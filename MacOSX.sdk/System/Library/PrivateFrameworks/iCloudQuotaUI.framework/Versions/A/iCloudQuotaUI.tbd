@@ -192,6 +192,10 @@ exports:
                        '_$s13iCloudQuotaUI25DynamicUIPresenterAdapterCACycfC', '_$s13iCloudQuotaUI25DynamicUIPresenterAdapterCACycfc', 
                        '_$s13iCloudQuotaUI25DynamicUIPresenterAdapterCMa', '_$s13iCloudQuotaUI25DynamicUIPresenterAdapterCMn', 
                        '_$s13iCloudQuotaUI25DynamicUIPresenterAdapterCN', '_$s13iCloudQuotaUI25DynamicUIPresenterAdapterCfD', 
+                       '_$s13iCloudQuotaUI25ICQUISwiftHelperFunctionsC23platformColorFromStringySo7NSColorCSSFZ', 
+                       '_$s13iCloudQuotaUI25ICQUISwiftHelperFunctionsCACycfC', '_$s13iCloudQuotaUI25ICQUISwiftHelperFunctionsCACycfc', 
+                       '_$s13iCloudQuotaUI25ICQUISwiftHelperFunctionsCMa', '_$s13iCloudQuotaUI25ICQUISwiftHelperFunctionsCMn', 
+                       '_$s13iCloudQuotaUI25ICQUISwiftHelperFunctionsCN', '_$s13iCloudQuotaUI25ICQUISwiftHelperFunctionsCfD', 
                        '_$s13iCloudQuotaUI26ManageStorageAppModelStoreC4view11forBundleIdQrSS_tF', 
                        '_$s13iCloudQuotaUI26ManageStorageAppModelStoreC4view11forBundleIdQrSS_tFQOMQ', 
                        '_$s13iCloudQuotaUI26ManageStorageAppModelStoreC4view11forBundleIdQrSS_tFTq', 
@@ -330,12 +334,13 @@ exports:
                        _ICQUIUpsellTriggerEventFlowManagerKey, _ICQUniversalLinkWithQueryStart, 
                        _ICQiCloudSettingsUniversalURL, _NSPPrivacyProxyAccountTypeDescription, 
                        _NSPPrivacyProxyUserTierDecription ]
-    objc-classes:    [ ICQAnalytics, ICQDynamicUIPresenter, ICQInAppAction, ICQInAppMessage, 
-                       ICQInAppMessaging, ICQInternetPrivacyBannerModel, ICQInternetPrivacyPrefPaneViewController, 
-                       ICQInternetPrivacyQuotaFetcher, ICQInternetPrivacyQuotaInfoResponse, 
-                       ICQInternetPrivacyRestrictions, ICQInternetPrivacyViewModel, 
-                       ICQLinkInAppAction, ICQPurchase, ICQUIAOSUISoftLinking, ICQUIINDaemonConnectionSoftLinking, 
+    objc-classes:    [ ICQAnalytics, ICQDynamicUIPresenter, ICQInAppAction, ICQInAppAlert, 
+                       ICQInAppMessage, ICQInAppMessaging, ICQInternetPrivacyBannerModel, 
+                       ICQInternetPrivacyPrefPaneViewController, ICQInternetPrivacyQuotaFetcher, 
+                       ICQInternetPrivacyQuotaInfoResponse, ICQInternetPrivacyRestrictions, 
+                       ICQInternetPrivacyViewModel, ICQLinkInAppAction, ICQPurchase, 
+                       ICQUIAOSUISoftLinking, ICQUIINDaemonConnectionSoftLinking, 
                        ICQUIImageLoader, ICQUpgradeFlowManager, ICQiCloudPurchaseStorageController, 
                        _ICQUIHelperFunctions, _TtC13iCloudQuotaUI18ManageStorageModel, 
-                       _TtC13iCloudQuotaUI25DynamicUIPresenterAdapter ]
+                       _TtC13iCloudQuotaUI25DynamicUIPresenterAdapter, _TtC13iCloudQuotaUI25ICQUISwiftHelperFunctions ]
 ...

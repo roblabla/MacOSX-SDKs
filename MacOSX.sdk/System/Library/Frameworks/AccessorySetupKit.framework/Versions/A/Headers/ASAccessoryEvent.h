@@ -39,6 +39,10 @@ typedef NS_ENUM( NSInteger, ASAccessoryEventType )
     ASAccessoryEventTypeAccessoryRemoved            = 31,   // [ASAccessoryEvent] Accessory removed from system.
     /// The properties of an accessory changed.
     ASAccessoryEventTypeAccessoryChanged            = 32,   // [ASAccessoryEvent] Accessory properties changed.
+    /// The session discovered an accessory.
+    ///
+    /// Your app only receives this event if your picker uses the ``ASPickerDisplaySettings/Options/filterDiscoveryResults`` option.
+    ASAccessoryEventTypeAccessoryDiscovered         = 33,   // [ASAccessoryEvent] Accessory discovered.
     /// The discovery session picker appeared.
     ASAccessoryEventTypePickerDidPresent            = 40,   // [ASAccessoryEvent] Picker did present.
     /// The discovery session picker dismissed.

@@ -11,12 +11,12 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// The error domain for managed asset packs.
-BA_EXPORT NSErrorDomain const BAManagedErrorDomain API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT;
+BA_EXPORT NSErrorDomain const BAManagedErrorDomain API_AVAILABLE(ios(26), macos(26), tvos(26), visionos(26)) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT;
 
 /// The `-[NSError userInfo]` key for an asset pack’s identifier.
 ///
 /// This key is relevant when the error code is ``BAManagedErrorCode/BAManagedErrorCodeAssetPackNotFound``.
-BA_EXPORT NSErrorUserInfoKey const BAAssetPackIdentifierErrorKey API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT;
+BA_EXPORT NSErrorUserInfoKey const BAAssetPackIdentifierErrorKey API_AVAILABLE(ios(26), macos(26), tvos(26), visionos(26)) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT;
 
 /// An error code for a managed asset pack.
 typedef NS_ENUM(NSInteger, BAManagedErrorCode) {
@@ -31,6 +31,6 @@ typedef NS_ENUM(NSInteger, BAManagedErrorCode) {
     /// Refer to the value in `-[NSError userInfo]` for the key `NSFilePathErrorKey` for the file path.
     BAManagedErrorCodeFileNotFound
     
-} API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT;
+} API_AVAILABLE(ios(26), macos(26), tvos(26), visionos(26)) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT;
 
 NS_HEADER_AUDIT_END(nullability, sendability)

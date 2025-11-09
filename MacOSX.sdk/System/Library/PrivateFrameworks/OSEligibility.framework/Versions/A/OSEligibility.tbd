@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/OSEligibility.framework/Versions/A/OSEligibility'
-current-version: 286
+current-version: 286.40.9
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -38,8 +38,9 @@ exports:
                        '_$s13OSEligibility0A5InputO12deviceLocaleyA2CmFWC', '_$s13OSEligibility0A5InputO12siriLanguageyA2CmFWC', 
                        '_$s13OSEligibility0A5InputO13chinaCellularyA2CmFWC', '_$s13OSEligibility0A5InputO14countryBillingyA2CmFWC', 
                        '_$s13OSEligibility0A5InputO14deviceLanguageyA2CmFWC', '_$s13OSEligibility0A5InputO14shiptoLocationyA2CmFWC', 
-                       '_$s13OSEligibility0A5InputO15countryLocationyA2CmFWC', '_$s13OSEligibility0A5InputO15preciseLocationyA2CmFWC', 
-                       '_$s13OSEligibility0A5InputO16deviceRegionCodeyA2CmFWC', '_$s13OSEligibility0A5InputO17externalBootDriveyA2CmFWC', 
+                       '_$s13OSEligibility0A5InputO15countryLocationyA2CmFWC', '_$s13OSEligibility0A5InputO15phoneAppRemovalyA2CmFWC', 
+                       '_$s13OSEligibility0A5InputO15preciseLocationyA2CmFWC', '_$s13OSEligibility0A5InputO16deviceRegionCodeyA2CmFWC', 
+                       '_$s13OSEligibility0A5InputO17externalBootDriveyA2CmFWC', 
                        '_$s13OSEligibility0A5InputO17greymatterOnQueueyA2CmFWC', 
                        '_$s13OSEligibility0A5InputO20initialSetupLocationyA2CmFWC', 
                        '_$s13OSEligibility0A5InputO21generativeModelSystemyA2CmFWC', 

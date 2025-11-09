@@ -21,11 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// A read-only container that stores pipeline states from a shader compiler.
 ///
 /// The pipeline states can have intermediate representation (IR) binaries,
-/// GPU- and system-specifc binaries, or a combination.
+/// GPU- and system-specific binaries, or a combination.
 ///
 /// ## Topics
 ///
-/// ### Identifiying the archive
+/// ### Identifying the archive
 /// - ``label``
 ///
 /// ### Creating compute pipeline states
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// - ``newComputePipelineStateWithName:dynamicLinkingDescriptor:error:``
 /// - ``newComputePipelineStateWithName:error:``
 ///
-/// ### Creating reder pipeline states
+/// ### Creating render pipeline states
 ///
 /// - ``newRenderPipelineStateWithDescriptor:dynamicLinkingDescriptor:error:``
 /// - ``newRenderPipelineStateWithDescriptor:error:``
@@ -109,11 +109,15 @@ API_AVAILABLE(macos(26.0), ios(26.0)) NS_SWIFT_SENDABLE
                                                                       error:(NSError**)error;
 
 
-/// Method used to create a binary function, with a given descriptor, from the contents of the archive.
+/// Synchronously creates a binary version of a GPU visible function or GPU intersection function.
+///
 /// - Parameters:
-///   - descriptor: the function descriptor for a visible or intersection function.
-///   - error: an optional parameter that is populated in the case of an error.
-/// - Returns: a binary function object, otherwise `nil`.
+///   - descriptor: A configuration that tells the method which GPU function to
+///   make into a binary function and which options to apply when compiling it.
+///   - error: An optional pointer to an error pointer where the method returns
+///   the problem details when it can't create a binary GPU function.
+///
+/// - Returns: A new GPU binary function instance if the method succeeds; otherwise `nil`.
 - (nullable id<MTL4BinaryFunction>)newBinaryFunctionWithDescriptor:(MTL4BinaryFunctionDescriptor *)descriptor
                                                              error:(NSError**)error;
 

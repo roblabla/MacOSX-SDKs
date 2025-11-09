@@ -15,36 +15,37 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/*!
- @enum          HKMedicationDoseEventLogStatus
- @abstract      The possible statuses of a logged HKMedicationDoseEvent
- 
- @constant      HKMedicationDoseEventLogStatusNotInteracted             User has not logged information for a scheduled medication. System generated status.
- @constant      HKMedicationDoseEventLogStatusNotificationNotSent    Could not deliver a notification for a scheduled medication. System generated status.
- @constant      HKMedicationDoseEventLogStatusSnoozed                    User snoozed the notification.
- @constant      HKMedicationDoseEventLogStatusTaken                         Logged the medication dose as taken.
- @constant      HKMedicationDoseEventLogStatusSkipped                      Logged the medication dose as skipped.
- @constant      HKMedicationDoseEventLogStatusNotLogged                 User has undone logging.
- */
-
+/// The statuses the system assigns to a logged medication dose event.
 typedef NS_ENUM(NSInteger, HKMedicationDoseEventLogStatus) {
+    /// The person doesn't interact with a scheduled medication reminder.
+    ///
+    /// The system generates this to represent an untouched reminder slot.
     HKMedicationDoseEventLogStatusNotInteracted = 1,
+    /// The system assigns this status when it fails to deliver a scheduled medication notification.
+    ///
+    /// The system can generate this status because of a person's notification
+    /// restrictions or issues with notification delivery.
     HKMedicationDoseEventLogStatusNotificationNotSent,
+    /// The person snoozes a scheduled medication notification.
     HKMedicationDoseEventLogStatusSnoozed,
+    /// The person logs that they took the medication dose.
     HKMedicationDoseEventLogStatusTaken,
+    /// The person logs that they skipped the medication dose.
     HKMedicationDoseEventLogStatusSkipped,
+    /// The person undoes a previously logged medication status.
+    ///
+    /// The system clears the prior status.
     HKMedicationDoseEventLogStatusNotLogged,
 } API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0)) NS_SWIFT_NAME(HKMedicationDoseEvent.LogStatus);
 
-/*!
- @enum          HKMedicationDoseEventScheduleType
- @abstract      The kind of schedule used to log this dose event.
- 
- @constant      HKMedicationDoseEventScheduleTypeAsNeeded         The dose event was created while logging a medication as needed.
- @constant      HKMedicationDoseEventScheduleTypeSchedule           The dose event was created while logging a medication from a scheduled event.
- */
+/// The kind of schedule the system associates with a logged medication dose event.
+///
+/// Each value tells you whether the person logged the dose ad-hoc or
+/// in response to a scheduled medication reminder.
 typedef NS_ENUM(NSInteger, HKMedicationDoseEventScheduleType) {
+    /// The person logged this dose event ad-hoc, outside of any scheduled reminder.
     HKMedicationDoseEventScheduleTypeAsNeeded = 1,
+    /// The person logged this dose event in response to a scheduled medication reminder.
     HKMedicationDoseEventScheduleTypeSchedule
 } API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0)) NS_SWIFT_NAME(HKMedicationDoseEvent.ScheduleType);
 
@@ -53,57 +54,45 @@ NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0))
 @interface HKMedicationDoseEvent : HKSample <NSSecureCoding, NSCopying>
 
-/*!
-@property   medicationDoseEventType
-@abstract   The data type of the HKMedicationDoseEvent object.
-*/
+/// The data type that identified the samples that store medication dose event data.
+///
+/// You use this type when creating queries or filtering results by sample type.
 @property (readonly, copy) HKMedicationDoseEventType *medicationDoseEventType;
 
-/*!
-@property   scheduleType
-@abstract   The impetus behind the dose event.
-@discussion HKMedicationDoseEventScheduleTypeAsNeeded for doses logged as needed, and HKMedicationDoseEventScheduleTypeSchedule for doses logged from a scheduled event.
-*/
+/// The scheduling context for this logged dose event.
+///
+/// The system sets this to ``HKMedicationDoseEvent/ScheduleType/asNeeded`` when the person
+/// logs a dose without a schedule and ``HKMedicationDoseEvent/ScheduleType/schedule`` when a person logs a dose
+/// from a scheduled medication reminder.
 @property (nonatomic, assign, readonly) HKMedicationDoseEventScheduleType scheduleType;
 
-/*!
-@property   medicationConceptIdentifier
-@abstract   A unique identifier of the medication concept for which the dose event was created for, used to relate the dose event to the backing HKMedicationConcept object.
-*/
+/// The identifier of the medication concept the system associates with this dose event.
+///
+/// The system uses this identifier to link the dose event back to its ``HKMedicationConcept`` object.
 @property (nonatomic, copy, readonly) HKHealthConceptIdentifier *medicationConceptIdentifier;
 
-/*!
-@property   scheduledDate
-@abstract   The time that the medication dose was supposed to be taken.
-@discussion Always non-null for scheduled medication dose events, always null for as needed dose events.
-*/
+/// The date and time the person takes the medication, if scheduled.
+///
+/// The value is always non-null for ``HKMedicationDoseEvent/ScheduleType/schedule`` and always null for  ``HKMedicationDoseEvent/ScheduleType/asNeeded``.
 @property (nonatomic, copy, readonly, nullable) NSDate *scheduledDate;
 
-/*!
-@property   scheduledDoseQuantity
-@abstract   The dose quantity a user is expected to take per the user's schedule.
-@discussion Always non-null for scheduled medication dose events, always null for as needed dose events.
-*/
+/// The dose quantity a person is expected to take based on their medication schedule.
+///
+/// The value is always non-null for ``HKMedicationDoseEvent/ScheduleType/schedule``, and always null for ``HKMedicationDoseEvent/ScheduleType/asNeeded``.
 @property (nonatomic, copy, readonly, nullable) NSNumber *scheduledDoseQuantity NS_REFINED_FOR_SWIFT;
 
-/*!
-@property   doseQuantity
-@abstract   The dose quantity the user indicates has actually been taken.
-@discussion For scheduled dose events, defaults to the scheduledDoseQuantity, when logged from a reminder. For as needed dose events, defaults to 1 in the medication tracking experience, but can be edited by the user at any time.
-*/
+/// The dose quantity the person reports as taken.
+///
+/// For scheduled dose events, the value defaults to the ``HKMedicationDoseEvent/scheduledDoseQuantity-477ge``, when logged from a
+/// reminder. For as needed dose events, the value defaults to `1` in the medication tracking experience, but can always be edited by the person logging.
 @property (nonatomic, copy, readonly, nullable) NSNumber *doseQuantity NS_REFINED_FOR_SWIFT;
 
-/*!
-@property   logStatus
-@abstract   The log status of HKMedicationDoseEvent sample.
-*/
+/// The log status the system assigns to this dose event.
 @property (nonatomic, assign, readonly) HKMedicationDoseEventLogStatus logStatus;
 
-
-/*!
-@property   unit
-@abstract   The unit that the associated medication had associated at time the user logged the dose event.
-*/
+/// The unit that the system associates with the medication when the person logs the dose.
+///
+/// This ensures that the dose quantity is recorded with the correct measurement unit.
 @property (nonatomic, copy, readonly, nonnull) HKUnit *unit;
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -111,10 +100,13 @@ API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos
 
 @end
 
-// Predicate Key Paths
+/// The key path you use to create predicates that query by a dose event’s log status.
 HK_EXTERN NSString * const HKPredicateKeyPathStatus API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0));
+/// The key path you use to create predicates that query by the dose event's medication log origin.
 HK_EXTERN NSString * const HKPredicateKeyPathLogOrigin API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0));
+/// The key path you use to create predicates that query by the dose event's scheduled date.
 HK_EXTERN NSString * const HKPredicateKeyPathScheduledDate API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0));
+/// The key path you use to create predicates that query by the dose event's medication concept identifier.
 HK_EXTERN NSString * const HKPredicateKeyPathMedicationConceptIdentifier API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0));
 
 NS_ASSUME_NONNULL_END

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/iCloudDriveCore.framework/Versions/A/iCloudDriveCore'
-current-version: 4257.0.23
+current-version: 4257.40.69
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -177,10 +177,10 @@ exports:
                        AppTelemetryFPFSMigrationInvestigation._xpcActivityTimeSinceLastRegistration, 
                        AppTelemetryInvestigation._dbAge, AppTelemetryInvestigation._errorCode, 
                        AppTelemetryInvestigation._errorDescription, AppTelemetryInvestigation._errorDomain, 
-                       AppTelemetryInvestigation._eventGroupUUID, AppTelemetryInvestigation._eventTimestamp, 
-                       AppTelemetryInvestigation._fpfsMigrationInvestigation, AppTelemetryInvestigation._has, 
-                       AppTelemetryInvestigation._hasForegroundClients, AppTelemetryInvestigation._isConsolidated, 
-                       AppTelemetryInvestigation._isEnhancedDrivePrivacyEnabled, 
+                       AppTelemetryInvestigation._errorsChain, AppTelemetryInvestigation._eventGroupUUID, 
+                       AppTelemetryInvestigation._eventTimestamp, AppTelemetryInvestigation._fpfsMigrationInvestigation, 
+                       AppTelemetryInvestigation._has, AppTelemetryInvestigation._hasForegroundClients, 
+                       AppTelemetryInvestigation._isConsolidated, AppTelemetryInvestigation._isEnhancedDrivePrivacyEnabled, 
                        AppTelemetryInvestigation._isPCSChained, AppTelemetryInvestigation._itemID, 
                        AppTelemetryInvestigation._itemStatsInvestigation, AppTelemetryInvestigation._lastOSUpdate, 
                        AppTelemetryInvestigation._lastStep, AppTelemetryInvestigation._migrationUUID, 

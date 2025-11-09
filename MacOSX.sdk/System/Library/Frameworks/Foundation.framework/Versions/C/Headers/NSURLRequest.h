@@ -335,6 +335,14 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @property (readonly) BOOL allowsConstrainedNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 /*!
+ @abstract returns whether a connection created with this request is allowed to use
+ network interfaces which have been marked as ultra constrained.
+ @result YES if the receiver is allowed to use an interface marked as ultra constrained to
+ satisfy the request, NO otherwise.
+ */
+@property (readonly) BOOL allowsUltraConstrainedNetworkAccess API_AVAILABLE(macos(26.1), ios(26.1), watchos(26.1), tvos(26.1), visionos(26.1));
+
+/*!
  @abstract returns whether we assume that server supports HTTP/3. Enables QUIC
  racing without HTTP/3 service discovery.
  @result YES if server endpoint is known to support HTTP/3. Defaults to NO.
@@ -474,6 +482,14 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
  satisfy the request, YES otherwise.
  */
 @property BOOL allowsConstrainedNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*!
+ @abstract sets whether a connection created with this request is allowed to use
+ network interfaces which have been marked as ultra constrained.
+ @discussion NO if the receiver should not be allowed to use an interface marked as ultra constrained to
+ satisfy the request, YES otherwise.
+ */
+@property BOOL allowsUltraConstrainedNetworkAccess API_AVAILABLE(macos(26.1), ios(26.1), watchos(26.1), tvos(26.1), visionos(26.1));
 
 /*!
  @abstract returns whether we assume that server supports HTTP/3. Enables QUIC

@@ -42,7 +42,7 @@ exports:
                        _reportingScreenCaptureEvent, _reportingSessionModeFromOperatingMode, 
                        _reportingSetAggregatorForClientType, _reportingSetDataPath, 
                        _reportingSetDigestKey, _reportingSetNWActivityReportingEnabled, 
-                       _reportingSetPeriodicAggregationOccuredHandler, _reportingSetReportingClientPersistentSetting, 
+                       _reportingSetPeriodicAggregationOccurredHandler, _reportingSetReportingClientPersistentSetting, 
                        _reportingSetUserInfo, _reportingStartTimer, _reportingStopTimer, 
                        _reportingStreamGroupFromStreamGroupID, _reportingSymptom, 
                        _reportingSymptomSetCallback, _reportingThermal, _reportingTierLog, 

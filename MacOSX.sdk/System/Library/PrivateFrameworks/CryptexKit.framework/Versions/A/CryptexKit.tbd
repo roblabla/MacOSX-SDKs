@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CryptexKit.framework/Versions/A/CryptexKit'
-current-version: 589.0.19
+current-version: 589.40.18
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -146,7 +146,8 @@ exports:
                        '_$s10CryptexKit0A11LocalDeviceC8endpointACSo13OS_xpc_object_p_tcfCTj', 
                        '_$s10CryptexKit0A11LocalDeviceC8endpointACSo13OS_xpc_object_p_tcfCTq', 
                        '_$s10CryptexKit0A11LocalDeviceC8endpointACSo13OS_xpc_object_p_tcfc', 
-                       '_$s10CryptexKit0A11LocalDeviceC9readNonce7optionsAA0aF0VAA0a4ReadF7OptionsV_tYaKFTj', 
+                       '_$s10CryptexKit0A11LocalDeviceC8lockdownyyYaKFTj', '_$s10CryptexKit0A11LocalDeviceC8lockdownyyYaKFTjTu', 
+                       '_$s10CryptexKit0A11LocalDeviceC8lockdownyyYaKFTq', '_$s10CryptexKit0A11LocalDeviceC9readNonce7optionsAA0aF0VAA0a4ReadF7OptionsV_tYaKFTj', 
                        '_$s10CryptexKit0A11LocalDeviceC9readNonce7optionsAA0aF0VAA0a4ReadF7OptionsV_tYaKFTjTu', 
                        '_$s10CryptexKit0A11LocalDeviceC9readNonce7optionsAA0aF0VAA0a4ReadF7OptionsV_tYaKFTq', 
                        '_$s10CryptexKit0A11LocalDeviceCAA0aD0AAMc', '_$s10CryptexKit0A11LocalDeviceCAA0aD0AAWP', 
@@ -509,7 +510,9 @@ exports:
                        '_$s10CryptexKit11RequestTypeOAA10XpcCodableAAWP', '_$s10CryptexKit11RequestTypeOMa', 
                        '_$s10CryptexKit11RequestTypeOMn', '_$s10CryptexKit11RequestTypeON', 
                        '_$s10CryptexKit11RequestTypeOSHAAMc', '_$s10CryptexKit11RequestTypeOSQAAMc', 
-                       '_$s10CryptexKit11RequestTypeOSYAAMc', '_$s10CryptexKit14RequestInstallV10CodingKeysO11stringValueAESgSS_tcfC', 
+                       '_$s10CryptexKit11RequestTypeOSYAAMc', '_$s10CryptexKit12valueOrErrno16retryOnInterrupt_s6ResultOyx6System0E0VGSb_xyXEts17FixedWidthIntegerRzlF', 
+                       '_$s10CryptexKit12valueOrErrnoys6ResultOyx6System0E0VGxs17FixedWidthIntegerRzlF', 
+                       '_$s10CryptexKit14RequestInstallV10CodingKeysO11stringValueAESgSS_tcfC', 
                        '_$s10CryptexKit14RequestInstallV10CodingKeysO11stringValueSSvg', 
                        '_$s10CryptexKit14RequestInstallV10CodingKeysO11stringValueSSvpMV', 
                        '_$s10CryptexKit14RequestInstallV10CodingKeysO8intValueAESgSi_tcfC', 
@@ -575,7 +578,9 @@ exports:
                        '_$s10CryptexKit14XpcDictCodableMp', '_$s10CryptexKit14XpcDictCodableP8populate03xpcD0ySo03OS_G7_object_pz_tKFTj', 
                        '_$s10CryptexKit14XpcDictCodableP8populate03xpcD0ySo03OS_G7_object_pz_tKFTq', 
                        '_$s10CryptexKit14XpcDictCodablePAA0cE0Tb', '_$s10CryptexKit14XpcDictCodablePAAE5asXPCSo13OS_xpc_object_pyKF', 
-                       '_$s10CryptexKit14XpcDictCodableTL', '_$s10CryptexKit15ResponseInstallV4from3xpcACSo03OS_F7_object_p_tKFZ', 
+                       '_$s10CryptexKit14XpcDictCodableTL', '_$s10CryptexKit14nothingOrErrno16retryOnInterrupt_s6ResultOyyt6System0E0VGSb_xyXEts17FixedWidthIntegerRzlF', 
+                       '_$s10CryptexKit14nothingOrErrnoys6ResultOyyt6System0E0VGxs17FixedWidthIntegerRzlF', 
+                       '_$s10CryptexKit15ResponseInstallV4from3xpcACSo03OS_F7_object_p_tKFZ', 
                        '_$s10CryptexKit15ResponseInstallV8populate7xpcDictySo03OS_F7_object_pz_tKF', 
                        '_$s10CryptexKit15ResponseInstallVAA0C0AAMc', '_$s10CryptexKit15ResponseInstallVAA0C0AAWP', 
                        '_$s10CryptexKit15ResponseInstallVAA10XpcCodableAAMc', '_$s10CryptexKit15ResponseInstallVAA10XpcCodableAAWP', 
@@ -700,6 +705,7 @@ exports:
                        '_$s10CryptexKit27ResponseInstalledInfoPlistsV10CodingKeysOs28CustomDebugStringConvertibleAAMc', 
                        '_$s10CryptexKit27ResponseInstalledInfoPlistsV12infoPlistFDsACSaySo12NSFileHandleCG_tcfC', 
                        '_$s10CryptexKit27ResponseInstalledInfoPlistsV4from3xpcACSo03OS_H7_object_p_tKFZ', 
+                       '_$s10CryptexKit27ResponseInstalledInfoPlistsV6decodeys15LazyMapSequenceVySaySo12NSFileHandleCGs6ResultOyxs5Error_pGGxmSeRzlF', 
                        '_$s10CryptexKit27ResponseInstalledInfoPlistsV8populate7xpcDictySo03OS_H7_object_pz_tKF', 
                        '_$s10CryptexKit27ResponseInstalledInfoPlistsVAA0C0AAMc', 
                        '_$s10CryptexKit27ResponseInstalledInfoPlistsVAA0C0AAWP', 
@@ -742,10 +748,11 @@ exports:
                        '_$s10CryptexKit8FileStatV8rawValueSo4statVvg', '_$s10CryptexKit8FileStatV8rawValueSo4statVvpMV', 
                        '_$s10CryptexKit8FileStatV8rawValueSo4statVvs', '_$s10CryptexKit8FileStatVMa', 
                        '_$s10CryptexKit8FileStatVMn', '_$s10CryptexKit8FileStatVN', 
-                       '_$s10CryptexKit8FileStatVyAC6System0C4PathVKcfC', '_$s10CryptexKit8ResponseMp', 
-                       '_$s10CryptexKit8ResponsePAA14XpcDictCodableTb', '_$s10CryptexKit8ResponseTL', 
-                       '_$s10Foundation4DataV10CryptexKit10XpcCodableADMc', '_$s10Foundation4DataV10CryptexKit10XpcCodableADWP', 
-                       '_$s10Foundation4DataV10CryptexKitE4from3xpcACSo03OS_F7_object_p_tKFZ', 
+                       '_$s10CryptexKit8FileStatVyAC6System0C10DescriptorVKcfC', 
+                       '_$s10CryptexKit8FileStatVyAC6System0C4PathVKcfC', '_$s10CryptexKit8FileStatVyACs5Int32VKcfC', 
+                       '_$s10CryptexKit8ResponseMp', '_$s10CryptexKit8ResponsePAA14XpcDictCodableTb', 
+                       '_$s10CryptexKit8ResponseTL', '_$s10Foundation4DataV10CryptexKit10XpcCodableADMc', 
+                       '_$s10Foundation4DataV10CryptexKit10XpcCodableADWP', '_$s10Foundation4DataV10CryptexKitE4from3xpcACSo03OS_F7_object_p_tKFZ', 
                        '_$s10Foundation4DataV10CryptexKitE5asXPCSo13OS_xpc_object_pyKF', 
                        '_$s12ResponseType10CryptexKit7RequestPTl', '_$s2os6LoggerV10CryptexKitE8categoryACSS_tcfC', 
                        '_$s6System14FileDescriptorV10CryptexKit10XpcCodableADMc', 
@@ -754,6 +761,8 @@ exports:
                        '_$s6System14FileDescriptorV10CryptexKitE5asXPCSo13OS_xpc_object_pyKF', 
                        '_$s6System15FilePermissionsV10CryptexKitE11fileDefaultACvgZ', 
                        '_$s6System15FilePermissionsV10CryptexKitE16directoryDefaultACvgZ', 
+                       '_$s6System5ErrnoV10CryptexKitE7currentACvMZ', '_$s6System5ErrnoV10CryptexKitE7currentACvgZ', 
+                       '_$s6System5ErrnoV10CryptexKitE7currentACvpZMV', '_$s6System5ErrnoV10CryptexKitE7currentACvsZ', 
                        '_$s6System8FilePathV10CryptexKitE06createB011permissions12withContentsyAA0B11PermissionsV_10Foundation4DataVSgtKF', 
                        '_$s6System8FilePathV10CryptexKitE10fileExistsSbyKF', '_$s6System8FilePathV10CryptexKitE13createSymlink9targetingyAC_tKF', 
                        '_$s6System8FilePathV10CryptexKitE13symlinkExistsSbyKF', '_$s6System8FilePathV10CryptexKitE13symlinkTargetACyKF', 

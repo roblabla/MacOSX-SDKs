@@ -95,7 +95,6 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 /**
  `NSSavePanel`: Returns `YES` if the panel is expanded. Defaults to `NO`. Persists in the user defaults.
- - Note: Can only be set during the configuration phase.
  `NSOpenPanel`: Not used.
  */
 @property (getter=isExpanded, readonly) BOOL expanded;

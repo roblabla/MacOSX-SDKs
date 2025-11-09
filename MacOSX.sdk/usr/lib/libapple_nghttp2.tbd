@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libapple_nghttp2.dylib'
-current-version: 1.66
+current-version: 1.67.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -22,13 +22,14 @@ exports:
                        _nghttp2_hd_inflate_hd2, _nghttp2_hd_inflate_hd3, _nghttp2_hd_inflate_new, 
                        _nghttp2_hd_inflate_new2, _nghttp2_http2_strerror, _nghttp2_is_fatal, 
                        _nghttp2_nv_compare_name, _nghttp2_option_del, _nghttp2_option_new, 
-                       _nghttp2_option_set_builtin_recv_extension_type, _nghttp2_option_set_max_continuations, 
-                       _nghttp2_option_set_max_deflate_dynamic_table_size, _nghttp2_option_set_max_outbound_ack, 
-                       _nghttp2_option_set_max_reserved_remote_streams, _nghttp2_option_set_max_send_header_block_length, 
-                       _nghttp2_option_set_max_settings, _nghttp2_option_set_no_auto_ping_ack, 
-                       _nghttp2_option_set_no_auto_window_update, _nghttp2_option_set_no_closed_streams, 
-                       _nghttp2_option_set_no_http_messaging, _nghttp2_option_set_no_http_semantics, 
-                       _nghttp2_option_set_no_recv_client_magic, _nghttp2_option_set_no_rfc9113_leading_and_trailing_ws_validation, 
+                       _nghttp2_option_set_builtin_recv_extension_type, _nghttp2_option_set_glitch_rate_limit, 
+                       _nghttp2_option_set_max_continuations, _nghttp2_option_set_max_deflate_dynamic_table_size, 
+                       _nghttp2_option_set_max_outbound_ack, _nghttp2_option_set_max_reserved_remote_streams, 
+                       _nghttp2_option_set_max_send_header_block_length, _nghttp2_option_set_max_settings, 
+                       _nghttp2_option_set_no_auto_ping_ack, _nghttp2_option_set_no_auto_window_update, 
+                       _nghttp2_option_set_no_closed_streams, _nghttp2_option_set_no_http_messaging, 
+                       _nghttp2_option_set_no_http_semantics, _nghttp2_option_set_no_recv_client_magic, 
+                       _nghttp2_option_set_no_rfc9113_leading_and_trailing_ws_validation, 
                        _nghttp2_option_set_peer_max_concurrent_streams, _nghttp2_option_set_server_fallback_rfc7540_priorities, 
                        _nghttp2_option_set_stream_reset_rate_limit, _nghttp2_option_set_user_recv_extension_type, 
                        _nghttp2_pack_settings_payload, _nghttp2_pack_settings_payload2, 
@@ -50,11 +51,11 @@ exports:
                        _nghttp2_session_callbacks_set_on_invalid_header_callback, 
                        _nghttp2_session_callbacks_set_on_invalid_header_callback2, 
                        _nghttp2_session_callbacks_set_on_stream_close_callback, _nghttp2_session_callbacks_set_pack_extension_callback, 
-                       _nghttp2_session_callbacks_set_pack_extension_callback2, _nghttp2_session_callbacks_set_recv_callback, 
-                       _nghttp2_session_callbacks_set_recv_callback2, _nghttp2_session_callbacks_set_select_padding_callback, 
-                       _nghttp2_session_callbacks_set_select_padding_callback2, _nghttp2_session_callbacks_set_send_callback, 
-                       _nghttp2_session_callbacks_set_send_callback2, _nghttp2_session_callbacks_set_send_data_callback, 
-                       _nghttp2_session_callbacks_set_unpack_extension_callback, 
+                       _nghttp2_session_callbacks_set_pack_extension_callback2, _nghttp2_session_callbacks_set_rand_callback, 
+                       _nghttp2_session_callbacks_set_recv_callback, _nghttp2_session_callbacks_set_recv_callback2, 
+                       _nghttp2_session_callbacks_set_select_padding_callback, _nghttp2_session_callbacks_set_select_padding_callback2, 
+                       _nghttp2_session_callbacks_set_send_callback, _nghttp2_session_callbacks_set_send_callback2, 
+                       _nghttp2_session_callbacks_set_send_data_callback, _nghttp2_session_callbacks_set_unpack_extension_callback, 
                        _nghttp2_session_change_extpri_stream_priority, _nghttp2_session_change_stream_priority, 
                        _nghttp2_session_check_request_allowed, _nghttp2_session_check_server_session, 
                        _nghttp2_session_client_new, _nghttp2_session_client_new2, 

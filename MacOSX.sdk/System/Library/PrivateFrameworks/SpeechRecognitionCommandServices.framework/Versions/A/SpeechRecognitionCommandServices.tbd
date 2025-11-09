@@ -80,6 +80,7 @@ exports:
                        '_$s32SpeechRecognitionCommandServices9VCCommandV10EvaluationO35requiresInputControllerForDictationyA2EmFWC', 
                        '_$s32SpeechRecognitionCommandServices9VCCommandV10EvaluationO36requiresSpellingModeSupportForLocaleyA2EmFWC', 
                        '_$s32SpeechRecognitionCommandServices9VCCommandV10EvaluationO37requiresActiveDictationRecognizerModeyA2EmFWC', 
+                       '_$s32SpeechRecognitionCommandServices9VCCommandV10EvaluationO37requiresFocusedEditableTextOrDateTimeyA2EmFWC', 
                        '_$s32SpeechRecognitionCommandServices9VCCommandV10EvaluationO39requiresSwiftCodingModeSupportForLocaleyA2EmFWC', 
                        '_$s32SpeechRecognitionCommandServices9VCCommandV10EvaluationO41requiresTextDisambiguationNumberedOverlayyA2EmFWC', 
                        '_$s32SpeechRecognitionCommandServices9VCCommandV10EvaluationO41supportsNumberOnlyDictationRecognizerModeyA2EmFWC', 
@@ -348,6 +349,8 @@ exports:
                        '_$sSo13VCCommandObjCC32SpeechRecognitionCommandServicesE28currentDeviceHasLegacyEngineSbvpZMV', 
                        '_$sSo13VCCommandObjCC32SpeechRecognitionCommandServicesE47currentDeviceHasSwiftCodingModeSupportForLocaleSbvgZ', 
                        '_$sSo13VCCommandObjCC32SpeechRecognitionCommandServicesE47currentDeviceHasSwiftCodingModeSupportForLocaleSbvpZMV', 
+                       '_$sSo13VCCommandObjCC32SpeechRecognitionCommandServicesE50currentDeviceHasSpellingCodingModeSupportForLocaleSbvgZ', 
+                       '_$sSo13VCCommandObjCC32SpeechRecognitionCommandServicesE50currentDeviceHasSpellingCodingModeSupportForLocaleSbvpZMV', 
                        '_$sSo13VCCommandObjCC32SpeechRecognitionCommandServicesE7command14withIdentifierABSgSS_tFZ', 
                        '_$sSo13VCCommandObjCC32SpeechRecognitionCommandServicesEABycfC', 
                        '_$sSo13VCCommandObjCC32SpeechRecognitionCommandServicesEABycfc', 
@@ -368,8 +371,7 @@ exports:
                        _CreateMutableDictionaryFromSpokenCommandString, _IsValidCommandParameterIdentifier, 
                        _SRCSLogGeneral, _SpeechRecognitionCommandServicesVersionNumber, 
                        _SpeechRecognitionCommandServicesVersionString, _YYLastErrorLineNumber, 
-                       _YYLastErrorSymbolString, __ZN7WebCore29isCharacterSmartReplaceExemptEib, 
-                       _kCMDPClosestMatchedElements, _kCMDPMatchedCommandIdentifier, 
+                       _YYLastErrorSymbolString, _kCMDPClosestMatchedElements, _kCMDPMatchedCommandIdentifier, 
                        _kCMDPMatchedElementCategoryIdentifier, _kCMDPMatchedElementText, 
                        _kCMDPMatchedElementTextVariants, _kCMDPMatchedElements, _kSRCSBuiltInLmValueGroup, 
                        _kSRCSBuiltInLmValueNode, _kSRCSCommandAttributeExcludeAlwaysForLocales, 
@@ -409,7 +411,7 @@ exports:
                        _yychar, _yyerror, _yylex, _yylval, _yynerrs, _yyparse ]
     objc-classes:    [ CMDPGrammar, CMDPGrammarData, CMDPResult, SRCSCommandRecognitionSystem, 
                        SRCSCommandRecognizer, SRCSCommandSegmentInfo, SRCSCommandStringsTable, 
-                       SRCSLexiconManager, SRCSPhraseMatchResult, SRCSSmartReplaceObjCWrapper, 
+                       SRCSLexiconManager, SRCSPhraseMatchResult, SRCSSmartReplace, 
                        SRCSSpokenCommand, SRCSSpokenCommandUtilities, SRCSTextEditing, 
                        VCCommandCollectionObjC, VCCommandObjC ]
     objc-ivars:      [ SRCSSpokenCommandUtilities._commandAttributes, SRCSSpokenCommandUtilities._commandStringsTablesByLocaleIdentifier ]

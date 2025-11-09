@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/VideosUI.framework/Versions/A/VideosUI'
-current-version: 1061.4.1
+current-version: 1061.14.1
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -84,14 +84,16 @@ exports:
                        '_$s8VideosUI14ViewModelEventON', '_$s8VideosUI14ViewModelEventOSHAAMc', 
                        '_$s8VideosUI14ViewModelEventOSQAAMc', '_$s8VideosUI14ViewModelEventOSYAAMc', 
                        '_$s8VideosUI14ViewModelEventOs23CustomStringConvertibleAAMc', 
-                       '_$s8VideosUI15AppStoreWrapperCMa', '_$s8VideosUI15AppStoreWrapperCMm', 
-                       '_$s8VideosUI15AppStoreWrapperCMn', '_$s8VideosUI15AppStoreWrapperCN', 
-                       '_$s8VideosUI15AppStoreWrapperCfD', '_$s8VideosUI15AppStoreWrapperCfd', 
-                       '_$s8VideosUI15VUIFavoriteTypeO8rawValueACSgSi_tcfC', '_$s8VideosUI15VUIFavoriteTypeO8rawValueSivg', 
-                       '_$s8VideosUI15VUIFavoriteTypeO8rawValueSivpMV', '_$s8VideosUI15VUIFavoriteTypeOMa', 
-                       '_$s8VideosUI15VUIFavoriteTypeOMn', '_$s8VideosUI15VUIFavoriteTypeON', 
-                       '_$s8VideosUI15VUIFavoriteTypeOSHAAMc', '_$s8VideosUI15VUIFavoriteTypeOSQAAMc', 
-                       '_$s8VideosUI15VUIFavoriteTypeOSYAAMc', '_$s8VideosUI16MetricsJetEngineC026convertClickDataToLocationH0_5indexSDySSypGAF_SitFZ', 
+                       '_$s8VideosUI15AppStoreWrapperC17TransactionResultOMa', '_$s8VideosUI15AppStoreWrapperC17TransactionResultOMn', 
+                       '_$s8VideosUI15AppStoreWrapperC17TransactionResultON', '_$s8VideosUI15AppStoreWrapperCMa', 
+                       '_$s8VideosUI15AppStoreWrapperCMm', '_$s8VideosUI15AppStoreWrapperCMn', 
+                       '_$s8VideosUI15AppStoreWrapperCN', '_$s8VideosUI15AppStoreWrapperCfD', 
+                       '_$s8VideosUI15AppStoreWrapperCfd', '_$s8VideosUI15VUIFavoriteTypeO8rawValueACSgSi_tcfC', 
+                       '_$s8VideosUI15VUIFavoriteTypeO8rawValueSivg', '_$s8VideosUI15VUIFavoriteTypeO8rawValueSivpMV', 
+                       '_$s8VideosUI15VUIFavoriteTypeOMa', '_$s8VideosUI15VUIFavoriteTypeOMn', 
+                       '_$s8VideosUI15VUIFavoriteTypeON', '_$s8VideosUI15VUIFavoriteTypeOSHAAMc', 
+                       '_$s8VideosUI15VUIFavoriteTypeOSQAAMc', '_$s8VideosUI15VUIFavoriteTypeOSYAAMc', 
+                       '_$s8VideosUI16MetricsJetEngineC026convertClickDataToLocationH0_5indexSDySSypGAF_SitFZ', 
                        '_$s8VideosUI16MetricsJetEngineC029convertClickDataToImpressionsH0_5indexSDySSypGAF_SitFZ', 
                        '_$s8VideosUI16MetricsJetEngineC05flushC0yyF', '_$s8VideosUI16MetricsJetEngineC05flushC0yyFTq', 
                        '_$s8VideosUI16MetricsJetEngineC05flushC14WithCompletionyyyycF', 

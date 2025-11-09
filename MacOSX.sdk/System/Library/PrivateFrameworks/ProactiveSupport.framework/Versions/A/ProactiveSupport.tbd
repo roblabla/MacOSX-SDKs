@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ProactiveSupport.framework/Versions/A/ProactiveSupport'
-current-version: 414
+current-version: 415.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -122,9 +122,10 @@ exports:
                        _PASLowValueCardinalityMutableDictionary._objectsAndKeys, 
                        _PASNotificationDescriptor.isCanceled, _PASPosixPipeContext._queue, 
                        _PASPosixPipeContext._readChannel, _PASPosixPipeContext._stop, 
-                       _PASPosixPipeContext._writeHandle, _PASSqliteDatabase._currentExclusivity, 
-                       _PASSqliteDatabase._explainedQueriesLogFile, _PASSqliteDatabase._explainedQueriesLogged, 
-                       _PASSqliteDatabase._explainedQueryForPlan, _PASSqliteDatabase._filename, 
+                       _PASPosixPipeContext._writeHandle, _PASSqliteDatabase._bloomFilter, 
+                       _PASSqliteDatabase._currentExclusivity, _PASSqliteDatabase._explainedQueriesLogFile, 
+                       _PASSqliteDatabase._explainedQueriesLogged, _PASSqliteDatabase._explainedQueryForPlan, 
+                       _PASSqliteDatabase._filename, _PASSqliteDatabase._hashArray, 
                        _PASSqliteDatabase._lock, _PASSqliteDatabase._preparedForFirstQuery, 
                        _PASSqliteDatabase._sqlTelemetryApi, _PASSqliteDatabase._statementCache, 
                        _PASSqliteDatabase._waitingForLock, _PASUnlockBlock.block, 

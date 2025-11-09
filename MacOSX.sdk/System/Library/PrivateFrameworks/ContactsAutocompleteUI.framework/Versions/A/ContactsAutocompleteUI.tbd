@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ContactsAutocompleteUI.framework/Versions/A/ContactsAutocompleteUI'
-current-version: 819.100.2
+current-version: 819.200.31
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CNAutocompleteColumnAccount, _CNAutocompleteColumnIcon, _CNAutocompleteColumnIdentifier, 

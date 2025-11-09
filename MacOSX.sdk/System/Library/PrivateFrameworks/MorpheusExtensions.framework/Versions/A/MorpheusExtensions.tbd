@@ -39,11 +39,20 @@ exports:
                        '_$s18MorpheusExtensions10RegexMatchCMn', '_$s18MorpheusExtensions10RegexMatchCMo', 
                        '_$s18MorpheusExtensions10RegexMatchCMu', '_$s18MorpheusExtensions10RegexMatchCN', 
                        '_$s18MorpheusExtensions10RegexMatchCfD', '_$s18MorpheusExtensions10RegexMatchCfd', 
+                       '_$s18MorpheusExtensions11BiomeWriterC06extendA0yyFZ', '_$s18MorpheusExtensions11BiomeWriterC0A012AttributableAAMc', 
+                       '_$s18MorpheusExtensions11BiomeWriterC3has9attributeSbSS_tFTj', 
+                       '_$s18MorpheusExtensions11BiomeWriterC3has9attributeSbSS_tFTq', 
+                       '_$s18MorpheusExtensions11BiomeWriterC9attribute3forypSgSS_tFTj', 
+                       '_$s18MorpheusExtensions11BiomeWriterC9attribute3forypSgSS_tFTq', 
+                       '_$s18MorpheusExtensions11BiomeWriterCMa', '_$s18MorpheusExtensions11BiomeWriterCMm', 
+                       '_$s18MorpheusExtensions11BiomeWriterCMn', '_$s18MorpheusExtensions11BiomeWriterCMo', 
+                       '_$s18MorpheusExtensions11BiomeWriterCMu', '_$s18MorpheusExtensions11BiomeWriterCN', 
+                       '_$s18MorpheusExtensions11BiomeWriterCfD', '_$s18MorpheusExtensions11BiomeWriterCfd', 
                        '_$s18MorpheusExtensions2ReO06extendA0yyKFZ', '_$s18MorpheusExtensions2ReOMa', 
                        '_$s18MorpheusExtensions2ReOMn', '_$s18MorpheusExtensions2ReON', 
                        '_$s18MorpheusExtensions4MathO06extendA0yyKFZ', '_$s18MorpheusExtensions4MathOMa', 
                        '_$s18MorpheusExtensions4MathOMn', '_$s18MorpheusExtensions4MathON', 
-                       '_$s18MorpheusExtensions5BiomeO06extendA0yyKFZ', '_$s18MorpheusExtensions5BiomeOMa', 
+                       '_$s18MorpheusExtensions5BiomeO06extendA0yyFZ', '_$s18MorpheusExtensions5BiomeOMa', 
                        '_$s18MorpheusExtensions5BiomeOMn', '_$s18MorpheusExtensions5BiomeON', 
                        '_$s18MorpheusExtensions6SQLiteO06extendA0yyKFZ', '_$s18MorpheusExtensions6SQLiteOMa', 
                        '_$s18MorpheusExtensions6SQLiteOMn', '_$s18MorpheusExtensions6SQLiteON', 
@@ -97,4 +106,5 @@ exports:
                        '_$sSo19NSRegularExpressionC18MorpheusExtensionsE9attribute3forypSgSS_tF', 
                        '_$sSo19NSRegularExpressionC8Morpheus12Attributable0C10ExtensionsMc', 
                        _MorpheusExtensionsVersionNumber, _MorpheusExtensionsVersionString ]
+    objc-classes:    [ AnyEvent, StreamHelpers ]
 ...

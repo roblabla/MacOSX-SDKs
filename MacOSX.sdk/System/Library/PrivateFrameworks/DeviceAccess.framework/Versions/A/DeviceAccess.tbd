@@ -34,17 +34,18 @@ exports:
                        '_$sSo8DADeviceC12DeviceAccessE9txtRecord7Network11NWTXTRecordVSgvs', 
                        _DAAccessorySetupExtensionEntitlement, _DAAccessorySetupExtensionPointIdentifier, 
                        _DACurrentDeviceCapabilitiesToString, _DADeviceAccessorySetupOptionsToString, 
-                       _DADeviceFlagsToString, _DADeviceMediaPlaybackStateToString, 
+                       _DADeviceConnectedStatusToString, _DADeviceFlagsToString, 
+                       _DADeviceInteractionTypeToString, _DADeviceMediaPlaybackStateToString, 
                        _DADeviceProtocolDIAL, _DADeviceProtocolInvalid, _DADeviceProtocolTypeToString, 
                        _DADeviceStateToString, _DADeviceTypeToString, _DAErrorCodeToString, 
                        _DAErrorDomain, _DAErrorF, _DAEventTypeToString, _DAExtensionEntitlement, 
                        _DAExtensionPointIdentifier, _DANestedErrorF, _gDADaemonServer ]
     objc-classes:    [ DAAppContext, DABluetoothAccessInfo, DABluetoothDeviceAccessInfo, 
                        DABluetoothPairingInfo, DADaemonSession, DADevice, DADeviceAccessAnalytics, 
-                       DADeviceAppAccessInfo, DADeviceEvent, DADeviceResolver, DADeviceSettings, 
-                       DADiscovery, DADiscoveryConfiguration, DADiscoveryExtensionSession, 
-                       DAEndpoint, DAEvent, DAEventDevice, DAEventDeviceBluetoothPairingRequest, 
-                       DAEventDeviceWiFiAwarePairingRequest, DAEventDevices, DAEventDevicesPresent, 
-                       DAPartialIP, DAPropertyCompareString, DASession, DASimulatedDeviceServer, 
-                       DAUserAlert, DAWiFiAwarePairingInfo ]
+                       DADeviceAccessoryServiceInfo, DADeviceAppAccessInfo, DADeviceEvent, 
+                       DADeviceResolver, DADeviceSettings, DADiscovery, DADiscoveryConfiguration, 
+                       DADiscoveryExtensionSession, DAEndpoint, DAEvent, DAEventDevice, 
+                       DAEventDeviceBluetoothPairingRequest, DAEventDeviceWiFiAwarePairingRequest, 
+                       DAEventDevices, DAEventDevicesPresent, DAPartialIP, DAPropertyCompareString, 
+                       DASession, DASimulatedDeviceServer, DAUserAlert, DAWiFiAwarePairingInfo ]
 ...

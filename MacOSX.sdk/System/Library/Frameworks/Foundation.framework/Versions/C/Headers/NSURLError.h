@@ -91,6 +91,7 @@ typedef NS_ENUM(NSInteger, NSURLErrorNetworkUnavailableReason)
     NSURLErrorNetworkUnavailableReasonCellular =    0,
     NSURLErrorNetworkUnavailableReasonExpensive =   1,
     NSURLErrorNetworkUnavailableReasonConstrained = 2,
+    NSURLErrorNetworkUnavailableReasonUltraConstrained API_AVAILABLE(macos(26.1), ios(26.1), watchos(26.1), tvos(26.1), visionos(26.1)) = 3,
 } API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 /*!

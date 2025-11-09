@@ -61,7 +61,12 @@ exports:
                        '_$s12FamilyCircle0A15SharingAudienceON', '_$s12FamilyCircle0A15SharingAudienceOSEAAMc', 
                        '_$s12FamilyCircle0A15SharingAudienceOSHAAMc', '_$s12FamilyCircle0A15SharingAudienceOSQAAMc', 
                        '_$s12FamilyCircle0A15SharingAudienceOSYAAMc', '_$s12FamilyCircle0A15SharingAudienceOSeAAMc', 
-                       '_$s12FamilyCircle0A19SettingsValueEntityC03intD0So8NSNumberCSgvpMV', 
+                       '_$s12FamilyCircle0A16UserDefaultsKeysC33familyDetailsAppleAccountOverrideSSvgZ', 
+                       '_$s12FamilyCircle0A16UserDefaultsKeysC33familyDetailsAppleAccountOverrideSSvpZMV', 
+                       '_$s12FamilyCircle0A16UserDefaultsKeysCACycfC', '_$s12FamilyCircle0A16UserDefaultsKeysCACycfc', 
+                       '_$s12FamilyCircle0A16UserDefaultsKeysCMa', '_$s12FamilyCircle0A16UserDefaultsKeysCMn', 
+                       '_$s12FamilyCircle0A16UserDefaultsKeysCMo', '_$s12FamilyCircle0A16UserDefaultsKeysCN', 
+                       '_$s12FamilyCircle0A16UserDefaultsKeysCfD', '_$s12FamilyCircle0A19SettingsValueEntityC03intD0So8NSNumberCSgvpMV', 
                        '_$s12FamilyCircle0A19SettingsValueEntityC04boolD0So8NSNumberCSgvpMV', 
                        '_$s12FamilyCircle0A19SettingsValueEntityC06doubleD0So8NSNumberCSgvpMV', 
                        '_$s12FamilyCircle0A19SettingsValueEntityC12fetchRequestSo07NSFetchG0CyACGyFZ', 
@@ -1476,7 +1481,7 @@ exports:
                        '_$sSo14FAFamilyCircleC06FamilyB0E07refreshC15MemberIDSStatus12forceRefreshySb_tF', 
                        '_$sSo14FAFamilyCircleC06FamilyB0E07refreshC22MemberIDSStatusAndWait12forceRefreshySb_tYaF', 
                        '_$sSo14FAFamilyCircleC06FamilyB0E07refreshC22MemberIDSStatusAndWait12forceRefreshySb_tYaFTu', 
-                       '_$sSo14FAFamilyCircleC06FamilyB0E08isPartOfC14AndChildOrTeen7altDSIDSb_SbtSS_tF', 
+                       '_$sSo14FAFamilyCircleC06FamilyB0E08isPartOfC0SbyF', '_$sSo14FAFamilyCircleC06FamilyB0E08isPartOfC14AndChildOrTeen7altDSIDSb_SbtSS_tF', 
                        '_$sSo14FAFamilyCircleC06FamilyB0E12amIOrganizerSbvg', '_$sSo14FAFamilyCircleC06FamilyB0E12amIOrganizerSbvpMV', 
                        '_$sSo14FAFamilyCircleC06FamilyB0E12membersNotMeSaySo0A6MemberCGyF', 
                        '_$sSo14FAFamilyCircleC06FamilyB0E13familyHasTeenSbvg', '_$sSo14FAFamilyCircleC06FamilyB0E13familyHasTeenSbvpMV', 
@@ -1764,6 +1769,7 @@ exports:
                        FAUpdateFamilyMemberFlagRequest, FAUpdateFamilyMemberFlagsRequest, 
                        FAXPCEventObserver, FamilySettingsDestinations, _FAFamilyCircleRequestConnectionFactory, 
                        _FAFamilyCircleRequestConnectionProvider, _TtC12FamilyCircle19FamilyDefaultSuites, 
-                       _TtC12FamilyCircle20AgeAttestationEntity, _TtC12FamilyCircle25FamilySettingsValueEntity, 
-                       _TtC12FamilyCircle27RecordSharingMetadataEntity, _TtC12FamilyCircle28ProfilePictureMarqueKeyNames ]
+                       _TtC12FamilyCircle20AgeAttestationEntity, _TtC12FamilyCircle22FamilyUserDefaultsKeys, 
+                       _TtC12FamilyCircle25FamilySettingsValueEntity, _TtC12FamilyCircle27RecordSharingMetadataEntity, 
+                       _TtC12FamilyCircle28ProfilePictureMarqueKeyNames ]
 ...

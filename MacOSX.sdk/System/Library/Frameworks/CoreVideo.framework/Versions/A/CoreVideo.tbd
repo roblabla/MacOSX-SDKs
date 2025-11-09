@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo'
-current-version: 706.46.5
+current-version: 726.2
 compatibility-version: 1.2
 swift-abi-version: 7
 exports:

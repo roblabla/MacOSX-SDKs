@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MailSupport.framework/Versions/A/MailSupport'
-current-version: 3864.100.1
+current-version: 3864.200.81
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -24,17 +24,15 @@ exports:
                        '_$s11MailSupport0A11FeatureFlagO012isGenerativeC7EnabledSbvpMV', 
                        '_$s11MailSupport0A11FeatureFlagO0C5Flags0cE3KeyAAMc', '_$s11MailSupport0A11FeatureFlagO10blackPearlyA2CmFWC', 
                        '_$s11MailSupport0A11FeatureFlagO10classCDatayA2CmFWC', '_$s11MailSupport0A11FeatureFlagO10liveSearchyA2CmFWC', 
-                       '_$s11MailSupport0A11FeatureFlagO10quickReplyyA2CmFWC', '_$s11MailSupport0A11FeatureFlagO13messageSearchyA2CmFWC', 
-                       '_$s11MailSupport0A11FeatureFlagO15solariumAvatarsyA2CmFWC', 
-                       '_$s11MailSupport0A11FeatureFlagO19catchUpHighlightsV2yA2CmFWC', 
+                       '_$s11MailSupport0A11FeatureFlagO10quickReplyyA2CmFWC', '_$s11MailSupport0A11FeatureFlagO19catchUpHighlightsV2yA2CmFWC', 
                        '_$s11MailSupport0A11FeatureFlagO19searchImportantTextyA2CmFWC', 
+                       '_$s11MailSupport0A11FeatureFlagO20imapSyncMoreMessagesyA2CmFWC', 
                        '_$s11MailSupport0A11FeatureFlagO26catchUpManualSummarizationyA2CmFWC', 
                        '_$s11MailSupport0A11FeatureFlagO2eeoiySbAC_ACtFZ', '_$s11MailSupport0A11FeatureFlagO4hash4intoys6HasherVz_tF', 
-                       '_$s11MailSupport0A11FeatureFlagO5shojiyA2CmFWC', '_$s11MailSupport0A11FeatureFlagO6domains12StaticStringVvg', 
+                       '_$s11MailSupport0A11FeatureFlagO6domains12StaticStringVvg', 
                        '_$s11MailSupport0A11FeatureFlagO6domains12StaticStringVvpMV', 
                        '_$s11MailSupport0A11FeatureFlagO7catchUpyA2CmFWC', '_$s11MailSupport0A11FeatureFlagO7features12StaticStringVvg', 
                        '_$s11MailSupport0A11FeatureFlagO7features12StaticStringVvpMV', 
-                       '_$s11MailSupport0A11FeatureFlagO8followUpyA2CmFWC', '_$s11MailSupport0A11FeatureFlagO8remindMeyA2CmFWC', 
                        '_$s11MailSupport0A11FeatureFlagO9hashValueSivg', '_$s11MailSupport0A11FeatureFlagO9hashValueSivpMV', 
                        '_$s11MailSupport0A11FeatureFlagO9isEnabledSbvg', '_$s11MailSupport0A11FeatureFlagO9isEnabledSbvpMV', 
                        '_$s11MailSupport0A11FeatureFlagOMa', '_$s11MailSupport0A11FeatureFlagOMn', 
@@ -332,8 +330,8 @@ exports:
                        MSGetMailIntent, MSGetMailIntentResponse, MSInputContextHistory, 
                        MSIntentMail, MSIntentMailResolutionResult, MSIntentReadStatusResolutionResult, 
                        MSJunkTriageAction, MSMessageListItemSelection, MSMoveTriageAction, 
-                       MSMuteTriageAction, MSNotifyTriageAction, MSParsecSearchIndexState, 
-                       MSParsecSearchSession, MSParsecSearchSessionInstantAnswer, 
+                       MSMuteTriageAction, MSNotifyTriageAction, MSParsecSearchEmbeddingState, 
+                       MSParsecSearchIndexState, MSParsecSearchSession, MSParsecSearchSessionInstantAnswer, 
                        MSParsecSearchSessionMessageListResult, MSParsecSearchSessionMessageResult, 
                        MSParsecSearchSessionQueryComponent, MSParsecSearchSessionSuggestion, 
                        MSParsecSearchSessionTopHit, MSRadarInteraction, MSRadarURLBuilder, 
@@ -343,6 +341,7 @@ exports:
                        MSSendMailIntentFormatter, MSSendMailIntentResponse, MSSenderBlockingTriageAction, 
                        MSSiriIntelligenceSettings, MSTriageAction, MSTriageChangeAction, 
                        MSTriageUndoAction, MSUnsubscribeTriageAction, MSUserDefaultsBucketBarConfigurationProvider, 
-                       MSUserNotificationCenterAnalyticsLogger, _MSCountableMatchesContext ]
+                       MSUserNotificationCenterAnalyticsLogger, MSWebKitWebViewConfigurationFactory, 
+                       _MSCountableMatchesContext ]
     objc-ivars:      [ _MSCountableMatchesContext._contactsCount ]
 ...

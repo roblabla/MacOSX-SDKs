@@ -98,6 +98,7 @@ exports:
                        '_$s10FindMyBase10SystemInfoO15bootSessionUUID10Foundation0H0VvgZ', 
                        '_$s10FindMyBase10SystemInfoO15bootSessionUUID10Foundation0H0VvpZMV', 
                        '_$s10FindMyBase10SystemInfoO15isInternalBuildSbvgZ', '_$s10FindMyBase10SystemInfoO15isInternalBuildSbvpZMV', 
+                       '_$s10FindMyBase10SystemInfoO16isVirtualMachineSbvgZ', '_$s10FindMyBase10SystemInfoO16isVirtualMachineSbvpZMV', 
                        '_$s10FindMyBase10SystemInfoO19auditUserIdentifiers6UInt32VvgZ', 
                        '_$s10FindMyBase10SystemInfoO19auditUserIdentifiers6UInt32VvpZMV', 
                        '_$s10FindMyBase10SystemInfoO20LowPowerExpressModesV03nfcH0AEvgZ', 

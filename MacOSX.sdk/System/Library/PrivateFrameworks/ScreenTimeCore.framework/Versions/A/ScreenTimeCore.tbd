@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeCore.framework/Versions/A/ScreenTimeCore'
-current-version: 604.1
+current-version: 605.1.19
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -17,10 +17,8 @@ exports:
                        '_$s14ScreenTimeCore0aB12FeatureFlagsO14dataValidationyA2CmFWC', 
                        '_$s14ScreenTimeCore0aB12FeatureFlagsO15appDistributionyA2CmFWC', 
                        '_$s14ScreenTimeCore0aB12FeatureFlagsO15newUsageSwiftUIyA2CmFWC', 
-                       '_$s14ScreenTimeCore0aB12FeatureFlagsO15simplifiedAgentyA2CmFWC', 
                        '_$s14ScreenTimeCore0aB12FeatureFlagsO16passcodeActivityyA2CmFWC', 
                        '_$s14ScreenTimeCore0aB12FeatureFlagsO17amsAppMetadataAPIyA2CmFWC', 
-                       '_$s14ScreenTimeCore0aB12FeatureFlagsO17featureDecouplingyA2CmFWC', 
                        '_$s14ScreenTimeCore0aB12FeatureFlagsO17nlgDialogResponseyA2CmFWC', 
                        '_$s14ScreenTimeCore0aB12FeatureFlagsO19legacyUsageShutdownyA2CmFWC', 
                        '_$s14ScreenTimeCore0aB12FeatureFlagsO21greymatterImagePresetyA2CmFWC', 
@@ -650,7 +648,7 @@ exports:
                        STAskForTimeCategoryResource, STAskForTimeClient, STAskForTimeNotApprovedResponseReceivedUserNotificationContext, 
                        STAskForTimeRequest, STAskForTimeRequestReceivedUserNotificationContext, 
                        STAskForTimeRequestResponse, STAskForTimeResource, STAskForTimeResponse, 
-                       STAskForTimeWebsiteResource, STAskServiceClient, STAskToManageContactsApprovedResponseReceivedUserNotificationContext, 
+                       STAskForTimeWebsiteResource, STAskToManageContactsApprovedResponseReceivedUserNotificationContext, 
                        STAskToManageContactsNotApprovedResponseReceivedUserNotificationContext, 
                        STAskToManageContactsRequestReceivedUserNotificationContext, 
                        STAuthenticationResult, STBlueprint, STBlueprintBackedDowntimeOverrideModifier, 

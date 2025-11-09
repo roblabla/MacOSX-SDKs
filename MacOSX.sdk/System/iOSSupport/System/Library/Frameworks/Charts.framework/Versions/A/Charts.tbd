@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/Charts.framework/Versions/A/Charts'
-current-version: 4.0.71
+current-version: 4.1.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -690,7 +690,11 @@ exports:
                        '_$s6Charts19_ScaleDomainOutputsVN', '_$s6Charts20AutomaticScaleDomainV05_makecD0AA01_cD7OutputsVyF', 
                        '_$s6Charts20AutomaticScaleDomainVAA0cD0AAMc', '_$s6Charts20AutomaticScaleDomainVAA0cD0AAWP', 
                        '_$s6Charts20AutomaticScaleDomainVMa', '_$s6Charts20AutomaticScaleDomainVMn', 
-                       '_$s6Charts20AutomaticScaleDomainVN', '_$s6Charts20ChartModifiedContentV7content8modifierACyxq_Gx_q_tcfC', 
+                       '_$s6Charts20AutomaticScaleDomainVN', '_$s6Charts20Chart3DImageRendererV11snapshotterSo10CGImageRefaSgycvg', 
+                       '_$s6Charts20Chart3DImageRendererV11snapshotterSo10CGImageRefaSgycvpMV', 
+                       '_$s6Charts20Chart3DImageRendererV2eeoiySbAC_ACtFZ', '_$s6Charts20Chart3DImageRendererVMa', 
+                       '_$s6Charts20Chart3DImageRendererVMn', '_$s6Charts20Chart3DImageRendererVN', 
+                       '_$s6Charts20Chart3DImageRendererVSQAAMc', '_$s6Charts20ChartModifiedContentV7content8modifierACyxq_Gx_q_tcfC', 
                        '_$s6Charts20ChartModifiedContentV7contentxvM', '_$s6Charts20ChartModifiedContentV7contentxvg', 
                        '_$s6Charts20ChartModifiedContentV7contentxvpMV', '_$s6Charts20ChartModifiedContentV7contentxvs', 
                        '_$s6Charts20ChartModifiedContentV8modifierq_vM', '_$s6Charts20ChartModifiedContentV8modifierq_vg', 
@@ -794,7 +798,14 @@ exports:
                        '_$s6Charts23Chart3DCameraProjectionV9hashValueSivg', '_$s6Charts23Chart3DCameraProjectionV9hashValueSivpMV', 
                        '_$s6Charts23Chart3DCameraProjectionVMa', '_$s6Charts23Chart3DCameraProjectionVMn', 
                        '_$s6Charts23Chart3DCameraProjectionVN', '_$s6Charts23Chart3DCameraProjectionVSHAAMc', 
-                       '_$s6Charts23Chart3DCameraProjectionVSQAAMc', '_$s6Charts23FunctionAreaPlotContentV012_layoutChartE0yyAC_AA01_gE12LayoutInputsVtFZ', 
+                       '_$s6Charts23Chart3DCameraProjectionVSQAAMc', '_$s6Charts23Chart3DImageRendererKeyV12defaultValueSayAA0bcD0VGvMZ', 
+                       '_$s6Charts23Chart3DImageRendererKeyV12defaultValueSayAA0bcD0VGvgZ', 
+                       '_$s6Charts23Chart3DImageRendererKeyV12defaultValueSayAA0bcD0VGvpZMV', 
+                       '_$s6Charts23Chart3DImageRendererKeyV12defaultValueSayAA0bcD0VGvsZ', 
+                       '_$s6Charts23Chart3DImageRendererKeyV6reduce5value9nextValueySayAA0bcD0VGz_AIyXEtFZ', 
+                       '_$s6Charts23Chart3DImageRendererKeyV7SwiftUI010PreferenceE0AAMc', 
+                       '_$s6Charts23Chart3DImageRendererKeyVMa', '_$s6Charts23Chart3DImageRendererKeyVMn', 
+                       '_$s6Charts23Chart3DImageRendererKeyVN', '_$s6Charts23FunctionAreaPlotContentV012_layoutChartE0yyAC_AA01_gE12LayoutInputsVtFZ', 
                        '_$s6Charts23FunctionAreaPlotContentV012_renderChartE0yAA01_gE13RenderOutputsVAC_AA01_geH6InputsVtFZ', 
                        '_$s6Charts23FunctionAreaPlotContentVAA05ChartE0AAMc', '_$s6Charts23FunctionAreaPlotContentVAA05ChartE0AAWP', 
                        '_$s6Charts23FunctionAreaPlotContentVMa', '_$s6Charts23FunctionAreaPlotContentVMn', 

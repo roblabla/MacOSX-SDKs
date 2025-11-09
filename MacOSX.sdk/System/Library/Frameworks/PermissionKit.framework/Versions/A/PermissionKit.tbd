@@ -174,11 +174,13 @@ exports:
                        '_$s13PermissionKit19CommunicationLimitsCMn', '_$s13PermissionKit19CommunicationLimitsCMo', 
                        '_$s13PermissionKit19CommunicationLimitsCMu', '_$s13PermissionKit19CommunicationLimitsCN', 
                        '_$s13PermissionKit19CommunicationLimitsCfD', '_$s13PermissionKit19CommunicationLimitsCfd', 
+                       '_$s13PermissionKit8AskErrorO06systemD0yACs0D0_p_tcACmFWC', 
                        '_$s13PermissionKit8AskErrorO10Foundation09LocalizedD0AAMc', 
-                       '_$s13PermissionKit8AskErrorO2eeoiySbAC_ACtFZ', '_$s13PermissionKit8AskErrorO4hash4intoys6HasherVz_tF', 
-                       '_$s13PermissionKit8AskErrorO7unknownyA2CmFWC', '_$s13PermissionKit8AskErrorO9hashValueSivg', 
-                       '_$s13PermissionKit8AskErrorO9hashValueSivpMV', '_$s13PermissionKit8AskErrorOMa', 
+                       '_$s13PermissionKit8AskErrorO15invalidQuestionyA2CmFWC', '_$s13PermissionKit8AskErrorO16errorDescriptionSSSgvg', 
+                       '_$s13PermissionKit8AskErrorO16errorDescriptionSSSgvpMV', 
+                       '_$s13PermissionKit8AskErrorO19contactSyncNotSetupyA2CmFWC', 
+                       '_$s13PermissionKit8AskErrorO29communicationLimitsNotEnabledyA2CmFWC', 
+                       '_$s13PermissionKit8AskErrorO7unknownyA2CmFWC', '_$s13PermissionKit8AskErrorOMa', 
                        '_$s13PermissionKit8AskErrorOMn', '_$s13PermissionKit8AskErrorON', 
-                       '_$s13PermissionKit8AskErrorOSHAAMc', '_$s13PermissionKit8AskErrorOSQAAMc', 
                        '_$s13PermissionKit8AskErrorOs0D0AAMc' ]
 ...

@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ASDiscoveryDescriptor;
 @class ASAccessoryEvent;
 @class ASAccessorySession;
+@class ASDiscoveredDisplayItem;
 @class ASMigrationDisplayItem;
 @class ASPickerDisplayItem;
 @class ASPickerDisplaySettings;
@@ -123,6 +124,33 @@ NS_SWIFT_NAME(renameAccessory(_:options:completionHandler:));
            completionHandler:(void(^)(NSError * _Nullable error)) completionHandler
 NS_SWIFT_NAME(updateAuthorization(for:descriptor:completionHandler:))
 API_AVAILABLE( ios( 26.0 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos);
+
+/// Updates the picker with app-filtered accessories.
+///
+/// You use this method when your picker uses the ``ASPickerDisplaySettings/Options/filterDiscoveryResults`` option to enable manual filtering of discovered accessories.
+/// After creating customized ``ASDiscoveredDisplayItem`` instances for included accessories, call this method to update the picker to show your app-filtered accessories with updated assets.
+///
+/// - Parameters:
+///   - displayItems: The app-filtered accessories to show in the picker.
+///   - completionHandler: A block or closure that executes after the updatePicker operation completes. The completion handler receives an <doc://com.apple.documentation/documentation/Foundation/NSError> instance if the operation encounters an error.
+
+- (void) updatePickerShowingDiscoveredDisplayItems:(NSArray<ASDiscoveredDisplayItem *> *)displayItems
+                                 completionHandler:(void(^)(NSError * _Nullable error)) completionHandler
+NS_SWIFT_NAME(updatePicker(showing:completionHandler:))
+API_AVAILABLE( ios( 26.1 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos);
+
+/// Finish the discovery session in the picker and show a timeout error.
+///
+/// Use this method if you previously set the picker display setting ``ASPickerDisplaySettings/discoveryTimeout`` to ``ASPickerDisplaySettings/DiscoveryTimeout/unbounded`` in order to perform manual filtering of discovered accessories.
+/// Calling this method finishes the discovery session in the picker and shows a timeout error if the session didn't find any desired accessories.
+///
+/// Calling this method after updating the picker with discovered accessories has no effect.
+///
+/// - Parameters:
+///   - completionHandler: A block or closure that executes after this operation completes. The completion handler receives an <doc://com.apple.documentation/documentation/Foundation/NSError> instance if the operation encounters an error.
+- (void) finishPickerDiscovery:(void(^)(NSError * _Nullable error)) completionHandler
+NS_SWIFT_NAME(finishPickerDiscovery(completionHandler:))
+API_AVAILABLE( ios( 26.1 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos);
 
 @end
 

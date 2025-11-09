@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_CompositorServices_SwiftUI.framework/Versions/A/_CompositorServices_SwiftUI'
-current-version: 420.1.1
+current-version: 420.40.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -2,8 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleCVA.framework/Versions/A/AppleCVA'
-current-version: 1002.6.1
-compatibility-version: 1002.6
+current-version: 1002.25
+compatibility-version: 1002.25
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CVAFaceTrackingCopySemantics, _CVAFaceTrackingCreate, _CVAFaceTrackingGetAPIVersion, 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/LinkServices.framework/Versions/A/LinkServices'
-current-version: 300.0.4
+current-version: 300.1.13
 compatibility-version: 0
 swift-abi-version: 7
 reexported-libraries:
@@ -104,7 +104,7 @@ exports:
                        '_$sSo14LNActionOutputC12LinkServicesE010asBMActionB0So027BMAppIntentInvocationActionB0CvgTu', 
                        '_$sSo14LNActionOutputC12LinkServicesE010asBMActionB0So027BMAppIntentInvocationActionB0CvpMV', 
                        '_$sSo18LNConnectionPolicyC12LinkServicesE11_typeExists15mangledTypeNameSbSS_tFZ', 
-                       '_$sSo18LNConnectionPolicyC12LinkServicesE33resolveEffectiveBundleIdentifiers_18withAllowedTargets03appG10Identifier09extensiongM006daemongM009frameworkgM07signalsySaySo011LNEffectivegM0CG_SaySo16LNTargetMetadataCGSgSpyALSgGA3SSo0aB7SignalsCSgtFZ', 
+                       '_$sSo18LNConnectionPolicyC12LinkServicesE7resolve_14allowedTargets19appBundleIdentifier09extensioniJ006daemoniJ009frameworkiJ07signalsySaySo011LNEffectiveiJ0CG_SaySo16LNTargetMetadataCGSgSAyALSgGSgA3TSo0aB7SignalsCSgtFZ', 
                        '_$sSo18LNMetadataProviderC12LinkServicesE10accumulate_19forBundleIdentifierSayxGAbCE9QueryTypeVy_xG_SStKlF', 
                        '_$sSo18LNMetadataProviderC12LinkServicesE10accumulateySDySSSayxGGAbCE9QueryTypeVy_xGKlF', 
                        '_$sSo18LNMetadataProviderC12LinkServicesE9QueryTypeV5enumsAEy_So14LNEnumMetadataCGvgZ', 
@@ -244,6 +244,7 @@ exports:
                        _LNTranscriptMatchingPredicateTypeAsString, _LNTranscriptServiceName, 
                        _LNTranscriptXPCInterface, _LNTranscriptXPCObservingInterface, 
                        _LNTranscriptXPCPrivilegedInterface, _LNTranscriptXPCPrivilegedObservingInterface, 
+                       _LNTriggerReindexBundleKey, _LNTriggerReindexNotification, 
                        _LNUserIdentityAccessLevelToLaunchOption, _LNValueExtractionTypeAsString, 
                        _LNViewEntityStateAsString, _LNViewLocationAsString, _LNVocabularyDonationTimeout, 
                        _LNVocabularyTermQuota, _LNVocabularyTraitId, _LNVocabularyTraitModel, 
@@ -307,7 +308,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/LinkMetadata.framework/Versions/A/LinkMetadata'
-current-version: 300.0.4
+current-version: 300.1.13
 compatibility-version: 0
 swift-abi-version: 7
 exports:

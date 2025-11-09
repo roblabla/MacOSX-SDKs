@@ -8,11 +8,11 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MADSafetyClassificationGoreViolenceResultKey, _MADSafetyClassificationNudityResultKey, 
                        _MADSignpostLog, _MADTextEmbeddingCalibrationVersionCurrent, 
-                       _MADVIDomainArt, _MADVIDomainMedia, _MADVIDomainPackagedProducts, 
-                       _MADVIFeatureARKitThirdParty, _MADVISuggestionTypeAutomatic, 
-                       _MADVISuggestionTypeGlyph, _MADVISuggestionTypeHighlightedSubject, 
-                       _MADVISuggestionTypeInfoPanel, _MediaAnalysisServicesVersionNumber, 
-                       _MediaAnalysisServicesVersionString ]
+                       _MADUnifiedEmbeddingVersionToString, _MADVIDomainArt, _MADVIDomainMedia, 
+                       _MADVIDomainPackagedProducts, _MADVIFeatureARKitThirdParty, 
+                       _MADVISuggestionTypeAutomatic, _MADVISuggestionTypeGlyph, 
+                       _MADVISuggestionTypeHighlightedSubject, _MADVISuggestionTypeInfoPanel, 
+                       _MediaAnalysisServicesVersionNumber, _MediaAnalysisServicesVersionString ]
     objc-classes:    [ MADCaptionResult, MADComputeService, MADComputeServiceProxy, 
                        MADCoreMLObservation, MADCoreMLRequest, MADCoreMLResult, MADDetectedFace, 
                        MADDetectedFaceVideoEntry, MADEmbeddingResult, MADExposureImageRequest, 

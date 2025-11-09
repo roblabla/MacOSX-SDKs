@@ -126,6 +126,7 @@
 #import <AppKit/NSSavePanel.h>
 #import <AppKit/NSMediaLibraryBrowserController.h>
 #import <AppKit/NSScreen.h>
+#import <AppKit/NSScrollEdgeEffect.h>
 #import <AppKit/NSScrollView.h>
 #import <AppKit/NSScroller.h>
 #import <AppKit/NSSegmentedControl.h>

@@ -7,9 +7,9 @@ allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ IntegrationTests, SystemUIServer, TMDebugTool, TMHelperAgent, 
                        Time Machine System Restore, TimeMachine, TimeMachineMenuExtra, 
-                       TimeMachineSettings, TimeMachineWidgetTestExtension, TimelineUI, 
-                       UnitTests, backupd, backupd-helper, fscompare, tmdiagnose, 
-                       tmutil ]
+                       TimeMachineSettings, TimeMachineSettings-Debug, TimeMachineWidgetTestExtension, 
+                       TimelineUI, UnitTests, backupd, backupd-helper, fscompare, 
+                       tmdiagnose, tmutil ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s10Descriptor18TimeMachinePrivate10CopySourcePTl', '_$s10Descriptor18TimeMachinePrivate15CopyDestinationPTl', 
@@ -1253,7 +1253,13 @@ exports:
                        '_$s18TimeMachinePrivate17NetworkVolumeInfoVMa', '_$s18TimeMachinePrivate17NetworkVolumeInfoVMn', 
                        '_$s18TimeMachinePrivate17NetworkVolumeInfoVN', '_$s18TimeMachinePrivate17NetworkVolumeInfoVSQAAMc', 
                        '_$s18TimeMachinePrivate17NetworkVolumeInfoVs12IdentifiableAAMc', 
-                       '_$s18TimeMachinePrivate18CopyEngineDelegateMp', '_$s18TimeMachinePrivate18CopyEngineDelegateP11ClientStatsAC_AA0d9UpdatableH0Tn', 
+                       '_$s18TimeMachinePrivate17TMVolumeUtilitiesC17mountNetworkShare3url14sessionOptions0fK010Foundation3URLVAJ_SDySSypGSgALtKFZ', 
+                       '_$s18TimeMachinePrivate17TMVolumeUtilitiesC7unmount_5forcey10Foundation3URLV_SbtKFZ', 
+                       '_$s18TimeMachinePrivate17TMVolumeUtilitiesCACycfC', '_$s18TimeMachinePrivate17TMVolumeUtilitiesCACycfc', 
+                       '_$s18TimeMachinePrivate17TMVolumeUtilitiesCMa', '_$s18TimeMachinePrivate17TMVolumeUtilitiesCMn', 
+                       '_$s18TimeMachinePrivate17TMVolumeUtilitiesCMo', '_$s18TimeMachinePrivate17TMVolumeUtilitiesCN', 
+                       '_$s18TimeMachinePrivate17TMVolumeUtilitiesCfD', '_$s18TimeMachinePrivate18CopyEngineDelegateMp', 
+                       '_$s18TimeMachinePrivate18CopyEngineDelegateP11ClientStatsAC_AA0d9UpdatableH0Tn', 
                        '_$s18TimeMachinePrivate18CopyEngineDelegateP12finishedItem_11destinationyAA0dH0V_10Foundation3URLVtKFTj', 
                        '_$s18TimeMachinePrivate18CopyEngineDelegateP12finishedItem_11destinationyAA0dH0V_10Foundation3URLVtKFTq', 
                        '_$s18TimeMachinePrivate18CopyEngineDelegateP13statsReported_5total15enumeratorStats10reportTypeyAA0deK0Vy06ClientK0QzG_AlA0d10EnumeratorK0VAA0dk6ReportM0OtKFTj', 
@@ -2232,7 +2238,7 @@ exports:
                        LookupItem, PreparationStrategy, SpecialPathsCache, SpecialPathsCacheRecord, 
                        StdoutLoggingHandler, TMCompression, TMDictionaryConfiguration, 
                        VolumePath, XMLPropertyListStream, _TtC18TimeMachinePrivate11LookupStats, 
-                       _TtC18TimeMachinePrivate19LookupStatsObserver ]
+                       _TtC18TimeMachinePrivate17TMVolumeUtilities, _TtC18TimeMachinePrivate19LookupStatsObserver ]
     objc-ivars:      [ DEBackupItem._snapshotVolumeRootURL, DEItem._comparisonFlags, 
                        DEItem._comparisonRootURL, DEItem._inode, DEItem._kind, DEItem._name, 
                        DEItem._securityRef, DEItem._url, DEItem._volumeID, DEItem._xattrKeyFilter, 

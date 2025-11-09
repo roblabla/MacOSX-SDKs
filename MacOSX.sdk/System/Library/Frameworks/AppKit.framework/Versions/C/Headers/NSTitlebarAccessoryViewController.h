@@ -5,9 +5,10 @@
     All rights reserved.
 */
 
-#import <AppKit/NSViewController.h>
-#import <AppKit/NSLayoutConstraint.h>
 #import <AppKit/AppKitDefines.h>
+#import <AppKit/NSLayoutConstraint.h>
+#import <AppKit/NSScrollEdgeEffect.h>
+#import <AppKit/NSViewController.h>
 
 @class NSClipView;
 
@@ -61,6 +62,13 @@ API_AVAILABLE(macos(10.10))
    NOTE: NSTitlebarAccessoryViewController will observe the view's frame for changes. You can change the view's frame in a direction that "makes sense". For instance, changing the height when the layoutAttribute is NSLayoutAttributeBottom, or changing the width when the layoutAttribute is NSLayoutAttributeRight. The other size direction will automatically be filled to the maximum size as required for the window.
 
  */
+
+/// The titlebar accessory’s preferred effect for content scrolling behind it.
+///
+/// To allow for a soft edge on the bottom edge of a titlebar accessory:
+///
+///     titlebarAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
+@property (strong) NSScrollEdgeEffectStyle *preferredScrollEdgeEffectStyle API_AVAILABLE(macos(26.1));
 
 @end
 

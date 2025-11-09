@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target arm64e-apple-macos26.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 815.0.49 -module-name StoreKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target arm64e-apple-macos26.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 815.1.15 -module-name StoreKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 import AppKit
 import BackgroundAssets
 import Combine
@@ -171,7 +171,7 @@ public struct Transaction : Swift.Identifiable {
       public static let freeTrial: StoreKit.Transaction.Offer.PaymentMode
       public static let payAsYouGo: StoreKit.Transaction.Offer.PaymentMode
       public static let payUpFront: StoreKit.Transaction.Offer.PaymentMode
-      @backDeployed(before: iOS 19.0, macOS 16.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+      @backDeployed(before: iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
       public static var oneTime: StoreKit.Transaction.Offer.PaymentMode {
         get { Self(rawValue: "ONE_TIME") }
       }
@@ -668,30 +668,6 @@ public struct AppStoreMerchandisingKind : Swift.Sendable {
   @available(watchOS, unavailable)
   @available(visionOS, unavailable)
   public static func subscriptionBundle(_ products: [StoreKit.Product]) -> StoreKit.AppStoreMerchandisingKind
-}
-@available(iOS, unavailable)
-@available(tvOS, unavailable)
-@available(macOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
-public struct AppStoreOfferKind : Swift.Sendable {
-  public enum PresentationResult : Swift.Sendable {
-    case dismissed
-    case purchaseCompleted(StoreKit.Product.PurchaseResult)
-  }
-  @available(iOS, unavailable)
-  @available(tvOS, unavailable)
-  @available(macOS, unavailable)
-  @available(watchOS, unavailable)
-  @available(visionOS, unavailable)
-  public static func subscriptionBundle(_ productIDs: [StoreKit.Product.ID]) -> StoreKit.AppStoreOfferKind
-  public static func subscriptionBundle(_ groupID: Swift.String) -> StoreKit.AppStoreOfferKind
-  @available(iOS, unavailable)
-  @available(tvOS, unavailable)
-  @available(macOS, unavailable)
-  @available(watchOS, unavailable)
-  @available(visionOS, unavailable)
-  public static func subscriptionBundle(_ products: [StoreKit.Product]) -> StoreKit.AppStoreOfferKind
 }
 @available(iOS 16.4, macOS 14.4, macCatalyst 16.4, *)
 @available(tvOS, unavailable)
@@ -2374,7 +2350,7 @@ extension StoreKit.Product {
     @available(visionOS, introduced: 1.1, deprecated: 26.0, message: "Sign promotional offers with JWS and use promotionalOffer(_:compactJWS:) instead")
     public static func promotionalOffer(offerID: Swift.String, signature: StoreKit.Product.SubscriptionOffer.Signature) -> StoreKit.Product.PurchaseOption
     @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
-    @backDeployed(before: iOS 19.0, macOS 16.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+    @backDeployed(before: iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
     public static func promotionalOffer(_ offerID: Swift.String, compactJWS: Swift.String) -> [StoreKit.Product.PurchaseOption] {
             return [
                 .custom(key: "adHocOfferId", value: offerID),
@@ -2518,7 +2494,7 @@ extension StoreKit.Product {
 }
 extension StoreKit.Product {
   @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
-  @backDeployed(before: iOS 19.0, macOS 16.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+  @backDeployed(before: iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
   @inlinable public var currentEntitlements: StoreKit.Transaction.Transactions {
     get {
         Transaction.currentEntitlements(for: id)

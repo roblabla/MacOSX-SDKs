@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/VectorKit.framework/Versions/A/VectorKit'
-current-version: 1991.20.7
+current-version: 1991.21.8
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFvimEEE, __ZTINSt3__110__function6__baseIFvmPKyEEE, 
@@ -95,16 +95,15 @@ exports:
                        _VectorKitDebugConfig_DaVinciTransitionAnimationPitch, _VectorKitDebugConfig_DebugAlbedoOnly, 
                        _VectorKitDebugConfig_DebugAmbientLightColorBlue, _VectorKitDebugConfig_DebugAmbientLightColorGreen, 
                        _VectorKitDebugConfig_DebugAmbientLightColorRed, _VectorKitDebugConfig_DebugChromaPreservedShadowThreshold, 
-                       _VectorKitDebugConfig_DebugEnableSharpnessBasedNormals, _VectorKitDebugConfig_DebugLightingOnly, 
-                       _VectorKitDebugConfig_DebugOverrideAmbientLightColor, _VectorKitDebugConfig_DebugOverrideNormalsSharpness, 
-                       _VectorKitDebugConfig_DebugOverridePrimaryLightColor, _VectorKitDebugConfig_DebugOverridePrimaryLightDirection, 
+                       _VectorKitDebugConfig_DebugLightingOnly, _VectorKitDebugConfig_DebugOverrideAmbientLightColor, 
+                       _VectorKitDebugConfig_DebugOverrideNormalsSharpness, _VectorKitDebugConfig_DebugOverridePrimaryLightColor, 
+                       _VectorKitDebugConfig_DebugOverridePrimaryLightDirection, 
                        _VectorKitDebugConfig_DebugOverrideSSAO, _VectorKitDebugConfig_DebugPrimaryLightAltitude, 
                        _VectorKitDebugConfig_DebugPrimaryLightAzimuth, _VectorKitDebugConfig_DebugPrimaryLightColorBlue, 
                        _VectorKitDebugConfig_DebugPrimaryLightColorGreen, _VectorKitDebugConfig_DebugPrimaryLightColorRed, 
                        _VectorKitDebugConfig_DebugSSAOIntensity, _VectorKitDebugConfig_DebugSSAOMaxIntensity, 
                        _VectorKitDebugConfig_DebugSSAOTopDownIntensityScale, _VectorKitDebugConfig_DebugSharpnessNormalsBias, 
-                       _VectorKitDebugConfig_DebugSharpnessThreshold, _VectorKitDebugConfig_DebugSteepnessDarkeningFactor, 
-                       _VectorKitDebugConfig_DebugSteepnessDarkeningThresholdMax, 
+                       _VectorKitDebugConfig_DebugSteepnessDarkeningFactor, _VectorKitDebugConfig_DebugSteepnessDarkeningThresholdMax, 
                        _VectorKitDebugConfig_DebugSteepnessDarkeningThresholdMin, 
                        _VectorKitDebugConfig_DecodeStyleNames, _VectorKitDebugConfig_DisableAllAssets, 
                        _VectorKitDebugConfig_DisableMSAA, _VectorKitDebugConfig_DisableMetros, 

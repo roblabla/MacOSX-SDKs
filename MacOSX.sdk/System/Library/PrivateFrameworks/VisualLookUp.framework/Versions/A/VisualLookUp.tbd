@@ -339,6 +339,7 @@ exports:
                        '_$s12VisualLookUp0A18SearchCameraResultV19visualUnderstandingAA0aH0VvpMV', 
                        '_$s12VisualLookUp0A18SearchCameraResultVMa', '_$s12VisualLookUp0A18SearchCameraResultVMn', 
                        '_$s12VisualLookUp0A18SearchCameraResultVN', '_$s12VisualLookUp0A19IntelligenceServiceC010searchableA13Understanding2inSd_AA0aG0VtSgSaySd_AGtG_tF', 
+                       '_$s12VisualLookUp0A19IntelligenceServiceC06answerA2QA5image9textQuery8dawToken16regionOfInterest7domains10annotation12queryContext10completionSo15VIQueryHandling_pSo14VIImageContent_p_S2SAA14NormalizedRectVShyAA0A6DomainVGSo12VIAnnotationCSgSo0uS0CSgys6ResultOyAA0A12SearchResultVs5Error_pGctF', 
                        '_$s12VisualLookUp0A19IntelligenceServiceC12performQueueSo17OS_dispatch_queueCvg', 
                        '_$s12VisualLookUp0A19IntelligenceServiceC12performQueueSo17OS_dispatch_queueCvpMV', 
                        '_$s12VisualLookUp0A19IntelligenceServiceC12warmupSearchyyF', 

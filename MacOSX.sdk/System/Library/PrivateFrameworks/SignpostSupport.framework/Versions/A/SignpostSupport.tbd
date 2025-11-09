@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SignpostSupport.framework/Versions/A/SignpostSupport'
-current-version: 173
+current-version: 174.7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -11,8 +11,9 @@ exports:
                        _SSCAIntervalTypeForSignpostInterval, _SSCAIsCAMetadataSubsystemCategory, 
                        _SSCAIsUCMetadataSubsystemCategory, _SignpostJSONRepresentation, 
                        _SignpostJSONRepresentationOfObject, _SignpostPlatformForDevice, 
-                       _SignpostPlatformForString, _SignpostReporterAllowlistedStringSet, 
-                       _SignpostReporterCrossPlatformAppleAccountAllowlist, _SignpostReporterCrossPlatformAppleIDAuthenticationAllowlist, 
+                       _SignpostPlatformForString, _SignpostReporterAllowlistSetDoInternalVariantCheck, 
+                       _SignpostReporterAllowlistedStringSet, _SignpostReporterCrossPlatformAppleAccountAllowlist, 
+                       _SignpostReporterCrossPlatformAppleIDAuthenticationAllowlist, 
                        _SignpostReporterCrossPlatformAuthKitAllowlist, _SignpostReporterCrossPlatformIntelligencePlatformAllowlist, 
                        _SignpostReporterCrossPlatformMediaAnalysisAllowlist, _SignpostReporterCrossPlatformPersonIdentificationTaskAllowlist, 
                        _SignpostReporterCrossPlatformPhotosPersistenceAllowlist, 

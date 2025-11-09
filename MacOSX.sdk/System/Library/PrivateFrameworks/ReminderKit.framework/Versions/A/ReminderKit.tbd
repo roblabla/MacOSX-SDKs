@@ -3,7 +3,6 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ReminderKit.framework/Versions/A/ReminderKit'
-current-version: 3799.31
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -33,9 +32,10 @@ exports:
                        _RDStoreControllerUnsetCKDirtyFlagsInNonCKAccountsMigrationAuthor, 
                        _RDStoreControllerUpdateAlternativeDueDatesOfCalDavRemindersMigrationAuthor, 
                        _RDSyncActivityNotificationEngineAuthor, _RDTemplateOperationAuthor, 
-                       _RDTodayNotificationLastBannerPresentationDateAuthor, _REMACAccountPropertyDidChooseToMigrate, 
-                       _REMACAccountPropertyDidFinishMigration, _REMAccountTypeMaskContainsType, 
-                       _REMAppBundleIdentifier, _REMAppGroupBundleIdentifier, _REMAppIntentsGroupEntityName, 
+                       _RDTodayNotificationLastBannerPresentationDateAuthor, _RDUrgentAlarmConsumerLastBannerPresentationDateAuthor, 
+                       _REMACAccountPropertyDidChooseToMigrate, _REMACAccountPropertyDidFinishMigration, 
+                       _REMAccountTypeMaskContainsType, _REMAppBundleIdentifier, 
+                       _REMAppGroupBundleIdentifier, _REMAppIntentsGroupEntityName, 
                        _REMAppIntentsGroupTypeDisplayName, _REMAppIntentsListEntityName, 
                        _REMAppIntentsListTypeDisplayName, _REMAppIntentsReminderEntityName, 
                        _REMAppIntentsReminderTypeDisplayName, _REMAppIntentsSectionEntityName, 

@@ -3,8 +3,8 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MIL.framework/Versions/A/MIL'
-current-version: 3500.14.1
-compatibility-version: 3500.14
+current-version: 3505.3.2
+compatibility-version: 3505.3
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIFN3MIL16ValidationResultERKNS_11IROperationEE, __ZTIFN3MIL4Fp16ES0_E, 
@@ -611,7 +611,11 @@ exports:
                        __ZN3MIL4Text20ParseProgramFromFileENSt3__110shared_ptrINS_10MILContextEEERKNS_13ParserOptionsE, 
                        __ZN3MIL4Text9SerializeERKNS_9IRProgramE, __ZN3MIL4Text9SerializeERKNS_9IRProgramERKNS0_17SerializerOptionsE, 
                        __ZN3MIL4Util16OpMatchesPatternERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKNS1_13unordered_setIS7_NS1_4hashIS7_EENS1_8equal_toIS7_EENS5_IS7_EEEE, 
-                       __ZN3MIL4Util17FindBlobFilePathsERKNS_9IRProgramE, __ZN3MIL4Util20GetRowAlignedStridesERNS_10MILContextENS_10IRDataTypeERKNSt3__16vectorIPKNS_11IRDimensionENS4_9allocatorIS8_EEEERKNS5_IPKNS_10IRPropertyENS9_ISG_EEEEy, 
+                       __ZN3MIL4Util17FindBlobFilePathsERKNS_9IRProgramE, __ZN3MIL4Util18ComputeProgramHashERKNS_9IRProgramERKNS0_11HashOptionsE, 
+                       __ZN3MIL4Util18ComputeWeightsHashERKNSt3__16vectorINS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEENS6_IS8_EEEERKNS0_11HashOptionsE, 
+                       __ZN3MIL4Util20ComputeStructureHashERKNS_9IRProgramE, __ZN3MIL4Util20GetRowAlignedStridesERNS_10MILContextENS_10IRDataTypeERKNSt3__16vectorIPKNS_11IRDimensionENS4_9allocatorIS8_EEEERKNS5_IPKNS_10IRPropertyENS9_ISG_EEEEy, 
+                       __ZN3MIL4Util21ComputeSeparateHashesERKNS_9IRProgramERKNS0_11HashOptionsE, 
+                       __ZN3MIL4Util25ComputeConstantValuesHashERKNS_9IRProgramERKNS0_11HashOptionsE, 
                        __ZN3MIL4Util4WalkERKNS_10IRFunctionERKNSt3__18functionIFbRKNS_11IROperationEEEE, 
                        __ZN3MIL4Util4WalkERKNS_10IRFunctionERKNSt3__18functionIFbRKNS_7IRBlockEEEE, 
                        __ZN3MIL4Util4WalkERKNS_11IROperationERKNSt3__18functionIFbRKNS_7IRBlockEEEE, 

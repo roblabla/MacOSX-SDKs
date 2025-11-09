@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target arm64e-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature LifetimeDependence -enable-experimental-feature NonescapableTypes -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -user-module-version 227.0.9 -module-name BackgroundAssets
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target arm64e-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature LifetimeDependence -enable-experimental-feature NonescapableTypes -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -user-module-version 227.40.4 -module-name BackgroundAssets
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 @_exported public import BackgroundAssets
 public import ExtensionFoundation
 public import Foundation
@@ -10,32 +10,32 @@ public import System
 public import _Concurrency
 public import _StringProcessing
 public import _SwiftConcurrencyShims
-@available(iOS 26.0, macOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(iOS 26, macOS 26, tvOS 26, visionOS 26, *)
 @available(watchOS, unavailable)
 public protocol ManagedDownloaderExtension : BackgroundAssets.BADownloaderExtension where Self.Configuration : BackgroundAssets.ManagedDownloaderExtensionConfiguration {
   func shouldDownload(_ assetPack: BackgroundAssets.AssetPack) -> Swift.Bool
 }
 extension BackgroundAssets.ManagedDownloaderExtension {
-  @available(iOS 26.0, macOS 26.0, tvOS 26.0, visionOS 26.0, *)
+  @available(iOS 26, macOS 26, tvOS 26, visionOS 26, *)
   @available(watchOS, unavailable)
   public var configuration: some BackgroundAssets.ManagedDownloaderExtensionConfiguration {
     get
   }
-  @available(iOS 26.0, macOS 26.0, tvOS 26.0, visionOS 26.0, *)
+  @available(iOS 26, macOS 26, tvOS 26, visionOS 26, *)
   @available(watchOS, unavailable)
   public func shouldDownload(_ assetPack: BackgroundAssets.AssetPack) -> Swift.Bool
-  @available(iOS 26.0, macOS 26.0, tvOS 26.0, visionOS 26.0, *)
+  @available(iOS 26, macOS 26, tvOS 26, visionOS 26, *)
   @available(watchOS, unavailable)
   public func downloads(for request: BackgroundAssets.BAContentRequest, manifestURL: Foundation.URL, extensionInfo: BackgroundAssets.BAAppExtensionInfo) -> Swift.Set<BackgroundAssets.BADownload>
   #if compiler(>=5.3) && $NonescapableTypes
-  @available(iOS 26.0, macOS 26.0, tvOS 26.0, visionOS 26.0, *)
+  @available(iOS 26, macOS 26, tvOS 26, visionOS 26, *)
   @available(watchOS, unavailable)
   public func backgroundDownload(_ download: BackgroundAssets.BADownload, didReceive challenge: Foundation.URLAuthenticationChallenge) async -> (Foundation.URLSession.AuthChallengeDisposition, Foundation.URLCredential?)
   #endif
-  @available(iOS 26.0, macOS 26.0, tvOS 26.0, visionOS 26.0, *)
+  @available(iOS 26, macOS 26, tvOS 26, visionOS 26, *)
   @available(watchOS, unavailable)
   public func backgroundDownload(_ failedDownload: BackgroundAssets.BADownload, failedWithError error: any Swift.Error)
-  @available(iOS 26.0, macOS 26.0, tvOS 26.0, visionOS 26.0, *)
+  @available(iOS 26, macOS 26, tvOS 26, visionOS 26, *)
   @available(watchOS, unavailable)
   public func backgroundDownload(_ finishedDownload: BackgroundAssets.BADownload, finishedWithFileURL fileURL: Foundation.URL)
 }
@@ -73,7 +73,7 @@ extension BackgroundAssets.BADownloaderExtension {
     get
   }
 }
-@_hasMissingDesignatedInitializers @available(iOS 26.0, macOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@_hasMissingDesignatedInitializers @available(iOS 26, macOS 26, tvOS 26, visionOS 26, *)
 @available(watchOS, unavailable)
 public actor AssetPackManager {
   public enum DownloadStatusUpdate : Swift.CustomStringConvertible, Swift.Sendable {
@@ -107,13 +107,13 @@ public actor AssetPackManager {
   nonisolated public func url(for path: System.FilePath) throws -> Foundation.URL
   public func remove(assetPackWithID assetPackID: Swift.String) async throws
   @objc deinit
-  @available(iOS 26.0, tvOS 26.0, visionOS 26.0, macOS 26.0, *)
+  @available(iOS 26, tvOS 26, visionOS 26, macOS 26, *)
   @available(watchOS, unavailable, introduced: 6.0)
   @_semantics("defaultActor") nonisolated final public var unownedExecutor: _Concurrency.UnownedSerialExecutor {
     get
   }
 }
-@available(iOS 26.0, macOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(iOS 26, macOS 26, tvOS 26, visionOS 26, *)
 @available(watchOS, unavailable)
 public enum ManagedBackgroundAssetsError : Swift.CustomStringConvertible, Foundation.LocalizedError {
   case assetPackNotFound(withID: Swift.String)
@@ -127,7 +127,7 @@ public enum ManagedBackgroundAssetsError : Swift.CustomStringConvertible, Founda
   }
   #endif
 }
-@available(iOS 26.0, macOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(iOS 26, macOS 26, tvOS 26, visionOS 26, *)
 @available(watchOS, unavailable)
 @_documentation(visibility: internal) @_Concurrency.MainActor @preconcurrency public protocol ManagedDownloaderExtensionConfiguration : BackgroundAssets.BADownloaderExtensionConfiguration {
   associatedtype DownloadManagerDelegateType : BackgroundAssets.BADownloadManagerDelegate, Swift.Sendable
@@ -148,7 +148,7 @@ extension BackgroundAssets.BAAppExtensionInfo {
   }
   #endif
 }
-@available(iOS 26.0, macOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(iOS 26, macOS 26, tvOS 26, visionOS 26, *)
 @available(watchOS, unavailable)
 public struct AssetPack : Swift.CustomStringConvertible, Foundation.DecodableWithConfiguration, Swift.Encodable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public struct Status : Swift.OptionSet, Swift.Sendable {
@@ -161,13 +161,13 @@ public struct AssetPack : Swift.CustomStringConvertible, Foundation.DecodableWit
     public static let downloaded: BackgroundAssets.AssetPack.Status
     public let rawValue: Swift.Int
     public init(rawValue: Swift.Int)
-    @available(iOS 26.0, tvOS 26.0, visionOS 26.0, macOS 26.0, *)
+    @available(iOS 26, tvOS 26, visionOS 26, macOS 26, *)
     @available(watchOS, unavailable)
     public typealias ArrayLiteralElement = BackgroundAssets.AssetPack.Status
-    @available(iOS 26.0, tvOS 26.0, visionOS 26.0, macOS 26.0, *)
+    @available(iOS 26, tvOS 26, visionOS 26, macOS 26, *)
     @available(watchOS, unavailable)
     public typealias Element = BackgroundAssets.AssetPack.Status
-    @available(iOS 26.0, tvOS 26.0, visionOS 26.0, macOS 26.0, *)
+    @available(iOS 26, tvOS 26, visionOS 26, macOS 26, *)
     @available(watchOS, unavailable)
     public typealias RawValue = Swift.Int
   }
@@ -186,14 +186,14 @@ public struct AssetPack : Swift.CustomStringConvertible, Foundation.DecodableWit
   public func encode(to encoder: any Swift.Encoder) throws
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (lhs: BackgroundAssets.AssetPack, rhs: BackgroundAssets.AssetPack) -> Swift.Bool
-  @available(iOS 26.0, tvOS 26.0, visionOS 26.0, macOS 26.0, *)
+  @available(iOS 26, tvOS 26, visionOS 26, macOS 26, *)
   @available(watchOS, unavailable)
   public typealias ID = Swift.String
   public var hashValue: Swift.Int {
     get
   }
 }
-@available(iOS 26.0, macOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(iOS 26, macOS 26, tvOS 26, visionOS 26, *)
 @available(watchOS, unavailable)
 public struct AssetPackManifest : Swift.CustomStringConvertible, Foundation.DecodableWithConfiguration, Swift.Encodable, Swift.Sendable {
   public struct DecodingConfiguration : Swift.CustomStringConvertible {

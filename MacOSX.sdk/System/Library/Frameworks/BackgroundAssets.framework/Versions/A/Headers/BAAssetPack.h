@@ -10,7 +10,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /// An archive of assets that the system downloads together.
 ///
 /// An instance of this class can be invalidated when the asset pack that it represents is updated on the server.
-API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0))
+API_AVAILABLE(ios(26), macos(26), tvos(26), visionos(26))
 API_UNAVAILABLE(watchos)
 NS_SWIFT_SENDABLE
 NS_REFINED_FOR_SWIFT

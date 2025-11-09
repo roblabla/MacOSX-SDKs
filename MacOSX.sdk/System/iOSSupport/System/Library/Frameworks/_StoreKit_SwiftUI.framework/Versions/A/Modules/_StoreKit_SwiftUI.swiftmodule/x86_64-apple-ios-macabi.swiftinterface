@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 815.0.49 -module-name _StoreKit_SwiftUI
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target x86_64-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 815.1.15 -module-name _StoreKit_SwiftUI
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 import Combine
 import CoreGraphics
 import CryptoKit/*.Insecure*/
@@ -446,18 +446,6 @@ extension _StoreKit_SwiftUI.SubscriptionStoreControlStyle where Self == _StoreKi
 extension SwiftUICore.View {
   #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public func appStoreMerchandising(isPresented: SwiftUICore.Binding<Swift.Bool>, kind: StoreKit.AppStoreMerchandisingKind, onDismiss: ((Swift.Result<StoreKit.AppStoreMerchandisingKind.PresentationResult, any Swift.Error>) async -> ())? = nil) -> some SwiftUICore.View
-  
-  #endif
-}
-@available(iOS, unavailable)
-@available(macCatalyst, unavailable)
-@available(tvOS, unavailable)
-@available(macOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
-extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
-  nonisolated public func appStoreOffer(isPresented: SwiftUICore.Binding<Swift.Bool>, kind: StoreKit.AppStoreOfferKind, onDismiss: ((Swift.Result<StoreKit.AppStoreOfferKind.PresentationResult, any Swift.Error>) async -> ())? = nil) -> some SwiftUICore.View
   
   #endif
 }

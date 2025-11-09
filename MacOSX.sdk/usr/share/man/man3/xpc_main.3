@@ -38,11 +38,19 @@ Each connection corresponds to a call to
 .Xr xpc_connection_create 3
 made by a client of the service.
 .Pp
-The service is responsible for setting an event handler on the new connection
-and resuming it in the same fashion as new connections returned by
-.Xr xpc_connection_create 3 .
+The
+.Fa handler
+.Em must
+either accept the connection by setting an event handler with
+.Xr xpc_connection_set_event_handler 3
+and calling
+.Xr xpc_connection_resume 3 ,
+or reject the connection by calling
+.Xr xpc_connection_cancel 3 .
+Failure to take one of these actions will result in the connection remaining
+in an undefined state, potentially causing resource leaks or preventing proper
+transaction cleanup.
 .Pp
-.Em Important :
 The new connection passed to
 .Fn handler
 must be retained using
@@ -154,7 +162,7 @@ key in the service's
 .Pp
 By default, the
 .Fn xpc_main
-function will call the 
+function will call the
 .Xr dispatch_main 3
 function to manage the service's main event loop.
 This behavior may be overridden with the
@@ -162,7 +170,7 @@ This behavior may be overridden with the
 key in the service's
 .Pa Info.plist .
 .Pp
-See 
+See
 .Xr xpcservice.plist 5
 for more information about these keys.
 .Sh SEE ALSO

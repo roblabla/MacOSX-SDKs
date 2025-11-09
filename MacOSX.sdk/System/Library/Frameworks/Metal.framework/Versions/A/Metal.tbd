@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Metal.framework/Versions/A/Metal'
-current-version: 370.63.1
+current-version: 370.63.7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -438,7 +438,7 @@ exports:
                        _MTLCommandQueue._qosLevel, _MTLCommandQueue._skipRender, 
                        _MTLCommandQueue._submittedGroup, _MTLCommandQueue._submittedQueue, 
                        _MTLCommandQueue._submittedQueueLock, _MTLDepthStencilState._device, 
-                       _MTLDepthStencilState._label, _MTLDevice._commandQueueCount, 
+                       _MTLDepthStencilState._label, _MTLDevice._acquireCount, _MTLDevice._commandQueueCount, 
                        _MTLDevice._commandQueueID, _MTLDevice._commandQueueLimit, 
                        _MTLDevice._commandQueueWaitLock, _MTLDevice._compilerMaximizationReferenceCount, 
                        _MTLDevice._emulationMeshPrefixSum1PSO, _MTLDevice._emulationMeshPrefixSum2PSO, 

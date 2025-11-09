@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligencePlatform.framework/Versions/A/IntelligencePlatform'
-current-version: 155.2.1
+current-version: 155.10
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1066,6 +1066,7 @@ exports:
                        '_$s20IntelligencePlatform11ViewServiceC013SiriRemembersC0V17InteractionEntityVN', 
                        '_$s20IntelligencePlatform11ViewServiceC013SiriRemembersC0V17InteractionEntityVSEAAMc', 
                        '_$s20IntelligencePlatform11ViewServiceC013SiriRemembersC0V17InteractionEntityVSeAAMc', 
+                       '_$s20IntelligencePlatform11ViewServiceC013SiriRemembersC0V19statsTableInsertSQLSSvgZ', 
                        '_$s20IntelligencePlatform11ViewServiceC013SiriRemembersC0V20ProcessedInteractionV12GRDBInternal11TableRecordAAMc', 
                        '_$s20IntelligencePlatform11ViewServiceC013SiriRemembersC0V20ProcessedInteractionV12GRDBInternal15EncodableRecordAAMc', 
                        '_$s20IntelligencePlatform11ViewServiceC013SiriRemembersC0V20ProcessedInteractionV12GRDBInternal15FetchableRecordAAMc', 
@@ -3055,6 +3056,8 @@ exports:
                        '_$s20IntelligencePlatform15EntityPredicateV16memberIdentifierACvpZMV', 
                        '_$s20IntelligencePlatform15EntityPredicateV16officialLanguageACvgZ', 
                        '_$s20IntelligencePlatform15EntityPredicateV16officialLanguageACvpZMV', 
+                       '_$s20IntelligencePlatform15EntityPredicateV16orderContentTypeACvgZ', 
+                       '_$s20IntelligencePlatform15EntityPredicateV16orderContentTypeACvpZMV', 
                        '_$s20IntelligencePlatform15EntityPredicateV16personIdentifierACvgZ', 
                        '_$s20IntelligencePlatform15EntityPredicateV16personIdentifierACvpZMV', 
                        '_$s20IntelligencePlatform15EntityPredicateV16senderIdentifierACvgZ', 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/TipKit.framework/Versions/A/TipKit'
-current-version: 120
+current-version: 120.1.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -80,15 +80,16 @@ exports:
                        '_$s6TipKit04MiniA9ViewStyleV8makeBody13configurationQrAA0adE13ConfigurationV_tF', 
                        '_$s6TipKit04MiniA9ViewStyleV8makeBody13configurationQrAA0adE13ConfigurationV_tFQOMQ', 
                        '_$s6TipKit04MiniA9ViewStyleVAA0adE0AAMc', '_$s6TipKit04MiniA9ViewStyleVAA0adE0AAWP', 
-                       '_$s6TipKit04MiniA9ViewStyleVMa', '_$s6TipKit04MiniA9ViewStyleVMn', 
-                       '_$s6TipKit04MiniA9ViewStyleVN', '_$s6TipKit0A0Mp', '_$s6TipKit0A0P2idSSvgTj', 
-                       '_$s6TipKit0A0P2idSSvgTq', '_$s6TipKit0A0P5image7SwiftUI5ImageVSgvgTj', 
-                       '_$s6TipKit0A0P5image7SwiftUI5ImageVSgvgTq', '_$s6TipKit0A0P5rulesSayAA4TipsO4RuleVGvgTj', 
-                       '_$s6TipKit0A0P5rulesSayAA4TipsO4RuleVGvgTq', '_$s6TipKit0A0P5title7SwiftUI4TextVvgTj', 
-                       '_$s6TipKit0A0P5title7SwiftUI4TextVvgTq', '_$s6TipKit0A0P7actionsSayAA4TipsO6ActionVGvgTj', 
-                       '_$s6TipKit0A0P7actionsSayAA4TipsO6ActionVGvgTq', '_$s6TipKit0A0P7message7SwiftUI4TextVSgvgTj', 
-                       '_$s6TipKit0A0P7message7SwiftUI4TextVSgvgTq', '_$s6TipKit0A0P7optionsSayAA0A6Option_pGvgTj', 
-                       '_$s6TipKit0A0P7optionsSayAA0A6Option_pGvgTq', '_$s6TipKit0A0PAAE10invalidate6reasonyAA4TipsO18InvalidationReasonO_tF', 
+                       '_$s6TipKit04MiniA9ViewStyleVACycfC', '_$s6TipKit04MiniA9ViewStyleVMa', 
+                       '_$s6TipKit04MiniA9ViewStyleVMn', '_$s6TipKit04MiniA9ViewStyleVN', 
+                       '_$s6TipKit0A0Mp', '_$s6TipKit0A0P2idSSvgTj', '_$s6TipKit0A0P2idSSvgTq', 
+                       '_$s6TipKit0A0P5image7SwiftUI5ImageVSgvgTj', '_$s6TipKit0A0P5image7SwiftUI5ImageVSgvgTq', 
+                       '_$s6TipKit0A0P5rulesSayAA4TipsO4RuleVGvgTj', '_$s6TipKit0A0P5rulesSayAA4TipsO4RuleVGvgTq', 
+                       '_$s6TipKit0A0P5title7SwiftUI4TextVvgTj', '_$s6TipKit0A0P5title7SwiftUI4TextVvgTq', 
+                       '_$s6TipKit0A0P7actionsSayAA4TipsO6ActionVGvgTj', '_$s6TipKit0A0P7actionsSayAA4TipsO6ActionVGvgTq', 
+                       '_$s6TipKit0A0P7message7SwiftUI4TextVSgvgTj', '_$s6TipKit0A0P7message7SwiftUI4TextVSgvgTq', 
+                       '_$s6TipKit0A0P7optionsSayAA0A6Option_pGvgTj', '_$s6TipKit0A0P7optionsSayAA0A6Option_pGvgTq', 
+                       '_$s6TipKit0A0PAAE10invalidate6reasonyAA4TipsO18InvalidationReasonO_tF', 
                        '_$s6TipKit0A0PAAE13shouldDisplaySbvg', '_$s6TipKit0A0PAAE13shouldDisplaySbvpMV', 
                        '_$s6TipKit0A0PAAE13statusUpdatesScSyAA4TipsO6StatusOGvg', 
                        '_$s6TipKit0A0PAAE13statusUpdatesScSyAA4TipsO6StatusOGvpMV', 
@@ -159,7 +160,7 @@ exports:
                        '_$s6TipKit0A22ViewStyleConfigurationV7message7SwiftUI4TextVSgvpMV', 
                        '_$s6TipKit0A22ViewStyleConfigurationVMa', '_$s6TipKit0A22ViewStyleConfigurationVMn', 
                        '_$s6TipKit0A22ViewStyleConfigurationVN', '_$s6TipKit0A23UIPopoverViewControllerC019popoverPresentationE0So0cgE0CSgvg', 
-                       '_$s6TipKit0A23UIPopoverViewControllerC10imageStyle7SwiftUI05ShapeG0_pSgvM', 
+                       '_$s6TipKit0A23UIPopoverViewControllerC04loadD0yyF', '_$s6TipKit0A23UIPopoverViewControllerC10imageStyle7SwiftUI05ShapeG0_pSgvM', 
                        '_$s6TipKit0A23UIPopoverViewControllerC10imageStyle7SwiftUI05ShapeG0_pSgvg', 
                        '_$s6TipKit0A23UIPopoverViewControllerC10imageStyle7SwiftUI05ShapeG0_pSgvpMV', 
                        '_$s6TipKit0A23UIPopoverViewControllerC10imageStyle7SwiftUI05ShapeG0_pSgvs', 

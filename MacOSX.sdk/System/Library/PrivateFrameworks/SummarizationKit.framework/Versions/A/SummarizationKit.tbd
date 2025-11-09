@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SummarizationKit.framework/Versions/A/SummarizationKit'
-current-version: 2.0.22
+current-version: 2.1.8
 compatibility-version: 2
 swift-abi-version: 7
 allowable-clients:
@@ -12,7 +12,9 @@ allowable-clients:
                        summarizationctl ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s16SummarizationKit033Com_Apple_Summarizationkit_Proto_A5StyleO12UNRECOGNIZEDyACSicACmFWC', 
+    symbols:         [ '_$s15TokenGeneration6PromptV9RenderingV16SummarizationKitE05fixedC0SSvg', 
+                       '_$s15TokenGeneration6PromptV9RenderingV16SummarizationKitE05fixedC0SSvpMV', 
+                       '_$s16SummarizationKit033Com_Apple_Summarizationkit_Proto_A5StyleO12UNRECOGNIZEDyACSicACmFWC', 
                        '_$s16SummarizationKit033Com_Apple_Summarizationkit_Proto_A5StyleO17_protobuf_nameMap21InternalSwiftProtobuf05_NameJ0VvgZ', 
                        '_$s16SummarizationKit033Com_Apple_Summarizationkit_Proto_A5StyleO21InternalSwiftProtobuf01_F13NameProvidingAAMc', 
                        '_$s16SummarizationKit033Com_Apple_Summarizationkit_Proto_A5StyleO21InternalSwiftProtobuf4EnumAAMc', 
@@ -267,9 +269,6 @@ exports:
                        '_$s16SummarizationKit20LLMUrgencyClassifierC11sessionInfo13configuration19contextSizeOverrideAcA07SessionF0_p_AA013PriorityModelK0C13ConfigurationVSiSgtYaKcfCTu', 
                        '_$s16SummarizationKit20LLMUrgencyClassifierC11sessionInfo13configuration19contextSizeOverrideAcA07SessionF0_p_AA013PriorityModelK0C13ConfigurationVSiSgtYaKcfc', 
                        '_$s16SummarizationKit20LLMUrgencyClassifierC11sessionInfo13configuration19contextSizeOverrideAcA07SessionF0_p_AA013PriorityModelK0C13ConfigurationVSiSgtYaKcfcTu', 
-                       '_$s16SummarizationKit20LLMUrgencyClassifierC16performInference3for9messageID11requestInfoSb_AA08GMSModelK0VtSS_SSAA07RequestK0_ptYaKFTj', 
-                       '_$s16SummarizationKit20LLMUrgencyClassifierC16performInference3for9messageID11requestInfoSb_AA08GMSModelK0VtSS_SSAA07RequestK0_ptYaKFTjTu', 
-                       '_$s16SummarizationKit20LLMUrgencyClassifierC16performInference3for9messageID11requestInfoSb_AA08GMSModelK0VtSS_SSAA07RequestK0_ptYaKFTq', 
                        '_$s16SummarizationKit20LLMUrgencyClassifierC16performInference5input11requestInfo19eventTimeBucketNameSb_AA08GMSModelI0VtAA20PriorityModelSessionC5InputV_AA07RequestI0_pSSSgtYaKFTj', 
                        '_$s16SummarizationKit20LLMUrgencyClassifierC16performInference5input11requestInfo19eventTimeBucketNameSb_AA08GMSModelI0VtAA20PriorityModelSessionC5InputV_AA07RequestI0_pSSSgtYaKFTjTu', 
                        '_$s16SummarizationKit20LLMUrgencyClassifierC16performInference5input11requestInfo19eventTimeBucketNameSb_AA08GMSModelI0VtAA20PriorityModelSessionC5InputV_AA07RequestI0_pSSSgtYaKFTq', 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/AppIntents.framework/Versions/A/AppIntents'
-current-version: 300.0.4
+current-version: 300.1.13
 compatibility-version: 0
 swift-abi-version: 7
 reexported-libraries:
@@ -13859,6 +13859,10 @@ exports:
                        '_$sSo8INPersonC10AppIntentsEyAbC12IntentPersonVcfC', '_$sSo8INPersonC10AppIntentsEyAbC12IntentPersonVcfc', 
                        '_$sSq10AppIntentsAA12_IntentValueRzlE28defaultResolverSpecification13UnwrappedType_0G0QZvgZ', 
                        '_$sSq10AppIntentsAA12_IntentValueRzlE28defaultResolverSpecification13UnwrappedType_0G0QZvpZMV', 
+                       '_$sSq10AppIntentsAA14ValueEncodableRzlE03_asC0So7LNValueCvg', 
+                       '_$sSq10AppIntentsAA14ValueEncodableRzlE03_asC0So7LNValueCvpMV', 
+                       '_$sSq10AppIntentsAA14ValueEncodableRzlE9valueTypeSo07LNValueF0CvgZ', 
+                       '_$sSq10AppIntentsAA14ValueEncodableRzlE9valueTypeSo07LNValueF0CvpZMV', 
                        '_$ss5NeverO10AppIntents09_SupportsB12DependenciesACMc', '_$ss5NeverO10AppIntents09_SupportsB12DependenciesACWP', 
                        '_$ss5NeverO10AppIntents0B6IntentACMc', '_$ss5NeverO10AppIntents0B6IntentACWP', 
                        '_$ss5NeverO10AppIntents12IntentResultACMc', '_$ss5NeverO10AppIntents12IntentResultACWP', 
@@ -13907,6 +13911,7 @@ exports:
                        '_$ss8DurationV10AppIntentsE28defaultResolverSpecificationQrvpZQOMQ', 
                        '_$ss8DurationV10Foundation40CustomLocalizedStringResourceConvertible10AppIntentsMc', 
                        '_$sxSg10AppIntents12_IntentValueA2bCRzlMc', '_$sxSg10AppIntents12_IntentValueA2bCRzlWP', 
+                       '_$sxSg10AppIntents14ValueEncodableA2bCRzlMc', '_$sxSg10AppIntents14ValueEncodableA2bCRzlWP', 
                        _LNProcessInstanceRegistryClientErrorDomain ]
     objc-classes:    [ LNAppConnectionListener, LNAppContext, LNAppContextWrapper, 
                        LNClientConnection, LNConnectionListener, LNDaemonConnectionListener, 

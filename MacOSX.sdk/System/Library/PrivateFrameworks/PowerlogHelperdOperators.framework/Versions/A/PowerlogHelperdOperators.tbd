@@ -14,8 +14,8 @@ exports:
                        _PLLogCommon, _PLLogDisplay, _PLLogLocation, _PLLogPower, 
                        _PLLogProcessMonitor, _PLLogProcessNetwork, _PLLogPush, _PLLogSQLiteConnection, 
                        _PLLogScreenState, _PLLogSleepWake, _PLLogSoC, _PLLogSubmission, 
-                       _PLLogXPC, _PLLogXPCService, _PLLogZlib, _PLProcessMetricsAdd, 
-                       _PLProcessMetricsForIdleBand, _PLProcessMetricsInitWithRusage, 
+                       _PLLogUrsaUtilities, _PLLogXPC, _PLLogXPCService, _PLLogZlib, 
+                       _PLProcessMetricsAdd, _PLProcessMetricsForIdleBand, _PLProcessMetricsInitWithRusage, 
                        _PLProcessMetricsRead, _PLProcessPrioritiesDelete, _PLProcessPrioritiesInit, 
                        _PLProcessPrioritiesMetricsForPriority, _PLProcessPrioritiesRead, 
                        _PPSLogAPFS, _PeakForce, _PeakForceMajorRadius, _PeakForceMillimetersFromEdge, 
@@ -491,8 +491,9 @@ exports:
                        PLProcessCPUWrapper, PLProcessExitAggregator, PLProcessExitAggregatorHistogram, 
                        PLProcessMonitorAgent, PLProcessNetworkAgent, PLProcessNetworkSource, 
                        PLProcessPortMap, PLPushAgent, PLScreenStateAgent, PLSleepWakeAgent, 
-                       PLSoCAgent, PLUtilities, PLXPCAgent, PLXPCService, PPSFileUtilities, 
-                       ProcessMemoryUsage, ProcessMonitorStats, SignpostReaderHelper ]
+                       PLSoCAgent, PLUrsaUtilities, PLUtilities, PLXPCAgent, PLXPCService, 
+                       PPSFileUtilities, ProcessMemoryUsage, ProcessMonitorStats, 
+                       SignpostReaderHelper ]
     objc-ivars:      [ AFKEndpointInterfacePowerlogDisplay._notification ]
   - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ _PLLogPowerMetricMonitor, _PLLogPowerSignpost, _PLLogSMC, 

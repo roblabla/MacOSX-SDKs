@@ -1950,7 +1950,7 @@ Protocols:
     SwiftName: copy(sourceTexture:destinationTexture:)
     MethodKind: Instance
   - Selector: 'copyFromTexture:sourceSlice:sourceLevel:toTexture:destinationSlice:destinationLevel:sliceCount:levelCount:'
-    SwiftName: copy(sourceTexture:sourceSlice:sourceLevel:destinationTexture:destinationSice:destinationLevel:sliceCount:levelCount:)
+    SwiftName: copy(sourceTexture:sourceSlice:sourceLevel:destinationTexture:destinationSlice:destinationLevel:sliceCount:levelCount:)
     MethodKind: Instance
   - Selector: 'copyFromTexture:sourceSlice:sourceLevel:sourceOrigin:sourceSize:toTexture:destinationSlice:destinationLevel:destinationOrigin:'
     SwiftName: copy(sourceTexture:sourceSlice:sourceLevel:sourceOrigin:sourceSize:destinationTexture:destinationSlice:destinationLevel:destinationOrigin:)

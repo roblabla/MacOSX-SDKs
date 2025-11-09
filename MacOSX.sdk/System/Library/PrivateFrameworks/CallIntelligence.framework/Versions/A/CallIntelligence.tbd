@@ -187,7 +187,7 @@ exports:
                        '_$s16CallIntelligence18PredictedRawActionVN', '_$s16CallIntelligence18PredictedRawActionVSEAAMc', 
                        '_$s16CallIntelligence18PredictedRawActionVSHAAMc', '_$s16CallIntelligence18PredictedRawActionVSQAAMc', 
                        '_$s16CallIntelligence18PredictedRawActionVSeAAMc', '_$s16CallIntelligence19HoldAssistEventTypeO05soundF7ChangedyAcA05SoundF0OcACmFWC', 
-                       '_$s16CallIntelligence19HoldAssistEventTypeO15remoteUtteranceyACSS_SbtcACmFWC', 
+                       '_$s16CallIntelligence19HoldAssistEventTypeO15remoteUtteranceyACSS_SbSdtcACmFWC', 
                        '_$s16CallIntelligence19HoldAssistEventTypeO2eeoiySbAC_ACtFZ', 
                        '_$s16CallIntelligence19HoldAssistEventTypeO4fromACs7Decoder_p_tKcfC', 
                        '_$s16CallIntelligence19HoldAssistEventTypeO4hash4intoys6HasherVz_tF', 

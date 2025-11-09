@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TextAnimationSupport.framework/Versions/A/TextAnimationSupport'
-current-version: 7.0.84
+current-version: 7.1.13
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -25,6 +25,8 @@ exports:
                        '_$s7SwiftUI4TextV0C16AnimationSupportE23textGlassWipeTransition9alignmentQrAA19HorizontalAlignmentV_tFQOMQ', 
                        '_$s7SwiftUI4TextV0C16AnimationSupportE23textGlassWipeTransitionQryF', 
                        '_$s7SwiftUI4TextV0C16AnimationSupportE23textGlassWipeTransitionQryFQOMQ', 
+                       '_$s7SwiftUI4ViewP20TextAnimationSupportE023textGlassWipeTransitionH10SubvariantyQrSSSgF', 
+                       '_$s7SwiftUI4ViewP20TextAnimationSupportE023textGlassWipeTransitionH10SubvariantyQrSSSgFQOMQ', 
                        '_$s7SwiftUI4ViewP20TextAnimationSupportE27textGlassWipeTransitionTint5colorQrAA5ColorVSg_tF', 
                        '_$s7SwiftUI4ViewP20TextAnimationSupportE27textGlassWipeTransitionTint5colorQrAA5ColorVSg_tFQOMQ', 
                        '_$s7SwiftUI4ViewP20TextAnimationSupportE28textGlassWipeTransitionFrostyQrSfSgF', 

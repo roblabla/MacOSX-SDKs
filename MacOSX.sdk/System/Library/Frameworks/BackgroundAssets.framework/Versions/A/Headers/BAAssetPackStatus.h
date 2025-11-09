@@ -33,4 +33,4 @@ typedef NS_OPTIONS(NSUInteger, BAAssetPackStatus) {
     /// A status value that indicates that the system finished downloading the asset pack.
     BAAssetPackStatusDownloaded = 1 << 6
     
-} API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT;
+} API_AVAILABLE(ios(26), macos(26), tvos(26), visionos(26)) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT;

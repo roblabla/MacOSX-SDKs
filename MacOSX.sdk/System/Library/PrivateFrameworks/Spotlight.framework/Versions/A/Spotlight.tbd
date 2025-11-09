@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Spotlight.framework/Versions/A/Spotlight'
-current-version: 2393.255
+current-version: 2400.14.255
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
@@ -130,15 +130,13 @@ exports:
                        '_$s9Spotlight23SPPreferenceCustomRulesOs12CaseIterableAAMc', 
                        '_$s9Spotlight23SPPreferenceSystemRulesO10iphoneAppsyA2CmFWC', 
                        '_$s9Spotlight23SPPreferenceSystemRulesO12applicationsyA2CmFWC', 
-                       '_$s9Spotlight23SPPreferenceSystemRulesO16clipboardHistoryyA2CmFWC', 
                        '_$s9Spotlight23SPPreferenceSystemRulesO4ruleAA0B4RuleVvg', 
                        '_$s9Spotlight23SPPreferenceSystemRulesO4ruleAA0B4RuleVvpMV', 
-                       '_$s9Spotlight23SPPreferenceSystemRulesO7foldersyA2CmFWC', 
+                       '_$s9Spotlight23SPPreferenceSystemRulesO5filesyA2CmFWC', '_$s9Spotlight23SPPreferenceSystemRulesO7foldersyA2CmFWC', 
                        '_$s9Spotlight23SPPreferenceSystemRulesO8allCasesSayACGvgZ', 
                        '_$s9Spotlight23SPPreferenceSystemRulesO8allCasesSayACGvpZMV', 
                        '_$s9Spotlight23SPPreferenceSystemRulesO8rawValueACSgSS_tcfC', 
                        '_$s9Spotlight23SPPreferenceSystemRulesO8rawValueSSvg', '_$s9Spotlight23SPPreferenceSystemRulesO8rawValueSSvpMV', 
-                       '_$s9Spotlight23SPPreferenceSystemRulesO9documentsyA2CmFWC', 
                        '_$s9Spotlight23SPPreferenceSystemRulesO9menuItemsyA2CmFWC', 
                        '_$s9Spotlight23SPPreferenceSystemRulesOAA0B15RuleConvertibleAAMc', 
                        '_$s9Spotlight23SPPreferenceSystemRulesOAA0B15RuleConvertibleAAWP', 
@@ -184,10 +182,10 @@ exports:
                        _areExplicitBooksForbidden, _bootDriveIsFast, _isEventSearchIntent, 
                        _sp_analytics_log_timing, _sp_analytics_log_timing_with_bundle_id, 
                        _spotlightPrefsId ]
-    objc-classes:    [ PRSCalculationResult, PRSCalculatorResult, PRSConversion, 
+    objc-classes:    [ LimitQueue, PRSCalculationResult, PRSCalculatorResult, PRSConversion, 
                        PRSConversionResult, PRSCurrencyConversionResult, PRSDictionaryAsyncCard, 
                        PRSDictionaryResult, PRSPurchaseHistoryManager, PRSUnitConversionResult, 
-                       SPAppDefaults, SPApplicationQuery, SPApplicationQueryResult, 
+                       SPApp, SPAppDefaults, SPAppManager, SPApplicationQuery, SPApplicationQueryResult, 
                        SPClientSession, SPCoreSpotlightManagedQuery, SPCoreSpotlightQuery, 
                        SPCoreSpotlightResult, SPDefaults, SPFileProviderServerQuery, 
                        SPFileRadarSupport, SPFiltersQuery, SPFolderQuery, SPGoToFilesQuery, 

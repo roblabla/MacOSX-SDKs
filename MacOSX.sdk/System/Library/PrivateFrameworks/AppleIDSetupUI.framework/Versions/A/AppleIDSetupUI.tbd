@@ -362,7 +362,11 @@ exports:
                        '_$s14AppleIDSetupUI27AISFlowStepChildSignInErrorON', '_$s14AppleIDSetupUI27AISFlowStepChildSignInErrorOSHAAMc', 
                        '_$s14AppleIDSetupUI27AISFlowStepChildSignInErrorOSQAAMc', 
                        '_$s14AppleIDSetupUI27AISFlowStepChildSignInErrorOs0I0AAMc', 
-                       '_$s14AppleIDSetupUI28AISFlowStepFamilyPickerErrorO06pickerH0yACs0H0_pSgcACmFWC', 
+                       '_$s14AppleIDSetupUI27SafetySettingsFlowPresenterCACycfC', 
+                       '_$s14AppleIDSetupUI27SafetySettingsFlowPresenterCACycfc', 
+                       '_$s14AppleIDSetupUI27SafetySettingsFlowPresenterCMa', '_$s14AppleIDSetupUI27SafetySettingsFlowPresenterCMn', 
+                       '_$s14AppleIDSetupUI27SafetySettingsFlowPresenterCMo', '_$s14AppleIDSetupUI27SafetySettingsFlowPresenterCN', 
+                       '_$s14AppleIDSetupUI27SafetySettingsFlowPresenterCfD', '_$s14AppleIDSetupUI28AISFlowStepFamilyPickerErrorO06pickerH0yACs0H0_pSgcACmFWC', 
                        '_$s14AppleIDSetupUI28AISFlowStepFamilyPickerErrorO11descriptionSSvg', 
                        '_$s14AppleIDSetupUI28AISFlowStepFamilyPickerErrorO11descriptionSSvpMV', 
                        '_$s14AppleIDSetupUI28AISFlowStepFamilyPickerErrorO16invalidSelectionyA2CmFWC', 
@@ -393,7 +397,13 @@ exports:
                        '_$s14AppleIDSetupUI28AISFlowStepSilentChildSignInCMn', '_$s14AppleIDSetupUI28AISFlowStepSilentChildSignInCMo', 
                        '_$s14AppleIDSetupUI28AISFlowStepSilentChildSignInCMu', '_$s14AppleIDSetupUI28AISFlowStepSilentChildSignInCN', 
                        '_$s14AppleIDSetupUI28AISFlowStepSilentChildSignInCfD', '_$s14AppleIDSetupUI28AISFlowStepSilentChildSignInCfd', 
-                       '_$s14AppleIDSetupUI29AISAppleIDSignInConfigurationC04signF8FlowType0aB00defiJ0OvM', 
+                       '_$s14AppleIDSetupUI28SafetySettingsViewControllerC5coderACSgSo7NSCoderC_tcfC', 
+                       '_$s14AppleIDSetupUI28SafetySettingsViewControllerC5coderACSgSo7NSCoderC_tcfc', 
+                       '_$s14AppleIDSetupUI28SafetySettingsViewControllerC7nibName6bundleACSSSg_So8NSBundleCSgtcfC', 
+                       '_$s14AppleIDSetupUI28SafetySettingsViewControllerC7nibName6bundleACSSSg_So8NSBundleCSgtcfc', 
+                       '_$s14AppleIDSetupUI28SafetySettingsViewControllerCMa', '_$s14AppleIDSetupUI28SafetySettingsViewControllerCMn', 
+                       '_$s14AppleIDSetupUI28SafetySettingsViewControllerCMo', '_$s14AppleIDSetupUI28SafetySettingsViewControllerCN', 
+                       '_$s14AppleIDSetupUI28SafetySettingsViewControllerCfD', '_$s14AppleIDSetupUI29AISAppleIDSignInConfigurationC04signF8FlowType0aB00defiJ0OvM', 
                        '_$s14AppleIDSetupUI29AISAppleIDSignInConfigurationC04signF8FlowType0aB00defiJ0Ovg', 
                        '_$s14AppleIDSetupUI29AISAppleIDSignInConfigurationC04signF8FlowType0aB00defiJ0OvpMV', 
                        '_$s14AppleIDSetupUI29AISAppleIDSignInConfigurationC04signF8FlowType0aB00defiJ0Ovs', 
@@ -526,6 +536,7 @@ exports:
                        '_$sSo7NSColorC14AppleIDSetupUIE5labelABvpZMV', _AppleIDSetupUIVersionNumber, 
                        _AppleIDSetupUIVersionString ]
     objc-classes:    [ AISAppleIDSignInConfiguration, AISAppleIDSignInController, 
-                       AISChildSetupPresenter, AISSetupViewController, AISShieldViewController, 
-                       MicaPlayer, __AISSetupViewController ]
+                       AISChildSetupPresenter, AISSafetySettingsFlowPresenter, AISSafetySettingsViewController, 
+                       AISSetupViewController, AISShieldViewController, MicaPlayer, 
+                       __AISSetupViewController ]
 ...

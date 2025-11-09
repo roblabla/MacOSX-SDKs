@@ -333,6 +333,12 @@ typedef NSString * AVFileType NS_EXTENSIBLE_STRING_ENUM;
 /// Files are identified with the .mov and .qt extensions.
 AVF_EXPORT AVFileType const AVFileTypeQuickTimeMovie API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
+/// A UTI for the QuickTime audio file format
+/// 
+/// The value of this UTI is @"com.apple.quicktime-audio".
+/// Files are identified with the .qta extension.
+AVF_EXPORT AVFileType const AVFileTypeQuickTimeAudio API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
 /// A UTI for the MPEG-4 file format.
 /// 
 /// The value of this UTI is @"public.mpeg-4".

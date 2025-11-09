@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Sage.framework/Versions/A/Sage'
-current-version: 209.3.2
+current-version: 209.21
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1952,6 +1952,7 @@ exports:
                        '_$sSC24SummarizationClientErrorLeV4SageE08isSafetyC0SbvpMV', 
                        '_$sSC24SummarizationClientErrorLeV4SageE09alternateC16CodeForAnalyticsSoAAVSgvg', 
                        '_$sSC24SummarizationClientErrorLeV4SageE09alternateC16CodeForAnalyticsSoAAVSgvpMV', 
+                       '_$sSC24SummarizationClientErrorLeV4SageE09alternateC29DomainAndCodeForCoreAnalytics03forF04codeSS6domain_SiAFtSgSS_SitFZ', 
                        '_$sSC24SummarizationClientErrorLeV4SageE09isAccountC0Sbvg', 
                        '_$sSC24SummarizationClientErrorLeV4SageE09isAccountC0SbvpMV', 
                        '_$sSC24SummarizationClientErrorLeV4SageE26userFacingLocalizedMessageSSSgvg', 

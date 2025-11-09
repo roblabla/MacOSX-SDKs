@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DesktopServicesUI.framework/Versions/A/DesktopServicesUI'
-current-version: 1827.0.1
+current-version: 1827.1.11
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -138,6 +138,8 @@ exports:
                        '_$s17DesktopServicesUI23TFolderAnimationOverlayVMa', '_$s17DesktopServicesUI23TFolderAnimationOverlayVMn', 
                        '_$s17DesktopServicesUI23TFolderAnimationOverlayVN', '_$s17DesktopServicesUI31DSFolderCustomizationControllerC10controller9forFolder7allTags8delegate14retainDelegateSo06NSViewF0CAA0D8IconInfoC_SayAA016DSLightweightTagQ0CGAA0dpE10Applicator_pSbtFZ', 
                        '_$s17DesktopServicesUI31DSFolderCustomizationControllerC10controller9forFolder7allTags8delegate17initialCustomIcon14retainDelegateSo06NSViewF0CAA0dO4InfoC_SayAA016DSLightweightTagS0CGAA0doE10Applicator_pSo6ISIconCSgSbtFZ', 
+                       '_$s17DesktopServicesUI31DSFolderCustomizationControllerC11heightRangeSNy12CoreGraphics7CGFloatVGvgZ', 
+                       '_$s17DesktopServicesUI31DSFolderCustomizationControllerC11heightRangeSNy12CoreGraphics7CGFloatVGvpZMV', 
                        '_$s17DesktopServicesUI31DSFolderCustomizationControllerCMa', 
                        '_$s17DesktopServicesUI31DSFolderCustomizationControllerCMm', 
                        '_$s17DesktopServicesUI31DSFolderCustomizationControllerCMn', 

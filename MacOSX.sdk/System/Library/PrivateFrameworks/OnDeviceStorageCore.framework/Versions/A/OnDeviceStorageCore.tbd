@@ -8,7 +8,7 @@ allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ OnDeviceStorage, OnDeviceStorageCoreTests, OnDeviceStorageDaemonTests, 
-                       OnDeviceStorageTests, _OnDeviceStorage_JavaScriptCore, _OnDeviceStorage_JavaScriptCoreTests, 
+                       OnDeviceStorageTests, _OnDeviceStorage_JetEngine, _OnDeviceStorage_JetEngineTests, 
                        amsondevicestoragectl, amsondevicestoraged ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

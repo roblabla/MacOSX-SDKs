@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/QuickLook.framework/Versions/A/QuickLook'
-current-version: 1016.200
+current-version: 1016.201.6
 swift-abi-version: 7
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -52,11 +52,11 @@ exports:
                        _QLBubbleControlTightTitleKey, _QLBubbleControlTitleKey, _QLBubbleControlURLKey, 
                        _QLBumpFileAccessTime, _QLCacheObserverCancel, _QLCacheObserverCreate, 
                        _QLCacheObserverGetTypeID, _QLCacheObserverResume, _QLCacheObserverSetInvalidationBlock, 
-                       _QLCacheObserverSuspend, _QLCopyURLQueryDictionary, _QLCreateURLByResolvingAlias, 
-                       _QLCreateURLByResolvingSymlink, _QLDeactivateGeneratorAtURL, 
-                       _QLDeactivatedThirdPartyGenerators, _QLDiskStoreAcceptsThumbnails, 
-                       _QLDiskStoreCopyDiskStoreForURL, _QLDiskStoreCopyDiskStores, 
-                       _QLDiskStoreExecuteBlock, _QLDiskStoreGetAvailableDiskSpace, 
+                       _QLCacheObserverSuspend, _QLContentRect, _QLCopyURLQueryDictionary, 
+                       _QLCornerRadius, _QLCreateURLByResolvingAlias, _QLCreateURLByResolvingSymlink, 
+                       _QLDeactivateGeneratorAtURL, _QLDeactivatedThirdPartyGenerators, 
+                       _QLDiskStoreAcceptsThumbnails, _QLDiskStoreCopyDiskStoreForURL, 
+                       _QLDiskStoreCopyDiskStores, _QLDiskStoreExecuteBlock, _QLDiskStoreGetAvailableDiskSpace, 
                        _QLDiskStoreGetMountPath, _QLDiskStoreGetTypeID, _QLDiskStoreHasThumbnailCache, 
                        _QLDiskStoreIsDistant, _QLDiskStoreIsExternalEncrypted, _QLGeneratorDispatchBlock, 
                        _QLGeneratorGetTypeID, _QLGetDebugServerMessageHandler, _QLGetServerMachPort, 

@@ -66,7 +66,7 @@
  */
 
 #ifndef _DNS_SD_H
-#define _DNS_SD_H 2881000025
+#define _DNS_SD_H 2881040018
 
 /* DNS-SD API version strings are of the form x[.y[.z]].
  * Version strings less than or equal to 1661 are encoded as (x * 10000) + (y * 100) + z, where 0 ≤ y,z ≤ 99.

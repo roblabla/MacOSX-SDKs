@@ -819,7 +819,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_msg_type_number_t in_pointer_listCnt;
-		mach_vm_offset_t in_pointer_list[512];
+		mach_vm_offset_t in_pointer_list[1024];
 		mach_msg_type_number_t out_pointer_listCnt;
 	} __Request__mach_vm_update_pointers_with_remote_tags_t __attribute__((unused));
 #ifdef  __MigPackStructs
@@ -1184,7 +1184,7 @@ union __RequestUnion__mach_vm_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_msg_type_number_t out_pointer_listCnt;
-		mach_vm_offset_t out_pointer_list[512];
+		mach_vm_offset_t out_pointer_list[1024];
 	} __Reply__mach_vm_update_pointers_with_remote_tags_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)

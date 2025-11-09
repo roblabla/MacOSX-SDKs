@@ -13,6 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ASDiscoveredAccessory;
 @class ASDiscoveryDescriptor;
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -81,6 +82,34 @@ NS_SWIFT_SENDABLE
 /// The Wi-Fi hotspot SSID of the accessory to migrate.
 @property (readwrite, copy, nullable, nonatomic) NSString *hotspotSSID;
 
+/// The Wi-Fi Aware paired device identififer of the accessory to migrate.
+@property (readwrite, assign, nonatomic) ASAccessoryWiFiAwarePairedDeviceID wifiAwarePairedDeviceID
+API_AVAILABLE( ios( 26.1 ) );
+
+@end
+
+//===========================================================================================================================
+
+/// A picker display item created from customizing a discovered accessory.
+///
+/// Use this type when your app's picker uses the ``ASPickerDisplaySettings/Options/filterDiscoveryResults`` option.
+/// With this option enabled, your discovery session receives ``ASAccessoryEventType/accessoryDiscovered`` events with discovered accessories.
+/// To include a discovered accessory in the picker, create an instance of this class, optionally using the Bluetooth properties of the event's ``ASDiscoveredAccessory`` to provide a more specific name or product image.
+/// Then send the `ASDiscoveredDisplayItem` to the picker with the session's ``ASAccessorySession/updatePicker(showing:completionHandler:)`` method.
+AS_EXTERN
+API_AVAILABLE( ios( 26.1 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos)
+NS_SWIFT_SENDABLE
+@interface ASDiscoveredDisplayItem : ASPickerDisplayItem
+
+/// Creates a discovered picker display item with a name and image to display and a descriptor to match discovered accessories.
+/// - Parameters:
+///   - name: The accessory name to display in the picker.
+///   - productImage: An image of the accessory to display in the picker.
+///   - accessory: App filtered accessory to display in the picker.
+- (instancetype)initWithName:(NSString *) name productImage:(UIImage *) productImage accessory:(ASDiscoveredAccessory *) accessory;
+
+- (instancetype)initWithName:(NSString *) name productImage:(UIImage *) productImage
+                  descriptor:(ASDiscoveryDescriptor *) descriptor NS_UNAVAILABLE;
 @end
 
 NS_ASSUME_NONNULL_END

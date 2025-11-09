@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreIDCred.framework/Versions/A/CoreIDCred'
-current-version: 8.43.2
+current-version: 8.109
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -84,6 +84,7 @@ exports:
                        '_$s10CoreIDCred21SendableXPCConnectionC19invalidationHandleryycSgvs', 
                        '_$s10CoreIDCred21SendableXPCConnectionC28performWithRemoteObjectProxy_8onCancelqd__qd__xYaYbKc_yxYaYbKcSgtYaKs0C0Rd__lF', 
                        '_$s10CoreIDCred21SendableXPCConnectionC28performWithRemoteObjectProxy_8onCancelqd__qd__xYaYbKc_yxYaYbKcSgtYaKs0C0Rd__lFTu', 
+                       '_$s10CoreIDCred21SendableXPCConnectionC41performSynchronouslyWithRemoteObjectProxyyqd__qd__xXEKlF', 
                        '_$s10CoreIDCred21SendableXPCConnectionC7wrappedSo15NSXPCConnectionCvg', 
                        '_$s10CoreIDCred21SendableXPCConnectionC7wrappedSo15NSXPCConnectionCvpMV', 
                        '_$s10CoreIDCred21SendableXPCConnectionCMa', '_$s10CoreIDCred21SendableXPCConnectionCMn', 
@@ -281,14 +282,15 @@ exports:
                        '_$sSo41DCPresentmentResponseEncryptionParametersCMa', _DCBiometricStoreErrorDomain, 
                        _DCCredentialAuthACLTypeToString, _DCCredentialCryptoKeyTypeToString, 
                        _DCCredentialCryptoKeyUsageToString, _DCCredentialDeviceEncryptionKeyTypeToString, 
-                       _DCCredentialElementNumericTypeHintToString, _DCCredentialPayloadFormatToString, 
-                       _DCCredentialPayloadProtectionPolicyToString, _DCCredentialPayloadProtectionTypeToString, 
-                       _DCCredentialPresentmentAuthPolicyToString, _DCCredentialReaderAuthenticationPolicyToString, 
-                       _DCCredentialStateToString, _DCCredentialStoreErrorDomain, 
-                       _DCPresentmentElementFallbackModeToString, _DCPresentmentElementRetentionIntentToString, 
-                       _DCPresentmentErrorDomain, _DCPresentmentMessageEncodingFormatToString, 
-                       _DCPresentmentResponseStatusToString, _DCPresentmentSessionEncryptionModeToString, 
-                       _DCPresentmentTransportKeySpecificationToString, _DCPresentmentTypeToString ]
+                       _DCCredentialElementNumericTypeHintToString, _DCCredentialKeyStoreTypeToString, 
+                       _DCCredentialPayloadFormatToString, _DCCredentialPayloadProtectionPolicyToString, 
+                       _DCCredentialPayloadProtectionTypeToString, _DCCredentialPresentmentAuthPolicyToString, 
+                       _DCCredentialReaderAuthenticationPolicyToString, _DCCredentialStateToString, 
+                       _DCCredentialStoreErrorDomain, _DCPresentmentElementFallbackModeToString, 
+                       _DCPresentmentElementRetentionIntentToString, _DCPresentmentErrorDomain, 
+                       _DCPresentmentMessageEncodingFormatToString, _DCPresentmentResponseStatusToString, 
+                       _DCPresentmentSessionEncryptionModeToString, _DCPresentmentTransportKeySpecificationToString, 
+                       _DCPresentmentTypeToString ]
     objc-classes:    [ DCBiometricStore, DCCredentialAttestation, DCCredentialAuthACL, 
                        DCCredentialAuthorizationToken, DCCredentialCryptoKey, DCCredentialCryptoKeyInfo, 
                        DCCredentialElement, DCCredentialNonce, DCCredentialOptions, 

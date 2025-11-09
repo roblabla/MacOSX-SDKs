@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GameControllerFoundation.framework/Versions/A/GameControllerFoundation'
-current-version: 13.0.39
+current-version: 13.1.8
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -149,8 +149,8 @@ exports:
                        _IOGCFastPathSampleSetTimestamp, _NSStringFromGCHIDElementUsageType, 
                        __GCFConvertStringToLocalizedString, __gc_log_device, __gc_log_device_configuration, 
                        __gc_log_hid, __gc_log_hid_input, __gc_log_ipc, __gc_log_runtime_issue, 
-                       __gc_state_dictionary_builder, _gc_log_create_device, _gc_log_create_hid, 
-                       _gc_log_create_ipc ]
+                       __gc_log_signpost, __gc_state_dictionary_builder, _gc_log_create_device, 
+                       _gc_log_create_hid, _gc_log_create_ipc ]
     objc-classes:    [ GCConfigXPCService, GCConfigXPCServiceClientConnection, GCConfigXPCServiceConnection, 
                        GCConfigXPCServiceServiceConnection, GCConfigurationAssetManagementServiceConnection, 
                        GCConfigurationAssetManagementServiceXPCProxy, GCConfigurationBundleFileSystemSource, 
@@ -192,8 +192,8 @@ exports:
                        GCGenericDeviceRumbleOutputFieldModelBuilder, GCGenericDeviceRumbleOutputModel, 
                        GCGenericDeviceRumbleOutputModelBuilder, GCHIDDevice, GCHIDDeviceInput, 
                        GCHIDDeviceSnapshot, GCHIDElementSnapshot, GCHIDEventSystemClient, 
-                       GCHIDInputElement, GCHIDServiceInfo, GCIPCRemoteConnection, 
-                       GCIPCRemoteIncomingConnection, GCIPCRemoteOutgoingConnection, 
+                       GCHIDInputElement, GCHIDServiceInfo, GCIONotificationPort, 
+                       GCIPCRemoteConnection, GCIPCRemoteIncomingConnection, GCIPCRemoteOutgoingConnection, 
                        GCOperation, GCPromise, GCVersion, IOGCFastPathProxyConnection, 
                        IOGCFastPathProxyQueue, IOGCFastPathProxyServer, _GCDeviceConfiguration, 
                        _GCDeviceConfigurationEvaluator, _GCGenericDeviceManager, 

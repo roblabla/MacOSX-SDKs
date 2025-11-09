@@ -3,13 +3,12 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TipKitCore.framework/Versions/A/TipKitCore'
-current-version: 120
+current-version: 120.1.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation12NotificationV10TipKitCoreE4boolySbSgs11AnyHashableVF', 
-                       '_$s10Foundation29PredicateCodableConfigurationV10TipKitCoreE08standardD12WithKeyPaths3forACxm_tlFZ', 
                        '_$s10Foundation3URLV10TipKitCoreE10removeFile11fileManagerySo06NSFileI0C_tF', 
                        '_$s10Foundation3URLV10TipKitCoreE10removeFile11fileManagerySo06NSFileI0C_tFfA_', 
                        '_$s10Foundation3URLV10TipKitCoreE12removeFolder11fileManagerySo06NSFileI0C_tF', 
@@ -787,6 +786,14 @@ exports:
                        '_$s10TipKitCore13ConfigurationV6sharedACvMZ', '_$s10TipKitCore13ConfigurationV6sharedACvgZ', 
                        '_$s10TipKitCore13ConfigurationV6sharedACvsZ', '_$s10TipKitCore13ConfigurationVMa', 
                        '_$s10TipKitCore13ConfigurationVMn', '_$s10TipKitCore13ConfigurationVN', 
+                       '_$s10TipKitCore13DeviceProfileC0E7ContentV2eeoiySbAE_AEtFZ', 
+                       '_$s10TipKitCore13DeviceProfileC0E7ContentV4fromAEs7Decoder_p_tKcfC', 
+                       '_$s10TipKitCore13DeviceProfileC0E7ContentV6encode2toys7Encoder_p_tKF', 
+                       '_$s10TipKitCore13DeviceProfileC0E7ContentVMa', '_$s10TipKitCore13DeviceProfileC0E7ContentVMn', 
+                       '_$s10TipKitCore13DeviceProfileC0E7ContentVN', '_$s10TipKitCore13DeviceProfileC0E7ContentVSEAAMc', 
+                       '_$s10TipKitCore13DeviceProfileC0E7ContentVSQAAMc', '_$s10TipKitCore13DeviceProfileC0E7ContentVSeAAMc', 
+                       '_$s10TipKitCore13DeviceProfileC13dynamicMemberxs7KeyPathCyAC0E7ContentVxG_tcluig', 
+                       '_$s10TipKitCore13DeviceProfileC13dynamicMemberxs7KeyPathCyAC0E7ContentVxG_tcluipMV', 
                        '_$s10TipKitCore13DeviceProfileC15updateTipsdDatayySDySSs8Sendable_pGKFZ', 
                        '_$s10TipKitCore13DeviceProfileCMa', '_$s10TipKitCore13DeviceProfileCMm', 
                        '_$s10TipKitCore13DeviceProfileCMn', '_$s10TipKitCore13DeviceProfileCMo', 
@@ -810,6 +817,7 @@ exports:
                        '_$s10TipKitCore14DatastoreActorCScAAAMc', '_$s10TipKitCore14DatastoreActorCfD', 
                        '_$s10TipKitCore14DatastoreActorCfd', '_$s10TipKitCore14DatastoreActorCs06GlobalE0AAMc', 
                        '_$s10TipKitCore14PredicateCoderO6decode_4from10Foundation0D0Vyx_QPGxm_AF4DataVtKlFZ', 
+                       '_$s10TipKitCore14PredicateCoderO6encode_8fallback10Foundation4DataVAF0D0Vyx_QPG_AKtKlFZ', 
                        '_$s10TipKitCore14PredicateCoderO6encodey10Foundation4DataVAE0D0Vyx_QPGKlFZ', 
                        '_$s10TipKitCore14PredicateCoderOMa', '_$s10TipKitCore14PredicateCoderOMn', 
                        '_$s10TipKitCore14PredicateCoderON', '_$s10TipKitCore15DictionaryCoderO6decode4from5classxSDySSs8Sendable_pG_xmtKSeRzlFZ', 
@@ -1117,6 +1125,7 @@ exports:
                        '_$ss10AnyKeyPathC10TipKitCoreE014unsafeSendableabC0s0H0_ABXcSgvg', 
                        '_$ss10AnyKeyPathC10TipKitCoreE014unsafeSendableabC0s0H0_ABXcSgvpMV', 
                        '_$ss10AnyKeyPathC10TipKitCoreE11stringValueSSvg', '_$ss10AnyKeyPathC10TipKitCoreE11stringValueSSvpMV', 
+                       '_$ss10AnyKeyPathC10TipKitCoreE15pathDescriptionSSvg', '_$ss10AnyKeyPathC10TipKitCoreE15pathDescriptionSSvpMV', 
                        '_$ss10AnyKeyPathC10TipKitCoreE8toStringSSyKF', '_$ss17FixedWidthIntegerP10TipKitCoreE13bitComponentsSayxGvg', 
                        '_$ss17FixedWidthIntegerP10TipKitCoreE13bitComponentsSayxGvpMV', 
                        '_$ss17FixedWidthIntegerP10TipKitCoreE13bitComponentsxSayxG_tcfC', 

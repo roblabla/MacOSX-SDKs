@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target arm64e-apple-macos26.0 -target-variant arm64e-apple-ios26.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature StrictConcurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2360.79.5.2 -module-name AVFoundation
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target arm64e-apple-macos26.1 -target-variant arm64e-apple-ios26.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature StrictConcurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2390.10.1 -module-name AVFoundation
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 @_exported import AVFAudio.AVAudioSession
 @_exported import AVFAudio
 @_exported import AVFoundation
@@ -2063,6 +2063,14 @@ extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVMovie 
   public static var tracks: AVFoundation.AVAsyncProperty<Root, [AVFoundation.AVMovieTrack]> {
     get
   }
+}
+@available(iOS 26.1, *)
+@available(macOS, unavailable)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+@available(watchOS, unavailable)
+extension AVFoundation.AVCaptureSmartFramingMonitor : Observation.Observable {
 }
 extension AVFoundation.AVURLAsset {
   @available(macOS 10.7, iOS 4.0, tvOS 9.0, watchOS 1.0, visionOS 1.0, *)

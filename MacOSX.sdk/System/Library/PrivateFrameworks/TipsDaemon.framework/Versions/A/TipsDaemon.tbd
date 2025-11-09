@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TipsDaemon.framework/Versions/A/TipsDaemon'
-current-version: 822
+current-version: 822.1.10
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -37,7 +37,9 @@ exports:
                        '_$s10TipsDaemon17SearchItemIndexerC14deleteAllItems16qualityOfService17completionHandlerySo09NSQualityjK0V_ys5Error_pSgcSgtF', 
                        '_$s10TipsDaemon17SearchItemIndexerC14deleteAllItems7ofTypes16qualityOfService17completionHandleryShyAC05IndexD4TypeOG_So09NSQualitylM0Vys5Error_pSgcSgtF', 
                        '_$s10TipsDaemon17SearchItemIndexerC15indexUserGuides_16qualityOfService17completionHandlerySay0A4Core0G5GuideCG_So09NSQualityjK0Vys5Error_pSgcSgtF', 
+                       '_$s10TipsDaemon17SearchItemIndexerC17indexSupportFlows_16qualityOfService17completionHandlerySaySo13TPSCollectionCG_So09NSQualityjK0Vys5Error_pSgcSgtF', 
                        '_$s10TipsDaemon17SearchItemIndexerC17reindexUserGuides_16qualityOfService17completionHandlerySay0A4Core0G5GuideCG_So09NSQualityjK0Vys5Error_pSgcSgtF', 
+                       '_$s10TipsDaemon17SearchItemIndexerC18reindexCollections_16qualityOfService17completionHandlerySaySo13TPSCollectionCG_So09NSQualityiJ0Vys5Error_pSgcSgtF', 
                        '_$s10TipsDaemon17SearchItemIndexerC4nameACSS_tcfC', '_$s10TipsDaemon17SearchItemIndexerC4nameACSS_tcfCTj', 
                        '_$s10TipsDaemon17SearchItemIndexerC4nameACSS_tcfCTq', '_$s10TipsDaemon17SearchItemIndexerC4nameACSS_tcfc', 
                        '_$s10TipsDaemon17SearchItemIndexerC7defaultACvgZ', '_$s10TipsDaemon17SearchItemIndexerC7defaultACvpZMV', 
@@ -174,7 +176,18 @@ exports:
                        '_$s10TipsDaemon45GenerativeModelsUseCaseAvailabilityValidationCMu', 
                        '_$s10TipsDaemon45GenerativeModelsUseCaseAvailabilityValidationCN', 
                        '_$s10TipsDaemon45GenerativeModelsUseCaseAvailabilityValidationCfD', 
+                       '_$sSa10TipsDaemonSo13TPSCollectionCRszlE15searchableItemsSaySo16CSSearchableItemCGvg', 
+                       '_$sSa10TipsDaemonSo13TPSCollectionCRszlE15searchableItemsSaySo16CSSearchableItemCGvpMV', 
                        '_$sScT10TipsDaemons5NeverORs_rlE16qualityOfService9operationScTyxACGSo09NSQualityeF0V_xyYaYbctcfC', 
+                       '_$sSo13TPSCollectionC10TipsDaemonE12lastModifiedSSvg', '_$sSo13TPSCollectionC10TipsDaemonE12lastModifiedSSvpMV', 
+                       '_$sSo13TPSCollectionC10TipsDaemonE13addAttributes2toSo28CSSearchableItemAttributeSetCAG_tF', 
+                       '_$sSo13TPSCollectionC10TipsDaemonE14csAttributeSetSo016CSSearchableItemeF0CSgvg', 
+                       '_$sSo13TPSCollectionC10TipsDaemonE14csAttributeSetSo016CSSearchableItemeF0CSgvpMV', 
+                       '_$sSo13TPSCollectionC10TipsDaemonE16csSearchableItemSo012CSSearchableF0CSgvg', 
+                       '_$sSo13TPSCollectionC10TipsDaemonE16csSearchableItemSo012CSSearchableF0CSgvpMV', 
+                       '_$sSo13TPSCollectionC10TipsDaemonE9indexHash10Foundation4DataVvg', 
+                       '_$sSo13TPSCollectionC10TipsDaemonE9indexHash10Foundation4DataVvpMV', 
+                       '_$sSo13TPSCollectionC10TipsDaemonE9indexableSbvg', '_$sSo13TPSCollectionC10TipsDaemonE9indexableSbvpMV', 
                        '_$sSo14TPSTipsManagerC10TipsDaemonE22hmtFeaturedCollections4with25collectionDeliveryInfoMap08deliverykL0SaySo13TPSCollectionCGSgSDySSAIGSg_SDyS2SGSDySSyXlGSgtF', 
                        '_$sSo14TPSTipsManagerC10TipsDaemonE30updatedHMTCollectionSectionMap4from19featuredCollectionsSDySSSo013TPSCollectionG0CGSgAJ_SaySo0L0CGSgtF', 
                        '_$sSo14TPSTipsManagerC10TipsDaemonE34presentReentryNotificationIfNeededyyFZ', 

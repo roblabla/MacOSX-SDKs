@@ -64,3 +64,6 @@
 #import <HomeKit/HMAccessorySetupPayload.h>
 #import <HomeKit/HMAccessorySetupRequest.h>
 #import <HomeKit/HMAccessorySetupResult.h>
+
+#import <HomeKit/HMAccessory+Vendor.h>
+#import <HomeKit/HMHomeManager+Vendor.h>

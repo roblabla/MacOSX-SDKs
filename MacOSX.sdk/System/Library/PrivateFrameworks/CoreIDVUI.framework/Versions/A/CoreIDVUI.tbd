@@ -2,13 +2,14 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreIDVUI.framework/Versions/A/CoreIDVUI'
-current-version: 8.43.2
+current-version: 8.109
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s9CoreIDVUI17PassportReadStateO04chipD0yA2CmFWC', '_$s9CoreIDVUI17PassportReadStateO04chipD6FailedyA2CmFWC', 
                        '_$s9CoreIDVUI17PassportReadStateO10readAccessyA2CmFWC', '_$s9CoreIDVUI17PassportReadStateO12authenticateyA2CmFWC', 
                        '_$s9CoreIDVUI17PassportReadStateO12readerTooHotyA2CmFWC', 
+                       '_$s9CoreIDVUI17PassportReadStateO14missingNetworkyA2CmFWC', 
                        '_$s9CoreIDVUI17PassportReadStateO14progressWeightSfvg', '_$s9CoreIDVUI17PassportReadStateO14progressWeightSfvpMV', 
                        '_$s9CoreIDVUI17PassportReadStateO14titleMessageIDSSvg', '_$s9CoreIDVUI17PassportReadStateO14titleMessageIDSSvpMV', 
                        '_$s9CoreIDVUI17PassportReadStateO15readInitializedyA2CmFWC', 
@@ -102,7 +103,6 @@ exports:
                        '_$s9CoreIDVUI45IdentityDocumentTransactionElementDetailsViewVMa', 
                        '_$s9CoreIDVUI45IdentityDocumentTransactionElementDetailsViewVMn', 
                        '_$s9CoreIDVUI45IdentityDocumentTransactionElementDetailsViewVN', 
-                       '_$s9CoreIDVUI46IdentityCredentialProviderRemoteViewControllerC07servicegH9InterfaceSo14NSXPCInterfaceCSgyF', 
                        '_$s9CoreIDVUI46IdentityCredentialProviderRemoteViewControllerC17exportedInterfaceSo14NSXPCInterfaceCSgyF', 
                        '_$s9CoreIDVUI46IdentityCredentialProviderRemoteViewControllerC32viewServiceDidTerminateWithErroryys0N0_pSgF', 
                        '_$s9CoreIDVUI46IdentityCredentialProviderRemoteViewControllerC5coderACSgSo7NSCoderC_tcfC', 
@@ -145,7 +145,8 @@ exports:
                        '_$s9CoreIDVUI52CIDVUIInternalIdentityProofingDataSharingFlowManagerCfD', 
                        '_$s9CoreIDVUI9DataGroupMp', '_$s9CoreIDVUI9DataGroupP5parseyy10Foundation0C0VKFTj', 
                        '_$s9CoreIDVUI9DataGroupP5parseyy10Foundation0C0VKFTq', '_$s9CoreIDVUI9DataGroupP6fileID10Foundation0C0VvgTj', 
-                       '_$s9CoreIDVUI9DataGroupP6fileID10Foundation0C0VvgTq', '_$s9CoreIDVUI9DataGroupP8fileNameSSvgTj', 
+                       '_$s9CoreIDVUI9DataGroupP6fileID10Foundation0C0VvgTq', '_$s9CoreIDVUI9DataGroupP6hashIDSSvgTj', 
+                       '_$s9CoreIDVUI9DataGroupP6hashIDSSvgTq', '_$s9CoreIDVUI9DataGroupP8fileNameSSvgTj', 
                        '_$s9CoreIDVUI9DataGroupP8fileNameSSvgTq', '_$s9CoreIDVUI9DataGroupTL', 
                        '_$sSo28CIDVUIProofingDisplayMessageC9CoreIDVUIE5coderABSgSo7NSCoderC_tcfC', 
                        '_$sSo28CIDVUIProofingDisplayMessageC9CoreIDVUIE5coderABSgSo7NSCoderC_tcfc', 

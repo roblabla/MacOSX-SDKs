@@ -1301,8 +1301,7 @@ typedef uint64_t MTLTimestamp;
  @discussion The property returns a different value depending on the value of the property `shouldMaximizeConcurrentCompilation`.
  */
 @property (readonly) NSUInteger maximumConcurrentCompilationTaskCount
-    API_AVAILABLE(macos(13.3), ios(26.0));
-
+        API_AVAILABLE(macos(13.3), ios(26.0));
 
 /*!
  @method newResidencySetWithDescriptor

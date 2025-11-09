@@ -23,25 +23,47 @@ API_AVAILABLE(macos(13.0), ios(26.0))
 API_UNAVAILABLE(watchos, tvos, visionos)
 EXTENSIONKIT_EXPORT
 #if TARGET_OS_OSX
-/// A view controller that hosts remote views provided by an extension.
+/// A view controller that hosts remote views provided by an app extension.
+///
+/// Present this view controller from your app’s interface to display the content for
+/// an associated app extension. Configure the view controller with the app extension
+/// identity and the specific scene you want to display. Use the associated delegate
+/// object to receive notifications when the app extension becomes active or inactive.
+///
+/// For more information about presenting this view controller and using it to display
+/// an app extension’s UI, see
+/// <doc://com.apple.documentation/documentation/extensionkit/including-extension-based-ui-in-your-interface>.
 @interface EXHostViewController : NSViewController
 #else
-/// A view controller that hosts remote views provided by an extension.
+/// A view controller that hosts remote views provided by an app extension.
+///
+/// Present this view controller from your app’s interface to display the content for
+/// an associated app extension. Configure the view controller with the app extension
+/// identity and the specific scene you want to display. Use the associated delegate
+/// object to receive notifications when the app extension becomes active or inactive.
+///
+/// For more information about presenting this view controller and using it to display
+/// an app extension’s UI, see
+/// <doc://com.apple.documentation/documentation/extensionkit/including-extension-based-ui-in-your-interface>.
 @interface EXHostViewController : UIViewController
 #endif
 
-/// The connection delegate.
+/// A custom delegate object you use to receive notifications about the activation
+/// and deactivation of the app extension.
 @property (weak, nonatomic, nullable) id<EXHostViewControllerDelegate> delegate;
 
 #if TARGET_OS_OSX
-/// A view that’s used when the view controller has no content to display.
+/// The view to display when the view controller has no app extension content to display.
 @property (strong, nonatomic) NSView* placeholderView;
 #else
-/// A view that’s used when the view controller has no content to display.
+/// The view to display when the view controller has no app extension content to display.
 @property (strong, nonatomic) UIView* placeholderView;
 #endif
 
-/// Attempts to connect to the extension over XPC.
+/// Initiates an XPC connection to the app extension’s scene.
+///
+/// Call this method from your delegate's ``EXHostViewControllerDelegate/hostViewControllerDidActivate:``
+/// method to initiate a scene-specific connection to the app extension. 
 ///
 /// - Returns: An object representing the connection.
 -(nullable NSXPCConnection*)makeXPCConnectionWithError:(NSError* __nullable*)error;
@@ -54,29 +76,26 @@ API_UNAVAILABLE(watchos, tvos, visionos)
 @protocol EXHostViewControllerDelegate <NSObject>
 @optional
 
-/// A delegate method the view controller calls when a connection succeeds.
+/// Tells the host that the app extension is active and ready to accept an XPC connection.
 ///
-/// This delegate method gets called when the extension process has launched and
-/// the remote scene connects. After this delegate method gets called the host
-/// view controller can establish an XPC connection with the scene in the
-/// extension process.
+/// The host view controller calls this method after it launches an app extension and
+/// connects to its remote scene. Use this method to establish an XPC connection to
+/// the newly created UI instance.
 ///
 /// - Parameters:
-///   - viewController: The user interface object from the remote process.
+///    - viewController: The host view controller that initiated the connection.
 -(void)hostViewControllerDidActivate:(EXHostViewController*)viewController NS_SWIFT_UI_ACTOR;
 
-/// A delegate method the host view controller calls when an extension
-/// disconnects.
+/// Tells the host that the app extension disconnected and is no longer available.
 ///
-/// Called when the host view controller stops hosting the remote user
-/// interface. This can occur when the extension exits or when the view
-/// controller’s configuration property changes.
+/// The host view controller calls this method when the app extension exits or when
+/// you change the view controller’s ``EXHostViewController/configuration`` property.
+/// Use this method to close out the previous connection to the app extension.
 ///
 /// - Parameters:
-///   - viewController: The view controller for the extension that’s disconnecting
-///
-///   - error: An error object containing information about why the object
-/// disconnected, or `nil` if it’s disconnecting without error.
+///    - viewController: The host view controller that initiated the connection.
+///    - error: An error object indicating why the app extension disconnected, or `nil`
+///    if the extension exited without issues.
 -(void)hostViewControllerWillDeactivate:(EXHostViewController*)viewController error:(nullable NSError *)error NS_SWIFT_UI_ACTOR;
 
 @end

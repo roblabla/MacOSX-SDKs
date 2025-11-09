@@ -14,7 +14,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 ///
 /// The first time that your code refers to the shared manager, Background Assets considers that your app is opting into automatic system management of your asset packs.
 /// - Important: When using the asset-pack manager, make sure that you also adopt the corresponding managed extension protocol. For apps that use Apple hosting, the corresponding protocol is `SKDownloaderExtension` from StoreKit. For other apps, the corresponding protocol is ``BAManagedDownloaderExtension``. Not adopting the right protocol is a programmer error.
-API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0))
+API_AVAILABLE(ios(26), macos(26), tvos(26), visionos(26))
 API_UNAVAILABLE(watchos)
 NS_REFINED_FOR_SWIFT
 @interface BAAssetPackManager : NSObject

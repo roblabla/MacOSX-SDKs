@@ -1006,6 +1006,8 @@ exports:
                        '_$s7FMFCore25FMFContactsDataControllerC14isSnapshotModeACSb_tcfCTj', 
                        '_$s7FMFCore25FMFContactsDataControllerC14isSnapshotModeACSb_tcfCTq', 
                        '_$s7FMFCore25FMFContactsDataControllerC14isSnapshotModeACSb_tcfc', 
+                       '_$s7FMFCore25FMFContactsDataControllerC17lookupSlimContact8byHandleSo9CNContactCSgSS_tFTj', 
+                       '_$s7FMFCore25FMFContactsDataControllerC17lookupSlimContact8byHandleSo9CNContactCSgSS_tFTq', 
                        '_$s7FMFCore25FMFContactsDataControllerC7contact3for11keysToFetchSo9CNContactCSgSS_SaySo15CNKeyDescriptor_pGSgtFTj', 
                        '_$s7FMFCore25FMFContactsDataControllerC7contact3for11keysToFetchSo9CNContactCSgSS_SaySo15CNKeyDescriptor_pGSgtFTq', 
                        '_$s7FMFCore25FMFContactsDataControllerCMa', '_$s7FMFCore25FMFContactsDataControllerCMm', 

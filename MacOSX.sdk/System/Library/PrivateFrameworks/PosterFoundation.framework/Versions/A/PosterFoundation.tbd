@@ -7,12 +7,13 @@ swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ BackdropSamplePoster, BlastDoor, MessageUnpackerTests, MessagesBlastDoorService, 
-                       PaperBoardUI, PaperBoardUITests, PosterBoardFramework, PosterBoardFrameworkTests, 
-                       PosterBoardServices, PosterBoardServicesTests, PosterBoardUI, 
-                       PosterBoardUIServices, PosterBoardUIServicesTests, PosterChannelTester, 
-                       PosterFoundationTests, PosterKit, PosterKitTests, PosterModel, 
-                       PosterPlatformSupport, PosterTester, PosterUIFoundation, PosterUIFoundationTests, 
+    clients:         [ AdaptiveTimePoster, BackdropSamplePoster, BlastDoor, MessageUnpackerTests, 
+                       MessagesBlastDoorService, PaperBoardUI, PaperBoardUITests, 
+                       PosterBoardFramework, PosterBoardFrameworkTests, PosterBoardServices, 
+                       PosterBoardServicesTests, PosterBoardUI, PosterBoardUIServices, 
+                       PosterBoardUIServicesTests, PosterChannelTester, PosterFoundationTests, 
+                       PosterKit, PosterKitTests, PosterModel, PosterPlatformSupport, 
+                       PosterTester, PosterUIFoundation, PosterUIFoundationTests, 
                        SBRendererService, SamplePoster, posterctl ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -71,8 +72,8 @@ exports:
                        _kPRStaticDescriptorsKey, _kPRSupportedRolesKey, _kPRSupportsGalleryKey ]
     objc-classes:    [ PFDebounceFilter, PFDeviceMotionUtilities, PFDictionaryCoder, 
                        PFFileSystemEndpoint, PFFileSystemSchemaManager, PFFileSystemStagedURL, 
-                       PFGenericValueTransformer, PFOSTransactionQueue, PFOSUnfairLock, 
-                       PFPathProvider, PFPosterArchiveManifest, PFPosterArchiver, 
+                       PFGenericValueTransformer, PFLRUCache, PFOSTransactionQueue, 
+                       PFOSUnfairLock, PFPathProvider, PFPosterArchiveManifest, PFPosterArchiver, 
                        PFPosterCollection, PFPosterCollectionDiff, PFPosterExtension, 
                        PFPosterExtensionInstance, PFPosterExtensionInstancePool, 
                        PFPosterExtensionInstanceProvider, PFPosterExtensionProvider, 

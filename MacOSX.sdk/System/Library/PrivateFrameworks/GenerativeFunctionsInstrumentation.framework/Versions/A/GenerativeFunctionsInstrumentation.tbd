@@ -3,12 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GenerativeFunctionsInstrumentation.framework/Versions/A/GenerativeFunctionsInstrumentation'
-current-version: 209.3.2
+current-version: 209.21
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s27IntelligencePlatformLibrary39GenerativeFunctionsInstrumentationEventV0deF0E7latency5sinceSdSgAC_tF', 
+                       '_$s34GenerativeFunctionsInstrumentation08IdentityC20ProcessorErrorMapperV03mapF25ForCoreAnalyticsReportingy27IntelligencePlatformLibrary0abcF0OAGF', 
+                       '_$s34GenerativeFunctionsInstrumentation08IdentityC20ProcessorErrorMapperVAA0ceF7MappingAAMc', 
+                       '_$s34GenerativeFunctionsInstrumentation08IdentityC20ProcessorErrorMapperVAA0ceF7MappingAAWP', 
+                       '_$s34GenerativeFunctionsInstrumentation08IdentityC20ProcessorErrorMapperVMa', 
+                       '_$s34GenerativeFunctionsInstrumentation08IdentityC20ProcessorErrorMapperVMn', 
+                       '_$s34GenerativeFunctionsInstrumentation08IdentityC20ProcessorErrorMapperVN', 
                        '_$s34GenerativeFunctionsInstrumentation0A20FunctionInstrumenterV12executionEnd5errorys5Error_pSg_tF', 
                        '_$s34GenerativeFunctionsInstrumentation0A20FunctionInstrumenterV12inferenceEndyyF', 
                        '_$s34GenerativeFunctionsInstrumentation0A20FunctionInstrumenterV13eventReporterAA05EventG0Cvg', 
@@ -76,6 +82,10 @@ exports:
                        '_$s34GenerativeFunctionsInstrumentation0A28FunctionPerformanceProcessorCN', 
                        '_$s34GenerativeFunctionsInstrumentation0A28FunctionPerformanceProcessorCfD', 
                        '_$s34GenerativeFunctionsInstrumentation0A28FunctionPerformanceProcessorCfd', 
+                       '_$s34GenerativeFunctionsInstrumentation0C21ProcessorErrorMappingMp', 
+                       '_$s34GenerativeFunctionsInstrumentation0C21ProcessorErrorMappingP03mapE25ForCoreAnalyticsReportingy27IntelligencePlatformLibrary0abcE0OAGFTj', 
+                       '_$s34GenerativeFunctionsInstrumentation0C21ProcessorErrorMappingP03mapE25ForCoreAnalyticsReportingy27IntelligencePlatformLibrary0abcE0OAGFTq', 
+                       '_$s34GenerativeFunctionsInstrumentation0C21ProcessorErrorMappingTL', 
                        '_$s34GenerativeFunctionsInstrumentation0C9ProcessorMp', '_$s34GenerativeFunctionsInstrumentation0C9ProcessorP12processEventyy27IntelligencePlatformLibrary0abcF0VFTj', 
                        '_$s34GenerativeFunctionsInstrumentation0C9ProcessorP12processEventyy27IntelligencePlatformLibrary0abcF0VFTq', 
                        '_$s34GenerativeFunctionsInstrumentation0C9ProcessorP6finishyyFTj', 
@@ -314,10 +324,10 @@ exports:
                        '_$s34GenerativeFunctionsInstrumentation21PrewarmEventProcessorCN', 
                        '_$s34GenerativeFunctionsInstrumentation21PrewarmEventProcessorCfD', 
                        '_$s34GenerativeFunctionsInstrumentation21PrewarmEventProcessorCfd', 
+                       '_$s34GenerativeFunctionsInstrumentation25SummarizationKitProcessorC11errorMapperAcA0cF12ErrorMapping_p_tcfC', 
                        '_$s34GenerativeFunctionsInstrumentation25SummarizationKitProcessorC12processEventyy27IntelligencePlatformLibrary0abcH0VF', 
                        '_$s34GenerativeFunctionsInstrumentation25SummarizationKitProcessorCAA0cF0AAMc', 
                        '_$s34GenerativeFunctionsInstrumentation25SummarizationKitProcessorCAA0cF0AAWP', 
-                       '_$s34GenerativeFunctionsInstrumentation25SummarizationKitProcessorCACycfC', 
                        '_$s34GenerativeFunctionsInstrumentation25SummarizationKitProcessorCMa', 
                        '_$s34GenerativeFunctionsInstrumentation25SummarizationKitProcessorCMm', 
                        '_$s34GenerativeFunctionsInstrumentation25SummarizationKitProcessorCMn', 

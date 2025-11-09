@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -module-abi-name SwiftUI -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7.0.84.1.411 -module-name SwiftUICore -package-name SwiftUI
-// swift-module-flags-ignorable: -public-module-name SwiftUI -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target x86_64-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -module-abi-name SwiftUI -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7.1.13.1.401 -module-name SwiftUICore -package-name SwiftUI
+// swift-module-flags-ignorable: -public-module-name SwiftUI -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 import Accessibility
 import Combine
 import CoreFoundation
@@ -76,6 +76,10 @@ extension CoreFoundation.CGPoint {
         return x.isFinite && y.isFinite
     }
   }
+  @available(iOS 26.1, macOS 26.1, tvOS 26.1, watchOS 26.1, visionOS 26.1, *)
+  @inlinable package var isNegative: Swift.Bool {
+    get { x < 0.0 || y < 0.0 }
+  }
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   @inlinable package func offsetBy(dx: CoreFoundation.CGFloat, dy: CoreFoundation.CGFloat) -> CoreFoundation.CGPoint {
         return CGPoint(x: self.x + dx, y: self.y + dy)
@@ -116,6 +120,12 @@ extension CoreFoundation.CGPoint {
   @inlinable package var flushingNaNs: CoreFoundation.CGPoint {
     get {
         return CGPoint(x: !x.isNaN ? x : 0, y: !y.isNaN ? y : 0)
+    }
+  }
+  @available(iOS 26.1, macOS 26.1, tvOS 26.1, watchOS 26.1, visionOS 26.1, *)
+  @inlinable package var flushingNegatives: CoreFoundation.CGPoint {
+    get {
+        CGPoint(x: max(x, 0.0), y: max(y, 0.0))
     }
   }
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -13915,7 +13925,7 @@ extension SwiftUICore._UnaryViewAdaptor : Swift.Sendable {
         self.first = first
         self.second = second
     }
-  @_alwaysEmitIntoClient package init(_ _firstType: First.Type, _ _secondType: Second.Type) {
+  @_alwaysEmitIntoClient public init(_ _firstType: First.Type, _ _secondType: Second.Type) {
         self.first = _firstType.zero
         self.second = _secondType.zero
     }
@@ -15115,7 +15125,7 @@ extension CoreFoundation.CGFloat : SwiftUICore.Animatable {
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias AnimatableData = CoreFoundation.CGFloat
 }
-@available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension SwiftUICore.Animatable {
   @inline(__always) @_alwaysEmitIntoClient public static subscript<T>(_animatableType _: Swift.KeyPath<Self, T>) -> T.Type where T : SwiftUICore.VectorArithmetic {
     get {
@@ -15153,6 +15163,14 @@ extension SwiftUICore.Animatable {
     nonmutating set { self[keyPath: keyPath].animatableData = newValue }
   }
 }
+@available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+public func _animatableMacroKind() -> SwiftUICore.AnimatableValues<>
+@available(iOS, introduced: 13.0, deprecated: 26.0, obsoleted: 26.0)
+@available(macOS, introduced: 10.15, deprecated: 26.0, obsoleted: 26.0)
+@available(tvOS, introduced: 13.0, deprecated: 26.0, obsoleted: 26.0)
+@available(watchOS, introduced: 6.0, deprecated: 26.0, obsoleted: 26.0)
+@available(visionOS, introduced: 1.0, deprecated: 26.0, obsoleted: 26.0)
+public func _animatableMacroKind() -> SwiftUICore.AnimatablePair<SwiftUICore.EmptyAnimatableData, SwiftUICore.EmptyAnimatableData>
 @available(iOS 18.0, macOS 15.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -15830,7 +15848,7 @@ extension SwiftUICore.ModifiedContent : SwiftUICore.DynamicViewContent where Con
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Data = Content.Data
 }
-@available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 @attached(extension, conformances: SwiftUICore.Animatable) @attached(member, names: named(animatableData)) public macro Animatable() = #externalMacro(
     module: "SwiftUIMacros", type: "AnimatableValuesMacro"
 )
@@ -15839,8 +15857,23 @@ extension SwiftUICore.ModifiedContent : SwiftUICore.DynamicViewContent where Con
     module: "SwiftUIMacros", type: "AnimatableIgnoredMacro"
 )
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@freestanding(declaration) public macro _SwiftUIAnimatableDataProperty(animatableMacroContext: Swift.String, kind: SwiftUICore.AnimatableValues<>) = #externalMacro(
+    module: "SwiftUIMacros", type: "AnimatableValuesDataPropertyMacro"
+)
+@available(iOS, introduced: 13.0, deprecated: 26.0, obsoleted: 26.0)
+@available(macOS, introduced: 10.15, deprecated: 26.0, obsoleted: 26.0)
+@available(tvOS, introduced: 13.0, deprecated: 26.0, obsoleted: 26.0)
+@available(watchOS, introduced: 6.0, deprecated: 26.0, obsoleted: 26.0)
+@available(visionOS, introduced: 1.0, deprecated: 26.0, obsoleted: 26.0)
+@freestanding(declaration) public macro _SwiftUIAnimatableDataProperty(animatableMacroContext: Swift.String, kind: SwiftUICore.AnimatablePair<SwiftUICore.EmptyAnimatableData, SwiftUICore.EmptyAnimatableData>) = #externalMacro(
+    module: "SwiftUIMacros", type: "AnimatablePairDataPropertyMacro"
+)
+@available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 @attached(accessor) public macro _AnimatableData() = #externalMacro(
     module: "SwiftUIMacros", type: "AnimatableValuesDataMacro")
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
+@attached(accessor) public macro _AnimatablePairData() = #externalMacro(
+    module: "SwiftUIMacros", type: "AnimatablePairDataMacro")
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 @freestanding(expression) public macro _SwiftUIAnimatableProperty<T>(_ t: T.Type) -> T.Type = #externalMacro(
     module: "SwiftUIMacros", type: "AnimatablePropertyMacro"
@@ -18346,11 +18379,15 @@ extension SwiftUICore.EnvironmentValues {
     set
   }
 }
-@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
+@available(iOS, introduced: 14.0, deprecated: 1000, renamed: "accessibilityShowBorders")
+@available(macOS, introduced: 11.0, deprecated: 1000, renamed: "accessibilityShowBorders")
+@available(tvOS, introduced: 14.0, deprecated: 1000, renamed: "accessibilityShowBorders")
+@available(watchOS, introduced: 7.0, deprecated: 1000, renamed: "accessibilityShowBorders")
+@available(visionOS, introduced: 1.0, deprecated: 1000, renamed: "accessibilityShowBorders")
 extension SwiftUICore.EnvironmentValues {
   public var accessibilityShowButtonShapes: Swift.Bool {
     get
@@ -18358,6 +18395,13 @@ extension SwiftUICore.EnvironmentValues {
   public var _accessibilityShowButtonShapes: Swift.Bool {
     get
     set
+  }
+}
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+extension SwiftUICore.EnvironmentValues {
+  @backDeployed(before: iOS 26.1, macOS 26.1, tvOS 26.1, watchOS 26.1, visionOS 26.1)
+  public var accessibilityShowBorders: Swift.Bool {
+    get { _accessibilityShowButtonShapes }
   }
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)

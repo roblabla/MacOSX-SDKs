@@ -130,6 +130,6 @@ exports:
                        '_$s18ReplicatorServices0A6ClientC18AppPlaceholderSyncE06createC0ACyFZ', 
                        '_$sSo13APSLaunchUtilC18AppPlaceholderSyncEABycfC', '_$sSo13APSLaunchUtilC18AppPlaceholderSyncEABycfc', 
                        '_$sSo13APSLaunchUtilCMa', _AppPlaceholderSyncVersionNumber, 
-                       _AppPlaceholderSyncVersionString, _IsEligibleForOneness, _SelfDestruct ]
+                       _AppPlaceholderSyncVersionString, _SelfDestruct ]
     objc-classes:    [ APSLaunchUtil ]
 ...

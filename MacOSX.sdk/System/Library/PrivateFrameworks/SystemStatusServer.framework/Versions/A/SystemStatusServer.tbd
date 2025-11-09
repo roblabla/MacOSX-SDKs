@@ -9,12 +9,13 @@ exports:
                        _SystemStatusServerVersionNumber, _SystemStatusServerVersionString ]
     objc-classes:    [ STAttributedEntityResolutionSession, STAttributedEntityResolver, 
                        STAttributedEntityResolverProvider, STBackgroundActivitiesStatusDomainVisualDescriptorTransformer, 
-                       STDataAccessStatusDomainDataProvider, STDataAccessStatusDomainDisplayNameTransformer, 
-                       STDataAccessStatusDomainDisplayNameTransformerProvider, STExecutableIdentityResolutionSession, 
-                       STExecutableIdentityResolver, STLocalStatusServer, STLocationStatusDomainDisplayNameTransformer, 
+                       STDataAccessStatusDomainDataProvider, STDataAccessStatusDomainDataProviderTransformer, 
+                       STDataAccessStatusDomainDisplayNameTransformer, STDataAccessStatusDomainDisplayNameTransformerProvider, 
+                       STExecutableIdentityResolutionSession, STExecutableIdentityResolver, 
+                       STLocalStatusServer, STLocationStatusDomainDisplayNameTransformer, 
                        STLocationStatusDomainDisplayNameTransformerProvider, STMediaStatusDomainDisplayNameTransformer, 
                        STMediaStatusDomainDisplayNameTransformerProvider, STReferenceCountedCache, 
                        STStatusDomainClientHandleWrapper, STStatusDomainPublisherXPCClientHandle, 
                        STStatusDomainPublisherXPCClientListener, STStatusDomainXPCClientHandle, 
-                       STStatusDomainXPCClientListener, STStatusServer ]
+                       STStatusDomainXPCClientListener, STStatusServer, _STInternalQueueLocalStatusServerWrapper ]
 ...

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsFoundationOS.framework/Versions/A/PreviewsFoundationOS'
-current-version: 23.0.52
+current-version: 23.10.5
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -149,6 +149,7 @@ exports:
                        '_$s20PreviewsFoundationOS10OrderedSetV12makeIterators03AnyG0VyxGyF', 
                        '_$s20PreviewsFoundationOS10OrderedSetV15reserveCapacityyySiF', 
                        '_$s20PreviewsFoundationOS10OrderedSetV16formIntersectionyyqd__7ElementQyd__RszSTRd__lF', 
+                       '_$s20PreviewsFoundationOS10OrderedSetV1poiyACyxGAE_AEtFZ', 
                        '_$s20PreviewsFoundationOS10OrderedSetV2eeoiySbACyqd__G_AEtSHRd__lFZ', 
                        '_$s20PreviewsFoundationOS10OrderedSetV4lastxSgvg', '_$s20PreviewsFoundationOS10OrderedSetV4lastxSgvpMV', 
                        '_$s20PreviewsFoundationOS10OrderedSetV5countSivg', '_$s20PreviewsFoundationOS10OrderedSetV5countSivpMV', 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Contacts.framework/Versions/A/Contacts'
-current-version: 3804.100.1
+current-version: 3804.200.81
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -871,22 +871,23 @@ exports:
                        CNContactTypeDescription, CNContactUpdate, CNContactVCardSerialization, 
                        CNContactVCardSummary, CNContactsAPIServiceAuthorizationCheck, 
                        CNContactsEnvironment, CNContactsUserDefaults, CNContainer, 
-                       CNContainerPermissions, CNCoreRecentsChangeNotifier, CNCoreRecentsContactStore, 
-                       CNCoreRecentsSaveRequest, CNCountryInformation, CNCreationDateDescription, 
-                       CNCropRectDescription, CNCropRectHashDescription, CNCropRectIDDescription, 
-                       CNCroppedImageDataHelper, CNDataMapperConfiguration, CNDataMapperContactStore, 
-                       CNDatesDescription, CNDeduplication, CNDepartmentDescription, 
-                       CNDowntimeWhitelist, CNDowntimeWhitelistContainerFetcher, 
-                       CNDowntimeWhitelistDescription, CNDraggingContact, CNDuplicateCohort, 
-                       CNDuplicateContactsManager, CNDuplicateSet, CNDuplicateSetContactImage, 
-                       CNDuplicateSetContactPoster, CNEmailAddressesDescription, 
-                       CNErrorFactory, CNExplicitDisplayNameDescription, CNExternalIdentifierDescription, 
-                       CNExternalImageURIDescription, CNExternalModificationTagDescription, 
-                       CNExternalRepresentationDescription, CNExternalUUIDDescription, 
-                       CNFamilyNameDescription, CNFavorites, CNFavoritesEntry, CNFavoritesEntryRepresentation, 
-                       CNFetchRequest, CNFetchResult, CNFullscreenImageDataDescription, 
-                       CNGeminiChannel, CNGeminiHandle, CNGeminiInteraction, CNGeminiManager, 
-                       CNGeminiResult, CNGivenNameDescription, CNGroup, CNHandleBlockingTestDouble, 
+                       CNContainerPermissions, CNCoreImageDerivedColorGenerator, 
+                       CNCoreRecentsChangeNotifier, CNCoreRecentsContactStore, CNCoreRecentsSaveRequest, 
+                       CNCountryInformation, CNCreationDateDescription, CNCropRectDescription, 
+                       CNCropRectHashDescription, CNCropRectIDDescription, CNCroppedImageDataHelper, 
+                       CNDataMapperConfiguration, CNDataMapperContactStore, CNDatesDescription, 
+                       CNDeduplication, CNDepartmentDescription, CNDowntimeWhitelist, 
+                       CNDowntimeWhitelistContainerFetcher, CNDowntimeWhitelistDescription, 
+                       CNDraggingContact, CNDuplicateCohort, CNDuplicateContactsManager, 
+                       CNDuplicateSet, CNDuplicateSetContactImage, CNDuplicateSetContactPoster, 
+                       CNEmailAddressesDescription, CNErrorFactory, CNExplicitDisplayNameDescription, 
+                       CNExternalIdentifierDescription, CNExternalImageURIDescription, 
+                       CNExternalModificationTagDescription, CNExternalRepresentationDescription, 
+                       CNExternalUUIDDescription, CNFamilyNameDescription, CNFavorites, 
+                       CNFavoritesEntry, CNFavoritesEntryRepresentation, CNFetchRequest, 
+                       CNFetchResult, CNFullscreenImageDataDescription, CNGeminiChannel, 
+                       CNGeminiHandle, CNGeminiInteraction, CNGeminiManager, CNGeminiResult, 
+                       CNGivenNameDescription, CNGroup, CNHandleBlockingTestDouble, 
                        CNHandleExpander, CNIOSLegacyIdentifierDescription, CNImageDataAvailableDescription, 
                        CNImageDataDescription, CNImageHashDescription, CNImageSyncFailedTimeDescription, 
                        CNImageTypeDescription, CNImageUtilsBitmapFormat, CNInstantMessageAddress, 

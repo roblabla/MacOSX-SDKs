@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HelpData.framework/Versions/A/HelpData'
-current-version: 239
+current-version: 239.1.3
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DDMAppleDomain, _DDMAssetURLProtocolRequest, _DDMBookConfigKeyAppBundleID, 
@@ -85,10 +85,10 @@ exports:
                        DDMAssetURLProtocolOperation, DDMAssetURLSessionManager, DDMBook, 
                        DDMConfig, DDMContext, DDMInfo, DDMMeta, DDMMisc, DDMObject, 
                        DDMObjectManager, DDMRequest, DDMTocItem, DDMTopic, DDMTopicPreloadOperation, 
-                       HPDAuthChallengeHandler, HPDAuthenticationNotification, HPDBaseClient, 
-                       HPDCacheManager, HPDClient, HPDFeatureFlags, HPDHelpBook, 
-                       HPDQuery, HPDReachability, HPDResult, HPDSearchManager, HPDSearchResult, 
-                       HVObjectDeallocWatcher ]
+                       HPDAuthChallengeHandler, HPDAuthResult, HPDAuthenticationNotification, 
+                       HPDBaseClient, HPDCacheManager, HPDClient, HPDFeatureFlags, 
+                       HPDHelpBook, HPDQuery, HPDReachability, HPDResult, HPDSearchManager, 
+                       HPDSearchResult, HVObjectDeallocWatcher ]
     objc-ivars:      [ DDMAssetURLProtocolCoordinator._urlLoadingQueue, DDMAssetURLProtocolDelegate._protocol, 
                        DDMAssetURLProtocolOperation._executing, DDMAssetURLProtocolOperation._finished, 
                        DDMAssetURLProtocolOperation._resumeBlock, DDMTopicPreloadOperation._book, 

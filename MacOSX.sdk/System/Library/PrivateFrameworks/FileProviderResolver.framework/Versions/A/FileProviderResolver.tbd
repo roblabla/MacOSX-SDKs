@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/FileProviderResolver.framework/Versions/A/FileProviderResolver'
-current-version: 3882.1.1
+current-version: 3882.40.131
 compatibility-version: 0
 swift-abi-version: 7
 allowable-clients:

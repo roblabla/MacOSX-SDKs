@@ -370,33 +370,56 @@ completionHandler:(void(^)(size_t actuallyWritten,
 
 @end
 
-/// A resource representing an abstract URL
+/// A resource that represents an abstract URL.
 ///
+/// An `FSGenericURLResource` is a completely abstract resource.
+/// The only reference to its contents is a single URL, the contents of which are arbitrary.
+/// This URL might represent a PCI locator string like `/pci@f0000000/usb@5`, or some sort of network address for a remote file system.
+/// FSKit leaves interpretation of the URL and its contents entirely up to your implementation.
+///
+/// Use the `Info.plist` key `FSSupportedSchemes` to provide an array of case-insensitive URL schemes that your implementation supports.
+/// The following example shows how a hypothetical `FSGenericURLResource` implementation declares support for the `rsh` and `ssh` URL schemes:
+/// ```
+/// <key>FSSupportedSchemes</key>
+/// <array>
+///     <string>rsh</string>
+///     <string>ssh</string>
+/// </array>
+/// ```
 FSKIT_API_AVAILABILITY_V2
 @interface FSGenericURLResource : FSResource
 
+/// The URL represented by the resource.
 @property (readonly, copy)              NSURL *    url;
 
+/// Creates a generic URL resource with the given URL.
+/// - Parameter url: A URL that provides the content of the file system. The format of this URL is completely arbitrary. It's up to your extension to access the contents represented by the URL and make them available as an ``FSVolume`` that FSKit can load.
 - (instancetype)initWithURL:(NSURL *)url;
 
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
 
-/// A resource representing a path
+/// A resource that represents a path in the system file space.
 ///
-/// Represents a file path (possibly security scoped URL).
-///
+/// The URL passed to `FSPathURLResource` may be a security-scoped URL.
+/// If the URL is a security-scoped URL, FSKit transports it intact from a client application to your extension.
 FSKIT_API_AVAILABILITY_V2
 @interface FSPathURLResource : FSResource
 
+/// The URL represented by the resource.
 @property (readonly, copy)              NSURL *    url;
 
+/// Creates a path URL resource.
+/// - Parameters:
+///   - URL: A URL in the system file space that represents the contents of a file system. This parameter uses the `file:` scheme.
+///   - writable: A Boolean value that indicates whether the file system supports writing to the contents of the URL.
 - (instancetype)initWithURL:(NSURL *)URL
                    writable:(BOOL)writable;
 
 - (instancetype)init NS_UNAVAILABLE;
 
+/// A Boolean value that indicates whether the file system supports writing to the contents of the path URL.
 @property (readonly, getter=isWritable)
                                 BOOL            writable;
 
@@ -460,7 +483,7 @@ FSKIT_API_AVAILABILITY_V1
 
 /// The container identifier, as found during the probe operation.
 ///
-/// This value is non-`nil` unless the ``FSProbeResult/result`` is ``FSMatchResult/notRecognized`.
+/// This value is non-`nil` unless the ``FSProbeResult/result`` is ``FSMatchResult/notRecognized``.
 /// For formats that lack a durable UUID on which to base a container identifier --- which is only legal for a ``FSUnaryFileSystem`` --- this value may be a random UUID.
 @property (readonly, nullable)          FSContainerIdentifier  *containerID;
 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_PhotosUI_SwiftUI.framework/Versions/A/_PhotosUI_SwiftUI'
-current-version: 801.43.240
+current-version: 811.0.106
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -93,12 +93,22 @@ exports:
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E12photosPicker11isPresented9selection8matching21preferredItemEncodingQrAA7BindingVySbG_AKyAD0dfL0VSgG0dB014PHPickerFilterVSgAN0M20DisambiguationPolicyVtFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E17photosPickerStyleyQrAD0dfG0VF', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E17photosPickerStyleyQrAD0dfG0VFQOMQ', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E18_photosPickerTitleyQrSSSgF', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E18_photosPickerTitleyQrSSSgFQOMQ', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E19_photosPickerPromptyQrSSSgF', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E19_photosPickerPromptyQrSSSgFQOMQ', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E23_photosPickerButtonType7primary9secondaryQrSo016_PHPickerPrimarygH0V_So01_k9SecondarygH0VtF', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E23_photosPickerButtonType7primary9secondaryQrSo016_PHPickerPrimarygH0V_So01_k9SecondarygH0VtFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E23_photosPickerSearchTextyQrSSSgF', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E23_photosPickerSearchTextyQrSSSgFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E23_photosPickerSourceTypeyQrSo09_PHPickergH0VF', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E23_photosPickerSourceTypeyQrSo09_PHPickergH0VFQOMQ', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E28_photosPickerOnPrimaryActionyQryyScMYccF', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E28_photosPickerOnPrimaryActionyQryyScMYccFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E28_photosPickerSuggestionGroupyQr0dB009_PHPickergH0VSgF', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E28_photosPickerSuggestionGroupyQr0dB009_PHPickergH0VSgFQOMQ', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E30_photosPickerOnSecondaryActionyQryyScMYccF', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E30_photosPickerOnSecondaryActionyQryyScMYccFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E30_photosPickerSheetSizeOverrideyQrSo6CGSizeVSgF', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E30_photosPickerSheetSizeOverrideyQrSo6CGSizeVSgFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E31photosPickerAccessoryVisibility_5edgesQrAA0H0O_AA4EdgeO3SetVtF', 
@@ -113,6 +123,8 @@ exports:
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E32_photosPickerPeopleConfigurationyQr0dB0019_PHPickerCollectionH0VSgFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E32photosPickerDisabledCapabilitiesyQrSo08PHPickerH0VF', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E32photosPickerDisabledCapabilitiesyQrSo08PHPickerH0VFQOMQ', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E37_photosPickerAutomaticDismissDisabledyQrSbF', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E37_photosPickerAutomaticDismissDisabledyQrSbFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E40_photosPickerDisabledPrivateCapabilitiesyQrSo09_PHPickerhI0VF', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E40_photosPickerDisabledPrivateCapabilitiesyQrSo09_PHPickerhI0VFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E41_photosPickerDesiredCollectionSuggestionsyQrSo09_PHPickerH14SuggestionTypeVF', 

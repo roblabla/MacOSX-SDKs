@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target x86_64-apple-macos26.0 -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature ABIAttribute -enable-experimental-feature GlobalActorInferenceCutoff -enable-experimental-feature ABIAttribute -enable-experimental-feature GlobalActorInferenceCutoff -package-name com.apple.TipKit -target-min-inlining-version min -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -user-module-version 120 -module-name TipKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target x86_64-apple-macos26.1 -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature ABIAttribute -enable-experimental-feature GlobalActorInferenceCutoff -enable-experimental-feature ABIAttribute -enable-experimental-feature GlobalActorInferenceCutoff -package-name com.apple.TipKit -target-min-inlining-version min -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -user-module-version 120.1.4 -module-name TipKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 import Foundation
 import Swift
 @_exported import SwiftUI
@@ -870,16 +870,16 @@ extension SwiftUICore.View {
   nonisolated public func tipImageStyle<S1, S2, S3>(_ primary: S1, _ secondary: S2, _ tertiary: S3) -> some SwiftUICore.View where S1 : SwiftUICore.ShapeStyle, S2 : SwiftUICore.ShapeStyle, S3 : SwiftUICore.ShapeStyle
   
 }
+extension SwiftUICore.View {
+  @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
+  nonisolated public func tipViewStyle(_ style: some TipViewStyle) -> some SwiftUICore.View
+  
+}
 @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @preconcurrency @_Concurrency.MainActor public protocol TipViewStyle {
   typealias Configuration = TipKit.TipViewStyleConfiguration
   associatedtype Body : SwiftUICore.View
   @SwiftUICore.ViewBuilder @_Concurrency.MainActor @preconcurrency func makeBody(configuration: Self.Configuration) -> Self.Body
-}
-extension SwiftUICore.View {
-  @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
-  nonisolated public func tipViewStyle(_ style: some TipViewStyle) -> some SwiftUICore.View
-  
 }
 @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 public struct TipViewStyleConfiguration {

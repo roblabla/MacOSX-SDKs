@@ -449,7 +449,7 @@ API_AVAILABLE(macos(12.0), ios(15.0));
 /* Return true if `space' can be used as a destination color space; false
  otherwise. */
 
-CG_EXTERN bool CGColorSpaceSupportsOutput(CGColorSpaceRef space)
+CG_EXTERN bool CGColorSpaceSupportsOutput(CGColorSpaceRef cg_nullable space)
 API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*  CGColorSpaceCopyPropertyList will return NULL for special color spaces
@@ -465,26 +465,26 @@ API_AVAILABLE(macos(10.12), ios(10.0));
 /* Return true if `space' uses extended range [-Inf, +Inf]; false
  otherwise. */
 
-CG_EXTERN bool CGColorSpaceUsesExtendedRange(CGColorSpaceRef space)
+CG_EXTERN bool CGColorSpaceUsesExtendedRange(CGColorSpaceRef cg_nullable space)
 API_AVAILABLE(macos(10.12), ios(10.0));
 
 /* Create a linearized copy of the color space if the color space is matrix based.
    Return NULL if otherwise */
-CG_EXTERN CGColorSpaceRef  __nullable CGColorSpaceCreateLinearized(CGColorSpaceRef space)
+CG_EXTERN CGColorSpaceRef  __nullable CGColorSpaceCreateLinearized(CGColorSpaceRef cg_nullable space)
 API_AVAILABLE(macos(11.0), ios(14.0));
 
 /* Create a copy of the color space which uses extended range [-Inf, +Inf] if the color space is
    matrix based. Return NULL if otherwise */
-CG_EXTERN CGColorSpaceRef  __nullable CGColorSpaceCreateExtended(CGColorSpaceRef space)
+CG_EXTERN CGColorSpaceRef  __nullable CGColorSpaceCreateExtended(CGColorSpaceRef cg_nullable space)
 API_AVAILABLE(macos(11.0), ios(14.0));
 
 /* Create a linearized copy of the color space which uses extended range [-Inf, +Inf]
    if the color space is matrix based. Return NULL if otherwise */
-CG_EXTERN CGColorSpaceRef  __nullable CGColorSpaceCreateExtendedLinearized(CGColorSpaceRef space)
+CG_EXTERN CGColorSpaceRef  __nullable CGColorSpaceCreateExtendedLinearized(CGColorSpaceRef cg_nullable space)
 API_AVAILABLE(macos(11.0), ios(14.0));
 
 /* Create a copy of the color space which uses standard range [0.0, 1.0]. */
-CG_EXTERN CGColorSpaceRef CGColorSpaceCreateCopyWithStandardRange(CGColorSpaceRef s)
+CG_EXTERN CGColorSpaceRef CGColorSpaceCreateCopyWithStandardRange(CGColorSpaceRef cg_nullable space)
 API_AVAILABLE(macos(13.0), ios(16.0));
 
 /* Deprecated functions */

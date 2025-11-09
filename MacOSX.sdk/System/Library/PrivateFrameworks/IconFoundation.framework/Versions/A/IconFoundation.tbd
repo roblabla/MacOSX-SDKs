@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/IconFoundation.framework/Versions/A/IconFoundation'
-current-version: 729
+current-version: 738
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -58,10 +58,10 @@ exports:
                        _CUIEdgeInsetsMake, _CUIEdgeInsetsOutsetRect, _CUIEdgeInsetsToCGRect, 
                        _CUIEdgeInsetsValid, _CUIEdgeInsetsZero, _CUIFillCARKeyArrayForRenditionKey, 
                        _CUIFillCARKeyArrayForRenditionKey2, _CUIFillRenditionKeyForCARKeyArray, 
-                       _CUIGeneratePlaceholderAssetCatalog, _CUIGetThemeCleanupQueue, 
-                       _CUIKeyFormatToArrayString, _CUILogEnableRenditionLog, _CUILogHandle, 
-                       _CUILogLogToStderr, _CUILogRenditionLogEnabled, _CUIMaxColorTemperature, 
-                       _CUIMaxDimensionForVectorGlyph, _CUIMaxScaleForTargetPlatform, 
+                       _CUIGeneratePlaceholderAssetCatalog, _CUIGeneratePlaceholderWhilePreservingAssetCatalog, 
+                       _CUIGetThemeCleanupQueue, _CUIKeyFormatToArrayString, _CUILogEnableRenditionLog, 
+                       _CUILogHandle, _CUILogLogToStderr, _CUILogRenditionLogEnabled, 
+                       _CUIMaxColorTemperature, _CUIMaxDimensionForVectorGlyph, _CUIMaxScaleForTargetPlatform, 
                        _CUIMinColorTemperature, _CUIMinDimensionForVectorGlyph, _CUIMinScaleForTargetPlatform, 
                        _CUIParseDeploymentTarget, _CUIPlatformForPlatformString, 
                        _CUIPlatformNameForPlatform, _CUIPointSizeForDimensionForVectorGlyph, 

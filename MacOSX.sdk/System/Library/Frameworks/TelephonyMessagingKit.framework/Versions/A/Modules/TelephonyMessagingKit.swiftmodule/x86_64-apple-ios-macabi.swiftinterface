@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -user-module-version 13091 -module-name TelephonyMessagingKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target x86_64-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -user-module-version 13114 -module-name TelephonyMessagingKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 import CoreGraphics
 import CoreLocation
 import Foundation
@@ -554,7 +554,7 @@ extension TelephonyMessagingKit.RCSMessage {
 @available(visionOS, unavailable)
 extension TelephonyMessagingKit.RCSMessage {
   public struct Text : Swift.ExpressibleByStringLiteral, Swift.Equatable, Swift.Codable, Swift.Sendable {
-    public let body: Swift.String
+    public var body: Swift.String
     public init(body: Swift.String)
     public init(stringLiteral value: Swift.String)
     public static func == (a: TelephonyMessagingKit.RCSMessage.Text, b: TelephonyMessagingKit.RCSMessage.Text) -> Swift.Bool
@@ -580,8 +580,8 @@ extension TelephonyMessagingKit.RCSMessage {
     public init(from decoder: any Swift.Decoder) throws
   }
   public struct FileTransfer : Swift.Equatable, Swift.Codable, Swift.Sendable {
-    public let fileMetadata: TelephonyMessagingKit.RCSFileTransferMetadata
-    public let thumbnailMetadata: TelephonyMessagingKit.RCSFileTransferMetadata?
+    public var fileMetadata: TelephonyMessagingKit.RCSFileTransferMetadata
+    public var thumbnailMetadata: TelephonyMessagingKit.RCSFileTransferMetadata?
     #if compiler(>=5.3) && $NonescapableTypes
     public init(fileMetadata: TelephonyMessagingKit.RCSFileTransferMetadata, thumbnailMetadata: TelephonyMessagingKit.RCSFileTransferMetadata? = nil)
     #endif
@@ -590,9 +590,9 @@ extension TelephonyMessagingKit.RCSMessage {
     public init(from decoder: any Swift.Decoder) throws
   }
   public struct GeolocationPush : Swift.Equatable, Swift.Codable, Swift.Sendable {
-    public let latitude: Swift.Double
-    public let longitude: Swift.Double
-    public let description: Swift.String?
+    public var latitude: Swift.Double
+    public var longitude: Swift.Double
+    public var description: Swift.String?
     #if compiler(>=5.3) && $NonescapableTypes
     public init(latitude: Swift.Double, longitude: Swift.Double, description: Swift.String? = nil)
     #endif
@@ -620,10 +620,10 @@ extension TelephonyMessagingKit.RCSMessage {
       }
       public init(from decoder: any Swift.Decoder) throws
     }
-    public let state: TelephonyMessagingKit.RCSMessage.ComposingIndicator.State
-    public let lastActive: Foundation.Date?
-    public let contentType: UniformTypeIdentifiers.UTType?
-    public let refreshInterval: Swift.Duration?
+    public var state: TelephonyMessagingKit.RCSMessage.ComposingIndicator.State
+    public var lastActive: Foundation.Date?
+    public var contentType: UniformTypeIdentifiers.UTType?
+    public var refreshInterval: Swift.Duration?
     #if compiler(>=5.3) && $NonescapableTypes
     public init(state: TelephonyMessagingKit.RCSMessage.ComposingIndicator.State, lastActive: Foundation.Date? = nil, contentType: UniformTypeIdentifiers.UTType? = nil, refreshInterval: Swift.Duration? = nil)
     #endif
@@ -684,9 +684,19 @@ final public class MMSService : Swift.Sendable {
     public init(from decoder: any Swift.Decoder) throws
   }
   public struct IncomingMessageNotification : Swift.Equatable, Swift.Sendable {
-    public let cellularServiceID: TelephonyMessagingKit.CellularServiceID
-    public let messageID: TelephonyMessagingKit.MMSMessageID
-    public static func == (a: TelephonyMessagingKit.MMSService.IncomingMessageNotification, b: TelephonyMessagingKit.MMSService.IncomingMessageNotification) -> Swift.Bool
+    @available(iOS, introduced: 26.0, deprecated: 26.1, message: "Use message.cellularServiceID instead.")
+    public var cellularServiceID: TelephonyMessagingKit.CellularServiceID {
+      get
+    }
+    @available(iOS, introduced: 26.0, deprecated: 26.1, message: "Use message.messageID instead.")
+    public var messageID: TelephonyMessagingKit.MMSMessageID {
+      get
+    }
+    @available(iOS 26.1, *)
+    public var message: TelephonyMessagingKit.MMSMessage {
+      get
+    }
+    public static func == (lhs: TelephonyMessagingKit.MMSService.IncomingMessageNotification, rhs: TelephonyMessagingKit.MMSService.IncomingMessageNotification) -> Swift.Bool
   }
   public struct ViabilityNotification : Swift.Equatable, Swift.Sendable {
     public let cellularServiceID: TelephonyMessagingKit.CellularServiceID
@@ -695,6 +705,7 @@ final public class MMSService : Swift.Sendable {
   }
   final public func sendMessage(_ message: TelephonyMessagingKit.MMSMessage) async throws
   final public func isViable(for cellularServiceID: TelephonyMessagingKit.CellularServiceID) -> Swift.Bool
+  @available(iOS, introduced: 26.0, deprecated: 26.1, message: "Use IncomingMessageNotification.message instead.")
   final public func receiveMessage(using cellularServiceID: TelephonyMessagingKit.CellularServiceID, messageID: TelephonyMessagingKit.MMSMessageID) async throws -> TelephonyMessagingKit.MMSMessage
   final public func reportSpam(_ message: TelephonyMessagingKit.MMSMessage) async throws
   final public func configuration(for cellularServiceID: TelephonyMessagingKit.CellularServiceID) async throws -> TelephonyMessagingKit.MMSService.Configuration

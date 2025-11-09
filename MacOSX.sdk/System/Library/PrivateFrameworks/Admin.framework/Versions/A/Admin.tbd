@@ -11,11 +11,11 @@ exports:
                        _directorySizeAtPath, _freeSpaceAtPath, _getPIDForProcess, 
                        _isBootVolumeHCSFDE, _isInternalBuild, _isSIPDisabled, _kickMCXDForUID, 
                        _loadAppKit, _setSafariLockedSync, _writeKeyboardType ]
-    objc-classes:    [ ADMFirewallConfig, ARDConfig, Authenticator, DSAuthenticator, 
-                       DSNode, DSRecord, DynamicDNSConfig, Group, HostConfig, InternetServices, 
-                       NetworkTimeClient, NetworkTimeServer, ParentalControlsConfig, 
-                       PowerActivityManager, PrinterSharingConfig, RemoteAEConfig, 
-                       RemoteUser, SysKeyChainConfig, SystemClock, User, WebServerConfig ]
+    objc-classes:    [ ARDConfig, Authenticator, DSAuthenticator, DSNode, DSRecord, 
+                       DynamicDNSConfig, Group, HostConfig, InternetServices, NetworkTimeClient, 
+                       NetworkTimeServer, ParentalControlsConfig, PowerActivityManager, 
+                       PrinterSharingConfig, RemoteAEConfig, RemoteUser, SysKeyChainConfig, 
+                       SystemClock, User, WebServerConfig ]
     objc-ivars:      [ Authenticator._syncWaitDone, Authenticator._wantsClearTextAuthentication, 
                        DSAuthenticator._didClearTextAuthentication, DSNode.mDirectoryService, 
                        DSNode.mNodeName, DSNode.mNodeReference, DSNode.mOpenCloseSemaphore, 

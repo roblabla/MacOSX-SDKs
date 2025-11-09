@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target arm64e-apple-macos26.0 -target-variant arm64e-apple-ios26.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1957 -module-name CoreGraphics
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target arm64e-apple-macos26.1 -target-variant arm64e-apple-ios26.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1965.1.4 -module-name CoreGraphics
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 @_exported import CoreFoundation
 @_exported import CoreGraphics
 import Foundation
@@ -1119,6 +1119,19 @@ extension CoreGraphics.CGBitmapInfo {
         self = CGBitmapInfo(rawValue: self.rawValue & ~other.rawValue)
     }
 }
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+public enum CGPathFillRule : Swift.Int {
+  case winding
+  case evenOdd
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.Int)
+  #endif
+  @available(iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, macOS 10.9, *)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension CoreGraphics.CGImageComponentInfo : Swift.CaseIterable {
   public static let allCases: [CoreGraphics.CGImageComponentInfo]
@@ -1207,19 +1220,6 @@ internal func CGSizeNearlyEqualToSize(_ lhs: CoreFoundation.CGSize, _ rhs: CoreF
 @_cdecl("CGSizeNearlyEqualToSizeWithTolerance")
 @usableFromInline
 internal func CGSizeNearlyEqualToSizeWithTolerance(_ lhs: CoreFoundation.CGSize, _ rhs: CoreFoundation.CGSize, _ tolerance: CoreFoundation.CGFloat) -> Swift.Bool
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-public enum CGPathFillRule : Swift.Int {
-  case winding
-  case evenOdd
-  #if compiler(>=5.3) && $NonescapableTypes
-  public init?(rawValue: Swift.Int)
-  #endif
-  @available(iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, macOS 10.9, *)
-  public typealias RawValue = Swift.Int
-  public var rawValue: Swift.Int {
-    get
-  }
-}
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 extension CoreGraphics.CGPath {
   public func copy(dashingWithPhase phase: CoreFoundation.CGFloat, lengths: [CoreFoundation.CGFloat], transform: CoreFoundation.CGAffineTransform = .identity) -> CoreGraphics.CGPath

@@ -443,6 +443,10 @@ struct  tcpstat {
 	u_int32_t       tcps_mptcp_triggered_cell;      /* Total number of times an MPTCP-connection triggered cell bringup */
 
 	u_int32_t       tcps_fin_timeout_drops;
+
+	/* RST compression statistics */
+	u_int64_t       tcps_rst_dup_suppressed;
+	u_int64_t       tcps_rst_not_suppressed;
 };
 
 

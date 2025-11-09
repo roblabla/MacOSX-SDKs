@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HomeKitDaemon.framework/Versions/A/HomeKitDaemon'
-current-version: 1349.1.3
+current-version: 1371.2.9
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -425,7 +425,9 @@ exports:
                        '_$sSo20HMMediaPlaybackStateV13HomeKitDaemonE11descriptionSSvpMV', 
                        '_$sSo20HMMediaPlaybackStateVs23CustomStringConvertible13HomeKitDaemonMc', 
                        '_$sSo22HMDAppleMediaAccessoryCSL13HomeKitDaemonMc', '_$sSo22HMDAppleMediaAccessoryCSL13HomeKitDaemonSL1loiySbx_xtFZTW', 
-                       '_$sSo24HMDHomeDefaultDataSourceCMa', '_$sSo24HMDUserDefaultDataSourceC13HomeKitDaemonEABycfC', 
+                       '_$sSo24HMDHomeDefaultDataSourceCMa', '_$sSo24HMDHomeManagerDataSourceC13HomeKitDaemonEABycfC', 
+                       '_$sSo24HMDHomeManagerDataSourceC13HomeKitDaemonEABycfc', 
+                       '_$sSo24HMDHomeManagerDataSourceCMa', '_$sSo24HMDUserDefaultDataSourceC13HomeKitDaemonEABycfC', 
                        '_$sSo24HMDUserDefaultDataSourceC13HomeKitDaemonEABycfc', 
                        '_$sSo24HMDUserDefaultDataSourceCMa', '_$sSo25HMAccessorySleepWakeStateV13HomeKitDaemonE11descriptionSSvg', 
                        '_$sSo25HMAccessorySleepWakeStateV13HomeKitDaemonE11descriptionSSvpMV', 
@@ -462,31 +464,33 @@ exports:
                        '_$sSo35HMDCommunicationTrustHandlerFactoryC13HomeKitDaemonEABycfc', 
                        '_$sSo35HMDCommunicationTrustHandlerFactoryCMa', '_$sSo35HMDHomeActivityStateContributorTypeVs28CustomDebugStringConvertible13HomeKitDaemonMc', 
                        '_$sSo35HMDHomeActivityStateContributorTypeVs28CustomDebugStringConvertible13HomeKitDaemonsACP16debugDescriptionSSvgTW', 
-                       '_$sSo39HMDHomeMatterServicesCoordinatorFactoryC13HomeKitDaemonEABycfC', 
+                       '_$sSo39HMDCameraSettingProactiveReaderLogEventC13HomeKitDaemonE9startTimeABSd_tcfC', 
+                       '_$sSo39HMDCameraSettingProactiveReaderLogEventC13HomeKitDaemonE9startTimeABSd_tcfc', 
+                       '_$sSo39HMDCameraSettingProactiveReaderLogEventC13HomeKitDaemonEABycfC', 
+                       '_$sSo39HMDCameraSettingProactiveReaderLogEventC13HomeKitDaemonEABycfc', 
+                       '_$sSo39HMDCameraSettingProactiveReaderLogEventCMa', '_$sSo39HMDHomeMatterServicesCoordinatorFactoryC13HomeKitDaemonEABycfC', 
                        '_$sSo39HMDHomeMatterServicesCoordinatorFactoryC13HomeKitDaemonEABycfc', 
                        '_$sSo39HMDHomeMatterServicesCoordinatorFactoryCMa', '_$sSo39HMDUserActivityReportCoordinatorFactoryC13HomeKitDaemonEABycfC', 
                        '_$sSo39HMDUserActivityReportCoordinatorFactoryC13HomeKitDaemonEABycfc', 
-                       '_$sSo39HMDUserActivityReportCoordinatorFactoryCMa', '_$sSo52HMDCleanEnergyAutomationConfigurationLogEventFactoryC13HomeKitDaemonEABycfC', 
-                       '_$sSo52HMDCleanEnergyAutomationConfigurationLogEventFactoryC13HomeKitDaemonEABycfc', 
-                       '_$sSo52HMDCleanEnergyAutomationConfigurationLogEventFactoryCMa', 
-                       '_$sSo61HMDAdaptiveTemperatureAutomationsConfigurationLogEventFactoryC13HomeKitDaemonEABycfC', 
+                       '_$sSo39HMDUserActivityReportCoordinatorFactoryCMa', '_$sSo61HMDAdaptiveTemperatureAutomationsConfigurationLogEventFactoryC13HomeKitDaemonEABycfC', 
                        '_$sSo61HMDAdaptiveTemperatureAutomationsConfigurationLogEventFactoryC13HomeKitDaemonEABycfc', 
                        '_$sSo61HMDAdaptiveTemperatureAutomationsConfigurationLogEventFactoryCMa', 
                        '_$sSo7HMDHomeC13HomeKitDaemonE22preflightCheckLogEvent17sessionIdentifier17accessoryCategory13fetchDuration20firstImportCompleted013hasMediaRouteJ00R15PairingIdentity0r9ConnectedH12RouterClient15isCloudSignedIn0R7Manatee0Z8IdsReady0Z9OwnerUser8homeUUIDSo07HMMHomegH0CSSSg_ASSdS8b10Foundation4UUIDVtF' ]
     objc-classes:    [ HMDACWGKeyManager, HMDAccountChangeObserver, HMDAccountMetadataFactory, 
                        HMDActionSetResponse, HMDAdaptiveTemperatureAutomationsConfigurationLogEventFactory, 
                        HMDAliroVersion, HMDAliroVersionUtilities, HMDCameraRecordingEventDailySummaryHouseholdLogEventFactory, 
-                       HMDCameraRecordingEventObserver, HMDCameraStreamManagerDataSource, 
-                       HMDCleanEnergyAutomationConfigurationLogEventFactory, HMDCommunicationTrustHandlerFactory, 
+                       HMDCameraRecordingEventObserver, HMDCameraSettingProactiveReaderLogEvent, 
+                       HMDCameraStreamManagerDataSource, HMDCommunicationTrustHandlerFactory, 
                        HMDDemoModeManagerFactory, HMDDiscoveryController, HMDFMFHandlerFactory, 
                        HMDHAPAccessoryDefaultDataSource, HMDHomeDefaultDataSource, 
-                       HMDHomeManagerXPCClientConnectionsManagerFactory, HMDHomeMatterServicesCoordinatorFactory, 
-                       HMDKeyPaths, HMDMainDriver, HMDMainDriverUtilities, HMDMatterCapabilitiesFactory, 
-                       HMDMobileAssetManagerFactory, HMDNetworkInfoController, HMDRegistry, 
-                       HMDUserActivityReportCoordinatorFactory, HMDUserDefaultDataSource, 
-                       HomeIntelligenceActivityLogger, _TtC13HomeKitDaemon16HomeIntelligence, 
-                       _TtC13HomeKitDaemon27RestrictedGuestInfoLogEvent, _TtC13HomeKitDaemon28HMDRemoteConnectivityMonitor, 
-                       _TtC13HomeKitDaemon30RestrictedGuestFeatureLogEvent, _TtC13HomeKitDaemon35AddACWGKeysToExistingHomesOperation, 
+                       HMDHomeManagerDataSource, HMDHomeManagerXPCClientConnectionsManagerFactory, 
+                       HMDHomeMatterServicesCoordinatorFactory, HMDKeyPaths, HMDMainDriver, 
+                       HMDMainDriverUtilities, HMDMatterCapabilitiesFactory, HMDMobileAssetManagerFactory, 
+                       HMDNetworkInfoController, HMDRegistry, HMDUserActivityReportCoordinatorFactory, 
+                       HMDUserDefaultDataSource, HomeIntelligenceActivityLogger, 
+                       _TtC13HomeKitDaemon16HomeIntelligence, _TtC13HomeKitDaemon27RestrictedGuestInfoLogEvent, 
+                       _TtC13HomeKitDaemon28HMDRemoteConnectivityMonitor, _TtC13HomeKitDaemon30RestrictedGuestFeatureLogEvent, 
+                       _TtC13HomeKitDaemon35AddACWGKeysToExistingHomesOperation, 
                        _TtC13HomeKitDaemon40CameraRecordingEventDailySummaryLogEvent, 
                        _TtC13HomeKitDaemon7Account ]
 ...

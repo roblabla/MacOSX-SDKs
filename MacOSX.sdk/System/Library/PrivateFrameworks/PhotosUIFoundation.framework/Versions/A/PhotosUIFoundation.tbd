@@ -2,17 +2,18 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosUIFoundation.framework/Versions/A/PhotosUIFoundation'
-current-version: 801.43.240
+current-version: 811.0.106
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ GridZero, PhotosCloudRecommendations, PhotosPosterProvider, 
+    clients:         [ GridZero, PhotoLibrary, PhotosCloudRecommendations, PhotosPosterProvider, 
                        PhotosReliveWidget, PhotosSpatialMedia, PhotosSpatialMediaCore, 
                        PhotosSpatialMediaProtoApp, PhotosSwiftUICore, PhotosSwiftUICoreProtoApp, 
                        PhotosSwiftUICoreTests, PhotosTCCNotificationExtension, PhotosTests, 
-                       PhotosUI, PhotosUICore, PhotosUICoreProtoApp, PhotosUIEdit, 
-                       PhotosUIFoundationTests, PhotosUIPrivate, PhotosUITestClient-iOS, 
-                       PhotosUITests, ShareServicesCore, TVPhotos, Tungsten, _PhotosUI_WidgetKit ]
+                       PhotosUI, PhotosUIComponents, PhotosUICore, PhotosUICoreProtoApp, 
+                       PhotosUIEdit, PhotosUIFoundationTests, PhotosUIPrivate, PhotosUITestClient, 
+                       PhotosUITests, ShareServicesCore, TVPhotos, Tungsten, _PhotosUIPrivate_SwiftUI, 
+                       _PhotosUI_WidgetKit ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s10Identifier18PhotosUIFoundation0B4ItemPTl', '_$s10Identifier18PhotosUIFoundation0B5ModelPTl', 
@@ -305,7 +306,13 @@ exports:
                        '_$s18PhotosUIFoundation0A16SendableTransferVyACyxGxcfC', 
                        '_$s18PhotosUIFoundation0A17AnalyticsProviderMp', '_$s18PhotosUIFoundation0A17AnalyticsProviderP20analyticsDescriptionSSSgvgTj', 
                        '_$s18PhotosUIFoundation0A17AnalyticsProviderP20analyticsDescriptionSSSgvgTq', 
-                       '_$s18PhotosUIFoundation0A17AnalyticsProviderTL', '_$s18PhotosUIFoundation0A17EnvironmentValuesV04takeD04fromyAC_tF', 
+                       '_$s18PhotosUIFoundation0A17AnalyticsProviderTL', '_$s18PhotosUIFoundation0A17EnvironmentActionC7performyyFTj', 
+                       '_$s18PhotosUIFoundation0A17EnvironmentActionC7performyyFTq', 
+                       '_$s18PhotosUIFoundation0A17EnvironmentActionCMa', '_$s18PhotosUIFoundation0A17EnvironmentActionCMm', 
+                       '_$s18PhotosUIFoundation0A17EnvironmentActionCMn', '_$s18PhotosUIFoundation0A17EnvironmentActionCMo', 
+                       '_$s18PhotosUIFoundation0A17EnvironmentActionCMu', '_$s18PhotosUIFoundation0A17EnvironmentActionCN', 
+                       '_$s18PhotosUIFoundation0A17EnvironmentActionCfD', '_$s18PhotosUIFoundation0A17EnvironmentActionCfd', 
+                       '_$s18PhotosUIFoundation0A17EnvironmentValuesV04takeD04fromyAC_tF', 
                        '_$s18PhotosUIFoundation0A17EnvironmentValuesV20collectionTitleModelAA0a10CollectionfG0_pSgvM', 
                        '_$s18PhotosUIFoundation0A17EnvironmentValuesV20collectionTitleModelAA0a10CollectionfG0_pSgvg', 
                        '_$s18PhotosUIFoundation0A17EnvironmentValuesV20collectionTitleModelAA0a10CollectionfG0_pSgvpMV', 
@@ -1517,6 +1524,8 @@ exports:
                        '_$s5Value18PhotosUIFoundation0B4ItemPTl', '_$s6Object18PhotosUIFoundation0bA9ReferencePTl', 
                        '_$s6Target18PhotosUIFoundation22ObservingUpdaterEntityPTl', 
                        '_$s7Overlay18PhotosUIFoundation0b10FullscreenA10ControllerPTl', 
+                       '_$s7SwiftUI4ViewP18PhotosUIFoundationE23photosEnvironmentAction_5blockQrqd___yycts15WritableKeyPathCyAA0G6ValuesVAD0dgH0CSgGRbd__lF', 
+                       '_$s7SwiftUI4ViewP18PhotosUIFoundationE23photosEnvironmentAction_5blockQrqd___yycts15WritableKeyPathCyAA0G6ValuesVAD0dgH0CSgGRbd__lFQOMQ', 
                        '_$s8ItemList18PhotosUIFoundation0caB7ManagerPTl', '_$sSB18PhotosUIFoundationE10px_easeOutxvg', 
                        '_$sSB18PhotosUIFoundationE10px_easeOutxvpMV', '_$sSB18PhotosUIFoundationE11px_saturatexvg', 
                        '_$sSB18PhotosUIFoundationE11px_saturatexvpMV', '_$sSB18PhotosUIFoundationE16px_easeInEaseOutxvg', 
@@ -1736,6 +1745,7 @@ exports:
                        '_$sSo7CGPointV18PhotosUIFoundationE9nilIfNullABSgvg', '_$sSo7CGPointV18PhotosUIFoundationE9nilIfNullABSgvpMV', 
                        '_$sSo7CGPointV18PhotosUIFoundationE9px_length12CoreGraphics7CGFloatVvg', 
                        '_$sSo7CGPointV18PhotosUIFoundationE9px_length12CoreGraphics7CGFloatVvpMV', 
+                       '_$sSo7NSErrorC18PhotosUIFoundationE15px_genericError16debugDescriptionABSS_tFZ', 
                        '_$sSo7PXEdgesV18PhotosUIFoundationE3for4axisABSo6PXAxisV_tFZ', 
                        '_$sSo9OS_os_logC18PhotosUIFoundationE10footerViewABvgZ', 
                        '_$sSu18PhotosUIFoundation15SettingsCodableAAMc', '_$sSu18PhotosUIFoundation15SettingsCodableAAWP', 
@@ -1776,7 +1786,7 @@ exports:
                        _PXAssetActionTypeClearRecentlyViewed, _PXAssetActionTypeCompositeVideo, 
                        _PXAssetActionTypeCopy, _PXAssetActionTypeCopyAdjustments, 
                        _PXAssetActionTypeCopyAdjustmentsSkippingOptions, _PXAssetActionTypeDelete, 
-                       _PXAssetActionTypeDuplicate, _PXAssetActionTypeEditAudioMixMode, 
+                       _PXAssetActionTypeDuplicate, _PXAssetActionTypeEdit, _PXAssetActionTypeEditAudioMixMode, 
                        _PXAssetActionTypeEditDateTime, _PXAssetActionTypeEditDisableAutoEnhance, 
                        _PXAssetActionTypeEditEnableAutoEnhance, _PXAssetActionTypeEditLocation, 
                        _PXAssetActionTypeEditPlaybackRate, _PXAssetActionTypeEditRotateLeft, 
@@ -1854,16 +1864,16 @@ exports:
                        _PXBarItemIdentifierActionMenu, _PXBarItemIdentifierAdd, _PXBarItemIdentifierAddTo, 
                        _PXBarItemIdentifierAddToLibrary, _PXBarItemIdentifierButtonEndSpacing, 
                        _PXBarItemIdentifierCancel, _PXBarItemIdentifierCancelSelect, 
-                       _PXBarItemIdentifierContentSyndicationSaveAll, _PXBarItemIdentifierDelete, 
-                       _PXBarItemIdentifierDeselectAll, _PXBarItemIdentifierDismiss, 
-                       _PXBarItemIdentifierDone, _PXBarItemIdentifierEdit, _PXBarItemIdentifierExplicitBack, 
-                       _PXBarItemIdentifierFavorite, _PXBarItemIdentifierFileRadar, 
-                       _PXBarItemIdentifierInfo, _PXBarItemIdentifierInterButtonSpacing, 
+                       _PXBarItemIdentifierClose, _PXBarItemIdentifierContentSyndicationSaveAll, 
+                       _PXBarItemIdentifierDelete, _PXBarItemIdentifierDeselectAll, 
+                       _PXBarItemIdentifierDismiss, _PXBarItemIdentifierDone, _PXBarItemIdentifierEdit, 
+                       _PXBarItemIdentifierExplicitBack, _PXBarItemIdentifierFavorite, 
+                       _PXBarItemIdentifierFileRadar, _PXBarItemIdentifierInfo, _PXBarItemIdentifierInterButtonSpacing, 
                        _PXBarItemIdentifierMergeDuplicates, _PXBarItemIdentifierMoveToLibrary, 
                        _PXBarItemIdentifierMoveToPersonalLibrary, _PXBarItemIdentifierMoveToSharedLibrary, 
-                       _PXBarItemIdentifierPlaceholder, _PXBarItemIdentifierRecover, 
-                       _PXBarItemIdentifierReply, _PXBarItemIdentifierRestore, _PXBarItemIdentifierSearch, 
-                       _PXBarItemIdentifierSelect, _PXBarItemIdentifierSelectAll, 
+                       _PXBarItemIdentifierOpenInPhotosApp, _PXBarItemIdentifierPlaceholder, 
+                       _PXBarItemIdentifierRecover, _PXBarItemIdentifierReply, _PXBarItemIdentifierRestore, 
+                       _PXBarItemIdentifierSearch, _PXBarItemIdentifierSelect, _PXBarItemIdentifierSelectAll, 
                        _PXBarItemIdentifierSelectModeCaption, _PXBarItemIdentifierSelectModeMenu, 
                        _PXBarItemIdentifierShare, _PXBarItemIdentifierShowAll, _PXBarItemIdentifierShowCollaborationPopover, 
                        _PXBarItemIdentifierSlideshow, _PXBarItemIdentifierSortAndFilterMenu, 

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 1.0.49 -module-name FoundationModels -package-name com.apple.foundationmodels
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target x86_64-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 1.1.7 -module-name FoundationModels -package-name com.apple.foundationmodels
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 public import BackgroundAssets
 public import CoreGraphics
 public import Foundation
@@ -312,13 +312,13 @@ extension FoundationModels.GenerationGuide {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @_documentation(visibility: private) extension FoundationModels.GenerationGuide where Value == [Swift.Never] {
-  @_documentation(visibility: private) @_disfavoredOverload @_alwaysEmitIntoClient public static func minimumCount(_ count: Swift.Int) -> FoundationModels.GenerationGuide<Value> {
+  @_documentation(visibility: private) @_alwaysEmitIntoClient public static func minimumCount(_ count: Swift.Int) -> FoundationModels.GenerationGuide<Value> {
     fatalError("GenerationGuide<[Never]>.\(#function) should not be called.")
   }
-  @_documentation(visibility: private) @_disfavoredOverload @_alwaysEmitIntoClient public static func maximumCount(_ count: Swift.Int) -> FoundationModels.GenerationGuide<Value> {
+  @_documentation(visibility: private) @_alwaysEmitIntoClient public static func maximumCount(_ count: Swift.Int) -> FoundationModels.GenerationGuide<Value> {
     fatalError("GenerationGuide<[Never]>.\(#function) should not be called.")
   }
-  @_documentation(visibility: private) @_disfavoredOverload @_alwaysEmitIntoClient public static func count(_ range: Swift.ClosedRange<Swift.Int>) -> FoundationModels.GenerationGuide<Value> {
+  @_documentation(visibility: private) @_alwaysEmitIntoClient public static func count(_ range: Swift.ClosedRange<Swift.Int>) -> FoundationModels.GenerationGuide<Value> {
     fatalError("GenerationGuide<[Never]>.\(#function) should not be called.")
   }
   @_documentation(visibility: private) @_disfavoredOverload @_alwaysEmitIntoClient public static func count(_ count: Swift.Int) -> FoundationModels.GenerationGuide<Value> {
@@ -1035,7 +1035,7 @@ extension FoundationModels.Transcript.Response : Swift.CustomStringConvertible {
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public struct Instructions {
+public struct Instructions : Swift.Sendable {
   public init(_ content: some InstructionsRepresentable)
   @usableFromInline
   internal init<each I>(_ components: repeat each I) where repeat each I : FoundationModels.InstructionsRepresentable
@@ -1468,6 +1468,50 @@ extension FoundationModels.LanguageModelSession {
   @available(watchOS, unavailable)
   @discardableResult
   final public func logFeedbackAttachment(sentiment: FoundationModels.LanguageModelFeedback.Sentiment?, issues: [FoundationModels.LanguageModelFeedback.Issue] = [], desiredOutput: FoundationModels.Transcript.Entry? = nil) -> Foundation.Data
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
+  @backDeployed(before: iOS 26.1, macOS 26.1, visionOS 26.1)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @discardableResult
+  final public func logFeedbackAttachment(sentiment: FoundationModels.LanguageModelFeedback.Sentiment?, issues: [FoundationModels.LanguageModelFeedback.Issue] = [], desiredResponseText: Swift.String?) -> Foundation.Data {
+    let entry = desiredResponseText.map { content in
+      let text = Transcript.TextSegment(content: content)
+      let segment = Transcript.Segment.text(text)
+      let response = Transcript.Response(assetIDs: [], segments: [segment])
+      let entry = Transcript.Entry.response(response)
+      return entry
+    }
+    return logFeedbackAttachment(
+      sentiment: sentiment,
+      issues: issues,
+      desiredOutput: entry
+    )
+  }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
+  @backDeployed(before: iOS 26.1, macOS 26.1, visionOS 26.1)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @discardableResult
+  final public func logFeedbackAttachment(sentiment: FoundationModels.LanguageModelFeedback.Sentiment?, issues: [FoundationModels.LanguageModelFeedback.Issue] = [], desiredResponseContent: (any FoundationModels.ConvertibleToGeneratedContent)?) -> Foundation.Data {
+    let entry = desiredResponseContent.map { desiredContent in
+      let source = String(describing: type(of: desiredResponseContent))
+      let content = desiredContent.generatedContent
+      let structure = Transcript.StructuredSegment(source: source, content: content)
+      let segment = Transcript.Segment.structure(structure)
+      let response = Transcript.Response(assetIDs: [], segments: [segment])
+      let entry = Transcript.Entry.response(response)
+      return entry
+    }
+    return logFeedbackAttachment(
+      sentiment: sentiment,
+      issues: issues,
+      desiredOutput: entry
+    )
+  }
   #endif
 }
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)

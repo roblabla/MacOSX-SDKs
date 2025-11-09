@@ -1003,6 +1003,8 @@ Globals:
   SwiftName: mp4
 - Name: AVFileTypeMPEGLayer3
   SwiftName: mp3
+- Name: AVFileTypeQuickTimeAudio
+  SwiftName: qta
 - Name: AVFileTypeQuickTimeMovie
   SwiftName: mov
 - Name: AVFileTypeSunAU

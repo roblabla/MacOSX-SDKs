@@ -45,9 +45,9 @@ exports:
                        _MCMMigrationLastBuildInfoKey, _MCMMigrationTypeACLMigration, 
                        _MCMMigrationTypeBundleMigration, _MCMMigrationTypeCodeSigningMigration, 
                        _MCMMigrationTypeDaemonContainerCleaning, _MCMMigrationTypeDeleteManifestLocationChange, 
-                       _MCMMigrationTypeGroupIdMigration, _MCMUserMigrationTypeSubdirectoryMigration, 
-                       __containermanagerd_main, _containermanager_copy_global_configuration, 
-                       _containermanager_set_global_configuration ]
+                       _MCMMigrationTypeGroupIdMigration, _MCMUserMigrationTypeRepairTmpDir, 
+                       _MCMUserMigrationTypeSubdirectoryMigration, __containermanagerd_main, 
+                       _containermanager_copy_global_configuration, _containermanager_set_global_configuration ]
     objc-classes:    [ MCMAnalytics, MCMCommandAuthorize, MCMEntitlementAccess, MCMEntitlementLookup, 
                        MCMGlobalConfiguration, MCMMigrationStatus, MCMPOSIXUser, 
                        MCMSandboxExtension, MCMStaticConfiguration ]

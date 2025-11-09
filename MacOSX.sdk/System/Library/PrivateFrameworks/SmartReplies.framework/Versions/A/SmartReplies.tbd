@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SmartReplies.framework/Versions/A/SmartReplies'
-current-version: 116.3
+current-version: 116.7.5
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -140,6 +140,10 @@ exports:
                        '_$s12SmartReplies07SRSmartB14ActionMetadataC07hasRichD4TypeSbvpMV', 
                        '_$s12SmartReplies07SRSmartB14ActionMetadataC11attributionSSSgvg', 
                        '_$s12SmartReplies07SRSmartB14ActionMetadataC11attributionSSSgvpMV', 
+                       '_$s12SmartReplies07SRSmartB14ActionMetadataC12currencyCodeSSSgvg', 
+                       '_$s12SmartReplies07SRSmartB14ActionMetadataC12currencyCodeSSSgvpMV', 
+                       '_$s12SmartReplies07SRSmartB14ActionMetadataC14currencyAmountSdvg', 
+                       '_$s12SmartReplies07SRSmartB14ActionMetadataC14currencyAmountSdvpMV', 
                        '_$s12SmartReplies07SRSmartB14ActionMetadataC16locationLatitudeSdvg', 
                        '_$s12SmartReplies07SRSmartB14ActionMetadataC16locationLatitudeSdvpMV', 
                        '_$s12SmartReplies07SRSmartB14ActionMetadataC17attributionSourceAA0cbd11AttributionG0Ovg', 
@@ -156,10 +160,10 @@ exports:
                        '_$s12SmartReplies07SRSmartB14ActionMetadataC4copy4withyp10ObjectiveC6NSZoneVSg_tFTq', 
                        '_$s12SmartReplies07SRSmartB14ActionMetadataC4date10Foundation4DateVvg', 
                        '_$s12SmartReplies07SRSmartB14ActionMetadataC4date10Foundation4DateVvpMV', 
-                       '_$s12SmartReplies07SRSmartB14ActionMetadataC4type5title11attribution20stringRepresentation4date07hasRichD4Type3url16locationLatitude0P9Longitude9imageName0H6SourceAcA0cbdN0O_SSSgA2Q10Foundation4DateVSbAR3URLVSgS2dAqA0cbd11AttributionU0OtcfC', 
-                       '_$s12SmartReplies07SRSmartB14ActionMetadataC4type5title11attribution20stringRepresentation4date07hasRichD4Type3url16locationLatitude0P9Longitude9imageName0H6SourceAcA0cbdN0O_SSSgA2Q10Foundation4DateVSbAR3URLVSgS2dAqA0cbd11AttributionU0OtcfCTj', 
-                       '_$s12SmartReplies07SRSmartB14ActionMetadataC4type5title11attribution20stringRepresentation4date07hasRichD4Type3url16locationLatitude0P9Longitude9imageName0H6SourceAcA0cbdN0O_SSSgA2Q10Foundation4DateVSbAR3URLVSgS2dAqA0cbd11AttributionU0OtcfCTq', 
-                       '_$s12SmartReplies07SRSmartB14ActionMetadataC4type5title11attribution20stringRepresentation4date07hasRichD4Type3url16locationLatitude0P9Longitude9imageName0H6SourceAcA0cbdN0O_SSSgA2Q10Foundation4DateVSbAR3URLVSgS2dAqA0cbd11AttributionU0Otcfc', 
+                       '_$s12SmartReplies07SRSmartB14ActionMetadataC4type5title11attribution20stringRepresentation4date07hasRichD4Type3url16locationLatitude0P9Longitude9imageName0H6Source14currencyAmount0V4CodeAcA0cbdN0O_SSSgA2S10Foundation4DateVSbAT3URLVSgS2dAsA0cbd11AttributionU0OSdAStcfC', 
+                       '_$s12SmartReplies07SRSmartB14ActionMetadataC4type5title11attribution20stringRepresentation4date07hasRichD4Type3url16locationLatitude0P9Longitude9imageName0H6Source14currencyAmount0V4CodeAcA0cbdN0O_SSSgA2S10Foundation4DateVSbAT3URLVSgS2dAsA0cbd11AttributionU0OSdAStcfCTj', 
+                       '_$s12SmartReplies07SRSmartB14ActionMetadataC4type5title11attribution20stringRepresentation4date07hasRichD4Type3url16locationLatitude0P9Longitude9imageName0H6Source14currencyAmount0V4CodeAcA0cbdN0O_SSSgA2S10Foundation4DateVSbAT3URLVSgS2dAsA0cbd11AttributionU0OSdAStcfCTq', 
+                       '_$s12SmartReplies07SRSmartB14ActionMetadataC4type5title11attribution20stringRepresentation4date07hasRichD4Type3url16locationLatitude0P9Longitude9imageName0H6Source14currencyAmount0V4CodeAcA0cbdN0O_SSSgA2S10Foundation4DateVSbAT3URLVSgS2dAsA0cbd11AttributionU0OSdAStcfc', 
                        '_$s12SmartReplies07SRSmartB14ActionMetadataC4typeAA0cbD4TypeOvg', 
                        '_$s12SmartReplies07SRSmartB14ActionMetadataC4typeAA0cbD4TypeOvpMV', 
                        '_$s12SmartReplies07SRSmartB14ActionMetadataC5coderACSgSo7NSCoderC_tcfC', 
@@ -374,9 +378,9 @@ exports:
                        '_$s12SmartReplies07SRSmartB24ActionMetadataControllerC023responseKitAttributesToD4Info3forAA0cbdK0VSDySSypG_tFTq', 
                        '_$s12SmartReplies07SRSmartB24ActionMetadataControllerC6sharedACvgZ', 
                        '_$s12SmartReplies07SRSmartB24ActionMetadataControllerC6sharedACvpZMV', 
-                       '_$s12SmartReplies07SRSmartB24ActionMetadataControllerC8metadata3for10actionTypeAA0cbdE0CSgAA0cB17SuggestionRequestC_AA0cbdJ0OtYaFTj', 
-                       '_$s12SmartReplies07SRSmartB24ActionMetadataControllerC8metadata3for10actionTypeAA0cbdE0CSgAA0cB17SuggestionRequestC_AA0cbdJ0OtYaFTjTu', 
-                       '_$s12SmartReplies07SRSmartB24ActionMetadataControllerC8metadata3for10actionTypeAA0cbdE0CSgAA0cB17SuggestionRequestC_AA0cbdJ0OtYaFTq', 
+                       '_$s12SmartReplies07SRSmartB24ActionMetadataControllerC8metadata3for10actionType0I3POVAA0cbdE0CSgAA0cB17SuggestionRequestC_AA0cbdJ0OAA0cbD11PointOfViewOtYaFTj', 
+                       '_$s12SmartReplies07SRSmartB24ActionMetadataControllerC8metadata3for10actionType0I3POVAA0cbdE0CSgAA0cB17SuggestionRequestC_AA0cbdJ0OAA0cbD11PointOfViewOtYaFTjTu', 
+                       '_$s12SmartReplies07SRSmartB24ActionMetadataControllerC8metadata3for10actionType0I3POVAA0cbdE0CSgAA0cB17SuggestionRequestC_AA0cbdJ0OAA0cbD11PointOfViewOtYaFTq', 
                        '_$s12SmartReplies07SRSmartB24ActionMetadataControllerCMa', 
                        '_$s12SmartReplies07SRSmartB24ActionMetadataControllerCMm', 
                        '_$s12SmartReplies07SRSmartB24ActionMetadataControllerCMn', 

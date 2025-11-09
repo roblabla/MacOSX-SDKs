@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PlatformSSOUI.framework/Versions/A/PlatformSSOUI'
-current-version: 483.1.1
+current-version: 483.40.14
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     objc-classes:    [ POAgentWindow, POAgentWindowController, POBuddyAuthenticationViewController, 

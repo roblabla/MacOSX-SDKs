@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox'
-current-version: 1246.1
+current-version: 1247.3
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        Carbon
@@ -367,14 +367,15 @@ exports:
                        __IsSymbolicHotKeyEvent, __LoadPerformanceMenu, __MenuIterCreate, 
                        __MenuIterFirst, __MenuIterNext, __MenuIterRelease, __NotifyEventLoopObservers, 
                        __OpenMenuWithOptions, __OpenSubmenuFromItem, __OpenSubmenuFromItemWithOptions, 
-                       __PostCGEventToQueue, __PushMouseCoalescingState, __QuitAppModalLoop, 
-                       __ReactivateTSMDocumentAfterMenuTracking, __RegisterSharedDockClientWithRunLoop, 
-                       __RemoveCGEventFromQueue, __RemoveCGSSourceFromRunLoop, __RemoveEventLoopObserver, 
-                       __RemoveMouseCoalescingState, __RequestBackgroundMouseMovedEvents, 
-                       __RunAppModalLoop, __SetAppleMenuEnabled, __SetAppleMenuInstallerMode, 
-                       __SetAutomaticCGEventConversionEnabled, __SetBaroloFullScreenModeUIMode, 
-                       __SetCGEventAssociatedData, __SetCGEventQueueEnqueueSignalBlock, 
-                       __SetDefaultMenuFont, __SetEventQueueEnqueueSignalBlock, __SetFullTabbingEnabled, 
+                       __PostCGEventToQueue, __ProcessCanReceiveCGSEvents, __PushMouseCoalescingState, 
+                       __QuitAppModalLoop, __ReactivateTSMDocumentAfterMenuTracking, 
+                       __RegisterSharedDockClientWithRunLoop, __RemoveCGEventFromQueue, 
+                       __RemoveCGSSourceFromRunLoop, __RemoveEventLoopObserver, __RemoveMouseCoalescingState, 
+                       __RequestBackgroundMouseMovedEvents, __RunAppModalLoop, __SetAppleMenuEnabled, 
+                       __SetAppleMenuInstallerMode, __SetAutomaticCGEventConversionEnabled, 
+                       __SetBaroloFullScreenModeUIMode, __SetCGEventAssociatedData, 
+                       __SetCGEventQueueEnqueueSignalBlock, __SetDefaultMenuFont, 
+                       __SetEventQueueEnqueueSignalBlock, __SetFullTabbingEnabled, 
                        __SetJavaThreadHook, __SetMenuCallout, __SetMenuItemIconSize, 
                        __SetMenuMinimumWidth, __SetMenuTrackingShouldReraiseNSExceptions, 
                        __SetMenuWindowLevel, __SetOpenMenuOrigin, __SetReceiveNextEventDrainsEventQueue, 

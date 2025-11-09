@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LocalAuthenticationCoreUI.framework/Versions/A/LocalAuthenticationCoreUI'
-current-version: 2005.0.61
+current-version: 2005.40.35
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -11,15 +11,14 @@ allowable-clients:
                        LocalAuthenticationBinTests, LocalAuthenticationCoreTests, 
                        LocalAuthenticationCoreUI, LocalAuthenticationCoreUITests, 
                        LocalAuthenticationCredentialServicesTests, LocalAuthenticationEmbeddedUI, 
-                       LocalAuthenticationInterfaceTests, LocalAuthenticationPreboard, 
-                       LocalAuthenticationPreboardTests, LocalAuthenticationPrivateUI, 
-                       LocalAuthenticationRecoveryUI, LocalAuthenticationRemoteService, 
-                       LocalAuthenticationTestSupport, LocalAuthenticationTests, 
-                       LocalAuthenticationUI, LocalAuthenticationUIService, LocalAuthenticationUserTests, 
-                       LocalAuthorizationTests, MechOyster, MechPasscode, MechPearl, 
-                       MechPushButton, MechTouchId, MechWatch, MechanismBase, ModuleACM, 
-                       ModuleBase, SecurityAgentPlugin, SharedUtils, coreautha, coreauthd, 
-                       latool ]
+                       LocalAuthenticationPreboard, LocalAuthenticationPreboardTests, 
+                       LocalAuthenticationPrivateUI, LocalAuthenticationRecoveryUI, 
+                       LocalAuthenticationRemoteService, LocalAuthenticationTestSupport, 
+                       LocalAuthenticationTests, LocalAuthenticationUI, LocalAuthenticationUIService, 
+                       LocalAuthenticationUserTests, LocalAuthorizationTests, MechOyster, 
+                       MechPasscode, MechPearl, MechPushButton, MechTouchId, MechWatch, 
+                       MechanismBase, ModuleACM, ModuleBase, SecurityAgentPlugin, 
+                       SharedUtils, coreautha, coreauthd, latool ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s21DeveloperToolsSupport13ImageResourceV25LocalAuthenticationCoreUIE11touchIDGrayACvau', 
@@ -487,9 +486,10 @@ exports:
                        _LACUIAxIdentifierAuthenticationAlert, _LACUIAxIdentifierAuthenticationButtonCancel, 
                        _LACUIAxIdentifierAuthenticationButtonFallback, _LACUIAxIdentifierAuthenticationButtonLearnMore, 
                        _LACUIAxIdentifierAuthenticationButtonOK, _LACUIAxIdentifierAuthenticationButtonTryAgain, 
-                       _LACUIImageNamed, _LACUIImageWithIcon, _LACUILayerFindSublayerWithName, 
-                       _LACUILayerScaleDirectDescendants, _LACUILayerScaleToFitInRect, 
-                       _LACUILockViewStateNameFromState, _LACUIPackagedViewStateAnimationOptionsDefaultMaxDuration, 
+                       _LACUIAxIdentifierAuthenticationSheet, _LACUIImageNamed, _LACUIImageWithIcon, 
+                       _LACUILayerFindSublayerWithName, _LACUILayerScaleDirectDescendants, 
+                       _LACUILayerScaleToFitInRect, _LACUILockViewStateNameFromState, 
+                       _LACUIPackagedViewStateAnimationOptionsDefaultMaxDuration, 
                        _LACUIUseAlwaysOnPasswordField, _NSStringFromLACUIAuthenticatorServiceConfigurationRequirement, 
                        _NSStringFromLACUIAuthorizationViewMode, _NSStringFromLACUIAuthorizationViewStyle, 
                        _NSStringFromLACUILockViewState, _kLACUIAuthenticationSheetHelperAHPDefaultTimeout ]

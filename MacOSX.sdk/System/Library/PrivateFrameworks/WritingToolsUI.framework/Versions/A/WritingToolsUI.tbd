@@ -19,6 +19,7 @@ exports:
                        '_$s14WritingToolsUI27FeedbackConfigurationHelperCMa', '_$s14WritingToolsUI27FeedbackConfigurationHelperCMn', 
                        '_$s14WritingToolsUI27FeedbackConfigurationHelperCMo', '_$s14WritingToolsUI27FeedbackConfigurationHelperCMu', 
                        '_$s14WritingToolsUI27FeedbackConfigurationHelperCN', '_$s14WritingToolsUI27FeedbackConfigurationHelperCfD', 
+                       '_$sSo18NSAttributedStringC14WritingToolsUIE011rtfDataWithcD6Marker10Foundation0G0VSgyF', 
                        _WTIATextAssistantLog, _WTIAWritingToolsLog, _WTInputAnalyticsLog, 
                        _WritingToolsUIVersionNumber, _WritingToolsUIVersionString, 
                        __WTSizingLog, __WTVCLog, __performSyncOnMain, _getIAPayloadKeyWritingToolsIsEditable, 

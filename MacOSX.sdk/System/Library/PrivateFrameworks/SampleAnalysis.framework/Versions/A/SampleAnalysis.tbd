@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SampleAnalysis.framework/Versions/A/SampleAnalysis'
-current-version: 412
+current-version: 413
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -22,9 +22,9 @@ exports:
                        SADependencyGraphNode, SADependencyGraphTaskNode, SADispatchQueue, 
                        SADispatchQueueState, SAExclave, SAExecutableCallTree, SAFanSpeed, 
                        SAFrame, SAHIDEvent, SAHIDStep, SAIOEvent, SAInstruction, 
-                       SAKPerfTrigger, SAKernelCache, SAMSTypeStats, SAMemoryPressureEvent, 
-                       SAMicrostackshotInfo, SAMicrostackshotStatistics, SAModel, 
-                       SAModelExecution, SAModelLoadedChange, SANANDGarbageCollectionEvent, 
+                       SAKPerfTrigger, SAKernelCache, SALostPerfEvent, SAMSTypeStats, 
+                       SAMemoryPressureEvent, SAMicrostackshotInfo, SAMicrostackshotStatistics, 
+                       SAModel, SAModelExecution, SAModelLoadedChange, SANANDGarbageCollectionEvent, 
                        SAPowerModeTransition, SASamplePrintOptions, SASamplePrinter, 
                        SASampleStore, SASegment, SASharedCache, SASourceInfo, SASwiftTask, 
                        SASwiftTaskState, SASymbol, SATask, SATaskCallTree, SATaskState, 

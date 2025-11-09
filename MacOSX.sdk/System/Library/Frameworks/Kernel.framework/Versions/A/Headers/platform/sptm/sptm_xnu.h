@@ -89,6 +89,8 @@
 #define SPTM_FUNCTIONID_BATCH_SIGN_USER_POINTER  40
 #define SPTM_FUNCTIONID_SURT_ALLOC               41
 #define SPTM_FUNCTIONID_SURT_FREE                42
+#define SPTM_FUNCTIONID_SPTM_SERIAL_PUTC         43
+#define SPTM_FUNCTIONID_SPTM_SERIAL_DISABLE      44
 
 #ifndef __ASSEMBLER__
 
@@ -712,6 +714,26 @@ void sptm_surt_free(sptm_paddr_t surt_frame, uint8_t surt_index);
 #else
 void sptm_surt_free(sptm_surt_frame_u surt_frame_U, sptm_surt_index_u surt_index_U);
 #endif
+
+/**
+ * Output a character onto the dockchannel interface.
+ *
+ * @note This function is meant to be used only for XNU early panics and not to be used
+ *       for any other usecases including for normal printf. It is disabled after XNU
+ *       serial initialization.
+ *
+ * @param c The character to output.
+ */
+void sptm_serial_putc(uint8_t c);
+
+/**
+ * Disables the use of the serial interface.
+ *
+ * @note This function is called right after serial_init() in XNU since
+ *       the serial_init() can itself panic in various cases such as user error
+ *       setting bad value for `serial-device` or `serial-device-name` boot-args.
+ */
+void sptm_serial_disable(void);
 
 /**
  * Flags within the "mask" field used when updating already existing mappings.
@@ -1779,6 +1801,29 @@ uint64_t sptm_sysctl(sptm_sysctl_selector_u selector_U, sptm_sysctl_op_u op_U, u
 #endif /* HAS_SPTM_SYSCTL */
 
 /**
+ * An X-macro list of all the SPTM event counters.
+ *
+ * Recall that the X-macro metaprogramming pattern is used to generate code from
+ * a list of elements. This particular X-macro makes it easy to, for example,
+ * generate sysctl accessors for the SPTM event counters on the XNU side.
+ */
+#define FOREACH_SPTM_EVENT_COUNTER(DO)                                                    \
+	DO(RETYPES, "Number of retype operations")                                            \
+	DO(SWWA_TLBI_ASID, "Number of extra SWWA OSH TLBI ASIDs (for rdar://154685324)")      \
+	DO(SWWA_TLBI_ALL, "Number of extra SWWA OSH TLBI ALLs (for rdar://154685324)")        \
+	DO(UAT_UNMAP_PROCESSED,                                                               \
+	    "Number of pages processed by the UAT unmapping function (for rdar://154685324)") \
+	DO(UAT_UNMAP_MARKED,                                                                  \
+	    "Number of pages marked by the UAT unmapping function (for rdar://154685324)")    \
+	DO(UAT_UNMAP_UNMARKED,                                                                \
+	    "Number of pages not marked by the UAT unmapping function (for rdar://154685324)")
+
+/**
+ * Maps an SPTM event counter to its `sptm_get_info()` enum value.
+ */
+#define SPTM_EVENT_COUNTER_TO_ENUM(event_counter) INFO_SPTM_EVNT_CNTR_ ## event_counter
+
+/**
  * Values that can be passed to sptm_get_info() to retrieve the corresponding
  * information from SPTM.
  */
@@ -1832,6 +1877,18 @@ __enum_closed_decl(sptm_info_t,
          * pointer type: `unsigned int`
          */
         INFO_SPTM_IO_RANGES_COUNT,
+
+/* X-macro to generate an enum value for each SPTM event counter. */
+#define GENERATE_SPTM_EVNT_CNTR_ENUM_VALUE(event_counter, description) \
+	SPTM_EVENT_COUNTER_TO_ENUM(event_counter),
+
+        /**
+         * These enum values are used to retrieve the SPTM event counters.
+         *
+         * arg: `uint64_t` logical CPU ID
+         * pointer type: `uint64_t`
+         */
+        FOREACH_SPTM_EVENT_COUNTER(GENERATE_SPTM_EVNT_CNTR_ENUM_VALUE)
 
         /**
          * Placeholder value indicating the current number of supported info,
@@ -1975,4 +2032,17 @@ libsptm_error_t sptm_copy_callee_saved_state(uint64_t sptm_logical_cpu_id,
  *         LIBSPTM_FAILURE if the requested SPTM info is invalid.
  */
 libsptm_error_t sptm_get_info(sptm_info_t info, uint64_t arg, void *output);
+
+/**
+ * Returns whether the given frame type is ECC retireable.
+ *
+ * @param type SPTM frame type to check.
+ * @param is_ecc_retireable Pointer to a boolean that will be set to true if the
+ *                          frame type is ECC retireable, false otherwise.
+ *
+ * @return LIBSPTM_SUCCESS if the `is_ecc_retireable` pointer is successfully set.
+ *         LIBSPTM_INVALID_ARG if the input frame type is invalid or the
+ *         `is_ecc_retireable` pointer is NULL.
+ */
+libsptm_error_t sptm_type_is_ecc_retireable(sptm_frame_type_t type, bool *is_ecc_retireable);
 #endif /* __ASSEMBLER__ */

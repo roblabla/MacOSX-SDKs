@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/LanguageModeling.framework/Versions/A/LanguageModeling'
-current-version: 431
+current-version: 432
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN5boost10wrapexceptINS_17bad_function_callEEE, __ZTIN5boost16exception_detail10clone_baseE, 
@@ -159,6 +159,8 @@ exports:
                        __ZN17language_modeling2v120LanguageModelSession25supportsPrefixCompletionsEv, 
                        __ZN17language_modeling2v120LanguageModelSession27setDynamicResourceDirectoryERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN17language_modeling2v120LanguageModelSession30removeDynamicResourceDirectoryEv, 
+                       __ZN17language_modeling2v120LanguageModelSession32attachToDynamicResourceDirectoryERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
+                       __ZN17language_modeling2v120LanguageModelSession34detachFromDynamicResourceDirectoryEv, 
                        __ZN17language_modeling2v120LanguageModelSession38supportsNormalizedNameTokenProbabilityEv, 
                        __ZN17language_modeling2v120LanguageModelSession41normalizedNameTokenConditionalProbabilityERKNSt3__16vectorINS3_INS0_5TokenENS2_9allocatorIS4_EEEENS5_IS7_EEEERKNS3_INS3_INS0_13TokenMetadataENS5_ISC_EEEENS5_ISE_EEEERKNS0_17LinguisticContextE, 
                        __ZN17language_modeling2v120LanguageModelSession44supportsFragmentsBasedConditionalProbabilityEv, 

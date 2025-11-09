@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Tungsten.framework/Versions/A/Tungsten'
-current-version: 801.43.240
+current-version: 811.0.106
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -222,6 +222,10 @@ exports:
                        '_$s8Tungsten0A8SettingsC34shouldShowBoundariesOfTextTexturesSbvg', 
                        '_$s8Tungsten0A8SettingsC34shouldShowBoundariesOfTextTexturesSbvpMV', 
                        '_$s8Tungsten0A8SettingsC34shouldShowBoundariesOfTextTexturesSbvs', 
+                       '_$s8Tungsten0A8SettingsC35enablePanicOnCommandBufferPageFaultSbvM', 
+                       '_$s8Tungsten0A8SettingsC35enablePanicOnCommandBufferPageFaultSbvg', 
+                       '_$s8Tungsten0A8SettingsC35enablePanicOnCommandBufferPageFaultSbvpMV', 
+                       '_$s8Tungsten0A8SettingsC35enablePanicOnCommandBufferPageFaultSbvs', 
                        '_$s8Tungsten0A8SettingsC35enableRectDiagnosticsForPathSpritesSbvg', 
                        '_$s8Tungsten0A8SettingsC35enableRectDiagnosticsForPathSpritesSbvpMV', 
                        '_$s8Tungsten0A8SettingsC35enableRectDiagnosticsForTextSpritesSbvg', 
@@ -337,7 +341,8 @@ exports:
                        _PXGCreateIOSurface2DTexture, _PXGCreateMetalTexture, _PXGCreateMetalTextureFromBytesInCGImage, 
                        _PXGCreateMetalTextureFromIOSurface, _PXGCreateMetalTextureToRenderCIImage, 
                        _PXGCreateMetalTexturesFromIOSurface, _PXGCreateMetalTexturesFromPixelBuffer, 
-                       _PXGCreateResizableShadowImage, _PXGCreateTextureInfo, _PXGDampedSpringDOFParametersConfigure, 
+                       _PXGCreateResizableShadowImage, _PXGCreateSRGBColorFromDisplayP3Color, 
+                       _PXGCreateTextureInfo, _PXGDampedSpringDOFParametersConfigure, 
                        _PXGDampedSpringDOFParametersDescription, _PXGDampedSpringDOFParametersDoubleConfigure, 
                        _PXGDampedSpringDOFParametersDoubleDescription, _PXGDampedSpringDOFParametersDoubleUpdateForAdjustedPresentation, 
                        _PXGDampedSpringDOFParametersUpdateForAdjustedPresentation, 

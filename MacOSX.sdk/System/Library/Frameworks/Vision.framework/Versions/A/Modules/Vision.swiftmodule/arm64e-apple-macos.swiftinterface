@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target arm64e-apple-macos26.0 -target-variant arm64e-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 9.0.34 -module-name Vision
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target arm64e-apple-macos26.1 -target-variant arm64e-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 9.0.53 -module-name Vision
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 import AVFoundation
 import Accelerate
 import CoreFoundation
@@ -77,6 +77,7 @@ public struct GenerateObjectnessBasedSaliencyImageRequest : Vision.ImageProcessi
   public typealias Result = Vision.SaliencyImageObservation
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision2
+    public static func < (a: Vision.GenerateObjectnessBasedSaliencyImageRequest.Revision, b: Vision.GenerateObjectnessBasedSaliencyImageRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.GenerateObjectnessBasedSaliencyImageRequest.Revision, b: Vision.GenerateObjectnessBasedSaliencyImageRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -94,6 +95,9 @@ public struct GenerateObjectnessBasedSaliencyImageRequest : Vision.ImageProcessi
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.GenerateObjectnessBasedSaliencyImageRequest, b: Vision.GenerateObjectnessBasedSaliencyImageRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -283,6 +287,7 @@ public struct DetectAnimalBodyPoseRequest : Vision.ImageProcessingRequest {
   public typealias Result = [Vision.AnimalBodyPoseObservation]
   public enum Revision : Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable, Swift.Comparable {
     case revision1
+    public static func < (a: Vision.DetectAnimalBodyPoseRequest.Revision, b: Vision.DetectAnimalBodyPoseRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectAnimalBodyPoseRequest.Revision, b: Vision.DetectAnimalBodyPoseRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -306,6 +311,9 @@ public struct DetectAnimalBodyPoseRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.DetectAnimalBodyPoseRequest, b: Vision.DetectAnimalBodyPoseRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -346,6 +354,7 @@ public struct GenerateAttentionBasedSaliencyImageRequest : Vision.ImageProcessin
   public typealias Result = Vision.SaliencyImageObservation
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision2
+    public static func < (a: Vision.GenerateAttentionBasedSaliencyImageRequest.Revision, b: Vision.GenerateAttentionBasedSaliencyImageRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.GenerateAttentionBasedSaliencyImageRequest.Revision, b: Vision.GenerateAttentionBasedSaliencyImageRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -363,6 +372,9 @@ public struct GenerateAttentionBasedSaliencyImageRequest : Vision.ImageProcessin
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.GenerateAttentionBasedSaliencyImageRequest, b: Vision.GenerateAttentionBasedSaliencyImageRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -402,6 +414,7 @@ final public class TrackTranslationalImageRegistrationRequest : Vision.ImageProc
   public typealias Result = Vision.ImageTranslationAlignmentObservation
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.TrackTranslationalImageRegistrationRequest.Revision, b: Vision.TrackTranslationalImageRegistrationRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.TrackTranslationalImageRegistrationRequest.Revision, b: Vision.TrackTranslationalImageRegistrationRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -429,6 +442,9 @@ final public class TrackTranslationalImageRegistrationRequest : Vision.ImageProc
   final public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   @objc deinit
   final public var hashValue: Swift.Int {
     get
@@ -498,6 +514,7 @@ public struct DetectFaceCaptureQualityRequest : Vision.ImageProcessingRequest {
   public typealias Result = [Vision.FaceObservation]
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision3
+    public static func < (a: Vision.DetectFaceCaptureQualityRequest.Revision, b: Vision.DetectFaceCaptureQualityRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectFaceCaptureQualityRequest.Revision, b: Vision.DetectFaceCaptureQualityRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -516,6 +533,9 @@ public struct DetectFaceCaptureQualityRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.DetectFaceCaptureQualityRequest, b: Vision.DetectFaceCaptureQualityRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -527,6 +547,7 @@ final public class TrackObjectRequest : Vision.ImageProcessingRequest, Vision.St
   public typealias Result = Vision.DetectedObjectObservation?
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision2
+    public static func < (a: Vision.TrackObjectRequest.Revision, b: Vision.TrackObjectRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.TrackObjectRequest.Revision, b: Vision.TrackObjectRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -549,6 +570,9 @@ final public class TrackObjectRequest : Vision.ImageProcessingRequest, Vision.St
   final public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   @objc deinit
   final public var hashValue: Swift.Int {
     get
@@ -575,6 +599,7 @@ public struct GenerateImageFeaturePrintRequest : Vision.ImageProcessingRequest {
   public typealias Result = Vision.FeaturePrintObservation
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision2
+    public static func < (a: Vision.GenerateImageFeaturePrintRequest.Revision, b: Vision.GenerateImageFeaturePrintRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.GenerateImageFeaturePrintRequest.Revision, b: Vision.GenerateImageFeaturePrintRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -593,6 +618,9 @@ public struct GenerateImageFeaturePrintRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.GenerateImageFeaturePrintRequest, b: Vision.GenerateImageFeaturePrintRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -789,8 +817,17 @@ public struct HumanHandPoseObservation : Vision.VisionObservation, Vision.PosePr
   }
   public let chirality: Vision.HumanHandPoseObservation.Chirality?
   #if compiler(>=5.3) && $NonescapableTypes
-  public func allJoints(in groupName: Vision.HumanHandPoseObservation.PoseJointsGroupName? = nil) -> [Vision.HumanHandPoseObservation.PoseJointName : Vision.Joint]
+  public func joint(for jointName: Vision.HumanHandPoseObservation.JointName) -> Vision.Joint?
   #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func allJoints(in groupName: Vision.HumanHandPoseObservation.JointsGroupName? = nil) -> [Vision.HumanHandPoseObservation.PoseJointName : Vision.Joint]
+  #endif
+  public var availableJointNames: [Vision.HumanHandPoseObservation.JointName] {
+    get
+  }
+  public var availableJointsGroupNames: [Vision.HumanHandPoseObservation.JointsGroupName] {
+    get
+  }
   public var keypoints: CoreML.MLMultiArray {
     get throws
   }
@@ -873,6 +910,7 @@ public struct DetectFaceLandmarksRequest : Vision.ImageProcessingRequest {
   public typealias Result = [Vision.FaceObservation]
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision3
+    public static func < (a: Vision.DetectFaceLandmarksRequest.Revision, b: Vision.DetectFaceLandmarksRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectFaceLandmarksRequest.Revision, b: Vision.DetectFaceLandmarksRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -891,6 +929,9 @@ public struct DetectFaceLandmarksRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.DetectFaceLandmarksRequest, b: Vision.DetectFaceLandmarksRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -902,6 +943,7 @@ public struct RecognizeAnimalsRequest : Vision.ImageProcessingRequest {
   public typealias Result = [Vision.RecognizedObjectObservation]
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision2
+    public static func < (a: Vision.RecognizeAnimalsRequest.Revision, b: Vision.RecognizeAnimalsRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.RecognizeAnimalsRequest.Revision, b: Vision.RecognizeAnimalsRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -934,6 +976,9 @@ public struct RecognizeAnimalsRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.RecognizeAnimalsRequest, b: Vision.RecognizeAnimalsRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -945,6 +990,7 @@ public struct DetectBarcodesRequest : Vision.ImageProcessingRequest {
   public typealias Result = [Vision.BarcodeObservation]
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision4
+    public static func < (a: Vision.DetectBarcodesRequest.Revision, b: Vision.DetectBarcodesRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectBarcodesRequest.Revision, b: Vision.DetectBarcodesRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -967,6 +1013,9 @@ public struct DetectBarcodesRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.DetectBarcodesRequest, b: Vision.DetectBarcodesRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1199,6 +1248,7 @@ public struct DetectHumanBodyPoseRequest : Vision.ImageProcessingRequest {
   public typealias Result = [Vision.HumanBodyPoseObservation]
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision2
+    public static func < (a: Vision.DetectHumanBodyPoseRequest.Revision, b: Vision.DetectHumanBodyPoseRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectHumanBodyPoseRequest.Revision, b: Vision.DetectHumanBodyPoseRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1223,6 +1273,9 @@ public struct DetectHumanBodyPoseRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.DetectHumanBodyPoseRequest, b: Vision.DetectHumanBodyPoseRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1234,6 +1287,7 @@ final public class DetectTrajectoriesRequest : Vision.ImageProcessingRequest, Vi
   public typealias Result = [Vision.TrajectoryObservation]
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.DetectTrajectoriesRequest.Revision, b: Vision.DetectTrajectoriesRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectTrajectoriesRequest.Revision, b: Vision.DetectTrajectoriesRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1274,6 +1328,9 @@ final public class DetectTrajectoriesRequest : Vision.ImageProcessingRequest, Vi
   final public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   @objc deinit
   final public var hashValue: Swift.Int {
     get
@@ -1310,6 +1367,7 @@ public struct DetectHumanHandPoseRequest : Vision.ImageProcessingRequest {
   public typealias Result = [Vision.HumanHandPoseObservation]
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.DetectHumanHandPoseRequest.Revision, b: Vision.DetectHumanHandPoseRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectHumanHandPoseRequest.Revision, b: Vision.DetectHumanHandPoseRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1334,6 +1392,9 @@ public struct DetectHumanHandPoseRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.DetectHumanHandPoseRequest, b: Vision.DetectHumanHandPoseRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1345,6 +1406,7 @@ public struct CalculateImageAestheticsScoresRequest : Vision.ImageProcessingRequ
   public typealias Result = Vision.ImageAestheticsScoresObservation
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.CalculateImageAestheticsScoresRequest.Revision, b: Vision.CalculateImageAestheticsScoresRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.CalculateImageAestheticsScoresRequest.Revision, b: Vision.CalculateImageAestheticsScoresRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1363,6 +1425,9 @@ public struct CalculateImageAestheticsScoresRequest : Vision.ImageProcessingRequ
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.CalculateImageAestheticsScoresRequest, b: Vision.CalculateImageAestheticsScoresRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1545,10 +1610,20 @@ public protocol VisionRequest : Swift.CustomStringConvertible, Swift.Hashable, S
   associatedtype Result
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
+extension Vision.VisionRequest {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func computeDevice(for computeStage: Vision.ComputeStage) -> CoreML.MLComputeDevice?
+  #endif
+  public var description: Swift.String {
+    get
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 public struct DetectDocumentSegmentationRequest : Vision.ImageProcessingRequest {
   public typealias Result = Vision.DetectedDocumentObservation?
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.DetectDocumentSegmentationRequest.Revision, b: Vision.DetectDocumentSegmentationRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectDocumentSegmentationRequest.Revision, b: Vision.DetectDocumentSegmentationRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1566,6 +1641,9 @@ public struct DetectDocumentSegmentationRequest : Vision.ImageProcessingRequest 
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.DetectDocumentSegmentationRequest, b: Vision.DetectDocumentSegmentationRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1577,6 +1655,7 @@ final public class TrackHomographicImageRegistrationRequest : Vision.ImageProces
   public typealias Result = Vision.ImageHomographicAlignmentObservation
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.TrackHomographicImageRegistrationRequest.Revision, b: Vision.TrackHomographicImageRegistrationRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.TrackHomographicImageRegistrationRequest.Revision, b: Vision.TrackHomographicImageRegistrationRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1601,6 +1680,9 @@ final public class TrackHomographicImageRegistrationRequest : Vision.ImageProces
   final public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   @objc deinit
   final public var hashValue: Swift.Int {
     get
@@ -1623,6 +1705,7 @@ public struct CoreMLRequest : Vision.ImageProcessingRequest {
   public typealias Result = [any Vision.VisionObservation]
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.CoreMLRequest.Revision, b: Vision.CoreMLRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.CoreMLRequest.Revision, b: Vision.CoreMLRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1650,6 +1733,9 @@ public struct CoreMLRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.CoreMLRequest, b: Vision.CoreMLRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1661,6 +1747,7 @@ public struct DetectHumanRectanglesRequest : Vision.ImageProcessingRequest {
   public typealias Result = [Vision.HumanObservation]
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision2
+    public static func < (a: Vision.DetectHumanRectanglesRequest.Revision, b: Vision.DetectHumanRectanglesRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectHumanRectanglesRequest.Revision, b: Vision.DetectHumanRectanglesRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1679,6 +1766,9 @@ public struct DetectHumanRectanglesRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.DetectHumanRectanglesRequest, b: Vision.DetectHumanRectanglesRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1690,6 +1780,7 @@ final public class GeneratePersonSegmentationRequest : Vision.ImageProcessingReq
   public typealias Result = Vision.PixelBufferObservation
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.GeneratePersonSegmentationRequest.Revision, b: Vision.GeneratePersonSegmentationRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.GeneratePersonSegmentationRequest.Revision, b: Vision.GeneratePersonSegmentationRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1739,6 +1830,9 @@ final public class GeneratePersonSegmentationRequest : Vision.ImageProcessingReq
   final public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   @objc deinit
   final public var hashValue: Swift.Int {
     get
@@ -1824,6 +1918,7 @@ public struct GeneratePersonInstanceMaskRequest : Vision.ImageProcessingRequest 
   public typealias Result = Vision.InstanceMaskObservation?
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.GeneratePersonInstanceMaskRequest.Revision, b: Vision.GeneratePersonInstanceMaskRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.GeneratePersonInstanceMaskRequest.Revision, b: Vision.GeneratePersonInstanceMaskRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1841,6 +1936,9 @@ public struct GeneratePersonInstanceMaskRequest : Vision.ImageProcessingRequest 
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.GeneratePersonInstanceMaskRequest, b: Vision.GeneratePersonInstanceMaskRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1864,6 +1962,7 @@ public struct GenerateForegroundInstanceMaskRequest : Vision.ImageProcessingRequ
   public typealias Result = Vision.InstanceMaskObservation?
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.GenerateForegroundInstanceMaskRequest.Revision, b: Vision.GenerateForegroundInstanceMaskRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.GenerateForegroundInstanceMaskRequest.Revision, b: Vision.GenerateForegroundInstanceMaskRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1881,6 +1980,9 @@ public struct GenerateForegroundInstanceMaskRequest : Vision.ImageProcessingRequ
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.GenerateForegroundInstanceMaskRequest, b: Vision.GenerateForegroundInstanceMaskRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1919,6 +2021,7 @@ public struct DetectTextRectanglesRequest : Vision.ImageProcessingRequest {
   public typealias Result = [Vision.TextObservation]
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.DetectTextRectanglesRequest.Revision, b: Vision.DetectTextRectanglesRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectTextRectanglesRequest.Revision, b: Vision.DetectTextRectanglesRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1940,6 +2043,9 @@ public struct DetectTextRectanglesRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.DetectTextRectanglesRequest, b: Vision.DetectTextRectanglesRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1951,6 +2057,7 @@ final public class TrackOpticalFlowRequest : Vision.ImageProcessingRequest, Visi
   public typealias Result = Vision.OpticalFlowObservation?
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.TrackOpticalFlowRequest.Revision, b: Vision.TrackOpticalFlowRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.TrackOpticalFlowRequest.Revision, b: Vision.TrackOpticalFlowRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -2001,6 +2108,9 @@ final public class TrackOpticalFlowRequest : Vision.ImageProcessingRequest, Visi
   final public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   @objc deinit
   final public var hashValue: Swift.Int {
     get
@@ -2312,6 +2422,7 @@ public struct RecognizeDocumentsRequest : Vision.ImageProcessingRequest {
   public typealias Result = [Vision.DocumentObservation]
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.RecognizeDocumentsRequest.Revision, b: Vision.RecognizeDocumentsRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.RecognizeDocumentsRequest.Revision, b: Vision.RecognizeDocumentsRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -2367,6 +2478,9 @@ public struct RecognizeDocumentsRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.RecognizeDocumentsRequest, b: Vision.RecognizeDocumentsRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -2427,6 +2541,7 @@ public struct DetectRectanglesRequest : Vision.ImageProcessingRequest {
   public typealias Result = [Vision.RectangleObservation]
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.DetectRectanglesRequest.Revision, b: Vision.DetectRectanglesRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectRectanglesRequest.Revision, b: Vision.DetectRectanglesRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -2450,6 +2565,9 @@ public struct DetectRectanglesRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.DetectRectanglesRequest, b: Vision.DetectRectanglesRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -2461,6 +2579,7 @@ public struct ClassifyImageRequest : Vision.ImageProcessingRequest {
   public typealias Result = [Vision.ClassificationObservation]
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision2
+    public static func < (a: Vision.ClassifyImageRequest.Revision, b: Vision.ClassifyImageRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.ClassifyImageRequest.Revision, b: Vision.ClassifyImageRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -2482,6 +2601,9 @@ public struct ClassifyImageRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.ClassifyImageRequest, b: Vision.ClassifyImageRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -2493,6 +2615,7 @@ public struct RecognizeTextRequest : Vision.ImageProcessingRequest {
   public typealias Result = [Vision.RecognizedTextObservation]
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision3
+    public static func < (a: Vision.RecognizeTextRequest.Revision, b: Vision.RecognizeTextRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.RecognizeTextRequest.Revision, b: Vision.RecognizeTextRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -2538,6 +2661,9 @@ public struct RecognizeTextRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.RecognizeTextRequest, b: Vision.RecognizeTextRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -2755,6 +2881,7 @@ final public class TrackRectangleRequest : Vision.ImageProcessingRequest, Vision
   public typealias Result = Vision.RectangleObservation?
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.TrackRectangleRequest.Revision, b: Vision.TrackRectangleRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.TrackRectangleRequest.Revision, b: Vision.TrackRectangleRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -2797,6 +2924,9 @@ final public class TrackRectangleRequest : Vision.ImageProcessingRequest, Vision
   final public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   @objc deinit
   final public var hashValue: Swift.Int {
     get
@@ -2837,6 +2967,7 @@ public struct DetectContoursRequest : Vision.ImageProcessingRequest {
   public typealias Result = Vision.ContoursObservation
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.DetectContoursRequest.Revision, b: Vision.DetectContoursRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectContoursRequest.Revision, b: Vision.DetectContoursRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -2858,6 +2989,9 @@ public struct DetectContoursRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.DetectContoursRequest, b: Vision.DetectContoursRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -2952,6 +3086,7 @@ public struct DetectFaceRectanglesRequest : Vision.ImageProcessingRequest {
   public typealias Result = [Vision.FaceObservation]
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision3
+    public static func < (lhs: Vision.DetectFaceRectanglesRequest.Revision, rhs: Vision.DetectFaceRectanglesRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectFaceRectanglesRequest.Revision, b: Vision.DetectFaceRectanglesRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -2966,6 +3101,9 @@ public struct DetectFaceRectanglesRequest : Vision.ImageProcessingRequest {
   public var regionOfInterest: Vision.NormalizedRect
   public let revision: Vision.DetectFaceRectanglesRequest.Revision
   public static let supportedRevisions: [Vision.DetectFaceRectanglesRequest.Revision]
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public var descriptor: Vision.RequestDescriptor {
     get
   }
@@ -3022,6 +3160,7 @@ public struct DetectLensSmudgeRequest : Vision.ImageProcessingRequest {
   public typealias Result = Vision.SmudgeObservation
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.DetectLensSmudgeRequest.Revision, b: Vision.DetectLensSmudgeRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectLensSmudgeRequest.Revision, b: Vision.DetectLensSmudgeRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -3042,6 +3181,9 @@ public struct DetectLensSmudgeRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.DetectLensSmudgeRequest, b: Vision.DetectLensSmudgeRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -3050,12 +3192,21 @@ public struct DetectLensSmudgeRequest : Vision.ImageProcessingRequest {
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 public struct HumanBodyPoseObservation : Vision.VisionObservation, Vision.PoseProviding {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func joint(for jointName: Vision.HumanBodyPoseObservation.JointName) -> Vision.Joint?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func allJoints(in groupName: Vision.HumanBodyPoseObservation.JointsGroupName? = nil) -> [Vision.HumanBodyPoseObservation.JointName : Vision.Joint]
+  #endif
+  public var availableJointNames: [Vision.HumanBodyPoseObservation.JointName] {
+    get
+  }
+  public var availableJointsGroupNames: [Vision.HumanBodyPoseObservation.JointsGroupName] {
+    get
+  }
   public var keypoints: CoreML.MLMultiArray {
     get throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
-  public func allJoints(in groupName: Vision.HumanBodyPoseObservation.PoseJointsGroupName? = nil) -> [Vision.HumanBodyPoseObservation.PoseJointName : Vision.Joint]
-  #endif
   public let uuid: Foundation.UUID
   public let confidence: Swift.Float
   public let timeRange: CoreMedia.CMTimeRange?
@@ -3136,6 +3287,7 @@ public struct DetectHorizonRequest : Vision.ImageProcessingRequest {
   public typealias Result = Vision.HorizonObservation?
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.DetectHorizonRequest.Revision, b: Vision.DetectHorizonRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectHorizonRequest.Revision, b: Vision.DetectHorizonRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -3153,6 +3305,9 @@ public struct DetectHorizonRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   public static func == (a: Vision.DetectHorizonRequest, b: Vision.DetectHorizonRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -3259,6 +3414,18 @@ extension Vision.ContoursObservation {
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 public struct AnimalBodyPoseObservation : Vision.VisionObservation, Vision.PoseProviding {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func joint(for jointName: Vision.AnimalBodyPoseObservation.JointName) -> Vision.Joint?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func allJoints(in groupName: Vision.AnimalBodyPoseObservation.JointsGroupName? = nil) -> [Vision.AnimalBodyPoseObservation.JointName : Vision.Joint]
+  #endif
+  public var availableJointNames: [Vision.AnimalBodyPoseObservation.JointName] {
+    get
+  }
+  public var availableJointsGroupNames: [Vision.AnimalBodyPoseObservation.JointsGroupName] {
+    get
+  }
   public let uuid: Foundation.UUID
   public let confidence: Swift.Float
   public let timeRange: CoreMedia.CMTimeRange?
@@ -3266,9 +3433,6 @@ public struct AnimalBodyPoseObservation : Vision.VisionObservation, Vision.PoseP
   public var description: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
-  public func allJoints(in groupName: Vision.AnimalBodyPoseObservation.PoseJointsGroupName? = nil) -> [Vision.AnimalBodyPoseObservation.PoseJointName : Vision.Joint]
-  #endif
   public typealias PoseJointName = Vision.AnimalBodyPoseObservation.JointName
   public typealias PoseJointsGroupName = Vision.AnimalBodyPoseObservation.JointsGroupName
   public enum JointName : Swift.String, Swift.Hashable, Swift.Sendable, Swift.Codable {
@@ -3376,6 +3540,7 @@ final public class DetectHumanBodyPose3DRequest : Vision.ImageProcessingRequest,
   public typealias Result = [Vision.HumanBodyPose3DObservation]
   public enum Revision : Swift.Comparable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case revision1
+    public static func < (a: Vision.DetectHumanBodyPose3DRequest.Revision, b: Vision.DetectHumanBodyPose3DRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectHumanBodyPose3DRequest.Revision, b: Vision.DetectHumanBodyPose3DRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -3406,6 +3571,9 @@ final public class DetectHumanBodyPose3DRequest : Vision.ImageProcessingRequest,
   final public var descriptor: Vision.RequestDescriptor {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
+  #endif
   @objc deinit
   final public var hashValue: Swift.Int {
     get

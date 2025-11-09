@@ -186,6 +186,7 @@ __BEGIN_DECLS
 #define DBG_MACH_VM_RECLAIM     0xB0 // Deferred Memory Reclamation
 #define DBG_MACH_VM_LOCK_PERF   0xB1 // Performance of VM Locks
 #define DBG_MACH_MEMINFO        0xB2 // General system memory information
+#define DBG_MACH_VM_COMPRESSOR  0xB3 // Mach VM Compressor
 
 // Codes for DBG_MACH_IO
 #define DBC_MACH_IO_MMIO_READ           0x1
@@ -395,6 +396,7 @@ __BEGIN_DECLS
 #define DBG_VM_IOPL_REQUEST                 0x134
 #define DBG_VM_KERN_REQUEST                 0x135
 #define DBG_VM_UPL_THROTTLE                 0x136
+#define DBG_VM_UPL_COMMIT_FORCE_DEACTIVATE  0x137
 
 #define DBG_VM_DATA_WRITE                   0x140
 #define DBG_VM_PRESSURE_LEVEL_CHANGE        0x141
@@ -434,6 +436,18 @@ __BEGIN_DECLS
 #define DBG_COMPRESSOR_FAULT            0x09
 #define DBG_COMPRESSOR_SWAPIN_FAULT     0x0a
 #define DBG_COR_FAULT                   0x0b
+
+/*
+ * Codes for VM Compressor (DBG_MACH_VM_COMPRESSOR)
+ */
+#define DBG_COMPACT_AND_SWAP             0x03
+#define DBG_COMPACT_DEFERRED             0x04
+#define DBG_COMPACT_SPECIAL              0x05
+#define DBG_PROCESS_SWAPPEDIN            0x06
+#define DBG_COMPACT_PAUSE                0x07
+#define DBG_COMPACT_MINOR                0x08
+#define DBG_COMPACT_MAJOR                0x09
+#define DBG_COMPACT_COALESCE             0x0a
 
 /* Codes for IPC (DBG_MACH_IPC) */
 /* unused MACH_TASK_SUSPEND                     0x0 was: Suspended a task */
@@ -698,6 +712,21 @@ __BEGIN_DECLS
 /* Page demand statistics */
 #define DBG_MEMINFO_DEMAND1                 0x21
 #define DBG_MEMINFO_DEMAND2                 0x22
+
+/* Compressor statistics */
+#define DBG_MEMINFO_CSEG1                   0x31
+#define DBG_MEMINFO_CSEG2                   0x32
+#define DBG_MEMINFO_CSEG3                   0x33
+#define DBG_MEMINFO_CSEG4                   0x34
+
+/* Compactor/Swapper statistics */
+#define DBG_MEMINFO_CSWAP1                  0x41
+#define DBG_MEMINFO_CSWAP2                  0x42
+#define DBG_MEMINFO_CSWAP3                  0x43
+
+#define DBG_MEMINFO_COMPACTOR1              0x46
+#define DBG_MEMINFO_COMPACTOR2              0x47
+#define DBG_MEMINFO_COMPACTOR3              0x48
 
 /* **** The Kernel Debug Sub Classes for Network (DBG_NETWORK) **** */
 #define DBG_NETIP       1       /* Internet Protocol */
@@ -1229,6 +1258,7 @@ __BEGIN_DECLS
 
 #define VM_RECLAIM_CODE(code) MACHDBG_CODE(DBG_MACH_VM_RECLAIM, code)
 #define VMDBG_CODE(code) MACHDBG_CODE(DBG_MACH_VM, code)
+#define VM_COMPRESSOR_EVENTID(code) KDBG_EVENTID(DBG_MACH, DBG_MACH_VM_COMPRESSOR, code)
 
 #define PMAP_CODE(code) MACHDBG_CODE(DBG_MACH_PMAP, code)
 

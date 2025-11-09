@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target arm64e-apple-ios26.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-experimental-feature AllowUnsafeAttribute -enable-upcoming-feature InferSendableFromCaptures -enable-experimental-feature LifetimeDependence -enable-experimental-feature AddressableTypes -enable-experimental-feature BuiltinModule -enable-experimental-feature InoutLifetimeDependence -enable-experimental-feature LifetimeDependenceMutableAccessors -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 4040.1.401 -module-name Foundation -package-name "\"FoundationPreview\""
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target arm64e-apple-ios26.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-experimental-feature AllowUnsafeAttribute -enable-upcoming-feature InferSendableFromCaptures -enable-experimental-feature LifetimeDependence -enable-experimental-feature AddressableTypes -enable-experimental-feature BuiltinModule -enable-experimental-feature InoutLifetimeDependence -enable-experimental-feature LifetimeDependenceMutableAccessors -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 4109.1.401 -module-name Foundation -package-name "\"FoundationPreview\""
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 import Builtin
 import Combine
 import CoreFoundation
@@ -4615,8 +4615,15 @@ extension Foundation.Locale.Region {
     get
   }
   #endif
-  @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
-  public func subRegions(ofCategoy category: Foundation.Locale.Region.Category) -> [Foundation.Locale.Region]
+  #if compiler(>=5.3) && $ABIAttributeSE0479
+  @abi(func subRegions(ofCategoy category: Foundation.Locale.Region.Category) -> [Foundation.Locale.Region])
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+public func subRegions(ofCategory category: Foundation.Locale.Region.Category) -> [Foundation.Locale.Region]
+  #else
+  @_silgen_name("$s10Foundation6LocaleV6RegionV10subRegions9ofCategoySayAEGAE8CategoryV_tF")
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+  public func subRegions(ofCategory category: Foundation.Locale.Region.Category) -> [Foundation.Locale.Region]
+  #endif
   #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
   public var subcontinent: Foundation.Locale.Region? {
@@ -8451,11 +8458,19 @@ final internal class __DataStorage : @unchecked Swift.Sendable {
                   start: UnsafeMutableRawPointer(Builtin.addressOfBorrow(self)),
                   count: _representation.count
                 )
-            case .large(let slice):
+            case .large(var slice):
+                 
+                _representation = .empty
+                slice.ensureUniqueReference()
+                _representation = .large(slice)
                 buffer = UnsafeMutableRawBufferPointer(
                   start: slice.storage.mutableBytes?.advanced(by: slice.startIndex), count: slice.count
                 )
-            case .slice(let slice):
+            case .slice(var slice):
+                 
+                _representation = .empty
+                slice.ensureUniqueReference()
+                _representation = .slice(slice)
                 buffer = UnsafeMutableRawBufferPointer(
                   start: slice.storage.mutableBytes?.advanced(by: slice.startIndex), count: slice.count
                 )
@@ -8479,11 +8494,19 @@ final internal class __DataStorage : @unchecked Swift.Sendable {
                   start: UnsafeMutableRawPointer(Builtin.addressOfBorrow(self)),
                   count: _representation.count
                 )
-            case .large(let slice):
+            case .large(var slice):
+                 
+                _representation = .empty
+                slice.ensureUniqueReference()
+                _representation = .large(slice)
                 buffer = UnsafeMutableRawBufferPointer(
                   start: slice.storage.mutableBytes?.advanced(by: slice.startIndex), count: slice.count
                 )
-            case .slice(let slice):
+            case .slice(var slice):
+                 
+                _representation = .empty
+                slice.ensureUniqueReference()
+                _representation = .slice(slice)
                 buffer = UnsafeMutableRawBufferPointer(
                   start: slice.storage.mutableBytes?.advanced(by: slice.startIndex), count: slice.count
                 )
@@ -9858,11 +9881,19 @@ final internal class __DataStorage : @unchecked Swift.Sendable {
                   start: UnsafeMutableRawPointer(Builtin.addressOfBorrow(self)),
                   count: _representation.count
                 )
-            case .large(let slice):
+            case .large(var slice):
+                 
+                _representation = .empty
+                slice.ensureUniqueReference()
+                _representation = .large(slice)
                 buffer = UnsafeMutableRawBufferPointer(
                   start: slice.storage.mutableBytes?.advanced(by: slice.startIndex), count: slice.count
                 )
-            case .slice(let slice):
+            case .slice(var slice):
+                 
+                _representation = .empty
+                slice.ensureUniqueReference()
+                _representation = .slice(slice)
                 buffer = UnsafeMutableRawBufferPointer(
                   start: slice.storage.mutableBytes?.advanced(by: slice.startIndex), count: slice.count
                 )
@@ -9886,11 +9917,19 @@ final internal class __DataStorage : @unchecked Swift.Sendable {
                   start: UnsafeMutableRawPointer(Builtin.addressOfBorrow(self)),
                   count: _representation.count
                 )
-            case .large(let slice):
+            case .large(var slice):
+                 
+                _representation = .empty
+                slice.ensureUniqueReference()
+                _representation = .large(slice)
                 buffer = UnsafeMutableRawBufferPointer(
                   start: slice.storage.mutableBytes?.advanced(by: slice.startIndex), count: slice.count
                 )
-            case .slice(let slice):
+            case .slice(var slice):
+                 
+                _representation = .empty
+                slice.ensureUniqueReference()
+                _representation = .slice(slice)
                 buffer = UnsafeMutableRawBufferPointer(
                   start: slice.storage.mutableBytes?.advanced(by: slice.startIndex), count: slice.count
                 )
@@ -18705,12 +18744,12 @@ extension Swift.RangeSet where Bound == Swift.Int {
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension Foundation.NotificationCenter {
-  public func messages<Identifier, Message>(of subject: Message.Subject, for identifier: Identifier, bufferSize limit: Swift.Int = 10) -> some _Concurrency.AsyncSequence<Message, Swift.Never> where Identifier : Foundation.NotificationCenter.MessageIdentifier, Message : Foundation.NotificationCenter.AsyncMessage, Message == Identifier.MessageType, Message.Subject : AnyObject
+  public func messages<Identifier, Message>(of subject: Message.Subject, for identifier: Identifier, bufferSize limit: Swift.Int = 10) -> some Swift.Sendable & _Concurrency.AsyncSequence<Message, Swift.Never> where Identifier : Foundation.NotificationCenter.MessageIdentifier, Message : Foundation.NotificationCenter.AsyncMessage, Message == Identifier.MessageType, Message.Subject : AnyObject
   
-  public func messages<Identifier, Message>(of subject: Message.Subject.Type, for identifier: Identifier, bufferSize limit: Swift.Int = 10) -> some _Concurrency.AsyncSequence<Message, Swift.Never> where Identifier : Foundation.NotificationCenter.MessageIdentifier, Message : Foundation.NotificationCenter.AsyncMessage, Message == Identifier.MessageType
+  public func messages<Identifier, Message>(of subject: Message.Subject.Type, for identifier: Identifier, bufferSize limit: Swift.Int = 10) -> some Swift.Sendable & _Concurrency.AsyncSequence<Message, Swift.Never> where Identifier : Foundation.NotificationCenter.MessageIdentifier, Message : Foundation.NotificationCenter.AsyncMessage, Message == Identifier.MessageType
   
   #if compiler(>=5.3) && $NonescapableTypes
-  public func messages<Message>(of subject: Message.Subject? = nil, for messageType: Message.Type, bufferSize limit: Swift.Int = 10) -> some _Concurrency.AsyncSequence<Message, Swift.Never> where Message : Foundation.NotificationCenter.AsyncMessage, Message.Subject : AnyObject
+  public func messages<Message>(of subject: Message.Subject? = nil, for messageType: Message.Type, bufferSize limit: Swift.Int = 10) -> some Swift.Sendable & _Concurrency.AsyncSequence<Message, Swift.Never> where Message : Foundation.NotificationCenter.AsyncMessage, Message.Subject : AnyObject
   
   #endif
 }
@@ -18750,7 +18789,7 @@ extension Foundation.URLCache {
   convenience public init(memoryCapacity: Swift.Int, diskCapacity: Swift.Int, directory: Foundation.URL? = nil)
   #endif
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.HTTPCookieStorage {
   public struct CookiesChangedMessage : Foundation.NotificationCenter.AsyncMessage {
     public typealias Subject = Foundation.HTTPCookieStorage
@@ -18763,13 +18802,13 @@ extension Foundation.HTTPCookieStorage {
     #endif
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.HTTPCookieStorage.CookiesChangedMessage> {
   @_alwaysEmitIntoClient public static var cookiesChanged: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.HTTPCookieStorage.CookiesChangedMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.UndoManager {
   public struct WillUndoChangeMessage : Foundation.NotificationCenter.MainActorMessage, Swift.Sendable {
     public typealias Subject = Foundation.UndoManager
@@ -18858,55 +18897,55 @@ extension Foundation.UndoManager {
     #endif
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UndoManager.WillUndoChangeMessage> {
   @_alwaysEmitIntoClient public static var willUndoChange: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UndoManager.WillUndoChangeMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UndoManager.DidUndoChangeMessage> {
   @_alwaysEmitIntoClient public static var didUndoChange: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UndoManager.DidUndoChangeMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UndoManager.WillRedoChangeMessage> {
   @_alwaysEmitIntoClient public static var willRedoChange: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UndoManager.WillRedoChangeMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UndoManager.DidRedoChangeMessage> {
   @_alwaysEmitIntoClient public static var didRedoChange: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UndoManager.DidRedoChangeMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UndoManager.CheckpointMessage> {
   @_alwaysEmitIntoClient public static var checkpoint: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UndoManager.CheckpointMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UndoManager.DidOpenUndoGroupMessage> {
   @_alwaysEmitIntoClient public static var didOpenUndoGroup: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UndoManager.DidOpenUndoGroupMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UndoManager.DidCloseUndoGroupMessage> {
   @_alwaysEmitIntoClient public static var didCloseUndoGroup: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UndoManager.DidCloseUndoGroupMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UndoManager.WillCloseUndoGroupMessage> {
   @_alwaysEmitIntoClient public static var willCloseUndoGroup: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UndoManager.WillCloseUndoGroupMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NSMetadataQuery {
   public struct DidFinishGatheringMessage : Foundation.NotificationCenter.AsyncMessage {
     public typealias Subject = Foundation.NSMetadataQuery
@@ -18929,19 +18968,19 @@ extension Foundation.NSMetadataQuery {
     #endif
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.NSMetadataQuery.DidFinishGatheringMessage> {
   @_alwaysEmitIntoClient public static var didFinishGathering: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.NSMetadataQuery.DidFinishGatheringMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.NSMetadataQuery.DidStartGatheringMessage> {
   @_alwaysEmitIntoClient public static var didStartGathering: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.NSMetadataQuery.DidStartGatheringMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.Calendar {
   public struct CalendarDayChangedMessage : Foundation.NotificationCenter.AsyncMessage {
     public typealias Subject = Foundation.Calendar
@@ -18954,13 +18993,13 @@ extension Foundation.Calendar {
     #endif
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.Calendar.CalendarDayChangedMessage> {
   @_alwaysEmitIntoClient public static var calendarDayChanged: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.Calendar.CalendarDayChangedMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.Date {
   public struct SystemClockDidChangeMessage : Foundation.NotificationCenter.MainActorMessage, Swift.Sendable {
     public typealias Subject = Foundation.Date
@@ -18973,13 +19012,13 @@ extension Foundation.Date {
     #endif
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.Date.SystemClockDidChangeMessage> {
   @_alwaysEmitIntoClient public static var systemClockDidChange: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.Date.SystemClockDidChangeMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.TimeZone {
   public struct SystemTimeZoneDidChangeMessage : Foundation.NotificationCenter.MainActorMessage, Swift.Sendable {
     public typealias Subject = Foundation.TimeZone
@@ -18995,13 +19034,13 @@ extension Foundation.TimeZone {
     #endif
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.TimeZone.SystemTimeZoneDidChangeMessage> {
   @_alwaysEmitIntoClient public static var systemTimeZoneDidChange: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.TimeZone.SystemTimeZoneDidChangeMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.ProcessInfo {
   public struct PowerStateDidChangeMessage : Foundation.NotificationCenter.AsyncMessage {
     public typealias Subject = Foundation.ProcessInfo
@@ -19024,19 +19063,19 @@ extension Foundation.ProcessInfo {
     #endif
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.ProcessInfo.PowerStateDidChangeMessage> {
   @_alwaysEmitIntoClient public static var powerStateDidChange: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.ProcessInfo.PowerStateDidChangeMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.ProcessInfo.ThermalStateDidChangeMessage> {
   @_alwaysEmitIntoClient public static var thermalStateDidChange: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.ProcessInfo.ThermalStateDidChangeMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.FileHandle {
   public struct ConnectionAcceptedMessage : Foundation.NotificationCenter.AsyncMessage {
     public typealias Subject = Foundation.FileHandle
@@ -19091,31 +19130,31 @@ extension Foundation.FileHandle {
     public static func makeNotification(_ message: Foundation.FileHandle.ReadCompletionMessage) -> Foundation.Notification
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.FileHandle.ConnectionAcceptedMessage> {
   @_alwaysEmitIntoClient public static var connectionAccepted: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.FileHandle.ConnectionAcceptedMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.FileHandle.DataAvailableMessage> {
   @_alwaysEmitIntoClient public static var dataAvailable: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.FileHandle.DataAvailableMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.FileHandle.ReadToEndOfFileCompletionMessage> {
   @_alwaysEmitIntoClient public static var readToEndOfFileCompletion: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.FileHandle.ReadToEndOfFileCompletionMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.FileHandle.ReadCompletionMessage> {
   @_alwaysEmitIntoClient public static var readCompletion: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.FileHandle.ReadCompletionMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.Bundle {
   public struct DidLoadMessage : Foundation.NotificationCenter.AsyncMessage {
     public typealias Subject = Foundation.Bundle
@@ -19128,13 +19167,13 @@ extension Foundation.Bundle {
     #endif
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.Bundle.DidLoadMessage> {
   @_alwaysEmitIntoClient public static var didLoad: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.Bundle.DidLoadMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.UserDefaults {
   public struct DidChangeMessage : Foundation.NotificationCenter.AsyncMessage {
     public typealias Subject = Foundation.UserDefaults
@@ -19157,19 +19196,19 @@ extension Foundation.UserDefaults {
     #endif
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UserDefaults.DidChangeMessage> {
   @_alwaysEmitIntoClient public static var didChange: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UserDefaults.DidChangeMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UserDefaults.SizeLimitExceededMessage> {
   @_alwaysEmitIntoClient public static var sizeLimitExceeded: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.UserDefaults.SizeLimitExceededMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.Port {
   public struct DidBecomeInvalidMessage : Foundation.NotificationCenter.AsyncMessage {
     public typealias Subject = Foundation.Port
@@ -19182,13 +19221,13 @@ extension Foundation.Port {
     #endif
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.Port.DidBecomeInvalidMessage> {
   @_alwaysEmitIntoClient public static var didBecomeInvalid: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.Port.DidBecomeInvalidMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.Locale {
   public struct CurrentLocaleDidChangeMessage : Foundation.NotificationCenter.MainActorMessage, Swift.Sendable {
     public typealias Subject = Foundation.Locale
@@ -19201,13 +19240,13 @@ extension Foundation.Locale {
     #endif
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.Locale.CurrentLocaleDidChangeMessage> {
   @_alwaysEmitIntoClient public static var currentLocaleDidChange: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.Locale.CurrentLocaleDidChangeMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.FileManager {
   public struct UbiquityIdentityDidChangeMessage : Foundation.NotificationCenter.MainActorMessage, Swift.Sendable {
     public typealias Subject = Foundation.FileManager
@@ -19220,7 +19259,7 @@ extension Foundation.FileManager {
     #endif
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.FileManager.UbiquityIdentityDidChangeMessage> {
   @_alwaysEmitIntoClient public static var ubiquityIdentityDidChange: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.FileManager.UbiquityIdentityDidChangeMessage> {
     get { .init() }
@@ -19247,7 +19286,7 @@ extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundati
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NSExtensionContext {
   public struct DidBecomeActiveMessage : Foundation.NotificationCenter.MainActorMessage, Swift.Sendable {
     public typealias Subject = Foundation.NSExtensionContext
@@ -19290,25 +19329,25 @@ extension Foundation.NSExtensionContext {
     #endif
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.NSExtensionContext.DidBecomeActiveMessage> {
   @_alwaysEmitIntoClient public static var didBecomeActive: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.NSExtensionContext.DidBecomeActiveMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.NSExtensionContext.DidEnterBackgroundMessage> {
   @_alwaysEmitIntoClient public static var didEnterBackground: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.NSExtensionContext.DidEnterBackgroundMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.NSExtensionContext.WillEnterForegroundMessage> {
   @_alwaysEmitIntoClient public static var willEnterForeground: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.NSExtensionContext.WillEnterForegroundMessage> {
     get { .init() }
   }
 }
-@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.NSExtensionContext.WillResignActiveMessage> {
   @_alwaysEmitIntoClient public static var willResignActive: Foundation.NotificationCenter.BaseMessageIdentifier<Foundation.NSExtensionContext.WillResignActiveMessage> {
     get { .init() }
@@ -20512,6 +20551,11 @@ public struct URLRequest : Foundation.ReferenceConvertible, Swift.Equatable, Swi
     get
     set
   }
+  @available(macOS 26.1, iOS 26.1, watchOS 26.1, tvOS 26.1, visionOS 26.1, *)
+  public var allowsUltraConstrainedNetworkAccess: Swift.Bool {
+    get
+    set
+  }
   @available(macOS 11.3, iOS 14.5, watchOS 7.4, tvOS 14.5, *)
   public var assumesHTTP3Capable: Swift.Bool {
     get
@@ -21147,7 +21191,7 @@ extension Foundation.UndoManager {
   @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
   @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency final public func setActionName(_ actionNameResource: Foundation.LocalizedStringResource?) {
          
-        if #available(macOS 16, iOS 19, tvOS 19, watchOS 12, visionOS 3, *) {
+        if #available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *) {
              
             self._setActionNameLocalizedStringResource(actionNameResource)
         } else {
@@ -21171,7 +21215,7 @@ extension Foundation.UndoManager {
     }
   #endif
   #if compiler(>=5.3) && $NonescapableTypes
-  @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+  @available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
   @usableFromInline
   @_Concurrency.MainActor @preconcurrency internal func _setActionNameLocalizedStringResource(_ actionName: Foundation.LocalizedStringResource?)
   #endif
@@ -21594,6 +21638,8 @@ extension Foundation.URLError {
     case cellular
     case expensive
     case constrained
+    @available(macOS 26.1, iOS 26.1, watchOS 26.1, tvOS 26.1, visionOS 26.1, *)
+    case ultraConstrained
     #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
     #endif
@@ -23153,7 +23199,7 @@ extension Foundation.Bundle {
   #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
   @_alwaysEmitIntoClient convenience public init?(_dsoHandle: Swift.UnsafeRawPointer) {
-        if #available(macOS 16, iOS 19, tvOS 19, watchOS 9, visionOS 3, *) {
+        if #available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *) {
              
             self.init(__dsoHandle: _dsoHandle)
             return
@@ -23241,7 +23287,7 @@ extension Foundation.Bundle {
     }
   #endif
   #if compiler(>=5.3) && $NonescapableTypes
-  @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 9, visionOS 26.0, *)
+  @available(macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26, *)
   @usableFromInline
   convenience internal init?(__dsoHandle: Swift.UnsafeRawPointer)
   #endif

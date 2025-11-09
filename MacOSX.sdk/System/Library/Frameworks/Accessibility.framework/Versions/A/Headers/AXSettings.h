@@ -33,6 +33,14 @@ AX_EXTERN NSNotificationName const AXPrefersHeadAnchorAlternativeDidChangeNotifi
 AX_EXTERN BOOL AXPrefersNonBlinkingTextInsertionIndicator(void) API_AVAILABLE(ios(18.0), macos(15.0), tvos(18.0), watchos(11.0), visionos(2.0)) NS_REFINED_FOR_SWIFT;
 AX_EXTERN NSNotificationName const AXPrefersNonBlinkingTextInsertionIndicatorDidChangeNotification API_AVAILABLE(ios(18.0), macos(15.0), tvos(18.0), watchos(11.0), visionos(2.0)) NS_SWIFT_NAME(AccessibilitySettings.prefersNonBlinkingTextInsertionIndicatorDidChangeNotification);
 
+// Prefers that user interface items that rely on a prolonged, continuous swipe action provide an alternative requiring less physical dexterity or effort.
+AX_EXTERN BOOL AXPrefersActionSliderAlternative(void) API_AVAILABLE(ios(26.1), macos(26.1), tvos(26.1), watchos(26.1), visionos(26.1)) NS_REFINED_FOR_SWIFT;
+AX_EXTERN NSNotificationName const AXPrefersActionSliderAlternativeDidChangeNotification API_AVAILABLE(ios(26.1), macos(26.1), tvos(26.1), watchos(26.1), visionos(26.1)) NS_SWIFT_NAME(AccessibilitySettings.prefersActionSliderAlternativeDidChangeNotification);
+
+// Returns whether the system preference for show borders is enabled
+AX_EXTERN BOOL AXShowBordersEnabled(void) API_AVAILABLE(ios(26.1), macos(26.1), tvos(26.1), watchos(26.1), visionos(26.1)) NS_REFINED_FOR_SWIFT;
+AX_EXTERN NSNotificationName const AXShowBordersEnabledStatusDidChangeNotification API_AVAILABLE(ios(26.1), macos(26.1), tvos(26.1), watchos(26.1), visionos(26.1)) NS_SWIFT_NAME(AccessibilitySettings.showBordersEnabledStatusDidChangeNotification);
+
 typedef NS_ENUM(NSInteger, AXSettingsFeature) {
     // Jump to the setting for "Allow Apps to Request to Use" in Personal Voice. This is relevant for the AVSpeechSynthesis.personalVoiceAuthorizationStatus API.
     AXSettingsFeaturePersonalVoiceAllowAppsToRequestToUse = 1,

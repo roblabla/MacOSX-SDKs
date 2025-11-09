@@ -89,7 +89,7 @@ CARPLAY_TEMPLATE_UI_ACTOR
  If a nil @c text property is provided the cell will resize accordingly to hide the title.
 
  @param text The text visible at the top of the cell.
- @param cardElements The list of @c CPListImageRowItemCardElement  elements visible below the text.
+ @param elements The list of @c CPListImageRowItemCardElement  elements visible below the text.
  @param allowsMultipleLines Determines if the elements could be visible on more than a single line.
  */
 - (instancetype)initWithText:(NSString * _Nullable)text
@@ -102,7 +102,7 @@ CARPLAY_TEMPLATE_UI_ACTOR
  If a nil @c text property is provided the cell will resize accordingly to hide the title.
 
  @param text The text visible at the top of the cell.
- @param condensedElements The list of @c CPListImageRowItemCondensedElement  elements visible below the text.
+ @param elements The list of @c CPListImageRowItemCondensedElement  elements visible below the text.
  @param allowsMultipleLines Determines if the elements could be visible on more than a single line.
  */
 - (instancetype)initWithText:(NSString * _Nullable)text
@@ -115,7 +115,7 @@ CARPLAY_TEMPLATE_UI_ACTOR
  If a nil @c text property is provided the cell will resize accordingly to hide the title.
 
  @param text The text visible at the top of the cell.
- @param gridElements The list of @c CPListImageRowItemGridElement  elements visible below the text.
+ @param elements The list of @c CPListImageRowItemGridElement  elements visible below the text.
  @param allowsMultipleLines Determines if the elements could be visible on more than a single line.
  */
 - (instancetype)initWithText:(NSString * _Nullable)text
@@ -128,7 +128,7 @@ CARPLAY_TEMPLATE_UI_ACTOR
  If a nil @c text property is provided the cell will resize accordingly to hide the title.
 
  @param text The text visible at the top of the cell.
- @param imageGridElements The list of @c CPListImageRowItemImageGridElement  elements visible below the text.
+ @param elements The list of @c CPListImageRowItemImageGridElement  elements visible below the text.
  @param allowsMultipleLines Determines if the elements could be visible on more than a single line.
  */
 - (instancetype)initWithText:(NSString * _Nullable)text

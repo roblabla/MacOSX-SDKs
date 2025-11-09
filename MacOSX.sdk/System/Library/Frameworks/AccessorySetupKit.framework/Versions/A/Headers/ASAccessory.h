@@ -88,4 +88,27 @@ NS_SWIFT_SENDABLE
 
 @end
 
+// MARK: -
+//===========================================================================================================================
+
+/// A discovered accessory, for use in creating a customized picker display item.
+///
+/// When your app's picker uses the ``ASPickerDisplaySettings/Options/filterDiscoveryResults`` option, you receive ``ASAccessoryEventType/accessoryDiscovered`` events that contain this type.
+/// Use the discovered accessory's Bluetooth properties to create a new ``ASDiscoveredDisplayItem``, incorporating traits like a custom accessory name or a newly downloaded product image.
+/// You can then add this item to the picker to allow the person using the app to set up the accessory.
+AS_EXTERN
+API_AVAILABLE( ios( 26.1 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos)
+NS_SWIFT_SENDABLE
+@interface ASDiscoveredAccessory : ASAccessory
+
+/// The Bluetooth advertisement data from the discovered accessory.
+@property (readonly, copy, nullable, nonatomic) NSDictionary *bluetoothAdvertisementData;
+
+/// The Bluetooth RSSI (Received Signal Strength Indicator) value from the discovered accessory.
+///
+/// This value represents the signal strength in dBm when the session discovered the accessory.
+@property (readonly, copy, nullable, nonatomic) NSNumber *bluetoothRSSI NS_REFINED_FOR_SWIFT;
+
+@end
+
 NS_ASSUME_NONNULL_END

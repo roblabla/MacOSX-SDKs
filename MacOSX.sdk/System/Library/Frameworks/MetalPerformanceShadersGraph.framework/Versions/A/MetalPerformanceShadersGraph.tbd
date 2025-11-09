@@ -75,6 +75,8 @@ exports:
                        '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV13gCommandQueueSo010MTLCommandI0_pvpMV', 
                        '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV17adapterExecutableSo0eI0CSgvg', 
                        '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV17adapterExecutableSo0eI0CSgvpMV', 
+                       '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV29executableExecutionDescriptorSo0e10ExecutableiJ0Cvg', 
+                       '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV29executableExecutionDescriptorSo0e10ExecutableiJ0CvpMV', 
                        '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV4ODIE0G0AAMc', 
                        '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV4name10executable17adapterExecutable7gDevice13gCommandQueue12functionName12stateIndicesACSS_So0eK0CALSgSo9MTLDevice_pSo010MTLCommandN0_pSSSaySo8NSNumberCGSgtcfC', 
                        '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV4nameSSvM', 

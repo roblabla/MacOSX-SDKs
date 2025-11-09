@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ControlCenter.framework/Versions/A/ControlCenter'
-current-version: 682.0.2
+current-version: 682.1.31
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -97,6 +97,7 @@ exports:
                        '_$s13ControlCenter0aB17ModuleXPCListenerCMu', '_$s13ControlCenter0aB17ModuleXPCListenerCN', 
                        '_$s13ControlCenter0aB17ModuleXPCListenerCfD', '_$s13ControlCenter0aB17ModuleXPCListenerCfd', 
                        '_$s13ControlCenter0aB22CopyClockTimeFormatterSo06NSDateF0CyF', 
+                       '_$s13ControlCenter0aB23CopyDateFormatterLocale10Foundation0F0VyF', 
                        '_$s13ControlCenter0aB26CopyClockDateOnlyFormatterSo06NSDateG0CyF', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerC010userShowInaB0SbSgvM', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerC010userShowInaB0SbSgvg', 
@@ -396,10 +397,8 @@ exports:
                        '_$s13ControlCenter16ClockPreferencesC8isForcedySbs7KeyPathCyACxGlF', 
                        '_$s13ControlCenter16ClockPreferencesC8showAMPMSbvM', '_$s13ControlCenter16ClockPreferencesC8showAMPMSbvg', 
                        '_$s13ControlCenter16ClockPreferencesC8showAMPMSbvpMV', '_$s13ControlCenter16ClockPreferencesC8showAMPMSbvs', 
-                       '_$s13ControlCenter16ClockPreferencesC8showDateAC04ShowF0OvM', 
-                       '_$s13ControlCenter16ClockPreferencesC8showDateAC04ShowF0Ovg', 
-                       '_$s13ControlCenter16ClockPreferencesC8showDateAC04ShowF0OvpMV', 
-                       '_$s13ControlCenter16ClockPreferencesC8showDateAC04ShowF0Ovs', 
+                       '_$s13ControlCenter16ClockPreferencesC8showDateSbvM', '_$s13ControlCenter16ClockPreferencesC8showDateSbvg', 
+                       '_$s13ControlCenter16ClockPreferencesC8showDateSbvpMV', '_$s13ControlCenter16ClockPreferencesC8showDateSbvs', 
                        '_$s13ControlCenter16ClockPreferencesCACycfC', '_$s13ControlCenter16ClockPreferencesCACycfCTj', 
                        '_$s13ControlCenter16ClockPreferencesCACycfCTq', '_$s13ControlCenter16ClockPreferencesCACycfc', 
                        '_$s13ControlCenter16ClockPreferencesCMa', '_$s13ControlCenter16ClockPreferencesCMm', 
@@ -601,18 +600,11 @@ exports:
                        '_$s13ControlCenter22ClockSpeechPreferencesC14chosenIntervalSSvg', 
                        '_$s13ControlCenter22ClockSpeechPreferencesC14chosenIntervalSSvpMV', 
                        '_$s13ControlCenter22ClockSpeechPreferencesC14chosenIntervalSSvs', 
-                       '_$s13ControlCenter22ClockSpeechPreferencesC3app4keysACSS_xtcSTRzSS7ElementRtzlufC', 
-                       '_$s13ControlCenter22ClockSpeechPreferencesC3app4keysACSS_xtcSTRzSS7ElementRtzlufc', 
-                       '_$s13ControlCenter22ClockSpeechPreferencesC3app4keysACSS_xtcSTRzSY7ElementRpzSSAF_8RawValueRTzlufC', 
-                       '_$s13ControlCenter22ClockSpeechPreferencesC3app4keysACSS_xtcSTRzSY7ElementRpzSSAF_8RawValueRTzlufc', 
-                       '_$s13ControlCenter22ClockSpeechPreferencesC6domain4keysAcA0E0V6DomainV_xtcSTRzSS7ElementRtzlufC', 
-                       '_$s13ControlCenter22ClockSpeechPreferencesC6domain4keysAcA0E0V6DomainV_xtcSTRzSS7ElementRtzlufc', 
-                       '_$s13ControlCenter22ClockSpeechPreferencesC6domain4keysAcA0E0V6DomainV_xtcSTRzSY7ElementRpzSSAJ_8RawValueRTzlufC', 
-                       '_$s13ControlCenter22ClockSpeechPreferencesC6domain4keysAcA0E0V6DomainV_xtcSTRzSY7ElementRpzSSAJ_8RawValueRTzlufc', 
                        '_$s13ControlCenter22ClockSpeechPreferencesC6sharedACvMZ', 
                        '_$s13ControlCenter22ClockSpeechPreferencesC6sharedACvgZ', 
                        '_$s13ControlCenter22ClockSpeechPreferencesC6sharedACvpZMV', 
                        '_$s13ControlCenter22ClockSpeechPreferencesC6sharedACvsZ', 
+                       '_$s13ControlCenter22ClockSpeechPreferencesC7Combine16ObservableObjectAAMc', 
                        '_$s13ControlCenter22ClockSpeechPreferencesC8IntervalV2idSSvM', 
                        '_$s13ControlCenter22ClockSpeechPreferencesC8IntervalV2idSSvg', 
                        '_$s13ControlCenter22ClockSpeechPreferencesC8IntervalV2idSSvpMV', 
@@ -631,13 +623,9 @@ exports:
                        '_$s13ControlCenter22ClockSpeechPreferencesC9isEnabledSbvg', 
                        '_$s13ControlCenter22ClockSpeechPreferencesC9isEnabledSbvpMV', 
                        '_$s13ControlCenter22ClockSpeechPreferencesC9isEnabledSbvs', 
-                       '_$s13ControlCenter22ClockSpeechPreferencesCACycfC', '_$s13ControlCenter22ClockSpeechPreferencesCACycfCTj', 
-                       '_$s13ControlCenter22ClockSpeechPreferencesCACycfCTq', '_$s13ControlCenter22ClockSpeechPreferencesCACycfc', 
-                       '_$s13ControlCenter22ClockSpeechPreferencesCMa', '_$s13ControlCenter22ClockSpeechPreferencesCMm', 
-                       '_$s13ControlCenter22ClockSpeechPreferencesCMn', '_$s13ControlCenter22ClockSpeechPreferencesCMo', 
-                       '_$s13ControlCenter22ClockSpeechPreferencesCMu', '_$s13ControlCenter22ClockSpeechPreferencesCN', 
-                       '_$s13ControlCenter22ClockSpeechPreferencesCfD', '_$s13ControlCenter22ClockSpeechPreferencesCfd', 
-                       '_$s13ControlCenter22TimeMachinePreferencesC13showInMenuBarSbvM', 
+                       '_$s13ControlCenter22ClockSpeechPreferencesCMa', '_$s13ControlCenter22ClockSpeechPreferencesCMn', 
+                       '_$s13ControlCenter22ClockSpeechPreferencesCMo', '_$s13ControlCenter22ClockSpeechPreferencesCN', 
+                       '_$s13ControlCenter22ClockSpeechPreferencesCfD', '_$s13ControlCenter22TimeMachinePreferencesC13showInMenuBarSbvM', 
                        '_$s13ControlCenter22TimeMachinePreferencesC13showInMenuBarSbvg', 
                        '_$s13ControlCenter22TimeMachinePreferencesC13showInMenuBarSbvpMV', 
                        '_$s13ControlCenter22TimeMachinePreferencesC13showInMenuBarSbvs', 
@@ -746,6 +734,7 @@ exports:
                        '_$s13ControlCenter28SystemItemMenuBarPreferencesC23stopTrackingApplication3for10auditTokenySS_So0L8_token_tatF', 
                        '_$s13ControlCenter28SystemItemMenuBarPreferencesC24startTrackingApplication2at10auditTokeny10Foundation3URLV_So0L8_token_tatF', 
                        '_$s13ControlCenter28SystemItemMenuBarPreferencesC24startTrackingApplication3for10auditTokenySS_So0L8_token_tatF', 
+                       '_$s13ControlCenter28SystemItemMenuBarPreferencesC25verifyTrackedApplicationsyyF', 
                        '_$s13ControlCenter28SystemItemMenuBarPreferencesC26TrackedApplicationLocationO11descriptionSSvg', 
                        '_$s13ControlCenter28SystemItemMenuBarPreferencesC26TrackedApplicationLocationO11descriptionSSvpMV', 
                        '_$s13ControlCenter28SystemItemMenuBarPreferencesC26TrackedApplicationLocationO2eeoiySbAE_AEtFZ', 
@@ -802,5 +791,5 @@ exports:
                        '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesCfd', 
                        _ControlCenterClockDateFormatterChangedNotification, _ControlCenterCopyClockDateFormatter, 
                        __ControlCenterCopyClockDateFormatter ]
-    objc-classes:    [ _TtC13ControlCenter19ControlCenterModule ]
+    objc-classes:    [ _TtC13ControlCenter19ControlCenterModule, _TtC13ControlCenter22ClockSpeechPreferences ]
 ...

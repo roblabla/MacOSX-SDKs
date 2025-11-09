@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftAccelerate.dylib'
-current-version: 75
+current-version: 77
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1403,6 +1403,10 @@ exports:
                        '_$s10Accelerate4vDSPO22integerToFloatingPoint_08floatingF4TypeSayq_Gx_q_mtAA0A6BufferRzAA01vb1_eF11ConvertableR_s6UInt32V7ElementRtzr0_lFZ', 
                        '_$s10Accelerate4vDSPO23indexOfMaximumMagnitudeySu_SdtxAA0A6BufferRzSd7ElementRtzlFZ', 
                        '_$s10Accelerate4vDSPO23indexOfMaximumMagnitudeySu_SftxAA0A6BufferRzSf7ElementRtzlFZ', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformC11previousDFT5count9direction13transformType02ofK0AEy_xGAKSg_SiAC0dE9DirectionOAC012DFTTransformK0OxmtKcfC', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformC11previousDFT5count9direction13transformType02ofK0AEy_xGAKSg_SiAC0dE9DirectionOAC012DFTTransformK0OxmtKcfCTj', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformC11previousDFT5count9direction13transformType02ofK0AEy_xGAKSg_SiAC0dE9DirectionOAC012DFTTransformK0OxmtKcfCTq', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformC11previousDFT5count9direction13transformType02ofK0AEy_xGAKSg_SiAC0dE9DirectionOAC012DFTTransformK0OxmtKcfc', 
                        '_$s10Accelerate4vDSPO24DiscreteFourierTransformC8previous5count9direction13transformType02ofJ0AEy_xGAEy_SfGSg_SiAC0dE9DirectionOAC012DFTTransformJ0OxmtKcfC', 
                        '_$s10Accelerate4vDSPO24DiscreteFourierTransformC8previous5count9direction13transformType02ofJ0AEy_xGAEy_SfGSg_SiAC0dE9DirectionOAC012DFTTransformJ0OxmtKcfCTj', 
                        '_$s10Accelerate4vDSPO24DiscreteFourierTransformC8previous5count9direction13transformType02ofJ0AEy_xGAEy_SfGSg_SiAC0dE9DirectionOAC012DFTTransformJ0OxmtKcfCTq', 

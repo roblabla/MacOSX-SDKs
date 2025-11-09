@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SpotlightIndex.framework/Versions/A/SpotlightIndex'
-current-version: 2393.255
+current-version: 2400.14.255
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -90,7 +90,8 @@ exports:
                        __SICopyMeFullName, __SICopyMeGivenNameTokens, __SICopyMeNameTokens, 
                        __SICopyMeNonGivenNameTokens, __SICopyPropertyIDMap, __SICrashStateDump, 
                        __SICreateContactMailCounts, __SICreateContactSMSCounts, __SIDeleteBundles, 
-                       __SIDirectoryStoreIterate, __SIFilterValidatedCSImports, __SIFlushAndSyncIndex, 
+                       __SIDirectoryStoreIterate, __SIDumpIndexSetRefs, __SIDumpJobRefs, 
+                       __SIDumpQueryInfo, __SIFilterValidatedCSImports, __SIFlushAndSyncIndex, 
                        __SIGetAllOids, __SIGetDocumentCount, __SIGetErrorString, 
                        __SIGetFieldNameForId, __SIGetFileOptions, __SIGetIndexCount, 
                        __SIGetLastUsedDate, __SIGetMissingParentOID, __SIGetRecoverTimeStamp, 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GenerativeAssistantSettings.framework/Versions/A/GenerativeAssistantSettings'
-current-version: 3500.83.3
+current-version: 3505.21.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -151,10 +151,12 @@ exports:
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsC31decrementKnowledgeFallbackCountyyFZ', 
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsC31incrementKnowledgeFallbackCountyyFZ', 
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsC32clearConfirmationPromptCancelledyyFZ', 
+                       '_$s27GenerativeAssistantSettings0abC12UserDefaultsC32isRegionUnavailablityDialogShownSbyFZ', 
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsC32recordDeclineConfirmationRequestyyFZ', 
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsC32setDeclineKnowledgeFallbackCountyySiFZ', 
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsC32updateConsecutiveLLMConfirmation4datey10Foundation4DateV_tFZ', 
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsC33clearLastRateLimitFullMessageDateyyFZ', 
+                       '_$s27GenerativeAssistantSettings0abC12UserDefaultsC33setRegionUnavailablityDialogShownyySbFZ', 
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsC34declineKnowledgeFallbackExpiration10Foundation4DateVyFZ', 
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsC34setConsecutiveLLMConfirmationDatesyySay10Foundation4DateVGFZ', 
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsC34setDeclineComposeViaSiriExpirationyy10Foundation4DateVFZ', 
@@ -176,6 +178,7 @@ exports:
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsC3KeyO27confirmationPromptCancelledyA2EmFWC', 
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsC3KeyO28lastRateLimitFullMessageDateyA2EmFWC', 
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsC3KeyO29declineKnowledgeFallbackCountyA2EmFWC', 
+                       '_$s27GenerativeAssistantSettings0abC12UserDefaultsC3KeyO30regionUnavailablityDialogShownyA2EmFWC', 
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsC3KeyO31consecutiveLLMConfirmationDatesyA2EmFWC', 
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsC3KeyO31declineComposeViaSiriExpirationyA2EmFWC', 
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsC3KeyO34declineKnowledgeFallbackExpirationyA2EmFWC', 

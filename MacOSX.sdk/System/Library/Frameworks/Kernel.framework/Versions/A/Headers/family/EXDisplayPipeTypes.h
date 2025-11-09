@@ -116,6 +116,47 @@ typedef struct
     uint64_t tconhpd;
     uint64_t dcptransporthealth;
     uint64_t silhealth;
+    uint64_t periodicHealthCheck;
+    uint64_t hwlinkfailures;
+    uint64_t nonauthenticpanel;
+    // new stats information
+    uint64_t sclDriverFailureTime;
+    uint64_t scaDriverFailureTime;
+    uint64_t scaAlgorithmFailureTime;
+    uint64_t pipeFailureTime;
+    uint64_t linkFailureTime;
+    uint64_t globalHealthFailureTime;
+    uint64_t hwlinkfailuresFailureTime;
+    uint64_t silHealthFailureTime;
+    uint64_t brightnessFailureTime;
+    uint64_t tconCrcFailureTime;
+    uint64_t tconHealthFailureTime;
+    uint64_t tconHpdFailureTime;
+    uint64_t dcpTransportHealthFailureTime;
+    uint64_t nonauthenticpanelFailureTime;
+
+    uint64_t scaFailuresBeyondThresh;
+    uint64_t crcFailuresBeyondThresh;
+
+    // Chillpill (cp) counters
+    uint64_t globalHealthCp;
+    uint64_t sclDriverCp;
+    uint64_t scaDriverCp;
+    uint64_t scaAlgorithmCp;
+    uint64_t pipeCp;
+    uint64_t linkCp;
+    uint64_t brightnessCp;
+    uint64_t tconCrcCp;
+    uint64_t tconHealthCp;
+    uint64_t tconHpdCp;
+    uint64_t dcpTransportHealthCp;
+    uint64_t silHealthCp;
+    uint64_t hwlinkfailuresCp;
+    uint64_t nonauthenticpanelCp;
+
+    // Average variance counters
+    uint64_t averageSCAVariance;
+    uint64_t averageCRCVariance;
 } EXDisplayPipeHealthStats;
 
 // kEXBrightMessageFunction API

@@ -86,6 +86,7 @@ exports:
                        __Z38hdr10_applyTonemapCurveS_C_PolyGenericfPK13_HDR10TMParam, 
                        __Z40dovi_setScalingFactorTableS_C_deprecatedPfPKfmPK11dm_config_tPK12_DoViTMParamPK19_EdrAdaptationParamPK19_AmbAdaptationParam, 
                        __Z45spl_apply_with_linear_extension_and_high_clipfiPKfS0_S0_, 
+                       __Z55spl_apply_with_linear_extension_and_high_clip_monotonicfiPKfS0_S0_, 
                        __Z56calculateHeadroomForInternalCapturesInternalOrRefDisplayP11dm_config_tP17ToneCurve_Control18_HDRProcessingTypeP20HistBasedToneMappingf, 
                        __Z8L2PqNormf, __Z9GetChipIdv, __Z9GetConfigv, __ZN10commonRBSP10byte_alignEv, 
                        __ZN10commonRBSP10flush_bitsEib, __ZN10commonRBSP14byte_alignmentEv, 

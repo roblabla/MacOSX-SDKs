@@ -241,8 +241,8 @@ API_UNAVAILABLE(visionos)
 ///
 /// The frame interpolator uses this property to overlay your custom UI on any frame data it produces into ``outputTexture``.
 ///
-/// Use property ``uiTextureComposited`` to indicate to this frame interpolator if ``colorTexture`` contains a precomposition
-/// of this UI to avoid it producing incorrect results for the overlay.
+/// Use property ``uiTextureComposited`` to indicate to this frame interpolator if this texture contains a precomposition of
+/// ``colorTexture``and UI.
 @property (nonatomic, retain, nullable, setter=setUITexture:) id<MTLTexture> uiTexture;
 
 

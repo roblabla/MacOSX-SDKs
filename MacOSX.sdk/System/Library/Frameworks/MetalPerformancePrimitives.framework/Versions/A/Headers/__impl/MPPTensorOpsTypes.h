@@ -130,7 +130,7 @@ inline uint16_t __sizeof_tensorops_datatype(__tensor_ops_datatype dataType)
 template <typename T, typename U = __tensor_ops_detail::__enable_if_t<__tensor_ops_detail::__is_integral_v<T>>>
 struct dynamic_length
 {
-  static constexpr constant T value = metal::numeric_limits<T>::max();
+    static constexpr constant T value = metal::numeric_limits<T>::max();
 };
 
 template <typename T, typename U = __tensor_ops_detail::__enable_if_t<__tensor_ops_detail::__is_integral_v<T>>>

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CalendarFoundation.framework/Versions/A/CalendarFoundation'
-current-version: 1603
+current-version: 1603.1.2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -23,7 +23,10 @@ exports:
                        '_$s18CalendarFoundation0A12FeatureFlagsO9hashValueSivpMV', 
                        '_$s18CalendarFoundation0A12FeatureFlagsOMa', '_$s18CalendarFoundation0A12FeatureFlagsOMn', 
                        '_$s18CalendarFoundation0A12FeatureFlagsON', '_$s18CalendarFoundation0A12FeatureFlagsOSHAAMc', 
-                       '_$s18CalendarFoundation0A12FeatureFlagsOSQAAMc', '_$sSo19CalBlockListWrapperC18CalendarFoundationE11batchLookup6emails12phoneNumbers17completionHandlerySaySSGSg_AIy0F08IndexSetVSg_AMs5Error_pSgtYbctF', 
+                       '_$s18CalendarFoundation0A12FeatureFlagsOSQAAMc', '_$sSo19CalBlockListWrapperC18CalendarFoundationE11batchCached6emails12phoneNumbers17completionHandlerySaySSGSg_AIy0F08IndexSetVSg_AMs5Error_pSgtYbctF', 
+                       '_$sSo19CalBlockListWrapperC18CalendarFoundationE11batchLookup6emails12phoneNumbers17completionHandlerySaySSGSg_AIy0F08IndexSetVSg_AMs5Error_pSgtYbctF', 
+                       '_$sSo19CalBlockListWrapperC18CalendarFoundationE13cachedBlocked11phoneNumberSbSS_tF', 
+                       '_$sSo19CalBlockListWrapperC18CalendarFoundationE13cachedBlocked5emailSbSS_tF', 
                        '_$sSo19CalBlockListWrapperC18CalendarFoundationE7isEmptySbvg', 
                        '_$sSo19CalBlockListWrapperC18CalendarFoundationE7isEmptySbvpMV', 
                        '_$sSo19CalBlockListWrapperC18CalendarFoundationE9isBlocked11phoneNumberSbSS_tF', 
@@ -32,7 +35,10 @@ exports:
                        '_$sSo19CalBlockListWrapperC18CalendarFoundationEABycfc', 
                        '_$sSo19CalBlockListWrapperCMa', '_$sSo20CalInMemoryBlockListC18CalendarFoundationE10addBlocked11phoneNumberySS_tF', 
                        '_$sSo20CalInMemoryBlockListC18CalendarFoundationE10addBlocked5emailySS_tF', 
+                       '_$sSo20CalInMemoryBlockListC18CalendarFoundationE11batchCached6emails12phoneNumbers17completionHandlerySaySSGSg_AIy0G08IndexSetVSg_AMs5Error_pSgtYbctF', 
                        '_$sSo20CalInMemoryBlockListC18CalendarFoundationE11batchLookup6emails12phoneNumbers17completionHandlerySaySSGSg_AIy0G08IndexSetVSg_AMs5Error_pSgtYbctF', 
+                       '_$sSo20CalInMemoryBlockListC18CalendarFoundationE13cachedBlocked11phoneNumberSbSS_tF', 
+                       '_$sSo20CalInMemoryBlockListC18CalendarFoundationE13cachedBlocked5emailSbSS_tF', 
                        '_$sSo20CalInMemoryBlockListC18CalendarFoundationE7isEmptySbvg', 
                        '_$sSo20CalInMemoryBlockListC18CalendarFoundationE7isEmptySbvpMV', 
                        '_$sSo20CalInMemoryBlockListC18CalendarFoundationE9isBlocked11phoneNumberSbSS_tF', 
@@ -84,8 +90,9 @@ exports:
                        _CalAccountVisibleChangedKey, _CalAccountsCredentialsChanged, 
                        _CalAddStateCaptureBlock, _CalAnalyticsIsEventUsed, _CalAnalyticsSendEvent, 
                        _CalAnalyticsSendEventLazy, _CalAnalyticsTimeIntervalFromMachTimes, 
-                       _CalAppNameForBundleID, _CalApproximateContinuousTime, _CalBooleanAsString, 
-                       _CalCFTimeZoneCopyCalTimeZone, _CalCachedObjectForKeyWithCalculateBlock, 
+                       _CalAppNameForBundleID, _CalApproximateContinuousTime, _CalBlockListCacheUpdatedNotification, 
+                       _CalBlockListUpdatedEmailsKey, _CalBlockListUpdatedPhonesKey, 
+                       _CalBooleanAsString, _CalCFTimeZoneCopyCalTimeZone, _CalCachedObjectForKeyWithCalculateBlock, 
                        _CalChronometryTodayChangedNotification, _CalColorStringRepresentation, 
                        _CalColorsAreAlmostEqual, _CalContactsProviderHistoryToken, 
                        _CalContinuousIntervalToNSTimeInterval, _CalContinuousTime, 

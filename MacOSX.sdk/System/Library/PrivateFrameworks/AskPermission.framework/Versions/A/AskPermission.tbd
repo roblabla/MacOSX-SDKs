@@ -26,8 +26,8 @@ exports:
                        _kPRRequestInfoStoreSalableURL, _kPRRequestInfoStoreSalables, 
                        _kPRRequestInfoStoreSandboxRequest, _kPRRequestQueueiTunesStoreIdentifier, 
                        _kUserIDNamespace ]
-    objc-classes:    [ APDefaults, APLogConfig, APMetricsEvent, APMutableLogConfig, 
-                       APRemoteApprovalBiometricsMetricsEvent, APRemoteApprovalPasswordEntryMetricsEvent, 
-                       APRequestExtension, APRequestHandler, APResult, PRRequest, 
-                       PRRequestQueue ]
+    objc-classes:    [ APAskToAgeRestrictionMetadata, APDefaults, APLogConfig, APMetricsEvent, 
+                       APMutableLogConfig, APRemoteApprovalBiometricsMetricsEvent, 
+                       APRemoteApprovalPasswordEntryMetricsEvent, APRequestExtension, 
+                       APRequestHandler, APResult, PRRequest, PRRequestQueue ]
 ...

@@ -30,6 +30,8 @@ exports:
                        '_$s13TVAppServices0A12AccountStoreC8accountsSaySo9ACAccountCGvpZMV', 
                        '_$s13TVAppServices0A12AccountStoreC9mediaTypeSo015AMSAccountMediaF0aSgvgZ', 
                        '_$s13TVAppServices0A12AccountStoreC9mediaTypeSo015AMSAccountMediaF0aSgvpZMV', 
+                       '_$s13TVAppServices0A12AccountStoreCACycfC', '_$s13TVAppServices0A12AccountStoreCACycfCTj', 
+                       '_$s13TVAppServices0A12AccountStoreCACycfCTq', '_$s13TVAppServices0A12AccountStoreCACycfc', 
                        '_$s13TVAppServices0A12AccountStoreCMa', '_$s13TVAppServices0A12AccountStoreCMm', 
                        '_$s13TVAppServices0A12AccountStoreCMn', '_$s13TVAppServices0A12AccountStoreCMo', 
                        '_$s13TVAppServices0A12AccountStoreCMu', '_$s13TVAppServices0A12AccountStoreCN', 

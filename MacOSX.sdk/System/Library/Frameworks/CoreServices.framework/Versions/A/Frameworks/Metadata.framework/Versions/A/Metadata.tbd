@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata'
-current-version: 2393.255
+current-version: 2400.14.255
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -205,11 +205,11 @@ exports:
                        __MDQuerySetClientBundleID, __MDQuerySetCompletionOptions, 
                        __MDQuerySetCompletionQuery, __MDQuerySetCompletionQueryWithWeights, 
                        __MDQuerySetCompletionResultCount, __MDQuerySetCreateResultFunctionWithKeyCallBacks, 
-                       __MDQuerySetGroupComparator, __MDQuerySetGroupingRules, __MDQuerySetHasUpdateNotification, 
-                       __MDQuerySetLabel, __MDQuerySetMDFilter, __MDQuerySetMDFilterQueries, 
-                       __MDQuerySetMatchesOnlyFinderFiles, __MDQuerySetMaxCountPerGroup, 
-                       __MDQuerySetMenuSortFlagsForQuery, __MDQuerySetNoProgress, 
-                       __MDQuerySetPommesRanking, __MDQuerySetQueryUnderstanding, 
+                       __MDQuerySetDateSortedL1, __MDQuerySetGroupComparator, __MDQuerySetGroupingRules, 
+                       __MDQuerySetHasUpdateNotification, __MDQuerySetLabel, __MDQuerySetMDFilter, 
+                       __MDQuerySetMDFilterQueries, __MDQuerySetMatchesOnlyFinderFiles, 
+                       __MDQuerySetMaxCountPerGroup, __MDQuerySetMenuSortFlagsForQuery, 
+                       __MDQuerySetNoProgress, __MDQuerySetPommesRanking, __MDQuerySetQueryUnderstanding, 
                        __MDQuerySetRankingTerms, __MDQuerySetResultMatchingAttributes, 
                        __MDQuerySetSearchScopes, __MDQuerySetSortFlagsForAttribute, 
                        __MDQuerySetSortOrder, __MDQuerySetSortToNone, __MDQuerySetTokenRewrites, 
@@ -381,14 +381,14 @@ exports:
                        _kMDQueryBatchFirstCount, _kMDQueryBatchFirstDelay, _kMDQueryBatchProgressCount, 
                        _kMDQueryBatchProgressDelay, _kMDQueryBatchUpdateCount, _kMDQueryBatchUpdateDelay, 
                        _kMDQueryCompletionFields, _kMDQueryCompletionOptions, _kMDQueryCompletionResultCount, 
-                       _kMDQueryCompletionString, _kMDQueryCompletionWeights, _kMDQueryDidFinishNotification, 
-                       _kMDQueryDidUpdateNotification, _kMDQueryFilters, _kMDQueryFlatScopes, 
-                       _kMDQueryGroupMaxCount, _kMDQueryGroupingRules, _kMDQueryHasUpdateNotification, 
-                       _kMDQueryIndexedOnly, _kMDQueryIsLive, _kMDQueryIsLowPriority, 
-                       _kMDQueryItemArray, _kMDQueryLiftingRules, _kMDQueryMDFilter, 
-                       _kMDQueryMatchOnlyFinderFiles, _kMDQueryMatchSupportFiles, 
-                       _kMDQueryMaxCount, _kMDQueryNoProgress, _kMDQueryNoRewrite, 
-                       _kMDQueryOptionContextIdentifier, _kMDQueryOptionFinderLabelsDict, 
+                       _kMDQueryCompletionString, _kMDQueryCompletionWeights, _kMDQueryDateSortedL1, 
+                       _kMDQueryDidFinishNotification, _kMDQueryDidUpdateNotification, 
+                       _kMDQueryFilters, _kMDQueryFlatScopes, _kMDQueryGroupMaxCount, 
+                       _kMDQueryGroupingRules, _kMDQueryHasUpdateNotification, _kMDQueryIndexedOnly, 
+                       _kMDQueryIsLive, _kMDQueryIsLowPriority, _kMDQueryItemArray, 
+                       _kMDQueryLiftingRules, _kMDQueryMDFilter, _kMDQueryMatchOnlyFinderFiles, 
+                       _kMDQueryMatchSupportFiles, _kMDQueryMaxCount, _kMDQueryNoProgress, 
+                       _kMDQueryNoRewrite, _kMDQueryOptionContextIdentifier, _kMDQueryOptionFinderLabelsDict, 
                        _kMDQueryOptionFinderLabelsDictLocale, _kMDQueryOptionSPQUParse, 
                        _kMDQueryProgressNotification, _kMDQueryQoSClass, _kMDQueryResultContentRelevance, 
                        _kMDQueryResultGroupId, _kMDQueryResultMLRelevance, _kMDQueryResultMatchedDisplayNameField, 

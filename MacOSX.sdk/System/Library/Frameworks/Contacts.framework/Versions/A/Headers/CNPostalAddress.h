@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @discussion CNPostalAddress is thread safe.
  */
 NS_CLASS_AVAILABLE(10_11, 9_0)
+NS_SWIFT_SENDABLE
 @interface CNPostalAddress : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 
 /*! multi-street address is delimited with carriage returns “\n” */

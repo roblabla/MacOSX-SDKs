@@ -79,7 +79,7 @@
 .Fa "xpc_connection_t connection"
 .Fc
 .Ft gid_t
-.Fo xpc_connection_get_guid
+.Fo xpc_connection_get_egid
 .Fa "xpc_connection_t connection"
 .Fc
 .Ft pid_t
@@ -129,7 +129,7 @@ semantically similar to the
 .Xr accept 3
 model, whereby the server listens on a single file descriptor, and that
 listening descriptor emits new file descriptors for each connection that
-occurs. 
+occurs.
 .Sh EVENT HANDLERS
 Each connection must have an event handler associated with it. The event handler
 block takes one argument of type
@@ -225,6 +225,20 @@ If the service is a MachService advertised by
 .Xr launchd 8 ,
 then the listener connection for the named service will receive the new
 connection in its event handler.
+.Pp
+Peer connections must either be accepted by setting an event handler with
+.Xr xpc_connection_set_event_handler 3
+and calling
+.Xr xpc_connection_resume 3 ,
+or rejected by calling
+.Xr xpc_connection_cancel 3 .
+Failure to take one of these actions will result in the connection remaining
+in an undefined state, potentially causing resource leaks or preventing proper
+transaction cleanup. This requirement applies to all listener connections,
+including those created with
+.Fn xpc_connection_create_mach_service
+and those managed automatically by
+.Xr xpc_main 3 .
 .Pp
 Even if the same process creates multiple connections to the same service, each
 connection will be distinct. The peer connection received by the service will
@@ -326,7 +340,7 @@ the message.
 .Ss Execution Ordering
 .Pp
 Send barriers are NOT immediately enqueued on the connection's target queue and
-therefore has no guaranteed execution order with respect to other blocks
+therefore have no guaranteed execution order with respect to other blocks
 scheduled on that queue. The following code illustrates this anti-pattern:
 .Bd -literal -offset indent
 xpc_connection_set_target_queue(connection, queue);
@@ -353,7 +367,7 @@ static bool aboolean = false;
 
 dispatch_group_t group = dispatch_group_create();
 
-dispatch_group_enter(group)
+dispatch_group_enter(group);
 xpc_connection_send_barrier(connection, ^{
 	aboolean = true;
 	dispatch_group_leave(group);
@@ -447,9 +461,9 @@ this API may return errors indicating that the remote end of the connection will
 never deliver a reply.
 .Pp
 .Em Important :
-This API is primarily intended for allowing existing synchronous API to be re-
-implemented in terms of XPC. But in cases where the you are designing a new API
-that calls  out to a service to retrieve a value, we strongly encourage you to
+This API is primarily intended for allowing existing synchronous APIs to be re-
+implemented in terms of XPC. But in cases where you are designing a new API
+that calls out to a service to retrieve a value, we strongly encourage you to
 have the API return the value asynchronously using a queue/block pair rather
 than blocking the caller until the service returns the requested value:
 .Pp
@@ -486,17 +500,49 @@ response requires I/O, and it is likely to be called from the main thread (or a
 thread which synchronizes with the main thread), we highly encourage that you
 take the asynchronous route to avoid the risk of blocking the UI.
 .Sh CREDENTIALS
-Identifying information about the sending processs can be obtained from a
-connection. Available credential information includes the sending
-process identifer (PID), effective user identifier (EUID),
-effective group identifier (EGID) and audit session identifier (ASID).
+Modern XPC applications should use peer requirement APIs for secure validation
+of connecting processes. These APIs provide automatic, continuous validation of
+every incoming message and prevent connection sharing attacks. Available peer
+requirement functions include
+.Fn xpc_connection_set_peer_lightweight_code_requirement
+for complex code signing requirements using dictionary format,
+.Fn xpc_connection_set_peer_code_signing_requirement
+for full code signing requirement strings,
+.Fn xpc_connection_set_peer_entitlement_exists_requirement
+and
+.Fn xpc_connection_set_peer_entitlement_matches_value_requirement
+for entitlement-based validation,
+.Fn xpc_connection_set_peer_team_identity_requirement
+for team identifier validation, and
+.Fn xpc_connection_set_peer_platform_identity_requirement
+for validating Apple-signed platform binaries.
+These APIs deliver
+.Ft XPC_ERROR_PEER_CODE_SIGNING_REQUIREMENT
+when validation fails.
+.Pp
+For services bundled with an application, the security implications are
+somewhat reduced because the application is the only process capable of
+looking up its services. However, MachServices advertised through launchd
+have much higher visibility and are particularly vulnerable to attacks where
+connections are shared between processes with different privilege levels.
+.Pp
+Legacy credential information about the sending process can be obtained from a
+connection, including the process identifier (PID), effective user identifier
+(EUID), effective group identifier (EGID) and audit session identifier (ASID).
 These values can be obtained with the functions
 .Fn xpc_connection_get_pid ,
 .Fn xpc_connection_get_euid ,
 .Fn xpc_connection_get_egid
 and
 .Fn xpc_connection_get_asid 
-respectively.
+respectively. However, credential checking using these APIs is inherently
+insecure and should be avoided. A malicious client can send its connection
+mach port to another process with different credentials, bypassing
+credential checks performed only at connection establishment time. Additionally,
+PIDs on macOS roll over when they reach a relatively small value, and a given
+PID cannot be assumed to be unique for a given boot session, making PID-based
+validation unreliable. These functions return information about the process
+that sent the most recent message.
 .Pp
 Credentials for a connection may not be immediately available. For example, when
 creating a new connection with
@@ -514,7 +560,6 @@ will return -1 and
 .Fn xpc_connection_get_asid
 will return AU_ASSIGN_ASID (see
 .Xr setaudit_addr 2) .
-.Pp
 For peer connections received through a listener's event handler or through the
 handler given to
 .Xr xpc_main 3 ,
@@ -524,18 +569,7 @@ Connection credentials have similar semantics to file descriptor credentials.
 That is, the credentials that the connection was created with are "baked in" to
 it and do not change as a result of calls to
 .Xr setuid 3
-and friends. Use of these APIs is heavily discouraged in IPC protocols due to
-the inherently racy nature of credential checking.
-.Pp
-.Em Important :
-PIDs on OS X roll over when they reach a relatively small value, and a given PID
-cannot be assumed to be unique for a given boot session. For services bundled
-with an application, this is not a practical concern because the application is
-the only process capable of looking up its services. But MachServices advertised
-through launchd have a much higher visibility, so extra care should be taken
-when checking credentials to mitigate
-.Xr fork 2
-bomb-style attacks.
+and friends.
 .Sh CANCELLATION
 A connection may be canceled when it is no longer needed. Once canceled, a
 connection will receive the
@@ -628,12 +662,28 @@ connection's event handler will receive the XPC_ERROR_CONNECTION_INVALID error,
 as XPC disallows ad-hoc service name registrations.  However, assuming your
 configuration is correct, the listener connection will only ever deliver new
 peer connections to its event handler. The connections received by the event
-handler must have an event hander set on them and resumed along with an optional
+handler must have an event handler set on them and resumed along with an optional
 target queue, just like the peer
 connections delivered to the handler given to
 .Xr xpc_main 3 .
 Note connections received through listener connection's event handler do not
 inherit the target queue of the listener.
+.Pp
+Peer connections received through a listener connection's event handler
+.Em must
+either be accepted by setting an event handler with
+.Xr xpc_connection_set_event_handler 3
+and calling
+.Xr xpc_connection_resume 3 ,
+or rejected by calling
+.Xr xpc_connection_cancel 3 .
+Failure to take one of these actions will result in the connection remaining
+in an undefined state, potentially causing resource leaks or preventing proper
+transaction cleanup. This requirement applies to all listener connections,
+including those created with
+.Fn xpc_connection_create_mach_service
+and those managed automatically by
+.Xr xpc_main 3 .
 .Pp
 .Bd -literal -offset indent
 int
@@ -693,7 +743,7 @@ then be able to create a connection from that endpoint using
 The resulting connection will behave like a connection to a named service
 created using
 .Fn xpc_connection_create .
-The fundamental difference is that an anonymous connection is not backed a name
+The fundamental difference is that an anonymous connection is not backed by a name
 that can be looked up. Therefore, if an connection created from an endpoint is
 closed, there is no guarantee that it can be re-established. So anonymous
 connections' event handlers must always handle

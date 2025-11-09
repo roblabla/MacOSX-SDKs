@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/GameController.framework/Versions/A/GameController'
-current-version: 13.0.39
+current-version: 13.1.8
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -554,11 +554,11 @@ exports:
                        _kGCSettingsMetaSuiteSuffix, _loadNSDictionaryFromJSON, _mapToAnalytics, 
                        _mappingKeyForElement, _nameForKeyCode, _numberFromInt, _serviceMatchesUsageAndUsagePage, 
                        _stringFromState ]
-    objc-classes:    [ GCAnalytics, GCApplicationStateMonitor, GCColor, GCController, 
-                       GCControllerAxisInput, GCControllerButtonInput, GCControllerDirectionPad, 
-                       GCControllerElement, GCControllerElementSettings, GCControllerInputState, 
-                       GCControllerLiveInput, GCControllerSettings, GCControllerTouchpad, 
-                       GCCursorElement, GCDeviceAdaptiveTriggersPayload, GCDeviceAdaptiveTriggersStatusPayload, 
+    objc-classes:    [ GCAnalytics, GCColor, GCController, GCControllerAxisInput, 
+                       GCControllerButtonInput, GCControllerDirectionPad, GCControllerElement, 
+                       GCControllerElementSettings, GCControllerInputState, GCControllerLiveInput, 
+                       GCControllerSettings, GCControllerTouchpad, GCCursorElement, 
+                       GCDeviceAdaptiveTriggersPayload, GCDeviceAdaptiveTriggersStatusPayload, 
                        GCDeviceBattery, GCDeviceButtonInputDescription, GCDeviceCollection, 
                        GCDeviceCursor, GCDeviceDirectionPadDescription, GCDeviceElementDescription, 
                        GCDeviceHaptics, GCDeviceLight, GCDeviceObjectParameters, 

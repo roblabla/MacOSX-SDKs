@@ -239,7 +239,7 @@ exports:
                        '_$s7Network12NWParametersC21DeviceDiscoveryUICoreE38applicationServiceQUICServerParameters8identityACSo07OS_sec_J0_pSg_tFZ', 
                        _DDUIAddEndpointToArray, _DDUIBuildLocalizedKeyForDeviceTypes, 
                        _DDUICoreLocalizedString, _DDUICorePrimaryQueue, _DDUICoreSingLocalizedString, 
-                       _DDUIDeviceTypeString, _DDUIEndpointPairingBrowsingTransportForOptions, 
+                       _DDUIDeviceTypeForModelString, _DDUIDeviceTypeString, _DDUIEndpointPairingBrowsingTransportForOptions, 
                        _DDUIEndpointPairingListeningTransportForOptions, _DDUIEndpointPairingSessionResultString, 
                        _DDUIFetchInfoPlistFromRecord, _DDUIInfoPlistFromTopLevelDictionary, 
                        _DDUILocalizedString, _DDUILocalizedUsageStringForBundle, 
@@ -262,7 +262,7 @@ exports:
     objc-classes:    [ DDUIApplicationInfo, DDUICoreAgent, DDUIEndpointPairingInitiator, 
                        DDUIEndpointPairingListener, DDUIEndpointPairingSession, DDUIInfoPlist, 
                        DDUIInfoPlistService, DDUIPairCompleteMessage, DDUIPairInitiateMessage, 
-                       DDUIRapportPeopleDiscovery, _DDUIRapportPairingTransport, 
+                       DDUIRapportPeopleDiscovery, _DDUIRapportDevice, _DDUIRapportPairingTransport, 
                        _TtC21DeviceDiscoveryUICore11DDUIService, _TtC21DeviceDiscoveryUICore20DDUINoticeXPCService, 
                        _TtC21DeviceDiscoveryUICore20DDUIPermissionClient ]
 ...

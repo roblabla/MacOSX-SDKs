@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7.0.84.1.411 -module-name SwiftUI -package-name SwiftUI
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target x86_64-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7.1.13.1.401 -module-name SwiftUI -package-name SwiftUI
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 import Combine
 import CoreData
 import CoreFoundation
@@ -1324,6 +1324,8 @@ extension SwiftUI.PrimitiveButtonStyle where Self == SwiftUI.GlassButtonStyle {
 @available(visionOS, unavailable)
 public struct GlassButtonStyle : SwiftUI.PrimitiveButtonStyle {
   public init()
+  @available(iOS 26.1, macOS 26.1, tvOS 26.1, watchOS 26.1, *)
+  public init(_ glass: SwiftUICore.Glass)
   @_Concurrency.MainActor @preconcurrency public func makeBody(configuration: SwiftUI.GlassButtonStyle.Configuration) -> some SwiftUICore.View
   
   @available(iOS 26.0, tvOS 26.0, watchOS 26.0, macOS 26.0, *)
@@ -4044,7 +4046,7 @@ extension SwiftUI.LabeledContent where Label == SwiftUICore.Text, Content == Swi
   public init<S>(_ titleKey: SwiftUICore.LocalizedStringKey, value: S) where S : Swift.StringProtocol
   @_disfavoredOverload public init<S1, S2>(_ title: S1, value: S2) where S1 : Swift.StringProtocol, S2 : Swift.StringProtocol
   public init<F>(_ titleKey: SwiftUICore.LocalizedStringKey, value: F.FormatInput, format: F) where F : Foundation.FormatStyle, F.FormatInput : Swift.Equatable, F.FormatOutput == Swift.String
-  public init<S, F>(_ title: S, value: F.FormatInput, format: F) where S : Swift.StringProtocol, F : Foundation.FormatStyle, F.FormatInput : Swift.Equatable, F.FormatOutput == Swift.String
+  @_disfavoredOverload public init<S, F>(_ title: S, value: F.FormatInput, format: F) where S : Swift.StringProtocol, F : Foundation.FormatStyle, F.FormatInput : Swift.Equatable, F.FormatOutput == Swift.String
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26, *)
 extension SwiftUI.LabeledContent where Label == SwiftUICore.Text, Content == SwiftUICore.Text {
@@ -5159,19 +5161,30 @@ extension SwiftUI.TableColumn where Sort == Foundation.KeyPathComparator<RowValu
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUICore.View {
-  @inlinable nonisolated public func task(priority: _Concurrency.TaskPriority = .userInitiated, @_inheritActorContext _ action: @escaping @Sendable () async -> Swift.Void) -> some SwiftUICore.View {
+  @inlinable @_disfavoredOverload nonisolated public func task(priority: _Concurrency.TaskPriority = .userInitiated, @_inheritActorContext _ action: @escaping @Sendable () async -> Swift.Void) -> some SwiftUICore.View {
         modifier(_TaskModifier(priority: priority, action: action))
     }
   
-  @inlinable nonisolated public func task<T>(id value: T, priority: _Concurrency.TaskPriority = .userInitiated, @_inheritActorContext _ action: @escaping @Sendable () async -> Swift.Void) -> some SwiftUICore.View where T : Swift.Equatable {
+  @inlinable @_disfavoredOverload nonisolated public func task<T>(id value: T, priority: _Concurrency.TaskPriority = .userInitiated, @_inheritActorContext _ action: @escaping @Sendable () async -> Swift.Void) -> some SwiftUICore.View where T : Swift.Equatable {
         modifier(_TaskValueModifier(
             value: value, priority: priority, action: action))
     }
   
+  #if compiler(>=5.3) && $IsolatedAny && $NonescapableTypes
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  @available(iOS 26.4, macOS 26.4, tvOS 26.4, watchOS 26.4, visionOS 26.4, *)
+  nonisolated public func task<T>(id: T, name: Swift.String? = nil, executorPreference taskExecutor: any _Concurrency.TaskExecutor, priority: _Concurrency.TaskPriority = .userInitiated, file: Swift.String = #fileID, line: Swift.Int = #line, @_inheritActorContext _ action: sending @escaping @isolated(any) () async -> Swift.Void) -> some SwiftUICore.View where T : Swift.Equatable
+  
+  #else
+  @available(iOS 26.4, macOS 26.4, tvOS 26.4, watchOS 26.4, visionOS 26.4, *)
+  nonisolated public func task<T>(id: T, name: Swift.String? = nil, executorPreference taskExecutor: any _Concurrency.TaskExecutor, priority: _Concurrency.TaskPriority = .userInitiated, file: Swift.String = #fileID, line: Swift.Int = #line, @_inheritActorContext _ action: __owned @escaping @isolated(any) () async -> Swift.Void) -> some SwiftUICore.View where T : Swift.Equatable
+  
+  #endif
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @frozen public struct _TaskModifier : SwiftUICore.ViewModifier {
-  nonisolated(unsafe) public var action: @Sendable () async -> Swift.Void
+  nonisolated public var action: @Sendable () async -> Swift.Void
   public var priority: _Concurrency.TaskPriority
   @inlinable public init(priority: _Concurrency.TaskPriority, action: @escaping @Sendable () async -> Swift.Void) {
         self.priority = priority
@@ -5187,7 +5200,7 @@ extension SwiftUICore.View {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @frozen public struct _TaskValueModifier<Value> : SwiftUICore.ViewModifier where Value : Swift.Equatable {
-  nonisolated(unsafe) public var action: @Sendable () async -> Swift.Void
+  nonisolated public var action: @Sendable () async -> Swift.Void
   public var priority: _Concurrency.TaskPriority
   public var value: Value
   @inlinable public init(value: Value, priority: _Concurrency.TaskPriority, action: @escaping @Sendable () async -> Swift.Void) {
@@ -5345,6 +5358,14 @@ extension SwiftUI.TextField where Label == SwiftUICore.Text {
   #endif
   #if compiler(>=5.3) && $NonescapableTypes
   @_disfavoredOverload nonisolated public init<S>(_ title: S, text: SwiftUICore.Binding<Swift.String>, selection: SwiftUICore.Binding<SwiftUI.TextSelection?>, prompt: SwiftUICore.Text? = nil, axis: SwiftUICore.Axis? = nil) where S : Swift.StringProtocol
+  #endif
+}
+@available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension SwiftUI.TextField {
+  #if compiler(>=5.3) && $NonescapableTypes
+  nonisolated public init(text: SwiftUICore.Binding<Swift.String>, selection: SwiftUICore.Binding<SwiftUI.TextSelection?>, prompt: SwiftUICore.Text? = nil, axis: SwiftUICore.Axis? = nil, @SwiftUICore.ViewBuilder label: () -> Label)
   #endif
 }
 extension SwiftUI.TextField where Label == SwiftUICore.Text {
@@ -7744,7 +7765,7 @@ extension SwiftUICore.View {
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 extension SwiftUICore.View {
   @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public func navigationLinkIndicatorVisibility(_ visibility: SwiftUICore.Visibility) -> some SwiftUICore.View {
-        environment(\._navigationIndicatorVisibilityABI, visibility)
+        environment(\._emittableNavigationIndicatorVisibilityABI, visibility)
     }
   
 }
@@ -7752,11 +7773,17 @@ extension SwiftUICore.View {
 extension SwiftUICore.EnvironmentValues {
   @_alwaysEmitIntoClient public var navigationLinkIndicatorVisibility: SwiftUICore.Visibility {
     get {
-        _navigationIndicatorVisibilityABI
+        _emittableNavigationIndicatorVisibilityABI
     }
   }
 }
 extension SwiftUICore.EnvironmentValues {
+  @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
+  @_alwaysEmitIntoClient internal var _emittableNavigationIndicatorVisibilityABI: SwiftUICore.Visibility {
+    get { _navigationIndicatorVisibilityABI }
+    set { _navigationIndicatorVisibilityABI = newValue }
+    _modify { yield &_navigationIndicatorVisibilityABI }
+  }
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
   @usableFromInline
   internal var _navigationIndicatorVisibilityABI: SwiftUICore.Visibility {
@@ -13700,12 +13727,12 @@ public struct TabRole : Swift.Hashable, Swift.Sendable {
     get
   }
 }
-@available(iOS 26.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
 extension SwiftUICore.View {
+  @available(iOS 26.0, *)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
   nonisolated public func tabViewBottomAccessory<Content>(@SwiftUICore.ViewBuilder content: () -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
   
 }
@@ -20041,9 +20068,6 @@ public struct _OverlayLayout : SwiftUICore._VariadicView.UnaryViewRoot, SwiftUIC
   public typealias AnimatableData = SwiftUICore.EmptyAnimatableData
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
-}
-@available(*, unavailable)
-extension SwiftUI._OverlayLayout : Swift.Sendable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension SwiftUI._OverlayLayout : SwiftUICore.Layout {

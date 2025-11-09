@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DocumentUnderstanding.framework/Versions/A/DocumentUnderstanding'
-current-version: 116.3
+current-version: 116.7.5
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
@@ -1385,6 +1385,7 @@ exports:
                        '_$s21DocumentUnderstanding20DUDocumentIdentifierCMa', '_$s21DocumentUnderstanding20DUDocumentIdentifierCMn', 
                        '_$s21DocumentUnderstanding20DUDocumentIdentifierCMo', '_$s21DocumentUnderstanding20DUDocumentIdentifierCMu', 
                        '_$s21DocumentUnderstanding20DUDocumentIdentifierCN', '_$s21DocumentUnderstanding20DUDocumentIdentifierCfD', 
+                       '_$s21DocumentUnderstanding20DUExtractionCategoryO11EventsDraftyA2CmFWC', 
                        '_$s21DocumentUnderstanding20DUExtractionCategoryO4CardyA2CmFWC', 
                        '_$s21DocumentUnderstanding20DUExtractionCategoryO6EventsyA2CmFWC', 
                        '_$s21DocumentUnderstanding20DUExtractionCategoryO8allCasesSayACGvgZ', 
@@ -1392,6 +1393,7 @@ exports:
                        '_$s21DocumentUnderstanding20DUExtractionCategoryO8rawValueACSgSS_tcfC', 
                        '_$s21DocumentUnderstanding20DUExtractionCategoryO8rawValueSSvg', 
                        '_$s21DocumentUnderstanding20DUExtractionCategoryO8rawValueSSvpMV', 
+                       '_$s21DocumentUnderstanding20DUExtractionCategoryO9CardDraftyA2CmFWC', 
                        '_$s21DocumentUnderstanding20DUExtractionCategoryOMa', '_$s21DocumentUnderstanding20DUExtractionCategoryOMn', 
                        '_$s21DocumentUnderstanding20DUExtractionCategoryON', '_$s21DocumentUnderstanding20DUExtractionCategoryOSHAAMc', 
                        '_$s21DocumentUnderstanding20DUExtractionCategoryOSQAAMc', 
@@ -2178,6 +2180,8 @@ exports:
                        '_$s21DocumentUnderstanding32DUCategoryClassificationResponseCfD', 
                        '_$s21DocumentUnderstanding32DUIDClassificationImplementationC12isIDDocument3for8labelKey0H9ThresholdSbSg_SdSgtSS_SSSdtFZ', 
                        '_$s21DocumentUnderstanding32DUIDClassificationImplementationC14textLengthGate3for03minF003maxF0Sb_SitSS_S2itFZ', 
+                       '_$s21DocumentUnderstanding32DUIDClassificationImplementationC15isIDDocumentLLM3for14labelThresholdSb_SdtSgSS_SdtYaKFZ', 
+                       '_$s21DocumentUnderstanding32DUIDClassificationImplementationC15isIDDocumentLLM3for14labelThresholdSb_SdtSgSS_SdtYaKFZTu', 
                        '_$s21DocumentUnderstanding32DUIDClassificationImplementationC20containsDataDetector3forSb_SiSaySSGtSS_tFZ', 
                        '_$s21DocumentUnderstanding32DUIDClassificationImplementationC25getLoadedModelDescriptionSSSgyFZ', 
                        '_$s21DocumentUnderstanding32DUIDClassificationImplementationCMa', 
@@ -2309,6 +2313,9 @@ exports:
                        '_$s21DocumentUnderstanding42DUFoundInEventClassificationImplementationC014isCandidateForE10Extraction4text7subject12emailHeaders11senderEmailAA0cdeF6ResultCSS_SSSgSDyS2SGSgAKtKFTq', 
                        '_$s21DocumentUnderstanding42DUFoundInEventClassificationImplementationC02isaE03for8labelKey0J9ThresholdSb_SdtSgSS_SSSdtFTj', 
                        '_$s21DocumentUnderstanding42DUFoundInEventClassificationImplementationC02isaE03for8labelKey0J9ThresholdSb_SdtSgSS_SSSdtFTq', 
+                       '_$s21DocumentUnderstanding42DUFoundInEventClassificationImplementationC02isaE3LLM3for14labelThresholdSb_SdtSS_SdtYaKFTj', 
+                       '_$s21DocumentUnderstanding42DUFoundInEventClassificationImplementationC02isaE3LLM3for14labelThresholdSb_SdtSS_SdtYaKFTjTu', 
+                       '_$s21DocumentUnderstanding42DUFoundInEventClassificationImplementationC02isaE3LLM3for14labelThresholdSb_SdtSS_SdtYaKFTq', 
                        '_$s21DocumentUnderstanding42DUFoundInEventClassificationImplementationC11inHumanPass12emailHeaders11senderEmailSo8NSNumberCSg_AItSDyS2SGSg_SSSgtFTj', 
                        '_$s21DocumentUnderstanding42DUFoundInEventClassificationImplementationC11inHumanPass12emailHeaders11senderEmailSo8NSNumberCSg_AItSDyS2SGSg_SSSgtFTq', 
                        '_$s21DocumentUnderstanding42DUFoundInEventClassificationImplementationC11inHumanPass13emailMetaDataSo8NSNumberCSg_AHtAA015DUDocumentEmailM0C_tFTj', 

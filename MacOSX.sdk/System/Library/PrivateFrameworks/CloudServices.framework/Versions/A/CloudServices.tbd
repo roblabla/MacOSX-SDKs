@@ -6,7 +6,10 @@ install-name:    '/System/Library/PrivateFrameworks/CloudServices.framework/Vers
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _CSStingrayAccountStatusReadFrom, _CSStingrayRecordClientMetadataICloudDataProtectionReadFrom, 
+    symbols:         [ _CSFDERecordFDEClientMetadataFDEKeyRegistryFDEEntryReadFrom, 
+                       _CSFDERecordFDEClientMetadataFDEKeyRegistryReadFrom, _CSFDERecordFDEClientMetadataFDEiCloudDataProtectionReadFrom, 
+                       _CSFDERecordFDEClientMetadataReadFrom, _CSFDERecordReadFrom, 
+                       _CSStingrayAccountStatusReadFrom, _CSStingrayRecordClientMetadataICloudDataProtectionReadFrom, 
                        _CSStingrayRecordClientMetadataKeyRegistryEntryReadFrom, _CSStingrayRecordClientMetadataKeyRegistryReadFrom, 
                        _CSStingrayRecordClientMetadataReadFrom, _CSStingrayRecordClientMetadataStableMetadataReadFrom, 
                        _CSStingrayRecordReadFrom, _CloudServicesAnalyticsBackupForViewName, 
@@ -96,6 +99,8 @@ exports:
                        _kSecureBackupiCDPRecordsKey, _kSecureBackupiCloudDataProtectionDeleteAllRecordsKey, 
                        _kSecureBackupiCloudIdentityDataKey, _kSecureBackupiCloudIdentityPublicDataKey ]
     objc-classes:    [ AppleIDPasswordMetadata, CSCertOperations, CSDateUtilities, 
+                       CSFDERecord, CSFDERecordFDEClientMetadata, CSFDERecordFDEClientMetadataFDEKeyRegistry, 
+                       CSFDERecordFDEClientMetadataFDEKeyRegistryFDEEntry, CSFDERecordFDEClientMetadataFDEiCloudDataProtection, 
                        CSSESWrapper, CSStingrayAccountStatus, CSStingrayRecord, CSStingrayRecordClientMetadata, 
                        CSStingrayRecordClientMetadataICloudDataProtection, CSStingrayRecordClientMetadataKeyRegistry, 
                        CSStingrayRecordClientMetadataKeyRegistryEntry, CSStingrayRecordClientMetadataStableMetadata, 

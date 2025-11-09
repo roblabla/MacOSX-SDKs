@@ -130,6 +130,7 @@ exports:
                        '_$s24GameCenterOverlayService20DashboardClientProxyC012isPresentingE15FromAccessPointyySo7NSValueCF', 
                        '_$s24GameCenterOverlayService20DashboardClientProxyC03setA4Mode16bundleIdentifier7enabledySS_So7NSValueCtF', 
                        '_$s24GameCenterOverlayService20DashboardClientProxyC04showA10ModeBanner16bundleIdentifier9available8required7enabled0H4Text18usingLocalEndPointySS_S5btF', 
+                       '_$s24GameCenterOverlayService20DashboardClientProxyC04showA10ModeBanner6config18usingLocalEndPointySo06GKGameiJ6ConfigC_SbtF', 
                        '_$s24GameCenterOverlayService20DashboardClientProxyC04showE012initialState15sceneIdentifier18usingLocalEndPoint21canDismissWithGestureySDySSyXlG_SSSgS2btFTj', 
                        '_$s24GameCenterOverlayService20DashboardClientProxyC04showE012initialState15sceneIdentifier18usingLocalEndPoint21canDismissWithGestureySDySSyXlG_SSSgS2btFTq', 
                        '_$s24GameCenterOverlayService20DashboardClientProxyC05closeE018usingLocalEndPointySb_tFTj', 

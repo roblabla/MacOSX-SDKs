@@ -45,7 +45,6 @@ exports:
                        _QLThumbnailingImageIOCreateImageSourceFromData, _QLThumbnailingImageIOCreateThumbnailFromData, 
                        _QLThumbnailingImageIOCreateThumbnailOfMinimumSizeWithImageSource, 
                        _QLThumbnailingImageIOCreateThumbnailOfMinimumSizeWithImageSourceAndContentType, 
-                       _QLThumbnailingImageIOCreateThumbnailOfMinimumSizeWithImageSourceAndContentTypeAtIndex, 
                        _QLThumbnailingImageIOExpectedMemoryUsageForImageSourceThumbnail, 
                        _QLThumbnailingImageIOGetSizeFromImageSourceAtIndex, _QLURLIsAllowedForClient, 
                        _QLUTIManagerTypeIsInternallyClaimedType, _QLXMLGetStringEncoding, 

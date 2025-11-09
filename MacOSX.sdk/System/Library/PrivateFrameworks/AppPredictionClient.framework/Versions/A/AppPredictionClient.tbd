@@ -319,6 +319,7 @@ exports:
                        ATXHomeScreenEventLoggerCachedStackData.pageIndex, ATXHomeScreenEventLoggerCachedStackData.stackId, 
                        ATXHomeScreenEventLoggerCachedStackData.stackKind, ATXHomeScreenEventLoggerCachedStackData.stackLocation, 
                        ATXHomeScreenSuggestionClientGuardedData.appPanelIdentifierToPageIndex, 
+                       ATXHomeScreenSuggestionClientGuardedData.clientIdentifier, 
                        ATXHomeScreenSuggestionClientGuardedData.currentAppPredictionPanelLayouts, 
                        ATXHomeScreenSuggestionClientGuardedData.currentBlendingCacheId, 
                        ATXHomeScreenSuggestionClientGuardedData.currentFallbacks, 

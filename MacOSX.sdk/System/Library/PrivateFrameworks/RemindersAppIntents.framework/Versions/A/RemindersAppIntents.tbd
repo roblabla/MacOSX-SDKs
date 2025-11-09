@@ -2,7 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/RemindersAppIntents.framework/Versions/A/RemindersAppIntents'
-current-version: 3799.31
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -3169,8 +3168,8 @@ exports:
                        '_$s19RemindersAppIntents10ListEntityV25typeDisplayRepresentation0bC004TypegH0VvgZ', 
                        '_$s19RemindersAppIntents10ListEntityV25typeDisplayRepresentation0bC004TypegH0VvpZMV', 
                        '_$s19RemindersAppIntents10ListEntityV25typeDisplayRepresentation0bC004TypegH0VvsZ', 
-                       '_$s19RemindersAppIntents10ListEntityV2id4name8listKind5color5badge6parent17cloudKitContainer13existingShare12participants8sections8isPinned14showsCompleted14autoCategorize0H6Layout12sortingStyle0H4Type08supportsD10AppearanceAcA0bE2IDV_SSAC0dI0OAA05ColorE0VSgAA0d5BadgeE0VSgAA05GroupE0VSgSo11CKContainerCSgSo7CKShareCSgSay0bC012IntentPersonVGSgSayAA07SectionE0VGSgS3bAC0dZ0OSgAC12SortingStyleOSgAC0D4TypeOSgSbtcfC', 
-                       '_$s19RemindersAppIntents10ListEntityV2id4name8listKind5color5badge6parent17cloudKitContainer13existingShare12participants8sections8isPinned14showsCompleted14autoCategorize0H6Layout12sortingStyle4type08supportsD10AppearanceAcA0bE2IDV_SSAC0dI0OAA05ColorE0VSgAA0d5BadgeE0VSgAA05GroupE0VSgSo11CKContainerCSgSo7CKShareCSgSay0bC012IntentPersonVGSgSayAA07SectionE0VGSgS3bAC0dZ0OSgAC12SortingStyleOSgAC0D4TypeOSbtcfC', 
+                       '_$s19RemindersAppIntents10ListEntityV2id4name8listKind5color5badge6parent25cloudKitContainerProvider13existingShare12participants8sections8isPinned14showsCompleted14autoCategorize0H6Layout12sortingStyle0H4Type08supportsD10AppearanceAcA0bE2IDV_SSAC0dI0OAA05ColorE0VSgAA0d5BadgeE0VSgAA05GroupE0VSgSo11CKContainerCSgyYbcSgSo7CKShareCSgSay0bC012IntentPersonVGSgSayAA07SectionE0VGSgS3bAC0D6LayoutOSgAC12SortingStyleOSgAC0D4TypeOSgSbtcfC', 
+                       '_$s19RemindersAppIntents10ListEntityV2id4name8listKind5color5badge6parent25cloudKitContainerProvider13existingShare12participants8sections8isPinned14showsCompleted14autoCategorize0H6Layout12sortingStyle4type08supportsD10AppearanceAcA0bE2IDV_SSAC0dI0OAA05ColorE0VSgAA0d5BadgeE0VSgAA05GroupE0VSgSo11CKContainerCSgyYbcSgSo7CKShareCSgSay0bC012IntentPersonVGSgSayAA07SectionE0VGSgS3bAC0D6LayoutOSgAC12SortingStyleOSgAC0D4TypeOSbtcfC', 
                        '_$s19RemindersAppIntents10ListEntityV2idAA0bE2IDVvM', '_$s19RemindersAppIntents10ListEntityV2idAA0bE2IDVvg', 
                        '_$s19RemindersAppIntents10ListEntityV2idAA0bE2IDVvpMV', '_$s19RemindersAppIntents10ListEntityV2idAA0bE2IDVvs', 
                        '_$s19RemindersAppIntents10ListEntityV4nameSSvM', '_$s19RemindersAppIntents10ListEntityV4nameSSvg', 
@@ -3848,6 +3847,8 @@ exports:
                        '_$s19RemindersAppIntents15ListEntityQueryVACycfC', '_$s19RemindersAppIntents15ListEntityQueryVMa', 
                        '_$s19RemindersAppIntents15ListEntityQueryVMn', '_$s19RemindersAppIntents15ListEntityQueryVN', 
                        '_$s19RemindersAppIntents15SectionEntityIDO0bC00E21IdentifierConvertibleAAMc', 
+                       '_$s19RemindersAppIntents15SectionEntityIDO11descriptionSSvg', 
+                       '_$s19RemindersAppIntents15SectionEntityIDO11descriptionSSvpMV', 
                        '_$s19RemindersAppIntents15SectionEntityIDO11sectionlessyAcA0beF0VcACmFWC', 
                        '_$s19RemindersAppIntents15SectionEntityIDO16entityIdentifier3forACSgSS_tFZ', 
                        '_$s19RemindersAppIntents15SectionEntityIDO22entityIdentifierStringSSvg', 
@@ -3859,7 +3860,8 @@ exports:
                        '_$s19RemindersAppIntents15SectionEntityIDO9sectionedyAcA0beF0VcACmFWC', 
                        '_$s19RemindersAppIntents15SectionEntityIDOMa', '_$s19RemindersAppIntents15SectionEntityIDOMn', 
                        '_$s19RemindersAppIntents15SectionEntityIDON', '_$s19RemindersAppIntents15SectionEntityIDOSHAAMc', 
-                       '_$s19RemindersAppIntents15SectionEntityIDOSQAAMc', '_$s19RemindersAppIntents15SmartListEntityV0bC00B5ValueAAMc', 
+                       '_$s19RemindersAppIntents15SectionEntityIDOSQAAMc', '_$s19RemindersAppIntents15SectionEntityIDOs23CustomStringConvertibleAAMc', 
+                       '_$s19RemindersAppIntents15SmartListEntityV0bC00B5ValueAAMc', 
                        '_$s19RemindersAppIntents15SmartListEntityV0bC00bF0AAMc', 
                        '_$s19RemindersAppIntents15SmartListEntityV0bC012_IntentValueAAMc', 
                        '_$s19RemindersAppIntents15SmartListEntityV0bC020DisplayRepresentableAAMc', 

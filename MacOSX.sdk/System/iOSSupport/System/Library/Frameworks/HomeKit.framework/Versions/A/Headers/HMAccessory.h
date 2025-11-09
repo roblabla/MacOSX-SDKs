@@ -32,6 +32,11 @@ API_UNAVAILABLE(macos)
 @interface HMAccessory : NSObject
 
 /*!
+ * @brief The home containing the accessory.
+ */
+@property (nullable, nonatomic, readonly, weak) HMHome *home API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
+
+/*!
  * @brief The name of the accessory.
  *
  * @discussion Returns the accessory's name that is associated with HomeKit. The initial value is the name
@@ -91,6 +96,14 @@ API_UNAVAILABLE(macos)
  *                    its 'uniqueIdentifiersForBridgedAccessories' property set to nil.
  */
 @property (nullable, nonatomic, readonly, copy) NSArray<NSUUID *> *uniqueIdentifiersForBridgedAccessories API_AVAILABLE(ios(9.0));
+
+/*!
+ * @brief If the receiver represents a bridge, an array of the accessories behind the bridge, otherwise empty.
+ *
+ * @see uniqueIdentifiersForBridgedAccessories
+ * @see bridged
+ */
+@property (nonatomic, readonly, copy) NSArray<HMAccessory *> *bridgedAccessories API_AVAILABLE(ios(13.0), watchos(6.0), tvos(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 /*!
  * @brief Category information for the accessory. 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreRE.framework/Versions/A/CoreRE'
-current-version: 403.0.26
+current-version: 403.40.7
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -79,8 +79,8 @@ allowable-clients:
                        Viewer-xrOS, ViewerTests, 'Vilo (xrOS)', Vilo2, VirtualVoice, 
                        VoiceOverUnitTests_iOS, WebCore, WebKit, WellbeingPlatform, 
                        WidgetRenderer, XCTestInternalAngel, XROS, ZoomWindowAXUIService, 
-                       _RealityKit_Ogma, _RealityKit_SwiftUI, assetgenerationctl, 
-                       assistivetouchd, carutil, com.apple.PDFKit.PDFExtensionView, 
+                       _RealityKit_Ogma, _RealityKit_SwiftUI, _SwiftUITestingSupport, 
+                       assetgenerationctl, assistivetouchd, carutil, com.apple.PDFKit.PDFExtensionView, 
                        druid, dutBismarckApp, dutHandsAutomationApp, imageutil, m2s_test, 
                        mravplay, pipelineTool, pointeruid, presencectl, prototyped, 
                        realitytoolTests, royad, swiftMRUIKit, sysenvscreenshot, tm-core-re, 

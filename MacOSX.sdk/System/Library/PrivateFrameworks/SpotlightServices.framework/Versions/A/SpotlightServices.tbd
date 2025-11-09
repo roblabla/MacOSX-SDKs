@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpotlightServices.framework/Versions/A/SpotlightServices'
-current-version: 2393.255
+current-version: 2400.14.255
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -502,23 +502,25 @@ exports:
                        SSFilterResult, SSFilterUtilities, SSFindMyResultBuilder, 
                        SSFindMySectionBuilder, SSFreeFormResultBuilder, SSFuzzyMatchScoring, 
                        SSGeneralResultBuilder, SSICloudDriveUtilities, SSIntentBasedSectionConfiguration, 
-                       SSIntentBasedSuggestionsConfiguration, SSLaunchOnenessAppCommand, 
-                       SSLegacySectionBuilder, SSLinkResultBuilder, SSLinksSectionBuilder, 
-                       SSLocalCEP, SSLocalRankingResultSignalManager, SSLocalWebResultBuilder, 
-                       SSLocaleObserver, SSMailResultBuilder, SSMediaNowPlaying, 
-                       SSMenuItemResultBuilder, SSMessageResultBuilder, SSMixedRankingConfig, 
-                       SSMixedRankingInput, SSMixedRankingScore, SSMixedRankingScoring, 
-                       SSMixedRankingUtilities, SSModelLoader, SSMusicResultBuilder, 
-                       SSNameFormatManager, SSNewsResultBuilder, SSNoteResultBuilder, 
-                       SSNumberFormatManager, SSParsecBundleFeatureCollection, SSPasteCommand, 
-                       SSPasteboardResultBuilder, SSPerformEntityQueryCommand, SSPersonalAnswerResultBuilder, 
+                       SSIntentBasedSuggestionsConfiguration, SSJournalResultBuilder, 
+                       SSLaunchOnenessAppCommand, SSLegacySectionBuilder, SSLinkResultBuilder, 
+                       SSLinksSectionBuilder, SSLocalCEP, SSLocalRankingResultSignalManager, 
+                       SSLocalWebResultBuilder, SSLocaleObserver, SSMailResultBuilder, 
+                       SSMediaNowPlaying, SSMenuItemResultBuilder, SSMessageResultBuilder, 
+                       SSMixedRankingBlender, SSMixedRankingConfig, SSMixedRankingInput, 
+                       SSMixedRankingScore, SSMixedRankingScoring, SSMixedRankingUtilities, 
+                       SSModelLoader, SSMusicResultBuilder, SSNameFormatManager, 
+                       SSNewsResultBuilder, SSNoteResultBuilder, SSNumberFormatManager, 
+                       SSParsecBundleFeatureCollection, SSPasteCommand, SSPasteboardResultBuilder, 
+                       SSPerformEntityQueryCommand, SSPersonalAnswerResultBuilder, 
                        SSPhoneResultBuilder, SSPhotoFromFilesResultBuilder, SSPhotosFromAppSectionBuilder, 
                        SSPhotosResultBuilder, SSPhotosSectionBuilder, SSPlistDataReader, 
                        SSPodcastResultBuilder, SSPommesPhotosRanker, SSPommesRanker, 
-                       SSPurchaseRequestResultBuilder, SSQueryIntent, SSQueryIntentHelper, 
-                       SSQueryIntentManager, SSQueryIntentManagerConfig, SSQueryUnderstandingUtilities, 
-                       SSRankingFeedbackHandler, SSRankingManager, SSRankingUtilities, 
-                       SSRecentResultsManager, SSRelatedSearchesSectionBuilder, SSReminderResultBuilder, 
+                       SSPunchout, SSPurchaseRequestResultBuilder, SSQueryIntent, 
+                       SSQueryIntentHelper, SSQueryIntentManager, SSQueryIntentManagerConfig, 
+                       SSQueryUnderstandingUtilities, SSQuickLookCommand, SSRankingFeedbackHandler, 
+                       SSRankingManager, SSRankingUtilities, SSRecentResultsManager, 
+                       SSRelatedSearchesSectionBuilder, SSReminderResultBuilder, 
                        SSRequestsSectionBuilder, SSResultBuilder, SSScreenTimeRequestResultBuilder, 
                        SSSearchInAppResultBuilder, SSSearchInAppSectionBuilder, SSSearchToolDonation, 
                        SSSearchWebsiteCommand, SSSearchableWebsiteResultBuilder, 

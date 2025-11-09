@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target arm64e-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1216 -module-name FamilyControls
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target arm64e-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1221 -module-name FamilyControls
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 import Combine
 import CoreServices
 import DeveloperToolsSupport
@@ -241,6 +241,7 @@ public class AuthorizationCenter : Combine.ObservableObject {
   public var $authorizationStatus: Combine.Published<FamilyControls.AuthorizationStatus>.Publisher {
     get
   }
+  @objc deinit
   #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, deprecated: 16.0, message: "Use requestAuthorization(for:) instead")
   @available(watchOS, unavailable)
@@ -261,7 +262,6 @@ public class AuthorizationCenter : Combine.ObservableObject {
   @available(macOS, unavailable)
   @available(macCatalyst, unavailable)
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
-  @objc deinit
 }
 @available(iOS 15.0, macOS 13.0, *)
 @available(macCatalyst, unavailable)

@@ -118,6 +118,8 @@ API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
  */
 - (nullable __kindof id<GCDevicePhysicalInputState, GCDevicePhysicalInputStateDiff>)nextInputState;
 
+
+
 @end
 
 NS_ASSUME_NONNULL_END

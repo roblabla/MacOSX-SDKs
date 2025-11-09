@@ -43,6 +43,7 @@
 #import <CarPlay/CPMessageComposeBarButton.h>
 #import <CarPlay/CPMessageListItem.h>
 #import <CarPlay/CPNavigationAlert.h>
+#import <CarPlay/CPNavigationEnum.h>
 #import <CarPlay/CPNavigationSession.h>
 #import <CarPlay/CPNowPlayingButton.h>
 #import <CarPlay/CPNowPlayingMode.h>

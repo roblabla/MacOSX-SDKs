@@ -6,6 +6,10 @@ install-name:    '/System/Library/PrivateFrameworks/FontServices.framework/Versi
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _FSGetMaxSupportedFontAssetCompatibilityVersion, _FontServicesVersionNumber, 
-                       _FontServicesVersionString, _kFSFontAssetType ]
+    symbols:         [ _FSGetAllFontAssets, _FSGetMaxSupportedFontAssetCompatibilityVersion, 
+                       _FSInstallAssets, _FSIsAssetInstalled, _FSIterateFontAssets, 
+                       _FSRefreshObsoleteAssets, _FontServicesVersionNumber, _FontServicesVersionString, 
+                       _kFSFontAssetCompatibilityVersionKey, _kFSFontAssetFontInfoKey, 
+                       _kFSFontAssetMockFutureVersion, _kFSFontAssetPostScriptFontNameAliasesKey, 
+                       _kFSFontAssetPostScriptFontNameKey, _kFSFontAssetType ]
 ...

@@ -168,7 +168,20 @@ GAMECONTROLLER_EXPORT GCInputButtonName GCInputArcadeButtonName(NSInteger row, N
 
 /** The stylus tip button used to detect contact with a surface.  */
 GAMECONTROLLER_EXPORT GCInputButtonName GCInputStylusTip API_AVAILABLE(visionos(26.0)) API_UNAVAILABLE(macos, ios, tvos);
-/** The stylus button used for interacting with virtual objects. */
+
+/**
+ *  The stylus side button nearest the tip.
+ *
+ *  A spatial stylus has at least two buttons arranged vertically along the
+ *  barrel.  The primary button is the button nearest the tip.
+ */
 GAMECONTROLLER_EXPORT GCInputButtonName GCInputStylusPrimaryButton API_AVAILABLE(visionos(26.0)) API_UNAVAILABLE(macos, ios, tvos);
-/** The stylus button used for drawing and writing in air. */
+
+/**
+ *  The stylus side button above the primary button.
+ *
+ *  A spatial stylus has at least two buttons arranged vertically along the
+ *  barrel.  The secondary button is located above the primary button when
+ *  the stylus is held with the tip pointing down.
+ */
 GAMECONTROLLER_EXPORT GCInputButtonName GCInputStylusSecondaryButton API_AVAILABLE(visionos(26.0)) API_UNAVAILABLE(macos, ios, tvos);

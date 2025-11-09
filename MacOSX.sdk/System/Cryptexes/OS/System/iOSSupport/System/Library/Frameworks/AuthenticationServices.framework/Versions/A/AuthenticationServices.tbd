@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/AuthenticationServices.framework/Versions/A/AuthenticationServices'
-current-version: 622.1.22
+current-version: 622.2.11
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -25,6 +25,7 @@ exports:
                        '_$s22AuthenticationServices16ASImportableItemV2id10Foundation4DataVvg', 
                        '_$s22AuthenticationServices16ASImportableItemV2id10Foundation4DataVvpMV', 
                        '_$s22AuthenticationServices16ASImportableItemV2id10Foundation4DataVvs', 
+                       '_$s22AuthenticationServices16ASImportableItemV2id5title8subtitle8favorite5scope11credentials4tagsAC10Foundation4DataV_S2SSgSbAA0C15CredentialScopeVSgSayAA0cN0OGSaySSGtcfC', 
                        '_$s22AuthenticationServices16ASImportableItemV2id7created12lastModified5title8subtitle8favorite5scope11credentials4tagsAC10Foundation4DataV_AM4DateVAQS2SSgSbAA0C15CredentialScopeVSgSayAA0cR0OGSaySSGtcfC', 
                        '_$s22AuthenticationServices16ASImportableItemV4fromACs7Decoder_p_tKcfC', 
                        '_$s22AuthenticationServices16ASImportableItemV4hash4intoys6HasherVz_tF', 
@@ -1099,16 +1100,6 @@ exports:
                        '_$s22AuthenticationServices33ASPasskeyCredentialExtensionInputOMa', 
                        '_$s22AuthenticationServices33ASPasskeyCredentialExtensionInputOMn', 
                        '_$s22AuthenticationServices33ASPasskeyCredentialExtensionInputON', 
-                       '_$s22AuthenticationServices35_ASNavigationControllerBackdropViewC5frameACSo6CGRectV_tcfC', 
-                       '_$s22AuthenticationServices35_ASNavigationControllerBackdropViewC5frameACSo6CGRectV_tcfc', 
-                       '_$s22AuthenticationServices35_ASNavigationControllerBackdropViewCACycfC', 
-                       '_$s22AuthenticationServices35_ASNavigationControllerBackdropViewCACycfc', 
-                       '_$s22AuthenticationServices35_ASNavigationControllerBackdropViewCMa', 
-                       '_$s22AuthenticationServices35_ASNavigationControllerBackdropViewCMn', 
-                       '_$s22AuthenticationServices35_ASNavigationControllerBackdropViewCMo', 
-                       '_$s22AuthenticationServices35_ASNavigationControllerBackdropViewCMu', 
-                       '_$s22AuthenticationServices35_ASNavigationControllerBackdropViewCN', 
-                       '_$s22AuthenticationServices35_ASNavigationControllerBackdropViewCfD', 
                        '_$s22AuthenticationServices38ASAuthorizationAccountCreationProviderC52createPlatformPublicKeyCredentialRegistrationRequest26acceptedContactIdentifiers06shouldM4Name22relyingPartyIdentifier9challenge6userIDAA0cdehijkM0CSayAA09ASContactuM0OG_SbSS10Foundation4DataVAQtFTj', 
                        '_$s22AuthenticationServices38ASAuthorizationAccountCreationProviderC52createPlatformPublicKeyCredentialRegistrationRequest26acceptedContactIdentifiers06shouldM4Name22relyingPartyIdentifier9challenge6userIDAA0cdehijkM0CSayAA09ASContactuM0OG_SbSS10Foundation4DataVAQtFTq', 
                        '_$s22AuthenticationServices38ASAuthorizationAccountCreationProviderCACycfC', 
@@ -1473,6 +1464,9 @@ exports:
                        '_$sSo51ASAuthorizationWebBrowserPublicKeyCredentialManagerC22AuthenticationServicesE19platformCredentials15forRelyingPartySayAC0abc8PlatformdeF0VGSS_tYaFTu', 
                        '_$sSo51ASAuthorizationWebBrowserPublicKeyCredentialManagerC22AuthenticationServicesE23corePlatformCredentials15forRelyingPartySaySo06WBSWebC7PasskeyCGSS_tYaF', 
                        '_$sSo51ASAuthorizationWebBrowserPublicKeyCredentialManagerC22AuthenticationServicesE23corePlatformCredentials15forRelyingPartySaySo06WBSWebC7PasskeyCGSS_tYaFTu', 
+                       '_$sSo51ASAuthorizationWebBrowserPublicKeyCredentialManagerC22AuthenticationServicesE29isDeviceConfiguredForPasskeysSbvgZ', 
+                       '_$sSo51ASAuthorizationWebBrowserPublicKeyCredentialManagerC22AuthenticationServicesE29isDeviceConfiguredForPasskeysSbvpZMV', 
+                       '_$sSo51ASAuthorizationWebBrowserPublicKeyCredentialManagerC22AuthenticationServicesE30_isDeviceConfiguredForPasskeysSbyFZ', 
                        '_$sSo52ASAuthorizationPublicKeyCredentialPRFAssertionOutputC22AuthenticationServicesE5first10Foundation4DataVvg', 
                        '_$sSo52ASAuthorizationPublicKeyCredentialPRFAssertionOutputC22AuthenticationServicesE5first10Foundation4DataVvpMV', 
                        '_$sSo52ASAuthorizationPublicKeyCredentialPRFAssertionOutputC22AuthenticationServicesE5first10Foundation4DataVvpWvd', 
@@ -1640,8 +1634,7 @@ exports:
                        _ASPasswordManagerDeleteAlertConfiguration, _ASPasswordManagerIconController, 
                        _ASWebAuthenticationSessionRequestServer, _ASWebsiteNameDictionary, 
                        _ASWebsiteNameDictionarySnapshotTransformer, _ASWebsiteNameFetchOperation, 
-                       _ASWebsiteNameProvider, _TtC22AuthenticationServices35_ASNavigationControllerBackdropView, 
-                       _TtC22AuthenticationServices38ASAuthorizationAccountCreationProvider, 
+                       _ASWebsiteNameProvider, _TtC22AuthenticationServices38ASAuthorizationAccountCreationProvider, 
                        _TtC22AuthenticationServices49_ASCredentialProviderExtensionNotificationManager, 
                        _TtC22AuthenticationServices57ASAuthorizationAccountCreationPlatformPublicKeyCredential, 
                        _TtC22AuthenticationServices64ASAuthorizationAccountCreationPlatformPublicKeyCredentialRequest ]

@@ -26,6 +26,8 @@ AS_EXTERN API_AVAILABLE(macos(13.3), macCatalyst(16.4), ios(17.4)) API_UNAVAILAB
 #endif
 @interface ASAuthorizationWebBrowserPublicKeyCredentialManager : NSObject
 
+@property (class, nonatomic, readonly) BOOL isDeviceConfiguredForPasskeys API_AVAILABLE(macos(26.2), ios(26.2));
+
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 - (void)requestAuthorizationForPublicKeyCredentials:(void (^)(ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState authorizationState))completionHandler NS_SWIFT_NAME(requestAuthorizationForPublicKeyCredentials(_:));

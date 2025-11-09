@@ -57,20 +57,35 @@ typedef NS_OPTIONS(NSInteger, FSItemAttribute) {
 /// An enumeration of item types, such as file, directory, or symbolic link.
 FSKIT_API_AVAILABILITY_V1
 typedef NS_ENUM(NSInteger, FSItemType) {
+    /// The item type of an unknown item.
     FSItemTypeUnknown = 0,
+    /// The item type of a regular file.
     FSItemTypeFile,
+    /// The item type of a directory.
     FSItemTypeDirectory,
+    /// The item type of a symbolic link.
     FSItemTypeSymlink,
+    /// The item type of a first-in/first-out named pipe.
     FSItemTypeFIFO NS_SWIFT_NAME(fifo),
+    /// The item type of a character device.
     FSItemTypeCharDevice,
+    /// The item type of a block device.
     FSItemTypeBlockDevice,
+    /// The item type of a socket.
     FSItemTypeSocket
 }NS_SWIFT_NAME(FSItem.ItemType);
 
+/// The unique identifier for an item.
+///
+/// Use this type when packing items for an enumeration in ``FSDirectoryEntryPacker/packEntry(name:itemType:itemID:nextCookie:attributes:)``.
+/// Either provide a unique identifier like an inode number, or one of the special enumeration cases this type defines, like ``FSItem/Identifier/rootDirectory``.
 FSKIT_API_AVAILABILITY_V1
 typedef NS_ENUM(UInt64, FSItemID) {
+    /// The identifier for an invalid item.
     FSItemIDInvalid = 0,
+    /// The identifier for an item that serves as the parent of the root directory.
     FSItemIDParentOfRoot = 1,
+    /// The item identifier for the root directory.
     FSItemIDRootDirectory = 2,
 } NS_SWIFT_NAME(FSItem.Identifier);
 

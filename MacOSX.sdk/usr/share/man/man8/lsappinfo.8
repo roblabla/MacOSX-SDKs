@@ -15,10 +15,10 @@
 \fBfront\fR Show the front application\.
 .
 .IP "\(bu" 4
-\fBfind\fR [ \fIkey\fR=\fIvalue\fR ]+
+\fBfind\fR [ --includeExitedApplications] [ \fIkey\fR=\fIvalue\fR ]+
 .
 .br
-Show the ASN of all applications which have the given \fIkey\fR/\fIvalue\fR present in their application information\. For \fIkey\fR the actual CFString value for the key can be used, or any of the aliases described below under Key Strings\. For \fIvalue\fR, see the rules below under Key Values\.
+Show the ASN of all applications which have the given \fIkey\fR/\fIvalue\fR present in their application information\. For \fIkey\fR the actual CFString value for the key can be used, or any of the aliases described below under Key Strings\. For \fIvalue\fR, see the rules below under Key Values\.  If \f--includeExitedApplications\f then also include any matches for applications which have exited but still have running child applications or coalition procesess.
 .
 .IP "\(bu" 4
 \fBinfo\fR [\fB\-only\fR \fIinformation\-item\-key\fR] [\-app \fIapp\-specifier\fR] [\fB\-long\fR][\fIapp\-specifier\fR]

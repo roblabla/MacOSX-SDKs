@@ -178,6 +178,18 @@ const CFStringRef kCFUserNotificationAlertTopMostKey API_AVAILABLE(macos(10.0)) 
 CF_EXPORT
 const CFStringRef kCFUserNotificationKeyboardTypesKey API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
+CF_EXPORT
+const CFStringRef kCFUserNotificationAlertAccessibilityIdentifierKey API_UNAVAILABLE(ios) API_UNAVAILABLE(macos, watchos, tvos, visionos, macCatalyst);
+
+CF_EXPORT
+const CFStringRef kCFUserNotificationDefaultButtonAccessibilityIdentifierKey API_UNAVAILABLE(ios) API_UNAVAILABLE(macos, watchos, tvos, visionos, macCatalyst);
+
+CF_EXPORT
+const CFStringRef kCFUserNotificationAlternateButtonAccessibilityIdentifierKey API_UNAVAILABLE(ios) API_UNAVAILABLE(macos, watchos, tvos, visionos, macCatalyst);
+
+CF_EXPORT
+const CFStringRef kCFUserNotificationOtherButtonAccessibilityIdentifierKey API_UNAVAILABLE(ios) API_UNAVAILABLE(macos, watchos, tvos, visionos, macCatalyst);
+
 CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED
 

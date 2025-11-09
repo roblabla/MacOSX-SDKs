@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation'
-current-version: 4040.1.255
+current-version: 4109.1.255
 compatibility-version: 300
 swift-abi-version: 7
 reexported-libraries:
@@ -26578,6 +26578,10 @@ exports:
                        '_$s10Foundation10URLRequestV30allowsConstrainedNetworkAccessSbvpMV', 
                        '_$s10Foundation10URLRequestV30allowsConstrainedNetworkAccessSbvs', 
                        '_$s10Foundation10URLRequestV34_conditionallyBridgeFromObjectiveC_6resultSbSo12NSURLRequestC_ACSgztFZ', 
+                       '_$s10Foundation10URLRequestV35allowsUltraConstrainedNetworkAccessSbvM', 
+                       '_$s10Foundation10URLRequestV35allowsUltraConstrainedNetworkAccessSbvg', 
+                       '_$s10Foundation10URLRequestV35allowsUltraConstrainedNetworkAccessSbvpMV', 
+                       '_$s10Foundation10URLRequestV35allowsUltraConstrainedNetworkAccessSbvs', 
                        '_$s10Foundation10URLRequestV36_unconditionallyBridgeFromObjectiveCyACSo12NSURLRequestCSgFZ', 
                        '_$s10Foundation10URLRequestV3url11cachePolicy15timeoutIntervalAcA3URLV_So017NSURLRequestCacheE0VSdtcfC', 
                        '_$s10Foundation10URLRequestV3urlAA3URLVSgvM', '_$s10Foundation10URLRequestV3urlAA3URLVSgvg', 
@@ -35401,6 +35405,7 @@ exports:
                        '_$s10Foundation8URLErrorV23noPermissionsToReadFileAC4CodeVvgZ', 
                        '_$s10Foundation8URLErrorV23noPermissionsToReadFileAC4CodeVvpZMV', 
                        '_$s10Foundation8URLErrorV24NetworkUnavailableReasonO11constrainedyA2EmFWC', 
+                       '_$s10Foundation8URLErrorV24NetworkUnavailableReasonO16ultraConstrainedyA2EmFWC', 
                        '_$s10Foundation8URLErrorV24NetworkUnavailableReasonO8cellularyA2EmFWC', 
                        '_$s10Foundation8URLErrorV24NetworkUnavailableReasonO8rawValueAESgSi_tcfC', 
                        '_$s10Foundation8URLErrorV24NetworkUnavailableReasonO8rawValueSivg', 

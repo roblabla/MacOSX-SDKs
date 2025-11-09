@@ -29,6 +29,10 @@
 #import <Photos/PHAssetChangeRequest.h>
 #import <Photos/PHAssetCreationRequest.h>
 #import <Photos/PHAssetCollectionChangeRequest.h>
+
+#import <Photos/PHAssetResourceUploadJob.h>
+#import <Photos/PHAssetResourceUploadJobChangeRequest.h>
+
 #import <Photos/PHCollectionListChangeRequest.h>
 #import <Photos/PHLivePhotoEditingContext.h>
 

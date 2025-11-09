@@ -250,7 +250,7 @@ Note that the enabled state may change after route changes, e.g. if user plugs i
 	deactivation is requested, the session will be deactivated, but the method will return NO and
 	populate the NSError with the code property set to AVAudioSessionErrorCodeIsBusy to indicate the
 	misuse of the API. Prior to iOS 8, the session would have remained active if it had running I/Os
-	at the time of the deactivation request. Starting in iOS 19.0, deactivating while IO is running will
+	at the time of the deactivation request. Starting in iOS 26.0, deactivating while IO is running will
 	no longer return AVAudioSessionErrorCodeIsBusy.
 */
 - (BOOL)setActive:(BOOL)active error:(NSError **)outError API_AVAILABLE(ios(3.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);

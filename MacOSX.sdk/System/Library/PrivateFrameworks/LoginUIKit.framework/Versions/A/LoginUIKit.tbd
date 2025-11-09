@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/LoginUIKit'
-current-version: 398.0.1
+current-version: 398.1.4
 swift-abi-version: 7
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -35,28 +35,22 @@ exports:
                        '_$s10LoginUIKit17LUI2GlassTextViewC4dateSo6NSDateCvpMV', 
                        '_$s10LoginUIKit17LUI2GlassTextViewC4dateSo6NSDateCvsTj', 
                        '_$s10LoginUIKit17LUI2GlassTextViewC4dateSo6NSDateCvsTq', 
-                       '_$s10LoginUIKit17LUI2GlassTextViewC4fontSo6NSFontCSgvMTj', 
-                       '_$s10LoginUIKit17LUI2GlassTextViewC4fontSo6NSFontCSgvMTq', 
-                       '_$s10LoginUIKit17LUI2GlassTextViewC4fontSo6NSFontCSgvgTj', 
-                       '_$s10LoginUIKit17LUI2GlassTextViewC4fontSo6NSFontCSgvgTq', 
-                       '_$s10LoginUIKit17LUI2GlassTextViewC4fontSo6NSFontCSgvpMV', 
-                       '_$s10LoginUIKit17LUI2GlassTextViewC4fontSo6NSFontCSgvsTj', 
-                       '_$s10LoginUIKit17LUI2GlassTextViewC4fontSo6NSFontCSgvsTq', 
                        '_$s10LoginUIKit17LUI2GlassTextViewC5frameACSo6CGRectV_tcfC', 
                        '_$s10LoginUIKit17LUI2GlassTextViewC5frameACSo6CGRectV_tcfc', 
                        '_$s10LoginUIKit17LUI2GlassTextViewC7Combine16ObservableObjectAAMc', 
-                       '_$s10LoginUIKit17LUI2GlassTextViewC9alignmentSo15NSTextAlignmentVvMTj', 
-                       '_$s10LoginUIKit17LUI2GlassTextViewC9alignmentSo15NSTextAlignmentVvMTq', 
-                       '_$s10LoginUIKit17LUI2GlassTextViewC9alignmentSo15NSTextAlignmentVvgTj', 
-                       '_$s10LoginUIKit17LUI2GlassTextViewC9alignmentSo15NSTextAlignmentVvgTq', 
-                       '_$s10LoginUIKit17LUI2GlassTextViewC9alignmentSo15NSTextAlignmentVvpMV', 
-                       '_$s10LoginUIKit17LUI2GlassTextViewC9alignmentSo15NSTextAlignmentVvsTj', 
-                       '_$s10LoginUIKit17LUI2GlassTextViewC9alignmentSo15NSTextAlignmentVvsTq', 
                        '_$s10LoginUIKit17LUI2GlassTextViewCMa', '_$s10LoginUIKit17LUI2GlassTextViewCMn', 
                        '_$s10LoginUIKit17LUI2GlassTextViewCMo', '_$s10LoginUIKit17LUI2GlassTextViewCMu', 
                        '_$s10LoginUIKit17LUI2GlassTextViewCN', '_$s10LoginUIKit17LUI2GlassTextViewCfD', 
                        '_$s15WallpaperAccess06publicA5Image11forUserUUIDSo10CGImageRefa10Foundation0G0V_tKF', 
                        '_$s15WallpaperAccess06publicA5Image9forUserIDSo10CGImageRefas6UInt32V_tKF', 
+                       '_$s15WallpaperAccess07defaultA9Thumbnail4sizeSo10CGImageRefaSo6CGSizeV_tKF', 
+                       '_$s15WallpaperAccess0aB5ErrorO23couldNotCreateThumbnailyA2CmFWC', 
+                       '_$s15WallpaperAccess0aB5ErrorO25couldNotCreateImageSourceyA2CmFWC', 
+                       '_$s15WallpaperAccess0aB5ErrorO2eeoiySbAC_ACtFZ', '_$s15WallpaperAccess0aB5ErrorO4hash4intoys6HasherVz_tF', 
+                       '_$s15WallpaperAccess0aB5ErrorO9hashValueSivg', '_$s15WallpaperAccess0aB5ErrorO9hashValueSivpMV', 
+                       '_$s15WallpaperAccess0aB5ErrorOMa', '_$s15WallpaperAccess0aB5ErrorOMn', 
+                       '_$s15WallpaperAccess0aB5ErrorON', '_$s15WallpaperAccess0aB5ErrorOSHAAMc', 
+                       '_$s15WallpaperAccess0aB5ErrorOSQAAMc', '_$s15WallpaperAccess0aB5ErrorOs0C0AAMc', 
                        '_$s15WallpaperAccess9ModelInfoO24desktopPictureSystemPathSSSgvgZ', 
                        '_$s15WallpaperAccess9ModelInfoO24desktopPictureSystemPathSSSgvpZMV', 
                        '_$s15WallpaperAccess9ModelInfoOMa', '_$s15WallpaperAccess9ModelInfoOMn', 
@@ -279,7 +273,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Frameworks/LoginUICore.framework/Versions/A/LoginUICore'
-current-version: 398.0.1
+current-version: 398.1.4
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _LUI2CButtonBack, _LUI2CButtonLogin, _LUICAvatarMask, _LUICAvatarOverlay, 

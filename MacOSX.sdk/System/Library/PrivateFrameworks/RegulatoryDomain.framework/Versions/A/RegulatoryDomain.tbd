@@ -16,6 +16,7 @@ exports:
                        _RDUpdateCountryCodesFromPeer, _RDUpdateCountryCodesFromServingCell, 
                        _RDUpdateCountryCodesFromWiFiAPs, _kRDPriorityGEOIP, _kRDPriorityNearbyCellsMCC, 
                        _kRDPriorityServingCellMCC, _kRDPrioritySingleLocation, _kRDPriorityWiFiAP, 
-                       _kRDUpdateKeyCountryCodes, _kRDUpdateKeyInDisputedArea, _kRegulatoryDomainUpdateNotification ]
+                       _kRDUpdateKeyCountryCodes, _kRDUpdateKeyInDisputedArea, _kRegulatoryDomainMontaraUpdateNotification, 
+                       _kRegulatoryDomainUpdateNotification ]
     objc-classes:    [ RDCachedData, RDEstimate, RDStatusShareWrapper ]
 ...

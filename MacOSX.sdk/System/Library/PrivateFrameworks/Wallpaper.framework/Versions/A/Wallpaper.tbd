@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Wallpaper.framework/Versions/A/Wallpaper'
-current-version: 245.0.1
+current-version: 245.1.9
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -77,6 +77,10 @@ exports:
                        '_$s9Wallpaper011ImageFolderA19ChoiceConfigurationVN', '_$s9Wallpaper011ImageFolderA19ChoiceConfigurationVSEAAMc', 
                        '_$s9Wallpaper011ImageFolderA19ChoiceConfigurationVSQAAMc', 
                        '_$s9Wallpaper011ImageFolderA19ChoiceConfigurationVSeAAMc', 
+                       '_$s9Wallpaper013OnDiskDynamicA9ValidatorV7isValidySb10Foundation3URLVF', 
+                       '_$s9Wallpaper013OnDiskDynamicA9ValidatorVAA0daE0AAMc', '_$s9Wallpaper013OnDiskDynamicA9ValidatorVAA0daE0AAWP', 
+                       '_$s9Wallpaper013OnDiskDynamicA9ValidatorVACycfC', '_$s9Wallpaper013OnDiskDynamicA9ValidatorVMa', 
+                       '_$s9Wallpaper013OnDiskDynamicA9ValidatorVMn', '_$s9Wallpaper013OnDiskDynamicA9ValidatorVN', 
                        '_$s9Wallpaper015EncodedExportedA0V0A10Foundation16XPCObjectCodableAAMc', 
                        '_$s9Wallpaper015EncodedExportedA0V12readMetadata4from10Foundation4DataVAF3URLV_tKFZ', 
                        '_$s9Wallpaper015EncodedExportedA0V2eeoiySbAC_ACtFZ', '_$s9Wallpaper015EncodedExportedA0V4fromACSo13OS_xpc_object_p_tKcfC', 
@@ -207,11 +211,12 @@ exports:
                        '_$s9Wallpaper07DynamicA19ChoiceConfigurationV6decodeyAC10Foundation4DataVKFZ', 
                        '_$s9Wallpaper07DynamicA19ChoiceConfigurationV6encode10Foundation4DataVyKF', 
                        '_$s9Wallpaper07DynamicA19ChoiceConfigurationV6encode2toys7Encoder_p_tKF', 
-                       '_$s9Wallpaper07DynamicA19ChoiceConfigurationV7isValidySb10Foundation3URLVFZ', 
                        '_$s9Wallpaper07DynamicA19ChoiceConfigurationVMa', '_$s9Wallpaper07DynamicA19ChoiceConfigurationVMn', 
                        '_$s9Wallpaper07DynamicA19ChoiceConfigurationVN', '_$s9Wallpaper07DynamicA19ChoiceConfigurationVSEAAMc', 
                        '_$s9Wallpaper07DynamicA19ChoiceConfigurationVSQAAMc', '_$s9Wallpaper07DynamicA19ChoiceConfigurationVSeAAMc', 
-                       '_$s9Wallpaper07SequoiaA19ChoiceConfigurationV10CodingKeysO11stringValueAESgSS_tcfC', 
+                       '_$s9Wallpaper07DynamicA9ValidatorMp', '_$s9Wallpaper07DynamicA9ValidatorP7isValidySb10Foundation3URLVFTj', 
+                       '_$s9Wallpaper07DynamicA9ValidatorP7isValidySb10Foundation3URLVFTq', 
+                       '_$s9Wallpaper07DynamicA9ValidatorTL', '_$s9Wallpaper07SequoiaA19ChoiceConfigurationV10CodingKeysO11stringValueAESgSS_tcfC', 
                        '_$s9Wallpaper07SequoiaA19ChoiceConfigurationV10CodingKeysO11stringValueSSvg', 
                        '_$s9Wallpaper07SequoiaA19ChoiceConfigurationV10CodingKeysO11stringValueSSvpMV', 
                        '_$s9Wallpaper07SequoiaA19ChoiceConfigurationV10CodingKeysO5styleyA2EmFWC', 

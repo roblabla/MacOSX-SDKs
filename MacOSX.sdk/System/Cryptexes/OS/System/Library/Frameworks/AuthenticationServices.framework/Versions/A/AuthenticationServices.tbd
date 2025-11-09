@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/AuthenticationServices.framework/Versions/A/AuthenticationServices'
-current-version: 622.1.22
+current-version: 622.2.11
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -45,6 +45,7 @@ exports:
                        '_$s22AuthenticationServices16ASImportableItemV2id10Foundation4DataVvg', 
                        '_$s22AuthenticationServices16ASImportableItemV2id10Foundation4DataVvpMV', 
                        '_$s22AuthenticationServices16ASImportableItemV2id10Foundation4DataVvs', 
+                       '_$s22AuthenticationServices16ASImportableItemV2id5title8subtitle8favorite5scope11credentials4tagsAC10Foundation4DataV_S2SSgSbAA0C15CredentialScopeVSgSayAA0cN0OGSaySSGtcfC', 
                        '_$s22AuthenticationServices16ASImportableItemV2id7created12lastModified5title8subtitle8favorite5scope11credentials4tagsAC10Foundation4DataV_AM4DateVAQS2SSgSbAA0C15CredentialScopeVSgSayAA0cR0OGSaySSGtcfC', 
                        '_$s22AuthenticationServices16ASImportableItemV4fromACs7Decoder_p_tKcfC', 
                        '_$s22AuthenticationServices16ASImportableItemV4hash4intoys6HasherVz_tF', 
@@ -1815,6 +1816,9 @@ exports:
                        '_$sSo51ASAuthorizationWebBrowserPublicKeyCredentialManagerC22AuthenticationServicesE19platformCredentials15forRelyingPartySayAC0abc8PlatformdeF0VGSS_tYaFTu', 
                        '_$sSo51ASAuthorizationWebBrowserPublicKeyCredentialManagerC22AuthenticationServicesE23corePlatformCredentials15forRelyingPartySaySo06WBSWebC7PasskeyCGSS_tYaF', 
                        '_$sSo51ASAuthorizationWebBrowserPublicKeyCredentialManagerC22AuthenticationServicesE23corePlatformCredentials15forRelyingPartySaySo06WBSWebC7PasskeyCGSS_tYaFTu', 
+                       '_$sSo51ASAuthorizationWebBrowserPublicKeyCredentialManagerC22AuthenticationServicesE29isDeviceConfiguredForPasskeysSbvgZ', 
+                       '_$sSo51ASAuthorizationWebBrowserPublicKeyCredentialManagerC22AuthenticationServicesE29isDeviceConfiguredForPasskeysSbvpZMV', 
+                       '_$sSo51ASAuthorizationWebBrowserPublicKeyCredentialManagerC22AuthenticationServicesE30_isDeviceConfiguredForPasskeysSbyFZ', 
                        '_$sSo52ASAuthorizationPublicKeyCredentialPRFAssertionOutputC22AuthenticationServicesE5first10Foundation4DataVvg', 
                        '_$sSo52ASAuthorizationPublicKeyCredentialPRFAssertionOutputC22AuthenticationServicesE5first10Foundation4DataVvpMV', 
                        '_$sSo52ASAuthorizationPublicKeyCredentialPRFAssertionOutputC22AuthenticationServicesE5first10Foundation4DataVvpWvd', 

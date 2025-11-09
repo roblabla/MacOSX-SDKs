@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotoFoundation.framework/Versions/A/PhotoFoundation'
-current-version: 801.43.240
+current-version: 811.0.106
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -31,7 +31,6 @@ exports:
                        '_$s15PhotoFoundation18PhotosFeatureFlagsO32MemoryCreationPromptSuggestionDByA2CmFWC', 
                        '_$s15PhotoFoundation18PhotosFeatureFlagsO33AppleMusicExportRestrictionByPassyA2CmFWC', 
                        '_$s15PhotoFoundation18PhotosFeatureFlagsO34MemoryCreationInternationalizationyA2CmFWC', 
-                       '_$s15PhotoFoundation18PhotosFeatureFlagsO34SharedStreamCollectionShareSupportyA2CmFWC', 
                        '_$s15PhotoFoundation18PhotosFeatureFlagsO37MemoryCreationTimeEventDisambiguationyA2CmFWC', 
                        '_$s15PhotoFoundation18PhotosFeatureFlagsO42MemoryCreationPersonalEventsBeyondMeaningsyA2CmFWC', 
                        '_$s15PhotoFoundation18PhotosFeatureFlagsO4hash4intoys6HasherVz_tF', 

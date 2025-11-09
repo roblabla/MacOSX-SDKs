@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DiskImages2.framework/Versions/A/DiskImages2'
-current-version: 511
+current-version: 514.40.7
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
@@ -18,7 +18,7 @@ exports:
                        __ZTINSt3__116__owns_one_stateIcEE, __ZTINSt3__117__owns_two_statesIcEE, 
                        __ZTINSt3__117__repeat_one_loopIcEE, __ZTINSt3__118__back_ref_collateIcNS_12regex_traitsIcEEEE, 
                        __ZTINSt3__118__match_char_icaseIcNS_12regex_traitsIcEEEE, 
-                       __ZTINSt3__120__bracket_expressionIcNS_12regex_traitsIcEEEE, 
+                       __ZTINSt3__119bad_expected_accessINS_10error_codeEEE, __ZTINSt3__120__bracket_expressionIcNS_12regex_traitsIcEEEE, 
                        __ZTINSt3__120__l_anchor_multilineIcEE, __ZTINSt3__120__match_char_collateIcNS_12regex_traitsIcEEEE, 
                        __ZTINSt3__120__r_anchor_multilineIcEE, __ZTINSt3__120__shared_ptr_emplaceINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
                        __ZTINSt3__120__shared_ptr_pointerIPNS_13__empty_stateIcEENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
@@ -44,7 +44,7 @@ exports:
                        __ZTSNSt3__116__owns_one_stateIcEE, __ZTSNSt3__117__owns_two_statesIcEE, 
                        __ZTSNSt3__117__repeat_one_loopIcEE, __ZTSNSt3__118__back_ref_collateIcNS_12regex_traitsIcEEEE, 
                        __ZTSNSt3__118__match_char_icaseIcNS_12regex_traitsIcEEEE, 
-                       __ZTSNSt3__120__bracket_expressionIcNS_12regex_traitsIcEEEE, 
+                       __ZTSNSt3__119bad_expected_accessINS_10error_codeEEE, __ZTSNSt3__120__bracket_expressionIcNS_12regex_traitsIcEEEE, 
                        __ZTSNSt3__120__l_anchor_multilineIcEE, __ZTSNSt3__120__match_char_collateIcNS_12regex_traitsIcEEEE, 
                        __ZTSNSt3__120__r_anchor_multilineIcEE, __ZTSNSt3__120__shared_ptr_emplaceINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPNS_13__empty_stateIcEENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 

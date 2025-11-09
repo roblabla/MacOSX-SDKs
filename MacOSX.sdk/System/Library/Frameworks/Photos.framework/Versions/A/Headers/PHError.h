@@ -32,6 +32,7 @@ typedef NS_ERROR_ENUM(PHPhotosErrorDomain, PHPhotosError) {
     PHPhotosErrorMissingResource API_AVAILABLE(macos(12), ios(15), tvos(15)) = 3303, // Asset resource missing
     PHPhotosErrorNotEnoughSpace API_AVAILABLE(macos(12), ios(15), tvos(15)) = 3305, // Not enough space to perform the requested change
     PHPhotosErrorRequestNotSupportedForAsset API_AVAILABLE(macos(12), ios(15), tvos(15)) = 3306, // The request could not be completed because it is not supported for the specified asset
+    PHPhotosErrorLimitExceeded API_AVAILABLE(macos(26.1), ios(26.1), tvos(26.1)) = 3307, // The request could not be completed because a limit would be exceeded
     
     PHPhotosErrorAccessRestricted API_AVAILABLE(macos(12), ios(15), tvos(15)) = 3310, // Access restricted by system configuration
     PHPhotosErrorAccessUserDenied API_AVAILABLE(macos(12), ios(15), tvos(15)) = 3311, // The user has denied access

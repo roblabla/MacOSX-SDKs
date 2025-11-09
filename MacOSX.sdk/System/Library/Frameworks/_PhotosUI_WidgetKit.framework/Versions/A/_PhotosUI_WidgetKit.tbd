@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_PhotosUI_WidgetKit.framework/Versions/A/_PhotosUI_WidgetKit'
-current-version: 801.43.240
+current-version: 811.0.106
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

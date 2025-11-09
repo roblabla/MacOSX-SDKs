@@ -323,6 +323,7 @@ exports:
                        _PRMPosterSystemTimeFontConfigurationKeyIsSystemTime, _PRMPosterSystemTimeFontConfigurationKeyTimeFontIdentifier, 
                        _PRMPosterSystemTimeFontConfigurationKeyWeight, _PRMPosterTitleStyleConfigurationKeyAdaptiveTimeMode, 
                        _PRMPosterTitleStyleConfigurationKeyContentsLuminance, _PRMPosterTitleStyleConfigurationKeyGroupName, 
+                       _PRMPosterTitleStyleConfigurationKeyIsAdaptiveTimeHeightUserConfigured, 
                        _PRMPosterTitleStyleConfigurationKeyIsAlternateDateEnabled, 
                        _PRMPosterTitleStyleConfigurationKeyIsUserConfigured, _PRMPosterTitleStyleConfigurationKeyPreferredTitleAlignment, 
                        _PRMPosterTitleStyleConfigurationKeyPreferredTitleLayout, 

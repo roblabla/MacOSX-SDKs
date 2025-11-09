@@ -414,6 +414,9 @@ API_AVAILABLE(macos(26.0), ios(26.0)) NS_SWIFT_SENDABLE
 /// Provides a list of inputs and outputs of the function.
 @property (nonnull, readonly) NSArray<id<MTLBinding>> *bindings;
 
+/// The string passed to the user annotation attribute for this function. Null if no user annotation is present for this function.
+@property (nullable, readonly) NSString *userAnnotation API_AVAILABLE(macos(26.0), ios(26.0));
+
 @end
 
 /*!
@@ -476,13 +479,27 @@ API_AVAILABLE(macos(10.11), ios(8.0)) NS_SWIFT_SENDABLE
 			completionHandler:(void (^)(id<MTLFunction> __nullable function, NSError* __nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0));
 
 
-/// Returns a reflection object for a matching function name in this library instance.
+/// Retrieves reflection information for a function in the library.
 ///
 /// - Parameters:
-///   - functionName: The name of the function.
+///   - functionName: The name of a GPU function in the library.
+///   The name needs to match one of the elements in the string array of library's ``functionNames`` property.
 ///
-/// - Returns: An object containing the reflection information, or `nil` if no function in the library matches the name.
+/// - Returns: An `MTLFunctionReflection` instance when the method succeeds; otherwise `nil`.
 ///
+/// The reflection instance contains metadata information about a specific GPU function,
+/// which can include:
+/// * Function parameters
+/// * Return types
+/// * Bindings
+/// * Annotations from a developer, if available
+///
+/// - Note: The Metal compiler generates the function's reflection information
+/// when you or Xcode build the library.
+///
+/// The method only returns reflection information if all of the following conditions apply:
+/// * The library has a function with a name that matches `functionName`.
+/// * The deployment target is macOS 13.0 or later, or iOS 16.0 or later, or visionOS 2.0 or later.
 - (nullable MTLFunctionReflection *)reflectionForFunctionWithName:(NSString *)functionName API_AVAILABLE(macos(26.0), ios(26.0));
 
 

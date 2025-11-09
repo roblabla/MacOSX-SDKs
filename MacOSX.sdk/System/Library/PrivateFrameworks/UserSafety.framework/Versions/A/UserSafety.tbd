@@ -9,5 +9,5 @@ exports:
     symbols:         [ _USError, _USErrorCausedBy, _USErrorDomain, _UserSafetyVersionNumber, 
                        _UserSafetyVersionString, _kUSLogSubsystem, _kUserSafetyServiceEntitlement ]
     objc-classes:    [ USAnalysisEnablementSubscription, USEntitlements, USLog, USManagedSettingsReader, 
-                       USMediaAnalysisService, USSensitivityAnalyzer ]
+                       USSensitivityAnalyzer ]
 ...

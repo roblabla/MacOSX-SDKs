@@ -44,7 +44,7 @@ exports:
                        _APSUltraConstrainedEntitlement, _APSUnderlyingError, _APSUseMultiIdentityProvider, 
                        _APSXPCConfigureConnection, _APSXPCConnectionSetEventHandlers, 
                        _APSXPCCreateConnectionForService, _APSXPCCreateConnectionForServiceWithQueue, 
-                       _APSXPCCreateServerConnection, _APSXPCMessageTypeKey ]
+                       _APSXPCCreateServerConnection, _APSXPCMessageTypeKey, _aps_log_reduce_logging ]
     objc-classes:    [ APSAccessCheck, APSAppTokenInfo, APSChannelSubscriptionFailure, 
                        APSConnection, APSDNSRequest, APSDNSResponse, APSIncomingMessage, 
                        APSLog, APSMessage, APSOutgoingMessage, APSSignDataWithIdentityRequest, 

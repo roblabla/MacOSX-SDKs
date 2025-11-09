@@ -15,10 +15,11 @@ exports:
                        _CPKEmojiFoundationPrefsChangedNotification, _CPKGenmojiCreationIsAvailable, 
                        _CPKGetRawCategoryData, _CPKLogTypeSessionEvents, _CPKLogTypeStartupPerformance, 
                        _CPKLoggingGetDefaultLog, _CPKLoggingGetUserInterfaceLog, 
-                       _CPKPopoverWillCloseForFocusLostNotification, _CPKPopoverWillCloseForNonFocusLostNotification, 
-                       _CPKSearchFieldDidGetFocusNotification, _CPKShowGenmojiCreationFirstOnNextSession, 
-                       _CPKTextAttachmentFromCharacterEntity, _CPKTextAttachmentFromImage, 
-                       _CharacterPickerContentTypeIsInlineAttachment, _LogCurrentTime ]
+                       _CPKPopoverDidRequestGenmojiCancellation, _CPKPopoverWillCloseForFocusLostNotification, 
+                       _CPKPopoverWillCloseForNonFocusLostNotification, _CPKSearchFieldDidGetFocusNotification, 
+                       _CPKShowGenmojiCreationFirstOnNextSession, _CPKTextAttachmentFromCharacterEntity, 
+                       _CPKTextAttachmentFromImage, _CharacterPickerContentTypeIsInlineAttachment, 
+                       _LogCurrentTime ]
     objc-classes:    [ CPKCharactersView, CPKDefaultDataSource, CPKEmojiAndStickersDataSource, 
                        CPKEmojiDataSource, CPKEmojiIMDataSource, CPKEmojiIMViewController, 
                        CPKFont, CPKPopover, CPKSearchField, CPKStandardCharacterEntity, 

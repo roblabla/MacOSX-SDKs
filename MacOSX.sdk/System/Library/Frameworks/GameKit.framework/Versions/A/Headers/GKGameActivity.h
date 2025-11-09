@@ -19,7 +19,7 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos)
-/// `GKGameActivity` represents a single instance of a game activity for the current game.
+/// An object that represents a single instance of a game activity for the current game.
 NS_SWIFT_SENDABLE @interface GKGameActivity : NSObject
 
 /// The identifier of this activity instance.
@@ -30,11 +30,12 @@ NS_SWIFT_SENDABLE @interface GKGameActivity : NSObject
 
 /// Properties that contain additional information about the activity.
 ///
-/// This takes precedence over the `defaultProperties` on the `activityDefinition`.
+/// This takes precedence over ``GKGameActivityDefinition/defaultProperties`` on the activity
+/// definition.
 ///
-/// 1. This dictionary is initialized with the default properties from the activity definition and deep linked properties if any.
-/// 2. If deep linking contains the same key as the default properties, the deep linked value will override the default value.
-/// 3. The properties can be updated at runtime.
+/// 1. The framework initializes this dictionary with the default properties from the activity definition and deep linked properties, if any.
+/// 2. If deep linking contains the same key as the default properties, the deep linked value overrides the default value.
+/// 3. You can update the properties at runtime.
 @property (nonatomic, readwrite, copy) NSDictionary<NSString *, NSString *> *properties;
 
 /// The state of the game activity.
@@ -42,8 +43,8 @@ NS_SWIFT_SENDABLE @interface GKGameActivity : NSObject
 
 /// If the game supports party code, this is the party code that can be shared among players to join the party.
 ///
-/// If the game does not support party code, this value will be nil.
-/// - SeeAlso: ``-[GKGameActivity startWithDefinition:partyCode:completionHandler:]`` for creating a game activity with a custom party code.
+/// If the game doesn't support party code, this value will be `nil`. Use ``GKGameActivity/start(definition:partyCode:)``
+/// to create a game activity with a custom party code.
 @property (nonatomic, readonly, copy, nullable) NSString *partyCode;
 
 /// If the game supports party code, this is the URL that can be shared among players to join the party.
@@ -64,7 +65,7 @@ NS_SWIFT_SENDABLE @interface GKGameActivity : NSObject
 /// The date when the activity was officially ended.
 @property (nonatomic, readonly, strong, nullable) NSDate *endDate;
 
-/// Total time elapsed while in active state.
+/// The total time elapsed while in active state.
 @property (nonatomic, readonly, assign) NSTimeInterval duration;
 
 /// All achievements that have been associated with this activity.
@@ -84,48 +85,49 @@ NS_SWIFT_SENDABLE @interface GKGameActivity : NSObject
 
 /// Creates and starts a new game activity with a custom party code.
 ///
-/// The party code will be converted to uppercased.
+/// The framework converts the party code to uppercase.
 + (GKGameActivity * _Nullable)startWithDefinition:(GKGameActivityDefinition *)activityDefinition
                                         partyCode:(NSString *)partyCode
                                             error:(NSError **)error NS_SWIFT_NAME(start(definition:partyCode:));
 
-/// Initializes and starts a game activity with definition.
+/// Creates and starts a game activity with a definition.
 + (GKGameActivity * _Nullable)startWithDefinition:(GKGameActivityDefinition *)activityDefinition
                                             error:(NSError **)error NS_SWIFT_NAME(start(definition:));
 
 /// Checks whether a party code is in valid format.
 ///
-/// Party code should be two parts of strings with the same length (2-6) connected with a dash, and the code can be either pure digits (0-9), or both parts are uppercased characters from `validPartyCodeAlphabet`.
-/// - SeeAlso: `validPartyCodeAlphabet` for allowed characters.
+/// Party code should be two parts of strings with the same length (2-6) connected with a dash, and the
+/// code can be either pure digits (0-9), or both parts are uppercased characters from
+/// ``GKGameActivity/validPartyCodeAlphabet``.
 + (BOOL)isValidPartyCode:(NSString *)partyCode;
 
-/// Initializes a game activity with definition.
+/// Creates a game activity with definition.
 - (instancetype)initWithDefinition:(GKGameActivityDefinition *)activityDefinition;
 
-/// Starts the game activity if it is not already started.
+/// Starts the game activity if it's not already started.
 - (void)start;
 
-/// Pauses the game activity if it is not already paused.
+/// Pauses the game activity if it's not already paused.
 - (void)pause;
 
 /// Resumes the game activity if it was paused.
 - (void)resume;
 
-/// Ends the game activity if it is not already ended.
+/// Ends the game activity if it's not already ended.
 ///
-/// This will report all associated achievements and submit scores to leaderboards.
+/// This reports all associated achievements and submit scores to leaderboards.
 - (void)end;
 
 /// Set a score of a leaderboard with a context for a player.
 ///
-/// The score will be submitted to the leaderboard when the activity ends.
+/// The framewwork submits the score to the leaderboard when the activity ends.
 - (void)setScoreOnLeaderboard:(GKLeaderboard *)leaderboard
                       toScore:(NSInteger)score
                       context:(NSUInteger)context NS_SWIFT_NAME(setScore(on:to:context:));
 
 /// Set a score of a leaderboard for a player.
 ///
-/// The score will be submitted to the leaderboard when the activity ends.
+/// The framewowrk submits the score to the leaderboard when the activity ends.
 - (void)setScoreOnLeaderboard:(GKLeaderboard *)leaderboard
                       toScore:(NSInteger)score NS_SWIFT_NAME(setScore(on:to:));
 
@@ -137,21 +139,21 @@ NS_SWIFT_SENDABLE @interface GKGameActivity : NSObject
 
 /// Set a progress for an achievement for a player.
 ///
-/// Achievement progress will be reported when the activity ends.
+/// The framework reports achievement progress when the activity ends.
 - (void)setProgressOnAchievement:(GKAchievement *)achievement
                toPercentComplete:(double)percentComplete NS_SWIFT_NAME(setProgress(on:to:));
 
-/// Convenience method to set a progress to 100% for an achievement for a player.
+/// Set progress to 100% for an achievement for a player.
 ///
-/// Achievement completion will be reported when the activity ends.
+/// The system reports achievement completion when the activity ends.
 - (void)setAchievementCompleted:(GKAchievement *)achievement NS_SWIFT_NAME(setAchievementCompleted(_:));
 
 /// Get the achievement progress from a specific achievement of the local player if previously set.
 /// 
-/// Returns 0 if the achievement has not been set in the current activity.
+/// Returns `0` if the achievement hasn't been set in the current activity.
 - (double)getProgressOnAchievement:(GKAchievement *)achievement NS_SWIFT_NAME(progress(on:));
 
-/// Removes all achievements if exist.
+/// Removes all achievements if they exist.
 - (void)removeAchievements:(NSArray<GKAchievement *> *)achievements NS_SWIFT_NAME(removeAchievements(_:));
 @end
 
@@ -159,20 +161,24 @@ NS_SWIFT_SENDABLE @interface GKGameActivity : NSObject
 API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos)
 @interface GKGameActivity (Multiplayer)
 
-/// Makes a `GKMatchRequest` object with information from the activity, which can be used to find matches for the local player.
+/// Makes a match request object with information from the activity, which you can use to find matches for the local player.
 - (GKMatchRequest * _Nullable)makeMatchRequest;
 
 /// Use information from the activity to find matches for the local player.
 ///
-/// GameKit will create a classic match making request with the activity's party code and other information, and return the match object in the completion handler or any error that occurred.
-/// Error occurs if this activity doesn't support party code, or has unsupported range of players, which is used to be configured as match request's minPlayers and maxPlayers.
+/// GameKit creates a classic match making request with the activity's party code and other information, and
+/// returns the match object in the completion handler or any error that occurred.
+/// An error occurs if this activity doesn't support party code, or has an unsupported range of players, which
+/// is used to be configured as match request's `minPlayers` and `maxPlayers`.
 - (void)findMatchWithCompletionHandler:(void(^)(GKMatch * _Nullable match,
                                                 NSError * _Nullable error))completionHandler NS_SWIFT_NAME(findMatch(completionHandler:));
 
 /// Use information from the activity to find server hosted players for the local player.
 ///
-/// GameKit will create a classic server hosted match making request with the activity's party code and other information, and return the players in the completion handler or any error that occurred.
-/// Error occurs if this activity doesn't support party code, or has unsupported range of players, which is used to be configured as match request's minPlayers and maxPlayers.
+/// GameKit creates a classic server hosted match making request with the activity's party code and other
+/// information, and returns the players in the completion handler or any error that occurred.
+/// An error occurs if this activity doesn't support party code, or has unsupported range of players, which is
+/// used to be configured as match request's `minPlayers` and `maxPlayers`.
 - (void)findPlayersForHostedMatchWithCompletionHandler:(void(^)(NSArray<GKPlayer *> * _Nullable players,
                                                                 NSError * _Nullable error))completionHandler NS_SWIFT_NAME(findPlayersForHostedMatch(completionHandler:));
 
@@ -183,6 +189,9 @@ API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABL
 @interface GKGameActivity (State)
 
 /// Checks whether there is a pending activity to handle for the current game.
+///
+/// You can call this method before you initialize Game Center to avoid activating the system banner or
+/// welcome experience.
 + (void)checkPendingGameActivityExistenceWithCompletionHandler:(void(^)(BOOL))completionHandler NS_SWIFT_ASYNC_NAME(getter:hasPendingGameActivities());
 
 @end

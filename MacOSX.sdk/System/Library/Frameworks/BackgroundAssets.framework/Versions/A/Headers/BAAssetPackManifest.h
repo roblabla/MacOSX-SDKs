@@ -12,7 +12,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /// A representation of a manifest that lists asset packs that are available to download.
 ///
 /// This class applies only when you want to manage your asset packs manually. Don’t use this class if you want to opt in to automatic management of asset packs.
-API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0))
+API_AVAILABLE(ios(26), macos(26), tvos(26), visionos(26))
 API_UNAVAILABLE(watchos)
 NS_SWIFT_SENDABLE
 NS_REFINED_FOR_SWIFT

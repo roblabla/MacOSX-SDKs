@@ -198,6 +198,8 @@ exports:
                        '_$s20PegasusConfiguration13ConfigFetcherP13configuration3for10forceFetchAA0C0_pAA10ClientTypeO_SbtYaKFTjTu', 
                        '_$s20PegasusConfiguration13ConfigFetcherP13configuration3for10forceFetchAA0C0_pAA10ClientTypeO_SbtYaKFTq', 
                        '_$s20PegasusConfiguration13ConfigFetcherTL', '_$s20PegasusConfiguration13URLDataSourceMp', 
+                       '_$s20PegasusConfiguration13URLDataSourceP21lastTaskTimingMetricsSo012NSURLSessionf11TransactionH0CSgvgTj', 
+                       '_$s20PegasusConfiguration13URLDataSourceP21lastTaskTimingMetricsSo012NSURLSessionf11TransactionH0CSgvgTq', 
                        '_$s20PegasusConfiguration13URLDataSourceP4data10forRequest8priorityAA0cD6OutputV10Foundation10URLRequestV_SftYaKFTj', 
                        '_$s20PegasusConfiguration13URLDataSourceP4data10forRequest8priorityAA0cD6OutputV10Foundation10URLRequestV_SftYaKFTjTu', 
                        '_$s20PegasusConfiguration13URLDataSourceP4data10forRequest8priorityAA0cD6OutputV10Foundation10URLRequestV_SftYaKFTq', 

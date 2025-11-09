@@ -53,13 +53,25 @@ API_AVAILABLE(macos(26.0), ios(26.0))
 
 @end
 
+/// The configuration options that control the behavior of a compilation task for a Metal 4 compiler instance.
+///
+/// You can configure task-specific settings that affect a compilation task by
+/// creating an instance of this class, setting its properties,
+/// and passing it to one of the applicable methods of an ``MTL4Compiler`` instance.
 MTL_EXPORT
 API_AVAILABLE(macos(26.0), ios(26.0))
 @interface MTL4CompilerTaskOptions : NSObject <NSCopying>
 
-/// Specifies a set of archive instances this compilation process uses for accelerating the build process.
+/// An array of archive instances that can potentially accelerate a compilation task.
 ///
-/// In case of a match in the archive, the compiler can skip one or more compilation tasks, speeding up the build process.
+/// The compiler can reduce the runtime of a compilation task if it finds an entry
+/// that matches a function description within any of the archives in this array.
+/// The compiler searches the archives in the order of the array's element.
+///
+/// Consider adding archives to the array in scenarios that can benefit from the runtime savings,
+/// such as repeat builds or when your app can share compilation results across multiple contexts.
+///
+/// - Important: Only add ``MTL4Archive`` instances to the array that are compatible with the Metal device.
 @property (nullable, copy, nonatomic) NSArray<id<MTL4Archive>>* lookupArchives;
 
 @end
@@ -321,7 +333,7 @@ API_AVAILABLE(macos(26.0), ios(26.0)) NS_SWIFT_SENDABLE
 ///
 /// Additionally, there are some cases where the Metal can't specialize a pipeline:
 /// * If the original pipeline state object doesn't have any unspecialized properties
-/// * You can't re-specialize a previosuly specialized pipeline state object
+/// * You can't re-specialize a previously specialized pipeline state object
 ///
 /// - Parameters:
 ///   - descriptor: A render pipeline state descriptor or any type: default, tile, or mesh render pipeline descriptor.
@@ -335,13 +347,15 @@ API_AVAILABLE(macos(26.0), ios(26.0)) NS_SWIFT_SENDABLE
                                                            completionHandler:(MTLNewRenderPipelineStateCompletionHandler)completionHandler
     API_AVAILABLE(macos(26.0), ios(26.0));
 
-/// Creates a new binary visible/intersection function asynchronously.
+/// Returns a new compiler task that asyncrhonously creates a binary version
+/// of a GPU visible function or GPU intersection function.
+///
 /// - Parameters:
-///   - descriptor: a binary function descriptor used to create the binary function.
-///   - compilerTaskOptions: a descriptor of the compilation itself, providing parameters to
-///         influence execution of this compilation, but not the resulting object.
-///   - completionHandler: a callback used on task completion.
-/// - Returns: a compiler task indicating the asynchronous compilation job.
+///   - descriptor: A configuration that tells the method which GPU function to
+///   make into a binary function and which options to apply when compiling it.
+///   - compilerTaskOptions: A configuration for the compiler task.
+///   - completionHandler: A completetion handler that you provide, which the task calls
+///   when it finishes compiling the binary function.
 - (id<MTL4CompilerTask>)newBinaryFunctionWithDescriptor:(MTL4BinaryFunctionDescriptor *)descriptor
                                     compilerTaskOptions:(nullable MTL4CompilerTaskOptions*)compilerTaskOptions
                                       completionHandler:(MTL4NewBinaryFunctionCompletionHandler)completionHandler;

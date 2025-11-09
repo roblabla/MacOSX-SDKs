@@ -2,10 +2,16 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/CarPlay.framework/Versions/A/CarPlay'
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-    symbols:         [ _CPButtonMaximumImageSize, _CPColorMeetsContrastRequirement, 
-                       _CPContrastRatioForColors, _CPContrastingColorForColor, _CPCurrentProcessHasAudioEntitlement, 
+    symbols:         [ '_$s2os6LoggerV7CarPlayE19vehicleStateManagerACvau', '_$s2os6LoggerV7CarPlayE19vehicleStateManagerACvgZ', 
+                       '_$s2os6LoggerV7CarPlayE19vehicleStateManagerACvpZ', '_$s2os6LoggerV7CarPlayE19vehicleStateManagerACvpZMV', 
+                       '_$sSo21CPVehicleStateManagerC7CarPlayE8delegate33_8CF23B4C98753B3B7E23CE4A41E0DBB4LLSo0abC8Delegate_pSgvpfi', 
+                       '_$sSo21CPVehicleStateManagerC7CarPlayEABycfC', '_$sSo21CPVehicleStateManagerC7CarPlayEABycfc', 
+                       '_$sSo21CPVehicleStateManagerCMa', _CPButtonMaximumImageSize, 
+                       _CPColorMeetsContrastRequirement, _CPContrastRatioForColors, 
+                       _CPContrastingColorForColor, _CPCurrentProcessHasAudioEntitlement, 
                        _CPCurrentProcessHasChargingEntitlement, _CPCurrentProcessHasCommunicationEntitlement, 
                        _CPCurrentProcessHasDrivingTaskEntitlement, _CPCurrentProcessHasFuelingEntitlement, 
                        _CPCurrentProcessHasMapsEntitlement, _CPCurrentProcessHasParkingEntitlement, 
@@ -50,19 +56,20 @@ exports:
                        CPMessageListItem, CPMessageListItemLeadingConfiguration, 
                        CPMessageListItemTrailingConfiguration, CPNavigationAlert, 
                        CPNavigationEnum, CPNavigationManager, CPNavigationSession, 
-                       CPNowPlayingAddToLibraryButton, CPNowPlayingButton, CPNowPlayingImageButton, 
-                       CPNowPlayingMode, CPNowPlayingModeSports, CPNowPlayingMoreButton, 
-                       CPNowPlayingPlaybackRateButton, CPNowPlayingRepeatButton, 
+                       CPNavigationWaypoint, CPNowPlayingAddToLibraryButton, CPNowPlayingButton, 
+                       CPNowPlayingImageButton, CPNowPlayingMode, CPNowPlayingModeSports, 
+                       CPNowPlayingMoreButton, CPNowPlayingPlaybackRateButton, CPNowPlayingRepeatButton, 
                        CPNowPlayingShuffleButton, CPNowPlayingSportsClock, CPNowPlayingSportsEventStatus, 
                        CPNowPlayingSportsTeam, CPNowPlayingSportsTeamLogo, CPNowPlayingTemplate, 
                        CPPointOfInterest, CPPointOfInterestTemplate, CPPointsOfInterestEntity, 
                        CPRequestEndpointAction, CPRouteChoice, CPRouteGuidance, CPRouteInfo, 
-                       CPRouteInformation, CPSearchTemplate, CPSessionConfiguration, 
-                       CPTabBarTemplate, CPTemplate, CPTemplateApplicationDashboardScene, 
+                       CPRouteInformation, CPRouteLeg, CPRouteLine, CPSearchTemplate, 
+                       CPSessionConfiguration, CPTabBarTemplate, CPTemplate, CPTemplateApplicationDashboardScene, 
                        CPTemplateApplicationInstrumentClusterScene, CPTemplateApplicationScene, 
                        CPTextButton, CPTravelEstimates, CPTrip, CPTripPreviewTextConfiguration, 
                        CPUIContentStyleDiffInspector, CPUIMutableTemplateApplicationSceneSettings, 
                        CPUITemplateApplicationSceneSettings, CPUITemplateApplicationSceneSpecification, 
                        CPUITemplateDashboardSceneSpecification, CPUITemplateInstrumentClusterSceneSpecification, 
-                       CPVoiceControlState, CPVoiceControlTemplate, CPWindow ]
+                       CPVehicleStateManager, CPVoiceControlState, CPVoiceControlTemplate, 
+                       CPWindow ]
 ...

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target arm64e-apple-macos26.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7622.1.22.11.14 -module-name AuthenticationServices
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target arm64e-apple-macos26.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7622.2.11.11.5 -module-name AuthenticationServices
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 @_exported import AuthenticationServices
 import CryptoKit
 import DeveloperToolsSupport
@@ -467,6 +467,10 @@ public struct ASAuthorizationWebBrowserPlatformPublicKeyCredential : Swift.Senda
 @available(visionOS, unavailable)
 extension AuthenticationServices.ASAuthorizationWebBrowserPublicKeyCredentialManager {
   public func platformCredentials(forRelyingParty relyingParty: Swift.String) async -> [AuthenticationServices.ASAuthorizationWebBrowserPlatformPublicKeyCredential]
+  @available(macOS 26.2, iOS 26.2, *)
+  public class var isDeviceConfiguredForPasskeys: Swift.Bool {
+    get
+  }
 }
 @available(macOS 13.5, macCatalyst 16.6, *)
 @available(iOS, unavailable)
@@ -823,6 +827,12 @@ public struct ASImportableItem : Swift.Codable, Swift.Hashable, Swift.Sendable {
   public var scope: AuthenticationServices.ASImportableCredentialScope?
   public var tags: [Swift.String]
   public var credentials: [AuthenticationServices.ASImportableCredential]
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(iOS 26.1, macOS 26.1, visionOS 26.1, *)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  public init(id: Foundation.Data, title: Swift.String, subtitle: Swift.String? = nil, favorite: Swift.Bool = false, scope: AuthenticationServices.ASImportableCredentialScope? = nil, credentials: [AuthenticationServices.ASImportableCredential], tags: [Swift.String] = [])
+  #endif
   #if compiler(>=5.3) && $NonescapableTypes
   public init(id: Foundation.Data, created: Foundation.Date, lastModified: Foundation.Date, title: Swift.String, subtitle: Swift.String? = nil, favorite: Swift.Bool = false, scope: AuthenticationServices.ASImportableCredentialScope? = nil, credentials: [AuthenticationServices.ASImportableCredential], tags: [Swift.String] = [])
   #endif

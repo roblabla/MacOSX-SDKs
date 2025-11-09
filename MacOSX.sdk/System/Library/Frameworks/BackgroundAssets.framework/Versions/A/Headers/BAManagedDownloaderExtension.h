@@ -55,7 +55,7 @@
 ///   <key>EXPrincipalClass</key>
 ///   <string>DownloaderExtension</string>
 ///   ```
-API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0))
+API_AVAILABLE(ios(26), macos(26), tvos(26), visionos(26))
 API_UNAVAILABLE(watchos)
 NS_REFINED_FOR_SWIFT
 @protocol BAManagedDownloaderExtension <BADownloaderExtension>

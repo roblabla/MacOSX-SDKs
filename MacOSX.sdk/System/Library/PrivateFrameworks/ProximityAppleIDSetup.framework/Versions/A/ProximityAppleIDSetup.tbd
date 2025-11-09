@@ -2021,6 +2021,7 @@ exports:
                        '_$s21ProximityAppleIDSetup24AKAccountManagerProtocolP12protoAccountSo9ACAccountCSgyFTq', 
                        '_$s21ProximityAppleIDSetup24AKAccountManagerProtocolP27transportableAuthKitAccountySo9ACAccountCSgAFFTj', 
                        '_$s21ProximityAppleIDSetup24AKAccountManagerProtocolP27transportableAuthKitAccountySo9ACAccountCSgAFFTq', 
+                       '_$s21ProximityAppleIDSetup24AKAccountManagerProtocolPAAE17fetchUserAgeRange7altDSIDSo06AKUseriJ0VSS_tF', 
                        '_$s21ProximityAppleIDSetup24AKAccountManagerProtocolTL', 
                        '_$s21ProximityAppleIDSetup24PASAuthenticatorProtocolMp', 
                        '_$s21ProximityAppleIDSetup24PASAuthenticatorProtocolP12personalAuth12withUsername7context15companionDevice07requireB4MAID20anisetteDataProviderAA14PASAuthResultsVSS_So30AKAppleIDAuthenticationContextCSo8AKDeviceCSbSo017AKAnisetteServiceE0_ptYaKFTj', 

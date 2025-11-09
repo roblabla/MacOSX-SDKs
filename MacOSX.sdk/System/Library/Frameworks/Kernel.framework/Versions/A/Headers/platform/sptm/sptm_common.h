@@ -644,7 +644,8 @@ _Static_assert(sizeof(sptm_trace_buffer_t) == (1 << 14), "Unexpected size for sp
 #define LIBSPTM_VERSION_7              7U
 #define LIBSPTM_VERSION_8              8U
 #define LIBSPTM_VERSION_9              9U
-#define LIBSPTM_VERSION                LIBSPTM_VERSION_9
+#define LIBSPTM_VERSION_10             10U
+#define LIBSPTM_VERSION                LIBSPTM_VERSION_10
 
 typedef struct sptm_client_state {
 	/* Version number identifying the set of included fields */
@@ -737,8 +738,12 @@ typedef struct sptm_client_state {
 	sptm_domain_t *sptm_panicking_domain_id;
 	/* End of Version 9 fields */
 
+	/* Version 10 fields: */
+	const void *percpu_event_counters;
+	/* End of Version 10 fields */
+
 	/* Padding for future expansion */
-	uint8_t reserved[96];
+	uint8_t reserved[88];
 } libsptm_state_t;
 
 /**

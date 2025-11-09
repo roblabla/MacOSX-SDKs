@@ -19,7 +19,7 @@ exports:
                        _AudioDataAnalysisManagerSetDeviceConnectionState, _AudioDataAnalysisManagerSetDeviceInfo, 
                        _AudioDataAnalysisManagerStartServices, _AudioDataAnalysisManagerUpdateReportingSessions, 
                        _AudioIssueDetectorAnalyzeBuffer, _AudioIssueDetectorCreate, 
-                       _AudioIssueDetectorDispose, _AudioIssueDetectorInitialize, 
+                       _AudioIssueDetectorDispose, _AudioIssueDetectorFlush, _AudioIssueDetectorInitialize, 
                        _AudioIssueDetectorRemoveNode, _AudioIssueDetectorReset, _AudioIssueDetectorSetDownlinkVolume, 
                        _AudioIssueDetectorSetNodeFormat, _AudioIssueDetectorSetNodeFormatWithDirection, 
                        _AudioIssueDetectorSetRouteSpecificDownlinkGainAdjustment, 

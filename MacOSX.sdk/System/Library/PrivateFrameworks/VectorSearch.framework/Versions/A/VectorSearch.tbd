@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/VectorSearch.framework/Versions/A/VectorSearch'
-current-version: 45
+current-version: 45.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -209,7 +209,8 @@ exports:
                        '_$s12VectorSearch0A16DatabaseDataTypeOMa', '_$s12VectorSearch0A16DatabaseDataTypeOMn', 
                        '_$s12VectorSearch0A16DatabaseDataTypeON', '_$s12VectorSearch0A16DatabaseDataTypeOSEAAMc', 
                        '_$s12VectorSearch0A16DatabaseDataTypeOSHAAMc', '_$s12VectorSearch0A16DatabaseDataTypeOSQAAMc', 
-                       '_$s12VectorSearch0A16DatabaseDataTypeOSeAAMc', '_$s12VectorSearch0A16DatabaseOperatorO11greaterThanyA2CmFWC', 
+                       '_$s12VectorSearch0A16DatabaseDataTypeOSeAAMc', '_$s12VectorSearch0A16DatabaseOperatorO10notEqualToyA2CmFWC', 
+                       '_$s12VectorSearch0A16DatabaseOperatorO11greaterThanyA2CmFWC', 
                        '_$s12VectorSearch0A16DatabaseOperatorO17lessThanOrEqualToyA2CmFWC', 
                        '_$s12VectorSearch0A16DatabaseOperatorO20greaterThanOrEqualToyA2CmFWC', 
                        '_$s12VectorSearch0A16DatabaseOperatorO2eeoiySbAC_ACtFZ', 
@@ -344,7 +345,9 @@ exports:
                        '_$s12VectorSearch17IndexableDataTypeP15weightedAverage08previousG09nextValue12learningRate10Foundation0D0VAJ_AJSftKFZTq', 
                        '_$s12VectorSearch17IndexableDataTypeP8numBytesSivgZTj', '_$s12VectorSearch17IndexableDataTypeP8numBytesSivgZTq', 
                        '_$s12VectorSearch17IndexableDataTypePAAE13embeddingSize9dimensionS2i_tFZ', 
-                       '_$s12VectorSearch17IndexableDataTypeTL', '_$s12VectorSearch19VSKAttributeWrapperC4name10columnTypeACSS_So09VSKColumnG0CtcfC', 
+                       '_$s12VectorSearch17IndexableDataTypeTL', '_$s12VectorSearch19VSKAttributeWrapperC13getColumnTypeSo09VSKColumnG0CyKFTj', 
+                       '_$s12VectorSearch19VSKAttributeWrapperC13getColumnTypeSo09VSKColumnG0CyKFTq', 
+                       '_$s12VectorSearch19VSKAttributeWrapperC4name10columnTypeACSS_So09VSKColumnG0CtcfC', 
                        '_$s12VectorSearch19VSKAttributeWrapperC4name10columnTypeACSS_So09VSKColumnG0CtcfCTj', 
                        '_$s12VectorSearch19VSKAttributeWrapperC4name10columnTypeACSS_So09VSKColumnG0CtcfCTq', 
                        '_$s12VectorSearch19VSKAttributeWrapperC4name10columnTypeACSS_So09VSKColumnG0Ctcfc', 
@@ -378,6 +381,8 @@ exports:
                        '_$s12VectorSearch21VSKSwiftClientWrapperC14getIdentifiers15applyingFiltersSays5Int64VGSaySo9VSKFilterCG_tKFTq', 
                        '_$s12VectorSearch21VSKSwiftClientWrapperC20getStringIdentifiers15applyingFiltersSaySSGSaySo9VSKFilterCG_tKFTj', 
                        '_$s12VectorSearch21VSKSwiftClientWrapperC20getStringIdentifiers15applyingFiltersSaySSGSaySo9VSKFilterCG_tKFTq', 
+                       '_$s12VectorSearch21VSKSwiftClientWrapperC25getStringIdentifiedAssets11identifiers16attributeFilters10pagination14includeVectors16selectAttributesSaySo8VSKAssetCGSaySSGSg_SaySo9VSKFilterCGSo13VSKPaginationCSgSbSaySo12VSKAttributeCGSgtKFTj', 
+                       '_$s12VectorSearch21VSKSwiftClientWrapperC25getStringIdentifiedAssets11identifiers16attributeFilters10pagination14includeVectors16selectAttributesSaySo8VSKAssetCGSaySSGSg_SaySo9VSKFilterCGSo13VSKPaginationCSgSbSaySo12VSKAttributeCGSgtKFTq', 
                        '_$s12VectorSearch21VSKSwiftClientWrapperC25getStringIdentifiedAssets11identifiers16attributeFilters10pagination14includeVectorsSaySo8VSKAssetCGSaySSGSg_SaySo9VSKFilterCGSo13VSKPaginationCSgSbtKFTj', 
                        '_$s12VectorSearch21VSKSwiftClientWrapperC25getStringIdentifiedAssets11identifiers16attributeFilters10pagination14includeVectorsSaySo8VSKAssetCGSaySSGSg_SaySo9VSKFilterCGSo13VSKPaginationCSgSbtKFTq', 
                        '_$s12VectorSearch21VSKSwiftClientWrapperC4dropyyKFTj', '_$s12VectorSearch21VSKSwiftClientWrapperC4dropyyKFTq', 

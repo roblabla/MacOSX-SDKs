@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-abi-name UIKit -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 9088.1.410 -module-name UIKit
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target x86_64-apple-ios26.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-abi-name UIKit -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 9126.1.12.1.404 -module-name UIKit
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 @_exported import Accessibility
 @_exported import CoreGraphics
 import CoreText
@@ -828,8 +828,8 @@ extension UIViewController {
   }
 }
 @available(iOS 26.0, *)
-@available(visionOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 public struct UITraitTabAccessoryEnvironment : UIKit.UITraitDefinition {
   public static let defaultValue: UITabAccessory.Environment
@@ -845,8 +845,8 @@ public struct UITraitTabAccessoryEnvironment : UIKit.UITraitDefinition {
   public typealias Value = UITabAccessory.Environment
 }
 @available(iOS 26.0, *)
-@available(visionOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension UIKit.UIMutableTraits {
   public var tabAccessoryEnvironment: UITabAccessory.Environment {
@@ -1159,7 +1159,7 @@ extension UIKit.UIShape.Resolved : Swift.CustomStringConvertible, Swift.CustomDe
     get
   }
 }
-@available(iOS 26.0, macCatalyst 26.0, visionOS 26.0, tvOS 26.0, *)
+@available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
 @available(watchOS, unavailable)
 extension UIDevice {
   @available(iOS 26.0, macCatalyst 26.0, visionOS 26.0, *)
@@ -3510,8 +3510,8 @@ extension UIContentSizeCategory {
 extension UIContentSizeCategory : Swift.Comparable {
 }
 @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, *)
-@available(watchOS, unavailable)
 @available(visionOS, unavailable)
+@available(watchOS, unavailable)
 extension UIContentSizeCategory {
   public struct DidChangeMessage : Foundation.NotificationCenter.MainActorMessage {
     public static var name: Foundation.Notification.Name {
@@ -3528,8 +3528,8 @@ extension UIContentSizeCategory {
   }
 }
 @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, *)
-@available(watchOS, unavailable)
 @available(visionOS, unavailable)
+@available(watchOS, unavailable)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<UIContentSizeCategory.DidChangeMessage> {
   @_alwaysEmitIntoClient public static var contentSizeCategoryDidChange: Foundation.NotificationCenter.BaseMessageIdentifier<UIContentSizeCategory.DidChangeMessage> {
     get { .init() }
@@ -4334,7 +4334,7 @@ extension UIScene {
     set
   }
 }
-@available(iOS 26.0, macCatalyst 26.0, visionOS 26.0, tvOS 26.0, *)
+@available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
 @available(watchOS, unavailable)
 extension UIScene {
   @available(iOS 26.0, macCatalyst 26.0, *)
@@ -4962,7 +4962,10 @@ extension UIAccessibility {
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.VoiceOverStatusDidChangeMessage?
     #endif
   }
-  @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
+  @available(iOS, introduced: 26.0, deprecated: 26.1)
+  @available(macCatalyst, introduced: 26.0, deprecated: 26.1)
+  @available(tvOS, introduced: 26.0, deprecated: 26.1)
+  @available(visionOS, introduced: 26.0, deprecated: 26.1)
   @available(watchOS, unavailable)
   public struct ButtonShapesEnabledStatusDidChangeMessage : Foundation.NotificationCenter.MainActorMessage {
     public static var name: Foundation.Notification.Name {
@@ -5100,7 +5103,10 @@ extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundati
     get { .init() }
   }
 }
-@available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(iOS, introduced: 26.0, deprecated: 26.1)
+@available(macCatalyst, introduced: 26.0, deprecated: 26.1)
+@available(tvOS, introduced: 26.0, deprecated: 26.1)
+@available(visionOS, introduced: 26.0, deprecated: 26.1)
 @available(watchOS, unavailable)
 extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<UIAccessibility.ButtonShapesEnabledStatusDidChangeMessage> {
   @_alwaysEmitIntoClient public static var buttonShapesEnabledStatusDidChange: Foundation.NotificationCenter.BaseMessageIdentifier<UIAccessibility.ButtonShapesEnabledStatusDidChangeMessage> {

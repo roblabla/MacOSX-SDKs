@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target arm64e-apple-macos26.0 -target-variant arm64e-apple-ios26.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreMedia -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 3255.79.5.9 -module-name CoreMedia
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target arm64e-apple-macos26.1 -target-variant arm64e-apple-ios26.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreMedia -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 3285.11.5.5 -module-name CoreMedia
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 public import CoreAudio
 public import CoreAudioTypes
 public import CoreFoundation
@@ -1422,7 +1422,7 @@ extension CoreMedia.CMSampleBuffer.SingleSampleBuffers.Iterator : Swift.Sendable
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia.CMSampleTimingInfo : @unchecked Swift.Sendable, Swift.Equatable {
-  @backDeployed(before: macOS 16.0, iOS 19.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+  @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
   public static func == (lhs: CoreMedia.CMSampleTimingInfo, rhs: CoreMedia.CMSampleTimingInfo) -> Swift.Bool {
 		lhs.duration == rhs.duration && lhs.decodeTimeStamp == rhs.decodeTimeStamp && lhs.presentationTimeStamp == rhs.presentationTimeStamp
 	}
@@ -1767,7 +1767,7 @@ extension CoreMedia.CMFormatDescription {
       public static let chromaLocationBottomField: CoreMedia.CMFormatDescription.Extensions.Key
       public static let conformsToMPEG2VideoProfile: CoreMedia.CMFormatDescription.Extensions.Key
       @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, visionOS 1.0, *)
-      @backDeployed(before: macOS 16.0, iOS 19.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+      @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
       public static var protectedContentOriginalFormat: CoreMedia.CMFormatDescription.Extensions.Key {
         get { Key(rawValue: kCMFormatDescriptionExtension_ProtectedContentOriginalFormat) }
       }
@@ -1779,7 +1779,7 @@ extension CoreMedia.CMFormatDescription {
       public static let masteringDisplayColorVolume: CoreMedia.CMFormatDescription.Extensions.Key
       public static let contentLightLevelInfo: CoreMedia.CMFormatDescription.Extensions.Key
       @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
-      @backDeployed(before: macOS 16.0, iOS 19.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+      @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
       public static var contentColorVolume: CoreMedia.CMFormatDescription.Extensions.Key {
         get { Key(rawValue: kCMFormatDescriptionExtension_ContentColorVolume) }
       }
@@ -1803,52 +1803,52 @@ extension CoreMedia.CMFormatDescription {
       @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
       public static let bitsPerComponent: CoreMedia.CMFormatDescription.Extensions.Key
       @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
-      @backDeployed(before: macOS 16.0, iOS 19.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+      @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
       public static var horizontalFieldOfView: CoreMedia.CMFormatDescription.Extensions.Key {
         get { Key(rawValue: kCMFormatDescriptionExtension_HorizontalFieldOfView) }
       }
       @available(macOS 14.2, iOS 17.2, tvOS 17.2, watchOS 10.2, visionOS 1.1, *)
-      @backDeployed(before: macOS 16.0, iOS 19.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+      @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
       public static var logTransferFunction: CoreMedia.CMFormatDescription.Extensions.Key {
         get { Key(rawValue: kCMFormatDescriptionExtension_LogTransferFunction) }
       }
       @available(macOS 14.0, iOS 17.0, visionOS 1.0, *)
-      @backDeployed(before: macOS 16.0, iOS 19.0, visionOS 3.0)
+      @backDeployed(before: macOS 26.0, iOS 26.0, visionOS 26.0)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)
       public static var heroEye: CoreMedia.CMFormatDescription.Extensions.Key {
         get { Key(rawValue: kCMFormatDescriptionExtension_HeroEye) }
       }
       @available(macOS 14.0, iOS 17.0, visionOS 1.0, *)
-      @backDeployed(before: macOS 16.0, iOS 19.0, visionOS 3.0)
+      @backDeployed(before: macOS 26.0, iOS 26.0, visionOS 26.0)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)
       public static var stereoCameraBaseline: CoreMedia.CMFormatDescription.Extensions.Key {
         get { Key(rawValue: kCMFormatDescriptionExtension_StereoCameraBaseline) }
       }
       @available(macOS 14.0, iOS 17.0, visionOS 1.0, *)
-      @backDeployed(before: macOS 16.0, iOS 19.0, visionOS 3.0)
+      @backDeployed(before: macOS 26.0, iOS 26.0, visionOS 26.0)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)
       public static var horizontalDisparityAdjustment: CoreMedia.CMFormatDescription.Extensions.Key {
         get { Key(rawValue: kCMFormatDescriptionExtension_HorizontalDisparityAdjustment) }
       }
       @available(macOS 14.0, iOS 17.0, visionOS 1.0, *)
-      @backDeployed(before: macOS 16.0, iOS 19.0, visionOS 3.0)
+      @backDeployed(before: macOS 26.0, iOS 26.0, visionOS 26.0)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)
       public static var hasLeftStereoEyeView: CoreMedia.CMFormatDescription.Extensions.Key {
         get { Key(rawValue: kCMFormatDescriptionExtension_HasLeftStereoEyeView) }
       }
       @available(macOS 14.0, iOS 17.0, visionOS 1.0, *)
-      @backDeployed(before: macOS 16.0, iOS 19.0, visionOS 3.0)
+      @backDeployed(before: macOS 26.0, iOS 26.0, visionOS 26.0)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)
       public static var hasRightStereoEyeView: CoreMedia.CMFormatDescription.Extensions.Key {
         get { Key(rawValue: kCMFormatDescriptionExtension_HasRightStereoEyeView) }
       }
       @available(macOS 14.0, iOS 17.0, visionOS 1.0, *)
-      @backDeployed(before: macOS 16.0, iOS 19.0, visionOS 3.0)
+      @backDeployed(before: macOS 26.0, iOS 26.0, visionOS 26.0)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)
       public static var hasAdditionalViews: CoreMedia.CMFormatDescription.Extensions.Key {
@@ -1859,7 +1859,7 @@ extension CoreMedia.CMFormatDescription {
       @available(watchOS, unavailable)
       public static let convertedFromExternalSphericalTags: CoreMedia.CMFormatDescription.Extensions.Key
       @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
-      @backDeployed(before: macOS 16.0, iOS 19.0, visionOS 3.0)
+      @backDeployed(before: macOS 26.0, iOS 26.0, visionOS 26.0)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)
       public static var projectionKind: CoreMedia.CMFormatDescription.Extensions.Key {

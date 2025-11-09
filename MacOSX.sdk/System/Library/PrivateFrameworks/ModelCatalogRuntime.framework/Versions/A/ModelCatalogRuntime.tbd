@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ModelCatalogRuntime.framework/Versions/A/ModelCatalogRuntime'
-current-version: 218.3
+current-version: 218.20
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -16,7 +16,7 @@ exports:
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C16debugInformation7options4withySo8NSNumberC_y0aB005DebugG7WrapperCSg_s5Error_pSgtctF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C16releaseResources10requestKey4withySS_ySo8NSNumberCSg_s5Error_pSgtctF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C16requestResources0F3Key4withySS_ySo8NSNumberCSg_s5Error_pSgtctF', 
-                       '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C17availableUseCases24includeAssetsInformation4withySb_y0aB009AvailablegH7WrapperCSg_s5Error_pSgtctF', 
+                       '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C17availableUseCases18useCaseIdentifiers24includeAssetsInformation4withySaySSG_Sby0aB009AvailablegH7WrapperCSg_s5Error_pSgtctF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C17regulatoryDomains4withyySaySSG_s5Error_pSgtc_tF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C17resourceContainer10identifier4withySS_y0aB008ResourceG0CSg_s5Error_pSgtctF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C18resourceContainers4withyySay0aB017ResourceContainerCGSg_s5Error_pSgtc_tF', 
@@ -84,7 +84,8 @@ exports:
                        '_$s19ModelCatalogRuntime20SubscriptionDecisionV9hashValueSivpMV', 
                        '_$s19ModelCatalogRuntime20SubscriptionDecisionVMa', '_$s19ModelCatalogRuntime20SubscriptionDecisionVMn', 
                        '_$s19ModelCatalogRuntime20SubscriptionDecisionVN', '_$s19ModelCatalogRuntime20SubscriptionDecisionVSHAAMc', 
-                       '_$s19ModelCatalogRuntime20SubscriptionDecisionVSQAAMc', '_$s19ModelCatalogRuntime21SubscriptionEvaluatorV8evaluate17downloadConditionSaySayAA0D9ParameterVG_10Foundation4DateVSgtGSS_tKF', 
+                       '_$s19ModelCatalogRuntime20SubscriptionDecisionVSQAAMc', '_$s19ModelCatalogRuntime21SubscriptionEvaluatorV8evaluate17downloadConditionSaySayAA0D9ParameterVG_10Foundation4DateVSgtG0aB017UseCaseIdentifierV08DownloadH0V_tKF', 
+                       '_$s19ModelCatalogRuntime21SubscriptionEvaluatorV8evaluate20downloadConditionSQLSaySayAA0D9ParameterVG_10Foundation4DateVSgtGSS_tKF', 
                        '_$s19ModelCatalogRuntime21SubscriptionEvaluatorV8evaluate7useCaseSayAA0D8DecisionVG0aB003UseH0V_tKF', 
                        '_$s19ModelCatalogRuntime21SubscriptionEvaluatorV8evaluate8useCasesSayAA0D8DecisionVGSay0aB07UseCaseVG_tKF', 
                        '_$s19ModelCatalogRuntime21SubscriptionEvaluatorVACycfC', 

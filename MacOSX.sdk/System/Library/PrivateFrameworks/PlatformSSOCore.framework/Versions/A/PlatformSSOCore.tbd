@@ -2,11 +2,12 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PlatformSSOCore.framework/Versions/A/PlatformSSOCore'
-current-version: 483.1.1
+current-version: 483.40.14
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s10Foundation4DataV15PlatformSSOCoreE16base64URLEncodedACSgSS_tcfC', 
+    symbols:         [ '$ld$previous$/System/Library/PrivateFrameworks/PlatformSSO.framework/Versions/A/PlatformSSO$$1$13.0$15.0$$', 
+                       '_$s10Foundation4DataV15PlatformSSOCoreE16base64URLEncodedACSgSS_tcfC', 
                        '_$s10Foundation4DataV15PlatformSSOCoreE22base64URLEncodedStringSSyF', 
                        '_$s15PlatformSSOCore15POCryptoKitHPKEC11cipherSuiteAC06CryptoD00E0O11CiphersuiteV_tcfC', 
                        '_$s15PlatformSSOCore15POCryptoKitHPKEC11cipherSuiteAC06CryptoD00E0O11CiphersuiteV_tcfCTq', 

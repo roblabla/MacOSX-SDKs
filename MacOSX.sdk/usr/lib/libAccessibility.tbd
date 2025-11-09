@@ -352,6 +352,7 @@ exports:
                        _kAXSPreferredFontSizeChangedNotification, _kAXSPreferredFontSizeDisabled, 
                        _kAXSPreferredFontSizePreference, _kAXSPrefersHorizontalTextNotification, 
                        _kAXSPrefersNonBlinkingCursorIndicatorDidChangeNotification, 
+                       _kAXSProtectedVariableSetFailureNotification, _kAXSProtectedVariableSetSuccessNotification, 
                        _kAXSQuickSpeakEnabledNotification, _kAXSQuickSpeakEnabledPreference, 
                        _kAXSQuickSpeakHighlightTextEnabledNotification, _kAXSQuickSpeakHighlightTextEnabledPreference, 
                        _kAXSQuickSpeakLocaleForLanguageNotification, _kAXSQuickSpeakLocaleForLanguagePreference, 

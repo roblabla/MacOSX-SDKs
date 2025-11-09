@@ -156,6 +156,26 @@ __tensorops_impl_matmul2d_op_cooperative_destination_tensor_load_tg_f32(
     __tensor_ops_detail::__tensor_ops_datatype,
     __tensor_ops_detail::__tensor_ops_datatype,
     int);
+extern "C" EXTERNALLY_DEFINED_ATTR void
+__tensorops_impl_matmul2d_op_cooperative_destination_tensor_load_dv_b16(
+    __matmul2d_descriptor,
+    __tensor_ops_detail::__thread_void_t,
+    __tensor_ops_detail::__const_thread_void_t,
+    __tensor_ops_detail::__tensor_ops_tensor_descriptor_type,
+    int,
+    __tensor_ops_detail::__tensor_ops_datatype,
+    __tensor_ops_detail::__tensor_ops_datatype,
+    int);
+extern "C" EXTERNALLY_DEFINED_ATTR void
+__tensorops_impl_matmul2d_op_cooperative_destination_tensor_load_tg_b16(
+    __matmul2d_descriptor,
+    __tensor_ops_detail::__thread_void_t,
+    __tensor_ops_detail::__const_thread_void_t,
+    __tensor_ops_detail::__tensor_ops_tensor_descriptor_type,
+    int,
+    __tensor_ops_detail::__tensor_ops_datatype,
+    __tensor_ops_detail::__tensor_ops_datatype,
+    int);
 
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_matmul2d_op_cooperative_destination_tensor_store_dv_f16(
@@ -204,6 +224,24 @@ __tensorops_impl_matmul2d_op_cooperative_destination_tensor_store_dv_f32(
     int threads);
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_matmul2d_op_cooperative_destination_tensor_store_tg_f32(
+    __matmul2d_descriptor,
+    __tensor_ops_detail::__const_thread_void_t,
+    __tensor_ops_detail::__const_thread_void_t,
+    __tensor_ops_detail::__tensor_ops_tensor_descriptor_type,
+    __tensor_ops_detail::__tensor_ops_datatype,
+    __tensor_ops_detail::__tensor_ops_datatype,
+    int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void
+__tensorops_impl_matmul2d_op_cooperative_destination_tensor_store_dv_b16(
+    __matmul2d_descriptor,
+    __tensor_ops_detail::__const_thread_void_t,
+    __tensor_ops_detail::__const_thread_void_t,
+    __tensor_ops_detail::__tensor_ops_tensor_descriptor_type,
+    __tensor_ops_detail::__tensor_ops_datatype,
+    __tensor_ops_detail::__tensor_ops_datatype,
+    int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void
+__tensorops_impl_matmul2d_op_cooperative_destination_tensor_store_tg_b16(
     __matmul2d_descriptor,
     __tensor_ops_detail::__const_thread_void_t,
     __tensor_ops_detail::__const_thread_void_t,
@@ -359,6 +397,26 @@ __tensorops_impl_matmul2d_op_cooperative_reduction_destination_tensor_load_tg_f3
     int,
     __tensor_ops_detail::__tensor_ops_datatype leftDataType,
     __tensor_ops_detail::__tensor_ops_datatype rightDataType);
+extern "C" EXTERNALLY_DEFINED_ATTR void
+__tensorops_impl_matmul2d_op_cooperative_reduction_destination_tensor_load_dv_b16(
+    __matmul2d_descriptor,
+    __tensor_ops_detail::__thread_void_t,
+    __tensor_ops_detail::__const_thread_void_t,
+    __tensor_ops_detail::__tensor_ops_tensor_descriptor_type,
+    int,
+    int,
+    __tensor_ops_detail::__tensor_ops_datatype leftDataType,
+    __tensor_ops_detail::__tensor_ops_datatype rightDataType);
+extern "C" EXTERNALLY_DEFINED_ATTR void
+__tensorops_impl_matmul2d_op_cooperative_reduction_destination_tensor_load_tg_b16(
+    __matmul2d_descriptor,
+    __tensor_ops_detail::__thread_void_t,
+    __tensor_ops_detail::__const_thread_void_t,
+    __tensor_ops_detail::__tensor_ops_tensor_descriptor_type,
+    int,
+    int,
+    __tensor_ops_detail::__tensor_ops_datatype leftDataType,
+    __tensor_ops_detail::__tensor_ops_datatype rightDataType);
 
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_matmul2d_op_cooperative_reduction_destination_tensor_store_dv_f16(
@@ -420,6 +478,26 @@ __tensorops_impl_matmul2d_op_cooperative_reduction_destination_tensor_store_tg_f
     int,
     __tensor_ops_detail::__tensor_ops_datatype leftDataType,
     __tensor_ops_detail::__tensor_ops_datatype rightDataType);
+extern "C" EXTERNALLY_DEFINED_ATTR void
+__tensorops_impl_matmul2d_op_cooperative_reduction_destination_tensor_store_dv_b16(
+    __matmul2d_descriptor,
+    __tensor_ops_detail::__const_thread_void_t,
+    __tensor_ops_detail::__const_thread_void_t,
+    __tensor_ops_detail::__tensor_ops_tensor_descriptor_type,
+    int,
+    int,
+    __tensor_ops_detail::__tensor_ops_datatype leftDataType,
+    __tensor_ops_detail::__tensor_ops_datatype rightDataType);
+extern "C" EXTERNALLY_DEFINED_ATTR void
+__tensorops_impl_matmul2d_op_cooperative_reduction_destination_tensor_store_tg_b16(
+    __matmul2d_descriptor,
+    __tensor_ops_detail::__const_thread_void_t,
+    __tensor_ops_detail::__const_thread_void_t,
+    __tensor_ops_detail::__tensor_ops_tensor_descriptor_type,
+    int,
+    int,
+    __tensor_ops_detail::__tensor_ops_datatype leftDataType,
+    __tensor_ops_detail::__tensor_ops_datatype rightDataType);
 
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_matmul2d_op_cooperative_destination_reduce_rows_f16(
@@ -448,6 +526,15 @@ __tensorops_impl_matmul2d_op_cooperative_destination_reduce_rows_i32(
     __reduction_operation,
     __tensor_ops_detail::__tensor_ops_datatype,
     __tensor_ops_detail::__tensor_ops_datatype);
+extern "C" EXTERNALLY_DEFINED_ATTR void
+__tensorops_impl_matmul2d_op_cooperative_destination_reduce_rows_b16(
+    __matmul2d_descriptor,
+    __tensor_ops_detail::__const_thread_void_t,
+    __tensor_ops_detail::__thread_void_t,
+    bfloat,
+    __reduction_operation,
+    __tensor_ops_detail::__tensor_ops_datatype,
+    __tensor_ops_detail::__tensor_ops_datatype);
 
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_matmul2d_op_cooperative_destination_reduce_columns_f16(
@@ -473,6 +560,15 @@ __tensorops_impl_matmul2d_op_cooperative_destination_reduce_columns_i32(
     __tensor_ops_detail::__const_thread_void_t,
     __tensor_ops_detail::__thread_void_t,
     int,
+    __reduction_operation,
+    __tensor_ops_detail::__tensor_ops_datatype,
+    __tensor_ops_detail::__tensor_ops_datatype);
+extern "C" EXTERNALLY_DEFINED_ATTR void
+__tensorops_impl_matmul2d_op_cooperative_destination_reduce_columns_b16(
+    __matmul2d_descriptor,
+    __tensor_ops_detail::__const_thread_void_t,
+    __tensor_ops_detail::__thread_void_t,
+    bfloat,
     __reduction_operation,
     __tensor_ops_detail::__tensor_ops_datatype,
     __tensor_ops_detail::__tensor_ops_datatype);
@@ -2640,6 +2736,287 @@ __tensorops_impl_matmul2d_op_run_single_thread_th_i8_th_i8_th_i32(
     __tensor_ops_detail::__tensor_ops_tensor_descriptor_type
         destinationDescType);
 
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_dv_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_dv_b16_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_tg_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_tg_b16_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_dv_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_dv_b16_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_tg_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_tg_b16_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_dv_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_dv_b16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_tg_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_tg_b16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_dv_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_dv_b16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_tg_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_tg_b16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_dv_f32_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_dv_f32_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_tg_f32_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_tg_f32_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_dv_f32_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_dv_f32_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_tg_f32_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_tg_f32_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_dv_i8_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_dv_i8_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_tg_i8_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_tg_i8_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_dv_i8_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_dv_i8_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_tg_i8_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_tg_i8_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_dv_i8_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_dv_i8_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_tg_i8_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_tg_i8_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_dv_i8_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_dv_i8_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_tg_i8_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_tg_i8_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_f32_dv_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_f32_dv_b16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_f32_tg_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_f32_tg_b16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_f32_dv_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_f32_dv_b16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_f32_tg_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_f32_tg_b16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_i8_dv_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_i8_dv_b16_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_i8_tg_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_i8_tg_b16_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_i8_dv_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_i8_dv_b16_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_i8_tg_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_i8_tg_b16_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_i8_dv_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_i8_dv_b16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_i8_tg_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_i8_tg_b16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_i8_dv_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_i8_dv_b16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_i8_tg_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_i8_tg_b16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_dv_f16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_dv_f16_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_tg_f16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_tg_f16_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_dv_f16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_dv_f16_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_tg_f16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_tg_f16_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_dv_f16_dv_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_dv_f16_tg_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_tg_f16_dv_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_tg_f16_tg_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_dv_f16_dv_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_dv_f16_tg_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_tg_f16_dv_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_tg_f16_tg_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_dv_f16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_dv_f16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_tg_f16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_b16_tg_f16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_dv_f16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_dv_f16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_tg_f16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_b16_tg_f16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_f16_dv_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_f16_dv_b16_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_f16_tg_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_f16_tg_b16_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_f16_dv_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_f16_dv_b16_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_f16_tg_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_f16_tg_b16_tg_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_f16_dv_b16_dv_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_f16_dv_b16_tg_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_f16_tg_b16_dv_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_f16_tg_b16_tg_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_f16_dv_b16_dv_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_f16_dv_b16_tg_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_f16_tg_b16_dv_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_f16_tg_b16_tg_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_f16_dv_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_f16_dv_b16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_f16_tg_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_dv_f16_tg_b16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_f16_dv_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_f16_dv_b16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_f16_tg_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_tg_f16_tg_b16_tg_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_dv_b16_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_tg_b16_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_dv_b16_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_tg_b16_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_dv_b16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_tg_b16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_dv_b16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_tg_b16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_dv_f32_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_tg_f32_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_dv_f32_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_tg_f32_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_dv_i8_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_tg_i8_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_dv_i8_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_tg_i8_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_dv_i8_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_tg_i8_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_dv_i8_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_tg_i8_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_f32_dv_b16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_f32_tg_b16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_f32_dv_b16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_f32_tg_b16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_i8_dv_b16_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_i8_tg_b16_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_i8_dv_b16_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_i8_tg_b16_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_i8_dv_b16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_i8_tg_b16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_i8_dv_b16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_i8_tg_b16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_dv_f16_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_tg_f16_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_dv_f16_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_tg_f16_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_dv_f16_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_tg_f16_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_dv_f16_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_tg_f16_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_dv_f16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_tg_f16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_dv_f16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_tg_f16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_f16_dv_b16_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_f16_tg_b16_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_f16_dv_b16_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_f16_tg_b16_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_f16_dv_b16_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_f16_tg_b16_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_f16_dv_b16_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_f16_tg_b16_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_f16_dv_b16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_dv_f16_tg_b16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_f16_dv_b16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_cooperative_tg_f16_tg_b16_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, int threads);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_b16_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_b16_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_b16_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_b16_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_b16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_b16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_b16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_b16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_f32_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_f32_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_f32_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_f32_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_f32_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_f32_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_f32_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_f32_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_i8_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_i8_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_i8_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_i8_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_i8_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_i8_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_i8_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_i8_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_i8_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_i8_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_i8_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_i8_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_i8_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_i8_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_i8_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_i8_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_f32_dv_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_f32_dv_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_f32_th_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_f32_th_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_f32_dv_b16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_f32_dv_b16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_f32_th_b16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_f32_th_b16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_i8_dv_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_i8_dv_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_i8_th_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_i8_th_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_i8_dv_b16_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_i8_dv_b16_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_i8_th_b16_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_i8_th_b16_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_i8_dv_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_i8_dv_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_i8_th_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_i8_th_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_i8_dv_b16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_i8_dv_b16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_i8_th_b16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_i8_th_b16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_f16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_f16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_f16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_f16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_f16_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_f16_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_f16_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_f16_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_f16_dv_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_f16_dv_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_f16_dv_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_f16_dv_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_f16_th_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_f16_th_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_f16_th_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_f16_th_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_f16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_f16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_f16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_f16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_f16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_f16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_f16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_f16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_dv_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_f16_dv_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_th_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_f16_th_b16_dv_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_dv_b16_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_f16_dv_b16_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_th_b16_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_f16_th_b16_th_b16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_dv_b16_dv_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_f16_dv_b16_dv_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_th_b16_dv_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_f16_th_b16_dv_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_dv_b16_th_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_f16_dv_b16_th_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_th_b16_th_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_f16_th_b16_th_f16(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_dv_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_f16_dv_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_th_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_f16_th_b16_dv_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_dv_b16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_f16_dv_b16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_th_b16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+extern "C" EXTERNALLY_DEFINED_ATTR void __tensorops_impl_matmul2d_op_run_single_thread_th_f16_th_b16_th_f32(thread __matmul2d_descriptor &desc, thread void *left, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type leftDescType, thread void *right, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type rightDescType, thread void *destination, __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destinationDescType);
+
 template <__matmul2d_descriptor descriptor,
           __matmul2d_cooperative_operand_index operand_index, typename scope,
           typename left_operand, typename right_operand, typename element_type,
@@ -2652,9 +3029,10 @@ struct __operand_layout
                 "only destination can be cooperative tensor");
   static_assert(__tensor_ops_detail::__is_same_v<element_type, float> ||
                     __tensor_ops_detail::__is_same_v<element_type, half> ||
+                    __tensor_ops_detail::__is_same_v<element_type, bfloat> ||
                     __tensor_ops_detail::__is_same_v<element_type, int32_t>,
                 "cooperative tensor data type can only be one of "
-                "float/half/int32_t");
+                "float/half/bfloat/int32_t");
 
   static constant constexpr __tensor_ops_detail::__rank_t rank = 2;
   using element_t = element_type;
@@ -2827,6 +3205,21 @@ struct __operand_layout
         static_assert(__tensor_ops_detail::__assert_false_v<sourcePtrType>,
                       "Unsupported address space");
     }
+    else if constexpr (__tensor_ops_detail::__is_same_v<elem_t, bfloat>)
+    {
+      if constexpr (__tensor_ops_detail::__is_device_addrspace_v<sourcePtrType>)
+        __tensorops_impl_matmul2d_op_cooperative_destination_tensor_load_dv_b16(
+            desc, storage, source, sourceDescType, sourceRank, leftDataType,
+            rightDataType, threads);
+      else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<
+                             sourcePtrType>)
+        __tensorops_impl_matmul2d_op_cooperative_destination_tensor_load_tg_b16(
+            desc, storage, source, sourceDescType, sourceRank, leftDataType,
+            rightDataType, threads);
+      else
+        static_assert(__tensor_ops_detail::__assert_false_v<sourcePtrType>,
+                      "Unsupported address space");
+    }
     else
       static_assert(__tensor_ops_detail::__assert_false_v<elem_t>,
                     "Unsupported type");
@@ -2907,6 +3300,22 @@ struct __operand_layout
       else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<
                              destinationPtrType>)
         __tensorops_impl_matmul2d_op_cooperative_destination_tensor_store_tg_f32(
+            desc, storage, destination, destinationDescType, leftDataType,
+            rightDataType, threads);
+      else
+        static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>,
+                      "Unsupported address space");
+    }
+    else if constexpr (__tensor_ops_detail::__is_same_v<elem_t, bfloat>)
+    {
+      if constexpr (__tensor_ops_detail::__is_device_addrspace_v<
+                        destinationPtrType>)
+        __tensorops_impl_matmul2d_op_cooperative_destination_tensor_store_dv_b16(
+            desc, storage, destination, destinationDescType, leftDataType,
+            rightDataType, threads);
+      else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<
+                             destinationPtrType>)
+        __tensorops_impl_matmul2d_op_cooperative_destination_tensor_store_tg_b16(
             desc, storage, destination, destinationDescType, leftDataType,
             rightDataType, threads);
       else
@@ -3089,9 +3498,10 @@ struct __reduction_operand_layout
 {
   static_assert(__tensor_ops_detail::__is_same_v<element_type, float> ||
                     __tensor_ops_detail::__is_same_v<element_type, half> ||
+                    __tensor_ops_detail::__is_same_v<element_type, bfloat> ||
                     __tensor_ops_detail::__is_same_v<element_type, int32_t>,
                 "cooperative tensor data type can only be one of "
-                "float/half/int32_t");
+                "float/half/bfloat/int32_t");
 
   static constant constexpr __tensor_ops_detail::__rank_t rank = 1;
   using element_t = element_type;
@@ -3259,6 +3669,19 @@ struct __reduction_operand_layout
         static_assert(__tensor_ops_detail::__assert_false_v<sourcePtrType>,
                       "Unsupported address space");
     }
+    else if constexpr (__tensor_ops_detail::__is_same_v<elem_t, bfloat>)
+    {
+      if constexpr (__tensor_ops_detail::__is_device_addrspace_v<sourcePtrType>)
+        __tensorops_impl_matmul2d_op_cooperative_reduction_destination_tensor_load_dv_b16(
+            desc, storage, source, sourceDescType, reduction_dim, threads, leftDataType, rightDataType);
+      else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<
+                             sourcePtrType>)
+        __tensorops_impl_matmul2d_op_cooperative_reduction_destination_tensor_load_tg_b16(
+            desc, storage, source, sourceDescType, reduction_dim, threads, leftDataType, rightDataType);
+      else
+        static_assert(__tensor_ops_detail::__assert_false_v<sourcePtrType>,
+                      "Unsupported address space");
+    }
     else
       static_assert(__tensor_ops_detail::__assert_false_v<elem_t>,
                     "Unsupported type");
@@ -3334,6 +3757,20 @@ struct __reduction_operand_layout
       else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<
                              destinationPtrType>)
         __tensorops_impl_matmul2d_op_cooperative_reduction_destination_tensor_store_tg_f32(
+            desc, storage, destination, destinationDescType, reduction_dim, threads, leftDataType, rightDataType);
+      else
+        static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>,
+                      "Unsupported address space");
+    }
+    else if constexpr (__tensor_ops_detail::__is_same_v<elem_t, bfloat>)
+    {
+      if constexpr (__tensor_ops_detail::__is_device_addrspace_v<
+                        destinationPtrType>)
+        __tensorops_impl_matmul2d_op_cooperative_reduction_destination_tensor_store_dv_b16(
+            desc, storage, destination, destinationDescType, reduction_dim, threads, leftDataType, rightDataType);
+      else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<
+                             destinationPtrType>)
+        __tensorops_impl_matmul2d_op_cooperative_reduction_destination_tensor_store_tg_b16(
             desc, storage, destination, destinationDescType, reduction_dim, threads, leftDataType, rightDataType);
       else
         static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>,
@@ -4460,6 +4897,552 @@ void __run(thread left_operand &leftIn, thread right_operand &rightIn,
               __tensor_ops_detail::__assert_false_v<destinationPtrType>,
               "Unsupported address space");
       }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, bfloat>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_b16_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_b16_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_b16_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_b16_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_b16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_b16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_b16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_b16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, float> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_f32_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_f32_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_f32_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_f32_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_f32_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_f32_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_f32_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_f32_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, int8_t> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, bfloat>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_i8_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_i8_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_i8_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_i8_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_i8_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_i8_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_i8_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_i8_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, int8_t> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_i8_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_i8_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_i8_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_i8_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_i8_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_i8_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_i8_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_i8_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, float> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_f32_dv_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_f32_dv_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_f32_th_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_f32_th_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_f32_dv_b16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_f32_dv_b16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_f32_th_b16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_f32_th_b16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, int8_t> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, bfloat>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_i8_dv_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_i8_dv_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_i8_th_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_i8_th_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_i8_dv_b16_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_i8_dv_b16_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_i8_th_b16_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_i8_th_b16_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, int8_t> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_i8_dv_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_i8_dv_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_i8_th_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_i8_th_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_i8_dv_b16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_i8_dv_b16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_i8_th_b16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_i8_th_b16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, bfloat>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_f16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_f16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_f16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_f16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_f16_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_f16_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_f16_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_f16_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, half>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_f16_dv_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_f16_dv_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_f16_dv_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_f16_dv_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_f16_th_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_f16_th_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_f16_th_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_f16_th_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_f16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_f16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_f16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_f16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_dv_f16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_dv_f16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_b16_th_f16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_b16_th_f16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, bfloat>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_dv_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_f16_dv_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_th_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_f16_th_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_dv_b16_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_f16_dv_b16_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_th_b16_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_f16_th_b16_th_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, half>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_dv_b16_dv_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_f16_dv_b16_dv_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_th_b16_dv_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_f16_th_b16_dv_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_dv_b16_th_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_f16_dv_b16_th_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_th_b16_th_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_f16_th_b16_th_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_dv_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_f16_dv_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_th_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_f16_th_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_dv_b16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_f16_dv_b16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_dv_f16_th_b16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else if constexpr (__tensor_ops_detail::__is_thread_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_thread_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_single_thread_th_f16_th_b16_th_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
       else
         static_assert(
             __tensor_ops_detail::__assert_false_v<destinationValueType>,
@@ -5394,6 +6377,552 @@ void __run(thread left_operand &leftIn, thread right_operand &rightIn,
               __tensor_ops_detail::__assert_false_v<destinationPtrType>,
               "Unsupported address space");
       }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, bfloat>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_dv_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_dv_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_tg_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_tg_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_dv_b16_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_dv_b16_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_tg_b16_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_tg_b16_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_dv_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_dv_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_tg_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_tg_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_dv_b16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_dv_b16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_tg_b16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_tg_b16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, float> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_dv_f32_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_dv_f32_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_tg_f32_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_tg_f32_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_dv_f32_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_dv_f32_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_tg_f32_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_tg_f32_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, int8_t> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, bfloat>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_dv_i8_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_dv_i8_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_tg_i8_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_tg_i8_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_dv_i8_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_dv_i8_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_tg_i8_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_tg_i8_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, int8_t> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_dv_i8_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_dv_i8_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_tg_i8_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_tg_i8_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_dv_i8_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_dv_i8_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_tg_i8_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_tg_i8_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, float> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_f32_dv_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_f32_dv_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_f32_tg_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_f32_tg_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_f32_dv_b16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_f32_dv_b16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_f32_tg_b16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_f32_tg_b16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, int8_t> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, bfloat>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_i8_dv_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_i8_dv_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_i8_tg_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_i8_tg_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_i8_dv_b16_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_i8_dv_b16_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_i8_tg_b16_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_i8_tg_b16_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, int8_t> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_i8_dv_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_i8_dv_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_i8_tg_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_i8_tg_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_i8_dv_b16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_i8_dv_b16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_i8_tg_b16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_i8_tg_b16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, bfloat>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_dv_f16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_dv_f16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_tg_f16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_tg_f16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_dv_f16_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_dv_f16_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_tg_f16_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_tg_f16_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, half>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_dv_f16_dv_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_dv_f16_dv_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_tg_f16_dv_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_tg_f16_dv_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_dv_f16_tg_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_dv_f16_tg_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_tg_f16_tg_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_tg_f16_tg_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_dv_f16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_dv_f16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_tg_f16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_tg_f16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_dv_f16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_dv_f16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_b16_tg_f16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_b16_tg_f16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, bfloat>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_f16_dv_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_f16_dv_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_f16_tg_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_f16_tg_b16_dv_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_f16_dv_b16_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_f16_dv_b16_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_f16_tg_b16_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_f16_tg_b16_tg_b16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, half>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_f16_dv_b16_dv_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_f16_dv_b16_dv_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_f16_tg_b16_dv_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_f16_tg_b16_dv_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_f16_dv_b16_tg_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_f16_dv_b16_tg_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_f16_tg_b16_tg_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_f16_tg_b16_tg_f16(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_f16_dv_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_f16_dv_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_f16_tg_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_f16_tg_b16_dv_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_f16_dv_b16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_f16_dv_b16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_dv_f16_tg_b16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<destinationPtrType>)
+          __tensorops_impl_matmul2d_op_run_tg_f16_tg_b16_tg_f32(desc, left, leftDescType, right, rightDescType, destination, destinationDescType, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
       else
         static_assert(
             __tensor_ops_detail::__assert_false_v<destinationValueType>,
@@ -5881,6 +7410,272 @@ void __run(thread left_operand &leftIn, thread right_operand &rightIn,
               __tensor_ops_detail::__assert_false_v<destinationPtrType>,
               "Unsupported address space");
       }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, bfloat>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_dv_b16_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_dv_b16_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_tg_b16_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_tg_b16_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_dv_b16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_dv_b16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_tg_b16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_tg_b16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, float> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_dv_f32_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_dv_f32_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_tg_f32_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_tg_f32_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, int8_t> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, bfloat>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_dv_i8_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_dv_i8_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_tg_i8_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_tg_i8_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, int8_t> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_dv_i8_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_dv_i8_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_tg_i8_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_tg_i8_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, float> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_f32_dv_b16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_f32_dv_b16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_f32_tg_b16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_f32_tg_b16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, int8_t> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, bfloat>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_i8_dv_b16_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_i8_dv_b16_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_i8_tg_b16_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_i8_tg_b16_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, int8_t> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_i8_dv_b16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_i8_dv_b16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_i8_tg_b16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_i8_tg_b16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, bfloat>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_dv_f16_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_dv_f16_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_tg_f16_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_tg_f16_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, half>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_dv_f16_f16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_dv_f16_f16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_tg_f16_f16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_tg_f16_f16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_dv_f16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_dv_f16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_b16_tg_f16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_b16_tg_f16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, bfloat>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_f16_dv_b16_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_f16_dv_b16_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_f16_tg_b16_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_f16_tg_b16_b16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, half>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_f16_dv_b16_f16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_f16_dv_b16_f16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_f16_tg_b16_f16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_f16_tg_b16_f16(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
+      else if constexpr (__tensor_ops_detail::__is_same_v<leftValueType, half> &&
+                         __tensor_ops_detail::__is_same_v<rightValueType, bfloat> &&
+                         __tensor_ops_detail::__is_same_v<destinationValueType, float>)
+      {
+        if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                      __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_f16_dv_b16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_device_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_f16_dv_b16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_device_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_dv_f16_tg_b16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<leftPtrType> &&
+                           __tensor_ops_detail::__is_threadgroup_addrspace_v<rightPtrType>)
+          __tensorops_impl_matmul2d_op_run_cooperative_tg_f16_tg_b16_f32(desc, left, leftDescType, right, rightDescType, destination, threads);
+        else
+          static_assert(__tensor_ops_detail::__assert_false_v<destinationPtrType>, "Unsupported address space");
+      }
       else
         static_assert(
             __tensor_ops_detail::__assert_false_v<destinationValueType>,
@@ -5938,6 +7733,9 @@ inline void __reduce_rows(
   else if constexpr (__tensor_ops_detail::__is_same_v<ElementType, float>)
     __tensorops_impl_matmul2d_op_cooperative_destination_reduce_rows_f32(
         desc, src, dst, identity, op, leftDataType, rightDataType);
+  else if constexpr (__tensor_ops_detail::__is_same_v<ElementType, bfloat>)
+    __tensorops_impl_matmul2d_op_cooperative_destination_reduce_rows_b16(
+        desc, src, dst, identity, op, leftDataType, rightDataType);
   else
     static_assert(__tensor_ops_detail::__assert_false_v<ElementType>,
                   "Unsupported type");
@@ -5992,6 +7790,9 @@ inline void __reduce_columns(
   else if constexpr (__tensor_ops_detail::__is_same_v<ElementType, float>)
     __tensorops_impl_matmul2d_op_cooperative_destination_reduce_columns_f32(
         desc, src, dst, identity, op, leftDataType, rightDataType);
+  else if constexpr (__tensor_ops_detail::__is_same_v<ElementType, bfloat>)
+    __tensorops_impl_matmul2d_op_cooperative_destination_reduce_columns_b16(
+        desc, src, dst, identity, op, leftDataType, rightDataType);
   else
     static_assert(__tensor_ops_detail::__assert_false_v<ElementType>,
                   "Unsupported type");
@@ -5999,8 +7800,8 @@ inline void __reduce_columns(
 
 template <class SrcElementType, class DstElementType, class SrcExtents, class DstExtents, class SrcLayout, class DstLayout>
 inline bool __is_iterator_compatible(
-    thread metal::cooperative_tensor<SrcElementType, SrcExtents, SrcLayout> &sourceT,
-    thread metal::cooperative_tensor<DstElementType, DstExtents, DstLayout> &destT)
+    const thread metal::cooperative_tensor<SrcElementType, SrcExtents, SrcLayout> &sourceT,
+    const thread metal::cooperative_tensor<DstElementType, DstExtents, DstLayout> &destT)
 {
   if (!SrcLayout::is_matmul2d_cooperative_destination_layout ||
       !DstLayout::is_matmul2d_reduction_cooperative_destination_layout ||

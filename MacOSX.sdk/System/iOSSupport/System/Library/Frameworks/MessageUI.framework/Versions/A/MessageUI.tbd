@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/MessageUI.framework/Versions/A/MessageUI'
-current-version: 3864.100.1
+current-version: 3864.200.81
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -63,10 +63,9 @@ exports:
                        _MFImageGlyphArchiveFill, _MFImageGlyphBold, _MFImageGlyphBorderlessSend, 
                        _MFImageGlyphCamera, _MFImageGlyphCameraEllipsis, _MFImageGlyphCheckmark, 
                        _MFImageGlyphCheckmarkCircle, _MFImageGlyphChevronForward, 
-                       _MFImageGlyphCircleXMark, _MFImageGlyphColorPicker, _MFImageGlyphCommerceMessage, 
-                       _MFImageGlyphCommerceSender, _MFImageGlyphCompose, _MFImageGlyphComposeEncrypted, 
-                       _MFImageGlyphComposeMoreFormats, _MFImageGlyphComposeMute, 
-                       _MFImageGlyphComposeNotify, _MFImageGlyphComposeNotifyEnabled, 
+                       _MFImageGlyphCircleXMark, _MFImageGlyphColorPicker, _MFImageGlyphCompose, 
+                       _MFImageGlyphComposeEncrypted, _MFImageGlyphComposeMoreFormats, 
+                       _MFImageGlyphComposeMute, _MFImageGlyphComposeNotify, _MFImageGlyphComposeNotifyEnabled, 
                        _MFImageGlyphComposeUnencrypted, _MFImageGlyphDecreaseIndent, 
                        _MFImageGlyphDecreaseQuoteLevel, _MFImageGlyphDocuments, _MFImageGlyphDownArrow, 
                        _MFImageGlyphDownloads, _MFImageGlyphEditDrawing, _MFImageGlyphEnvelope, 
@@ -92,7 +91,6 @@ exports:
                        _MFImageGlyphMessageListChevronThread, _MFImageGlyphMessageListFilter, 
                        _MFImageGlyphMessageListMore, _MFImageGlyphMore, _MFImageGlyphMoreActions, 
                        _MFImageGlyphMoreActionsFill, _MFImageGlyphMove, _MFImageGlyphMute, 
-                       _MFImageGlyphNotCommerceMessage, _MFImageGlyphNotCommerceSender, 
                        _MFImageGlyphNotify, _MFImageGlyphOpenEnvelope, _MFImageGlyphOpenInNewWindow, 
                        _MFImageGlyphPhotos, _MFImageGlyphPrimary, _MFImageGlyphPrint, 
                        _MFImageGlyphProtectedEnvelope, _MFImageGlyphQuestion, _MFImageGlyphQuestionMark, 

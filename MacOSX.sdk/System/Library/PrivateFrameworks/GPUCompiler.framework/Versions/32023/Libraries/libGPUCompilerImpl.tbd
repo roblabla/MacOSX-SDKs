@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/libGPUCompilerImpl.dylib'
-current-version: 32023.255.2
+current-version: 32023.255.8
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -298,17 +298,17 @@ exports:
                        __ZN4llvm3air12ErrorHandler7explainERKNS_5TwineE, __ZN4llvm3air12ErrorHandler7messageERKNS_5TwineE, 
                        __ZN4llvm3air12ErrorHandler7warningERKNS_5TwineE, __ZN4llvm3air12ErrorHandler8printTagENS_9StringRefENS_11raw_ostream6ColorsEb, 
                        __ZN4llvm3air12MachOBuilder10finishImplERNS_17raw_pwrite_streamE, 
-                       __ZN4llvm3air12MachOBuilder11addPipelineEjNS_8ArrayRefINS0_10ResourceIDEEENS_9StringRefE, 
+                       __ZN4llvm3air12MachOBuilder11addPipelineEjNS_8ArrayRefINS0_11ResourcesIDEEENS_9StringRefE, 
                        __ZN4llvm3air12MachOBuilder12addResourcesERKNS0_15ResourceEncoderES4_RKNS0_10ResourceIDE, 
                        __ZN4llvm3air12MachOBuilder13addDescriptorERKNS0_15ResourceEncoderE, 
-                       __ZN4llvm3air12MachOBuilder13addReflectionERKNS0_10ResourceIDERKNS0_15ResourceEncoderES7_, 
+                       __ZN4llvm3air12MachOBuilder13addReflectionENS0_11ResourcesIDERKNS0_15ResourceEncoderES5_, 
                        __ZN4llvm3air12MachOBuilder13emitMetalLibsERN10llvm_utils16PackedMCStreamerE, 
                        __ZN4llvm3air12MachOBuilder14buildHashTableERN10llvm_utils16PackedMCStreamerE, 
                        __ZN4llvm3air12MachOBuilder15emitDescriptorsERN10llvm_utils16PackedMCStreamerE, 
                        __ZN4llvm3air12MachOBuilder15emitReflectionsERN10llvm_utils16PackedMCStreamerE, 
                        __ZN4llvm3air12MachOBuilder15getMetalLibInfoERKNS0_10ResourceIDE, 
                        __ZN4llvm3air12MachOBuilder15getUniqueScriptERKNS0_12NativeScriptEj, 
-                       __ZN4llvm3air12MachOBuilder16addLinkedModulesERKNS0_10ResourceIDENS_8ArrayRefINS0_15ResourceEncoderEEE, 
+                       __ZN4llvm3air12MachOBuilder16addLinkedModulesENS0_11ResourcesIDENS_8ArrayRefINS0_15ResourceEncoderEEE, 
                        __ZN4llvm3air12MachOBuilder16buildModuleTableERKNS_11SmallVectorIN10llvm_utils22PackedMachObjectWriter8MetalLibELj4EEE, 
                        __ZN4llvm3air12MachOBuilder16buildObjectTableERN10llvm_utils16PackedMCStreamerE, 
                        __ZN4llvm3air12MachOBuilder16emitBuildVersionERN10llvm_utils16PackedMCStreamerE, 
@@ -325,7 +325,7 @@ exports:
                        __ZN4llvm3air12MachOBuilder26getOrCreateMetalLibSymbolsERN10llvm_utils16PackedMCStreamerEPKNS1_14ModuleLocationE, 
                        __ZN4llvm3air12MachOBuilder28getOrCreateDescriptorSymbolsERN10llvm_utils16PackedMCStreamerEPKNS1_18DescriptorLocationE, 
                        __ZN4llvm3air12MachOBuilder6finishENS_9StringRefE, __ZN4llvm3air12MachOBuilder6finishERNS_17raw_pwrite_streamE, 
-                       __ZN4llvm3air12MachOBuilder7addHashERKNS0_10ResourceIDERKNS0_9BuildHashE, 
+                       __ZN4llvm3air12MachOBuilder7addHashENS0_11ResourcesIDERKNS0_9BuildHashE, 
                        __ZN4llvm3air12MachOBuilder9addModuleERKNS0_15ResourceEncoderE, 
                        __ZN4llvm3air12MachOBuilder9addObjectERKNS0_10ResourceIDE, 
                        __ZN4llvm3air12NamePathPair5parseENS_9StringRefE, __ZN4llvm3air12NativeScript14createFromJSONENS_15MemoryBufferRefE, 

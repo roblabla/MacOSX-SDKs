@@ -2,8 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GESS.framework/Versions/A/GESS'
-current-version: 1.5.23
-compatibility-version: 1.5.23
+current-version: 1.5.26
+compatibility-version: 1.5.24
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__117bad_function_callE, __ZTISt11logic_error, __ZTISt12length_error, 
@@ -29,14 +29,16 @@ exports:
                        _GESSIOSaveObjFile, _GESSIOSaveTexturedObjFile, _GESSIOSaveTexturedUSDZFile, 
                        _GESSIOSaveUSDZFile, _GESSTestsSandboxDir, _GESSVersionNumberMajor, 
                        _GESSVersionNumberMinor, _GESSVersionNumberPatch, _TestGESSAlgPrepareInverseRenderDataExample ]
-    objc-classes:    [ GESSAlgAdaptiveCubeInferenceOptions, GESSAlgAdaptiveQuadModelConvertExtended, 
+    objc-classes:    [ GESSAlgAdaptiveCubeInferenceExtended, GESSAlgAdaptiveCubeInferenceOptions, 
+                       GESSAlgAdaptiveCubeInferenceReport, GESSAlgAdaptiveQuadModelConvertExtended, 
                        GESSAlgAdaptiveQuadModelConvertOptions, GESSAlgAdaptiveQuadModelConvertReport, 
                        GESSAlgAdaptiveQuadModelConvertWithGeometryEnhancementExtended, 
                        GESSAlgAdaptiveQuadModelConvertWithGeometryEnhancementOptions, 
                        GESSAlgAdaptiveQuadModelConvertWithGeometryEnhancementReport, 
                        GESSAlgBase, GESSAlgCollapseShortEdgesOptions, GESSAlgConnectedComponentFilterOptions, 
-                       GESSAlgFillHoleOptions, GESSAlgGeometryQuality, GESSAlgInverseRenderImageSet, 
-                       GESSAlgInverseRenderOptions, GESSAlgIsometricParameterizeExtended, 
+                       GESSAlgFillHoleOptions, GESSAlgGeometryQuality, GESSAlgInverseRenderExtended, 
+                       GESSAlgInverseRenderImageSet, GESSAlgInverseRenderOptions, 
+                       GESSAlgInverseRenderReport, GESSAlgIsometricParameterizeExtended, 
                        GESSAlgIsometricParameterizeOptions, GESSAlgIsometricParameterizeReport, 
                        GESSAlgIsotropicRemeshOptions, GESSAlgMidpointSubdivideOptions, 
                        GESSAlgModelSimplifyOptions, GESSAlgParameterizeOptions, GESSAlgQuadricErrorMetricsSimplifyOptions, 
@@ -44,12 +46,14 @@ exports:
                        GESSAlgReport, GESSAlgSDDenoiseExtended, GESSAlgSDDenoiseOptions, 
                        GESSAlgSDDenoiseReport, GESSAlgSDSmoothExtended, GESSAlgSDSmoothOptions, 
                        GESSAlgSDSmoothReport, GESSAlgSimplifyOptions, GESSAlgSmoothOptions, 
-                       GESSAlgSplitLongEdgesOptions, GESSAlgTopologyQuality, GESSAlgVertexClusterSimplifyExtended, 
-                       GESSAlgVertexClusterSimplifyOptions, GESSIOPolyMeshCreator, 
-                       GESSIOQuadMeshCreator, GESSIOTriMeshCreator, GESSIOUSDZLoader, 
-                       GESSMaterial, GESSMaterialParameterData, GESSMathAABB, GESSPolyMesh, 
-                       GESSQuadMesh, GESSQuadMeshBase, GESSSubMaterial, GESSTextureTransferOptions, 
-                       GESSTriMesh, GESSTriMeshBase ]
+                       GESSAlgSplitLongEdgesOptions, GESSAlgSplitMeshByComponentsExtended, 
+                       GESSAlgSplitMeshByComponentsOptions, GESSAlgTopologyQuality, 
+                       GESSAlgVertexClusterSimplifyExtended, GESSAlgVertexClusterSimplifyOptions, 
+                       GESSIOPolyMeshCreator, GESSIOQuadMeshCreator, GESSIOTriMeshCreator, 
+                       GESSIOUSDZLoader, GESSMaterial, GESSMaterialParameterData, 
+                       GESSMathAABB, GESSPolyMesh, GESSQuadMesh, GESSQuadMeshBase, 
+                       GESSSubMaterial, GESSTextureTransferOptions, GESSTriMesh, 
+                       GESSTriMeshBase ]
   - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ __ZN2NS7Private5Class10s_kNSArrayEv, __ZN2NS7Private5Class10s_kNSErrorEv, 
                        __ZN2NS7Private5Class10s_kNSValueEv, __ZN2NS7Private5Class11s_kNSBundleEv, 

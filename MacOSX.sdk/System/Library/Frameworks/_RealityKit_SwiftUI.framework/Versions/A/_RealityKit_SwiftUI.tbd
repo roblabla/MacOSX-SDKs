@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_RealityKit_SwiftUI.framework/Versions/A/_RealityKit_SwiftUI'
-current-version: 403.0.26
+current-version: 403.40.7
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

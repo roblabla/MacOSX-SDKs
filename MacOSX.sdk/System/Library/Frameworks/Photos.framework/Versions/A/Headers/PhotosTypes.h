@@ -11,7 +11,6 @@
 #import <Foundation/Foundation.h>
 
 
-
 API_AVAILABLE_BEGIN(macos(10.11), ios(8), tvos(10))
 
 #pragma mark - PHCollectionListTypes
@@ -172,6 +171,8 @@ typedef NS_OPTIONS(NSUInteger, PHAssetSourceType) {
 
 } API_AVAILABLE(ios(9));
 
+#pragma mark - PHAssetResourceType
+
 typedef NS_ENUM(NSInteger, PHAssetResourceType) {
     PHAssetResourceTypePhoto                             = 1,
     PHAssetResourceTypeVideo                             = 2,
@@ -190,7 +191,26 @@ typedef NS_ENUM(NSInteger, PHAssetResourceType) {
 
 } API_AVAILABLE(ios(9));
 
+#pragma mark - PHAssetResourceUploadJob types
+
+/// The states of an upload job.
+typedef NS_ENUM(NSInteger, PHAssetResourceUploadJobState) {
+    PHAssetResourceUploadJobStateRegistered = 1,    /// The job has been registered.
+    PHAssetResourceUploadJobStatePending = 2,       /// A request has been made to send the asset resource to the destination, but has not yet been fulfilled.
+    PHAssetResourceUploadJobStateFailed = 3,        /// The job has failed to send over.
+    PHAssetResourceUploadJobStateSucceeded = 4,     /// The job has sent over successfully.
+
+} NS_SWIFT_NAME(PHAssetResourceUploadJob.State) API_AVAILABLE(ios(26.1)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos);
+
+/// These actions correspond with the types of fetches we can make on a PHAssetResourceUploadJob and the actions we can also take on those jobs.
+typedef NS_ENUM(NSInteger, PHAssetResourceUploadJobAction) {
+    PHAssetResourceUploadJobActionAcknowledge = 1,      /// Where PHAssetResourceUploadJobState = (success OR fail).
+    PHAssetResourceUploadJobActionRetry = 2,            /// Where PHAssetResourceUploadJobState = failed, but the job can be retried
+} NS_SWIFT_NAME(PHAssetResourceUploadJob.Action) API_AVAILABLE(ios(26.1)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos);
+
 API_AVAILABLE_END
+
+#pragma mark - PHObjectTypes
 
 typedef NS_ENUM(NSInteger, PHObjectType) {
     PHObjectTypeAsset                = 1,

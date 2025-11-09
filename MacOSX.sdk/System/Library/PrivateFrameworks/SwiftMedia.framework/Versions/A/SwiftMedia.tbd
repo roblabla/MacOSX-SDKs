@@ -515,5 +515,6 @@ exports:
                        '_$s7SwiftUI4ViewP0A5MediaE30mediaAllowedViewingExperiencesyQrAD0gH0VF', 
                        '_$s7SwiftUI4ViewP0A5MediaE30mediaAllowedViewingExperiencesyQrAD0gH0VFQOMQ', 
                        '_$s7SwiftUI4ViewP0A5MediaE5media13playbackState_QrAA7BindingVyAD2v1V08PlaybackG0VG_qd__yXEtAD0d1_I0Rd__lF', 
-                       '_$s7SwiftUI4ViewP0A5MediaE5media13playbackState_QrAA7BindingVyAD2v1V08PlaybackG0VG_qd__yXEtAD0d1_I0Rd__lFQOMQ' ]
+                       '_$s7SwiftUI4ViewP0A5MediaE5media13playbackState_QrAA7BindingVyAD2v1V08PlaybackG0VG_qd__yXEtAD0d1_I0Rd__lFQOMQ', 
+                       '_$sSo6CGSizeV10SwiftMediaE10fittedRect3forA2B_tF', '_$sSo6CGSizeV10SwiftMediaE11scaleFactor3forA2B_tF' ]
 ...

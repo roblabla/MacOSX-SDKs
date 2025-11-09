@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 332 -module-name PaperKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target x86_64-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 344 -module-name PaperKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 public import CoreGraphics
 public import Foundation
 public import Observation
@@ -75,6 +75,7 @@ public struct PaperMarkup : Swift.Sendable, Swift.Equatable {
   #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(markup: PaperKit.PaperMarkup? = nil, supportedFeatureSet: PaperKit.FeatureSet)
   #endif
+  @objc deinit
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public var canBecomeFirstResponder: Swift.Bool {
     @objc get
   }
@@ -126,6 +127,18 @@ public struct PaperMarkup : Swift.Sendable, Swift.Equatable {
     set
     _modify
   }
+  @available(iOS 26.1, visionOS 26.1, *)
+  @_Concurrency.MainActor @preconcurrency public var showsVerticalScrollIndicator: Swift.Bool {
+    get
+    set
+    _modify
+  }
+  @available(iOS 26.1, visionOS 26.1, *)
+  @_Concurrency.MainActor @preconcurrency public var showsHorizontalScrollIndicator: Swift.Bool {
+    get
+    set
+    _modify
+  }
   @_Concurrency.MainActor @preconcurrency public var contentVisibleFrame: CoreFoundation.CGRect {
     get
     set
@@ -141,7 +154,6 @@ public struct PaperMarkup : Swift.Sendable, Swift.Equatable {
   }
   @_Concurrency.MainActor @preconcurrency @objc public func toolPickerSelectedToolItemDidChange(_ toolPicker: PencilKit.PKToolPicker)
   @_Concurrency.MainActor @preconcurrency @objc public func toolPickerIsRulerActiveDidChange(_ toolPicker: PencilKit.PKToolPicker)
-  @objc deinit
 }
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 extension PaperKit.PaperMarkupViewController : nonisolated Observation.Observable {
@@ -239,7 +251,6 @@ public struct RenderingOptions : Swift.Equatable, Swift.Sendable {
   }
   @_Concurrency.MainActor @preconcurrency public init(supportedFeatureSet: PaperKit.FeatureSet, additionalActions: [UIKit.UIMenuElement] = [])
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
-  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLayoutSubviews()
   @objc deinit
 }
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)

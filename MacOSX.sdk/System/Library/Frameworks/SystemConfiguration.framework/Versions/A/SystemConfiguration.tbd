@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration'
-current-version: 1385.0.7
+current-version: 1385.40.9
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -157,16 +157,16 @@ exports:
                        _SCVLANInterfaceCreate, _SCVLANInterfaceGetOptions, _SCVLANInterfaceGetPhysicalInterface, 
                        _SCVLANInterfaceGetTag, _SCVLANInterfaceRemove, _SCVLANInterfaceSetLocalizedDisplayName, 
                        _SCVLANInterfaceSetOptions, _SCVLANInterfaceSetPhysicalInterfaceAndTag, 
-                       _VPNConfigurationConnectionStart, _VPNConfigurationConnectionStop, 
-                       _VPNConfigurationCopy, _VPNConfigurationCopyAll, _VPNConfigurationCopyAppRule, 
-                       _VPNConfigurationCopyAppRuleIDs, _VPNConfigurationCopyCertificate, 
-                       _VPNConfigurationCopyIdentities, _VPNConfigurationCopyLastConnectionError, 
-                       _VPNConfigurationCopyPersistentData, _VPNConfigurationCopyVendorData, 
-                       _VPNConfigurationCreate, _VPNConfigurationCreateWithOptions, 
-                       _VPNConfigurationEnableVPNType, _VPNConfigurationGetEnabled, 
-                       _VPNConfigurationGetName, _VPNConfigurationGetStatus, _VPNConfigurationGetTunnelType, 
-                       _VPNConfigurationIsVPNTypeEnabled, _VPNConfigurationRemove, 
-                       _VPNConfigurationRemoveAppRule, _VPNConfigurationScheduleWithRunLoop, 
+                       _SC_create_file_safely, _VPNConfigurationConnectionStart, 
+                       _VPNConfigurationConnectionStop, _VPNConfigurationCopy, _VPNConfigurationCopyAll, 
+                       _VPNConfigurationCopyAppRule, _VPNConfigurationCopyAppRuleIDs, 
+                       _VPNConfigurationCopyCertificate, _VPNConfigurationCopyIdentities, 
+                       _VPNConfigurationCopyLastConnectionError, _VPNConfigurationCopyPersistentData, 
+                       _VPNConfigurationCopyVendorData, _VPNConfigurationCreate, 
+                       _VPNConfigurationCreateWithOptions, _VPNConfigurationEnableVPNType, 
+                       _VPNConfigurationGetEnabled, _VPNConfigurationGetName, _VPNConfigurationGetStatus, 
+                       _VPNConfigurationGetTunnelType, _VPNConfigurationIsVPNTypeEnabled, 
+                       _VPNConfigurationRemove, _VPNConfigurationRemoveAppRule, _VPNConfigurationScheduleWithRunLoop, 
                        _VPNConfigurationSendMessage, _VPNConfigurationSet, _VPNConfigurationSetAppRule, 
                        _VPNConfigurationSetCallback, _VPNConfigurationSetEnabled, 
                        _VPNConfigurationSetMessageCallback, _VPNConfigurationSetName, 

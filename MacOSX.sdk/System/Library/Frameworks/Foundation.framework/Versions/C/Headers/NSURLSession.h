@@ -758,6 +758,9 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 /* allow request to route over networks in constrained mode. Defaults to YES. */
 @property BOOL allowsConstrainedNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
+/* allow request to route over ultra constrained networks. */
+@property BOOL allowsUltraConstrainedNetworkAccess API_AVAILABLE(macos(26.1), ios(26.1), watchos(26.1), tvos(26.1), visionos(26.1));
+
 /* requires requests from the session to be made with DNSSEC validation enabled. Defaults to NO. */
 @property BOOL requiresDNSSECValidation API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 

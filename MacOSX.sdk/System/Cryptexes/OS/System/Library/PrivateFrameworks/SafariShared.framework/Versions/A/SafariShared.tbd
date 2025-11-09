@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SafariShared.framework/Versions/A/SafariShared'
-current-version: 622.1.22
+current-version: 622.2.11
 compatibility-version: 0
 swift-abi-version: 7
 allowable-clients:
@@ -74,11 +74,12 @@ exports:
                        _TRIAL_percentageThresholdForAnywhereInURL, _TRIAL_prefixNavigationalIntentThreshold, 
                        _TRIAL_shouldHideIgnoredSiriSuggestedSites, _TRIAL_strengthenAutocompleteTriggerExtensionMatching, 
                        _TRIAL_thresholdForHidingIgnoredSiriSuggestedSites, _WBHistoryVisitWeightForAttributesAndOrigin, 
-                       _WBSAdditionalNameOrderedPartToken, _WBSAddressBookMatchIdentifierKey, 
-                       _WBSAddressBookMatchKeyKey, _WBSAddressBookMatchLabelKey, 
-                       _WBSAddressBookMatchPropertyKey, _WBSAddressBookMatchUniqueIDKey, 
-                       _WBSAddressBookMatchValueKey, _WBSAllowUnsignedExtensionsTimeoutNotification, 
-                       _WBSAutoFillGetSavedDataClasses, _WBSAutoFillInternalFeedbackDetailTypeAutoFillFilledIncorrectDataExpectedFilledData, 
+                       _WBSAboutSrcdocString, _WBSAdditionalNameOrderedPartToken, 
+                       _WBSAddressBookMatchIdentifierKey, _WBSAddressBookMatchKeyKey, 
+                       _WBSAddressBookMatchLabelKey, _WBSAddressBookMatchPropertyKey, 
+                       _WBSAddressBookMatchUniqueIDKey, _WBSAddressBookMatchValueKey, 
+                       _WBSAllowUnsignedExtensionsTimeoutNotification, _WBSAutoFillGetSavedDataClasses, 
+                       _WBSAutoFillInternalFeedbackDetailTypeAutoFillFilledIncorrectDataExpectedFilledData, 
                        _WBSAutoFillInternalFeedbackDetailTypeAutoFillFilledIncorrectDataIncorrectFields, 
                        _WBSAutoFillInternalFeedbackDetailTypeAutoFillFilledIncorrectFormatExpectedFormat, 
                        _WBSAutoFillInternalFeedbackDetailTypeAutoFillFilledIncorrectFormatIncorrectFields, 
@@ -760,6 +761,7 @@ exports:
                        __ZNK12SafariShared21URLCompletionEntryMap21enumerateConcurrentlyEPU28objcproto17OS_dispatch_group8NSObjectPU28objcproto17OS_dispatch_queueS1_iU13block_pointerFvRKNS_18URLCompletionEntryEE, 
                        __ZNK12SafariShared21URLCompletionEntryMap29nextItemInRedirectChainOfItemEP8NSString, 
                        __ZNK12SafariShared21URLCompletionEntryMap33addURLCompletionMatchEntryToArrayEP39WBSHistoryServiceURLCompletionMatchDataP14NSMutableArrayIP40WBSHistoryServiceURLCompletionMatchEntryEP8NSStringd, 
+                       __ZNK12SafariShared21URLCompletionEntryMap33uniqueLocalCanonicalURLVisitCountEv, 
                        __ZNK12SafariShared21URLCompletionEntryMap9enumerateEiiU13block_pointerFvRKNS_18URLCompletionEntryEE, 
                        __ZNK12SafariShared22ExtensionURLTranslator22fileURLForExtensionURLEP5NSURLNS0_23VerifyExtensionResourceE, 
                        __ZNK12SafariShared22ExtensionURLTranslator23decodeAndResolveFileURLEP5NSURL, 
@@ -988,7 +990,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SafariCore.framework/Versions/A/SafariCore'
-current-version: 622.1.22
+current-version: 622.2.11
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -1225,9 +1227,11 @@ exports:
                        '_$s10SafariCore28WBSFileVaultRecoveryKeyErrorO12itemNotFoundyA2CmFWC', 
                        '_$s10SafariCore28WBSFileVaultRecoveryKeyErrorO14invalidRequestyA2CmFWC', 
                        '_$s10SafariCore28WBSFileVaultRecoveryKeyErrorO18invalidEntitlementyA2CmFWC', 
+                       '_$s10SafariCore28WBSFileVaultRecoveryKeyErrorO2eeoiySbAC_ACtFZ', 
                        '_$s10SafariCore28WBSFileVaultRecoveryKeyErrorO7unknownyA2CmFWC', 
                        '_$s10SafariCore28WBSFileVaultRecoveryKeyErrorOMa', '_$s10SafariCore28WBSFileVaultRecoveryKeyErrorOMn', 
-                       '_$s10SafariCore28WBSFileVaultRecoveryKeyErrorON', '_$s10SafariCore28WBSFileVaultRecoveryKeyErrorOs0G0AAMc', 
+                       '_$s10SafariCore28WBSFileVaultRecoveryKeyErrorON', '_$s10SafariCore28WBSFileVaultRecoveryKeyErrorOSQAAMc', 
+                       '_$s10SafariCore28WBSFileVaultRecoveryKeyErrorOs0G0AAMc', 
                        '_$s10SafariCore29WBSPasswordManagerTestOptionsCACycfC', '_$s10SafariCore29WBSPasswordManagerTestOptionsCACycfc', 
                        '_$s10SafariCore29WBSPasswordManagerTestOptionsCMa', '_$s10SafariCore29WBSPasswordManagerTestOptionsCMn', 
                        '_$s10SafariCore29WBSPasswordManagerTestOptionsCMo', '_$s10SafariCore29WBSPasswordManagerTestOptionsCN', 
@@ -1481,6 +1485,9 @@ exports:
                        '_$sSo20WBSSavedAccountStoreC10SafariCoreE7passkey4withAC18WBSKeychainPasskeyVSg10Foundation4DataV_tYaFTu', 
                        '_$sSo20WBSSavedAccountStoreC10SafariCoreE8passkeys3forSayAC18WBSKeychainPasskeyVGSS_tYaF', 
                        '_$sSo20WBSSavedAccountStoreC10SafariCoreE8passkeys3forSayAC18WBSKeychainPasskeyVGSS_tYaFTu', 
+                       '_$sSo27WBSSavedAccountMatchingTypeV10SafariCoreE16debugDescriptionSSvg', 
+                       '_$sSo27WBSSavedAccountMatchingTypeV10SafariCoreE16debugDescriptionSSvpMV', 
+                       '_$sSo27WBSSavedAccountMatchingTypeVs28CustomDebugStringConvertible10SafariCoreMc', 
                        '_$sSo29WBSManagedFeatureAvailabilityC10SafariCoreE28shouldHideExtensionDiscoverySbvg', 
                        '_$sSo29WBSManagedFeatureAvailabilityC10SafariCoreE28shouldHideExtensionDiscoverySbvpMV', 
                        '_$sSo29WBSManagedFeatureAvailabilityC10SafariCoreE6sharedABvgZ', 
@@ -1710,7 +1717,8 @@ exports:
                        WBSAutoFillPasskey, WBSAutoFillQuirksManager, WBSAutoFillQuirksSnapshot, 
                        WBSAutoFillQuirksSnapshotTransformer, WBSBlockCoalescer, WBSBrowsingDataImportService, 
                        WBSBrowsingDataImportServiceProxy, WBSChangePasswordURLManager, 
-                       WBSChromeExtensionsImporter, WBSChromeHistoryImporter, WBSChromeHistoryImporterDelegateProxy, 
+                       WBSCharacterSetReplacementsContainer, WBSChromeExtensionsImporter, 
+                       WBSChromeHistoryImporter, WBSChromeHistoryImporterDelegateProxy, 
                        WBSCloudBookmarksRemoteMigrationInfo, WBSCloudKitContainerManateeObserver, 
                        WBSCloudKitThrottler, WBSCoalescedAsynchronousWriter, WBSConfigurationDataTransformer, 
                        WBSConfigurationDownloader, WBSCopyOnWriteState, WBSCopyOnWriteValue, 

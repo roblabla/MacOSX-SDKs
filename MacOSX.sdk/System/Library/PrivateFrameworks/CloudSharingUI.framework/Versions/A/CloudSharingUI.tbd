@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CloudSharingUI.framework/Versions/A/CloudSharingUI'
-current-version: 215
+current-version: 215.1.8
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -277,10 +277,10 @@ exports:
                        '_$s14CloudSharingUI19AddressingViewModelC13$userInfoText7Combine9PublishedV9PublisherVySS_GvpMV', 
                        '_$s14CloudSharingUI19AddressingViewModelC13$userInfoText7Combine9PublishedV9PublisherVySS_GvsTj', 
                        '_$s14CloudSharingUI19AddressingViewModelC13$userInfoText7Combine9PublishedV9PublisherVySS_GvsTq', 
-                       '_$s14CloudSharingUI19AddressingViewModelC15headerImageData0G5Title11loadingText013supplementaryL008userInfoL0013primaryButtonL009secondaryqL00n15DidClickPrimaryQ00nst9SecondaryQ00nsT17ShowContactPicker0nS15ChangeAddressesAC10Foundation0I0VSg_SSSgA5SySaySSGcSgA3UtcfC', 
-                       '_$s14CloudSharingUI19AddressingViewModelC15headerImageData0G5Title11loadingText013supplementaryL008userInfoL0013primaryButtonL009secondaryqL00n15DidClickPrimaryQ00nst9SecondaryQ00nsT17ShowContactPicker0nS15ChangeAddressesAC10Foundation0I0VSg_SSSgA5SySaySSGcSgA3UtcfCTj', 
-                       '_$s14CloudSharingUI19AddressingViewModelC15headerImageData0G5Title11loadingText013supplementaryL008userInfoL0013primaryButtonL009secondaryqL00n15DidClickPrimaryQ00nst9SecondaryQ00nsT17ShowContactPicker0nS15ChangeAddressesAC10Foundation0I0VSg_SSSgA5SySaySSGcSgA3UtcfCTq', 
-                       '_$s14CloudSharingUI19AddressingViewModelC15headerImageData0G5Title11loadingText013supplementaryL008userInfoL0013primaryButtonL009secondaryqL00n15DidClickPrimaryQ00nst9SecondaryQ00nsT17ShowContactPicker0nS15ChangeAddressesAC10Foundation0I0VSg_SSSgA5SySaySSGcSgA3Utcfc', 
+                       '_$s14CloudSharingUI19AddressingViewModelC15headerImageData0G5Title11loadingText013supplementaryL008userInfoL0013primaryButtonL009secondaryqL025shouldAllowEmptyAddresses0n15DidClickPrimaryQ00nwx9SecondaryQ00nwX17ShowContactPicker0nw6ChangeV0AC10Foundation0I0VSg_SSSgA5TSbySaySSGcSgA3VtcfC', 
+                       '_$s14CloudSharingUI19AddressingViewModelC15headerImageData0G5Title11loadingText013supplementaryL008userInfoL0013primaryButtonL009secondaryqL025shouldAllowEmptyAddresses0n15DidClickPrimaryQ00nwx9SecondaryQ00nwX17ShowContactPicker0nw6ChangeV0AC10Foundation0I0VSg_SSSgA5TSbySaySSGcSgA3VtcfCTj', 
+                       '_$s14CloudSharingUI19AddressingViewModelC15headerImageData0G5Title11loadingText013supplementaryL008userInfoL0013primaryButtonL009secondaryqL025shouldAllowEmptyAddresses0n15DidClickPrimaryQ00nwx9SecondaryQ00nwX17ShowContactPicker0nw6ChangeV0AC10Foundation0I0VSg_SSSgA5TSbySaySSGcSgA3VtcfCTq', 
+                       '_$s14CloudSharingUI19AddressingViewModelC15headerImageData0G5Title11loadingText013supplementaryL008userInfoL0013primaryButtonL009secondaryqL025shouldAllowEmptyAddresses0n15DidClickPrimaryQ00nwx9SecondaryQ00nwX17ShowContactPicker0nw6ChangeV0AC10Foundation0I0VSg_SSSgA5TSbySaySSGcSgA3Vtcfc', 
                        '_$s14CloudSharingUI19AddressingViewModelC16yourNameAndEmailSS4name_SS5emailtvMTj', 
                        '_$s14CloudSharingUI19AddressingViewModelC16yourNameAndEmailSS4name_SS5emailtvMTq', 
                        '_$s14CloudSharingUI19AddressingViewModelC16yourNameAndEmailSS4name_SS5emailtvgTj', 
@@ -377,10 +377,10 @@ exports:
                        '_$s14CloudSharingUI19AddressingViewModelCfD', '_$s14CloudSharingUI19AddressingViewModelCfd', 
                        '_$s14CloudSharingUI21AddressingViewFactoryC14viewControllerSo06NSViewH0Cvg', 
                        '_$s14CloudSharingUI21AddressingViewFactoryC14viewControllerSo06NSViewH0CvpMV', 
-                       '_$s14CloudSharingUI21AddressingViewFactoryC15headerImageData0G5Title11loadingText013supplementaryL008userInfoL0013primaryButtonL009secondaryqL00n15DidClickPrimaryQ00nst9SecondaryQ00nsT17ShowContactPicker0nS15ChangeAddressesAC10Foundation0I0VSg_SSSgA5SySaySSGcSgA3UtcfC', 
-                       '_$s14CloudSharingUI21AddressingViewFactoryC15headerImageData0G5Title11loadingText013supplementaryL008userInfoL0013primaryButtonL009secondaryqL00n15DidClickPrimaryQ00nst9SecondaryQ00nsT17ShowContactPicker0nS15ChangeAddressesAC10Foundation0I0VSg_SSSgA5SySaySSGcSgA3UtcfCTj', 
-                       '_$s14CloudSharingUI21AddressingViewFactoryC15headerImageData0G5Title11loadingText013supplementaryL008userInfoL0013primaryButtonL009secondaryqL00n15DidClickPrimaryQ00nst9SecondaryQ00nsT17ShowContactPicker0nS15ChangeAddressesAC10Foundation0I0VSg_SSSgA5SySaySSGcSgA3UtcfCTq', 
-                       '_$s14CloudSharingUI21AddressingViewFactoryC15headerImageData0G5Title11loadingText013supplementaryL008userInfoL0013primaryButtonL009secondaryqL00n15DidClickPrimaryQ00nst9SecondaryQ00nsT17ShowContactPicker0nS15ChangeAddressesAC10Foundation0I0VSg_SSSgA5SySaySSGcSgA3Utcfc', 
+                       '_$s14CloudSharingUI21AddressingViewFactoryC15headerImageData0G5Title11loadingText013supplementaryL008userInfoL0013primaryButtonL009secondaryqL025shouldAllowEmptyAddresses0n15DidClickPrimaryQ00nwx9SecondaryQ00nwX17ShowContactPicker0nw6ChangeV0AC10Foundation0I0VSg_SSSgA5TSbySaySSGcSgA3VtcfC', 
+                       '_$s14CloudSharingUI21AddressingViewFactoryC15headerImageData0G5Title11loadingText013supplementaryL008userInfoL0013primaryButtonL009secondaryqL025shouldAllowEmptyAddresses0n15DidClickPrimaryQ00nwx9SecondaryQ00nwX17ShowContactPicker0nw6ChangeV0AC10Foundation0I0VSg_SSSgA5TSbySaySSGcSgA3VtcfCTj', 
+                       '_$s14CloudSharingUI21AddressingViewFactoryC15headerImageData0G5Title11loadingText013supplementaryL008userInfoL0013primaryButtonL009secondaryqL025shouldAllowEmptyAddresses0n15DidClickPrimaryQ00nwx9SecondaryQ00nwX17ShowContactPicker0nw6ChangeV0AC10Foundation0I0VSg_SSSgA5TSbySaySSGcSgA3VtcfCTq', 
+                       '_$s14CloudSharingUI21AddressingViewFactoryC15headerImageData0G5Title11loadingText013supplementaryL008userInfoL0013primaryButtonL009secondaryqL025shouldAllowEmptyAddresses0n15DidClickPrimaryQ00nwx9SecondaryQ00nwX17ShowContactPicker0nw6ChangeV0AC10Foundation0I0VSg_SSSgA5TSbySaySSGcSgA3Vtcfc', 
                        '_$s14CloudSharingUI21AddressingViewFactoryC6update15headerImageData0H5Title11loadingText013supplementaryM008userInfoM0013primaryButtonM009secondaryrM0y10Foundation0J0VSg_SSSgA5PtFTj', 
                        '_$s14CloudSharingUI21AddressingViewFactoryC6update15headerImageData0H5Title11loadingText013supplementaryM008userInfoM0013primaryButtonM009secondaryrM0y10Foundation0J0VSg_SSSgA5PtFTq', 
                        '_$s14CloudSharingUI21AddressingViewFactoryCACycfC', '_$s14CloudSharingUI21AddressingViewFactoryCACycfc', 

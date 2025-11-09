@@ -412,6 +412,7 @@ exports:
                        '_$s12FMNetworking30FMNAuthenticationProviderErrorO15missingPersonIdyA2CmFWC', 
                        '_$s12FMNetworking30FMNAuthenticationProviderErrorO17missingCredentialyA2CmFWC', 
                        '_$s12FMNetworking30FMNAuthenticationProviderErrorO18cannotReadBundleIdyA2CmFWC', 
+                       '_$s12FMNetworking30FMNAuthenticationProviderErrorO19unsupportedPlatformyA2CmFWC', 
                        '_$s12FMNetworking30FMNAuthenticationProviderErrorO23autoRenewalLimitReachedyA2CmFWC', 
                        '_$s12FMNetworking30FMNAuthenticationProviderErrorO24unsupportedSecurityLevelyA2CmFWC', 
                        '_$s12FMNetworking30FMNAuthenticationProviderErrorO29cannotReadDataClassPropertiesyA2CmFWC', 

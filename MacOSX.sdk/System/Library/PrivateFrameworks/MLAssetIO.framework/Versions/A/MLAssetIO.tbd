@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MLAssetIO.framework/Versions/A/MLAssetIO'
-current-version: 3500.32.1
+current-version: 3505.4.1
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIFN3MIL16ValidationResultERKNS_11IROperationEE, __ZTINSt3__110__function6__baseIFN3MIL16ValidationResultERKNS2_11IROperationEEEE, 

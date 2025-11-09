@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/DeviceActivity.framework/Versions/A/DeviceActivity'
-current-version: 392.1
+current-version: 392.1.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -853,7 +853,16 @@ exports:
                        '_$s14DeviceActivity11PickupEventV8durationSdSgvM', '_$s14DeviceActivity11PickupEventV8durationSdSgvg', 
                        '_$s14DeviceActivity11PickupEventV8durationSdSgvpMV', '_$s14DeviceActivity11PickupEventV8durationSdSgvs', 
                        '_$s14DeviceActivity11PickupEventVMa', '_$s14DeviceActivity11PickupEventVMn', 
-                       '_$s14DeviceActivity11PickupEventVN', '_$s14DeviceActivity12EventStreamsV11identifiers6duringSaySSG17bundleIdentifiers_AF10webDomainst10Foundation12DateIntervalV_tFZ', 
+                       '_$s14DeviceActivity11PickupEventVN', '_$s14DeviceActivity12EventStreamsV11ExportErrorO18failedToOpenStreamyA2EmFWC', 
+                       '_$s14DeviceActivity12EventStreamsV11ExportErrorO2eeoiySbAE_AEtFZ', 
+                       '_$s14DeviceActivity12EventStreamsV11ExportErrorO4hash4intoys6HasherVz_tF', 
+                       '_$s14DeviceActivity12EventStreamsV11ExportErrorO9hashValueSivg', 
+                       '_$s14DeviceActivity12EventStreamsV11ExportErrorO9hashValueSivpMV', 
+                       '_$s14DeviceActivity12EventStreamsV11ExportErrorOMa', '_$s14DeviceActivity12EventStreamsV11ExportErrorOMn', 
+                       '_$s14DeviceActivity12EventStreamsV11ExportErrorON', '_$s14DeviceActivity12EventStreamsV11ExportErrorOSHAAMc', 
+                       '_$s14DeviceActivity12EventStreamsV11ExportErrorOSQAAMc', 
+                       '_$s14DeviceActivity12EventStreamsV11ExportErrorOs0F0AAMc', 
+                       '_$s14DeviceActivity12EventStreamsV11identifiers6duringSaySSG17bundleIdentifiers_AF10webDomainst10Foundation12DateIntervalV_tFZ', 
                        '_$s14DeviceActivity12EventStreamsV11synchronizeyyKFZ', '_$s14DeviceActivity12EventStreamsV14testBiomeQueueSo17OS_dispatch_queueCvgZ', 
                        '_$s14DeviceActivity12EventStreamsV14testBiomeQueueSo17OS_dispatch_queueCvpZMV', 
                        '_$s14DeviceActivity12EventStreamsV15deleteFromBiomeyyKFZ', 
@@ -878,7 +887,8 @@ exports:
                        '_$s14DeviceActivity12EventStreamsV5BiomeV3allSaySo8NSObjectCGvpZMV', 
                        '_$s14DeviceActivity12EventStreamsV5BiomeVMa', '_$s14DeviceActivity12EventStreamsV5BiomeVMn', 
                        '_$s14DeviceActivity12EventStreamsV5BiomeVN', '_$s14DeviceActivity12EventStreamsV6adjusty10Foundation12DateIntervalVAGFZ', 
-                       '_$s14DeviceActivity12EventStreamsV6deleteyyKFZ', '_$s14DeviceActivity12EventStreamsV7command9rateLimitSSSi_tFZ', 
+                       '_$s14DeviceActivity12EventStreamsV6deleteyyKFZ', '_$s14DeviceActivity12EventStreamsV6export2toy10Foundation3URLV_tKFZ', 
+                       '_$s14DeviceActivity12EventStreamsV7command9rateLimitSSSi_tFZ', 
                        '_$s14DeviceActivity12EventStreamsVMa', '_$s14DeviceActivity12EventStreamsVMn', 
                        '_$s14DeviceActivity12EventStreamsVN', '_$s14DeviceActivity13AppUsageEventV16bundleIdentifier8interval8timeZoneACSS_10Foundation12DateIntervalVAG04TimeJ0VtcfC', 
                        '_$s14DeviceActivity13AppUsageEventVMa', '_$s14DeviceActivity13AppUsageEventVMn', 

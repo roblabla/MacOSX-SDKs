@@ -7,6 +7,7 @@
 #import <Foundation/Foundation.h>
 #import <TargetConditionals.h>
 
+/// The state of a game activity.
 typedef NS_ENUM(NSUInteger, GKGameActivityState) {
     /// The game activity is initialized but has not started.
     GKGameActivityStateInitialized = 0,

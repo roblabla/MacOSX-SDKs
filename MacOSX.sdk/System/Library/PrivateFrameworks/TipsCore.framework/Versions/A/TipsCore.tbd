@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TipsCore.framework/Versions/A/TipsCore'
-current-version: 822
+current-version: 822.1.10
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -306,8 +306,11 @@ exports:
                        '_$s8TipsCore11SearchQueryCMa', '_$s8TipsCore11SearchQueryCMn', 
                        '_$s8TipsCore11SearchQueryCMo', '_$s8TipsCore11SearchQueryCMu', 
                        '_$s8TipsCore11SearchQueryCN', '_$s8TipsCore11SearchQueryCfD', 
-                       '_$s8TipsCore12SearchResultC11descriptionSSvg', '_$s8TipsCore12SearchResultC11suggestionsSaySSGvg', 
-                       '_$s8TipsCore12SearchResultC11suggestionsSaySSGvpMV', '_$s8TipsCore12SearchResultC12replaceItems4withyACSg_tF', 
+                       '_$s8TipsCore11SupportFlowO3utiSSvgZ', '_$s8TipsCore11SupportFlowO3utiSSvpZMV', 
+                       '_$s8TipsCore11SupportFlowOMa', '_$s8TipsCore11SupportFlowOMn', 
+                       '_$s8TipsCore11SupportFlowON', '_$s8TipsCore12SearchResultC11descriptionSSvg', 
+                       '_$s8TipsCore12SearchResultC11suggestionsSaySSGvg', '_$s8TipsCore12SearchResultC11suggestionsSaySSGvpMV', 
+                       '_$s8TipsCore12SearchResultC12replaceItems4withyACSg_tF', 
                        '_$s8TipsCore12SearchResultC20deviceExpertResponse10PegasusAPI019Apple_Parsec_Devicef25_V0alpha_ClientComponent_lfD0VSgvg', 
                        '_$s8TipsCore12SearchResultC20deviceExpertResponse10PegasusAPI019Apple_Parsec_Devicef25_V0alpha_ClientComponent_lfD0VSgvpMV', 
                        '_$s8TipsCore12SearchResultC20supportsSecureCodingSbvgZ', 
@@ -806,7 +809,8 @@ exports:
                        '_$s8TipsCore9UserGuideCACycfC', '_$s8TipsCore9UserGuideCACycfc', 
                        '_$s8TipsCore9UserGuideCMa', '_$s8TipsCore9UserGuideCMn', 
                        '_$s8TipsCore9UserGuideCMo', '_$s8TipsCore9UserGuideCMu', 
-                       '_$s8TipsCore9UserGuideCN', '_$s8TipsCore9UserGuideCfD', '_$sSo14NSXPCInterfaceC8TipsCoreE10setClasses_3for13argumentIndex7ofReplyySaySo8NSObjectCmG_10ObjectiveC8SelectorVSiSbtF', 
+                       '_$s8TipsCore9UserGuideCN', '_$s8TipsCore9UserGuideCfD', '_$sSo13TPSCollectionC8TipsCoreE3utiSSvgZ', 
+                       '_$sSo14NSXPCInterfaceC8TipsCoreE10setClasses_3for13argumentIndex7ofReplyySaySo8NSObjectCmG_10ObjectiveC8SelectorVSiSbtF', 
                        '_$sSo14NSXPCInterfaceC8TipsCoreE25assistantSupportInterfaceABvgZ', 
                        '_$sSo14NSXPCInterfaceC8TipsCoreE25assistantSupportInterfaceABvpZMV', 
                        '_$sSo14NSXPCInterfaceC8TipsCoreE36supportFlowSessionAnalyticsInterfaceABvgZ', 

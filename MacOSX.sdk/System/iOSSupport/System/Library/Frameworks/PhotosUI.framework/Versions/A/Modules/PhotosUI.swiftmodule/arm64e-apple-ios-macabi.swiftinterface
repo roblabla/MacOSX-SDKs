@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
-// swift-module-flags: -target arm64e-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature ObjCImplementation -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 801.43.240 -module-name PhotosUI
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
+// swift-module-flags: -target arm64e-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature ObjCImplementation -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 811.0.106 -module-name PhotosUI
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
 @_exported public import PhotosUI
 public import Swift
 public import _Concurrency
@@ -106,33 +106,29 @@ public struct PHPickerConfiguration : Swift.Equatable, Swift.Hashable, @unchecke
   @available(watchOS, unavailable)
   public struct Update : Swift.Equatable, Swift.Hashable, Swift.Sendable {
     public var selectionLimit: Swift.Int?
-    public var edgesWithoutContentMargins: UIKit.NSDirectionalRectEdge?
+    #if compiler(>=5.3) && $NonescapableTypes
+    public var edgesWithoutContentMargins: UIKit.NSDirectionalRectEdge? {
+      get
+      set
+    }
+    #endif
     public init()
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: PhotosUI.PHPickerConfiguration.Update, b: PhotosUI.PHPickerConfiguration.Update) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
   }
   public var preferredAssetRepresentationMode: PhotosUI.PHPickerConfiguration.AssetRepresentationMode
   @available(iOS 15.0, *)
-  public var selection: PhotosUI.PHPickerConfiguration.Selection {
-    get
-    set
-  }
+  public var selection: PhotosUI.PHPickerConfiguration.Selection
   public var selectionLimit: Swift.Int
   public var filter: PhotosUI.PHPickerFilter?
   @available(iOS 15.0, *)
-  public var preselectedAssetIdentifiers: [Swift.String] {
-    get
-    set
-  }
+  public var preselectedAssetIdentifiers: [Swift.String]
   @available(iOS 17.0, macOS 14.0, *)
   @available(watchOS, unavailable)
-  public var mode: PhotosUI.PHPickerMode {
-    get
-    set
-  }
+  public var mode: PhotosUI.PHPickerMode
   @available(iOS 17.0, macOS 14.0, *)
   @available(watchOS, unavailable)
   public var edgesWithoutContentMargins: UIKit.NSDirectionalRectEdge {

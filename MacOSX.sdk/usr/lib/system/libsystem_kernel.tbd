@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_kernel.dylib'
-current-version: 12377.1.9
+current-version: 12377.41.6
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -139,7 +139,7 @@ exports:
                        _clock_alarm, _clock_alarm_reply, _clock_get_attributes, _clock_get_time, 
                        _clock_set_attributes, _clock_set_time, _clock_sleep, _clock_sleep_trap, 
                        _clonefile, _clonefileat, _close, '_close$NOCANCEL', _coalition_create, 
-                       _coalition_info_debug_info, _coalition_info_resource_usage, 
+                       _coalition_info_debug_info, _coalition_info_pid_list, _coalition_info_resource_usage, 
                        _coalition_info_set_efficiency, _coalition_info_set_name, 
                        _coalition_ledger_set_logical_writes_limit, _coalition_policy_get, 
                        _coalition_policy_set, _coalition_reap, _coalition_terminate, 

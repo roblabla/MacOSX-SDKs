@@ -37,8 +37,8 @@ exports:
                        _CNDHostExtensionContext, _CNDRemoteExtensionContext, _CNDonationAccountLogger, 
                        _CNDonationAgentLogger, _CNDonationAgentXPCMethodScope, _CNDonationAnalyticsLogger, 
                        _CNDonationExtensionLogger, _CNDonationManagedDuplicatesLogger, 
-                       _CNDonationPreferencesLogger, _CNDonationToolLogger, _CNEmailAddressDonationValue, 
-                       _CNImageDataDonationValue, _CNNameComponentsDonationValue, 
+                       _CNDonationPreferencesLogger, _CNDonationToolLogger, _CNDonationValueLogger, 
+                       _CNEmailAddressDonationValue, _CNImageDataDonationValue, _CNNameComponentsDonationValue, 
                        _CNPhoneNumberDonationValue, _CNPostalAddressDonationValue ]
     objc-ivars:      [ CNDonationOrigin._bundleIdentifier, CNDonationOrigin._clusterIdentifier, 
                        CNDonationOrigin._donationDate, CNDonationOrigin._donationIdentifier, 

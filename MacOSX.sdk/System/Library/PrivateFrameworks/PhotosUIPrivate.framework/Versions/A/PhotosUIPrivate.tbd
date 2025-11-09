@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosUIPrivate.framework/Versions/A/PhotosUIPrivate'
-current-version: 801.43.240
+current-version: 811.0.106
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -90,7 +90,10 @@ exports:
                        '_$s15PhotosUIPrivate18VFXScannerDefaultsVMa', '_$s15PhotosUIPrivate18VFXScannerDefaultsVMn', 
                        '_$s15PhotosUIPrivate18VFXScannerDefaultsVN', '_$s15PhotosUIPrivate18VFXScannerDefaultsVSEAAMc', 
                        '_$s15PhotosUIPrivate18VFXScannerDefaultsVSQAAMc', '_$s15PhotosUIPrivate18VFXScannerDefaultsVSeAAMc', 
-                       '_$s15PhotosUIPrivate19StoryViewControllerC013itemPlacementE016forItemReferenceSo07PXGItemgE0_pSgyp_tFTj', 
+                       '_$s15PhotosUIPrivate19OneUpTitleFormatterO16formattedStrings20forAssetCreationDate23localizedGeoDescriptionSSSg0mE0_AG0M8Subtitlet10Foundation0L0VSg_AGtFZ', 
+                       '_$s15PhotosUIPrivate19OneUpTitleFormatterO29attributedStringForSymbolName_18shouldPrependSpaceSo012NSAttributedH0CSgSS_SbtFZ', 
+                       '_$s15PhotosUIPrivate19OneUpTitleFormatterOMa', '_$s15PhotosUIPrivate19OneUpTitleFormatterOMn', 
+                       '_$s15PhotosUIPrivate19OneUpTitleFormatterON', '_$s15PhotosUIPrivate19StoryViewControllerC013itemPlacementE016forItemReferenceSo07PXGItemgE0_pSgyp_tFTj', 
                        '_$s15PhotosUIPrivate19StoryViewControllerC013itemPlacementE016forItemReferenceSo07PXGItemgE0_pSgyp_tFTq', 
                        '_$s15PhotosUIPrivate19StoryViewControllerC014gridDecorationD5ClassSo013PXGDecorationD0_pXpSgvMTj', 
                        '_$s15PhotosUIPrivate19StoryViewControllerC014gridDecorationD5ClassSo013PXGDecorationD0_pXpSgvMTq', 
@@ -289,7 +292,7 @@ exports:
                        '_$s15PhotosUIPrivate21OneUpToolbarUtilitiesO40allowedElementsForVisibleAccessoryDrawer_15toolbarPosition29enableSideCommentsInLandscapeShy0A11SwiftUICore0cD13ChromeElementOGAG0cdV11Environment_p_AG0cdveN0OSbtFZ', 
                        '_$s15PhotosUIPrivate21OneUpToolbarUtilitiesO8linkType3for11importState0A11SwiftUICore0cd14CloudLinkAssetH0OAG0cD27PerformableActionProperties_p_So011PXOperationK0VtFZ', 
                        '_$s15PhotosUIPrivate21OneUpToolbarUtilitiesOMa', '_$s15PhotosUIPrivate21OneUpToolbarUtilitiesOMn', 
-                       '_$s15PhotosUIPrivate21OneUpToolbarUtilitiesON', '_$s15PhotosUIPrivate23OneUpChromeEDRBoostTypeO13videoControlsyACSb_SbtcACmFWC', 
+                       '_$s15PhotosUIPrivate21OneUpToolbarUtilitiesON', '_$s15PhotosUIPrivate23OneUpChromeEDRBoostTypeO13videoControlsyACSbcACmFWC', 
                        '_$s15PhotosUIPrivate23OneUpChromeEDRBoostTypeO4textyA2CmFWC', 
                        '_$s15PhotosUIPrivate23OneUpChromeEDRBoostTypeO7buttonsyA2CmFWC', 
                        '_$s15PhotosUIPrivate23OneUpChromeEDRBoostTypeOMa', '_$s15PhotosUIPrivate23OneUpChromeEDRBoostTypeOMn', 

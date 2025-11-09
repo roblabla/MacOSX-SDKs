@@ -2436,7 +2436,7 @@ exports:
                        '_$s18SiriSuggestionsKit21GMStatusChangeHandlerTL', '_$s18SiriSuggestionsKit21OSFeatureFlagProviderC010isFirstUseB7EnabledSbyF', 
                        '_$s18SiriSuggestionsKit21OSFeatureFlagProviderC011isAppIntentB7EnabledSbyF', 
                        '_$s18SiriSuggestionsKit21OSFeatureFlagProviderC022isHandCraftedAppIntentB7EnabledSbyF', 
-                       '_$s18SiriSuggestionsKit21OSFeatureFlagProviderC023isSAESuggestionsFeatureE7EnabledSbyF', 
+                       '_$s18SiriSuggestionsKit21OSFeatureFlagProviderC023isSAESuggestionsFeatureE7Enabled6localeSbSSSg_tF', 
                        '_$s18SiriSuggestionsKit21OSFeatureFlagProviderC02isA11HelpEnabled6deviceSb0A9Utilities13CurrentDeviceCSg_tF', 
                        '_$s18SiriSuggestionsKit21OSFeatureFlagProviderC14isInAppEnabledSbyF', 
                        '_$s18SiriSuggestionsKit21OSFeatureFlagProviderC14isSAEUIEnabledSbyF', 
