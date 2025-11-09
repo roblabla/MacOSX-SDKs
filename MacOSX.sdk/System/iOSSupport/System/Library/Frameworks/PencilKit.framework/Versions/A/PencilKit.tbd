@@ -881,10 +881,10 @@ exports:
                        _PKTextInputWindowFirstResponderControllerReloadResponderKey, 
                        _PKTiledViewDrawingMinimumHeight, _PKTiledViewDrawingWidth, 
                        _PKToolIdentifierRuler, _PKToolPickerDidHideNotification, 
-                       _PKToolPickerNotificationWindowSceneUserInfoKey, _PKToolPickerWillShowNotification, 
-                       __PKStrokePointZero, _kUTTypeAppleStrokeSelection ]
-    objc-classes:    [ PKAttachmentView, PKCanvasView, PKColorPicker, PKCustomTool, 
-                       PKDataDetectorItem, PKDataDetectorQuery, PKDataDetectorQueryItem, 
+                       _PKToolPickerDidShowNotification, _PKToolPickerNotificationWindowSceneUserInfoKey, 
+                       _PKToolPickerWillShowNotification, __PKStrokePointZero, _kUTTypeAppleStrokeSelection ]
+    objc-classes:    [ PKAttachmentView, PKAutoRefineLogEntry, PKCanvasView, PKColorPicker, 
+                       PKCustomTool, PKDataDetectorItem, PKDataDetectorQuery, PKDataDetectorQueryItem, 
                        PKDataDetectorView, PKDetectionItem, PKDetectionQuery, PKDetectionQueryItem, 
                        PKDetectionView, PKDisplayLinkObserver, PKDrawing, PKDrawingConcrete, 
                        PKDrawingGestureRecognizer, PKDrawingOverlayCache, PKDrawingPaletteView, 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Geode.framework/Versions/A/Geode'
-current-version: 711.0.180
+current-version: 721.0.150
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CGPointOffset, _CGPointScale, _CGRectFlipInRect, _CGRectGrowInRect, 
@@ -40,13 +40,12 @@ exports:
                        _DGSpotPatchInitialOpacityValue, _DGSpotPatchInitialSoftnessValue, 
                        _DGUnionRect, _DGZeroPoint, _DGZeroRect, _DG_RGBToTempTint, 
                        _DG_RGBToTempTint_dng, _DG_TempTintToMatrix, _DG_TempTintToXY_dng, 
-                       _DG_XYToTempTint, _DG_XYToTempTint_dng, _GeodeVersionNumber, 
-                       _GeodeVersionString, _IPACIFilter_PhotoEffect, _IPAPhotoEffectFilter_Input_EffectNumber, 
-                       _IPAPhotoEffectFilter_Input_EffectVersion, _IPAPhotoEffectNumber_None, 
-                       _IPAPhotoEffectOperation_Input_EffectIntensity, _IPAPhotoEffectOperation_Input_EffectNumber, 
-                       _IPAPhotoEffectOperation_Input_EffectVersion, _NSArrayFromDGRect, 
-                       _NSStringFromDGPoint, _NSStringFromDGRect, _NSStringFromDGSize, 
-                       _PADiscreteFileLoadRequest_urlKey, _PAImagingErrorDomain, 
+                       _DG_XYToTempTint, _DG_XYToTempTint_dng, _IPACIFilter_PhotoEffect, 
+                       _IPAPhotoEffectFilter_Input_EffectNumber, _IPAPhotoEffectFilter_Input_EffectVersion, 
+                       _IPAPhotoEffectNumber_None, _IPAPhotoEffectOperation_Input_EffectIntensity, 
+                       _IPAPhotoEffectOperation_Input_EffectNumber, _IPAPhotoEffectOperation_Input_EffectVersion, 
+                       _NSArrayFromDGRect, _NSStringFromDGPoint, _NSStringFromDGRect, 
+                       _NSStringFromDGSize, _PADiscreteFileLoadRequest_urlKey, _PAImagingErrorDomain, 
                        _PALoadRequest_CGOptionsKey, _PALoadRequest_imageSizePolicyKey, 
                        _PANonLocalizedErrorKey, _PARenderPipeline_CalculateGeometry, 
                        _PARenderPipeline_RenderType_CalculateGeometry, _PARenderPipeline_StraightenCrop, 

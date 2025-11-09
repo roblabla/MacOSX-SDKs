@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UXKit.framework/Versions/A/UXKit'
-current-version: 711.0.180
+current-version: 721.0.150
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ Mondrian, PhotoPrintProduct, Photos, PhotosUI, PhotosUICore, 
@@ -16,10 +16,9 @@ exports:
                        _UXCollectionViewElementKindDecorationView, _UXCollectionViewElementKindSectionFooter, 
                        _UXCollectionViewElementKindSectionHeader, _UXEdgeInsetsZero, 
                        _UXFlowLayoutCommonRowHorizontalAlignmentKey, _UXFlowLayoutLastRowHorizontalAlignmentKey, 
-                       _UXFlowLayoutRowVerticalAlignmentKey, _UXKitVersionNumber, 
-                       _UXKitVersionString, _UXLocalizedString, _UXNavigationControllerOperationToString, 
-                       _UXNavigationDestinationIsEqualToDestination, _UXNavigationItemSubtitleKey, 
-                       _UXNavigationItemTitleKey, _UXSourceControllerForceSelectionKey, 
+                       _UXFlowLayoutRowVerticalAlignmentKey, _UXLocalizedString, 
+                       _UXNavigationControllerOperationToString, _UXNavigationDestinationIsEqualToDestination, 
+                       _UXNavigationItemSubtitleKey, _UXNavigationItemTitleKey, _UXSourceControllerForceSelectionKey, 
                        _UXSourceControllerSenderIdentifierKey, _UXSourceControllerShouldForceSelectionForNavigationDestination, 
                        _UXSourceControllerSkipDestinationRemovalKey, _UXTransitionContextFromViewControllerKey, 
                        _UXTransitionContextToViewControllerKey, _UXWindowToolbarCenteredItemIdentifier, 

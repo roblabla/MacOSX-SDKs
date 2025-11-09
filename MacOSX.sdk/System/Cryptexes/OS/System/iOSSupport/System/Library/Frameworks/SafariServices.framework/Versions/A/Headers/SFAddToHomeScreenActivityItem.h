@@ -34,9 +34,10 @@ API_AVAILABLE(ios(17.4))
 /*! @abstract An optional method to provide the web app manifest.
  This is only available to apps that can use BrowserEngineKit.
 */
-- (void)getWebAppManifestWithCompletionHandler:(void (^)(BEWebAppManifest *_Nullable))completionHandler API_AVAILABLE(ios(17.5));
+- (void)getWebAppManifestWithCompletionHandler:(void (^)(BEWebAppManifest *_Nullable))completionHandler API_DEPRECATED("Create a SFAddToHomeScreenInfo instead", ios(17.5, API_TO_BE_DEPRECATED));
+
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END 
 

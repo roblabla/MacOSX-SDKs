@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
-// swift-module-flags: -target arm64e-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 814.1.11 -module-name StoreKit
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
+// swift-module-flags: -target arm64e-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 814.2.17 -module-name StoreKit
 import Combine
 import CoreFoundation
 import CryptoKit
@@ -544,32 +544,6 @@ extension StoreKit.Product : Swift.CustomDebugStringConvertible {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Product {
-  public enum PurchaseResult {
-    case success(StoreKit.VerificationResult<StoreKit.Transaction>)
-    case userCancelled
-    case pending
-  }
-  public enum PurchaseError : Swift.Error {
-    case invalidQuantity
-    case productUnavailable
-    case purchaseNotAllowed
-    case ineligibleForOffer
-    case invalidOfferIdentifier
-    case invalidOfferPrice
-    case invalidOfferSignature
-    case missingOfferParameters
-    public static func == (a: StoreKit.Product.PurchaseError, b: StoreKit.Product.PurchaseError) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
-    public var hashValue: Swift.Int {
-      get
-    }
-  }
-  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-  @available(visionOS, unavailable, message: "Use @Environment(\\.purchase) to get a PurchaseAction value to call. If your app uses UIKit, use purchase(confirmIn:options:).")
-  public func purchase(options: Swift.Set<StoreKit.Product.PurchaseOption> = []) async throws -> StoreKit.Product.PurchaseResult
-}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
-extension StoreKit.Product {
   public static func products<Identifiers>(for identifiers: Identifiers) async throws -> [StoreKit.Product] where Identifiers : Swift.Collection, Identifiers.Element == Swift.String
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
@@ -649,13 +623,6 @@ extension StoreKit.Product {
   public var subscriptionPeriodUnitFormatStyle: StoreKit.Product.SubscriptionPeriod.Unit.FormatStyle {
     get
   }
-}
-@available(iOS 17.0, tvOS 17.0, macCatalyst 17.0, visionOS 1.0, *)
-extension StoreKit.Product {
-  @available(iOS 17.0, tvOS 17.0, macCatalyst 17.0, visionOS 1.0, *)
-  @available(macOS, unavailable)
-  @available(watchOS, unavailable)
-  public func purchase(confirmIn scene: some UIScene, options: Swift.Set<StoreKit.Product.PurchaseOption> = []) async throws -> StoreKit.Product.PurchaseResult
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Product {
@@ -1755,7 +1722,7 @@ extension StoreKit.PurchaseIntent {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Product {
-  public struct PurchaseOption : Swift.Equatable, Swift.Hashable {
+  public struct PurchaseOption : Swift.Equatable, Swift.Hashable, Swift.Sendable {
     public static func appAccountToken(_ token: Foundation.UUID) -> StoreKit.Product.PurchaseOption
     @usableFromInline
     internal static func custom(key: Swift.String, value: StoreKit.BackingValue) -> StoreKit.Product.PurchaseOption
@@ -1763,10 +1730,12 @@ extension StoreKit.Product {
     public static func custom(key: Swift.String, value: Swift.Double) -> StoreKit.Product.PurchaseOption
     public static func custom(key: Swift.String, value: Swift.Bool) -> StoreKit.Product.PurchaseOption
     public static func custom(key: Swift.String, value: Foundation.Data) -> StoreKit.Product.PurchaseOption
+    @preconcurrency public static func onStorefrontChange(shouldContinuePurchase: @escaping @Sendable (StoreKit.Storefront) -> Swift.Bool) -> StoreKit.Product.PurchaseOption
     public static func promotionalOffer(offerID: Swift.String, keyID: Swift.String, nonce: Foundation.UUID, signature: Foundation.Data, timestamp: Swift.Int) -> StoreKit.Product.PurchaseOption
+    @available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
+    public static func promotionalOffer(offerID: Swift.String, signature: StoreKit.Product.SubscriptionOffer.Signature) -> StoreKit.Product.PurchaseOption
     public static func quantity(_ quantity: Swift.Int) -> StoreKit.Product.PurchaseOption
     public static func simulatesAskToBuyInSandbox(_ simulateAskToBuy: Swift.Bool) -> StoreKit.Product.PurchaseOption
-    @preconcurrency public static func onStorefrontChange(shouldContinuePurchase: @escaping @Sendable (StoreKit.Storefront) -> Swift.Bool) -> StoreKit.Product.PurchaseOption
     @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
     public static func winBackOffer(_ offer: StoreKit.Product.SubscriptionOffer) -> StoreKit.Product.PurchaseOption
     public static func == (a: StoreKit.Product.PurchaseOption, b: StoreKit.Product.PurchaseOption) -> Swift.Bool
@@ -1783,11 +1752,39 @@ extension StoreKit.Product.PurchaseOption : Swift.CustomDebugStringConvertible {
   }
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
-extension StoreKit.Product.PurchaseOption : Swift.Sendable {
-}
-extension StoreKit.Product.PurchaseOption {
-  @available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
-  public static func promotionalOffer(offerID: Swift.String, signature: StoreKit.Product.SubscriptionOffer.Signature) -> StoreKit.Product.PurchaseOption
+extension StoreKit.Product {
+  public enum PurchaseResult {
+    case success(StoreKit.VerificationResult<StoreKit.Transaction>)
+    case userCancelled
+    case pending
+  }
+  public enum PurchaseError : Swift.Error {
+    case invalidQuantity
+    case productUnavailable
+    case purchaseNotAllowed
+    case ineligibleForOffer
+    case invalidOfferIdentifier
+    case invalidOfferPrice
+    case invalidOfferSignature
+    case missingOfferParameters
+    public static func == (a: StoreKit.Product.PurchaseError, b: StoreKit.Product.PurchaseError) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+  @available(visionOS, unavailable, message: "Use @Environment(\\.purchase) to get a PurchaseAction value to call. If your app uses UIKit, use purchase(confirmIn:options:).")
+  @available(visionOS, unavailable)
+  @_Concurrency.MainActor public func purchase(options: Swift.Set<StoreKit.Product.PurchaseOption> = []) async throws -> StoreKit.Product.PurchaseResult
+  @available(iOS 17.0, tvOS 17.0, macCatalyst 17.0, visionOS 1.0, *)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @_Concurrency.MainActor public func purchase(confirmIn scene: some UIScene, options: Swift.Set<StoreKit.Product.PurchaseOption> = []) async throws -> StoreKit.Product.PurchaseResult
+  @available(iOS 18.2, tvOS 18.2, macCatalyst 18.2, visionOS 2.2, *)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  public func purchase(confirmIn viewController: UIKit.UIViewController, options: Swift.Set<StoreKit.Product.PurchaseOption> = []) async throws -> StoreKit.Product.PurchaseResult
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension Swift.BinaryInteger {
@@ -2152,10 +2149,6 @@ extension StoreKit.VerificationResult where SignedType == StoreKit.Product.Subsc
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Product.SubscriptionInfo.RenewalInfo.PriceIncreaseStatus : Swift.BitwiseCopyable {}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
-extension StoreKit.Product.PurchaseError : Swift.Equatable {}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
-extension StoreKit.Product.PurchaseError : Swift.Hashable {}
 @available(iOS 15.0, macOS 12.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 extension StoreKit.Transaction.RefundRequestError : Swift.Equatable {}
 @available(iOS 15.0, macOS 12.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
@@ -2168,6 +2161,10 @@ extension StoreKit.Transaction.RefundRequestStatus : Swift.Hashable {}
 extension StoreKit.VerificationResult.VerificationError : Swift.Equatable {}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.VerificationResult.VerificationError : Swift.Hashable {}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
+extension StoreKit.Product.PurchaseError : Swift.Equatable {}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
+extension StoreKit.Product.PurchaseError : Swift.Hashable {}
 @available(iOS 16.4, *)
 @available(visionOS, unavailable)
 @available(macOS, unavailable)

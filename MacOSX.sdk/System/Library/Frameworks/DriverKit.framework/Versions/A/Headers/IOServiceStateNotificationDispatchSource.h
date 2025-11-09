@@ -1,4 +1,4 @@
-/* iig(DriverKit-400.0.2) generated from IOServiceStateNotificationDispatchSource.iig */
+/* iig(DriverKit-402.60.12) generated from IOServiceStateNotificationDispatchSource.iig */
 
 /* IOServiceStateNotificationDispatchSource.iig:1-36 */
 /*

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ReminderKit.framework/Versions/A/ReminderKit'
-current-version: 1133
+current-version: 1203
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -34,7 +34,8 @@ exports:
                        _RDSyncActivityNotificationEngineAuthor, _RDTemplateOperationAuthor, 
                        _RDTodayNotificationLastBannerPresentationDateAuthor, _REMACAccountPropertyDidChooseToMigrate, 
                        _REMACAccountPropertyDidFinishMigration, _REMAccountTypeMaskContainsType, 
-                       _REMAppBundleIdentifier, _REMAppGroupBundleIdentifier, _REMAppIntentsListEntityName, 
+                       _REMAppBundleIdentifier, _REMAppGroupBundleIdentifier, _REMAppIntentsGroupEntityName, 
+                       _REMAppIntentsGroupTypeDisplayName, _REMAppIntentsListEntityName, 
                        _REMAppIntentsListTypeDisplayName, _REMAppIntentsReminderEntityName, 
                        _REMAppIntentsReminderTypeDisplayName, _REMAppStoreCreatedOrCompletedRemindersLastMonthCountFetchResultKey, 
                        _REMBundleGet, _REMCFTypeCast, _REMChangeErrorDomain, _REMCheckedDynamicCast, 

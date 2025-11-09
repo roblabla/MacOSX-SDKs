@@ -163,9 +163,9 @@ API_AVAILABLE(ios(3.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)
     ringtones and alerts. By setting this property to YES, clients will not be interrupted
     by incoming call notifications and other alerts. Starting in iOS 14.0, users can set a global
     preference for incoming call display style to "Banner" or "Full Screen". With "Banner" display style,
-    if below property is set to YES then clients will not be interrupted on incoming call notification
-    and user will have opportunity to accept or decline the call. If call is declined, the session
-    will not be interrupted, but if user accepts the incoming call, the session will be interrupted.
+    if below property is set to YES then system audio will be silenced. Thus, clients will not be interrupted
+    on incoming call notification and user will have opportunity to accept or decline the call. If call is declined,
+    the session will not be interrupted, but if user accepts the incoming call, the session will be interrupted.
     With  display style set as "Full Screen", below property will have no effect and clients will be
     interrupted by incoming calls. Apps that record audio and/or video and apps that are used for
     music performance are candidates for using this feature.
@@ -176,6 +176,35 @@ API_AVAILABLE(ios(3.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)
 /// Get the currently resolved rendering mode to badge content appropriately.
 /// Clients should use this property to determine what to badge content as.
 @property(readonly) AVAudioSessionRenderingMode renderingMode API_AVAILABLE(ios(17.2), tvos(17.2)) API_UNAVAILABLE(watchos, macos, visionos);
+
+/*!
+ @brief Set a preference to enable echo cancelled input on supported hardware
+
+Applications might want to record the built-in microphone's input while also playing audio out via the built-in speaker.
+Enabling echo cancelled input is useful when the application needs the input signal to be clear of any echoes
+from the audio playing out of the built-in speaker.
+
+Audio sessions using Voice Processor don't need this option as echo cancellation is implicitly applied for those routes.
+The Voice Processor solution is tuned for voice signals, unlike this option, which is tuned for better capture
+of wider range of audio signals in the presence of built-in speaker echo.
+
+This option is valid only when used with AVAudioSessionCategoryPlayAndRecord and AVAudioSessionModeDefault and is only available
+on certain 2024 or later iPhone models. Support can be queried using property `isEchoCancelledInputAvailable`.
+Other recording sessions might be interrupted if this option is not compatible with sessions that are already recording.
+
+After an audio session goes active, `isEchoCancelledInputEnabled` property can be queried to check if the option was honored.
+Note that the enabled state may change after route changes, e.g. if user plugs in a headset, that route might not support echo cancellation.
+*/
+- (BOOL)setPrefersEchoCancelledInput:(BOOL)value error:(NSError **)error API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(tvos, watchos, macos, visionos);
+@property (readonly, nonatomic) BOOL prefersEchoCancelledInput API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(tvos, watchos, macos, visionos);
+
+/// Returns YES if echo cancelled input is successfully enabled on an active session.
+/// Please see `prefersEchoCancelledInput` above for more details.
+@property (readonly, nonatomic) BOOL isEchoCancelledInputEnabled API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(tvos, watchos, macos, visionos);
+
+/// Query whether built-in mic / built-in speaker route supports echo cancellation for the session's given category and mode.
+/// Returns YES if device model supports echo cancellation and the audio category is PlayAndRecord and the mode is Default.
+@property(readonly, nonatomic) BOOL isEchoCancelledInputAvailable API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(macos);
 
 @end
 
@@ -447,6 +476,19 @@ API_AVAILABLE(ios(3.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)
 
 @end // interface for AVAudioSession (RoutingConfiguration)
 
+@interface  AVAudioSession (MicrophoneInjection)
+
+/// Set the preferred form of audio injection into another app's input stream
+/// See AVAudioSessionMicrophoneInjectionMode for available modes
+- (BOOL)setPreferredMicrophoneInjectionMode:(AVAudioSessionMicrophoneInjectionMode)inValue error:(NSError**)outError API_AVAILABLE(ios(18.2), visionos(2.2)) API_UNAVAILABLE(tvos, watchos, macos);
+@property(readonly) AVAudioSessionMicrophoneInjectionMode  preferredMicrophoneInjectionMode API_AVAILABLE(ios(18.2), visionos(2.2)) API_UNAVAILABLE(tvos, watchos, macos);
+
+/// Indicates if microphone injection is available.
+/// Observe AVAudioSessionMicrophoneInjectionCapabilitiesChangeNotification for changes to this property
+@property(readonly) BOOL isMicrophoneInjectionAvailable API_AVAILABLE(ios(18.2), visionos(2.2)) API_UNAVAILABLE(tvos, watchos, macos);
+
+@end
+
 #if TARGET_OS_VISION
 /*!
  The perceived "size" or "immersivity" of the sound. Use Small for least
@@ -623,6 +665,14 @@ OS_EXPORT NSNotificationName const  AVAudioSessionRenderingModeChangeNotificatio
  */
 OS_EXPORT NSNotificationName const AVAudioSessionRenderingCapabilitiesChangeNotification API_AVAILABLE(ios(17.2), tvos(17.2)) API_UNAVAILABLE(watchos, macos, visionos) NS_SWIFT_NAME(AVAudioSession.renderingCapabilitiesChangeNotification);
 
+/*!
+     @brief Notification sent to registered listeners when the system's capability to inject audio into input stream is changed
+ 
+ Check the notification's userInfo dictionary for AVAudioSessionMicrophoneInjectionIsAvailableKey to check if microphone
+ injection is available. Use AVAudioSession's isMicrophoneInjectionAvailable property to check if microphone injection is available
+ */
+OS_EXPORT NSNotificationName const AVAudioSessionMicrophoneInjectionCapabilitiesChangeNotification API_AVAILABLE(ios(18.2), visionos(2.2)) API_UNAVAILABLE(tvos, watchos, macos) NS_SWIFT_NAME(AVAudioSession.microphoneInjectionCapabilitiesChangeNotification);
+
 #pragma mark-- Keys for NSNotification userInfo dictionaries --
 
 /// keys for AVAudioSessionSpatialPlaybackCapabilitiesChangedNotification
@@ -667,6 +717,13 @@ OS_EXPORT NSString *const AVAudioSessionSilenceSecondaryAudioHintTypeKey API_AVA
 /// keys for AVAudioSessionRenderingModeChangeNotification
 /// Contains a payload of NSInteger representing the new resolved rendering mode
 OS_EXPORT NSString *const AVAudioSessionRenderingModeNewRenderingModeKey API_AVAILABLE(ios(17.2), tvos(17.2)) API_UNAVAILABLE(watchos, macos, visionos);
+
+/*!
+    Keys for AVAudioSessionMicrophoneInjectionCapabilitiesChangeNotification
+*/
+/// Indicates if microphone injection is available.
+/// Value is an NSNumber whose boolean value indicates if microphone injection is available.
+OS_EXPORT NSString *const AVAudioSessionMicrophoneInjectionIsAvailableKey API_AVAILABLE(ios(18.2), visionos(2.2)) API_UNAVAILABLE(tvos, watchos, macos);
 
 NS_ASSUME_NONNULL_END
 

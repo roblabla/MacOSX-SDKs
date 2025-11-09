@@ -80,13 +80,6 @@ exports:
                        '_$s33AppleMediaServicesUIPaymentSheets32PaymentServiceHostViewControllerC06remoteG5ProxyyXlSgvpMV', 
                        '_$s33AppleMediaServicesUIPaymentSheets32PaymentServiceHostViewControllerC06remoteG5ProxyyXlSgvsTj', 
                        '_$s33AppleMediaServicesUIPaymentSheets32PaymentServiceHostViewControllerC06remoteG5ProxyyXlSgvsTq', 
-                       '_$s33AppleMediaServicesUIPaymentSheets32PaymentServiceHostViewControllerC06remoteI0So6NSViewCSgvMTj', 
-                       '_$s33AppleMediaServicesUIPaymentSheets32PaymentServiceHostViewControllerC06remoteI0So6NSViewCSgvMTq', 
-                       '_$s33AppleMediaServicesUIPaymentSheets32PaymentServiceHostViewControllerC06remoteI0So6NSViewCSgvgTj', 
-                       '_$s33AppleMediaServicesUIPaymentSheets32PaymentServiceHostViewControllerC06remoteI0So6NSViewCSgvgTq', 
-                       '_$s33AppleMediaServicesUIPaymentSheets32PaymentServiceHostViewControllerC06remoteI0So6NSViewCSgvpMV', 
-                       '_$s33AppleMediaServicesUIPaymentSheets32PaymentServiceHostViewControllerC06remoteI0So6NSViewCSgvsTj', 
-                       '_$s33AppleMediaServicesUIPaymentSheets32PaymentServiceHostViewControllerC06remoteI0So6NSViewCSgvsTq', 
                        '_$s33AppleMediaServicesUIPaymentSheets32PaymentServiceHostViewControllerC06remoteiJ0AA0fg6RemoteiJ0CSgvMTj', 
                        '_$s33AppleMediaServicesUIPaymentSheets32PaymentServiceHostViewControllerC06remoteiJ0AA0fg6RemoteiJ0CSgvMTq', 
                        '_$s33AppleMediaServicesUIPaymentSheets32PaymentServiceHostViewControllerC06remoteiJ0AA0fg6RemoteiJ0CSgvgTj', 
@@ -108,6 +101,8 @@ exports:
                        '_$s33AppleMediaServicesUIPaymentSheets32PaymentServiceHostViewControllerCMu', 
                        '_$s33AppleMediaServicesUIPaymentSheets32PaymentServiceHostViewControllerCN', 
                        '_$s33AppleMediaServicesUIPaymentSheets32PaymentServiceHostViewControllerCfD', 
+                       '_$s33AppleMediaServicesUIPaymentSheets34PaymentServiceRemoteViewControllerC013shouldDismissI05replyyySb_s5Error_pSgtc_tFTj', 
+                       '_$s33AppleMediaServicesUIPaymentSheets34PaymentServiceRemoteViewControllerC013shouldDismissI05replyyySb_s5Error_pSgtc_tFTq', 
                        '_$s33AppleMediaServicesUIPaymentSheets34PaymentServiceRemoteViewControllerC013shouldDisplayI05replyyySb_s5Error_pSgtc_tFTj', 
                        '_$s33AppleMediaServicesUIPaymentSheets34PaymentServiceRemoteViewControllerC013shouldDisplayI05replyyySb_s5Error_pSgtc_tFTq', 
                        '_$s33AppleMediaServicesUIPaymentSheets34PaymentServiceRemoteViewControllerC5coderACSgSo7NSCoderC_tcfC', 
@@ -127,6 +122,7 @@ exports:
                        '_$s33AppleMediaServicesUIPaymentSheets34PaymentServiceRemoteViewControllerCMu', 
                        '_$s33AppleMediaServicesUIPaymentSheets34PaymentServiceRemoteViewControllerCN', 
                        '_$s33AppleMediaServicesUIPaymentSheets34PaymentServiceRemoteViewControllerCfD', 
+                       '_$s33AppleMediaServicesUIPaymentSheets37PaymentServiceHostViewControllerEventO011willDismissI0yA2CmFWC', 
                        '_$s33AppleMediaServicesUIPaymentSheets37PaymentServiceHostViewControllerEventO013shouldDisplayI0yA2CmFWC', 
                        '_$s33AppleMediaServicesUIPaymentSheets37PaymentServiceHostViewControllerEventO12didTerminateyACs5Error_pSg_tcACmFWC', 
                        '_$s33AppleMediaServicesUIPaymentSheets37PaymentServiceHostViewControllerEventOMa', 
@@ -147,6 +143,7 @@ exports:
                        '_$s7SwiftUI17EnvironmentValuesV33AppleMediaServicesUIPaymentSheetsE13secondaryTextAA5ColorVvs', 
                        '_$s7SwiftUI5ColorV33AppleMediaServicesUIPaymentSheetsE06borderC0ACvgZ', 
                        _AppleMediaServicesUIPaymentSheetsVersionNumber, _AppleMediaServicesUIPaymentSheetsVersionString ]
-    objc-classes:    [ PaymentServiceHostViewController, PaymentServiceRemoteViewController, 
-                       _TtC33AppleMediaServicesUIPaymentSheets29AMSUIPaymentSheetViewProvider ]
+    objc-classes:    [ _TtC33AppleMediaServicesUIPaymentSheets29AMSUIPaymentSheetViewProvider, 
+                       _TtC33AppleMediaServicesUIPaymentSheets32PaymentServiceHostViewController, 
+                       _TtC33AppleMediaServicesUIPaymentSheets34PaymentServiceRemoteViewController ]
 ...

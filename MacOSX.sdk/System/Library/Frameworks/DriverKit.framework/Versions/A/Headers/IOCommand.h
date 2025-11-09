@@ -1,4 +1,4 @@
-/* iig(DriverKit-400.0.2) generated from IOCommand.iig */
+/* iig(DriverKit-402.60.12) generated from IOCommand.iig */
 
 /* IOCommand.iig:1-38 */
 /*

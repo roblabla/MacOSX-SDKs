@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HomeKitCore.framework/Versions/A/HomeKitCore'
-current-version: 1215.2.15
+current-version: 1241.3.7
 compatibility-version: 0
 swift-abi-version: 7
 allowable-clients:
@@ -379,9 +379,7 @@ exports:
                        '_$s11HomeKitCore10HomesStoreC4UserV14SharedSettingsV6encode2toys7Encoder_p_tKF', 
                        '_$s11HomeKitCore10HomesStoreC4UserV14SharedSettingsV9hashValueSivg', 
                        '_$s11HomeKitCore10HomesStoreC4UserV14SharedSettingsV9hashValueSivpMV', 
-                       '_$s11HomeKitCore10HomesStoreC4UserV14SharedSettingsV9modelTypeAC05ModelJ0OvMZ', 
                        '_$s11HomeKitCore10HomesStoreC4UserV14SharedSettingsV9modelTypeAC05ModelJ0OvgZ', 
-                       '_$s11HomeKitCore10HomesStoreC4UserV14SharedSettingsV9modelTypeAC05ModelJ0OvsZ', 
                        '_$s11HomeKitCore10HomesStoreC4UserV14SharedSettingsVAC13FetchableTypeAAMc', 
                        '_$s11HomeKitCore10HomesStoreC4UserV14SharedSettingsVAC13FetchableTypeAAWP', 
                        '_$s11HomeKitCore10HomesStoreC4UserV14SharedSettingsVAC5ModelAAMc', 
@@ -458,9 +456,7 @@ exports:
                        '_$s11HomeKitCore10HomesStoreC9AccessoryV16AppleMediaDeviceV6encode2toys7Encoder_p_tKF', 
                        '_$s11HomeKitCore10HomesStoreC9AccessoryV16AppleMediaDeviceV9hashValueSivg', 
                        '_$s11HomeKitCore10HomesStoreC9AccessoryV16AppleMediaDeviceV9hashValueSivpMV', 
-                       '_$s11HomeKitCore10HomesStoreC9AccessoryV16AppleMediaDeviceV9modelTypeAC05ModelK0OvMZ', 
                        '_$s11HomeKitCore10HomesStoreC9AccessoryV16AppleMediaDeviceV9modelTypeAC05ModelK0OvgZ', 
-                       '_$s11HomeKitCore10HomesStoreC9AccessoryV16AppleMediaDeviceV9modelTypeAC05ModelK0OvsZ', 
                        '_$s11HomeKitCore10HomesStoreC9AccessoryV16AppleMediaDeviceVAC13FetchableTypeAAMc', 
                        '_$s11HomeKitCore10HomesStoreC9AccessoryV16AppleMediaDeviceVAC13FetchableTypeAAWP', 
                        '_$s11HomeKitCore10HomesStoreC9AccessoryV16AppleMediaDeviceVAC5ModelAAMc', 

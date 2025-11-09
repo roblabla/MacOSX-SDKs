@@ -2,17 +2,23 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WebGPU.framework/Versions/A/WebGPU'
-current-version: 619.2.8
+current-version: 620.1.16
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ __Z17wgpuDefaultLimitsv, __Z26wgpuExternalTextureDestroyP23WGPUExternalTextureImpl, 
+    symbols:         [ __Z17wgpuDefaultLimitsv, __Z23wgpuAdapterXRCompatibleP15WGPUAdapterImpl, 
+                       __Z25wgpuDeviceCreateXRBindingP14WGPUDeviceImpl, __Z25wgpuExternalTextureUpdateP23WGPUExternalTextureImplP10__CVBuffer, 
+                       __Z26wgpuBindingGetViewSubImageP17WGPUXRBindingImpl9WGPUXREye, 
+                       __Z26wgpuExternalTextureDestroyP23WGPUExternalTextureImpl, 
                        __Z26wgpuExternalTextureIsValidP23WGPUExternalTextureImpl, 
                        __Z26wgpuExternalTextureReleaseP23WGPUExternalTextureImpl, 
                        __Z28wgpuExternalTextureReferenceP23WGPUExternalTextureImpl, 
                        __Z28wgpuExternalTextureUndestroyP23WGPUExternalTextureImpl, 
                        __Z30wgpuSwapChainGetCurrentTextureP17WGPUSwapChainImpl, __Z31wgpuDeviceImportExternalTextureP14WGPUDeviceImplPK29WGPUExternalTextureDescriptor, 
                        __Z31wgpuDeviceSetDeviceLostCallbackP14WGPUDeviceImplPFv20WGPUDeviceLostReasonPKcPvES4_, 
-                       __Z36wgpuSwapChainGetTextureAsNativeImageP17WGPUSwapChainImplj, 
+                       __Z33wgpuDeviceClearDeviceLostCallbackP14WGPUDeviceImpl, __Z34wgpuBindingCreateXRProjectionLayerP17WGPUXRBindingImpl17WGPUTextureFormatPS1_jd, 
+                       __Z35wgpuBindGroupUpdateExternalTexturesP17WGPUBindGroupImplP23WGPUExternalTextureImpl, 
+                       __Z36wgpuSwapChainGetTextureAsNativeImageP17WGPUSwapChainImpljRb, 
+                       __Z38wgpuDeviceClearUncapturedErrorCallbackP14WGPUDeviceImpl, 
                        __Z40wgpuDeviceSetDeviceLostCallbackWithBlockP14WGPUDeviceImplU13block_pointerFv20WGPUDeviceLostReasonPKcE, 
                        __Z53wgpuRenderBundleEncoderSetBindGroupWithDynamicOffsetsP27WGPURenderBundleEncoderImpljP17WGPUBindGroupImplONSt3__18optionalIN3WTF6VectorIjLm0ENS5_15CrashOnOverflowELm16ENS5_10FastMallocEEEEE, 
                        _wgpuAdapterEnumerateFeatures, _wgpuAdapterGetLimits, _wgpuAdapterGetProperties, 
@@ -100,5 +106,9 @@ exports:
                        _wgpuTextureGetUsage, _wgpuTextureGetWidth, _wgpuTextureIsValid, 
                        _wgpuTextureReference, _wgpuTextureRelease, _wgpuTextureSetLabel, 
                        _wgpuTextureViewIsValid, _wgpuTextureViewReference, _wgpuTextureViewRelease, 
-                       _wgpuTextureViewSetLabel ]
+                       _wgpuTextureViewSetLabel, _wgpuXRBindingIsValid, _wgpuXRBindingReference, 
+                       _wgpuXRBindingRelease, _wgpuXRProjectionLayerIsValid, _wgpuXRProjectionLayerReference, 
+                       _wgpuXRProjectionLayerRelease, _wgpuXRSubImageIsValid, _wgpuXRSubImageReference, 
+                       _wgpuXRSubImageRelease, _wgpuXRViewIsValid, _wgpuXRViewReference, 
+                       _wgpuXRViewRelease ]
 ...

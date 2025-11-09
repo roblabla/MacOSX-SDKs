@@ -224,6 +224,7 @@ exports:
                        '_$s8SPShared18PerformanceCaptureCN', '_$s8SPShared18PerformanceCaptureCfD', 
                        '_$s8SPShared18PerformanceCaptureCfd', '_$s8SPShared19LocalizationUtilityO15localizedString3key5tableS2S_AC5TableOtFZ', 
                        '_$s8SPShared19LocalizationUtilityO5TableO11itemSharingyA2EmFWC', 
+                       '_$s8SPShared19LocalizationUtilityO5TableO16delegatedSharingyA2EmFWC', 
                        '_$s8SPShared19LocalizationUtilityO5TableO2eeoiySbAE_AEtFZ', 
                        '_$s8SPShared19LocalizationUtilityO5TableO4hash4intoys6HasherVz_tF', 
                        '_$s8SPShared19LocalizationUtilityO5TableO6stewieyA2EmFWC', 

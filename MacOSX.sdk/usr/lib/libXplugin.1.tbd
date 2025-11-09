@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libXplugin.1.dylib'
-current-version: 55
+current-version: 57
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _xp_api_version, _xp_attach_gl_context, _xp_composite_area_threshold, 

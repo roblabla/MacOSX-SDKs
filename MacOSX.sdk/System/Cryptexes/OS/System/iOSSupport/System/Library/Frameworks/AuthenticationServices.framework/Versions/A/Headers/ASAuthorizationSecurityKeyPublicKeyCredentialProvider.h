@@ -1,9 +1,8 @@
 // Copyright © 2020 Apple Inc. All rights reserved.
 
 #import <AuthenticationServices/ASAuthorizationProvider.h>
-#import <Foundation/Foundation.h>
-
 #import <AuthenticationServices/ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialProvider.h>
+#import <Foundation/Foundation.h>
 
 @class ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest;
 @class ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest;

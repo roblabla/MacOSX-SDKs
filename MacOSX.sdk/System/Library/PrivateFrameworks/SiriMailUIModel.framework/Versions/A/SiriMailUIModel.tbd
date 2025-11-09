@@ -89,6 +89,7 @@ exports:
                        '_$s15SiriMailUIModel01_aB7MessageV5FieldON', '_$s15SiriMailUIModel01_aB7MessageV5FieldOSEAAMc', 
                        '_$s15SiriMailUIModel01_aB7MessageV5FieldOSHAAMc', '_$s15SiriMailUIModel01_aB7MessageV5FieldOSQAAMc', 
                        '_$s15SiriMailUIModel01_aB7MessageV5FieldOSYAAMc', '_$s15SiriMailUIModel01_aB7MessageV5FieldOSeAAMc', 
+                       '_$s15SiriMailUIModel01_aB7MessageV5StateO11isCompletedSbyF', 
                        '_$s15SiriMailUIModel01_aB7MessageV5StateO4sentyA2EmFWC', 
                        '_$s15SiriMailUIModel01_aB7MessageV5StateO5draftyA2EmFWC', 
                        '_$s15SiriMailUIModel01_aB7MessageV5StateO6failedyA2EmFWC', 

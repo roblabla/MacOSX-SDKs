@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/_AppIntents_AppKit.framework/Versions/A/_AppIntents_AppKit'
-current-version: 210.13
+current-version: 226.3
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -72,6 +72,8 @@ exports:
                        '_$sSo6NSViewC012_AppIntents_B3KitE19removeDonatedIntentyy0bC00G18DonationIdentifierVYaKFTu', 
                        '_$sSo6NSViewC012_AppIntents_B3KitE21donateSuggestedIntenty0bC00G18DonationIdentifierVAE0bG0_pYaKF', 
                        '_$sSo6NSViewC012_AppIntents_B3KitE21donateSuggestedIntenty0bC00G18DonationIdentifierVAE0bG0_pYaKFTu', 
+                       '_$sSo6NSViewC012_AppIntents_B3KitE6bridge0bC00B27ViewBridgeAnnotationManager_pSgvg', 
+                       '_$sSo6NSViewC012_AppIntents_B3KitE6bridge0bC00B27ViewBridgeAnnotationManager_pSgvpMV', 
                        '_$sSo6NSViewC012_AppIntents_B3KitE8annotate4withyAC0B20EntityViewAnnotationC_tF', 
                        '_$sSo6NSViewC012_AppIntents_B3KitE8geometry0bC012ViewLocationVvg', 
                        '_$sSo6NSViewC012_AppIntents_B3KitE8geometry0bC012ViewLocationVvpMV', 

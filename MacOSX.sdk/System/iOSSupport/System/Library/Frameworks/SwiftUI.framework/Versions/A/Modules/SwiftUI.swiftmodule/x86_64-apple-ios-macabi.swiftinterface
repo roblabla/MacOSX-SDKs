@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
-// swift-module-flags: -target x86_64-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-bare-slash-regex -user-module-version 6.1.19.2 -module-name SwiftUI -package-name SwiftUI
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
+// swift-module-flags: -target x86_64-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-bare-slash-regex -user-module-version 6.2.16.1.201 -module-name SwiftUI -package-name SwiftUI
 import Combine
 import CoreData
 import CoreFoundation
@@ -912,25 +912,6 @@ public struct ButtonToggleStyle : SwiftUI.ToggleStyle {
 @available(*, unavailable)
 extension SwiftUI.ButtonToggleStyle : Swift.Sendable {
 }
-#if compiler(>=5.3) && $RetroactiveAttribute
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension SwiftUICore._Velocity : @retroactive SwiftUICore.Animatable where Value : SwiftUICore.Animatable {
-  public typealias AnimatableData = Value.AnimatableData
-  public var animatableData: SwiftUICore._Velocity<Value>.AnimatableData {
-    @inlinable get { return valuePerSecond.animatableData }
-    @inlinable set { valuePerSecond.animatableData = newValue }
-  }
-}
-#else
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension SwiftUICore._Velocity : SwiftUICore.Animatable where Value : SwiftUICore.Animatable {
-  public typealias AnimatableData = Value.AnimatableData
-  public var animatableData: SwiftUICore._Velocity<Value>.AnimatableData {
-    @inlinable get { return valuePerSecond.animatableData }
-    @inlinable set { valuePerSecond.animatableData = newValue }
-  }
-}
-#endif
 @available(iOS 16.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -1586,11 +1567,6 @@ public struct WindowGroup<Content> : SwiftUI.Scene where Content : SwiftUICore.V
 @available(*, unavailable)
 extension SwiftUI.WindowGroup : Swift.Sendable {
 }
-@available(iOS 18.1, macOS 15.1, tvOS 18.1, watchOS 11.1, visionOS 2.1, *)
-extension SwiftUICore.View {
-  nonisolated public func automationElement() -> some SwiftUICore.View
-  
-}
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @available(visionOS, unavailable)
 extension SwiftUICore.View {
@@ -2018,7 +1994,7 @@ extension SwiftUICore.View {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension SwiftUICore.View {
-  nonisolated public func pointerVisibility(_ visibility: SwiftUI.Visibility) -> some SwiftUICore.View
+  nonisolated public func pointerVisibility(_ visibility: SwiftUICore.Visibility) -> some SwiftUICore.View
   
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
@@ -3254,7 +3230,7 @@ extension SwiftUICore.View {
 @available(watchOS, unavailable)
 public struct TableColumnCustomization<RowValue> : Swift.Equatable, Swift.Sendable, Swift.Codable where RowValue : Swift.Identifiable {
   public init()
-  public subscript(visibility id: Swift.String) -> SwiftUI.Visibility {
+  public subscript(visibility id: Swift.String) -> SwiftUICore.Visibility {
     get
     set
   }
@@ -4184,93 +4160,6 @@ extension SwiftUI.TabCustomizationBehavior : Swift.Sendable {
   associatedtype Body : SwiftUI.ControlWidgetConfiguration
   @SwiftUI.ControlWidgetConfigurationBuilder @_Concurrency.MainActor @preconcurrency var body: Self.Body { get }
 }
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension SwiftUICore.Group {
-  public init<Base, Result>(subviews view: Base, @SwiftUICore.ViewBuilder transform: @escaping (SwiftUI.SubviewsCollection) -> Result) where Content == SwiftUI.GroupElementsOfContent<Base, Result>, Base : SwiftUICore.View, Result : SwiftUICore.View
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public struct GroupElementsOfContent<Subviews, Content> : SwiftUICore.View where Subviews : SwiftUICore.View, Content : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
-    get
-  }
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Body = @_opaqueReturnTypeOf("$s7SwiftUI22GroupElementsOfContentV4bodyQrvp", 0) __<Subviews, Content>
-}
-@available(*, unavailable)
-extension SwiftUI.GroupElementsOfContent : Swift.Sendable {
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public struct SubviewsCollection : Swift.RandomAccessCollection {
-  public func index(before i: Swift.Int) -> Swift.Int
-  public func index(after i: Swift.Int) -> Swift.Int
-  public subscript(index: Swift.Int) -> SwiftUI.Subview {
-    get
-  }
-  public subscript(bounds: Swift.Range<Swift.Int>) -> SwiftUI.SubviewsCollectionSlice {
-    get
-  }
-  public var startIndex: Swift.Int {
-    get
-  }
-  public var endIndex: Swift.Int {
-    get
-  }
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Element = SwiftUI.Subview
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Index = Swift.Int
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Indices = Swift.Range<Swift.Int>
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Iterator = Swift.IndexingIterator<SwiftUI.SubviewsCollection>
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias SubSequence = SwiftUI.SubviewsCollectionSlice
-}
-@available(*, unavailable)
-extension SwiftUI.SubviewsCollection : Swift.Sendable {
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension SwiftUI.SubviewsCollection : SwiftUICore.View {
-  nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUI.SubviewsCollection>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Body = Swift.Never
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public struct SubviewsCollectionSlice : Swift.RandomAccessCollection {
-  public subscript(index: Swift.Int) -> SwiftUI.Subview {
-    get
-  }
-  public subscript(bounds: Swift.Range<Swift.Int>) -> SwiftUI.SubviewsCollectionSlice {
-    get
-  }
-  public var startIndex: Swift.Int {
-    get
-  }
-  public var endIndex: Swift.Int {
-    get
-  }
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Element = SwiftUI.Subview
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Index = Swift.Int
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Indices = Swift.Range<Swift.Int>
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Iterator = Swift.IndexingIterator<SwiftUI.SubviewsCollectionSlice>
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias SubSequence = SwiftUI.SubviewsCollectionSlice
-}
-@available(*, unavailable)
-extension SwiftUI.SubviewsCollectionSlice : Swift.Sendable {
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension SwiftUI.SubviewsCollectionSlice : SwiftUICore.View {
-  nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUI.SubviewsCollectionSlice>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Body = Swift.Never
-}
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension SwiftUICore.View {
   @inlinable nonisolated public func layoutDirectionBehavior(_ behavior: SwiftUICore.LayoutDirectionBehavior) -> some SwiftUICore.View {
@@ -4765,7 +4654,7 @@ extension SwiftUICore.View {
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension SwiftUI.ImageRenderer {
+extension SwiftUICore.ImageRenderer {
   @_Concurrency.MainActor final public var uiImage: UIKit.UIImage? {
     get
   }
@@ -4914,22 +4803,6 @@ extension SwiftUICore.View {
   @_disfavoredOverload nonisolated public func searchable<S>(text: SwiftUICore.Binding<Swift.String>, isPresented: SwiftUICore.Binding<Swift.Bool>, placement: SwiftUI.SearchFieldPlacement = .automatic, prompt: S) -> some SwiftUICore.View where S : Swift.StringProtocol
   
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-@frozen public enum Visibility : Swift.Hashable, Swift.CaseIterable {
-  case automatic
-  case visible
-  case hidden
-  public static func == (a: SwiftUI.Visibility, b: SwiftUI.Visibility) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
-  public typealias AllCases = [SwiftUI.Visibility]
-  nonisolated public static var allCases: [SwiftUI.Visibility] {
-    get
-  }
-  public var hashValue: Swift.Int {
-    get
-  }
-}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension SwiftUICore.ForEach {
   public init<C, R>(_ data: SwiftUICore.Binding<C>, editActions: SwiftUI.EditActions<C>, @SwiftUICore.ViewBuilder content: @escaping (SwiftUICore.Binding<C.Element>) -> R) where Data == SwiftUI.IndexedIdentifierCollection<C, ID>, ID == C.Element.ID, Content == SwiftUI.EditableCollectionContent<R, C>, C : Swift.MutableCollection, C : Swift.RandomAccessCollection, R : SwiftUICore.View, C.Element : Swift.Identifiable, C.Index : Swift.Hashable
@@ -5072,46 +4945,6 @@ extension SwiftUICore.View {
   nonisolated public func onGeometryChange<T>(for type: T.Type, of transform: @escaping (SwiftUICore.GeometryProxy) -> T, action: @escaping (_ oldValue: T, _ newValue: T) -> Swift.Void) -> some SwiftUICore.View where T : Swift.Equatable
   
 }
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@usableFromInline
-internal struct SafeAreaPaddingModifier : SwiftUICore.ViewModifier {
-  @usableFromInline
-  internal init(edges: SwiftUICore.Edge.Set, insets: SwiftUICore.EdgeInsets?)
-  @usableFromInline
-  @_Concurrency.MainActor @preconcurrency internal func body(content: SwiftUI.SafeAreaPaddingModifier.Content) -> some SwiftUICore.View
-  
-  @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
-  @usableFromInline
-  internal typealias Body = @_opaqueReturnTypeOf("$s7SwiftUI23SafeAreaPaddingModifierV4body7contentQrAA05_ViewF8_ContentVyACG_tF", 0) __
-}
-@available(*, unavailable)
-extension SwiftUI.SafeAreaPaddingModifier : Swift.Sendable {
-}
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-extension SwiftUICore.View {
-  @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-  @_alwaysEmitIntoClient nonisolated public func safeAreaPadding(_ insets: SwiftUICore.EdgeInsets) -> some SwiftUICore.View {
-        modifier(
-            SafeAreaPaddingModifier(edges: .all, insets: insets)
-        )
-    }
-  
-  @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-  @_alwaysEmitIntoClient nonisolated public func safeAreaPadding(_ edges: SwiftUICore.Edge.Set = .all, _ length: CoreFoundation.CGFloat? = nil) -> some SwiftUICore.View {
-        modifier(
-            SafeAreaPaddingModifier(
-                edges: edges,
-                insets: length.map { EdgeInsets(_all: $0) }
-            )
-        )
-    }
-  
-  @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-  @_alwaysEmitIntoClient nonisolated public func safeAreaPadding(_ length: CoreFoundation.CGFloat) -> some SwiftUICore.View {
-        safeAreaPadding(.all, length)
-    }
-  
-}
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -5143,35 +4976,6 @@ extension SwiftUICore.View {
   @available(watchOS, unavailable)
   nonisolated public func searchFocused<V>(_ binding: SwiftUI.FocusState<V>.Binding, equals value: V) -> some SwiftUICore.View where V : Swift.Hashable
   
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension SwiftUICore.ForEach {
-  public init<V>(sections view: V, @SwiftUICore.ViewBuilder content: @escaping (SwiftUI.SectionConfiguration) -> Content) where Data == SwiftUI.ForEachSectionCollection<Content>, ID == SwiftUI.SectionConfiguration.ID, Content : SwiftUICore.View, V : SwiftUICore.View
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public struct ForEachSectionCollection<Content> : Swift.RandomAccessCollection where Content : SwiftUICore.View {
-  public var startIndex: Swift.Int {
-    get
-  }
-  public var endIndex: Swift.Int {
-    get
-  }
-  public subscript(index: Swift.Int) -> SwiftUI.SectionConfiguration {
-    get
-  }
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Element = SwiftUI.SectionConfiguration
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Index = Swift.Int
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Indices = Swift.Range<Swift.Int>
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Iterator = Swift.IndexingIterator<SwiftUI.ForEachSectionCollection<Content>>
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias SubSequence = Swift.Slice<SwiftUI.ForEachSectionCollection<Content>>
-}
-@available(*, unavailable)
-extension SwiftUI.ForEachSectionCollection : Swift.Sendable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @preconcurrency @_Concurrency.MainActor public protocol NavigationSplitViewStyle {
@@ -5536,7 +5340,7 @@ extension SwiftUI.MenuBarExtraStyle where Self == SwiftUI.PullDownMenuBarExtraSt
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension SwiftUICore.LayoutSubview {
-  public var containerValues: SwiftUI.ContainerValues {
+  public var containerValues: SwiftUICore.ContainerValues {
     get
   }
 }
@@ -6032,7 +5836,7 @@ extension SwiftUI.List where SelectionValue == Swift.Never {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUICore.View {
-  nonisolated public func listRowSeparator(_ visibility: SwiftUI.Visibility, edges: SwiftUICore.VerticalEdge.Set = .all) -> some SwiftUICore.View
+  nonisolated public func listRowSeparator(_ visibility: SwiftUICore.Visibility, edges: SwiftUICore.VerticalEdge.Set = .all) -> some SwiftUICore.View
   
   nonisolated public func listRowSeparatorTint(_ color: SwiftUICore.Color?, edges: SwiftUICore.VerticalEdge.Set = .all) -> some SwiftUICore.View
   
@@ -6041,30 +5845,10 @@ extension SwiftUICore.View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUICore.View {
-  nonisolated public func listSectionSeparator(_ visibility: SwiftUI.Visibility, edges: SwiftUICore.VerticalEdge.Set = .all) -> some SwiftUICore.View
+  nonisolated public func listSectionSeparator(_ visibility: SwiftUICore.Visibility, edges: SwiftUICore.VerticalEdge.Set = .all) -> some SwiftUICore.View
   
   nonisolated public func listSectionSeparatorTint(_ color: SwiftUICore.Color?, edges: SwiftUICore.VerticalEdge.Set = .all) -> some SwiftUICore.View
   
-}
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension SwiftUICore.View {
-  @inlinable nonisolated public func onPreferenceChange<K>(_ key: K.Type = K.self, perform action: @escaping (K.Value) -> Swift.Void) -> some SwiftUICore.View where K : SwiftUICore.PreferenceKey, K.Value : Swift.Equatable {
-        return modifier(_PreferenceActionModifier<K>(action: action))
-    }
-  
-}
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-@frozen public struct _PreferenceActionModifier<Key> : SwiftUICore.ViewModifier where Key : SwiftUICore.PreferenceKey, Key.Value : Swift.Equatable {
-  public var action: (Key.Value) -> Swift.Void
-  @inlinable public init(action: @escaping (Key.Value) -> Swift.Void) {
-        self.action = action
-    }
-  nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUI._PreferenceActionModifier<Key>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-  public typealias Body = Swift.Never
-}
-@available(*, unavailable)
-extension SwiftUI._PreferenceActionModifier : Swift.Sendable {
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ToolbarItem<ID, Content> : SwiftUI.ToolbarContent where Content : SwiftUICore.View {
@@ -6568,27 +6352,6 @@ extension SwiftUICore.View {
   
   @available(*, deprecated, renamed: "fullScreenCover(isPresented:onDismiss:content:)")
   @_Concurrency.MainActor @preconcurrency public func _cover<Content>(isPresented: SwiftUICore.Binding<Swift.Bool>, onDismiss: (() -> Swift.Void)? = nil, @SwiftUICore.ViewBuilder content: @escaping () -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
-  
-}
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension SwiftUICore.View {
-  @inlinable nonisolated public func aspectRatio(_ aspectRatio: CoreFoundation.CGFloat? = nil, contentMode: SwiftUICore.ContentMode) -> some SwiftUICore.View {
-        return modifier(_AspectRatioLayout(
-            aspectRatio: aspectRatio, contentMode: contentMode))
-    }
-  
-  @inlinable nonisolated public func aspectRatio(_ aspectRatio: CoreFoundation.CGSize, contentMode: SwiftUICore.ContentMode) -> some SwiftUICore.View {
-        return self.aspectRatio(
-            aspectRatio.width / aspectRatio.height, contentMode: contentMode)
-    }
-  
-  @inlinable nonisolated public func scaledToFit() -> some SwiftUICore.View {
-        return aspectRatio(contentMode: .fit)
-    }
-  
-  @inlinable nonisolated public func scaledToFill() -> some SwiftUICore.View {
-        return aspectRatio(contentMode: .fill)
-    }
   
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -7184,7 +6947,7 @@ public struct TableColumnCustomizationBehavior : Swift.SetAlgebra, Swift.Sendabl
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUI.TableColumnContent {
-  @_Concurrency.MainActor @preconcurrency public func defaultVisibility(_ visibility: SwiftUI.Visibility) -> some SwiftUI.TableColumnContent<Self.TableRowValue, Self.TableColumnSortComparator>
+  @_Concurrency.MainActor @preconcurrency public func defaultVisibility(_ visibility: SwiftUICore.Visibility) -> some SwiftUI.TableColumnContent<Self.TableRowValue, Self.TableColumnSortComparator>
   
   @_Concurrency.MainActor @preconcurrency public func customizationID(_ id: Swift.String) -> some SwiftUI.TableColumnContent<Self.TableRowValue, Self.TableColumnSortComparator>
   
@@ -8701,12 +8464,12 @@ extension SwiftUI.AccessibilityTechnologies {
 }
 extension SwiftUICore.View {
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-  nonisolated public func persistentSystemOverlays(_ visibility: SwiftUI.Visibility) -> some SwiftUICore.View
+  nonisolated public func persistentSystemOverlays(_ visibility: SwiftUICore.Visibility) -> some SwiftUICore.View
   
 }
 extension SwiftUI.Scene {
   @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  nonisolated public func persistentSystemOverlays(_ preferredVisibility: SwiftUI.Visibility) -> some SwiftUI.Scene
+  nonisolated public func persistentSystemOverlays(_ preferredVisibility: SwiftUICore.Visibility) -> some SwiftUI.Scene
   
 }
 @available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "MagnifyGesture")
@@ -8859,18 +8622,6 @@ extension SwiftUI.NewDocumentButton where Label == SwiftUICore.Text {
 @available(*, unavailable)
 extension SwiftUI.DefaultDocumentGroupLaunchActions : Swift.Sendable {
 }
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public struct ContainerValues {
-  public subscript<Key>(key: Key.Type) -> Key.Value where Key : SwiftUI.ContainerValueKey {
-    get
-    set
-  }
-  public func tag<V>(for type: V.Type) -> V? where V : Swift.Hashable
-  public func hasTag<V>(_ tag: V) -> Swift.Bool where V : Swift.Hashable
-}
-@available(*, unavailable)
-extension SwiftUI.ContainerValues : Swift.Sendable {
-}
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension SwiftUICore.VisualEffect {
   public func saturation(_ amount: Swift.Double) -> some SwiftUICore.VisualEffect
@@ -8917,10 +8668,10 @@ extension SwiftUICore.View {
   @available(macOS, introduced: 13.0, deprecated: 100000.0, renamed: "toolbarBackgroundVisibility(_:for:)")
   @available(tvOS, introduced: 16.0, deprecated: 100000.0, renamed: "toolbarBackgroundVisibility(_:for:)")
   @available(watchOS, introduced: 9.0, deprecated: 100000.0, renamed: "toolbarBackgroundVisibility(_:for:)")
-  nonisolated public func toolbarBackground(_ visibility: SwiftUI.Visibility, for bars: SwiftUI.ToolbarPlacement...) -> some SwiftUICore.View
+  nonisolated public func toolbarBackground(_ visibility: SwiftUICore.Visibility, for bars: SwiftUI.ToolbarPlacement...) -> some SwiftUICore.View
   
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  nonisolated public func toolbarBackgroundVisibility(_ visibility: SwiftUI.Visibility, for bars: SwiftUI.ToolbarPlacement...) -> some SwiftUICore.View
+  nonisolated public func toolbarBackgroundVisibility(_ visibility: SwiftUICore.Visibility, for bars: SwiftUI.ToolbarPlacement...) -> some SwiftUICore.View
   
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   nonisolated public func toolbarColorScheme(_ colorScheme: SwiftUICore.ColorScheme?, for bars: SwiftUI.ToolbarPlacement...) -> some SwiftUICore.View
@@ -8929,10 +8680,10 @@ extension SwiftUICore.View {
   @available(macOS, introduced: 13.0, deprecated: 100000.0, renamed: "toolbarVisibility(_:for:)")
   @available(tvOS, introduced: 16.0, deprecated: 100000.0, renamed: "toolbarVisibility(_:for:)")
   @available(watchOS, introduced: 9.0, deprecated: 100000.0, renamed: "toolbarVisibility(_:for:)")
-  nonisolated public func toolbar(_ visibility: SwiftUI.Visibility, for bars: SwiftUI.ToolbarPlacement...) -> some SwiftUICore.View
+  nonisolated public func toolbar(_ visibility: SwiftUICore.Visibility, for bars: SwiftUI.ToolbarPlacement...) -> some SwiftUICore.View
   
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  nonisolated public func toolbarVisibility(_ visibility: SwiftUI.Visibility, for bars: SwiftUI.ToolbarPlacement...) -> some SwiftUICore.View
+  nonisolated public func toolbarVisibility(_ visibility: SwiftUICore.Visibility, for bars: SwiftUI.ToolbarPlacement...) -> some SwiftUICore.View
   
   @available(watchOS 9.0, *)
   @available(iOS, unavailable)
@@ -9009,7 +8760,7 @@ extension SwiftUICore.View {
   @available(macOS, unavailable)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
-  nonisolated public func ornament<Content>(visibility: SwiftUI.Visibility = .automatic, attachmentAnchor: SwiftUI.OrnamentAttachmentAnchor, contentAlignment: SwiftUICore.Alignment = .center, @SwiftUICore.ViewBuilder ornament: () -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
+  nonisolated public func ornament<Content>(visibility: SwiftUICore.Visibility = .automatic, attachmentAnchor: SwiftUI.OrnamentAttachmentAnchor, contentAlignment: SwiftUICore.Alignment = .center, @SwiftUICore.ViewBuilder ornament: () -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
   
 }
 #if compiler(>=5.3) && $PrimaryAssociatedTypes2
@@ -9207,26 +8958,6 @@ extension SwiftUICore.Group : SwiftUI.TabContent where Content : SwiftUI.TabCont
 }
 @available(*, unavailable)
 extension SwiftUI._TupleTabContent : Swift.Sendable {
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public struct ScrollContentOffsetAdjustmentBehavior {
-  public static var automatic: SwiftUI.ScrollContentOffsetAdjustmentBehavior {
-    get
-  }
-  public static var disabled: SwiftUI.ScrollContentOffsetAdjustmentBehavior {
-    get
-  }
-}
-@available(*, unavailable)
-extension SwiftUI.ScrollContentOffsetAdjustmentBehavior : Swift.Sendable {
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension SwiftUICore.Transaction {
-  @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  public var scrollContentOffsetAdjustmentBehavior: SwiftUI.ScrollContentOffsetAdjustmentBehavior {
-    get
-    set
-  }
 }
 @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 @available(macOS, unavailable)
@@ -9651,29 +9382,6 @@ internal struct KeyboardShortcutPickerOptionTraitKey : SwiftUICore._ViewTraitKey
 extension SwiftUI.KeyboardShortcutPickerOptionTraitKey : Swift.Sendable {
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension SwiftUICore.View {
-  @inlinable nonisolated public func anchorPreference<A, K>(key _: K.Type = K.self, value: SwiftUICore.Anchor<A>.Source, transform: @escaping (SwiftUICore.Anchor<A>) -> K.Value) -> some SwiftUICore.View where K : SwiftUICore.PreferenceKey {
-        return modifier(_AnchorWritingModifier<A, K>(
-            anchor: value, transform: transform))
-    }
-  
-}
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-@frozen public struct _AnchorWritingModifier<AnchorValue, Key> : SwiftUICore.ViewModifier where Key : SwiftUICore.PreferenceKey {
-  public var anchor: SwiftUICore.Anchor<AnchorValue>.Source
-  public var transform: (SwiftUICore.Anchor<AnchorValue>) -> Key.Value
-  @inlinable public init(anchor: SwiftUICore.Anchor<AnchorValue>.Source, transform: @escaping (SwiftUICore.Anchor<AnchorValue>) -> Key.Value) {
-        self.anchor = anchor
-        self.transform = transform
-    }
-  nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUI._AnchorWritingModifier<AnchorValue, Key>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-  public typealias Body = Swift.Never
-}
-@available(*, unavailable)
-extension SwiftUI._AnchorWritingModifier : Swift.Sendable {
-}
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @usableFromInline
 internal struct OnMoveTraitKey : SwiftUICore._ViewTraitKey {
   @inlinable internal static var defaultValue: Swift.Optional<(Foundation.IndexSet, Swift.Int) -> Swift.Void> {
@@ -9735,7 +9443,7 @@ extension SwiftUICore.View {
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
 extension SwiftUICore.View {
-  nonisolated public func scrollContentBackground(_ visibility: SwiftUI.Visibility) -> some SwiftUICore.View
+  nonisolated public func scrollContentBackground(_ visibility: SwiftUICore.Visibility) -> some SwiftUICore.View
   
 }
 @available(iOS 14.0, macOS 11.0, watchOS 9.0, *)
@@ -10118,47 +9826,9 @@ public struct NavigationLink<Label, Destination> : SwiftUICore.View where Label 
   @_alwaysEmitIntoClient public init(@SwiftUICore.ViewBuilder destination: () -> Destination, @SwiftUICore.ViewBuilder label: () -> Label) {
         self.init(destination: destination(), label: label)
     }
-  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @_alwaysEmitIntoClient public init(isActive: SwiftUICore.Binding<Swift.Bool>, @SwiftUICore.ViewBuilder destination: () -> Destination, @SwiftUICore.ViewBuilder label: () -> Label) {
-        self.init(destination: destination(), isActive: isActive, label: label)
-    }
-  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @_alwaysEmitIntoClient public init<V>(tag: V, selection: SwiftUICore.Binding<V?>, @SwiftUICore.ViewBuilder destination: () -> Destination, @SwiftUICore.ViewBuilder label: () -> Label) where V : Swift.Hashable {
-        self.init(
-            destination: destination(),
-            tag: tag,
-            selection: selection,
-            label: label)
-    }
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
-  @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Pass a closure as the destination")
-  @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Pass a closure as the destination")
-  @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Pass a closure as the destination")
-  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Pass a closure as the destination")
-  @available(visionOS, introduced: 1.0, deprecated: 100000.0, message: "Pass a closure as the destination")
-  public init(destination: Destination, @SwiftUICore.ViewBuilder label: () -> Label)
-  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  public init(destination: Destination, isActive: SwiftUICore.Binding<Swift.Bool>, @SwiftUICore.ViewBuilder label: () -> Label)
-  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  public init<V>(destination: Destination, tag: V, selection: SwiftUICore.Binding<V?>, @SwiftUICore.ViewBuilder label: () -> Label) where V : Swift.Hashable
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = @_opaqueReturnTypeOf("$s7SwiftUI14NavigationLinkV4bodyQrvp", 0) __<Label, Destination>
 }
@@ -10173,105 +9843,6 @@ extension SwiftUI.NavigationLink where Label == SwiftUICore.Text {
   @_disfavoredOverload @_alwaysEmitIntoClient nonisolated public init<S>(_ title: S, @SwiftUICore.ViewBuilder destination: () -> Destination) where S : Swift.StringProtocol {
         self.init(title, destination: destination())
     }
-  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @_alwaysEmitIntoClient nonisolated public init(_ titleKey: SwiftUICore.LocalizedStringKey, isActive: SwiftUICore.Binding<Swift.Bool>, @SwiftUICore.ViewBuilder destination: () -> Destination) {
-        self.init(titleKey, destination: destination(), isActive: isActive)
-    }
-  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @_disfavoredOverload @_alwaysEmitIntoClient nonisolated public init<S>(_ title: S, isActive: SwiftUICore.Binding<Swift.Bool>, @SwiftUICore.ViewBuilder destination: () -> Destination) where S : Swift.StringProtocol {
-        self.init(title, destination: destination(), isActive: isActive)
-    }
-  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @_alwaysEmitIntoClient nonisolated public init<V>(_ titleKey: SwiftUICore.LocalizedStringKey, tag: V, selection: SwiftUICore.Binding<V?>, @SwiftUICore.ViewBuilder destination: () -> Destination) where V : Swift.Hashable {
-        self.init(
-            titleKey,
-            destination: destination(),
-            tag: tag, selection: selection)
-    }
-  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @_disfavoredOverload @_alwaysEmitIntoClient nonisolated public init<S, V>(_ title: S, tag: V, selection: SwiftUICore.Binding<V?>, @SwiftUICore.ViewBuilder destination: () -> Destination) where S : Swift.StringProtocol, V : Swift.Hashable {
-        self.init(
-            title,
-            destination: destination(),
-            tag: tag, selection: selection)
-    }
-  @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Pass a closure as the destination")
-  @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Pass a closure as the destination")
-  @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Pass a closure as the destination")
-  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Pass a closure as the destination")
-  @available(visionOS, introduced: 1.0, deprecated: 100000.0, message: "Pass a closure as the destination")
-  nonisolated public init(_ titleKey: SwiftUICore.LocalizedStringKey, destination: Destination)
-  @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Pass a closure as the destination")
-  @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Pass a closure as the destination")
-  @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Pass a closure as the destination")
-  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Pass a closure as the destination")
-  @available(visionOS, introduced: 1.0, deprecated: 100000.0, message: "Pass a closure as the destination")
-  @_disfavoredOverload nonisolated public init<S>(_ title: S, destination: Destination) where S : Swift.StringProtocol
-  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  nonisolated public init(_ titleKey: SwiftUICore.LocalizedStringKey, destination: Destination, isActive: SwiftUICore.Binding<Swift.Bool>)
-  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @_disfavoredOverload nonisolated public init<S>(_ title: S, destination: Destination, isActive: SwiftUICore.Binding<Swift.Bool>) where S : Swift.StringProtocol
-  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  nonisolated public init<V>(_ titleKey: SwiftUICore.LocalizedStringKey, destination: Destination, tag: V, selection: SwiftUICore.Binding<V?>) where V : Swift.Hashable
-  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
-  @_disfavoredOverload nonisolated public init<S, V>(_ title: S, destination: Destination, tag: V, selection: SwiftUICore.Binding<V?>) where S : Swift.StringProtocol, V : Swift.Hashable
-}
-@available(watchOS 6.0, *)
-@available(iOS, unavailable)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(visionOS, unavailable)
-extension SwiftUI.NavigationLink where Destination == SwiftUI._WKStoryboardContent {
-  @available(iOS, unavailable)
-  @available(macOS, unavailable)
-  @available(tvOS, unavailable)
-  @available(visionOS, unavailable)
-  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "use NavigationLink(value:label:)")
-  nonisolated public init(destinationName: Swift.String, @SwiftUICore.ViewBuilder label: () -> Label)
-  @available(iOS, unavailable)
-  @available(macOS, unavailable)
-  @available(tvOS, unavailable)
-  @available(visionOS, unavailable)
-  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "use NavigationLink(value:label:)")
-  nonisolated public init(destinationName: Swift.String, isActive: SwiftUICore.Binding<Swift.Bool>, @SwiftUICore.ViewBuilder label: () -> Label)
-  @available(iOS, unavailable)
-  @available(macOS, unavailable)
-  @available(tvOS, unavailable)
-  @available(visionOS, unavailable)
-  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "use NavigationLink(value:label:)")
-  nonisolated public init<V>(destinationName: Swift.String, tag: V, selection: SwiftUICore.Binding<V?>, @SwiftUICore.ViewBuilder label: () -> Label) where V : Swift.Hashable
 }
 @available(iOS 13.0, *)
 @available(macOS, unavailable)
@@ -10954,23 +10525,87 @@ extension SwiftUI.PopoverAttachmentAnchor : Swift.Sendable {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUICore.View {
+  @_alwaysEmitIntoClient nonisolated public func popover<Item, Content>(item: SwiftUICore.Binding<Item?>, attachmentAnchor: SwiftUI.PopoverAttachmentAnchor = .rect(.bounds), arrowEdge: SwiftUICore.Edge? = nil, @SwiftUICore.ViewBuilder content: @escaping (Item) -> Content) -> some SwiftUICore.View where Item : Swift.Identifiable, Content : SwiftUICore.View {
+        if #available(iOS 18.1, macOS 15.1, visionOS 2.1, *) {
+            return popoverCore(
+                item: item,
+                attachmentAnchor: attachmentAnchor,
+                arrowEdges: arrowEdge.map { .init($0) },
+                content: content)
+        }
+
+        if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
+             
+            return popover(
+                item: item,
+                attachmentAnchor: attachmentAnchor,
+                content: content)
+        } else {
+             
+             
+             
+             
+             
+            return popover(
+                item: item,
+                attachmentAnchor: attachmentAnchor,
+                arrowEdge: arrowEdge ?? .top,
+                content: content)
+        }
+    }
+  
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
-  nonisolated public func popover<Item, Content>(item: SwiftUICore.Binding<Item?>, attachmentAnchor: SwiftUI.PopoverAttachmentAnchor = .rect(.bounds), arrowEdge: SwiftUICore.Edge = .top, @SwiftUICore.ViewBuilder content: @escaping (Item) -> Content) -> some SwiftUICore.View where Item : Swift.Identifiable, Content : SwiftUICore.View
+  @usableFromInline
+  nonisolated internal func popover<Item, Content>(item: SwiftUICore.Binding<Item?>, attachmentAnchor: SwiftUI.PopoverAttachmentAnchor = .rect(.bounds), arrowEdge: SwiftUICore.Edge, @SwiftUICore.ViewBuilder content: @escaping (Item) -> Content) -> some SwiftUICore.View where Item : Swift.Identifiable, Content : SwiftUICore.View
   
   @available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
-  nonisolated public func popover<Item, Content>(item: SwiftUICore.Binding<Item?>, attachmentAnchor: SwiftUI.PopoverAttachmentAnchor = .rect(.bounds), @SwiftUICore.ViewBuilder content: @escaping (Item) -> Content) -> some SwiftUICore.View where Item : Swift.Identifiable, Content : SwiftUICore.View
+  @usableFromInline
+  nonisolated internal func popover<Item, Content>(item: SwiftUICore.Binding<Item?>, attachmentAnchor: SwiftUI.PopoverAttachmentAnchor = .rect(.bounds), @SwiftUICore.ViewBuilder content: @escaping (Item) -> Content) -> some SwiftUICore.View where Item : Swift.Identifiable, Content : SwiftUICore.View
   
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
-  nonisolated public func popover<Content>(isPresented: SwiftUICore.Binding<Swift.Bool>, attachmentAnchor: SwiftUI.PopoverAttachmentAnchor = .rect(.bounds), arrowEdge: SwiftUICore.Edge = .top, @SwiftUICore.ViewBuilder content: @escaping () -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
+  @_alwaysEmitIntoClient nonisolated public func popover<Content>(isPresented: SwiftUICore.Binding<Swift.Bool>, attachmentAnchor: SwiftUI.PopoverAttachmentAnchor = .rect(.bounds), arrowEdge: SwiftUICore.Edge? = nil, @SwiftUICore.ViewBuilder content: @escaping () -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View {
+        if #available(iOS 18.1, macOS 15.1, visionOS 2.1, *) {
+            return popoverCore(
+                isPresented: isPresented,
+                attachmentAnchor: attachmentAnchor,
+                arrowEdges: arrowEdge.map { .init($0) },
+                isDetachable: false,
+                content: content)
+        }
+        if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
+             
+            return popover(
+                isPresented: isPresented,
+                attachmentAnchor: attachmentAnchor,
+                content: content)
+        } else {
+             
+             
+             
+             
+             
+            return popover(
+                isPresented: isPresented,
+                attachmentAnchor: attachmentAnchor,
+                arrowEdge: arrowEdge ?? .top,
+                content: content)
+        }
+    }
+  
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @usableFromInline
+  nonisolated internal func popover<Content>(isPresented: SwiftUICore.Binding<Swift.Bool>, attachmentAnchor: SwiftUI.PopoverAttachmentAnchor = .rect(.bounds), arrowEdge: SwiftUICore.Edge, @SwiftUICore.ViewBuilder content: @escaping () -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
   
   @available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
-  nonisolated public func popover<Content>(isPresented: SwiftUICore.Binding<Swift.Bool>, attachmentAnchor: SwiftUI.PopoverAttachmentAnchor = .rect(.bounds), @SwiftUICore.ViewBuilder content: @escaping () -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
+  @usableFromInline
+  nonisolated internal func popover<Content>(isPresented: SwiftUICore.Binding<Swift.Bool>, attachmentAnchor: SwiftUI.PopoverAttachmentAnchor = .rect(.bounds), @SwiftUICore.ViewBuilder content: @escaping () -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
   
 }
 extension SwiftUICore.View {
@@ -11118,6 +10753,15 @@ public struct ScrollDismissesKeyboardMode : Swift.Sendable {
     get
   }
 }
+@available(iOS 18.2, macOS 15.2, tvOS 18.2, watchOS 11.2, *)
+@available(visionOS, unavailable)
+extension SwiftUI.ScrollDismissesKeyboardMode : Swift.Equatable, Swift.Hashable {
+  public static func == (a: SwiftUI.ScrollDismissesKeyboardMode, b: SwiftUI.ScrollDismissesKeyboardMode) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
 extension SwiftUICore.EnvironmentValues {
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   @available(visionOS, unavailable)
@@ -11241,6 +10885,9 @@ public struct AnyTabContent<SelectionValue> : SwiftUI.TabContent where Selection
   public typealias Body = SwiftUI.AnyTabContent<SelectionValue>
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias _IdentifiedView = SwiftUICore.AnyView
+}
+@available(*, unavailable)
+extension SwiftUI.AnyTabContent : Swift.Sendable {
 }
 @available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
 @available(tvOS, unavailable)
@@ -11481,35 +11128,6 @@ extension SwiftUI.ImmersiveSpaceViewContent {
   public var body: Swift.Never {
     get
   }
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension SwiftUICore.ForEach {
-  public init<V>(subviews view: V, @SwiftUICore.ViewBuilder content: @escaping (SwiftUI.Subview) -> Content) where Data == SwiftUI.ForEachSubviewCollection<Content>, ID == SwiftUI.Subview.ID, Content : SwiftUICore.View, V : SwiftUICore.View
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public struct ForEachSubviewCollection<Content> : Swift.RandomAccessCollection where Content : SwiftUICore.View {
-  public var startIndex: Swift.Int {
-    get
-  }
-  public var endIndex: Swift.Int {
-    get
-  }
-  public subscript(index: Swift.Int) -> SwiftUI.Subview {
-    get
-  }
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Element = SwiftUI.Subview
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Index = Swift.Int
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Indices = Swift.Range<Swift.Int>
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Iterator = Swift.IndexingIterator<SwiftUI.ForEachSubviewCollection<Content>>
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias SubSequence = Swift.Slice<SwiftUI.ForEachSubviewCollection<Content>>
-}
-@available(*, unavailable)
-extension SwiftUI.ForEachSubviewCollection : Swift.Sendable {
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public func __designTimeSelection<T>(_ instance: T, _ identifier: Swift.String) -> T
@@ -12153,7 +11771,7 @@ public struct ToolbarCustomizationOptions : Swift.OptionSet, Swift.Sendable {
 }
 extension SwiftUI.CustomizableToolbarContent {
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-  public func defaultCustomization(_ defaultVisibility: SwiftUI.Visibility = .automatic, options: SwiftUI.ToolbarCustomizationOptions = []) -> some SwiftUI.CustomizableToolbarContent
+  public func defaultCustomization(_ defaultVisibility: SwiftUICore.Visibility = .automatic, options: SwiftUI.ToolbarCustomizationOptions = []) -> some SwiftUI.CustomizableToolbarContent
   
   @available(iOS, introduced: 16.0, deprecated: 16.0, message: "Please provide either a visibility or customization options")
   @available(macOS, introduced: 13.0, deprecated: 13.0, message: "Please provide either a visibility or customization options")
@@ -12830,7 +12448,7 @@ extension SwiftUICore.View {
   nonisolated public func searchCompletion<T>(_ token: T) -> some SwiftUICore.View where T : Swift.Identifiable
   
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-  nonisolated public func searchSuggestions(_ visibility: SwiftUI.Visibility, for placements: SwiftUI.SearchSuggestionsPlacement.Set) -> some SwiftUICore.View
+  nonisolated public func searchSuggestions(_ visibility: SwiftUICore.Visibility, for placements: SwiftUI.SearchSuggestionsPlacement.Set) -> some SwiftUICore.View
   
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
@@ -13463,6 +13081,149 @@ extension SwiftUICore.EnvironmentValues {
   public var documentConfiguration: SwiftUI.DocumentConfiguration? {
     get
   }
+}
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+extension SwiftUI.NavigationLink {
+  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @_alwaysEmitIntoClient public init(isActive: SwiftUICore.Binding<Swift.Bool>, @SwiftUICore.ViewBuilder destination: () -> Destination, @SwiftUICore.ViewBuilder label: () -> Label) {
+        self.init(destination: destination(), isActive: isActive, label: label)
+    }
+  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @_alwaysEmitIntoClient public init<V>(tag: V, selection: SwiftUICore.Binding<V?>, @SwiftUICore.ViewBuilder destination: () -> Destination, @SwiftUICore.ViewBuilder label: () -> Label) where V : Swift.Hashable {
+        self.init(
+            destination: destination(),
+            tag: tag,
+            selection: selection,
+            label: label)
+    }
+  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  public init(destination: Destination, isActive: SwiftUICore.Binding<Swift.Bool>, @SwiftUICore.ViewBuilder label: () -> Label)
+  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  public init<V>(destination: Destination, tag: V, selection: SwiftUICore.Binding<V?>, @SwiftUICore.ViewBuilder label: () -> Label) where V : Swift.Hashable
+  @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Pass a closure as the destination")
+  @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Pass a closure as the destination")
+  @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Pass a closure as the destination")
+  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Pass a closure as the destination")
+  @available(visionOS, introduced: 1.0, deprecated: 100000.0, message: "Pass a closure as the destination")
+  public init(destination: Destination, @SwiftUICore.ViewBuilder label: () -> Label)
+}
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+extension SwiftUI.NavigationLink where Label == SwiftUICore.Text {
+  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @_alwaysEmitIntoClient nonisolated public init(_ titleKey: SwiftUICore.LocalizedStringKey, isActive: SwiftUICore.Binding<Swift.Bool>, @SwiftUICore.ViewBuilder destination: () -> Destination) {
+        self.init(titleKey, destination: destination(), isActive: isActive)
+    }
+  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @_disfavoredOverload @_alwaysEmitIntoClient nonisolated public init<S>(_ title: S, isActive: SwiftUICore.Binding<Swift.Bool>, @SwiftUICore.ViewBuilder destination: () -> Destination) where S : Swift.StringProtocol {
+        self.init(title, destination: destination(), isActive: isActive)
+    }
+  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @_alwaysEmitIntoClient nonisolated public init<V>(_ titleKey: SwiftUICore.LocalizedStringKey, tag: V, selection: SwiftUICore.Binding<V?>, @SwiftUICore.ViewBuilder destination: () -> Destination) where V : Swift.Hashable {
+        self.init(
+            titleKey,
+            destination: destination(),
+            tag: tag, selection: selection)
+    }
+  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @_disfavoredOverload @_alwaysEmitIntoClient nonisolated public init<S, V>(_ title: S, tag: V, selection: SwiftUICore.Binding<V?>, @SwiftUICore.ViewBuilder destination: () -> Destination) where S : Swift.StringProtocol, V : Swift.Hashable {
+        self.init(
+            title,
+            destination: destination(),
+            tag: tag, selection: selection)
+    }
+  @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Pass a closure as the destination")
+  @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Pass a closure as the destination")
+  @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Pass a closure as the destination")
+  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Pass a closure as the destination")
+  @available(visionOS, introduced: 1.0, deprecated: 100000.0, message: "Pass a closure as the destination")
+  nonisolated public init(_ titleKey: SwiftUICore.LocalizedStringKey, destination: Destination)
+  @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Pass a closure as the destination")
+  @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Pass a closure as the destination")
+  @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Pass a closure as the destination")
+  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Pass a closure as the destination")
+  @available(visionOS, introduced: 1.0, deprecated: 100000.0, message: "Pass a closure as the destination")
+  @_disfavoredOverload nonisolated public init<S>(_ title: S, destination: Destination) where S : Swift.StringProtocol
+  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  nonisolated public init(_ titleKey: SwiftUICore.LocalizedStringKey, destination: Destination, isActive: SwiftUICore.Binding<Swift.Bool>)
+  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @_disfavoredOverload nonisolated public init<S>(_ title: S, destination: Destination, isActive: SwiftUICore.Binding<Swift.Bool>) where S : Swift.StringProtocol
+  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  nonisolated public init<V>(_ titleKey: SwiftUICore.LocalizedStringKey, destination: Destination, tag: V, selection: SwiftUICore.Binding<V?>) where V : Swift.Hashable
+  @available(iOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(macOS, introduced: 10.15, deprecated: 13.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(tvOS, introduced: 13.0, deprecated: 16.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(watchOS, introduced: 6.0, deprecated: 9.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "use NavigationLink(value:label:), or navigationDestination(isPresented:destination:), inside a NavigationStack or NavigationSplitView")
+  @_disfavoredOverload nonisolated public init<S, V>(_ title: S, destination: Destination, tag: V, selection: SwiftUICore.Binding<V?>) where S : Swift.StringProtocol, V : Swift.Hashable
+}
+@available(watchOS 6.0, *)
+@available(iOS, unavailable)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension SwiftUI.NavigationLink where Destination == SwiftUI._WKStoryboardContent {
+  @available(iOS, unavailable)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(visionOS, unavailable)
+  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "use NavigationLink(value:label:)")
+  nonisolated public init(destinationName: Swift.String, @SwiftUICore.ViewBuilder label: () -> Label)
+  @available(iOS, unavailable)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(visionOS, unavailable)
+  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "use NavigationLink(value:label:)")
+  nonisolated public init(destinationName: Swift.String, isActive: SwiftUICore.Binding<Swift.Bool>, @SwiftUICore.ViewBuilder label: () -> Label)
+  @available(iOS, unavailable)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(visionOS, unavailable)
+  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "use NavigationLink(value:label:)")
+  nonisolated public init<V>(destinationName: Swift.String, tag: V, selection: SwiftUICore.Binding<V?>, @SwiftUICore.ViewBuilder label: () -> Label) where V : Swift.Hashable
 }
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
@@ -14915,38 +14676,38 @@ extension SwiftUICore.View {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUICore.View {
-  nonisolated public func confirmationDialog<A>(_ titleKey: SwiftUICore.LocalizedStringKey, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUI.Visibility = .automatic, @SwiftUICore.ViewBuilder actions: () -> A) -> some SwiftUICore.View where A : SwiftUICore.View
+  nonisolated public func confirmationDialog<A>(_ titleKey: SwiftUICore.LocalizedStringKey, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUICore.Visibility = .automatic, @SwiftUICore.ViewBuilder actions: () -> A) -> some SwiftUICore.View where A : SwiftUICore.View
   
-  @_disfavoredOverload nonisolated public func confirmationDialog<S, A>(_ title: S, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUI.Visibility = .automatic, @SwiftUICore.ViewBuilder actions: () -> A) -> some SwiftUICore.View where S : Swift.StringProtocol, A : SwiftUICore.View
+  @_disfavoredOverload nonisolated public func confirmationDialog<S, A>(_ title: S, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUICore.Visibility = .automatic, @SwiftUICore.ViewBuilder actions: () -> A) -> some SwiftUICore.View where S : Swift.StringProtocol, A : SwiftUICore.View
   
-  nonisolated public func confirmationDialog<A>(_ title: SwiftUICore.Text, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUI.Visibility = .automatic, @SwiftUICore.ViewBuilder actions: () -> A) -> some SwiftUICore.View where A : SwiftUICore.View
-  
-}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-extension SwiftUICore.View {
-  nonisolated public func confirmationDialog<A, M>(_ titleKey: SwiftUICore.LocalizedStringKey, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUI.Visibility = .automatic, @SwiftUICore.ViewBuilder actions: () -> A, @SwiftUICore.ViewBuilder message: () -> M) -> some SwiftUICore.View where A : SwiftUICore.View, M : SwiftUICore.View
-  
-  @_disfavoredOverload nonisolated public func confirmationDialog<S, A, M>(_ title: S, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUI.Visibility = .automatic, @SwiftUICore.ViewBuilder actions: () -> A, @SwiftUICore.ViewBuilder message: () -> M) -> some SwiftUICore.View where S : Swift.StringProtocol, A : SwiftUICore.View, M : SwiftUICore.View
-  
-  nonisolated public func confirmationDialog<A, M>(_ title: SwiftUICore.Text, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUI.Visibility = .automatic, @SwiftUICore.ViewBuilder actions: () -> A, @SwiftUICore.ViewBuilder message: () -> M) -> some SwiftUICore.View where A : SwiftUICore.View, M : SwiftUICore.View
+  nonisolated public func confirmationDialog<A>(_ title: SwiftUICore.Text, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUICore.Visibility = .automatic, @SwiftUICore.ViewBuilder actions: () -> A) -> some SwiftUICore.View where A : SwiftUICore.View
   
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUICore.View {
-  nonisolated public func confirmationDialog<A, T>(_ titleKey: SwiftUICore.LocalizedStringKey, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUI.Visibility = .automatic, presenting data: T?, @SwiftUICore.ViewBuilder actions: (T) -> A) -> some SwiftUICore.View where A : SwiftUICore.View
+  nonisolated public func confirmationDialog<A, M>(_ titleKey: SwiftUICore.LocalizedStringKey, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUICore.Visibility = .automatic, @SwiftUICore.ViewBuilder actions: () -> A, @SwiftUICore.ViewBuilder message: () -> M) -> some SwiftUICore.View where A : SwiftUICore.View, M : SwiftUICore.View
   
-  @_disfavoredOverload nonisolated public func confirmationDialog<S, A, T>(_ title: S, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUI.Visibility = .automatic, presenting data: T?, @SwiftUICore.ViewBuilder actions: (T) -> A) -> some SwiftUICore.View where S : Swift.StringProtocol, A : SwiftUICore.View
+  @_disfavoredOverload nonisolated public func confirmationDialog<S, A, M>(_ title: S, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUICore.Visibility = .automatic, @SwiftUICore.ViewBuilder actions: () -> A, @SwiftUICore.ViewBuilder message: () -> M) -> some SwiftUICore.View where S : Swift.StringProtocol, A : SwiftUICore.View, M : SwiftUICore.View
   
-  nonisolated public func confirmationDialog<A, T>(_ title: SwiftUICore.Text, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUI.Visibility = .automatic, presenting data: T?, @SwiftUICore.ViewBuilder actions: (T) -> A) -> some SwiftUICore.View where A : SwiftUICore.View
+  nonisolated public func confirmationDialog<A, M>(_ title: SwiftUICore.Text, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUICore.Visibility = .automatic, @SwiftUICore.ViewBuilder actions: () -> A, @SwiftUICore.ViewBuilder message: () -> M) -> some SwiftUICore.View where A : SwiftUICore.View, M : SwiftUICore.View
   
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUICore.View {
-  nonisolated public func confirmationDialog<A, M, T>(_ titleKey: SwiftUICore.LocalizedStringKey, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUI.Visibility = .automatic, presenting data: T?, @SwiftUICore.ViewBuilder actions: (T) -> A, @SwiftUICore.ViewBuilder message: (T) -> M) -> some SwiftUICore.View where A : SwiftUICore.View, M : SwiftUICore.View
+  nonisolated public func confirmationDialog<A, T>(_ titleKey: SwiftUICore.LocalizedStringKey, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUICore.Visibility = .automatic, presenting data: T?, @SwiftUICore.ViewBuilder actions: (T) -> A) -> some SwiftUICore.View where A : SwiftUICore.View
   
-  @_disfavoredOverload nonisolated public func confirmationDialog<S, A, M, T>(_ title: S, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUI.Visibility = .automatic, presenting data: T?, @SwiftUICore.ViewBuilder actions: (T) -> A, @SwiftUICore.ViewBuilder message: (T) -> M) -> some SwiftUICore.View where S : Swift.StringProtocol, A : SwiftUICore.View, M : SwiftUICore.View
+  @_disfavoredOverload nonisolated public func confirmationDialog<S, A, T>(_ title: S, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUICore.Visibility = .automatic, presenting data: T?, @SwiftUICore.ViewBuilder actions: (T) -> A) -> some SwiftUICore.View where S : Swift.StringProtocol, A : SwiftUICore.View
   
-  nonisolated public func confirmationDialog<A, M, T>(_ title: SwiftUICore.Text, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUI.Visibility = .automatic, presenting data: T?, @SwiftUICore.ViewBuilder actions: (T) -> A, @SwiftUICore.ViewBuilder message: (T) -> M) -> some SwiftUICore.View where A : SwiftUICore.View, M : SwiftUICore.View
+  nonisolated public func confirmationDialog<A, T>(_ title: SwiftUICore.Text, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUICore.Visibility = .automatic, presenting data: T?, @SwiftUICore.ViewBuilder actions: (T) -> A) -> some SwiftUICore.View where A : SwiftUICore.View
+  
+}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension SwiftUICore.View {
+  nonisolated public func confirmationDialog<A, M, T>(_ titleKey: SwiftUICore.LocalizedStringKey, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUICore.Visibility = .automatic, presenting data: T?, @SwiftUICore.ViewBuilder actions: (T) -> A, @SwiftUICore.ViewBuilder message: (T) -> M) -> some SwiftUICore.View where A : SwiftUICore.View, M : SwiftUICore.View
+  
+  @_disfavoredOverload nonisolated public func confirmationDialog<S, A, M, T>(_ title: S, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUICore.Visibility = .automatic, presenting data: T?, @SwiftUICore.ViewBuilder actions: (T) -> A, @SwiftUICore.ViewBuilder message: (T) -> M) -> some SwiftUICore.View where S : Swift.StringProtocol, A : SwiftUICore.View, M : SwiftUICore.View
+  
+  nonisolated public func confirmationDialog<A, M, T>(_ title: SwiftUICore.Text, isPresented: SwiftUICore.Binding<Swift.Bool>, titleVisibility: SwiftUICore.Visibility = .automatic, presenting data: T?, @SwiftUICore.ViewBuilder actions: (T) -> A, @SwiftUICore.ViewBuilder message: (T) -> M) -> some SwiftUICore.View where A : SwiftUICore.View, M : SwiftUICore.View
   
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
@@ -16120,7 +15881,7 @@ extension SwiftUI.DefaultToggleStyle : Swift.Sendable {
 extension SwiftUICore.View {
   nonisolated public func digitalCrownAccessory<Content>(@SwiftUICore.ViewBuilder content: @escaping () -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
   
-  nonisolated public func digitalCrownAccessory(_ visibility: SwiftUI.Visibility) -> some SwiftUICore.View
+  nonisolated public func digitalCrownAccessory(_ visibility: SwiftUICore.Visibility) -> some SwiftUICore.View
   
 }
 @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Use Color(uiColor:) when converting a UIColor, or create a standard Color directly")
@@ -16281,29 +16042,6 @@ public struct _Previewable {
 }
 @available(*, unavailable)
 extension SwiftUI._Previewable : Swift.Sendable {
-}
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension SwiftUICore.View {
-  @inlinable nonisolated public func transformAnchorPreference<A, K>(key _: K.Type = K.self, value: SwiftUICore.Anchor<A>.Source, transform: @escaping (inout K.Value, SwiftUICore.Anchor<A>) -> Swift.Void) -> some SwiftUICore.View where K : SwiftUICore.PreferenceKey {
-        return modifier(_AnchorTransformModifier<A, K>(
-            anchor: value, transform: transform))
-    }
-  
-}
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-@frozen public struct _AnchorTransformModifier<AnchorValue, Key> : SwiftUICore.ViewModifier where Key : SwiftUICore.PreferenceKey {
-  public var anchor: SwiftUICore.Anchor<AnchorValue>.Source
-  public var transform: (inout Key.Value, SwiftUICore.Anchor<AnchorValue>) -> Swift.Void
-  @inlinable public init(anchor: SwiftUICore.Anchor<AnchorValue>.Source, transform: @escaping (inout Key.Value, SwiftUICore.Anchor<AnchorValue>) -> Swift.Void) {
-        self.anchor = anchor
-        self.transform = transform
-    }
-  nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUI._AnchorTransformModifier<AnchorValue, Key>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-  public typealias Body = Swift.Never
-}
-@available(*, unavailable)
-extension SwiftUI._AnchorTransformModifier : Swift.Sendable {
 }
 @available(macOS 12.0, *)
 @available(iOS, unavailable)
@@ -17190,7 +16928,7 @@ extension SwiftUICore.EnvironmentValues {
 @available(iOS 15.0, macOS 12.0, tvOS 17.0, *)
 @available(watchOS, unavailable)
 extension SwiftUICore.EnvironmentValues {
-  public var menuIndicatorVisibility: SwiftUI.Visibility {
+  public var menuIndicatorVisibility: SwiftUICore.Visibility {
     get
     set
   }
@@ -17198,7 +16936,7 @@ extension SwiftUICore.EnvironmentValues {
 @available(iOS 15.0, macOS 12.0, tvOS 17.0, *)
 @available(watchOS, unavailable)
 extension SwiftUICore.View {
-  @inlinable nonisolated public func menuIndicator(_ visibility: SwiftUI.Visibility) -> some SwiftUICore.View {
+  @inlinable nonisolated public func menuIndicator(_ visibility: SwiftUICore.Visibility) -> some SwiftUICore.View {
         environment(\.menuIndicatorVisibility, visibility)
     }
   
@@ -17331,32 +17069,6 @@ extension SwiftUI.FocusedValues : Swift.Sendable {
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.FocusedValues : Swift.Equatable {
   public static func == (lhs: SwiftUI.FocusedValues, rhs: SwiftUI.FocusedValues) -> Swift.Bool
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public struct Subview : SwiftUICore.View, Swift.Identifiable {
-  public struct ID : Swift.Hashable {
-    public func hash(into hasher: inout Swift.Hasher)
-    public static func == (a: SwiftUI.Subview.ID, b: SwiftUI.Subview.ID) -> Swift.Bool
-    public var hashValue: Swift.Int {
-      get
-    }
-  }
-  public var id: SwiftUI.Subview.ID {
-    get
-  }
-  public var containerValues: SwiftUI.ContainerValues {
-    get
-  }
-  nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUI.Subview>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
-  nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUI.Subview>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Body = Swift.Never
-}
-@available(*, unavailable)
-extension SwiftUI.Subview : Swift.Sendable {
-}
-@available(*, unavailable)
-extension SwiftUI.Subview.ID : Swift.Sendable {
 }
 extension SwiftUICore.EnvironmentValues {
   @available(iOS 17.0, tvOS 17.0, *)
@@ -17603,7 +17315,7 @@ extension SwiftUI._ShadowView : Swift.Sendable {
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension SwiftUICore.View {
-  nonisolated public func tableColumnHeaders(_ visibility: SwiftUI.Visibility) -> some SwiftUICore.View
+  nonisolated public func tableColumnHeaders(_ visibility: SwiftUICore.Visibility) -> some SwiftUICore.View
   
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -17696,7 +17408,7 @@ extension SwiftUI.FetchedResults where Result : CoreData.NSManagedObject {
 @available(watchOS, unavailable)
 public struct TabViewCustomization : Swift.Equatable, Swift.Sendable, Swift.Codable {
   public init()
-  public subscript(sidebarVisibility id: Swift.String) -> SwiftUI.Visibility {
+  public subscript(sidebarVisibility id: Swift.String) -> SwiftUICore.Visibility {
     get
     set
   }
@@ -18534,7 +18246,7 @@ extension SwiftUICore.View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUI.TabContent {
-  nonisolated public func defaultVisibility(_ visibility: SwiftUI.Visibility, for placements: SwiftUI.AdaptableTabBarPlacement...) -> some SwiftUI.TabContent<Self.TabValue>
+  nonisolated public func defaultVisibility(_ visibility: SwiftUICore.Visibility, for placements: SwiftUI.AdaptableTabBarPlacement...) -> some SwiftUI.TabContent<Self.TabValue>
   
 }
 @available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
@@ -18875,7 +18587,7 @@ extension SwiftUICore.View {
   
   nonisolated public func presentationDetents(_ detents: Swift.Set<SwiftUI.PresentationDetent>, selection: SwiftUICore.Binding<SwiftUI.PresentationDetent>) -> some SwiftUICore.View
   
-  nonisolated public func presentationDragIndicator(_ visibility: SwiftUI.Visibility) -> some SwiftUICore.View
+  nonisolated public func presentationDragIndicator(_ visibility: SwiftUICore.Visibility) -> some SwiftUICore.View
   
 }
 @available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, *)
@@ -19130,11 +18842,6 @@ extension SwiftUI.UIGestureRecognizerRepresentableCoordinateSpaceConverter : Swi
 extension SwiftUICore.View {
   nonisolated public func gesture(_ representable: some UIGestureRecognizerRepresentable) -> some SwiftUICore.View
   
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public protocol ContainerValueKey {
-  associatedtype Value
-  static var defaultValue: Self.Value { get }
 }
 @available(iOS, unavailable)
 @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Use `MenuStyle` instead.")
@@ -19506,12 +19213,12 @@ extension SwiftUICore.View {
 }
 extension SwiftUICore.View {
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  nonisolated public func labelsVisibility(_ visibility: SwiftUI.Visibility) -> some SwiftUICore.View
+  nonisolated public func labelsVisibility(_ visibility: SwiftUICore.Visibility) -> some SwiftUICore.View
   
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension SwiftUICore.EnvironmentValues {
-  public var labelsVisibility: SwiftUI.Visibility {
+  public var labelsVisibility: SwiftUICore.Visibility {
     get
     set
   }
@@ -19785,30 +19492,6 @@ extension SwiftUICore.ModifiedContent where Modifier == SwiftUI.AccessibilityAtt
   @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityRemoveTraits(_:)")
   @available(visionOS, introduced: 1.0, deprecated: 100000.0, renamed: "accessibilityRemoveTraits(_:)")
   nonisolated public func accessibility(removeTraits traits: SwiftUICore.AccessibilityTraits) -> SwiftUICore.ModifiedContent<Content, Modifier>
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension SwiftUICore.View {
-  @_alwaysEmitIntoClient nonisolated public func containerValue<V>(_ keyPath: Swift.WritableKeyPath<SwiftUI.ContainerValues, V>, _ value: V) -> some SwiftUICore.View {
-        modifier(_ContainerValueWritingModifier(keyPath: keyPath, value: value))
-    }
-  
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-@frozen public struct _ContainerValueWritingModifier<Value> {
-  public var keyPath: Swift.WritableKeyPath<SwiftUI.ContainerValues, Value>
-  public var value: Value
-  @_alwaysEmitIntoClient public init(keyPath: Swift.WritableKeyPath<SwiftUI.ContainerValues, Value>, value: Value) {
-        self.keyPath = keyPath
-        self.value = value
-    }
-  nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUI._ContainerValueWritingModifier<Value>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
-  nonisolated public static func _makeViewList(modifier: SwiftUICore._GraphValue<SwiftUI._ContainerValueWritingModifier<Value>>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
-  nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Body = Swift.Never
-}
-@available(*, unavailable)
-extension SwiftUI._ContainerValueWritingModifier : Swift.Sendable {
 }
 @available(iOS 18.0, visionOS 2.0, *)
 @available(macOS, unavailable)
@@ -20571,19 +20254,6 @@ extension SwiftUICore.EnvironmentValues {
     set
   }
 }
-@available(iOS 14.5, macOS 11.0, tvOS 14.5, watchOS 7.4, *)
-@usableFromInline
-package struct IsLeafTraitKey : SwiftUICore._ViewTraitKey {
-  @inlinable package static var defaultValue: Swift.Bool {
-    get { true }
-  }
-  @available(iOS 14.5, tvOS 14.5, watchOS 7.4, macOS 11.0, *)
-  @usableFromInline
-  package typealias Value = Swift.Bool
-}
-@available(*, unavailable)
-extension SwiftUI.IsLeafTraitKey : Swift.Sendable {
-}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 public struct AccessibilityZoomGestureAction {
   @frozen public enum Direction {
@@ -20915,26 +20585,6 @@ extension SwiftUI.DocumentGroupLaunchScene {
 extension SwiftUI.DocumentGroupLaunchScene : Swift.Sendable {
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension SwiftUICore.Anchor.Source where Value == CoreFoundation.CGRect {
-  public static func rect(_ r: CoreFoundation.CGRect) -> SwiftUICore.Anchor<Value>.Source
-  public static var bounds: SwiftUICore.Anchor<CoreFoundation.CGRect>.Source {
-    get
-  }
-}
-@available(iOS 17.0, macOS 11.0, tvOS 17.0, watchOS 10.0, *)
-@usableFromInline
-package struct IsExpandedTraitKey : SwiftUICore._ViewTraitKey {
-  @inlinable package static var defaultValue: SwiftUICore.Binding<Swift.Bool>? {
-    get { nil }
-  }
-  @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 11.0, *)
-  @usableFromInline
-  package typealias Value = SwiftUICore.Binding<Swift.Bool>?
-}
-@available(*, unavailable)
-extension SwiftUI.IsExpandedTraitKey : Swift.Sendable {
-}
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityActionKind : Swift.Equatable, Swift.Sendable {
   public static let `default`: SwiftUI.AccessibilityActionKind
   public static let escape: SwiftUI.AccessibilityActionKind
@@ -20986,77 +20636,6 @@ extension SwiftUICore.ModifiedContent where Modifier == SwiftUI.AccessibilityAtt
   nonisolated public func accessibilityAction(named nameKey: SwiftUICore.LocalizedStringKey, _ handler: @escaping () -> Swift.Void) -> SwiftUICore.ModifiedContent<Content, Modifier>
   @_disfavoredOverload nonisolated public func accessibilityAction<S>(named name: S, _ handler: @escaping () -> Swift.Void) -> SwiftUICore.ModifiedContent<Content, Modifier> where S : Swift.StringProtocol
 }
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension SwiftUICore.Group {
-  public init<Base, Result>(sections view: Base, @SwiftUICore.ViewBuilder transform: @escaping (SwiftUI.SectionCollection) -> Result) where Content == SwiftUI.GroupSectionsOfContent<Base, Result>, Base : SwiftUICore.View, Result : SwiftUICore.View
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public struct GroupSectionsOfContent<Sections, Content> : SwiftUICore.View where Sections : SwiftUICore.View, Content : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
-    get
-  }
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Body = @_opaqueReturnTypeOf("$s7SwiftUI22GroupSectionsOfContentV4bodyQrvp", 0) __<Sections, Content>
-}
-@available(*, unavailable)
-extension SwiftUI.GroupSectionsOfContent : Swift.Sendable {
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public struct SectionCollection : Swift.RandomAccessCollection {
-  public subscript(index: Swift.Int) -> SwiftUI.SectionConfiguration {
-    get
-  }
-  public var startIndex: Swift.Int {
-    get
-  }
-  public var endIndex: Swift.Int {
-    get
-  }
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Element = SwiftUI.SectionConfiguration
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Index = Swift.Int
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Indices = Swift.Range<Swift.Int>
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias Iterator = Swift.IndexingIterator<SwiftUI.SectionCollection>
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias SubSequence = Swift.Slice<SwiftUI.SectionCollection>
-}
-@available(*, unavailable)
-extension SwiftUI.SectionCollection : Swift.Sendable {
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public struct SectionConfiguration : Swift.Identifiable {
-  public struct ID : Swift.Hashable {
-    public func hash(into hasher: inout Swift.Hasher)
-    public static func == (a: SwiftUI.SectionConfiguration.ID, b: SwiftUI.SectionConfiguration.ID) -> Swift.Bool
-    public var hashValue: Swift.Int {
-      get
-    }
-  }
-  public var id: SwiftUI.SectionConfiguration.ID {
-    get
-  }
-  public var containerValues: SwiftUI.ContainerValues {
-    get
-  }
-  public var header: SwiftUI.SubviewsCollection {
-    get
-  }
-  public var footer: SwiftUI.SubviewsCollection {
-    get
-  }
-  public var content: SwiftUI.SubviewsCollection {
-    get
-  }
-}
-@available(*, unavailable)
-extension SwiftUI.SectionConfiguration : Swift.Sendable {
-}
-@available(*, unavailable)
-extension SwiftUI.SectionConfiguration.ID : Swift.Sendable {
-}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
 @available(watchOS, unavailable)
 public struct _DisclosureIndicator : SwiftUICore.View {
@@ -21093,52 +20672,6 @@ extension SwiftUICore.View {
   
   @_disfavoredOverload nonisolated public func help<S>(_ text: S) -> some SwiftUICore.View where S : Swift.StringProtocol
   
-}
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-final public class ImageRenderer<Content> : Combine.ObservableObject where Content : SwiftUICore.View {
-  final public let objectWillChange: Combine.PassthroughSubject<Swift.Void, Swift.Never>
-  @available(iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, *)
-  @usableFromInline
-  final internal var observationEnabled: Swift.Bool
-  @available(iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, *)
-  @_alwaysEmitIntoClient final public var isObservationEnabled: Swift.Bool {
-    get { observationEnabled }
-    set { observationEnabled = newValue }
-  }
-  @_Concurrency.MainActor final public var content: Content {
-    get
-    set
-  }
-  @_Concurrency.MainActor final public var proposedSize: SwiftUICore.ProposedViewSize {
-    get
-    set
-  }
-  @_Concurrency.MainActor final public var scale: CoreFoundation.CGFloat {
-    get
-    set
-  }
-  @_Concurrency.MainActor final public var isOpaque: Swift.Bool {
-    get
-    set
-  }
-  @_Concurrency.MainActor final public var colorMode: SwiftUICore.ColorRenderingMode {
-    get
-    set
-  }
-  @_Concurrency.MainActor public init(content view: Content)
-  @_Concurrency.MainActor final public var cgImage: CoreGraphics.CGImage? {
-    get
-  }
-  @_Concurrency.MainActor final public func render(rasterizationScale: CoreFoundation.CGFloat = 1, renderer: (CoreFoundation.CGSize, (CoreGraphics.CGContext) -> Swift.Void) -> Swift.Void)
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
-  public typealias ObjectWillChangePublisher = Combine.PassthroughSubject<Swift.Void, Swift.Never>
-  @objc deinit
-}
-@available(iOS 17.1, macOS 14.1, tvOS 17.1, watchOS 10.1, *)
-extension SwiftUI.ImageRenderer : Observation.Observable {
-}
-@available(*, unavailable)
-extension SwiftUI.ImageRenderer : Swift.Sendable {
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @usableFromInline
@@ -22261,10 +21794,6 @@ extension SwiftUI._LayoutDirectionBehaviorEffect : Swift.Sendable {}
 extension SwiftUI._TaskModifier : Swift.Sendable {}
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.ScenePhase : Swift.Hashable {}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-extension SwiftUI.Visibility : Swift.Sendable {}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-extension SwiftUI.Visibility : Swift.BitwiseCopyable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension SwiftUI._GeometryActionModifier : SwiftUICore.ViewModifier {}
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 10.0, *)
@@ -22599,8 +22128,6 @@ extension SwiftUI._ScrollViewAnimationMode : Swift.Hashable {}
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUI.UIViewRepresentableContext : Swift.Sendable {}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension SwiftUI._ContainerValueWritingModifier : SwiftUICore.ViewModifier {}
 @available(iOS 17.0, macOS 14.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

@@ -85,11 +85,14 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 @property (nullable, readonly, copy) CKShareParticipant *currentUserParticipant;
 
 /*! @discussion If a participant with a matching userIdentity already exists, then that existing participant's properties will be updated; no new participant will be added.
+ *  A `CKShareParticipant` instance that has already been added to one `CKShare` cannot be added to another, unless it is removed from the first `CKShare` through `removeParticipant`.
  *  In order to modify the list of participants, a share must have publicPermission set to @c CKShareParticipantPermissionNone.  That is, you cannot mix-and-match private users and public users in the same share.
- *  Only certain participant types may be added via this API
  *  @see CKShareParticipantRole
  */
 - (void)addParticipant:(CKShareParticipant *)participant;
+
+/*! @discussion It's not allowed to call `removeParticipant` on a `CKShare` with a `CKShareParticipant` that has never been added to that share through `addParticipant`.
+ */
 - (void)removeParticipant:(CKShareParticipant *)participant;
 
 /*! These superclass-provided initializers are not allowed for CKShare */

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox'
-current-version: 3175.11.5
+current-version: 3185.18.5
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -279,7 +279,10 @@ exports:
                        _kVTCompressionPropertyKey_RequestedMaxEncoderLatency, _kVTCompressionPropertyKey_RequireDeterministicDependencyAndReordering, 
                        _kVTCompressionPropertyKey_RequiredHEVCPictureParameterSetID, 
                        _kVTCompressionPropertyKey_RequiredHEVCSequenceParameterSetID, 
+                       _kVTCompressionPropertyKey_RequiredHEVCSequenceParameterSetRepFormatIndex, 
                        _kVTCompressionPropertyKey_RequiredHEVCVideoParameterSetAlphaLayerID, 
+                       _kVTCompressionPropertyKey_RequiredHEVCVideoParameterSetRepFormatBitDepths, 
+                       _kVTCompressionPropertyKey_RequiredHEVCVideoParameterSetRepFormatChromaFormatIdcs, 
                        _kVTCompressionPropertyKey_RequiredMVHEVCPictureParameterSetIDs, 
                        _kVTCompressionPropertyKey_RequiredMVHEVCSequenceParameterSetIDs, 
                        _kVTCompressionPropertyKey_RequiredMVHEVCVideoParameterSetAlphaVideoLayerIDs, 
@@ -664,7 +667,8 @@ exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _VTCopyRAWProcessorExtensionProperties, _VTCopyVideoDecoderExtensionProperties, 
                        _VTGetGVADecoderAvailability, _VTIsSecTaskEntitledForInProcessH264AndVP9Decode, 
-                       _VTParavirtualizationHostSessionCreate, _VTParavirtualizationHostSessionCreateTerminateAllSessionsMessage, 
+                       _VTParavirtualizationHostSessionCompleteInvalidate, _VTParavirtualizationHostSessionCreate, 
+                       _VTParavirtualizationHostSessionCreateTerminateAllSessionsMessage, 
                        _VTParavirtualizationHostSessionDeliverMessageFromGuest, _VTParavirtualizationHostSessionGetTypeID, 
                        _VTParavirtualizationHostSessionInvalidate, _VTRAWProcessingSessionCompleteFrames, 
                        _VTRAWProcessingSessionCopyProcessingParameters, _VTRAWProcessingSessionCreate, 

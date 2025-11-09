@@ -700,6 +700,16 @@ API_AVAILABLE(macos(15.0), macCatalyst(18.0), ios(18.0), watchos(11.0), tvos(18.
 UT_EXPORT UTType *const UTTypeDNG NS_REFINED_FOR_SWIFT
 API_AVAILABLE(macos(15.0), macCatalyst(18.0), ios(18.0), watchos(11.0), tvos(18.0));
 
+/**
+    \brief A JPEG-XL encoded image.
+
+    UTI: public.jpeg-xl
+
+    conforms to: public.image
+*/
+UT_EXPORT UTType *const UTTypeJPEGXL NS_REFINED_FOR_SWIFT
+API_AVAILABLE(macos(15.2), macCatalyst(18.2), ios(18.2), watchos(11.2), tvos(18.2));
+
 
 #pragma mark - 3D Content
 

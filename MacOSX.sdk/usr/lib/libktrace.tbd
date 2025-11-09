@@ -10,7 +10,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ktrace.framework/Versions/A/ktrace'
-current-version: 629.40.2
+current-version: 629.60.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -77,9 +77,13 @@ exports:
                        '_$s6ktrace8TrimmingV8toolName11interactive6notifyACSS_SbyAA8TrimNoteOctcfC', 
                        '_$s6ktrace8TrimmingV8toolNameSSvg', '_$s6ktrace8TrimmingV8toolNameSSvpMV', 
                        '_$s6ktrace8TrimmingVMa', '_$s6ktrace8TrimmingVMn', '_$s6ktrace8TrimmingVN', 
-                       '_$ss12StaticStringV6ktraceE7charPtrSPys4Int8VGvg', '_$ss12StaticStringV6ktraceE7charPtrSPys4Int8VGvpMV', 
-                       _CFArrayApplierTrampoline, _CFDictionaryApplierTrampoline, 
-                       _CFSetApplierTrampoline, __Z21ktrace_catalog_createP14ktrace_sessionRNSt3__16vectorIyNS1_9allocatorIyEEEE, 
+                       '_$s6ktrace9listFiles2in13pathExtension9olderThanSay10Foundation3URLVG_SitAH_SSAF4DateVSgtKF', 
+                       '_$sSS6ktraceE11stringValueS2S_tcfC', '_$sSS6ktraceE11stringValueSSvg', 
+                       '_$sSS6ktraceE11stringValueSSvpMV', '_$sSS6ktraceE8intValueSSSi_tcfC', 
+                       '_$sSS6ktraceE8intValueSiSgvg', '_$sSS6ktraceE8intValueSiSgvpMV', 
+                       '_$sSSs9CodingKey6ktraceMc', '_$ss12StaticStringV6ktraceE7charPtrSPys4Int8VGvg', 
+                       '_$ss12StaticStringV6ktraceE7charPtrSPys4Int8VGvpMV', _CFArrayApplierTrampoline, 
+                       _CFDictionaryApplierTrampoline, _CFSetApplierTrampoline, __Z21ktrace_catalog_createP14ktrace_sessionRNSt3__16vectorIyNS1_9allocatorIyEEEE, 
                        __Z25ktrace_address_space_sortP20ktrace_address_space, __Z27ktrace_address_space_appendP20ktrace_address_space11SymbolOwner, 
                        __Z27ktrace_address_space_createi, __Z31ktrace_uuid_map_update_internalP15ktrace_uuid_mapP14ktrace_sessionP12ktrace_pointbbU13block_pointerFv12PrepassOpRefE, 
                        __Z32ktrace_address_space_from_dscsymPvm, __Z32ktrace_uuid_map_get_shared_cacheP15ktrace_uuid_map11CFUUIDBytes, 

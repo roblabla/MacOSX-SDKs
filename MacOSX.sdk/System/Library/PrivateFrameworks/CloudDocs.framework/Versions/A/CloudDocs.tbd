@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CloudDocs.framework/Versions/A/CloudDocs'
-current-version: 3097.40.5
+current-version: 3097.60.161
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -199,7 +199,7 @@ exports:
                        BRShareUnshareOperation, BRSharingCopyEtagOperation, BRSharingCopyShareInfoOperation, 
                        BRSharingCopyShareTokenOperation, BRSharingCopyShortTokenOperation, 
                        BRSharingModifyRecordAccessOperation, BRStopwatch, BRTask, 
-                       BRTransfersStatusManager, BRTrashItem, BRUploadAllFilesForLogOutOperation, 
+                       BRTimer, BRTransfersStatusManager, BRTrashItem, BRUploadAllFilesForLogOutOperation, 
                        BRUploadAllFilesOperation, BRXPCClientUtils, BRXPCSyncProxy, 
                        BRZombie, BRiWorkWebShareMigrateOperation, ICDCollaborationVersion, 
                        _BRContainerItem ]

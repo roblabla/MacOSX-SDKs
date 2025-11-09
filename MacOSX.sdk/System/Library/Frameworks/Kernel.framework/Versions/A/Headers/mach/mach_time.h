@@ -45,19 +45,16 @@ __BEGIN_DECLS
 
 uint64_t                        mach_absolute_time(void);
 
-__OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0)
 uint64_t                        mach_approximate_time(void);
 
 /*
  * like mach_absolute_time, but advances during sleep
  */
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0)
 uint64_t                        mach_continuous_time(void);
 
 /*
  * like mach_approximate_time, but advances during sleep
  */
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0)
 uint64_t                        mach_continuous_approximate_time(void);
 
 __END_DECLS

@@ -275,6 +275,13 @@ HK_EXTERN NSString * const HKMetadataKeyWorkoutBrandName API_AVAILABLE(ios(8.0),
 HK_EXTERN NSString * const HKMetadataKeyGroupFitness API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
 
 /*!
+ @constant      HKMetadataKeyAppleFitnessPlusCatalogIdentifier
+ @abstract      Contains the catalog identifier of the Fitness+ workout.
+ @discussion    This key only exists if the workout was completed in Fitness+. The expected value type is an NSString containing the Fitness+ catalog identifier.
+ */
+HK_EXTERN NSString * const HKMetadataKeyAppleFitnessPlusCatalogIdentifier API_AVAILABLE(ios(18.2), watchos(11.2), macCatalyst(18.2), macos(15.2), visionos(2.2));
+
+/*!
   @constant      HKMetadataKeyAppleFitnessPlusSession
   @abstract      Represents whether or not a workout is a Fitness+ workout.
   @discussion    The expected value type is an NSNumber containing a BOOL value.

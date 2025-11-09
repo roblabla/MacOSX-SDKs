@@ -40,4 +40,7 @@
 
 #import <BrowserEngineKit/BEWebAppManifest.h>
 #import <BrowserEngineKit/BEAccessibility.h>
+#import <BrowserEngineKit/BEAccessibilityTextMarker.h>
 #import <BrowserEngineKit/BEAccessibilityConstants.h>
+
+#import <BrowserEngineKit/BEDownloads.h>

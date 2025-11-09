@@ -5,7 +5,14 @@ install-name:    '/System/Library/PrivateFrameworks/SiriVideoUIFramework.framewo
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s20SiriVideoUIFramework15SnippetProviderO7snippet3for4mode5idiom7SwiftUI7AnyViewV0aB7Intents0B10DataModelsO_So7VRXModeVSo8VRXIdiomVtKFZ', 
+    symbols:         [ '_$s20SiriVideoUIFramework0B24ResultDisambiguationListV4bodyQrvg', 
+                       '_$s20SiriVideoUIFramework0B24ResultDisambiguationListV4bodyQrvpMV', 
+                       '_$s20SiriVideoUIFramework0B24ResultDisambiguationListV4bodyQrvpQOMQ', 
+                       '_$s20SiriVideoUIFramework0B24ResultDisambiguationListV7SwiftUI4ViewAAMc', 
+                       '_$s20SiriVideoUIFramework0B24ResultDisambiguationListVMa', 
+                       '_$s20SiriVideoUIFramework0B24ResultDisambiguationListVMn', 
+                       '_$s20SiriVideoUIFramework0B24ResultDisambiguationListVN', 
+                       '_$s20SiriVideoUIFramework15SnippetProviderO7snippet3for4mode5idiom7SwiftUI7AnyViewV0aB7Intents0B10DataModelsO_So7VRXModeVSo8VRXIdiomVtKFZ', 
                        '_$s20SiriVideoUIFramework15SnippetProviderOMa', '_$s20SiriVideoUIFramework15SnippetProviderOMn', 
                        '_$s20SiriVideoUIFramework15SnippetProviderON', '_$s20SiriVideoUIFramework16ConfirmationViewV14_actionHandler33_19ADDAB092E0F06738070D2C59FBEF95LL9SnippetUI06ActionG0Vvpfi', 
                        '_$s20SiriVideoUIFramework16ConfirmationViewV4bodyQrvg', '_$s20SiriVideoUIFramework16ConfirmationViewV4bodyQrvpMV', 

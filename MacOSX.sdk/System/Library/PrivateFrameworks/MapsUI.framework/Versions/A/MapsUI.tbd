@@ -55,6 +55,7 @@ exports:
                        MUPlatterConfigurator, MUPlatterView, MUPresentationOptions, 
                        MUScrollViewImpressionsCalculator, MUScrollableStackView, 
                        MUStackView, MUTextFactoidViewModel, MUTimeExpirableLRUCache, 
-                       MUTrailSelectionInfo, MUVendorLinkSortParameters, MUVendorLinkSorter, 
-                       MUVendorLinkViewModel, MapsUILocalizationBridge, MapsUIUtilities ]
+                       MUTrailSelectionInfo, MUVendorLinkMenuItemViewModel, MUVendorLinkSortParameters, 
+                       MUVendorLinkSorter, MUVendorLinkViewModel, MapsUILocalizationBridge, 
+                       MapsUIUtilities ]
 ...

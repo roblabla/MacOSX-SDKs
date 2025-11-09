@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpotlightDaemon.framework/Versions/A/SpotlightDaemon'
-current-version: 2314.10.1
+current-version: 2328.7.7
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __Z22isSpellCorrectionReadyP8NSStringa, __Z22skipAppSpellCorrectionP8NSStringS0_a ]
@@ -29,7 +29,8 @@ exports:
                        _delayedOpBlockCompleteCallback, _duet_log_activity_start, 
                        _duet_log_activity_stop, _gIsSystemOnBattery, _getAppCorrectionIfAny, 
                        _getSystemVersionString, _isAppPrefixMatch, _isCandidate, 
-                       _json_char_table, _json_parse, _json_utf8_string, _kSecEntitlementCSDisableQuota, 
+                       _json_char_table, _json_parse, _json_utf8_string, _kSecEntitlementCSAllowMessagesContent, 
+                       _kSecEntitlementCSAllowNotifications, _kSecEntitlementCSDisableQuota, 
                        _logForCSLogCategoryDaemonClient, _logForCSLogCategoryDefault, 
                        _logForCSLogCategoryIndex, _logForCSLogCategoryPersonalization, 
                        _logForCSLogCategoryPhotosQU, _logForCSLogCategoryQuery, _logForCSLogCategoryRecs, 

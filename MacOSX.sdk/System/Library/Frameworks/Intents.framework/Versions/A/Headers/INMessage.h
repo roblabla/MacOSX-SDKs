@@ -43,8 +43,14 @@ typedef NS_ENUM(NSInteger, INMessageType) {
     INMessageTypeActivitySnippet API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx),
     INMessageTypeFile API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx),
     INMessageTypeLink API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx),
+
+    /// The message contains a reaction to another message.
     INMessageTypeReaction API_AVAILABLE(ios(17.0), watchos(10.0)) API_UNAVAILABLE(macosx),
+    
+    /// Media content containing an animated image, such as a GIF.
     INMessageTypeMediaAnimatedImage API_AVAILABLE(ios(18.0), watchos(11.0)) API_UNAVAILABLE(macosx),
+
+    /// The message contains an attachment from a third party application.
     INMessageTypeThirdPartyAttachment API_AVAILABLE(ios(18.0), watchos(11.0)) API_UNAVAILABLE(macosx),
 } API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macosx, tvos);
 
@@ -142,6 +148,22 @@ messageType:(INMessageType)messageType API_DEPRECATED("Use initializer with reac
                  referencedMessage:(nullable INMessage *)referencedMessage
                           reaction:(nullable INMessageReaction *)reaction API_AVAILABLE(ios(18.0), watchos(11.0)) API_UNAVAILABLE(macos);
 
+
+/// Creates a message that includes a reaction and references the original message for the reaction.
+///
+/// - Parameters:
+///   - identifier: The message’s unique identifier.
+///   - conversationIdentifier: The identifier of the conversation that contains this message.
+///   - content: The text that Siri recites to the message recipient.
+///   - dateSent: The date and time the app sent the message to each recipient.
+///   - sender: The person who sent the message.
+///   - recipients: The people who received the message.
+///   - groupName: The name of the group conversation.
+///   - serviceName: The name of the service that delivers the message.
+///   - messageType: The type of content the message contains.
+///   - referencedMessage: The referenced message that received a reaction if the message object itself was a reaction.
+///   - sticker: The sticker that this message contains.
+///   - reaction: The message reaction that this message contains.
 - (instancetype)initWithIdentifier:(NSString *)identifier
             conversationIdentifier:(nullable NSString *)conversationIdentifier
                            content:(nullable NSString *)content
@@ -181,8 +203,10 @@ messageType:(INMessageType)messageType API_DEPRECATED("Use initializer with reac
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INMessageLinkMetadata *linkMetadata API_AVAILABLE(ios(17.0), watchos(10.0)) API_UNAVAILABLE(macosx);
 
+/// The sticker that this message contains.
 @property (readwrite, copy, nullable, NS_NONATOMIC_IOSONLY) INSticker *sticker API_AVAILABLE(ios(18.0), watchos(11.0), macosx(15.0));
 
+/// The message reaction that this message contains.
 @property (readwrite, copy, nullable, NS_NONATOMIC_IOSONLY) INMessageReaction *reaction API_AVAILABLE(ios(18.0), watchos(11.0)) API_UNAVAILABLE(macosx);
 
 @end

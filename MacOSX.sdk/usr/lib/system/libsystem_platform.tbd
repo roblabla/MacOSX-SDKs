@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_platform.dylib'
-current-version: 340
+current-version: 340.60.2
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -71,7 +71,8 @@ exports:
                        _os_unfair_recursive_lock_unlock_forked_child, _setcontext, 
                        _setjmp, _siglongjmp, _sigsetjmp, _spin_lock, _spin_lock_try, 
                        _spin_unlock, _swapcontext, _sys_cache_control, _sys_dcache_flush, 
-                       _sys_icache_invalidate ]
+                       _sys_icache_invalidate, _timingsafe_enable_if_supported, _timingsafe_restore_if_supported ]
   - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ __ctx_done ]
+    symbols:         [ ___sme_memchr, ___sme_memcpy, ___sme_memmove, ___sme_memset, 
+                       __ctx_done ]
 ...

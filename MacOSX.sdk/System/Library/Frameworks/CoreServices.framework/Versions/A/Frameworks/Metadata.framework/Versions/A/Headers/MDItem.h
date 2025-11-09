@@ -169,6 +169,14 @@ MD_EXPORT CFArrayRef MDItemCopyAttributeNames(MDItemRef item) MD_AVAIL;
  */
 MD_EXPORT CFArrayRef MDItemsCopyAttributes(CFArrayRef items, CFArrayRef names) API_AVAILABLE( macos(10.12) ) API_UNAVAILABLE( ios, tvos, watchos );
 
+/*
+        @function MDItemGetCacheFileDescriptors
+        Returns an array of corresponding cache file descriptors for MDItem files
+        @param items The CFArray of MDItems.
+        @result array of XPC_TYPE_FD if corresponding cache file exists, or XPC_TYPE_NULL otherwise.
+*/
+MD_EXPORT void MDItemGetCacheFileDescriptors(CFArrayRef items, void(^completionHandler)(CFArrayRef array) ) API_AVAILABLE( macos(15.2) ) API_UNAVAILABLE( ios, tvos, watchos );
+
 /* List of well-known attributes */
 
 /*!

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/Charts.framework/Versions/A/Charts'
-current-version: 3.1.12
+current-version: 3.2.7
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -420,6 +420,8 @@ exports:
                        '_$s6Charts15FunctionSamplerC24defaultDomainAspectRatioSdSgvsTq', 
                        '_$s6Charts15FunctionSamplerC6bounds7xDomain01yE0SNySdG1x_AG1ytSgAG_AGtFTj', 
                        '_$s6Charts15FunctionSamplerC6bounds7xDomain01yE0SNySdG1x_AG1ytSgAG_AGtFTq', 
+                       '_$s6Charts15FunctionSamplerC9presample7xDomainySNySdG_tFTj', 
+                       '_$s6Charts15FunctionSamplerC9presample7xDomainySNySdG_tFTq', 
                        '_$s6Charts15FunctionSamplerCMa', '_$s6Charts15FunctionSamplerCMm', 
                        '_$s6Charts15FunctionSamplerCMn', '_$s6Charts15FunctionSamplerCMo', 
                        '_$s6Charts15FunctionSamplerCMu', '_$s6Charts15FunctionSamplerCN', 

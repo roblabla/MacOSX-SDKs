@@ -21,8 +21,9 @@ exports:
                        _IXUserPresentableErrorCodeIsHardError, _IXUserPresentableErrorDomain, 
                        _kIXNotificationPayloadDataStoreClockGUIDKey, _kIXNotificationPayloadDataStoreClockSequenceNumberKey ]
     objc-classes:    [ IXAppInstallCoordinator, IXAppInstallObserver, IXAppRemovabilityMetadata, 
-                       IXApplicationIdentity, IXDataPromise, IXDataStoreClock, IXDemotingAppInstallCoordinator, 
-                       IXFileManager, IXGizmoInstallingAppInstallCoordinator, IXGlobalConfiguration, 
+                       IXAppRemovabilityMetadataList, IXApplicationIdentity, IXDataPromise, 
+                       IXDataStoreClock, IXDemotingAppInstallCoordinator, IXFileManager, 
+                       IXGizmoInstallingAppInstallCoordinator, IXGlobalConfiguration, 
                        IXInitiatingAppInstallCoordinator, IXOpaqueDataPromise, IXOwnedDataPromise, 
                        IXPlaceholder, IXPlaceholderAttributes, IXProgressHint, IXPromisedInMemoryData, 
                        IXPromisedInMemoryDictionary, IXPromisedOutOfBandStreamingZipTransfer, 

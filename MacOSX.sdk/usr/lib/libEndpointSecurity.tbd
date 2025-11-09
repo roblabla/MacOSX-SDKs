@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libEndpointSecurity.dylib'
-current-version: 511.40.8
+current-version: 511.60.5
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _es_clear_cache, _es_copy_message, _es_delete_client, _es_disable_exclusive_mode, 

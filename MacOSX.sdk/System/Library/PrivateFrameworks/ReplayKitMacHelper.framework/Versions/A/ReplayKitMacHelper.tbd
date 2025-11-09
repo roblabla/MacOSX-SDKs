@@ -11,7 +11,8 @@ exports:
                        RPBroadcastActivityViewServiceExtensionHostContext, RPDimAndShadowWindow, 
                        RPDimAndShadowWindowContentView, RPMacUtility, RPRemoteViewContainerWindow, 
                        RPRemoteWindowController, RPTransparentWindow, RPVideoEditorHostRemoteNSViewController, 
-                       RPVideoEditorViewServiceExtensionHostContext, ReplayKitMacHelperClass ]
+                       RPVideoEditorViewServiceExtensionHostContext, ReplayKitMacHelperClass, 
+                       SCCatalystMacOSBridge, SCRunningApplicationInternal, SCStatusItemInternal ]
     objc-ivars:      [ RPBorderlessEffectWindow.noSourceWindow, RPDimAndShadowWindow.animatesTransitions, 
                        RPDimAndShadowWindow.dimLayer, RPDimAndShadowWindow.groupLayer, 
                        RPDimAndShadowWindow.shadowCenterKnockoutLayer, RPDimAndShadowWindow.shadowLayer ]

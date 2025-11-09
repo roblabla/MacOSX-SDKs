@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CalendarDraw.framework/Versions/A/CalendarDraw'
-current-version: 2442.2.1
+current-version: 2443
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CalCGColorConvertToRGBCopy, _CalCGColorSpaceGetRGB, _CalUICalendarOccurrenceItemDefaultFontSize, 

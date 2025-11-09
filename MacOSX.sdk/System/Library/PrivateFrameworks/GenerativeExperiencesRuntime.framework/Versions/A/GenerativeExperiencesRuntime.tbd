@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GenerativeExperiencesRuntime.framework/Versions/A/GenerativeExperiencesRuntime'
-current-version: 145.255.2
+current-version: 150.255
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -25,28 +25,24 @@ exports:
                        '_$s28GenerativeExperiencesRuntime19AvailabilityManagerO12UpdateReasonOMn', 
                        '_$s28GenerativeExperiencesRuntime19AvailabilityManagerO12UpdateReasonON', 
                        '_$s28GenerativeExperiencesRuntime19AvailabilityManagerO12UpdateReasonOSQAAMc', 
-                       '_$s28GenerativeExperiencesRuntime19AvailabilityManagerO9updateAll0F6ReasonyAC06UpdateH0O_tYaFZ', 
-                       '_$s28GenerativeExperiencesRuntime19AvailabilityManagerO9updateAll0F6ReasonyAC06UpdateH0O_tYaFZTu', 
+                       '_$s28GenerativeExperiencesRuntime19AvailabilityManagerO9updateAll0F6Reason16isClassCUnlockedyAC06UpdateH0O_SbtYaFZ', 
+                       '_$s28GenerativeExperiencesRuntime19AvailabilityManagerO9updateAll0F6Reason16isClassCUnlockedyAC06UpdateH0O_SbtYaFZTu', 
+                       '_$s28GenerativeExperiencesRuntime19AvailabilityManagerO9updateAll0F6Reason16isClassCUnlockedyAC06UpdateH0O_SbtYaFZfA0_', 
                        '_$s28GenerativeExperiencesRuntime19AvailabilityManagerOMa', 
                        '_$s28GenerativeExperiencesRuntime19AvailabilityManagerOMn', 
                        '_$s28GenerativeExperiencesRuntime19AvailabilityManagerON', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerC016postOutOfStorageeF05force22remainingSpaceRequiredySb_s6UInt64VtKFZ', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerC019pendingOutOfStorageeF5ItemsSaySo08FLFollowF4ItemCGyKFZ', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerC024clearPendingOutOfStorageeF5ItemsyyKFZ', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerC11pendingCFUsSaySo08FLFollowF4ItemCGyKFZTj', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerC11pendingCFUsSaySo08FLFollowF4ItemCGyKFZTq', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerC16clientIdentifierSSvgZ', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerC16uniqueIdentifierSSvgZ', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerC35checkAndNotifyForOutOfStorageStatus05forceJ0ySb_tFZ', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerC9clearCFUsyyKFZTj', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerC9clearCFUsyyKFZTq', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerCMa', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerCMm', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerCMn', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerCMo', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerCMu', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerCN', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerCfD', 
-                       '_$s28GenerativeExperiencesRuntime19CoreFollowUpManagerCfd' ]
+                       '_$s28GenerativeExperiencesRuntime26FollowUpControllerProtocolMp', 
+                       '_$s28GenerativeExperiencesRuntime26FollowUpControllerProtocolP012clearPendingdE5Items21withUniqueIdentifiersySayypGSg_tKFTj', 
+                       '_$s28GenerativeExperiencesRuntime26FollowUpControllerProtocolP012clearPendingdE5Items21withUniqueIdentifiersySayypGSg_tKFTq', 
+                       '_$s28GenerativeExperiencesRuntime26FollowUpControllerProtocolP012clearPendingdE5ItemsyyKFTj', 
+                       '_$s28GenerativeExperiencesRuntime26FollowUpControllerProtocolP012clearPendingdE5ItemsyyKFTq', 
+                       '_$s28GenerativeExperiencesRuntime26FollowUpControllerProtocolP07pendingdE5ItemsSaySo08FLFollowE4ItemCGyKFTj', 
+                       '_$s28GenerativeExperiencesRuntime26FollowUpControllerProtocolP07pendingdE5ItemsSaySo08FLFollowE4ItemCGyKFTq', 
+                       '_$s28GenerativeExperiencesRuntime26FollowUpControllerProtocolP4postyySo08FLFollowE4ItemCSgKFTj', 
+                       '_$s28GenerativeExperiencesRuntime26FollowUpControllerProtocolP4postyySo08FLFollowE4ItemCSgKFTq', 
+                       '_$s28GenerativeExperiencesRuntime26FollowUpControllerProtocolTL', 
+                       '_$sSo14FLFollowUpItemC28GenerativeExperiencesRuntimeE024createOutOfStorageFollowbC016uniqueIdentifier22remainingSpaceRequired29timeInSecondsBeforeExpirationABSgSS_s6UInt64VSdtFZ', 
+                       '_$sSo20FLFollowUpControllerC28GenerativeExperiencesRuntime06FollowbC8ProtocolACMc', 
+                       '_$sSo20FLFollowUpControllerC28GenerativeExperiencesRuntime06FollowbC8ProtocolACWP' ]
     objc-classes:    [ ProfilePreferencesChangeHandler ]
 ...

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PAImaging.framework/Versions/A/PAImaging'
-current-version: 711.0.180
+current-version: 721.0.150
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AddedAdjustmentNotificationKey, _CATransform3DFromNSString, 
@@ -16,19 +16,18 @@ exports:
                        _NSStringFromPATransform3D, _PAAnimationDuration, _PACanvasItemViewFrameSizeDidChangeNotification, 
                        _PACompositionEditControllerObserverNotificationName, _PAFrameTimeKey, 
                        _PAImageItemViewDidChangeDisplayNotification, _PAImageItemViewDidChangeHDREnableNotification, 
-                       _PAImageItemViewOldBackingScaleFactorUserInfoKey, _PAImagingVersionNumber, 
-                       _PAImagingVersionString, _PAImplicitAnimationEnabled, _PATransform3DDecompose, 
-                       _PATransform3DDelta, _PATransform3DIdentity, _PATransform3DStandardize, 
-                       _RemovedAdjustmentNotificationKey, _UpdatedAdjustmentNotificationKey, 
-                       _UpdatedMultipleAdjustmentsNotificationKey, _VideoComplementVisibilityChangedNotificationKey, 
-                       _gDebugFileNumber, _g_extensions, _g_sharedPAGLUtilities, 
-                       _g_supportsARBFragmentProgram, _kIPADebugAnimationAssertLayerDrawCount, 
-                       _kIPADebugAnimationDumpLayerTree, _kIPADebugAnimationHideDestinationLayer, 
-                       _kIPADebugAnimationHideSourceLayer, _kIPADebugAnimationShowLayerBorder, 
-                       _kIPADebugAnimationShowLayerOverlayColor, _kIPADebugAnimationStepBack, 
-                       _kPACanvasItemViewZoomFactorKey, _kPACanvasItemViewZoomToFitFactorKey, 
-                       _kPACanvasItemViewZoomToFitKey, _kPAHistogramDefaultCount, 
-                       _kPAHistogramDefaultRange, _kPAHistogramEqualGrayWeights, 
+                       _PAImageItemViewOldBackingScaleFactorUserInfoKey, _PAImplicitAnimationEnabled, 
+                       _PATransform3DDecompose, _PATransform3DDelta, _PATransform3DIdentity, 
+                       _PATransform3DStandardize, _RemovedAdjustmentNotificationKey, 
+                       _UpdatedAdjustmentNotificationKey, _UpdatedMultipleAdjustmentsNotificationKey, 
+                       _VideoComplementVisibilityChangedNotificationKey, _gDebugFileNumber, 
+                       _g_extensions, _g_sharedPAGLUtilities, _g_supportsARBFragmentProgram, 
+                       _kIPADebugAnimationAssertLayerDrawCount, _kIPADebugAnimationDumpLayerTree, 
+                       _kIPADebugAnimationHideDestinationLayer, _kIPADebugAnimationHideSourceLayer, 
+                       _kIPADebugAnimationShowLayerBorder, _kIPADebugAnimationShowLayerOverlayColor, 
+                       _kIPADebugAnimationStepBack, _kPACanvasItemViewZoomFactorKey, 
+                       _kPACanvasItemViewZoomToFitFactorKey, _kPACanvasItemViewZoomToFitKey, 
+                       _kPAHistogramDefaultCount, _kPAHistogramDefaultRange, _kPAHistogramEqualGrayWeights, 
                        _kPAHistogramExtendedRange, _kPAHistogramStandardLuminanceWeights, 
                        _kPAImageKeyBackground, _kPAImageKeyDefault, _kPAImageKeyForeground, 
                        _kPAImageKeyPreview, _kPAImageKeyRender, _kPAImageKeyThumbnail, 

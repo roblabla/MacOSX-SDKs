@@ -49,6 +49,12 @@ WK_SWIFT_UI_ACTOR
 /* @abstract The delegate that receives progress updates for this download. */
 @property (nonatomic, weak) id <WKDownloadDelegate> delegate;
 
+/* @abstract A boolean value indicating whether this download was initiated by the user. */
+@property (nonatomic, readonly, getter=isUserInitiated) BOOL userInitiated API_AVAILABLE(macos(NA), ios(18.2));
+
+/* @abstract The frame that originated this download. */
+@property (nonatomic, readonly) WKFrameInfo *originatingFrame API_AVAILABLE(macos(NA), ios(18.2));
+
 /* @abstract Cancel the download.
  @param completionHandler A block to invoke when cancellation is finished.
  @discussion To attempt to resume the download, call WKWebView resumeDownloadFromResumeData: with the data given to the completionHandler.

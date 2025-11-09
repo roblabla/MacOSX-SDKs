@@ -93,7 +93,7 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 
 @property (readonly, copy) NSString *symbol;
 
-- (instancetype)init API_UNAVAILABLE(macos, ios, watchos, tvos);
+- (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new API_UNAVAILABLE(macos, ios, watchos, tvos);
 
 - (instancetype)initWithSymbol:(NSString *)symbol NS_DESIGNATED_INITIALIZER;

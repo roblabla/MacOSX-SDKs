@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CloudPhotoServices.framework/Versions/A/CloudPhotoServices'
-current-version: 711.0.180
+current-version: 721.0.150
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -14,7 +14,6 @@ exports:
                        _CloudPhotoServicesOptionOutputFileTypeKey, _CloudPhotoServicesOptionRenderOriginatingSignatureKey, 
                        _CloudPhotoServicesOptionRequestReasonKey, _CloudPhotoServicesOptionTargetFileSizeKey, 
                        _CloudPhotoServicesRetryCount, _CloudPhotoServicesRetryDelay, 
-                       _CloudPhotoServicesVersionNumber, _CloudPhotoServicesVersionString, 
                        _CloudPhotoServicesVideoConversionPowerEfficiencyKey, _CloudPhotoServicesVideoConversionPowerEfficiencyMinimumDurationKey, 
                        _CloudPhotoServicesVideoConversionPowerEfficiencyOverrideUserDefaultsKey, 
                        __logDropDerivatives ]

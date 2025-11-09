@@ -463,6 +463,12 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
  */
 @property (readonly, strong, nonatomic) NSXPCConnection * (^matterControllerXPCConnectBlock)(void)API_AVAILABLE(ios(16.1));
 
+/*!
+ * @brief Block generating XPC connection on demand through which to access the Matter controller associated with this home.
+ *        This property can be passed as part of an MTRXPCDeviceControllerParameters to create an MTRDeviceController that will have access to the Apple Home Fabric.
+ */
+@property (readonly, strong, nonatomic) NSXPCConnection * (^matterStartupParametersXPCConnectBlock)(void)API_AVAILABLE(ios(18.2));
+
 @end
 
 

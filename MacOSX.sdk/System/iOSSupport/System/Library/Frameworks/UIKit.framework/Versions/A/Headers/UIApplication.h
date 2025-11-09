@@ -284,6 +284,71 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @end
 
 
+typedef NS_ENUM(NSInteger, UIApplicationCategory) {
+    UIApplicationCategoryWebBrowser = 1
+}
+API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, macCatalyst) API_UNAVAILABLE(watchos, tvos)
+NS_SWIFT_NAME(UIApplication.Category);
+
+/// The default status of an application for some category.
+typedef NS_ENUM(NSInteger, UIApplicationCategoryDefaultStatus) {
+    /// The status was not available. This is an error condition and the returned error object has more information.
+    UIApplicationCategoryDefaultStatusUnavailable,
+
+    /// The application is the default for the category.
+    UIApplicationCategoryDefaultStatusIsDefault,
+
+    /// The application is not the default for the category.
+    UIApplicationCategoryDefaultStatusNotDefault
+} API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, macCatalyst) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UNAVAILABLE("Use UIApplication.isDefault(_:)");
+
+UIKIT_EXTERN NSErrorDomain const UIApplicationCategoryDefaultErrorDomain
+API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, macCatalyst) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_NONISOLATED NS_SWIFT_UNAVAILABLE("Use UIApplication.CategoryDefaultError.domain");
+
+typedef NS_ERROR_ENUM(UIApplicationCategoryDefaultErrorDomain, UIApplicationCategoryDefaultErrorCode) {
+    /// The application is rate-limited.
+    UIApplicationCategoryDefaultErrorRateLimited = 1,
+}
+API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, macCatalyst) API_UNAVAILABLE(watchos, tvos)
+NS_SWIFT_NAME(UIApplication.CategoryDefaultError);
+
+/// Supplied in userInfo when the application is rate-limited: the last date on which data was
+/// retrieved.
+UIKIT_EXTERN NSErrorUserInfoKey const UIApplicationCategoryDefaultStatusLastProvidedDateErrorKey
+API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, macCatalyst) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_NONISOLATED NS_REFINED_FOR_SWIFT;
+
+/// Supplied in userInfo when the application is rate-limited: the date after which the app will no
+/// longer be rate-limited
+UIKIT_EXTERN NSErrorUserInfoKey const UIApplicationCategoryDefaultRetryAvailabilityDateErrorKey
+API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, macCatalyst) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_NONISOLATED NS_REFINED_FOR_SWIFT;
+
+@interface UIApplication (DefaultApplication)
+
+/// Determine whether the application is the current default app for some category of application.
+///
+/// When this method returns `UIApplicationCategoryDefaultStatusIsDefault`, the application
+/// is the default for the provided category.
+///
+/// When this method returns `UIApplicationCategoryDefaultStatusNotDefault`, the application is
+/// not the default for the provide category.
+///
+/// Otherwise, this method returns `UIApplicationCategoryDefaultStatusUnavailable`, which is an error
+/// condition (e.g., the application was rate-limited); the `NSError` object returned in the error
+/// out-parameter has more information.
+///
+/// The system reserves the right to aggressively rate-limit its response. If the application is
+/// rate-limited, the method will fail, the error will be `UIApplicationCategoryDefaultErrorRateLimited`
+/// in the `UIApplicationCategoryDefaultErrorDomain` domain, and two keys will be in the error userInfo
+/// dictionary: `UIApplicationCategoryDefaultStatusLastProvidedDateErrorKey`, which is the date when
+/// an answer was last provided to the app, and `UIApplicationCategoryDefaultRetryAvailabilityDateErrorKey`,
+/// which is the date after which the application can expect to ask again (i.e., will not be
+/// rate-limited any more).
+- (UIApplicationCategoryDefaultStatus)defaultStatusForCategory:(UIApplicationCategory)category error:(NSError **)error
+API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, macCatalyst) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_NONISOLATED NS_REFINED_FOR_SWIFT;
+
+@end
+
+
 typedef NSString * UIApplicationLaunchOptionsKey NS_TYPED_ENUM API_UNAVAILABLE(watchos);
 
 API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
@@ -506,6 +571,9 @@ UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsUserA
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsCloudKitShareMetadataKey API_UNAVAILABLE(watchos) NS_SWIFT_NAME(cloudKitShareMetadata) API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos); // The presence of this key indicates that the app was launched in order to handle a CloudKit sharing invitation. The value of this key is a CKShareMetadata object.
 
 UIKIT_EXTERN NSString *const UIApplicationOpenSettingsURLString API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
+
+/// The URL string you use to deep link to settings for default app selection in the Settings app.
+UIKIT_EXTERN NSString *const UIApplicationOpenDefaultApplicationsSettingsURLString API_AVAILABLE(ios(18.3)) API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
 
 #if __swift__
 UIKIT_EXTERN NSString *const UIApplicationOpenNotificationSettingsURLString API_DEPRECATED_WITH_REPLACEMENT("UIApplication.openNotificationSettingsURLString", ios(15.4, 16.0), visionos(1.0, 1.0)) NS_SWIFT_NONISOLATED;

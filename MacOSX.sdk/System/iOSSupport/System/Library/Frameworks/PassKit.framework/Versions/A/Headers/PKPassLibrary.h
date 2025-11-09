@@ -52,6 +52,7 @@ API_AVAILABLE(ios(6.0), watchos(3.0))
 // These return only local passes the process is entitled to access.
 - (NSArray<PKPass *> *)passes;
 - (nullable PKPass *)passWithPassTypeIdentifier:(NSString *)identifier serialNumber:(NSString *)serialNumber;
+- (NSSet<PKSecureElementPass *> *)passesWithReaderIdentifier:(NSString *)readerIdentifier;
 - (NSArray<PKPass *> *)passesOfType:(PKPassType)passType API_AVAILABLE(ios(8.0), watchos(3.0));
 
 // This returns the remote payment passes from attached devices

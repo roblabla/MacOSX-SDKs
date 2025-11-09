@@ -93,6 +93,175 @@ OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 
 hv_return_t hv_vcpu_set_simd_fp_reg(hv_vcpu_t vcpu, hv_simd_fp_reg_t reg, hv_simd_fp_uchar16_t value);
 
+/*!
+ @abstract Gets the current SME state consisting of the streaming SVE mode (PSTATE.SM) and ZA storage enable (PSTATE.ZA).
+ @param vcpu ID of the vCPU instance.
+ @param sme_state Pointer to the SME state.
+ @result HV_SUCCESS on success, an error code otherwise.
+ @discussion
+    Must be called by the owning thread.
+
+    In streaming SVE mode, the SIMD Q registers are aliased to the bottom 128 bits of the
+    corresponding Z register, and any modification will reflect on the Z register state.
+
+    Returns HV_UNSUPPORTED if SME is not supported.
+ */
+OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+hv_return_t hv_vcpu_get_sme_state(hv_vcpu_t vcpu, hv_vcpu_sme_state_t *sme_state);
+
+/*!
+ @abstract Sets the SME state consisting of the streaming SVE mode and ZA storage enable.
+ @param vcpu ID of the vCPU instance.
+ @param sme_state Pointer to the SME state to set.
+ @result HV_SUCCESS on success, an error code otherwise.
+ @discussion
+    Must be called by the owning thread.
+
+    For any entry or exit from streaming SVE mode, all Z vector and P predicate registers
+    are set to zero, and all FPSR flags are set; this state must be saved if it needs to be
+    retained across streaming SVE mode transitions.
+
+    In streaming SVE mode, the SIMD Q registers are aliased to the bottom 128 bits of the
+    corresponding Z register, and any modification will reflect on the Z register state.
+
+    If the optional FEAT_SME_FA64 is implemented, the full SIMD instruction set is supported
+    in streaming SVE mode; otherwise many legacy SIMD instructions are illegal in this mode.
+
+    When finished, disable streaming SVE mode and ZA storage; this serves as a power-down
+    hint for SME-related hardware.
+
+    Returns HV_UNSUPPORTED if SME is not supported.
+ */
+OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+hv_return_t hv_vcpu_set_sme_state(hv_vcpu_t vcpu, const hv_vcpu_sme_state_t *sme_state);
+
+/*!
+ @abstract Returns the value of a vCPU Z vector register in streaming SVE mode.
+ @param vcpu ID of the vCPU instance.
+ @param reg ID of the Z vector register.
+ @param value Pointer to the retrieved register value.
+ @param length The length (in bytes) of the provided value storage.
+ @result HV_SUCCESS on success, an error code otherwise.
+ @discussion
+    Must be called by the owning thread.
+
+    Returns an error if not in streaming SVE mode (i.e. streaming_sve_mode_enabled is false),
+    or if the provided value storage is not maximum SVL bytes.
+ */
+OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+hv_return_t hv_vcpu_get_sme_z_reg(hv_vcpu_t vcpu, hv_sme_z_reg_t reg, uint8_t *value, size_t length);
+
+/*!
+ @abstract Sets the value of a vCPU Z vector register in streaming SVE mode.
+ @param vcpu ID of the vCPU instance.
+ @param reg ID of the Z vector register.
+ @param value Pointer to the register value to set.
+ @param length The length (in bytes) of the Z register value.
+ @result HV_SUCCESS on success, an error code otherwise.
+ @discussion
+    Must be called by the owning thread.
+
+    Returns an error if not in streaming SVE mode (i.e. streaming_sve_mode_enabled is false),
+    or if the value length is not maximum SVL bytes.
+ */
+OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+hv_return_t hv_vcpu_set_sme_z_reg(hv_vcpu_t vcpu, hv_sme_z_reg_t reg, const uint8_t *value, size_t length);
+
+/*!
+ @abstract Returns the value of a vCPU P predicate register in streaming SVE mode.
+ @param vcpu ID of the vCPU instance.
+ @param reg ID of the P predicate register.
+ @param value Pointer to the retrieved register value.
+ @param length The length (in bytes) of the provided value storage.
+ @result HV_SUCCESS on success, an error code otherwise.
+ @discussion
+    Must be called by the owning thread.
+
+    Returns an error if not in streaming SVE mode (i.e. streaming_sve_mode_enabled is false),
+    or if the provided value storage is not maximum SVL / 8 bytes.
+ */
+OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+hv_return_t hv_vcpu_get_sme_p_reg(hv_vcpu_t vcpu, hv_sme_p_reg_t reg, uint8_t *value, size_t length);
+
+/*!
+ @abstract Sets the value of a vCPU P predicate register in streaming SVE mode.
+ @param vcpu ID of the vCPU instance.
+ @param reg ID of the P predicate register.
+ @param value Pointer to the register value to set.
+ @param length The length (in bytes) of the P register value.
+ @result HV_SUCCESS on success, an error code otherwise.
+ @discussion
+    Must be called by the owning thread.
+
+    Returns an error if not in streaming SVE mode (i.e. streaming_sve_mode_enabled is false),
+    or if the value length is not the maximum SVL / 8 bytes.
+ */
+OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+hv_return_t hv_vcpu_set_sme_p_reg(hv_vcpu_t vcpu, hv_sme_p_reg_t reg, const uint8_t *value, size_t length);
+
+/*!
+ @abstract Returns the value of the vCPU ZA matrix register in streaming SVE mode.
+ @param vcpu ID of the vCPU instance.
+ @param value Pointer to the retrieved register value.
+ @param length The length (in bytes) of the provided value storage.
+ @result HV_SUCCESS on success, an error code otherwise.
+ @discussion
+    Must be called by the owning thread.
+
+    Returns an error if PSTATE.ZA is 0 (i.e. za_storage_enabled is false), or if the provided value storage
+    is not [maximum SVL bytes x maximum SVL bytes].
+
+    Does not require streaming SVE mode enabled.
+ */
+OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+hv_return_t hv_vcpu_get_sme_za_reg(hv_vcpu_t vcpu, uint8_t *value, size_t length);
+
+/*!
+ @abstract Sets the value of the vCPU ZA matrix register in streaming SVE mode.
+ @param vcpu ID of the vCPU instance.
+ @param value Pointer to the register value to set.
+ @param length The length (in bytes) of the provided ZA register value.
+ @result HV_SUCCESS on success, an error code otherwise.
+ @discussion
+    Must be called by the owning thread.
+
+    Returns an error if PSTATE.ZA is 0 (i.e. za_storage_enabled is false), or if the value length
+    is not [maximum SVL bytes x maximum SVL bytes].
+
+    Does not require streaming SVE mode enabled.
+ */
+OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+hv_return_t hv_vcpu_set_sme_za_reg(hv_vcpu_t vcpu, const uint8_t *value, size_t length);
+
+/*!
+ @abstract Returns the current value of the vCPU ZT0 register in streaming SVE mode.
+ @param vcpu ID of the vCPU instance.
+ @param value Pointer to the retrieved register value.
+ @result HV_SUCCESS on success, an error code otherwise.
+ @discussion
+    Must be called by the owning thread.
+
+    Returns an error if PSTATE.ZA is 0 (i.e. za_storage_enabled is false).
+
+    Does not require streaming SVE mode enabled.
+ */
+OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+hv_return_t hv_vcpu_get_sme_zt0_reg(hv_vcpu_t vcpu, hv_sme_zt0_uchar64_t *value);
+
+/*!
+ @abstract Sets the value of the vCPU ZT0 register in streaming SVE mode.
+ @param vcpu ID of the vCPU instance.
+ @param value Pointer to the register value to set.
+ @result HV_SUCCESS on success, an error code otherwise.
+ @discussion
+    Must be called by the owning thread.
+
+    Returns an error if PSTATE.ZA is 0 (i.e. za_storage_enabled is false).
+
+    Does not require streaming SVE mode enabled.
+ */
+OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+hv_return_t hv_vcpu_set_sme_zt0_reg(hv_vcpu_t vcpu, const hv_sme_zt0_uchar64_t *value);
 
 /*!
  @abstract Returns the current value of a vCPU system register

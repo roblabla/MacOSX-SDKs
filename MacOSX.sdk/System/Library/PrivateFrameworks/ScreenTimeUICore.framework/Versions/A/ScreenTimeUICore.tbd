@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeUICore.framework/Versions/A/ScreenTimeUICore'
-current-version: 537.1.8
+current-version: 537.2.14
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -427,6 +427,7 @@ exports:
                        '_$s16ScreenTimeUICore49STCommunicationSafetyAnalyticsTipContentInterfaceCMo', 
                        '_$s16ScreenTimeUICore49STCommunicationSafetyAnalyticsTipContentInterfaceCN', 
                        '_$s16ScreenTimeUICore49STCommunicationSafetyAnalyticsTipContentInterfaceCfD', 
+                       '_$s16ScreenTimeUICore6DeviceV03hasD12ActivityDataSbvg', '_$s16ScreenTimeUICore6DeviceV03hasD12ActivityDataSbvpMV', 
                        '_$s16ScreenTimeUICore6DeviceV10identifierSSvM', '_$s16ScreenTimeUICore6DeviceV10identifierSSvg', 
                        '_$s16ScreenTimeUICore6DeviceV10identifierSSvpMV', '_$s16ScreenTimeUICore6DeviceV10identifierSSvs', 
                        '_$s16ScreenTimeUICore6DeviceV11backingItem4name10identifier18coreDuetIdentifierACSo06STCoreD0CSg_S3SSgtcfC', 

@@ -8,7 +8,8 @@
 #include <CoreGraphics/CGBase.h>
 #include <CoreFoundation/CFAvailability.h>
 #include <CoreGraphics/CGColorSpace.h>
-#include <CoreGraphics/CGContext.h>
+#include <CoreGraphics/CGImage.h>
+#include <CoreGraphics/CGToneMapping.h>
 
 typedef const struct CF_BRIDGED_TYPE(id) CGColorConversionInfo* CGColorConversionInfoRef;
 

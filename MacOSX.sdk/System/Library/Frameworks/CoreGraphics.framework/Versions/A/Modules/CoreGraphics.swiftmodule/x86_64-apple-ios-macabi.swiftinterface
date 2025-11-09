@@ -1,13 +1,33 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
-// swift-module-flags: -target x86_64-apple-ios18.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 1883.1.10.4.1 -module-name CoreGraphics
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
+// swift-module-flags: -target x86_64-apple-ios18.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 1889.2.7 -module-name CoreGraphics
 @_exported import CoreFoundation
 @_exported import CoreGraphics
-import Darwin
+import Foundation
 import Swift
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreGraphics.CGColor {
+  public var components: [CoreFoundation.CGFloat]? {
+    get
+  }
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+public protocol _CGColorInitTrampoline {
+  init?(colorSpace space: CoreGraphics.CGColorSpace, components: Swift.UnsafePointer<CoreFoundation.CGFloat>)
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreGraphics._CGColorInitTrampoline {
+  public init(_colorLiteralRed red: Swift.Float, green: Swift.Float, blue: Swift.Float, alpha: Swift.Float)
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreGraphics.CGColor : CoreGraphics._CGColorInitTrampoline, Swift._ExpressibleByColorLiteral {
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreGraphics.CGColor : @unchecked Swift.Sendable {
+}
 @available(*, unavailable, message: "Use == instead")
 public func CGAffineTransformEqualToTransform(_ t1: CoreFoundation.CGAffineTransform, _ t2: CoreFoundation.CGAffineTransform) -> Swift.Bool
 @available(*, unavailable, message: "Use class var white/black/clear instead")
@@ -142,151 +162,151 @@ public var CGFLOAT_MAX: CoreFoundation.CGFloat {
 }
 @available(*, unavailable, message: "Use truncatingRemainder instead")
 @_transparent public func % (lhs: CoreFoundation.CGFloat, rhs: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  fatalError("% is not available.")
+    fatalError("% is not available.")
 }
 @available(*, unavailable, message: "Use formTruncatingRemainder instead")
 @_transparent public func %= (lhs: inout CoreFoundation.CGFloat, rhs: CoreFoundation.CGFloat) {
-  fatalError("%= is not available.")
+    fatalError("%= is not available.")
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func acos(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(acos(x.native))
+    return CGFloat(acos(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func asin(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(asin(x.native))
+    return CGFloat(asin(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func atan(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(atan(x.native))
+    return CGFloat(atan(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func cos(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(cos(x.native))
+    return CGFloat(cos(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func sin(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(sin(x.native))
+    return CGFloat(sin(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func tan(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(tan(x.native))
+    return CGFloat(tan(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func acosh(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(acosh(x.native))
+    return CGFloat(acosh(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func asinh(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(asinh(x.native))
+    return CGFloat(asinh(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func atanh(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(atanh(x.native))
+    return CGFloat(atanh(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func cosh(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(cosh(x.native))
+    return CGFloat(cosh(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func sinh(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(sinh(x.native))
+    return CGFloat(sinh(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func tanh(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(tanh(x.native))
+    return CGFloat(tanh(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func exp(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(exp(x.native))
+    return CGFloat(exp(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func exp2(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(exp2(x.native))
+    return CGFloat(exp2(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func expm1(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(expm1(x.native))
+    return CGFloat(expm1(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func log(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(log(x.native))
+    return CGFloat(log(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func log10(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(log10(x.native))
+    return CGFloat(log10(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func log1p(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(log1p(x.native))
+    return CGFloat(log1p(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func log2(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(log2(x.native))
+    return CGFloat(log2(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func logb(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(logb(x.native))
+    return CGFloat(logb(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func cbrt(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(cbrt(x.native))
+    return CGFloat(cbrt(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func erf(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(erf(x.native))
+    return CGFloat(erf(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func erfc(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(erfc(x.native))
+    return CGFloat(erfc(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func tgamma(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(tgamma(x.native))
+    return CGFloat(tgamma(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func nearbyint(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(nearbyint(x.native))
+    return CGFloat(nearbyint(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func rint(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(rint(x.native))
+    return CGFloat(rint(x.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func atan2(_ lhs: CoreFoundation.CGFloat, _ rhs: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(atan2(lhs.native, rhs.native))
+    return CGFloat(atan2(lhs.native, rhs.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func hypot(_ lhs: CoreFoundation.CGFloat, _ rhs: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(hypot(lhs.native, rhs.native))
+    return CGFloat(hypot(lhs.native, rhs.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func pow(_ lhs: CoreFoundation.CGFloat, _ rhs: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(pow(lhs.native, rhs.native))
+    return CGFloat(pow(lhs.native, rhs.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func copysign(_ lhs: CoreFoundation.CGFloat, _ rhs: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(copysign(lhs.native, rhs.native))
+    return CGFloat(copysign(lhs.native, rhs.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func nextafter(_ lhs: CoreFoundation.CGFloat, _ rhs: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(nextafter(lhs.native, rhs.native))
+    return CGFloat(nextafter(lhs.native, rhs.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func fdim(_ lhs: CoreFoundation.CGFloat, _ rhs: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(fdim(lhs.native, rhs.native))
+    return CGFloat(fdim(lhs.native, rhs.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func fmax(_ lhs: CoreFoundation.CGFloat, _ rhs: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(fmax(lhs.native, rhs.native))
+    return CGFloat(fmax(lhs.native, rhs.native))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func fmin(_ lhs: CoreFoundation.CGFloat, _ rhs: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(fmin(lhs.native, rhs.native))
+    return CGFloat(fmin(lhs.native, rhs.native))
 }
 @available(*, unavailable, message: "use the floatingPointClass property.")
 @_transparent public func fpclassify(_ x: CoreFoundation.CGFloat) -> Swift.Int {
-  fatalError("unavailable")
+    fatalError("unavailable")
 }
 @available(*, unavailable, message: "use the isNormal property.")
 public func isnormal(_ value: CoreFoundation.CGFloat) -> Swift.Bool
@@ -301,130 +321,51 @@ public func signbit(_ value: CoreFoundation.CGFloat) -> Swift.Int
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @available(swift, deprecated: 4.2, renamed: "scalbn")
 @_transparent public func ldexp(_ x: CoreFoundation.CGFloat, _ n: Swift.Int) -> CoreFoundation.CGFloat {
-  return CGFloat(ldexp(x.native, n))
+    return CGFloat(ldexp(x.native, n))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @available(swift, deprecated: 4.2, message: "use the exponent property.")
 @_transparent public func ilogb(_ x: CoreFoundation.CGFloat) -> Swift.Int {
-  return Int(x.exponent)
+    return Int(x.exponent)
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func lgamma(_ x: CoreFoundation.CGFloat) -> (CoreFoundation.CGFloat, Swift.Int) {
-  let (value, sign) = lgamma(x.native)
-  return (CGFloat(value), sign)
+    let (value, sign) = lgamma(x.native)
+    return (CGFloat(value), sign)
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func remquo(_ x: CoreFoundation.CGFloat, _ y: CoreFoundation.CGFloat) -> (CoreFoundation.CGFloat, Swift.Int) {
-  let (rem, quo) = remquo(x.native, y.native)
-  return (CGFloat(rem), quo)
+    let (rem, quo) = remquo(x.native, y.native)
+    return (CGFloat(rem), quo)
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @available(swift, deprecated: 4.2, message: "use CGFloat(nan: CGFloat.RawSignificand) instead.")
 @_transparent public func nan(_ tag: Swift.String) -> CoreFoundation.CGFloat {
-  return CGFloat(nan(tag) as CGFloat.NativeType)
+    return CGFloat(nan(tag) as CGFloat.NativeType)
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func j0(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(j0(Double(x.native)))
+    return CGFloat(j0(Double(x.native)))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func j1(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(j1(Double(x.native)))
+    return CGFloat(j1(Double(x.native)))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func jn(_ n: Swift.Int, _ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(jn(n, Double(x.native)))
+    return CGFloat(jn(n, Double(x.native)))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func y0(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(y0(Double(x.native)))
+    return CGFloat(y0(Double(x.native)))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func y1(_ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(y1(Double(x.native)))
+    return CGFloat(y1(Double(x.native)))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 @_transparent public func yn(_ n: Swift.Int, _ x: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
-  return CGFloat(yn(n, Double(x.native)))
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreFoundation.CGAffineTransform : Swift.Equatable {
-  public static func == (lhs: CoreFoundation.CGAffineTransform, rhs: CoreFoundation.CGAffineTransform) -> Swift.Bool
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreFoundation.CGAffineTransform {
-  @_alwaysEmitIntoClient public func hash(into hasher: inout Swift.Hasher) {
-        hasher.combine(a)
-        hasher.combine(b)
-        hasher.combine(c)
-        hasher.combine(d)
-        hasher.combine(tx)
-        hasher.combine(ty)
-    }
-  @_alwaysEmitIntoClient public var hashValue: Swift.Int {
-    get {
-        var hasher = Hasher()
-        hash(into: &hasher)
-        return hasher.finalize()
-    }
-  }
-}
-@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension CoreFoundation.CGAffineTransform : Swift.Hashable {
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreGraphics.CGColor {
-  public var components: [CoreFoundation.CGFloat]? {
-    get
-  }
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-public protocol _CGColorInitTrampoline {
-  init?(colorSpace space: CoreGraphics.CGColorSpace, components: Swift.UnsafePointer<CoreFoundation.CGFloat>)
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreGraphics._CGColorInitTrampoline {
-  public init(_colorLiteralRed red: Swift.Float, green: Swift.Float, blue: Swift.Float, alpha: Swift.Float)
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreGraphics.CGColor : CoreGraphics._CGColorInitTrampoline, Swift._ExpressibleByColorLiteral {
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreGraphics.CGColor : @unchecked Swift.Sendable {
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreGraphics.CGColorSpace {
-  public var colorTable: [Swift.UInt8]? {
-    get
-  }
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreGraphics.CGColorSpace : @unchecked Swift.Sendable {
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreGraphics.CGContext {
-  public func setLineDash(phase: CoreFoundation.CGFloat, lengths: [CoreFoundation.CGFloat])
-  public func move(to point: CoreFoundation.CGPoint)
-  public func addLine(to point: CoreFoundation.CGPoint)
-  public func addCurve(to end: CoreFoundation.CGPoint, control1: CoreFoundation.CGPoint, control2: CoreFoundation.CGPoint)
-  public func addQuadCurve(to end: CoreFoundation.CGPoint, control: CoreFoundation.CGPoint)
-  public func addRects(_ rects: [CoreFoundation.CGRect])
-  public func addLines(between points: [CoreFoundation.CGPoint])
-  public func addArc(center: CoreFoundation.CGPoint, radius: CoreFoundation.CGFloat, startAngle: CoreFoundation.CGFloat, endAngle: CoreFoundation.CGFloat, clockwise: Swift.Bool)
-  public func addArc(tangent1End: CoreFoundation.CGPoint, tangent2End: CoreFoundation.CGPoint, radius: CoreFoundation.CGFloat)
-  public func fillPath(using rule: CoreGraphics.CGPathFillRule = .winding)
-  public func clip(using rule: CoreGraphics.CGPathFillRule = .winding)
-  public func fill(_ rects: [CoreFoundation.CGRect])
-  public func strokeLineSegments(between points: [CoreFoundation.CGPoint])
-  public func clip(to rects: [CoreFoundation.CGRect])
-  public func draw(_ image: CoreGraphics.CGImage, in rect: CoreFoundation.CGRect, byTiling: Swift.Bool = false)
-  @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  public func draw(_ image: CoreGraphics.CGImage, in rect: CoreFoundation.CGRect, by toneMapping: CoreGraphics.CGToneMapping = .default, options: CoreFoundation.CFDictionary?) -> Swift.Bool
-  public var textPosition: CoreFoundation.CGPoint {
-    get
-    set
-  }
-  public func showGlyphs(_ glyphs: [CoreGraphics.CGGlyph], at positions: [CoreFoundation.CGPoint])
+    return CGFloat(yn(n, Double(x.native)))
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 extension CoreFoundation.CGPoint {
@@ -432,11 +373,11 @@ extension CoreFoundation.CGPoint {
     @_transparent get { return CGPoint(x: 0, y: 0) }
   }
   @_transparent public init(x: Swift.Int, y: Swift.Int) {
-    self.init(x: CGFloat(x), y: CGFloat(y))
-  }
+        self.init(x: CGFloat(x), y: CGFloat(y))
+    }
   @_transparent public init(x: Swift.Double, y: Swift.Double) {
-    self.init(x: CGFloat(x), y: CGFloat(y))
-  }
+        self.init(x: CGFloat(x), y: CGFloat(y))
+    }
   public init?(dictionaryRepresentation dict: CoreFoundation.CFDictionary)
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
@@ -461,8 +402,8 @@ extension CoreFoundation.CGPoint : Swift.CustomDebugStringConvertible {
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 extension CoreFoundation.CGPoint : Swift.Equatable {
   @_transparent public static func == (lhs: CoreFoundation.CGPoint, rhs: CoreFoundation.CGPoint) -> Swift.Bool {
-    return lhs.x == rhs.x  &&  lhs.y == rhs.y
-  }
+        return lhs.x == rhs.x && lhs.y == rhs.y
+    }
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 extension CoreFoundation.CGPoint {
@@ -487,110 +428,17 @@ extension CoreFoundation.CGPoint : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreFoundation.CGSize {
-  public static var zero: CoreFoundation.CGSize {
-    @_transparent get { return CGSize(width: 0, height: 0) }
-  }
-  @_transparent public init(width: Swift.Int, height: Swift.Int) {
-    self.init(width: CGFloat(width), height: CGFloat(height))
-  }
-  @_transparent public init(width: Swift.Double, height: Swift.Double) {
-    self.init(width: CGFloat(width), height: CGFloat(height))
-  }
-  public init?(dictionaryRepresentation dict: CoreFoundation.CFDictionary)
+extension CoreGraphics.CGImage {
+  public func copy(maskingColorComponents components: [CoreFoundation.CGFloat]) -> CoreGraphics.CGImage?
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreFoundation.CGSize : Swift.CustomReflectable {
-  public var customMirror: Swift.Mirror {
+extension CoreGraphics.CGImage : @unchecked Swift.Sendable {
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
+extension CoreGraphics.CGEvent {
+  public var data: CoreFoundation.CFData? {
     get
   }
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreFoundation.CGSize : Swift._CustomPlaygroundQuickLookable {
-  @available(*, deprecated, message: "CGSize.customPlaygroundQuickLook will be removed in a future Swift version")
-  public var customPlaygroundQuickLook: Swift.PlaygroundQuickLook {
-    get
-  }
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreFoundation.CGSize : Swift.CustomDebugStringConvertible {
-  public var debugDescription: Swift.String {
-    get
-  }
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreFoundation.CGSize : Swift.Equatable {
-  @_transparent public static func == (lhs: CoreFoundation.CGSize, rhs: CoreFoundation.CGSize) -> Swift.Bool {
-    return lhs.width == rhs.width  &&  lhs.height == rhs.height
-  }
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreFoundation.CGSize {
-  @_alwaysEmitIntoClient public func hash(into hasher: inout Swift.Hasher) {
-        hasher.combine(width)
-        hasher.combine(height)
-    }
-  @_alwaysEmitIntoClient public var hashValue: Swift.Int {
-    get {
-        var hasher = Hasher()
-        hash(into: &hasher)
-        return hasher.finalize()
-    }
-  }
-}
-@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension CoreFoundation.CGSize : Swift.Hashable {
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreFoundation.CGSize : Swift.Codable {
-  public init(from decoder: any Swift.Decoder) throws
-  public func encode(to encoder: any Swift.Encoder) throws
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreFoundation.CGVector {
-  public static var zero: CoreFoundation.CGVector {
-    @_transparent get { return CGVector(dx: 0, dy: 0) }
-  }
-  @_transparent public init(dx: Swift.Int, dy: Swift.Int) {
-    self.init(dx: CGFloat(dx), dy: CGFloat(dy))
-  }
-  @_transparent public init(dx: Swift.Double, dy: Swift.Double) {
-    self.init(dx: CGFloat(dx), dy: CGFloat(dy))
-  }
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreFoundation.CGVector : Swift.Equatable {
-  @_transparent public static func == (lhs: CoreFoundation.CGVector, rhs: CoreFoundation.CGVector) -> Swift.Bool {
-    return lhs.dx == rhs.dx  &&  lhs.dy == rhs.dy
-  }
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreFoundation.CGVector {
-  @_alwaysEmitIntoClient public func hash(into hasher: inout Swift.Hasher) {
-        hasher.combine(dx)
-        hasher.combine(dy)
-    }
-  @_alwaysEmitIntoClient public var hashValue: Swift.Int {
-    get {
-        var hasher = Hasher()
-        hash(into: &hasher)
-        return hasher.finalize()
-    }
-  }
-}
-@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension CoreFoundation.CGVector : Swift.Hashable {
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreFoundation.CGVector : Swift.CustomDebugStringConvertible {
-  public var debugDescription: Swift.String {
-    get
-  }
-}
-@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreFoundation.CGVector : Swift.Codable {
-  public init(from decoder: any Swift.Decoder) throws
-  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 extension CoreFoundation.CGRect {
@@ -598,25 +446,23 @@ extension CoreFoundation.CGRect {
     @_transparent get { return CGRect(x: 0, y: 0, width: 0, height: 0) }
   }
   @_transparent public init(x: CoreFoundation.CGFloat, y: CoreFoundation.CGFloat, width: CoreFoundation.CGFloat, height: CoreFoundation.CGFloat) {
-    self.init(origin: CGPoint(x: x, y: y),
-              size: CGSize(width: width, height: height))
-  }
+        self.init(origin: CGPoint(x: x, y: y), size: CGSize(width: width, height: height))
+    }
   @_transparent public init(x: Swift.Double, y: Swift.Double, width: Swift.Double, height: Swift.Double) {
-    self.init(origin: CGPoint(x: x, y: y),
-              size: CGSize(width: width, height: height))
-  }
+        self.init(origin: CGPoint(x: x, y: y), size: CGSize(width: width, height: height))
+    }
   @_transparent public init(x: Swift.Int, y: Swift.Int, width: Swift.Int, height: Swift.Int) {
-    self.init(origin: CGPoint(x: x, y: y),
-              size: CGSize(width: width, height: height))
-  }
+        self.init(origin: CGPoint(x: x, y: y), size: CGSize(width: width, height: height))
+    }
   public init?(dictionaryRepresentation dict: CoreFoundation.CFDictionary)
   @_transparent public func divided(atDistance: CoreFoundation.CGFloat, from fromEdge: CoreFoundation.CGRectEdge) -> (slice: CoreFoundation.CGRect, remainder: CoreFoundation.CGRect) {
-    var slice = CGRect.zero
-    var remainder = CGRect.zero
-    self.__divided(slice: &slice, remainder: &remainder, atDistance: atDistance,
-           from: fromEdge)
-    return (slice, remainder)
-  }
+        var slice = CGRect.zero
+        var remainder = CGRect.zero
+        self.__divided(
+            slice: &slice, remainder: &remainder, atDistance: atDistance,
+            from: fromEdge)
+        return (slice, remainder)
+    }
   @available(*, unavailable, renamed: "minX")
   public var x: CoreFoundation.CGFloat {
     get
@@ -648,8 +494,8 @@ extension CoreFoundation.CGRect : Swift.CustomDebugStringConvertible {
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 extension CoreFoundation.CGRect : Swift.Equatable {
   @_transparent public static func == (lhs: CoreFoundation.CGRect, rhs: CoreFoundation.CGRect) -> Swift.Bool {
-    return lhs.equalTo(rhs)
-  }
+        return lhs.equalTo(rhs)
+    }
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 extension CoreFoundation.CGRect {
@@ -688,16 +534,135 @@ extension CoreFoundation.CGAffineTransform : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreGraphics.CGImage {
-  public func copy(maskingColorComponents components: [CoreFoundation.CGFloat]) -> CoreGraphics.CGImage?
+extension CoreFoundation.CGAffineTransform : Swift.Equatable {
+  public static func == (lhs: CoreFoundation.CGAffineTransform, rhs: CoreFoundation.CGAffineTransform) -> Swift.Bool
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreGraphics.CGImage : @unchecked Swift.Sendable {
+extension CoreFoundation.CGAffineTransform {
+  @_alwaysEmitIntoClient public func hash(into hasher: inout Swift.Hasher) {
+        hasher.combine(a)
+        hasher.combine(b)
+        hasher.combine(c)
+        hasher.combine(d)
+        hasher.combine(tx)
+        hasher.combine(ty)
+    }
+  @_alwaysEmitIntoClient public var hashValue: Swift.Int {
+    get {
+        var hasher = Hasher()
+        hash(into: &hasher)
+        return hasher.finalize()
+    }
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension CoreFoundation.CGAffineTransform : Swift.Hashable {
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-extension CoreGraphics.CGContext {
-  public func draw(_ layer: CoreGraphics.CGLayer, in rect: CoreFoundation.CGRect)
-  public func draw(_ layer: CoreGraphics.CGLayer, at point: CoreFoundation.CGPoint)
+extension CoreFoundation.CGVector {
+  public static var zero: CoreFoundation.CGVector {
+    @_transparent get { return CGVector(dx: 0, dy: 0) }
+  }
+  @_transparent public init(dx: Swift.Int, dy: Swift.Int) {
+        self.init(dx: CGFloat(dx), dy: CGFloat(dy))
+    }
+  @_transparent public init(dx: Swift.Double, dy: Swift.Double) {
+        self.init(dx: CGFloat(dx), dy: CGFloat(dy))
+    }
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreFoundation.CGVector : Swift.Equatable {
+  @_transparent public static func == (lhs: CoreFoundation.CGVector, rhs: CoreFoundation.CGVector) -> Swift.Bool {
+        return lhs.dx == rhs.dx && lhs.dy == rhs.dy
+    }
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreFoundation.CGVector {
+  @_alwaysEmitIntoClient public func hash(into hasher: inout Swift.Hasher) {
+        hasher.combine(dx)
+        hasher.combine(dy)
+    }
+  @_alwaysEmitIntoClient public var hashValue: Swift.Int {
+    get {
+        var hasher = Hasher()
+        hash(into: &hasher)
+        return hasher.finalize()
+    }
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension CoreFoundation.CGVector : Swift.Hashable {
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreFoundation.CGVector : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreFoundation.CGVector : Swift.Codable {
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreFoundation.CGSize {
+  public static var zero: CoreFoundation.CGSize {
+    @_transparent get { return CGSize(width: 0, height: 0) }
+  }
+  @_transparent public init(width: Swift.Int, height: Swift.Int) {
+        self.init(width: CGFloat(width), height: CGFloat(height))
+    }
+  @_transparent public init(width: Swift.Double, height: Swift.Double) {
+        self.init(width: CGFloat(width), height: CGFloat(height))
+    }
+  public init?(dictionaryRepresentation dict: CoreFoundation.CFDictionary)
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreFoundation.CGSize : Swift.CustomReflectable {
+  public var customMirror: Swift.Mirror {
+    get
+  }
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreFoundation.CGSize : Swift._CustomPlaygroundQuickLookable {
+  @available(*, deprecated, message: "CGSize.customPlaygroundQuickLook will be removed in a future Swift version")
+  public var customPlaygroundQuickLook: Swift.PlaygroundQuickLook {
+    get
+  }
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreFoundation.CGSize : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreFoundation.CGSize : Swift.Equatable {
+  @_transparent public static func == (lhs: CoreFoundation.CGSize, rhs: CoreFoundation.CGSize) -> Swift.Bool {
+        return lhs.width == rhs.width && lhs.height == rhs.height
+    }
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreFoundation.CGSize {
+  @_alwaysEmitIntoClient public func hash(into hasher: inout Swift.Hasher) {
+        hasher.combine(width)
+        hasher.combine(height)
+    }
+  @_alwaysEmitIntoClient public var hashValue: Swift.Int {
+    get {
+        var hasher = Hasher()
+        hash(into: &hasher)
+        return hasher.finalize()
+    }
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension CoreFoundation.CGSize : Swift.Hashable {
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreFoundation.CGSize : Swift.Codable {
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 public enum CGPathFillRule : Swift.Int {
@@ -744,12 +709,6 @@ extension CoreGraphics.CGPath {
   public func flattened(threshold: CoreFoundation.CGFloat) -> CoreGraphics.CGPath
   public func intersects(_ other: CoreGraphics.CGPath, using rule: CoreGraphics.CGPathFillRule = .winding) -> Swift.Bool
   public func componentsSeparated(using rule: CoreGraphics.CGPathFillRule = .winding) -> [CoreGraphics.CGPath]
-}
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
-extension CoreGraphics.CGEvent {
-  public var data: CoreFoundation.CFData? {
-    get
-  }
 }
 extension CoreFoundation.CGAffineTransform {
   @_alwaysEmitIntoClient public init(translationX tx: CoreFoundation.CGFloat, y ty: CoreFoundation.CGFloat) {
@@ -926,6 +885,45 @@ extension CoreFoundation.CGRect {
 }
 @_alwaysEmitIntoClient public func __CGSizeApplyAffineTransform(_ size: CoreFoundation.CGSize, _ t: CoreFoundation.CGAffineTransform) -> CoreFoundation.CGSize {
     CGSizeApplyAffineTransform(size, t)
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreGraphics.CGColorSpace {
+  public var colorTable: [Swift.UInt8]? {
+    get
+  }
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreGraphics.CGColorSpace : @unchecked Swift.Sendable {
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreGraphics.CGContext {
+  public func setLineDash(phase: CoreFoundation.CGFloat, lengths: [CoreFoundation.CGFloat])
+  public func move(to point: CoreFoundation.CGPoint)
+  public func addLine(to point: CoreFoundation.CGPoint)
+  public func addCurve(to end: CoreFoundation.CGPoint, control1: CoreFoundation.CGPoint, control2: CoreFoundation.CGPoint)
+  public func addQuadCurve(to end: CoreFoundation.CGPoint, control: CoreFoundation.CGPoint)
+  public func addRects(_ rects: [CoreFoundation.CGRect])
+  public func addLines(between points: [CoreFoundation.CGPoint])
+  public func addArc(center: CoreFoundation.CGPoint, radius: CoreFoundation.CGFloat, startAngle: CoreFoundation.CGFloat, endAngle: CoreFoundation.CGFloat, clockwise: Swift.Bool)
+  public func addArc(tangent1End: CoreFoundation.CGPoint, tangent2End: CoreFoundation.CGPoint, radius: CoreFoundation.CGFloat)
+  public func fillPath(using rule: CoreGraphics.CGPathFillRule = .winding)
+  public func clip(using rule: CoreGraphics.CGPathFillRule = .winding)
+  public func fill(_ rects: [CoreFoundation.CGRect])
+  public func strokeLineSegments(between points: [CoreFoundation.CGPoint])
+  public func clip(to rects: [CoreFoundation.CGRect])
+  public func draw(_ image: CoreGraphics.CGImage, in rect: CoreFoundation.CGRect, byTiling: Swift.Bool = false)
+  @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  public func draw(_ image: CoreGraphics.CGImage, in rect: CoreFoundation.CGRect, by toneMapping: CoreGraphics.CGToneMapping = .default, options: CoreFoundation.CFDictionary?) -> Swift.Bool
+  public var textPosition: CoreFoundation.CGPoint {
+    get
+    set
+  }
+  public func showGlyphs(_ glyphs: [CoreGraphics.CGGlyph], at positions: [CoreFoundation.CGPoint])
+}
+@available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
+extension CoreGraphics.CGContext {
+  public func draw(_ layer: CoreGraphics.CGLayer, in rect: CoreFoundation.CGRect)
+  public func draw(_ layer: CoreGraphics.CGLayer, at point: CoreFoundation.CGPoint)
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 extension CoreGraphics.CGPathFillRule : Swift.Equatable {}

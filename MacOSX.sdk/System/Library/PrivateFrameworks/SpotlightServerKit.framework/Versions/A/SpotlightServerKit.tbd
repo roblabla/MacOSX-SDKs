@@ -2,11 +2,11 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpotlightServerKit.framework/Versions/A/SpotlightServerKit'
-current-version: 2314.10.1
+current-version: 2328.7.7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _BWA_Create, _BWA_DataAllocate, _BWA_DataDeallocate, _CFDataCreateWithContentsOfURL, 
-                       _CF_MaxRange, _CF_RangeIntersection, _CF_RangeUnion, _GetSystemBuildVersionString, 
+                       _CF_MaxRange, _CF_RangeIntersection, _CF_RangeUnion, _GetSystemBuildVersionStringLocal, 
                        _MDAddNanoseconds, _MDArrayCreateMutable, _MDArrayIterate, 
                        _MDBootTime, _MDCopyMachPortDescription, _MDDictionaryCreateMutable, 
                        _MDDictionaryIterate, _MDElapsedTime, _MDGetCurrentTimeSpec, 

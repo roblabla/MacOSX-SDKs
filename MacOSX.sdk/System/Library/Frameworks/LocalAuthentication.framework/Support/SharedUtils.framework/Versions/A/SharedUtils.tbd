@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/LocalAuthentication.framework/Support/SharedUtils.framework/Versions/A/SharedUtils'
-current-version: 1656.40.25
+current-version: 1656.60.132
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -25,7 +25,8 @@ exports:
                        _LALogCategoryForOptions, _LALogCategoryForPolicy, _LALogForCategory, 
                        _LALogForPolicy, _LALogSetProcessCategory, _LALogTypeForInternalError, 
                        _LASerialScheduler, _NSStringFromACMRequirement, _NSStringFromLAPasscodeType, 
-                       _NSStringFromMechanismEvent ]
+                       _NSStringFromMechanismEvent, _NSStringFromMechanismEventAndValue, 
+                       _NSStringFromRemoteUIEvent, _NSStringFromRemoteUIEventAndOptions ]
     objc-classes:    [ LAACMBiometricAttemptNotifier, LAACMHelper, LAAssertionsProxy, 
                        LABaseService, LABaseServiceManager, LACachedExternalizedContext, 
                        LADFR, LADecriptionBuilder, LAErrorHelper, LAErrorOysterRedactor, 

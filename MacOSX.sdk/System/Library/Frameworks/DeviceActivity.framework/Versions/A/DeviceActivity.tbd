@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/DeviceActivity.framework/Versions/A/DeviceActivity'
-current-version: 377.1.2
+current-version: 377.2.9
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -738,6 +738,8 @@ exports:
                        '_$s14DeviceActivity0aB7MonitorC22eventDidReachThreshold_8activityyAA0aB5EventV4NameV_AA0abJ0VtFTq', 
                        '_$s14DeviceActivity0aB7MonitorC22intervalWillEndWarning3foryAA0aB4NameV_tFTj', 
                        '_$s14DeviceActivity0aB7MonitorC22intervalWillEndWarning3foryAA0aB4NameV_tFTq', 
+                       '_$s14DeviceActivity0aB7MonitorC24eventDidUnreachThreshold_8activityyAA0aB5EventV4NameV_AA0abJ0VtFTj', 
+                       '_$s14DeviceActivity0aB7MonitorC24eventDidUnreachThreshold_8activityyAA0aB5EventV4NameV_AA0abJ0VtFTq', 
                        '_$s14DeviceActivity0aB7MonitorC24intervalWillStartWarning3foryAA0aB4NameV_tFTj', 
                        '_$s14DeviceActivity0aB7MonitorC24intervalWillStartWarning3foryAA0aB4NameV_tFTq', 
                        '_$s14DeviceActivity0aB7MonitorC30eventWillReachThresholdWarning_8activityyAA0aB5EventV4NameV_AA0abK0VtFTj', 
@@ -813,9 +815,12 @@ exports:
                        '_$s14DeviceActivity0aB9DataStoreVMn', '_$s14DeviceActivity0aB9DataStoreVN', 
                        '_$s14DeviceActivity11PickupEventV16bundleIdentifier4date011includeStopD08timeZoneACSSSg_10Foundation4DateVSbAI04TimeK0VtcfC', 
                        '_$s14DeviceActivity11PickupEventV16bundleIdentifier4date8timeZoneACSSSg_10Foundation4DateVAH04TimeI0VtcfC', 
+                       '_$s14DeviceActivity11PickupEventV8durationSdSgvM', '_$s14DeviceActivity11PickupEventV8durationSdSgvg', 
+                       '_$s14DeviceActivity11PickupEventV8durationSdSgvpMV', '_$s14DeviceActivity11PickupEventV8durationSdSgvs', 
                        '_$s14DeviceActivity11PickupEventVMa', '_$s14DeviceActivity11PickupEventVMn', 
                        '_$s14DeviceActivity11PickupEventVN', '_$s14DeviceActivity12EventStreamsV11identifiers6duringSaySSG17bundleIdentifiers_AF10webDomainst10Foundation12DateIntervalV_tFZ', 
-                       '_$s14DeviceActivity12EventStreamsV11synchronizeyyKFZ', '_$s14DeviceActivity12EventStreamsV17currentWebDomainsSo12NSOrderedSetCvgZ', 
+                       '_$s14DeviceActivity12EventStreamsV11synchronizeyyKFZ', '_$s14DeviceActivity12EventStreamsV15deleteFromBiomeyyKFZ', 
+                       '_$s14DeviceActivity12EventStreamsV17currentWebDomainsSo12NSOrderedSetCvgZ', 
                        '_$s14DeviceActivity12EventStreamsV24currentBundleIdentifiersSo12NSOrderedSetCvgZ', 
                        '_$s14DeviceActivity12EventStreamsV24setUseTestBiomeDirectoryyySbKFZ', 
                        '_$s14DeviceActivity12EventStreamsV26isQuickLookVideoNowPlayingSbvgZ', 
@@ -877,7 +882,8 @@ exports:
                        '_$sSo18NSNotificationNamea14DeviceActivityE14eventThresholdABvgZ', 
                        '_$sSo18NSNotificationNamea14DeviceActivityE18intervalEndWarningABvgZ', 
                        '_$sSo18NSNotificationNamea14DeviceActivityE20intervalStartWarningABvgZ', 
-                       '_$sSo18NSNotificationNamea14DeviceActivityE21eventThresholdWarningABvgZ' ]
+                       '_$sSo18NSNotificationNamea14DeviceActivityE21eventThresholdWarningABvgZ', 
+                       '_$sSo18NSNotificationNamea14DeviceActivityE21eventUnreachThresholdABvgZ' ]
     objc-classes:    [ _TtC14DeviceActivity21DeviceActivityMonitor, _TtC14DeviceActivity27DeviceActivityAuthorization, 
                        _TtC14DeviceActivity7Feature ]
 ...

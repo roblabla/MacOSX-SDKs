@@ -114,6 +114,22 @@ typedef NS_OPTIONS(NSUInteger, BEAccessibilityContainerType) {
  */
 - (void)browserAccessibilityDeleteTextAtCursor:(NSInteger)numberOfCharacters NS_SWIFT_NAME(browserAccessibilityDeleteTextAtCursor(numberOfCharacters:)) BROWSERENGINE_ACCESSIBILITY_AVAILABILITY;
 
+/**
+ @abstract The text cursor position of the soft line end should be returned, starting from the current selection (or beginning if no selection).
+ */
+- (NSInteger)accessibilityLineEndPositionFromCurrentSelection BROWSERENGINE_ACCESSIBILITY_MARKER_AVAILABILITY;
+
+/**
+ @abstract The text cursor position of the soft line start should be returned, starting from the current selection (or beginning if no selection).
+ */
+- (NSInteger)accessibilityLineStartPositionFromCurrentSelection BROWSERENGINE_ACCESSIBILITY_MARKER_AVAILABILITY;
+
+/**
+ @abstract The text cursor range of the soft line should be returned depending on the position.
+ @param position A text cursor position within a line of text.
+ */
+- (NSRange)accessibilityLineRangeForPosition:(NSInteger)position BROWSERENGINE_ACCESSIBILITY_MARKER_AVAILABILITY;
+
 @end
 
 NS_ASSUME_NONNULL_END

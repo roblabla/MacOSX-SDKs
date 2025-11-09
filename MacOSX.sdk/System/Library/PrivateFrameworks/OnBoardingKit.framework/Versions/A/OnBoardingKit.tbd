@@ -44,11 +44,12 @@ exports:
     objc-classes:    [ OBAnalyticsManager, OBAnimationController, OBAnimationState, 
                        OBAnimationView, OBBundle, OBBundleManager, OBCapabilities, 
                        OBFlow, OBPrivacyBundleProvider, OBPrivacyCombinedController, 
-                       OBPrivacyCombinedController_macOS, OBPrivacyFlow, OBPrivacyFlowGroup, 
-                       OBPrivacyLinkController, OBPrivacyLinkController_macOS, OBPrivacyPresenter, 
-                       OBPrivacySplashController, OBSplashBullet, OBSplashContent, 
-                       OBTemplateContainerViewController, OBTemplatePartBulletExpandableListItem, 
-                       OBTemplatePartBulletList, OBTemplatePartBulletListItem, OBTemplatePartDisclosingListView, 
+                       OBPrivacyCombinedController_macOS, OBPrivacyCombinedFooterComponents, 
+                       OBPrivacyFlow, OBPrivacyFlowGroup, OBPrivacyLinkController, 
+                       OBPrivacyLinkController_macOS, OBPrivacyPresenter, OBPrivacySplashController, 
+                       OBSplashBullet, OBSplashContent, OBTemplateContainerViewController, 
+                       OBTemplatePartBulletExpandableListItem, OBTemplatePartBulletList, 
+                       OBTemplatePartBulletListItem, OBTemplatePartDisclosingListView, 
                        OBTemplatePartLinkButton, OBTemplateUIUtilities, OBTemplateView, 
                        OBUtilities ]
 ...

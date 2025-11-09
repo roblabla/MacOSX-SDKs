@@ -2,7 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/PDFKit.framework/Versions/A/PDFKit'
-current-version: 1332.2.6
+current-version: 1332.3.9
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '$ld$install_name$os10.10$/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz', 
@@ -16,6 +17,7 @@ exports:
                        '$ld$install_name$os10.7$/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz', 
                        '$ld$install_name$os10.8$/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz', 
                        '$ld$install_name$os10.9$/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz', 
+                       '_$sSo7PDFViewC6PDFKitE27_intelligenceCollectContent2in9collectorySo6CGRectV_21UIIntelligenceSupport0I16ElementCollectorCtF', 
                        _PDFAnnotationHighlightingModeInvert, _PDFAnnotationHighlightingModeNone, 
                        _PDFAnnotationHighlightingModeOutline, _PDFAnnotationHighlightingModePush, 
                        _PDFAnnotationKeyAction, _PDFAnnotationKeyAdditionalActions, 

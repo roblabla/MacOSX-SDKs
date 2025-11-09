@@ -11,6 +11,7 @@
 #import <Foundation/Foundation.h>
 #import <Intents/IntentsDefines.h>
 
+/// Constants that describe the type of the message reaction.
 typedef NS_ENUM(NSInteger, INMessageReactionType) {
     INMessageReactionTypeUnknown = 0,
     INMessageReactionTypeEmoji,

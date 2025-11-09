@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Virtualization.framework/Versions/A/Virtualization'
-current-version: 210.2.2
+current-version: 210.3.12
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
@@ -110,8 +110,8 @@ exports:
                        VZMacOSInstaller, VZMacOSRestoreImage, VZMacOSVirtualMachineStartOptions, 
                        VZMacPlatformConfiguration, VZMacTrackpadConfiguration, _VZAppleTouchScreenConfiguration, 
                        _VZBifrostAttachment, _VZBifrostDeviceConfiguration, _VZBinaryBootLoader, 
-                       _VZBinaryBootLoaderSegment, _VZCPUExitContext, _VZCoprocessorBootLoader, 
-                       _VZCoprocessorConfiguration, _VZMacBatteryPowerSourceDevice, 
+                       _VZBinaryBootLoaderSegment, _VZCPUExitContext, _VZCoprocessor, 
+                       _VZCoprocessorBootLoader, _VZCoprocessorConfiguration, _VZMacBatteryPowerSourceDevice, 
                        _VZMacBatteryPowerSourceDeviceConfiguration, _VZMacBatterySource, 
                        _VZMacBifrostDeviceConfiguration, _VZMacHardwareModelDescriptor, 
                        _VZMacHostBatterySource, _VZMacNeuralEngineDeviceConfiguration, 
@@ -120,7 +120,7 @@ exports:
                        _VZMacVideoToolboxDeviceConfiguration, _VZMacWallPowerSourceDevice, 
                        _VZMacWallPowerSourceDeviceConfiguration, _VZMailboxDeviceAttachment, 
                        _VZMailboxDeviceConfiguration, _VZMailboxHandleMailboxDeviceConfiguration, 
-                       _VZPowerSourceDevice, _VZPowerSourceDeviceConfiguration, _VZSEPCoprocessorConfiguration, 
-                       _VZSEPStorage, _VZUnixSocketBifrostAttachment, _VZXPCBifrostAttachment, 
-                       _VZXPCClientMailboxDeviceAttachment ]
+                       _VZPowerSourceDevice, _VZPowerSourceDeviceConfiguration, _VZSEPCoprocessor, 
+                       _VZSEPCoprocessorConfiguration, _VZSEPStorage, _VZUnixSocketBifrostAttachment, 
+                       _VZXPCBifrostAttachment, _VZXPCClientMailboxDeviceAttachment ]
 ...

@@ -16,6 +16,7 @@ exports:
                        _kFMDFMMUserAgentAccessEntitlement, _kFMDLocalActivationLockInfoChangedNotification, 
                        _kFMDLogPrefsChangedDarwinNotification, _kFMDNotBackedUpMagSafePrefDomain, 
                        _kFMDNotBackedUpPrefDomain, _kFMDOfflineFindingInfoChangedNotification, 
+                       _kFMDOptionsActivationLockPET, _kFMDOptionsActivationLockUsername, 
                        _kFMDPlaySoundStartedDarwinNotification, _kFMDPlaySoundStoppedDarwinNotification, 
                        _kFMDPostWipePrefDomain, _kFMDPrefDomain, _kFMDPublicNotBackedUpPrefDomain, 
                        _kFMDSecureLocationModeBackgroundProactive, _kFMDSecureLocationModeLive, 

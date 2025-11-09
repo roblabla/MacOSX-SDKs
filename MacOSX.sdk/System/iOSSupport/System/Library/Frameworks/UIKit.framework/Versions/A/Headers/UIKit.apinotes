@@ -2077,6 +2077,8 @@ Typedefs:
   SwiftName: NSAttributedString.TextLayoutSectionKey
 - Name: NSTextTabOptionKey
   SwiftName: NSTextTab.OptionKey
+- Name: NSWritingToolsExclusionAttributeName
+  SwiftName: writingToolsExclusion
 - Name: UIFontDescriptorAttributeName
   SwiftName: UIFontDescriptor.AttributeName
 - Name: UIFontDescriptorTraitKey
@@ -2692,6 +2694,8 @@ Globals:
   SwiftName: UIFloatRange.infinite
 - Name: UIApplicationOpenSettingsURLString
   SwiftName: UIApplication.openSettingsURLString
+- Name: UIApplicationOpenDefaultApplicationsSettingsURLString
+  SwiftName: UIApplication.openDefaultApplicationsSettingsURLString
 - Name: UIStateRestorationViewControllerStoryboardKey
   SwiftName: UIApplication.stateRestorationViewControllerStoryboardKey
 - Name: UIApplicationStateRestorationBundleVersionKey

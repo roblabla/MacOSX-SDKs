@@ -84,7 +84,7 @@ typedef NS_ENUM(NSInteger, MTLMatrixLayout) {
      * @brief Row-major order
      */
     MTLMatrixLayoutRowMajor = 1,
-} API_AVAILABLE(macos(15.0), ios(18.0));
+} API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.1), visionos(2.1));
 
 /**
  * @brief Base class for acceleration structure descriptors. Do not use this class directly. Use
@@ -271,7 +271,7 @@ MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
  * @brief Matrix layout for the transformation matrix in the transformation
  * matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
  */
-@property (nonatomic) MTLMatrixLayout transformationMatrixLayout API_AVAILABLE(macos(15.0), ios(18.0));
+@property (nonatomic) MTLMatrixLayout transformationMatrixLayout API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.1), visionos(2.1));
 + (instancetype)descriptor;
 
 @end
@@ -389,7 +389,7 @@ MTL_EXPORT API_AVAILABLE(macos(12.0), ios(15.0))
  * @brief Matrix layout for the transformation matrix in the transformation
  * matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
  */
-@property (nonatomic) MTLMatrixLayout transformationMatrixLayout API_AVAILABLE(macos(15.0), ios(18.0));
+@property (nonatomic) MTLMatrixLayout transformationMatrixLayout API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.1), visionos(2.1));
 + (instancetype)descriptor;
 
 @end
@@ -985,7 +985,7 @@ typedef NS_ENUM(NSInteger, MTLTransformType) {
      * interpolation.
      */
     MTLTransformTypeComponent = 1,
-} API_AVAILABLE(macos(15.0), ios(18.0));
+} API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.1), visionos(2.1));
 
 /**
  * @brief Descriptor for an instance acceleration structure
@@ -1048,18 +1048,18 @@ MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
  * in the instance descriptor buffer and the transformation matrices in the
  * transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
  */
-@property (nonatomic) MTLMatrixLayout instanceTransformationMatrixLayout API_AVAILABLE(macos(15.0), ios(18.0));
+@property (nonatomic) MTLMatrixLayout instanceTransformationMatrixLayout API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.1), visionos(2.1));
 
 /**
  * @brief Type of motion transforms. Defaults to MTLTransformTypePackedFloat4x3.
  */
-@property (nonatomic) MTLTransformType motionTransformType API_AVAILABLE(macos(15.0), ios(18.0));
+@property (nonatomic) MTLTransformType motionTransformType API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.1), visionos(2.1));
 
 /**
  * @brief Motion transform stride. Defaults to 0, indicating that transforms are tightly packed according to the
  * motion transform type.
  */
-@property (nonatomic) NSUInteger motionTransformStride API_AVAILABLE(macos(15.0), ios(18.0));
+@property (nonatomic) NSUInteger motionTransformStride API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.1), visionos(2.1));
 
 + (instancetype)descriptor;
 
@@ -1147,18 +1147,18 @@ MTL_EXPORT API_AVAILABLE(macos(14.0), ios(17.0))
  * in the instance descriptor buffer and the transformation matrices in the
  * transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
  */
-@property (nonatomic) MTLMatrixLayout instanceTransformationMatrixLayout API_AVAILABLE(macos(15.0), ios(18.0));
+@property (nonatomic) MTLMatrixLayout instanceTransformationMatrixLayout API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.1), visionos(2.1));
 
 /**
  * @brief Type of motion transforms. Defaults to MTLTransformTypePackedFloat4x3.
  */
-@property (nonatomic) MTLTransformType motionTransformType API_AVAILABLE(macos(15.0), ios(18.0));
+@property (nonatomic) MTLTransformType motionTransformType API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.1), visionos(2.1));
 
 /**
  * @brief Motion transform stride. Defaults to 0, indicating that transforms are tightly packed according to the
  * motion transform type.
  */
-@property (nonatomic) NSUInteger motionTransformStride API_AVAILABLE(macos(15.0), ios(18.0));
+@property (nonatomic) NSUInteger motionTransformStride API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.1), visionos(2.1));
 
 + (instancetype)descriptor;
 

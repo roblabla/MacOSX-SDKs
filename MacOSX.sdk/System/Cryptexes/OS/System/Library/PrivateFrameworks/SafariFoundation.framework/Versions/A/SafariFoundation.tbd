@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SafariFoundation.framework/Versions/A/SafariFoundation'
-current-version: 619.2.8
+current-version: 620.1.16
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -15,6 +15,7 @@ exports:
                        _SFCredentialProviderCapabilitiesKey, _SFCredentialProviderCapabilitiesProvidesOneTimeCodesKey, 
                        _SFCredentialProviderCapabilitiesProvidesPasskeysKey, _SFCredentialProviderCapabilitiesProvidesPasswordsKey, 
                        _SFCredentialProviderCapabilitiesShowConfigurationUIKey, _SFCredentialProviderCapabilitiesSupportsConditionalPasskeyRegistrationKey, 
+                       _SFCredentialProviderCapabilitiesSupportsCredentialExchangeKey, 
                        _SFCredentialProviderDeveloperEntitlement, _SFCredentialProviderExtensionPointIdentifier, 
                        _SFCredentialProviderShowsConfigurationUIKey, _SFCredentialProviderSystemEntitlement, 
                        _SFCreditCardCardholderNameKey, _SFCreditCardExpirationDateKey, 

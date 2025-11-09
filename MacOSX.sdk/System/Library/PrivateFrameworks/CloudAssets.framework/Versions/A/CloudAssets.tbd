@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CloudAssets.framework/Versions/A/CloudAssets'
-current-version: 2220.14
+current-version: 2230.24
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -148,8 +148,8 @@ exports:
                        '_$s11CloudAssets16XPCMessageSenderC15machServiceNameACSS_tKcfc', 
                        '_$s11CloudAssets16XPCMessageSenderC4sendyScsyq_s5Error_pGxYaKSERzs8SendableRzSeR_r0_lF', 
                        '_$s11CloudAssets16XPCMessageSenderC4sendyScsyq_s5Error_pGxYaKSERzs8SendableRzSeR_r0_lFTu', 
-                       '_$s11CloudAssets16XPCMessageSenderC4sendyq_xYaKSERzs8SendableRzSeR_r0_lF', 
-                       '_$s11CloudAssets16XPCMessageSenderC4sendyq_xYaKSERzs8SendableRzSeR_r0_lFTu', 
+                       '_$s11CloudAssets16XPCMessageSenderC4sendyq_xYaKSERzs8SendableRzSeR_sAER_r0_lF', 
+                       '_$s11CloudAssets16XPCMessageSenderC4sendyq_xYaKSERzs8SendableRzSeR_sAER_r0_lFTu', 
                        '_$s11CloudAssets16XPCMessageSenderCMa', '_$s11CloudAssets16XPCMessageSenderCMm', 
                        '_$s11CloudAssets16XPCMessageSenderCMn', '_$s11CloudAssets16XPCMessageSenderCMo', 
                        '_$s11CloudAssets16XPCMessageSenderCMu', '_$s11CloudAssets16XPCMessageSenderCN', 

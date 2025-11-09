@@ -2,8 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CorePhotogrammetry.framework/Versions/A/CorePhotogrammetry'
-current-version: 2.58.3
-compatibility-version: 2.58.3
+current-version: 2.59
+compatibility-version: 2.59
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIFvvE, __ZTINSt3__110__back_refIcEE, __ZTINSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKcEEE, 
@@ -126,6 +126,7 @@ exports:
                        _CPGOutputModelOptionsSetTextureLossyCompressionQuality, _CPGOutputRelease, 
                        _CPGOutputRetain, _CPGProcessingCallbackBundleCreate, _CPGProcessingCallbackBundleRelease, 
                        _CPGProcessingCallbackBundleRetain, _CPGProcessingCallbackBundleSetCompleteOutputCallback, 
+                       _CPGProcessingCallbackBundleSetDensePointCloudBoundingBoxCallback, 
                        _CPGProcessingCallbackBundleSetProgressCallback, _CPGProcessingCallbackBundleSetSfmOutputCallback, 
                        _CPGProcessingCallbackBundleSetWarningCallback, _CPGProcessingFailureGetCode, 
                        _CPGProcessingFailureRelease, _CPGProcessingFailureRetain, 

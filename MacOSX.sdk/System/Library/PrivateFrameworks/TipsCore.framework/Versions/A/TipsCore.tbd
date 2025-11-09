@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TipsCore.framework/Versions/A/TipsCore'
-current-version: 769
+current-version: 772
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -790,9 +790,9 @@ exports:
                        _kTipsSession, _kTipsShareMethodKey, _kTipsStatusCodeKey, 
                        _kTipsTimeSinceLastNotification, _kTipsTimeSpentEventIdentifier, 
                        _kTipsTimeSpentEventTimeSpentKey, _kTipsTimeToDownloadResponseKey, 
-                       _kTipsTipDismissedKey, _kTipsTypeKey, _kTipsUnspecifiedValue, 
-                       _kTipsUrlKey, _kTipsUserTypeKey, _kTipsViewMethodKey, _kTipsViewModeKey, 
-                       _kTipsWidgetType, _kTipsWindowHeight, _kTipsWindowWidth ]
+                       _kTipsTipDismissedKey, _kTipsTypeKey, _kTipsUrlKey, _kTipsUserTypeKey, 
+                       _kTipsViewMethodKey, _kTipsViewModeKey, _kTipsWidgetType, 
+                       _kTipsWindowHeight, _kTipsWindowWidth ]
     objc-classes:    [ TPSActionableContent, TPSAnalyticsChecklistSessionController, 
                        TPSAnalyticsCommonDefines, TPSAnalyticsDataProvider, TPSAnalyticsEvent, 
                        TPSAnalyticsEventAnimationFinished, TPSAnalyticsEventAnimationLoadTime, 

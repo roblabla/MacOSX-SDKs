@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TipsDaemon.framework/Versions/A/TipsDaemon'
-current-version: 769
+current-version: 772
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -171,12 +171,11 @@ exports:
                        TPSAppEntityValidation, TPSAppIntent, TPSAppIntentCondition, 
                        TPSAppIntentValidation, TPSAppIntentsHelper, TPSAppStoreRegionValidation, 
                        TPSAppStoreRegionsCondition, TPSAppleArcadeValidation, TPSAppleCardSetupValidation, 
-                       TPSAppleCashFamilyValidation, TPSAppleCashValidation, TPSAppleDisplayValidation, 
-                       TPSApplePayActivationValidation, TPSApplePayPeerValidation, 
-                       TPSApplePaySetupValidation, TPSAppleTVHomePodValidation, TPSAssetsDownloadOperation, 
-                       TPSAutoCorrectKeyboardValidation, TPSBatteryUIValidation, 
-                       TPSBetaUserValidation, TPSBiometricEnrollmentValidation, TPSBlockValidation, 
-                       TPSBluetoothChecker, TPSCapability, TPSCloudAccountChecker, 
+                       TPSAppleCashFamilyValidation, TPSAppleCashValidation, TPSApplePayActivationValidation, 
+                       TPSApplePayPeerValidation, TPSApplePaySetupValidation, TPSAppleTVHomePodValidation, 
+                       TPSAssetsDownloadOperation, TPSAutoCorrectKeyboardValidation, 
+                       TPSBatteryUIValidation, TPSBetaUserValidation, TPSBiometricEnrollmentValidation, 
+                       TPSBlockValidation, TPSBluetoothChecker, TPSCapability, TPSCloudAccountChecker, 
                        TPSCloudAccountValidation, TPSCloudBackupValidation, TPSCloudDeviceHasPhoneOrPadValidation, 
                        TPSCloudDeviceInfo, TPSCloudDeviceValidation, TPSCloudDevicesCondition, 
                        TPSCloudDriveValidation, TPSCloudFindMyValidation, TPSCloudMusicCatalogPlaybackValidation, 

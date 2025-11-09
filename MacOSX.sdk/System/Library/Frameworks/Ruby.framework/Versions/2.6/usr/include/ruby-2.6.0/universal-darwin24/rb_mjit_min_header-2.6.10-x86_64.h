@@ -1,1 +1,1 @@
-#error MJIT does not support '/AppleInternal/Library/BuildRoots/4b66fb3c-7dd0-11ef-b4fb-4a83e32a47e1/Applications/Xcode.app/Contents/Developer/Toolchains/OSX15.1.xctoolchain/usr/bin/clang -arch x86_64' yet
+#error MJIT does not support '/AppleInternal/Library/BuildRoots/b11baf73-9ee0-11ef-b7b4-7aebe1f78c73/Applications/Xcode.app/Contents/Developer/Toolchains/OSX15.2.xctoolchain/usr/bin/clang -arch x86_64' yet

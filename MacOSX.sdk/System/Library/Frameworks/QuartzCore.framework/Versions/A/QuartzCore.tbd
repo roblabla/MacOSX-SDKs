@@ -364,8 +364,8 @@ exports:
                        _CAXPCImageQueueReceiverProcessMessage, _CAXPCImageQueueReceiverSetDisplayedPixelCount, 
                        _CAXPCImageQueueReceiverSetProperty, _CAXPCImageQueueSampleFinish, 
                        _CAXPCImageQueueSampleGetDisplayCount, _CAXPCImageQueueSampleGetIOSurface, 
-                       _CAXPCImageQueueSampleGetTimestamp, _CA_CGPointApplyTransform, 
-                       _CA_CGPointApplyTransform_, _CA_CGPointUnapplyInverseTransform, 
+                       _CAXPCImageQueueSampleGetTimestamp, _CAXPCImageQueueSampleIsLowLatency, 
+                       _CA_CGPointApplyTransform, _CA_CGPointApplyTransform_, _CA_CGPointUnapplyInverseTransform, 
                        _CA_CGPointUnapplyInverseTransform_, _CA_CGRectApplyTransform, 
                        _CA_CGRectApplyTransform_, _CA_CGRectUnapplyInverseTransform, 
                        _CA_CGRectUnapplyInverseTransform_, _NSStringFromCADisplayPowerAssertionReason, 
@@ -673,10 +673,10 @@ exports:
                        _CARenderContextSetDisplayMask, _CARenderUpdateAddedAllContextsWithOptions, 
                        _CARenderUpdateCameraCaptureTime, _CARenderUpdateCopyAllLayerHostBindingsRenderReport, 
                        _CARenderUpdateCopyContextLayerHostBindingsRenderReport, _CARenderUpdateGetLayerComplexity, 
-                       _CARenderUpdateGetPluginLayerIds, _CARenderUpdateGetPluginLayerIdsCount, 
-                       _CARenderUpdateGetPortalLayerAtIndex, _CARenderUpdateGetPortalLayerCount, 
-                       _CARenderUpdateSetIsSnapshot, _CARenderUpdateSetUseSkylightDisplayAttributes, 
-                       _kCAContentsFormatAutomaticAppKit ]
+                       _CARenderUpdateGetMaxDesiredHeadroom, _CARenderUpdateGetPluginLayerIds, 
+                       _CARenderUpdateGetPluginLayerIdsCount, _CARenderUpdateGetPortalLayerAtIndex, 
+                       _CARenderUpdateGetPortalLayerCount, _CARenderUpdateSetIsSnapshot, 
+                       _CARenderUpdateSetUseSkylightDisplayAttributes, _kCAContentsFormatAutomaticAppKit ]
     objc-classes:    [ CALayerHostBindingsRenderReport ]
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     objc-classes:    [ CACarPlayRegionLayer, CACloningTerminatorLayer, CADynamicFrameRateSource ]

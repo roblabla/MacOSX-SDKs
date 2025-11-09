@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/FPFS.framework/Versions/A/FPFS'
-current-version: 2732.41.1
+current-version: 2732.61.1
 compatibility-version: 0
 swift-abi-version: 7
 exports:

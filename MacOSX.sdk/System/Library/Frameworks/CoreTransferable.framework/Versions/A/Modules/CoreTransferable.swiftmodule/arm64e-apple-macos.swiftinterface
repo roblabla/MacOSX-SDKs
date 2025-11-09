@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
-// swift-module-flags: -target arm64e-apple-macos15.1 -target-variant arm64e-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -library-level api -library-level api -enable-bare-slash-regex -user-module-version 6.1.5 -module-name CoreTransferable
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
+// swift-module-flags: -target arm64e-apple-macos15.2 -target-variant arm64e-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -library-level api -library-level api -enable-bare-slash-regex -user-module-version 6.2.10.1 -module-name CoreTransferable
 import Combine
 @_exported import CoreTransferable
 import Foundation
@@ -32,6 +32,21 @@ extension Swift.Never : CoreTransferable.Transferable {
   public static var transferRepresentation: Swift.Never {
     get
   }
+}
+@available(iOS 18.2, macOS 15.2, tvOS 18.2, watchOS 11.2, visionOS 2.2, *)
+extension CoreTransferable.Transferable {
+  public static func exportedContentTypes(visibility: CoreTransferable.TransferRepresentationVisibility = .all) -> [UniformTypeIdentifiers.UTType]
+  public static func importedContentTypes() -> [UniformTypeIdentifiers.UTType]
+  public func exportedContentTypes(_ visibility: CoreTransferable.TransferRepresentationVisibility = .all) -> [UniformTypeIdentifiers.UTType]
+  public func importedContentTypes() -> [UniformTypeIdentifiers.UTType]
+  public init(importing file: Foundation.URL, contentType: UniformTypeIdentifiers.UTType?) async throws
+  public func export(to destinationDirectory: Foundation.URL, contentType: UniformTypeIdentifiers.UTType?) async throws -> Foundation.URL
+  public func withExportedFile<Result>(contentType: UniformTypeIdentifiers.UTType?, fileHandler: (Foundation.URL) async throws -> Result) async throws -> Result
+  public var suggestedFilename: Swift.String? {
+    get
+  }
+  public init(importing data: Foundation.Data, contentType: UniformTypeIdentifiers.UTType?) async throws
+  public func exported(as contentType: UniformTypeIdentifiers.UTType?) async throws -> Foundation.Data
 }
 @available(iOS 16.1, macOS 13.0, tvOS 16.1, watchOS 9.1, *)
 extension Foundation.AttributedString : CoreTransferable.Transferable {

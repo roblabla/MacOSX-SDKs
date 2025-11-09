@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/XOJIT.framework/Versions/A/XOJIT'
-current-version: 52
+current-version: 56
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -164,9 +164,24 @@ exports:
                        '_$s5XOJITAAC18MachOHeaderOptionsV7idDylibAD0F0VSgvM', '_$s5XOJITAAC18MachOHeaderOptionsV7idDylibAD0F0VSgvg', 
                        '_$s5XOJITAAC18MachOHeaderOptionsV7idDylibAD0F0VSgvpMV', '_$s5XOJITAAC18MachOHeaderOptionsV7idDylibAD0F0VSgvs', 
                        '_$s5XOJITAAC18MachOHeaderOptionsVMa', '_$s5XOJITAAC18MachOHeaderOptionsVMn', 
-                       '_$s5XOJITAAC18MachOHeaderOptionsVN', '_$s5XOJITAAC18ObjectLinkingLayerV11linkArchive7archive4intoyAA12MemoryBufferC_AB8JITDylibVtKF', 
+                       '_$s5XOJITAAC18MachOHeaderOptionsVN', '_$s5XOJITAAC18ObjectLinkingLayerV11linkArchive7archive4into9forceLoadyAA12MemoryBufferC_AB8JITDylibVAD06Staticf5ForceJ0OtKF', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerV11linkArchive7archive4into9forceLoadyAA12MemoryBufferC_AB8JITDylibVAD06Staticf5ForceJ0OtYaKF', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerV11linkArchive7archive4into9forceLoadyAA12MemoryBufferC_AB8JITDylibVAD06Staticf5ForceJ0OtYaKFTu', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerV11linkArchive7archive4intoyAA12MemoryBufferC_AB8JITDylibVtKF', 
                        '_$s5XOJITAAC18ObjectLinkingLayerV11linkArchive7archive4intoyAA12MemoryBufferC_AB8JITDylibVtYaKF', 
                        '_$s5XOJITAAC18ObjectLinkingLayerV11linkArchive7archive4intoyAA12MemoryBufferC_AB8JITDylibVtYaKFTu', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerV22StaticArchiveForceLoadO2eeoiySbAF_AFtFZ', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerV22StaticArchiveForceLoadO3allyA2FmFWC', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerV22StaticArchiveForceLoadO4hash4intoys6HasherVz_tF', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerV22StaticArchiveForceLoadO4noneyA2FmFWC', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerV22StaticArchiveForceLoadO4objCyA2FmFWC', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerV22StaticArchiveForceLoadO9hashValueSivg', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerV22StaticArchiveForceLoadO9hashValueSivpMV', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerV22StaticArchiveForceLoadOMa', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerV22StaticArchiveForceLoadOMn', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerV22StaticArchiveForceLoadON', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerV22StaticArchiveForceLoadOSHAAMc', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerV22StaticArchiveForceLoadOSQAAMc', 
                        '_$s5XOJITAAC18ObjectLinkingLayerV3add6object2toyAA12MemoryBufferC_AB8JITDylibVtKF', 
                        '_$s5XOJITAAC18ObjectLinkingLayerV3add6object2toyAA12MemoryBufferC_AB8JITDylibVtYaKF', 
                        '_$s5XOJITAAC18ObjectLinkingLayerV3add6object2toyAA12MemoryBufferC_AB8JITDylibVtYaKFTu', 
@@ -219,7 +234,8 @@ exports:
                        _XOJIT_XOJIT_CreateJITDylib, _XOJIT_XOJIT_Destroy, _XOJIT_XOJIT_EndSession, 
                        _XOJIT_XOJIT_GetObjectLinkingLayer, _XOJIT_XOJIT_GetProgramJITDylibRetained, 
                        _XOJIT_XOJIT_GetTargetTriple, _XOJIT_XOJIT_Intern, _XOJIT_XOJIT_LinkStaticArchive, 
-                       _XOJIT_XOJIT_LinkStaticArchiveAsync, _XOJIT_XOJIT_LoadLinkableFile, 
+                       _XOJIT_XOJIT_LinkStaticArchiveAsync, _XOJIT_XOJIT_LinkStaticArchiveWithForceLoad, 
+                       _XOJIT_XOJIT_LinkStaticArchiveWithForceLoadAsync, _XOJIT_XOJIT_LoadLinkableFile, 
                        _XOJIT_XOJIT_NoopMutatingCallback, _XOJIT_XOJIT_RemoveJITDylibAndRelease, 
                        _XOJIT_XOJIT_SetLoadableAtPathViaRegex ]
 ...

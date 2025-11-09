@@ -185,6 +185,11 @@ module Darwin.sys {
     export *
   }
 
+  module protosw {
+    header "sys/protosw.h"
+    export *
+  }
+
   module queue {
     header "sys/queue.h"
     export *

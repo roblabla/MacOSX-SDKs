@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligencePlatformCompute.framework/Versions/A/IntelligencePlatformCompute'
-current-version: 153.10
+current-version: 165.7
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]

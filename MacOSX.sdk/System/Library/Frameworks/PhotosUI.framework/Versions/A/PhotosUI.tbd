@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/PhotosUI.framework/Versions/A/PhotosUI'
-current-version: 711.0.180
+current-version: 721.0.150
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -381,6 +381,10 @@ exports:
                        '_$s8PhotosUI21PHPickerConfigurationV20disabledCapabilitiesSo0cF0Vvg', 
                        '_$s8PhotosUI21PHPickerConfigurationV20disabledCapabilitiesSo0cF0VvpMV', 
                        '_$s8PhotosUI21PHPickerConfigurationV20disabledCapabilitiesSo0cF0Vvs', 
+                       '_$s8PhotosUI21PHPickerConfigurationV21minimumSelectionLimitSiSgvM', 
+                       '_$s8PhotosUI21PHPickerConfigurationV21minimumSelectionLimitSiSgvg', 
+                       '_$s8PhotosUI21PHPickerConfigurationV21minimumSelectionLimitSiSgvpMV', 
+                       '_$s8PhotosUI21PHPickerConfigurationV21minimumSelectionLimitSiSgvs', 
                        '_$s8PhotosUI21PHPickerConfigurationV23AssetRepresentationModeO10compatibleyA2EmFWC', 
                        '_$s8PhotosUI21PHPickerConfigurationV23AssetRepresentationModeO2eeoiySbAE_AEtFZ', 
                        '_$s8PhotosUI21PHPickerConfigurationV23AssetRepresentationModeO4hash4intoys6HasherVz_tF', 
@@ -413,6 +417,10 @@ exports:
                        '_$s8PhotosUI21PHPickerConfigurationV29_alwaysShowLoadingPlaceholderSbvg', 
                        '_$s8PhotosUI21PHPickerConfigurationV29_alwaysShowLoadingPlaceholderSbvpMV', 
                        '_$s8PhotosUI21PHPickerConfigurationV29_alwaysShowLoadingPlaceholderSbvs', 
+                       '_$s8PhotosUI21PHPickerConfigurationV29_desiredCollectionSuggestionsSo01_cF14SuggestionTypeVvM', 
+                       '_$s8PhotosUI21PHPickerConfigurationV29_desiredCollectionSuggestionsSo01_cF14SuggestionTypeVvg', 
+                       '_$s8PhotosUI21PHPickerConfigurationV29_desiredCollectionSuggestionsSo01_cF14SuggestionTypeVvpMV', 
+                       '_$s8PhotosUI21PHPickerConfigurationV29_desiredCollectionSuggestionsSo01_cF14SuggestionTypeVvs', 
                        '_$s8PhotosUI21PHPickerConfigurationV29_followupPeopleConfigurationsSayAA01_c10CollectionD0VGSgvM', 
                        '_$s8PhotosUI21PHPickerConfigurationV29_followupPeopleConfigurationsSayAA01_c10CollectionD0VGSgvg', 
                        '_$s8PhotosUI21PHPickerConfigurationV29_followupPeopleConfigurationsSayAA01_c10CollectionD0VGSgvpMV', 
@@ -434,6 +442,10 @@ exports:
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV14selectionLimitSiSgvg', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV14selectionLimitSiSgvpMV', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV14selectionLimitSiSgvs', 
+                       '_$s8PhotosUI21PHPickerConfigurationV6UpdateV21minimumSelectionLimitSiSgvM', 
+                       '_$s8PhotosUI21PHPickerConfigurationV6UpdateV21minimumSelectionLimitSiSgvg', 
+                       '_$s8PhotosUI21PHPickerConfigurationV6UpdateV21minimumSelectionLimitSiSgvpMV', 
+                       '_$s8PhotosUI21PHPickerConfigurationV6UpdateV21minimumSelectionLimitSiSgvs', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV26edgesWithoutContentMarginsSo21NSDirectionalRectEdgeVSgvM', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV26edgesWithoutContentMarginsSo21NSDirectionalRectEdgeVSgvg', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV26edgesWithoutContentMarginsSo21NSDirectionalRectEdgeVSgvpMV', 
@@ -565,11 +577,25 @@ exports:
                        '_$s8PhotosUI30PHPickerViewControllerDelegateTL', '_$s8PhotosUI30PickerStyleablePhotoSuggestionC20supportsSecureCodingSbvgZ', 
                        '_$s8PhotosUI30PickerStyleablePhotoSuggestionC22shouldReverseSortOrderSbvg', 
                        '_$s8PhotosUI30PickerStyleablePhotoSuggestionC22shouldReverseSortOrderSbvpMV', 
+                       '_$s8PhotosUI30PickerStyleablePhotoSuggestionC4ModeO8rawValueAESgSi_tcfC', 
+                       '_$s8PhotosUI30PickerStyleablePhotoSuggestionC4ModeO8rawValueSivg', 
+                       '_$s8PhotosUI30PickerStyleablePhotoSuggestionC4ModeO8rawValueSivpMV', 
+                       '_$s8PhotosUI30PickerStyleablePhotoSuggestionC4ModeOMa', '_$s8PhotosUI30PickerStyleablePhotoSuggestionC4ModeOMn', 
+                       '_$s8PhotosUI30PickerStyleablePhotoSuggestionC4ModeON', '_$s8PhotosUI30PickerStyleablePhotoSuggestionC4ModeOSHAAMc', 
+                       '_$s8PhotosUI30PickerStyleablePhotoSuggestionC4ModeOSQAAMc', 
+                       '_$s8PhotosUI30PickerStyleablePhotoSuggestionC4ModeOSYAAMc', 
+                       '_$s8PhotosUI30PickerStyleablePhotoSuggestionC4modeA2C4ModeO_tcfC', 
+                       '_$s8PhotosUI30PickerStyleablePhotoSuggestionC4modeA2C4ModeO_tcfCTj', 
+                       '_$s8PhotosUI30PickerStyleablePhotoSuggestionC4modeA2C4ModeO_tcfCTq', 
+                       '_$s8PhotosUI30PickerStyleablePhotoSuggestionC4modeA2C4ModeO_tcfc', 
+                       '_$s8PhotosUI30PickerStyleablePhotoSuggestionC4modeAC4ModeOvg', 
+                       '_$s8PhotosUI30PickerStyleablePhotoSuggestionC4modeAC4ModeOvpMV', 
                        '_$s8PhotosUI30PickerStyleablePhotoSuggestionC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s8PhotosUI30PickerStyleablePhotoSuggestionC5coderACSgSo7NSCoderC_tcfCTj', 
                        '_$s8PhotosUI30PickerStyleablePhotoSuggestionC5coderACSgSo7NSCoderC_tcfCTq', 
                        '_$s8PhotosUI30PickerStyleablePhotoSuggestionC5coderACSgSo7NSCoderC_tcfc', 
                        '_$s8PhotosUI30PickerStyleablePhotoSuggestionC6encode4withySo7NSCoderC_tF', 
+                       '_$s8PhotosUI30PickerStyleablePhotoSuggestionC7isEqualySbypSgF', 
                        '_$s8PhotosUI30PickerStyleablePhotoSuggestionCACycfC', '_$s8PhotosUI30PickerStyleablePhotoSuggestionCACycfc', 
                        '_$s8PhotosUI30PickerStyleablePhotoSuggestionCMa', '_$s8PhotosUI30PickerStyleablePhotoSuggestionCMn', 
                        '_$s8PhotosUI30PickerStyleablePhotoSuggestionCMo', '_$s8PhotosUI30PickerStyleablePhotoSuggestionCMu', 

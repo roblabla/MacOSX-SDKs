@@ -12,13 +12,14 @@ allowable-clients:
                        HomePodSettingsDaemon, InstalledApps, Mail, MessagesFlowDelegatePlugin, 
                        MessagesNotificationFiltering, MobileMail, NanoSettingsGlance, 
                        NotificationsSettings, NotificationsSettingsIntents, NotificationsSettingsSimulator, 
-                       NotificationsUITool, Preferences, SUIAKit, SUIATPTests, SUICITests, 
-                       SUISimulatorTests, SUITVTests, SUIWatchTests, ScreenSharingKit, 
-                       SharingViewService, SiriMessagesFlow, SiriSettingsIntents, 
-                       SiriUI, SoundBoard, SoundBoardFramework, UserNotificationsCore, 
-                       UserNotificationsCoreTests, UserNotificationsKit, UserNotificationsServer, 
-                       UserNotificationsServicesTests, UserNotificationsUIKit, assistantd, 
-                       examplenotificationd, untool, usernoted ]
+                       NotificationsUITool, Preferences, SE Angel, SUIAKit, SUIATPTests, 
+                       SUICITests, SUISimulatorTests, SUITVTests, SUIWatchTests, 
+                       ScreenSharingKit, SharingViewService, SiriMessagesFlow, SiriNotificationsIntents, 
+                       SiriSettingsIntents, SiriUI, SoundBoard, SoundBoardFramework, 
+                       SystemExperienceAutomationAngel, UserNotificationsCore, UserNotificationsCoreTests, 
+                       UserNotificationsKit, UserNotificationsServer, UserNotificationsServicesTests, 
+                       UserNotificationsUIKit, assistantd, examplenotificationd, 
+                       untool, usernoted ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _UNNotificationSourceFilterDefault, _UNUserNotificationSettingsServiceName, 

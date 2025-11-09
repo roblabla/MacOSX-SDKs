@@ -3,9 +3,8 @@
 #import <AuthenticationServices/ASAuthorizationPublicKeyCredentialRegistrationRequest.h>
 #import <AuthenticationServices/ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput.h>
 #import <AuthenticationServices/ASAuthorizationRequest.h>
-#import <AuthenticationServices/ASFoundation.h>
-
 #import <AuthenticationServices/ASAuthorizationWebBrowserPlatformPublicKeyCredentialRegistrationRequest.h>
+#import <AuthenticationServices/ASFoundation.h>
 
 @class ASAuthorizationPublicKeyCredentialPRFRegistrationInput;
 

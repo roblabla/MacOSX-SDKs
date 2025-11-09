@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
-// swift-module-flags: -target x86_64-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 217 -module-name ManagedSettings
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
+// swift-module-flags: -target x86_64-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 242.2.2 -module-name ManagedSettings
 import Combine
 import Foundation
 import Swift
@@ -368,12 +368,15 @@ public class ManagedSettingsStore : Combine.ObservableObject {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct SafariSettings : ManagedSettings.ManagedSettingsGroup {
-  public enum CookiePolicy : Swift.String, Swift.Comparable {
+  public enum CookiePolicy : Swift.String, Swift.Comparable, Swift.CustomStringConvertible {
     case never
     case currentWebsite
     case visitedWebsites
     case always
     public static func < (lhs: ManagedSettings.SafariSettings.CookiePolicy, rhs: ManagedSettings.SafariSettings.CookiePolicy) -> Swift.Bool
+    public var description: Swift.String {
+      get
+    }
     public init?(rawValue: Swift.String)
     @available(iOS 15.0, *)
     @available(tvOS, unavailable)

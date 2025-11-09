@@ -747,6 +747,7 @@ exports:
                        _kAVCFMediaComputeOperation_Preset_fMP4_854_480_720pBitrate, 
                        _kAVCFMediaComputeOperation_Preset_fMP4_960_960, _kAVCFMediaComputeOperation_Repackage_AudioFormat, 
                        _kAVCFMediaComputeOperation_Repackage_fMP4Segment, _kAVCFMediaComputeRequest_Option_LogSuffix_Key, 
+                       _kAVCFMediaComputeRequest_Option_OmitSceneLuminanceTrack, 
                        _kAVCFMediaComputeRequest_Option_fMP4ExpectedTargetDuration, 
                        _kAVCFMediaComputeRequest_Option_fMP4RequestMaximunResolutionPreset, 
                        _kAVCFMediaComputeRequest_RecoverableError_Key, _kAVCFPlayerInterstitialEventMonitorVTable, 

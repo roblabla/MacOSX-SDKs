@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
-// swift-module-flags: -target x86_64-apple-ios18.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-upcoming-feature InferSendableFromCaptures -enable-bare-slash-regex -user-module-version 3107 -module-name Foundation -package-name "\"FoundationPreview\""
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
+// swift-module-flags: -target x86_64-apple-ios18.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-upcoming-feature InferSendableFromCaptures -enable-bare-slash-regex -user-module-version 3208 -module-name Foundation -package-name "\"FoundationPreview\""
 import Combine
 import CoreFoundation
 import Darwin
@@ -1941,10 +1941,6 @@ extension Foundation.NSMeasurement : Swift._HasCustomAnyHashableRepresentation {
   @nonobjc public func _toCustomAnyHashable() -> Swift.AnyHashable?
 }
 @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
-extension Foundation.MeasurementFormatter {
-  public func string<UnitType>(from measurement: Foundation.Measurement<UnitType>) -> Swift.String where UnitType : Foundation.Unit
-}
-@available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
 extension Foundation.Measurement : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
@@ -3523,6 +3519,10 @@ extension Foundation.Measurement.AttributedStyle {
     get
     set
   }
+}
+@available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
+extension Foundation.MeasurementFormatter {
+  public func string<UnitType>(from measurement: Foundation.Measurement<UnitType>) -> Swift.String where UnitType : Foundation.Unit
 }
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 extension Foundation.PredicateExpressions {
@@ -5488,92 +5488,6 @@ extension Foundation.Measurement.FormatStyle where UnitType == Foundation.UnitIn
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-public struct MeasurementFormatUnitUsage<UnitType> : Swift.Codable, Swift.Hashable, Swift.Sendable where UnitType : Foundation.Dimension {
-  public static var general: Foundation.MeasurementFormatUnitUsage<UnitType> {
-    get
-  }
-  public static var asProvided: Foundation.MeasurementFormatUnitUsage<UnitType> {
-    get
-  }
-  public func hash(into hasher: inout Swift.Hasher)
-  public static func == (a: Foundation.MeasurementFormatUnitUsage<UnitType>, b: Foundation.MeasurementFormatUnitUsage<UnitType>) -> Swift.Bool
-  public func encode(to encoder: any Swift.Encoder) throws
-  public var hashValue: Swift.Int {
-    get
-  }
-  public init(from decoder: any Swift.Decoder) throws
-}
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.MeasurementFormatUnitUsage where UnitType == Foundation.UnitTemperature {
-  public static var weather: Foundation.MeasurementFormatUnitUsage<Foundation.UnitTemperature> {
-    get
-  }
-  public static var person: Foundation.MeasurementFormatUnitUsage<Foundation.UnitTemperature> {
-    get
-  }
-}
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.MeasurementFormatUnitUsage where UnitType == Foundation.UnitLength {
-  public static var person: Foundation.MeasurementFormatUnitUsage<Foundation.UnitLength> {
-    get
-  }
-  public static var road: Foundation.MeasurementFormatUnitUsage<Foundation.UnitLength> {
-    get
-  }
-  public static var personHeight: Foundation.MeasurementFormatUnitUsage<Foundation.UnitLength> {
-    get
-  }
-  @available(macOS 14, iOS 16, tvOS 17, watchOS 9, *)
-  public static var visibility: Foundation.MeasurementFormatUnitUsage<Foundation.UnitLength> {
-    get
-  }
-}
-@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
-extension Foundation.MeasurementFormatUnitUsage where UnitType == Foundation.UnitLength {
-  public static var focalLength: Foundation.MeasurementFormatUnitUsage<Foundation.UnitLength> {
-    get
-  }
-  public static var rainfall: Foundation.MeasurementFormatUnitUsage<Foundation.UnitLength> {
-    get
-  }
-  public static var snowfall: Foundation.MeasurementFormatUnitUsage<Foundation.UnitLength> {
-    get
-  }
-}
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.MeasurementFormatUnitUsage where UnitType == Foundation.UnitEnergy {
-  public static var food: Foundation.MeasurementFormatUnitUsage<Foundation.UnitEnergy> {
-    get
-  }
-  public static var workout: Foundation.MeasurementFormatUnitUsage<Foundation.UnitEnergy> {
-    get
-  }
-}
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.MeasurementFormatUnitUsage where UnitType == Foundation.UnitMass {
-  public static var personWeight: Foundation.MeasurementFormatUnitUsage<Foundation.UnitMass> {
-    get
-  }
-}
-extension Foundation.MeasurementFormatUnitUsage where UnitType == Foundation.UnitSpeed {
-  @available(macOS 14, iOS 16, tvOS 17, watchOS 9, *)
-  public static var wind: Foundation.MeasurementFormatUnitUsage<Foundation.UnitSpeed> {
-    get
-  }
-}
-extension Foundation.MeasurementFormatUnitUsage where UnitType == Foundation.UnitPressure {
-  @available(macOS 14, iOS 16, tvOS 17, watchOS 9, *)
-  public static var barometric: Foundation.MeasurementFormatUnitUsage<Foundation.UnitPressure> {
-    get
-  }
-}
-@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
-extension Foundation.MeasurementFormatUnitUsage where UnitType == Foundation.UnitVolume {
-  public static var liquid: Foundation.MeasurementFormatUnitUsage<Foundation.UnitVolume> {
-    get
-  }
-}
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.Measurement where UnitType : Foundation.Dimension {
   public func formatted<S>(_ style: S) -> S.FormatOutput where S : Foundation.FormatStyle, S.FormatInput == Foundation.Measurement<UnitType>
   public func formatted() -> Swift.String
@@ -5950,6 +5864,14 @@ extension Foundation.Calendar {
       public static var never: Foundation.Calendar.RecurrenceRule.End {
         get
       }
+      @available(macOS 15.2, iOS 18.2, tvOS 18.2, watchOS 11.2, *)
+      public var occurrences: Swift.Int? {
+        get
+      }
+      @available(macOS 15.2, iOS 18.2, tvOS 18.2, watchOS 11.2, *)
+      public var date: Foundation.Date? {
+        get
+      }
       public static func == (a: Foundation.Calendar.RecurrenceRule.End, b: Foundation.Calendar.RecurrenceRule.End) -> Swift.Bool
     }
     public var end: Foundation.Calendar.RecurrenceRule.End
@@ -6006,6 +5928,12 @@ extension Foundation.Calendar.RecurrenceRule.Month : Swift.Codable {
 extension Foundation.Calendar.RecurrenceRule : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
+}
+@available(macOS 15.2, iOS 18.2, tvOS 18.2, watchOS 11.2, *)
+extension Foundation.Calendar.RecurrenceRule.End : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
 }
 @available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 extension Swift.EncodingError : Foundation.LocalizedError {
@@ -7944,6 +7872,92 @@ extension Foundation.NotificationCenter.Publisher : Swift.Equatable {
 @available(*, unavailable)
 extension Foundation.NotificationCenter.Publisher : @unchecked Swift.Sendable {
 }
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+public struct MeasurementFormatUnitUsage<UnitType> : Swift.Codable, Swift.Hashable, Swift.Sendable where UnitType : Foundation.Dimension {
+  public static var general: Foundation.MeasurementFormatUnitUsage<UnitType> {
+    get
+  }
+  public static var asProvided: Foundation.MeasurementFormatUnitUsage<UnitType> {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: Foundation.MeasurementFormatUnitUsage<UnitType>, b: Foundation.MeasurementFormatUnitUsage<UnitType>) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.MeasurementFormatUnitUsage where UnitType == Foundation.UnitTemperature {
+  public static var weather: Foundation.MeasurementFormatUnitUsage<Foundation.UnitTemperature> {
+    get
+  }
+  public static var person: Foundation.MeasurementFormatUnitUsage<Foundation.UnitTemperature> {
+    get
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.MeasurementFormatUnitUsage where UnitType == Foundation.UnitLength {
+  public static var person: Foundation.MeasurementFormatUnitUsage<Foundation.UnitLength> {
+    get
+  }
+  public static var road: Foundation.MeasurementFormatUnitUsage<Foundation.UnitLength> {
+    get
+  }
+  public static var personHeight: Foundation.MeasurementFormatUnitUsage<Foundation.UnitLength> {
+    get
+  }
+  @available(macOS 14, iOS 16, tvOS 17, watchOS 9, *)
+  public static var visibility: Foundation.MeasurementFormatUnitUsage<Foundation.UnitLength> {
+    get
+  }
+}
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+extension Foundation.MeasurementFormatUnitUsage where UnitType == Foundation.UnitLength {
+  public static var focalLength: Foundation.MeasurementFormatUnitUsage<Foundation.UnitLength> {
+    get
+  }
+  public static var rainfall: Foundation.MeasurementFormatUnitUsage<Foundation.UnitLength> {
+    get
+  }
+  public static var snowfall: Foundation.MeasurementFormatUnitUsage<Foundation.UnitLength> {
+    get
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.MeasurementFormatUnitUsage where UnitType == Foundation.UnitEnergy {
+  public static var food: Foundation.MeasurementFormatUnitUsage<Foundation.UnitEnergy> {
+    get
+  }
+  public static var workout: Foundation.MeasurementFormatUnitUsage<Foundation.UnitEnergy> {
+    get
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.MeasurementFormatUnitUsage where UnitType == Foundation.UnitMass {
+  public static var personWeight: Foundation.MeasurementFormatUnitUsage<Foundation.UnitMass> {
+    get
+  }
+}
+extension Foundation.MeasurementFormatUnitUsage where UnitType == Foundation.UnitSpeed {
+  @available(macOS 14, iOS 16, tvOS 17, watchOS 9, *)
+  public static var wind: Foundation.MeasurementFormatUnitUsage<Foundation.UnitSpeed> {
+    get
+  }
+}
+extension Foundation.MeasurementFormatUnitUsage where UnitType == Foundation.UnitPressure {
+  @available(macOS 14, iOS 16, tvOS 17, watchOS 9, *)
+  public static var barometric: Foundation.MeasurementFormatUnitUsage<Foundation.UnitPressure> {
+    get
+  }
+}
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+extension Foundation.MeasurementFormatUnitUsage where UnitType == Foundation.UnitVolume {
+  public static var liquid: Foundation.MeasurementFormatUnitUsage<Foundation.UnitVolume> {
+    get
+  }
+}
 @available(*, deprecated, message: "Please use the struct type URLRequest")
 public typealias MutableURLRequest = Foundation.NSMutableURLRequest
 @available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
@@ -8030,6 +8044,11 @@ public struct URLRequest : Foundation.ReferenceConvertible, Swift.Equatable, Swi
     set
   }
   public var httpShouldHandleCookies: Swift.Bool {
+    get
+    set
+  }
+  @available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+  public var cookiePartitionIdentifier: Swift.String? {
     get
     set
   }

@@ -23,7 +23,7 @@ exports:
                        _UTTypeFont, _UTTypeFramework, _UTTypeGIF, _UTTypeGZIP, _UTTypeGeoJSON, 
                        _UTTypeHEIC, _UTTypeHEICS, _UTTypeHEIF, _UTTypeHTML, _UTTypeICNS, 
                        _UTTypeICO, _UTTypeImage, _UTTypeInternetLocation, _UTTypeInternetShortcut, 
-                       _UTTypeItem, _UTTypeJPEG, _UTTypeJSON, _UTTypeJavaScript, 
+                       _UTTypeItem, _UTTypeJPEG, _UTTypeJPEGXL, _UTTypeJSON, _UTTypeJavaScript, 
                        _UTTypeLinkPresentationMetadata, _UTTypeLivePhoto, _UTTypeLog, 
                        _UTTypeM3UPlaylist, _UTTypeMIDI, _UTTypeMP3, _UTTypeMPEG, 
                        _UTTypeMPEG2TransportStream, _UTTypeMPEG2Video, _UTTypeMPEG4Audio, 

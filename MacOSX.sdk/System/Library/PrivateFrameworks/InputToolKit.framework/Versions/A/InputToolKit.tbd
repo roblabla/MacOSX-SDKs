@@ -90,5 +90,5 @@ exports:
                        _itk_performBlockOnMainThreadWithStrongSelf, _itk_performBlockOnQueueWithStrongSelf, 
                        _itk_performWhileLocked, _itk_processHasUnlockEntitlement, 
                        _itk_requestDeviceUnlockIfNecessaryWithCompletion ]
-    objc-classes:    [ ITKAssert, ITKLine, ITKLineSegment ]
+    objc-classes:    [ ITKAssert, ITKLexiconChecker, ITKLine, ITKLineSegment ]
 ...

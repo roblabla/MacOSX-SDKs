@@ -81,11 +81,13 @@ API_AVAILABLE(macos(10.5))
 
 @property (nullable) CGColorSpaceRef colorspace;
 
+
 /* If any rendering context on the screen has this enabled, all content will be
  * clamped to its NSScreen’s maximumExtendedDynamicRangeColorComponentValue
  * rather than 1.0. The default is NO.  */
 
 @property BOOL wantsExtendedDynamicRangeContent;
+
 
 @end
 

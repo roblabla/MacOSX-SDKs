@@ -342,6 +342,7 @@ API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @property float startProgress;
 @property float endProgress;
 
+
 /* An optional filter object implementing the transition. When set the
  * `type' and `subtype' properties are ignored. The filter must
  * implement `inputImage', `inputTargetImage' and `inputTime' input
@@ -350,6 +351,7 @@ API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  * the region in which the transition should run. Defaults to nil. */
 
 @property(nullable, strong) id filter;
+
 
 @end
 

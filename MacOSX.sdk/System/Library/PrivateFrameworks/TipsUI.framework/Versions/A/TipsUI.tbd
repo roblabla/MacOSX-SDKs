@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TipsUI.framework/Versions/A/TipsUI'
-current-version: 769
+current-version: 772
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -13,6 +13,7 @@ exports:
                        '_$s12CoreGraphics7CGFloatV6TipsUIE30tipsCollectionTileMinimumWidthACvgZ', 
                        '_$s12CoreGraphics7CGFloatV6TipsUIE34tipsMainContentTopAndBottomPaddingACvgZ', 
                        '_$s6TipsUI0A11LandingViewV05SwiftB00D0AAMc', '_$s6TipsUI0A11LandingViewV10currentTip20collectionIdentifier03tipH0AC05SwiftB07BindingVySo6TPSTipCSgG_SSSgANtcfC', 
+                       '_$s6TipsUI0A11LandingViewV20collectionIdentifier03tipF0ACSSSg_AFtcfC', 
                        '_$s6TipsUI0A11LandingViewV4bodyQrvg', '_$s6TipsUI0A11LandingViewV4bodyQrvpMV', 
                        '_$s6TipsUI0A11LandingViewV4bodyQrvpQOMQ', '_$s6TipsUI0A11LandingViewVMa', 
                        '_$s6TipsUI0A11LandingViewVMn', '_$s6TipsUI0A11LandingViewVN', 
@@ -237,7 +238,7 @@ exports:
                        '_$s6TipsUI0A18CollectionTileViewV4bodyQrvg', '_$s6TipsUI0A18CollectionTileViewV4bodyQrvpMV', 
                        '_$s6TipsUI0A18CollectionTileViewV4bodyQrvpQOMQ', '_$s6TipsUI0A18CollectionTileViewVMa', 
                        '_$s6TipsUI0A18CollectionTileViewVMn', '_$s6TipsUI0A18CollectionTileViewVN', 
-                       '_$s6TipsUI0A4ViewV05SwiftB00C0AAMc', '_$s6TipsUI0A4ViewV10collection3tipACSo13TPSCollectionC_05SwiftB07BindingVySo6TPSTipCSgGtcfC', 
+                       '_$s6TipsUI0A4ViewV05SwiftB00C0AAMc', '_$s6TipsUI0A4ViewV10collectionACSo13TPSCollectionC_tcfC', 
                        '_$s6TipsUI0A4ViewV4bodyQrvg', '_$s6TipsUI0A4ViewV4bodyQrvpMV', 
                        '_$s6TipsUI0A4ViewV4bodyQrvpQOMQ', '_$s6TipsUI0A4ViewVMa', 
                        '_$s6TipsUI0A4ViewVMn', '_$s6TipsUI0A4ViewVN', '_$s6TipsUI0A9WorkspaceV13openSensitiveyy10Foundation3URLVFZ', 
@@ -521,6 +522,7 @@ exports:
                        '_$s6TipsUI18SearchResultsModelC06searchdA7UpdatedySaySo6TPSTipCGcSgvpMV', 
                        '_$s6TipsUI18SearchResultsModelC06searchdA7UpdatedySaySo6TPSTipCGcSgvsTj', 
                        '_$s6TipsUI18SearchResultsModelC06searchdA7UpdatedySaySo6TPSTipCGcSgvsTq', 
+                       '_$s6TipsUI18SearchResultsModelC06updateC5Query4text10identifierySS_SSSgtF', 
                        '_$s6TipsUI18SearchResultsModelC10queryCountSivMTj', '_$s6TipsUI18SearchResultsModelC10queryCountSivMTq', 
                        '_$s6TipsUI18SearchResultsModelC10queryCountSivgTj', '_$s6TipsUI18SearchResultsModelC10queryCountSivgTq', 
                        '_$s6TipsUI18SearchResultsModelC10queryCountSivpMV', '_$s6TipsUI18SearchResultsModelC10queryCountSivsTj', 
@@ -714,6 +716,8 @@ exports:
                        '_$s6TipsUI19MacHelpContentModelC23collectionEntityHandler10AppIntents0jH0_pSo13TPSCollectionCcSgvpMV', 
                        '_$s6TipsUI19MacHelpContentModelC23collectionEntityHandler10AppIntents0jH0_pSo13TPSCollectionCcSgvsTj', 
                        '_$s6TipsUI19MacHelpContentModelC23collectionEntityHandler10AppIntents0jH0_pSo13TPSCollectionCcSgvsTq', 
+                       '_$s6TipsUI19MacHelpContentModelC3tip24forCorrelationIdentifierSo6TPSTipCSgSSSg_tFTj', 
+                       '_$s6TipsUI19MacHelpContentModelC3tip24forCorrelationIdentifierSo6TPSTipCSgSSSg_tFTq', 
                        '_$s6TipsUI19MacHelpContentModelC6entity13forIdentifier10AppIntents0J6Entity_pSgSS_tF', 
                        '_$s6TipsUI19MacHelpContentModelC9tileItems11forCategorySayAA15LandingTileItemCGSgSS_tF', 
                        '_$s6TipsUI19MacHelpContentModelC9tileItems14fromCollection16validateBundleId0K12CloudDevices3maxSayAA15LandingTileItemCGSgSo13TPSCollectionCSg_S2bSitFTj', 
@@ -997,8 +1001,8 @@ exports:
                        '_$sSo7NSImageC6TipsUIE13withTintColor_13renderingModeABSo7NSColorC_AC014UIKitRenderingH0OtF', 
                        '_$sSo7NSImageC6TipsUIE13withTintColoryABSo7NSColorCF', '_$sSo7NSImageC6TipsUIE15systemImageNameABSgSS_tcfC', 
                        '_$sSo7NSImageC6TipsUIE21tipsAppHomeScreenIconABSgyFZ', '_$sSo7NSImageC6TipsUIE25imageWithSymbolAttributes_9textStyle5scaleABSgSDySSypG_So010NSFontTextI0aSo0aF5ScaleVSgtFZ', 
-                       '_$sSo7NSImageC6TipsUIE7resized2toABSgSo6CGSizeV_tF', _TipsUIVersionNumber, 
-                       _TipsUIVersionString ]
+                       '_$sSo7NSImageC6TipsUIE7resized2toABSgSo6CGSizeV_tF', '_$sSo8NSBundleC6TipsUIE21tipsUIFrameworkBundleABvgZ', 
+                       _TipsUIVersionNumber, _TipsUIVersionString ]
     objc-classes:    [ TPSAppSearchQuery, TPSImageAssetController, TPSTipsAssetPrefetchingManager, 
                        TipNavigationViewModel, _TtC6TipsUI10PlayerView, _TtC6TipsUI14TipPreviewView, 
                        _TtC6TipsUI16TipsContentModel, _TtC6TipsUI19MacHelpContentModel, 

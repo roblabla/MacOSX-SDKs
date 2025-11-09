@@ -28,10 +28,17 @@ API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 @property(nullable, copy) id string;
 
+
 /* The font to use, currently may be either a CTFontRef (toll-free
  * bridged from NSFont), a CGFontRef, or a string naming the font.
  * Defaults to the Helvetica font. Only used when the `string' property
  * is not an NSAttributedString. */
+
+
+
+
+
+
 
 @property(nullable) CFTypeRef font;
 

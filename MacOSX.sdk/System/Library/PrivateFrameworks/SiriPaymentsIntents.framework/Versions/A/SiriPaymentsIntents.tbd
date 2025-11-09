@@ -10,6 +10,8 @@ exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s11SiriKitFlow5ParseO0A15PaymentsIntentsE15isFirstPartyAppSbyF', 
                        '_$s11SiriKitFlow5ParseO16DirectInvocationV0A15PaymentsIntentsE17getSelectionIndexSiyKF', 
+                       '_$s11SiriKitFlow8USOParseV0A15PaymentsIntentsE24isRequestForAppleSavingsSbvg', 
+                       '_$s11SiriKitFlow8USOParseV0A15PaymentsIntentsE24isRequestForAppleSavingsSbvpMV', 
                        '_$s13SiriInference0A18KitContactResolverV0A15PaymentsIntents0D9ResolvingADMc', 
                        '_$s13SiriInference0A18KitContactResolverV0A15PaymentsIntents0D9ResolvingADWP', 
                        '_$s13SiriUtilities11TransformerV0A15PaymentsIntents0A8Ontology26UsoTask_pay_common_PaymentCRszSo06INSendK6IntentCRs_rlE11transformer08previousM015contactResolverACyAgIGAISg_AD16ContactResolving_ptFZ', 
@@ -57,6 +59,8 @@ exports:
                        '_$s19SiriPaymentsIntents11FlowFactoryC017unsupportedActionD00a3KitD003AnyD0CyYaKFTu', 
                        '_$s19SiriPaymentsIntents11FlowFactoryC019unsupportedOnDeviceD00a3KitD003AnyD0CyF', 
                        '_$s19SiriPaymentsIntents11FlowFactoryC019unsupportedOnDeviceD00a3KitD003AnyD0CyFTq', 
+                       '_$s19SiriPaymentsIntents11FlowFactoryC026makeAppleCardBalanceOutputD00a3KitD003AnyD0CyF', 
+                       '_$s19SiriPaymentsIntents11FlowFactoryC026makeAppleCardBalanceOutputD00a3KitD003AnyD0CyFTq', 
                        '_$s19SiriPaymentsIntents11FlowFactoryC04findD03for0a3KitD003AnyD0CSgAF5ParseO_tYaKF', 
                        '_$s19SiriPaymentsIntents11FlowFactoryC04findD03for0a3KitD003AnyD0CSgAF5ParseO_tYaKFTq', 
                        '_$s19SiriPaymentsIntents11FlowFactoryC04findD03for0a3KitD003AnyD0CSgAF5ParseO_tYaKFTu', 

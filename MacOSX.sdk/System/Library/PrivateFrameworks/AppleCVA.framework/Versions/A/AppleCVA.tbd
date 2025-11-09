@@ -2,8 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleCVA.framework/Versions/A/AppleCVA'
-current-version: 1001.9.2
-compatibility-version: 1001.9
+current-version: 1001.100.6
+compatibility-version: 1001.100
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CVAFaceTrackingCopySemantics, _CVAFaceTrackingCreate, _CVAFaceTrackingGetAPIVersion, 

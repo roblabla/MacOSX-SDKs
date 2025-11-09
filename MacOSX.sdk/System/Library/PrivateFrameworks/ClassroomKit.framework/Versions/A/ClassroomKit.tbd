@@ -155,7 +155,7 @@ exports:
                        CRKAnnotatedCredentialManifest, CRKAnnotatedCredentialStore, 
                        CRKApplication, CRKApplicationDescriptor, CRKApplicationInfo, 
                        CRKApplicationInfoServiceProxy, CRKArrayDifferenceEngine, 
-                       CRKAssignUserRequest, CRKBLBookItem, CRKBlockCancelable, CRKBlockOperation, 
+                       CRKAssignUserRequest, CRKBlockCancelable, CRKBlockOperation, 
                        CRKBook, CRKBookmark, CRKBooksServiceProxy, CRKBoundedGrowthFunction, 
                        CRKBrowseForCourseInvitationsRequest, CRKBrowseForNearbyDevicesRequest, 
                        CRKBrowseForShareTargetsRequest, CRKCancelableBackedCatalystIDSSubscription, 
@@ -220,8 +220,7 @@ exports:
                        CRKFetchActiveStudentCourseIdentifiersResultObject, CRKFetchAdHocConfigurationRequest, 
                        CRKFetchAdHocConfigurationResultObject, CRKFetchApplicationsRequest, 
                        CRKFetchApplicationsResultObject, CRKFetchBooksFromBooksServiceOperation, 
-                       CRKFetchBooksOperation, CRKFetchBooksRequest, CRKFetchBooksResultObject, 
-                       CRKFetchChaptersFromBooksServiceOperation, CRKFetchChaptersOperation, 
+                       CRKFetchBooksRequest, CRKFetchBooksResultObject, CRKFetchChaptersFromBooksServiceOperation, 
                        CRKFetchChaptersRequest, CRKFetchChaptersResultObject, CRKFetchClassroomConfigurationOperation, 
                        CRKFetchClassroomConfigurationRequest, CRKFetchClassroomConfigurationResultObject, 
                        CRKFetchConfigurationTypeRequest, CRKFetchConfigurationTypeResultObject, 
@@ -274,18 +273,14 @@ exports:
                        CRKLeaveControlGroupsRequest, CRKListTableEntries, CRKListenForIDSMessagesRequest, 
                        CRKLocalBackedIDSPrimitives, CRKLocalDeviceIPAddresses, CRKLockRequest, 
                        CRKLogEvent, CRKLogOutUserRequest, CRKMCXPrimitivesProvider, 
-                       CRKMDMIdentityProvider, CRKMeCardUserProvider, CRKMobileGestalt, 
-                       CRKMockSettingsUIVisibilityProvider, CRKMonitorExpiredCoursesInteraction, 
+                       CRKMDMIdentityProvider, CRKMeCardUserProvider, CRKMemoryBasedKeyedDataStore, 
+                       CRKMobileGestalt, CRKMockSettingsUIVisibilityProvider, CRKMonitorExpiredCoursesInteraction, 
                        CRKMutableURLResources, CRKNetworkPowerAssertion, CRKNoOpKeychain, 
                        CRKNonCatalystStudentDaemonProxy, CRKNotificationObservation, 
-                       CRKNotifyDaemonOfSettingsPaneActivationRequest, CRKOPFPackageContents, 
-                       CRKOSTransactionAssertionProvider, CRKOSTransactionToken, 
-                       CRKOpenAppRequest, CRKOpenFileRequestItem, CRKOpenFilesRequest, 
-                       CRKOpenURLRequest, CRKOperationBackedIDSMessageSubscription, 
+                       CRKNotifyDaemonOfSettingsPaneActivationRequest, CRKOSTransactionAssertionProvider, 
+                       CRKOSTransactionToken, CRKOpenAppRequest, CRKOpenFileRequestItem, 
+                       CRKOpenFilesRequest, CRKOpenURLRequest, CRKOperationBackedIDSMessageSubscription, 
                        CRKOrderedOneToManyKVOAccumulator, CRKOrderedOneToManyKVOAccumulatorResults, 
-                       CRKParseBookMetadataOperation, CRKParseHTMLTableOfContentsOperation, 
-                       CRKParseNCXTableOfContentsOperation, CRKParseOPFFilePathOperation, 
-                       CRKParseOPFPackageContentsOperation, CRKParsePDFMetadataOperation, 
                        CRKPauseMediaRequest, CRKPerformIDSFirewallActionRequest, 
                        CRKPerformIDSFirewallActionResultObject, CRKPersonaAdoptingClassKitFacade, 
                        CRKPersonaMatchEnforcingClassKitFacade, CRKPlatformClassroomLockScreenMonitor, 
@@ -337,7 +332,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst'
-current-version: 11.3
+current-version: 11.5
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -460,7 +455,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagement.framework/Versions/A/DeviceManagement'
-current-version: 220.1.1
+current-version: 221.2.6
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -564,8 +559,7 @@ exports:
                        _DMFDeviceVolumeKey, _DMFDeviceWiFiMACKey, _DMFDeviceXsanConfigurationKey, 
                        _DMFDeviceiTunesStoreAccountHashKey, _DMFDeviceiTunesStoreAccountIsActiveKey, 
                        _DMFEffectivePolicyTypeApplication, _DMFEffectivePolicyTypeApplicationCategory, 
-                       _DMFEffectivePolicyTypeCategory, _DMFEffectivePolicyTypeDowntime, 
-                       _DMFEffectivePolicyTypeShield, _DMFEffectivePolicyTypeWeb, 
+                       _DMFEffectivePolicyTypeCategory, _DMFEffectivePolicyTypeWeb, 
                        _DMFEffectivePolicyTypeWebCategory, _DMFEffectivePolicyTypeiCloudAccountLogout, 
                        _DMFEmergencyModeChangedNotification, _DMFEmergencyModeLog, 
                        _DMFEmergencyModeMachServiceName, _DMFEntitlementsApplicationIdentifierKey, 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/SafariServices.framework/Versions/A/SafariServices'
-current-version: 619.2.8
+current-version: 620.1.16
 compatibility-version: 535
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

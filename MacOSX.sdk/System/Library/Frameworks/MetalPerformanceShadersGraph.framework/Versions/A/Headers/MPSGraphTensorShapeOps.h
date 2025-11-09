@@ -139,6 +139,52 @@ MPS_SWIFT_NAME( transpose(_:permutation:name:) );
                     squeezeMask:(uint32_t) squeezeMask
                            name:(NSString * _Nullable) name;
 
+/// Creates a strided-slice operation and returns the result tensor.
+///
+/// Slices a tensor starting from `startTensor`, stopping short before `endTensor` stepping
+/// `strideTensor` paces between each value. Semantics based on
+/// [TensorFlow Strided Slice Op](https://www.tensorflow.org/api_docs/python/tf/strided_slice).
+///
+/// - Parameters:
+///   - tensor: The Tensor to be sliced.
+///   - startTensor: The tensor that specifies the starting points for each dimension.
+///   - endTensor: The tensor that specifies the ending points for each dimension.
+///   - strideTensor: The tensor that specifies the strides for each dimension.
+///   - startMask: A bitmask that indicates dimensions whose `starts` values the operation should ignore.
+///   - endMask: A bitmask that indicates dimensions whose `ends` values the operation should ignore.
+///   - squeezeMask: A bitmask that indicates dimensions the operation will squeeze out from the result.
+///   - name: The name for the operation.
+/// - Returns: A valid MPSGraphTensor object.
+-(MPSGraphTensor *) sliceTensor:(MPSGraphTensor *) tensor
+                    startTensor:(MPSGraphTensor *) startTensor
+                      endTensor:(MPSGraphTensor *) endTensor
+                   strideTensor:(MPSGraphTensor *) strideTensor
+                      startMask:(uint32_t) startMask
+                        endMask:(uint32_t) endMask
+                    squeezeMask:(uint32_t) squeezeMask
+                           name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(15.2), ios(18.2), macCatalyst(18.2), tvos(18.2));
+
+/// Creates a slice operation and returns the result tensor.
+///
+/// Slices a tensor starting from `startTensor`, stopping short before `startTensor + endTensor` stepping
+/// a single pace between each value. Semantics based on
+/// [TensorFlow Strided Slice Op](https://www.tensorflow.org/api_docs/python/tf/strided_slice).
+///
+/// - Parameters:
+///   - tensor: The Tensor to be sliced.
+///   - startTensor: The tensor that specifies the starting points for each dimension.
+///   - sizeTensor: The tensor that specifies the size of the result for each dimension.
+///   - squeezeMask: A bitmask that indicates dimensions the operation will squeeze out from the result.
+///   - name: The name for the operation.
+/// - Returns: A valid MPSGraphTensor object.
+-(MPSGraphTensor *) sliceTensor:(MPSGraphTensor *) tensor
+                    startTensor:(MPSGraphTensor *) startTensor
+                     sizeTensor:(MPSGraphTensor *) sizeTensor
+                    squeezeMask:(uint32_t) squeezeMask
+                           name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(15.2), ios(18.2), macCatalyst(18.2), tvos(18.2));
+
 /// Creates a strided-slice gradient operation and returns the result tensor.
 ///
 /// - Parameters:
@@ -155,6 +201,48 @@ MPS_SWIFT_NAME( transpose(_:permutation:name:) );
                                    ends:(NSArray<NSNumber *> *) ends
                                 strides:(NSArray<NSNumber *> *) strides
                                    name:(NSString * _Nullable) name;
+
+/// Creates a strided-slice gradient operation and returns the result tensor.
+///
+/// - Parameters:
+///   - inputGradientTensor: The input gradient.
+///   - fwdInShapeTensor: The shape of the forward pass input, that is the shape of the gradient output.
+///   - startTensor: The tensor that specifies the starting points for each dimension.
+///   - endTensor: The tensor that specifies the ending points for each dimension.
+///   - strideTensor: The tensor that specifies the strides for each dimension.
+///   - startMask: A bitmask that indicates dimensions whose `starts` values the operation should ignore.
+///   - endMask: A bitmask that indicates dimensions whose `ends` values the operation should ignore.
+///   - squeezeMask: A bitmask that indicates dimensions the operation will squeeze out from the result.
+///   - name: The name for the operation.
+/// - Returns: A valid MPSGraphTensor object
+-(MPSGraphTensor *) sliceGradientTensor:(MPSGraphTensor *) inputGradientTensor
+                       fwdInShapeTensor:(MPSGraphTensor *) fwdInShapeTensor
+                            startTensor:(MPSGraphTensor *) startTensor
+                              endTensor:(MPSGraphTensor *) endTensor
+                           strideTensor:(MPSGraphTensor *) strideTensor
+                              startMask:(uint32_t) startMask
+                                endMask:(uint32_t) endMask
+                            squeezeMask:(uint32_t) squeezeMask
+                                   name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(15.2), ios(18.2), macCatalyst(18.2), tvos(18.2));
+
+/// Creates a slice gradient operation and returns the result tensor.
+///
+/// - Parameters:
+///   - inputGradientTensor: The input gradient.
+///   - fwdInShapeTensor: The shape of the forward pass input, that is the shape of the gradient output.
+///   - startTensor: The tensor that specifies the starting points for each dimension.
+///   - sizeTensor: The tensor that specifies the size of the forward result for each dimension.
+///   - squeezeMask: A bitmask that indicates dimensions the operation will squeeze out from the result.
+///   - name: The name for the operation.
+/// - Returns: A valid MPSGraphTensor object
+-(MPSGraphTensor *) sliceGradientTensor:(MPSGraphTensor *) inputGradientTensor
+                       fwdInShapeTensor:(MPSGraphTensor *) fwdInShapeTensor
+                            startTensor:(MPSGraphTensor *) startTensor
+                             sizeTensor:(MPSGraphTensor *) sizeTensor
+                            squeezeMask:(uint32_t) squeezeMask
+                                   name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(15.2), ios(18.2), macCatalyst(18.2), tvos(18.2));
 
 /// Creates a strided-slice gradient operation and returns the result tensor.
 ///

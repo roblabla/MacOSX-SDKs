@@ -418,6 +418,7 @@ exports:
                        '_$sSo13NSBindingNamea12AMPDesktopUIE9viewModelABvMZ', '_$sSo13NSBindingNamea12AMPDesktopUIE9viewModelABvgZ', 
                        '_$sSo13NSBindingNamea12AMPDesktopUIE9viewModelABvsZ', '_$sSo16NSOperationQueueC12AMPDesktopUIE8schedule4taskyyyc_tF', 
                        '_$sSo19AMPTrackTableLockupC12AMPDesktopUIE03ampB4View_11menuForRowsSo6NSMenuCSgSo07NSTableG0C_10Foundation8IndexSetVtF', 
+                       '_$sSo19AMPTrackTableLockupC12AMPDesktopUIE06updateB3Row_4withySo07NSTableG4ViewC_So0aB9ItemModel_ptF', 
                        '_$sSo19AMPTrackTableLockupC12AMPDesktopUIE10showArtistSbvg', 
                        '_$sSo19AMPTrackTableLockupC12AMPDesktopUIE10showArtistSbvpMV', 
                        '_$sSo19AMPTrackTableLockupC12AMPDesktopUIE10showArtistSbvpWvd', 

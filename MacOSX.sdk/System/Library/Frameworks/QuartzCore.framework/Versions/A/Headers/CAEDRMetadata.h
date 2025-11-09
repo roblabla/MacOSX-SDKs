@@ -7,6 +7,7 @@
 #define CAEDRMetadata_h
 
 
+
 #ifdef __OBJC__
 
 #include <Foundation/NSObject.h>
@@ -114,6 +115,7 @@ API_AVAILABLE(macos(10.15), ios(16.0)) API_UNAVAILABLE(watchos)
 NS_HEADER_AUDIT_END(nullability, sendability)
 
 #endif /* __OBJC__ */
+
 
 
 #endif /* CAEDRMetadata_h */

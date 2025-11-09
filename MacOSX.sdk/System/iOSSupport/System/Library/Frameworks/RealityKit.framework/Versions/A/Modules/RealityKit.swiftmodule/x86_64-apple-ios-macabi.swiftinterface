@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
-// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-bare-slash-regex -user-module-version 366.40.5.0.1 -module-name RealityKit
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
+// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-bare-slash-regex -user-module-version 366.60.13.0.1 -module-name RealityKit
 import ARKit
 import Combine
 import CoreGraphics
@@ -45,8 +45,9 @@ extension RealityKit.ARView {
 extension RealityFoundation.Entity.ConfigurationCatalog {
   public init(from url: Foundation.URL) async throws
 }
-@objc @_inheritsConvenienceInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
-@available(visionOS, unavailable)
+@objc @_inheritsConvenienceInitializers @available(iOS 13.0, macCatalyst 14.0, *)
+@available(macOS, unavailable)
+@available(visionOS, unavailable, introduced: 1.0)
 @_Concurrency.MainActor @preconcurrency open class EntityTranslationGestureRecognizer : UIKit.UIGestureRecognizer, RealityKit.EntityGestureRecognizer {
   @_Concurrency.MainActor @preconcurrency public var entity: (any RealityFoundation.HasCollision)? {
     get
@@ -79,8 +80,9 @@ extension RealityFoundation.ParticleEmitterComponent.Presets {
     get
   }
 }
-@objc @_inheritsConvenienceInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
-@available(visionOS, unavailable)
+@objc @_inheritsConvenienceInitializers @available(iOS 13.0, macCatalyst 14.0, *)
+@available(macOS, unavailable)
+@available(visionOS, unavailable, introduced: 1.0)
 @_Concurrency.MainActor @preconcurrency open class EntityScaleGestureRecognizer : UIKit.UIPinchGestureRecognizer, RealityKit.EntityGestureRecognizer {
   @_Concurrency.MainActor @preconcurrency public var entity: (any RealityFoundation.HasCollision)? {
     get
@@ -272,8 +274,9 @@ extension RealityFoundation.ParticleEmitterComponent {
   public struct Presets {
   }
 }
-@objc @_inheritsConvenienceInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
-@available(visionOS, unavailable)
+@objc @_inheritsConvenienceInitializers @available(iOS 13.0, macCatalyst 14.0, *)
+@available(macOS, unavailable)
+@available(visionOS, unavailable, introduced: 1.0)
 @_Concurrency.MainActor @preconcurrency open class EntityRotationGestureRecognizer : UIKit.UIRotationGestureRecognizer, RealityKit.EntityGestureRecognizer {
   @_Concurrency.MainActor @preconcurrency public var entity: (any RealityFoundation.HasCollision)? {
     get
@@ -314,13 +317,16 @@ extension RealityFoundation.ShapeResource {
   @available(visionOS, deprecated, message: "Use `ShapeResource.generateStaticMesh(from meshAnchor: MeshAnchor)` instead.")
   nonisolated public static func generateStaticMesh(from meshAnchor: ARKit.ARMeshAnchor) async throws -> RealityFoundation.ShapeResource
 }
-@available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
+@available(iOS 13.0, macCatalyst 14.0, *)
+@available(macOS, unavailable)
 @available(visionOS, unavailable)
 public protocol EntityGestureRecognizer : UIKit.UIGestureRecognizer {
   var entity: (any RealityFoundation.HasCollision)? { get set }
   @preconcurrency @_Concurrency.MainActor func location(in entity: RealityFoundation.Entity?) -> Swift.SIMD3<Swift.Float>?
 }
-@available(visionOS, unavailable)
+@available(iOS 13.0, macCatalyst 14.0, *)
+@available(macOS, unavailable)
+@available(visionOS, unavailable, introduced: 1.0)
 extension RealityKit.EntityGestureRecognizer {
   public func location(in entity: RealityFoundation.Entity?) -> Swift.SIMD3<Swift.Float>?
 }
@@ -572,7 +578,8 @@ public protocol __ARViewDelegatePrivate : AnyObject {
 extension RealityKit.__ARViewDelegatePrivate {
   public func view(_ view: RealityKit.ARView, performedProximityInteractionsForEntities: [RealityFoundation.Entity])
 }
-@available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
+@available(iOS 13.0, macCatalyst 13.0, *)
+@available(macOS, unavailable)
 @available(visionOS, unavailable)
 public typealias ARViewBase = UIKit.UIView
 @objc @_inheritsConvenienceInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
@@ -740,11 +747,13 @@ extension RealityFoundation.DirectionalLightComponent {
   @available(macOS, unavailable)
   @available(macCatalyst, unavailable)
   public init(color: RealityFoundation.DirectionalLightComponent.Color = .white, intensity: Swift.Float = 2145.7078)
-  @available(visionOS, unavailable)
+  @available(visionOS, unavailable, introduced: 2.0)
   public init(color: RealityFoundation.DirectionalLightComponent.Color = .white, intensity: Swift.Float = 2145.7078, isRealWorldProxy: Swift.Bool = false)
 }
+@available(iOS 13.0, macCatalyst 13.0, *)
+@available(macOS, unavailable)
 @available(visionOS, unavailable)
-extension RealityKit.ARView : UIKit.UIGestureRecognizerDelegate {
+extension RealityKit.ARView {
   @_Concurrency.MainActor @preconcurrency @objc override dynamic open class var layerClass: Swift.AnyClass {
     @objc get
   }
@@ -760,8 +769,6 @@ extension RealityKit.ARView : UIKit.UIGestureRecognizerDelegate {
   @_Concurrency.MainActor @preconcurrency @objc override dynamic open func touchesMoved(_ touches: Swift.Set<UIKit.UITouch>, with event: UIKit.UIEvent?)
   @_Concurrency.MainActor @preconcurrency @objc override dynamic open func touchesEnded(_ touches: Swift.Set<UIKit.UITouch>, with event: UIKit.UIEvent?)
   @_Concurrency.MainActor @preconcurrency @objc override dynamic open func touchesCancelled(_ touches: Swift.Set<UIKit.UITouch>, with event: UIKit.UIEvent?)
-  @_Concurrency.MainActor @preconcurrency @objc dynamic public func gestureRecognizer(_ gestureRecognizer: UIKit.UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
-  @_Concurrency.MainActor @preconcurrency @objc dynamic public func gestureRecognizer(_ gestureRecognizer: UIKit.UIGestureRecognizer, shouldReceive touch: UIKit.UITouch) -> Swift.Bool
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 extension RealityFoundation.TextureResource {
@@ -823,7 +830,7 @@ public class __EntityAccessibilityWrapper : ObjectiveC.NSObject {
   @objc deinit
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(visionOS, unavailable)
+@available(visionOS, unavailable, introduced: 1.0, message: "ARView is not available on visionOS, use RealityView.")
 extension RealityKit.ARView {
   @_Concurrency.MainActor @preconcurrency public var physicsOrigin: RealityFoundation.Entity? {
     get
@@ -1008,7 +1015,13 @@ extension RealityKit.ARView {
   @_Concurrency.MainActor @preconcurrency public func __occlusionEntity(for faceAnchor: ARKit.ARFaceAnchor) -> RealityFoundation.Entity?
   @_Concurrency.MainActor @preconcurrency public func __removeOcclusionEntity(for faceAnchor: ARKit.ARFaceAnchor)
 }
-@available(macCatalyst 14.0, *)
+@available(iOS 13.0, macCatalyst 14.0, *)
+@available(macOS, unavailable)
+@available(visionOS, unavailable)
+extension RealityKit.ARView : UIKit.UIGestureRecognizerDelegate {
+}
+@available(iOS 13.0, macCatalyst 14.0, *)
+@available(macOS, unavailable)
 @available(visionOS, unavailable)
 extension RealityKit.ARView {
   public struct EntityGestures : Swift.OptionSet {
@@ -1018,24 +1031,29 @@ extension RealityKit.ARView {
     public static let rotation: RealityKit.ARView.EntityGestures
     public static let scale: RealityKit.ARView.EntityGestures
     public static let all: RealityKit.ARView.EntityGestures
-    @available(iOS, introduced: 13.0, message: "ARView is not available on xrOS, use RealityView.")
+    @available(iOS 13.0, macCatalyst 14.0, *)
     @available(visionOS, unavailable)
-    @available(macOS, introduced: 10.15, message: "ARView is not available on xrOS, use RealityView.")
-    @available(macCatalyst, introduced: 14.0, message: "ARView is not available on xrOS, use RealityView.")
+    @available(macOS, unavailable, introduced: 10.15)
     public typealias ArrayLiteralElement = RealityKit.ARView.EntityGestures
-    @available(iOS, introduced: 13.0, message: "ARView is not available on xrOS, use RealityView.")
+    @available(iOS 13.0, macCatalyst 14.0, *)
     @available(visionOS, unavailable)
-    @available(macOS, introduced: 10.15, message: "ARView is not available on xrOS, use RealityView.")
-    @available(macCatalyst, introduced: 14.0, message: "ARView is not available on xrOS, use RealityView.")
+    @available(macOS, unavailable, introduced: 10.15)
     public typealias Element = RealityKit.ARView.EntityGestures
-    @available(iOS, introduced: 13.0, message: "ARView is not available on xrOS, use RealityView.")
+    @available(iOS 13.0, macCatalyst 14.0, *)
     @available(visionOS, unavailable)
-    @available(macOS, introduced: 10.15, message: "ARView is not available on xrOS, use RealityView.")
-    @available(macCatalyst, introduced: 14.0, message: "ARView is not available on xrOS, use RealityView.")
+    @available(macOS, unavailable, introduced: 10.15)
     public typealias RawValue = Swift.Int
   }
+}
+@available(iOS 13.0, macCatalyst 14.0, *)
+@available(macOS, unavailable)
+@available(visionOS, unavailable, introduced: 1.0)
+extension RealityKit.ARView {
+  @available(visionOS, deprecated)
   @discardableResult
   @_Concurrency.MainActor @preconcurrency public func installGestures(_ gestures: RealityKit.ARView.EntityGestures = .all, for entity: any RealityFoundation.HasCollision) -> [any RealityKit.EntityGestureRecognizer]
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func gestureRecognizer(_ gestureRecognizer: UIKit.UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func gestureRecognizer(_ gestureRecognizer: UIKit.UIGestureRecognizer, shouldReceive touch: UIKit.UITouch) -> Swift.Bool
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @available(visionOS, unavailable)

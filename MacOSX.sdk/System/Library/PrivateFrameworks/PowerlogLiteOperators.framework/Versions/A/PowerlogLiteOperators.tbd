@@ -801,8 +801,8 @@ exports:
                        PLScreenStateAgent, PLSiriAgent, PLSleepWakeAgent, PLSoCAgent, 
                        PLTestService, PLThermalMonitorService, PLUserActiveStateService, 
                        PLVideoAgent, PLWifiAgent, PLWindowServerAgent, PLXPCAgent, 
-                       PLXPCService, PPSFeatureFlagReaderHelper, PPSSafeguardController, 
-                       ProcessMemoryUsage, ProcessMonitorStats, _TtC21PowerlogLiteOperators10UrsaClient ]
+                       PLXPCService, PPSFeatureFlagReaderHelper, ProcessMemoryUsage, 
+                       ProcessMonitorStats, _TtC21PowerlogLiteOperators10UrsaClient ]
     objc-ivars:      [ AFKEndpointInterfacePowerlogDisplay._notification ]
   - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ _ASP_GetIndirectionTableStatistics, _ASP_GetNandPerfStats, 

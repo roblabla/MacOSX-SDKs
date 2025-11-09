@@ -62,6 +62,8 @@ API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 - (void)move:(nullable id)sender API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
 - (void)export:(nullable id)sender API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
 
+- (void)showWritingTools:(id)sender API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos);
+
 @end
 
 UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR

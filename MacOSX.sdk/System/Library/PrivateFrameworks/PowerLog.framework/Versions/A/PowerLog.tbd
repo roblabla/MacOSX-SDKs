@@ -37,7 +37,7 @@ exports:
                        _PLSysdiagnoseCopyPowerlog, _PLSysdiagnoseTimeSensitivePhase, 
                        _PLTalkToPowerlogHelper, _PPSCreateTelemetryIdentifier, _PPSSendTelemetry, 
                        _PerfPowerTelemetryCreateIdentifier, _PerfPowerTelemetrySendEvent, 
-                       _batteryUIHasNoteworthyInformation, _perfpowertelemetry_create_identifier, 
+                       _batteryUIHasNoteworthyInformation, _kPLHPDConfigPath, _perfpowertelemetry_create_identifier, 
                        _perfpowertelemetry_send_event, _pps_create_telemetry_identifier, 
                        _pps_send_telemetry ]
     objc-classes:    [ PLBatteryUIExternalData, PLCoreDuetEvent, PLCoreDuetEventInterval, 

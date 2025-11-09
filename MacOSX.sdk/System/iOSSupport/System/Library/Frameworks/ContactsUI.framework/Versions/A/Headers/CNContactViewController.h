@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  *              You must use one of the class factory methods.
  */
 
-NS_CLASS_AVAILABLE_IOS(9_0) API_UNAVAILABLE(tvos)
+NS_CLASS_AVAILABLE_IOS(9_0) API_DEPRECATED("Unavailable on tvOS", tvos(1.0, 18.0))
 @interface CNContactViewController : UIViewController
 
 /*!
@@ -133,7 +133,7 @@ NS_CLASS_AVAILABLE_IOS(9_0) API_UNAVAILABLE(tvos)
 @end
 
 
-NS_AVAILABLE_IOS(9_0) API_UNAVAILABLE(tvos)
+NS_AVAILABLE_IOS(9_0) API_DEPRECATED("Unavailable on tvOS", tvos(1.0, 18.0))
 @protocol CNContactViewControllerDelegate <NSObject>
 @optional
 

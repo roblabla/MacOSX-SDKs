@@ -104,6 +104,8 @@ exports:
                        '_$s22AdaptiveVoiceShortcuts20AVSCoordinatorObjectC23$cacheAVSfeatureEnabled7Combine9PublishedV9PublisherVySb_GvsTq', 
                        '_$s22AdaptiveVoiceShortcuts20AVSCoordinatorObjectC23stopStreamingEnrollmentyyFTj', 
                        '_$s22AdaptiveVoiceShortcuts20AVSCoordinatorObjectC23stopStreamingEnrollmentyyFTq', 
+                       '_$s22AdaptiveVoiceShortcuts20AVSCoordinatorObjectC24setupAudioFileEnrollmentyyFTj', 
+                       '_$s22AdaptiveVoiceShortcuts20AVSCoordinatorObjectC24setupAudioFileEnrollmentyyFTq', 
                        '_$s22AdaptiveVoiceShortcuts20AVSCoordinatorObjectC24startStreamingEnrollmentyyFTj', 
                        '_$s22AdaptiveVoiceShortcuts20AVSCoordinatorObjectC24startStreamingEnrollmentyyFTq', 
                        '_$s22AdaptiveVoiceShortcuts20AVSCoordinatorObjectC27navigateToRestartEnrollmentyyFTj', 
@@ -195,6 +197,7 @@ exports:
                        '_$sSo20AVSTriggerControllerC22AdaptiveVoiceShortcutsE19displayAlertHandlerySSSg_AEtcSgvpMV', 
                        '_$sSo20AVSTriggerControllerC22AdaptiveVoiceShortcutsE19displayAlertHandlerySSSg_AEtcSgvpWvd', 
                        '_$sSo20AVSTriggerControllerC22AdaptiveVoiceShortcutsE19displayAlertHandlerySSSg_AEtcSgvs', 
+                       '_$sSo20AVSTriggerControllerC22AdaptiveVoiceShortcutsE22handleAudioBufferInput_4timeySo16AVAudioPCMBufferCSg_s6UInt64VtF', 
                        '_$sSo20AVSTriggerControllerC22AdaptiveVoiceShortcutsE29keywordSpotterDidUpdateScores10verboseLogySS_tF', 
                        '_$sSo20AVSTriggerControllerC22AdaptiveVoiceShortcutsE30keywordSpotterDidDetectKeyword5eventy0D7Actions21VAKeywordSpottedEventC_tF', 
                        '_$sSo20AVSTriggerControllerC22AdaptiveVoiceShortcutsE32keywordSpotterDidStopWithSummary4json4uuidySS_10Foundation4UUIDVtKF', 
@@ -231,6 +234,6 @@ exports:
                        '_$sSo8AVSStoreCMa', _AdaptiveVoiceShortcutsVersionNumber, 
                        _AdaptiveVoiceShortcutsVersionString, _convertToShortLPCMBufFromFloatLPCMBuf, 
                        _kAdjust0DB ]
-    objc-classes:    [ AVSCoreSpeechBridge, AVSSettings, AVSStore, AVSTriggerController, 
-                       AdaptiveVoiceShortcutObjcClass ]
+    objc-classes:    [ AVAudioUtilities, AVSCoreSpeechBridge, AVSSettings, AVSStore, 
+                       AVSTriggerController, AdaptiveVoiceShortcutObjcClass ]
 ...

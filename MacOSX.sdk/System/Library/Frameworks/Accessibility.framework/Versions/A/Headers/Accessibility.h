@@ -14,3 +14,5 @@
 #import <Accessibility/AXRequest.h>
 #import <Accessibility/AXSettings.h>
 #import <Accessibility/AXTechnology.h>
+#import <Accessibility/AXMathExpression.h>
+#import <Accessibility/AXFeatureOverrideSessionManager.h>

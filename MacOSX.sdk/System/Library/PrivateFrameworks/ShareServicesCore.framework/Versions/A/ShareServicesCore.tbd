@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ShareServicesCore.framework/Versions/A/ShareServicesCore'
-current-version: 711.0.180
+current-version: 721.0.150
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SBLDontAllowRAWForSharingService, _SBLFileURLFromFileURLs, 
@@ -13,8 +13,7 @@ exports:
                        _SBLSharingServiceNameSendToSimulator, _SBLSharingServiceParametersSkipAssetsPreparationKey, 
                        _SBLSharingServiceParametersSkipIncrementShareCountKey, _SBLShouldProvideImageForAsset, 
                        _SBLShouldProvideMovieForAsset, _SBLSubsystemShareKit, _SBLTemporaryExportURLFromURL, 
-                       _SBLVariantFromVariants, _SBLVideoSharingServicePrefix, _ShareServicesCoreVersionNumber, 
-                       _ShareServicesCoreVersionString, _kCompletedUnitCountProperty, 
+                       _SBLVariantFromVariants, _SBLVideoSharingServicePrefix, _kCompletedUnitCountProperty, 
                        _kSBLItemKey, _kSBLPreSharingAlertCancelButtonTitle, _kSBLPreSharingAlertConfirmButtonTitle, 
                        _kSBLPreSharingAlertMessage, _kSBLPreSharingAlertNeeded, _kSBLPreSharingAlertTitle, 
                        _kSBLProgressDelayShowingUntilNonZeroProgress, _kSBLProgressFormatKey, 

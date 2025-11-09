@@ -28,7 +28,8 @@ exports:
                        PPSpecifierExtensionContext, PPSpecifierExtensionHostManager, 
                        PPSpecifierExtensionItem, PPSpecifierExtensionManager, PPSpecifierHostExtensionContext, 
                        PPSpecifierScrollView, PPSpecifierTableCellView, PPSpecifierTableViewController, 
-                       PPSpecifierViewController, ValidSubrangeSlider, ValidSubrangeSliderCell ]
+                       PPSpecifierViewController, ValidSubrangeSlider, ValidSubrangeSliderCell, 
+                       WallpaperUtils ]
     objc-ivars:      [ AccountsPrefFormatter._characterSet, AccountsPrefFormatter._maxLength, 
                        BTPointingDevicePairController.mBTAlertIconImage, BTPointingDevicePairController.mBTIsAvailable, 
                        BTPointingDevicePairController.mBTKeyboardList, BTPointingDevicePairController.mBTPowerIsOn, 

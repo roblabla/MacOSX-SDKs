@@ -384,4 +384,7 @@
 #import <UIKit/UITextFormattingViewControllerConfiguration.h>
 #import <UIKit/UITextFormattingViewControllerComponent.h>
 #import <UIKit/UITextFormattingViewControllerFormattingDescriptor.h>
+#import <UIKit/UIWritingToolsCoordinator.h>
+#import <UIKit/UIWritingToolsCoordinatorContext.h>
+#import <UIKit/UIWritingToolsCoordinatorAnimationParameters.h>
 #endif

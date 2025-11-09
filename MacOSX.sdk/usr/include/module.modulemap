@@ -2,9 +2,12 @@
 extern module AppleTextureEncoder "AppleTextureEncoder.modulemap"
 extern module asl "asl.modulemap"
 extern module Compression "compression.modulemap"
+extern module CUPS_Placeholder_NewFile "cups.modulemap"
 extern module dnssd "dnssd.modulemap"
 extern module EditLine "editline.modulemap"
+extern module FFI "ffi.modulemap"
 extern module gssapi "gssapi.modulemap"
+extern module ICU_Placeholder_NewFile "unicode.modulemap"
 extern module krb5 "krb5.modulemap"
 extern module ldap "ldap.modulemap"
 extern module SQLite3 "SQLite3.modulemap"
@@ -19,8 +22,11 @@ extern module vproc "launch.modulemap"
 extern module XPC "xpc.modulemap"
 
 // OS and kernel interfaces on top of Darwin/POSIX.
+extern module Dispatch "dispatch.modulemap"
+extern module DispatchIntrospection "dispatch.modulemap"
 extern module kcdata "kcdata.modulemap"
 extern module libkern "libkern.modulemap"
+extern module MachO_Placeholder_NewFile "MachO.modulemap"
 extern module os "os.modulemap"
 extern module os_object "os.modulemap"
 extern module os_workgroup "os.modulemap"
@@ -133,10 +139,7 @@ extern module __wctype "c_standard_library.modulemap"
 
 // Source module maps for modules in sub-directories where a directory name
 // doesn't match a module name.
-extern module Dispatch "dispatch/module.modulemap"
-extern module DispatchIntrospection "dispatch/module.modulemap"
-extern module MachO "mach-o/module.modulemap"
-extern module ICU "unicode/module.modulemap"
+extern module MachO_Placeholder_OldFile "mach-o/module.modulemap"
+extern module ICU_Placeholder_OldFile "unicode/module.modulemap"
 
-extern module CUPS "cups/module.modulemap"
-extern module FFI "ffi/module.modulemap"
+extern module CUPS_Placeholder_OldFile "cups/module.modulemap"

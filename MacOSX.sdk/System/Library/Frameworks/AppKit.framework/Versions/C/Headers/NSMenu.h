@@ -184,6 +184,9 @@ typedef NS_ENUM(NSInteger, NSMenuSelectionMode) {
 */
 @property BOOL allowsContextMenuPlugIns API_AVAILABLE(macos(10.6));
 
+/* Determines whether Writing Tools menu items may be inserted into the menu, if used as a context menu. The default is YES. */
+@property BOOL automaticallyInsertsWritingToolsItems API_AVAILABLE(macos(15.2));
+
 /* Determines whether the menu contains a column for the state image.  The default is YES. */
 @property BOOL showsStateColumn API_AVAILABLE(macos(10.5));
 

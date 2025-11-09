@@ -3,9 +3,8 @@
 #import <AuthenticationServices/ASAuthorizationPublicKeyCredentialAssertionRequest.h>
 #import <AuthenticationServices/ASAuthorizationRequest.h>
 #import <AuthenticationServices/ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor.h>
-#import <Foundation/Foundation.h>
-
 #import <AuthenticationServices/ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialAssertionRequest.h>
+#import <Foundation/Foundation.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 

@@ -6,9 +6,10 @@ install-name:    '/usr/lib/libspindump.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _SPCachePort, _SPCheckHIDResponseTime, _SPExpectedHIDResponseDelayUntil, 
-                       _SPGenerateSpindump, _SPHIDResponseDelayThreshold, _SPPauseMonitoringHIDResponsiveness, 
-                       _SPReportCPUUsageResource, _SPReportCPUWakeupsResource, _SPReportDiskWritesResource, 
+    symbols:         [ _SPCachePort, _SPCheckHIDResponseTime, _SPCheckHIDResponseTime2, 
+                       _SPExpectedHIDResponseDelayUntil, _SPGenerateSpindump, _SPHIDResponseDelayThreshold, 
+                       _SPPauseMonitoringHIDResponsiveness, _SPReportCPUUsageResource, 
+                       _SPReportCPUWakeupsResource, _SPReportDiskWritesResource, 
                        _SPReportFileDescriptorExhaustion, _SPReportFileDescriptorExhaustion_FatalPort, 
                        _SPReportHIDResponseDelay, _SPReportKQWorkLoopExhaustion, 
                        _SPReportKQWorkLoopExhaustion_FatalPort, _SPReportPortExhaustion, 

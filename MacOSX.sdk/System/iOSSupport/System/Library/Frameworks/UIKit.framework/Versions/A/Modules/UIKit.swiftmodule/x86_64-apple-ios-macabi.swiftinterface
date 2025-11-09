@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
-// swift-module-flags: -target x86_64-apple-ios18.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-abi-name UIKit -enable-bare-slash-regex -user-module-version 8117.1.405 -module-name UIKit
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
+// swift-module-flags: -target x86_64-apple-ios18.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-abi-name UIKit -enable-bare-slash-regex -user-module-version 8220.1.402 -module-name UIKit
 // swift-module-flags-ignorable: -no-verify-emitted-module-interface
 @_exported import Accessibility
 @_exported import CoreGraphics
@@ -3080,6 +3080,12 @@ extension NSCollectionLayoutGroup {
 extension UIApplication {
   @available(iOS 16.0, *)
   nonisolated public static let openNotificationSettingsURLString: Swift.String
+  @available(iOS 18.2, *)
+  @available(visionOS, unavailable)
+  @available(macCatalyst, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  nonisolated public func isDefault(_ category: UIApplication.Category) throws -> Swift.Bool
 }
 @available(iOS 18.0, *)
 extension UIViewController.Transition {

@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
-// swift-module-flags: -target x86_64-apple-macos15.1 -target-variant x86_64-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 210.13.0.1 -module-name AppIntents
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
+// swift-module-flags: -target x86_64-apple-macos15.2 -target-variant x86_64-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 226.3.0.4 -module-name AppIntents
 @_exported import AppIntents
 import CoreGraphics
 import CoreLocation
@@ -684,7 +684,7 @@ extension AppIntents.AssistantSchemas.Intent where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var reader: some AppIntents.AssistantSchemas.ReaderIntent {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.IntentSchema("com.apple.Reader")
+            return AssistantSchema.IntentSchema("reader")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -791,7 +791,7 @@ extension AppIntents.AssistantSchemas.Entity where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var reader: some AppIntents.AssistantSchemas.ReaderEntity {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.EntitySchema("com.apple.Reader")
+            return AssistantSchema.EntitySchema("reader")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -835,7 +835,7 @@ extension AppIntents.AssistantSchemas.Enum where Self == AppIntents.AssistantSch
   @_alwaysEmitIntoClient public static var reader: some AppIntents.AssistantSchemas.ReaderEnum {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.EnumSchema("com.apple.Reader")
+            return AssistantSchema.EnumSchema("reader")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -933,7 +933,7 @@ extension AppIntents.AssistantSchemas.Intent where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var files: some AppIntents.AssistantSchemas.FilesIntent {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.IntentSchema("com.apple.Files")
+            return AssistantSchema.IntentSchema("files")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -1004,7 +1004,7 @@ extension AppIntents.AssistantSchemas.Entity where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var files: some AppIntents.AssistantSchemas.FilesEntity {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.EntitySchema("com.apple.Files")
+            return AssistantSchema.EntitySchema("files")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -1200,7 +1200,7 @@ extension AppIntents.AssistantSchemas.Entity where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var presentation: some AppIntents.AssistantSchemas.PresentationEntity {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.EntitySchema("com.apple.Presentation")
+            return AssistantSchema.EntitySchema("presentation")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -1378,7 +1378,7 @@ extension AppIntents.AssistantSchemas.Intent where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var mail: some AppIntents.AssistantSchemas.MailIntent {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.IntentSchema("com.apple.Mail")
+            return AssistantSchema.IntentSchema("mail")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -1494,7 +1494,7 @@ extension AppIntents.AssistantSchemas.Entity where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var mail: some AppIntents.AssistantSchemas.MailEntity {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.EntitySchema("com.apple.Mail")
+            return AssistantSchema.EntitySchema("mail")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -1557,6 +1557,20 @@ extension AppIntents.AssistantSchemas.MailEntity {
     set
   }
   @objc deinit
+}
+@available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+extension AppIntents.IntentParameter {
+  public enum ValueState {
+    case unset
+    case set(Value)
+  }
+  final public var valueState: AppIntents.IntentParameter<Value>.ValueState {
+    get
+  }
+}
+@available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+extension AppIntents.IntentParameter.ValueState : Swift.Equatable where Value : Swift.Equatable {
+  public static func == (lhs: AppIntents.IntentParameter<Value>.ValueState, rhs: AppIntents.IntentParameter<Value>.ValueState) -> Swift.Bool
 }
 #if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
@@ -1751,7 +1765,7 @@ extension AppIntents.AssistantSchemas.Entity where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var browser: some AppIntents.AssistantSchemas.BrowserEntity {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.EntitySchema("com.apple.Browser")
+            return AssistantSchema.EntitySchema("browser")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -1805,7 +1819,7 @@ extension AppIntents.AssistantSchemas.Enum where Self == AppIntents.AssistantSch
   @_alwaysEmitIntoClient public static var browser: some AppIntents.AssistantSchemas.BrowserEnum {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.EnumSchema("com.apple.Browser")
+            return AssistantSchema.EnumSchema("browser")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -2014,7 +2028,7 @@ extension AppIntents.AssistantSchemas.Intent where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var spreadsheet: some AppIntents.AssistantSchemas.SpreadsheetIntent {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.IntentSchema("com.apple.Spreadsheet")
+            return AssistantSchema.IntentSchema("spreadsheet")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -2166,7 +2180,7 @@ extension AppIntents.AssistantSchemas.Entity where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var spreadsheet: some AppIntents.AssistantSchemas.SpreadsheetEntity {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.EntitySchema("com.apple.Spreadsheet")
+            return AssistantSchema.EntitySchema("spreadsheet")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -2646,7 +2660,7 @@ extension AppIntents.AssistantSchemas.Intent where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var photos: some AppIntents.AssistantSchemas.PhotosIntent {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.IntentSchema("com.apple.Photos")
+            return AssistantSchema.IntentSchema("photos")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -2799,6 +2813,15 @@ extension AppIntents.AssistantSchemas.PhotosIntent {
         }
     }
   }
+  @_alwaysEmitIntoClient public var cleanupPhoto: some AppIntents.AssistantSchemas.Intent {
+    get {
+        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+            return AssistantSchema.IntentSchema("CleanupMediaIntent")
+        } else {
+            fatalError("Do not reference schema types directly")
+        }
+    }
+  }
   @_alwaysEmitIntoClient public var setExposure: some AppIntents.AssistantSchemas.Intent {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
@@ -2906,7 +2929,7 @@ extension AppIntents.AssistantSchemas.Entity where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var photos: some AppIntents.AssistantSchemas.PhotosEntity {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.EntitySchema("com.apple.Photos")
+            return AssistantSchema.EntitySchema("photos")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -2959,7 +2982,7 @@ extension AppIntents.AssistantSchemas.Enum where Self == AppIntents.AssistantSch
   @_alwaysEmitIntoClient public static var photos: some AppIntents.AssistantSchemas.PhotosEnum {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.EnumSchema("com.apple.Photos")
+            return AssistantSchema.EnumSchema("photos")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -3088,7 +3111,7 @@ extension AppIntents.AssistantSchemas.Intent where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var books: some AppIntents.AssistantSchemas.BooksIntent {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.IntentSchema("com.apple.Books")
+            return AssistantSchema.IntentSchema("books")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -3195,7 +3218,7 @@ extension AppIntents.AssistantSchemas.Entity where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var books: some AppIntents.AssistantSchemas.BooksEntity {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.EntitySchema("com.apple.Books")
+            return AssistantSchema.EntitySchema("books")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -3248,7 +3271,7 @@ extension AppIntents.AssistantSchemas.Enum where Self == AppIntents.AssistantSch
   @_alwaysEmitIntoClient public static var books: some AppIntents.AssistantSchemas.BooksEnum {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.EnumSchema("com.apple.Books")
+            return AssistantSchema.EnumSchema("books")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -3646,11 +3669,25 @@ extension AppIntents.AppShortcutsBuilder {
   public static func buildExpression(_ component: AppIntents.AppShortcut) -> [AppIntents.AppShortcut]
   public static func buildBlock(_ components: [AppIntents.AppShortcut]...) -> [AppIntents.AppShortcut]
   public static func buildBlock() -> [AppIntents.AppShortcut]
-  public static func buildOptional(_ component: (any AppIntents._AppShortcutsContentMarker & AppIntents._LimitedAvailabilityAppShortcutsContentMarker)?) -> [AppIntents.AppShortcut]
+}
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, visionOS 1.1, *)
+extension AppIntents.AppShortcutsBuilder {
+  @_alwaysEmitIntoClient public static func buildOptional(_ component: (any AppIntents._AppShortcutsContentEmitterMarker & AppIntents._AppShortcutsContentMarker & AppIntents._LimitedAvailabilityAppShortcutsContentMarker)?) -> [AppIntents.AppShortcut] {
+        if let component {
+             
+            (component as! LimitedAvailabilityAppShortcuts).appShortcuts
+        } else {
+            []
+        }
+    }
+}
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, visionOS 1.1, *)
+extension AppIntents.AppShortcutsBuilder {
   @available(*, unavailable, message: "if statements in an AppShortcutsBuilder can only be used with #available clauses")
   public static func buildOptional<A>(_ appShortcuts: A?) -> [AppIntents.AppShortcut] where A : AppIntents._AppShortcutsContentMarker
   @available(*, unavailable, message: "if statements in an AppShortcutsBuilder can only be used with #available clauses")
   public static func buildOptional(_ appShortcuts: [AppIntents.AppShortcut]?) -> [AppIntents.AppShortcut]
+  @_disfavoredOverload public static func buildOptional(_ component: (any AppIntents._AppShortcutsContentMarker & AppIntents._LimitedAvailabilityAppShortcutsContentMarker)?) -> [AppIntents.AppShortcut]
   public static func buildLimitedAvailability(_ components: [AppIntents.AppShortcut]) -> (any AppIntents._AppShortcutsContentMarker & AppIntents._LimitedAvailabilityAppShortcutsContentMarker)
 }
 @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, visionOS 1.1, *)
@@ -3661,11 +3698,14 @@ public protocol AppShortcutsContent {
 @_marker public protocol _AppShortcutsContentMarker {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+@_marker public protocol _AppShortcutsContentEmitterMarker {
+}
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 @_marker public protocol _LimitedAvailabilityAppShortcutsContentMarker {
 }
 @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, visionOS 1.1, *)
 @usableFromInline
-@frozen internal struct LimitedAvailabilityAppShortcuts : AppIntents.AppShortcutsContent, AppIntents._AppShortcutsContentMarker, AppIntents._LimitedAvailabilityAppShortcutsContentMarker {
+@frozen internal struct LimitedAvailabilityAppShortcuts : AppIntents.AppShortcutsContent, AppIntents._AppShortcutsContentMarker, AppIntents._AppShortcutsContentEmitterMarker, AppIntents._LimitedAvailabilityAppShortcutsContentMarker {
   @usableFromInline
   internal var appShortcuts: [AppIntents.AppShortcut]
   @usableFromInline
@@ -4526,6 +4566,11 @@ extension AppIntents.EntityProperty where Value.ValueType == AppIntents.IntentPa
 @objc public protocol _ViewBridgeLoader {
   @objc static func loadBridge()
 }
+@available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+extension AppIntents.EntityProperty where Value.ValueType == Foundation.Calendar.RecurrenceRule {
+  convenience public init(title: Foundation.LocalizedStringResource)
+  convenience public init()
+}
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct IntentDonationMatchingPredicate {
   public static func donationIdentifier(_ identifier: AppIntents.IntentDonationIdentifier) -> AppIntents.IntentDonationMatchingPredicate
@@ -4654,6 +4699,10 @@ extension Foundation.NSUserActivity {
 @available(macOS, unavailable)
 public protocol StartDiveIntent : AppIntents.SystemIntent {
 }
+@available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+public protocol AppEntityAnnotatable {
+  var appEntityIdentifier: AppIntents.EntityIdentifier? { get set }
+}
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.AppIntent {
   @available(*, deprecated, message: "Please use requestConfirmation(conditions:actionName:dialog:) or requestConfirmation(conditions:actionName:dialog:showDialogAsPrompt:content:)")
@@ -4672,10 +4721,18 @@ extension AppIntents.AppIntent {
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol IntentResult : Swift.Sendable {
   associatedtype Value : AppIntents._IntentValue = Swift.Never
-  associatedtype OpensAppIntent : AppIntents.AppIntent = Swift.Never
   associatedtype Snippet = Swift.Never
   associatedtype Dialog = Swift.Never
   var value: Self.Value? { get }
+  #if compiler(>=5.3) && $AssociatedTypeAvailability
+  @available(iOS, deprecated: 18.2)
+  @available(watchOS, deprecated: 11.2)
+  @available(tvOS, deprecated: 18.2)
+  @available(visionOS, deprecated: 2.2)
+  associatedtype OpensAppIntent : AppIntents.AppIntent = Swift.Never
+  #else
+  associatedtype OpensAppIntent : AppIntents.AppIntent = Swift.Never
+  #endif
 }
 #if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -4699,6 +4756,10 @@ public protocol ShowsSnippetView : AppIntents.IntentResult where Self.Snippet ==
 public struct IntentResultContainer<Value, OpensAppIntent, Snippet, Dialog> : AppIntents.IntentResult, @unchecked Swift.Sendable where Value : AppIntents._IntentValue, OpensAppIntent : AppIntents.AppIntent {
   public var value: Value?
   public var dialog: AppIntents.IntentDialog?
+  @available(iOS, deprecated: 18.2)
+  @available(watchOS, deprecated: 11.2)
+  @available(tvOS, deprecated: 18.2)
+  @available(visionOS, deprecated: 2.2)
   public var opensIntent: OpensAppIntent?
   @available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
   public var activityIdentifier: Swift.String?
@@ -4725,7 +4786,9 @@ extension AppIntents.IntentResult {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentResult {
-  public static func result<OpensAppIntent>(opensIntent: OpensAppIntent) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, OpensAppIntent, Swift.Never, Swift.Never>, OpensAppIntent : AppIntents.AppIntent
+  @_disfavoredOverload public static func result<OpensAppIntent>(opensIntent: OpensAppIntent) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, OpensAppIntent, Swift.Never, Swift.Never>, OpensAppIntent : AppIntents.AppIntent
+  @available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+  public static func result(opensIntent: some AppIntent) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, Swift.Never, Swift.Never, Swift.Never>
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentResult {
@@ -4733,7 +4796,9 @@ extension AppIntents.IntentResult {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentResult {
-  public static func result<Value, OpensAppIntent>(value: Value, opensIntent: OpensAppIntent) -> Self where Self == AppIntents.IntentResultContainer<Value, OpensAppIntent, Swift.Never, Swift.Never>, Value : AppIntents._IntentValue, OpensAppIntent : AppIntents.AppIntent
+  @_disfavoredOverload public static func result<Value, OpensAppIntent>(value: Value, opensIntent: OpensAppIntent) -> Self where Self == AppIntents.IntentResultContainer<Value, OpensAppIntent, Swift.Never, Swift.Never>, Value : AppIntents._IntentValue, OpensAppIntent : AppIntents.AppIntent
+  @available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+  public static func result<Value>(value: Value, opensIntent: some AppIntent) -> Self where Self == AppIntents.IntentResultContainer<Value, Swift.Never, Swift.Never, Swift.Never>, Value : AppIntents._IntentValue
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentResult {
@@ -4741,11 +4806,15 @@ extension AppIntents.IntentResult {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentResult {
-  public static func result<Value, OpensAppIntent>(value: Value, opensIntent: OpensAppIntent, dialog: AppIntents.IntentDialog) -> Self where Self == AppIntents.IntentResultContainer<Value, OpensAppIntent, Swift.Never, AppIntents.IntentDialog>, Value : AppIntents._IntentValue, OpensAppIntent : AppIntents.AppIntent
+  @_disfavoredOverload public static func result<Value, OpensAppIntent>(value: Value, opensIntent: OpensAppIntent, dialog: AppIntents.IntentDialog) -> Self where Self == AppIntents.IntentResultContainer<Value, OpensAppIntent, Swift.Never, AppIntents.IntentDialog>, Value : AppIntents._IntentValue, OpensAppIntent : AppIntents.AppIntent
+  @available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+  public static func result<Value>(value: Value, opensIntent: some AppIntent, dialog: AppIntents.IntentDialog) -> Self where Self == AppIntents.IntentResultContainer<Value, Swift.Never, Swift.Never, AppIntents.IntentDialog>, Value : AppIntents._IntentValue
 }
 @available(macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4, *)
 extension AppIntents.IntentResult {
-  public static func result<OpensAppIntent>(opensIntent: OpensAppIntent, dialog: AppIntents.IntentDialog) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, OpensAppIntent, Swift.Never, AppIntents.IntentDialog>, OpensAppIntent : AppIntents.AppIntent
+  @_disfavoredOverload public static func result<OpensAppIntent>(opensIntent: OpensAppIntent, dialog: AppIntents.IntentDialog) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, OpensAppIntent, Swift.Never, AppIntents.IntentDialog>, OpensAppIntent : AppIntents.AppIntent
+  @available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+  public static func result(opensIntent: some AppIntent, dialog: AppIntents.IntentDialog) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, Swift.Never, Swift.Never, AppIntents.IntentDialog>
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentResult {
@@ -4958,6 +5027,13 @@ extension Foundation.NSNull : AppIntents._IntentValue {
   public typealias UnwrappedType = Foundation.NSNull
   @available(*, unavailable)
   public typealias ValueType = Foundation.NSNull
+}
+@available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+extension Foundation.NSUserActivity : AppIntents.AppEntityAnnotatable {
+  public var appEntityIdentifier: AppIntents.EntityIdentifier? {
+    get
+    set
+  }
 }
 @_hasMissingDesignatedInitializers @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 final public class EntityQueryProperty<Entity, Subject, Property, PropertyType, ComparatorMappingType> : AppIntents.EntityQueryPropertyDeclaration<Entity, ComparatorMappingType> where Entity : AppIntents.AppEntity, Subject : AppIntents.AppEntity, Property : AppIntents.EntityProperty<PropertyType>, PropertyType : AppIntents._IntentValue, PropertyType : Swift.Sendable {
@@ -5280,7 +5356,7 @@ final public class AppDependencyManager {
   }
   public init()
   @_silgen_name("$s10AppIntents0A17DependencyManagerC3add3key10dependencyys11AnyHashableVSg_xyXAts8SendableRzlF")
-  final public func add<Dependency>(key: Swift.AnyHashable? = nil, dependency dependencyProvider: @autoclosure @escaping @Sendable () -> Dependency) where Dependency : Swift.Sendable
+  @_disfavoredOverload final public func add<Dependency>(key: Swift.AnyHashable? = nil, dependency dependencyProvider: @autoclosure @escaping @Sendable () -> Dependency) where Dependency : Swift.Sendable
   @_silgen_name("$s10AppIntents0A17DependencyManagerC3add3key10dependencyys11AnyHashableVSg_xyKcyXAts8SendableRzlF")
   final public func add<Dependency>(key: Swift.AnyHashable? = nil, dependency dependencyProvider: @autoclosure @escaping () -> @Sendable () throws -> Dependency) where Dependency : Swift.Sendable
   @_silgen_name("$s10AppIntents0A17DependencyManagerC3add3key10dependencyys11AnyHashableVSg_xyYaKcts8SendableRzlF")
@@ -5314,7 +5390,7 @@ extension AppIntents.AssistantSchemas.Intent where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var camera: some AppIntents.AssistantSchemas.CameraIntent {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.IntentSchema("com.apple.Camera")
+            return AssistantSchema.IntentSchema("camera")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -5385,7 +5461,7 @@ extension AppIntents.AssistantSchemas.Enum where Self == AppIntents.AssistantSch
   @_alwaysEmitIntoClient public static var camera: some AppIntents.AssistantSchemas.CameraEnum {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.EnumSchema("com.apple.Camera")
+            return AssistantSchema.EnumSchema("camera")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -5482,6 +5558,18 @@ extension AppIntents.AppIntent {
   public var systemContext: AppIntents.IntentSystemContext {
     get
   }
+}
+@available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+extension Foundation.Calendar.RecurrenceRule : AppIntents._IntentValue {
+  public static var defaultResolverSpecification: some AppIntents.ResolverSpecification {
+    get
+  }
+  @available(iOS 18.2, tvOS 18.2, watchOS 11.2, visionOS 2.2, macOS 15.2, *)
+  public typealias Specification = @_opaqueReturnTypeOf("$s10Foundation8CalendarV14RecurrenceRuleV10AppIntentsE28defaultResolverSpecificationQrvpZ", 0) __
+  @available(iOS 18.2, tvOS 18.2, watchOS 11.2, visionOS 2.2, macOS 15.2, *)
+  public typealias UnwrappedType = Foundation.Calendar.RecurrenceRule
+  @available(iOS 18.2, tvOS 18.2, watchOS 11.2, visionOS 2.2, macOS 15.2, *)
+  public typealias ValueType = Foundation.Calendar.RecurrenceRule
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.EntityProperty where Value.ValueType == AppIntents.IntentCurrencyAmount {
@@ -6657,7 +6745,7 @@ extension AppIntents.AssistantSchemas.Intent where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var system: some AppIntents.AssistantSchemas.SystemIntent {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.IntentSchema("com.apple.System")
+            return AssistantSchema.IntentSchema("system")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -7110,7 +7198,7 @@ extension AppIntents.AssistantSchemas.Intent where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var wordProcessor: some AppIntents.AssistantSchemas.WordProcessorIntent {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.IntentSchema("com.apple.WordProcessor")
+            return AssistantSchema.IntentSchema("wordProcessor")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -7217,7 +7305,7 @@ extension AppIntents.AssistantSchemas.Entity where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var wordProcessor: some AppIntents.AssistantSchemas.WordProcessorEntity {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.EntitySchema("com.apple.WordProcessor")
+            return AssistantSchema.EntitySchema("wordProcessor")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -7294,7 +7382,7 @@ extension AppIntents.AssistantSchemas.Intent where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var whiteboard: some AppIntents.AssistantSchemas.WhiteboardIntent {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.IntentSchema("com.apple.Whiteboard")
+            return AssistantSchema.IntentSchema("whiteboard")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -7383,7 +7471,7 @@ extension AppIntents.AssistantSchemas.Entity where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var whiteboard: some AppIntents.AssistantSchemas.WhiteboardEntity {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.EntitySchema("com.apple.Whiteboard")
+            return AssistantSchema.EntitySchema("whiteboard")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -7427,7 +7515,7 @@ extension AppIntents.AssistantSchemas.Enum where Self == AppIntents.AssistantSch
   @_alwaysEmitIntoClient public static var whiteboard: some AppIntents.AssistantSchemas.WhiteboardEnum {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.EnumSchema("com.apple.Whiteboard")
+            return AssistantSchema.EnumSchema("whiteboard")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -7565,7 +7653,7 @@ extension AppIntents.AssistantSchemas.Intent where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var journal: some AppIntents.AssistantSchemas.JournalIntent {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.IntentSchema("com.apple.Journal")
+            return AssistantSchema.IntentSchema("journal")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -7636,7 +7724,7 @@ extension AppIntents.AssistantSchemas.Entity where Self == AppIntents.AssistantS
   @_alwaysEmitIntoClient public static var journal: some AppIntents.AssistantSchemas.JournalEntity {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.EntitySchema("com.apple.Journal")
+            return AssistantSchema.EntitySchema("journal")
         } else {
             fatalError("Do not reference schema types directly")
         }

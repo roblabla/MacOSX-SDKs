@@ -305,8 +305,17 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos)
  @function PGNewDeviceWithDescriptor
  @abstract Create a new PGDevice implementation object based on the provided descriptor.
  @param descriptor The device descriptor for the new device.
+ @deprecated Use PGCreateDeviceWithDescriptor instead as it's annotated correctly for ARC.
  */
-PG_EXTERN id<PGDevice> _Nullable PGNewDeviceWithDescriptor(PGDeviceDescriptor * _Nonnull descriptor) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+PG_EXTERN id<PGDevice> _Nullable PGNewDeviceWithDescriptor(PGDeviceDescriptor * _Nonnull descriptor) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos) API_DEPRECATED_WITH_REPLACEMENT("PGCreateDeviceWithDescriptor", macos(11.0, 15.2));
+
+
+/*!
+ @function PGCreateDeviceWithDescriptor
+ @abstract Create a new PGDevice implementation object based on the provided descriptor.
+ @param descriptor The device descriptor for the new device.
+ */
+PG_EXTERN id<PGDevice> _Nullable PGCreateDeviceWithDescriptor(PGDeviceDescriptor * _Nonnull descriptor) NS_RETURNS_RETAINED API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @function PGMaxDisplayPortCount

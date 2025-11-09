@@ -1,13 +1,13 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
-// swift-module-flags: -target arm64e-apple-macosx15.1 -target-variant arm64e-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSynchronization -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature ExtensionImportVisiblity -enable-experimental-feature RawLayout -enable-experimental-feature StaticExclusiveOnly -enable-experimental-feature Extern -user-module-version 6.0.0.7.43 -enable-builtin-module -module-name Synchronization
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
+// swift-module-flags: -target arm64e-apple-macosx15.2 -target-variant arm64e-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSynchronization -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature ExtensionImportVisiblity -enable-experimental-feature RawLayout -enable-experimental-feature StaticExclusiveOnly -enable-experimental-feature Extern -user-module-version 6.0.3.1.5 -enable-builtin-module -module-name Synchronization
 // swift-module-flags-ignorable: -enable-ossa-modules -enable-lexical-lifetimes=false
 import Builtin
 import Darwin
 import Swift
-#if compiler(>=5.3) && $MoveOnly && $RawLayout && $StaticExclusiveOnly
+#if compiler(>=5.3) && $RawLayout && $StaticExclusiveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-@frozen @_rawLayout(like: Value.AtomicRepresentation) @_staticExclusiveOnly @_moveOnly public struct Atomic<Value> where Value : Synchronization.AtomicRepresentable {
+@frozen @_rawLayout(like: Value.AtomicRepresentation) @_staticExclusiveOnly public struct Atomic<Value> : ~Swift.Copyable where Value : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent internal var _address: Swift.UnsafeMutablePointer<Value.AtomicRepresentation> {
     @_transparent get {
@@ -33,11 +33,9 @@ import Swift
   }
 }
 #endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic : @unchecked Swift.Sendable where Value : Swift.Sendable {
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.Bool : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -55,7 +53,6 @@ extension Swift.Bool : Synchronization.AtomicRepresentable {
     )
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value == Swift.Bool {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -191,7 +188,6 @@ extension Synchronization.Atomic where Value == Swift.Bool {
     return (oldValue: old, newValue: old != operand)
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.Float16 : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -231,9 +227,9 @@ extension Swift.Double : Synchronization.AtomicRepresentable {
     Double(bitPattern: UInt64.decodeAtomicRepresentation(representation))
   }
 }
-#if compiler(>=5.3) && $MoveOnly && $StaticExclusiveOnly
+#if compiler(>=5.3) && $StaticExclusiveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-@frozen @_staticExclusiveOnly @_moveOnly public struct AtomicLazyReference<Instance> where Instance : AnyObject {
+@frozen @_staticExclusiveOnly public struct AtomicLazyReference<Instance> : ~Swift.Copyable where Instance : AnyObject {
   @usableFromInline
   internal let storage: Synchronization.Atomic<Swift.Unmanaged<Instance>?>
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -247,7 +243,6 @@ extension Swift.Double : Synchronization.AtomicRepresentable {
   }
 }
 #endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.AtomicLazyReference {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -255,12 +250,9 @@ extension Synchronization.AtomicLazyReference {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public func load() -> Instance?
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.AtomicLazyReference : @unchecked Swift.Sendable where Instance : Swift.Sendable {
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 @frozen public struct AtomicLoadOrdering {
   @usableFromInline
@@ -1447,7 +1439,6 @@ extension Swift.Int : Synchronization.AtomicRepresentable {
     Int(representation._storage)
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value == Swift.Int {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -1857,7 +1848,6 @@ extension Synchronization.Atomic where Value == Swift.Int {
     return (oldValue: result.original, newValue: new)
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.Int8 : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -1871,7 +1861,6 @@ extension Swift.Int8 : Synchronization.AtomicRepresentable {
     Int8(representation._storage)
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value == Swift.Int8 {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -2281,7 +2270,6 @@ extension Synchronization.Atomic where Value == Swift.Int8 {
     return (oldValue: result.original, newValue: new)
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.Int16 : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -2295,7 +2283,6 @@ extension Swift.Int16 : Synchronization.AtomicRepresentable {
     Int16(representation._storage)
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value == Swift.Int16 {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -2705,7 +2692,6 @@ extension Synchronization.Atomic where Value == Swift.Int16 {
     return (oldValue: result.original, newValue: new)
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.Int32 : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -2719,7 +2705,6 @@ extension Swift.Int32 : Synchronization.AtomicRepresentable {
     Int32(representation._storage)
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value == Swift.Int32 {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -3129,7 +3114,6 @@ extension Synchronization.Atomic where Value == Swift.Int32 {
     return (oldValue: result.original, newValue: new)
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.Int64 : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -3143,7 +3127,6 @@ extension Swift.Int64 : Synchronization.AtomicRepresentable {
     Int64(representation._storage)
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value == Swift.Int64 {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -3553,7 +3536,6 @@ extension Synchronization.Atomic where Value == Swift.Int64 {
     return (oldValue: result.original, newValue: new)
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.Int128 : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -3567,7 +3549,6 @@ extension Swift.Int128 : Synchronization.AtomicRepresentable {
     Int128(representation._storage)
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value == Swift.Int128 {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -3977,7 +3958,6 @@ extension Synchronization.Atomic where Value == Swift.Int128 {
     return (oldValue: result.original, newValue: new)
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UInt : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -3991,7 +3971,6 @@ extension Swift.UInt : Synchronization.AtomicRepresentable {
     UInt(representation._storage)
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value == Swift.UInt {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -4401,7 +4380,6 @@ extension Synchronization.Atomic where Value == Swift.UInt {
     return (oldValue: result.original, newValue: new)
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UInt8 : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -4415,7 +4393,6 @@ extension Swift.UInt8 : Synchronization.AtomicRepresentable {
     UInt8(representation._storage)
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value == Swift.UInt8 {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -4825,7 +4802,6 @@ extension Synchronization.Atomic where Value == Swift.UInt8 {
     return (oldValue: result.original, newValue: new)
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UInt16 : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -4839,7 +4815,6 @@ extension Swift.UInt16 : Synchronization.AtomicRepresentable {
     UInt16(representation._storage)
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value == Swift.UInt16 {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -5249,7 +5224,6 @@ extension Synchronization.Atomic where Value == Swift.UInt16 {
     return (oldValue: result.original, newValue: new)
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UInt32 : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -5263,7 +5237,6 @@ extension Swift.UInt32 : Synchronization.AtomicRepresentable {
     UInt32(representation._storage)
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value == Swift.UInt32 {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -5673,7 +5646,6 @@ extension Synchronization.Atomic where Value == Swift.UInt32 {
     return (oldValue: result.original, newValue: new)
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UInt64 : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -5687,7 +5659,6 @@ extension Swift.UInt64 : Synchronization.AtomicRepresentable {
     UInt64(representation._storage)
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value == Swift.UInt64 {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -6097,7 +6068,6 @@ extension Synchronization.Atomic where Value == Swift.UInt64 {
     return (oldValue: result.original, newValue: new)
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UInt128 : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -6111,7 +6081,6 @@ extension Swift.UInt128 : Synchronization.AtomicRepresentable {
     UInt128(representation._storage)
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value == Swift.UInt128 {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -6521,7 +6490,6 @@ extension Synchronization.Atomic where Value == Swift.UInt128 {
     return (oldValue: result.original, newValue: new)
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 @frozen @_alignment(1) public struct _Atomic8BitStorage {
   public var _storage: Builtin.Int8
@@ -6530,7 +6498,6 @@ extension Synchronization.Atomic where Value == Swift.UInt128 {
     self._storage = _builtin
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -6554,8 +6521,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     return Value.decodeAtomicRepresentation(Value.AtomicRepresentation(result))
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -6586,8 +6551,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     }
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -6621,8 +6584,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     return Value.decodeAtomicRepresentation(atomicStorage)
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -6635,8 +6596,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -6762,8 +6721,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -6776,8 +6733,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -6903,7 +6858,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 @frozen @_alignment(2) public struct _Atomic16BitStorage {
   public var _storage: Builtin.Int16
@@ -6912,7 +6866,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     self._storage = _builtin
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -6936,8 +6889,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     return Value.decodeAtomicRepresentation(Value.AtomicRepresentation(result))
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -6968,8 +6919,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     }
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7003,8 +6952,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     return Value.decodeAtomicRepresentation(atomicStorage)
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7017,8 +6964,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7144,8 +7089,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7158,8 +7101,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7285,7 +7226,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 @frozen @_alignment(4) public struct _Atomic32BitStorage {
   public var _storage: Builtin.Int32
@@ -7294,7 +7234,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     self._storage = _builtin
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7318,8 +7257,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     return Value.decodeAtomicRepresentation(Value.AtomicRepresentation(result))
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7350,8 +7287,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     }
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7385,8 +7320,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     return Value.decodeAtomicRepresentation(atomicStorage)
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7399,8 +7332,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7526,8 +7457,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7540,8 +7469,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7667,7 +7594,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 @frozen @_alignment(8) public struct _Atomic64BitStorage {
   public var _storage: Builtin.Int64
@@ -7676,7 +7602,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     self._storage = _builtin
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7700,8 +7625,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     return Value.decodeAtomicRepresentation(Value.AtomicRepresentation(result))
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7732,8 +7655,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     }
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7767,8 +7688,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     return Value.decodeAtomicRepresentation(atomicStorage)
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7781,8 +7700,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7908,8 +7825,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -7922,8 +7837,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -8049,7 +7962,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 @frozen @_alignment(16) public struct _Atomic128BitStorage {
   public var _storage: Builtin.Int128
@@ -8058,7 +7970,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     self._storage = _builtin
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -8082,8 +7993,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     return Value.decodeAtomicRepresentation(Value.AtomicRepresentation(result))
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -8114,8 +8023,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     }
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -8149,8 +8056,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     return Value.decodeAtomicRepresentation(atomicStorage)
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -8163,8 +8068,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -8290,8 +8193,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -8304,8 +8205,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -8431,7 +8330,6 @@ extension Synchronization.Atomic where Value.AtomicRepresentation == Synchroniza
     )
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.AtomicLoadOrdering : Swift.Sendable {}
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)

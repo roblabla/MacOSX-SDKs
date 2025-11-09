@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork'
-current-version: 1568.200.51
+current-version: 1568.255.101
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -154,16 +154,17 @@ exports:
                        _NSHTTPCookieMaximumAge, _NSHTTPCookieName, _NSHTTPCookieOriginURL, 
                        _NSHTTPCookiePath, _NSHTTPCookiePort, _NSHTTPCookieSameSiteLax, 
                        _NSHTTPCookieSameSitePolicy, _NSHTTPCookieSameSiteStrict, 
-                       _NSHTTPCookieSecure, _NSHTTPCookieValue, _NSHTTPCookieVersion, 
-                       _NSNetServicesErrorCode, _NSNetServicesErrorDomain, _NSTCPConnectionConditionsUnmetReasonErrorDomain, 
-                       _NSURLAuthenticationMethodClientCertificate, _NSURLAuthenticationMethodDefault, 
-                       _NSURLAuthenticationMethodHTMLForm, _NSURLAuthenticationMethodHTTPBasic, 
-                       _NSURLAuthenticationMethodHTTPDigest, _NSURLAuthenticationMethodNTLM, 
-                       _NSURLAuthenticationMethodNegotiate, _NSURLAuthenticationMethodOAuth, 
-                       _NSURLAuthenticationMethodOAuthBearerToken, _NSURLAuthenticationMethodPrivateAccessToken, 
-                       _NSURLAuthenticationMethodServerTrust, _NSURLAuthenticationMethodXMobileMeAuthToken, 
-                       _NSURLCredentialStorageChangedNotification, _NSURLCredentialStorageRemoveSynchronizableCredentials, 
-                       _NSURLProtectionSpaceFTP, _NSURLProtectionSpaceFTPProxy, _NSURLProtectionSpaceHTTP, 
+                       _NSHTTPCookieSecure, _NSHTTPCookieSetByJavaScript, _NSHTTPCookieValue, 
+                       _NSHTTPCookieVersion, _NSNetServicesErrorCode, _NSNetServicesErrorDomain, 
+                       _NSTCPConnectionConditionsUnmetReasonErrorDomain, _NSURLAuthenticationMethodClientCertificate, 
+                       _NSURLAuthenticationMethodDefault, _NSURLAuthenticationMethodHTMLForm, 
+                       _NSURLAuthenticationMethodHTTPBasic, _NSURLAuthenticationMethodHTTPDigest, 
+                       _NSURLAuthenticationMethodNTLM, _NSURLAuthenticationMethodNegotiate, 
+                       _NSURLAuthenticationMethodOAuth, _NSURLAuthenticationMethodOAuthBearerToken, 
+                       _NSURLAuthenticationMethodPrivateAccessToken, _NSURLAuthenticationMethodServerTrust, 
+                       _NSURLAuthenticationMethodXMobileMeAuthToken, _NSURLCredentialStorageChangedNotification, 
+                       _NSURLCredentialStorageRemoveSynchronizableCredentials, _NSURLProtectionSpaceFTP, 
+                       _NSURLProtectionSpaceFTPProxy, _NSURLProtectionSpaceHTTP, 
                        _NSURLProtectionSpaceHTTPProxy, _NSURLProtectionSpaceHTTPS, 
                        _NSURLProtectionSpaceHTTPSProxy, _NSURLProtectionSpaceSOCKSProxy, 
                        _NSURLSessionDefaultLoadingPriority, _NSURLSessionDownloadTaskResumeData, 

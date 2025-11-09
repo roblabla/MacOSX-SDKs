@@ -19,7 +19,7 @@ API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 @property (readonly, copy) UnitType unit;
 @property (readonly) double doubleValue;
 
-- (instancetype)init API_UNAVAILABLE(macos, ios, watchos, tvos);
+- (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithDoubleValue:(double)doubleValue unit:(UnitType)unit NS_DESIGNATED_INITIALIZER;
 
 /*

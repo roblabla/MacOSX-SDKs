@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CloudPhotoServicesConfiguration.framework/Versions/A/CloudPhotoServicesConfiguration'
-current-version: 711.0.180
+current-version: 721.0.150
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CPSAccountAvailabilityDataClassURLKey, _CPSAccountDisplayNameKey, 
@@ -34,8 +34,7 @@ exports:
                        _CPSSystemPhotoLibraryCountOfItemsImportedByReferenceKey, 
                        _CPSSystemPhotoLibraryInformationKey, _CPSSystemPhotoLibraryIsAvailableKey, 
                        _CPSSystemPhotoLibraryPathKey, _CPSSystemPhotoLibraryPhotosApplicationStateKey, 
-                       _CPSTargetServiceStateMapKey, _CloudPhotoServicesConfigurationVersionNumber, 
-                       _CloudPhotoServicesConfigurationVersionString, _PhotoStreamConfigurationAppleIDKey, 
+                       _CPSTargetServiceStateMapKey, _PhotoStreamConfigurationAppleIDKey, 
                        _PhotoStreamConfigurationDidDisablePhotostreamKey, _PhotoStreamConfigurationEnabledPhotoStreamTypesKey, 
                        _PhotoStreamConfigurationKey, _PhotoStreamConfigurationModificationAppKey, 
                        _PhotoStreamConfigurationModificationDateKey, _PhotoStreamConfigurationStreamTypeClassicPhotoStream, 

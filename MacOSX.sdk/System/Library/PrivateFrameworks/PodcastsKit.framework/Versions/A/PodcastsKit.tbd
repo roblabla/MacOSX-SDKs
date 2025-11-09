@@ -23,13 +23,13 @@ allowable-clients:
                        PodcastsNotificationExtension, PodcastsPodcastsTodayExtension, 
                        PodcastsSettingsAppIntentsExtension, PodcastsSettingsPlugin, 
                        PodcastsTVTopShelfExtension, PodcastsTestSupport, PodcastsTests, 
-                       PodcastsTestsMock, PodcastsTodayExtension, PodcastsUI, PodcastsUITests, 
-                       PodcastsUIUtil, PodcastsUsagePlugin, PodcastsWidget, SPI, 
-                       ShelfKit, ShelfKitCollectionViews, ShelfKitCollectionViewsTests, 
+                       PodcastsTestsMock, PodcastsTodayExtension, PodcastsTranscripts, 
+                       PodcastsUI, PodcastsUITests, PodcastsUIUtil, PodcastsUsagePlugin, 
+                       PodcastsWidget, SPI, ShelfKit, ShelfKitCollectionViews, ShelfKitCollectionViewsTests, 
                        ShelfKitStacks, ShelfKitTests, SiriAudioDESPlugin, SiriAudioHeavyweightTests, 
                        SiriAudioInternal, SiriAudioInternalTests, SiriAudioSupport, 
-                       SiriAudioSupportIntegrationTests, SiriAudioSupportTests, UnifiedSiriTest, 
-                       com.apple.podcasts.DiagnosticExtension, com.apple.podcasts.SpotlightIndexExtension, 
+                       SiriAudioSupportIntegrationTests, SiriAudioSupportTests, SonicPodcasts, 
+                       UnifiedSiriTest, com.apple.podcasts.DiagnosticExtension, com.apple.podcasts.SpotlightIndexExtension, 
                        com.apple.podcasts.appremoval, iTunesPodcastLibrary, podcastsctl, 
                        siriaudio_helper ]
 exports:

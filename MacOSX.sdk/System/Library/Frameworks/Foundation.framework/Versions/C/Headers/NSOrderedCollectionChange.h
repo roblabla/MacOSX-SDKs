@@ -48,7 +48,7 @@ API_AVAILABLE(macosx(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 // change representing a move operation may store different objects.
 @property (readonly) NSUInteger associatedIndex;
 
-- (id)init API_UNAVAILABLE(macos, ios, watchos, tvos);
+- (id)init NS_UNAVAILABLE;
 
 - (instancetype)initWithObject:(nullable ObjectType)anObject
                           type:(NSCollectionChangeType)type

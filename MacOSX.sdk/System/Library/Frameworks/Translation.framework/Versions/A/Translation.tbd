@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Translation.framework/Versions/A/Translation'
-current-version: 294.4
+current-version: 300.2
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -129,9 +129,10 @@ exports:
                        __LTTranslationServiceXPCInterface, __kLTSourceLocaleUserInfoKey, 
                        __kLTTargetLocaleUserInfoKey, _kLTDebugDisableTTSCacheKey, 
                        _kLTDebugForceLowConfidenceLIDKey, _kLTDebugForceLowWordConfidenceASRKey, 
-                       _kLTDebugUseQuickSessionTimeoutKey, _kLTRateLimitingMaximumDynamicContentRequestsKey, 
-                       _kLTRateLimitingMaximumPageLoadRequestsKey, _kLTTranslationRangeIsInCrossSiteSubframeKey, 
-                       _kLTTranslationRangeIsInSubframeKey, _kLTUnknownLanguageCode ]
+                       _kLTDebugIncludeInternalSettingsShortcutKey, _kLTDebugUseQuickSessionTimeoutKey, 
+                       _kLTRateLimitingMaximumDynamicContentRequestsKey, _kLTRateLimitingMaximumPageLoadRequestsKey, 
+                       _kLTTranslationRangeIsInCrossSiteSubframeKey, _kLTTranslationRangeIsInSubframeKey, 
+                       _kLTUnknownLanguageCode ]
     objc-classes:    [ _LTAlignment, _LTAssetProgress, _LTBatchTextTranslationRequest, 
                        _LTCombinedRouteParagraphTranslationRequest, _LTCombinedTranslationResult, 
                        _LTDirectedEdge, _LTDisambiguableResult, _LTDisambiguableSentence, 

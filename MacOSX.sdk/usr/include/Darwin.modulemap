@@ -253,6 +253,11 @@ module Darwin [system] {
     export *
   }
 
+  explicit module utmp {
+    header "utmp.h"
+    export *
+  }
+
   extern module uuid "uuid.modulemap"
 
   module architecture {

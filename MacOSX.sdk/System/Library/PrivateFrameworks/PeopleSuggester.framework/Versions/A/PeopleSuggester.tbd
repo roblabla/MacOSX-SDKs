@@ -34,7 +34,6 @@ exports:
                        __PSShareSheetSiriSettingsDomain, __PSShareSheetSiriSettingsDomain_Feedback, 
                        __PSShareSheetSuggestionBundleIDMapping, __PSShareSheetSuggestionBundleIDs, 
                        __PSSuggestionKey, __Z16_PSUnarchiverZipPKvmP5NSURL, __uncachedPSShareSheetSuggestionBundleIDMapping, 
-                       _autocompleteSearchResultsWithPredictionContextRequestCount, 
                        _conversationIdentifierPrefix, _fetchLimit, _kPSBiomeFeedbackSubpath, 
                        _kPSCNAutocompleteFeedbackDataVersion, _kPSCNAutocompleteFeedbackStreamID, 
                        _kPSIncomingInteractionAccount, _kPSIncomingInteractionBundleId, 

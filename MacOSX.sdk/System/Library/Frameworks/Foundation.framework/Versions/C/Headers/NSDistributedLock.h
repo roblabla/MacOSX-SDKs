@@ -13,7 +13,7 @@ NS_SWIFT_SENDABLE // Locks are inherently Sendable by definition
 
 + (nullable NSDistributedLock *)lockWithPath:(NSString *)path;  
 
-- (instancetype)init API_UNAVAILABLE(macos, ios, watchos, tvos);
+- (instancetype)init NS_UNAVAILABLE;
 - (nullable instancetype)initWithPath:(NSString *)path NS_DESIGNATED_INITIALIZER;
 
 - (BOOL)tryLock;

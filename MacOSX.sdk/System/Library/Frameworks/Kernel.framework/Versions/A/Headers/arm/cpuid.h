@@ -242,6 +242,19 @@ typedef union {
 #define CPU_PART_PCORE_DONAN 0x53
 
 
+/* H16S Brava S e-Core. */
+#define CPU_PART_ECORE_BRAVA_S 0x54
+
+/* H16S Brava S p-Core. */
+#define CPU_PART_PCORE_BRAVA_S 0x55
+
+/* H16C Brava C e-Core. */
+#define CPU_PART_ECORE_BRAVA_C 0x58
+
+/* H16C Brava C p-Core. */
+#define CPU_PART_PCORE_BRAVA_C 0x59
+
+
 
 /* H17P Tahiti e-Core. */
 #define CPU_PART_ECORE_TAHITI 0x60

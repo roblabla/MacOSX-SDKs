@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/TipKit.framework/Versions/A/TipKit'
-current-version: 92.1.1
+current-version: 92.2.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -157,7 +157,6 @@ exports:
                        '_$s6TipKit0A23UIPopoverViewControllerC10sourceItemSo0c12Presentatione6SourceG0_pSgvg', 
                        '_$s6TipKit0A23UIPopoverViewControllerC10sourceItemSo0c12Presentatione6SourceG0_pSgvpMV', 
                        '_$s6TipKit0A23UIPopoverViewControllerC10sourceItemSo0c12Presentatione6SourceG0_pSgvs', 
-                       '_$s6TipKit0A23UIPopoverViewControllerC11viewDidLoadyyF', 
                        '_$s6TipKit0A23UIPopoverViewControllerC12closeHandleryAA0A0_pcSgvM', 
                        '_$s6TipKit0A23UIPopoverViewControllerC12closeHandleryAA0A0_pcSgvg', 
                        '_$s6TipKit0A23UIPopoverViewControllerC12closeHandleryAA0A0_pcSgvpMV', 

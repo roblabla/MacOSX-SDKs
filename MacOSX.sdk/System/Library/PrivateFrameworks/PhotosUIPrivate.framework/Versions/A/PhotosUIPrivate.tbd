@@ -2,11 +2,12 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosUIPrivate.framework/Versions/A/PhotosUIPrivate'
-current-version: 711.0.180
+current-version: 721.0.150
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s15PhotosUIPrivate016StoryMusicEditorD6SourceO04flexD6ByMoodyA2CmFWC', 
+    symbols:         [ '_$s15PhotosUIPrivate016StoryMusicEditorD6SourceO04flexD14ExportFallbackyA2CmFWC', 
+                       '_$s15PhotosUIPrivate016StoryMusicEditorD6SourceO04flexD6ByMoodyA2CmFWC', 
                        '_$s15PhotosUIPrivate016StoryMusicEditorD6SourceO07curatedD11SuggestionsyA2CmFWC', 
                        '_$s15PhotosUIPrivate016StoryMusicEditorD6SourceO2eeoiySbAC_ACtFZ', 
                        '_$s15PhotosUIPrivate016StoryMusicEditorD6SourceO4hash4intoys6HasherVz_tF', 
@@ -46,16 +47,13 @@ exports:
                        '_$s15PhotosUIPrivate15OneUpTitleModelC17localizedSubtitleSSSgvgTj', 
                        '_$s15PhotosUIPrivate15OneUpTitleModelC17localizedSubtitleSSSgvgTq', 
                        '_$s15PhotosUIPrivate15OneUpTitleModelC17localizedSubtitleSSSgvpMV', 
-                       '_$s15PhotosUIPrivate15OneUpTitleModelC8isPausedSbvMTj', '_$s15PhotosUIPrivate15OneUpTitleModelC8isPausedSbvMTq', 
-                       '_$s15PhotosUIPrivate15OneUpTitleModelC8isPausedSbvgTj', '_$s15PhotosUIPrivate15OneUpTitleModelC8isPausedSbvgTq', 
-                       '_$s15PhotosUIPrivate15OneUpTitleModelC8isPausedSbvpMV', '_$s15PhotosUIPrivate15OneUpTitleModelC8isPausedSbvsTj', 
-                       '_$s15PhotosUIPrivate15OneUpTitleModelC8isPausedSbvsTq', '_$s15PhotosUIPrivate15OneUpTitleModelCACycfC', 
-                       '_$s15PhotosUIPrivate15OneUpTitleModelCACycfCTj', '_$s15PhotosUIPrivate15OneUpTitleModelCACycfCTq', 
-                       '_$s15PhotosUIPrivate15OneUpTitleModelCACycfc', '_$s15PhotosUIPrivate15OneUpTitleModelCMa', 
-                       '_$s15PhotosUIPrivate15OneUpTitleModelCMm', '_$s15PhotosUIPrivate15OneUpTitleModelCMn', 
-                       '_$s15PhotosUIPrivate15OneUpTitleModelCMo', '_$s15PhotosUIPrivate15OneUpTitleModelCMu', 
-                       '_$s15PhotosUIPrivate15OneUpTitleModelCN', '_$s15PhotosUIPrivate15OneUpTitleModelCfD', 
-                       '_$s15PhotosUIPrivate15OneUpTitleModelCfd', '_$s15PhotosUIPrivate15VFXGlowDefaultsV2eeoiySbAC_ACtFZ', 
+                       '_$s15PhotosUIPrivate15OneUpTitleModelCACycfC', '_$s15PhotosUIPrivate15OneUpTitleModelCACycfCTj', 
+                       '_$s15PhotosUIPrivate15OneUpTitleModelCACycfCTq', '_$s15PhotosUIPrivate15OneUpTitleModelCACycfc', 
+                       '_$s15PhotosUIPrivate15OneUpTitleModelCMa', '_$s15PhotosUIPrivate15OneUpTitleModelCMm', 
+                       '_$s15PhotosUIPrivate15OneUpTitleModelCMn', '_$s15PhotosUIPrivate15OneUpTitleModelCMo', 
+                       '_$s15PhotosUIPrivate15OneUpTitleModelCMu', '_$s15PhotosUIPrivate15OneUpTitleModelCN', 
+                       '_$s15PhotosUIPrivate15OneUpTitleModelCfD', '_$s15PhotosUIPrivate15OneUpTitleModelCfd', 
+                       '_$s15PhotosUIPrivate15VFXGlowDefaultsV2eeoiySbAC_ACtFZ', 
                        '_$s15PhotosUIPrivate15VFXGlowDefaultsV4fromACs7Decoder_p_tKcfC', 
                        '_$s15PhotosUIPrivate15VFXGlowDefaultsV6encode2toys7Encoder_p_tKF', 
                        '_$s15PhotosUIPrivate15VFXGlowDefaultsVMa', '_$s15PhotosUIPrivate15VFXGlowDefaultsVMn', 
@@ -296,14 +294,7 @@ exports:
                        '_$s15PhotosUIPrivate23OneUpChromeEDRBoostTypeO4textyA2CmFWC', 
                        '_$s15PhotosUIPrivate23OneUpChromeEDRBoostTypeO7buttonsyA2CmFWC', 
                        '_$s15PhotosUIPrivate23OneUpChromeEDRBoostTypeOMa', '_$s15PhotosUIPrivate23OneUpChromeEDRBoostTypeOMn', 
-                       '_$s15PhotosUIPrivate23OneUpChromeEDRBoostTypeON', '_$s15PhotosUIPrivate23PXEditAppDependencyTypeO27pendingEditsRequestProvideryA2CmFWC', 
-                       '_$s15PhotosUIPrivate23PXEditAppDependencyTypeO8rawValueACSgSS_tcfC', 
-                       '_$s15PhotosUIPrivate23PXEditAppDependencyTypeO8rawValueSSvg', 
-                       '_$s15PhotosUIPrivate23PXEditAppDependencyTypeO8rawValueSSvpMV', 
-                       '_$s15PhotosUIPrivate23PXEditAppDependencyTypeOMa', '_$s15PhotosUIPrivate23PXEditAppDependencyTypeOMn', 
-                       '_$s15PhotosUIPrivate23PXEditAppDependencyTypeON', '_$s15PhotosUIPrivate23PXEditAppDependencyTypeOSHAAMc', 
-                       '_$s15PhotosUIPrivate23PXEditAppDependencyTypeOSQAAMc', '_$s15PhotosUIPrivate23PXEditAppDependencyTypeOSYAAMc', 
-                       '_$s15PhotosUIPrivate24OneUpChromeSpecUtilitiesO26wantsTopLegibilityGradient3for15chromeViewModelSb0A11SwiftUICore0cdE11Environment_p_AG0cdenO0CtFZ', 
+                       '_$s15PhotosUIPrivate23OneUpChromeEDRBoostTypeON', '_$s15PhotosUIPrivate24OneUpChromeSpecUtilitiesO26wantsTopLegibilityGradient3for15chromeViewModelSb0A11SwiftUICore0cdE11Environment_p_AG0cdenO0CtFZ', 
                        '_$s15PhotosUIPrivate24OneUpChromeSpecUtilitiesO29wantsBottomLegibilityGradient3for15chromeViewModel06bottomJ6HeightSb0A11SwiftUICore0cdE11Environment_p_AH0cdenO0C12CoreGraphics7CGFloatVtFZ', 
                        '_$s15PhotosUIPrivate24OneUpChromeSpecUtilitiesO8edrBoost7forType10assetIsHDR012isZoomedOverE012CoreGraphics7CGFloatVAA0cde8EDRBoostK0O_S2btFZ', 
                        '_$s15PhotosUIPrivate24OneUpChromeSpecUtilitiesOMa', '_$s15PhotosUIPrivate24OneUpChromeSpecUtilitiesOMn', 

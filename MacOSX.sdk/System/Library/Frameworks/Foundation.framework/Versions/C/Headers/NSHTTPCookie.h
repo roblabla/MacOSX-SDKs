@@ -98,6 +98,12 @@ FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieMaximumAge API_AVAIL
 FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
+ @const NSHTTPCookieSetByJavaScript
+ @discussion An NSString object indicating that the cookie is set via JavaScript.
+ */
+ FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieSetByJavaScript API_AVAILABLE(macos(15.2), ios(18.2), watchos(11.2), tvos(18.2), visionos(2.2));
+
+/*!
  @const NSHTTPCookieSameSitePolicy
  @discussion Key for cookie same site
  */
@@ -250,6 +256,13 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
         <td>Specifies the version of the cookie. Must be either "0" or
         "1". Default is "0".</td>
     </tr>
+     <tr>
+         <td>NSHTTPCookieSetByJavaScript</td>
+         <td>NSNumber</td>
+         <td>NO</td>
+         <td>@YES if the cookie is set via JavaScript. @NO if the cookie
+         is not set via JavaScript</td>
+     </tr>
     </table>
     <p>
     All other keys are ignored.

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libcryptex_interface.dylib'
-current-version: 475.40.3
+current-version: 475.60.5
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ cryptest, cryptex, cryptexctl, cryptexd, cryptexd.diagnostic ]

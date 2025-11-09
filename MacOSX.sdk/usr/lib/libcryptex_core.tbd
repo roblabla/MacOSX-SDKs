@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libcryptex_core.dylib'
-current-version: 475.40.3
+current-version: 475.60.5
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __cryptex_asset_type_c411, __cryptex_asset_type_cpxd, __cryptex_asset_type_cx1p, 
@@ -10,11 +10,12 @@ exports:
                        __cryptex_asset_type_gtgv, __cryptex_asset_type_im4m, __cryptex_asset_type_ltrs, 
                        __cryptex_asset_type_pdmg, __cryptex_asset_type_root, __cryptex_asset_type_roothash, 
                        __cryptex_base_alloc, __cryptex_base_dealloc, __cryptex_content_type_executable, 
-                       __cryptex_content_type_factory, __cryptex_content_type_jetsam_properties, 
-                       __cryptex_content_type_library, __cryptex_content_type_log_profile, 
-                       __cryptex_content_type_service, __cryptex_su_preboot_cryptex_app, 
-                       __cryptex_su_preboot_cryptex_nextos, _cryptex_activate, _cryptex_assert_queue, 
-                       _cryptex_asset_array_destroy, _cryptex_asset_copy, _cryptex_asset_create_generic_digest, 
+                       __cryptex_content_type_factory, __cryptex_content_type_feature_flags, 
+                       __cryptex_content_type_jetsam_properties, __cryptex_content_type_library, 
+                       __cryptex_content_type_log_profile, __cryptex_content_type_service, 
+                       __cryptex_su_preboot_cryptex_app, __cryptex_su_preboot_cryptex_nextos, 
+                       _cryptex_activate, _cryptex_assert_queue, _cryptex_asset_array_destroy, 
+                       _cryptex_asset_copy, _cryptex_asset_create_generic_digest, 
                        _cryptex_asset_destroy, _cryptex_asset_evaluate, _cryptex_asset_len, 
                        _cryptex_asset_new, _cryptex_asset_new_borrowed, _cryptex_asset_type_is_cryptex1, 
                        _cryptex_asset_types, _cryptex_async, _cryptex_async_f, _cryptex_content_type_parse, 

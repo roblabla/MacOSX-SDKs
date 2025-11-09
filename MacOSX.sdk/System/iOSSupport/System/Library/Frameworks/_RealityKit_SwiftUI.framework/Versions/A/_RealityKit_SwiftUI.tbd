@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_RealityKit_SwiftUI.framework/Versions/A/_RealityKit_SwiftUI'
-current-version: 366.40.5
+current-version: 366.60.13
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -166,7 +166,6 @@ exports:
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV27__proto_antialiasingMode_v10A10Foundation019_Proto_Antialiasingj1_K0OvpMV', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV27__proto_antialiasingMode_v10A10Foundation019_Proto_Antialiasingj1_K0Ovs', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV3ray7through2in2tos5SIMD3VySfG6origin_AJ9directiontSgSo7CGPointV_xq_t0cD023CoordinateSpaceProtocolRz0A10Foundation0apQ0R_r0_lF', 
-                       '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV3ray7through2ins5SIMD3VySfG6origin_AI9directiontSgSo7CGPointV_0cD015CoordinateSpaceOtF', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV4BodyV4bodyQrvg', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV4BodyV4bodyQrvpMV', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV4BodyV4bodyQrvpQOMQ', 
@@ -177,14 +176,9 @@ exports:
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV6cameraAA0aeF0Vvg', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV6cameraAA0aeF0VvpMV', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV6cameraAA0aeF0Vvs', 
-                       '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV6entity2at2in0aB06EntityCSgSo7CGPointV_0cD015CoordinateSpaceOtF', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV6entity2at2in0aB06EntityCSgSo7CGPointV_xt0cD023CoordinateSpaceProtocolRzlF', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV7hitTest5point2in5query4maskSay0aB016CollisionCastHitVGSo7CGPointV_xAI0nO9QueryTypeOAI0N5GroupVt0cD023CoordinateSpaceProtocolRzlF', 
-                       '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV7hitTest_2in5query4maskSay0aB016CollisionCastHitVGSo7CGPointV_0cD015CoordinateSpaceOAH0mN9QueryTypeOAH0M5GroupVtF', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV7project5point2toSo7CGPointVSgs5SIMD3VySfG_xt0cD023CoordinateSpaceProtocolRzlF', 
-                       '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV7project6vector2toSo7CGPointVSgs5SIMD3VySfG_0cD015CoordinateSpaceOtF', 
-                       '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV7project6vector2toSo7CGPointVSgs5SIMD3VySfG_xt0cD023CoordinateSpaceProtocolRzlF', 
-                       '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV8entities2at2inSay0aB06EntityCGSo7CGPointV_0cD015CoordinateSpaceOtF', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV8entities2at2inSay0aB06EntityCGSo7CGPointV_xt0cD023CoordinateSpaceProtocolRzlF', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV8entitiesAA0aE16EntityCollectionVvM', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV8entitiesAA0aE16EntityCollectionVvg', 
@@ -192,8 +186,6 @@ exports:
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV8entitiesAA0aE16EntityCollectionVvs', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV8snapshot9saveToHDR10completionySb_ySo7UIImageCSgctF', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV9subscribe2to2on13componentType_0A10Foundation17EventSubscriptionVxm_0aB00N6Source_pSgAK9Component_pXpSgyxctAK0N0RzlF', 
-                       '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV9unproject5point4from9ontoPlane010relativeToF0s5SIMD3VySfGSgSo7CGPointV_0cD015CoordinateSpaceOSo13simd_float4x4aSbtF', 
-                       '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV9unproject5point8viewports5SIMD3VySfGSgSo7CGPointV_So6CGRectVtF', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentV9unproject_4from2to9ontoPlanes5SIMD3VySfGSgSo7CGPointV_xq_So13simd_float4x4at0cD023CoordinateSpaceProtocolRz0A10Foundation0aqR0R_r0_lF', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentVAA0A25CoordinateSpaceProjectingAAMc', 
                        '_$s19_RealityKit_SwiftUI0A17ViewCameraContentVAA0A25CoordinateSpaceProjectingAAWP', 
@@ -308,22 +300,14 @@ exports:
                        '_$s19_RealityKit_SwiftUI17EntityTargetValueV13dynamicMemberqd__s7KeyPathCyxqd__G_tcluig', 
                        '_$s19_RealityKit_SwiftUI17EntityTargetValueV13dynamicMemberqd__s7KeyPathCyxqd__G_tcluipMV', 
                        '_$s19_RealityKit_SwiftUI17EntityTargetValueV3ray7through2in2tos5SIMD3VySfG6origin_AJ9directiontSgSo7CGPointV_qd__qd_0_t0cD023CoordinateSpaceProtocolRd__0A10Foundation0apQ0Rd_0_r0_lF', 
-                       '_$s19_RealityKit_SwiftUI17EntityTargetValueV3ray7through2ins5SIMD3VySfG6origin_AI9directiontSgSo7CGPointV_0cD015CoordinateSpaceOtF', 
                        '_$s19_RealityKit_SwiftUI17EntityTargetValueV6entity0aB00E0CvM', 
                        '_$s19_RealityKit_SwiftUI17EntityTargetValueV6entity0aB00E0Cvg', 
                        '_$s19_RealityKit_SwiftUI17EntityTargetValueV6entity0aB00E0CvpMV', 
                        '_$s19_RealityKit_SwiftUI17EntityTargetValueV6entity0aB00E0Cvs', 
-                       '_$s19_RealityKit_SwiftUI17EntityTargetValueV6entity2at2in0aB00E0CSgSo7CGPointV_0cD015CoordinateSpaceOtF', 
                        '_$s19_RealityKit_SwiftUI17EntityTargetValueV6entity2at2in0aB00E0CSgSo7CGPointV_qd__t0cD023CoordinateSpaceProtocolRd__lF', 
                        '_$s19_RealityKit_SwiftUI17EntityTargetValueV7hitTest5point2in5query4maskSay0aB016CollisionCastHitVGSo7CGPointV_qd__AI0nO9QueryTypeOAI0N5GroupVt0cD023CoordinateSpaceProtocolRd__lF', 
-                       '_$s19_RealityKit_SwiftUI17EntityTargetValueV7hitTest_2in5query4maskSay0aB016CollisionCastHitVGSo7CGPointV_0cD015CoordinateSpaceOAH0mN9QueryTypeOAH0M5GroupVtF', 
                        '_$s19_RealityKit_SwiftUI17EntityTargetValueV7project5point2toSo7CGPointVSgs5SIMD3VySfG_qd__t0cD023CoordinateSpaceProtocolRd__lF', 
-                       '_$s19_RealityKit_SwiftUI17EntityTargetValueV7project6vector2toSo7CGPointVSgs5SIMD3VySfG_0cD015CoordinateSpaceOtF', 
-                       '_$s19_RealityKit_SwiftUI17EntityTargetValueV7project6vector2toSo7CGPointVSgs5SIMD3VySfG_qd__t0cD023CoordinateSpaceProtocolRd__lF', 
-                       '_$s19_RealityKit_SwiftUI17EntityTargetValueV8entities2at2inSay0aB00E0CGSo7CGPointV_0cD015CoordinateSpaceOtF', 
                        '_$s19_RealityKit_SwiftUI17EntityTargetValueV8entities2at2inSay0aB00E0CGSo7CGPointV_qd__t0cD023CoordinateSpaceProtocolRd__lF', 
-                       '_$s19_RealityKit_SwiftUI17EntityTargetValueV9unproject5point4from9ontoPlane16relativeToCameras5SIMD3VySfGSgSo7CGPointV_0cD015CoordinateSpaceOSo13simd_float4x4aSbtF', 
-                       '_$s19_RealityKit_SwiftUI17EntityTargetValueV9unproject5point8viewports5SIMD3VySfGSgSo7CGPointV_So6CGRectVtF', 
                        '_$s19_RealityKit_SwiftUI17EntityTargetValueV9unproject_2tos5SIMD3VySfGSgs7KeyPathCyxSo7CGPointVG_qd__t0A10Foundation0A15CoordinateSpaceRd__lF', 
                        '_$s19_RealityKit_SwiftUI17EntityTargetValueV9unproject_4from2to9ontoPlanes5SIMD3VySfGSgSo7CGPointV_qd__qd_0_So13simd_float4x4at0cD023CoordinateSpaceProtocolRd__0A10Foundation0aqR0Rd_0_r0_lF', 
                        '_$s19_RealityKit_SwiftUI17EntityTargetValueV9unproject_4from2tos5SIMD3VySfGSgSo7CGPointV_qd__qd_0_t0cD023CoordinateSpaceProtocolRd__0A10Foundation0amN0Rd_0_r0_lF', 

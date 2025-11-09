@@ -275,7 +275,7 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 - (void)setDirectory:(nullable NSString *)path API_DEPRECATED("Use -setDirectoryURL: instead", macos(10.0,10.6));
 - (nullable NSString *)requiredFileType API_DEPRECATED("Use -allowedContentTypes instead", macos(10.0,10.6));
 - (void)setRequiredFileType:(nullable NSString *)type API_DEPRECATED("Use -allowedContentTypes: instead", macos(10.0,10.6));
-- (void)beginSheetForDirectory:(NSString *)path file:(nullable NSString *)name modalForWindow:(nullable NSWindow *)docWindow modalDelegate:(nullable id)delegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(nullable void *)contextInfo API_DEPRECATED("Use beginSheetModalForWindow:completionHandler: instead. The following parameters are replaced by properties: 'path' is replaced by 'directoryURL' and 'name' by 'nameFieldStringValue'.", macos(10.0,10.6));
+- (void)beginSheetForDirectory:(nullable NSString *)path file:(nullable NSString *)name modalForWindow:(nullable NSWindow *)docWindow modalDelegate:(nullable id)delegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(nullable void *)contextInfo API_DEPRECATED("Use beginSheetModalForWindow:completionHandler: instead. The following parameters are replaced by properties: 'path' is replaced by 'directoryURL' and 'name' by 'nameFieldStringValue'.", macos(10.0,10.6));
 - (NSInteger)runModalForDirectory:(nullable NSString *)path file:(nullable NSString *)name API_DEPRECATED("Use -runModal instead. The following parameters are replaced by properties: 'path' is replaced by 'directoryURL' and 'name' by 'nameFieldStringValue'.", macos(10.0,10.6));
 - (IBAction)selectText:(nullable id)sender API_DEPRECATED("Default implementation does nothing.", macos(10.0,10.3));
 

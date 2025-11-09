@@ -24,7 +24,7 @@ exports:
                        '_$s23DistributedTimersDaemon011DTTransportC0C15unownedExecutorScevpMV', 
                        '_$s23DistributedTimersDaemon011DTTransportC0C18handleLocalRequest7request7context13xpcConnection10Foundation4DataV0aB09DTRequestO_AK0N7ContextVAA15DTXPCConnectionCtYaKF', 
                        '_$s23DistributedTimersDaemon011DTTransportC0C18handleLocalRequest7request7context13xpcConnection10Foundation4DataV0aB09DTRequestO_AK0N7ContextVAA15DTXPCConnectionCtYaKFTu', 
-                       '_$s23DistributedTimersDaemon011DTTransportC0C19siriEndpointProfile_29didUpdateSessionHubIdentifierySo06HMSirifG0C_yXlSgtF', 
+                       '_$s23DistributedTimersDaemon011DTTransportC0C19siriEndpointProfile_29didUpdateSessionHubIdentifierySo06HMSirifG0C_10Foundation4UUIDVSgtF', 
                        '_$s23DistributedTimersDaemon011DTTransportC0C20handleMonitorStopAll13xpcConnectionyAA15DTXPCConnectionC_tF', 
                        '_$s23DistributedTimersDaemon011DTTransportC0C21alternateAccessoryIDsShySSGvMZ', 
                        '_$s23DistributedTimersDaemon011DTTransportC0C21alternateAccessoryIDsShySSGvgZ', 

@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
-// swift-module-flags: -disable-objc-attr-requires-foundation-module -target arm64e-apple-macosx15.1 -target-variant arm64e-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftCore -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -enable-experimental-concise-pound-file -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature ExtensionImportVisiblity -enable-experimental-feature Macros -enable-experimental-feature FreestandingMacros -enable-experimental-feature Extern -enable-experimental-feature BitwiseCopyable -user-module-version 6.0.0.7.43 -module-name Swift
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
+// swift-module-flags: -disable-objc-attr-requires-foundation-module -target arm64e-apple-macosx15.2 -target-variant arm64e-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftCore -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -enable-experimental-concise-pound-file -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature ExtensionImportVisiblity -enable-experimental-feature Macros -enable-experimental-feature FreestandingMacros -enable-experimental-feature Extern -enable-experimental-feature BitwiseCopyable -user-module-version 6.0.3.1.5 -module-name Swift
 // swift-module-flags-ignorable: -enable-ossa-modules -enable-lexical-lifetimes=false
 import SwiftShims
 @inlinable public func min<T>(_ x: T, _ y: T) -> T where T : Swift.Comparable {
@@ -7198,27 +7198,12 @@ public func _debuggerTestingCheckExpect(_: Swift.String, _: Swift.String)
   let unmanaged = Unmanaged.passUnretained(object)
   return body(unmanaged.toOpaque())
 }
-#if compiler(>=5.3) && $Extern
 @usableFromInline
 @_extern(c, "swift_retainCount") internal func _swift_retainCount(_: Swift.UnsafeMutableRawPointer) -> Swift.Int
-#else
-@usableFromInline
-internal func _swift_retainCount(_: Swift.UnsafeMutableRawPointer) -> Swift.Int
-#endif
-#if compiler(>=5.3) && $Extern
 @usableFromInline
 @_extern(c, "swift_unownedRetainCount") internal func _swift_unownedRetainCount(_: Swift.UnsafeMutableRawPointer) -> Swift.Int
-#else
-@usableFromInline
-internal func _swift_unownedRetainCount(_: Swift.UnsafeMutableRawPointer) -> Swift.Int
-#endif
-#if compiler(>=5.3) && $Extern
 @usableFromInline
 @_extern(c, "swift_weakRetainCount") internal func _swift_weakRetainCount(_: Swift.UnsafeMutableRawPointer) -> Swift.Int
-#else
-@usableFromInline
-internal func _swift_weakRetainCount(_: Swift.UnsafeMutableRawPointer) -> Swift.Int
-#endif
 @_alwaysEmitIntoClient public func _getRetainCount(_ object: Swift.AnyObject) -> Swift.UInt {
   let count = _withHeapObject(of: object) { _swift_retainCount($0) }
   return UInt(bitPattern: count)

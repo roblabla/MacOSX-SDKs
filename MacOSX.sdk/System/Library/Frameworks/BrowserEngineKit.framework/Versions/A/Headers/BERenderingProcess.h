@@ -45,6 +45,17 @@ BROWSERENGINE_EXPORT
 +(void)renderingProcessWithInterruptionHandler:(void(^)(void))interruptionHandler
                            completion:(void(^)(BERenderingProcess* _Nullable process, NSError* _Nullable error))completion;
 
+/// Asynchronously launches a rendering extension process.
+///
+/// This initializer launches a new rendering extension process with the provided bundle identifier.
+///
+/// - Parameters:
+///   - `bundleID` : The bundle identifier of the rendering extension process to launch.
+///   - `interruptionHandler` : A block that is called if the extension process terminates.
+///   - `completion` : A block called with a new ``BERenderingProcess`` when the extension process has
+///     launched or with an error.
++(void)renderingProcessWithBundleID:(NSString *)bundleID interruptionHandler:(void(^)(void))interruptionHandler completion:(void(^)(BERenderingProcess  *_Nullable process, NSError *_Nullable error))completion API_AVAILABLE(ios(18.2));
+
 /// Stops the extension process.
 ///
 /// When you call this method, you tell the system your app no longer needs this extension process.

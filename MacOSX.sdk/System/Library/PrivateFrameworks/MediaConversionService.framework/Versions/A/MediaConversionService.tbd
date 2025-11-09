@@ -3,12 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MediaConversionService.framework/Versions/A/MediaConversionService'
-current-version: 711.0.180
+current-version: 721.0.150
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _MediaConversionServiceVersionNumber, _MediaConversionServiceVersionString, 
-                       _PAMediaConversionIsCancellationError, _PAMediaConversionJobPriorityIsBackground, 
+    symbols:         [ _PAMediaConversionIsCancellationError, _PAMediaConversionJobPriorityIsBackground, 
                        _PAMediaConversionJobPriorityIsOptional, _PAMediaConversionNameForErrorCode, 
                        _PAMediaConversionNameForJobPriority, _PAMediaConversionNameForJobStatus, 
                        _PAMediaConversionNameForValueType, _PAMediaConversionOptionNameToValueTypeMapping, 

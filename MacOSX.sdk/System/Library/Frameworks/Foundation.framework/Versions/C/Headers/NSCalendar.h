@@ -113,7 +113,7 @@ enum {
 */
 + (nullable NSCalendar *)calendarWithIdentifier:(NSCalendarIdentifier)calendarIdentifierConstant API_AVAILABLE(macos(10.9), ios(8.0), watchos(2.0), tvos(9.0));
 
-- (instancetype)init API_UNAVAILABLE(macos, ios, watchos, tvos);
+- (instancetype)init NS_UNAVAILABLE;
 
 - (nullable id)initWithCalendarIdentifier:(NSCalendarIdentifier)ident NS_DESIGNATED_INITIALIZER;
 

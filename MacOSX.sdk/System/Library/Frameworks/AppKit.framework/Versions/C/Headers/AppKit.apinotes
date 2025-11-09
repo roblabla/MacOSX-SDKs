@@ -10689,6 +10689,8 @@ Globals:
   SwiftName: NSWorkspace.willUnmountNotification
 - Name: NSWritingDirectionAttributeName
   SwiftName: writingDirection
+- Name: NSWritingToolsExclusionAttributeName
+  SwiftName: writingToolsExclusion
 - Name: NSYearMonthDatePickerElementFlag
   Availability: nonswift
   AvailabilityMsg: "prefer 'yearMonth'"

@@ -238,7 +238,13 @@ struct _aot_cache_header {
 #endif /* CONFIG_X86_64_COMPAT */
 
 enum micro_snapshot_flags {
+	/*
+	 * (Timer) interrupt records are no longer supported.
+	 */
 	kInterruptRecord        = 0x1,
+	/*
+	 * Timer arming records are no longer supported.
+	 */
 	kTimerArmingRecord      = 0x2,
 	kUserMode               = 0x4, /* interrupted usermode, or armed by usermode */
 	kIORecord               = 0x8,

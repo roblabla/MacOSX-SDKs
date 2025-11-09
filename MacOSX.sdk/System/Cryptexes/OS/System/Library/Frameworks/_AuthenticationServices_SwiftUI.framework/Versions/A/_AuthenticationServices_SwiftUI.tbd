@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_AuthenticationServices_SwiftUI.framework/Versions/A/_AuthenticationServices_SwiftUI'
-current-version: 619.2.8
+current-version: 620.1.16
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -70,6 +70,10 @@ exports:
                        '_$s7SwiftUI17EnvironmentValuesV024_AuthenticationServices_aB0E03webE7SessionAD03WebeH0VvpMV', 
                        '_$s7SwiftUI17EnvironmentValuesV024_AuthenticationServices_aB0E23authorizationControllerAD013AuthorizationH0Vvg', 
                        '_$s7SwiftUI17EnvironmentValuesV024_AuthenticationServices_aB0E23authorizationControllerAD013AuthorizationH0VvpMV', 
+                       '_$s7SwiftUI17EnvironmentValuesV024_AuthenticationServices_aB0E23credentialExportManager0eF0012ASCredentialhI0Cvg', 
+                       '_$s7SwiftUI17EnvironmentValuesV024_AuthenticationServices_aB0E23credentialExportManager0eF0012ASCredentialhI0CvpMV', 
+                       '_$s7SwiftUI17EnvironmentValuesV024_AuthenticationServices_aB0E23credentialImportManager0eF0012ASCredentialhI0Cvg', 
+                       '_$s7SwiftUI17EnvironmentValuesV024_AuthenticationServices_aB0E23credentialImportManager0eF0012ASCredentialhI0CvpMV', 
                        '_$s7SwiftUI4ViewP024_AuthenticationServices_aB0E26signInWithAppleButtonStyleyQrAD04SignghiJ0V0K0VF', 
                        '_$s7SwiftUI4ViewP024_AuthenticationServices_aB0E26signInWithAppleButtonStyleyQrAD04SignghiJ0V0K0VFQOMQ' ]
 ...

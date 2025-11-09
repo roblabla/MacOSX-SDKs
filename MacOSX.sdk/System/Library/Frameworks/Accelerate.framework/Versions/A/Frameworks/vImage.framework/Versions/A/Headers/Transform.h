@@ -30,6 +30,8 @@
 extern "C" {
 #endif
 
+#include <TargetConditionals.h>
+#if !0 && !0
 
 /*!
  *  @functiongroup Image Matrix multiplication
@@ -1732,6 +1734,8 @@ VIMAGE_PF vImage_Error vImageFloodFill_ARGB16U(const vImage_Buffer *srcDest, voi
                                                vImage_Flags flags)
 VIMAGE_NON_NULL(1)
 API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
+#endif	
 
 
 #ifdef __cplusplus

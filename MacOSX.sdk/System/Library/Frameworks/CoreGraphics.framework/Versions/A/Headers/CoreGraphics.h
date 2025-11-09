@@ -10,6 +10,9 @@
 #include <CoreGraphics/CGAffineTransform.h>
 #include <CoreGraphics/CGBitmapContext.h>
 #include <CoreGraphics/CGColor.h>
+#include <CoreGraphics/CGToneMapping.h>
+#include <CoreGraphics/CGEXRToneMappingGamma.h>
+#include <CoreGraphics/CGITUToneMapping.h>
 #include <CoreGraphics/CGColorConversionInfo.h>
 #include <CoreGraphics/CGColorSpace.h>
 #include <CoreGraphics/CGConvertColorDataWithFormat.h>
@@ -37,7 +40,6 @@
 #include <CoreGraphics/CGPath.h>
 #include <CoreGraphics/CGPattern.h>
 #include <CoreGraphics/CGShading.h>
-#include <CoreGraphics/CGToneMapping.h>
 
 #include <CoreGraphics/CGDirectDisplay.h>
 #include <CoreGraphics/CGDirectPalette.h>

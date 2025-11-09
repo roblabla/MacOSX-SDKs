@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MediaStream.framework/Versions/A/MediaStream'
-current-version: 711.0.180
+current-version: 721.0.150
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MSAlbumSharingInitialize, _MSMSLocalizedString, _MSMediaStreamInitialize, 
-                       _MediaStreamVersionNumber, _MediaStreamVersionString, _XPCSetLogBlocks, 
-                       __MSASSetDaemon, __MSSetDaemon, __XPCLog, __XPCShouldLog, 
-                       _kMSASConnectionErrorDomain, _kMSASServiceName, _kMSAuthenticationManagerDidReceiveAuthenticationChangeNotification, 
+                       _XPCSetLogBlocks, __MSASSetDaemon, __MSSetDaemon, __XPCLog, 
+                       __XPCShouldLog, _kMSASConnectionErrorDomain, _kMSASServiceName, 
+                       _kMSAuthenticationManagerDidReceiveAuthenticationChangeNotification, 
                        _kMSBatteryPowerMonitorExternalPowerSourceChangedNotification, 
                        _kMSCServerSideConfigurationDidChangeNotification, _kMSCXPCReplyError, 
                        _kMSCXPCReplyRetval, _kMSIDSFacility, _kMSMMCSFacility, _kMSMachServiceName, 

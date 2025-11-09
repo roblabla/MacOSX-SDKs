@@ -45,6 +45,10 @@ NS_SWIFT_SENDABLE
 /// The accessory's Bluetooth manufacturer data mask.
 @property (readwrite, copy, nullable, nonatomic) NSData *bluetoothManufacturerDataMask;
 
+/// The accessory's over-the-air Bluetooth name substring compare options.
+@property (readwrite, assign, nonatomic) NSStringCompareOptions bluetoothNameSubstringCompareOptions
+API_AVAILABLE( ios( 18.2 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos);
+
 /// The accessory's over-the-air Bluetooth name substring.
 @property (readwrite, copy, nullable, nonatomic) NSString *bluetoothNameSubstring;
 

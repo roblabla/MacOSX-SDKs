@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_AppIntents_UIKit.framework/Versions/A/_AppIntents_UIKit'
-current-version: 210.13
+current-version: 226.3
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -195,11 +195,14 @@ exports:
                        '_$sSo6UIViewC17_AppIntents_UIKitE12viewProvider21UIIntelligenceSupport012IntelligencebC16PayloadProviding_AE0i10SubelementK0pSgvpMV', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE16removeAnnotationyyF', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE17setEntityProvideryyx0bC0012_RepresentedfG0RzlF', 
+                       '_$sSo6UIViewC17_AppIntents_UIKitE17updateInteractionyy0bC014ViewAnnotationOSgF', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE18updateViewProvider4withy0bC0014StandardEntityG0C_tF', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE19appEntityIdentifier0bC00fG0VSgvM', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE19appEntityIdentifier0bC00fG0VSgvg', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE19appEntityIdentifier0bC00fG0VSgvpMV', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE19appEntityIdentifier0bC00fG0VSgvs', 
+                       '_$sSo6UIViewC17_AppIntents_UIKitE6bridge0bC00B27ViewBridgeAnnotationManager_pSgvg', 
+                       '_$sSo6UIViewC17_AppIntents_UIKitE6bridge0bC00B27ViewBridgeAnnotationManager_pSgvpMV', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE8annotate4withyAC0B20EntityViewAnnotationC_tF', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE8geometry0bC012ViewLocationVvg', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE8geometry0bC012ViewLocationVvpMV', 

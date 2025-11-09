@@ -195,6 +195,7 @@ exports:
                        '_$s20SiriEmergencyIntents0B9DialogActVMa', '_$s20SiriEmergencyIntents0B9DialogActVMn', 
                        '_$s20SiriEmergencyIntents0B9DialogActVN', '_$s20SiriEmergencyIntents0B9DialogActVs23CustomStringConvertibleAAMc', 
                        '_$s20SiriEmergencyIntents0B9SituationO14catiIntentNameACSgAA010CATIIntentG0O_tcfC', 
+                       '_$s20SiriEmergencyIntents0B9SituationO20fromValueWithCleanupyACSgSSFZ', 
                        '_$s20SiriEmergencyIntents0B9SituationO4from15identifierValueACSgSS_tFZ', 
                        '_$s20SiriEmergencyIntents0B9SituationO6isCSAMSbvg', '_$s20SiriEmergencyIntents0B9SituationO6isCSAMSbvpMV', 
                        '_$s20SiriEmergencyIntents0B9SituationO8rawValueACSgSS_tcfC', 

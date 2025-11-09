@@ -12,7 +12,6 @@
 #if __has_include(<CoreImage/CoreImage.h>)
 #import <CoreImage/CoreImage.h>
 #endif
-#import <UIKit/UIKitDefines.h>
 
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)

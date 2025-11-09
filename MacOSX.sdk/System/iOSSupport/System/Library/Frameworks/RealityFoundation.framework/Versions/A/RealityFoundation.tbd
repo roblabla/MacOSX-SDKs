@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/RealityFoundation.framework/Versions/A/RealityFoundation'
-current-version: 366.40.5
+current-version: 366.60.13
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -1033,6 +1033,10 @@ exports:
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit15__REAssetBundleV13ExportOptionsV17deduplicateAssetsSbvg$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit15__REAssetBundleV13ExportOptionsV17deduplicateAssetsSbvpMV$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit15__REAssetBundleV13ExportOptionsV17deduplicateAssetsSbvs$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit15__REAssetBundleV13ExportOptionsV17useAutoVersioningSbvM$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit15__REAssetBundleV13ExportOptionsV17useAutoVersioningSbvg$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit15__REAssetBundleV13ExportOptionsV17useAutoVersioningSbvpMV$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit15__REAssetBundleV13ExportOptionsV17useAutoVersioningSbvs$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit15__REAssetBundleV13ExportOptionsV18generateIdentifierSbvM$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit15__REAssetBundleV13ExportOptionsV18generateIdentifierSbvg$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit$$6$13.0$15.0$_$s10RealityKit15__REAssetBundleV13ExportOptionsV18generateIdentifierSbvpMV$', 
@@ -8397,6 +8401,10 @@ exports:
                        '_$s10RealityKit15__REAssetBundleV13ExportOptionsV17deduplicateAssetsSbvg', 
                        '_$s10RealityKit15__REAssetBundleV13ExportOptionsV17deduplicateAssetsSbvpMV', 
                        '_$s10RealityKit15__REAssetBundleV13ExportOptionsV17deduplicateAssetsSbvs', 
+                       '_$s10RealityKit15__REAssetBundleV13ExportOptionsV17useAutoVersioningSbvM', 
+                       '_$s10RealityKit15__REAssetBundleV13ExportOptionsV17useAutoVersioningSbvg', 
+                       '_$s10RealityKit15__REAssetBundleV13ExportOptionsV17useAutoVersioningSbvpMV', 
+                       '_$s10RealityKit15__REAssetBundleV13ExportOptionsV17useAutoVersioningSbvs', 
                        '_$s10RealityKit15__REAssetBundleV13ExportOptionsV18generateIdentifierSbvM', 
                        '_$s10RealityKit15__REAssetBundleV13ExportOptionsV18generateIdentifierSbvg', 
                        '_$s10RealityKit15__REAssetBundleV13ExportOptionsV18generateIdentifierSbvpMV', 
@@ -9718,7 +9726,6 @@ exports:
                        '_$s10RealityKit19EnvironmentResourceC4load5named2in11allowsREIblACSS_So8NSBundleCSgSbtKFZ', 
                        '_$s10RealityKit19EnvironmentResourceC4load5named2inACSS_So8NSBundleCSgtKFZ', 
                        '_$s10RealityKit19EnvironmentResourceC6__load10contentsOf8withNameAC10Foundation3URLV_SSSgtKFZ', 
-                       '_$s10RealityKit19EnvironmentResourceC8generate11fromLatLong8withNameACSo10CGImageRefa_SSSgtKFZ', 
                        '_$s10RealityKit19EnvironmentResourceC8generate19fromEquirectangular8withNameACSo10CGImageRefa_SSSgtKFZ', 
                        '_$s10RealityKit19EnvironmentResourceC8generate19fromEquirectangular8withNameACSo10CGImageRefa_SSSgtYaKFZ', 
                        '_$s10RealityKit19EnvironmentResourceC8generate19fromEquirectangular8withNameACSo10CGImageRefa_SSSgtYaKFZTu', 
@@ -15099,14 +15106,7 @@ exports:
                        '_$s17RealityFoundation13ComponentInfoV8PlatformVs23CustomStringConvertibleAAMc', 
                        '_$s17RealityFoundation13ComponentInfoVMa', '_$s17RealityFoundation13ComponentInfoVMn', 
                        '_$s17RealityFoundation13ComponentInfoVN', '_$s17RealityFoundation13ComponentInfoVs23CustomStringConvertibleAAMc', 
-                       '_$s17RealityFoundation13EventSequenceV17makeAsyncIteratorAC0G0Vyx_GyF', 
-                       '_$s17RealityFoundation13EventSequenceV8IteratorV4nextxSgyYaKF', 
-                       '_$s17RealityFoundation13EventSequenceV8IteratorV4nextxSgyYaKFTu', 
-                       '_$s17RealityFoundation13EventSequenceV8IteratorVMa', '_$s17RealityFoundation13EventSequenceV8IteratorVMn', 
-                       '_$s17RealityFoundation13EventSequenceV8IteratorVyx_GScIAAMc', 
-                       '_$s17RealityFoundation13EventSequenceVMa', '_$s17RealityFoundation13EventSequenceVMn', 
-                       '_$s17RealityFoundation13EventSequenceVyACyxGqd__c6OutputQyd__Rsz7Combine9PublisherRd__s5NeverO7FailureRtd__lufC', 
-                       '_$s17RealityFoundation13EventSequenceVyxGSciAAMc', '_$s17RealityFoundation13GeomMeshErrorO04geomD7FailureyA2CmFWC', 
+                       '_$s17RealityFoundation13GeomMeshErrorO04geomD7FailureyA2CmFWC', 
                        '_$s17RealityFoundation13GeomMeshErrorO05emptyD0yA2CmFWC', 
                        '_$s17RealityFoundation13GeomMeshErrorO13bufferFailureyAcA0D7BuffersO10IdentifierVcACmFWC', 
                        '_$s17RealityFoundation13GeomMeshErrorOMa', '_$s17RealityFoundation13GeomMeshErrorOMn', 
@@ -18799,6 +18799,10 @@ exports:
                        '_$s17RealityFoundation20HoverEffectComponentV09SpotlightcD5StyleVSQAAMc', 
                        '_$s17RealityFoundation20HoverEffectComponentV0A3Kit0E0AAMc', 
                        '_$s17RealityFoundation20HoverEffectComponentV0A3Kit0E0AAWP', 
+                       '_$s17RealityFoundation20HoverEffectComponentV0cD0V14isHierarchicalSbvM', 
+                       '_$s17RealityFoundation20HoverEffectComponentV0cD0V14isHierarchicalSbvg', 
+                       '_$s17RealityFoundation20HoverEffectComponentV0cD0V14isHierarchicalSbvpMV', 
+                       '_$s17RealityFoundation20HoverEffectComponentV0cD0V14isHierarchicalSbvs', 
                        '_$s17RealityFoundation20HoverEffectComponentV0cD0V6shaderyAeC06ShadercD6InputsVFZ', 
                        '_$s17RealityFoundation20HoverEffectComponentV0cD0V9highlightyAeC09HighlightcD5StyleVFZ', 
                        '_$s17RealityFoundation20HoverEffectComponentV0cD0V9spotlightyAeC09SpotlightcD5StyleVFZ', 
@@ -19016,6 +19020,8 @@ exports:
                        '_$s17RealityFoundation20VideoPlayerComponentV02avD0ACSo8AVPlayerC_tcfC', 
                        '_$s17RealityFoundation20VideoPlayerComponentV02avD0So8AVPlayerCSgvg', 
                        '_$s17RealityFoundation20VideoPlayerComponentV02avD0So8AVPlayerCSgvpMV', 
+                       '_$s17RealityFoundation20VideoPlayerComponentV05startC10BlurFadeIn17targetAspectRatio8fadeTimeySf_SftF', 
+                       '_$s17RealityFoundation20VideoPlayerComponentV05startC11BlurFadeOutyyF', 
                        '_$s17RealityFoundation20VideoPlayerComponentV06__coreE4Type0A3Kit02__eG3RefVvgZ', 
                        '_$s17RealityFoundation20VideoPlayerComponentV06screenC9Dimensions5SIMD2VySfGvg', 
                        '_$s17RealityFoundation20VideoPlayerComponentV06screenC9Dimensions5SIMD2VySfGvpMV', 

@@ -26,6 +26,9 @@ typedef NS_ERROR_ENUM (SFSpeechErrorDomain, SFSpeechErrorCode) {
     
     /** A custom language model file was malformed */
     SFSpeechErrorCodeMalformedSupplementalModel = 8,
+    
+    /** Operation timed out */
+    SFSpeechErrorCodeTimeout = 10,
 } API_AVAILABLE(macos(14), ios(17), tvos(18));
 
 NS_ASSUME_NONNULL_END

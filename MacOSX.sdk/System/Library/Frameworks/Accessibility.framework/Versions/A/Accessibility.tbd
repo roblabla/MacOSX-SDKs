@@ -296,6 +296,11 @@ exports:
     objc-classes:    [ AXBrailleMap, AXCategoricalDataAxisDescriptor, AXCategoricalScale, 
                        AXChartDescriptor, AXCustomContent, AXDataAnnotation, AXDataPoint, 
                        AXDataPointValue, AXDataSeriesDescriptor, AXLiveAudioGraph, 
+                       AXMathExpression, AXMathExpressionFenced, AXMathExpressionFraction, 
+                       AXMathExpressionIdentifier, AXMathExpressionMultiscript, AXMathExpressionNumber, 
+                       AXMathExpressionOperator, AXMathExpressionRoot, AXMathExpressionRow, 
+                       AXMathExpressionSubSuperscript, AXMathExpressionTable, AXMathExpressionTableCell, 
+                       AXMathExpressionTableRow, AXMathExpressionText, AXMathExpressionUnderOver, 
                        AXNumericDataAxisDescriptor, AXNumericScale, AXRequest, AXScale ]
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _AXMFiHearingDevicePairedUUIDs, _AXMFiHearingDevicePairedUUIDsDidChangeNotification, 

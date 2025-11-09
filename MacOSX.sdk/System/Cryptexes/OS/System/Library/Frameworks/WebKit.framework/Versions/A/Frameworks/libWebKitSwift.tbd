@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/libWebKitSwift.dylib'
-current-version: 619.2.8
+current-version: 620.1.16
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -153,11 +153,38 @@ exports:
                        '_$s14libWebKitSwift30WKTextExtractionScrollableItemCMa', 
                        '_$s14libWebKitSwift30WKTextExtractionScrollableItemCMn', 
                        '_$s14libWebKitSwift30WKTextExtractionScrollableItemCN', '_$s14libWebKitSwift30WKTextExtractionScrollableItemCfD', 
-                       '_$sSo9WKWebViewC14libWebKitSwiftE22_intelligenceBaseClassyXlXpvg', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE015activePonderingC033_DD5526F81BA56B2640300E7874429689LLAC020PlatformIntelligencejbC0CyAbCE5ChunkCGSgvpfi', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE017activeReplacementC033_DD5526F81BA56B2640300E7874429689LLAC020PlatformIntelligencejbC0CyAbCE5ChunkCGSgvpfi', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE08suppressC4View33_DD5526F81BA56B2640300E7874429689LLSbvpfi', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE10effectView33_DD5526F81BA56B2640300E7874429689LLAC020PlatformIntelligencebcJ0CyABGSgvpfi', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE11hideEffectsyyYaF', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE11hideEffectsyyYaFTu', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE11showEffectsyyYaF', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE11showEffectsyyYaFTu', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE12contextRange33_DD5526F81BA56B2640300E7874429689LLSnySiGSgvpfi', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE14characterDelta22forReceivedSuggestionsSiSaySo16WTTextSuggestionCG_tFZ', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE14startAnimation3forySo8_NSRangeV_tYaF', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE14startAnimation3forySo8_NSRangeV_tYaFTu', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE16hasActiveEffectsSbvg', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE16hasActiveEffectsSbvpMV', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE16replacementQueue33_DD5526F81BA56B2640300E7874429689LLSayAbCE27ReplacementOperationRequestAELLVGvpfi', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE16restoreSelection20acceptedReplacementsySb_tYaF', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE16restoreSelection20acceptedReplacementsySb_tYaFTu', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE17flushReplacementsyyYaF', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE17flushReplacementsyyYaFTu', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE17onFlushCompletion33_DD5526F81BA56B2640300E7874429689LLyyYacSgvpfi', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE18requestReplacement18withProcessedRange8finished14characterDelta9operationySo8_NSRangeV_SbSiyyycctYaF', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE18requestReplacement18withProcessedRange8finished14characterDelta9operationySo8_NSRangeV_SbSiyyycctYaFTu', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE20processedRangeOffset33_DD5526F81BA56B2640300E7874429689LLSivpfi', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE8delegateABSo0abcD8Delegate_p_tcfC', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftE8delegateABSo0abcD8Delegate_p_tcfc', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftEABycfC', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorC14libWebKitSwiftEABycfc', 
+                       '_$sSo35WKIntelligenceTextEffectCoordinatorCMa', '_$sSo9WKWebViewC14libWebKitSwiftE22_intelligenceBaseClassyXlXpvg', 
                        '_$sSo9WKWebViewC14libWebKitSwiftE27_intelligenceCollectContent2in9collectorySo6CGRectV_21UIIntelligenceSupport0M16ElementCollectorCtF', 
                        '_$sSo9WKWebViewC14libWebKitSwiftE33_intelligenceCollectRemoteContent2in20remoteContextWrapperySo6CGRectV_21UIIntelligenceSupport0p10CollectionimN0CtF' ]
-    objc-classes:    [ WKGroupSession, WKGroupSessionObserver, WKTextExtractionContainerItem, 
-                       WKTextExtractionEditable, WKTextExtractionImageItem, WKTextExtractionItem, 
-                       WKTextExtractionLink, WKTextExtractionScrollableItem, WKTextExtractionTextItem, 
-                       WKURLActivity ]
+    objc-classes:    [ WKGroupSession, WKGroupSessionObserver, WKIntelligenceTextEffectCoordinator, 
+                       WKTextExtractionContainerItem, WKTextExtractionEditable, WKTextExtractionImageItem, 
+                       WKTextExtractionItem, WKTextExtractionLink, WKTextExtractionScrollableItem, 
+                       WKTextExtractionTextItem, WKURLActivity ]
 ...

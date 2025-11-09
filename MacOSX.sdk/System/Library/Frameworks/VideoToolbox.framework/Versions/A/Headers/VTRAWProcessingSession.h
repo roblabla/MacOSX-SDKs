@@ -207,7 +207,7 @@ VTRAWProcessingSessionCopyProcessingParameters(
 		after VTRAWProcessingSessionSetProcessingParameters returns.
  
 		If any parameters specified are not in the array reported by VTRAWProcessingSessionCopyProcessingParameters, or are the wrong type or are out of range,
-		kVTParameterErr will be returned.  Valid key/value pairs in the dictionary will still be applied. [SKIPPER: should we reject all settings if any are invalid?  Should we apply valid ones and not return an err?]
+		kVTParameterErr will be returned and none of the parameters will be applied.
 	@param	session
 		The RAW processing session.
 	@param	processingParameters

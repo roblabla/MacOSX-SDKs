@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BookDataStore.framework/Versions/A/BookDataStore'
-current-version: 2204
+current-version: 2230
 compatibility-version: 0
 swift-abi-version: 7
 exports:

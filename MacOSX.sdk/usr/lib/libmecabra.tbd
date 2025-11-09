@@ -95,7 +95,7 @@ exports:
                        _MecabraSetAssetDataItemsForType, _MecabraSetBuildDynamicDictionariesAsynchronously, 
                        _MecabraSetCandidateOrderAdjustment, _MecabraSetDebuggingLogEnabled, 
                        _MecabraSetDynamicLanguageModelAppContext, _MecabraSetFuzzyPinyinPairs, 
-                       _MecabraSetKeyboardLayout, _MecabraSetSupplementalLexiconEntries, 
+                       _MecabraSetIsTypeToSiriMode, _MecabraSetKeyboardLayout, _MecabraSetSupplementalLexiconEntries, 
                        _MecabraSetUserWordKeyPairs, _MecabraSetWubixingStandard, 
                        _MecabraSpecialtyDictionaryCreateWithData, _MecabraSpecialtyDictionaryCreateWithEntries, 
                        _MecabraSpecialtyDictionaryEnumerateEntries, _MecabraSpecialtyDictionaryGetData, 

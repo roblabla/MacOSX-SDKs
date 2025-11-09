@@ -79,14 +79,14 @@ NS_CLASS_AVAILABLE_MAC(11_0)
 - (nullable instancetype)initWithPaymentRequest:(PKPaymentRequest *)request NS_DESIGNATED_INITIALIZER;
 
 // Determine whether this device can process disbursement requests.
-+ (BOOL)supportsDisbursements API_AVAILABLE(ios(17.0), macos(15.0)) API_UNAVAILABLE(watchos, tvos);
++ (BOOL)supportsDisbursements API_AVAILABLE(ios(17.0), macos(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 // Determine whether this device can process disbursement requests using specific payment network brands.
-+ (BOOL)supportsDisbursementsUsingNetworks:(NSArray<PKPaymentNetwork> *)supportedNetworks NS_SWIFT_NAME(supportsDisbursements(using:)) API_AVAILABLE(ios(17.0), macos(15.0)) API_UNAVAILABLE(watchos, tvos);
++ (BOOL)supportsDisbursementsUsingNetworks:(NSArray<PKPaymentNetwork> *)supportedNetworks NS_SWIFT_NAME(supportsDisbursements(using:)) API_AVAILABLE(ios(17.0), macos(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 // Determine whether this device can process disbursements to cards using the specified networks and capabilities bitmask.
 + (BOOL)supportsDisbursementsUsingNetworks:(NSArray<PKPaymentNetwork> *)supportedNetworks
-                              capabilities:(PKMerchantCapability)capabilities NS_SWIFT_NAME(supportsDisbursements(using:capabilities:)) API_AVAILABLE(ios(17.0), macos(15.0)) API_UNAVAILABLE(watchos, tvos);
+                              capabilities:(PKMerchantCapability)capabilities NS_SWIFT_NAME(supportsDisbursements(using:capabilities:)) API_AVAILABLE(ios(17.0), macos(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 // Initialize the controller with a request to send money to a user.
 - (instancetype)initWithDisbursementRequest:(PKDisbursementRequest *)request API_AVAILABLE(ios(17.0), macos(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);

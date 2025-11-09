@@ -13,6 +13,7 @@
 #include <Hypervisor/hv_gic_parameters.h>
 #include <Hypervisor/hv_gic_state.h>
 #include <Hypervisor/hv_gic_types.h>
+#include <Hypervisor/hv_sme_config.h>
 #include <Hypervisor/hv_vcpu.h>
 #include <Hypervisor/hv_vcpu_config.h>
 #include <Hypervisor/hv_vcpu_types.h>

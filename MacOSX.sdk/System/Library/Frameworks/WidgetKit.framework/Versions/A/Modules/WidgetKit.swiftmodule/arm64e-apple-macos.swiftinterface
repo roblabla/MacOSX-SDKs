@@ -1,16 +1,16 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
-// swift-module-flags: -target arm64e-apple-macos15.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 536.2.14 -module-name WidgetKit -package-name com.apple.chrono.internal
-import AppIntents
-@_exported import DeveloperToolsSupport
-import Intents
-import Swift
-import SwiftUI
-@_exported import WidgetKit
-import _AppIntents_SwiftUI
-import _Concurrency
-import _StringProcessing
-import _SwiftConcurrencyShims
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
+// swift-module-flags: -target arm64e-apple-macos15.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-bare-slash-regex -user-module-version 537.3.23.1 -module-name WidgetKit -package-name com.apple.chrono.internal
+public import AppIntents
+@_exported public import DeveloperToolsSupport
+public import Intents
+public import Swift
+public import SwiftUI
+@_exported public import WidgetKit
+public import _AppIntents_SwiftUI
+public import _Concurrency
+public import _StringProcessing
+public import _SwiftConcurrencyShims
 @available(iOS 14.0, macOS 11.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
 public struct TimelineEntryRelevance : Swift.Codable, Swift.Hashable {
@@ -270,7 +270,8 @@ extension WidgetKit.AppIntentControlConfiguration {
   @_Concurrency.MainActor @preconcurrency public init<Provider>(kind: Swift.String, provider: Provider, @SwiftUI.ControlWidgetTemplateBuilder content: @escaping (Provider.Value) -> Content) where Configuration == Provider.Configuration, Provider : WidgetKit.AppIntentControlValueProvider
   @_Concurrency.MainActor @preconcurrency public init(kind: Swift.String, intent: Configuration.Type = Configuration.self, @SwiftUI.ControlWidgetTemplateBuilder content: @escaping (Configuration) -> Content)
 }
-@available(iOS 14.0, macOS 11.0, tvOS 18.0, watchOS 9.0, *)
+@available(iOS 14.0, macOS 11.0, watchOS 9.0, *)
+@available(tvOS, unavailable)
 public struct WidgetPreviewContext : SwiftUI.PreviewContext {
   public subscript<Key>(key: Key.Type) -> Key.Value where Key : SwiftUI.PreviewContextKey {
     get
@@ -405,7 +406,8 @@ extension SwiftUI.WidgetConfiguration {
   @_Concurrency.MainActor @preconcurrency public func _contentMarginsDisabled() -> some SwiftUI.WidgetConfiguration
   
 }
-@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 18.0, *)
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, *)
+@available(tvOS, unavailable)
 extension DeveloperToolsSupport.Preview {
   @_Concurrency.MainActor public init(_ name: Swift.String? = nil, as family: WidgetKit.WidgetFamily, widget: @escaping () -> some Widget, @WidgetKit.PreviewTimelineBuilder timeline: @escaping @_Concurrency.MainActor () async -> [any WidgetKit.TimelineEntry])
   @_Concurrency.MainActor public init(_ name: Swift.String? = nil, as family: WidgetKit.WidgetFamily, widget: @escaping () -> some Widget, timelineProvider: @escaping () -> some TimelineProvider)
@@ -414,11 +416,13 @@ extension DeveloperToolsSupport.Preview {
   @_Concurrency.MainActor public init<Provider>(_ name: Swift.String? = nil, as family: WidgetKit.WidgetFamily, using intent: Provider.Intent, widget: @escaping () -> some Widget, timelineProvider: @escaping () -> Provider) where Provider : WidgetKit.AppIntentTimelineProvider
 }
 #if compiler(>=5.3) && $Macros && $FreestandingMacros
-@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 18.0, *)
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, *)
+@available(tvOS, unavailable)
 @freestanding(declaration) public macro Preview<Widget>(_ name: Swift.String? = nil, as family: WidgetKit.WidgetFamily, widget: @escaping () -> Widget, @WidgetKit.PreviewTimelineBuilder timeline: @escaping @_Concurrency.MainActor () async -> [any WidgetKit.TimelineEntry]) = #externalMacro(module: "PreviewsMacros", type: "Common") where Widget : SwiftUI.Widget
 #endif
 #if compiler(>=5.3) && $Macros && $FreestandingMacros
-@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 18.0, *)
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, *)
+@available(tvOS, unavailable)
 @freestanding(declaration) public macro Preview<Widget, Provider>(_ name: Swift.String? = nil, as family: WidgetKit.WidgetFamily, widget: @escaping () -> Widget, timelineProvider: @escaping () -> Provider) = #externalMacro(module: "PreviewsMacros", type: "Common") where Widget : SwiftUI.Widget, Provider : WidgetKit.TimelineProvider
 #endif
 #if compiler(>=5.3) && $Macros && $FreestandingMacros
@@ -427,10 +431,12 @@ extension DeveloperToolsSupport.Preview {
 @freestanding(declaration) public macro Preview<Widget, Provider>(_ name: Swift.String? = nil, as family: WidgetKit.WidgetFamily, using intent: Provider.Intent, widget: @escaping () -> Widget, timelineProvider: @escaping () -> Provider) = #externalMacro(module: "PreviewsMacros", type: "Common") where Widget : SwiftUI.Widget, Provider : WidgetKit.IntentTimelineProvider
 #endif
 #if compiler(>=5.3) && $Macros && $FreestandingMacros
-@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 18.0, *)
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, *)
+@available(tvOS, unavailable)
 @freestanding(declaration) public macro Preview<Widget, Provider>(_ name: Swift.String? = nil, as family: WidgetKit.WidgetFamily, using intent: Provider.Intent, widget: @escaping () -> Widget, timelineProvider: @escaping () -> Provider) = #externalMacro(module: "PreviewsMacros", type: "Common") where Widget : SwiftUI.Widget, Provider : WidgetKit.AppIntentTimelineProvider
 #endif
-@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 18.0, *)
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, *)
+@available(tvOS, unavailable)
 @_functionBuilder public struct PreviewTimelineBuilder {
   @available(*, unavailable, message: "Please provide at lease one timeline entry to preview your widget.")
   @_alwaysEmitIntoClient public static func buildBlock() -> [any WidgetKit.TimelineEntry] {
@@ -441,7 +447,8 @@ extension DeveloperToolsSupport.Preview {
   public static func buildPartialBlock(accumulated: [any WidgetKit.TimelineEntry], next: [any WidgetKit.TimelineEntry]) -> [any WidgetKit.TimelineEntry]
   public static func buildArray(_ components: [[any WidgetKit.TimelineEntry]]) -> [any WidgetKit.TimelineEntry]
 }
-@available(iOS 14.0, macOS 11.0, tvOS 18.0, watchOS 9.0, *)
+@available(iOS 14.0, macOS 11.0, watchOS 9.0, *)
+@available(tvOS, unavailable)
 extension SwiftUI.Widget {
   @_Concurrency.MainActor @preconcurrency public static func main()
 }
@@ -453,7 +460,8 @@ extension SwiftUI.Widget {
 extension SwiftUI.ControlWidget {
   @_Concurrency.MainActor @preconcurrency public static func main()
 }
-@available(iOS 14.0, macOS 11.0, tvOS 18.0, watchOS 9.0, *)
+@available(iOS 14.0, macOS 11.0, watchOS 9.0, *)
+@available(tvOS, unavailable)
 extension SwiftUI.WidgetBundle {
   @_Concurrency.MainActor @preconcurrency public static func main()
 }

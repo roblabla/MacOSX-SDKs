@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PersonalizationPortrait.framework/Versions/A/PersonalizationPortrait'
-current-version: 1260.9
+current-version: 1271.5
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -54,7 +54,7 @@ exports:
                        _pp_contacts_signpost_handle, _pp_default_log_handle, _pp_default_signpost_handle, 
                        _pp_entities_log_handle, _pp_entities_signpost_handle, _pp_events_log_handle, 
                        _pp_events_signpost_handle, _pp_locations_log_handle, _pp_locations_signpost_handle, 
-                       _pp_maintenance_signpost_handle, _pp_private_log_handle, _pp_quicktype_log_handle, 
+                       _pp_maintenance_signpost_handle, _pp_quicktype_log_handle, 
                        _pp_quicktype_signpost_handle, _pp_reranker_log_handle, _pp_reranker_signpost_handle, 
                        _pp_score_interpreter_log_handle, _pp_social_highlights_log_handle, 
                        _pp_social_highlights_signpost_handle, _pp_temporal_clusters_log_handle, 

@@ -49,7 +49,7 @@ exports:
                        _NFDriverSetPollingProfile, _NFDriverSetReaderModeRFGain, 
                        _NFDriverSetSecureElementAlwaysOn, _NFDriverSetSecureElementPower, 
                        _NFDriverSetTemporaryPollingPeriod, _NFDriverSetTypeATagDataRate, 
-                       _NFDriverSimulateCrash, _NFDriverToggleGPIO, _NFDriverTriggerDelayedWake, 
-                       _NFDriverUnloadStackAndLeaveHWEnabled, _NFDriverUpdateFirmware, 
-                       _nfc_err ]
+                       _NFDriverSimulateCrash, _NFDriverSupportsSecureTimersInOFF, 
+                       _NFDriverToggleGPIO, _NFDriverTriggerDelayedWake, _NFDriverUnloadStackAndLeaveHWEnabled, 
+                       _NFDriverUpdateFirmware, _nfc_err ]
 ...

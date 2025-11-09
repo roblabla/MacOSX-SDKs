@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosImagingFoundation.framework/Versions/A/PhotosImagingFoundation'
-current-version: 711.0.180
+current-version: 721.0.150
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -173,7 +173,6 @@ exports:
                        _PFSizeFitAspectInSize, _PFSizeFitAspectInSizeNoRounding, 
                        _PFSizeFitAspectInSizeRounded, _PFSizeFitSizeInSize, _PFSizeFitSizeInSquare, 
                        _PFSizeGetScaleToFit, _PFSizeRotate, _PFZeroIntPoint, _PFZeroIntSize, 
-                       _PhotosImagingFoundationVersionNumber, _PhotosImagingFoundationVersionString, 
                        _RKThumbnailSize, _TIFFOrientationFromIPAOrientation, _ZeroRectEdge, 
                        _kIPAGeometryInvalidPoint, _kIPAImageGeometryInputSpace, _kIPAImageGeometryOutputSpace ]
     objc-classes:    [ IPAAdjustment, IPAAdjustmentEnvelope, IPAAdjustmentSerialization, 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FileProviderDaemon.framework/Versions/A/FileProviderDaemon'
-current-version: 2732.41.1
+current-version: 2732.61.1
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -23,7 +23,7 @@ exports:
                        FPDKeychainManager, FPDMoveAtom, FPDMoveOperation, FPDMoveReader, 
                        FPDMoveWriter, FPDProcessMonitor, FPDProvider, FPDProviderDescriptor, 
                        FPDRequest, FPDServer, FPDSharedScheduler, FPDSyncBubble, 
-                       FPDVolume, FPDVolumeManager, FPDXPCServicer ]
+                       FPDTapToRadarManager, FPDVolume, FPDVolumeManager, FPDXPCServicer ]
     objc-ivars:      [ FPDCacheDeleteService._cacheDeleteCacheable, FPDCacheDeleteService._cacheDeleteServiceName, 
                        FPDCacheDeleteService._cdNotificationsHandlers, FPDCacheDeleteService._notificationsHandlersQueue ]
 ...

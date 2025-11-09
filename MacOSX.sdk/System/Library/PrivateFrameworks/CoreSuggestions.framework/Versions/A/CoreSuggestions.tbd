@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestions.framework/Versions/A/CoreSuggestions'
-current-version: 1260.9
+current-version: 1271.5
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -62,11 +62,11 @@ exports:
                        _SGMDetailExtractionTypePhrase, _SGMDetailExtractionTypeSig, 
                        _SGMDetailExtractionTypeSigPhrase, _SGMDetailExtractionTypeUnkLookup, 
                        _SGMDetailExtractionTypeUnknown, _SGMDocumentTypeEmail, _SGMDocumentTypeMessage, 
-                       _SGMEventCategoryBoat, _SGMEventCategoryBus, _SGMEventCategoryCar, 
-                       _SGMEventCategoryFlight, _SGMEventCategoryFood, _SGMEventCategoryHotel, 
-                       _SGMEventCategoryMovie, _SGMEventCategoryOther, _SGMEventCategorySocial, 
-                       _SGMEventCategoryTicket, _SGMEventCategoryTrain, _SGMEventDateAdjAddTime1h, 
-                       _SGMEventDateAdjAddTime2h, _SGMEventDateAdjAddTime2hPlus, 
+                       _SGMEventCategoryAppointment, _SGMEventCategoryBoat, _SGMEventCategoryBus, 
+                       _SGMEventCategoryCar, _SGMEventCategoryFlight, _SGMEventCategoryFood, 
+                       _SGMEventCategoryHotel, _SGMEventCategoryMovie, _SGMEventCategoryOther, 
+                       _SGMEventCategorySocial, _SGMEventCategoryTicket, _SGMEventCategoryTrain, 
+                       _SGMEventDateAdjAddTime1h, _SGMEventDateAdjAddTime2h, _SGMEventDateAdjAddTime2hPlus, 
                        _SGMEventDateAdjChangedDay, _SGMEventDateAdjChangedDayAndTime, 
                        _SGMEventDateAdjConfirmed, _SGMEventDateAdjNA, _SGMEventDateAdjSubTime1h, 
                        _SGMEventDateAdjSubTime2h, _SGMEventDateAdjSubTime2hPlus, 
@@ -174,9 +174,8 @@ exports:
                        _kSuggestionsEkEventSavedFromSyncKey, _kSuggestionsEkEventSchemaOrgKey, 
                        _kSuggestionsNotificationsWhitelistAssetUpdated, _sgDeveloperLogHandle, 
                        _sgEventsLogHandle, _sgFilter, _sgLogHandle, _sgMailIntelligenceLogHandle, 
-                       _sgMap, _sgMapAndFilter, _sgMapSelector, _sgPrivateLogHandle, 
-                       _sgQuicktypeLogHandle, _sgRemindersLogHandle, _sgShuffledArrayFrom, 
-                       _sgSignpostHandle ]
+                       _sgMap, _sgMapAndFilter, _sgMapSelector, _sgQuicktypeLogHandle, 
+                       _sgRemindersLogHandle, _sgShuffledArrayFrom, _sgSignpostHandle ]
     objc-classes:    [ SGCircularBufferArray, SGContact, SGContactMatch, SGConversationTurn, 
                        SGDSuggestManagerInterface, SGDaemonConnection, SGDateComponents, 
                        SGDelivery, SGDetailCacheSnapshot, SGEKEventConversions, SGEmailAddress, 

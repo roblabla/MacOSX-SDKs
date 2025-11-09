@@ -10,8 +10,7 @@ exports:
                        '_$s18AppleIDSetupDaemon0C0VMn', '_$s18AppleIDSetupDaemon0C0VN', 
                        '_$sSo13audit_token_ta18AppleIDSetupDaemonE11descriptionSSvg', 
                        '_$sSo13audit_token_ta18AppleIDSetupDaemonE11descriptionSSvpMV', 
-                       '_$sSo13audit_token_ta18AppleIDSetupDaemonE2eeoiySbAB_ABtFZ', 
-                       '_$sSo13audit_token_taSQ18AppleIDSetupDaemonMc', '_$sSo13audit_token_tas23CustomStringConvertible18AppleIDSetupDaemonMc', 
+                       '_$sSo13audit_token_tas23CustomStringConvertible18AppleIDSetupDaemonMc', 
                        _AppleIDSetupDaemonVersionNumber, _AppleIDSetupDaemonVersionString ]
     objc-classes:    [ AISDCloudDataProtectionHelper, AISDGameCenterSignInHelper ]
 ...

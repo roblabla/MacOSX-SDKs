@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
-// swift-module-flags: -disable-objc-attr-requires-foundation-module -target arm64e-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swift_Concurrency -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature ExtensionImportVisiblity -enable-experimental-feature IsolatedAny -user-module-version 6.0.0.7.43 -module-name _Concurrency
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
+// swift-module-flags: -disable-objc-attr-requires-foundation-module -target arm64e-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swift_Concurrency -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature ExtensionImportVisiblity -enable-experimental-feature IsolatedAny -user-module-version 6.0.3.1.5 -module-name _Concurrency
 // swift-module-flags-ignorable: -enable-ossa-modules -enable-lexical-lifetimes=false
 import Swift
 import SwiftShims
@@ -203,30 +203,22 @@ public func swift_deletedAsyncMethodError() async
 public protocol Executor : AnyObject, Swift.Sendable {
   @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   func enqueue(_ job: _Concurrency.UnownedJob)
-  #if compiler(>=5.3) && $MoveOnly
   @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
   @available(*, deprecated, message: "Implement 'enqueue(_: consuming ExecutorJob)' instead")
   func enqueue(_ job: consuming _Concurrency.Job)
-  #endif
-  #if compiler(>=5.3) && $MoveOnly
   @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
   func enqueue(_ job: consuming _Concurrency.ExecutorJob)
-  #endif
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public protocol SerialExecutor : _Concurrency.Executor {
   @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   @available(*, deprecated, message: "Implement 'enqueue(_: consuming ExecutorJob)' instead")
   @_nonoverride func enqueue(_ job: _Concurrency.UnownedJob)
-  #if compiler(>=5.3) && $MoveOnly
   @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
   @available(*, deprecated, message: "Implement 'enqueue(_: consuming ExecutorJob)' instead")
   @_nonoverride func enqueue(_ job: consuming _Concurrency.Job)
-  #endif
-  #if compiler(>=5.3) && $MoveOnly
   @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
   @_nonoverride func enqueue(_ job: consuming _Concurrency.ExecutorJob)
-  #endif
   func asUnownedSerialExecutor() -> _Concurrency.UnownedSerialExecutor
   @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
   func isSameExclusiveExecutionContext(other: Self) -> Swift.Bool
@@ -241,13 +233,9 @@ extension _Concurrency.SerialExecutor {
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 public protocol TaskExecutor : _Concurrency.Executor {
   @_nonoverride func enqueue(_ job: _Concurrency.UnownedJob)
-  #if compiler(>=5.3) && $MoveOnly
   @available(*, deprecated, message: "Implement 'enqueue(_: consuming ExecutorJob)' instead")
   @_nonoverride func enqueue(_ job: consuming _Concurrency.Job)
-  #endif
-  #if compiler(>=5.3) && $MoveOnly
   @_nonoverride func enqueue(_ job: consuming _Concurrency.ExecutorJob)
-  #endif
   func asUnownedTaskExecutor() -> _Concurrency.UnownedTaskExecutor
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -257,12 +245,8 @@ extension _Concurrency.TaskExecutor {
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 extension _Concurrency.Executor {
   public func enqueue(_ job: _Concurrency.UnownedJob)
-  #if compiler(>=5.3) && $MoveOnly
   public func enqueue(_ job: consuming _Concurrency.ExecutorJob)
-  #endif
-  #if compiler(>=5.3) && $MoveOnly
   public func enqueue(_ job: consuming _Concurrency.Job)
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 extension _Concurrency.SerialExecutor {
@@ -2027,14 +2011,10 @@ internal func _swiftJobRunOnTaskExecutor(_ job: _Concurrency.UnownedJob, _ seria
   @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
   @usableFromInline
   internal init(context: Builtin.Job)
-  #if compiler(>=5.3) && $MoveOnly
   @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
   public init(_ job: __owned _Concurrency.Job)
-  #endif
-  #if compiler(>=5.3) && $MoveOnly
   @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
   public init(_ job: __owned _Concurrency.ExecutorJob)
-  #endif
   @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
   public var priority: _Concurrency.JobPriority {
     get
@@ -2062,10 +2042,9 @@ extension _Concurrency.UnownedJob : Swift.CustomStringConvertible {
     get
   }
 }
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 @available(*, deprecated, renamed: "ExecutorJob")
-@frozen @_moveOnly public struct Job : Swift.Sendable {
+@frozen public struct Job : ~Swift.Copyable, Swift.Sendable {
   internal var context: Builtin.Job
   @usableFromInline
   internal init(context: __owned Builtin.Job)
@@ -2078,18 +2057,14 @@ extension _Concurrency.UnownedJob : Swift.CustomStringConvertible {
     get
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 extension _Concurrency.Job {
   @_alwaysEmitIntoClient @inlinable public __consuming func runSynchronously(on executor: _Concurrency.UnownedSerialExecutor) {
     _swiftJobRun(UnownedJob(self), executor)
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-@frozen @_moveOnly public struct ExecutorJob : Swift.Sendable {
+@frozen public struct ExecutorJob : ~Swift.Copyable, Swift.Sendable {
   internal var context: Builtin.Job
   @usableFromInline
   internal init(context: __owned Builtin.Job)
@@ -2102,8 +2077,6 @@ extension _Concurrency.Job {
     get
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 extension _Concurrency.ExecutorJob {
   @_alwaysEmitIntoClient @inlinable public __consuming func runSynchronously(on executor: _Concurrency.UnownedSerialExecutor) {
@@ -2118,7 +2091,6 @@ extension _Concurrency.ExecutorJob {
     _swiftJobRunOnTaskExecutor(UnownedJob(self), serialExecutor, taskExecutor)
   }
 }
-#endif
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 @frozen public struct JobPriority : Swift.Sendable {
   public typealias RawValue = Swift.UInt8

@@ -377,6 +377,12 @@ You can override this method to customize the presentation of errors by examinin
 
 @end
 
+@interface NSResponder(NSWritingToolsSupport)
+
+- (IBAction)showWritingTools:(nullable id)sender API_AVAILABLE(macos(15.2));
+
+@end
+
 
 @interface NSResponder(NSDeprecated)
 

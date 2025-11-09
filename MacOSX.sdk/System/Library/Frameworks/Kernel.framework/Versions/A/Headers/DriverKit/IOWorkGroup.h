@@ -1,4 +1,4 @@
-/* iig(DriverKit-400.0.2) generated from IOWorkGroup.iig */
+/* iig(DriverKit-402.60.12) generated from IOWorkGroup.iig */
 
 /* IOWorkGroup.iig:1-38 */
 /*

@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
-// swift-module-flags: -target arm64e-apple-macos15.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 814.1.11 -module-name _StoreKit_SwiftUI
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
+// swift-module-flags: -target arm64e-apple-macos15.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 814.2.17 -module-name _StoreKit_SwiftUI
 import AppKit
 import Combine
 import CoreGraphics
@@ -262,12 +262,12 @@ extension _StoreKit_SwiftUI.ProductViewStyle where Self == _StoreKit_SwiftUI.Reg
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 extension SwiftUICore.View {
-  nonisolated public func storeButton(_ visibility: SwiftUI.Visibility, for buttonKinds: _StoreKit_SwiftUI.StoreButtonKind...) -> some SwiftUICore.View
+  nonisolated public func storeButton(_ visibility: SwiftUICore.Visibility, for buttonKinds: _StoreKit_SwiftUI.StoreButtonKind...) -> some SwiftUICore.View
   
 }
 extension _StoreKit_SwiftUI.StoreContent {
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  nonisolated public func storeButton(_ visibility: SwiftUI.Visibility, for buttonKinds: _StoreKit_SwiftUI.StoreButtonKind...) -> some _StoreKit_SwiftUI.StoreContent
+  nonisolated public func storeButton(_ visibility: SwiftUICore.Visibility, for buttonKinds: _StoreKit_SwiftUI.StoreButtonKind...) -> some _StoreKit_SwiftUI.StoreContent
   
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
@@ -609,7 +609,7 @@ public struct SubscriptionStoreControlStyleConfiguration {
     }
   }
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  public var descriptionVisibility: SwiftUI.Visibility {
+  public var descriptionVisibility: SwiftUICore.Visibility {
     get
   }
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -1422,9 +1422,9 @@ extension SwiftUICore.View {
   
   @available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency internal func _productDescription(_ visibility: SwiftUI.Visibility) -> some SwiftUICore.View
+  @_Concurrency.MainActor @preconcurrency internal func _productDescription(_ visibility: SwiftUICore.Visibility) -> some SwiftUICore.View
   
-  @_alwaysEmitIntoClient nonisolated public func productDescription(_ visibility: SwiftUI.Visibility) -> some SwiftUICore.View {
+  @_alwaysEmitIntoClient nonisolated public func productDescription(_ visibility: SwiftUICore.Visibility) -> some SwiftUICore.View {
         if #available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *) {
             return _productDescription(visibility)
         }
@@ -1435,7 +1435,7 @@ extension SwiftUICore.View {
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension _StoreKit_SwiftUI.StoreContent {
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  @_Concurrency.MainActor @preconcurrency public func productDescription(_ visibility: SwiftUI.Visibility) -> some _StoreKit_SwiftUI.StoreContent
+  @_Concurrency.MainActor @preconcurrency public func productDescription(_ visibility: SwiftUICore.Visibility) -> some _StoreKit_SwiftUI.StoreContent
   
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
@@ -1457,7 +1457,7 @@ public struct ProductViewStyleConfiguration {
   public let icon: _StoreKit_SwiftUI.ProductViewStyleConfiguration.Icon
   public let hasCurrentEntitlement: Swift.Bool
   @available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
-  public let descriptionVisibility: SwiftUI.Visibility
+  public let descriptionVisibility: SwiftUICore.Visibility
   public var product: StoreKit.Product? {
     get
   }

@@ -366,6 +366,11 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
  */
 @property (readonly) BOOL allowsPersistentDNS API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0));
 
+/*
+ * Cookie partition identifier used for cookie storage and retrieval.
+ */
+@property (nullable, readonly, copy) NSString *cookiePartitionIdentifier API_AVAILABLE(macos(15.2), ios(18.2), watchos(11.2), tvos(18.2), visionos(2.2));
+
 @end
 
 
@@ -500,6 +505,11 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
  NO otherwise. Defaults to NO.
  */
 @property BOOL allowsPersistentDNS API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0));
+
+/*
+* Cookie partition identifier used for cookie storage and retrieval.
+*/
+@property (nullable, copy) NSString *cookiePartitionIdentifier API_AVAILABLE(macos(15.2), ios(18.2), watchos(11.2), tvos(18.2), visionos(2.2));
 
 @end
 

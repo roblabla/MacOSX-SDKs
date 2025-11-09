@@ -96,6 +96,8 @@ exports:
                        '_$s18BrailleTranslation16BRLTBrailleModelC12handleEscapeSbyFTq', 
                        '_$s18BrailleTranslation16BRLTBrailleModelC12handleReturnSbyFTj', 
                        '_$s18BrailleTranslation16BRLTBrailleModelC12handleReturnSbyFTq', 
+                       '_$s18BrailleTranslation16BRLTBrailleModelC13_resetForTestyyFTj', 
+                       '_$s18BrailleTranslation16BRLTBrailleModelC13_resetForTestyyFTq', 
                        '_$s18BrailleTranslation16BRLTBrailleModelC13technicalModeSbvMTj', 
                        '_$s18BrailleTranslation16BRLTBrailleModelC13technicalModeSbvMTq', 
                        '_$s18BrailleTranslation16BRLTBrailleModelC13technicalModeSbvgTj', 

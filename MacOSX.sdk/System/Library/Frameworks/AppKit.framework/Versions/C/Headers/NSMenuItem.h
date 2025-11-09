@@ -31,6 +31,10 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 /// Items created using this method are non-interactive and do not perform an action.
 + (instancetype)sectionHeaderWithTitle:(NSString *)title API_AVAILABLE(macos(14.0)) NS_REFINED_FOR_SWIFT;
 
+/// An array of standard menu items related to Writing Tools.
+/// Each call to this method returns an array of newly allocated instances of NSMenuItem.
+@property (class, readonly, copy) NSArray<NSMenuItem *> *writingToolsItems API_AVAILABLE(macos(15.2));
+
 - (instancetype)initWithTitle:(NSString *)string action:(nullable SEL)selector keyEquivalent:(NSString *)charCode NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 

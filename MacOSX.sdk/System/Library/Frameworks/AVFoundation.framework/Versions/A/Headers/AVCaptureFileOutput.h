@@ -227,6 +227,29 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
 - (void)captureOutput:(AVCaptureFileOutput *)output didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray<AVCaptureConnection *> *)connections;
 
 /*!
+ @method captureOutput:didStartRecordingToOutputFileAtURL:startPTS:fromConnections:
+ @abstract
+    Informs the delegate when the output has started writing to a file.
+ 
+ @param output
+    The capture file output that started writing the file.
+ @param fileURL
+    The file URL of the file that is being written.
+ @param startPTS
+    The timestamp of the first buffer written to the file, synced with AVCaptureSession.synchronizationClock
+ @param connections
+    An array of AVCaptureConnection objects attached to the file output that provided the data that is being written to the file.
+ 
+ @discussion
+    This method is called when the file output has started writing data to a file. If an error condition prevents any data from being written, this method may not be called. captureOutput:willFinishRecordingToOutputFileAtURL:fromConnections:error: and captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: will always be called, even if no data is written.
+ 
+    If this method is implemented, the alternative delegate callback -captureOutput:didStartRecordingToOutputFileAtURL:fromConnections will not be called.
+ 
+    Clients should not assume that this method will be called on a specific thread, and should also try to make this method as efficient as possible.
+ */
+- (void)captureOutput:(AVCaptureFileOutput *)output didStartRecordingToOutputFileAtURL:(NSURL *)fileURL startPTS:(CMTime)startPTS fromConnections:(NSArray<AVCaptureConnection *> *)connections NS_SWIFT_NAME(fileOutput(_:didStartRecordingTo:startPTS:from:)) API_AVAILABLE(macos(15.2), ios(18.2), macCatalyst(18.2), tvos(18.2)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/*!
  @method captureOutput:didPauseRecordingToOutputFileAtURL:fromConnections:
  @abstract
     Called whenever the output is recording to a file and successfully pauses the recording at the request of the client.

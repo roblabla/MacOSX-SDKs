@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CloudAssetDaemon.framework/Versions/A/CloudAssetDaemon'
-current-version: 2220.14
+current-version: 2230.24
 compatibility-version: 0
 swift-abi-version: 7
 exports:

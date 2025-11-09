@@ -57,6 +57,7 @@ exports:
                        SASExpressSettings._siriDataSharingOptIn, SASExpressSettings._siriOptIn, 
                        SASExpressSettings._siriPrivacyBundle, SASExpressSettings._siriVoiceTriggerEnabled, 
                        SASExpressSettings._softwareUpdateAutoDownloadEnabled, SASExpressSettings._softwareUpdateAutoUpdateEnabled, 
+                       SASExpressSettings._stolenDeviceProtectionEnabled, SASExpressSettings._stolenDeviceProtectionStrictModeEnabled, 
                        SASExpressSettings._unlockWithWatchEnabled, SASExpressSettings._version, 
                        SASExpressSettings._walletData, SASExpressSettings._watchMigrationData, 
                        SASExpressSettingsPrivacyBundle._contentVersion, SASExpressSettingsPrivacyBundle._identifier ]

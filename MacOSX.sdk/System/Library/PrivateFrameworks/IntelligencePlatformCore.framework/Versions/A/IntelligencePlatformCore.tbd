@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligencePlatformCore.framework/Versions/A/IntelligencePlatformCore'
-current-version: 115.4
+current-version: 121.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -4516,7 +4516,7 @@ exports:
                        '_$s24IntelligencePlatformCore7OptionsV34enableEntityCandidateRetrievalAjaxACvgZ', 
                        '_$s24IntelligencePlatformCore7OptionsV37enableDefaultResolverInteractionsViewACvgZ', 
                        '_$s24IntelligencePlatformCore7OptionsV7options12featureFlagsACSi_SitcfC', 
-                       '_$s24IntelligencePlatformCore7OptionsV8rawValueA2C0dF0V_tcfC', 
+                       '_$s24IntelligencePlatformCore7OptionsV8orionSQLACvgZ', '_$s24IntelligencePlatformCore7OptionsV8rawValueA2C0dF0V_tcfC', 
                        '_$s24IntelligencePlatformCore7OptionsV8rawValueAC0dF0VvM', 
                        '_$s24IntelligencePlatformCore7OptionsV8rawValueAC0dF0Vvg', 
                        '_$s24IntelligencePlatformCore7OptionsV8rawValueAC0dF0VvpMV', 
@@ -4532,19 +4532,21 @@ exports:
                        '_$s24IntelligencePlatformCore7OptionsVs9OptionSetAAMc', '_$s24IntelligencePlatformCore7ViewXPCC13configurationAA13ConfigurationVSgvMZ', 
                        '_$s24IntelligencePlatformCore7ViewXPCC13configurationAA13ConfigurationVSgvgZ', 
                        '_$s24IntelligencePlatformCore7ViewXPCC13configurationAA13ConfigurationVSgvsZ', 
-                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC11accessToken8viewName11isSandboxedSo012GDViewAccessH0CSS_SbtYaKF', 
-                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC11accessToken8viewName11isSandboxedSo012GDViewAccessH0CSS_SbtYaKFTu', 
-                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC13performUpdate03forD5Names19includeDependenciesSbSaySSG_SbtYaKF', 
-                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC13performUpdate03forD5Names19includeDependenciesSbSaySSG_SbtYaKFTu', 
-                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC17reportSQLiteError03forD4Name06sqliteI4Code6configSbSS_s5Int64VAA13ConfigurationVtYaKF', 
-                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC17reportSQLiteError03forD4Name06sqliteI4Code6configSbSS_s5Int64VAA13ConfigurationVtYaKFTu', 
-                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC17reportSQLiteError03forD4Name06sqliteI4CodeSbSS_s5Int64VtYaKF', 
-                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC17reportSQLiteError03forD4Name06sqliteI4CodeSbSS_s5Int64VtYaKFTu', 
-                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC18reportUnknownError03forD4Name6configSbSS_AA13ConfigurationVtYaKF', 
-                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC18reportUnknownError03forD4Name6configSbSS_AA13ConfigurationVtYaKFTu', 
-                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC18reportUnknownError03forD4NameSbSS_tYaKF', 
-                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC18reportUnknownError03forD4NameSbSS_tYaKFTu', 
-                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC22accessTokenForFeatures11isSandboxed10completionySb_ySo012GDViewAccessH0CSg_s5Error_pSgtXEtF', 
+                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC10accessInfo8viewName7useCaseSo012GDViewAccessH0CSS_So05BMUseL10IdentifieratYaKF', 
+                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC10accessInfo8viewName7useCaseSo012GDViewAccessH0CSS_So05BMUseL10IdentifieratYaKFTu', 
+                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC11accessToken8viewName11isSandboxed7useCaseSo012GDViewAccessH0CSS_SbSo05BMUseN10IdentifieratYaKF', 
+                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC11accessToken8viewName11isSandboxed7useCaseSo012GDViewAccessH0CSS_SbSo05BMUseN10IdentifieratYaKFTu', 
+                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC13performUpdate03forD5Names7useCase19includeDependenciesSbSaySSG_So05BMUseL10IdentifieraSbtYaKF', 
+                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC13performUpdate03forD5Names7useCase19includeDependenciesSbSaySSG_So05BMUseL10IdentifieraSbtYaKFTu', 
+                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC17reportSQLiteError03forD4Name06sqliteI4Code7useCase6configSbSS_s5Int64VSo05BMUseO10IdentifieraAA13ConfigurationVtYaKF', 
+                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC17reportSQLiteError03forD4Name06sqliteI4Code7useCase6configSbSS_s5Int64VSo05BMUseO10IdentifieraAA13ConfigurationVtYaKFTu', 
+                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC17reportSQLiteError03forD4Name06sqliteI4Code7useCaseSbSS_s5Int64VSo05BMUseO10IdentifieratYaKF', 
+                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC17reportSQLiteError03forD4Name06sqliteI4Code7useCaseSbSS_s5Int64VSo05BMUseO10IdentifieratYaKFTu', 
+                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC18reportUnknownError03forD4Name7useCase6configSbSS_So05BMUseM10IdentifieraAA13ConfigurationVtYaKF', 
+                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC18reportUnknownError03forD4Name7useCase6configSbSS_So05BMUseM10IdentifieraAA13ConfigurationVtYaKFTu', 
+                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC18reportUnknownError03forD4Name7useCaseSbSS_So05BMUseM10IdentifieratYaKF', 
+                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC18reportUnknownError03forD4Name7useCaseSbSS_So05BMUseM10IdentifieratYaKFTu', 
+                       '_$s24IntelligencePlatformCore7ViewXPCC6ServerC22accessTokenForFeatures11isSandboxed7useCase10completionySb_So05BMUseN10IdentifieraySo012GDViewAccessH0CSg_s5Error_pSgtXEtF', 
                        '_$s24IntelligencePlatformCore7ViewXPCC6ServerCAEycfC', '_$s24IntelligencePlatformCore7ViewXPCC6ServerCAEycfc', 
                        '_$s24IntelligencePlatformCore7ViewXPCC6ServerCMa', '_$s24IntelligencePlatformCore7ViewXPCC6ServerCMn', 
                        '_$s24IntelligencePlatformCore7ViewXPCC6ServerCMo', '_$s24IntelligencePlatformCore7ViewXPCC6ServerCN', 

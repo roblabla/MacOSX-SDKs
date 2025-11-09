@@ -279,3 +279,7 @@
 #import <AppKit/NSTextViewportLayoutController.h>
 #import <AppKit/NSTextAttachmentCell.h>
 #import <AppKit/NSAdaptiveImageGlyph.h>
+
+#import <AppKit/NSWritingToolsCoordinatorAnimationParameters.h>
+#import <AppKit/NSWritingToolsCoordinatorContext.h>
+#import <AppKit/NSWritingToolsCoordinator.h>

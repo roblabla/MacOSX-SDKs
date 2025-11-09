@@ -300,5 +300,6 @@ exports:
                        SCRCThreadedWeakLinkedObject._calledDealloc, SCRCThreadedWeakLinkedObject._referenceCount, 
                        SCRCThreadedWeakLinkedObject._releaseLock, SCRCUserDefaults._cursorTrackingEnabledCommand, 
                        SCRCUserDefaults._outputManager, SCRCUserDefaults._registry, 
-                       SCRCWeakReferenceContainer._weakReference ]
+                       SCRCUserDefaults._soundsTemporarilyMuted, SCRCUserDefaults._speakItemUnderMouseForcedForScreenSharing, 
+                       SCRCUserDefaults._trackingForcedForScreenSharing, SCRCWeakReferenceContainer._weakReference ]
 ...

@@ -83,6 +83,8 @@ exports:
                        '_$s21FaceTimeMacHelperCore0cD0P18windowEventHandleryAA06WindowG0O_SbSSXEtcSgvgTq', 
                        '_$s21FaceTimeMacHelperCore0cD0P18windowEventHandleryAA06WindowG0O_SbSSXEtcSgvsTj', 
                        '_$s21FaceTimeMacHelperCore0cD0P18windowEventHandleryAA06WindowG0O_SbSSXEtcSgvsTq', 
+                       '_$s21FaceTimeMacHelperCore0cD0P19closeContactPopoveryyFTj', 
+                       '_$s21FaceTimeMacHelperCore0cD0P19closeContactPopoveryyFTq', 
                        '_$s21FaceTimeMacHelperCore0cD0P19setStoplightsHidden_15sceneIdentifier8animatedySb_SSSbtFTj', 
                        '_$s21FaceTimeMacHelperCore0cD0P19setStoplightsHidden_15sceneIdentifier8animatedySb_SSSbtFTq', 
                        '_$s21FaceTimeMacHelperCore0cD0P19setWindowToDarkMode15sceneIdentifierySS_tFTj', 

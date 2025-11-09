@@ -103,6 +103,7 @@ exports:
                        '_$s16GameCenterUICore20GCUILocalizedStringsC35SETTINGS_ALL_FRIENDS_EMPTY_SUBTITLESSvgZ', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC35SETTINGS_ALL_FRIENDS_SECTION_HEADER5countSSSi_tFZ', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC36ONBOARDING_WHATSNEW_SUBTITLE_CRYSTALSSvgZ', 
+                       '_$s16GameCenterUICore20GCUILocalizedStringsC36SETTINGS_AU_SAFETY_LINK_BUTTON_TITLESSvgZ', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC36SETTINGS_FRIEND_REQUESTS_EMPTY_TITLESSvgZ', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC37CONTACTS_INTEGRATION_ONBOARDING_TITLESSvgZ', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC37FRIEND_REQUEST_MODULE_SENDER_SUBTITLESSvgZ', 

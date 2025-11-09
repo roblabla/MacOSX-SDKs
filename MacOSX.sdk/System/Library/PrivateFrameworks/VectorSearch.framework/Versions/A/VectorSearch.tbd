@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/VectorSearch.framework/Versions/A/VectorSearch'
-current-version: 28.3
+current-version: 33
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -81,6 +81,8 @@ exports:
                        '_$s12VectorSearch0A14DatabaseClientC6search02byA017stringIdentifiers16attributeFilters5limit8fullScan14includePayload14numberOfProbes9batchSize20numConcurrentReadersSayAA0aC6ResultVG10Foundation4DataV_SaySSGSayAA0aC6FilterVGSiS2bS2iSgSitKFTq', 
                        '_$s12VectorSearch0A14DatabaseClientC6search7byBatch11identifiers16attributeFilters5limit8fullScan14includePayload14numberOfProbes9batchSize20numConcurrentReadersSaySayAA0aC6ResultVGGSay10Foundation4DataVG_Says5Int64VGSayAA0aC6FilterVGSiS2bS2iSgSitKFTj', 
                        '_$s12VectorSearch0A14DatabaseClientC6search7byBatch11identifiers16attributeFilters5limit8fullScan14includePayload14numberOfProbes9batchSize20numConcurrentReadersSaySayAA0aC6ResultVGGSay10Foundation4DataVG_Says5Int64VGSayAA0aC6FilterVGSiS2bS2iSgSitKFTq', 
+                       '_$s12VectorSearch0A14DatabaseClientC6search7byBatch16assetIdentifiers16attributeFilters5limit8fullScan14includePayload14numberOfProbes9batchSize20numConcurrentReaders20projectionAttributesSaySayAA0aC6ResultVGGSay10Foundation4DataVG_SaySSGSayAA0aC6FilterVGSiS2bS2iSgSiSayAA0aC9AttributeVGtKFTj', 
+                       '_$s12VectorSearch0A14DatabaseClientC6search7byBatch16assetIdentifiers16attributeFilters5limit8fullScan14includePayload14numberOfProbes9batchSize20numConcurrentReaders20projectionAttributesSaySayAA0aC6ResultVGGSay10Foundation4DataVG_SaySSGSayAA0aC6FilterVGSiS2bS2iSgSiSayAA0aC9AttributeVGtKFTq', 
                        '_$s12VectorSearch0A14DatabaseClientC6search7byBatch16assetIdentifiers16attributeFilters5limit8fullScan14includePayload14numberOfProbes9batchSize20numConcurrentReadersSaySayAA0aC6ResultVGGSay10Foundation4DataVG_SaySSGSayAA0aC6FilterVGSiS2bS2iSgSitKFTj', 
                        '_$s12VectorSearch0A14DatabaseClientC6search7byBatch16assetIdentifiers16attributeFilters5limit8fullScan14includePayload14numberOfProbes9batchSize20numConcurrentReadersSaySayAA0aC6ResultVGGSay10Foundation4DataVG_SaySSGSayAA0aC6FilterVGSiS2bS2iSgSitKFTq', 
                        '_$s12VectorSearch0A14DatabaseClientC6search7byBatch16attributeFilters5limit14includePayload14numberOfProbes9batchSize20numConcurrentReadersSaySayAA0aC6ResultVGGSay10Foundation4DataVG_SayAA0aC6FilterVGSiSbS2iSgSitKFTj', 
@@ -168,6 +170,8 @@ exports:
                        '_$s12VectorSearch0A14DatabaseMetricON', '_$s12VectorSearch0A14DatabaseMetricOSEAAMc', 
                        '_$s12VectorSearch0A14DatabaseMetricOSHAAMc', '_$s12VectorSearch0A14DatabaseMetricOSQAAMc', 
                        '_$s12VectorSearch0A14DatabaseMetricOSYAAMc', '_$s12VectorSearch0A14DatabaseMetricOSeAAMc', 
+                       '_$s12VectorSearch0A14DatabaseResultV10attributesSayAA0C5ValueOGvg', 
+                       '_$s12VectorSearch0A14DatabaseResultV10attributesSayAA0C5ValueOGvpMV', 
                        '_$s12VectorSearch0A14DatabaseResultV11metricValueSfvg', '_$s12VectorSearch0A14DatabaseResultV11metricValueSfvpMV', 
                        '_$s12VectorSearch0A14DatabaseResultV15assetIdentifiers5Int64Vvg', 
                        '_$s12VectorSearch0A14DatabaseResultV15assetIdentifiers5Int64VvpMV', 

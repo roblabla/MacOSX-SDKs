@@ -285,8 +285,8 @@ struct chroot_args {
 	char path_l_[PADL_(user_addr_t)]; user_addr_t path; char path_r_[PADR_(user_addr_t)];
 };
 struct msync_args {
-	char addr_l_[PADL_(user_addr_t)]; user_addr_t addr; char addr_r_[PADR_(user_addr_t)];
-	char len_l_[PADL_(user_size_t)]; user_size_t len; char len_r_[PADR_(user_size_t)];
+	char addr_l_[PADL_(user_addr_ut)]; user_addr_ut addr; char addr_r_[PADR_(user_addr_ut)];
+	char len_l_[PADL_(user_size_ut)]; user_size_ut len; char len_r_[PADR_(user_size_ut)];
 	char flags_l_[PADL_(int)]; int flags; char flags_r_[PADR_(int)];
 };
 #if CONFIG_VFORK
@@ -300,18 +300,18 @@ struct munmap_args {
 	char len_l_[PADL_(user_size_ut)]; user_size_ut len; char len_r_[PADR_(user_size_ut)];
 };
 struct mprotect_args {
-	char addr_l_[PADL_(user_addr_t)]; user_addr_t addr; char addr_r_[PADR_(user_addr_t)];
-	char len_l_[PADL_(user_size_t)]; user_size_t len; char len_r_[PADR_(user_size_t)];
+	char addr_l_[PADL_(user_addr_ut)]; user_addr_ut addr; char addr_r_[PADR_(user_addr_ut)];
+	char len_l_[PADL_(user_size_ut)]; user_size_ut len; char len_r_[PADR_(user_size_ut)];
 	char prot_l_[PADL_(int)]; int prot; char prot_r_[PADR_(int)];
 };
 struct madvise_args {
-	char addr_l_[PADL_(user_addr_t)]; user_addr_t addr; char addr_r_[PADR_(user_addr_t)];
-	char len_l_[PADL_(user_size_t)]; user_size_t len; char len_r_[PADR_(user_size_t)];
+	char addr_l_[PADL_(user_addr_ut)]; user_addr_ut addr; char addr_r_[PADR_(user_addr_ut)];
+	char len_l_[PADL_(user_size_ut)]; user_size_ut len; char len_r_[PADR_(user_size_ut)];
 	char behav_l_[PADL_(int)]; int behav; char behav_r_[PADR_(int)];
 };
 struct mincore_args {
-	char addr_l_[PADL_(user_addr_t)]; user_addr_t addr; char addr_r_[PADR_(user_addr_t)];
-	char len_l_[PADL_(user_size_t)]; user_size_t len; char len_r_[PADR_(user_size_t)];
+	char addr_l_[PADL_(user_addr_ut)]; user_addr_ut addr; char addr_r_[PADR_(user_addr_ut)];
+	char len_l_[PADL_(user_size_ut)]; user_size_ut len; char len_r_[PADR_(user_size_ut)];
 	char vec_l_[PADL_(user_addr_t)]; user_addr_t vec; char vec_r_[PADR_(user_addr_t)];
 };
 struct getgroups_args {
@@ -894,8 +894,8 @@ struct fhopen_args {
 #else
 #endif
 struct minherit_args {
-	char addr_l_[PADL_(user_addr_t)]; user_addr_t addr; char addr_r_[PADR_(user_addr_t)];
-	char len_l_[PADL_(user_size_t)]; user_size_t len; char len_r_[PADR_(user_size_t)];
+	char addr_l_[PADL_(user_addr_ut)]; user_addr_ut addr; char addr_r_[PADR_(user_addr_ut)];
+	char len_l_[PADL_(user_size_ut)]; user_size_ut len; char len_r_[PADR_(user_size_ut)];
 	char inherit_l_[PADL_(int)]; int inherit; char inherit_r_[PADR_(int)];
 };
 #if SYSV_SEM
@@ -1636,8 +1636,8 @@ struct accept_nocancel_args {
 #else
 #endif /* SOCKETS */
 struct msync_nocancel_args {
-	char addr_l_[PADL_(user_addr_t)]; user_addr_t addr; char addr_r_[PADR_(user_addr_t)];
-	char len_l_[PADL_(user_size_t)]; user_size_t len; char len_r_[PADR_(user_size_t)];
+	char addr_l_[PADL_(user_addr_ut)]; user_addr_ut addr; char addr_r_[PADR_(user_addr_ut)];
+	char len_l_[PADL_(user_size_ut)]; user_size_ut len; char len_r_[PADR_(user_size_ut)];
 	char flags_l_[PADL_(int)]; int flags; char flags_r_[PADR_(int)];
 };
 struct fcntl_nocancel_args {
@@ -2416,7 +2416,7 @@ struct shared_region_map_and_slide_2_np_args {
 	char files_count_l_[PADL_(uint32_t)]; uint32_t files_count; char files_count_r_[PADR_(uint32_t)];
 	char files_l_[PADL_(user_addr_t)]; user_addr_t files; char files_r_[PADR_(user_addr_t)];
 	char mappings_count_l_[PADL_(uint32_t)]; uint32_t mappings_count; char mappings_count_r_[PADR_(uint32_t)];
-	char mappings_l_[PADL_(user_addr_t)]; user_addr_t mappings; char mappings_r_[PADR_(user_addr_t)];
+	char mappings_u_l_[PADL_(user_addr_t)]; user_addr_t mappings_u; char mappings_u_r_[PADR_(user_addr_t)];
 };
 struct pivot_root_args {
 	char new_rootfs_path_before_l_[PADL_(user_addr_t)]; user_addr_t new_rootfs_path_before; char new_rootfs_path_before_r_[PADR_(user_addr_t)];

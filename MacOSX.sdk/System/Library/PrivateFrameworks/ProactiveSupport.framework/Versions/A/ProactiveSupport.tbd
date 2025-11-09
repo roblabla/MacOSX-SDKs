@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ProactiveSupport.framework/Versions/A/ProactiveSupport'
-current-version: 401
+current-version: 405.0.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -84,8 +84,7 @@ exports:
                        _PASInternPool, _PASKVOHandler, _PASKVOHandlerTask, _PASLPArray, 
                        _PASLPArrayContext, _PASLPDictionary, _PASLPDictionaryContext, 
                        _PASLPDictionaryEnumerator, _PASLPReaderBinaryPlist, _PASLPReaderV1, 
-                       _PASLPWriterV1, _PASLRUCache, _PASLRUCacheData, _PASLanguageDetection, 
-                       _PASLanguageDetectionNLLanguageIdentifierWrapper, _PASLazyArrayBase, 
+                       _PASLPWriterV1, _PASLRUCache, _PASLRUCacheData, _PASLazyArrayBase, 
                        _PASLazyImmortalResult, _PASLazyPlist, _PASLazyPlistCorruptException, 
                        _PASLazyPlistWithBPlistSupport, _PASLazyPurgeableResult, _PASLazyResult, 
                        _PASLevenshtein, _PASLock, _PASLowValueCardinalityMutableDictionary, 
@@ -118,9 +117,9 @@ exports:
                        _PASCoalescingTimerGuardedData.nextCoalescedEventTime, _PASCoalescingTimerGuardedData.nonCoalescingSources, 
                        _PASDatabaseMigrationContext.db, _PASDatabaseMigrationContext.migrations, 
                        _PASDatabaseMigrationContext.object, _PASDatabaseMigrationContext.version, 
-                       _PASLRUCacheData.items, _PASLRUCacheData.keysMRU, _PASLanguageDetectionNLLanguageIdentifierWrapper._languageIdentifier, 
-                       _PASLazyResult._block, _PASLazyResult._data, _PASLazyResult._lock, 
-                       _PASLowValueCardinalityMutableDictionary._count, _PASLowValueCardinalityMutableDictionary._objectsAndKeys, 
+                       _PASLRUCacheData.items, _PASLRUCacheData.keysMRU, _PASLazyResult._block, 
+                       _PASLazyResult._data, _PASLazyResult._lock, _PASLowValueCardinalityMutableDictionary._count, 
+                       _PASLowValueCardinalityMutableDictionary._objectsAndKeys, 
                        _PASNotificationDescriptor.isCanceled, _PASPosixPipeContext._queue, 
                        _PASPosixPipeContext._readChannel, _PASPosixPipeContext._stop, 
                        _PASPosixPipeContext._writeHandle, _PASSqliteDatabase._currentExclusivity, 

@@ -16,7 +16,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class BEScrollView, BEScrollViewScrollUpdate;
 
 
-BROWSERENGINE_EXPORT API_AVAILABLE(ios(17.4)) NS_SWIFT_UI_ACTOR
+BROWSERENGINE_EXPORT API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol BEScrollViewDelegate <UIScrollViewDelegate>
 
 @optional
@@ -43,7 +43,7 @@ BROWSERENGINE_EXPORT API_AVAILABLE(ios(17.4)) NS_SWIFT_UI_ACTOR
 
 
 // A scroll view with features specific to browsers.
-BROWSERENGINE_EXPORT API_AVAILABLE(ios(17.4)) NS_SWIFT_UI_ACTOR
+BROWSERENGINE_EXPORT API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface BEScrollView : UIScrollView
 
 @property (nonatomic, weak, nullable) id<BEScrollViewDelegate> delegate;

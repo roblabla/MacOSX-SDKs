@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagement.framework/Versions/A/DeviceManagement'
-current-version: 220.1.1
+current-version: 221.2.6
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -107,8 +107,7 @@ exports:
                        _DMFDeviceVolumeKey, _DMFDeviceWiFiMACKey, _DMFDeviceXsanConfigurationKey, 
                        _DMFDeviceiTunesStoreAccountHashKey, _DMFDeviceiTunesStoreAccountIsActiveKey, 
                        _DMFEffectivePolicyTypeApplication, _DMFEffectivePolicyTypeApplicationCategory, 
-                       _DMFEffectivePolicyTypeCategory, _DMFEffectivePolicyTypeDowntime, 
-                       _DMFEffectivePolicyTypeShield, _DMFEffectivePolicyTypeWeb, 
+                       _DMFEffectivePolicyTypeCategory, _DMFEffectivePolicyTypeWeb, 
                        _DMFEffectivePolicyTypeWebCategory, _DMFEffectivePolicyTypeiCloudAccountLogout, 
                        _DMFEmergencyModeChangedNotification, _DMFEmergencyModeLog, 
                        _DMFEmergencyModeMachServiceName, _DMFEntitlementsApplicationIdentifierKey, 
@@ -214,7 +213,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst'
-current-version: 11.3
+current-version: 11.5
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

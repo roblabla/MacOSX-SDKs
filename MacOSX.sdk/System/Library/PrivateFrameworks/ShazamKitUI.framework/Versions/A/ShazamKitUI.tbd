@@ -39,6 +39,8 @@ exports:
                        '_$s11ShazamKitUI17LocationViewModelC7addressSSSgvpMV', '_$s11ShazamKitUI17LocationViewModelC7addressSSSgvs', 
                        '_$s11ShazamKitUI17LocationViewModelC8location07artworkE0ACSo10CLLocationC_05SwiftC003AnyE0VSgtcfC', 
                        '_$s11ShazamKitUI17LocationViewModelC8location11albumArtURLACSo10CLLocationC_10Foundation0J0VSgtcfC', 
+                       '_$s11ShazamKitUI17LocationViewModelC8locationSo10CLLocationCvg', 
+                       '_$s11ShazamKitUI17LocationViewModelC8locationSo10CLLocationCvpMV', 
                        '_$s11ShazamKitUI17LocationViewModelCMa', '_$s11ShazamKitUI17LocationViewModelCMm', 
                        '_$s11ShazamKitUI17LocationViewModelCMn', '_$s11ShazamKitUI17LocationViewModelCMo', 
                        '_$s11ShazamKitUI17LocationViewModelCMu', '_$s11ShazamKitUI17LocationViewModelCN', 
@@ -103,6 +105,6 @@ exports:
                        '_$s11ShazamKitUI23AmbientMatchingFlowViewV9viewModelAA0efgI0Cvs', 
                        '_$s11ShazamKitUI23AmbientMatchingFlowViewVMa', '_$s11ShazamKitUI23AmbientMatchingFlowViewVMn', 
                        '_$s11ShazamKitUI23AmbientMatchingFlowViewVN', '_$s9ShazamKit9SHLibraryC0aB2UIE7presentyyYaKFZ', 
-                       '_$s9ShazamKit9SHLibraryC0aB2UIE7presentyyYaKFZTu', '_$sSo19SHMediaLibraryTrackCs12Identifiable11ShazamKitUIMc' ]
+                       '_$s9ShazamKit9SHLibraryC0aB2UIE7presentyyYaKFZTu' ]
     objc-classes:    [ SHListeningLayer ]
 ...

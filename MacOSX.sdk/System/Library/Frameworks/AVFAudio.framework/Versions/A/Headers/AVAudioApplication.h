@@ -28,6 +28,26 @@ typedef NS_ENUM(NSInteger, AVAudioApplicationRecordPermission) {
 	AVAudioApplicationRecordPermissionGranted = 'grnt'
 } NS_SWIFT_NAME(AVAudioApplication.recordPermission);
 
+/*!
+    @enum AVAudioApplicationMicrophoneInjectionPermission
+    @brief    These are the values returned by microphoneInjectionPermission.
+    @var    AVAudioApplicationMicrophoneInjectionPermissionServiceDisabled
+    The user has disabled this service for all apps.
+    @var    AVAudioApplicationMicrophoneInjectionUndetermined
+    The user has not yet been asked for permission.
+    @var    AVAudioApplicationMicrophoneInjectionPermissionDenied
+    The user has been asked and has denied permission.
+    @var    AVAudioApplicationMicrophoneInjectionPermissionGranted
+    The user has been asked and has granted permission.
+
+    Introduced: ios(18.2) visionos(2.2)
+*/
+typedef NS_ENUM(NSInteger, AVAudioApplicationMicrophoneInjectionPermission) {
+    AVAudioApplicationMicrophoneInjectionPermissionServiceDisabled = 'srds',
+    AVAudioApplicationMicrophoneInjectionPermissionUndetermined    = 'undt',
+    AVAudioApplicationMicrophoneInjectionPermissionDenied          = 'deny',
+    AVAudioApplicationMicrophoneInjectionPermissionGranted         = 'grnt'
+} NS_SWIFT_NAME(AVAudioApplication.MicrophoneInjectionPermission);
 
 /*!
 	@brief	Notification sent to registered listeners when the application's input is muted
@@ -97,6 +117,21 @@ API_AVAILABLE(ios(17.0), watchos(10.0), tvos(17.0), macos(14.0))
 	granted. Note that the block may be called in a different thread context.
 */
 + (void)requestRecordPermissionWithCompletionHandler:(void (^)(BOOL granted))response API_AVAILABLE(ios(17.0), watchos(10.0), tvos(17.0), macos(14.0));
+
+/// Returns an enum indicating whether the user has granted or denied permission to inject audio into input,
+/// or has not been asked
+@property(readonly) AVAudioApplicationMicrophoneInjectionPermission microphoneInjectionPermission API_AVAILABLE(ios(18.2), visionos(2.2)) API_UNAVAILABLE(tvos, watchos, macos);
+
+/*!
+    @brief Checks to see if calling process has permission to inject audio to input stream.
+
+    The 'response' block will be called immediately if permission has already been granted or
+    denied or if the service is disabled by the user.  Otherwise, it presents a dialog to notify the
+    user and allow them to choose, and calls the block once the UI has been dismissed.
+    'granted' indicates whether permission has been granted. Note that the block may be
+    called in a different thread context.
+*/
++ (void)requestMicrophoneInjectionPermissionWithCompletionHandler:(void (^)(AVAudioApplicationMicrophoneInjectionPermission permission))response API_AVAILABLE(ios(18.2), visionos(2.2)) API_UNAVAILABLE(tvos, watchos, macos);
 
 @end
 

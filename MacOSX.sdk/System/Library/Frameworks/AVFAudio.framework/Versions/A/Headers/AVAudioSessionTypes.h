@@ -650,6 +650,27 @@ typedef NS_ENUM(NSInteger, AVAudioSessionRenderingMode) {
 	AVAudioSessionRenderingModeDolbyAtmos              = 5,
 } NS_SWIFT_NAME(AVAudioSession.RenderingMode);
 
+/*!
+    @enum AVAudioSessionMicrophoneInjectionMode
+    @brief Various modes to inject audio coming from a session to another app’s input stream
+ 
+    Applications can state their intent to mix locally generated audio, which should consist primarily of
+    synthesized speech, to another app's input stream. This feature is intended to be used by accessibility apps
+    implementing augmentative and alternative communication systems that enable users with disabilities to
+    communicate with synthesized speech. When input is muted, microphone injection will also be muted.
+ 
+    @var  AVAudioSessionMicrophoneInjectionModeNone
+    @var  AVAudioSessionMicrophoneInjectionModeSpokenAudio
+ 
+*/
+typedef NS_ENUM(NSInteger, AVAudioSessionMicrophoneInjectionMode) {
+    /// Default state, microphone injection is not preferred
+    AVAudioSessionMicrophoneInjectionModeNone = 0,
+    
+    /// Inject Spoken Audio, like synthesized speech, with microphone audio
+    AVAudioSessionMicrophoneInjectionModeSpokenAudio = 1,
+} NS_SWIFT_NAME(AVAudioSession.MicrophoneInjectionMode);
+
 #endif // AudioSession_AVAudioSessionTypes_h
 #else
 #include <AudioSession/AVAudioSessionTypes.h>

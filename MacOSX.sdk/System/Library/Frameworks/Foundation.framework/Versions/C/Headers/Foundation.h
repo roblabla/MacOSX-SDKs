@@ -24,7 +24,6 @@
 #import <Foundation/NSMassFormatter.h>
 #import <Foundation/NSLengthFormatter.h>
 #import <Foundation/NSEnergyFormatter.h>
-#import <Foundation/NSMeasurement.h>
 #import <Foundation/NSMeasurementFormatter.h>
 #import <Foundation/NSPersonNameComponents.h>
 #import <Foundation/NSPersonNameComponentsFormatter.h>

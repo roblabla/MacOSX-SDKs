@@ -4,7 +4,7 @@ targets:         [ arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AudioServerDriverTransports_IOA2.framework/Versions/A/AudioServerDriverTransports_IOA2'
 exports:
   - targets:         [ arm64-macos, arm64e-macos ]
-    symbols:         [ __ZN12CADeprecated15CADispatchQueue11EventSource6RetainEv, 
+    symbols:         [ _ASDTIOA2LogType, __ZN12CADeprecated15CADispatchQueue11EventSource6RetainEv, 
                        __ZN12CADeprecated15CADispatchQueue11EventSource7ReleaseEv, 
                        __ZN12CADeprecated15CADispatchQueue13Dispatch_MainEbPvPFvS1_E, 
                        __ZN12CADeprecated15CADispatchQueue13Dispatch_MainEbU13block_pointerFvvE, 
@@ -241,6 +241,7 @@ exports:
                        __ZNK4ASDT14IOA2UserClient25SupportsClientDescriptionEv, __ZNK4ASDT14IOA2UserClient27CopyStreamDictionaryByIndexEbj, 
                        __ZNK4ASDT14IOA2UserClient27GetNumberDataExchangeBlocksEv, 
                        __ZNK4ASDT14IOA2UserClient28CopyDefaultChannelLayoutDataEb, 
+                       __ZNK4ASDT14IOA2UserClient28SupportsInputStreamInjectionEv, 
                        __ZNK4ASDT14IOA2UserClient35CopyDataExchangeBlockDictionaryByIDEj, 
                        __ZNK4ASDT14IOA2UserClient38CopyDataExchangeBlockDictionaryByIndexEj, 
                        __ZNK4ASDT14IOA2UserClient9IsRunningEv, __ZNK4ASDT8UCObject11HasPropertyEPK10__CFString, 
@@ -266,20 +267,21 @@ exports:
                        __ZTSN12CADeprecated7CAMutexE, __ZTSN4ASDT12IOA2UCDeviceE, 
                        __ZTSN4ASDT8UCObjectE, __ZTVN12CADeprecated15CADispatchQueueE, 
                        __ZTVN12CADeprecated7CAMutexE, __ZTVN4ASDT12IOA2UCDeviceE, 
-                       __ZTVN4ASDT8UCObjectE, _kASDTIOA2ConfigKeyExclavesInputBufferName, 
-                       _kASDTIOA2ConfigKeyIsolatedInputUseCaseID, _kASDTIOA2ControlPropertySelectorInfoKeyDataType, 
-                       _kASDTIOA2ControlPropertySelectorInfoKeySelector, _kASDTIOA2DeviceKeyDeviceUID, 
-                       _kASDTIOA2DeviceKeyIsPrivate, _kASDTIOA2HeadsetInfoPropertyAddress, 
-                       _kASDTIOA2LegacyDeviceKeyDeviceUID, _kASDTIOA2LegacyDeviceKeyIsPrivate ]
+                       __ZTVN4ASDT8UCObjectE, _kASDTIOA2ConfigKeyExclavesInjectionBufferName, 
+                       _kASDTIOA2ConfigKeyExclavesInputBufferName, _kASDTIOA2ConfigKeyIsolatedInputUseCaseID, 
+                       _kASDTIOA2ControlPropertySelectorInfoKeyDataType, _kASDTIOA2ControlPropertySelectorInfoKeySelector, 
+                       _kASDTIOA2DeviceKeyDeviceUID, _kASDTIOA2DeviceKeyIsPrivate, 
+                       _kASDTIOA2HeadsetInfoPropertyAddress, _kASDTIOA2LegacyDeviceKeyDeviceUID, 
+                       _kASDTIOA2LegacyDeviceKeyIsPrivate ]
     objc-classes:    [ ASDTIOA2BlockControl, ASDTIOA2BooleanControl, ASDTIOA2Control, 
                        ASDTIOA2DefaultChannelLayout, ASDTIOA2Device, ASDTIOA2DeviceFactory, 
-                       ASDTIOA2HeadsetInfoProperty, ASDTIOA2JackControl, ASDTIOA2LegacyBooleanControl, 
-                       ASDTIOA2LegacyControl, ASDTIOA2LegacyDevice, ASDTIOA2LegacyHeadsetInfoProperty, 
-                       ASDTIOA2LegacyJackControl, ASDTIOA2LegacyLevelControl, ASDTIOA2LegacyMuteControl, 
-                       ASDTIOA2LegacyOffsetStream, ASDTIOA2LegacyPhantomPowerControl, 
-                       ASDTIOA2LegacyPhaseInvertControl, ASDTIOA2LegacySelectorControl, 
-                       ASDTIOA2LegacyStream, ASDTIOA2LevelControl, ASDTIOA2MuteControl, 
-                       ASDTIOA2OffsetStream, ASDTIOA2PhantomPowerControl, ASDTIOA2PhaseInvertControl, 
-                       ASDTIOA2SelectorControl, ASDTIOA2ServiceManager, ASDTIOA2SliderControl, 
-                       ASDTIOA2Stream ]
+                       ASDTIOA2HeadsetInfoProperty, ASDTIOA2InjectionStream, ASDTIOA2JackControl, 
+                       ASDTIOA2LegacyBooleanControl, ASDTIOA2LegacyControl, ASDTIOA2LegacyDevice, 
+                       ASDTIOA2LegacyHeadsetInfoProperty, ASDTIOA2LegacyJackControl, 
+                       ASDTIOA2LegacyLevelControl, ASDTIOA2LegacyMuteControl, ASDTIOA2LegacyOffsetStream, 
+                       ASDTIOA2LegacyPhantomPowerControl, ASDTIOA2LegacyPhaseInvertControl, 
+                       ASDTIOA2LegacySelectorControl, ASDTIOA2LegacyStream, ASDTIOA2LevelControl, 
+                       ASDTIOA2MuteControl, ASDTIOA2OffsetStream, ASDTIOA2PhantomPowerControl, 
+                       ASDTIOA2PhaseInvertControl, ASDTIOA2SelectorControl, ASDTIOA2ServiceManager, 
+                       ASDTIOA2SliderControl, ASDTIOA2Stream ]
 ...

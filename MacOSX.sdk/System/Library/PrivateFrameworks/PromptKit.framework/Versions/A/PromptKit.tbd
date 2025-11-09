@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PromptKit.framework/Versions/A/PromptKit'
-current-version: 145.255.2
+current-version: 150.255
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -176,7 +176,9 @@ exports:
                        '_$s9PromptKit0A0V11RenderErrorON', '_$s9PromptKit0A0V11RenderErrorOs0D0AAMc', 
                        '_$s9PromptKit0A0V13promptVersionAC0aD0VvM', '_$s9PromptKit0A0V13promptVersionAC0aD0Vvg', 
                        '_$s9PromptKit0A0V13promptVersionAC0aD0VvpMV', '_$s9PromptKit0A0V13promptVersionAC0aD0Vvs', 
-                       '_$s9PromptKit0A0V13stringLiteralACSS_tcfC', '_$s9PromptKit0A0V19StringInterpolationV06appendD0_8priority7privacyy10Foundation4DateV_SiSgAC9ComponentV7PrivacyOSgtF', 
+                       '_$s9PromptKit0A0V13stringLiteralACSS_tcfC', '_$s9PromptKit0A0V16transformAndBind16bindingVariables18includeAttachments22customDataTransformersACSDySSAA0A25ComponentValueConvertible_pG_SbSayAA0amn6CustomK11Transformer_pGtYaKF', 
+                       '_$s9PromptKit0A0V16transformAndBind16bindingVariables18includeAttachments22customDataTransformersACSDySSAA0A25ComponentValueConvertible_pG_SbSayAA0amn6CustomK11Transformer_pGtYaKFTu', 
+                       '_$s9PromptKit0A0V19StringInterpolationV06appendD0_8priority7privacyy10Foundation4DateV_SiSgAC9ComponentV7PrivacyOSgtF', 
                        '_$s9PromptKit0A0V19StringInterpolationV06appendD0_8priority7privacyySS_SiSgAC9ComponentV7PrivacyOSgtF', 
                        '_$s9PromptKit0A0V19StringInterpolationV06appendD0_8priority7privacyySd_SiSgAC9ComponentV7PrivacyOSgtF', 
                        '_$s9PromptKit0A0V19StringInterpolationV06appendD0_8priority7privacyySi_SiSgAC9ComponentV7PrivacyOSgtF', 
@@ -376,12 +378,14 @@ exports:
                        '_$s9PromptKit10RetrievalsVyxGAA0A29RetrievalComponentConvertibleAAWP', 
                        '_$s9PromptKit12SpecialTokenV013overestimatedD5CountSiSgvg', 
                        '_$s9PromptKit12SpecialTokenV013overestimatedD5CountSiSgvpMV', 
+                       '_$s9PromptKit12SpecialTokenV10identifier013overestimatedD5Count8instanceACSS_SiSgSSSgtcfC', 
                        '_$s9PromptKit12SpecialTokenV10identifier013overestimatedD5CountACSS_SitcfC', 
                        '_$s9PromptKit12SpecialTokenV10identifierACSS_tcfC', '_$s9PromptKit12SpecialTokenV10identifierSSvg', 
                        '_$s9PromptKit12SpecialTokenV10identifierSSvpMV', '_$s9PromptKit12SpecialTokenV2eeoiySbAC_ACtFZ', 
                        '_$s9PromptKit12SpecialTokenV4fromACs7Decoder_p_tKcfC', '_$s9PromptKit12SpecialTokenV4hash4intoys6HasherVz_tF', 
                        '_$s9PromptKit12SpecialTokenV6encode2toys7Encoder_p_tKF', 
                        '_$s9PromptKit12SpecialTokenV7toValueAA0A0V9ComponentV0F0OyF', 
+                       '_$s9PromptKit12SpecialTokenV8instanceSSSgvg', '_$s9PromptKit12SpecialTokenV8instanceSSSgvpMV', 
                        '_$s9PromptKit12SpecialTokenV9hashValueSivg', '_$s9PromptKit12SpecialTokenV9hashValueSivpMV', 
                        '_$s9PromptKit12SpecialTokenVAA0A25ComponentValueConvertibleAAMc', 
                        '_$s9PromptKit12SpecialTokenVAA0A25ComponentValueConvertibleAAWP', 

@@ -2,6 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SmartRepliesUI.framework/Versions/A/SmartRepliesUI'
+current-version: 73.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -12,9 +13,6 @@ exports:
                        '_$s14SmartRepliesUI07SRSmartB14ActionCardViewV4bodyQrvpQOMQ', 
                        '_$s14SmartRepliesUI07SRSmartB14ActionCardViewV8metadataAC0aB00dbE8MetadataC_tcfC', 
                        '_$s14SmartRepliesUI07SRSmartB14ActionCardViewVMa', '_$s14SmartRepliesUI07SRSmartB14ActionCardViewVMn', 
-                       '_$s14SmartRepliesUI07SRSmartB14ActionCardViewVN', '_$s14SmartRepliesUI15LocalizedString_7comment9tableNameS2S_S2SSgtF', 
-                       '_$s14SmartRepliesUI15LocalizedString_7comment9tableNameS2S_S2SSgtFfA0_', 
-                       '_$sSo8NSBundleC14SmartRepliesUIE7currentABvau', '_$sSo8NSBundleC14SmartRepliesUIE7currentABvgZ', 
-                       '_$sSo8NSBundleC14SmartRepliesUIE7currentABvpZ', _SmartRepliesUIVersionNumber, 
+                       '_$s14SmartRepliesUI07SRSmartB14ActionCardViewVN', _SmartRepliesUIVersionNumber, 
                        _SmartRepliesUIVersionString ]
 ...

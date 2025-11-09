@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/EventKit.framework/Versions/A/EventKit'
-current-version: 1901.2.3
+current-version: 1902.3.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -147,10 +147,10 @@ exports:
                        __EKNotificationsLoadedNotification, __EKReminderURLHost, 
                        __EKReminderURLScheme, __bitmaskContainsOption, __bitmaskExclusivelyMatchesOption, 
                        _gondolaDefaultExtensionName, _identityIsEqualToIdentity, 
-                       _kAllAllowConstraintFlags, _kEKAccountErrorDomain, _kEKAccountErrorUserInfoAccountNameKey, 
-                       _kEKCalendarErrorDomain, _kEKCalendarItemErrorCalendarItemKey, 
-                       _kEKCalendarItemErrorCalendarItemNameKey, _kEKCalendarItemErrorCalendarNameKey, 
-                       _kEKCalendarItemErrorDomain ]
+                       _kAllAllowConstraintFlags, _kCalDefaultAlarmChangedNote, _kEKAccountErrorDomain, 
+                       _kEKAccountErrorUserInfoAccountNameKey, _kEKCalendarErrorDomain, 
+                       _kEKCalendarItemErrorCalendarItemKey, _kEKCalendarItemErrorCalendarItemNameKey, 
+                       _kEKCalendarItemErrorCalendarNameKey, _kEKCalendarItemErrorDomain ]
     objc-classes:    [ CGColorWrapper, EKAccountRefresher, EKAlarm, EKAlarmChange, 
                        EKAlarmUtils, EKAppProtectionUtils, EKAttachment, EKAttachmentChange, 
                        EKAttendee, EKAttendeeChange, EKAutocompletePendingSearch, 

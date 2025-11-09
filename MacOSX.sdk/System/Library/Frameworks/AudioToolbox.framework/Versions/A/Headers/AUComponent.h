@@ -798,6 +798,9 @@ typedef CF_OPTIONS(UInt32, AudioUnitRenderActionFlags)
 					deprecated Component Manager. A host application should use the API functions
 					AudioComponentInstantiate or AudioComponentInstanceNew when rebuilding
 					against the macOS 11 or later SDK.
+	@constant		kAudioUnitErr_MultipleVoiceProcessors
+					On some platforms, this error is returned when a client attempts to initialize
+					a voice processor instance while another is initialized.
 */
 CF_ENUM(OSStatus) {
 	kAudioUnitErr_InvalidProperty					= -10879,
@@ -827,7 +830,8 @@ CF_ENUM(OSStatus) {
 	kAudioUnitErr_InvalidParameterValue				= -66743,
 	kAudioUnitErr_InvalidFilePath					= -66742,
 	kAudioUnitErr_MissingKey						= -66741,
-	kAudioUnitErr_ComponentManagerNotSupported		= -66740
+	kAudioUnitErr_ComponentManagerNotSupported		= -66740,
+	kAudioUnitErr_MultipleVoiceProcessors			= -66635
 };
 
 

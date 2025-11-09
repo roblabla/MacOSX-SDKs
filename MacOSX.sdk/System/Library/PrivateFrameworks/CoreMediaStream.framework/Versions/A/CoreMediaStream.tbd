@@ -3,12 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreMediaStream.framework/Versions/A/CoreMediaStream'
-current-version: 711.0.180
+current-version: 721.0.150
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _CoreMediaStreamVersionNumber, _CoreMediaStreamVersionString, 
-                       _CreateDirectoryAtPathIfNonNil, _MPSStateRequestReadFrom, 
+    symbols:         [ _CreateDirectoryAtPathIfNonNil, _MPSStateRequestReadFrom, 
                        _MPSStateResponseReadFrom, _MSASInitialize, _MSASPlatform, 
                        _MSASPlatformIsDebugLoggingEnabled, _MSCFCopyLocalizedString, 
                        _MSCFCreateLocalizedFormat, _MSCoreMediaStreamInitialize, 

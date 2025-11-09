@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/CoreUI'
-current-version: 916.1
+current-version: 917.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -395,13 +395,13 @@ exports:
                        _kCUIRendererAllowsSystemTintColors, _kCUIRendererAllowsVibrancyKey, 
                        _kCUIRendererAlternateSystemThemeKey, _kCUIRendererAlternateSystemThemeWhiteControls, 
                        _kCUIRendererBundleResourceName, _kCUIRendererDefaultBlendModeKey, 
-                       _kCUIRendererSupportsBrightnessAdjustmentsKey, _kCUIRendererSupportsWhitePointAdjustmentsKey, 
-                       _kCUIRendererThemeFileBundleIdentifierKey, _kCUIRendererThemeFileNameKey, 
-                       _kCUIRendererThemeFileURLKey, _kCUIRequestedAppearanceNamesKey, 
-                       _kCUIScaleKey, _kCUIScrollArrowDown, _kCUIScrollArrowInsideDown, 
-                       _kCUIScrollArrowInsideLeft, _kCUIScrollArrowInsideRight, _kCUIScrollArrowInsideUp, 
-                       _kCUIScrollArrowLeft, _kCUIScrollArrowRight, _kCUIScrollArrowUp, 
-                       _kCUIScrollThumb, _kCUIScrollTrack, _kCUIScrollTrackDown, 
+                       _kCUIRendererMaximumScaleFactor, _kCUIRendererSupportsBrightnessAdjustmentsKey, 
+                       _kCUIRendererSupportsWhitePointAdjustmentsKey, _kCUIRendererThemeFileBundleIdentifierKey, 
+                       _kCUIRendererThemeFileNameKey, _kCUIRendererThemeFileURLKey, 
+                       _kCUIRequestedAppearanceNamesKey, _kCUIScaleKey, _kCUIScrollArrowDown, 
+                       _kCUIScrollArrowInsideDown, _kCUIScrollArrowInsideLeft, _kCUIScrollArrowInsideRight, 
+                       _kCUIScrollArrowInsideUp, _kCUIScrollArrowLeft, _kCUIScrollArrowRight, 
+                       _kCUIScrollArrowUp, _kCUIScrollThumb, _kCUIScrollTrack, _kCUIScrollTrackDown, 
                        _kCUIScrollTrackLeft, _kCUIScrollTrackRight, _kCUIScrollTrackUp, 
                        _kCUISegmentLeadingSeparatorKey, _kCUISegmentLeadingSeparatorTypeKey, 
                        _kCUISegmentPositionFirst, _kCUISegmentPositionLast, _kCUISegmentPositionMiddle, 

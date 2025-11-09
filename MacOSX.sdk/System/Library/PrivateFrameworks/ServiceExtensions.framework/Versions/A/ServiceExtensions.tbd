@@ -10,8 +10,6 @@ reexported-libraries:
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s17ServiceExtensions010NetworkingA9ExtensionMp', '_$s17ServiceExtensions010NetworkingA9ExtensionP0D10Foundation03AppD0Tb', 
-                       '_$s17ServiceExtensions010NetworkingA9ExtensionP26_backgroundTransferManagerAA010BackgroundfG0CvgTj', 
-                       '_$s17ServiceExtensions010NetworkingA9ExtensionP26_backgroundTransferManagerAA010BackgroundfG0CvgTq', 
                        '_$s17ServiceExtensions010NetworkingA9ExtensionP6handle13xpcConnectionySo03OS_F7_object_p_tFTj', 
                        '_$s17ServiceExtensions010NetworkingA9ExtensionP6handle13xpcConnectionySo03OS_F7_object_p_tFTq', 
                        '_$s17ServiceExtensions010NetworkingA9ExtensionP8_request12capabilitiesAA11_CapabilityO5GrantVAG_tKFTj', 

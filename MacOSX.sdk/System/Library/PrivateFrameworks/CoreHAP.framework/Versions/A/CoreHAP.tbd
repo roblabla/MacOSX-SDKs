@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreHAP.framework/Versions/A/CoreHAP'
-current-version: 1215.2.15
+current-version: 1241.3.7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _HAP2AccessoryServerDiscoveryBonjourHAPServiceTypeAirPlay, 
@@ -127,12 +127,13 @@ exports:
                        _HAPDeviceIDLength, _HAPDiagnosticsSnapshotAudioAsString, 
                        _HAPDiagnosticsSnapshotFormatAsString, _HAPDiagnosticsSnapshotOptionsAsString, 
                        _HAPDiagnosticsSnapshotTypeAsString, _HAPDispatchQueueName, 
-                       _HAPErrorDomain, _HAPFirmwareUpdateStateAsString, _HAPGetHAPMetadataVersion, 
-                       _HAPGetPreferredAuthMethod, _HAPHTTPClientErrorDomain, _HAPHTTPSerializationTypeDescription, 
-                       _HAPIsHH2Enabled, _HAPIsHomePod, _HAPIsInternalBuild, _HAPLinkLayerTypeDescription, 
-                       _HAPLinkTypeDescription, _HAPMetadataFirmwareUpdateAutoApplyPolicyKey, 
-                       _HAPMetadataFirmwareUpdatePoliciesKey, _HAPMetadataFirmwareUpdatePolicyAnyUserAtHomeKey, 
-                       _HAPMetadataFirmwareUpdatePolicyCharacteristicValueSettlingTimeKey, 
+                       _HAPEqualInstanceIDs, _HAPErrorDomain, _HAPFirmwareUpdateStateAsString, 
+                       _HAPGetHAPMetadataVersion, _HAPGetPreferredAuthMethod, _HAPHTTPClientErrorDomain, 
+                       _HAPHTTPSerializationTypeDescription, _HAPInstanceIDFromUniqueIdentifier, 
+                       _HAPInstanceIDFromValue, _HAPIsHH2Enabled, _HAPIsHomePod, 
+                       _HAPIsInternalBuild, _HAPLinkLayerTypeDescription, _HAPLinkTypeDescription, 
+                       _HAPMetadataFirmwareUpdateAutoApplyPolicyKey, _HAPMetadataFirmwareUpdatePoliciesKey, 
+                       _HAPMetadataFirmwareUpdatePolicyAnyUserAtHomeKey, _HAPMetadataFirmwareUpdatePolicyCharacteristicValueSettlingTimeKey, 
                        _HAPMetadataFirmwareUpdatePolicyCharacteristicValuesKey, _HAPMetadataFirmwareUpdatePolicyCharacteristicsKey, 
                        _HAPMetadataFirmwareUpdatePolicyCheckForScheduledAutomationKey, 
                        _HAPMetadataFirmwareUpdatePolicyDefaultCategoryKey, _HAPMetadataFirmwareUpdatePolicyNoUserAtHomeKey, 
@@ -146,7 +147,8 @@ exports:
                        _HAPOperatingStateAbnormalReasonsAsString, _HAPOperatingStateAsString, 
                        _HAPPairingStateFromData, _HAPProtocolVersionStr, _HAPQueryStringDelimiter_AccessoryInstanceID, 
                        _HAPQueryStringDelimiter_InstanceIDs, _HAPQueryStringKey_InstanceIDs, 
-                       _HAPResponseKey_Status, _HAPServiceType_Lightbulb, _HAPServiceType_LockMechanism, 
+                       _HAPResponseKey_Status, _HAPServerIDFromUniqueIdentifier, 
+                       _HAPServiceType_Lightbulb, _HAPServiceType_LockMechanism, 
                        _HAPServiceType_SecuritySystem, _HAPServiceUUID_AccessoryInformation, 
                        _HAPServiceUUID_AccessoryInformation_BTLE, _HAPServiceUUID_AccessoryRuntimeInformation, 
                        _HAPServiceUUID_AirPurifier, _HAPServiceUUID_BridgingState, 
@@ -182,8 +184,9 @@ exports:
                        _HAPURLComponent_ResourceImage, _HAPURLComponent_ResourceImageHeight, 
                        _HAPURLComponent_ResourceImageWidth, _HAPURLComponent_ResourceRequestReason, 
                        _HAPURLComponent_ResourceType, _HAPURLComponent_Services, 
-                       _HAPUUIDSuffix, _HAPUpdateNotReadyReasonsAsString, _HAPUserPermissionTypeDescription, 
-                       _HAPValidateSetupHash, _HAPWACWiFiBandToString, _HAPWiFiConfigurationOperationTypeAsString, 
+                       _HAPUUIDSuffix, _HAPUniqueIdentifier, _HAPUpdateNotReadyReasonsAsString, 
+                       _HAPUserPermissionTypeDescription, _HAPValidateSetupHash, 
+                       _HAPWACWiFiBandToString, _HAPWiFiConfigurationOperationTypeAsString, 
                        _HAPWiFiConfigurationUpdateStatusAsString, _HAPWiFiSecurityModeAsString, 
                        _HAPWriteRequestKey_ResponseValue, _HMErrorFromOSStatus, _hap2LogInitialize, 
                        _hap2Log_accessory, _hap2Log_browser, _hap2Log_coap, _hap2Log_default, 

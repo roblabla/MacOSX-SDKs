@@ -1963,10 +1963,6 @@ CF_ENUM(AudioClassID)
                         A UInt32 where a value of 0 indicates that the process is not running any
                         IO or there is not any active output streams, and a value of 1 indicates that
                         the process is running IO and there is at least one active output stream.
-    @constant       kAudioProcessPropertyIsMuted
-                        A UInt32 where a value of 0 indicates that the process is playing audio
-                        through its selected audio devices and a value of 1 indicates that a process
-                        is currently muted by an audio tap.
 */
 CF_ENUM(AudioObjectPropertySelector)
 {

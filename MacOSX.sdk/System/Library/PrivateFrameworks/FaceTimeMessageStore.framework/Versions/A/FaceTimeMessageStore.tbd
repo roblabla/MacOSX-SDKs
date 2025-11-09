@@ -748,6 +748,7 @@ exports:
                        '_$s20FaceTimeMessageStore12BadgeManagerC05mergeE9CountDatayySbFTq', 
                        '_$s20FaceTimeMessageStore12BadgeManagerC06notifyE6CountsyySayAA0E13CountCategoryO_SitGFTj', 
                        '_$s20FaceTimeMessageStore12BadgeManagerC06notifyE6CountsyySayAA0E13CountCategoryO_SitGFTq', 
+                       '_$s20FaceTimeMessageStore12BadgeManagerC5queueACSo012OS_dispatch_G0CSg_tcfC', 
                        '_$s20FaceTimeMessageStore12BadgeManagerCMa', '_$s20FaceTimeMessageStore12BadgeManagerCMm', 
                        '_$s20FaceTimeMessageStore12BadgeManagerCMn', '_$s20FaceTimeMessageStore12BadgeManagerCMo', 
                        '_$s20FaceTimeMessageStore12BadgeManagerCMu', '_$s20FaceTimeMessageStore12BadgeManagerCN', 

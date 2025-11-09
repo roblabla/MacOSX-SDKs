@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftUniformTypeIdentifiers.dylib'
-current-version: 820.4
+current-version: 827.5.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -257,20 +257,20 @@ exports:
                        '_$s22UniformTypeIdentifiers6UTTypeV5vCardACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV5videoACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV6_types11identifiersSDySSACGShySSG_tFZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV6bundleACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV6encode2toys7Encoder_p_tKF', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV6folderACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV6pkcs12ACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV6scriptACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV6volumeACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV7_deviceACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV7_iPhoneACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV7_macProACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV7_socketACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV7archiveACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV7cHeaderACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV7cSourceACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV7contactACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV7contentACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV7fileURLACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV7geoJSONACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV7messageACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV7packageACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV7versionSiSgvg', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV7versionSiSgvpMV', '_$s22UniformTypeIdentifiers6UTTypeV8_appleTVACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV8_displayACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8_homePodACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV8_macBookACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8_macMiniACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV8_speakerACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8bookmarkACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV8conforms2toSbAC_tF', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV6folderACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV6jpegxlACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV6pkcs12ACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV6scriptACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV6volumeACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV7_deviceACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV7_iPhoneACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV7_macProACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV7_socketACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV7archiveACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV7cHeaderACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV7cSourceACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV7contactACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV7contentACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV7fileURLACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV7geoJSONACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV7messageACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV7packageACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV7versionSiSgvg', '_$s22UniformTypeIdentifiers6UTTypeV7versionSiSgvpMV', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV8_appleTVACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8_displayACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV8_homePodACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8_macBookACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV8_macMiniACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8_speakerACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV8bookmarkACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8conforms2toSbAC_tF', 
                        '_$s22UniformTypeIdentifiers6UTTypeV8databaseACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8flatRTFDACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV8isPublicSbvg', '_$s22UniformTypeIdentifiers6UTTypeV8isPublicSbvpMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV8makefileACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8playlistACvgZ', 

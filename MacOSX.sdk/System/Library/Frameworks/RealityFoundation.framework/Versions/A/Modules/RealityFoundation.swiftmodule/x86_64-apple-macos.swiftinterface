@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
-// swift-module-flags: -target x86_64-apple-macos15.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-bare-slash-regex -user-module-version 366.40.5.0.1 -module-name RealityFoundation
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
+// swift-module-flags: -target x86_64-apple-macos15.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-bare-slash-regex -user-module-version 366.60.13.0.1 -module-name RealityFoundation
 import AVFAudio
 import AVFoundation
 import Accessibility
@@ -3063,9 +3063,8 @@ extension RealityFoundation.CustomMaterial {
   public typealias Texture = RealityFoundation.CustomMaterial.CustomMaterialTexture
   public typealias FaceCulling = RealityFoundation.MaterialParameterTypes.FaceCulling
   public typealias TextureCoordinateTransform = RealityFoundation.MaterialParameterTypes.TextureCoordinateTransform
+  @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, *)
   @available(visionOS, unavailable)
-  @available(macOS, unavailable)
-  @available(iOS, unavailable)
   public typealias TriangleFillMode = RealityFoundation.MaterialParameterTypes.TriangleFillMode
   @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
   public struct CustomMaterialTexture {
@@ -5986,9 +5985,9 @@ extension RealityFoundation.VideoPlaybackController {
   }
 }
 @available(visionOS, unavailable)
-@available(macOS, introduced: 12, deprecated: 14, message: "Use the ChannelAudioComponent, AmbientAudioComponent, or SpatialAudioComponent instead.")
-@available(macCatalyst, introduced: 15, deprecated: 17, message: "Use the ChannelAudioComponent, AmbientAudioComponent, or SpatialAudioComponent instead.")
-@available(iOS, introduced: 15, deprecated: 17, message: "Use the ChannelAudioComponent, AmbientAudioComponent, or SpatialAudioComponent instead.")
+@available(macOS, introduced: 12.0, deprecated: 15.0, message: "Use ChannelAudioComponent, AmbientAudioComponent, or SpatialAudioComponent instead.")
+@available(macCatalyst, introduced: 15.0, deprecated: 18.0, message: "Use ChannelAudioComponent, AmbientAudioComponent, or SpatialAudioComponent instead.")
+@available(iOS, introduced: 15.0, deprecated: 18.0, message: "Use ChannelAudioComponent, AmbientAudioComponent, or SpatialAudioComponent instead.")
 extension RealityFoundation.VideoPlaybackController {
   @_Concurrency.MainActor @preconcurrency public var reverbSendLevel: RealityFoundation.AudioPlaybackController.Decibel {
     get
@@ -6825,6 +6824,7 @@ public struct __REAssetBundle {
     get
   }
   public static func frameworkVersion(key: Swift.String) -> Swift.String
+  @available(*, deprecated, message: "Will be removed by end of January 2025 - rdar://136600358. Please use use __platform instead")
   public static func platform() -> Swift.String
   public func mainSceneIdentifier() -> RealityFoundation.__REAssetIdentifier?
   public enum QueueOptions : Swift.Equatable {
@@ -6847,6 +6847,7 @@ public struct __REAssetBundle {
     @available(macOS 13.0, iOS 16.0, macCatalyst 16.0, *)
     public var deploymentTarget: RealityFoundation.__REAssetBundle.ExportOptions.DeploymentTarget?
     public var versionOverride: Swift.Int?
+    public var useAutoVersioning: Swift.Bool
     public var restrictToSeed: Swift.Bool
     public var configurationSetNames: [Swift.String]?
     public var defaultConfigurationNames: [Swift.String]?
@@ -7853,15 +7854,15 @@ extension RealityFoundation.Entity {
   @available(visionOS, introduced: 1.0, deprecated: 1.0, renamed: "init(named:in:)")
   @_Concurrency.MainActor @preconcurrency public static func loadAsync(named name: Swift.String, in bundle: Foundation.Bundle? = nil) -> RealityFoundation.LoadRequest<RealityFoundation.EnvironmentResource>
   @_Concurrency.MainActor @preconcurrency public static func __load(contentsOf url: Foundation.URL, withName resourceName: Swift.String? = nil) throws -> RealityFoundation.EnvironmentResource
-  @available(visionOS, introduced: 1.0, deprecated: 2.0, renamed: "init(equirectangular:withName:)")
+  @available(visionOS, introduced: 1.0, deprecated: 2.0, renamed: "EnvironmentResource.init(equirectangular:withName:)")
   @available(macOS, unavailable)
-  @available(iOS, unavailable)
-  @available(macCatalyst, unavailable)
+  @available(iOS, unavailable, introduced: 18.0, renamed: "EnvironmentResource.init(equirectangular:withName:)")
+  @available(macCatalyst, unavailable, introduced: 18.0, renamed: "EnvironmentResource.init(equirectangular:withName:)")
   @_Concurrency.MainActor @preconcurrency public static func generate(fromEquirectangular cgImage: CoreGraphics.CGImage, withName resourceName: Swift.String? = nil) throws -> RealityFoundation.EnvironmentResource
-  @available(visionOS, introduced: 1.0, deprecated: 2.0, renamed: "init(equirectangular:withName:)")
-  @available(macOS, unavailable)
-  @available(iOS, unavailable)
-  @available(macCatalyst, unavailable)
+  @available(visionOS, introduced: 1.0, deprecated: 2.0, renamed: "EnvironmentResource.init(equirectangular:withName:)")
+  @available(macOS, unavailable, introduced: 15.0, renamed: "EnvironmentResource.init(equirectangular:withName:)")
+  @available(iOS, unavailable, introduced: 18.0, renamed: "EnvironmentResource.init(equirectangular:withName:)")
+  @available(macCatalyst, unavailable, introduced: 18.0, renamed: "EnvironmentResource.init(equirectangular:withName:)")
   @_Concurrency.MainActor @preconcurrency public static func generate(fromEquirectangular cgImage: CoreGraphics.CGImage, withName resourceName: Swift.String? = nil) async throws -> RealityFoundation.EnvironmentResource
   @_Concurrency.MainActor @preconcurrency public static func __fromAssets(_ coreIBLAsset: RealityFoundation.__AssetRef?, _ coreSkyboxAsset: RealityFoundation.__AssetRef?) -> RealityFoundation.EnvironmentResource
   @_Concurrency.MainActor @preconcurrency public static func __exportCompiledResource(contentsOf inURL: Foundation.URL, to outURL: Foundation.URL) throws
@@ -9939,9 +9940,8 @@ public struct CustomMaterial : RealityFoundation.Material {
     get
     set
   }
+  @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, *)
   @available(visionOS, unavailable)
-  @available(macOS, unavailable)
-  @available(iOS, unavailable)
   public var triangleFillMode: RealityFoundation.CustomMaterial.TriangleFillMode {
     get
     set
@@ -10514,7 +10514,6 @@ public struct MaterialParameters {
   @available(visionOS 1.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, *)
   public enum Value {
     @available(visionOS 2.0, *)
-    @available(visionOS, unavailable)
     case texture(RealityFoundation.MaterialParameters.Texture)
     case textureResource(RealityFoundation.TextureResource)
     case float(Swift.Float)
@@ -10740,45 +10739,6 @@ extension RealityFoundation.VideoPlayerComponent {
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 public class __RKEmphasisBounceAnimation : RealityFoundation.__RKEmphasisBaseAnimation {
   @objc deinit
-}
-@available(iOS, unavailable)
-@available(visionOS, unavailable)
-@available(macOS, unavailable)
-public struct EventSequence<Element> : _Concurrency.AsyncSequence where Element : RealityFoundation.Event {
-  public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-    public mutating func next() async throws -> Element?
-    #if compiler(>=5.3) && $AssociatedTypeImplements
-    @available(tvOS 18.0, watchOS 11.0, *)
-    @available(iOS, introduced: 18.0, deprecated: 17.0)
-    @available(visionOS, introduced: 2.0, deprecated: 1.0)
-    @available(macOS, introduced: 15.0, deprecated: 14.0)
-    @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #else
-    @available(tvOS 18.0, watchOS 11.0, *)
-    @available(iOS, introduced: 18.0, deprecated: 17.0)
-    @available(visionOS, introduced: 2.0, deprecated: 1.0)
-    @available(macOS, introduced: 15.0, deprecated: 14.0)
-    public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #endif
-  }
-  public func makeAsyncIterator() -> RealityFoundation.EventSequence<Element>.Iterator
-  @available(iOS, unavailable)
-  @available(visionOS, unavailable)
-  @available(macOS, unavailable)
-  public typealias AsyncIterator = RealityFoundation.EventSequence<Element>.Iterator
-  #if compiler(>=5.3) && $AssociatedTypeImplements
-  @available(tvOS 18.0, watchOS 11.0, *)
-  @available(iOS, introduced: 18.0, deprecated: 17.0)
-  @available(visionOS, introduced: 2.0, deprecated: 1.0)
-  @available(macOS, introduced: 15.0, deprecated: 14.0)
-  @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-  #else
-  @available(tvOS 18.0, watchOS 11.0, *)
-  @available(iOS, introduced: 18.0, deprecated: 17.0)
-  @available(visionOS, introduced: 2.0, deprecated: 1.0)
-  @available(macOS, introduced: 15.0, deprecated: 14.0)
-  public typealias __AsyncSequence_Failure = any Swift.Error
-  #endif
 }
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
@@ -11367,14 +11327,14 @@ public struct __AnyARKitObject {
   @_Concurrency.MainActor @preconcurrency final public let configuration: RealityFoundation.AudioBufferResource.Configuration
   @available(visionOS 1.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, *)
   @_Concurrency.MainActor @preconcurrency public init(buffer: AVFAudio.AVAudioBuffer, configuration: RealityFoundation.AudioBufferResource.Configuration = .init()) throws
-  @available(visionOS, unavailable)
-  @available(macOS, deprecated: 15.0, message: "Use AudioFileResource.configuration.shouldLoop instead.")
-  @available(macCatalyst, deprecated: 18.0, message: "Use AudioFileResource.configuration.shouldLoop instead.")
-  @available(iOS, deprecated: 18.0, message: "Use AudioFileResource.configuration.shouldLoop instead.")
+  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "Use AudioBufferResource.init(buffer:configuration:) instead.")
+  @available(macOS, deprecated: 15.0, message: "Use AudioBufferResource.init(buffer:configuration:) instead.")
+  @available(macCatalyst, deprecated: 18.0, message: "Use AudioBufferResource.init(buffer:configuration:) instead.")
+  @available(iOS, deprecated: 18.0, message: "Use AudioBufferResource.init(buffer:configuration:) instead.")
   @_Concurrency.MainActor @preconcurrency public var shouldLoop: Swift.Bool {
     get
   }
-  @available(visionOS, unavailable)
+  @available(visionOS, unavailable, introduced: 1.0, message: "Use AudioBufferResource.init(buffer:configuration:) instead.")
   @available(macOS, introduced: 12, deprecated: 15.0, message: "Use AudioBufferResource.init(buffer:configuration:) instead.")
   @available(macCatalyst, introduced: 15, deprecated: 18.0, message: "Use AudioBufferResource.init(buffer:configuration:) instead.")
   @available(iOS, introduced: 15, deprecated: 18.0, message: "Use AudioBufferResource.init(buffer:configuration:) instead.")
@@ -11669,6 +11629,19 @@ public class __RKEntitySpinAction : RealityFoundation.__RKEntityAction {
   override public func clone(matching entity: RealityFoundation.Entity, newEntity: RealityFoundation.Entity) -> (action: RealityFoundation.__RKEntityAction?, anythingChanged: Swift.Bool)
   @objc deinit
 }
+@available(visionOS 1.0, macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
+extension RealityFoundation.Entity {
+  #if compiler(>=5.3) && $ParameterPacks
+  @_alwaysEmitIntoClient @inline(__always) @_Concurrency.MainActor @preconcurrency convenience public init<each T>(components: repeat each T) where repeat each T : RealityFoundation.Component {
+        self.init()
+        repeat self.components.set(each components)
+    }
+  #endif
+  @_alwaysEmitIntoClient @inline(__always) @_Concurrency.MainActor @preconcurrency convenience public init(components: [any RealityFoundation.Component]) {
+        self.init()
+        self.components.set(components)
+    }
+}
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
@@ -11761,6 +11734,8 @@ public class PhotogrammetrySession {
     }
     public var isObjectMaskingEnabled: Swift.Bool
     @available(macOS 14.0, macCatalyst 17.0, *)
+    @available(iOS, unavailable)
+    @available(visionOS, unavailable)
     public struct CustomDetailSpecification : Swift.Equatable {
       public var maximumPolygonCount: Swift.UInt
       public enum TextureDimension : Swift.UInt, Swift.Hashable {
@@ -11769,10 +11744,12 @@ public class PhotogrammetrySession {
         case fourK
         case eightK
         @available(macOS 15.0, macCatalyst 18.0, *)
+        @available(iOS, unavailable)
         @available(visionOS, unavailable)
         case sixteenK
         public init?(rawValue: Swift.UInt)
-        @available(iOS 17.0, macOS 14.0, macCatalyst 17.0, *)
+        @available(macOS 14.0, macCatalyst 17.0, *)
+        @available(iOS, unavailable, introduced: 17.0)
         @available(tvOS, unavailable)
         @available(watchOS, unavailable)
         @available(visionOS, unavailable)
@@ -11791,17 +11768,20 @@ public class PhotogrammetrySession {
         public static let all: RealityFoundation.PhotogrammetrySession.Configuration.CustomDetailSpecification.TextureMapOutputs
         public let rawValue: Swift.UInt
         public init(rawValue: Swift.UInt)
-        @available(iOS 17.0, macOS 14.0, macCatalyst 17.0, *)
+        @available(macOS 14.0, macCatalyst 17.0, *)
+        @available(iOS, unavailable, introduced: 17.0)
         @available(tvOS, unavailable)
         @available(watchOS, unavailable)
         @available(visionOS, unavailable)
         public typealias ArrayLiteralElement = RealityFoundation.PhotogrammetrySession.Configuration.CustomDetailSpecification.TextureMapOutputs
-        @available(iOS 17.0, macOS 14.0, macCatalyst 17.0, *)
+        @available(macOS 14.0, macCatalyst 17.0, *)
+        @available(iOS, unavailable, introduced: 17.0)
         @available(tvOS, unavailable)
         @available(watchOS, unavailable)
         @available(visionOS, unavailable)
         public typealias Element = RealityFoundation.PhotogrammetrySession.Configuration.CustomDetailSpecification.TextureMapOutputs
-        @available(iOS 17.0, macOS 14.0, macCatalyst 17.0, *)
+        @available(macOS 14.0, macCatalyst 17.0, *)
+        @available(iOS, unavailable, introduced: 17.0)
         @available(tvOS, unavailable)
         @available(watchOS, unavailable)
         @available(visionOS, unavailable)
@@ -11818,8 +11798,11 @@ public class PhotogrammetrySession {
       public static func == (a: RealityFoundation.PhotogrammetrySession.Configuration.CustomDetailSpecification, b: RealityFoundation.PhotogrammetrySession.Configuration.CustomDetailSpecification) -> Swift.Bool
     }
     @available(macOS 14.0, macCatalyst 17.0, *)
+    @available(iOS, unavailable)
+    @available(visionOS, unavailable)
     public var customDetailSpecification: RealityFoundation.PhotogrammetrySession.Configuration.CustomDetailSpecification
     @available(macOS 15.0, macCatalyst 18.0, *)
+    @available(iOS, unavailable)
     @available(visionOS, unavailable)
     public enum MeshPrimitive : Swift.Equatable {
       case triangle
@@ -11831,6 +11814,7 @@ public class PhotogrammetrySession {
       }
     }
     @available(macOS 15.0, macCatalyst 18.0, *)
+    @available(iOS, unavailable)
     @available(visionOS, unavailable)
     public var meshPrimitive: RealityFoundation.PhotogrammetrySession.Configuration.MeshPrimitive
     public var sampleOrdering: RealityFoundation.PhotogrammetrySession.Configuration.SampleOrdering
@@ -11856,19 +11840,24 @@ public class PhotogrammetrySession {
     public enum Detail : Swift.Int, Swift.Hashable {
       @available(macOS 12.0, macCatalyst 15.0, *)
       @available(iOS, unavailable)
+      @available(visionOS, unavailable)
       case preview
       case reduced
       @available(macOS 12.0, macCatalyst 15.0, *)
       @available(iOS, unavailable)
+      @available(visionOS, unavailable)
       case medium
       @available(macOS 12.0, macCatalyst 15.0, *)
       @available(iOS, unavailable)
+      @available(visionOS, unavailable)
       case full
       @available(macOS 12.0, macCatalyst 15.0, *)
       @available(iOS, unavailable)
+      @available(visionOS, unavailable)
       case raw
       @available(macOS 14.0, macCatalyst 17.0, *)
       @available(iOS, unavailable)
+      @available(visionOS, unavailable)
       case custom
       public init?(rawValue: Swift.Int)
       @available(iOS 17.0, macOS 12.0, macCatalyst 15.0, *)
@@ -14641,14 +14630,16 @@ extension RealityFoundation.PhotogrammetrySession.Configuration.FeatureSensitivi
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension RealityFoundation.PhotogrammetrySession.Configuration.FeatureSensitivity : Swift.Hashable {}
-@available(iOS 17.0, macOS 14.0, macCatalyst 17.0, *)
+@available(macOS 14.0, macCatalyst 17.0, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(iOS, unavailable)
 @available(visionOS, unavailable)
-@available(watchOS, unavailable)
-@available(tvOS, unavailable)
 extension RealityFoundation.PhotogrammetrySession.Configuration.CustomDetailSpecification.TextureDimension : Swift.RawRepresentable {}
-@available(iOS 17.0, macOS 15.0, macCatalyst 18.0, *)
+@available(macOS 15.0, macCatalyst 18.0, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
+@available(iOS, unavailable)
 @available(visionOS, unavailable)
 extension RealityFoundation.PhotogrammetrySession.Configuration.MeshPrimitive : Swift.Hashable {}
 @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, *)

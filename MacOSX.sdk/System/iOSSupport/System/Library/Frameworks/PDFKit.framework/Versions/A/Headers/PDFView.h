@@ -63,9 +63,9 @@ PDFKIT_EXTERN NSNotificationName const PDFViewVisiblePagesChangedNotification PD
 
 PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 @interface PDFView : PDFKitPlatformView
-#if defined(PDFKIT_PLATFORM_OSX)
+#if TARGET_OS_OSX
     < NSAnimationDelegate, NSMenuDelegate >
-#elif defined(PDFKIT_PLATFORM_IOS)
+#elif (TARGET_OS_IOS || TARGET_OS_VISION)
     < UIGestureRecognizerDelegate, UIFindInteractionDelegate >
 #endif
 {
@@ -352,7 +352,7 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 #if defined(PDFKIT_PLATFORM_IOS)
 
 /// If `findInteractionEnabled` is set to true, returns the receiver's built-in find interaction. Otherwise, nil.
-@property (nonatomic, readonly) UIFindInteraction *findInteraction PDFKIT_AVAILABLE(NA, 16_0);
+@property (nonatomic, readonly) UIFindInteraction *findInteraction API_AVAILABLE(ios(16.0), visionos(1.0)) API_UNAVAILABLE(watchos, tvos);
 
 /// Enables the built-in find interaction.
 @property (nonatomic, readwrite, getter=isFindInteractionEnabled) BOOL findInteractionEnabled PDFKIT_AVAILABLE(NA, 16_0);

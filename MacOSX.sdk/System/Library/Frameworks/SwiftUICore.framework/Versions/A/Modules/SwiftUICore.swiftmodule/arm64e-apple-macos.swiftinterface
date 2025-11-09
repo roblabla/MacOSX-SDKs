@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
-// swift-module-flags: -target arm64e-apple-macos15.1 -target-variant arm64e-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -module-abi-name SwiftUI -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-bare-slash-regex -user-module-version 6.1.19.2 -module-name SwiftUICore -package-name SwiftUI
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
+// swift-module-flags: -target arm64e-apple-macos15.2 -target-variant arm64e-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -module-abi-name SwiftUI -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-bare-slash-regex -user-module-version 6.2.16.1.201 -module-name SwiftUICore -package-name SwiftUI
 import Accessibility
 import Combine
 import CoreFoundation
@@ -1313,6 +1313,45 @@ extension SwiftUICore.View {
 extension SwiftUICore.Animation {
   public static let `default`: SwiftUICore.Animation
 }
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+extension SwiftUICore.ForEach {
+  public init<V>(sections view: V, @SwiftUICore.ViewBuilder content: @escaping (SwiftUICore.SectionConfiguration) -> Content) where Data == SwiftUICore.ForEachSectionCollection<Content>, ID == SwiftUICore.SectionConfiguration.ID, Content : SwiftUICore.View, V : SwiftUICore.View
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+public struct ForEachSectionCollection<Content> : Swift.RandomAccessCollection where Content : SwiftUICore.View {
+  public var startIndex: Swift.Int {
+    get
+  }
+  public var endIndex: Swift.Int {
+    get
+  }
+  public subscript(index: Swift.Int) -> SwiftUICore.SectionConfiguration {
+    get
+  }
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Element = SwiftUICore.SectionConfiguration
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Index = Swift.Int
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Indices = Swift.Range<Swift.Int>
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Iterator = Swift.IndexingIterator<SwiftUICore.ForEachSectionCollection<Content>>
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias SubSequence = Swift.Slice<SwiftUICore.ForEachSectionCollection<Content>>
+}
+@available(*, unavailable)
+extension SwiftUICore.ForEachSectionCollection : Swift.Sendable {
+}
 @available(iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 @_originallyDefinedIn(module: "SwiftUI", visionOS 2.0)
 @available(macOS, unavailable)
@@ -2201,6 +2240,23 @@ public struct KeyframeAnimator<Value, KeyframePath, Content> : SwiftUICore.View 
 @available(*, unavailable)
 extension SwiftUICore.KeyframeAnimator : Swift.Sendable {
 }
+@available(iOS 14.5, macOS 11.0, tvOS 14.5, watchOS 7.4, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@usableFromInline
+package struct IsLeafTraitKey : SwiftUICore._ViewTraitKey {
+  @inlinable package static var defaultValue: Swift.Bool {
+    get { true }
+  }
+  @available(iOS 14.5, tvOS 14.5, watchOS 7.4, macOS 11.0, *)
+  @usableFromInline
+  package typealias Value = Swift.Bool
+}
+@available(*, unavailable)
+extension SwiftUICore.IsLeafTraitKey : Swift.Sendable {
+}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -2637,6 +2693,11 @@ extension SwiftUICore.UnitCurve {
 #if compiler(>=5.3) && $Macros && $AttachedMacros
 @attached(accessor) @attached(peer, names: prefixed(__Key_)) public macro Entry() = #externalMacro(
     module: "SwiftUIMacros", type: "EntryMacro"
+)
+#endif
+#if compiler(>=5.3) && $Macros && $AttachedMacros
+@attached(accessor) public macro __EntryDefaultValue() = #externalMacro(
+    module: "SwiftUIMacros", type: "EntryDefaultValueMacro"
 )
 #endif
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -4755,6 +4816,23 @@ extension SwiftUICore.LocalizedStringKey.StringInterpolation {
   @available(iOS 16.0, macOS 13, tvOS 16.0, watchOS 9.0, *)
   @_semantics("swiftui.localized.appendInterpolation_@_specifier") public mutating func appendInterpolation(_ resource: Foundation.LocalizedStringResource)
 }
+@available(iOS 17.0, macOS 11.0, tvOS 17.0, watchOS 10.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@usableFromInline
+package struct IsExpandedTraitKey : SwiftUICore._ViewTraitKey {
+  @inlinable package static var defaultValue: SwiftUICore.Binding<Swift.Bool>? {
+    get { nil }
+  }
+  @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 11.0, *)
+  @usableFromInline
+  package typealias Value = SwiftUICore.Binding<Swift.Bool>?
+}
+@available(*, unavailable)
+extension SwiftUICore.IsExpandedTraitKey : Swift.Sendable {
+}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -6482,6 +6560,31 @@ extension SwiftUICore.GraphicsContext.Storage : Swift.Sendable {
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
 }
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+extension SwiftUICore.View {
+  @inlinable nonisolated public func aspectRatio(_ aspectRatio: CoreFoundation.CGFloat? = nil, contentMode: SwiftUICore.ContentMode) -> some SwiftUICore.View {
+        return modifier(_AspectRatioLayout(
+            aspectRatio: aspectRatio, contentMode: contentMode))
+    }
+  
+  @inlinable nonisolated public func aspectRatio(_ aspectRatio: CoreFoundation.CGSize, contentMode: SwiftUICore.ContentMode) -> some SwiftUICore.View {
+        return self.aspectRatio(
+            aspectRatio.width / aspectRatio.height, contentMode: contentMode)
+    }
+  
+  @inlinable nonisolated public func scaledToFit() -> some SwiftUICore.View {
+        return aspectRatio(contentMode: .fit)
+    }
+  
+  @inlinable nonisolated public func scaledToFill() -> some SwiftUICore.View {
+        return aspectRatio(contentMode: .fill)
+    }
+  
+}
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension SwiftUICore.LocalizedStringKey.StringInterpolation {
   @_semantics("swiftui.localized.appendInterpolation_@_specifier") public mutating func appendInterpolation(accessibilityName color: SwiftUICore.Color)
@@ -7610,6 +7713,36 @@ extension SwiftUICore.Transaction {
     set
   }
 }
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+public struct ScrollContentOffsetAdjustmentBehavior {
+  public static var automatic: SwiftUICore.ScrollContentOffsetAdjustmentBehavior {
+    get
+  }
+  public static var disabled: SwiftUICore.ScrollContentOffsetAdjustmentBehavior {
+    get
+  }
+}
+@available(*, unavailable)
+extension SwiftUICore.ScrollContentOffsetAdjustmentBehavior : Swift.Sendable {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+extension SwiftUICore.Transaction {
+  @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  public var scrollContentOffsetAdjustmentBehavior: SwiftUICore.ScrollContentOffsetAdjustmentBehavior {
+    get
+    set
+  }
+}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -7816,6 +7949,45 @@ public struct _ViewListOutputs {
 }
 @available(*, unavailable)
 extension SwiftUICore._ViewListOutputs : Swift.Sendable {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+extension SwiftUICore.ForEach {
+  public init<V>(subviews view: V, @SwiftUICore.ViewBuilder content: @escaping (SwiftUICore.Subview) -> Content) where Data == SwiftUICore.ForEachSubviewCollection<Content>, ID == SwiftUICore.Subview.ID, Content : SwiftUICore.View, V : SwiftUICore.View
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+public struct ForEachSubviewCollection<Content> : Swift.RandomAccessCollection where Content : SwiftUICore.View {
+  public var startIndex: Swift.Int {
+    get
+  }
+  public var endIndex: Swift.Int {
+    get
+  }
+  public subscript(index: Swift.Int) -> SwiftUICore.Subview {
+    get
+  }
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Element = SwiftUICore.Subview
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Index = Swift.Int
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Indices = Swift.Range<Swift.Int>
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Iterator = Swift.IndexingIterator<SwiftUICore.ForEachSubviewCollection<Content>>
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias SubSequence = Swift.Slice<SwiftUICore.ForEachSubviewCollection<Content>>
+}
+@available(*, unavailable)
+extension SwiftUICore.ForEachSubviewCollection : Swift.Sendable {
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -8364,6 +8536,16 @@ extension SwiftUICore.View {
         return modifier(_LuminanceToAlphaEffect())
     }
   
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+public protocol ContainerValueKey {
+  associatedtype Value
+  static var defaultValue: Self.Value { get }
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -9650,8 +9832,8 @@ extension SwiftUICore.HorizontalAlignment {
   public static let trailing: SwiftUICore.HorizontalAlignment
 }
 @available(iOS 16.0, macOS 13.0, *)
-@_originallyDefinedIn(module: "SwiftUI", iOS 18.1)
-@_originallyDefinedIn(module: "SwiftUI", macOS 15.1)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUICore.HorizontalAlignment {
@@ -10047,6 +10229,33 @@ extension SwiftUICore._Velocity : Swift.Hashable where Value : Swift.Hashable {
     get
   }
 }
+#if compiler(>=5.3) && $RetroactiveAttribute
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+extension SwiftUICore._Velocity : @retroactive SwiftUICore.Animatable where Value : SwiftUICore.Animatable {
+  public typealias AnimatableData = Value.AnimatableData
+  public var animatableData: SwiftUICore._Velocity<Value>.AnimatableData {
+    @inlinable get { return valuePerSecond.animatableData }
+    @inlinable set { valuePerSecond.animatableData = newValue }
+  }
+}
+#else
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+extension SwiftUICore._Velocity : SwiftUICore.Animatable where Value : SwiftUICore.Animatable {
+  public typealias AnimatableData = Value.AnimatableData
+  public var animatableData: SwiftUICore._Velocity<Value>.AnimatableData {
+    @inlinable get { return valuePerSecond.animatableData }
+    @inlinable set { valuePerSecond.animatableData = newValue }
+  }
+}
+#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -10716,6 +10925,51 @@ extension SwiftUICore.Font._Leading : Swift.Sendable {
 extension SwiftUICore.Font._StylisticAlternative : Swift.Sendable {
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+extension SwiftUICore.Anchor.Source where Value == CoreFoundation.CGRect {
+  public static func rect(_ r: CoreFoundation.CGRect) -> SwiftUICore.Anchor<Value>.Source
+  public static var bounds: SwiftUICore.Anchor<CoreFoundation.CGRect>.Source {
+    get
+  }
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+extension SwiftUICore.View {
+  @_alwaysEmitIntoClient nonisolated public func containerValue<V>(_ keyPath: Swift.WritableKeyPath<SwiftUICore.ContainerValues, V>, _ value: V) -> some SwiftUICore.View {
+        modifier(_ContainerValueWritingModifier(keyPath: keyPath, value: value))
+    }
+  
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+@frozen public struct _ContainerValueWritingModifier<Value> {
+  public var keyPath: Swift.WritableKeyPath<SwiftUICore.ContainerValues, Value>
+  public var value: Value
+  @_alwaysEmitIntoClient public init(keyPath: Swift.WritableKeyPath<SwiftUICore.ContainerValues, Value>, value: Value) {
+        self.keyPath = keyPath
+        self.value = value
+    }
+  nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._ContainerValueWritingModifier<Value>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
+  nonisolated public static func _makeViewList(modifier: SwiftUICore._GraphValue<SwiftUICore._ContainerValueWritingModifier<Value>>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
+  nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = Swift.Never
+}
+@available(*, unavailable)
+extension SwiftUICore._ContainerValueWritingModifier : Swift.Sendable {
+}
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
@@ -10809,6 +11063,37 @@ extension Swift.OptionSet {
             subtract(set)
         }
     }
+}
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+extension SwiftUICore.View {
+  @inlinable nonisolated public func anchorPreference<A, K>(key _: K.Type = K.self, value: SwiftUICore.Anchor<A>.Source, transform: @escaping (SwiftUICore.Anchor<A>) -> K.Value) -> some SwiftUICore.View where K : SwiftUICore.PreferenceKey {
+        return modifier(_AnchorWritingModifier<A, K>(
+            anchor: value, transform: transform))
+    }
+  
+}
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@frozen public struct _AnchorWritingModifier<AnchorValue, Key> : SwiftUICore.ViewModifier where Key : SwiftUICore.PreferenceKey {
+  public var anchor: SwiftUICore.Anchor<AnchorValue>.Source
+  public var transform: (SwiftUICore.Anchor<AnchorValue>) -> Key.Value
+  @inlinable public init(anchor: SwiftUICore.Anchor<AnchorValue>.Source, transform: @escaping (SwiftUICore.Anchor<AnchorValue>) -> Key.Value) {
+        self.anchor = anchor
+        self.transform = transform
+    }
+  nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._AnchorWritingModifier<AnchorValue, Key>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  public typealias Body = Swift.Never
+}
+@available(*, unavailable)
+extension SwiftUICore._AnchorWritingModifier : Swift.Sendable {
 }
 #if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -11465,6 +11750,23 @@ extension SwiftUICore.View where Self : Swift.Equatable {
         return _AnimationView(content: self, animation: animation)
     }
   
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+public struct ContainerValues {
+  public subscript<Key>(key: Key.Type) -> Key.Value where Key : SwiftUICore.ContainerValueKey {
+    get
+    set
+  }
+  public func tag<V>(for type: V.Type) -> V? where V : Swift.Hashable
+  public func hasTag<V>(_ tag: V) -> Swift.Bool where V : Swift.Hashable
+}
+@available(*, unavailable)
+extension SwiftUICore.ContainerValues : Swift.Sendable {
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -12484,6 +12786,34 @@ extension SwiftUICore.View {
   
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+extension SwiftUICore.View {
+  @preconcurrency @inlinable nonisolated public func onPreferenceChange<K>(_ key: K.Type = K.self, perform action: @escaping @Sendable (K.Value) -> Swift.Void) -> some SwiftUICore.View where K : SwiftUICore.PreferenceKey, K.Value : Swift.Equatable {
+        return modifier(_PreferenceActionModifier<K>(action: action))
+    }
+  
+}
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@frozen public struct _PreferenceActionModifier<Key> : SwiftUICore.ViewModifier where Key : SwiftUICore.PreferenceKey, Key.Value : Swift.Equatable {
+  public var action: (Key.Value) -> Swift.Void
+  @inlinable public init(action: @escaping (Key.Value) -> Swift.Void) {
+        self.action = action
+    }
+  nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._PreferenceActionModifier<Key>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  public typealias Body = Swift.Never
+}
+@available(*, unavailable)
+extension SwiftUICore._PreferenceActionModifier : Swift.Sendable {
+}
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
@@ -13334,6 +13664,26 @@ extension SwiftUICore.EnvironmentValues {
 extension SwiftUICore.Image {
   public init(size: CoreFoundation.CGSize, label: SwiftUICore.Text? = nil, opaque: Swift.Bool = false, colorMode: SwiftUICore.ColorRenderingMode = .nonLinear, renderer: @escaping (inout SwiftUICore.GraphicsContext) -> Swift.Void)
 }
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@frozen public enum Visibility : Swift.Hashable, Swift.CaseIterable {
+  case automatic
+  case visible
+  case hidden
+  public static func == (a: SwiftUICore.Visibility, b: SwiftUICore.Visibility) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
+  public typealias AllCases = [SwiftUICore.Visibility]
+  nonisolated public static var allCases: [SwiftUICore.Visibility] {
+    get
+  }
+  public var hashValue: Swift.Int {
+    get
+  }
+}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -14042,6 +14392,177 @@ extension SwiftUICore.CoordinateSpaceProtocol where Self == SwiftUICore.GlobalCo
   public static var global: SwiftUICore.GlobalCoordinateSpace {
     get
   }
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+extension SwiftUICore.Group {
+  public init<Base, Result>(subviews view: Base, @SwiftUICore.ViewBuilder transform: @escaping (SwiftUICore.SubviewsCollection) -> Result) where Content == SwiftUICore.GroupElementsOfContent<Base, Result>, Base : SwiftUICore.View, Result : SwiftUICore.View
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+public struct GroupElementsOfContent<Subviews, Content> : SwiftUICore.View where Subviews : SwiftUICore.View, Content : SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
+    get
+  }
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s7SwiftUI22GroupElementsOfContentV4bodyQrvp", 0) __<Subviews, Content>
+}
+@available(*, unavailable)
+extension SwiftUICore.GroupElementsOfContent : Swift.Sendable {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+public struct SubviewsCollection : Swift.RandomAccessCollection {
+  public func index(before i: Swift.Int) -> Swift.Int
+  public func index(after i: Swift.Int) -> Swift.Int
+  public subscript(index: Swift.Int) -> SwiftUICore.Subview {
+    get
+  }
+  public subscript(bounds: Swift.Range<Swift.Int>) -> SwiftUICore.SubviewsCollectionSlice {
+    get
+  }
+  public var startIndex: Swift.Int {
+    get
+  }
+  public var endIndex: Swift.Int {
+    get
+  }
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Element = SwiftUICore.Subview
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Index = Swift.Int
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Indices = Swift.Range<Swift.Int>
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Iterator = Swift.IndexingIterator<SwiftUICore.SubviewsCollection>
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias SubSequence = SwiftUICore.SubviewsCollectionSlice
+}
+@available(*, unavailable)
+extension SwiftUICore.SubviewsCollection : Swift.Sendable {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+extension SwiftUICore.SubviewsCollection : SwiftUICore.View {
+  nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.SubviewsCollection>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
+  nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = Swift.Never
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+public struct SubviewsCollectionSlice : Swift.RandomAccessCollection {
+  public subscript(index: Swift.Int) -> SwiftUICore.Subview {
+    get
+  }
+  public subscript(bounds: Swift.Range<Swift.Int>) -> SwiftUICore.SubviewsCollectionSlice {
+    get
+  }
+  public var startIndex: Swift.Int {
+    get
+  }
+  public var endIndex: Swift.Int {
+    get
+  }
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Element = SwiftUICore.Subview
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Index = Swift.Int
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Indices = Swift.Range<Swift.Int>
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Iterator = Swift.IndexingIterator<SwiftUICore.SubviewsCollectionSlice>
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias SubSequence = SwiftUICore.SubviewsCollectionSlice
+}
+@available(*, unavailable)
+extension SwiftUICore.SubviewsCollectionSlice : Swift.Sendable {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+extension SwiftUICore.SubviewsCollectionSlice : SwiftUICore.View {
+  nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.SubviewsCollectionSlice>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
+  nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = Swift.Never
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+final public class ImageRenderer<Content> : Combine.ObservableObject where Content : SwiftUICore.View {
+  final public let objectWillChange: Combine.PassthroughSubject<Swift.Void, Swift.Never>
+  @available(iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, *)
+  @usableFromInline
+  final internal var observationEnabled: Swift.Bool
+  @available(iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, *)
+  @_alwaysEmitIntoClient final public var isObservationEnabled: Swift.Bool {
+    get { observationEnabled }
+    set { observationEnabled = newValue }
+  }
+  @_Concurrency.MainActor final public var content: Content {
+    get
+    set
+  }
+  @_Concurrency.MainActor final public var proposedSize: SwiftUICore.ProposedViewSize {
+    get
+    set
+  }
+  @_Concurrency.MainActor final public var scale: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @_Concurrency.MainActor final public var isOpaque: Swift.Bool {
+    get
+    set
+  }
+  @_Concurrency.MainActor final public var colorMode: SwiftUICore.ColorRenderingMode {
+    get
+    set
+  }
+  @_Concurrency.MainActor public init(content view: Content)
+  @_Concurrency.MainActor final public var cgImage: CoreGraphics.CGImage? {
+    get
+  }
+  @_Concurrency.MainActor final public func render(rasterizationScale: CoreFoundation.CGFloat = 1, renderer: (CoreFoundation.CGSize, (CoreGraphics.CGContext) -> Swift.Void) -> Swift.Void)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
+  public typealias ObjectWillChangePublisher = Combine.PassthroughSubject<Swift.Void, Swift.Never>
+  @objc deinit
+}
+@available(iOS 17.1, macOS 14.1, tvOS 17.1, watchOS 10.1, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+extension SwiftUICore.ImageRenderer : Observation.Observable {
+}
+@available(*, unavailable)
+extension SwiftUICore.ImageRenderer : Swift.Sendable {
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -14910,6 +15431,37 @@ extension SwiftUICore.Canvas where Symbols == SwiftUICore.EmptyView {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 public func withAnimation<Result>(_ animation: SwiftUICore.Animation? = .default, _ body: () throws -> Result) rethrows -> Result
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+extension SwiftUICore.View {
+  @inlinable nonisolated public func transformAnchorPreference<A, K>(key _: K.Type = K.self, value: SwiftUICore.Anchor<A>.Source, transform: @escaping (inout K.Value, SwiftUICore.Anchor<A>) -> Swift.Void) -> some SwiftUICore.View where K : SwiftUICore.PreferenceKey {
+        return modifier(_AnchorTransformModifier<A, K>(
+            anchor: value, transform: transform))
+    }
+  
+}
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@frozen public struct _AnchorTransformModifier<AnchorValue, Key> : SwiftUICore.ViewModifier where Key : SwiftUICore.PreferenceKey {
+  public var anchor: SwiftUICore.Anchor<AnchorValue>.Source
+  public var transform: (inout Key.Value, SwiftUICore.Anchor<AnchorValue>) -> Swift.Void
+  @inlinable public init(anchor: SwiftUICore.Anchor<AnchorValue>.Source, transform: @escaping (inout Key.Value, SwiftUICore.Anchor<AnchorValue>) -> Swift.Void) {
+        self.anchor = anchor
+        self.transform = transform
+    }
+  nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._AnchorTransformModifier<AnchorValue, Key>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  public typealias Body = Swift.Never
+}
+@available(*, unavailable)
+extension SwiftUICore._AnchorTransformModifier : Swift.Sendable {
+}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -16422,6 +16974,145 @@ extension SwiftUICore.View {
 extension SwiftUICore._InsetViewModifier : Swift.Sendable {
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@usableFromInline
+internal struct SafeAreaPaddingModifier : SwiftUICore.ViewModifier {
+  @usableFromInline
+  internal init(edges: SwiftUICore.Edge.Set, insets: SwiftUICore.EdgeInsets?)
+  @usableFromInline
+  @_Concurrency.MainActor @preconcurrency internal func body(content: SwiftUICore.SafeAreaPaddingModifier.Content) -> some SwiftUICore.View
+  
+  @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
+  @usableFromInline
+  internal typealias Body = @_opaqueReturnTypeOf("$s7SwiftUI23SafeAreaPaddingModifierV4body7contentQrAA05_ViewF8_ContentVyACG_tF", 0) __
+}
+@available(*, unavailable)
+extension SwiftUICore.SafeAreaPaddingModifier : Swift.Sendable {
+}
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+extension SwiftUICore.View {
+  @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+  @_alwaysEmitIntoClient nonisolated public func safeAreaPadding(_ insets: SwiftUICore.EdgeInsets) -> some SwiftUICore.View {
+        modifier(
+            SafeAreaPaddingModifier(edges: .all, insets: insets)
+        )
+    }
+  
+  @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+  @_alwaysEmitIntoClient nonisolated public func safeAreaPadding(_ edges: SwiftUICore.Edge.Set = .all, _ length: CoreFoundation.CGFloat? = nil) -> some SwiftUICore.View {
+        modifier(
+            SafeAreaPaddingModifier(
+                edges: edges,
+                insets: length.map { EdgeInsets(_all: $0) }
+            )
+        )
+    }
+  
+  @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+  @_alwaysEmitIntoClient nonisolated public func safeAreaPadding(_ length: CoreFoundation.CGFloat) -> some SwiftUICore.View {
+        safeAreaPadding(.all, length)
+    }
+  
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+extension SwiftUICore.Group {
+  public init<Base, Result>(sections view: Base, @SwiftUICore.ViewBuilder transform: @escaping (SwiftUICore.SectionCollection) -> Result) where Content == SwiftUICore.GroupSectionsOfContent<Base, Result>, Base : SwiftUICore.View, Result : SwiftUICore.View
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+public struct GroupSectionsOfContent<Sections, Content> : SwiftUICore.View where Sections : SwiftUICore.View, Content : SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
+    get
+  }
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s7SwiftUI22GroupSectionsOfContentV4bodyQrvp", 0) __<Sections, Content>
+}
+@available(*, unavailable)
+extension SwiftUICore.GroupSectionsOfContent : Swift.Sendable {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+public struct SectionCollection : Swift.RandomAccessCollection {
+  public subscript(index: Swift.Int) -> SwiftUICore.SectionConfiguration {
+    get
+  }
+  public var startIndex: Swift.Int {
+    get
+  }
+  public var endIndex: Swift.Int {
+    get
+  }
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Element = SwiftUICore.SectionConfiguration
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Index = Swift.Int
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Indices = Swift.Range<Swift.Int>
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Iterator = Swift.IndexingIterator<SwiftUICore.SectionCollection>
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias SubSequence = Swift.Slice<SwiftUICore.SectionCollection>
+}
+@available(*, unavailable)
+extension SwiftUICore.SectionCollection : Swift.Sendable {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+public struct SectionConfiguration : Swift.Identifiable {
+  public struct ID : Swift.Hashable {
+    public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: SwiftUICore.SectionConfiguration.ID, b: SwiftUICore.SectionConfiguration.ID) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public var id: SwiftUICore.SectionConfiguration.ID {
+    get
+  }
+  public var containerValues: SwiftUICore.ContainerValues {
+    get
+  }
+  public var header: SwiftUICore.SubviewsCollection {
+    get
+  }
+  public var footer: SwiftUICore.SubviewsCollection {
+    get
+  }
+  public var content: SwiftUICore.SubviewsCollection {
+    get
+  }
+}
+@available(*, unavailable)
+extension SwiftUICore.SectionConfiguration : Swift.Sendable {
+}
+@available(*, unavailable)
+extension SwiftUICore.SectionConfiguration.ID : Swift.Sendable {
+}
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
@@ -16707,6 +17398,37 @@ extension SwiftUICore.SystemFormatStyle.Stopwatch : Foundation.DiscreteFormatSty
 extension SwiftUICore.SystemFormatStyle.Stopwatch {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+public struct Subview : SwiftUICore.View, Swift.Identifiable {
+  public struct ID : Swift.Hashable {
+    public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: SwiftUICore.Subview.ID, b: SwiftUICore.Subview.ID) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public var id: SwiftUICore.Subview.ID {
+    get
+  }
+  public var containerValues: SwiftUICore.ContainerValues {
+    get
+  }
+  nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.Subview>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
+  nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.Subview>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = Swift.Never
+}
+@available(*, unavailable)
+extension SwiftUICore.Subview : Swift.Sendable {
+}
+@available(*, unavailable)
+extension SwiftUICore.Subview.ID : Swift.Sendable {
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -18441,6 +19163,13 @@ extension SwiftUICore.Font.Leading : Swift.Equatable {}
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Font.Leading : Swift.Hashable {}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
+extension SwiftUICore._ContainerValueWritingModifier : SwiftUICore.ViewModifier {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -18666,6 +19395,18 @@ extension SwiftUICore.EmptyModifier : Swift.Sendable {}
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.EmptyModifier : Swift.BitwiseCopyable {}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+extension SwiftUICore.Visibility : Swift.Sendable {}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
+extension SwiftUICore.Visibility : Swift.BitwiseCopyable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)

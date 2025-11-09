@@ -36,10 +36,21 @@ BROWSERENGINE_EXPORT
 ///
 /// - Parameters:
 ///   - `interruptionHandler` : A block that is called if the extension process terminates.
-///   - `completion` : A block called with a new ``BEWebContentProcess`` when the extension process has
+///   - `completion` : A block called with a new ``BENetworkingProcess`` when the extension process has
 ///     launched or with an error.
 +(void)networkProcessWithInterruptionHandler:(void(^)(void))interruptionHandler
                                completion:(void(^)(BENetworkingProcess* _Nullable process, NSError* _Nullable error))completion;
+
+/// Asynchronously launches a network extension process.
+///
+/// This initializer launches a new network extension process with the provided bundle identifier.
+///
+/// - Parameters:
+///   - `bundleID` : The bundle identifier of the network extension process to launch.
+///   - `interruptionHandler` : A block that is called if the extension process terminates.
+///   - `completion` : A block called with a new ``BENetworkingProcess`` when the extension process has
+///     launched or with an error.
++(void)networkProcessWithBundleID:(NSString *)bundleID interruptionHandler:(void(^)(void))interruptionHandler completion:(void(^)(BENetworkingProcess *_Nullable process, NSError *_Nullable error))completion API_AVAILABLE(ios(18.2));
 
 /// Stops the extension process.
 ///

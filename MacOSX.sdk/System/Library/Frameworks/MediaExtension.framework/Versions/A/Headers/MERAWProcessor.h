@@ -82,7 +82,7 @@
 
 	Creation:
 		An instance of an MERAWProcessorExtension factory object is created the first time a given processor is opened
-		by the VideoToolbox in a process. The processorWithCodecType: method on the MERAWProcessorExtension
+		by the VideoToolbox in a process. The processorWithFormatDescription: method on the MERAWProcessorExtension
 		object will be called once for each processor instance needed. The processor can evaluate the provided codecType
 		and CMVideoFormatDescription at this point and confirm whether it is able to process the specified format. If the
 		processor cannot process the format, the factory routine should return MEErrorUnsupportedFeature. This sequence of

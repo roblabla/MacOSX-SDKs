@@ -338,6 +338,7 @@ exports:
                        __AAUILogGreenTeaEnabled, __AAUILogGreenTeaTransmittingPhotosOrVideos, 
                        __AAUILogGreenTeaWithFormat, __AAUILogSystem, __AAUIPPSLogSystem, 
                        __AAUISignpostCreate, __AAUISignpostGetNanoseconds, __AAUISignpostLogSystem, 
+                       _kAAAnalyticEventRecoveryContactCodeEntryLanding, _kAAAnalyticEventRecoveryContactRecoveryLanding, 
                        _kAccountAccessBack, _kAccountAccessEditInvite, _kAccountAccessSend ]
     objc-classes:    [ AAUICDPHelper, AAUICustodianRepairHelper, AAUILegacyContactsViewFactory, 
                        AAUIPrintableAccountRecoverySummaryViewFactory, AAUIRecoveryContactsViewFactory, 

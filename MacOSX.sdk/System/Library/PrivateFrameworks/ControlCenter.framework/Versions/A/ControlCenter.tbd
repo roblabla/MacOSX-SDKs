@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ControlCenter.framework/Versions/A/ControlCenter'
-current-version: 571.1.22
+current-version: 571.2.31
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -52,7 +52,37 @@ exports:
                        '_$s13ControlCenter0aB17ModulePreferencesP13showInMenuBarSbvgTq', 
                        '_$s13ControlCenter0aB17ModulePreferencesP13showInMenuBarSbvsTj', 
                        '_$s13ControlCenter0aB17ModulePreferencesP13showInMenuBarSbvsTq', 
-                       '_$s13ControlCenter0aB17ModulePreferencesTL', '_$s13ControlCenter0aB27ModulePreferencesControllerC010userShowInaB0SbSgvM', 
+                       '_$s13ControlCenter0aB17ModulePreferencesTL', '_$s13ControlCenter0aB17ModuleXPCListenerC13ClientMessageO04hideC0yA2EmFWC', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC13ClientMessageO04showC0yA2EmFWC', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC13ClientMessageO06toggleC0yA2EmFWC', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC13ClientMessageO11descriptionSSvg', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC13ClientMessageO11descriptionSSvpMV', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC13ClientMessageO8rawValueAESgSS_tcfC', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC13ClientMessageO8rawValueSSvg', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC13ClientMessageO8rawValueSSvpMV', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC13ClientMessageOMa', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC13ClientMessageOMn', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC13ClientMessageON', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC13ClientMessageOSEAAMc', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC13ClientMessageOSHAAMc', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC13ClientMessageOSQAAMc', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC13ClientMessageOSYAAMc', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC13ClientMessageOSeAAMc', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC13ClientMessageOs23CustomStringConvertibleAAMc', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC8DelegateMp', '_$s13ControlCenter0aB17ModuleXPCListenerC8DelegateP07controlbcD0_17didReceiveMessage4fromyAC_AC06ClientI0O10Foundation4UUIDVtFTj', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC8DelegateP07controlbcD0_17didReceiveMessage4fromyAC_AC06ClientI0O10Foundation4UUIDVtFTq', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC8DelegateTL', '_$s13ControlCenter0aB17ModuleXPCListenerC8activateyyKF', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC8delegateAC8Delegate_pSgvM', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC8delegateAC8Delegate_pSgvg', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC8delegateAC8Delegate_pSgvpMV', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerC8delegateAC8Delegate_pSgvs', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerCACycfC', '_$s13ControlCenter0aB17ModuleXPCListenerCACycfCTj', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerCACycfCTq', '_$s13ControlCenter0aB17ModuleXPCListenerCACycfc', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerCMa', '_$s13ControlCenter0aB17ModuleXPCListenerCMm', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerCMn', '_$s13ControlCenter0aB17ModuleXPCListenerCMo', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerCMu', '_$s13ControlCenter0aB17ModuleXPCListenerCN', 
+                       '_$s13ControlCenter0aB17ModuleXPCListenerCfD', '_$s13ControlCenter0aB17ModuleXPCListenerCfd', 
+                       '_$s13ControlCenter0aB27ModulePreferencesControllerC010userShowInaB0SbSgvM', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerC010userShowInaB0SbSgvg', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerC010userShowInaB0SbSgvpMV', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerC010userShowInaB0SbSgvs', 
@@ -119,6 +149,11 @@ exports:
                        '_$s13ControlCenter0aB27ModulePreferencesControllerCMu', '_$s13ControlCenter0aB27ModulePreferencesControllerCN', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerCfD', '_$s13ControlCenter0aB27ModulePreferencesControllerCfd', 
                        '_$s13ControlCenter0aB29CopyCompactClockDateFormatterSo06NSDateG0CyF', 
+                       '_$s13ControlCenter0aB6ModuleC04hideC0yyKF', '_$s13ControlCenter0aB6ModuleC04showC0yyKF', 
+                       '_$s13ControlCenter0aB6ModuleC06toggleC0yyKF', '_$s13ControlCenter0aB6ModuleCACycfC', 
+                       '_$s13ControlCenter0aB6ModuleCACycfc', '_$s13ControlCenter0aB6ModuleCMa', 
+                       '_$s13ControlCenter0aB6ModuleCMn', '_$s13ControlCenter0aB6ModuleCMo', 
+                       '_$s13ControlCenter0aB6ModuleCN', '_$s13ControlCenter0aB6ModuleCfD', 
                        '_$s13ControlCenter11DeviceModelV3usbACSgSS_tcfC', '_$s13ControlCenter11DeviceModelV8vendorIDs6UInt16VvM', 
                        '_$s13ControlCenter11DeviceModelV8vendorIDs6UInt16Vvg', '_$s13ControlCenter11DeviceModelV8vendorIDs6UInt16VvpMV', 
                        '_$s13ControlCenter11DeviceModelV8vendorIDs6UInt16Vvs', '_$s13ControlCenter11DeviceModelV9bluetoothACSgSS_tcfC', 
@@ -699,5 +734,5 @@ exports:
                        '_$s13ControlCenter34MenuBarModuleVisibilityPreferencesCfd', 
                        _ControlCenterClockDateFormatterChangedNotification, _ControlCenterCopyClockDateFormatter, 
                        __ControlCenterCopyClockDateFormatter ]
-    objc-classes:    [ _TtC13ControlCenter22ClockSpeechPreferences ]
+    objc-classes:    [ _TtC13ControlCenter19ControlCenterModule, _TtC13ControlCenter22ClockSpeechPreferences ]
 ...

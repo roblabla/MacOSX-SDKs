@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosFormats.framework/Versions/A/PhotosFormats'
-current-version: 711.0.180
+current-version: 721.0.150
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN2pf17ArchiveLineParserE, __ZTIN5boost10wrapexceptINS_7bad_getEEE, 
@@ -123,13 +123,15 @@ exports:
                        _PFDefaultParallaxStyleKindForCategory, _PFDeviceLockScreenApproximateTimeRectNormalized, 
                        _PFDeviceLockScreenApproximateTimeRectNormalized_SBS, _PFDeviceLockScreenFocusAreaRectNormalized, 
                        _PFDeviceNativeScreenSize, _PFDeviceScreenScale, _PFDeviceScreenSize, 
-                       _PFDisplayAssetPlaybackStyleDescription, _PFErrorDomain, _PFErrorOrUnderlyingErrorMatchesCodesByDomain, 
+                       _PFDeviceSupportsSmartStyles, _PFDisplayAssetPlaybackStyleDescription, 
+                       _PFErrorDomain, _PFErrorOrUnderlyingErrorMatchesCodesByDomain, 
                        _PFExportGIFRequestErrorDomain, _PFFaceFractionIntercept, 
-                       _PFFaceFractionSlope, _PFFigCopyImageDataWithProperties, _PFFigCopyImageFileWithProperties, 
+                       _PFFaceFractionSlope, _PFFigCopyImageDataToURLWithUpdatedProperties, 
                        _PFFigCopyImageFileWithPropertiesToData, _PFFigCreateCGImageFromImageData, 
                        _PFFigCreateCVPixelBufferFromImageData, _PFFigCreateCVPixelBufferFromURL, 
                        _PFFigEncodeCVPixelBufferToData, _PFFigEncodeCVPixelBufferToURL, 
-                       _PFFigJPEGDataFromImage, _PFFigTranscodeImageDataToJPEG, _PFFigTranscodeImageFileToJPEG, 
+                       _PFFigGetImageSourceImageIndexForContainerItemID, _PFFigJPEGDataFromImage, 
+                       _PFFigTranscodeImageDataToJPEG, _PFFigTranscodeImageFileToJPEG, 
                        _PFFrameApplyingContentsRectInBounds, _PFGMTDateFromDateTimeZone, 
                        _PFGMTDateFromLocalDate, _PFGMTTimeZone, _PFGetDimensionsFromImageProperties, 
                        _PFImageMetricComputeSSIMForCIImage, _PFIsErrorOrUnderlyingErrorFileNotFound, 
@@ -286,8 +288,9 @@ exports:
                        _PFStringFromPFAdjustmentStyleCast, _PFStringFromPFAdjustmentStyleCastShort, 
                        _PFSupplementalResourceExtensionAAE, _PFSupplementalResourceExtensionXMP, 
                        _PFTimeZoneDateFromGMTDate, _PFUnderlyingErrorThatMatchesCodesByDomain, 
-                       _PFUniformTypeUtilitiesDynamicUTIPrefix, _PFVideoAVCFObjectBuilderCopyAVCFAsset, 
-                       _PFVideoAVCFObjectBuilderCreateErrorWithDescription, _PFVideoAVCFObjectBuilderCreateExportSessionWithExportPreset, 
+                       _PFUniformTypeUtilitiesDynamicUTIPrefix, _PFUserHasSetSmartStyle, 
+                       _PFVideoAVCFObjectBuilderCopyAVCFAsset, _PFVideoAVCFObjectBuilderCreateErrorWithDescription, 
+                       _PFVideoAVCFObjectBuilderCreateExportSessionWithExportPreset, 
                        _PFVideoAVCFObjectBuilderCreatePlayerItem, _PFVideoAVCFObjectBuilderCreateWithVideoAsset, 
                        _PFVideoAVCFObjectBuilderDefaultVideoAdjustments, _PFVideoAVCFObjectBuilderGetAudioMix, 
                        _PFVideoAVCFObjectBuilderGetMutableComposition, _PFVideoAVCFObjectBuilderGetTypeID, 

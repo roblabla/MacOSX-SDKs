@@ -3,8 +3,8 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MIL.framework/Versions/A/MIL'
-current-version: 3401.3.1
-compatibility-version: 3401.3
+current-version: 3402.3.2
+compatibility-version: 3402.3
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIFN3MIL16ValidationResultERKNS_11IROperationEE, __ZTIFN3MIL4Fp16ES0_E, 
@@ -1634,6 +1634,7 @@ exports:
                        __ZN3MIL9Transform18NewOperationOutputaSEOS1_, __ZN3MIL9Transform18NewOperationOutputaSERKS1_, 
                        __ZN3MIL9Transform18ProgramTransformer15MatchAndReplaceERKNS_8Matching15CompiledPatternERKNSt3__18functionIFvRNS0_12MatchContextENS2_9MatchViewEEEE, 
                        __ZN3MIL9Transform18ProgramTransformer15MatchAndReplaceERKNS_8Matching7PatternERKNSt3__18functionIFvRNS0_12MatchContextENS2_9MatchViewEEEE, 
+                       __ZN3MIL9Transform18ProgramTransformer17ExtractSubProgramERKNSt3__13setImNS2_4lessImEENS2_9allocatorImEEEERKNS2_12basic_stringIcNS2_11char_traitsIcEENS6_IcEEEE, 
                        __ZN3MIL9Transform18ProgramTransformer17ExtractSubProgramERKNSt3__16vectorINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEENS7_IS9_EEEESD_RKS9_, 
                        __ZN3MIL9Transform18ProgramTransformer17ExtractSubProgramEmmRKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN3MIL9Transform18ProgramTransformer17FoldConstantNodesEv, 

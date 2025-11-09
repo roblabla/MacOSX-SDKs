@@ -1,4 +1,4 @@
-/* iig(DriverKit-400.0.2) generated from IOService.iig */
+/* iig(DriverKit-402.60.12) generated from IOService.iig */
 
 /* IOService.iig:1-71 */
 /*
@@ -70,7 +70,7 @@ enum {
 	kIOServiceHaltStateRestart  = 0x00000002,
 };
 
-/* source class IOService IOService.iig:72-551 */
+/* source class IOService IOService.iig:72-561 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -257,6 +257,16 @@ public:
 	virtual kern_return_t
 	ChangePowerState(
 		uint32_t powerFlags);
+
+	/*!
+     * @brief       Request provider to create a power override.
+     * @discussion  Allows a driver to ignore power desires of its children, similar to powerOverrideOnPriv in IOKit, enabling its power state to be governed solely by its own desire (set via IOService::ChangePowerState)
+     * @param       enable Whether to enable or disable the power override.
+     * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
+     */
+	virtual kern_return_t
+	SetPowerOverride(
+		bool enable);
 
     /*!
      * @brief       Request create a new user client for a client process.
@@ -555,7 +565,7 @@ private:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOService IOService.iig:72-551 */
+/* generated class IOService IOService.iig:72-561 */
 
 #define IOService_Start_ID            0xab6f76dde6d693f2ULL
 #define IOService_Stop_ID            0x98e715041c459fa5ULL
@@ -570,6 +580,7 @@ private:
 #define IOService_JoinPMTree_ID            0xf26c46526735efffULL
 #define IOService_SetPowerState_ID            0xd200fde7d57ecca6ULL
 #define IOService_ChangePowerState_ID            0xdb75cfc3395484a0ULL
+#define IOService_SetPowerOverride_ID            0xdca775718f07ae4fULL
 #define IOService_NewUserClient_ID            0xf669efffcb89ed9cULL
 #define IOService_Create_ID            0xe1a46dbd68bbe09cULL
 #define IOService_Terminate_ID            0xf7a595d9927810c8ULL
@@ -644,6 +655,9 @@ private:
 
 #define IOService_ChangePowerState_Args \
         uint32_t powerFlags
+
+#define IOService_SetPowerOverride_Args \
+        bool enable
 
 #define IOService_NewUserClient_Args \
         uint32_t type, \
@@ -812,6 +826,11 @@ public:\
     kern_return_t\
     ChangePowerState(\
         uint32_t powerFlags,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    SetPowerOverride(\
+        bool enable,\
         OSDispatchMethod supermethod = NULL);\
 \
     kern_return_t\
@@ -1117,6 +1136,12 @@ public:\
         OSMetaClassBase * target,\
         ChangePowerState_Handler func);\
 \
+    typedef kern_return_t (*SetPowerOverride_Handler)(OSMetaClassBase * target, IOService_SetPowerOverride_Args);\
+    static kern_return_t\
+    SetPowerOverride_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        SetPowerOverride_Handler func);\
+\
     typedef kern_return_t (*NewUserClient_Handler)(OSMetaClassBase * target, IOService_NewUserClient_Args);\
     static kern_return_t\
     NewUserClient_Invoke(const IORPC rpc,\
@@ -1290,6 +1315,9 @@ protected:\
     ChangePowerState_Impl(IOService_ChangePowerState_Args);\
 \
     kern_return_t\
+    SetPowerOverride_Impl(IOService_SetPowerOverride_Args);\
+\
+    kern_return_t\
     NewUserClient_Impl(IOService_NewUserClient_Args);\
 \
     kern_return_t\
@@ -1367,6 +1395,6 @@ public:\
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOService.iig:553- */
+/* IOService.iig:563- */
 
 #endif /* ! _IOKIT_UIOSERVICE_H */

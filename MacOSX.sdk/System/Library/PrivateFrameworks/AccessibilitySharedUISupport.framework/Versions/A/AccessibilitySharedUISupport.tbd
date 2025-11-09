@@ -144,6 +144,8 @@ exports:
                        '_$s28AccessibilitySharedUISupport17AXOnboardingModelC13initialOffsetSivpMV', 
                        '_$s28AccessibilitySharedUISupport17AXOnboardingModelC13initialOffsetSivsTj', 
                        '_$s28AccessibilitySharedUISupport17AXOnboardingModelC13initialOffsetSivsTq', 
+                       '_$s28AccessibilitySharedUISupport17AXOnboardingModelC15invalidateTimeryyFTj', 
+                       '_$s28AccessibilitySharedUISupport17AXOnboardingModelC15invalidateTimeryyFTq', 
                        '_$s28AccessibilitySharedUISupport17AXOnboardingModelC16bundleIdentifierSSvMTj', 
                        '_$s28AccessibilitySharedUISupport17AXOnboardingModelC16bundleIdentifierSSvMTq', 
                        '_$s28AccessibilitySharedUISupport17AXOnboardingModelC16bundleIdentifierSSvgTj', 

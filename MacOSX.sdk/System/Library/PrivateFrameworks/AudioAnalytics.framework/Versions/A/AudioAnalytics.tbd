@@ -58,8 +58,8 @@ exports:
                        _AudioAnalyticsRequestMessage, _AudioAnalyticsSendMessage, 
                        _AudioAnalyticsSendSessionlessMessage, _AudioAnalyticsSetAudioServiceType, 
                        _AudioAnalyticsSetConfiguration, _AudioAnalyticsStartReporter, 
-                       _AudioAnalyticsStopReporter, _kAAPCMetricDirtyMemPeakDeltaID, 
-                       _kAAPCMetricDirtyMemRecentPeakID ]
-    objc-classes:    [ AudioAnalyticsReporter, AudioAnalyticsTrace, AudioAnalyticsTraceArgs, 
-                       _TtC14AudioAnalytics26AudioAnalyticsTestReporter ]
+                       _AudioAnalyticsStopReporter, _AudioAnalyticsTraceWrapperPost, 
+                       _AudioAnalyticsTraceWrapperPostEnd, _AudioAnalyticsTraceWrapperPostStart, 
+                       _kAAPCMetricDirtyMemPeakDeltaID, _kAAPCMetricDirtyMemRecentPeakID ]
+    objc-classes:    [ AudioAnalyticsReporter, _TtC14AudioAnalytics26AudioAnalyticsTestReporter ]
 ...

@@ -700,7 +700,7 @@ MTL_EXPORT API_AVAILABLE(macos(13.0), ios(16.0))
  @abstract Whether this pipeline will support being used by commands in an indirect command buffer.
  @discussion The default value is NO.
  */
-@property (readwrite, nonatomic) BOOL supportIndirectCommandBuffers API_AVAILABLE(macos(14.0), ios(17.0));
+@property (readwrite, nonatomic) BOOL supportIndirectCommandBuffers API_AVAILABLE(macos(14.0), ios(17.0), tvos(18.1), visionos(2.1));
 
 /*!
  @property binaryArchives

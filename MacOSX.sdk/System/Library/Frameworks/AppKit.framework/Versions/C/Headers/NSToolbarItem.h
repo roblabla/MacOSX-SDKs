@@ -265,6 +265,9 @@ APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarToggleInspectorItemIdentifier API
 /** A standard item for cloud sharing via NSSharingServiceNameCloudSharing. It validates itself and modifies its appearance by using the NSCloudSharingValidation protocol. It sends -performCloudSharing: to the firstResponder. */
 APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarCloudSharingItemIdentifier API_AVAILABLE(macos(10.12));
 
+/** A standard item that is configured to send -showWritingTools: to the firstResponder when invoked. */
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarWritingToolsItemIdentifier API_AVAILABLE(macos(15.2));
+
 /**
  Creates a new NSTrackingSeparatorToolbarItem and automatically configures it to track the divider of the sidebar if one is discovered.
  Only applies to windows with `NSWindowStyleMaskFullSizeContentView` applied.

@@ -148,6 +148,8 @@ exports:
                        '_$sSS16SiriMailInternalE23partiallyRedactedStringSSvpMV', 
                        '_$sSS16SiriMailInternalE33partiallyRedactedSubjectOrSummarySSvg', 
                        '_$sSS16SiriMailInternalE33partiallyRedactedSubjectOrSummarySSvpMV', 
+                       '_$sSo8CSPersonC16SiriMailInternalE12dialogPerson0B12DialogEngine0gF0CSgvg', 
+                       '_$sSo8CSPersonC16SiriMailInternalE12dialogPerson0B12DialogEngine0gF0CSgvpMV', 
                        '_$ss6ResultO16SiriMailInternal0B7KitFlow010TemplatingA0VRszrlE6dialogSSvg', 
                        '_$ss6ResultO16SiriMailInternal0B7KitFlow010TemplatingA0VRszrlE6dialogSSvpMV', 
                        _SiriMailInternalVersionNumber, _SiriMailInternalVersionString ]

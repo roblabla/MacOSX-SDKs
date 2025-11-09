@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SummarizationKit.framework/Versions/A/SummarizationKit'
-current-version: 1.1.10
+current-version: 1.2.4
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -106,6 +106,7 @@ exports:
                        '_$s16SummarizationKit0A7SessionC13ConfigurationV20handlesSensitiveDataAESb_tcfC', 
                        '_$s16SummarizationKit0A7SessionC13ConfigurationVMa', '_$s16SummarizationKit0A7SessionC13ConfigurationVMn', 
                        '_$s16SummarizationKit0A7SessionC13ConfigurationVN', '_$s16SummarizationKit0A7SessionC13configuration11sessionInfoA2C13ConfigurationV_AA0cF0_ptKcfC', 
+                       '_$s16SummarizationKit0A7SessionC16canHandleRequestySbAA0F4Info_pF', 
                        '_$s16SummarizationKit0A7SessionC16partialSummaries3for11requestInfo15signalCollectorScsy4Sage0A6ClientC27TextAssistantPartialSummaryVy_SSGs5Error_pGAA6SKTextV_AA07RequestH0_pAA015TelemetrySignalJ0CSgtYaKF', 
                        '_$s16SummarizationKit0A7SessionC16partialSummaries3for11requestInfo15signalCollectorScsy4Sage0A6ClientC27TextAssistantPartialSummaryVy_SSGs5Error_pGAA6SKTextV_AA07RequestH0_pAA015TelemetrySignalJ0CSgtYaKFTu', 
                        '_$s16SummarizationKit0A7SessionC23overestimatedTokenCount3forSiSS_tF', 
@@ -157,6 +158,8 @@ exports:
                        '_$s16SummarizationKit12GMSModelInfoV19tokenizerIdentifierSSSgvpMV', 
                        '_$s16SummarizationKit12GMSModelInfoV20draftModelIdentifierSSSgvg', 
                        '_$s16SummarizationKit12GMSModelInfoV20draftModelIdentifierSSSgvpMV', 
+                       '_$s16SummarizationKit12GMSModelInfoV26safetyRejectionPlaceholderSSSgvg', 
+                       '_$s16SummarizationKit12GMSModelInfoV26safetyRejectionPlaceholderSSSgvpMV', 
                        '_$s16SummarizationKit12GMSModelInfoV7isStaleSbvg', '_$s16SummarizationKit12GMSModelInfoV7isStaleSbvpMV', 
                        '_$s16SummarizationKit12GMSModelInfoV9stalenessSdvg', '_$s16SummarizationKit12GMSModelInfoV9stalenessSdvpMV', 
                        '_$s16SummarizationKit12GMSModelInfoVMa', '_$s16SummarizationKit12GMSModelInfoVMn', 
@@ -1198,5 +1201,7 @@ exports:
                        '_$s4Sage7SummaryV16SummarizationKitE24setAttributedStringValue_3fory10Foundation0fG0VSg_AD0C5StyleOtF', 
                        '_$sSo13NSProcessInfoC16SummarizationKitE18isDebuggerAttachedSbvg', 
                        '_$sSo13NSProcessInfoC16SummarizationKitE18isDebuggerAttachedSbvpMV', 
+                       '_$sSo7NSErrorC16SummarizationKitE18loggingDescriptionSSvg', 
+                       '_$sSo7NSErrorC16SummarizationKitE18loggingDescriptionSSvpMV', 
                        _SummarizationKitVersionNumber, _SummarizationKitVersionString ]
 ...

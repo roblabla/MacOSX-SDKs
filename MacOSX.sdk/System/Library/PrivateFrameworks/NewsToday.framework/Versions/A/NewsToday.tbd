@@ -14,7 +14,8 @@ allowable-clients:
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _FCConsumedArticleFilterMethodForReadArticlesFilterMethod, 
+    symbols:         [ _ColorGradientPairWithJSONDictionary, _ColorGradientWithJSONDictionary, 
+                       _ColorPairWithJSONDictionary, _ColorPoint, _ColorStop, _FCConsumedArticleFilterMethodForReadArticlesFilterMethod, 
                        _FCConsumedArticleFilterMethodForSeenArticlesFilterMethod, 
                        _NNCreateHeadlineSyncableHeadline, _NNHeadlineSyncableResultFromHeadline, 
                        _NNHeadlineSyncableResultFromResult, _NNHeadlineSyncableSectionFromSection, 
@@ -59,7 +60,7 @@ exports:
                        NTSectionFeedFilterTransformation, NTSectionPlaceholderDescriptor, 
                        NTSectionPresencePersonalizationAbsoluteRequest, NTSectionPresencePersonalizationOperation, 
                        NTSectionPresencePersonalizationRelativeRequest, NTSourceAvailabilityManager, 
-                       NTTagSectionFetchDescriptor, NTTodayConfigConversionOperation, 
+                       NTTagSectionFetchDescriptor, NTTodayBanner, NTTodayConfigConversionOperation, 
                        NTTodayConfigOperation, NTTodayContext, NTTodayHeadlineProtoitem, 
                        NTTodayItemOperation, NTTodayModuleDescriptorsOperation, NTTodayResultOperation, 
                        NTTodayResults, NTTodayResultsSource, NTWidgetConfigDataOperation ]

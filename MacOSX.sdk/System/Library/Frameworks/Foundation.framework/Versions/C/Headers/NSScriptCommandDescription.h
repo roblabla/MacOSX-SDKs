@@ -21,7 +21,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
     id _moreVars;
 }
 
-- (id)init API_UNAVAILABLE(macos, ios, watchos, tvos);
+- (id)init NS_UNAVAILABLE;
 
 /* Initialize, given a scripting suite name, command name, and command declaration dictionary of the sort that is valid in .scriptSuite property list files.
 */

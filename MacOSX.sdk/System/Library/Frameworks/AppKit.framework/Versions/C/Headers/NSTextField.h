@@ -57,6 +57,7 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 @property NSLineBreakStrategy lineBreakStrategy API_AVAILABLE(macos(10.15));
 #endif
 
+@property BOOL allowsWritingTools API_AVAILABLE(macos(15.2)); // Default is YES. Configures its field editor to work with Writing Tools.
 @end
 
 #pragma mark NSTextField NSTouchBar Properties

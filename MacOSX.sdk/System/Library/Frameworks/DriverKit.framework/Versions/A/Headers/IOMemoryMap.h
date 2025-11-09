@@ -1,4 +1,4 @@
-/* iig(DriverKit-400.0.2) generated from IOMemoryMap.iig */
+/* iig(DriverKit-402.60.12) generated from IOMemoryMap.iig */
 
 /* IOMemoryMap.iig:1-46 */
 /*

@@ -50,7 +50,8 @@ typedef NS_ENUM(NSInteger, UIBarButtonSystemItem) {
     UIBarButtonSystemItemUndo API_AVAILABLE(ios(3.0)),
     UIBarButtonSystemItemRedo API_AVAILABLE(ios(3.0)),
     UIBarButtonSystemItemPageCurl API_DEPRECATED("", ios(4.0, 11.0)) API_UNAVAILABLE(visionos, watchos),
-    UIBarButtonSystemItemClose API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos)
+    UIBarButtonSystemItemClose API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos),
+    UIBarButtonSystemItemWritingTools API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos, watchos)
 } API_UNAVAILABLE(watchos);
 
 @class UIImage, UIView;

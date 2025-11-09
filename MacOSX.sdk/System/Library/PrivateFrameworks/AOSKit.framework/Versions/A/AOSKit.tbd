@@ -77,7 +77,7 @@ exports:
                        __AOSSerializeAccountInfo, __ShowPasswordChangedAlert, __didFailCallback, 
                        __didFinishLoadingCallback, __didReceiveAuthChallengeCallback, 
                        __didReceiveDataCallback, __didReceiveResponseCallback, __isCertificateTrusted, 
-                       __isSetupServiceHost, __willCacheResponseCallback, __willSendRequestForAuthChallengeCallback, 
+                       __shouldPinHostName, __willCacheResponseCallback, __willSendRequestForAuthChallengeCallback, 
                        _kAOSAcceptLanguageHeaderName, _kAOSAcceptTOSHeaderName, _kAOSAccountChangedNotification, 
                        _kAOSAccountFamilyStatusMessageKey, _kAOSAccountHasAcceptedTermsKey, 
                        _kAOSAccountInfoKey, _kAOSAccountIsFamilyEligibleKey, _kAOSAccountIsHSAEnabledKey, 

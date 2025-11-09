@@ -183,6 +183,6 @@ exports:
                        PLXPCListenerOperatorComposition, PLXPCRelay, PLXPCResponderOperatorComposition, 
                        PPSCollectionOperator, PPSCoreStorage, PPSCoreUtilities, PPSEntryDefinition, 
                        PPSEntryKey, PPSFeatureFlagReaderHelper, PPSFlatStorage, PPSSQLStorage, 
-                       PPSStorage, PPSSubmissionUtilities, PowerlogCore, RbdcConverterHelper, 
-                       SignpostReaderHelper ]
+                       PPSStorage, PPSSubmissionRecord, PPSSubmissionUtilities, PowerlogCore, 
+                       RbdcConverterHelper, SignpostReaderHelper ]
 ...

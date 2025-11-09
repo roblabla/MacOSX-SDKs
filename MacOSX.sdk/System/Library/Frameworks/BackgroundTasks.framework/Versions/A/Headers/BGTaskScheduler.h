@@ -48,19 +48,19 @@ typedef NS_ERROR_ENUM(BGTaskSchedulerErrorDomain, BGTaskSchedulerErrorCode) {
     /// Try canceling some existing task requests and then resubmit the request
     /// that failed.
     BGTaskSchedulerErrorCodeTooManyPendingTaskRequests = 2,
-/// A task scheduling error indicating the app isn’t permitted to schedule the
-/// task.
-///
-/// There are two causes for this error:
-///
-/// - The app doesn’t set the appropriate mode in the
-/// <doc://com.apple.documentation/documentation/bundleresources/information_property_list/uibackgroundmodes>
-/// array.
-/// 
-/// - The task identifier of the submitted task wasn’t in the
-/// <doc://com.apple.documentation/documentation/bundleresources/information_property_list/bgtaskschedulerpermittedidentifiers>
-/// array in [the Info.plist
-/// File](https://developer.apple.com/library/archive/documentation/Carbon/Conceptual/ProvidingUserAssitAppleHelp/authoring_help/authoring_help_book.html#//apple_ref/doc/uid/TP30000903-CH206-SW22).
+    /// A task scheduling error indicating the app isn’t permitted to schedule the
+    /// task.
+    ///
+    /// There are two causes for this error:
+    ///
+    /// - The app doesn’t set the appropriate mode in the
+    /// <doc://com.apple.documentation/documentation/bundleresources/information_property_list/uibackgroundmodes>
+    /// array.
+    ///
+    /// - The task identifier of the submitted task wasn’t in the
+    /// <doc://com.apple.documentation/documentation/bundleresources/information_property_list/bgtaskschedulerpermittedidentifiers>
+    /// array in [the Info.plist
+    /// File](https://developer.apple.com/library/archive/documentation/Carbon/Conceptual/ProvidingUserAssitAppleHelp/authoring_help/authoring_help_book.html#//apple_ref/doc/uid/TP30000903-CH206-SW22).
     BGTaskSchedulerErrorCodeNotPermitted = 3,
 } API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(macos, watchos);
 

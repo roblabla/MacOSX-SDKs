@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosUIEdit.framework/Versions/A/PhotosUIEdit'
-current-version: 711.0.180
+current-version: 721.0.150
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -136,6 +136,6 @@ exports:
                        PERevertPreset, PERotateAction, PESCAPReviewManager, PESCAPReviewPayload, 
                        PESaveRequest, PESerializationUtility, PESerializationUtilityExportSettings, 
                        PESmartPasteablePreset, PESpatialAudioMixMode, PESupport, 
-                       PEValuesCalculator, PEVideoTrimBurnInResult, PEVideoTrimBurnInUtility, 
+                       PETailspin, PEValuesCalculator, PEVideoTrimBurnInResult, PEVideoTrimBurnInUtility, 
                        PUPhotoEditImageValues, _CleanupSegmentInfo, _PEResourceHandler ]
 ...

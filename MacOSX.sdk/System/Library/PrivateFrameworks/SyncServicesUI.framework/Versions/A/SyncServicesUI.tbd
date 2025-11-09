@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SyncServicesUI.framework/Versions/A/SyncServicesUI'
-current-version: 730
+current-version: 733
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ISyncDCAClearedNotification, _ISyncDCAShowingNotification, 

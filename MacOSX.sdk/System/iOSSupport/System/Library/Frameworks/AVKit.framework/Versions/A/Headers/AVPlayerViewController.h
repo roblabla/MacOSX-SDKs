@@ -131,7 +131,7 @@ API_AVAILABLE(ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos) API_U
 	@property	updatesNowPlayingInfoCenter
 	@abstract	Whether or not the now playing info center should be updated. Default is YES.
  */
-@property (nonatomic) BOOL updatesNowPlayingInfoCenter API_AVAILABLE(ios(10.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);
+@property (nonatomic) BOOL updatesNowPlayingInfoCenter API_AVAILABLE(ios(10.0), visionos(1.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*!
 	@property	entersFullScreenWhenPlaybackBegins

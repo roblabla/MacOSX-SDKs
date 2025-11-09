@@ -24,7 +24,8 @@ allowable-clients:
                        SpringBoardUI, SpringBoardUIServices, SystemApertureUI, TVRemoteUI, 
                        TVSystemUI, UNSNotificationAuthorizationAlertExtension, UserNotificationsUIKit, 
                        UserNotificationsUIKitTests, VideoConferenceControlCenterModule, 
-                       WidgetConfigurationExtension, Widgets, WorkflowUI, WorkflowUIServices ]
+                       WeatherUI, WidgetConfigurationExtension, Widgets, WorkflowUI, 
+                       WorkflowUIServices ]
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _MTCompareBlurInputQualities, _MTCoreMaterialPlatformColorsStyleNameForUserInterfaceStyle, 

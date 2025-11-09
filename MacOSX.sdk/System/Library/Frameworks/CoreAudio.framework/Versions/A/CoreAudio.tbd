@@ -55,6 +55,7 @@ exports:
                        __ZN4AMCP13Feature_Flags30allow_adm_dsp_graph_parametersEv, 
                        __ZN4AMCP13Feature_Flags33set_allow_client_io_timeout_macosEb, 
                        __ZN4AMCP13Feature_Flags34set_allow_adm_dsp_graph_parametersEb, 
+                       __ZN4AMCP13Feature_Flags36allow_unified_device_engine_replacerEv, 
                        __ZN4AMCP13Level_Control16set_scalar_valueEf, __ZN4AMCP13Level_Control17set_decibel_valueEf, 
                        __ZN4AMCP13Level_Control25set_scalar_value_and_waitEf, __ZN4AMCP13Level_Control26set_decibel_value_and_waitEf, 
                        __ZN4AMCP13Level_ControlC1ERKNS_6DeviceEjjj, __ZN4AMCP13Level_ControlC1ERNS_14System_ContextEj, 

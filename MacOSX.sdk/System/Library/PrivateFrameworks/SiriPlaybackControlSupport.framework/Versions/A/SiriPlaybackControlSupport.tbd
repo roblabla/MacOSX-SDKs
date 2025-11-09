@@ -228,6 +228,7 @@ exports:
                        '_$s26SiriPlaybackControlSupport0B16ControllingErrorO18unsupportedCommandyA2CmFWC', 
                        '_$s26SiriPlaybackControlSupport0B16ControllingErrorO19unsupportedPlatformyA2CmFWC', 
                        '_$s26SiriPlaybackControlSupport0B16ControllingErrorO20adSkippingDisallowedyA2CmFWC', 
+                       '_$s26SiriPlaybackControlSupport0B16ControllingErrorO21defaultImplementationyA2CmFWC', 
                        '_$s26SiriPlaybackControlSupport0B16ControllingErrorO24outputDeviceNotGroupableyA2CmFWC', 
                        '_$s26SiriPlaybackControlSupport0B16ControllingErrorO26timedOutForCanBeNowPlayingyA2CmFWC', 
                        '_$s26SiriPlaybackControlSupport0B16ControllingErrorO27createUserActivityForResult6result08fallbackF0So06NSUserI0CSgs0K0OyxACG_SSSgtlFZ', 

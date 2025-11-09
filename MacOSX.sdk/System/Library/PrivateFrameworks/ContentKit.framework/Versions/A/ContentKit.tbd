@@ -9,6 +9,8 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$sSo17WFContentPropertyC10ContentKitE14valueItemClassSo0aF0CmSgvg', 
                        '_$sSo17WFContentPropertyC10ContentKitE14valueItemClassSo0aF0CmSgvpMV', 
+                       '_$sSo19WFContentCollectionC10ContentKitE20objectRepresentation3forxSgxm_tYaKRlzClF', 
+                       '_$sSo19WFContentCollectionC10ContentKitE20objectRepresentation3forxSgxm_tYaKRlzClFTu', 
                        '_$sSo19WFContentCollectionC10ContentKitE20objectRepresentation3foryXlSg_SSSgtyXlXp_tYaKF', 
                        '_$sSo19WFContentCollectionC10ContentKitE20objectRepresentation3foryXlSg_SSSgtyXlXp_tYaKFTu', 
                        '_$sSo21WFContentItemRegistryC10ContentKitE07contentB5Class3forSo0aB0CmSgSo6WFTypeC_tF', 

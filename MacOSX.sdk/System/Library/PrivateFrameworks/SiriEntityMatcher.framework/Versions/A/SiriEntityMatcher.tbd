@@ -13,7 +13,7 @@ exports:
                        _SEMTokenizationErrorDomain ]
     objc-classes:    [ SEMAdministrator, SEMAppCustomVocabularySearchResult, SEMAppCustomVocabularySearcher, 
                        SEMCascadeEntityFieldInfo, SEMCascadeEntityInfo, SEMCascadeFieldTypeFilter, 
-                       SEMCascadeItemTypeFilter, SEMDispatcher, SEMFieldMatch, SEMIndexSiteManager, 
-                       SEMSandbox, SEMSpanInfo, SEMSpanMatchQuery, SEMSpanMatchQueryBuilder, 
+                       SEMCascadeItemTypeFilter, SEMDispatcher, SEMFieldMatch, SEMSandbox, 
+                       SEMSpanInfo, SEMSpanMatchQuery, SEMSpanMatchQueryBuilder, 
                        SEMSpanMatchResult, SEMSpanMatcher, SEMTokenizer ]
 ...

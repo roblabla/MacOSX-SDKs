@@ -11,7 +11,8 @@ exports:
                        _CPKCharacterPickerWindowWillOpenNotification, _CPKCharacterViewerWindowRevertToPickerNotification, 
                        _CPKCharacterViewerWindowWillOpenNotification, _CPKCharactersViewDidChangedLayoutNotification, 
                        _CPKEmojiFoundationPrefsChangedNotification, _CPKGetRawCategoryData, 
-                       _CPKLogTypeSessionEvents, _CPKLogTypeStartupPerformance, _CPKSearchFieldDidGetFocusNotification, 
+                       _CPKLogTypeSessionEvents, _CPKLogTypeStartupPerformance, _CPKLoggingGetDefaultLog, 
+                       _CPKLoggingGetUserInterfaceLog, _CPKSearchFieldDidGetFocusNotification, 
                        _CPKTextAttachmentFromCharacterEntity, _CPKTextAttachmentFromImage ]
     objc-classes:    [ CPKCharactersView, CPKDefaultDataSource, CPKEmojiDataSource, 
                        CPKEmojiIMDataSource, CPKEmojiIMViewController, CPKFont, CPKPopover, 

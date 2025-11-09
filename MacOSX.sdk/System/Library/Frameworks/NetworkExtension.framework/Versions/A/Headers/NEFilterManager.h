@@ -128,7 +128,7 @@ API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos)
 /*!
  * @property disableEncryptedDNSSettings
  * @discussion Causes the content filter to disable any other installed encrypted DNS settings. This should only be used if
- * the content filter expects to intercept cleartext UDP DNS packets.
+ * the content filter expects to intercept cleartext UDP DNS packets.  On macOS disables encrypted DNS for Privacy Proxies.
  */
 @property (assign) BOOL disableEncryptedDNSSettings API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos);
 

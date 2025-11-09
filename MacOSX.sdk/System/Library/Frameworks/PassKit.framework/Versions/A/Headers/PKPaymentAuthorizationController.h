@@ -177,18 +177,18 @@ API_AVAILABLE(macos(11.0), ios(10.0), watchos(3.0)) API_UNAVAILABLE(tvos)
 - (void)dismissWithCompletion:(nullable void(^)(void))completion;
 
 // Determine whether this device can process disbursement requests.
-+ (BOOL)supportsDisbursements API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos);
++ (BOOL)supportsDisbursements API_AVAILABLE(ios(17.0), macos(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 // Determine whether this device can process disbursement requests using specific payment network brands.
-+ (BOOL)supportsDisbursementsUsingNetworks:(NSArray<PKPaymentNetwork> *)supportedNetworks NS_SWIFT_NAME(supportsDisbursements(using:)) API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos);
++ (BOOL)supportsDisbursementsUsingNetworks:(NSArray<PKPaymentNetwork> *)supportedNetworks NS_SWIFT_NAME(supportsDisbursements(using:)) API_AVAILABLE(ios(17.0), macos(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 // Determine whether this device can process disbursements to cards issued in any of the indicated regions using the specified networks and capabilities bitmask.
 // supportedRegions is a list of ISO 3166 country codes. Duplicates are ignored.
 + (BOOL)supportsDisbursementsUsingNetworks:(NSArray<PKPaymentNetwork> *)supportedNetworks
-                              capabilities:(PKMerchantCapability)capabilties NS_SWIFT_NAME(supportsDisbursements(using:capabilities:)) API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos);
+                              capabilities:(PKMerchantCapability)capabilties NS_SWIFT_NAME(supportsDisbursements(using:capabilities:)) API_AVAILABLE(ios(17.0), macos(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 // Initialize the controller with a request to send money to a user.
-- (instancetype)initWithDisbursementRequest:(PKDisbursementRequest *)request API_AVAILABLE(ios(17.0), macos(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(tvos);
+- (instancetype)initWithDisbursementRequest:(PKDisbursementRequest *)request API_AVAILABLE(ios(17.0), macos(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 @end
 

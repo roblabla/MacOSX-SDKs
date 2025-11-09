@@ -8,7 +8,8 @@ allowable-clients:
     clients:         [ MessagesFlowDelegatePlugin ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s11SiriKitFlow12StaticActionP0a8MessagesC0E16debugDescriptionSSvg', 
+    symbols:         [ '_$s10Foundation12CharacterSetV16SiriMessagesFlowE22containsUnicodeScalars2ofSbSJ_tF', 
+                       '_$s11SiriKitFlow12StaticActionP0a8MessagesC0E16debugDescriptionSSvg', 
                        '_$s11SiriKitFlow12StaticActionP0a8MessagesC0E16debugDescriptionSSvpMV', 
                        '_$s11SiriKitFlow14ActionGroupingP0a8MessagesC0E16debugDescriptionSSvg', 
                        '_$s11SiriKitFlow14ActionGroupingP0a8MessagesC0E16debugDescriptionSSvpMV', 

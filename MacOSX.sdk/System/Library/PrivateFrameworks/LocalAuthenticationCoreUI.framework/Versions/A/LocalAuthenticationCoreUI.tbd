@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LocalAuthenticationCoreUI.framework/Versions/A/LocalAuthenticationCoreUI'
-current-version: 1656.40.25
+current-version: 1656.60.132
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -77,6 +77,7 @@ exports:
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO39dtoUnapprovedSensorStrictModeTextFaceIDSSvgZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO39operationNotSupportedOnCompanionTouchId15applicationNameS2SSg_tFZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO40dtoUnapprovedSensorStrictModeTextTouchIDSSvgZ', 
+                       '_$s25LocalAuthenticationCoreUI16LocalizedStringsO45ratchetCoolOffMessageBeginNoFamiliarLocationsSSvgZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO4doneSSvgZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO4nextSSvgZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO6cancelSSvgZ', 
@@ -406,7 +407,7 @@ exports:
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV22ActionButtonIdentifierOSQAAMc', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV22ActionButtonIdentifierOSYAAMc', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV2eeoiySbAC_ACtFZ', 
-                       '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV5begin5title7message17strictModeEnabled20showsLocationWarning17customCancelTitleACSSSg_AJS2bAJtFZ', 
+                       '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV5begin5title7message17strictModeEnabled20showsLocationWarning28familiarLocationsUnavailable17customCancelTitleACSSSg_AKS3bAKtFZ', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV5emptyACvgZ', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV5image5title7message05delayG011actionItems0L7Buttons14rightBarButtonAcA0e5ImageG0O_S2SAA0ef5DelayG0VSgSayAA0ef4ItemG0VGSgSayAA0eqG0VGAUSgtcfC', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV5imageAA0e5ImageG0OvM', 
@@ -418,6 +419,7 @@ exports:
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV5titleSSvg', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV5titleSSvpMV', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV5titleSSvs', 
+                       '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV7message17strictModeEnabled28familiarLocationsUnavailableSSSb_SbtFZ', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV7messageSSvM', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV7messageSSvg', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV7messageSSvpMV', 
@@ -517,8 +519,8 @@ exports:
                        _NSStringFromLACUILockViewState ]
     objc-classes:    [ LACUIAuthenticationViewModel, LACUIAuthenticatorServiceConfiguration, 
                        LACUIAuthenticatorServiceConfigurationRequirementBuilder, 
-                       LACUIAvailableMechanismsWrapper, LACUIDTOUtilities, LACUIIcon, 
-                       LACUILockView, LACUIPackagedView, LACUIPackagedViewPlatformStateController, 
+                       LACUIAvailableMechanismsWrapper, LACUIDTOUtilities, LACUIDevice, 
+                       LACUIIcon, LACUILockView, LACUIPackagedView, LACUIPackagedViewPlatformStateController, 
                        LACUIPackagedViewState, LACUIPackagedViewStateAnimationOptions, 
                        LACUIPackagedViewStateController, LACUIPackagedViewStateTransition, 
                        _TtC25LocalAuthenticationCoreUI21LACUIRatchetViewModel ]

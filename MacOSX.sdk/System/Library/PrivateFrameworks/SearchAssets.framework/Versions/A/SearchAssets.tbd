@@ -41,6 +41,7 @@ exports:
                        '_$sSo21SAAssetManagerFactoryCMa', '_$sSo22SATreatmentAllocStatusV12SearchAssetsE11descriptionSSvg', 
                        '_$sSo22SATreatmentAllocStatusV12SearchAssetsE11descriptionSSvpMV', 
                        '_$sSo22SATreatmentAllocStatusVs23CustomStringConvertible12SearchAssetsMc', 
-                       _SearchAssetsVersionNumber, _SearchAssetsVersionString ]
+                       _SASafariAssistantAssetManagerErrorDomain, _SearchAssetsVersionNumber, 
+                       _SearchAssetsVersionString ]
     objc-classes:    [ SAAssetManagerFactory, SADeviceInfo, SATrialExperiment ]
 ...

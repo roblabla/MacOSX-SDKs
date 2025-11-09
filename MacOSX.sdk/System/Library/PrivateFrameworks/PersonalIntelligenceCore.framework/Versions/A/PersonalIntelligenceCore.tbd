@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PersonalIntelligenceCore.framework/Versions/A/PersonalIntelligenceCore'
-current-version: 1260.9
+current-version: 1271.5
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -57,10 +57,9 @@ exports:
                        '_$s24PersonalIntelligenceCore19MetricConfigurationVyACSaySSGcfC', 
                        _IIErrorDomain, _IIErrorInfoKey, _IIExit, _PersonalIntelligenceCoreVersionNumber, 
                        _PersonalIntelligenceCoreVersionString, _ii_default_log_handle, 
-                       _ii_private_log_handle, _kIIAssetVersionFieldName, _kIIEngagedCountFieldName, 
-                       _kIIFeatureEngagementMetricName, _kIIFeatureNameFieldName, 
-                       _kIIFrustrationCountFieldName, _kIILogSubsystem, _kIIOfferedCountFieldName, 
-                       _kIISignpostSubsystem, _kIITrialTreatmentsFieldName ]
+                       _kIIAssetVersionFieldName, _kIIEngagedCountFieldName, _kIIFeatureEngagementMetricName, 
+                       _kIIFeatureNameFieldName, _kIIFrustrationCountFieldName, _kIILogSubsystem, 
+                       _kIIOfferedCountFieldName, _kIISignpostSubsystem, _kIITrialTreatmentsFieldName ]
     objc-classes:    [ IILanguageDetection, IILanguageDetectionNLLanguageIdentifierWrapper, 
                        IIMetricsDispatcher, IIPaths, IISMetricStore, IIStartupManager ]
     objc-ivars:      [ IILanguageDetectionNLLanguageIdentifierWrapper._languageIdentifier ]

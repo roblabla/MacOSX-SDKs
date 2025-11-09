@@ -1,9 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/UnifiedAssetFramework.framework/Versions/A/UnifiedAssetFramework'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _UAFErrorCodeAssetHistoryFailedToCreateFile, _UAFErrorCodeAssetHistoryFailedToCreateObject, 
                        _UAFErrorCodeAssetHistoryPathExistsIsNotDir, _UAFErrorCodeAssetHistoryUnknownType, 
                        _UAFFaultCapture, _UAFGetLogCategory, _UAFLogContextAssetUtilities, 
@@ -24,10 +26,11 @@ exports:
                        _kUAFAssetMetadataSourceRootValue, _kUAFAssetMetadataSourceTrialValue, 
                        _kUAFAssetMetadataSourceUnknownValue, _kUAFAssetMetadataUnarchivedSizeKey, 
                        _kUAFAssetMetadataVersionKey, _kUAFAssetName, _kUAFAssetSetConfigurationDir, 
-                       _kUAFAssetSetExperimenFileVersion_1_0_0, _kUAFAssetSetExperimentFileName, 
-                       _kUAFAssetSetExperimentFileType, _kUAFAssetSetFileType, _kUAFAssetSetFileVersion_1_0_0, 
-                       _kUAFAssetSetMetadataFileType, _kUAFAssetSetMetadataFileVersion_1_0_0, 
-                       _kUAFAssetSetName, _kUAFAssetSetNotificationPrefix, _kUAFAssetSetNotificationRootSuffix, 
+                       _kUAFAssetSetConsistencyTokenVersion_1_0_0, _kUAFAssetSetExperimenFileVersion_1_0_0, 
+                       _kUAFAssetSetExperimentFileName, _kUAFAssetSetExperimentFileType, 
+                       _kUAFAssetSetFileType, _kUAFAssetSetFileVersion_1_0_0, _kUAFAssetSetMetadataFileType, 
+                       _kUAFAssetSetMetadataFileVersion_1_0_0, _kUAFAssetSetName, 
+                       _kUAFAssetSetNotificationPrefix, _kUAFAssetSetNotificationRootSuffix, 
                        _kUAFAssetStatusDidChangeDarwinNotification, _kUAFAssets, 
                        _kUAFAssistantAssistantEngineLanguageUsageAlias, _kUAFAssistantHybridLanguageUsageAlias, 
                        _kUAFAssistantLanguageUsageAlias, _kUAFAssistantLegacyLanguageUsageAlias, 
@@ -81,17 +84,18 @@ exports:
                        _kUAFUsageAliasName, _kUAFUsageAliasValues, _kUAFUsageLimits, 
                        _kUAFUsageType, _kUAFUsageTypes, _kUAFUsageValue, _kUAFUsageValues, 
                        _kUAFUsages, _kUAFValidConfigs, _kUAFXPCCacheDeleteDisabled, 
-                       _kUAFXPCConfigureCacheDelete, _kUAFXPCGetSubscriptions, _kUAFXPCOperation, 
+                       _kUAFXPCConfigureAssetDelivery, _kUAFXPCConfigureCacheDelete, 
+                       _kUAFXPCGetSubscriptions, _kUAFXPCLockIfUnchanged, _kUAFXPCOperation, 
                        _kUAFXPCSubscribe, _kUAFXPCSubscriber, _kUAFXPCSubscriptions, 
-                       _kUAFXPCUnsubscribe ]
+                       _kUAFXPCUnsubscribe, _kUAFXPCUserInitiated ]
     objc-classes:    [ UAFAsset, UAFAssetConfiguration, UAFAssetExpansion, UAFAssetSet, 
-                       UAFAssetSetConfiguration, UAFAssetSetExperiment, UAFAssetSetExperimentConfiguration, 
-                       UAFAssetSetManager, UAFAssetSetMetadata, UAFAssetSetObserver, 
-                       UAFAssetSetProgress, UAFAssetSetStatus, UAFAssetSetSubscription, 
-                       UAFAssetStatus, UAFAssetUtilities, UAFAssetUtilitiesService, 
-                       UAFAutoAssetHistory, UAFAutoAssetInstance, UAFAutoAssetManager, 
-                       UAFAutoAssetProgress, UAFAutoAssetSet, UAFAutoBugCapture, 
-                       UAFCommonUtilities, UAFConfiguration, UAFConfigurationManager, 
+                       UAFAssetSetConfiguration, UAFAssetSetConsistencyToken, UAFAssetSetExperiment, 
+                       UAFAssetSetExperimentConfiguration, UAFAssetSetManager, UAFAssetSetMetadata, 
+                       UAFAssetSetObserver, UAFAssetSetProgress, UAFAssetSetStatus, 
+                       UAFAssetSetSubscription, UAFAssetStatus, UAFAssetUtilities, 
+                       UAFAssetUtilitiesService, UAFAutoAssetHistory, UAFAutoAssetInstance, 
+                       UAFAutoAssetManager, UAFAutoAssetProgress, UAFAutoAssetSet, 
+                       UAFAutoBugCapture, UAFCommonUtilities, UAFConfiguration, UAFConfigurationManager, 
                        UAFExperimentalAssetsConfiguration, UAFGestalt, UAFInstrumentationProvider, 
                        UAFManagedSubscriptions, UAFMinVersionConfiguration, UAFPlatform, 
                        UAFPreinstalledAssetsCache, UAFPrestageConfiguration, UAFRetryState, 

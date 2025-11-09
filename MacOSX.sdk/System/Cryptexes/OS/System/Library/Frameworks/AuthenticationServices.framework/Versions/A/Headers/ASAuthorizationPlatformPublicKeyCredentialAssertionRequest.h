@@ -5,9 +5,8 @@
 #import <AuthenticationServices/ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput.h>
 #import <AuthenticationServices/ASAuthorizationRequest.h>
 #import <AuthenticationServices/ASAuthorizationWebBrowserExternallyAuthenticatableRequest.h>
-#import <Foundation/Foundation.h>
-
 #import <AuthenticationServices/ASAuthorizationWebBrowserPlatformPublicKeyCredentialAssertionRequest.h>
+#import <Foundation/Foundation.h>
 
 @class ASAuthorizationPublicKeyCredentialPRFAssertionInput;
 
@@ -37,7 +36,7 @@ API_AVAILABLE(macos(13.3)) API_UNAVAILABLE(ios, watchos, tvos)
 API_AVAILABLE(macos(13.5), macCatalyst(16.6), ios(17.4)) API_UNAVAILABLE(tvos, watchos, visionos)
 #else
 API_AVAILABLE(macos(13.5), macCatalyst(16.6), ios(17.4)) API_UNAVAILABLE(tvos, watchos)
-#endif // defined(TARGET_OS_XR) && TARGET_OS_XR
+#endif
 @interface ASAuthorizationPlatformPublicKeyCredentialAssertionRequest () <ASAuthorizationWebBrowserPlatformPublicKeyCredentialAssertionRequest>
 @end
 

@@ -15,7 +15,8 @@ exports:
                        _CPSErrorMake, _CPSErrorMultipleUnderlyingMake, _CPSErrorUnderlyingMake, 
                        _CPSMetricsSessionResultWithCustomMethod, _CompanionServicesVersionNumber, 
                        _CompanionServicesVersionString, _cps_daemon_log, _cps_service_connection_log, 
-                       _cps_service_listener_log, _cps_service_log, _cps_session_log ]
+                       _cps_service_listener_log, _cps_service_log, _cps_session_log, 
+                       _cps_signpost_log ]
     objc-classes:    [ CASPasswordCredential, CPSAppSignInRequest, CPSAppSignInResponse, 
                        CPSAuthenticationRequest, CPSAuthenticationResponse, CPSAuthenticationServiceInterface, 
                        CPSAuthenticationSession, CPSDevice, CPSMetrics, CPSRestrictedAccessRequest, 

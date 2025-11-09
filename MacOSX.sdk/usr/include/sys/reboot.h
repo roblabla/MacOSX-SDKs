@@ -92,10 +92,11 @@
 #define RB_PANIC_FORCERESET 0x2000   /* do force-reset panic */
 
 __BEGIN_DECLS
-enum panic_with_data_flags {
+__options_closed_decl(panic_with_data_flags, unsigned int, {
 	PANIC_WITH_DATA_FLAGS_NONE = 0,
+	PANIC_WITH_DATA_FLAGS_EXCLAVE_STACKSHOT,
 	PANIC_WITH_DATA_FLAGS_MAX,
-};
+});
 
 /* userspace reboot control */
 int usrctl(uint32_t flags);

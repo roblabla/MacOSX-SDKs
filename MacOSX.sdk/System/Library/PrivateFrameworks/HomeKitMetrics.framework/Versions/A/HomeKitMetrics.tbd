@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/HomeKitMetrics.framework/Versions/A/HomeKitMetrics'
-current-version: 1215.2.15
+current-version: 1241.3.7
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -99,7 +99,7 @@ exports:
                        _HMMLogTagActivityWithErrorAndField, _HMMLogTagWithError, 
                        _HMMLogTagWithErrorAndField, _HMMSafeHomeUUIDFromLogEvent, 
                        _HMM_ERROR_CODE, _HMM_ERROR_DOMAIN, _HMM_UNDERLYING_ERROR_CODE, 
-                       _HMM_UNDERLYING_ERROR_DOMAIN ]
+                       _HMM_UNDERLYING_ERROR_DOMAIN, _getLowestError ]
     objc-classes:    [ HMMBufferingLogEventSubmitter, HMMCoreAnalyticsLogEventObserver, 
                        HMMCoreAnalyticsTagObserver, HMMCounterStatistics, HMMCountersManager, 
                        HMMDateProvider, HMMDatedHomeLogEvent, HMMDatedLogEvent, HMMHomeLogEvent, 

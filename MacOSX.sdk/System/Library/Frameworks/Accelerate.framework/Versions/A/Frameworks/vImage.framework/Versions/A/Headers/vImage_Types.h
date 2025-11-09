@@ -27,8 +27,13 @@ extern "C" {
 #if __has_include(<os/availability.h>) && !defined(__linux__) && !0 && !0
 #    include <os/availability.h>
 #else
+#    ifndef  __API_AVAILABLE
 #    define __API_AVAILABLE(...)
+#    endif
+
+#    ifndef  API_AVAILABLE
 #    define API_AVAILABLE(...) /* nothing */
+#    endif
 #endif // __has_include(<os/availability.h>)
 
 /*!
@@ -115,9 +120,11 @@ extern "C" {
  */
     
 #ifndef VIMAGE_PF
-#define VIMAGE_PF __attribute__ ((visibility ("default")))
+
+		#define VIMAGE_PF __attribute__ ((visibility ("default")))
+
 #endif
-    
+
 /* Please see vImage.h and vImage documentation for the meaning of these types. */
 
 /*!
@@ -666,7 +673,6 @@ typedef VIMAGE_OPTIONS_ENUM(vImage_Flags, uint32_t)
     kvImageUseFP16Accumulator     __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))   =  4096,
 };
 
-
 /*!
     @class vImageConverterRef
     @abstract   An opaque type which contains a decription of a conversion from one CoreGraphics image format to another.
@@ -690,7 +696,6 @@ typedef VIMAGE_OPTIONS_ENUM(vImage_Flags, uint32_t)
 
 typedef struct CF_BRIDGED_TYPE(id) vImageConverter * vImageConverterRef;
 
-    
 /*!
     @class vImageCVImageFormatRef
     @abstract   An opaque type which contains a decription of a conversion from a CoreGraphics image format to a CVPixelBuffer, or the reverse.
@@ -794,6 +799,7 @@ typedef struct CF_BRIDGED_TYPE(id) vImageConverter * vImageConverterRef;
  
     @seealso Please see vImage_CVUtilities.h for interfaces that operate on the vImageCVImageFormatRef
  */
+
 typedef struct CF_BRIDGED_TYPE(id) vImageCVImageFormat * vImageCVImageFormatRef;
 typedef const struct CF_BRIDGED_TYPE(id) vImageCVImageFormat * vImageConstCVImageFormatRef;
 

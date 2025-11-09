@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/VFX.framework/Versions/A/VFX'
-current-version: 184.40.6
+current-version: 184.60.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -934,8 +934,9 @@ exports:
                        '_$s3VFX8VFXSceneC17fetchEntityObject7withTagAA09VFXEntityE0CSgSS_tF', 
                        '_$s3VFX8VFXSceneC17makeDefaultCameraAA07VFXCoreE0CyFTj', 
                        '_$s3VFX8VFXSceneC17makeDefaultCameraAA07VFXCoreE0CyFTq', 
-                       '_$s3VFX8VFXSceneC17setDebugUIOptionsyySuF', '_$s3VFX8VFXSceneC18performTransactionyyyycFTj', 
-                       '_$s3VFX8VFXSceneC18performTransactionyyyycFTq', '_$s3VFX8VFXSceneC18removeEntityObjectyyAA09VFXEntityE0CF', 
+                       '_$s3VFX8VFXSceneC17setDebugUIOptionsyySuF', '_$s3VFX8VFXSceneC17stopRuntimeThreadyyF', 
+                       '_$s3VFX8VFXSceneC18performTransactionyyyycFTj', '_$s3VFX8VFXSceneC18performTransactionyyyycFTq', 
+                       '_$s3VFX8VFXSceneC18removeEntityObjectyyAA09VFXEntityE0CF', 
                        '_$s3VFX8VFXSceneC18setLightParameters2on10parametersys5Int64V_AA0bdE0CtF', 
                        '_$s3VFX8VFXSceneC18startRuntimeThreadyyF', '_$s3VFX8VFXSceneC18withPointerToValue6atPath5blockySS_ySvctFTj', 
                        '_$s3VFX8VFXSceneC18withPointerToValue6atPath5blockySS_ySvctFTq', 

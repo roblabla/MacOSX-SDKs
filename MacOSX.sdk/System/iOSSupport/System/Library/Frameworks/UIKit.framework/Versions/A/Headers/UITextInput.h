@@ -264,8 +264,8 @@ API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 - (void)replaceRange:(UITextRange *)range withAttributedText:(NSAttributedString *)attributedText API_AVAILABLE(ios(13.0), tvos(13.0), macos(10.15), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 // These methods are called when the Writing Tools panel is presented and dismissed
-- (void)willPresentWritingTools API_AVAILABLE(ios(18.0), macos(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
-- (void)didDismissWritingTools API_AVAILABLE(ios(18.0), macos(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
+- (void)willPresentWritingTools API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(tvos, watchos, visionos);
+- (void)didDismissWritingTools API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 @end
 
 //---------------------------------------------------------------------------------------------------

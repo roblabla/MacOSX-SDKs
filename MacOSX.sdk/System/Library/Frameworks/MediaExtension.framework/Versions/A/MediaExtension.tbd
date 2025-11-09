@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/MediaExtension.framework/Versions/A/MediaExtension'
-current-version: 3175.11.5
+current-version: 3185.18.5
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -18,12 +18,28 @@ exports:
                        '_$sSo24MERAWProcessingParameterC14MediaExtensionE7boolean4name3key11description12initialValue07neutralJ006cameraJ0So0a7BooleanB0CSS_S2SS2bSgAMtFZ', 
                        '_$sSo24MERAWProcessingParameterC14MediaExtensionE7integer4name3key11description12initialValue7maximum7minimum07neutralJ006cameraJ0So0a7IntegerB0CSS_S2SS4iSgAOtFZ', 
                        '_$sSo24MERAWProcessingParameterC14MediaExtensionE8subGroup4name11description10parametersSo0a3SubfB0CSS_SSSayABGtFZ', 
+                       '_$sSo28MERAWProcessingListParameterC14MediaExtensionE11cameraValueSiSgvg', 
+                       '_$sSo28MERAWProcessingListParameterC14MediaExtensionE11cameraValueSiSgvpMV', 
+                       '_$sSo28MERAWProcessingListParameterC14MediaExtensionE12neutralValueSiSgvg', 
+                       '_$sSo28MERAWProcessingListParameterC14MediaExtensionE12neutralValueSiSgvpMV', 
                        '_$sSo28MERAWProcessingListParameterC14MediaExtensionE4name3key11description4list12initialValue07neutralK006cameraK0ABSS_S2SSaySo0ab7ElementC0CGS2iSgANtcfC', 
                        '_$sSo28MERAWProcessingListParameterC14MediaExtensionE4name3key11description4list12initialValue07neutralK006cameraK0ABSS_S2SSaySo0ab7ElementC0CGS2iSgANtcfc', 
+                       '_$sSo29MERAWProcessingFloatParameterC14MediaExtensionE11cameraValueSfSgvg', 
+                       '_$sSo29MERAWProcessingFloatParameterC14MediaExtensionE11cameraValueSfSgvpMV', 
+                       '_$sSo29MERAWProcessingFloatParameterC14MediaExtensionE12neutralValueSfSgvg', 
+                       '_$sSo29MERAWProcessingFloatParameterC14MediaExtensionE12neutralValueSfSgvpMV', 
                        '_$sSo29MERAWProcessingFloatParameterC14MediaExtensionE4name3key11description12initialValue7maximum7minimum07neutralJ006cameraJ0ABSS_S2SS4fSgALtcfC', 
                        '_$sSo29MERAWProcessingFloatParameterC14MediaExtensionE4name3key11description12initialValue7maximum7minimum07neutralJ006cameraJ0ABSS_S2SS4fSgALtcfc', 
+                       '_$sSo31MERAWProcessingBooleanParameterC14MediaExtensionE11cameraValueSbSgvg', 
+                       '_$sSo31MERAWProcessingBooleanParameterC14MediaExtensionE11cameraValueSbSgvpMV', 
+                       '_$sSo31MERAWProcessingBooleanParameterC14MediaExtensionE12neutralValueSbSgvg', 
+                       '_$sSo31MERAWProcessingBooleanParameterC14MediaExtensionE12neutralValueSbSgvpMV', 
                        '_$sSo31MERAWProcessingBooleanParameterC14MediaExtensionE4name3key11description12initialValue07neutralJ006cameraJ0ABSS_S2SS2bSgAJtcfC', 
                        '_$sSo31MERAWProcessingBooleanParameterC14MediaExtensionE4name3key11description12initialValue07neutralJ006cameraJ0ABSS_S2SS2bSgAJtcfc', 
+                       '_$sSo31MERAWProcessingIntegerParameterC14MediaExtensionE11cameraValueSiSgvg', 
+                       '_$sSo31MERAWProcessingIntegerParameterC14MediaExtensionE11cameraValueSiSgvpMV', 
+                       '_$sSo31MERAWProcessingIntegerParameterC14MediaExtensionE12neutralValueSiSgvg', 
+                       '_$sSo31MERAWProcessingIntegerParameterC14MediaExtensionE12neutralValueSiSgvpMV', 
                        '_$sSo31MERAWProcessingIntegerParameterC14MediaExtensionE4name3key11description12initialValue7maximum7minimum07neutralJ006cameraJ0ABSS_S2SS4iSgALtcfC', 
                        '_$sSo31MERAWProcessingIntegerParameterC14MediaExtensionE4name3key11description12initialValue7maximum7minimum07neutralJ006cameraJ0ABSS_S2SS4iSgALtcfc', 
                        '_$sSo32MERAWProcessorPixelBufferManagerC14MediaExtensionE05pixelC10AttributesSDySSs8Sendable_pGvM', 

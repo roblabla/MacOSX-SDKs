@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosIntelligenceCore.framework/Versions/A/PhotosIntelligenceCore'
-current-version: 711.0.180
+current-version: 721.0.150
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -13,8 +13,20 @@ allowable-clients:
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s22PhotosIntelligenceCore0abC12LogSubsystemSSvg', '_$s22PhotosIntelligenceCore16ProgressReporterMp', 
-                       '_$s22PhotosIntelligenceCore16ProgressReporterP10canProceed8progressSbSd_tFTj', 
+    symbols:         [ '_$s22PhotosIntelligenceCore0abC12LogSubsystemSSvg', '_$s22PhotosIntelligenceCore10PartOfWeekO04parteF03for2inAC10Foundation4DateV_AG8CalendarVtFZ', 
+                       '_$s22PhotosIntelligenceCore10PartOfWeekO13localizedTextSSyF', 
+                       '_$s22PhotosIntelligenceCore10PartOfWeekO4from13localizedTextACSgSS_tFZ', 
+                       '_$s22PhotosIntelligenceCore10PartOfWeekO7weekdayyA2CmFWC', 
+                       '_$s22PhotosIntelligenceCore10PartOfWeekO7weekendyA2CmFWC', 
+                       '_$s22PhotosIntelligenceCore10PartOfWeekO8allCasesSayACGvgZ', 
+                       '_$s22PhotosIntelligenceCore10PartOfWeekO8rawValueACSgSS_tcfC', 
+                       '_$s22PhotosIntelligenceCore10PartOfWeekO8rawValueSSvg', '_$s22PhotosIntelligenceCore10PartOfWeekO8rawValueSSvpMV', 
+                       '_$s22PhotosIntelligenceCore10PartOfWeekOMa', '_$s22PhotosIntelligenceCore10PartOfWeekOMn', 
+                       '_$s22PhotosIntelligenceCore10PartOfWeekON', '_$s22PhotosIntelligenceCore10PartOfWeekOSEAAMc', 
+                       '_$s22PhotosIntelligenceCore10PartOfWeekOSHAAMc', '_$s22PhotosIntelligenceCore10PartOfWeekOSQAAMc', 
+                       '_$s22PhotosIntelligenceCore10PartOfWeekOSYAAMc', '_$s22PhotosIntelligenceCore10PartOfWeekOSeAAMc', 
+                       '_$s22PhotosIntelligenceCore10PartOfWeekOs12CaseIterableAAMc', 
+                       '_$s22PhotosIntelligenceCore16ProgressReporterMp', '_$s22PhotosIntelligenceCore16ProgressReporterP10canProceed8progressSbSd_tFTj', 
                        '_$s22PhotosIntelligenceCore16ProgressReporterP10canProceed8progressSbSd_tFTq', 
                        '_$s22PhotosIntelligenceCore16ProgressReporterP5child4from2to2ofAaB_pSi_S2itFTj', 
                        '_$s22PhotosIntelligenceCore16ProgressReporterP5child4from2to2ofAaB_pSi_S2itFTq', 
@@ -66,6 +78,22 @@ exports:
                        '_$s22PhotosIntelligenceCore20RootProgressReporterCyACySdKccfCTj', 
                        '_$s22PhotosIntelligenceCore20RootProgressReporterCyACySdKccfCTq', 
                        '_$s22PhotosIntelligenceCore20RootProgressReporterCyACySdKccfc', 
+                       '_$s22PhotosIntelligenceCore9PartOfDayO13localizedTextSSyF', 
+                       '_$s22PhotosIntelligenceCore9PartOfDayO13rangeContains4hourSbSi_tF', 
+                       '_$s22PhotosIntelligenceCore9PartOfDayO4from13localizedTextACSgSS_tFZ', 
+                       '_$s22PhotosIntelligenceCore9PartOfDayO4noonyA2CmFWC', '_$s22PhotosIntelligenceCore9PartOfDayO5nightyA2CmFWC', 
+                       '_$s22PhotosIntelligenceCore9PartOfDayO7eveningyA2CmFWC', 
+                       '_$s22PhotosIntelligenceCore9PartOfDayO7matches4hourShyACGSi_tFZ', 
+                       '_$s22PhotosIntelligenceCore9PartOfDayO7morningyA2CmFWC', 
+                       '_$s22PhotosIntelligenceCore9PartOfDayO8allCasesSayACGvgZ', 
+                       '_$s22PhotosIntelligenceCore9PartOfDayO8rawValueACSgSS_tcfC', 
+                       '_$s22PhotosIntelligenceCore9PartOfDayO8rawValueSSvg', '_$s22PhotosIntelligenceCore9PartOfDayO8rawValueSSvpMV', 
+                       '_$s22PhotosIntelligenceCore9PartOfDayO9afternoonyA2CmFWC', 
+                       '_$s22PhotosIntelligenceCore9PartOfDayOMa', '_$s22PhotosIntelligenceCore9PartOfDayOMn', 
+                       '_$s22PhotosIntelligenceCore9PartOfDayON', '_$s22PhotosIntelligenceCore9PartOfDayOSEAAMc', 
+                       '_$s22PhotosIntelligenceCore9PartOfDayOSHAAMc', '_$s22PhotosIntelligenceCore9PartOfDayOSQAAMc', 
+                       '_$s22PhotosIntelligenceCore9PartOfDayOSYAAMc', '_$s22PhotosIntelligenceCore9PartOfDayOSeAAMc', 
+                       '_$s22PhotosIntelligenceCore9PartOfDayOs12CaseIterableAAMc', 
                        '_$sSo19PNAssetGroupOptionsC22PhotosIntelligenceCoreE17distanceThresholds5Int32Vvg', 
                        '_$sSo19PNAssetGroupOptionsC22PhotosIntelligenceCoreE17distanceThresholds5Int32VvpMV', 
                        '_$sSo19PNAssetGroupOptionsC22PhotosIntelligenceCoreE17distanceThresholds5Int32VvpWvd', 
@@ -95,7 +123,13 @@ exports:
                        '_$sSo19PNAssetGroupOptionsCMa', '_$sSo20PNKeyPickerProcessorC22PhotosIntelligenceCoreE7keyPick4from7optionsSo0aH5Asset_pSgSaySoAG_pG_So19PNAssetGroupOptionsCtFZ', 
                        '_$sSo20PNKeyPickerProcessorC22PhotosIntelligenceCoreEABycfC', 
                        '_$sSo20PNKeyPickerProcessorC22PhotosIntelligenceCoreEABycfc', 
-                       '_$sSo20PNKeyPickerProcessorCMa', '_$sSo23PNUtilityTypeClassifierC22PhotosIntelligenceCoreE09utilityOfB0_30detectedInSceneClassifications13hasQRCodeData33isAIImageFromGenerativePlayground5usingSbSo0aB0V_Shys11AnyHashableVGS2bSo21CLSTaxonomyBasedModelCtFZ', 
+                       '_$sSo20PNKeyPickerProcessorCMa', '_$sSo21PNPartOfDayCalculatorC22PhotosIntelligenceCoreE04partbC14LocalizedNames3forShySSG10Foundation4DateV_tKFZ', 
+                       '_$sSo21PNPartOfDayCalculatorC22PhotosIntelligenceCoreEABycfC', 
+                       '_$sSo21PNPartOfDayCalculatorC22PhotosIntelligenceCoreEABycfc', 
+                       '_$sSo21PNPartOfDayCalculatorCMa', '_$sSo22PNPartOfWeekCalculatorC22PhotosIntelligenceCoreE04partbC14LocalizedNames3forShySSG10Foundation4DateV_tKFZ', 
+                       '_$sSo22PNPartOfWeekCalculatorC22PhotosIntelligenceCoreEABycfC', 
+                       '_$sSo22PNPartOfWeekCalculatorC22PhotosIntelligenceCoreEABycfc', 
+                       '_$sSo22PNPartOfWeekCalculatorCMa', '_$sSo23PNUtilityTypeClassifierC22PhotosIntelligenceCoreE09utilityOfB0_30detectedInSceneClassifications13hasQRCodeData33isAIImageFromGenerativePlayground5usingSbSo0aB0V_Shys11AnyHashableVGS2bSo21CLSTaxonomyBasedModelCtFZ', 
                        '_$sSo23PNUtilityTypeClassifierC22PhotosIntelligenceCoreE13latestVersions6UInt64VyFZ', 
                        '_$sSo23PNUtilityTypeClassifierC22PhotosIntelligenceCoreE18screenshotInferred2in15usingSceneModelSbSo12PNSceneAsset_p_So016CLSTaxonomyBasedL0CtFZ', 
                        '_$sSo23PNUtilityTypeClassifierC22PhotosIntelligenceCoreE20utilityTypesDetected2in15usingSceneModelSo0aB0VSo0A5Asset_p_So016CLSTaxonomyBasedM0CtFZ', 
@@ -114,5 +148,6 @@ exports:
                        CLSMemorySimilarityModel, CLSNSFWModel, CLSPotentialLandmarkModel, 
                        CLSSDModel, CLSSceneModel, CLSSignalNode, CLSTabooEventModel, 
                        CLSTaxonomyBasedModel, CLSTrendsSceneModel, CLSWallpaperScoreModel, 
-                       PNAssetGroupOptions, PNKeyPickerProcessor, PNUtilityTypeClassifier ]
+                       PNAssetGroupOptions, PNKeyPickerProcessor, PNPartOfDayCalculator, 
+                       PNPartOfWeekCalculator, PNUtilityTypeClassifier ]
 ...

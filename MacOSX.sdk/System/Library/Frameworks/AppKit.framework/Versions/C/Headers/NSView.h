@@ -22,6 +22,7 @@
 #import <AppKit/NSUserInterfaceLayout.h>
 
 @protocol NSDraggingSource;
+@class NSWritingToolsCoordinator;
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
@@ -633,6 +634,10 @@ API_AVAILABLE(macos(14.0))
                                       
 @end
 
+API_AVAILABLE(macos(15.2))
+@interface NSView (NSWritingToolsCoordinator)
+@property (nullable) NSWritingToolsCoordinator *writingToolsCoordinator;
+@end
 
 /* Notifications */
 

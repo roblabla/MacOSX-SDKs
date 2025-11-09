@@ -824,6 +824,7 @@ VIMAGE_PF size_t vImageGetResamplingFilterSize(  float scale,
  */
 VIMAGE_PF vImagePixelCount vImageGetResamplingFilterExtent( ResamplingFilter filter, vImage_Flags flags )  VIMAGE_NON_NULL(1)  API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
 
+
 #endif  
 
 #ifdef __cplusplus

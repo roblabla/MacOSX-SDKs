@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
-// swift-module-flags: -target x86_64-apple-macos15.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 210.13.0.1 -module-name _AppIntents_SwiftUI
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
+// swift-module-flags: -target x86_64-apple-macos15.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 226.3.0.4 -module-name _AppIntents_SwiftUI
 @_exported import AppIntents
 import CoreSpotlight
 import DeveloperToolsSupport
@@ -32,13 +32,21 @@ extension AppIntents.IntentResult {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentResult {
-  public static func result<Value, OpensAppIntent, Content>(value: Value, opensIntent: OpensAppIntent, view: Content = EmptyView()) -> Self where Self == AppIntents.IntentResultContainer<Value, OpensAppIntent, AppIntents._SnippetViewContainer, Swift.Never>, Value : AppIntents._IntentValue, OpensAppIntent : AppIntents.AppIntent, Content : SwiftUICore.View
-  public static func result<Value, OpensAppIntent, Content>(value: Value, opensIntent: OpensAppIntent, @SwiftUICore.ViewBuilder content: () -> Content) -> Self where Self == AppIntents.IntentResultContainer<Value, OpensAppIntent, AppIntents._SnippetViewContainer, Swift.Never>, Value : AppIntents._IntentValue, OpensAppIntent : AppIntents.AppIntent, Content : SwiftUICore.View
+  @_disfavoredOverload public static func result<Value, OpensAppIntent, Content>(value: Value, opensIntent: OpensAppIntent, view: Content = EmptyView()) -> Self where Self == AppIntents.IntentResultContainer<Value, OpensAppIntent, AppIntents._SnippetViewContainer, Swift.Never>, Value : AppIntents._IntentValue, OpensAppIntent : AppIntents.AppIntent, Content : SwiftUICore.View
+  @available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+  public static func result<Value, Content>(value: Value, opensIntent: some AppIntent, view: Content = EmptyView()) -> Self where Self == AppIntents.IntentResultContainer<Value, Swift.Never, AppIntents._SnippetViewContainer, Swift.Never>, Value : AppIntents._IntentValue, Content : SwiftUICore.View
+  @_disfavoredOverload public static func result<Value, OpensAppIntent, Content>(value: Value, opensIntent: OpensAppIntent, @SwiftUICore.ViewBuilder content: () -> Content) -> Self where Self == AppIntents.IntentResultContainer<Value, OpensAppIntent, AppIntents._SnippetViewContainer, Swift.Never>, Value : AppIntents._IntentValue, OpensAppIntent : AppIntents.AppIntent, Content : SwiftUICore.View
+  @available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+  public static func result<Value, Content>(value: Value, opensIntent: some AppIntent, @SwiftUICore.ViewBuilder content: () -> Content) -> Self where Self == AppIntents.IntentResultContainer<Value, Swift.Never, AppIntents._SnippetViewContainer, Swift.Never>, Value : AppIntents._IntentValue, Content : SwiftUICore.View
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentResult {
-  public static func result<Value, OpensAppIntent, Content>(value: Value, opensIntent: OpensAppIntent, dialog: AppIntents.IntentDialog, view: Content = EmptyView()) -> Self where Self == AppIntents.IntentResultContainer<Value, OpensAppIntent, AppIntents._SnippetViewContainer, AppIntents.IntentDialog>, Value : AppIntents._IntentValue, OpensAppIntent : AppIntents.AppIntent, Content : SwiftUICore.View
-  public static func result<Value, OpensAppIntent, Content>(value: Value, opensIntent: OpensAppIntent, dialog: AppIntents.IntentDialog, @SwiftUICore.ViewBuilder content: () -> Content) -> Self where Self == AppIntents.IntentResultContainer<Value, OpensAppIntent, AppIntents._SnippetViewContainer, AppIntents.IntentDialog>, Value : AppIntents._IntentValue, OpensAppIntent : AppIntents.AppIntent, Content : SwiftUICore.View
+  @_disfavoredOverload public static func result<Value, OpensAppIntent, Content>(value: Value, opensIntent: OpensAppIntent, dialog: AppIntents.IntentDialog, view: Content = EmptyView()) -> Self where Self == AppIntents.IntentResultContainer<Value, OpensAppIntent, AppIntents._SnippetViewContainer, AppIntents.IntentDialog>, Value : AppIntents._IntentValue, OpensAppIntent : AppIntents.AppIntent, Content : SwiftUICore.View
+  @available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+  public static func result<Value, Content>(value: Value, opensIntent: some AppIntent, dialog: AppIntents.IntentDialog, view: Content = EmptyView()) -> Self where Self == AppIntents.IntentResultContainer<Value, Swift.Never, AppIntents._SnippetViewContainer, AppIntents.IntentDialog>, Value : AppIntents._IntentValue, Content : SwiftUICore.View
+  @_disfavoredOverload public static func result<Value, OpensAppIntent, Content>(value: Value, opensIntent: OpensAppIntent, dialog: AppIntents.IntentDialog, @SwiftUICore.ViewBuilder content: () -> Content) -> Self where Self == AppIntents.IntentResultContainer<Value, OpensAppIntent, AppIntents._SnippetViewContainer, AppIntents.IntentDialog>, Value : AppIntents._IntentValue, OpensAppIntent : AppIntents.AppIntent, Content : SwiftUICore.View
+  @available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+  public static func result<Value, Content>(value: Value, opensIntent: some AppIntent, dialog: AppIntents.IntentDialog, @SwiftUICore.ViewBuilder content: () -> Content) -> Self where Self == AppIntents.IntentResultContainer<Value, Swift.Never, AppIntents._SnippetViewContainer, AppIntents.IntentDialog>, Value : AppIntents._IntentValue, Content : SwiftUICore.View
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentResult {
@@ -47,13 +55,21 @@ extension AppIntents.IntentResult {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentResult {
-  public static func result<OpensAppIntent, Content>(opensIntent: OpensAppIntent, view: Content = EmptyView()) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, OpensAppIntent, AppIntents._SnippetViewContainer, Swift.Never>, OpensAppIntent : AppIntents.AppIntent, Content : SwiftUICore.View
-  public static func result<OpensAppIntent, Content>(opensIntent: OpensAppIntent, @SwiftUICore.ViewBuilder content: () -> Content) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, OpensAppIntent, AppIntents._SnippetViewContainer, Swift.Never>, OpensAppIntent : AppIntents.AppIntent, Content : SwiftUICore.View
+  @_disfavoredOverload public static func result<OpensAppIntent, Content>(opensIntent: OpensAppIntent, view: Content = EmptyView()) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, OpensAppIntent, AppIntents._SnippetViewContainer, Swift.Never>, OpensAppIntent : AppIntents.AppIntent, Content : SwiftUICore.View
+  @available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+  public static func result<Content>(opensIntent: some AppIntent, view: Content = EmptyView()) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, Swift.Never, AppIntents._SnippetViewContainer, Swift.Never>, Content : SwiftUICore.View
+  @_disfavoredOverload public static func result<OpensAppIntent, Content>(opensIntent: OpensAppIntent, @SwiftUICore.ViewBuilder content: () -> Content) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, OpensAppIntent, AppIntents._SnippetViewContainer, Swift.Never>, OpensAppIntent : AppIntents.AppIntent, Content : SwiftUICore.View
+  @available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+  public static func result<Content>(opensIntent: some AppIntent, @SwiftUICore.ViewBuilder content: () -> Content) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, Swift.Never, AppIntents._SnippetViewContainer, Swift.Never>, Content : SwiftUICore.View
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentResult {
-  public static func result<OpensAppIntent, Content>(opensIntent: OpensAppIntent, dialog: AppIntents.IntentDialog, view: Content = EmptyView()) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, OpensAppIntent, AppIntents._SnippetViewContainer, AppIntents.IntentDialog>, OpensAppIntent : AppIntents.AppIntent, Content : SwiftUICore.View
-  public static func result<OpensAppIntent, Content>(opensIntent: OpensAppIntent, dialog: AppIntents.IntentDialog, @SwiftUICore.ViewBuilder content: () -> Content) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, OpensAppIntent, AppIntents._SnippetViewContainer, AppIntents.IntentDialog>, OpensAppIntent : AppIntents.AppIntent, Content : SwiftUICore.View
+  @_disfavoredOverload public static func result<OpensAppIntent, Content>(opensIntent: OpensAppIntent, dialog: AppIntents.IntentDialog, view: Content = EmptyView()) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, OpensAppIntent, AppIntents._SnippetViewContainer, AppIntents.IntentDialog>, OpensAppIntent : AppIntents.AppIntent, Content : SwiftUICore.View
+  @available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+  public static func result<Content>(opensIntent: some AppIntent, dialog: AppIntents.IntentDialog, view: Content = EmptyView()) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, Swift.Never, AppIntents._SnippetViewContainer, AppIntents.IntentDialog>, Content : SwiftUICore.View
+  @_disfavoredOverload public static func result<OpensAppIntent, Content>(opensIntent: OpensAppIntent, dialog: AppIntents.IntentDialog, @SwiftUICore.ViewBuilder content: () -> Content) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, OpensAppIntent, AppIntents._SnippetViewContainer, AppIntents.IntentDialog>, OpensAppIntent : AppIntents.AppIntent, Content : SwiftUICore.View
+  @available(macOS 15.2, iOS 18.2, watchOS 11.2, tvOS 18.2, visionOS 2.2, *)
+  public static func result<Content>(opensIntent: some AppIntent, dialog: AppIntents.IntentDialog, @SwiftUICore.ViewBuilder content: () -> Content) -> Self where Self == AppIntents.IntentResultContainer<Swift.Never, Swift.Never, AppIntents._SnippetViewContainer, AppIntents.IntentDialog>, Content : SwiftUICore.View
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentResult {

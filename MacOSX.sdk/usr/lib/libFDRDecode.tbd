@@ -27,5 +27,6 @@ exports:
                        _AMFDRDecodeOfflineBlob, _AMFDRDecodeParseDERLengthFromBuffer, 
                        _AMFDRDecodePublicKey, _AMFDRDecodeSealingRequest, _AMFDRDecodeTrustEvaluation, 
                        _AMFDRDecodeTrustObject, _AMFDRDecodeVerifyCertIssuer, _AMFDRDecodeVerifyCertIssuerNoRevocation, 
-                       _AMFDRDecodeVerifySealingManifest, _AMFDRDecodeVerifySealingRequest ]
+                       _AMFDRDecodeVerifyMultiCombinedDataIntegrity, _AMFDRDecodeVerifySealingManifest, 
+                       _AMFDRDecodeVerifySealingRequest ]
 ...

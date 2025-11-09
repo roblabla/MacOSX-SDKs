@@ -174,6 +174,82 @@ OS_ENUM(hv_simd_fp_reg, uint32_t,
     HV_SIMD_FP_REG_Q31,
 );
 
+/*!
+ @abstract Contains information about SME PSTATE.
+ @discussion
+    streaming_sve_mode_enabled controls PSTATE.SM and za_storage_enabled controls PSTATE.ZA.
+ */
+API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+typedef struct {
+    bool streaming_sve_mode_enabled;
+    bool za_storage_enabled;
+} hv_vcpu_sme_state_t;
+
+/*!
+ @abstract Type of an ARM SME Z vector register.
+ */
+OS_ENUM(hv_sme_z_reg, uint32_t,
+    HV_SME_Z_REG_0,
+    HV_SME_Z_REG_1,
+    HV_SME_Z_REG_2,
+    HV_SME_Z_REG_3,
+    HV_SME_Z_REG_4,
+    HV_SME_Z_REG_5,
+    HV_SME_Z_REG_6,
+    HV_SME_Z_REG_7,
+    HV_SME_Z_REG_8,
+    HV_SME_Z_REG_9,
+    HV_SME_Z_REG_10,
+    HV_SME_Z_REG_11,
+    HV_SME_Z_REG_12,
+    HV_SME_Z_REG_13,
+    HV_SME_Z_REG_14,
+    HV_SME_Z_REG_15,
+    HV_SME_Z_REG_16,
+    HV_SME_Z_REG_17,
+    HV_SME_Z_REG_18,
+    HV_SME_Z_REG_19,
+    HV_SME_Z_REG_20,
+    HV_SME_Z_REG_21,
+    HV_SME_Z_REG_22,
+    HV_SME_Z_REG_23,
+    HV_SME_Z_REG_24,
+    HV_SME_Z_REG_25,
+    HV_SME_Z_REG_26,
+    HV_SME_Z_REG_27,
+    HV_SME_Z_REG_28,
+    HV_SME_Z_REG_29,
+    HV_SME_Z_REG_30,
+    HV_SME_Z_REG_31,
+) API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos);
+
+/*!
+ @abstract Type of an ARM SME P predicate register.
+ */
+OS_ENUM(hv_sme_p_reg, uint32_t,
+    HV_SME_P_REG_0,
+    HV_SME_P_REG_1,
+    HV_SME_P_REG_2,
+    HV_SME_P_REG_3,
+    HV_SME_P_REG_4,
+    HV_SME_P_REG_5,
+    HV_SME_P_REG_6,
+    HV_SME_P_REG_7,
+    HV_SME_P_REG_8,
+    HV_SME_P_REG_9,
+    HV_SME_P_REG_10,
+    HV_SME_P_REG_11,
+    HV_SME_P_REG_12,
+    HV_SME_P_REG_13,
+    HV_SME_P_REG_14,
+    HV_SME_P_REG_15,
+) API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos);
+
+/*!
+ @abstract Type of the SME2 ZT0 register.
+ */
+API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+typedef __attribute__((ext_vector_type(64))) uint8_t hv_sme_zt0_uchar64_t;
 
 /*!
  @abstract Type of an ARM system register.
@@ -249,6 +325,8 @@ OS_ENUM(hv_sys_reg, uint16_t,
     HV_SYS_REG_MPIDR_EL1 = 0xc005,
     HV_SYS_REG_ID_AA64PFR0_EL1 = 0xc020,
     HV_SYS_REG_ID_AA64PFR1_EL1 = 0xc021,
+    HV_SYS_REG_ID_AA64ZFR0_EL1 API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos) = 0xc024,
+    HV_SYS_REG_ID_AA64SMFR0_EL1 API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos) = 0xc025,
     HV_SYS_REG_ID_AA64DFR0_EL1 = 0xc028,
     HV_SYS_REG_ID_AA64DFR1_EL1 = 0xc029,
     HV_SYS_REG_ID_AA64ISAR0_EL1 = 0xc030,
@@ -267,6 +345,8 @@ OS_ENUM(hv_sys_reg, uint16_t,
     */
     HV_SYS_REG_ACTLR_EL1 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xc081,
     HV_SYS_REG_CPACR_EL1 = 0xc082,
+    HV_SYS_REG_SMPRI_EL1 API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos) = 0xc094,
+    HV_SYS_REG_SMCR_EL1 API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos) = 0xc096,
     HV_SYS_REG_TTBR0_EL1 = 0xc100,
     HV_SYS_REG_TTBR1_EL1 = 0xc101,
     HV_SYS_REG_TCR_EL1 = 0xc102,
@@ -293,10 +373,13 @@ OS_ENUM(hv_sys_reg, uint16_t,
     HV_SYS_REG_VBAR_EL1 = 0xc600,
     HV_SYS_REG_CONTEXTIDR_EL1 = 0xc681,
     HV_SYS_REG_TPIDR_EL1 = 0xc684,
+    HV_SYS_REG_SCXTNUM_EL1 API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos) = 0xc687,
     HV_SYS_REG_CNTKCTL_EL1 = 0xc708,
     HV_SYS_REG_CSSELR_EL1 = 0xd000,
     HV_SYS_REG_TPIDR_EL0 = 0xde82,
     HV_SYS_REG_TPIDRRO_EL0 = 0xde83,
+    HV_SYS_REG_TPIDR2_EL0 API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos) = 0xde85,
+    HV_SYS_REG_SCXTNUM_EL0 API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos) = 0xde87,
     HV_SYS_REG_CNTV_CTL_EL0 = 0xdf19,
     HV_SYS_REG_CNTV_CVAL_EL0 = 0xdf1a,
     HV_SYS_REG_SP_EL1 = 0xe208,

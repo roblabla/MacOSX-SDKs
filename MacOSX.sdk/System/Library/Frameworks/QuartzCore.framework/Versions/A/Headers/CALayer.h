@@ -14,7 +14,9 @@
 
 @class NSEnumerator, CAAnimation, CALayerArray;
 @protocol CAAction, CALayerDelegate;
+
 @protocol CALayoutManager;
+
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
@@ -22,6 +24,7 @@ typedef NSString * CALayerContentsGravity NS_TYPED_ENUM API_AVAILABLE(macos(10.5
 typedef NSString * CALayerContentsFormat NS_TYPED_ENUM API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 typedef NSString * CALayerContentsFilter NS_TYPED_ENUM API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 typedef NSString * CALayerCornerCurve NS_TYPED_ENUM API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+
 
 /* Bit definitions for `autoresizingMask' property. */
 
@@ -35,6 +38,7 @@ typedef NS_OPTIONS (unsigned int, CAAutoresizingMask)
   kCALayerHeightSizable = 1U << 4,
   kCALayerMaxYMargin    = 1U << 5
 };
+
 
 
 /* Options that control when to tone map CALayer contents and
@@ -124,6 +128,24 @@ API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 /** Property methods. **/
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* CALayer implements the standard NSKeyValueCoding protocol for all
  * Objective C properties defined by the class and its subclasses. It
  * dynamically implements missing accessor methods for properties
@@ -140,6 +162,7 @@ API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  *      CGRect                  NSValue
  *      CGAffineTransform       NSAffineTransform
  *      CATransform3D           NSValue  */
+
 
 /* Returns the default value of the named property, or nil if no
  * default value is known. Subclasses that override this method to
@@ -399,6 +422,7 @@ API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @property(copy) CALayerContentsFormat contentsFormat
   API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
+
 /* If YES, contents of the layer can be displayed up to its NSScreen's
  * maximumExtendedDynamicRangeColorComponentValue or UIScreen's
  * currentEDRHeadroom. If NO, contents are clipped or tonemapped to 1.0 (SDR).
@@ -410,10 +434,12 @@ API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @property BOOL wantsExtendedDynamicRangeContent
   API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0)) API_UNAVAILABLE(tvos, watchos);
 
+
 /* Options that control when to tone map CALayer contents and
    CAMetalLayer drawables. */
 @property(copy) CAToneMapMode toneMapMode
 API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
 
 /* If YES, allows the layer's content to render at arbitrary integer scales
    to preserve high-quality vector graphics. This only affects content drawn
@@ -422,6 +448,7 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
 
 @property BOOL wantsDynamicContentScaling
   API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(macos, ios, tvos, watchos);
+
 
 
 /* The filter types to use when rendering the `contents' property of
@@ -508,6 +535,14 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
 
 @property CAEdgeAntialiasingMask edgeAntialiasingMask;
 
+
+
+
+
+
+
+
+
 /* When true this layer is allowed to antialias its edges, as requested
  * by the edgeAntialiasingMask.
  *
@@ -516,6 +551,7 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
  * is not found, the UIViewEdgeAntialiasing property will be used
  * instead. If no value is found in the Info.plist the default value is
  * YES on macOS and NO on iOS. */
+
 
 @property BOOL allowsEdgeAntialiasing
     API_AVAILABLE(macos(10.10), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
@@ -567,6 +603,18 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
 
 @property float opacity;
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* When true, and the layer's opacity property is less than one, the
  * layer is allowed to composite itself as a group separate from its
  * parent. This gives the correct results when the layer contains
@@ -577,6 +625,7 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
  * is not found, the UIViewGroupOpacity property will be used instead.
  * If no value is found in the Info.plist the default value is YES on
  * macOS and NO on iOS. */
+
 
 @property BOOL allowsGroupOpacity
     API_AVAILABLE(macos(10.10), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
@@ -660,11 +709,14 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
 
 /** Layout methods. **/
 
+
 /* A bitmask defining how the layer is resized when the bounds of its
  * superlayer changes. See the CAAutoresizingMask enum for the bit
  * definitions. Default value is zero. */
 
 @property CAAutoresizingMask autoresizingMask;
+
+
 
 /* The object responsible for assigning frame rects to sublayers,
  * should implement methods from the CALayoutManager informal protocol.
@@ -672,6 +724,7 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
  * is done (unless a subclass overrides -layoutSublayers). */
 
 @property(nullable, strong) id <CALayoutManager> layoutManager;
+
 
 /* Returns the preferred frame size of the layer in the coordinate
  * space of the superlayer. The default implementation calls the layout
@@ -711,6 +764,7 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
 
 - (void)layoutSublayers;
 
+
 /* NSView-style springs and struts layout. -resizeSublayersWithOldSize:
  * is called when the layer's bounds rect is changed. It calls
  * -resizeWithOldSuperlayerSize: to resize the sublayer's frame to
@@ -719,6 +773,7 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
 
 - (void)resizeSublayersWithOldSize:(CGSize)size;
 - (void)resizeWithOldSuperlayerSize:(CGSize)size;
+
 
 /** Action methods. **/
 
@@ -844,6 +899,7 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
 
 @end
 
+
 /** Layout manager protocol. **/
 
 @protocol CALayoutManager <NSObject>
@@ -867,6 +923,7 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
 - (void)layoutSublayersOfLayer:(CALayer *)layer;
 
 @end
+
 
 /** Action (event handler) protocol. **/
 

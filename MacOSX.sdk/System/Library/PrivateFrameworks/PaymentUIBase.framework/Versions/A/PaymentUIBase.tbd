@@ -181,6 +181,7 @@ exports:
                        '_$s13PaymentUIBase14FooterViewTypeON', '_$s13PaymentUIBase14FooterViewTypeOSQAAMc', 
                        '_$s13PaymentUIBase14SheetConstantsO010horizontalC7Padding12CoreGraphics7CGFloatVvgZ', 
                        '_$s13PaymentUIBase14SheetConstantsO011virtualCardC9MinHeight12CoreGraphics7CGFloatVvgZ', 
+                       '_$s13PaymentUIBase14SheetConstantsO03ampC9MinHeight12CoreGraphics7CGFloatVvgZ', 
                        '_$s13PaymentUIBase14SheetConstantsO13menuItemWidth12CoreGraphics7CGFloatVvgZ', 
                        '_$s13PaymentUIBase14SheetConstantsO16pearlIsAvailableSbvgZ', 
                        '_$s13PaymentUIBase14SheetConstantsO17dropdownItemWidth12CoreGraphics7CGFloatVvgZ', 

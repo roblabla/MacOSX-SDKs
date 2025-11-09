@@ -205,34 +205,34 @@ AV_INIT_UNAVAILABLE
  @method 		assetVariantQualifierWithPredicate:
  @abstract		Returns a qualifer for a predicate.
  @param			predicate
-				The variant predicate.
+				The variant predicate. Must be a valid, non-nil NSPredicate.
  */
-+ (instancetype)assetVariantQualifierWithPredicate:(NSPredicate *)predicate;
++ (instancetype)assetVariantQualifierWithPredicate:(nonnull NSPredicate *)predicate;
 
 /*!
  @method 		assetVariantQualifierWithVariant:
  @abstract		Returns a qualifer for a particular asset variant.
  @param			variant
-				A variant obtained from the -[AVAsset variants] or -[AVAssetDownloadConfiguration playableVariants].
+				A variant obtained from the -[AVAsset variants] or -[AVAssetDownloadConfiguration playableVariants]. Must be a valid, non-nil AVAssetVariant.
  */
-+ (instancetype)assetVariantQualifierWithVariant:(AVAssetVariant *)variant;
++ (instancetype)assetVariantQualifierWithVariant:(nonnull AVAssetVariant *)variant;
 
 /*!
  @method 		assetVariantQualifierForMinimumValueInKeyPath:
  @abstract		Returns a qualifer for finding variant with minimum value in the input key path.
  @param			keyPath
-				AVAssetVariant keyPath. Allowed keyPath values are peakBitRate, averageBitRate, videoAttributes.presentationSize.
+				AVAssetVariant keyPath. Allowed keyPath values are peakBitRate, averageBitRate, videoAttributes.presentationSize. Must be a valid, non-nil NSString.
  */
 
-+ (instancetype)assetVariantQualifierForMinimumValueInKeyPath:(NSString *)keyPath API_UNAVAILABLE(macos, ios, tvos, watchos, visionos);
++ (instancetype)assetVariantQualifierForMinimumValueInKeyPath:(nonnull NSString *)keyPath API_UNAVAILABLE(macos, ios, tvos, watchos, visionos);
 
 /*!
  @method 		assetVariantQualifierForMaximumValueInKeyPath:
  @abstract		Returns a qualifer for finding variant with maximum value in the input key path
  @param			keyPath
-				AVAssetVariant keyPath. Allowed keyPath values are peakBitRate, averageBitRate, videoAttributes.presentationSize.
+				AVAssetVariant keyPath. Allowed keyPath values are peakBitRate, averageBitRate, videoAttributes.presentationSize. Must be a valid, non-nil NSString.
  */
-+ (instancetype)assetVariantQualifierForMaximumValueInKeyPath:(NSString *)keyPath API_UNAVAILABLE(macos, ios, tvos, watchos, visionos);
++ (instancetype)assetVariantQualifierForMaximumValueInKeyPath:(nonnull NSString *)keyPath API_UNAVAILABLE(macos, ios, tvos, watchos, visionos);
 
 /*!
  @method		predicateForChannelCount:mediaSelectionOption:operatorType:

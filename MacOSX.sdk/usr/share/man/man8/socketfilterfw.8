@@ -18,8 +18,8 @@
 .Op Fl -add Ar path
 .Op Fl -remove Ar path
 .Op Fl -getallowsigned
-.Op Fl -setallowsigned
-.Op Fl -setallowsignedapp
+.Op Fl -setallowsigned Ar on | off
+.Op Fl -setallowsignedapp Ar on | off
 .Op Fl -getstealthmode
 .Op Fl -setstealthmode Ar on | off
 .Pp
@@ -54,9 +54,9 @@ Add the application at the indicated path to the firewall.
 Remove the application at the indicated path from the firewall.
 .It Fl -getallowsigned
 Show whether built-in and downloaded signed applications are to automatically receive incoming connections.
-.It Fl -setallowsigned
+.It Fl -setallowsigned Ar on | off
 Set whether built-in signed applications are to automatically receive incoming connections or not.
-.It Fl -setallowsignedapp
+.It Fl -setallowsignedapp Ar on | off
 Set whether downloaded signed applications are to automatically receive incoming connections or not.
 .It Fl -getstealthmode
 Show whether stealth mode is on or not.

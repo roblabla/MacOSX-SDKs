@@ -13,6 +13,8 @@
 .Nm
 .Ar --status
 .Nm
+.Ar --global-enable
+.Nm
 .Ar --global-disable | --disable-status
 .Sh DESCRIPTION
 .Nm
@@ -31,6 +33,11 @@ Requests that
 perform an assessment on the
 .Ar files
 given.
+.It Fl -global-enable
+Enable the assessment subsystem.
+Operations that are denied by system policy will fail;
+assessment APIs report the truth.
+Requires root access.
 .It Fl -global-disable
 Reveal the option to allow applications downloaded from anywhere in the Privacy & Security settings pane.
 .It Fl -disable-status
@@ -91,11 +98,6 @@ Disabled rules are not considered when performing assessment, but
 remain in the database and can be re-enabled later.
 .It Fl -enable
 Enable rule(s) in the assessment rule database, counteracting earlier disabling.
-.It Fl -global-enable
-Enable the assessment subsystem.
-Operations that are denied by system policy will fail;
-assessment APIs report the truth.
-Requires root access.
 .It Fl -remove
 Remove rule(s) from the assessment rule database.
 .It Fl -reset-default

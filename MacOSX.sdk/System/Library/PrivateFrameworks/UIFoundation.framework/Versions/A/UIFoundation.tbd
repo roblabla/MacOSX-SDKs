@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 968.6
+current-version: 969.5
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -109,10 +109,10 @@ exports:
                        _NSViewSizeDocumentAttribute, _NSViewZoomDocumentAttribute, 
                        _NSWebArchiveTextDocumentType, _NSWebPreferencesDocumentOption, 
                        _NSWebResourceLoadDelegateDocumentOption, _NSWordMLTextDocumentType, 
-                       _NSWritingDirectionAttributeName, _NSZipTextDocumentType, 
-                       _UIAppendBytesForValueToData, _UIAppendVInt32ToData, _UIArchiveHeaderIdentifier, 
-                       _UICreateOrderedAndStrippedCoderValues, _UICurrentCoderVersion, 
-                       _UIDataLooksLikeNibArchive, _UIDistanceBetweenPointAndRect, 
+                       _NSWritingDirectionAttributeName, _NSWritingToolsExclusionAttributeName, 
+                       _NSZipTextDocumentType, _UIAppendBytesForValueToData, _UIAppendVInt32ToData, 
+                       _UIArchiveHeaderIdentifier, _UICreateOrderedAndStrippedCoderValues, 
+                       _UICurrentCoderVersion, _UIDataLooksLikeNibArchive, _UIDistanceBetweenPointAndRect, 
                        _UIFixedByteLengthForType, _UIFontDescriptorCascadeListAttribute, 
                        _UIFontDescriptorCharacterSetAttribute, _UIFontDescriptorFaceAttribute, 
                        _UIFontDescriptorFamilyAttribute, _UIFontDescriptorFeatureSettingsAttribute, 
@@ -185,9 +185,10 @@ exports:
                        NSTextList, NSTextListElement, NSTextParagraph, NSTextRange, 
                        NSTextSelection, NSTextSelectionNavigation, NSTextStorage, 
                        NSTextTab, NSTextTable, NSTextTableBlock, NSTextViewportLayoutController, 
-                       NSTypesetter, NSWordMLReader, NSWordMLWriter, NSWritingToolsContextState, 
-                       NSWritingToolsEditTracker, NSWritingToolsProofreadingController, 
-                       NSWritingToolsProofreadingSuggestion, NSZipTextReader, UIBoxcarFilterPointFIFO, 
+                       NSTypesetter, NSWordMLReader, NSWordMLWriter, NSWritingToolsAnimationParameters, 
+                       NSWritingToolsContext, NSWritingToolsContextState, NSWritingToolsEditTracker, 
+                       NSWritingToolsProofreadingController, NSWritingToolsProofreadingSuggestion, 
+                       NSWritingToolsSelection, NSZipTextReader, UIBoxcarFilterPointFIFO, 
                        UIFont, UIFontDescriptor, UINibCoderValue, UINibDecoder, UINibEncoder, 
                        UINibStringIDTable, UIPointFIFO, UIQuadCurvePointFIFO, _NSATSTypesetterGuts, 
                        _NSAttributeRun, _NSAttributedStringAsyncReadReply, _NSAttributedStringIntentResolver, 
