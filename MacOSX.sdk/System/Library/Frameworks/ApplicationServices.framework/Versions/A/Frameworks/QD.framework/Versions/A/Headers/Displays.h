@@ -3,9 +3,9 @@
  
      Contains:   Display Manager Interfaces.
  
-     Version:    Quickdraw-64.6.15~3
+     Version:    Quickdraw-96.21~1
  
-     Copyright:  © 1993-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1993-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,12 +16,8 @@
 #ifndef __DISPLAYS__
 #define __DISPLAYS__
 
-#ifndef __CONDITIONALMACROS__
-#include <CarbonCore/ConditionalMacros.h>
-#endif
-
-#ifndef __COMPONENTS__
-#include <CarbonCore/Components.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __VIDEO__
@@ -32,13 +28,13 @@
 #include <ColorSync/CMApplication.h>
 #endif
 
-
 #ifndef __APPLEEVENTS__
 #include <AE/AppleEvents.h>
 #endif
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -48,17 +44,10 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 typedef void *                          DMProcessInfoPtr;
 typedef void *                          DMModalFilterUPP;
-
 enum {
                                         /* AppleEvents Core Suite */
   kAESystemConfigNotice         = 'cnfg', /* Core Suite types */
@@ -150,6 +139,8 @@ enum {
   kDMNotifySuspendConfigure     = 7,    /* Temporary end of configuration */
   kDMNotifyResumeConfigure      = 8,    /* Resume configuration */
   kDMNotifyRequestDisplayProbe  = 9,    /* Request smart displays re-probe (used in sleep and hot plugging) */
+  kDMNotifyDisplayWillSleep     = 10,   /* Mac OS X only */
+  kDMNotifyDisplayDidWake       = 11,   /* Mac OS X only */
                                         /* Notification Flags */
   kExtendedNotificationProc     = (1L << 16)
 };
@@ -425,7 +416,7 @@ typedef STACK_UPP_TYPE(DMDisplayListIteratorProcPtr)            DMDisplayListIte
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DMNotificationUPP
-NewDMNotificationUPP(DMNotificationProcPtr userRoutine);
+NewDMNotificationUPP(DMNotificationProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDMExtendedNotificationUPP()
@@ -436,7 +427,7 @@ NewDMNotificationUPP(DMNotificationProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DMExtendedNotificationUPP
-NewDMExtendedNotificationUPP(DMExtendedNotificationProcPtr userRoutine);
+NewDMExtendedNotificationUPP(DMExtendedNotificationProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDMComponentListIteratorUPP()
@@ -447,7 +438,7 @@ NewDMExtendedNotificationUPP(DMExtendedNotificationProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DMComponentListIteratorUPP
-NewDMComponentListIteratorUPP(DMComponentListIteratorProcPtr userRoutine);
+NewDMComponentListIteratorUPP(DMComponentListIteratorProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDMDisplayModeListIteratorUPP()
@@ -458,7 +449,7 @@ NewDMComponentListIteratorUPP(DMComponentListIteratorProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DMDisplayModeListIteratorUPP
-NewDMDisplayModeListIteratorUPP(DMDisplayModeListIteratorProcPtr userRoutine);
+NewDMDisplayModeListIteratorUPP(DMDisplayModeListIteratorProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDMProfileListIteratorUPP()
@@ -469,7 +460,7 @@ NewDMDisplayModeListIteratorUPP(DMDisplayModeListIteratorProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DMProfileListIteratorUPP
-NewDMProfileListIteratorUPP(DMProfileListIteratorProcPtr userRoutine);
+NewDMProfileListIteratorUPP(DMProfileListIteratorProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDMDisplayListIteratorUPP()
@@ -480,7 +471,7 @@ NewDMProfileListIteratorUPP(DMProfileListIteratorProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DMDisplayListIteratorUPP
-NewDMDisplayListIteratorUPP(DMDisplayListIteratorProcPtr userRoutine);
+NewDMDisplayListIteratorUPP(DMDisplayListIteratorProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDMNotificationUPP()
@@ -491,7 +482,7 @@ NewDMDisplayListIteratorUPP(DMDisplayListIteratorProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDMNotificationUPP(DMNotificationUPP userUPP);
+DisposeDMNotificationUPP(DMNotificationUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDMExtendedNotificationUPP()
@@ -502,7 +493,7 @@ DisposeDMNotificationUPP(DMNotificationUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDMExtendedNotificationUPP(DMExtendedNotificationUPP userUPP);
+DisposeDMExtendedNotificationUPP(DMExtendedNotificationUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDMComponentListIteratorUPP()
@@ -513,7 +504,7 @@ DisposeDMExtendedNotificationUPP(DMExtendedNotificationUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDMComponentListIteratorUPP(DMComponentListIteratorUPP userUPP);
+DisposeDMComponentListIteratorUPP(DMComponentListIteratorUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDMDisplayModeListIteratorUPP()
@@ -524,7 +515,7 @@ DisposeDMComponentListIteratorUPP(DMComponentListIteratorUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDMDisplayModeListIteratorUPP(DMDisplayModeListIteratorUPP userUPP);
+DisposeDMDisplayModeListIteratorUPP(DMDisplayModeListIteratorUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDMProfileListIteratorUPP()
@@ -535,7 +526,7 @@ DisposeDMDisplayModeListIteratorUPP(DMDisplayModeListIteratorUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDMProfileListIteratorUPP(DMProfileListIteratorUPP userUPP);
+DisposeDMProfileListIteratorUPP(DMProfileListIteratorUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDMDisplayListIteratorUPP()
@@ -546,7 +537,7 @@ DisposeDMProfileListIteratorUPP(DMProfileListIteratorUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDMDisplayListIteratorUPP(DMDisplayListIteratorUPP userUPP);
+DisposeDMDisplayListIteratorUPP(DMDisplayListIteratorUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDMNotificationUPP()
@@ -559,7 +550,7 @@ DisposeDMDisplayListIteratorUPP(DMDisplayListIteratorUPP userUPP);
 extern void
 InvokeDMNotificationUPP(
   AppleEvent *       theEvent,
-  DMNotificationUPP  userUPP);
+  DMNotificationUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDMExtendedNotificationUPP()
@@ -574,7 +565,7 @@ InvokeDMExtendedNotificationUPP(
   void *                     userData,
   short                      theMessage,
   void *                     notifyData,
-  DMExtendedNotificationUPP  userUPP);
+  DMExtendedNotificationUPP  userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDMComponentListIteratorUPP()
@@ -589,7 +580,7 @@ InvokeDMComponentListIteratorUPP(
   void *                      userData,
   DMListIndexType             itemIndex,
   DMComponentListEntryPtr     componentInfo,
-  DMComponentListIteratorUPP  userUPP);
+  DMComponentListIteratorUPP  userUPP)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDMDisplayModeListIteratorUPP()
@@ -604,7 +595,7 @@ InvokeDMDisplayModeListIteratorUPP(
   void *                        userData,
   DMListIndexType               itemIndex,
   DMDisplayModeListEntryPtr     displaymodeInfo,
-  DMDisplayModeListIteratorUPP  userUPP);
+  DMDisplayModeListIteratorUPP  userUPP)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDMProfileListIteratorUPP()
@@ -619,7 +610,7 @@ InvokeDMProfileListIteratorUPP(
   void *                    userData,
   DMListIndexType           itemIndex,
   DMProfileListEntryPtr     profileInfo,
-  DMProfileListIteratorUPP  userUPP);
+  DMProfileListIteratorUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDMDisplayListIteratorUPP()
@@ -634,7 +625,7 @@ InvokeDMDisplayListIteratorUPP(
   void *                    userData,
   DMListIndexType           itemIndex,
   DisplayListEntryPtr       displaymodeInfo,
-  DMDisplayListIteratorUPP  userUPP);
+  DMDisplayListIteratorUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DMDisplayGestalt()
@@ -756,7 +747,7 @@ InvokeDMDisplayListIteratorUPP(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern GDHandle 
-DMGetFirstScreenDevice(Boolean activeOnly);
+DMGetFirstScreenDevice(Boolean activeOnly)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -770,7 +761,7 @@ DMGetFirstScreenDevice(Boolean activeOnly);
 extern GDHandle 
 DMGetNextScreenDevice(
   GDHandle   theDevice,
-  Boolean    activeOnly);
+  Boolean    activeOnly)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -782,7 +773,7 @@ DMGetNextScreenDevice(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DMDrawDesktopRect(Rect * globalRect);
+DMDrawDesktopRect(Rect * globalRect)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -794,7 +785,7 @@ DMDrawDesktopRect(Rect * globalRect);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DMDrawDesktopRegion(RgnHandle globalRgn);
+DMDrawDesktopRegion(RgnHandle globalRgn)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -808,7 +799,7 @@ DMDrawDesktopRegion(RgnHandle globalRgn);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-DMBeginConfigureDisplays(Handle * displayState);
+DMBeginConfigureDisplays(Handle * displayState)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -820,7 +811,7 @@ DMBeginConfigureDisplays(Handle * displayState);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-DMEndConfigureDisplays(Handle displayState);
+DMEndConfigureDisplays(Handle displayState)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -839,7 +830,7 @@ DMAddDisplay(
   unsigned long   reserved,
   unsigned long   displayID,
   Component       displayComponent,
-  Handle          displayState);
+  Handle          displayState)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -855,7 +846,7 @@ DMMoveDisplay(
   GDHandle   moveDevice,
   short      x,
   short      y,
-  Handle     displayState);
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -869,7 +860,7 @@ DMMoveDisplay(
 extern OSErr 
 DMDisableDisplay(
   GDHandle   disableDevice,
-  Handle     displayState);
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -883,7 +874,7 @@ DMDisableDisplay(
 extern OSErr 
 DMEnableDisplay(
   GDHandle   enableDevice,
-  Handle     displayState);
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -897,7 +888,7 @@ DMEnableDisplay(
 extern OSErr 
 DMRemoveDisplay(
   GDHandle   removeDevice,
-  Handle     displayState);
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -914,7 +905,7 @@ DMRemoveDisplay(
 extern OSErr 
 DMSetMainDisplay(
   GDHandle   newMainDevice,
-  Handle     displayState);
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -931,7 +922,7 @@ DMSetDisplayMode(
   unsigned long    mode,
   unsigned long *  depthMode,
   unsigned long    reserved,
-  Handle           displayState);
+  Handle           displayState)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -949,7 +940,7 @@ DMCheckDisplayMode(
   unsigned long    depthMode,
   unsigned long *  switchFlags,
   unsigned long    reserved,
-  Boolean *        modeOk);
+  Boolean *        modeOk)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -961,7 +952,7 @@ DMCheckDisplayMode(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-DMGetDeskRegion(RgnHandle * desktopRegion);
+DMGetDeskRegion(RgnHandle * desktopRegion)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -975,7 +966,7 @@ DMGetDeskRegion(RgnHandle * desktopRegion);
 extern OSErr 
 DMRegisterNotifyProc(
   DMNotificationUPP   notificationProc,
-  DMProcessInfoPtr    whichPSN);
+  DMProcessInfoPtr    whichPSN)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -989,7 +980,7 @@ DMRegisterNotifyProc(
 extern OSErr 
 DMRemoveNotifyProc(
   DMNotificationUPP   notificationProc,
-  DMProcessInfoPtr    whichPSN);
+  DMProcessInfoPtr    whichPSN)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1001,7 +992,7 @@ DMRemoveNotifyProc(
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
-DMQDIsMirroringCapable(Boolean * qdIsMirroringCapable);
+DMQDIsMirroringCapable(Boolean * qdIsMirroringCapable)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1013,7 +1004,7 @@ DMQDIsMirroringCapable(Boolean * qdIsMirroringCapable);
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
-DMCanMirrorNow(Boolean * canMirrorNow);
+DMCanMirrorNow(Boolean * canMirrorNow)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1025,7 +1016,7 @@ DMCanMirrorNow(Boolean * canMirrorNow);
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
-DMIsMirroringOn(Boolean * isMirroringOn);
+DMIsMirroringOn(Boolean * isMirroringOn)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1040,7 +1031,7 @@ extern OSErr
 DMMirrorDevices(
   GDHandle   gD1,
   GDHandle   gD2,
-  Handle     displayState);
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1054,7 +1045,7 @@ DMMirrorDevices(
 extern OSErr 
 DMUnmirrorDevice(
   GDHandle   gDevice,
-  Handle     displayState);
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1068,7 +1059,7 @@ DMUnmirrorDevice(
 extern OSErr 
 DMGetNextMirroredDevice(
   GDHandle    gDevice,
-  GDHandle *  mirroredDevice);
+  GDHandle *  mirroredDevice)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1080,7 +1071,7 @@ DMGetNextMirroredDevice(
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
-DMBlockMirroring(void);
+DMBlockMirroring(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1092,7 +1083,7 @@ DMBlockMirroring(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
-DMUnblockMirroring(void);
+DMUnblockMirroring(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1117,7 +1108,7 @@ extern OSErr
 DMGetDisplayIDByGDevice(
   GDHandle         displayDevice,
   DisplayIDType *  displayID,
-  Boolean          failToMain);
+  Boolean          failToMain)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1132,7 +1123,7 @@ extern OSErr
 DMGetGDeviceByDisplayID(
   DisplayIDType   displayID,
   GDHandle *      displayDevice,
-  Boolean         failToMain);
+  Boolean         failToMain)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1146,7 +1137,7 @@ DMGetGDeviceByDisplayID(
 extern OSErr 
 DMSetDisplayComponent(
   GDHandle    theDevice,
-  Component   displayComponent);
+  Component   displayComponent)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1160,7 +1151,7 @@ DMSetDisplayComponent(
 extern OSErr 
 DMGetDisplayComponent(
   GDHandle     theDevice,
-  Component *  displayComponent);
+  Component *  displayComponent)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1179,7 +1170,7 @@ DMNewDisplay(
   unsigned long   reserved,
   DisplayIDType   displayID,
   Component       displayComponent,
-  Handle          displayState);
+  Handle          displayState)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1193,7 +1184,7 @@ DMNewDisplay(
 extern OSErr 
 DMDisposeDisplay(
   GDHandle   disposeDevice,
-  Handle     displayState);
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1205,7 +1196,7 @@ DMDisposeDisplay(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-DMResolveDisplayComponents(void);
+DMResolveDisplayComponents(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1221,7 +1212,7 @@ DMRegisterExtendedNotifyProc(
   DMExtendedNotificationUPP   notifyProc,
   void *                      notifyUserData,
   unsigned short              nofifyOnFlags,
-  DMProcessInfoPtr            whichPSN);
+  DMProcessInfoPtr            whichPSN)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1237,7 +1228,7 @@ DMRemoveExtendedNotifyProc(
   DMExtendedNotificationUPP   notifyProc,
   void *                      notifyUserData,
   DMProcessInfoPtr            whichPSN,
-  unsigned short              removeFlags);
+  unsigned short              removeFlags)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1256,7 +1247,7 @@ DMNewAVPanelList(
   unsigned long      panelListFlags,
   unsigned long      reserved,
   DMListIndexType *  thePanelCount,
-  DMListType *       thePanelList);
+  DMListType *       thePanelList)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1275,7 +1266,7 @@ DMNewAVEngineList(
   unsigned long      engineListFlags,
   unsigned long      reserved,
   DMListIndexType *  engineCount,
-  DMListType *       engineList);
+  DMListType *       engineList)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1292,7 +1283,7 @@ DMNewAVDeviceList(
   unsigned long      deviceListFlags,
   unsigned long      reserved,
   DMListIndexType *  deviceCount,
-  DMListType *       deviceList);
+  DMListType *       deviceList)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1309,7 +1300,7 @@ DMNewAVPortListByPortType(
   unsigned long      portListFlags,
   unsigned long      reserved,
   DMListIndexType *  devicePortCount,
-  DMListType *       theDevicePortList);
+  DMListType *       theDevicePortList)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1326,7 +1317,7 @@ DMGetIndexedComponentFromList(
   DMListIndexType              itemIndex,
   unsigned long                reserved,
   DMComponentListIteratorUPP   listIterator,
-  void *                       userData);
+  void *                       userData)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1338,7 +1329,7 @@ DMGetIndexedComponentFromList(
  *    Non-Carbon CFM:   in DisplayLib 2.0 and later
  */
 extern OSErr 
-DMDisposeList(DMListType panelList);
+DMDisposeList(DMListType panelList)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1353,7 +1344,7 @@ extern OSErr
 DMGetNameByAVID(
   AVIDType        theID,
   unsigned long   nameFlags,
-  Str255          name);
+  Str255          name)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1369,7 +1360,7 @@ DMNewAVIDByPortComponent(
   Component       thePortComponent,
   ResType         portKind,
   unsigned long   reserved,
-  AVIDType *      newID);
+  AVIDType *      newID)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1385,7 +1376,7 @@ DMGetPortComponentByAVID(
   DisplayIDType           thePortID,
   Component *             thePortComponent,
   ComponentDescription *  theDesciption,
-  ResType *               thePortKind);
+  ResType *               thePortKind)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1401,7 +1392,7 @@ DMSendDependentNotification(
   ResType             notifyType,
   ResType             notifyClass,
   AVIDType            displayID,
-  ComponentInstance   notifyComponent);
+  ComponentInstance   notifyComponent)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1413,7 +1404,7 @@ DMSendDependentNotification(
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
 extern OSErr 
-DMDisposeAVComponent(Component theAVComponent);
+DMDisposeAVComponent(Component theAVComponent)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1428,7 +1419,7 @@ extern OSErr
 DMSaveScreenPrefs(
   unsigned long   reserved1,
   unsigned long   saveFlags,
-  unsigned long   reserved2);
+  unsigned long   reserved2)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1444,7 +1435,7 @@ DMNewAVIDByDeviceComponent(
   Component        theDeviceComponent,
   ResType          portKind,
   unsigned long    reserved,
-  DisplayIDType *  newID);
+  DisplayIDType *  newID)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1462,7 +1453,7 @@ DMNewAVPortListByDeviceAVID(
   unsigned long      portListFlags,
   unsigned long      reserved,
   DMListIndexType *  devicePortCount,
-  DMListType *       theDevicePortList);
+  DMListType *       theDevicePortList)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1478,7 +1469,7 @@ DMGetDeviceComponentByAVID(
   AVIDType                theDeviceID,
   Component *             theDeviceComponent,
   ComponentDescription *  theDesciption,
-  ResType *               theDeviceKind);
+  ResType *               theDeviceKind)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1495,7 +1486,7 @@ DMNewDisplayModeList(
   unsigned long      modeListFlags,
   unsigned long      reserved,
   DMListIndexType *  thePanelCount,
-  DMListType *       thePanelList);
+  DMListType *       thePanelList)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1512,7 +1503,7 @@ DMGetIndexedDisplayModeFromList(
   DMListIndexType                itemIndex,
   unsigned long                  reserved,
   DMDisplayModeListIteratorUPP   listIterator,
-  void *                         userData);
+  void *                         userData)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1528,7 +1519,7 @@ DMGetGraphicInfoByAVID(
   AVIDType         theID,
   PicHandle *      theAVPcit,
   Handle *         theAVIconSuite,
-  AVLocationRec *  theAVLocation);
+  AVLocationRec *  theAVLocation)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1543,7 +1534,7 @@ extern OSErr
 DMGetAVPowerState(
   AVIDType          theID,
   AVPowerStatePtr   getPowerState,
-  unsigned long     reserved1);
+  unsigned long     reserved1)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1559,7 +1550,7 @@ DMSetAVPowerState(
   AVIDType          theID,
   AVPowerStatePtr   setPowerState,
   unsigned long     powerFlags,
-  Handle            displayState);
+  Handle            displayState)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1573,7 +1564,7 @@ DMSetAVPowerState(
 extern OSErr 
 DMGetDeviceAVIDByPortAVID(
   AVIDType    portAVID,
-  AVIDType *  deviceAVID);
+  AVIDType *  deviceAVID)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1588,7 +1579,7 @@ extern OSErr
 DMGetEnableByAVID(
   AVIDType   theAVID,
   Boolean *  isAVIDEnabledNow,
-  Boolean *  canChangeEnableNow);
+  Boolean *  canChangeEnableNow)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1603,7 +1594,7 @@ extern OSErr
 DMSetEnableByAVID(
   AVIDType   theAVID,
   Boolean    doEnable,
-  Handle     displayState);
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1617,7 +1608,7 @@ DMSetEnableByAVID(
 extern OSErr 
 DMGetDisplayMode(
   GDHandle          theDevice,
-  VDSwitchInfoPtr   switchInfo);
+  VDSwitchInfoPtr   switchInfo)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1633,17 +1624,11 @@ DMConfirmConfiguration(
   DMModalFilterUPP   filterProc,
   UInt32             confirmFlags,
   UInt32             reserved,
-  Handle             displayState);
+  Handle             displayState)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

@@ -32,6 +32,12 @@ APPKIT_EXTERN NSString *NSLinkAttributeName;		 /* ??? id <NSTextLink>; link */
  */
 APPKIT_EXTERN NSString *NSCharacterShapeAttributeName;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+/* An NSGlyphInfo object.  This provides a means to override the standard glyph generation.  NSLayoutManager will assign the glyph specified by this glyph info to the entire attribute range, provided that its contents match the specified base string, and that the specified glyph is available in the font specified by NSFontAttributeName.
+*/
+APPKIT_EXTERN NSString *NSGlyphInfoAttributeName;
+#endif
+
 /* This defines currently supported values for NSUnderlineStyleAttributeName
 */
 enum {

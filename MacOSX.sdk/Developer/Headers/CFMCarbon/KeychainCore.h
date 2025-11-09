@@ -1,1 +1,1 @@
-../../../System/Library/Frameworks/CoreServices.framework/Frameworks/SecurityCore.framework/Headers/KeychainCore.h
+../../../System/Library/Frameworks/CoreServices.framework/Frameworks/OSServices.framework/Headers/KeychainCore.h

@@ -96,9 +96,9 @@
 #define USE_EXPAT 1
 #endif
 
-/* build flag: -DHARD_SERVER_LIMIT=1024 */
+/* build flag: -DHARD_SERVER_LIMIT=2048 */
 #ifndef HARD_SERVER_LIMIT
-#define HARD_SERVER_LIMIT 1024
+#define HARD_SERVER_LIMIT 2048
 #endif
 
 /* build flag: -DEAPI */

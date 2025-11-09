@@ -3,9 +3,9 @@
  
      Contains:   Basic Macintosh data types.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -23,6 +23,8 @@
 #include <stdbool.h>
 
 
+#include <AvailabilityMacros.h>
+
 #if PRAGMA_ONCE
 #pragma once
 #endif
@@ -31,13 +33,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /********************************************************************************
 
@@ -165,40 +161,18 @@ typedef ShortFixed *                    ShortFixedPtr;
 
 *********************************************************************************/
 typedef float               Float32;
-#if defined(__MWERKS__) || defined(THINK_C)
-    typedef short double    Float64;
-#else
-    typedef double          Float64;
-#endif
-#if TARGET_CPU_68K
-    #if TARGET_RT_MAC_68881
-        typedef long double Float96;        
-        struct Float80 {
-            SInt16  exp;
-            UInt16  man[4];
-        };
-        typedef struct Float80 Float80;
-    #else
-        typedef long double Float80;        
-        struct Float96 {
-            SInt16  exp[2];     /* the second 16-bits are undefined */
-            UInt16  man[4];
-        };
-        typedef struct Float96 Float96;
-    #endif
-#else
-    struct Float80 {
-        SInt16  exp;
-        UInt16  man[4];
-    };
-    typedef struct Float80 Float80;
-    
-    struct Float96 {
-        SInt16  exp[2];     /* the second 16-bits are undefined */
-        UInt16  man[4];
-    };
-    typedef struct Float96 Float96;
-#endif
+typedef double              Float64;
+struct Float80 {
+    SInt16  exp;
+    UInt16  man[4];
+};
+typedef struct Float80 Float80;
+
+struct Float96 {
+    SInt16  exp[2];     /* the second 16-bits are undefined */
+    UInt16  man[4];
+};
+typedef struct Float96 Float96;
 struct Float32Point {
     Float32             x;
     Float32             y;
@@ -630,7 +604,7 @@ typedef SInt8                           VHSelect;
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-Debugger(void);
+Debugger(void)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -642,7 +616,7 @@ Debugger(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DebugStr(ConstStr255Param debuggerMsg);
+DebugStr(ConstStr255Param debuggerMsg)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -689,7 +663,7 @@ DebugStr(ConstStr255Param debuggerMsg);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SysBreak(void);
+SysBreak(void)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -701,7 +675,7 @@ SysBreak(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SysBreakStr(ConstStr255Param debuggerMsg);
+SysBreakStr(ConstStr255Param debuggerMsg)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -713,7 +687,7 @@ SysBreakStr(ConstStr255Param debuggerMsg);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SysBreakFunc(ConstStr255Param debuggerMsg);
+SysBreakFunc(ConstStr255Param debuggerMsg)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* old names for Debugger and DebugStr */
@@ -723,13 +697,7 @@ SysBreakFunc(ConstStr255Param debuggerMsg);
 #endif
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

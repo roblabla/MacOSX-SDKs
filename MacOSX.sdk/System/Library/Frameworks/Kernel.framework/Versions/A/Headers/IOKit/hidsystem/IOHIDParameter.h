@@ -65,15 +65,25 @@
 #define kIOHIDPointerContactToMoveKey	"HIDPointerContactToMove"
 #define kIOHIDPointerPressureToClickKey	"HIDPointerPressureToClick"
 #define kIOHIDPointerButtonMode			"HIDPointerButtonMode"
+#define kIOHIDPointerButtonCountKey	"HIDPointerButtonCount"
 
 #define kIOHIDPointerAccelerationKey	"HIDPointerAcceleration"
 #define kIOHIDPointerAccelerationSettingsKey	"HIDPointerAccelerationSettings"
 #define kIOHIDPointerAccelerationTypeKey	"HIDPointerAccelerationType"
+#define kIOHIDPointerAccelerationTableKey  "HIDPointerAccelerationTable"
+
+#define kIOHIDScrollResetKey			"HIDScrollReset"
+#define kIOHIDScrollResolutionKey		"HIDScrollResolution"
+#define kIOHIDScrollAccelerationKey		"HIDScrollAcceleration"
+#define kIOHIDScrollAccelerationTableKey	"HIDScrollAccelerationTable"
+
 #define kIOHIDTrackpadAccelerationType	"HIDTrackpadAcceleration"
 #define kIOHIDMouseAccelerationType		"HIDMouseAcceleration"
 
 #define kIOHIDClickTimeKey				"HIDClickTime"
 #define kIOHIDClickSpaceKey				"HIDClickSpace"
+
+#define kIOHIDWaitCursorFrameIntervalKey	"HIDWaitCursorFrameInterval"
 
 #define kIOHIDAutoDimThresholdKey		"HIDAutoDimThreshold"
 #define kIOHIDAutoDimStateKey			"HIDAutoDimState"
@@ -83,19 +93,30 @@
 #define kIOHIDBrightnessKey				"HIDBrightness"
 #define kIOHIDAutoDimBrightnessKey		"HIDAutoDimBrightness"
 
-// if kIOHIDSickyKeysDisabledKey is 1, then all sticky keys functionality
+// if kIOHIDStickyKeysDisabledKey is 1, then all sticky keys functionality
 // is completely turned off. Multiple shifts will have no effect.
-#define kIOHIDSickyKeysDisabledKey		"HIDStickyKeysDisabled"
+#define kIOHIDStickyKeysDisabledKey		"HIDStickyKeysDisabled"
 
-// if kIOHIDSickyKeysOnKey is 1 then a depressed modifier will stay down
+// if kIOHIDStickyKeysOnKey is 1 then a depressed modifier will stay down
 // until a non-modifer key is pressed (or sticky keys is turned off)
-#define kIOHIDSickyKeysOnKey			"HIDStickyKeysOn"
+#define kIOHIDStickyKeysOnKey			"HIDStickyKeysOn"
 
-// if kIOHIDSickyKeysShiftTogglesKey is 1, then a sequence of five
+// if kIOHIDStickyKeysShiftTogglesKey is 1, then a sequence of five
 // shift keys in sequence will toggle sticky keys on or off
-#define kIOHIDSickyKeysShiftTogglesKey	"HIDStickyKeysShiftToggles"
+#define kIOHIDStickyKeysShiftTogglesKey	"HIDStickyKeysShiftToggles"
+
+// kIOHIDSlowKeysDelayKey represents the delay used for slow keys.
+// if kIOHIDSlowKeysDelayKey is 0, then slow keys off
+#define kIOHIDSlowKeysDelayKey			"HIDSlowKeysDelay"
 
 #define kIOHIDF12EjectDelayKey			"HIDF12EjectDelay"
+
+
+// the following are misspelled keys present in the system
+// they are being kept around, but will eventually be deprecated
+#define kIOHIDSickyKeysDisabledKey		"HIDStickyKeysDisabled"
+#define kIOHIDSickyKeysOnKey			"HIDStickyKeysOn"
+#define kIOHIDSickyKeysShiftTogglesKey	"HIDStickyKeysShiftToggles"
 
 // the following values are used in kIOHIDPointerButtonMode
 typedef enum {

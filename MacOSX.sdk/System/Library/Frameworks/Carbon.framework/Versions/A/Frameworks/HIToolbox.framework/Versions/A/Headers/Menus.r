@@ -3,9 +3,9 @@
  
      Contains:   Menu Manager Interfaces.
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,8 +17,8 @@
 #ifndef __MENUS_R__
 #define __MENUS_R__
 
-#ifndef __CONDITIONALMACROS_R__
-#include <CarbonCore/ConditionalMacros.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
 
 #define kMenuStdMenuProc 				63
@@ -38,8 +38,8 @@
 #define kMenuIconSuiteType 				5					/*  Type for Icon Suite */
 #define kMenuIconRefType 				6					/*  Type for Icon Ref */
 #define kMenuCGImageRefType 			7					/*  Type for a CGImageRef (Mac OS X only) */
-#define kMenuSystemIconSelectorType 	8					/*  Type for an IconRef registered with Icon Services under kSystemIconsCreator (after Mac OS X 10.0.x only) */
-#define kMenuIconResourceType 			9					/*  Type for a CFStringRef naming a resource in the main bundle of the process (after Mac OS X 10.0.x only) */
+#define kMenuSystemIconSelectorType 	8					/*  Type for an IconRef registered with Icon Services under kSystemIconsCreator (Mac OS X 10.1 and later only) */
+#define kMenuIconResourceType 			9					/*  Type for a CFStringRef naming a resource in the main bundle of the process (Mac OS X 10.1 and later only) */
 
 #define kMenuNullGlyph 					0x00				/*  Null (always glyph 1) */
 #define kMenuTabRightGlyph 				0x02				/*  Tab to the right key (for left-to-right script systems) */
@@ -99,10 +99,12 @@
 #define kMenuF14Glyph 					0x88				/*  F14 key */
 #define kMenuF15Glyph 					0x89				/*  F15 key */
 #define kMenuControlISOGlyph 			0x8A				/*  Control key (ISO standard) */
+#define kMenuEjectGlyph 				0x8C				/*  Eject key (available on Jaguar and later) */
 
 #define kMenuAttrExcludesMarkColumn 	0x01
 #define kMenuAttrAutoDisable 			0x04
 #define kMenuAttrUsePencilGlyph 		0x08
+#define kMenuAttrHidden 				0x10
 
 #define kMenuItemAttrDisabled 			0x01
 #define kMenuItemAttrIconDisabled 		0x02
@@ -116,14 +118,18 @@
 #define kMenuItemAttrAutoRepeat 		0x0200
 #define kMenuItemAttrUseVirtualKey 		0x0400
 #define kMenuItemAttrCustomDraw 		0x0800
+#define kMenuItemAttrIncludeInCmdKeyMatching  0x1000
 
 #define gestaltContextualMenuAttr 		'cmnu'
 #define gestaltContextualMenuUnusedBit 	0
 #define gestaltContextualMenuTrapAvailable  1
+#define gestaltContextualMenuHasAttributeAndModifierKeys  2	/*  Contextual Menu Manager supports keyContextualMenuAttributes and keyContextualMenuModifiers  */
+#define gestaltContextualMenuHasUnicodeSupport  3			/*  Contextual Menu Manager supports typeUnicodeText and typeCFStringRef  */
 
 #define kCMHelpItemNoHelp 				0
 #define kCMHelpItemAppleGuide 			1
 #define kCMHelpItemOtherHelp 			2
+#define kCMHelpItemRemoveHelp 			3
 
 #define kCMNothingSelected 				0
 #define kCMMenuItemSelected 			1
@@ -205,6 +211,33 @@ type 'xmnu'
                      unsigned longint;                       /* refCon */
                        unsigned longint;                       /* refCon2 */
                       unsigned integer noHierID=0;            /* hierarchical menu ID */
+                     unsigned integer sysFont=0;             /* font ID */
+                      integer naturalGlyph=0;                 /* keyboard glyph */
+               };
+         };
+
+        case versionOne:
+           key integer = 1;    /* version */
+
+         integer = $$Countof(ItemExtensions);
+           array ItemExtensions
+           {
+              switch
+             {
+                  case skipItem:
+                     key integer=0;
+                     
+                   case dataItem:
+                     key integer=1;
+                     unsigned longint;                       /* Command ID */
+                       unsigned hex byte;                      /* modifiers */
+                        unsigned hex byte noVKey=0;             /* virtual keycode for command key */
+                      unsigned hex longint noAttributes=0;    /* MenuItemAttributes */
+                       unsigned longint sysScript=-1,          /* text encoding */
+                                         currScript=-2;         /*  (use currScript for default)*/
+                     unsigned longint;                       /* refCon */
+                       unsigned longint noIndent=0;            /* indent */
+                       unsigned integer noHierID=0;            /* hierarchical menu ID */
                      unsigned integer sysFont=0;             /* font ID */
                       integer naturalGlyph=0;                 /* keyboard glyph */
                };

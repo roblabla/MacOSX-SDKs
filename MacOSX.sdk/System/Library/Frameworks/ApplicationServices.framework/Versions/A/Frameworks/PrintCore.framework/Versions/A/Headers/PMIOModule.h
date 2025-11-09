@@ -12,12 +12,6 @@
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
- 
-	History:
-		11/28/00	jl		Add kPMPrinterURI.	
-		10/03/00	amq		Updated per code review.	
-		09/06/00	amq		Moved error codes into PMErrors.h and included it.	
-
 */
 #ifndef __PMIOMODULE__
 #define __PMIOMODULE__
@@ -47,6 +41,7 @@ strings in its UI, instead it gets the actual UI strings from the Printer Browse
 #define   kPMUSBConnection          	CFSTR("USB")
 #define   kPMLPRConnection          	CFSTR("LPR")
 #define   kPMDirServicesConnection      CFSTR("Directory Services")
+#define	  kPMRendezvousConnection	CFSTR("Rendezvous")
 
 /* possible attributes that can be requested from an IO Module and allow clients to determine various 
 characteristics about the IOM, its connection type, and the target printer.  The same attribute can 
@@ -84,8 +79,9 @@ typedef struct  IOMProcs
         
     // The actual IO Module routine Procs
 	
-	// GetConnectionInfo: returns the connection type and the path to the companion browser module relative 
-	// to /Library/Printers/.  The connection types: AppleTalk, USB, LPR, and Directory Services are reserved by Apple.
+	// GetConnectionInfo: returns the connection type and the path to the companion browser module
+        // relative to the IOM 
+        // The connection types: AppleTalk, USB, LPR, and Directory Services are reserved by Apple.
     CALLBACK_API_C( OSStatus , GetConnectionInfo )(CFStringRef *connectionType, CFStringRef *pbmPath);
 
 	// Initialize: creates a context to store local variables during an IO session.  printerAddress of

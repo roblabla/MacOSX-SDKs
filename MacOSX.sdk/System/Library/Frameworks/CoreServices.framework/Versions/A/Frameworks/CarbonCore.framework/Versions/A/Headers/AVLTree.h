@@ -3,9 +3,9 @@
  
      Contains:   Interfaces for AVL balanced trees.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -27,6 +27,7 @@
 
 /* The visit stage for AVLWalk() walkProcs */
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -36,13 +37,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 
 /*
@@ -149,7 +144,7 @@ typedef STACK_UPP_TYPE(AVLWalkProcPtr)                          AVLWalkUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AVLCompareItemsUPP
-NewAVLCompareItemsUPP(AVLCompareItemsProcPtr userRoutine);
+NewAVLCompareItemsUPP(AVLCompareItemsProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewAVLItemSizeUPP()
@@ -160,7 +155,7 @@ NewAVLCompareItemsUPP(AVLCompareItemsProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AVLItemSizeUPP
-NewAVLItemSizeUPP(AVLItemSizeProcPtr userRoutine);
+NewAVLItemSizeUPP(AVLItemSizeProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewAVLDisposeItemUPP()
@@ -171,7 +166,7 @@ NewAVLItemSizeUPP(AVLItemSizeProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AVLDisposeItemUPP
-NewAVLDisposeItemUPP(AVLDisposeItemProcPtr userRoutine);
+NewAVLDisposeItemUPP(AVLDisposeItemProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewAVLWalkUPP()
@@ -182,7 +177,7 @@ NewAVLDisposeItemUPP(AVLDisposeItemProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AVLWalkUPP
-NewAVLWalkUPP(AVLWalkProcPtr userRoutine);
+NewAVLWalkUPP(AVLWalkProcPtr userRoutine)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeAVLCompareItemsUPP()
@@ -193,7 +188,7 @@ NewAVLWalkUPP(AVLWalkProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAVLCompareItemsUPP(AVLCompareItemsUPP userUPP);
+DisposeAVLCompareItemsUPP(AVLCompareItemsUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeAVLItemSizeUPP()
@@ -204,7 +199,7 @@ DisposeAVLCompareItemsUPP(AVLCompareItemsUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAVLItemSizeUPP(AVLItemSizeUPP userUPP);
+DisposeAVLItemSizeUPP(AVLItemSizeUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeAVLDisposeItemUPP()
@@ -215,7 +210,7 @@ DisposeAVLItemSizeUPP(AVLItemSizeUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAVLDisposeItemUPP(AVLDisposeItemUPP userUPP);
+DisposeAVLDisposeItemUPP(AVLDisposeItemUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeAVLWalkUPP()
@@ -226,7 +221,7 @@ DisposeAVLDisposeItemUPP(AVLDisposeItemUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAVLWalkUPP(AVLWalkUPP userUPP);
+DisposeAVLWalkUPP(AVLWalkUPP userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeAVLCompareItemsUPP()
@@ -242,7 +237,7 @@ InvokeAVLCompareItemsUPP(
   const void *        i1,
   const void *        i2,
   AVLNodeType         nd_typ,
-  AVLCompareItemsUPP  userUPP);
+  AVLCompareItemsUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeAVLItemSizeUPP()
@@ -256,7 +251,7 @@ extern UInt32
 InvokeAVLItemSizeUPP(
   AVLTreePtr      tree,
   const void *    itemPtr,
-  AVLItemSizeUPP  userUPP);
+  AVLItemSizeUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeAVLDisposeItemUPP()
@@ -270,7 +265,7 @@ extern void
 InvokeAVLDisposeItemUPP(
   AVLTreePtr         tree,
   const void *       dataP,
-  AVLDisposeItemUPP  userUPP);
+  AVLDisposeItemUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeAVLWalkUPP()
@@ -289,7 +284,7 @@ InvokeAVLWalkUPP(
   UInt32         level,
   SInt32         balance,
   void *         refCon,
-  AVLWalkUPP     userUPP);
+  AVLWalkUPP     userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
     Create an AVL tree.  The compareItemsProc and the sizeItemProc are required; disposeItemProc is
@@ -313,7 +308,7 @@ AVLInit(
   AVLItemSizeUPP       sizeItemProc,
   AVLDisposeItemUPP    disposeItemProc,
   void *               refCon,
-  AVLTreePtr *         tree);
+  AVLTreePtr *         tree)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -332,7 +327,7 @@ AVLInit(
 extern OSErr 
 AVLDispose(
   AVLTreePtr *  tree,
-  AVLOrder      order);
+  AVLOrder      order)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -369,7 +364,7 @@ AVLWalk(
   AVLTreePtr   tree,
   AVLWalkUPP   walkProc,
   AVLOrder     order,
-  void *       walkRefCon);
+  void *       walkRefCon)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*  Return  the number of items in the given tree.*/
@@ -384,7 +379,7 @@ AVLWalk(
 extern OSErr 
 AVLCount(
   AVLTreePtr   tree,
-  UInt32 *     count);
+  UInt32 *     count)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -406,7 +401,7 @@ AVLGetIndItem(
   AVLTreePtr   tree,
   UInt32       index,
   void *       dataPtr,
-  UInt32 *     itemSize);
+  UInt32 *     itemSize)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -428,7 +423,7 @@ AVLGetIndItem(
 extern OSErr 
 AVLInsert(
   AVLTreePtr    tree,
-  const void *  data);
+  const void *  data)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -453,7 +448,7 @@ AVLRemove(
   AVLTreePtr    tree,
   const void *  key,
   void *        dataPtr,
-  UInt32 *      itemSize);
+  UInt32 *      itemSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -477,7 +472,7 @@ AVLFind(
   AVLTreePtr    tree,
   const void *  key,
   void *        dataPtr,
-  UInt32 *      itemSize);
+  UInt32 *      itemSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -495,17 +490,11 @@ AVLFind(
 extern OSErr 
 AVLGetRefcon(
   AVLTreePtr   tree,
-  void **      refCon);
+  void **      refCon)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

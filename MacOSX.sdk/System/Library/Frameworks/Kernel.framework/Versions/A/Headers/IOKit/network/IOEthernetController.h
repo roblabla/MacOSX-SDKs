@@ -94,12 +94,6 @@ struct IOEthernetAddress {
 	UInt8 bytes[kIOEthernetAddressSize];
 };
 
-extern "C" {  // FIXME - remove
-#include <sys/socket.h>
-#include <net/if.h>
-#include <net/etherdefs.h>
-}
-
 /*!	@defined gIOEthernetWakeOnLANFilterGroup
     @discussion gIOEthernetWakeOnLANFilterGroup is an OSSymbol object
         that contains the name of the Ethernet wake-on-LAN filter group

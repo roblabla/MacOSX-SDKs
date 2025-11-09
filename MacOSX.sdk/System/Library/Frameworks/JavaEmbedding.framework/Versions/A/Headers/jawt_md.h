@@ -27,12 +27,15 @@ extern "C" {
  * MacOSX-specific declarations for AWT native interface.
  * See notes in jawt.h for an example of use.
  */
-typedef struct jawt_MacDrawingSurfaceInfo {
-
+typedef struct jawt_MacDrawingSurfaceInfo
+{
+    // QuickDraw stuff
 	GDevice*        fQDDevice;
 	GrafPtr         fQDPort;
 	WindowRef       fQDWindow;
-	Rect*        	fLocationInParent;
+    
+    // CoreGraphics stuff
+	CGRect       	fLocationInParent; // in CG coordinate space
 	UInt32 			fCGWindowID;
 	UInt32 			fCGConnectionID;
 

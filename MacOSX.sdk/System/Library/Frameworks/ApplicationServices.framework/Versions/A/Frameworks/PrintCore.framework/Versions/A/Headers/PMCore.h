@@ -3,9 +3,9 @@
  
      Contains:   Carbon Printing Manager Interfaces.
  
-     Version:    PrintingCore-61~16
+     Version:    PrintingCore-102.1~1
  
-     Copyright:  © 1998-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1998-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,12 +16,8 @@
 #ifndef __PMCORE__
 #define __PMCORE__
 
-#ifndef __MACERRORS__
-#include <CarbonCore/MacErrors.h>
-#endif
-
-#ifndef __FILES__
-#include <CarbonCore/Files.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __QUICKDRAW__
@@ -36,15 +32,9 @@
 #include <PrintCore/PMDefinitions.h>
 #endif
 
-#ifndef __CFSTRING__
-#include <CoreFoundation/CFString.h>
-#endif
-
-#ifndef __CFURL__
-#include <CoreFoundation/CFURL.h>
-#endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -52,14 +42,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 #ifndef PM_USE_SESSION_APIS
@@ -78,7 +60,7 @@ typedef STACK_UPP_TYPE(PMIdleProcPtr)                           PMIdleUPP;
  *    Non-Carbon CFM:   not available
  */
 extern PMIdleUPP
-NewPMIdleUPP(PMIdleProcPtr userRoutine);
+NewPMIdleUPP(PMIdleProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposePMIdleUPP()
@@ -89,7 +71,7 @@ NewPMIdleUPP(PMIdleProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposePMIdleUPP(PMIdleUPP userUPP);
+DisposePMIdleUPP(PMIdleUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokePMIdleUPP()
@@ -100,7 +82,7 @@ DisposePMIdleUPP(PMIdleUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-InvokePMIdleUPP(PMIdleUPP userUPP);
+InvokePMIdleUPP(PMIdleUPP userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 #if PM_USE_SESSION_APIS
 /* Session routines */
@@ -114,7 +96,7 @@ InvokePMIdleUPP(PMIdleUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMRetain(PMObject object);
+PMRetain(PMObject object)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -126,7 +108,7 @@ PMRetain(PMObject object);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMRelease(PMObject object);
+PMRelease(PMObject object)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Session Print loop */
@@ -142,7 +124,7 @@ PMRelease(PMObject object);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMCreateSession(PMPrintSession * printSession);
+PMCreateSession(PMPrintSession * printSession)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Session PMPageFormat */
@@ -158,7 +140,7 @@ PMCreateSession(PMPrintSession * printSession);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMCreatePageFormat(PMPageFormat * pageFormat);
+PMCreatePageFormat(PMPageFormat * pageFormat)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -172,7 +154,7 @@ PMCreatePageFormat(PMPageFormat * pageFormat);
 extern OSStatus 
 PMSessionDefaultPageFormat(
   PMPrintSession   printSession,
-  PMPageFormat     pageFormat);
+  PMPageFormat     pageFormat)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -187,7 +169,7 @@ extern OSStatus
 PMSessionValidatePageFormat(
   PMPrintSession   printSession,
   PMPageFormat     pageFormat,
-  Boolean *        result);
+  Boolean *        result)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Session PMPrintSettings */
@@ -203,7 +185,7 @@ PMSessionValidatePageFormat(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMCreatePrintSettings(PMPrintSettings * printSettings);
+PMCreatePrintSettings(PMPrintSettings * printSettings)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -217,7 +199,7 @@ PMCreatePrintSettings(PMPrintSettings * printSettings);
 extern OSStatus 
 PMSessionDefaultPrintSettings(
   PMPrintSession    printSession,
-  PMPrintSettings   printSettings);
+  PMPrintSettings   printSettings)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -232,7 +214,7 @@ extern OSStatus
 PMSessionValidatePrintSettings(
   PMPrintSession    printSession,
   PMPrintSettings   printSettings,
-  Boolean *         result);
+  Boolean *         result)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Session Classic support */
@@ -247,7 +229,7 @@ PMSessionValidatePrintSettings(
 extern OSStatus 
 PMSessionGeneral(
   PMPrintSession   printSession,
-  Ptr              pData);
+  Ptr              pData)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -263,7 +245,7 @@ PMSessionConvertOldPrintRecord(
   PMPrintSession     printSession,
   Handle             printRecordHandle,
   PMPrintSettings *  printSettings,
-  PMPageFormat *     pageFormat);
+  PMPageFormat *     pageFormat)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -279,7 +261,7 @@ PMSessionMakeOldPrintRecord(
   PMPrintSession    printSession,
   PMPrintSettings   printSettings,
   PMPageFormat      pageFormat,
-  Handle *          printRecordHandle);
+  Handle *          printRecordHandle)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Session Driver Information */
@@ -295,7 +277,7 @@ extern OSStatus
 PMPrinterGetDescriptionURL(
   PMPrinter     printer,
   CFStringRef   descriptionType,
-  CFURLRef *    fileURL);
+  CFURLRef *    fileURL)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -309,7 +291,7 @@ PMPrinterGetDescriptionURL(
 extern OSStatus 
 PMSessionGetCurrentPrinter(
   PMPrintSession   printSession,
-  PMPrinter *      currentPrinter);
+  PMPrinter *      currentPrinter)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -323,7 +305,7 @@ PMSessionGetCurrentPrinter(
 extern OSStatus 
 PMPrinterGetLanguageInfo(
   PMPrinter         printer,
-  PMLanguageInfo *  info);
+  PMLanguageInfo *  info)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -337,7 +319,7 @@ PMPrinterGetLanguageInfo(
 extern OSStatus 
 PMPrinterGetDriverCreator(
   PMPrinter   printer,
-  OSType *    creator);
+  OSType *    creator)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -351,7 +333,7 @@ PMPrinterGetDriverCreator(
 extern OSStatus 
 PMPrinterGetDriverReleaseInfo(
   PMPrinter   printer,
-  VersRec *   release);
+  VersRec *   release)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -365,7 +347,7 @@ PMPrinterGetDriverReleaseInfo(
 extern OSStatus 
 PMPrinterGetPrinterResolutionCount(
   PMPrinter   printer,
-  UInt32 *    count);
+  UInt32 *    count)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -380,7 +362,7 @@ extern OSStatus
 PMPrinterGetPrinterResolution(
   PMPrinter       printer,
   PMTag           tag,
-  PMResolution *  res);
+  PMResolution *  res)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -395,7 +377,33 @@ extern OSStatus
 PMPrinterGetIndexedPrinterResolution(
   PMPrinter       printer,
   UInt32          index,
-  PMResolution *  res);
+  PMResolution *  res)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  PMPrinterIsPostScriptCapable()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+PMPrinterIsPostScriptCapable(PMPrinter printer)               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  PMPrinterGetMakeAndModelName()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPrinterGetMakeAndModelName(
+  PMPrinter      printer,
+  CFStringRef *  makeAndModel)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /* Session ColorSync & PostScript Support */
@@ -408,7 +416,7 @@ PMPrinterGetIndexedPrinterResolution(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMSessionEnableColorSync(PMPrintSession printSession);
+PMSessionEnableColorSync(PMPrintSession printSession)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -420,7 +428,7 @@ PMSessionEnableColorSync(PMPrintSession printSession);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMSessionDisableColorSync(PMPrintSession printSession);
+PMSessionDisableColorSync(PMPrintSession printSession)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -432,7 +440,7 @@ PMSessionDisableColorSync(PMPrintSession printSession);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMSessionPostScriptBegin(PMPrintSession printSession);
+PMSessionPostScriptBegin(PMPrintSession printSession)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -444,7 +452,7 @@ PMSessionPostScriptBegin(PMPrintSession printSession);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMSessionPostScriptEnd(PMPrintSession printSession);
+PMSessionPostScriptEnd(PMPrintSession printSession)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -458,7 +466,7 @@ PMSessionPostScriptEnd(PMPrintSession printSession);
 extern OSStatus 
 PMSessionPostScriptHandle(
   PMPrintSession   printSession,
-  Handle           psHandle);
+  Handle           psHandle)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -473,7 +481,7 @@ extern OSStatus
 PMSessionPostScriptData(
   PMPrintSession   printSession,
   Ptr              psPtr,
-  Size             len);
+  Size             len)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -487,7 +495,7 @@ PMSessionPostScriptData(
 extern OSStatus 
 PMSessionPostScriptFile(
   PMPrintSession   printSession,
-  FSSpec *         psFile);
+  FSSpec *         psFile)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -502,7 +510,7 @@ extern OSStatus
 PMSessionSetPSInjectionData(
   PMPrintSession    printSession,
   PMPrintSettings   printSettings,
-  CFArrayRef        injectionDictArray);
+  CFArrayRef        injectionDictArray)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Session Error */
@@ -515,7 +523,7 @@ PMSessionSetPSInjectionData(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMSessionError(PMPrintSession printSession);
+PMSessionError(PMPrintSession printSession)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -529,7 +537,7 @@ PMSessionError(PMPrintSession printSession);
 extern OSStatus 
 PMSessionSetError(
   PMPrintSession   printSession,
-  OSStatus         printError);
+  OSStatus         printError)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Other Session routines */
@@ -544,7 +552,7 @@ PMSessionSetError(
 extern OSStatus 
 PMSessionGetDocumentFormatGeneration(
   PMPrintSession   printSession,
-  CFArrayRef *     docFormats);
+  CFArrayRef *     docFormats)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -560,7 +568,7 @@ PMSessionSetDocumentFormatGeneration(
   PMPrintSession   printSession,
   CFStringRef      docFormat,
   CFArrayRef       graphicsContextTypes,
-  CFTypeRef        options);
+  CFTypeRef        options)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -575,7 +583,7 @@ extern OSStatus
 PMSessionGetDocumentFormatSupported(
   PMPrintSession   printSession,
   CFArrayRef *     docFormats,
-  UInt32           limit);
+  UInt32           limit)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -590,7 +598,7 @@ extern OSStatus
 PMSessionIsDocumentFormatSupported(
   PMPrintSession   printSession,
   CFStringRef      docFormat,
-  Boolean *        supported);
+  Boolean *        supported)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -617,7 +625,7 @@ extern OSStatus
 PMSessionGetGraphicsContext(
   PMPrintSession   printSession,
   CFStringRef      graphicsContextType,
-  void **          graphicsContext);
+  void **          graphicsContext)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -631,7 +639,7 @@ PMSessionGetGraphicsContext(
 extern OSStatus 
 PMSessionSetIdleProc(
   PMPrintSession   printSession,
-  PMIdleUPP        idleProc);
+  PMIdleUPP        idleProc)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -646,7 +654,7 @@ extern OSStatus
 PMSessionSetDataInSession(
   PMPrintSession   printSession,
   CFStringRef      key,
-  CFTypeRef        data);
+  CFTypeRef        data)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -661,14 +669,14 @@ extern OSStatus
 PMSessionGetDataFromSession(
   PMPrintSession   printSession,
   CFStringRef      key,
-  CFTypeRef *      data);
+  CFTypeRef *      data)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PMSessionCreatePrinterList()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -677,21 +685,21 @@ PMSessionCreatePrinterList(
   PMPrintSession   printSession,
   CFArrayRef *     printerList,
   CFIndex *        currentIndex,
-  PMPrinter *      currentPrinter);
+  PMPrinter *      currentPrinter)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
  *  PMSessionSetCurrentPrinter()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.4 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 PMSessionSetCurrentPrinter(
   PMPrintSession   session,
-  CFStringRef      printerName);
+  CFStringRef      printerName)                               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -741,10 +749,16 @@ PMSessionSetCurrentPrinter(
  *      clearest example is the kPMDestinationFile destination type
  *      which allows a caller to also supply a file URL specifying
  *      where the output file is to be created.
+ *    
+ *    SPECIAL_AVAILABILITY_NOTE:
+ *      This routine is available in ApplicationsServices.framework in
+ *      Mac OS X version 10.1 and later. On Mac OS X it is available to
+ *      CFM applications through CarbonLib starting with Mac OS X
+ *      version 10.2 and later.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        not available
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
@@ -753,7 +767,7 @@ PMSessionSetDestination(
   PMPrintSettings     printSettings,
   PMDestinationType   destType,
   CFStringRef         destFormat,
-  CFURLRef            destLocation);
+  CFURLRef            destLocation)                           AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -792,17 +806,23 @@ PMSessionSetDestination(
  *      the destination type for a print job that used the specified
  *      session and print settings. If this function fails, then
  *      *'destType' will be set to kPMDestinationInvalid.
+ *    
+ *    SPECIAL_AVAILABILITY_NOTE:
+ *      This routine is available in ApplicationsServices.framework in
+ *      Mac OS X version 10.1 and later. On Mac OS X it is available to
+ *      CFM applications through CarbonLib starting with Mac OS X
+ *      version 10.2 and later.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        not available
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 PMSessionGetDestinationType(
   PMPrintSession       printSession,
   PMPrintSettings      printSettings,
-  PMDestinationType *  destTypeP);
+  PMDestinationType *  destTypeP)                             AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -827,17 +847,23 @@ PMSessionGetDestinationType(
  *      job, or NULL indicating that the default output format will be
  *      used. If this function return an error, then *'destFormatP'
  *      will be set to NULL.
+ *    
+ *    SPECIAL_AVAILABILITY_NOTE:
+ *      This routine is available in ApplicationsServices.framework in
+ *      Mac OS X version 10.1 and later. On Mac OS X it is available to
+ *      CFM applications through CarbonLib starting with Mac OS X
+ *      version 10.2 and later.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        not available
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 PMSessionCopyDestinationFormat(
   PMPrintSession    printSession,
   PMPrintSettings   printSettings,
-  CFStringRef *     destFormatP);
+  CFStringRef *     destFormatP)                              AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -868,17 +894,23 @@ PMSessionCopyDestinationFormat(
  *      location for the current destination type or a copy of a
  *      CFURLRef will be placed in *'destLocationP'. If this function
  *      returns an error then 'destLocationP' will be set to NULL.
+ *    
+ *    SPECIAL_AVAILABILITY_NOTE:
+ *      This routine is available in ApplicationsServices.framework in
+ *      Mac OS X version 10.1 and later. On Mac OS X it is available to
+ *      CFM applications through CarbonLib starting with Mac OS X
+ *      version 10.2 and later.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        not available
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 PMSessionCopyDestinationLocation(
   PMPrintSession    printSession,
   PMPrintSettings   printSettings,
-  CFURLRef *        destLocationP);
+  CFURLRef *        destLocationP)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -908,17 +940,24 @@ PMSessionCopyDestinationLocation(
  *      array is a MIME type specifying a type of output that can be
  *      generated by the printer module associated with the current
  *      printer.
+ *    
+ *    SPECIAL_AVAILABILITY_NOTE:
+ *      This routine is available in ApplicationsServices.framework in
+ *      Mac OS X version 10.1 and later. On Mac OS X it is available to
+ *      CFM applications through CarbonLib starting with Mac OS X
+ *      version 10.2 and later. On Mac OS 8/9 using CarbonLib, this
+ *      routine returns kPMNotImplemented
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        not available
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 PMSessionCopyOutputFormatList(
   PMPrintSession      printSession,
   PMDestinationType   destType,
-  CFArrayRef *        documentFormatP);
+  CFArrayRef *        documentFormatP)                        AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -946,17 +985,106 @@ PMSessionCopyOutputFormatList(
  *      available paper size for the specified printer. If this
  *      function fails then a non-zero error code will be returned and
  *      *'pageFormatList' will be set to NULL.
+ *    
+ *    SPECIAL_AVAILABILITY_NOTE:
+ *      This routine is available in ApplicationsServices.framework in
+ *      Mac OS X version 10.1 and later. On Mac OS X it is available to
+ *      CFM applications through CarbonLib starting with Mac OS X
+ *      version 10.2 and later. On Mac OS 8/9 using CarbonLib, this
+ *      routine returns kPMNotImplemented
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        not available
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 PMSessionCreatePageFormatList(
   PMPrintSession   printSession,
   PMPrinter        printer,
-  CFArrayRef *     pageFormatList);
+  CFArrayRef *     pageFormatList)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+/*
+ * SPECIAL AVAILABILITY note: This routine is available in ApplicationsServices.framework in
+ * Mac OS X version 10.0 and later. On Mac OS X it is available to CFM applications through CarbonLib
+ * starting with Mac OS X version 10.2 and later.
+ *
+ * On Mac OS 8/9 using CarbonLib, this routine returns kPMNotImplemented
+ */
+/*
+ *  PMSessionBeginDocumentNoDialog()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSessionBeginDocumentNoDialog(
+  PMPrintSession    printSession,
+  PMPrintSettings   printSettings,
+  PMPageFormat      pageFormat)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ * SPECIAL AVAILABILITY note: This routine is available in ApplicationsServices.framework in
+ * Mac OS X version 10.0 and later. On Mac OS X it is available to CFM applications through CarbonLib
+ * starting with Mac OS X version 10.2 and later.
+ *
+ * On Mac OS 8/9 using CarbonLib, this routine returns kPMNotImplemented
+ */
+/*
+ *  PMSessionEndDocumentNoDialog()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSessionEndDocumentNoDialog(PMPrintSession printSession)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ * SPECIAL AVAILABILITY note: This routine is available in ApplicationsServices.framework in
+ * Mac OS X version 10.0 and later. On Mac OS X it is available to CFM applications through CarbonLib
+ * starting with Mac OS X version 10.2 and later.
+ *
+ * On Mac OS 8/9 using CarbonLib, this routine returns kPMNotImplemented
+ */
+/*
+ *  PMSessionBeginPageNoDialog()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSessionBeginPageNoDialog(
+  PMPrintSession   printSession,
+  PMPageFormat     pageFormat,
+  const PMRect *   pageFrame)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ * SPECIAL AVAILABILITY note: This routine is available in ApplicationsServices.framework in
+ * Mac OS X version 10.0 and later. On Mac OS X it is available to CFM applications through CarbonLib
+ * starting with Mac OS X version 10.2 and later.
+ *
+ * On Mac OS 8/9 using CarbonLib, this routine returns kPMNotImplemented
+ */
+/*
+ *  PMSessionEndPageNoDialog()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSessionEndPageNoDialog(PMPrintSession printSession)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #else
@@ -969,7 +1097,7 @@ PMSessionCreatePageFormatList(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMSetIdleProc(PMIdleUPP idleProc);
+PMSetIdleProc(PMIdleUPP idleProc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Print loop */
@@ -982,7 +1110,7 @@ PMSetIdleProc(PMIdleUPP idleProc);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMBegin(void);
+PMBegin(void)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -994,7 +1122,7 @@ PMBegin(void);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMEnd(void);
+PMEnd(void)                                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /************************/
@@ -1012,7 +1140,7 @@ PMEnd(void);
 extern OSStatus 
 PMGetGrafPtr(
   PMPrintContext   printContext,
-  GrafPtr *        grafPort);
+  GrafPtr *        grafPort)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* PMPageFormat */
@@ -1025,7 +1153,7 @@ PMGetGrafPtr(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMNewPageFormat(PMPageFormat * pageFormat);
+PMNewPageFormat(PMPageFormat * pageFormat)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1037,7 +1165,7 @@ PMNewPageFormat(PMPageFormat * pageFormat);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMDisposePageFormat(PMPageFormat pageFormat);
+PMDisposePageFormat(PMPageFormat pageFormat)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1049,7 +1177,7 @@ PMDisposePageFormat(PMPageFormat pageFormat);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMDefaultPageFormat(PMPageFormat pageFormat);
+PMDefaultPageFormat(PMPageFormat pageFormat)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1063,7 +1191,7 @@ PMDefaultPageFormat(PMPageFormat pageFormat);
 extern OSStatus 
 PMValidatePageFormat(
   PMPageFormat   pageFormat,
-  Boolean *      result);
+  Boolean *      result)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* PMPrintSettings */
@@ -1076,7 +1204,7 @@ PMValidatePageFormat(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMNewPrintSettings(PMPrintSettings * printSettings);
+PMNewPrintSettings(PMPrintSettings * printSettings)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1088,7 +1216,7 @@ PMNewPrintSettings(PMPrintSettings * printSettings);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMDisposePrintSettings(PMPrintSettings printSettings);
+PMDisposePrintSettings(PMPrintSettings printSettings)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1100,7 +1228,7 @@ PMDisposePrintSettings(PMPrintSettings printSettings);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMDefaultPrintSettings(PMPrintSettings printSettings);
+PMDefaultPrintSettings(PMPrintSettings printSettings)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1114,7 +1242,7 @@ PMDefaultPrintSettings(PMPrintSettings printSettings);
 extern OSStatus 
 PMValidatePrintSettings(
   PMPrintSettings   printSettings,
-  Boolean *         result);
+  Boolean *         result)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Classic Support */
@@ -1127,7 +1255,7 @@ PMValidatePrintSettings(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMGeneral(Ptr pData);
+PMGeneral(Ptr pData)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1142,7 +1270,7 @@ extern OSStatus
 PMConvertOldPrintRecord(
   Handle             printRecordHandle,
   PMPrintSettings *  printSettings,
-  PMPageFormat *     pageFormat);
+  PMPageFormat *     pageFormat)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1157,7 +1285,7 @@ extern OSStatus
 PMMakeOldPrintRecord(
   PMPrintSettings   printSettings,
   PMPageFormat      pageFormat,
-  Handle *          printRecordHandle);
+  Handle *          printRecordHandle)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Driver Information */
@@ -1170,7 +1298,7 @@ PMMakeOldPrintRecord(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMIsPostScriptDriver(Boolean * isPostScript);
+PMIsPostScriptDriver(Boolean * isPostScript)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1182,7 +1310,7 @@ PMIsPostScriptDriver(Boolean * isPostScript);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMGetLanguageInfo(PMLanguageInfo * info);
+PMGetLanguageInfo(PMLanguageInfo * info)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1194,7 +1322,7 @@ PMGetLanguageInfo(PMLanguageInfo * info);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMGetDriverCreator(OSType * creator);
+PMGetDriverCreator(OSType * creator)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1206,7 +1334,7 @@ PMGetDriverCreator(OSType * creator);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMGetDriverReleaseInfo(VersRec * release);
+PMGetDriverReleaseInfo(VersRec * release)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1218,7 +1346,7 @@ PMGetDriverReleaseInfo(VersRec * release);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMGetPrinterResolutionCount(UInt32 * count);
+PMGetPrinterResolutionCount(UInt32 * count)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1232,7 +1360,7 @@ PMGetPrinterResolutionCount(UInt32 * count);
 extern OSStatus 
 PMGetPrinterResolution(
   PMTag           tag,
-  PMResolution *  res);
+  PMResolution *  res)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1246,7 +1374,7 @@ PMGetPrinterResolution(
 extern OSStatus 
 PMGetIndexedPrinterResolution(
   UInt32          index,
-  PMResolution *  res);
+  PMResolution *  res)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /************************/
@@ -1263,7 +1391,7 @@ PMGetIndexedPrinterResolution(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMEnableColorSync(void);
+PMEnableColorSync(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1275,7 +1403,7 @@ PMEnableColorSync(void);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMDisableColorSync(void);
+PMDisableColorSync(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /************************/
@@ -1291,7 +1419,7 @@ PMDisableColorSync(void);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMPostScriptBegin(void);
+PMPostScriptBegin(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1303,7 +1431,7 @@ PMPostScriptBegin(void);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMPostScriptEnd(void);
+PMPostScriptEnd(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /************************/
@@ -1319,7 +1447,7 @@ PMPostScriptEnd(void);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMPostScriptHandle(Handle psHandle);
+PMPostScriptHandle(Handle psHandle)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1333,7 +1461,7 @@ PMPostScriptHandle(Handle psHandle);
 extern OSStatus 
 PMPostScriptData(
   Ptr    psPtr,
-  Size   len);
+  Size   len)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1345,7 +1473,7 @@ PMPostScriptData(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMPostScriptFile(FSSpec * psFile);
+PMPostScriptFile(FSSpec * psFile)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Error */
@@ -1358,7 +1486,7 @@ PMPostScriptFile(FSSpec * psFile);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMError(void);
+PMError(void)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1370,7 +1498,7 @@ PMError(void);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMSetError(OSStatus printError);
+PMSetError(OSStatus printError)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #endif  /* PM_USE_SESSION_APIS */
@@ -1387,7 +1515,7 @@ PMSetError(OSStatus printError);
 extern OSStatus 
 PMCopyPageFormat(
   PMPageFormat   formatSrc,
-  PMPageFormat   formatDest);
+  PMPageFormat   formatDest)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /************************/
@@ -1410,7 +1538,7 @@ PMCopyPageFormat(
 extern OSStatus 
 PMFlattenPageFormat(
   PMPageFormat   pageFormat,
-  Handle *       flatFormat);
+  Handle *       flatFormat)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1424,7 +1552,7 @@ PMFlattenPageFormat(
 extern OSStatus 
 PMUnflattenPageFormat(
   Handle          flatFormat,
-  PMPageFormat *  pageFormat);
+  PMPageFormat *  pageFormat)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* PMPageFormat Accessors */
@@ -1455,7 +1583,7 @@ PMGetPageFormatExtendedData(
   PMPageFormat   pageFormat,
   OSType         dataID,
   UInt32 *       size,
-  void *         extendedData);
+  void *         extendedData)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1471,7 +1599,7 @@ PMSetPageFormatExtendedData(
   PMPageFormat   pageFormat,
   OSType         dataID,
   UInt32         size,
-  void *         extendedData);
+  void *         extendedData)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /************************/
@@ -1488,7 +1616,7 @@ PMSetPageFormatExtendedData(
 extern OSStatus 
 PMGetScale(
   PMPageFormat   pageFormat,
-  double *       scale);
+  double *       scale)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1502,7 +1630,7 @@ PMGetScale(
 extern OSStatus 
 PMSetScale(
   PMPageFormat   pageFormat,
-  double         scale);
+  double         scale)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /************************/
@@ -1521,7 +1649,7 @@ PMSetScale(
 extern OSStatus 
 PMGetResolution(
   PMPageFormat    pageFormat,
-  PMResolution *  res);
+  PMResolution *  res)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1535,7 +1663,7 @@ PMGetResolution(
 extern OSStatus 
 PMSetResolution(
   PMPageFormat          pageFormat,
-  const PMResolution *  res);
+  const PMResolution *  res)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /************************/
@@ -1553,7 +1681,7 @@ PMSetResolution(
 extern OSStatus 
 PMGetPhysicalPaperSize(
   PMPageFormat   pageFormat,
-  PMRect *       paperSize);
+  PMRect *       paperSize)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1567,7 +1695,7 @@ PMGetPhysicalPaperSize(
 extern OSStatus 
 PMSetPhysicalPaperSize(
   PMPageFormat    pageFormat,
-  const PMRect *  paperSize);
+  const PMRect *  paperSize)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /************************/
@@ -1585,7 +1713,7 @@ PMSetPhysicalPaperSize(
 extern OSStatus 
 PMGetPhysicalPageSize(
   PMPageFormat   pageFormat,
-  PMRect *       pageSize);
+  PMRect *       pageSize)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1599,7 +1727,7 @@ PMGetPhysicalPageSize(
 extern OSStatus 
 PMGetAdjustedPaperRect(
   PMPageFormat   pageFormat,
-  PMRect *       paperRect);
+  PMRect *       paperRect)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1613,7 +1741,7 @@ PMGetAdjustedPaperRect(
 extern OSStatus 
 PMGetAdjustedPageRect(
   PMPageFormat   pageFormat,
-  PMRect *       pageRect);
+  PMRect *       pageRect)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1627,7 +1755,7 @@ PMGetAdjustedPageRect(
 extern OSStatus 
 PMGetUnadjustedPaperRect(
   PMPageFormat   pageFormat,
-  PMRect *       paperRect);
+  PMRect *       paperRect)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1641,7 +1769,7 @@ PMGetUnadjustedPaperRect(
 extern OSStatus 
 PMSetUnadjustedPaperRect(
   PMPageFormat    pageFormat,
-  const PMRect *  paperRect);
+  const PMRect *  paperRect)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1655,7 +1783,7 @@ PMSetUnadjustedPaperRect(
 extern OSStatus 
 PMGetUnadjustedPageRect(
   PMPageFormat   pageFormat,
-  PMRect *       pageRect);
+  PMRect *       pageRect)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1669,7 +1797,7 @@ PMGetUnadjustedPageRect(
 extern OSStatus 
 PMSetAdjustedPageRect(
   PMPageFormat    pageFormat,
-  const PMRect *  pageRect);
+  const PMRect *  pageRect)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1683,7 +1811,7 @@ PMSetAdjustedPageRect(
 extern OSStatus 
 PMGetOrientation(
   PMPageFormat     pageFormat,
-  PMOrientation *  orientation);
+  PMOrientation *  orientation)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1698,7 +1826,7 @@ extern OSStatus
 PMSetOrientation(
   PMPageFormat    pageFormat,
   PMOrientation   orientation,
-  Boolean         lock);
+  Boolean         lock)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* PMPrintSettings */
@@ -1713,7 +1841,7 @@ PMSetOrientation(
 extern OSStatus 
 PMCopyPrintSettings(
   PMPrintSettings   settingSrc,
-  PMPrintSettings   settingDest);
+  PMPrintSettings   settingDest)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /************************/
@@ -1736,7 +1864,7 @@ PMCopyPrintSettings(
 extern OSStatus 
 PMFlattenPrintSettings(
   PMPrintSettings   printSettings,
-  Handle *          flatSettings);
+  Handle *          flatSettings)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1750,7 +1878,7 @@ PMFlattenPrintSettings(
 extern OSStatus 
 PMUnflattenPrintSettings(
   Handle             flatSettings,
-  PMPrintSettings *  printSettings);
+  PMPrintSettings *  printSettings)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* PMPrintSettings Accessors */
@@ -1767,7 +1895,7 @@ PMGetPrintSettingsExtendedData(
   PMPrintSettings   printSettings,
   OSType            dataID,
   UInt32 *          size,
-  void *            extendedData);
+  void *            extendedData)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1783,7 +1911,7 @@ PMSetPrintSettingsExtendedData(
   PMPrintSettings   printSettings,
   OSType            dataID,
   UInt32            size,
-  void *            extendedData);
+  void *            extendedData)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1798,7 +1926,7 @@ extern OSStatus
 PMGetDestination(
   PMPrintSettings      printSettings,
   PMDestinationType *  destType,
-  CFURLRef *           fileURL);
+  CFURLRef *           fileURL)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1812,7 +1940,7 @@ PMGetDestination(
 extern OSStatus 
 PMGetJobName(
   PMPrintSettings   printSettings,
-  StringPtr         name);
+  StringPtr         name)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1826,7 +1954,7 @@ PMGetJobName(
 extern OSStatus 
 PMSetJobName(
   PMPrintSettings   printSettings,
-  StringPtr         name);
+  StringPtr         name)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1840,7 +1968,7 @@ PMSetJobName(
 extern OSStatus 
 PMGetCopies(
   PMPrintSettings   printSettings,
-  UInt32 *          copies);
+  UInt32 *          copies)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1855,7 +1983,7 @@ extern OSStatus
 PMSetCopies(
   PMPrintSettings   printSettings,
   UInt32            copies,
-  Boolean           lock);
+  Boolean           lock)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1869,7 +1997,7 @@ PMSetCopies(
 extern OSStatus 
 PMGetFirstPage(
   PMPrintSettings   printSettings,
-  UInt32 *          first);
+  UInt32 *          first)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1884,7 +2012,7 @@ extern OSStatus
 PMSetFirstPage(
   PMPrintSettings   printSettings,
   UInt32            first,
-  Boolean           lock);
+  Boolean           lock)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1898,7 +2026,7 @@ PMSetFirstPage(
 extern OSStatus 
 PMGetLastPage(
   PMPrintSettings   printSettings,
-  UInt32 *          last);
+  UInt32 *          last)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1913,7 +2041,7 @@ extern OSStatus
 PMSetLastPage(
   PMPrintSettings   printSettings,
   UInt32            last,
-  Boolean           lock);
+  Boolean           lock)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /************************/
@@ -1934,7 +2062,7 @@ extern OSStatus
 PMGetPageRange(
   PMPrintSettings   printSettings,
   UInt32 *          minPage,
-  UInt32 *          maxPage);
+  UInt32 *          maxPage)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /************************/
@@ -1952,7 +2080,7 @@ extern OSStatus
 PMSetPageRange(
   PMPrintSettings   printSettings,
   UInt32            minPage,
-  UInt32            maxPage);
+  UInt32            maxPage)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1967,7 +2095,7 @@ extern OSStatus
 PMSetProfile(
   PMPrintSettings            printSettings,
   PMTag                      tag,
-  const CMProfileLocation *  profile);
+  const CMProfileLocation *  profile)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1981,7 +2109,7 @@ PMSetProfile(
 extern OSStatus 
 PMGetColorMode(
   PMPrintSettings   printSettings,
-  PMColorMode *     colorMode);
+  PMColorMode *     colorMode)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1995,7 +2123,7 @@ PMGetColorMode(
 extern OSStatus 
 PMSetColorMode(
   PMPrintSettings   printSettings,
-  PMColorMode       colorMode);
+  PMColorMode       colorMode)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2009,7 +2137,7 @@ PMSetColorMode(
 extern OSStatus 
 PMGetJobNameCFString(
   PMPrintSettings   printSettings,
-  CFStringRef *     name);
+  CFStringRef *     name)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2023,17 +2151,223 @@ PMGetJobNameCFString(
 extern OSStatus 
 PMSetJobNameCFString(
   PMPrintSettings   printSettings,
-  CFStringRef       name);
+  CFStringRef       name)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  PMSetCollate()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSetCollate(
+  PMPrintSettings   printSettings,
+  Boolean           collate)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  PMGetCollate()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMGetCollate(
+  PMPrintSettings   printSettings,
+  Boolean *         collate)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  PMServerCreatePrinterList()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMServerCreatePrinterList(
+  PMServer      server,
+  CFArrayRef *  printerList)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  PMPrinterGetName()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef 
+PMPrinterGetName(PMPrinter printer)                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  PMPrinterGetID()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef 
+PMPrinterGetID(PMPrinter printer)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  PMPrinterIsDefault()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+PMPrinterIsDefault(PMPrinter printer)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  PMPrinterGetLocation()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef 
+PMPrinterGetLocation(PMPrinter printer)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  PMPrinterGetState()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPrinterGetState(
+  PMPrinter         printer,
+  PMPrinterState *  state)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  PMPrinterGetDeviceURI()
+ *  
+ *  Summary:
+ *    Hand back the URI of the printer's device.
+ *  
+ *  Discussion:
+ *    If defined on OS 9 this function returns kPMNotImplemented.
+ *  
+ *  Parameters:
+ *    
+ *    printer:
+ *      The printer whose device URI is to be retrieved.
+ *    
+ *    deviceURI:
+ *      On exit, if successful *'deviceURI' will contain a reference to
+ *      a CFURL describing the printer's device. The caller is
+ *      responsible for releasing this reference. If this call returns
+ *      an error, then *'deviceURI' will be set to NULL.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPrinterGetDeviceURI(
+  PMPrinter   printer,
+  CFURLRef *  deviceURI)                                      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+/*
+ *  PMPrinterIsFavorite()
+ *  
+ *  Summary:
+ *    Return true if the printer is in the user's favorite printer list.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+PMPrinterIsFavorite(PMPrinter printer)                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  PMCGImageCreateWithEPSDataProvider()
+ *  
+ *  Summary:
+ *    Create an image reference that references both the PostScript
+ *    contents of an EPS file and a preview (proxy) image for that EPS
+ *    file.
+ *  
+ *  Discussion:
+ *    For OS X 10.1.0, this function ignores the passed in data
+ *    provider. The passed in image reference is retained and then
+ *    returned. For 10.1.1 and later, then the data provider is used
+ *    and the returned image reference is different than the passed in
+ *    image reference, so please be careful with your use of these
+ *    references. It is likely that the data will not be read from the
+ *    EPS data provider until well after this function returns. The
+ *    caller should be careful not to free the underlying EPS data
+ *    until the provider's release routine is invoked. Similarly the
+ *    preview image's data may be needed long after you think it should
+ *    be. Do not free the image data until the image data provider's
+ *    release data function has been called. To make sure these data
+ *    providers are properly reference counted, release your reference
+ *    the EPS data provider and on the EPS image preview when they are
+ *    no longer needed by your application. For Mac OS X 10.2 and
+ *    later, the contents of the EPS provider at the time of this call
+ *    can be dumped to a file if you first do the following, BEFORE
+ *    running your application. From the command line in terminal:
+ *    defaults write NSGlobalDomain com.apple.print.eps.testProvider
+ *    /tmp/dump.eps causes a dump of the EPS data into a file
+ *    /tmp/dump.eps.
+ *  
+ *  Parameters:
+ *    
+ *    epsDataProvider:
+ *      A Core Graphics data provider that can supply the PostScript
+ *      contents of the EPS file. Post OS X 10.1, there will be some
+ *      checking done on the EPS data provided to the
+ *      PMCGImageCreateWithEPSDataProvider() call. It is important that
+ *      the EPS data begin with the EPSF required header and bounding
+ *      box DSC comments.
+ *    
+ *    epsPreview:
+ *      A Core Graphics image reference to the proxy image for the EPS
+ *      file. When the image reference result of this function is
+ *      rendered on screen or printed to a printer that can not render
+ *      PostScript this proxy image is drawn instead.
+ *  
+ *  Result:
+ *    an image reference capable of rendering either the EPS content or
+ *    the proxy image depending upon the capabilities of the targeted
+ *    context.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern CGImageRef 
+PMCGImageCreateWithEPSDataProvider(
+  CGDataProviderRef   epsDataProvider,
+  CGImageRef          epsPreview)                             AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
 
 #ifdef __cplusplus
 }

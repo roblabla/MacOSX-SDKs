@@ -1,20 +1,23 @@
 /*
- * Copyright (c) 1998-2001 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.2 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * Copyright (c) 1999-2003 Apple Computer, Inc.  All Rights Reserved.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.  
- * Please see the License for the specific language governing rights and 
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
  * limitations under the License.
  * 
  * @APPLE_LICENSE_HEADER_END@
@@ -67,7 +70,7 @@ enum {
     kUSBEndPtShift = 7,
     kUSBDeviceMask = ((1 << kUSBEndPtShift) -1),
 
-    kUSBNoPipeIdx = -1,
+    kUSBNoPipeIdx = -1
 };
 
 enum {
@@ -163,13 +166,40 @@ kSyncFrame
 
 // TYPES
 
+typedef UInt16 USBDeviceAddress;
+
+
+/*!
+    @typedef IOUSBIsocFrame
+    Structure used to encode information about each isoc frame
+    @param frStatus Returns status associated with the frame
+    @param frReqCount Input specifiying how many bytes to read or write
+    @param frActCount Actual # of bytes transferred
+*/
 typedef struct IOUSBIsocFrame {
     IOReturn                        frStatus;
     UInt16                          frReqCount;
     UInt16                          frActCount;
 } IOUSBIsocFrame;
 
-typedef UInt16 USBDeviceAddress;
+
+/*!
+    @typedef                         
+    Structure used to encode information about each isoc frame that is processed
+    at hardware interrupt time
+    @param frStatus Returns status associated with the frame
+    @param frReqCount Input specifiying how many bytes to read or write
+    @param frActCount Actual # of bytes transferred
+    @param frTimeStamp Time stamp that indicates time when frame was procesed
+*/
+struct IOUSBLowLatencyIsocFrame {
+    IOReturn                        frStatus;
+    UInt16                          frReqCount;
+    UInt16                          frActCount;
+    AbsoluteTime		    frTimeStamp;
+};
+
+typedef struct IOUSBLowLatencyIsocFrame IOUSBLowLatencyIsocFrame;
 
 /*!
     @typedef IOUSBCompletionAction
@@ -191,6 +221,12 @@ typedef void (*IOUSBIsocCompletionAction)(
                 IOReturn		status,
                 IOUSBIsocFrame		*pFrames);
 
+typedef void (*IOUSBLowLatencyIsocCompletionAction)(
+                void *				target,
+                void *				parameter,
+                IOReturn			status,
+                IOUSBLowLatencyIsocFrame	*pFrames);
+
 /*!
     @typedef IOUSBCompletion
     Struct spefifying action to perform when a USB I/O completes
@@ -211,6 +247,13 @@ typedef struct IOUSBIsocCompletion {
     void *			parameter;
 } IOUSBIsocCompletion;
 
+typedef struct IOUSBLowLatencyIsocCompletion {
+    void * 				target;
+    IOUSBLowLatencyIsocCompletionAction	action;
+    void *				parameter;
+} IOUSBLowLatencyIsocCompletion;
+
+
 /* ************* USB Family error codes ************* */
 
 #define	iokit_usb_err(return) (sys_iokit|sub_iokit_usb|return)
@@ -224,7 +267,9 @@ typedef struct IOUSBIsocCompletion {
 #define kIOUSBTransactionTimeout	iokit_usb_err(81) // 0x51  time out
 #define kIOUSBTransactionReturned	iokit_usb_err(80) // 0x50  The transaction has been returned to the caller
 #define kIOUSBPipeStalled		iokit_usb_err(79) // 0x4f  Pipe has stalled, error needs to be cleared
-#define kIOUSBInterfaceNotFound		iokit_usb_err(78) // 0x4e  Interface ref not recognised
+#define kIOUSBInterfaceNotFound		iokit_usb_err(78) // 0x4e  Interface ref not recognized
+#define kIOUSBLowLatencyBufferNotPreviouslyAllocated	iokit_usb_err(77) // 0x4d  Attempted to use user land low latency isoc calls w/out calling PrepareBuffer first
+#define kIOUSBLowLatencyFrameListNotPreviouslyAllocated	iokit_usb_err(76) // 0x4c  Attempted to use user land low latency isoc calls w/out calling PrepareBuffer first
 
 // USB Hardware Errors
 // These errors are returned by the OHCI controller.  The # in parenthesis (xx) corresponds to the OHCI Completion Code.
@@ -379,6 +424,35 @@ struct IOUSBHIDReportDesc {
 };
 typedef struct IOUSBHIDReportDesc	IOUSBHIDReportDesc;
 typedef IOUSBHIDReportDesc *		IOUSBHIDReportDescPtr;
+
+#pragma pack(1)
+struct IOUSBDeviceQualifierDescriptor
+{
+	UInt8 			bLength;
+	UInt8 			bDescriptorType;
+	UInt16 			bcdUSB;
+	UInt8 			bDeviceClass;
+	UInt8 			bDeviceSubClass;
+	UInt8 			bDeviceProtocol;
+	UInt8 			bMaxPacketSize0;
+	UInt8 			bNumConfigurations;
+	UInt8 			bReserved;
+};
+typedef struct IOUSBDeviceQualifierDescriptor	IOUSBDeviceQualifierDescriptor;
+typedef IOUSBDeviceQualifierDescriptor *	IOUSBDeviceQualifierDescriptorPtr;
+
+struct IOUSBDFUDescriptor 
+{
+        UInt8 			bLength;
+        UInt8 			bDescriptorType;
+        UInt8 			bmAttributes;
+        UInt16 			wDetachTimeout;
+        UInt16 			wTransferSize;
+};
+typedef struct 	IOUSBDFUDescriptor 		IOUSBDFUDescriptor;
+typedef 		IOUSBDFUDescriptor *	IOUSBDFUDescriptorPtr;
+
+#pragma options align=reset
 
 typedef UInt16				USBStatus;
 typedef USBStatus *			USBStatusPtr;
@@ -548,6 +622,22 @@ typedef struct {
     IOUSBIsocFrame 	*fFrameCounts;
 } IOUSBIsocStruct;
 
+// Structure to request low latency isochronous transfer
+//
+struct IOUSBLowLatencyIsocStruct {
+    UInt32 			fPipe;
+    UInt32 			fBufSize;
+    UInt64 			fStartFrame;
+    UInt32 			fNumFrames;
+    UInt32			fUpdateFrequency;
+    UInt32			fDataBufferCookie;
+    UInt32			fDataBufferOffset;
+    UInt32			fFrameListBufferCookie;
+    UInt32			fFrameListBufferOffset;
+};
+
+typedef struct IOUSBLowLatencyIsocStruct IOUSBLowLatencyIsocStruct;
+
 // Structure to return frame number, and time frame register was read.
 //
 typedef struct {
@@ -564,17 +654,52 @@ typedef struct {
 } IOUSBFindInterfaceRequest;
 
 enum {
-        kIOUSBFindInterfaceDontCare		= 0xFFFF,
+        kIOUSBFindInterfaceDontCare		= 0xFFFF
         };
 
 enum {
-	kIOUSBVendorIDAppleComputer		= 0x05AC,	/* Assigned by USB-if*/
+	kIOUSBVendorIDAppleComputer		= 0x05AC	/* Assigned by USB-if*/
         };
 
 enum {
         kUSBDeviceSpeedLow		= 0,		// low speed device
-        kUSBDeviceSpeedFull		= 1		// full speed device
+        kUSBDeviceSpeedFull		= 1,		// full speed device
+        kUSBDeviceSpeedHigh		= 2		// high speed device
         };
+
+enum {
+    kUSBFullSpeedMicrosecondsInFrame		= 1000,		// full speed device
+    kUSBHighSpeedMicrosecondsInFrame		= 125		// high speed device
+};
+
+enum {
+        kUSBLowLatencyIsochTransferKey	= 'llit'	// Set frStatus field of first frame in isoch transfer to designate as low latency
+    };
+    
+typedef struct LowLatencyUserBufferInfo LowLatencyUserBufferInfo;
+
+struct LowLatencyUserBufferInfo {
+    UInt32			cookie;
+    void *			bufferAddress;
+    IOByteCount			bufferSize;
+    UInt32			bufferType;
+    Boolean			isPrepared;
+    LowLatencyUserBufferInfo *	nextBuffer;
+};
+
+typedef enum {
+    kUSBLowLatencyWriteBuffer 		= 0,
+    kUSBLowLatencyReadBuffer		= 1,
+    kUSBLowLatencyFrameListBuffer	= 2
+} USBLowLatencyBufferType;
+
+// USB User Notification Types
+enum {
+    kUSBNoUserNotificationType			= 0,
+    kUSBNotEnoughPowerNotificationType		= 1,
+    kUSBIndividualOverCurrentNotificationType	= 2,
+    kUSBGangOverCurrentNotificationType		= 3
+};
 
 // misc. properties which are useful
 #define	kUSBDevicePropertySpeed			"Device Speed"

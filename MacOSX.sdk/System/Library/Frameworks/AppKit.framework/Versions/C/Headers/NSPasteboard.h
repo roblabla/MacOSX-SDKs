@@ -28,6 +28,11 @@ APPKIT_EXTERN NSString *NSHTMLPboardType;
 APPKIT_EXTERN NSString *NSPICTPboardType;
 APPKIT_EXTERN NSString *NSURLPboardType;
 APPKIT_EXTERN NSString *NSPDFPboardType;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+APPKIT_EXTERN NSString *NSVCardPboardType;
+// HFS Promise type for dragging only
+APPKIT_EXTERN NSString *NSFilesPromisePboardType;
+#endif
 
 /* standard Pasteboard names */
 

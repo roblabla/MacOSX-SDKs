@@ -3,9 +3,9 @@
  
      Contains:   Master include for ColorSync private framework
  
-     Version:    ColorSync-81~8
+     Version:    ColorSync-98.1~196
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,8 +17,8 @@
 #ifndef __COLORSYNC_R__
 #define __COLORSYNC_R__
 
-#ifndef __CARBONCORE_R__
-#include <CarbonCore/CarbonCore.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
 
 

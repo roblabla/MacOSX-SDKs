@@ -3,9 +3,9 @@
  
      Contains:   AEPrint, AEBuild and AEStream for Carbon
  
-     Version:    AppleEvents-116~3
+     Version:    AppleEvents-242~1
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -29,6 +29,7 @@
 
 #include <stdarg.h>
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -38,13 +39,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /*
  * AEBuild:
@@ -109,7 +104,7 @@ AEBuildDesc(
   AEDesc *        dst,
   AEBuildError *  error,       /* can be NULL */
   const char *    src,
-  ...);
+  ...)                                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* varargs version of AEBuildDesc*/
@@ -126,7 +121,7 @@ vAEBuildDesc(
   AEDesc *        dst,
   AEBuildError *  error,       /* can be NULL */
   const char *    src,
-  va_list         args);
+  va_list         args)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -144,7 +139,7 @@ AEBuildParameters(
   AppleEvent *    event,
   AEBuildError *  error,        /* can be NULL */
   const char *    format,
-  ...);
+  ...)                                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* varargs version of AEBuildParameters*/
@@ -161,7 +156,7 @@ vAEBuildParameters(
   AppleEvent *    event,
   AEBuildError *  error,        /* can be NULL */
   const char *    format,
-  va_list         args);
+  va_list         args)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Building an entire Apple event:*/
@@ -185,7 +180,7 @@ AEBuildAppleEvent(
   AppleEvent *    result,
   AEBuildError *  error,               /* can be NULL */
   const char *    paramsFmt,
-  ...);
+  ...)                                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* varargs version of AEBuildAppleEvent*/
@@ -209,7 +204,7 @@ vAEBuildAppleEvent(
   AppleEvent *    resultEvt,
   AEBuildError *  error,               /* can be NULL */
   const char *    paramsFmt,
-  va_list         args);
+  va_list         args)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -232,7 +227,7 @@ vAEBuildAppleEvent(
 extern OSStatus 
 AEPrintDescToHandle(
   const AEDesc *  desc,
-  Handle *        result);
+  Handle *        result)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -259,7 +254,7 @@ typedef struct OpaqueAEStreamRef*       AEStreamRef;
  *    Non-Carbon CFM:   not available
  */
 extern AEStreamRef 
-AEStreamOpen(void);
+AEStreamOpen(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -278,7 +273,7 @@ AEStreamOpen(void);
 extern OSStatus 
 AEStreamClose(
   AEStreamRef   ref,
-  AEDesc *      desc);
+  AEDesc *      desc)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -296,7 +291,7 @@ AEStreamClose(
 extern OSStatus 
 AEStreamOpenDesc(
   AEStreamRef   ref,
-  DescType      newType);
+  DescType      newType)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Append data to the previously opened desc.*/
@@ -312,7 +307,7 @@ extern OSStatus
 AEStreamWriteData(
   AEStreamRef   ref,
   const void *  data,
-  Size          length);
+  Size          length)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -328,7 +323,7 @@ AEStreamWriteData(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AEStreamCloseDesc(AEStreamRef ref);
+AEStreamCloseDesc(AEStreamRef ref)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Write data as a desc to the stream*/
@@ -345,7 +340,7 @@ AEStreamWriteDesc(
   AEStreamRef   ref,
   DescType      newType,
   const void *  data,
-  Size          length);
+  Size          length)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Write an entire desc to the stream*/
@@ -360,7 +355,7 @@ AEStreamWriteDesc(
 extern OSStatus 
 AEStreamWriteAEDesc(
   AEStreamRef     ref,
-  const AEDesc *  desc);
+  const AEDesc *  desc)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -376,7 +371,7 @@ AEStreamWriteAEDesc(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AEStreamOpenList(AEStreamRef ref);
+AEStreamOpenList(AEStreamRef ref)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Finish a list.*/
@@ -389,7 +384,7 @@ AEStreamOpenList(AEStreamRef ref);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AEStreamCloseList(AEStreamRef ref);
+AEStreamCloseList(AEStreamRef ref)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -407,7 +402,7 @@ AEStreamCloseList(AEStreamRef ref);
 extern OSStatus 
 AEStreamOpenRecord(
   AEStreamRef   ref,
-  DescType      newType);
+  DescType      newType)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Change the type of a record.*/
@@ -422,7 +417,7 @@ AEStreamOpenRecord(
 extern OSStatus 
 AEStreamSetRecordType(
   AEStreamRef   ref,
-  DescType      newType);
+  DescType      newType)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Finish a record*/
@@ -435,7 +430,7 @@ AEStreamSetRecordType(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AEStreamCloseRecord(AEStreamRef ref);
+AEStreamCloseRecord(AEStreamRef ref)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -456,11 +451,11 @@ AEStreamWriteKeyDesc(
   AEKeyword     key,
   DescType      newType,
   const void *  data,
-  Size          length);
+  Size          length)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
-   OpenDesc for a keyed record entry.  You can youse AEStreamWriteData
+   OpenDesc for a keyed record entry.  You can use AEStreamWriteData
    after opening a keyed desc.
 */
 /*
@@ -475,7 +470,7 @@ extern OSStatus
 AEStreamOpenKeyDesc(
   AEStreamRef   ref,
   AEKeyword     key,
-  DescType      newType);
+  DescType      newType)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Write a key to the stream - you can follow this with an AEWriteDesc.*/
@@ -490,7 +485,7 @@ AEStreamOpenKeyDesc(
 extern OSStatus 
 AEStreamWriteKey(
   AEStreamRef   ref,
-  AEKeyword     key);
+  AEKeyword     key)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -514,7 +509,7 @@ AEStreamCreateEvent(
   const void *   targetData,
   long           targetLength,
   short          returnID,
-  long           transactionID);
+  long           transactionID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -534,7 +529,7 @@ AEStreamCreateEvent(
  *    Non-Carbon CFM:   not available
  */
 extern AEStreamRef 
-AEStreamOpenEvent(AppleEvent * event);
+AEStreamOpenEvent(AppleEvent * event)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Mark a keyword as being an optional parameter.*/
@@ -549,17 +544,11 @@ AEStreamOpenEvent(AppleEvent * event);
 extern OSStatus 
 AEStreamOptionalParam(
   AEStreamRef   ref,
-  AEKeyword     key);
+  AEKeyword     key)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

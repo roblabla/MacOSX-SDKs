@@ -3,9 +3,9 @@
  
      Contains:   AppleEvent Package Interfaces.
  
-     Version:    AppleEvents-116~3
+     Version:    AppleEvents-242~1
  
-     Copyright:  © 1989-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1989-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,12 +16,8 @@
 #ifndef __APPLEEVENTS__
 #define __APPLEEVENTS__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __MIXEDMODE__
-#include <CarbonCore/MixedMode.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 /*
@@ -34,6 +30,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -41,14 +38,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 enum {
@@ -126,7 +115,7 @@ AEInstallEventHandler(
   AEEventID           theAEEventID,
   AEEventHandlerUPP   handler,
   long                handlerRefcon,
-  Boolean             isSysHandler);
+  Boolean             isSysHandler)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -142,7 +131,7 @@ AERemoveEventHandler(
   AEEventClass        theAEEventClass,
   AEEventID           theAEEventID,
   AEEventHandlerUPP   handler,
-  Boolean             isSysHandler);
+  Boolean             isSysHandler)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -159,7 +148,7 @@ AEGetEventHandler(
   AEEventID            theAEEventID,
   AEEventHandlerUPP *  handler,
   long *               handlerRefcon,
-  Boolean              isSysHandler);
+  Boolean              isSysHandler)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -180,7 +169,7 @@ extern OSErr
 AEInstallSpecialHandler(
   AEKeyword           functionClass,
   AEEventHandlerUPP   handler,
-  Boolean             isSysHandler);
+  Boolean             isSysHandler)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -195,7 +184,7 @@ extern OSErr
 AERemoveSpecialHandler(
   AEKeyword           functionClass,
   AEEventHandlerUPP   handler,
-  Boolean             isSysHandler);
+  Boolean             isSysHandler)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -210,7 +199,7 @@ extern OSErr
 AEGetSpecialHandler(
   AEKeyword            functionClass,
   AEEventHandlerUPP *  handler,
-  Boolean              isSysHandler);
+  Boolean              isSysHandler)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -231,21 +220,13 @@ AEGetSpecialHandler(
 extern OSErr 
 AEManagerInfo(
   AEKeyword   keyWord,
-  long *      result);
+  long *      result)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -20,7 +20,7 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 /*
- * Copyright (c) 1999 Apple Computer, Inc.  All rights reserved.
+ * Copyright (c) 1999-2002 Apple Computer, Inc.  All rights reserved.
  *
  * HISTORY
  *
@@ -32,9 +32,9 @@
 
 #include <IOKit/IOService.h>
 #include <IOKit/firewire/IOFWIsochChannel.h>
-#include <IOKit/firewire/IOFWRegs.h>
-#include <IOKit/firewire/IOFWCommand.h>
 #include <IOKit/firewire/IOFWAddressSpace.h>
+#include <IOKit/firewire/IOFWCommand.h>
+#include <IOKit/firewire/IOFireWireFamilyCommon.h>
 
 extern const OSSymbol *gFireWireROM;
 extern const OSSymbol *gFireWireNodeID;
@@ -47,17 +47,83 @@ extern const OSSymbol *gFireWire_GUID;
 extern const OSSymbol *gFireWireVendor_Name;
 extern const OSSymbol *gFireWireProduct_Name;
 
-class IOFWIsochPort;
+class IOFireWireDevice;
+class IOLocalConfigDirectory;
 class IOFWLocalIsochPort;
-struct DCLCommandStruct;
+class IOFireWirePowerManager;
+class IOFireWireBus;
+
+#pragma mark -
+
+/*! 
+	@class IOFireWireBusAux
+*/
+
+class IOFireWireBusAux : public OSObject
+{
+    OSDeclareDefaultStructors(IOFireWireBusAux)
+
+	friend class IOFireWireBus;
+	
+protected:
+		
+	/*! 
+		@struct ExpansionData
+		@discussion This structure will be used to expand the capablilties of the class in the future.
+    */  
+	  
+    struct ExpansionData { };
+
+	/*! 
+		@var reserved
+		Reserved for future use.  (Internal use only)  
+	*/
+    
+	ExpansionData * reserved;
+	
+private:
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 0);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 1);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 2);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 3);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 4);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 5);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 6);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 7);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 8);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 9);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 10);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 11);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 12);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 13);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 14);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 15);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 16);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 17);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 18);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 19);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 20);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 21);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 22);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 23);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 24);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 25);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 26);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 27);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 28);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 29);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 30);
+    OSMetaClassDeclareReservedUnused(IOFireWireBusAux, 31);
+	
+};
+
+#pragma mark -
 
 class IOFireWireBus : public IOService
 {
     OSDeclareAbstractStructors(IOFireWireBus)
 
 public:
-
-static const IORegistryPlane * gIOFireWirePlane;
 
     typedef void (CallUserProc)(void *refcon, void * userProc, void * dclCommand);
     typedef struct _DCLTaskInfo {
@@ -70,15 +136,19 @@ static const IORegistryPlane * gIOFireWirePlane;
         void *fCallRefCon;	// Refcon for user call
     } DCLTaskInfo;
 
+	static const IORegistryPlane * gIOFireWirePlane;
+
+	IOFireWireBusAux * fAuxiliary;
+
     // Create an Isochronous Channel object
     virtual IOFWIsochChannel *createIsochChannel(
         bool doIRM, UInt32 bandwidth, IOFWSpeed prefSpeed,
-        FWIsochChannelForceStopNotificationProc stopProc=NULL,
+        IOFWIsochChannel::ForceStopNotificationProc stopProc=NULL,
         void *stopRefCon=NULL) = 0;
  
    // Create a local isochronous port to run the given DCL program
     virtual IOFWLocalIsochPort *createLocalIsochPort(bool talking,
-        DCLCommandStruct *opcodes, DCLTaskInfo *info = 0,
+        DCLCommand *opcodes, DCLTaskInfo *info = 0,
         UInt32 startEvent = 0, UInt32 startState = 0, UInt32 startMask = 0) = 0;
 
     virtual IOReturn getCycleTime(UInt32 &cycleTime) = 0;
@@ -123,16 +193,30 @@ static const IORegistryPlane * gIOFireWirePlane;
 
     // Get address space object for given address, if any
     virtual IOFWAddressSpace *getAddressSpace(FWAddress address) = 0;
+
+    // Extract info about the async request - was the request ack'ed complete already?
+    virtual bool isCompleteRequest(IOFWRequestRefCon refcon) = 0;
     
+    virtual IOFWAsyncStreamCommand *createAsyncStreamCommand( UInt32 generation,
+    			UInt32 channel, UInt32 sync, UInt32 tag, IOMemoryDescriptor *hostMem,
+				UInt32 size, int speed,FWAsyncStreamCallback completion=NULL, void *refcon=NULL) = 0;
+
+	virtual UInt32 hopCount(UInt16 nodeAAddress, UInt16 nodeBAddress ) = 0;
+	virtual UInt32 hopCount(UInt16 nodeAAddress ) = 0;
+	virtual IOFireWirePowerManager * getBusPowerManager( void ) = 0;
+
+protected:
+	virtual IOFireWireBusAux * createAuxiliary( void ) = 0;
+	
 private:
     OSMetaClassDeclareReservedUsed(IOFireWireBus, 0);
     OSMetaClassDeclareReservedUsed(IOFireWireBus, 1);
-    OSMetaClassDeclareReservedUnused(IOFireWireBus, 2);
-    OSMetaClassDeclareReservedUnused(IOFireWireBus, 3);
-    OSMetaClassDeclareReservedUnused(IOFireWireBus, 4);
-    OSMetaClassDeclareReservedUnused(IOFireWireBus, 5);
-    OSMetaClassDeclareReservedUnused(IOFireWireBus, 6);
-    OSMetaClassDeclareReservedUnused(IOFireWireBus, 7);
+    OSMetaClassDeclareReservedUsed(IOFireWireBus, 2);
+    OSMetaClassDeclareReservedUsed(IOFireWireBus, 3);
+    OSMetaClassDeclareReservedUsed(IOFireWireBus, 4);
+    OSMetaClassDeclareReservedUsed(IOFireWireBus, 5);
+    OSMetaClassDeclareReservedUsed(IOFireWireBus, 6);
+    OSMetaClassDeclareReservedUsed(IOFireWireBus, 7);
 
 };
 

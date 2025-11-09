@@ -3,9 +3,9 @@
  
      Contains:   HTML Rendering Library Interfaces.
  
-     Version:    HTMLRenderingLib-62~14
+     Version:    HTMLRenderingLib-64.2~303
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -20,11 +20,21 @@
 #include <ApplicationServices/ApplicationServices.h>
 #endif
 
+#ifndef __EVENTS__
+#include <HIToolbox/Events.h>
+#endif
+
+#ifndef __CONTROLS__
+#include <HIToolbox/Controls.h>
+#endif
+
 #ifndef __HITOOLBOX__
 #include <HIToolbox/HIToolbox.h>
 #endif
 
 
+
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -32,14 +42,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 typedef struct OpaqueHRReference*       HRReference;
@@ -52,7 +54,7 @@ typedef struct OpaqueHRReference*       HRReference;
  *    Non-Carbon CFM:   in HTMLRenderingLib 1.0 and later
  */
 extern OSStatus 
-HRGetHTMLRenderingLibVersion(NumVersion * returnVers);
+HRGetHTMLRenderingLibVersion(NumVersion * returnVers)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #if TARGET_RT_MAC_CFM
@@ -86,7 +88,7 @@ extern OSStatus
 HRNewReference(
   HRReference *  hrRef,
   OSType         rendererType,
-  GrafPtr        grafPtr);
+  GrafPtr        grafPtr)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -120,7 +122,7 @@ extern OSStatus
 HRNewReferenceInWindow(
   HRReference *  hrRef,
   OSType         rendererType,
-  WindowRef      inWindowRef);
+  WindowRef      inWindowRef)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -132,7 +134,7 @@ HRNewReferenceInWindow(
  *    Non-Carbon CFM:   in HTMLRenderingLib 1.0 and later
  */
 extern OSStatus 
-HRDisposeReference(HRReference hrRef);
+HRDisposeReference(HRReference hrRef)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -145,7 +147,7 @@ HRDisposeReference(HRReference hrRef);
  *    Non-Carbon CFM:   in HTMLRenderingLib 1.0 and later
  */
 extern SInt32 
-HRFreeMemory(Size inBytesNeeded);
+HRFreeMemory(Size inBytesNeeded)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -159,7 +161,7 @@ HRFreeMemory(Size inBytesNeeded);
  *    Non-Carbon CFM:   in HTMLRenderingLib 1.0 and later
  */
 extern void 
-HRScreenConfigurationChanged(void);
+HRScreenConfigurationChanged(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -171,7 +173,7 @@ HRScreenConfigurationChanged(void);
  *    Non-Carbon CFM:   in HTMLRenderingLib 1.0 and later
  */
 extern Boolean 
-HRIsHREvent(const EventRecord * eventRecord);
+HRIsHREvent(const EventRecord * eventRecord)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -187,7 +189,7 @@ HRIsHREvent(const EventRecord * eventRecord);
 extern OSStatus 
 HRSetGrafPtr(
   HRReference   hrRef,
-  GrafPtr       grafPtr);
+  GrafPtr       grafPtr)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -215,7 +217,7 @@ HRSetGrafPtr(
 extern OSStatus 
 HRSetWindowRef(
   HRReference   hrRef,
-  WindowRef     windowRef);
+  WindowRef     windowRef)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -245,7 +247,7 @@ HRSetWindowRef(
 extern OSStatus 
 HRSetEmbeddingControl(
   HRReference   hrRef,
-  ControlRef    controlRef);
+  ControlRef    controlRef)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -257,7 +259,7 @@ HRSetEmbeddingControl(
  *    Non-Carbon CFM:   in HTMLRenderingLib 1.0 and later
  */
 extern OSStatus 
-HRActivate(HRReference hrRef);
+HRActivate(HRReference hrRef)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -269,7 +271,7 @@ HRActivate(HRReference hrRef);
  *    Non-Carbon CFM:   in HTMLRenderingLib 1.0 and later
  */
 extern OSStatus 
-HRDeactivate(HRReference hrRef);
+HRDeactivate(HRReference hrRef)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -283,7 +285,7 @@ HRDeactivate(HRReference hrRef);
 extern OSStatus 
 HRDraw(
   HRReference   hrRef,
-  RgnHandle     updateRgnH);
+  RgnHandle     updateRgnH)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -315,7 +317,7 @@ extern OSStatus
 HRDrawInPort(
   HRReference   hrRef,
   RgnHandle     updateRgnH,
-  CGrafPtr      grafPtr);
+  CGrafPtr      grafPtr)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -329,7 +331,7 @@ HRDrawInPort(
 extern OSStatus 
 HRSetRenderingRect(
   HRReference   hrRef,
-  const Rect *  renderingRect);
+  const Rect *  renderingRect)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -343,7 +345,7 @@ HRSetRenderingRect(
 extern OSStatus 
 HRGetRenderedImageSize(
   HRReference   hrRef,
-  Point *       renderingSize);
+  Point *       renderingSize)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -373,7 +375,7 @@ extern OSStatus
 HRGetRenderedImageSize32(
   HRReference   hrRef,
   UInt32 *      height,
-  UInt32 *      width);
+  UInt32 *      width)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -387,7 +389,7 @@ HRGetRenderedImageSize32(
 extern OSStatus 
 HRScrollToLocation(
   HRReference   hrRef,
-  Point *       location);
+  Point *       location)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -417,7 +419,7 @@ extern OSStatus
 HRScrollToImageLocation32(
   HRReference   hrRef,
   SInt32        h,
-  SInt32        v);
+  SInt32        v)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -431,7 +433,7 @@ HRScrollToImageLocation32(
 extern OSStatus 
 HRForceQuickdraw(
   HRReference   hrRef,
-  Boolean       forceQuickdraw);
+  Boolean       forceQuickdraw)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 typedef SInt16 HRScrollbarState;
@@ -453,7 +455,7 @@ extern OSStatus
 HRSetScrollbarState(
   HRReference        hrRef,
   HRScrollbarState   hScrollbarState,
-  HRScrollbarState   vScrollbarState);
+  HRScrollbarState   vScrollbarState)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -467,7 +469,7 @@ HRSetScrollbarState(
 extern OSStatus 
 HRSetDrawBorder(
   HRReference   hrRef,
-  Boolean       drawBorder);
+  Boolean       drawBorder)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -481,7 +483,7 @@ HRSetDrawBorder(
 extern OSStatus 
 HRSetGrowboxCutout(
   HRReference   hrRef,
-  Boolean       allowCutout);
+  Boolean       allowCutout)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Navigation */
@@ -498,7 +500,7 @@ HRGoToFile(
   HRReference     hrRef,
   const FSSpec *  fsspec,
   Boolean         addToHistory,
-  Boolean         forceRefresh);
+  Boolean         forceRefresh)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -514,7 +516,7 @@ HRGoToURL(
   HRReference   hrRef,
   const char *  url,
   Boolean       addToHistory,
-  Boolean       forceRefresh);
+  Boolean       forceRefresh)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -528,7 +530,7 @@ HRGoToURL(
 extern OSStatus 
 HRGoToAnchor(
   HRReference   hrRef,
-  const char *  anchorName);
+  const char *  anchorName)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -545,7 +547,7 @@ HRGoToPtr(
   char *        buffer,
   UInt32        bufferSize,
   Boolean       addToHistory,
-  Boolean       forceRefresh);
+  Boolean       forceRefresh)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -582,7 +584,7 @@ HRGoToFSRef(
   HRReference    hrRef,
   const FSRef *  fref,
   Boolean        addToHistory,
-  Boolean        forceRefresh);
+  Boolean        forceRefresh)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -619,7 +621,7 @@ HRGoToCFURL(
   HRReference   hrRef,
   CFURLRef      url,
   Boolean       addToHistory,
-  Boolean       forceRefresh);
+  Boolean       forceRefresh)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -648,7 +650,7 @@ HRGoToCFURL(
 extern OSStatus 
 HRGoToAnchorCFString(
   HRReference   hrRef,
-  CFStringRef   anchorName);
+  CFStringRef   anchorName)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -685,7 +687,7 @@ HRGoToData(
   HRReference   hrRef,
   CFDataRef     data,
   Boolean       addToHistory,
-  Boolean       forceRefresh);
+  Boolean       forceRefresh)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Accessors */
@@ -701,7 +703,7 @@ HRGoToData(
 extern OSStatus 
 HRGetRootURL(
   HRReference   hrRef,
-  Handle        rootURLH);
+  Handle        rootURLH)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* url of <base> tag */
@@ -716,7 +718,7 @@ HRGetRootURL(
 extern OSStatus 
 HRGetBaseURL(
   HRReference   hrRef,
-  Handle        baseURLH);
+  Handle        baseURLH)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* file url */
@@ -731,7 +733,7 @@ HRGetBaseURL(
 extern OSStatus 
 HRGetHTMLURL(
   HRReference   hrRef,
-  Handle        HTMLURLH);
+  Handle        HTMLURLH)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -745,7 +747,7 @@ HRGetHTMLURL(
 extern OSStatus 
 HRGetTitle(
   HRReference   hrRef,
-  StringPtr     title);
+  StringPtr     title)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -759,7 +761,7 @@ HRGetTitle(
 extern OSStatus 
 HRGetHTMLFile(
   HRReference   hrRef,
-  FSSpec *      fsspec);
+  FSSpec *      fsspec)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -789,7 +791,7 @@ HRGetHTMLFile(
 extern OSStatus 
 HRGetRootURLAsCFString(
   HRReference    hrRef,
-  CFStringRef *  rootString);
+  CFStringRef *  rootString)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -818,7 +820,7 @@ HRGetRootURLAsCFString(
 extern OSStatus 
 HRGetBaseURLAsCFString(
   HRReference    hrRef,
-  CFStringRef *  baseString);
+  CFStringRef *  baseString)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -847,7 +849,7 @@ HRGetBaseURLAsCFString(
 extern OSStatus 
 HRGetHTMLURLAsCFURL(
   HRReference   hrRef,
-  CFURLRef *    theURL);
+  CFURLRef *    theURL)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -876,7 +878,7 @@ HRGetHTMLURLAsCFURL(
 extern OSStatus 
 HRGetTitleAsCFString(
   HRReference    hrRef,
-  CFStringRef *  title);
+  CFStringRef *  title)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -905,7 +907,7 @@ HRGetTitleAsCFString(
 extern OSStatus 
 HRGetHTMLFileAsFSRef(
   HRReference   hrRef,
-  FSRef *       fref);
+  FSRef *       fref)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Utilities */
@@ -921,7 +923,7 @@ extern OSStatus
 HRUtilCreateFullURL(
   const char *  rootURL,
   const char *  linkURL,
-  Handle        fullURLH);
+  Handle        fullURLH)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -936,7 +938,7 @@ extern OSStatus
 HRUtilGetFSSpecFromURL(
   const char *  rootURL,
   const char *  linkURL,
-  FSSpec *      destSpec);
+  FSSpec *      destSpec)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* urlHandle should be valid on input */
@@ -951,7 +953,7 @@ HRUtilGetFSSpecFromURL(
 extern OSStatus 
 HRUtilGetURLFromFSSpec(
   const FSSpec *  fsspec,
-  Handle          urlHandle);
+  Handle          urlHandle)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -986,7 +988,7 @@ extern OSStatus
 HRUtilCreateFullCFURL(
   CFStringRef   rootString,
   CFStringRef   linkString,
-  CFURLRef *    url);
+  CFURLRef *    url)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1021,7 +1023,7 @@ extern OSStatus
 HRUtilGetFSRefFromURL(
   CFStringRef   rootString,
   CFStringRef   linkString,
-  FSRef *       destRef);
+  FSRef *       destRef)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1052,7 +1054,7 @@ HRUtilGetFSRefFromURL(
 extern OSStatus 
 HRUtilGetURLFromFSRef(
   const FSRef *  fileRef,
-  CFURLRef *     url);
+  CFURLRef *     url)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1081,7 +1083,7 @@ extern void
 HRRegisterWasURLVisitedUPP(
   HRWasURLVisitedUPP   inWasURLVisitedUPP,
   HRReference          hrRef,
-  void *               inRefCon);
+  void *               inRefCon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1093,7 +1095,7 @@ HRRegisterWasURLVisitedUPP(
  *    Non-Carbon CFM:   in HTMLRenderingLib 1.0 and later
  */
 extern void 
-HRUnregisterWasURLVisitedUPP(HRReference hrRef);
+HRUnregisterWasURLVisitedUPP(HRReference hrRef)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1116,7 +1118,7 @@ extern void
 HRRegisterWasCFURLVisitedUPP(
   HRWasCFURLVisitedUPP   inWasCFURLVisitedUPP,
   HRReference            hrRef,
-  void *                 inRefCon);
+  void *                 inRefCon)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1128,7 +1130,7 @@ HRRegisterWasCFURLVisitedUPP(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-HRUnregisterWasCFURLVisitedUPP(HRReference hrRef);
+HRUnregisterWasCFURLVisitedUPP(HRReference hrRef)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1157,7 +1159,7 @@ extern void
 HRRegisterNewURLUPP(
   HRNewURLUPP   inNewURLUPP,
   HRReference   hrRef,
-  void *        inRefCon);
+  void *        inRefCon)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1169,7 +1171,7 @@ HRRegisterNewURLUPP(
  *    Non-Carbon CFM:   in HTMLRenderingLib 1.0 and later
  */
 extern void 
-HRUnregisterNewURLUPP(HRReference hrRef);
+HRUnregisterNewURLUPP(HRReference hrRef)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1192,7 +1194,7 @@ extern void
 HRRegisterNewCFURLUPP(
   HRNewCFURLUPP   inURLUPP,
   HRReference     hrRef,
-  void *          inRefCon);
+  void *          inRefCon)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1204,7 +1206,7 @@ HRRegisterNewCFURLUPP(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-HRUnregisterNewCFURLUPP(HRReference hrRef);
+HRUnregisterNewCFURLUPP(HRReference hrRef)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1240,7 +1242,7 @@ extern void
 HRRegisterURLToFSSpecUPP(
   HRURLToFSSpecUPP   inURLToFSSpecUPP,
   HRReference        hrRef,
-  void *             inRefCon);
+  void *             inRefCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1252,7 +1254,7 @@ HRRegisterURLToFSSpecUPP(
  *    Non-Carbon CFM:   in HTMLRenderingLib 1.0 and later
  */
 extern void 
-HRUnregisterURLToFSSpecUPP(HRReference hrRef);
+HRUnregisterURLToFSSpecUPP(HRReference hrRef)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1275,7 +1277,7 @@ extern void
 HRRegisterURLToFSRefUPP(
   HRURLToFSRefUPP   inURLToFSRefUPP,
   HRReference       hrRef,
-  void *            inRefCon);
+  void *            inRefCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1287,7 +1289,7 @@ HRRegisterURLToFSRefUPP(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-HRUnregisterURLToFSRefUPP(HRReference hrRef);
+HRUnregisterURLToFSRefUPP(HRReference hrRef)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1299,7 +1301,7 @@ HRUnregisterURLToFSRefUPP(HRReference hrRef);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern HRWasURLVisitedUPP
-NewHRWasURLVisitedUPP(HRWasURLVisitedProcPtr userRoutine);
+NewHRWasURLVisitedUPP(HRWasURLVisitedProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewHRWasCFURLVisitedUPP()
@@ -1310,7 +1312,7 @@ NewHRWasURLVisitedUPP(HRWasURLVisitedProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern HRWasCFURLVisitedUPP
-NewHRWasCFURLVisitedUPP(HRWasCFURLVisitedProcPtr userRoutine);
+NewHRWasCFURLVisitedUPP(HRWasCFURLVisitedProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewHRNewURLUPP()
@@ -1321,7 +1323,7 @@ NewHRWasCFURLVisitedUPP(HRWasCFURLVisitedProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern HRNewURLUPP
-NewHRNewURLUPP(HRNewURLProcPtr userRoutine);
+NewHRNewURLUPP(HRNewURLProcPtr userRoutine)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewHRNewCFURLUPP()
@@ -1332,7 +1334,7 @@ NewHRNewURLUPP(HRNewURLProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern HRNewCFURLUPP
-NewHRNewCFURLUPP(HRNewCFURLProcPtr userRoutine);
+NewHRNewCFURLUPP(HRNewCFURLProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewHRURLToFSSpecUPP()
@@ -1343,7 +1345,7 @@ NewHRNewCFURLUPP(HRNewCFURLProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern HRURLToFSSpecUPP
-NewHRURLToFSSpecUPP(HRURLToFSSpecProcPtr userRoutine);
+NewHRURLToFSSpecUPP(HRURLToFSSpecProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewHRURLToFSRefUPP()
@@ -1354,7 +1356,7 @@ NewHRURLToFSSpecUPP(HRURLToFSSpecProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern HRURLToFSRefUPP
-NewHRURLToFSRefUPP(HRURLToFSRefProcPtr userRoutine);
+NewHRURLToFSRefUPP(HRURLToFSRefProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeHRWasURLVisitedUPP()
@@ -1365,7 +1367,7 @@ NewHRURLToFSRefUPP(HRURLToFSRefProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeHRWasURLVisitedUPP(HRWasURLVisitedUPP userUPP);
+DisposeHRWasURLVisitedUPP(HRWasURLVisitedUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeHRWasCFURLVisitedUPP()
@@ -1376,7 +1378,7 @@ DisposeHRWasURLVisitedUPP(HRWasURLVisitedUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeHRWasCFURLVisitedUPP(HRWasCFURLVisitedUPP userUPP);
+DisposeHRWasCFURLVisitedUPP(HRWasCFURLVisitedUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeHRNewURLUPP()
@@ -1387,7 +1389,7 @@ DisposeHRWasCFURLVisitedUPP(HRWasCFURLVisitedUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeHRNewURLUPP(HRNewURLUPP userUPP);
+DisposeHRNewURLUPP(HRNewURLUPP userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeHRNewCFURLUPP()
@@ -1398,7 +1400,7 @@ DisposeHRNewURLUPP(HRNewURLUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeHRNewCFURLUPP(HRNewCFURLUPP userUPP);
+DisposeHRNewCFURLUPP(HRNewCFURLUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeHRURLToFSSpecUPP()
@@ -1409,7 +1411,7 @@ DisposeHRNewCFURLUPP(HRNewCFURLUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeHRURLToFSSpecUPP(HRURLToFSSpecUPP userUPP);
+DisposeHRURLToFSSpecUPP(HRURLToFSSpecUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeHRURLToFSRefUPP()
@@ -1420,7 +1422,7 @@ DisposeHRURLToFSSpecUPP(HRURLToFSSpecUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeHRURLToFSRefUPP(HRURLToFSRefUPP userUPP);
+DisposeHRURLToFSRefUPP(HRURLToFSRefUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeHRWasURLVisitedUPP()
@@ -1434,7 +1436,7 @@ extern Boolean
 InvokeHRWasURLVisitedUPP(
   const char *        url,
   void *              refCon,
-  HRWasURLVisitedUPP  userUPP);
+  HRWasURLVisitedUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeHRWasCFURLVisitedUPP()
@@ -1448,7 +1450,7 @@ extern Boolean
 InvokeHRWasCFURLVisitedUPP(
   CFURLRef              url,
   void *                refCon,
-  HRWasCFURLVisitedUPP  userUPP);
+  HRWasCFURLVisitedUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeHRNewURLUPP()
@@ -1464,7 +1466,7 @@ InvokeHRNewURLUPP(
   const char *  targetFrame,
   Boolean       addToHistory,
   void *        refCon,
-  HRNewURLUPP   userUPP);
+  HRNewURLUPP   userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeHRNewCFURLUPP()
@@ -1480,7 +1482,7 @@ InvokeHRNewCFURLUPP(
   CFStringRef    targetString,
   Boolean        addToHistory,
   void *         refCon,
-  HRNewCFURLUPP  userUPP);
+  HRNewCFURLUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeHRURLToFSSpecUPP()
@@ -1497,7 +1499,7 @@ InvokeHRURLToFSSpecUPP(
   FSSpec *          fsspec,
   URLSourceType     urlSourceType,
   void *            refCon,
-  HRURLToFSSpecUPP  userUPP);
+  HRURLToFSSpecUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeHRURLToFSRefUPP()
@@ -1514,16 +1516,8 @@ InvokeHRURLToFSRefUPP(
   FSRef *          fref,
   URLSourceType    urlSourceType,
   void *           refCon,
-  HRURLToFSRefUPP  userUPP);
+  HRURLToFSRefUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

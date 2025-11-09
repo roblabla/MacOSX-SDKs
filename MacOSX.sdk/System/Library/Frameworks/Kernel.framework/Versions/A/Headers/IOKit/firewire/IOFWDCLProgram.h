@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -20,7 +20,7 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 /*
- * Copyright (c) 1999 Apple Computer, Inc.  All rights reserved.
+ * Copyright (c) 1999-2002 Apple Computer, Inc.  All rights reserved.
  *
  * HISTORY
  *
@@ -31,10 +31,12 @@
 #define _IOKIT_IOFWDCLPROGRAM_H
 
 #include <libkern/c++/OSObject.h>
-#include <IOKit/firewire/IOFWIsoch.h>
+#include <IOKit/firewire/IOFireWireFamilyCommon.h>
 #include <IOKit/firewire/IOFireWireBus.h>
 #include <IOKit/IOMemoryCursor.h>
 
+/*! @class IODCLProgram
+*/
 class IODCLProgram : public OSObject
 {
     OSDeclareAbstractStructors(IODCLProgram)
@@ -46,8 +48,6 @@ protected:
     IOMemoryDescriptor *fDCLDesc;
     IOMemoryDescriptor *fDataDesc;
     IOMemoryCursor *fDataCursor;
-    IOFireWireBus::CallUserProc * fCallUser;
-    void *fCallRefCon;	// Refcon for user call
 
 /*! @struct ExpansionData
     @discussion This structure will be used to expand the capablilties of the class in the future.
@@ -58,14 +58,11 @@ protected:
     Reserved for future use.  (Internal use only)  */
     ExpansionData *reserved;
 
-	DCLCommandPtr convertDCLPtrToKernel(DCLCommandPtr dcl)
-		{if (dcl) return (DCLCommandPtr)((UInt32)dcl + fDCLTaskToKernel); else return dcl;};
-
-	DCLCommandPtr convertDCLPtrFromKernel(DCLCommandPtr dcl)
-		{if (dcl) return (DCLCommandPtr)((UInt32)dcl - fDCLTaskToKernel); else return dcl;};
-
-    virtual UInt32 getPhysicalSegs(void *addr, IOByteCount len,
-                    IOMemoryCursor::PhysicalSegment segs[], UInt32 maxSegs);
+    virtual UInt32 getPhysicalSegs( void *							addr, 
+									IOMemoryDescriptor *			memory, 
+									IOByteCount 					len,
+									IOMemoryCursor::PhysicalSegment	segs[], 
+									UInt32 							maxSegs );
 
     void dumpDCL(DCLCommand *op);
 
@@ -78,7 +75,7 @@ public:
     virtual IOReturn releaseHW() = 0;
     virtual IOReturn compile(IOFWSpeed speed, UInt32 chan) = 0;
     virtual IOReturn notify(UInt32 notificationType,
-        DCLCommandPtr *dclCommandList, UInt32 numDCLCommands) = 0;
+        DCLCommand** dclCommandList, UInt32 numDCLCommands) = 0;
     virtual IOReturn start() = 0;
     virtual void stop() = 0;
     virtual IOReturn pause();

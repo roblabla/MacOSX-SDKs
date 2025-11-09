@@ -3,9 +3,9 @@
  
      Contains:   HTML Rendering Library Interfaces.
  
-     Version:    HTMLRenderingLib-62~14
+     Version:    HTMLRenderingLib-64.2~303
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -19,6 +19,14 @@
 
 #ifndef __APPLICATIONSERVICES_R__
 #include <ApplicationServices/ApplicationServices.r>
+#endif
+
+#ifndef __EVENTS_R__
+#include <HIToolbox/Events.r>
+#endif
+
+#ifndef __CONTROLS_R__
+#include <HIToolbox/Controls.r>
 #endif
 
 #ifndef __HITOOLBOX_R__

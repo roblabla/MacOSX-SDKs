@@ -6,7 +6,7 @@
      Version:    Technology: Mac OS X
                  Release:    1.0
  
-     Copyright:  © 2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 2001-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,18 +17,25 @@
 #ifndef __PPDLIB__
 #define __PPDLIB__
 
-#include <ApplicationServices/ApplicationServices.h>
-#include <HIToolbox/HIToolbox.h>
+#ifndef __CARBON__
+#include <Carbon/Carbon.h>
+#endif
+
+#ifndef __PMTICKET__
 #include <PrintCore/PMTicket.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#if !USE_MIRROR_INTERFACES
-#if PRAGMA_ALIGN_SUPPORTED
-#pragma options align=mac68k
-#endif
+
+#if PRAGMA_STRUCT_ALIGN
+    #pragma options align=mac68k
+#elif PRAGMA_STRUCT_PACKPUSH
+    #pragma pack(push, 2)
+#elif PRAGMA_STRUCT_PACK
+    #pragma pack(2)
 #endif
 
 /*** Constants ***/
@@ -205,17 +212,53 @@ OSErr ppdParseHandle (Handle ppdHandle, short compiledRef, short compiledResFRef
 	*'errInfoP'.
 */
 
-OSErr ppdOpen(short compiledPPDRef, PPDContext *ppdContext);
+/* CUPs and this library conflict over the symbols ppdOpen and ppdClose. We rename our
+ * routines by adding the Context postfix. If the including file is not using CUPs
+ * then we'll give them the old names through the following defines.
+ */
+#if !USE_CUPS
+#define ppdOpen(compiledPPDRef, ppdContext)	ppdOpenContext(compiledPPDRef, ppdContext)
+#define ppdClose(ppdContext)			ppdCloseContext(ppdContext)
+#endif	/* !USE_CUPS */
+
+OSErr ppdOpenContext(short compiledPPDRef, PPDContext *ppdContext);
 /*	Prepare to reference the compiled PPD information in the
 	open file with reference 'compiledPPDRef'. If this function
 	doesn't return an error, then *'ppdContext' is filled in
 	with a value that can be used in other ppd calls.
 */
 
+void ppdCloseContext(PPDContext ppdContext);
+/*	Free up the memory used to access the PPD file
+	referenced by 'ppdContext' (returned from ppdOpen())
+	After this call, 'ppdContext' is no longer valid.
+*/
+
+
 OSStatus PPDAddFeatureEntries(PMTicketRef jobTicket, CFMutableDictionaryRef psContextDictRef);
 /*
 Add to psContextDictRef the entries for PPD features needed to satisfy the job requests in jobTicket.
 */
+
+OSStatus PPDAddFeatureEntriesFromPPDContext(PMTicketRef jobTicket, PPDContext ppdContext, 
+							CFMutableDictionaryRef psContextDictRef);
+/*
+    Added in Mac OS X v10.2.
+    Add to psContextDictRef the entries for PPD features needed to satisfy the job 
+    requests in jobTicket. If a non-NULL ppdContext is explicitly passed in, then it is used
+    rather than obtained from data that may or may not be in the jobTicket.
+*/
+
+
+OSStatus ppdGetCompiledPPDData(PMTicketRef printerInfoTicket, CFDataRef *ppdData);
+/*
+From the printerInfoTicket passed in, get the parsed PPD data. Upon return
+ppdData contains a reference to the PPD data.
+*/
+
+//BGMARK
+OSStatus ppdCreateInstallableOptionsData(FSSpec ppdSpec, char ** data, CFMutableArrayRef optionKeyWords);
+
 OSStatus ppdOpenCompiledPPDFromTicket(PMTicketRef printerInfoTicket, PPDContext *ppdContextP, FSSpec *tempFSSpecP);
 /*
 From the printerInfoTicket passed in, create a temp file containing the parsed PPD data and open that
@@ -229,11 +272,6 @@ OSStatus ppdCloseCompiledPPDFromTicket(PPDContext ppdContext, FSSpec *tempPPDFil
 Call ppdClose for the ppdContext and delete the file corresponding to *tempPPDFileSpecP.
 */
 
-void ppdClose(PPDContext ppdContext);
-/*	Free up the memory used to access the PPD file
-	referenced by 'ppdContext' (returned from ppdOpen())
-	After this call, 'ppdContext' is no longer valid.
-*/
 
 Mindex ppdGetMainIndex(PPDContext ppdContext, const StringPtr keyword);
 /*	Given Pascal string reprentation of a PPD main keyword, 'keyword',
@@ -496,10 +534,12 @@ OSStatus ppdOpenAndParsePPDAutoSetup(Collection prInfo,
 #endif
 
 
-#if !USE_MIRROR_INTERFACES
-#if PRAGMA_ALIGN_SUPPORTED
-#pragma options align=reset
-#endif
+#if PRAGMA_STRUCT_ALIGN
+    #pragma options align=reset
+#elif PRAGMA_STRUCT_PACKPUSH
+    #pragma pack(pop)
+#elif PRAGMA_STRUCT_PACK
+    #pragma pack()
 #endif
 
 #ifdef __cplusplus

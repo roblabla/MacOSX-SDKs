@@ -3,9 +3,9 @@
  
      Contains:   AppleEvents AEUT resource format Interfaces.
  
-     Version:    AppleEvents-116~3
+     Version:    AppleEvents-242~1
  
-     Copyright:  © 1991-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1991-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,32 +16,18 @@
 #ifndef __AEUSERTERMTYPES__
 #define __AEUSERTERMTYPES__
 
-#ifndef __CONDITIONALMACROS__
-#include <CarbonCore/ConditionalMacros.h>
-#endif
-
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   kAEUserTerminology            = 'aeut', /*  0x61657574  */
@@ -104,17 +90,8 @@ enum {
 };
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __AEUSERTERMTYPES__ */
 

@@ -3,9 +3,9 @@
  
      Contains:   Object Support Library Interfaces.
  
-     Version:    AppleEvents-116~3
+     Version:    AppleEvents-242~1
  
-     Copyright:  © 1991-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1991-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,20 +16,17 @@
 #ifndef __AEOBJECTS__
 #define __AEOBJECTS__
 
-#ifndef __OSUTILS__
-#include <CarbonCore/OSUtils.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __APPLEEVENTS__
 #include <AE/AppleEvents.h>
 #endif
 
-#ifndef __MACERRORS__
-#include <CarbonCore/MacErrors.h>
-#endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -39,13 +36,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
                                         /**** LOGICAL OPERATOR CONSTANTS  ****/
@@ -177,7 +168,7 @@ typedef STACK_UPP_TYPE(OSLAdjustMarksProcPtr)                   OSLAdjustMarksUP
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLAccessorUPP
-NewOSLAccessorUPP(OSLAccessorProcPtr userRoutine);
+NewOSLAccessorUPP(OSLAccessorProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewOSLCompareUPP()
@@ -188,7 +179,7 @@ NewOSLAccessorUPP(OSLAccessorProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLCompareUPP
-NewOSLCompareUPP(OSLCompareProcPtr userRoutine);
+NewOSLCompareUPP(OSLCompareProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewOSLCountUPP()
@@ -199,7 +190,7 @@ NewOSLCompareUPP(OSLCompareProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLCountUPP
-NewOSLCountUPP(OSLCountProcPtr userRoutine);
+NewOSLCountUPP(OSLCountProcPtr userRoutine)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewOSLDisposeTokenUPP()
@@ -210,7 +201,7 @@ NewOSLCountUPP(OSLCountProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLDisposeTokenUPP
-NewOSLDisposeTokenUPP(OSLDisposeTokenProcPtr userRoutine);
+NewOSLDisposeTokenUPP(OSLDisposeTokenProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewOSLGetMarkTokenUPP()
@@ -221,7 +212,7 @@ NewOSLDisposeTokenUPP(OSLDisposeTokenProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLGetMarkTokenUPP
-NewOSLGetMarkTokenUPP(OSLGetMarkTokenProcPtr userRoutine);
+NewOSLGetMarkTokenUPP(OSLGetMarkTokenProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewOSLGetErrDescUPP()
@@ -232,7 +223,7 @@ NewOSLGetMarkTokenUPP(OSLGetMarkTokenProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLGetErrDescUPP
-NewOSLGetErrDescUPP(OSLGetErrDescProcPtr userRoutine);
+NewOSLGetErrDescUPP(OSLGetErrDescProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewOSLMarkUPP()
@@ -243,7 +234,7 @@ NewOSLGetErrDescUPP(OSLGetErrDescProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLMarkUPP
-NewOSLMarkUPP(OSLMarkProcPtr userRoutine);
+NewOSLMarkUPP(OSLMarkProcPtr userRoutine)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewOSLAdjustMarksUPP()
@@ -254,7 +245,7 @@ NewOSLMarkUPP(OSLMarkProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLAdjustMarksUPP
-NewOSLAdjustMarksUPP(OSLAdjustMarksProcPtr userRoutine);
+NewOSLAdjustMarksUPP(OSLAdjustMarksProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeOSLAccessorUPP()
@@ -265,7 +256,7 @@ NewOSLAdjustMarksUPP(OSLAdjustMarksProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLAccessorUPP(OSLAccessorUPP userUPP);
+DisposeOSLAccessorUPP(OSLAccessorUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeOSLCompareUPP()
@@ -276,7 +267,7 @@ DisposeOSLAccessorUPP(OSLAccessorUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLCompareUPP(OSLCompareUPP userUPP);
+DisposeOSLCompareUPP(OSLCompareUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeOSLCountUPP()
@@ -287,7 +278,7 @@ DisposeOSLCompareUPP(OSLCompareUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLCountUPP(OSLCountUPP userUPP);
+DisposeOSLCountUPP(OSLCountUPP userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeOSLDisposeTokenUPP()
@@ -298,7 +289,7 @@ DisposeOSLCountUPP(OSLCountUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLDisposeTokenUPP(OSLDisposeTokenUPP userUPP);
+DisposeOSLDisposeTokenUPP(OSLDisposeTokenUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeOSLGetMarkTokenUPP()
@@ -309,7 +300,7 @@ DisposeOSLDisposeTokenUPP(OSLDisposeTokenUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLGetMarkTokenUPP(OSLGetMarkTokenUPP userUPP);
+DisposeOSLGetMarkTokenUPP(OSLGetMarkTokenUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeOSLGetErrDescUPP()
@@ -320,7 +311,7 @@ DisposeOSLGetMarkTokenUPP(OSLGetMarkTokenUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLGetErrDescUPP(OSLGetErrDescUPP userUPP);
+DisposeOSLGetErrDescUPP(OSLGetErrDescUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeOSLMarkUPP()
@@ -331,7 +322,7 @@ DisposeOSLGetErrDescUPP(OSLGetErrDescUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLMarkUPP(OSLMarkUPP userUPP);
+DisposeOSLMarkUPP(OSLMarkUPP userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeOSLAdjustMarksUPP()
@@ -342,7 +333,7 @@ DisposeOSLMarkUPP(OSLMarkUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLAdjustMarksUPP(OSLAdjustMarksUPP userUPP);
+DisposeOSLAdjustMarksUPP(OSLAdjustMarksUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeOSLAccessorUPP()
@@ -361,7 +352,7 @@ InvokeOSLAccessorUPP(
   const AEDesc *  selectionData,
   AEDesc *        value,
   long            accessorRefcon,
-  OSLAccessorUPP  userUPP);
+  OSLAccessorUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeOSLCompareUPP()
@@ -377,7 +368,7 @@ InvokeOSLCompareUPP(
   const AEDesc *  obj1,
   const AEDesc *  obj2,
   Boolean *       result,
-  OSLCompareUPP   userUPP);
+  OSLCompareUPP   userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeOSLCountUPP()
@@ -393,7 +384,7 @@ InvokeOSLCountUPP(
   DescType        containerClass,
   const AEDesc *  container,
   long *          result,
-  OSLCountUPP     userUPP);
+  OSLCountUPP     userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeOSLDisposeTokenUPP()
@@ -406,7 +397,7 @@ InvokeOSLCountUPP(
 extern OSErr
 InvokeOSLDisposeTokenUPP(
   AEDesc *            unneededToken,
-  OSLDisposeTokenUPP  userUPP);
+  OSLDisposeTokenUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeOSLGetMarkTokenUPP()
@@ -421,7 +412,7 @@ InvokeOSLGetMarkTokenUPP(
   const AEDesc *      dContainerToken,
   DescType            containerClass,
   AEDesc *            result,
-  OSLGetMarkTokenUPP  userUPP);
+  OSLGetMarkTokenUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeOSLGetErrDescUPP()
@@ -434,7 +425,7 @@ InvokeOSLGetMarkTokenUPP(
 extern OSErr
 InvokeOSLGetErrDescUPP(
   AEDesc **         appDescPtr,
-  OSLGetErrDescUPP  userUPP);
+  OSLGetErrDescUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeOSLMarkUPP()
@@ -449,7 +440,7 @@ InvokeOSLMarkUPP(
   const AEDesc *  dToken,
   const AEDesc *  markToken,
   long            index,
-  OSLMarkUPP      userUPP);
+  OSLMarkUPP      userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeOSLAdjustMarksUPP()
@@ -464,7 +455,7 @@ InvokeOSLAdjustMarksUPP(
   long               newStart,
   long               newStop,
   const AEDesc *     markToken,
-  OSLAdjustMarksUPP  userUPP);
+  OSLAdjustMarksUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -478,7 +469,7 @@ InvokeOSLAdjustMarksUPP(
  *    Non-Carbon CFM:   in ObjectSupportLib 1.0 and later
  */
 extern OSErr 
-AEObjectInit(void);
+AEObjectInit(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Not done by inline, but by direct linking into code.  It sets up the pack
@@ -499,7 +490,7 @@ AESetObjectCallbacks(
   OSLGetMarkTokenUPP   myGetMarkTokenProc,
   OSLMarkUPP           myMarkProc,
   OSLAdjustMarksUPP    myAdjustMarksProc,
-  OSLGetErrDescUPP     myGetErrDescProcPtr);
+  OSLGetErrDescUPP     myGetErrDescProcPtr)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -514,7 +505,7 @@ extern OSErr
 AEResolve(
   const AEDesc *  objectSpecifier,
   short           callbackFlags,
-  AEDesc *        theToken);
+  AEDesc *        theToken)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -531,7 +522,7 @@ AEInstallObjectAccessor(
   DescType         containerType,
   OSLAccessorUPP   theAccessor,
   long             accessorRefcon,
-  Boolean          isSysHandler);
+  Boolean          isSysHandler)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -547,7 +538,7 @@ AERemoveObjectAccessor(
   DescType         desiredClass,
   DescType         containerType,
   OSLAccessorUPP   theAccessor,
-  Boolean          isSysHandler);
+  Boolean          isSysHandler)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -564,7 +555,7 @@ AEGetObjectAccessor(
   DescType          containerType,
   OSLAccessorUPP *  accessor,
   long *            accessorRefcon,
-  Boolean           isSysHandler);
+  Boolean           isSysHandler)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -576,7 +567,7 @@ AEGetObjectAccessor(
  *    Non-Carbon CFM:   in ObjectSupportLib 1.0 and later
  */
 extern OSErr 
-AEDisposeToken(AEDesc * theToken);
+AEDisposeToken(AEDesc * theToken)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -594,18 +585,12 @@ AECallObjectAccessor(
   DescType        containerClass,
   DescType        keyForm,
   const AEDesc *  keyData,
-  AEDesc *        token);
+  AEDesc *        token)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

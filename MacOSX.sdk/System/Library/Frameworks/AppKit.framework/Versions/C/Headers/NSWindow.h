@@ -12,7 +12,7 @@
 #import <Foundation/NSDate.h>
 #import <ApplicationServices/ApplicationServices.h>
 
-@class NSButtonCell, NSColor, NSImage, NSPasteboard, NSScreen;
+@class NSButton, NSButtonCell, NSColor, NSImage, NSPasteboard, NSScreen;
 @class NSNotification, NSText, NSView, NSMutableSet, NSSet, NSDate;
 @class NSToolbar;
 
@@ -22,7 +22,15 @@ enum {
     NSClosableWindowMask		= 1 << 1,
     NSMiniaturizableWindowMask		= 1 << 2,
     NSResizableWindowMask		= 1 << 3
+    
 };
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+// window stylemask additions
+enum {
+    NSTexturedBackgroundWindowMask	= 1 << 8
+};
+#endif
 
 /* used with NSRunLoop's performSelector:target:argument:order:modes: */
 enum {
@@ -51,6 +59,17 @@ typedef enum _NSSelectionDirection {
     NSSelectingNext,
     NSSelectingPrevious
 } NSSelectionDirection;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+// standard window buttons
+typedef enum {
+    NSWindowCloseButton,
+    NSWindowMiniaturizeButton,
+    NSWindowZoomButton,
+    NSWindowToolbarButton,
+    NSWindowDocumentIconButton
+} NSWindowButton;
+#endif
 
 typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
 
@@ -231,6 +250,11 @@ typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
 - (void)setBackgroundColor:(NSColor *)color;
 - (NSColor *)backgroundColor;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (void)setMovableByWindowBackground:(BOOL)flag;
+- (BOOL)isMovableByWindowBackground;
+#endif
+
 - (void)setHidesOnDeactivate:(BOOL)flag;
 - (BOOL)hidesOnDeactivate;
 
@@ -298,6 +322,9 @@ typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
 - (BOOL)canStoreColor;
 - (void)setHasShadow:(BOOL)hasShadow;
 - (BOOL)hasShadow;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (void)invalidateShadow;
+#endif
 - (void)setAlphaValue:(float)windowAlpha;
 - (float)alphaValue;
 - (void)setOpaque:(BOOL)isOpaque;
@@ -330,6 +357,10 @@ typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
 - (NSEvent *)currentEvent;
 - (void)setAcceptsMouseMovedEvents:(BOOL)flag;
 - (BOOL)acceptsMouseMovedEvents;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (void)setIgnoresMouseEvents:(BOOL)flag;
+- (BOOL)ignoresMouseEvents;
+#endif
 - (NSDictionary *)deviceDescription;
 - (void)sendEvent:(NSEvent *)theEvent;
 - (NSPoint)mouseLocationOutsideOfEventStream;
@@ -340,6 +371,21 @@ typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
 
 - (BOOL)isSheet;
 - (NSWindow *)attachedSheet;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
++ (NSButton *)standardWindowButton:(NSWindowButton)b forStyleMask:(unsigned int)styleMask;
+- (NSButton *)standardWindowButton:(NSWindowButton)b;
+#endif
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (void)addChildWindow:(NSWindow *)childWin ordered:(NSWindowOrderingMode)place;
+- (void)removeChildWindow:(NSWindow *)childWin;
+- (NSArray *)childWindows;
+
+- (NSWindow *)parentWindow;
+- (void)setParentWindow:(NSWindow *)window;
+#endif
+
 @end
 
 @interface NSWindow(NSKeyboardUI)
@@ -378,7 +424,7 @@ typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
 @interface NSWindow(NSCarbonExtensions)
 // create an NSWindow for a Carbon window - windowRef must be a Carbon WindowRef - see MacWindows.h
 - (NSWindow *)initWithWindowRef:(void * /* WindowRef */)windowRef;
-// return the Carbon WindowRef passed into initWithWindowRef: - see MacWindows.h
+// return the Carbon WindowRef for this window, creating if necessary: - see MacWindows.h
 - (void * /* WindowRef */)windowRef;
 @end
 

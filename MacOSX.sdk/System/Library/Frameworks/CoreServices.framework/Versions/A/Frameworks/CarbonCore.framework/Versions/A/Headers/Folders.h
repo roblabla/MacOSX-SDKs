@@ -3,9 +3,9 @@
  
      Contains:   Folder Manager Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1995-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1995-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -30,6 +30,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -39,13 +40,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   kOnSystemDisk                 = -32768L, /* previously was 0x8000 but that is an unsigned value whereas vRefNum is signed*/
@@ -106,7 +101,7 @@ FindFolder(
   OSType    folderType,
   Boolean   createFolder,
   short *   foundVRefNum,
-  long *    foundDirID);
+  long *    foundDirID)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -125,7 +120,7 @@ FindFolderExtended(
   UInt32    flags,
   void *    data,
   short *   vRefNum,
-  long *    dirID);
+  long *    dirID)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -139,7 +134,7 @@ FindFolderExtended(
 extern OSErr 
 ReleaseFolder(
   short    vRefNum,
-  OSType   folderType);
+  OSType   folderType)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -156,7 +151,7 @@ FSFindFolder(
   short     vRefNum,
   OSType    folderType,
   Boolean   createFolder,
-  FSRef *   foundRef);
+  FSRef *   foundRef)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -175,7 +170,7 @@ FSFindFolderExtended(
   Boolean   createFolder,
   UInt32    flags,
   void *    data,
-  FSRef *   foundRef);
+  FSRef *   foundRef)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /******************************************/
@@ -297,7 +292,12 @@ enum {
   kFileSystemSupportFolderType  = 'fsys', /* Refers to the [domain]/Library/Filesystems folder in Mac OS X*/
   kAppleShareSupportFolderType  = 'shar', /* Refers to the [domain]/Library/Filesystems/AppleShare folder in Mac OS X*/
   kAppleShareAuthenticationFolderType = 'auth', /* Refers to the [domain]/Library/Filesystems/AppleShare/Authentication folder in Mac OS X*/
-  kMIDIDriversFolderType        = 'midi' /* Refers to the MIDI Drivers folder on Mac OS X*/
+  kMIDIDriversFolderType        = 'midi', /* Refers to the MIDI Drivers folder on Mac OS X*/
+  kKeyboardLayoutsFolderType    = 'klay', /* Refers to the [domain]/Library/KeyboardLayouts folder in Mac OS X*/
+  kIndexFilesFolderType         = 'indx', /* Refers to the [domain]/Library/Indexes folder in Mac OS X*/
+  kFindByContentIndexesFolderType = 'fbcx', /* Refers to the [domain]/Library/Indexes/FindByContent folder in Mac OS X*/
+  kManagedItemsFolderType       = 'mang', /* Refers to the Managed Items folder for Mac OS X */
+  kBootTimeStartupItemsFolderType = 'empz' /* Refers to the "StartupItems" folder of Mac OS X */
 };
 
 enum {
@@ -455,7 +455,7 @@ typedef STACK_UPP_TYPE(FolderManagerNotificationProcPtr)        FolderManagerNot
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern FolderManagerNotificationUPP
-NewFolderManagerNotificationUPP(FolderManagerNotificationProcPtr userRoutine);
+NewFolderManagerNotificationUPP(FolderManagerNotificationProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeFolderManagerNotificationUPP()
@@ -466,7 +466,7 @@ NewFolderManagerNotificationUPP(FolderManagerNotificationProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeFolderManagerNotificationUPP(FolderManagerNotificationUPP userUPP);
+DisposeFolderManagerNotificationUPP(FolderManagerNotificationUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeFolderManagerNotificationUPP()
@@ -481,7 +481,7 @@ InvokeFolderManagerNotificationUPP(
   OSType                        message,
   void *                        arg,
   void *                        userRefCon,
-  FolderManagerNotificationUPP  userUPP);
+  FolderManagerNotificationUPP  userUPP)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 enum {
   kFolderManagerNotificationMessageUserLogIn = 'log+', /*    Sent by system & third party software after a user logs in.  arg should point to a valid FindFolderUserRedirectionGlobals structure or nil for the owner*/
@@ -525,7 +525,7 @@ AddFolderDescriptor(
   OSType                  badgeSignature,
   OSType                  badgeType,
   ConstStrFileNameParam   name,
-  Boolean                 replaceFlag);
+  Boolean                 replaceFlag)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -540,7 +540,7 @@ extern OSErr
 GetFolderDescriptor(
   FolderType    foldType,
   Size          descSize,
-  FolderDesc *  foldDesc);
+  FolderDesc *  foldDesc)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -555,7 +555,7 @@ extern OSErr
 GetFolderTypes(
   UInt32        requestedTypeCount,
   UInt32 *      totalTypeCount,
-  FolderType *  theTypes);
+  FolderType *  theTypes)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -567,7 +567,7 @@ GetFolderTypes(
  *    Non-Carbon CFM:   in FoldersLib 1.0 and later
  */
 extern OSErr 
-RemoveFolderDescriptor(FolderType foldType);
+RemoveFolderDescriptor(FolderType foldType)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* legacy routines */
@@ -584,7 +584,7 @@ GetFolderName(
   short         vRefNum,
   OSType        foldType,
   short *       foundVRefNum,
-  StrFileName   name);
+  StrFileName   name)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* routing routines */
@@ -602,7 +602,7 @@ AddFolderRouting(
   FolderType     routeFromFolder,
   FolderType     routeToFolder,
   RoutingFlags   flags,
-  Boolean        replaceFlag);
+  Boolean        replaceFlag)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -616,7 +616,7 @@ AddFolderRouting(
 extern OSErr 
 RemoveFolderRouting(
   OSType       fileType,
-  FolderType   routeFromFolder);
+  FolderType   routeFromFolder)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -632,7 +632,7 @@ FindFolderRouting(
   OSType          fileType,
   FolderType      routeFromFolder,
   FolderType *    routeToFolder,
-  RoutingFlags *  flags);
+  RoutingFlags *  flags)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -648,7 +648,7 @@ GetFolderRoutings(
   UInt32           requestedRoutingCount,
   UInt32 *         totalRoutingCount,
   Size             routingSize,
-  FolderRouting *  theRoutings);
+  FolderRouting *  theRoutings)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -662,7 +662,7 @@ GetFolderRoutings(
 extern OSErr 
 InvalidateFolderDescriptorCache(
   short   vRefNum,
-  long    dirID);
+  long    dirID)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -677,7 +677,7 @@ extern OSErr
 IdentifyFolder(
   short         vRefNum,
   long          dirID,
-  FolderType *  foldType);
+  FolderType *  foldType)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -693,7 +693,7 @@ extern OSErr
 FolderManagerRegisterNotificationProc(
   FolderManagerNotificationUPP   notificationProc,
   void *                         refCon,
-  UInt32                         options);
+  UInt32                         options)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -707,7 +707,7 @@ FolderManagerRegisterNotificationProc(
 extern OSErr 
 FolderManagerUnregisterNotificationProc(
   FolderManagerNotificationUPP   notificationProc,
-  void *                         refCon);
+  void *                         refCon)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -722,7 +722,7 @@ extern OSStatus
 FolderManagerRegisterCallNotificationProcs(
   OSType   message,
   void *   arg,
-  UInt32   options);
+  UInt32   options)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*******************************/
@@ -792,13 +792,7 @@ typedef MultiUserGestaltPtr *           MultiUserGestaltHandle;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

@@ -3,9 +3,9 @@
  
      Contains:   Types & prototypes for locale functions
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1998-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1998-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -35,13 +36,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 
 /*
@@ -100,7 +95,7 @@ extern OSStatus
 LocaleRefFromLangOrRegionCode(
   LangCode     lang,
   RegionCode   region,
-  LocaleRef *  locale);
+  LocaleRef *  locale)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -114,7 +109,7 @@ LocaleRefFromLangOrRegionCode(
 extern OSStatus 
 LocaleRefFromLocaleString(
   const char   localeString[],
-  LocaleRef *  locale);
+  LocaleRef *  locale)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -130,7 +125,7 @@ LocaleRefGetPartString(
   LocaleRef        locale,
   LocalePartMask   partMask,
   ByteCount        maxStringLen,
-  char             partString[]);
+  char             partString[])                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -145,7 +140,7 @@ extern OSStatus
 LocaleStringToLangAndRegionCodes(
   const char    localeString[],
   LangCode *    lang,
-  RegionCode *  region);
+  RegionCode *  region)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Enumerate locales for a LocaleOperationClass */
@@ -160,7 +155,7 @@ LocaleStringToLangAndRegionCodes(
 extern OSStatus 
 LocaleOperationCountLocales(
   LocaleOperationClass   opClass,
-  ItemCount *            localeCount);
+  ItemCount *            localeCount)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -176,7 +171,7 @@ LocaleOperationGetLocales(
   LocaleOperationClass   opClass,
   ItemCount              maxLocaleCount,
   ItemCount *            actualLocaleCount,
-  LocaleAndVariant       localeVariantList[]);
+  LocaleAndVariant       localeVariantList[])                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Get names for a locale (or a region's language)*/
@@ -197,7 +192,7 @@ LocaleGetName(
   LocaleRef                displayLocale,
   UniCharCount             maxNameLen,
   UniCharCount *           actualNameLen,
-  UniChar                  displayName[]);
+  UniChar                  displayName[])                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -213,7 +208,7 @@ LocaleCountNames(
   LocaleRef                locale,
   LocaleOperationVariant   opVariant,
   LocaleNameMask           nameMask,
-  ItemCount *              nameCount);
+  ItemCount *              nameCount)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -233,7 +228,7 @@ LocaleGetIndName(
   UniCharCount             maxNameLen,
   UniCharCount *           actualNameLen,
   UniChar                  displayName[],
-  LocaleRef *              displayLocale);
+  LocaleRef *              displayLocale)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -247,7 +242,7 @@ LocaleGetIndName(
 extern OSStatus 
 LocaleGetRegionLanguageName(
   RegionCode   region,
-  Str255       languageName);
+  Str255       languageName)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Get names for a LocaleOperationClass*/
@@ -265,7 +260,7 @@ LocaleOperationGetName(
   LocaleRef              displayLocale,
   UniCharCount           maxNameLen,
   UniCharCount *         actualNameLen,
-  UniChar                displayName[]);
+  UniChar                displayName[])                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -279,7 +274,7 @@ LocaleOperationGetName(
 extern OSStatus 
 LocaleOperationCountNames(
   LocaleOperationClass   opClass,
-  ItemCount *            nameCount);
+  ItemCount *            nameCount)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -297,17 +292,11 @@ LocaleOperationGetIndName(
   UniCharCount           maxNameLen,
   UniCharCount *         actualNameLen,
   UniChar                displayName[],
-  LocaleRef *            displayLocale);
+  LocaleRef *            displayLocale)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

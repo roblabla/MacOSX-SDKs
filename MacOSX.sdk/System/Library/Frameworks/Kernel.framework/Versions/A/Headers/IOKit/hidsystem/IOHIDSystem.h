@@ -36,10 +36,12 @@
 #define _IOHIDSYSTEM_H
 
 #include <IOKit/IOTimerEventSource.h>
+#include <IOKit/IOInterruptEventSource.h>
 #include <IOKit/IOService.h>
+#include <IOKit/IOMessage.h>
 #include <IOKit/IOUserClient.h>
 #include <IOKit/IOWorkLoop.h>
-#include <IOKit/IOCommandQueue.h>
+#include <IOKit/IOCommandGate.h>
 #include <IOKit/IOBufferMemoryDescriptor.h>
 #include <IOKit/pwr_mgt/IOPM.h>
 #include <IOKit/graphics/IOGraphicsDevice.h>
@@ -49,7 +51,10 @@
 #include <IOKit/hidsystem/IOLLEvent.h>
 #include "ev_keymap.h"		/* For NX_NUM_SCANNED_SPECIALKEYS */
 
-typedef void (*IOHIDAction)(OSObject *, void *);
+           
+// The following messages should be unique across the entire system
+#define sub_iokit_hidsystem			err_sub(14)
+#define kIOHIDSystem508MouseClickMessage 	iokit_family_msg(sub_iokit_hidsystem, 1)
 
 class IOHIDSystem : public IOService
 {
@@ -59,14 +64,16 @@ class IOHIDSystem : public IOService
 	friend class IOHIDParamUserClient;
 
 private:
-	IOLock *	driverLock;
-
 	IOWorkLoop *		workLoop;
 	IOTimerEventSource *  	timerES;
-	IOCommandQueue *	cmdQ;
+        IOInterruptEventSource * eventConsumerES;
+        IOCommandGate *		cmdGate;
 	IOUserClient *		serverConnect;
 	IOUserClient *		paramConnect;
         IONotifier *		publishNotify;
+        IONotifier *		terminateNotify;
+        
+        OSArray *		ioHIDevices;
 
 	// Ports on which we hold send rights
 	mach_port_t	eventPort;	// Send msg here when event queue
@@ -160,12 +167,18 @@ private:
 	// Flags used in scheduling periodic event callbacks
 	bool		needSetCursorPosition;
 	bool		needToKickEventConsumer;
-	IOLock *	kickConsumerLock;
         
         IOService *	displayManager;	// points to display manager
         IOPMPowerFlags	displayState;
+        
+        IOService *	rootDomain;
+        AbsoluteTime	stateChangeDeadline;
 
         OSDictionary *  savedParameters;	// keep user settings
+        
+        char *		registryName;		// cache our name
+        UInt32		maxWaitCursorFrame;	// animation frames
+	UInt32		firstWaitCursorFrame;	//
 
 private:
   inline short getUniqueEventNum();
@@ -192,23 +205,19 @@ private:
                /* level */     unsigned l);
   /* Message the event consumer to process posted events */
   void kickEventConsumer();
-  IOReturn sendWorkLoopCommand(OSObject *  target,
-                                       IOHIDAction action,
-                                       void *      data);
-  static void _doPerformInIOThread( void* self,
-				    void* target,
-                                    void* action,
-                                    void* data,
-                                    void* unused);
+
   static void _periodicEvents(IOHIDSystem * self,
                               IOTimerEventSource *timer);
 
-  static void _performSpecialKeyMsg(IOHIDSystem * self,
+  static void doSpecialKeyMsg(IOHIDSystem * self,
 					struct evioSpecialKeyMsg *msg);
-  static void _performKickEventConsumer(IOHIDSystem * self,void *);
+  static void doKickEventConsumer(IOHIDSystem * self);
  
   static bool publishNotificationHandler( void * target, 
 				void * ref, IOService * newService );
+
+  static bool terminateNotificationHandler( void * target, 
+				void * ref, IOService * service );
 
   static void makeParamProperty( OSDictionary * dict, const char * key,
                             const void * bytes, unsigned int length );
@@ -484,7 +493,7 @@ public:
 //           /* shmem */     void **  addr,
 //           /* size */      int *    size)
   virtual void unregisterScreen(int index);
-
+    
 /*
  * HISTORICAL NOTE:
  *   The following methods were part of the IOWorkspaceBounds protocol;
@@ -501,6 +510,114 @@ public:
   virtual Bounds * workspaceBounds();
 
 /* END HISTORICAL NOTES */
+
+/*
+ * COMMAND GATE COMPATIBILITY:
+ *   The following method is part of the work needed to make IOHIDSystem
+ *   compatible with IOCommandGate.  The use of IOCommandQueue has been
+ *   deprecated, thus requiring this move.  This should allow for less
+ *   context switching as all actions formerly run on the I/O Workloop
+ *   thread, will now be run on the caller thread.  The static methods
+ *   will be called from cmdGate->runAction and returns the appropriate 
+ *   non-static helper method.  Arguments are stored in the void* array, 
+ *   args, and are passed through.   Since we are returning in the static
+ *   function, gcc3 should translate that to one instruction, thus 
+ *   minimizing cost.
+ */ 
+
+static	IOReturn	doEvClose (IOHIDSystem *self);
+        IOReturn	evCloseGated (void);
+        
+static	IOReturn	doResetMouseParameters (IOHIDSystem *self);
+        void		resetMouseParametersGated (void);
+        
+static	IOReturn	doUnregisterScreen (IOHIDSystem *self, void * arg0);
+        void		unregisterScreenGated (int index);
+
+static	IOReturn	doCreateShmem (IOHIDSystem *self, void * arg0);
+        IOReturn	createShmemGated (void * p1);
+
+static	IOReturn	doRelativePointerEvent (IOHIDSystem *self, void * arg0, void * arg1, 
+                                                    void * arg2, void * arg3);
+        void		relativePointerEventGated(int buttons, 
+                                                    int dx, 
+                                                    int dy, 
+                                                    AbsoluteTime ts);
+
+static	IOReturn	doAbsolutePointerEvent (IOHIDSystem *self, void * args);        
+        void 		absolutePointerEventGated (int buttons,
+                                                    Point *    newLoc,
+                                                    Bounds *   bounds,
+                                                    bool       proximity,
+                                                    int        pressure,
+                                                    int        stylusAngle,
+                                                    AbsoluteTime ts);
+
+static	IOReturn	doScrollWheelEvent(IOHIDSystem *self, void * arg0, void * arg1, 
+                                                    void * arg2, void * arg3);        
+        void		scrollWheelEventGated (short deltaAxis1,
+                                                short deltaAxis2,
+                                                short deltaAxis3,
+                                                AbsoluteTime ts);
+
+static	IOReturn	doTabletEvent (IOHIDSystem *self, void * arg0, void * arg1);        
+        void		tabletEventGated (NXEventData *tabletData, AbsoluteTime ts);
+
+static	IOReturn	doProximityEvent (IOHIDSystem *self, void * arg0, void * arg1);        
+        void		proximityEventGated (NXEventData *proximityData, AbsoluteTime ts);
+
+static	IOReturn	doKeyboardEvent (IOHIDSystem *self, void * args);        
+        void		keyboardEventGated (unsigned   eventType,
+                                            unsigned   flags,
+                                            unsigned   key,
+                                            unsigned   charCode,
+                                            unsigned   charSet,
+                                            unsigned   origCharCode,
+                                            unsigned   origCharSet,
+                                            unsigned   keyboardType,
+                                            bool       repeat,
+                                            AbsoluteTime ts);
+
+static	IOReturn	doKeyboardSpecialEvent (IOHIDSystem *self, void * args);        
+        void		keyboardSpecialEventGated (   
+                                            unsigned   eventType,
+                                            unsigned   flags,
+                                            unsigned   key,
+                                            unsigned   flavor,
+                                            UInt64     guid,
+                                            bool       repeat,
+                                            AbsoluteTime ts);
+
+static	IOReturn	doUpdateEventFlags (IOHIDSystem *self, void * arg0);        
+        void		updateEventFlagsGated (unsigned flags);
+
+static	IOReturn	doNewUserClient (IOHIDSystem *self, void * arg0, void * arg1, 
+                                                    void * arg2, void * arg3);        
+        IOReturn 	newUserClientGated (task_t owningTask,
+                                            void * security_id,
+                                            UInt32 type,
+                                            IOUserClient ** handler);
+
+static	IOReturn	doSetCursorEnable (IOHIDSystem *self, void * arg0);        
+        IOReturn	setCursorEnableGated (void * p1);
+
+static	IOReturn	doExtPostEvent (IOHIDSystem *self, void * arg0);        
+        IOReturn	extPostEventGated (void * p1);
+
+static	IOReturn	doExtSetMouseLocation (IOHIDSystem *self, void * args);        
+        IOReturn	extSetMouseLocationGated (void * args);
+
+static	IOReturn	doExtGetButtonEventNum (IOHIDSystem *self, void * arg0, void * arg1);        
+        IOReturn	extGetButtonEventNumGated (void * p1, void * p2);
+
+static	bool		doUpdateProperties (IOHIDSystem *self);        
+        bool		updatePropertiesGated (void);
+
+static	IOReturn	doSetParamProperties (IOHIDSystem *self, void * arg0);        
+        IOReturn	setParamPropertiesGated (OSDictionary * dict);
+        
+/* END COMMAND GATE COMPATIBILITY */
+
 };
 
 #endif /* !_IOHIDSYSTEM_H */

@@ -3,9 +3,9 @@
  
      Contains:   Gestalt Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1988-2001 by Apple Computer, Inc.  All rights reserved
+     Copyright:  © 1988-2002 by Apple Computer, Inc.  All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -33,14 +34,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 
@@ -58,7 +51,7 @@ typedef STACK_UPP_TYPE(SelectorFunctionProcPtr)                 SelectorFunction
 extern OSErr 
 Gestalt(
   OSType   selector,
-  long *   response);
+  long *   response)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -74,7 +67,7 @@ extern OSErr
 ReplaceGestalt(
   OSType                 selector,
   SelectorFunctionUPP    gestaltFunction,
-  SelectorFunctionUPP *  oldGestaltFunction);
+  SelectorFunctionUPP *  oldGestaltFunction)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -88,7 +81,7 @@ ReplaceGestalt(
 extern OSErr 
 NewGestalt(
   OSType                selector,
-  SelectorFunctionUPP   gestaltFunction);
+  SelectorFunctionUPP   gestaltFunction)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*  The GestaltValue functions are available in System 7.5 and later*/
@@ -104,7 +97,7 @@ NewGestalt(
 extern OSErr 
 NewGestaltValue(
   OSType   selector,
-  long     newValue);
+  long     newValue)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -118,7 +111,7 @@ NewGestaltValue(
 extern OSErr 
 ReplaceGestaltValue(
   OSType   selector,
-  long     replacementValue);
+  long     replacementValue)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -132,7 +125,7 @@ ReplaceGestaltValue(
 extern OSErr 
 SetGestaltValue(
   OSType   selector,
-  long     newValue);
+  long     newValue)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -144,7 +137,7 @@ SetGestaltValue(
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
-DeleteGestaltValue(OSType selector);
+DeleteGestaltValue(OSType selector)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -157,7 +150,7 @@ DeleteGestaltValue(OSType selector);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SelectorFunctionUPP
-NewSelectorFunctionUPP(SelectorFunctionProcPtr userRoutine);
+NewSelectorFunctionUPP(SelectorFunctionProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeSelectorFunctionUPP()
@@ -168,7 +161,7 @@ NewSelectorFunctionUPP(SelectorFunctionProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSelectorFunctionUPP(SelectorFunctionUPP userUPP);
+DisposeSelectorFunctionUPP(SelectorFunctionUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeSelectorFunctionUPP()
@@ -182,7 +175,7 @@ extern OSErr
 InvokeSelectorFunctionUPP(
   OSType               selector,
   long *               response,
-  SelectorFunctionUPP  userUPP);
+  SelectorFunctionUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Environment Selectors */
@@ -225,7 +218,8 @@ enum {
   gestaltAliasMgrResolveAliasFileWithMountOptions = 3, /* True if the Alias Mgr implements gestaltAliasMgrResolveAliasFileWithMountOptions() and IsAliasFile() */
   gestaltAliasMgrFollowsAliasesWhenResolving = 4,
   gestaltAliasMgrSupportsExtendedCalls = 5,
-  gestaltAliasMgrSupportsFSCalls = 6    /* true if Alias Mgr supports HFS+ Calls */
+  gestaltAliasMgrSupportsFSCalls = 6,   /* true if Alias Mgr supports HFS+ Calls */
+  gestaltAliasMgrPrefersPath    = 7     /* True if the Alias Mgr prioritizes the path over file id during resolution by default */
 };
 
 /* Gestalt selector and values for the Appearance Manager */
@@ -431,12 +425,13 @@ enum {
   gestaltCPU750                 = 0x0108, /* Also 740 - "G3" */
   gestaltCPU604e                = 0x0109,
   gestaltCPU604ev               = 0x010A, /* Mach 5, 250Mhz and up */
-  gestaltCPUG4                  = 0x010C /* Max */
+  gestaltCPUG4                  = 0x010C, /* Max */
+  gestaltCPUG47450              = 0x0110 /* Vger , Altivec */
 };
 
 enum {
-  gestaltCPUVger                = 0x0110, /* Vger , Altivec */
-  gestaltCPUApollo              = 0x0111 /* Apollo , Altivec */
+  gestaltCPUApollo              = 0x0111, /* Apollo , Altivec */
+  gestaltCPU750FX               = 0x0120 /* Sahara,G3 like thing */
 };
 
 enum {
@@ -516,7 +511,8 @@ enum {
   gestaltDisplayMgrSetDepthNotifies = 3, /* True SetDepth generates displays mgr notification */
   gestaltDisplayMgrCanConfirm   = 4,    /* True Display Manager supports DMConfirmConfiguration */
   gestaltDisplayMgrColorSyncAware = 5,  /* True if Display Manager supports profiles for displays */
-  gestaltDisplayMgrGeneratesProfiles = 6 /* True if Display Manager will automatically generate profiles for displays */
+  gestaltDisplayMgrGeneratesProfiles = 6, /* True if Display Manager will automatically generate profiles for displays */
+  gestaltDisplayMgrSleepNotifies = 7    /* True if Display Mgr generates "displayWillSleep", "displayDidWake" notifications */
 };
 
 enum {
@@ -673,7 +669,9 @@ enum {
 enum {
   gestaltHasHFSPlusAPIs         = 12,   /* file system supports HFS Plus APIs */
   gestaltMustUseFCBAccessors    = 13,   /* FCBSPtr and FSFCBLen are invalid - must use FSM FCB accessor functions*/
-  gestaltFSUsesPOSIXPathsForConversion = 14 /* The path interchange routines operate on POSIX paths instead of HFS paths */
+  gestaltFSUsesPOSIXPathsForConversion = 14, /* The path interchange routines operate on POSIX paths instead of HFS paths */
+  gestaltFSSupportsExclusiveLocks = 15, /* File system uses POSIX O_EXLOCK for opens */
+  gestaltFSSupportsHardLinkDetection = 16 /* File system returns if an item is a hard link */
 };
 
 enum {
@@ -1092,12 +1090,14 @@ enum {
   gestaltMenuMgrMultipleItemsWithCommandIDBit = 2, /* CountMenuItemsWithCommandID/GetIndMenuItemWithCommandID support multiple items with the same command ID*/
   gestaltMenuMgrRetainsIconRefBit = 3,  /* SetMenuItemIconHandle, when passed an IconRef, calls AcquireIconRef*/
   gestaltMenuMgrSendsMenuBoundsToDefProcBit = 4, /* kMenuSizeMsg and kMenuPopUpMsg have menu bounding rect information*/
+  gestaltMenuMgrMoreThanFiveMenusDeepBit = 5, /* the Menu Manager supports hierarchical menus more than five deep*/
                                         /* masks for the above bits*/
   gestaltMenuMgrPresentMask     = (1L << gestaltMenuMgrPresentBit),
   gestaltMenuMgrAquaLayoutMask  = (1L << gestaltMenuMgrAquaLayoutBit),
   gestaltMenuMgrMultipleItemsWithCommandIDMask = (1L << gestaltMenuMgrMultipleItemsWithCommandIDBit),
   gestaltMenuMgrRetainsIconRefMask = (1L << gestaltMenuMgrRetainsIconRefBit),
-  gestaltMenuMgrSendsMenuBoundsToDefProcMask = (1L << gestaltMenuMgrSendsMenuBoundsToDefProcBit)
+  gestaltMenuMgrSendsMenuBoundsToDefProcMask = (1L << gestaltMenuMgrSendsMenuBoundsToDefProcBit),
+  gestaltMenuMgrMoreThanFiveMenusDeepMask = (1L << gestaltMenuMgrMoreThanFiveMenusDeepBit)
 };
 
 
@@ -1222,7 +1222,8 @@ enum {
   gestaltTempMemTracked         = 6,    /* temporary memory handles are tracked */
   gestaltIPCSupport             = 7,    /* IPC support is present */
   gestaltSysDebuggerSupport     = 8,    /* system debugger support is present */
-  gestaltNativeProcessMgrBit    = 19    /* the process manager itself is native */
+  gestaltNativeProcessMgrBit    = 19,   /* the process manager itself is native */
+  gestaltAltivecRegistersSwappedCorrectlyBit = 20 /* Altivec registers are saved correctly on process switches */
 };
 
 enum {
@@ -1433,7 +1434,7 @@ enum {
   gestalt32BitQD12              = 0x0220, /* 32-bit color QDv1.2 */
   gestalt32BitQD13              = 0x0230, /* 32-bit color QDv1.3 */
   gestaltAllegroQD              = 0x0250, /* Allegro QD OS 8.5 */
-  gestaltMacOSXQD               = 0x0300 /* Mac OS X QD */
+  gestaltMacOSXQD               = 0x0300 /* 0x310, 0x320 etc. for 10.x.y */
 };
 
 enum {
@@ -1477,7 +1478,8 @@ enum {
   gestaltAntiAliasedTextAvailable = 2,  /* capable of antialiased text */
   gestaltOFA2available          = 3,    /* OFA2 available */
   gestaltCreatesAliasFontRsrc   = 4,    /* "real" datafork font support */
-  gestaltNativeType1FontSupport = 5     /* we have scaler for Type1 fonts */
+  gestaltNativeType1FontSupport = 5,    /* we have scaler for Type1 fonts */
+  gestaltCanUseCGTextRendering  = 6
 };
 
 
@@ -1783,7 +1785,9 @@ enum {
 
 enum {
   gestaltAVLTreeAttr            = 'tree', /* AVLTree utility routines attributes. */
-  gestaltAVLTreePresentBit      = 0     /* if set, then the AVL Tree routines are available. */
+  gestaltAVLTreePresentBit      = 0,    /* if set, then the AVL Tree routines are available. */
+  gestaltAVLTreeSupportsHandleBasedTreeBit = 1, /* if set, then the AVL Tree routines can store tree data in a single handle */
+  gestaltAVLTreeSupportsTreeLockingBit = 2 /* if set, the AVLLockTree() and AVLUnlockTree() routines are available. */
 };
 
 enum {
@@ -1840,7 +1844,8 @@ enum {
   gestaltATSUUpdate2            = (3 << 16), /* ATSUI version 1.2 */
   gestaltATSUUpdate3            = (4 << 16), /* ATSUI version 2.0 */
   gestaltATSUUpdate4            = (5 << 16), /* ATSUI version in Mac OS X - SoftwareUpdate 1-4 for Mac OS 10.0.1 - 10.0.4 */
-  gestaltATSUUpdate5            = (6 << 16) /* ATSUI version 2.3 in MacOS 10.1 */
+  gestaltATSUUpdate5            = (6 << 16), /* ATSUI version 2.3 in MacOS 10.1 */
+  gestaltATSUUpdate6            = (7 << 16) /* ATSUI version 2.4 in MacOS 10.2 */
 };
 
 enum {
@@ -1855,7 +1860,14 @@ enum {
   gestaltATSUTextLocatorUsageFeature = 0x00000002, /* feature introduced in ATSUI version 1.2 */
   gestaltATSULowLevelOrigFeatures = 0x00000004, /* first low-level features introduced in ATSUI version 2.0 */
   gestaltATSUFallbacksObjFeatures = 0x00000008, /* feature introduced - ATSUFontFallbacks objects introduced in ATSUI version 2.3 */
-  gestaltATSUIgnoreLeadingFeature = 0x00000008 /* feature introduced - kATSLineIgnoreFontLeading LineLayoutOption introduced in ATSUI version 2.3 */
+  gestaltATSUIgnoreLeadingFeature = 0x00000008, /* feature introduced - kATSLineIgnoreFontLeading LineLayoutOption introduced in ATSUI version 2.3 */
+  gestaltATSUByCharacterClusterFeature = 0x00000010, /* ATSUCursorMovementTypes introduced in ATSUI version 2.4 */
+  gestaltATSUAscentDescentControlsFeature = 0x00000010, /* attributes introduced in ATSUI version 2.4 */
+  gestaltATSUHighlightInactiveTextFeature = 0x00000010, /* feature introduced in ATSUI version 2.4 */
+  gestaltATSUPositionToCursorFeature = 0x00000010, /* features introduced in ATSUI version 2.4 */
+  gestaltATSUBatchBreakLinesFeature = 0x00000010, /* feature introduced in ATSUI version 2.4 */
+  gestaltATSUTabSupportFeature  = 0x00000010, /* features introduced in ATSUI version 2.4 */
+  gestaltATSUDirectAccess       = 0x00000010 /* features introduced in ATSUI version 2.4 */
 };
 
 enum {
@@ -1924,6 +1936,7 @@ enum {
   gestaltWindowMinimizeToDockBit = 5,   /* windows minimize to the dock and do not windowshade (Mac OS X)*/
   gestaltHasWindowShadowsBit    = 6,    /* windows have shadows*/
   gestaltSheetsAreWindowModalBit = 7,   /* sheet windows are modal only to their parent window*/
+  gestaltFrontWindowMayBeHiddenBit = 8, /* FrontWindow and related APIs will return the front window even when the app is hidden*/
                                         /* masks for the above bits*/
   gestaltWindowMgrPresentMask   = (1L << gestaltWindowMgrPresentBit),
   gestaltExtendedWindowAttributesMask = (1L << gestaltExtendedWindowAttributesBit),
@@ -1932,7 +1945,8 @@ enum {
   gestaltWindowLiveResizeMask   = (1L << gestaltWindowLiveResizeBit),
   gestaltWindowMinimizeToDockMask = (1L << gestaltWindowMinimizeToDockBit),
   gestaltHasWindowShadowsMask   = (1L << gestaltHasWindowShadowsBit),
-  gestaltSheetsAreWindowModalMask = (1L << gestaltSheetsAreWindowModalBit)
+  gestaltSheetsAreWindowModalMask = (1L << gestaltSheetsAreWindowModalBit),
+  gestaltFrontWindowMayBeHiddenMask = (1L << gestaltFrontWindowMayBeHiddenBit)
 };
 
 enum {
@@ -2000,14 +2014,6 @@ enum {
 
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

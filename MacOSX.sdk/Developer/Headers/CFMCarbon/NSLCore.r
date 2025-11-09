@@ -1,1 +1,1 @@
-../../../System/Library/Frameworks/CoreServices.framework/Frameworks/NSLCore.framework/Headers/NSLCore.r
+../../../System/Library/Frameworks/CoreServices.framework/Frameworks/OSServices.framework/Headers/NSLCore.r

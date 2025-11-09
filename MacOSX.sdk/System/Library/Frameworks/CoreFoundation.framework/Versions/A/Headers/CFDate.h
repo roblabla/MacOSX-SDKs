@@ -1,5 +1,5 @@
 /*	CFDate.h
-	Copyright 1998-2001, Apple, Inc. All rights reserved.
+	Copyright 1998-2002, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFDATE__)
@@ -68,6 +68,10 @@ typedef enum {
     kCFGregorianUnitsHours = (1 << 3),
     kCFGregorianUnitsMinutes = (1 << 4),
     kCFGregorianUnitsSeconds = (1 << 5),
+#if 0
+    kCFGregorianUnitsTimeZone = (1 << 8),
+    kCFGregorianUnitsDayOfWeek = (1 << 9),
+#endif
     kCFGregorianAllUnits = 0x00FFFFFF
 } CFGregorianUnitFlags;
 

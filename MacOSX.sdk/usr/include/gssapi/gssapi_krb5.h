@@ -24,13 +24,15 @@
 #define _GSSAPI_KRB5_H_
 
 #if defined(macintosh) || (defined(__MACH__) && defined(__APPLE__))
-	#include <KerberosSupport/KerberosSupport.h>
+	#include <TargetConditionals.h>
 #endif
 
 #if TARGET_OS_MAC
-#include <krb5.h>
+    #include <krb5.h>
+    #include <gssapi/gssapi.h>
+    #include <gssapi/gssapi_generic.h>
 #else
-#include <krb5.h>
+    #include <krb5.h>
 #endif
 
 /* C++ friendlyness */
@@ -38,6 +40,7 @@
 extern "C" {
 #endif /* __cplusplus */
 
+#if GSS_RFC_COMPLIANT_OIDS
 /* Reserved static storage for GSS_oids.  See rfc 1964 for more details. */
 
 /* 2.1.1. Kerberos Principal Name Form: */
@@ -76,6 +79,8 @@ GSS_DLLIMP extern const gss_OID_desc * const GSS_KRB5_NT_PRINCIPAL_NAME;
  * member-body(2) United States(840) mit(113554) infosys(1) gssapi(2)
  * generic(1) string_uid_name(3)}.  The recommended symbolic name for
  * this type is "GSS_KRB5_NT_STRING_UID_NAME". */ 
+
+#endif /* GSS_RFC_COMPLIANT_OIDS */
 
 extern const gss_OID_desc * const gss_mech_krb5;
 extern const gss_OID_desc * const gss_mech_krb5_old;

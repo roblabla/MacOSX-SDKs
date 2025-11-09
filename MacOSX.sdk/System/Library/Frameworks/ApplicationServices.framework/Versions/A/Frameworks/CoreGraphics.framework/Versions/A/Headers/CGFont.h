@@ -1,5 +1,5 @@
 /* CoreGraphics - CGFont.h
- * Copyright (c) 1999-2001 Apple Computer, Inc.
+ * Copyright (c) 1999-2002 Apple Computer, Inc.
  * All rights reserved.
  */
 
@@ -11,17 +11,22 @@ typedef unsigned short CGFontIndex;
 typedef CGFontIndex CGGlyph;
 
 #include <CoreGraphics/CGBase.h>
+#include <CoreFoundation/CFBase.h>
 #include <limits.h>
+#include <stdbool.h>
+#include <stddef.h>
 
 enum {
-    kCGFontIndexMax = USHRT_MAX - 1,
-    kCGFontIndexInvalid = USHRT_MAX,
+    kCGFontIndexMax = ((1 << 16) - 2),		/* Always <= USHRT_MAX - 1 */
+    kCGFontIndexInvalid = ((1 << 16) - 1),	/* Always <= USHRT_MAX */
     kCGGlyphMax = kCGFontIndexMax
 };
 
 CG_EXTERN_C_BEGIN
 
-/*** Font creation. ***/
+/* Return the CFTypeID for CGFontRefs. */
+
+CG_EXTERN CFTypeID CGFontGetTypeID(void);
 
 /* Create a CGFont using `platformFontReference', a pointer to a
  * platform-specific font reference.  For MacOS X, `platformFontReference'
@@ -29,15 +34,11 @@ CG_EXTERN_C_BEGIN
 
 CG_EXTERN CGFontRef CGFontCreateWithPlatformFont(void *platformFontReference);
 
-/*** Retain & release. ***/
-
-/* Increment the retain count of `font' and return it.  All fonts are
- * created with an initial retain count of 1. */
+/* Equivalent to `CFRetain(font)'. */
 
 CG_EXTERN CGFontRef CGFontRetain(CGFontRef font);
 
-/* Decrement the retain count of `font'.  If the retain count reaches 0,
- * then release it and any associated resources. */
+/* Equivalent to `CFRelease(font)'. */
 
 CG_EXTERN void CGFontRelease(CGFontRef font);
 

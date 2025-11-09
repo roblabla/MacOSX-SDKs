@@ -13,6 +13,25 @@
 
 @class NSArray, NSColor, NSImageRep, NSPasteboard, NSURL;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+
+typedef enum {
+    NSImageLoadStatusCompleted,
+    NSImageLoadStatusCancelled,
+    NSImageLoadStatusInvalidData,
+    NSImageLoadStatusUnexpectedEOF,
+    NSImageLoadStatusReadError
+} NSImageLoadStatus;
+
+typedef enum {
+    NSImageCacheDefault,    // unspecified. use image rep's default
+    NSImageCacheAlways,     // always generate a cache when drawing
+    NSImageCacheBySize,     // cache if cache size is smaller than original data
+    NSImageCacheNever       // never cache, always draw direct
+} NSImageCacheMode;
+
+#endif
+
 @interface NSImage : NSObject <NSCopying, NSCoding> {
     /*All instance variables are private*/
     NSString *_name;
@@ -32,7 +51,10 @@
 	unsigned int unboundedCacheDepth:1;
         unsigned int flipped:1;
         unsigned int aliased:1;
-        unsigned int reserved1:18;
+	unsigned int dirtied:1;
+        unsigned int cacheMode:2;
+        unsigned int focusedWhilePrinting:1;
+        unsigned int reserved1:14;
     } _flags;
     void *_reps;
     NSColor *_color;
@@ -45,6 +67,9 @@
 - (id)initWithContentsOfFile:(NSString *)fileName;	/* When archived, saves contents */
 - (id)initWithContentsOfURL:(NSURL *)url;               /* When archived, saves contents */
 - (id)initByReferencingFile:(NSString *)fileName;	/* When archived, saves fileName */
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (id)initByReferencingURL:(NSURL *)url;		/* When archived, saves url, supports progressive loading */
+#endif
 - (id)initWithPasteboard:(NSPasteboard *)pasteboard;
 
 - (void)setSize:(NSSize)aSize;
@@ -107,6 +132,13 @@
 - (void)setFlipped:(BOOL)flag;
 - (BOOL)isFlipped;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (void)cancelIncrementalLoad;
+
+-(void)setCacheMode:(NSImageCacheMode)mode;
+-(NSImageCacheMode)cacheMode;
+#endif
+
 @end
 
 #ifdef WIN32
@@ -120,6 +152,13 @@
 
 @interface NSObject(NSImageDelegate)
 - (NSImage *)imageDidNotDraw:(id)sender inRect:(NSRect)aRect;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (void)image:(NSImage*)image willLoadRepresentation:(NSImageRep*)rep;
+- (void)image:(NSImage*)image didLoadRepresentationHeader:(NSImageRep*)rep;
+- (void)image:(NSImage*)image didLoadPartOfRepresentation:(NSImageRep*)rep withValidRows:(int)rows; 
+- (void)image:(NSImage*)image didLoadRepresentation:(NSImageRep*)rep withStatus:(NSImageLoadStatus)status;
+#endif
 @end
 
 @interface NSBundle(NSBundleImageExtension)

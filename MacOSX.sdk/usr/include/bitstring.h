@@ -136,7 +136,7 @@ typedef	unsigned char bitstr_t;
 	register bitstr_t *_name = name; \
 	register int _byte, _nbits = nbits; \
 	register int _stopbyte = _bit_byte(_nbits), _value = -1; \
-	for (_byte = 0; _byte <= _stopbyte; ++_byte) \
+	for (_byte = 0; _byte < _stopbyte; ++_byte) \
 		if (_name[_byte] != 0xff) { \
 			_value = _byte << 3; \
 			for (_stopbyte = _name[_byte]; (_stopbyte&0x1); \
@@ -151,7 +151,7 @@ typedef	unsigned char bitstr_t;
 	register bitstr_t *_name = name; \
 	register int _byte, _nbits = nbits; \
 	register int _stopbyte = _bit_byte(_nbits), _value = -1; \
-	for (_byte = 0; _byte <= _stopbyte; ++_byte) \
+	for (_byte = 0; _byte < _stopbyte; ++_byte) \
 		if (_name[_byte]) { \
 			_value = _byte << 3; \
 			for (_stopbyte = _name[_byte]; !(_stopbyte&0x1); \

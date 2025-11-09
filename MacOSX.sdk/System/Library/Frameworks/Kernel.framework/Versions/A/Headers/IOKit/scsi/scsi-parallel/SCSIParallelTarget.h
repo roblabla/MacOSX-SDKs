@@ -81,12 +81,12 @@ enum
     kStateIdle,
     kStateIssue,
     kStatePending,
-    kStateActive,
+    kStateActive
 };
 
 enum _cdbFlagsInternal
 {
-    kCDBFlagsEnableTagQueuing   = 0x80000000,
+    kCDBFlagsEnableTagQueuing   = 0x80000000
 };
 
 
@@ -99,7 +99,7 @@ enum SCSICommandType
     kSCSICommandAbortAll,
     kSCSICommandDeviceReset,
     kSCSICommandBusReset,
-    kSCSICommandCancel,
+    kSCSICommandCancel
 };
     
 

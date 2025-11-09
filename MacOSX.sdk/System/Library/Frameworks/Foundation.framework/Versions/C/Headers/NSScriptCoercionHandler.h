@@ -1,5 +1,5 @@
 /*	NSScriptCoercionHandler.h
-	Copyright 1997-2001, Apple, Inc. All rights reserved.
+	Copyright 1997-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>

@@ -3,9 +3,9 @@
  
      Contains:   Carbon Event Manager
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,8 +17,8 @@
 #ifndef __CARBONEVENTS_R__
 #define __CARBONEVENTS_R__
 
-#ifndef __CONDITIONALMACROS_R__
-#include <CarbonCore/ConditionalMacros.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
 
 #define kHICommandOK 					'ok  '
@@ -45,6 +45,10 @@
 #define kHICommandWindowListSeparator 	'wldv'
 #define kHICommandWindowListTerminator 	'wlst'
 #define kHICommandSelectWindow 			'swin'
+#define kHICommandRotateWindowsForward 	'rotw'
+#define kHICommandRotateWindowsBackward  'rotb'
+#define kHICommandRotateFloatingWindowsForward  'rtfw'
+#define kHICommandRotateFloatingWindowsBackward  'rtfb'
 #define kHICommandAbout 				'abou'
 #define kHICommandNew 					'new '
 #define kHICommandOpen 					'open'

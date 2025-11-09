@@ -3,9 +3,9 @@
  
      Contains:   AppleScript Specific Interfaces.
  
-     Version:    OSA-30~10
+     Version:    OSA-48~15
  
-     Copyright:  © 1992-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1992-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,12 +16,8 @@
 #ifndef __APPLESCRIPT__
 #define __APPLESCRIPT__
 
-#ifndef __MACERRORS__
-#include <CarbonCore/MacErrors.h>
-#endif
-
-#ifndef __APPLEEVENTS__
-#include <AE/AppleEvents.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __OSA__
@@ -34,6 +30,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -41,14 +38,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 /**************************************************************************
@@ -110,7 +99,7 @@ ASInit(
   long                maxStackSize,
   long                minHeapSize,
   long                preferredHeapSize,
-  long                maxHeapSize);
+  long                maxHeapSize)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -151,7 +140,7 @@ enum {
 extern OSAError 
 ASSetSourceStyles(
   ComponentInstance   scriptingComponent,
-  STHandle            sourceStyles);
+  STHandle            sourceStyles)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -170,7 +159,7 @@ ASSetSourceStyles(
 extern OSAError 
 ASGetSourceStyles(
   ComponentInstance   scriptingComponent,
-  STHandle *          resultingSourceStyles);
+  STHandle *          resultingSourceStyles)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -190,7 +179,7 @@ extern OSAError
 ASGetSourceStyleNames(
   ComponentInstance   scriptingComponent,
   long                modeFlags,
-  AEDescList *        resultingSourceStyleNamesList);
+  AEDescList *        resultingSourceStyleNamesList)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -220,14 +209,6 @@ enum {
 };
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

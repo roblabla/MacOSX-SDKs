@@ -24,6 +24,46 @@ CG_EXTERN_C_BEGIN
 
 CG_EXTERN CGContextRef CGBitmapContextCreate(void *data, size_t width, size_t height, size_t bitsPerComponent, size_t bytesPerRow, CGColorSpaceRef colorspace, CGImageAlphaInfo alphaInfo);
 
+/* Return the data associated with the bitmap context `c', or NULL if `c'
+ * is not a bitmap context. */
+
+CG_EXTERN void *CGBitmapContextGetData(CGContextRef c);
+
+/* Return the width of the bitmap context `c', or 0 if `c' is not a bitmap
+ * context. */
+
+CG_EXTERN size_t CGBitmapContextGetWidth(CGContextRef c);
+
+/* Return the height of the bitmap context `c', or 0 if `c' is not a bitmap
+ * context. */
+
+CG_EXTERN size_t CGBitmapContextGetHeight(CGContextRef c);
+
+/* Return the bits per component of the bitmap context `c', or 0 if `c' is
+ * not a bitmap context. */
+
+CG_EXTERN size_t CGBitmapContextGetBitsPerComponent(CGContextRef c);
+
+/* Return the bits per pixel of the bitmap context `c', or 0 if `c' is not
+ * a bitmap context. */
+
+CG_EXTERN size_t CGBitmapContextGetBitsPerPixel(CGContextRef c);
+
+/* Return the bytes per row of the bitmap context `c', or 0 if `c' is not a
+ * bitmap context. */
+
+CG_EXTERN size_t CGBitmapContextGetBytesPerRow(CGContextRef c);
+
+/* Return the colorspace of the bitmap context `c', or NULL if `c' is not a
+ * bitmap context. */
+
+CG_EXTERN CGColorSpaceRef CGBitmapContextGetColorSpace(CGContextRef c);
+
+/* Return the alpha info of the bitmap context `c', or kCGImageAlphaNone if
+ * `c' is not a bitmap context. */
+
+CG_EXTERN CGImageAlphaInfo CGBitmapContextGetAlphaInfo(CGContextRef c);
+
 CG_EXTERN_C_END
 
 #endif	/* CGBITMAPCONTEXT_H_ */

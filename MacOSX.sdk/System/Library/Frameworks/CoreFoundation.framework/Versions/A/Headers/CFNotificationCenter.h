@@ -1,5 +1,5 @@
 /*	CFNotificationCenter.h
-	Copyright 1998-2001, Apple, Inc. All rights reserved.
+	Copyright 1998-2002, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFNOTIFICATIONCENTER__)
@@ -18,13 +18,13 @@ typedef void (*CFNotificationCallback)(CFNotificationCenterRef center, void *obs
 
 typedef enum {
     CFNotificationSuspensionBehaviorDrop = 1,
-        // The server will not queue any notifications with this name and object until CFNotificationCenterSetSuspended(false) is called.
+        // The server will not queue any notifications with this name and object while the process/app is in the background.
     CFNotificationSuspensionBehaviorCoalesce = 2,
-        // The server will only queue the last notification of the specified name and object; earlier notifications are dropped.  In cover methods for which suspension behavior is not an explicit argument, NSNotificationSuspensionBehaviorCoalesce is the default.
+        // The server will only queue the last notification of the specified name and object; earlier notifications are dropped. 
     CFNotificationSuspensionBehaviorHold = 3,
         // The server will hold all matching notifications until the queue has been filled (queue size determined by the server) at which point the server may flush queued notifications.
     CFNotificationSuspensionBehaviorDeliverImmediately = 4
-        // The server will deliver notifications matching this registration irrespective of whether CFNotificationCenterSetSuspended(false) has been called.  When a notification with this suspension behavior is matched, it has the effect of first flushing any queued notifications.  The effect is somewhat as if CFNotificationCenterSetSuspended(false) were first called if the app is suspended, followed by the notification in question being delivered, followed by a transition back to the previous suspended or unsuspended state.
+        // The server will deliver notifications matching this registration whether or not the process is in the background.  When a notification with this suspension behavior is matched, it has the effect of first flushing any queued notifications.
 } CFNotificationSuspensionBehavior;
 
 CF_EXPORT CFTypeID CFNotificationCenterGetTypeID(void);

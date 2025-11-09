@@ -30,6 +30,8 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* ledger_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 
 #ifdef __BeforeMigUserHeader
@@ -87,6 +89,96 @@ kern_return_t ledger_read
 	ledger_item_t *balance,
 	ledger_item_t *limit
 );
+/* typedefs for all requests */
+
+#ifndef __Request__ledger_subsystem__defined
+#define __Request__ledger_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t ledger_ledger;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		ledger_item_t transfer;
+	} __Request__ledger_create_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__ledger_terminate_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t child_ledger;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		ledger_item_t transfer;
+	} __Request__ledger_transfer_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__ledger_read_t;
+
+#endif /* !__Request__ledger_subsystem__defined */
+
+/* union of all requests */
+
+#ifndef __RequestUnion__ledger_subsystem__defined
+#define __RequestUnion__ledger_subsystem__defined
+union __RequestUnion__ledger_subsystem {
+	__Request__ledger_create_t Request_ledger_create;
+	__Request__ledger_terminate_t Request_ledger_terminate;
+	__Request__ledger_transfer_t Request_ledger_transfer;
+	__Request__ledger_read_t Request_ledger_read;
+};
+#endif /* !__RequestUnion__ledger_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__ledger_subsystem__defined
+#define __Reply__ledger_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t new_ledger;
+		/* end of the kernel processed data */
+	} __Reply__ledger_create_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__ledger_terminate_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__ledger_transfer_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		ledger_item_t balance;
+		ledger_item_t limit;
+	} __Reply__ledger_read_t;
+
+#endif /* !__Reply__ledger_subsystem__defined */
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__ledger_subsystem__defined
+#define __ReplyUnion__ledger_subsystem__defined
+union __ReplyUnion__ledger_subsystem {
+	__Reply__ledger_create_t Reply_ledger_create;
+	__Reply__ledger_terminate_t Reply_ledger_terminate;
+	__Reply__ledger_transfer_t Reply_ledger_transfer;
+	__Reply__ledger_read_t Reply_ledger_read;
+};
+#endif /* !__RequestUnion__ledger_subsystem__defined */
 
 #ifndef subsystem_to_name_map_ledger
 #define subsystem_to_name_map_ledger \

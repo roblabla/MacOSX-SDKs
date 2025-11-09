@@ -48,6 +48,7 @@ enum _CGCommonWindowLevelKey {
     kCGHelpWindowLevelKey,
     kCGUtilityWindowLevelKey,
     kCGDesktopIconWindowLevelKey,
+    kCGCursorWindowLevelKey,
     kCGNumberOfWindowLevelKeys	/* Internal bookkeeping; must be last */
 };
 
@@ -72,6 +73,7 @@ CGWindowLevel CGWindowLevelForKey( CGWindowLevelKey key );
 #define kCGPopUpMenuWindowLevel		CGWindowLevelForKey(kCGPopUpMenuWindowLevelKey)	/* 101 */
 #define kCGDraggingWindowLevel		CGWindowLevelForKey(kCGDraggingWindowLevelKey)	/* 500 */
 #define kCGScreenSaverWindowLevel	CGWindowLevelForKey(kCGScreenSaverWindowLevelKey)	/* 1000 */
+#define kCGCursorWindowLevel		CGWindowLevelForKey(kCGCursorWindowLevelKey)	/* 2000 */
 #define kCGOverlayWindowLevel		CGWindowLevelForKey(kCGOverlayWindowLevelKey)	/* 102 */
 #define kCGHelpWindowLevel		CGWindowLevelForKey(kCGHelpWindowLevelKey)	/* 102 */
 #define kCGUtilityWindowLevel		CGWindowLevelForKey(kCGUtilityWindowLevelKey)	/* 19 */

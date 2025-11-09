@@ -28,12 +28,28 @@ typedef enum _NSBitmapImageFileType {
     NSPNGFileType
 } NSBitmapImageFileType;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+typedef enum {
+    NSImageRepLoadStatusUnknownType     = -1, // not enough data to determine image format. please feed me more data
+    NSImageRepLoadStatusReadingHeader   = -2, // image format known, reading header. not yet valid. more data needed
+    NSImageRepLoadStatusWillNeedAllData = -3, // can't read incrementally. will wait for complete data to become avail.
+    NSImageRepLoadStatusInvalidData     = -4, // image decompression encountered error.
+    NSImageRepLoadStatusUnexpectedEOF   = -5, // ran out of data before full image was decompressed.
+    NSImageRepLoadStatusCompleted       = -6  // all is well, the full pixelsHigh image is valid.
+} NSImageRepLoadStatus;
+#endif
+
 APPKIT_EXTERN NSString* NSImageCompressionMethod;	// TIFF input/output (NSTIFFCompression in NSNumber)
 APPKIT_EXTERN NSString* NSImageCompressionFactor;	// TIFF/JPEG input/output (float in NSNumber)
 APPKIT_EXTERN NSString* NSImageDitherTransparency;	// GIF output (BOOL in NSNumber)
 APPKIT_EXTERN NSString* NSImageRGBColorTable;		// GIF input/output (packed RGB in NSData)
 APPKIT_EXTERN NSString* NSImageInterlaced;		// PNG output (BOOL in NSNumber)
 APPKIT_EXTERN NSString* NSImageColorSyncProfileData;	// TIFF input/output (NSData)
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+APPKIT_EXTERN NSString* NSImageFrameCount;		// GIF input (int in NSNumber) (read-only)
+APPKIT_EXTERN NSString* NSImageCurrentFrame;		// GIF input (int in NSNumber)
+APPKIT_EXTERN NSString* NSImageCurrentFrameDuration;	// GIF input (float in NSNumber) (read-only)
+#endif
 
 @interface NSBitmapImageRep : NSImageRep {
     /*All instance variables are private*/
@@ -91,6 +107,11 @@ Gray value of midPoint -> midPointColor, black -> shadowColor, white -> lightCol
 Works on images with 8-bit SPP; thus either 8-bit gray or 24-bit color (with optional alpha).
 */
 - (void)colorizeByMappingGray:(float)midPoint toColor:(NSColor *)midPointColor blackMapping:(NSColor *)shadowColor whiteMapping:(NSColor *)lightColor;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (id)initForIncrementalLoad;
+- (int)incrementalLoadFromData:(NSData*)data complete:(BOOL)complete;
+#endif
 
 @end
 

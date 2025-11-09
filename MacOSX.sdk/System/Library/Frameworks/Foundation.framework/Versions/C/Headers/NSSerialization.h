@@ -1,6 +1,12 @@
 /*	NSSerialization.h
-	Copyright 1993-2001, Apple, Inc. All rights reserved.
+	Copyright 1993-2002, Apple, Inc. All rights reserved.
 */
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#warning The API is this header is obsolete and deprecated in 10.2.
+#warning Stop using this API and including this header.
+// Note also that this API does not handle modern property list object graphs.
+#endif
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSData.h>
@@ -65,3 +71,4 @@
 + (id)deserializePropertyListFromData:(NSData *)serialization mutableContainers:(BOOL)mut;
 
 @end
+

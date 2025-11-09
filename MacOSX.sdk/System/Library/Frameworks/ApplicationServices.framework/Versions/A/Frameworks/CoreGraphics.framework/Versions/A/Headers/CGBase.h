@@ -6,6 +6,9 @@
 #ifndef CGBASE_H_
 #define CGBASE_H_
 
+#include <stdbool.h>
+#include <stddef.h>
+
 #ifdef __cplusplus
 #  define CG_EXTERN_C_BEGIN extern "C" {
 #  define CG_EXTERN_C_END   }
@@ -38,10 +41,12 @@ CG_EXTERN_C_BEGIN
 #endif
 
 #if !defined(CG_INLINE)
-#  if defined(__GNUC__)
-#    define CG_INLINE static __inline__
+#  if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
+#    define CG_INLINE static inline
 #  elif defined(__MWERKS__) || defined(__cplusplus)
 #    define CG_INLINE static inline
+#  elif defined(__GNUC__)
+#    define CG_INLINE static __inline__
 #  else
 #    define CG_INLINE static    
 #  endif

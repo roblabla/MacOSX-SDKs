@@ -1,6 +1,6 @@
 // Forwarding declarations -*- C++ -*-
 
-// Copyright (C) 1997, 1998, 1999, 2001 Free Software Foundation, Inc.
+// Copyright (C) 1997, 1998, 1999, 2001, 2002 Free Software Foundation, Inc.
 //
 // This file is part of the GNU ISO C++ Library.  This library is free
 // software; you can redistribute it and/or modify it under the
@@ -31,9 +31,9 @@
 // ISO C++ 14882: 27.2  Forward declarations
 //
 
-/** @file std_iosfwd.h
- *  This is an internal header file, included by other library headers.
- *  You should not attempt to use it directly.
+/** @file iosfwd
+ *  This is a Standard C++ Library header.  You should @c #include this header
+ *  in your programs, rather than any of the "st[dl]_*.h" implementation files.
  */
 
 #ifndef _CPP_IOSFWD
@@ -116,7 +116,6 @@ namespace std
   typedef basic_ofstream<char> 		ofstream;
   typedef basic_fstream<char> 		fstream;
 
-#ifdef _GLIBCPP_USE_WCHAR_T
   typedef basic_ios<wchar_t> 		wios;
   typedef basic_streambuf<wchar_t> 	wstreambuf;
   typedef basic_istream<wchar_t> 	wistream;
@@ -130,7 +129,6 @@ namespace std
   typedef basic_ifstream<wchar_t> 	wifstream;
   typedef basic_ofstream<wchar_t> 	wofstream;
   typedef basic_fstream<wchar_t> 	wfstream;
-#endif
 } // namespace std
 
 #endif

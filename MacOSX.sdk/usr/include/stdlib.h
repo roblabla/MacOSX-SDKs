@@ -58,17 +58,22 @@
 #define _STDLIB_H_
 
 #include <machine/ansi.h>
+#include <machine/types.h>
 
 #ifndef	_BSD_SIZE_T_DEFINED_
 #define	_BSD_SIZE_T_DEFINED_
 typedef	_BSD_SIZE_T_	size_t;
 #endif
 
+#if !defined(_ANSI_SOURCE)
+#ifndef _BSD_RUNE_T_DEFINED_
+#define _BSD_RUNE_T_DEFINED_
+typedef _BSD_WCHAR_T_   rune_t;
+#endif
+#endif
+
 #ifndef	_BSD_WCHAR_T_DEFINED_
 #define	_BSD_WCHAR_T_DEFINED_
-#ifndef _ANSI_SOURCE
-typedef	_BSD_WCHAR_T_	rune_t;
-#endif
 typedef	_BSD_WCHAR_T_	wchar_t;
 #endif
 
@@ -143,8 +148,23 @@ int	 setenv __P((const char *, const char *, int));
 #endif
 
 #if !defined(_ANSI_SOURCE) && !defined(_POSIX_SOURCE)
+double	drand48 __P((void));
+double	erand48 __P((unsigned short[3])); 
+long	jrand48 __P((unsigned short[3]));
+void	lcong48 __P((unsigned short[7]));
+long	lrand48 __P((void));
+long	mrand48 __P((void)); 
+long	nrand48 __P((unsigned short[3]));
+unsigned short
+	*seed48 __P((unsigned short[3]));
+void	srand48 __P((long));
+
 void	*alloca __P((size_t));		/* built-in for gcc */
 					/* getcap(3) functions */
+u_int32_t
+	 arc4random __P((void));
+void	 arc4random_addrandom __P((unsigned char *dat, int datlen));
+void	 arc4random_stir __P((void));
 char	*getbsize __P((int *, long *));
 char	*cgetcap __P((char *, char *, int));
 int	 cgetclose __P((void));
@@ -161,6 +181,9 @@ int	 daemon __P((int, int));
 char	*devname __P((int, int));
 int	 getloadavg __P((double [], int));
 
+long	 a64l __P((const char *));
+char	*l64a __P((long));
+
 char	*group_from_gid __P((unsigned long, int));
 int	 heapsort __P((void *, size_t, size_t,
 	    int (*)(const void *, const void *)));
@@ -171,12 +194,18 @@ int	 radixsort __P((const unsigned char **, int, const unsigned char *,
 	    unsigned));
 int	 sradixsort __P((const unsigned char **, int, const unsigned char *,
 	    unsigned));
+int	 rand_r __P((unsigned *));
 long	 random __P((void));
+void	*reallocf __P((void *, size_t));
 char	*realpath __P((const char *, char resolved_path[]));
 char	*setstate __P((char *));
 void	 srandom __P((unsigned long));
 char	*user_from_uid __P((unsigned long, int));
 #ifndef __STRICT_ANSI__
+long long 
+	 strtoll(const char *, char **, int);
+unsigned long long
+	 strtoull(const char *, char **, int);
 long long
 	 strtoq __P((const char *, char **, int));
 unsigned long long

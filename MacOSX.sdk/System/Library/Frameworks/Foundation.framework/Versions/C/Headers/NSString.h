@@ -1,5 +1,5 @@
 /*	NSString.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
 typedef unsigned short unichar;
@@ -22,6 +22,11 @@ enum {
     NSAnchoredSearch = 8
 };
 
+/* Note that in addition to the values explicitly listed below, NSStringEncoding
+supports encodings provided by CFString.
+See CFStringEncodingExt.h for a list of these encodings.
+See CFString.h for functions which convert between NSStringEncoding and CFStringEncoding.
+*/
 typedef unsigned NSStringEncoding;
 
 enum {
@@ -101,6 +106,11 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 - (NSString *)lowercaseString;
 - (NSString *)capitalizedString;
 
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (NSString *)stringByTrimmingCharactersInSet:(NSCharacterSet *)set;
+- (NSString *)stringByPaddingToLength:(unsigned)newLength withString:(NSString *)padString startingAtIndex:(unsigned)padIndex;
+#endif
+
 - (void)getLineStart:(unsigned *)startPtr end:(unsigned *)lineEndPtr contentsEnd:(unsigned *)contentsEndPtr forRange:(NSRange)range;
 - (NSRange)lineRangeForRange:(NSRange)range;
 
@@ -115,6 +125,13 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 - (NSData *)dataUsingEncoding:(NSStringEncoding)encoding;
 
 - (BOOL)canBeConvertedToEncoding:(NSStringEncoding)encoding;
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (NSString *)decomposedStringWithCanonicalMapping;
+- (NSString *)precomposedStringWithCanonicalMapping;
+- (NSString *)decomposedStringWithCompatibilityMapping;
+- (NSString *)precomposedStringWithCompatibilityMapping;
+#endif
 
 - (const char *)UTF8String;	// Convenience to return null-terminated UTF8 representation
 
@@ -177,6 +194,12 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 
 + (id)stringWithCapacity:(unsigned)capacity;
 - (id)initWithCapacity:(unsigned)capacity;
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+/* This method replaces all occurrences of the target string with the replacement string, in the specified range of the receiver string, and returns the number of replacements. NSBackwardsSearch means the search is done from the end of the range (the results could be different); NSAnchoredSearch means only anchored (but potentially multiple) instances will be replaced. NSLiteralSearch and NSCaseInsensitiveSearch also apply. Use NSMakeRange(0, [receiver length]) to process whole string.
+*/
+- (unsigned int)replaceOccurrencesOfString:(NSString *)target withString:(NSString *)replacement options:(unsigned)opts range:(NSRange)searchRange;
+#endif
 
 @end
 

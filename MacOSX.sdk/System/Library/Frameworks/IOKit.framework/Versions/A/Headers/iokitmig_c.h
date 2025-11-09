@@ -30,6 +30,8 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* iokit_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 #include <mach/mach_types.h>
 #include <device/device_types.h>
@@ -808,6 +810,1025 @@ kern_return_t io_registry_entry_get_property_recursively
 	io_buf_ptr_t *properties,
 	mach_msg_type_number_t *propertiesCnt
 );
+/* typedefs for all requests */
+
+#ifndef __Request__iokit_subsystem__defined
+#define __Request__iokit_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__io_object_get_class_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t classNameOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t classNameCnt;
+		char className[128];
+	} __Request__io_object_conforms_to_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__io_iterator_next_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__io_iterator_reset_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t matchingOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t matchingCnt;
+		char matching[512];
+	} __Request__io_service_get_matching_services_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t property_nameOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t property_nameCnt;
+		char property_name[128];
+	} __Request__io_registry_entry_get_property_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t planeOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t planeCnt;
+		char plane[128];
+		int options;
+	} __Request__io_registry_create_iterator_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__io_registry_iterator_enter_entry_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__io_registry_iterator_exit_entry_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t pathOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t pathCnt;
+		char path[512];
+	} __Request__io_registry_entry_from_path_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__io_registry_entry_get_name_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__io_registry_entry_get_properties_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t property_nameOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t property_nameCnt;
+		char property_name[128];
+		mach_msg_type_number_t dataCnt;
+	} __Request__io_registry_entry_get_property_bytes_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t planeOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t planeCnt;
+		char plane[128];
+	} __Request__io_registry_entry_get_child_iterator_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t planeOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t planeCnt;
+		char plane[128];
+	} __Request__io_registry_entry_get_parent_iterator_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t owningTask;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		int connect_type;
+	} __Request__io_service_open_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__io_service_close_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__io_connect_get_service_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t port;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		int notification_type;
+		int reference;
+	} __Request__io_connect_set_notification_port_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t into_task;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		int memory_type;
+		vm_address_t address;
+		vm_size_t size;
+		int flags;
+	} __Request__io_connect_map_memory_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t connect_to;
+		/* end of the kernel processed data */
+	} __Request__io_connect_add_client_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t properties;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t propertiesCnt;
+	} __Request__io_connect_set_properties_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int selector;
+		mach_msg_type_number_t inputCnt;
+		int input[16];
+		mach_msg_type_number_t outputCnt;
+	} __Request__io_connect_method_scalarI_scalarO_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int selector;
+		mach_msg_type_number_t inputCnt;
+		int input[16];
+		mach_msg_type_number_t outputCnt;
+	} __Request__io_connect_method_scalarI_structureO_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int selector;
+		mach_msg_type_number_t inputCnt;
+		int input[16];
+		mach_msg_type_number_t inputStructCnt;
+		char inputStruct[4096];
+	} __Request__io_connect_method_scalarI_structureI_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int selector;
+		mach_msg_type_number_t inputCnt;
+		char input[4096];
+		mach_msg_type_number_t outputCnt;
+	} __Request__io_connect_method_structureI_structureO_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t planeOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t planeCnt;
+		char plane[128];
+	} __Request__io_registry_entry_get_path_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__io_registry_get_root_entry_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t properties;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t propertiesCnt;
+	} __Request__io_registry_entry_set_properties_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t planeOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t planeCnt;
+		char plane[128];
+	} __Request__io_registry_entry_in_plane_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__io_object_get_retain_count_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__io_service_get_busy_state_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_timespec_t wait_time;
+	} __Request__io_service_wait_quiet_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t planeOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t planeCnt;
+		char plane[128];
+		int options;
+	} __Request__io_registry_entry_create_iterator_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__io_iterator_is_valid_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int of_type;
+		int options;
+		mach_msg_type_number_t inputCnt;
+		char input[4096];
+	} __Request__io_make_matching_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t inData;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		int flag;
+		mach_msg_type_number_t inDataCnt;
+	} __Request__io_catalog_send_data_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int flag;
+		mach_msg_type_number_t nameOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t nameCnt;
+		char name[128];
+	} __Request__io_catalog_terminate_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int flag;
+	} __Request__io_catalog_get_data_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__io_catalog_get_gen_count_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t nameOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t nameCnt;
+		char name[128];
+	} __Request__io_catalog_module_loaded_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int flag;
+	} __Request__io_catalog_reset_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int options;
+	} __Request__io_service_request_probe_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t planeOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t planeCnt;
+		char plane[128];
+	} __Request__io_registry_entry_get_name_in_plane_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t matchingOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t matchingCnt;
+		char matching[512];
+	} __Request__io_service_match_property_table_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t wake_port;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t referenceCnt;
+		natural_t reference[8];
+		int selector;
+		mach_msg_type_number_t inputCnt;
+		int input[16];
+		mach_msg_type_number_t outputCnt;
+	} __Request__io_async_method_scalarI_scalarO_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t wake_port;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t referenceCnt;
+		natural_t reference[8];
+		int selector;
+		mach_msg_type_number_t inputCnt;
+		int input[16];
+		mach_msg_type_number_t outputCnt;
+	} __Request__io_async_method_scalarI_structureO_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t wake_port;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t referenceCnt;
+		natural_t reference[8];
+		int selector;
+		mach_msg_type_number_t inputCnt;
+		int input[16];
+		mach_msg_type_number_t inputStructCnt;
+		char inputStruct[4096];
+	} __Request__io_async_method_scalarI_structureI_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t wake_port;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t referenceCnt;
+		natural_t reference[8];
+		int selector;
+		mach_msg_type_number_t inputCnt;
+		char input[4096];
+		mach_msg_type_number_t outputCnt;
+	} __Request__io_async_method_structureI_structureO_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t wake_port;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t notification_typeOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t notification_typeCnt;
+		char notification_type[128];
+		mach_msg_type_number_t matchingOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t matchingCnt;
+		char matching[512];
+		mach_msg_type_number_t referenceCnt;
+		natural_t reference[8];
+	} __Request__io_service_add_notification_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t wake_port;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t type_of_interestOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t type_of_interestCnt;
+		char type_of_interest[128];
+		mach_msg_type_number_t referenceCnt;
+		natural_t reference[8];
+	} __Request__io_service_add_interest_notification_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		natural_t notify_ref;
+		natural_t response;
+	} __Request__io_service_acknowledge_notification_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		natural_t notification_type;
+	} __Request__io_connect_get_notification_semaphore_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t into_task;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		int memory_type;
+		vm_address_t address;
+	} __Request__io_connect_unmap_memory_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t planeOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t planeCnt;
+		char plane[128];
+	} __Request__io_registry_entry_get_location_in_plane_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t planeOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t planeCnt;
+		char plane[128];
+		mach_msg_type_number_t property_nameOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t property_nameCnt;
+		char property_name[128];
+		int options;
+	} __Request__io_registry_entry_get_property_recursively_t;
+
+#endif /* !__Request__iokit_subsystem__defined */
+
+/* union of all requests */
+
+#ifndef __RequestUnion__iokit_subsystem__defined
+#define __RequestUnion__iokit_subsystem__defined
+union __RequestUnion__iokit_subsystem {
+	__Request__io_object_get_class_t Request_io_object_get_class;
+	__Request__io_object_conforms_to_t Request_io_object_conforms_to;
+	__Request__io_iterator_next_t Request_io_iterator_next;
+	__Request__io_iterator_reset_t Request_io_iterator_reset;
+	__Request__io_service_get_matching_services_t Request_io_service_get_matching_services;
+	__Request__io_registry_entry_get_property_t Request_io_registry_entry_get_property;
+	__Request__io_registry_create_iterator_t Request_io_registry_create_iterator;
+	__Request__io_registry_iterator_enter_entry_t Request_io_registry_iterator_enter_entry;
+	__Request__io_registry_iterator_exit_entry_t Request_io_registry_iterator_exit_entry;
+	__Request__io_registry_entry_from_path_t Request_io_registry_entry_from_path;
+	__Request__io_registry_entry_get_name_t Request_io_registry_entry_get_name;
+	__Request__io_registry_entry_get_properties_t Request_io_registry_entry_get_properties;
+	__Request__io_registry_entry_get_property_bytes_t Request_io_registry_entry_get_property_bytes;
+	__Request__io_registry_entry_get_child_iterator_t Request_io_registry_entry_get_child_iterator;
+	__Request__io_registry_entry_get_parent_iterator_t Request_io_registry_entry_get_parent_iterator;
+	__Request__io_service_open_t Request_io_service_open;
+	__Request__io_service_close_t Request_io_service_close;
+	__Request__io_connect_get_service_t Request_io_connect_get_service;
+	__Request__io_connect_set_notification_port_t Request_io_connect_set_notification_port;
+	__Request__io_connect_map_memory_t Request_io_connect_map_memory;
+	__Request__io_connect_add_client_t Request_io_connect_add_client;
+	__Request__io_connect_set_properties_t Request_io_connect_set_properties;
+	__Request__io_connect_method_scalarI_scalarO_t Request_io_connect_method_scalarI_scalarO;
+	__Request__io_connect_method_scalarI_structureO_t Request_io_connect_method_scalarI_structureO;
+	__Request__io_connect_method_scalarI_structureI_t Request_io_connect_method_scalarI_structureI;
+	__Request__io_connect_method_structureI_structureO_t Request_io_connect_method_structureI_structureO;
+	__Request__io_registry_entry_get_path_t Request_io_registry_entry_get_path;
+	__Request__io_registry_get_root_entry_t Request_io_registry_get_root_entry;
+	__Request__io_registry_entry_set_properties_t Request_io_registry_entry_set_properties;
+	__Request__io_registry_entry_in_plane_t Request_io_registry_entry_in_plane;
+	__Request__io_object_get_retain_count_t Request_io_object_get_retain_count;
+	__Request__io_service_get_busy_state_t Request_io_service_get_busy_state;
+	__Request__io_service_wait_quiet_t Request_io_service_wait_quiet;
+	__Request__io_registry_entry_create_iterator_t Request_io_registry_entry_create_iterator;
+	__Request__io_iterator_is_valid_t Request_io_iterator_is_valid;
+	__Request__io_make_matching_t Request_io_make_matching;
+	__Request__io_catalog_send_data_t Request_io_catalog_send_data;
+	__Request__io_catalog_terminate_t Request_io_catalog_terminate;
+	__Request__io_catalog_get_data_t Request_io_catalog_get_data;
+	__Request__io_catalog_get_gen_count_t Request_io_catalog_get_gen_count;
+	__Request__io_catalog_module_loaded_t Request_io_catalog_module_loaded;
+	__Request__io_catalog_reset_t Request_io_catalog_reset;
+	__Request__io_service_request_probe_t Request_io_service_request_probe;
+	__Request__io_registry_entry_get_name_in_plane_t Request_io_registry_entry_get_name_in_plane;
+	__Request__io_service_match_property_table_t Request_io_service_match_property_table;
+	__Request__io_async_method_scalarI_scalarO_t Request_io_async_method_scalarI_scalarO;
+	__Request__io_async_method_scalarI_structureO_t Request_io_async_method_scalarI_structureO;
+	__Request__io_async_method_scalarI_structureI_t Request_io_async_method_scalarI_structureI;
+	__Request__io_async_method_structureI_structureO_t Request_io_async_method_structureI_structureO;
+	__Request__io_service_add_notification_t Request_io_service_add_notification;
+	__Request__io_service_add_interest_notification_t Request_io_service_add_interest_notification;
+	__Request__io_service_acknowledge_notification_t Request_io_service_acknowledge_notification;
+	__Request__io_connect_get_notification_semaphore_t Request_io_connect_get_notification_semaphore;
+	__Request__io_connect_unmap_memory_t Request_io_connect_unmap_memory;
+	__Request__io_registry_entry_get_location_in_plane_t Request_io_registry_entry_get_location_in_plane;
+	__Request__io_registry_entry_get_property_recursively_t Request_io_registry_entry_get_property_recursively;
+};
+#endif /* !__RequestUnion__iokit_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__iokit_subsystem__defined
+#define __Reply__iokit_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t classNameOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t classNameCnt;
+		char className[128];
+	} __Reply__io_object_get_class_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		boolean_t conforms;
+	} __Reply__io_object_conforms_to_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t object;
+		/* end of the kernel processed data */
+	} __Reply__io_iterator_next_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__io_iterator_reset_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t existing;
+		/* end of the kernel processed data */
+	} __Reply__io_service_get_matching_services_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t properties;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t propertiesCnt;
+	} __Reply__io_registry_entry_get_property_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t iterator;
+		/* end of the kernel processed data */
+	} __Reply__io_registry_create_iterator_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__io_registry_iterator_enter_entry_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__io_registry_iterator_exit_entry_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t registry_entry;
+		/* end of the kernel processed data */
+	} __Reply__io_registry_entry_from_path_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t nameOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t nameCnt;
+		char name[128];
+	} __Reply__io_registry_entry_get_name_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t properties;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t propertiesCnt;
+	} __Reply__io_registry_entry_get_properties_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t dataCnt;
+		char data[4096];
+	} __Reply__io_registry_entry_get_property_bytes_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t iterator;
+		/* end of the kernel processed data */
+	} __Reply__io_registry_entry_get_child_iterator_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t iterator;
+		/* end of the kernel processed data */
+	} __Reply__io_registry_entry_get_parent_iterator_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t connection;
+		/* end of the kernel processed data */
+	} __Reply__io_service_open_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__io_service_close_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t service;
+		/* end of the kernel processed data */
+	} __Reply__io_connect_get_service_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__io_connect_set_notification_port_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		vm_address_t address;
+		vm_size_t size;
+	} __Reply__io_connect_map_memory_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__io_connect_add_client_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		natural_t result;
+	} __Reply__io_connect_set_properties_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t outputCnt;
+		int output[16];
+	} __Reply__io_connect_method_scalarI_scalarO_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t outputCnt;
+		char output[4096];
+	} __Reply__io_connect_method_scalarI_structureO_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__io_connect_method_scalarI_structureI_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t outputCnt;
+		char output[4096];
+	} __Reply__io_connect_method_structureI_structureO_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t pathOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t pathCnt;
+		char path[512];
+	} __Reply__io_registry_entry_get_path_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t root;
+		/* end of the kernel processed data */
+	} __Reply__io_registry_get_root_entry_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		natural_t result;
+	} __Reply__io_registry_entry_set_properties_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		boolean_t inPlane;
+	} __Reply__io_registry_entry_in_plane_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		int retainCount;
+	} __Reply__io_object_get_retain_count_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		int busyState;
+	} __Reply__io_service_get_busy_state_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__io_service_wait_quiet_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t iterator;
+		/* end of the kernel processed data */
+	} __Reply__io_registry_entry_create_iterator_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		boolean_t is_valid;
+	} __Reply__io_iterator_is_valid_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t matchingOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t matchingCnt;
+		char matching[512];
+	} __Reply__io_make_matching_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		natural_t result;
+	} __Reply__io_catalog_send_data_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__io_catalog_terminate_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t outData;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t outDataCnt;
+	} __Reply__io_catalog_get_data_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		int genCount;
+	} __Reply__io_catalog_get_gen_count_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__io_catalog_module_loaded_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__io_catalog_reset_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__io_service_request_probe_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t nameOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t nameCnt;
+		char name[128];
+	} __Reply__io_registry_entry_get_name_in_plane_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		boolean_t matches;
+	} __Reply__io_service_match_property_table_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t outputCnt;
+		int output[16];
+	} __Reply__io_async_method_scalarI_scalarO_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t outputCnt;
+		char output[4096];
+	} __Reply__io_async_method_scalarI_structureO_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__io_async_method_scalarI_structureI_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t outputCnt;
+		char output[4096];
+	} __Reply__io_async_method_structureI_structureO_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t notification;
+		/* end of the kernel processed data */
+	} __Reply__io_service_add_notification_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t notification;
+		/* end of the kernel processed data */
+	} __Reply__io_service_add_interest_notification_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__io_service_acknowledge_notification_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t semaphore;
+		/* end of the kernel processed data */
+	} __Reply__io_connect_get_notification_semaphore_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__io_connect_unmap_memory_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t locationOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t locationCnt;
+		char location[128];
+	} __Reply__io_registry_entry_get_location_in_plane_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t properties;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t propertiesCnt;
+	} __Reply__io_registry_entry_get_property_recursively_t;
+
+#endif /* !__Reply__iokit_subsystem__defined */
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__iokit_subsystem__defined
+#define __ReplyUnion__iokit_subsystem__defined
+union __ReplyUnion__iokit_subsystem {
+	__Reply__io_object_get_class_t Reply_io_object_get_class;
+	__Reply__io_object_conforms_to_t Reply_io_object_conforms_to;
+	__Reply__io_iterator_next_t Reply_io_iterator_next;
+	__Reply__io_iterator_reset_t Reply_io_iterator_reset;
+	__Reply__io_service_get_matching_services_t Reply_io_service_get_matching_services;
+	__Reply__io_registry_entry_get_property_t Reply_io_registry_entry_get_property;
+	__Reply__io_registry_create_iterator_t Reply_io_registry_create_iterator;
+	__Reply__io_registry_iterator_enter_entry_t Reply_io_registry_iterator_enter_entry;
+	__Reply__io_registry_iterator_exit_entry_t Reply_io_registry_iterator_exit_entry;
+	__Reply__io_registry_entry_from_path_t Reply_io_registry_entry_from_path;
+	__Reply__io_registry_entry_get_name_t Reply_io_registry_entry_get_name;
+	__Reply__io_registry_entry_get_properties_t Reply_io_registry_entry_get_properties;
+	__Reply__io_registry_entry_get_property_bytes_t Reply_io_registry_entry_get_property_bytes;
+	__Reply__io_registry_entry_get_child_iterator_t Reply_io_registry_entry_get_child_iterator;
+	__Reply__io_registry_entry_get_parent_iterator_t Reply_io_registry_entry_get_parent_iterator;
+	__Reply__io_service_open_t Reply_io_service_open;
+	__Reply__io_service_close_t Reply_io_service_close;
+	__Reply__io_connect_get_service_t Reply_io_connect_get_service;
+	__Reply__io_connect_set_notification_port_t Reply_io_connect_set_notification_port;
+	__Reply__io_connect_map_memory_t Reply_io_connect_map_memory;
+	__Reply__io_connect_add_client_t Reply_io_connect_add_client;
+	__Reply__io_connect_set_properties_t Reply_io_connect_set_properties;
+	__Reply__io_connect_method_scalarI_scalarO_t Reply_io_connect_method_scalarI_scalarO;
+	__Reply__io_connect_method_scalarI_structureO_t Reply_io_connect_method_scalarI_structureO;
+	__Reply__io_connect_method_scalarI_structureI_t Reply_io_connect_method_scalarI_structureI;
+	__Reply__io_connect_method_structureI_structureO_t Reply_io_connect_method_structureI_structureO;
+	__Reply__io_registry_entry_get_path_t Reply_io_registry_entry_get_path;
+	__Reply__io_registry_get_root_entry_t Reply_io_registry_get_root_entry;
+	__Reply__io_registry_entry_set_properties_t Reply_io_registry_entry_set_properties;
+	__Reply__io_registry_entry_in_plane_t Reply_io_registry_entry_in_plane;
+	__Reply__io_object_get_retain_count_t Reply_io_object_get_retain_count;
+	__Reply__io_service_get_busy_state_t Reply_io_service_get_busy_state;
+	__Reply__io_service_wait_quiet_t Reply_io_service_wait_quiet;
+	__Reply__io_registry_entry_create_iterator_t Reply_io_registry_entry_create_iterator;
+	__Reply__io_iterator_is_valid_t Reply_io_iterator_is_valid;
+	__Reply__io_make_matching_t Reply_io_make_matching;
+	__Reply__io_catalog_send_data_t Reply_io_catalog_send_data;
+	__Reply__io_catalog_terminate_t Reply_io_catalog_terminate;
+	__Reply__io_catalog_get_data_t Reply_io_catalog_get_data;
+	__Reply__io_catalog_get_gen_count_t Reply_io_catalog_get_gen_count;
+	__Reply__io_catalog_module_loaded_t Reply_io_catalog_module_loaded;
+	__Reply__io_catalog_reset_t Reply_io_catalog_reset;
+	__Reply__io_service_request_probe_t Reply_io_service_request_probe;
+	__Reply__io_registry_entry_get_name_in_plane_t Reply_io_registry_entry_get_name_in_plane;
+	__Reply__io_service_match_property_table_t Reply_io_service_match_property_table;
+	__Reply__io_async_method_scalarI_scalarO_t Reply_io_async_method_scalarI_scalarO;
+	__Reply__io_async_method_scalarI_structureO_t Reply_io_async_method_scalarI_structureO;
+	__Reply__io_async_method_scalarI_structureI_t Reply_io_async_method_scalarI_structureI;
+	__Reply__io_async_method_structureI_structureO_t Reply_io_async_method_structureI_structureO;
+	__Reply__io_service_add_notification_t Reply_io_service_add_notification;
+	__Reply__io_service_add_interest_notification_t Reply_io_service_add_interest_notification;
+	__Reply__io_service_acknowledge_notification_t Reply_io_service_acknowledge_notification;
+	__Reply__io_connect_get_notification_semaphore_t Reply_io_connect_get_notification_semaphore;
+	__Reply__io_connect_unmap_memory_t Reply_io_connect_unmap_memory;
+	__Reply__io_registry_entry_get_location_in_plane_t Reply_io_registry_entry_get_location_in_plane;
+	__Reply__io_registry_entry_get_property_recursively_t Reply_io_registry_entry_get_property_recursively;
+};
+#endif /* !__RequestUnion__iokit_subsystem__defined */
 
 #ifndef subsystem_to_name_map_iokit
 #define subsystem_to_name_map_iokit \

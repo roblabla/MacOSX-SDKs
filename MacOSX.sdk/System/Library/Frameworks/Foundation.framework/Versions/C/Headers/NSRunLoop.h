@@ -1,5 +1,5 @@
 /*	NSRunLoop.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -51,11 +51,19 @@ FOUNDATION_EXPORT NSString * const NSDefaultRunLoopMode;
 - (void)performSelector:(SEL)aSelector withObject:(id)anArgument afterDelay:(NSTimeInterval)delay inModes:(NSArray *)modes;
 - (void)performSelector:(SEL)aSelector withObject:(id)anArgument afterDelay:(NSTimeInterval)delay;
 + (void)cancelPreviousPerformRequestsWithTarget:(id)aTarget selector:(SEL)aSelector object:(id)anArgument;
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
++ (void)cancelPreviousPerformRequestsWithTarget:(id)aTarget;
+#endif
 
 @end
 
 @interface NSRunLoop (NSOrderedPerform)
+
 - (void)performSelector:(SEL)aSelector target:(id)target argument:(id)arg order:(unsigned)order modes:(NSArray *)modes;
 - (void)cancelPerformSelector:(SEL)aSelector target:(id)target argument:(id)arg;
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (void)cancelPerformSelectorsWithTarget:(id)target;
+#endif
+
 @end
 

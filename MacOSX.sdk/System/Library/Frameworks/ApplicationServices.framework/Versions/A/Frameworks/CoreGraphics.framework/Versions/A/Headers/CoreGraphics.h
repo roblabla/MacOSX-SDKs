@@ -17,13 +17,19 @@
 #include <CoreGraphics/CGDataProvider.h>
 #include <CoreGraphics/CGDirectDisplay.h>
 #include <CoreGraphics/CGDirectPalette.h>
+#include <CoreGraphics/CGDisplayConfiguration.h>
+#include <CoreGraphics/CGDisplayFade.h>
 #include <CoreGraphics/CGError.h>
+#include <CoreGraphics/CGFont.h>
+#include <CoreGraphics/CGFunction.h>
 #include <CoreGraphics/CGGeometry.h>
 #include <CoreGraphics/CGImage.h>
+#include <CoreGraphics/CGPath.h>
 #include <CoreGraphics/CGPattern.h>
 #include <CoreGraphics/CGPDFContext.h>
 #include <CoreGraphics/CGPDFDocument.h>
 #include <CoreGraphics/CGRemoteOperation.h>
+#include <CoreGraphics/CGShading.h>
 #include <CoreGraphics/CGWindowLevel.h>
 
 #endif	/* COREGRAPHICS_H_ */

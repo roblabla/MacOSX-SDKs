@@ -39,16 +39,18 @@
 
 class IOPCIBridge : public IOService
 {
-    friend IOPCIDevice;
+    friend class IOPCIDevice;
 
     OSDeclareAbstractStructors(IOPCIBridge)
 
 private:
+    static void initialize(void);
     IORegistryEntry * findMatching( OSIterator * in, IOPCIAddressSpace space );
-    void publishNubs( OSIterator * kids, UInt32 index );
     virtual bool isDTNub( IOPCIDevice * nub );
     static void nvLocation( IORegistryEntry * entry,
 	UInt8 * busNum, UInt8 * deviceNum, UInt8 * functionNum );
+    bool checkProperties( IOPCIDevice * entry );
+    bool checkCardBusNumbering(OSArray * children);
 
 protected:
     IORangeAllocator *	bridgeMemoryRanges;
@@ -231,6 +233,8 @@ protected:
     virtual UInt8 lastBusNum( void );
 
 public:
+    virtual void free();
+
     virtual IOService * probe(	IOService * 	provider,
                                 SInt32 *	score );
 

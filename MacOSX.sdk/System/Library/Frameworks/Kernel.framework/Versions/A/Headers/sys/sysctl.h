@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -64,11 +64,10 @@
 /*
  * These are for the eproc structure defined below.
  */
+#include <sys/appleapiopts.h>
 #ifndef KERNEL
 #include <sys/time.h>
 #include <sys/ucred.h>
-
-
 #endif
 
 #include <sys/vm.h>
@@ -112,6 +111,9 @@ struct ctlname {
 #define CTLFLAG_NOLOCK	0x20000000	/* XXX Don't Lock */
 #define CTLFLAG_ANYBODY	0x10000000	/* All users can set this var */
 #define CTLFLAG_SECURE	0x08000000	/* Permit set only if securelevel<=0 */
+#define CTLFLAG_MASKED	0x04000000	/* deprecated variable, do not display */
+#define CTLFLAG_NOAUTO	0x02000000	/* do not auto-register */
+#define CTLFLAG_KERN	0x01000000	/* valid inside the kernel */
 
 /*
  * USE THIS instead of a hardwired number from the categories below
@@ -123,6 +125,7 @@ struct ctlname {
 #define OID_AUTO	(-1)
 
 #ifdef KERNEL
+#ifdef __APPLE_API_UNSTABLE
 #define SYSCTL_HANDLER_ARGS (struct sysctl_oid *oidp, void *arg1, int arg2, \
 	struct sysctl_req *req)
 
@@ -166,7 +169,9 @@ struct sysctl_oid {
 
 int sysctl_handle_int SYSCTL_HANDLER_ARGS;
 int sysctl_handle_long SYSCTL_HANDLER_ARGS;
-int sysctl_handle_intptr SYSCTL_HANDLER_ARGS;
+int sysctl_handle_quad SYSCTL_HANDLER_ARGS;
+int sysctl_handle_int2quad SYSCTL_HANDLER_ARGS;
+/*int sysctl_handle_intptr SYSCTL_HANDLER_ARGS; XXX not implemented */
 int sysctl_handle_string SYSCTL_HANDLER_ARGS;
 int sysctl_handle_opaque SYSCTL_HANDLER_ARGS;
 
@@ -182,7 +187,7 @@ void sysctl_unregister_oid(struct sysctl_oid *oidp);
 
 /* This constructs a "raw" MIB oid. */
 #define SYSCTL_OID(parent, nbr, name, kind, a1, a2, handler, fmt, descr) \
-	struct sysctl_oid sysctl_##parent##_##name## = {		 \
+	struct sysctl_oid sysctl_##parent##_##name = {		 \
 		&sysctl_##parent##_children, { 0 },			 \
 		nbr, kind, a1, a2, #name, handler, fmt };
 
@@ -209,6 +214,16 @@ void sysctl_unregister_oid(struct sysctl_oid *oidp);
 	SYSCTL_OID(parent, nbr, name, CTLTYPE_INT|access, \
 		ptr, 0, sysctl_handle_long, "L", descr)
 
+/* Oid for a quad.  The pointer must be non NULL. */
+#define SYSCTL_QUAD(parent, nbr, name, access, ptr, descr) \
+	SYSCTL_OID(parent, nbr, name, CTLTYPE_QUAD|access, \
+		ptr, 0, sysctl_handle_quad, "Q", descr)
+
+/* Oid for a int returned as quad.  The pointer must be non NULL. */
+#define SYSCTL_INT2QUAD(parent, nbr, name, access, ptr, descr) \
+	SYSCTL_OID(parent, nbr, name, CTLTYPE_QUAD|access, \
+		ptr, 0, sysctl_handle_int2quad, "Q", descr)
+
 /* Oid for an opaque object.  Specified by a pointer and a length. */
 #define SYSCTL_OPAQUE(parent, nbr, name, access, ptr, len, fmt, descr) \
 	SYSCTL_OID(parent, nbr, name, CTLTYPE_OPAQUE|access, \
@@ -224,6 +239,7 @@ void sysctl_unregister_oid(struct sysctl_oid *oidp);
 #define SYSCTL_PROC(parent, nbr, name, access, ptr, arg, handler, fmt, descr) \
 	SYSCTL_OID(parent, nbr, name, access, \
 		ptr, arg, handler, fmt, descr)
+#endif /* __APPLE_API_UNSTABLE */
 #endif /* KERNEL */
 
 /*
@@ -294,8 +310,11 @@ void sysctl_unregister_oid(struct sysctl_oid *oidp);
 #define	KERN_LOGSIGEXIT		36	/* int: do we log sigexit procs? */
 #define KERN_SYMFILE		37	/* string: kernel symbol filename */
 #define KERN_PROCARGS		38
-#define KERN_PCSAMPLES          39      /* int: pc sampling */
-#define KERN_MAXID		40      /* number of valid kern ids */
+#define KERN_PCSAMPLES		39	/* node: pc sampling */
+#define KERN_NETBOOT		40	/* int: are we netbooted? 1=yes,0=no */
+#define	KERN_PANICINFO		41	/* node: panic UI information */
+#define	KERN_SYSV		42	/* node: panic UI information */
+#define	KERN_MAXID		43	/* number of valid kern ids */
 
 
 /* KERN_KDEBUG types */
@@ -314,6 +333,7 @@ void sysctl_unregister_oid(struct sysctl_oid *oidp);
 /* Don't use 13 as it is overloaded with KERN_VNODE */
 #define KERN_KDPIDEX            14
 #define KERN_KDSETRTCDEC        15
+#define KERN_KDGETENTROPY       16
 
 /* KERN_PCSAMPLES types */
 #define KERN_PCDISABLE		1
@@ -324,6 +344,21 @@ void sysctl_unregister_oid(struct sysctl_oid *oidp);
 #define KERN_PCREADBUF		6
 #define KERN_PCSETREG           7
 #define KERN_PCCOMM             8
+
+/* KERN_PANICINFO types */
+#define	KERN_PANICINFO_MAXSIZE	1	/* quad: panic UI image size limit */
+#define	KERN_PANICINFO_IMAGE16	2	/* string: path to the panic UI (16 bit) */
+#define	KERN_PANICINFO_IMAGE32	3	/* string: path to the panic UI (32 bit) */
+
+/*
+ * KERN_SYSV identifiers
+ */
+#define KSYSV_SHMMAX		1	/* int: max shared memory segment size (bytes) */
+#define	KSYSV_SHMMIN		2	/* int: min shared memory segment size (bytes) */
+#define	KSYSV_SHMMNI		3	/* int: max number of shared memory identifiers */
+#define	KSYSV_SHMSEG		4	/* int: max shared memory segments per process */
+#define	KSYSV_SHMALL		5	/* int: max amount of shared memory (pages) */
+
 
 #define CTL_KERN_NAMES { \
 	{ 0, 0 }, \
@@ -353,7 +388,7 @@ void sysctl_unregister_oid(struct sysctl_oid *oidp);
 	{ "kdebug", CTLTYPE_INT }, \
 	{ "update", CTLTYPE_INT }, \
 	{ "osreldate", CTLTYPE_INT }, \
-        { "ntp_pll", CTLTYPE_NODE }, \
+	{ "ntp_pll", CTLTYPE_NODE }, \
 	{ "bootfile", CTLTYPE_STRING }, \
 	{ "maxfilesperproc", CTLTYPE_INT }, \
 	{ "maxprocperuid", CTLTYPE_INT }, \
@@ -363,14 +398,19 @@ void sysctl_unregister_oid(struct sysctl_oid *oidp);
 	{ "ps_strings", CTLTYPE_INT }, \
 	{ "usrstack", CTLTYPE_INT }, \
 	{ "logsigexit", CTLTYPE_INT }, \
-        { "symfile",CTLTYPE_STRING },\
+	{ "symfile",CTLTYPE_STRING },\
+	{ "procargs",CTLTYPE_STRUCT },\
+	{ "pcsamples",CTLTYPE_STRUCT },\
+	{ "netboot", CTLTYPE_INT }, \
+	{ "panicinfo", CTLTYPE_NODE }, \
+	{ "sysv", CTLTYPE_NODE } \
 }
 
 /*
  * CTL_VFS identifiers
  */
 #define CTL_VFS_NAMES { \
-	{ "vfsconf", CTLTYPE_STRUCT }, \
+	{ "vfsconf", CTLTYPE_STRUCT } \
 }
 
 /* 
@@ -387,6 +427,7 @@ void sysctl_unregister_oid(struct sysctl_oid *oidp);
 /* 
  * KERN_PROC subtype ops return arrays of augmented proc structures:
  */
+#ifdef __APPLE_API_UNSTABLE
 struct kinfo_proc {
 	struct	extern_proc kp_proc;			/* proc structure */
 	struct	eproc {
@@ -394,16 +435,7 @@ struct kinfo_proc {
 		struct	session *e_sess;	/* session pointer */
 		struct	pcred e_pcred;		/* process credentials */
 		struct	ucred e_ucred;		/* current credentials */
-#ifdef sparc
-		struct {
-			segsz_t	vm_rssize;	/* resident set size */
-			segsz_t	vm_tsize;	/* text size */
-			segsz_t	vm_dsize;	/* data size */
-			segsz_t	vm_ssize;	/* stack size */
-		} e_vm;
-#else
-		struct	vmspace e_vm;		/* address space */
-#endif
+		struct	 vmspace e_vm;		/* address space */
 		pid_t	e_ppid;			/* parent process id */
 		pid_t	e_pgid;			/* process group id */
 		short	e_jobc;			/* job control counter */
@@ -419,10 +451,12 @@ struct kinfo_proc {
 		long	e_flag;
 #define	EPROC_CTTY	0x01	/* controlling tty vnode active */
 #define	EPROC_SLEADER	0x02	/* session leader */
-		char	e_login[MAXLOGNAME];	/* setlogin() name */
+#define	COMAPT_MAXLOGNAME	12
+		char	e_login[COMAPT_MAXLOGNAME];	/* short setlogin() name */
 		long	e_spare[4];
 	} kp_eproc;
 };
+#endif /* __APPLE_API_UNSTABLE */
 
 /*
  * KERN_IPC identifiers
@@ -448,7 +482,7 @@ struct kinfo_proc {
 #define	CTL_VM_NAMES { \
 	{ 0, 0 }, \
 	{ "vmmeter", CTLTYPE_STRUCT }, \
-	{ "loadavg", CTLTYPE_STRUCT }, \
+	{ "loadavg", CTLTYPE_STRUCT } \
 }
 
 /*
@@ -476,7 +510,10 @@ struct kinfo_proc {
 #define HW_L2CACHESIZE	20		/* int: L2 Cache Size in Bytes */
 #define HW_L3SETTINGS	21		/* int: L3 Cache Settings */
 #define HW_L3CACHESIZE	22		/* int: L3 Cache Size in Bytes */
-#define	HW_MAXID	23		/* number of valid hw ids */
+#define HW_TB_FREQ	23		/* int: Bus Frequency */
+#define HW_MEMSIZE	24		/* uint64_t: physical ram size */
+#define HW_AVAILCPU	25		/* int: number of available CPUs */
+#define	HW_MAXID	26		/* number of valid hw ids */
 
 #define CTL_HW_NAMES { \
 	{ 0, 0 }, \
@@ -502,7 +539,71 @@ struct kinfo_proc {
 	{ "l2cachesize", CTLTYPE_INT }, \
 	{ "l3settings", CTLTYPE_INT }, \
 	{ "l3cachesize", CTLTYPE_INT }, \
+	{ "tbfrequency", CTLTYPE_INT }, \
+	{ "memsize", CTLTYPE_QUAD }, \
+	{ "availcpu", CTLTYPE_INT } \
 }
+
+/*
+ * These are the support HW selectors for sysctlbyname.  Parameters that are byte count or frequencies are 64 bit numbers.
+ * All other parameters are 32 bit numbers.
+ *
+ *   hw.memsize                - The number of bytes of physical memory in the system.
+ *
+ *   hw.ncpu                   - The number maximum number of processor that could be available this boot.
+ *                               Use this value for sizing of static per processor arrays; i.e. processor load statistics.
+ *
+ *   hw.activecpu              - The number of cpus currently available for executing threads.
+ *                               Use this number to determine the number threads to create in SMP aware applications.
+ *                               This number can change when power management modes are changed.
+ *   
+ *   hw.tbfrequency            - This gives the time base frequency used by the OS and is the basis of all timing services.
+ *                               In general is is better to use mach's or higher level timing services, but this value
+ *                               is needed to convert the PPC Time Base registers to real time.
+ *
+ *   hw.cpufrequency           - These values provide the current, min and max cpu frequency.  The min and max are for
+ *   hw.cpufrequency_max       - all power management modes.  The current frequency is the max frequency in the current mode.
+ *   hw.cpufrequency_min       - All frequencies are in Hz.
+ *
+ *   hw.busfrequency           - These values provide the current, min and max bus frequency.  The min and max are for
+ *   hw.busfrequency_max       - all power management modes.  The current frequency is the max frequency in the current mode.
+ *   hw.busfrequency_min       - All frequencies are in Hz.
+ *
+ *   hw.cputype                - These values provide the mach-o cpu type and subtype.  A complete list is in <mach/machine.h>
+ *   hw.cpusubtype             - These values should be used to determine what processor family the running cpu is from so that
+ *                               the best binary can be chosen, or the best dynamic code generated.  They should not be used
+ *                               to determine if a given processor feature is available.
+ *
+ *   hw.byteorder              - Gives the byte order of the processor.  4321 for big endian, 1234 for little.
+ *
+ *   hw.pagesize               - Gives the size in bytes of the pages used by the processor and VM system.
+ *
+ *   hw.cachelinesize          - Gives the size in bytes of the processor's cache lines.
+ *                               This value should be use to control the strides of loops that use cache control instructions
+ *                               like dcbz, dcbt or dcbst.
+ *
+ *   hw.l1dcachesize           - These values provide the size in bytes of the L1, L2 and L3 caches.  If a cache is not present
+ *   hw.l1icachesize           - then the selector will return and error.
+ *   hw.l2cachesize            -
+ *   hw.l3cachesize            -
+ *
+ *
+ * These are the selectors for optional processor features.  Selectors that return errors are not support on the system.
+ * Supported features will return 1 if they are recommended or 0 if they are supported but are not expected to help performance.
+ * Future versions of these selectors may return larger values as necessary so it is best to test for non zero.
+ *
+ *   hw.optional.floatingpoint - Floating Point Instructions
+ *   hw.optional.altivec       - AltiVec Instructions
+ *   hw.optional.graphicsops   - Graphics Operations
+ *   hw.optional.64bitops      - 64-bit Instructions
+ *   hw.optional.fsqrt         - HW Floating Point Square Root Instruction
+ *   hw.optional.stfiwx        - Store Floating Point as Integer Word Indexed Instructions
+ *   hw.optional.dcba          - Data Cache Block Allocate Instruction
+ *   hw.optional.datastreams   - Data Streams Instructions
+ *   hw.optional.dcbtstreams   - Data Cache Block Touch Steams Instruction Form
+ *
+ */
+
 
 /*
  * CTL_USER definitions
@@ -550,7 +651,7 @@ struct kinfo_proc {
 	{ "posix2_sw_dev", CTLTYPE_INT }, \
 	{ "posix2_upe", CTLTYPE_INT }, \
 	{ "stream_max", CTLTYPE_INT }, \
-	{ "tzname_max", CTLTYPE_INT }, \
+	{ "tzname_max", CTLTYPE_INT } \
 }
 
 
@@ -566,6 +667,7 @@ struct kinfo_proc {
 #define	CTL_DEBUG_MAXID		20
 
 #ifdef	KERNEL
+#ifdef __APPLE_API_UNSTABLE
 
 extern struct sysctl_oid_list sysctl__children;
 SYSCTL_DECL(_kern);
@@ -610,12 +712,21 @@ struct linker_set;
 
 void	sysctl_register_set(struct linker_set *lsp);
 void	sysctl_unregister_set(struct linker_set *lsp);
+void	sysctl_mib_init(void);
 int	kernel_sysctl(struct proc *p, int *name, u_int namelen, void *old,
-		      size_t *oldlenp, void *new, size_t newlen,
-		      size_t *retval);
+		      size_t *oldlenp, void *newp, size_t newlen);
 int	userland_sysctl(struct proc *p, int *name, u_int namelen, void *old,
-			size_t *oldlenp, int inkernel, void *new, size_t newlen,
+			size_t *oldlenp, int inkernel, void *newp, size_t newlen,
 			size_t *retval);
+
+/*
+ * Sysctl handling within the kernel.
+ *
+ * May be called with either or no funnel held; will take and
+ * switch funnels as required.
+ */
+int	sysctlbyname __P((const char *, void *, size_t *, void *, size_t));
+
 /*
  * Internal sysctl function calling convention:
  *
@@ -630,11 +741,14 @@ typedef int (sysctlfn)
 
 int sysctl_int __P((void *, size_t *, void *, size_t, int *));
 int sysctl_rdint __P((void *, size_t *, void *, int));
+int sysctl_quad __P((void *, size_t *, void *, size_t, quad_t *));
+int sysctl_rdquad __P((void *, size_t *, void *, quad_t));
 int sysctl_string __P((void *, size_t *, void *, size_t, char *, int));
 int sysctl_rdstring __P((void *, size_t *, void *, char *));
 int sysctl_rdstruct __P((void *, size_t *, void *, void *, int));
 void fill_eproc __P((struct proc *, struct eproc *));
 
+#endif /* __APPLE_API_UNSTABLE */
 #else	/* !KERNEL */
 #include <sys/cdefs.h>
 

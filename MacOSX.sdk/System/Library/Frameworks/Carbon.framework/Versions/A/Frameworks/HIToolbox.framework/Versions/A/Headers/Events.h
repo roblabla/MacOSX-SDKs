@@ -3,9 +3,9 @@
  
      Contains:   Event Manager Interfaces.
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,26 +16,12 @@
 #ifndef __EVENTS__
 #define __EVENTS__
 
-#ifndef __OSUTILS__
-#include <CarbonCore/OSUtils.h>
+#ifndef __APPLICATIONSERVICES__
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
-#ifndef __QUICKDRAW__
-#include <QD/Quickdraw.h>
-#endif
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#if !TARGET_API_MAC_OS8
-#ifndef __ENDIAN__
-#include <CarbonCore/Endian.h>
-#endif
-
-#endif  /* !TARGET_API_MAC_OS8 */
-
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -45,13 +31,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 typedef UInt16                          EventKind;
 typedef UInt16                          EventMask;
@@ -238,41 +218,38 @@ typedef STACK_UPP_TYPE(FKEYProcPtr)                             FKEYUPP;
 /*
  *  GetMouse()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GetMouse(Point * mouseLoc);
+GetMouse(Point * mouseLoc)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  Button()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
-Button(void);
+Button(void)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  StillDown()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern Boolean 
-StillDown(void);
-
-
-/*
- *  WaitMouseUp()
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -280,11 +257,29 @@ StillDown(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
-WaitMouseUp(void);
+StillDown(void)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  WaitMouseUp()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern Boolean 
+WaitMouseUp(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  KeyTranslate()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -295,11 +290,14 @@ extern UInt32
 KeyTranslate(
   const void *  transData,
   UInt16        keycode,
-  UInt32 *      state);
+  UInt32 *      state)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetCaretTime()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -307,7 +305,7 @@ KeyTranslate(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern UInt32 
-GetCaretTime(void);
+GetCaretTime(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -328,13 +326,16 @@ typedef UInt8                           KeyMapByteArray[16];
 /*
  *  GetKeys()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GetKeys(KeyMap theKeys);
+GetKeys(KeyMap theKeys)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Obsolete event types & masks */
@@ -397,17 +398,23 @@ typedef GetNextEventFilterUPP           GNEFilterUPP;
 /*
  *  GetDblTime()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern UInt32 
-GetDblTime(void);
+GetDblTime(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetEventMask()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -415,7 +422,7 @@ GetDblTime(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetEventMask(EventMask value);
+SetEventMask(EventMask value)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -441,6 +448,9 @@ SetEventMask(EventMask value);
 /*
  *  GetNextEvent()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -449,11 +459,14 @@ SetEventMask(EventMask value);
 extern Boolean 
 GetNextEvent(
   EventMask      eventMask,
-  EventRecord *  theEvent);
+  EventRecord *  theEvent)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  WaitNextEvent()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -465,11 +478,14 @@ WaitNextEvent(
   EventMask      eventMask,
   EventRecord *  theEvent,
   UInt32         sleep,
-  RgnHandle      mouseRgn);       /* can be NULL */
+  RgnHandle      mouseRgn)        /* can be NULL */           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  EventAvail()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -479,11 +495,14 @@ WaitNextEvent(
 extern Boolean 
 EventAvail(
   EventMask      eventMask,
-  EventRecord *  theEvent);
+  EventRecord *  theEvent)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PostEvent()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -493,7 +512,7 @@ EventAvail(
 extern OSErr 
 PostEvent(
   EventKind   eventNum,
-  UInt32      eventMsg);
+  UInt32      eventMsg)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -526,6 +545,9 @@ PostEvent(
 /*
  *  FlushEvents()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -534,7 +556,7 @@ PostEvent(
 extern void 
 FlushEvents(
   EventMask   whichMask,
-  EventMask   stopMask);
+  EventMask   stopMask)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -582,6 +604,9 @@ FlushEvents(
  *  Summary:
  *    Returns the position of the mouse in global coordinates.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    globalMouse:
@@ -593,18 +618,41 @@ FlushEvents(
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern void 
-GetGlobalMouse(Point * globalMouse);
+GetGlobalMouse(Point * globalMouse)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetCurrentKeyModifiers()
  *  
  *  Summary:
- *    Returns the current state of the keyboard modifier keys.
+ *    Returns the current hardware keyboard modifier state.
  *  
  *  Discussion:
- *    The format of the return value is the same as the modifiers field
- *    of the EventRecord.
+ *    In most cases, you should not use GetCurrentKeyModifiers, but
+ *    should use the GetCurrentEventKeyModifiers function instead.
+ *    GetCurrentEventKeyModifiers is much faster than
+ *    GetCurrentKeyModifiers because it returns the locally cached
+ *    modifier state; GetCurrentKeyModifiers must get the modifier
+ *    state from the window server, which is slower. Using
+ *    GetCurrentKeyModifiers also can prevent your application from
+ *    being operated by remote posting of events, since the hardware
+ *    input device is not actually changing state in that case. Most
+ *    commonly, you might need to use GetCurrentKeyModifiers when your
+ *    application is not the active application (as determined by the
+ *    Process Manager function GetFrontProcess). In that case, the
+ *    cached modifier state returned by GetCurrentEventKeyModifiers is
+ *    not valid because modifier-changed events are not flowing to your
+ *    application, and you must use GetCurrentKeyModifiers to determine
+ *    the current hardware state.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Result:
+ *    The hardware state of the keyboard modifiers. The format of the
+ *    return value is the same as the modifiers field of an EventRecord
+ *    (but only includes keyboard modifiers and not the other modifier
+ *    flags included in an EventRecord).
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -612,19 +660,24 @@ GetGlobalMouse(Point * globalMouse);
  *    Non-Carbon CFM:   not available
  */
 extern UInt32 
-GetCurrentKeyModifiers(void);
+GetCurrentKeyModifiers(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CheckEventQueueForUserCancel()
  *  
  *  Summary:
- *    Determines if there is a cancel event in the event queue.
+ *    Determines if there is a cancel event in the main thread's event
+ *    queue.
  *  
  *  Discussion:
- *    This API supports two cancel events: Escape and Cmd-Period. Mouse
- *    or keyboard events in front of the cancel event in the event
- *    queue will be removed.
+ *    This API supports two cancel events: Escape and Cmd-Period. The
+ *    cancel event itself, as well as mouse or keyboard events in front
+ *    of the cancel event in the event queue, will be removed from the
+ *    queue.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -632,17 +685,15 @@ GetCurrentKeyModifiers(void);
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-CheckEventQueueForUserCancel(void);
+CheckEventQueueForUserCancel(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-/*
-    The core data structure for the Carbon event system. It is declared here instead of
-    in CarbonEvents.h to avoid recursive include problems.
-*/
-typedef struct OpaqueEventRef*          EventRef;
 /*
  *  KeyScript()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -650,11 +701,14 @@ typedef struct OpaqueEventRef*          EventRef;
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-KeyScript(short code);
+KeyScript(short code)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  IsCmdChar()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -664,7 +718,7 @@ KeyScript(short code);
 extern Boolean 
 IsCmdChar(
   const EventRecord *  event,
-  short                test);
+  short                test)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -674,17 +728,23 @@ IsCmdChar(
 /*
  *  LMGetKeyThresh()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern SInt16 
-LMGetKeyThresh(void);
+LMGetKeyThresh(void)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LMSetKeyThresh()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -692,24 +752,30 @@ LMGetKeyThresh(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetKeyThresh(SInt16 value);
+LMSetKeyThresh(SInt16 value)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  LMGetKeyRepThresh()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern SInt16 
-LMGetKeyRepThresh(void);
+LMGetKeyRepThresh(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LMSetKeyRepThresh()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -717,11 +783,14 @@ LMGetKeyRepThresh(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetKeyRepThresh(SInt16 value);
+LMSetKeyRepThresh(SInt16 value)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LMGetKbdLast()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -729,11 +798,14 @@ LMSetKeyRepThresh(SInt16 value);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern UInt8 
-LMGetKbdLast(void);
+LMGetKbdLast(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LMSetKbdLast()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -741,24 +813,30 @@ LMGetKbdLast(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetKbdLast(UInt8 value);
+LMSetKbdLast(UInt8 value)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  LMGetKbdType()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern UInt8 
-LMGetKbdType(void);
+LMGetKbdType(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LMSetKbdType()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -766,17 +844,11 @@ LMGetKbdType(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetKbdType(UInt8 value);
+LMSetKbdType(UInt8 value)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

@@ -3,9 +3,9 @@
  
      Contains:   OSErr codes.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,7 @@
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -28,14 +29,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 enum {
@@ -142,6 +135,7 @@ enum {
   errFSBadIteratorFlags         = -1422, /* Flags passed to FSOpenIterator are bad */
   errFSIteratorNotFound         = -1423, /* Passed FSIterator is not an open iterator */
   errFSIteratorNotSupported     = -1424, /* The iterator's flags or container are not supported by this call */
+  errFSQuotaExceeded            = -1425, /* The user's quota of disk blocks has been exhausted. */
   envNotPresent                 = -5500, /*returned by glue.*/
   envBadVers                    = -5501, /*Version non-positive*/
   envVersTooBig                 = -5502, /*Version bigger than call can handle*/
@@ -266,7 +260,7 @@ enum {
   cDevErr                       = -155, /*invalid type of graphics device*/
   cResErr                       = -156, /*invalid resolution for MakeITable*/
   cDepthErr                     = -157, /*invalid pixel depth */
-  rgnTooBigErr                  = -500,
+  rgnTooBigErr                  = -500, /* should have never been added! (cf. rgnTooBigError = 147) */
   updPixMemErr                  = -125, /*insufficient memory to update a pixmap*/
   pictInfoVersionErr            = -11000, /*wrong version of the PictInfo structure*/
   pictInfoIDErr                 = -11001, /*the internal consistancy check for the PictInfoID is wrong*/
@@ -1001,7 +995,10 @@ enum {
   tsmNoHandler                  = -2521, /* No Callback Handler exists for callback */
   tsmNoMoreTokens               = -2522, /* No more tokens are available for the source text */
   tsmNoStem                     = -2523, /* No stem exists for the token */
-  tsmDefaultIsNotInputMethodErr = -2524 /* Current Input source is KCHR or uchr, not Input Method  (GetDefaultInputMethod) */
+  tsmDefaultIsNotInputMethodErr = -2524, /* Current Input source is KCHR or uchr, not Input Method  (GetDefaultInputMethod) */
+  tsmDocPropertyNotFoundErr     = -2528, /* Requested TSM Document property not found */
+  tsmDocPropertyBufferTooSmallErr = -2529, /* Buffer passed in for property value is too small */
+  tsmCantChangeForcedClassStateErr = -2530 /* Enabled state of a TextService class has been forced and cannot be changed */
 };
 
 
@@ -1343,6 +1340,17 @@ enum {
   kOTUserRequestedErr           = -3284, /*                          */
   kOTPortLostConnection         = -3285 /*                          */
 };
+
+
+/* Additional Quickdraw errors in the assigned range -3950 .. -3999*/
+enum {
+  kQDNoPalette                  = -3950, /* PaletteHandle is NULL*/
+  kQDNoColorHWCursorSupport     = -3951, /* CGSSystemSupportsColorHardwareCursors() returned false*/
+  kQDCursorAlreadyRegistered    = -3952, /* can be returned from QDRegisterNamedPixMapCursor()*/
+  kQDCursorNotRegistered        = -3953, /* can be returned from QDSetNamedPixMapCursor()*/
+  kQDCorruptPICTDataErr         = -3954
+};
+
 
 
 /* Color Picker errors*/
@@ -1937,7 +1945,9 @@ enum {
 
 
 
-/* ATSUnicode error codes*/
+/* ATSUI Error Codes - Range 1 of 2*/
+
+
 enum {
   kATSUInvalidTextLayoutErr     = -8790, /*    An attempt was made to use a ATSUTextLayout */
                                         /*    which hadn't been initialized or is otherwise */
@@ -1992,12 +2002,13 @@ enum {
   kATSULineBreakInWord          = -8808, /*    This is not an error code but is returned by ATSUBreakLine to */
                                         /*    indicate that the returned offset is within a word since there was*/
                                         /*    only less than one word that could fit the requested width.*/
-  kATSUBusyObjectErr            = -8809, /*    An ATSUI object is being used by another thread */
-  kATSUInvalidFontFallbacksErr  = -8810, /*    An attempt was made to use a ATSUFontFallbacks */
-                                        /*    which hadn't been initialized or is otherwise */
-                                        /*    in an invalid state. */
-  kATSULastErr                  = -8811 /*    The last ATSUI error code.*/
+  kATSUBusyObjectErr            = -8809 /*    An ATSUI object is being used by another thread */
 };
+
+/*
+   kATSUInvalidFontFallbacksErr, which had formerly occupied -8810 has been relocated to error code -8900. See
+   below in this range for additional error codes.
+*/
 
 
 /* Error & status codes for general text and text encoding conversion*/
@@ -2050,6 +2061,26 @@ enum {
 };
 
 
+/* ATSUI Error Codes - Range 2 of 2*/
+
+
+enum {
+  kATSUInvalidFontFallbacksErr  = -8900, /*    An attempt was made to use a ATSUFontFallbacks which hadn't */
+                                        /*    been initialized or is otherwise in an invalid state. */
+  kATSUUnsupportedStreamFormatErr = -8901, /*    An attempt was made to use a ATSUFlattenedDataStreamFormat*/
+                                        /*    which is invalid is not compatible with this version of ATSUI.*/
+  kATSUBadStreamErr             = -8902, /*    An attempt was made to use a stream which is incorrectly*/
+                                        /*    structured, contains bad or out of range values or is*/
+                                        /*    missing required information.*/
+  kATSUOutputBufferTooSmallErr  = -8903, /*    An attempt was made to use an output buffer which was too small*/
+                                        /*    for the requested operation.*/
+  kATSUInvalidCallInsideCallbackErr = -8904, /*    A call was made within the context of a callback that could*/
+                                        /*    potetially cause an infinite recursion*/
+  kATSULastErr                  = -8959 /*    The last ATSUI error code.*/
+};
+
+
+/* QuickTime errors (Image Compression Manager) */
 enum {
   codecErr                      = -8960,
   noCodecErr                    = -8961,
@@ -2084,7 +2115,9 @@ enum {
   codecDroppedFrameErr          = -8989, /* returned from ImageCodecDrawBand */
   directXObjectAlreadyExists    = -8990,
   lockPortBitsWrongGDeviceErr   = -8991,
-  codecOffscreenFailedPleaseRetryErr = -8992
+  codecOffscreenFailedPleaseRetryErr = -8992,
+  badCodecCharacterizationErr   = -8993,
+  noThumbnailFoundErr           = -8994
 };
 
 
@@ -2674,7 +2707,8 @@ enum {
   themeHasNoAccentsErr          = -30564,
   themeBadCursorIndexErr        = -30565,
   themeScriptFontNotFoundErr    = -30566, /* theme font requested for uninstalled script system */
-  themeMonitorDepthNotSupportedErr = -30567 /* theme not supported at monitor depth */
+  themeMonitorDepthNotSupportedErr = -30567, /* theme not supported at monitor depth */
+  themeNoAppropriateBrushErr    = -30568 /* theme brush has no corresponding theme text color */
 };
 
 
@@ -2865,19 +2899,11 @@ enum {
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SysError(short errorCode);
+SysError(short errorCode)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

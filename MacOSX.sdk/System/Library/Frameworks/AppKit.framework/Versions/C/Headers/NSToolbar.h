@@ -14,6 +14,7 @@
 @class NSMutableArray;
 
 typedef enum { NSToolbarDisplayModeDefault, NSToolbarDisplayModeIconAndLabel, NSToolbarDisplayModeIconOnly, NSToolbarDisplayModeLabelOnly } NSToolbarDisplayMode;
+typedef enum { NSToolbarSizeModeDefault, NSToolbarSizeModeRegular, NSToolbarSizeModeSmall } NSToolbarSizeMode;
 
 @interface NSToolbar : NSObject {
 @private
@@ -36,12 +37,12 @@ typedef enum { NSToolbarDisplayModeDefault, NSToolbarDisplayModeIconAndLabel, NS
     
     struct __tbFlags {
 	unsigned int allowsUserCustomization:1;
-	unsigned int autosavesUsingIdentifer:1;
+	unsigned int autosavesUsingIdentifier:1;
 	unsigned int initialConfigurationDone:1;
 	unsigned int shouldHideAfterCustomization:1;
-	unsigned int delegateWillAddItem:1;
-	unsigned int delegateDidRemoveItem:1;
-        unsigned int delegateItemWithItemIdentifer:1;
+        unsigned int delegateDefaultItemIdentifiers:1;
+        unsigned int delegateAllowedItemIdentifiers:1;
+        unsigned int delegateItemWithItemIdentifier:1;
 	unsigned int delegateNotificationsEnabled:1;
         unsigned int prefersToBeShown:1;
         unsigned int loadItemsImmediately:1;
@@ -52,7 +53,8 @@ typedef enum { NSToolbarDisplayModeDefault, NSToolbarDisplayModeIconAndLabel, NS
         unsigned int showsNoContextMenu:1;
         unsigned int firstMoveableItemIndex:6;
         unsigned int keyboardLoopNeedsUpdating:1;
-	unsigned int RESERVED:10;
+        unsigned int showHideDuringConfigurationChangeDisabled:1;
+	unsigned int RESERVED:9;
     } _tbFlags;
 
     int				_customizationSheetWidth;
@@ -83,6 +85,11 @@ typedef enum { NSToolbarDisplayModeDefault, NSToolbarDisplayModeIconAndLabel, NS
 
 - (void)setDisplayMode:(NSToolbarDisplayMode)displayMode;
 - (NSToolbarDisplayMode)displayMode;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (void)setSizeMode:(NSToolbarSizeMode)sizeMode;
+- (NSToolbarSizeMode)sizeMode;
+#endif
 
 - (void)setAllowsUserCustomization:(BOOL)allowCustomization;
 - (BOOL)allowsUserCustomization;

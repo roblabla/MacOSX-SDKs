@@ -3,9 +3,9 @@
  
      Contains:   Multiprocessing interfaces
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1995-2001 DayStar Digital, Inc.
+     Copyright:  © 1995-2002 DayStar Digital, Inc.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -32,6 +32,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -41,13 +42,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=power
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=power
 
 
 /*
@@ -280,7 +275,7 @@ enum {
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern ItemCount 
-MPProcessors(void);
+MPProcessors(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* The physical total.*/
@@ -294,7 +289,7 @@ MPProcessors(void);
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern ItemCount 
-MPProcessorsScheduled(void);
+MPProcessorsScheduled(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Those currently in use.*/
@@ -341,7 +336,7 @@ MPCreateTask(
   void *          terminationParameter1,
   void *          terminationParameter2,
   MPTaskOptions   options,
-  MPTaskID *      task);
+  MPTaskID *      task)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -357,7 +352,7 @@ MPCreateTask(
 extern OSStatus 
 MPTerminateTask(
   MPTaskID   task,
-  OSStatus   terminationStatus);
+  OSStatus   terminationStatus)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -373,7 +368,7 @@ MPTerminateTask(
 extern OSStatus 
 MPSetTaskWeight(
   MPTaskID       task,
-  MPTaskWeight   weight);
+  MPTaskWeight   weight)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -387,7 +382,7 @@ MPSetTaskWeight(
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern Boolean 
-MPTaskIsPreemptive(MPTaskID taskID);
+MPTaskIsPreemptive(MPTaskID taskID)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* May be kInvalidID.*/
@@ -401,7 +396,7 @@ MPTaskIsPreemptive(MPTaskID taskID);
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern void 
-MPExit(OSStatus status);
+MPExit(OSStatus status)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -415,7 +410,7 @@ MPExit(OSStatus status);
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern void 
-MPYield(void);
+MPYield(void)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -429,7 +424,7 @@ MPYield(void);
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern MPTaskID 
-MPCurrentTaskID(void);
+MPCurrentTaskID(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -445,7 +440,7 @@ MPCurrentTaskID(void);
 extern OSStatus 
 MPSetTaskType(
   MPTaskID   task,
-  OSType     taskType);
+  OSType     taskType)                                        AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -468,7 +463,7 @@ MPSetTaskType(
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPAllocateTaskStorageIndex(TaskStorageIndex * index);
+MPAllocateTaskStorageIndex(TaskStorageIndex * index)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -482,7 +477,7 @@ MPAllocateTaskStorageIndex(TaskStorageIndex * index);
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPDeallocateTaskStorageIndex(TaskStorageIndex index);
+MPDeallocateTaskStorageIndex(TaskStorageIndex index)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -498,7 +493,7 @@ MPDeallocateTaskStorageIndex(TaskStorageIndex index);
 extern OSStatus 
 MPSetTaskStorageValue(
   TaskStorageIndex   index,
-  TaskStorageValue   value);
+  TaskStorageValue   value)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -512,7 +507,7 @@ MPSetTaskStorageValue(
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern TaskStorageValue 
-MPGetTaskStorageValue(TaskStorageIndex index);
+MPGetTaskStorageValue(TaskStorageIndex index)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -534,7 +529,7 @@ MPGetTaskStorageValue(TaskStorageIndex index);
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPCreateQueue(MPQueueID * queue);
+MPCreateQueue(MPQueueID * queue)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -548,7 +543,7 @@ MPCreateQueue(MPQueueID * queue);
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPDeleteQueue(MPQueueID queue);
+MPDeleteQueue(MPQueueID queue)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -566,7 +561,7 @@ MPNotifyQueue(
   MPQueueID   queue,
   void *      param1,
   void *      param2,
-  void *      param3);
+  void *      param3)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -585,7 +580,7 @@ MPWaitOnQueue(
   void **     param1,
   void **     param2,
   void **     param3,
-  Duration    timeout);
+  Duration    timeout)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -601,7 +596,7 @@ MPWaitOnQueue(
 extern OSStatus 
 MPSetQueueReserve(
   MPQueueID   queue,
-  ItemCount   count);
+  ItemCount   count)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -621,7 +616,7 @@ extern OSStatus
 MPCreateSemaphore(
   MPSemaphoreCount   maximumValue,
   MPSemaphoreCount   initialValue,
-  MPSemaphoreID *    semaphore);
+  MPSemaphoreID *    semaphore)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -635,7 +630,7 @@ MPCreateSemaphore(
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPDeleteSemaphore(MPSemaphoreID semaphore);
+MPDeleteSemaphore(MPSemaphoreID semaphore)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -649,7 +644,7 @@ MPDeleteSemaphore(MPSemaphoreID semaphore);
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPSignalSemaphore(MPSemaphoreID semaphore);
+MPSignalSemaphore(MPSemaphoreID semaphore)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -665,7 +660,7 @@ MPSignalSemaphore(MPSemaphoreID semaphore);
 extern OSStatus 
 MPWaitOnSemaphore(
   MPSemaphoreID   semaphore,
-  Duration        timeout);
+  Duration        timeout)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -685,7 +680,7 @@ MPWaitOnSemaphore(
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPCreateCriticalRegion(MPCriticalRegionID * criticalRegion);
+MPCreateCriticalRegion(MPCriticalRegionID * criticalRegion)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -699,7 +694,7 @@ MPCreateCriticalRegion(MPCriticalRegionID * criticalRegion);
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPDeleteCriticalRegion(MPCriticalRegionID criticalRegion);
+MPDeleteCriticalRegion(MPCriticalRegionID criticalRegion)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -715,7 +710,7 @@ MPDeleteCriticalRegion(MPCriticalRegionID criticalRegion);
 extern OSStatus 
 MPEnterCriticalRegion(
   MPCriticalRegionID   criticalRegion,
-  Duration             timeout);
+  Duration             timeout)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -729,7 +724,7 @@ MPEnterCriticalRegion(
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPExitCriticalRegion(MPCriticalRegionID criticalRegion);
+MPExitCriticalRegion(MPCriticalRegionID criticalRegion)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -745,7 +740,7 @@ MPExitCriticalRegion(MPCriticalRegionID criticalRegion);
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPCreateEvent(MPEventID * event);
+MPCreateEvent(MPEventID * event)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -758,7 +753,7 @@ MPCreateEvent(MPEventID * event);
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPDeleteEvent(MPEventID event);
+MPDeleteEvent(MPEventID event)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -774,7 +769,7 @@ MPDeleteEvent(MPEventID event);
 extern OSStatus 
 MPSetEvent(
   MPEventID      event,
-  MPEventFlags   flags);
+  MPEventFlags   flags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -790,7 +785,7 @@ extern OSStatus
 MPWaitForEvent(
   MPEventID       event,
   MPEventFlags *  flags,
-  Duration        timeout);
+  Duration        timeout)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -811,7 +806,7 @@ MPWaitForEvent(
  *    Non-Carbon CFM:   in MPLibrary 2.1 and later
  */
 extern OSStatus 
-MPCreateNotification(MPNotificationID * notificationID);
+MPCreateNotification(MPNotificationID * notificationID)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -825,7 +820,7 @@ MPCreateNotification(MPNotificationID * notificationID);
  *    Non-Carbon CFM:   in MPLibrary 2.1 and later
  */
 extern OSStatus 
-MPDeleteNotification(MPNotificationID notificationID);
+MPDeleteNotification(MPNotificationID notificationID)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -844,7 +839,7 @@ MPModifyNotification(
   MPOpaqueID         anID,
   void *             notifyParam1,
   void *             notifyParam2,
-  void *             notifyParam3);
+  void *             notifyParam3)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -863,7 +858,7 @@ MPModifyNotificationParameters(
   MPOpaqueIDClass    kind,
   void *             notifyParam1,
   void *             notifyParam2,
-  void *             notifyParam3);
+  void *             notifyParam3)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -877,7 +872,7 @@ MPModifyNotificationParameters(
  *    Non-Carbon CFM:   in MPLibrary 2.1 and later
  */
 extern OSStatus 
-MPCauseNotification(MPNotificationID notificationID);
+MPCauseNotification(MPNotificationID notificationID)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -914,7 +909,7 @@ enum {
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPDelayUntil(AbsoluteTime * expirationTime);
+MPDelayUntil(AbsoluteTime * expirationTime)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -940,7 +935,7 @@ MPDelayUntil(AbsoluteTime * expirationTime);
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPCreateTimer(MPTimerID * timerID);
+MPCreateTimer(MPTimerID * timerID)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -954,7 +949,7 @@ MPCreateTimer(MPTimerID * timerID);
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPDeleteTimer(MPTimerID timerID);
+MPDeleteTimer(MPTimerID timerID)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -973,7 +968,7 @@ MPSetTimerNotify(
   MPOpaqueID   anID,
   void *       notifyParam1,
   void *       notifyParam2,
-  void *       notifyParam3);
+  void *       notifyParam3)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -990,7 +985,7 @@ extern OSStatus
 MPArmTimer(
   MPTimerID       timerID,
   AbsoluteTime *  expirationTime,
-  OptionBits      options);
+  OptionBits      options)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1006,7 +1001,7 @@ MPArmTimer(
 extern OSStatus 
 MPCancelTimer(
   MPTimerID       timerID,
-  AbsoluteTime *  timeRemaining);
+  AbsoluteTime *  timeRemaining)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1066,7 +1061,7 @@ extern LogicalAddress
 MPAllocateAligned(
   ByteCount    size,
   UInt8        alignment,
-  OptionBits   options);
+  OptionBits   options)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* ! MPAllocateAligned is new in version 2.0.*/
@@ -1080,7 +1075,7 @@ MPAllocateAligned(
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern LogicalAddress 
-MPAllocate(ByteCount size);
+MPAllocate(ByteCount size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Use MPAllocateAligned instead.*/
@@ -1094,7 +1089,7 @@ MPAllocate(ByteCount size);
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern void 
-MPFree(LogicalAddress object);
+MPFree(LogicalAddress object)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1108,7 +1103,7 @@ MPFree(LogicalAddress object);
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern ByteCount 
-MPGetAllocatedBlockSize(LogicalAddress object);
+MPGetAllocatedBlockSize(LogicalAddress object)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1128,7 +1123,7 @@ extern void
 MPBlockCopy(
   LogicalAddress   source,
   LogicalAddress   destination,
-  ByteCount        size);
+  ByteCount        size)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1144,7 +1139,7 @@ MPBlockCopy(
 extern void 
 MPBlockClear(
   LogicalAddress   address,
-  ByteCount        size);
+  ByteCount        size)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* ! MPBlockClear is new in version 2.0.*/
@@ -1160,7 +1155,7 @@ MPBlockClear(
 extern void 
 MPDataToCode(
   LogicalAddress   address,
-  ByteCount        size);
+  ByteCount        size)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* ! MPDataToCode is new in version 2.0.*/
@@ -1322,7 +1317,7 @@ typedef struct MPTaskInfo               MPTaskInfo;
 extern OSStatus 
 MPSetExceptionHandler(
   MPTaskID    task,
-  MPQueueID   exceptionQ);
+  MPQueueID   exceptionQ)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1338,7 +1333,7 @@ MPSetExceptionHandler(
 extern OSStatus 
 MPDisposeTaskException(
   MPTaskID     task,
-  OptionBits   action);
+  OptionBits   action)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1355,7 +1350,7 @@ extern OSStatus
 MPExtractTaskState(
   MPTaskID          task,
   MPTaskStateKind   kind,
-  void *            info);
+  void *            info)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1372,7 +1367,7 @@ extern OSStatus
 MPSetTaskState(
   MPTaskID          task,
   MPTaskStateKind   kind,
-  void *            info);
+  void *            info)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1388,7 +1383,7 @@ MPSetTaskState(
 extern OSStatus 
 MPThrowException(
   MPTaskID          task,
-  MPExceptionKind   kind);
+  MPExceptionKind   kind)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1415,7 +1410,7 @@ enum {
 extern OSStatus 
 MPRegisterDebugger(
   MPQueueID         queue,
-  MPDebuggerLevel   level);
+  MPDebuggerLevel   level)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1429,7 +1424,7 @@ MPRegisterDebugger(
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPUnregisterDebugger(MPQueueID queue);
+MPUnregisterDebugger(MPQueueID queue)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1466,7 +1461,7 @@ extern void *
 MPRemoteCall(
   MPRemoteProcedure   remoteProc,
   void *              parameter,
-  MPRemoteContext     context);
+  MPRemoteContext     context)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* ! MPRemoteCall is new in version 2.0.*/
@@ -1543,7 +1538,7 @@ MPRemoteCall(
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern Boolean 
-_MPIsFullyInitialized(void);
+_MPIsFullyInitialized(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 typedef CALLBACK_API_C( Boolean , MPIsFullyInitializedProc )(void);
@@ -1573,7 +1568,7 @@ _MPLibraryVersion(
   UInt32 *       major,
   UInt32 *       minor,
   UInt32 *       release,
-  UInt32 *       revision);
+  UInt32 *       revision)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1643,7 +1638,7 @@ _MPLibraryIsCompatible(
   UInt32        major,
   UInt32        minor,
   UInt32        release,
-  UInt32        revision);
+  UInt32        revision)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1724,13 +1719,7 @@ typedef CALLBACK_API_C( void , MPPrintfHandler )(MPTaskID taskID, const char *fo
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

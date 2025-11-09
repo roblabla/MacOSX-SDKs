@@ -3,9 +3,9 @@
  
      Contains:   Apple Speech Recognition Toolbox Interfaces.
  
-     Version:    SpeechRecognition-3_0_2f1~1
+     Version:    SpeechRecognition-3.2.1~4
  
-     Copyright:  © 1992-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1992-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,7 @@
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -30,13 +31,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* Error Codes [Speech recognition gets -5100 through -5199] */
 enum {
@@ -118,7 +113,7 @@ typedef STACK_UPP_TYPE(SRCallBackProcPtr)                       SRCallBackUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SRCallBackUPP
-NewSRCallBackUPP(SRCallBackProcPtr userRoutine);
+NewSRCallBackUPP(SRCallBackProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeSRCallBackUPP()
@@ -129,7 +124,7 @@ NewSRCallBackUPP(SRCallBackProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSRCallBackUPP(SRCallBackUPP userUPP);
+DisposeSRCallBackUPP(SRCallBackUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeSRCallBackUPP()
@@ -142,7 +137,7 @@ DisposeSRCallBackUPP(SRCallBackUPP userUPP);
 extern void
 InvokeSRCallBackUPP(
   SRCallBackStruct *  param,
-  SRCallBackUPP       userUPP);
+  SRCallBackUPP       userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 struct SRCallBackParam {
   SRCallBackUPP       callBack;
@@ -322,7 +317,7 @@ enum {
 extern OSErr 
 SROpenRecognitionSystem(
   SRRecognitionSystem *  system,
-  OSType                 systemID);
+  OSType                 systemID)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -334,7 +329,7 @@ SROpenRecognitionSystem(
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SRCloseRecognitionSystem(SRRecognitionSystem system);
+SRCloseRecognitionSystem(SRRecognitionSystem system)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Accessing Properties of any Speech Object */
@@ -351,7 +346,7 @@ SRSetProperty(
   SRSpeechObject   srObject,
   OSType           selector,
   const void *     property,
-  Size             propertyLen);
+  Size             propertyLen)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -367,7 +362,7 @@ SRGetProperty(
   SRSpeechObject   srObject,
   OSType           selector,
   void *           property,
-  Size *           propertyLen);
+  Size *           propertyLen)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Any object obtained via New or Get type calls must be released */
@@ -380,7 +375,7 @@ SRGetProperty(
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SRReleaseObject(SRSpeechObject srObject);
+SRReleaseObject(SRSpeechObject srObject)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -394,7 +389,7 @@ SRReleaseObject(SRSpeechObject srObject);
 extern OSErr 
 SRGetReference(
   SRSpeechObject    srObject,
-  SRSpeechObject *  newObjectRef);
+  SRSpeechObject *  newObjectRef)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* SRRecognizer Instance Functions */
@@ -410,7 +405,7 @@ extern OSErr
 SRNewRecognizer(
   SRRecognitionSystem   system,
   SRRecognizer *        recognizer,
-  OSType                sourceID);
+  OSType                sourceID)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -422,7 +417,7 @@ SRNewRecognizer(
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SRStartListening(SRRecognizer recognizer);
+SRStartListening(SRRecognizer recognizer)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -434,7 +429,7 @@ SRStartListening(SRRecognizer recognizer);
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SRStopListening(SRRecognizer recognizer);
+SRStopListening(SRRecognizer recognizer)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -448,7 +443,7 @@ SRStopListening(SRRecognizer recognizer);
 extern OSErr 
 SRSetLanguageModel(
   SRRecognizer      recognizer,
-  SRLanguageModel   languageModel);
+  SRLanguageModel   languageModel)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -462,7 +457,7 @@ SRSetLanguageModel(
 extern OSErr 
 SRGetLanguageModel(
   SRRecognizer       recognizer,
-  SRLanguageModel *  languageModel);
+  SRLanguageModel *  languageModel)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -474,7 +469,7 @@ SRGetLanguageModel(
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SRContinueRecognition(SRRecognizer recognizer);
+SRContinueRecognition(SRRecognizer recognizer)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -486,7 +481,7 @@ SRContinueRecognition(SRRecognizer recognizer);
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SRCancelRecognition(SRRecognizer recognizer);
+SRCancelRecognition(SRRecognizer recognizer)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -498,7 +493,7 @@ SRCancelRecognition(SRRecognizer recognizer);
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SRIdle(void);
+SRIdle(void)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Language Model Building and Manipulation Functions */
@@ -515,7 +510,7 @@ SRNewLanguageModel(
   SRRecognitionSystem   system,
   SRLanguageModel *     model,
   const void *          name,
-  Size                  nameLength);
+  Size                  nameLength)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -529,7 +524,7 @@ SRNewLanguageModel(
 extern OSErr 
 SRNewPath(
   SRRecognitionSystem   system,
-  SRPath *              path);
+  SRPath *              path)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -545,7 +540,7 @@ SRNewPhrase(
   SRRecognitionSystem   system,
   SRPhrase *            phrase,
   const void *          text,
-  Size                  textLength);
+  Size                  textLength)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -561,7 +556,7 @@ SRNewWord(
   SRRecognitionSystem   system,
   SRWord *              word,
   const void *          text,
-  Size                  textLength);
+  Size                  textLength)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Operations on any object of the SRLanguageObject family */
@@ -576,7 +571,7 @@ SRNewWord(
 extern OSErr 
 SRPutLanguageObjectIntoHandle(
   SRLanguageObject   languageObject,
-  Handle             lobjHandle);
+  Handle             lobjHandle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -590,7 +585,7 @@ SRPutLanguageObjectIntoHandle(
 extern OSErr 
 SRPutLanguageObjectIntoDataFile(
   SRLanguageObject   languageObject,
-  short              fRefNum);
+  short              fRefNum)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -605,7 +600,7 @@ extern OSErr
 SRNewLanguageObjectFromHandle(
   SRRecognitionSystem   system,
   SRLanguageObject *    languageObject,
-  Handle                lObjHandle);
+  Handle                lObjHandle)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -620,7 +615,7 @@ extern OSErr
 SRNewLanguageObjectFromDataFile(
   SRRecognitionSystem   system,
   SRLanguageObject *    languageObject,
-  short                 fRefNum);
+  short                 fRefNum)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -632,7 +627,7 @@ SRNewLanguageObjectFromDataFile(
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SREmptyLanguageObject(SRLanguageObject languageObject);
+SREmptyLanguageObject(SRLanguageObject languageObject)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -647,7 +642,7 @@ extern OSErr
 SRChangeLanguageObject(
   SRLanguageObject   languageObject,
   const void *       text,
-  Size               textLength);
+  Size               textLength)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -661,7 +656,7 @@ SRChangeLanguageObject(
 extern OSErr 
 SRAddLanguageObject(
   SRLanguageObject   base,
-  SRLanguageObject   addon);
+  SRLanguageObject   addon)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -677,7 +672,7 @@ SRAddText(
   SRLanguageObject   base,
   const void *       text,
   Size               textLength,
-  long               refCon);
+  long               refCon)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -691,7 +686,7 @@ SRAddText(
 extern OSErr 
 SRRemoveLanguageObject(
   SRLanguageObject   base,
-  SRLanguageObject   toRemove);
+  SRLanguageObject   toRemove)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Traversing SRRecognitionResults or SRLanguageObjects */
@@ -706,7 +701,7 @@ SRRemoveLanguageObject(
 extern OSErr 
 SRCountItems(
   SRSpeechObject   container,
-  long *           count);
+  long *           count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -721,7 +716,7 @@ extern OSErr
 SRGetIndexedItem(
   SRSpeechObject    container,
   SRSpeechObject *  item,
-  long              index);
+  long              index)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -736,7 +731,7 @@ extern OSErr
 SRSetIndexedItem(
   SRSpeechObject   container,
   SRSpeechObject   item,
-  long             index);
+  long             index)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -750,7 +745,7 @@ SRSetIndexedItem(
 extern OSErr 
 SRRemoveIndexedItem(
   SRSpeechObject   container,
-  long             index);
+  long             index)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Utilizing the System Feedback Window */
@@ -766,7 +761,7 @@ extern OSErr
 SRDrawText(
   SRRecognizer   recognizer,
   const void *   dispText,
-  Size           dispLength);
+  Size           dispLength)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -781,7 +776,7 @@ extern OSErr
 SRDrawRecognizedText(
   SRRecognizer   recognizer,
   const void *   dispText,
-  Size           dispLength);
+  Size           dispLength)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -796,7 +791,7 @@ extern OSErr
 SRSpeakText(
   SRRecognizer   recognizer,
   const void *   speakText,
-  Size           speakLength);
+  Size           speakLength)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -811,7 +806,7 @@ extern OSErr
 SRSpeakAndDrawText(
   SRRecognizer   recognizer,
   const void *   text,
-  Size           textLength);
+  Size           textLength)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -823,7 +818,7 @@ SRSpeakAndDrawText(
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SRStopSpeech(SRRecognizer recognizer);
+SRStopSpeech(SRRecognizer recognizer)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -835,7 +830,7 @@ SRStopSpeech(SRRecognizer recognizer);
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern Boolean 
-SRSpeechBusy(SRRecognizer recognizer);
+SRSpeechBusy(SRRecognizer recognizer)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -849,7 +844,7 @@ SRSpeechBusy(SRRecognizer recognizer);
 extern OSErr 
 SRProcessBegin(
   SRRecognizer   recognizer,
-  Boolean        failed);
+  Boolean        failed)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -863,19 +858,13 @@ SRProcessBegin(
 extern OSErr 
 SRProcessEnd(
   SRRecognizer   recognizer,
-  Boolean        failed);
+  Boolean        failed)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

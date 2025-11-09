@@ -3,9 +3,9 @@
  
      Contains:   TextEncoding-related types and constants, and prototypes for related functions
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1995-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1995-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,6 +22,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -31,13 +32,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* TextEncodingBase type & values */
 /* (values 0-32 correspond to the Script Codes defined in Inside Macintosh: Text pages 6-52 and 6-53 */
@@ -241,7 +236,8 @@ enum {
 
 /* Other platform encodings*/
 enum {
-  kTextEncodingNextStepLatin    = 0x0B01 /* NextStep encoding*/
+  kTextEncodingNextStepLatin    = 0x0B01, /* NextStep Latin encoding*/
+  kTextEncodingNextStepJapanese = 0x0B02 /* NextStep Japanese encoding (variant of EUC-JP)*/
 };
 
 /* EBCDIC & IBM host encodings begin at 0xC00*/
@@ -347,7 +343,10 @@ enum {
 /* Variants of Unicode & ISO 10646 encodings*/
 enum {
   kUnicodeNoSubset              = 0,
-  kUnicodeCanonicalDecompVariant = 2    /* canonical decomposition; excludes composed characters*/
+  kUnicodeCanonicalDecompVariant = 2,   /* canonical decomposition (NFD); excludes composed characters*/
+  kUnicodeCanonicalCompVariant  = 3,    /* canonical composition (NFC); uses the composed chars as of Unicode 3.1*/
+  kUnicodeHFSPlusDecompVariant  = 8,    /* decomposition for HFS+; doesn't decompose in 2000-2FFF, F900-FAFF, 2F800-2FAFF*/
+  kUnicodeHFSPlusCompVariant    = 9     /* composition based on HFS+ decomposition*/
 };
 
 /* Variants of Big-5 encoding*/
@@ -370,10 +369,8 @@ enum {
 /* Unicode variants not yet supported (and not fully defined)*/
 enum {
   kUnicodeNoCompatibilityVariant = 1,
-  kUnicodeNoComposedVariant     = 3,
   kUnicodeNoCorporateVariant    = 4
 };
-
 
 /* The following are older names for backward compatibility*/
 enum {
@@ -390,6 +387,7 @@ enum {
   kHebrewStandardVariant        = 0,
   kHebrewFigureSpaceVariant     = 1,
   kUnicodeMaxDecomposedVariant  = 2,    /* replaced by kUnicodeCanonicalDecompVariant*/
+  kUnicodeNoComposedVariant     = 3,    /* this really meant NoComposing; replaced by kUnicodeCanonicalCompVariant*/
                                         /* The following Japanese variant options were never supported and are now deprecated.*/
                                         /* In TEC 1.4 and later their functionality is replaced by the Unicode Converter options listed.*/
   kJapaneseNoOneByteKanaOption  = 0x20, /* replaced by UnicodeConverter option kUnicodeNoHalfwidthCharsBit*/
@@ -652,7 +650,7 @@ extern TextEncoding
 CreateTextEncoding(
   TextEncodingBase      encodingBase,
   TextEncodingVariant   encodingVariant,
-  TextEncodingFormat    encodingFormat);
+  TextEncodingFormat    encodingFormat)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -664,7 +662,7 @@ CreateTextEncoding(
  *    Non-Carbon CFM:   in TextCommon 1.1 and later
  */
 extern TextEncodingBase 
-GetTextEncodingBase(TextEncoding encoding);
+GetTextEncodingBase(TextEncoding encoding)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -676,7 +674,7 @@ GetTextEncodingBase(TextEncoding encoding);
  *    Non-Carbon CFM:   in TextCommon 1.1 and later
  */
 extern TextEncodingVariant 
-GetTextEncodingVariant(TextEncoding encoding);
+GetTextEncodingVariant(TextEncoding encoding)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -688,7 +686,7 @@ GetTextEncodingVariant(TextEncoding encoding);
  *    Non-Carbon CFM:   in TextCommon 1.1 and later
  */
 extern TextEncodingFormat 
-GetTextEncodingFormat(TextEncoding encoding);
+GetTextEncodingFormat(TextEncoding encoding)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -700,7 +698,7 @@ GetTextEncodingFormat(TextEncoding encoding);
  *    Non-Carbon CFM:   in TextCommon 1.1 and later
  */
 extern TextEncoding 
-ResolveDefaultTextEncoding(TextEncoding encoding);
+ResolveDefaultTextEncoding(TextEncoding encoding)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -721,7 +719,7 @@ GetTextEncodingName(
   ByteCount *                oNameLength,
   RegionCode *               oActualRegion,            /* can be NULL */
   TextEncoding *             oActualEncoding,          /* can be NULL */
-  TextPtr                    oEncodingName);
+  TextPtr                    oEncodingName)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -733,7 +731,7 @@ GetTextEncodingName(
  *    Non-Carbon CFM:   in TextCommon 1.2.1 and later
  */
 extern OSStatus 
-TECGetInfo(TECInfoHandle * tecInfo);
+TECGetInfo(TECInfoHandle * tecInfo)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -751,7 +749,7 @@ UpgradeScriptInfoToTextEncoding(
   LangCode           iTextLanguageID,
   RegionCode         iRegionID,
   ConstStr255Param   iTextFontname,
-  TextEncoding *     oEncoding);
+  TextEncoding *     oEncoding)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -767,7 +765,38 @@ RevertTextEncodingToScriptInfo(
   TextEncoding   iEncoding,
   ScriptCode *   oTextScriptID,
   LangCode *     oTextLanguageID,       /* can be NULL */
-  Str255         oTextFontname);        /* can be NULL */
+  Str255         oTextFontname)         /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  GetTextEncodingFromScriptInfo()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+GetTextEncodingFromScriptInfo(
+  ScriptCode      iTextScriptID,
+  LangCode        iTextLanguageID,
+  RegionCode      iTextRegionID,
+  TextEncoding *  oEncoding)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  GetScriptInfoFromTextEncoding()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+GetScriptInfoFromTextEncoding(
+  TextEncoding   iEncoding,
+  ScriptCode *   oTextScriptID,
+  LangCode *     oTextLanguageID)       /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
@@ -782,7 +811,7 @@ extern OSStatus
 NearestMacTextEncodings(
   TextEncoding    generalEncoding,
   TextEncoding *  bestMacEncoding,
-  TextEncoding *  alternateMacEncoding);
+  TextEncoding *  alternateMacEncoding)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -798,17 +827,71 @@ UCGetCharProperty(
   const UniChar *        charPtr,
   UniCharCount           textLength,
   UCCharPropertyType     propType,
-  UCCharPropertyValue *  propValue);
+  UCCharPropertyValue *  propValue)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+   -------------------------------------------------------------------------------------------------
+   Surrogate pair utilities
+   -------------------------------------------------------------------------------------------------
+*/
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
+
+#if !defined(UC_INLINE)
+    #if defined(__GNUC__)
+ #define UC_INLINE static __inline__
+    #elif defined(__MWERKS__) || defined(__cplusplus)
+  #define UC_INLINE static inline
+    #endif
 #endif
+
+// surrogate ranges
+enum {
+  kUCHighSurrogateRangeStart  = 0xD800UL,
+    kUCHighSurrogateRangeEnd    = 0xDBFFUL,
+    kUCLowSurrogateRangeStart   = 0xDC00UL,
+    kUCLowSurrogateRangeEnd     = 0xDFFFUL
+};
+
+
+/*!
+   @function UCIsSurrogateHighCharacter
+   Reports whether or not the character is a high surrogate.
+  @param character  The character to be checked.
+ @result true, if character is a high surrogate, otherwise false.
+*/
+UC_INLINE Boolean UCIsSurrogateHighCharacter( UniChar character ) {
+    /* return ( ( character >= kUCHighSurrogateRangeStart ) && (character <= kUCHighSurrogateRangeEnd ) ? true : false ); */
+   return ( ( character & 0xFC00UL ) == kUCHighSurrogateRangeStart );
+}
+
+/*!
+  @function UCIsSurrogateLowCharacter
+    Reports whether or not the character is a low surrogate.
+   @param character  The character to be checked.
+ @result true, if character is a low surrogate, otherwise false.
+*/
+UC_INLINE Boolean UCIsSurrogateLowCharacter( UniChar character ) {
+  /* return ( ( character >= kUCLowSurrogateRangeStart ) && ( character <= kUCLowSurrogateRangeEnd ) ? true : false ); */
+    return ( ( character & 0xFC00UL ) == kUCLowSurrogateRangeStart );
+}
+
+/*!
+   @function UCGetUnicodeScalarValueForSurrogatePair
+  Returns the UTF-32 value corresponding to the surrogate pair passed in.
+    @param surrogateHigh  The high surrogate character.  If this parameter
+         is not a valid high surrogate character, the behavior is undefined.
+    @param surrogateLow  The low surrogate character.  If this parameter
+           is not a valid low surrogate character, the behavior is undefined.
+ @result The UTF-32 value for the surrogate pair.
+*/
+UC_INLINE UnicodeScalarValue UCGetUnicodeScalarValueForSurrogatePair( UniChar surrogateHigh, UniChar surrogateLow ) {
+  return ( ( surrogateHigh - kUCHighSurrogateRangeStart ) << 10 ) + ( surrogateLow - kUCLowSurrogateRangeStart ) + 0x0010000UL;
+}
+
+
+
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

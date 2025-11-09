@@ -1,5 +1,5 @@
 /*	CFBundle.h
-	Copyright 1999-2001, Apple, Inc. All rights reserved.
+	Copyright 1999-2002, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFBUNDLE__)
@@ -38,6 +38,11 @@ const CFStringRef kCFBundleDevelopmentRegionKey;
 CF_EXPORT
 const CFStringRef kCFBundleNameKey;
     /* The human-readable name of the bundle.  This key is often found in the InfoPlist.strings since it is usually localized. */
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+CF_EXPORT
+const CFStringRef kCFBundleLocalizationsKey;
+    /* Allows an unbundled application that handles localization itself to specify which localizations it has available. */
+#endif
 
 /* ===================== Finding Bundles ===================== */
 
@@ -125,7 +130,7 @@ CFDictionaryRef CFBundleCopyInfoDictionaryInDirectory(CFURLRef bundleURL);
 
 CF_EXPORT
 Boolean CFBundleGetPackageInfoInDirectory(CFURLRef url, UInt32 *packageType, UInt32 *packageCreator);
-
+    
 /* ==================== Resource Handling API ==================== */
 
 CF_EXPORT
@@ -143,6 +148,8 @@ CFStringRef CFBundleCopyLocalizedString(CFBundleRef bundle, CFStringRef key, CFS
             CFBundleCopyLocalizedString(CFBundleGetMainBundle(), (key), (key), (tbl))
 #define CFCopyLocalizedStringFromTableInBundle(key, tbl, bundle, comment) \
             CFBundleCopyLocalizedString((bundle), (key), (key), (tbl))
+#define CFCopyLocalizedStringWithDefaultValue(key, tbl, bundle, value, comment) \
+            CFBundleCopyLocalizedString((bundle), (key), (value), (tbl))
 
 /* ------------- Resource Handling without a CFBundle instance ------------- */
 /* This API is provided to enable developers to use the CFBundle resource */
@@ -159,7 +166,7 @@ CFArrayRef CFBundleCopyResourceURLsOfTypeInDirectory(CFURLRef bundleURL, CFStrin
 /* =========== Localization-specific Resource Handling API =========== */
 /* This API allows finer-grained control over specific localizations,  */
 /* as distinguished from the above API, which always uses the user's   */
-/* preferred localizations.  */
+/* preferred localizations for the bundle in the current app context.  */
 
 CF_EXPORT
 CFArrayRef CFBundleCopyBundleLocalizations(CFBundleRef bundle);
@@ -168,15 +175,49 @@ CFArrayRef CFBundleCopyBundleLocalizations(CFBundleRef bundle);
 CF_EXPORT
 CFArrayRef CFBundleCopyPreferredLocalizationsFromArray(CFArrayRef locArray);
     /* Given an array of possible localizations, returns the one or more */
-    /* that CFBundle would use in the current context. To find out which */
-    /* localizations are in use for a particular bundle, apply this to   */
-    /* the result of CFBundleCopyBundleLocalizations.  */
+    /* of them that CFBundle would use in the current application context. */
+    /* To determine the localizations that would be used for a particular */
+    /* bundle in the current application context, apply this function to the */
+    /* result of CFBundleCopyBundleLocalizations.  */
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+CF_EXPORT
+CFArrayRef CFBundleCopyLocalizationsForPreferences(CFArrayRef locArray, CFArrayRef prefArray);
+    /* Given an array of possible localizations, returns the one or more of */
+    /* them that CFBundle would use, without reference to the current application */
+    /* context, if the user's preferred localizations were given by prefArray. */
+    /* If prefArray is NULL, the current user's actual preferred localizations will */
+    /* be used. This is not the same as CFBundleCopyPreferredLocalizationsFromArray, */
+    /* because that function takes the current application context into account. */
+    /* To determine the localizations that another application would use, apply */
+    /* this function to the result of CFBundleCopyBundleLocalizations.  */
+#endif
 
 CF_EXPORT
 CFURLRef CFBundleCopyResourceURLForLocalization(CFBundleRef bundle, CFStringRef resourceName, CFStringRef resourceType, CFStringRef subDirName, CFStringRef localizationName);
 
 CF_EXPORT
 CFArrayRef CFBundleCopyResourceURLsOfTypeForLocalization(CFBundleRef bundle, CFStringRef resourceType, CFStringRef subDirName, CFStringRef localizationName);
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+/* =================== Unbundled application info ===================== */
+/* This API is provided to enable developers to retrieve bundle-related */
+/* information about an application that may be bundled or unbundled.   */
+CF_EXPORT
+CFDictionaryRef CFBundleCopyInfoDictionaryForURL(CFURLRef url);
+    /* For a directory URL, this is equivalent to CFBundleCopyInfoDictionaryInDirectory. */
+    /* For a plain file URL representing an unbundled application, this will attempt to read */
+    /* an info dictionary either from the (__TEXT, __info_plist) section (for a Mach-o file) */
+    /* or from a 'plst' resource.  */
+
+CF_EXPORT
+CFArrayRef CFBundleCopyLocalizationsForURL(CFURLRef url);
+    /* For a directory URL, this is equivalent to calling CFBundleCopyBundleLocalizations */
+    /* on the corresponding bundle.  For a plain file URL representing an unbundled application, */
+    /* this will attempt to determine its localizations using the CFBundleLocalizations and */
+    /* CFBundleDevelopmentRegion keys in the dictionary returned by CFBundleCopyInfoDictionaryForURL,*/
+    /* or a 'vers' resource if those are not present.  */
+#endif
 
 /* ==================== Primitive Code Loading API ==================== */
 /* This API abstracts the various different executable formats supported on */

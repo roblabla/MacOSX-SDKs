@@ -30,6 +30,7 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* netname_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
 #include <servers/netname_defs.h>
 
 #ifdef __BeforeMigUserHeader
@@ -89,6 +90,109 @@ kern_return_t netname_version
 	mach_port_t server_port,
 	netname_name_t version
 );
+/* typedefs for all requests */
+
+#ifndef __Request__netname_subsystem__defined
+#define __Request__netname_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t signature;
+		mach_msg_port_descriptor_t port_id;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t port_nameOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t port_nameCnt;
+		char port_name[80];
+	} __Request__netname_check_in_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t host_nameOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t host_nameCnt;
+		char host_name[80];
+		mach_msg_type_number_t port_nameOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t port_nameCnt;
+		char port_name[80];
+	} __Request__netname_look_up_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t signature;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t port_nameOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t port_nameCnt;
+		char port_name[80];
+	} __Request__netname_check_out_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__netname_version_t;
+
+#endif /* !__Request__netname_subsystem__defined */
+
+/* union of all requests */
+
+#ifndef __RequestUnion__netname_subsystem__defined
+#define __RequestUnion__netname_subsystem__defined
+union __RequestUnion__netname_subsystem {
+	__Request__netname_check_in_t Request_netname_check_in;
+	__Request__netname_look_up_t Request_netname_look_up;
+	__Request__netname_check_out_t Request_netname_check_out;
+	__Request__netname_version_t Request_netname_version;
+};
+#endif /* !__RequestUnion__netname_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__netname_subsystem__defined
+#define __Reply__netname_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__netname_check_in_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t port_id;
+		/* end of the kernel processed data */
+	} __Reply__netname_look_up_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__netname_check_out_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t versionOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t versionCnt;
+		char version[80];
+	} __Reply__netname_version_t;
+
+#endif /* !__Reply__netname_subsystem__defined */
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__netname_subsystem__defined
+#define __ReplyUnion__netname_subsystem__defined
+union __ReplyUnion__netname_subsystem {
+	__Reply__netname_check_in_t Reply_netname_check_in;
+	__Reply__netname_look_up_t Reply_netname_look_up;
+	__Reply__netname_check_out_t Reply_netname_check_out;
+	__Reply__netname_version_t Reply_netname_version;
+};
+#endif /* !__RequestUnion__netname_subsystem__defined */
 
 #ifndef subsystem_to_name_map_netname
 #define subsystem_to_name_map_netname \

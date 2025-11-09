@@ -30,6 +30,8 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* host_priv_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 #include <mach/mach_types.h>
 #include <mach_debug/mach_debug_types.h>
@@ -379,6 +381,479 @@ kern_return_t host_get_UNDServer
 	host_priv_t host,
 	UNDServerRef *server
 );
+/* typedefs for all requests */
+
+#ifndef __Request__host_priv_subsystem__defined
+#define __Request__host_priv_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__host_get_boot_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int options;
+	} __Request__host_reboot_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		host_flavor_t flavor;
+		mach_msg_type_number_t host_info_outCnt;
+	} __Request__host_priv_statistics_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t default_manager;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		vm_size_t cluster_size;
+	} __Request__host_default_memory_manager_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t task;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_size_t size;
+		vm_prot_t access;
+	} __Request__vm_wire_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t thread;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		boolean_t wired;
+	} __Request__thread_wire_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t task;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_size_t size;
+		boolean_t anywhere;
+	} __Request__vm_allocate_cpm_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__host_processors_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		clock_id_t clock_id;
+	} __Request__host_get_clock_control_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t info;
+	} __Request__kmod_create_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kmod_t module;
+	} __Request__kmod_destroy_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t data;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		kmod_t module;
+		kmod_control_flavor_t flavor;
+		mach_msg_type_number_t dataCnt;
+	} __Request__kmod_control_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int node;
+		int which;
+	} __Request__host_get_special_port_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t port;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		int which;
+	} __Request__host_set_special_port_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t new_port;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		exception_mask_t exception_mask;
+		exception_behavior_t behavior;
+		thread_state_flavor_t new_flavor;
+	} __Request__host_set_exception_ports_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		exception_mask_t exception_mask;
+	} __Request__host_get_exception_ports_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t new_port;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		exception_mask_t exception_mask;
+		exception_behavior_t behavior;
+		thread_state_flavor_t new_flavor;
+	} __Request__host_swap_exception_ports_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t task;
+		mach_msg_ool_descriptor_t symtab;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t nameOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t nameCnt;
+		char name[32];
+		mach_msg_type_number_t symtabCnt;
+	} __Request__host_load_symbol_table_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t target_task;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		boolean_t make_swappable;
+	} __Request__task_swappable_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__host_processor_sets_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t set_name;
+		/* end of the kernel processed data */
+	} __Request__host_processor_set_priv_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t control_port;
+		/* end of the kernel processed data */
+	} __Request__set_dp_control_port_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__get_dp_control_port_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t server;
+		/* end of the kernel processed data */
+	} __Request__host_set_UNDServer_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__host_get_UNDServer_t;
+
+#endif /* !__Request__host_priv_subsystem__defined */
+
+/* union of all requests */
+
+#ifndef __RequestUnion__host_priv_subsystem__defined
+#define __RequestUnion__host_priv_subsystem__defined
+union __RequestUnion__host_priv_subsystem {
+	__Request__host_get_boot_info_t Request_host_get_boot_info;
+	__Request__host_reboot_t Request_host_reboot;
+	__Request__host_priv_statistics_t Request_host_priv_statistics;
+	__Request__host_default_memory_manager_t Request_host_default_memory_manager;
+	__Request__vm_wire_t Request_vm_wire;
+	__Request__thread_wire_t Request_thread_wire;
+	__Request__vm_allocate_cpm_t Request_vm_allocate_cpm;
+	__Request__host_processors_t Request_host_processors;
+	__Request__host_get_clock_control_t Request_host_get_clock_control;
+	__Request__kmod_create_t Request_kmod_create;
+	__Request__kmod_destroy_t Request_kmod_destroy;
+	__Request__kmod_control_t Request_kmod_control;
+	__Request__host_get_special_port_t Request_host_get_special_port;
+	__Request__host_set_special_port_t Request_host_set_special_port;
+	__Request__host_set_exception_ports_t Request_host_set_exception_ports;
+	__Request__host_get_exception_ports_t Request_host_get_exception_ports;
+	__Request__host_swap_exception_ports_t Request_host_swap_exception_ports;
+	__Request__host_load_symbol_table_t Request_host_load_symbol_table;
+	__Request__task_swappable_t Request_task_swappable;
+	__Request__host_processor_sets_t Request_host_processor_sets;
+	__Request__host_processor_set_priv_t Request_host_processor_set_priv;
+	__Request__set_dp_control_port_t Request_set_dp_control_port;
+	__Request__get_dp_control_port_t Request_get_dp_control_port;
+	__Request__host_set_UNDServer_t Request_host_set_UNDServer;
+	__Request__host_get_UNDServer_t Request_host_get_UNDServer;
+};
+#endif /* !__RequestUnion__host_priv_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__host_priv_subsystem__defined
+#define __Reply__host_priv_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t boot_infoOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t boot_infoCnt;
+		char boot_info[4096];
+	} __Reply__host_get_boot_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__host_reboot_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t host_info_outCnt;
+		integer_t host_info_out[12];
+	} __Reply__host_priv_statistics_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t default_manager;
+		/* end of the kernel processed data */
+	} __Reply__host_default_memory_manager_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__vm_wire_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__thread_wire_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		vm_address_t address;
+	} __Reply__vm_allocate_cpm_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_ports_descriptor_t processor_list;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t processor_listCnt;
+	} __Reply__host_processors_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t clock_ctrl;
+		/* end of the kernel processed data */
+	} __Reply__host_get_clock_control_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		kmod_t module;
+	} __Reply__kmod_create_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__kmod_destroy_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t data;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t dataCnt;
+	} __Reply__kmod_control_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t port;
+		/* end of the kernel processed data */
+	} __Reply__host_get_special_port_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__host_set_special_port_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__host_set_exception_ports_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t old_handlers[32];
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t masksCnt;
+		exception_mask_t masks[32];
+		exception_behavior_t old_behaviors[32];
+		thread_state_flavor_t old_flavors[32];
+	} __Reply__host_get_exception_ports_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t old_handlerss[32];
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t masksCnt;
+		exception_mask_t masks[32];
+		exception_behavior_t old_behaviors[32];
+		thread_state_flavor_t old_flavors[32];
+	} __Reply__host_swap_exception_ports_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__host_load_symbol_table_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__task_swappable_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_ports_descriptor_t processor_sets;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t processor_setsCnt;
+	} __Reply__host_processor_sets_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t set;
+		/* end of the kernel processed data */
+	} __Reply__host_processor_set_priv_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__set_dp_control_port_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t contorl_port;
+		/* end of the kernel processed data */
+	} __Reply__get_dp_control_port_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__host_set_UNDServer_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t server;
+		/* end of the kernel processed data */
+	} __Reply__host_get_UNDServer_t;
+
+#endif /* !__Reply__host_priv_subsystem__defined */
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__host_priv_subsystem__defined
+#define __ReplyUnion__host_priv_subsystem__defined
+union __ReplyUnion__host_priv_subsystem {
+	__Reply__host_get_boot_info_t Reply_host_get_boot_info;
+	__Reply__host_reboot_t Reply_host_reboot;
+	__Reply__host_priv_statistics_t Reply_host_priv_statistics;
+	__Reply__host_default_memory_manager_t Reply_host_default_memory_manager;
+	__Reply__vm_wire_t Reply_vm_wire;
+	__Reply__thread_wire_t Reply_thread_wire;
+	__Reply__vm_allocate_cpm_t Reply_vm_allocate_cpm;
+	__Reply__host_processors_t Reply_host_processors;
+	__Reply__host_get_clock_control_t Reply_host_get_clock_control;
+	__Reply__kmod_create_t Reply_kmod_create;
+	__Reply__kmod_destroy_t Reply_kmod_destroy;
+	__Reply__kmod_control_t Reply_kmod_control;
+	__Reply__host_get_special_port_t Reply_host_get_special_port;
+	__Reply__host_set_special_port_t Reply_host_set_special_port;
+	__Reply__host_set_exception_ports_t Reply_host_set_exception_ports;
+	__Reply__host_get_exception_ports_t Reply_host_get_exception_ports;
+	__Reply__host_swap_exception_ports_t Reply_host_swap_exception_ports;
+	__Reply__host_load_symbol_table_t Reply_host_load_symbol_table;
+	__Reply__task_swappable_t Reply_task_swappable;
+	__Reply__host_processor_sets_t Reply_host_processor_sets;
+	__Reply__host_processor_set_priv_t Reply_host_processor_set_priv;
+	__Reply__set_dp_control_port_t Reply_set_dp_control_port;
+	__Reply__get_dp_control_port_t Reply_get_dp_control_port;
+	__Reply__host_set_UNDServer_t Reply_host_set_UNDServer;
+	__Reply__host_get_UNDServer_t Reply_host_get_UNDServer;
+};
+#endif /* !__RequestUnion__host_priv_subsystem__defined */
 
 #ifndef subsystem_to_name_map_host_priv
 #define subsystem_to_name_map_host_priv \

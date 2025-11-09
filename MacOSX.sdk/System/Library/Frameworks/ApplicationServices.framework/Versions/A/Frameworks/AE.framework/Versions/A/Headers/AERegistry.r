@@ -3,9 +3,9 @@
  
      Contains:   AppleEvents Registry Interface.
  
-     Version:    AppleEvents-116~3
+     Version:    AppleEvents-242~1
  
-     Copyright:  © 1993-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1993-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,8 +17,8 @@
 #ifndef __AEREGISTRY_R__
 #define __AEREGISTRY_R__
 
-#ifndef __CONDITIONALMACROS_R__
-#include <CarbonCore/ConditionalMacros.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
 
 #define cAEList 						'list'				/*   0x6c697374   */
@@ -229,6 +229,11 @@
 #define kAEWholeWordEquals 				'wweq'				/*   0x77776571   */
 #define kAEYes 							'yes '				/*   0x79657320   */
 #define kAEZoom 						'zoom'				/*   0x7a6f6f6d   */
+
+#define kAELogOut 						'logo'
+#define kAEReallyLogOut 				'rlgo'
+#define kAEShowRestartDialog 			'rrst'
+#define kAEShowShutdownDialog 			'rsdn'
 
 #define kAEMouseClass 					'mous'
 #define kAEDown 						'down'
@@ -565,11 +570,13 @@
 #define keyAETSMEventRef 				'tevr'				/*  Carbon EventRef, typeEventRef  */
 #define keyAETextServiceEncoding 		'tsen'				/*  Text Service encoding, mac or Unicode in UpdateActiveInputArea or GetSelectedText events.  */
 #define keyAETextServiceMacEncoding 	'tmen'				/*  Target mac encoding for TSM conversion of text from Unicode text service.  */
+#define keyAETSMGlyphInfoArray 			'tgia'				/*  typeGlyphInfoArray  */
 #define typeTextRange 					'txrn'				/*  TextRange  */
 #define typeComponentInstance 			'cmpi'				/*  server instance  */
 #define typeOffsetArray 				'ofay'				/*  offset array  */
 #define typeTextRangeArray 				'tray'
 #define typeLowLevelEventRecord 		'evtr'				/*  Low Level Event Record  */
+#define typeGlyphInfoArray 				'glia'				/*  Glyph/FMFont info array for sub ranges of Unicode text.  See GlyphInfoArray in TextServices.h   */
 #define typeEventRef 					'evrf'				/*  Carbon EventRef  */
 #define typeText 						'TEXT'				/*  Plain text  */
 
@@ -605,6 +612,7 @@
 															/*  AppleScript 1.3: New Text types  */
 #define typeUnicodeText 				'utxt'
 #define typeStyledUnicodeText 			'sutx'
+#define typeUTF8Text 					'utf8'
 #define typeEncodedString 				'encs'
 #define typeCString 					'cstr'
 #define typePString 					'pstr'

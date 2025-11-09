@@ -3,9 +3,9 @@
  
      Contains:   Interface to Quickdraw Graphics
  
-     Version:    Quickdraw-64.6.15~3
+     Version:    Quickdraw-96.21~1
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,8 +17,8 @@
 #ifndef __QUICKDRAW_R__
 #define __QUICKDRAW_R__
 
-#ifndef __CONDITIONALMACROS_R__
-#include <CarbonCore/ConditionalMacros.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
 
 #ifndef OLDPIXMAPSTRUCT

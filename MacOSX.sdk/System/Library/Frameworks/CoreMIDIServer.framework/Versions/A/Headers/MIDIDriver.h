@@ -286,7 +286,6 @@ public:		// informs HeaderDoc that the members of a struct are public by default
 	*/
 	OSStatus	(*Monitor)(MIDIDriverRef self, MIDIEndpointRef dest, const MIDIPacketList *pktlist);
 };
-typedef struct MIDIDriverInterface MIDIDriverInterface;
 
 
 #ifdef __cplusplus

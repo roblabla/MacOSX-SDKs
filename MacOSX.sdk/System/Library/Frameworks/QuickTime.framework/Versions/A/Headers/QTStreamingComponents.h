@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime-142~1
+     Version:    QuickTime_6
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -30,6 +30,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -39,13 +40,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /*============================================================================
         Stream Sourcer
@@ -63,7 +58,8 @@ enum {
 
 /* flags for sourcer data */
 enum {
-  kQTSSourcerDataFlag_SyncSample = 0x00000001
+  kQTSSourcerDataFlag_SyncSample = 0x00000001,
+  kQTSPushDataSourcerFlag_SampleTimeIsValid = (long)0x80000000
 };
 
 
@@ -92,7 +88,7 @@ QTSNewSourcer(
   void *                        params,
   const QTSSourcerInitParams *  inInitParams,
   SInt32                        inFlags,
-  ComponentInstance *           outSourcer);
+  ComponentInstance *           outSourcer)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* info selectors for sourcers - get and set */
@@ -123,14 +119,19 @@ enum {
   kQTSInfo_VideoContrast        = 'trst', /* UInt16* */
   kQTSInfo_VideoBrightness      = 'brit', /* UInt16* */
   kQTSInfo_VideoSharpness       = 'shrp', /* UInt16* */
-  kQTSInfo_TimeScale            = 'scal' /* UInt32* */
+  kQTSInfo_TimeScale            = 'scal', /* UInt32* */
+  kQTSInfo_SGChannelDeviceName  = 'innm', /* Handle* */
+  kQTSInfo_SGChannelDeviceList  = 'srdl', /* SGDeviceList* */
+  kQTSInfo_SGChannelDeviceInput = 'sdii', /* short* */
+  kQTSInfo_SGChannelSettings    = 'sesg', /* QTSSGChannelSettingsParams */
+  kQTSInfo_PreviewWhileRecordingMode = 'srpr', /* Boolean* */
+  kQTSInfo_CompressionParams    = 'sccp' /* QTAtomContainer* */
 };
 
 /* info selectors for sourcers - get only*/
 enum {
   kQTSInfo_SGChannel            = 'sgch', /* SGChannel* */
-  kQTSInfo_InputDeviceName      = 'innm', /* Handle* */
-  kQTSInfo_InputSourceName      = 'srnm', /* Handle* */
+  kQTSInfo_SGChannelInputName   = 'srnm', /* Handle* */
   kQTSInfo_FullInputRect        = 'fulr' /* Rect* */
 };
 
@@ -230,7 +231,9 @@ struct QTSPushDataHasCharacteristicParams {
   SInt32              flags;
   OSType              characteristic;
   Boolean             returnedHasIt;
-  char                reserved[3];
+  char                reserved1;
+  char                reserved2;
+  char                reserved3;
 };
 typedef struct QTSPushDataHasCharacteristicParams QTSPushDataHasCharacteristicParams;
 struct QTSPushDataInfoParams {
@@ -250,7 +253,11 @@ struct QTSSourcerDoneParams {
   ComponentInstance   sourcer;
 };
 typedef struct QTSSourcerDoneParams     QTSSourcerDoneParams;
-
+struct QTSSGChannelSettingsParams {
+  UserData            settings;
+  SInt32              flags;
+};
+typedef struct QTSSGChannelSettingsParams QTSSGChannelSettingsParams;
 
 /*-----------------------------------------
     Stream Sourcer Selectors
@@ -274,13 +281,13 @@ enum {
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in QuickTime.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0.1 and later
  */
 extern ComponentResult 
 QTSSourcerInitialize(
   QTSSourcer                    inSourcer,
-  const QTSSourcerInitParams *  inInitParams);
+  const QTSSourcerInitParams *  inInitParams)                 AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -296,7 +303,7 @@ QTSSourcerIdle(
   QTSSourcer           inSourcer,
   const TimeValue64 *  inTime,
   SInt32               inFlags,
-  SInt32 *             outFlags);
+  SInt32 *             outFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -311,7 +318,7 @@ extern ComponentResult
 QTSSourcerSetEnable(
   QTSSourcer   inSourcer,
   Boolean      inEnableMode,
-  SInt32       inFlags);
+  SInt32       inFlags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -326,7 +333,7 @@ extern ComponentResult
 QTSSourcerGetEnable(
   QTSSourcer   inSourcer,
   Boolean *    outEnableMode,
-  SInt32       inFlags);
+  SInt32       inFlags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -340,7 +347,7 @@ QTSSourcerGetEnable(
 extern ComponentResult 
 QTSSourcerSetTimeScale(
   QTSSourcer   inSourcer,
-  TimeScale    inTimeScale);
+  TimeScale    inTimeScale)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -354,7 +361,7 @@ QTSSourcerSetTimeScale(
 extern ComponentResult 
 QTSSourcerGetTimeScale(
   QTSSourcer   inSourcer,
-  TimeScale *  outTimeScale);
+  TimeScale *  outTimeScale)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -369,7 +376,7 @@ extern ComponentResult
 QTSSourcerSetInfo(
   QTSSourcer   inSourcer,
   OSType       inSelector,
-  void *       ioParams);
+  void *       ioParams)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -384,8 +391,14 @@ extern ComponentResult
 QTSSourcerGetInfo(
   QTSSourcer   inSourcer,
   OSType       inSelector,
-  void *       ioParams);
+  void *       ioParams)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+
+enum {
+  kQTSInfo_InputDeviceName      = 'innm', /* Handle* */
+  kQTSInfo_InputSourceName      = 'srnm' /* Handle* */
+};
 
 
 /*============================================================================
@@ -405,7 +418,8 @@ typedef struct SHServerEditParameters   SHServerEditParameters;
 enum {
   kSHNoChunkDispatchFlags       = 0,
   kSHChunkFlagSyncSample        = 1 << 2,
-  kSHChunkFlagDataLoss          = 1 << 4
+  kSHChunkFlagDataLoss          = 1 << 4,
+  kSHChunkFlagExtended          = 1 << 5
 };
 
 struct SHChunkRecord {
@@ -425,6 +439,21 @@ struct SHChunkRecord {
   long                reserved7;
 };
 typedef struct SHChunkRecord            SHChunkRecord;
+enum {
+  kSHNumExtendedDataLongs       = 10
+};
+
+enum {
+  kSHExtendedChunkFlag_HasSampleCount = 1 << 0,
+  kSHExtendedChunkFlag_HasFrameLengths = 1 << 1
+};
+
+struct SHExtendedChunkRecord {
+  SHChunkRecord       chunk;
+  SInt32              extendedFlags;
+  SInt32              extendedData[10];
+};
+typedef struct SHExtendedChunkRecord    SHExtendedChunkRecord;
 
 /*============================================================================
         RTP Components
@@ -530,7 +559,8 @@ enum {
 -----------------------------------------*/
 enum {
   kRTPPayloadSpeedTag           = 'sped', /* 0-255, 255 is fastest*/
-  kRTPPayloadLossRecoveryTag    = 'loss' /* 0-255, 0 can't handle any loss, 128 can handle 50% packet loss*/
+  kRTPPayloadLossRecoveryTag    = 'loss', /* 0-255, 0 can't handle any loss, 128 can handle 50% packet loss*/
+  kRTPPayloadConformanceTag     = 'conf' /* more than one of these can be present*/
 };
 
 struct RTPPayloadCharacteristic {
@@ -558,7 +588,9 @@ enum {
 struct RTPPayloadInfo {
   long                payloadFlags;
   UInt8               payloadID;
-  char                unused[3];
+  char                reserved1;
+  char                reserved2;
+  char                reserved3;
   char                payloadName[1];
 };
 typedef struct RTPPayloadInfo           RTPPayloadInfo;
@@ -580,26 +612,54 @@ enum {
   kRTPAudioReassemblerType      = 'soun',
   kRTPQTReassemblerType         = 'qtim',
   kRTPPureVoiceReassemblerType  = 'Qclp',
-  kRTPMp3ReassemblerType        = 'mp3 ',
   kRTPJPEGReassemblerType       = 'jpeg',
   kRTPQDesign2ReassemblerType   = 'QDM2',
-  kRTPSorensonReassemblerType   = 'SVQ1'
+  kRTPSorensonReassemblerType   = 'SVQ1',
+  kRTPMP3ReassemblerType        = 'mp3 ',
+  kRTPMPEG4AudioReassemblerType = 'mp4a',
+  kRTPMPEG4VideoReassemblerType = 'mp4v',
+  kRTPAMRReassemblerType        = 'amr '
 };
 
 struct RTPRssmInitParams {
   RTPSSRC             ssrc;
   UInt8               payloadType;
-  UInt8               pad[3];
+  UInt8               reserved1;
+  UInt8               reserved2;
+  UInt8               reserved3;
   TimeBase            timeBase;
   TimeScale           timeScale;
 };
 typedef struct RTPRssmInitParams        RTPRssmInitParams;
+struct RTPDescParams {
+  QTAtomContainer     container;
+  QTAtom              presentationParentAtom;
+  QTAtom              streamParentAtom;
+};
+typedef struct RTPDescParams            RTPDescParams;
+struct RTPRssmMoreInitParams {
+  RTPRssmInitParams   initParams;
+  SInt32              version;
+  RTPDescParams       desc;
+};
+typedef struct RTPRssmMoreInitParams    RTPRssmMoreInitParams;
+enum {
+  kRTPRssmMoreInitParamsVersion1 = 1
+};
+
+
+/* get/set info selectors*/
+enum {
+  kRTPRssmInfo_MoreInitParams   = 'rrmi'
+};
+
+
 struct RTPRssmPacket {
   struct RTPRssmPacket * next;
   struct RTPRssmPacket * prev;
   QTSStreamBuffer *   streamBuffer;
   Boolean             paramsFilledIn;
-  UInt8               pad[1];
+  UInt8               reserved;
   UInt16              sequenceNum;
   UInt32              transportHeaderLength;  /* filled in by base*/
   UInt32              payloadHeaderLength;    /* derived adjusts this */
@@ -687,7 +747,7 @@ extern OSErr
 QTSFindReassemblerForPayloadID(
   UInt8                    inPayloadID,
   RTPPayloadSortRequest *  inSortInfo,
-  QTAtomContainer *        outReassemblerList);
+  QTAtomContainer *        outReassemblerList)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -703,7 +763,7 @@ extern OSErr
 QTSFindReassemblerForPayloadName(
   const char *             inPayloadName,
   RTPPayloadSortRequest *  inSortInfo,
-  QTAtomContainer *        outReassemblerList);
+  QTAtomContainer *        outReassemblerList)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*-----------------------------------------
@@ -730,6 +790,7 @@ enum {
   kRTPRssmReleasePacketListSelect = 0x0114,
   kRTPRssmIncrChunkRefCountSelect = 0x0115,
   kRTPRssmDecrChunkRefCountSelect = 0x0116,
+  kRTPRssmGetExtChunkAndIncrRefCountSelect = 0x0117,
   kRTPRssmInitializeSelect      = 0x0500,
   kRTPRssmHandleNewPacketSelect = 0x0501,
   kRTPRssmComputeChunkSizeSelect = 0x0502,
@@ -759,7 +820,7 @@ enum {
 extern ComponentResult 
 RTPRssmInitialize(
   RTPReassembler       rtpr,
-  RTPRssmInitParams *  inInitParams);
+  RTPRssmInitParams *  inInitParams)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -775,7 +836,7 @@ extern ComponentResult
 RTPRssmHandleNewPacket(
   RTPReassembler     rtpr,
   QTSStreamBuffer *  inStreamBuffer,
-  SInt32             inNumWraparounds);
+  SInt32             inNumWraparounds)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -792,7 +853,7 @@ RTPRssmComputeChunkSize(
   RTPReassembler   rtpr,
   RTPRssmPacket *  inPacketListHead,
   SInt32           inFlags,
-  UInt32 *         outChunkDataSize);
+  UInt32 *         outChunkDataSize)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -808,7 +869,7 @@ extern ComponentResult
 RTPRssmAdjustPacketParams(
   RTPReassembler   rtpr,
   RTPRssmPacket *  inPacket,
-  SInt32           inFlags);
+  SInt32           inFlags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -826,7 +887,7 @@ RTPRssmCopyDataToChunk(
   RTPRssmPacket *  inPacketListHead,
   UInt32           inMaxChunkDataSize,
   SHChunkRecord *  inChunk,
-  SInt32           inFlags);
+  SInt32           inFlags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -843,7 +904,7 @@ RTPRssmSendPacketList(
   RTPReassembler       rtpr,
   RTPRssmPacket *      inPacketListHead,
   const TimeValue64 *  inLastChunkPresentationTime,
-  SInt32               inFlags);
+  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -859,7 +920,7 @@ extern ComponentResult
 RTPRssmGetTimeScaleFromPacket(
   RTPReassembler     rtpr,
   QTSStreamBuffer *  inStreamBuffer,
-  TimeScale *        outTimeScale);
+  TimeScale *        outTimeScale)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -875,7 +936,7 @@ extern ComponentResult
 RTPRssmSetInfo(
   RTPReassembler   rtpr,
   OSType           inSelector,
-  void *           ioParams);
+  void *           ioParams)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -891,7 +952,7 @@ extern ComponentResult
 RTPRssmGetInfo(
   RTPReassembler   rtpr,
   OSType           inSelector,
-  void *           ioParams);
+  void *           ioParams)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -907,7 +968,7 @@ extern ComponentResult
 RTPRssmHasCharacteristic(
   RTPReassembler   rtpr,
   OSType           inCharacteristic,
-  Boolean *        outHasIt);
+  Boolean *        outHasIt)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -922,7 +983,7 @@ RTPRssmHasCharacteristic(
 extern ComponentResult 
 RTPRssmReset(
   RTPReassembler   rtpr,
-  SInt32           inFlags);
+  SInt32           inFlags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*-----------------------------------------
@@ -942,7 +1003,7 @@ extern ComponentResult
 RTPRssmSetCapabilities(
   RTPReassembler   rtpr,
   SInt32           inFlags,
-  SInt32           inFlagsMask);
+  SInt32           inFlagsMask)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -957,7 +1018,7 @@ RTPRssmSetCapabilities(
 extern ComponentResult 
 RTPRssmGetCapabilities(
   RTPReassembler   rtpr,
-  SInt32 *         outFlags);
+  SInt32 *         outFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -972,7 +1033,7 @@ RTPRssmGetCapabilities(
 extern ComponentResult 
 RTPRssmSetPayloadHeaderLength(
   RTPReassembler   rtpr,
-  UInt32           inPayloadHeaderLength);
+  UInt32           inPayloadHeaderLength)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -987,7 +1048,7 @@ RTPRssmSetPayloadHeaderLength(
 extern ComponentResult 
 RTPRssmGetPayloadHeaderLength(
   RTPReassembler   rtpr,
-  UInt32 *         outPayloadHeaderLength);
+  UInt32 *         outPayloadHeaderLength)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1002,7 +1063,7 @@ RTPRssmGetPayloadHeaderLength(
 extern ComponentResult 
 RTPRssmSetTimeScale(
   RTPReassembler   rtpr,
-  TimeScale        inSHTimeScale);
+  TimeScale        inSHTimeScale)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1017,7 +1078,7 @@ RTPRssmSetTimeScale(
 extern ComponentResult 
 RTPRssmGetTimeScale(
   RTPReassembler   rtpr,
-  TimeScale *      outSHTimeScale);
+  TimeScale *      outSHTimeScale)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1035,7 +1096,7 @@ RTPRssmNewStreamHandler(
   OSType                    inSHType,
   SampleDescriptionHandle   inSampleDescription,
   TimeScale                 inSHTimeScale,
-  ComponentInstance *       outHandler);
+  ComponentInstance *       outHandler)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1050,7 +1111,7 @@ RTPRssmNewStreamHandler(
 extern ComponentResult 
 RTPRssmSetStreamHandler(
   RTPReassembler      rtpr,
-  ComponentInstance   inStreamHandler);
+  ComponentInstance   inStreamHandler)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1065,7 +1126,7 @@ RTPRssmSetStreamHandler(
 extern ComponentResult 
 RTPRssmGetStreamHandler(
   RTPReassembler       rtpr,
-  ComponentInstance *  outStreamHandler);
+  ComponentInstance *  outStreamHandler)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1079,7 +1140,7 @@ RTPRssmGetStreamHandler(
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern ComponentResult 
-RTPRssmSendStreamHandlerChanged(RTPReassembler rtpr);
+RTPRssmSendStreamHandlerChanged(RTPReassembler rtpr)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1094,7 +1155,7 @@ RTPRssmSendStreamHandlerChanged(RTPReassembler rtpr);
 extern ComponentResult 
 RTPRssmSetSampleDescription(
   RTPReassembler            rtpr,
-  SampleDescriptionHandle   inSampleDescription);
+  SampleDescriptionHandle   inSampleDescription)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* ----- manually sending chunks*/
@@ -1112,7 +1173,25 @@ RTPRssmGetChunkAndIncrRefCount(
   RTPReassembler       rtpr,
   UInt32               inChunkDataSize,
   const TimeValue64 *  inChunkPresentationTime,
-  SHChunkRecord **     outChunk);
+  SHChunkRecord **     outChunk)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  RTPRssmGetExtChunkAndIncrRefCount()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QTStreamLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+RTPRssmGetExtChunkAndIncrRefCount(
+  RTPReassembler            rtpr,
+  UInt32                    inChunkDataSize,
+  const TimeValue64 *       inChunkPresentationTime,
+  SInt32                    inFlags,
+  SHExtendedChunkRecord **  outChunk)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
@@ -1128,7 +1207,7 @@ extern ComponentResult
 RTPRssmSendChunkAndDecrRefCount(
   RTPReassembler                  rtpr,
   SHChunkRecord *                 inChunk,
-  const SHServerEditParameters *  inServerEdit);
+  const SHServerEditParameters *  inServerEdit)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1143,7 +1222,7 @@ RTPRssmSendChunkAndDecrRefCount(
 extern ComponentResult 
 RTPRssmSendLostChunk(
   RTPReassembler       rtpr,
-  const TimeValue64 *  inChunkPresentationTime);
+  const TimeValue64 *  inChunkPresentationTime)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1158,7 +1237,7 @@ RTPRssmSendLostChunk(
 extern ComponentResult 
 RTPRssmSendStreamBufferRange(
   RTPReassembler                    rtpr,
-  RTPSendStreamBufferRangeParams *  inParams);
+  RTPSendStreamBufferRangeParams *  inParams)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1173,7 +1252,7 @@ RTPRssmSendStreamBufferRange(
 extern ComponentResult 
 RTPRssmClearCachedPackets(
   RTPReassembler   rtpr,
-  SInt32           inFlags);
+  SInt32           inFlags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1190,7 +1269,7 @@ RTPRssmFillPacketListParams(
   RTPReassembler   rtpr,
   RTPRssmPacket *  inPacketListHead,
   SInt32           inNumWraparounds,
-  SInt32           inFlags);
+  SInt32           inFlags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1205,7 +1284,7 @@ RTPRssmFillPacketListParams(
 extern ComponentResult 
 RTPRssmReleasePacketList(
   RTPReassembler   rtpr,
-  RTPRssmPacket *  inPacketListHead);
+  RTPRssmPacket *  inPacketListHead)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1220,7 +1299,7 @@ RTPRssmReleasePacketList(
 extern ComponentResult 
 RTPRssmIncrChunkRefCount(
   RTPReassembler   rtpr,
-  SHChunkRecord *  inChunk);
+  SHChunkRecord *  inChunk)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1235,7 +1314,7 @@ RTPRssmIncrChunkRefCount(
 extern ComponentResult 
 RTPRssmDecrChunkRefCount(
   RTPReassembler   rtpr,
-  SHChunkRecord *  inChunk);
+  SHChunkRecord *  inChunk)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*============================================================================
@@ -1253,10 +1332,13 @@ enum {
   kRTPAudioMediaPacketizerType  = 'soun',
   kRTPQTMediaPacketizerType     = 'qtim',
   kRTPPureVoiceMediaPacketizerType = 'Qclp',
-  kRTPMp3MediaPacketizerType    = 'mp3 ',
   kRTPJPEGMediaPacketizerType   = 'jpeg',
   kRTPQDesign2MediaPacketizerType = 'QDM2',
-  kRTPSorensonMediaPacketizerType = 'SVQ1'
+  kRTPSorensonMediaPacketizerType = 'SVQ1',
+  kRTPMP3MediaPacketizerType    = 'mp3 ',
+  kRTPMPEG4AudioMediaPacketizerType = 'mp4a',
+  kRTPMPEG4VideoMediaPacketizerType = 'mp4v',
+  kRTPAMRMediaPacketizerType    = 'amr '
 };
 
 typedef UInt32                          RTPMPSampleRef;
@@ -1277,7 +1359,9 @@ struct MediaPacketizerRequirements {
   OSType              dataFormat;             /* data format (e.g., compression) supported (0 for all)*/
   UInt32              capabilityFlags;        /* ability to handle non-standard track characteristics*/
   UInt8               canPackMatrixType;      /* can pack any matrix type up to this (identityMatrixType for identity only)*/
-  UInt8               pad[3];
+  UInt8               reserved1;
+  UInt8               reserved2;
+  UInt8               reserved3;
 };
 typedef struct MediaPacketizerRequirements MediaPacketizerRequirements;
 typedef MediaPacketizerRequirements *   MediaPacketizerRequirementsPtr;
@@ -1287,7 +1371,9 @@ struct MediaPacketizerInfo {
   OSType              vendor;                 /* manufacturer of this packetizer (e.g., 'appl' for Apple)*/
   UInt32              capabilityFlags;        /* ability to handle non-standard track characteristics*/
   UInt8               canPackMatrixType;      /* can pack any matrix type up to this (identityMatrixType for identity only)*/
-  UInt8               pad[3];
+  UInt8               reserved1;
+  UInt8               reserved2;
+  UInt8               reserved3;
   long                characteristicCount;
   RTPPayloadCharacteristic  characteristic[1];
 
@@ -1303,6 +1389,11 @@ enum {
   kMediaPacketizerInfoPadUpToBytes = 4
 };
 
+enum {
+  kRTPMediaPacketizerInfoRezType = 'pcki'
+};
+
+
 /*
  *  QTSFindMediaPacketizer()
  *  
@@ -1317,7 +1408,7 @@ QTSFindMediaPacketizer(
   MediaPacketizerRequirementsPtr   inPacketizerinfo,
   SampleDescriptionHandle          inSampleDescription,
   RTPPayloadSortRequestPtr         inSortInfo,
-  QTAtomContainer *                outPacketizerList);
+  QTAtomContainer *                outPacketizerList)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1334,7 +1425,7 @@ QTSFindMediaPacketizerForTrack(
   Track                      inTrack,
   long                       inSampleDescriptionIndex,
   RTPPayloadSortRequestPtr   inSortInfo,
-  QTAtomContainer *          outPacketizerList);
+  QTAtomContainer *          outPacketizerList)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1350,7 +1441,7 @@ extern OSErr
 QTSFindMediaPacketizerForPayloadID(
   long                       payloadID,
   RTPPayloadSortRequestPtr   inSortInfo,
-  QTAtomContainer *          outPacketizerList);
+  QTAtomContainer *          outPacketizerList)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1366,7 +1457,7 @@ extern OSErr
 QTSFindMediaPacketizerForPayloadName(
   const char *               payloadName,
   RTPPayloadSortRequestPtr   inSortInfo,
-  QTAtomContainer *          outPacketizerList);
+  QTAtomContainer *          outPacketizerList)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* flags for RTPMPInitialize*/
@@ -1422,7 +1513,8 @@ enum {
   kRTPMPSuggestedRepeatPktSpacingInfo = 'srps', /* UInt32* in milliseconds */
   kRTPMPMaxPartialSampleSizeInfo = 'mpss', /* UInt32* in bytes */
   kRTPMPPreferredBufferDelayInfo = 'prbd', /* UInt32* in milliseconds */
-  kRTPMPPayloadNameInfo         = 'name' /* StringPtr */
+  kRTPMPPayloadNameInfo         = 'name', /* StringPtr */
+  kRTPInfo_FormatString         = 'fmtp' /* char **, caller allocates ptr, callee disposes */
 };
 
 /*-----------------------------------------
@@ -1468,8 +1560,8 @@ enum {
   kRTPMPSetSettingsFromAtomContainerAtAtomSelect = 0x0517,
   kRTPMPGetSettingsIntoAtomContainerAtAtomSelect = 0x0518,
   kRTPMPGetSettingsAsTextSelect = 0x0519,
-  kRTPMPGetSettingsSelect       = 0x051A,
-  kRTPMPSetSettingsSelect       = 0x051B
+  kRTPMPGetSettingsSelect       = 0x051C,
+  kRTPMPSetSettingsSelect       = 0x051D
 };
 
 /*-----------------------------------------
@@ -1488,7 +1580,7 @@ enum {
 extern ComponentResult 
 RTPMPInitialize(
   RTPMediaPacketizer   rtpm,
-  SInt32               inFlags);
+  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* return noErr if you can handle this media */
@@ -1505,7 +1597,7 @@ extern ComponentResult
 RTPMPPreflightMedia(
   RTPMediaPacketizer        rtpm,
   OSType                    inMediaType,
-  SampleDescriptionHandle   inSampleDescription);
+  SampleDescriptionHandle   inSampleDescription)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1525,7 +1617,7 @@ extern ComponentResult
 RTPMPIdle(
   RTPMediaPacketizer   rtpm,
   SInt32               inFlags,
-  SInt32 *             outFlags);
+  SInt32 *             outFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1548,7 +1640,7 @@ extern ComponentResult
 RTPMPSetSampleData(
   RTPMediaPacketizer             rtpm,
   const RTPMPSampleDataParams *  inSampleData,
-  SInt32 *                       outFlags);
+  SInt32 *                       outFlags)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1568,7 +1660,7 @@ extern ComponentResult
 RTPMPFlush(
   RTPMediaPacketizer   rtpm,
   SInt32               inFlags,
-  SInt32 *             outFlags);
+  SInt32 *             outFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1589,7 +1681,7 @@ RTPMPFlush(
 extern ComponentResult 
 RTPMPReset(
   RTPMediaPacketizer   rtpm,
-  SInt32               inFlags);
+  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*-----------------------------------------
@@ -1608,7 +1700,7 @@ extern ComponentResult
 RTPMPSetInfo(
   RTPMediaPacketizer   rtpm,
   OSType               inSelector,
-  const void *         ioParams);
+  const void *         ioParams)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1624,7 +1716,7 @@ extern ComponentResult
 RTPMPGetInfo(
   RTPMediaPacketizer   rtpm,
   OSType               inSelector,
-  void *               ioParams);
+  void *               ioParams)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1639,7 +1731,7 @@ RTPMPGetInfo(
 extern ComponentResult 
 RTPMPSetTimeScale(
   RTPMediaPacketizer   rtpm,
-  TimeScale            inTimeScale);
+  TimeScale            inTimeScale)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1654,7 +1746,7 @@ RTPMPSetTimeScale(
 extern ComponentResult 
 RTPMPGetTimeScale(
   RTPMediaPacketizer   rtpm,
-  TimeScale *          outTimeScale);
+  TimeScale *          outTimeScale)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1669,7 +1761,7 @@ RTPMPGetTimeScale(
 extern ComponentResult 
 RTPMPSetTimeBase(
   RTPMediaPacketizer   rtpm,
-  TimeBase             inTimeBase);
+  TimeBase             inTimeBase)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1684,7 +1776,7 @@ RTPMPSetTimeBase(
 extern ComponentResult 
 RTPMPGetTimeBase(
   RTPMediaPacketizer   rtpm,
-  TimeBase *           outTimeBase);
+  TimeBase *           outTimeBase)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1700,7 +1792,7 @@ extern ComponentResult
 RTPMPHasCharacteristic(
   RTPMediaPacketizer   rtpm,
   OSType               inSelector,
-  Boolean *            outHasIt);
+  Boolean *            outHasIt)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1715,7 +1807,7 @@ RTPMPHasCharacteristic(
 extern ComponentResult 
 RTPMPSetPacketBuilder(
   RTPMediaPacketizer   rtpm,
-  ComponentInstance    inPacketBuilder);
+  ComponentInstance    inPacketBuilder)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1730,7 +1822,7 @@ RTPMPSetPacketBuilder(
 extern ComponentResult 
 RTPMPGetPacketBuilder(
   RTPMediaPacketizer   rtpm,
-  ComponentInstance *  outPacketBuilder);
+  ComponentInstance *  outPacketBuilder)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1745,7 +1837,7 @@ RTPMPGetPacketBuilder(
 extern ComponentResult 
 RTPMPSetMediaType(
   RTPMediaPacketizer   rtpm,
-  OSType               inMediaType);
+  OSType               inMediaType)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1760,7 +1852,7 @@ RTPMPSetMediaType(
 extern ComponentResult 
 RTPMPGetMediaType(
   RTPMediaPacketizer   rtpm,
-  OSType *             outMediaType);
+  OSType *             outMediaType)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* size is in bytes*/
@@ -1776,7 +1868,7 @@ RTPMPGetMediaType(
 extern ComponentResult 
 RTPMPSetMaxPacketSize(
   RTPMediaPacketizer   rtpm,
-  UInt32               inMaxPacketSize);
+  UInt32               inMaxPacketSize)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1791,7 +1883,7 @@ RTPMPSetMaxPacketSize(
 extern ComponentResult 
 RTPMPGetMaxPacketSize(
   RTPMediaPacketizer   rtpm,
-  UInt32 *             outMaxPacketSize);
+  UInt32 *             outMaxPacketSize)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* duration is in milliseconds*/
@@ -1807,7 +1899,7 @@ RTPMPGetMaxPacketSize(
 extern ComponentResult 
 RTPMPSetMaxPacketDuration(
   RTPMediaPacketizer   rtpm,
-  UInt32               inMaxPacketDuration);
+  UInt32               inMaxPacketDuration)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1822,7 +1914,7 @@ RTPMPSetMaxPacketDuration(
 extern ComponentResult 
 RTPMPGetMaxPacketDuration(
   RTPMediaPacketizer   rtpm,
-  UInt32 *             outMaxPacketDuration);
+  UInt32 *             outMaxPacketDuration)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1838,7 +1930,7 @@ extern ComponentResult
 RTPMPDoUserDialog(
   RTPMediaPacketizer   rtpm,
   ModalFilterUPP       inFilterUPP,
-  Boolean *            canceled);
+  Boolean *            canceled)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1854,7 +1946,7 @@ extern ComponentResult
 RTPMPSetSettingsFromAtomContainerAtAtom(
   RTPMediaPacketizer   rtpm,
   QTAtomContainer      inContainer,
-  QTAtom               inParentAtom);
+  QTAtom               inParentAtom)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1870,7 +1962,7 @@ extern ComponentResult
 RTPMPGetSettingsIntoAtomContainerAtAtom(
   RTPMediaPacketizer   rtpm,
   QTAtomContainer      inOutContainer,
-  QTAtom               inParentAtom);
+  QTAtom               inParentAtom)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1885,7 +1977,7 @@ RTPMPGetSettingsIntoAtomContainerAtAtom(
 extern ComponentResult 
 RTPMPGetSettingsAsText(
   RTPMediaPacketizer   rtpm,
-  Handle *             text);
+  Handle *             text)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1902,7 +1994,7 @@ extern ComponentResult
 RTPMPGetSettings(
   RTPMediaPacketizer   rtpm,
   QTAtomContainer *    outSettings,
-  SInt32               inFlags);
+  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1918,7 +2010,7 @@ extern ComponentResult
 RTPMPSetSettings(
   RTPMediaPacketizer   rtpm,
   QTAtomSpecPtr        inSettings,
-  SInt32               inFlags);
+  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*============================================================================
@@ -1996,7 +2088,7 @@ RTPPBBeginPacketGroup(
   RTPPacketBuilder     rtpb,
   SInt32               inFlags,
   UInt32               inTimeStamp,
-  RTPPacketGroupRef *  outPacketGroup);
+  RTPPacketGroupRef *  outPacketGroup)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2012,7 +2104,7 @@ extern ComponentResult
 RTPPBEndPacketGroup(
   RTPPacketBuilder    rtpb,
   SInt32              inFlags,
-  RTPPacketGroupRef   inPacketGroup);
+  RTPPacketGroupRef   inPacketGroup)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2030,7 +2122,7 @@ RTPPBBeginPacket(
   SInt32              inFlags,
   RTPPacketGroupRef   inPacketGroup,
   UInt32              inPacketMediaDataLength,
-  RTPPacketRef *      outPacket);
+  RTPPacketRef *      outPacket)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2049,7 +2141,7 @@ RTPPBEndPacket(
   RTPPacketGroupRef   inPacketGroup,
   RTPPacketRef        inPacket,
   UInt32              inTransmissionTimeOffset,
-  UInt32              inDuration);
+  UInt32              inDuration)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2073,7 +2165,7 @@ RTPPBAddPacketLiteralData(
   RTPPacketRef                inPacket,
   UInt8 *                     inData,
   UInt32                      inDataLength,
-  RTPPacketRepeatedDataRef *  outDataRef);
+  RTPPacketRepeatedDataRef *  outDataRef)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2098,7 +2190,7 @@ RTPPBAddPacketSampleData(
   RTPMPSampleDataParams *     inSampleDataParams,
   UInt32                      inSampleOffset,
   UInt32                      inSampleDataLength,
-  RTPPacketRepeatedDataRef *  outDataRef);
+  RTPPacketRepeatedDataRef *  outDataRef)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2123,7 +2215,7 @@ RTPPBAddPacketSampleData64(
   RTPMPSampleDataParams *     inSampleDataParams,
   const UInt64 *              inSampleOffset,
   UInt32                      inSampleDataLength,
-  RTPPacketRepeatedDataRef *  outDataRef);
+  RTPPacketRepeatedDataRef *  outDataRef)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2145,7 +2237,7 @@ RTPPBAddPacketRepeatedData(
   SInt32                     inFlags,
   RTPPacketGroupRef          inPacketGroup,
   RTPPacketRef               inPacket,
-  RTPPacketRepeatedDataRef   inDataRef);
+  RTPPacketRepeatedDataRef   inDataRef)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* call when done with repeated data*/
@@ -2161,7 +2253,7 @@ RTPPBAddPacketRepeatedData(
 extern ComponentResult 
 RTPPBReleaseRepeatedData(
   RTPPacketBuilder           rtpb,
-  RTPPacketRepeatedDataRef   inDataRef);
+  RTPPacketRepeatedDataRef   inDataRef)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2183,7 +2275,7 @@ RTPPBSetPacketSequenceNumber(
   SInt32              inFlags,
   RTPPacketGroupRef   inPacketGroup,
   RTPPacketRef        inPacket,
-  UInt32              inSequenceNumber);
+  UInt32              inSequenceNumber)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2201,7 +2293,7 @@ RTPPBGetPacketSequenceNumber(
   SInt32              inFlags,
   RTPPacketGroupRef   inPacketGroup,
   RTPPacketRef        inPacket,
-  UInt32 *            outSequenceNumber);
+  UInt32 *            outSequenceNumber)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2219,7 +2311,7 @@ RTPPBSetPacketTimeStampOffset(
   SInt32              inFlags,
   RTPPacketGroupRef   inPacketGroup,
   RTPPacketRef        inPacket,
-  SInt32              inTimeStampOffset);
+  SInt32              inTimeStampOffset)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2237,7 +2329,7 @@ RTPPBGetPacketTimeStampOffset(
   SInt32              inFlags,
   RTPPacketGroupRef   inPacketGroup,
   RTPPacketRef        inPacket,
-  SInt32 *            outTimeStampOffset);
+  SInt32 *            outTimeStampOffset)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2256,7 +2348,7 @@ RTPPBAddRepeatPacket(
   RTPPacketGroupRef   inPacketGroup,
   RTPPacketRef        inPacket,
   TimeValue           inTransmissionOffset,
-  UInt32              inSequenceNumber);
+  UInt32              inSequenceNumber)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2276,7 +2368,7 @@ extern ComponentResult
 RTPPBSetCallback(
   RTPPacketBuilder   rtpb,
   RTPPBCallbackUPP   inCallback,
-  void *             inRefCon);
+  void *             inRefCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2292,7 +2384,7 @@ extern ComponentResult
 RTPPBGetCallback(
   RTPPacketBuilder    rtpb,
   RTPPBCallbackUPP *  outCallback,
-  void **             outRefCon);
+  void **             outRefCon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2308,7 +2400,7 @@ extern ComponentResult
 RTPPBSetInfo(
   RTPPacketBuilder   rtpb,
   OSType             inSelector,
-  void *             ioParams);
+  void *             ioParams)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2324,7 +2416,7 @@ extern ComponentResult
 RTPPBGetInfo(
   RTPPacketBuilder   rtpb,
   OSType             inSelector,
-  void *             ioParams);
+  void *             ioParams)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2344,7 +2436,7 @@ RTPPBGetSampleData(
   UInt8 *                  outDataBuffer,
   UInt32                   inBytesToRead,
   UInt32 *                 outBytesRead,
-  SInt32 *                 outFlags);
+  SInt32 *                 outFlags)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2358,7 +2450,7 @@ RTPPBGetSampleData(
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern RTPMPDataReleaseUPP
-NewRTPMPDataReleaseUPP(RTPMPDataReleaseProcPtr userRoutine);
+NewRTPMPDataReleaseUPP(RTPMPDataReleaseProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewRTPPBCallbackUPP()
@@ -2369,7 +2461,7 @@ NewRTPMPDataReleaseUPP(RTPMPDataReleaseProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern RTPPBCallbackUPP
-NewRTPPBCallbackUPP(RTPPBCallbackProcPtr userRoutine);
+NewRTPPBCallbackUPP(RTPPBCallbackProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeRTPMPDataReleaseUPP()
@@ -2380,7 +2472,7 @@ NewRTPPBCallbackUPP(RTPPBCallbackProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeRTPMPDataReleaseUPP(RTPMPDataReleaseUPP userUPP);
+DisposeRTPMPDataReleaseUPP(RTPMPDataReleaseUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeRTPPBCallbackUPP()
@@ -2391,7 +2483,7 @@ DisposeRTPMPDataReleaseUPP(RTPMPDataReleaseUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeRTPPBCallbackUPP(RTPPBCallbackUPP userUPP);
+DisposeRTPPBCallbackUPP(RTPPBCallbackUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeRTPMPDataReleaseUPP()
@@ -2405,7 +2497,7 @@ extern void
 InvokeRTPMPDataReleaseUPP(
   UInt8 *              inData,
   void *               inRefCon,
-  RTPMPDataReleaseUPP  userUPP);
+  RTPMPDataReleaseUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeRTPPBCallbackUPP()
@@ -2420,16 +2512,10 @@ InvokeRTPPBCallbackUPP(
   OSType            inSelector,
   void *            ioParams,
   void *            inRefCon,
-  RTPPBCallbackUPP  userUPP);
+  RTPPBCallbackUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

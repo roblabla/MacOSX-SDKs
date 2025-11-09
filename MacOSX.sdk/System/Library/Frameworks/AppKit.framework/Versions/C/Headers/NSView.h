@@ -103,7 +103,7 @@ typedef struct __NSViewAuxiliary _NSViewAuxiliary;
     struct __VFlags2 {
 	unsigned int	nextKeyViewRefCount:14;
 	unsigned int	previousKeyViewRefCount:14;
-	unsigned int	clippedFocus:1;
+	unsigned int	isVisibleRect:1;
 	unsigned int	hasToolTip:1;
 	unsigned int	needsRealLockFocus:1;
 	unsigned int	menuWasSet:1;
@@ -210,6 +210,9 @@ typedef struct __NSViewAuxiliary _NSViewAuxiliary;
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent;
 - (BOOL)shouldDelayWindowOrderingForEvent:(NSEvent *)theEvent;
 - (BOOL)needsPanelToBecomeKey;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (BOOL)mouseDownCanMoveWindow;
+#endif
 
 - (void)addCursorRect:(NSRect)aRect cursor:(NSCursor *)anObj;
 - (void)removeCursorRect:(NSRect)aRect cursor:(NSCursor *)anObj;
@@ -300,7 +303,9 @@ typedef struct __NSViewAuxiliary _NSViewAuxiliary;
 - (void)unregisterDraggedTypes;
 
 - (BOOL)dragFile:(NSString *)filename fromRect:(NSRect)rect slideBack:(BOOL)aFlag event:(NSEvent *)event;
-
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (BOOL)dragPromisedFilesOfTypes:(NSArray *)typeArray fromRect:(NSRect)rect source:(id)sourceObject slideBack:(BOOL)aFlag event:(NSEvent *)event;
+#endif
 @end
 
 /* Notifications */

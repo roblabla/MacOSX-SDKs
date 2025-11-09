@@ -24,6 +24,11 @@ Boston, MA 02111-1307, USA.  */
    reasons why the executable file might be covered by the GNU General
    Public License.  */
 
+/* APPLE LOCAL begin MW compatibility */
+#ifdef __MWERKS__
+#include "mw_varargs.h"
+#else
+/* APPLE LOCAL end MW compatibility */
 #ifndef _VARARGS_H
 #define _VARARGS_H
 
@@ -142,3 +147,5 @@ typedef __gnuc_va_list va_list;
 #endif
 
 #endif /* _VARARGS_H */
+/* APPLE LOCAL MW compatibility */
+#endif /* __MWERKS__ */

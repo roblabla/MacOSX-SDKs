@@ -487,7 +487,7 @@ public:
     @result The current selected medium, the default medium, or 0. */
 
     virtual const IONetworkMedium * getSelectedMedium() const;
-    inline  const IONetworkMedium * getCurrentMedium() const;
+	const IONetworkMedium * getCurrentMedium() const;
 
 /*! @function getMediumDictionary
     @abstract Returns the medium dictionary published by the driver.
@@ -975,7 +975,7 @@ public:
     any entry from the published medium dictionary. */
 
     virtual bool setSelectedMedium(const IONetworkMedium * medium);
-    inline  bool setCurrentMedium(const IONetworkMedium * medium);
+    bool setCurrentMedium(const IONetworkMedium * medium);
 
 /*! @function setLinkStatus
     @abstract Report the link status and the active medium.
@@ -1349,16 +1349,6 @@ protected:
     OSMetaClassDeclareReservedUnused( IONetworkController, 30);
     OSMetaClassDeclareReservedUnused( IONetworkController, 31);
 };
-
-inline const IONetworkMedium * IONetworkController::getCurrentMedium() const
-{
-    return getSelectedMedium();
-}
-
-inline bool IONetworkController::setCurrentMedium(const IONetworkMedium * medium)
-{
-    return setSelectedMedium(medium);
-}
 
 #endif /* defined(KERNEL) && defined(__cplusplus) */
 

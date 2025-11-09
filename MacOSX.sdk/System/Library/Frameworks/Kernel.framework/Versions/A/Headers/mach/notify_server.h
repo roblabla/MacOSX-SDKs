@@ -30,6 +30,7 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* notify_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
 
 #ifdef __BeforeMigServerHeader
 __BeforeMigServerHeader
@@ -37,6 +38,8 @@ __BeforeMigServerHeader
 
 /* typedefs for all requests */
 
+#ifndef __Request__notify_subsystem__defined
+#define __Request__notify_subsystem__defined
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -67,9 +70,12 @@ __BeforeMigServerHeader
 		mach_port_name_t name;
 	} __Request__mach_notify_dead_name_t;
 
+#endif /* !__Request__notify_subsystem__defined */
 
 /* union of all requests */
 
+#ifndef __RequestUnion__do_notify_subsystem__defined
+#define __RequestUnion__do_notify_subsystem__defined
 union __RequestUnion__do_notify_subsystem {
 	__Request__mach_notify_port_deleted_t Request_mach_notify_port_deleted;
 	__Request__mach_notify_port_destroyed_t Request_mach_notify_port_destroyed;
@@ -77,8 +83,11 @@ union __RequestUnion__do_notify_subsystem {
 	__Request__mach_notify_send_once_t Request_mach_notify_send_once;
 	__Request__mach_notify_dead_name_t Request_mach_notify_dead_name;
 };
+#endif /* __RequestUnion__do_notify_subsystem__defined */
 /* typedefs for all replies */
 
+#ifndef __Reply__notify_subsystem__defined
+#define __Reply__notify_subsystem__defined
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -109,9 +118,12 @@ union __RequestUnion__do_notify_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_notify_dead_name_t;
 
+#endif /* !__Reply__notify_subsystem__defined */
 
 /* union of all replies */
 
+#ifndef __ReplyUnion__do_notify_subsystem__defined
+#define __ReplyUnion__do_notify_subsystem__defined
 union __ReplyUnion__do_notify_subsystem {
 	__Reply__mach_notify_port_deleted_t Reply_mach_notify_port_deleted;
 	__Reply__mach_notify_port_destroyed_t Reply_mach_notify_port_destroyed;
@@ -119,6 +131,7 @@ union __ReplyUnion__do_notify_subsystem {
 	__Reply__mach_notify_send_once_t Reply_mach_notify_send_once;
 	__Reply__mach_notify_dead_name_t Reply_mach_notify_dead_name;
 };
+#endif /* __RequestUnion__do_notify_subsystem__defined */
 
 /* SimpleRoutine mach_notify_port_deleted */
 #ifdef	mig_external
@@ -189,11 +202,11 @@ extern mig_routine_t notify_server_routine(
 
 /* Description of this subsystem, for use in direct RPC */
 extern const struct do_notify_subsystem {
-	struct subsystem *	subsystem;	/* Reserved for system use */
+	mig_server_routine_t	server;	/* Server routine */
 	mach_msg_id_t	start;	/* Min routine number */
 	mach_msg_id_t	end;	/* Max routine number + 1 */
 	unsigned int	maxsize;	/* Max msg size */
-	vm_address_t	base_addr;	/* Base ddress */
+	vm_address_t	reserved;	/* Reserved */
 	struct routine_descriptor	/*Array of routine descriptors */
 		routine[9];
 } do_notify_subsystem;

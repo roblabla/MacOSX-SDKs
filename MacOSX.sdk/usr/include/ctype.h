@@ -82,6 +82,51 @@
 #define	_T	0x00100000L		/* Special */
 #define	_Q	0x00200000L		/* Phonogram */
 
+#define _CTYPE_A	_A
+#define _CTYPE_C	_C
+#define _CTYPE_D	_D
+#define _CTYPE_G	_G
+#define _CTYPE_L	_L
+#define _CTYPE_P	_P
+#define _CTYPE_S	_S
+#define _CTYPE_U	_U
+#define _CTYPE_X	_X
+#define _CTYPE_B	_B
+#define _CTYPE_R	_R
+#define _CTYPE_I	_I
+#define _CTYPE_T	_T
+#define _CTYPE_Q	_Q
+
+__BEGIN_DECLS
+int     isalnum __P((int));
+int     isalpha __P((int));
+int     iscntrl __P((int));
+int     isdigit __P((int));
+int     isgraph __P((int));
+int     islower __P((int));
+int     isprint __P((int));
+int     ispunct __P((int));
+int     isspace __P((int));
+int     isupper __P((int));
+int     isxdigit __P((int));
+int     tolower __P((int));
+int     toupper __P((int));
+
+#if !defined(_ANSI_SOURCE) && !defined(_POSIX_SOURCE)
+int     digittoint __P((int));
+int     isascii __P((int));
+int     isblank __P((int));
+int     ishexnumber __P((int));
+int     isideogram __P((int));
+int     isnumber __P((int));
+int     isphonogram __P((int));
+int     isrune __P((int));
+int     isspecial __P((int));
+int     toascii __P((int));
+#endif
+__END_DECLS
+
+
 #define isalnum(c)      __istype((c), (_A|_D))
 #define isalpha(c)      __istype((c),     _A)
 #define iscntrl(c)      __istype((c),     _C)
@@ -93,76 +138,88 @@
 #define isspace(c)      __istype((c),     _S)
 #define isupper(c)      __istype((c),     _U)
 #define isxdigit(c)     __isctype((c),    _X)	/* ANSI -- locale independent */
+#define tolower(c)      __tolower(c)
+#define toupper(c)      __toupper(c)
 
 #if !defined(_ANSI_SOURCE) && !defined(_POSIX_SOURCE)
+#define	digittoint(c)	__maskrune((c), 0xFF)
 #define	isascii(c)	((c & ~0x7F) == 0)
-#define toascii(c)	((c) & 0x7F)
-#define	digittoint(c)	__istype((c), 0xFF)
-#define	isideogram(c)	__istype((c), _I)
-#define	isphonogram(c)	__istype((c), _T)
-#define	isspecial(c)	__istype((c), _Q)
 #define isblank(c)	__istype((c), _B)
-#define	isrune(c)	__istype((c),  0xFFFFFF00L)
-#define	isnumber(c)	__istype((c), _D)
 #define	ishexnumber(c)	__istype((c), _X)
+#define	isideogram(c)	__istype((c), _I)
+#define	isnumber(c)	__istype((c), _D)
+#define	isphonogram(c)	__istype((c), _T)
+#define	isrune(c)	__istype((c),  0xFFFFFF00L)
+#define	isspecial(c)	__istype((c), _Q)
+#define toascii(c)	((c) & 0x7F)
 #endif
 
 /* See comments in <machine/ansi.h> about _BSD_RUNE_T_. */
 __BEGIN_DECLS
-unsigned long	___runetype __P((_BSD_RUNE_T_));
-_BSD_RUNE_T_	___tolower __P((_BSD_RUNE_T_));
-_BSD_RUNE_T_	___toupper __P((_BSD_RUNE_T_));
+unsigned long	___runetype __P((_BSD_CT_RUNE_T_));
+_BSD_CT_RUNE_T_	___tolower __P((_BSD_CT_RUNE_T_));
+_BSD_CT_RUNE_T_	___toupper __P((_BSD_CT_RUNE_T_));
 __END_DECLS
 
 /*
- * If your compiler supports prototypes and inline functions,
- * #define _USE_CTYPE_INLINE_.  Otherwise, use the C library
- * functions.
+ * _EXTERNALIZE_CTYPE_INLINES_ is defined in locale/nomacros.c to tell us
+ * to generate code for extern versions of all our inline functions.
  */
-#if !defined(_USE_CTYPE_CLIBRARY_) && defined(__GNUC__) || defined(__cplusplus)
-#define	_USE_CTYPE_INLINE_	1
+#ifdef _EXTERNALIZE_CTYPE_INLINES_
+#define _USE_CTYPE_INLINE_
+#define static
+#define __inline
 #endif
 
-#if defined(_USE_CTYPE_INLINE_)
-static __inline int
-__istype(_BSD_RUNE_T_ c, unsigned long f)
+/*
+ * Use inline functions if we are allowed to and the compiler supports them.
+ */
+#if !defined(_DONT_USE_CTYPE_INLINE_) && \
+    (defined(_USE_CTYPE_INLINE_) || defined(__GNUC__) || defined(__cplusplus))
+
+static __inline int     
+__maskrune(_BSD_CT_RUNE_T_ _c, unsigned long _f)
 {
-	return((((c & _CRMASK) ? ___runetype(c) :
-	    _CurrentRuneLocale->runetype[c]) & f) ? 1 : 0);
+	return ((_c < 0 || _c >= _CACHED_RUNES) ? ___runetype(_c) :
+		_CurrentRuneLocale->runetype[_c]) & _f;
 }
 
 static __inline int
-__isctype(_BSD_RUNE_T_ c, unsigned long f)
+__istype(_BSD_CT_RUNE_T_ c, unsigned long f)
 {
-	return((((c & _CRMASK) ? 0 :
-	    _DefaultRuneLocale.runetype[c]) & f) ? 1 : 0);
+	return !!(__maskrune(c, f));
 }
 
-/* _ANSI_LIBRARY is defined by lib/libc/gen/isctype.c. */
-#if !defined(_ANSI_LIBRARY)
-static __inline _BSD_RUNE_T_
-toupper(_BSD_RUNE_T_ c)
+static __inline _BSD_CT_RUNE_T_
+__isctype(_BSD_CT_RUNE_T_ _c, unsigned long _f)
 {
-	return((c & _CRMASK) ?
-	    ___toupper(c) : _CurrentRuneLocale->mapupper[c]);
+	return (_c < 0 || _c >= _CACHED_RUNES) ? 0 :
+		!!(_DefaultRuneLocale.runetype[_c] & _f);
 }
 
-static __inline _BSD_RUNE_T_
-tolower(_BSD_RUNE_T_ c)
+static __inline _BSD_CT_RUNE_T_
+__toupper(_BSD_CT_RUNE_T_ _c)
 {
-	return((c & _CRMASK) ?
-	    ___tolower(c) : _CurrentRuneLocale->maplower[c]);
+	return (_c < 0 || _c >= _CACHED_RUNES) ? ___toupper(_c) :
+		_CurrentRuneLocale->mapupper[_c];
 }
-#endif /* !_ANSI_LIBRARY */
 
-#else /* !_USE_CTYPE_INLINE_ */
+static __inline _BSD_CT_RUNE_T_
+__tolower(_BSD_CT_RUNE_T_ _c)
+{
+	return (_c < 0 || _c >= _CACHED_RUNES) ? ___tolower(_c) :
+		_CurrentRuneLocale->maplower[_c];
+}
+
+#else /* not using inlines */
 
 __BEGIN_DECLS
-int		__istype __P((_BSD_RUNE_T_, unsigned long));
-int		__isctype __P((_BSD_RUNE_T_, unsigned long));
-_BSD_RUNE_T_	toupper __P((_BSD_RUNE_T_));
-_BSD_RUNE_T_	tolower __P((_BSD_RUNE_T_));
+int             __maskrune __P((_BSD_CT_RUNE_T_, unsigned long));   
+int		__istype  __P((_BSD_CT_RUNE_T_, unsigned long));
+int             __isctype __P((_BSD_CT_RUNE_T_, unsigned long));   
+_BSD_CT_RUNE_T_ __toupper __P((_BSD_CT_RUNE_T_));
+_BSD_CT_RUNE_T_ __tolower __P((_BSD_CT_RUNE_T_));
 __END_DECLS
-#endif /* _USE_CTYPE_INLINE_ */
+#endif /* using inlines */
 
 #endif /* !_CTYPE_H_ */

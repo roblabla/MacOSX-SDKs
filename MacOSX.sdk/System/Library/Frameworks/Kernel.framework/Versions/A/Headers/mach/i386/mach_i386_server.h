@@ -30,7 +30,9 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* mach_i386_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
 #include <kern/ipc_mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 #include <device/device_types.h>
 #include <mach/i386/mach_i386_types.h>
@@ -41,6 +43,8 @@ __BeforeMigServerHeader
 
 /* typedefs for all requests */
 
+#ifndef __Request__mach_i386_subsystem__defined
+#define __Request__mach_i386_subsystem__defined
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -79,9 +83,12 @@ __BeforeMigServerHeader
 		int selector_count;
 	} __Request__i386_get_ldt_t;
 
+#endif /* !__Request__mach_i386_subsystem__defined */
 
 /* union of all requests */
 
+#ifndef __RequestUnion__mach_i386_subsystem__defined
+#define __RequestUnion__mach_i386_subsystem__defined
 union __RequestUnion__mach_i386_subsystem {
 	__Request__i386_io_port_add_t Request_i386_io_port_add;
 	__Request__i386_io_port_remove_t Request_i386_io_port_remove;
@@ -89,8 +96,11 @@ union __RequestUnion__mach_i386_subsystem {
 	__Request__i386_set_ldt_t Request_i386_set_ldt;
 	__Request__i386_get_ldt_t Request_i386_get_ldt;
 };
+#endif /* __RequestUnion__mach_i386_subsystem__defined */
 /* typedefs for all replies */
 
+#ifndef __Reply__mach_i386_subsystem__defined
+#define __Reply__mach_i386_subsystem__defined
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -129,9 +139,12 @@ union __RequestUnion__mach_i386_subsystem {
 		mach_msg_type_number_t desc_listCnt;
 	} __Reply__i386_get_ldt_t;
 
+#endif /* !__Reply__mach_i386_subsystem__defined */
 
 /* union of all replies */
 
+#ifndef __ReplyUnion__mach_i386_subsystem__defined
+#define __ReplyUnion__mach_i386_subsystem__defined
 union __ReplyUnion__mach_i386_subsystem {
 	__Reply__i386_io_port_add_t Reply_i386_io_port_add;
 	__Reply__i386_io_port_remove_t Reply_i386_io_port_remove;
@@ -139,6 +152,7 @@ union __ReplyUnion__mach_i386_subsystem {
 	__Reply__i386_set_ldt_t Reply_i386_set_ldt;
 	__Reply__i386_get_ldt_t Reply_i386_get_ldt;
 };
+#endif /* __RequestUnion__mach_i386_subsystem__defined */
 
 /* Routine i386_io_port_add */
 #ifdef	mig_external
@@ -216,11 +230,11 @@ extern mig_routine_t mach_i386_server_routine(
 
 /* Description of this subsystem, for use in direct RPC */
 extern const struct mach_i386_subsystem {
-	struct subsystem *	subsystem;	/* Reserved for system use */
+	mig_server_routine_t	server;	/* Server routine */
 	mach_msg_id_t	start;	/* Min routine number */
 	mach_msg_id_t	end;	/* Max routine number + 1 */
 	unsigned int	maxsize;	/* Max msg size */
-	vm_address_t	base_addr;	/* Base ddress */
+	vm_address_t	reserved;	/* Reserved */
 	struct routine_descriptor	/*Array of routine descriptors */
 		routine[5];
 } mach_i386_subsystem;

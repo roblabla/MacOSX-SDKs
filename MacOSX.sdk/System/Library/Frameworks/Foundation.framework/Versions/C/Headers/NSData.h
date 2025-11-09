@@ -1,5 +1,5 @@
 /*	NSData.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -34,11 +34,17 @@
 + (id)data;
 + (id)dataWithBytes:(const void *)bytes length:(unsigned)length;
 + (id)dataWithBytesNoCopy:(void *)bytes length:(unsigned)length;
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
++ (id)dataWithBytesNoCopy:(void *)bytes length:(unsigned)length freeWhenDone:(BOOL)b;
+#endif
 + (id)dataWithContentsOfFile:(NSString *)path;
 + (id)dataWithContentsOfURL:(NSURL *)url;
 + (id)dataWithContentsOfMappedFile:(NSString *)path;
 - (id)initWithBytes:(const void *)bytes length:(unsigned)length;
 - (id)initWithBytesNoCopy:(void *)bytes length:(unsigned)length;
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (id)initWithBytesNoCopy:(void *)bytes length:(unsigned)length freeWhenDone:(BOOL)b;
+#endif
 - (id)initWithContentsOfFile:(NSString *)path;
 - (id)initWithContentsOfURL:(NSURL *)url;
 - (id)initWithContentsOfMappedFile:(NSString *)path;
@@ -64,6 +70,9 @@
 - (void)replaceBytesInRange:(NSRange)range withBytes:(const void *)bytes;
 - (void)resetBytesInRange:(NSRange)range;
 - (void)setData:(NSData *)data;
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (void)replaceBytesInRange:(NSRange)range withBytes:(const void *)replacementBytes length:(unsigned)replacementLength;
+#endif
 
 @end
 

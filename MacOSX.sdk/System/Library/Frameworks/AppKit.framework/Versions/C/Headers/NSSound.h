@@ -16,14 +16,8 @@ APPKIT_EXTERN NSString * const NSSoundPboardType;
 @interface NSSound : NSObject <NSCopying, NSCoding> {
 @private
     id _delegate;
-    NSString *_name;
-    NSURL *_url;
-    unsigned int _flags;
-    NSData *_data0;
-    NSData *_data1;
-    void *_channel;
-    void *_buffer;
-    void *_reserved1;
+    void *_info;
+    void *_reserved[7];
 }
 
 + (id)soundNamed:(NSString *)name;
@@ -35,9 +29,9 @@ APPKIT_EXTERN NSString * const NSSoundPboardType;
 - (id)initWithContentsOfFile:(NSString *)path byReference:(BOOL)byRef;
 
 - (id)initWithData:(NSData *)data;
-    /* Whether the data comes in from disk, or via this method, NSSound expects
-     * it to have a proper magic number, sound header, and data, for the formats
-     * it understands, currently: AIFF, WAV, [NeXT] SND. */
+    /* Whether the data comes in from disk, or via this method, NSSound
+     * expects it to have a proper magic number, sound header, and data.
+     * Only uncompressed AIFF data is currently supported. */
 
 - (BOOL)setName:(NSString *)string;
 - (NSString *)name;

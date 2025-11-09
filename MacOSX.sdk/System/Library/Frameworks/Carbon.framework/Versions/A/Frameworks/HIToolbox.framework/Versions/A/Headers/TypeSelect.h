@@ -3,9 +3,9 @@
  
      Contains:   TypeSelect Utilties
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,6 +22,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -31,13 +32,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 typedef SInt16 TSCode;
 enum {
@@ -57,13 +52,16 @@ typedef STACK_UPP_TYPE(IndexToStringProcPtr)                    IndexToStringUPP
 /*
  *  TypeSelectClear()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern void 
-TypeSelectClear(TypeSelectRecord * tsr);
+TypeSelectClear(TypeSelectRecord * tsr)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -75,6 +73,9 @@ TypeSelectClear(TypeSelectRecord * tsr);
 /*
  *  TypeSelectNewKey()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -83,11 +84,14 @@ TypeSelectClear(TypeSelectRecord * tsr);
 extern Boolean 
 TypeSelectNewKey(
   const EventRecord *  theEvent,
-  TypeSelectRecord *   tsr);
+  TypeSelectRecord *   tsr)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  TypeSelectFindItem()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -100,12 +104,15 @@ TypeSelectFindItem(
   short                     listSize,
   TSCode                    selectMode,
   IndexToStringUPP          getStringProc,
-  void *                    yourDataPtr);
+  void *                    yourDataPtr)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  TypeSelectCompare()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -116,7 +123,7 @@ extern short
 TypeSelectCompare(
   const TypeSelectRecord *  tsr,
   ScriptCode                testStringScript,
-  StringPtr                 testStringPtr);
+  StringPtr                 testStringPtr)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -128,7 +135,7 @@ TypeSelectCompare(
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern IndexToStringUPP
-NewIndexToStringUPP(IndexToStringProcPtr userRoutine);
+NewIndexToStringUPP(IndexToStringProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeIndexToStringUPP()
@@ -139,7 +146,7 @@ NewIndexToStringUPP(IndexToStringProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeIndexToStringUPP(IndexToStringUPP userUPP);
+DisposeIndexToStringUPP(IndexToStringUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeIndexToStringUPP()
@@ -155,19 +162,13 @@ InvokeIndexToStringUPP(
   ScriptCode *      itemsScript,
   StringPtr *       itemsStringPtr,
   void *            yourDataPtr,
-  IndexToStringUPP  userUPP);
+  IndexToStringUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

@@ -11,6 +11,7 @@
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSGraphicsContext.h>
 #import <AppKit/NSActionCell.h>
+#import <AppKit/NSAppleScriptExtensions.h>
 #import <AppKit/NSApplication.h>
 #import <AppKit/NSBox.h>
 #import <AppKit/NSButton.h>
@@ -129,3 +130,4 @@
 #import <AppKit/NSWindowScripting.h>
 #import <AppKit/NSStepper.h>
 #import <AppKit/NSStepperCell.h>
+#import <AppKit/NSGlyphInfo.h>

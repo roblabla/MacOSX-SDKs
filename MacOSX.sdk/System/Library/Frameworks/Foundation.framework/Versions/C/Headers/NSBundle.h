@@ -1,5 +1,5 @@
 /*	NSBundle.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -31,6 +31,9 @@
 + (NSArray *)allFrameworks;
 
 - (BOOL)load;
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (BOOL)isLoaded;
+#endif
 
 - (NSString *)bundlePath;
 - (NSString *)resourcePath;
@@ -60,11 +63,21 @@
 - (NSString *)localizedStringForKey:(NSString *)key value:(NSString *)value table:(NSString *)tableName;
 
 - (NSDictionary *)infoDictionary;
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (NSDictionary *)localizedInfoDictionary;
+- (id)objectForInfoDictionaryKey:(NSString *)key;
+#endif
 
 - (NSArray *)localizations;
 - (NSArray *)preferredLocalizations;
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (NSString *)developmentLocalization;
+#endif
 
 + (NSArray *)preferredLocalizationsFromArray:(NSArray *)localizationsArray;
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
++ (NSArray *)preferredLocalizationsFromArray:(NSArray *)localizationsArray forPreferences:(NSArray *)preferencesArray;
+#endif
 
 @end
 
@@ -74,6 +87,8 @@
 	    [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:(tbl)]
 #define NSLocalizedStringFromTableInBundle(key, tbl, bundle, comment) \
 	    [bundle localizedStringForKey:(key) value:@"" table:(tbl)]
+#define NSLocalizedStringWithDefaultValue(key, tbl, bundle, val, comment) \
+	    [bundle localizedStringForKey:(key) value:(val) table:(tbl)]
 
 FOUNDATION_EXPORT NSString * const NSBundleDidLoadNotification;
 FOUNDATION_EXPORT NSString * const NSLoadedClasses;	// notification key

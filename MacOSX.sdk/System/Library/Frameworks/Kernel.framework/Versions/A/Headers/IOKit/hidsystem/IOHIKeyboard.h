@@ -129,9 +129,14 @@ public:
                     UpdateEventFlagsAction     uefAction);
   virtual void close(IOService * client, IOOptionBits );
 
+  virtual IOReturn message( UInt32 type, IOService * provider,
+                    void * argument = 0 );
+
   virtual IOHIDKind hidKind();
   virtual bool 	    updateProperties( void );
   virtual IOReturn  setParamProperties(OSDictionary * dict);
+  
+  inline  bool	    isRepeat() {return _isRepeat;}
 
 protected: // for subclasses to implement
   virtual const unsigned char * defaultKeymapOfLength(UInt32 * length);

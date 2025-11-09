@@ -3,9 +3,9 @@
  
      Contains:   Resource Manager Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -30,6 +30,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -37,14 +38,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 
@@ -90,7 +83,7 @@ typedef STACK_UPP_TYPE(ResErrProcPtr)                           ResErrUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ResErrUPP
-NewResErrUPP(ResErrProcPtr userRoutine);
+NewResErrUPP(ResErrProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeResErrUPP()
@@ -101,7 +94,7 @@ NewResErrUPP(ResErrProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeResErrUPP(ResErrUPP userUPP);
+DisposeResErrUPP(ResErrUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeResErrUPP()
@@ -114,7 +107,7 @@ DisposeResErrUPP(ResErrUPP userUPP);
 extern void
 InvokeResErrUPP(
   OSErr      thErr,
-  ResErrUPP  userUPP);
+  ResErrUPP  userUPP)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /* QuickTime 3.0*/
 typedef CALLBACK_API( OSErr , ResourceEndianFilterPtr )(Handle theResource, Boolean currentlyNativeEndian);
@@ -147,7 +140,7 @@ typedef CALLBACK_API( OSErr , ResourceEndianFilterPtr )(Handle theResource, Bool
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-CloseResFile(short refNum);
+CloseResFile(short refNum)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -159,7 +152,7 @@ CloseResFile(short refNum);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-ResError(void);
+ResError(void)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -171,7 +164,7 @@ ResError(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-CurResFile(void);
+CurResFile(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -183,7 +176,7 @@ CurResFile(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-HomeResFile(Handle theResource);
+HomeResFile(Handle theResource)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -215,7 +208,7 @@ HomeResFile(Handle theResource);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-UseResFile(short refNum);
+UseResFile(short refNum)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -227,7 +220,7 @@ UseResFile(short refNum);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-CountTypes(void);
+CountTypes(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -239,7 +232,7 @@ CountTypes(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-Count1Types(void);
+Count1Types(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -253,7 +246,7 @@ Count1Types(void);
 extern void 
 GetIndType(
   ResType *  theType,
-  short      index);
+  short      index)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -267,7 +260,7 @@ GetIndType(
 extern void 
 Get1IndType(
   ResType *  theType,
-  short      index);
+  short      index)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -279,7 +272,7 @@ Get1IndType(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetResLoad(Boolean load);
+SetResLoad(Boolean load)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -291,7 +284,7 @@ SetResLoad(Boolean load);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-CountResources(ResType theType);
+CountResources(ResType theType)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -303,7 +296,7 @@ CountResources(ResType theType);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-Count1Resources(ResType theType);
+Count1Resources(ResType theType)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -317,7 +310,7 @@ Count1Resources(ResType theType);
 extern Handle 
 GetIndResource(
   ResType   theType,
-  short     index);
+  short     index)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -331,7 +324,7 @@ GetIndResource(
 extern Handle 
 Get1IndResource(
   ResType   theType,
-  short     index);
+  short     index)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -345,7 +338,7 @@ Get1IndResource(
 extern Handle 
 GetResource(
   ResType   theType,
-  short     theID);
+  short     theID)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -359,7 +352,7 @@ GetResource(
 extern Handle 
 Get1Resource(
   ResType   theType,
-  short     theID);
+  short     theID)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -373,7 +366,7 @@ Get1Resource(
 extern Handle 
 GetNamedResource(
   ResType            theType,
-  ConstStr255Param   name);
+  ConstStr255Param   name)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -387,7 +380,7 @@ GetNamedResource(
 extern Handle 
 Get1NamedResource(
   ResType            theType,
-  ConstStr255Param   name);
+  ConstStr255Param   name)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -402,7 +395,7 @@ Get1NamedResource(
     #define MacLoadResource LoadResource
 #endif
 extern void 
-MacLoadResource(Handle theResource);
+MacLoadResource(Handle theResource)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -414,7 +407,7 @@ MacLoadResource(Handle theResource);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ReleaseResource(Handle theResource);
+ReleaseResource(Handle theResource)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -426,7 +419,7 @@ ReleaseResource(Handle theResource);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DetachResource(Handle theResource);
+DetachResource(Handle theResource)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -438,7 +431,7 @@ DetachResource(Handle theResource);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-UniqueID(ResType theType);
+UniqueID(ResType theType)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -450,7 +443,7 @@ UniqueID(ResType theType);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-Unique1ID(ResType theType);
+Unique1ID(ResType theType)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -462,7 +455,7 @@ Unique1ID(ResType theType);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-GetResAttrs(Handle theResource);
+GetResAttrs(Handle theResource)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -478,7 +471,7 @@ GetResInfo(
   Handle     theResource,
   short *    theID,
   ResType *  theType,
-  Str255     name);
+  Str255     name)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -493,7 +486,7 @@ extern void
 SetResInfo(
   Handle             theResource,
   short              theID,
-  ConstStr255Param   name);
+  ConstStr255Param   name)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -509,7 +502,7 @@ AddResource(
   Handle             theData,
   ResType            theType,
   short              theID,
-  ConstStr255Param   name);
+  ConstStr255Param   name)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -521,7 +514,7 @@ AddResource(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-GetResourceSizeOnDisk(Handle theResource);
+GetResourceSizeOnDisk(Handle theResource)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -533,7 +526,7 @@ GetResourceSizeOnDisk(Handle theResource);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-GetMaxResourceSize(Handle theResource);
+GetMaxResourceSize(Handle theResource)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -557,7 +550,7 @@ GetMaxResourceSize(Handle theResource);
 extern void 
 SetResAttrs(
   Handle   theResource,
-  short    attrs);
+  short    attrs)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -569,7 +562,7 @@ SetResAttrs(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ChangedResource(Handle theResource);
+ChangedResource(Handle theResource)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -581,7 +574,7 @@ ChangedResource(Handle theResource);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-RemoveResource(Handle theResource);
+RemoveResource(Handle theResource)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -593,7 +586,7 @@ RemoveResource(Handle theResource);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-UpdateResFile(short refNum);
+UpdateResFile(short refNum)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -605,7 +598,7 @@ UpdateResFile(short refNum);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-WriteResource(Handle theResource);
+WriteResource(Handle theResource)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -617,7 +610,7 @@ WriteResource(Handle theResource);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetResPurge(Boolean install);
+SetResPurge(Boolean install)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -629,7 +622,7 @@ SetResPurge(Boolean install);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-GetResFileAttrs(short refNum);
+GetResFileAttrs(short refNum)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -643,7 +636,7 @@ GetResFileAttrs(short refNum);
 extern void 
 SetResFileAttrs(
   short   refNum,
-  short   attrs);
+  short   attrs)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -658,7 +651,7 @@ extern short
 OpenRFPerm(
   ConstStr255Param   fileName,
   short              vRefNum,
-  SInt8              permission);
+  SInt8              permission)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -684,7 +677,7 @@ HOpenResFile(
   short              vRefNum,
   long               dirID,
   ConstStr255Param   fileName,
-  SInt8              permission);
+  SInt8              permission)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -699,7 +692,7 @@ extern void
 HCreateResFile(
   short              vRefNum,
   long               dirID,
-  ConstStr255Param   fileName);
+  ConstStr255Param   fileName)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -713,7 +706,7 @@ HCreateResFile(
 extern short 
 FSpOpenResFile(
   const FSSpec *  spec,
-  SignedByte      permission);
+  SignedByte      permission)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -729,7 +722,7 @@ FSpCreateResFile(
   const FSSpec *  spec,
   OSType          creator,
   OSType          fileType,
-  ScriptCode      scriptTag);
+  ScriptCode      scriptTag)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -745,7 +738,7 @@ ReadPartialResource(
   Handle   theResource,
   long     offset,
   void *   buffer,
-  long     count);
+  long     count)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -761,7 +754,7 @@ WritePartialResource(
   Handle        theResource,
   long          offset,
   const void *  buffer,
-  long          count);
+  long          count)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -775,7 +768,7 @@ WritePartialResource(
 extern void 
 SetResourceSize(
   Handle   theResource,
-  long     newSize);
+  long     newSize)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -787,7 +780,7 @@ SetResourceSize(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-GetNextFOND(Handle fondHandle);
+GetNextFOND(Handle fondHandle)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* QuickTime 3.0*/
@@ -848,7 +841,7 @@ enum {
 extern OSErr 
 InsertResourceFile(
   SInt16              refNum,
-  RsrcChainLocation   where);
+  RsrcChainLocation   where)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -864,7 +857,7 @@ InsertResourceFile(
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
-DetachResourceFile(SInt16 refNum);
+DetachResourceFile(SInt16 refNum)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -886,7 +879,7 @@ extern Boolean
 FSpResourceFileAlreadyOpen(
   const FSSpec *  resourceFile,
   Boolean *       inChain,
-  SInt16 *        refNum);
+  SInt16 *        refNum)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -910,7 +903,7 @@ extern OSErr
 FSpOpenOrphanResFile(
   const FSSpec *  spec,
   SignedByte      permission,
-  SInt16 *        refNum);
+  SInt16 *        refNum)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -926,7 +919,7 @@ FSpOpenOrphanResFile(
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
-GetTopResourceFile(SInt16 * refNum);
+GetTopResourceFile(SInt16 * refNum)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -946,7 +939,7 @@ GetTopResourceFile(SInt16 * refNum);
 extern OSErr 
 GetNextResourceFile(
   SInt16    curRefNum,
-  SInt16 *  nextRefNum);
+  SInt16 *  nextRefNum)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1047,7 +1040,7 @@ GetNextResourceFile(
 extern short 
 FSOpenResFile(
   const FSRef *  ref,
-  SInt8          permission);
+  SInt8          permission)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1066,7 +1059,7 @@ FSCreateResFile(
   FSCatalogInfoBitmap    whichInfo,
   const FSCatalogInfo *  catalogInfo,
   FSRef *                newRef,
-  FSSpec *               newSpec);
+  FSSpec *               newSpec)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1081,7 +1074,7 @@ extern Boolean
 FSResourceFileAlreadyOpen(
   const FSRef *  resourceFileRef,
   Boolean *      inChain,
-  SInt16 *       refNum);
+  SInt16 *       refNum)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1141,7 +1134,48 @@ FSCreateResourceFile(
   UniCharCount           forkNameLength,
   const UniChar *        forkName,             /* can be NULL */
   FSRef *                newRef,               /* can be NULL */
-  FSSpec *               newSpec);             /* can be NULL */
+  FSSpec *               newSpec)              /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+ *  FSCreateResourceFork()
+ *  
+ *  Summary:
+ *    Creates the named forked and initializes it as an empty resource
+ *    fork.
+ *  
+ *  Discussion:
+ *    This function allows a resource fork to be added to an existing
+ *    file.  Passing in a null forkname will result in the data fork
+ *    being used.  If the named fork already exists this function does
+ *    nothing and returns errFSForkExists.
+ *  
+ *  Parameters:
+ *    
+ *    ref:
+ *      The file to add the fork to
+ *    
+ *    forkNameLength:
+ *      The length of the fork name (in Unicode characters)
+ *    
+ *    forkName:
+ *      The name of the fork to open (in Unicode); may be NULL
+ *    
+ *    flags:
+ *      Pass in zero
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+FSCreateResourceFork(
+  const FSRef *    ref,
+  UniCharCount     forkNameLength,
+  const UniChar *  forkName,             /* can be NULL */
+  UInt32           flags)                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
@@ -1183,7 +1217,7 @@ FSOpenResourceFile(
   UniCharCount     forkNameLength,
   const UniChar *  forkName,             /* can be NULL */
   SInt8            permissions,
-  SInt16 *         refNum);
+  SInt16 *         refNum)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1205,14 +1239,6 @@ typedef short                           ResFileAttributes;
 
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

@@ -61,8 +61,11 @@
 #ifndef	_MACH_PORT_H_
 #define _MACH_PORT_H_
 
+#include <stdint.h>
 #include <mach/boolean.h>
 #include <mach/machine/vm_types.h>
+
+#include <sys/appleapiopts.h>
 
 /*
  * A port_name_t is a 32 bit value which represents a name of a
@@ -80,12 +83,16 @@
  *	are naked rights) these rights are represented by passing a
  *	pointer to the specific ipc_object_t subclass (typically
  *	ipc_port_t) that got altered/is to be altered.
+ *
+ *	JMM - Because of this pointer/integer overloading, port names
+ *	should be defined as uintptr_t types.  But that would make
+ *	message headers and descriptors pointer-length dependent.
  */
 typedef natural_t port_name_t;
 typedef port_name_t *port_name_array_t;
 
 
-typedef port_name_t port_t;
+typedef port_name_t 		port_t;
 
 
 /*
@@ -207,16 +214,10 @@ typedef natural_t mach_port_msgcount_t;		/* number of msgs */
 typedef natural_t mach_port_rights_t;		/* number of rights */
 
 /*
- *	A port may have NMS detection enabled, in which case
- *	it tracks outstanding send rights.  Otherwise, there
- *	is no information available about outstanding srights.
- *	The return values are deliberately chosen to match
- *	the old boolean (0=FALSE=no srights, 1=TRUE=srights,
- *	2=xxx=no information available).
+ *	Are there outstanding send rights for a given port?
  */
-#define	MACH_PORT_SRIGHTS_NONE		0		/* NMS:  no srights */
-#define	MACH_PORT_SRIGHTS_PRESENT	1		/* NMS:  srights */
-#define	MACH_PORT_SRIGHTS_NO_INFO	2		/* no NMS */
+#define	MACH_PORT_SRIGHTS_NONE		0		/* no srights */
+#define	MACH_PORT_SRIGHTS_PRESENT	1		/* srights */
 typedef unsigned int mach_port_srights_t;	/* status of send rights */
 
 typedef struct mach_port_status {

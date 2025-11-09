@@ -123,7 +123,6 @@ APPKIT_EXTERN void NSDrawButton(NSRect aRect, NSRect clipRect);
 APPKIT_EXTERN void NSEraseRect(NSRect aRect);
 APPKIT_EXTERN NSColor *NSReadPixel(NSPoint passedPoint);
 APPKIT_EXTERN void NSDrawBitmap(NSRect rect, int width, int height, int bps, int spp, int bpp, int bpr, BOOL isPlanar, BOOL hasAlpha, NSString *colorSpaceName, const unsigned char *const data[5]);
-APPKIT_EXTERN void NSCopyBitmapFromGState(int srcGState, NSRect srcRect, NSRect destRect);
 APPKIT_EXTERN void NSCopyBits(int srcGState, NSRect srcRect, NSPoint destPoint);
 APPKIT_EXTERN void NSHighlightRect(NSRect aRect);
 APPKIT_EXTERN void NSBeep(void);

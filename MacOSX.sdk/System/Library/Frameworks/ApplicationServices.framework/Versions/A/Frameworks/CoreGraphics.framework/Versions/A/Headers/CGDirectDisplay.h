@@ -42,6 +42,10 @@ typedef CGError CGDisplayErr;
 /* A NULL value points to the main display device as a programming convention */
 #define kCGDirectMainDisplay ((CGDirectDisplayID)0)
 
+#define kCGNullDirectDisplay ((CGDirectDisplayID)0)
+
+/* Returns the display ID of the current main display */
+CGDirectDisplayID CGMainDisplayID(void);
 
 /*
  * Mechanisms used to find screen IDs
@@ -83,8 +87,27 @@ CGDisplayErr CGGetActiveDisplayList(CGDisplayCount maxDisplays,
                              CGDirectDisplayID * activeDspys,
                              CGDisplayCount * dspyCnt);
 
+/*
+ * With hardware mirroring, a display may be on-line,
+ * but not necessarily active, or drawable.
+ * Programs which manipulate display settings such as the
+ * palette or gamma tables need access to all displays in use,
+ * including hardware mirrors which are not drawable.
+ */
+CGDisplayErr CGGetOnlineDisplayList(CGDisplayCount maxDisplays,
+                                    CGDirectDisplayID * onlineDspys,
+                                    CGDisplayCount * dspyCnt);
+
 /* Map a display to an OpenGL display mask; returns 0 on invalid display */
 CGOpenGLDisplayMask CGDisplayIDToOpenGLDisplayMask(CGDirectDisplayID display);
+
+/*
+ * Map an OpenGL display mask to a display.
+ * Returns kCGNullDirectDisplay if a bit doesn't
+ * match a display.
+ * Passing in multiple bits results in an arbitrary match. 
+ */
+CGDirectDisplayID  CGOpenGLDisplayMaskToDisplayID(CGOpenGLDisplayMask mask);
 
 /* Return screen size and origin in global coords; Empty rect if display is invalid */
 CGRect CGDisplayBounds(CGDirectDisplayID display);
@@ -101,22 +124,48 @@ size_t CGDisplayPixelsHigh(CGDirectDisplayID display);
  *
  * Values associated with the following keys are CFNumber types.
  * With CFNumberGetValue(), use kCFNumberLongType for best results.
+ * kCGDisplayRefreshRate encodes a double value, so to get the fractional
+ * refresh rate use kCFNumberDoubleType.
  */
  
 /*
  * Keys used in mode dictionaries.  Source C strings shown won't change.
  * Some CFM environments cannot import data variables, and so
- * duplicate these CFStringRefs locally.
+ * the definitions are provided directly.
+ *
+ * These keys are used only within the scope of the mode dictionaries,
+ * so further uniquing, as by prefix, of the source string is not needed.
  */
-extern CFStringRef kCGDisplayWidth;			/* "Width" */
-extern CFStringRef kCGDisplayHeight;			/* "Height" */
-extern CFStringRef kCGDisplayMode;			/* "Mode" */
-extern CFStringRef kCGDisplayBitsPerPixel;		/* "BitsPerPixel" */
-extern CFStringRef kCGDisplayBitsPerSample;		/* "BitsPerSample" */
-extern CFStringRef kCGDisplaySamplesPerPixel;		/* "SamplesPerPixel" */ 
-extern CFStringRef kCGDisplayRefreshRate;		/* "RefreshRate" */
-extern CFStringRef kCGDisplayModeUsableForDesktopGUI;	/* "UsableForDesktopGUI" */
-extern CFStringRef kCGDisplayIOFlags;			/* "IOFlags" */
+#define kCGDisplayWidth				CFSTR("Width")
+#define kCGDisplayHeight			CFSTR("Height")
+#define kCGDisplayMode				CFSTR("Mode")
+#define kCGDisplayBitsPerPixel			CFSTR("BitsPerPixel")
+#define kCGDisplayBitsPerSample			CFSTR("BitsPerSample")
+#define kCGDisplaySamplesPerPixel		CFSTR("SamplesPerPixel")
+#define kCGDisplayRefreshRate			CFSTR("RefreshRate")
+#define kCGDisplayModeUsableForDesktopGUI	CFSTR("UsableForDesktopGUI")
+#define kCGDisplayIOFlags			CFSTR("IOFlags")
+#define kCGDisplayBytesPerRow			CFSTR("kCGDisplayBytesPerRow")
+
+/*
+ * Keys to describe optional properties of display modes.
+ *
+ * The key will only be present if the property applies,
+ * and will be associated with a value of kCFBooleanTrue.
+ * Keys not relevant to a particular display mode will not
+ * appear in the mode dictionary.  Note that CFM apps do not
+ * have access to the pre-initialized globals, so the CFSTR()
+ * equivalent is provided as a comment.
+ * These strings must remain unchanged in future releases, of course.
+ */
+
+/* Set if display mode doesn't need a confirmation dialog to be set */
+#define kCGDisplayModeIsSafeForHardware		CFSTR("kCGDisplayModeIsSafeForHardware")
+
+/* The following keys reflect interesting bits of the IOKit display mode flags */
+#define kCGDisplayModeIsInterlaced		CFSTR("kCGDisplayModeIsInterlaced") 
+#define kCGDisplayModeIsStretched		CFSTR("kCGDisplayModeIsStretched")
+#define kCGDisplayModeIsTelevisionOutput	CFSTR("kCGDisplayModeIsTelevisionOutput" )
 
 
 /*
@@ -132,10 +181,21 @@ CFArrayRef CGDisplayAvailableModes(CGDirectDisplayID display);
  *
  * exactmatch, if not NULL, is set to 'true' if an exact match in width, height, and depth is found,
  * and 'false' otherwise.
+ *
+ * CGDisplayBestModeForParametersAndRefreshRateWithProperty searches the list, looking for
+ * display modes with the specified property.  The property should be one of:
+ *	kCGDisplayModeIsSafeForHardware;
+ *	kCGDisplayModeIsInterlaced;
+ *	kCGDisplayModeIsStretched;
+ *	kCGDisplayModeIsTelevisionOutput
+ *	
  * Returns NULL if display is invalid.
  */
 CFDictionaryRef CGDisplayBestModeForParameters(CGDirectDisplayID display, size_t bitsPerPixel, size_t width, size_t height, boolean_t * exactMatch);
+
 CFDictionaryRef CGDisplayBestModeForParametersAndRefreshRate(CGDirectDisplayID display, size_t bitsPerPixel, size_t width, size_t height, CGRefreshRate refresh, boolean_t * exactMatch);
+
+CFDictionaryRef CGDisplayBestModeForParametersAndRefreshRateWithProperty(CGDirectDisplayID display, size_t bitsPerPixel, size_t width, size_t height, CGRefreshRate refresh, CFStringRef property, boolean_t * exactMatch);
 
 /*
  * Return a CFDictionary describing the current display mode.
@@ -149,6 +209,13 @@ CFDictionaryRef CGDisplayCurrentMode(CGDirectDisplayID display);
  * reverts to the permanent setting made by Preferences when the program terminates.
  * The mode dictionary passed in must be a dictionary vended by other CGDirectDisplay
  * APIs such as CGDisplayBestModeForParameters() and CGDisplayAvailableModes().
+ *
+ * The mode dictionary passed in must be a dictionary vended by other CGDirectDisplay
+ * APIs such as CGDisplayBestModeForParameters() and CGDisplayAvailableModes().
+ *
+ * When changing display modes of displays in a mirroring set, other displays in
+ * the mirroring set will be set to a display mode capable of mirroring the bounds
+ * of the largest display being explicitly set. 
  */
 CGDisplayErr CGDisplaySwitchToMode(CGDirectDisplayID display, CFDictionaryRef mode);
 
@@ -233,6 +300,7 @@ CGDisplayErr CGSetDisplayTransferByByteTable(CGDirectDisplayID display,
 /* Restore gamma tables of system displays to the user's ColorSync specified values */
 void CGDisplayRestoreColorSyncSettings(void);
 
+
 /* Display capture and release */
 boolean_t CGDisplayIsCaptured(CGDirectDisplayID display);
 CGDisplayErr CGDisplayCapture(CGDirectDisplayID display);
@@ -302,13 +370,18 @@ void CGGetLastMouseDelta( CGMouseDelta * deltaX, CGMouseDelta * deltaY );
 /* Palette controls (8 bit pseudocolor only) */
 
 /*
- * Returns TRUE if the current display mode supports palettes
+ * Returns TRUE if the current display mode supports palettes.
+ * Display must not be a hardware mirror of another, and should
+ * have a depth of 8 bits per pixel for this to return TRUE.
  */
 boolean_t CGDisplayCanSetPalette(CGDirectDisplayID display);
 
 /*
  * Set a palette.  The current gamma function is applied to the palette
- * elements before being loaded into hardware.
+ * elements before being loaded into hardware.  The display must not be
+ * a hardware mirror of another, and should have a depth of 8 bits per pixel.
+ * Setting the palette on the active, or primary display in a hardware
+ * mirroring set affects all displays in that set.
  */
 CGDisplayErr CGDisplaySetPalette(CGDirectDisplayID display, const CGDirectPaletteRef palette);
 

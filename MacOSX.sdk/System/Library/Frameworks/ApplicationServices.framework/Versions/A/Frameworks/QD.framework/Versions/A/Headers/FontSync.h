@@ -3,9 +3,9 @@
  
      Contains:   Public interface for FontSync
  
-     Version:    Quickdraw-64.6.15~3
+     Version:    Quickdraw-96.21~1
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,12 +16,8 @@
 #ifndef __FONTSYNC__
 #define __FONTSYNC__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __FILES__
-#include <CarbonCore/Files.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __FONTS__
@@ -32,12 +28,9 @@
 #include <ATS/SFNTTypes.h>
 #endif
 
-#ifndef __MACERRORS__
-#include <CarbonCore/MacErrors.h>
-#endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -47,13 +40,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=power
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=power
 
 
 /* Matching Options */
@@ -83,7 +70,7 @@ enum {
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
 extern FNSMatchOptions 
-FNSMatchDefaultsGet(void);
+FNSMatchDefaultsGet(void)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -119,7 +106,7 @@ typedef struct FNSSysInfo               FNSSysInfo;
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
 extern void 
-FNSSysInfoGet(FNSSysInfo * ioInfo);
+FNSSysInfoGet(FNSSysInfo * ioInfo)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -136,7 +123,7 @@ typedef struct OpaqueFNSFontReference*  FNSFontReference;
 extern OSStatus 
 FNSReferenceGetVersion(
   FNSFontReference    iReference,
-  FNSObjectVersion *  oVersion);
+  FNSObjectVersion *  oVersion)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -148,7 +135,7 @@ FNSReferenceGetVersion(
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
 extern OSStatus 
-FNSReferenceDispose(FNSFontReference iReference);
+FNSReferenceDispose(FNSFontReference iReference)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -164,7 +151,7 @@ FNSReferenceMatch(
   FNSFontReference   iReference1,
   FNSFontReference   iReference2,
   FNSMatchOptions    iOptions,
-  FNSMatchOptions *  oFailedMatchOptions);      /* can be NULL */
+  FNSMatchOptions *  oFailedMatchOptions)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -178,7 +165,7 @@ FNSReferenceMatch(
 extern OSStatus 
 FNSReferenceFlattenedSize(
   FNSFontReference   iReference,
-  ByteCount *        oFlattenedSize);
+  ByteCount *        oFlattenedSize)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -193,7 +180,7 @@ extern OSStatus
 FNSReferenceFlatten(
   FNSFontReference   iReference,
   void *             oFlatReference,       /* can be NULL */
-  ByteCount *        oFlattenedSize);      /* can be NULL */
+  ByteCount *        oFlattenedSize)       /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -208,7 +195,7 @@ extern OSStatus
 FNSReferenceUnflatten(
   const void *        iFlatReference,
   ByteCount           iFlattenedSize,
-  FNSFontReference *  oReference);
+  FNSFontReference *  oReference)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -233,7 +220,7 @@ FNSProfileCreate(
   FourCharCode       iCreator,
   ItemCount          iEstNumRefs,
   FNSObjectVersion   iDesiredVersion,
-  FNSFontProfile *   oProfile);
+  FNSFontProfile *   oProfile)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -248,7 +235,7 @@ extern OSStatus
 FNSProfileOpen(
   const FSSpec *    iFile,
   Boolean           iOpenForWrite,
-  FNSFontProfile *  oProfile);
+  FNSFontProfile *  oProfile)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -268,7 +255,7 @@ FNSProfileCreateWithFSRef(
   FourCharCode       iCreator,
   ItemCount          iEstNumRefs,
   FNSObjectVersion   iDesiredVersion,
-  FNSFontProfile *   oProfile);
+  FNSFontProfile *   oProfile)                                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -283,7 +270,7 @@ extern OSStatus
 FNSProfileOpenWithFSRef(
   const FSRef *     iFile,
   Boolean           iOpenForWrite,
-  FNSFontProfile *  oProfile);
+  FNSFontProfile *  oProfile)                                 AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -297,7 +284,7 @@ FNSProfileOpenWithFSRef(
 extern OSStatus 
 FNSProfileGetVersion(
   FNSFontProfile      iProfile,
-  FNSObjectVersion *  oVersion);
+  FNSObjectVersion *  oVersion)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -309,7 +296,7 @@ FNSProfileGetVersion(
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
 extern OSStatus 
-FNSProfileCompact(FNSFontProfile iProfile);
+FNSProfileCompact(FNSFontProfile iProfile)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -321,7 +308,7 @@ FNSProfileCompact(FNSFontProfile iProfile);
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
 extern OSStatus 
-FNSProfileClose(FNSFontProfile iProfile);
+FNSProfileClose(FNSFontProfile iProfile)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -335,7 +322,7 @@ FNSProfileClose(FNSFontProfile iProfile);
 extern OSStatus 
 FNSProfileAddReference(
   FNSFontProfile     iProfile,
-  FNSFontReference   iReference);
+  FNSFontReference   iReference)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -349,7 +336,7 @@ FNSProfileAddReference(
 extern OSStatus 
 FNSProfileRemoveReference(
   FNSFontProfile     iProfile,
-  FNSFontReference   iReference);
+  FNSFontReference   iReference)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -363,7 +350,7 @@ FNSProfileRemoveReference(
 extern OSStatus 
 FNSProfileRemoveIndReference(
   FNSFontProfile   iProfile,
-  UInt32           iIndex);
+  UInt32           iIndex)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -375,7 +362,7 @@ FNSProfileRemoveIndReference(
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
 extern OSStatus 
-FNSProfileClear(FNSFontProfile iProfile);
+FNSProfileClear(FNSFontProfile iProfile)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -389,7 +376,7 @@ FNSProfileClear(FNSFontProfile iProfile);
 extern OSStatus 
 FNSProfileCountReferences(
   FNSFontProfile   iProfile,
-  ItemCount *      oCount);
+  ItemCount *      oCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -404,7 +391,7 @@ extern OSStatus
 FNSProfileGetIndReference(
   FNSFontProfile      iProfile,
   UInt32              iWhichReference,
-  FNSFontReference *  oReference);
+  FNSFontReference *  oReference)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -422,7 +409,7 @@ FNSProfileMatchReference(
   FNSMatchOptions    iMatchOptions,
   ItemCount          iOutputSize,
   UInt32             oIndices[],          /* can be NULL */
-  ItemCount *        oNumMatches);        /* can be NULL */
+  ItemCount *        oNumMatches)         /* can be NULL */   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -439,7 +426,7 @@ extern OSStatus
 FNSReferenceCreate(
   FMFont              iFont,
   FNSObjectVersion    iDesiredVersion,
-  FNSFontReference *  oReference);
+  FNSFontReference *  oReference)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -456,7 +443,7 @@ FNSReferenceMatchFonts(
   FNSMatchOptions    iMatchOptions,
   ItemCount          iOutputSize,
   FMFont             oFonts[],            /* can be NULL */
-  ItemCount *        oNumMatches);        /* can be NULL */
+  ItemCount *        oNumMatches)         /* can be NULL */   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -475,7 +462,7 @@ FNSReferenceCreateFromFamily(
   FMFontStyle         iStyle,
   FNSObjectVersion    iDesiredVersion,
   FNSFontReference *  oReference,            /* can be NULL */
-  FMFontStyle *       oActualStyle);         /* can be NULL */
+  FMFontStyle *       oActualStyle)          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -492,7 +479,7 @@ FNSReferenceMatchFamilies(
   FNSMatchOptions        iMatchOptions,
   ItemCount              iOutputSize,
   FMFontFamilyInstance   oFonts[],            /* can be NULL */
-  ItemCount *            oNumMatches);        /* can be NULL */
+  ItemCount *            oNumMatches)         /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -510,7 +497,7 @@ FNSReferenceGetFamilyInfo(
   FNSFontReference   iReference,
   Str255             oFamilyName,             /* can be NULL */
   ScriptCode *       oFamilyNameScript,       /* can be NULL */
-  FMFontStyle *      oActualStyle);           /* can be NULL */
+  FMFontStyle *      oActualStyle)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -524,7 +511,7 @@ FNSReferenceGetFamilyInfo(
 extern OSStatus 
 FNSReferenceCountNames(
   FNSFontReference   iReference,
-  ItemCount *        oNameCount);
+  ItemCount *        oNameCount)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -545,7 +532,7 @@ FNSReferenceGetIndName(
   FontNameCode *      oFontNameCode,            /* can be NULL */
   FontPlatformCode *  oFontNamePlatform,        /* can be NULL */
   FontScriptCode *    oFontNameScript,          /* can be NULL */
-  FontLanguageCode *  oFontNameLanguage);       /* can be NULL */
+  FontLanguageCode *  oFontNameLanguage)        /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -566,7 +553,7 @@ FNSReferenceFindName(
   ByteCount          iMaximumNameLength,
   Ptr                oName,                    /* can be NULL */
   ByteCount *        oActualNameLength,        /* can be NULL */
-  ItemCount *        oFontNameIndex);          /* can be NULL */
+  ItemCount *        oFontNameIndex)           /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Miscellany */
@@ -579,17 +566,11 @@ FNSReferenceFindName(
  *    Non-Carbon CFM:   in FontSyncLib 1.0 and later
  */
 extern Boolean 
-FNSEnabled(void);
+FNSEnabled(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

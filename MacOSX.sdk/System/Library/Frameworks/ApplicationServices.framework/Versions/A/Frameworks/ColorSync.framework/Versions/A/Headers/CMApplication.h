@@ -3,9 +3,9 @@
  
      Contains:   Color Matching Interfaces
  
-     Version:    ColorSync-81~8
+     Version:    ColorSync-98.1~196
  
-     Copyright:  © 1992-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1992-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,34 +16,17 @@
 #ifndef __CMAPPLICATION__
 #define __CMAPPLICATION__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __FILES__
-#include <CarbonCore/Files.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __CMICCPROFILE__
 #include <ColorSync/CMICCProfile.h>
 #endif
 
-#ifndef __MACERRORS__
-#include <CarbonCore/MacErrors.h>
-#endif
-
 #ifndef __CMTYPES__
 #include <ColorSync/CMTypes.h>
 #endif
-
-#ifndef __CFSTRING__
-#include <CoreFoundation/CFString.h>
-#endif
-
-#ifndef __CFDICTIONARY__
-#include <CoreFoundation/CFDictionary.h>
-#endif
-
 
 
 #define _DECLARE_CS_QD_API_ 0
@@ -53,6 +36,7 @@
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -62,13 +46,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   kDefaultCMMSignature          = 'appl'
@@ -590,7 +568,7 @@ struct CMProfileIterateData {
   UniChar *           uniCodeName;
   unsigned char *     asciiName;
   CMMakeAndModel *    makeAndModel;
-  CMProfileMD5 *      digest;
+  CMProfileMD5 *      digest;                 /* Derived from the RSA Data Security, Inc. MD5 Message-Digest Algorithm */
 };
 typedef struct CMProfileIterateData     CMProfileIterateData;
 /* Caller-supplied callback function for Profile & CMM iteration */
@@ -607,7 +585,7 @@ typedef STACK_UPP_TYPE(CMMIterateProcPtr)                       CMMIterateUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern CMProfileIterateUPP
-NewCMProfileIterateUPP(CMProfileIterateProcPtr userRoutine);
+NewCMProfileIterateUPP(CMProfileIterateProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewCMMIterateUPP()
@@ -618,7 +596,7 @@ NewCMProfileIterateUPP(CMProfileIterateProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern CMMIterateUPP
-NewCMMIterateUPP(CMMIterateProcPtr userRoutine);
+NewCMMIterateUPP(CMMIterateProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeCMProfileIterateUPP()
@@ -629,7 +607,7 @@ NewCMMIterateUPP(CMMIterateProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeCMProfileIterateUPP(CMProfileIterateUPP userUPP);
+DisposeCMProfileIterateUPP(CMProfileIterateUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeCMMIterateUPP()
@@ -640,7 +618,7 @@ DisposeCMProfileIterateUPP(CMProfileIterateUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeCMMIterateUPP(CMMIterateUPP userUPP);
+DisposeCMMIterateUPP(CMMIterateUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeCMProfileIterateUPP()
@@ -654,7 +632,7 @@ extern OSErr
 InvokeCMProfileIterateUPP(
   CMProfileIterateData *  iterateData,
   void *                  refCon,
-  CMProfileIterateUPP     userUPP);
+  CMProfileIterateUPP     userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeCMMIterateUPP()
@@ -668,7 +646,20 @@ extern OSErr
 InvokeCMMIterateUPP(
   CMMInfo *      iterateData,
   void *         refCon,
-  CMMIterateUPP  userUPP);
+  CMMIterateUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+    Clients can register for notifications of ColorSync preference changes by
+  using the kCMPrefsChangedNotification key. This notification will be sent if the
+   user changes ColorSync preferences such as:
+        the default profile by colors space, (CMSetDefaultProfileBySpace)
+      the default profile by device useage, (CMSetDefaultProfileByUse)
+       or the preferred CMM.
+  See <CMDeviceIntegration.h> for more notifications that can be sent.
+*/
+#define kCMPrefsChangedNotification     CFSTR("AppleColorSyncPreferencesChangedNotification")
+
 
 /* Profile file and element access */
 /*
@@ -682,7 +673,7 @@ InvokeCMMIterateUPP(
 extern CMError 
 CMNewProfile(
   CMProfileRef *             prof,
-  const CMProfileLocation *  theProfile);
+  const CMProfileLocation *  theProfile)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -696,7 +687,7 @@ CMNewProfile(
 extern CMError 
 CMOpenProfile(
   CMProfileRef *             prof,
-  const CMProfileLocation *  theProfile);
+  const CMProfileLocation *  theProfile)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -708,7 +699,7 @@ CMOpenProfile(
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
 extern CMError 
-CMCloseProfile(CMProfileRef prof);
+CMCloseProfile(CMProfileRef prof)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -720,7 +711,7 @@ CMCloseProfile(CMProfileRef prof);
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
 extern CMError 
-CMUpdateProfile(CMProfileRef prof);
+CMUpdateProfile(CMProfileRef prof)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -735,7 +726,7 @@ extern CMError
 CMCopyProfile(
   CMProfileRef *             targetProf,
   const CMProfileLocation *  targetLocation,
-  CMProfileRef               srcProf);
+  CMProfileRef               srcProf)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -750,7 +741,7 @@ extern CMError
 CMValidateProfile(
   CMProfileRef   prof,
   Boolean *      valid,
-  Boolean *      preferredCMMnotfound);
+  Boolean *      preferredCMMnotfound)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -764,7 +755,7 @@ CMValidateProfile(
 extern CMError 
 CMGetProfileLocation(
   CMProfileRef         prof,
-  CMProfileLocation *  theProfile);
+  CMProfileLocation *  theProfile)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -779,7 +770,7 @@ extern CMError
 NCMGetProfileLocation(
   CMProfileRef         prof,
   CMProfileLocation *  theProfile,
-  UInt32 *             locationSize);
+  UInt32 *             locationSize)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -796,7 +787,7 @@ CMFlattenProfile(
   UInt32         flags,
   CMFlattenUPP   proc,
   void *         refCon,
-  Boolean *      preferredCMMnotfound);
+  Boolean *      preferredCMMnotfound)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -820,7 +811,7 @@ CMFlattenProfile(
 extern CMError 
 CMGetProfileHeader(
   CMProfileRef            prof,
-  CMAppleProfileHeader *  header);
+  CMAppleProfileHeader *  header)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -834,7 +825,7 @@ CMGetProfileHeader(
 extern CMError 
 CMSetProfileHeader(
   CMProfileRef                  prof,
-  const CMAppleProfileHeader *  header);
+  const CMAppleProfileHeader *  header)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -849,7 +840,7 @@ extern CMError
 CMProfileElementExists(
   CMProfileRef   prof,
   OSType         tag,
-  Boolean *      found);
+  Boolean *      found)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -863,7 +854,7 @@ CMProfileElementExists(
 extern CMError 
 CMCountProfileElements(
   CMProfileRef   prof,
-  UInt32 *       elementCount);
+  UInt32 *       elementCount)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -879,7 +870,7 @@ CMGetProfileElement(
   CMProfileRef   prof,
   OSType         tag,
   UInt32 *       elementSize,
-  void *         elementData);
+  void *         elementData)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -895,7 +886,7 @@ CMSetProfileElement(
   CMProfileRef   prof,
   OSType         tag,
   UInt32         elementSize,
-  const void *   elementData);
+  const void *   elementData)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -910,7 +901,7 @@ extern CMError
 CMSetProfileElementSize(
   CMProfileRef   prof,
   OSType         tag,
-  UInt32         elementSize);
+  UInt32         elementSize)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -925,7 +916,7 @@ extern CMError
 CMSetProfileElementReference(
   CMProfileRef   prof,
   OSType         elementTag,
-  OSType         referenceTag);
+  OSType         referenceTag)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -942,7 +933,7 @@ CMGetPartialProfileElement(
   OSType         tag,
   UInt32         offset,
   UInt32 *       byteCount,
-  void *         elementData);
+  void *         elementData)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -959,7 +950,7 @@ CMSetPartialProfileElement(
   OSType         tag,
   UInt32         offset,
   UInt32         byteCount,
-  const void *   elementData);
+  const void *   elementData)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -976,7 +967,7 @@ CMGetIndProfileElementInfo(
   UInt32         index,
   OSType *       tag,
   UInt32 *       elementSize,
-  Boolean *      refs);
+  Boolean *      refs)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -992,7 +983,7 @@ CMGetIndProfileElement(
   CMProfileRef   prof,
   UInt32         index,
   UInt32 *       elementSize,
-  void *         elementData);
+  void *         elementData)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1006,7 +997,7 @@ CMGetIndProfileElement(
 extern CMError 
 CMRemoveProfileElement(
   CMProfileRef   prof,
-  OSType         tag);
+  OSType         tag)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1021,7 +1012,7 @@ extern CMError
 CMGetScriptProfileDescription(
   CMProfileRef   prof,
   Str255         name,
-  ScriptCode *   code);
+  ScriptCode *   code)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1040,7 +1031,7 @@ CMGetProfileDescriptions(
   Str255          mName,
   ScriptCode *    mCode,
   UniChar *       uName,
-  UniCharCount *  uCount);
+  UniCharCount *  uCount)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1059,7 +1050,7 @@ CMSetProfileDescriptions(
   ConstStr255Param   mName,
   ScriptCode         mCode,
   const UniChar *    uName,
-  UniCharCount       uCount);
+  UniCharCount       uCount)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1074,7 +1065,7 @@ extern CMError
 CMCopyProfileLocalizedStringDictionary(
   CMProfileRef       prof,
   OSType             tag,
-  CFDictionaryRef *  theDict);
+  CFDictionaryRef *  theDict)                                 AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -1089,7 +1080,7 @@ extern CMError
 CMSetProfileLocalizedStringDictionary(
   CMProfileRef      prof,
   OSType            tag,
-  CFDictionaryRef   theDict);
+  CFDictionaryRef   theDict)                                  AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -1106,7 +1097,7 @@ CMCopyProfileLocalizedString(
   OSType         tag,
   CFStringRef    reqLocale,
   CFStringRef *  locale,
-  CFStringRef *  str);
+  CFStringRef *  str)                                         AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -1118,7 +1109,7 @@ CMCopyProfileLocalizedString(
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
 extern CMError 
-CMCloneProfileRef(CMProfileRef prof);
+CMCloneProfileRef(CMProfileRef prof)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1132,7 +1123,7 @@ CMCloneProfileRef(CMProfileRef prof);
 extern CMError 
 CMGetProfileRefCount(
   CMProfileRef   prof,
-  long *         count);
+  long *         count)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1146,7 +1137,7 @@ CMGetProfileRefCount(
 extern CMError 
 CMProfileModified(
   CMProfileRef   prof,
-  Boolean *      modified);
+  Boolean *      modified)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1160,7 +1151,7 @@ CMProfileModified(
 extern CMError 
 CMGetProfileMD5(
   CMProfileRef   prof,
-  CMProfileMD5   digest);
+  CMProfileMD5   digest)                                      AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -1181,7 +1172,7 @@ CMGetNamedColorInfo(
   OSType *       PCSColorSpace,
   UInt32 *       count,
   StringPtr      prefix,
-  StringPtr      suffix);
+  StringPtr      suffix)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1197,7 +1188,7 @@ CMGetNamedColorValue(
   CMProfileRef   prof,
   StringPtr      name,
   CMColor *      deviceColor,
-  CMColor *      PCSColor);
+  CMColor *      PCSColor)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1213,7 +1204,7 @@ CMGetIndNamedColorValue(
   CMProfileRef   prof,
   UInt32         index,
   CMColor *      deviceColor,
-  CMColor *      PCSColor);
+  CMColor *      PCSColor)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1228,7 +1219,7 @@ extern CMError
 CMGetNamedColorIndex(
   CMProfileRef   prof,
   StringPtr      name,
-  UInt32 *       index);
+  UInt32 *       index)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1243,7 +1234,7 @@ extern CMError
 CMGetNamedColorName(
   CMProfileRef   prof,
   UInt32         index,
-  StringPtr      name);
+  StringPtr      name)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1260,7 +1251,7 @@ extern CMError
 NCWNewColorWorld(
   CMWorldRef *   cw,
   CMProfileRef   src,
-  CMProfileRef   dst);
+  CMProfileRef   dst)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1274,7 +1265,7 @@ NCWNewColorWorld(
 extern CMError 
 CWConcatColorWorld(
   CMWorldRef *          cw,
-  CMConcatProfileSet *  profileSet);
+  CMConcatProfileSet *  profileSet)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1289,7 +1280,7 @@ extern CMError
 CWNewLinkProfile(
   CMProfileRef *             prof,
   const CMProfileLocation *  targetLocation,
-  CMConcatProfileSet *       profileSet);
+  CMConcatProfileSet *       profileSet)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1305,7 +1296,7 @@ NCWConcatColorWorld(
   CMWorldRef *           cw,
   NCMConcatProfileSet *  profileSet,
   CMConcatCallBackUPP    proc,
-  void *                 refCon);
+  void *                 refCon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1322,7 +1313,7 @@ NCWNewLinkProfile(
   const CMProfileLocation *  targetLocation,
   NCMConcatProfileSet *      profileSet,
   CMConcatCallBackUPP        proc,
-  void *                     refCon);
+  void *                     refCon)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1334,7 +1325,7 @@ NCWNewLinkProfile(
  *    Non-Carbon CFM:   in ColorSyncLib 1.0 and later
  */
 extern void 
-CWDisposeColorWorld(CMWorldRef cw);
+CWDisposeColorWorld(CMWorldRef cw)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1349,7 +1340,7 @@ extern CMError
 CWMatchColors(
   CMWorldRef   cw,
   CMColor *    myColors,
-  UInt32       count);
+  UInt32       count)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1365,7 +1356,7 @@ CWCheckColors(
   CMWorldRef   cw,
   CMColor *    myColors,
   UInt32       count,
-  UInt32 *     result);
+  UInt32 *     result)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1382,7 +1373,7 @@ CWMatchBitmap(
   CMBitmap *            bitmap,
   CMBitmapCallBackUPP   progressProc,
   void *                refCon,
-  CMBitmap *            matchedBitmap);
+  CMBitmap *            matchedBitmap)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1399,7 +1390,7 @@ CWCheckBitmap(
   const CMBitmap *      bitmap,
   CMBitmapCallBackUPP   progressProc,
   void *                refCon,
-  CMBitmap *            resultBitmap);
+  CMBitmap *            resultBitmap)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Quickdraw-specific matching */
@@ -1532,7 +1523,7 @@ extern CMError
 CMCreateProfileIdentifier(
   CMProfileRef             prof,
   CMProfileIdentifierPtr   ident,
-  UInt32 *                 size);
+  UInt32 *                 size)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1546,7 +1537,7 @@ CMCreateProfileIdentifier(
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
 extern CMError 
-CMGetSystemProfile(CMProfileRef * prof);
+CMGetSystemProfile(CMProfileRef * prof)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1558,7 +1549,7 @@ CMGetSystemProfile(CMProfileRef * prof);
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
 extern CMError 
-CMSetSystemProfile(const FSSpec * profileFileSpec);
+CMSetSystemProfile(const FSSpec * profileFileSpec)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1570,7 +1561,7 @@ CMSetSystemProfile(const FSSpec * profileFileSpec);
  *    Non-Carbon CFM:   in ColorSyncLib 2.6 and later
  */
 extern CMError 
-NCMSetSystemProfile(const CMProfileLocation * profLoc);
+NCMSetSystemProfile(const CMProfileLocation * profLoc)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1584,7 +1575,7 @@ NCMSetSystemProfile(const CMProfileLocation * profLoc);
 extern CMError 
 CMGetDefaultProfileBySpace(
   OSType          dataColorSpace,
-  CMProfileRef *  prof);
+  CMProfileRef *  prof)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1598,7 +1589,7 @@ CMGetDefaultProfileBySpace(
 extern CMError 
 CMSetDefaultProfileBySpace(
   OSType         dataColorSpace,
-  CMProfileRef   prof);
+  CMProfileRef   prof)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1612,7 +1603,7 @@ CMSetDefaultProfileBySpace(
 extern CMError 
 CMGetProfileByAVID(
   CMDisplayIDType   theID,
-  CMProfileRef *    prof);
+  CMProfileRef *    prof)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1626,7 +1617,7 @@ CMGetProfileByAVID(
 extern CMError 
 CMSetProfileByAVID(
   CMDisplayIDType   theID,
-  CMProfileRef      prof);
+  CMProfileRef      prof)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1641,7 +1632,7 @@ extern CMError
 CMGetGammaByAVID(
   CMDisplayIDType     theID,
   CMVideoCardGamma *  gamma,
-  UInt32 *            size);
+  UInt32 *            size)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1655,7 +1646,7 @@ CMGetGammaByAVID(
 extern CMError 
 CMSetGammaByAVID(
   CMDisplayIDType     theID,
-  CMVideoCardGamma *  gamma);
+  CMVideoCardGamma *  gamma)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Profile access by Use */
@@ -1670,7 +1661,7 @@ CMSetGammaByAVID(
 extern CMError 
 CMGetDefaultProfileByUse(
   OSType          use,
-  CMProfileRef *  prof);
+  CMProfileRef *  prof)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1684,7 +1675,7 @@ CMGetDefaultProfileByUse(
 extern CMError 
 CMSetDefaultProfileByUse(
   OSType         use,
-  CMProfileRef   prof);
+  CMProfileRef   prof)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Profile Management */
@@ -1701,7 +1692,7 @@ CMNewProfileSearch(
   CMSearchRecord *      searchSpec,
   void *                refCon,
   UInt32 *              count,
-  CMProfileSearchRef *  searchResult);
+  CMProfileSearchRef *  searchResult)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1716,7 +1707,7 @@ extern CMError
 CMUpdateProfileSearch(
   CMProfileSearchRef   search,
   void *               refCon,
-  UInt32 *             count);
+  UInt32 *             count)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1728,7 +1719,7 @@ CMUpdateProfileSearch(
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
 extern void 
-CMDisposeProfileSearch(CMProfileSearchRef search);
+CMDisposeProfileSearch(CMProfileSearchRef search)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1743,7 +1734,7 @@ extern CMError
 CMSearchGetIndProfile(
   CMProfileSearchRef   search,
   UInt32               index,
-  CMProfileRef *       prof);
+  CMProfileRef *       prof)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1758,7 +1749,7 @@ extern CMError
 CMSearchGetIndProfileFileSpec(
   CMProfileSearchRef   search,
   UInt32               index,
-  FSSpec *             profileFile);
+  FSSpec *             profileFile)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1773,7 +1764,7 @@ extern CMError
 CMProfileIdentifierFolderSearch(
   CMProfileIdentifierPtr   ident,
   UInt32 *                 matchedCount,
-  CMProfileSearchRef *     searchResult);
+  CMProfileSearchRef *     searchResult)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1790,7 +1781,7 @@ CMProfileIdentifierListSearch(
   CMProfileRef *           profileList,
   UInt32                   listSize,
   UInt32 *                 matchedCount,
-  CMProfileRef *           matchedList);
+  CMProfileRef *           matchedList)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1806,7 +1797,7 @@ CMIterateColorSyncFolder(
   CMProfileIterateUPP   proc,
   UInt32 *              seed,
   UInt32 *              count,
-  void *                refCon);
+  void *                refCon)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1822,7 +1813,7 @@ NCMUnflattenProfile(
   CMProfileLocation *  targetLocation,
   CMFlattenUPP         proc,
   void *               refCon,
-  Boolean *            preferredCMMnotfound);
+  Boolean *            preferredCMMnotfound)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Utilities */
@@ -1839,7 +1830,7 @@ CMGetColorSyncFolderSpec(
   short     vRefNum,
   Boolean   createFolder,
   short *   foundVRefNum,
-  long *    foundDirID);
+  long *    foundDirID)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #if TARGET_OS_WIN32 || TARGET_OS_UNIX
@@ -1866,7 +1857,7 @@ CMGetColorSyncFolderSpec(
 extern CMError 
 CMGetCWInfo(
   CMWorldRef        cw,
-  CMCWInfoRecord *  info);
+  CMCWInfoRecord *  info)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #if TARGET_API_MAC_OS8
@@ -1893,7 +1884,7 @@ CMGetCWInfo(
 extern CMError 
 CMGetPreferredCMM(
   OSType *   cmmType,
-  Boolean *  preferredCMMnotfound);
+  Boolean *  preferredCMMnotfound)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1908,7 +1899,7 @@ extern CMError
 CMIterateCMMInfo(
   CMMIterateUPP   proc,
   UInt32 *        count,
-  void *          refCon);
+  void *          refCon)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1920,7 +1911,7 @@ CMIterateCMMInfo(
  *    Non-Carbon CFM:   in ColorSyncLib 2.6 and later
  */
 extern CMError 
-CMGetColorSyncVersion(UInt32 * version);
+CMGetColorSyncVersion(UInt32 * version)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1932,7 +1923,7 @@ CMGetColorSyncVersion(UInt32 * version);
  *    Non-Carbon CFM:   in ColorSyncLib 3.0 and later
  */
 extern CMError 
-CMLaunchControlPanel(UInt32 flags);
+CMLaunchControlPanel(UInt32 flags)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* ColorSpace conversion functions */
@@ -1949,7 +1940,7 @@ CMConvertXYZToLab(
   const CMColor *     src,
   const CMXYZColor *  white,
   CMColor *           dst,
-  UInt32              count);
+  UInt32              count)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1965,7 +1956,7 @@ CMConvertLabToXYZ(
   const CMColor *     src,
   const CMXYZColor *  white,
   CMColor *           dst,
-  UInt32              count);
+  UInt32              count)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1981,7 +1972,7 @@ CMConvertXYZToLuv(
   const CMColor *     src,
   const CMXYZColor *  white,
   CMColor *           dst,
-  UInt32              count);
+  UInt32              count)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1997,7 +1988,7 @@ CMConvertLuvToXYZ(
   const CMColor *     src,
   const CMXYZColor *  white,
   CMColor *           dst,
-  UInt32              count);
+  UInt32              count)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2012,7 +2003,7 @@ extern CMError
 CMConvertXYZToYxy(
   const CMColor *  src,
   CMColor *        dst,
-  UInt32           count);
+  UInt32           count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2027,7 +2018,7 @@ extern CMError
 CMConvertYxyToXYZ(
   const CMColor *  src,
   CMColor *        dst,
-  UInt32           count);
+  UInt32           count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2042,7 +2033,7 @@ extern CMError
 CMConvertRGBToHLS(
   const CMColor *  src,
   CMColor *        dst,
-  UInt32           count);
+  UInt32           count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2057,7 +2048,7 @@ extern CMError
 CMConvertHLSToRGB(
   const CMColor *  src,
   CMColor *        dst,
-  UInt32           count);
+  UInt32           count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2072,7 +2063,7 @@ extern CMError
 CMConvertRGBToHSV(
   const CMColor *  src,
   CMColor *        dst,
-  UInt32           count);
+  UInt32           count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2087,7 +2078,7 @@ extern CMError
 CMConvertHSVToRGB(
   const CMColor *  src,
   CMColor *        dst,
-  UInt32           count);
+  UInt32           count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2102,7 +2093,7 @@ extern CMError
 CMConvertRGBToGray(
   const CMColor *  src,
   CMColor *        dst,
-  UInt32           count);
+  UInt32           count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2117,7 +2108,7 @@ extern CMError
 CMConvertXYZToFixedXYZ(
   const CMXYZColor *  src,
   CMFixedXYZColor *   dst,
-  UInt32              count);
+  UInt32              count)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2132,7 +2123,7 @@ extern CMError
 CMConvertFixedXYZToXYZ(
   const CMFixedXYZColor *  src,
   CMXYZColor *             dst,
-  UInt32                   count);
+  UInt32                   count)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2150,7 +2141,7 @@ CMConvertXYZToXYZ(
   CMColor *               dst,
   const CMXYZColor *      dstIlluminant,
   CMChromaticAdaptation   method,
-  UInt32                  count);
+  UInt32                  count)                              AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -2169,7 +2160,7 @@ CMGetPS2ColorSpace(
   UInt32         flags,
   CMFlattenUPP   proc,
   void *         refCon,
-  Boolean *      preferredCMMnotfound);
+  Boolean *      preferredCMMnotfound)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2186,7 +2177,7 @@ CMGetPS2ColorRenderingIntent(
   UInt32         flags,
   CMFlattenUPP   proc,
   void *         refCon,
-  Boolean *      preferredCMMnotfound);
+  Boolean *      preferredCMMnotfound)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2204,7 +2195,7 @@ CMGetPS2ColorRendering(
   UInt32         flags,
   CMFlattenUPP   proc,
   void *         refCon,
-  Boolean *      preferredCMMnotfound);
+  Boolean *      preferredCMMnotfound)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2220,7 +2211,7 @@ CMGetPS2ColorRenderingVMSize(
   CMProfileRef   srcProf,
   CMProfileRef   dstProf,
   UInt32 *       vmSize,
-  Boolean *      preferredCMMnotfound);
+  Boolean *      preferredCMMnotfound)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2358,13 +2349,7 @@ enum {
 #endif  /* TARGET_API_MAC_OS8 */
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

@@ -37,7 +37,6 @@ typedef struct __AGLPrivateRec *AGLPrivate;
 struct __AGLContextRec {
 	GLIContext           rend;
 	GLIFunctionDispatch  disp;
-	GLIExtensionDispatch exts;
 	AGLPrivate           priv;
 };
 

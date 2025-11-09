@@ -3,9 +3,9 @@
  
      Contains:   Public interface to the Font Manager.
  
-     Version:    Quickdraw-64.6.15~3
+     Version:    Quickdraw-96.21~1
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,32 +16,21 @@
 #ifndef __FONTS__
 #define __FONTS__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __ATSTYPES__
 #include <ATS/ATSTypes.h>
 #endif
 
-#ifndef __FILES__
-#include <CarbonCore/Files.h>
-#endif
-
-#ifndef __MACERRORS__
-#include <CarbonCore/MacErrors.h>
-#endif
-
 #ifndef __QUICKDRAW__
 #include <QD/Quickdraw.h>
 #endif
 
-#ifndef __TEXTCOMMON__
-#include <CarbonCore/TextCommon.h>
-#endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -51,13 +40,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   systemFont                    = 0,
@@ -169,7 +152,7 @@ typedef FMetricRecPtr *                 FMetricRecHandle;
 extern void 
 GetFontName(
   short    familyID,
-  Str255   name);
+  Str255   name)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -183,7 +166,7 @@ GetFontName(
 extern void 
 GetFNum(
   ConstStr255Param   name,
-  short *            familyID);
+  short *            familyID)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -197,7 +180,7 @@ GetFNum(
 extern Boolean 
 RealFont(
   short   fontNum,
-  short   size);
+  short   size)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -219,7 +202,7 @@ RealFont(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern FMOutPtr 
-FMSwapFont(const FMInput * inRec);
+FMSwapFont(const FMInput * inRec)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -231,7 +214,7 @@ FMSwapFont(const FMInput * inRec);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetFScaleDisable(Boolean fscaleDisable);
+SetFScaleDisable(Boolean fscaleDisable)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -243,7 +226,7 @@ SetFScaleDisable(Boolean fscaleDisable);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-FontMetrics(FMetricRecPtr theMetrics);
+FontMetrics(FMetricRecPtr theMetrics)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -255,7 +238,7 @@ FontMetrics(FMetricRecPtr theMetrics);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetFractEnable(Boolean fractEnable);
+SetFractEnable(Boolean fractEnable)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -267,7 +250,7 @@ SetFractEnable(Boolean fractEnable);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-GetDefFontSize(void);
+GetDefFontSize(void)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -281,7 +264,7 @@ GetDefFontSize(void);
 extern Boolean 
 IsOutline(
   Point   numer,
-  Point   denom);
+  Point   denom)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -293,7 +276,7 @@ IsOutline(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetOutlinePreferred(Boolean outlinePreferred);
+SetOutlinePreferred(Boolean outlinePreferred)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -305,7 +288,7 @@ SetOutlinePreferred(Boolean outlinePreferred);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
-GetOutlinePreferred(void);
+GetOutlinePreferred(void)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -326,7 +309,7 @@ OutlineMetrics(
   short *       yMin,
   FixedPtr      awArray,
   FixedPtr      lsbArray,
-  RectPtr       boundsArray);
+  RectPtr       boundsArray)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -338,7 +321,7 @@ OutlineMetrics(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetPreserveGlyph(Boolean preserveGlyph);
+SetPreserveGlyph(Boolean preserveGlyph)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -350,7 +333,7 @@ SetPreserveGlyph(Boolean preserveGlyph);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
-GetPreserveGlyph(void);
+GetPreserveGlyph(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -392,7 +375,7 @@ GetPreserveGlyph(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-GetSysFont(void);
+GetSysFont(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -404,7 +387,7 @@ GetSysFont(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-GetAppFont(void);
+GetAppFont(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*--------------------------------------------------------------------------------------*/
@@ -421,7 +404,7 @@ GetAppFont(void);
 extern OSStatus 
 SetAntiAliasedTextEnabled(
   Boolean   iEnable,
-  SInt16    iMinFontSize);
+  SInt16    iMinFontSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -433,7 +416,7 @@ SetAntiAliasedTextEnabled(
  *    Non-Carbon CFM:   in InterfaceLib 8.6 and later
  */
 extern Boolean 
-IsAntiAliasedTextEnabled(SInt16 * oMinFontSize);
+IsAntiAliasedTextEnabled(SInt16 * oMinFontSize)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -448,7 +431,7 @@ extern void
 QDTextBounds(
   short         byteCount,
   const void *  textAddr,
-  Rect *        bounds);
+  Rect *        bounds)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -464,7 +447,7 @@ FetchFontInfo(
   SInt16      fontID,
   SInt16      fontSize,
   SInt16      fontStyle,
-  FontInfo *  info);
+  FontInfo *  info)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*--------------------------------------------------------------------------------------*/
@@ -484,7 +467,7 @@ FMCreateFontFamilyIterator(
   const FMFilter *        iFilter,          /* can be NULL */
   void *                  iRefCon,
   OptionBits              iOptions,
-  FMFontFamilyIterator *  ioIterator);
+  FMFontFamilyIterator *  ioIterator)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -496,7 +479,7 @@ FMCreateFontFamilyIterator(
  *    Non-Carbon CFM:   in FontManager 9.0 and later
  */
 extern OSStatus 
-FMDisposeFontFamilyIterator(FMFontFamilyIterator * ioIterator);
+FMDisposeFontFamilyIterator(FMFontFamilyIterator * ioIterator) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -512,7 +495,7 @@ FMResetFontFamilyIterator(
   const FMFilter *        iFilter,          /* can be NULL */
   void *                  iRefCon,
   OptionBits              iOptions,
-  FMFontFamilyIterator *  ioIterator);
+  FMFontFamilyIterator *  ioIterator)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -526,7 +509,7 @@ FMResetFontFamilyIterator(
 extern OSStatus 
 FMGetNextFontFamily(
   FMFontFamilyIterator *  ioIterator,
-  FMFontFamily *          oFontFamily);
+  FMFontFamily *          oFontFamily)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -542,7 +525,7 @@ FMCreateFontIterator(
   const FMFilter *  iFilter,          /* can be NULL */
   void *            iRefCon,
   OptionBits        iOptions,
-  FMFontIterator *  ioIterator);
+  FMFontIterator *  ioIterator)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -554,7 +537,7 @@ FMCreateFontIterator(
  *    Non-Carbon CFM:   in FontManager 9.0 and later
  */
 extern OSStatus 
-FMDisposeFontIterator(FMFontIterator * ioIterator);
+FMDisposeFontIterator(FMFontIterator * ioIterator)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -570,7 +553,7 @@ FMResetFontIterator(
   const FMFilter *  iFilter,          /* can be NULL */
   void *            iRefCon,
   OptionBits        iOptions,
-  FMFontIterator *  ioIterator);
+  FMFontIterator *  ioIterator)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -584,7 +567,7 @@ FMResetFontIterator(
 extern OSStatus 
 FMGetNextFont(
   FMFontIterator *  ioIterator,
-  FMFont *          oFont);
+  FMFont *          oFont)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Font families */
@@ -599,7 +582,7 @@ FMGetNextFont(
 extern OSStatus 
 FMCreateFontFamilyInstanceIterator(
   FMFontFamily                    iFontFamily,
-  FMFontFamilyInstanceIterator *  ioIterator);
+  FMFontFamilyInstanceIterator *  ioIterator)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -611,7 +594,7 @@ FMCreateFontFamilyInstanceIterator(
  *    Non-Carbon CFM:   in FontManager 9.0 and later
  */
 extern OSStatus 
-FMDisposeFontFamilyInstanceIterator(FMFontFamilyInstanceIterator * ioIterator);
+FMDisposeFontFamilyInstanceIterator(FMFontFamilyInstanceIterator * ioIterator) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -625,7 +608,7 @@ FMDisposeFontFamilyInstanceIterator(FMFontFamilyInstanceIterator * ioIterator);
 extern OSStatus 
 FMResetFontFamilyInstanceIterator(
   FMFontFamily                    iFontFamily,
-  FMFontFamilyInstanceIterator *  ioIterator);
+  FMFontFamilyInstanceIterator *  ioIterator)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -641,7 +624,7 @@ FMGetNextFontFamilyInstance(
   FMFontFamilyInstanceIterator *  ioIterator,
   FMFont *                        oFont,
   FMFontStyle *                   oStyle,           /* can be NULL */
-  FMFontSize *                    oSize);           /* can be NULL */
+  FMFontSize *                    oSize)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -653,7 +636,7 @@ FMGetNextFontFamilyInstance(
  *    Non-Carbon CFM:   in FontManager 9.0 and later
  */
 extern FMFontFamily 
-FMGetFontFamilyFromName(ConstStr255Param iName);
+FMGetFontFamilyFromName(ConstStr255Param iName)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -667,7 +650,7 @@ FMGetFontFamilyFromName(ConstStr255Param iName);
 extern OSStatus 
 FMGetFontFamilyName(
   FMFontFamily   iFontFamily,
-  Str255         oName);
+  Str255         oName)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -681,7 +664,7 @@ FMGetFontFamilyName(
 extern OSStatus 
 FMGetFontFamilyTextEncoding(
   FMFontFamily    iFontFamily,
-  TextEncoding *  oTextEncoding);
+  TextEncoding *  oTextEncoding)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -695,7 +678,7 @@ FMGetFontFamilyTextEncoding(
 extern OSStatus 
 FMGetFontFamilyGeneration(
   FMFontFamily    iFontFamily,
-  FMGeneration *  oGeneration);
+  FMGeneration *  oGeneration)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Fonts */
@@ -710,7 +693,7 @@ FMGetFontFamilyGeneration(
 extern OSStatus 
 FMGetFontFormat(
   FMFont          iFont,
-  FourCharCode *  oFormat);
+  FourCharCode *  oFormat)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -726,7 +709,7 @@ FMGetFontTableDirectory(
   FMFont       iFont,
   ByteCount    iLength,
   void *       iBuffer,
-  ByteCount *  oActualLength);      /* can be NULL */
+  ByteCount *  oActualLength)       /* can be NULL */         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -744,7 +727,7 @@ FMGetFontTable(
   ByteOffset     iOffset,
   ByteCount      iLength,
   void *         iBuffer,
-  ByteCount *    oActualLength);      /* can be NULL */
+  ByteCount *    oActualLength)       /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -758,7 +741,7 @@ FMGetFontTable(
 extern OSStatus 
 FMGetFontGeneration(
   FMFont          iFont,
-  FMGeneration *  oGeneration);
+  FMGeneration *  oGeneration)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -772,7 +755,7 @@ FMGetFontGeneration(
 extern OSStatus 
 FMGetFontContainer(
   FMFont    iFont,
-  FSSpec *  oFontContainer);
+  FSSpec *  oFontContainer)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Conversion */
@@ -789,7 +772,7 @@ FMGetFontFromFontFamilyInstance(
   FMFontFamily   iFontFamily,
   FMFontStyle    iStyle,
   FMFont *       oFont,
-  FMFontStyle *  oIntrinsicStyle);      /* can be NULL */
+  FMFontStyle *  oIntrinsicStyle)       /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -804,7 +787,7 @@ extern OSStatus
 FMGetFontFamilyInstanceFromFont(
   FMFont          iFont,
   FMFontFamily *  oFontFamily,
-  FMFontStyle *   oStyle);
+  FMFontStyle *   oStyle)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -816,7 +799,7 @@ FMGetFontFamilyInstanceFromFont(
  *    Non-Carbon CFM:   not available
  */
 extern ATSFontRef 
-FMGetATSFontRefFromFont(FMFont iFont);
+FMGetATSFontRefFromFont(FMFont iFont)                         AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -828,7 +811,7 @@ FMGetATSFontRefFromFont(FMFont iFont);
  *    Non-Carbon CFM:   not available
  */
 extern ATSFontFamilyRef 
-FMGetATSFontFamilyRefFromFontFamily(FMFontFamily iFamily);
+FMGetATSFontFamilyRefFromFontFamily(FMFontFamily iFamily)     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -840,7 +823,7 @@ FMGetATSFontFamilyRefFromFontFamily(FMFontFamily iFamily);
  *    Non-Carbon CFM:   not available
  */
 extern FMFont 
-FMGetFontFromATSFontRef(ATSFontRef iFont);
+FMGetFontFromATSFontRef(ATSFontRef iFont)                     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -852,7 +835,7 @@ FMGetFontFromATSFontRef(ATSFontRef iFont);
  *    Non-Carbon CFM:   not available
  */
 extern FMFontFamily 
-FMGetFontFamilyFromATSFontFamilyRef(ATSFontFamilyRef iFamily);
+FMGetFontFamilyFromATSFontFamilyRef(ATSFontFamilyRef iFamily) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /* Activation */
@@ -869,7 +852,7 @@ FMActivateFonts(
   const FSSpec *    iFontContainer,
   const FMFilter *  iFilter,              /* can be NULL */
   void *            iRefCon,
-  OptionBits        iOptions);
+  OptionBits        iOptions)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -885,7 +868,7 @@ FMDeactivateFonts(
   const FSSpec *    iFontContainer,
   const FMFilter *  iFilter,              /* can be NULL */
   void *            iRefCon,
-  OptionBits        iOptions);
+  OptionBits        iOptions)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -897,7 +880,7 @@ FMDeactivateFonts(
  *    Non-Carbon CFM:   in FontManager 9.0 and later
  */
 extern FMGeneration 
-FMGetGeneration(void);
+FMGetGeneration(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Container Access */
@@ -914,7 +897,7 @@ FMGetFontContainerFromFontFamilyInstance(
   FMFontFamily   iFontFamily,
   FMFontStyle    iStyle,
   FMFontSize     iFontSize,
-  FSSpec *       oFontContainer);
+  FSSpec *       oFontContainer)                              AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -932,7 +915,7 @@ FMGetFontFamilyResource(
   FMFontSize     iFontSize,
   ByteCount      iBufferSize,
   void *         ioBuffer,
-  ByteCount *    oSize);            /* can be NULL */
+  ByteCount *    oSize)             /* can be NULL */         AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -1104,13 +1087,7 @@ enum {
 
 /*--------------------------------------------------------------------------------------*/
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

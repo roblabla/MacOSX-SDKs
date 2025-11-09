@@ -3,9 +3,9 @@
  
      Contains:   Quickdraw Text Interfaces.
  
-     Version:    Quickdraw-64.6.15~3
+     Version:    Quickdraw-96.21~1
  
-     Copyright:  © 1983-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1983-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,20 +16,12 @@
 #ifndef __QUICKDRAWTEXT__
 #define __QUICKDRAWTEXT__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __MIXEDMODE__
-#include <CarbonCore/MixedMode.h>
-#endif
-
-#ifndef __INTLRESOURCES__
-#include <CarbonCore/IntlResources.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -39,13 +31,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* new CGrafPort bottleneck ("newProc2") function, used in Unicode Text drawing */
 /*
@@ -59,7 +45,7 @@ extern "C" {
 extern OSStatus 
 StandardGlyphs(
   void *      dataStream,
-  ByteCount   size);
+  ByteCount   size)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -149,7 +135,7 @@ typedef STACK_UPP_TYPE(StyleRunDirectionProcPtr)                StyleRunDirectio
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern StyleRunDirectionUPP
-NewStyleRunDirectionUPP(StyleRunDirectionProcPtr userRoutine);
+NewStyleRunDirectionUPP(StyleRunDirectionProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeStyleRunDirectionUPP()
@@ -160,7 +146,7 @@ NewStyleRunDirectionUPP(StyleRunDirectionProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeStyleRunDirectionUPP(StyleRunDirectionUPP userUPP);
+DisposeStyleRunDirectionUPP(StyleRunDirectionUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeStyleRunDirectionUPP()
@@ -174,7 +160,7 @@ extern Boolean
 InvokeStyleRunDirectionUPP(
   short                 styleRunIndex,
   void *                dirParam,
-  StyleRunDirectionUPP  userUPP);
+  StyleRunDirectionUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  Pixel2Char()
@@ -214,7 +200,7 @@ PixelToChar(
   Fixed *         widthRemaining,
   JustStyleCode   styleRunPosition,
   Point           numer,
-  Point           denom);
+  Point           denom)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -234,7 +220,7 @@ CharToPixel(
   short           direction,
   JustStyleCode   styleRunPosition,
   Point           numer,
-  Point           denom);
+  Point           denom)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -252,7 +238,7 @@ DrawJustified(
   Fixed           slop,
   JustStyleCode   styleRunPosition,
   Point           numer,
-  Point           denom);
+  Point           denom)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -271,7 +257,7 @@ MeasureJustified(
   Ptr             charLocs,
   JustStyleCode   styleRunPosition,
   Point           numer,
-  Point           denom);
+  Point           denom)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -288,7 +274,7 @@ PortionLine(
   long            textLen,
   JustStyleCode   styleRunPosition,
   Point           numer,
-  Point           denom);
+  Point           denom)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -305,7 +291,7 @@ HiliteText(
   short         textLength,
   short         firstOffset,
   short         secondOffset,
-  OffsetTable   offsets);
+  OffsetTable   offsets)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -349,7 +335,7 @@ HiliteText(
 extern long 
 VisibleLength(
   Ptr    textPtr,
-  long   textLength);
+  long   textLength)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -367,7 +353,7 @@ GetFormatOrder(
   short                  lastFormat,
   Boolean                lineRight,
   StyleRunDirectionUPP   rlDirProc,
-  Ptr                    dirParam);
+  Ptr                    dirParam)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -379,7 +365,7 @@ GetFormatOrder(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-TextFont(short font);
+TextFont(short font)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -391,7 +377,7 @@ TextFont(short font);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-TextFace(StyleParameter face);
+TextFace(StyleParameter face)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -403,7 +389,7 @@ TextFace(StyleParameter face);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-TextMode(short mode);
+TextMode(short mode)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -415,7 +401,7 @@ TextMode(short mode);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-TextSize(short size);
+TextSize(short size)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -427,7 +413,7 @@ TextSize(short size);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SpaceExtra(Fixed extra);
+SpaceExtra(Fixed extra)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -439,7 +425,7 @@ SpaceExtra(Fixed extra);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DrawChar(CharParameter ch);
+DrawChar(CharParameter ch)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -451,7 +437,7 @@ DrawChar(CharParameter ch);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DrawString(ConstStr255Param s);
+DrawString(ConstStr255Param s)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -469,7 +455,7 @@ extern void
 MacDrawText(
   const void *  textBuf,
   short         firstByte,
-  short         byteCount);
+  short         byteCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -481,7 +467,7 @@ MacDrawText(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-CharWidth(CharParameter ch);
+CharWidth(CharParameter ch)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -493,7 +479,7 @@ CharWidth(CharParameter ch);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-StringWidth(ConstStr255Param s);
+StringWidth(ConstStr255Param s)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -508,7 +494,7 @@ extern short
 TextWidth(
   const void *  textBuf,
   short         firstByte,
-  short         byteCount);
+  short         byteCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -523,7 +509,7 @@ extern void
 MeasureText(
   short         count,
   const void *  textAddr,
-  void *        charLocs);
+  void *        charLocs)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -535,7 +521,7 @@ MeasureText(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GetFontInfo(FontInfo * info);
+GetFontInfo(FontInfo * info)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -547,7 +533,7 @@ GetFontInfo(FontInfo * info);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-CharExtra(Fixed extra);
+CharExtra(Fixed extra)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -563,7 +549,7 @@ StdText(
   short         count,
   const void *  textAddr,
   Point         numer,
-  Point         denom);
+  Point         denom)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -580,7 +566,7 @@ StdTxMeas(
   const void *  textAddr,
   Point *       numer,
   Point *       denom,
-  FontInfo *    info);
+  FontInfo *    info)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -599,7 +585,7 @@ StyledLineBreak(
   long     textEnd,
   long     flags,
   Fixed *  textWidth,
-  long *   textOffset);
+  long *   textOffset)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -614,7 +600,7 @@ extern short
 TruncString(
   short       width,
   Str255      theString,
-  TruncCode   truncWhere);
+  TruncCode   truncWhere)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -630,7 +616,7 @@ TruncText(
   short       width,
   Ptr         textPtr,
   short *     length,
-  TruncCode   truncWhere);
+  TruncCode   truncWhere)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -667,7 +653,23 @@ stdtext(
   short          count,
   const void *   textAddr,
   const Point *  numer,
-  const Point *  denom);
+  const Point *  denom)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  SwapQDTextFlags()
+ *  
+ *  Discussion:
+ *    Obsolete. Use QDSwapTextFlags instead (in Quickdraw.h).
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern UInt32 
+SwapQDTextFlags(UInt32 newFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
 
 
 #if OLDROUTINENAMES
@@ -684,13 +686,7 @@ stdtext(
 #endif  /* OLDROUTINENAMES */
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

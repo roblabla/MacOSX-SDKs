@@ -3,9 +3,9 @@
  
      Contains:   AppleScript Debugging Interfaces.
  
-     Version:    OSA-30~10
+     Version:    OSA-48~15
  
-     Copyright:  © 1992-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1992-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,20 +16,8 @@
 #ifndef __ASDEBUGGING__
 #define __ASDEBUGGING__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __FILES__
-#include <CarbonCore/Files.h>
-#endif
-
-#ifndef __COMPONENTS__
-#include <CarbonCore/Components.h>
-#endif
-
-#ifndef __APPLEEVENTS__
-#include <AE/AppleEvents.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __APPLESCRIPT__
@@ -38,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -45,14 +34,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 /**************************************************************************
@@ -103,7 +84,7 @@ OSASetProperty(
   long                modeFlags,
   OSAID               contextID,
   const AEDesc *      variableName,
-  OSAID               scriptValueID);
+  OSAID               scriptValueID)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -120,7 +101,7 @@ OSAGetProperty(
   long                modeFlags,
   OSAID               contextID,
   const AEDesc *      variableName,
-  OSAID *             resultingScriptValueID);
+  OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -136,7 +117,7 @@ OSAGetPropertyNames(
   ComponentInstance   scriptingComponent,
   long                modeFlags,
   OSAID               contextID,
-  AEDescList *        resultingPropertyNames);
+  AEDescList *        resultingPropertyNames)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -153,7 +134,7 @@ OSASetHandler(
   long                modeFlags,
   OSAID               contextID,
   const AEDesc *      handlerName,
-  OSAID               compiledScriptID);
+  OSAID               compiledScriptID)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -170,7 +151,7 @@ OSAGetHandler(
   long                modeFlags,
   OSAID               contextID,
   const AEDesc *      handlerName,
-  OSAID *             resultingCompiledScriptID);
+  OSAID *             resultingCompiledScriptID)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -186,7 +167,7 @@ OSAGetHandlerNames(
   ComponentInstance   scriptingComponent,
   long                modeFlags,
   OSAID               contextID,
-  AEDescList *        resultingHandlerNames);
+  AEDescList *        resultingHandlerNames)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -204,7 +185,7 @@ OSAGetAppTerminology(
   FSSpec *            fileSpec,
   short               terminologyID,
   Boolean *           didLaunch,
-  AEDesc *            terminologyList);
+  AEDesc *            terminologyList)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Errors:
@@ -223,7 +204,7 @@ OSAGetSysTerminology(
   ComponentInstance   scriptingComponent,
   long                modeFlags,
   short               terminologyID,
-  AEDesc *            terminologyList);
+  AEDesc *            terminologyList)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Errors:
@@ -252,7 +233,7 @@ ASSetProperty(
   ComponentInstance   scriptingComponent,
   OSAID               contextID,
   const AEDesc *      variableName,
-  OSAID               scriptValueID);
+  OSAID               scriptValueID)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -268,7 +249,7 @@ ASGetProperty(
   ComponentInstance   scriptingComponent,
   OSAID               contextID,
   const AEDesc *      variableName,
-  OSAID *             resultingScriptValueID);
+  OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -284,7 +265,7 @@ ASSetHandler(
   ComponentInstance   scriptingComponent,
   OSAID               contextID,
   const AEDesc *      handlerName,
-  OSAID               compiledScriptID);
+  OSAID               compiledScriptID)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -300,7 +281,7 @@ ASGetHandler(
   ComponentInstance   scriptingComponent,
   OSAID               contextID,
   const AEDesc *      handlerName,
-  OSAID *             resultingCompiledScriptID);
+  OSAID *             resultingCompiledScriptID)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -317,7 +298,7 @@ ASGetAppTerminology(
   FSSpec *            fileSpec,
   short               terminologID,
   Boolean *           didLaunch,
-  AEDesc *            terminologyList);
+  AEDesc *            terminologyList)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Errors:
@@ -326,14 +307,6 @@ ASGetAppTerminology(
 /**************************************************************************/
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

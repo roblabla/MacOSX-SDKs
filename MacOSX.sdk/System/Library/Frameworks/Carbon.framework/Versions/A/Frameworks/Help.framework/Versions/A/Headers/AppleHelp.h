@@ -3,9 +3,9 @@
  
      Contains:   Apple Help
  
-     Version:    Help-20~104
+     Version:    Help-27~276
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -13,24 +13,15 @@
                      http://developer.apple.com/bugreporter/
  
 */
-
 #ifndef __APPLEHELP__
 #define __APPLEHELP__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __FILES__
-#include <CarbonCore/Files.h>
-#endif
-
-#ifndef __CFSTRING__
-#include <CoreFoundation/CFString.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -38,14 +29,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 /* AppleHelp Error Codes */
@@ -92,7 +75,7 @@ enum {
 extern OSStatus 
 AHSearch(
   CFStringRef   bookname,
-  CFStringRef   query);
+  CFStringRef   query)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -119,7 +102,7 @@ AHSearch(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AHGotoMainTOC(AHTOCType toctype);
+AHGotoMainTOC(AHTOCType toctype)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -163,7 +146,7 @@ extern OSStatus
 AHGotoPage(
   CFStringRef   bookname,
   CFStringRef   path,
-  CFStringRef   anchor);
+  CFStringRef   anchor)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -199,7 +182,7 @@ AHGotoPage(
 extern OSStatus 
 AHLookupAnchor(
   CFStringRef   bookname,
-  CFStringRef   anchor);
+  CFStringRef   anchor)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -231,17 +214,9 @@ AHLookupAnchor(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AHRegisterHelpBook(const FSRef * appBundleRef);
+AHRegisterHelpBook(const FSRef * appBundleRef)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

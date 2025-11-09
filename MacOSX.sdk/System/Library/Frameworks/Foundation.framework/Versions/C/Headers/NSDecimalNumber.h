@@ -1,5 +1,5 @@
 /*	NSDecimalNumber.h
-	Copyright 1995-2001, Apple, Inc. All rights reserved.
+	Copyright 1995-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSValue.h>
@@ -108,14 +108,16 @@ FOUNDATION_EXPORT NSString * const NSDecimalNumberDivideByZeroException;
 
 /***********	A class for defining common behaviors		*******/
 
-@interface NSDecimalNumberHandler : NSObject <NSDecimalNumberBehaviors> {
+@interface NSDecimalNumberHandler : NSObject <NSDecimalNumberBehaviors, NSCoding> {
   @private
-    NSRoundingMode _roundingMode;
-    short _scale;
+    signed int _scale:16;
+    unsigned _roundingMode:3;
     unsigned _raiseOnExactness:1;
     unsigned _raiseOnOverflow:1;
     unsigned _raiseOnUnderflow:1;
     unsigned _raiseOnDivideByZero:1;
+    unsigned _unused:9;
+    void *_reserved2;
     void *_reserved;
 }
 

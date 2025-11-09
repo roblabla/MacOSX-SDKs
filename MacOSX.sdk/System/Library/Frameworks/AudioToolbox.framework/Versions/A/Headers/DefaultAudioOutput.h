@@ -9,7 +9,7 @@
 #ifndef __DefaultAudioOutput_h__
 #define __DefaultAudioOutput_h__
 
-#include <AudioUnit/AudioOutputUnit.h>
+#include <AudioUnit/AudioUnit.h>
 
 // open an instance of a default audio output unit (it can be closed with CloseComponent)
 #ifdef __cplusplus

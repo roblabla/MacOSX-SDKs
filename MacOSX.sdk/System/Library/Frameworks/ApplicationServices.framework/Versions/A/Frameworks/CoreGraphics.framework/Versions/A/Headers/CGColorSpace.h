@@ -21,7 +21,15 @@ enum CGColorRenderingIntent {
 };
 typedef enum CGColorRenderingIntent CGColorRenderingIntent;
 
+#define kCGColorSpaceUserGray CFSTR("kCGColorSpaceUserGray")
+#define kCGColorSpaceUserRGB  CFSTR("kCGColorSpaceUserRGB")
+#define kCGColorSpaceUserCMYK CFSTR("kCGColorSpaceUserCMYK")
+
 CG_EXTERN_C_BEGIN
+
+/* Return the CFTypeID for CGColorSpaces. */
+
+CG_EXTERN CFTypeID CGColorSpaceGetTypeID(void);
 
 /** Device-dependent color spaces.  **/
 
@@ -111,6 +119,10 @@ CG_EXTERN CGColorSpaceRef CGColorSpaceCreatePattern(CGColorSpaceRef baseSpace);
 
 CG_EXTERN CGColorSpaceRef CGColorSpaceCreateWithPlatformColorSpace(void *platformColorSpaceReference);
 
+/* Create a colorspace using `name' as the identifier for the colorspace. */
+
+CG_EXTERN CGColorSpaceRef CGColorSpaceCreateWithName(CFStringRef name);
+
 /** Colorspace information. **/
 
 /* Return the number of color components in the colorspace `cs'. */
@@ -119,13 +131,11 @@ CG_EXTERN size_t CGColorSpaceGetNumberOfComponents(const CGColorSpaceRef cs);
 
 /** Retaining & releasing colorspaces. **/
 
-/* Increment the retain count of `cs' and return it.  All colorspaces are
- * created with an initial retain count of 1. */
+/* Equivalent to `CFRetain(cs)'. */
 
 CG_EXTERN CGColorSpaceRef CGColorSpaceRetain(CGColorSpaceRef cs);
 
-/* Decrement the retain count of `cs'.  If the retain count reaches 0, then
- * release it and any associated resources. */
+/* Equivalent to `CFRelease(cs)'. */
 
 CG_EXTERN void CGColorSpaceRelease(CGColorSpaceRef cs);
 

@@ -3,10 +3,9 @@
  
      Contains:   Mixed Mode Manager Interfaces.
  
-     Version:    Technology: Mac OS 8
-                 Release:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1992-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1992-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -23,22 +22,13 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* Mixed Mode constants */
 /* Current Routine Descriptor Version */
@@ -93,21 +83,27 @@ enum {
 };
 
 
-#if TARGET_CPU_PPC
-    #define     GetCurrentISA()     ((ISAType) kPowerPCISA)
-    #define     GetCurrentRTA()     ((RTAType) kPowerPCRTA)
-#elif TARGET_CPU_68K
-   #define     GetCurrentISA()     ((ISAType) kM68kISA)
-   #if TARGET_RT_MAC_CFM
-      #define GetCurrentRTA()     ((RTAType) kCFM68kRTA)
- #else
-      #define GetCurrentRTA()     ((RTAType) kOld68kRTA)
- #endif
-#elif TARGET_CPU_X86
-   #define     GetCurrentISA()     ((ISAType) kX86ISA)
-    #define     GetCurrentRTA()     ((RTAType) kX86RTA)
+#if TARGET_OS_MAC
+ #if TARGET_CPU_PPC
+     #define     GetCurrentISA()     ((ISAType) kPowerPCISA)
+        #define     GetCurrentRTA()     ((RTAType) kPowerPCRTA)
+    #elif TARGET_CPU_68K
+       #define     GetCurrentISA()     ((ISAType) kM68kISA)
+       #if TARGET_RT_MAC_CFM
+          #define GetCurrentRTA()     ((RTAType) kCFM68kRTA)
+     #else
+          #define GetCurrentRTA()     ((RTAType) kOld68kRTA)
+     #endif
+
+   #elif TARGET_CPU_X86
+       #define     GetCurrentISA()     ((ISAType) kX86ISA)
+        #define     GetCurrentRTA()     ((RTAType) kX86RTA)
+
+   #endif
+ #define     GetCurrentArchitecture()    (GetCurrentISA() | GetCurrentRTA())
+#else
+  #define     GetCurrentArchitecture()    0
 #endif
-#define      GetCurrentArchitecture()    (GetCurrentISA() | GetCurrentRTA())
 
 /* Constants for specifing 68k registers */
 enum {
@@ -378,16 +374,17 @@ enum {
     and classic routine.
 */
 
-#if TARGET_RT_MAC_CFM
 /*
  *  NewRoutineDescriptor()
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later or as macro/inline
  */
 
+
+#define NewRoutineDescriptor(theProc, procInfo, isa) ((UniversalProcPtr) theProc)
 
 /*
  *  DisposeRoutineDescriptor()
@@ -395,10 +392,11 @@ enum {
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later or as macro/inline
  */
 
 
+#define DisposeRoutineDescriptor(upp)
 /*
  *  NewFatRoutineDescriptor()
  *  
@@ -408,12 +406,6 @@ enum {
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 
-
-#else
-#define DisposeRoutineDescriptor(theProcPtr)
-#define NewRoutineDescriptor(theProc, theProcInfo, theISA) ((UniversalProcPtr)theProc)
-/* Note that the call to NewFatRoutineDescriptor is undefined. */
-#endif  /* TARGET_RT_MAC_CFM */
 
 
 /*
@@ -661,17 +653,8 @@ enum {
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __MIXEDMODE__ */
 

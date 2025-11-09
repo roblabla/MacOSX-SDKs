@@ -28,6 +28,10 @@
 
 - (float)baselineOffsetInLayoutManager:(NSLayoutManager *)layoutMgr glyphIndex:(unsigned)glyphIndex;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
++ (NSTypesetterBehavior)defaultTypesetterBehavior;
++ (id)sharedSystemTypesetterForBehavior:(NSTypesetterBehavior)theBehavior;
+#endif
 @end
 
 @class NSTextContainer;
@@ -71,9 +75,9 @@ typedef struct _NSTypesetterGlyphInfo {
     NSFont *font;				/* ...and its font */
     NSSize attachmentSize;  	/* Size of the character if it's an attachment; otherwise meaningless */
     struct {
-	BOOL defaultPositioning:1;	/* This block needs to be "show"ed */
-	BOOL dontShow:1;		/* Don't show this glyph */
-	BOOL isAttachment:1;      	/* Whether the glyph is an attachment */
+	unsigned int defaultPositioning:1;	/* This block needs to be "show"ed */
+	unsigned int dontShow:1;		/* Don't show this glyph */
+	unsigned int isAttachment:1;      	/* Whether the glyph is an attachment */
     } _giflags;
 } NSTypesetterGlyphInfo;		/* Glyphs 0..curGlyphIndex-1 are valid in here */
 
@@ -164,10 +168,22 @@ typedef struct _NSTypesetterGlyphInfo {
 	unsigned _glyphPostLay:1;
 	unsigned _fragPostLay:1;
 	unsigned _useItal:1;
-	unsigned reserved:29;
+        unsigned _curFontIsDefaultFace:1;
+        unsigned _tabState:2;
+        unsigned _tabType:2;
+        unsigned _tabEOL:1;
+	unsigned reserved:23;
     } _tsFlags;
 
-    unsigned _reserved2[8];
+@public
+    /* Bidi-related cached info */
+    unsigned char *glyphBidiLevelCache;
+    unsigned char curBidiLevel;		/* Resolved bidirectional embedding level of current glyph */
+    
+@private
+    unsigned char previousBidiLevel;
+    unsigned char _reservedChars[2];
+    unsigned _reserved2[6];
 }
 
 + (id)sharedInstance; 
@@ -226,7 +242,7 @@ typedef struct _NSTypesetterGlyphInfo {
 */
 @interface NSSimpleHorizontalTypesetter(NSTypesetterSubclassExtensions)
 
-/* If implemented by subclasses, this is called within "layoutGlyphsInHorizontalLineFragment:baseline:" after laying out each glyph, allowing a subclass to hook into the layout machinery directly.  Variables curGlyph, curGlyphInscription, curCharacterIndex, curGlyphIsAControlGlyph, curFont, glyphLayoutMode, glyphs[curGlyphIndex] are guaranteed to be up-to-date.
+/* If implemented by subclasses, this is called within "layoutGlyphsInHorizontalLineFragment:baseline:" after laying out each glyph, allowing a subclass to hook into the layout machinery directly.  Variables curGlyph, curGlyphInscription, curBidiLevel, curCharacterIndex, curGlyphIsAControlGlyph, curFont, glyphLayoutMode, glyphs[curGlyphIndex] are guaranteed to be up-to-date.
 */
 - (void)typesetterLaidOneGlyph:(NSTypesetterGlyphInfo *)gl;
 

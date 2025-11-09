@@ -3,9 +3,9 @@
  
      Contains:   Window Manager Interfaces
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1997-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1997-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,8 +17,8 @@
 #ifndef __MACWINDOWS_R__
 #define __MACWINDOWS_R__
 
-#ifndef __CONDITIONALMACROS_R__
-#include <CarbonCore/ConditionalMacros.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
 
 #ifndef __COLLECTIONS_R__
@@ -109,15 +109,16 @@
 #define kWindowAlertPositionParentWindowScreen  0x700A
 #define kWindowStaggerParentWindowScreen  0x780A
 
-#define kWindowCenterOnMainScreen 		0x00000001
-#define kWindowCenterOnParentWindow 	0x00000002
-#define kWindowCenterOnParentWindowScreen  0x00000003
-#define kWindowCascadeOnMainScreen 		0x00000004
-#define kWindowCascadeOnParentWindow 	0x00000005
-#define kWindowCascadeOnParentWindowScreen  0x00000006
-#define kWindowAlertPositionOnMainScreen  0x00000007
-#define kWindowAlertPositionOnParentWindow  0x00000008
-#define kWindowAlertPositionOnParentWindowScreen  0x00000009
+#define kWindowCenterOnMainScreen 		1
+#define kWindowCenterOnParentWindow 	2
+#define kWindowCenterOnParentWindowScreen  3
+#define kWindowCascadeOnMainScreen 		4
+#define kWindowCascadeOnParentWindow 	5
+#define kWindowCascadeOnParentWindowScreen  6
+#define kWindowCascadeStartAtParentWindowScreen  10
+#define kWindowAlertPositionOnMainScreen  7
+#define kWindowAlertPositionOnParentWindow  8
+#define kWindowAlertPositionOnParentWindowScreen  9
 
 
 

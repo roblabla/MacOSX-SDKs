@@ -1,6 +1,6 @@
 // Standard stream manipulators -*- C++ -*-
 
-// Copyright (C) 1997-1999, 2001 Free Software Foundation, Inc.
+// Copyright (C) 1997, 1998, 1999, 2001, 2002 Free Software Foundation, Inc.
 //
 // This file is part of the GNU ISO C++ Library.  This library is free
 // software; you can redistribute it and/or modify it under the
@@ -31,9 +31,9 @@
 // ISO C++ 14882: 27.6.3  Standard manipulators
 //
 
-/** @file std_iomanip.h
- *  This is an internal header file, included by other library headers.
- *  You should not attempt to use it directly.
+/** @file iomanip
+ *  This is a Standard C++ Library header.  You should @c #include this header
+ *  in your programs, rather than any of the "st[dl]_*.h" implementation files.
  */
 
 #ifndef _CPP_IOMANIP
@@ -47,7 +47,6 @@
 
 namespace std
 {
-
   struct _Resetiosflags { ios_base::fmtflags _M_mask; };
 
   inline _Resetiosflags 
@@ -58,16 +57,16 @@ namespace std
     return __x; 
   }
 
-  template <class _CharT, class _Traits>
-    basic_istream<_CharT,_Traits>& 
+  template<typename _CharT, typename _Traits>
+    inline basic_istream<_CharT,_Traits>& 
     operator>>(basic_istream<_CharT,_Traits>& __is, _Resetiosflags __f)
     { 
       __is.setf(ios_base::fmtflags(0), __f._M_mask); 
       return __is; 
     }
 
-  template <class _CharT, class _Traits>
-    basic_ostream<_CharT,_Traits>& 
+  template<typename _CharT, typename _Traits>
+    inline basic_ostream<_CharT,_Traits>& 
     operator<<(basic_ostream<_CharT,_Traits>& __os, _Resetiosflags __f)
     { 
       __os.setf(ios_base::fmtflags(0), __f._M_mask); 
@@ -85,16 +84,16 @@ namespace std
     return __x; 
   }
 
-  template <class _CharT, class _Traits>
-    basic_istream<_CharT,_Traits>& 
+  template<typename _CharT, typename _Traits>
+    inline basic_istream<_CharT,_Traits>& 
     operator>>(basic_istream<_CharT,_Traits>& __is, _Setiosflags __f)
     { 
       __is.setf(__f._M_mask); 
       return __is; 
     }
 
-  template <class _CharT, class _Traits>
-    basic_ostream<_CharT,_Traits>& 
+  template<typename _CharT, typename _Traits>
+    inline basic_ostream<_CharT,_Traits>& 
     operator<<(basic_ostream<_CharT,_Traits>& __os, _Setiosflags __f)
     { 
       __os.setf(__f._M_mask); 
@@ -112,8 +111,8 @@ namespace std
     return __x; 
   }
 
-  template <class _CharT, class _Traits>
-    basic_istream<_CharT,_Traits>& 
+  template<typename _CharT, typename _Traits>
+    inline basic_istream<_CharT,_Traits>& 
     operator>>(basic_istream<_CharT,_Traits>& __is, _Setbase __f)
     {
       __is.setf(__f._M_base ==  8 ? ios_base::oct : 
@@ -123,8 +122,8 @@ namespace std
       return __is; 
     }
   
-  template <class _CharT, class _Traits>
-    basic_ostream<_CharT,_Traits>& 
+  template<typename _CharT, typename _Traits>
+    inline basic_ostream<_CharT,_Traits>& 
     operator<<(basic_ostream<_CharT,_Traits>& __os, _Setbase __f)
     {
       __os.setf(__f._M_base ==  8 ? ios_base::oct : 
@@ -135,11 +134,11 @@ namespace std
     }
   
 
-  template<class _CharT> 
+  template<typename _CharT> 
     struct _Setfill { _CharT _M_c; };
 
-  template<class _CharT> 
-    _Setfill<_CharT> 
+  template<typename _CharT> 
+    inline _Setfill<_CharT> 
     setfill(_CharT __c)
     { 
       _Setfill<_CharT> __x; 
@@ -147,16 +146,16 @@ namespace std
       return __x; 
     }
 
-  template <class _CharT, class _Traits>
-    basic_istream<_CharT,_Traits>& 
+  template<typename _CharT, typename _Traits>
+    inline basic_istream<_CharT,_Traits>& 
     operator>>(basic_istream<_CharT,_Traits>& __is, _Setfill<_CharT> __f)
     { 
       __is.fill(__f._M_c); 
       return __is; 
     }
 
-  template <class _CharT, class _Traits>
-    basic_ostream<_CharT,_Traits>& 
+  template<typename _CharT, typename _Traits>
+    inline basic_ostream<_CharT,_Traits>& 
     operator<<(basic_ostream<_CharT,_Traits>& __os, _Setfill<_CharT> __f)
     { 
       __os.fill(__f._M_c); 
@@ -174,16 +173,16 @@ namespace std
     return __x; 
   }
 
-  template <class _CharT, class _Traits>
-    basic_istream<_CharT,_Traits>& 
+  template<typename _CharT, typename _Traits>
+    inline basic_istream<_CharT,_Traits>& 
     operator>>(basic_istream<_CharT,_Traits>& __is, _Setprecision __f)
     { 
       __is.precision(__f._M_n); 
       return __is; 
     }
 
-  template <class _CharT, class _Traits>
-    basic_ostream<_CharT,_Traits>& 
+  template<typename _CharT, typename _Traits>
+    inline basic_ostream<_CharT,_Traits>& 
     operator<<(basic_ostream<_CharT,_Traits>& __os, _Setprecision __f)
     { 
       __os.precision(__f._M_n); 
@@ -201,21 +200,50 @@ namespace std
     return __x; 
   }
 
-  template <class _CharT, class _Traits>
-    basic_istream<_CharT,_Traits>& 
+  template<typename _CharT, typename _Traits>
+    inline basic_istream<_CharT,_Traits>& 
     operator>>(basic_istream<_CharT,_Traits>& __is, _Setw __f)
     { 
       __is.width(__f._M_n); 
       return __is; 
     }
 
-  template <class _CharT, class _Traits>
-    basic_ostream<_CharT,_Traits>& 
+  template<typename _CharT, typename _Traits>
+    inline basic_ostream<_CharT,_Traits>& 
     operator<<(basic_ostream<_CharT,_Traits>& __os, _Setw __f)
     { 
       __os.width(__f._M_n); 
       return __os; 
     }
+
+  // Inhibit implicit instantiations for required instantiations,
+  // which are defined via explicit instantiations elsewhere.  
+  // NB:  This syntax is a GNU extension.
+  extern template ostream& operator<<(ostream&, _Setfill<char>);
+  extern template ostream& operator<<(ostream&, _Setiosflags);
+  extern template ostream& operator<<(ostream&, _Resetiosflags);
+  extern template ostream& operator<<(ostream&, _Setbase);
+  extern template ostream& operator<<(ostream&, _Setprecision);
+  extern template ostream& operator<<(ostream&, _Setw);
+  extern template wostream& operator<<(wostream&, _Setfill<wchar_t>);
+  extern template wostream& operator<<(wostream&, _Setiosflags);
+  extern template wostream& operator<<(wostream&, _Resetiosflags);
+  extern template wostream& operator<<(wostream&, _Setbase);
+  extern template wostream& operator<<(wostream&, _Setprecision);
+  extern template wostream& operator<<(wostream&, _Setw);
+
+  extern template istream& operator>>(istream&, _Setfill<char>);
+  extern template istream& operator>>(istream&, _Setiosflags);
+  extern template istream& operator>>(istream&, _Resetiosflags);
+  extern template istream& operator>>(istream&, _Setbase);
+  extern template istream& operator>>(istream&, _Setprecision);
+  extern template istream& operator>>(istream&, _Setw);
+  extern template wistream& operator>>(wistream&, _Setfill<wchar_t>);
+  extern template wistream& operator>>(wistream&, _Setiosflags);
+  extern template wistream& operator>>(wistream&, _Resetiosflags);
+  extern template wistream& operator>>(wistream&, _Setbase);
+  extern template wistream& operator>>(wistream&, _Setprecision);
+  extern template wistream& operator>>(wistream&, _Setw);
 } // namespace std
 
 #endif	

@@ -6,7 +6,7 @@
      Version:    Technology: Mac OS X
                  Release:    1.0
  
-     Copyright:  © 1998-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1998-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -18,7 +18,6 @@
 
 #include <ApplicationServices/ApplicationServices.h>
 #include <CoreFoundation/CoreFoundation.h>
-#include <HIToolbox/HIToolbox.h>
 #include <Print/Print.h>
 #include <PrintCore/PMTicket.h>
 #include <PrintCore/PMPluginHeader.h>
@@ -32,6 +31,18 @@ extern "C" {
     Constants
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
+enum {
+  kEventUpdatePrintButton           = FOUR_CHAR_CODE('prbt'),
+};
+
+/*
+Direction of sync
+*/
+enum {
+	kPMSyncTicketFromPane = false,
+	kPMSyncPaneFromTicket = true
+};
+
 /*
 Feature request flags...
 */
@@ -42,11 +53,20 @@ enum {
 };
 
 /*
-Dependency direction constants, used in calls to PMDlgXSetDependency()...
+    Parameters for printing events:
+    
+    kEventPrintingPDEResize
+        -->     kEventParamDirectObject     typeControlRef
+        -->     kEventParamPDEHeight        typeUInt32
+        
+    When sent to the this event is sent to the PageSetup or Print Dialog, the PDE pane
+    will be resized to match the new height.  The kEventParamDirectObject needs to be the 
+    embedderUserPane that is passed into Initialize
 */
 enum {
-    kPMPDEIsAffectedBy          = true,
-    kPMPDEAffects               = false
+  kEventClassPrinting           = FOUR_CHAR_CODE('prnt'),
+  kEventPrintingPDEResize       = FOUR_CHAR_CODE('rqsz'),
+  kEventParamPDEHeight          = FOUR_CHAR_CODE('pdeh')
 };
 
 /*
@@ -65,21 +85,25 @@ Define the Type and Interface keys for Printing Dialog Extensions.
 /*
 Define the Kind IDs for Universal and Standard Printing Dialog Extensions.
 */
-#define kPMPageAttributesKindID				CFSTR("com.apple.print.pde.PageAttributesKind")
-#define kPMCopiesAndPagesPDEKindID			CFSTR("com.apple.print.pde.CopiesAndPagesKind")
-#define kPMLayoutPDEKindID					CFSTR("com.apple.print.pde.LayoutUserOptionKind")
-#define kPMPaperSourcePDEKindID				CFSTR("com.apple.print.pde.PaperSourceKind")
-#define kPMOutputOptionsPDEKindID			CFSTR("com.apple.print.pde.OutputOptionsKind")
-#define kPMCoverPagePDEKindID				CFSTR("com.apple.print.pde.CoverPageKind")
-#define kPMPriorityPDEKindID				CFSTR("com.apple.print.pde.PriorityKind")
-#define kPMColorPDEKindID					CFSTR("com.apple.print.pde.ColorKind")
-#define kPMRotationScalingPDEKindID			CFSTR("com.apple.print.pde.RotationScalingKind")
-
-#define kPMPaperFeedPDEKindID				CFSTR("com.apple.print.pde.PaperFeedKind")
-#define kPMDuplexPDEKindID					CFSTR("com.apple.print.pde.DuplexKind")
-#define kPMErrorHandlingPDEKindID			CFSTR("com.apple.print.pde.ErrorHandlingKind")
-#define kPMPrinterFeaturesPDEKindID			CFSTR("com.apple.print.pde.PrinterFeaturesKind")
-
+/* Implemented Universal */
+#define kPMPageAttributesKindID         CFSTR("com.apple.print.pde.PageAttributesKind")
+#define kPMCopiesAndPagesPDEKindID      CFSTR("com.apple.print.pde.CopiesAndPagesKind")
+#define kPMLayoutPDEKindID              CFSTR("com.apple.print.pde.LayoutUserOptionKind")
+#define kPMOutputOptionsPDEKindID       CFSTR("com.apple.print.pde.OutputOptionsKind")
+#define kPMDuplexPDEKindID              CFSTR("com.apple.print.pde.DuplexKind")
+#define kPMCustomPaperSizePDEKindID     CFSTR("com.apple.print.pde.CustomPaperSizeKind")
+/* Unimplemented Universal */
+#define kPMCoverPagePDEKindID           CFSTR("com.apple.print.pde.CoverPageKind")
+#define kPMPaperSourcePDEKindID         CFSTR("com.apple.print.pde.PaperSourceKind")
+#define kPMPriorityPDEKindID            CFSTR("com.apple.print.pde.PriorityKind")
+#define kPMRotationScalingPDEKindID     CFSTR("com.apple.print.pde.RotationScalingKind")
+/* Implemented Standard */
+#define kPMErrorHandlingPDEKindID		CFSTR("com.apple.print.pde.ErrorHandlingKind")
+#define kPMPaperFeedPDEKindID           CFSTR("com.apple.print.pde.PaperFeedKind")
+#define kPMPrinterFeaturesPDEKindID		CFSTR("com.apple.print.pde.PrinterFeaturesKind")
+/* Unimplemented Standard */
+#define kPMColorPDEKindID               CFSTR("com.apple.print.pde.ColorKind")
+#define kPMQualityMediaPDEKindID        CFSTR("com.apple.print.pde.QualityMediaPDEKind")
 /*  These constants are used by PDE's to obtain the PMTicketRef data for the corresponding
     piece of data.
 */
@@ -186,6 +210,9 @@ PMCreateLocalizedPaperSizeCFString( PMTicketRef listofPaperTickets, UInt16 paper
 // Lower level version of the same function, this time passing the single PaperInfo.
 EXTERN_API_C( CFStringRef )
 PMCreatePaperSizeCFString( PMTicketRef selectedPaper ); 
+
+EXTERN_API_C( void )
+PMUpdatePrintButton( PMDestinationType dest ); 
 
 #ifdef __cplusplus
 }

@@ -1,52 +1,87 @@
 /*
 	NSPrintInfo.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2002, Apple Computer, Inc.
 	All rights reserved.
 */
 
-/*
-NSPrintInfo is a data container for parameters that help control the generation of PostScript output.  It is passed to the NSPrintOperation object, which makes a copy of it to use during the operation.
-*/
-
-#import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
+#import <Foundation/NSObject.h>
 #import <AppKit/AppKitDefines.h>
 
 @class NSMutableDictionary, NSPrinter;
 
-typedef enum _NSPrintingOrientation {
-    NSPortraitOrientation		= 0,
-    NSLandscapeOrientation		= 1
+// Valid values for the NSPrintOrientation attribute.
+typedef enum {
+    NSPortraitOrientation = 0,
+    NSLandscapeOrientation = 1
 } NSPrintingOrientation;
 
-typedef enum _NSPrintingPaginationMode {
-    NSAutoPagination			= 0,
-    NSFitPagination			= 1, // Force image to fit on one page
-    NSClipPagination			= 2  // Let image be clipped by page
+// Valid values for the NSPrintHorizontalPagination and NSPrintVerticalPagination attributes.
+typedef enum {
+    NSAutoPagination = 0,
+    NSFitPagination = 1,
+    NSClipPagination = 2
 } NSPrintingPaginationMode;
 
+// Valid values for the NSPrintJobDisposition attribute.
+APPKIT_EXTERN NSString *NSPrintSpoolJob;
+APPKIT_EXTERN NSString *NSPrintPreviewJob;
+APPKIT_EXTERN NSString *NSPrintSaveJob;
+APPKIT_EXTERN NSString *NSPrintCancelJob;
 
-@interface NSPrintInfo : NSObject <NSCopying, NSCoding>
-{
-/*All instance variables are private*/
-@private
-    NSMutableDictionary *dictionary;
-    void *_reservedPrintInfo1;
+// Keys for page setup attributes that are recognized by NSPrintInfo.
+APPKIT_EXTERN NSString *NSPrintPaperName; // an NSString
+APPKIT_EXTERN NSString *NSPrintPaperSize; // an NSSize, in points
+APPKIT_EXTERN NSString *NSPrintOrientation; // an NSNumber containing NSPortraitOrientation or NSLandscapeOrientation
+APPKIT_EXTERN NSString *NSPrintScalingFactor; // an NSNumber containing a floating-point percentage
+
+// Keys for pagination attributes that are recognized by NSPrintInfo.
+APPKIT_EXTERN NSString *NSPrintLeftMargin; // an NSNumber containing a measurement in floating-point points
+APPKIT_EXTERN NSString *NSPrintRightMargin; // an NSNumber containing a measurement in floating-point points
+APPKIT_EXTERN NSString *NSPrintTopMargin; // an NSNumber containing a measurement in floating-point points
+APPKIT_EXTERN NSString *NSPrintBottomMargin; // an NSNumber containing a measurement in floating-point points
+APPKIT_EXTERN NSString *NSPrintHorizontallyCentered; // an NSNumber containing a boolean value
+APPKIT_EXTERN NSString *NSPrintVerticallyCentered; // an NSNumber containing a boolean value
+APPKIT_EXTERN NSString *NSPrintHorizontalPagination; // an NSNumber containing NSAutoPagination, NSFitPagination, or NSClipPagination
+APPKIT_EXTERN NSString *NSPrintVerticalPagination; // an NSNumber containing NSAutoPagination, NSFitPagination, or NSClipPagination
+
+// Keys for print job attributes that are recognized by NSPrintInfo.
+APPKIT_EXTERN NSString *NSPrintPrinter;	// an NSPrinter
+APPKIT_EXTERN NSString *NSPrintCopies; // an NSNumber containing the number of copies of the print job to be printed
+APPKIT_EXTERN NSString *NSPrintAllPages; // an NSNumber containing a boolean value
+APPKIT_EXTERN NSString *NSPrintFirstPage; // an NSNumber containing the one-based index of the first job in the page to print
+APPKIT_EXTERN NSString *NSPrintLastPage; // an NSNumber containing the one-based index of the last job in the page to print
+APPKIT_EXTERN NSString *NSPrintMustCollate; // an NSNumber containing a boolean value
+APPKIT_EXTERN NSString *NSPrintReversePageOrder; // an NSNumber containing a boolean value
+APPKIT_EXTERN NSString *NSPrintJobDisposition; // an NSString equal to NSPrintSpoolJob, NSPrintPreviewJob, NSPrintSaveJob, or NSPrintCancelJob
+APPKIT_EXTERN NSString *NSPrintSavePath; // an NSString containing a path to which the job file will be saved, for NSPrintSaveJob
+
+@interface NSPrintInfo : NSObject<NSCopying, NSCoding> {
+    @private
+    NSMutableDictionary *_attributes;
+    void *_moreVars;
 }
 
+// Set or get the "shared" instance of NSPrintInfo.  The shared print info object is the one that is used automatically by -[NSPageLayout runModal] and +[NSPrintOperation printOperationWithView:].
++ (void)setSharedPrintInfo:(NSPrintInfo *)printInfo;
++ (NSPrintInfo *)sharedPrintInfo;
 
-/* Set/get the paper attributes.  The set methods in this group may change other values in the group to keep all three values (type, size, and orientation) consistent.  To avoid this behavior, set the values in the dictionary directly.
- */
+// Given a dictionary that contains attribute entries, initialize.  Attributes that are recognized by the NSPrintInfo class will be silently validated in the context of the printer selected by the attributes dictionary, or the default printer if the attributes dictionary selects no printer.  Attributes that are not recognized by the NSPrintInfo class will be preserved, and returned in the dictionary returned by the -dictionary method, but otherwise ignored.  This is the designated initializer for this class.
+- (id)initWithDictionary:(NSDictionary *)attributes;
+
+// Return a dictionary that contains attribute entries.  This dictionary may contain attributes that were not specified in the dictionary originally passed to this object by -initWithDictionary.  Changes to this dictionary will be reflected in the values returned by subsequent invocations of other of this class' methods.
+- (NSMutableDictionary *)dictionary;
+
+// Set or get the values of the paper attributes.  Because an NSPrintInfo's paper name, paper size, and orientation attributes must be kept consistent, invocation of any of the setting methods in this group may affect the values returned by subsequent invocations of any of the getting methods in this group.  For example, paper name and paper size must always agree, and the value returned by -paperSize always takes orientation into account.
 - (void)setPaperName:(NSString *)name;
-- (NSString *)paperName;
-- (void)setPaperSize:(NSSize)aSize;
-- (NSSize)paperSize;
+- (void)setPaperSize:(NSSize)size;
 - (void)setOrientation:(NSPrintingOrientation)orientation;
+- (NSString *)paperName;
+- (NSSize)paperSize;
 - (NSPrintingOrientation)orientation;
 
-/* Covers for a number of the keys on the dictionary.
-*/
+// Set or get the values of the pagination attributes.
 - (void)setLeftMargin:(float)margin;
 - (void)setRightMargin:(float)margin;
 - (void)setTopMargin:(float)margin;
@@ -56,104 +91,60 @@ typedef enum _NSPrintingPaginationMode {
 - (float)topMargin;
 - (float)bottomMargin;
 - (void)setHorizontallyCentered:(BOOL)flag;
-- (BOOL)isHorizontallyCentered;
 - (void)setVerticallyCentered:(BOOL)flag;
+- (BOOL)isHorizontallyCentered;
 - (BOOL)isVerticallyCentered;
 - (void)setHorizontalPagination:(NSPrintingPaginationMode)mode;
-- (NSPrintingPaginationMode)horizontalPagination;
 - (void)setVerticalPagination:(NSPrintingPaginationMode)mode;
+- (NSPrintingPaginationMode)horizontalPagination;
 - (NSPrintingPaginationMode)verticalPagination;
 
-/* If job features are not implemented on this new printer, flush them when the printer is set. */
-- (void)setPrinter:(NSPrinter *)pr;
-- (NSPrinter *)printer;
-
+// Set or get the value of the job disposition attribute.
 - (void)setJobDisposition:(NSString *)disposition;
 - (NSString *)jobDisposition;
 
-/* Called when a print operation is about to start.  It allows this object to set default values for any keys that are not already set.
-*/
+// Set or get the printer specified by this object.
+- (void)setPrinter:(NSPrinter *)printer;
+- (NSPrinter *)printer;
+
+// Validate all of the attributes encapsulated by this object.  This method is invoked automatically before the object is used by an NSPrintOperation.  This method may be overridden to perform validation of attributes that are not recognized by the NSPrintInfo class.
 - (void)setUpPrintOperationDefaultValues;
 
-/* The dictionary containing the key/values for this object.
-*/
-- (NSMutableDictionary *)dictionary;
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
-/* Create a PrintInfo from an existing NSDictionary.  Designated initializer.
-*/
-- (id)initWithDictionary:(NSDictionary *)aDict;
+// Return the imageable area of a sheet of paper specified by this object, taking into account the current printer, paper size, and orientation settings, but not scaling.  "Imageable area" is the maximum area that can possibly be marked on by the printer hardware, not the area defined by the current margin settings.  The rectangle is in a coordinate space measured by points, with (0, 0) being the lower-left corner of the oriented sheet and (paperWidth, paperHeight) being the upper-right corner of the oriented sheet.  The imageable bounds may extend past the edges of the sheet when, for example, a printer driver specifies it so that borderless printing can be done reliably.
+- (NSRect)imageablePageBounds;
 
-/* Set/get the shared PrintInfo instance.  This defines the settings for the PageLayout panel and print operations that will be used if no PrintInfo is specified for those operations.  This PrintInfo instance can be thought of as being "shared" among documents in the app.  This should never be set to nil.
-*/
-+ (void)setSharedPrintInfo:(NSPrintInfo *)printInfo;
-+ (NSPrintInfo *)sharedPrintInfo;
+#endif
 
-
-/* Set/get the user's default printer.
-*/
+// Return the default printer, if one has been selected by the user, nil otherwise.
 + (NSPrinter *)defaultPrinter;
-+ (void)setDefaultPrinter:(NSPrinter *)pr;
 
-/* Get the size of a paper name */
+// A method that was deprecated in Mac OS 10.2.  +[NSPrintInfo setDefaultPrinter:] does nothing.
++ (void)setDefaultPrinter:(NSPrinter *)printer;
+
+// A method that was deprecated in Mac OS 10.2.  NSPrintInfo's implementation of this method recognizes only a small fixed set of paper names, and does not take the details of any particular printer into account.  You should use -[NSPrinter pageSizeForPaper:] instead.
 + (NSSize)sizeForPaperName:(NSString *)name;
 
 @end
 
+// Keys for attributes that were deprecated in Mac OS 10.2.  NSPrintInfo does not recognizes these attributes.  For backward binary compatibility, -[NSPrintInfo setUpPrintOperationDefaultValues] does however set default values for the NSPrintJobFeatures (an empty dictionary) and NSPrintPagesPerSheet (1) attributes.
+APPKIT_EXTERN NSString *NSPrintFormName;
+APPKIT_EXTERN NSString *NSPrintJobFeatures;
+APPKIT_EXTERN NSString *NSPrintManualFeed;
+APPKIT_EXTERN NSString *NSPrintPagesPerSheet;
+APPKIT_EXTERN NSString *NSPrintPaperFeed;
 
-/* The list below defines the keys in the dictionary, and the types that they are assumed to be.  Values that are not objects are stored as NSValues.
+// Keys for attributes that were deprecated in Mac OS X Public Beta.  NSPrintInfo does not recognizes these attributes.
+APPKIT_EXTERN NSString *NSPrintFaxCoverSheetName;
+APPKIT_EXTERN NSString *NSPrintFaxHighResolution;
+APPKIT_EXTERN NSString *NSPrintFaxModem;
+APPKIT_EXTERN NSString *NSPrintFaxReceiverNames;
+APPKIT_EXTERN NSString *NSPrintFaxReceiverNumbers;
+APPKIT_EXTERN NSString *NSPrintFaxReturnReceipt;
+APPKIT_EXTERN NSString *NSPrintFaxSendTime;
+APPKIT_EXTERN NSString *NSPrintFaxTrimPageEnds;
+APPKIT_EXTERN NSString *NSPrintFaxUseCoverSheet;
 
-			Dictionary Key		   Type			Description
-			--------------		   ----			-----------	*/
-APPKIT_EXTERN NSString *NSPrintPaperName;	// NSString		Paper name: Letter, Legal, etc.
-APPKIT_EXTERN NSString *NSPrintPaperSize;	// NSSize		Height and width of paper
-APPKIT_EXTERN NSString *NSPrintFormName;	// NSString
-APPKIT_EXTERN NSString *NSPrintMustCollate;	// BOOL
-APPKIT_EXTERN NSString *NSPrintOrientation;	// NSPrintingOrientation Portrait/Landscape
-APPKIT_EXTERN NSString *NSPrintLeftMargin;	// float		Margins, in points:
-APPKIT_EXTERN NSString *NSPrintRightMargin;	// float
-APPKIT_EXTERN NSString *NSPrintTopMargin;	// float
-APPKIT_EXTERN NSString *NSPrintBottomMargin;	// float
-APPKIT_EXTERN NSString *NSPrintHorizontallyCentered;	// BOOL			Pages are centered horizontally.
-APPKIT_EXTERN NSString *NSPrintVerticallyCentered;	// BOOL			Pages are centered horizontally.
-APPKIT_EXTERN NSString *NSPrintHorizontalPagination;// NSPrintingPaginationMode
-APPKIT_EXTERN NSString *NSPrintVerticalPagination;	// NSPrintingPaginationMode
-
-APPKIT_EXTERN NSString *NSPrintScalingFactor;	// float		Scale before pagination.
-APPKIT_EXTERN NSString *NSPrintAllPages;	// BOOL			Include all pages in the job.
-APPKIT_EXTERN NSString *NSPrintReversePageOrder;// BOOL		Print last page first.
-APPKIT_EXTERN NSString *NSPrintFirstPage;	// int			First page to print in job.
-APPKIT_EXTERN NSString *NSPrintLastPage;	// int			Last page to print in job.
-APPKIT_EXTERN NSString *NSPrintCopies;		// int			Number of copies to spool.
-APPKIT_EXTERN NSString *NSPrintPagesPerSheet;	// int
-APPKIT_EXTERN NSString *NSPrintJobFeatures;	// NSMutableDictionary	Key = Name.  Value = Setting.
-						// Feature names come from the NSPrinter/PPD info.
-						// Example:  Key=@"Resolution" Value=@"600dpi"
-APPKIT_EXTERN NSString *NSPrintPaperFeed;	// NSString		Generally, the input slot.
-APPKIT_EXTERN NSString *NSPrintManualFeed;	// @"NSPrintManualFeed" refers to manual feed.
-APPKIT_EXTERN NSString *NSPrintPrinter;	// NSPrinter		Printer to use for print job.
-APPKIT_EXTERN NSString *NSPrintJobDisposition;	// NSString		What to do with the print stream:
-APPKIT_EXTERN NSString *NSPrintSavePath;	// NSString		Path if disposition = @"NSSave".
-
-#ifndef WIN32
-APPKIT_EXTERN NSString *NSPrintFaxReceiverNames;// NSArray of NSStrings  Names of receivers of the fax.
-APPKIT_EXTERN NSString *NSPrintFaxReceiverNumbers;// NSArray of NSStrings  Phone numbers of receivers.
-							     // Must parallel NSFaxReceiverNames.
-APPKIT_EXTERN NSString *NSPrintFaxSendTime;	// NSDate		When to send the fax.
-APPKIT_EXTERN NSString *NSPrintFaxUseCoverSheet;// BOOL		Whether to use a cover sheet.
-APPKIT_EXTERN NSString *NSPrintFaxCoverSheetName;// NSString		The cover sheet to use.
-APPKIT_EXTERN NSString *NSPrintFaxReturnReceipt;// BOOL		Whether to send mail when fax is sent.
-APPKIT_EXTERN NSString *NSPrintFaxHighResolution;// BOOL		Whether to send at low resolution.
-APPKIT_EXTERN NSString *NSPrintFaxTrimPageEnds;// BOOL			Whether to trim page ends or send complete pages.
-APPKIT_EXTERN NSString *NSPrintFaxModem;	// NSPrinter		The fax modem to use.
-#endif /* WIN32 */
-
-/* Valid values for job disposition */
-APPKIT_EXTERN NSString *NSPrintSpoolJob;	// @"NSPrintSpoolJob"	Normal print job.
-
-#ifndef WIN32
-APPKIT_EXTERN NSString *NSPrintFaxJob;		// @"NSPrintFaxJob"	Fax job.
-#endif /* WIN32 */
-
-APPKIT_EXTERN NSString *NSPrintPreviewJob;	// @"NSPrintPreviewJob"	Send to Preview app.
-APPKIT_EXTERN NSString *NSPrintSaveJob;	// @"NSPrintSaveJob"	Save to a file.
-APPKIT_EXTERN NSString *NSPrintCancelJob;	// @"NSPrintCancelJob"	Save to a file.
+// A job disposition that was deprecated in Mac OS X Public Beta.  NSPrintInfo treats this job disposition as synonymous with NSPrintSpoolJob.
+APPKIT_EXTERN NSString *NSPrintFaxJob;

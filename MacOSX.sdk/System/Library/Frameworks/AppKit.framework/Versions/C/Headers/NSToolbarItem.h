@@ -44,9 +44,11 @@
         unsigned int viewHasBeenLoaded:1;
         unsigned int drawingForDragImage:1;
         unsigned int isCustomItemType:1;
-	unsigned int RESERVED:15;
+	unsigned int hasValidatedAutoModeConfiguration:1;
+	unsigned int useAutoModeConfiguration:1;
+	unsigned int RESERVED:13;
     } _tbiFlags;
-    void *		_tbiReserved;
+    NSArray *		_allPossibleLabelsToFit;
         
     id			_itemViewer;
     NSView *		_view;

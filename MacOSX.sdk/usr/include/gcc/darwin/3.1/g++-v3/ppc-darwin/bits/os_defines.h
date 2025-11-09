@@ -40,7 +40,6 @@
 #define _GLIBCPP_AVOID_FSEEK 1
 
 /* APPLE LOCAL begin keymgr */
-#define MACOSX (1)
 /* Copyright (C) 1989, 92-97, 1998, Free Software Foundation, Inc.
 
 This file is part of GNU CC.
@@ -68,8 +67,6 @@ Boston, MA 02111-1307, USA.  */
 
 #ifndef __KEYMGR_H
 #define __KEYMGR_H
-
-#ifdef MACOSX
 
 #ifdef __cplusplus
 extern "C" {
@@ -157,8 +154,6 @@ extern int _keymgr_get_lock_count_processwide_ptr(unsigned int key) ;
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* MACOSX */
 
 #endif /* __KEYMGR_H */
 /* APPLE LOCAL end keymgr */

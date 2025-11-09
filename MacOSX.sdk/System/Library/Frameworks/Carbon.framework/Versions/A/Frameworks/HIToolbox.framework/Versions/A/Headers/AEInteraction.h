@@ -3,9 +3,9 @@
  
      Contains:   AppleEvent functions that deal with Events and interacting with user
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,8 +16,8 @@
 #ifndef __AEINTERACTION__
 #define __AEINTERACTION__
 
-#ifndef __AEDATAMODEL__
-#include <AE/AEDataModel.h>
+#ifndef __APPLICATIONSERVICES__
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 #ifndef __NOTIFICATION__
@@ -30,6 +30,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -37,14 +38,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 /**************************************************************************
@@ -62,6 +55,9 @@ typedef STACK_UPP_TYPE(AEFilterProcPtr)                         AEFilterUPP;
 /*
  *  AESend()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -75,11 +71,14 @@ AESend(
   AESendPriority      sendPriority,
   long                timeOutInTicks,
   AEIdleUPP           idleProc,             /* can be NULL */
-  AEFilterUPP         filterProc);          /* can be NULL */
+  AEFilterUPP         filterProc)           /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  AEProcessAppleEvent()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -87,7 +86,7 @@ AESend(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-AEProcessAppleEvent(const EventRecord * theEventRecord);
+AEProcessAppleEvent(const EventRecord * theEventRecord)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -100,13 +99,16 @@ AEProcessAppleEvent(const EventRecord * theEventRecord);
 /*
  *  AEResetTimer()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-AEResetTimer(const AppleEvent * reply);
+AEResetTimer(const AppleEvent * reply)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -125,17 +127,8 @@ enum {
 /*
  *  AEGetInteractionAllowed()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr 
-AEGetInteractionAllowed(AEInteractAllowed * level);
-
-
-/*
- *  AESetInteractionAllowed()
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -143,11 +136,29 @@ AEGetInteractionAllowed(AEInteractAllowed * level);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-AESetInteractionAllowed(AEInteractAllowed level);
+AEGetInteractionAllowed(AEInteractAllowed * level)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  AESetInteractionAllowed()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr 
+AESetInteractionAllowed(AEInteractAllowed level)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  AEInteractWithUser()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -158,7 +169,7 @@ extern OSErr
 AEInteractWithUser(
   long        timeOutInTicks,
   NMRecPtr    nmReqPtr,
-  AEIdleUPP   idleProc);
+  AEIdleUPP   idleProc)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -174,13 +185,16 @@ AEInteractWithUser(
 /*
  *  AESuspendTheCurrentEvent()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-AESuspendTheCurrentEvent(const AppleEvent * theAppleEvent);
+AESuspendTheCurrentEvent(const AppleEvent * theAppleEvent)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* 
@@ -216,6 +230,9 @@ enum {
 /*
  *  AEResumeTheCurrentEvent()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -226,23 +243,14 @@ AEResumeTheCurrentEvent(
   const AppleEvent *  theAppleEvent,
   const AppleEvent *  reply,
   AEEventHandlerUPP   dispatcher,          /* can be NULL */
-  long                handlerRefcon);
+  long                handlerRefcon)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  AEGetTheCurrentEvent()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr 
-AEGetTheCurrentEvent(AppleEvent * theAppleEvent);
-
-
-/*
- *  AESetTheCurrentEvent()
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -250,7 +258,22 @@ AEGetTheCurrentEvent(AppleEvent * theAppleEvent);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-AESetTheCurrentEvent(const AppleEvent * theAppleEvent);
+AEGetTheCurrentEvent(AppleEvent * theAppleEvent)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  AESetTheCurrentEvent()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr 
+AESetTheCurrentEvent(const AppleEvent * theAppleEvent)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -266,7 +289,7 @@ AESetTheCurrentEvent(const AppleEvent * theAppleEvent);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AEIdleUPP
-NewAEIdleUPP(AEIdleProcPtr userRoutine);
+NewAEIdleUPP(AEIdleProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewAEFilterUPP()
@@ -277,7 +300,7 @@ NewAEIdleUPP(AEIdleProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AEFilterUPP
-NewAEFilterUPP(AEFilterProcPtr userRoutine);
+NewAEFilterUPP(AEFilterProcPtr userRoutine)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeAEIdleUPP()
@@ -288,7 +311,7 @@ NewAEFilterUPP(AEFilterProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAEIdleUPP(AEIdleUPP userUPP);
+DisposeAEIdleUPP(AEIdleUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeAEFilterUPP()
@@ -299,7 +322,7 @@ DisposeAEIdleUPP(AEIdleUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAEFilterUPP(AEFilterUPP userUPP);
+DisposeAEFilterUPP(AEFilterUPP userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeAEIdleUPP()
@@ -314,7 +337,7 @@ InvokeAEIdleUPP(
   EventRecord *  theEvent,
   long *         sleepTime,
   RgnHandle *    mouseRgn,
-  AEIdleUPP      userUPP);
+  AEIdleUPP      userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeAEFilterUPP()
@@ -330,19 +353,11 @@ InvokeAEFilterUPP(
   long                   returnID,
   long                   transactionID,
   const AEAddressDesc *  sender,
-  AEFilterUPP            userUPP);
+  AEFilterUPP            userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

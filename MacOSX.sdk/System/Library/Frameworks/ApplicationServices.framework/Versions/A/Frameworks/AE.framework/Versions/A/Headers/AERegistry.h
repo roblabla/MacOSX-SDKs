@@ -3,9 +3,9 @@
  
      Contains:   AppleEvents Registry Interface.
  
-     Version:    AppleEvents-116~3
+     Version:    AppleEvents-242~1
  
-     Copyright:  © 1993-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1993-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,12 +16,8 @@
 #ifndef __AEREGISTRY__
 #define __AEREGISTRY__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __MACERRORS__
-#include <CarbonCore/MacErrors.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __APPLEEVENTS__
@@ -30,22 +26,13 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   cAEList                       = 'list', /*  0x6c697374  */
@@ -274,6 +261,14 @@ enum {
   kAEWholeWordEquals            = 'wweq', /*  0x77776571  */
   kAEYes                        = 'yes ', /*  0x79657320  */
   kAEZoom                       = 'zoom' /*  0x7a6f6f6d  */
+};
+
+/* events that can be sent to the "system" process (eg, loginwindow) on OS X 10.2 or later */
+enum {
+  kAELogOut                     = 'logo',
+  kAEReallyLogOut               = 'rlgo',
+  kAEShowRestartDialog          = 'rrst',
+  kAEShowShutdownDialog         = 'rsdn'
 };
 
 /* EventRecord Classes and EventIDs */
@@ -657,11 +652,13 @@ enum {
   keyAETSMEventRef              = 'tevr', /* Carbon EventRef, typeEventRef */
   keyAETextServiceEncoding      = 'tsen', /* Text Service encoding, mac or Unicode in UpdateActiveInputArea or GetSelectedText events. */
   keyAETextServiceMacEncoding   = 'tmen', /* Target mac encoding for TSM conversion of text from Unicode text service. */
+  keyAETSMGlyphInfoArray        = 'tgia', /* typeGlyphInfoArray */
   typeTextRange                 = 'txrn', /* TextRange */
   typeComponentInstance         = 'cmpi', /* server instance */
   typeOffsetArray               = 'ofay', /* offset array */
   typeTextRangeArray            = 'tray',
   typeLowLevelEventRecord       = 'evtr', /* Low Level Event Record */
+  typeGlyphInfoArray            = 'glia', /* Glyph/FMFont info array for sub ranges of Unicode text.  See GlyphInfoArray in TextServices.h  */
   typeEventRef                  = 'evrf', /* Carbon EventRef */
   typeText                      = typeChar /* Plain text */
 };
@@ -748,6 +745,7 @@ enum {
                                         /* AppleScript 1.3: New Text types */
   typeUnicodeText               = 'utxt',
   typeStyledUnicodeText         = 'sutx',
+  typeUTF8Text                  = 'utf8',
   typeEncodedString             = 'encs',
   typeCString                   = 'cstr',
   typePString                   = 'pstr'
@@ -1029,17 +1027,8 @@ enum {
 };
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __AEREGISTRY__ */
 

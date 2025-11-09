@@ -3,9 +3,9 @@
  
      Contains:   List Manager Interfaces.
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,8 +16,8 @@
 #ifndef __LISTS__
 #define __LISTS__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __CONTROLS__
@@ -26,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -35,13 +36,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 typedef Point                           Cell;
 typedef Rect                            ListBounds;
@@ -157,7 +152,7 @@ typedef STACK_UPP_TYPE(ListDefProcPtr)                          ListDefUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ListSearchUPP
-NewListSearchUPP(ListSearchProcPtr userRoutine);
+NewListSearchUPP(ListSearchProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewListClickLoopUPP()
@@ -168,7 +163,7 @@ NewListSearchUPP(ListSearchProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ListClickLoopUPP
-NewListClickLoopUPP(ListClickLoopProcPtr userRoutine);
+NewListClickLoopUPP(ListClickLoopProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewListDefUPP()
@@ -179,7 +174,7 @@ NewListClickLoopUPP(ListClickLoopProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ListDefUPP
-NewListDefUPP(ListDefProcPtr userRoutine);
+NewListDefUPP(ListDefProcPtr userRoutine)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeListSearchUPP()
@@ -190,7 +185,7 @@ NewListDefUPP(ListDefProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeListSearchUPP(ListSearchUPP userUPP);
+DisposeListSearchUPP(ListSearchUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeListClickLoopUPP()
@@ -201,7 +196,7 @@ DisposeListSearchUPP(ListSearchUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeListClickLoopUPP(ListClickLoopUPP userUPP);
+DisposeListClickLoopUPP(ListClickLoopUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeListDefUPP()
@@ -212,7 +207,7 @@ DisposeListClickLoopUPP(ListClickLoopUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeListDefUPP(ListDefUPP userUPP);
+DisposeListDefUPP(ListDefUPP userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeListSearchUPP()
@@ -228,7 +223,7 @@ InvokeListSearchUPP(
   Ptr            bPtr,
   short          aLen,
   short          bLen,
-  ListSearchUPP  userUPP);
+  ListSearchUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeListClickLoopUPP()
@@ -239,7 +234,7 @@ InvokeListSearchUPP(
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern Boolean
-InvokeListClickLoopUPP(ListClickLoopUPP userUPP);
+InvokeListClickLoopUPP(ListClickLoopUPP userUPP)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeListDefUPP()
@@ -258,7 +253,7 @@ InvokeListDefUPP(
   short       lDataOffset,
   short       lDataLen,
   ListHandle  lHandle,
-  ListDefUPP  userUPP);
+  ListDefUPP  userUPP)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 enum {
   kListDefProcPtr               = 0,
@@ -279,6 +274,9 @@ typedef ListDefSpec *                   ListDefSpecPtr;
 /*
  *  CreateCustomList()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -295,12 +293,15 @@ CreateCustomList(
   Boolean              hasGrow,
   Boolean              scrollHoriz,
   Boolean              scrollVert,
-  ListHandle *         outList);
+  ListHandle *         outList)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  LNew()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -317,11 +318,14 @@ LNew(
   Boolean             drawIt,
   Boolean             hasGrow,
   Boolean             scrollHoriz,
-  Boolean             scrollVert);
+  Boolean             scrollVert)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LDispose()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -329,11 +333,14 @@ LNew(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LDispose(ListHandle lHandle);
+LDispose(ListHandle lHandle)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LAddColumn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -344,11 +351,14 @@ extern short
 LAddColumn(
   short        count,
   short        colNum,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LAddRow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -359,11 +369,14 @@ extern short
 LAddRow(
   short        count,
   short        rowNum,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LDelColumn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -374,11 +387,14 @@ extern void
 LDelColumn(
   short        count,
   short        colNum,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LDelRow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -389,11 +405,14 @@ extern void
 LDelRow(
   short        count,
   short        rowNum,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LGetSelect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -404,11 +423,14 @@ extern Boolean
 LGetSelect(
   Boolean      next,
   Cell *       theCell,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LLastClick()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -416,11 +438,14 @@ LGetSelect(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Cell 
-LLastClick(ListHandle lHandle);
+LLastClick(ListHandle lHandle)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LNextCell()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -432,11 +457,14 @@ LNextCell(
   Boolean      hNext,
   Boolean      vNext,
   Cell *       theCell,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LSearch()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -449,11 +477,14 @@ LSearch(
   short           dataLen,
   ListSearchUPP   searchProc,
   Cell *          theCell,
-  ListHandle      lHandle);
+  ListHandle      lHandle)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LSize()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -464,11 +495,14 @@ extern void
 LSize(
   short        listWidth,
   short        listHeight,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LSetDrawingMode()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -478,11 +512,14 @@ LSize(
 extern void 
 LSetDrawingMode(
   Boolean      drawIt,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LScroll()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -493,11 +530,14 @@ extern void
 LScroll(
   short        dCols,
   short        dRows,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LAutoScroll()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -505,11 +545,14 @@ LScroll(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LAutoScroll(ListHandle lHandle);
+LAutoScroll(ListHandle lHandle)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LUpdate()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -519,11 +562,14 @@ LAutoScroll(ListHandle lHandle);
 extern void 
 LUpdate(
   RgnHandle    theRgn,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LActivate()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -533,11 +579,14 @@ LUpdate(
 extern void 
 LActivate(
   Boolean      act,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LCellSize()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -547,11 +596,14 @@ LActivate(
 extern void 
 LCellSize(
   Point        cSize,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LClick()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -562,11 +614,14 @@ extern Boolean
 LClick(
   Point            pt,
   EventModifiers   modifiers,
-  ListHandle       lHandle);
+  ListHandle       lHandle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LAddToCell()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -578,11 +633,14 @@ LAddToCell(
   const void *  dataPtr,
   short         dataLen,
   Cell          theCell,
-  ListHandle    lHandle);
+  ListHandle    lHandle)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LClrCell()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -592,11 +650,14 @@ LAddToCell(
 extern void 
 LClrCell(
   Cell         theCell,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LGetCell()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -608,11 +669,14 @@ LGetCell(
   void *       dataPtr,
   short *      dataLen,
   Cell         theCell,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -623,11 +687,14 @@ extern void
 LRect(
   Rect *       cellRect,
   Cell         theCell,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LSetCell()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -639,11 +706,14 @@ LSetCell(
   const void *  dataPtr,
   short         dataLen,
   Cell          theCell,
-  ListHandle    lHandle);
+  ListHandle    lHandle)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LSetSelect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -654,11 +724,14 @@ extern void
 LSetSelect(
   Boolean      setIt,
   Cell         theCell,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LDraw()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -668,11 +741,14 @@ LSetSelect(
 extern void 
 LDraw(
   Cell         theCell,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  LGetCellDataLocation()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -684,7 +760,7 @@ LGetCellDataLocation(
   short *      offset,
   short *      len,
   Cell         theCell,
-  ListHandle   lHandle);
+  ListHandle   lHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Routines available in Carbon only*/
@@ -706,6 +782,9 @@ LGetCellDataLocation(
  *    specify a UniversalProcPtr pointing to code in your application
  *    code fragment.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inResID:
@@ -717,13 +796,13 @@ LGetCellDataLocation(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 RegisterListDefinition(
   SInt16           inResID,
-  ListDefSpecPtr   inDefSpec);
+  ListDefSpecPtr   inDefSpec)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #if CALL_NOT_IN_CARBON
@@ -861,6 +940,9 @@ RegisterListDefinition(
 /*
  *  GetListViewBounds()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -868,12 +950,15 @@ RegisterListDefinition(
  */
 extern Rect * 
 GetListViewBounds(
-  ListRef   list,
-  Rect *    view);
+  ListHandle   list,
+  Rect *       view)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetListPort()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -881,11 +966,14 @@ GetListViewBounds(
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern CGrafPtr 
-GetListPort(ListRef list);
+GetListPort(ListHandle list)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetListCellIndent()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -894,12 +982,15 @@ GetListPort(ListRef list);
  */
 extern Point * 
 GetListCellIndent(
-  ListRef   list,
-  Point *   indent);
+  ListHandle   list,
+  Point *      indent)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetListCellSize()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -908,12 +999,15 @@ GetListCellIndent(
  */
 extern Point * 
 GetListCellSize(
-  ListRef   list,
-  Point *   size);
+  ListHandle   list,
+  Point *      size)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetListVisibleCells()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -922,24 +1016,15 @@ GetListCellSize(
  */
 extern ListBounds * 
 GetListVisibleCells(
-  ListRef       list,
-  ListBounds *  visible);
+  ListHandle    list,
+  ListBounds *  visible)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetListVerticalScrollBar()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
- */
-extern ControlRef 
-GetListVerticalScrollBar(ListRef list);
-
-
-/*
- *  GetListHorizontalScrollBar()
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -947,11 +1032,29 @@ GetListVerticalScrollBar(ListRef list);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern ControlRef 
-GetListHorizontalScrollBar(ListRef list);
+GetListVerticalScrollBar(ListHandle list)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  GetListHorizontalScrollBar()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
+ */
+extern ControlRef 
+GetListHorizontalScrollBar(ListHandle list)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetListActive()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -959,11 +1062,14 @@ GetListHorizontalScrollBar(ListRef list);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern Boolean 
-GetListActive(ListRef list);
+GetListActive(ListHandle list)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetListClickTime()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -971,11 +1077,14 @@ GetListActive(ListRef list);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern SInt32 
-GetListClickTime(ListRef list);
+GetListClickTime(ListHandle list)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetListClickLocation()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -984,12 +1093,15 @@ GetListClickTime(ListRef list);
  */
 extern Point * 
 GetListClickLocation(
-  ListRef   list,
-  Point *   click);
+  ListHandle   list,
+  Point *      click)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetListMouseLocation()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -998,12 +1110,15 @@ GetListClickLocation(
  */
 extern Point * 
 GetListMouseLocation(
-  ListRef   list,
-  Point *   mouse);
+  ListHandle   list,
+  Point *      mouse)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetListClickLoop()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1011,11 +1126,14 @@ GetListMouseLocation(
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern ListClickLoopUPP 
-GetListClickLoop(ListRef list);
+GetListClickLoop(ListHandle list)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetListRefCon()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1023,23 +1141,14 @@ GetListClickLoop(ListRef list);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern SInt32 
-GetListRefCon(ListRef list);
+GetListRefCon(ListHandle list)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetListDefinition()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
- */
-extern Handle 
-GetListDefinition(ListRef list);
-
-
-/*
- *  GetListUserHandle()
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1047,11 +1156,29 @@ GetListDefinition(ListRef list);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern Handle 
-GetListUserHandle(ListRef list);
+GetListDefinition(ListHandle list)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  GetListUserHandle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
+ */
+extern Handle 
+GetListUserHandle(ListHandle list)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetListDataBounds()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1060,12 +1187,15 @@ GetListUserHandle(ListRef list);
  */
 extern ListBounds * 
 GetListDataBounds(
-  ListRef       list,
-  ListBounds *  bounds);
+  ListHandle    list,
+  ListBounds *  bounds)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetListDataHandle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1073,23 +1203,14 @@ GetListDataBounds(
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern DataHandle 
-GetListDataHandle(ListRef list);
+GetListDataHandle(ListHandle list)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetListFlags()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
- */
-extern OptionBits 
-GetListFlags(ListRef list);
-
-
-/*
- *  GetListSelectionFlags()
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1097,12 +1218,30 @@ GetListFlags(ListRef list);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern OptionBits 
-GetListSelectionFlags(ListRef list);
+GetListFlags(ListHandle list)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  GetListSelectionFlags()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
+ */
+extern OptionBits 
+GetListSelectionFlags(ListHandle list)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Setters */
 /*
  *  SetListViewBounds()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1111,12 +1250,15 @@ GetListSelectionFlags(ListRef list);
  */
 extern void 
 SetListViewBounds(
-  ListRef       list,
-  const Rect *  view);
+  ListHandle    list,
+  const Rect *  view)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetListPort()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1125,12 +1267,15 @@ SetListViewBounds(
  */
 extern void 
 SetListPort(
-  ListRef    list,
-  CGrafPtr   port);
+  ListHandle   list,
+  CGrafPtr     port)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetListCellIndent()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1139,12 +1284,15 @@ SetListPort(
  */
 extern void 
 SetListCellIndent(
-  ListRef   list,
-  Point *   indent);
+  ListHandle   list,
+  Point *      indent)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetListClickTime()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1153,12 +1301,15 @@ SetListCellIndent(
  */
 extern void 
 SetListClickTime(
-  ListRef   list,
-  SInt32    time);
+  ListHandle   list,
+  SInt32       time)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetListClickLoop()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1167,12 +1318,15 @@ SetListClickTime(
  */
 extern void 
 SetListClickLoop(
-  ListRef            list,
-  ListClickLoopUPP   clickLoop);
+  ListHandle         list,
+  ListClickLoopUPP   clickLoop)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetListLastClick()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1181,12 +1335,15 @@ SetListClickLoop(
  */
 extern void 
 SetListLastClick(
-  ListRef   list,
-  Cell *    lastClick);
+  ListHandle   list,
+  Cell *       lastClick)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetListRefCon()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1195,12 +1352,15 @@ SetListLastClick(
  */
 extern void 
 SetListRefCon(
-  ListRef   list,
-  SInt32    refCon);
+  ListHandle   list,
+  SInt32       refCon)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetListUserHandle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1209,12 +1369,15 @@ SetListRefCon(
  */
 extern void 
 SetListUserHandle(
-  ListRef   list,
-  Handle    userHandle);
+  ListHandle   list,
+  Handle       userHandle)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetListFlags()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1223,12 +1386,15 @@ SetListUserHandle(
  */
 extern void 
 SetListFlags(
-  ListRef      list,
-  OptionBits   listFlags);
+  ListHandle   list,
+  OptionBits   listFlags)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetListSelectionFlags()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1237,8 +1403,8 @@ SetListFlags(
  */
 extern void 
 SetListSelectionFlags(
-  ListRef      list,
-  OptionBits   selectionFlags);
+  ListHandle   list,
+  OptionBits   selectionFlags)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* WARNING: These may go away in a future build.  Beware! */
@@ -1293,13 +1459,7 @@ SetListSelectionFlags(
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

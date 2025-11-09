@@ -3,9 +3,9 @@
  
      Contains:   ICC Profile Format Definitions
  
-     Version:    ColorSync-81~8
+     Version:    ColorSync-98.1~196
  
-     Copyright:  © 1994-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,28 +16,18 @@
 #ifndef __CMICCPROFILE__
 #define __CMICCPROFILE__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* ICC Profile version constants  */
 enum {
@@ -359,9 +349,10 @@ enum {
 /* parametric curve type enumerations */
 enum {
   cmParametricType0             = 0,    /* Y = X^gamma */
-  cmParametricType1             = 1,    /* Y = (aX+b)^gamma     [X>=-b/a],  Y = 0  [X<-b/a] */
-  cmParametricType2             = 2,    /* Y = (aX+b)^gamma + c [X>=-b/a],  Y = c  [X<-b/a] */
-  cmParametricType3             = 3     /* Y = (aX+b)^gamma     [X>=d],     Y = cX [X<d]    */
+  cmParametricType1             = 1,    /* Y = (aX+b)^gamma     [X>=-b/a],  Y = 0    [X<-b/a] */
+  cmParametricType2             = 2,    /* Y = (aX+b)^gamma + c [X>=-b/a],  Y = c    [X<-b/a] */
+  cmParametricType3             = 3,    /* Y = (aX+b)^gamma     [X>=d],     Y = cX   [X<d]    */
+  cmParametricType4             = 4     /* Y = (aX+b)^gamma + e [X>=d],     Y = cX+f [X<d]    */
 };
 
 
@@ -403,6 +394,7 @@ struct CMXYZColor {
 };
 typedef struct CMXYZColor               CMXYZColor;
 /* Typedef for Profile MD5 message digest */
+/* Derived from the RSA Data Security, Inc. MD5 Message-Digest Algorithm */
 
 typedef unsigned char                   CMProfileMD5[16];
 typedef CMProfileMD5 *                  CMProfileMD5Ptr;
@@ -1005,17 +997,8 @@ typedef CMResponseColor                 responseColor;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __CMICCPROFILE__ */
 

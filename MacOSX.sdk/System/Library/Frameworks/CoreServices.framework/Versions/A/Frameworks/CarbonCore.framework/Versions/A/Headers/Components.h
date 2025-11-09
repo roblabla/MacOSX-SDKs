@@ -3,9 +3,9 @@
  
      Contains:   Component Manager Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1991-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1991-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -34,6 +34,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -43,13 +44,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   kAppleManufacturer            = 'appl', /* Apple supplied components */
@@ -276,7 +271,7 @@ typedef UniversalProcPtr                ComponentFunctionUPP;
 extern ComponentFunctionUPP 
 NewComponentFunctionUPP(
   ProcPtr        userRoutine,
-  ProcInfoType   procInfo);
+  ProcInfoType   procInfo)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -293,7 +288,7 @@ NewComponentFunctionUPP(
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void 
-DisposeComponentFunctionUPP(ComponentFunctionUPP userUPP);
+DisposeComponentFunctionUPP(ComponentFunctionUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -340,7 +335,7 @@ RegisterComponent(
   short                   global,
   Handle                  componentName,
   Handle                  componentInfo,
-  Handle                  componentIcon);
+  Handle                  componentIcon)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -355,7 +350,7 @@ RegisterComponent(
 extern Component 
 RegisterComponentResource(
   ComponentResourceHandle   cr,
-  short                     global);
+  short                     global)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -368,7 +363,7 @@ RegisterComponentResource(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern OSErr 
-UnregisterComponent(Component aComponent);
+UnregisterComponent(Component aComponent)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -383,7 +378,7 @@ UnregisterComponent(Component aComponent);
 extern Component 
 FindNextComponent(
   Component               aComponent,
-  ComponentDescription *  looking);
+  ComponentDescription *  looking)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -396,7 +391,7 @@ FindNextComponent(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern long 
-CountComponents(ComponentDescription * looking);
+CountComponents(ComponentDescription * looking)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -414,7 +409,7 @@ GetComponentInfo(
   ComponentDescription *  cd,
   Handle                  componentName,
   Handle                  componentInfo,
-  Handle                  componentIcon);
+  Handle                  componentIcon)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -427,7 +422,7 @@ GetComponentInfo(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern long 
-GetComponentListModSeed(void);
+GetComponentListModSeed(void)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -440,7 +435,7 @@ GetComponentListModSeed(void);
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern long 
-GetComponentTypeModSeed(OSType componentType);
+GetComponentTypeModSeed(OSType componentType)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /********************************************************
@@ -458,7 +453,7 @@ GetComponentTypeModSeed(OSType componentType);
 extern OSErr 
 OpenAComponent(
   Component            aComponent,
-  ComponentInstance *  ci);
+  ComponentInstance *  ci)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -471,7 +466,7 @@ OpenAComponent(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern ComponentInstance 
-OpenComponent(Component aComponent);
+OpenComponent(Component aComponent)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -484,7 +479,7 @@ OpenComponent(Component aComponent);
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern OSErr 
-CloseComponent(ComponentInstance aComponentInstance);
+CloseComponent(ComponentInstance aComponentInstance)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -497,7 +492,7 @@ CloseComponent(ComponentInstance aComponentInstance);
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern OSErr 
-GetComponentInstanceError(ComponentInstance aComponentInstance);
+GetComponentInstanceError(ComponentInstance aComponentInstance) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /********************************************************
@@ -513,7 +508,7 @@ GetComponentInstanceError(ComponentInstance aComponentInstance);
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern Component 
-ResolveComponentAlias(Component aComponent);
+ResolveComponentAlias(Component aComponent)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /********************************************************
@@ -533,7 +528,7 @@ GetComponentPublicResource(
   Component   aComponent,
   OSType      resourceType,
   short       resourceID,
-  Handle *    theResource);
+  Handle *    theResource)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -552,7 +547,7 @@ GetComponentPublicResourceList(
   ComponentDescription *           cd,
   GetMissingComponentResourceUPP   missingProc,
   void *                           refCon,
-  void *                           atomContainerPtr);
+  void *                           atomContainerPtr)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -568,7 +563,7 @@ GetComponentPublicIndString(
   Component   aComponent,
   Str255      theString,
   short       strListID,
-  short       index);
+  short       index)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /********************************************************
@@ -591,7 +586,7 @@ GetComponentPublicIndString(
 extern void 
 SetComponentInstanceError(
   ComponentInstance   aComponentInstance,
-  OSErr               theError);
+  OSErr               theError)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -604,7 +599,7 @@ SetComponentInstanceError(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern long 
-GetComponentRefcon(Component aComponent);
+GetComponentRefcon(Component aComponent)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -619,7 +614,7 @@ GetComponentRefcon(Component aComponent);
 extern void 
 SetComponentRefcon(
   Component   aComponent,
-  long        theRefcon);
+  long        theRefcon)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -632,7 +627,7 @@ SetComponentRefcon(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern short 
-OpenComponentResFile(Component aComponent);
+OpenComponentResFile(Component aComponent)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -647,7 +642,7 @@ OpenComponentResFile(Component aComponent);
 extern OSErr 
 OpenAComponentResFile(
   Component   aComponent,
-  short *     resRef);
+  short *     resRef)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -660,7 +655,7 @@ OpenAComponentResFile(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern OSErr 
-CloseComponentResFile(short refnum);
+CloseComponentResFile(short refnum)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Note: GetComponentResource returns a Handle, not a resource.  The caller must dispose it with DisposeHandle. */
@@ -678,7 +673,7 @@ GetComponentResource(
   Component   aComponent,
   OSType      resType,
   short       resID,
-  Handle *    theResource);
+  Handle *    theResource)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -695,7 +690,7 @@ GetComponentIndString(
   Component   aComponent,
   Str255      theString,
   short       strListID,
-  short       index);
+  short       index)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /********************************************************
@@ -711,7 +706,7 @@ GetComponentIndString(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern Handle 
-GetComponentInstanceStorage(ComponentInstance aComponentInstance);
+GetComponentInstanceStorage(ComponentInstance aComponentInstance) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -726,7 +721,7 @@ GetComponentInstanceStorage(ComponentInstance aComponentInstance);
 extern void 
 SetComponentInstanceStorage(
   ComponentInstance   aComponentInstance,
-  Handle              theStorage);
+  Handle              theStorage)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -761,7 +756,7 @@ SetComponentInstanceStorage(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern long 
-CountComponentInstances(Component aComponent);
+CountComponentInstances(Component aComponent)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* useful helper routines for convenient method dispatching */
@@ -776,7 +771,7 @@ CountComponentInstances(Component aComponent);
 extern long 
 CallComponentFunction(
   ComponentParameters *  params,
-  ComponentFunctionUPP   func);
+  ComponentFunctionUPP   func)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -792,10 +787,9 @@ extern long
 CallComponentFunctionWithStorage(
   Handle                 storage,
   ComponentParameters *  params,
-  ComponentFunctionUPP   func);
+  ComponentFunctionUPP   func)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#if TARGET_CPU_PPC
 /*
  *  CallComponentFunctionWithStorageProcInfo()
  *  
@@ -809,13 +803,8 @@ CallComponentFunctionWithStorageProcInfo(
   Handle                 storage,
   ComponentParameters *  params,
   ProcPtr                func,
-  ProcInfoType           funcProcInfo);
+  ProcInfoType           funcProcInfo)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-
-#else
-#define CallComponentFunctionWithStorageProcInfo(storage, params, func, funcProcInfo ) CallComponentFunctionWithStorage(storage, params, func)
-
-#endif  /* TARGET_CPU_PPC */
 
 /*
  *  DelegateComponentCall()
@@ -829,7 +818,7 @@ CallComponentFunctionWithStorageProcInfo(
 extern long 
 DelegateComponentCall(
   ComponentParameters *  originalParams,
-  ComponentInstance      ci);
+  ComponentInstance      ci)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -844,7 +833,7 @@ DelegateComponentCall(
 extern OSErr 
 SetDefaultComponent(
   Component   aComponent,
-  short       flags);
+  short       flags)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -859,7 +848,7 @@ SetDefaultComponent(
 extern ComponentInstance 
 OpenDefaultComponent(
   OSType   componentType,
-  OSType   componentSubType);
+  OSType   componentSubType)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -875,7 +864,7 @@ extern OSErr
 OpenADefaultComponent(
   OSType               componentType,
   OSType               componentSubType,
-  ComponentInstance *  ci);
+  ComponentInstance *  ci)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -890,7 +879,7 @@ OpenADefaultComponent(
 extern Component 
 CaptureComponent(
   Component   capturedComponent,
-  Component   capturingComponent);
+  Component   capturingComponent)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -903,7 +892,7 @@ CaptureComponent(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern OSErr 
-UncaptureComponent(Component aComponent);
+UncaptureComponent(Component aComponent)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -918,7 +907,7 @@ UncaptureComponent(Component aComponent);
 extern long 
 RegisterComponentResourceFile(
   short   resRefNum,
-  short   global);
+  short   global)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -933,7 +922,7 @@ RegisterComponentResourceFile(
 extern OSErr 
 GetComponentIconSuite(
   Component   aComponent,
-  Handle *    iconSuite);
+  Handle *    iconSuite)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -957,7 +946,7 @@ GetComponentIconSuite(
 extern OSErr 
 RegisterComponentFile(
   const FSSpec *  spec,
-  short           global);
+  short           global)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -973,7 +962,7 @@ RegisterComponentFileEntries(
   const FSSpec *                spec,
   short                         global,
   const ComponentDescription *  toRegister,          /* can be NULL */
-  UInt32                        registerCount);
+  UInt32                        registerCount)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -987,7 +976,7 @@ RegisterComponentFileEntries(
 extern OSErr 
 RegisterComponentFileRef(
   const FSRef *  ref,
-  short          global);
+  short          global)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1003,7 +992,7 @@ RegisterComponentFileRefEntries(
   const FSRef *                 ref,
   short                         global,
   const ComponentDescription *  toRegister,          /* can be NULL */
-  UInt32                        registerCount);
+  UInt32                        registerCount)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /********************************************************
@@ -1025,7 +1014,7 @@ RegisterComponentFileRefEntries(
 extern long 
 ComponentFunctionImplemented(
   ComponentInstance   ci,
-  short               ftnNumber);
+  short               ftnNumber)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1038,7 +1027,7 @@ ComponentFunctionImplemented(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern long 
-GetComponentVersion(ComponentInstance ci);
+GetComponentVersion(ComponentInstance ci)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1053,7 +1042,7 @@ GetComponentVersion(ComponentInstance ci);
 extern long 
 ComponentSetTarget(
   ComponentInstance   ci,
-  ComponentInstance   target);
+  ComponentInstance   target)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* New style names*/
@@ -1070,7 +1059,7 @@ ComponentSetTarget(
 extern ComponentResult 
 CallComponentOpen(
   ComponentInstance   ci,
-  ComponentInstance   self);
+  ComponentInstance   self)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1085,7 +1074,7 @@ CallComponentOpen(
 extern ComponentResult 
 CallComponentClose(
   ComponentInstance   ci,
-  ComponentInstance   self);
+  ComponentInstance   self)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1100,7 +1089,7 @@ CallComponentClose(
 extern ComponentResult 
 CallComponentCanDo(
   ComponentInstance   ci,
-  short               ftnNumber);
+  short               ftnNumber)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1113,7 +1102,7 @@ CallComponentCanDo(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern ComponentResult 
-CallComponentVersion(ComponentInstance ci);
+CallComponentVersion(ComponentInstance ci)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1126,7 +1115,7 @@ CallComponentVersion(ComponentInstance ci);
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern ComponentResult 
-CallComponentRegister(ComponentInstance ci);
+CallComponentRegister(ComponentInstance ci)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1141,7 +1130,7 @@ CallComponentRegister(ComponentInstance ci);
 extern ComponentResult 
 CallComponentTarget(
   ComponentInstance   ci,
-  ComponentInstance   target);
+  ComponentInstance   target)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1154,7 +1143,7 @@ CallComponentTarget(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern ComponentResult 
-CallComponentUnregister(ComponentInstance ci);
+CallComponentUnregister(ComponentInstance ci)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1170,7 +1159,7 @@ extern ComponentResult
 CallComponentGetMPWorkFunction(
   ComponentInstance             ci,
   ComponentMPWorkFunctionUPP *  workFunction,
-  void **                       refCon);
+  void **                       refCon)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1186,7 +1175,7 @@ CallComponentGetPublicResource(
   ComponentInstance   ci,
   OSType              resourceType,
   short               resourceID,
-  Handle *            resource);
+  Handle *            resource)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1203,7 +1192,7 @@ CallComponentGetPublicResource(
  *    Non-Carbon CFM:   not available
  */
 extern ComponentResult 
-CallComponentDispatch(ComponentParameters * cp);
+CallComponentDispatch(ComponentParameters * cp)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1217,7 +1206,7 @@ CallComponentDispatch(ComponentParameters * cp);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ComponentMPWorkFunctionUPP
-NewComponentMPWorkFunctionUPP(ComponentMPWorkFunctionProcPtr userRoutine);
+NewComponentMPWorkFunctionUPP(ComponentMPWorkFunctionProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewComponentRoutineUPP()
@@ -1228,7 +1217,7 @@ NewComponentMPWorkFunctionUPP(ComponentMPWorkFunctionProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ComponentRoutineUPP
-NewComponentRoutineUPP(ComponentRoutineProcPtr userRoutine);
+NewComponentRoutineUPP(ComponentRoutineProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewGetMissingComponentResourceUPP()
@@ -1239,7 +1228,7 @@ NewComponentRoutineUPP(ComponentRoutineProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern GetMissingComponentResourceUPP
-NewGetMissingComponentResourceUPP(GetMissingComponentResourceProcPtr userRoutine);
+NewGetMissingComponentResourceUPP(GetMissingComponentResourceProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeComponentMPWorkFunctionUPP()
@@ -1250,7 +1239,7 @@ NewGetMissingComponentResourceUPP(GetMissingComponentResourceProcPtr userRoutine
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeComponentMPWorkFunctionUPP(ComponentMPWorkFunctionUPP userUPP);
+DisposeComponentMPWorkFunctionUPP(ComponentMPWorkFunctionUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeComponentRoutineUPP()
@@ -1261,7 +1250,7 @@ DisposeComponentMPWorkFunctionUPP(ComponentMPWorkFunctionUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeComponentRoutineUPP(ComponentRoutineUPP userUPP);
+DisposeComponentRoutineUPP(ComponentRoutineUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeGetMissingComponentResourceUPP()
@@ -1272,7 +1261,7 @@ DisposeComponentRoutineUPP(ComponentRoutineUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeGetMissingComponentResourceUPP(GetMissingComponentResourceUPP userUPP);
+DisposeGetMissingComponentResourceUPP(GetMissingComponentResourceUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeComponentMPWorkFunctionUPP()
@@ -1286,7 +1275,7 @@ extern ComponentResult
 InvokeComponentMPWorkFunctionUPP(
   void *                                  globalRefCon,
   ComponentMPWorkFunctionHeaderRecordPtr  header,
-  ComponentMPWorkFunctionUPP              userUPP);
+  ComponentMPWorkFunctionUPP              userUPP)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeComponentRoutineUPP()
@@ -1300,7 +1289,7 @@ extern ComponentResult
 InvokeComponentRoutineUPP(
   ComponentParameters *  cp,
   Handle                 componentStorage,
-  ComponentRoutineUPP    userUPP);
+  ComponentRoutineUPP    userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeGetMissingComponentResourceUPP()
@@ -1317,7 +1306,7 @@ InvokeGetMissingComponentResourceUPP(
   short                           resID,
   void *                          refCon,
   Handle *                        resource,
-  GetMissingComponentResourceUPP  userUPP);
+  GetMissingComponentResourceUPP  userUPP)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /* ProcInfos */
 
@@ -1343,13 +1332,7 @@ enum {
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

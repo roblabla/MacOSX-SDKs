@@ -113,6 +113,8 @@ struct passwd {
 __BEGIN_DECLS
 struct passwd	*getpwuid __P((uid_t));
 struct passwd	*getpwnam __P((const char *));
+int		 getpwuid_r __P((uid_t, struct passwd *, char *, size_t, struct passwd **));
+int		 getpwnam_r __P((const char *, struct passwd *, char *, size_t, struct passwd **));
 #ifndef _POSIX_SOURCE
 struct passwd	*getpwent __P((void));
 #ifndef _XOPEN_SOURCE

@@ -108,6 +108,33 @@ enum {
     kIOPCIStatusParityErrActive		= 0x8000
 };
 
+// constants which are part of the PCI Bus Power Management Spec.
+enum
+{
+    // capabilities bits in the 16 bit capabilities register
+    kPCIPMCPMESupportFromD3Cold		= 0x8000,
+    kPCIPMCPMESupportFromD3Hot		= 0x4000,
+    kPCIPMCPMESupportFromD2		= 0x2000,
+    kPCIPMCPMESupportFromD1		= 0x1000,
+    kPCIPMCPMESupportFromD0		= 0x0800,
+    kPCIPMCD2Support			= 0x0400,
+    kPCIPMCD1Support			= 0x0200
+};
+
+enum
+{
+    // bits in the power management control/status register
+    kPCIPMCSPMEStatus			= 0x8000,
+    kPCIPMCSPMEEnable			= 0x0100,
+    kPCIPMCSPowerStateMask		= 0x0003,
+    kPCIPMCSPowerStateD3		= 0x0003,
+    kPCIPMCSPowerStateD2		= 0x0002,
+    kPCIPMCSPowerStateD1		= 0x0001,
+    kPCIPMCSPowerStateD0		= 0x0000,
+    
+    kPCIPMCSDefaultEnableBits		= (~(IOOptionBits)0)
+};
+
 union IOPCIAddressSpace {
     UInt32		bits;
     struct {
@@ -155,7 +182,8 @@ struct IOPCIPhysicalAddress {
 enum {
     kIOPCIDevicePowerStateCount = 3,
     kIOPCIDeviceOffState	= 0,
-    kIOPCIDeviceOnState		= 2
+    kIOPCIDeviceDozeState	= 1,
+    kIOPCIDeviceOnState		= 2,
 };
 
 /*! @class IOPCIDevice : public IOService
@@ -235,7 +263,11 @@ protected:
 /*! @struct ExpansionData
     @discussion This structure will be used to expand the capablilties of the IOWorkLoop in the future.
     */    
-    struct ExpansionData { };
+    struct ExpansionData {
+	bool					PMsleepEnabled;		// T if a client has enabled PCI Power Management
+	UInt8					PMcontrolStatus;	// if >0 this device supports PCI Power Management
+	UInt16					sleepControlBits;	// bits to set the control/status register to for sleep
+    };
 
 /*! @var reserved
     Reserved for future use.  (Internal use only)  */
@@ -248,11 +280,13 @@ public:
 public:
     /* IOService/IORegistryEntry methods */
 
+    virtual bool init( OSDictionary *  propTable );
+    virtual bool init( IORegistryEntry * from,
+				const IORegistryPlane * inPlane );
+    virtual void free();
     virtual bool attach( IOService * provider );
     virtual void detach( IOService * provider );
     virtual IOReturn setPowerState( unsigned long, IOService * );
-    virtual IOReturn addPowerChild ( IOService * theChild );
-    virtual void joinPMtree( IOService * driver );
     virtual bool compareName( OSString * name, OSString ** matched = 0 ) const;
     virtual bool matchPropertyTable( OSDictionary *	table,
                                      SInt32       *	score );
@@ -400,7 +434,8 @@ public:
 /*! @function mapDeviceMemoryWithRegister
     @abstract Maps a physical range of the device.
     @discussion This method will create a mapping for the IODeviceMemory for the physical memory range that was assigned to the configuration space base address register passed in, with IODeviceMemory::map(options). The mapping is represented by the returned instance of IOMemoryMap, which should not be released until the mapping is no longer required. This method is analogous to IOService::mapDeviceMemoryWithIndex.
-    @param index An index into the array of ranges assigned to the device.
+    @param reg The 8-bit configuration space register that is the base address register for the desired range.
+    @param options Options to be passed to the IOMemoryDescriptor::map() method.
     @result An instance of IOMemoryMap, or zero if the index is beyond the count available. The mapping should be released only when access to it is no longer required. */
 
     virtual IOMemoryMap * mapDeviceMemoryWithRegister( UInt8 reg,
@@ -472,9 +507,23 @@ public:
 
     virtual UInt8 ioRead8( UInt16 offset, IOMemoryMap * map = 0 );
 
+    OSMetaClassDeclareReservedUsed(IOPCIDevice,  0);
+/*! @function hasPCIPowerManagement
+    @abstract determine whether or not the device supports PCI Bus Power Management.
+    @discussion This method will look at the device's capabilties registers and determine whether or not the device supports the PCI BUS Power Management Specification.
+    @param state(optional) Check for support of a specific state (e.g. kPCIPMCPMESupportFromD3Cold). If state is not suuplied or is 0, then check for a property in the registry which tells which state the hardware expects the device to go to during sleep.
+    @result true if the specified state is supported */
+    virtual bool hasPCIPowerManagement(IOOptionBits state = 0);
+    
+    OSMetaClassDeclareReservedUsed(IOPCIDevice,  1);
+/*! @function enablePCIPowerManagement
+    @abstract enable PCI power management for sleep state
+    @discussion This method will enable PCI Bus Powermanagement when going to sleep mode.
+    @param state(optional) Enables PCI Power Management by placing the function in the given state (e.g. kPCIPMCSPowerStateD3). If state is not specified or is 0xffffffff, then the IOPCIDevice determines the desired state. If state is kPCIPMCSPowerStateD0 (0) then PCI Power Management is disabled.
+    @result kIOReturnSuccess if there were no errors */
+    virtual IOReturn enablePCIPowerManagement(IOOptionBits state = 0xffffffff);
+    
     // Unused Padding
-    OSMetaClassDeclareReservedUnused(IOPCIDevice,  0);
-    OSMetaClassDeclareReservedUnused(IOPCIDevice,  1);
     OSMetaClassDeclareReservedUnused(IOPCIDevice,  2);
     OSMetaClassDeclareReservedUnused(IOPCIDevice,  3);
     OSMetaClassDeclareReservedUnused(IOPCIDevice,  4);

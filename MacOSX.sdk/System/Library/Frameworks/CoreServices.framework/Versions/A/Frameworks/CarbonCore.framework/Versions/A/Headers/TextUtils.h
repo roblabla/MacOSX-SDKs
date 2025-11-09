@@ -3,9 +3,9 @@
  
      Contains:   Text Utilities Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -34,6 +34,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -43,13 +44,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /*
 
@@ -123,7 +118,7 @@ Munger(
   const void *  ptr1,
   long          len1,
   const void *  ptr2,
-  long          len2);
+  long          len2)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -135,7 +130,7 @@ Munger(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern StringHandle 
-NewString(ConstStr255Param theString);
+NewString(ConstStr255Param theString)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -149,7 +144,7 @@ NewString(ConstStr255Param theString);
 extern void 
 SetString(
   StringHandle       theString,
-  ConstStr255Param   strNew);
+  ConstStr255Param   strNew)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -161,7 +156,7 @@ SetString(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern StringHandle 
-GetString(short stringID);
+GetString(short stringID)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -176,7 +171,7 @@ extern void
 GetIndString(
   Str255   theString,
   short    strListID,
-  short    index);
+  short    index)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -225,7 +220,7 @@ FindWordBreaks(
   Boolean         leadingEdge,
   BreakTablePtr   breaks,
   OffsetTable     offsets,
-  ScriptCode      script);
+  ScriptCode      script)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -240,7 +235,7 @@ extern void
 LowercaseText(
   Ptr          textPtr,
   short        len,
-  ScriptCode   script);
+  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -255,7 +250,7 @@ extern void
 UppercaseText(
   Ptr          textPtr,
   short        len,
-  ScriptCode   script);
+  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -270,7 +265,7 @@ extern void
 StripDiacritics(
   Ptr          textPtr,
   short        len,
-  ScriptCode   script);
+  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -285,7 +280,7 @@ extern void
 UppercaseStripDiacritics(
   Ptr          textPtr,
   short        len,
-  ScriptCode   script);
+  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -300,7 +295,7 @@ extern ScriptRunStatus
 FindScriptRun(
   Ptr     textPtr,
   long    textLen,
-  long *  lenUsed);
+  long *  lenUsed)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -398,7 +393,7 @@ FindScriptRun(
 extern void 
 UpperString(
   Str255    theString,
-  Boolean   diacSensitive);
+  Boolean   diacSensitive)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -412,7 +407,7 @@ UpperString(
 extern void 
 upperstring(
   char *    theString,
-  Boolean   diacSensitive);
+  Boolean   diacSensitive)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* The following are macros which map old names to the names exported by InterfaceLib*/
@@ -460,7 +455,7 @@ upperstring(
 extern void 
 c2pstrcpy(
   Str255        dst,
-  const char *  src);
+  const char *  src)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -474,7 +469,7 @@ c2pstrcpy(
 extern void 
 p2cstrcpy(
   char *             dst,
-  ConstStr255Param   src);
+  ConstStr255Param   src)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -488,7 +483,7 @@ p2cstrcpy(
 extern void 
 CopyPascalStringToC(
   ConstStr255Param   src,
-  char *             dst);
+  char *             dst)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -502,7 +497,7 @@ CopyPascalStringToC(
 extern void 
 CopyCStringToPascal(
   const char *  src,
-  Str255        dst);
+  Str255        dst)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -565,13 +560,7 @@ CopyCStringToPascal(
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

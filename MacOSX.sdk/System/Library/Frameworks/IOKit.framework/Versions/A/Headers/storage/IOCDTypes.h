@@ -24,12 +24,7 @@
 #define	_IOCDTYPES_H
 
 #include <IOKit/IOTypes.h>
-
-#if defined(KERNEL)
 #include <libkern/OSByteOrder.h>
-#else /* !defined(KERNEL) */
-#include <architecture/byte_order.h>
-#endif /* !defined(KERNEL) */
 
 #pragma pack(1)                              /* (enable 8-bit struct packing) */
 
@@ -80,7 +75,8 @@ typedef struct
     struct
     {
         CDMSF time;
-        struct {
+        struct
+        {
             UInt8 index;
             UInt8 number;
             CDMSF time;
@@ -98,11 +94,11 @@ typedef struct
 typedef struct
 {
     UInt8 session;
-#if defined(__LITTLE_ENDIAN__)
+#ifdef __LITTLE_ENDIAN__
     UInt8 control:4, adr:4;
-#else /* !defined(__LITTLE_ENDIAN__) */
+#else /* !__LITTLE_ENDIAN__ */
     UInt8 adr:4, control:4;
-#endif /* !defined(__LITTLE_ENDIAN__) */
+#endif /* !__LITTLE_ENDIAN__ */
     UInt8 tno;
     UInt8 point;
     CDMSF address;
@@ -124,13 +120,10 @@ typedef struct
 
 static UInt32 __inline CDTOCGetDescriptorCount(CDTOC * toc)
 {
-#if defined(KERNEL)
-    return ( OSSwapBigToHostInt16(toc->length) - sizeof(UInt16) )
-           / sizeof(CDTOCDescriptor);
-#else /* !defined(KERNEL) */
-    return ( NXSwapBigShortToHost(toc->length) - sizeof(UInt16) )
-           / sizeof(CDTOCDescriptor);
-#endif /* !defined(KERNEL) */
+    UInt32 tocSize = OSSwapBigToHostInt16(toc->length) + sizeof(toc->length);
+
+    return (tocSize < sizeof(CDTOC)) ? 0 : 
+           (tocSize - sizeof(CDTOC)) / sizeof(CDTOCDescriptor);
 }
 
 /*
@@ -140,6 +133,15 @@ static UInt32 __inline CDTOCGetDescriptorCount(CDTOC * toc)
 static UInt32 __inline CDConvertMSFToLBA(CDMSF msf)
 {
     return (((msf.minute * 60UL) + msf.second) * 75UL) + msf.frame - 150;
+}
+
+/*
+ * M:S:F To Clipped LBA Convenience Function
+ */
+
+static UInt32 __inline CDConvertMSFToClippedLBA(CDMSF msf)
+{
+    return (msf.minute == 0 && msf.second <= 1) ? 0 : CDConvertMSFToLBA(msf);
 }
 
 /*
@@ -196,39 +198,41 @@ static CDMSF __inline CDConvertTrackNumberToMSF(UInt8 track, CDTOC * toc)
  * Auxiliary       | 0        | 288      | 0        | 280      | 0        |
  * ErrorFlags      | 294      | 294      | 294      | 294      | 294      |
  * SubChannel      | 96       | 96       | 96       | 96       | 96       |
+ * SubChannelQ     | 16       | 16       | 16       | 16       | 16       |
  *                 +----------+----------+----------+----------+----------+
  */
 
 typedef enum
 {
-    kCDSectorAreaSync       = 0x80,
-    kCDSectorAreaHeader     = 0x20,
-    kCDSectorAreaSubHeader  = 0x40,
-    kCDSectorAreaUser       = 0x10,
-    kCDSectorAreaAuxiliary  = 0x08,
-    kCDSectorAreaErrorFlags = 0x02,
-    kCDSectorAreaSubChannel = 0x01
+    kCDSectorAreaSync        = 0x80,
+    kCDSectorAreaHeader      = 0x20,
+    kCDSectorAreaSubHeader   = 0x40,
+    kCDSectorAreaUser        = 0x10,
+    kCDSectorAreaAuxiliary   = 0x08,
+    kCDSectorAreaErrorFlags  = 0x02,
+    kCDSectorAreaSubChannel  = 0x01,
+    kCDSectorAreaSubChannelQ = 0x04
 } CDSectorArea;
 
 typedef enum
 {
-    kCDSectorTypeUnknown    = 0x00,
-    kCDSectorTypeCDDA       = 0x01,
-    kCDSectorTypeMode1      = 0x02,
-    kCDSectorTypeMode2      = 0x03,
-    kCDSectorTypeMode2Form1 = 0x04,
-    kCDSectorTypeMode2Form2 = 0x05,
-    kCDSectorTypeCount      = 0x06
+    kCDSectorTypeUnknown     = 0x00,
+    kCDSectorTypeCDDA        = 0x01,
+    kCDSectorTypeMode1       = 0x02,
+    kCDSectorTypeMode2       = 0x03,
+    kCDSectorTypeMode2Form1  = 0x04,
+    kCDSectorTypeMode2Form2  = 0x05,
+    kCDSectorTypeCount       = 0x06
 } CDSectorType;
 
 typedef enum
 {
-    kCDSectorSizeCDDA       = 2352,
-    kCDSectorSizeMode1      = 2048,
-    kCDSectorSizeMode2      = 2336,
-    kCDSectorSizeMode2Form1 = 2048,
-    kCDSectorSizeMode2Form2 = 2328,
-    kCDSectorSizeWhole      = 2352
+    kCDSectorSizeCDDA        = 2352,
+    kCDSectorSizeMode1       = 2048,
+    kCDSectorSizeMode2       = 2336,
+    kCDSectorSizeMode2Form1  = 2048,
+    kCDSectorSizeMode2Form2  = 2328,
+    kCDSectorSizeWhole       = 2352
 } CDSectorSize;
 
 /*
@@ -237,13 +241,13 @@ typedef enum
 
 typedef enum
 {
-    kCDMediaTypeUnknown     = 0x0100,
-    kCDMediaTypeROM         = 0x0102, /* CD-ROM */
-    kCDMediaTypeR           = 0x0104, /* CD-R   */
-    kCDMediaTypeRW          = 0x0105, /* CD-RW  */
+    kCDMediaTypeUnknown      = 0x0100,
+    kCDMediaTypeROM          = 0x0102, /* CD-ROM */
+    kCDMediaTypeR            = 0x0104, /* CD-R   */
+    kCDMediaTypeRW           = 0x0105, /* CD-RW  */
 
-    kCDMediaTypeMin         = 0x0100,
-    kCDMediaTypeMax         = 0x01FF
+    kCDMediaTypeMin          = 0x0100,
+    kCDMediaTypeMax          = 0x01FF
 } CDMediaType;
 
 /*
@@ -271,11 +275,11 @@ enum
 struct CDPMADescriptor
 {
     UInt8 reserved;
-#if defined(__LITTLE_ENDIAN__)
+#ifdef __LITTLE_ENDIAN__
     UInt8 control:4, adr:4;
-#else /* !defined(__LITTLE_ENDIAN__) */
+#else /* !__LITTLE_ENDIAN__ */
     UInt8 adr:4, control:4;
-#endif /* !defined(__LITTLE_ENDIAN__) */
+#endif /* !__LITTLE_ENDIAN__ */
     UInt8 tno;
     UInt8 point;
     CDMSF address;
@@ -298,7 +302,7 @@ struct CDATIP
 {
     UInt16 dataLength;
     UInt8  reserved[2];
-#if defined(__LITTLE_ENDIAN__)
+#ifdef __LITTLE_ENDIAN__
     UInt8  referenceSpeed:3;
     UInt8  reserved3:1;
     UInt8  indicativeTargetWritingPower:3;
@@ -314,7 +318,7 @@ struct CDATIP
     UInt8  discSubType:3;
     UInt8  discType:1;
     UInt8  reserved6:1;
-#else /* !defined(__LITTLE_ENDIAN__) */
+#else /* !__LITTLE_ENDIAN__ */
     UInt8  reserved2:1;
     UInt8  indicativeTargetWritingPower:3;
     UInt8  reserved3:1;
@@ -330,7 +334,7 @@ struct CDATIP
     UInt8  a1Valid:1;
     UInt8  a2Valid:1;
     UInt8  a3Valid:1;
-#endif /* !defined(__LITTLE_ENDIAN__) */
+#endif /* !__LITTLE_ENDIAN__ */
     UInt8  reserved7;
     CDMSF  startTimeOfLeadIn;
     UInt8  reserved8;
@@ -351,15 +355,15 @@ struct CDTEXTDescriptor
     UInt8 packType;
     UInt8 trackNumber;
     UInt8 sequenceNumber;
-#if defined(__LITTLE_ENDIAN__)
+#ifdef __LITTLE_ENDIAN__
     UInt8 characterPosition:4;
     UInt8 blockNumber:3;
     UInt8 doubleByteCharacterCode:1;
-#else /* !defined(__LITTLE_ENDIAN__) */
+#else /* !__LITTLE_ENDIAN__ */
     UInt8 doubleByteCharacterCode:1;
     UInt8 blockNumber:3;
     UInt8 characterPosition:4;
-#endif /* !defined(__LITTLE_ENDIAN__) */
+#endif /* !__LITTLE_ENDIAN__ */
     UInt8 textData[12];
     UInt8 reserved[2];
 };
@@ -378,32 +382,32 @@ typedef struct CDTEXT CDTEXT;
 struct CDDiscInfo
 {
     UInt16 dataLength;
-#if defined(__LITTLE_ENDIAN__)
+#ifdef __LITTLE_ENDIAN__
     UInt8  discStatus:2;
     UInt8  stateOfLastSession:2;
     UInt8  erasable:1;
     UInt8  reserved:3;
-#else /* !defined(__LITTLE_ENDIAN__) */
+#else /* !__LITTLE_ENDIAN__ */
     UInt8  reserved:3;
     UInt8  erasable:1;
     UInt8  stateOfLastSession:2;
     UInt8  discStatus:2;
-#endif /* !defined(__LITTLE_ENDIAN__) */
+#endif /* !__LITTLE_ENDIAN__ */
     UInt8  numberOfFirstTrack;
     UInt8  numberOfSessionsLSB;
     UInt8  firstTrackNumberInLastSessionLSB;
     UInt8  lastTrackNumberInLastSessionLSB;
-#if defined(__LITTLE_ENDIAN__)
+#ifdef __LITTLE_ENDIAN__
     UInt8  reserved3:5;
     UInt8  unrestrictedUse:1;
     UInt8  discBarCodeValid:1;
     UInt8  discIdentificationValid:1;
-#else /* !defined(__LITTLE_ENDIAN__) */
+#else /* !__LITTLE_ENDIAN__ */
     UInt8  discIdentificationValid:1;
     UInt8  discBarCodeValid:1;
     UInt8  unrestrictedUse:1;
     UInt8  reserved3:5;
-#endif /* !defined(__LITTLE_ENDIAN__) */
+#endif /* !__LITTLE_ENDIAN__ */
     UInt8  discType;
     UInt8  numberOfSessionsMSB;
     UInt8  firstTrackNumberInLastSessionMSB;
@@ -436,7 +440,7 @@ struct CDTrackInfo
     UInt8  trackNumberLSB;
     UInt8  sessionNumberLSB;
     UInt8  reserved;
-#if defined(__LITTLE_ENDIAN__)
+#ifdef __LITTLE_ENDIAN__
     UInt8  trackMode:4;
     UInt8  copy:1;
     UInt8  damage:1;
@@ -451,7 +455,7 @@ struct CDTrackInfo
     UInt8  nextWritableAddressValid:1;
     UInt8  lastRecordedAddressValid:1;
     UInt8  reserved5:6;
-#else /* !defined(__LITTLE_ENDIAN__) */
+#else /* !__LITTLE_ENDIAN__ */
     UInt8  reserved3:2;
     UInt8  damage:1;
     UInt8  copy:1;
@@ -466,7 +470,7 @@ struct CDTrackInfo
     UInt8  reserved5:6;
     UInt8  lastRecordedAddressValid:1;
     UInt8  nextWritableAddressValid:1;
-#endif /* !defined(__LITTLE_ENDIAN__) */
+#endif /* !__LITTLE_ENDIAN__ */
     UInt32 trackStartAddress;
     UInt32 nextWritableAddress;
     UInt32 freeBlocks;

@@ -3,9 +3,9 @@
  
      Contains:   Gestalt Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1988-2001 by Apple Computer, Inc.  All rights reserved
+     Copyright:  © 1988-2002 by Apple Computer, Inc.  All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -55,6 +55,7 @@
 #define gestaltAliasMgrFollowsAliasesWhenResolving  4
 #define gestaltAliasMgrSupportsExtendedCalls  5
 #define gestaltAliasMgrSupportsFSCalls 	6					/*  true if Alias Mgr supports HFS+ Calls  */
+#define gestaltAliasMgrPrefersPath 		7					/*  True if the Alias Mgr prioritizes the path over file id during resolution by default  */
 
 #define gestaltAppearanceAttr 			'appr'
 #define gestaltAppearanceExists 		0
@@ -148,9 +149,10 @@
 #define gestaltCPU604e 					0x0109
 #define gestaltCPU604ev 				0x010A				/*  Mach 5, 250Mhz and up  */
 #define gestaltCPUG4 					0x010C				/*  Max  */
+#define gestaltCPUG47450 				0x0110				/*  Vger , Altivec  */
 
-#define gestaltCPUVger 					0x0110				/*  Vger , Altivec  */
 #define gestaltCPUApollo 				0x0111				/*  Apollo , Altivec  */
+#define gestaltCPU750FX 				0x0120				/*  Sahara,G3 like thing  */
 
 															/*  x86 CPUs all start with 'i' in the high nybble  */
 #define gestaltCPU486 					'i486'
@@ -200,6 +202,7 @@
 #define gestaltDisplayMgrCanConfirm 	4					/*  True Display Manager supports DMConfirmConfiguration  */
 #define gestaltDisplayMgrColorSyncAware  5					/*  True if Display Manager supports profiles for displays  */
 #define gestaltDisplayMgrGeneratesProfiles  6				/*  True if Display Manager will automatically generate profiles for displays  */
+#define gestaltDisplayMgrSleepNotifies 	7					/*  True if Display Mgr generates "displayWillSleep", "displayDidWake" notifications  */
 
 #define gestaltDragMgrAttr 				'drag'				/*  Drag Manager attributes  */
 #define gestaltDragMgrPresent 			0					/*  Drag Manager is present  */
@@ -297,6 +300,8 @@
 #define gestaltHasHFSPlusAPIs 			12					/*  file system supports HFS Plus APIs  */
 #define gestaltMustUseFCBAccessors 		13					/*  FCBSPtr and FSFCBLen are invalid - must use FSM FCB accessor functions */
 #define gestaltFSUsesPOSIXPathsForConversion  14			/*  The path interchange routines operate on POSIX paths instead of HFS paths  */
+#define gestaltFSSupportsExclusiveLocks  15					/*  File system uses POSIX O_EXLOCK for opens  */
+#define gestaltFSSupportsHardLinkDetection  16				/*  File system returns if an item is a hard link  */
 
 #define gestaltAdminFeaturesFlagsAttr 	'fred'				/*  a set of admin flags, mostly useful internally.  */
 #define gestaltFinderUsesSpecialOpenFoldersFile  0			/*  the Finder uses a special file to store the list of open folders  */
@@ -551,12 +556,14 @@
 #define gestaltMenuMgrMultipleItemsWithCommandIDBit  2		/*  CountMenuItemsWithCommandID/GetIndMenuItemWithCommandID support multiple items with the same command ID */
 #define gestaltMenuMgrRetainsIconRefBit  3					/*  SetMenuItemIconHandle, when passed an IconRef, calls AcquireIconRef */
 #define gestaltMenuMgrSendsMenuBoundsToDefProcBit  4		/*  kMenuSizeMsg and kMenuPopUpMsg have menu bounding rect information */
+#define gestaltMenuMgrMoreThanFiveMenusDeepBit  5			/*  the Menu Manager supports hierarchical menus more than five deep */
 															/*  masks for the above bits */
 #define gestaltMenuMgrPresentMask 		0x00000001
 #define gestaltMenuMgrAquaLayoutMask 	0x00000002
 #define gestaltMenuMgrMultipleItemsWithCommandIDMask  0x00000004
 #define gestaltMenuMgrRetainsIconRefMask  0x00000008
 #define gestaltMenuMgrSendsMenuBoundsToDefProcMask  0x00000010
+#define gestaltMenuMgrMoreThanFiveMenusDeepMask  0x00000020
 
 #define gestaltMultipleUsersState 		'mfdr'				/*  Gestalt selector returns MultiUserGestaltHandle (in Folders.h) */
 #define gestaltMachineIcon 				'micn'				/*  machine icon  */
@@ -621,6 +628,7 @@
 #define gestaltIPCSupport 				7					/*  IPC support is present  */
 #define gestaltSysDebuggerSupport 		8					/*  system debugger support is present  */
 #define gestaltNativeProcessMgrBit 		19					/*  the process manager itself is native  */
+#define gestaltAltivecRegistersSwappedCorrectlyBit  20		/*  Altivec registers are saved correctly on process switches  */
 
 #define gestaltOSTable 					'ostt'				/*   OS trap table base   */
 #define gestaltOpenTptNetworkSetup 		'otcf'
@@ -737,7 +745,7 @@
 #define gestalt32BitQD12 				0x0220				/*  32-bit color QDv1.2  */
 #define gestalt32BitQD13 				0x0230				/*  32-bit color QDv1.3  */
 #define gestaltAllegroQD 				0x0250				/*  Allegro QD OS 8.5  */
-#define gestaltMacOSXQD 				0x0300				/*  Mac OS X QD  */
+#define gestaltMacOSXQD 				0x0300				/*  0x310, 0x320 etc. for 10.x.y  */
 
 #define gestaltQD3D 					'qd3d'				/*  Quickdraw 3D attributes */
 #define gestaltQD3DPresent 				0					/*  bit 0 set if QD3D available */
@@ -769,6 +777,7 @@
 #define gestaltOFA2available 			3					/*  OFA2 available  */
 #define gestaltCreatesAliasFontRsrc 	4					/*  "real" datafork font support  */
 #define gestaltNativeType1FontSupport 	5					/*  we have scaler for Type1 fonts  */
+#define gestaltCanUseCGTextRendering 	6
 
 #define gestaltQuickTimeConferencingInfo  'qtci'			/*  returns pointer to QuickTime Conferencing information  */
 #define gestaltQuickTimeVersion 		'qtim'				/*  returns version of QuickTime  */
@@ -949,6 +958,8 @@
 
 #define gestaltAVLTreeAttr 				'tree'				/*  AVLTree utility routines attributes.  */
 #define gestaltAVLTreePresentBit 		0					/*  if set, then the AVL Tree routines are available.  */
+#define gestaltAVLTreeSupportsHandleBasedTreeBit  1			/*  if set, then the AVL Tree routines can store tree data in a single handle  */
+#define gestaltAVLTreeSupportsTreeLockingBit  2				/*  if set, the AVLLockTree() and AVLUnlockTree() routines are available.  */
 
 #define gestaltALMAttr 					'trip'				/*  Settings Manager attributes (see also gestaltALMVers)  */
 #define gestaltALMPresent 				0					/*  bit true if ALM is available  */
@@ -990,6 +1001,7 @@
 #define gestaltATSUUpdate3 				0x00040000			/*  ATSUI version 2.0  */
 #define gestaltATSUUpdate4 				0x00050000			/*  ATSUI version in Mac OS X - SoftwareUpdate 1-4 for Mac OS 10.0.1 - 10.0.4  */
 #define gestaltATSUUpdate5 				0x00060000			/*  ATSUI version 2.3 in MacOS 10.1  */
+#define gestaltATSUUpdate6 				0x00070000			/*  ATSUI version 2.4 in MacOS 10.2  */
 
 #define gestaltATSUFeatures 			'uisf'
 #define gestaltATSUTrackingFeature 		0x00000001			/*  feature introduced in ATSUI version 1.1  */
@@ -1003,6 +1015,13 @@
 #define gestaltATSULowLevelOrigFeatures  0x00000004			/*  first low-level features introduced in ATSUI version 2.0  */
 #define gestaltATSUFallbacksObjFeatures  0x00000008			/*  feature introduced - ATSUFontFallbacks objects introduced in ATSUI version 2.3  */
 #define gestaltATSUIgnoreLeadingFeature  0x00000008			/*  feature introduced - kATSLineIgnoreFontLeading LineLayoutOption introduced in ATSUI version 2.3  */
+#define gestaltATSUByCharacterClusterFeature  0x00000010	/*  ATSUCursorMovementTypes introduced in ATSUI version 2.4  */
+#define gestaltATSUAscentDescentControlsFeature  0x00000010	/*  attributes introduced in ATSUI version 2.4  */
+#define gestaltATSUHighlightInactiveTextFeature  0x00000010	/*  feature introduced in ATSUI version 2.4  */
+#define gestaltATSUPositionToCursorFeature  0x00000010		/*  features introduced in ATSUI version 2.4  */
+#define gestaltATSUBatchBreakLinesFeature  0x00000010		/*  feature introduced in ATSUI version 2.4  */
+#define gestaltATSUTabSupportFeature 	0x00000010			/*  features introduced in ATSUI version 2.4  */
+#define gestaltATSUDirectAccess 		0x00000010			/*  features introduced in ATSUI version 2.4  */
 
 #define gestaltUSBAttr 					'usb '				/*  USB Attributes  */
 #define gestaltUSBPresent 				0					/*  USB Support available  */
@@ -1044,6 +1063,7 @@
 #define gestaltWindowMinimizeToDockBit 	5					/*  windows minimize to the dock and do not windowshade (Mac OS X) */
 #define gestaltHasWindowShadowsBit 		6					/*  windows have shadows */
 #define gestaltSheetsAreWindowModalBit 	7					/*  sheet windows are modal only to their parent window */
+#define gestaltFrontWindowMayBeHiddenBit  8					/*  FrontWindow and related APIs will return the front window even when the app is hidden */
 															/*  masks for the above bits */
 #define gestaltWindowMgrPresentMask 	0x00000001
 #define gestaltExtendedWindowAttributesMask  0x00000002
@@ -1053,6 +1073,7 @@
 #define gestaltWindowMinimizeToDockMask  0x00000020
 #define gestaltHasWindowShadowsMask 	0x00000040
 #define gestaltSheetsAreWindowModalMask  0x00000080
+#define gestaltFrontWindowMayBeHiddenMask  0x00000100
 
 #define gestaltHasSingleWindowModeBit 	8					/*  This system supports single window mode */
 #define gestaltHasSingleWindowModeMask 	0x00000100

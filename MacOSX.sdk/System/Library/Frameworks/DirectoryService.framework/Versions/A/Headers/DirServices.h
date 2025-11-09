@@ -1,12 +1,29 @@
 /*
-	File:		DirServices.h
+ * Copyright (c) 2002 Apple Computer, Inc. All rights reserved.
+ *
+ * @APPLE_LICENSE_HEADER_START@
+ * 
+ * The contents of this file constitute Original Code as defined in and
+ * are subject to the Apple Public Source License Version 1.1 (the
+ * "License").  You may not use this file except in compliance with the
+ * License.  Please obtain a copy of the License at
+ * http://www.apple.com/publicsource and read it before using this file.
+ * 
+ * This Original Code and all software distributed under the License are
+ * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
+ * License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * @APPLE_LICENSE_HEADER_END@
+ */
 
-	Contains:	xxx put contents here xxx
-
-	Copyright:	© 1998-2000 by Apple Computer, Inc., all rights reserved.
-
-	NOT_FOR_OPEN_SOURCE <to be reevaluated at a later time>
-*/
+/*!
+ * @header DirServices
+ * APIs.
+ */
 
 /*!
  * @header DirectoryServices
@@ -16,7 +33,6 @@
 #ifndef __DirServices_h__
 #define __DirServices_h__
 
-// App
 #include <DirectoryService/DirServicesTypes.h>
 
 #ifdef __cplusplus
@@ -36,6 +52,23 @@ extern "C" {
  */
 tDirStatus	dsOpenDirService			(	tDirReference	   *outDirReference	);
 
+/*!
+ * @function dsOpenDirServiceProxy
+ * @discussion Opens Directory Services API reference via TCP. Must be called before any other
+ * 		Directory Services API calls because this reference is needed for any other call.
+ * @param outDirRef reference to use in subsequent Directory Services API calls
+ * @param inIPAddress either the domain or IP (dot) address of the remote DirectoryService machine
+ * @param inIPPort either the client defined port or "0" which then allows use of the default
+ */
+#define DSPROXY 1
+tDirStatus	dsOpenDirServiceProxy 		(	tDirReference	   *outDirRef,
+											const char		   *inIPAddress,
+											unsigned long		inIPPort,
+											tDataNodePtr		inAuthMethod,
+											tDataBufferPtr		inAuthStepData,
+											tDataBufferPtr		outAuthStepDataResponse,
+											tContextData	   *ioContinueData );
+	
 /*!
  * @function dsCloseDirService
  * @param inDirReference Directory Services API reference to be closed
@@ -94,8 +127,13 @@ tDirStatus	dsUnRegisterCustomThread	(	tDirReference			inDirReference,
 
 //-----------------------------------------------
 
-/*! * @function dsGetDirNodeCount * @discussion Get the count of the total number of directory nodes in the system. * @param inDirReference Directory reference established with dsOpenDirService. * @param outDirectoryNodeCount Contains count of the total number of directory nodes.
- */tDirStatus	dsGetDirNodeCount		(	tDirReference	inDirReference,
+/*!
+ * @function dsGetDirNodeCount
+ * @discussion Get the count of the total number of directory nodes in the system.
+ * @param inDirReference Directory reference established with dsOpenDirService.
+ * @param outDirectoryNodeCount Contains count of the total number of directory nodes.
+ */
+tDirStatus	dsGetDirNodeCount		(	tDirReference	inDirReference,
 										unsigned long	*outDirectoryNodeCount	);
 
 /*!
@@ -229,12 +267,9 @@ tDirStatus	dsGetDirNodeInfo		(	tDirNodeReference	inDirNodeReference,
  * @param inDirNodeReference Directory node reference obtained from dsOpenDirNode.
  * @param inOutDataBuffer A client-allocated buffer to hold the data results.
  * @param inRecordNameList A tDataList of Record names to be matched.
- * 		Pass NULL if there are no record names to be matched.
  * @param inPatternMatchType How is the pattern matched for the inRecordNameList.
- * 		Ignored if inRecordNameList is NULL.
- * @param inRecordTypeList What record types do we want returned? Pass NULL for all record types.
+ * @param inRecordTypeList What record types do we want returned?
  * @param inAttributeTypeList What type of attributes do we want for each record.
- * 		NULL for all types for each record.
  * @param inAttributeInfoOnly Do we want attribute information only, or do we also want attribute values.
  * @param inOutRecordEntryCount How many record entries are there in the client buffer.
  * 		However, also a limit of the maximum records returned as provided by the client.

@@ -3,9 +3,9 @@
  
      Contains:   Public search interface for the Find by Content shared library
  
-     Version:    FindByContent-28~51
+     Version:    FindByContent-44~269
  
-     Copyright:  © 1997-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1997-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,7 @@
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -30,13 +31,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 
 /*
@@ -47,34 +42,41 @@ extern "C" {
    words are 0, the default value of kDefaultLanguagesHighWord is used.
    ***************************************************************************
 */
+
+/* These are the new names for the language constants*/
 enum {
                                         /* languages that use the Roman character mapping*/
-  englishHighWord               = (long)0x80000000,
-  dutchHighWord                 = 0x40000000, /* also Afrikaans*/
-  germanHighWord                = 0x20000000,
-  swedishHighWord               = 0x10000000, /* also Norwegian*/
-  danishHighWord                = 0x08000000,
-  spanishHighWord               = 0x04000000, /* also Catalan*/
-  portugueseHighWord            = 0x02000000,
-  italianHighWord               = 0x01000000,
-  frenchHighWord                = 0x00800000,
-  romanHighWord                 = 0x00400000, /* other languages using Roman alphabet*/
+  kFBCenglishHighWord           = (long)0x80000000,
+  kFBCdutchHighWord             = 0x40000000, /* also Afrikaans*/
+  kFBCgermanHighWord            = 0x20000000,
+  kFBCswedishHighWord           = 0x10000000, /* also Norwegian*/
+  kFBCdanishHighWord            = 0x08000000,
+  kFBCspanishHighWord           = 0x04000000, /* also Catalan*/
+  kFBCportugueseHighWord        = 0x02000000,
+  kFBCitalianHighWord           = 0x01000000,
+  kFBCfrenchHighWord            = 0x00800000,
+  kFBCromanHighWord             = 0x00400000, /* other languages using Roman alphabet*/
                                         /* Languages that use other mappings*/
-  icelandicHighWord             = 0x00200000, /* also Faroese*/
-  hebrewHighWord                = 0x00100000, /* also Yiddish*/
-  arabicHighWord                = 0x00080000, /* also Farsi, Urdu*/
-  centeuroHighWord              = 0x00040000, /* Central European languages not using Cyrillic*/
-  croatianHighWord              = 0x00020000,
-  turkishHighWord               = 0x00010000,
-  romanianHighWord              = 0x00008000,
-  greekHighWord                 = 0x00004000,
-  cyrillicHighWord              = 0x00002000, /* all languages using Cyrillic*/
-  devanagariHighWord            = 0x00001000,
-  gujuratiHighWord              = 0x00000800,
-  gurmukhiHighWord              = 0x00000400,
-  japaneseHighWord              = 0x00000200,
-  koreanHighWord                = 0x00000100,
-  kDefaultLanguagesHighWord     = (long)0xFF800000 /* sum of first 9*/
+  kFBCicelandicHighWord         = 0x00200000, /* also Faroese*/
+  kFBChebrewHighWord            = 0x00100000, /* also Yiddish*/
+  kFBCarabicHighWord            = 0x00080000, /* also Farsi, Urdu*/
+  kFBCcenteuroHighWord          = 0x00040000, /* Central European languages not using Cyrillic*/
+  kFBCcroatianHighWord          = 0x00020000,
+  kFBCturkishHighWord           = 0x00010000,
+  kFBCromanianHighWord          = 0x00008000,
+  kFBCgreekHighWord             = 0x00004000,
+  kFBCcyrillicHighWord          = 0x00002000, /* all languages using Cyrillic*/
+  kFBCdevanagariHighWord        = 0x00001000,
+  kFBCgujuratiHighWord          = 0x00000800,
+  kFBCgurmukhiHighWord          = 0x00000400,
+  kFBCjapaneseHighWord          = 0x00000200,
+  kFBCkoreanHighWord            = 0x00000100,
+  kFBCdefaultLanguagesHighWord  = (long)0xFF800000 /* sum of first 9*/
+};
+
+/*A new error, needs to be moved to MacErrors.h*/
+enum {
+  kFBCnotAllFoldersSearchable   = -30533
 };
 
 
@@ -82,7 +84,7 @@ enum {
    ***************************************************************************
    Phase values
    These values are passed to the client's callback function to indicate what
-   the FBC code is doing.
+   the FBC code is doing.  They are meaningless in OS X.
    ***************************************************************************
 */
 enum {
@@ -101,6 +103,9 @@ enum {
   kFBCphCanceling               = 11
 };
 
+enum {
+  kFBCsummarizationFailed       = -30533
+};
 
 
 /*
@@ -113,6 +118,8 @@ enum {
 
 /* A collection of state information for searching*/
 typedef struct OpaqueFBCSearchSession*  FBCSearchSession;
+/* An object containing summary information, from which summary text can be obtained*/
+typedef struct OpaqueFBCSummaryRef*     FBCSummaryRef;
 /* An ordinary C string (used for hit/doc terms)*/
 typedef char *                          FBCWordItem;
 /* An array of WordItems*/
@@ -138,7 +145,7 @@ typedef STACK_UPP_TYPE(FBCCallbackProcPtr)                      FBCCallbackUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern FBCCallbackUPP
-NewFBCCallbackUPP(FBCCallbackProcPtr userRoutine);
+NewFBCCallbackUPP(FBCCallbackProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeFBCCallbackUPP()
@@ -149,7 +156,7 @@ NewFBCCallbackUPP(FBCCallbackProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeFBCCallbackUPP(FBCCallbackUPP userUPP);
+DisposeFBCCallbackUPP(FBCCallbackUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeFBCCallbackUPP()
@@ -164,15 +171,31 @@ InvokeFBCCallbackUPP(
   UInt16          phase,
   float           percentDone,
   void *          data,
-  FBCCallbackUPP  userUPP);
+  FBCCallbackUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
    ***************************************************************************
    Set the callback function for progress reporting and cancelation during
-   searching and indexing, and set the amount of heap space to reserve for
-   the client's use when FBC allocates memory.
+   searching and indexing.
    ***************************************************************************
 */
+
+/*
+ *  FBCSetSessionCallback()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+FBCSetSessionCallback(
+  FBCSearchSession   searchSession,
+  FBCCallbackUPP     fn,
+  void *             data)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*      OS X DEPRECATED, use FBCSetSessionCallback*/
 /*
  *  FBCSetCallback()
  *  
@@ -184,9 +207,81 @@ InvokeFBCCallbackUPP(
 extern void 
 FBCSetCallback(
   FBCCallbackUPP   fn,
-  void *           data);
+  void *           data)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+   ***************************************************************************
+   Callback function type for hit testing during searching
+   ***************************************************************************
+*/
+
+typedef CALLBACK_API_C( Boolean , FBCHitTestProcPtr )(const FSRef *theFile, void *data);
+typedef STACK_UPP_TYPE(FBCHitTestProcPtr)                       FBCHitTestUPP;
+/*
+ *  NewFBCHitTestUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   available as macro/inline
+ */
+extern FBCHitTestUPP
+NewFBCHitTestUPP(FBCHitTestProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/*
+ *  DisposeFBCHitTestUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   available as macro/inline
+ */
+extern void
+DisposeFBCHitTestUPP(FBCHitTestUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/*
+ *  InvokeFBCHitTestUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   available as macro/inline
+ */
+extern Boolean
+InvokeFBCHitTestUPP(
+  const FSRef *  theFile,
+  void *         data,
+  FBCHitTestUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/*
+   ***************************************************************************
+   Set the hit-testing function for searches.
+   ***************************************************************************
+*/
+/*
+ *  FBCSetSessionHitTest()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   in FindByContent 8.5 and later
+ */
+extern void 
+FBCSetSessionHitTest(
+  FBCSearchSession   theSession,
+  FBCHitTestUPP      fn,
+  void *             data)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+   ***************************************************************************
+   Set the amount of heap space to reserve for the client's use when FBC
+   allocates memory.
+   ***************************************************************************
+*/
+
+/*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
  *  FBCSetHeapReservation()
  *  
@@ -196,16 +291,16 @@ FBCSetCallback(
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern void 
-FBCSetHeapReservation(UInt32 bytes);
+FBCSetHeapReservation(UInt32 bytes)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
    ***************************************************************************
-   Find out whether a volume is indexed, the date & time of its last
-   completed  update, and its physical size.
+   Find out whether a volume is indexed.
    ***************************************************************************
 */
 
+/*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
  *  FBCVolumeIsIndexed()
  *  
@@ -215,9 +310,16 @@ FBCSetHeapReservation(UInt32 bytes);
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern Boolean 
-FBCVolumeIsIndexed(SInt16 theVRefNum);
+FBCVolumeIsIndexed(SInt16 theVRefNum)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+   ***************************************************************************
+   Find out whether a volume is remote.
+   ***************************************************************************
+*/
+
+/*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
  *  FBCVolumeIsRemote()
  *  
@@ -227,9 +329,16 @@ FBCVolumeIsIndexed(SInt16 theVRefNum);
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern Boolean 
-FBCVolumeIsRemote(SInt16 theVRefNum);
+FBCVolumeIsRemote(SInt16 theVRefNum)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+   ***************************************************************************
+   Find out the date & time of an index's last completed  update.
+   ***************************************************************************
+*/
+
+/*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
  *  FBCVolumeIndexTimeStamp()
  *  
@@ -241,9 +350,16 @@ FBCVolumeIsRemote(SInt16 theVRefNum);
 extern OSErr 
 FBCVolumeIndexTimeStamp(
   SInt16    theVRefNum,
-  UInt32 *  timeStamp);
+  UInt32 *  timeStamp)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+   ***************************************************************************
+   Find out the physical size of an index.
+   ***************************************************************************
+*/
+
+/*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
  *  FBCVolumeIndexPhysicalSize()
  *  
@@ -255,7 +371,7 @@ FBCVolumeIndexTimeStamp(
 extern OSErr 
 FBCVolumeIndexPhysicalSize(
   SInt16    theVRefNum,
-  UInt32 *  size);
+  UInt32 *  size)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -273,93 +389,7 @@ FBCVolumeIndexPhysicalSize(
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern OSErr 
-FBCCreateSearchSession(FBCSearchSession * searchSession);
-
-
-/*
- *  FBCAddAllVolumesToSession()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in FindByContent 8.5 and later
- */
-extern OSErr 
-FBCAddAllVolumesToSession(
-  FBCSearchSession   theSession,
-  Boolean            includeRemote);
-
-
-/*
- *  FBCSetSessionVolumes()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in FindByContent 8.5 and later
- */
-extern OSErr 
-FBCSetSessionVolumes(
-  FBCSearchSession   theSession,
-  const SInt16       vRefNums[],
-  UInt16             numVolumes);
-
-
-/*
- *  FBCAddVolumeToSession()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in FindByContent 8.5 and later
- */
-extern OSErr 
-FBCAddVolumeToSession(
-  FBCSearchSession   theSession,
-  SInt16             vRefNum);
-
-
-/*
- *  FBCRemoveVolumeFromSession()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in FindByContent 8.5 and later
- */
-extern OSErr 
-FBCRemoveVolumeFromSession(
-  FBCSearchSession   theSession,
-  SInt16             vRefNum);
-
-
-/*
- *  FBCGetSessionVolumeCount()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in FindByContent 8.5 and later
- */
-extern OSErr 
-FBCGetSessionVolumeCount(
-  FBCSearchSession   theSession,
-  UInt16 *           count);
-
-
-/*
- *  FBCGetSessionVolumes()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in FindByContent 8.5 and later
- */
-extern OSErr 
-FBCGetSessionVolumes(
-  FBCSearchSession   theSession,
-  SInt16             vRefNums[],
-  UInt16 *           numVolumes);
+FBCCreateSearchSession(FBCSearchSession * searchSession)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -373,7 +403,99 @@ FBCGetSessionVolumes(
 extern OSErr 
 FBCCloneSearchSession(
   FBCSearchSession    original,
-  FBCSearchSession *  clone);
+  FBCSearchSession *  clone)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
+/*
+ *  FBCAddAllVolumesToSession()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in FindByContent 8.5 and later
+ */
+extern OSErr 
+FBCAddAllVolumesToSession(
+  FBCSearchSession   theSession,
+  Boolean            includeRemote)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
+/*
+ *  FBCSetSessionVolumes()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in FindByContent 8.5 and later
+ */
+extern OSErr 
+FBCSetSessionVolumes(
+  FBCSearchSession   theSession,
+  const SInt16       vRefNums[],
+  UInt16             numVolumes)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
+/*
+ *  FBCAddVolumeToSession()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in FindByContent 8.5 and later
+ */
+extern OSErr 
+FBCAddVolumeToSession(
+  FBCSearchSession   theSession,
+  SInt16             vRefNum)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
+/*
+ *  FBCRemoveVolumeFromSession()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in FindByContent 8.5 and later
+ */
+extern OSErr 
+FBCRemoveVolumeFromSession(
+  FBCSearchSession   theSession,
+  SInt16             vRefNum)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
+/*
+ *  FBCGetSessionVolumeCount()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in FindByContent 8.5 and later
+ */
+extern OSErr 
+FBCGetSessionVolumeCount(
+  FBCSearchSession   theSession,
+  UInt16 *           count)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
+/*
+ *  FBCGetSessionVolumes()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in FindByContent 8.5 and later
+ */
+extern OSErr 
+FBCGetSessionVolumes(
+  FBCSearchSession   theSession,
+  SInt16             vRefNums[],
+  UInt16 *           numVolumes)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -397,7 +519,7 @@ FBCDoQuerySearch(
   const FSSpec       targetDirs[],
   UInt32             numTargets,
   UInt32             maxHits,
-  UInt32             maxHitWords);
+  UInt32             maxHitWords)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -415,7 +537,7 @@ FBCDoCFStringSearch(
   const FSSpec       targetDirs[],
   UInt32             numTargets,
   UInt32             maxHits,
-  UInt32             maxHitWords);
+  UInt32             maxHitWords)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -434,9 +556,10 @@ FBCDoExampleSearch(
   const FSSpec       targetDirs[],
   UInt32             numTargets,
   UInt32             maxHits,
-  UInt32             maxHitWords);
+  UInt32             maxHitWords)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/* OS X DEPRECATED, use FBCBlindExampleSearchWithCallback to be able to cancel*/
 /*
  *  FBCBlindExampleSearch()
  *  
@@ -447,7 +570,7 @@ FBCDoExampleSearch(
  */
 extern OSErr 
 FBCBlindExampleSearch(
-  FSSpec              examples[],
+  const FSSpec        examples[],
   UInt32              numExamples,
   const FSSpec        targetDirs[],
   UInt32              numTargets,
@@ -455,7 +578,32 @@ FBCBlindExampleSearch(
   UInt32              maxHitWords,
   Boolean             allIndexes,
   Boolean             includeRemote,
-  FBCSearchSession *  theSession);
+  FBCSearchSession *  theSession)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  FBCBlindExampleSearchWithCallback()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+FBCBlindExampleSearchWithCallback(
+  const FSSpec        examples[],
+  UInt32              numExamples,
+  const FSSpec        targetDirs[],
+  UInt32              numTargets,
+  UInt32              maxHits,
+  UInt32              maxHitWords,
+  Boolean             allIndexes,
+  Boolean             includeRemote,
+  FBCSearchSession *  theSession,
+  FBCCallbackUPP      callback,
+  void *              callbackData,
+  FBCHitTestUPP       userHitTest,
+  void *              userHitTestData)                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
@@ -476,7 +624,7 @@ FBCBlindExampleSearch(
 extern OSErr 
 FBCGetHitCount(
   FBCSearchSession   theSession,
-  UInt32 *           count);
+  UInt32 *           count)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -491,7 +639,7 @@ extern OSErr
 FBCGetHitDocument(
   FBCSearchSession   theSession,
   UInt32             hitNumber,
-  FSSpec *           theDocument);
+  FSSpec *           theDocument)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -506,7 +654,7 @@ extern OSErr
 FBCGetHitDocumentRef(
   FBCSearchSession   theSession,
   UInt32             hitNumber,
-  FSRef *            theDocument);
+  FSRef *            theDocument)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -521,45 +669,13 @@ extern OSErr
 FBCGetHitScore(
   FBCSearchSession   theSession,
   UInt32             hitNumber,
-  float *            score);
-
-
-/*
- *  FBCGetMatchedWords()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in FindByContent 8.5 and later
- */
-extern OSErr 
-FBCGetMatchedWords(
-  FBCSearchSession   theSession,
-  UInt32             hitNumber,
-  UInt32 *           wordCount,
-  FBCWordList *      list);
-
-
-/*
- *  FBCGetTopicWords()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in FindByContent 8.5 and later
- */
-extern OSErr 
-FBCGetTopicWords(
-  FBCSearchSession   theSession,
-  UInt32             hitNumber,
-  UInt32 *           wordCount,
-  FBCWordList *      list);
+  float *            score)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
    ***************************************************************************
-   Summarize a buffer of text
+   Summarize text
    ***************************************************************************
 */
 
@@ -573,16 +689,88 @@ FBCGetTopicWords(
  */
 extern OSErr 
 FBCSummarize(
-  void *    inBuf,
-  UInt32    inLength,
-  void *    outBuf,
-  UInt32 *  outLength,
-  UInt32 *  numSentences);
+  const void *  inBuf,
+  UInt32        inLength,
+  void *        outBuf,
+  UInt32 *      outLength,
+  UInt32 *      numSentences)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  FBCSummarizeCFString()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FBCSummarizeCFString(
+  CFStringRef    inString,
+  CFStringRef *  outString,
+  UInt32 *       numSentences)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FBCGetSummaryOfCFString()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FBCGetSummaryOfCFString(
+  CFStringRef      inString,
+  FBCSummaryRef *  summary)                                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FBCGetSummarySentenceCount()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FBCGetSummarySentenceCount(
+  FBCSummaryRef   summary,
+  UInt32 *        numSentences)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FBCGetSummarySentences()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FBCGetSummarySentences(
+  FBCSummaryRef   summary,
+  CFStringRef *   outString,
+  UInt32 *        numSentences,
+  Boolean         paragraphs)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FBCDisposeSummary()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FBCDisposeSummary(FBCSummaryRef summary)                      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
 
 
 /*
    ***************************************************************************
-   Deallocate hit lists, word arrays, and search sessions
+   Deallocate hit lists and search sessions
    ***************************************************************************
 */
 
@@ -595,21 +783,7 @@ FBCSummarize(
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern OSErr 
-FBCReleaseSessionHits(FBCSearchSession theSession);
-
-
-/*
- *  FBCDestroyWordList()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in FindByContent 8.5 and later
- */
-extern OSErr 
-FBCDestroyWordList(
-  FBCWordList   theList,
-  UInt32        wordCount);
+FBCReleaseSessionHits(FBCSearchSession theSession)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -621,7 +795,7 @@ FBCDestroyWordList(
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern OSErr 
-FBCDestroySearchSession(FBCSearchSession theSession);
+FBCDestroySearchSession(FBCSearchSession theSession)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -630,6 +804,7 @@ FBCDestroySearchSession(FBCSearchSession theSession);
    ***************************************************************************
 */
 
+/*      OS X DEPRECATED (will be removed from OS X exports in a future release)*/
 /*
  *  FBCIndexItems()
  *  
@@ -641,7 +816,7 @@ FBCDestroySearchSession(FBCSearchSession theSession);
 extern OSErr 
 FBCIndexItems(
   FSSpecArrayPtr   theItems,
-  UInt32           itemCount);
+  UInt32           itemCount)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -657,7 +832,7 @@ FBCIndexItemsInLanguages(
   FSSpecArrayPtr   theItems,
   UInt32           itemCount,
   UInt32           languageHighBits,
-  UInt32           languageLowBits);
+  UInt32           languageLowBits)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -677,8 +852,8 @@ FBCIndexItemsInLanguages(
  */
 extern OSErr 
 FBCFindIndexFileFolderForFolder(
-  FSRef *  inFolder,
-  FSRef *  outFolder);
+  const FSRef *  inFolder,
+  FSRef *        outFolder)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -696,17 +871,98 @@ FBCFindIndexFileFolderForFolder(
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
-FBCDeleteIndexFileForFolder(const FSRef * folder);
+FBCDeleteIndexFileForFolder(const FSRef * folder)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+/*
+   ***************************************************************************
+   The following are deprecated and obsolete for both OS X and OS 9
+   ***************************************************************************
+*/
+
+/*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
+/*
+ *  FBCGetMatchedWords()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in FindByContent 8.5 and later
+ */
+extern OSErr 
+FBCGetMatchedWords(
+  FBCSearchSession   theSession,
+  UInt32             hitNumber,
+  UInt32 *           wordCount,
+  FBCWordList *      list)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
+/*
+ *  FBCGetTopicWords()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in FindByContent 8.5 and later
+ */
+extern OSErr 
+FBCGetTopicWords(
+  FBCSearchSession   theSession,
+  UInt32             hitNumber,
+  UInt32 *           wordCount,
+  FBCWordList *      list)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
+/*
+ *  FBCDestroyWordList()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in FindByContent 8.5 and later
+ */
+extern OSErr 
+FBCDestroyWordList(
+  FBCWordList   theList,
+  UInt32        wordCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/* These names are deprecated, use the new ones above*/
+enum {
+                                        /* languages that use the Roman character mapping*/
+  englishHighWord               = kFBCenglishHighWord,
+  dutchHighWord                 = kFBCdutchHighWord, /* also Afrikaans*/
+  germanHighWord                = kFBCgermanHighWord,
+  swedishHighWord               = kFBCswedishHighWord, /* also Norwegian*/
+  danishHighWord                = kFBCdanishHighWord,
+  spanishHighWord               = kFBCspanishHighWord, /* also Catalan*/
+  portugueseHighWord            = kFBCportugueseHighWord,
+  italianHighWord               = kFBCitalianHighWord,
+  frenchHighWord                = kFBCfrenchHighWord,
+  romanHighWord                 = kFBCromanHighWord, /* other languages using Roman alphabet*/
+                                        /* Languages that use other mappings*/
+  icelandicHighWord             = kFBCicelandicHighWord, /* also Faroese*/
+  hebrewHighWord                = kFBChebrewHighWord, /* also Yiddish*/
+  arabicHighWord                = kFBCarabicHighWord, /* also Farsi, Urdu*/
+  centeuroHighWord              = kFBCcenteuroHighWord, /* Central European languages not using Cyrillic*/
+  croatianHighWord              = kFBCcroatianHighWord,
+  turkishHighWord               = kFBCturkishHighWord,
+  romanianHighWord              = kFBCromanianHighWord,
+  greekHighWord                 = kFBCgreekHighWord,
+  cyrillicHighWord              = kFBCcyrillicHighWord, /* all languages using Cyrillic*/
+  devanagariHighWord            = kFBCdevanagariHighWord,
+  gujuratiHighWord              = kFBCgujuratiHighWord,
+  gurmukhiHighWord              = kFBCgurmukhiHighWord,
+  japaneseHighWord              = kFBCjapaneseHighWord,
+  koreanHighWord                = kFBCkoreanHighWord,
+  kDefaultLanguagesHighWord     = kFBCdefaultLanguagesHighWord /* sum of first 9*/
+};
+
+
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

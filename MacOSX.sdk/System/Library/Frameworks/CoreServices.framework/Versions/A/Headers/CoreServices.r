@@ -3,9 +3,9 @@
  
      Contains:   Master include for CoreServices (non-UI toolbox)
  
-     Version:    CoreServices-10.2~52
+     Version:    CoreServices-14~88
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,8 +21,8 @@
 #include <CarbonCore/CarbonCore.r>
 #endif
 
-#ifndef __OT_R__
-#include <OT/OT.r>
+#ifndef __OSSERVICES_R__
+#include <OSServices/OSServices.r>
 #endif
 
 

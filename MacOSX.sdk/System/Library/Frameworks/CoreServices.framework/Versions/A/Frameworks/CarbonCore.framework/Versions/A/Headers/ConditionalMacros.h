@@ -3,9 +3,9 @@
  
      Contains:   Set up for compiler independent conditionals
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1993-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1993-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,6 +16,9 @@
 #ifndef __CONDITIONALMACROS__
 #define __CONDITIONALMACROS__
 
+#ifndef __AVAILABILITYMACROS__
+#include <AvailabilityMacros.h>
+#endif
 /****************************************************************************************************
     UNIVERSAL_INTERFACES_VERSION
     

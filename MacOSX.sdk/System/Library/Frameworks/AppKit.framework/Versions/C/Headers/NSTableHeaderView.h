@@ -21,7 +21,10 @@
     int				_mayDragColumn;
     NSImage			*_headerDragImage;
     float			_draggedDistance;
-    NSCursor			*_resizeCursor;
+    BOOL			_isColumnResizing;
+    BOOL			_reserved2;
+    BOOL			_reserved3;
+    BOOL			_reserved4;
     BOOL			_drawingLastColumn;
     id				_reserved;
 }

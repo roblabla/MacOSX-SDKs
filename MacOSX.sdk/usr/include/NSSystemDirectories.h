@@ -60,6 +60,8 @@ typedef enum {
     NSDeveloperDirectory,		// developer resources (Developer)
     NSUserDirectory,			// user home directories (Users)
     NSDocumentationDirectory,		// documentation (Library/Documentation)
+    NSDocumentDirectory,                // documents (Documents)
+    NSCoreServiceDirectory,		// location of core services (System/Library/CoreServices)
     NSAllApplicationsDirectory = 100,	// all directories where applications can occur (Applications, Applications/Utilities, Developer/Applications, Applications/GrabBag)
     NSAllLibrariesDirectory = 101	// all directories where resources can occur (Library, Developer)
 } NSSearchPathDirectory;

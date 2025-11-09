@@ -30,6 +30,8 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* exc_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 
 #ifdef __BeforeMigServerHeader
@@ -38,6 +40,8 @@ __BeforeMigServerHeader
 
 /* typedefs for all requests */
 
+#ifndef __Request__exc_subsystem__defined
+#define __Request__exc_subsystem__defined
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -78,16 +82,22 @@ __BeforeMigServerHeader
 		natural_t old_state[144];
 	} __Request__exception_raise_state_identity_t;
 
+#endif /* !__Request__exc_subsystem__defined */
 
 /* union of all requests */
 
+#ifndef __RequestUnion__catch_exc_subsystem__defined
+#define __RequestUnion__catch_exc_subsystem__defined
 union __RequestUnion__catch_exc_subsystem {
 	__Request__exception_raise_t Request_exception_raise;
 	__Request__exception_raise_state_t Request_exception_raise_state;
 	__Request__exception_raise_state_identity_t Request_exception_raise_state_identity;
 };
+#endif /* __RequestUnion__catch_exc_subsystem__defined */
 /* typedefs for all replies */
 
+#ifndef __Reply__exc_subsystem__defined
+#define __Reply__exc_subsystem__defined
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -112,14 +122,18 @@ union __RequestUnion__catch_exc_subsystem {
 		natural_t new_state[144];
 	} __Reply__exception_raise_state_identity_t;
 
+#endif /* !__Reply__exc_subsystem__defined */
 
 /* union of all replies */
 
+#ifndef __ReplyUnion__catch_exc_subsystem__defined
+#define __ReplyUnion__catch_exc_subsystem__defined
 union __ReplyUnion__catch_exc_subsystem {
 	__Reply__exception_raise_t Reply_exception_raise;
 	__Reply__exception_raise_state_t Reply_exception_raise_state;
 	__Reply__exception_raise_state_identity_t Reply_exception_raise_state_identity;
 };
+#endif /* __RequestUnion__catch_exc_subsystem__defined */
 
 /* Routine exception_raise */
 #ifdef	mig_external
@@ -147,10 +161,10 @@ kern_return_t catch_exception_raise_state
 (
 	mach_port_t exception_port,
 	exception_type_t exception,
-	exception_data_t code,
+	const exception_data_t code,
 	mach_msg_type_number_t codeCnt,
 	int *flavor,
-	thread_state_t old_state,
+	const thread_state_t old_state,
 	mach_msg_type_number_t old_stateCnt,
 	thread_state_t new_state,
 	mach_msg_type_number_t *new_stateCnt
@@ -187,11 +201,11 @@ extern mig_routine_t exc_server_routine(
 
 /* Description of this subsystem, for use in direct RPC */
 extern const struct catch_exc_subsystem {
-	struct subsystem *	subsystem;	/* Reserved for system use */
+	mig_server_routine_t	server;	/* Server routine */
 	mach_msg_id_t	start;	/* Min routine number */
 	mach_msg_id_t	end;	/* Max routine number + 1 */
 	unsigned int	maxsize;	/* Max msg size */
-	vm_address_t	base_addr;	/* Base ddress */
+	vm_address_t	reserved;	/* Reserved */
 	struct routine_descriptor	/*Array of routine descriptors */
 		routine[3];
 } catch_exc_subsystem;

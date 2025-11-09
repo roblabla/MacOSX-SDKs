@@ -3,9 +3,9 @@
  
      Contains:   Types, constants, prototypes for Unicode Utilities (Unicode input and text utils)
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1997-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1997-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -30,6 +30,7 @@
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -39,13 +40,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /*
    -------------------------------------------------------------------------------------------------
@@ -372,7 +367,7 @@ UCKeyTranslate(
   UInt32 *                  deadKeyState,
   UniCharCount              maxStringLength,
   UniCharCount *            actualStringLength,
-  UniChar                   unicodeString[]);
+  UniChar                   unicodeString[])                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Standard collation functions*/
@@ -389,7 +384,7 @@ UCCreateCollator(
   LocaleRef                locale,
   LocaleOperationVariant   opVariant,
   UCCollateOptions         options,
-  CollatorRef *            collatorRef);
+  CollatorRef *            collatorRef)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -407,7 +402,7 @@ UCGetCollationKey(
   UniCharCount       textLength,
   ItemCount          maxKeySize,
   ItemCount *        actualKeySize,
-  UCCollationValue   collationKey[]);
+  UCCollationValue   collationKey[])                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -425,7 +420,7 @@ UCCompareCollationKeys(
   const UCCollationValue *  key2Ptr,
   ItemCount                 key2Length,
   Boolean *                 equivalent,
-  SInt32 *                  order);
+  SInt32 *                  order)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -444,7 +439,7 @@ UCCompareText(
   const UniChar *  text2Ptr,
   UniCharCount     text2Length,
   Boolean *        equivalent,
-  SInt32 *         order);
+  SInt32 *         order)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -456,7 +451,7 @@ UCCompareText(
  *    Non-Carbon CFM:   in UnicodeUtilitiesLib 8.6 and later
  */
 extern OSStatus 
-UCDisposeCollator(CollatorRef * collatorRef);
+UCDisposeCollator(CollatorRef * collatorRef)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Simple collation using default locale*/
@@ -477,7 +472,7 @@ UCCompareTextDefault(
   const UniChar *    text2Ptr,
   UniCharCount       text2Length,
   Boolean *          equivalent,
-  SInt32 *           order);
+  SInt32 *           order)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -499,7 +494,7 @@ UCCompareTextNoLocale(
   const UniChar *    text2Ptr,
   UniCharCount       text2Length,
   Boolean *          equivalent,
-  SInt32 *           order);
+  SInt32 *           order)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Standard text break (text boundary) functions*/
@@ -516,7 +511,7 @@ UCCreateTextBreakLocator(
   LocaleRef                locale,
   LocaleOperationVariant   opVariant,
   UCTextBreakType          breakTypes,
-  TextBreakLocatorRef *    breakRef);
+  TextBreakLocatorRef *    breakRef)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -535,7 +530,7 @@ UCFindTextBreak(
   const UniChar *       textPtr,
   UniCharCount          textLength,
   UniCharArrayOffset    startOffset,
-  UniCharArrayOffset *  breakOffset);
+  UniCharArrayOffset *  breakOffset)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -547,17 +542,11 @@ UCFindTextBreak(
  *    Non-Carbon CFM:   in UnicodeUtilitiesLib 9.0 and later
  */
 extern OSStatus 
-UCDisposeTextBreakLocator(TextBreakLocatorRef * breakRef);
+UCDisposeTextBreakLocator(TextBreakLocatorRef * breakRef)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

@@ -197,12 +197,15 @@ CG_EXTERN CGEventErr CGEnableEventStateCombining(boolean_t doCombineState);
  * By default the system supresses local hardware events from the keyboard and mouse during
  * a short interval after a synthetic event is posted (see CGSetLocalEventsSuppressionInterval())
  * and while a synthetic mouse drag (mouse movement with the left/only mouse button down).
+ *
  * Some classes of applications may want to enable events from some of the local hardware.
  * For example, an app may want to post only mouse events, and so may wish to permit local
- * keyboard hardware events to pass through.
+ * keyboard hardware events to pass through. Set the filter state to permit keyboard events
+ * prior to posting the mouse event after which you want to get keyboard events.
  *
  * This interface lets an app specify a state (event supression interval, or mouse drag), and
- * a mask of event categories to be passed through.
+ * a mask of event categories to be passed through. The new filter state takes effect
+ * with the next event your app posts.
  */
 enum
 {
@@ -228,7 +231,8 @@ CG_EXTERN CGEventErr CGSetLocalEventsFilterDuringSupressionState(CGEventFilterMa
 CGEventSupressionState state);
 
 /*
- * Helper function to connect or disconnect the mouse and mouse cursor.
+ * Helper function to connect or disconnect the mouse and mouse cursor while the calling app
+ * is in the foreground.
  * CGAssociateMouseAndMouseCursorPosition(false) has the same effect
  * as the following, without actually modifying the supression interval:
  *
@@ -246,6 +250,8 @@ CGEventSupressionState state);
  * To update the display cursor position, use the function defined in this module:
  *
  *	CGEventErr CGWarpMouseCursorPosition( CGPoint newCursorPosition );
+ *
+ * Note: The Force Quit key combination (CMD-OPT-ESC by default) will reconnect the mouse and cursor.
  */
 CG_EXTERN CGEventErr CGAssociateMouseAndMouseCursorPosition(boolean_t connected);
 

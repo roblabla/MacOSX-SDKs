@@ -213,7 +213,7 @@ struct rpcent {
 /*
  * Scope delimit character
  */
-#define SCOPE_DELIMITER	'@'
+#define SCOPE_DELIMITER	'%'
 
 __BEGIN_DECLS
 void		endhostent __P((void));
@@ -253,6 +253,7 @@ void		setservent __P((int));
 char		*gai_strerror __P((int));
 void		freeaddrinfo __P((struct addrinfo *));
 int		getaddrinfo __P((const char *, const char *, const struct addrinfo *, struct addrinfo **));
+int		getnameinfo __P((const struct sockaddr *, size_t, char *, size_t, char *, size_t, int));
 __END_DECLS
 
 #endif /* !_NETDB_H_ */

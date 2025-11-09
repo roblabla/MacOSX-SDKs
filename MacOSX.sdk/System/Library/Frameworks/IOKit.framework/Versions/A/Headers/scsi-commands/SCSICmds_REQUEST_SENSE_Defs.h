@@ -37,13 +37,11 @@ struct SCSI_Sense_Data
 	UInt8		VALID_RESPONSE_CODE;				// 7 = Valid. 6-0 = Response Code.
 	UInt8		SEGMENT_NUMBER;						// Segment number
 	UInt8		SENSE_KEY;							// 7 = FILEMARK, 6 = EOM, 5 = ILI, 3-0 = SENSE KEY.
-	//UInt32		INFORMATION;						// INFORMATION.
 	UInt8		INFORMATION_1;						// INFORMATION.
 	UInt8		INFORMATION_2;						// INFORMATION.
 	UInt8		INFORMATION_3;						// INFORMATION.
 	UInt8		INFORMATION_4;						// INFORMATION.
 	UInt8		ADDITIONAL_SENSE_LENGTH;			// Number of additional bytes available in sense data
-	//UInt32		COMMAND_SPECIFIC_INFORMATION;		// Command Specific Information
 	UInt8		COMMAND_SPECIFIC_INFORMATION_1;		// Command Specific Information
 	UInt8		COMMAND_SPECIFIC_INFORMATION_2;		// Command Specific Information
 	UInt8		COMMAND_SPECIFIC_INFORMATION_3;		// Command Specific Information
@@ -52,10 +50,8 @@ struct SCSI_Sense_Data
 	UInt8		ADDITIONAL_SENSE_CODE_QUALIFIER;	// Additional Sense Code Qualifier
 	UInt8		FIELD_REPLACEABLE_UNIT_CODE;		// Field Replaceable Unit Code
 	UInt8		SKSV_SENSE_KEY_SPECIFIC_MSB;		// 7 = Sense Key Specific Valid bit, 6-0 Sense Key Specific MSB
-	//UInt16		SENSE_KEY_SPECIFIC_LSB;				// Sense Key Specific LSB
 	UInt8		SENSE_KEY_SPECIFIC_MID;				// Sense Key Specific Middle
 	UInt8		SENSE_KEY_SPECIFIC_LSB;				// Sense Key Specific LSB
-	
 };
 
 typedef struct SCSI_Sense_Data SCSI_Sense_Data;
@@ -122,9 +118,5 @@ enum
 	kSENSE_KEY_Mask 										= 0x0F
 };
 
-#ifndef _OPEN_SOURCE_
-/* Coming soon to this space - the list of ADDITIONAL SENSE CODE and *
- * ADDITIONAL SENSE CODE QUALIFIER definitions.						 */
-#endif
 
 #endif	/* _IOKIT_SCSI_CMDS_REQUEST_SENSE_H_ */

@@ -181,4 +181,11 @@ extern NSString *NSPreferencePaneCancelUnselectNotification;
 //
 - (void)setLastKeyView:(NSView *)view;
 
+// Default = YES
+// If set to YES, text fields will be forced to give up their responder status
+// before shouldUnselect is called on the preference pane.
+// If overriden and set to NO, the preference pane will be responsible for 
+// forcing the fields to give up their responder status before saving them.
+- (BOOL)autoSaveTextFields;
+
 @end

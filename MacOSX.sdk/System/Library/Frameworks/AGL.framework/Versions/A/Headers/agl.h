@@ -1,25 +1,30 @@
 /*
-    File:	AGL/agl.h
+    File:	    AGL/agl.h
 
     Contains:	Basic AGL data types, constants and function prototypes.
 
     Version:	Technology:	Mac OS X
                 Release:	GM
  
-     Copyright:  (c) 2000, 2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 2000, 2001, 2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
  
-                     http://developer.apple.com/bugreporter/
+                 http://developer.apple.com/bugreporter/
  
 */
 
 #ifndef _AGL_H
 #define _AGL_H
 
-#import <ApplicationServices/ApplicationServices.h>
-#import <OpenGL/gl.h>
+#if defined (__MACH__)
+	#import <Carbon/Carbon.h>
+	#import <OpenGL/gl.h>
+#else
+	#include <Carbon.h>
+	#include <gl.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -80,6 +85,10 @@ typedef struct __AGLContextRec       *AGLContext;
 #define AGL_MAXIMUM_POLICY        52  /* choose largest buffers of type requested     */
 #define AGL_OFFSCREEN             53  /* choose an off-screen capable renderer        */
 #define AGL_FULLSCREEN            54  /* choose a full-screen capable renderer        */
+#define AGL_SAMPLE_BUFFERS_ARB    55  /* number of multi sample buffers               */
+#define AGL_SAMPLES_ARB	          56  /* number of samples per multi sample buffer    */
+#define AGL_AUX_DEPTH_STENCIL	  57  /* independent depth and/or stencil buffers for the aux buffer */
+
 /* Renderer management */
 #define AGL_RENDERER_ID           70  /* request renderer by ID                       */
 #define AGL_SINGLE_RENDERER       71  /* choose a single renderer for all screens     */
@@ -127,6 +136,7 @@ typedef struct __AGLContextRec       *AGLContext;
 */
 #define AGL_SWAP_RECT	         200  /* Enable or set the swap rectangle              */
 #define AGL_BUFFER_RECT          202  /* Enable or set the buffer rectangle            */
+#define AGL_SWAP_LIMIT           203  /* Enable or disable the swap async limit        */
 #define AGL_COLORMAP_TRACKING    210  /* Enable or disable colormap tracking           */
 #define AGL_COLORMAP_ENTRY       212  /* Set a colormap entry to {index, r, g, b}      */
 #define AGL_RASTERIZATION        220  /* Enable or disable all rasterization           */
@@ -134,6 +144,12 @@ typedef struct __AGLContextRec       *AGLContext;
 #define AGL_STATE_VALIDATION     230  /* Validate state for multi-screen functionality */
 #define AGL_BUFFER_NAME          231  /* Set the buffer name. Allows for multi ctx to share a buffer */
 #define AGL_ORDER_CONTEXT_TO_FRONT  232  /* Order the current context in front of all the other contexts. */
+#define AGL_CONTEXT_SURFACE_ID   233  /* aglGetInteger only - returns the ID of the drawable surface for the context */
+#define AGL_CONTEXT_DISPLAY_ID   234  /* aglGetInteger only - returns the display ID(s) of all displays touched by the context, up to a maximum of 32 displays */
+#define AGL_SURFACE_ORDER        235  /* Position of OpenGL surface relative to window: 1 -> Above window, -1 -> Below Window */
+#define AGL_SURFACE_OPACITY      236  /* Opacity of OpenGL surface: 1 -> Surface is opaque (default), 0 -> non-opaque */
+#define AGL_CLIP_REGION          254  /* Enable or set the drawable clipping region */
+#define AGL_FS_CAPTURE_SINGLE    255  /* Enable the capture of only a single display for aglFullScreen, normally disabled */
 
 /*
 ** Option names for aglConfigure.
@@ -141,8 +157,6 @@ typedef struct __AGLContextRec       *AGLContext;
 #define AGL_FORMAT_CACHE_SIZE    501  /* Set the size of the pixel format cache        */
 #define AGL_CLEAR_FORMAT_CACHE   502  /* Reset the pixel format cache                  */
 #define AGL_RETAIN_RENDERERS     503  /* Whether to retain loaded renderers in memory  */
-#define AGL_TARGET_OS_MAC_OSX	 504  /* Set to true if you are a Mac OSX application  */
-                                      /* Default value is false						   */
 
 /* buffer_modes */
 #define AGL_MONOSCOPIC_BIT       0x00000001
@@ -307,6 +321,10 @@ extern const GLubyte *aglErrorString(GLenum code);
 */
 extern void aglResetLibrary(void);
 
+/*
+** Surface texture function
+*/
+extern void aglSurfaceTexture (AGLContext context, GLenum target, GLenum internalformat, AGLContext surfacecontext);
 
 #ifdef __cplusplus
 }

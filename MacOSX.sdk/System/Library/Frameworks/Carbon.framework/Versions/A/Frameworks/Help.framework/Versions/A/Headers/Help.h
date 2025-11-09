@@ -3,9 +3,9 @@
  
      Contains:   Master include for Help private framework
  
-     Version:    Help-20~104
+     Version:    Help-27~276
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,12 +16,8 @@
 #ifndef __HELP__
 #define __HELP__
 
-#ifndef __COREFOUNDATION__
-#include <CoreFoundation/CoreFoundation.h>
-#endif
-
-#ifndef __CARBONCORE__
-#include <CarbonCore/CarbonCore.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 

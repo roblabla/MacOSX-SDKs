@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Image Compression Interfaces.
  
-     Version:    QuickTime-142~1
+     Version:    QuickTime_6
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,9 +17,77 @@
 #ifndef __IMAGECOMPRESSION_R__
 #define __IMAGECOMPRESSION_R__
 
-#ifndef __CONDITIONALMACROS_R__
-#include <CarbonCore/ConditionalMacros.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
+
+#define kRawCodecType 					'raw '
+#define kCinepakCodecType 				'cvid'
+#define kGraphicsCodecType 				'smc '
+#define kAnimationCodecType 			'rle '
+#define kVideoCodecType 				'rpza'
+#define kComponentVideoCodecType 		'yuv2'
+#define kJPEGCodecType 					'jpeg'
+#define kMotionJPEGACodecType 			'mjpa'
+#define kMotionJPEGBCodecType 			'mjpb'
+#define kSGICodecType 					'.SGI'
+#define kPlanarRGBCodecType 			'8BPS'
+#define kMacPaintCodecType 				'PNTG'
+#define kGIFCodecType 					'gif '
+#define kPhotoCDCodecType 				'kpcd'
+#define kQuickDrawGXCodecType 			'qdgx'
+#define kAVRJPEGCodecType 				'avr '
+#define kOpenDMLJPEGCodecType 			'dmb1'
+#define kBMPCodecType 					'WRLE'
+#define kWindowsRawCodecType 			'WRAW'
+#define kVectorCodecType 				'path'
+#define kQuickDrawCodecType 			'qdrw'
+#define kWaterRippleCodecType 			'ripl'
+#define kFireCodecType 					'fire'
+#define kCloudCodecType 				'clou'
+#define kH261CodecType 					'h261'
+#define kH263CodecType 					'h263'
+#define kDVCNTSCCodecType 				'dvc '				/*  DV - NTSC and DVCPRO NTSC (available in QuickTime 6.0 or later) */
+															/*  NOTE: kDVCProNTSCCodecType is deprecated.   */
+															/*  Use kDVCNTSCCodecType instead -- as far as the codecs are concerned,  */
+															/*  the two data formats are identical. */
+#define kDVCPALCodecType 				'dvcp'
+#define kDVCProPALCodecType 			'dvpp'				/*  available in QuickTime 6.0 or later */
+#define kDVCPro50NTSCCodecType 			'dv5n'
+#define kDVCPro50PALCodecType 			'dv5p'
+#define kDVCPro100NTSCCodecType 		'dv1n'
+#define kDVCPro100PALCodecType 			'dv1p'
+#define kBaseCodecType 					'base'
+#define kFLCCodecType 					'flic'
+#define kTargaCodecType 				'tga '
+#define kPNGCodecType 					'png '
+#define kTIFFCodecType 					'tiff'				/*  NOTE: despite what might seem obvious from the two constants */
+															/*  below and their names, they really are correct. 'yuvu' really  */
+															/*  does mean signed, and 'yuvs' really does mean unsigned. Really.  */
+#define kComponentVideoSigned 			'yuvu'
+#define kComponentVideoUnsigned 		'yuvs'
+#define kCMYKCodecType 					'cmyk'
+#define kMicrosoftVideo1CodecType 		'msvc'
+#define kSorensonCodecType 				'SVQ1'
+#define kSorenson3CodecType 			'SVQ3'				/*  available in QuickTime 5 and later */
+#define kIndeo4CodecType 				'IV41'
+#define kMPEG4VisualCodecType 			'mp4v'
+#define k64ARGBCodecType 				'b64a'
+#define k48RGBCodecType 				'b48r'
+#define k32AlphaGrayCodecType 			'b32a'
+#define k16GrayCodecType 				'b16g'
+#define kMpegYUV420CodecType 			'myuv'
+#define kYUV420CodecType 				'y420'
+#define kSorensonYUV9CodecType 			'syv9'
+#define k422YpCbCr8CodecType 			'2vuy'				/*  Component Y'CbCr 8-bit 4:2:2   */
+#define k444YpCbCr8CodecType 			'v308'				/*  Component Y'CbCr 8-bit 4:4:4   */
+#define k4444YpCbCrA8CodecType 			'v408'				/*  Component Y'CbCrA 8-bit 4:4:4:4  */
+#define k422YpCbCr16CodecType 			'v216'				/*  Component Y'CbCr 10,12,14,16-bit 4:2:2 */
+#define k422YpCbCr10CodecType 			'v210'				/*  Component Y'CbCr 10-bit 4:2:2  */
+#define k444YpCbCr10CodecType 			'v410'				/*  Component Y'CbCr 10-bit 4:4:4  */
+#define k4444YpCbCrA8RCodecType 		'r408'				/*  Component Y'CbCrA 8-bit 4:4:4:4, rendering format. full range alpha, zero biased yuv */
+#define kJPEG2000CodecType 				'mjp2'
+#define kPixletCodecType 				'pxlt'
 
 #define codecInfoDoes1 					0x00000001			/*  codec can work with 1-bit pixels  */
 #define codecInfoDoes2 					0x00000002			/*  codec can work with 2-bit pixels  */
@@ -89,17 +157,31 @@
 #define compressorComponentType 		'imco'				/*  the type for "Components" which compress images  */
 #define decompressorComponentType 		'imdc'				/*  the type for "Components" which decompress images  */
 
+#ifndef __QTUUID__
+#define __QTUUID__ 1
+#endif  /* !defined(__QTUUID__) */
+
+#define GraphicsImporterComponentType 	'grip'
+#define graphicsImporterIsBaseImporter 	0x00000001
+#define graphicsImporterCanValidateFile  0x00000200
+#define graphicsImporterSubTypeIsFileExtension  0x00001000
+#define graphicsImporterHasMIMEList 	0x00004000
 #define graphicsImporterUsesImageDecompressor  0x00800000
+
 #define kGraphicsExportGroup 			'expo'
 #define kGraphicsExportFileType 		'ftyp'
 #define kGraphicsExportMIMEType 		'mime'
 #define kGraphicsExportExtension 		'ext '
 #define kGraphicsExportDescription 		'desc'
 
+#define GraphicsExporterComponentType 	'grex'
+#define kBaseGraphicsExporterSubType 	'base'
+
 #define graphicsExporterIsBaseExporter 	0x00000001
 #define graphicsExporterCanTranscode 	0x00000002
 #define graphicsExporterUsesImageCompressor  0x00000004
 
+#define kQTComponentPropertyListenerCollectionContextVersion 1
 
 #endif /* __IMAGECOMPRESSION_R__ */
 

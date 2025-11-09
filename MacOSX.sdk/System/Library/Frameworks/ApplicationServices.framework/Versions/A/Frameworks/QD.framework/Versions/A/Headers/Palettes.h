@@ -3,9 +3,9 @@
  
      Contains:   Palette Manager Interfaces.
  
-     Version:    Quickdraw-64.6.15~3
+     Version:    Quickdraw-96.21~1
  
-     Copyright:  © 1987-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1987-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,6 +22,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -31,13 +32,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   pmCourteous                   = 0,    /*Record use of color on each device touched.*/
@@ -85,7 +80,7 @@ typedef PalettePtr *                    PaletteHandle;
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-InitPalettes(void);
+InitPalettes(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -101,7 +96,7 @@ NewPalette(
   short        entries,
   CTabHandle   srcColors,
   short        srcUsage,
-  short        srcTolerance);
+  short        srcTolerance)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -113,7 +108,7 @@ NewPalette(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern PaletteHandle 
-GetNewPalette(short PaletteID);
+GetNewPalette(short PaletteID)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -125,7 +120,7 @@ GetNewPalette(short PaletteID);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DisposePalette(PaletteHandle srcPalette);
+DisposePalette(PaletteHandle srcPalette)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -137,7 +132,7 @@ DisposePalette(PaletteHandle srcPalette);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ActivatePalette(WindowRef srcWindow);
+ActivatePalette(WindowRef srcWindow)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -152,7 +147,7 @@ extern void
 SetPalette(
   WindowRef       dstWindow,
   PaletteHandle   srcPalette,
-  Boolean         cUpdates);
+  Boolean         cUpdates)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -167,7 +162,7 @@ extern void
 NSetPalette(
   WindowRef       dstWindow,
   PaletteHandle   srcPalette,
-  short           nCUpdates);
+  short           nCUpdates)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -179,7 +174,7 @@ NSetPalette(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern PaletteHandle 
-GetPalette(WindowRef srcWindow);
+GetPalette(WindowRef srcWindow)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -196,7 +191,7 @@ CopyPalette(
   PaletteHandle   dstPalette,
   short           srcEntry,
   short           dstEntry,
-  short           dstLength);
+  short           dstLength)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -208,7 +203,7 @@ CopyPalette(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-PmForeColor(short dstEntry);
+PmForeColor(short dstEntry)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -220,7 +215,7 @@ PmForeColor(short dstEntry);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-PmBackColor(short dstEntry);
+PmBackColor(short dstEntry)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -235,7 +230,7 @@ extern void
 AnimateEntry(
   WindowRef         dstWindow,
   short             dstEntry,
-  const RGBColor *  srcRGB);
+  const RGBColor *  srcRGB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -255,7 +250,7 @@ MacAnimatePalette(
   CTabHandle   srcCTab,
   short        srcIndex,
   short        dstEntry,
-  short        dstLength);
+  short        dstLength)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -270,7 +265,7 @@ extern void
 GetEntryColor(
   PaletteHandle   srcPalette,
   short           srcEntry,
-  RGBColor *      dstRGB);
+  RGBColor *      dstRGB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -285,7 +280,7 @@ extern void
 SetEntryColor(
   PaletteHandle     dstPalette,
   short             dstEntry,
-  const RGBColor *  srcRGB);
+  const RGBColor *  srcRGB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -301,7 +296,7 @@ GetEntryUsage(
   PaletteHandle   srcPalette,
   short           srcEntry,
   short *         dstUsage,
-  short *         dstTolerance);
+  short *         dstTolerance)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -317,7 +312,7 @@ SetEntryUsage(
   PaletteHandle   dstPalette,
   short           dstEntry,
   short           srcUsage,
-  short           srcTolerance);
+  short           srcTolerance)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -333,7 +328,7 @@ CTab2Palette(
   CTabHandle      srcCTab,
   PaletteHandle   dstPalette,
   short           srcUsage,
-  short           srcTolerance);
+  short           srcTolerance)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -347,7 +342,7 @@ CTab2Palette(
 extern void 
 Palette2CTab(
   PaletteHandle   srcPalette,
-  CTabHandle      dstCTab);
+  CTabHandle      dstCTab)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -359,7 +354,7 @@ Palette2CTab(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-Entry2Index(short entry);
+Entry2Index(short entry)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -371,7 +366,7 @@ Entry2Index(short entry);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-RestoreDeviceClut(GDHandle gd);
+RestoreDeviceClut(GDHandle gd)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -388,7 +383,7 @@ RestoreDeviceClut(GDHandle gd);
 extern void 
 MacResizePalette(
   PaletteHandle   p,
-  short           size);
+  short           size)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -400,7 +395,7 @@ MacResizePalette(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SaveFore(ColorSpec * c);
+SaveFore(ColorSpec * c)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -412,7 +407,7 @@ SaveFore(ColorSpec * c);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SaveBack(ColorSpec * c);
+SaveBack(ColorSpec * c)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -424,7 +419,7 @@ SaveBack(ColorSpec * c);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-RestoreFore(const ColorSpec * c);
+RestoreFore(const ColorSpec * c)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -436,7 +431,7 @@ RestoreFore(const ColorSpec * c);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-RestoreBack(const ColorSpec * c);
+RestoreBack(const ColorSpec * c)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -452,7 +447,7 @@ SetDepth(
   GDHandle   gd,
   short      depth,
   short      whichFlags,
-  short      flags);
+  short      flags)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -468,7 +463,7 @@ HasDepth(
   GDHandle   gd,
   short      depth,
   short      whichFlags,
-  short      flags);
+  short      flags)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -480,7 +475,7 @@ HasDepth(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-PMgrVersion(void);
+PMgrVersion(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -494,7 +489,7 @@ PMgrVersion(void);
 extern void 
 SetPaletteUpdates(
   PaletteHandle   p,
-  short           updates);
+  short           updates)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -506,7 +501,7 @@ SetPaletteUpdates(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-GetPaletteUpdates(PaletteHandle p);
+GetPaletteUpdates(PaletteHandle p)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -521,19 +516,13 @@ extern Boolean
 GetGray(
   GDHandle          device,
   const RGBColor *  backGround,
-  RGBColor *        foreGround);
+  RGBColor *        foreGround)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

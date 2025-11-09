@@ -1,5 +1,5 @@
 /*	NSPortNameServer.h
-	Copyright 1993-2001, Apple, Inc. All rights reserved.
+	Copyright 1993-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -69,17 +69,18 @@
 
 - (NSPort *)portForName:(NSString *)name;
 - (NSPort *)portForName:(NSString *)name host:(NSString *)host;
-- (NSPort *)portForName:(NSString *)name host:(NSString *)host nameServerPortNumber:(unsigned short)portNumber;
     // this name server supports remote lookup
-- (BOOL)registerPort:(NSPort *)port name:(NSString *)name nameServerPortNumber:(unsigned short)portNumber;
+- (BOOL)registerPort:(NSPort *)port name:(NSString *)name;
 
 - (BOOL)removePortForName:(NSString *)name;
      // removePortForName: is supported, and should be used
 
+// the following may be used in the future, but for now nameServerPortNumber arguments are ignored
+- (NSPort *)portForName:(NSString *)name host:(NSString *)host nameServerPortNumber:(unsigned short)portNumber;
+- (BOOL)registerPort:(NSPort *)port name:(NSString *)name nameServerPortNumber:(unsigned short)portNumber;
 - (void)setDefaultNameServerPortNumber:(unsigned short)portNumber;
 - (unsigned short)defaultNameServerPortNumber;
-     // controls the port number used to contact the name server,
-     // if none is specified
+
 @end
 
 

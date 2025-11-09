@@ -116,13 +116,13 @@
 	(*cgl_ctx->disp.color4b)(cgl_ctx->rend, red, green, blue, alpha)
 
 #define glColor4bv(v) \
-	(*cgl_ctx->disp.color3bv)(cgl_ctx->rend, v)
+	(*cgl_ctx->disp.color4bv)(cgl_ctx->rend, v)
 
 #define glColor4d(red, green, blue, alpha) \
 	(*cgl_ctx->disp.color4d)(cgl_ctx->rend, red, green, blue, alpha)
 
 #define glColor4dv(v) \
-	(*cgl_ctx->disp.color3dv)(cgl_ctx->rend, v)
+	(*cgl_ctx->disp.color4dv)(cgl_ctx->rend, v)
 
 #define glColor4f(red, green, blue, alpha) \
 	(*cgl_ctx->disp.color4f)(cgl_ctx->rend, red, green, blue, alpha)
@@ -1024,312 +1024,928 @@
 /****************** OpenGL 1.2 ************************************/
 
 #define glBlendColor(red, green, blue, alpha) \
-	(*cgl_ctx->exts.blend_color)(cgl_ctx->rend, red, green, blue, alpha)
+	(*cgl_ctx->disp.blend_color)(cgl_ctx->rend, red, green, blue, alpha)
 
 #define glBlendEquation(mode) \
-	(*cgl_ctx->exts.blend_equation)(cgl_ctx->rend, mode)
+	(*cgl_ctx->disp.blend_equation)(cgl_ctx->rend, mode)
 
 #define glDrawRangeElements(mode, start, end, count, type, indices) \
-	(*cgl_ctx->exts.draw_range_elements)(cgl_ctx->rend, mode, start, end, count, type, indices)
+	(*cgl_ctx->disp.draw_range_elements)(cgl_ctx->rend, mode, start, end, count, type, indices)
+
+#define glTexImage3D(target, level, internalformat, width, height, depth, border, format, type, data) \
+	(*cgl_ctx->disp.tex_image3D)(cgl_ctx->rend, target, level, internalformat, width, height, depth, border, format, type, data)
+
+#define glTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels) \
+	(*cgl_ctx->disp.tex_sub_image3D)(cgl_ctx->rend, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels)
+
+#define glCopyTexSubImage3D(target, level, xoffset, yoffset, zoffset, x, y, width, height) \
+	(*cgl_ctx->disp.copy_tex_sub_image3D)(cgl_ctx->rend, target, level, xoffset, yoffset, zoffset, x, y, width, height)
+
+/****************** OpenGL 1.2 Imaging Subset *********************/
+
+#define glColorTable(target, internalformat, width, format, type, table) \
+	(*cgl_ctx->disp.color_table)(cgl_ctx->rend, target, internalformat, width, format, type, table)
+
+#define glColorTableParameterfv(target, pname, params) \
+	(*cgl_ctx->disp.color_table_parameterfv)(cgl_ctx->rend, target, pname, params)
+
+#define glColorTableParameteriv(target, pname, params) \
+	(*cgl_ctx->disp.color_table_parameteriv)(cgl_ctx->rend, target, pname, params)
+
+#define glCopyColorTable(target, internalformat, x, y, width) \
+	(*cgl_ctx->disp.copy_color_table)(cgl_ctx->rend, target, internalformat, x, y, width)
+
+#define glGetColorTable(target, format, type, table) \
+	(*cgl_ctx->disp.get_color_table)(cgl_ctx->rend, target, format, type, table)
+
+#define glGetColorTableParameterfv(target, pname, params) \
+	(*cgl_ctx->disp.get_color_table_parameterfv)(cgl_ctx->rend, target, pname, params)
+
+#define glGetColorTableParameteriv(target, pname, params) \
+	(*cgl_ctx->disp.get_color_table_parameteriv)(cgl_ctx->rend, target, pname, params)
+
+#define glColorSubTable(target, start, count, format, type, data) \
+	(*cgl_ctx->disp.color_sub_table)(cgl_ctx->rend, target, start, count, format, type, data)
+
+#define glCopyColorSubTable(target, start, x, y, width) \
+	(*cgl_ctx->disp.copy_color_sub_table)(cgl_ctx->rend, target, start, x, y, width)
+
+#define glConvolutionFilter1D(target, internalformat, width, format, type, image) \
+	(*cgl_ctx->disp.convolution_filter1D)(cgl_ctx->rend, target, internalformat, width, format, type, image)
+
+#define glConvolutionFilter2D(target, internalformat, width, height, format, type, image) \
+	(*cgl_ctx->disp.convolution_filter2D)(cgl_ctx->rend, target, internalformat, width, height, format, type, image)
+
+#define glConvolutionParameterf(target, pname, param) \
+	(*cgl_ctx->disp.convolution_parameterf)(cgl_ctx->rend, target, pname, param)
+
+#define glConvolutionParameterfv(target, pname, params) \
+	(*cgl_ctx->disp.convolution_parameterfv)(cgl_ctx->rend, target, pname, params)
+
+#define glConvolutionParameteri(target, pname, param) \
+	(*cgl_ctx->disp.convolution_parameteri)(cgl_ctx->rend, target, pname, param)
+
+#define glConvolutionParameteriv(target, pname, params) \
+	(*cgl_ctx->disp.convolution_parameteriv)(cgl_ctx->rend, target, pname, params)
+
+#define glCopyConvolutionFilter1D(target, internalformat, x, y, width) \
+	(*cgl_ctx->disp.copy_convolution_filter1D)(cgl_ctx->rend, target, internalformat, x, y, width)
+
+#define glCopyConvolutionFilter2D(target, internalformat, x, y, width, height) \
+	(*cgl_ctx->disp.copy_convolution_filter2D)(cgl_ctx->rend, target, internalformat, x, y, width, height)
+
+#define glGetConvolutionFilter(target, format, type, image) \
+	(*cgl_ctx->disp.get_convolution_filter)(cgl_ctx->rend, target, format, type, image)
+
+#define glGetConvolutionParameterfv(target, pname, params) \
+	(*cgl_ctx->disp.get_convolution_parameterfv)(cgl_ctx->rend, target, pname, params)
+
+#define glGetConvolutionParameteriv(target, pname, params) \
+	(*cgl_ctx->disp.get_convolution_parameteriv)(cgl_ctx->rend, target, pname, params)
+
+#define glGetSeparableFilter(target, format, type, row, column, span) \
+	(*cgl_ctx->disp.get_separable_filter)(cgl_ctx->rend, target, format, type, row, column, span)
+
+#define glSeparableFilter2D(target, internalformat, width, height, format, type, row, column) \
+	(*cgl_ctx->disp.separable_filter2D)(cgl_ctx->rend, target, internalformat, width, height, format, type, row, column)
+
+#define glGetHistogram(target, reset, format, type, values) \
+	(*cgl_ctx->disp.get_histogram)(cgl_ctx->rend, target, reset, format, type, values)
+
+#define glGetHistogramParameterfv(target, pname, params) \
+	(*cgl_ctx->disp.get_histogram_parameterfv)(cgl_ctx->rend, target, pname, params)
+
+#define glGetHistogramParameteriv(target, pname, params) \
+	(*cgl_ctx->disp.get_histogram_parameteriv)(cgl_ctx->rend, target, pname, params)
+
+#define glGetMinmax(target, reset, format, type, values) \
+	(*cgl_ctx->disp.get_minmax)(cgl_ctx->rend, target, reset, format, type, values)
+
+#define glGetMinmaxParameterfv(target, pname, params) \
+	(*cgl_ctx->disp.get_minmax_parameterfv)(cgl_ctx->rend, target, pname, params)
+
+#define glGetMinmaxParameteriv(target, pname, params) \
+	(*cgl_ctx->disp.get_minmax_parameteriv)(cgl_ctx->rend, target, pname, params)
+
+#define glHistogram(target, width, internalformat, sink) \
+	(*cgl_ctx->disp.histogram)(cgl_ctx->rend, target, width, internalformat, sink)
+
+#define glMinmax(target, internalformat, sink) \
+	(*cgl_ctx->disp.minmax)(cgl_ctx->rend, target, internalformat, sink)
+
+#define glResetHistogram(target) \
+	(*cgl_ctx->disp.reset_histogram)(cgl_ctx->rend, target)
+
+#define glResetMinmax(target) \
+	(*cgl_ctx->disp.reset_minmax)(cgl_ctx->rend, target)
 
 /****************** OpenGL 1.3 ************************************/
 
 #define glClientActiveTexture(target) \
-	(*cgl_ctx->exts.client_active_texture_ARB)(cgl_ctx->rend, target)
+	(*cgl_ctx->disp.client_active_texture)(cgl_ctx->rend, target)
 
 #define glActiveTexture(target) \
-	(*cgl_ctx->exts.active_texture_ARB)(cgl_ctx->rend, target)
+	(*cgl_ctx->disp.active_texture)(cgl_ctx->rend, target)
 
 #define glMultiTexCoord1d(target, s) \
-	(*cgl_ctx->exts.multi_tex_coord1d_ARB)(cgl_ctx->rend, target, s)
+	(*cgl_ctx->disp.multi_tex_coord1d)(cgl_ctx->rend, target, s)
 
 #define glMultiTexCoord1dv(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord1dv_ARB)(cgl_ctx->rend, target, v)
+	(*cgl_ctx->disp.multi_tex_coord1dv)(cgl_ctx->rend, target, v)
 
 #define glMultiTexCoord1f(target, s) \
-	(*cgl_ctx->exts.multi_tex_coord1f_ARB)(cgl_ctx->rend, target, s)
+	(*cgl_ctx->disp.multi_tex_coord1f)(cgl_ctx->rend, target, s)
 
 #define glMultiTexCoord1fv(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord1fv_ARB)(cgl_ctx->rend, target, v)
+	(*cgl_ctx->disp.multi_tex_coord1fv)(cgl_ctx->rend, target, v)
 
 #define glMultiTexCoord1i(target, s) \
-	(*cgl_ctx->exts.multi_tex_coord1i_ARB)(cgl_ctx->rend, target, s)
+	(*cgl_ctx->disp.multi_tex_coord1i)(cgl_ctx->rend, target, s)
 
 #define glMultiTexCoord1iv(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord1iv_ARB)(cgl_ctx->rend, target, v)
+	(*cgl_ctx->disp.multi_tex_coord1iv)(cgl_ctx->rend, target, v)
 
 #define glMultiTexCoord1s(target, s) \
-	(*cgl_ctx->exts.multi_tex_coord1s_ARB)(cgl_ctx->rend, target, s)
+	(*cgl_ctx->disp.multi_tex_coord1s)(cgl_ctx->rend, target, s)
 
 #define glMultiTexCoord1sv(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord1sv_ARB)(cgl_ctx->rend, target, v)
+	(*cgl_ctx->disp.multi_tex_coord1sv)(cgl_ctx->rend, target, v)
 
 #define glMultiTexCoord2d(target, s, t) \
-	(*cgl_ctx->exts.multi_tex_coord2d_ARB)(cgl_ctx->rend, target, s, t)
+	(*cgl_ctx->disp.multi_tex_coord2d)(cgl_ctx->rend, target, s, t)
 
 #define glMultiTexCoord2dv(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord2dv_ARB)(cgl_ctx->rend, target, v)
+	(*cgl_ctx->disp.multi_tex_coord2dv)(cgl_ctx->rend, target, v)
 
 #define glMultiTexCoord2f(target, s, t) \
-	(*cgl_ctx->exts.multi_tex_coord2f_ARB)(cgl_ctx->rend, target, s, t)
+	(*cgl_ctx->disp.multi_tex_coord2f)(cgl_ctx->rend, target, s, t)
 
 #define glMultiTexCoord2fv(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord2fv_ARB)(cgl_ctx->rend, target, v)
+	(*cgl_ctx->disp.multi_tex_coord2fv)(cgl_ctx->rend, target, v)
 
 #define glMultiTexCoord2i(target, s, t) \
-	(*cgl_ctx->exts.multi_tex_coord2i_ARB)(cgl_ctx->rend, target, s, t)
+	(*cgl_ctx->disp.multi_tex_coord2i)(cgl_ctx->rend, target, s, t)
 
 #define glMultiTexCoord2iv(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord2iv_ARB)(cgl_ctx->rend, target, v)
+	(*cgl_ctx->disp.multi_tex_coord2iv)(cgl_ctx->rend, target, v)
 
 #define glMultiTexCoord2s(target, s, t) \
-	(*cgl_ctx->exts.multi_tex_coord2s_ARB)(cgl_ctx->rend, target, s, t)
+	(*cgl_ctx->disp.multi_tex_coord2s)(cgl_ctx->rend, target, s, t)
 
 #define glMultiTexCoord2sv(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord2sv_ARB)(cgl_ctx->rend, target, v)
+	(*cgl_ctx->disp.multi_tex_coord2sv)(cgl_ctx->rend, target, v)
 
 #define glMultiTexCoord3d(target, s, t, r) \
-	(*cgl_ctx->exts.multi_tex_coord3d_ARB)(cgl_ctx->rend, target, s, t, r)
+	(*cgl_ctx->disp.multi_tex_coord3d)(cgl_ctx->rend, target, s, t, r)
 
 #define glMultiTexCoord3dv(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord3dv_ARB)(cgl_ctx->rend, target, v)
+	(*cgl_ctx->disp.multi_tex_coord3dv)(cgl_ctx->rend, target, v)
 
 #define glMultiTexCoord3f(target, s, t, r) \
-	(*cgl_ctx->exts.multi_tex_coord3f_ARB)(cgl_ctx->rend, target, s, t, r)
+	(*cgl_ctx->disp.multi_tex_coord3f)(cgl_ctx->rend, target, s, t, r)
 
 #define glMultiTexCoord3fv(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord3fv_ARB)(cgl_ctx->rend, target, v)
+	(*cgl_ctx->disp.multi_tex_coord3fv)(cgl_ctx->rend, target, v)
 
 #define glMultiTexCoord3i(target, s, t, r) \
-	(*cgl_ctx->exts.multi_tex_coord3i_ARB)(cgl_ctx->rend, target, s, t, r)
+	(*cgl_ctx->disp.multi_tex_coord3i)(cgl_ctx->rend, target, s, t, r)
 
 #define glMultiTexCoord3iv(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord3iv_ARB)(cgl_ctx->rend, target, v)
+	(*cgl_ctx->disp.multi_tex_coord3iv)(cgl_ctx->rend, target, v)
 
 #define glMultiTexCoord3s(target, s, t, r) \
-	(*cgl_ctx->exts.multi_tex_coord3s_ARB)(cgl_ctx->rend, target, s, t, r)
+	(*cgl_ctx->disp.multi_tex_coord3s)(cgl_ctx->rend, target, s, t, r)
 
 #define glMultiTexCoord3sv(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord3sv_ARB)(cgl_ctx->rend, target, v)
+	(*cgl_ctx->disp.multi_tex_coord3sv)(cgl_ctx->rend, target, v)
 
 #define glMultiTexCoord4d(target, s, t, r, q) \
-	(*cgl_ctx->exts.multi_tex_coord4d_ARB)(cgl_ctx->rend, target, s, t, r, q)
+	(*cgl_ctx->disp.multi_tex_coord4d)(cgl_ctx->rend, target, s, t, r, q)
 
 #define glMultiTexCoord4dv(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord4dv_ARB)(cgl_ctx->rend, target, v)
+	(*cgl_ctx->disp.multi_tex_coord4dv)(cgl_ctx->rend, target, v)
 
 #define glMultiTexCoord4f(target, s, t, r, q) \
-	(*cgl_ctx->exts.multi_tex_coord4f_ARB)(cgl_ctx->rend, target, s, t, r, q)
+	(*cgl_ctx->disp.multi_tex_coord4f)(cgl_ctx->rend, target, s, t, r, q)
 
 #define glMultiTexCoord4fv(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord4fv_ARB)(cgl_ctx->rend, target, v)
+	(*cgl_ctx->disp.multi_tex_coord4fv)(cgl_ctx->rend, target, v)
 
 #define glMultiTexCoord4i(target, s, t, r, q) \
-	(*cgl_ctx->exts.multi_tex_coord4i_ARB)(cgl_ctx->rend, target, s, t, r, q)
+	(*cgl_ctx->disp.multi_tex_coord4i)(cgl_ctx->rend, target, s, t, r, q)
 
 #define glMultiTexCoord4iv(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord4iv_ARB)(cgl_ctx->rend, target, v)
+	(*cgl_ctx->disp.multi_tex_coord4iv)(cgl_ctx->rend, target, v)
 
 #define glMultiTexCoord4s(target, s, t, r, q) \
-	(*cgl_ctx->exts.multi_tex_coord4s_ARB)(cgl_ctx->rend, target, s, t, r, q)
+	(*cgl_ctx->disp.multi_tex_coord4s)(cgl_ctx->rend, target, s, t, r, q)
 
 #define glMultiTexCoord4sv(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord4sv_ARB)(cgl_ctx->rend, target, v)
+	(*cgl_ctx->disp.multi_tex_coord4sv)(cgl_ctx->rend, target, v)
 
 #define glSampleCoverage(v, i) \
-	(*cgl_ctx->exts.sample_coverage_ARB)(cgl_ctx->rend, v, i)
+	(*cgl_ctx->disp.sample_coverage)(cgl_ctx->rend, v, i)
 
 #define glSamplePass(mode) \
-	(*cgl_ctx->exts.sample_pass_ARB)(cgl_ctx->rend, mode)
+	(*cgl_ctx->disp.sample_pass)(cgl_ctx->rend, mode)
 
 #define glLoadTransposeMatrixf(v) \
-	(*cgl_ctx->exts.load_transpose_matrixf_ARB)(cgl_ctx->rend, v)
+	(*cgl_ctx->disp.load_transpose_matrixf)(cgl_ctx->rend, v)
 
 #define glLoadTransposeMatrixd(v) \
-	(*cgl_ctx->exts.load_transpose_matrixd_ARB)(cgl_ctx->rend, v)
+	(*cgl_ctx->disp.load_transpose_matrixd)(cgl_ctx->rend, v)
 
 #define glMultTransposeMatrixf(v) \
-	(*cgl_ctx->exts.mult_transpose_matrixf_ARB)(cgl_ctx->rend, v)
+	(*cgl_ctx->disp.mult_transpose_matrixf)(cgl_ctx->rend, v)
 
 #define glMultTransposeMatrixd(v) \
-	(*cgl_ctx->exts.mult_transpose_matrixd_ARB)(cgl_ctx->rend, v)
+	(*cgl_ctx->disp.mult_transpose_matrixd)(cgl_ctx->rend, v)
 
 #define glCompressedTexImage3D(target, level, internalformat, width, height, depth, border, imageSize, data) \
-	(*cgl_ctx->exts.compressed_tex_image3D_ARB)(cgl_ctx->rend, target, level, internalformat, width, height, depth, border, imageSize, data)
+	(*cgl_ctx->disp.compressed_tex_image3D)(cgl_ctx->rend, target, level, internalformat, width, height, depth, border, imageSize, data)
 
 #define glCompressedTexImage2D(target, level, internalformat, width, height, border, imageSize, data) \
-	(*cgl_ctx->exts.compressed_tex_image2D_ARB)(cgl_ctx->rend, target, level, internalformat, width, height, border, imageSize, data)
+	(*cgl_ctx->disp.compressed_tex_image2D)(cgl_ctx->rend, target, level, internalformat, width, height, border, imageSize, data)
 
 #define glCompressedTexImage1D(target, level, internalformat, width, border, imageSize, data) \
-	(*cgl_ctx->exts.compressed_tex_image1D_ARB)(cgl_ctx->rend, target, level, internalformat, width, border, imageSize, data)
+	(*cgl_ctx->disp.compressed_tex_image1D)(cgl_ctx->rend, target, level, internalformat, width, border, imageSize, data)
 
 #define glCompressedTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data) \
-	(*cgl_ctx->exts.compressed_tex_sub_image3D_ARB)(cgl_ctx->rend, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data)
+	(*cgl_ctx->disp.compressed_tex_sub_image3D)(cgl_ctx->rend, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data)
 
 #define glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data) \
-	(*cgl_ctx->exts.compressed_tex_sub_image2D_ARB)(cgl_ctx->rend, target, level, xoffset, yoffset, width, height, format, imageSize, data)
+	(*cgl_ctx->disp.compressed_tex_sub_image2D)(cgl_ctx->rend, target, level, xoffset, yoffset, width, height, format, imageSize, data)
 
 #define glCompressedTexSubImage1D(target, level, xoffset, width, format, imageSize, data) \
-	(*cgl_ctx->exts.compressed_tex_sub_image1D_ARB)(cgl_ctx->rend, target, level, xoffset, width, format, imageSize, data)
+	(*cgl_ctx->disp.compressed_tex_sub_image1D)(cgl_ctx->rend, target, level, xoffset, width, format, imageSize, data)
 
 #define glGetCompressedTexImage(target, level, img) \
-	(*cgl_ctx->exts.get_compressed_tex_image_ARB)(cgl_ctx->rend, target, level, img)
-	
-/****************** Supported OpenGL Extension Macros *************/
+	(*cgl_ctx->disp.get_compressed_tex_image)(cgl_ctx->rend, target, level, img)
 
-#define glBlendColorEXT(red, green, blue, alpha) \
-	(*cgl_ctx->exts.blend_color_EXT)(cgl_ctx->rend, red, green, blue, alpha)
+#define glSampleCoverage(v, i) \
+	(*cgl_ctx->disp.sample_coverage)(cgl_ctx->rend, v, i)
 
-#define glBlendEquationEXT(mode) \
-	(*cgl_ctx->exts.blend_equation_EXT)(cgl_ctx->rend, mode)
+#define glSamplePass(mode) \
+	(*cgl_ctx->disp.sample_pass)(cgl_ctx->rend, mode)
 
+/****************** OpenGL 1.4 ************************************/
+
+#define glFogCoordf(coord) \
+	(*cgl_ctx->disp.fog_coordf)(cgl_ctx->rend, coord)
+
+#define glFogCoordfv(coord) \
+	(*cgl_ctx->disp.fog_coordfv)(cgl_ctx->rend, coord)
+
+#define glFogCoordd(coord) \
+	(*cgl_ctx->disp.fog_coordd)(cgl_ctx->rend, coord)
+
+#define glFogCoorddv(coord) \
+	(*cgl_ctx->disp.fog_coorddv)(cgl_ctx->rend,coord)
+
+#define glFogCoordPointer(type, stride, pointer) \
+	(*cgl_ctx->disp.fog_coord_pointer)(cgl_ctx->rend, type, stride, pointer)
+
+#define glSecondaryColor3b(red, green, blue) \
+	(*cgl_ctx->disp.secondary_color3b)(cgl_ctx->rend, red, green, blue)
+
+#define glSecondaryColor3bv(components) \
+	(*cgl_ctx->disp.secondary_color3bv)(cgl_ctx->rend, components)
+
+#define glSecondaryColor3d(red, green, blue) \
+	(*cgl_ctx->disp.secondary_color3d)(cgl_ctx->rend, red, green, blue)
+
+#define glSecondaryColor3dv(components) \
+	(*cgl_ctx->disp.secondary_color3dv)(cgl_ctx->rend, components)
+
+#define glSecondaryColor3f(red, green, blue) \
+	(*cgl_ctx->disp.secondary_color3f)(cgl_ctx->rend, red, green, blue)
+
+#define glSecondaryColor3fv(components) \
+	(*cgl_ctx->disp.secondary_color3fv)(cgl_ctx->rend, components)
+
+#define glSecondaryColor3i(red, green, blue) \
+	(*cgl_ctx->disp.secondary_color3i)(cgl_ctx->rend, red, green, blue)
+
+#define glSecondaryColor3iv(components) \
+	(*cgl_ctx->disp.secondary_color3iv)(cgl_ctx->rend, components)
+
+#define glSecondaryColor3s(red, green, blue) \
+	(*cgl_ctx->disp.secondary_color3s)(cgl_ctx->rend, red, green, blue)
+
+#define glSecondaryColor3sv(components) \
+	(*cgl_ctx->disp.secondary_color3sv)(cgl_ctx->rend, components)
+
+#define glSecondaryColor3ub(red, green, blue) \
+	(*cgl_ctx->disp.secondary_color3ub)(cgl_ctx->rend, red, green, blue)
+
+#define glSecondaryColor3ubv(components) \
+	(*cgl_ctx->disp.secondary_color3ubv)(cgl_ctx->rend, components)
+
+#define glSecondaryColor3ui(red, green, blue) \
+	(*cgl_ctx->disp.secondary_color3ui)(cgl_ctx->rend, red, green, blue)
+
+#define glSecondaryColor3uiv(components) \
+	(*cgl_ctx->disp.secondary_color3uiv)(cgl_ctx->rend, components)
+
+#define glSecondaryColor3us(red, green, blue) \
+	(*cgl_ctx->disp.secondary_color3us)(cgl_ctx->rend, red, green, blue)
+
+#define glSecondaryColor3usv(components) \
+	(*cgl_ctx->disp.secondary_color3usv)(cgl_ctx->rend, components)
+
+#define glSecondaryColorPointer(size, type, stride, pointer) \
+	(*cgl_ctx->disp.secondary_color_pointer)(cgl_ctx->rend, size, type, stride, pointer)
+
+#define glPointParameterf(pname, param) \
+	(*cgl_ctx->disp.point_parameterf)(cgl_ctx->rend, pname, param)
+
+#define glPointParameterfv(pname, params) \
+	(*cgl_ctx->disp.point_parameterfv)(cgl_ctx->rend, pname, params)
+
+#define glBlendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha) \
+	(*cgl_ctx->disp.blend_func_separate)(cgl_ctx->rend, sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha)
+
+#define glMultiDrawArrays(mode, first, count, primcount) \
+	(*cgl_ctx->disp.multi_draw_arrays)(cgl_ctx->rend, mode, first, count, primcount)
+
+#define glMultiDrawElements(mode, count, type, indices, primcount) \
+	(*cgl_ctx->disp.multi_draw_elements)(cgl_ctx->rend, mode, count, type, indices, primcount)
+
+#define glWindowPos2d(x, y) \
+	(*cgl_ctx->disp.window_pos2d)(cgl_ctx->rend, x, y)
+
+#define glWindowPos2dv(v) \
+	(*cgl_ctx->disp.window_pos2dv)(cgl_ctx->rend, v)
+
+#define glWindowPos2f(x, y) \
+	(*cgl_ctx->disp.window_pos2f)(cgl_ctx->rend, x, y)
+
+#define glWindowPos2fv(v) \
+	(*cgl_ctx->disp.window_pos2fv)(cgl_ctx->rend, v)
+
+#define glWindowPos2i(x, y) \
+	(*cgl_ctx->disp.window_pos2i)(cgl_ctx->rend, x, y)
+
+#define glWindowPos2iv(v) \
+	(*cgl_ctx->disp.window_pos2iv)(cgl_ctx->rend, v)
+
+#define glWindowPos2s(x, y) \
+	(*cgl_ctx->disp.window_pos2s)(cgl_ctx->rend, x, y)
+
+#define glWindowPos2sv(v) \
+	(*cgl_ctx->disp.window_pos2sv)(cgl_ctx->rend, v)
+
+#define glWindowPos3d(x, y, z) \
+	(*cgl_ctx->disp.window_pos3d)(cgl_ctx->rend, x, y, z)
+
+#define glWindowPos3dv(v) \
+	(*cgl_ctx->disp.window_pos3dv)(cgl_ctx->rend, v)
+
+#define glWindowPos3f(x, y, z) \
+	(*cgl_ctx->disp.window_pos3f)(cgl_ctx->rend, x, y, z)
+
+#define glWindowPos3fv(v) \
+	(*cgl_ctx->disp.window_pos3fv)(cgl_ctx->rend, v)
+
+#define glWindowPos3i(x, y, z) \
+	(*cgl_ctx->disp.window_pos3i)(cgl_ctx->rend, x, y, z)
+
+#define glWindowPos3iv(v) \
+	(*cgl_ctx->disp.window_pos3iv)(cgl_ctx->rend, v)
+
+#define glWindowPos3s(x, y, z) \
+	(*cgl_ctx->disp.window_pos3s)(cgl_ctx->rend, x, y, z)
+
+#define glWindowPos3sv(v) \
+	(*cgl_ctx->disp.window_pos3sv)(cgl_ctx->rend, v)
+
+/*********** ARB Extensions *************************************************/
+
+/* GL_ARB_vertex_program */
+#define glBindProgramARB(target, id) \
+	(*cgl_ctx->disp.bind_program_ARB)(cgl_ctx->rend, target, id)
+
+#define glDeleteProgramsARB(n, programs) \
+	(*cgl_ctx->disp.delete_programs_ARB)(cgl_ctx->rend, n, programs)
+
+#define glGenProgramsARB(n, programs) \
+	(*cgl_ctx->disp.gen_programs_ARB)(cgl_ctx->rend, n, programs)
+
+#define glIsProgramARB(id) \
+	(*cgl_ctx->disp.is_program_ARB)(cgl_ctx->rend, id)
+
+#define glVertexAttrib1sARB(index, x) \
+	(*cgl_ctx->disp.vertex_attrib1s_ARB)(cgl_ctx->rend, index, x)
+
+#define glVertexAttrib1fARB(index, x) \
+	(*cgl_ctx->disp.vertex_attrib1f_ARB)(cgl_ctx->rend, index, x)
+
+#define glVertexAttrib1dARB(index, x) \
+	(*cgl_ctx->disp.vertex_attrib1d_ARB)(cgl_ctx->rend, index, x)
+
+#define glVertexAttrib2sARB(index, x, y) \
+	(*cgl_ctx->disp.vertex_attrib2s_ARB)(cgl_ctx->rend, index, x, y)
+
+#define glVertexAttrib2fARB(index, x, y) \
+	(*cgl_ctx->disp.vertex_attrib2f_ARB)(cgl_ctx->rend, index, x, y)
+
+#define glVertexAttrib2dARB(index, x, y) \
+	(*cgl_ctx->disp.vertex_attrib2d_ARB)(cgl_ctx->rend, index, x, y)
+
+#define glVertexAttrib3sARB(index, x, y, z) \
+	(*cgl_ctx->disp.vertex_attrib3s_ARB)(cgl_ctx->rend, index, x, y, z)
+
+#define glVertexAttrib3fARB(index, x, y, z) \
+	(*cgl_ctx->disp.vertex_attrib3f_ARB)(cgl_ctx->rend, index, x, y, z)
+
+#define glVertexAttrib3dARB(index, x, y, z) \
+	(*cgl_ctx->disp.vertex_attrib3d_ARB)(cgl_ctx->rend, index, x, y, z)
+
+#define glVertexAttrib4sARB(index, x, y, z, w) \
+	(*cgl_ctx->disp.vertex_attrib4s_ARB)(cgl_ctx->rend, index, x, y, z, w)
+
+#define glVertexAttrib4fARB(index, x, y, z, w) \
+	(*cgl_ctx->disp.vertex_attrib4f_ARB)(cgl_ctx->rend, index, x, y, z, w)
+
+#define glVertexAttrib4dARB(index, x, y, z, w) \
+	(*cgl_ctx->disp.vertex_attrib4d_ARB)(cgl_ctx->rend, index, x, y, z, w)
+
+#define glVertexAttrib4NubARB(index, x, y, z, w) \
+	(*cgl_ctx->disp.vertex_attrib4Nub_ARB)(cgl_ctx->rend, index, x, y, z, w)
+
+#define glVertexAttrib1svARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib1sv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib1fvARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib1fv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib1dvARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib1dv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib2svARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib2sv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib2fvARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib2fv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib2dvARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib2dv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib3svARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib3sv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib3fvARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib3fv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib3dvARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib3dv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib4bvARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib4bv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib4ubvARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib4ubv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib4svARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib4sv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib4usvARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib4usv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib4ivARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib4iv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib4uivARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib4uiv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib4fvARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib4fv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib4dvARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib4dv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib4NbvARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib4Nbv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib4NubvARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib4Nubv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib4NsvARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib4Nsv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib4NusvARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib4Nusv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib4NivARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib4Niv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttrib4NuivARB(index, addr) \
+	(*cgl_ctx->disp.vertex_attrib4Nuiv_ARB)(cgl_ctx->rend, index, addr)
+
+#define glVertexAttribPointerARB(index, size, type, normalized, stride, addr) \
+	(*cgl_ctx->disp.vertex_attrib_pointer_ARB)(cgl_ctx->rend, index, size, type, normalized, stride, addr)
+
+#define glEnableVertexAttribArrayARB(index) \
+	(*cgl_ctx->disp.enable_vertex_attrib_array_ARB)(cgl_ctx->rend, index)
+
+#define glDisableVertexAttribArrayARB(index) \
+	(*cgl_ctx->disp.disable_vertex_attrib_array_ARB)(cgl_ctx->rend, index)
+
+#define glGetVertexAttribdvARB(index, pname, params) \
+	(*cgl_ctx->disp.get_vertex_attribdv_ARB)(cgl_ctx->rend, index, pname, params)
+
+#define glGetVertexAttribfvARB(index, pname, params) \
+	(*cgl_ctx->disp.get_vertex_attribfv_ARB)(cgl_ctx->rend, index, pname, params)
+
+#define glGetVertexAttribivARB(index, pname, params) \
+	(*cgl_ctx->disp.get_vertex_attribiv_ARB)(cgl_ctx->rend, index, pname, params)
+
+#define glGetVertexAttribPointervARB(index, pname, pointer) \
+	(*cgl_ctx->disp.get_vertex_attrib_pointerv_ARB)(cgl_ctx->rend, index, pname, pointer)
+
+#define glProgramEnvParameter4dARB(target, index, x, y, z, w) \
+	(*cgl_ctx->disp.program_env_parameter4d_ARB)(cgl_ctx->rend, target, index, x, y, z, w)
+
+#define glProgramEnvParameter4dvARB(target, index, params) \
+	(*cgl_ctx->disp.program_env_parameter4dv_ARB)(cgl_ctx->rend, target, index, params)
+
+#define glProgramEnvParameter4fARB(target, index, x, y, z, w) \
+	(*cgl_ctx->disp.program_env_parameter4f_ARB)(cgl_ctx->rend, target, index, x, y, z, w)
+
+#define glProgramEnvParameter4fvARB(target, index, params) \
+	(*cgl_ctx->disp.program_env_parameter4fv_ARB)(cgl_ctx->rend, target, index, params)
+
+#define glProgramLocalParameter4dARB(target, index, x, y, z, w) \
+	(*cgl_ctx->disp.program_local_parameter4d_ARB)(cgl_ctx->rend, target, index, x, y, z, w)
+
+#define glProgramLocalParameter4dvARB(target, index, params) \
+	(*cgl_ctx->disp.program_local_parameter4dv_ARB)(cgl_ctx->rend, target, index, params)
+
+#define glProgramLocalParameter4fARB(target, index, x, y, z, w) \
+	(*cgl_ctx->disp.program_local_parameter4f_ARB)(cgl_ctx->rend, target, index, x, y, z, w)
+
+#define glProgramLocalParameter4fvARB(target, index, params) \
+	(*cgl_ctx->disp.program_local_parameter4fv_ARB)(cgl_ctx->rend, target, index, params)
+
+#define glGetProgramEnvParameterdvARB(target, index, params) \
+	(*cgl_ctx->disp.get_program_env_parameterdv_ARB)(cgl_ctx->rend, target, index, params)
+
+#define glGetProgramEnvParameterfvARB(target, index, params) \
+	(*cgl_ctx->disp.get_program_env_parameterfv_ARB)(cgl_ctx->rend, target, index, params)
+
+#define glGetProgramLocalParameterdvARB(target, index, params) \
+	(*cgl_ctx->disp.get_program_local_parameterdv_ARB)(cgl_ctx->rend, target, index, params)
+
+#define glGetProgramLocalParameterfvARB(target, index, params) \
+	(*cgl_ctx->disp.get_program_local_parameterfv_ARB)(cgl_ctx->rend, target, index, params)
+
+#define glProgramStringARB(target, format, length, string) \
+	(*cgl_ctx->disp.program_string_ARB)(cgl_ctx->rend, target, format, length, string)
+
+#define glGetProgramStringARB(target, pname, string) \
+	(*cgl_ctx->disp.get_program_string_ARB)(cgl_ctx->rend, target, pname, string)
+
+#define glGetProgramivARB(target, pname, params) \
+	(*cgl_ctx->disp.get_programiv_ARB)(cgl_ctx->rend, target, pname, params)
+
+/* GL_ARB_vertex_blend */
+#define glWeightbvARB(size, weights) \
+	(*cgl_ctx->disp.weightbv_ARB)(cgl_ctx->rend, size, weights)
+
+#define glWeightsvARB(size, weights) \
+	(*cgl_ctx->disp.weightsv_ARB)(cgl_ctx->rend, size, weights)
+
+#define glWeightivARB(size, weights) \
+	(*cgl_ctx->disp.weightiv_ARB)(cgl_ctx->rend, size, weights)
+
+#define glWeightfvARB(size, weights) \
+	(*cgl_ctx->disp.weightfv_ARB)(cgl_ctx->rend, size, weights)
+
+#define glWeightdvARB(size, weights) \
+	(*cgl_ctx->disp.weightdv_ARB)(cgl_ctx->rend, size, weights)
+
+#define glWeightubvARB(size, weights) \
+	(*cgl_ctx->disp.weightubv_ARB)(cgl_ctx->rend, size, weights)
+
+#define glWeightusvARB(size, weights) \
+	(*cgl_ctx->disp.weightusv_ARB)(cgl_ctx->rend, size, weights)
+
+#define glWeightuivARB(size, weights) \
+	(*cgl_ctx->disp.weightuiv_ARB)(cgl_ctx->rend, size, weights)
+
+#define glWeightPointerARB(size, type, stride, pointer) \
+	(*cgl_ctx->disp.weight_pointer_ARB)(cgl_ctx->rend, size, type, stride, pointer)
+
+#define glVertexBlendARB(count) \
+	(*cgl_ctx->disp.vertex_blend_ARB)(cgl_ctx->rend, count)
+
+/* GL_ARB_multitexture */
+#define glClientActiveTextureARB glClientActiveTexture
+#define glActiveTextureARB       glActiveTexture
+#define glMultiTexCoord1dARB  glMultiTexCoord1d
+#define glMultiTexCoord1dvARB glMultiTexCoord1dv
+#define glMultiTexCoord1fARB  glMultiTexCoord1f
+#define glMultiTexCoord1fvARB glMultiTexCoord1fv
+#define glMultiTexCoord1iARB  glMultiTexCoord1i
+#define glMultiTexCoord1ivARB glMultiTexCoord1iv
+#define glMultiTexCoord1sARB  glMultiTexCoord1s
+#define glMultiTexCoord1svARB glMultiTexCoord1sv
+#define glMultiTexCoord2dARB  glMultiTexCoord2d
+#define glMultiTexCoord2dvARB glMultiTexCoord2dv
+#define glMultiTexCoord2fARB  glMultiTexCoord2f
+#define glMultiTexCoord2fvARB glMultiTexCoord2fv
+#define glMultiTexCoord2iARB  glMultiTexCoord2i
+#define glMultiTexCoord2ivARB glMultiTexCoord2iv
+#define glMultiTexCoord2sARB  glMultiTexCoord2s
+#define glMultiTexCoord2svARB glMultiTexCoord2sv
+#define glMultiTexCoord3dARB  glMultiTexCoord3d
+#define glMultiTexCoord3dvARB glMultiTexCoord3dv
+#define glMultiTexCoord3fARB  glMultiTexCoord3f
+#define glMultiTexCoord3fvARB glMultiTexCoord3fv
+#define glMultiTexCoord3iARB  glMultiTexCoord3i
+#define glMultiTexCoord3ivARB glMultiTexCoord3iv
+#define glMultiTexCoord3sARB  glMultiTexCoord3s
+#define glMultiTexCoord3svARB glMultiTexCoord3sv
+#define glMultiTexCoord4dARB  glMultiTexCoord4d
+#define glMultiTexCoord4dvARB glMultiTexCoord4dv
+#define glMultiTexCoord4fARB  glMultiTexCoord4f
+#define glMultiTexCoord4fvARB glMultiTexCoord4fv
+#define glMultiTexCoord4iARB  glMultiTexCoord4i
+#define glMultiTexCoord4ivARB glMultiTexCoord4iv
+#define glMultiTexCoord4sARB  glMultiTexCoord4s
+#define glMultiTexCoord4svARB glMultiTexCoord4sv
+
+/* GL_ARB_transpose_matrix */
+#define glLoadTransposeMatrixfARB glLoadTransposeMatrixf
+#define glLoadTransposeMatrixdARB glLoadTransposeMatrixd
+#define glMultTransposeMatrixfARB glMultTransposeMatrixf
+#define glMultTransposeMatrixdARB glMultTransposeMatrixd
+
+/* GL_ARB_texture_compression */
+#define glCompressedTexImage3DARB    glCompressedTexImage3D
+#define glCompressedTexImage2DARB    glCompressedTexImage2D
+#define glCompressedTexImage1DARB    glCompressedTexImage1D
+#define glCompressedTexSubImage3DARB glCompressedTexSubImage3D
+#define glCompressedTexSubImage2DARB glCompressedTexSubImage2D
+#define glCompressedTexSubImage1DARB glCompressedTexSubImage1D
+#define glGetCompressedTexImageARB   glGetCompressedTexImage
+
+/* GL_ARB_multisample */
+#define glSampleCoverageARB glSampleCoverage
+#define glSamplePassARB     glSamplePass
+
+/* GL_ARB_point_parameters */
+#define glPointParameterfARB  glPointParameterf
+#define glPointParameterfvARB glPointParameterfv
+
+/* GL_ARB_window_pos */
+#define glWindowPos2dARB  glWindowPos2d
+#define glWindowPos2dvARB glWindowPos2dv
+#define glWindowPos2fARB  glWindowPos2f
+#define glWindowPos2fvARB glWindowPos2fv
+#define glWindowPos2iARB  glWindowPos2i
+#define glWindowPos2ivARB glWindowPos2iv
+#define glWindowPos2sARB  glWindowPos2s
+#define glWindowPos2svARB glWindowPos2sv
+#define glWindowPos3dARB  glWindowPos3d
+#define glWindowPos3dvARB glWindowPos3dv
+#define glWindowPos3fARB  glWindowPos3f
+#define glWindowPos3fvARB glWindowPos3fv
+#define glWindowPos3iARB  glWindowPos3i
+#define glWindowPos3ivARB glWindowPos3iv
+#define glWindowPos3sARB  glWindowPos3s
+#define glWindowPos3svARB glWindowPos3sv
+
+/*********** EXT Extensions *************************************************/
+
+/* GL_EXT_compiled_vertex_array */
 #define glLockArraysEXT(first, count) \
-	(*cgl_ctx->exts.lock_arrays_EXT)(cgl_ctx->rend, first, count)
+	(*cgl_ctx->disp.lock_arrays_EXT)(cgl_ctx->rend, first, count)
 
 #define glUnlockArraysEXT() \
-	(*cgl_ctx->exts.unlock_arrays_EXT)(cgl_ctx->rend)
+	(*cgl_ctx->disp.unlock_arrays_EXT)(cgl_ctx->rend)
 
-#define glClientActiveTextureARB(target) \
-	(*cgl_ctx->exts.client_active_texture_ARB)(cgl_ctx->rend, target)
+/* GL_EXT_stencil_two_side */
+#define glActiveStencilFaceEXT(face) \
+	(*cgl_ctx->disp.active_stencil_face_EXT)(cgl_ctx->rend, face)
 
-#define glActiveTextureARB(target) \
-	(*cgl_ctx->exts.active_texture_ARB)(cgl_ctx->rend, target)
+/* GL_ATI_separate_stencil */
+#define glStencilOpSeparateATI(face, sfail, dpfail, dppass) \
+	(*cgl_ctx->disp.stencil_op_separate_ATI)(cgl_ctx->rend, face, sfail, dpfail, dppass)
 
+#define glStencilFuncSeparateATI(frontfunc, backfunc, ref, mask) \
+	(*cgl_ctx->disp.stencil_func_separate_ATI)(cgl_ctx->rend, frontfunc, backfunc, ref, mask)
 
-#define glMultiTexCoord1dARB(target, s) \
-	(*cgl_ctx->exts.multi_tex_coord1d_ARB)(cgl_ctx->rend, target, s)
+/* GL_EXT_paletted_texture */
+#define glColorTableEXT glColorTable
+#define glColorSubTableEXT glColorSubTable
+#define glGetColorTableEXT glGetColorTable
+#define glGetColorTableParameterivEXT glGetColorTableParameteriv
+#define glGetColorTableParameterfvEXT glGetColorTableParameterfv
 
-#define glMultiTexCoord1dvARB(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord1dv_ARB)(cgl_ctx->rend, target, v)
+/* GL_EXT_secondary_color */
+#define glSecondaryColor3bEXT glSecondaryColor3b
+#define glSecondaryColor3bvEXT glSecondaryColor3bv
+#define glSecondaryColor3dEXT glSecondaryColor3d
+#define glSecondaryColor3dvEXT glSecondaryColor3dv
+#define glSecondaryColor3fEXT glSecondaryColor3f
+#define glSecondaryColor3fvEXT glSecondaryColor3fv
+#define glSecondaryColor3iEXT glSecondaryColor3i
+#define glSecondaryColor3ivEXT glSecondaryColor3iv
+#define glSecondaryColor3sEXT glSecondaryColor3s
+#define glSecondaryColor3svEXT glSecondaryColor3sv
+#define glSecondaryColor3ubEXT glSecondaryColor3ub
+#define glSecondaryColor3ubvEXT glSecondaryColor3ubv
+#define glSecondaryColor3uiEXT glSecondaryColor3ui
+#define glSecondaryColor3uivEXT glSecondaryColor3uiv
+#define glSecondaryColor3usEXT glSecondaryColor3us
+#define glSecondaryColor3usvEXT glSecondaryColor3usv
+#define glSecondaryColorPointerEXT glSecondaryColorPointer
 
-#define glMultiTexCoord1fARB(target, s) \
-	(*cgl_ctx->exts.multi_tex_coord1f_ARB)(cgl_ctx->rend, target, s)
+/* GL_EXT_fog_coord */
+#define glFogCoordfEXT glFogCoordf
+#define glFogCoordfvEXT glFogCoordfv
+#define glFogCoorddEXT glFogCoordd
+#define glFogCoorddvEXT glFogCoorddv
+#define glFogCoordPointerEXT glFogCoordPointer
 
-#define glMultiTexCoord1fvARB(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord1fv_ARB)(cgl_ctx->rend, target, v)
+/* GL_EXT_draw_range_elements */
+#define glDrawRangeElementsEXT glDrawRangeElements
 
-#define glMultiTexCoord1iARB(target, s) \
-	(*cgl_ctx->exts.multi_tex_coord1i_ARB)(cgl_ctx->rend, target, s)
+/* GL_EXT_blend_func_separate */
+#define glBlendFuncSeparateEXT glBlendFuncSeparate
 
-#define glMultiTexCoord1ivARB(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord1iv_ARB)(cgl_ctx->rend, target, v)
+/* GL_EXT_multi_draw_arrays */
+#define glMultiDrawArraysEXT glMultiDrawArrays
+#define glMultiDrawElementsEXT glMultiDrawElements
 
-#define glMultiTexCoord1sARB(target, s) \
-	(*cgl_ctx->exts.multi_tex_coord1s_ARB)(cgl_ctx->rend, target, s)
+/* GL_EXT_blend_color */
+#define glBlendColorEXT glBlendColor
 
-#define glMultiTexCoord1svARB(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord1sv_ARB)(cgl_ctx->rend, target, v)
+/* GL_EXT_blend_minmax */
+#define glBlendEquationEXT glBlendEquation
 
-#define glMultiTexCoord2dARB(target, s, t) \
-	(*cgl_ctx->exts.multi_tex_coord2d_ARB)(cgl_ctx->rend, target, s, t)
+/*********** APPLE Extensions ***********************************************/
 
-#define glMultiTexCoord2dvARB(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord2dv_ARB)(cgl_ctx->rend, target, v)
+/* GL_APPLE_vertex_program_evaluators */
+#define glEnableVertexAttribARB(index, pname) \
+	(*cgl_ctx->disp.enable_vertex_attrib_ARB)(cgl_ctx->rend, index, pname)
 
-#define glMultiTexCoord2fARB(target, s, t) \
-	(*cgl_ctx->exts.multi_tex_coord2f_ARB)(cgl_ctx->rend, target, s, t)
+#define glDisableVertexAttribARB(index, pname) \
+	(*cgl_ctx->disp.disable_vertex_attrib_ARB)(cgl_ctx->rend, index, pname)
 
-#define glMultiTexCoord2fvARB(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord2fv_ARB)(cgl_ctx->rend, target, v)
+#define glIsVertexAttribEnabledARB(index, pname) \
+	(*cgl_ctx->disp.is_vertex_attrib_enabled_ARB)(cgl_ctx->rend, index, pname)
 
-#define glMultiTexCoord2iARB(target, s, t) \
-	(*cgl_ctx->exts.multi_tex_coord2i_ARB)(cgl_ctx->rend, target, s, t)
+#define glMapVertexAttrib1dARB(index, size, u1, u2, stride, order, points) \
+	(*cgl_ctx->disp.map_vertex_attrib1d_ARB)(cgl_ctx->rend, index, size, u1, u2, stride, order, points)
 
-#define glMultiTexCoord2ivARB(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord2iv_ARB)(cgl_ctx->rend, target, v)
+#define glMapVertexAttrib1fARB(index, size, u1, u2, stride, order, points) \
+	(*cgl_ctx->disp.map_vertex_attrib1f_ARB)(cgl_ctx->rend, index, size, u1, u2, stride, order, points)
 
-#define glMultiTexCoord2sARB(target, s, t) \
-	(*cgl_ctx->exts.multi_tex_coord2s_ARB)(cgl_ctx->rend, target, s, t)
+#define glMapVertexAttrib2dARB(index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) \
+	(*cgl_ctx->disp.map_vertex_attrib2d_ARB)(cgl_ctx->rend, index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)
 
-#define glMultiTexCoord2svARB(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord2sv_ARB)(cgl_ctx->rend, target, v)
+#define glMapVertexAttrib2fARB(index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) \
+	(*cgl_ctx->disp.map_vertex_attrib2f_ARB)(cgl_ctx->rend, index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)
 
-#define glMultiTexCoord3dARB(target, s, t, r) \
-	(*cgl_ctx->exts.multi_tex_coord3d_ARB)(cgl_ctx->rend, target, s, t, r)
+/* GL_APPLE_texture_range */
+#define glTextureRangeAPPLE(target, length, pointer) \
+	(*cgl_ctx->disp.texture_range_APPLE)(cgl_ctx->rend, target, length, pointer)
 
-#define glMultiTexCoord3dvARB(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord3dv_ARB)(cgl_ctx->rend, target, v)
+#define glGetTexParameterPointervAPPLE(target, pname, params) \
+	(*cgl_ctx->disp.get_tex_parameter_pointerv_APPLE)(cgl_ctx->rend, target, pname, params)
 
-#define glMultiTexCoord3fARB(target, s, t, r) \
-	(*cgl_ctx->exts.multi_tex_coord3f_ARB)(cgl_ctx->rend, target, s, t, r)
+/* GL_APPLE_fence */
+#define glGenFencesAPPLE(n, fences) \
+	(*cgl_ctx->disp.gen_fences_APPLE)(cgl_ctx->rend, n, fences)
 
-#define glMultiTexCoord3fvARB(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord3fv_ARB)(cgl_ctx->rend, target, v)
+#define glDeleteFencesAPPLE(n, fences) \
+	(*cgl_ctx->disp.delete_fences_APPLE)(cgl_ctx->rend, n, fences)
 
-#define glMultiTexCoord3iARB(target, s, t, r) \
-	(*cgl_ctx->exts.multi_tex_coord3i_ARB)(cgl_ctx->rend, target, s, t, r)
+#define glSetFenceAPPLE(fence) \
+	(*cgl_ctx->disp.set_fence_APPLE)(cgl_ctx->rend, fence)
 
-#define glMultiTexCoord3ivARB(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord3iv_ARB)(cgl_ctx->rend, target, v)
+#define glIsFenceAPPLE(fence) \
+	(*cgl_ctx->disp.is_fence_APPLE)(cgl_ctx->rend, fence)
 
-#define glMultiTexCoord3sARB(target, s, t, r) \
-	(*cgl_ctx->exts.multi_tex_coord3s_ARB)(cgl_ctx->rend, target, s, t, r)
+#define glTestFenceAPPLE(fence) \
+	(*cgl_ctx->disp.test_fence_APPLE)(cgl_ctx->rend, fence)
 
-#define glMultiTexCoord3svARB(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord3sv_ARB)(cgl_ctx->rend, target, v)
+#define glFinishFenceAPPLE(fence) \
+	(*cgl_ctx->disp.finish_fence_APPLE)(cgl_ctx->rend, fence)
 
-#define glMultiTexCoord4dARB(target, s, t, r, q) \
-	(*cgl_ctx->exts.multi_tex_coord4d_ARB)(cgl_ctx->rend, target, s, t, r, q)
+#define glTestObjectAPPLE(object, name) \
+	(*cgl_ctx->disp.test_object_APPLE)(cgl_ctx->rend, object, name)
 
-#define glMultiTexCoord4dvARB(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord4dv_ARB)(cgl_ctx->rend, target, v)
+#define glFinishObjectAPPLE(object, name) \
+	(*cgl_ctx->disp.finish_object_APPLE)(cgl_ctx->rend, object, name)
 
-#define glMultiTexCoord4fARB(target, s, t, r, q) \
-	(*cgl_ctx->exts.multi_tex_coord4f_ARB)(cgl_ctx->rend, target, s, t, r, q)
+/* GL_APPLE_vertex_array_range */
+#define glVertexArrayRangeAPPLE(length, pointer) \
+	(*cgl_ctx->disp.vertex_array_range_EXT)(cgl_ctx->rend, length, pointer)
 
-#define glMultiTexCoord4fvARB(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord4fv_ARB)(cgl_ctx->rend, target, v)
+#define glFlushVertexArrayRangeAPPLE(length, pointer) \
+	(*cgl_ctx->disp.flush_vertex_array_range_EXT)(cgl_ctx->rend, length, pointer)
 
-#define glMultiTexCoord4iARB(target, s, t, r, q) \
-	(*cgl_ctx->exts.multi_tex_coord4i_ARB)(cgl_ctx->rend, target, s, t, r, q)
+#define glVertexArrayParameteriAPPLE(pname, param) \
+	(*cgl_ctx->disp.vertex_array_parameteri_EXT)(cgl_ctx->rend, pname, param)
 
-#define glMultiTexCoord4ivARB(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord4iv_ARB)(cgl_ctx->rend, target, v)
+/* GL_APPLE_vertex_array_object */
+#define glBindVertexArrayAPPLE(id) \
+	(*cgl_ctx->disp.bind_vertex_array_EXT)(cgl_ctx->rend, id)
 
-#define glMultiTexCoord4sARB(target, s, t, r, q) \
-	(*cgl_ctx->exts.multi_tex_coord4s_ARB)(cgl_ctx->rend, target, s, t, r, q)
+#define glDeleteVertexArraysAPPLE(n, ids) \
+	(*cgl_ctx->disp.delete_vertex_arrays_EXT)(cgl_ctx->rend, n, ids)
 
-#define glMultiTexCoord4svARB(target, v) \
-	(*cgl_ctx->exts.multi_tex_coord4sv_ARB)(cgl_ctx->rend, target, v)
+#define glGenVertexArraysAPPLE(n, ids) \
+	(*cgl_ctx->disp.gen_vertex_arrays_EXT)(cgl_ctx->rend, n, ids)
 
-#define glSampleCoverageARB(v, i) \
-	(*cgl_ctx->exts.sample_coverage_ARB)(cgl_ctx->rend, v, i)
+#define glIsVertexArrayAPPLE(id) \
+	(*cgl_ctx->disp.is_vertex_array_EXT)(cgl_ctx->rend, id)
 
-#define glSamplePassARB(mode) \
-	(*cgl_ctx->exts.sample_pass_ARB)(cgl_ctx->rend, mode)
+/* GL_APPLE_element_array */
+#define glElementPointerAPPLE(type, pointer) \
+	(*cgl_ctx->disp.element_pointer_APPLE)(cgl_ctx->rend, type, pointer)
 
-#define glLoadTransposeMatrixfARB(v) \
-	(*cgl_ctx->exts.load_transpose_matrixf_ARB)(cgl_ctx->rend, v)
+#define glDrawElementArrayAPPLE(mode, first, count) \
+	(*cgl_ctx->disp.draw_element_array_APPLE)(cgl_ctx->rend, mode, first, count)
 
-#define glLoadTransposeMatrixdARB(v) \
-	(*cgl_ctx->exts.load_transpose_matrixd_ARB)(cgl_ctx->rend, v)
+#define glDrawRangeElementArrayAPPLE(mode, start, end, first, count) \
+	(*cgl_ctx->disp.draw_range_element_array_APPLE)(cgl_ctx->rend, mode, start, end, first, count)
 
-#define glMultTransposeMatrixfARB(v) \
-	(*cgl_ctx->exts.mult_transpose_matrixf_ARB)(cgl_ctx->rend, v)
+/*********** ATI Extensions *************************************************/
 
-#define glMultTransposeMatrixdARB(v) \
-	(*cgl_ctx->exts.mult_transpose_matrixd_ARB)(cgl_ctx->rend, v)
+/* GL_ATI_blend_equation_separate */
+#define glBlendEquationSeparateATI(equationRGB, equationAlpha) \
+	(*cgl_ctx->disp.blend_equation_separate_ATI)(cgl_ctx->rend, equationRGB, equationAlpha)
 
-#define glCompressedTexImage3DARB(target, level, internalformat, width, height, depth, border, imageSize, data) \
-	(*cgl_ctx->exts.compressed_tex_image3D_ARB)(cgl_ctx->rend, target, level, internalformat, width, height, depth, border, imageSize, data)
+/* GL_ATI_pn_triangles */
+#define glPNTrianglesiATI(pname, param) \
+    (*cgl_ctx->disp.pn_trianglesi_ATI)(cgl_ctx->rend, pname, param)
 
-#define glCompressedTexImage2DARB(target, level, internalformat, width, height, border, imageSize, data) \
-	(*cgl_ctx->exts.compressed_tex_image2D_ARB)(cgl_ctx->rend, target, level, internalformat, width, height, border, imageSize, data)
+#define glPNTrianglesfATI(pname, param) \
+    (*cgl_ctx->disp.pn_trianglesf_ATI)(cgl_ctx->rend, pname, param)
 
-#define glCompressedTexImage1DARB(target, level, internalformat, width, border, imageSize, data) \
-	(*cgl_ctx->exts.compressed_tex_image1D_ARB)(cgl_ctx->rend, target, level, internalformat, width, border, imageSize, data)
+/* GL_ATIX_pn_triangles */
+#define glPNTrianglesiATIX glPNTrianglesiATI
+#define glPNTrianglesfATIX glPNTrianglesfATI
 
-#define glCompressedTexSubImage3DARB(target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data) \
-	(*cgl_ctx->exts.compressed_tex_sub_image3D_ARB)(cgl_ctx->rend, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data)
+/*********** NVIDIA Extensions **********************************************/
 
-#define glCompressedTexSubImage2DARB(target, level, xoffset, yoffset, width, height, format, imageSize, data) \
-	(*cgl_ctx->exts.compressed_tex_sub_image2D_ARB)(cgl_ctx->rend, target, level, xoffset, yoffset, width, height, format, imageSize, data)
+/* GL_NV_point_sprite */
+#define glPointParameteriNV(pname, param) \
+	(*cgl_ctx->disp.point_parameteri)(cgl_ctx->rend, pname, param)
 
-#define glCompressedTexSubImage1DARB(target, level, xoffset, width, format, imageSize, data) \
-	(*cgl_ctx->exts.compressed_tex_sub_image1D_ARB)(cgl_ctx->rend, target, level, xoffset, width, format, imageSize, data)
+#define glPointParameterivNV(pname, params) \
+	(*cgl_ctx->disp.point_parameteriv)(cgl_ctx->rend, pname, params)
 
-#define glGetCompressedTexImageARB(target, level, img) \
-	(*cgl_ctx->exts.get_compressed_tex_image_ARB)(cgl_ctx->rend, target, level, img)
+/* GL_NV_register_combiners */
+#define glCombinerParameterfvNV(pname, params) \
+	(*cgl_ctx->disp.combiner_parameterfv_NV)(cgl_ctx->rend, pname, params)
+
+#define glCombinerParameterfNV(pname, param) \
+	(*cgl_ctx->disp.combiner_parameterf_NV)(cgl_ctx->rend, pname, param)
+
+#define glCombinerParameterivNV(pname, params) \
+	(*cgl_ctx->disp.combiner_parameteriv_NV)(cgl_ctx->rend, pname, params)
+
+#define glCombinerParameteriNV(pname, param) \
+	(*cgl_ctx->disp.combiner_parameteri_NV)(cgl_ctx->rend, pname, param)
+
+#define glCombinerInputNV(stage, portion, variable, input, mapping ,componentUsage) \
+	(*cgl_ctx->disp.combiner_input_NV)(cgl_ctx->rend, stage, portion, variable, input, mapping ,componentUsage)
+
+#define glCombinerOutputNV(stage, portion, abOutput, cdOutput, sumOutput, scale, bias, abDotProduct, cdDoProduct, muxSum) \
+	(*cgl_ctx->disp.combiner_output_NV)(cgl_ctx->rend, stage, portion, abOutput, cdOutput, sumOutput, scale, bias, abDotProduct, cdDoProduct, muxSum)
+
+#define glFinalCombinerInputNV(variable, input, mapping, componentUsage) \
+	(*cgl_ctx->disp.final_combiner_input_NV)(cgl_ctx->rend, variable, input, mapping, componentUsage)
+
+#define glGetCombinerInputParameterfvNV(stage, portion, variable, pname, params) \
+	(*cgl_ctx->disp.get_combiner_input_parameterfv_NV)(cgl_ctx->rend, stage, portion, variable, pname, params)
+
+#define glGetCombinerInputParameterivNV(stage, portion, variable, pname, params) \
+	(*cgl_ctx->disp.get_combiner_input_parameteriv_NV)(cgl_ctx->rend, stage, portion, variable, pname, params)
+
+#define glGetCombinerOutputParameterfvNV(stage, portion, pname, params) \
+	(*cgl_ctx->disp.get_combiner_output_parameterfv_NV)(cgl_ctx->rend, stage, portion, pname, params)
+
+#define glGetCombinerOutputParameterivNV(stage, portion, pname, params) \
+	(*cgl_ctx->disp.get_combiner_output_parameteriv_NV)(cgl_ctx->rend, stage, portion, pname, params)
+
+#define glGetFinalCombinerInputParameterfvNV(variable, pname, params) \
+	(*cgl_ctx->disp.get_final_combiner_input_parameterfv_NV)(cgl_ctx->rend, variable, pname, params)
+
+#define glGetFinalCombinerInputParameterfvNV(variable, pname, params) \
+	(*cgl_ctx->disp.get_final_combiner_input_parameterfv_NV)(cgl_ctx->rend, variable, pname, params)
+
+/* GL_NV_register_combiners2 */
+#define glCombinerStageParameterfvNV(stage, pname, params) \
+	(*cgl_ctx->disp.combiner_stage_parameterfv_NV)(cgl_ctx->rend, stage, pname, params)
+
+#define glGetCombinerStageParameterfvNV(stage, pname, param) \
+	(*cgl_ctx->disp.get_combiner_stage_parameterfv_NV)(cgl_ctx->rend, stage, pname, param)
 
 #endif /* _CGLMACRO_H */
 

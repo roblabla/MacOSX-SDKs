@@ -1,12 +1,28 @@
 /*
-	File:		DirServicesTypes.h
+ * Copyright (c) 2002 Apple Computer, Inc. All rights reserved.
+ *
+ * @APPLE_LICENSE_HEADER_START@
+ * 
+ * The contents of this file constitute Original Code as defined in and
+ * are subject to the Apple Public Source License Version 1.1 (the
+ * "License").  You may not use this file except in compliance with the
+ * License.  Please obtain a copy of the License at
+ * http://www.apple.com/publicsource and read it before using this file.
+ * 
+ * This Original Code and all software distributed under the License are
+ * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
+ * License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * @APPLE_LICENSE_HEADER_END@
+ */
 
-	Contains:	xxx put contents here xxx
-
-	Copyright:	© 1998-2000 by Apple Computer, Inc., all rights reserved.
-
-	NOT_FOR_OPEN_SOURCE <to be reevaluated at a later time>
-*/
+/*!
+ * @header DirServicesTypes
+ */
 
 #ifndef __DirServicesTypesH__
 #define	__DirServicesTypesH__	1
@@ -15,6 +31,44 @@
 	#define	dsBool	int
 #endif
 
+/*!
+ *	@enum tDirStatus
+ *	@discussion Error codes returned from the Directory Services API.
+ *	@constant eDSSchemaError The write operation failed because the result would conflict
+ *		with the server's schema. For example, trying to remove a required attribute would
+ *		return this error.
+ *	@constant eDSAttributeValueNotFound	When using dsSetAttributeValue, dsRemoveAttributeValue,
+ *		or dsGetAttributeValueByID the value with the specified ID was not found.
+ *	@constant eDSVersionMismatch A configuration file version is not compatible with this
+ *		version of Directory Services or the plug-in that loaded it.
+ *	@constant eDSAuthNewPasswordRequired The administrator set a flag to force a password
+ *		reset on the next login.
+ *	@constant eDSAuthPasswordExpired The password expiration date has passed so it must be
+ *		reset.
+ *	@constant eDSAuthPasswordQualityCheckFailed New password rejected because it did not meet
+ *		the password server’s quality requirements (for example, it was too short).
+ *		This error only comes back when changing or setting the password, not when
+ *		authenticating.
+ *	@constant eDSAuthPasswordTooShort New password rejected because it did not meet
+ *		the password server’s minimum length requirements. This error only comes back 
+ *		when changing or setting the password, not when authenticating.
+ *	@constant eDSAuthPasswordTooLong New password rejected because it exceeded
+ *		the password server’s maximum length limit. This error only comes back 
+ *		when changing or setting the password, not when authenticating.
+ *	@constant eDSAuthPasswordNeedsLetter New password rejected because it did not meet
+ *		the password server’s quality requirements (did not contain a letter).
+ *		This error only comes back when changing or setting the password, not when
+ *		authenticating.
+ *	@constant eDSAuthPasswordNeedsDigit New password rejected because it did not meet
+ *		the password server’s quality requirements (did not contain a digit).
+ *		This error only comes back when changing or setting the password, not when
+ *		authenticating.
+ *	@constant eDSAuthAccountDisabled The administrator set a flag to disable the account.
+ *	@constant eDSAuthAccountExpired The expiration date/time of the account passed so it is
+ *		automatically disabled.
+ *	@constant eDSAuthAccountInactive The account was unused for a preset amount of time so
+ *		it was automatically disabled.
+ */
 typedef	enum
 {
 	eDSNoErr					=	0,
@@ -58,6 +112,7 @@ typedef	enum
 	eDSInvalidContinueData		=	-14078,
 	eDSInvalidBuffFormat		=	-14079,
 	eDSInvalidPatternMatchType	=	-14080,
+	eDSRefTableError			=	-14081,
 
 	eDSAuthFailed				=	-14090,
 	eDSAuthMethodNotSupported	=	-14091,
@@ -91,10 +146,24 @@ typedef	enum
 
 	eDSNoStdMappingAvailable	=	-14140,
 	eDSInvalidNativeMapping		=	-14141,
+	eDSSchemaError				=	-14142,
+	eDSAttributeValueNotFound	=   -14143,
 
+	eDSVersionMismatch			=   -14149,
 	eDSPlugInConfigFileError	=	-14150,
 	eDSInvalidPlugInConfigData	=	-14151,
 
+	eDSAuthNewPasswordRequired	=	-14161,
+	eDSAuthPasswordExpired		=	-14162,
+	eDSAuthPasswordQualityCheckFailed	=	-14165,
+	eDSAuthAccountDisabled		=	-14167,
+	eDSAuthAccountExpired		=	-14168,
+	eDSAuthAccountInactive		=	-14169,
+	eDSAuthPasswordTooShort		=	-14170,
+	eDSAuthPasswordTooLong		=	-14171,
+	eDSAuthPasswordNeedsLetter	=	-14172,
+	eDSAuthPasswordNeedsDigit	=	-14173,
+	
 	eDSNullParameter			=	-14200,
 	eDSNullDataBuff				=	-14201,
 	eDSNullNodeName				=	-14202,
@@ -172,6 +241,12 @@ typedef	enum
 	eIPCSendError				=	-14330,
 	eIPCReceiveError			=	-14331,
 	eServerReplyError			=	-14332,
+	
+	eDSTCPSendError				=	-14350,
+	eDSTCPReceiveError			=	-14351,
+	eDSTCPVersionMismatch		=	-14352,
+	eDSIPUnreachable			=	-14353,
+	eDSUnknownHost				=	-14354,
 
 	ePluginHandlerNotLoaded		=	-14400,
 	eNoPluginsLoaded			=	-14402,
@@ -272,6 +347,7 @@ typedef enum
 	// Advanced Search Pattern Match Specifiers
 	eDSWildCardPattern		=	0x2009,
 	eDSRegularExpression	=	0x200A,
+	eDSCompoundExpression	=	0x200B,
 
 
 	// The following Specifiers are identical to the ones above
@@ -290,6 +366,7 @@ typedef enum
 	// Advanced Search Pattern Match Specifiers
 	eDSiWildCardPattern		=	0x2109,
 	eDSiRegularExpression	=	0x210A,
+	eDSiCompoundExpression	=	0x210B,
 
 	// Specific Node Types
 	eDSLocalNodeNames		=	0x2200,
@@ -298,6 +375,8 @@ typedef enum
 	eDSLocalHostedNodes		=	0x2203,
 	eDSAuthenticationSearchNodeName		=	0x2201,		//duplicate of eDSSearchNodeName
 	eDSContactsSearchNodeName			=	0x2204,
+	eDSNetworkSearchNodeName			=	0x2205,
+	eDSDefaultNetworkNodes			=	0x2206,
 	
 	dDSBeginPlugInCustom	=	0x3000,
 	eDSEndPlugInCustom		=	0x4fff,

@@ -1,5 +1,5 @@
 /*	NSGeometry.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSValue.h>

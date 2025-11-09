@@ -1,5 +1,7 @@
-/*	NSScriptStandardSuiteCommands.h
-	Copyright 1997-2001, Apple, Inc. All rights reserved.
+/*
+	NSScriptStandardSuiteCommands.h
+	Copyright (c) 1997-2002, Apple Computer, Inc.
+	All rights reserved.
 */
 
 #import <Foundation/NSScriptCommand.h>
@@ -44,7 +46,7 @@ typedef enum {
 
 @interface NSCreateCommand : NSScriptCommand {
     @private
-    NSMutableDictionary *_resolvedKeyDictionary;
+    void *_privateVars;
 }
 
 - (NSScriptClassDescription *)createClassDescription;

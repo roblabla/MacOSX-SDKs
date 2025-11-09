@@ -3,9 +3,9 @@
  
      Contains:   Low Memory Accessor Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1993-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1993-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -39,6 +39,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -48,13 +49,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /**************************************************************************************
 
@@ -125,7 +120,7 @@ extern "C" {
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Ptr  LMGetMemTop(void);
+extern Ptr  LMGetMemTop(void)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -136,7 +131,7 @@ extern Ptr  LMGetMemTop(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetMemTop(Ptr value);
+extern void  LMSetMemTop(Ptr value)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -148,7 +143,7 @@ extern void  LMSetMemTop(Ptr value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Ptr  LMGetBufPtr(void);
+extern Ptr  LMGetBufPtr(void)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -159,7 +154,7 @@ extern Ptr  LMGetBufPtr(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetBufPtr(Ptr value);
+extern void  LMSetBufPtr(Ptr value)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -171,7 +166,7 @@ extern void  LMSetBufPtr(Ptr value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Ptr  LMGetHeapEnd(void);
+extern Ptr  LMGetHeapEnd(void)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -182,7 +177,7 @@ extern Ptr  LMGetHeapEnd(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetHeapEnd(Ptr value);
+extern void  LMSetHeapEnd(Ptr value)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -236,7 +231,7 @@ extern void  LMSetHeapEnd(Ptr value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UInt8  LMGetCPUFlag(void);
+extern UInt8  LMGetCPUFlag(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -247,7 +242,7 @@ extern UInt8  LMGetCPUFlag(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetCPUFlag(UInt8 value);
+extern void  LMSetCPUFlag(UInt8 value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -302,7 +297,7 @@ extern void  LMSetCPUFlag(UInt8 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetRndSeed(void);
+extern SInt32  LMGetRndSeed(void)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -313,7 +308,7 @@ extern SInt32  LMGetRndSeed(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetRndSeed(SInt32 value);
+extern void  LMSetRndSeed(SInt32 value)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -325,7 +320,7 @@ extern void  LMSetRndSeed(SInt32 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UInt8  LMGetSEvtEnb(void);
+extern UInt8  LMGetSEvtEnb(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -336,7 +331,7 @@ extern UInt8  LMGetSEvtEnb(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSEvtEnb(UInt8 value);
+extern void  LMSetSEvtEnb(UInt8 value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -729,7 +724,7 @@ extern void  LMSetSEvtEnb(UInt8 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetBootDrive(void);
+extern SInt16  LMGetBootDrive(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -740,7 +735,7 @@ extern SInt16  LMGetBootDrive(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetBootDrive(SInt16 value);
+extern void  LMSetBootDrive(SInt16 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -773,7 +768,7 @@ extern void  LMSetBootDrive(SInt16 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetMemErr(void);
+extern SInt16  LMGetMemErr(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -784,7 +779,7 @@ extern SInt16  LMGetMemErr(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetMemErr(SInt16 value);
+extern void  LMSetMemErr(SInt16 value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -796,7 +791,7 @@ extern void  LMSetMemErr(SInt16 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UInt8  LMGetSdVolume(void);
+extern UInt8  LMGetSdVolume(void)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -807,7 +802,7 @@ extern UInt8  LMGetSdVolume(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSdVolume(UInt8 value);
+extern void  LMSetSdVolume(UInt8 value)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -819,7 +814,7 @@ extern void  LMSetSdVolume(UInt8 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Ptr  LMGetSoundPtr(void);
+extern Ptr  LMGetSoundPtr(void)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -830,7 +825,7 @@ extern Ptr  LMGetSoundPtr(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSoundPtr(Ptr value);
+extern void  LMSetSoundPtr(Ptr value)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -842,7 +837,7 @@ extern void  LMSetSoundPtr(Ptr value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Ptr  LMGetSoundBase(void);
+extern Ptr  LMGetSoundBase(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -853,7 +848,7 @@ extern Ptr  LMGetSoundBase(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSoundBase(Ptr value);
+extern void  LMSetSoundBase(Ptr value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -865,7 +860,7 @@ extern void  LMSetSoundBase(Ptr value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UInt8  LMGetSoundLevel(void);
+extern UInt8  LMGetSoundLevel(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -876,7 +871,7 @@ extern UInt8  LMGetSoundLevel(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSoundLevel(UInt8 value);
+extern void  LMSetSoundLevel(UInt8 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -888,7 +883,7 @@ extern void  LMSetSoundLevel(UInt8 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetCurPitch(void);
+extern SInt16  LMGetCurPitch(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -899,7 +894,7 @@ extern SInt16  LMGetCurPitch(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetCurPitch(SInt16 value);
+extern void  LMSetCurPitch(SInt16 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -974,7 +969,7 @@ extern void  LMSetCurPitch(SInt16 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern THz  LMGetSysZone(void);
+extern THz  LMGetSysZone(void)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -985,7 +980,7 @@ extern THz  LMGetSysZone(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSysZone(THz value);
+extern void  LMSetSysZone(THz value)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -997,7 +992,7 @@ extern void  LMSetSysZone(THz value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern THz  LMGetApplZone(void);
+extern THz  LMGetApplZone(void)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1008,7 +1003,7 @@ extern THz  LMGetApplZone(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetApplZone(THz value);
+extern void  LMSetApplZone(THz value)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1184,7 +1179,7 @@ extern void  LMSetApplZone(THz value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UInt8  LMGetScrDmpEnb(void);
+extern UInt8  LMGetScrDmpEnb(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1195,7 +1190,7 @@ extern UInt8  LMGetScrDmpEnb(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetScrDmpEnb(UInt8 value);
+extern void  LMSetScrDmpEnb(UInt8 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1207,7 +1202,7 @@ extern void  LMSetScrDmpEnb(UInt8 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetBufTgFNum(void);
+extern SInt32  LMGetBufTgFNum(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1218,7 +1213,7 @@ extern SInt32  LMGetBufTgFNum(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetBufTgFNum(SInt32 value);
+extern void  LMSetBufTgFNum(SInt32 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1230,7 +1225,7 @@ extern void  LMSetBufTgFNum(SInt32 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetBufTgFFlg(void);
+extern SInt16  LMGetBufTgFFlg(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1241,7 +1236,7 @@ extern SInt16  LMGetBufTgFFlg(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetBufTgFFlg(SInt16 value);
+extern void  LMSetBufTgFFlg(SInt16 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1253,7 +1248,7 @@ extern void  LMSetBufTgFFlg(SInt16 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetBufTgFBkNum(void);
+extern SInt16  LMGetBufTgFBkNum(void)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1264,7 +1259,7 @@ extern SInt16  LMGetBufTgFBkNum(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetBufTgFBkNum(SInt16 value);
+extern void  LMSetBufTgFBkNum(SInt16 value)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1276,7 +1271,7 @@ extern void  LMSetBufTgFBkNum(SInt16 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetBufTgDate(void);
+extern SInt32  LMGetBufTgDate(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1287,7 +1282,7 @@ extern SInt32  LMGetBufTgDate(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetBufTgDate(SInt32 value);
+extern void  LMSetBufTgDate(SInt32 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1320,7 +1315,7 @@ extern void  LMSetBufTgDate(SInt32 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetMinStack(void);
+extern SInt32  LMGetMinStack(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1331,7 +1326,7 @@ extern SInt32  LMGetMinStack(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetMinStack(SInt32 value);
+extern void  LMSetMinStack(SInt32 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1343,7 +1338,7 @@ extern void  LMSetMinStack(SInt32 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetDefltStack(void);
+extern SInt32  LMGetDefltStack(void)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1354,7 +1349,7 @@ extern SInt32  LMGetDefltStack(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetDefltStack(SInt32 value);
+extern void  LMSetDefltStack(SInt32 value)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1366,7 +1361,7 @@ extern void  LMSetDefltStack(SInt32 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Handle  LMGetGZRootHnd(void);
+extern Handle  LMGetGZRootHnd(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1377,7 +1372,7 @@ extern Handle  LMGetGZRootHnd(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetGZRootHnd(Handle value);
+extern void  LMSetGZRootHnd(Handle value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1389,7 +1384,7 @@ extern void  LMSetGZRootHnd(Handle value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Handle  LMGetGZMoveHnd(void);
+extern Handle  LMGetGZMoveHnd(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1400,7 +1395,7 @@ extern Handle  LMGetGZMoveHnd(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetGZMoveHnd(Handle value);
+extern void  LMSetGZMoveHnd(Handle value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1520,7 +1515,7 @@ extern void  LMSetGZMoveHnd(Handle value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UniversalProcPtr  LMGetToExtFS(void);
+extern UniversalProcPtr  LMGetToExtFS(void)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1531,7 +1526,7 @@ extern UniversalProcPtr  LMGetToExtFS(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetToExtFS(UniversalProcPtr value);
+extern void  LMSetToExtFS(UniversalProcPtr value)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1648,7 +1643,7 @@ extern void  LMSetToExtFS(UniversalProcPtr value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UniversalProcPtr  LMGetJStash(void);
+extern UniversalProcPtr  LMGetJStash(void)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1659,7 +1654,7 @@ extern UniversalProcPtr  LMGetJStash(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetJStash(UniversalProcPtr value);
+extern void  LMSetJStash(UniversalProcPtr value)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1692,7 +1687,7 @@ extern void  LMSetJStash(UniversalProcPtr value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetCurApRefNum(void);
+extern SInt16  LMGetCurApRefNum(void)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1703,7 +1698,7 @@ extern SInt16  LMGetCurApRefNum(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetCurApRefNum(SInt16 value);
+extern void  LMSetCurApRefNum(SInt16 value)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1736,7 +1731,7 @@ extern void  LMSetCurApRefNum(SInt16 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Ptr  LMGetCurStackBase(void);
+extern Ptr  LMGetCurStackBase(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1747,7 +1742,7 @@ extern Ptr  LMGetCurStackBase(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetCurStackBase(Ptr value);
+extern void  LMSetCurStackBase(Ptr value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1780,7 +1775,7 @@ extern void  LMSetCurStackBase(Ptr value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetCurPageOption(void);
+extern SInt16  LMGetCurPageOption(void)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1791,7 +1786,7 @@ extern SInt16  LMGetCurPageOption(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetCurPageOption(SInt16 value);
+extern void  LMSetCurPageOption(SInt16 value)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1804,7 +1799,7 @@ extern void  LMSetCurPageOption(SInt16 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetPrintErr(void);
+extern SInt16  LMGetPrintErr(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1815,7 +1810,7 @@ extern SInt16  LMGetPrintErr(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetPrintErr(SInt16 value);
+extern void  LMSetPrintErr(SInt16 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1951,7 +1946,7 @@ extern void  LMSetPrintErr(SInt16 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetApFontID(void);
+extern SInt16  LMGetApFontID(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1962,7 +1957,7 @@ extern SInt16  LMGetApFontID(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetApFontID(SInt16 value);
+extern void  LMSetApFontID(SInt16 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2243,7 +2238,7 @@ extern void  LMSetApFontID(SInt16 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetOneOne(void);
+extern SInt32  LMGetOneOne(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2254,7 +2249,7 @@ extern SInt32  LMGetOneOne(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetOneOne(SInt32 value);
+extern void  LMSetOneOne(SInt32 value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2266,7 +2261,7 @@ extern void  LMSetOneOne(SInt32 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetMinusOne(void);
+extern SInt32  LMGetMinusOne(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2277,7 +2272,7 @@ extern SInt32  LMGetMinusOne(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetMinusOne(SInt32 value);
+extern void  LMSetMinusOne(SInt32 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2499,7 +2494,7 @@ extern void  LMSetMinusOne(SInt32 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetSysMap(void);
+extern SInt16  LMGetSysMap(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2510,7 +2505,7 @@ extern SInt16  LMGetSysMap(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSysMap(SInt16 value);
+extern void  LMSetSysMap(SInt16 value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2544,7 +2539,7 @@ extern void  LMSetSysMap(SInt16 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UInt8  LMGetResLoad(void);
+extern UInt8  LMGetResLoad(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2555,7 +2550,7 @@ extern UInt8  LMGetResLoad(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetResLoad(UInt8 value);
+extern void  LMSetResLoad(UInt8 value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2567,7 +2562,7 @@ extern void  LMSetResLoad(UInt8 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetResErr(void);
+extern SInt16  LMGetResErr(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2578,7 +2573,7 @@ extern SInt16  LMGetResErr(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetResErr(SInt16 value);
+extern void  LMSetResErr(SInt16 value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2977,7 +2972,7 @@ extern void  LMSetResErr(SInt16 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UInt8  LMGetTmpResLoad(void);
+extern UInt8  LMGetTmpResLoad(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2988,7 +2983,7 @@ extern UInt8  LMGetTmpResLoad(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetTmpResLoad(UInt8 value);
+extern void  LMSetTmpResLoad(UInt8 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -3000,7 +2995,7 @@ extern void  LMSetTmpResLoad(UInt8 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Ptr  LMGetIntlSpec(void);
+extern Ptr  LMGetIntlSpec(void)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3011,7 +3006,7 @@ extern Ptr  LMGetIntlSpec(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetIntlSpec(Ptr value);
+extern void  LMSetIntlSpec(Ptr value)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* LMGetWordRedraw and LMSetWordRedraw moved to TextEdit.h */
@@ -3023,7 +3018,7 @@ extern void  LMSetIntlSpec(Ptr value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetSysFontFam(void);
+extern SInt16  LMGetSysFontFam(void)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3034,7 +3029,7 @@ extern SInt16  LMGetSysFontFam(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSysFontFam(SInt16 value);
+extern void  LMSetSysFontFam(SInt16 value)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3045,7 +3040,7 @@ extern void  LMSetSysFontFam(SInt16 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetSysFontSize(void);
+extern SInt16  LMGetSysFontSize(void)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3056,7 +3051,7 @@ extern SInt16  LMGetSysFontSize(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSysFontSize(SInt16 value);
+extern void  LMSetSysFontSize(SInt16 value)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -3491,7 +3486,7 @@ extern void  LMSetSysFontSize(SInt16 value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern StringPtr  LMGetCurApName(void);
+extern StringPtr  LMGetCurApName(void)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3502,7 +3497,7 @@ extern StringPtr  LMGetCurApName(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetCurApName(ConstStr31Param curApNameValue);
+extern void  LMSetCurApName(ConstStr31Param curApNameValue)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3513,7 +3508,7 @@ extern void  LMSetCurApName(ConstStr31Param curApNameValue);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern StringPtr  LMGetSysResName(void);
+extern StringPtr  LMGetSysResName(void)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3524,7 +3519,7 @@ extern StringPtr  LMGetSysResName(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSysResName(ConstStr15Param sysResNameValue);
+extern void  LMSetSysResName(ConstStr15Param sysResNameValue) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3535,7 +3530,7 @@ extern void  LMSetSysResName(ConstStr15Param sysResNameValue);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern StringPtr  LMGetFinderName(void);
+extern StringPtr  LMGetFinderName(void)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3546,7 +3541,7 @@ extern StringPtr  LMGetFinderName(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetFinderName(ConstStr15Param finderNameValue);
+extern void  LMSetFinderName(ConstStr15Param finderNameValue) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3577,7 +3572,7 @@ extern void  LMSetFinderName(ConstStr15Param finderNameValue);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Ptr  LMGetToolScratch(void);
+extern Ptr  LMGetToolScratch(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3588,7 +3583,7 @@ extern Ptr  LMGetToolScratch(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetToolScratch(const void * toolScratchValue);
+extern void  LMSetToolScratch(const void * toolScratchValue)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3650,7 +3645,7 @@ extern void  LMSetToolScratch(const void * toolScratchValue);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UniversalProcPtr  LMGetLvl2DT(short vectorNumber);
+extern UniversalProcPtr  LMGetLvl2DT(short vectorNumber)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3661,7 +3656,7 @@ extern UniversalProcPtr  LMGetLvl2DT(short vectorNumber);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetLvl2DT(UniversalProcPtr Lvl2DTValue, short vectorNumber);
+extern void  LMSetLvl2DT(UniversalProcPtr Lvl2DTValue, short vectorNumber)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3823,7 +3818,7 @@ extern void  LMSetLvl2DT(UniversalProcPtr Lvl2DTValue, short vectorNumber);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern Ptr  LMGetHighHeapMark(void);
+extern Ptr  LMGetHighHeapMark(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3834,7 +3829,7 @@ extern Ptr  LMGetHighHeapMark(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern void  LMSetHighHeapMark(Ptr value);
+extern void  LMSetHighHeapMark(Ptr value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -3847,7 +3842,7 @@ extern void  LMSetHighHeapMark(Ptr value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern Ptr  LMGetStackLowPoint(void);
+extern Ptr  LMGetStackLowPoint(void)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3858,7 +3853,7 @@ extern Ptr  LMGetStackLowPoint(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern void  LMSetStackLowPoint(Ptr value);
+extern void  LMSetStackLowPoint(Ptr value)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -3915,7 +3910,7 @@ extern void  LMSetStackLowPoint(Ptr value);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern Ptr  LMGetDiskFormatingHFSDefaults(void);
+extern Ptr  LMGetDiskFormatingHFSDefaults(void)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3926,7 +3921,7 @@ extern Ptr  LMGetDiskFormatingHFSDefaults(void);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern void  LMSetDiskFormatingHFSDefaults(Ptr value);
+extern void  LMSetDiskFormatingHFSDefaults(Ptr value)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -3996,13 +3991,7 @@ extern void  LMSetDiskFormatingHFSDefaults(Ptr value);
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

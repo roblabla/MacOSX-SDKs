@@ -1,5 +1,5 @@
 /*	NSPort.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -79,8 +79,7 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
     id _delegate;
     void *_tickler;
     int _machPort;
-    BOOL _isValid;
-    BOOL _reserved[3];
+    unsigned _reserved;
 }
 
 + (NSPort *)portWithMachPort:(int)machPort;
@@ -130,7 +129,7 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
     id _lock;
     unsigned _maxSize;
     unsigned _maxSockets;
-    void *_reserved;
+    unsigned _reserved;
 }
 
 - (id)init;

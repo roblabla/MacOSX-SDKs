@@ -1,1 +1,1 @@
-../../../System/Library/Frameworks/Carbon.framework/Frameworks/HIToolbox.framework/Headers/Icons.h
+../../../System/Library/Frameworks/ApplicationServices.framework/Frameworks/HIServices.framework/Headers/Icons.h

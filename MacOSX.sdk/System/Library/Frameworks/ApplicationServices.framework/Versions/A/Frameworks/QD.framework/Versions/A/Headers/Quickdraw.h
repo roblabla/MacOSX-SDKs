@@ -3,9 +3,9 @@
  
      Contains:   Interface to Quickdraw Graphics
  
-     Version:    Quickdraw-64.6.15~3
+     Version:    Quickdraw-96.21~1
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,17 +16,8 @@
 #ifndef __QUICKDRAW__
 #define __QUICKDRAW__
 
-#ifndef __COMPONENTS__
-#include <CarbonCore/Components.h>
-#endif
-
-
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __MIXEDMODE__
-#include <CarbonCore/MixedMode.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __QUICKDRAWTEXT__
@@ -42,6 +33,7 @@
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -51,13 +43,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   invalColReq                   = -1    /*invalid color table request*/
@@ -140,6 +126,7 @@ enum {
 
 enum {
   interlacedDevice              = 2,    /* 1 if single pixel lines look bad */
+  hwMirroredDevice              = 4,    /* 1 if device is HW mirrored */
   roundedDevice                 = 5,    /* 1 if device has been “rounded” into the GrayRgn */
   hasAuxMenuBar                 = 6,    /* 1 if device has an aux menu bar on it */
   burstDevice                   = 7,
@@ -373,7 +360,7 @@ typedef QDProcs *                       QDProcsPtr;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QDTextUPP
-NewQDTextUPP(QDTextProcPtr userRoutine);
+NewQDTextUPP(QDTextProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQDLineUPP()
@@ -384,7 +371,7 @@ NewQDTextUPP(QDTextProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QDLineUPP
-NewQDLineUPP(QDLineProcPtr userRoutine);
+NewQDLineUPP(QDLineProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQDRectUPP()
@@ -395,7 +382,7 @@ NewQDLineUPP(QDLineProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QDRectUPP
-NewQDRectUPP(QDRectProcPtr userRoutine);
+NewQDRectUPP(QDRectProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQDRRectUPP()
@@ -406,7 +393,7 @@ NewQDRectUPP(QDRectProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QDRRectUPP
-NewQDRRectUPP(QDRRectProcPtr userRoutine);
+NewQDRRectUPP(QDRRectProcPtr userRoutine)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQDOvalUPP()
@@ -417,7 +404,7 @@ NewQDRRectUPP(QDRRectProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QDOvalUPP
-NewQDOvalUPP(QDOvalProcPtr userRoutine);
+NewQDOvalUPP(QDOvalProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQDArcUPP()
@@ -428,7 +415,7 @@ NewQDOvalUPP(QDOvalProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QDArcUPP
-NewQDArcUPP(QDArcProcPtr userRoutine);
+NewQDArcUPP(QDArcProcPtr userRoutine)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQDPolyUPP()
@@ -439,7 +426,7 @@ NewQDArcUPP(QDArcProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QDPolyUPP
-NewQDPolyUPP(QDPolyProcPtr userRoutine);
+NewQDPolyUPP(QDPolyProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQDRgnUPP()
@@ -450,7 +437,7 @@ NewQDPolyUPP(QDPolyProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QDRgnUPP
-NewQDRgnUPP(QDRgnProcPtr userRoutine);
+NewQDRgnUPP(QDRgnProcPtr userRoutine)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQDBitsUPP()
@@ -461,7 +448,7 @@ NewQDRgnUPP(QDRgnProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QDBitsUPP
-NewQDBitsUPP(QDBitsProcPtr userRoutine);
+NewQDBitsUPP(QDBitsProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQDCommentUPP()
@@ -472,7 +459,7 @@ NewQDBitsUPP(QDBitsProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QDCommentUPP
-NewQDCommentUPP(QDCommentProcPtr userRoutine);
+NewQDCommentUPP(QDCommentProcPtr userRoutine)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQDTxMeasUPP()
@@ -483,7 +470,7 @@ NewQDCommentUPP(QDCommentProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QDTxMeasUPP
-NewQDTxMeasUPP(QDTxMeasProcPtr userRoutine);
+NewQDTxMeasUPP(QDTxMeasProcPtr userRoutine)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQDGetPicUPP()
@@ -494,7 +481,7 @@ NewQDTxMeasUPP(QDTxMeasProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QDGetPicUPP
-NewQDGetPicUPP(QDGetPicProcPtr userRoutine);
+NewQDGetPicUPP(QDGetPicProcPtr userRoutine)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQDPutPicUPP()
@@ -505,7 +492,7 @@ NewQDGetPicUPP(QDGetPicProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QDPutPicUPP
-NewQDPutPicUPP(QDPutPicProcPtr userRoutine);
+NewQDPutPicUPP(QDPutPicProcPtr userRoutine)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQDOpcodeUPP()
@@ -516,7 +503,7 @@ NewQDPutPicUPP(QDPutPicProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QDOpcodeUPP
-NewQDOpcodeUPP(QDOpcodeProcPtr userRoutine);
+NewQDOpcodeUPP(QDOpcodeProcPtr userRoutine)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQDStdGlyphsUPP()
@@ -527,7 +514,7 @@ NewQDOpcodeUPP(QDOpcodeProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QDStdGlyphsUPP
-NewQDStdGlyphsUPP(QDStdGlyphsProcPtr userRoutine);
+NewQDStdGlyphsUPP(QDStdGlyphsProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQDJShieldCursorUPP()
@@ -538,7 +525,7 @@ NewQDStdGlyphsUPP(QDStdGlyphsProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QDJShieldCursorUPP
-NewQDJShieldCursorUPP(QDJShieldCursorProcPtr userRoutine);
+NewQDJShieldCursorUPP(QDJShieldCursorProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQDTextUPP()
@@ -549,7 +536,7 @@ NewQDJShieldCursorUPP(QDJShieldCursorProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQDTextUPP(QDTextUPP userUPP);
+DisposeQDTextUPP(QDTextUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQDLineUPP()
@@ -560,7 +547,7 @@ DisposeQDTextUPP(QDTextUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQDLineUPP(QDLineUPP userUPP);
+DisposeQDLineUPP(QDLineUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQDRectUPP()
@@ -571,7 +558,7 @@ DisposeQDLineUPP(QDLineUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQDRectUPP(QDRectUPP userUPP);
+DisposeQDRectUPP(QDRectUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQDRRectUPP()
@@ -582,7 +569,7 @@ DisposeQDRectUPP(QDRectUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQDRRectUPP(QDRRectUPP userUPP);
+DisposeQDRRectUPP(QDRRectUPP userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQDOvalUPP()
@@ -593,7 +580,7 @@ DisposeQDRRectUPP(QDRRectUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQDOvalUPP(QDOvalUPP userUPP);
+DisposeQDOvalUPP(QDOvalUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQDArcUPP()
@@ -604,7 +591,7 @@ DisposeQDOvalUPP(QDOvalUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQDArcUPP(QDArcUPP userUPP);
+DisposeQDArcUPP(QDArcUPP userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQDPolyUPP()
@@ -615,7 +602,7 @@ DisposeQDArcUPP(QDArcUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQDPolyUPP(QDPolyUPP userUPP);
+DisposeQDPolyUPP(QDPolyUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQDRgnUPP()
@@ -626,7 +613,7 @@ DisposeQDPolyUPP(QDPolyUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQDRgnUPP(QDRgnUPP userUPP);
+DisposeQDRgnUPP(QDRgnUPP userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQDBitsUPP()
@@ -637,7 +624,7 @@ DisposeQDRgnUPP(QDRgnUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQDBitsUPP(QDBitsUPP userUPP);
+DisposeQDBitsUPP(QDBitsUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQDCommentUPP()
@@ -648,7 +635,7 @@ DisposeQDBitsUPP(QDBitsUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQDCommentUPP(QDCommentUPP userUPP);
+DisposeQDCommentUPP(QDCommentUPP userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQDTxMeasUPP()
@@ -659,7 +646,7 @@ DisposeQDCommentUPP(QDCommentUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQDTxMeasUPP(QDTxMeasUPP userUPP);
+DisposeQDTxMeasUPP(QDTxMeasUPP userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQDGetPicUPP()
@@ -670,7 +657,7 @@ DisposeQDTxMeasUPP(QDTxMeasUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQDGetPicUPP(QDGetPicUPP userUPP);
+DisposeQDGetPicUPP(QDGetPicUPP userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQDPutPicUPP()
@@ -681,7 +668,7 @@ DisposeQDGetPicUPP(QDGetPicUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQDPutPicUPP(QDPutPicUPP userUPP);
+DisposeQDPutPicUPP(QDPutPicUPP userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQDOpcodeUPP()
@@ -692,7 +679,7 @@ DisposeQDPutPicUPP(QDPutPicUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQDOpcodeUPP(QDOpcodeUPP userUPP);
+DisposeQDOpcodeUPP(QDOpcodeUPP userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQDStdGlyphsUPP()
@@ -703,7 +690,7 @@ DisposeQDOpcodeUPP(QDOpcodeUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQDStdGlyphsUPP(QDStdGlyphsUPP userUPP);
+DisposeQDStdGlyphsUPP(QDStdGlyphsUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQDJShieldCursorUPP()
@@ -714,7 +701,7 @@ DisposeQDStdGlyphsUPP(QDStdGlyphsUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQDJShieldCursorUPP(QDJShieldCursorUPP userUPP);
+DisposeQDJShieldCursorUPP(QDJShieldCursorUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQDTextUPP()
@@ -730,7 +717,7 @@ InvokeQDTextUPP(
   const void *  textBuf,
   Point         numer,
   Point         denom,
-  QDTextUPP     userUPP);
+  QDTextUPP     userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQDLineUPP()
@@ -743,7 +730,7 @@ InvokeQDTextUPP(
 extern void
 InvokeQDLineUPP(
   Point      newPt,
-  QDLineUPP  userUPP);
+  QDLineUPP  userUPP)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQDRectUPP()
@@ -757,7 +744,7 @@ extern void
 InvokeQDRectUPP(
   GrafVerb      verb,
   const Rect *  r,
-  QDRectUPP     userUPP);
+  QDRectUPP     userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQDRRectUPP()
@@ -773,7 +760,7 @@ InvokeQDRRectUPP(
   const Rect *  r,
   short         ovalWidth,
   short         ovalHeight,
-  QDRRectUPP    userUPP);
+  QDRRectUPP    userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQDOvalUPP()
@@ -787,7 +774,7 @@ extern void
 InvokeQDOvalUPP(
   GrafVerb      verb,
   const Rect *  r,
-  QDOvalUPP     userUPP);
+  QDOvalUPP     userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQDArcUPP()
@@ -803,7 +790,7 @@ InvokeQDArcUPP(
   const Rect *  r,
   short         startAngle,
   short         arcAngle,
-  QDArcUPP      userUPP);
+  QDArcUPP      userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQDPolyUPP()
@@ -817,7 +804,7 @@ extern void
 InvokeQDPolyUPP(
   GrafVerb    verb,
   PolyHandle  poly,
-  QDPolyUPP   userUPP);
+  QDPolyUPP   userUPP)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQDRgnUPP()
@@ -831,7 +818,7 @@ extern void
 InvokeQDRgnUPP(
   GrafVerb   verb,
   RgnHandle  rgn,
-  QDRgnUPP   userUPP);
+  QDRgnUPP   userUPP)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQDBitsUPP()
@@ -848,7 +835,7 @@ InvokeQDBitsUPP(
   const Rect *    dstRect,
   short           mode,
   RgnHandle       maskRgn,
-  QDBitsUPP       userUPP);
+  QDBitsUPP       userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQDCommentUPP()
@@ -863,7 +850,7 @@ InvokeQDCommentUPP(
   short         kind,
   short         dataSize,
   Handle        dataHandle,
-  QDCommentUPP  userUPP);
+  QDCommentUPP  userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQDTxMeasUPP()
@@ -880,7 +867,7 @@ InvokeQDTxMeasUPP(
   Point *       numer,
   Point *       denom,
   FontInfo *    info,
-  QDTxMeasUPP   userUPP);
+  QDTxMeasUPP   userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQDGetPicUPP()
@@ -894,7 +881,7 @@ extern void
 InvokeQDGetPicUPP(
   void *       dataPtr,
   short        byteCount,
-  QDGetPicUPP  userUPP);
+  QDGetPicUPP  userUPP)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQDPutPicUPP()
@@ -908,7 +895,7 @@ extern void
 InvokeQDPutPicUPP(
   const void *  dataPtr,
   short         byteCount,
-  QDPutPicUPP   userUPP);
+  QDPutPicUPP   userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQDOpcodeUPP()
@@ -924,7 +911,7 @@ InvokeQDOpcodeUPP(
   const Rect *  toRect,
   UInt16        opcode,
   SInt16        version,
-  QDOpcodeUPP   userUPP);
+  QDOpcodeUPP   userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQDStdGlyphsUPP()
@@ -938,7 +925,7 @@ extern OSStatus
 InvokeQDStdGlyphsUPP(
   void *          dataStream,
   ByteCount       size,
-  QDStdGlyphsUPP  userUPP);
+  QDStdGlyphsUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQDJShieldCursorUPP()
@@ -954,7 +941,7 @@ InvokeQDJShieldCursorUPP(
   short               top,
   short               right,
   short               bottom,
-  QDJShieldCursorUPP  userUPP);
+  QDJShieldCursorUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 #if !OPAQUE_TOOLBOX_STRUCTS
 struct GrafPort {
@@ -1039,7 +1026,7 @@ typedef STACK_UPP_TYPE(ColorComplementProcPtr)                  ColorComplementU
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DragGrayRgnUPP
-NewDragGrayRgnUPP(DragGrayRgnProcPtr userRoutine);
+NewDragGrayRgnUPP(DragGrayRgnProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewColorSearchUPP()
@@ -1050,7 +1037,7 @@ NewDragGrayRgnUPP(DragGrayRgnProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ColorSearchUPP
-NewColorSearchUPP(ColorSearchProcPtr userRoutine);
+NewColorSearchUPP(ColorSearchProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewColorComplementUPP()
@@ -1061,7 +1048,7 @@ NewColorSearchUPP(ColorSearchProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ColorComplementUPP
-NewColorComplementUPP(ColorComplementProcPtr userRoutine);
+NewColorComplementUPP(ColorComplementProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDragGrayRgnUPP()
@@ -1072,7 +1059,7 @@ NewColorComplementUPP(ColorComplementProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDragGrayRgnUPP(DragGrayRgnUPP userUPP);
+DisposeDragGrayRgnUPP(DragGrayRgnUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeColorSearchUPP()
@@ -1083,7 +1070,7 @@ DisposeDragGrayRgnUPP(DragGrayRgnUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeColorSearchUPP(ColorSearchUPP userUPP);
+DisposeColorSearchUPP(ColorSearchUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeColorComplementUPP()
@@ -1094,7 +1081,7 @@ DisposeColorSearchUPP(ColorSearchUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeColorComplementUPP(ColorComplementUPP userUPP);
+DisposeColorComplementUPP(ColorComplementUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDragGrayRgnUPP()
@@ -1105,7 +1092,7 @@ DisposeColorComplementUPP(ColorComplementUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-InvokeDragGrayRgnUPP(DragGrayRgnUPP userUPP);
+InvokeDragGrayRgnUPP(DragGrayRgnUPP userUPP)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeColorSearchUPP()
@@ -1119,7 +1106,7 @@ extern Boolean
 InvokeColorSearchUPP(
   RGBColor *      rgb,
   long *          position,
-  ColorSearchUPP  userUPP);
+  ColorSearchUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeColorComplementUPP()
@@ -1132,7 +1119,7 @@ InvokeColorSearchUPP(
 extern Boolean
 InvokeColorComplementUPP(
   RGBColor *          rgb,
-  ColorComplementUPP  userUPP);
+  ColorComplementUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 struct ColorSpec {
   short               value;                  /*index or other value*/
@@ -1502,7 +1489,7 @@ typedef STACK_UPP_TYPE(DeviceLoopDrawingProcPtr)                DeviceLoopDrawin
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DeviceLoopDrawingUPP
-NewDeviceLoopDrawingUPP(DeviceLoopDrawingProcPtr userRoutine);
+NewDeviceLoopDrawingUPP(DeviceLoopDrawingProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQDPrinterStatusUPP()
@@ -1522,7 +1509,7 @@ NewDeviceLoopDrawingUPP(DeviceLoopDrawingProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDeviceLoopDrawingUPP(DeviceLoopDrawingUPP userUPP);
+DisposeDeviceLoopDrawingUPP(DeviceLoopDrawingUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQDPrinterStatusUPP()
@@ -1547,7 +1534,7 @@ InvokeDeviceLoopDrawingUPP(
   short                 deviceFlags,
   GDHandle              targetDevice,
   long                  userData,
-  DeviceLoopDrawingUPP  userUPP);
+  DeviceLoopDrawingUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 #if !OPAQUE_TOOLBOX_STRUCTS || !TARGET_API_MAC_CARBON
 struct QDGlobals {
@@ -1622,7 +1609,7 @@ extern QDGlobals qd;
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
-LockPortBits(GrafPtr port);
+LockPortBits(GrafPtr port)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1634,7 +1621,7 @@ LockPortBits(GrafPtr port);
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
-UnlockPortBits(GrafPtr port);
+UnlockPortBits(GrafPtr port)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Break a region up into rectangles.*/
@@ -1666,7 +1653,7 @@ typedef STACK_UPP_TYPE(RegionToRectsProcPtr)                    RegionToRectsUPP
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern RegionToRectsUPP
-NewRegionToRectsUPP(RegionToRectsProcPtr userRoutine);
+NewRegionToRectsUPP(RegionToRectsProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeRegionToRectsUPP()
@@ -1677,7 +1664,7 @@ NewRegionToRectsUPP(RegionToRectsProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeRegionToRectsUPP(RegionToRectsUPP userUPP);
+DisposeRegionToRectsUPP(RegionToRectsUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeRegionToRectsUPP()
@@ -1693,7 +1680,7 @@ InvokeRegionToRectsUPP(
   RgnHandle         rgn,
   const Rect *      rect,
   void *            refCon,
-  RegionToRectsUPP  userUPP);
+  RegionToRectsUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  QDRegionToRects()
@@ -1708,7 +1695,7 @@ QDRegionToRects(
   RgnHandle                rgn,
   QDRegionParseDirection   dir,
   RegionToRectsUPP         proc,
-  void *                   userData);
+  void *                   userData)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #if TARGET_OS_WIN32
@@ -1808,7 +1795,7 @@ QDRegionToRects(
     #define MacSetPort SetPort
 #endif
 extern void 
-MacSetPort(GrafPtr port);
+MacSetPort(GrafPtr port)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1820,21 +1807,45 @@ MacSetPort(GrafPtr port);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GetPort(GrafPtr * port);
+GetPort(GrafPtr * port)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  QDSwapPort()
  *  
+ *  Summary:
+ *    Combines a GetPort(&savePort); SetPort(newPort) sequence.
+ *  
+ *  Discussion:
+ *    On X, the GetPort/SetPort calls act on per-thread globals, and
+ *    cost more processor cycles than in the past, where they were
+ *    simple memory accessors. To optimize, use the QDSwapPort call
+ *    which combines both, and returns a Boolean indicating if the port
+ *    actually did change. Typical usage: portChanged =
+ *    QDSwapPort(newPort, &savePort); // some drawing into newPort if
+ *    (portChanged) QDSwapPort(savePort, NULL);
+ *  
+ *  Parameters:
+ *    
+ *    inNewPort:
+ *      The new port to be set.
+ *    
+ *    outOldPort:
+ *      Receives the previous port. Can be NULL.
+ *  
+ *  Result:
+ *    A Boolean indicating whether the port was changed, i.e.
+ *    (inNewPort != *outOldPort)
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
 QDSwapPort(
   CGrafPtr    inNewPort,
-  CGrafPtr *  outOldPort);
+  CGrafPtr *  outOldPort)                                     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -1846,7 +1857,7 @@ QDSwapPort(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GrafDevice(short device);
+GrafDevice(short device)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1858,7 +1869,7 @@ GrafDevice(short device);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetPortBits(const BitMap * bm);
+SetPortBits(const BitMap * bm)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1872,7 +1883,7 @@ SetPortBits(const BitMap * bm);
 extern void 
 PortSize(
   short   width,
-  short   height);
+  short   height)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1886,7 +1897,7 @@ PortSize(
 extern void 
 MovePortTo(
   short   leftGlobal,
-  short   topGlobal);
+  short   topGlobal)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1900,7 +1911,7 @@ MovePortTo(
 extern void 
 SetOrigin(
   short   h,
-  short   v);
+  short   v)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1912,7 +1923,7 @@ SetOrigin(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetClip(RgnHandle rgn);
+SetClip(RgnHandle rgn)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1924,7 +1935,7 @@ SetClip(RgnHandle rgn);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GetClip(RgnHandle rgn);
+GetClip(RgnHandle rgn)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1936,7 +1947,7 @@ GetClip(RgnHandle rgn);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ClipRect(const Rect * r);
+ClipRect(const Rect * r)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1948,7 +1959,7 @@ ClipRect(const Rect * r);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-BackPat(const Pattern * pat);
+BackPat(const Pattern * pat)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1960,7 +1971,7 @@ BackPat(const Pattern * pat);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-InitCursor(void);
+InitCursor(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1975,7 +1986,7 @@ InitCursor(void);
     #define MacSetCursor SetCursor
 #endif
 extern void 
-MacSetCursor(const Cursor * crsr);
+MacSetCursor(const Cursor * crsr)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1987,7 +1998,7 @@ MacSetCursor(const Cursor * crsr);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HideCursor(void);
+HideCursor(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2002,7 +2013,7 @@ HideCursor(void);
     #define MacShowCursor ShowCursor
 #endif
 extern void 
-MacShowCursor(void);
+MacShowCursor(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2014,7 +2025,7 @@ MacShowCursor(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ObscureCursor(void);
+ObscureCursor(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2026,7 +2037,7 @@ ObscureCursor(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HidePen(void);
+HidePen(void)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2038,7 +2049,7 @@ HidePen(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ShowPen(void);
+ShowPen(void)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2050,7 +2061,7 @@ ShowPen(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GetPen(Point * pt);
+GetPen(Point * pt)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2062,7 +2073,7 @@ GetPen(Point * pt);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GetPenState(PenState * pnState);
+GetPenState(PenState * pnState)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2074,7 +2085,7 @@ GetPenState(PenState * pnState);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetPenState(const PenState * pnState);
+SetPenState(const PenState * pnState)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2088,7 +2099,7 @@ SetPenState(const PenState * pnState);
 extern void 
 PenSize(
   short   width,
-  short   height);
+  short   height)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2100,7 +2111,7 @@ PenSize(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-PenMode(short mode);
+PenMode(short mode)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2112,7 +2123,7 @@ PenMode(short mode);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-PenPat(const Pattern * pat);
+PenPat(const Pattern * pat)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2124,7 +2135,7 @@ PenPat(const Pattern * pat);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-PenNormal(void);
+PenNormal(void)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2138,7 +2149,7 @@ PenNormal(void);
 extern void 
 MoveTo(
   short   h,
-  short   v);
+  short   v)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2152,7 +2163,7 @@ MoveTo(
 extern void 
 Move(
   short   dh,
-  short   dv);
+  short   dv)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2169,7 +2180,7 @@ Move(
 extern void 
 MacLineTo(
   short   h,
-  short   v);
+  short   v)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2183,7 +2194,7 @@ MacLineTo(
 extern void 
 Line(
   short   dh,
-  short   dv);
+  short   dv)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2195,7 +2206,7 @@ Line(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ForeColor(long color);
+ForeColor(long color)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2207,7 +2218,7 @@ ForeColor(long color);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-BackColor(long color);
+BackColor(long color)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2219,7 +2230,7 @@ BackColor(long color);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ColorBit(short whichBit);
+ColorBit(short whichBit)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2239,7 +2250,7 @@ MacSetRect(
   short   left,
   short   top,
   short   right,
-  short   bottom);
+  short   bottom)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2257,7 +2268,7 @@ extern void
 MacOffsetRect(
   Rect *  r,
   short   dh,
-  short   dv);
+  short   dv)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2275,7 +2286,7 @@ extern void
 MacInsetRect(
   Rect *  r,
   short   dh,
-  short   dv);
+  short   dv)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2290,7 +2301,7 @@ extern Boolean
 SectRect(
   const Rect *  src1,
   const Rect *  src2,
-  Rect *        dstRect);
+  Rect *        dstRect)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2308,7 +2319,7 @@ extern void
 MacUnionRect(
   const Rect *  src1,
   const Rect *  src2,
-  Rect *        dstRect);
+  Rect *        dstRect)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2325,7 +2336,7 @@ MacUnionRect(
 extern Boolean 
 MacEqualRect(
   const Rect *  rect1,
-  const Rect *  rect2);
+  const Rect *  rect2)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2337,7 +2348,7 @@ MacEqualRect(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
-EmptyRect(const Rect * r);
+EmptyRect(const Rect * r)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2352,7 +2363,7 @@ EmptyRect(const Rect * r);
     #define MacFrameRect FrameRect
 #endif
 extern void 
-MacFrameRect(const Rect * r);
+MacFrameRect(const Rect * r)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2364,7 +2375,7 @@ MacFrameRect(const Rect * r);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-PaintRect(const Rect * r);
+PaintRect(const Rect * r)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2376,7 +2387,7 @@ PaintRect(const Rect * r);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-EraseRect(const Rect * r);
+EraseRect(const Rect * r)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2391,7 +2402,7 @@ EraseRect(const Rect * r);
     #define MacInvertRect InvertRect
 #endif
 extern void 
-MacInvertRect(const Rect * r);
+MacInvertRect(const Rect * r)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2408,7 +2419,7 @@ MacInvertRect(const Rect * r);
 extern void 
 MacFillRect(
   const Rect *     r,
-  const Pattern *  pat);
+  const Pattern *  pat)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2420,7 +2431,7 @@ MacFillRect(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-FrameOval(const Rect * r);
+FrameOval(const Rect * r)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2432,7 +2443,7 @@ FrameOval(const Rect * r);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-PaintOval(const Rect * r);
+PaintOval(const Rect * r)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2444,7 +2455,7 @@ PaintOval(const Rect * r);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-EraseOval(const Rect * r);
+EraseOval(const Rect * r)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2456,7 +2467,7 @@ EraseOval(const Rect * r);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-InvertOval(const Rect * r);
+InvertOval(const Rect * r)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2470,7 +2481,7 @@ InvertOval(const Rect * r);
 extern void 
 FillOval(
   const Rect *     r,
-  const Pattern *  pat);
+  const Pattern *  pat)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2485,7 +2496,7 @@ extern void
 FrameRoundRect(
   const Rect *  r,
   short         ovalWidth,
-  short         ovalHeight);
+  short         ovalHeight)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2500,7 +2511,7 @@ extern void
 PaintRoundRect(
   const Rect *  r,
   short         ovalWidth,
-  short         ovalHeight);
+  short         ovalHeight)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2515,7 +2526,7 @@ extern void
 EraseRoundRect(
   const Rect *  r,
   short         ovalWidth,
-  short         ovalHeight);
+  short         ovalHeight)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2530,7 +2541,7 @@ extern void
 InvertRoundRect(
   const Rect *  r,
   short         ovalWidth,
-  short         ovalHeight);
+  short         ovalHeight)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2546,7 +2557,7 @@ FillRoundRect(
   const Rect *     r,
   short            ovalWidth,
   short            ovalHeight,
-  const Pattern *  pat);
+  const Pattern *  pat)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2561,7 +2572,7 @@ extern void
 FrameArc(
   const Rect *  r,
   short         startAngle,
-  short         arcAngle);
+  short         arcAngle)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2576,7 +2587,7 @@ extern void
 PaintArc(
   const Rect *  r,
   short         startAngle,
-  short         arcAngle);
+  short         arcAngle)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2591,7 +2602,7 @@ extern void
 EraseArc(
   const Rect *  r,
   short         startAngle,
-  short         arcAngle);
+  short         arcAngle)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2606,7 +2617,7 @@ extern void
 InvertArc(
   const Rect *  r,
   short         startAngle,
-  short         arcAngle);
+  short         arcAngle)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2622,7 +2633,7 @@ FillArc(
   const Rect *     r,
   short            startAngle,
   short            arcAngle,
-  const Pattern *  pat);
+  const Pattern *  pat)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2634,7 +2645,7 @@ FillArc(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern RgnHandle 
-NewRgn(void);
+NewRgn(void)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2646,7 +2657,7 @@ NewRgn(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-OpenRgn(void);
+OpenRgn(void)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2658,7 +2669,7 @@ OpenRgn(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-CloseRgn(RgnHandle dstRgn);
+CloseRgn(RgnHandle dstRgn)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2672,7 +2683,7 @@ CloseRgn(RgnHandle dstRgn);
 extern OSErr 
 BitMapToRegion(
   RgnHandle       region,
-  const BitMap *  bMap);
+  const BitMap *  bMap)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2686,7 +2697,7 @@ BitMapToRegion(
 extern void 
 HandleToRgn(
   Handle      oldRegion,
-  RgnHandle   region);
+  RgnHandle   region)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2700,7 +2711,7 @@ HandleToRgn(
 extern void 
 RgnToHandle(
   RgnHandle   region,
-  Handle      flattenedRgnDataHdl);
+  Handle      flattenedRgnDataHdl)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -2712,7 +2723,7 @@ RgnToHandle(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DisposeRgn(RgnHandle rgn);
+DisposeRgn(RgnHandle rgn)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2729,7 +2740,7 @@ DisposeRgn(RgnHandle rgn);
 extern void 
 MacCopyRgn(
   RgnHandle   srcRgn,
-  RgnHandle   dstRgn);
+  RgnHandle   dstRgn)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2741,7 +2752,7 @@ MacCopyRgn(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetEmptyRgn(RgnHandle rgn);
+SetEmptyRgn(RgnHandle rgn)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2761,7 +2772,7 @@ MacSetRectRgn(
   short       left,
   short       top,
   short       right,
-  short       bottom);
+  short       bottom)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2775,7 +2786,7 @@ MacSetRectRgn(
 extern void 
 RectRgn(
   RgnHandle     rgn,
-  const Rect *  r);
+  const Rect *  r)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2793,7 +2804,7 @@ extern void
 MacOffsetRgn(
   RgnHandle   rgn,
   short       dh,
-  short       dv);
+  short       dv)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2808,7 +2819,7 @@ extern void
 InsetRgn(
   RgnHandle   rgn,
   short       dh,
-  short       dv);
+  short       dv)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2823,7 +2834,7 @@ extern void
 SectRgn(
   RgnHandle   srcRgnA,
   RgnHandle   srcRgnB,
-  RgnHandle   dstRgn);
+  RgnHandle   dstRgn)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2841,7 +2852,7 @@ extern void
 MacUnionRgn(
   RgnHandle   srcRgnA,
   RgnHandle   srcRgnB,
-  RgnHandle   dstRgn);
+  RgnHandle   dstRgn)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2856,7 +2867,7 @@ extern void
 DiffRgn(
   RgnHandle   srcRgnA,
   RgnHandle   srcRgnB,
-  RgnHandle   dstRgn);
+  RgnHandle   dstRgn)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2874,7 +2885,7 @@ extern void
 MacXorRgn(
   RgnHandle   srcRgnA,
   RgnHandle   srcRgnB,
-  RgnHandle   dstRgn);
+  RgnHandle   dstRgn)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2888,7 +2899,7 @@ MacXorRgn(
 extern Boolean 
 RectInRgn(
   const Rect *  r,
-  RgnHandle     rgn);
+  RgnHandle     rgn)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2905,7 +2916,7 @@ RectInRgn(
 extern Boolean 
 MacEqualRgn(
   RgnHandle   rgnA,
-  RgnHandle   rgnB);
+  RgnHandle   rgnB)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2917,7 +2928,7 @@ MacEqualRgn(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
-EmptyRgn(RgnHandle rgn);
+EmptyRgn(RgnHandle rgn)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2932,7 +2943,7 @@ EmptyRgn(RgnHandle rgn);
     #define MacFrameRgn FrameRgn
 #endif
 extern void 
-MacFrameRgn(RgnHandle rgn);
+MacFrameRgn(RgnHandle rgn)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2947,7 +2958,7 @@ MacFrameRgn(RgnHandle rgn);
     #define MacPaintRgn PaintRgn
 #endif
 extern void 
-MacPaintRgn(RgnHandle rgn);
+MacPaintRgn(RgnHandle rgn)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2959,7 +2970,7 @@ MacPaintRgn(RgnHandle rgn);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-EraseRgn(RgnHandle rgn);
+EraseRgn(RgnHandle rgn)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2974,7 +2985,7 @@ EraseRgn(RgnHandle rgn);
     #define MacInvertRgn InvertRgn
 #endif
 extern void 
-MacInvertRgn(RgnHandle rgn);
+MacInvertRgn(RgnHandle rgn)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2991,7 +3002,7 @@ MacInvertRgn(RgnHandle rgn);
 extern void 
 MacFillRgn(
   RgnHandle        rgn,
-  const Pattern *  pat);
+  const Pattern *  pat)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3007,7 +3018,7 @@ ScrollRect(
   const Rect *  r,
   short         dh,
   short         dv,
-  RgnHandle     updateRgn);
+  RgnHandle     updateRgn)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3025,7 +3036,7 @@ CopyBits(
   const Rect *    srcRect,
   const Rect *    dstRect,
   short           mode,
-  RgnHandle       maskRgn);      /* can be NULL */
+  RgnHandle       maskRgn)       /* can be NULL */            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3045,7 +3056,7 @@ SeedFill(
   short         height,
   short         words,
   short         seedH,
-  short         seedV);
+  short         seedV)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3063,7 +3074,7 @@ CalcMask(
   short         srcRow,
   short         dstRow,
   short         height,
-  short         words);
+  short         words)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3081,7 +3092,7 @@ CopyMask(
   const BitMap *  dstBits,
   const Rect *    srcRect,
   const Rect *    maskRect,
-  const Rect *    dstRect);
+  const Rect *    dstRect)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3093,7 +3104,7 @@ CopyMask(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern PicHandle 
-OpenPicture(const Rect * picFrame);
+OpenPicture(const Rect * picFrame)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3108,7 +3119,7 @@ extern void
 PicComment(
   short    kind,
   short    dataSize,
-  Handle   dataHandle);
+  Handle   dataHandle)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3120,7 +3131,7 @@ PicComment(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ClosePicture(void);
+ClosePicture(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3134,7 +3145,7 @@ ClosePicture(void);
 extern void 
 DrawPicture(
   PicHandle     myPicture,
-  const Rect *  dstRect);
+  const Rect *  dstRect)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3146,7 +3157,7 @@ DrawPicture(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-KillPicture(PicHandle myPicture);
+KillPicture(PicHandle myPicture)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3158,7 +3169,7 @@ KillPicture(PicHandle myPicture);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern PolyHandle 
-OpenPoly(void);
+OpenPoly(void)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3170,7 +3181,7 @@ OpenPoly(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ClosePoly(void);
+ClosePoly(void)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3182,7 +3193,7 @@ ClosePoly(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-KillPoly(PolyHandle poly);
+KillPoly(PolyHandle poly)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3197,7 +3208,7 @@ extern void
 OffsetPoly(
   PolyHandle   poly,
   short        dh,
-  short        dv);
+  short        dv)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3209,7 +3220,7 @@ OffsetPoly(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-FramePoly(PolyHandle poly);
+FramePoly(PolyHandle poly)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3221,7 +3232,7 @@ FramePoly(PolyHandle poly);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-PaintPoly(PolyHandle poly);
+PaintPoly(PolyHandle poly)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3233,7 +3244,7 @@ PaintPoly(PolyHandle poly);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ErasePoly(PolyHandle poly);
+ErasePoly(PolyHandle poly)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3245,7 +3256,7 @@ ErasePoly(PolyHandle poly);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-InvertPoly(PolyHandle poly);
+InvertPoly(PolyHandle poly)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3259,7 +3270,7 @@ InvertPoly(PolyHandle poly);
 extern void 
 FillPoly(
   PolyHandle       poly,
-  const Pattern *  pat);
+  const Pattern *  pat)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3274,7 +3285,7 @@ extern void
 SetPt(
   Point *  pt,
   short    h,
-  short    v);
+  short    v)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3286,7 +3297,7 @@ SetPt(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LocalToGlobal(Point * pt);
+LocalToGlobal(Point * pt)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3298,7 +3309,7 @@ LocalToGlobal(Point * pt);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GlobalToLocal(Point * pt);
+GlobalToLocal(Point * pt)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3310,7 +3321,7 @@ GlobalToLocal(Point * pt);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-Random(void);
+Random(void)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3324,7 +3335,7 @@ Random(void);
 extern void 
 StuffHex(
   void *             thingPtr,
-  ConstStr255Param   s);
+  ConstStr255Param   s)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3341,7 +3352,7 @@ StuffHex(
 extern Boolean 
 MacGetPixel(
   short   h,
-  short   v);
+  short   v)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3356,7 +3367,7 @@ extern void
 ScalePt(
   Point *       pt,
   const Rect *  srcRect,
-  const Rect *  dstRect);
+  const Rect *  dstRect)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3371,7 +3382,7 @@ extern void
 MapPt(
   Point *       pt,
   const Rect *  srcRect,
-  const Rect *  dstRect);
+  const Rect *  dstRect)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3386,7 +3397,7 @@ extern void
 MapRect(
   Rect *        r,
   const Rect *  srcRect,
-  const Rect *  dstRect);
+  const Rect *  dstRect)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3401,7 +3412,7 @@ extern void
 MapRgn(
   RgnHandle     rgn,
   const Rect *  srcRect,
-  const Rect *  dstRect);
+  const Rect *  dstRect)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3416,7 +3427,7 @@ extern void
 MapPoly(
   PolyHandle    poly,
   const Rect *  srcRect,
-  const Rect *  dstRect);
+  const Rect *  dstRect)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3428,7 +3439,7 @@ MapPoly(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetStdProcs(QDProcs * procs);
+SetStdProcs(QDProcs * procs)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3442,7 +3453,7 @@ SetStdProcs(QDProcs * procs);
 extern void 
 StdRect(
   GrafVerb      verb,
-  const Rect *  r);
+  const Rect *  r)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3458,7 +3469,7 @@ StdRRect(
   GrafVerb      verb,
   const Rect *  r,
   short         ovalWidth,
-  short         ovalHeight);
+  short         ovalHeight)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3472,7 +3483,7 @@ StdRRect(
 extern void 
 StdOval(
   GrafVerb      verb,
-  const Rect *  r);
+  const Rect *  r)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3488,7 +3499,7 @@ StdArc(
   GrafVerb      verb,
   const Rect *  r,
   short         startAngle,
-  short         arcAngle);
+  short         arcAngle)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3502,7 +3513,7 @@ StdArc(
 extern void 
 StdPoly(
   GrafVerb     verb,
-  PolyHandle   poly);
+  PolyHandle   poly)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3516,7 +3527,7 @@ StdPoly(
 extern void 
 StdRgn(
   GrafVerb    verb,
-  RgnHandle   rgn);
+  RgnHandle   rgn)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3533,7 +3544,7 @@ StdBits(
   const Rect *    srcRect,
   const Rect *    dstRect,
   short           mode,
-  RgnHandle       maskRgn);
+  RgnHandle       maskRgn)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3548,7 +3559,7 @@ extern void
 StdComment(
   short    kind,
   short    dataSize,
-  Handle   dataHandle);
+  Handle   dataHandle)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3562,7 +3573,7 @@ StdComment(
 extern void 
 StdGetPic(
   void *  dataPtr,
-  short   byteCount);
+  short   byteCount)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3576,7 +3587,7 @@ StdGetPic(
 extern void 
 StdPutPic(
   const void *  dataPtr,
-  short         byteCount);
+  short         byteCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3592,7 +3603,7 @@ StdOpcode(
   const Rect *  fromRect,
   const Rect *  toRect,
   UInt16        opcode,
-  SInt16        version);
+  SInt16        version)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3606,7 +3617,7 @@ StdOpcode(
 extern void 
 AddPt(
   Point    src,
-  Point *  dst);
+  Point *  dst)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3620,7 +3631,7 @@ AddPt(
 extern Boolean 
 EqualPt(
   Point   pt1,
-  Point   pt2);
+  Point   pt2)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3637,7 +3648,7 @@ EqualPt(
 extern Boolean 
 MacPtInRect(
   Point         pt,
-  const Rect *  r);
+  const Rect *  r)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3652,7 +3663,7 @@ extern void
 Pt2Rect(
   Point   pt1,
   Point   pt2,
-  Rect *  dstRect);
+  Rect *  dstRect)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3667,7 +3678,7 @@ extern void
 PtToAngle(
   const Rect *  r,
   Point         pt,
-  short *       angle);
+  short *       angle)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3681,7 +3692,7 @@ PtToAngle(
 extern void 
 SubPt(
   Point    src,
-  Point *  dst);
+  Point *  dst)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3695,7 +3706,7 @@ SubPt(
 extern Boolean 
 PtInRgn(
   Point       pt,
-  RgnHandle   rgn);
+  RgnHandle   rgn)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3707,7 +3718,7 @@ PtInRgn(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-StdLine(Point newPt);
+StdLine(Point newPt)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3749,7 +3760,7 @@ StdLine(Point newPt);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern PixMapHandle 
-NewPixMap(void);
+NewPixMap(void)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3761,7 +3772,7 @@ NewPixMap(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DisposePixMap(PixMapHandle pm);
+DisposePixMap(PixMapHandle pm)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3775,7 +3786,7 @@ DisposePixMap(PixMapHandle pm);
 extern void 
 CopyPixMap(
   PixMapHandle   srcPM,
-  PixMapHandle   dstPM);
+  PixMapHandle   dstPM)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3787,7 +3798,7 @@ CopyPixMap(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern PixPatHandle 
-NewPixPat(void);
+NewPixPat(void)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3799,7 +3810,7 @@ NewPixPat(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DisposePixPat(PixPatHandle pp);
+DisposePixPat(PixPatHandle pp)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3813,7 +3824,7 @@ DisposePixPat(PixPatHandle pp);
 extern void 
 CopyPixPat(
   PixPatHandle   srcPP,
-  PixPatHandle   dstPP);
+  PixPatHandle   dstPP)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3825,7 +3836,7 @@ CopyPixPat(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-PenPixPat(PixPatHandle pp);
+PenPixPat(PixPatHandle pp)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3837,7 +3848,7 @@ PenPixPat(PixPatHandle pp);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-BackPixPat(PixPatHandle pp);
+BackPixPat(PixPatHandle pp)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3849,7 +3860,7 @@ BackPixPat(PixPatHandle pp);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern PixPatHandle 
-GetPixPat(short patID);
+GetPixPat(short patID)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3863,7 +3874,7 @@ GetPixPat(short patID);
 extern void 
 MakeRGBPat(
   PixPatHandle      pp,
-  const RGBColor *  myColor);
+  const RGBColor *  myColor)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3877,7 +3888,7 @@ MakeRGBPat(
 extern void 
 FillCRect(
   const Rect *   r,
-  PixPatHandle   pp);
+  PixPatHandle   pp)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3891,7 +3902,7 @@ FillCRect(
 extern void 
 FillCOval(
   const Rect *   r,
-  PixPatHandle   pp);
+  PixPatHandle   pp)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3907,7 +3918,7 @@ FillCRoundRect(
   const Rect *   r,
   short          ovalWidth,
   short          ovalHeight,
-  PixPatHandle   pp);
+  PixPatHandle   pp)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3923,7 +3934,7 @@ FillCArc(
   const Rect *   r,
   short          startAngle,
   short          arcAngle,
-  PixPatHandle   pp);
+  PixPatHandle   pp)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3937,7 +3948,7 @@ FillCArc(
 extern void 
 FillCRgn(
   RgnHandle      rgn,
-  PixPatHandle   pp);
+  PixPatHandle   pp)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3951,7 +3962,7 @@ FillCRgn(
 extern void 
 FillCPoly(
   PolyHandle     poly,
-  PixPatHandle   pp);
+  PixPatHandle   pp)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3963,7 +3974,7 @@ FillCPoly(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-RGBForeColor(const RGBColor * color);
+RGBForeColor(const RGBColor * color)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3975,7 +3986,7 @@ RGBForeColor(const RGBColor * color);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-RGBBackColor(const RGBColor * color);
+RGBBackColor(const RGBColor * color)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3990,7 +4001,7 @@ extern void
 SetCPixel(
   short             h,
   short             v,
-  const RGBColor *  cPix);
+  const RGBColor *  cPix)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4002,7 +4013,7 @@ SetCPixel(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetPortPix(PixMapHandle pm);
+SetPortPix(PixMapHandle pm)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4017,7 +4028,7 @@ extern void
 GetCPixel(
   short       h,
   short       v,
-  RGBColor *  cPix);
+  RGBColor *  cPix)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4029,7 +4040,7 @@ GetCPixel(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GetForeColor(RGBColor * color);
+GetForeColor(RGBColor * color)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4041,7 +4052,7 @@ GetForeColor(RGBColor * color);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GetBackColor(RGBColor * color);
+GetBackColor(RGBColor * color)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4061,7 +4072,7 @@ SeedCFill(
   short            seedH,
   short            seedV,
   ColorSearchUPP   matchProc,
-  long             matchData);
+  long             matchData)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4080,7 +4091,7 @@ CalcCMask(
   const Rect *      dstRect,
   const RGBColor *  seedRGB,
   ColorSearchUPP    matchProc,
-  long              matchData);
+  long              matchData)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4092,7 +4103,7 @@ CalcCMask(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern PicHandle 
-OpenCPicture(const OpenCPicParams * newHeader);
+OpenCPicture(const OpenCPicParams * newHeader)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4104,7 +4115,7 @@ OpenCPicture(const OpenCPicParams * newHeader);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-OpColor(const RGBColor * color);
+OpColor(const RGBColor * color)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4116,7 +4127,7 @@ OpColor(const RGBColor * color);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HiliteColor(const RGBColor * color);
+HiliteColor(const RGBColor * color)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4128,7 +4139,7 @@ HiliteColor(const RGBColor * color);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DisposeCTable(CTabHandle cTable);
+DisposeCTable(CTabHandle cTable)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4140,7 +4151,7 @@ DisposeCTable(CTabHandle cTable);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern CTabHandle 
-GetCTable(short ctID);
+GetCTable(short ctID)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4152,7 +4163,7 @@ GetCTable(short ctID);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern CCrsrHandle 
-GetCCursor(short crsrID);
+GetCCursor(short crsrID)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4164,7 +4175,7 @@ GetCCursor(short crsrID);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetCCursor(CCrsrHandle cCrsr);
+SetCCursor(CCrsrHandle cCrsr)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4176,7 +4187,7 @@ SetCCursor(CCrsrHandle cCrsr);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-AllocCursor(void);
+AllocCursor(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4188,7 +4199,7 @@ AllocCursor(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DisposeCCursor(CCrsrHandle cCrsr);
+DisposeCCursor(CCrsrHandle cCrsr)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* GetCIcon(), PlotCIcon(), and DisposeCIcon() moved to Icons.h*/
@@ -4202,7 +4213,7 @@ DisposeCCursor(CCrsrHandle cCrsr);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetStdCProcs(CQDProcs * procs);
+SetStdCProcs(CQDProcs * procs)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4214,7 +4225,7 @@ SetStdCProcs(CQDProcs * procs);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern GDHandle 
-GetMaxDevice(const Rect * globalRect);
+GetMaxDevice(const Rect * globalRect)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4226,7 +4237,7 @@ GetMaxDevice(const Rect * globalRect);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-GetCTSeed(void);
+GetCTSeed(void)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4238,7 +4249,7 @@ GetCTSeed(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern GDHandle 
-GetDeviceList(void);
+GetDeviceList(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4250,7 +4261,7 @@ GetDeviceList(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern GDHandle 
-GetMainDevice(void);
+GetMainDevice(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4262,7 +4273,7 @@ GetMainDevice(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern GDHandle 
-GetNextDevice(GDHandle curDevice);
+GetNextDevice(GDHandle curDevice)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4276,7 +4287,7 @@ GetNextDevice(GDHandle curDevice);
 extern Boolean 
 TestDeviceAttribute(
   GDHandle   gdh,
-  short      attribute);
+  short      attribute)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4291,7 +4302,7 @@ extern void
 SetDeviceAttribute(
   GDHandle   gdh,
   short      attribute,
-  Boolean    value);
+  Boolean    value)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4306,7 +4317,7 @@ extern void
 InitGDevice(
   short      qdRefNum,
   long       mode,
-  GDHandle   gdh);
+  GDHandle   gdh)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4320,7 +4331,7 @@ InitGDevice(
 extern GDHandle 
 NewGDevice(
   short   refNum,
-  long    mode);
+  long    mode)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4332,7 +4343,7 @@ NewGDevice(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DisposeGDevice(GDHandle gdh);
+DisposeGDevice(GDHandle gdh)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4344,7 +4355,7 @@ DisposeGDevice(GDHandle gdh);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetGDevice(GDHandle gd);
+SetGDevice(GDHandle gd)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4356,7 +4367,7 @@ SetGDevice(GDHandle gd);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern GDHandle 
-GetGDevice(void);
+GetGDevice(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4368,7 +4379,7 @@ GetGDevice(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-Color2Index(const RGBColor * myColor);
+Color2Index(const RGBColor * myColor)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4382,7 +4393,7 @@ Color2Index(const RGBColor * myColor);
 extern void 
 Index2Color(
   long        index,
-  RGBColor *  aColor);
+  RGBColor *  aColor)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4394,7 +4405,7 @@ Index2Color(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-InvertColor(RGBColor * myColor);
+InvertColor(RGBColor * myColor)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4406,7 +4417,7 @@ InvertColor(RGBColor * myColor);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
-RealColor(const RGBColor * color);
+RealColor(const RGBColor * color)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4421,7 +4432,7 @@ extern void
 GetSubTable(
   CTabHandle   myColors,
   short        iTabRes,
-  CTabHandle   targetTbl);
+  CTabHandle   targetTbl)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4436,7 +4447,7 @@ extern void
 MakeITable(
   CTabHandle   cTabH,
   ITabHandle   iTabH,
-  short        res);
+  short        res)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4448,7 +4459,7 @@ MakeITable(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-AddSearch(ColorSearchUPP searchProc);
+AddSearch(ColorSearchUPP searchProc)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4460,7 +4471,7 @@ AddSearch(ColorSearchUPP searchProc);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-AddComp(ColorComplementUPP compProc);
+AddComp(ColorComplementUPP compProc)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4472,7 +4483,7 @@ AddComp(ColorComplementUPP compProc);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DelSearch(ColorSearchUPP searchProc);
+DelSearch(ColorSearchUPP searchProc)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4484,7 +4495,7 @@ DelSearch(ColorSearchUPP searchProc);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DelComp(ColorComplementUPP compProc);
+DelComp(ColorComplementUPP compProc)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4496,7 +4507,7 @@ DelComp(ColorComplementUPP compProc);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetClientID(short id);
+SetClientID(short id)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4510,7 +4521,7 @@ SetClientID(short id);
 extern void 
 ProtectEntry(
   short     index,
-  Boolean   protect);
+  Boolean   protect)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4524,7 +4535,7 @@ ProtectEntry(
 extern void 
 ReserveEntry(
   short     index,
-  Boolean   reserve);
+  Boolean   reserve)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4539,7 +4550,7 @@ extern void
 SetEntries(
   short        start,
   short        count,
-  CSpecArray   aTable);
+  CSpecArray   aTable)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4554,7 +4565,7 @@ extern void
 SaveEntries(
   CTabHandle    srcTable,
   CTabHandle    resultTable,
-  ReqListRec *  selection);
+  ReqListRec *  selection)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4569,7 +4580,7 @@ extern void
 RestoreEntries(
   CTabHandle    srcTable,
   CTabHandle    dstTable,
-  ReqListRec *  selection);
+  ReqListRec *  selection)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4581,7 +4592,7 @@ RestoreEntries(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-QDError(void);
+QDError(void)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4601,7 +4612,7 @@ CopyDeepMask(
   const Rect *    maskRect,
   const Rect *    dstRect,
   short           mode,
-  RgnHandle       maskRgn);       /* can be NULL */
+  RgnHandle       maskRgn)        /* can be NULL */           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4617,7 +4628,7 @@ DeviceLoop(
   RgnHandle              drawingRgn,
   DeviceLoopDrawingUPP   drawingProc,
   long                   userData,
-  DeviceLoopFlags        flags);
+  DeviceLoopFlags        flags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4631,7 +4642,7 @@ DeviceLoop(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Ptr 
-GetMaskTable(void);
+GetMaskTable(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4644,7 +4655,7 @@ GetMaskTable(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern PatHandle 
-GetPattern(short patternID);
+GetPattern(short patternID)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4659,7 +4670,7 @@ GetPattern(short patternID);
     #define MacGetCursor GetCursor
 #endif
 extern CursHandle 
-MacGetCursor(short cursorID);
+MacGetCursor(short cursorID)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4671,7 +4682,7 @@ MacGetCursor(short cursorID);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern PicHandle 
-GetPicture(short pictureID);
+GetPicture(short pictureID)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4685,7 +4696,7 @@ GetPicture(short pictureID);
 extern long 
 DeltaPoint(
   Point   ptA,
-  Point   ptB);
+  Point   ptB)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4699,7 +4710,7 @@ DeltaPoint(
 extern void 
 ShieldCursor(
   const Rect *  shieldRect,
-  Point         offsetPt);
+  Point         offsetPt)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4713,7 +4724,7 @@ ShieldCursor(
 extern void 
 ScreenRes(
   short *  scrnHRes,
-  short *  scrnVRes);
+  short *  scrnVRes)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4728,7 +4739,7 @@ extern void
 GetIndPattern(
   Pattern *  thePat,
   short      patternListID,
-  short      index);
+  short      index)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4842,7 +4853,7 @@ GetIndPattern(
 extern long 
 deltapoint(
   Point *  ptA,
-  Point *  ptB);
+  Point *  ptB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #if OLDROUTINENAMES
@@ -4868,7 +4879,7 @@ extern void
 PackBits(
   Ptr *   srcPtr,
   Ptr *   dstPtr,
-  short   srcBytes);
+  short   srcBytes)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4883,7 +4894,7 @@ extern void
 UnpackBits(
   Ptr *   srcPtr,
   Ptr *   dstPtr,
-  short   dstBytes);
+  short   dstBytes)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4895,7 +4906,7 @@ UnpackBits(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fixed 
-SlopeFromAngle(short angle);
+SlopeFromAngle(short angle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4907,7 +4918,7 @@ SlopeFromAngle(short angle);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-AngleFromSlope(Fixed slope);
+AngleFromSlope(Fixed slope)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* New transfer modes */
@@ -4950,7 +4961,7 @@ GetPortCustomXFerProc(
   CGrafPtr             port,
   CustomXFerProcPtr *  proc,
   UInt32 *             flags,
-  UInt32 *             refCon);
+  UInt32 *             refCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4966,7 +4977,7 @@ SetPortCustomXFerProc(
   CGrafPtr            port,
   CustomXFerProcPtr   proc,
   UInt32              flags,
-  UInt32              refCon);
+  UInt32              refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5027,7 +5038,7 @@ enum {
 extern OSErr 
 OpenCursorComponent(
   Component            c,
-  ComponentInstance *  ci);
+  ComponentInstance *  ci)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5039,7 +5050,7 @@ OpenCursorComponent(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-CloseCursorComponent(ComponentInstance ci);
+CloseCursorComponent(ComponentInstance ci)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5051,7 +5062,7 @@ CloseCursorComponent(ComponentInstance ci);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-SetCursorComponent(ComponentInstance ci);
+SetCursorComponent(ComponentInstance ci)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5063,7 +5074,7 @@ SetCursorComponent(ComponentInstance ci);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-CursorComponentChanged(ComponentInstance ci);
+CursorComponentChanged(ComponentInstance ci)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5077,7 +5088,7 @@ CursorComponentChanged(ComponentInstance ci);
 extern OSErr 
 CursorComponentSetData(
   ComponentInstance   ci,
-  long                data);
+  long                data)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Quickdraw-specific ColorSync matching */
@@ -5094,7 +5105,7 @@ CWMatchPixMap(
   CMWorldRef            cw,
   PixMap *              myPixMap,
   CMBitmapCallBackUPP   progressProc,
-  void *                refCon);
+  void *                refCon)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5111,7 +5122,7 @@ CWCheckPixMap(
   PixMap *              myPixMap,
   CMBitmapCallBackUPP   progressProc,
   void *                refCon,
-  BitMap *              resultBitMap);
+  BitMap *              resultBitMap)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5126,7 +5137,7 @@ extern CMError
 NCMBeginMatching(
   CMProfileRef   src,
   CMProfileRef   dst,
-  CMMatchRef *   myRef);
+  CMMatchRef *   myRef)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5138,7 +5149,7 @@ NCMBeginMatching(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-CMEndMatching(CMMatchRef myRef);
+CMEndMatching(CMMatchRef myRef)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5153,7 +5164,7 @@ extern void
 NCMDrawMatchedPicture(
   PicHandle      myPicture,
   CMProfileRef   dst,
-  Rect *         myRect);
+  Rect *         myRect)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5165,7 +5176,7 @@ NCMDrawMatchedPicture(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-CMEnableMatchingComment(Boolean enableIt);
+CMEnableMatchingComment(Boolean enableIt)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5179,7 +5190,7 @@ CMEnableMatchingComment(Boolean enableIt);
 extern CMError 
 NCMUseProfileComment(
   CMProfileRef   prof,
-  UInt32         flags);
+  UInt32         flags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Available in CarbonLib... */
@@ -5192,7 +5203,7 @@ NCMUseProfileComment(
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-IsValidPort(CGrafPtr port);
+IsValidPort(CGrafPtr port)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5207,7 +5218,7 @@ IsValidPort(CGrafPtr port);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern PixMapHandle 
-GetPortPixMap(CGrafPtr port);
+GetPortPixMap(CGrafPtr port)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5230,7 +5241,7 @@ GetPortPixMap(CGrafPtr port);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
 extern const BitMap * 
-GetPortBitMapForCopyBits(CGrafPtr port);
+GetPortBitMapForCopyBits(CGrafPtr port)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5244,7 +5255,7 @@ GetPortBitMapForCopyBits(CGrafPtr port);
 extern Rect * 
 GetPortBounds(
   CGrafPtr   port,
-  Rect *     rect);
+  Rect *     rect)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5258,7 +5269,7 @@ GetPortBounds(
 extern RGBColor * 
 GetPortForeColor(
   CGrafPtr    port,
-  RGBColor *  foreColor);
+  RGBColor *  foreColor)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5272,7 +5283,7 @@ GetPortForeColor(
 extern RGBColor * 
 GetPortBackColor(
   CGrafPtr    port,
-  RGBColor *  backColor);
+  RGBColor *  backColor)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5286,7 +5297,7 @@ GetPortBackColor(
 extern RGBColor * 
 GetPortOpColor(
   CGrafPtr    port,
-  RGBColor *  opColor);
+  RGBColor *  opColor)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5300,7 +5311,7 @@ GetPortOpColor(
 extern RGBColor * 
 GetPortHiliteColor(
   CGrafPtr    port,
-  RGBColor *  hiliteColor);
+  RGBColor *  hiliteColor)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5312,7 +5323,7 @@ GetPortHiliteColor(
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern CQDProcsPtr 
-GetPortGrafProcs(CGrafPtr port);
+GetPortGrafProcs(CGrafPtr port)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5324,7 +5335,7 @@ GetPortGrafProcs(CGrafPtr port);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern short 
-GetPortTextFont(CGrafPtr port);
+GetPortTextFont(CGrafPtr port)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5336,7 +5347,7 @@ GetPortTextFont(CGrafPtr port);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern Style 
-GetPortTextFace(CGrafPtr port);
+GetPortTextFace(CGrafPtr port)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5348,7 +5359,7 @@ GetPortTextFace(CGrafPtr port);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern short 
-GetPortTextMode(CGrafPtr port);
+GetPortTextMode(CGrafPtr port)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5360,7 +5371,7 @@ GetPortTextMode(CGrafPtr port);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern short 
-GetPortTextSize(CGrafPtr port);
+GetPortTextSize(CGrafPtr port)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5372,7 +5383,7 @@ GetPortTextSize(CGrafPtr port);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern short 
-GetPortChExtra(CGrafPtr port);
+GetPortChExtra(CGrafPtr port)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5384,7 +5395,7 @@ GetPortChExtra(CGrafPtr port);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern short 
-GetPortFracHPenLocation(CGrafPtr port);
+GetPortFracHPenLocation(CGrafPtr port)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5396,7 +5407,7 @@ GetPortFracHPenLocation(CGrafPtr port);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern Fixed 
-GetPortSpExtra(CGrafPtr port);
+GetPortSpExtra(CGrafPtr port)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5408,7 +5419,7 @@ GetPortSpExtra(CGrafPtr port);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern short 
-GetPortPenVisibility(CGrafPtr port);
+GetPortPenVisibility(CGrafPtr port)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5422,7 +5433,7 @@ GetPortPenVisibility(CGrafPtr port);
 extern RgnHandle 
 GetPortVisibleRegion(
   CGrafPtr    port,
-  RgnHandle   visRgn);
+  RgnHandle   visRgn)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5436,7 +5447,7 @@ GetPortVisibleRegion(
 extern RgnHandle 
 GetPortClipRegion(
   CGrafPtr    port,
-  RgnHandle   clipRgn);
+  RgnHandle   clipRgn)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5450,7 +5461,7 @@ GetPortClipRegion(
 extern PixPatHandle 
 GetPortBackPixPat(
   CGrafPtr       port,
-  PixPatHandle   backPattern);
+  PixPatHandle   backPattern)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5464,7 +5475,7 @@ GetPortBackPixPat(
 extern PixPatHandle 
 GetPortPenPixPat(
   CGrafPtr       port,
-  PixPatHandle   penPattern);
+  PixPatHandle   penPattern)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5478,7 +5489,7 @@ GetPortPenPixPat(
 extern PixPatHandle 
 GetPortFillPixPat(
   CGrafPtr       port,
-  PixPatHandle   fillPattern);
+  PixPatHandle   fillPattern)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5492,7 +5503,7 @@ GetPortFillPixPat(
 extern Point * 
 GetPortPenSize(
   CGrafPtr   port,
-  Point *    penSize);
+  Point *    penSize)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5504,7 +5515,7 @@ GetPortPenSize(
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern SInt32 
-GetPortPenMode(CGrafPtr port);
+GetPortPenMode(CGrafPtr port)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5518,7 +5529,7 @@ GetPortPenMode(CGrafPtr port);
 extern Point * 
 GetPortPenLocation(
   CGrafPtr   port,
-  Point *    penLocation);
+  Point *    penLocation)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5530,7 +5541,7 @@ GetPortPenLocation(
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern Boolean 
-IsPortRegionBeingDefined(CGrafPtr port);
+IsPortRegionBeingDefined(CGrafPtr port)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5542,7 +5553,7 @@ IsPortRegionBeingDefined(CGrafPtr port);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern Boolean 
-IsPortPictureBeingDefined(CGrafPtr port);
+IsPortPictureBeingDefined(CGrafPtr port)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5554,7 +5565,7 @@ IsPortPictureBeingDefined(CGrafPtr port);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.3 and later
  */
 extern Boolean 
-IsPortPolyBeingDefined(CGrafPtr port);
+IsPortPolyBeingDefined(CGrafPtr port)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5566,7 +5577,7 @@ IsPortPolyBeingDefined(CGrafPtr port);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern Boolean 
-IsPortOffscreen(CGrafPtr port);
+IsPortOffscreen(CGrafPtr port)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5578,7 +5589,7 @@ IsPortOffscreen(CGrafPtr port);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
 extern Boolean 
-IsPortColor(CGrafPtr port);
+IsPortColor(CGrafPtr port)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5586,11 +5597,11 @@ IsPortColor(CGrafPtr port);
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-IsPortVisibleRegionEmpty(CGrafPtr port);
+IsPortVisibleRegionEmpty(CGrafPtr port)                       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -5598,11 +5609,11 @@ IsPortVisibleRegionEmpty(CGrafPtr port);
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-IsPortClipRegionEmpty(CGrafPtr port);
+IsPortClipRegionEmpty(CGrafPtr port)                          AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -5610,13 +5621,13 @@ IsPortClipRegionEmpty(CGrafPtr port);
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   not available
  */
 extern void 
 SectRegionWithPortClipRegion(
   CGrafPtr    port,
-  RgnHandle   ioRegion);
+  RgnHandle   ioRegion)                                       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -5624,15 +5635,17 @@ SectRegionWithPortClipRegion(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   not available
  */
 extern void 
 SectRegionWithPortVisibleRegion(
   CGrafPtr    port,
-  RgnHandle   ioRegion);
+  RgnHandle   ioRegion)                                       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
+
+/* Swappers */
 /*
  *  SwapPortPicSaveHandle()
  *  
@@ -5659,13 +5672,43 @@ SectRegionWithPortVisibleRegion(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern Handle 
 SwapPortPicSaveHandle(
   CGrafPtr   port,
-  Handle     inPicSaveHdl);
+  Handle     inPicSaveHdl)                                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+/* Similarly: */
+/*
+ *  SwapPortPolySaveHandle()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Handle 
+SwapPortPolySaveHandle(
+  CGrafPtr   port,
+  Handle     inPolySaveHdl)                                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  SwapPortRegionSaveHandle()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Handle 
+SwapPortRegionSaveHandle(
+  CGrafPtr   port,
+  Handle     inRegionSaveHdl)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
 
 
 /* Setters */
@@ -5680,7 +5723,7 @@ SwapPortPicSaveHandle(
 extern void 
 SetPortBounds(
   CGrafPtr      port,
-  const Rect *  rect);
+  const Rect *  rect)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5694,7 +5737,7 @@ SetPortBounds(
 extern void 
 SetPortOpColor(
   CGrafPtr          port,
-  const RGBColor *  opColor);
+  const RGBColor *  opColor)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5707,8 +5750,8 @@ SetPortOpColor(
  */
 extern void 
 SetPortGrafProcs(
-  CGrafPtr    port,
-  CQDProcs *  procs);
+  CGrafPtr      port,
+  CQDProcsPtr   procs)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5716,13 +5759,13 @@ SetPortGrafProcs(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern void 
 SetPortTextFont(
   CGrafPtr   port,
-  short      txFont);
+  short      txFont)                                          AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -5730,13 +5773,13 @@ SetPortTextFont(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern void 
 SetPortTextSize(
   CGrafPtr   port,
-  short      txSize);
+  short      txSize)                                          AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -5744,13 +5787,13 @@ SetPortTextSize(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern void 
 SetPortTextFace(
   CGrafPtr         port,
-  StyleParameter   face);
+  StyleParameter   face)                                      AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -5758,13 +5801,13 @@ SetPortTextFace(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern void 
 SetPortTextMode(
   CGrafPtr   port,
-  short      mode);
+  short      mode)                                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -5778,7 +5821,7 @@ SetPortTextMode(
 extern void 
 SetPortVisibleRegion(
   CGrafPtr    port,
-  RgnHandle   visRgn);
+  RgnHandle   visRgn)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5792,7 +5835,7 @@ SetPortVisibleRegion(
 extern void 
 SetPortClipRegion(
   CGrafPtr    port,
-  RgnHandle   clipRgn);
+  RgnHandle   clipRgn)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5806,7 +5849,7 @@ SetPortClipRegion(
 extern void 
 SetPortPenPixPat(
   CGrafPtr       port,
-  PixPatHandle   penPattern);
+  PixPatHandle   penPattern)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5820,7 +5863,7 @@ SetPortPenPixPat(
 extern void 
 SetPortFillPixPat(
   CGrafPtr       port,
-  PixPatHandle   penPattern);
+  PixPatHandle   penPattern)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5834,7 +5877,7 @@ SetPortFillPixPat(
 extern void 
 SetPortBackPixPat(
   CGrafPtr       port,
-  PixPatHandle   backPattern);
+  PixPatHandle   backPattern)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5848,7 +5891,7 @@ SetPortBackPixPat(
 extern void 
 SetPortPenSize(
   CGrafPtr   port,
-  Point      penSize);
+  Point      penSize)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5862,7 +5905,7 @@ SetPortPenSize(
 extern void 
 SetPortPenMode(
   CGrafPtr   port,
-  SInt32     penMode);
+  SInt32     penMode)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5876,7 +5919,7 @@ SetPortPenMode(
 extern void 
 SetPortFracHPenLocation(
   CGrafPtr   port,
-  short      pnLocHFrac);
+  short      pnLocHFrac)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* PixMap */
@@ -5891,7 +5934,7 @@ SetPortFracHPenLocation(
 extern Rect * 
 GetPixBounds(
   PixMapHandle   pixMap,
-  Rect *         bounds);
+  Rect *         bounds)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5903,7 +5946,7 @@ GetPixBounds(
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern short 
-GetPixDepth(PixMapHandle pixMap);
+GetPixDepth(PixMapHandle pixMap)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* QDGlobals */
@@ -5917,7 +5960,7 @@ GetPixDepth(PixMapHandle pixMap);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern long 
-GetQDGlobalsRandomSeed(void);
+GetQDGlobalsRandomSeed(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5929,7 +5972,7 @@ GetQDGlobalsRandomSeed(void);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern BitMap * 
-GetQDGlobalsScreenBits(BitMap * screenBits);
+GetQDGlobalsScreenBits(BitMap * screenBits)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5941,7 +5984,7 @@ GetQDGlobalsScreenBits(BitMap * screenBits);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern Cursor * 
-GetQDGlobalsArrow(Cursor * arrow);
+GetQDGlobalsArrow(Cursor * arrow)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5953,7 +5996,7 @@ GetQDGlobalsArrow(Cursor * arrow);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern Pattern * 
-GetQDGlobalsDarkGray(Pattern * dkGray);
+GetQDGlobalsDarkGray(Pattern * dkGray)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5965,7 +6008,7 @@ GetQDGlobalsDarkGray(Pattern * dkGray);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern Pattern * 
-GetQDGlobalsLightGray(Pattern * ltGray);
+GetQDGlobalsLightGray(Pattern * ltGray)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5977,7 +6020,7 @@ GetQDGlobalsLightGray(Pattern * ltGray);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern Pattern * 
-GetQDGlobalsGray(Pattern * gray);
+GetQDGlobalsGray(Pattern * gray)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5989,7 +6032,7 @@ GetQDGlobalsGray(Pattern * gray);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern Pattern * 
-GetQDGlobalsBlack(Pattern * black);
+GetQDGlobalsBlack(Pattern * black)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6001,7 +6044,7 @@ GetQDGlobalsBlack(Pattern * black);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern Pattern * 
-GetQDGlobalsWhite(Pattern * white);
+GetQDGlobalsWhite(Pattern * white)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6013,7 +6056,7 @@ GetQDGlobalsWhite(Pattern * white);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern CGrafPtr 
-GetQDGlobalsThePort(void);
+GetQDGlobalsThePort(void)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Setters */
@@ -6026,7 +6069,7 @@ GetQDGlobalsThePort(void);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern void 
-SetQDGlobalsRandomSeed(long randomSeed);
+SetQDGlobalsRandomSeed(long randomSeed)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6038,7 +6081,7 @@ SetQDGlobalsRandomSeed(long randomSeed);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern void 
-SetQDGlobalsArrow(const Cursor * arrow);
+SetQDGlobalsArrow(const Cursor * arrow)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Regions */
@@ -6053,7 +6096,7 @@ SetQDGlobalsArrow(const Cursor * arrow);
 extern Rect * 
 GetRegionBounds(
   RgnHandle   region,
-  Rect *      bounds);
+  Rect *      bounds)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6065,7 +6108,7 @@ GetRegionBounds(
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern Boolean 
-IsRegionRectangular(RgnHandle region);
+IsRegionRectangular(RgnHandle region)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Utilities */
@@ -6081,7 +6124,7 @@ IsRegionRectangular(RgnHandle region);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern CGrafPtr 
-CreateNewPort(void);
+CreateNewPort(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6093,7 +6136,7 @@ CreateNewPort(void);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern void 
-DisposePort(CGrafPtr port);
+DisposePort(CGrafPtr port)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -6106,7 +6149,94 @@ DisposePort(CGrafPtr port);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
 extern void 
-SetQDError(OSErr err);
+SetQDError(OSErr err)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/* Helpful Carbon-only utilities (finally made public)*/
+
+/*
+ *  QDLocalToGlobalPoint()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Point * 
+QDLocalToGlobalPoint(
+  CGrafPtr   port,
+  Point *    point)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  QDGlobalToLocalPoint()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Point * 
+QDGlobalToLocalPoint(
+  CGrafPtr   port,
+  Point *    point)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  QDLocalToGlobalRect()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Rect * 
+QDLocalToGlobalRect(
+  CGrafPtr   port,
+  Rect *     bounds)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  QDGlobalToLocalRect()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Rect * 
+QDGlobalToLocalRect(
+  CGrafPtr   port,
+  Rect *     bounds)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  QDLocalToGlobalRegion()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern RgnHandle 
+QDLocalToGlobalRegion(
+  CGrafPtr    port,
+  RgnHandle   region)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  QDGlobalToLocalRegion()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern RgnHandle 
+QDGlobalToLocalRegion(
+  CGrafPtr    port,
+  RgnHandle   region)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
 
 
 /*
@@ -6123,7 +6253,7 @@ SetQDError(OSErr err);
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-QDIsPortBuffered(CGrafPtr port);
+QDIsPortBuffered(CGrafPtr port)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6135,7 +6265,7 @@ QDIsPortBuffered(CGrafPtr port);
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-QDIsPortBufferDirty(CGrafPtr port);
+QDIsPortBufferDirty(CGrafPtr port)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6149,7 +6279,7 @@ QDIsPortBufferDirty(CGrafPtr port);
 extern void 
 QDFlushPortBuffer(
   CGrafPtr    port,
-  RgnHandle   region);      /* can be NULL */
+  RgnHandle   region)       /* can be NULL */                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6163,7 +6293,7 @@ QDFlushPortBuffer(
 extern OSStatus 
 QDGetDirtyRegion(
   CGrafPtr    port,
-  RgnHandle   rgn);
+  RgnHandle   rgn)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6177,35 +6307,35 @@ QDGetDirtyRegion(
 extern OSStatus 
 QDSetDirtyRegion(
   CGrafPtr    port,
-  RgnHandle   rgn);
+  RgnHandle   rgn)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  QDAddRectToDirtyRegion()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 QDAddRectToDirtyRegion(
   CGrafPtr      inPort,
-  const Rect *  inBounds);
+  const Rect *  inBounds)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  QDAddRegionToDirtyRegion()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 QDAddRegionToDirtyRegion(
   CGrafPtr    inPort,
-  RgnHandle   inRegion);
+  RgnHandle   inRegion)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -6220,7 +6350,7 @@ QDAddRegionToDirtyRegion(
 extern OSStatus 
 CreateCGContextForPort(
   CGrafPtr        inPort,
-  CGContextRef *  outContext);
+  CGContextRef *  outContext)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6235,7 +6365,7 @@ extern OSStatus
 ClipCGContextToRegion(
   CGContextRef   gc,
   const Rect *   portRect,
-  RgnHandle      region);
+  RgnHandle      region)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6249,7 +6379,7 @@ ClipCGContextToRegion(
 extern OSStatus 
 SyncCGContextOriginWithPort(
   CGContextRef   inContext,
-  CGrafPtr       port);
+  CGrafPtr       port)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6289,7 +6419,7 @@ SyncCGContextOriginWithPort(
 extern OSStatus 
 QDBeginCGContext(
   CGrafPtr        inPort,
-  CGContextRef *  outContext);
+  CGContextRef *  outContext)                                 AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -6303,7 +6433,7 @@ QDBeginCGContext(
 extern OSStatus 
 QDEndCGContext(
   CGrafPtr        inPort,
-  CGContextRef *  inoutContext);
+  CGContextRef *  inoutContext)                               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -6323,7 +6453,7 @@ typedef struct OpaqueQDRegionBitsRef*   QDRegionBitsRef;
  *    Non-Carbon CFM:   not available
  */
 extern QDRegionBitsRef 
-QDSaveRegionBits(RgnHandle region);
+QDSaveRegionBits(RgnHandle region)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -6337,7 +6467,7 @@ QDSaveRegionBits(RgnHandle region);
 extern OSStatus 
 QDRestoreRegionBits(
   RgnHandle         region,
-  QDRegionBitsRef   regionBits);
+  QDRegionBitsRef   regionBits)                               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -6349,7 +6479,7 @@ QDRestoreRegionBits(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-QDDisposeRegionBits(QDRegionBitsRef regionBits);
+QDDisposeRegionBits(QDRegionBitsRef regionBits)               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -6368,7 +6498,7 @@ QDDisposeRegionBits(QDRegionBitsRef regionBits);
  *    Non-Carbon CFM:   not available
  */
 extern CGrafPtr 
-CreateNewPortForCGDisplayID(UInt32 inCGDisplayID);
+CreateNewPortForCGDisplayID(UInt32 inCGDisplayID)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6386,7 +6516,7 @@ CreateNewPortForCGDisplayID(UInt32 inCGDisplayID);
  *    Non-Carbon CFM:   not available
  */
 extern void 
-QDDisplayWaitCursor(Boolean forceWaitCursor);
+QDDisplayWaitCursor(Boolean forceWaitCursor)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6424,7 +6554,7 @@ QDDisplayWaitCursor(Boolean forceWaitCursor);
  *    Non-Carbon CFM:   in NQD 8.5 and later
  */
 extern void 
-QDSetPatternOrigin(Point origin);
+QDSetPatternOrigin(Point origin)                              AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -6444,7 +6574,180 @@ QDSetPatternOrigin(Point origin);
  *    Non-Carbon CFM:   in NQD 8.5 and later
  */
 extern void 
-QDGetPatternOrigin(Point * origin);
+QDGetPatternOrigin(Point * origin)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+
+/*
+ *  QDIsNamedPixMapCursorRegistered()
+ *  
+ *  Summary:
+ *    Returns whether a named cursor has already been registered.
+ *  
+ *  Discussion:
+ *    The CoreGraphics Scalable Cursor Registry provides support for
+ *    cursors based on PixMaps for crsrData and crsrMask, with sizes up
+ *    to 64x64 pixels. Such cursors need to be registered via
+ *    QDRegisterNamedPixMapCursor, and can then be set by
+ *    QDSetNamedPixMapCursor.
+ *  
+ *  Parameters:
+ *    
+ *    name:
+ *      (see below at QDRegisterNamedPixMapCursor)
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+QDIsNamedPixMapCursorRegistered(const char name[128])         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+
+/*
+ *  QDRegisterNamedPixMapCursor()
+ *  
+ *  Summary:
+ *    Register a new cursor by name
+ *  
+ *  Discussion:
+ *    In order to set a PixMapCursor, it needs to be registered first
+ *    by name.
+ *  
+ *  Parameters:
+ *    
+ *    crsrData:
+ *      (description forthcoming)
+ *    
+ *    crsrMask:
+ *      (description forthcoming)
+ *    
+ *    hotSpot:
+ *      (description forthcoming)
+ *    
+ *    name:
+ *      A naming convention involving the name of your application and
+ *      descriptive cursor names or resource IDs is suggested. Cursor
+ *      names are 0-terminated C-strings up to a length of 127.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+QDRegisterNamedPixMapCursor(
+  PixMapHandle   crsrData,
+  PixMapHandle   crsrMask,
+  Point          hotSpot,
+  const char     name[128])                                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  QDUnregisterNamedPixMapCursur()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+QDUnregisterNamedPixMapCursur(const char name[128])           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  QDSetNamedPixMapCursor()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+QDSetNamedPixMapCursor(const char name[128])                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  QDSetCursorScale()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+QDSetCursorScale(float scale)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+
+
+enum {
+  kQDUseDefaultTextRendering    = 0,    /* Sets whatever is specified in system defaults.*/
+                                        /* Currently sets kQDUseTrueTypeScalerGlyphs if nothing is specified.*/
+  kQDUseTrueTypeScalerGlyphs    = (1 << 0), /* bit 0*/
+  kQDUseCGTextRendering         = (1 << 1), /* bit 1*/
+  kQDUseCGTextMetrics           = (1 << 2), /* bit 2*/
+  kQDSupportedFlags             = kQDUseTrueTypeScalerGlyphs | kQDUseCGTextRendering | kQDUseCGTextMetrics,
+  kQDDontChangeFlags            = (long)0xFFFFFFFF /* to request the current state, without changing anything*/
+};
+
+
+
+/*
+ *  QDSwapTextFlags()
+ *  
+ *  Summary:
+ *    Returns current flags and optionally sets new flags.
+ *  
+ *  Discussion:
+ *    Currently, only the flag bits in the enum above are supported.
+ *    The typical usage is UInt32 savedFlags =
+ *    QDSwapTextFlags(newFlags); // ... draw text under the conditions
+ *    of "newFlags" ... (void)QDSwapTextFlags(savedFlags);  // restore
+ *    previous setting
+ *  
+ *  Parameters:
+ *    
+ *    newFlags:
+ *      Use the enums above; example "kQDUseCGTextRendering |
+ *      kQDUseCGTextMetrics".
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern UInt32 
+QDSwapTextFlags(UInt32 newFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  QDSwapPortTextFlags()
+ *  
+ *  Summary:
+ *    Same as QDSwapTextFlags, but per GrafPort.
+ *  
+ *  Parameters:
+ *    
+ *    port:
+ *      Settings per port override any global settings. If port ==
+ *      NULL, the current port is used.
+ *    
+ *    newFlags:
+ *      As in QDSwapTextFlags, above.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern UInt32 
+QDSwapPortTextFlags(
+  CGrafPtr   port,
+  UInt32     newFlags)                                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
 
 
 
@@ -6460,7 +6763,7 @@ QDGetPatternOrigin(Point * origin);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern SInt16 
-LMGetScrVRes(void);
+LMGetScrVRes(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6472,7 +6775,7 @@ LMGetScrVRes(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetScrVRes(SInt16 value);
+LMSetScrVRes(SInt16 value)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6484,7 +6787,7 @@ LMSetScrVRes(SInt16 value);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern SInt16 
-LMGetScrHRes(void);
+LMGetScrHRes(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6496,7 +6799,7 @@ LMGetScrHRes(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetScrHRes(SInt16 value);
+LMSetScrHRes(SInt16 value)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6508,7 +6811,7 @@ LMSetScrHRes(SInt16 value);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern GDHandle 
-LMGetMainDevice(void);
+LMGetMainDevice(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6520,7 +6823,7 @@ LMGetMainDevice(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetMainDevice(GDHandle value);
+LMSetMainDevice(GDHandle value)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6532,7 +6835,7 @@ LMSetMainDevice(GDHandle value);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern GDHandle 
-LMGetDeviceList(void);
+LMGetDeviceList(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6544,7 +6847,7 @@ LMGetDeviceList(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetDeviceList(GDHandle value);
+LMSetDeviceList(GDHandle value)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6556,7 +6859,7 @@ LMSetDeviceList(GDHandle value);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-LMGetQDColors(void);
+LMGetQDColors(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6568,7 +6871,7 @@ LMGetQDColors(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetQDColors(Handle value);
+LMSetQDColors(Handle value)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6580,7 +6883,7 @@ LMSetQDColors(Handle value);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-LMGetWidthListHand(void);
+LMGetWidthListHand(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6592,7 +6895,7 @@ LMGetWidthListHand(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetWidthListHand(Handle value);
+LMSetWidthListHand(Handle value)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6604,7 +6907,7 @@ LMSetWidthListHand(Handle value);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern UInt8 
-LMGetHiliteMode(void);
+LMGetHiliteMode(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6616,7 +6919,7 @@ LMGetHiliteMode(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetHiliteMode(UInt8 value);
+LMSetHiliteMode(UInt8 value)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6628,7 +6931,7 @@ LMSetHiliteMode(UInt8 value);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Ptr 
-LMGetWidthPtr(void);
+LMGetWidthPtr(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6640,7 +6943,7 @@ LMGetWidthPtr(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetWidthPtr(Ptr value);
+LMSetWidthPtr(Ptr value)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6652,7 +6955,7 @@ LMSetWidthPtr(Ptr value);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-LMGetWidthTabHandle(void);
+LMGetWidthTabHandle(void)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6664,7 +6967,7 @@ LMGetWidthTabHandle(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetWidthTabHandle(Handle value);
+LMSetWidthTabHandle(Handle value)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6676,7 +6979,7 @@ LMSetWidthTabHandle(Handle value);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern SInt32 
-LMGetLastSPExtra(void);
+LMGetLastSPExtra(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6688,7 +6991,7 @@ LMGetLastSPExtra(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetLastSPExtra(SInt32 value);
+LMSetLastSPExtra(SInt32 value)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6700,7 +7003,7 @@ LMSetLastSPExtra(SInt32 value);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-LMGetLastFOND(void);
+LMGetLastFOND(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6712,7 +7015,7 @@ LMGetLastFOND(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetLastFOND(Handle value);
+LMSetLastFOND(Handle value)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6724,7 +7027,7 @@ LMSetLastFOND(Handle value);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern UInt8 
-LMGetFractEnable(void);
+LMGetFractEnable(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6736,7 +7039,7 @@ LMGetFractEnable(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetFractEnable(UInt8 value);
+LMSetFractEnable(UInt8 value)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6748,7 +7051,7 @@ LMSetFractEnable(UInt8 value);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern GDHandle 
-LMGetTheGDevice(void);
+LMGetTheGDevice(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6760,7 +7063,7 @@ LMGetTheGDevice(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetTheGDevice(GDHandle value);
+LMSetTheGDevice(GDHandle value)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -6773,7 +7076,7 @@ LMSetTheGDevice(GDHandle value);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMGetHiliteRGB(RGBColor * hiliteRGBValue);
+LMGetHiliteRGB(RGBColor * hiliteRGBValue)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6785,7 +7088,7 @@ LMGetHiliteRGB(RGBColor * hiliteRGBValue);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetHiliteRGB(const RGBColor * hiliteRGBValue);
+LMSetHiliteRGB(const RGBColor * hiliteRGBValue)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6797,7 +7100,7 @@ LMSetHiliteRGB(const RGBColor * hiliteRGBValue);
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern Boolean 
-LMGetCursorNew(void);
+LMGetCursorNew(void)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6809,7 +7112,7 @@ LMGetCursorNew(void);
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern void 
-LMSetCursorNew(Boolean value);
+LMSetCursorNew(Boolean value)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -6829,13 +7132,7 @@ LMSetCursorNew(Boolean value);
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

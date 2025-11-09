@@ -3,9 +3,9 @@
  
      Contains:   AppleEvent over mach_msg interfaces
  
-     Version:    AppleEvents-116~3
+     Version:    AppleEvents-242~1
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,12 +16,8 @@
 #ifndef __AEMACH__
 #define __AEMACH__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __MIXEDMODE__
-#include <CarbonCore/MixedMode.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __AEDATAMODEL__
@@ -33,6 +29,7 @@
 #include <mach/message.h>
 #endif
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -40,14 +37,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 /*-
@@ -63,7 +52,7 @@ extern "C" {
  * the target parameter.)  If a port cannot be found,
  * procNotFound (-600) will be returned on AESend.
  *
- * Of note is a new attribute for an AppleEvent, typeReplyPortAttr.
+ * Of note is a new attribute for an AppleEvent, keyReplyPortAttr.
  * This specifies the mach_port_t to which an AppleEvent reply
  * should be directed.  By default, replies are sent to the
  * processes registered port where they are culled from the normal  
@@ -78,10 +67,14 @@ extern "C" {
  * tech note.
  **/
 enum {
-  typeReplyPortAttr             = 'repp'
+  keyReplyPortAttr              = 'repp'
 };
 
-#if TARGET_RT_MAC_MACHO
+/* typeReplyPortAttr was misnamed and is deprecated; use keyReplyPortAttr instead. */
+enum {
+  typeReplyPortAttr             = keyReplyPortAttr
+};
+
 /*-
  * Return the mach_port_t that was registered with the bootstrap
  * server for this process.  This port is considered public, and
@@ -96,11 +89,11 @@ enum {
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        not available
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern mach_port_t 
-AEGetRegisteredMachPort(void);
+AEGetRegisteredMachPort(void)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*-
@@ -118,14 +111,14 @@ AEGetRegisteredMachPort(void);
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        not available
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 AEDecodeMessage(
   mach_msg_header_t *  header,
   AppleEvent *         event,
-  AppleEvent *         reply);       /* can be NULL */
+  AppleEvent *         reply)        /* can be NULL */        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*-
@@ -139,11 +132,11 @@ AEDecodeMessage(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        not available
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AEProcessMessage(mach_msg_header_t * header);
+AEProcessMessage(mach_msg_header_t * header)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*-
@@ -157,7 +150,7 @@ AEProcessMessage(mach_msg_header_t * header);
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        not available
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
@@ -165,19 +158,10 @@ AESendMessage(
   const AppleEvent *  event,
   AppleEvent *        reply,                /* can be NULL */
   AESendMode          sendMode,
-  long                timeOutInTicks);
+  long                timeOutInTicks)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#endif  /* TARGET_RT_MAC_MACHO */
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

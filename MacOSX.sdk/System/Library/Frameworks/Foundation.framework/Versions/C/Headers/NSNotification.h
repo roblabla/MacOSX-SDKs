@@ -1,5 +1,5 @@
 /*	NSNotification.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -26,7 +26,7 @@
 /****************	Notification Center	****************/
 
 @interface NSNotificationCenter : NSObject {
-    @private
+    @protected
     void *_impl;
     void *_pad[12];  // Padding for old ivars to preserve instance size
 }

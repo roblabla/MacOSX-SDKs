@@ -20,8 +20,11 @@
 #ifndef __PMERRORS__
 #define __PMERRORS__
 
-#if TARGET_API_MAC_OSX
+#ifndef __APPLICATIONSERVICES__
 #include <ApplicationServices/ApplicationServices.h>
+#endif
+
+#ifndef __COREFOUNDATION__
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
@@ -86,13 +89,15 @@ enum {
     kPMInvalidReply					= -30894,		/* invalid reply from a remote server/client */
     kPMInvalidFileType				= -30895,		/* invalid file type in queue */
     kPMInvalidObject				= -30896,		/* invalid object or internal error */
-
+    kPMInvalidPaper				= -30897,		/* Invalid PMPaper. */
+    
 	/* Print Job Creator and Printing Dialog Extension error codes (-9500 to -9540) */
     kPMNoDefaultItem            	= -9500,		/* unused; to be removed */
     kPMNoDefaultSettings        	= -9501,		/* unused; to be removed */
     kPMInvalidPDEContext     		= -9530,		/* invalid printing dialog extension context */
 	kPMDontSwitchPDEError			= -9531,		/* tells the pjc not to switch panels */
 	kPMUnableToFindProcess			= -9532,		/* unable to find the Finder.app process */
+	kPMFeatureNotInstalled			= -9533,		/* printer is feature capable, but not installed */
     
     /* PrintCenter and Printer Browser error codes (-9540 to -9579) */
 	kPMInvalidPBMRef				= -9540,		/* invalid printer browser module reference.*/

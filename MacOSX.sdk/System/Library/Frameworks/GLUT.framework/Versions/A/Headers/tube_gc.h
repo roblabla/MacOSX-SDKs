@@ -9,7 +9,11 @@
  * HISTORY:
  * Linas Vepstas --- February 1993
  * Added auto texture coord generation hacks, Linas April 1994
+ * Added tube.h include to define gleDouble, tad February 2002
  */
+
+#include "tube.h"
+#include "port.h" /* for gleVector */
 
 typedef float gleColor[3];
 typedef double gleTwoVec[2];

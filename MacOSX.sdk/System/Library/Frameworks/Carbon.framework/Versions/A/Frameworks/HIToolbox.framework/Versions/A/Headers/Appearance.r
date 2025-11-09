@@ -3,9 +3,9 @@
  
      Contains:   Appearance Manager Interfaces.
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1994-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,8 +17,8 @@
 #ifndef __APPEARANCE_R__
 #define __APPEARANCE_R__
 
-#ifndef __CONDITIONALMACROS_R__
-#include <CarbonCore/ConditionalMacros.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
 
 #define kAppearanceEventClass 			'appr'				/*  Event Class  */
@@ -32,21 +32,21 @@
 #define kThemeCustomThemesFileType 		'scen'				/*  file type for user themes  */
 #define kThemeSoundTrackFileType 		'tsnd'
 
-#define kThemeBrushDialogBackgroundActive  1				/*  Dialogs  */
-#define kThemeBrushDialogBackgroundInactive  2				/*  Dialogs  */
-#define kThemeBrushAlertBackgroundActive  3
-#define kThemeBrushAlertBackgroundInactive  4
-#define kThemeBrushModelessDialogBackgroundActive  5
-#define kThemeBrushModelessDialogBackgroundInactive  6
-#define kThemeBrushUtilityWindowBackgroundActive  7			/*  Miscellaneous  */
-#define kThemeBrushUtilityWindowBackgroundInactive  8		/*  Miscellaneous  */
-#define kThemeBrushListViewSortColumnBackground  9			/*  Finder  */
+#define kThemeBrushDialogBackgroundActive  1				/*  use with kModalWindowClass  */
+#define kThemeBrushDialogBackgroundInactive  2				/*  use with kModalWindowClass  */
+#define kThemeBrushAlertBackgroundActive  3					/*  use with kAlertWindowClass and kMovableAlertWindowClass  */
+#define kThemeBrushAlertBackgroundInactive  4				/*  use with kAlertWindowClass and kMovableAlertWindowClass  */
+#define kThemeBrushModelessDialogBackgroundActive  5		/*  use with kDocumentWindowClass  */
+#define kThemeBrushModelessDialogBackgroundInactive  6		/*  use with kDocumentWindowClass  */
+#define kThemeBrushUtilityWindowBackgroundActive  7			/*  use with kFloatingWindowClass and kUtilityWindowClass  */
+#define kThemeBrushUtilityWindowBackgroundInactive  8		/*  use with kFloatingWindowClass and kUtilityWindowClass  */
+#define kThemeBrushListViewSortColumnBackground  9			/*  Finder list views  */
 #define kThemeBrushListViewBackground 	10
 #define kThemeBrushIconLabelBackground 	11
 #define kThemeBrushListViewSeparator 	12
 #define kThemeBrushChasingArrows 		13
 #define kThemeBrushDragHilite 			14
-#define kThemeBrushDocumentWindowBackground  15
+#define kThemeBrushDocumentWindowBackground  15				/*  use with kDocumentWindowClass  */
 #define kThemeBrushFinderWindowBackground  16
 
 #define kThemeBrushScrollBarDelimiterActive  17
@@ -82,15 +82,19 @@
 #define kThemeBrushBevelInactiveDark 	47
 
 #define kThemeBrushNotificationWindowBackground  48
-#define kThemeBrushMovableModalBackground  49
-#define kThemeBrushSheetBackgroundOpaque  50
-#define kThemeBrushDrawerBackground 	51
-#define kThemeBrushToolbarBackground 	52
-#define kThemeBrushSheetBackgroundTransparent  53
+#define kThemeBrushMovableModalBackground  49				/*  use with kMovableModalWindowClass; available in Mac OS X, and CarbonLib 1.3 and later  */
+#define kThemeBrushSheetBackgroundOpaque  50				/*  use with kSheetWindowClass and kSheetAlertWindowClass; available in Mac OS X, and CarbonLib 1.3 and later  */
+#define kThemeBrushDrawerBackground 	51					/*  use with kDrawerWindowClass; available in Mac OS X, and CarbonLib 1.3 and later  */
+#define kThemeBrushToolbarBackground 	52					/*  use with kToolbarWindowClass; available in Mac OS X, and CarbonLib 1.6 and later  */
+#define kThemeBrushSheetBackgroundTransparent  53			/*  use with kSheetWindowClass and kSheetAlertWindowClass; available in Mac OS X 10.1 and CarbonLib 1.6, and later  */
+#define kThemeBrushMenuBackground 		54					/*  available in Mac OS X 10.1 and CarbonLib 1.6, and later  */
+#define kThemeBrushMenuBackgroundSelected  55				/*  available in Mac OS X 10.1 and CarbonLib 1.6, and later  */
 
 #define kThemeBrushSheetBackground 		50
 #define kThemeBrushBlack 				(-1)
 #define kThemeBrushWhite 				(-2)
+#define kThemeBrushPrimaryHighlightColor  (-3)				/*  available in Mac OS 10.1 and CarbonLib 1.6, and later */
+#define kThemeBrushSecondaryHighlightColor  (-4)			/*  available in Mac OS 10.1 and CarbonLib 1.6, and later */
 
 #define kThemeTextColorDialogActive 	1
 #define kThemeTextColorDialogInactive 	2
@@ -142,6 +146,7 @@
 #define kThemeTextColorBevelButtonStickyInactive  46
 
 #define kThemeTextColorNotification 	47
+#define kThemeTextColorSystemDetail 	48
 #define kThemeTextColorBlack 			(-1)
 #define kThemeTextColorWhite 			(-2)
 
@@ -174,6 +179,7 @@
 #define kThemeResizeLeftCursor 			15
 #define kThemeResizeRightCursor 		16
 #define kThemeResizeLeftRightCursor 	17
+#define kThemeNotAllowedCursor 			18					/*  Jaguar or Later  */
 
 #define kThemeMenuBarNormal 			0
 #define kThemeMenuBarSelected 			1
@@ -207,7 +213,7 @@
 
 #define kThemeNameTag 					'name'				/*  Str255 */
 #define kThemeVariantNameTag 			'varn'				/*  Str255 */
-#define kThemeVariantBaseTintTag 		'tint'				/*  RGBColor */
+#define kThemeVariantBaseTintTag 		'tint'				/*  RGBColor (10.1 and later) */
 #define kThemeHighlightColorTag 		'hcol'				/*  RGBColor */
 #define kThemeScrollBarArrowStyleTag 	'sbar'				/*  ThemeScrollBarArrowStyle */
 #define kThemeScrollBarThumbStyleTag 	'sbth'				/*  ThemeScrollBarThumbStyle */
@@ -223,7 +229,7 @@
 #define kThemeDesktopPatternTag 		'patt'				/*  <variable-length data> (flattened pattern) */
 #define kThemeDesktopPictureNameTag 	'dpnm'				/*  Str255 */
 #define kThemeDesktopPictureAliasTag 	'dpal'				/*  <alias handle> */
-#define kThemeDesktopPictureAlignmentTag  'dpan'			/*  UInt32 */
+#define kThemeDesktopPictureAlignmentTag  'dpan'			/*  UInt32 (see the Picture Alignments below) */
 #define kThemeHighlightColorNameTag 	'hcnm'				/*  Str255 */
 #define kThemeExamplePictureIDTag 		'epic'				/*  SInt16 */
 #define kThemeSoundTrackNameTag 		'sndt'				/*  Str255 */
@@ -231,6 +237,12 @@
 #define kThemeUserDefinedTag 			'user'				/*  Boolean (this should _always_ be true if present - used by Control Panel). */
 #define kThemeSmoothFontEnabledTag 		'smoo'				/*  Boolean */
 #define kThemeSmoothFontMinSizeTag 		'smos'				/*  UInt16 (must be >= 12 and <= 24) */
+
+#define kTiledOnScreen 					1					/*  draws picture repeatedly */
+#define kCenterOnScreen 				2					/*  "actual size", shows pattern on sides or clips picture if necessary */
+#define kFitToScreen 					3					/*  shrinks if necessary */
+#define kFillScreen 					4					/*  messes up aspect ratio if necessary */
+#define kUseBestGuess 					5					/*  heuristically determines the best way to display the picture based on picture and monitor sizes */
 
 #define kThemeCheckBoxClassicX 			0					/*  check box with an 'X' */
 #define kThemeCheckBoxCheckMark 		1					/*  check box with a real check mark */
@@ -256,9 +268,12 @@
 #define kThemePushButtonFont 			105
 #define kThemeUtilityWindowTitleFont 	106
 #define kThemeAlertHeaderFont 			107
-#define kThemeCurrentPortFont 			200
+#define kThemeSystemFontDetail 			7
+#define kThemeSystemFontDetailEmphasized  8
+#define kThemeCurrentPortFont 			200					/*  Available in JAGUAR or later */
+#define kThemeToolbarFont 				108
 
-#define kPublicThemeFontCount 			16
+#define kPublicThemeFontCount 			17
 #define kThemeTabNonFront 				0
 #define kThemeTabNonFrontPressed 		1
 #define kThemeTabNonFrontInactive 		2
@@ -314,11 +329,12 @@
 #define kThemeThumbUpward 				1
 #define kThemeThumbDownward 			2
 
-#define kThemeTrackHorizontal 			0x01				/*  track is drawn horizontally */
-#define kThemeTrackRightToLeft 			0x02				/*  track progresses from right to left */
-#define kThemeTrackShowThumb 			0x04				/*  track's thumb should be drawn */
-#define kThemeTrackThumbRgnIsNotGhost 	0x08				/*  the provided thumbRgn should be drawn opaque, not as a ghost */
-#define kThemeTrackNoScrollBarArrows 	0x10				/*  the scroll bar doesn't have arrows */
+#define kThemeTrackHorizontal 			0x01
+#define kThemeTrackRightToLeft 			0x02
+#define kThemeTrackShowThumb 			0x04
+#define kThemeTrackThumbRgnIsNotGhost 	0x08
+#define kThemeTrackNoScrollBarArrows 	0x10
+#define kThemeTrackHasFocus 			0x20
 
 #define kThemeWindowHasGrow 			0x01				/*  can the size of the window be changed by the user?  */
 #define kThemeWindowHasHorizontalZoom 	0x08				/*  window can zoom only horizontally  */
@@ -341,6 +357,7 @@
 #define kThemeUtilityWindow 			8
 #define kThemeUtilitySideWindow 		9
 #define kThemeSheetWindow 				10
+#define kThemeDrawerWindow 				11
 
 #define kThemeWidgetCloseBox 			0
 #define kThemeWidgetZoomBox 			1
@@ -573,47 +590,26 @@
 #define kThemeMetricTabOverlap 			14
 #define kThemeMetricSmallTabHeight 		15
 #define kThemeMetricSmallTabCapsWidth 	16
-#define kThemeMetricDisclosureButtonHeight  17
-#define kThemeMetricRoundButtonSize 	18
 #define kThemeMetricPushButtonHeight 	19
 #define kThemeMetricListHeaderHeight 	20
-#define kThemeMetricSmallCheckBoxHeight  21
-#define kThemeMetricDisclosureButtonWidth  22
-#define kThemeMetricSmallDisclosureButtonHeight  23
-#define kThemeMetricSmallDisclosureButtonWidth  24
 #define kThemeMetricDisclosureTriangleHeight  25
 #define kThemeMetricDisclosureTriangleWidth  26
 #define kThemeMetricLittleArrowsHeight 	27
 #define kThemeMetricLittleArrowsWidth 	28
-#define kThemeMetricPaneSplitterHeight 	29
 #define kThemeMetricPopupButtonHeight 	30
 #define kThemeMetricSmallPopupButtonHeight  31
 #define kThemeMetricLargeProgressBarThickness  32
 #define kThemeMetricPullDownHeight 		33
 #define kThemeMetricSmallPullDownHeight  34
-#define kThemeMetricSmallPushButtonHeight  35
-#define kThemeMetricSmallRadioButtonHeight  36
-#define kThemeMetricRelevanceIndicatorHeight  37
 #define kThemeMetricResizeControlHeight  38
 #define kThemeMetricSmallResizeControlHeight  39
-#define kThemeMetricLargeRoundButtonSize  40
 #define kThemeMetricHSliderHeight 		41
 #define kThemeMetricHSliderTickHeight 	42
-#define kThemeMetricSmallHSliderHeight 	43
-#define kThemeMetricSmallHSliderTickHeight  44
 #define kThemeMetricVSliderWidth 		45
 #define kThemeMetricVSliderTickWidth 	46
-#define kThemeMetricSmallVSliderWidth 	47
-#define kThemeMetricSmallVSliderTickWidth  48
 #define kThemeMetricTitleBarControlsHeight  49
 #define kThemeMetricCheckBoxWidth 		50
-#define kThemeMetricSmallCheckBoxWidth 	51
 #define kThemeMetricRadioButtonWidth 	52
-#define kThemeMetricSmallRadioButtonWidth  53
-#define kThemeMetricSmallHSliderMinThumbWidth  54
-#define kThemeMetricSmallVSliderMinThumbHeight  55
-#define kThemeMetricSmallHSliderTickOffset  56
-#define kThemeMetricSmallVSliderTickOffset  57
 #define kThemeMetricNormalProgressBarThickness  58
 #define kThemeMetricProgressBarShadowOutset  59
 #define kThemeMetricSmallProgressBarShadowOutset  60
@@ -626,6 +622,28 @@
 #define kThemeMetricMenuTextTrailingEdgeMargin  67
 #define kThemeMetricMenuIndentWidth 	68
 #define kThemeMetricMenuIconTrailingEdgeMargin  69
+
+#define kThemeMetricDisclosureButtonHeight  17
+#define kThemeMetricRoundButtonSize 	18
+#define kThemeMetricSmallCheckBoxHeight  21
+#define kThemeMetricDisclosureButtonWidth  22
+#define kThemeMetricSmallDisclosureButtonHeight  23
+#define kThemeMetricSmallDisclosureButtonWidth  24
+#define kThemeMetricPaneSplitterHeight 	29
+#define kThemeMetricSmallPushButtonHeight  35
+#define kThemeMetricSmallRadioButtonHeight  36
+#define kThemeMetricRelevanceIndicatorHeight  37
+#define kThemeMetricLargeRoundButtonSize  40
+#define kThemeMetricSmallHSliderHeight 	43
+#define kThemeMetricSmallHSliderTickHeight  44
+#define kThemeMetricSmallVSliderWidth 	47
+#define kThemeMetricSmallVSliderTickWidth  48
+#define kThemeMetricSmallCheckBoxWidth 	51
+#define kThemeMetricSmallRadioButtonWidth  53
+#define kThemeMetricSmallHSliderMinThumbWidth  54
+#define kThemeMetricSmallVSliderMinThumbHeight  55
+#define kThemeMetricSmallHSliderTickOffset  56
+#define kThemeMetricSmallVSliderTickOffset  57
 
 #define appearanceBadBrushIndexErr 		(-30560)			/*  pattern index invalid  */
 #define appearanceProcessRegisteredErr 	(-30561)

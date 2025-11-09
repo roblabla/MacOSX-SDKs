@@ -252,4 +252,14 @@
 
 #endif /* !__i386__ */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern int __fegetfltrounds( void ); 
+#ifdef __cplusplus
+}
+#endif
+#undef FLT_ROUNDS
+#define FLT_ROUNDS (__fegetfltrounds ())
+
 #endif /* _FLOAT_H_ */

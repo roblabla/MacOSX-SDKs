@@ -3,9 +3,9 @@
  
      Contains:   Public interfaces for Apple Type Services components.
  
-     Version:    ATS-77.1~62
+     Version:    ATS-102.4~1
  
-     Copyright:  © 1997-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1997-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,20 +16,12 @@
 #ifndef __ATSTYPES__
 #define __ATSTYPES__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __FILES__
-#include <CarbonCore/Files.h>
-#endif
-
-#ifndef __MIXEDMODE__
-#include <CarbonCore/MixedMode.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -39,13 +31,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 typedef UInt32                          FMGeneration;
 /* The FMFontFamily reference represents a collection of fonts with the same design
@@ -121,7 +107,7 @@ typedef STACK_UPP_TYPE(FMFontCallbackFilterProcPtr)             FMFontCallbackFi
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern FMFontFamilyCallbackFilterUPP
-NewFMFontFamilyCallbackFilterUPP(FMFontFamilyCallbackFilterProcPtr userRoutine);
+NewFMFontFamilyCallbackFilterUPP(FMFontFamilyCallbackFilterProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewFMFontCallbackFilterUPP()
@@ -132,7 +118,7 @@ NewFMFontFamilyCallbackFilterUPP(FMFontFamilyCallbackFilterProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern FMFontCallbackFilterUPP
-NewFMFontCallbackFilterUPP(FMFontCallbackFilterProcPtr userRoutine);
+NewFMFontCallbackFilterUPP(FMFontCallbackFilterProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeFMFontFamilyCallbackFilterUPP()
@@ -143,7 +129,7 @@ NewFMFontCallbackFilterUPP(FMFontCallbackFilterProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeFMFontFamilyCallbackFilterUPP(FMFontFamilyCallbackFilterUPP userUPP);
+DisposeFMFontFamilyCallbackFilterUPP(FMFontFamilyCallbackFilterUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeFMFontCallbackFilterUPP()
@@ -154,7 +140,7 @@ DisposeFMFontFamilyCallbackFilterUPP(FMFontFamilyCallbackFilterUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeFMFontCallbackFilterUPP(FMFontCallbackFilterUPP userUPP);
+DisposeFMFontCallbackFilterUPP(FMFontCallbackFilterUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeFMFontFamilyCallbackFilterUPP()
@@ -168,7 +154,7 @@ extern OSStatus
 InvokeFMFontFamilyCallbackFilterUPP(
   FMFontFamily                   iFontFamily,
   void *                         iRefCon,
-  FMFontFamilyCallbackFilterUPP  userUPP);
+  FMFontFamilyCallbackFilterUPP  userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeFMFontCallbackFilterUPP()
@@ -182,7 +168,7 @@ extern OSStatus
 InvokeFMFontCallbackFilterUPP(
   FMFont                   iFont,
   void *                   iRefCon,
-  FMFontCallbackFilterUPP  userUPP);
+  FMFontCallbackFilterUPP  userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 struct FMFontDirectoryFilter {
   SInt16              fontFolderDomain;
@@ -251,6 +237,15 @@ enum {
   kATSOtherCurveType            = 0x0003
 };
 
+/* 
+    This is what the ATSGlyphRef is set to when the glyph is deleted -
+    that is, when the glyph is set to no longer appear when the layout
+    is actually drawn
+*/
+enum {
+  kATSDeletedGlyphcode          = 0xFFFF
+};
+
 struct ATSUCurvePath {
   UInt32              vectors;
   UInt32              controlBits[1];
@@ -279,16 +274,11 @@ struct ATSGlyphScreenMetrics {
   Float32Point        otherSideBearing;
 };
 typedef struct ATSGlyphScreenMetrics    ATSGlyphScreenMetrics;
+/* Glyph References */
 
 typedef ATSGlyphRef                     GlyphID;
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

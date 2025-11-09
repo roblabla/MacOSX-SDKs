@@ -30,6 +30,8 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* clock_priv_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 #include <mach/mach_types.h>
 
@@ -63,6 +65,62 @@ kern_return_t clock_set_attributes
 	clock_attr_t clock_attr,
 	mach_msg_type_number_t clock_attrCnt
 );
+/* typedefs for all requests */
+
+#ifndef __Request__clock_priv_subsystem__defined
+#define __Request__clock_priv_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_timespec_t new_time;
+	} __Request__clock_set_time_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		clock_flavor_t flavor;
+		mach_msg_type_number_t clock_attrCnt;
+		int clock_attr[1];
+	} __Request__clock_set_attributes_t;
+
+#endif /* !__Request__clock_priv_subsystem__defined */
+
+/* union of all requests */
+
+#ifndef __RequestUnion__clock_priv_subsystem__defined
+#define __RequestUnion__clock_priv_subsystem__defined
+union __RequestUnion__clock_priv_subsystem {
+	__Request__clock_set_time_t Request_clock_set_time;
+	__Request__clock_set_attributes_t Request_clock_set_attributes;
+};
+#endif /* !__RequestUnion__clock_priv_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__clock_priv_subsystem__defined
+#define __Reply__clock_priv_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__clock_set_time_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__clock_set_attributes_t;
+
+#endif /* !__Reply__clock_priv_subsystem__defined */
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__clock_priv_subsystem__defined
+#define __ReplyUnion__clock_priv_subsystem__defined
+union __ReplyUnion__clock_priv_subsystem {
+	__Reply__clock_set_time_t Reply_clock_set_time;
+	__Reply__clock_set_attributes_t Reply_clock_set_attributes;
+};
+#endif /* !__RequestUnion__clock_priv_subsystem__defined */
 
 #ifndef subsystem_to_name_map_clock_priv
 #define subsystem_to_name_map_clock_priv \

@@ -3,9 +3,9 @@
  
      Contains:   Open Scripting Architecture Client Interfaces.
  
-     Version:    OSA-30~10
+     Version:    OSA-48~15
  
-     Copyright:  © 1992-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1992-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,32 +16,17 @@
 #ifndef __OSA__
 #define __OSA__
 
-#ifndef __MACERRORS__
-#include <CarbonCore/MacErrors.h>
-#endif
-
-#ifndef __APPLEEVENTS__
-#include <AE/AppleEvents.h>
-#endif
-
-#ifndef __AEOBJECTS__
-#include <AE/AEObjects.h>
+#ifndef __APPLICATIONSERVICES__
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 #ifndef __AEINTERACTION__
 #include <HIToolbox/AEInteraction.h>
 #endif
 
-#ifndef __COMPONENTS__
-#include <CarbonCore/Components.h>
-#endif
-
-#ifndef __MACERRORS__
-#include <CarbonCore/MacErrors.h>
-#endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -51,13 +36,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /**************************************************************************
     Types and Constants
@@ -178,7 +157,7 @@ typedef STACK_UPP_TYPE(OSASendProcPtr)                          OSASendUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSACreateAppleEventUPP
-NewOSACreateAppleEventUPP(OSACreateAppleEventProcPtr userRoutine);
+NewOSACreateAppleEventUPP(OSACreateAppleEventProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewOSASendUPP()
@@ -189,7 +168,7 @@ NewOSACreateAppleEventUPP(OSACreateAppleEventProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSASendUPP
-NewOSASendUPP(OSASendProcPtr userRoutine);
+NewOSASendUPP(OSASendProcPtr userRoutine)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeOSACreateAppleEventUPP()
@@ -200,7 +179,7 @@ NewOSASendUPP(OSASendProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSACreateAppleEventUPP(OSACreateAppleEventUPP userUPP);
+DisposeOSACreateAppleEventUPP(OSACreateAppleEventUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeOSASendUPP()
@@ -211,7 +190,7 @@ DisposeOSACreateAppleEventUPP(OSACreateAppleEventUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSASendUPP(OSASendUPP userUPP);
+DisposeOSASendUPP(OSASendUPP userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeOSACreateAppleEventUPP()
@@ -230,7 +209,7 @@ InvokeOSACreateAppleEventUPP(
   long                    transactionID,
   AppleEvent *            result,
   long                    refCon,
-  OSACreateAppleEventUPP  userUPP);
+  OSACreateAppleEventUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeOSASendUPP()
@@ -250,7 +229,7 @@ InvokeOSASendUPP(
   AEIdleUPP           idleProc,
   AEFilterUPP         filterProc,
   long                refCon,
-  OSASendUPP          userUPP);
+  OSASendUPP          userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /**************************************************************************
     OSA Interface Descriptions
@@ -538,7 +517,7 @@ OSALoad(
   ComponentInstance   scriptingComponent,
   const AEDesc *      scriptData,
   long                modeFlags,
-  OSAID *             resultingScriptID);
+  OSAID *             resultingScriptID)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -569,7 +548,7 @@ OSAStore(
   OSAID               scriptID,
   DescType            desiredType,
   long                modeFlags,
-  AEDesc *            resultingScriptData);
+  AEDesc *            resultingScriptData)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -600,7 +579,7 @@ OSAExecute(
   OSAID               compiledScriptID,
   OSAID               contextID,
   long                modeFlags,
-  OSAID *             resultingScriptValueID);
+  OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -643,7 +622,7 @@ OSADisplay(
   OSAID               scriptValueID,
   DescType            desiredType,
   long                modeFlags,
-  AEDesc *            resultingText);
+  AEDesc *            resultingText)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -680,7 +659,7 @@ OSAScriptError(
   ComponentInstance   scriptingComponent,
   OSType              selector,
   DescType            desiredType,
-  AEDesc *            resultingErrorDescription);
+  AEDesc *            resultingErrorDescription)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -826,7 +805,7 @@ enum {
 extern OSAError 
 OSADispose(
   ComponentInstance   scriptingComponent,
-  OSAID               scriptID);
+  OSAID               scriptID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -852,7 +831,7 @@ OSASetScriptInfo(
   ComponentInstance   scriptingComponent,
   OSAID               scriptID,
   OSType              selector,
-  long                value);
+  long                value)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -878,7 +857,7 @@ OSAGetScriptInfo(
   ComponentInstance   scriptingComponent,
   OSAID               scriptID,
   OSType              selector,
-  long *              result);
+  long *              result)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -907,7 +886,7 @@ typedef STACK_UPP_TYPE(OSAActiveProcPtr)                        OSAActiveUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSAActiveUPP
-NewOSAActiveUPP(OSAActiveProcPtr userRoutine);
+NewOSAActiveUPP(OSAActiveProcPtr userRoutine)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeOSAActiveUPP()
@@ -918,7 +897,7 @@ NewOSAActiveUPP(OSAActiveProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSAActiveUPP(OSAActiveUPP userUPP);
+DisposeOSAActiveUPP(OSAActiveUPP userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeOSAActiveUPP()
@@ -931,7 +910,7 @@ DisposeOSAActiveUPP(OSAActiveUPP userUPP);
 extern OSErr
 InvokeOSAActiveUPP(
   long          refCon,
-  OSAActiveUPP  userUPP);
+  OSAActiveUPP  userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  OSASetActiveProc()
@@ -945,7 +924,7 @@ extern OSAError
 OSASetActiveProc(
   ComponentInstance   scriptingComponent,
   OSAActiveUPP        activeProc,
-  long                refCon);
+  long                refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -968,7 +947,7 @@ extern OSAError
 OSAGetActiveProc(
   ComponentInstance   scriptingComponent,
   OSAActiveUPP *      activeProc,
-  long *              refCon);
+  long *              refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -995,7 +974,7 @@ OSAGetActiveProc(
 extern OSAError 
 OSAScriptingComponentName(
   ComponentInstance   scriptingComponent,
-  AEDesc *            resultingScriptingComponentName);
+  AEDesc *            resultingScriptingComponentName)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1023,7 +1002,7 @@ OSACompile(
   ComponentInstance   scriptingComponent,
   const AEDesc *      sourceData,
   long                modeFlags,
-  OSAID *             previousAndResultingScriptID);
+  OSAID *             previousAndResultingScriptID)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1066,7 +1045,7 @@ extern OSAError
 OSACopyID(
   ComponentInstance   scriptingComponent,
   OSAID               fromID,
-  OSAID *             toID);
+  OSAID *             toID)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1119,7 +1098,7 @@ OSAGetSource(
   ComponentInstance   scriptingComponent,
   OSAID               scriptID,
   DescType            desiredType,
-  AEDesc *            resultingSourceData);
+  AEDesc *            resultingSourceData)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1152,7 +1131,7 @@ OSACoerceFromDesc(
   ComponentInstance   scriptingComponent,
   const AEDesc *      scriptData,
   long                modeFlags,
-  OSAID *             resultingScriptID);
+  OSAID *             resultingScriptID)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1190,7 +1169,7 @@ OSACoerceToDesc(
   OSAID               scriptID,
   DescType            desiredType,
   long                modeFlags,
-  AEDesc *            result);
+  AEDesc *            result)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1226,7 +1205,7 @@ extern OSAError
 OSASetSendProc(
   ComponentInstance   scriptingComponent,
   OSASendUPP          sendProc,
-  long                refCon);
+  long                refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1249,7 +1228,7 @@ extern OSAError
 OSAGetSendProc(
   ComponentInstance   scriptingComponent,
   OSASendUPP *        sendProc,
-  long *              refCon);
+  long *              refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1271,7 +1250,7 @@ extern OSAError
 OSASetCreateProc(
   ComponentInstance        scriptingComponent,
   OSACreateAppleEventUPP   createProc,
-  long                     refCon);
+  long                     refCon)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1294,7 +1273,7 @@ extern OSAError
 OSAGetCreateProc(
   ComponentInstance         scriptingComponent,
   OSACreateAppleEventUPP *  createProc,
-  long *                    refCon);
+  long *                    refCon)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1315,7 +1294,7 @@ OSAGetCreateProc(
 extern OSAError 
 OSASetDefaultTarget(
   ComponentInstance      scriptingComponent,
-  const AEAddressDesc *  target);
+  const AEAddressDesc *  target)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1347,7 +1326,7 @@ OSASetDefaultTarget(
 extern OSAError 
 OSAStartRecording(
   ComponentInstance   scriptingComponent,
-  OSAID *             compiledScriptToModifyID);
+  OSAID *             compiledScriptToModifyID)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1375,7 +1354,7 @@ OSAStartRecording(
 extern OSAError 
 OSAStopRecording(
   ComponentInstance   scriptingComponent,
-  OSAID               compiledScriptID);
+  OSAID               compiledScriptID)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1408,7 +1387,7 @@ OSALoadExecute(
   const AEDesc *      scriptData,
   OSAID               contextID,
   long                modeFlags,
-  OSAID *             resultingScriptValueID);
+  OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1449,7 +1428,7 @@ OSACompileExecute(
   const AEDesc *      sourceData,
   OSAID               contextID,
   long                modeFlags,
-  OSAID *             resultingScriptValueID);
+  OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1490,7 +1469,7 @@ OSADoScript(
   OSAID               contextID,
   DescType            desiredType,
   long                modeFlags,
-  AEDesc *            resultingText);
+  AEDesc *            resultingText)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1544,7 +1523,7 @@ OSADoScript(
 extern OSAError 
 OSASetCurrentDialect(
   ComponentInstance   scriptingComponent,
-  short               dialectCode);
+  short               dialectCode)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1566,7 +1545,7 @@ OSASetCurrentDialect(
 extern OSAError 
 OSAGetCurrentDialect(
   ComponentInstance   scriptingComponent,
-  short *             resultingDialectCode);
+  short *             resultingDialectCode)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1587,7 +1566,7 @@ OSAGetCurrentDialect(
 extern OSAError 
 OSAAvailableDialects(
   ComponentInstance   scriptingComponent,
-  AEDesc *            resultingDialectInfoList);
+  AEDesc *            resultingDialectInfoList)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1615,7 +1594,7 @@ OSAGetDialectInfo(
   ComponentInstance   scriptingComponent,
   short               dialectCode,
   OSType              selector,
-  AEDesc *            resultingDialectInfo);
+  AEDesc *            resultingDialectInfo)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1643,7 +1622,7 @@ OSAGetDialectInfo(
 extern OSAError 
 OSAAvailableDialectCodeList(
   ComponentInstance   scriptingComponent,
-  AEDesc *            resultingDialectCodeList);
+  AEDesc *            resultingDialectCodeList)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1686,7 +1665,7 @@ extern OSAError
 OSASetResumeDispatchProc(
   ComponentInstance   scriptingComponent,
   AEEventHandlerUPP   resumeDispatchProc,
-  long                refCon);
+  long                refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1755,7 +1734,7 @@ extern OSAError
 OSAGetResumeDispatchProc(
   ComponentInstance    scriptingComponent,
   AEEventHandlerUPP *  resumeDispatchProc,
-  long *               refCon);
+  long *               refCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1781,7 +1760,7 @@ OSAExecuteEvent(
   const AppleEvent *  theAppleEvent,
   OSAID               contextID,
   long                modeFlags,
-  OSAID *             resultingScriptValueID);
+  OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1824,7 +1803,7 @@ OSADoEvent(
   const AppleEvent *  theAppleEvent,
   OSAID               contextID,
   long                modeFlags,
-  AppleEvent *        reply);
+  AppleEvent *        reply)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1870,7 +1849,7 @@ OSAMakeContext(
   ComponentInstance   scriptingComponent,
   const AEDesc *      contextName,
   OSAID               parentContext,
-  OSAID *             resultingContextID);
+  OSAID *             resultingContextID)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1957,7 +1936,7 @@ OSADebuggerCreateSession(
   ComponentInstance     scriptingComponent,
   OSAID                 inScript,
   OSAID                 inContext,
-  OSADebugSessionRef *  outSession);
+  OSADebugSessionRef *  outSession)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1972,7 +1951,7 @@ extern OSAError
 OSADebuggerGetSessionState(
   ComponentInstance    scriptingComponent,
   OSADebugSessionRef   inSession,
-  AERecord *           outState);
+  AERecord *           outState)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1987,7 +1966,7 @@ extern OSAError
 OSADebuggerSessionStep(
   ComponentInstance    scriptingComponent,
   OSADebugSessionRef   inSession,
-  OSADebugStepKind     inKind);
+  OSADebugStepKind     inKind)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2001,7 +1980,7 @@ OSADebuggerSessionStep(
 extern OSAError 
 OSADebuggerDisposeSession(
   ComponentInstance    scriptingComponent,
-  OSADebugSessionRef   inSession);
+  OSADebugSessionRef   inSession)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2016,7 +1995,7 @@ extern OSAError
 OSADebuggerGetStatementRanges(
   ComponentInstance    scriptingComponent,
   OSADebugSessionRef   inSession,
-  AEDescList *         outStatementRangeArray);
+  AEDescList *         outStatementRangeArray)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Returns an array of StatementRange objects.*/
@@ -2033,7 +2012,7 @@ OSADebuggerGetBreakpoint(
   ComponentInstance    scriptingComponent,
   OSADebugSessionRef   inSession,
   UInt32               inSrcOffset,
-  OSAID *              outBreakpoint);
+  OSAID *              outBreakpoint)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2049,7 +2028,7 @@ OSADebuggerSetBreakpoint(
   ComponentInstance    scriptingComponent,
   OSADebugSessionRef   inSession,
   UInt32               inSrcOffset,
-  OSAID                inBreakpoint);
+  OSAID                inBreakpoint)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2064,7 +2043,7 @@ extern OSAError
 OSADebuggerGetDefaultBreakpoint(
   ComponentInstance    scriptingComponent,
   OSADebugSessionRef   inSession,
-  OSAID *              outBreakpoint);
+  OSAID *              outBreakpoint)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2082,7 +2061,7 @@ extern OSAError
 OSADebuggerGetCurrentCallFrame(
   ComponentInstance       scriptingComponent,
   OSADebugSessionRef      inSession,
-  OSADebugCallFrameRef *  outCallFrame);
+  OSADebugCallFrameRef *  outCallFrame)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2097,7 +2076,7 @@ extern OSAError
 OSADebuggerGetCallFrameState(
   ComponentInstance      scriptingComponent,
   OSADebugCallFrameRef   inCallFrame,
-  AERecord *             outState);
+  AERecord *             outState)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2113,7 +2092,7 @@ OSADebuggerGetVariable(
   ComponentInstance      scriptingComponent,
   OSADebugCallFrameRef   inCallFrame,
   const AEDesc *         inVariableName,
-  OSAID *                outVariable);
+  OSAID *                outVariable)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2129,7 +2108,7 @@ OSADebuggerSetVariable(
   ComponentInstance      scriptingComponent,
   OSADebugCallFrameRef   inCallFrame,
   const AEDesc *         inVariableName,
-  OSAID                  inVariable);
+  OSAID                  inVariable)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2144,7 +2123,7 @@ extern OSAError
 OSADebuggerGetPreviousCallFrame(
   ComponentInstance       scriptingComponent,
   OSADebugCallFrameRef    inCurrentFrame,
-  OSADebugCallFrameRef *  outPrevFrame);
+  OSADebugCallFrameRef *  outPrevFrame)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2158,17 +2137,11 @@ OSADebuggerGetPreviousCallFrame(
 extern OSAError 
 OSADebuggerDisposeCallFrame(
   ComponentInstance      scriptingComponent,
-  OSADebugCallFrameRef   inCallFrame);
+  OSADebugCallFrameRef   inCallFrame)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

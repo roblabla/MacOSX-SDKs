@@ -71,16 +71,32 @@
 - (NSArray *)mountNewRemovableMedia;
 - (void)checkForRemovableMedia;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+
+/* The following methods return information about an application as a dictionary containing as many of the following keys as are available:
+        NSApplicationPath (the full path to the application, as a string)
+        NSApplicationName (the application's name, as a string)
+        NSApplicationProcessIdentifier (the application's process id, as an NSNumber)
+        NSApplicationProcessSerialNumberHigh (the high long of the PSN, as an NSNumber)
+        NSApplicationProcessSerialNumberLow (the low long of the PSN, as an NSNumber)
+   The same information will now be provided in the userInfo of the NSWorkspace notifications for application launch and termination.
+*/
+
+- (NSArray *)launchedApplications;	/* Returns an array of dictionaries, one for each running application. */
+- (NSDictionary *)activeApplication;	/* Returns a dictionary with information about the current active application. */
+
+#endif
+
 @end
 
 /* Notifications (through the special notification center) 
 */									// userInfo keys:
-APPKIT_EXTERN NSString *NSWorkspaceDidLaunchApplicationNotification;	//	@"NSApplicationName"
+APPKIT_EXTERN NSString *NSWorkspaceDidLaunchApplicationNotification;	//	see above
 APPKIT_EXTERN NSString *NSWorkspaceDidMountNotification;		//	@"NSDevicePath"
 APPKIT_EXTERN NSString *NSWorkspaceDidPerformFileOperationNotification;	//	@"NSOperationNumber"
-APPKIT_EXTERN NSString *NSWorkspaceDidTerminateApplicationNotification;	//	@"NSApplicationName"
+APPKIT_EXTERN NSString *NSWorkspaceDidTerminateApplicationNotification;	//	see above
 APPKIT_EXTERN NSString *NSWorkspaceDidUnmountNotification;		//	@"NSDevicePath"
-APPKIT_EXTERN NSString *NSWorkspaceWillLaunchApplicationNotification;	//	@"NSApplicationName"
+APPKIT_EXTERN NSString *NSWorkspaceWillLaunchApplicationNotification;	//	see above
 APPKIT_EXTERN NSString *NSWorkspaceWillPowerOffNotification;
 APPKIT_EXTERN NSString *NSWorkspaceWillUnmountNotification;		//	@"NSDevicePath"
 

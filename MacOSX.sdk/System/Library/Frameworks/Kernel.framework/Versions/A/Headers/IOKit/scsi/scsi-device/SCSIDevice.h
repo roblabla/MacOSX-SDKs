@@ -62,7 +62,7 @@ enum SCSITransferOptions
     kSCSITransferOptionClockDT 		= 0x00000001,
     kSCSITransferOptionQAS     		= 0x00000100,
     kSCSITransferOptionIUS     		= 0x00000200,
-    kSCSITransferOptionPPR     		= 0x00000400,
+    kSCSITransferOptionPPR     		= 0x00000400
 };
 
 #define kSCSITransferOptionsSCSI3	(kSCSITransferOptionClockDT | kSCSITransferOptionQAS | kSCSITransferOptionIUS | kSCSITransferOptionPPR)
@@ -75,7 +75,7 @@ enum SCSIDeviceTimeouts
     kSCSIResetIntervalmS 	= 3000,
     kSCSIAbortTimeoutmS  	= 5000,
     kSCSIReqSenseTimeoutmS	= 5000,
-    kSCSIDisableTimeoutmS	= 5000,
+    kSCSIDisableTimeoutmS	= 5000
 };
 
 enum SCSIClientMessage
@@ -85,19 +85,19 @@ enum SCSIClientMessage
     kSCSIClientMsgDeviceReset,
     kSCSIClientMsgBusReset,		
 
-    kSCSIClientMsgDone			= 0x80000000,
+    kSCSIClientMsgDone			= 0x80000000
 };
 
 enum SCSIQueueType
 {
     kQTypeNormalQ		= 0,
-    kQTypeBypassQ		= 1,
+    kQTypeBypassQ		= 1
 };
 
 enum SCSIQueuePosition
 {
     kQPositionTail		= 0,
-    kQPositionHead		= 1,
+    kQPositionHead		= 1
 };
 
 

@@ -1,5 +1,5 @@
 /*	CFPreferences.h
-	Copyright 1998-2001, Apple, Inc. All rights reserved.
+	Copyright 1998-2002, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFPREFERENCES__)
@@ -7,7 +7,6 @@
 
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFArray.h>
-#include <CoreFoundation/CFPropertyList.h>
 #include <CoreFoundation/CFString.h>
 
 #if defined(__cplusplus)
@@ -116,6 +115,17 @@ location.  The returned value must be released by the caller;
 all arguments must be non-NULL */
 CF_EXPORT
 CFArrayRef CFPreferencesCopyKeyList(CFStringRef applicationID, CFStringRef userName, CFStringRef hostName);
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+/* Function to determine whether or not a given key has been imposed on the
+user - In cases where machines and/or users are under some kind of management,
+callers should use this function to determine whether or not to disable UI elements
+corresponding to those preference keys. */
+CF_EXPORT
+Boolean CFPreferencesAppValueIsForced(CFStringRef key, CFStringRef applicationID);
+
+#endif
 
 #if defined(__cplusplus)
 }

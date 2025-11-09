@@ -3,9 +3,9 @@
  
      Contains:   Data types for Finder AppleEvents
  
-     Version:    OSA-30~10
+     Version:    OSA-48~15
  
-     Copyright:  © 1991-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1991-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,8 +16,8 @@
 #ifndef __FINDERREGISTRY__
 #define __FINDERREGISTRY__
 
-#ifndef __AEREGISTRY__
-#include <AE/AERegistry.h>
+#ifndef __APPLICATIONSERVICES__
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 #ifndef __OSA__
@@ -26,21 +26,10 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
-#endif
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 
@@ -732,17 +721,6 @@ enum {
 };
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __FINDERREGISTRY__ */
 

@@ -14,7 +14,7 @@
     /*All instance variables are private*/
     NSMatrix 		*_faces;
     NSMatrix 		*_families;
-    id                  _preview; // no longer used
+    id                  _preview; 
     id                  _current; // no longer used
     id                  _size;
     NSMatrix 		*_sizes;
@@ -23,7 +23,7 @@
     NSMutableArray	*_collections;
     NSMutableDictionary *_collectionDicts;
     id                  _accessoryView;
-    NSBrowser		*_browser;	// main Family/Face browser
+    id			_browser;	
     NSButton		*_setButton;
     id                  _separator;
     id                  _sizeTitle;
@@ -121,7 +121,19 @@
 
     id _doneButton; // done with col editing.
 
-    id _Reserved32[28]; // Some reserved thingies for ui widgets.
+    id _familyList;
+    id _faceList;
+    id _familyBrowser;
+    id _faceBrowser;
+    id _favoritesList;
+    id _mainCollectionList;
+    id _sizeList;
+    id _allFamiliesList;
+    id _curFont;
+    id _sizeEditDoneButton;
+    id _carbonNotification;
+    id _resetSizesButton;
+    id _Reserved32[16]; // Some reserved thingies for ui widgets.
     id _sizeChooser; // matrix of radio buttons to choose list/slider mode
     id _sizeChooserFld_New; // text fields in the size edit pane.
     id _sizeChooserFld_Min;

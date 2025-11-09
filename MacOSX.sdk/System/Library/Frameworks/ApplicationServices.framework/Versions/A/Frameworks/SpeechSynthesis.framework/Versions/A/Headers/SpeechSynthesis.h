@@ -3,9 +3,9 @@
  
      Contains:   Speech Interfaces.
  
-     Version:    SpeechSynthesis-3_0_1b8~12
+     Version:    SpeechSynthesis-3.1.27~219
  
-     Copyright:  © 1989-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1989-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,7 @@
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -30,13 +31,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   kTextToSpeechSynthType        = 'ttsc',
@@ -230,7 +225,7 @@ typedef STACK_UPP_TYPE(SpeechWordProcPtr)                       SpeechWordUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SpeechTextDoneUPP
-NewSpeechTextDoneUPP(SpeechTextDoneProcPtr userRoutine);
+NewSpeechTextDoneUPP(SpeechTextDoneProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewSpeechDoneUPP()
@@ -241,7 +236,7 @@ NewSpeechTextDoneUPP(SpeechTextDoneProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SpeechDoneUPP
-NewSpeechDoneUPP(SpeechDoneProcPtr userRoutine);
+NewSpeechDoneUPP(SpeechDoneProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewSpeechSyncUPP()
@@ -252,7 +247,7 @@ NewSpeechDoneUPP(SpeechDoneProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SpeechSyncUPP
-NewSpeechSyncUPP(SpeechSyncProcPtr userRoutine);
+NewSpeechSyncUPP(SpeechSyncProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewSpeechErrorUPP()
@@ -263,7 +258,7 @@ NewSpeechSyncUPP(SpeechSyncProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SpeechErrorUPP
-NewSpeechErrorUPP(SpeechErrorProcPtr userRoutine);
+NewSpeechErrorUPP(SpeechErrorProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewSpeechPhonemeUPP()
@@ -274,7 +269,7 @@ NewSpeechErrorUPP(SpeechErrorProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SpeechPhonemeUPP
-NewSpeechPhonemeUPP(SpeechPhonemeProcPtr userRoutine);
+NewSpeechPhonemeUPP(SpeechPhonemeProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewSpeechWordUPP()
@@ -285,7 +280,7 @@ NewSpeechPhonemeUPP(SpeechPhonemeProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SpeechWordUPP
-NewSpeechWordUPP(SpeechWordProcPtr userRoutine);
+NewSpeechWordUPP(SpeechWordProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeSpeechTextDoneUPP()
@@ -296,7 +291,7 @@ NewSpeechWordUPP(SpeechWordProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSpeechTextDoneUPP(SpeechTextDoneUPP userUPP);
+DisposeSpeechTextDoneUPP(SpeechTextDoneUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeSpeechDoneUPP()
@@ -307,7 +302,7 @@ DisposeSpeechTextDoneUPP(SpeechTextDoneUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSpeechDoneUPP(SpeechDoneUPP userUPP);
+DisposeSpeechDoneUPP(SpeechDoneUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeSpeechSyncUPP()
@@ -318,7 +313,7 @@ DisposeSpeechDoneUPP(SpeechDoneUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSpeechSyncUPP(SpeechSyncUPP userUPP);
+DisposeSpeechSyncUPP(SpeechSyncUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeSpeechErrorUPP()
@@ -329,7 +324,7 @@ DisposeSpeechSyncUPP(SpeechSyncUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSpeechErrorUPP(SpeechErrorUPP userUPP);
+DisposeSpeechErrorUPP(SpeechErrorUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeSpeechPhonemeUPP()
@@ -340,7 +335,7 @@ DisposeSpeechErrorUPP(SpeechErrorUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSpeechPhonemeUPP(SpeechPhonemeUPP userUPP);
+DisposeSpeechPhonemeUPP(SpeechPhonemeUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeSpeechWordUPP()
@@ -351,7 +346,7 @@ DisposeSpeechPhonemeUPP(SpeechPhonemeUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSpeechWordUPP(SpeechWordUPP userUPP);
+DisposeSpeechWordUPP(SpeechWordUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeSpeechTextDoneUPP()
@@ -368,7 +363,7 @@ InvokeSpeechTextDoneUPP(
   const void **      nextBuf,
   unsigned long *    byteLen,
   long *             controlFlags,
-  SpeechTextDoneUPP  userUPP);
+  SpeechTextDoneUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeSpeechDoneUPP()
@@ -382,7 +377,7 @@ extern void
 InvokeSpeechDoneUPP(
   SpeechChannel  chan,
   long           refCon,
-  SpeechDoneUPP  userUPP);
+  SpeechDoneUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeSpeechSyncUPP()
@@ -397,7 +392,7 @@ InvokeSpeechSyncUPP(
   SpeechChannel  chan,
   long           refCon,
   OSType         syncMessage,
-  SpeechSyncUPP  userUPP);
+  SpeechSyncUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeSpeechErrorUPP()
@@ -413,7 +408,7 @@ InvokeSpeechErrorUPP(
   long            refCon,
   OSErr           theError,
   long            bytePos,
-  SpeechErrorUPP  userUPP);
+  SpeechErrorUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeSpeechPhonemeUPP()
@@ -428,7 +423,7 @@ InvokeSpeechPhonemeUPP(
   SpeechChannel     chan,
   long              refCon,
   short             phonemeOpcode,
-  SpeechPhonemeUPP  userUPP);
+  SpeechPhonemeUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeSpeechWordUPP()
@@ -444,7 +439,7 @@ InvokeSpeechWordUPP(
   long            refCon,
   unsigned long   wordPos,
   unsigned short  wordLen,
-  SpeechWordUPP   userUPP);
+  SpeechWordUPP   userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  SpeechManagerVersion()
@@ -455,7 +450,7 @@ InvokeSpeechWordUPP(
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
 extern NumVersion 
-SpeechManagerVersion(void);
+SpeechManagerVersion(void)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -470,7 +465,7 @@ extern OSErr
 MakeVoiceSpec(
   OSType       creator,
   OSType       id,
-  VoiceSpec *  voice);
+  VoiceSpec *  voice)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -482,7 +477,7 @@ MakeVoiceSpec(
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
 extern OSErr 
-CountVoices(short * numVoices);
+CountVoices(short * numVoices)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -496,7 +491,7 @@ CountVoices(short * numVoices);
 extern OSErr 
 GetIndVoice(
   short        index,
-  VoiceSpec *  voice);
+  VoiceSpec *  voice)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -511,7 +506,7 @@ extern OSErr
 GetVoiceDescription(
   const VoiceSpec *   voice,
   VoiceDescription *  info,
-  long                infoLength);
+  long                infoLength)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -526,7 +521,7 @@ extern OSErr
 GetVoiceInfo(
   const VoiceSpec *  voice,
   OSType             selector,
-  void *             voiceInfo);
+  void *             voiceInfo)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -540,7 +535,7 @@ GetVoiceInfo(
 extern OSErr 
 NewSpeechChannel(
   VoiceSpec *      voice,       /* can be NULL */
-  SpeechChannel *  chan);
+  SpeechChannel *  chan)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -552,7 +547,7 @@ NewSpeechChannel(
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
 extern OSErr 
-DisposeSpeechChannel(SpeechChannel chan);
+DisposeSpeechChannel(SpeechChannel chan)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -564,7 +559,7 @@ DisposeSpeechChannel(SpeechChannel chan);
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
 extern OSErr 
-SpeakString(ConstStr255Param textToBeSpoken);
+SpeakString(ConstStr255Param textToBeSpoken)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -579,7 +574,7 @@ extern OSErr
 SpeakText(
   SpeechChannel   chan,
   const void *    textBuf,
-  unsigned long   textBytes);
+  unsigned long   textBytes)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -595,7 +590,7 @@ SpeakBuffer(
   SpeechChannel   chan,
   const void *    textBuf,
   unsigned long   textBytes,
-  long            controlFlags);
+  long            controlFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -607,7 +602,7 @@ SpeakBuffer(
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
 extern OSErr 
-StopSpeech(SpeechChannel chan);
+StopSpeech(SpeechChannel chan)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -621,7 +616,7 @@ StopSpeech(SpeechChannel chan);
 extern OSErr 
 StopSpeechAt(
   SpeechChannel   chan,
-  long            whereToStop);
+  long            whereToStop)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -635,7 +630,7 @@ StopSpeechAt(
 extern OSErr 
 PauseSpeechAt(
   SpeechChannel   chan,
-  long            whereToPause);
+  long            whereToPause)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -647,7 +642,7 @@ PauseSpeechAt(
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
 extern OSErr 
-ContinueSpeech(SpeechChannel chan);
+ContinueSpeech(SpeechChannel chan)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -659,7 +654,7 @@ ContinueSpeech(SpeechChannel chan);
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
 extern short 
-SpeechBusy(void);
+SpeechBusy(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -671,7 +666,7 @@ SpeechBusy(void);
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
 extern short 
-SpeechBusySystemWide(void);
+SpeechBusySystemWide(void)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -685,7 +680,7 @@ SpeechBusySystemWide(void);
 extern OSErr 
 SetSpeechRate(
   SpeechChannel   chan,
-  Fixed           rate);
+  Fixed           rate)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -699,7 +694,7 @@ SetSpeechRate(
 extern OSErr 
 GetSpeechRate(
   SpeechChannel   chan,
-  Fixed *         rate);
+  Fixed *         rate)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -713,7 +708,7 @@ GetSpeechRate(
 extern OSErr 
 SetSpeechPitch(
   SpeechChannel   chan,
-  Fixed           pitch);
+  Fixed           pitch)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -727,7 +722,7 @@ SetSpeechPitch(
 extern OSErr 
 GetSpeechPitch(
   SpeechChannel   chan,
-  Fixed *         pitch);
+  Fixed *         pitch)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -742,7 +737,7 @@ extern OSErr
 SetSpeechInfo(
   SpeechChannel   chan,
   OSType          selector,
-  const void *    speechInfo);
+  const void *    speechInfo)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -757,7 +752,7 @@ extern OSErr
 GetSpeechInfo(
   SpeechChannel   chan,
   OSType          selector,
-  void *          speechInfo);
+  void *          speechInfo)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -774,7 +769,7 @@ TextToPhonemes(
   const void *    textBuf,
   unsigned long   textBytes,
   Handle          phonemeBuf,
-  long *          phonemeBytes);
+  long *          phonemeBytes)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -788,19 +783,13 @@ TextToPhonemes(
 extern OSErr 
 UseDictionary(
   SpeechChannel   chan,
-  Handle          dictionary);
+  Handle          dictionary)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

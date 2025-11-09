@@ -127,7 +127,8 @@ typedef struct __CFlags {
     unsigned int        controlTint:3;
     unsigned int        controlSize:2;
     unsigned int	branchImageDisabled:1;
-    unsigned int        RESERVED4:2;
+    unsigned int	drawingInClipTip:1;
+    unsigned int        needsHighlightedTextHint:1;
 } _CFlags;
 
 

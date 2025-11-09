@@ -1,1 +1,1 @@
-#include <CoreServices/CoreServices.h>
+#warning OpenTransportProviders.h is not available on Mac OS X

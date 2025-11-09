@@ -3,9 +3,9 @@
  
      Contains:   AltiVec DSP Interfaces
  
-     Version:    vecLib-1.1_8~32
+     Version:    vecLib-138.1~9
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,7 @@
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -30,13 +31,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 struct DSPComplex {
   float               real;
@@ -48,7 +43,18 @@ struct DSPSplitComplex {
   float *             imagp;
 };
 typedef struct DSPSplitComplex          DSPSplitComplex;
+struct DSPDoubleComplex {
+  double              real;
+  double              imag;
+};
+typedef struct DSPDoubleComplex         DSPDoubleComplex;
+struct DSPDoubleSplitComplex {
+  double *            realp;
+  double *            imagp;
+};
+typedef struct DSPDoubleSplitComplex    DSPDoubleSplitComplex;
 typedef struct OpaqueFFTSetup*          FFTSetup;
+typedef struct OpaqueFFTSetupD*         FFTSetupD;
 typedef SInt32 FFTDirection;
 enum {
   kFFTDirection_Forward         = 1,
@@ -68,10 +74,12 @@ enum {
     change and become less restrictive in the future.                          
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
+
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Functions create_fftsetup and destroy_fftsetup.
-
+              create_fftsetupD and destroy_fftsetupD.
+              
     create_fftsetup will allocate memory and setup a weight array used by      
     the FFT. The call destroy_fftsetup will free the array.                    
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
@@ -87,7 +95,7 @@ enum {
 extern FFTSetup 
 create_fftsetup(
   UInt32     log2n,
-  FFTRadix   radix);
+  FFTRadix   radix)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -99,14 +107,40 @@ create_fftsetup(
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
 extern void 
-destroy_fftsetup(FFTSetup setup);
+destroy_fftsetup(FFTSetup setup)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*
+ *  create_fftsetupD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern FFTSetupD 
+create_fftsetupD(
+  UInt32     log2n,
+  FFTRadix   radix)                                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  destroy_fftsetupD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+destroy_fftsetupD(FFTSetupD setup)                            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Functions ctoz and ztoc.
+              ctozD and ztocD.
     
     ctoz converts a complex array to a complex-split array
     ztoc converts a complex-split array to a complex array
@@ -115,10 +149,7 @@ destroy_fftsetup(FFTSetup setup);
         1. size > 3
         2. strideC = 2
         3. strideZ = 1
-        4. Z.realp and Z.imagp are relatively aligned.
-        5. C is 8-byte aligned if Z.realp and Z.imagp are 4-byte- aligned
-           or C is 16-byte aligned if Z.realp and Z.imagp are at least
-           8-byte aligned.
+        4. C is 16-byte aligned and Z.realp and Z.imagp are 16-byte aligned.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
 /*
@@ -135,7 +166,7 @@ ctoz(
   SInt32             strideC,
   DSPSplitComplex *  Z,
   SInt32             strideZ,
-  UInt32             size);
+  UInt32             size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -152,15 +183,49 @@ ztoc(
   SInt32                   strideZ,
   DSPComplex               C[],
   SInt32                   strideC,
-  UInt32                   size);
+  UInt32                   size)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*
+ *  ctozD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+ctozD(
+  const DSPDoubleComplex   C[],
+  SInt32                   strideC,
+  DSPDoubleSplitComplex *  Z,
+  SInt32                   strideZ,
+  UInt32                   size)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  ztocD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+ztocD(
+  const DSPDoubleSplitComplex *  Z,
+  SInt32                         strideZ,
+  DSPDoubleComplex               C[],
+  SInt32                         strideC,
+  UInt32                         size)                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Functions fft_zip and fft_zipt 
-    
+              fft_zipD and fft_ziptD
+              
     In-place Split Complex Fourier Transform with or without temporary memory.
             
       Criteria to invoke PowerPC vector code:    
@@ -170,7 +235,7 @@ ztoc(
         3. 2 <= log2n <= 20
         4. bufferTemp.realp and bufferTemp.imagp must be 16-byte aligned.
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.  The size of temporary memory for each part
       is the lower value of 4*n and 16k.  Direction can be either
       kFFTDirection_Forward or kFFTDirection_Inverse.
@@ -190,7 +255,7 @@ fft_zip(
   DSPSplitComplex *  ioData,
   SInt32             stride,
   UInt32             log2n,
-  FFTDirection       direction);
+  FFTDirection       direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -208,14 +273,49 @@ fft_zipt(
   SInt32             stride,
   DSPSplitComplex *  bufferTemp,
   UInt32             log2n,
-  FFTDirection       direction);
+  FFTDirection       direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*
+ *  fft_zipD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft_zipD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  ioData,
+  SInt32                   stride,
+  UInt32                   log2n,
+  FFTDirection             direction)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fft_ziptD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft_ziptD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  ioData,
+  SInt32                   stride,
+  DSPDoubleSplitComplex *  bufferTemp,
+  UInt32                   log2n,
+  FFTDirection             direction)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
      Functions fft_zop and fft_zopt
+               fft_zopD and fft_zoptD
      
      Out-of-place Split Complex Fourier Transform with or without temporary
      memory
@@ -229,7 +329,7 @@ fft_zipt(
         5. 2 <= log2n <= 20
         6. bufferTemp.realp and bufferTemp.imagp must be 16-byte aligned.
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.  The size of temporary memory for each part
       is the lower value of 4*n and 16k.  Direction can be either
       kFFTDirection_Forward or kFFTDirection_Inverse.
@@ -251,7 +351,7 @@ fft_zop(
   DSPSplitComplex *  result,
   SInt32             strideResult,
   UInt32             log2n,
-  FFTDirection       direction);
+  FFTDirection       direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -271,15 +371,54 @@ fft_zopt(
   SInt32             strideResult,
   DSPSplitComplex *  bufferTemp,
   UInt32             log2n,
-  FFTDirection       direction);
+  FFTDirection       direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*
+ *  fft_zopD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft_zopD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  signal,
+  SInt32                   signalStride,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   strideResult,
+  UInt32                   log2n,
+  FFTDirection             direction)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fft_zoptD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft_zoptD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  signal,
+  SInt32                   signalStride,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   strideResult,
+  DSPDoubleSplitComplex *  bufferTemp,
+  UInt32                   log2n,
+  FFTDirection             direction)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Functions fft_zrip and fft_zript
-    
+              fft_zripD and fft_zriptD
+              
     In-Place Real Fourier Transform with or without temporary memory,
     split Complex Format
             
@@ -288,7 +427,7 @@ fft_zopt(
         2. stride = 1
         3. 3 <= log2n <= 13
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.  The size of temporary memory for each part
       is the lower value of 4*n and 16k.  Direction can be either
       kFFTDirection_Forward or kFFTDirection_Inverse.
@@ -308,7 +447,7 @@ fft_zrip(
   DSPSplitComplex *  ioData,
   SInt32             stride,
   UInt32             log2n,
-  FFTDirection       direction);
+  FFTDirection       direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -326,15 +465,50 @@ fft_zript(
   SInt32             stride,
   DSPSplitComplex *  bufferTemp,
   UInt32             log2n,
-  FFTDirection       direction);
+  FFTDirection       direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*
+ *  fft_zripD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft_zripD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  ioData,
+  SInt32                   stride,
+  UInt32                   log2n,
+  FFTDirection             flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fft_zriptD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft_zriptD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  ioData,
+  SInt32                   stride,
+  DSPDoubleSplitComplex *  bufferTemp,
+  UInt32                   log2n,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Functions fft_zrop and fft_zropt
-    
+              fft_zropD and fft_zroptD
+              
     Out-of-Place Real Fourier Transform with or without temporary memory,
     split Complex Format
             
@@ -345,7 +519,7 @@ fft_zript(
         4. strideResult = 1
         5. 3 <= log2n <= 13
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.  The size of temporary memory for each part
       is the lower value of 4*n and 16k.  Direction can be either
       kFFTDirection_Forward or kFFTDirection_Inverse.
@@ -367,7 +541,7 @@ fft_zrop(
   DSPSplitComplex *  result,
   SInt32             strideResult,
   UInt32             log2n,
-  FFTDirection       direction);
+  FFTDirection       direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -387,15 +561,54 @@ fft_zropt(
   SInt32             strideResult,
   DSPSplitComplex *  bufferTemp,
   UInt32             log2n,
-  FFTDirection       direction);
+  FFTDirection       direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*
+ *  fft_zropD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft_zropD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  signal,
+  SInt32                   signalStride,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   strideResult,
+  UInt32                   log2n,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fft_zroptD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft_zroptD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  signal,
+  SInt32                   signalStride,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   strideResult,
+  DSPDoubleSplitComplex *  bufferTemp,
+  UInt32                   log2n,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Functions fft2d_zip and fft2d_zipt
-    
+              fft2d_zipD and fft2d_ziptD
+              
     In-place two dimensional Split Complex Fourier Transform with or without
     temporary memory
             
@@ -407,7 +620,7 @@ fft_zropt(
         5. 2 <= log2nInCol <= 12
         6. bufferTemp.realp and bufferTemp.imagp must be 16-byte aligned.
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.  The size of temporary memory for each part
       is the lower value of 4*n and 16k.  ( log2n = log2nInRow + log2nInCol ) 
       Direction can be either kFFTDirection_Forward or kFFTDirection_Inverse.
@@ -429,7 +642,7 @@ fft2d_zip(
   SInt32             strideInCol,
   UInt32             log2nInCol,
   UInt32             log2nInRow,
-  FFTDirection       direction);
+  FFTDirection       direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -449,15 +662,54 @@ fft2d_zipt(
   DSPSplitComplex *  bufferTemp,
   UInt32             log2nInCol,
   UInt32             log2nInRow,
-  FFTDirection       direction);
+  FFTDirection       direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*
+ *  fft2d_zipD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft2d_zipD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  ioData,
+  SInt32                   strideInRow,
+  SInt32                   strideInCol,
+  UInt32                   log2nInCol,
+  UInt32                   log2nInRow,
+  FFTDirection             direction)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fft2d_ziptD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft2d_ziptD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  ioData,
+  SInt32                   strideInRow,
+  SInt32                   strideInCol,
+  DSPDoubleSplitComplex *  bufferTemp,
+  UInt32                   log2nInCol,
+  UInt32                   log2nInRow,
+  FFTDirection             direction)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Functions fft2d_zop and fft2d_zopt
-    
+              fft2d_zopD and fft2d_zoptD
+              
     Out-of-Place two dimemsional Split Complex Fourier Transform with or
     without temporary memory
             
@@ -473,7 +725,7 @@ fft2d_zipt(
         8. 2 <= log2nInCol <= 12
         9. bufferTemp.realp and bufferTemp.imagp must be 16-byte aligned.
 
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.  The size of temporary memory for each part
       is the lower value of 4*n and 16k.  ( log2n = log2nInRow + log2nInCol ) 
       Direction can be either kFFTDirection_Forward or kFFTDirection_Inverse.
@@ -498,7 +750,7 @@ fft2d_zop(
   SInt32             strideResultInCol,
   UInt32             log2nInCol,
   UInt32             log2nInRow,
-  SInt32             flag);
+  SInt32             flag)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -521,15 +773,60 @@ fft2d_zopt(
   DSPSplitComplex *  bufferTemp,
   UInt32             log2nInCol,
   UInt32             log2nInRow,
-  SInt32             flag);
+  SInt32             flag)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*
+ *  fft2d_zopD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft2d_zopD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  signal,
+  SInt32                   signalStrideInRow,
+  SInt32                   signalStrideInCol,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   strideResultInRow,
+  SInt32                   strideResultInCol,
+  UInt32                   log2nInCol,
+  UInt32                   log2nInRow,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fft2d_zoptD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft2d_zoptD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  signal,
+  SInt32                   signalStrideInRow,
+  SInt32                   signalStrideInCol,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   strideResultInRow,
+  SInt32                   strideResultInCol,
+  DSPDoubleSplitComplex *  bufferTemp,
+  UInt32                   log2nInCol,
+  UInt32                   log2nInRow,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Functions fft2d_zrip and fft2d_zript
-    
+              fft2d_zripD and fft2d_zriptD
+              
     In-place two dimensional Real Fourier Transform with or without temporary
     memory, Split Complex Format
             
@@ -541,7 +838,7 @@ fft2d_zopt(
         5. 3 <= log2nInCol <= 13
         6. bufferTemp.realp and bufferTemp.imagp must be 16-byte aligned.
 
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.  The size of temporary memory for each part
       is the lower value of 4*n and 16k.  ( log2n = log2nInRow + log2nInCol ) 
       Direction can be either kFFTDirection_Forward or kFFTDirection_Inverse.
@@ -563,7 +860,7 @@ fft2d_zrip(
   SInt32             strideInCol,
   UInt32             log2nInCol,
   UInt32             log2nInRow,
-  FFTDirection       direction);
+  FFTDirection       direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -583,15 +880,54 @@ fft2d_zript(
   DSPSplitComplex *  bufferTemp,
   UInt32             log2nInCol,
   UInt32             log2nInRow,
-  FFTDirection       direction);
+  FFTDirection       direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*
+ *  fft2d_zripD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft2d_zripD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  signal,
+  SInt32                   strideInRow,
+  SInt32                   strideInCol,
+  UInt32                   log2nInCol,
+  UInt32                   log2nInRow,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fft2d_zriptD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft2d_zriptD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  signal,
+  SInt32                   strideInRow,
+  SInt32                   strideInCol,
+  DSPDoubleSplitComplex *  bufferTemp,
+  UInt32                   log2nInCol,
+  UInt32                   log2nInRow,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Functions fft2d_zrop and fft2d_zropt
-    
+              fft2d_zropD and fft2d_zroptD
+              
     Out-of-Place Two-Dimemsional Real Fourier Transform with or without
     temporary memory, Split Complex Format
             
@@ -606,7 +942,7 @@ fft2d_zript(
         8. 3 <= log2nInCol <= 13
         9. bufferTemp.realp and bufferTemp.imagp must be 16-byte aligned.
 
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.  The size of temporary memory for each part
       is the lower value of 4*n and 16k.  ( log2n = log2nInRow + log2nInCol ) 
       Direction can be either kFFTDirection_Forward or kFFTDirection_Inverse.
@@ -631,7 +967,7 @@ fft2d_zrop(
   SInt32             strideResultInCol,
   UInt32             log2nInCol,
   UInt32             log2nInRow,
-  SInt32             flag);
+  SInt32             flag)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -654,16 +990,578 @@ fft2d_zropt(
   DSPSplitComplex *  bufferTemp,
   UInt32             log2nInCol,
   UInt32             log2nInRow,
-  SInt32             flag);
+  SInt32             flag)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*
+ *  fft2d_zropD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft2d_zropD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  ioData,
+  SInt32                   Kr,
+  SInt32                   Kc,
+  DSPDoubleSplitComplex *  ioData2,
+  SInt32                   Ir,
+  SInt32                   Ic,
+  UInt32                   log2nc,
+  UInt32                   log2nr,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fft2d_zroptD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft2d_zroptD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  ioData,
+  SInt32                   Kr,
+  SInt32                   Kc,
+  DSPDoubleSplitComplex *  ioData2,
+  SInt32                   Ir,
+  SInt32                   Ic,
+  DSPDoubleSplitComplex *  temp,
+  UInt32                   log2nc,
+  UInt32                   log2nr,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+
+/*
+________________________________________________________________________________
+      Functions fftm_zip and fftm_zipt
+                fftm_zipD and fftm_ziptD
+                
+      In-Place multiple One_Dimensional Complex Fourier Transform with or 
+      without temporary memory, Split Complex Format
+      
+         Criteria to invoke PowerPC vector code:
+            1. signal.realp and signal.imagp must be 16-byte aligned.
+            2. signalStride = 1;
+            3. fftStride must be a multiple of 4
+            4. 2 <= log2n <= 12
+            5. temp.realp and temp.imagp must be 16-byte aligned.
+         
+         If any of the above criteria are not satisfied, the PowerPC scalar code
+         implementation will be used.
+________________________________________________________________________________
+*/
+/*
+ *  fftm_zip()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fftm_zip(
+  FFTSetup           setup,
+  DSPSplitComplex *  signal,
+  SInt32             signalStride,
+  SInt32             fftStride,
+  UInt32             log2n,
+  UInt32             numFFT,
+  SInt32             flag)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fftm_zipt()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fftm_zipt(
+  FFTSetup           setup,
+  DSPSplitComplex *  signal,
+  SInt32             signalStride,
+  SInt32             fftStride,
+  DSPSplitComplex *  temp,
+  UInt32             log2n,
+  UInt32             numFFT,
+  SInt32             flag)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fftm_zipD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fftm_zipD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  signal,
+  SInt32                   signalStride,
+  SInt32                   fftStride,
+  UInt32                   log2n,
+  UInt32                   numFFT,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fftm_ziptD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fftm_ziptD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  signal,
+  SInt32                   signalStride,
+  SInt32                   fftStride,
+  DSPDoubleSplitComplex *  temp,
+  UInt32                   log2n,
+  UInt32                   numFFT,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+
+/*
+________________________________________________________________________________
+      Functions fftm_zop and fftm_zopt
+                fftm_zopD and fftm_zoptD
+                
+      Out-Of-Place multiple One_Dimensional Complex Fourier Transform with or 
+      without temporary memory, Split Complex Format
+      
+         Criteria to invoke PowerPC vector code:
+            1. signal.realp and signal.imagp must be 16-byte aligned.
+            2. signalStride = 1;
+            3. fftStride must be a multiple of 4
+            4. result.realp and result.imagp must be 16-byte aligned.
+            5. resultStride = 1;
+            6. rfftStride must be a multiple of 4
+            7. 2 <= log2n <= 12
+            8. temp.realp and temp.imagp must be 16-byte aligned.
+        
+        If any of the above criteria are not satisfied, the PowerPC scalar code
+        implementation will be used.
+________________________________________________________________________________
+*/
+/*
+ *  fftm_zop()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fftm_zop(
+  FFTSetup           setup,
+  DSPSplitComplex *  signal,
+  SInt32             signalStride,
+  SInt32             fftStride,
+  DSPSplitComplex *  result,
+  SInt32             resultStride,
+  SInt32             rfftStride,
+  UInt32             log2n,
+  UInt32             numFFT,
+  SInt32             flag)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fftm_zopt()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fftm_zopt(
+  FFTSetup           setup,
+  DSPSplitComplex *  signal,
+  SInt32             signalStride,
+  SInt32             fftStride,
+  DSPSplitComplex *  result,
+  SInt32             resultStride,
+  SInt32             rfftStride,
+  DSPSplitComplex *  temp,
+  UInt32             log2n,
+  UInt32             numFFT,
+  SInt32             flag)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fftm_zopD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fftm_zopD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  signal,
+  SInt32                   signalStride,
+  SInt32                   fftStride,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   resultStride,
+  SInt32                   rfftStride,
+  UInt32                   log2n,
+  UInt32                   numFFT,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fftm_zoptD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fftm_zoptD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  signal,
+  SInt32                   signalStride,
+  SInt32                   fftStride,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   resultStride,
+  SInt32                   rfftStride,
+  DSPDoubleSplitComplex *  temp,
+  UInt32                   log2n,
+  UInt32                   numFFT,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+
+/*
+________________________________________________________________________________
+      Functions fftm_zrip and fftm_zript
+                fftm_zripD and fftm_zriptD
+                
+      In-Place multiple One_Dimensional Real Fourier Transform with or 
+      without temporary memory, Split Complex Format
+      
+         Criteria to invoke PowerPC vector code:
+            1. signal.realp and signal.imagp must be 16-byte aligned.
+            2. signalStride = 1;
+            3. fftStride must be a multiple of 4
+            4. 3 <= log2n <= 13
+            5. temp.realp and temp.imagp must be 16-byte aligned.
+        If any of the above criteria are not satisfied, the PowerPC scalar code
+        implementation will be used.
+________________________________________________________________________________
+*/
+/*
+ *  fftm_zrip()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fftm_zrip(
+  FFTSetup           setup,
+  DSPSplitComplex *  signal,
+  SInt32             signalStride,
+  SInt32             fftStride,
+  UInt32             log2n,
+  UInt32             numFFT,
+  SInt32             flag)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fftm_zript()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fftm_zript(
+  FFTSetup           setup,
+  DSPSplitComplex *  signal,
+  SInt32             signalStride,
+  SInt32             fftStride,
+  DSPSplitComplex *  temp,
+  UInt32             log2n,
+  UInt32             numFFT,
+  SInt32             flag)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fftm_zripD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fftm_zripD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  signal,
+  SInt32                   signalStride,
+  SInt32                   fftStride,
+  UInt32                   log2n,
+  UInt32                   numFFT,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fftm_zriptD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fftm_zriptD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  signal,
+  SInt32                   signalStride,
+  SInt32                   fftStride,
+  DSPDoubleSplitComplex *  temp,
+  UInt32                   log2n,
+  UInt32                   numFFT,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+
+/*
+________________________________________________________________________________
+      Functions fftm_zrop and fftm_zropt
+                fftm_zropD and fftm_zroptD
+                
+      Out-Of-Place multiple One_Dimensional Real Fourier Transform with or 
+      without temporary memory, Split Complex Format
+      
+         Criteria to invoke PowerPC vector code:
+            1. signal.realp and signal.imagp must be 16-byte aligned.
+            2. signalStride = 1;
+            3. fftStride must be a multiple of 4
+            4. result.realp and result.imagp must be 16-byte aligned.
+            5. resultStride = 1;
+            6. rfftStride must be a multiple of 4
+            7. 3 <= log2n <= 13
+            8. temp.realp and temp.imagp must be 16-byte aligned.
+         
+         If any of the above criteria are not satisfied, the PowerPC scalar code
+         implementation will be used.
+________________________________________________________________________________
+*/
+/*
+ *  fftm_zrop()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fftm_zrop(
+  FFTSetup           setup,
+  DSPSplitComplex *  signal,
+  SInt32             signalStride,
+  SInt32             fftStride,
+  DSPSplitComplex *  result,
+  SInt32             resultStride,
+  SInt32             rfftStride,
+  UInt32             log2n,
+  UInt32             numFFT,
+  SInt32             flag)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fftm_zropt()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fftm_zropt(
+  FFTSetup           setup,
+  DSPSplitComplex *  signal,
+  SInt32             signalStride,
+  SInt32             fftStride,
+  DSPSplitComplex *  result,
+  SInt32             resultStride,
+  SInt32             rfftStride,
+  DSPSplitComplex *  temp,
+  UInt32             log2n,
+  UInt32             numFFT,
+  SInt32             flag)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fftm_zropD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fftm_zropD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  signal,
+  SInt32                   signalStride,
+  SInt32                   fftStride,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   resultStride,
+  SInt32                   rfftStride,
+  UInt32                   log2n,
+  UInt32                   numFFT,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fftm_zroptD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fftm_zroptD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  signal,
+  SInt32                   signalStride,
+  SInt32                   fftStride,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   resultStride,
+  SInt32                   rfftStride,
+  DSPDoubleSplitComplex *  temp,
+  UInt32                   log2n,
+  UInt32                   numFFT,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+
+/*
+________________________________________________________________________________
+      Functions fft3_zop and fft5_zop
+                fft3_zopD and fft5_zopD
+                
+      Out-Of-Place One_Dimensional Complex Fourier Transform in base-3 and 
+      base-5 with or without temporary memory, Split Complex Format 
+      
+         Criteria to invoke PowerPC vector code:
+            1. signal.realp and signal.imagp must be 16-byte aligned.
+            2. signalStride = 1;
+            3. result.realp and result.imagp must be 16-byte aligned.
+            4. resultStride = 1;
+            5. 3 <= log2n 
+         
+         If any of the above criteria are not satisfied, the PowerPC scalar code
+         implementation will be used.
+________________________________________________________________________________
+*/
+/*
+ *  fft3_zop()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft3_zop(
+  FFTSetup           setup,
+  DSPSplitComplex *  signal,
+  SInt32             signalStride,
+  DSPSplitComplex *  result,
+  SInt32             resultStride,
+  UInt32             log2n,
+  SInt32             flag)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fft5_zop()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft5_zop(
+  FFTSetup           setup,
+  DSPSplitComplex *  signal,
+  SInt32             signalStride,
+  DSPSplitComplex *  result,
+  SInt32             resultStride,
+  UInt32             log2n,
+  SInt32             flag)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fft3_zopD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft3_zopD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  ioData,
+  SInt32                   K,
+  DSPDoubleSplitComplex *  ioData2,
+  SInt32                   L,
+  UInt32                   log2n,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  fft5_zopD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+fft5_zopD(
+  FFTSetupD                setup,
+  DSPDoubleSplitComplex *  ioData,
+  SInt32                   K,
+  DSPDoubleSplitComplex *  ioData2,
+  SInt32                   L,
+  UInt32                   log2n,
+  SInt32                   flag)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function conv
-    
-    Floating Point Convolution and Correlation
+             convD
+             
+    Floating Point Convolution and Correlation in Single and Double Precision
       
       Criteria to invoke PowerPC vector code:  
         1. signal and result must have relative alignement.
@@ -672,7 +1570,7 @@ fft2d_zropt(
         4. signalStride = 1
         5. strideResult = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.  strideFilter can be positive for
       correlation or negative for convolution.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
@@ -694,16 +1592,469 @@ conv(
   float         result[],
   SInt32        strideResult,
   SInt32        lenResult,
-  SInt32        lenFilter);
+  SInt32        lenFilter)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  convD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+convD(
+  const double   signal[],
+  SInt32         signalStride,
+  const double   filter[],
+  SInt32         strideFilter,
+  double         result[],
+  SInt32         strideResult,
+  SInt32         lenResult,
+  SInt32         lenFilter)                                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+_______________________________________________________________________________
+     Functions f3x3, f5x5, and imgfir
+               f3x3D, f5x5D and imgfirD
+               
+     Filter, 3x3, 5x5, MxN Single and Double Precision Convolution
+     
+       Criteria to invoke PowerPC vector code:
+         1. signal, filter, and result must have relative alignment and
+            be 16-byte aligned.
+         2. for f3x3, NC >= 18
+         3. for f5x5, NC >= 20
+         4. for imgfir, NC >= 20
+       
+       If any of the above criteria are not satisfied, the PowerPC scalar code
+       implementation will be used.
+_______________________________________________________________________________
+*/
+/*
+ *  f3x3()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+f3x3(
+  float *  signal,
+  SInt32   rowStride,
+  SInt32   colStride,
+  float *  filter,
+  float *  result)                                            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  f3x3D()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+f3x3D(
+  double *  signal,
+  SInt32    rowStride,
+  SInt32    colStride,
+  double *  filter,
+  double *  result)                                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  f5x5()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+f5x5(
+  float *  signal,
+  SInt32   rowStride,
+  SInt32   colStride,
+  float *  filter,
+  float *  result)                                            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  f5x5D()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+f5x5D(
+  double *  signal,
+  SInt32    rowStride,
+  SInt32    colStride,
+  double *  filter,
+  double *  result)                                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  imgfir()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+imgfir(
+  float *  signal,
+  SInt32   numRow,
+  SInt32   numCol,
+  float *  filter,
+  float *  result,
+  SInt32   fnumRow,
+  SInt32   fnumCol)                                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  imgfirD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+imgfirD(
+  double *  signal,
+  SInt32    numRow,
+  SInt32    numCol,
+  double *  filter,
+  double *  result,
+  SInt32    fnumRow,
+  SInt32    fnumCol)                                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+
+/*
+_______________________________________________________________________________
+     Function mtrans
+              mtransD
+              
+     Single and Double Precision Matrix Transpose
+     
+       Criteria to invoke PowerPC vector code:
+         1. a = c
+         2. a and c must be 16-byte aligned.
+         3. M must be a multiple of 8.
+       
+       If any of the above criteria are not satisfied, the PowerPC scalar code
+       implementation will be used.
+_______________________________________________________________________________
+*/
+/*
+ *  mtrans()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+mtrans(
+  float *  a,
+  SInt32   aStride,
+  float *  c,
+  SInt32   cStride,
+  SInt32   M,
+  SInt32   N)                                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  mtransD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+mtransD(
+  double *  a,
+  SInt32    aStride,
+  double *  c,
+  SInt32    cStride,
+  SInt32    M,
+  SInt32    N)                                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+_______________________________________________________________________________
+      Function mmul
+               mmulD
+               
+      Single and Double Precision Matrix Multiply
+      
+        Criteria to invoke PowerPC vector code:
+          1. a, b, c must be 16-byte aligned.
+          2. M >= 8.
+          3. N >= 32.
+          4. P is a multiple of 8.
+        
+        If any of the above criteria are not satisfied, the PowerPC scalar code
+        implementation will be used.
+_______________________________________________________________________________
+*/
+/*
+ *  mmul()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+mmul(
+  float *  a,
+  SInt32   aStride,
+  float *  b,
+  SInt32   bStride,
+  float *  c,
+  SInt32   cStride,
+  SInt32   M,
+  SInt32   N,
+  SInt32   P)                                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  mmulD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+mmulD(
+  double *  a,
+  SInt32    aStride,
+  double *  b,
+  SInt32    bStride,
+  double *  c,
+  SInt32    cStride,
+  SInt32    M,
+  SInt32    N,
+  SInt32    P)                                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+_______________________________________________________________________________
+      Function zmma, zmms, zmsm, and zmmul
+               zmmaD, zmmsD, zmsmD, and zmmulD
+               
+      Single and Double Precision Complex Split Matrix mul/add, mul/sub, sub/mul, 
+                                                       and mul
+      
+        Criteria to invoke PowerPC vector code:
+          1. a, b, c, and d must be 16-byte aligned.
+          2. N is a multiple of 4.
+          3. P is a multiple of 4.
+          4. I, J, K, L = 1;
+          
+       If any of the above criteria are not satisfied, the PowerPC scalar code
+       implementation will be used.
+_______________________________________________________________________________
+*/
+/*
+ *  zmma()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zmma(
+  DSPSplitComplex *  a,
+  SInt32             i,
+  DSPSplitComplex *  b,
+  SInt32             j,
+  DSPSplitComplex *  c,
+  SInt32             k,
+  DSPSplitComplex *  d,
+  SInt32             l,
+  SInt32             M,
+  SInt32             N,
+  SInt32             P)                                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  zmmaD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zmmaD(
+  DSPDoubleSplitComplex *  a,
+  SInt32                   i,
+  DSPDoubleSplitComplex *  b,
+  SInt32                   j,
+  DSPDoubleSplitComplex *  c,
+  SInt32                   k,
+  DSPDoubleSplitComplex *  d,
+  SInt32                   l,
+  SInt32                   M,
+  SInt32                   N,
+  SInt32                   P)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  zmms()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zmms(
+  DSPSplitComplex *  a,
+  SInt32             i,
+  DSPSplitComplex *  b,
+  SInt32             j,
+  DSPSplitComplex *  c,
+  SInt32             k,
+  DSPSplitComplex *  d,
+  SInt32             l,
+  SInt32             M,
+  SInt32             N,
+  SInt32             P)                                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  zmmsD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zmmsD(
+  DSPDoubleSplitComplex *  a,
+  SInt32                   i,
+  DSPDoubleSplitComplex *  b,
+  SInt32                   j,
+  DSPDoubleSplitComplex *  c,
+  SInt32                   k,
+  DSPDoubleSplitComplex *  d,
+  SInt32                   l,
+  SInt32                   M,
+  SInt32                   N,
+  SInt32                   P)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  zmsm()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zmsm(
+  DSPSplitComplex *  a,
+  SInt32             i,
+  DSPSplitComplex *  b,
+  SInt32             j,
+  DSPSplitComplex *  c,
+  SInt32             k,
+  DSPSplitComplex *  d,
+  SInt32             l,
+  SInt32             M,
+  SInt32             N,
+  SInt32             P)                                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  zmsmD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zmsmD(
+  DSPDoubleSplitComplex *  a,
+  SInt32                   i,
+  DSPDoubleSplitComplex *  b,
+  SInt32                   j,
+  DSPDoubleSplitComplex *  c,
+  SInt32                   k,
+  DSPDoubleSplitComplex *  d,
+  SInt32                   l,
+  SInt32                   M,
+  SInt32                   N,
+  SInt32                   P)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  zmmul()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zmmul(
+  DSPSplitComplex *  a,
+  SInt32             i,
+  DSPSplitComplex *  b,
+  SInt32             j,
+  DSPSplitComplex *  c,
+  SInt32             k,
+  SInt32             M,
+  SInt32             N,
+  SInt32             P)                                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  zmmulD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zmmulD(
+  DSPDoubleSplitComplex *  a,
+  SInt32                   i,
+  DSPDoubleSplitComplex *  b,
+  SInt32                   j,
+  DSPDoubleSplitComplex *  c,
+  SInt32                   k,
+  SInt32                   M,
+  SInt32                   N,
+  SInt32                   P)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function vadd
+             vaddD
     
-    Floating Point Add
+    Floating Point Add in Single and Double Precision
     
       Criteria to invoke PowerPC vector code:  
         1. input1 and input2 and result are all relatively aligned.
@@ -712,7 +2063,7 @@ conv(
         4. stride2 = 1
         5. strideResult = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -732,16 +2083,34 @@ vadd(
   SInt32        stride2,
   float         result[],
   SInt32        strideResult,
-  UInt32        size);
+  UInt32        size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  vaddD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+vaddD(
+  const double   input1[],
+  SInt32         stride1,
+  const double   input2[],
+  SInt32         stride2,
+  double         result[],
+  SInt32         strideResult,
+  UInt32         size)                                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function vsub
-    
-     Floating Point Substract
+             vsubD
+             
+     Floating Point Substract in Single and Double Precision
       
       Criteria to invoke PowerPC vector code:  
         1. input1 and input2 and result are all relatively aligned.
@@ -750,7 +2119,7 @@ vadd(
         4. stride2 = 1
         5. strideResult = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -770,16 +2139,34 @@ vsub(
   SInt32        stride2,
   float         result[],
   SInt32        strideResult,
-  UInt32        size);
+  UInt32        size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  vsubD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+vsubD(
+  const double   input1[],
+  SInt32         stride1,
+  const double   input2[],
+  SInt32         stride2,
+  double         result[],
+  SInt32         strideResult,
+  UInt32         size)                                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function vmul
-    
-    Floating Point Multiply
+             vmulD
+             
+    Floating Point Multiply in Single and Double Precision
     
       Criteria to invoke PowerPC vector code:  
         1. input1 and input2 and result must be all relatively aligned.
@@ -788,7 +2175,7 @@ vsub(
         4. stride2 = 1
         5. strideResult = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -808,16 +2195,34 @@ vmul(
   SInt32        stride2,
   float         result[],
   SInt32        strideResult,
-  UInt32        size);
+  UInt32        size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  vmulD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+vmulD(
+  const double   input1[],
+  SInt32         stride1,
+  const double   input2[],
+  SInt32         stride2,
+  double         result[],
+  SInt32         strideResult,
+  UInt32         size)                                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function vsmul
+             vsmulD
     
-    Floating Point - Scalar Multiply
+    Floating Point - Scalar Multiply in Single and Double Precision
     
       Criteria to invoke PowerPC vector code:  
         1. input1 and result are all relatively aligned.
@@ -825,7 +2230,7 @@ vmul(
         3. stride1 = 1
         5. strideResult = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -844,16 +2249,34 @@ vsmul(
   const float *  input2,
   float          result[],
   SInt32         strideResult,
-  UInt32         size);
+  UInt32         size)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*
+ *  vsmulD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+vsmulD(
+  const double    input1[],
+  SInt32          stride1,
+  const double *  input2,
+  double          result[],
+  SInt32          strideResult,
+  UInt32          size)                                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function vsq
+             vsqD
     
-    Floating Point Square
+    Floating Point Square in Single and Double Precision
       
       Criteria to invoke PowerPC vector code:  
         1. input and result are relatively aligned.
@@ -861,7 +2284,7 @@ vsmul(
         3. strideInput = 1
         4. strideResult = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -879,16 +2302,33 @@ vsq(
   SInt32        strideInput,
   float         result[],
   SInt32        strideResult,
-  UInt32        size);
+  UInt32        size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*
+ *  vsqD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+vsqD(
+  const double   input[],
+  SInt32         strideInput,
+  double         result[],
+  SInt32         strideResult,
+  UInt32         size)                                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function vssq
-    
-    Floating Point Signed Square
+             vssqD
+             
+    Floating Point Signed Square in Single and Double Precision
       
       Criteria to invoke PowerPC vector code:  
         1. input and result must be all relatively aligned.
@@ -896,7 +2336,7 @@ vsq(
         3. strideInput = 1
         4. strideResult = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -914,16 +2354,32 @@ vssq(
   SInt32        strideInput,
   float         result[],
   SInt32        strideResult,
-  UInt32        size);
+  UInt32        size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  vssqD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+vssqD(
+  const double   input[],
+  SInt32         strideInput,
+  double         result[],
+  SInt32         strideResult,
+  UInt32         size)                                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function dotpr
+             dotprD
     
-    Floating Point Dot product
+    Floating Point Dot product in Single and Double Precision
     
       Criteria to invoke PowerPC vector code:  
         1. input1 and input2 are relatively aligned.
@@ -931,7 +2387,7 @@ vssq(
         3. stride1 = 1
         4. stride2 = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -950,16 +2406,33 @@ dotpr(
   const float   input2[],
   SInt32        stride2,
   float *       result,
-  UInt32        size);
+  UInt32        size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  dotprD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+dotprD(
+  const double   input1[],
+  SInt32         stride1,
+  const double   input2[],
+  SInt32         stride2,
+  double *       result,
+  UInt32         size)                                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function vam
-    
-    Floating Point vadd and Multiply
+             vamD
+             
+    Floating Point vadd and Multiply in Single and Double Precision
     
       Criteria to invoke PowerPC vector code:  
         1. input1, input2, input_3 and result are all relatively aligned.
@@ -969,7 +2442,7 @@ dotpr(
         5. stride_3 = 1
         6. strideResult = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -991,16 +2464,36 @@ vam(
   SInt32        stride3,
   float         result[],
   SInt32        strideResult,
-  UInt32        size);
+  UInt32        size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  vamD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+vamD(
+  const double   input1[],
+  SInt32         stride1,
+  const double   input2[],
+  SInt32         stride2,
+  const double   input3[],
+  SInt32         stride3,
+  double         result[],
+  SInt32         strideResult,
+  UInt32         size)                                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function zconv
-    
-    Split Complex Convolution and Correlation
+             zconvD
+                
+    Split Complex Convolution and Correlation in Single and Double Precision
       
       Criteria to invoke PowerPC vector code:  
         1. signal->realp, signal->imagp, result->realp, result->imagp
@@ -1010,7 +2503,7 @@ vam(
         4. signalStride = 1
         5. strideResult = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.  strideFilter can be positive for correlation
       or negative for convolution
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
@@ -1032,16 +2525,35 @@ zconv(
   DSPSplitComplex *  result,
   SInt32             strideResult,
   SInt32             lenResult,
-  SInt32             lenFilter);
+  SInt32             lenFilter)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  zconvD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zconvD(
+  DSPDoubleSplitComplex *  signal,
+  SInt32                   signalStride,
+  DSPDoubleSplitComplex *  filter,
+  SInt32                   strideFilter,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   strideResult,
+  SInt32                   lenResult,
+  SInt32                   lenFilter)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function zvadd
+             zvaddD
     
-    Split Complex vadd
+    Split Complex vadd in Single and Double Precision
       
       Criteria to invoke PowerPC vector code:  
         1. input1.realp, input1.imagp, input2.realp, input2.imagp,
@@ -1051,7 +2563,7 @@ zconv(
         4. stride2 = 1
         5. strideResult = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -1071,16 +2583,34 @@ zvadd(
   SInt32             stride2,
   DSPSplitComplex *  result,
   SInt32             strideResult,
-  UInt32             size);
+  UInt32             size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  zvaddD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zvaddD(
+  DSPDoubleSplitComplex *  input1,
+  SInt32                   stride1,
+  DSPDoubleSplitComplex *  input2,
+  SInt32                   stride2,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   strideResult,
+  UInt32                   size)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function zvsub
-    
-    Split Complex Substract
+             zvsubD
+             
+    Split Complex Substract in Single and Double Precision
       
       Criteria to invoke PowerPC vector code:  
         1. input1.realp, input1.imagp, input2.realp, input2.imagp,
@@ -1090,7 +2620,7 @@ zvadd(
         4. stride2 = 1
         5. strideResult = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -1110,16 +2640,34 @@ zvsub(
   SInt32             stride2,
   DSPSplitComplex *  result,
   SInt32             strideResult,
-  UInt32             size);
+  UInt32             size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  zvsubD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zvsubD(
+  DSPDoubleSplitComplex *  input1,
+  SInt32                   stride1,
+  DSPDoubleSplitComplex *  input2,
+  SInt32                   stride2,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   strideResult,
+  UInt32                   size)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function zvmul
-    
-    Split Complex Multiply
+             zvmulD
+             
+    Split Complex Multiply in Single and Double Precision
       
       Criteria to invoke PowerPC vector code:  
         1. input1.realp, input1.imagp, input2.realp, input2.imagp,
@@ -1129,7 +2677,7 @@ zvsub(
         4. stride2 = 1
         5. strideResult = 1
 
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.  The conjugate value can be 1 or -1.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -1150,16 +2698,35 @@ zvmul(
   DSPSplitComplex *  result,
   SInt32             strideResult,
   UInt32             size,
-  SInt32             conjugate);
+  SInt32             conjugate)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  zvmulD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zvmulD(
+  DSPDoubleSplitComplex *  input1,
+  SInt32                   stride1,
+  DSPDoubleSplitComplex *  input2,
+  SInt32                   stride2,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   strideResult,
+  UInt32                   size,
+  SInt32                   conjugate)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function zdotpr
-    
-    Split Complex Dot product
+             zdotprD
+             
+    Split Complex Dot product in Single and Double Precision
     
       Criteria to invoke PowerPC vector code:  
         1. input1.realp, input1.imagp, input2.realp, input2.imagp are all
@@ -1168,7 +2735,7 @@ zvmul(
         3. stride1 = 1
         4. stride2 = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -1187,16 +2754,33 @@ zdotpr(
   DSPSplitComplex *  input2,
   SInt32             stride2,
   DSPSplitComplex *  result,
-  UInt32             size);
+  UInt32             size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  zdotprD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zdotprD(
+  DSPDoubleSplitComplex *  input1,
+  SInt32                   stride1,
+  DSPDoubleSplitComplex *  input2,
+  SInt32                   stride2,
+  DSPDoubleSplitComplex *  result,
+  UInt32                   size)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function zidotpr
-    
-    Split Complex Inner Dot product
+             zidotprD
+             
+    Split Complex Inner Dot product in Single and Double Precision
     
       Criteria to invoke PowerPC vector code:  
         1. input1.realp, input1.imagp, input2.realp, input2.imagp must be
@@ -1205,7 +2789,7 @@ zdotpr(
         3. stride1 = 1
         4. stride2 = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -1224,16 +2808,34 @@ zidotpr(
   DSPSplitComplex *  input2,
   SInt32             stride2,
   DSPSplitComplex *  result,
-  UInt32             size);
+  UInt32             size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*
+ *  zidotprD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zidotprD(
+  DSPDoubleSplitComplex *  input1,
+  SInt32                   stride1,
+  DSPDoubleSplitComplex *  input2,
+  SInt32                   stride2,
+  DSPDoubleSplitComplex *  result,
+  UInt32                   size)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function zrdotpr
-    
-    Split Complex - Real Dot product
+             zrdotprD
+                
+    Split Complex - Real Dot product in Single and Double Precision
       
       Criteria to invoke PowerPC vector code:  
         1. input1.realp, input1.imagp, input2 are must be relatively aligned.
@@ -1241,7 +2843,7 @@ zidotpr(
         3. stride1 = 1
         4. stride2 = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -1260,16 +2862,33 @@ zrdotpr(
   const float        input2[],
   SInt32             stride2,
   DSPSplitComplex *  result,
-  UInt32             size);
+  UInt32             size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  zrdotprD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zrdotprD(
+  DSPDoubleSplitComplex *  input1,
+  SInt32                   stride1,
+  const double             input2[],
+  SInt32                   stride2,
+  DSPDoubleSplitComplex *  result,
+  UInt32                   size)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function zvcma
-    
-    Split Complex Conjugate Multiply And vadd
+             zvcmaD
+             
+    Split Complex Conjugate Multiply And vadd in Single and Double Precision
     
       Criteria to invoke PowerPC vector code:  
         1. input1.realp, input1.imagp, input2.realp, input2.imagp,
@@ -1281,7 +2900,7 @@ zrdotpr(
         5. stride_3 = 1
         6. strideResult = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -1303,16 +2922,36 @@ zvcma(
   SInt32             stride3,
   DSPSplitComplex *  result,
   SInt32             strideResult,
-  UInt32             size);
+  UInt32             size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  zvcmaD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zvcmaD(
+  DSPDoubleSplitComplex *  input1,
+  SInt32                   stride1,
+  DSPDoubleSplitComplex *  input2,
+  SInt32                   stride2,
+  DSPDoubleSplitComplex *  input3,
+  SInt32                   stride3,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   strideResult,
+  UInt32                   size)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function zrvadd
-    
-    Split Complex - Real Add
+             zrvaddD
+             
+    Split Complex - Real Add in Single and Double Precision
       
       Criteria to invoke PowerPC vector code:  
         1. input1.realp, input1.imagp, input2, result.realp, result.imagp
@@ -1322,7 +2961,7 @@ zvcma(
         4. stride2 = 1
         5. strideResult = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -1342,16 +2981,34 @@ zrvadd(
   SInt32             stride2,
   DSPSplitComplex *  result,
   SInt32             strideResult,
-  UInt32             size);
+  UInt32             size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  zrvaddD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zrvaddD(
+  DSPDoubleSplitComplex *  input1,
+  SInt32                   stride1,
+  const double             input2[],
+  SInt32                   stride2,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   strideResult,
+  UInt32                   size)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function zrvsub
-    
-    Split Complex - Real Substract
+             zrvsubD
+                
+    Split Complex - Real Substract in Single and Double Precision
     
       Criteria to invoke PowerPC vector code:  
         1. input1.realp, input1.imagp, input2, result.realp, result.imagp
@@ -1361,7 +3018,7 @@ zrvadd(
         4. stride2 = 1
         5. strideResult = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -1381,15 +3038,33 @@ zrvsub(
   SInt32             stride2,
   DSPSplitComplex *  result,
   SInt32             strideResult,
-  UInt32             size);
+  UInt32             size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  zrvsubD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zrvsubD(
+  DSPDoubleSplitComplex *  input1,
+  SInt32                   stride1,
+  const double             input2[],
+  SInt32                   stride2,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   strideResult,
+  UInt32                   size)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Function zrvmul
-    
+             zrvmulD
+             
     Split Complex - Real Multiply
     
       Criteria to invoke PowerPC vector code:  
@@ -1400,7 +3075,7 @@ zrvsub(
         4. stride2 = 1
         5. strideResult = 1
       
-      If any of the above criteria are not satisfied, the PowerPC scalor code
+      If any of the above criteria are not satisfied, the PowerPC scalar code
       implementation will be used.
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
@@ -1420,17 +3095,34 @@ zrvmul(
   SInt32             stride2,
   DSPSplitComplex *  result,
   SInt32             strideResult,
-  UInt32             size);
+  UInt32             size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  zrvmulD()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in vecLib.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+zrvmulD(
+  DSPDoubleSplitComplex *  input1,
+  SInt32                   stride1,
+  const double             input2[],
+  SInt32                   stride2,
+  DSPDoubleSplitComplex *  result,
+  SInt32                   strideResult,
+  UInt32                   size)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
+#ifndef USE_NON_APPLE_STANDARD_DATATYPES
+#define USE_NON_APPLE_STANDARD_DATATYPES 1
+#endif  /* !defined(USE_NON_APPLE_STANDARD_DATATYPES) */
 
-
-#ifndef USE_NONE_APPLE_STANDARD_DATATYPES
-#define USE_NONE_APPLE_STANDARD_DATATYPES 1
-#endif  /* !defined(USE_NONE_APPLE_STANDARD_DATATYPES) */
-
-#if USE_NONE_APPLE_STANDARD_DATATYPES
+#if USE_NON_APPLE_STANDARD_DATATYPES
 enum {
   FFT_FORWARD                   = kFFTDirection_Forward,
   FFT_INVERSE                   = kFFTDirection_Inverse
@@ -1445,16 +3137,12 @@ enum {
 
 typedef DSPComplex                      COMPLEX;
 typedef DSPSplitComplex                 COMPLEX_SPLIT;
-#endif  /* USE_NONE_APPLE_STANDARD_DATATYPES */
+typedef DSPDoubleComplex                DOUBLE_COMPLEX;
+typedef DSPDoubleSplitComplex           DOUBLE_COMPLEX_SPLIT;
+#endif  /* USE_NON_APPLE_STANDARD_DATATYPES */
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

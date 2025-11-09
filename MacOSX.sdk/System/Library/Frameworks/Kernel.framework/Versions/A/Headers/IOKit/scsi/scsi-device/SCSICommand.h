@@ -56,7 +56,7 @@ enum SCSICDBFlags
     kCDBFlagsDisableParity      = 0x08000000,
     kCDBFlagsNoDisconnect       = 0x10000000,
     kCDBFlagsNegotiateSDTR	= 0x20000000,
-    kCDBFlagsNegotiateWDTR	= 0x40000000,
+    kCDBFlagsNegotiateWDTR	= 0x40000000
 //                              = 0x80000000,           // reserved
 };
 
@@ -67,7 +67,7 @@ enum SCSIAdapterStatus
     kSCSIAdapterStatusSelectionTimeout,
     kSCSIAdapterStatusMsgReject,
     kSCSIAdapterStatusParityError,
-    kSCSIAdapterStatusOverrun,
+    kSCSIAdapterStatusOverrun
 };
 
 typedef struct SCSIResults

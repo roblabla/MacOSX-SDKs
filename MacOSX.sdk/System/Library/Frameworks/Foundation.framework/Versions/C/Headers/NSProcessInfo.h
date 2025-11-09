@@ -1,5 +1,5 @@
 /*	NSProcessInfo.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -43,5 +43,9 @@ enum {	/* Constants returned by -operatingSystem */
 
 - (unsigned int)operatingSystem;
 - (NSString *)operatingSystemName;
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (NSString *)operatingSystemVersionString;	/* Human readable, localized; appropriate for displaying to user or using in bug emails and such; NOT appropriate for parsing */
+#endif
 
 @end

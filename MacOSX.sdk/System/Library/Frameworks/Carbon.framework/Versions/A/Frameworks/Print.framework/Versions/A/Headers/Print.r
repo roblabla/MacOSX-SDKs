@@ -3,9 +3,9 @@
  
      Contains:   Printing functions with UI
  
-     Version:    Printing-91~3
+     Version:    Printing-135.1~1
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,12 +17,12 @@
 #ifndef __PRINT_R__
 #define __PRINT_R__
 
-#ifndef __HITOOLBOX_R__
-#include <HIToolbox/HIToolbox.r>
+#ifndef __APPLICATIONSERVICES_R__
+#include <ApplicationServices/ApplicationServices.r>
 #endif
 
-#ifndef __PRINTCORE_R__
-#include <PrintCore/PrintCore.r>
+#ifndef __HITOOLBOX_R__
+#include <HIToolbox/HIToolbox.r>
 #endif
 
 

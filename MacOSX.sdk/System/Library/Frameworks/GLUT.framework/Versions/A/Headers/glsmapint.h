@@ -7,7 +7,7 @@
    and is provided without guarantee or warrantee expressed or 
    implied. This program is -not- in the public domain. */
 
-#include <glsmap.h>
+#include "glsmap.h"
 
 enum { X = 0, Y = 1, Z = 2 };
 

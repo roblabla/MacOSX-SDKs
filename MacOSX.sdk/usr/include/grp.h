@@ -69,7 +69,7 @@
 struct group {
 	char	*gr_name;		/* group name */
 	char	*gr_passwd;		/* group password */
-	int	gr_gid;			/* group id */
+	gid_t	gr_gid;			/* group id */
 	char	**gr_mem;		/* group members */
 };
 
@@ -78,6 +78,8 @@ struct group {
 __BEGIN_DECLS
 struct group *getgrgid __P((gid_t));
 struct group *getgrnam __P((const char *));
+int getgrgid_r __P((gid_t, struct group *, char *, size_t, struct group **));
+int getgrnam_r __P((const char *, struct group *, char *, size_t, struct group **));
 #ifndef _POSIX_SOURCE
 struct group *getgrent __P((void));
 int setgrent __P((void));

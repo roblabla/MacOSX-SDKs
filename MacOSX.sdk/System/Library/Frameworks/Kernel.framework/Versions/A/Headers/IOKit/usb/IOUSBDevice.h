@@ -1,20 +1,23 @@
 /*
- * Copyright (c) 1998-2001 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.2 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * Copyright (c) 1999-2003 Apple Computer, Inc.  All Rights Reserved.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.  
- * Please see the License for the specific language governing rights and 
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
  * limitations under the License.
  * 
  * @APPLE_LICENSE_HEADER_END@
@@ -43,18 +46,17 @@
 
 class IOUSBController;
 class IOUSBInterface;
-
 /*!
     @class IOUSBDevice
-    @abstract The object representing a device on the USB bus.
+    @abstract The IOService object representing a device on the USB bus.
     @discussion This class provides functionality to configure a device and to create
-	IOUSBInterface objects to represent the interfaces of the device
+	IOUSBInterface objects to represent the interfaces of the device.
 */
 
 class IOUSBDevice : public IOUSBNub
 {
-    friend IOUSBController;
-    friend IOUSBInterface;
+    friend class IOUSBController;
+    friend class IOUSBInterface;
    
     OSDeclareDefaultStructors(IOUSBDevice)
 
@@ -75,31 +77,25 @@ protected:
     
     struct ExpansionData 
     {
-        UInt32		_portNumber;
-        thread_call_t	_doPortResetThread;
-        IOUSBDevice *	_usbPlaneParent;
-        bool		_portResetThreadActive;
-        bool		_allowConfigValueOfZero;
-        thread_call_t	_doPortSuspendThread;
-        bool		_portSuspendThreadActive;
-        thread_call_t	_doPortReEnumerateThread;
-        bool		_resetInProgress;
-        bool		_portHasBeenReset;
-        bool		_deviceterminating;
-    
+        UInt32			_portNumber;
+        thread_call_t		_doPortResetThread;
+        IOUSBDevice *		_usbPlaneParent;
+        bool			_portResetThreadActive;
+        bool			_allowConfigValueOfZero;
+        thread_call_t		_doPortSuspendThread;
+        bool			_portSuspendThreadActive;
+        thread_call_t		_doPortReEnumerateThread;
+        bool			_resetInProgress;
+        bool			_portHasBeenReset;
+        bool			_deviceterminating;
+        IORecursiveLock*	_getConfigLock;
+        bool			_doneWaiting;
+        bool			_notifiedWhileBooting;
+        IOWorkLoop *		_workLoop;
+        IOTimerEventSource *	_notifierHandlerTimer;
+        UInt32			_notificationType;
     };
     ExpansionData * _expansionData;
-    #define _portNumber			_expansionData->_portNumber
-    #define _doPortResetThread		_expansionData->_doPortResetThread
-    #define _usbPlaneParent		_expansionData->_usbPlaneParent
-    #define _portResetThreadActive	_expansionData->_portResetThreadActive
-    #define _allowConfigValueOfZero	_expansionData->_allowConfigValueOfZero
-    #define _doPortSuspendThread	_expansionData->_doPortSuspendThread
-    #define _portSuspendThreadActive	_expansionData->_portSuspendThreadActive
-    #define _doPortReEnumerateThread	_expansionData->_doPortReEnumerateThread
-    #define _resetInProgress		_expansionData->_resetInProgress
-    #define _portHasBeenReset		_expansionData->_portHasBeenReset
-    #define _deviceterminating		_expansionData->_deviceterminating
 
    virtual void free();	
 
@@ -107,8 +103,10 @@ protected:
 
     virtual IOUSBInterface * GetInterface(const IOUSBInterfaceDescriptor *interface);
 
-    virtual IOReturn IOUSBDevice::SetFeature(UInt8 feature);
-    
+public:
+    virtual IOReturn SetFeature(UInt8 feature);
+
+protected:    
     virtual IOReturn GetConfigDescriptor(UInt8 configIndex, void *data, UInt32 len);
 
     virtual IOReturn GetDeviceDescriptor(IOUSBDeviceDescriptor *desc, UInt32 size);
@@ -131,7 +129,7 @@ public:
     virtual bool 	willTerminate( IOService * provider, IOOptionBits options );
     virtual bool 	didTerminate( IOService * provider, IOOptionBits options, bool * defer );
 
-    virtual void SetPort(void *port) { _port = port;}			// Obsolete, do NOT use
+    virtual void SetPort(void *port);			// Obsolete, do NOT use
 
     /*!
 	@function FindNextInterfaceDescriptor
@@ -148,11 +146,11 @@ public:
                                                  IOUSBInterfaceDescriptor **descOut);
     /*!
 	@function FindNextInterface
-	return an pointer to an instantiated interface satisfying the requirements specified in request, or NULL if there aren't any. the device
+	return an pointer to an IOUSBInterface object satisfying the requirements specified in request, or NULL if there aren't any. the device
         must be configured for there to be any interfaces.
         @param current interface to start searching from, NULL to start at the beginning of the device's interface list for the current configuration.
 	@param request specifies what properties an interface must have to match.
-	@result Pointer to a matching interface, or NULL if none match. Note: The IOUSBInterface is NOT retained for the caller. If the caller wishes to continue to use the returned object, it should call retain() on that object.
+	@result Pointer to a matching IOUSBInterface, or NULL if none match. Note: The IOUSBInterface is NOT retained for the caller. If the caller wishes to continue to use the returned object, it should call retain() on that object.
     */
     virtual IOUSBInterface *FindNextInterface(IOUSBInterface *current,
                                               IOUSBFindInterfaceRequest *request);
@@ -170,7 +168,7 @@ public:
 	@function GetFullConfigurationDescriptor
 	return a pointer to all the descriptors for the requested configuration.
         @param configIndex The configuration index (not the configuration value)
-	@result Pointer to the descriptors, which are cached in the device object.
+	@result Pointer to the descriptors, which are cached in the IOUSBDevice object.
     */
     virtual const IOUSBConfigurationDescriptor *GetFullConfigurationDescriptor(UInt8 configIndex);
 
@@ -186,20 +184,21 @@ public:
     /*!
 	@function ResetDevice
 	Reset the device, returning it to the addressed, unconfigured state.
-	This is useful if a device has got badly confused
+	This is useful if a device has got badly confused. Note that the AppleUSBComposite driver will automatically
+        reconfigure the device if it is a composite device.
     */
     virtual IOReturn ResetDevice();
 
     /*!
 	@function SetConfiguration
 	Do a USB SetConfiguration call to the device. The caller must have the device open() in order to 
-	actually cause a configuration change. If the device is currently configured, all interfaces
-	associated with the device are freed. After the new configuration has been set, all of its interfaces are
+	actually cause a configuration change. If the device is currently configured, all IOUSBInterface objects
+	associated with the device are freed. After the new configuration has been set, all of its IOUSBInterface objects are
 	instantiated automatically.
 	@param forClient The client requesting the configuration change
 	@param configValue The desired configuration value.
 	@param startInterfaceMatching A boolean specifying whether IOKit should begin the process of finding
-	matching drivers for the new interfaces.
+	matching drivers for the new IOUSBInterface objects.
     */
     virtual IOReturn SetConfiguration(IOService *forClient, UInt8 configValue, bool startInterfaceMatching=true);
     
@@ -208,84 +207,77 @@ public:
         @function GetAddress
         returns the bus address of the device
     */
-    virtual USBDeviceAddress GetAddress(void) { return _address; }
+    virtual USBDeviceAddress GetAddress(void);
     
     /*!
         @function GetSpeed
         returns the speed of the device
     */
-    virtual UInt8 GetSpeed(void) { return _speed; }
+    virtual UInt8 GetSpeed(void);
     /*!
         @function GetBus
-        returns a pointer to the bus object for the device
+        returns a pointer to the IOUSBController object for the device
     */
-    virtual IOUSBController *GetBus(void) { return _controller; }
+    virtual IOUSBController *GetBus(void);
     /*!
         @function GetBusPowerAvailable
         returns the power available to the device, in units of 2mA
     */
-    virtual UInt32 GetBusPowerAvailable( void ) { return _busPowerAvailable; }
+    virtual UInt32 GetBusPowerAvailable( void );
     /*!
         @function GetMaxPacketSize
         returns the maximum packet size for endpoint zero (only 8, 16, 32, 64 are valid)
     */
-    virtual UInt8 GetMaxPacketSize(void) { return _descriptor.bMaxPacketSize0; }
+    virtual UInt8 GetMaxPacketSize(void);
     /*!
         @function GetVendorID
         returns the Vendor ID of the device
     */
-    virtual UInt16 GetVendorID(void) { return USBToHostWord(_descriptor.idVendor); }
+    virtual UInt16 GetVendorID(void);
     /*!
         @function GetProductID
         returns the Product ID of the device
     */
-    virtual UInt16 GetProductID(void) { return USBToHostWord(_descriptor.idProduct);}
+    virtual UInt16 GetProductID(void);
     /*!
         @function GetDeviceRelease
         returns the DeviceRelease information
     */
-    virtual UInt16 GetDeviceRelease(void) { return USBToHostWord(_descriptor.bcdDevice); }
+    virtual UInt16 GetDeviceRelease(void);
     /*!
         @function GetNumConfigs
         returns the number of configs in the device config descriptor
     */
-    virtual UInt8 GetNumConfigurations(void) { return _descriptor.bNumConfigurations; }
+    virtual UInt8 GetNumConfigurations(void);
     /*!
         @function GetManufacturerStringIndex
         returns the index of string descriptor describing manufacturer
     */
-    virtual UInt8 GetManufacturerStringIndex(void ) { return _descriptor.iManufacturer; }
+    virtual UInt8 GetManufacturerStringIndex(void );
     /*!
         @function GetProductStringIndex
         returns the index of string descriptor describing product
     */
-    virtual UInt8 GetProductStringIndex(void ) { return _descriptor.iProduct; }
+    virtual UInt8 GetProductStringIndex(void );
     /*!
         @function GetSerialNumberStringIndex
         returns the index of string descriptor describing the device's serial number
     */
-    virtual UInt8 GetSerialNumberStringIndex(void ) { return _descriptor.iSerialNumber; }
+    virtual UInt8 GetSerialNumberStringIndex(void );
     /*!
         @function GetPipeZero
-        returns a pointer to the device's default pipe
+        returns a pointer to the device's default control pipe
     */
-    virtual IOUSBPipe * GetPipeZero(void) { return _pipeZero; }
+    virtual IOUSBPipe * GetPipeZero(void);
     /*!
         @function MakePipe
         @abstract build a pipe on a given endpoint
         @param ep A description of the endpoint
-        returns the desired pipe
+        returns the desired IOUSBPipe object
     */
-    virtual IOUSBPipe*	MakePipe(const IOUSBEndpointDescriptor *ep) 
-        {return IOUSBPipe::ToEndpoint(ep, _speed, _address, _controller); }
-        
-    /*!
-	@function DeviceRequest
-        @abstract execute a device request
-        @param request The parameter block to send to the device
-	@completion Function to call when request completes. If omitted then deviceRequest()
-	executes synchronously, blocking until the request is complete.
-    */
+    virtual IOUSBPipe*	MakePipe(const IOUSBEndpointDescriptor *ep);
+    
+    // this method is deprecated. use the other DeviceRequest methods
     virtual IOReturn DeviceRequest(IOUSBDevRequest	*request,
                                 IOUSBCompletion	*completion = 0);
 
@@ -295,15 +287,16 @@ public:
 
     /*!
 	@function GetConfiguration
-	Gets the current configuration from the device
-	@param configNum Pointer to place to store configuration value
+	Gets the current configuration from the IOUSBDevice object.  Note that this call will send a control
+        request on the bus to get the current configuration from the physical device.
+	@param configNum Pointer to place to store configuration value.
     */
     virtual IOReturn GetConfiguration(UInt8 *configNumber);
 
     /*!
-        @function GetConfiguration
-        Gets the current configuration from the device
-        @param configNum Pointer to place to store configuration value
+        @function GetDeviceStatus
+        Gets the device's status.  Note that this sends a control request to the physical device.
+        @param status Pointer to place to store the status.
     */
     virtual IOReturn GetDeviceStatus(USBStatus *status);
 
@@ -328,8 +321,23 @@ public:
     virtual const IOUSBDescriptorHeader* FindNextDescriptor(const void *cur, UInt8 descType);
 
     virtual void 	DisplayNotEnoughPowerNotice();
+    
+    // this is a non-virtual function so that we don't have to take up a binary compatibility slot.
+    UInt16	GetbcdUSB(void);
+    UInt8	GetProtocol(void);
 
     OSMetaClassDeclareReservedUsed(IOUSBDevice,  0);
+    /*!
+	@function DeviceRequest
+        @abstract execute a control request to the default control pipe (pipe zero)
+        @param request The parameter block to send to the device
+        @param noDataTimeout Specifies an amount of time (in ms) after which the command will be aborted
+        if no data has been transferred on the bus.
+        @param completionTimeout Specifies an amount of time (in ms) after which the command will be aborted if the entire command has
+        not been completed.
+	@param completion Function to call when request completes. If omitted then
+        DeviceRequest() executes synchronously, blocking until the request is complete.
+    */
     virtual IOReturn DeviceRequest(IOUSBDevRequest	*request,
 				UInt32 noDataTimeout,
 				UInt32 completionTimeout,
@@ -343,12 +351,33 @@ public:
 				    IOUSBCompletion	*completion = 0);
 
     OSMetaClassDeclareReservedUsed(IOUSBDevice,  2);
+    /*!
+	@function SuspendDevice
+        @abstract Instruct the hub to which this device is attached to suspend or resume the port to which the device is attached.
+        Note that if there are any outstanding transactions on any pipes in the device, those transactions will get returned with a 
+        kIOReturnNotResponding error.
+        @param suspend Boolean value. true = suspend, false = resume.
+    */
     virtual IOReturn SuspendDevice( bool suspend);
     
     OSMetaClassDeclareReservedUsed(IOUSBDevice,  3);
+    /*!
+	@function ReEnumerateDevice
+        @abstract Instruct the hub to which this device is attached to reset the port to which this device is attached. This causes the
+        IOUSBDevice object and any child objects (IOUSBInterface objects or driver objects) to be terminated, and the device to be
+        completely reenumerated, as if it had been detached and reattached.
+        @param options Reserved for future use.
+    */
     virtual IOReturn ReEnumerateDevice( UInt32 options );
     
-    OSMetaClassDeclareReservedUnused(IOUSBDevice,  4);
+    OSMetaClassDeclareReservedUsed(IOUSBDevice,  4);
+    /*!
+        @function DisplayUserNotification
+        @abstract  Will use the KUNCUserNotification mechanism to display a notification to the user.
+        @param notificationType Which notification to display.
+     */
+    virtual void	DisplayUserNotification(UInt32 notificationType);
+    
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  5);
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  6);
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  7);
@@ -378,8 +407,8 @@ private:
     static void 	ProcessPortReEnumerateEntry(OSObject *target, thread_call_param_t options);
     void 		ProcessPortReEnumerate(UInt32 options);
 
-
-
+    static void 	DisplayUserNotificationForDeviceEntry (OSObject *owner, IOTimerEventSource *sender);
+    void		DisplayUserNotificationForDevice( );
 };
 
 #endif /* _IOKIT_IOUSBDEVICE_H */

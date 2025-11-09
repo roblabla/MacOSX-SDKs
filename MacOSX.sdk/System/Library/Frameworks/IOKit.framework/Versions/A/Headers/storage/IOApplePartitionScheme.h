@@ -20,10 +20,20 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
+/*
+ * This header contains the IOApplePartitionScheme class definition.
+ */
+
 #ifndef _IOAPPLEPARTITIONSCHEME_H
 #define _IOAPPLEPARTITIONSCHEME_H
 
 #include <IOKit/IOTypes.h>
+
+/*
+ * kIOApplePartitionSchemeClass is the name of the IOApplePartitionScheme class.
+ */
+
+#define kIOApplePartitionSchemeClass "IOApplePartitionScheme"
 
 /*
  * Apple Partition Map Definitions
@@ -107,139 +117,5 @@ typedef struct Block0
 #define DPME_FLAGS_RESERVED_2     0xFFFFFE00                   /* (bit 9..31) */
 
 #pragma options align=reset              /* (reset to default struct packing) */
-
-/*
- * Kernel
- */
-
-#if defined(KERNEL) && defined(__cplusplus)
-
-#include <IOKit/storage/IOPartitionScheme.h>
-
-/*
- * Class
- */
-
-class IOApplePartitionScheme : public IOPartitionScheme
-{
-    OSDeclareDefaultStructors(IOApplePartitionScheme);
-
-protected:
-
-    struct ExpansionData { /* */ };
-    ExpansionData * _expansionData;
-
-    OSSet * _partitions;    /* (set of media objects representing partitions) */
-
-    /*
-     * Free all of this object's outstanding resources.
-     */
-
-    virtual void free(void);
-
-    /*
-     * Scan the provider media for an Apple partition map.  Returns the set
-     * of media objects representing each of the partitions (the retain for
-     * the set is passed to the caller), or null should no partition map be
-     * found.  The default probe score can be adjusted up or down, based on
-     * the confidence of the scan.
-     */
-
-    virtual OSSet * scan(SInt32 * score);
-
-    /*
-     * Ask whether the given partition appears to be corrupt.  A partition that
-     * is corrupt will cause the failure of the Apple partition map recognition
-     * altogether.
-     */
-
-    virtual bool isPartitionCorrupt( dpme * partition,
-                                     UInt32 partitionID,
-                                     UInt32 partitionBlockSize );
-
-    /*
-     * Ask whether the given partition appears to be invalid.  A partition that
-     * is invalid will cause it to be skipped in the scan, but will not cause a
-     * failure of the Apple partition map recognition.
-     */
-
-    virtual bool isPartitionInvalid( dpme * partition,
-                                     UInt32 partitionID,
-                                     UInt32 partitionBlockSize );
-
-    /*
-     * Instantiate a new media object to represent the given partition.
-     */
-
-    virtual IOMedia * instantiateMediaObject( dpme * partition,
-                                              UInt32 partitionID,
-                                              UInt32 partitionBlockSize );
-
-    /*
-     * Allocate a new media object (called from instantiateMediaObject).
-     */
-
-    virtual IOMedia * instantiateDesiredMediaObject(
-                                                    dpme * partition,
-                                                    UInt32 partitionID,
-                                                    UInt32 partitionBlockSize );
-
-    /*
-     * Attach the given media object to the device tree plane.
-     */
-
-    virtual bool attachMediaObjectToDeviceTree(IOMedia * media);
-
-    /*
-     * Detach the given media object from the device tree plane.
-     */
-
-    virtual void detachMediaObjectFromDeviceTree(IOMedia * media);
-
-public:
-
-    /*
-     * Initialize this object's minimal state.
-     */
-
-    virtual bool init(OSDictionary * properties = 0);
-
-    /*
-     * Determine whether the provider media contains an Apple partition map.
-     */
-
-    virtual IOService * probe(IOService * provider, SInt32 * score);
-
-    /*
-     * Publish the new media objects which represent our partitions.
-     */
-
-    virtual bool start(IOService * provider);
-
-    /*
-     * Clean up after the media objects we published before terminating.
-     */
-
-    virtual void stop(IOService * provider);
-
-    OSMetaClassDeclareReservedUnused(IOApplePartitionScheme,  0);
-    OSMetaClassDeclareReservedUnused(IOApplePartitionScheme,  1);
-    OSMetaClassDeclareReservedUnused(IOApplePartitionScheme,  2);
-    OSMetaClassDeclareReservedUnused(IOApplePartitionScheme,  3);
-    OSMetaClassDeclareReservedUnused(IOApplePartitionScheme,  4);
-    OSMetaClassDeclareReservedUnused(IOApplePartitionScheme,  5);
-    OSMetaClassDeclareReservedUnused(IOApplePartitionScheme,  6);
-    OSMetaClassDeclareReservedUnused(IOApplePartitionScheme,  7);
-    OSMetaClassDeclareReservedUnused(IOApplePartitionScheme,  8);
-    OSMetaClassDeclareReservedUnused(IOApplePartitionScheme,  9);
-    OSMetaClassDeclareReservedUnused(IOApplePartitionScheme, 10);
-    OSMetaClassDeclareReservedUnused(IOApplePartitionScheme, 11);
-    OSMetaClassDeclareReservedUnused(IOApplePartitionScheme, 12);
-    OSMetaClassDeclareReservedUnused(IOApplePartitionScheme, 13);
-    OSMetaClassDeclareReservedUnused(IOApplePartitionScheme, 14);
-    OSMetaClassDeclareReservedUnused(IOApplePartitionScheme, 15);
-};
-
-#endif /* defined(KERNEL) && defined(__cplusplus) */
 
 #endif /* !_IOAPPLEPARTITIONSCHEME_H */

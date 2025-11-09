@@ -1,5 +1,5 @@
 /*	CoreFoundation.h
-	Copyright 1998-2001, Apple, Inc. All rights reserved.
+	Copyright 1998-2002, Apple, Inc. All rights reserved.
 */
 
 #include <CoreFoundation/CFBase.h>
@@ -46,17 +46,17 @@
 #include <string.h>
 #include <time.h>
 
-#if (199901L <= __STDC_VERSION__)
+#if defined(__STDC_VERSION__) && (199901L <= __STDC_VERSION__)
 
-#include <complex.h>
-#include <fenv.h>
+//#include <complex.h>
+//#include <fenv.h>
 #include <inttypes.h>
-#include <iso646.h>
+//#include <iso646.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include <tgmath.h>
-#include <wchar.h>
-#include <wctype.h>
+//#include <tgmath.h>
+//#include <wchar.h>
+//#include <wctype.h>
 
 #endif
 
@@ -68,7 +68,7 @@
 #include <CoreFoundation/CFURLAccess.h>
 #include <CoreFoundation/CFUUID.h>
 
-#if defined(__MACH__)
+#if defined(__MACH__) || defined(__WIN32__)
 #include <CoreFoundation/CFMachPort.h>
 #include <CoreFoundation/CFMessagePort.h>
 #include <CoreFoundation/CFRunLoop.h>

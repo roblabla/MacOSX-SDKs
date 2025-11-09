@@ -30,6 +30,8 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* clock_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 #include <mach/mach_types.h>
 
@@ -77,6 +79,81 @@ kern_return_t clock_alarm
 	mach_timespec_t alarm_time,
 	clock_reply_t alarm_port
 );
+/* typedefs for all requests */
+
+#ifndef __Request__clock_subsystem__defined
+#define __Request__clock_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__clock_get_time_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		clock_flavor_t flavor;
+		mach_msg_type_number_t clock_attrCnt;
+	} __Request__clock_get_attributes_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t alarm_port;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		alarm_type_t alarm_type;
+		mach_timespec_t alarm_time;
+	} __Request__clock_alarm_t;
+
+#endif /* !__Request__clock_subsystem__defined */
+
+/* union of all requests */
+
+#ifndef __RequestUnion__clock_subsystem__defined
+#define __RequestUnion__clock_subsystem__defined
+union __RequestUnion__clock_subsystem {
+	__Request__clock_get_time_t Request_clock_get_time;
+	__Request__clock_get_attributes_t Request_clock_get_attributes;
+	__Request__clock_alarm_t Request_clock_alarm;
+};
+#endif /* !__RequestUnion__clock_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__clock_subsystem__defined
+#define __Reply__clock_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_timespec_t cur_time;
+	} __Reply__clock_get_time_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t clock_attrCnt;
+		int clock_attr[1];
+	} __Reply__clock_get_attributes_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__clock_alarm_t;
+
+#endif /* !__Reply__clock_subsystem__defined */
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__clock_subsystem__defined
+#define __ReplyUnion__clock_subsystem__defined
+union __ReplyUnion__clock_subsystem {
+	__Reply__clock_get_time_t Reply_clock_get_time;
+	__Reply__clock_get_attributes_t Reply_clock_get_attributes;
+	__Reply__clock_alarm_t Reply_clock_alarm;
+};
+#endif /* !__RequestUnion__clock_subsystem__defined */
 
 #ifndef subsystem_to_name_map_clock
 #define subsystem_to_name_map_clock \

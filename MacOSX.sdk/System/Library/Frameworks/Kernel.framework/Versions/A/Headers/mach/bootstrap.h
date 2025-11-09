@@ -1,108 +1,28 @@
-#ifndef	_bootstrap_user_
-#define	_bootstrap_user_
+/*
+ * Copyright (c) 2002 Apple Computer, Inc. All rights reserved.
+ *
+ * @APPLE_LICENSE_HEADER_START@
+ * 
+ * The contents of this file constitute Original Code as defined in and
+ * are subject to the Apple Public Source License Version 1.1 (the
+ * "License").  You may not use this file except in compliance with the
+ * License.  Please obtain a copy of the License at
+ * http://www.apple.com/publicsource and read it before using this file.
+ * 
+ * This Original Code and all software distributed under the License are
+ * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
+ * License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * @APPLE_LICENSE_HEADER_END@
+ */
+/*
+ * Mach bootstrap interfaces (obsolete: header included only for compatibility)
+ */
+#ifndef	_MACH_BOOTSTRAP_H_
+#define _MACH_BOOTSTRAP_H_
 
-/* Module bootstrap */
-
-#include <string.h>
-#include <mach/ndr.h>
-#include <mach/boolean.h>
-#include <mach/kern_return.h>
-#include <mach/notify.h>
-#include <mach/mach_types.h>
-#include <mach/message.h>
-#include <mach/mig_errors.h>
-#include <mach/port.h>
-
-#ifdef AUTOTEST
-#ifndef FUNCTION_PTR_T
-#define FUNCTION_PTR_T
-typedef void (*function_ptr_t)(mach_port_t, char *, mach_msg_type_number_t);
-typedef struct {
-        char            *name;
-        function_ptr_t  function;
-} function_table_entry;
-typedef function_table_entry 	*function_table_t;
-#endif /* FUNCTION_PTR_T */
-#endif /* AUTOTEST */
-
-#ifndef	bootstrap_MSG_COUNT
-#define	bootstrap_MSG_COUNT	4
-#endif	/* bootstrap_MSG_COUNT */
-
-#include <mach/std_types.h>
-#include <mach/mach_types.h>
-
-#ifdef __BeforeMigUserHeader
-__BeforeMigUserHeader
-#endif /* __BeforeMigUserHeader */
-
-
-/* Routine bootstrap_ports */
-#ifdef	mig_external
-mig_external
-#else
-extern
-#endif	/* mig_external */
-kern_return_t bootstrap_ports
-(
-	bootstrap_t bootstrap,
-	mach_port_t *priv_host,
-	mach_port_t *device_master,
-	mach_port_t *wired_ledger,
-	mach_port_t *paged_ledger,
-	mach_port_t *host_security
-);
-
-/* Routine bootstrap_arguments */
-#ifdef	mig_external
-mig_external
-#else
-extern
-#endif	/* mig_external */
-kern_return_t bootstrap_arguments
-(
-	bootstrap_t bootstrap,
-	task_t task,
-	vm_offset_t *arguments,
-	mach_msg_type_number_t *argumentsCnt
-);
-
-/* Routine bootstrap_environment */
-#ifdef	mig_external
-mig_external
-#else
-extern
-#endif	/* mig_external */
-kern_return_t bootstrap_environment
-(
-	bootstrap_t bootstrap,
-	task_t task,
-	vm_offset_t *environment,
-	mach_msg_type_number_t *environmentCnt
-);
-
-/* SimpleRoutine bootstrap_completed */
-#ifdef	mig_external
-mig_external
-#else
-extern
-#endif	/* mig_external */
-kern_return_t bootstrap_completed
-(
-	bootstrap_t bootstrap,
-	task_t task
-);
-
-#ifndef subsystem_to_name_map_bootstrap
-#define subsystem_to_name_map_bootstrap \
-    { "bootstrap_ports", 1000001 },\
-    { "bootstrap_arguments", 1000002 },\
-    { "bootstrap_environment", 1000003 },\
-    { "bootstrap_completed", 1000004 }
-#endif
-
-#ifdef __AfterMigUserHeader
-__AfterMigUserHeader
-#endif /* __AfterMigUserHeader */
-
-#endif	 /* _bootstrap_user_ */
+#endif /* _MACH_BOOTSTRAP_H_ */

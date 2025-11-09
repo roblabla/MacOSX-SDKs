@@ -28,6 +28,11 @@ Boston, MA 02111-1307, USA.  */
  * ISO C Standard:  7.15  Variable arguments  <stdarg.h>
  */
 
+/* APPLE LOCAL begin MW compatibility */
+#ifdef __MWERKS__
+#include "mw_stdarg.h"
+#else
+/* APPLE LOCAL end MW compatibility */
 #ifndef _STDARG_H
 #ifndef _ANSI_STDARG_H_
 #ifndef __need___va_list
@@ -136,3 +141,5 @@ typedef __gnuc_va_list va_list;
 
 #endif /* not _ANSI_STDARG_H_ */
 #endif /* not _STDARG_H */
+/* APPLE LOCAL MW compatibility */
+#endif /* __MWERKS__ */

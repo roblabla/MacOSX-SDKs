@@ -3,9 +3,9 @@
  
      Contains:   Master include for OpenScripting private framework
  
-     Version:    OSA-30~10
+     Version:    OSA-48~15
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,9 +16,10 @@
 #ifndef __OPENSCRIPTING__
 #define __OPENSCRIPTING__
 
-#ifndef __CARBONCORE__
-#include <CarbonCore/CarbonCore.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
+
 
 #ifndef __HITOOLBOX__
 #include <HIToolbox/HIToolbox.h>
@@ -51,6 +52,10 @@
 
 #ifndef __FINDERREGISTRY__
 #include <OpenScripting/FinderRegistry.h>
+#endif
+
+#ifndef __DIGITALHUBREGISTRY__
+#include <OpenScripting/DigitalHubRegistry.h>
 #endif
 
 

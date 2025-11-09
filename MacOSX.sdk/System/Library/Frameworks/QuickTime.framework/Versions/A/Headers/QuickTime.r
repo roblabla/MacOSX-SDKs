@@ -3,9 +3,9 @@
  
      Contains:   Master include for all of QuickTime on OS X
  
-     Version:    QuickTime-142~1
+     Version:    QuickTime_6
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -19,6 +19,10 @@
 
 #ifndef __CARBON_R__
 #include <Carbon/Carbon.r>
+#endif
+
+#ifndef __MOVIES_R__
+#include <QuickTime/Movies.r>
 #endif
 
 #ifndef __IMAGECOMPRESSION_R__

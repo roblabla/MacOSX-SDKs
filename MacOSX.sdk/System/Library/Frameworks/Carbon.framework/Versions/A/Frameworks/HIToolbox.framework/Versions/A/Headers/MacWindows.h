@@ -3,9 +3,9 @@
  
      Contains:   Window Manager Interfaces
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1997-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1997-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,20 +16,8 @@
 #ifndef __MACWINDOWS__
 #define __MACWINDOWS__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __ALIASES__
-#include <CarbonCore/Aliases.h>
-#endif
-
-#ifndef __APPLEEVENTS__
-#include <AE/AppleEvents.h>
-#endif
-
-#ifndef __COLLECTIONS__
-#include <CarbonCore/Collections.h>
+#ifndef __APPLICATIONSERVICES__
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 #ifndef __DRAG__
@@ -44,35 +32,13 @@
 #include <HIToolbox/Menus.h>
 #endif
 
-#ifndef __MIXEDMODE__
-#include <CarbonCore/MixedMode.h>
-#endif
-
-#ifndef __QDOFFSCREEN__
-#include <QD/QDOffscreen.h>
-#endif
-
-#ifndef __QUICKDRAW__
-#include <QD/Quickdraw.h>
-#endif
-
-#ifndef __TEXTCOMMON__
-#include <CarbonCore/TextCommon.h>
-#endif
-
-#ifndef __ICONS__
-#include <HIToolbox/Icons.h>
-#endif
-
-#ifndef __MACERRORS__
-#include <CarbonCore/MacErrors.h>
-#endif
-
-#ifndef __CFSTRING__
-#include <CoreFoundation/CFString.h>
+#ifndef __HITOOLBAR__
+#include <HIToolbox/HIToolbar.h>
 #endif
 
 
+
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -82,13 +48,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /*                                                                                                      */
 /* Current documentation for the Mac OS Window Manager is available on the web:                         */
@@ -102,23 +62,239 @@ typedef OSType                          PropertyTag;
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* ¥ Window Classes                                                                     */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ *  WindowClass
+ *  
+ *  Summary:
+ *    The types of windows provided by the Window Manager.
+ *  
+ *  Discussion:
+ *    The class of a window determines several aspects of the window:
+ *    its appearance, its initial window attributes, its initial window
+ *    group, and its initial modality. All of these except for the
+ *    window's appearance may be changed later using other Window
+ *    Manager APIs.
+ */
 typedef UInt32 WindowClass;
 enum {
-  kAlertWindowClass             = 1L,   /* ÒI need your attention now.Ó*/
-  kMovableAlertWindowClass      = 2L,   /* ÒI need your attention now, but IÕm kind enough to let you switch out of this app to do other things.Ó*/
-  kModalWindowClass             = 3L,   /* system modal, not draggable*/
-  kMovableModalWindowClass      = 4L,   /* application modal, draggable*/
-  kFloatingWindowClass          = 5L,   /* floats above all other application windows*/
-  kDocumentWindowClass          = 6L,   /* document windows*/
-  kUtilityWindowClass           = 8L,   /* system-wide floating windows (TSM, AppleGuide) (available in CarbonLib 1.1)*/
-  kHelpWindowClass              = 10L,  /* help window (no frame; coachmarks, help tags ) (available in CarbonLib 1.1)*/
-  kSheetWindowClass             = 11L,  /* sheet windows for dialogs (available in Mac OS X and CarbonLib 1.3)*/
-  kToolbarWindowClass           = 12L,  /* toolbar windows (above documents, below floating windows) (available in CarbonLib 1.1)*/
-  kPlainWindowClass             = 13L,  /* plain window (in document layer)*/
-  kOverlayWindowClass           = 14L,  /* transparent window which allows 'screen' drawing via CoreGraphics (Mac OS X only)*/
-  kSheetAlertWindowClass        = 15L,  /* sheet windows for alerts (available in Mac OS X after 10.0.x and CarbonLib 1.3)*/
-  kAltPlainWindowClass          = 16L,  /* alternate plain window (in document layer) (available in Mac OS X after 10.0.x and CarbonLib 1.3)*/
-  kAllWindowClasses             = (unsigned long)0xFFFFFFFF /* for use with GetFrontWindowOfClass, FindWindowOfClass, GetNextWindowOfClass*/
+
+  /*
+   * An alert window is used when the application needs the user's
+   * attention immediately. On Mac OS 9 and earlier, a visible alert
+   * window will prevent the user from switching to any other
+   * application. Use kThemeBrushAlertBackgroundActive to draw the
+   * background of alert windows. Alert windows are initially placed in
+   * the modal window group, given a modality of
+   * kWindowModalityAppModal, and given an activation scope of
+   * kWindowActivationScopeAll. Available in Mac OS 8.5 and later.
+   */
+  kAlertWindowClass             = 1,
+
+  /*
+   * Similar to kAlertWindowClass, but provides a window that is
+   * movable and that allows switching to other applications. Generally
+   * you should use this window class rather than kAlertWindowClass.
+   * Use kThemeBrushAlertBackgroundActive to draw the background of
+   * movable alert windows. Movable alert windows are initially placed
+   * in the modal window group, given a modality of
+   * kWindowModalityAppModal, and given an activation scope of
+   * kWindowActivationScopeAll. Available in Mac OS 8.5 and later.
+   */
+  kMovableAlertWindowClass      = 2,
+
+  /*
+   * A modal window is used to display a dialog (but not an alert; use
+   * kAlertWindowClass for alerts). On Mac OS 9 and earlier, a visible
+   * modal window will prevent the user from switching to any other
+   * application. Use kThemeBrushDialogBackgroundActive to draw the
+   * background of modal windows. Modal windows are initially placed in
+   * the modal window group, given a modality of
+   * kWindowModalityAppModal, and given an activation scope of
+   * kWindowActivationScopeAll. Available in Mac OS 8.5 and later.
+   */
+  kModalWindowClass             = 3,
+
+  /*
+   * Similar to kModalWindowClass, but provides a window that is
+   * movable and that allows switching to other applications. Generally
+   * you should use this window class rather than kModalWindowClass. If
+   * you are using CarbonLib 1.3 or later, or Mac OS X, use
+   * kThemeBrushMovableModalBackground to draw the background of
+   * movable modal windows; on earlier versions of CarbonLib, or for
+   * non-Carbon programming, use kThemeBrushDialogBackgroundActive.
+   * Movable modal windows are initially placed in the modal window
+   * group, given a modality of kWindowModalityAppModal, and given an
+   * activation scope of kWindowActivationScopeAll. Available in Mac OS
+   * 8.5 and later.
+   */
+  kMovableModalWindowClass      = 4,
+
+  /*
+   * A floating window is layered above all application windows except
+   * for alert and modal windows. It is commonly used for palette
+   * windows, inspectors, and other accessory (non-document) windows.
+   * Use kThemeBrushUtilityWindowBackgroundActive or
+   * kThemeBrushDocumentWindowBackground to draw the background of
+   * floating windows. Floating windows are initially placed in the
+   * floating window group, given a modality of kWindowModalityNone,
+   * and given an activation scope of
+   * kWindowActivationScopeIndependent. Available in Mac OS 8.6 and
+   * later.
+   */
+  kFloatingWindowClass          = 5,
+
+  /*
+   * A document window is used for normal application document windows.
+   * Use kThemeBrushDocumentWindowBackground or your own custom drawing
+   * to draw the background of a document window. Document windows are
+   * initially placed in the document window group, given a modality of
+   * kWindowModalityNone, and given an activation scope of
+   * kWindowActivationScopeAll. Available in Mac OS 8.5 and later.
+   */
+  kDocumentWindowClass          = 6,
+
+  /*
+   * A utility window is similar to a floating window, but it floats
+   * above the windows of all applications rather than just above the
+   * windows of the application that creates it. Use
+   * kThemeBrushUtilityWindowBackgroundActive or
+   * kThemeBrushDocumentWindowBackground to draw the background of
+   * utility windows. Utility windows are initially placed in the
+   * utility window group, given a modality of kWindowModalityNone, and
+   * given an activation scope of kWindowActivationScopeIndependent.
+   * Available in CarbonLib 1.1 and later, and in Mac OS X.
+   */
+  kUtilityWindowClass           = 8,
+
+  /*
+   * A help window is used to display help tags. It has no window
+   * frame. Typically you should use the Help Manager to display help
+   * tags, rather than creating a help tag window yourself. Help
+   * windows are initially placed in the help window group, given a
+   * modality of kWindowModalityNone, and given an activation scope of
+   * kWindowActivationScopeNone. Available in CarbonLib 1.1 and later,
+   * and in Mac OS X.
+   */
+  kHelpWindowClass              = 10,
+
+  /*
+   * A sheet window is used to display a dialog that is attached
+   * directly to its parent window, rather than being a independent
+   * window. A sheet dialog only prevents interaction with its parent
+   * window; the user may still interact with other windows in the same
+   * application. Use kThemeBrushSheetBackgroundOpaque to draw an
+   * opaque background for sheet windows, or
+   * kThemeBrushSheetBackgroundTransparent to draw a transparent
+   * background (the transparent brush is only available in Mac OS X
+   * 10.1 and later). Sheet windows are initially placed in the
+   * document window group, given a modality of kWindowModalityNone,
+   * and given an activation scope of kWindowActivationScopeAll.
+   * Available in CarbonLib 1.3 and later, and in Mac OS X; in
+   * CarbonLib, a sheet window is actually a movable-modal window,
+   * which blocks user interaction with all windows of the application.
+   */
+  kSheetWindowClass             = 11,
+
+  /*
+   * A toolbar window is used to display a palette of controls. It is
+   * similar to a floating window, and like a floating window is
+   * layered above all application windows except for alert and modal
+   * windows, but is layered beneath floating windows. Use
+   * kThemeBrushToolbarBackground to draw the background of a toolbar
+   * window in Mac OS X or later; CarbonLib does not currently support
+   * kThemeBrushToolbarBackground. Floating windows are initially
+   * placed in the toolbar window group, given a modality of
+   * kWindowModalityNone, and given an activation scope of
+   * kWindowActivationScopeNone. Available in CarbonLib 1.1 and later,
+   * and Mac OS X.
+   */
+  kToolbarWindowClass           = 12,
+
+  /*
+   * A plain window has a single-pixel window frame.
+   * kThemeBrushDocumentWindowBackground,
+   * kThemeBrushDialogBackgroundActive, and application-specific custom
+   * drawing are all commonly used to draw the background of a plain
+   * window. Plain windows are initially placed in the document window
+   * group, given a modality of kWindowModalityNone, and given an
+   * activation scope of kWindowActivationScopeAll. Available in
+   * CarbonLib 1.2.5 and later, and Mac OS X.
+   */
+  kPlainWindowClass             = 13,
+
+  /*
+   * An overlay window is a completely transparent window positioned
+   * above all other windows. Overlay windows are intended as a
+   * replacement for the pre-Carbon practice of drawing directly into
+   * the window manager port; by creating a full-screen overlay window
+   * and drawing into it, you can draw over any window in any
+   * application without disturbing the contents of the windows
+   * underneath your drawing. After creating an overlay window, you
+   * should use CGContextClearRect to clear the overlay window's alpha
+   * channel to zero; this ensures the initial transparancy of the
+   * window. You must use CoreGraphics to draw into an overlay window
+   * to preserve the transparency of the window. Overlay windows are
+   * initially placed in the overlay window group, given a modality of
+   * kWindowModalityNone, and given an activation scope of
+   * kWindowActivationScopeNone. Available in Mac OS X.
+   */
+  kOverlayWindowClass           = 14,
+
+  /*
+   * A sheet alert window is similar to a sheet window, but is intended
+   * to display an alert rather than a dialog. On Mac OS X, the
+   * appearance of a sheet window and a sheet alert window is currently
+   * identical, but in CarbonLib a sheet alert window has a different
+   * appearance from a sheet window. Use
+   * kThemeBrushSheetBackgroundOpaque to draw an opaque background for
+   * sheet alert windows, or kThemeBrushSheetBackgroundTransparent to
+   * draw a transparent background (the transparent brush is only
+   * available in Mac OS X 10.1 and later). Sheet alert windows are
+   * initially placed in the document window group, given a modality of
+   * kWindowModalityNone, and given an activation scope of
+   * kWindowActivationScopeAll. Available in CarbonLib 1.3 and later,
+   * and in Mac OS X 10.1 and later; in CarbonLib, a sheet alert window
+   * is actually a movable alert window, which blocks user interaction
+   * with all windows of the application.
+   */
+  kSheetAlertWindowClass        = 15,
+
+  /*
+   * A alternate plain window is similar to a plain window but has a
+   * solid black shadow on its right and bottom sides. It is rarely
+   * used in modern Mac OS applications.
+   * kThemeBrushDocumentWindowBackground,
+   * kThemeBrushDialogBackgroundActive, and application-specific custom
+   * drawing are all commonly used to draw the background of an
+   * alternate plain window. Alternate plain windows are initially
+   * placed in the document window group, given a modality of
+   * kWindowModalityNone, and given an activation scope of
+   * kWindowActivationScopeAll. Available in CarbonLib 1.3 and later,
+   * and Mac OS X 10.1 and later.
+   */
+  kAltPlainWindowClass          = 16,
+
+  /*
+   * A drawer window is used when implementing a drawer user interface,
+   * in which the drawer windo slides out from underneath a document
+   * window. Use kThemeBrushDrawerBackground or
+   * kThemeBrushDocumentWindowBackground to draw the background of
+   * drawer windows. Drawer windows are initially placed in the
+   * document window group, given a modality of kWindowModalityNone,
+   * and given an activation scope of kWindowActivationScopeAll.
+   * Available in Mac OS X 10.2 or later.
+   */
+  kDrawerWindowClass            = 20,
+
+  /*
+   * Not an actual window class, but a meta-constant that is used with
+   * GetFrontWindowOfClass, FindWindowOfClass, and GetNextWindowOfClass
+   * to indicate that there should be no restriction on the class of
+   * the returned window. Also used with GetWindowGroupOfClass to get
+   * the root window group.
+   */
+  kAllWindowClasses             = (unsigned long)0xFFFFFFFF
 };
 
 
@@ -132,11 +308,11 @@ typedef UInt32                          WindowAttributes;
  *  Summary:
  *    Window attributes
  */
+enum {
 
   /*
    * A constant with value zero; the lack of any attributes.
    */
-enum {
   kWindowNoAttributes           = 0L,
 
   /*
@@ -196,6 +372,15 @@ enum {
   kWindowToolbarButtonAttribute = (1L << 6),
 
   /*
+   * This window uses the Metal appearance. Available for document and
+   * floating window classes on Mac OS X 10.2 and later. Drawers can
+   * also be metal, but dynamically adjust their appearance based on
+   * their parent window's appearance; it is not necessary to specify
+   * this attribute for a metal drawer.
+   */
+  kWindowMetalAttribute         = (1L << 8),
+
+  /*
    * This window receives no update events. Available for all windows.
    */
   kWindowNoUpdatesAttribute     = (1L << 16),
@@ -208,9 +393,19 @@ enum {
   /*
    * This window receives mouse events even for areas of the window
    * that are transparent (have an alpha channel component of zero).
-   * Available for windows of kOverlayWindowClass on Mac OS X.
+   * Available for windows of kOverlayWindowClass on Mac OS X 10.0 and
+   * 10.1, and available for all windows on Mac OS X 10.2 and later.
    */
   kWindowOpaqueForEventsAttribute = (1L << 18),
+
+  /*
+   * This window uses composited drawing. This means that the entire
+   * window is comprised of HIViews, and can be treated thusly. This
+   * attribute must be specified at window creation, and cannot be
+   * changed later with ChangeWindowAttributes. Available on Mac OS X
+   * 10.2 and later.
+   */
+  kWindowCompositingAttribute   = (1L << 19),
 
   /*
    * This window has no shadow. Available for all windows on Mac OS X.
@@ -255,10 +450,18 @@ enum {
   kWindowLiveResizeAttribute    = (1L << 28),
 
   /*
+   * This window never receives mouse events, even in areas that are
+   * opaque. Instead, clicks on the window will be passed through to
+   * windows beneath it. Available for all windows on Mac OS X 10.2 and
+   * later.
+   */
+  kWindowIgnoreClicksAttribute  = (1L << 29),
+
+  /*
    * This window will not be repositioned by the default
    * kEventWindowConstrain handler in response to changes in monitor
    * size, Dock position, and so on. Available for all windows on Mac
-   * OS X after 10.0.x.
+   * OS X 10.1 and later, and CarbonLib 1.6 and later.
    */
   kWindowNoConstrainAttribute   = (unsigned long)((1L << 31)),
 
@@ -465,17 +668,75 @@ enum {
 /* Do not use them in WIND, ALRT, DLOG templates.                                       */
 /* Do not confuse these constants with the constants above                              */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ *  WindowPositionMethod
+ *  
+ *  Summary:
+ *    Positioning methods usable with RepositionWindow.
+ *  
+ *  Discussion:
+ *    These constants are for use solely with the RepositionWindow API.
+ *    They should not be used in 'WIND', 'ALRT', or 'DLOG' resources.
+ */
 typedef UInt32 WindowPositionMethod;
 enum {
-  kWindowCenterOnMainScreen     = 0x00000001,
-  kWindowCenterOnParentWindow   = 0x00000002,
-  kWindowCenterOnParentWindowScreen = 0x00000003,
-  kWindowCascadeOnMainScreen    = 0x00000004,
-  kWindowCascadeOnParentWindow  = 0x00000005,
-  kWindowCascadeOnParentWindowScreen = 0x00000006,
-  kWindowAlertPositionOnMainScreen = 0x00000007,
-  kWindowAlertPositionOnParentWindow = 0x00000008,
-  kWindowAlertPositionOnParentWindowScreen = 0x00000009
+
+  /*
+   * Centers the window on the main screen.
+   */
+  kWindowCenterOnMainScreen     = 1,
+
+  /*
+   * Centers the window on its parent window.
+   */
+  kWindowCenterOnParentWindow   = 2,
+
+  /*
+   * Centers the window on the screen containing the largest portion of
+   * its parent window.
+   */
+  kWindowCenterOnParentWindowScreen = 3,
+
+  /*
+   * Cascades the window on the main screen.
+   */
+  kWindowCascadeOnMainScreen    = 4,
+
+  /*
+   * Cascades the window on its parent window.
+   */
+  kWindowCascadeOnParentWindow  = 5,
+
+  /*
+   * Cascades the window on the screen containing the largest portion
+   * of its parent window.
+   */
+  kWindowCascadeOnParentWindowScreen = 6,
+
+  /*
+   * Cascades the window on the screen containing the largest portion
+   * of its parent window, starting below and to the right of its
+   * parent window. Available in Mac OS X after version 10.1.x and
+   * CarbonLib after 1.5.
+   */
+  kWindowCascadeStartAtParentWindowScreen = 10,
+
+  /*
+   * Puts the window into the alert position on the main screen.
+   */
+  kWindowAlertPositionOnMainScreen = 7,
+
+  /*
+   * Puts the window into the alert position on its parent window.
+   */
+  kWindowAlertPositionOnParentWindow = 8,
+
+  /*
+   * Puts the window into the alert position on the screen containing
+   * the largest portion of its parent window.
+   */
+  kWindowAlertPositionOnParentWindowScreen = 9
 };
 
 
@@ -484,7 +745,7 @@ enum {
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 typedef UInt16                          WindowRegionCode;
 enum {
-                                        /* Region values to pass into GetWindowRegion & GetWindowBounds */
+                                        /* Region values to pass into GetWindowRegion & GetWindowBounds. All regions are reported in global coordinates. */
   kWindowTitleBarRgn            = 0,
   kWindowTitleTextRgn           = 1,
   kWindowCloseBoxRgn            = 2,
@@ -897,7 +1158,7 @@ typedef STACK_UPP_TYPE(WindowPaintProcPtr)                      WindowPaintUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern WindowDefUPP
-NewWindowDefUPP(WindowDefProcPtr userRoutine);
+NewWindowDefUPP(WindowDefProcPtr userRoutine)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDeskHookUPP()
@@ -917,7 +1178,7 @@ NewWindowDefUPP(WindowDefProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern WindowPaintUPP
-NewWindowPaintUPP(WindowPaintProcPtr userRoutine);
+NewWindowPaintUPP(WindowPaintProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeWindowDefUPP()
@@ -928,7 +1189,7 @@ NewWindowPaintUPP(WindowPaintProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeWindowDefUPP(WindowDefUPP userUPP);
+DisposeWindowDefUPP(WindowDefUPP userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDeskHookUPP()
@@ -948,7 +1209,7 @@ DisposeWindowDefUPP(WindowDefUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeWindowPaintUPP(WindowPaintUPP userUPP);
+DisposeWindowPaintUPP(WindowPaintUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeWindowDefUPP()
@@ -964,7 +1225,7 @@ InvokeWindowDefUPP(
   WindowRef     window,
   short         message,
   long          param,
-  WindowDefUPP  userUPP);
+  WindowDefUPP  userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDeskHookUPP()
@@ -991,7 +1252,7 @@ InvokeWindowPaintUPP(
   RgnHandle       inClientPaintRgn,
   RgnHandle       outSystemPaintRgn,
   void *          refCon,
-  WindowPaintUPP  userUPP);
+  WindowPaintUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* ¥ Window Definition Spec.  Used in Carbon to specify the code that defines a window. */
@@ -999,7 +1260,8 @@ InvokeWindowPaintUPP(
 enum {
   kWindowDefProcPtr             = 0,    /* raw proc-ptr based access*/
   kWindowDefObjectClass         = 1,    /* event-based definition (Carbon 1.1 or later)*/
-  kWindowDefProcID              = 2     /* explicit proc ID; overrides the window class default proc ID*/
+  kWindowDefProcID              = 2,    /* explicit proc ID; overrides the window class default proc ID*/
+  kWindowDefHIView              = 3     /* this window uses a view as its frame, not a WDEF*/
 };
 
 typedef UInt32                          WindowDefType;
@@ -1009,6 +1271,7 @@ struct WindowDefSpec {
     WindowDefUPP        defProc;
     void *              classRef;
     short               procID;
+    void *              rootView;             /* ControlRef*/
   }                       u;
 };
 typedef struct WindowDefSpec            WindowDefSpec;
@@ -1019,6 +1282,9 @@ typedef WindowDefSpec *                 WindowDefSpecPtr;
 /*
  *  GetNewCWindow()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1028,11 +1294,14 @@ extern WindowRef
 GetNewCWindow(
   short       windowID,
   void *      wStorage,
-  WindowRef   behind);
+  WindowRef   behind)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  NewWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1048,11 +1317,14 @@ NewWindow(
   short              theProc,
   WindowRef          behind,
   Boolean            goAwayFlag,
-  long               refCon);
+  long               refCon)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetNewWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1063,11 +1335,14 @@ extern WindowRef
 GetNewWindow(
   short       windowID,
   void *      wStorage,
-  WindowRef   behind);
+  WindowRef   behind)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  NewCWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1083,11 +1358,14 @@ NewCWindow(
   short              procID,
   WindowRef          behind,
   Boolean            goAwayFlag,
-  long               refCon);
+  long               refCon)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  DisposeWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1095,7 +1373,7 @@ NewCWindow(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DisposeWindow(WindowRef window);
+DisposeWindow(WindowRef window)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1117,6 +1395,9 @@ DisposeWindow(WindowRef window);
 /*
  *  CreateNewWindow()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1127,7 +1408,7 @@ CreateNewWindow(
   WindowClass        windowClass,
   WindowAttributes   attributes,
   const Rect *       contentBounds,
-  WindowRef *        outWindow);
+  WindowRef *        outWindow)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Routines available from Mac OS 8.5 forward*/
@@ -1135,6 +1416,9 @@ CreateNewWindow(
 /* Create a window from a ÔwindÕ resource*/
 /*
  *  CreateWindowFromResource()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1144,12 +1428,15 @@ CreateNewWindow(
 extern OSStatus 
 CreateWindowFromResource(
   SInt16       resID,
-  WindowRef *  outWindow);
+  WindowRef *  outWindow)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* window persistence*/
 /*
  *  StoreWindowIntoCollection()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1159,11 +1446,14 @@ CreateWindowFromResource(
 extern OSStatus 
 StoreWindowIntoCollection(
   WindowRef    window,
-  Collection   collection);
+  Collection   collection)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CreateWindowFromCollection()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1173,12 +1463,15 @@ StoreWindowIntoCollection(
 extern OSStatus 
 CreateWindowFromCollection(
   Collection   collection,
-  WindowRef *  outWindow);
+  WindowRef *  outWindow)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* window refcounting*/
 /*
  *  GetWindowOwnerCount()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1188,11 +1481,14 @@ CreateWindowFromCollection(
 extern OSStatus 
 GetWindowOwnerCount(
   WindowRef   window,
-  UInt32 *    outCount);
+  UInt32 *    outCount)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CloneWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1200,7 +1496,7 @@ GetWindowOwnerCount(
  *    Non-Carbon CFM:   in WindowsLib 8.5 and later
  */
 extern OSStatus 
-CloneWindow(WindowRef window);
+CloneWindow(WindowRef window)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1214,6 +1510,9 @@ CloneWindow(WindowRef window);
  *    with CoreFoundation and Carbon Events, it is preferred over
  *    GetWindowOwnerCount. Both APIs will continue to be supported.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inWindow:
@@ -1225,7 +1524,7 @@ CloneWindow(WindowRef window);
  *    Non-Carbon CFM:   not available
  */
 extern ItemCount 
-GetWindowRetainCount(WindowRef inWindow);
+GetWindowRetainCount(WindowRef inWindow)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1239,6 +1538,9 @@ GetWindowRetainCount(WindowRef inWindow);
  *    CoreFoundation and Carbon Events, it is preferred over
  *    CloneWindow. Both APIs will continue to be supported.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inWindow:
@@ -1250,7 +1552,7 @@ GetWindowRetainCount(WindowRef inWindow);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-RetainWindow(WindowRef inWindow);
+RetainWindow(WindowRef inWindow)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1265,6 +1567,9 @@ RetainWindow(WindowRef inWindow);
  *    CoreFoundation and Carbon Events, it is preferred over
  *    DisposeWindow. Both APIs will continue to be supported.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inWindow:
@@ -1276,7 +1581,7 @@ RetainWindow(WindowRef inWindow);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-ReleaseWindow(WindowRef inWindow);
+ReleaseWindow(WindowRef inWindow)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1287,6 +1592,9 @@ ReleaseWindow(WindowRef inWindow);
 
 /*
  *  CreateCustomWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1299,11 +1607,14 @@ CreateCustomWindow(
   WindowClass            windowClass,
   WindowAttributes       attributes,
   const Rect *           contentBounds,
-  WindowRef *            outWindow);
+  WindowRef *            outWindow)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  ReshapeCustomWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1311,7 +1622,7 @@ CreateCustomWindow(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-ReshapeCustomWindow(WindowRef window);
+ReshapeCustomWindow(WindowRef window)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1334,6 +1645,9 @@ ReshapeCustomWindow(WindowRef window);
  *    fragment. RegisterWindowDefinition is available when linking to
  *    CarbonLib 1.1 forward.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inResID:
@@ -1353,7 +1667,7 @@ ReshapeCustomWindow(WindowRef window);
 extern OSStatus 
 RegisterWindowDefinition(
   SInt16                 inResID,
-  const WindowDefSpec *  inDefSpec);
+  const WindowDefSpec *  inDefSpec)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1369,6 +1683,9 @@ RegisterWindowDefinition(
 /*
  *  GetWindowWidgetHilite()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1377,7 +1694,7 @@ RegisterWindowDefinition(
 extern OSStatus 
 GetWindowWidgetHilite(
   WindowRef            inWindow,
-  WindowDefPartCode *  outHilite);
+  WindowDefPartCode *  outHilite)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1391,6 +1708,9 @@ GetWindowWidgetHilite(
  *    Indicates whether a window class is supported by the Window
  *    Manager.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inClass:
@@ -1398,11 +1718,11 @@ GetWindowWidgetHilite(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-IsValidWindowClass(WindowClass inClass);
+IsValidWindowClass(WindowClass inClass)                       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -1420,6 +1740,9 @@ IsValidWindowClass(WindowClass inClass);
  *    class. You can use this API to remove attributes that are not
  *    supported by the current platform before calling CreateNewWindow.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inClass:
@@ -1431,11 +1754,11 @@ IsValidWindowClass(WindowClass inClass);
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern WindowAttributes 
-GetAvailableWindowAttributes(WindowClass inClass);
+GetAvailableWindowAttributes(WindowClass inClass)             AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -1445,6 +1768,9 @@ GetAvailableWindowAttributes(WindowClass inClass);
 /*
  *  GetWindowClass()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1453,11 +1779,14 @@ GetAvailableWindowAttributes(WindowClass inClass);
 extern OSStatus 
 GetWindowClass(
   WindowRef      window,
-  WindowClass *  outClass);
+  WindowClass *  outClass)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetWindowAttributes()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1467,7 +1796,7 @@ GetWindowClass(
 extern OSStatus 
 GetWindowAttributes(
   WindowRef           window,
-  WindowAttributes *  outAttributes);
+  WindowAttributes *  outAttributes)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1476,6 +1805,9 @@ GetWindowAttributes(
 */
 /*
  *  ChangeWindowAttributes()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1486,7 +1818,7 @@ extern OSStatus
 ChangeWindowAttributes(
   WindowRef          window,
   WindowAttributes   setTheseAttributes,
-  WindowAttributes   clearTheseAttributes);
+  WindowAttributes   clearTheseAttributes)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1519,6 +1851,9 @@ ChangeWindowAttributes(
  *    utility window have non-utility class. SetWindowClass is
  *    available from CarbonLib 1.1 forward.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inWindow:
@@ -1535,7 +1870,7 @@ ChangeWindowAttributes(
 extern OSStatus 
 SetWindowClass(
   WindowRef     inWindow,
-  WindowClass   inWindowClass);
+  WindowClass   inWindowClass)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1547,13 +1882,13 @@ SetWindowClass(
  *  WindowModality
  *  
  */
+typedef UInt32 WindowModality;
+enum {
 
   /*
    * A window does not prevent interaction with any other window in the
    * system.
    */
-typedef UInt32 WindowModality;
-enum {
   kWindowModalityNone           = 0,
 
   /*
@@ -1586,6 +1921,9 @@ enum {
  *    The modality of a window is used by the Carbon event manager to
  *    automatically determine appropriate event handling.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inWindow:
@@ -1609,7 +1947,7 @@ extern OSStatus
 SetWindowModality(
   WindowRef        inWindow,
   WindowModality   inModalKind,
-  WindowRef        inUnavailableWindow);
+  WindowRef        inUnavailableWindow)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1617,6 +1955,9 @@ SetWindowModality(
  *  
  *  Summary:
  *    Retrieves the modality of a window.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1639,7 +1980,7 @@ extern OSStatus
 GetWindowModality(
   WindowRef         inWindow,
   WindowModality *  outModalKind,
-  WindowRef *       outUnavailableWindow);      /* can be NULL */
+  WindowRef *       outUnavailableWindow)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1654,17 +1995,8 @@ GetWindowModality(
 /*
  *  ShowFloatingWindows()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in WindowsLib 8.5 and later
- */
-extern OSStatus 
-ShowFloatingWindows(void);
-
-
-/*
- *  HideFloatingWindows()
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1672,11 +2004,29 @@ ShowFloatingWindows(void);
  *    Non-Carbon CFM:   in WindowsLib 8.5 and later
  */
 extern OSStatus 
-HideFloatingWindows(void);
+ShowFloatingWindows(void)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  HideFloatingWindows()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in WindowsLib 8.5 and later
+ */
+extern OSStatus 
+HideFloatingWindows(void)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  AreFloatingWindowsVisible()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1684,7 +2034,7 @@ HideFloatingWindows(void);
  *    Non-Carbon CFM:   in WindowsLib 8.5 and later
  */
 extern Boolean 
-AreFloatingWindowsVisible(void);
+AreFloatingWindowsVisible(void)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1714,6 +2064,8 @@ typedef struct OpaqueWindowGroupRef*    WindowGroupRef;
  *  Summary:
  *    These are attributes that may be applied to a window group.
  */
+typedef UInt32 WindowGroupAttributes;
+enum {
 
   /*
    * Makes the group behave somewhat as a layer of windows that move
@@ -1721,8 +2073,6 @@ typedef struct OpaqueWindowGroupRef*    WindowGroupRef;
    * the group, the entire group will also be brought to the front of
    * the containing group's child hierarchy.
    */
-typedef UInt32 WindowGroupAttributes;
-enum {
   kWindowGroupAttrSelectAsLayer = 1 << 0,
 
   /*
@@ -1768,6 +2118,8 @@ enum {
  *    are activated by the Window Manager with respect to other windows
  *    in the windowÕs group and in the current process.
  */
+typedef UInt32 WindowActivationScope;
+enum {
 
   /*
    * Windows with this scope are never activated by the Window Manager.
@@ -1777,8 +2129,6 @@ enum {
    * is free to explicitly activate windows using the ActivateWindow
    * and DeactivateWindow APIs.
    */
-typedef UInt32 WindowActivationScope;
-enum {
   kWindowActivationScopeNone    = 0,
 
   /*
@@ -1804,12 +2154,12 @@ enum {
  *    These are constants that can be used for the inNextGroup
  *    parameter to GetSiblingWindowGroup.
  */
+enum {
 
   /*
    * Indicates that GetSiblingWindowGroup should return the next deeper
    * sibling group in the z-order.
    */
-enum {
   kNextWindowGroup              = true,
 
   /*
@@ -1828,14 +2178,14 @@ enum {
  *    content is counted or returned by the CountWindowGroupContents
  *    and GetWindowGroupContents APIs.
  */
+typedef UInt32 WindowGroupContentOptions;
+enum {
 
   /*
    * Indicates that Count/GetWindowGroupContents should return the
    * windows in a group. If this option is not set, these APIs return
    * the groups in a group.
    */
-typedef UInt32 WindowGroupContentOptions;
-enum {
   kWindowGroupContentsReturnWindows = 1 << 0,
 
   /*
@@ -1864,6 +2214,9 @@ enum {
  *  Summary:
  *    Creates a new window group.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inAttributes:
@@ -1880,7 +2233,7 @@ enum {
 extern OSStatus 
 CreateWindowGroup(
   WindowGroupAttributes   inAttributes,
-  WindowGroupRef *        outGroup);
+  WindowGroupRef *        outGroup)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1888,6 +2241,9 @@ CreateWindowGroup(
  *  
  *  Summary:
  *    Increments the refcount of a window group.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1900,7 +2256,7 @@ CreateWindowGroup(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-RetainWindowGroup(WindowGroupRef inGroup);
+RetainWindowGroup(WindowGroupRef inGroup)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1910,6 +2266,9 @@ RetainWindowGroup(WindowGroupRef inGroup);
  *    Releases a refcount on a window group. If the refcount goes to
  *    zero, the group is destroyed, and a refcount is released from all
  *    contained objects.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1922,7 +2281,7 @@ RetainWindowGroup(WindowGroupRef inGroup);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-ReleaseWindowGroup(WindowGroupRef inGroup);
+ReleaseWindowGroup(WindowGroupRef inGroup)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1930,6 +2289,9 @@ ReleaseWindowGroup(WindowGroupRef inGroup);
  *  
  *  Summary:
  *    Returns the refcount of a window group.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1942,7 +2304,7 @@ ReleaseWindowGroup(WindowGroupRef inGroup);
  *    Non-Carbon CFM:   not available
  */
 extern ItemCount 
-GetWindowGroupRetainCount(WindowGroupRef inGroup);
+GetWindowGroupRetainCount(WindowGroupRef inGroup)             AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -1961,6 +2323,9 @@ GetWindowGroupRetainCount(WindowGroupRef inGroup);
  *    by this API is not incremented, and the caller does not need to
  *    release the reference.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    windowClass:
@@ -1973,7 +2338,7 @@ GetWindowGroupRetainCount(WindowGroupRef inGroup);
  *    Non-Carbon CFM:   not available
  */
 extern WindowGroupRef 
-GetWindowGroupOfClass(WindowClass windowClass);
+GetWindowGroupOfClass(WindowClass windowClass)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1992,6 +2357,9 @@ GetWindowGroupOfClass(WindowClass windowClass);
  *    DebugPrintWindowGroup. This can be very useful when debugging the
  *    structure of your window groups.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inGroup:
@@ -2008,7 +2376,7 @@ GetWindowGroupOfClass(WindowClass windowClass);
 extern OSStatus 
 SetWindowGroupName(
   WindowGroupRef   inGroup,
-  CFStringRef      inName);
+  CFStringRef      inName)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2016,6 +2384,9 @@ SetWindowGroupName(
  *  
  *  Summary:
  *    Returns a copy of the name of a window group.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2034,7 +2405,7 @@ SetWindowGroupName(
 extern OSStatus 
 CopyWindowGroupName(
   WindowGroupRef   inGroup,
-  CFStringRef *    outName);
+  CFStringRef *    outName)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2042,6 +2413,9 @@ CopyWindowGroupName(
  *  
  *  Summary:
  *    Retrieves the attributes of a window group.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2059,7 +2433,7 @@ CopyWindowGroupName(
 extern OSStatus 
 GetWindowGroupAttributes(
   WindowGroupRef           inGroup,
-  WindowGroupAttributes *  outAttributes);
+  WindowGroupAttributes *  outAttributes)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2067,6 +2441,9 @@ GetWindowGroupAttributes(
  *  
  *  Summary:
  *    Changes the attributes of a window group.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2088,7 +2465,7 @@ extern OSStatus
 ChangeWindowGroupAttributes(
   WindowGroupRef          inGroup,
   WindowGroupAttributes   setTheseAttributes,
-  WindowGroupAttributes   clearTheseAttributes);
+  WindowGroupAttributes   clearTheseAttributes)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2116,6 +2493,9 @@ ChangeWindowGroupAttributes(
  *    Changing the level of a group also changes the level of all
  *    windows currently contained by the group.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inGroup:
@@ -2132,7 +2512,7 @@ ChangeWindowGroupAttributes(
 extern OSStatus 
 SetWindowGroupLevel(
   WindowGroupRef   inGroup,
-  SInt32           inLevel);
+  SInt32           inLevel)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2140,6 +2520,9 @@ SetWindowGroupLevel(
  *  
  *  Summary:
  *    Gets the CoreGraphics window group level of windows in a group.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2157,7 +2540,7 @@ SetWindowGroupLevel(
 extern OSStatus 
 GetWindowGroupLevel(
   WindowGroupRef   inGroup,
-  SInt32 *         outLevel);
+  SInt32 *         outLevel)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2175,6 +2558,9 @@ GetWindowGroupLevel(
  *    SendWindowGroupBehind currently requires that the group being
  *    moved and the behindGroup have the same parent group.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inGroup:
@@ -2191,7 +2577,7 @@ GetWindowGroupLevel(
 extern OSStatus 
 SendWindowGroupBehind(
   WindowGroupRef   inGroup,
-  WindowGroupRef   behindGroup);
+  WindowGroupRef   behindGroup)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*----------------------------------------------------------------------------------*/
@@ -2208,6 +2594,9 @@ SendWindowGroupBehind(
  *    incremented, and the caller does not need to release the
  *    reference.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inWindow:
@@ -2219,7 +2608,7 @@ SendWindowGroupBehind(
  *    Non-Carbon CFM:   not available
  */
 extern WindowGroupRef 
-GetWindowGroup(WindowRef inWindow);
+GetWindowGroup(WindowRef inWindow)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2237,6 +2626,9 @@ GetWindowGroup(WindowRef inWindow);
  *    placed at the top of the new group. You may not place a window
  *    directly into the root group.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inWindow:
@@ -2253,7 +2645,7 @@ GetWindowGroup(WindowRef inWindow);
 extern OSStatus 
 SetWindowGroup(
   WindowRef        inWindow,
-  WindowGroupRef   inNewGroup);
+  WindowGroupRef   inNewGroup)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2262,6 +2654,9 @@ SetWindowGroup(
  *  Summary:
  *    Indicates whether a window is contained within a group or any of
  *    its subgroups.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2279,7 +2674,7 @@ SetWindowGroup(
 extern Boolean 
 IsWindowContainedInGroup(
   WindowRef        inWindow,
-  WindowGroupRef   inGroup);
+  WindowGroupRef   inGroup)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2287,6 +2682,9 @@ IsWindowContainedInGroup(
  *  
  *  Summary:
  *    Gets the window group that contains a group.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2304,7 +2702,7 @@ IsWindowContainedInGroup(
  *    Non-Carbon CFM:   not available
  */
 extern WindowGroupRef 
-GetWindowGroupParent(WindowGroupRef inGroup);
+GetWindowGroupParent(WindowGroupRef inGroup)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2316,6 +2714,9 @@ GetWindowGroupParent(WindowGroupRef inGroup);
  *  Discussion:
  *    SetWindowGroupParent currently requires that the group have no
  *    windows in it.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2333,7 +2734,7 @@ GetWindowGroupParent(WindowGroupRef inGroup);
 extern OSStatus 
 SetWindowGroupParent(
   WindowGroupRef   inGroup,
-  WindowGroupRef   inNewGroup);
+  WindowGroupRef   inNewGroup)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2341,6 +2742,9 @@ SetWindowGroupParent(
  *  
  *  Summary:
  *    Returns the next or previous group of a window group.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2359,7 +2763,7 @@ SetWindowGroupParent(
 extern WindowGroupRef 
 GetWindowGroupSibling(
   WindowGroupRef   inGroup,
-  Boolean          inNextGroup);
+  Boolean          inNextGroup)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2374,6 +2778,9 @@ GetWindowGroupSibling(
  *    window. Whenever the owner window changes z-order, the windows in
  *    the groups owned by the window will be moved also.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inGroup:
@@ -2385,7 +2792,7 @@ GetWindowGroupSibling(
  *    Non-Carbon CFM:   not available
  */
 extern WindowRef 
-GetWindowGroupOwner(WindowGroupRef inGroup);
+GetWindowGroupOwner(WindowGroupRef inGroup)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2398,6 +2805,9 @@ GetWindowGroupOwner(WindowGroupRef inGroup);
  *    The group and the window must have the same parent group.
  *    SetWindowGroupOwner currently requires that the group have no
  *    windows in it.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2415,7 +2825,7 @@ GetWindowGroupOwner(WindowGroupRef inGroup);
 extern OSStatus 
 SetWindowGroupOwner(
   WindowGroupRef   inGroup,
-  WindowRef        inWindow);
+  WindowRef        inWindow)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2428,6 +2838,9 @@ SetWindowGroupOwner(
  *  
  *  Summary:
  *    Counts the windows or groups contained in a group.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2445,7 +2858,7 @@ SetWindowGroupOwner(
 extern ItemCount 
 CountWindowGroupContents(
   WindowGroupRef              inGroup,
-  WindowGroupContentOptions   inOptions);
+  WindowGroupContentOptions   inOptions)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2457,6 +2870,9 @@ CountWindowGroupContents(
  *  Discussion:
  *    The windows or groups returned by this API will be placed into
  *    the output buffer in z-order, from highest to lowest.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2488,7 +2904,7 @@ GetWindowGroupContents(
   WindowGroupContentOptions   inOptions,
   ItemCount                   inAllowedItems,
   ItemCount *                 outNumItems,          /* can be NULL */
-  void **                     outItems);
+  void **                     outItems)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2504,6 +2920,9 @@ GetWindowGroupContents(
  *    easier and more efficient to use GetIndexedWindow. If you need to
  *    retrieve all the windows in a group, it is more efficient to use
  *    GetWindowGroupContents.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2533,7 +2952,7 @@ GetIndexedWindow(
   WindowGroupRef              inGroup,
   UInt32                      inIndex,
   WindowGroupContentOptions   inOptions,
-  WindowRef *                 outWindow);
+  WindowRef *                 outWindow)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2546,6 +2965,9 @@ GetIndexedWindow(
  *    The z-order index of a window is its relative position in z-order
  *    inside a group. The index ranges from 1 to the number of windows
  *    in the group.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2576,7 +2998,7 @@ GetWindowIndex(
   WindowRef                   inWindow,
   WindowGroupRef              inStartGroup,
   WindowGroupContentOptions   inOptions,
-  UInt32 *                    outIndex);
+  UInt32 *                    outIndex)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2603,13 +3025,16 @@ GetWindowIndex(
  *    GetFrontWindowOfClass(kDocumentClass) to get the active window
  *    should use ActiveNonFloatingWindow instead.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.4 and later
  *    Non-Carbon CFM:   not available
  */
 extern WindowRef 
-ActiveNonFloatingWindow(void);
+ActiveNonFloatingWindow(void)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2624,6 +3049,9 @@ ActiveNonFloatingWindow(void);
  *    indicate whether the window has keyboard focus. To get the window
  *    with keyboard focus, use GetUserFocusWindow().
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inWindow:
@@ -2635,7 +3063,7 @@ ActiveNonFloatingWindow(void);
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-IsWindowActive(WindowRef inWindow);
+IsWindowActive(WindowRef inWindow)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2653,6 +3081,9 @@ IsWindowActive(WindowRef inWindow);
  *    should always use ActivateWindow rather than creating and sending
  *    the event yourself.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inWindow:
@@ -2669,7 +3100,7 @@ IsWindowActive(WindowRef inWindow);
 extern OSStatus 
 ActivateWindow(
   WindowRef   inWindow,
-  Boolean     inActivate);
+  Boolean     inActivate)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2677,6 +3108,9 @@ ActivateWindow(
  *  
  *  Summary:
  *    Retrieves a windowÕs activation scope.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2694,7 +3128,7 @@ ActivateWindow(
 extern OSStatus 
 GetWindowActivationScope(
   WindowRef                inWindow,
-  WindowActivationScope *  outScope);
+  WindowActivationScope *  outScope)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2702,6 +3136,9 @@ GetWindowActivationScope(
  *  
  *  Summary:
  *    Sets a windowÕs activation scope.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2719,7 +3156,7 @@ GetWindowActivationScope(
 extern OSStatus 
 SetWindowActivationScope(
   WindowRef               inWindow,
-  WindowActivationScope   inScope);
+  WindowActivationScope   inScope)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2732,6 +3169,9 @@ SetWindowActivationScope(
  *  Summary:
  *    Prints the contents of a window group to stdout.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inGroup:
@@ -2743,7 +3183,7 @@ SetWindowActivationScope(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-DebugPrintWindowGroup(WindowGroupRef inGroup);
+DebugPrintWindowGroup(WindowGroupRef inGroup)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2753,13 +3193,16 @@ DebugPrintWindowGroup(WindowGroupRef inGroup);
  *    Prints the full window group hierarchy, starting at the root
  *    group.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern void 
-DebugPrintAllWindowGroups(void);
+DebugPrintAllWindowGroups(void)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2796,6 +3239,9 @@ DebugPrintAllWindowGroups(void);
 /*
  *  SetWindowContentColor()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2804,11 +3250,14 @@ DebugPrintAllWindowGroups(void);
 extern OSStatus 
 SetWindowContentColor(
   WindowRef         window,
-  const RGBColor *  color);
+  const RGBColor *  color)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetWindowContentColor()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2818,12 +3267,15 @@ SetWindowContentColor(
 extern OSStatus 
 GetWindowContentColor(
   WindowRef   window,
-  RGBColor *  color);
+  RGBColor *  color)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Routines available from Mac OS 8.5 forward*/
 /*
  *  GetWindowContentPattern()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2833,11 +3285,14 @@ GetWindowContentColor(
 extern OSStatus 
 GetWindowContentPattern(
   WindowRef      window,
-  PixPatHandle   outPixPat);
+  PixPatHandle   outPixPat)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetWindowContentPattern()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2847,7 +3302,7 @@ GetWindowContentPattern(
 extern OSStatus 
 SetWindowContentPattern(
   WindowRef      window,
-  PixPatHandle   pixPat);
+  PixPatHandle   pixPat)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Routines available from Mac OS 9.0 forward*/
@@ -2859,6 +3314,9 @@ enum {
 /*
  *  InstallWindowContentPaintProc()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2869,7 +3327,7 @@ InstallWindowContentPaintProc(
   WindowRef                window,
   WindowPaintUPP           paintProc,
   WindowPaintProcOptions   options,
-  void *                   refCon);         /* can be NULL */
+  void *                   refCon)          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -2888,6 +3346,9 @@ enum {
 /*
  *  ScrollWindowRect()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2900,11 +3361,14 @@ ScrollWindowRect(
   SInt16                inHPixels,
   SInt16                inVPixels,
   ScrollWindowOptions   inOptions,
-  RgnHandle             outExposedRgn);      /* can be NULL */
+  RgnHandle             outExposedRgn)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  ScrollWindowRegion()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2918,7 +3382,7 @@ ScrollWindowRegion(
   SInt16                inHPixels,
   SInt16                inVPixels,
   ScrollWindowOptions   inOptions,
-  RgnHandle             outExposedRgn);      /* can be NULL */
+  RgnHandle             outExposedRgn)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2929,13 +3393,16 @@ ScrollWindowRegion(
 /*
  *  ClipAbove()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ClipAbove(WindowRef window);
+ClipAbove(WindowRef window)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* SaveOld/DrawNew are not available in Carbon.  Use ReshapeCustomWindow instead.*/
@@ -2962,6 +3429,9 @@ ClipAbove(WindowRef window);
 /*
  *  PaintOne()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2970,11 +3440,14 @@ ClipAbove(WindowRef window);
 extern void 
 PaintOne(
   WindowRef   window,             /* can be NULL */
-  RgnHandle   clobberedRgn);
+  RgnHandle   clobberedRgn)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PaintBehind()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2984,11 +3457,14 @@ PaintOne(
 extern void 
 PaintBehind(
   WindowRef   startWindow,        /* can be NULL */
-  RgnHandle   clobberedRgn);
+  RgnHandle   clobberedRgn)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CalcVis()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2996,11 +3472,14 @@ PaintBehind(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-CalcVis(WindowRef window);
+CalcVis(WindowRef window)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CalcVisBehind()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3010,11 +3489,14 @@ CalcVis(WindowRef window);
 extern void 
 CalcVisBehind(
   WindowRef   startWindow,        /* can be NULL */
-  RgnHandle   clobberedRgn);
+  RgnHandle   clobberedRgn)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CheckUpdate()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3022,7 +3504,7 @@ CalcVisBehind(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
-CheckUpdate(EventRecord * theEvent);
+CheckUpdate(EventRecord * theEvent)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -3031,6 +3513,9 @@ CheckUpdate(EventRecord * theEvent);
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*
  *  [Mac]FindWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3043,11 +3528,14 @@ CheckUpdate(EventRecord * theEvent);
 extern WindowPartCode 
 MacFindWindow(
   Point        thePoint,
-  WindowRef *  window);
+  WindowRef *  window)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  FrontWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3055,11 +3543,14 @@ MacFindWindow(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern WindowRef 
-FrontWindow(void);
+FrontWindow(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  BringToFront()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3067,11 +3558,14 @@ FrontWindow(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-BringToFront(WindowRef window);
+BringToFront(WindowRef window)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SendBehind()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3081,11 +3575,14 @@ BringToFront(WindowRef window);
 extern void 
 SendBehind(
   WindowRef   window,
-  WindowRef   behindWindow);
+  WindowRef   behindWindow)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SelectWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3093,7 +3590,7 @@ SendBehind(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SelectWindow(WindowRef window);
+SelectWindow(WindowRef window)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3104,19 +3601,25 @@ SelectWindow(WindowRef window);
 /*
  *  FrontNonFloatingWindow()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in WindowsLib 8.5 and later
  */
 extern WindowRef 
-FrontNonFloatingWindow(void);
+FrontNonFloatingWindow(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Routines available from Mac OS 8.1 forward when linking to CarbonLib 1.0 forward*/
 
 /*
  *  GetNextWindowOfClass()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3127,11 +3630,14 @@ extern WindowRef
 GetNextWindowOfClass(
   WindowRef     inWindow,
   WindowClass   inWindowClass,
-  Boolean       mustBeVisible);
+  Boolean       mustBeVisible)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetFrontWindowOfClass()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3141,11 +3647,14 @@ GetNextWindowOfClass(
 extern WindowRef 
 GetFrontWindowOfClass(
   WindowClass   inWindowClass,
-  Boolean       mustBeVisible);
+  Boolean       mustBeVisible)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  FindWindowOfClass()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3157,31 +3666,63 @@ FindWindowOfClass(
   const Point *     where,
   WindowClass       inWindowClass,
   WindowRef *       outWindow,
-  WindowPartCode *  outWindowPart);      /* can be NULL */
+  WindowPartCode *  outWindowPart)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-/* Carbon only*/
+/*
+ *  Summary:
+ *    Options for the CreateStandardWindowMenu API.
+ */
+enum {
+
+  /*
+   * Requests the standard window menu include a Rotate Windows menu
+   * item. Available in Mac OS X after version 10.1.
+   */
+  kWindowMenuIncludeRotate      = 1 << 0
+};
+
 /*
  *  CreateStandardWindowMenu()
  *  
  *  Discussion:
  *    Creates a standard Window menu for your application. You can call
- *    this to create a window menu for your application and insert it
- *    in your menu bar (typically at the end of your menu list). To
- *    register a window to be tracked by this menu, you either create
- *    your window with CreateNewWindow, passing the
+ *    this to create a window menu for your application. Once you have
+ *    the menu, you need to insert it in your menu bar (typically at
+ *    the end of your menu list) with a call to InsertMenu. To register
+ *    a window to be tracked by this menu, you either create your
+ *    window with CreateNewWindow, passing the
  *    kWindowInWindowMenuAttribute, or you can use
  *    ChangeWindowAttributes after the window is created. The Toolbox
  *    takes care of acting on the standard items such as zoom and
  *    minimize, as well as bringing selected windows to the front. All
  *    you need to do is install it and register your windows and the
  *    Toolbox does the rest.
+ *    
+ *    You may also add your own menu items to the standard window menu.
+ *    To do this, we recommend that you use the
+ *    GetIndMenuItemWithCommandID API to locate one of the standard
+ *    menu items in the menu which is immediately above or below the
+ *    location where you wish to insert your items. Then insert your
+ *    items relative to the position of the standard menu item. Do not
+ *    attempt to search the menu items yourself without calling
+ *    GetIndMenuItemWithCommandID; in Mac OS X 10.2,
+ *    CreateStandardWindowMenu returns an initially empty menu which is
+ *    populated later when the menu is displayed or when
+ *    GetIndMenuItemWithCommandID is called, so you will find no items
+ *    in the menu unless you first call GetIndMenuItemWithCommandID.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
  *    inOptions:
- *      Currently you must pass zero for this parameter.
+ *      Requests optional behavior of the standard window menu. Mac OS
+ *      X 10.2 supports the kWindowMenuIncludeRotate option; in earlier
+ *      versions of Mac OS X, and in CarbonLib, you must pass zero for
+ *      this parameter.
  *    
  *    outMenu:
  *      Receives a new menu reference which contains the standard
@@ -3198,7 +3739,7 @@ FindWindowOfClass(
 extern OSStatus 
 CreateStandardWindowMenu(
   OptionBits   inOptions,
-  MenuRef *    outMenu);
+  MenuRef *    outMenu)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3211,6 +3752,9 @@ CreateStandardWindowMenu(
  *    would normally use this if the window title was not expressive
  *    enough to be used in the Window menu (or similar text-only
  *    situation).
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -3232,7 +3776,7 @@ CreateStandardWindowMenu(
 extern OSStatus 
 SetWindowAlternateTitle(
   WindowRef     inWindow,
-  CFStringRef   inTitle);
+  CFStringRef   inTitle)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3241,6 +3785,9 @@ SetWindowAlternateTitle(
  *  Discussion:
  *    This API gets the alternate title for a window. See the
  *    discussion of SetWindowAlternateTitle for more info.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -3262,7 +3809,7 @@ SetWindowAlternateTitle(
 extern OSStatus 
 CopyWindowAlternateTitle(
   WindowRef      inWindow,
-  CFStringRef *  outTitle);
+  CFStringRef *  outTitle)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -3307,13 +3854,16 @@ CopyWindowAlternateTitle(
 /*
  *  IsValidWindowPtr()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in WindowsLib 8.5 and later
  */
 extern Boolean 
-IsValidWindowPtr(WindowRef possibleWindow);
+IsValidWindowPtr(WindowRef possibleWindow)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #define IsValidWindowRef IsValidWindowPtr
@@ -3339,6 +3889,9 @@ IsValidWindowPtr(WindowRef possibleWindow);
 /*
  *  HiliteWindow()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3347,11 +3900,14 @@ IsValidWindowPtr(WindowRef possibleWindow);
 extern void 
 HiliteWindow(
   WindowRef   window,
-  Boolean     fHilite);
+  Boolean     fHilite)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetWRefCon()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3361,11 +3917,14 @@ HiliteWindow(
 extern void 
 SetWRefCon(
   WindowRef   window,
-  long        data);
+  long        data)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetWRefCon()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3373,11 +3932,14 @@ SetWRefCon(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-GetWRefCon(WindowRef window);
+GetWRefCon(WindowRef window)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetWindowPic()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3387,11 +3949,14 @@ GetWRefCon(WindowRef window);
 extern void 
 SetWindowPic(
   WindowRef   window,
-  PicHandle   pic);
+  PicHandle   pic)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetWindowPic()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3399,11 +3964,14 @@ SetWindowPic(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern PicHandle 
-GetWindowPic(WindowRef window);
+GetWindowPic(WindowRef window)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetWVariant()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3411,12 +3979,15 @@ GetWindowPic(WindowRef window);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-GetWVariant(WindowRef window);
+GetWVariant(WindowRef window)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Routines available from Mac OS 8.0 (Appearance 1.0) forward*/
 /*
  *  GetWindowFeatures()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3426,11 +3997,14 @@ GetWVariant(WindowRef window);
 extern OSStatus 
 GetWindowFeatures(
   WindowRef   window,
-  UInt32 *    outFeatures);
+  UInt32 *    outFeatures)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetWindowRegion()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3441,11 +4015,14 @@ extern OSStatus
 GetWindowRegion(
   WindowRef          window,
   WindowRegionCode   inRegionCode,
-  RgnHandle          ioWinRgn);
+  RgnHandle          ioWinRgn)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetWindowStructureWidths()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3455,7 +4032,7 @@ GetWindowRegion(
 extern OSStatus 
 GetWindowStructureWidths(
   WindowRef   inWindow,
-  Rect *      outRect);
+  Rect *      outRect)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -3509,17 +4086,8 @@ GetWindowStructureWidths(
 /*
  *  BeginUpdate()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern void 
-BeginUpdate(WindowRef window);
-
-
-/*
- *  EndUpdate()
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3527,7 +4095,22 @@ BeginUpdate(WindowRef window);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-EndUpdate(WindowRef window);
+BeginUpdate(WindowRef window)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  EndUpdate()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern void 
+EndUpdate(WindowRef window)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3538,6 +4121,9 @@ EndUpdate(WindowRef window);
 /*
  *  InvalWindowRgn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3546,11 +4132,14 @@ EndUpdate(WindowRef window);
 extern OSStatus 
 InvalWindowRgn(
   WindowRef   window,
-  RgnHandle   region);
+  RgnHandle   region)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  InvalWindowRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3560,11 +4149,14 @@ InvalWindowRgn(
 extern OSStatus 
 InvalWindowRect(
   WindowRef     window,
-  const Rect *  bounds);
+  const Rect *  bounds)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  ValidWindowRgn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3574,11 +4166,14 @@ InvalWindowRect(
 extern OSStatus 
 ValidWindowRgn(
   WindowRef   window,
-  RgnHandle   region);
+  RgnHandle   region)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  ValidWindowRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3588,7 +4183,7 @@ ValidWindowRgn(
 extern OSStatus 
 ValidWindowRect(
   WindowRef     window,
-  const Rect *  bounds);
+  const Rect *  bounds)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -3601,13 +4196,16 @@ ValidWindowRect(
 /*
  *  DrawGrowIcon()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DrawGrowIcon(WindowRef window);
+DrawGrowIcon(WindowRef window)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -3615,6 +4213,9 @@ DrawGrowIcon(WindowRef window);
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*
  *  SetWTitle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3624,11 +4225,14 @@ DrawGrowIcon(WindowRef window);
 extern void 
 SetWTitle(
   WindowRef          window,
-  ConstStr255Param   title);
+  ConstStr255Param   title)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetWTitle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3638,11 +4242,14 @@ SetWTitle(
 extern void 
 GetWTitle(
   WindowRef   window,
-  Str255      title);
+  Str255      title)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetWindowTitleWithCFString()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3652,11 +4259,14 @@ GetWTitle(
 extern OSStatus 
 SetWindowTitleWithCFString(
   WindowRef     inWindow,
-  CFStringRef   inString);
+  CFStringRef   inString)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CopyWindowTitleAsCFString()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3666,7 +4276,7 @@ SetWindowTitleWithCFString(
 extern OSStatus 
 CopyWindowTitleAsCFString(
   WindowRef      inWindow,
-  CFStringRef *  outString);
+  CFStringRef *  outString)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -3678,6 +4288,9 @@ CopyWindowTitleAsCFString(
 /*
  *  SetWindowProxyFSSpec()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3686,11 +4299,14 @@ CopyWindowTitleAsCFString(
 extern OSStatus 
 SetWindowProxyFSSpec(
   WindowRef       window,
-  const FSSpec *  inFile);
+  const FSSpec *  inFile)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetWindowProxyFSSpec()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3700,11 +4316,27 @@ SetWindowProxyFSSpec(
 extern OSStatus 
 GetWindowProxyFSSpec(
   WindowRef   window,
-  FSSpec *    outFile);
+  FSSpec *    outFile)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetWindowProxyAlias()
+ *  
+ *  Summary:
+ *    Sets the proxy icon for a window based on an AliasHandle.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose proxy icon to set.
+ *    
+ *    inAlias:
+ *      The alias that specifies the proxy icon. The Window Manager
+ *      copies the alias data; the caller may dispose of the alias
+ *      after SetWindowProxyAlias returns.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3713,12 +4345,15 @@ GetWindowProxyFSSpec(
  */
 extern OSStatus 
 SetWindowProxyAlias(
-  WindowRef     window,
-  AliasHandle   alias);
+  WindowRef     inWindow,
+  AliasHandle   inAlias)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetWindowProxyAlias()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3728,11 +4363,14 @@ SetWindowProxyAlias(
 extern OSStatus 
 GetWindowProxyAlias(
   WindowRef      window,
-  AliasHandle *  alias);
+  AliasHandle *  alias)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetWindowProxyCreatorAndType()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3744,11 +4382,14 @@ SetWindowProxyCreatorAndType(
   WindowRef   window,
   OSType      fileCreator,
   OSType      fileType,
-  SInt16      vRefNum);
+  SInt16      vRefNum)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetWindowProxyIcon()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3758,11 +4399,14 @@ SetWindowProxyCreatorAndType(
 extern OSStatus 
 GetWindowProxyIcon(
   WindowRef   window,
-  IconRef *   outIcon);
+  IconRef *   outIcon)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetWindowProxyIcon()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3772,11 +4416,14 @@ GetWindowProxyIcon(
 extern OSStatus 
 SetWindowProxyIcon(
   WindowRef   window,
-  IconRef     icon);
+  IconRef     icon)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  RemoveWindowProxy()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3784,11 +4431,14 @@ SetWindowProxyIcon(
  *    Non-Carbon CFM:   in WindowsLib 8.5 and later
  */
 extern OSStatus 
-RemoveWindowProxy(WindowRef window);
+RemoveWindowProxy(WindowRef window)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  BeginWindowProxyDrag()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3799,11 +4449,14 @@ extern OSStatus
 BeginWindowProxyDrag(
   WindowRef        window,
   DragReference *  outNewDrag,
-  RgnHandle        outDragOutlineRgn);
+  RgnHandle        outDragOutlineRgn)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  EndWindowProxyDrag()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3813,11 +4466,14 @@ BeginWindowProxyDrag(
 extern OSStatus 
 EndWindowProxyDrag(
   WindowRef       window,
-  DragReference   theDrag);
+  DragReference   theDrag)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  TrackWindowProxyFromExistingDrag()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3829,11 +4485,14 @@ TrackWindowProxyFromExistingDrag(
   WindowRef       window,
   Point           startPt,
   DragReference   drag,
-  RgnHandle       inDragOutlineRgn);
+  RgnHandle       inDragOutlineRgn)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  TrackWindowProxyDrag()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3843,11 +4502,14 @@ TrackWindowProxyFromExistingDrag(
 extern OSStatus 
 TrackWindowProxyDrag(
   WindowRef   window,
-  Point       startPt);
+  Point       startPt)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  IsWindowModified()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3855,11 +4517,14 @@ TrackWindowProxyDrag(
  *    Non-Carbon CFM:   in WindowsLib 8.5 and later
  */
 extern Boolean 
-IsWindowModified(WindowRef window);
+IsWindowModified(WindowRef window)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetWindowModified()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3869,11 +4534,14 @@ IsWindowModified(WindowRef window);
 extern OSStatus 
 SetWindowModified(
   WindowRef   window,
-  Boolean     modified);
+  Boolean     modified)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  IsWindowPathSelectClick()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3883,11 +4551,14 @@ SetWindowModified(
 extern Boolean 
 IsWindowPathSelectClick(
   WindowRef            window,
-  const EventRecord *  event);
+  const EventRecord *  event)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  WindowPathSelect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3898,11 +4569,14 @@ extern OSStatus
 WindowPathSelect(
   WindowRef   window,
   MenuRef     menu,                /* can be NULL */
-  SInt32 *    outMenuResult);
+  SInt32 *    outMenuResult)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  IsWindowPathSelectEvent()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3912,7 +4586,7 @@ WindowPathSelect(
 extern Boolean 
 IsWindowPathSelectEvent(
   WindowRef   window,
-  EventRef    inEvent);
+  EventRef    inEvent)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -3928,6 +4602,9 @@ IsWindowPathSelectEvent(
 /*
  *  HiliteWindowFrameForDrag()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3936,7 +4613,7 @@ IsWindowPathSelectEvent(
 extern OSStatus 
 HiliteWindowFrameForDrag(
   WindowRef   window,
-  Boolean     hilited);
+  Boolean     hilited)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -3945,23 +4622,112 @@ HiliteWindowFrameForDrag(
 /*                                                                                      */
 /*  TransitionWindow displays a window with accompanying animation and sound.           */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ *  WindowTransitionEffect
+ *  
+ *  Summary:
+ *    Visual effects that are provided by TransitionWindow
+ */
 typedef UInt32 WindowTransitionEffect;
 enum {
-  kWindowZoomTransitionEffect   = 1,    /* Finder-like zoom rectangles. Use with Show or Hide transition actions*/
-  kWindowSheetTransitionEffect  = 2,    /* Zoom in/out from parent. Use with TransitionWindowAndParent and Show or Hide transition actions*/
-  kWindowSlideTransitionEffect  = 3     /* Slide the window into its new position. Use with Move or Resize transition actions*/
+
+  /*
+   * Finder-like zoom rectangles. Use with TransitionWindow and Show or
+   * Hide transition actions
+   */
+  kWindowZoomTransitionEffect   = 1,
+
+  /*
+   * Zoom in/out from parent. Use with TransitionWindowAndParent and
+   * Show or Hide transition actions. Available in Mac OS X, and in
+   * CarbonLib 1.5 and later.
+   */
+  kWindowSheetTransitionEffect  = 2,
+
+  /*
+   * Slide the window into its new position. Use with TransitionWindow
+   * and Move or Resize transition actions. Available in Mac OS X, and
+   * in CarbonLib 1.5 and later.
+   */
+  kWindowSlideTransitionEffect  = 3
 };
 
+
+/*
+ *  WindowTransitionAction
+ *  
+ *  Summary:
+ *    Modifications to window state that are provided by
+ *    TransitionWindow
+ */
 typedef UInt32 WindowTransitionAction;
 enum {
-  kWindowShowTransitionAction   = 1,    /* param is rect in global coordinates from which to start the animation*/
-  kWindowHideTransitionAction   = 2,    /* param is rect in global coordinates at which to end the animation*/
-  kWindowMoveTransitionAction   = 3,    /* param is rect in global coordinates of window's new structure bounds*/
-  kWindowResizeTransitionAction = 4     /* param is rect in global coordinates of window's new structure bounds*/
+
+  /*
+   * Shows the window. Use with the Zoom or Sheet transition effects.
+   * The inRect parameter is the global coordinates from which to start
+   * the animation; if inRect is NULL, the animation begins at the
+   * center of the window.
+   */
+  kWindowShowTransitionAction   = 1,
+
+  /*
+   * Hides the window. Use with the Zoom or Sheet transition effects.
+   * The inRect parameter is the global coordinates at which to end the
+   * animation; if inRect is NULL, the animation ends at the center of
+   * the window.
+   */
+  kWindowHideTransitionAction   = 2,
+
+  /*
+   * Moves the window. Use with the Slide transition effect. The inRect
+   * parameter is the global coordinates of the window's new structure
+   * bounds; inRect must be non-NULL. Available in Mac OS X, and in
+   * CarbonLib 1.5 and later.
+   */
+  kWindowMoveTransitionAction   = 3,
+
+  /*
+   * Resizes the window. Use with the Slide transition effect. The
+   * inRect parameter is the global coordinates of the window's new
+   * structure bounds; inRect must be non-NULL. Available in Mac OS X,
+   * and in CarbonLib 1.5 and later.
+   */
+  kWindowResizeTransitionAction = 4
 };
 
 /*
  *  TransitionWindow()
+ *  
+ *  Summary:
+ *    Shows, hides, moves, or resizes a window with appropriate
+ *    animation and sound.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window on which to act.
+ *    
+ *    inEffect:
+ *      The type of visual effect to use. TransitionWindow supports the
+ *      Zoom and Slide transition effects. The Slide effect is
+ *      supported on Mac OS X and in CarbonLib 1.5 and later.
+ *    
+ *    inAction:
+ *      The action to take on the window. TransitionWindow supports the
+ *      Show, Hide, Move, and Resize actions. The Move and Resize
+ *      actions are supported on Mac OS X and in CarbonLib 1.5 and
+ *      later.
+ *    
+ *    inRect:
+ *      A screen rect in global coordinates. The interpretation of the
+ *      rect is dependent on the transition action; see the
+ *      documentation for each action for details. May be NULL for some
+ *      transition actions.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3970,27 +4736,56 @@ enum {
  */
 extern OSStatus 
 TransitionWindow(
-  WindowRef                window,
-  WindowTransitionEffect   effect,
-  WindowTransitionAction   action,
-  const Rect *             rect);        /* can be NULL */
+  WindowRef                inWindow,
+  WindowTransitionEffect   inEffect,
+  WindowTransitionAction   inAction,
+  const Rect *             inRect)         /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  TransitionWindowAndParent()
  *  
+ *  Summary:
+ *    Shows or hides a window, potentially also moving a second window,
+ *    with appropriate animation and sound.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window on which to act.
+ *    
+ *    inParentWindow:
+ *      The window to which the primary window is related.
+ *    
+ *    inEffect:
+ *      The type of visual effect to use. TransitionWindowAndParent
+ *      supports the Sheet transition effect.
+ *    
+ *    inAction:
+ *      The action to take on the window. TransitionWindowAndParent
+ *      supports the Show and Hide actions.
+ *    
+ *    inRect:
+ *      A screen rect in global coordinates. The interpretation of the
+ *      rect is dependent on the transition action; see the
+ *      documentation for each action for details. May be NULL for some
+ *      transition actions.
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 TransitionWindowAndParent(
-  WindowRef                window,
-  WindowRef                parentWindow,
-  WindowTransitionEffect   effect,
-  WindowTransitionAction   action,
-  const Rect *             rect);              /* can be NULL */
+  WindowRef                inWindow,
+  WindowRef                inParentWindow,
+  WindowTransitionEffect   inEffect,
+  WindowTransitionAction   inAction,
+  const Rect *             inRect)               /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4000,6 +4795,9 @@ TransitionWindowAndParent(
 
 /*
  *  [Mac]MoveWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4014,11 +4812,14 @@ MacMoveWindow(
   WindowRef   window,
   short       hGlobal,
   short       vGlobal,
-  Boolean     front);
+  Boolean     front)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SizeWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4030,13 +4831,16 @@ SizeWindow(
   WindowRef   window,
   short       w,
   short       h,
-  Boolean     fUpdate);
+  Boolean     fUpdate)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /* Note: bBox can only be NULL when linking to CarbonLib 1.0 forward */
 /*
  *  GrowWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4047,12 +4851,15 @@ extern long
 GrowWindow(
   WindowRef     window,
   Point         startPt,
-  const Rect *  bBox);         /* can be NULL */
+  const Rect *  bBox)          /* can be NULL */              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Note: boundsRect can only be NULL when linking to CarbonLib 1.0 forward */
 /*
  *  DragWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4063,11 +4870,14 @@ extern void
 DragWindow(
   WindowRef     window,
   Point         startPt,
-  const Rect *  boundsRect);      /* can be NULL */
+  const Rect *  boundsRect)       /* can be NULL */           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  ZoomWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4078,7 +4888,7 @@ extern void
 ZoomWindow(
   WindowRef        window,
   WindowPartCode   partCode,
-  Boolean          front);
+  Boolean          front)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -4088,17 +4898,8 @@ ZoomWindow(
 /*
  *  IsWindowCollapsable()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
- */
-extern Boolean 
-IsWindowCollapsable(WindowRef window);
-
-
-/*
- *  IsWindowCollapsed()
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4106,11 +4907,29 @@ IsWindowCollapsable(WindowRef window);
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern Boolean 
-IsWindowCollapsed(WindowRef window);
+IsWindowCollapsable(WindowRef window)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  IsWindowCollapsed()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
+ */
+extern Boolean 
+IsWindowCollapsed(WindowRef window)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CollapseWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4120,11 +4939,14 @@ IsWindowCollapsed(WindowRef window);
 extern OSStatus 
 CollapseWindow(
   WindowRef   window,
-  Boolean     collapse);
+  Boolean     collapse)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CollapseAllWindows()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4132,7 +4954,7 @@ CollapseWindow(
  *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
  */
 extern OSStatus 
-CollapseAllWindows(Boolean collapse);
+CollapseAllWindows(Boolean collapse)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Routines available on Mac OS X*/
@@ -4147,6 +4969,9 @@ CollapseAllWindows(Boolean collapse);
  *    ReleaseQDContextForCollapsedWindowDockTile and NOT DisposePort
  *    when using this API, as it maintains more state than just the
  *    port. If you call DisposePort, you may leak system resources.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -4170,7 +4995,7 @@ CollapseAllWindows(Boolean collapse);
 extern OSStatus 
 CreateQDContextForCollapsedWindowDockTile(
   WindowRef   inWindow,
-  CGrafPtr *  outContext);
+  CGrafPtr *  outContext)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4180,6 +5005,9 @@ CreateQDContextForCollapsedWindowDockTile(
  *    Releases a port and other state created by the
  *    CreateQDContextForCollapsedWindowDockTile API. You MUST call this
  *    instead of DisposePort directly, or you may leak system resources.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -4201,7 +5029,7 @@ CreateQDContextForCollapsedWindowDockTile(
 extern OSStatus 
 ReleaseQDContextForCollapsedWindowDockTile(
   WindowRef   inWindow,
-  CGrafPtr    inContext);
+  CGrafPtr    inContext)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4212,6 +5040,9 @@ ReleaseQDContextForCollapsedWindowDockTile(
  *    dock to the current contents of the window. Use this for periodic
  *    updates, etc. Do not use this for animation purposes, if you want
  *    animation, use the above create/release drawing context APIs.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -4228,8 +5059,85 @@ ReleaseQDContextForCollapsedWindowDockTile(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-UpdateCollapsedWindowDockTile(WindowRef inWindow);
+UpdateCollapsedWindowDockTile(WindowRef inWindow)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*
+ *  SetWindowDockTileMenu()
+ *  
+ *  Summary:
+ *    Sets the menu that is displayed by a window's dock tile.
+ *  
+ *  Discussion:
+ *    When a window's dock tile menu is right-clicked or
+ *    control-clicked, the Dock will always automatically display a
+ *    menu containing a Close menu item that closes the window. If the
+ *    application wants to add other additional menu items, it can use
+ *    the SetWindowDockTileMenu API to provide those items. The items
+ *    in the specified menu will be combined with the standard items
+ *    provided by the Dock.
+ *    
+ *    Before the menu is actually displayed, it will receive
+ *    kEventMenuPopulate, kEventMenuOpening, and kEventMenuEnableItems
+ *    Carbon events, so any event handlers for these events may update
+ *    the menu appropriately for the current state of the
+ *    application.
+ *    
+ *    The application should set a command ID for each menu item in the
+ *    dock tile menu, and when that item is chosen, a
+ *    kEventCommandProcess Carbon event containing the item's command
+ *    ID will be sent to the window's event target (and from there to
+ *    the application, if the window does not handle the
+ *    event).
+ *    
+ *    This API increments the refcount of the specified menu.
+ *    
+ *    The toolbox provides a default handler for the
+ *    kEventWindowGetDockTileMenu event that returns the menu specified
+ *    by the SetWindowDockTileMenu API.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window for which to set the dock tile menu.
+ *    
+ *    inMenu:
+ *      The menu to display, or NULL to remove the current dock tile
+ *      menu.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+SetWindowDockTileMenu(
+  WindowRef   inWindow,
+  MenuRef     inMenu)         /* can be NULL */               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  GetWindowDockTileMenu()
+ *  
+ *  Summary:
+ *    Returns the menu that is displayed by a window's dock tile.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Result:
+ *    The application's dock tile menu, or NULL if none.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern MenuRef 
+GetWindowDockTileMenu(WindowRef inWindow)                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
@@ -4240,6 +5148,9 @@ UpdateCollapsedWindowDockTile(WindowRef inWindow);
 /*
  *  GetWindowBounds()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4249,12 +5160,165 @@ extern OSStatus
 GetWindowBounds(
   WindowRef          window,
   WindowRegionCode   regionCode,
-  Rect *             globalBounds);
+  Rect *             globalBounds)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/* Note: newContentRect can only be NULL when linking to CarbonLib 1.0 forward */
+/*
+ *  SetWindowResizeLimits()
+ *  
+ *  Summary:
+ *    Sets the minimum and maximum content sizes for a window.
+ *  
+ *  Discussion:
+ *    The minimum and maximum sizes are obeyed by ResizeWindow and
+ *    GrowWindow. The default Carbon event handler installed for all
+ *    windows will return these sizes in response to
+ *    kEventWindowGetMinimumSize and kEventWindowGetMaximumSize events.
+ *    When a window is first created, its minimum and maximum sizes are
+ *    set to reasonable values (which may change from one system
+ *    release to the next).
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose minimum and maximum sizes to set.
+ *    
+ *    inMinLimits:
+ *      The new minimum size for the content region of the window. Pass
+ *      NULL if you don't want to set a minimum size.
+ *    
+ *    inMaxLimits:
+ *      The new maximum size for the content region of the window. Pass
+ *      NULL if you don't want to set a maximum size.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+SetWindowResizeLimits(
+  WindowRef       inWindow,
+  const HISize *  inMinLimits,       /* can be NULL */
+  const HISize *  inMaxLimits)       /* can be NULL */        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  GetWindowResizeLimits()
+ *  
+ *  Summary:
+ *    Returns the minimum and maximum content sizes for a window.
+ *  
+ *  Discussion:
+ *    GetWindowResizeLimits returns the minimum and maximum sizes that
+ *    were set by SetWindowResizeLimits. Note that it does not send
+ *    kEventWindowGetMinimumSize or kEventWindowGetMaximumSize Carbon
+ *    events to get these sizes; it simply retrieves the sizes from the
+ *    WindowRef. It is entirely possible (and quite likely) that a
+ *    given window will have event handlers for the
+ *    kEventWindowGetMinimum/MaximumSize events that will modify or
+ *    override the sizes in the WindowRef; therefore, to accurately
+ *    determine the desired minimum and maximum sizes, you should send
+ *    kEventWindowGetMinimum/MaximumSize Carbon events rather than
+ *    using this API.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose minimum and maximum sizes to retrieve.
+ *    
+ *    outMinLimits:
+ *      On exit, contains the minimum size of the window's content
+ *      region. Pass NULL if you don't want this information.
+ *    
+ *    outMaxLimits:
+ *      On exit, contains the maximum size of the window's content
+ *      region. Pass NULL if you don't want this information.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+GetWindowResizeLimits(
+  WindowRef   inWindow,
+  HISize *    outMinLimits,       /* can be NULL */
+  HISize *    outMaxLimits)       /* can be NULL */           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
 /*
  *  ResizeWindow()
+ *  
+ *  Summary:
+ *    Handles all user interaction while a window is being resized.
+ *  
+ *  Discussion:
+ *    The ResizeWindow function moves either an outline of the window's
+ *    edges (on Mac OS 9.x and earlier) or the actual window (on Mac OS
+ *    X) around the screen, following the userÕs cursor movements, and
+ *    handles all user interaction until the mouse button is released.
+ *    Unlike the GrowWindow API, there is no need to follow this call
+ *    with a call to the function SizeWindow, because once the mouse
+ *    button is released, ResizeWindow resizes the window if the user
+ *    has changed the window size. Once the resizing is complete,
+ *    ResizeWindow draws the window in the new size. Your application
+ *    should call the ResizeWindow function instead of the earlier
+ *    Window Manager APIs SizeWindow and GrowWindow. Some windows may
+ *    allow themselves to be resized from any corner or edge, not just
+ *    the bottom right, and as a result, when the user resizes the
+ *    window, the window may move on the screen and not merely change
+ *    size. ResizeWindow informs your application of the new window
+ *    bounds, so that your application can respond to any changes in
+ *    the windowÕs position.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window to be resized.
+ *    
+ *    inStartPoint:
+ *      The point, in global coordinates, at which the original
+ *      mouse-down occurred.
+ *    
+ *    inSizeConstraints:
+ *      The limits on the vertical and horizontal measurements of the
+ *      content rectangle, in pixels. Although this parameter is typed
+ *      as a Rect, the four numbers in the structure represent limits,
+ *      not screen coordinates. The top, left, bottom, and right fields
+ *      of the structure specify the minimum vertical measurement
+ *      (top), the minimum horizontal measurement (left), the maximum
+ *      vertical measurement (bottom), and the maximum horizontal
+ *      measurement (right). The minimum dimensions should be large
+ *      enough to allow a manageable rectangle; 64 pixels on a side is
+ *      typical. The maximum dimensions can be no greater than 32,767.
+ *      You can pass NULL to allow the user to resize the window to any
+ *      size that is contained onscreen.
+ *    
+ *    outNewContentRect:
+ *      On exit, the structure contains the new dimensions of the
+ *      windowÕs content region, in global coordinates. On Mac OS 9.x
+ *      and earlier, you must pass a non-NULL value in this parameter;
+ *      in Carbon, you may pass NULL if you do not need the windowÕs
+ *      new dimensions.
+ *  
+ *  Result:
+ *    Returns true if the window changed size, or false if not.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4263,10 +5327,10 @@ GetWindowBounds(
  */
 extern Boolean 
 ResizeWindow(
-  WindowRef     window,
-  Point         startPoint,
-  const Rect *  sizeConstraints,       /* can be NULL */
-  Rect *        newContentRect);       /* can be NULL */
+  WindowRef     inWindow,
+  Point         inStartPoint,
+  const Rect *  inSizeConstraints,       /* can be NULL */
+  Rect *        outNewContentRect)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4278,6 +5342,9 @@ ResizeWindow(
 /*
  *  SetWindowBounds()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4287,13 +5354,16 @@ extern OSStatus
 SetWindowBounds(
   WindowRef          window,
   WindowRegionCode   regionCode,
-  const Rect *       globalBounds);
+  const Rect *       globalBounds)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Routines available from Mac OS 8.5 forward*/
 
 /*
  *  RepositionWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4304,11 +5374,14 @@ extern OSStatus
 RepositionWindow(
   WindowRef              window,
   WindowRef              parentWindow,
-  WindowPositionMethod   method);
+  WindowPositionMethod   method)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  MoveWindowStructure()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4319,7 +5392,7 @@ extern OSStatus
 MoveWindowStructure(
   WindowRef   window,
   short       hGlobal,
-  short       vGlobal);
+  short       vGlobal)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4327,8 +5400,52 @@ MoveWindowStructure(
    or from Mac OS 8.6 forward when linking to CarbonLib 1.1 forward
 */
 
+/* Routines available from Mac OS 8.5 forward*/
+
 /*
  *  IsWindowInStandardState()
+ *  
+ *  Summary:
+ *    Determines whether a window is currently zoomed in to the user
+ *    state or zoomed out to the standard state.
+ *  
+ *  Discussion:
+ *    IsWindowInStandardState compares the windowÕs current dimensions
+ *    to those given by the inIdealSize parameter to determine if the
+ *    window is currently in its standard (zoomed-out) state. Your
+ *    application may use IsWindowInStandardState to decide whether a
+ *    userÕs click of the zoom box is a request to zoom in to the user
+ *    state or out to the standard state. Your application may also use
+ *    IsWindowInStandardState to determine the size and position of the
+ *    standard state that the Window Manager would calculate for a
+ *    window, given a specified ideal size; this value is returned in
+ *    the outIdealStandardState parameter.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window for which to determine the zoom state.
+ *    
+ *    inIdealSize:
+ *      The ideal width and height of the windowÕs content region,
+ *      regardless of the actual screen device dimensions. If you set
+ *      idealSize to NULL, IsWindowInStandardState examines the
+ *      dimensions stored in the stdState field of the WStateData
+ *      structure attached to the window.
+ *    
+ *    outIdealStandardState:
+ *      On exit, contains the global coordinates for the content region
+ *      of the window in its standard state, based on the data supplied
+ *      in the inIdealSize parameter. You may pass NULL if you do not
+ *      need this information.
+ *  
+ *  Result:
+ *    Returns true if the window is currently in its standard
+ *    (zoomed-out) state, or false if the window is a non-zoomed-out
+ *    state.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4337,13 +5454,67 @@ MoveWindowStructure(
  */
 extern Boolean 
 IsWindowInStandardState(
-  WindowRef   window,
-  Point *     idealSize,                /* can be NULL */
-  Rect *      idealStandardState);      /* can be NULL */
+  WindowRef      inWindow,
+  const Point *  inIdealSize,                 /* can be NULL */
+  Rect *         outIdealStandardState)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  ZoomWindowIdeal()
+ *  
+ *  Summary:
+ *    Zooms a window in accordance with human interface guidelines.
+ *  
+ *  Discussion:
+ *    Applications should use the ZoomWindowIdeal API instead of the
+ *    older ZoomWindow API. When your application calls
+ *    ZoomWindowIdeal, it automatically conforms to the human interface
+ *    guidelines for determining a windowÕs standard state: the window
+ *    is moved as little as possible when switching between user and
+ *    standard states, the window is zoomed to the screen that contains
+ *    the largest portion of the window, and the window is positioned
+ *    in its zoomed-out size to avoid the Dock on Mac OS X. The
+ *    ZoomWindowIdeal API calculates a windowÕs ideal standard state
+ *    and updates a windowÕs ideal user state independently of the
+ *    WStateData structure. Previously, the window definition function
+ *    was responsible for updating the user state, but because it
+ *    relies upon the WStateData structure, the window definition
+ *    function is unaware of the ideal standard state and can no longer
+ *    track the windowÕs zoom state reliably. The Window Manager
+ *    provides the GetWindowIdealUserState and SetWindowIdealUserState
+ *    APIs to access a window's current ideal user state, previously
+ *    recorded by ZoomWindowIdeal.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window to be zoomed.
+ *    
+ *    inPartCode:
+ *      The direction of the zoom, either inZoomIn or inZoomOut. The
+ *      value passed in this parameter should generally be determined
+ *      by calling IsWindowInStandardState; if IsWindowInStandardState
+ *      returns true, pass inZoomIn, otherwise pass inZoomOut.
+ *    
+ *    ioIdealSize:
+ *      When you specify inZoomIn in the inPartCode parameter, this
+ *      parameter is unused on entry; you pass a pointer to a Point
+ *      structure, but do not fill the structure with data. On exit,
+ *      the Point contains the new height and width of the windowÕs
+ *      content region, and ZoomWindowIdeal restores the previous ideal
+ *      user state. When you specify inZoomOut in the inPartCode
+ *      parameter, you pass the ideal height and width of the windowÕs
+ *      content region in the Point structure. On return, the Point
+ *      contains the new height and width of the windowÕs content
+ *      region; ZoomWindowIdeal saves the current user state of the
+ *      window and zooms the window to its ideal size for the standard
+ *      state.
+ *  
+ *  Result:
+ *    An operating system result code.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4352,13 +5523,61 @@ IsWindowInStandardState(
  */
 extern OSStatus 
 ZoomWindowIdeal(
-  WindowRef        window,
-  WindowPartCode   partCode,
-  Point *          ioIdealSize);
+  WindowRef        inWindow,
+  WindowPartCode   inPartCode,
+  Point *          ioIdealSize)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetWindowIdealUserState()
+ *  
+ *  Summary:
+ *    Returns the bounds of a windowÕs content region in its user
+ *    (zoomed-in) state.
+ *  
+ *  Discussion:
+ *    Traditionally, the user (zoomed-in) state of a window has been
+ *    stored in the WStateData structure attached to a window. This
+ *    field is updated by the window definition when the user clicks on
+ *    the zoom box and the window definition determines that the window
+ *    is currently not zoomed out. When determining whether the window
+ *    is zoomed out, however, the window definition can only look at
+ *    the standard state stored in the WStateData field. With the
+ *    introduction of the ZoomWindowIdeal API, there is a new basis for
+ *    determining whether a window is zoomed out: the windowÕs ideal
+ *    size. The window definition does not have access to the windowÕs
+ *    ideal size, and therefore cannot accurately determine whether a
+ *    window that is zoomed with ZoomWindowIdeal is in its user state
+ *    or standard state; therefore, the user state that the window
+ *    definition stores in the WStateData is also unreliable. The
+ *    ZoomWindowIdeal API therefore stores the windowÕs user state
+ *    before zooming out in a new location, which is accessed using the
+ *    GetWindowIdealUserState API. The GetWindowIdealUserState API
+ *    returns the windowÕs user state most recently recorded by
+ *    ZoomWindowIdeal.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose ideal user state you wish to retrieve.
+ *    
+ *    outUserState:
+ *      On exit, contains the global coordinates of the windowÕs
+ *      content region when zoomed in. On Mac OS X 10.1 and earlier,
+ *      and CarbonLib 1.5 and earlier, the windowÕs ideal user state is
+ *      an empty rect with coordinates (0,0,0,0) if the window has
+ *      never been zoomed out; you should check for an empty rect and
+ *      use GetWindowBounds with the kWindowContentRgn selector to
+ *      determine the windowÕs current content region. On later
+ *      versions of Mac OS X and CarbonLib, GetWindowIdealUserState
+ *      automatically returns the windowÕs current content bounds if
+ *      the window has not yet been zoomed.
+ *  
+ *  Result:
+ *    An operating system result code.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4367,12 +5586,36 @@ ZoomWindowIdeal(
  */
 extern OSStatus 
 GetWindowIdealUserState(
-  WindowRef   window,
-  Rect *      userState);
+  WindowRef   inWindow,
+  Rect *      outUserState)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetWindowIdealUserState()
+ *  
+ *  Summary:
+ *    Sets the bounds of a windowÕs content region in its user
+ *    (zoomed-in) state.
+ *  
+ *  Discussion:
+ *    The windowÕs ideal user state is used by the ZoomWindowIdeal API
+ *    when zooming in. The ideal user state is ignored by the
+ *    ZoomWindow API.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose ideal user state to set.
+ *    
+ *    inUserState:
+ *      The global coordinates of the windowÕs content region in its
+ *      ideal user state.
+ *  
+ *  Result:
+ *    An operating system result code.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4381,8 +5624,8 @@ GetWindowIdealUserState(
  */
 extern OSStatus 
 SetWindowIdealUserState(
-  WindowRef     window,
-  const Rect *  userState);
+  WindowRef     inWindow,
+  const Rect *  inUserState)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Routines available in CarbonLib 1.1 and later*/
@@ -4393,6 +5636,9 @@ SetWindowIdealUserState(
  *  Summary:
  *    Returns the graphics device with the greatest area of
  *    intersection with a specified window region.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -4422,7 +5668,7 @@ GetWindowGreatestAreaDevice(
   WindowRef          inWindow,
   WindowRegionCode   inRegion,
   GDHandle *         outGreatestDevice,           /* can be NULL */
-  Rect *             outGreatestDeviceRect);      /* can be NULL */
+  Rect *             outGreatestDeviceRect)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4430,12 +5676,12 @@ GetWindowGreatestAreaDevice(
  *  WindowConstrainOptions
  *  
  */
+typedef UInt32 WindowConstrainOptions;
+enum {
 
   /*
    * The window may be resized if necessary to make it fit onscreen.
    */
-typedef UInt32 WindowConstrainOptions;
-enum {
   kWindowConstrainMayResize     = (1L << 0),
 
   /*
@@ -4456,6 +5702,12 @@ enum {
   kWindowConstrainCalcOnly      = (1L << 3),
 
   /*
+   * Use TransitionWindow with kWindowSlideTransitionEffect to move
+   * windows onscreen. Available in Mac OS X 10.2.
+   */
+  kWindowConstrainUseTransitionWindow = (1L << 4),
+
+  /*
    * The most common options: don't resize the window, move the window
    * regardless of fit to the screen, require total intersection of the
    * specified window region with the screen, and do actually move the
@@ -4470,6 +5722,9 @@ enum {
  *  Summary:
  *    Moves and resizes a window so that it's contained entirely on a
  *    single screen.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -4503,7 +5758,7 @@ ConstrainWindowToScreen(
   WindowRegionCode         inRegionCode,
   WindowConstrainOptions   inOptions,
   const Rect *             inScreenRect,       /* can be NULL */
-  Rect *                   outStructure);      /* can be NULL */
+  Rect *                   outStructure)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4514,12 +5769,15 @@ ConstrainWindowToScreen(
  *    screen (i.e., the screen rect minus the MenuBar and Dock if
  *    located on that screen).
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inDevice:
  *      The device for which to find the available bounds.
  *    
- *    availableRect:
+ *    outAvailableRect:
  *      On exit, contains the available bounds for the given device.
  *  
  *  Availability:
@@ -4530,7 +5788,50 @@ ConstrainWindowToScreen(
 extern OSStatus 
 GetAvailableWindowPositioningBounds(
   GDHandle   inDevice,
-  Rect *     availableRect);
+  Rect *     outAvailableRect)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+ *  GetAvailableWindowPositioningRegion()
+ *  
+ *  Summary:
+ *    Returns the available window positioning region on the given
+ *    screen (i.e., the screen rect minus the MenuBar and Dock if
+ *    located on that screen).
+ *  
+ *  Discussion:
+ *    GetAvailableWindowPositionRegion differs from
+ *    GetAvailableWindowPositioningBounds in that the Bounds API
+ *    removes the entire area that may theoretically be covered by the
+ *    Dock, even if the the Dock does not currently reach from edge to
+ *    edge of the device on which it is positioned. The Region API
+ *    includes the area at the sides of the Dock that is not covered by
+ *    the Dock in the available region.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDevice:
+ *      The device for which to find the available bounds.
+ *    
+ *    ioRgn:
+ *      On entry, contains a preallocated RgnHandle. On exit, the
+ *      RgnHandle has been modified to contain the available region for
+ *      the given device.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+GetAvailableWindowPositioningRegion(
+  GDHandle    inDevice,
+  RgnHandle   ioRgn)                                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -4539,17 +5840,23 @@ GetAvailableWindowPositioningBounds(
 /*
  *  HideWindow()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HideWindow(WindowRef window);
+HideWindow(WindowRef window)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  [Mac]ShowWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4560,11 +5867,14 @@ HideWindow(WindowRef window);
     #define MacShowWindow ShowWindow
 #endif
 extern void 
-MacShowWindow(WindowRef window);
+MacShowWindow(WindowRef window)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  ShowHide()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4574,12 +5884,15 @@ MacShowWindow(WindowRef window);
 extern void 
 ShowHide(
   WindowRef   window,
-  Boolean     showFlag);
+  Boolean     showFlag)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  [Mac]IsWindowVisible()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4590,7 +5903,7 @@ ShowHide(
     #define MacIsWindowVisible IsWindowVisible
 #endif
 extern Boolean 
-MacIsWindowVisible(WindowRef window);
+MacIsWindowVisible(WindowRef window)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4607,12 +5920,12 @@ MacIsWindowVisible(WindowRef window);
  *    Reasons why a window is currently invisible when ordinarily it
  *    would be visible.
  */
+typedef UInt32 WindowLatentVisibility;
+enum {
 
   /*
    * Window is a floater and floating windows are hidden
    */
-typedef UInt32 WindowLatentVisibility;
-enum {
   kWindowLatentVisibleFloater   = 1 << 0,
 
   /*
@@ -4661,6 +5974,9 @@ enum {
  *    onscreen/offscreen status and its latent visibility (if the
  *    window is offscreen).
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inWindow:
@@ -4677,13 +5993,13 @@ enum {
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
 IsWindowLatentVisible(
   WindowRef                 inWindow,
-  WindowLatentVisibility *  outLatentVisible);      /* can be NULL */
+  WindowLatentVisibility *  outLatentVisible)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -4820,6 +6136,9 @@ IsWindowLatentVisible(
  *    classes kSheetWindowClass or kSheetAlertWindowClass to get the
  *    right appearance on both platforms.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inSheet:
@@ -4836,7 +6155,7 @@ IsWindowLatentVisible(
 extern OSStatus 
 ShowSheetWindow(
   WindowRef   inSheet,
-  WindowRef   inParentWindow);
+  WindowRef   inParentWindow)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4844,6 +6163,9 @@ ShowSheetWindow(
  *  
  *  Summary:
  *    Hides a sheet window using appropriate visual effects.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -4856,7 +6178,7 @@ ShowSheetWindow(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-HideSheetWindow(WindowRef inSheet);
+HideSheetWindow(WindowRef inSheet)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4864,6 +6186,9 @@ HideSheetWindow(WindowRef inSheet);
  *  
  *  Summary:
  *    Returns the parent window of a sheet.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -4881,7 +6206,575 @@ HideSheetWindow(WindowRef inSheet);
 extern OSStatus 
 GetSheetWindowParent(
   WindowRef    inSheet,
-  WindowRef *  outParentWindow);
+  WindowRef *  outParentWindow)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*
+    ¥ Drawers
+    
+    Drawers are supported in Carbon by Jaguar and later. To create and use a drawer:
+    
+        -   Create a window using kDrawerWindowClass. You may optionally set the background
+            brush of the window to kThemeBrushDrawerBackground using the SetThemeWindowBackground
+            function.
+            
+        -   Either install the standard window event handler on the drawer window, or use
+            your own Carbon event or WaitNextEvent code to handle user interaction with the
+            drawer. If you do not use the standard window event handler, you should call
+            ResizeWindow in response to clicks on the grow region of the drawer if you want
+            the drawer to be resizable.
+            
+        -   Install a handler on the drawer window for the kEventWindowDrawContent event.
+            You must handle this event and draw your drawer's content so that the content
+            will be visible when the drawer is slid out from underneath the parent window.
+            
+        -   Set the drawer's parent window with the SetDrawerParent function. The parent is
+            the window on which the drawer will open.
+            
+        -   Optionally, install a Carbon event handler on the drawer or the drawer's parent
+            window for the kEventWindowDrawerOpening/Opened/Closing/Closed events, to be notified
+            when the drawer has started or finished opening or closing.
+        
+        -   Optionally, set the drawer's preferred edge on the parent window with the
+            SetDrawerPreferredEdge function. If you do not set a preferred edge, the drawer
+            opens on the parent's left side on a left-to-right system, or on the parent's right
+            side on a right-to-left system.
+            
+        -   Optionally, Set the drawer's offsets with the SetDrawerOffsets function. The offsets
+            control the amount of inset between the edge of the parent's content area and the edge
+            of the drawer's structure. If you do not set any offsets, the drawer's edges are flush
+            with the edges of the parent's content.
+            
+        -   Optionally, set the drawer's minimum and maximum sizes with the SetWindowResizeLimits
+            function. Or, install a Carbon event handler on the drawer to handle the kEventWindow-
+            GetMinimumSize and kEventWindowGetMaximumSize events. The drawer's minimum and maximum
+            sizes control how small or large it will resize together with the parent. If you do not
+            set resize limits, the drawer will be capable of resizing to default small and large
+            limits.
+        
+        -   Call ToggleDrawer to open or close the drawer, or use OpenDrawer or CloseDrawer if
+            you require more control over how the drawer opens or closes.
+*/
+
+/*
+ *  Summary:
+ *    Indicates the parent window edge on which a drawer will be shown.
+ */
+enum {
+
+  /*
+   * This constant is typically used with the OpenDrawer API; it
+   * indicates that the drawer should be opened on whatever edge of the
+   * parent window has previously been set as the drawer's preferred
+   * edge.
+   */
+  kWindowEdgeDefault            = 0,
+
+  /*
+   * The drawer should open on the top edge of the parent window.
+   */
+  kWindowEdgeTop                = 1 << 0,
+
+  /*
+   * The drawer should open on the left edge of the parent window.
+   */
+  kWindowEdgeLeft               = 1 << 1,
+
+  /*
+   * The drawer should open on the bottom edge of the parent window.
+   */
+  kWindowEdgeBottom             = 1 << 2,
+
+  /*
+   * The drawer should open on the right edge of the parent window.
+   */
+  kWindowEdgeRight              = 1 << 3
+};
+
+
+/*
+ *  Summary:
+ *    Indicates the current state of a drawer window.
+ */
+enum {
+
+  /*
+   * The drawer is opening, but is not yet fully open.
+   */
+  kWindowDrawerOpening          = 1,
+
+  /*
+   * The drawer is fully open.
+   */
+  kWindowDrawerOpen             = 2,
+
+  /*
+   * The drawer is closing, but is not yet fully closed.
+   */
+  kWindowDrawerClosing          = 3,
+
+  /*
+   * The drawer is fully closed.
+   */
+  kWindowDrawerClosed           = 4
+};
+
+typedef UInt32                          WindowDrawerState;
+
+/*
+ *  GetDrawerPreferredEdge()
+ *  
+ *  Summary:
+ *    Returns the preferred parent window edge of a drawer.
+ *  
+ *  Discussion:
+ *    Drawers start out with a preferred parent window edge of
+ *    kWindowEdgeDefault. On left-to-right systems, the default edge is
+ *    the left edge of the parent window; on right-to-left systems, the
+ *    default edge is the right edge. You can set the preferred edge
+ *    with SetDrawerPreferredEdge. If there's not enough room on the
+ *    preferred edge, the drawer will automatically switch to the
+ *    opposite edge.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDrawerWindow:
+ *      The drawer window whose preferred edge to retrieve.
+ *  
+ *  Result:
+ *    The preferred edge of the drawer window.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OptionBits 
+GetDrawerPreferredEdge(WindowRef inDrawerWindow)              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  SetDrawerPreferredEdge()
+ *  
+ *  Summary:
+ *    Sets the preferred parent window edge of a drawer.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDrawerWindow:
+ *      The drawer window whose preferred edge to set.
+ *    
+ *    inEdge:
+ *      The preferred edge of the drawer window. Note that although the
+ *      WindowEdge enumeration has values appropriate for a bitfield,
+ *      the current implementation does not support receiving more than
+ *      one edge bit in this parameter. You can also pass
+ *      kWindowEdgeDefault to allow the Window Manager to pick an edge.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+SetDrawerPreferredEdge(
+  WindowRef    inDrawerWindow,
+  OptionBits   inEdge)                                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  GetDrawerCurrentEdge()
+ *  
+ *  Summary:
+ *    Returns the current parent window edge on which a drawer is
+ *    displayed.
+ *  
+ *  Discussion:
+ *    If the drawer window is currently visible, this API returns the
+ *    parent window edge on which the drawer is displayed. If the
+ *    drawer is not visible, this API determines on which edge of the
+ *    parent window the drawer should be displayed, given the current
+ *    size of the drawer, position of the parent, and preferred edge
+ *    for the drawer.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDrawerWindow:
+ *      The drawer window whose current edge to retrieve.
+ *  
+ *  Result:
+ *    The current edge of the drawer window.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OptionBits 
+GetDrawerCurrentEdge(WindowRef inDrawerWindow)                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  GetDrawerState()
+ *  
+ *  Summary:
+ *    Returns the current state of a drawer: opening, open, closing, or
+ *    closed.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDrawerWindow:
+ *      The drawer window whose state to retrieve.
+ *  
+ *  Result:
+ *    The current state of the drawer window.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern WindowDrawerState 
+GetDrawerState(WindowRef inDrawerWindow)                      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  GetDrawerParent()
+ *  
+ *  Summary:
+ *    Returns the parent window of a drawer.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDrawerWindow:
+ *      The drawer window whose parent window to retrieve.
+ *  
+ *  Result:
+ *    The drawer's parent window, or NULL if the drawer has no assigned
+ *    parent.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern WindowRef 
+GetDrawerParent(WindowRef inDrawerWindow)                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  SetDrawerParent()
+ *  
+ *  Summary:
+ *    Sets the parent window of a drawer.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDrawerWindow:
+ *      The drawer window whose parent window to set.
+ *    
+ *    inParent:
+ *      The drawer's new parent window, or NULL if the drawer should
+ *      have no parent.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+SetDrawerParent(
+  WindowRef   inDrawerWindow,
+  WindowRef   inParent)                                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+
+/*
+ *  kWindowOffsetUnchanged
+ *  
+ *  Discussion:
+ *    Pass this value to SetDrawerOffsets to indicate that an existing
+ *    offset should not be changed.
+ */
+#define kWindowOffsetUnchanged          ((float)(-1.0))
+/*
+ *  SetDrawerOffsets()
+ *  
+ *  Summary:
+ *    Sets the offsets from the beginning and end of the parent window
+ *    to the beginning and end of the drawer window.
+ *  
+ *  Discussion:
+ *    The drawer offsets control the positioning of the drawer relative
+ *    to its parent window. When a drawer is first created, its offsets
+ *    are zero. When a drawer is positioned, it is initially given a
+ *    height or width equal to the height or width of the content area
+ *    of the parent to which it is attached. If a drawer is opening on
+ *    the left side of its parent, for example, the drawer's height
+ *    will be the height of the parent's content area. In this case,
+ *    the top side of the drawer window is called the leading edge of
+ *    the drawer, and the bottom side of the drawer window is called
+ *    the trailing edge of the drawer. The drawer's size is then
+ *    adjusted by the leading and trailing offsets. The leading edge of
+ *    the drawer is moved inward by an amount equal to the leading
+ *    offset, and the trailing edge is moved inward by an amount equal
+ *    to the trailing offset. For example, if the leading and trailing
+ *    offsets are five and fifteen, then the top edge of a left-opening
+ *    drawer will be five pixels inside the top edge of the parent
+ *    window's content area, and the bottom edge of the drawer will be
+ *    fifteen pixels inside the bottom edge of the parent's content
+ *    area.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDrawerWindow:
+ *      The drawer window whose offsets to change.
+ *    
+ *    inLeadingOffset:
+ *      The new leading offset, in pixels. Pass kWindowOffsetUnchanged
+ *      if you don't want to change the leading offset.
+ *    
+ *    inTrailingOffset:
+ *      The new trailing offset, in pixels. Pass kWindowOffsetUnchanged
+ *      if you don't want to change the trailing offset.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+SetDrawerOffsets(
+  WindowRef   inDrawerWindow,
+  float       inLeadingOffset,
+  float       inTrailingOffset)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  GetDrawerOffsets()
+ *  
+ *  Summary:
+ *    Returns the offsets from the beginning and end of the parent
+ *    window to the beginning and end of the drawer window.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDrawerWindow:
+ *      The drawer window whose offsets to retrieve.
+ *    
+ *    outLeadingOffset:
+ *      On exit, contains the drawer's leading offset. Pass NULL if you
+ *      don't need this information returned.
+ *    
+ *    outTrailingOffset:
+ *      On exit, contains the drawer's trailing offset. Pass NULL if
+ *      you don't need this information returned.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+GetDrawerOffsets(
+  WindowRef   inDrawerWindow,
+  float *     outLeadingOffset,        /* can be NULL */
+  float *     outTrailingOffset)       /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  ToggleDrawer()
+ *  
+ *  Summary:
+ *    Toggles a drawer from open to closed, or vice versa.
+ *  
+ *  Discussion:
+ *    ToggleDrawer opens the drawer if it is closed, opening, or
+ *    closing. If the drawer is open, it closes the drawer.
+ *     ToggleDrawer attemps to open the drawer on its preferred edge,
+ *    but if there is not enough room on that edge, it will try the
+ *    opposite edge instead. If there is insufficient room on either
+ *    edge, the drawer will open on the preferred edge but may extend
+ *    offscreen, under the Dock, or under the menubar.
+ *    The opening or closing of the drawer is performed asynchronously;
+ *    ToggleDrawer installs an event loop timer that opens or closes
+ *    the drawer after ToggleDrawer returns to the caller. Therefore,
+ *    the caller must be running its event loop for the drawer to open
+ *    or close. To open or close the drawer synchronously, use the
+ *    OpenDrawer or CloseDrawer APIs.
+ *    ToggleDrawer retains the drawer window while the drawer is
+ *    opening or closing, and releases it when the drawer is fully
+ *    opened or closed.
+ *    ToggleDrawer sends the kEventWindowDrawerOpening,
+ *    kEventWindowDrawerOpened, kEventWindowDrawerClosing, and
+ *    kEventWindowDrawerClosed events as the drawer opens or closes.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDrawerWindow:
+ *      The drawer window to open or close.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+ToggleDrawer(WindowRef inDrawerWindow)                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  OpenDrawer()
+ *  
+ *  Summary:
+ *    Opens a drawer on a specified parent window edge.
+ *  
+ *  Discussion:
+ *    OpenDrawer may open the drawer either synchronously or
+ *    asynchronously, depending on the value of the inAsync parameter.
+ *    If inAsync is true, OpenDrawer installs an event loop timer that
+ *    opens the drawer after OpenDrawer returns to the caller;
+ *    therefore, the caller must be running its event loop for the
+ *    drawer to open. If inAsync is false, OpenDrawer opens the drawer
+ *    completely before returning to the caller.
+ *    OpenDrawer retains the drawer window while the drawer is opening,
+ *    and releases it when the drawer is fully open.
+ *    OpenDrawer sends the kEventWindowDrawerOpening event to the
+ *    drawer, the drawer's parent, and the application before opening
+ *    the drawer. If an event handler for this event returns
+ *    userCanceledErr, OpenDrawer will return immediately without
+ *    opening the drawer. OpenDrawer sends the kEventWindowDrawerOpened
+ *    event to the drawer, the drawer's parent, and the application
+ *    after the drawer has finished opening.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDrawerWindow:
+ *      The drawer window to open.
+ *    
+ *    inEdge:
+ *      The parent window edge on which to open the drawer. Pass
+ *      kWindowEdgeDefault to use the drawer's preferred edge. If there
+ *      is not enough room on the preferred edge, OpenDrawer will try
+ *      the opposite edge instead. If there is insufficient room on
+ *      either edge, the drawer will open on the preferred edge but may
+ *      extend offscreen, under the Dock, or under the menubar.
+ *    
+ *    inAsync:
+ *      Whether to open the drawer synchronously (the drawer is
+ *      entirely opened before the function call returns) or
+ *      asynchronously (the drawer opens using an event loop timer
+ *      after the function call returns).
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+OpenDrawer(
+  WindowRef    inDrawerWindow,
+  OptionBits   inEdge,
+  Boolean      inAsync)                                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  CloseDrawer()
+ *  
+ *  Summary:
+ *    Closes a drawer.
+ *  
+ *  Discussion:
+ *    CloseDrawer may close the drawer either synchronously or
+ *    asynchronously, depending on the value of the inAsync parameter.
+ *    If inAsync is true, CloseDrawer installs an event loop timer that
+ *    closes the drawer after CloseDrawer returns to the caller;
+ *    therefore, the caller must be running its event loop for the
+ *    drawer to close. If inAsync is false, CloseDrawer closes the
+ *    drawer completely before returning to the caller.
+ *    CloseDrawer retains the drawer window while the drawer is
+ *    closing, and releases it when the drawer is fully closed.
+ *     CloseDrawer sends the kEventWindowDrawerClosing event to the
+ *    drawer, the drawer's parent, and the application before closing
+ *    the drawer. If an event handler for this event returns
+ *    userCanceledErr, CloseDrawer will return immediately without
+ *    closing the drawer. CloseDrawer sends the
+ *    kEventWindowDrawerClosed event to the drawer, the drawer's
+ *    parent, and the application after the drawer has finished closing.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDrawerWindow:
+ *      The drawer window to close.
+ *    
+ *    inAsync:
+ *      Whether to close the drawer synchronously (the drawer is
+ *      entirely closed before the function call returns) or
+ *      asynchronously (the drawer closes using an event loop timer
+ *      after the function call returns).
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+CloseDrawer(
+  WindowRef   inDrawerWindow,
+  Boolean     inAsync)                                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
@@ -4896,17 +6789,8 @@ GetSheetWindowParent(
 /*
  *  DisableScreenUpdates()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-DisableScreenUpdates(void);
-
-
-/*
- *  EnableScreenUpdates()
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4914,8 +6798,236 @@ DisableScreenUpdates(void);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-EnableScreenUpdates(void);
+DisableScreenUpdates(void)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*
+ *  EnableScreenUpdates()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.1 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+EnableScreenUpdates(void)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/* ¥ Window Toolbars                                                                    */
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+#define _SetWindowToolbar SetWindowToolbar
+/*
+ *  SetWindowToolbar()
+ *  
+ *  Discussion:
+ *    Sets the toolbar for a window. If any other toolbar is currently
+ *    bound to the window, it is released. This API does NOT add the
+ *    toolbar button to the window, your application must set the
+ *    attribute itself.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window to add the toolbar to.
+ *    
+ *    inToolbar:
+ *      The toolbar to add.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+SetWindowToolbar(
+  WindowRef      inWindow,
+  HIToolbarRef   inToolbar)                                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+#define _GetWindowToolbar GetWindowToolbar
+/*
+ *  GetWindowToolbar()
+ *  
+ *  Discussion:
+ *    Gets the toolbar of a window, if any.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window to add the toolbar to.
+ *    
+ *    outToolbar:
+ *      The toolbar. You do not own the toolbar reference returned by
+ *      this function. Do not release it! It is possibly for the
+ *      toolbar returned to be NULL, indicating there is no toolbar
+ *      associated with this window. ¥¥¥ NOTE: May need to change the
+ *      release strategy here.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+GetWindowToolbar(
+  WindowRef       inWindow,
+  HIToolbarRef *  outToolbar)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+#define _ShowHideWindowToolbar ShowHideWindowToolbar
+/*
+ *  ShowHideWindowToolbar()
+ *  
+ *  Discussion:
+ *    Shows or hides a window's toolbar. Optionally, you can ask for
+ *    the transition to be animated or not. Typically, you would not
+ *    need to call this other than to set up your window accordingly.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window to show or hide the toolbar for.
+ *    
+ *    inShow:
+ *      Pass true to show the toolbar, false to hide it.
+ *    
+ *    inAnimate:
+ *      Pass true to animate the transition, false to do it quickly and
+ *      without fanfare.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+ShowHideWindowToolbar(
+  WindowRef   inWindow,
+  Boolean     inShow,
+  Boolean     inAnimate)                                      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+#define _IsWindowToolbarVisible IsWindowToolbarVisible
+/*
+ *  IsWindowToolbarVisible()
+ *  
+ *  Discussion:
+ *    Returns whether the toolbar (if any) attached to a window is
+ *    visible. If the window has no toolbar, false is returned.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window test the toolbar visiblity for.
+ *  
+ *  Result:
+ *    A boolean result indicating whether the toolbar is visible (true)
+ *    or not (false).
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+IsWindowToolbarVisible(WindowRef inWindow)                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/* ¥ Window Transparency                                                                */
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*
+ *  SetWindowAlpha()
+ *  
+ *  Discussion:
+ *    Alters the overall alpha of a window, making the entire window
+ *    (including window frame) either more or less transparent. The
+ *    alpha is expressed as a floating point value from 0.0 (completely
+ *    transparent) to 1.0 (completely opaque).
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose alpha to modify.
+ *    
+ *    inAlpha:
+ *      The new alpha value.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+SetWindowAlpha(
+  WindowRef   inWindow,
+  float       inAlpha)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+ *  GetWindowAlpha()
+ *  
+ *  Discussion:
+ *    Returns the current overall alpha value for a window. The alpha
+ *    is expressed as a floating point value from 0.0 (completely
+ *    transparent) to 1.0 (completely opaque).
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose alpha to return.
+ *    
+ *    outAlpha:
+ *      On exit, contains the window's current alpha value.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+GetWindowAlpha(
+  WindowRef   inWindow,
+  float *     outAlpha)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -4929,6 +7041,9 @@ EnableScreenUpdates(void);
 /*
  *  GetWindowProperty()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4941,11 +7056,14 @@ GetWindowProperty(
   PropertyTag       propertyTag,
   UInt32            bufferSize,
   UInt32 *          actualSize,            /* can be NULL */
-  void *            propertyBuffer);
+  void *            propertyBuffer)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetWindowPropertySize()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4957,11 +7075,14 @@ GetWindowPropertySize(
   WindowRef         window,
   PropertyCreator   creator,
   PropertyTag       tag,
-  UInt32 *          size);
+  UInt32 *          size)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetWindowProperty()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4974,11 +7095,14 @@ SetWindowProperty(
   PropertyCreator   propertyCreator,
   PropertyTag       propertyTag,
   UInt32            propertySize,
-  void *            propertyBuffer);
+  const void *      propertyBuffer)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  RemoveWindowProperty()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4989,7 +7113,7 @@ extern OSStatus
 RemoveWindowProperty(
   WindowRef         window,
   PropertyCreator   propertyCreator,
-  PropertyTag       propertyTag);
+  PropertyTag       propertyTag)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5002,6 +7126,9 @@ enum {
 /*
  *  GetWindowPropertyAttributes()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5012,11 +7139,14 @@ GetWindowPropertyAttributes(
   WindowRef   window,
   OSType      propertyCreator,
   OSType      propertyTag,
-  UInt32 *    attributes);
+  UInt32 *    attributes)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  ChangeWindowPropertyAttributes()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5029,7 +7159,7 @@ ChangeWindowPropertyAttributes(
   OSType      propertyCreator,
   OSType      propertyTag,
   UInt32      attributesToSet,
-  UInt32      attributesToClear);
+  UInt32      attributesToClear)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -5037,6 +7167,9 @@ ChangeWindowPropertyAttributes(
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*
  *  PinRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5046,12 +7179,15 @@ ChangeWindowPropertyAttributes(
 extern long 
 PinRect(
   const Rect *  theRect,
-  Point         thePt);
+  Point         thePt)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  GetGrayRgn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5059,7 +7195,7 @@ PinRect(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern RgnHandle 
-GetGrayRgn(void);
+GetGrayRgn(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5068,6 +7204,9 @@ GetGrayRgn(void);
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*
  *  TrackBox()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5078,11 +7217,14 @@ extern Boolean
 TrackBox(
   WindowRef        window,
   Point            thePt,
-  WindowPartCode   partCode);
+  WindowPartCode   partCode)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  TrackGoAway()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5092,7 +7234,7 @@ TrackBox(
 extern Boolean 
 TrackGoAway(
   WindowRef   window,
-  Point       thePt);
+  Point       thePt)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5101,6 +7243,9 @@ TrackGoAway(
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*
  *  DragGrayRgn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5114,11 +7259,14 @@ DragGrayRgn(
   const Rect *     limitRect,
   const Rect *     slopRect,
   short            axis,
-  DragGrayRgnUPP   actionProc);
+  DragGrayRgnUPP   actionProc)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  DragTheRgn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5132,7 +7280,7 @@ DragTheRgn(
   const Rect *     limitRect,
   const Rect *     slopRect,
   short            axis,
-  DragGrayRgnUPP   actionProc);
+  DragGrayRgnUPP   actionProc)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5300,18 +7448,24 @@ DragTheRgn(
 /*
  *  GetWindowList()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
 extern WindowRef 
-GetWindowList(void);
+GetWindowList(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  GetWindowPort()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5319,24 +7473,30 @@ GetWindowList(void);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later or as macro/inline
  */
 extern CGrafPtr 
-GetWindowPort(WindowRef window);
+GetWindowPort(WindowRef window)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetWindowStructurePort()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern CGrafPtr 
-GetWindowStructurePort(WindowRef inWindow);
+GetWindowStructurePort(WindowRef inWindow)                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
 /*
  *  GetWindowKind()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5344,25 +7504,15 @@ GetWindowStructurePort(WindowRef inWindow);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later or as macro/inline
  */
 extern short 
-GetWindowKind(WindowRef window);
+GetWindowKind(WindowRef window)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  IsWindowHilited()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later or as macro/inline
- */
-extern Boolean 
-IsWindowHilited(WindowRef window);
-
-
-
-/*
- *  IsWindowUpdatePending()
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5370,12 +7520,31 @@ IsWindowHilited(WindowRef window);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later or as macro/inline
  */
 extern Boolean 
-IsWindowUpdatePending(WindowRef window);
+IsWindowHilited(WindowRef window)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+ *  IsWindowUpdatePending()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later or as macro/inline
+ */
+extern Boolean 
+IsWindowUpdatePending(WindowRef window)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  [Mac]GetNextWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5386,12 +7555,38 @@ IsWindowUpdatePending(WindowRef window);
     #define MacGetNextWindow GetNextWindow
 #endif
 extern WindowRef 
-MacGetNextWindow(WindowRef window);
+MacGetNextWindow(WindowRef window)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  GetPreviousWindow()
+ *  
+ *  Summary:
+ *    Returns the window above a given window in the window list.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window above this window is returned.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern WindowRef 
+GetPreviousWindow(WindowRef inWindow)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
 /*
  *  GetWindowStandardState()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5401,12 +7596,15 @@ MacGetNextWindow(WindowRef window);
 extern Rect * 
 GetWindowStandardState(
   WindowRef   window,
-  Rect *      rect);
+  Rect *      rect)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  GetWindowUserState()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5416,12 +7614,15 @@ GetWindowStandardState(
 extern Rect * 
 GetWindowUserState(
   WindowRef   window,
-  Rect *      rect);
+  Rect *      rect)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  SetWindowKind()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5431,12 +7632,15 @@ GetWindowUserState(
 extern void 
 SetWindowKind(
   WindowRef   window,
-  short       kind);
+  short       kind)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  SetWindowStandardState()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5446,13 +7650,16 @@ SetWindowKind(
 extern void 
 SetWindowStandardState(
   WindowRef     window,
-  const Rect *  rect);
+  const Rect *  rect)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
 /*
  *  SetWindowUserState()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5462,7 +7669,7 @@ SetWindowStandardState(
 extern void 
 SetWindowUserState(
   WindowRef     window,
-  const Rect *  rect);
+  const Rect *  rect)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5473,19 +7680,25 @@ SetWindowUserState(
  *    set the current QuickDraw port to the port associated with the
  *    window
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later or as macro/inline
  */
 extern void 
-SetPortWindowPort(WindowRef window);
+SetPortWindowPort(WindowRef window)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
 /*
  *  GetWindowPortBounds()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5495,7 +7708,7 @@ SetPortWindowPort(WindowRef window);
 extern Rect * 
 GetWindowPortBounds(
   WindowRef   window,
-  Rect *      bounds);
+  Rect *      bounds)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5505,13 +7718,16 @@ GetWindowPortBounds(
  *  Discussion:
  *    Needed to Ôcast upÕ to a WindowRef from a GrafPtr
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later or as macro/inline
  */
 extern WindowRef 
-GetWindowFromPort(CGrafPtr port);
+GetWindowFromPort(CGrafPtr port)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5615,13 +7831,7 @@ enum {
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

@@ -1,7 +1,7 @@
 /*
 	NSPrintOperation.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2002, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -50,7 +50,7 @@ APPKIT_EXTERN NSString *NSPrintOperationExistsException;
 */
 - (BOOL)runOperation;
 
-    /* Do the print operation, with panels that are document-modal to a specific window.  didRunSelector should have the following signature:
+/* Do the print operation, with panels that are document-modal to a specific window.  didRunSelector should have the following signature:
 - (void)printOperationDidRun:(NSPrintOperation *)printOperation success:(BOOL)success contextInfo:(void *)contextInfo;
 */
 - (void)runOperationModalForWindow:(NSWindow *)docWindow delegate:(id)delegate didRunSelector:(SEL)didRunSelector contextInfo:(void *)contextInfo;
@@ -74,6 +74,14 @@ APPKIT_EXTERN NSString *NSPrintOperationExistsException;
 */
 - (void)setAccessoryView:(NSView *)aView;
 - (NSView *)accessoryView;
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+// Set or get a string that provides a hint about the type of print job.  This controls the set of items that appear in the Presets menu of the print panel presented by this operation, if it presents one.  The string must be one of the job style hint strings declared in NSPrintPanel.h, or nil to provide no hint.
+- (void)setJobStyleHint:(NSString *)hint;
+- (NSString *)jobStyleHint;
+
+#endif
 
 /* Set/get the current PrintInfo object for the operation.  Setting the PrintInfo object should be done very carefully.  The safest approach is to copy all the settings from the new object into current object, rather than replacing the object.
 */

@@ -24,7 +24,6 @@ typedef struct _CGLPrivateObject *CGLPrivateObj;
 struct _CGLContextObject {
 	GLIContext            rend;
 	GLIFunctionDispatch   disp;
-	GLIExtensionDispatch  exts;
 	CGLPrivateObj         priv;
 	void                 *stak;
 };

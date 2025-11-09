@@ -30,7 +30,7 @@ typedef enum {
 } NSLineMovementDirection;
 
 
-@interface NSTextContainer : NSObject {
+@interface NSTextContainer : NSObject <NSCoding> {
     
   /*All instance variables are private*/
     

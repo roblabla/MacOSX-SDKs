@@ -3,9 +3,9 @@
  
      Contains:   Folder Manager Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1995-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1995-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -157,6 +157,11 @@
 #define kAppleShareSupportFolderType 	'shar'				/*  Refers to the [domain]/Library/Filesystems/AppleShare folder in Mac OS X */
 #define kAppleShareAuthenticationFolderType  'auth'			/*  Refers to the [domain]/Library/Filesystems/AppleShare/Authentication folder in Mac OS X */
 #define kMIDIDriversFolderType 			'midi'				/*  Refers to the MIDI Drivers folder on Mac OS X */
+#define kKeyboardLayoutsFolderType 		'klay'				/*  Refers to the [domain]/Library/KeyboardLayouts folder in Mac OS X */
+#define kIndexFilesFolderType 			'indx'				/*  Refers to the [domain]/Library/Indexes folder in Mac OS X */
+#define kFindByContentIndexesFolderType  'fbcx'				/*  Refers to the [domain]/Library/Indexes/FindByContent folder in Mac OS X */
+#define kManagedItemsFolderType 		'mang'				/*  Refers to the Managed Items folder for Mac OS X  */
+#define kBootTimeStartupItemsFolderType  'empz'				/*  Refers to the "StartupItems" folder of Mac OS X  */
 
 #define kLocalesFolderType 				'Äloc'				/*  PKE for Locales folder  */
 #define kFindByContentPluginsFolderType  'fbcp'				/*  Find By Content Plug-ins  */

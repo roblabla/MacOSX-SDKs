@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime-142~1
+     Version:    QuickTime_6
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -31,6 +31,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -40,13 +41,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /*
    The following GX types were previously in GXTypes.h, but that header
@@ -68,8 +63,6 @@ struct gxPaths {
   gxPath              contour[1];
 };
 typedef struct gxPaths                  gxPaths;
-
-
 /*  codec capabilities flags    */
 enum {
   codecCanScale                 = 1L << 0,
@@ -112,7 +105,9 @@ enum {
   codecImageBufferIsOverlaySurface = 1L << 1, /* codec image buffer is overlay surface, the bits in the buffer are on the screen */
   codecSrcMustBeImageBuffer     = 1L << 2, /* codec can only source data from an image buffer */
   codecImageBufferIsInAGPMemory = 1L << 4, /* codec image buffer is in AGP space, byte writes are OK */
-  codecImageBufferIsInPCIMemory = 1L << 5 /* codec image buffer is across a PCI bus; byte writes are bad */
+  codecImageBufferIsInPCIMemory = 1L << 5, /* codec image buffer is across a PCI bus; byte writes are bad */
+  codecImageBufferMemoryFlagsValid = 1L << 6, /* set by ImageCodecNewImageBufferMemory/NewImageGWorld to indicate that it set the AGP/PCI flags (supported in QuickTime 6.0 and later) */
+  codecDrawsHigherQualityScaled = 1L << 7 /* codec will draw higher-quality image if it performs scaling (eg, wipe effect with border) */
 };
 
 struct CodecCapabilities {
@@ -318,6 +313,18 @@ struct CodecDecompressParams {
                                               /* The following fields only exist for QuickTime 5.0 and greater */
   UInt32              taskWeight;             /* preferred weight for MP tasks implementing this operation*/
   OSType              taskName;               /* preferred name (type) for MP tasks implementing this operation*/
+
+                                              /* The following fields only exist for QuickTime 6.0 and greater */
+  Boolean             bidirectionalPredictionMode;
+  UInt8               destinationBufferMemoryPreference; /* a codec's PreDecompress/Preflight call can set this to express a preference about what kind of memory its destination buffer should go into.  no guarantees.*/
+  UInt8               codecBufferMemoryPreference; /* may indicate preferred kind of memory that NewImageGWorld/NewImageBufferMemory should create its buffer in, if applicable.*/
+  Boolean             onlyUseCodecIfItIsInUserPreferredCodecList; /* set to prevent this codec from being used unless it is in the userPreferredCodec list*/
+
+  QTMediaContextID    mediaContextID;
+
+                                              /* The following fields only exist for QuickTime 6.5 and greater */
+  UInt8               deinterlaceRequest;     /* set by the ICM before PreDecompress/Preflight */
+  UInt8               deinterlaceAnswer;      /* codec should set this in PreDecompress/Preflight if it will satisfy the deinterlaceRequest */
 };
 typedef struct CodecDecompressParams    CodecDecompressParams;
 enum {
@@ -341,6 +348,19 @@ enum {
   kNewImageGWorldErase          = 1L << 0
 };
 
+/* values for destinationBufferMemoryPreference and codecBufferMemoryPreference */
+enum {
+  kICMImageBufferNoPreference   = 0,
+  kICMImageBufferPreferMainMemory = 1,
+  kICMImageBufferPreferVideoMemory = 2
+};
+
+/* values for deinterlaceRequest and deinterlaceAnswer */
+enum {
+  kICMNoDeinterlacing           = 0,
+  kICMDeinterlaceFields         = 1
+};
+
 typedef CALLBACK_API( void , ImageCodecTimeTriggerProcPtr )(void * refcon);
 typedef CALLBACK_API( void , ImageCodecDrawBandCompleteProcPtr )(void *refcon, ComponentResult drawBandResult, UInt32 drawBandCompleteFlags);
 typedef STACK_UPP_TYPE(ImageCodecTimeTriggerProcPtr)            ImageCodecTimeTriggerUPP;
@@ -354,7 +374,7 @@ typedef STACK_UPP_TYPE(ImageCodecDrawBandCompleteProcPtr)       ImageCodecDrawBa
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ImageCodecTimeTriggerUPP
-NewImageCodecTimeTriggerUPP(ImageCodecTimeTriggerProcPtr userRoutine);
+NewImageCodecTimeTriggerUPP(ImageCodecTimeTriggerProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewImageCodecDrawBandCompleteUPP()
@@ -365,7 +385,7 @@ NewImageCodecTimeTriggerUPP(ImageCodecTimeTriggerProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ImageCodecDrawBandCompleteUPP
-NewImageCodecDrawBandCompleteUPP(ImageCodecDrawBandCompleteProcPtr userRoutine);
+NewImageCodecDrawBandCompleteUPP(ImageCodecDrawBandCompleteProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeImageCodecTimeTriggerUPP()
@@ -376,7 +396,7 @@ NewImageCodecDrawBandCompleteUPP(ImageCodecDrawBandCompleteProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeImageCodecTimeTriggerUPP(ImageCodecTimeTriggerUPP userUPP);
+DisposeImageCodecTimeTriggerUPP(ImageCodecTimeTriggerUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeImageCodecDrawBandCompleteUPP()
@@ -387,7 +407,7 @@ DisposeImageCodecTimeTriggerUPP(ImageCodecTimeTriggerUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeImageCodecDrawBandCompleteUPP(ImageCodecDrawBandCompleteUPP userUPP);
+DisposeImageCodecDrawBandCompleteUPP(ImageCodecDrawBandCompleteUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeImageCodecTimeTriggerUPP()
@@ -400,7 +420,7 @@ DisposeImageCodecDrawBandCompleteUPP(ImageCodecDrawBandCompleteUPP userUPP);
 extern void
 InvokeImageCodecTimeTriggerUPP(
   void *                    refcon,
-  ImageCodecTimeTriggerUPP  userUPP);
+  ImageCodecTimeTriggerUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeImageCodecDrawBandCompleteUPP()
@@ -415,7 +435,7 @@ InvokeImageCodecDrawBandCompleteUPP(
   void *                         refcon,
   ComponentResult                drawBandResult,
   UInt32                         drawBandCompleteFlags,
-  ImageCodecDrawBandCompleteUPP  userUPP);
+  ImageCodecDrawBandCompleteUPP  userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 struct ImageSubCodecDecompressCapabilities {
   long                recordSize;             /* sizeof(ImageSubCodecDecompressCapabilities)*/
@@ -434,7 +454,8 @@ struct ImageSubCodecDecompressCapabilities {
 
                                               /* The following fields only exist for QuickTime 5.0.1 and greater */
   Boolean             isChildCodec;           /* set by base codec before calling Initialize*/
-  UInt8               pad3[3];
+  UInt8               reserved1;
+  UInt8               pad4[2];
 };
 typedef struct ImageSubCodecDecompressCapabilities ImageSubCodecDecompressCapabilities;
 enum {
@@ -492,6 +513,11 @@ struct PlanarPixmapInfoYUV420 {
   PlanarComponentInfo  componentInfoCr;
 };
 typedef struct PlanarPixmapInfoYUV420   PlanarPixmapInfoYUV420;
+enum {
+  codecSuggestedBufferSentinel  = 'sent' /* codec public resource containing suggested data pattern to put past end of data buffer */
+};
+
+
 /* name of parameters or effect -- placed in root container, required */
 enum {
   kParameterTitleName           = 'name',
@@ -533,6 +559,97 @@ enum {
   kParameterSourceCountID       = 1
 };
 
+/* EFFECT CLASSES*/
+
+/*
+   The effect major class defines the major grouping of the effect.
+   Major classes are defined only by Apple and are not extendable by third
+   parties.  Major classes are used for filtering of the effect list by
+   applications, but do not define what UI sub-group may or may not be
+   presented to the user.  For example, the major class may be a transition,
+   but the minor class may be a wipe.  
+*/
+
+/*
+   Effects that fail to include a
+   kEffectMajorClassType will be classified as kMiscMajorClass.
+*/
+enum {
+  kEffectMajorClassType         = 'clsa',
+  kEffectMajorClassID           = 1
+};
+
+enum {
+  kGeneratorMajorClass          = 'genr', /* zero source effects*/
+  kFilterMajorClass             = 'filt', /* one source effects*/
+  kTransitionMajorClass         = 'tran', /* multisource morph effects */
+  kCompositorMajorClass         = 'comp', /* multisource layer effects*/
+  kMiscMajorClass               = 'misc' /* all other effects*/
+};
+
+/*
+   The effect minor class defines the grouping of effects for the purposes
+   of UI.  Apple defines a set of minor classes and will extend it over
+   time.  Apple also provides strings within the UI for minor classes
+   that it defines.  Third party developers may either classify
+   their effects as a type defined by Apple, or may define their own
+   minor class.  Effects which define a minor class of their own
+   must also then supply a kEffectMinorClassNameType atom.
+*/
+
+/*
+   If a kEffectMinorClassNameType atom is present, but
+   the minor type is one defined by Apple, the Apple supplied
+   string will be used in the UI.
+*/
+
+/*
+   Effects that fail to supply a kEffectMinorClassType will be 
+   classified as kMiscMinorClass.
+*/
+enum {
+  kEffectMinorClassType         = 'clsi',
+  kEffectMinorClassID           = 1,
+  kEffectMinorClassNameType     = 'clsn',
+  kEffectMinorClassNameID       = 1
+};
+
+enum {
+  kGeneratorMinorClass          = 'genr', /* "Generators"*/
+  kRenderMinorClass             = 'rend', /* "Render"*/
+  kFilterMinorClass             = 'filt', /* "Filters"*/
+  kArtisticMinorClass           = 'arts', /* "Artistic*/
+  kBlurMinorClass               = 'blur', /* "Blur"*/
+  kSharpenMinorClass            = 'shrp', /* "Sharpen"*/
+  kDistortMinorClass            = 'dist', /* "Distort"*/
+  kNoiseMinorClass              = 'nois', /* "Noise"*/
+  kAdjustmentMinorClass         = 'adst', /* "Adjustments"*/
+  kTransitionMinorClass         = 'tran', /* "Transitions"*/
+  kWipeMinorClass               = 'wipe', /* "Wipes"*/
+  k3DMinorClass                 = 'pzre', /* "3D Transitions"*/
+  kCompositorMinorClass         = 'comp', /* "Compositors"*/
+  kEffectsMinorClass            = 'fxfx', /* "Special Effects"*/
+  kMiscMinorClass               = 'misc' /* "Miscellaneous"*/
+};
+
+/*
+   Effects can define a number of "preset" values which will be presented to the user
+   in a simplified UI.  Each preset is an atom within the parameter description list
+   and must have an atom ID from 1 going up sequentially.  Inside of this atom are three other
+   atoms containing:
+    1) the name of the preset as a Pascal string
+    2) a preview picture for the preset, 86 x 64 pixels in size
+    3) the ENTIRE set of parameter values needed to create a sample of this preset.
+*/
+enum {
+  kEffectPresetType             = 'peff',
+  kPresetNameType               = 'pnam',
+  kPresetNameID                 = 1,
+  kPresetPreviewPictureType     = 'ppct',
+  kPresetPreviewPictureID       = 1,
+  kPresetSettingsType           = 'psst',
+  kPresetSettingsID             = 1
+};
 
 enum {
   kParameterDependencyName      = 'deep',
@@ -587,6 +704,16 @@ struct ParameterAtomTypeAndID {
   Str255              atomName;               /* name of this value type*/
 };
 typedef struct ParameterAtomTypeAndID   ParameterAtomTypeAndID;
+/* optional specification of mapping between parameters and properties*/
+enum {
+  kParameterProperty            = 'prop'
+};
+
+struct ParameterProperty {
+  OSType              propertyClass;          /* class to set for this property (0 for default which is specified by caller)*/
+  OSType              propertyID;             /* id to set for this property (default is the atomType)*/
+};
+typedef struct ParameterProperty        ParameterProperty;
 /* data type of a parameter*/
 enum {
   kParameterDataType            = 'data'
@@ -763,13 +890,16 @@ enum {
   kDisableWhenNotEqual          = (0x00000000 + kDisableControl),
   kDisableWhenEqual             = (0x00000010 + kDisableControl),
   kDisableWhenLessThan          = (0x00000020 + kDisableControl),
-  kDisableWhenGreaterThan       = (0x00000030 + kDisableControl), /* flags valid for popups*/
+  kDisableWhenGreaterThan       = (0x00000030 + kDisableControl), /* flags valid for controls*/
+  kCustomControl                = 0x00100000, /* flags valid for popups*/
   kPopupStoreAsString           = 0x00010000
 };
 
 struct ControlBehaviors {
   QTAtomID            groupID;                /* group under control of this item*/
   long                controlValue;           /* control value for comparison purposes*/
+  QTAtomType          customType;             /* custom type identifier, for kCustomControl*/
+  QTAtomID            customID;               /* custom type ID, for kCustomControl*/
 };
 typedef struct ControlBehaviors         ControlBehaviors;
 struct ParameterDataBehavior {
@@ -795,7 +925,7 @@ enum {
   kParameterUsagePercent        = 'pcnt',
   kParameterUsageSeconds        = 'secs',
   kParameterUsageMilliseconds   = 'msec',
-  kParameterUsageMicroseconds   = 'µsec',
+  kParameterUsageMicroseconds   = (long)0xB5736563/*'µsec' */,
   kParameterUsage3by3Matrix     = '3by3',
   kParameterUsageCircularDegrees = 'degc',
   kParameterUsageCircularRadians = 'radc'
@@ -812,12 +942,12 @@ enum {
 
 /* atoms that help to fill in data within the info window */
 enum {
-  kParameterInfoLongName        = '©nam',
-  kParameterInfoCopyright       = '©cpy',
-  kParameterInfoDescription     = '©inf',
-  kParameterInfoWindowTitle     = '©wnt',
-  kParameterInfoPicture         = '©pix',
-  kParameterInfoManufacturer    = '©man',
+  kParameterInfoLongName        = (long)0xA96E616D/*'©nam' */,
+  kParameterInfoCopyright       = (long)0xA9637079/*'©cpy' */,
+  kParameterInfoDescription     = (long)0xA9696E66/*'©inf' */,
+  kParameterInfoWindowTitle     = (long)0xA9776E74/*'©wnt' */,
+  kParameterInfoPicture         = (long)0xA9706978/*'©pix' */,
+  kParameterInfoManufacturer    = (long)0xA96D616E/*'©man' */,
   kParameterInfoIDs             = 1
 };
 
@@ -934,7 +1064,7 @@ typedef STACK_UPP_TYPE(ImageCodecMPDrawBandProcPtr)             ImageCodecMPDraw
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ImageCodecMPDrawBandUPP
-NewImageCodecMPDrawBandUPP(ImageCodecMPDrawBandProcPtr userRoutine);
+NewImageCodecMPDrawBandUPP(ImageCodecMPDrawBandProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeImageCodecMPDrawBandUPP()
@@ -945,7 +1075,7 @@ NewImageCodecMPDrawBandUPP(ImageCodecMPDrawBandProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeImageCodecMPDrawBandUPP(ImageCodecMPDrawBandUPP userUPP);
+DisposeImageCodecMPDrawBandUPP(ImageCodecMPDrawBandUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeImageCodecMPDrawBandUPP()
@@ -959,7 +1089,7 @@ extern ComponentResult
 InvokeImageCodecMPDrawBandUPP(
   void *                           refcon,
   ImageSubCodecDecompressRecord *  drp,
-  ImageCodecMPDrawBandUPP          userUPP);
+  ImageCodecMPDrawBandUPP          userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*  codec selectors 0-127 are reserved by Apple */
 /*  codec selectors 128-191 are subtype specific */
@@ -978,7 +1108,7 @@ InvokeImageCodecMPDrawBandUPP(
 extern ComponentResult 
 ImageCodecGetCodecInfo(
   ComponentInstance   ci,
-  CodecInfo *         info);
+  CodecInfo *         info)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -998,7 +1128,7 @@ ImageCodecGetCompressionTime(
   short               depth,
   CodecQ *            spatialQuality,
   CodecQ *            temporalQuality,
-  unsigned long *     time);
+  unsigned long *     time)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1017,7 +1147,7 @@ ImageCodecGetMaxCompressionSize(
   const Rect *        srcRect,
   short               depth,
   CodecQ              quality,
-  long *              size);
+  long *              size)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1032,7 +1162,7 @@ ImageCodecGetMaxCompressionSize(
 extern ComponentResult 
 ImageCodecPreCompress(
   ComponentInstance      ci,
-  CodecCompressParams *  params);
+  CodecCompressParams *  params)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1047,7 +1177,7 @@ ImageCodecPreCompress(
 extern ComponentResult 
 ImageCodecBandCompress(
   ComponentInstance      ci,
-  CodecCompressParams *  params);
+  CodecCompressParams *  params)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1062,7 +1192,7 @@ ImageCodecBandCompress(
 extern ComponentResult 
 ImageCodecPreDecompress(
   ComponentInstance        ci,
-  CodecDecompressParams *  params);
+  CodecDecompressParams *  params)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1077,7 +1207,7 @@ ImageCodecPreDecompress(
 extern ComponentResult 
 ImageCodecBandDecompress(
   ComponentInstance        ci,
-  CodecDecompressParams *  params);
+  CodecDecompressParams *  params)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1092,7 +1222,7 @@ ImageCodecBandDecompress(
 extern ComponentResult 
 ImageCodecBusy(
   ComponentInstance   ci,
-  ImageSequence       seq);
+  ImageSequence       seq)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1111,7 +1241,7 @@ ImageCodecGetCompressedImageSize(
   Ptr                      data,
   long                     bufferSize,
   ICMDataProcRecordPtr     dataProc,
-  long *                   dataSize);
+  long *                   dataSize)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1130,7 +1260,7 @@ ImageCodecGetSimilarity(
   const Rect *             srcRect,
   ImageDescriptionHandle   desc,
   Ptr                      data,
-  Fixed *                  similarity);
+  Fixed *                  similarity)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1153,7 +1283,7 @@ ImageCodecTrimImage(
   long                       outBufferSize,
   ICMFlushProcRecordPtr      flushProc,
   Rect *                     trimRect,
-  ICMProgressProcRecordPtr   progressProc);
+  ICMProgressProcRecordPtr   progressProc)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1170,7 +1300,7 @@ ImageCodecRequestSettings(
   ComponentInstance   ci,
   Handle              settings,
   Rect *              rp,
-  ModalFilterUPP      filterProc);
+  ModalFilterUPP      filterProc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1185,7 +1315,7 @@ ImageCodecRequestSettings(
 extern ComponentResult 
 ImageCodecGetSettings(
   ComponentInstance   ci,
-  Handle              settings);
+  Handle              settings)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1200,7 +1330,7 @@ ImageCodecGetSettings(
 extern ComponentResult 
 ImageCodecSetSettings(
   ComponentInstance   ci,
-  Handle              settings);
+  Handle              settings)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1213,7 +1343,7 @@ ImageCodecSetSettings(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern ComponentResult 
-ImageCodecFlush(ComponentInstance ci);
+ImageCodecFlush(ComponentInstance ci)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1229,7 +1359,7 @@ extern ComponentResult
 ImageCodecSetTimeCode(
   ComponentInstance   ci,
   void *              timeCodeFormat,
-  void *              timeCodeTime);
+  void *              timeCodeTime)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1245,7 +1375,7 @@ extern ComponentResult
 ImageCodecIsImageDescriptionEquivalent(
   ComponentInstance        ci,
   ImageDescriptionHandle   newDesc,
-  Boolean *                equivalent);
+  Boolean *                equivalent)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1264,7 +1394,7 @@ ImageCodecNewMemory(
   Size                   dataSize,
   long                   dataUse,
   ICMMemoryDisposedUPP   memoryGoneProc,
-  void *                 refCon);
+  void *                 refCon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1279,7 +1409,7 @@ ImageCodecNewMemory(
 extern ComponentResult 
 ImageCodecDisposeMemory(
   ComponentInstance   ci,
-  Ptr                 data);
+  Ptr                 data)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1298,7 +1428,7 @@ ImageCodecHitTestData(
   void *                   data,
   Size                     dataSize,
   Point                    where,
-  Boolean *                hit);
+  Boolean *                hit)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1316,7 +1446,7 @@ ImageCodecNewImageBufferMemory(
   CodecDecompressParams *  params,
   long                     flags,
   ICMMemoryDisposedUPP     memoryGoneProc,
-  void *                   refCon);
+  void *                   refCon)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1340,7 +1470,7 @@ ImageCodecExtractAndCombineFields(
   ImageDescriptionHandle   desc2,
   void *                   outputData,
   long *                   outDataSize,
-  ImageDescriptionHandle   descOut);
+  ImageDescriptionHandle   descOut)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1360,7 +1490,7 @@ ImageCodecGetMaxCompressionSizeWithSources(
   short                     depth,
   CodecQ                    quality,
   CDSequenceDataSourcePtr   sourceData,
-  long *                    size);
+  long *                    size)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1375,7 +1505,7 @@ ImageCodecGetMaxCompressionSizeWithSources(
 extern ComponentResult 
 ImageCodecSetTimeBase(
   ComponentInstance   ci,
-  void *              base);
+  void *              base)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1393,7 +1523,7 @@ ImageCodecSourceChanged(
   UInt32                    majorSourceChangeSeed,
   UInt32                    minorSourceChangeSeed,
   CDSequenceDataSourcePtr   sourceData,
-  long *                    flagsOut);
+  long *                    flagsOut)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1408,7 +1538,7 @@ ImageCodecSourceChanged(
 extern ComponentResult 
 ImageCodecFlushFrame(
   ComponentInstance   ci,
-  UInt32              flags);
+  UInt32              flags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1423,7 +1553,7 @@ ImageCodecFlushFrame(
 extern ComponentResult 
 ImageCodecGetSettingsAsText(
   ComponentInstance   ci,
-  Handle *            text);
+  Handle *            text)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1438,7 +1568,7 @@ ImageCodecGetSettingsAsText(
 extern ComponentResult 
 ImageCodecGetParameterListHandle(
   ComponentInstance   ci,
-  Handle *            parameterDescriptionHandle);
+  Handle *            parameterDescriptionHandle)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1453,7 +1583,7 @@ ImageCodecGetParameterListHandle(
 extern ComponentResult 
 ImageCodecGetParameterList(
   ComponentInstance   ci,
-  QTAtomContainer *   parameterDescription);
+  QTAtomContainer *   parameterDescription)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1473,7 +1603,7 @@ ImageCodecCreateStandardParameterDialog(
   QTParameterDialogOptions   dialogOptions,
   DialogPtr                  existingDialog,
   short                      existingUserItem,
-  QTParameterDialog *        createdDialog);
+  QTParameterDialog *        createdDialog)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1489,7 +1619,7 @@ extern ComponentResult
 ImageCodecIsStandardParameterDialogEvent(
   ComponentInstance   ci,
   EventRecord *       pEvent,
-  QTParameterDialog   createdDialog);
+  QTParameterDialog   createdDialog)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1504,7 +1634,7 @@ ImageCodecIsStandardParameterDialogEvent(
 extern ComponentResult 
 ImageCodecDismissStandardParameterDialog(
   ComponentInstance   ci,
-  QTParameterDialog   createdDialog);
+  QTParameterDialog   createdDialog)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1521,7 +1651,7 @@ ImageCodecStandardParameterDialogDoAction(
   ComponentInstance   ci,
   QTParameterDialog   createdDialog,
   long                action,
-  void *              params);
+  void *              params)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1538,7 +1668,7 @@ ImageCodecNewImageGWorld(
   ComponentInstance        ci,
   CodecDecompressParams *  params,
   GWorldPtr *              newGW,
-  long                     flags);
+  long                     flags)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1553,7 +1683,7 @@ ImageCodecNewImageGWorld(
 extern ComponentResult 
 ImageCodecDisposeImageGWorld(
   ComponentInstance   ci,
-  GWorldPtr           theGW);
+  GWorldPtr           theGW)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1573,7 +1703,7 @@ ImageCodecHitTestDataWithFlags(
   Size                     dataSize,
   Point                    where,
   long *                   hit,
-  long                     hitFlags);
+  long                     hitFlags)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1590,7 +1720,7 @@ ImageCodecValidateParameters(
   ComponentInstance              ci,
   QTAtomContainer                parameters,
   QTParameterValidationOptions   validationFlags,
-  StringPtr                      errorString);
+  StringPtr                      errorString)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1608,7 +1738,37 @@ ImageCodecGetBaseMPWorkFunction(
   ComponentMPWorkFunctionUPP *  workFunction,
   void **                       refCon,
   ImageCodecMPDrawBandUPP       drawProc,
-  void *                        drawProcRefCon);
+  void *                        drawProcRefCon)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  ImageCodecLockBits()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ *    Windows:          in qtmlClient.lib 6.5 and later
+ */
+extern ComponentResult 
+ImageCodecLockBits(
+  ComponentInstance   ci,
+  CGrafPtr            port)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  ImageCodecUnlockBits()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ *    Windows:          in qtmlClient.lib 6.5 and later
+ */
+extern ComponentResult 
+ImageCodecUnlockBits(
+  ComponentInstance   ci,
+  CGrafPtr            port)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*
@@ -1625,7 +1785,7 @@ ImageCodecRequestGammaLevel(
   ComponentInstance   ci,
   Fixed               srcGammaLevel,
   Fixed               dstGammaLevel,
-  long *              codecCanMatch);
+  long *              codecCanMatch)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1640,9 +1800,10 @@ ImageCodecRequestGammaLevel(
 extern ComponentResult 
 ImageCodecGetSourceDataGammaLevel(
   ComponentInstance   ci,
-  Fixed *             sourceDataGammaLevel);
+  Fixed *             sourceDataGammaLevel)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/* (Selector 42 skipped) */
 /*
  *  ImageCodecGetDecompressLatency()
  *  
@@ -1655,7 +1816,136 @@ ImageCodecGetSourceDataGammaLevel(
 extern ComponentResult 
 ImageCodecGetDecompressLatency(
   ComponentInstance   ci,
-  TimeRecord *        latency);
+  TimeRecord *        latency)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  ImageCodecMergeFloatingImageOntoWindow()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+ImageCodecMergeFloatingImageOntoWindow(
+  ComponentInstance   ci,
+  UInt32              flags)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  ImageCodecRemoveFloatingImage()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+ImageCodecRemoveFloatingImage(
+  ComponentInstance   ci,
+  UInt32              flags)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  ImageCodecGetDITLForSize()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+ImageCodecGetDITLForSize(
+  ComponentInstance   ci,
+  Handle *            ditl,
+  Point *             requestedSize)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  ImageCodecDITLInstall()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+ImageCodecDITLInstall(
+  ComponentInstance   ci,
+  DialogRef           d,
+  short               itemOffset)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  ImageCodecDITLEvent()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+ImageCodecDITLEvent(
+  ComponentInstance    ci,
+  DialogRef            d,
+  short                itemOffset,
+  const EventRecord *  theEvent,
+  short *              itemHit,
+  Boolean *            handled)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  ImageCodecDITLItem()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+ImageCodecDITLItem(
+  ComponentInstance   ci,
+  DialogRef           d,
+  short               itemOffset,
+  short               itemNum)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  ImageCodecDITLRemove()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+ImageCodecDITLRemove(
+  ComponentInstance   ci,
+  DialogRef           d,
+  short               itemOffset)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  ImageCodecDITLValidateInput()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+ImageCodecDITLValidateInput(
+  ComponentInstance   ci,
+  Boolean *           ok)                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
@@ -1670,7 +1960,7 @@ ImageCodecGetDecompressLatency(
 extern ComponentResult 
 ImageCodecPreflight(
   ComponentInstance        ci,
-  CodecDecompressParams *  params);
+  CodecDecompressParams *  params)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1685,7 +1975,7 @@ ImageCodecPreflight(
 extern ComponentResult 
 ImageCodecInitialize(
   ComponentInstance                      ci,
-  ImageSubCodecDecompressCapabilities *  cap);
+  ImageSubCodecDecompressCapabilities *  cap)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1702,7 +1992,7 @@ ImageCodecBeginBand(
   ComponentInstance                ci,
   CodecDecompressParams *          params,
   ImageSubCodecDecompressRecord *  drp,
-  long                             flags);
+  long                             flags)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1717,7 +2007,7 @@ ImageCodecBeginBand(
 extern ComponentResult 
 ImageCodecDrawBand(
   ComponentInstance                ci,
-  ImageSubCodecDecompressRecord *  drp);
+  ImageSubCodecDecompressRecord *  drp)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1734,7 +2024,7 @@ ImageCodecEndBand(
   ComponentInstance                ci,
   ImageSubCodecDecompressRecord *  drp,
   OSErr                            result,
-  long                             flags);
+  long                             flags)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1747,7 +2037,7 @@ ImageCodecEndBand(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern ComponentResult 
-ImageCodecQueueStarting(ComponentInstance ci);
+ImageCodecQueueStarting(ComponentInstance ci)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1760,7 +2050,7 @@ ImageCodecQueueStarting(ComponentInstance ci);
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern ComponentResult 
-ImageCodecQueueStopping(ComponentInstance ci);
+ImageCodecQueueStopping(ComponentInstance ci)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1775,7 +2065,7 @@ ImageCodecQueueStopping(ComponentInstance ci);
 extern ComponentResult 
 ImageCodecDroppingFrame(
   ComponentInstance                      ci,
-  const ImageSubCodecDecompressRecord *  drp);
+  const ImageSubCodecDecompressRecord *  drp)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1792,7 +2082,7 @@ ImageCodecScheduleFrame(
   ComponentInstance                      ci,
   const ImageSubCodecDecompressRecord *  drp,
   ImageCodecTimeTriggerUPP               triggerProc,
-  void *                                 triggerProcRefCon);
+  void *                                 triggerProcRefCon)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1805,7 +2095,7 @@ ImageCodecScheduleFrame(
  *    Windows:          in qtmlClient.lib 4.0 and later
  */
 extern ComponentResult 
-ImageCodecCancelTrigger(ComponentInstance ci);
+ImageCodecCancelTrigger(ComponentInstance ci)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1851,9 +2141,19 @@ enum {
     kImageCodecHitTestDataWithFlagsSelect      = 0x0023,
     kImageCodecValidateParametersSelect        = 0x0024,
     kImageCodecGetBaseMPWorkFunctionSelect     = 0x0025,
+    kImageCodecLockBitsSelect                  = 0x0026,
+    kImageCodecUnlockBitsSelect                = 0x0027,
     kImageCodecRequestGammaLevelSelect         = 0x0028,
     kImageCodecGetSourceDataGammaLevelSelect   = 0x0029,
     kImageCodecGetDecompressLatencySelect      = 0x002B,
+    kImageCodecMergeFloatingImageOntoWindowSelect = 0x002C,
+    kImageCodecRemoveFloatingImageSelect       = 0x002D,
+    kImageCodecGetDITLForSizeSelect            = 0x002E,
+    kImageCodecDITLInstallSelect               = 0x002F,
+    kImageCodecDITLEventSelect                 = 0x0030,
+    kImageCodecDITLItemSelect                  = 0x0031,
+    kImageCodecDITLRemoveSelect                = 0x0032,
+    kImageCodecDITLValidateInputSelect         = 0x0033,
     kImageCodecPreflightSelect                 = 0x0200,
     kImageCodecInitializeSelect                = 0x0201,
     kImageCodecBeginBandSelect                 = 0x0202,
@@ -1865,6 +2165,7 @@ enum {
     kImageCodecScheduleFrameSelect             = 0x0208,
     kImageCodecCancelTriggerSelect             = 0x0209
 };
+
 
 
 
@@ -1923,7 +2224,7 @@ QTPhotoSetSampling(
   short               cbH,
   short               cbV,
   short               crH,
-  short               crV);
+  short               crV)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1938,7 +2239,7 @@ QTPhotoSetSampling(
 extern ComponentResult 
 QTPhotoSetRestartInterval(
   ComponentInstance   codec,
-  unsigned short      restartInterval);
+  unsigned short      restartInterval)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1956,7 +2257,7 @@ QTPhotoDefineHuffmanTable(
   short               componentNumber,
   Boolean             isDC,
   unsigned char *     lengthCounts,
-  unsigned char *     values);
+  unsigned char *     values)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1972,7 +2273,7 @@ extern ComponentResult
 QTPhotoDefineQuantizationTable(
   ComponentInstance   codec,
   short               componentNumber,
-  unsigned char *     table);
+  unsigned char *     table)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2012,7 +2313,6 @@ union SourceData {
   EffectSourcePtr     effect;
 };
 typedef union SourceData                SourceData;
-
 struct EffectSource {
   long                effectType;             /* type of effect or kEffectRawSource if raw ICM data*/
   Ptr                 data;                   /* track data for this effect*/
@@ -2036,7 +2336,6 @@ struct EffectsFrameParams {
 typedef struct EffectsFrameParams       EffectsFrameParams;
 typedef EffectsFrameParams *            EffectsFrameParamsPtr;
 
-
 /*
  *  ImageCodecEffectSetup()
  *  
@@ -2049,7 +2348,7 @@ typedef EffectsFrameParams *            EffectsFrameParamsPtr;
 extern ComponentResult 
 ImageCodecEffectSetup(
   ComponentInstance        effect,
-  CodecDecompressParams *  p);
+  CodecDecompressParams *  p)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2065,7 +2364,7 @@ extern ComponentResult
 ImageCodecEffectBegin(
   ComponentInstance        effect,
   CodecDecompressParams *  p,
-  EffectsFrameParamsPtr    ePtr);
+  EffectsFrameParamsPtr    ePtr)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2080,7 +2379,7 @@ ImageCodecEffectBegin(
 extern ComponentResult 
 ImageCodecEffectRenderFrame(
   ComponentInstance       effect,
-  EffectsFrameParamsPtr   p);
+  EffectsFrameParamsPtr   p)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2096,7 +2395,7 @@ extern ComponentResult
 ImageCodecEffectConvertEffectSourceToFormat(
   ComponentInstance        effect,
   EffectSourcePtr          sourceToConvert,
-  ImageDescriptionHandle   requestedDesc);
+  ImageDescriptionHandle   requestedDesc)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2111,7 +2410,7 @@ ImageCodecEffectConvertEffectSourceToFormat(
 extern ComponentResult 
 ImageCodecEffectCancel(
   ComponentInstance       effect,
-  EffectsFrameParamsPtr   p);
+  EffectsFrameParamsPtr   p)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2127,7 +2426,7 @@ extern ComponentResult
 ImageCodecEffectGetSpeed(
   ComponentInstance   effect,
   QTAtomContainer     parameters,
-  Fixed *             pFPS);
+  Fixed *             pFPS)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2303,7 +2602,7 @@ extern ComponentResult
 ImageCodecEffectPrepareSMPTEFrame(
   ComponentInstance      effect,
   PixMapPtr              destPixMap,
-  SMPTEFrameReference *  returnValue);
+  SMPTEFrameReference *  returnValue)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2318,7 +2617,7 @@ ImageCodecEffectPrepareSMPTEFrame(
 extern ComponentResult 
 ImageCodecEffectDisposeSMPTEFrame(
   ComponentInstance     effect,
-  SMPTEFrameReference   frameRef);
+  SMPTEFrameReference   frameRef)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2338,13 +2637,13 @@ ImageCodecEffectRenderSMPTEFrame(
   Fixed                 effectPercentageEven,
   Fixed                 effectPercentageOdd,
   Rect *                pSourceRect,
-  MatrixRecord *        pMatrix,
+  MatrixRecord *        matrixP,
   SMPTEWipeType         effectNumber,
   long                  xRepeat,
   long                  yRepeat,
   SMPTEFlags            flags,
   Fixed                 penWidth,
-  long                  strokeValue);
+  long                  strokeValue)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2427,7 +2726,7 @@ CurveGetLength(
   ComponentInstance   effect,
   gxPaths *           target,
   long                index,
-  wide *              wideLength);
+  wide *              wideLength)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2446,7 +2745,7 @@ CurveLengthToPoint(
   long                index,
   Fixed               length,
   FixedPoint *        location,
-  FixedPoint *        tangent);
+  FixedPoint *        tangent)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2461,7 +2760,7 @@ CurveLengthToPoint(
 extern ComponentResult 
 CurveNewPath(
   ComponentInstance   effect,
-  Handle *            pPath);
+  Handle *            pPath)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2478,7 +2777,7 @@ CurveCountPointsInPath(
   ComponentInstance   effect,
   gxPaths *           aPath,
   unsigned long       contourIndex,
-  unsigned long *     pCount);
+  unsigned long *     pCount)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2497,7 +2796,7 @@ CurveGetPathPoint(
   unsigned long       contourIndex,
   unsigned long       pointIndex,
   gxPoint *           thePoint,
-  Boolean *           ptIsOnPath);
+  Boolean *           ptIsOnPath)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2516,7 +2815,7 @@ CurveInsertPointIntoPath(
   Handle              thePath,
   unsigned long       contourIndex,
   unsigned long       pointIndex,
-  Boolean             ptIsOnPath);
+  Boolean             ptIsOnPath)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2535,7 +2834,7 @@ CurveSetPathPoint(
   unsigned long       contourIndex,
   unsigned long       pointIndex,
   gxPoint *           thePoint,
-  Boolean             ptIsOnPath);
+  Boolean             ptIsOnPath)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2554,7 +2853,7 @@ CurveGetNearestPathPoint(
   FixedPoint *        thePoint,
   unsigned long *     contourIndex,
   unsigned long *     pointIndex,
-  Fixed *             theDelta);
+  Fixed *             theDelta)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2573,7 +2872,7 @@ CurvePathPointToLength(
   Fixed               startDist,
   Fixed               endDist,
   FixedPoint *        thePoint,
-  Fixed *             pLength);
+  Fixed *             pLength)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2588,7 +2887,7 @@ CurvePathPointToLength(
 extern ComponentResult 
 CurveCreateVectorStream(
   ComponentInstance   effect,
-  Handle *            pStream);
+  Handle *            pStream)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2606,7 +2905,7 @@ CurveAddAtomToVectorStream(
   OSType              atomType,
   Size                atomSize,
   void *              pAtomData,
-  Handle              vectorStream);
+  Handle              vectorStream)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2622,7 +2921,7 @@ extern ComponentResult
 CurveAddPathAtomToVectorStream(
   ComponentInstance   effect,
   Handle              pathData,
-  Handle              vectorStream);
+  Handle              vectorStream)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2637,7 +2936,7 @@ CurveAddPathAtomToVectorStream(
 extern ComponentResult 
 CurveAddZeroAtomToVectorStream(
   ComponentInstance   effect,
-  Handle              vectorStream);
+  Handle              vectorStream)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2655,7 +2954,7 @@ CurveGetAtomDataFromVectorStream(
   Handle              vectorStream,
   long                atomType,
   long *              dataSize,
-  Ptr *               dataPtr);
+  Ptr *               dataPtr)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2679,13 +2978,7 @@ enum {
 };
 /* UPP call backs */
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

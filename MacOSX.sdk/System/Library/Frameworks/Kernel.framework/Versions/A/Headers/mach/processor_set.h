@@ -30,6 +30,8 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* processor_set_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 
 #ifdef __BeforeMigUserHeader
@@ -171,6 +173,191 @@ kern_return_t processor_set_info
 	processor_set_info_t info_out,
 	mach_msg_type_number_t *info_outCnt
 );
+/* typedefs for all requests */
+
+#ifndef __Request__processor_set_subsystem__defined
+#define __Request__processor_set_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		processor_set_flavor_t flavor;
+		mach_msg_type_number_t info_outCnt;
+	} __Request__processor_set_statistics_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__processor_set_destroy_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int max_priority;
+		boolean_t change_threads;
+	} __Request__processor_set_max_priority_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int policy;
+	} __Request__processor_set_policy_enable_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int policy;
+		boolean_t change_threads;
+	} __Request__processor_set_policy_disable_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__processor_set_tasks_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__processor_set_threads_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		processor_set_flavor_t flavor;
+		mach_msg_type_number_t policy_infoCnt;
+		integer_t policy_info[5];
+		boolean_t change;
+	} __Request__processor_set_policy_control_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__processor_set_stack_usage_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int flavor;
+		mach_msg_type_number_t info_outCnt;
+	} __Request__processor_set_info_t;
+
+#endif /* !__Request__processor_set_subsystem__defined */
+
+/* union of all requests */
+
+#ifndef __RequestUnion__processor_set_subsystem__defined
+#define __RequestUnion__processor_set_subsystem__defined
+union __RequestUnion__processor_set_subsystem {
+	__Request__processor_set_statistics_t Request_processor_set_statistics;
+	__Request__processor_set_destroy_t Request_processor_set_destroy;
+	__Request__processor_set_max_priority_t Request_processor_set_max_priority;
+	__Request__processor_set_policy_enable_t Request_processor_set_policy_enable;
+	__Request__processor_set_policy_disable_t Request_processor_set_policy_disable;
+	__Request__processor_set_tasks_t Request_processor_set_tasks;
+	__Request__processor_set_threads_t Request_processor_set_threads;
+	__Request__processor_set_policy_control_t Request_processor_set_policy_control;
+	__Request__processor_set_stack_usage_t Request_processor_set_stack_usage;
+	__Request__processor_set_info_t Request_processor_set_info;
+};
+#endif /* !__RequestUnion__processor_set_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__processor_set_subsystem__defined
+#define __Reply__processor_set_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t info_outCnt;
+		integer_t info_out[5];
+	} __Reply__processor_set_statistics_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__processor_set_destroy_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__processor_set_max_priority_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__processor_set_policy_enable_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__processor_set_policy_disable_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_ports_descriptor_t task_list;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t task_listCnt;
+	} __Reply__processor_set_tasks_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_ports_descriptor_t thread_list;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t thread_listCnt;
+	} __Reply__processor_set_threads_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__processor_set_policy_control_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		unsigned total;
+		vm_size_t space;
+		vm_size_t resident;
+		vm_size_t maxusage;
+		vm_offset_t maxstack;
+	} __Reply__processor_set_stack_usage_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t host;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t info_outCnt;
+		integer_t info_out[5];
+	} __Reply__processor_set_info_t;
+
+#endif /* !__Reply__processor_set_subsystem__defined */
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__processor_set_subsystem__defined
+#define __ReplyUnion__processor_set_subsystem__defined
+union __ReplyUnion__processor_set_subsystem {
+	__Reply__processor_set_statistics_t Reply_processor_set_statistics;
+	__Reply__processor_set_destroy_t Reply_processor_set_destroy;
+	__Reply__processor_set_max_priority_t Reply_processor_set_max_priority;
+	__Reply__processor_set_policy_enable_t Reply_processor_set_policy_enable;
+	__Reply__processor_set_policy_disable_t Reply_processor_set_policy_disable;
+	__Reply__processor_set_tasks_t Reply_processor_set_tasks;
+	__Reply__processor_set_threads_t Reply_processor_set_threads;
+	__Reply__processor_set_policy_control_t Reply_processor_set_policy_control;
+	__Reply__processor_set_stack_usage_t Reply_processor_set_stack_usage;
+	__Reply__processor_set_info_t Reply_processor_set_info;
+};
+#endif /* !__RequestUnion__processor_set_subsystem__defined */
 
 #ifndef subsystem_to_name_map_processor_set
 #define subsystem_to_name_map_processor_set \

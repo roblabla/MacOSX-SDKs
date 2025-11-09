@@ -1,48 +1,38 @@
-/* =============================================================================
- *
- *	File:		QDPictToCGContext.h
- *
- *  Written By:	David Gelphman (gelphman@apple.com, Ext. 4-6106)
- *
- *	Copyright © 2001, Apple Computer Inc., all rights reserved
- *	All rights reserved.
- *
- *  Description:
- *		This module implements QuickDraw picture drawing into 
- *		CG contexts.
- *
- *	$Revision: 1.2 $
- *	$Date: 2001/06/22 20:45:02 $
- *
- * ========================================================================== */
-
-
-/* --- Change History: ---------------------------------------------------------
-
-$Log: QDPictToCGContext.h,v $
-Revision 1.2  2001/06/22 20:45:02  velocio
-remove  directive from header comment
-
-Revision 1.1  2001/04/16 20:34:14  velocio
-#2679365: Need to draw PICTs into CG context
-
-Revision 1.3  2001/03/29 23:44:33  gelphman
-DMG825 complete changes to conform to agreed upon .h.
-
-Revision 1.2  2001/03/29 20:30:31  gelphman
-DMG825 fix to support auto CVS revision updating.
-
-
------------------------------------------------------------------------------ */
-#ifndef _QDPICTTOCGCONTEXT_H_
-#define _QDPICTTOCGCONTEXT_H_
-
-typedef struct QDPict *QDPictRef;
+/*
+     File:       QD/QDPictToCGContext.h
+ 
+     Contains:   API to draw Quickdraw PICTs into CoreGraphics context
+ 
+     Version:    Quickdraw-96.21~1
+ 
+     Copyright:  © 2001-2002 by Apple Computer, Inc., all rights reserved.
+ 
+     Bugs?:      For bug reports, consult the following page on
+                 the World Wide Web:
+ 
+                     http://developer.apple.com/bugreporter/
+ 
+*/
+#ifndef __QDPICTTOCGCONTEXT__
+#define __QDPICTTOCGCONTEXT__
 
 #ifndef __CGCONTEXT__
 #include <CoreGraphics/CGContext.h>
 #endif
 
+
+
+#include <AvailabilityMacros.h>
+
+#if PRAGMA_ONCE
+#pragma once
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef struct QDPict*                  QDPictRef;
 /*
     Note: QuickDraw picture data typically comes in two forms: a PICT resource
     that begins the picture header data at the beginning of the resource and PICT
@@ -53,14 +43,23 @@ typedef struct QDPict *QDPictRef;
     
     Additionally the Picture Bounds must not be an empty rect.
 */
-
 /* Create a QDPict reference, using `provider' to obtain the QDPict's data. 
  * It is assumed that either the first byte or the 513th byte of data
  * in the file referenced by the URL is the first byte of the
  * picture header. If the URL does not begin PICT data at one
  * of these places in the data fork then the QDPictRef returned will be NULL.
 */
-extern QDPictRef QDPictCreateWithProvider(CGDataProviderRef provider);
+/*
+ *  QDPictCreateWithProvider()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern QDPictRef 
+QDPictCreateWithProvider(CGDataProviderRef provider)          AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
 
 /* Create a QDPict reference from `url'. 
  * It is assumed that either the first byte or the 513th byte of data
@@ -68,33 +67,105 @@ extern QDPictRef QDPictCreateWithProvider(CGDataProviderRef provider);
  * picture header. If the URL does not begin PICT data at one
  * of these places in the data fork then the QDPictRef returned will be NULL.
 */
-extern QDPictRef QDPictCreateWithURL(CFURLRef url);
+/*
+ *  QDPictCreateWithURL()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern QDPictRef 
+QDPictCreateWithURL(CFURLRef url)                             AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
 
 /* Increment the retain count of `pictRef' and return it.  All 
  * pictRefs are created with an initial retain count of 1. */
-extern QDPictRef QDPictRetain(QDPictRef pictRef);
+/*
+ *  QDPictRetain()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern QDPictRef 
+QDPictRetain(QDPictRef pictRef)                               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
 
 /* Decrement the retain count of `pictRef'.  If the retain count reaches 0,
  * then free it and any associated resources. */
-extern void QDPictRelease(QDPictRef pictRef);
+/*
+ *  QDPictRelease()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+QDPictRelease(QDPictRef pictRef)                              AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
 
 /* Return the Picture Bounds of the QuickDraw picture represented by `pictRef'. This
     rectangle is in the default user space with one unit = 1/72 inch.
 */
-extern CGRect QDPictGetBounds(QDPictRef pictRef);
+/*
+ *  QDPictGetBounds()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CGRect 
+QDPictGetBounds(QDPictRef pictRef)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
 
 /* Return the resolution of the QuickDraw picture represented by `pictRef'.
     This data, together with the CGRect returned by QDPictGetBounds, can be
     used to compute the size of the picture in pixels, which is what QuickDraw
     really records into pictures.
 */
-extern void QDPictGetResolution(QDPictRef pictRef, float *xRes, float *yRes);
+/*
+ *  QDPictGetResolution()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+QDPictGetResolution(
+  QDPictRef   pictRef,
+  float *     xRes,
+  float *     yRes)                                           AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
 
 /* Draw `pictRef' in the rectangular area specified by `rect'.
  * The PICT bounds of the page is scaled, if necessary, to fit into
  * `rect'. To get unscaled results, supply a rect the size of the rect
  * returned by QDPictGetBounds.
 */
-extern OSStatus QDPictDrawToCGContext(CGContextRef ctx, CGRect rect, QDPictRef pictRef);
+/*
+ *  QDPictDrawToCGContext()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+QDPictDrawToCGContext(
+  CGContextRef   ctx,
+  CGRect         rect,
+  QDPictRef      pictRef)                                     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
-#endif	/* _QDPICTTOCGCONTEXT_H_ */
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __QDPICTTOCGCONTEXT__ */
+

@@ -187,6 +187,7 @@ __END_DECLS
 #define	__SNPT	0x0800		/* do not do fseek() optimisation */
 #define	__SOFF	0x1000		/* set iff _offset is in fact correct */
 #define	__SMOD	0x2000		/* true => fgetln modified _p text */
+#define __SALC  0x4000		/* allocate string space dynamically */
 
 /*
  * The following three definitions are for ANSI C, which took them
@@ -245,7 +246,7 @@ int	 ferror __P((FILE *));
 int	 fflush __P((FILE *));
 int	 fgetc __P((FILE *));
 int	 fgetpos __P((FILE *, fpos_t *));
-char	*fgets __P((char *, size_t, FILE *));
+char	*fgets __P((char *, int, FILE *));
 FILE	*fopen __P((const char *, const char *));
 int	 fprintf __P((FILE *, const char *, ...));
 int	 fputc __P((int, FILE *));
@@ -261,7 +262,7 @@ int	 getc __P((FILE *));
 int	 getchar __P((void));
 char	*gets __P((char *));
 #if !defined(_ANSI_SOURCE) && !defined(_POSIX_SOURCE)
-extern int sys_nerr;			/* perror(3) external variables */
+extern __const int sys_nerr;		/* perror(3) external variables */
 extern __const char *__const sys_errlist[];
 #endif
 void	 perror __P((const char *));
@@ -283,6 +284,8 @@ int	 ungetc __P((int, FILE *));
 int	 vfprintf __P((FILE *, const char *, _BSD_VA_LIST_));
 int	 vprintf __P((const char *, _BSD_VA_LIST_));
 int	 vsprintf __P((char *, const char *, _BSD_VA_LIST_));
+int	 asprintf __P((char **, const char *, ...));
+int	 vasprintf __P((char **, const char *, _BSD_VA_LIST_));
 __END_DECLS
 
 /*

@@ -3,9 +3,9 @@
  
      Contains:   Scrap Manager Interfaces.
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,20 +16,12 @@
 #ifndef __SCRAP__
 #define __SCRAP__
 
-#ifndef __MIXEDMODE__
-#include <CarbonCore/MixedMode.h>
-#endif
-
-#ifndef __MACERRORS__
-#include <CarbonCore/MacErrors.h>
-#endif
-
-#ifndef __CFSTRING__
-#include <CoreFoundation/CFString.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -39,13 +31,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /*
     ________________________________________________________________
@@ -56,7 +42,7 @@ extern "C" {
     ________________________________________________________________
 */
 /*
-    While were in here mucking about, we defined a new type to
+    While we're in here mucking about, we defined a new type to
     to put some confusion to rest. The old calls, as well as the
     new calls, use the new type. Existing clients should be
     blissfully ignorant.
@@ -90,17 +76,8 @@ enum {
 /*
  *  LoadScrap()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSStatus 
-LoadScrap(void);
-
-
-/*
- *  UnloadScrap()
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -108,7 +85,22 @@ LoadScrap(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSStatus 
-UnloadScrap(void);
+LoadScrap(void)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  UnloadScrap()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSStatus 
+UnloadScrap(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #if CALL_NOT_IN_CARBON
@@ -244,7 +236,7 @@ typedef struct OpaqueScrapRef*          ScrapRef;
 /*
     Defined Apple scrap names for GetScrapByName
     kScrapClipboardScrap    traditional clipboard scrap
-    kScrapFindScrap         compatable with Cocoa's global find scrap
+    kScrapFindScrap         compatible with Cocoa's global find scrap
 */
 #define kScrapClipboardScrap            CFSTR("com.apple.scrap.clipboard")
 #define kScrapFindScrap                 CFSTR("com.apple.scrap.find")
@@ -253,7 +245,7 @@ typedef struct OpaqueScrapRef*          ScrapRef;
 
 enum {
   kScrapGetNamedScrap           = 0,    /* get current named scrap without bumping*/
-  kScrapClearNamedScrap         = (1L << 0) /* aquire the named scrap, bumping and clearing*/
+  kScrapClearNamedScrap         = (1L << 0) /* acquire the named scrap, bumping and clearing*/
 };
 
 /*
@@ -280,20 +272,26 @@ enum {
     You can use this API to generate your own private scraps to use as a high
     level interprocess communication between your main and helper apps.  The Java
     naming convention is suggested for your scraps ( ie. com.joeco.scrap.secret ).
+    
+    CarbonLib does not support arbitrary named scraps; when calling this API on
+    CarbonLib, kScrapClipboardScrap is the only supported value for the name parameter.
 */
 /*
  *  GetScrapByName()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 GetScrapByName(
   CFStringRef   name,
   OptionBits    options,
-  ScrapRef *    scrap);
+  ScrapRef *    scrap)                                        AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -305,13 +303,16 @@ GetScrapByName(
 /*
  *  GetCurrentScrap()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-GetCurrentScrap(ScrapRef * scrap);
+GetCurrentScrap(ScrapRef * scrap)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -325,6 +326,9 @@ GetCurrentScrap(ScrapRef * scrap);
 /*
  *  GetScrapFlavorFlags()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -334,7 +338,7 @@ extern OSStatus
 GetScrapFlavorFlags(
   ScrapRef            scrap,
   ScrapFlavorType     flavorType,
-  ScrapFlavorFlags *  flavorFlags);
+  ScrapFlavorFlags *  flavorFlags)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -347,6 +351,9 @@ GetScrapFlavorFlags(
 /*
  *  GetScrapFlavorSize()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -356,7 +363,7 @@ extern OSStatus
 GetScrapFlavorSize(
   ScrapRef          scrap,
   ScrapFlavorType   flavorType,
-  Size *            byteCount);
+  Size *            byteCount)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -370,6 +377,9 @@ GetScrapFlavorSize(
 /*
  *  GetScrapFlavorData()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -380,7 +390,7 @@ GetScrapFlavorData(
   ScrapRef          scrap,
   ScrapFlavorType   flavorType,
   Size *            byteCount,
-  void *            destination);
+  void *            destination)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -398,13 +408,16 @@ GetScrapFlavorData(
 /*
  *  ClearCurrentScrap()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-ClearCurrentScrap(void);
+ClearCurrentScrap(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -412,17 +425,24 @@ ClearCurrentScrap(void);
         ScrapRef value. ClearScrap behaves similarly to GetScrapByName
         when called with the kScrapClearNamedScrap option with the
         benefit of not requiring a name in the event one is not available.
+        
+        CarbonLib does not support arbitrary named scraps; when calling this
+        API on CarbonLib, only clearing the current scrap is supported.
 */
 /*
  *  ClearScrap()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-ClearScrap(ScrapRef * inOutScrap);
+ClearScrap(ScrapRef * inOutScrap)                             AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
 
 
 /*
@@ -456,6 +476,9 @@ ClearScrap(ScrapRef * inOutScrap);
 /*
  *  PutScrapFlavor()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -467,7 +490,7 @@ PutScrapFlavor(
   ScrapFlavorType    flavorType,
   ScrapFlavorFlags   flavorFlags,
   Size               flavorSize,
-  const void *       flavorData);       /* can be NULL */
+  const void *       flavorData)        /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -488,7 +511,7 @@ typedef STACK_UPP_TYPE(ScrapPromiseKeeperProcPtr)               ScrapPromiseKeep
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ScrapPromiseKeeperUPP
-NewScrapPromiseKeeperUPP(ScrapPromiseKeeperProcPtr userRoutine);
+NewScrapPromiseKeeperUPP(ScrapPromiseKeeperProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeScrapPromiseKeeperUPP()
@@ -499,7 +522,7 @@ NewScrapPromiseKeeperUPP(ScrapPromiseKeeperProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeScrapPromiseKeeperUPP(ScrapPromiseKeeperUPP userUPP);
+DisposeScrapPromiseKeeperUPP(ScrapPromiseKeeperUPP userUPP)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeScrapPromiseKeeperUPP()
@@ -514,7 +537,7 @@ InvokeScrapPromiseKeeperUPP(
   ScrapRef               scrap,
   ScrapFlavorType        flavorType,
   void *                 userData,
-  ScrapPromiseKeeperUPP  userUPP);
+  ScrapPromiseKeeperUPP  userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
     SetScrapPromiseKeeper associates a ScrapPromiseKeeper with a
@@ -530,6 +553,9 @@ InvokeScrapPromiseKeeperUPP(
 /*
  *  SetScrapPromiseKeeper()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -539,7 +565,7 @@ extern OSStatus
 SetScrapPromiseKeeper(
   ScrapRef                scrap,
   ScrapPromiseKeeperUPP   upp,
-  const void *            userData);
+  const void *            userData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -550,6 +576,9 @@ SetScrapPromiseKeeper(
 /*
  *  GetScrapFlavorCount()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -558,7 +587,7 @@ SetScrapPromiseKeeper(
 extern OSStatus 
 GetScrapFlavorCount(
   ScrapRef   scrap,
-  UInt32 *   infoCount);
+  UInt32 *   infoCount)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -574,6 +603,9 @@ GetScrapFlavorCount(
 /*
  *  GetScrapFlavorInfoList()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -583,7 +615,7 @@ extern OSStatus
 GetScrapFlavorInfoList(
   ScrapRef          scrap,
   UInt32 *          infoCount,
-  ScrapFlavorInfo   info[]);
+  ScrapFlavorInfo   info[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -604,23 +636,20 @@ GetScrapFlavorInfoList(
 /*
  *  CallInScrapPromises()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-CallInScrapPromises(void);
+CallInScrapPromises(void)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

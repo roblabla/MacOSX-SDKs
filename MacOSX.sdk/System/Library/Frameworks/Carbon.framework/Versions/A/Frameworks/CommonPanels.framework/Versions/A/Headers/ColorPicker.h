@@ -3,9 +3,9 @@
  
      Contains:   Color Picker package Interfaces.
  
-     Version:    CommonPanels-51~48
+     Version:    CommonPanels-61~261
  
-     Copyright:  © 1987-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1987-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,16 +16,8 @@
 #ifndef __COLORPICKER__
 #define __COLORPICKER__
 
-#ifndef __MIXEDMODE__
-#include <CarbonCore/MixedMode.h>
-#endif
-
-#ifndef __QUICKDRAW__
-#include <QD/Quickdraw.h>
-#endif
-
-#ifndef __CMAPPLICATION__
-#include <ColorSync/CMApplication.h>
+#ifndef __APPLICATIONSERVICES__
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 #ifndef __EVENTS__
@@ -34,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -43,13 +36,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
                                         /*Maximum small fract value, as long*/
@@ -472,13 +459,7 @@ InvokeUserEventUPP(
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

@@ -3,10 +3,9 @@
  
      Contains:   Translation Manager (Macintosh Easy Open) Interfaces.
  
-     Version:    Technology: Macintosh Easy Open 1.1
-                 Release:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1991-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1991-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,16 +16,8 @@
 #ifndef __TRANSLATION__
 #define __TRANSLATION__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __FILES__
-#include <CarbonCore/Files.h>
-#endif
-
-#ifndef __COMPONENTS__
-#include <CarbonCore/Components.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __TRANSLATIONEXTENSIONS__
@@ -35,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -44,13 +36,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* enumerated types on how a document can be opened*/
 typedef short                           DocOpenMethod;
@@ -95,6 +81,9 @@ typedef FileTranslationSpecArrayPtr *   FileTranslationSpecArrayHandle;
 /*
  *  GetFileTypesThatAppCanNativelyOpen()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -104,7 +93,7 @@ extern OSErr
 GetFileTypesThatAppCanNativelyOpen(
   short       appVRefNumHint,
   OSType      appSignature,
-  FileType *  nativeTypes);
+  FileType *  nativeTypes)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*****************************************************************************************
@@ -125,6 +114,9 @@ GetFileTypesThatAppCanNativelyOpen(
 /*
  *  ExtendFileTypeList()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -135,7 +127,7 @@ ExtendFileTypeList(
   const FileType *  originalTypeList,
   short             numberOriginalTypes,
   FileType *        extendedTypeList,
-  short *           numberExtendedTypes);
+  short *           numberExtendedTypes)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -162,6 +154,9 @@ ExtendFileTypeList(
 /*
  *  CanDocBeOpened()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -175,7 +170,7 @@ CanDocBeOpened(
   const FileType *       nativeTypes,
   Boolean                onlyNative,
   DocOpenMethod *        howToOpen,
-  FileTranslationSpec *  howToTranslate);
+  FileTranslationSpec *  howToTranslate)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -195,6 +190,9 @@ CanDocBeOpened(
 /*
  *  GetFileTranslationPaths()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -202,10 +200,10 @@ CanDocBeOpened(
  */
 extern short 
 GetFileTranslationPaths(
-  FSSpec *                      srcDocument,
+  const FSSpec *                srcDocument,
   FileType                      dstDocType,
   unsigned short                maxResultCount,
-  FileTranslationSpecArrayPtr   resultBuffer);
+  FileTranslationSpecArrayPtr   resultBuffer)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*****************************************************************************************
@@ -230,6 +228,9 @@ GetFileTranslationPaths(
 /*
  *  GetPathFromTranslationDialog()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -241,7 +242,7 @@ GetPathFromTranslationDialog(
   const FSSpec *         theApplication,
   TypesBlockPtr          typeList,
   DocOpenMethod *        howToOpen,
-  FileTranslationSpec *  howToTranslate);
+  FileTranslationSpec *  howToTranslate)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -262,6 +263,9 @@ GetPathFromTranslationDialog(
 /*
  *  TranslateFile()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -271,7 +275,7 @@ extern OSErr
 TranslateFile(
   const FSSpec *               sourceDocument,
   const FSSpec *               destinationDocument,
-  const FileTranslationSpec *  howToTranslate);
+  const FileTranslationSpec *  howToTranslate)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*****************************************************************************************
@@ -292,6 +296,9 @@ TranslateFile(
 /*
  *  GetDocumentKindString()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -302,7 +309,7 @@ GetDocumentKindString(
   short    docVRefNum,
   OSType   docType,
   OSType   docCreator,
-  Str63    kindString);
+  Str63    kindString)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*****************************************************************************************
@@ -319,6 +326,9 @@ GetDocumentKindString(
 /*
  *  GetTranslationExtensionName()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -327,7 +337,7 @@ GetDocumentKindString(
 extern OSErr 
 GetTranslationExtensionName(
   const FileTranslationSpec *  translationMethod,
-  Str31                        extensionName);
+  Str31                        extensionName)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -359,7 +369,7 @@ typedef STACK_UPP_TYPE(GetScrapDataProcPtr)                     GetScrapDataUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern GetScrapDataUPP
-NewGetScrapDataUPP(GetScrapDataProcPtr userRoutine);
+NewGetScrapDataUPP(GetScrapDataProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeGetScrapDataUPP()
@@ -370,7 +380,7 @@ NewGetScrapDataUPP(GetScrapDataProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeGetScrapDataUPP(GetScrapDataUPP userUPP);
+DisposeGetScrapDataUPP(GetScrapDataUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeGetScrapDataUPP()
@@ -385,7 +395,7 @@ InvokeGetScrapDataUPP(
   ScrapType        requestedFormat,
   Handle           dataH,
   void *           srcDataGetterRefCon,
-  GetScrapDataUPP  userUPP);
+  GetScrapDataUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 typedef GetScrapDataUPP                 GetScrapData;
 /*****************************************************************************************
@@ -408,6 +418,9 @@ typedef GetScrapDataUPP                 GetScrapData;
 /*
  *  TranslateScrap()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -419,19 +432,13 @@ TranslateScrap(
   void *            sourceDataGetterRefCon,
   ScrapType         destinationFormat,
   Handle            destinationData,
-  short             progressDialogID);
+  short             progressDialogID)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

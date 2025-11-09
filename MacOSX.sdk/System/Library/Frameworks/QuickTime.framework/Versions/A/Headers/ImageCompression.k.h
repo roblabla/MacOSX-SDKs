@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Image Compression Interfaces.
  
-     Version:    QuickTime-142~1
+     Version:    QuickTime_6
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,12 +17,16 @@
 #define __IMAGECOMPRESSION_K__
 
 #include <QuickTime/ImageCompression.h>
+#ifndef __QTUUID__
+#define __QTUUID__ 1
+#endif  /* !defined(__QTUUID__) */
+
 /*
 	Example usage:
 
 		#define GRAPHICSIMPORT_BASENAME()	Fred
 		#define GRAPHICSIMPORT_GLOBALS()	FredGlobalsHandle
-		#include <ImageCompression.k.h>
+		#include <QuickTime/ImageCompression.k.h>
 
 	To specify that your component implementation does not use globals, do not #define GRAPHICSIMPORT_GLOBALS
 */
@@ -155,6 +159,43 @@
 
 	EXTERN_API( ComponentResult  ) ADD_GRAPHICSIMPORT_BASENAME(GetBaseDataOffsetAndSize64) (GRAPHICSIMPORT_GLOBALS() ADD_GRAPHICSIMPORT_COMMA wide * offset, wide * size);
 
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSIMPORT_BASENAME(SetImageIndexToThumbnail) (GRAPHICSIMPORT_GLOBALS());
+
+#if TARGET_API_MAC_OSX
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSIMPORT_BASENAME(CreateCGImage) (GRAPHICSIMPORT_GLOBALS() ADD_GRAPHICSIMPORT_COMMA CGImageRef * imageRefOut, UInt32  flags);
+
+#endif  /* TARGET_API_MAC_OSX */
+
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSIMPORT_BASENAME(SaveAsPictureToDataRef) (GRAPHICSIMPORT_GLOBALS() ADD_GRAPHICSIMPORT_COMMA Handle  dataRef, OSType  dataRefType);
+
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSIMPORT_BASENAME(SaveAsQuickTimeImageFileToDataRef) (GRAPHICSIMPORT_GLOBALS() ADD_GRAPHICSIMPORT_COMMA Handle  dataRef, OSType  dataRefType);
+
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSIMPORT_BASENAME(ExportImageFileToDataRef) (GRAPHICSIMPORT_GLOBALS() ADD_GRAPHICSIMPORT_COMMA OSType  fileType, OSType  fileCreator, Handle  dataRef, OSType  dataRefType);
+
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSIMPORT_BASENAME(DoExportImageFileToDataRefDialog) (GRAPHICSIMPORT_GLOBALS() ADD_GRAPHICSIMPORT_COMMA Handle  inDataRef, OSType  inDataRefType, CFStringRef  prompt, ModalFilterYDUPP  filterProc, OSType * outExportedType, Handle * outDataRef, OSType * outDataRefType);
+
+#if TARGET_API_MAC_OSX
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSIMPORT_BASENAME(SetOverrideSourceColorSyncProfileRef) (GRAPHICSIMPORT_GLOBALS() ADD_GRAPHICSIMPORT_COMMA CMProfileRef  newOverrideSourceProfileRef);
+
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSIMPORT_BASENAME(GetOverrideSourceColorSyncProfileRef) (GRAPHICSIMPORT_GLOBALS() ADD_GRAPHICSIMPORT_COMMA CMProfileRef * outOverrideSourceProfileRef);
+
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSIMPORT_BASENAME(SetDestinationColorSyncProfileRef) (GRAPHICSIMPORT_GLOBALS() ADD_GRAPHICSIMPORT_COMMA CMProfileRef  newDestinationProfileRef);
+
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSIMPORT_BASENAME(GetDestinationColorSyncProfileRef) (GRAPHICSIMPORT_GLOBALS() ADD_GRAPHICSIMPORT_COMMA CMProfileRef * destinationProfileRef);
+
+#endif  /* TARGET_API_MAC_OSX */
+
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSIMPORT_BASENAME(WillUseColorMatching) (GRAPHICSIMPORT_GLOBALS() ADD_GRAPHICSIMPORT_COMMA Boolean * outWillMatch);
+
+#if TARGET_API_MAC_OSX
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSIMPORT_BASENAME(GetGenericColorSyncProfile) (GRAPHICSIMPORT_GLOBALS() ADD_GRAPHICSIMPORT_COMMA OSType  pixelFormat, void * reservedSetToNULL, UInt32  flags, Handle * genericColorSyncProfileOut);
+
+#endif  /* TARGET_API_MAC_OSX */
+
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSIMPORT_BASENAME(SetReturnGenericColorSyncProfile) (GRAPHICSIMPORT_GLOBALS() ADD_GRAPHICSIMPORT_COMMA Boolean  returnGenericProfilesUnlessDontMatchFlagSet);
+
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSIMPORT_BASENAME(GetReturnGenericColorSyncProfile) (GRAPHICSIMPORT_GLOBALS() ADD_GRAPHICSIMPORT_COMMA Boolean * returnGenericProfilesUnlessDontMatchFlagSet);
+
 
 	/* MixedMode ProcInfo constants for component calls */
 	enum {
@@ -216,7 +257,21 @@
 		uppGraphicsImportGetDestRectProcInfo = 0x000003F0,
 		uppGraphicsImportSetFlagsProcInfo = 0x000003F0,
 		uppGraphicsImportGetFlagsProcInfo = 0x000003F0,
-		uppGraphicsImportGetBaseDataOffsetAndSize64ProcInfo = 0x00000FF0
+		uppGraphicsImportGetBaseDataOffsetAndSize64ProcInfo = 0x00000FF0,
+		uppGraphicsImportSetImageIndexToThumbnailProcInfo = 0x000000F0,
+		uppGraphicsImportCreateCGImageProcInfo = 0x00000FF0,
+		uppGraphicsImportSaveAsPictureToDataRefProcInfo = 0x00000FF0,
+		uppGraphicsImportSaveAsQuickTimeImageFileToDataRefProcInfo = 0x00000FF0,
+		uppGraphicsImportExportImageFileToDataRefProcInfo = 0x0000FFF0,
+		uppGraphicsImportDoExportImageFileToDataRefDialogProcInfo = 0x003FFFF0,
+		uppGraphicsImportSetOverrideSourceColorSyncProfileRefProcInfo = 0x000003F0,
+		uppGraphicsImportGetOverrideSourceColorSyncProfileRefProcInfo = 0x000003F0,
+		uppGraphicsImportSetDestinationColorSyncProfileRefProcInfo = 0x000003F0,
+		uppGraphicsImportGetDestinationColorSyncProfileRefProcInfo = 0x000003F0,
+		uppGraphicsImportWillUseColorMatchingProcInfo = 0x000003F0,
+		uppGraphicsImportGetGenericColorSyncProfileProcInfo = 0x0000FFF0,
+		uppGraphicsImportSetReturnGenericColorSyncProfileProcInfo = 0x000001F0,
+		uppGraphicsImportGetReturnGenericColorSyncProfileProcInfo = 0x000003F0
 	};
 
 #endif	/* GRAPHICSIMPORT_BASENAME */
@@ -226,7 +281,7 @@
 
 		#define GRAPHICSEXPORT_BASENAME()	Fred
 		#define GRAPHICSEXPORT_GLOBALS()	FredGlobalsHandle
-		#include <ImageCompression.k.h>
+		#include <QuickTime/ImageCompression.k.h>
 
 	To specify that your component implementation does not use globals, do not #define GRAPHICSEXPORT_GLOBALS
 */
@@ -393,6 +448,21 @@
 
 	EXTERN_API( ComponentResult  ) ADD_GRAPHICSEXPORT_BASENAME(GetExifEnabled) (GRAPHICSEXPORT_GLOBALS() ADD_GRAPHICSEXPORT_COMMA Boolean * exifEnabled);
 
+#if TARGET_API_MAC_OSX
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSEXPORT_BASENAME(SetInputCGImage) (GRAPHICSEXPORT_GLOBALS() ADD_GRAPHICSEXPORT_COMMA CGImageRef  imageRef);
+
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSEXPORT_BASENAME(GetInputCGImage) (GRAPHICSEXPORT_GLOBALS() ADD_GRAPHICSEXPORT_COMMA CGImageRef * imageRefOut);
+
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSEXPORT_BASENAME(SetInputCGBitmapContext) (GRAPHICSEXPORT_GLOBALS() ADD_GRAPHICSEXPORT_COMMA CGContextRef  bitmapContextRef);
+
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSEXPORT_BASENAME(GetInputCGBitmapContext) (GRAPHICSEXPORT_GLOBALS() ADD_GRAPHICSEXPORT_COMMA CGContextRef * bitmapContextRefOut);
+
+#endif  /* TARGET_API_MAC_OSX */
+
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSEXPORT_BASENAME(SetFlags) (GRAPHICSEXPORT_GLOBALS() ADD_GRAPHICSEXPORT_COMMA UInt32  flags);
+
+	EXTERN_API( ComponentResult  ) ADD_GRAPHICSEXPORT_BASENAME(GetFlags) (GRAPHICSEXPORT_GLOBALS() ADD_GRAPHICSEXPORT_COMMA UInt32 * flagsOut);
+
 
 	/* MixedMode ProcInfo constants for component calls */
 	enum {
@@ -471,7 +541,13 @@
 		uppGraphicsExportSetThumbnailEnabledProcInfo = 0x00003DF0,
 		uppGraphicsExportGetThumbnailEnabledProcInfo = 0x00003FF0,
 		uppGraphicsExportSetExifEnabledProcInfo = 0x000001F0,
-		uppGraphicsExportGetExifEnabledProcInfo = 0x000003F0
+		uppGraphicsExportGetExifEnabledProcInfo = 0x000003F0,
+		uppGraphicsExportSetInputCGImageProcInfo = 0x000003F0,
+		uppGraphicsExportGetInputCGImageProcInfo = 0x000003F0,
+		uppGraphicsExportSetInputCGBitmapContextProcInfo = 0x000003F0,
+		uppGraphicsExportGetInputCGBitmapContextProcInfo = 0x000003F0,
+		uppGraphicsExportSetFlagsProcInfo = 0x000003F0,
+		uppGraphicsExportGetFlagsProcInfo = 0x000003F0
 	};
 
 #endif	/* GRAPHICSEXPORT_BASENAME */
@@ -481,7 +557,7 @@
 
 		#define IMAGETRANSCODER_BASENAME()	Fred
 		#define IMAGETRANSCODER_GLOBALS()	FredGlobalsHandle
-		#include <ImageCompression.k.h>
+		#include <QuickTime/ImageCompression.k.h>
 
 	To specify that your component implementation does not use globals, do not #define IMAGETRANSCODER_GLOBALS
 */
@@ -515,6 +591,49 @@
 
 #endif	/* IMAGETRANSCODER_BASENAME */
 
+/*
+	Example usage:
+
+		#define QT_BASENAME()	Fred
+		#define QT_GLOBALS()	FredGlobalsHandle
+		#include <QuickTime/ImageCompression.k.h>
+
+	To specify that your component implementation does not use globals, do not #define QT_GLOBALS
+*/
+#ifdef QT_BASENAME
+	#ifndef QT_GLOBALS
+		#define QT_GLOBALS() 
+		#define ADD_QT_COMMA 
+	#else
+		#define ADD_QT_COMMA ,
+	#endif
+	#define QT_GLUE(a,b) a##b
+	#define QT_STRCAT(a,b) QT_GLUE(a,b)
+	#define ADD_QT_BASENAME(name) QT_STRCAT(QT_BASENAME(),name)
+
+	EXTERN_API( ComponentResult  ) ADD_QT_BASENAME(GetComponentPropertyInfo) (QT_GLOBALS() ADD_QT_COMMA ComponentPropertyClass  inPropClass, ComponentPropertyID  inPropID, ComponentValueType * outPropType, ByteCount * outPropValueSize, UInt32 * outPropertyFlags);
+
+	EXTERN_API( ComponentResult  ) ADD_QT_BASENAME(GetComponentProperty) (QT_GLOBALS() ADD_QT_COMMA ComponentPropertyClass  inPropClass, ComponentPropertyID  inPropID, ByteCount  inPropValueSize, ComponentValuePtr  outPropValueAddress, ByteCount * outPropValueSizeUsed);
+
+	EXTERN_API( ComponentResult  ) ADD_QT_BASENAME(SetComponentProperty) (QT_GLOBALS() ADD_QT_COMMA ComponentPropertyClass  inPropClass, ComponentPropertyID  inPropID, ByteCount  inPropValueSize, ConstComponentValuePtr  inPropValueAddress);
+
+	EXTERN_API( ComponentResult  ) ADD_QT_BASENAME(AddComponentPropertyListener) (QT_GLOBALS() ADD_QT_COMMA ComponentPropertyClass  inPropClass, ComponentPropertyID  inPropID, QTComponentPropertyListenerUPP  inDispatchProc, void * inUserData);
+
+	EXTERN_API( ComponentResult  ) ADD_QT_BASENAME(RemoveComponentPropertyListener) (QT_GLOBALS() ADD_QT_COMMA ComponentPropertyClass  inPropClass, ComponentPropertyID  inPropID, QTComponentPropertyListenerUPP  inDispatchProc, void * inUserData);
+
+
+	/* MixedMode ProcInfo constants for component calls */
+	enum {
+		uppQTGetComponentPropertyInfoProcInfo = 0x0003FFF0,
+		uppQTGetComponentPropertyProcInfo = 0x0003FFF0,
+		uppQTSetComponentPropertyProcInfo = 0x0000FFF0,
+		uppQTAddComponentPropertyListenerProcInfo = 0x0000FFF0,
+		uppQTRemoveComponentPropertyListenerProcInfo = 0x0000FFF0
+	};
+
+#endif	/* QT_BASENAME */
+
+#define kQTComponentPropertyListenerCollectionContextVersion 1
 
 #endif /* __IMAGECOMPRESSION_K__ */
 

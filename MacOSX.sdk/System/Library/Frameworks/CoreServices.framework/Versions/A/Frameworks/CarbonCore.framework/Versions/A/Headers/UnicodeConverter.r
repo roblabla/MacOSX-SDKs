@@ -3,9 +3,9 @@
  
      Contains:   Types, constants, and prototypes for Unicode Converter
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1994-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -32,6 +32,7 @@
 #define kUnicodeForceASCIIRangeBit 		9
 #define kUnicodeNoHalfwidthCharsBit 	10
 #define kUnicodeTextRunHeuristicsBit 	11
+#define kUnicodeMapLineFeedToReturnBit 	12
 
 #define kUnicodeUseFallbacksMask 		0x00000001
 #define kUnicodeKeepInfoMask 			0x00000002
@@ -44,6 +45,7 @@
 #define kUnicodeForceASCIIRangeMask 	0x00000200
 #define kUnicodeNoHalfwidthCharsMask 	0x00000400
 #define kUnicodeTextRunHeuristicsMask 	0x00000800
+#define kUnicodeMapLineFeedToReturnMask  0x00001000
 
 #define kUnicodeDefaultDirection 		0
 #define kUnicodeLeftToRight 			1

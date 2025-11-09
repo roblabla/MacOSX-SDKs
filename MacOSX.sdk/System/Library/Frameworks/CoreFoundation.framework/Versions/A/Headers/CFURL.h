@@ -1,5 +1,5 @@
 /*	CFURL.h
-	Copyright 1998-2001, Apple, Inc. All rights reserved.
+	Copyright 1998-2002, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFURL__)
@@ -8,13 +8,6 @@
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFData.h>
 #include <CoreFoundation/CFString.h>
-#if !defined(DARWIN)
-    #if defined(__CF_USE_FRAMEWORK_INCLUDES__) || (defined(__MACH__) && !defined(__MWERKS__))
-	#include <CoreServices/../Frameworks/CarbonCore.framework/Headers/Files.h>
-    #else
-	#include <Files.h>
-    #endif /* __MACH__ */
-#endif /* !DARWIN */
 
 #if defined(__cplusplus)
 extern "C" {
@@ -279,11 +272,14 @@ CF_EXPORT
 CFStringRef CFURLCreateStringByAddingPercentEscapes(CFAllocatorRef allocator, CFStringRef originalString, CFStringRef charactersToLeaveUnescaped, CFStringRef legalURLCharactersToBeEscaped, CFStringEncoding encoding);
 
 #if !defined(DARWIN)
-CF_EXPORT
-CFURLRef CFURLCreateFromFSRef(CFAllocatorRef allocator, const FSRef *fsRef);
+
+struct FSRef;
 
 CF_EXPORT
-Boolean CFURLGetFSRef(CFURLRef url, FSRef *fsRef);
+CFURLRef CFURLCreateFromFSRef(CFAllocatorRef allocator, const struct FSRef *fsRef);
+
+CF_EXPORT
+Boolean CFURLGetFSRef(CFURLRef url, struct FSRef *fsRef);
 #endif /* !DARWIN */
 
 #if defined(__cplusplus)

@@ -1,5 +1,5 @@
 /*	NSJavaSetup.h
-	Copyright 1997-2001, Apple, Inc. All rights reserved.
+	Copyright 1997-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -25,10 +25,6 @@ FOUNDATION_EXPORT NSString * const NSJavaDidSetupVirtualMachineNotification;
 FOUNDATION_EXPORT NSString * const NSJavaWillCreateVirtualMachineNotification;
 FOUNDATION_EXPORT NSString * const NSJavaDidCreateVirtualMachineNotification;
 
-#ifdef __cplusplus
-extern "Objective-C" {
-#endif
-
 FOUNDATION_EXPORT id NSJavaSetup(NSDictionary *plist);  // Setup if needed.
 FOUNDATION_EXPORT id NSJavaSetupVirtualMachine(void);	// Setup in any case.
 
@@ -41,8 +37,4 @@ FOUNDATION_EXPORT NSArray *NSJavaClassesForBundle(NSBundle *bundle, BOOL usesysc
 
 FOUNDATION_EXPORT id NSJavaBundleSetup(NSBundle *bundle, NSDictionary *plist);
 FOUNDATION_EXPORT void NSJavaBundleCleanup(NSBundle *bundle, NSDictionary *plist);
-
-#ifdef __cplusplus
-}
-#endif
 

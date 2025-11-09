@@ -11,6 +11,7 @@ typedef struct CGImage *CGImageRef;
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGColorSpace.h>
 #include <CoreGraphics/CGDataProvider.h>
+#include <CoreFoundation/CFBase.h>
 
 CG_EXTERN_C_BEGIN
 
@@ -25,31 +26,37 @@ enum CGImageAlphaInfo {
 };
 typedef enum CGImageAlphaInfo CGImageAlphaInfo;
 
+/* Return the CFTypeID for CGImageRefs. */
+
+CG_EXTERN CFTypeID CGImageGetTypeID(void);
+
 /* Create an image. */
 
-CG_EXTERN CGImageRef CGImageCreate(size_t width, size_t height, size_t bitsPerComponent, size_t bitsPerPixel, size_t bytesPerRow, CGColorSpaceRef colorspace, CGImageAlphaInfo alphaInfo, CGDataProviderRef provider, const float decode[], int shouldInterpolate, CGColorRenderingIntent intent);
+CG_EXTERN CGImageRef CGImageCreate(size_t width, size_t height, size_t bitsPerComponent, size_t bitsPerPixel, size_t bytesPerRow, CGColorSpaceRef colorspace, CGImageAlphaInfo alphaInfo, CGDataProviderRef provider, const float decode[], bool shouldInterpolate, CGColorRenderingIntent intent);
 
 /* Create an image mask. */
 
-CG_EXTERN CGImageRef CGImageMaskCreate(size_t width, size_t height, size_t bitsPerComponent, size_t bitsPerPixel, size_t bytesPerRow, CGDataProviderRef provider, const float decode[], int shouldInterpolate);
+CG_EXTERN CGImageRef CGImageMaskCreate(size_t width, size_t height, size_t bitsPerComponent, size_t bitsPerPixel, size_t bytesPerRow, CGDataProviderRef provider, const float decode[], bool shouldInterpolate);
 
 /* Create an image from `source', a data provider of JPEG-encoded data. */
 
-CG_EXTERN CGImageRef CGImageCreateWithJPEGDataProvider(CGDataProviderRef source, const float decode[], int shouldInterpolate, CGColorRenderingIntent intent);
+CG_EXTERN CGImageRef CGImageCreateWithJPEGDataProvider(CGDataProviderRef source, const float decode[], bool shouldInterpolate, CGColorRenderingIntent intent);
 
-/* Increment the retain count of `image' and return it.  All images are
- * created with an initial retain count of 1. */
+/* Create an image using `source', a data provider for PNG-encoded data. */
+
+CG_EXTERN CGImageRef CGImageCreateWithPNGDataProvider(CGDataProviderRef source, const float decode[], bool shouldInterpolate, CGColorRenderingIntent intent);
+
+/* Equivalent to `CFRetain(image)'. */
 
 CG_EXTERN CGImageRef CGImageRetain(CGImageRef image);
 
-/* Decrement the retain count of `image'.  If the retain count reaches 0,
- * then release it and any associated resources. */
+/* Equivalent to `CFRelease(image)'. */
 
 CG_EXTERN void CGImageRelease(CGImageRef image);
 
-/* Return 1 if `image' is an image mask, 0 otherwise. */
+/* Return true if `image' is an image mask, false otherwise. */
 
-CG_EXTERN int CGImageIsMask(CGImageRef image);
+CG_EXTERN bool CGImageIsMask(CGImageRef image);
 
 /* Return the width of `image'. */
 
@@ -90,7 +97,7 @@ CG_EXTERN const float *CGImageGetDecode(CGImageRef image);
 
 /* Return the interpolation parameter of `image'. */
 
-CG_EXTERN int CGImageGetShouldInterpolate(CGImageRef image);
+CG_EXTERN bool CGImageGetShouldInterpolate(CGImageRef image);
 
 /* Return the rendering intent of `image'. */
 

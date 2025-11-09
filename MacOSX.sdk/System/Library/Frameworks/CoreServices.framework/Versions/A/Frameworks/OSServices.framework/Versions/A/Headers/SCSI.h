@@ -3,9 +3,9 @@
  
      Contains:   SCSI Family Interfaces.
  
-     Version:    OSServices-24~82
+     Version:    OSServices-39.2~411
  
-     Copyright:  © 1986-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1986-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -35,13 +36,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* TIB opcodes */
 enum {
@@ -212,7 +207,7 @@ typedef STACK_UPP_TYPE(SCSICallbackProcPtr)                     SCSICallbackUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SCSICallbackUPP
-NewSCSICallbackUPP(SCSICallbackProcPtr userRoutine);
+NewSCSICallbackUPP(SCSICallbackProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeSCSICallbackUPP()
@@ -223,7 +218,7 @@ NewSCSICallbackUPP(SCSICallbackProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSCSICallbackUPP(SCSICallbackUPP userUPP);
+DisposeSCSICallbackUPP(SCSICallbackUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeSCSICallbackUPP()
@@ -236,7 +231,7 @@ DisposeSCSICallbackUPP(SCSICallbackUPP userUPP);
 extern void
 InvokeSCSICallbackUPP(
   void *           scsiPB,
-  SCSICallbackUPP  userUPP);
+  SCSICallbackUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -938,9 +933,13 @@ enum {
 };
 
 
-/* moveq #kSCSIx, D0;  _SCSIAtomic */
 /*
  *  SCSIAction()
+ *  
+ *  Discussion:
+ *    This routine is deprecated. It is exported and callable, but it
+ *    is no longer being maintained. Please use SCSITaskUserClient
+ *    instead.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -948,7 +947,7 @@ enum {
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
-SCSIAction(SCSI_PB * parameterBlock);
+SCSIAction(SCSI_PB * parameterBlock)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -994,13 +993,7 @@ SCSIAction(SCSI_PB * parameterBlock);
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

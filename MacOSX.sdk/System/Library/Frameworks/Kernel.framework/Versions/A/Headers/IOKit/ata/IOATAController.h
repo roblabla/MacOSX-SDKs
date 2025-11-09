@@ -24,6 +24,19 @@
  * Revision History
  *
  * $Log: IOATAController.h,v $
+ * Revision 1.11  2002/11/09 03:46:39  barras
+ *
+ * Bug #: 3083512, 3090979
+ *
+ * Submitted by:
+ * Reviewed by:
+ *
+ * Revision 1.10  2002/08/28 01:14:33  barras
+ *
+ * Bug #: 2876109
+ * Submitted by:
+ * Reviewed by:
+ *
  * Revision 1.9  2002/02/18 23:20:18  barras
  *
  * Fixing a i386 build failure due to a type mismatch in an extend lba call.
@@ -314,6 +327,9 @@ protected:
 	// for 48 bit register reading and writing 
 	UInt16 readExtRegister( IOATARegPtr8 inRegister );
 	void writeExtRegister( IOATARegPtr8 inRegister, UInt16 inValue );
+
+	// overrides
+	virtual void free();
 	
 private:
 

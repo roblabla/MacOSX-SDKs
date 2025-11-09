@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -69,6 +69,7 @@
 #define kSCCompNetwork                           SCSTR("Network")                        
 #define kSCCompService                           SCSTR("Service")                        
 #define kSCCompGlobal                            SCSTR("Global")                         
+#define kSCCompHostNames                         SCSTR("HostNames")                      
 #define kSCCompInterface                         SCSTR("Interface")                      
 #define kSCCompSystem                            SCSTR("System")                         
 #define kSCCompUsers                             SCSTR("Users")                          
@@ -100,16 +101,35 @@
 /*
  * kSCCompNetwork Properties
  */
+#define kSCPropNetOverridePrimary                SCSTR("OverridePrimary")                 /* CFNumber (0 or 1) */
 #define kSCPropNetServiceOrder                   SCSTR("ServiceOrder")                    /* CFArray[CFString] */
 #define kSCPropNetPPPOverridePrimary             SCSTR("PPPOverridePrimary")              /* CFNumber (0 or 1) */
 
 /*
+ * kSCCompNetworkInterface Properties
+ */
+#define kSCPropNetInterfaces                     SCSTR("Interfaces")                      /* CFArray[CFString] */
+
+/*
+ * kSCCompNetworkHostNames Properties
+ */
+#define kSCPropNetLocalHostName                  SCSTR("LocalHostName")                   /* CFString */
+
+/*
  * kSCEntNetAirPort (Hardware) Entity Keys
  */
-#define kSCPropNetAirPortPowerEnabled            SCSTR("PowerEnabled")                    /* CFNumber (0 or 1) */
-#define kSCPropNetAirPortAuthPassword            SCSTR("AuthPassword")                    /* CFString */
+#define kSCPropNetAirPortAllowNetCreation        SCSTR("AllowNetCreation")                /* CFNumber (0 or 1) */
+#define kSCPropNetAirPortAuthPassword            SCSTR("AuthPassword")                    /* CFData */
 #define kSCPropNetAirPortAuthPasswordEncryption  SCSTR("AuthPasswordEncryption")          /* CFString */
+#define kSCPropNetAirPortJoinMode                SCSTR("JoinMode")                        /* CFString */
+#define kSCPropNetAirPortPowerEnabled            SCSTR("PowerEnabled")                    /* CFNumber (0 or 1) */
 #define kSCPropNetAirPortPreferredNetwork        SCSTR("PreferredNetwork")                /* CFString */
+#define kSCPropNetAirPortSavePasswords           SCSTR("SavePasswords")                   /* CFNumber (0 or 1) */
+
+/* kSCPropNetAirPortJoinMode values */
+#define kSCValNetAirPortJoinModePreferred        SCSTR("Preferred")                      
+#define kSCValNetAirPortJoinModeRecent           SCSTR("Recent")                         
+#define kSCValNetAirPortJoinModeStrongest        SCSTR("Strongest")                      
 
 /*
  * kSCEntNetAppleTalk Entity Keys
@@ -119,6 +139,7 @@
 #define kSCPropNetAppleTalkConfigMethod          SCSTR("ConfigMethod")                    /* CFString */
 #define kSCPropNetAppleTalkDefaultZone           SCSTR("DefaultZone")                     /* CFString */
 #define kSCPropNetAppleTalkNetworkID             SCSTR("NetworkID")                       /* CFNumber */
+#define kSCPropNetAppleTalkNetworkRange          SCSTR("NetworkRange")                    /* CFArray[CFNumber] */
 #define kSCPropNetAppleTalkNodeID                SCSTR("NodeID")                          /* CFNumber */
 #define kSCPropNetAppleTalkSeedNetworkRange      SCSTR("SeedNetworkRange")                /* CFArray[CFNumber] */
 #define kSCPropNetAppleTalkSeedZones             SCSTR("SeedZones")                       /* CFArray[CFString] */
@@ -139,6 +160,9 @@
 /*
  * kSCEntNetEthernet (Hardware) Entity Keys
  */
+#define kSCPropNetEthernetMediaSubType           SCSTR("MediaSubType")                    /* CFString */
+#define kSCPropNetEthernetMediaOptions           SCSTR("MediaOptions")                    /* CFArray[CFString] */
+#define kSCPropNetEthernetMTU                    SCSTR("MTU")                             /* CFNumber */
 
 /*
  * kSCEntNetInterface Entity Keys
@@ -147,6 +171,7 @@
 #define kSCPropNetInterfaceHardware              SCSTR("Hardware")                        /* CFString */
 #define kSCPropNetInterfaceType                  SCSTR("Type")                            /* CFString */
 #define kSCPropNetInterfaceSubType               SCSTR("SubType")                         /* CFString */
+#define kSCPropNetInterfaceSupportsModemOnHold   SCSTR("SupportsModemOnHold")             /* CFNumber (0 or 1) */
 
 /* kSCPropNetInterfaceType values */
 #define kSCValNetInterfaceTypeEthernet           SCSTR("Ethernet")                       
@@ -155,6 +180,7 @@
 /* kSCPropNetServiceSubType values (for PPP) */
 #define kSCValNetInterfaceSubTypePPPoE           SCSTR("PPPoE")                          
 #define kSCValNetInterfaceSubTypePPPSerial       SCSTR("PPPSerial")                      
+#define kSCValNetInterfaceSubTypePPTP            SCSTR("PPTP")                           
 
 /*
  * kSCEntNetIPv4 Entity Keys
@@ -171,6 +197,7 @@
 #define kSCValNetIPv4ConfigMethodBOOTP           SCSTR("BOOTP")                          
 #define kSCValNetIPv4ConfigMethodDHCP            SCSTR("DHCP")                           
 #define kSCValNetIPv4ConfigMethodINFORM          SCSTR("INFORM")                         
+#define kSCValNetIPv4ConfigMethodLinkLocal       SCSTR("LinkLocal")                      
 #define kSCValNetIPv4ConfigMethodManual          SCSTR("Manual")                         
 #define kSCValNetIPv4ConfigMethodPPP             SCSTR("PPP")                            
 
@@ -184,14 +211,22 @@
  * kSCEntNetLink Entity Keys
  */
 #define kSCPropNetLinkActive                     SCSTR("Active")                          /* CFBoolean */
+#define kSCPropNetLinkDetaching                  SCSTR("Detaching")                       /* CFBoolean */
 
 /*
  * kSCEntNetModem (Hardware) Entity Keys
  */
 #define kSCPropNetModemConnectionScript          SCSTR("ConnectionScript")                /* CFString */
+#define kSCPropNetModemConnectSpeed              SCSTR("ConnectSpeed")                    /* CFNumber */
 #define kSCPropNetModemDataCompression           SCSTR("DataCompression")                 /* CFNumber (0 or 1) */
 #define kSCPropNetModemDialMode                  SCSTR("DialMode")                        /* CFString */
 #define kSCPropNetModemErrorCorrection           SCSTR("ErrorCorrection")                 /* CFNumber (0 or 1) */
+#define kSCPropNetModemHoldCallWaitingAudibleAlert SCSTR("HoldCallWaitingAudibleAlert")     /* CFNumber (0 or 1) */
+#define kSCPropNetModemHoldDisconnectOnAnswer    SCSTR("HoldDisconnectOnAnswer")          /* CFNumber (0 or 1) */
+#define kSCPropNetModemHoldEnabled               SCSTR("HoldEnabled")                     /* CFNumber (0 or 1) */
+#define kSCPropNetModemHoldReminder              SCSTR("HoldReminder")                    /* CFNumber (0 or 1) */
+#define kSCPropNetModemHoldReminderTime          SCSTR("HoldReminderTime")                /* CFNumber */
+#define kSCPropNetModemNote                      SCSTR("Note")                            /* CFString */
 #define kSCPropNetModemPulseDial                 SCSTR("PulseDial")                       /* CFNumber (0 or 1) */
 #define kSCPropNetModemSpeaker                   SCSTR("Speaker")                         /* CFNumber (0 or 1) */
 #define kSCPropNetModemSpeed                     SCSTR("Speed")                           /* CFNumber */
@@ -225,14 +260,21 @@
 /*
  * kSCEntNetPPP Entity Keys
  */
+#define kSCPropNetPPPConnectTime                 SCSTR("ConnectTime")                     /* CFNumber */
+#define kSCPropNetPPPDeviceLastCause             SCSTR("DeviceLastCause")                 /* CFNumber */
 #define kSCPropNetPPPDialOnDemand                SCSTR("DialOnDemand")                    /* CFNumber (0 or 1) */
 #define kSCPropNetPPPDisconnectOnIdle            SCSTR("DisconnectOnIdle")                /* CFNumber (0 or 1) */
 #define kSCPropNetPPPDisconnectOnIdleTimer       SCSTR("DisconnectOnIdleTimer")           /* CFNumber */
 #define kSCPropNetPPPDisconnectOnLogout          SCSTR("DisconnectOnLogout")              /* CFNumber (0 or 1) */
+#define kSCPropNetPPPDisconnectOnSleep           SCSTR("DisconnectOnSleep")               /* CFNumber (0 or 1) */
 #define kSCPropNetPPPIdleReminderTimer           SCSTR("IdleReminderTimer")               /* CFNumber */
 #define kSCPropNetPPPIdleReminder                SCSTR("IdleReminder")                    /* CFNumber (0 or 1) */
+#define kSCPropNetPPPLastCause                   SCSTR("LastCause")                       /* CFNumber */
 #define kSCPropNetPPPLogfile                     SCSTR("Logfile")                         /* CFString */
+#define kSCPropNetPPPPlugins                     SCSTR("Plugins")                         /* CFArray[CFString] */
 #define kSCPropNetPPPSessionTimer                SCSTR("SessionTimer")                    /* CFNumber */
+#define kSCPropNetPPPStatus                      SCSTR("Status")                          /* CFString */
+#define kSCPropNetPPPUseSessionTimer             SCSTR("UseSessionTimer")                 /* CFNumber (0 or 1) */
 #define kSCPropNetPPPVerboseLogging              SCSTR("VerboseLogging")                  /* CFNumber (0 or 1) */
 
 /* Auth: */
@@ -254,6 +296,10 @@
 #define kSCPropNetPPPCommRedialInterval          SCSTR("CommRedialInterval")              /* CFNumber */
 #define kSCPropNetPPPCommRemoteAddress           SCSTR("CommRemoteAddress")               /* CFString */
 #define kSCPropNetPPPCommTerminalScript          SCSTR("CommTerminalScript")              /* CFString */
+#define kSCPropNetPPPCommUseTerminalScript       SCSTR("CommUseTerminalScript")           /* CFNumber (0 or 1) */
+
+/* CCP: */
+#define kSCPropNetPPPCCPEnabled                  SCSTR("CCPEnabled")                      /* CFNumber (0 or 1) */
 
 /* IPCP: */
 #define kSCPropNetPPPIPCPCompressionVJ           SCSTR("IPCPCompressionVJ")               /* CFNumber (0 or 1) */

@@ -1,20 +1,23 @@
 /*
- * Copyright (c) 1998-2001 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.2 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * Copyright (c) 1999-2003 Apple Computer, Inc.  All Rights Reserved.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.  
- * Please see the License for the specific language governing rights and 
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
  * limitations under the License.
  * 
  * @APPLE_LICENSE_HEADER_END@
@@ -22,6 +25,12 @@
 #ifndef _IOKIT_IOUSBCONTROLLER_H
 #define _IOKIT_IOUSBCONTROLLER_H
 
+//================================================================================================
+//
+//   Headers
+//
+//================================================================================================
+//
 #include <libkern/c++/OSArray.h>
 
 #include <IOKit/IOService.h>
@@ -38,35 +47,46 @@
 #include <IOKit/usb/IOUSBCommand.h>
 #include <IOKit/usb/IOUSBWorkLoop.h>
 
-/*
- * Errata
- * These indicate the anomolies of the various chips sets.  Test
- * for these in errataBits.
- */
-enum {
-    // turn off UHCI test mode
-    kErrataCMDDisableTestMode		= (1 << 0),
-    // Don't cross page boundaries in a single transfer
-    kErrataOnlySinglePageTransfers	= (1 << 1),
-    // UIM will retry out transfers with buffer underrun errors
-    kErrataRetryBufferUnderruns		= (1 << 2),
-    // UIM will insert delay buffer between HS and LS transfers
-    kErrataLSHSOpti			= (1 << 3),
-    // Always set the NOCP bit in rhDescriptorA register
-    kErrataDisableOvercurrent		= (1 << 4),
-    // Don't allow port suspend at the root hub
-    kErrataLucentSuspendResume		= (1 << 5)
-};
-/* errataBits */
 
-/*
-    This table contains the list of errata that are necessary for known problems with particular devices.
+//================================================================================================
+//
+//   Types and Constants
+//
+//================================================================================================
+//
+enum
+{
+    kErrataCMDDisableTestMode		= (1 << 0),		// turn off UHCI test mode
+    kErrataOnlySinglePageTransfers	= (1 << 1),		// Don't cross page boundaries in a single transfer
+    kErrataRetryBufferUnderruns		= (1 << 2),		// Don't cross page boundaries in a single transfer
+    kErrataLSHSOpti			= (1 << 3),		// Don't cross page boundaries in a single transfer
+    kErrataDisableOvercurrent		= (1 << 4),		// Always set the NOCP bit in rhDescriptorA register
+    kErrataLucentSuspendResume		= (1 << 5),		// Don't allow port suspend at the root hub
+    kErrataNeedsWatchdogTimer		= (1 << 6),		// Use Watchdog timer to reset confused controllers
+    kErrataNeedsPortPowerOff		= (1 << 7)		// Power off the ports and back on again to clear weird status.
+};
+
+enum
+{
+    kUSBWatchdogTimeoutMS = 1000
+};
+
+
+/*!
+    @struct
+    @discussion This table contains the list of errata that are necessary for known problems with particular devices.
     The format is vendorID, product ID, lowest revisionID needing errata, highest rev needing errata, errataBits.
     The result of all matches is ORed together, so more than one entry may match.
     Typically for a given errata a list of revisions that this applies to is supplied.
+     @field vendID      The Vendor ID of the device
+     @field deviceID    Product ID of device
+     @field revisionLo  Lowest product revsion to apply errata to
+     @field revisionHi  Highest product revision to apply errata to
+     @field errata      Bit field flagging which errata to apply to device.
 */
 
-struct ErrataListEntryStruct {
+struct ErrataListEntryStruct
+{
     UInt16 				vendID;
     UInt16 				deviceID;
     UInt16 				revisionLo;
@@ -74,32 +94,48 @@ struct ErrataListEntryStruct {
     UInt32 				errata;
 };
 
-typedef struct ErrataListEntryStruct
-                    ErrataListEntry,
-                    *ErrataListEntryPtr;
-
-void IOUSBSyncCompletion(void *target, void * parameter,
-                                  IOReturn	status,
-                                  UInt32	bufferSizeRemaining);
-
-void  IOUSBSyncIsoCompletion(void *target, void * parameter,
-                                  IOReturn	status,
-                                  IOUSBIsocFrame *pFrames);
+typedef struct ErrataListEntryStruct  ErrataListEntry, *ErrataListEntryPtr;
 
 
-// forward definitions
+//================================================================================================
+//
+//   Routines used to implement synchronous I/O
+//
+//================================================================================================
+//
+void IOUSBSyncCompletion(void *target, void * parameter, IOReturn status, UInt32 bufferSizeRemaining);
+
+void  IOUSBSyncIsoCompletion(void *target, void * parameter, IOReturn status, IOUSBIsocFrame *pFrames);
+
+
+//================================================================================================
+//
+//   Forward Declarations
+//
+//================================================================================================
+//
 class IOUSBDevice;
 class IOUSBLog;
 class IOUSBRootHubDevice;
 class IOMemoryDescriptor;
 
+
+//================================================================================================
+//
+//   IOUSBController Class
+//
+//================================================================================================
+//
 /*!
     @class IOUSBController
     @abstract Base class for USB hardware driver
     @discussion Not many directly useful methods for USB device driver writers,
     IOUSBDevice, IOUSBInterface and IOUSBPipe provide more useful abstractions.
     The bulk of this class interfaces between IOKit and the low-level UIM, which is
-    based on the MacOS9 UIM.
+    based on the MacOS9 UIM. To impliment a new controller type, subclass
+    IOUSBController and impiment all the "UIM functions". AppleUSBOHCI
+    is an example of this implementing all the functions necessary to drive an
+    OHCI controller.
 */
 class IOUSBController : public IOUSBBus
 {
@@ -111,7 +147,8 @@ protected:
     IOCommandGate *		_commandGate;
     IOUSBRootHubDevice *	_rootHubDevice;
     UInt32			_devZeroLock;
-    static UInt32		_busNumber;
+    static UInt32		_busCount;
+    static bool			gUsedBusIDs[256];
     
     struct ExpansionData 
     {
@@ -120,14 +157,29 @@ protected:
         IOTimerEventSource	*watchdogUSBTimer;
         bool			_terminating;
         bool			_watchdogTimerActive;
+        bool			_pcCardEjected;
+        UInt32			_busNumber;
+        UInt32			_currentSizeOfCommandPool;
+        UInt32			_currentSizeOfIsocCommandPool;
+        UInt8			_controllerSpeed;	// Controller speed, passed down for splits
+        thread_call_t		_terminatePCCardThread;
+        bool			_addressPending[128];
     };
     ExpansionData *_expansionData;
-    
-#define _freeUSBCommandPool		_expansionData->freeUSBCommandPool
-#define _freeUSBIsocCommandPool		_expansionData->freeUSBIsocCommandPool
-#define _watchdogUSBTimer		_expansionData->watchdogUSBTimer
-#define _controllerTerminating		_expansionData->_terminating
-#define _watchdogTimerActive		_expansionData->_watchdogTimerActive
+
+    //
+    #define _freeUSBCommandPool			_expansionData->freeUSBCommandPool
+    #define _freeUSBIsocCommandPool		_expansionData->freeUSBIsocCommandPool
+    #define _watchdogUSBTimer			_expansionData->watchdogUSBTimer
+    #define _controllerTerminating		_expansionData->_terminating
+    #define _watchdogTimerActive		_expansionData->_watchdogTimerActive
+    #define _pcCardEjected			_expansionData->_pcCardEjected
+    #define _busNumber				_expansionData->_busNumber
+    #define _currentSizeOfCommandPool		_expansionData->_currentSizeOfCommandPool
+    #define _currentSizeOfIsocCommandPool	_expansionData->_currentSizeOfIsocCommandPool
+    #define _controllerSpeed			_expansionData->_controllerSpeed
+    #define _terminatePCCardThread		_expansionData->_terminatePCCardThread
+    #define _addressPending			_expansionData->_addressPending
 
     // The following methods do not use and upper case initial letter because they are part of IOKit
     //
@@ -144,6 +196,7 @@ protected:
                                             UInt16 deviceID, 
                                             UInt16 revisionID );    
     
+
     static IOReturn 		DoDeleteEP( 
                                             OSObject *	owner, 
                                             void *	arg0, 
@@ -192,6 +245,13 @@ protected:
                                             void *	arg2, 
                                             void *	arg3 );
                                             
+    static IOReturn 		DoLowLatencyIsocTransfer(	
+                                            OSObject *	owner, 
+                                            void *	arg0, 
+                                            void *	arg1, 
+                                            void *	arg2, 
+                                            void *	arg3 );
+                                            
     static void			ControlPacketHandler( 
                                                     OSObject *	target,
                                                     void *	parameter,
@@ -216,8 +276,16 @@ protected:
                                                     IOReturn		status,
                                                     IOUSBIsocFrame	*pFrames );
                                                     
+    static void			LowLatencyIsocCompletionHandler(
+                                                    OSObject *		target,
+                                                    void * 		parameter,
+                                                    IOReturn		status,
+                                                    IOUSBLowLatencyIsocFrame	*pFrames );
+                                                    
     static void			WatchdogTimer(OSObject *target, IOTimerEventSource *sender);
-    
+
+    static void 		TerminatePCCard(OSObject *target);
+
     static IOReturn		ProtectedDevZeroLock(OSObject *target, void* lock, void *, void *, void*);
 
     USBDeviceAddress		GetNewAddress( void );
@@ -230,12 +298,14 @@ protected:
     
     IOReturn    		IsocTransaction( IOUSBIsocCommand *  command );
     
+    IOReturn    		LowLatencyIsocTransaction( IOUSBIsocCommand *  command );
+    
     void 			FreeCommand( IOUSBCommand *  command );
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     // Invokes the specified completion action of the request.  If
     // the completion action is unspecified, no action is taken.
-    inline void 		Complete(
+    void 			Complete(
                                             IOUSBCompletion	completion,
                                             IOReturn		status,
                                             UInt32		actualByteCount = 0 );
@@ -245,16 +315,35 @@ protected:
     //
     // UIM methods
     //
+
+/*!
+    @function UIMInitialize
+    @abstract UIM function, initialise the controller and UIM data structures.
+*/
     virtual IOReturn 		UIMInitialize( IOService * provider ) = 0;
+    
+/*!
+    @function UIMFinalize
+    @abstract UIM function, finalise the controller and UIM data structures prior to removal.
+*/
     virtual IOReturn 		UIMFinalize() = 0;
 
     // Control
+/*!
+    @function UIMCreateControlEndpoint
+    @abstract UIM function, create a control endpoint for the controller.
+    @param functionNumber  The USB device ID of the device for this endpoint
+    @param endpointNumber  The endpoint number for this endpoint
+    @param maxPacketSize   Maximum packet size of this endpoint
+    @param speed           speed of the device: kUSBDeviceSpeedLow or kUSBDeviceSpeedFull 
+*/
     virtual IOReturn 		UIMCreateControlEndpoint(
                                                             UInt8	functionNumber,
                                                             UInt8	endpointNumber,
                                                             UInt16	maxPacketSize,
                                                             UInt8	speed) = 0;
 
+/* Note: this function has been superceded. */
     virtual IOReturn 		UIMCreateControlTransfer(   short		functionNumber,
                                                             short		endpointNumber,
                                                             IOUSBCompletion	completion,
@@ -263,6 +352,19 @@ protected:
                                                             UInt32		bufferSize,
                                                             short		direction) = 0;
 
+/*!
+    @function UIMCreateControlTransfer
+    @abstract UIM function, Do a transfer on a control endpoint.
+                This method supercedes the method which takes a void * parameter.
+    @param functionNumber  The USB device ID of the device to perform the transaction with
+    @param endpointNumber  The endpoint number for the transaction
+    @param completion      Action to perform when I/O completes
+    @param CBP             Memory descriptor describing the buffer to transfer. Will never describe
+                             memory which has disjoint packets.
+    @param bufferRounding  If true, short packets are OK and do not cause an error
+    @param bufferSize      Size of the data to transfer in the data phase. (C
+    @param direction       Specifies direction and PID for transaction. kUSBIn, KUSBOut (DATA PID) or kUSBSetup (SETUP PID).
+*/
     virtual IOReturn 		UIMCreateControlTransfer(   short			functionNumber,
                                                             short			endpointNumber,
                                                             IOUSBCompletion		completion,
@@ -272,6 +374,15 @@ protected:
                                                             short			direction) = 0;
     
     // Bulk
+/*!
+    @function UIMCreateBulkEndpoint
+    @abstract UIM function, create a bulk endpoint for the controller.
+    @param functionNumber  The USB device ID of the device for this endpoint
+    @param endpointNumber  The endpoint number for this endpoint
+    @param direction       Specifies direction for the endpoint. kUSBIn or KUSBOut.
+    @param speed           speed of the device: kUSBDeviceSpeedLow or kUSBDeviceSpeedFull 
+    @param maxPacketSize   Maximum packet size of this endpoint
+*/
     virtual IOReturn 		UIMCreateBulkEndpoint(
                                                         UInt8		functionNumber,
                                                         UInt8		endpointNumber,
@@ -279,6 +390,7 @@ protected:
                                                         UInt8		speed,
                                                         UInt8		maxPacketSize) = 0;
 
+/* Note: this function has been superceded. */
     virtual IOReturn 		UIMCreateBulkTransfer(  short			functionNumber,
                                                         short			endpointNumber,
                                                         IOUSBCompletion		completion,
@@ -288,6 +400,16 @@ protected:
                                                         short			direction) = 0;
 
     // Interrupt
+/*!
+    @function UIMCreateInterruptEndpoint
+    @abstract UIM function, create an interrupt endpoint for the controller.
+    @param functionNumber  The USB device ID of the device for this endpoint
+    @param endpointNumber  The endpoint number for this endpoint
+    @param direction       Specifies direction for the endpoint. kUSBIn or KUSBOut.
+    @param speed           speed of the device: kUSBDeviceSpeedLow or kUSBDeviceSpeedFull 
+    @param maxPacketSize   Maximum packet size of this endpoint
+    @param pollingRate     The maximum polling interval from the endpoint descriptor.
+*/
     virtual IOReturn		UIMCreateInterruptEndpoint(
                                                                 short		functionAddress,
                                                                 short		endpointNumber,
@@ -296,6 +418,7 @@ protected:
                                                                 UInt16		maxPacketSize,
                                                                 short		pollingRate) = 0;
 
+/* Note: this function has been superceded. */
     virtual IOReturn 		UIMCreateInterruptTransfer( short			functionNumber,
                                                             short			endpointNumber,
                                                             IOUSBCompletion		completion,
@@ -305,12 +428,32 @@ protected:
                                                             short			direction) = 0;
 
     // Isoch
+/*!
+	@function UIMCreateIsochEndpoint
+    @abstract Create an Isochronous endpoint in the controller.
+    @param functionNumber  The USB device ID of the device for this endpoint
+    @param endpointNumber  The endpoint number for this endpoint
+    @param maxPacketSize   Maximum packet size of this endpoint
+    @param direction       Specifies direction for the endpoint. kUSBIn or KUSBOut.
+*/
     virtual IOReturn 		UIMCreateIsochEndpoint(
                                                         short		functionAddress,
                                                         short		endpointNumber,
                                                         UInt32		maxPacketSize,
                                                         UInt8		direction) = 0;
 
+/*!
+    @function UIMCreateIsochTransfer
+    @abstract UIM function, Do a transfer on an Isocchronous endpoint.
+    @param functionNumber  The USB device ID of the device to perform the transaction with
+    @param endpointNumber  The endpoint number for the transaction
+    @param completion      Action to perform when I/O completes
+    @param direction       Specifies direction for transfer. kUSBIn or KUSBOut.
+    @param frameStart      The frame number in which to start the transactions
+    @param pBuffer         describes memory buffer. 
+    @param frameCount      number of frames to do transactions in
+    @param pFrames         Describes transactions in individual frames, gives sizes and reults for transactions.
+*/
     virtual IOReturn 		UIMCreateIsochTransfer(
                                                         short			functionAddress,
                                                         short			endpointNumber,
@@ -321,21 +464,48 @@ protected:
                                                         UInt32			frameCount,
                                                         IOUSBIsocFrame		*pFrames) = 0;
 
+/*!
+    @function UIMAbortEndpoint
+    @abstract UIM function  Abort the specified endpoint, return all transactions queued on it.
+    @param functionNumber  The USB device ID of the device to Abort
+    @param endpointNumber  The endpoint number to Abort
+    @param direction       Specifies direction of the endpoint for uniqueness. kUSBIn or KUSBOut.
+*/
     virtual IOReturn 		UIMAbortEndpoint(
                                                 short		functionNumber,
                                                 short		endpointNumber,
                                                 short		direction) = 0;
 
+/*!
+    @function UIMDeleteEndpoint
+    @abstract UIM function  Delete the specified endpoint, returning all transactions queued on it.
+    @param functionNumber  The USB device ID of the device to Delete
+    @param endpointNumber  The endpoint number to Delete
+    @param direction       Specifies direction of the endpoint for uniqueness. kUSBIn or KUSBOut.
+*/
     virtual IOReturn 		UIMDeleteEndpoint(
                                                     short	functionNumber,
                                                     short	endpointNumber,
                                                     short	direction) = 0;
     
+/*!
+    @function UIMClearEndpointStall
+    @abstract UIM function  Clear stall on the specified endpoint, set data toggle to zero,
+                              return all transactions queued on it.
+    @param functionNumber  The USB device ID of the device to Clear
+    @param endpointNumber  The endpoint number to Clear
+    @param direction       Specifies direction of the endpoint for uniqueness. kUSBIn or KUSBOut.
+*/
     virtual IOReturn 		UIMClearEndpointStall(
                                                         short		functionNumber,
                                                         short		endpointNumber,
                                                         short		direction) = 0;
 
+/*!
+    @function UIMClearEndpointStall
+    @abstract UIM function  UIMRootHubStatusChange This method gets called when there is a 
+                change in the root hub status or a change in the status of one of the ports.
+*/
     virtual void 		UIMRootHubStatusChange(void) = 0;
 
     static const IORegistryPlane	*gIOUSBPlane;
@@ -343,7 +513,7 @@ protected:
 public:
 
     static IOUSBLog		*_log;
-    inline IOCommandGate *GetCommandGate(void) { return _commandGate; }
+    IOCommandGate *GetCommandGate(void);
 
     /*!
 	@struct Endpoint
@@ -372,18 +542,96 @@ public:
      * Root hub methods
      * Only of interest to the IOUSBRootHubDevice object
      */
+/*!
+    @function GetRootHubDeviceDescriptor
+    @abstract UIM function, return the device descriptor of the simulated root hub device
+                           As GET_DESCRIPTOR control request for device descrptor
+    @param  desc   Descriptor structure to return data in
+*/
     virtual IOReturn 		GetRootHubDeviceDescriptor( IOUSBDeviceDescriptor *desc ) = 0;
+    
+/*!
+    @function GetRootHubDescriptor
+    @abstract UIM function, return the hub descriptor of the simulated root hub device
+                           As GET_DESCRIPTOR control request for hub descrptor
+    @param  desc   Descriptor structure to return data in
+*/
     virtual IOReturn 		GetRootHubDescriptor( IOUSBHubDescriptor *desc ) = 0;
+    
+/*!
+    @function SetRootHubDescriptor
+    @abstract UIM function, optional. Set the hub descriptor data.
+                           As SET_DESCRIPTOR control request for hub descrptor
+    @param  buffer   Descriptor data
+*/
     virtual IOReturn 		SetRootHubDescriptor( OSData *buffer ) = 0;
+    
+/*!
+    @function GetRootHubConfDescriptor
+    @abstract UIM function, retrun the configuration descriptor of the simulated root hub device
+                           As GET_DESCRIPTOR control request for configuration descrptor
+    @param  desc   Descriptor structure to return data in
+*/
     virtual IOReturn 		GetRootHubConfDescriptor( OSData *desc ) = 0;
+    
+/*!
+    @function GetRootHubStatus
+    @abstract UIM function, get the status of the root hub. As GET_STATUS control request to device.
+    @param status  Status structure to return
+*/
     virtual IOReturn 		GetRootHubStatus( IOUSBHubStatus *status ) = 0;
+    
+/*!
+    @function SetRootHubFeature
+    @abstract UIM function, set feature of root hub, As SET_FEATURE control request.
+    @param wValue  The feature to set, as would be transferred in wValue field of SETUP packet.
+*/
     virtual IOReturn 		SetRootHubFeature( UInt16 wValue ) = 0;
+    
+/*!
+    @function ClearRootHubFeature
+    @abstract UIM function, set feature of root hub, As CLEAR_FEATURE control request.
+    @param wValue  The feature to clear, as would be transferred in wValue field of SETUP packet.
+*/
     virtual IOReturn		ClearRootHubFeature( UInt16 wValue ) = 0;
+    
+/*!
+    @function GetRootHubPortStatus
+    @abstract UIM function, get the status of a root hub port. As GET_STATUS control request to the port.
+    @param status  Status structure to return
+    @param port    Port to get status for.
+*/
     virtual IOReturn 		GetRootHubPortStatus( IOUSBHubPortStatus *status, UInt16 port ) = 0;
+    
+/*!
+    @function SetRootHubPortFeature
+    @abstract UIM function, set feature of a root hub port, As SET_FEATURE control request to a port.
+    @param wValue  The feature to set, as would be transferred in wValue field of SETUP packet.
+    @param port    Port to set feature for
+*/
     virtual IOReturn 		SetRootHubPortFeature( UInt16 wValue, UInt16 port ) = 0;
+    
+/*!
+    @function ClearRootHubPortFeature
+    @abstract UIM function, clear feature of a root hub port, As CLEAR_FEATURE control request to a port.
+    @param wValue  The feature to clear, as would be transferred in wValue field of SETUP packet.
+    @param port    Port to clear feature for
+*/
     virtual IOReturn 		ClearRootHubPortFeature( UInt16 wValue, UInt16 port ) = 0;
+    
+/*!
+    @function ClearRootHubPortFeature
+    @abstract UIM function, Impliments GET_BUS_STATE control request, now obsolete.
+*/
     virtual IOReturn 		GetRootHubPortState( UInt8 *state, UInt16 port ) = 0;
+    
+/*!
+    @function SetHubAddress
+    @abstract UIM function, set the address of the simulated root hub device, as SET_ADDRESS
+    @param wValue	 New address for root hub.
+*/
     virtual IOReturn 		SetHubAddress( UInt16 wValue ) = 0;
+    
 
     /*!
 	@function openPipe
@@ -564,7 +812,7 @@ public:
                                             UInt8		maxPacketSize,
                                             UInt8		speed,
                                             UInt32		powerAvailable );
-                                            
+
    /*!
 	@function GetBandwidthAvailable
         Returns the available bandwidth (in bytes) per frame for
@@ -621,9 +869,21 @@ public:
                                                             short			direction);
 
     OSMetaClassDeclareReservedUsed(IOUSBController,  3);
+/*!
+    @function UIMCreateBulkTransfer
+    @abstract UIM function, Do a transfer on a bulk endpoint.
+                This method supercedes the method which takes multiple parameters.
+    @param command  paramters for transfer.
+*/
     virtual IOReturn 		UIMCreateBulkTransfer(IOUSBCommand* command);
 
     OSMetaClassDeclareReservedUsed(IOUSBController,  4);
+/*!
+    @function UIMCreateInterruptTransfer
+    @abstract UIM function, Do a transfer on an interrupt endpoint.
+                This method supercedes the method which takes multiple parameters.
+    @param command  paramters for transfer.
+*/
     virtual IOReturn 		UIMCreateInterruptTransfer(IOUSBCommand* command);
 
     /*!
@@ -687,6 +947,7 @@ public:
 					UInt32			noDataTimeout,
 					UInt32			completionTimeout );
 
+    // this should really not be using a padding slot, since free is in our superclas, but we shipped this way so now we need to leave it.
     OSMetaClassDeclareReservedUsed(IOUSBController,  9);
     virtual void free();
 
@@ -698,36 +959,110 @@ protected:
 public:
 
     OSMetaClassDeclareReservedUsed(IOUSBController,  11);
-    virtual IOReturn		CreateRootHubDevice( IOService * provider, IOUSBRootHubDevice ** rootHubDevice);
+    virtual IOReturn CreateRootHubDevice( IOService * provider, IOUSBRootHubDevice ** rootHubDevice);
     
-    OSMetaClassDeclareReservedUnused(IOUSBController,  12);
-    OSMetaClassDeclareReservedUnused(IOUSBController,  13);
-    OSMetaClassDeclareReservedUnused(IOUSBController,  14);
-    OSMetaClassDeclareReservedUnused(IOUSBController,  15);
-    OSMetaClassDeclareReservedUnused(IOUSBController,  16);
+    OSMetaClassDeclareReservedUsed(IOUSBController,  12);
+    /*!
+        @function Read
+        Read from an interrupt or bulk endpoint
+	@param buffer place to put the transferred data
+        @param address Address of the device on the USB bus
+        @param endpoint description of endpoint
+	@param completion describes action to take when buffer has been filled
+	@param noDataTimeout number of milliseconds of no data movement before the request is aborted
+	@param completionTimeout number of milliseonds after the command is on the bus in which it must complete
+	@param reqCount number of bytes requested for the transfer (must not be greater than the length of the buffer)
+    */
+    virtual IOReturn 		Read(   IOMemoryDescriptor * 	buffer,
+                                        USBDeviceAddress 	address,
+                                        Endpoint *		endpoint,
+                                        IOUSBCompletion *	completion,
+					UInt32			noDataTimeout,
+					UInt32			completionTimeout,
+					IOByteCount		reqCount );
+
+    OSMetaClassDeclareReservedUsed(IOUSBController,  13);
+    /*!
+        @function Write
+        Write to an interrupt or bulk endpoint
+        @param buffer place to get the transferred data
+        @param address Address of the device on the USB bus
+        @param endpoint description of endpoint
+        @param completion describes action to take when buffer has been emptied
+	@param noDataTimeout number of milliseconds of no data movement before the request is aborted
+	@param completionTimeout number of milliseonds after the command is on the bus in which it must complete
+	@param reqCount number of bytes requested for the transfer (must not be greater than the length of the buffer)
+    */
+    virtual IOReturn 		Write(  IOMemoryDescriptor *	buffer,
+                                        USBDeviceAddress 	address,
+                                        Endpoint *		endpoint,
+                                        IOUSBCompletion *	completion,
+					UInt32			noDataTimeout,
+					UInt32			completionTimeout,
+					IOByteCount		reqCount );
+
+    OSMetaClassDeclareReservedUsed(IOUSBController,  14);
+    
+    virtual IOReturn GetRootHubStringDescriptor(UInt8	index, OSData *desc) = 0;
+    
+    OSMetaClassDeclareReservedUsed(IOUSBController,  15);
+    /*!
+        @function IsocIO
+        Read from or write to an isochronous endpoint
+        @param buffer place to put the transferred data
+        @param frameStart USB frame number of the frame to start transfer
+        @param numFrames Number of frames to transfer
+        @param frameList Bytes to transfer and result for each frame
+        @param address Address of the device on the USB bus
+        @param endpoint description of endpoint
+        @param completion describes action to take when buffer has been filled
+        @param updateFrequency describes how often to update the framelist once the transfer has completed (in ms)
+    */
+    virtual IOReturn IsocIO(  IOMemoryDescriptor * 			buffer,
+                                        UInt64 				frameStart,
+                                        UInt32 				numFrames,
+                                        IOUSBLowLatencyIsocFrame *	frameList,
+                                        USBDeviceAddress 		address,
+                                        Endpoint *			endpoint,
+                                        IOUSBLowLatencyIsocCompletion *	completion,
+                                        UInt32				updateFrequency );
+
+    OSMetaClassDeclareReservedUsed(IOUSBController,  16);
+    
+    /*!
+    @function UIMCreateIsochTransfer
+    @abstract UIM function, Do a transfer on an Isocchronous endpoint.
+    @param functionNumber  The USB device ID of the device to perform the transaction with
+    @param endpointNumber  The endpoint number for the transaction
+    @param completion      Action to perform when I/O completes
+    @param direction       Specifies direction for transfer. kUSBIn or KUSBOut.
+    @param frameStart      The frame number in which to start the transactions
+    @param pBuffer         describes memory buffer. 
+    @param frameCount      number of frames to do transactions in
+    @param pFrames         Describes transactions in individual frames, gives sizes and reults for transactions.
+    @param updateFrequency Describes how often we update the frameList parameters (in ms)
+*/
+    virtual IOReturn 		UIMCreateIsochTransfer(
+                                                        short			functionAddress,
+                                                        short			endpointNumber,
+                                                        IOUSBIsocCompletion	completion,
+                                                        UInt8			direction,
+                                                        UInt64			frameStart,
+                                                        IOMemoryDescriptor *	pBuffer,
+                                                        UInt32			frameCount,
+                                                        IOUSBLowLatencyIsocFrame *pFrames,
+                                                        UInt32			updateFrequency);
+
+
     OSMetaClassDeclareReservedUnused(IOUSBController,  17);
     OSMetaClassDeclareReservedUnused(IOUSBController,  18);
     OSMetaClassDeclareReservedUnused(IOUSBController,  19);
     
-};
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Inline Functions
-
-inline void IOUSBController::Complete(IOUSBCompletion	completion,
-                                      IOReturn		status,
-                                      UInt32		actualByteCount)
-{
-    if (completion.action)  (*completion.action)(completion.target,
-                                                 completion.parameter,
-                                                 status,
-                                                 actualByteCount);
-}
-
-
-enum
-{
-    kUSBWatchdogTimeoutMS = 1000
+private:
+    void	IncreaseIsocCommandPool();
+    void 	IncreaseCommandPool();
+    void	ParsePCILocation(const char *str, int *deviceNum, int *functionNum);
+    int		ValueOfHexDigit(char c);
 };
 
 #endif /* ! _IOKIT_IOUSBCONTROLLER_H */

@@ -3,9 +3,9 @@
  
      Contains:   Navigation Services Interfaces
  
-     Version:    NavigationServices-77~1
+     Version:    NavigationServices-88~217
  
-     Copyright:  © 1996-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1996-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,12 +16,8 @@
 #ifndef __NAVIGATION__
 #define __NAVIGATION__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __APPLEEVENTS__
-#include <AE/AppleEvents.h>
+#ifndef __APPLICATIONSERVICES__
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 #ifndef __TRANSLATION__
@@ -32,24 +28,11 @@
 #include <HIToolbox/MacWindows.h>
 #endif
 
-#ifndef __CODEFRAGMENTS__
-#include <CarbonCore/CodeFragments.h>
-#endif
-
-#ifndef __MACERRORS__
-#include <CarbonCore/MacErrors.h>
-#endif
-
-#ifndef __CFARRAY__
-#include <CoreFoundation/CFArray.h>
-#endif
-
-#ifndef __CFSTRING__
-#include <CoreFoundation/CFString.h>
-#endif
 
 
 
+
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -59,13 +42,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 typedef UInt32 NavAskSaveChangesAction;
 enum {
@@ -198,13 +175,13 @@ typedef NavDialogRef                    NavContext;
  *    sent so the client can get the reply record and open the selected
  *    files.
  */
+typedef UInt32 NavUserAction;
+enum {
 
   /*
    * No action taken. The dialog is still running or was terminated
    * programmatically.
    */
-typedef UInt32 NavUserAction;
-enum {
   kNavUserActionNone            = 0,
 
   /*
@@ -332,13 +309,13 @@ typedef NavCBRec *                      NavCBRecPtr;
  *  Summary:
  *    Identifies the message type being sent to the client's event proc
  */
+typedef SInt32 NavEventCallbackMessage;
+enum {
 
   /*
    * An OS event has occurred. A pointer to the EventRecord is in the
    * eventData.eventDataParms.event field of the NavCBRec.
    */
-typedef SInt32 NavEventCallbackMessage;
-enum {
   kNavCBEvent                   = 0,
 
   /*
@@ -451,7 +428,7 @@ typedef STACK_UPP_TYPE(NavObjectFilterProcPtr)                  NavObjectFilterU
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern NavEventUPP
-NewNavEventUPP(NavEventProcPtr userRoutine);
+NewNavEventUPP(NavEventProcPtr userRoutine)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewNavPreviewUPP()
@@ -462,7 +439,7 @@ NewNavEventUPP(NavEventProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern NavPreviewUPP
-NewNavPreviewUPP(NavPreviewProcPtr userRoutine);
+NewNavPreviewUPP(NavPreviewProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewNavObjectFilterUPP()
@@ -473,7 +450,7 @@ NewNavPreviewUPP(NavPreviewProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern NavObjectFilterUPP
-NewNavObjectFilterUPP(NavObjectFilterProcPtr userRoutine);
+NewNavObjectFilterUPP(NavObjectFilterProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeNavEventUPP()
@@ -484,7 +461,7 @@ NewNavObjectFilterUPP(NavObjectFilterProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeNavEventUPP(NavEventUPP userUPP);
+DisposeNavEventUPP(NavEventUPP userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeNavPreviewUPP()
@@ -495,7 +472,7 @@ DisposeNavEventUPP(NavEventUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeNavPreviewUPP(NavPreviewUPP userUPP);
+DisposeNavPreviewUPP(NavPreviewUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeNavObjectFilterUPP()
@@ -506,7 +483,7 @@ DisposeNavPreviewUPP(NavPreviewUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeNavObjectFilterUPP(NavObjectFilterUPP userUPP);
+DisposeNavObjectFilterUPP(NavObjectFilterUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeNavEventUPP()
@@ -521,7 +498,7 @@ InvokeNavEventUPP(
   NavEventCallbackMessage  callBackSelector,
   NavCBRecPtr              callBackParms,
   void *                   callBackUD,
-  NavEventUPP              userUPP);
+  NavEventUPP              userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeNavPreviewUPP()
@@ -535,7 +512,7 @@ extern Boolean
 InvokeNavPreviewUPP(
   NavCBRecPtr    callBackParms,
   void *         callBackUD,
-  NavPreviewUPP  userUPP);
+  NavPreviewUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeNavObjectFilterUPP()
@@ -551,7 +528,7 @@ InvokeNavObjectFilterUPP(
   void *              info,
   void *              callBackUD,
   NavFilterModes      filterMode,
-  NavObjectFilterUPP  userUPP);
+  NavObjectFilterUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 typedef SInt32 NavCustomControlMessage;
 enum {
@@ -852,7 +829,7 @@ NavUnload(void);
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
 extern UInt32 
-NavLibraryVersion(void);
+NavLibraryVersion(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -864,7 +841,7 @@ NavLibraryVersion(void);
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
 extern OSErr 
-NavGetDefaultDialogOptions(NavDialogOptions * dialogOptions);
+NavGetDefaultDialogOptions(NavDialogOptions * dialogOptions)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -885,7 +862,7 @@ NavGetFile(
   NavPreviewUPP        previewProc,           /* can be NULL */
   NavObjectFilterUPP   filterProc,            /* can be NULL */
   NavTypeListHandle    typeList,              /* can be NULL */
-  void *               callBackUD);           /* can be NULL */
+  void *               callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -904,7 +881,7 @@ NavPutFile(
   NavEventUPP         eventProc,             /* can be NULL */
   OSType              fileType,
   OSType              fileCreator,
-  void *              callBackUD);           /* can be NULL */
+  void *              callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -921,7 +898,7 @@ NavAskSaveChanges(
   NavAskSaveChangesAction    action,
   NavAskSaveChangesResult *  reply,
   NavEventUPP                eventProc,           /* can be NULL */
-  void *                     callBackUD);         /* can be NULL */
+  void *                     callBackUD)          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -937,7 +914,7 @@ NavCustomAskSaveChanges(
   NavDialogOptions *         dialogOptions,
   NavAskSaveChangesResult *  reply,
   NavEventUPP                eventProc,           /* can be NULL */
-  void *                     callBackUD);         /* can be NULL */
+  void *                     callBackUD)          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -953,7 +930,7 @@ NavAskDiscardChanges(
   NavDialogOptions *            dialogOptions,
   NavAskDiscardChangesResult *  reply,
   NavEventUPP                   eventProc,           /* can be NULL */
-  void *                        callBackUD);         /* can be NULL */
+  void *                        callBackUD)          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -973,7 +950,7 @@ NavChooseFile(
   NavPreviewUPP        previewProc,           /* can be NULL */
   NavObjectFilterUPP   filterProc,            /* can be NULL */
   NavTypeListHandle    typeList,              /* can be NULL */
-  void *               callBackUD);           /* can be NULL */
+  void *               callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -991,7 +968,7 @@ NavChooseFolder(
   NavDialogOptions *   dialogOptions,         /* can be NULL */
   NavEventUPP          eventProc,             /* can be NULL */
   NavObjectFilterUPP   filterProc,            /* can be NULL */
-  void *               callBackUD);           /* can be NULL */
+  void *               callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1009,7 +986,7 @@ NavChooseVolume(
   NavDialogOptions *   dialogOptions,          /* can be NULL */
   NavEventUPP          eventProc,              /* can be NULL */
   NavObjectFilterUPP   filterProc,             /* can be NULL */
-  void *               callBackUD);            /* can be NULL */
+  void *               callBackUD)             /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1027,7 +1004,7 @@ NavChooseObject(
   NavDialogOptions *   dialogOptions,         /* can be NULL */
   NavEventUPP          eventProc,             /* can be NULL */
   NavObjectFilterUPP   filterProc,            /* can be NULL */
-  void *               callBackUD);           /* can be NULL */
+  void *               callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1044,7 +1021,7 @@ NavNewFolder(
   NavReplyRecord *    reply,
   NavDialogOptions *  dialogOptions,         /* can be NULL */
   NavEventUPP         eventProc,             /* can be NULL */
-  void *              callBackUD);           /* can be NULL */
+  void *              callBackUD)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1058,7 +1035,7 @@ NavNewFolder(
 extern OSErr 
 NavTranslateFile(
   NavReplyRecord *        reply,
-  NavTranslationOptions   howToTranslate);
+  NavTranslationOptions   howToTranslate)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1072,7 +1049,7 @@ NavTranslateFile(
 extern OSErr 
 NavCompleteSave(
   NavReplyRecord *        reply,
-  NavTranslationOptions   howToTranslate);
+  NavTranslationOptions   howToTranslate)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1087,7 +1064,7 @@ extern OSErr
 NavCustomControl(
   NavDialogRef              dialog,
   NavCustomControlMessage   selector,
-  void *                    parms);
+  void *                    parms)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1103,7 +1080,7 @@ NavCreatePreview(
   AEDesc *      theObject,
   OSType        previewDataType,
   const void *  previewData,
-  Size          previewDataSize);
+  Size          previewDataSize)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1115,7 +1092,7 @@ NavCreatePreview(
  *    Non-Carbon CFM:   in NavigationLib 1.0 and later
  */
 extern OSErr 
-NavDisposeReply(NavReplyRecord * reply);
+NavDisposeReply(NavReplyRecord * reply)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1308,7 +1285,7 @@ typedef struct NavDialogCreationOptions NavDialogCreationOptions;
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-NavGetDefaultDialogCreationOptions(NavDialogCreationOptions * outOptions);
+NavGetDefaultDialogCreationOptions(NavDialogCreationOptions * outOptions) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1369,7 +1346,7 @@ NavCreateGetFileDialog(
   NavPreviewUPP                     inPreviewProc,       /* can be NULL */
   NavObjectFilterUPP                inFilterProc,        /* can be NULL */
   void *                            inClientData,        /* can be NULL */
-  NavDialogRef *                    outDialog);
+  NavDialogRef *                    outDialog)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1427,7 +1404,7 @@ NavCreatePutFileDialog(
   OSType                            inFileCreator,
   NavEventUPP                       inEventProc,         /* can be NULL */
   void *                            inClientData,        /* can be NULL */
-  NavDialogRef *                    outDialog);
+  NavDialogRef *                    outDialog)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1489,7 +1466,7 @@ NavCreateAskReviewDocumentsDialog(
   UInt32                            inDocumentCount,
   NavEventUPP                       inEventProc,           /* can be NULL */
   void *                            inClientData,          /* can be NULL */
-  NavDialogRef *                    outDialog);
+  NavDialogRef *                    outDialog)                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -1543,7 +1520,7 @@ NavCreateAskSaveChangesDialog(
   NavAskSaveChangesAction           inAction,
   NavEventUPP                       inEventProc,        /* can be NULL */
   void *                            inClientData,       /* can be NULL */
-  NavDialogRef *                    outDialog);
+  NavDialogRef *                    outDialog)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1591,7 +1568,7 @@ NavCreateAskDiscardChangesDialog(
   const NavDialogCreationOptions *  inOptions,
   NavEventUPP                       inEventProc,        /* can be NULL */
   void *                            inClientData,       /* can be NULL */
-  NavDialogRef *                    outDialog);
+  NavDialogRef *                    outDialog)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1653,7 +1630,7 @@ NavCreateChooseFileDialog(
   NavPreviewUPP                     inPreviewProc,       /* can be NULL */
   NavObjectFilterUPP                inFilterProc,        /* can be NULL */
   void *                            inClientData,        /* can be NULL */
-  NavDialogRef *                    outDialog);
+  NavDialogRef *                    outDialog)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1704,7 +1681,7 @@ NavCreateChooseFolderDialog(
   NavEventUPP                       inEventProc,        /* can be NULL */
   NavObjectFilterUPP                inFilterProc,       /* can be NULL */
   void *                            inClientData,       /* can be NULL */
-  NavDialogRef *                    outDialog);
+  NavDialogRef *                    outDialog)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1755,7 +1732,7 @@ NavCreateChooseVolumeDialog(
   NavEventUPP                       inEventProc,        /* can be NULL */
   NavObjectFilterUPP                inFilterProc,       /* can be NULL */
   void *                            inClientData,       /* can be NULL */
-  NavDialogRef *                    outDialog);
+  NavDialogRef *                    outDialog)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1812,7 +1789,7 @@ NavCreateChooseObjectDialog(
   NavPreviewUPP                     inPreviewProc,       /* can be NULL */
   NavObjectFilterUPP                inFilterProc,        /* can be NULL */
   void *                            inClientData,        /* can be NULL */
-  NavDialogRef *                    outDialog);
+  NavDialogRef *                    outDialog)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1860,7 +1837,7 @@ NavCreateNewFolderDialog(
   const NavDialogCreationOptions *  inOptions,          /* can be NULL */
   NavEventUPP                       inEventProc,        /* can be NULL */
   void *                            inClientData,       /* can be NULL */
-  NavDialogRef *                    outDialog);
+  NavDialogRef *                    outDialog)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1903,7 +1880,7 @@ NavCreateNewFolderDialog(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-NavDialogRun(NavDialogRef inDialog);
+NavDialogRun(NavDialogRef inDialog)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1930,7 +1907,7 @@ NavDialogRun(NavDialogRef inDialog);
  *    Non-Carbon CFM:   not available
  */
 extern void 
-NavDialogDispose(NavDialogRef inDialog);
+NavDialogDispose(NavDialogRef inDialog)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1959,7 +1936,7 @@ NavDialogDispose(NavDialogRef inDialog);
  *    Non-Carbon CFM:   not available
  */
 extern WindowRef 
-NavDialogGetWindow(NavDialogRef inDialog);
+NavDialogGetWindow(NavDialogRef inDialog)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1998,7 +1975,7 @@ NavDialogGetWindow(NavDialogRef inDialog);
  *    Non-Carbon CFM:   not available
  */
 extern NavUserAction 
-NavDialogGetUserAction(NavDialogRef inDialog);
+NavDialogGetUserAction(NavDialogRef inDialog)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2036,7 +2013,7 @@ NavDialogGetUserAction(NavDialogRef inDialog);
 extern OSStatus 
 NavDialogGetReply(
   NavDialogRef      inDialog,
-  NavReplyRecord *  outReply);
+  NavReplyRecord *  outReply)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2072,7 +2049,7 @@ NavDialogGetReply(
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-NavDialogGetSaveFileName(NavDialogRef inPutFileDialog);
+NavDialogGetSaveFileName(NavDialogRef inPutFileDialog)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2109,7 +2086,7 @@ NavDialogGetSaveFileName(NavDialogRef inPutFileDialog);
 extern OSStatus 
 NavDialogSetSaveFileName(
   NavDialogRef   inPutFileDialog,
-  CFStringRef    inFileName);
+  CFStringRef    inFileName)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2138,7 +2115,7 @@ NavDialogSetSaveFileName(
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-NavDialogGetSaveFileExtensionHidden(NavDialogRef inPutFileDialog);
+NavDialogGetSaveFileExtensionHidden(NavDialogRef inPutFileDialog) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -2173,18 +2150,12 @@ NavDialogGetSaveFileExtensionHidden(NavDialogRef inPutFileDialog);
 extern OSStatus 
 NavDialogSetSaveFileExtensionHidden(
   NavDialogRef   inPutFileDialog,
-  Boolean        inHidden);
+  Boolean        inHidden)                                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

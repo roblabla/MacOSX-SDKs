@@ -30,6 +30,8 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* mach_host_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 #include <mach/mach_types.h>
 #include <mach_debug/mach_debug_types.h>
@@ -266,6 +268,310 @@ kern_return_t host_statistics
 	host_info_t host_info_out,
 	mach_msg_type_number_t *host_info_outCnt
 );
+/* typedefs for all requests */
+
+#ifndef __Request__mach_host_subsystem__defined
+#define __Request__mach_host_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		host_flavor_t flavor;
+		mach_msg_type_number_t host_info_outCnt;
+	} __Request__host_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__host_kernel_version_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__host_page_size_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t pager;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		boolean_t internal;
+		vm_size_t size;
+		vm_prot_t permission;
+	} __Request__mach_memory_object_memory_entry_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		processor_flavor_t flavor;
+	} __Request__host_processor_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__host_get_io_master_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		clock_id_t clock_id;
+	} __Request__host_get_clock_service_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__kmod_get_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__host_zone_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__host_virtual_physical_table_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__host_ipc_hash_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		unsigned taskID;
+		unsigned TWI_TableStart;
+		unsigned Desc_TableStart;
+	} __Request__enable_bluebox_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__disable_bluebox_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__processor_set_default_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__processor_set_create_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t pager;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		boolean_t internal;
+		memory_object_size_t size;
+		vm_prot_t permission;
+	} __Request__mach_memory_object_memory_entry_64_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		host_flavor_t flavor;
+		mach_msg_type_number_t host_info_outCnt;
+	} __Request__host_statistics_t;
+
+#endif /* !__Request__mach_host_subsystem__defined */
+
+/* union of all requests */
+
+#ifndef __RequestUnion__mach_host_subsystem__defined
+#define __RequestUnion__mach_host_subsystem__defined
+union __RequestUnion__mach_host_subsystem {
+	__Request__host_info_t Request_host_info;
+	__Request__host_kernel_version_t Request_host_kernel_version;
+	__Request__host_page_size_t Request_host_page_size;
+	__Request__mach_memory_object_memory_entry_t Request_mach_memory_object_memory_entry;
+	__Request__host_processor_info_t Request_host_processor_info;
+	__Request__host_get_io_master_t Request_host_get_io_master;
+	__Request__host_get_clock_service_t Request_host_get_clock_service;
+	__Request__kmod_get_info_t Request_kmod_get_info;
+	__Request__host_zone_info_t Request_host_zone_info;
+	__Request__host_virtual_physical_table_info_t Request_host_virtual_physical_table_info;
+	__Request__host_ipc_hash_info_t Request_host_ipc_hash_info;
+	__Request__enable_bluebox_t Request_enable_bluebox;
+	__Request__disable_bluebox_t Request_disable_bluebox;
+	__Request__processor_set_default_t Request_processor_set_default;
+	__Request__processor_set_create_t Request_processor_set_create;
+	__Request__mach_memory_object_memory_entry_64_t Request_mach_memory_object_memory_entry_64;
+	__Request__host_statistics_t Request_host_statistics;
+};
+#endif /* !__RequestUnion__mach_host_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__mach_host_subsystem__defined
+#define __Reply__mach_host_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t host_info_outCnt;
+		integer_t host_info_out[12];
+	} __Reply__host_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t kernel_versionOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t kernel_versionCnt;
+		char kernel_version[512];
+	} __Reply__host_kernel_version_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		vm_size_t page_size;
+	} __Reply__host_page_size_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t entry_handle;
+		/* end of the kernel processed data */
+	} __Reply__mach_memory_object_memory_entry_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t processor_info;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		natural_t processor_count;
+		mach_msg_type_number_t processor_infoCnt;
+	} __Reply__host_processor_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t io_master;
+		/* end of the kernel processed data */
+	} __Reply__host_get_io_master_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t clock_serv;
+		/* end of the kernel processed data */
+	} __Reply__host_get_clock_service_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t modules;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t modulesCnt;
+	} __Reply__kmod_get_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t names;
+		mach_msg_ool_descriptor_t info;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t namesCnt;
+		mach_msg_type_number_t infoCnt;
+	} __Reply__host_zone_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t info;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t infoCnt;
+	} __Reply__host_virtual_physical_table_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t info;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t infoCnt;
+	} __Reply__host_ipc_hash_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__enable_bluebox_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__disable_bluebox_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t default_set;
+		/* end of the kernel processed data */
+	} __Reply__processor_set_default_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t new_set;
+		mach_msg_port_descriptor_t new_name;
+		/* end of the kernel processed data */
+	} __Reply__processor_set_create_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t entry_handle;
+		/* end of the kernel processed data */
+	} __Reply__mach_memory_object_memory_entry_64_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t host_info_outCnt;
+		integer_t host_info_out[12];
+	} __Reply__host_statistics_t;
+
+#endif /* !__Reply__mach_host_subsystem__defined */
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__mach_host_subsystem__defined
+#define __ReplyUnion__mach_host_subsystem__defined
+union __ReplyUnion__mach_host_subsystem {
+	__Reply__host_info_t Reply_host_info;
+	__Reply__host_kernel_version_t Reply_host_kernel_version;
+	__Reply__host_page_size_t Reply_host_page_size;
+	__Reply__mach_memory_object_memory_entry_t Reply_mach_memory_object_memory_entry;
+	__Reply__host_processor_info_t Reply_host_processor_info;
+	__Reply__host_get_io_master_t Reply_host_get_io_master;
+	__Reply__host_get_clock_service_t Reply_host_get_clock_service;
+	__Reply__kmod_get_info_t Reply_kmod_get_info;
+	__Reply__host_zone_info_t Reply_host_zone_info;
+	__Reply__host_virtual_physical_table_info_t Reply_host_virtual_physical_table_info;
+	__Reply__host_ipc_hash_info_t Reply_host_ipc_hash_info;
+	__Reply__enable_bluebox_t Reply_enable_bluebox;
+	__Reply__disable_bluebox_t Reply_disable_bluebox;
+	__Reply__processor_set_default_t Reply_processor_set_default;
+	__Reply__processor_set_create_t Reply_processor_set_create;
+	__Reply__mach_memory_object_memory_entry_64_t Reply_mach_memory_object_memory_entry_64;
+	__Reply__host_statistics_t Reply_host_statistics;
+};
+#endif /* !__RequestUnion__mach_host_subsystem__defined */
 
 #ifndef subsystem_to_name_map_mach_host
 #define subsystem_to_name_map_mach_host \

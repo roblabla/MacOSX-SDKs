@@ -68,6 +68,12 @@ enum {
     NSDocModalWindowMask 		= 1 << 6
 };
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+enum {
+    NSNonactivatingPanelMask		= 1 << 7	// specify a panel that does not activate owning application
+};
+#endif
+
 @interface NSPanel : NSWindow
 {
 /*All instance variables are private*/

@@ -3,9 +3,9 @@
  
      Contains:   Image Capture Architecture header
  
-     Version:    ImageCapture-84.1~4
+     Version:    ImageCapture-125~203
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,8 +17,8 @@
 #ifndef __IMAGECAPTURE_R__
 #define __IMAGECAPTURE_R__
 
-#ifndef __CARBONCORE_R__
-#include <CarbonCore/CarbonCore.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
 
 

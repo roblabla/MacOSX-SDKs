@@ -35,9 +35,11 @@ typedef struct __Brflags {
     unsigned int	acceptsFirstMouse:1;
     unsigned int	actionNeedsToBeSent:1;
     unsigned int        usesSmallSizeTitleFont:1;
-    unsigned int        RESERVED:3;
+    unsigned int	usesSmallScrollers:1;
+    unsigned int        RESERVED:2;
 #else
-    unsigned int        RESERVED:3;
+    unsigned int        RESERVED:2;
+    unsigned int	usesSmallScrollers:1;
     unsigned int        usesSmallSizeTitleFont:1;
     unsigned int	actionNeedsToBeSent:1;
     unsigned int	acceptsFirstMouse:1;

@@ -1,5 +1,5 @@
 /*	NSUndoManager.h
-	Copyright 1995-2001, Apple, Inc. All rights reserved.
+	Copyright 1995-2002, Apple, Inc. All rights reserved.
 */
 
 //
@@ -26,12 +26,12 @@ enum {
     NSArray 		*_runLoopModes;
     int 		_disabled;
     struct {
-        int undoing:1;
-        int redoing:1;
-        int registeredForCallback:1;
-        int postingCheckpointNotification:1;
-        int groupsByEvent:1;
-        int reserved:27;
+        unsigned int undoing:1;
+        unsigned int redoing:1;
+        unsigned int registeredForCallback:1;
+        unsigned int postingCheckpointNotification:1;
+        unsigned int groupsByEvent:1;
+        unsigned int reserved:27;
     } _flags;
 
     id 			_target;		// Temp for Invocation based

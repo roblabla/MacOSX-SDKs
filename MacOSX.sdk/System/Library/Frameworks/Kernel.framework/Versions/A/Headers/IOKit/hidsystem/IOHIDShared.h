@@ -163,7 +163,8 @@ typedef volatile struct _evGlobals {
     IOGBounds mouseRect;	/* Rect for mouse-exited events */
     int version;		/* for run time checks */
     int	structSize;		/* for run time checks */
-    unsigned int reservedA[32];
+    int lastFrame;
+    unsigned int reservedA[31];
 
     unsigned reserved:27;
     unsigned wantPressure:1;	/* pressure in current mouseRect? */

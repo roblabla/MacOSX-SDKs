@@ -3,9 +3,9 @@
  
      Contains:   Master include for CoreServices (non-UI toolbox)
  
-     Version:    CoreServices-10.2~52
+     Version:    CoreServices-14~88
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,10 +21,6 @@
 #include <CarbonCore/CarbonCore.h>
 #endif
 
-#ifndef __OT__
-#include <OT/OT.h>
-#endif
-
 #ifndef __OSSERVICES__
 #include <OSServices/OSServices.h>
 #endif
@@ -33,16 +29,12 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
-#ifndef __NSLCORE__
-#include <NSLCore/NSLCore.h>
-#endif
-
-#ifndef __SECURITYCORE__
-#include <SecurityCore/SecurityCore.h>
-#endif
-
 #ifndef __CFNETWORK__
 #include <CFNetwork/CFNetwork.h>
+#endif
+
+#ifndef __WEBSERVICESCORE__
+#include <WebServicesCore/WebServicesCore.h>
 #endif
 
 

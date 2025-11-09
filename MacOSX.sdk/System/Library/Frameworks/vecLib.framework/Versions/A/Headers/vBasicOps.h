@@ -3,9 +3,9 @@
  
      Contains:   Basic Algebraic Operations for AltiVec
  
-     Version:    vecLib-1.1_8~32
+     Version:    vecLib-138.1~9
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,7 @@
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -28,14 +29,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 #ifdef __VEC__
@@ -157,7 +150,7 @@ extern vector unsigned char
 vU8Divide(
   vector unsigned char    vN,
   vector unsigned char    vD,
-  vector unsigned char *  vRemainder);
+  vector unsigned char *  vRemainder)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -172,7 +165,7 @@ extern vector signed char
 vS8Divide(
   vector signed char    vN,
   vector signed char    vD,
-  vector signed char *  vRemainder);
+  vector signed char *  vRemainder)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -187,7 +180,7 @@ extern vector unsigned short
 vU16Divide(
   vector unsigned short    vN,
   vector unsigned short    vD,
-  vector unsigned short *  vRemainder);
+  vector unsigned short *  vRemainder)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -202,7 +195,7 @@ extern vector signed short
 vS16Divide(
   vector signed short    vN,
   vector signed short    vD,
-  vector signed short *  vRemainder);
+  vector signed short *  vRemainder)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -217,7 +210,7 @@ extern vector unsigned int
 vU32Divide(
   vector unsigned int    vN,
   vector unsigned int    vD,
-  vector unsigned int *  vRemainder);
+  vector unsigned int *  vRemainder)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -232,7 +225,7 @@ extern vector signed int
 vS32Divide(
   vector signed int    vN,
   vector signed int    vD,
-  vector signed int *  vRemainder);
+  vector signed int *  vRemainder)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -247,7 +240,7 @@ extern vector unsigned int
 vU64Divide(
   vector unsigned int    vN,
   vector unsigned int    vD,
-  vector unsigned int *  vRemainder);
+  vector unsigned int *  vRemainder)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -262,7 +255,7 @@ extern vector signed int
 vS64Divide(
   vector signed int    vN,
   vector signed int    vD,
-  vector signed int *  vRemainder);
+  vector signed int *  vRemainder)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -277,7 +270,7 @@ extern vector unsigned int
 vU128Divide(
   vector unsigned int    vN,
   vector unsigned int    vD,
-  vector unsigned int *  vRemainder);
+  vector unsigned int *  vRemainder)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -292,7 +285,7 @@ extern vector signed int
 vS128Divide(
   vector signed int    vN,
   vector signed int    vD,
-  vector signed int *  vRemainder);
+  vector signed int *  vRemainder)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -307,7 +300,7 @@ vS128Divide(
 extern vector unsigned char 
 vU8HalfMultiply(
   vector unsigned char   vA,
-  vector unsigned char   vB);
+  vector unsigned char   vB)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -321,7 +314,7 @@ vU8HalfMultiply(
 extern vector signed char 
 vS8HalfMultiply(
   vector signed char   vA,
-  vector signed char   vB);
+  vector signed char   vB)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -335,7 +328,7 @@ vS8HalfMultiply(
 extern vector unsigned short 
 vU16HalfMultiply(
   vector unsigned short   vA,
-  vector unsigned short   vB);
+  vector unsigned short   vB)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -349,7 +342,7 @@ vU16HalfMultiply(
 extern vector signed short 
 vS16HalfMultiply(
   vector signed short   vA,
-  vector signed short   vB);
+  vector signed short   vB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -363,7 +356,7 @@ vS16HalfMultiply(
 extern vector unsigned int 
 vU32HalfMultiply(
   vector unsigned int   vA,
-  vector unsigned int   vB);
+  vector unsigned int   vB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -377,7 +370,7 @@ vU32HalfMultiply(
 extern vector signed int 
 vS32HalfMultiply(
   vector signed int   vA,
-  vector signed int   vB);
+  vector signed int   vB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -391,7 +384,7 @@ vS32HalfMultiply(
 extern vector unsigned int 
 vU32FullMulEven(
   vector unsigned int   vA,
-  vector unsigned int   vB);
+  vector unsigned int   vB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -405,7 +398,7 @@ vU32FullMulEven(
 extern vector unsigned int 
 vU32FullMulOdd(
   vector unsigned int   vA,
-  vector unsigned int   vB);
+  vector unsigned int   vB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -419,7 +412,7 @@ vU32FullMulOdd(
 extern vector signed int 
 vS32FullMulEven(
   vector signed int   vA,
-  vector signed int   vB);
+  vector signed int   vB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -433,7 +426,7 @@ vS32FullMulEven(
 extern vector signed int 
 vS32FullMulOdd(
   vector signed int   vA,
-  vector signed int   vB);
+  vector signed int   vB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -447,7 +440,7 @@ vS32FullMulOdd(
 extern vector unsigned int 
 vU64FullMulEven(
   vector unsigned int   vA,
-  vector unsigned int   vB);
+  vector unsigned int   vB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -461,7 +454,7 @@ vU64FullMulEven(
 extern vector unsigned int 
 vU64FullMulOdd(
   vector unsigned int   vA,
-  vector unsigned int   vB);
+  vector unsigned int   vB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -475,7 +468,7 @@ vU64FullMulOdd(
 extern vector unsigned int 
 vU64HalfMultiply(
   vector unsigned int   vA,
-  vector unsigned int   vB);
+  vector unsigned int   vB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -489,7 +482,7 @@ vU64HalfMultiply(
 extern vector signed int 
 vS64HalfMultiply(
   vector signed int   vA,
-  vector signed int   vB);
+  vector signed int   vB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -503,7 +496,7 @@ vS64HalfMultiply(
 extern vector signed int 
 vS64FullMulEven(
   vector signed int   vA,
-  vector signed int   vB);
+  vector signed int   vB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -517,7 +510,7 @@ vS64FullMulEven(
 extern vector signed int 
 vS64FullMulOdd(
   vector signed int   vA,
-  vector signed int   vB);
+  vector signed int   vB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -531,7 +524,7 @@ vS64FullMulOdd(
 extern vector unsigned int 
 vU128HalfMultiply(
   vector unsigned int   vA,
-  vector unsigned int   vB);
+  vector unsigned int   vB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -545,7 +538,7 @@ vU128HalfMultiply(
 extern vector signed int 
 vS128HalfMultiply(
   vector signed int   vA,
-  vector signed int   vB);
+  vector signed int   vB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -560,7 +553,7 @@ vS128HalfMultiply(
 extern vector unsigned int 
 vU64Sub(
   vector unsigned int   vA,
-  vector unsigned int   vB);
+  vector unsigned int   vB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -574,7 +567,7 @@ vU64Sub(
 extern vector unsigned int 
 vU64SubS(
   vector unsigned int   vA,
-  vector unsigned int   vB);
+  vector unsigned int   vB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -588,7 +581,7 @@ vU64SubS(
 extern vector unsigned int 
 vU128Sub(
   vector unsigned int   vA,
-  vector unsigned int   vB);
+  vector unsigned int   vB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -602,7 +595,7 @@ vU128Sub(
 extern vector unsigned int 
 vU128SubS(
   vector unsigned int   vA,
-  vector unsigned int   vB);
+  vector unsigned int   vB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -616,7 +609,7 @@ vU128SubS(
 extern vector signed int 
 vS64Sub(
   vector signed int   vA,
-  vector signed int   vB);
+  vector signed int   vB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -630,7 +623,7 @@ vS64Sub(
 extern vector signed int 
 vS128Sub(
   vector signed int   vA,
-  vector signed int   vB);
+  vector signed int   vB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -644,7 +637,7 @@ vS128Sub(
 extern vector signed int 
 vS64SubS(
   vector signed int   vA,
-  vector signed int   vB);
+  vector signed int   vB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -658,7 +651,7 @@ vS64SubS(
 extern vector signed int 
 vS128SubS(
   vector signed int   vA,
-  vector signed int   vB);
+  vector signed int   vB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -673,7 +666,7 @@ vS128SubS(
 extern vector unsigned int 
 vU64Add(
   vector unsigned int   vA,
-  vector unsigned int   vB);
+  vector unsigned int   vB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -687,7 +680,7 @@ vU64Add(
 extern vector unsigned int 
 vU64AddS(
   vector unsigned int   vA,
-  vector unsigned int   vB);
+  vector unsigned int   vB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -701,7 +694,7 @@ vU64AddS(
 extern vector unsigned int 
 vU128Add(
   vector unsigned int   vA,
-  vector unsigned int   vB);
+  vector unsigned int   vB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -715,7 +708,7 @@ vU128Add(
 extern vector unsigned int 
 vU128AddS(
   vector unsigned int   vA,
-  vector unsigned int   vB);
+  vector unsigned int   vB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -729,7 +722,7 @@ vU128AddS(
 extern vector signed int 
 vS64Add(
   vector signed int   vA,
-  vector signed int   vB);
+  vector signed int   vB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -743,7 +736,7 @@ vS64Add(
 extern vector signed int 
 vS64AddS(
   vector signed int   vA,
-  vector signed int   vB);
+  vector signed int   vB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -757,7 +750,7 @@ vS64AddS(
 extern vector signed int 
 vS128Add(
   vector signed int   vA,
-  vector signed int   vB);
+  vector signed int   vB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -771,7 +764,7 @@ vS128Add(
 extern vector signed int 
 vS128AddS(
   vector signed int   vA,
-  vector signed int   vB);
+  vector signed int   vB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -786,7 +779,7 @@ vS128AddS(
 extern vector unsigned int 
 vLL64Shift(
   vector unsigned int    vA,
-  vector unsigned char   vShiftFactor);
+  vector unsigned char   vShiftFactor)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -800,7 +793,7 @@ vLL64Shift(
 extern vector unsigned int 
 vA64Shift(
   vector unsigned int    vA,
-  vector unsigned char   vShiftFactor);
+  vector unsigned char   vShiftFactor)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -814,7 +807,7 @@ vA64Shift(
 extern vector unsigned int 
 vLR64Shift(
   vector unsigned int    vA,
-  vector unsigned char   vShiftFactor);
+  vector unsigned char   vShiftFactor)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -828,7 +821,7 @@ vLR64Shift(
 extern vector unsigned int 
 vLL64Shift2(
   vector unsigned int    vA,
-  vector unsigned char   vShiftFactor);
+  vector unsigned char   vShiftFactor)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -842,7 +835,7 @@ vLL64Shift2(
 extern vector unsigned int 
 vA64Shift2(
   vector unsigned int    vA,
-  vector unsigned char   vShiftFactor);
+  vector unsigned char   vShiftFactor)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -856,7 +849,7 @@ vA64Shift2(
 extern vector unsigned int 
 vLR64Shift2(
   vector unsigned int    vA,
-  vector unsigned char   vShiftFactor);
+  vector unsigned char   vShiftFactor)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -870,7 +863,7 @@ vLR64Shift2(
 extern vector unsigned int 
 vA128Shift(
   vector unsigned int    vA,
-  vector unsigned char   vShiftFactor);
+  vector unsigned char   vShiftFactor)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -885,7 +878,7 @@ vA128Shift(
 extern vector unsigned int 
 vL64Rotate(
   vector unsigned int    vA,
-  vector unsigned char   vRotateFactor);
+  vector unsigned char   vRotateFactor)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -899,7 +892,7 @@ vL64Rotate(
 extern vector unsigned int 
 vR64Rotate(
   vector unsigned int    vA,
-  vector unsigned char   vRotateFactor);
+  vector unsigned char   vRotateFactor)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -913,7 +906,7 @@ vR64Rotate(
 extern vector unsigned int 
 vL64Rotate2(
   vector unsigned int    vA,
-  vector unsigned char   vRotateFactor);
+  vector unsigned char   vRotateFactor)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -927,7 +920,7 @@ vL64Rotate2(
 extern vector unsigned int 
 vR64Rotate2(
   vector unsigned int    vA,
-  vector unsigned char   vRotateFactor);
+  vector unsigned char   vRotateFactor)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -941,7 +934,7 @@ vR64Rotate2(
 extern vector unsigned int 
 vL128Rotate(
   vector unsigned int    vA,
-  vector unsigned char   vRotateFactor);
+  vector unsigned char   vRotateFactor)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -955,19 +948,11 @@ vL128Rotate(
 extern vector unsigned int 
 vR128Rotate(
   vector unsigned int    vA,
-  vector unsigned char   vRotateFactor);
+  vector unsigned char   vRotateFactor)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #endif  /* defined(__VEC__) */
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

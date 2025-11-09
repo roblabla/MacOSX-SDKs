@@ -74,6 +74,15 @@ struct clock_frequency_info_t {
   unsigned long bus_to_cpu_rate_den;
   unsigned long bus_to_dec_rate_num;
   unsigned long bus_to_dec_rate_den;
+  unsigned long timebase_frequency_hz;
+  unsigned long timebase_frequency_num;
+  unsigned long timebase_frequency_den;
+  unsigned long long bus_frequency_hz;
+  unsigned long long bus_frequency_min_hz;
+  unsigned long long bus_frequency_max_hz;
+  unsigned long long cpu_frequency_hz;
+  unsigned long long cpu_frequency_min_hz;
+  unsigned long long cpu_frequency_max_hz;
 };
 
 typedef struct clock_frequency_info_t clock_frequency_info_t;

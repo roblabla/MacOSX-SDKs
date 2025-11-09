@@ -61,7 +61,7 @@ typedef struct
 ** kIOAccelNumSurfaceMemoryTypes.
 */
 enum eIOAccelSurfaceMemoryTypes {
-	kIOAccelNumSurfaceMemoryTypes,
+	kIOAccelNumSurfaceMemoryTypes
 };
 
 
@@ -91,7 +91,7 @@ enum eIOAccelSurfaceMethods {
 	kIOAccelSurfaceWriteLock,
 	kIOAccelSurfaceWriteUnlock,
 
-	kIOAccelNumSurfaceMethods,
+	kIOAccelNumSurfaceMethods
 };
 
 
@@ -119,20 +119,36 @@ typedef enum {
 ** Options bits for IOAccelSetSurfaceShape and the kIOAccelSurfaceSetShape method.
 */
 typedef enum {
-        kIOAccelSurfaceShapeNone         = 0x00000000,
-        kIOAccelSurfaceShapeBlockingBit  = 0x00000001,
-        kIOAccelSurfaceShapeNonSimpleBit = 0x00000002,
-} eIOAccelSurfaceShapeBits;
+        kIOAccelSurfaceShapeNone             = 0x00000000,
+        kIOAccelSurfaceShapeNonBlockingBit   = 0x00000001,
+        kIOAccelSurfaceShapeNonSimpleBit     = 0x00000002,
+        kIOAccelSurfaceShapeIdentityScaleBit = 0x00000004,
 
+        /* wrong name, use kIOAccelSurfaceShapeNonBlockingBit */
+        kIOAccelSurfaceShapeBlockingBit      = kIOAccelSurfaceShapeNonBlockingBit
+} eIOAccelSurfaceShapeBits;
 
 /*
 ** Return bits for the kIOAccelSurfaceGetState method.
 */
 typedef enum {
 	kIOAccelSurfaceStateNone    = 0x00000000,
-	kIOAccelSurfaceStateIdleBit = 0x00000001,
+	kIOAccelSurfaceStateIdleBit = 0x00000001
 } eIOAccelSurfaceStateBits;
 
+/*
+** Option bits for the kIOAccelSurfaceSetScale method.
+*/
+typedef enum {
+	kIOAccelSurfaceBeamSyncSwaps = 0x00000001,
+	kIOAccelSurfaceFixedSource   = 0x00000002,
+
+	kIOAccelSurfaceFiltering     = 0x000000f0,
+	kIOAccelSurfaceFilterDefault = 0x00000000,
+	kIOAccelSurfaceFilterNone    = 0x00000010,
+	kIOAccelSurfaceFilterLinear  = 0x00000020
+
+} eIOAccelSurfaceScaleBits;
 
 #endif /* _IOACCEL_SURFACE_CONNECT_H */
 

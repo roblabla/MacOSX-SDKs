@@ -83,6 +83,8 @@ int	sigsuspend __P((const sigset_t *));
 int	killpg __P((pid_t, int));
 int	sigblock __P((int));
 int	siginterrupt __P((int, int));
+int	sighold __P((int));
+int	sigrelse __P((int));
 int	sigpause __P((int));
 int	sigreturn __P((struct sigcontext *));
 int	sigsetmask __P((int));

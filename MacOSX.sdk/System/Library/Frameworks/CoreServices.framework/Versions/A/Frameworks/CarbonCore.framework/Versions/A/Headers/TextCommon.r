@@ -3,9 +3,9 @@
  
      Contains:   TextEncoding-related types and constants, and prototypes for related functions
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1995-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1995-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -172,7 +172,9 @@
 #define kTextEncodingHZ_GB_2312 		0x0A05				/*  HZ (RFC 1842, for Chinese mail & news) */
 #define kTextEncodingBig5_HKSCS_1999 	0x0A06				/*  Big-5 with Hong Kong special char set supplement */
 
-#define kTextEncodingNextStepLatin 		0x0B01				/*  NextStep encoding */
+#define kTextEncodingNextStepLatin 		0x0B01				/*  NextStep Latin encoding */
+#define kTextEncodingNextStepJapanese 	0x0B02				/*  NextStep Japanese encoding (variant of EUC-JP) */
+
 #define kTextEncodingEBCDIC_US 			0x0C01				/*  basic EBCDIC-US */
 #define kTextEncodingEBCDIC_CP037 		0x0C02				/*  code page 037, extended EBCDIC (Latin-1 set) for US,Canada... */
 
@@ -229,7 +231,10 @@
 #define kMacVT100EuroSignVariant 		2					/*  Mac OS version >= 8.5, 0xDB is EURO SIGN       */
 
 #define kUnicodeNoSubset 				0
-#define kUnicodeCanonicalDecompVariant 	2					/*  canonical decomposition; excludes composed characters */
+#define kUnicodeCanonicalDecompVariant 	2					/*  canonical decomposition (NFD); excludes composed characters */
+#define kUnicodeCanonicalCompVariant 	3					/*  canonical composition (NFC); uses the composed chars as of Unicode 3.1 */
+#define kUnicodeHFSPlusDecompVariant 	8					/*  decomposition for HFS+; doesn't decompose in 2000-2FFF, F900-FAFF, 2F800-2FAFF */
+#define kUnicodeHFSPlusCompVariant 		9					/*  composition based on HFS+ decomposition */
 
 #define kBig5_BasicVariant 				0
 #define kBig5_StandardVariant 			1					/*  0xC6A1-0xC7FC: kana, Cyrillic, enclosed numerics */
@@ -243,7 +248,6 @@
 #define kMacRomanLatin1RomanianVariant 	14					/*  permuted MacRomanian, EuroSignVariant */
 
 #define kUnicodeNoCompatibilityVariant 	1
-#define kUnicodeNoComposedVariant 		3
 #define kUnicodeNoCorporateVariant 		4
 
 #define kMacRomanStandardVariant 		0
@@ -259,6 +263,7 @@
 #define kHebrewStandardVariant 			0
 #define kHebrewFigureSpaceVariant 		1
 #define kUnicodeMaxDecomposedVariant 	2					/*  replaced by kUnicodeCanonicalDecompVariant */
+#define kUnicodeNoComposedVariant 		3					/*  this really meant NoComposing; replaced by kUnicodeCanonicalCompVariant */
 															/*  The following Japanese variant options were never supported and are now deprecated. */
 															/*  In TEC 1.4 and later their functionality is replaced by the Unicode Converter options listed. */
 #define kJapaneseNoOneByteKanaOption 	0x20				/*  replaced by UnicodeConverter option kUnicodeNoHalfwidthCharsBit */

@@ -3,9 +3,9 @@
  
      Contains:   ColorSync CMM Component API
  
-     Version:    ColorSync-81~8
+     Version:    ColorSync-98.1~196
  
-     Copyright:  © 1994-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,26 +16,21 @@
 #ifndef __CMMCOMPONENT__
 #define __CMMCOMPONENT__
 
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
+#endif
+
 #ifndef __CMAPPLICATION__
 #include <ColorSync/CMApplication.h>
 #endif
 
 
 
+
+#include <AvailabilityMacros.h>
+
 #if PRAGMA_ONCE
 #pragma once
-#endif
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 /* Component-based CMM interface version */
@@ -272,17 +267,6 @@ enum {
 #endif  /* TARGET_OS_WIN32 */
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __CMMCOMPONENT__ */
 

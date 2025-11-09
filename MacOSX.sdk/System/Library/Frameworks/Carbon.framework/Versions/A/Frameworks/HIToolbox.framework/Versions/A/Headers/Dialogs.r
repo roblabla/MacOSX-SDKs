@@ -3,9 +3,9 @@
  
      Contains:   Dialog Manager interfaces.
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -20,8 +20,8 @@
 #ifndef __MACWINDOWS_R__
 #include <HIToolbox/MacWindows.r>
 #endif
-#ifndef __CONDITIONALMACROS_R__
-#include <CarbonCore/ConditionalMacros.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
 
 															/*  Alert types to pass into StandardAlert  */
@@ -231,9 +231,12 @@ type 'DLOG' {
                        noGrowDocProc,
                      movableDBoxProc,
                        zoomDocProc = 8,
-                       zoomNoGrow = 12,
-                       rDocProc = 16;
-     byte            invisible, visible;                     /* visible              */
+                       zoomNoGrow = 12
+#if CALL_NOT_IN_CARBON
+                     ,rDocProc = 16
+#endif
+                      ;
+      byte            invisible, visible;                     /* visible              */
      fill byte;
      byte            noGoAway, goAway;                       /* goAway               */
      fill byte;

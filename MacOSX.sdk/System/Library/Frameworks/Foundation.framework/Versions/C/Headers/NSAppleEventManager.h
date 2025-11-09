@@ -1,12 +1,12 @@
-/*	NSAppleEventManager.h
-	Copyright 1997-2001, Apple, Inc. All rights reserved.
+/*
+	NSAppleEventManager.h
+	Copyright (c) 1997-2002, Apple Computer, Inc.
+	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
 #import <ApplicationServices/ApplicationServices.h>
-
-@class NSAppleEventDescriptor;
 
 extern const double NSAppleEventTimeOutDefault;
 extern const double NSAppleEventTimeOutNone;
@@ -16,7 +16,7 @@ extern NSString *NSAppleEventManagerWillProcessFirstEventNotification;
 @interface NSAppleEventManager : NSObject {
 
     @private
-    void *privateData;
+    BOOL _preparedToDispatch;
 
 }
 

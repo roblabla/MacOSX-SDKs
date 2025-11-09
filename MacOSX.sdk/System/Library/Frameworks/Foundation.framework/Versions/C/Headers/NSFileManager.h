@@ -1,5 +1,5 @@
 /*	NSFileManager.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -55,7 +55,9 @@
 
 - (const char *)fileSystemRepresentationWithPath:(NSString *)path;
 - (NSString *)stringWithFileSystemRepresentation:(const char *)str length:(unsigned)len;
-
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (NSArray *)componentsToDisplayForPath:(NSString *)path;
+#endif
 @end
 
 @interface NSObject (NSCopyLinkMoveHandler)
@@ -91,6 +93,13 @@ FOUNDATION_EXPORT NSString * const NSFileSystemFileNumber;
 FOUNDATION_EXPORT NSString * const NSFileExtensionHidden;
 FOUNDATION_EXPORT NSString * const NSFileHFSCreatorCode;
 FOUNDATION_EXPORT NSString * const NSFileHFSTypeCode;
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+FOUNDATION_EXPORT NSString * const NSFileImmutable;
+FOUNDATION_EXPORT NSString * const NSFileAppendOnly;
+FOUNDATION_EXPORT NSString * const NSFileCreationDate;
+FOUNDATION_EXPORT NSString * const NSFileOwnerAccountID;
+FOUNDATION_EXPORT NSString * const NSFileGroupOwnerAccountID;
+#endif
 
 /* File System attributes */
 FOUNDATION_EXPORT NSString * const NSFileSystemSize;
@@ -113,6 +122,12 @@ FOUNDATION_EXPORT NSString * const NSFileSystemFreeNodes;
 - (BOOL)fileExtensionHidden;
 - (OSType)fileHFSCreatorCode;
 - (OSType)fileHFSTypeCode;
-
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (BOOL)fileIsImmutable;
+- (BOOL)fileIsAppendOnly;
+- (NSDate *)fileCreationDate;
+- (NSNumber *)fileOwnerAccountID;
+- (NSNumber *)fileGroupOwnerAccountID;
+#endif
 @end
 

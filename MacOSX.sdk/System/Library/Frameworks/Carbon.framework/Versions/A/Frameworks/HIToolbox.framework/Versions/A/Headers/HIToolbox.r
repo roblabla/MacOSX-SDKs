@@ -3,9 +3,9 @@
  
      Contains:   Master include for HIToolbox private framework
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,16 +21,12 @@
 #include <ApplicationServices/ApplicationServices.r>
 #endif
 
+#ifndef __HIVIEW_R__
+#include <HIToolbox/HIView.r>
+#endif
+
 #ifndef __BALLOONS_R__
 #include <HIToolbox/Balloons.r>
-#endif
-
-#ifndef __PROCESSES_R__
-#include <HIToolbox/Processes.r>
-#endif
-
-#ifndef __ICONS_R__
-#include <HIToolbox/Icons.r>
 #endif
 
 #ifndef __CONTROLS_R__

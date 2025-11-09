@@ -3,9 +3,9 @@
  
      Contains:   Definitions of controls provided by the Control Manager
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -15,6 +15,10 @@
 */
 #ifndef __CONTROLDEFINITIONS__
 #define __CONTROLDEFINITIONS__
+
+#ifndef __APPLICATIONSERVICES__
+#include <ApplicationServices/ApplicationServices.h>
+#endif
 
 #ifndef __APPEARANCE__
 #include <HIToolbox/Appearance.h>
@@ -41,11 +45,10 @@
 #endif
 
 
-#ifndef __CFSTRING__
-#include <CoreFoundation/CFString.h>
-#endif
 
 
+
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -55,13 +58,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 
 /*
@@ -216,14 +213,15 @@ enum {
 /*                                                                                      */
 /*  An example call:                                                                    */
 /*                                                                                      */
-/*  control = NewControl( window, &bounds, "\p", true, 0, kContentIconSuiteRes +        */
+/*  control = NewControl( window, &bounds, "\p", true, 0, kControlContentIconSuiteRes + */
 /*                          kBehaviorToggles, myIconSuiteID, bevelButtonSmallBevelProc, */
 /*                          0L );                                                       */
 /*                                                                                      */
 /*  Attaching a menu:                                                                   */
 /*                                                                                      */
-/*  control = NewControl( window, &bounds, "\p", true, kMyMenuID, kContentIconSuiteRes, */
-/*          myIconSuiteID, bevelButtonSmallBevelProc + kBevelButtonMenuOnRight, 0L );   */
+/*  control = NewControl( window, &bounds, "\p", true, kMyMenuID,                       */
+/*          kControlContentIconSuiteRes, myIconSuiteID, bevelButtonSmallBevelProc +     */
+/*          kBevelButtonMenuOnRight, 0L );                                              */
 /*                                                                                      */
 /*  This will attach menu ID kMyMenuID to the button, with the popup arrow facing right.*/
 /*  This also puts the menu up to the right of the button. You can also specify that a  */
@@ -303,6 +301,9 @@ enum {
 /*
  *  CreateBevelButtonControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -319,7 +320,9 @@ CreateBevelButtonControl(
   SInt16                            menuID,
   ControlBevelButtonMenuBehavior    menuBehavior,
   ControlBevelButtonMenuPlacement   menuPlacement,
-  ControlRef *                      outControl);
+  ControlRef *                      outControl)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
 
 
 /* Graphic Alignments */
@@ -370,9 +373,7 @@ enum {
   kControlBevelButtonMenuValueTag = 'mval', /* SInt16*/
   kControlBevelButtonMenuHandleTag = 'mhnd', /* MenuRef*/
   kControlBevelButtonMenuRefTag = 'mhnd', /* MenuRef*/
-  kControlBevelButtonOwnedMenuRefTag = 'omrf', /* MenuRef (control will dispose)*/
-  kControlBevelButtonCenterPopupGlyphTag = 'pglc', /* Boolean: true = center, false = bottom right*/
-  kControlBevelButtonKindTag    = 'bebk' /* ThemeButtonKind ( kTheme[Small,Medium,Large,Rounded]BevelButton )*/
+  kControlBevelButtonCenterPopupGlyphTag = 'pglc' /* Boolean: true = center, false = bottom right*/
 };
 
 /* These are tags in 1.0.1 or later */
@@ -391,9 +392,18 @@ enum {
   kControlBevelButtonScaleIconTag = 'scal' /* IconRefs.*/
 };
 
+/* tags available in Mac OS X and later */
+enum {
+  kControlBevelButtonOwnedMenuRefTag = 'omrf', /* MenuRef (control will dispose)*/
+  kControlBevelButtonKindTag    = 'bebk' /* ThemeButtonKind ( kTheme[Small,Medium,Large,Rounded]BevelButton )*/
+};
+
 /* Helper routines are available only thru the shared library/glue. */
 /*
  *  GetBevelButtonMenuValue()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -403,11 +413,14 @@ enum {
 extern OSErr 
 GetBevelButtonMenuValue(
   ControlRef   inButton,
-  SInt16 *     outValue);
+  SInt16 *     outValue)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetBevelButtonMenuValue()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -417,11 +430,14 @@ GetBevelButtonMenuValue(
 extern OSErr 
 SetBevelButtonMenuValue(
   ControlRef   inButton,
-  SInt16       inValue);
+  SInt16       inValue)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetBevelButtonMenuHandle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -431,12 +447,15 @@ SetBevelButtonMenuValue(
 extern OSErr 
 GetBevelButtonMenuHandle(
   ControlRef    inButton,
-  MenuHandle *  outHandle);
+  MenuHandle *  outHandle)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #define GetBevelButtonMenuRef GetBevelButtonMenuHandle
 /*
  *  GetBevelButtonContentInfo()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -446,11 +465,14 @@ GetBevelButtonMenuHandle(
 extern OSErr 
 GetBevelButtonContentInfo(
   ControlRef                    inButton,
-  ControlButtonContentInfoPtr   outContent);
+  ControlButtonContentInfoPtr   outContent)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetBevelButtonContentInfo()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -460,11 +482,14 @@ GetBevelButtonContentInfo(
 extern OSErr 
 SetBevelButtonContentInfo(
   ControlRef                    inButton,
-  ControlButtonContentInfoPtr   inContent);
+  ControlButtonContentInfoPtr   inContent)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetBevelButtonTransform()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -474,11 +499,14 @@ SetBevelButtonContentInfo(
 extern OSErr 
 SetBevelButtonTransform(
   ControlRef          inButton,
-  IconTransformType   transform);
+  IconTransformType   transform)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetBevelButtonGraphicAlignment()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -490,11 +518,14 @@ SetBevelButtonGraphicAlignment(
   ControlRef                      inButton,
   ControlButtonGraphicAlignment   inAlign,
   SInt16                          inHOffset,
-  SInt16                          inVOffset);
+  SInt16                          inVOffset)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetBevelButtonTextAlignment()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -505,11 +536,14 @@ extern OSErr
 SetBevelButtonTextAlignment(
   ControlRef                   inButton,
   ControlButtonTextAlignment   inAlign,
-  SInt16                       inHOffset);
+  SInt16                       inHOffset)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetBevelButtonTextPlacement()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -519,7 +553,7 @@ SetBevelButtonTextAlignment(
 extern OSErr 
 SetBevelButtonTextPlacement(
   ControlRef                   inButton,
-  ControlButtonTextPlacement   inWhere);
+  ControlButtonTextPlacement   inWhere)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -578,6 +612,9 @@ enum {
 /*
  *  CreateSliderControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -594,7 +631,8 @@ CreateSliderControl(
   UInt16                     numTickMarks,
   Boolean                    liveTracking,
   ControlActionUPP           liveTrackingProc,
-  ControlRef *               outControl);
+  ControlRef *               outControl)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -615,7 +653,7 @@ enum {
 
 typedef UInt16 ControlDisclosureTriangleOrientation;
 enum {
-  kControlDisclosureTrianglePointDefault = 0, /* points right on a left-to-right script system (X only)*/
+  kControlDisclosureTrianglePointDefault = 0, /* points right on a left-to-right script system (Mac OS X and later or CarbonLib 1.5 and later only)*/
   kControlDisclosureTrianglePointRight = 1,
   kControlDisclosureTrianglePointLeft = 2
 };
@@ -625,9 +663,69 @@ enum {
   kControlKindDisclosureTriangle = 'dist'
 };
 
-/* Creation API: Carbon only */
 /*
  *  CreateDisclosureTriangleControl()
+ *  
+ *  Summary:
+ *    Creates a Disclosure Triangle control at a specific position in
+ *    the specified window.
+ *  
+ *  Discussion:
+ *    Disclosure Triangles are small controls that give the user a way
+ *    to toggle the visibility of information or other user interface.
+ *    When information is in a hidden state, a Disclosure Triangle is
+ *    considered "closed" and should point to the right (or sometimes
+ *    to the left). When the user clicks on it, the Disclosure Triangle
+ *    rotates downwards into the "open" state. The application should
+ *    repond by revealing the appropriate information or interface. On
+ *    Mac OS X, a root control will be created for the window if one
+ *    does not already exist. If a root control exists for the window,
+ *    the Disclosure Triangle control will be embedded into it.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The WindowRef into which the Disclosure Triangle will be
+ *      created.
+ *    
+ *    inBoundsRect:
+ *      The desired position (in coordinates local to the window's
+ *      port) for the Disclosure Triangle.
+ *    
+ *    inOrientation:
+ *      The direction the Disclosure Triangle should point when it is
+ *      "closed". Passing kControlDisclosureTrianglePointDefault is
+ *      only legal as of Mac OS X and CarbonLib 1.5.
+ *    
+ *    inTitle:
+ *      The title for the Disclosure Triangle. The title will only be
+ *      displayed if the inDrawTitle parameter is true. Title display
+ *      only works on Mac OS X.
+ *    
+ *    inInitialValue:
+ *      The starting value determines whether the Disclosure Triangle
+ *      is initially in its "open" or "closed" state. The value 0
+ *      represents the "closed" state and 1 represents the "open" state.
+ *    
+ *    inDrawTitle:
+ *      A Boolean indicating whether the Disclosure Triangle should
+ *      draw its title next to the widget. Title display only works on
+ *      Mac OS X.
+ *    
+ *    inAutoToggles:
+ *      A Boolean indicating whether the Disclosure Triangle should
+ *      change its own value (from "open" to "closed" and vice-versa)
+ *      automatically when it is clicked on.
+ *    
+ *    outControl:
+ *      On successful output, outControl will contain a reference to
+ *      the Disclosure Triangle control.
+ *  
+ *  Result:
+ *    An OSStatus code indicating success or failure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -636,14 +734,15 @@ enum {
  */
 extern OSStatus 
 CreateDisclosureTriangleControl(
-  WindowRef                              window,
-  const Rect *                           boundsRect,
-  ControlDisclosureTriangleOrientation   orientation,
-  CFStringRef                            title,
-  SInt32                                 initialValue,
-  Boolean                                drawTitle,
-  Boolean                                autoToggles,
-  ControlRef *                           outControl);
+  WindowRef                              inWindow,
+  const Rect *                           inBoundsRect,
+  ControlDisclosureTriangleOrientation   inOrientation,
+  CFStringRef                            inTitle,
+  SInt32                                 inInitialValue,
+  Boolean                                inDrawTitle,
+  Boolean                                inAutoToggles,
+  ControlRef *                           outControl)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
 
 
 /* Tagged data supported by disclosure triangles */
@@ -655,6 +754,9 @@ enum {
 /*
  *  SetDisclosureTriangleLastValue()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -663,7 +765,7 @@ enum {
 extern OSErr 
 SetDisclosureTriangleLastValue(
   ControlRef   inTabControl,
-  SInt16       inValue);
+  SInt16       inValue)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -692,6 +794,9 @@ enum {
 /*
  *  CreateProgressBarControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -705,11 +810,14 @@ CreateProgressBarControl(
   SInt32        minimum,
   SInt32        maximum,
   Boolean       indeterminate,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CreateRelevanceBarControl()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -723,7 +831,7 @@ CreateRelevanceBarControl(
   SInt32        value,
   SInt32        minimum,
   SInt32        maximum,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Tagged data supported by progress bars */
@@ -751,6 +859,9 @@ enum {
 /*
  *  CreateLittleArrowsControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -764,7 +875,7 @@ CreateLittleArrowsControl(
   SInt32        minimum,
   SInt32        maximum,
   SInt32        increment,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -786,6 +897,9 @@ enum {
 /*
  *  CreateChasingArrowsControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -795,7 +909,7 @@ extern OSStatus
 CreateChasingArrowsControl(
   WindowRef     window,
   const Rect *  boundsRect,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Tagged data supported by the Chasing Arrows control */
@@ -868,6 +982,9 @@ enum {
 /*
  *  CreateTabsControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -881,7 +998,8 @@ CreateTabsControl(
   ControlTabDirection      direction,
   UInt16                   numTabs,
   const ControlTabEntry *  tabArray,
-  ControlRef *             outControl);
+  ControlRef *             outControl)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
 
 
 /* Tagged data supported by tabs */
@@ -923,6 +1041,9 @@ typedef struct ControlTabInfoRecV1      ControlTabInfoRecV1;
 /*
  *  GetTabContentRect()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -931,11 +1052,14 @@ typedef struct ControlTabInfoRecV1      ControlTabInfoRecV1;
 extern OSErr 
 GetTabContentRect(
   ControlRef   inTabControl,
-  Rect *       outContentRect);
+  Rect *       outContentRect)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetTabEnabled()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -946,7 +1070,7 @@ extern OSErr
 SetTabEnabled(
   ControlRef   inTabControl,
   SInt16       inTabToHilite,
-  Boolean      inEnabled);
+  Boolean      inEnabled)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -968,6 +1092,9 @@ enum {
 /*
  *  CreateSeparatorControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -977,7 +1104,7 @@ extern OSStatus
 CreateSeparatorControl(
   WindowRef     window,
   const Rect *  boundsRect,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -1007,6 +1134,29 @@ enum {
 /*
  *  CreateGroupBoxControl()
  *  
+ *  Summary:
+ *    Creates a group box control.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window that should contain the control.
+ *    
+ *    boundsRect:
+ *      The bounding box of the control.
+ *    
+ *    title:
+ *      The title of the control.
+ *    
+ *    primary:
+ *      Whether to create a primary or secondary group box.
+ *    
+ *    outControl:
+ *      On exit, contains the new control.
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -1018,11 +1168,42 @@ CreateGroupBoxControl(
   const Rect *  boundsRect,
   CFStringRef   title,
   Boolean       primary,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CreateCheckGroupBoxControl()
+ *  
+ *  Summary:
+ *    Creates a group box control that has a check box as its title.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window that should contain the control.
+ *    
+ *    boundsRect:
+ *      The bounding box of the control.
+ *    
+ *    title:
+ *      The title of the control (used as the title of the check box).
+ *    
+ *    initialValue:
+ *      The initial value of the check box.
+ *    
+ *    primary:
+ *      Whether to create a primary or secondary group box.
+ *    
+ *    autoToggle:
+ *      Whether to create an auto-toggling check box. Auto-toggling
+ *      check box titles are only supported on Mac OS X; this parameter
+ *      must be false when used with CarbonLib.
+ *    
+ *    outControl:
+ *      On exit, contains the new control.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1037,11 +1218,54 @@ CreateCheckGroupBoxControl(
   SInt32        initialValue,
   Boolean       primary,
   Boolean       autoToggle,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CreatePopupGroupBoxControl()
+ *  
+ *  Summary:
+ *    Creates a group box control that has a popup button as its title.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window that should contain the control.
+ *    
+ *    boundsRect:
+ *      The bounding box of the control.
+ *    
+ *    title:
+ *      The title of the control (used as the title of the popup
+ *      button).
+ *    
+ *    primary:
+ *      Whether to create a primary or secondary group box.
+ *    
+ *    menuID:
+ *      The menu ID of the menu to be displayed by the popup button.
+ *    
+ *    variableWidth:
+ *      Whether the popup button should have a variable-width title.
+ *      Fixed-width titles are only supported by Mac OS X; this
+ *      parameter must be true when used with CarbonLib.
+ *    
+ *    titleWidth:
+ *      The width in pixels of the popup button title.
+ *    
+ *    titleJustification:
+ *      The justification of the popup button title. Use one of the
+ *      TextEdit justification constants here (teFlushDefault,
+ *      teCenter, teFlushRight, or teFlushLeft).
+ *    
+ *    titleStyle:
+ *      The QuickDraw text style of the popup button title.
+ *    
+ *    outControl:
+ *      On exit, contains the new control.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1059,7 +1283,8 @@ CreatePopupGroupBoxControl(
   SInt16        titleWidth,
   SInt16        titleJustification,
   Style         titleStyle,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
 
 
 /* Tagged data supported by group box */
@@ -1112,6 +1337,9 @@ enum {
 /*
  *  CreateImageWellControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -1122,7 +1350,7 @@ CreateImageWellControl(
   WindowRef                         window,
   const Rect *                      boundsRect,
   const ControlButtonContentInfo *  info,
-  ControlRef *                      outControl);
+  ControlRef *                      outControl)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Tagged data supported by image wells */
@@ -1136,6 +1364,9 @@ enum {
 /*
  *  GetImageWellContentInfo()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1144,11 +1375,14 @@ enum {
 extern OSErr 
 GetImageWellContentInfo(
   ControlRef                    inButton,
-  ControlButtonContentInfoPtr   outContent);
+  ControlButtonContentInfoPtr   outContent)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetImageWellContentInfo()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1158,11 +1392,14 @@ GetImageWellContentInfo(
 extern OSErr 
 SetImageWellContentInfo(
   ControlRef                    inButton,
-  ControlButtonContentInfoPtr   inContent);
+  ControlButtonContentInfoPtr   inContent)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetImageWellTransform()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1172,7 +1409,7 @@ SetImageWellContentInfo(
 extern OSErr 
 SetImageWellTransform(
   ControlRef          inButton,
-  IconTransformType   inTransform);
+  IconTransformType   inTransform)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -1221,6 +1458,9 @@ enum {
 /*
  *  CreatePopupArrowControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -1232,7 +1472,7 @@ CreatePopupArrowControl(
   const Rect *                   boundsRect,
   ControlPopupArrowOrientation   orientation,
   ControlPopupArrowSize          size,
-  ControlRef *                   outControl);
+  ControlRef *                   outControl)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -1252,6 +1492,9 @@ enum {
 /*
  *  CreatePlacardControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -1261,7 +1504,7 @@ extern OSStatus
 CreatePlacardControl(
   WindowRef     window,
   const Rect *  boundsRect,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -1320,6 +1563,9 @@ enum {
 /*
  *  CreateClockControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -1331,7 +1577,7 @@ CreateClockControl(
   const Rect *        boundsRect,
   ControlClockType    clockType,
   ControlClockFlags   clockFlags,
-  ControlRef *        outControl);
+  ControlRef *        outControl)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Tagged data supported by clocks */
@@ -1378,6 +1624,9 @@ enum {
 /*
  *  CreateUserPaneControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -1388,7 +1637,7 @@ CreateUserPaneControl(
   WindowRef     window,
   const Rect *  boundsRect,
   UInt32        features,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Tagged data supported by user panes */
@@ -1430,7 +1679,7 @@ typedef STACK_UPP_TYPE(ControlUserPaneBackgroundProcPtr)        ControlUserPaneB
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ControlUserPaneDrawUPP
-NewControlUserPaneDrawUPP(ControlUserPaneDrawProcPtr userRoutine);
+NewControlUserPaneDrawUPP(ControlUserPaneDrawProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewControlUserPaneHitTestUPP()
@@ -1441,7 +1690,7 @@ NewControlUserPaneDrawUPP(ControlUserPaneDrawProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ControlUserPaneHitTestUPP
-NewControlUserPaneHitTestUPP(ControlUserPaneHitTestProcPtr userRoutine);
+NewControlUserPaneHitTestUPP(ControlUserPaneHitTestProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewControlUserPaneTrackingUPP()
@@ -1452,7 +1701,7 @@ NewControlUserPaneHitTestUPP(ControlUserPaneHitTestProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ControlUserPaneTrackingUPP
-NewControlUserPaneTrackingUPP(ControlUserPaneTrackingProcPtr userRoutine);
+NewControlUserPaneTrackingUPP(ControlUserPaneTrackingProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewControlUserPaneIdleUPP()
@@ -1463,7 +1712,7 @@ NewControlUserPaneTrackingUPP(ControlUserPaneTrackingProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ControlUserPaneIdleUPP
-NewControlUserPaneIdleUPP(ControlUserPaneIdleProcPtr userRoutine);
+NewControlUserPaneIdleUPP(ControlUserPaneIdleProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewControlUserPaneKeyDownUPP()
@@ -1474,7 +1723,7 @@ NewControlUserPaneIdleUPP(ControlUserPaneIdleProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ControlUserPaneKeyDownUPP
-NewControlUserPaneKeyDownUPP(ControlUserPaneKeyDownProcPtr userRoutine);
+NewControlUserPaneKeyDownUPP(ControlUserPaneKeyDownProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewControlUserPaneActivateUPP()
@@ -1485,7 +1734,7 @@ NewControlUserPaneKeyDownUPP(ControlUserPaneKeyDownProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ControlUserPaneActivateUPP
-NewControlUserPaneActivateUPP(ControlUserPaneActivateProcPtr userRoutine);
+NewControlUserPaneActivateUPP(ControlUserPaneActivateProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewControlUserPaneFocusUPP()
@@ -1496,7 +1745,7 @@ NewControlUserPaneActivateUPP(ControlUserPaneActivateProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ControlUserPaneFocusUPP
-NewControlUserPaneFocusUPP(ControlUserPaneFocusProcPtr userRoutine);
+NewControlUserPaneFocusUPP(ControlUserPaneFocusProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewControlUserPaneBackgroundUPP()
@@ -1507,7 +1756,7 @@ NewControlUserPaneFocusUPP(ControlUserPaneFocusProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ControlUserPaneBackgroundUPP
-NewControlUserPaneBackgroundUPP(ControlUserPaneBackgroundProcPtr userRoutine);
+NewControlUserPaneBackgroundUPP(ControlUserPaneBackgroundProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeControlUserPaneDrawUPP()
@@ -1518,7 +1767,7 @@ NewControlUserPaneBackgroundUPP(ControlUserPaneBackgroundProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeControlUserPaneDrawUPP(ControlUserPaneDrawUPP userUPP);
+DisposeControlUserPaneDrawUPP(ControlUserPaneDrawUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeControlUserPaneHitTestUPP()
@@ -1529,7 +1778,7 @@ DisposeControlUserPaneDrawUPP(ControlUserPaneDrawUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeControlUserPaneHitTestUPP(ControlUserPaneHitTestUPP userUPP);
+DisposeControlUserPaneHitTestUPP(ControlUserPaneHitTestUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeControlUserPaneTrackingUPP()
@@ -1540,7 +1789,7 @@ DisposeControlUserPaneHitTestUPP(ControlUserPaneHitTestUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeControlUserPaneTrackingUPP(ControlUserPaneTrackingUPP userUPP);
+DisposeControlUserPaneTrackingUPP(ControlUserPaneTrackingUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeControlUserPaneIdleUPP()
@@ -1551,7 +1800,7 @@ DisposeControlUserPaneTrackingUPP(ControlUserPaneTrackingUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeControlUserPaneIdleUPP(ControlUserPaneIdleUPP userUPP);
+DisposeControlUserPaneIdleUPP(ControlUserPaneIdleUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeControlUserPaneKeyDownUPP()
@@ -1562,7 +1811,7 @@ DisposeControlUserPaneIdleUPP(ControlUserPaneIdleUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeControlUserPaneKeyDownUPP(ControlUserPaneKeyDownUPP userUPP);
+DisposeControlUserPaneKeyDownUPP(ControlUserPaneKeyDownUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeControlUserPaneActivateUPP()
@@ -1573,7 +1822,7 @@ DisposeControlUserPaneKeyDownUPP(ControlUserPaneKeyDownUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeControlUserPaneActivateUPP(ControlUserPaneActivateUPP userUPP);
+DisposeControlUserPaneActivateUPP(ControlUserPaneActivateUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeControlUserPaneFocusUPP()
@@ -1584,7 +1833,7 @@ DisposeControlUserPaneActivateUPP(ControlUserPaneActivateUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeControlUserPaneFocusUPP(ControlUserPaneFocusUPP userUPP);
+DisposeControlUserPaneFocusUPP(ControlUserPaneFocusUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeControlUserPaneBackgroundUPP()
@@ -1595,7 +1844,7 @@ DisposeControlUserPaneFocusUPP(ControlUserPaneFocusUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeControlUserPaneBackgroundUPP(ControlUserPaneBackgroundUPP userUPP);
+DisposeControlUserPaneBackgroundUPP(ControlUserPaneBackgroundUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeControlUserPaneDrawUPP()
@@ -1609,7 +1858,7 @@ extern void
 InvokeControlUserPaneDrawUPP(
   ControlRef              control,
   SInt16                  part,
-  ControlUserPaneDrawUPP  userUPP);
+  ControlUserPaneDrawUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeControlUserPaneHitTestUPP()
@@ -1623,7 +1872,7 @@ extern ControlPartCode
 InvokeControlUserPaneHitTestUPP(
   ControlRef                 control,
   Point                      where,
-  ControlUserPaneHitTestUPP  userUPP);
+  ControlUserPaneHitTestUPP  userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeControlUserPaneTrackingUPP()
@@ -1638,7 +1887,7 @@ InvokeControlUserPaneTrackingUPP(
   ControlRef                  control,
   Point                       startPt,
   ControlActionUPP            actionProc,
-  ControlUserPaneTrackingUPP  userUPP);
+  ControlUserPaneTrackingUPP  userUPP)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeControlUserPaneIdleUPP()
@@ -1651,7 +1900,7 @@ InvokeControlUserPaneTrackingUPP(
 extern void
 InvokeControlUserPaneIdleUPP(
   ControlRef              control,
-  ControlUserPaneIdleUPP  userUPP);
+  ControlUserPaneIdleUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeControlUserPaneKeyDownUPP()
@@ -1667,7 +1916,7 @@ InvokeControlUserPaneKeyDownUPP(
   SInt16                     keyCode,
   SInt16                     charCode,
   SInt16                     modifiers,
-  ControlUserPaneKeyDownUPP  userUPP);
+  ControlUserPaneKeyDownUPP  userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeControlUserPaneActivateUPP()
@@ -1681,7 +1930,7 @@ extern void
 InvokeControlUserPaneActivateUPP(
   ControlRef                  control,
   Boolean                     activating,
-  ControlUserPaneActivateUPP  userUPP);
+  ControlUserPaneActivateUPP  userUPP)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeControlUserPaneFocusUPP()
@@ -1695,7 +1944,7 @@ extern ControlPartCode
 InvokeControlUserPaneFocusUPP(
   ControlRef               control,
   ControlFocusPart         action,
-  ControlUserPaneFocusUPP  userUPP);
+  ControlUserPaneFocusUPP  userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeControlUserPaneBackgroundUPP()
@@ -1709,7 +1958,7 @@ extern void
 InvokeControlUserPaneBackgroundUPP(
   ControlRef                    control,
   ControlBackgroundPtr          info,
-  ControlUserPaneBackgroundUPP  userUPP);
+  ControlUserPaneBackgroundUPP  userUPP)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
   ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
@@ -1736,6 +1985,9 @@ enum {
 /*
  *  CreateEditTextControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -1748,8 +2000,8 @@ CreateEditTextControl(
   CFStringRef                  text,
   Boolean                      isPassword,
   Boolean                      useInlineInput,
-  const ControlFontStyleRec *  style,
-  ControlRef *                 outControl);
+  const ControlFontStyleRec *  style,                /* can be NULL */
+  ControlRef *                 outControl)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1759,7 +2011,7 @@ enum {
   kControlEditTextTextTag       = 'text', /* Buffer of chars - you supply the buffer*/
   kControlEditTextTEHandleTag   = 'than', /* The TEHandle of the text edit record*/
   kControlEditTextKeyFilterTag  = kControlKeyFilterTag,
-  kControlEditTextSelectionTag  = 'sele', /* EditTextSelectionRec*/
+  kControlEditTextSelectionTag  = 'sele', /* ControlEditTextSelectionRec*/
   kControlEditTextPasswordTag   = 'pass' /* The clear text password text*/
 };
 
@@ -1774,10 +2026,26 @@ enum {
   kControlEditTextInlinePostUpdateProcTag = 'poup' /* ...The refCon parameter will contain the ControlRef.*/
 };
 
-/* Tags available with Mac OS X and later */
+
+/*
+ *  Discussion:
+ *    EditText ControlData tags available with MacOSX and later.
+ */
 enum {
-  kControlEditTextCFStringTag   = 'cfst', /* CFStringRef*/
-  kControlEditTextPasswordCFStringTag = 'pwcf' /* CFStringRef -- UnicodeEditText Only*/
+
+  /*
+   * Extract the content of the edit text field as a CFString.  Don't
+   * forget that you own the returned CFStringRef and are responsible
+   * for CFReleasing it.
+   */
+  kControlEditTextCFStringTag   = 'cfst', /* CFStringRef (Also available on CarbonLib 1.5)*/
+
+  /*
+   * Extract the content of the edit text field as a CFString, if it is
+   * a password field.  Don't forget that you own the returned
+   * CFStringRef and are responsible for CFReleasing it.
+   */
+  kControlEditTextPasswordCFStringTag = 'pwcf' /* CFStringRef*/
 };
 
 
@@ -1801,7 +2069,7 @@ typedef STACK_UPP_TYPE(ControlEditTextValidationProcPtr)        ControlEditTextV
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ControlEditTextValidationUPP
-NewControlEditTextValidationUPP(ControlEditTextValidationProcPtr userRoutine);
+NewControlEditTextValidationUPP(ControlEditTextValidationProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeControlEditTextValidationUPP()
@@ -1812,7 +2080,7 @@ NewControlEditTextValidationUPP(ControlEditTextValidationProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeControlEditTextValidationUPP(ControlEditTextValidationUPP userUPP);
+DisposeControlEditTextValidationUPP(ControlEditTextValidationUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeControlEditTextValidationUPP()
@@ -1825,7 +2093,7 @@ DisposeControlEditTextValidationUPP(ControlEditTextValidationUPP userUPP);
 extern void
 InvokeControlEditTextValidationUPP(
   ControlRef                    control,
-  ControlEditTextValidationUPP  userUPP);
+  ControlEditTextValidationUPP  userUPP)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  ¥ STATIC TEXT (CDEF 18)                                                             */
@@ -1844,6 +2112,9 @@ enum {
 /*
  *  CreateStaticTextControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -1855,7 +2126,8 @@ CreateStaticTextControl(
   const Rect *                 boundsRect,
   CFStringRef                  text,
   const ControlFontStyleRec *  style,
-  ControlRef *                 outControl);
+  ControlRef *                 outControl)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
 
 
 /* Tagged data supported by static text */
@@ -1872,7 +2144,7 @@ enum {
 
 /* Tags available with Mac OS X or later */
 enum {
-  kControlStaticTextCFStringTag = 'cfst' /* CFStringRef*/
+  kControlStaticTextCFStringTag = 'cfst' /* CFStringRef (Also available on CarbonLib 1.5)*/
 };
 
 
@@ -1897,6 +2169,9 @@ enum {
 /*
  *  CreatePictureControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -1908,7 +2183,7 @@ CreatePictureControl(
   const Rect *                      boundsRect,
   const ControlButtonContentInfo *  content,
   Boolean                           dontTrack,
-  ControlRef *                      outControl);
+  ControlRef *                      outControl)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Tagged data supported by picture controls */
@@ -1943,9 +2218,48 @@ enum {
   kControlKindIcon              = 'icon'
 };
 
-/* Creation API: Carbon Only */
 /*
  *  CreateIconControl()
+ *  
+ *  Summary:
+ *    Creates an Icon control at a specific position in the specified
+ *    window.
+ *  
+ *  Discussion:
+ *    Icon controls display an icon that (optionally) hilites when
+ *    clicked on. On Mac OS X, a root control will be created for the
+ *    window if one does not already exist. If a root control exists
+ *    for the window, the Icon control will be embedded into it.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The WindowRef into which the Icon control will be created.
+ *    
+ *    inBoundsRect:
+ *      The desired position (in coordinates local to the window's
+ *      port) for the Icon control.
+ *    
+ *    inIconContent:
+ *      The descriptor for the icon you want the control to display.
+ *      Mac OS X and CarbonLib 1.5 (and beyond) support all of the icon
+ *      content types. Prior to CarbonLib 1.5, the only content types
+ *      that are properly respected are kControlContentIconSuiteRes,
+ *      kControlContentCIconRes, and kControlContentICONRes.
+ *    
+ *    inDontTrack:
+ *      A Boolean value indicating whether the control should hilite
+ *      when it is clicked on. False means hilite and track the mouse.
+ *    
+ *    outControl:
+ *      On successful output, outControl will contain a reference to
+ *      the Icon control.
+ *  
+ *  Result:
+ *    An OSStatus code indicating success or failure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1954,11 +2268,11 @@ enum {
  */
 extern OSStatus 
 CreateIconControl(
-  WindowRef                         window,
-  const Rect *                      boundsRect,
-  const ControlButtonContentInfo *  icon,
-  Boolean                           dontTrack,
-  ControlRef *                      outControl);
+  WindowRef                         inWindow,
+  const Rect *                      inBoundsRect,
+  const ControlButtonContentInfo *  inIconContent,
+  Boolean                           inDontTrack,
+  ControlRef *                      outControl)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Tagged data supported by icon controls */
@@ -1991,6 +2305,9 @@ enum {
 /*
  *  CreateWindowHeaderControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -2001,7 +2318,7 @@ CreateWindowHeaderControl(
   WindowRef     window,
   const Rect *  boundsRect,
   Boolean       isListHeader,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -2029,6 +2346,9 @@ enum {
 /*
  *  CreateListBoxControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -2047,7 +2367,7 @@ CreateListBoxControl(
   SInt16               cellWidth,
   Boolean              hasGrowSpace,
   const ListDefSpec *  listDef,
-  ControlRef *         outControl);
+  ControlRef *         outControl)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Tagged data supported by list box */
@@ -2081,7 +2401,7 @@ enum {
 /*  record is used to determine the ID of the 'cicn' resource drawn in the pushbutton.  */
 /*                                                                                      */
 /*  In addition, a push button can now be told to draw with a default outline using the */
-/*  SetControlData routine with the kPushButtonDefaultTag below.                        */
+/*  SetControlData routine with the kControlPushButtonDefaultTag below.                 */
 /*                                                                                      */
 /*  A push button may also be marked using the kControlPushButtonCancelTag. This has    */
 /*  no visible representation, but does cause the button to play the CancelButton theme */
@@ -2121,6 +2441,9 @@ enum {
 /*
  *  CreatePushButtonControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -2131,11 +2454,14 @@ CreatePushButtonControl(
   WindowRef     window,
   const Rect *  boundsRect,
   CFStringRef   title,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CreatePushButtonWithIconControl()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2149,11 +2475,14 @@ CreatePushButtonWithIconControl(
   CFStringRef                      title,
   ControlButtonContentInfo *       icon,
   ControlPushButtonIconAlignment   iconAlignment,
-  ControlRef *                     outControl);
+  ControlRef *                     outControl)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CreateRadioButtonControl()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2167,11 +2496,14 @@ CreateRadioButtonControl(
   CFStringRef   title,
   SInt32        initialValue,
   Boolean       autoToggle,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CreateCheckBoxControl()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2185,7 +2517,8 @@ CreateCheckBoxControl(
   CFStringRef   title,
   SInt32        initialValue,
   Boolean       autoToggle,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
 
 
 
@@ -2215,6 +2548,9 @@ enum {
 /*
  *  CreateScrollBarControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -2230,13 +2566,14 @@ CreateScrollBarControl(
   SInt32             viewSize,
   Boolean            liveTracking,
   ControlActionUPP   liveTrackingProc,
-  ControlRef *       outControl);
+  ControlRef *       outControl)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* These tags are available in Mac OS X or later */
 enum {
   kControlScrollBarShowsArrowsTag = 'arro' /* Boolean whether or not to draw the scroll arrows*/
 };
+
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  ¥ POPUP BUTTON (CDEF 25)                                                            */
@@ -2270,6 +2607,9 @@ enum {
 /*
  *  CreatePopupButtonControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -2285,7 +2625,8 @@ CreatePopupButtonControl(
   SInt16        titleWidth,
   SInt16        titleJustification,
   Style         titleStyle,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
 
 
 
@@ -2299,7 +2640,11 @@ enum {
 /* These tags are available in 1.1 or later of Appearance */
 enum {
   kControlPopupButtonExtraHeightTag = 'exht', /* SInt16 - extra vertical whitespace within the button*/
-  kControlPopupButtonOwnedMenuRefTag = 'omrf', /* MenuRef*/
+  kControlPopupButtonOwnedMenuRefTag = 'omrf' /* MenuRef*/
+};
+
+/* These tags are available in Mac OS X */
+enum {
   kControlPopupButtonCheckCurrentTag = 'chck' /* Boolean    - whether the popup puts a checkmark next to the current item (defaults to true)*/
 };
 
@@ -2330,6 +2675,9 @@ enum {
 /*
  *  CreateRadioGroupControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -2339,7 +2687,7 @@ extern OSStatus
 CreateRadioGroupControl(
   WindowRef     window,
   const Rect *  boundsRect,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -2374,6 +2722,9 @@ enum {
 /*
  *  CreateScrollingTextBoxControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -2388,7 +2739,7 @@ CreateScrollingTextBoxControl(
   UInt32        delayBeforeAutoScroll,
   UInt32        delayBetweenAutoScroll,
   UInt16        autoScrollAmount,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Tagged data supported by Scroll Text Box */
@@ -2418,6 +2769,9 @@ enum {
  *    semantics. The initial minimum of the Disclosure Button will be
  *    kControlDisclosureButtonClosed, and the maximum will be
  *    kControlDisclosureButtonDisclosed.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2451,7 +2805,7 @@ CreateDisclosureButtonControl(
   const Rect *  inBoundsRect,
   SInt32        inValue,
   Boolean       inAutoToggles,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2465,11 +2819,11 @@ enum {
  *  Discussion:
  *    Disclosure Button Values
  */
+enum {
 
   /*
    * The control be drawn suggesting a closed state.
    */
-enum {
   kControlDisclosureButtonClosed = 0,
 
   /*
@@ -2490,12 +2844,12 @@ enum {
  *  Discussion:
  *    Button Sizes
  */
+typedef SInt16 ControlRoundButtonSize;
+enum {
 
   /*
    * A 20 pixel diameter button.
    */
-typedef SInt16 ControlRoundButtonSize;
-enum {
   kControlRoundButtonNormalSize = kControlSizeNormal,
 
   /*
@@ -2507,7 +2861,7 @@ enum {
 /* Data tags supported by the round button controls */
 enum {
   kControlRoundButtonContentTag = 'cont', /* ControlButtonContentInfo*/
-  kControlRoundButtonSizeTag    = 'size' /* ControlRoundButtonSize*/
+  kControlRoundButtonSizeTag    = kControlSizeTag /* ControlRoundButtonSize*/
 };
 
 /* Control Kind Tag */
@@ -2525,6 +2879,9 @@ enum {
  *    CreateRoundButtonControl is preferred over NewControl because it
  *    allows you to specify the exact set of parameters required to
  *    create the control without overloading parameter semantics.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2559,7 +2916,7 @@ CreateRoundButtonControl(
   const Rect *                inBoundsRect,
   ControlRoundButtonSize      inSize,
   ControlButtonContentInfo *  inContent,
-  ControlRef *                outControl);
+  ControlRef *                outControl)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2600,6 +2957,11 @@ CreateRoundButtonControl(
 /*  TableView formatting options and API applies to both of these view styles.          */
 /*                                                                                      */
 /*  NOTE: This control is only available with CarbonLib 1.1.                            */
+/*                                                                                      */
+/*  NOTE: This control must be created with the CreateDataBrowserControl API in         */
+/*        CarbonLib 1.1 through 1.4. In Mac OS X and CarbonLib 1.5 and later, you       */
+/*        may use the control's procID (29) to create the control with NewControl       */
+/*        or with a 'CNTL' resource.                                                    */
 /* Control Kind Tag */
 enum {
   kControlKindDataBrowser       = 'datb'
@@ -2845,7 +3207,7 @@ typedef STACK_UPP_TYPE(DataBrowserItemProcPtr)                  DataBrowserItemU
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserItemUPP
-NewDataBrowserItemUPP(DataBrowserItemProcPtr userRoutine);
+NewDataBrowserItemUPP(DataBrowserItemProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDataBrowserItemUPP()
@@ -2856,7 +3218,7 @@ NewDataBrowserItemUPP(DataBrowserItemProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserItemUPP(DataBrowserItemUPP userUPP);
+DisposeDataBrowserItemUPP(DataBrowserItemUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDataBrowserItemUPP()
@@ -2871,11 +3233,14 @@ InvokeDataBrowserItemUPP(
   DataBrowserItemID     item,
   DataBrowserItemState  state,
   void *                clientData,
-  DataBrowserItemUPP    userUPP);
+  DataBrowserItemUPP    userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /* Creation/Configuration */
 /*
  *  CreateDataBrowserControl()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2887,11 +3252,14 @@ CreateDataBrowserControl(
   WindowRef              window,
   const Rect *           boundsRect,
   DataBrowserViewStyle   style,
-  ControlRef *           outControl);
+  ControlRef *           outControl)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserViewStyle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2901,11 +3269,14 @@ CreateDataBrowserControl(
 extern OSStatus 
 GetDataBrowserViewStyle(
   ControlRef              browser,
-  DataBrowserViewStyle *  style);
+  DataBrowserViewStyle *  style)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserViewStyle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2915,14 +3286,19 @@ GetDataBrowserViewStyle(
 extern OSStatus 
 SetDataBrowserViewStyle(
   ControlRef             browser,
-  DataBrowserViewStyle   style);
+  DataBrowserViewStyle   style)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Item Manipulation */
 /* Passing NULL for "items" argument to RemoveDataBrowserItems and */
-/* UpdateDataBrowserItems refers to all items in the specified container */
+/* UpdateDataBrowserItems refers to all items in the specified container. */
+/* Passing NULL for "items" argument to AddDataBrowserItems means */
+/* "generate IDs starting from 1." */
 /*
  *  AddDataBrowserItems()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2934,12 +3310,15 @@ AddDataBrowserItems(
   ControlRef                 browser,
   DataBrowserItemID          container,
   UInt32                     numItems,
-  const DataBrowserItemID *  items,
-  DataBrowserPropertyID      preSortProperty);
+  const DataBrowserItemID *  items,                 /* can be NULL */
+  DataBrowserPropertyID      preSortProperty)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  RemoveDataBrowserItems()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2951,12 +3330,15 @@ RemoveDataBrowserItems(
   ControlRef                 browser,
   DataBrowserItemID          container,
   UInt32                     numItems,
-  const DataBrowserItemID *  items,
-  DataBrowserPropertyID      preSortProperty);
+  const DataBrowserItemID *  items,                 /* can be NULL */
+  DataBrowserPropertyID      preSortProperty)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  UpdateDataBrowserItems()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2968,14 +3350,17 @@ UpdateDataBrowserItems(
   ControlRef                 browser,
   DataBrowserItemID          container,
   UInt32                     numItems,
-  const DataBrowserItemID *  items,
+  const DataBrowserItemID *  items,                 /* can be NULL */
   DataBrowserPropertyID      preSortProperty,
-  DataBrowserPropertyID      propertyID);
+  DataBrowserPropertyID      propertyID)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Edit Menu Enabling and Handling */
 /*
  *  EnableDataBrowserEditCommand()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2985,11 +3370,14 @@ UpdateDataBrowserItems(
 extern Boolean 
 EnableDataBrowserEditCommand(
   ControlRef               browser,
-  DataBrowserEditCommand   command);
+  DataBrowserEditCommand   command)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  ExecuteDataBrowserEditCommand()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2999,11 +3387,14 @@ EnableDataBrowserEditCommand(
 extern OSStatus 
 ExecuteDataBrowserEditCommand(
   ControlRef               browser,
-  DataBrowserEditCommand   command);
+  DataBrowserEditCommand   command)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserSelectionAnchor()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3014,11 +3405,14 @@ extern OSStatus
 GetDataBrowserSelectionAnchor(
   ControlRef           browser,
   DataBrowserItemID *  first,
-  DataBrowserItemID *  last);
+  DataBrowserItemID *  last)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  MoveDataBrowserSelectionAnchor()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3029,12 +3423,15 @@ extern OSStatus
 MoveDataBrowserSelectionAnchor(
   ControlRef                            browser,
   DataBrowserSelectionAnchorDirection   direction,
-  Boolean                               extendSelection);
+  Boolean                               extendSelection)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Container Manipulation */
 /*
  *  OpenDataBrowserContainer()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3044,11 +3441,14 @@ MoveDataBrowserSelectionAnchor(
 extern OSStatus 
 OpenDataBrowserContainer(
   ControlRef          browser,
-  DataBrowserItemID   container);
+  DataBrowserItemID   container)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CloseDataBrowserContainer()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3058,11 +3458,14 @@ OpenDataBrowserContainer(
 extern OSStatus 
 CloseDataBrowserContainer(
   ControlRef          browser,
-  DataBrowserItemID   container);
+  DataBrowserItemID   container)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SortDataBrowserContainer()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3073,12 +3476,15 @@ extern OSStatus
 SortDataBrowserContainer(
   ControlRef          browser,
   DataBrowserItemID   container,
-  Boolean             sortChildren);
+  Boolean             sortChildren)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Aggregate Item Access and Iteration */
 /*
  *  GetDataBrowserItems()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3091,11 +3497,14 @@ GetDataBrowserItems(
   DataBrowserItemID      container,
   Boolean                recurse,
   DataBrowserItemState   state,
-  Handle                 items);
+  Handle                 items)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserItemCount()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3108,11 +3517,14 @@ GetDataBrowserItemCount(
   DataBrowserItemID      container,
   Boolean                recurse,
   DataBrowserItemState   state,
-  UInt32 *               numItems);
+  UInt32 *               numItems)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  ForEachDataBrowserItem()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3126,12 +3538,15 @@ ForEachDataBrowserItem(
   Boolean                recurse,
   DataBrowserItemState   state,
   DataBrowserItemUPP     callback,
-  void *                 clientData);
+  void *                 clientData)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Individual Item Access and Display */
 /*
  *  IsDataBrowserItemSelected()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3141,11 +3556,14 @@ ForEachDataBrowserItem(
 extern Boolean 
 IsDataBrowserItemSelected(
   ControlRef          browser,
-  DataBrowserItemID   item);
+  DataBrowserItemID   item)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserItemState()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3156,11 +3574,14 @@ extern OSStatus
 GetDataBrowserItemState(
   ControlRef              browser,
   DataBrowserItemID       item,
-  DataBrowserItemState *  state);
+  DataBrowserItemState *  state)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  RevealDataBrowserItem()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3172,12 +3593,15 @@ RevealDataBrowserItem(
   ControlRef                 browser,
   DataBrowserItemID          item,
   DataBrowserPropertyID      propertyID,
-  DataBrowserRevealOptions   options);
+  DataBrowserRevealOptions   options)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Selection Set Manipulation */
 /*
  *  SetDataBrowserSelectedItems()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3189,7 +3613,7 @@ SetDataBrowserSelectedItems(
   ControlRef                 browser,
   UInt32                     numItems,
   const DataBrowserItemID *  items,
-  DataBrowserSetOption       operation);
+  DataBrowserSetOption       operation)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -3197,6 +3621,9 @@ SetDataBrowserSelectedItems(
 /* The user customizable portion of the current view style settings */
 /*
  *  SetDataBrowserUserState()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3206,11 +3633,14 @@ SetDataBrowserSelectedItems(
 extern OSStatus 
 SetDataBrowserUserState(
   ControlRef   browser,
-  CFDataRef    stateInfo);
+  CFDataRef    stateInfo)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserUserState()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3220,12 +3650,15 @@ SetDataBrowserUserState(
 extern OSStatus 
 GetDataBrowserUserState(
   ControlRef   browser,
-  CFDataRef *  stateInfo);
+  CFDataRef *  stateInfo)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* All items are active/enabled or not */
 /*
  *  SetDataBrowserActiveItems()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3235,11 +3668,14 @@ GetDataBrowserUserState(
 extern OSStatus 
 SetDataBrowserActiveItems(
   ControlRef   browser,
-  Boolean      active);
+  Boolean      active)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserActiveItems()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3249,12 +3685,15 @@ SetDataBrowserActiveItems(
 extern OSStatus 
 GetDataBrowserActiveItems(
   ControlRef   browser,
-  Boolean *    active);
+  Boolean *    active)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Inset the scrollbars within the DataBrowser bounds */
 /*
  *  SetDataBrowserScrollBarInset()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3264,11 +3703,14 @@ GetDataBrowserActiveItems(
 extern OSStatus 
 SetDataBrowserScrollBarInset(
   ControlRef   browser,
-  Rect *       insetRect);
+  Rect *       insetRect)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserScrollBarInset()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3278,7 +3720,7 @@ SetDataBrowserScrollBarInset(
 extern OSStatus 
 GetDataBrowserScrollBarInset(
   ControlRef   browser,
-  Rect *       insetRect);
+  Rect *       insetRect)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* The "user focused" item */
@@ -3286,6 +3728,9 @@ GetDataBrowserScrollBarInset(
 /* For the ColumnView, this means the rightmost container column */
 /*
  *  SetDataBrowserTarget()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3295,11 +3740,14 @@ GetDataBrowserScrollBarInset(
 extern OSStatus 
 SetDataBrowserTarget(
   ControlRef          browser,
-  DataBrowserItemID   target);
+  DataBrowserItemID   target)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserTarget()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3309,13 +3757,16 @@ SetDataBrowserTarget(
 extern OSStatus 
 GetDataBrowserTarget(
   ControlRef           browser,
-  DataBrowserItemID *  target);
+  DataBrowserItemID *  target)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Current sort ordering */
 /* ListView tracks this per-column */
 /*
  *  SetDataBrowserSortOrder()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3325,11 +3776,14 @@ GetDataBrowserTarget(
 extern OSStatus 
 SetDataBrowserSortOrder(
   ControlRef             browser,
-  DataBrowserSortOrder   order);
+  DataBrowserSortOrder   order)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserSortOrder()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3339,12 +3793,15 @@ SetDataBrowserSortOrder(
 extern OSStatus 
 GetDataBrowserSortOrder(
   ControlRef              browser,
-  DataBrowserSortOrder *  order);
+  DataBrowserSortOrder *  order)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Scrollbar values */
 /*
  *  SetDataBrowserScrollPosition()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3355,11 +3812,14 @@ extern OSStatus
 SetDataBrowserScrollPosition(
   ControlRef   browser,
   UInt32       top,
-  UInt32       left);
+  UInt32       left)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserScrollPosition()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3370,12 +3830,15 @@ extern OSStatus
 GetDataBrowserScrollPosition(
   ControlRef   browser,
   UInt32 *     top,
-  UInt32 *     left);
+  UInt32 *     left)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Show/Hide each scrollbar */
 /*
  *  SetDataBrowserHasScrollBars()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3386,11 +3849,14 @@ extern OSStatus
 SetDataBrowserHasScrollBars(
   ControlRef   browser,
   Boolean      horiz,
-  Boolean      vert);
+  Boolean      vert)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserHasScrollBars()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3401,12 +3867,15 @@ extern OSStatus
 GetDataBrowserHasScrollBars(
   ControlRef   browser,
   Boolean *    horiz,
-  Boolean *    vert);
+  Boolean *    vert)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Property passed to sort callback (ListView sort column) */
 /*
  *  SetDataBrowserSortProperty()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3416,11 +3885,14 @@ GetDataBrowserHasScrollBars(
 extern OSStatus 
 SetDataBrowserSortProperty(
   ControlRef              browser,
-  DataBrowserPropertyID   property);
+  DataBrowserPropertyID   property)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserSortProperty()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3430,12 +3902,15 @@ SetDataBrowserSortProperty(
 extern OSStatus 
 GetDataBrowserSortProperty(
   ControlRef               browser,
-  DataBrowserPropertyID *  property);
+  DataBrowserPropertyID *  property)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Modify selection behavior */
 /*
  *  SetDataBrowserSelectionFlags()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3445,11 +3920,14 @@ GetDataBrowserSortProperty(
 extern OSStatus 
 SetDataBrowserSelectionFlags(
   ControlRef                  browser,
-  DataBrowserSelectionFlags   selectionFlags);
+  DataBrowserSelectionFlags   selectionFlags)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserSelectionFlags()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3459,12 +3937,15 @@ SetDataBrowserSelectionFlags(
 extern OSStatus 
 GetDataBrowserSelectionFlags(
   ControlRef                   browser,
-  DataBrowserSelectionFlags *  selectionFlags);
+  DataBrowserSelectionFlags *  selectionFlags)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Dynamically modify property appearance/behavior */
 /*
  *  SetDataBrowserPropertyFlags()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3475,11 +3956,14 @@ extern OSStatus
 SetDataBrowserPropertyFlags(
   ControlRef                 browser,
   DataBrowserPropertyID      property,
-  DataBrowserPropertyFlags   flags);
+  DataBrowserPropertyFlags   flags)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserPropertyFlags()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3490,12 +3974,15 @@ extern OSStatus
 GetDataBrowserPropertyFlags(
   ControlRef                  browser,
   DataBrowserPropertyID       property,
-  DataBrowserPropertyFlags *  flags);
+  DataBrowserPropertyFlags *  flags)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Text of current in-place edit session */
 /*
  *  SetDataBrowserEditText()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3505,25 +3992,31 @@ GetDataBrowserPropertyFlags(
 extern OSStatus 
 SetDataBrowserEditText(
   ControlRef    browser,
-  CFStringRef   text);
+  CFStringRef   text)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CopyDataBrowserEditText()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 CopyDataBrowserEditText(
   ControlRef     browser,
-  CFStringRef *  text);
+  CFStringRef *  text)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserEditText()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3533,12 +4026,15 @@ CopyDataBrowserEditText(
 extern OSStatus 
 GetDataBrowserEditText(
   ControlRef           browser,
-  CFMutableStringRef   text);
+  CFMutableStringRef   text)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Item/property currently being edited */
 /*
  *  SetDataBrowserEditItem()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3549,11 +4045,14 @@ extern OSStatus
 SetDataBrowserEditItem(
   ControlRef              browser,
   DataBrowserItemID       item,
-  DataBrowserPropertyID   property);
+  DataBrowserPropertyID   property)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserEditItem()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3564,12 +4063,15 @@ extern OSStatus
 GetDataBrowserEditItem(
   ControlRef               browser,
   DataBrowserItemID *      item,
-  DataBrowserPropertyID *  property);
+  DataBrowserPropertyID *  property)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Get the current bounds of a visual part of an item's property */
 /*
  *  GetDataBrowserItemPartBounds()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3582,7 +4084,7 @@ GetDataBrowserItemPartBounds(
   DataBrowserItemID         item,
   DataBrowserPropertyID     property,
   DataBrowserPropertyPart   part,
-  Rect *                    bounds);
+  Rect *                    bounds)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -3592,6 +4094,9 @@ typedef void *                          DataBrowserItemDataRef;
 /*
  *  SetDataBrowserItemDataIcon()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -3600,25 +4105,31 @@ typedef void *                          DataBrowserItemDataRef;
 extern OSStatus 
 SetDataBrowserItemDataIcon(
   DataBrowserItemDataRef   itemData,
-  IconRef                  theData);
+  IconRef                  theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserItemDataIcon()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 GetDataBrowserItemDataIcon(
   DataBrowserItemDataRef   itemData,
-  IconRef *                theData);
+  IconRef *                theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserItemDataText()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3628,11 +4139,14 @@ GetDataBrowserItemDataIcon(
 extern OSStatus 
 SetDataBrowserItemDataText(
   DataBrowserItemDataRef   itemData,
-  CFStringRef              theData);
+  CFStringRef              theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserItemDataText()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3642,12 +4156,15 @@ SetDataBrowserItemDataText(
 extern OSStatus 
 GetDataBrowserItemDataText(
   DataBrowserItemDataRef   itemData,
-  CFStringRef *            theData);
+  CFStringRef *            theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  SetDataBrowserItemDataValue()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3657,11 +4174,14 @@ GetDataBrowserItemDataText(
 extern OSStatus 
 SetDataBrowserItemDataValue(
   DataBrowserItemDataRef   itemData,
-  SInt32                   theData);
+  SInt32                   theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserItemDataValue()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3671,11 +4191,14 @@ SetDataBrowserItemDataValue(
 extern OSStatus 
 GetDataBrowserItemDataValue(
   DataBrowserItemDataRef   itemData,
-  SInt32 *                 theData);
+  SInt32 *                 theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserItemDataMinimum()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3685,11 +4208,14 @@ GetDataBrowserItemDataValue(
 extern OSStatus 
 SetDataBrowserItemDataMinimum(
   DataBrowserItemDataRef   itemData,
-  SInt32                   theData);
+  SInt32                   theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserItemDataMinimum()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3699,11 +4225,14 @@ SetDataBrowserItemDataMinimum(
 extern OSStatus 
 GetDataBrowserItemDataMinimum(
   DataBrowserItemDataRef   itemData,
-  SInt32 *                 theData);
+  SInt32 *                 theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserItemDataMaximum()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3713,11 +4242,14 @@ GetDataBrowserItemDataMinimum(
 extern OSStatus 
 SetDataBrowserItemDataMaximum(
   DataBrowserItemDataRef   itemData,
-  SInt32                   theData);
+  SInt32                   theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserItemDataMaximum()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3727,11 +4259,14 @@ SetDataBrowserItemDataMaximum(
 extern OSStatus 
 GetDataBrowserItemDataMaximum(
   DataBrowserItemDataRef   itemData,
-  SInt32 *                 theData);
+  SInt32 *                 theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserItemDataBooleanValue()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3741,11 +4276,14 @@ GetDataBrowserItemDataMaximum(
 extern OSStatus 
 SetDataBrowserItemDataBooleanValue(
   DataBrowserItemDataRef   itemData,
-  Boolean                  theData);
+  Boolean                  theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserItemDataBooleanValue()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3755,11 +4293,14 @@ SetDataBrowserItemDataBooleanValue(
 extern OSStatus 
 GetDataBrowserItemDataBooleanValue(
   DataBrowserItemDataRef   itemData,
-  Boolean *                theData);
+  Boolean *                theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserItemDataMenuRef()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3769,11 +4310,14 @@ GetDataBrowserItemDataBooleanValue(
 extern OSStatus 
 SetDataBrowserItemDataMenuRef(
   DataBrowserItemDataRef   itemData,
-  MenuRef                  theData);
+  MenuRef                  theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserItemDataMenuRef()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3783,11 +4327,14 @@ SetDataBrowserItemDataMenuRef(
 extern OSStatus 
 GetDataBrowserItemDataMenuRef(
   DataBrowserItemDataRef   itemData,
-  MenuRef *                theData);
+  MenuRef *                theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserItemDataRGBColor()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3797,11 +4344,14 @@ GetDataBrowserItemDataMenuRef(
 extern OSStatus 
 SetDataBrowserItemDataRGBColor(
   DataBrowserItemDataRef   itemData,
-  const RGBColor *         theData);
+  const RGBColor *         theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserItemDataRGBColor()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3811,12 +4361,15 @@ SetDataBrowserItemDataRGBColor(
 extern OSStatus 
 GetDataBrowserItemDataRGBColor(
   DataBrowserItemDataRef   itemData,
-  RGBColor *               theData);
+  RGBColor *               theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  SetDataBrowserItemDataDrawState()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3826,11 +4379,14 @@ GetDataBrowserItemDataRGBColor(
 extern OSStatus 
 SetDataBrowserItemDataDrawState(
   DataBrowserItemDataRef   itemData,
-  ThemeDrawState           theData);
+  ThemeDrawState           theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserItemDataDrawState()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3840,11 +4396,14 @@ SetDataBrowserItemDataDrawState(
 extern OSStatus 
 GetDataBrowserItemDataDrawState(
   DataBrowserItemDataRef   itemData,
-  ThemeDrawState *         theData);
+  ThemeDrawState *         theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserItemDataButtonValue()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3854,11 +4413,14 @@ GetDataBrowserItemDataDrawState(
 extern OSStatus 
 SetDataBrowserItemDataButtonValue(
   DataBrowserItemDataRef   itemData,
-  ThemeButtonValue         theData);
+  ThemeButtonValue         theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserItemDataButtonValue()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3868,11 +4430,14 @@ SetDataBrowserItemDataButtonValue(
 extern OSStatus 
 GetDataBrowserItemDataButtonValue(
   DataBrowserItemDataRef   itemData,
-  ThemeButtonValue *       theData);
+  ThemeButtonValue *       theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserItemDataIconTransform()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3882,11 +4447,14 @@ GetDataBrowserItemDataButtonValue(
 extern OSStatus 
 SetDataBrowserItemDataIconTransform(
   DataBrowserItemDataRef   itemData,
-  IconTransformType        theData);
+  IconTransformType        theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserItemDataIconTransform()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3896,12 +4464,15 @@ SetDataBrowserItemDataIconTransform(
 extern OSStatus 
 GetDataBrowserItemDataIconTransform(
   DataBrowserItemDataRef   itemData,
-  IconTransformType *      theData);
+  IconTransformType *      theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  SetDataBrowserItemDataDateTime()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3911,11 +4482,14 @@ GetDataBrowserItemDataIconTransform(
 extern OSStatus 
 SetDataBrowserItemDataDateTime(
   DataBrowserItemDataRef   itemData,
-  long                     theData);
+  long                     theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserItemDataDateTime()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3925,11 +4499,14 @@ SetDataBrowserItemDataDateTime(
 extern OSStatus 
 GetDataBrowserItemDataDateTime(
   DataBrowserItemDataRef   itemData,
-  long *                   theData);
+  long *                   theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserItemDataLongDateTime()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3939,11 +4516,14 @@ GetDataBrowserItemDataDateTime(
 extern OSStatus 
 SetDataBrowserItemDataLongDateTime(
   DataBrowserItemDataRef   itemData,
-  const LongDateTime *     theData);
+  const LongDateTime *     theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserItemDataLongDateTime()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3953,12 +4533,15 @@ SetDataBrowserItemDataLongDateTime(
 extern OSStatus 
 GetDataBrowserItemDataLongDateTime(
   DataBrowserItemDataRef   itemData,
-  LongDateTime *           theData);
+  LongDateTime *           theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  SetDataBrowserItemDataItemID()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3968,25 +4551,31 @@ GetDataBrowserItemDataLongDateTime(
 extern OSStatus 
 SetDataBrowserItemDataItemID(
   DataBrowserItemDataRef   itemData,
-  DataBrowserItemID        theData);
+  DataBrowserItemID        theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserItemDataItemID()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 GetDataBrowserItemDataItemID(
   DataBrowserItemDataRef   itemData,
-  DataBrowserItemID *      theData);
+  DataBrowserItemID *      theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserItemDataProperty()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3996,7 +4585,7 @@ GetDataBrowserItemDataItemID(
 extern OSStatus 
 GetDataBrowserItemDataProperty(
   DataBrowserItemDataRef   itemData,
-  DataBrowserPropertyID *  theData);
+  DataBrowserPropertyID *  theData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4059,7 +4648,7 @@ typedef STACK_UPP_TYPE(DataBrowserItemHelpContentProcPtr)       DataBrowserItemH
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserItemDataUPP
-NewDataBrowserItemDataUPP(DataBrowserItemDataProcPtr userRoutine);
+NewDataBrowserItemDataUPP(DataBrowserItemDataProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDataBrowserItemCompareUPP()
@@ -4070,18 +4659,18 @@ NewDataBrowserItemDataUPP(DataBrowserItemDataProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserItemCompareUPP
-NewDataBrowserItemCompareUPP(DataBrowserItemCompareProcPtr userRoutine);
+NewDataBrowserItemCompareUPP(DataBrowserItemCompareProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDataBrowserItemNotificationWithItemUPP()
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserItemNotificationWithItemUPP
-NewDataBrowserItemNotificationWithItemUPP(DataBrowserItemNotificationWithItemProcPtr userRoutine);
+NewDataBrowserItemNotificationWithItemUPP(DataBrowserItemNotificationWithItemProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  NewDataBrowserItemNotificationUPP()
@@ -4092,7 +4681,7 @@ NewDataBrowserItemNotificationWithItemUPP(DataBrowserItemNotificationWithItemPro
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserItemNotificationUPP
-NewDataBrowserItemNotificationUPP(DataBrowserItemNotificationProcPtr userRoutine);
+NewDataBrowserItemNotificationUPP(DataBrowserItemNotificationProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDataBrowserAddDragItemUPP()
@@ -4103,7 +4692,7 @@ NewDataBrowserItemNotificationUPP(DataBrowserItemNotificationProcPtr userRoutine
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserAddDragItemUPP
-NewDataBrowserAddDragItemUPP(DataBrowserAddDragItemProcPtr userRoutine);
+NewDataBrowserAddDragItemUPP(DataBrowserAddDragItemProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDataBrowserAcceptDragUPP()
@@ -4114,7 +4703,7 @@ NewDataBrowserAddDragItemUPP(DataBrowserAddDragItemProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserAcceptDragUPP
-NewDataBrowserAcceptDragUPP(DataBrowserAcceptDragProcPtr userRoutine);
+NewDataBrowserAcceptDragUPP(DataBrowserAcceptDragProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDataBrowserReceiveDragUPP()
@@ -4125,7 +4714,7 @@ NewDataBrowserAcceptDragUPP(DataBrowserAcceptDragProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserReceiveDragUPP
-NewDataBrowserReceiveDragUPP(DataBrowserReceiveDragProcPtr userRoutine);
+NewDataBrowserReceiveDragUPP(DataBrowserReceiveDragProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDataBrowserPostProcessDragUPP()
@@ -4136,7 +4725,7 @@ NewDataBrowserReceiveDragUPP(DataBrowserReceiveDragProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserPostProcessDragUPP
-NewDataBrowserPostProcessDragUPP(DataBrowserPostProcessDragProcPtr userRoutine);
+NewDataBrowserPostProcessDragUPP(DataBrowserPostProcessDragProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDataBrowserGetContextualMenuUPP()
@@ -4147,7 +4736,7 @@ NewDataBrowserPostProcessDragUPP(DataBrowserPostProcessDragProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserGetContextualMenuUPP
-NewDataBrowserGetContextualMenuUPP(DataBrowserGetContextualMenuProcPtr userRoutine);
+NewDataBrowserGetContextualMenuUPP(DataBrowserGetContextualMenuProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDataBrowserSelectContextualMenuUPP()
@@ -4158,7 +4747,7 @@ NewDataBrowserGetContextualMenuUPP(DataBrowserGetContextualMenuProcPtr userRouti
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserSelectContextualMenuUPP
-NewDataBrowserSelectContextualMenuUPP(DataBrowserSelectContextualMenuProcPtr userRoutine);
+NewDataBrowserSelectContextualMenuUPP(DataBrowserSelectContextualMenuProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDataBrowserItemHelpContentUPP()
@@ -4169,7 +4758,7 @@ NewDataBrowserSelectContextualMenuUPP(DataBrowserSelectContextualMenuProcPtr use
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserItemHelpContentUPP
-NewDataBrowserItemHelpContentUPP(DataBrowserItemHelpContentProcPtr userRoutine);
+NewDataBrowserItemHelpContentUPP(DataBrowserItemHelpContentProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDataBrowserItemDataUPP()
@@ -4180,7 +4769,7 @@ NewDataBrowserItemHelpContentUPP(DataBrowserItemHelpContentProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserItemDataUPP(DataBrowserItemDataUPP userUPP);
+DisposeDataBrowserItemDataUPP(DataBrowserItemDataUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDataBrowserItemCompareUPP()
@@ -4191,18 +4780,18 @@ DisposeDataBrowserItemDataUPP(DataBrowserItemDataUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserItemCompareUPP(DataBrowserItemCompareUPP userUPP);
+DisposeDataBrowserItemCompareUPP(DataBrowserItemCompareUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDataBrowserItemNotificationWithItemUPP()
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserItemNotificationWithItemUPP(DataBrowserItemNotificationWithItemUPP userUPP);
+DisposeDataBrowserItemNotificationWithItemUPP(DataBrowserItemNotificationWithItemUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  DisposeDataBrowserItemNotificationUPP()
@@ -4213,7 +4802,7 @@ DisposeDataBrowserItemNotificationWithItemUPP(DataBrowserItemNotificationWithIte
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserItemNotificationUPP(DataBrowserItemNotificationUPP userUPP);
+DisposeDataBrowserItemNotificationUPP(DataBrowserItemNotificationUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDataBrowserAddDragItemUPP()
@@ -4224,7 +4813,7 @@ DisposeDataBrowserItemNotificationUPP(DataBrowserItemNotificationUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserAddDragItemUPP(DataBrowserAddDragItemUPP userUPP);
+DisposeDataBrowserAddDragItemUPP(DataBrowserAddDragItemUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDataBrowserAcceptDragUPP()
@@ -4235,7 +4824,7 @@ DisposeDataBrowserAddDragItemUPP(DataBrowserAddDragItemUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserAcceptDragUPP(DataBrowserAcceptDragUPP userUPP);
+DisposeDataBrowserAcceptDragUPP(DataBrowserAcceptDragUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDataBrowserReceiveDragUPP()
@@ -4246,7 +4835,7 @@ DisposeDataBrowserAcceptDragUPP(DataBrowserAcceptDragUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserReceiveDragUPP(DataBrowserReceiveDragUPP userUPP);
+DisposeDataBrowserReceiveDragUPP(DataBrowserReceiveDragUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDataBrowserPostProcessDragUPP()
@@ -4257,7 +4846,7 @@ DisposeDataBrowserReceiveDragUPP(DataBrowserReceiveDragUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserPostProcessDragUPP(DataBrowserPostProcessDragUPP userUPP);
+DisposeDataBrowserPostProcessDragUPP(DataBrowserPostProcessDragUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDataBrowserGetContextualMenuUPP()
@@ -4268,7 +4857,7 @@ DisposeDataBrowserPostProcessDragUPP(DataBrowserPostProcessDragUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserGetContextualMenuUPP(DataBrowserGetContextualMenuUPP userUPP);
+DisposeDataBrowserGetContextualMenuUPP(DataBrowserGetContextualMenuUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDataBrowserSelectContextualMenuUPP()
@@ -4279,7 +4868,7 @@ DisposeDataBrowserGetContextualMenuUPP(DataBrowserGetContextualMenuUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserSelectContextualMenuUPP(DataBrowserSelectContextualMenuUPP userUPP);
+DisposeDataBrowserSelectContextualMenuUPP(DataBrowserSelectContextualMenuUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDataBrowserItemHelpContentUPP()
@@ -4290,7 +4879,7 @@ DisposeDataBrowserSelectContextualMenuUPP(DataBrowserSelectContextualMenuUPP use
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserItemHelpContentUPP(DataBrowserItemHelpContentUPP userUPP);
+DisposeDataBrowserItemHelpContentUPP(DataBrowserItemHelpContentUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDataBrowserItemDataUPP()
@@ -4307,7 +4896,7 @@ InvokeDataBrowserItemDataUPP(
   DataBrowserPropertyID   property,
   DataBrowserItemDataRef  itemData,
   Boolean                 setValue,
-  DataBrowserItemDataUPP  userUPP);
+  DataBrowserItemDataUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDataBrowserItemCompareUPP()
@@ -4323,14 +4912,14 @@ InvokeDataBrowserItemCompareUPP(
   DataBrowserItemID          itemOne,
   DataBrowserItemID          itemTwo,
   DataBrowserPropertyID      sortProperty,
-  DataBrowserItemCompareUPP  userUPP);
+  DataBrowserItemCompareUPP  userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDataBrowserItemNotificationWithItemUPP()
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern void
@@ -4339,7 +4928,7 @@ InvokeDataBrowserItemNotificationWithItemUPP(
   DataBrowserItemID                       item,
   DataBrowserItemNotification             message,
   DataBrowserItemDataRef                  itemData,
-  DataBrowserItemNotificationWithItemUPP  userUPP);
+  DataBrowserItemNotificationWithItemUPP  userUPP)            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  InvokeDataBrowserItemNotificationUPP()
@@ -4354,7 +4943,7 @@ InvokeDataBrowserItemNotificationUPP(
   ControlRef                      browser,
   DataBrowserItemID               item,
   DataBrowserItemNotification     message,
-  DataBrowserItemNotificationUPP  userUPP);
+  DataBrowserItemNotificationUPP  userUPP)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDataBrowserAddDragItemUPP()
@@ -4370,7 +4959,7 @@ InvokeDataBrowserAddDragItemUPP(
   DragReference              theDrag,
   DataBrowserItemID          item,
   ItemReference *            itemRef,
-  DataBrowserAddDragItemUPP  userUPP);
+  DataBrowserAddDragItemUPP  userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDataBrowserAcceptDragUPP()
@@ -4385,7 +4974,7 @@ InvokeDataBrowserAcceptDragUPP(
   ControlRef                browser,
   DragReference             theDrag,
   DataBrowserItemID         item,
-  DataBrowserAcceptDragUPP  userUPP);
+  DataBrowserAcceptDragUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDataBrowserReceiveDragUPP()
@@ -4400,7 +4989,7 @@ InvokeDataBrowserReceiveDragUPP(
   ControlRef                 browser,
   DragReference              theDrag,
   DataBrowserItemID          item,
-  DataBrowserReceiveDragUPP  userUPP);
+  DataBrowserReceiveDragUPP  userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDataBrowserPostProcessDragUPP()
@@ -4415,7 +5004,7 @@ InvokeDataBrowserPostProcessDragUPP(
   ControlRef                     browser,
   DragReference                  theDrag,
   OSStatus                       trackDragResult,
-  DataBrowserPostProcessDragUPP  userUPP);
+  DataBrowserPostProcessDragUPP  userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDataBrowserGetContextualMenuUPP()
@@ -4432,7 +5021,7 @@ InvokeDataBrowserGetContextualMenuUPP(
   UInt32 *                         helpType,
   CFStringRef *                    helpItemString,
   AEDesc *                         selection,
-  DataBrowserGetContextualMenuUPP  userUPP);
+  DataBrowserGetContextualMenuUPP  userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDataBrowserSelectContextualMenuUPP()
@@ -4449,7 +5038,7 @@ InvokeDataBrowserSelectContextualMenuUPP(
   UInt32                              selectionType,
   SInt16                              menuID,
   MenuItemIndex                       menuItem,
-  DataBrowserSelectContextualMenuUPP  userUPP);
+  DataBrowserSelectContextualMenuUPP  userUPP)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDataBrowserItemHelpContentUPP()
@@ -4467,7 +5056,7 @@ InvokeDataBrowserItemHelpContentUPP(
   HMContentRequest               inRequest,
   HMContentProvidedType *        outContentProvided,
   HMHelpContentPtr               ioHelpContent,
-  DataBrowserItemHelpContentUPP  userUPP);
+  DataBrowserItemHelpContentUPP  userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /* Standard Callback (vtable) Structure */
 enum {
@@ -4498,13 +5087,16 @@ typedef struct DataBrowserCallbacks     DataBrowserCallbacks;
 /*
  *  InitDataBrowserCallbacks()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-InitDataBrowserCallbacks(DataBrowserCallbacks * callbacks);
+InitDataBrowserCallbacks(DataBrowserCallbacks * callbacks)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Macro for initializing callback structure */
@@ -4514,6 +5106,9 @@ InitDataBrowserCallbacks(DataBrowserCallbacks * callbacks);
 /*
  *  GetDataBrowserCallbacks()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -4522,11 +5117,14 @@ InitDataBrowserCallbacks(DataBrowserCallbacks * callbacks);
 extern OSStatus 
 GetDataBrowserCallbacks(
   ControlRef              browser,
-  DataBrowserCallbacks *  callbacks);
+  DataBrowserCallbacks *  callbacks)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserCallbacks()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4536,7 +5134,7 @@ GetDataBrowserCallbacks(
 extern OSStatus 
 SetDataBrowserCallbacks(
   ControlRef                    browser,
-  const DataBrowserCallbacks *  callbacks);
+  const DataBrowserCallbacks *  callbacks)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4573,7 +5171,7 @@ typedef STACK_UPP_TYPE(DataBrowserItemReceiveDragProcPtr)       DataBrowserItemR
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserDrawItemUPP
-NewDataBrowserDrawItemUPP(DataBrowserDrawItemProcPtr userRoutine);
+NewDataBrowserDrawItemUPP(DataBrowserDrawItemProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  NewDataBrowserEditItemUPP()
@@ -4584,7 +5182,7 @@ NewDataBrowserDrawItemUPP(DataBrowserDrawItemProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserEditItemUPP
-NewDataBrowserEditItemUPP(DataBrowserEditItemProcPtr userRoutine);
+NewDataBrowserEditItemUPP(DataBrowserEditItemProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  NewDataBrowserHitTestUPP()
@@ -4595,7 +5193,7 @@ NewDataBrowserEditItemUPP(DataBrowserEditItemProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserHitTestUPP
-NewDataBrowserHitTestUPP(DataBrowserHitTestProcPtr userRoutine);
+NewDataBrowserHitTestUPP(DataBrowserHitTestProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  NewDataBrowserTrackingUPP()
@@ -4606,7 +5204,7 @@ NewDataBrowserHitTestUPP(DataBrowserHitTestProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserTrackingUPP
-NewDataBrowserTrackingUPP(DataBrowserTrackingProcPtr userRoutine);
+NewDataBrowserTrackingUPP(DataBrowserTrackingProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  NewDataBrowserItemDragRgnUPP()
@@ -4617,7 +5215,7 @@ NewDataBrowserTrackingUPP(DataBrowserTrackingProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserItemDragRgnUPP
-NewDataBrowserItemDragRgnUPP(DataBrowserItemDragRgnProcPtr userRoutine);
+NewDataBrowserItemDragRgnUPP(DataBrowserItemDragRgnProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  NewDataBrowserItemAcceptDragUPP()
@@ -4628,7 +5226,7 @@ NewDataBrowserItemDragRgnUPP(DataBrowserItemDragRgnProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserItemAcceptDragUPP
-NewDataBrowserItemAcceptDragUPP(DataBrowserItemAcceptDragProcPtr userRoutine);
+NewDataBrowserItemAcceptDragUPP(DataBrowserItemAcceptDragProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  NewDataBrowserItemReceiveDragUPP()
@@ -4639,7 +5237,7 @@ NewDataBrowserItemAcceptDragUPP(DataBrowserItemAcceptDragProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern DataBrowserItemReceiveDragUPP
-NewDataBrowserItemReceiveDragUPP(DataBrowserItemReceiveDragProcPtr userRoutine);
+NewDataBrowserItemReceiveDragUPP(DataBrowserItemReceiveDragProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  DisposeDataBrowserDrawItemUPP()
@@ -4650,7 +5248,7 @@ NewDataBrowserItemReceiveDragUPP(DataBrowserItemReceiveDragProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserDrawItemUPP(DataBrowserDrawItemUPP userUPP);
+DisposeDataBrowserDrawItemUPP(DataBrowserDrawItemUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  DisposeDataBrowserEditItemUPP()
@@ -4661,7 +5259,7 @@ DisposeDataBrowserDrawItemUPP(DataBrowserDrawItemUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserEditItemUPP(DataBrowserEditItemUPP userUPP);
+DisposeDataBrowserEditItemUPP(DataBrowserEditItemUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  DisposeDataBrowserHitTestUPP()
@@ -4672,7 +5270,7 @@ DisposeDataBrowserEditItemUPP(DataBrowserEditItemUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserHitTestUPP(DataBrowserHitTestUPP userUPP);
+DisposeDataBrowserHitTestUPP(DataBrowserHitTestUPP userUPP)   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  DisposeDataBrowserTrackingUPP()
@@ -4683,7 +5281,7 @@ DisposeDataBrowserHitTestUPP(DataBrowserHitTestUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserTrackingUPP(DataBrowserTrackingUPP userUPP);
+DisposeDataBrowserTrackingUPP(DataBrowserTrackingUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  DisposeDataBrowserItemDragRgnUPP()
@@ -4694,7 +5292,7 @@ DisposeDataBrowserTrackingUPP(DataBrowserTrackingUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserItemDragRgnUPP(DataBrowserItemDragRgnUPP userUPP);
+DisposeDataBrowserItemDragRgnUPP(DataBrowserItemDragRgnUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  DisposeDataBrowserItemAcceptDragUPP()
@@ -4705,7 +5303,7 @@ DisposeDataBrowserItemDragRgnUPP(DataBrowserItemDragRgnUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserItemAcceptDragUPP(DataBrowserItemAcceptDragUPP userUPP);
+DisposeDataBrowserItemAcceptDragUPP(DataBrowserItemAcceptDragUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  DisposeDataBrowserItemReceiveDragUPP()
@@ -4716,7 +5314,7 @@ DisposeDataBrowserItemAcceptDragUPP(DataBrowserItemAcceptDragUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeDataBrowserItemReceiveDragUPP(DataBrowserItemReceiveDragUPP userUPP);
+DisposeDataBrowserItemReceiveDragUPP(DataBrowserItemReceiveDragUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  InvokeDataBrowserDrawItemUPP()
@@ -4735,7 +5333,7 @@ InvokeDataBrowserDrawItemUPP(
   const Rect *            theRect,
   SInt16                  gdDepth,
   Boolean                 colorDevice,
-  DataBrowserDrawItemUPP  userUPP);
+  DataBrowserDrawItemUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  InvokeDataBrowserEditItemUPP()
@@ -4753,7 +5351,7 @@ InvokeDataBrowserEditItemUPP(
   CFStringRef             theString,
   Rect *                  maxEditTextRect,
   Boolean *               shrinkToFit,
-  DataBrowserEditItemUPP  userUPP);
+  DataBrowserEditItemUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  InvokeDataBrowserHitTestUPP()
@@ -4770,7 +5368,7 @@ InvokeDataBrowserHitTestUPP(
   DataBrowserPropertyID  property,
   const Rect *           theRect,
   const Rect *           mouseRect,
-  DataBrowserHitTestUPP  userUPP);
+  DataBrowserHitTestUPP  userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  InvokeDataBrowserTrackingUPP()
@@ -4788,7 +5386,7 @@ InvokeDataBrowserTrackingUPP(
   const Rect *            theRect,
   Point                   startPt,
   EventModifiers          modifiers,
-  DataBrowserTrackingUPP  userUPP);
+  DataBrowserTrackingUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  InvokeDataBrowserItemDragRgnUPP()
@@ -4805,7 +5403,7 @@ InvokeDataBrowserItemDragRgnUPP(
   DataBrowserPropertyID      property,
   const Rect *               theRect,
   RgnHandle                  dragRgn,
-  DataBrowserItemDragRgnUPP  userUPP);
+  DataBrowserItemDragRgnUPP  userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  InvokeDataBrowserItemAcceptDragUPP()
@@ -4822,7 +5420,7 @@ InvokeDataBrowserItemAcceptDragUPP(
   DataBrowserPropertyID         property,
   const Rect *                  theRect,
   DragReference                 theDrag,
-  DataBrowserItemAcceptDragUPP  userUPP);
+  DataBrowserItemAcceptDragUPP  userUPP)                      AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  InvokeDataBrowserItemReceiveDragUPP()
@@ -4839,7 +5437,7 @@ InvokeDataBrowserItemReceiveDragUPP(
   DataBrowserPropertyID          property,
   DataBrowserDragFlags           dragFlags,
   DragReference                  theDrag,
-  DataBrowserItemReceiveDragUPP  userUPP);
+  DataBrowserItemReceiveDragUPP  userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /* Custom Callback (vtable) Structure */
 enum {
@@ -4867,13 +5465,16 @@ typedef struct DataBrowserCustomCallbacks DataBrowserCustomCallbacks;
 /*
  *  InitDataBrowserCustomCallbacks()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-InitDataBrowserCustomCallbacks(DataBrowserCustomCallbacks * callbacks);
+InitDataBrowserCustomCallbacks(DataBrowserCustomCallbacks * callbacks) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Macro for initializing custom callback structure */
@@ -4883,6 +5484,9 @@ InitDataBrowserCustomCallbacks(DataBrowserCustomCallbacks * callbacks);
 /*
  *  GetDataBrowserCustomCallbacks()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -4891,11 +5495,14 @@ InitDataBrowserCustomCallbacks(DataBrowserCustomCallbacks * callbacks);
 extern OSStatus 
 GetDataBrowserCustomCallbacks(
   ControlRef                    browser,
-  DataBrowserCustomCallbacks *  callbacks);
+  DataBrowserCustomCallbacks *  callbacks)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserCustomCallbacks()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4905,7 +5512,7 @@ GetDataBrowserCustomCallbacks(
 extern OSStatus 
 SetDataBrowserCustomCallbacks(
   ControlRef                          browser,
-  const DataBrowserCustomCallbacks *  callbacks);
+  const DataBrowserCustomCallbacks *  callbacks)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4924,6 +5531,7 @@ enum {
   kDataBrowserTableViewSelectionColumn = 1 << kDataBrowserViewSpecificFlagsOffset
 };
 
+/* The row and column indicies are zero-based */
 
 typedef UInt32                          DataBrowserTableViewRowIndex;
 typedef UInt32                          DataBrowserTableViewColumnIndex;
@@ -4939,6 +5547,9 @@ enum {
 /*
  *  RemoveDataBrowserTableViewColumn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -4947,11 +5558,14 @@ enum {
 extern OSStatus 
 RemoveDataBrowserTableViewColumn(
   ControlRef                     browser,
-  DataBrowserTableViewColumnID   column);
+  DataBrowserTableViewColumnID   column)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserTableViewColumnCount()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4961,12 +5575,15 @@ RemoveDataBrowserTableViewColumn(
 extern OSStatus 
 GetDataBrowserTableViewColumnCount(
   ControlRef   browser,
-  UInt32 *     numColumns);
+  UInt32 *     numColumns)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  SetDataBrowserTableViewHiliteStyle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4976,11 +5593,14 @@ GetDataBrowserTableViewColumnCount(
 extern OSStatus 
 SetDataBrowserTableViewHiliteStyle(
   ControlRef                        browser,
-  DataBrowserTableViewHiliteStyle   hiliteStyle);
+  DataBrowserTableViewHiliteStyle   hiliteStyle)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserTableViewHiliteStyle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4990,12 +5610,15 @@ SetDataBrowserTableViewHiliteStyle(
 extern OSStatus 
 GetDataBrowserTableViewHiliteStyle(
   ControlRef                         browser,
-  DataBrowserTableViewHiliteStyle *  hiliteStyle);
+  DataBrowserTableViewHiliteStyle *  hiliteStyle)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  SetDataBrowserTableViewRowHeight()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5005,11 +5628,14 @@ GetDataBrowserTableViewHiliteStyle(
 extern OSStatus 
 SetDataBrowserTableViewRowHeight(
   ControlRef   browser,
-  UInt16       height);
+  UInt16       height)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserTableViewRowHeight()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5019,11 +5645,14 @@ SetDataBrowserTableViewRowHeight(
 extern OSStatus 
 GetDataBrowserTableViewRowHeight(
   ControlRef   browser,
-  UInt16 *     height);
+  UInt16 *     height)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserTableViewColumnWidth()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5033,11 +5662,14 @@ GetDataBrowserTableViewRowHeight(
 extern OSStatus 
 SetDataBrowserTableViewColumnWidth(
   ControlRef   browser,
-  UInt16       width);
+  UInt16       width)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserTableViewColumnWidth()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5047,11 +5679,14 @@ SetDataBrowserTableViewColumnWidth(
 extern OSStatus 
 GetDataBrowserTableViewColumnWidth(
   ControlRef   browser,
-  UInt16 *     width);
+  UInt16 *     width)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserTableViewItemRowHeight()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5062,11 +5697,14 @@ extern OSStatus
 SetDataBrowserTableViewItemRowHeight(
   ControlRef          browser,
   DataBrowserItemID   item,
-  UInt16              height);
+  UInt16              height)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserTableViewItemRowHeight()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5077,11 +5715,14 @@ extern OSStatus
 GetDataBrowserTableViewItemRowHeight(
   ControlRef          browser,
   DataBrowserItemID   item,
-  UInt16 *            height);
+  UInt16 *            height)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserTableViewNamedColumnWidth()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5092,11 +5733,14 @@ extern OSStatus
 SetDataBrowserTableViewNamedColumnWidth(
   ControlRef                     browser,
   DataBrowserTableViewColumnID   column,
-  UInt16                         width);
+  UInt16                         width)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserTableViewNamedColumnWidth()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5107,11 +5751,14 @@ extern OSStatus
 GetDataBrowserTableViewNamedColumnWidth(
   ControlRef                     browser,
   DataBrowserTableViewColumnID   column,
-  UInt16 *                       width);
+  UInt16 *                       width)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserTableViewGeometry()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5122,11 +5769,14 @@ extern OSStatus
 SetDataBrowserTableViewGeometry(
   ControlRef   browser,
   Boolean      variableWidthColumns,
-  Boolean      variableHeightRows);
+  Boolean      variableHeightRows)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserTableViewGeometry()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5137,12 +5787,15 @@ extern OSStatus
 GetDataBrowserTableViewGeometry(
   ControlRef   browser,
   Boolean *    variableWidthColumns,
-  Boolean *    variableHeightRows);
+  Boolean *    variableHeightRows)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  GetDataBrowserTableViewItemID()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5153,11 +5806,14 @@ extern OSStatus
 GetDataBrowserTableViewItemID(
   ControlRef                     browser,
   DataBrowserTableViewRowIndex   row,
-  DataBrowserItemID *            item);
+  DataBrowserItemID *            item)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserTableViewItemRow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5168,11 +5824,14 @@ extern OSStatus
 SetDataBrowserTableViewItemRow(
   ControlRef                     browser,
   DataBrowserItemID              item,
-  DataBrowserTableViewRowIndex   row);
+  DataBrowserTableViewRowIndex   row)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserTableViewItemRow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5183,11 +5842,14 @@ extern OSStatus
 GetDataBrowserTableViewItemRow(
   ControlRef                      browser,
   DataBrowserItemID               item,
-  DataBrowserTableViewRowIndex *  row);
+  DataBrowserTableViewRowIndex *  row)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserTableViewColumnPosition()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5198,11 +5860,14 @@ extern OSStatus
 SetDataBrowserTableViewColumnPosition(
   ControlRef                        browser,
   DataBrowserTableViewColumnID      column,
-  DataBrowserTableViewColumnIndex   position);
+  DataBrowserTableViewColumnIndex   position)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserTableViewColumnPosition()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5213,11 +5878,14 @@ extern OSStatus
 GetDataBrowserTableViewColumnPosition(
   ControlRef                         browser,
   DataBrowserTableViewColumnID       column,
-  DataBrowserTableViewColumnIndex *  position);
+  DataBrowserTableViewColumnIndex *  position)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserTableViewColumnProperty()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5228,7 +5896,7 @@ extern OSStatus
 GetDataBrowserTableViewColumnProperty(
   ControlRef                        browser,
   DataBrowserTableViewColumnIndex   column,
-  DataBrowserTableViewColumnID *    property);
+  DataBrowserTableViewColumnID *    property)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5275,17 +5943,23 @@ enum {
 /*
  *  AutoSizeDataBrowserListViewColumns()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AutoSizeDataBrowserListViewColumns(ControlRef browser);
+AutoSizeDataBrowserListViewColumns(ControlRef browser)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  AddDataBrowserListViewColumn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5296,11 +5970,50 @@ extern OSStatus
 AddDataBrowserListViewColumn(
   ControlRef                        browser,
   DataBrowserListViewColumnDesc *   columnDesc,
-  DataBrowserTableViewColumnIndex   position);
+  DataBrowserTableViewColumnIndex   position)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  GetDataBrowserListViewHeaderDesc()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.5 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+GetDataBrowserListViewHeaderDesc(
+  ControlRef                       browser,
+  DataBrowserTableViewColumnID     column,
+  DataBrowserListViewHeaderDesc *  desc)                      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  SetDataBrowserListViewHeaderDesc()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.5 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+SetDataBrowserListViewHeaderDesc(
+  ControlRef                       browser,
+  DataBrowserTableViewColumnID     column,
+  DataBrowserListViewHeaderDesc *  desc)                      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
  *  SetDataBrowserListViewHeaderBtnHeight()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5310,11 +6023,14 @@ AddDataBrowserListViewColumn(
 extern OSStatus 
 SetDataBrowserListViewHeaderBtnHeight(
   ControlRef   browser,
-  UInt16       height);
+  UInt16       height)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserListViewHeaderBtnHeight()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5324,11 +6040,14 @@ SetDataBrowserListViewHeaderBtnHeight(
 extern OSStatus 
 GetDataBrowserListViewHeaderBtnHeight(
   ControlRef   browser,
-  UInt16 *     height);
+  UInt16 *     height)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserListViewUsePlainBackground()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5338,11 +6057,14 @@ GetDataBrowserListViewHeaderBtnHeight(
 extern OSStatus 
 SetDataBrowserListViewUsePlainBackground(
   ControlRef   browser,
-  Boolean      usePlainBackground);
+  Boolean      usePlainBackground)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserListViewUsePlainBackground()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5352,11 +6074,14 @@ SetDataBrowserListViewUsePlainBackground(
 extern OSStatus 
 GetDataBrowserListViewUsePlainBackground(
   ControlRef   browser,
-  Boolean *    usePlainBackground);
+  Boolean *    usePlainBackground)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserListViewDisclosureColumn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5367,11 +6092,14 @@ extern OSStatus
 SetDataBrowserListViewDisclosureColumn(
   ControlRef                     browser,
   DataBrowserTableViewColumnID   column,
-  Boolean                        expandableRows);
+  Boolean                        expandableRows)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserListViewDisclosureColumn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5382,13 +6110,16 @@ extern OSStatus
 GetDataBrowserListViewDisclosureColumn(
   ControlRef                      browser,
   DataBrowserTableViewColumnID *  column,
-  Boolean *                       expandableRows);
+  Boolean *                       expandableRows)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /* kDataBrowserColumnView API */
 /*
  *  GetDataBrowserColumnViewPath()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5398,11 +6129,14 @@ GetDataBrowserListViewDisclosureColumn(
 extern OSStatus 
 GetDataBrowserColumnViewPath(
   ControlRef   browser,
-  Handle       path);
+  Handle       path)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserColumnViewPathLength()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5412,11 +6146,14 @@ GetDataBrowserColumnViewPath(
 extern OSStatus 
 GetDataBrowserColumnViewPathLength(
   ControlRef   browser,
-  UInt32 *     pathLength);
+  UInt32 *     pathLength)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserColumnViewPath()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5427,11 +6164,14 @@ extern OSStatus
 SetDataBrowserColumnViewPath(
   ControlRef                 browser,
   UInt32                     length,
-  const DataBrowserItemID *  path);
+  const DataBrowserItemID *  path)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDataBrowserColumnViewDisplayType()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5441,11 +6181,14 @@ SetDataBrowserColumnViewPath(
 extern OSStatus 
 SetDataBrowserColumnViewDisplayType(
   ControlRef                browser,
-  DataBrowserPropertyType   propertyType);
+  DataBrowserPropertyType   propertyType)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDataBrowserColumnViewDisplayType()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5455,16 +6198,16 @@ SetDataBrowserColumnViewDisplayType(
 extern OSStatus 
 GetDataBrowserColumnViewDisplayType(
   ControlRef                 browser,
-  DataBrowserPropertyType *  propertyType);
+  DataBrowserPropertyType *  propertyType)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /* DataBrowser UPP macros */
 /*---------------------------------------------------------------------------------------*/
-/* EditUnicodeText Contol                                                                */
+/* EditUnicodeText Control                                                               */
 /*---------------------------------------------------------------------------------------*/
-/* This control is only available in X, XXXXX.  It is super similar to Edit Text control */
-/* Use all the same Get/Set tags.  But don't ask for the TEHandle.           */
+/* This control is only available in Mac OS X.  It is super similar to Edit Text control */
+/* Use all the same Get/Set tags.  But don't ask for the TEHandle.                       */
 /*---------------------------------------------------------------------------------------*/
 /* This callback supplies the functionality of the TSMTEPostUpdateProcPtr that is used */
 /* in the EditText control.  A client should supply this call if they want to look at  */
@@ -5483,7 +6226,7 @@ typedef STACK_UPP_TYPE(EditUnicodePostUpdateProcPtr)            EditUnicodePostU
  *    Non-Carbon CFM:   not available
  */
 extern EditUnicodePostUpdateUPP
-NewEditUnicodePostUpdateUPP(EditUnicodePostUpdateProcPtr userRoutine);
+NewEditUnicodePostUpdateUPP(EditUnicodePostUpdateProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeEditUnicodePostUpdateUPP()
@@ -5494,7 +6237,7 @@ NewEditUnicodePostUpdateUPP(EditUnicodePostUpdateProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeEditUnicodePostUpdateUPP(EditUnicodePostUpdateUPP userUPP);
+DisposeEditUnicodePostUpdateUPP(EditUnicodePostUpdateUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeEditUnicodePostUpdateUPP()
@@ -5511,7 +6254,7 @@ InvokeEditUnicodePostUpdateUPP(
   UniCharArrayOffset        iStartOffset,
   UniCharArrayOffset        iEndOffset,
   void *                    refcon,
-  EditUnicodePostUpdateUPP  userUPP);
+  EditUnicodePostUpdateUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /* Use this tag when calling ControlSet/GetData to specify the UnicodePostUpdateProcPtr */
 /* tags available with Appearance 1.1 or later */
@@ -5534,6 +6277,9 @@ enum {
 /*
  *  CreateEditUnicodeTextControl()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -5545,11 +6291,14 @@ CreateEditUnicodeTextControl(
   const Rect *                 boundsRect,
   CFStringRef                  text,
   Boolean                      isPassword,
-  const ControlFontStyleRec *  style,
-  ControlRef *                 outControl);
+  const ControlFontStyleRec *  style,            /* can be NULL */
+  ControlRef *                 outControl)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-
+/* Tagged data supported by Unicode text Control only*/
+enum {
+  kControlEditTextSingleLineTag = 'sglc'
+};
 
 #if OLDROUTINENAMES
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -5592,13 +6341,7 @@ enum {
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

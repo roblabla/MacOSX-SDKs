@@ -1,5 +1,5 @@
 /*	NSCoder.h
-	Copyright 1993-2001, Apple, Inc. All rights reserved.
+	Copyright 1993-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -38,6 +38,30 @@
 - (NSZone *)objectZone;
 
 - (unsigned)systemVersion;
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (BOOL)allowsKeyedCoding;
+
+- (void)encodeObject:(id)objv forKey:(NSString *)key;
+- (void)encodeConditionalObject:(id)objv forKey:(NSString *)key;
+- (void)encodeBool:(BOOL)boolv forKey:(NSString *)key;
+- (void)encodeInt:(int)intv forKey:(NSString *)key;
+- (void)encodeInt32:(int32_t)intv forKey:(NSString *)key;
+- (void)encodeInt64:(int64_t)intv forKey:(NSString *)key;
+- (void)encodeFloat:(float)realv forKey:(NSString *)key;
+- (void)encodeDouble:(double)realv forKey:(NSString *)key;
+- (void)encodeBytes:(const uint8_t *)bytesp length:(unsigned)lenv forKey:(NSString *)key;
+
+- (BOOL)containsValueForKey:(NSString *)key;
+- (id)decodeObjectForKey:(NSString *)key;
+- (BOOL)decodeBoolForKey:(NSString *)key;
+- (int)decodeIntForKey:(NSString *)key;
+- (int32_t)decodeInt32ForKey:(NSString *)key;
+- (int64_t)decodeInt64ForKey:(NSString *)key;
+- (float)decodeFloatForKey:(NSString *)key;
+- (double)decodeDoubleForKey:(NSString *)key;
+- (const uint8_t *)decodeBytesForKey:(NSString *)key returnedLength:(unsigned *)lengthp;   // returned bytes immutable!
+#endif
 
 @end
 

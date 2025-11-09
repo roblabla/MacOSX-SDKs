@@ -26,6 +26,10 @@ struct CGDataConsumerCallbacks {
 };
 typedef struct CGDataConsumerCallbacks CGDataConsumerCallbacks;
 
+/* Return the CFTypeID for CGDataConsumerRefs. */
+
+CG_EXTERN CFTypeID CGDataConsumerGetTypeID(void);
+
 /* Create a data consumer using `callbacks' to handle the data.  `info' is
  * passed to each of the callback functions. */
 
@@ -35,13 +39,11 @@ CG_EXTERN CGDataConsumerRef CGDataConsumerCreate(void *info, const CGDataConsume
 
 CG_EXTERN CGDataConsumerRef CGDataConsumerCreateWithURL(CFURLRef url);
 
-/* Increment the retain count of `consumer' and return it.  All data
- * consumers are created with an initial retain count of 1. */
+/* Equivalent to `CFRetain(consumer)'. */
 
 CG_EXTERN CGDataConsumerRef CGDataConsumerRetain(CGDataConsumerRef consumer);
 
-/* Decrement the retain count of `consumer'.  If the retain count reaches
- * 0, then release it and any associated resources. */
+/* Equivalent to `CFRelease(consumer)'. */
 
 CG_EXTERN void CGDataConsumerRelease(CGDataConsumerRef consumer);
 

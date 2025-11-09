@@ -83,6 +83,14 @@ typedef	_BSD_TIME_T_	time_t;
 typedef	_BSD_SIZE_T_	size_t;
 #endif
 
+#ifndef _TIMESPEC_DECLARED           
+#define _TIMESPEC_DECLARED
+struct timespec {
+        time_t  tv_sec;         /* seconds */
+        long    tv_nsec;        /* and nanoseconds */  
+};
+#endif
+
 struct tm {
 	int	tm_sec;		/* seconds after the minute [0-60] */
 	int	tm_min;		/* minutes after the hour [0-59] */
@@ -103,6 +111,10 @@ struct tm {
 
 #include <sys/cdefs.h>
 
+#ifndef _ANSI_SOURCE
+extern char *tzname[];
+#endif
+
 __BEGIN_DECLS
 char *asctime __P((const struct tm *));
 clock_t clock __P((void));
@@ -119,9 +131,20 @@ void tzset __P((void));
 #endif /* not ANSI */
 
 #if !defined(_ANSI_SOURCE) && !defined(_POSIX_SOURCE)
+char *asctime_r __P((const struct tm *, char *));
+char *ctime_r __P((const time_t *, char *));
+struct tm *gmtime_r __P((const time_t *, struct tm *));
+struct tm *localtime_r __P((const time_t *, struct tm *));
+char *strptime __P((const char *, const char *, struct tm *));
 char *timezone __P((int, int));
 void tzsetwall __P((void));
+time_t timelocal __P((struct tm * const));
+time_t timegm __P((struct tm * const));
 #endif /* neither ANSI nor POSIX */
+
+#if !defined(_ANSI_SOURCE)
+int nanosleep __P((const struct timespec *, struct timespec *));
+#endif
 __END_DECLS
 
 #endif /* !_TIME_H_ */

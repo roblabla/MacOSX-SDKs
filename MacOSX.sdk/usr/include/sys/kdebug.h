@@ -29,8 +29,11 @@
 #ifndef BSD_SYS_KDEBUG_H
 #define BSD_SYS_KDEBUG_H
 
+#include <sys/appleapiopts.h>
 #include <sys/cdefs.h>
 __BEGIN_DECLS
+
+#ifdef __APPLE_API_UNSTABLE
 
 #include <mach/clock_types.h>
 #if	defined(KERNEL_BUILD)
@@ -72,6 +75,7 @@ __BEGIN_DECLS
 #define DBG_TRACE               7
 #define DBG_DLIL	        8
 #define DBG_MISC		20
+#define DBG_DYLD                31
 #define DBG_MIG			255
 
 /* **** The Kernel Debug Sub Classes for Mach (DBG_MACH) **** */
@@ -98,6 +102,8 @@ __BEGIN_DECLS
 #define MACH_CALLOUT            0x4     /* callouts */
 #define MACH_STACK_DETACH       0x5
 #define MACH_MAKE_RUNNABLE      0x6     /* make thread runnable */
+#define	MACH_PROMOTE			0x7		/* promoted due to resource */
+#define	MACH_DEMOTE				0x8		/* promotion undone */
 
 /* **** The Kernel Debug Sub Classes for Network (DBG_NETWORK) **** */
 #define DBG_NETIP	1	/* Internet Protocol */
@@ -140,6 +146,7 @@ __BEGIN_DECLS
 #define DBG_IOCMDQ	13	/* Command queue latencies */
 #define DBG_IOMCURS	14	/* Memory Cursor */
 #define DBG_IOMDESC	15	/* Memory Descriptors */
+#define DBG_IOPOWER	16	/* Power Managerment */
 
 /* **** The Kernel Debug Sub Classes for Device Drivers (DBG_DRIVERS) **** */
 #define DBG_DRVSCSI	1	/* SCSI */
@@ -161,6 +168,7 @@ __BEGIN_DECLS
 
 /* The Kernel Debug Sub Classes for File System */
 #define DBG_FSRW      1       /* reads and writes to the filesystem */
+#define DBG_DKRW      2       /* reads and writes to the disk */
 
 /* The Kernel Debug Sub Classes for BSD */
 #define	DBG_BSD_EXCP_SC	0x0C	/* System Calls */
@@ -168,6 +176,16 @@ __BEGIN_DECLS
 /* The Kernel Debug Sub Classes for DBG_TRACE */
 #define DBG_TRACE_DATA      0
 #define DBG_TRACE_STRING    1
+
+/* The Kernel Debug Sub Classes for DBG_DYLD */
+#define DBG_DYLD_STRING   5
+
+/* The Kernel Debug modifiers for the DBG_DKRW sub class */
+#define DKIO_DONE 	0x01
+#define DKIO_READ	0x02
+#define DKIO_ASYNC	0x04
+#define DKIO_META	0x08
+#define DKIO_PAGING	0x10
 
 /**********************************************************************/
 
@@ -184,6 +202,7 @@ __BEGIN_DECLS
 #define TRACEDBG_CODE(SubClass,code) KDBG_CODE(DBG_TRACE, SubClass, code)
 #define MISCDBG_CODE(SubClass,code) KDBG_CODE(DBG_MISC, SubClass, code)
 #define DLILDBG_CODE(SubClass,code) KDBG_CODE(DBG_DLIL, SubClass, code)
+#define DYLDDBG_CODE(SubClass,code) KDBG_CODE(DBG_DYLD, SubClass, code)
 
 /*   Usage:
 * kernel_debug((KDBG_CODE(DBG_NETWORK, DNET_PROTOCOL, 51) | DBG_FUNC_START), 
@@ -213,6 +232,10 @@ __BEGIN_DECLS
 */
 
 extern unsigned int kdebug_enable;
+#define KDEBUG_ENABLE_TRACE   0x1
+#define KDEBUG_ENABLE_ENTROPY 0x2
+#define KDEBUG_ENABLE_CHUD    0x4
+
 #define KERNEL_DEBUG_CONSTANT(x,a,b,c,d,e)    \
 do {					\
     if (kdebug_enable)			\
@@ -250,6 +273,7 @@ do {					\
 
 #endif
 
+#endif /* __APPLE_API_UNSTABLE */
 __END_DECLS
 
 

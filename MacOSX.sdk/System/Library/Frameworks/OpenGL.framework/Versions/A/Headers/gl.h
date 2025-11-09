@@ -60,6 +60,7 @@ typedef void GLvoid;
 #define GL_VERSION_1_1                    1
 #define GL_VERSION_1_2                    1
 #define GL_VERSION_1_3                    1
+#define GL_VERSION_1_4                    1
 
 /* AccumOp */
 #define GL_ACCUM                          0x0100
@@ -1553,9 +1554,9 @@ typedef void GLvoid;
 #define GL_COMPRESSED_RGB                 0x84ED
 #define GL_COMPRESSED_RGBA                0x84EE
 #define GL_TEXTURE_COMPRESSION_HINT       0x84EF
-#define GL_TEXTURE_IMAGE_SIZE             0x86A0
+#define GL_TEXTURE_COMPRESSED_IMAGE_SIZE  0x86A0
 #define GL_TEXTURE_COMPRESSED             0x86A1
-#define GL_NUM_COMPRESSED_TEXTURE_FORMATS     0x86A2
+#define GL_NUM_COMPRESSED_TEXTURE_FORMATS 0x86A2
 #define GL_COMPRESSED_TEXTURE_FORMATS     0x86A3
 
 #define GL_MULTISAMPLE                    0x809D
@@ -1567,6 +1568,55 @@ typedef void GLvoid;
 #define GL_SAMPLE_COVERAGE_VALUE          0x80AA
 #define GL_SAMPLE_COVERAGE_INVERT         0x80AB
 #define GL_MULTISAMPLE_BIT                0x20000000
+
+#define GL_DEPTH_COMPONENT16              0x81A5
+#define GL_DEPTH_COMPONENT24              0x81A6
+#define GL_DEPTH_COMPONENT32              0x81A7
+#define GL_TEXTURE_DEPTH_SIZE             0x884A
+#define GL_DEPTH_TEXTURE_MODE             0x884B
+
+#define GL_TEXTURE_COMPARE_MODE           0x884C
+#define GL_TEXTURE_COMPARE_FUNC           0x884D
+#define GL_COMPARE_R_TO_TEXTURE           0x884E
+
+#define GL_FOG_COORDINATE_SOURCE          0x8450
+#define GL_FOG_COORDINATE                 0x8451
+#define GL_FRAGMENT_DEPTH                 0x8452
+#define GL_CURRENT_FOG_COORDINATE         0x8453  
+#define GL_FOG_COORDINATE_ARRAY_TYPE      0x8454
+#define GL_FOG_COORDINATE_ARRAY_STRIDE    0x8455
+#define GL_FOG_COORDINATE_ARRAY_POINTER   0x8456
+#define GL_FOG_COORDINATE_ARRAY           0x8457
+
+#define GL_COLOR_SUM                      0x8458
+#define GL_CURRENT_SECONDARY_COLOR        0x8459
+#define GL_SECONDARY_COLOR_ARRAY_SIZE     0x845A
+#define GL_SECONDARY_COLOR_ARRAY_TYPE     0x845B
+#define GL_SECONDARY_COLOR_ARRAY_STRIDE   0x845C
+#define GL_SECONDARY_COLOR_ARRAY_POINTER  0x845D
+#define GL_SECONDARY_COLOR_ARRAY          0x845E
+
+#define GL_POINT_SIZE_MIN                 0x8126
+#define GL_POINT_SIZE_MAX                 0x8127
+#define GL_POINT_FADE_THRESHOLD_SIZE      0x8128
+#define GL_POINT_DISTANCE_ATTENUATION     0x8129
+
+#define GL_BLEND_DST_RGB                  0x80C8
+#define GL_BLEND_SRC_RGB                  0x80C9
+#define GL_BLEND_DST_ALPHA                0x80CA
+#define GL_BLEND_SRC_ALPHA                0x80CB
+
+#define GL_GENERATE_MIPMAP                0x8191
+#define GL_GENERATE_MIPMAP_HINT           0x8192
+
+#define GL_INCR_WRAP                      0x8507
+#define GL_DECR_WRAP                      0x8508
+
+#define GL_MIRRORED_REPEAT                0x8370
+
+#define GL_MAX_TEXTURE_LOD_BIAS           0x84FD
+#define GL_TEXTURE_FILTER_CONTROL         0x8500
+#define GL_TEXTURE_LOD_BIAS               0x8501
 
 /*************************************************************/
 
@@ -1658,7 +1708,7 @@ extern void glDrawElements (GLenum mode, GLsizei count, GLenum type, const GLvoi
 extern void glDrawPixels (GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels);
 extern void glDrawRangeElements (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices);
 extern void glEdgeFlag (GLboolean flag);
-extern void glEdgeFlagPointer (GLsizei stride, const GLboolean *pointer);
+extern void glEdgeFlagPointer (GLsizei stride, const GLvoid *pointer);
 extern void glEdgeFlagv (const GLboolean *flag);
 extern void glEnable (GLenum cap);
 extern void glEnableClientState (GLenum array);
@@ -1959,7 +2009,7 @@ extern void glCompressedTexImage1D (GLenum, GLint, GLenum, GLsizei, GLint, GLsiz
 extern void glCompressedTexSubImage3D (GLenum, GLint, GLint, GLint, GLint, GLsizei, GLsizei, GLsizei, GLenum, GLsizei, const GLvoid *);
 extern void glCompressedTexSubImage2D (GLenum, GLint, GLint, GLint, GLsizei, GLsizei, GLenum, GLsizei, const GLvoid *);
 extern void glCompressedTexSubImage1D (GLenum, GLint, GLint, GLsizei, GLenum, GLsizei, const GLvoid *);
-extern void glGetCompressedTexImage (GLenum, GLint, void *);
+extern void glGetCompressedTexImage (GLenum, GLint, GLvoid *);
 
 extern void glActiveTexture (GLenum);
 extern void glClientActiveTexture (GLenum);
@@ -1995,6 +2045,55 @@ extern void glMultiTexCoord4i (GLenum, GLint, GLint, GLint, GLint);
 extern void glMultiTexCoord4iv (GLenum, const GLint *);
 extern void glMultiTexCoord4s (GLenum, GLshort, GLshort, GLshort, GLshort);
 extern void glMultiTexCoord4sv (GLenum, const GLshort *);
+
+extern void glFogCoordf (GLfloat);
+extern void glFogCoordfv (const GLfloat *);  
+extern void glFogCoordd (GLdouble);
+extern void glFogCoorddv (const GLdouble *);   
+extern void glFogCoordPointer (GLenum, GLsizei, const GLvoid *);
+
+extern void glSecondaryColor3b (GLbyte, GLbyte, GLbyte);
+extern void glSecondaryColor3bv (const GLbyte *);
+extern void glSecondaryColor3d (GLdouble, GLdouble, GLdouble);
+extern void glSecondaryColor3dv (const GLdouble *);
+extern void glSecondaryColor3f (GLfloat, GLfloat, GLfloat);
+extern void glSecondaryColor3fv (const GLfloat *);
+extern void glSecondaryColor3i (GLint, GLint, GLint);
+extern void glSecondaryColor3iv (const GLint *);
+extern void glSecondaryColor3s (GLshort, GLshort, GLshort);
+extern void glSecondaryColor3sv (const GLshort *);
+extern void glSecondaryColor3ub (GLubyte, GLubyte, GLubyte);
+extern void glSecondaryColor3ubv (const GLubyte *);
+extern void glSecondaryColor3ui (GLuint, GLuint, GLuint);
+extern void glSecondaryColor3uiv (const GLuint *);
+extern void glSecondaryColor3us (GLushort, GLushort, GLushort);
+extern void glSecondaryColor3usv (const GLushort *);
+extern void glSecondaryColorPointer (GLint, GLenum, GLsizei, const GLvoid *);
+
+extern void glPointParameterf (GLenum pname, GLfloat param); 
+extern void glPointParameterfv (GLenum pname, const GLfloat *params);
+
+extern void glBlendFuncSeparate (GLenum, GLenum, GLenum, GLenum);
+
+extern void glMultiDrawArrays (GLenum, const GLint *, const GLsizei *, GLsizei);
+extern void glMultiDrawElements (GLenum, const GLsizei *, GLenum, const GLvoid* *, GLsizei);
+
+extern void glWindowPos2d (GLdouble, GLdouble);
+extern void glWindowPos2dv (const GLdouble *);
+extern void glWindowPos2f (GLfloat, GLfloat);
+extern void glWindowPos2fv (const GLfloat *);
+extern void glWindowPos2i (GLint, GLint); 
+extern void glWindowPos2iv (const GLint *);
+extern void glWindowPos2s (GLshort, GLshort);
+extern void glWindowPos2sv (const GLshort *);
+extern void glWindowPos3d (GLdouble, GLdouble, GLdouble);
+extern void glWindowPos3dv (const GLdouble *);
+extern void glWindowPos3f (GLfloat, GLfloat, GLfloat);
+extern void glWindowPos3fv (const GLfloat *);
+extern void glWindowPos3i (GLint, GLint, GLint);
+extern void glWindowPos3iv (const GLint *);
+extern void glWindowPos3s (GLshort, GLshort, GLshort);
+extern void glWindowPos3sv (const GLshort *);
 
 #ifdef __cplusplus
 }

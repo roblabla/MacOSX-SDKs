@@ -1,6 +1,7 @@
 // Stream buffer classes -*- C++ -*-
 
-// Copyright (C) 1997, 1998, 1999, 2000, 2001 Free Software Foundation, Inc.
+// Copyright (C) 1997, 1998, 1999, 2000, 2001, 2002
+// Free Software Foundation, Inc.
 //
 // This file is part of the GNU ISO C++ Library.  This library is free
 // software; you can redistribute it and/or modify it under the
@@ -34,7 +35,13 @@
 #ifndef _CPP_BITS_STREAMBUF_TCC
 #define _CPP_BITS_STREAMBUF_TCC 1
 
-namespace std {
+#pragma GCC system_header
+
+namespace std 
+{
+  template<typename _CharT, typename _Traits>
+    const typename basic_streambuf<_CharT, _Traits>::int_type
+    basic_streambuf<_CharT, _Traits>::_S_pback_size;
 
   template<typename _CharT, typename _Traits>
     typename basic_streambuf<_CharT, _Traits>::int_type
@@ -223,6 +230,21 @@ namespace std {
 	}
       return __ret;
     }
+
+  // Inhibit implicit instantiations for required instantiations,
+  // which are defined via explicit instantiations elsewhere.  
+  // NB:  This syntax is a GNU extension.
+  extern template class basic_streambuf<char>;
+  extern template
+    streamsize
+    __copy_streambufs(basic_ios<char>&, basic_streambuf<char>*,
+		      basic_streambuf<char>*); 
+
+  extern template class basic_streambuf<wchar_t>;
+  extern template
+    streamsize
+    __copy_streambufs(basic_ios<wchar_t>&, basic_streambuf<wchar_t>*,
+		      basic_streambuf<wchar_t>*); 
 } // namespace std
 
-#endif // _CPP_BITS_STREAMBUF_TCC
+#endif 

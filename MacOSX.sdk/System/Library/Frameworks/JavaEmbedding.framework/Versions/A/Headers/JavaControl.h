@@ -3,9 +3,9 @@
  
      Contains:   interface to embedding Java code in a Carbon Control
  
-     Version:    JavaEmbedding-7~2
+     Version:    JavaEmbedding-12~208
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,12 +16,13 @@
 #ifndef __JAVACONTROL__
 #define __JAVACONTROL__
 
-#ifndef __HITOOLBOX__
-#include <HIToolbox/HIToolbox.h>
+#ifndef __CARBON__
+#include <Carbon/Carbon.h>
 #endif
 
 #include <JavaVM/jni.h>
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -29,14 +30,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 
@@ -57,7 +50,8 @@ enum {
   errJavaEmbeddingCouldNotConvertURL = -9958, /* previously errCouldNotConvertURL*/
   errJavaEmbeddingNotAFrame     = -9959, /* previously errNotAFrame*/
   errJavaEmbeddingControlNotEmbedded = -9960, /* previously errControlNotEmbedded*/
-  errJavaEmbeddingExceptionThrown = -9961 /* previously errExceptionThrown*/
+  errJavaEmbeddingExceptionThrown = -9961, /* previously errExceptionThrown*/
+  errJavaEmbeddingJavaDisabled  = -9963
 };
 
 
@@ -118,7 +112,7 @@ MoveAndClipJavaControl(
   int          clipX,
   int          clipY,
   int          clipWidth,
-  int          clipHeight);
+  int          clipHeight)                                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -137,7 +131,7 @@ SizeJavaControl(
   JNIEnv *     env,
   ControlRef   theControl,
   int          width,
-  int          height);
+  int          height)                                        AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -166,7 +160,7 @@ extern OSStatus
 ShowHideJavaControl(
   JNIEnv *     env,
   ControlRef   theControl,
-  Boolean      visible);
+  Boolean      visible)                                       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -203,7 +197,7 @@ ShowHideJavaControl(
 extern OSStatus 
 StopJavaControlAsyncDrawing(
   JNIEnv *     env,
-  ControlRef   theControl);
+  ControlRef   theControl)                                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -232,7 +226,7 @@ StopJavaControlAsyncDrawing(
 extern OSStatus 
 RestartJavaControlAsyncDrawing(
   JNIEnv *     env,
-  ControlRef   theControl);
+  ControlRef   theControl)                                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -266,7 +260,7 @@ RestartJavaControlAsyncDrawing(
 extern OSStatus 
 DrawJavaControl(
   JNIEnv *     env,
-  ControlRef   theControl);
+  ControlRef   theControl)                                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -292,7 +286,8 @@ DrawJavaControl(
  *      A reference to a native window.
  *    
  *    outJavaWindow:
- *      The corresponding Java window.
+ *      Returns a JNI global ref. Call env->DeleteGlobalRef() on it
+ *      when done.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
@@ -303,7 +298,7 @@ extern OSStatus
 GetJavaWindowFromWindow(
   JNIEnv *    env,
   WindowRef   inMacWindow,
-  jobject *   outJavaWindow);
+  jobject *   outJavaWindow)                                  AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -333,7 +328,7 @@ extern OSStatus
 GetWindowFromJavaWindow(
   JNIEnv *     env,
   jobject      inJavaWindow,
-  WindowRef *  outMacWindow);
+  WindowRef *  outMacWindow)                                  AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -352,7 +347,8 @@ GetWindowFromJavaWindow(
  *      A reference to the control for the applet.
  *    
  *    outJavaFrame:
- *      The applet reference.
+ *      Returns a JNI global ref. Call env->DeleteGlobalRef() on it
+ *      when done.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
@@ -363,7 +359,7 @@ extern OSStatus
 GetJavaFrameFromControl(
   JNIEnv *     env,
   ControlRef   inMacControl,
-  jobject *    outJavaFrame);
+  jobject *    outJavaFrame)                                  AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -393,7 +389,7 @@ extern OSStatus
 GetControlFromJavaFrame(
   JNIEnv *      env,
   jobject       inJavaFrame,
-  ControlRef *  outMacControl);
+  ControlRef *  outMacControl)                                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -438,17 +434,9 @@ CreateJavaControl(
   const Rect *  inBounds,
   jobject       inAppletFrame,
   Boolean       inVisible,
-  ControlRef *  outControl);
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

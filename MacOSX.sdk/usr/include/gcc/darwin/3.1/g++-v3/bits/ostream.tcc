@@ -1,4 +1,7 @@
-// Copyright (C) 1997, 1998, 1999, 2000, 2001 Free Software Foundation, Inc.
+// ostream classes -*- C++ -*-
+
+// Copyright (C) 1997, 1998, 1999, 2000, 2001, 2002
+// Free Software Foundation, Inc.
 //
 // This file is part of the GNU ISO C++ Library.  This library is free
 // software; you can redistribute it and/or modify it under the
@@ -28,6 +31,8 @@
 //
 // ISO C++ 14882: 27.6.2  Output streams
 //
+
+#pragma GCC system_header
 
 #include <locale>
 
@@ -180,7 +185,7 @@ namespace std
 	      if (_M_check_facet(_M_fnumput))
 		{
 		  bool __b = false;
-		  if (__fmt & ios_base::oct || __fmt & ios_base::hex)
+		  if ((__fmt & ios_base::oct) || (__fmt & ios_base::hex))
 		    {
 		      unsigned long __l = static_cast<unsigned long>(__n);
 		      __b = _M_fnumput->put(*this, *this, __c, __l).failed();
@@ -243,7 +248,7 @@ namespace std
 	      if (_M_check_facet(_M_fnumput))
 		{
 		  bool __b = false;
-		  if (__fmt & ios_base::oct || __fmt & ios_base::hex)
+		  if ((__fmt & ios_base::oct) || (__fmt & ios_base::hex))
 		    {
 		      unsigned long long __l;
 		      __l = static_cast<unsigned long long>(__n);
@@ -414,9 +419,7 @@ namespace std
     basic_ostream<_CharT, _Traits>::tellp()
     {
       pos_type __ret = pos_type(-1);
-      bool __testok = this->fail() != true;
-      
-      if (__testok)
+      if (!this->fail())
 	__ret = this->rdbuf()->pubseekoff(0, ios_base::cur, ios_base::out);
       return __ret;
     }
@@ -426,9 +429,7 @@ namespace std
     basic_ostream<_CharT, _Traits>&
     basic_ostream<_CharT, _Traits>::seekp(pos_type __pos)
     {
-      bool __testok = this->fail() != true;
-      
-      if (__testok)
+      if (!this->fail())
 	{
 #ifdef _GLIBCPP_RESOLVE_LIB_DEFECTS
 // 136.  seekp, seekg setting wrong streams?
@@ -447,9 +448,7 @@ namespace std
     basic_ostream<_CharT, _Traits>::
     seekp(off_type __off, ios_base::seekdir __d)
     {
-      bool __testok = this->fail() != true;
-      
-      if (__testok)
+      if (!this->fail())
 	{
 #ifdef _GLIBCPP_RESOLVE_LIB_DEFECTS
 // 136.  seekp, seekg setting wrong streams?
@@ -459,12 +458,12 @@ namespace std
 // 129. Need error indication from seekp() and seekg()
 	  if (__err == pos_type(off_type(-1)))
 	    this->setstate(ios_base::failbit);
-	}
 #endif
+	}
       return *this;
     }
 
-  // 27.6.2.5.4 Character inserters
+  // 27.6.2.5.4 Character inserters.
   template<typename _CharT, typename _Traits>
     basic_ostream<_CharT, _Traits>&
     operator<<(basic_ostream<_CharT, _Traits>& __out, _CharT __c)
@@ -476,7 +475,7 @@ namespace std
 	  try 
 	    {
 	      streamsize __w = __out.width();
-	      _CharT* __pads = static_cast<_CharT*>(__builtin_alloca(sizeof(_CharT) * __w));
+	      _CharT* __pads = static_cast<_CharT*>(__builtin_alloca(sizeof(_CharT) * (__w + 1)));
 	      __pads[0] = __c;
 	      streamsize __len = 1;
 	      if (__w > __len)
@@ -499,7 +498,7 @@ namespace std
       return __out;
     }
   
-  // Specialization
+  // Specializations.
   template <class _Traits> 
     basic_ostream<char, _Traits>&
     operator<<(basic_ostream<char, _Traits>& __out, char __c)
@@ -614,7 +613,7 @@ namespace std
       return __out;
     }
 
-  // Partial specializationss
+  // Partial specializations.
   template<class _Traits>
     basic_ostream<char, _Traits>&
     operator<<(basic_ostream<char, _Traits>& __out, const char* __s)
@@ -679,8 +678,27 @@ namespace std
 	}
       return __out;
     }
+
+  // Inhibit implicit instantiations for required instantiations,
+  // which are defined via explicit instantiations elsewhere.  
+  // NB:  This syntax is a GNU extension.
+  extern template class basic_ostream<char>;
+  extern template ostream& endl(ostream&);
+  extern template ostream& ends(ostream&);
+  extern template ostream& flush(ostream&);
+  extern template ostream& operator<<(ostream&, char);
+  extern template ostream& operator<<(ostream&, unsigned char);
+  extern template ostream& operator<<(ostream&, signed char);
+  extern template ostream& operator<<(ostream&, const char*);
+  extern template ostream& operator<<(ostream&, const unsigned char*);
+  extern template ostream& operator<<(ostream&, const signed char*);
+
+  extern template class basic_ostream<wchar_t>;
+  extern template wostream& endl(wostream&);
+  extern template wostream& ends(wostream&);
+  extern template wostream& flush(wostream&);
+  extern template wostream& operator<<(wostream&, wchar_t);
+  extern template wostream& operator<<(wostream&, char);
+  extern template wostream& operator<<(wostream&, const wchar_t*);
+  extern template wostream& operator<<(wostream&, const char*);
 } // namespace std
- 
-// Local Variables:
-// mode:C++
-// End:

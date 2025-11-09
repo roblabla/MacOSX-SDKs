@@ -3,9 +3,9 @@
  
      Contains:   URL Access Interfaces.
  
-     Version:    SecurityHI-56.2~77
+     Version:    SecurityHI-75.1~141
  
-     Copyright:  © 1994-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,7 @@
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -30,13 +31,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* Data structures and types */
 typedef struct OpaqueURLReference*      URLReference;
@@ -169,7 +164,7 @@ enum {
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
 extern OSStatus 
-URLGetURLAccessVersion(UInt32 * returnVers);
+URLGetURLAccessVersion(UInt32 * returnVers)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -201,7 +196,7 @@ typedef STACK_UPP_TYPE(URLSystemEventProcPtr)                   URLSystemEventUP
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern URLNotifyUPP
-NewURLNotifyUPP(URLNotifyProcPtr userRoutine);
+NewURLNotifyUPP(URLNotifyProcPtr userRoutine)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewURLSystemEventUPP()
@@ -212,7 +207,7 @@ NewURLNotifyUPP(URLNotifyProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern URLSystemEventUPP
-NewURLSystemEventUPP(URLSystemEventProcPtr userRoutine);
+NewURLSystemEventUPP(URLSystemEventProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeURLNotifyUPP()
@@ -223,7 +218,7 @@ NewURLSystemEventUPP(URLSystemEventProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeURLNotifyUPP(URLNotifyUPP userUPP);
+DisposeURLNotifyUPP(URLNotifyUPP userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeURLSystemEventUPP()
@@ -234,7 +229,7 @@ DisposeURLNotifyUPP(URLNotifyUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeURLSystemEventUPP(URLSystemEventUPP userUPP);
+DisposeURLSystemEventUPP(URLSystemEventUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeURLNotifyUPP()
@@ -249,7 +244,7 @@ InvokeURLNotifyUPP(
   void *             userContext,
   URLEvent           event,
   URLCallbackInfo *  callbackInfo,
-  URLNotifyUPP       userUPP);
+  URLNotifyUPP       userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeURLSystemEventUPP()
@@ -263,7 +258,7 @@ extern OSStatus
 InvokeURLSystemEventUPP(
   void *             userContext,
   EventRecord *      event,
-  URLSystemEventUPP  userUPP);
+  URLSystemEventUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  URLSimpleDownload()
@@ -280,7 +275,7 @@ URLSimpleDownload(
   Handle              destinationHandle,       /* can be NULL */
   URLOpenFlags        openFlags,
   URLSystemEventUPP   eventProc,               /* can be NULL */
-  void *              userContext);            /* can be NULL */
+  void *              userContext)             /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -298,7 +293,7 @@ URLDownload(
   Handle              destinationHandle,       /* can be NULL */
   URLOpenFlags        openFlags,
   URLSystemEventUPP   eventProc,               /* can be NULL */
-  void *              userContext);            /* can be NULL */
+  void *              userContext)             /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -315,7 +310,7 @@ URLSimpleUpload(
   const FSSpec *      source,
   URLOpenFlags        openFlags,
   URLSystemEventUPP   eventProc,         /* can be NULL */
-  void *              userContext);      /* can be NULL */
+  void *              userContext)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -332,7 +327,7 @@ URLUpload(
   const FSSpec *      source,
   URLOpenFlags        openFlags,
   URLSystemEventUPP   eventProc,         /* can be NULL */
-  void *              userContext);      /* can be NULL */
+  void *              userContext)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -346,7 +341,7 @@ URLUpload(
 extern OSStatus 
 URLNewReference(
   const char *    url,
-  URLReference *  urlRef);
+  URLReference *  urlRef)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -358,7 +353,7 @@ URLNewReference(
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
 extern OSStatus 
-URLDisposeReference(URLReference urlRef);
+URLDisposeReference(URLReference urlRef)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -376,7 +371,7 @@ URLOpen(
   URLOpenFlags   openFlags,
   URLNotifyUPP   notifyProc,          /* can be NULL */
   URLEventMask   eventRegister,
-  void *         userContext);        /* can be NULL */
+  void *         userContext)         /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -388,7 +383,7 @@ URLOpen(
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
 extern OSStatus 
-URLAbort(URLReference urlRef);
+URLAbort(URLReference urlRef)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -402,7 +397,7 @@ URLAbort(URLReference urlRef);
 extern OSStatus 
 URLGetDataAvailable(
   URLReference   urlRef,
-  Size *         dataSize);
+  Size *         dataSize)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -417,7 +412,7 @@ extern OSStatus
 URLGetBuffer(
   URLReference   urlRef,
   void **        buffer,
-  Size *         bufferSize);
+  Size *         bufferSize)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -431,7 +426,7 @@ URLGetBuffer(
 extern OSStatus 
 URLReleaseBuffer(
   URLReference   urlRef,
-  void *         buffer);
+  void *         buffer)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -447,7 +442,7 @@ URLGetProperty(
   URLReference   urlRef,
   const char *   property,
   void *         propertyBuffer,
-  Size           bufferSize);
+  Size           bufferSize)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -462,7 +457,7 @@ extern OSStatus
 URLGetPropertySize(
   URLReference   urlRef,
   const char *   property,
-  Size *         propertySize);
+  Size *         propertySize)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -478,7 +473,7 @@ URLSetProperty(
   URLReference   urlRef,
   const char *   property,
   void *         propertyBuffer,
-  Size           bufferSize);
+  Size           bufferSize)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -492,7 +487,7 @@ URLSetProperty(
 extern OSStatus 
 URLGetCurrentState(
   URLReference   urlRef,
-  URLState *     state);
+  URLState *     state)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -506,7 +501,7 @@ URLGetCurrentState(
 extern OSStatus 
 URLGetError(
   URLReference   urlRef,
-  OSStatus *     urlError);
+  OSStatus *     urlError)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -518,7 +513,7 @@ URLGetError(
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
 extern OSStatus 
-URLIdle(void);
+URLIdle(void)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -533,17 +528,11 @@ extern OSStatus
 URLGetFileInfo(
   StringPtr   fName,
   OSType *    fType,
-  OSType *    fCreator);
+  OSType *    fCreator)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

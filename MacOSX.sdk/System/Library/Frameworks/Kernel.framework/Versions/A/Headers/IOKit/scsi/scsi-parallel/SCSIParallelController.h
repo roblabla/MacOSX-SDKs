@@ -62,7 +62,7 @@ enum SCSITagAllocation
     kTagAllocationNone			= 0,
     kTagAllocationPerLun,
     kTagAllocationPerTarget,    
-    kTagAllocationPerController,
+    kTagAllocationPerController
 };
 
 /*
@@ -73,7 +73,7 @@ enum WorkLoopReqType
     kWorkLoopInitTarget		= 1,
     kWorkLoopReleaseTarget,
     kWorkLoopInitDevice,
-    kWorkLoopReleaseDevice,
+    kWorkLoopReleaseDevice
 };
 
 enum DispatchAction
@@ -81,7 +81,7 @@ enum DispatchAction
     kDispatchNextCommand	= 1,
     kDispatchNextLun,
     kDispatchNextTarget,
-    kDispatchStop,
+    kDispatchStop
 };
 
 typedef struct WorkLoopRequest

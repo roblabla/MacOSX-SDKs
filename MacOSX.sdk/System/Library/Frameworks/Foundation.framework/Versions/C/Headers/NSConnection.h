@@ -1,5 +1,5 @@
 /*	NSConnection.h
-	Copyright 1989-2001, Apple, Inc. All rights reserved.
+	Copyright 1989-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -35,7 +35,7 @@
     id          rootObject;
     void *	registerInfo;
     id		statistics;
-    void	*reserved4;
+    void	*replMode;
     void	*classInfoImported;
     NSMutableData	*releasedProxies;
     void	*reserved;

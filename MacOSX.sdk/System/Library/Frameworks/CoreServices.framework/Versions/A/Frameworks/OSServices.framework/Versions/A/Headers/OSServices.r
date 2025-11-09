@@ -3,9 +3,9 @@
  
      Contains:   Master include for OSServices private framework
  
-     Version:    OSServices-24~82
+     Version:    OSServices-39.2~411
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -19,6 +19,10 @@
 
 #ifndef __CARBONCORE_R__
 #include <CarbonCore/CarbonCore.r>
+#endif
+
+#ifndef __ICONSTORAGE_R__
+#include <OSServices/IconStorage.r>
 #endif
 
 

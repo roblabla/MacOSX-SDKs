@@ -1,16 +1,17 @@
 /*
         NSGraphicsContext.h
         Application Kit
-        Copyright (c) 1997-2001, Apple Computer, Inc.
+        Copyright (c) 1997-2002, Apple Computer, Inc.
         All rights reserved.
 */
 
-#import <Foundation/NSObject.h>
 #import <AppKit/AppKitDefines.h>
+#import <Foundation/NSGeometry.h>
+#import <Foundation/NSObject.h>
 
-@class NSWindow;
 @class NSDictionary;
 @class NSString;
+@class NSWindow;
 
 /* Attributes that can be passed to graphicsContextWithAttributes: method */
 APPKIT_EXTERN NSString *NSGraphicsContextDestinationAttributeName; // Can be an instance of NSWindow, NSMutableData, or NSURL.
@@ -69,7 +70,7 @@ typedef enum NSImageInterpolation {
 - (void *)focusStack;
 - (void)setFocusStack:(void *)stack;
 
-// Platform specific drawing context (usually CGSContextObj)
+// Platform specific drawing context (usually CGContextRef)
 - (void *)graphicsPort;
 
 @end
@@ -80,5 +81,12 @@ typedef enum NSImageInterpolation {
 - (BOOL)shouldAntialias;
 - (void)setImageInterpolation:(NSImageInterpolation)interpolation;
 - (NSImageInterpolation)imageInterpolation;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+
+- (void)setPatternPhase:(NSPoint)phase;
+- (NSPoint)patternPhase;
+
+#endif
 
 @end

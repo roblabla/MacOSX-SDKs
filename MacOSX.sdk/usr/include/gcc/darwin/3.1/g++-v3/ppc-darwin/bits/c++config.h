@@ -34,7 +34,7 @@
 #include <bits/os_defines.h>
 
 // The current version of the C++ library in compressed ISO date format.
-#define __GLIBCPP__ 20020105
+#define __GLIBCPP__ 20020420
 
 // This is necessary until GCC supports separate template
 // compilation.  
@@ -93,9 +93,6 @@
 // Define if C99 features such as lldiv_t, llabs, lldiv should be exposed.
 /* #undef _GLIBCPP_USE_C99 */
 
-// Include support for shadow headers, ie --enable-cshadow-headers.
-/* #undef _GLIBCPP_USE_SHADOW_HEADERS */
-
 // Define if code specialized for wchar_t should be used.
 /* #undef _GLIBCPP_USE_WCHAR_T */
 
@@ -109,7 +106,7 @@
 /* #undef _GLIBCPP_HAVE_MBSTATE_T */
 
 // Define if you have the modff function.
-/* #undef _GLIBCPP_HAVE_MODFF */
+#define _GLIBCPP_HAVE_MODFF 1
 
 // Define if you have the modfl function.
 /* #undef _GLIBCPP_HAVE_MODFL */
@@ -169,7 +166,16 @@
 /* #undef _GLIBCPP_HAVE___BUILTIN_SQRTL */
 
 // Define if LC_MESSAGES is available in <locale.h>.
-/* #undef _GLIBCPP_HAVE_LC_MESSAGES */
+#define _GLIBCPP_HAVE_LC_MESSAGES 1
+
+/* Define if you have the __signbit function.  */
+/* #undef _GLIBCPP_HAVE___SIGNBIT */
+
+/* Define if you have the __signbitf function.  */
+#define _GLIBCPP_HAVE___SIGNBITF 1
+
+/* Define if you have the __signbitl function.  */
+/* #undef _GLIBCPP_HAVE___SIGNBITL */
 
 /* Define if you have the _acosf function.  */
 /* #undef _GLIBCPP_HAVE__ACOSF */
@@ -218,6 +224,9 @@
 
 /* Define if you have the _cosl function.  */
 /* #undef _GLIBCPP_HAVE__COSL */
+
+/* Define if you have the _expf function.  */
+/* #undef _GLIBCPP_HAVE__EXPF */
 
 /* Define if you have the _expl function.  */
 /* #undef _GLIBCPP_HAVE__EXPL */
@@ -385,7 +394,7 @@
 /* #undef _GLIBCPP_HAVE_BTOWC */
 
 /* Define if you have the ceilf function.  */
-/* #undef _GLIBCPP_HAVE_CEILF */
+#define _GLIBCPP_HAVE_CEILF 1
 
 /* Define if you have the ceill function.  */
 /* #undef _GLIBCPP_HAVE_CEILL */
@@ -394,7 +403,7 @@
 #define _GLIBCPP_HAVE_COPYSIGN 1
 
 /* Define if you have the copysignf function.  */
-/* #undef _GLIBCPP_HAVE_COPYSIGNF */
+#define _GLIBCPP_HAVE_COPYSIGNF 1
 
 /* Define if you have the copysignl function.  */
 /* #undef _GLIBCPP_HAVE_COPYSIGNL */
@@ -412,13 +421,16 @@
 /* #undef _GLIBCPP_HAVE_COSL */
 
 /* Define if you have the drand48 function.  */
-/* #undef _GLIBCPP_HAVE_DRAND48 */
+#define _GLIBCPP_HAVE_DRAND48 1
+
+/* Define if you have the expf function.  */
+/* #undef _GLIBCPP_HAVE_EXPF */
 
 /* Define if you have the expl function.  */
 /* #undef _GLIBCPP_HAVE_EXPL */
 
 /* Define if you have the fabsf function.  */
-/* #undef _GLIBCPP_HAVE_FABSF */
+#define _GLIBCPP_HAVE_FABSF 1
 
 /* Define if you have the fabsl function.  */
 /* #undef _GLIBCPP_HAVE_FABSL */
@@ -439,13 +451,13 @@
 /* #undef _GLIBCPP_HAVE_FINITEL */
 
 /* Define if you have the floorf function.  */
-/* #undef _GLIBCPP_HAVE_FLOORF */
+#define _GLIBCPP_HAVE_FLOORF 1
 
 /* Define if you have the floorl function.  */
 /* #undef _GLIBCPP_HAVE_FLOORL */
 
 /* Define if you have the fmodf function.  */
-/* #undef _GLIBCPP_HAVE_FMODF */
+#define _GLIBCPP_HAVE_FMODF 1
 
 /* Define if you have the fmodl function.  */
 /* #undef _GLIBCPP_HAVE_FMODL */
@@ -460,7 +472,7 @@
 /* #undef _GLIBCPP_HAVE_FPUTWS */
 
 /* Define if you have the frexpf function.  */
-/* #undef _GLIBCPP_HAVE_FREXPF */
+#define _GLIBCPP_HAVE_FREXPF 1
 
 /* Define if you have the frexpl function.  */
 /* #undef _GLIBCPP_HAVE_FREXPL */
@@ -520,7 +532,7 @@
 /* #undef _GLIBCPP_HAVE_ISNANL */
 
 /* Define if you have the ldexpf function.  */
-/* #undef _GLIBCPP_HAVE_LDEXPF */
+#define _GLIBCPP_HAVE_LDEXPF 1
 
 /* Define if you have the ldexpl function.  */
 /* #undef _GLIBCPP_HAVE_LDEXPL */
@@ -550,13 +562,13 @@
 /* #undef _GLIBCPP_HAVE_MBSRTOWCS */
 
 /* Define if you have the modff function.  */
-/* #undef _GLIBCPP_HAVE_MODFF */
+#define _GLIBCPP_HAVE_MODFF 1
 
 /* Define if you have the modfl function.  */
 /* #undef _GLIBCPP_HAVE_MODFL */
 
 /* Define if you have the nan function.  */
-/* #undef _GLIBCPP_HAVE_NAN */
+#define _GLIBCPP_HAVE_NAN 1
 
 /* Define if you have the nl_langinfo function.  */
 /* #undef _GLIBCPP_HAVE_NL_LANGINFO */
@@ -576,8 +588,8 @@
 /* Define if you have the qfpclass function.  */
 /* #undef _GLIBCPP_HAVE_QFPCLASS */
 
-/* Define if you have the signbitl function.  */
-/* #undef _GLIBCPP_HAVE_SIGNBITL */
+/* Define if you have the setenv function.  */
+#define _GLIBCPP_HAVE_SETENV 1
 
 /* Define if you have the sincos function.  */
 /* #undef _GLIBCPP_HAVE_SINCOS */
@@ -605,6 +617,9 @@
 
 /* Define if you have the sqrtl function.  */
 /* #undef _GLIBCPP_HAVE_SQRTL */
+
+/* Define if you have the strtof function.  */
+/* #undef _GLIBCPP_HAVE_STRTOF */
 
 /* Define if you have the strtold function.  */
 /* #undef _GLIBCPP_HAVE_STRTOLD */
@@ -794,6 +809,9 @@
 
 /* Define if you have the <wchar.h> header file.  */
 /* #undef _GLIBCPP_HAVE_WCHAR_H */
+
+/* Define if you have the <wctype.h> header file.  */
+/* #undef _GLIBCPP_HAVE_WCTYPE_H */
 
 /* Define if you have the m library (-lm).  */
 #define _GLIBCPP_HAVE_LIBM 1

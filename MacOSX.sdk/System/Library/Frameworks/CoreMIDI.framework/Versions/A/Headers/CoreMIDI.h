@@ -20,5 +20,6 @@
 
 #include <CoreMIDI/MIDIServices.h>
 #include <CoreMIDI/MIDISetup.h>
+#include <CoreMIDI/MIDIThruConnection.h>
 
 #endif

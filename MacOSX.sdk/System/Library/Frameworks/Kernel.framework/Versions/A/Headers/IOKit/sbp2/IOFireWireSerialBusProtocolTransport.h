@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2003 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -20,105 +20,86 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef _OPEN_SOURCE_
-
-/*
- * Copyright (c) 2000 Apple Computer, Inc.  All rights reserved.
- *
- * HISTORY
- *
- *		2001.08.14	CM	header doc'ed
- *		2001.08.13	CM	added binary compatibility padding
- *		2001.02.05	CM	migrated to latest SAM changes
- *		2001.01.27	CM	migrated to tim's latest SAM changes
- *		2001.01.27	CM	migrated to collin's latest SBP-2 changes
- *		2001.01.19	CM	removed handleOpen handleClose methods
- *		2001.01.17	CM	cleaned up some lint
- *		2001.01.16	CM	turned off hot plugging hack 
- *		2001.01.07	CM	adapted new CommandCompleted APIs 
- *		2001.01.04	CM	added SetCommandBuffers for subclassing 
- *		2000.10.26	CM	made changes to sync up with SBP-2 API changes
- *		2000.10.15	CM	complete rewrite
- *		2000.08.18	CM	added support to set busy timeout register
- *		2000.07.14	CM	added more error handling support
- *		2000.07.13	CM	clean up and fixed header dependencies
- *		2000.07.10	CM	second pass rewrite
- *		2000.06.15	CM	started FireWire Mass Storage Transport
- *
- */
-
-#endif
-
 /*!
   @header IOFireWireSerialBusProtocolTransport
   Contains the class definition for IOFireWireSerialBusProtocolTransport.
 */
 
-#ifndef _IOFireWireSerialBusProtocolTransport_
-#define _IOFireWireSerialBusProtocolTransport_
+
+#ifndef _IOKIT_IO_FIREWIRE_SERIAL_BUS_PROTOCOL_TRANSPORT_H_
+#define _IOKIT_IO_FIREWIRE_SERIAL_BUS_PROTOCOL_TRANSPORT_H_
+
 
 #include <IOKit/IOBufferMemoryDescriptor.h>
 #include <IOKit/IOLib.h>
 #include <IOKit/IOMessage.h>
 #include <IOKit/IOService.h>
 #include <IOKit/IOSyncer.h>
-
+#include <IOKit/IOCommandPool.h>
 #include <IOKit/firewire/IOFireWireUnit.h>
 #include <IOKit/sbp2/IOFireWireSBP2LUN.h>
 
 #include <IOKit/scsi-commands/IOSCSIProtocolServices.h>
 
 /*!
-    @class IOFireWireSerialBusProtocolTransport
-    @abstract SCSI Protocol Driver Family for FireWire SBP2 Devices. 
-    @discussion IOFireWireSerialBusProtocolTransport contains all the bus specific support for FireWire
+	@class IOFireWireSerialBusProtocolTransport
+	@abstract SCSI Protocol Driver Family for FireWire SBP2 Devices. 
+	@discussion IOFireWireSerialBusProtocolTransport contains all the bus specific support for FireWire
 	SBP2 compliant devices. To add vendor specific features or workarounds you will sub-class the appropriate
 	methods of this family. 
 */
 
 class IOFireWireSerialBusProtocolTransport : public IOSCSIProtocolServices
 {
-	OSDeclareDefaultStructors(IOFireWireSerialBusProtocolTransport)
-
+	
+	OSDeclareDefaultStructors ( IOFireWireSerialBusProtocolTransport )
+	
 private:
-
-	IOFireWireUnit *fUnit;
-	IOFireWireSBP2LUN *fSBPTarget;
-	IOFireWireSBP2Login *fLogin;
-	IOFireWireSBP2ORB *fORB;
-	IOFireWireSBP2ManagementORB * fLUNResetORB;
-    IOSimpleLock *fQueueLock;
-	UInt32 fLoginRetryCount;
-	bool fDeferRegisterService;
-	bool fNeedLogin;
-	bool fPhysicallyConnected;
-
+	
+	IOFireWireUnit *				fUnit;
+	IOFireWireSBP2LUN *				fSBPTarget;
+	IOFireWireSBP2Login *			fLogin;
+	IOFireWireSBP2ORB *				fORB;
+	IOFireWireSBP2ManagementORB * 	fLUNResetORB;
+	
+	// /!\ WARNING! NOT USED left behind for legacy binary reasons
+	IOSimpleLock *					fQueueLock;
+	
+	UInt32							fLoginRetryCount;
+	bool							fDeferRegisterService;
+	bool							fNeedLogin;
+    
+    // /!\ WARNING! NOT USED left behind for legacy binary reasons
+	bool							fPhysicallyConnected;
+	
 	static void
 	StatusNotifyStatic ( void * refCon, FWSBP2NotifyParamsPtr params );
-
+	
 	static void
-	UnsolicitedStatusNotifyStatic (	void * refCon,
-									FWSBP2NotifyParamsPtr params );
-
+	UnsolicitedStatusNotifyStatic (	void * 					refCon,
+									FWSBP2NotifyParamsPtr 	params );
+	
 	static void
-	LunResetCompleteStatic (	void * refCon,
-								IOReturn status,
-								IOFireWireSBP2ManagementORB *orb);
-
+	LunResetCompleteStatic (	void * 							refCon,
+								IOReturn						status,
+								IOFireWireSBP2ManagementORB * 	orb );
+	
 	static void
-	FetchAgentResetCompleteStatic (	void *refcon,
+	FetchAgentResetCompleteStatic (	void * refcon,
 									IOReturn status );
-
+	
+	static IOReturn
+	ConnectToDeviceStatic (	OSObject * refCon, void *, void *, void *, void * );
+	
 	virtual void
 	FetchAgentResetComplete ( IOReturn status );
-
+	
+	static void LoginCompletionStatic ( void * refCon, FWSBP2LoginCompleteParams * params );
+	
 	static void
-	LoginCompletionStatic ( void *refCon, FWSBP2LoginCompleteParams *params );
-
-	static void
-	LogoutCompletionStatic ( void *refCon, FWSBP2LogoutCompleteParams *params );
-
-    /*!
+	LogoutCompletionStatic ( void * refCon, FWSBP2LogoutCompleteParams * params );
+	
+	/*!
 		@function CoalesceSenseData
 		@abstract CoalesceSenseData convert a SBP-2 status block into a SPC-2 sense block.
 		@discussion	CoalesceSenseData pulls the appropriate bits out of the SBP2 sense block
@@ -127,27 +108,41 @@ private:
 	*/
 	
 	SCSITaskStatus
-	CoalesceSenseData (	FWSBP2StatusBlock *sourceData,
-						UInt8 quadletCount,
-						SCSI_Sense_Data *targetData );
-
-	virtual void 
-	ConnectToDevice ( void );
-
-	virtual void
-	DisconnectFromDevice ( void );
-
-	virtual bool
-	IsDeviceCPUInDiskMode ( void );
-
-	virtual IOReturn
-	AllocateResources ( void );
-
-	virtual void
-	DeallocateResources ( void );
+	CoalesceSenseData (	FWSBP2StatusBlock *	sourceData,
+						UInt8				quadletCount,
+						SCSI_Sense_Data *	targetData );
+	
+	virtual void ConnectToDevice ( void );
+	
+	virtual void DisconnectFromDevice ( void );
+	
+	virtual bool IsDeviceCPUInDiskMode ( void );
 
 protected:
-
+    
+	/*!
+		@function AllocateResources
+		@abstract Allocate Resources.
+		@discussion	Called from start method to allocate needed resources.
+	*/
+    
+	virtual IOReturn AllocateResources ( void );
+    
+	/*!
+		@function DeallocateResources
+		@abstract Deallocate Resources.
+		@discussion	Called from cleanUp method to deallocate resources.
+	*/
+    
+	virtual void DeallocateResources ( void );
+	
+	enum SBP2LoginState
+	{
+		kFirstTimeLoggingInState,
+		kLogginSucceededState,
+		kLogginFailedState
+	};
+	
 	/*! 
 		@typedef SBP2ClientOrbData
 		@param orb IOFireWireSBP2ORB for request.
@@ -157,31 +152,36 @@ protected:
 		@discussion This structure is stuffed into the refcon so we can associate which
 		IOFireWireSBP2ORB and SCSITaskIdentifier is completing.
 	*/
-
+	
 	typedef struct {
-		IOFireWireSBP2ORB *orb;
-		SCSITaskIdentifier scsiTask;
-		SCSIServiceResponse serviceResponse;
-		SCSITaskStatus taskStatus;
+		IOFireWireSBP2ORB *		orb;
+		SCSITaskIdentifier 		scsiTask;
+		SCSIServiceResponse 	serviceResponse;
+		SCSITaskStatus			taskStatus;
 	} SBP2ClientOrbData;
 	
-    static const UInt32 kDefaultBusyTimeoutValue = 0x0000000F;
-	static const UInt64 kMaxFireWireLUN = 0xFFFF;
-	static const UInt32 kMaxFireWirePayload = 2048;
-	static const UInt32 kMaxLoginRetryCount = 8;
-	static const UInt32 kMaxReconnectCount = 128;
-	static const UInt32 kCSRModelInfoKey = 0x17;
+	static const UInt32 kDefaultBusyTimeoutValue	= 0x0000000F;
+	static const UInt64 kMaxFireWireLUN				= 0xFFFF;
+	static const UInt32 kMaxFireWirePayload			= 2048;
+	static const UInt32 kMaxLoginRetryCount			= 8;
+	static const UInt32 kMaxReconnectCount			= 128;
+	static const UInt32 kCSRModelInfoKey			= 0x17;
 
-	UInt32 fReconnectCount;
-	bool fLoggedIn;
+	UInt32	fReconnectCount;
+	bool 	fLoggedIn;
 	
-    // binary compatibility instance variable expansion
-    struct ExpansionData { };
-    ExpansionData *reserved;
+	// binary compatibility instance variable expansion
+	struct ExpansionData
+	{ 
+		IOCommandPool *	 fCommandPool;
+		SBP2LoginState	 fLoginState;
+	};
+	
+	ExpansionData * reserved;
 	
 	bool fObjectIsOpen;
 
-    /*!
+	/*!
 		@function CommandORBAccessor
 		@abstract accessor function for fORB.
 		@discussion	xxx.
@@ -200,7 +200,7 @@ protected:
 	virtual IOReturn
 	message ( UInt32 type, IOService * provider, void * argument = 0 );
 
-    /*!
+	/*!
 		@function SendSCSICommand
 		@abstract Prepare and send a SCSI command to the device.
 		@discussion	The incoming SCSITaskIdentifier gets turned into a IOFireWireSBP2ORB
@@ -216,11 +216,11 @@ protected:
 	*/
 
 	virtual bool 
-	SendSCSICommand (	SCSITaskIdentifier request,
-						SCSIServiceResponse *serviceResponse,
-						SCSITaskStatus *taskStatus );
+	SendSCSICommand (	SCSITaskIdentifier 		request,
+						SCSIServiceResponse *	serviceResponse,
+						SCSITaskStatus *		taskStatus );
 
-    /*!
+	/*!
 		@function SetCommandBuffers
 		@abstract Method to set orb's buffers.
 		@discussion	This method was added so that subclasses can override and massage buffers as
@@ -230,9 +230,9 @@ protected:
 	*/
 	
 	virtual IOReturn
-	SetCommandBuffers (	IOFireWireSBP2ORB *orb, SCSITaskIdentifier request );
+	SetCommandBuffers (	IOFireWireSBP2ORB * orb, SCSITaskIdentifier request );
 
-    /*!
+	/*!
 		@function CompleteSCSITask
 		@abstract This qualifies and sets appropriate data then calls CommandCompleted.
 		@discussion	See IOSCSIProtocolServices.h for more details
@@ -240,9 +240,9 @@ protected:
 	*/
 	
 	virtual void 
-	CompleteSCSITask ( IOFireWireSBP2ORB *orb );
+	CompleteSCSITask ( IOFireWireSBP2ORB * orb );
 
-    /*!
+	/*!
 		@function AbortSCSICommand
 		@abstract This method is intended to abort an in progress SCSI Task.
 		@discussion	Currently not implemented in super class. This is a stub method for adding
@@ -253,7 +253,7 @@ protected:
 	virtual SCSIServiceResponse 
 	AbortSCSICommand ( SCSITaskIdentifier request );
 
-    /*!
+	/*!
 		@function StatusNotify
 		@abstract This is our handler for status.
 		@discussion See IOFireWireSBP2Lib.h for details regarding the FWSBP2NotifyParams
@@ -261,9 +261,9 @@ protected:
 	*/
 	
 	virtual void
-	StatusNotify ( FWSBP2NotifyParams *params );
+	StatusNotify ( FWSBP2NotifyParams * params );
 
-    /*!
+	/*!
 		@function SetValidAutoSenseData
 		@abstract Set the auto sense data that was returned for a given SCSI Task.
 		@discussion	SetValidAutoSenseData is called to qualify sense data that is copied to the
@@ -272,11 +272,11 @@ protected:
 	*/
 	
 	void
-	SetValidAutoSenseData (	SBP2ClientOrbData *clientData,
-							FWSBP2StatusBlock *statusBlock,
-							SCSI_Sense_Data *targetData );
+	SetValidAutoSenseData (	SBP2ClientOrbData *	clientData,
+							FWSBP2StatusBlock *	statusBlock,
+							SCSI_Sense_Data *	targetData );
 	
-    /*!
+	/*!
 		@function UnsolicitedStatusNotify
 		@abstract This is our handler for unsolicited status.
 		@discussion	After we have parsed and handled the unsolicited status we call 
@@ -287,7 +287,7 @@ protected:
 	virtual void
 	UnsolicitedStatusNotify ( FWSBP2NotifyParamsPtr params );
 
-    /*!
+	/*!
 		@function LoginCompletion
 		@abstract Completion routine for login complete.
 		@discussion	See IOFireWireSBP2Lib.h for details regarding the FWSBP2LogoutCompleteParams
@@ -295,9 +295,9 @@ protected:
 	*/
 	
 	virtual void 
-	LoginCompletion ( FWSBP2LoginCompleteParams *params );
+	LoginCompletion ( FWSBP2LoginCompleteParams * params );
 
-    /*!
+	/*!
 		@function LogoutCompletion
 		@abstract Completion routine for logout complete.
 		@discussion	See IOFireWireSBP2Lib.h for details regarding the FWSBP2LogoutCompleteParams
@@ -305,9 +305,9 @@ protected:
 	*/
 	
 	virtual void 
-	LogoutCompletion ( FWSBP2LogoutCompleteParams *params );
+	LogoutCompletion ( FWSBP2LogoutCompleteParams * params );
 
-    /*!
+	/*!
 		@function IsProtocolServiceSupported
 		@abstract Determine is specified feature is supported by the protocol layer.
 		@discussion	If the service has a value that must be returned, it will be returned in the
@@ -317,9 +317,9 @@ protected:
 	*/
 
 	virtual bool
-    IsProtocolServiceSupported ( SCSIProtocolFeature feature, void *serviceValue );
+	IsProtocolServiceSupported ( SCSIProtocolFeature feature, void * serviceValue );
 
-    /*!
+	/*!
 		@function HandleProtocolServiceFeature
 		@abstract Handle specified feature supported by the protocol layer.
 		@discussion	See IOSCSIProtocolServices.h for more details regarding HandleProtocolServiceFeature.
@@ -327,9 +327,9 @@ protected:
 	*/
 
 	virtual bool
-	HandleProtocolServiceFeature( SCSIProtocolFeature feature, void *serviceValue );
+	HandleProtocolServiceFeature ( SCSIProtocolFeature feature, void * serviceValue );
    
-    /*!
+	/*!
 		@function LunResetComplete
 		@abstract Callback to submit Fetch Agent Reset.
 		@discussion	See IOFireWireSBP2Lib.h for details regarding the submitFetchAgentReset
@@ -337,11 +337,11 @@ protected:
 	*/
 	
 	virtual void
-	LunResetComplete ( IOReturn status, IOFireWireSBP2ManagementORB * orb);
+	LunResetComplete ( IOReturn status, IOFireWireSBP2ManagementORB * orb );
 
 public:
 
-    /*!
+	/*!
 		@function init
 		@abstract See IOService for discussion.
 		@discussion	Setup and prime class into known state.
@@ -360,37 +360,48 @@ public:
 
 	virtual bool start ( IOService * provider );
 
-    /*!
+	/*!
 	 *	@function cleanUp
 		@abstract cleanUp is called to tear down IOFireWireSerialBusProtocolTransport.
 		@discussion	cleanUp is called when we receive a kIOFWMessageServiceIsRequestingClose
 		message or if we fail our initialization.
 	*/
 	
-	virtual void cleanUp ( );
+	virtual void cleanUp ( void );
 
+protected:
+	
+	virtual IOReturn login ( void );
+    OSMetaClassDeclareReservedUsed ( IOFireWireSerialBusProtocolTransport, 1 );
+    
+	virtual IOReturn submitLogin ( void );
+    OSMetaClassDeclareReservedUsed ( IOFireWireSerialBusProtocolTransport, 2 );
+    
+	virtual void loginLost ( void );
+    OSMetaClassDeclareReservedUsed ( IOFireWireSerialBusProtocolTransport, 3 );
+    
+    void loginSuspended ( void );
+	OSMetaClassDeclareReservedUsed ( IOFireWireSerialBusProtocolTransport, 4 );
+   
+	virtual void loginResumed ( void );
+	OSMetaClassDeclareReservedUsed ( IOFireWireSerialBusProtocolTransport, 5 );
+		
 private:
 	
 	// binary compatibility reserved method space
-    OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 1 );
-    OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 2 );
-    OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 3 );
-    OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 4 );
-    OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 5 );
-    OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 6 );
-    OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 7 );
-    OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 8 );
-    OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 9 );
-    OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 10 );
-    OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 11 );
-    OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 12 );
-    OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 13 );
-    OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 14 );
-    OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 15 );
-    OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 16 );
+    
+	OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 6 );
+	OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 7 );
+	OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 8 );
+	OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 9 );
+	OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 10 );
+	OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 11 );
+	OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 12 );
+	OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 13 );
+	OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 14 );
+	OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 15 );
+	OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 16 );
 	
 };
 
-#endif _IOFireWireSerialBusProtocolTransport_
-
-//------------------------------------------------------------------------------
+#endif	/* _IOKIT_IO_FIREWIRE_SERIAL_BUS_PROTOCOL_TRANSPORT_H_ */

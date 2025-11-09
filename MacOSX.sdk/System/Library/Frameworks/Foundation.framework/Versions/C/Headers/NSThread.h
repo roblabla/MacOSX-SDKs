@@ -1,15 +1,15 @@
 /*	NSThread.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSMutableDictionary, NSDate;
+@class NSArray, NSMutableDictionary, NSDate;
 
 @interface NSThread : NSObject  {
 @private
     unsigned		seqNum;
-    unsigned		reserved2;
+    unsigned		state;
     NSMutableDictionary	*threadDictionary;
     id			runLoop;
     void		*excHandlers;
@@ -18,7 +18,7 @@
     id			doConversation;
     unsigned		doConversationCount;
     id			doConversationRequest;
-    void		*reserved1;
+    void		*params;
     void		*reserved;
 }
 
@@ -34,9 +34,24 @@
 
 + (void)exit;
 
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
++ (double)threadPriority;
++ (BOOL)setThreadPriority:(double)priority;
+#endif
+
 @end
 
 FOUNDATION_EXPORT NSString * const NSWillBecomeMultiThreadedNotification;
 FOUNDATION_EXPORT NSString * const NSDidBecomeSingleThreadedNotification;
 FOUNDATION_EXPORT NSString * const NSThreadWillExitNotification;
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+@interface NSObject (NSMainThreadPerformAdditions)
+
+- (void)performSelectorOnMainThread:(SEL)aSelector withObject:(id)arg waitUntilDone:(BOOL)wait modes:(NSArray *)array;
+- (void)performSelectorOnMainThread:(SEL)aSelector withObject:(id)arg waitUntilDone:(BOOL)wait;
+	// equivalent to the first method with kCFRunLoopCommonModes
+
+@end
+#endif
 

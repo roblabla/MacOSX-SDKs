@@ -1,5 +1,5 @@
 /*	NSDebug.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
 /**************************************************************************
@@ -47,7 +47,6 @@ NAME OF ENV. VARIABLE		       DEFAULT	SET TO...
 NSDebugEnabled				  NO	"YES"
 NSZombieEnabled				  NO	"YES"
 NSDeallocateZombies			  NO	"YES"
-NSHangOnMallocError			  NO	"YES"
 NSHangOnUncaughtException		  NO	"YES"
 
 NSEnableAutoreleasePool			 YES	"NO"

@@ -1,5 +1,5 @@
 /*	CFUserNotification.h
-	Copyright 2000-2001, Apple, Inc. All rights reserved.
+	Copyright 2000-2002, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFUSERNOTIFICATION__)

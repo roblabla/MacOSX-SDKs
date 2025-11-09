@@ -3,9 +3,9 @@
  
      Contains:   Toolbox Utilities Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,7 @@
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -30,13 +31,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
@@ -83,7 +78,7 @@ extern "C" {
 extern Boolean 
 BitTst(
   const void *  bytePtr,
-  long          bitNum);
+  long          bitNum)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -97,7 +92,7 @@ BitTst(
 extern void 
 BitSet(
   void *  bytePtr,
-  long    bitNum);
+  long    bitNum)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -111,7 +106,7 @@ BitSet(
 extern void 
 BitClr(
   void *  bytePtr,
-  long    bitNum);
+  long    bitNum)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -125,7 +120,7 @@ BitClr(
 extern long 
 BitAnd(
   long   value1,
-  long   value2);
+  long   value2)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -139,7 +134,7 @@ BitAnd(
 extern long 
 BitOr(
   long   value1,
-  long   value2);
+  long   value2)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -153,7 +148,7 @@ BitOr(
 extern long 
 BitXor(
   long   value1,
-  long   value2);
+  long   value2)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -165,7 +160,7 @@ BitXor(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-BitNot(long value);
+BitNot(long value)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -179,20 +174,14 @@ BitNot(long value);
 extern long 
 BitShift(
   long    value,
-  short   count);
+  short   count)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #define HiWord(x) ((short)((long)(x) >> 16))
 #define LoWord(x) ((short)(x))
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

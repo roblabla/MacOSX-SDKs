@@ -1,5 +1,5 @@
 /*	NSDateFormatter.h
-	Copyright 1995-2001, Apple, Inc. All rights reserved.
+	Copyright 1995-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -10,6 +10,7 @@
 @private
     NSString *_format;
     BOOL _naturalLanguage;
+    char _unused[3];
     int _reserved;
 }
 

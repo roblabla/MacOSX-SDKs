@@ -3,9 +3,9 @@
  
      Contains:   Dictionary Manager Interfaces
  
-     Version:    LanguageAnalysis-66~9
+     Version:    LanguageAnalysis-85.2.1~3
  
-     Copyright:  © 1992-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1992-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,28 +16,17 @@
 #ifndef __DICTIONARY__
 #define __DICTIONARY__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __FILES__
-#include <CarbonCore/Files.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __AEREGISTRY__
 #include <AE/AERegistry.h>
 #endif
 
-#ifndef __CODEFRAGMENTS__
-#include <CarbonCore/CodeFragments.h>
-#endif
-
-#ifndef __MACERRORS__
-#include <CarbonCore/MacErrors.h>
-#endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -47,13 +36,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=power
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=power
 
 /*
 =============================================================================================
@@ -246,7 +229,7 @@ typedef STACK_UPP_TYPE(DCMProgressFilterProcPtr)                DCMProgressFilte
  *    Non-Carbon CFM:   in DictionaryMgrLib 1.0 and later
  */
 extern UInt32 
-DCMLibraryVersion(void);
+DCMLibraryVersion(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -268,7 +251,7 @@ DCMNewDictionary(
   const AEDesc *      listOfFieldInfoRecords,
   Boolean             invisible,
   ItemCount           recordCapacity,
-  DCMDictionaryID *   newDictionary);
+  DCMDictionaryID *   newDictionary)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -286,7 +269,7 @@ DCMDeriveNewDictionary(
   ScriptCode         scriptTag,
   Boolean            invisible,
   ItemCount          recordCapacity,
-  DCMDictionaryID *  newDictionary);
+  DCMDictionaryID *  newDictionary)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -298,7 +281,7 @@ DCMDeriveNewDictionary(
  *    Non-Carbon CFM:   in DictionaryMgrLib 1.0 and later
  */
 extern OSStatus 
-DCMDeleteDictionary(DCMDictionaryID dictionaryID);
+DCMDeleteDictionary(DCMDictionaryID dictionaryID)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -315,7 +298,7 @@ DCMDeleteDictionary(DCMDictionaryID dictionaryID);
 extern OSStatus 
 DCMRegisterDictionaryFile(
   const FSSpec *     dictionaryFile,
-  DCMDictionaryID *  dictionaryID);
+  DCMDictionaryID *  dictionaryID)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -327,7 +310,7 @@ DCMRegisterDictionaryFile(
  *    Non-Carbon CFM:   in DictionaryMgrLib 1.0 and later
  */
 extern OSStatus 
-DCMUnregisterDictionary(DCMDictionaryID dictionaryID);
+DCMUnregisterDictionary(DCMDictionaryID dictionaryID)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -346,7 +329,7 @@ DCMOpenDictionary(
   DCMDictionaryID       dictionaryID,
   ByteCount             protectKeySize,
   ConstLogicalAddress   protectKey,
-  DCMDictionaryRef *    dictionaryRef);
+  DCMDictionaryRef *    dictionaryRef)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -358,7 +341,7 @@ DCMOpenDictionary(
  *    Non-Carbon CFM:   in DictionaryMgrLib 1.0 and later
  */
 extern OSStatus 
-DCMCloseDictionary(DCMDictionaryRef dictionaryRef);
+DCMCloseDictionary(DCMDictionaryRef dictionaryRef)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -375,7 +358,7 @@ DCMCloseDictionary(DCMDictionaryRef dictionaryRef);
 extern OSStatus 
 DCMGetDictionaryWriteAccess(
   DCMDictionaryRef   dictionaryRef,
-  Duration           timeOutDuration);
+  Duration           timeOutDuration)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -389,7 +372,7 @@ DCMGetDictionaryWriteAccess(
 extern OSStatus 
 DCMReleaseDictionaryWriteAccess(
   DCMDictionaryRef   dictionaryRef,
-  Boolean            commitTransaction);
+  Boolean            commitTransaction)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -414,7 +397,7 @@ DCMFindRecords(
   DCMFieldTag               preFetchedData[],
   ItemCount                 skipCount,
   ItemCount                 maxRecordCount,
-  DCMFoundRecordIterator *  recordIterator);
+  DCMFoundRecordIterator *  recordIterator)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -426,7 +409,7 @@ DCMFindRecords(
  *    Non-Carbon CFM:   in DictionaryMgrLib 1.0 and later
  */
 extern ItemCount 
-DCMCountRecordIterator(DCMFoundRecordIterator recordIterator);
+DCMCountRecordIterator(DCMFoundRecordIterator recordIterator) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -444,7 +427,7 @@ DCMIterateFoundRecord(
   ByteCount *              actualKeySize,
   LogicalAddress           keyData,
   DCMUniqueID *            uniqueID,
-  AEDesc *                 dataList);
+  AEDesc *                 dataList)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -456,7 +439,7 @@ DCMIterateFoundRecord(
  *    Non-Carbon CFM:   in DictionaryMgrLib 1.0 and later
  */
 extern OSStatus 
-DCMDisposeRecordIterator(DCMFoundRecordIterator recordIterator);
+DCMDisposeRecordIterator(DCMFoundRecordIterator recordIterator) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -473,7 +456,7 @@ DCMDisposeRecordIterator(DCMFoundRecordIterator recordIterator);
 extern OSStatus 
 DCMCountRecord(
   DCMDictionaryID   dictionaryID,
-  ItemCount *       count);
+  ItemCount *       count)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -491,7 +474,7 @@ DCMGetRecordSequenceNumber(
   ByteCount             keySize,
   ConstLogicalAddress   keyData,
   DCMUniqueID           uniqueID,
-  ItemCount *           sequenceNum);
+  ItemCount *           sequenceNum)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -510,7 +493,7 @@ DCMGetNthRecord(
   ByteCount          maxKeySize,
   ByteCount *        keySize,
   LogicalAddress     keyData,
-  DCMUniqueID *      uniqueID);
+  DCMUniqueID *      uniqueID)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -531,7 +514,7 @@ DCMGetNextRecord(
   ByteCount             maxKeySize,
   ByteCount *           nextKeySize,
   LogicalAddress        nextKeyData,
-  DCMUniqueID *         nextUniqueID);
+  DCMUniqueID *         nextUniqueID)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -552,7 +535,7 @@ DCMGetPrevRecord(
   ByteCount             maxKeySize,
   ByteCount *           prevKeySize,
   LogicalAddress        prevKeyData,
-  DCMUniqueID *         prevUniqueID);
+  DCMUniqueID *         prevUniqueID)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -575,7 +558,7 @@ DCMGetFieldData(
   DCMUniqueID           uniqueID,
   ItemCount             numOfData,
   const DCMFieldTag     dataTag[],
-  AEDesc *              dataList);
+  AEDesc *              dataList)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -593,7 +576,7 @@ DCMSetFieldData(
   ByteCount             keySize,
   ConstLogicalAddress   keyData,
   DCMUniqueID           uniqueID,
-  const AEDesc *        dataList);
+  const AEDesc *        dataList)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -615,7 +598,7 @@ DCMAddRecord(
   ConstLogicalAddress   keyData,
   Boolean               checkOnly,
   const AEDesc *        dataList,
-  DCMUniqueID *         newUniqueID);
+  DCMUniqueID *         newUniqueID)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -632,7 +615,7 @@ DCMDeleteRecord(
   DCMFieldTag           keyFieldTag,
   ByteCount             keySize,
   ConstLogicalAddress   keyData,
-  DCMUniqueID           uniqueID);
+  DCMUniqueID           uniqueID)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -651,7 +634,7 @@ DCMReorganizeDictionary(
   DCMDictionaryID        dictionaryID,
   ItemCount              extraCapacity,
   DCMProgressFilterUPP   progressProc,
-  UInt32                 userData);
+  UInt32                 userData)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -666,7 +649,7 @@ extern OSStatus
 DCMCompactDictionary(
   DCMDictionaryID        dictionaryID,
   DCMProgressFilterUPP   progressProc,
-  UInt32                 userData);
+  UInt32                 userData)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -683,7 +666,7 @@ DCMCompactDictionary(
 extern OSStatus 
 DCMGetFileFromDictionaryID(
   DCMDictionaryID   dictionaryID,
-  FSSpec *          fileRef);
+  FSSpec *          fileRef)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -697,7 +680,7 @@ DCMGetFileFromDictionaryID(
 extern OSStatus 
 DCMGetDictionaryIDFromFile(
   const FSSpec *     fileRef,
-  DCMDictionaryID *  dictionaryID);
+  DCMDictionaryID *  dictionaryID)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -709,7 +692,7 @@ DCMGetDictionaryIDFromFile(
  *    Non-Carbon CFM:   in DictionaryMgrLib 1.0 and later
  */
 extern DCMDictionaryID 
-DCMGetDictionaryIDFromRef(DCMDictionaryRef dictionaryRef);
+DCMGetDictionaryIDFromRef(DCMDictionaryRef dictionaryRef)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -727,7 +710,7 @@ extern OSStatus
 DCMGetDictionaryFieldInfo(
   DCMDictionaryID   dictionaryID,
   DCMFieldTag       fieldTag,
-  AEDesc *          fieldInfoRecord);
+  AEDesc *          fieldInfoRecord)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -747,7 +730,7 @@ DCMGetDictionaryProperty(
   DCMFieldTag       propertyTag,
   ByteCount         maxPropertySize,
   ByteCount *       actualSize,
-  LogicalAddress    propertyValue);
+  LogicalAddress    propertyValue)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -763,7 +746,7 @@ DCMSetDictionaryProperty(
   DCMDictionaryID       dictionaryID,
   DCMFieldTag           propertyTag,
   ByteCount             propertySize,
-  ConstLogicalAddress   propertyValue);
+  ConstLogicalAddress   propertyValue)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -779,7 +762,7 @@ DCMGetDictionaryPropertyList(
   DCMDictionaryID   dictionaryID,
   ItemCount         maxPropertyNum,
   ItemCount *       numProperties,
-  DCMFieldTag       propertyTag[]);
+  DCMFieldTag       propertyTag[])                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -794,7 +777,7 @@ DCMGetDictionaryPropertyList(
  *    Non-Carbon CFM:   in DictionaryMgrLib 1.0 and later
  */
 extern OSStatus 
-DCMCreateDictionaryIterator(DCMDictionaryIterator * dictionaryIterator);
+DCMCreateDictionaryIterator(DCMDictionaryIterator * dictionaryIterator) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -809,7 +792,7 @@ DCMCreateDictionaryIterator(DCMDictionaryIterator * dictionaryIterator);
  *    Non-Carbon CFM:   in DictionaryMgrLib 1.0 and later
  */
 extern OSStatus 
-DCMCreateAccessMethodIterator(DCMAccessMethodIterator * accessMethodIterator);
+DCMCreateAccessMethodIterator(DCMAccessMethodIterator * accessMethodIterator) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -824,7 +807,7 @@ DCMCreateAccessMethodIterator(DCMAccessMethodIterator * accessMethodIterator);
  *    Non-Carbon CFM:   in DictionaryMgrLib 1.0 and later
  */
 extern ItemCount 
-DCMCountObjectIterator(DCMObjectIterator iterator);
+DCMCountObjectIterator(DCMObjectIterator iterator)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -838,7 +821,7 @@ DCMCountObjectIterator(DCMObjectIterator iterator);
 extern OSStatus 
 DCMIterateObject(
   DCMObjectIterator   iterator,
-  DCMObjectID *       objectID);
+  DCMObjectID *       objectID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -850,7 +833,7 @@ DCMIterateObject(
  *    Non-Carbon CFM:   in DictionaryMgrLib 1.0 and later
  */
 extern OSStatus 
-DCMResetObjectIterator(DCMObjectIterator iterator);
+DCMResetObjectIterator(DCMObjectIterator iterator)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -862,7 +845,7 @@ DCMResetObjectIterator(DCMObjectIterator iterator);
  *    Non-Carbon CFM:   in DictionaryMgrLib 1.0 and later
  */
 extern OSStatus 
-DCMDisposeObjectIterator(DCMObjectIterator iterator);
+DCMDisposeObjectIterator(DCMObjectIterator iterator)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -879,7 +862,7 @@ DCMDisposeObjectIterator(DCMObjectIterator iterator);
 extern OSStatus 
 DCMGetAccessMethodIDFromName(
   ConstStr63Param      accessMethodName,
-  DCMAccessMethodID *  accessMethodID);
+  DCMAccessMethodID *  accessMethodID)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -902,7 +885,7 @@ DCMCreateFieldInfoRecord(
   AEDesc *             fieldDefaultData,
   ItemCount            numberOfFindMethods,
   DCMFindMethod        findMethods[],
-  AEDesc *             fieldInfoRecord);
+  AEDesc *             fieldInfoRecord)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -917,7 +900,7 @@ extern OSStatus
 DCMGetFieldTagAndType(
   const AEDesc *  fieldInfoRecord,
   DCMFieldTag *   fieldTag,
-  DCMFieldType *  fieldType);
+  DCMFieldType *  fieldType)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -931,7 +914,7 @@ DCMGetFieldTagAndType(
 extern OSStatus 
 DCMGetFieldMaxRecordSize(
   const AEDesc *  fieldInfoRecord,
-  ByteCount *     maxRecordSize);
+  ByteCount *     maxRecordSize)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -945,7 +928,7 @@ DCMGetFieldMaxRecordSize(
 extern OSStatus 
 DCMGetFieldAttributes(
   const AEDesc *        fieldInfoRecord,
-  DCMFieldAttributes *  attributes);
+  DCMFieldAttributes *  attributes)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -960,7 +943,7 @@ extern OSStatus
 DCMGetFieldDefaultData(
   const AEDesc *  fieldInfoRecord,
   DescType        desiredType,
-  AEDesc *        fieldDefaultData);
+  AEDesc *        fieldDefaultData)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -976,7 +959,7 @@ DCMGetFieldFindMethods(
   const AEDesc *  fieldInfoRecord,
   ItemCount       findMethodsArrayMaxSize,
   DCMFindMethod   findMethods[],
-  ItemCount *     actualNumberOfFindMethods);
+  ItemCount *     actualNumberOfFindMethods)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1046,10 +1029,8 @@ enum {
 =============================================================================================
 */
 
-#if PRAGMA_STRUCT_ALIGN
 #pragma options align=reset
 #pragma options align=mac68k
-#endif
 
 enum {
                                         /* Dictionary data insertion modes */
@@ -1187,13 +1168,7 @@ typedef DictionaryAttributeTable *      DictionaryAttributeTablePtr;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

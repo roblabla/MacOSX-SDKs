@@ -30,6 +30,8 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* host_security_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 
 #ifdef __BeforeMigUserHeader
@@ -68,6 +70,75 @@ kern_return_t host_security_set_task_token
 	security_token_t sec_token,
 	host_t host
 );
+/* typedefs for all requests */
+
+#ifndef __Request__host_security_subsystem__defined
+#define __Request__host_security_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t parent_task;
+		mach_msg_port_descriptor_t host;
+		mach_msg_ool_ports_descriptor_t ledgers;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		security_token_t sec_token;
+		mach_msg_type_number_t ledgersCnt;
+		boolean_t inherit_memory;
+	} __Request__host_security_create_task_token_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t target_task;
+		mach_msg_port_descriptor_t host;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		security_token_t sec_token;
+	} __Request__host_security_set_task_token_t;
+
+#endif /* !__Request__host_security_subsystem__defined */
+
+/* union of all requests */
+
+#ifndef __RequestUnion__host_security_subsystem__defined
+#define __RequestUnion__host_security_subsystem__defined
+union __RequestUnion__host_security_subsystem {
+	__Request__host_security_create_task_token_t Request_host_security_create_task_token;
+	__Request__host_security_set_task_token_t Request_host_security_set_task_token;
+};
+#endif /* !__RequestUnion__host_security_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__host_security_subsystem__defined
+#define __Reply__host_security_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t child_task;
+		/* end of the kernel processed data */
+	} __Reply__host_security_create_task_token_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__host_security_set_task_token_t;
+
+#endif /* !__Reply__host_security_subsystem__defined */
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__host_security_subsystem__defined
+#define __ReplyUnion__host_security_subsystem__defined
+union __ReplyUnion__host_security_subsystem {
+	__Reply__host_security_create_task_token_t Reply_host_security_create_task_token;
+	__Reply__host_security_set_task_token_t Reply_host_security_set_task_token;
+};
+#endif /* !__RequestUnion__host_security_subsystem__defined */
 
 #ifndef subsystem_to_name_map_host_security
 #define subsystem_to_name_map_host_security \

@@ -30,7 +30,10 @@
 #ifndef	_MACH_KMOD_H_
 #define	_MACH_KMOD_H_
 
+#include <sys/appleapiopts.h>
 #include <mach/kern_return.h>
+
+#ifdef __APPLE_API_PRIVATE
 
 #define KMOD_CNTL_START		1	// call kmod's start routine
 #define KMOD_CNTL_STOP		2	// call kmod's stop routine
@@ -42,16 +45,23 @@
 #define KMOD_UNPACK_FROM_ID(i)	((unsigned long)i >> 16)
 #define KMOD_UNPACK_TO_ID(i)	((unsigned long)i & 0xffff)
 
+#endif /* __APPLE_API_PRIVATE */
+
 #define KMOD_MAX_NAME	64
+
+#ifdef __APPLE_API_PRIVATE
 
 typedef int kmod_t;
 typedef int kmod_control_flavor_t;
 typedef void* kmod_args_t;
 
+#endif /* __APPLE_API_PRIVATE */
+
 typedef struct kmod_reference {
 	struct kmod_reference	*next;
 	struct kmod_info	*info;
 } kmod_reference_t;
+
 
 /**************************************************************************************/
 /*	 warning any changes to this structure affect the following macros.	      */	
@@ -78,7 +88,11 @@ typedef struct kmod_info {
         kmod_stop_func_t	*stop;
 } kmod_info_t;
 
+#ifdef __APPLE_API_PRIVATE
+
 typedef kmod_info_t *kmod_info_array_t;
+
+#endif /* __APPLE_API_PRIVATE */
 
 #define KMOD_INFO_NAME 		kmod_info
 #define KMOD_INFO_VERSION	1
@@ -108,6 +122,8 @@ typedef kmod_info_t *kmod_info_array_t;
 // kmod kernel to user commands
 // *************************************************************************************
 
+#ifdef __APPLE_API_PRIVATE
+
 #define KMOD_LOAD_EXTENSION_PACKET		1
 #define KMOD_LOAD_WITH_DEPENDENCIES_PACKET	2
 
@@ -130,6 +146,9 @@ typedef struct kmod_generic_cmd {
 	int	type;
 	char	data[1];
 } kmod_generic_cmd_t;
+
+
+#endif /* __APPLE_API_PRIVATE */
 
 
 #endif	/* _MACH_KMOD_H_ */

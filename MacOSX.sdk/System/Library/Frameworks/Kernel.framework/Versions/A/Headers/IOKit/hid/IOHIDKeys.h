@@ -24,6 +24,7 @@
 #define _IOKIT_HID_IOHIDKEYS_H_
 
 #include <sys/cdefs.h>
+#include <IOKit/hidsystem/IOHIDParameter.h>
 
 __BEGIN_DECLS
 
@@ -36,6 +37,7 @@ __BEGIN_DECLS
 /* These are properties for a HID Device */
 #define kIOHIDTransportKey                  "Transport"
 #define kIOHIDVendorIDKey                   "VendorID"
+#define kIOHIDVendorIDSourceKey             "VendorIDSource"
 #define kIOHIDProductIDKey                  "ProductID"
 #define kIOHIDVersionNumberKey              "VersionNumber"
 #define kIOHIDManufacturerKey               "Manufacturer"
@@ -44,6 +46,9 @@ __BEGIN_DECLS
 #define kIOHIDLocationIDKey                 "LocationID"
 #define kIOHIDPrimaryUsageKey               "PrimaryUsage"
 #define kIOHIDPrimaryUsagePageKey           "PrimaryUsagePage"
+#define kIOHIDMaxInputReportSizeKey	    "MaxInputReportSize"
+#define kIOHIDMaxOutputReportSizeKey	    "MaxOutputReportSize"
+#define kIOHIDMaxFeatureReportSizeKey	    "MaxFeatureReportSize"
 
 /* These are properties for a HID Device or element dictionaries */
 /* Elements can be heirarchical, so they can contain other elements */
@@ -60,6 +65,9 @@ __BEGIN_DECLS
 #define kIOHIDElementScaledMinKey           "ScaledMin"
 #define kIOHIDElementScaledMaxKey           "ScaledMax"
 #define kIOHIDElementSizeKey                "Size"
+#define kIOHIDElementReportSizeKey          "ReportSize"
+#define kIOHIDElementReportCountKey         "ReportCount"
+#define kIOHIDElementIsArrayKey             "IsArray"
 #define kIOHIDElementIsRelativeKey          "IsRelative"
 #define kIOHIDElementIsWrappingKey          "IsWrapping"
 #define kIOHIDElementIsNonLinearKey         "IsNonLinear"

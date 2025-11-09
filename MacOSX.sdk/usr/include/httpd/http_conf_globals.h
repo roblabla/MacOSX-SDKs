@@ -1,7 +1,7 @@
 /* ====================================================================
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 2000 The Apache Software Foundation.  All rights
+ * Copyright (c) 2000-2002 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -105,6 +105,9 @@ extern API_VAR_EXPORT char *ap_lock_fname;
 extern API_VAR_EXPORT char *ap_server_argv0;
 
 extern enum server_token_type ap_server_tokens;
+
+extern API_VAR_EXPORT int ap_protocol_req_check;
+extern API_VAR_EXPORT int ap_change_shmem_uid;
 
 /* Trying to allocate these in the config pool gets us into some *nasty*
  * chicken-and-egg problems in http_main.c --- where do you stick them

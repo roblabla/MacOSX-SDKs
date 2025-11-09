@@ -9,7 +9,7 @@
 #import <Foundation/NSGeometry.h>
 #import <limits.h>
 
-@class NSImage, NSPasteboard, NSWindow;
+@class NSImage, NSPasteboard, NSWindow, NSURL, NSArray;
 
 typedef unsigned int NSDragOperation;
 
@@ -42,6 +42,9 @@ enum {
 - (id)draggingSource;
 - (int)draggingSequenceNumber;
 - (void)slideDraggedImageTo:(NSPoint)screenPoint;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (NSArray *)namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination;
+#endif
 @end
 
 
@@ -67,6 +70,9 @@ enum {
  */
 @interface NSObject(NSDraggingSource)
 - (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)flag;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (NSArray *)namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination;
+#endif
 - (void)draggedImage:(NSImage *)image beganAt:(NSPoint)screenPoint;
 - (void)draggedImage:(NSImage *)image endedAt:(NSPoint)screenPoint operation:(NSDragOperation)operation;
 - (void)draggedImage:(NSImage *)image movedTo:(NSPoint)screenPoint;

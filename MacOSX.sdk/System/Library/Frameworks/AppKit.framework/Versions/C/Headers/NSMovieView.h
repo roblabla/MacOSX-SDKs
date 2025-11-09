@@ -92,7 +92,6 @@ typedef struct __MVFlags {
 - (void)copy:(id)sender;
 - (void)paste:(id)sender;
 - (void)clear:(id)sender;
-- (void)undo:(id)sender;
 - (void)selectAll:(id)sender;
 
 @end

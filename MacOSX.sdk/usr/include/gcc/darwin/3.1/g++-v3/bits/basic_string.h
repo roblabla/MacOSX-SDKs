@@ -1,6 +1,7 @@
 // Components for manipulating sequences of characters -*- C++ -*-
 
-// Copyright (C) 1997, 1998, 1999, 2000, 2001 Free Software Foundation, Inc.
+// Copyright (C) 1997, 1998, 1999, 2000, 2001, 2002
+// Free Software Foundation, Inc.
 //
 // This file is part of the GNU ISO C++ Library.  This library is free
 // software; you can redistribute it and/or modify it under the
@@ -98,8 +99,9 @@ namespace std
       typedef typename _Alloc::const_reference 		    const_reference;
       typedef typename _Alloc::pointer 			    pointer;
       typedef typename _Alloc::const_pointer 	   	    const_pointer;
-      typedef __normal_iterator<pointer, basic_string> 	    iterator;
-      typedef __normal_iterator<const_pointer, basic_string> const_iterator;
+      typedef __gnu_cxx::__normal_iterator<pointer, basic_string>  iterator;
+      typedef __gnu_cxx::__normal_iterator<const_pointer, basic_string>
+                                                            const_iterator;
       typedef reverse_iterator<const_iterator> 	const_reverse_iterator;
       typedef reverse_iterator<iterator> 		    reverse_iterator;
     
@@ -118,7 +120,6 @@ namespace std
       //   4. All fields==0 is an empty string, given the extra storage
       //      beyond-the-end for a null terminator; thus, the shared
       //      empty string representation needs no constructor.
-
       struct _Rep
       {
 	// Types:
@@ -162,7 +163,7 @@ namespace std
 
 	_CharT* 
 	_M_refdata() throw()
-	{ return reinterpret_cast<_CharT*> (this + 1); }
+	{ return reinterpret_cast<_CharT*>(this + 1); }
 
 	_CharT& 
 	operator[](size_t __s) throw()
@@ -170,8 +171,10 @@ namespace std
 
 	_CharT* 
 	_M_grab(const _Alloc& __alloc1, const _Alloc& __alloc2)
-	{ return (!_M_is_leaked() && __alloc1 == __alloc2) ?
-	    _M_refcopy() : _M_clone(__alloc1);  }
+	{ 
+	  return (!_M_is_leaked() && __alloc1 == __alloc2) 
+	          ? _M_refcopy() : _M_clone(__alloc1);  
+	}
 
 	// Create & Destroy
 	static _Rep* 
@@ -551,7 +554,7 @@ namespace std
 	const size_type __size = this->size();
  	if (__pos > __size)
 	  __throw_out_of_range("basic_string::insert");
-	if (__n + __size > this->max_size())
+	if (__size > this->max_size() - __n)
 	  __throw_length_error("basic_string::insert");
 	if (_M_rep()->_M_is_shared() || less<const _CharT*>()(__s, _M_data())
 	    || less<const _CharT*>()(_M_data() + __size, __s))
@@ -626,10 +629,7 @@ namespace std
 
       basic_string& 
       replace(size_type __pos, size_type __n, const basic_string& __str)
-      { 
-	return this->replace(_M_check(__pos), _M_fold(__pos, __n),
-			      __str.begin(), __str.end()); 
-      }
+      { return this->replace(__pos, __n, __str._M_data(), __str.size()); }
 
       basic_string& 
       replace(size_type __pos1, size_type __n1, const basic_string& __str,
@@ -639,36 +639,41 @@ namespace std
       replace(size_type __pos, size_type __n1, const _CharT* __s,
 	      size_type __n2)
       { 
-	return this->replace(_M_check(__pos), _M_fold(__pos, __n1),
-			     __s, __s + __n2); 
+	const size_type __size = this->size();
+ 	if (__pos > __size)
+	  __throw_out_of_range("basic_string::replace");
+	if (__size - __n1 > this->max_size() - __n2)
+	  __throw_length_error("basic_string::replace");
+	const bool __testn1 = __n1 < __size - __pos;
+	const size_type __foldn1 = __testn1 ? __n1 : __size - __pos;
+	if (_M_rep()->_M_is_shared() || less<const _CharT*>()(__s, _M_data())
+	    || less<const _CharT*>()(_M_data() + __size, __s))
+	  return _M_replace_safe(_M_ibegin() + __pos,
+				 _M_ibegin() + __pos + __foldn1, __s, __s + __n2);	
+	else return this->replace(_M_check(__pos), _M_fold(__pos, __n1),
+				  __s, __s + __n2); 
       }
 
       basic_string& 
       replace(size_type __pos, size_type __n1, const _CharT* __s)
-      { 
-	return this->replace(_M_check(__pos), _M_fold(__pos, __n1),
-			     __s, __s + traits_type::length(__s)); 
-      }
+      { return this->replace(__pos, __n1, __s, traits_type::length(__s)); }
 
       basic_string& 
       replace(size_type __pos, size_type __n1, size_type __n2, _CharT __c)
-      { 
-	return this->replace(_M_check(__pos), _M_fold(__pos, __n1), __n2, __c);
-      }
+      { return this->replace(_M_check(__pos), _M_fold(__pos, __n1), __n2, __c); }
 
       basic_string& 
       replace(iterator __i1, iterator __i2, const basic_string& __str)
-      { return this->replace(__i1, __i2, __str.begin(), __str.end()); }
+      { return this->replace(__i1, __i2, __str._M_data(), __str.size()); }
 
       basic_string& 
       replace(iterator __i1, iterator __i2,
                            const _CharT* __s, size_type __n)
-      { return this->replace(__i1, __i2, __s, __s + __n); }
+      { return this->replace(__i1 - _M_ibegin(), __i2 - __i1, __s, __n); }
 
       basic_string& 
       replace(iterator __i1, iterator __i2, const _CharT* __s)
-      { return this->replace(__i1, __i2, __s, 
-			     __s + traits_type::length(__s)); }
+      { return this->replace(__i1, __i2, __s, traits_type::length(__s)); }
 
       basic_string& 
       replace(iterator __i1, iterator __i2, size_type __n, _CharT __c);
@@ -729,7 +734,7 @@ namespace std
       // string::iterator, _CharT*, etc.
       template<class _FwdIter>
         static _CharT*
-        _S_construct(_FwdIter __end, _FwdIter __beg, const _Alloc& __a,
+        _S_construct(_FwdIter __beg, _FwdIter __end, const _Alloc& __a,
 		     forward_iterator_tag);
 
       static _CharT* 
@@ -877,15 +882,14 @@ namespace std
       int 
       compare(const _CharT* __s) const;
 
-#ifdef _GLIBCPP_RESOLVE_LIB_DEFECTS
-// 5. String::compare specification questionable
+      // _GLIBCPP_RESOLVE_LIB_DEFECTS
+      // 5. String::compare specification questionable
       int 
       compare(size_type __pos, size_type __n1, const _CharT* __s) const;
 
       int 
       compare(size_type __pos, size_type __n1, const _CharT* __s, 
 	      size_type __n2) const;
-#endif
   };
 
 

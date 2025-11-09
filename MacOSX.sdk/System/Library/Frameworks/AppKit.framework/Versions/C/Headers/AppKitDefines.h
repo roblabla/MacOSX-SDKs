@@ -7,6 +7,9 @@
 #ifndef _APPKITDEFINES_H
 #define _APPKITDEFINES_H
 
+#import <AvailabilityMacros.h>
+
+
 //
 //  Platform specific defs for externs
 //

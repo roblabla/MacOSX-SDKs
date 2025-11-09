@@ -1,6 +1,7 @@
 // Components for manipulating sequences of characters -*- C++ -*-
 
-// Copyright (C) 1997, 1998, 1999, 2000, 2001 Free Software Foundation, Inc.
+// Copyright (C) 1997, 1998, 1999, 2000, 2001, 2002
+// Free Software Foundation, Inc.
 //
 // This file is part of the GNU ISO C++ Library.  This library is free
 // software; you can redistribute it and/or modify it under the
@@ -40,17 +41,19 @@
 #ifndef _CPP_BITS_STRING_TCC
 #define _CPP_BITS_STRING_TCC 1
 
+#pragma GCC system_header
+
 namespace std
 {
-  template<typename _CharT, typename _Traits, typename _Alloc>
-    const _CharT 
-    basic_string<_CharT, _Traits, _Alloc>::
-    _Rep::_S_terminal = _CharT();
-
   template<typename _CharT, typename _Traits, typename _Alloc>
     const typename basic_string<_CharT, _Traits, _Alloc>::size_type 
     basic_string<_CharT, _Traits, _Alloc>::
     _Rep::_S_max_size = (((npos - sizeof(_Rep))/sizeof(_CharT)) - 1) / 4;
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    const _CharT 
+    basic_string<_CharT, _Traits, _Alloc>::
+    _Rep::_S_terminal = _CharT();
 
   template<typename _CharT, typename _Traits, typename _Alloc>
     const typename basic_string<_CharT, _Traits, _Alloc>::size_type
@@ -136,6 +139,10 @@ namespace std
       {
 	size_type __dnew = static_cast<size_type>(distance(__beg, __end));
 
+	// NB: Not required, but considered best practice.
+	if (__builtin_expect(__beg == _InIter(0), 0))
+	  __throw_logic_error("attempt to create string with null pointer");
+	
 	if (__beg == __end && __a == _Alloc())
 	  return _S_empty_rep()._M_refcopy();
 
@@ -216,7 +223,8 @@ namespace std
   template<typename _CharT, typename _Traits, typename _Alloc>
     basic_string<_CharT, _Traits, _Alloc>::
     basic_string(const _CharT* __s, const _Alloc& __a)
-    : _M_dataplus(_S_construct(__s, __s + traits_type::length(__s), __a), __a)
+    : _M_dataplus(_S_construct(__s, __s ? __s + traits_type::length(__s) : 0, 
+			       __a), __a)
     { }
 
   template<typename _CharT, typename _Traits, typename _Alloc>
@@ -435,7 +443,7 @@ namespace std
       void* __place = _Raw_bytes_alloc(__alloc).allocate(__size);
       _Rep *__p = new (__place) _Rep;
       __p->_M_capacity = __capacity;
-      __p->_M_set_sharable();  // one reference
+      __p->_M_set_sharable();  // One reference.
       __p->_M_length = 0;
       return __p;
     }
@@ -543,9 +551,13 @@ namespace std
     replace(size_type __pos1, size_type __n1, const basic_string& __str,
 	    size_type __pos2, size_type __n2)
     {
-      return this->replace(_M_check(__pos1), _M_fold(__pos1, __n1),
-			   __str._M_check(__pos2), 
-			   __str._M_fold(__pos2, __n2));      
+      const size_type __strsize = __str.size();
+      if (__pos2 > __strsize)
+	__throw_out_of_range("basic_string::replace");
+      const bool __testn2 = __n2 < __strsize - __pos2;
+      const size_type __foldn2 = __testn2 ? __n2 : __strsize - __pos2;
+      return this->replace(__pos1, __n1,
+			   __str._M_data() + __pos2, __foldn2);      
     }
 
   template<typename _CharT, typename _Traits, typename _Alloc>
@@ -933,6 +945,37 @@ namespace std
       _Traits::copy(__buf, __str.data(), __bytes);
       __buf[__bytes] = _CharT();
     }
+
+  // Inhibit implicit instantiations for required instantiations,
+  // which are defined via explicit instantiations elsewhere.  
+  // NB: This syntax is a GNU extension.
+  extern template class basic_string<char>;
+  extern template 
+    basic_istream<char>& 
+    operator>>(basic_istream<char>&, string&);
+  extern template 
+    basic_ostream<char>& 
+    operator<<(basic_ostream<char>&, const string&);
+  extern template 
+    basic_istream<char>& 
+    getline(basic_istream<char>&, string&, char);
+  extern template 
+    basic_istream<char>& 
+    getline(basic_istream<char>&, string&);
+
+  extern template class basic_string<wchar_t>;
+  extern template 
+    basic_istream<wchar_t>& 
+    operator>>(basic_istream<wchar_t>&, wstring&);
+  extern template 
+    basic_ostream<wchar_t>& 
+    operator<<(basic_ostream<wchar_t>&, const wstring&);
+  extern template 
+    basic_istream<wchar_t>& 
+    getline(basic_istream<wchar_t>&, wstring&, wchar_t);
+  extern template 
+    basic_istream<wchar_t>& 
+    getline(basic_istream<wchar_t>&, wstring&);
 } // namespace std
 
 #endif

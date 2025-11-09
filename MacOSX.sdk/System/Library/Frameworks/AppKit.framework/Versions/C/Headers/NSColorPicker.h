@@ -12,7 +12,7 @@
     /*All instance variables are private*/
     id _imageObject;
     NSColorPanel *_colorPanel;
-    unsigned int reservedColorPicker;
+    NSString *_buttonToolTip;
 }
 - (id)initWithPickerMask:(int)mask colorPanel:(NSColorPanel *)owningColorPanel;
 - (NSColorPanel *)colorPanel;

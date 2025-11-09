@@ -3,9 +3,9 @@
  
      Contains:   Public Code Fragment Manager Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1992-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1992-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -44,6 +44,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -53,13 +54,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /*
    ¤
@@ -320,7 +315,7 @@ GetSharedLibrary(
   CFragLoadOptions     options,
   CFragConnectionID *  connID,
   Ptr *                mainAddr,
-  Str255               errMessage);
+  Str255               errMessage)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -340,7 +335,7 @@ GetDiskFragment(
   CFragLoadOptions     options,
   CFragConnectionID *  connID,           /* can be NULL */
   Ptr *                mainAddr,         /* can be NULL */
-  Str255               errMessage);      /* can be NULL */
+  Str255               errMessage)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -359,7 +354,7 @@ GetMemFragment(
   CFragLoadOptions     options,
   CFragConnectionID *  connID,           /* can be NULL */
   Ptr *                mainAddr,         /* can be NULL */
-  Str255               errMessage);      /* can be NULL */
+  Str255               errMessage)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -371,7 +366,7 @@ GetMemFragment(
  *    Non-Carbon CFM:   in CFragManager 1.0 and later
  */
 extern OSErr 
-CloseConnection(CFragConnectionID * connID);
+CloseConnection(CFragConnectionID * connID)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -387,7 +382,7 @@ FindSymbol(
   CFragConnectionID   connID,
   ConstStr255Param    symName,
   Ptr *               symAddr,        /* can be NULL */
-  CFragSymbolClass *  symClass);      /* can be NULL */
+  CFragSymbolClass *  symClass)       /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -401,7 +396,7 @@ FindSymbol(
 extern OSErr 
 CountSymbols(
   CFragConnectionID   connID,
-  long *              symCount);
+  long *              symCount)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -418,7 +413,7 @@ GetIndSymbol(
   long                symIndex,
   Str255              symName,        /* can be NULL */
   Ptr *               symAddr,        /* can be NULL */
-  CFragSymbolClass *  symClass);      /* can be NULL */
+  CFragSymbolClass *  symClass)       /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -528,7 +523,7 @@ typedef CALLBACK_API_C( void , CFragTermProcedure )(void);
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
-ConvertBundlePreLocator(CFragSystem7LocatorPtr initBlockLocator);
+ConvertBundlePreLocator(CFragSystem7LocatorPtr initBlockLocator) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -614,13 +609,7 @@ enum {
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

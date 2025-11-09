@@ -1,8 +1,9 @@
 /*	NSInvocation.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#include <stdbool.h>
 
 @class NSMutableArray, NSMethodSignature;
 
@@ -15,6 +16,9 @@ enum _NSObjCValueType {
     NSObjCLonglongType = 'q',
     NSObjCFloatType = 'f',
     NSObjCDoubleType = 'd',
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+    NSObjCBoolType = 'B',
+#endif
     NSObjCSelectorType = ':',
     NSObjCObjectType = '@',
     NSObjCStructType = '{',
@@ -34,6 +38,9 @@ typedef struct {
 	long long longlongValue;
 	float floatValue;
 	double doubleValue;
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+	bool boolValue;
+#endif
 	SEL selectorValue;
 	id objectValue;
 	void *pointerValue;

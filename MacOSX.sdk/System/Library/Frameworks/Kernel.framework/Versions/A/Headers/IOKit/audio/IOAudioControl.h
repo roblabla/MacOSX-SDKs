@@ -140,8 +140,12 @@ protected:
     
     ExpansionData *reserved;
     
+public:
+	virtual void sendChangeNotification(UInt32 notificationType);
+
 private:
-    OSMetaClassDeclareReservedUnused(IOAudioControl, 0);
+    OSMetaClassDeclareReservedUsed(IOAudioControl, 0);
+
     OSMetaClassDeclareReservedUnused(IOAudioControl, 1);
     OSMetaClassDeclareReservedUnused(IOAudioControl, 2);
     OSMetaClassDeclareReservedUnused(IOAudioControl, 3);
@@ -387,6 +391,7 @@ public:
 
     virtual void setCoreAudioPropertyID(UInt32 propertyID);
 
+	void setWorkLoop(IOWorkLoop *wl);
 
 protected:
     /*!

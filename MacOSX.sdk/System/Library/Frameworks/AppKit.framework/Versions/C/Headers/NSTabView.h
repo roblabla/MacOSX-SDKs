@@ -10,11 +10,13 @@
 
 @class NSArray, NSFont, NSTabViewItem;
 
+#define NSAppKitVersionNumberWithDirectionalTabs 631.0
+
 typedef enum _NSTabViewType {
-    NSTopTabsBezelBorder	= 0,		// the default
-    NSLeftTabsBezelBorder	= 1,		// Not yet supported. Default to NSTopTabsBezelBorder
-    NSBottomTabsBezelBorder	= 2,		// Not yet supported. Default to NSTopTabsBezelBorder
-    NSRightTabsBezelBorder	= 3,		// Not yet supported. Default to NSTopTabsBezelBorder
+    NSTopTabsBezelBorder	= 0,			// the default
+    NSLeftTabsBezelBorder	= 1,
+    NSBottomTabsBezelBorder	= 2,
+    NSRightTabsBezelBorder	= 3,
     NSNoTabsBezelBorder		= 4,
     NSNoTabsLineBorder		= 5,
     NSNoTabsNoBorder		= 6
@@ -26,7 +28,7 @@ typedef enum _NSTabViewType {
     	
     	/* Persistent properties */
     
-    id	_tabViewItems;			// array of NSTabViewItem
+    id	_tabViewItems;                          	// array of NSTabViewItem
     NSTabViewItem	*_selectedTabViewItem;		// nil only if _tabViewItems is empty
     NSFont		*_font;				// font use to display the tab label
     NSTabViewType	_tabViewType;
@@ -45,21 +47,22 @@ typedef enum _NSTabViewType {
     NSTabViewItem	*_tabViewItemWithKeyView;	// the tabViewItem with the keyView "outline"
     NSView 		*_originalNextKeyView;		// Original nextKeyView of the tabView. Needed to restore the keyViewLoop.
     struct __NSTabViewDelegateRespondTo {
-        int shouldSelectTabViewItem:1;
-        int willSelectTabViewItem:1;
-        int didSelectTabViewItem:1;
-        int didChangeNumberOfTabViewItems:1;
-        int reserved:28;
+        unsigned int shouldSelectTabViewItem:1;
+        unsigned int willSelectTabViewItem:1;
+        unsigned int didSelectTabViewItem:1;
+        unsigned int didChangeNumberOfTabViewItems:1;
+        unsigned int reserved:28;
     } _delegateRespondTo;
     
     struct __NSTabViewFlags {
-        int needsLayout:1;
+        unsigned int needsLayout:1;
         unsigned int controlTint:3;	// archived
         unsigned int controlSize:2;	// archived
         unsigned int wiringNibConnections:1;
         unsigned int wiringInteriorLastKeyView:1;
         unsigned int originalNextKeyViewChanged:1;
-        int reserved:23;
+	unsigned int liveResizeSkippedResetToolTips:1;
+        unsigned int reserved:22;
     } _flags;
 
     	/* Unused fields */

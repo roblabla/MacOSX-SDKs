@@ -3,9 +3,9 @@
  
      Contains:   Memory Manager Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -35,13 +36,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   maxSize                       = 0x7FFFFFF0 /*the largest block possible*/
@@ -147,7 +142,7 @@ typedef VolumeVirtualMemoryInfo *       VolumeVirtualMemoryInfoPtr;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern GrowZoneUPP
-NewGrowZoneUPP(GrowZoneProcPtr userRoutine);
+NewGrowZoneUPP(GrowZoneProcPtr userRoutine)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewPurgeUPP()
@@ -158,7 +153,7 @@ NewGrowZoneUPP(GrowZoneProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern PurgeUPP
-NewPurgeUPP(PurgeProcPtr userRoutine);
+NewPurgeUPP(PurgeProcPtr userRoutine)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewUserFnUPP()
@@ -169,7 +164,7 @@ NewPurgeUPP(PurgeProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern UserFnUPP
-NewUserFnUPP(UserFnProcPtr userRoutine);
+NewUserFnUPP(UserFnProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeGrowZoneUPP()
@@ -180,7 +175,7 @@ NewUserFnUPP(UserFnProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeGrowZoneUPP(GrowZoneUPP userUPP);
+DisposeGrowZoneUPP(GrowZoneUPP userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposePurgeUPP()
@@ -191,7 +186,7 @@ DisposeGrowZoneUPP(GrowZoneUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposePurgeUPP(PurgeUPP userUPP);
+DisposePurgeUPP(PurgeUPP userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeUserFnUPP()
@@ -202,7 +197,7 @@ DisposePurgeUPP(PurgeUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeUserFnUPP(UserFnUPP userUPP);
+DisposeUserFnUPP(UserFnUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeGrowZoneUPP()
@@ -215,7 +210,7 @@ DisposeUserFnUPP(UserFnUPP userUPP);
 extern long
 InvokeGrowZoneUPP(
   Size         cbNeeded,
-  GrowZoneUPP  userUPP);
+  GrowZoneUPP  userUPP)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokePurgeUPP()
@@ -228,7 +223,7 @@ InvokeGrowZoneUPP(
 extern void
 InvokePurgeUPP(
   Handle    blockToPurge,
-  PurgeUPP  userUPP);
+  PurgeUPP  userUPP)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeUserFnUPP()
@@ -241,7 +236,7 @@ InvokePurgeUPP(
 extern void
 InvokeUserFnUPP(
   void *     parameter,
-  UserFnUPP  userUPP);
+  UserFnUPP  userUPP)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  GetApplLimit()
@@ -282,7 +277,7 @@ InvokeUserFnUPP(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-GZSaveHnd(void);
+GZSaveHnd(void)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -294,7 +289,7 @@ GZSaveHnd(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Ptr 
-TopMem(void);
+TopMem(void)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -306,7 +301,7 @@ TopMem(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-MemError(void);
+MemError(void)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -329,7 +324,7 @@ MemError(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-NewHandle(Size byteCount);
+NewHandle(Size byteCount)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -351,7 +346,7 @@ NewHandle(Size byteCount);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-NewHandleClear(Size byteCount);
+NewHandleClear(Size byteCount)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -383,7 +378,7 @@ NewHandleClear(Size byteCount);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-RecoverHandle(Ptr p);
+RecoverHandle(Ptr p)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -405,7 +400,7 @@ RecoverHandle(Ptr p);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Ptr 
-NewPtr(Size byteCount);
+NewPtr(Size byteCount)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -427,7 +422,7 @@ NewPtr(Size byteCount);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Ptr 
-NewPtrClear(Size byteCount);
+NewPtrClear(Size byteCount)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -459,7 +454,7 @@ NewPtrClear(Size byteCount);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-MaxBlock(void);
+MaxBlock(void)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -481,7 +476,7 @@ MaxBlock(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-StackSpace(void);
+StackSpace(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -493,7 +488,7 @@ StackSpace(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-NewEmptyHandle(void);
+NewEmptyHandle(void)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -515,7 +510,7 @@ NewEmptyHandle(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HLock(Handle h);
+HLock(Handle h)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -527,7 +522,7 @@ HLock(Handle h);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HUnlock(Handle h);
+HUnlock(Handle h)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -539,7 +534,7 @@ HUnlock(Handle h);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HPurge(Handle h);
+HPurge(Handle h)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -551,7 +546,7 @@ HPurge(Handle h);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HNoPurge(Handle h);
+HNoPurge(Handle h)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -563,7 +558,7 @@ HNoPurge(Handle h);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HLockHi(Handle h);
+HLockHi(Handle h)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -577,7 +572,7 @@ HLockHi(Handle h);
 extern Handle 
 TempNewHandle(
   Size     logicalSize,
-  OSErr *  resultCode);
+  OSErr *  resultCode)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -589,7 +584,7 @@ TempNewHandle(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Size 
-TempMaxMem(Size * grow);
+TempMaxMem(Size * grow)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -601,7 +596,7 @@ TempMaxMem(Size * grow);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-TempFreeMem(void);
+TempFreeMem(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -633,7 +628,7 @@ TempFreeMem(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Size 
-CompactMem(Size cbNeeded);
+CompactMem(Size cbNeeded)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -655,7 +650,7 @@ CompactMem(Size cbNeeded);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-PurgeMem(Size cbNeeded);
+PurgeMem(Size cbNeeded)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -677,7 +672,7 @@ PurgeMem(Size cbNeeded);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-FreeMem(void);
+FreeMem(void)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -699,7 +694,7 @@ FreeMem(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ReserveMem(Size cbNeeded);
+ReserveMem(Size cbNeeded)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -721,7 +716,7 @@ ReserveMem(Size cbNeeded);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Size 
-MaxMem(Size * grow);
+MaxMem(Size * grow)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -743,7 +738,7 @@ MaxMem(Size * grow);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetGrowZone(GrowZoneUPP growZone);
+SetGrowZone(GrowZoneUPP growZone)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -755,7 +750,7 @@ SetGrowZone(GrowZoneUPP growZone);
  *    Non-Carbon CFM:   not available
  */
 extern GrowZoneUPP 
-GetGrowZone(void);
+GetGrowZone(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -767,7 +762,7 @@ GetGrowZone(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-MoveHHi(Handle h);
+MoveHHi(Handle h)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -779,7 +774,7 @@ MoveHHi(Handle h);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DisposePtr(Ptr p);
+DisposePtr(Ptr p)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -791,7 +786,7 @@ DisposePtr(Ptr p);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Size 
-GetPtrSize(Ptr p);
+GetPtrSize(Ptr p)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -805,7 +800,7 @@ GetPtrSize(Ptr p);
 extern void 
 SetPtrSize(
   Ptr    p,
-  Size   newSize);
+  Size   newSize)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -817,7 +812,7 @@ SetPtrSize(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DisposeHandle(Handle h);
+DisposeHandle(Handle h)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -831,7 +826,7 @@ DisposeHandle(Handle h);
 extern void 
 SetHandleSize(
   Handle   h,
-  Size     newSize);
+  Size     newSize)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* 
@@ -850,7 +845,7 @@ SetHandleSize(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Size 
-GetHandleSize(Handle h);
+GetHandleSize(Handle h)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -874,7 +869,7 @@ GetHandleSize(Handle h);
 extern void 
 ReallocateHandle(
   Handle   h,
-  Size     byteCount);
+  Size     byteCount)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -896,7 +891,7 @@ ReallocateHandle(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-EmptyHandle(Handle h);
+EmptyHandle(Handle h)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -908,7 +903,7 @@ EmptyHandle(Handle h);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HSetRBit(Handle h);
+HSetRBit(Handle h)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -920,7 +915,7 @@ HSetRBit(Handle h);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HClrRBit(Handle h);
+HClrRBit(Handle h)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -932,7 +927,7 @@ HClrRBit(Handle h);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern SInt8 
-HGetState(Handle h);
+HGetState(Handle h)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -946,7 +941,7 @@ HGetState(Handle h);
 extern void 
 HSetState(
   Handle   h,
-  SInt8    flags);
+  SInt8    flags)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -960,7 +955,7 @@ HSetState(
 extern void 
 PurgeSpace(
   long *  total,
-  long *  contig);
+  long *  contig)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -978,7 +973,7 @@ PurgeSpace(
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern long 
-PurgeSpaceTotal(void);
+PurgeSpaceTotal(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -990,7 +985,7 @@ PurgeSpaceTotal(void);
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern long 
-PurgeSpaceContiguous(void);
+PurgeSpaceContiguous(void)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1039,7 +1034,7 @@ extern void
 BlockMove(
   const void *  srcPtr,
   void *        destPtr,
-  Size          byteCount);
+  Size          byteCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1054,7 +1049,7 @@ extern void
 BlockMoveData(
   const void *  srcPtr,
   void *        destPtr,
-  Size          byteCount);
+  Size          byteCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1069,7 +1064,7 @@ extern void
 BlockMoveUncached(
   const void *  srcPtr,
   void *        destPtr,
-  Size          byteCount);
+  Size          byteCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1084,7 +1079,7 @@ extern void
 BlockMoveDataUncached(
   const void *  srcPtr,
   void *        destPtr,
-  Size          byteCount);
+  Size          byteCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1098,7 +1093,7 @@ BlockMoveDataUncached(
 extern void 
 BlockZero(
   void *  destPtr,
-  Size    byteCount);
+  Size    byteCount)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1112,7 +1107,7 @@ BlockZero(
 extern void 
 BlockZeroUncached(
   void *  destPtr,
-  Size    byteCount);
+  Size    byteCount)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1145,7 +1140,7 @@ BlockZeroUncached(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-MoreMasters(void);
+MoreMasters(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1157,7 +1152,7 @@ MoreMasters(void);
  *    Non-Carbon CFM:   not available
  */
 extern void 
-MoreMasterPointers(UInt32 inCount);
+MoreMasterPointers(UInt32 inCount)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1193,7 +1188,7 @@ MoreMasterPointers(UInt32 inCount);
 extern void 
 TempHLock(
   Handle   h,
-  OSErr *  resultCode);
+  OSErr *  resultCode)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1207,7 +1202,7 @@ TempHLock(
 extern void 
 TempHUnlock(
   Handle   h,
-  OSErr *  resultCode);
+  OSErr *  resultCode)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1221,7 +1216,7 @@ TempHUnlock(
 extern void 
 TempDisposeHandle(
   Handle   h,
-  OSErr *  resultCode);
+  OSErr *  resultCode)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1233,7 +1228,7 @@ TempDisposeHandle(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Ptr 
-TempTopMem(void);
+TempTopMem(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1247,7 +1242,7 @@ TempTopMem(void);
 extern OSErr 
 HoldMemory(
   void *          address,
-  unsigned long   count);
+  unsigned long   count)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1261,7 +1256,7 @@ HoldMemory(
 extern OSErr 
 UnholdMemory(
   void *          address,
-  unsigned long   count);
+  unsigned long   count)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1315,7 +1310,7 @@ UnholdMemory(
 extern OSErr 
 MakeMemoryResident(
   void *          address,
-  unsigned long   count);
+  unsigned long   count)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1329,7 +1324,7 @@ MakeMemoryResident(
 extern OSErr 
 ReleaseMemoryData(
   void *          address,
-  unsigned long   count);
+  unsigned long   count)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1343,7 +1338,7 @@ ReleaseMemoryData(
 extern OSErr 
 MakeMemoryNonResident(
   void *          address,
-  unsigned long   count);
+  unsigned long   count)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1357,7 +1352,7 @@ MakeMemoryNonResident(
 extern OSErr 
 FlushMemory(
   void *          address,
-  unsigned long   count);
+  unsigned long   count)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1518,7 +1513,7 @@ FlushMemory(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-HandToHand(Handle * theHndl);
+HandToHand(Handle * theHndl)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1533,7 +1528,7 @@ extern OSErr
 PtrToXHand(
   const void *  srcPtr,
   Handle        dstHndl,
-  long          size);
+  long          size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1548,7 +1543,7 @@ extern OSErr
 PtrToHand(
   const void *  srcPtr,
   Handle *      dstHndl,
-  long          size);
+  long          size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1562,7 +1557,7 @@ PtrToHand(
 extern OSErr 
 HandAndHand(
   Handle   hand1,
-  Handle   hand2);
+  Handle   hand2)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1577,7 +1572,7 @@ extern OSErr
 PtrAndHand(
   const void *  ptr1,
   Handle        hand2,
-  long          size);
+  long          size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Carbon routines to aid in debugging. */
@@ -1591,7 +1586,7 @@ PtrAndHand(
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-CheckAllHeaps(void);
+CheckAllHeaps(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Checks the application heap for validity */
@@ -1604,7 +1599,7 @@ CheckAllHeaps(void);
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-IsHeapValid(void);
+IsHeapValid(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* It is invalid to pass a NULL or an empty Handle to IsHandleValid */
@@ -1617,7 +1612,7 @@ IsHeapValid(void);
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-IsHandleValid(Handle h);
+IsHandleValid(Handle h)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* It is invalid to pass a NULL Pointer to IsPointerValid */
@@ -1630,7 +1625,7 @@ IsHandleValid(Handle h);
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-IsPointerValid(Ptr p);
+IsPointerValid(Ptr p)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1650,13 +1645,7 @@ IsPointerValid(Ptr p);
 #endif  /* OLDROUTINENAMES */
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

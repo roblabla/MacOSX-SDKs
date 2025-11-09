@@ -1,20 +1,23 @@
 /*
- * Copyright (c) 1998-2001 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.2 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * Copyright (c) 1999-2003 Apple Computer, Inc.  All Rights Reserved.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.  
- * Please see the License for the specific language governing rights and 
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
  * limitations under the License.
  * 
  * @APPLE_LICENSE_HEADER_END@
@@ -94,6 +97,9 @@ enum {
 	kUSBStringDesc		= 3,
 	kUSBInterfaceDesc	= 4,
 	kUSBEndpointDesc	= 5,
+        kUSBDeviceQualifierDesc = 6,
+        kUSBOtherSpeedConfDesc 	= 7,
+        kUSBInterfacePowerDesc	= 8,
 	kUSBHIDDesc		= 0x21,
 	kUSBReportDesc		= 0x22,
 	kUSBPhysicalDesc	= 0x23,
@@ -119,7 +125,9 @@ enum {
 
 
 enum {
-	kUSBRel10		= 0x0100
+	kUSBRel10		= 0x0100,
+	kUSBRel11		= 0x0110,
+	kUSBRel20		= 0x0200
 };
 
 
@@ -147,8 +155,10 @@ enum {
 
 
 enum {
-    kHIDKeyboardInterfaceProtocol = 1,
-    kHIDMouseInterfaceProtocol	= 2
+    kHIDNoInterfaceProtocol		= 0,
+    kHIDKeyboardInterfaceProtocol 	= 1,
+    kHIDMouseInterfaceProtocol		= 2,
+    kUSBVendorSpecificProtocol		= 0xff
 };
 
 
@@ -170,6 +180,7 @@ enum {
     kUSBMassStorageClass        = 8,
     kUSBHubClass                = 9,
     kUSBDataClass               = 10,
+    kUSBApplicationSpecificClass = 0xFE,
     kUSBVendorSpecificClass     = 0xFF
 };
 
@@ -177,7 +188,32 @@ enum {
 
 enum {
     kUSBCompositeSubClass       = 0,
-    kUSBHubSubClass             = 0
+    kUSBHubSubClass             = 0,
+    kUSBDFUSubClass 		= 0x01,
+    kUSBIrDABridgeSubClass 	= 0x02,
+    kUSBMassStorageRBCSubClass 	= 0x01,
+    kUSBMassStorageATAPISubClass 	= 0x02,
+    kUSBMassStorageQIC157SubClass 	= 0x03,
+    kUSBMassStorageUFISubClass 		= 0x04,
+    kUSBMassStorageSFF8070iSubClass 	= 0x05,
+    kUSBMassStorageSCSISubClass 	= 0x06,
+    kUSBHIDBootInterfaceSubClass 	= 0x01,
+    kUSBCommDirectLineSubClass	= 0x01,
+    kUSBCommAbstractSubClass	= 0x02,
+    kUSBCommTelephoneSubClass	= 0x03,
+    kUSBCommMultiChannelSubClass	= 0x04,
+    kUSBCommCAPISubClass		= 0x05,
+    kUSBCommEthernetNetworkingSubClass	= 0x06,
+    kUSBATMNetworkingSubClass	= 0x07
+};
+
+/* DFU Class Attributes */
+
+enum {
+    kUSBDFUAttributesMask 		= 0x07,
+    kUSBDFUCanDownloadBit 		= 0,
+    kUSBDFUCanUploadBit 		= 1,
+    kUSBDFUManifestationTolerantBit 	= 2
 };
 
 // USB property names taken from the field names in various descriptors

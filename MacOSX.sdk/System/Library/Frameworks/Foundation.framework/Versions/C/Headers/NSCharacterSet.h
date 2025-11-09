@@ -1,7 +1,8 @@
 /*	NSCharacterSet.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
+#import <CoreFoundation/CFCharacterSet.h>
 #import <Foundation/NSObject.h>
 #import <Foundation/NSRange.h>
 #import <Foundation/NSString.h>
@@ -26,6 +27,9 @@ enum {
 + (NSCharacterSet *)decomposableCharacterSet;
 + (NSCharacterSet *)illegalCharacterSet;
 + (NSCharacterSet *)punctuationCharacterSet;
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
++ (NSCharacterSet *)capitalizedLetterCharacterSet;
+#endif
 
 + (NSCharacterSet *)characterSetWithRange:(NSRange)aRange;
 + (NSCharacterSet *)characterSetWithCharactersInString:(NSString *)aString;
@@ -36,6 +40,12 @@ enum {
 - (NSData *)bitmapRepresentation;
 - (NSCharacterSet *)invertedSet;
 
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (BOOL)longCharacterIsMember:(UTF32Char)theLongChar;
+
+- (BOOL)isSupersetOfSet:(NSCharacterSet *)theOtherSet;
+- (BOOL)hasMemberInPlane:(uint8_t)thePlane;
+#endif
 @end
 
 @interface NSMutableCharacterSet : NSCharacterSet <NSCopying, NSMutableCopying>

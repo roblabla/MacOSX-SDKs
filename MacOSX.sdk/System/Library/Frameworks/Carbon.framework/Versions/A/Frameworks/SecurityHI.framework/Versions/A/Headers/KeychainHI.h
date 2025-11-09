@@ -3,9 +3,9 @@
  
      Contains:   Keychain API's with Human Interfaces
  
-     Version:    SecurityHI-56.2~77
+     Version:    SecurityHI-75.1~141
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,24 +16,12 @@
 #ifndef __KEYCHAINHI__
 #define __KEYCHAINHI__
 
-#ifndef __KEYCHAINCORE__
-#include <SecurityCore/KeychainCore.h>
-#endif
-
-#ifndef __CFSTRING__
-#include <CoreFoundation/CFString.h>
-#endif
-
-#ifndef __CFARRAY__
-#include <CoreFoundation/CFArray.h>
-#endif
-
-#ifndef __CFDATE__
-#include <CoreFoundation/CFDate.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -41,14 +29,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 /* High-level interface for storing passwords */
@@ -69,7 +49,7 @@ KCAddAppleSharePassword(
   StringPtr             accountName,
   UInt32                passwordLength,
   const void *          passwordData,
-  KCItemRef *           item);                 /* can be NULL */
+  KCItemRef *           item)                  /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -90,7 +70,7 @@ KCAddInternetPassword(
   OSType        authType,
   UInt32        passwordLength,
   const void *  passwordData,
-  KCItemRef *   item);                /* can be NULL */
+  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -112,7 +92,7 @@ KCAddInternetPasswordWithPath(
   OSType        authType,
   UInt32        passwordLength,
   const void *  passwordData,
-  KCItemRef *   item);                /* can be NULL */
+  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -129,7 +109,7 @@ KCAddGenericPassword(
   StringPtr     accountName,
   UInt32        passwordLength,
   const void *  passwordData,
-  KCItemRef *   item);                /* can be NULL */
+  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Low-level interface for storing keychain items */
@@ -142,7 +122,7 @@ KCAddGenericPassword(
  *    Non-Carbon CFM:   in KeychainLib 1.0 and later
  */
 extern OSStatus 
-KCAddItem(KCItemRef item);
+KCAddItem(KCItemRef item)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Managing keychains */
@@ -157,7 +137,7 @@ KCAddItem(KCItemRef item);
 extern OSStatus 
 KCUnlock(
   KCRef       keychain,       /* can be NULL */
-  StringPtr   password);      /* can be NULL */
+  StringPtr   password)       /* can be NULL */               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -171,7 +151,7 @@ KCUnlock(
 extern OSStatus 
 KCCreateKeychain(
   StringPtr   password,       /* can be NULL */
-  KCRef *     keychain);      /* can be NULL */
+  KCRef *     keychain)       /* can be NULL */               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -183,7 +163,7 @@ KCCreateKeychain(
  *    Non-Carbon CFM:   in KeychainLib 2.0 and later
  */
 extern OSStatus 
-KCChangeSettings(KCRef keychain);
+KCChangeSettings(KCRef keychain)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -197,7 +177,7 @@ KCChangeSettings(KCRef keychain);
 extern OSStatus 
 kcunlock(
   KCRef         keychain,       /* can be NULL */
-  const char *  password);      /* can be NULL */
+  const char *  password)       /* can be NULL */             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -211,7 +191,7 @@ kcunlock(
 extern OSStatus 
 kccreatekeychain(
   const char *  password,       /* can be NULL */
-  KCRef *       keychain);      /* can be NULL */
+  KCRef *       keychain)       /* can be NULL */             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -231,7 +211,7 @@ kcaddapplesharepassword(
   const char *          accountName,
   UInt32                passwordLength,
   const void *          passwordData,
-  KCItemRef *           item);                 /* can be NULL */
+  KCItemRef *           item)                  /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -252,7 +232,7 @@ kcaddinternetpassword(
   OSType        authType,
   UInt32        passwordLength,
   const void *  passwordData,
-  KCItemRef *   item);                /* can be NULL */
+  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -274,7 +254,7 @@ kcaddinternetpasswordwithpath(
   OSType        authType,
   UInt32        passwordLength,
   const void *  passwordData,
-  KCItemRef *   item);                /* can be NULL */
+  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -291,7 +271,7 @@ kcaddgenericpassword(
   const char *  accountName,
   UInt32        passwordLength,
   const void *  passwordData,
-  KCItemRef *   item);                /* can be NULL */
+  KCItemRef *   item)                 /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Working with certificates */
@@ -316,14 +296,6 @@ kcaddgenericpassword(
 
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

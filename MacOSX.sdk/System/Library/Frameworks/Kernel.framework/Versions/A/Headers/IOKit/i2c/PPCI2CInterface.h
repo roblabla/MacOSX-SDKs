@@ -60,6 +60,8 @@
 // class ApplePMUInterface;  //not necessary
 
 
+#define busTypeString (i2cPMU ? "i2cPMU" : (i2cUniN ? "i2cUniN" : (i2cmacio ? "i2cmacio" : "i2cUnkn")))
+
 // Clients get call backs with this type of function:
 typedef void (*AppleI2Cclient)(IOService * client, UInt32 addressInfo, UInt32 length, UInt8 * buffer); 
 
@@ -281,8 +283,10 @@ private:
     // interrupts:
     IOService *myProvider;
     
-    // Remember if we had a PMU provider or not
+    // Remember if we had a PMU, UniN provider or not
     bool i2cPMU;
+    bool i2cUniN;
+    bool i2cmacio;
     
     // Keeps track of the success (or failure) of the last transfer:
     bool transferWasSuccesful;

@@ -3,9 +3,9 @@
  
      Contains:   Sound Manager Interfaces.
  
-     Version:    CarbonSound-65~5
+     Version:    CarbonSound-94~244
  
-     Copyright:  © 1986-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1986-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,8 +17,8 @@
 #ifndef __SOUND_R__
 #define __SOUND_R__
 
-#ifndef __CONDITIONALMACROS_R__
-#include <CarbonCore/ConditionalMacros.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
 
 #define kInvalidSource 					0xFFFFFFFF			/* this source may be returned from GetInfo if no other source is the monitored source */
@@ -67,6 +67,7 @@
 #define kUNIXsdevSubType 				'un1x'				/* UNIX base sdev */
 #define kUSBSubType 					'usb '				/* USB device */
 #define kBlueBoxSubType 				'bsnd'				/* Blue Box sound component */
+#define kHALCustomComponentSubType 		'halx'				/* Registered by the HAL output component ('hal!') for each HAL output device */
 #define kSoundCompressor 				'scom'
 #define kSoundDecompressor 				'sdec'
 #define kAudioComponentType 			'adio'				/* Audio components and sub-types */
@@ -97,6 +98,7 @@
 #define kALawCompression 				'alaw'				/* aLaw 2:1 */
 #define kMicrosoftADPCMFormat 			0x6D730002			/* Microsoft ADPCM - ACM code 2 */
 #define kDVIIntelIMAFormat 				0x6D730011			/* DVI/Intel IMA ADPCM - ACM code 17 */
+#define kMicrosoftGSMCompression 		0x6D730031			/* Microsoft GSM 6.10 - ACM code 49 */
 #define kDVAudioFormat 					'dvca'				/* DV Audio */
 #define kQDesignCompression 			'QDMC'				/* QDesign music */
 #define kQDesign2Compression 			'QDM2'				/* QDesign2 music */
@@ -106,6 +108,8 @@
 #define kLittleEndianFormat 			'sowt'				/* for compatibility */
 #define kMPEGLayer3Format 				0x6D730055			/* MPEG Layer 3, CBR only (pre QT4.1) */
 #define kFullMPEGLay3Format 			'.mp3'				/* MPEG Layer 3, CBR & VBR (QT4.1 and later) */
+#define kVariableDurationDVAudioFormat 	'vdva'				/* Variable Duration DV Audio */
+#define kMPEG4AudioFormat 				'mp4a'
 
 #define k8BitRawIn 						0x01				/* data description */
 #define k8BitTwosIn 					0x02
@@ -121,6 +125,13 @@
 #define kVMAwareness 					0x00200000			/*  component will hold its memory */
 #define kHighQuality 					0x00400000			/*   performance description */
 #define kNonRealTime 					0x00800000
+
+#define kSoundCodecInfoFixedCompression  0x00000001			/*  has fixed compression format */
+#define kSoundCodecInfoVariableCompression  0x00000002		/*  has variable compression format */
+#define kSoundCodecInfoHasRestrictedInputRates  0x00000004	/*  compressor has restricted set of input sample rates */
+#define kSoundCodecInfoCanChangeOutputRate  0x00000008		/*  compressor may output a different sample rate than it receives */
+#define kSoundCodecInfoRequiresExternalFraming  0x00000010	/*  format requires external framing information during decode/encode */
+#define kSoundCodecInfoVariableDuration  0x00000020			/*  audio packets can vary in duration */
 
 
 /*----------------------------snd  ¥ Sound----------------------------------------------*/
@@ -237,6 +248,13 @@ type 'snd ' {
             hex string [$$Long(SampleCnt[$$ArrayIndex(DataTables)])];
         };
 };
+
+/*----------------------------snfo ¥ Sound Codec Info   --------------------------------*/
+type 'snfo' {
+    longint = 0;
+    longint;    // feature flags
+};
+
 
 #endif /* __SOUND_R__ */
 

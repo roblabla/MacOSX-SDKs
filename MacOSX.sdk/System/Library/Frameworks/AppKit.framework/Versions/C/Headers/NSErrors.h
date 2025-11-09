@@ -46,4 +46,5 @@ APPKIT_EXTERN NSString *NSBadComparisonException;
 APPKIT_EXTERN NSString *NSImageCacheException;
 APPKIT_EXTERN NSString *NSNibLoadingException;
 APPKIT_EXTERN NSString *NSBrowserIllegalDelegateException;
+APPKIT_EXTERN NSString *NSAccessibilityException;
 

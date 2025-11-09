@@ -1,5 +1,5 @@
 /*	CFStringEncodingExt.h
-	Copyright 1998-2001, Apple, Inc. All rights reserved.
+	Copyright 1998-2002, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFSTRINGENCODINGEXT__)
@@ -121,8 +121,10 @@ typedef enum {
     kCFStringEncodingJIS_X0208_90 = 0x0622,
     kCFStringEncodingJIS_X0212_90 = 0x0623,
     kCFStringEncodingJIS_C6226_78 = 0x0624,
+    kCFStringEncodingShiftJIS_X0213_00 = 0x0628, /* Shift-JIS format encoding of JIS X0213 planes 1 and 2*/
     kCFStringEncodingGB_2312_80 = 0x0630,
     kCFStringEncodingGBK_95 = 0x0631,		/* annex to GB 13000-93; for Windows 95 */
+    kCFStringEncodingGB_18030_2000 = 0x0632,
     kCFStringEncodingKSC_5601_87 = 0x0640,	/* same as KSC 5601-92 without Johab annex */
     kCFStringEncodingKSC_5601_92_Johab = 0x0641, /* KSC 5601-92 Johab annex */
     kCFStringEncodingCNS_11643_92_P1 = 0x0651,	/* CNS 11643-1992 plane 1 */
@@ -132,6 +134,8 @@ typedef enum {
     /* ISO 2022 collections begin at 0x800 */
     kCFStringEncodingISO_2022_JP = 0x0820,
     kCFStringEncodingISO_2022_JP_2 = 0x0821,
+    kCFStringEncodingISO_2022_JP_1 = 0x0822, /* RFC 2237*/
+    kCFStringEncodingISO_2022_JP_3 = 0x0823, /* JIS X0213*/
     kCFStringEncodingISO_2022_CN = 0x0830,
     kCFStringEncodingISO_2022_CN_EXT = 0x0831,
     kCFStringEncodingISO_2022_KR = 0x0840,
@@ -148,6 +152,7 @@ typedef enum {
     kCFStringEncodingBig5 = 0x0A03,		/* Big-5 (has variants) */
     kCFStringEncodingMacRomanLatin1 = 0x0A04,	/* Mac OS Roman permuted to align with ISO Latin-1 */
     kCFStringEncodingHZ_GB_2312 = 0x0A05,	/* HZ (RFC 1842, for Chinese mail & news) */
+    kCFStringEncodingBig5_HKSCS_1999 = 0x0A06, /* Big-5 with Hong Kong special char set supplement*/
 
     /* Other platform encodings*/
 /*  kCFStringEncodingNextStepLatin = 0x0B01, defined in CoreFoundation/CFString.h */

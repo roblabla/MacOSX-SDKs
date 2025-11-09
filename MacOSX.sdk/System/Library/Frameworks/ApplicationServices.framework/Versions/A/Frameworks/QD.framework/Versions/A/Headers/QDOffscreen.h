@@ -3,9 +3,9 @@
  
      Contains:   Quickdraw Offscreen GWorld Interfaces.
  
-     Version:    Quickdraw-64.6.15~3
+     Version:    Quickdraw-96.21~1
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,8 +16,8 @@
 #ifndef __QDOFFSCREEN__
 #define __QDOFFSCREEN__
 
-#ifndef __MACERRORS__
-#include <CarbonCore/MacErrors.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __QUICKDRAW__
@@ -26,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -33,14 +34,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 enum {
@@ -102,7 +95,7 @@ NewGWorld(
   const Rect *  boundsRect,
   CTabHandle    cTable,                /* can be NULL */
   GDHandle      aGDevice,              /* can be NULL */
-  GWorldFlags   flags);
+  GWorldFlags   flags)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* GDevice attribute bits for Carbon and QuickTime 3.0*/
@@ -169,7 +162,7 @@ NewGWorldFromPtr(
   GDHandle        aGDevice,              /* can be NULL */
   GWorldFlags     flags,
   Ptr             newBuffer,
-  long            rowBytes);
+  long            rowBytes)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -181,7 +174,7 @@ NewGWorldFromPtr(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
-LockPixels(PixMapHandle pm);
+LockPixels(PixMapHandle pm)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -193,7 +186,7 @@ LockPixels(PixMapHandle pm);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-UnlockPixels(PixMapHandle pm);
+UnlockPixels(PixMapHandle pm)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -211,7 +204,7 @@ UpdateGWorld(
   const Rect *  boundsRect,
   CTabHandle    cTable,
   GDHandle      aGDevice,              /* can be NULL */
-  GWorldFlags   flags);
+  GWorldFlags   flags)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -223,7 +216,7 @@ UpdateGWorld(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DisposeGWorld(GWorldPtr offscreenGWorld);
+DisposeGWorld(GWorldPtr offscreenGWorld)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -237,7 +230,7 @@ DisposeGWorld(GWorldPtr offscreenGWorld);
 extern void 
 GetGWorld(
   CGrafPtr *  port,
-  GDHandle *  gdh);
+  GDHandle *  gdh)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -251,7 +244,7 @@ GetGWorld(
 extern void 
 SetGWorld(
   CGrafPtr   port,
-  GDHandle   gdh);
+  GDHandle   gdh)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -263,7 +256,7 @@ SetGWorld(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-CTabChanged(CTabHandle ctab);
+CTabChanged(CTabHandle ctab)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -275,7 +268,7 @@ CTabChanged(CTabHandle ctab);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-PixPatChanged(PixPatHandle ppat);
+PixPatChanged(PixPatHandle ppat)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -287,7 +280,7 @@ PixPatChanged(PixPatHandle ppat);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-PortChanged(GrafPtr port);
+PortChanged(GrafPtr port)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -299,7 +292,7 @@ PortChanged(GrafPtr port);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GDeviceChanged(GDHandle gdh);
+GDeviceChanged(GDHandle gdh)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -311,7 +304,7 @@ GDeviceChanged(GDHandle gdh);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-AllowPurgePixels(PixMapHandle pm);
+AllowPurgePixels(PixMapHandle pm)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -323,7 +316,7 @@ AllowPurgePixels(PixMapHandle pm);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-NoPurgePixels(PixMapHandle pm);
+NoPurgePixels(PixMapHandle pm)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -335,7 +328,7 @@ NoPurgePixels(PixMapHandle pm);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern GWorldFlags 
-GetPixelsState(PixMapHandle pm);
+GetPixelsState(PixMapHandle pm)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -349,7 +342,7 @@ GetPixelsState(PixMapHandle pm);
 extern void 
 SetPixelsState(
   PixMapHandle   pm,
-  GWorldFlags    state);
+  GWorldFlags    state)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -361,7 +354,7 @@ SetPixelsState(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Ptr 
-GetPixBaseAddr(PixMapHandle pm);
+GetPixBaseAddr(PixMapHandle pm)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -373,7 +366,7 @@ GetPixBaseAddr(PixMapHandle pm);
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern long 
-GetPixRowBytes(PixMapHandle pm);
+GetPixRowBytes(PixMapHandle pm)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -389,7 +382,7 @@ NewScreenBuffer(
   const Rect *    globalRect,
   Boolean         purgeable,
   GDHandle *      gdh,
-  PixMapHandle *  offscreenPixMap);
+  PixMapHandle *  offscreenPixMap)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -401,7 +394,7 @@ NewScreenBuffer(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DisposeScreenBuffer(PixMapHandle offscreenPixMap);
+DisposeScreenBuffer(PixMapHandle offscreenPixMap)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -413,7 +406,7 @@ DisposeScreenBuffer(PixMapHandle offscreenPixMap);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern GDHandle 
-GetGWorldDevice(GWorldPtr offscreenGWorld);
+GetGWorldDevice(GWorldPtr offscreenGWorld)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -425,7 +418,7 @@ GetGWorldDevice(GWorldPtr offscreenGWorld);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
-QDDone(GrafPtr port);
+QDDone(GrafPtr port)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -437,7 +430,7 @@ QDDone(GrafPtr port);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-OffscreenVersion(void);
+OffscreenVersion(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -453,7 +446,7 @@ NewTempScreenBuffer(
   const Rect *    globalRect,
   Boolean         purgeable,
   GDHandle *      gdh,
-  PixMapHandle *  offscreenPixMap);
+  PixMapHandle *  offscreenPixMap)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -465,7 +458,7 @@ NewTempScreenBuffer(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
-PixMap32Bit(PixMapHandle pmHandle);
+PixMap32Bit(PixMapHandle pmHandle)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -477,17 +470,9 @@ PixMap32Bit(PixMapHandle pmHandle);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern PixMapHandle 
-GetGWorldPixMap(GWorldPtr offscreenGWorld);
+GetGWorldPixMap(GWorldPtr offscreenGWorld)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

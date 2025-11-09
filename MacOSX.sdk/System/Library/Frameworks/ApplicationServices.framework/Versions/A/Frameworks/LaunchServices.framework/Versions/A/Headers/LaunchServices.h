@@ -3,9 +3,9 @@
  
      Contains:   Public interfaces for LaunchServices.framework
  
-     Version:    LaunchServices-54~1
+     Version:    LaunchServices-70.4~2
  
-     Copyright:  © 2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2001-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -20,11 +20,13 @@
 #include <CoreServices/CoreServices.h>
 #endif
 
+
 #ifndef __AE__
 #include <AE/AE.h>
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -34,13 +36,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 
 
@@ -96,8 +92,8 @@ enum {
   kLSItemInfoIsPackage          = 0x00000002, /* app, doc, or bundle package*/
   kLSItemInfoIsApplication      = 0x00000004, /* single-file or packaged*/
   kLSItemInfoIsContainer        = 0x00000008, /* folder or volume*/
-  kLSItemInfoIsAliasFile        = 0x00000010, /* 'real' alias*/
-  kLSItemInfoIsSymlink          = 0x00000020, /* UNIX symbolic link only*/
+  kLSItemInfoIsAliasFile        = 0x00000010, /* Alias file (includes sym links)*/
+  kLSItemInfoIsSymlink          = 0x00000020, /* UNIX sym link*/
   kLSItemInfoIsInvisible        = 0x00000040, /* does not include '.' files or '.hidden' entries*/
   kLSItemInfoIsNativeApp        = 0x00000080, /* Carbon or Cocoa native app*/
   kLSItemInfoIsClassicApp       = 0x00000100, /* CFM Classic app*/
@@ -193,9 +189,8 @@ typedef struct LSLaunchURLSpec          LSLaunchURLSpec;
  *    Initialize LaunchServices for use.
  *  
  *  Discussion:
- *    LSInit is optional but should be called by top level applications
- *    to explicitly incur any startup costs at a known time. Frameworks
- *    and libraries need never call LSInit.
+ *    LSInit is deprecated. Launch Services is initialized implicitly
+ *    when first called.
  *  
  *  Parameters:
  *    
@@ -208,7 +203,7 @@ typedef struct LSLaunchURLSpec          LSLaunchURLSpec;
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-LSInit(LSInitializeFlags inFlags);
+LSInit(LSInitializeFlags inFlags)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -219,9 +214,7 @@ LSInit(LSInitializeFlags inFlags);
  *    Terminate LaunchServices use.
  *  
  *  Discussion:
- *    LSTerm is optional but should be called by top level applications
- *    to explicitly terminate LaunchServices activity at a known time.
- *    Frameworks and libraries need never call LSTerm.
+ *    LSTerm is deprecated. It does not need to be called.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -229,7 +222,7 @@ LSInit(LSInitializeFlags inFlags);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-LSTerm(void);
+LSTerm(void)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -243,6 +236,9 @@ LSTerm(void);
  *    Returns as much or as little information as requested about
  *    inItemRef. Some information is available in a thread-safe manner,
  *    some is not. All CFStrings must be released after use.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -264,7 +260,7 @@ extern OSStatus
 LSCopyItemInfoForRef(
   const FSRef *       inItemRef,
   LSRequestedInfo     inWhichInfo,
-  LSItemInfoRecord *  outItemInfo);
+  LSItemInfoRecord *  outItemInfo)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -278,6 +274,9 @@ LSCopyItemInfoForRef(
  *    Returns as much or as little information as requested about
  *    inURL. Some information is available in a thread-safe manner,
  *    some is not. All CFStrings must be released after use.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -299,7 +298,7 @@ extern OSStatus
 LSCopyItemInfoForURL(
   CFURLRef            inURL,
   LSRequestedInfo     inWhichInfo,
-  LSItemInfoRecord *  outItemInfo);
+  LSItemInfoRecord *  outItemInfo)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -312,6 +311,9 @@ LSCopyItemInfoForURL(
  *    Returns the starting index of the extension (not including the
  *    period) or kLSInvalidExtensionIndex if the input name has no
  *    extension.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -335,7 +337,7 @@ extern OSStatus
 LSGetExtensionInfo(
   UniCharCount    inNameLen,
   const UniChar   inNameBuffer[],
-  UniCharCount *  outExtStartIndex);
+  UniCharCount *  outExtStartIndex)                           AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -348,6 +350,9 @@ LSGetExtensionInfo(
  *  Discussion:
  *    Return a copy of the display name for an FSRef. Takes into
  *    consideration whether this item has a hidden extension or not.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -366,7 +371,7 @@ LSGetExtensionInfo(
 extern OSStatus 
 LSCopyDisplayNameForRef(
   const FSRef *  inRef,
-  CFStringRef *  outDisplayName);
+  CFStringRef *  outDisplayName)                              AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -379,6 +384,9 @@ LSCopyDisplayNameForRef(
  *  Discussion:
  *    Return a copy of the display name for a CFURLRef. Takes into
  *    consideration whether this item has a hidden extension or not.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -397,7 +405,7 @@ LSCopyDisplayNameForRef(
 extern OSStatus 
 LSCopyDisplayNameForURL(
   CFURLRef       inURL,
-  CFStringRef *  outDisplayName);
+  CFStringRef *  outDisplayName)                              AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -412,6 +420,9 @@ LSCopyDisplayNameForURL(
  *    extension for inRef is hidden, as in the Finder. You can
  *    determine if an FSRef's extension is hidden using
  *    LSCopyItemInfoForRef.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -429,7 +440,7 @@ LSCopyDisplayNameForURL(
 extern OSStatus 
 LSSetExtensionHiddenForRef(
   const FSRef *  inRef,
-  Boolean        inHide);
+  Boolean        inHide)                                      AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -444,6 +455,9 @@ LSSetExtensionHiddenForRef(
  *    extension for inURL is hidden, as in the Finder. You can
  *    determine if a CFURLRef's extension is hidden using
  *    LSCopyItemInfoForURL.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -461,7 +475,7 @@ LSSetExtensionHiddenForRef(
 extern OSStatus 
 LSSetExtensionHiddenForURL(
   CFURLRef   inURL,
-  Boolean    inHide);
+  Boolean    inHide)                                          AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -475,14 +489,17 @@ LSSetExtensionHiddenForURL(
  *    Returns the kind string as used in the Finder and elsewhere for
  *    inFSRef. The CFStringRef must be released after use.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Parameters:
  *    
  *    inFSRef:
  *      The item for which the kind string is requested.
  *    
  *    outKindString:
- *      A non-NULL CFStringRef* into which the kind string will be
- *      copied. This CFStringRef must be released after use.
+ *      A CFStringRef* to receive the copied kind string object. This
+ *      CFStringRef must be released eventually.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -492,7 +509,7 @@ LSSetExtensionHiddenForURL(
 extern OSStatus 
 LSCopyKindStringForRef(
   const FSRef *  inFSRef,
-  CFStringRef *  outKindString);
+  CFStringRef *  outKindString)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -506,14 +523,17 @@ LSCopyKindStringForRef(
  *    Returns the kind string as used in the Finder and elsewhere for
  *    inURL. The CFStringRef must be released after use.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Parameters:
  *    
  *    inURL:
  *      The item for which the kind string is requested.
  *    
  *    outKindString:
- *      A non-NULL CFStringRef* into which the kind string will be
- *      copied. This CFStringRef must be released after use.
+ *      A CFStringRef* to receive the copied kind string object. This
+ *      CFStringRef must be released eventually.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -523,8 +543,94 @@ LSCopyKindStringForRef(
 extern OSStatus 
 LSCopyKindStringForURL(
   CFURLRef       inURL,
-  CFStringRef *  outKindString);
+  CFStringRef *  outKindString)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+
+/*
+ *  LSCopyKindStringForTypeInfo()
+ *  
+ *  Summary:
+ *    Return the kind string for items like the provided info
+ *  
+ *  Discussion:
+ *    Returns the kind string as shown in the Finder for the those
+ *    items whose type, creator, and/or extension match the provided
+ *    information. The kind string returned will be the one that most
+ *    closely describes all the information provided. The kind string
+ *    is subject to the document binding preferences that have been
+ *    specified by the user. For example, if a creator is specified but
+ *    the user has asked for files with the given
+ *    creator/type/extension combination to open in an application with
+ *    a different creator, the kind string will be loaded from the
+ *    user's preferred application.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
+ *  Parameters:
+ *    
+ *    inType:
+ *      The OSType file type for which you want a kind string. Specify
+ *      kLSUnknownType if no file type information is available.
+ *    
+ *    inCreator:
+ *      The OSType creator for which you want a kind string. Specify
+ *      kLSUnknownCreator if no creator information is available.
+ *    
+ *    inExtension:
+ *      The extension for which you want a kind string. Specify NULL if
+ *      no extension information is available.
+ *    
+ *    outKindString:
+ *      A CFStringRef* to receive the copied kind string object. This
+ *      CFStringRef must be released eventually.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+LSCopyKindStringForTypeInfo(
+  OSType         inType,
+  OSType         inCreator,
+  CFStringRef    inExtension,         /* can be NULL */
+  CFStringRef *  outKindString)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+
+/*
+ *  LSCopyKindStringForMIMEType()
+ *  
+ *  Summary:
+ *    Get the kind string for the specified MIME type.
+ *  
+ *  Discussion:
+ *    Returns the localized kind string describing the specified MIME
+ *    type.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
+ *  Parameters:
+ *    
+ *    inMIMEType:
+ *      The string specifying the MIME type.
+ *    
+ *    outKindString:
+ *      A CFStringRef* to receive the copied kind string object. This
+ *      CFStringRef must be released eventually.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+LSCopyKindStringForMIMEType(
+  CFStringRef    inMIMEType,
+  CFStringRef *  outKindString)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
@@ -540,6 +646,9 @@ LSCopyKindStringForURL(
  *    appropriate or the default otherwise. If no application is known
  *    to LaunchServices suitable for opening this item,
  *    kLSApplicationNotFoundErr will be returned.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -566,7 +675,7 @@ LSGetApplicationForItem(
   const FSRef *  inItemRef,
   LSRolesMask    inRoleMask,
   FSRef *        outAppRef,        /* can be NULL */
-  CFURLRef *     outAppURL);       /* can be NULL */
+  CFURLRef *     outAppURL)        /* can be NULL */          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -585,6 +694,9 @@ LSGetApplicationForItem(
  *    for opening such items, kLSApplicationNotFoundErr will be
  *    returned. Not all three input parameters can be NULL at the same
  *    time nor can both output parameters be NULL at the same time.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -619,7 +731,50 @@ LSGetApplicationForInfo(
   CFStringRef   inExtension,       /* can be NULL */
   LSRolesMask   inRoleMask,
   FSRef *       outAppRef,         /* can be NULL */
-  CFURLRef *    outAppURL);        /* can be NULL */
+  CFURLRef *    outAppURL)         /* can be NULL */          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+ *  LSCopyApplicationForMIMEType()
+ *  
+ *  Summary:
+ *    Return the application used to handle data with the specified
+ *    MIME type.
+ *  
+ *  Discussion:
+ *    The returned application URL will be the user's preferred handler
+ *    for the MIME type if one has been set. If no user preferred
+ *    application has been set, Launch Services will select a default
+ *    handler for the MIME type. If no application is known to handle
+ *    the MIME type, kLSApplicationNotFoundErr will be returned.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
+ *  Parameters:
+ *    
+ *    inMIMEType:
+ *      The string specifying the MIME type.
+ *    
+ *    inRoleMask:
+ *      A role mask that the chosen application must satisfy. Use
+ *      kLSRolesAll if the role is not important.
+ *    
+ *    outAppURL:
+ *      Receives the copied CFURLRef, which must be released by the
+ *      caller.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+LSCopyApplicationForMIMEType(
+  CFStringRef   inMIMEType,
+  LSRolesMask   inRoleMask,
+  CFURLRef *    outAppURL)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
@@ -636,6 +791,9 @@ LSGetApplicationForInfo(
  *    appropriate or the default otherwise. If no application is known
  *    to LaunchServices suitable for opening this item,
  *    kLSApplicationNotFoundErr will be returned.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -661,8 +819,8 @@ extern OSStatus
 LSGetApplicationForURL(
   CFURLRef      inURL,
   LSRolesMask   inRoleMask,
-  FSRef *       outAppRef,
-  CFURLRef *    outAppURL);
+  FSRef *       outAppRef,        /* can be NULL */
+  CFURLRef *    outAppURL)        /* can be NULL */           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -678,6 +836,9 @@ LSGetApplicationForURL(
  *    bundleID, then creator, then name. All comparisons are case
  *    insensitive and 'ties' are decided first by version, then by
  *    native vs. Classic.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -708,7 +869,7 @@ LSFindApplicationForInfo(
   CFStringRef   inBundleID,       /* can be NULL */
   CFStringRef   inName,           /* can be NULL */
   FSRef *       outAppRef,        /* can be NULL */
-  CFURLRef *    outAppURL);       /* can be NULL */
+  CFURLRef *    outAppURL)        /* can be NULL */           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -723,6 +884,9 @@ LSFindApplicationForInfo(
  *    inItemFSRef as in a drag and drop operation. If inRoleMask is
  *    other than kLSRolesAll then make sure inTargetRef claims to
  *    fulfill the requested role.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -753,7 +917,7 @@ LSCanRefAcceptItem(
   const FSRef *       inTargetRef,
   LSRolesMask         inRoleMask,
   LSAcceptanceFlags   inFlags,
-  Boolean *           outAcceptsItem);
+  Boolean *           outAcceptsItem)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -768,6 +932,9 @@ LSCanRefAcceptItem(
  *    inItemURL as in a drag and drop operation. If inRoleMask is other
  *    than kLSRolesAll then make sure inTargetRef claims to fulfill the
  *    requested role.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -798,7 +965,7 @@ LSCanURLAcceptURL(
   CFURLRef            inTargetURL,
   LSRolesMask         inRoleMask,
   LSAcceptanceFlags   inFlags,
-  Boolean *           outAcceptsItem);
+  Boolean *           outAcceptsItem)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -814,6 +981,9 @@ LSCanURLAcceptURL(
  *    their user-overridden or default applications as appropriate.
  *    Folders are opened in the Finder. Use the more specific
  *    LSOpenFromRefSpec for more control over launching.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -833,7 +1003,7 @@ LSCanURLAcceptURL(
 extern OSStatus 
 LSOpenFSRef(
   const FSRef *  inRef,
-  FSRef *        outLaunchedRef);      /* can be NULL */
+  FSRef *        outLaunchedRef)       /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -849,6 +1019,9 @@ LSOpenFSRef(
  *    their user-overridden or default applications as appropriate.
  *    Folders are opened in the Finder. Use the more specific
  *    LSOpenFromURLSpec for more control over launching.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -868,7 +1041,7 @@ LSOpenFSRef(
 extern OSStatus 
 LSOpenCFURLRef(
   CFURLRef    inURL,
-  CFURLRef *  outLaunchedURL);      /* can be NULL */
+  CFURLRef *  outLaunchedURL)       /* can be NULL */         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -880,6 +1053,9 @@ LSOpenCFURLRef(
  *  
  *  Discussion:
  *    Opens applications, documents, and folders.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -899,7 +1075,7 @@ LSOpenCFURLRef(
 extern OSStatus 
 LSOpenFromRefSpec(
   const LSLaunchFSRefSpec *  inLaunchSpec,
-  FSRef *                    outLaunchedRef);      /* can be NULL */
+  FSRef *                    outLaunchedRef)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -911,6 +1087,9 @@ LSOpenFromRefSpec(
  *  
  *  Discussion:
  *    Opens applications, documents, and folders.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -930,18 +1109,12 @@ LSOpenFromRefSpec(
 extern OSStatus 
 LSOpenFromURLSpec(
   const LSLaunchURLSpec *  inLaunchSpec,
-  CFURLRef *               outLaunchedURL);      /* can be NULL */
+  CFURLRef *               outLaunchedURL)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

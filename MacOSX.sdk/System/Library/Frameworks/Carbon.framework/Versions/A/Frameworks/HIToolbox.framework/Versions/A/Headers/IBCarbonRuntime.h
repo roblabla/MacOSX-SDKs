@@ -3,9 +3,9 @@
  
      Contains:   Nib support for Carbon
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,12 +16,8 @@
 #ifndef __IBCARBONRUNTIME__
 #define __IBCARBONRUNTIME__
 
-#ifndef __CARBONCORE__
-#include <CarbonCore/CarbonCore.h>
-#endif
-
-#ifndef __COREFOUNDATION__
-#include <CoreFoundation/CoreFoundation.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __MACWINDOWS__
@@ -32,7 +28,14 @@
 #include <HIToolbox/Menus.h>
 #endif
 
+#ifndef __CONTROLDEFINITIONS__
+#include <HIToolbox/ControlDefinitions.h>
+#endif
 
+
+
+
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -40,14 +43,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 enum {
@@ -62,6 +57,9 @@ typedef struct OpaqueIBNibRef*          IBNibRef;
 /*
  *  CreateNibReference()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -70,11 +68,14 @@ typedef struct OpaqueIBNibRef*          IBNibRef;
 extern OSStatus 
 CreateNibReference(
   CFStringRef   inNibName,
-  IBNibRef *    outNibRef);
+  IBNibRef *    outNibRef)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CreateNibReferenceWithCFBundle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -85,11 +86,14 @@ extern OSStatus
 CreateNibReferenceWithCFBundle(
   CFBundleRef   inBundle,
   CFStringRef   inNibName,
-  IBNibRef *    outNibRef);
+  IBNibRef *    outNibRef)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  DisposeNibReference()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -97,12 +101,15 @@ CreateNibReferenceWithCFBundle(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-DisposeNibReference(IBNibRef inNibRef);
+DisposeNibReference(IBNibRef inNibRef)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* ----- Window ------ */
 /*
  *  CreateWindowFromNib()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -113,13 +120,16 @@ extern OSStatus
 CreateWindowFromNib(
   IBNibRef      inNibRef,
   CFStringRef   inName,
-  WindowRef *   outWindow);
+  WindowRef *   outWindow)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* ----- Menu -----*/
 
 /*
  *  CreateMenuFromNib()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -130,13 +140,16 @@ extern OSStatus
 CreateMenuFromNib(
   IBNibRef      inNibRef,
   CFStringRef   inName,
-  MenuRef *     outMenuRef);
+  MenuRef *     outMenuRef)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* ----- MenuBar ------*/
 
 /*
  *  CreateMenuBarFromNib()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -147,11 +160,14 @@ extern OSStatus
 CreateMenuBarFromNib(
   IBNibRef      inNibRef,
   CFStringRef   inName,
-  Handle *      outMenuBar);
+  Handle *      outMenuBar)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetMenuBarFromNib()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -161,17 +177,9 @@ CreateMenuBarFromNib(
 extern OSStatus 
 SetMenuBarFromNib(
   IBNibRef      inNibRef,
-  CFStringRef   inName);
+  CFStringRef   inName)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

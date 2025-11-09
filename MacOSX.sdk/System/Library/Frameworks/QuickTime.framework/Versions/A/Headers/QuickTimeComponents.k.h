@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime-142~1
+     Version:    QuickTime_6
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,7 +22,7 @@
 
 		#define CLOCK_BASENAME()	Fred
 		#define CLOCK_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeComponents.k.h>
+		#include <QuickTime/QuickTimeComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define CLOCK_GLOBALS
 */
@@ -57,6 +57,10 @@
 
 	EXTERN_API( ComponentResult  ) ADD_CLOCK_BASENAME(GetRate) (CLOCK_GLOBALS() ADD_CLOCK_COMMA Fixed * rate);
 
+	EXTERN_API( ComponentResult  ) ADD_CLOCK_BASENAME(GetTimesForRateChange) (CLOCK_GLOBALS() ADD_CLOCK_COMMA Fixed  fromRate, Fixed  toRate, TimeRecord * currentTime, TimeRecord * preferredTime, TimeRecord * safeIncrementForPreferredTime);
+
+	EXTERN_API( ComponentResult  ) ADD_CLOCK_BASENAME(GetRateChangeConstraints) (CLOCK_GLOBALS() ADD_CLOCK_COMMA TimeRecord * minimumDelay, TimeRecord * maximumDelay);
+
 
 	/* MixedMode ProcInfo constants for component calls */
 	enum {
@@ -69,7 +73,9 @@
 		uppClockTimeChangedProcInfo = 0x000003F0,
 		uppClockSetTimeBaseProcInfo = 0x000003F0,
 		uppClockStartStopChangedProcInfo = 0x000017F0,
-		uppClockGetRateProcInfo = 0x000003F0
+		uppClockGetRateProcInfo = 0x000003F0,
+		uppClockGetTimesForRateChangeProcInfo = 0x0003FFF0,
+		uppClockGetRateChangeConstraintsProcInfo = 0x00000FF0
 	};
 
 #endif	/* CLOCK_BASENAME */
@@ -79,7 +85,7 @@
 
 		#define SC_BASENAME()	Fred
 		#define SC_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeComponents.k.h>
+		#include <QuickTime/QuickTimeComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define SC_GLOBALS
 */
@@ -190,7 +196,7 @@
 
 		#define TWEENER_BASENAME()	Fred
 		#define TWEENER_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeComponents.k.h>
+		#include <QuickTime/QuickTimeComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define TWEENER_GLOBALS
 */
@@ -226,7 +232,7 @@
 
 		#define TC_BASENAME()	Fred
 		#define TC_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeComponents.k.h>
+		#include <QuickTime/QuickTimeComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define TC_GLOBALS
 */
@@ -286,7 +292,7 @@
 
 		#define MOVIEIMPORT_BASENAME()	Fred
 		#define MOVIEIMPORT_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeComponents.k.h>
+		#include <QuickTime/QuickTimeComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define MOVIEIMPORT_GLOBALS
 */
@@ -359,6 +365,16 @@
 
 	EXTERN_API( ComponentResult  ) ADD_MOVIEIMPORT_BASENAME(GetDontBlock) (MOVIEIMPORT_GLOBALS() ADD_MOVIEIMPORT_COMMA Boolean * willBlock);
 
+	EXTERN_API( ComponentResult  ) ADD_MOVIEIMPORT_BASENAME(SetIdleManager) (MOVIEIMPORT_GLOBALS() ADD_MOVIEIMPORT_COMMA IdleManager  im);
+
+	EXTERN_API( ComponentResult  ) ADD_MOVIEIMPORT_BASENAME(SetNewMovieFlags) (MOVIEIMPORT_GLOBALS() ADD_MOVIEIMPORT_COMMA long  newMovieFlags);
+
+	EXTERN_API( ComponentResult  ) ADD_MOVIEIMPORT_BASENAME(GetDestinationMediaType) (MOVIEIMPORT_GLOBALS() ADD_MOVIEIMPORT_COMMA OSType * mediaType);
+
+	EXTERN_API( ComponentResult  ) ADD_MOVIEIMPORT_BASENAME(SetMediaDataRef) (MOVIEIMPORT_GLOBALS() ADD_MOVIEIMPORT_COMMA Handle  dataRef, OSType  dataRefType);
+
+	EXTERN_API( ComponentResult  ) ADD_MOVIEIMPORT_BASENAME(DoUserDialogDataRef) (MOVIEIMPORT_GLOBALS() ADD_MOVIEIMPORT_COMMA Handle  dataRef, OSType  dataRefType, Boolean * canceled);
+
 
 	/* MixedMode ProcInfo constants for component calls */
 	enum {
@@ -390,7 +406,12 @@
 		uppMovieImportGetMaxLoadedTimeProcInfo = 0x000003F0,
 		uppMovieImportEstimateCompletionTimeProcInfo = 0x000003F0,
 		uppMovieImportSetDontBlockProcInfo = 0x000001F0,
-		uppMovieImportGetDontBlockProcInfo = 0x000003F0
+		uppMovieImportGetDontBlockProcInfo = 0x000003F0,
+		uppMovieImportSetIdleManagerProcInfo = 0x000003F0,
+		uppMovieImportSetNewMovieFlagsProcInfo = 0x000003F0,
+		uppMovieImportGetDestinationMediaTypeProcInfo = 0x000003F0,
+		uppMovieImportSetMediaDataRefProcInfo = 0x00000FF0,
+		uppMovieImportDoUserDialogDataRefProcInfo = 0x00003FF0
 	};
 
 #endif	/* MOVIEIMPORT_BASENAME */
@@ -400,7 +421,7 @@
 
 		#define MOVIEEXPORT_BASENAME()	Fred
 		#define MOVIEEXPORT_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeComponents.k.h>
+		#include <QuickTime/QuickTimeComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define MOVIEEXPORT_GLOBALS
 */
@@ -478,7 +499,7 @@
 
 		#define TEXTEXPORT_BASENAME()	Fred
 		#define TEXTEXPORT_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeComponents.k.h>
+		#include <QuickTime/QuickTimeComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define TEXTEXPORT_GLOBALS
 */
@@ -510,7 +531,7 @@
 
 		#define MIDIIMPORT_BASENAME()	Fred
 		#define MIDIIMPORT_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeComponents.k.h>
+		#include <QuickTime/QuickTimeComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define MIDIIMPORT_GLOBALS
 */
@@ -536,7 +557,7 @@
 
 		#define MOVIEEXPORT_BASENAME()	Fred
 		#define MOVIEEXPORT_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeComponents.k.h>
+		#include <QuickTime/QuickTimeComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define MOVIEEXPORT_GLOBALS
 */
@@ -562,7 +583,7 @@
 
 		#define GRAPHICSIMAGEIMPORT_BASENAME()	Fred
 		#define GRAPHICSIMAGEIMPORT_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeComponents.k.h>
+		#include <QuickTime/QuickTimeComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define GRAPHICSIMAGEIMPORT_GLOBALS
 */
@@ -604,7 +625,7 @@ enum {
 
 		#define PREVIEW_BASENAME()	Fred
 		#define PREVIEW_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeComponents.k.h>
+		#include <QuickTime/QuickTimeComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define PREVIEW_GLOBALS
 */
@@ -643,7 +664,7 @@ enum {
 
 		#define DATACODEC_BASENAME()	Fred
 		#define DATACODEC_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeComponents.k.h>
+		#include <QuickTime/QuickTimeComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define DATACODEC_GLOBALS
 */
@@ -691,7 +712,7 @@ enum {
 
 		#define DATAH_BASENAME()	Fred
 		#define DATAH_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeComponents.k.h>
+		#include <QuickTime/QuickTimeComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define DATAH_GLOBALS
 */
@@ -830,6 +851,18 @@ enum {
 
 	EXTERN_API( ComponentResult  ) ADD_DATAH_BASENAME(GetInfo) (DATAH_GLOBALS() ADD_DATAH_COMMA OSType  what, void * info);
 
+	EXTERN_API( ComponentResult  ) ADD_DATAH_BASENAME(SetIdleManager) (DATAH_GLOBALS() ADD_DATAH_COMMA IdleManager  im);
+
+	EXTERN_API( ComponentResult  ) ADD_DATAH_BASENAME(DeleteFile) (DATAH_GLOBALS());
+
+	EXTERN_API( ComponentResult  ) ADD_DATAH_BASENAME(SetMovieUsageFlags) (DATAH_GLOBALS() ADD_DATAH_COMMA long  flags);
+
+	EXTERN_API( ComponentResult  ) ADD_DATAH_BASENAME(UseTemporaryDataRef) (DATAH_GLOBALS() ADD_DATAH_COMMA long  inFlags);
+
+	EXTERN_API( ComponentResult  ) ADD_DATAH_BASENAME(GetTemporaryDataRefCapabilities) (DATAH_GLOBALS() ADD_DATAH_COMMA long * outUnderstoodFlags);
+
+	EXTERN_API( ComponentResult  ) ADD_DATAH_BASENAME(RenameFile) (DATAH_GLOBALS() ADD_DATAH_COMMA Handle  newDataRef);
+
 	EXTERN_API( ComponentResult  ) ADD_DATAH_BASENAME(PlaybackHints) (DATAH_GLOBALS() ADD_DATAH_COMMA long  flags, unsigned long  minFileOffset, unsigned long  maxFileOffset, long  bytesPerSecond);
 
 	EXTERN_API( ComponentResult  ) ADD_DATAH_BASENAME(PlaybackHints64) (DATAH_GLOBALS() ADD_DATAH_COMMA long  flags, const wide * minFileOffset, const wide * maxFileOffset, long  bytesPerSecond);
@@ -845,7 +878,7 @@ enum {
 
 		#define VD_BASENAME()	Fred
 		#define VD_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeComponents.k.h>
+		#include <QuickTime/QuickTimeComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define VD_GLOBALS
 */
@@ -992,7 +1025,7 @@ enum {
 
 	EXTERN_API( VideoDigitizerError  ) ADD_VD_BASENAME(CompressOneFrameAsync) (VD_GLOBALS());
 
-	EXTERN_API( VideoDigitizerError  ) ADD_VD_BASENAME(CompressDone) (VD_GLOBALS() ADD_VD_COMMA Boolean * done, Ptr * theData, long * dataSize, UInt8 * similarity, TimeRecord * t);
+	EXTERN_API( VideoDigitizerError  ) ADD_VD_BASENAME(CompressDone) (VD_GLOBALS() ADD_VD_COMMA UInt8 * queuedFrameCount, Ptr * theData, long * dataSize, UInt8 * similarity, TimeRecord * t);
 
 	EXTERN_API( VideoDigitizerError  ) ADD_VD_BASENAME(ReleaseCompressBuffer) (VD_GLOBALS() ADD_VD_COMMA Ptr  bufferAddr);
 
@@ -1037,6 +1070,16 @@ enum {
 	EXTERN_API( VideoDigitizerError  ) ADD_VD_BASENAME(GetInputName) (VD_GLOBALS() ADD_VD_COMMA long  videoInput, Str255  name);
 
 	EXTERN_API( VideoDigitizerError  ) ADD_VD_BASENAME(SetDestinationPort) (VD_GLOBALS() ADD_VD_COMMA CGrafPtr  destPort);
+
+	EXTERN_API( VideoDigitizerError  ) ADD_VD_BASENAME(GetDeviceNameAndFlags) (VD_GLOBALS() ADD_VD_COMMA Str255  outName, UInt32 * outNameFlags);
+
+	EXTERN_API( VideoDigitizerError  ) ADD_VD_BASENAME(CaptureStateChanging) (VD_GLOBALS() ADD_VD_COMMA UInt32  inStateFlags);
+
+	EXTERN_API( VideoDigitizerError  ) ADD_VD_BASENAME(GetUniqueIDs) (VD_GLOBALS() ADD_VD_COMMA UInt64 * outDeviceID, UInt64 * outInputID);
+
+	EXTERN_API( VideoDigitizerError  ) ADD_VD_BASENAME(SelectUniqueIDs) (VD_GLOBALS() ADD_VD_COMMA const UInt64 * inDeviceID, const UInt64 * inInputID);
+
+	EXTERN_API( ComponentResult  ) ADD_VD_BASENAME(CopyPreferredAudioDevice) (VD_GLOBALS() ADD_VD_COMMA CFStringRef * outAudioDeviceUID);
 
 #endif	/* VD_BASENAME */
 
@@ -1105,6 +1148,12 @@ enum {
 	uppDataHCreateFileWithFlagsProcInfo = 0x000037F0,
 	uppDataHGetMIMETypeAsyncProcInfo = 0x00003FF0,
 	uppDataHGetInfoProcInfo = 0x00000FF0,
+	uppDataHSetIdleManagerProcInfo = 0x000003F0,
+	uppDataHDeleteFileProcInfo = 0x000000F0,
+	uppDataHSetMovieUsageFlagsProcInfo = 0x000003F0,
+	uppDataHUseTemporaryDataRefProcInfo = 0x000003F0,
+	uppDataHGetTemporaryDataRefCapabilitiesProcInfo = 0x000003F0,
+	uppDataHRenameFileProcInfo = 0x000003F0,
 	uppDataHPlaybackHintsProcInfo = 0x0000FFF0,
 	uppDataHPlaybackHints64ProcInfo = 0x0000FFF0,
 	uppDataHGetDataRateProcInfo = 0x00000FF0,
@@ -1197,15 +1246,65 @@ enum {
 	uppVDSetPreferredImageDimensionsProcInfo = 0x00000FF0,
 	uppVDGetPreferredImageDimensionsProcInfo = 0x00000FF0,
 	uppVDGetInputNameProcInfo = 0x00000FF0,
-	uppVDSetDestinationPortProcInfo = 0x000003F0
+	uppVDSetDestinationPortProcInfo = 0x000003F0,
+	uppVDGetDeviceNameAndFlagsProcInfo = 0x00000FF0,
+	uppVDCaptureStateChangingProcInfo = 0x000003F0,
+	uppVDGetUniqueIDsProcInfo = 0x00000FF0,
+	uppVDSelectUniqueIDsProcInfo = 0x00000FF0,
+	uppVDCopyPreferredAudioDeviceProcInfo = 0x000003F0
 };
+
+/*
+	Example usage:
+
+		#define VDIIDC_BASENAME()	Fred
+		#define VDIIDC_GLOBALS()	FredGlobalsHandle
+		#include <QuickTime/QuickTimeComponents.k.h>
+
+	To specify that your component implementation does not use globals, do not #define VDIIDC_GLOBALS
+*/
+#ifdef VDIIDC_BASENAME
+	#ifndef VDIIDC_GLOBALS
+		#define VDIIDC_GLOBALS() 
+		#define ADD_VDIIDC_COMMA 
+	#else
+		#define ADD_VDIIDC_COMMA ,
+	#endif
+	#define VDIIDC_GLUE(a,b) a##b
+	#define VDIIDC_STRCAT(a,b) VDIIDC_GLUE(a,b)
+	#define ADD_VDIIDC_BASENAME(name) VDIIDC_STRCAT(VDIIDC_BASENAME(),name)
+
+	EXTERN_API( VideoDigitizerError  ) ADD_VDIIDC_BASENAME(GetFeatures) (VDIIDC_GLOBALS() ADD_VDIIDC_COMMA QTAtomContainer * container);
+
+	EXTERN_API( VideoDigitizerError  ) ADD_VDIIDC_BASENAME(SetFeatures) (VDIIDC_GLOBALS() ADD_VDIIDC_COMMA QTAtomContainer  container);
+
+	EXTERN_API( VideoDigitizerError  ) ADD_VDIIDC_BASENAME(GetDefaultFeatures) (VDIIDC_GLOBALS() ADD_VDIIDC_COMMA QTAtomContainer * container);
+
+	EXTERN_API( VideoDigitizerError  ) ADD_VDIIDC_BASENAME(GetCSRData) (VDIIDC_GLOBALS() ADD_VDIIDC_COMMA Boolean  offsetFromUnitBase, UInt32  offset, UInt32 * data);
+
+	EXTERN_API( VideoDigitizerError  ) ADD_VDIIDC_BASENAME(SetCSRData) (VDIIDC_GLOBALS() ADD_VDIIDC_COMMA Boolean  offsetFromUnitBase, UInt32  offset, UInt32  data);
+
+	EXTERN_API( VideoDigitizerError  ) ADD_VDIIDC_BASENAME(GetFeaturesForSpecifier) (VDIIDC_GLOBALS() ADD_VDIIDC_COMMA OSType  specifier, QTAtomContainer * container);
+
+
+	/* MixedMode ProcInfo constants for component calls */
+	enum {
+		uppVDIIDCGetFeaturesProcInfo = 0x000003F0,
+		uppVDIIDCSetFeaturesProcInfo = 0x000003F0,
+		uppVDIIDCGetDefaultFeaturesProcInfo = 0x000003F0,
+		uppVDIIDCGetCSRDataProcInfo = 0x00003DF0,
+		uppVDIIDCSetCSRDataProcInfo = 0x00003DF0,
+		uppVDIIDCGetFeaturesForSpecifierProcInfo = 0x00000FF0
+	};
+
+#endif	/* VDIIDC_BASENAME */
 
 /*
 	Example usage:
 
 		#define XMLPARSE_BASENAME()	Fred
 		#define XMLPARSE_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeComponents.k.h>
+		#include <QuickTime/QuickTimeComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define XMLPARSE_GLOBALS
 */
@@ -1260,6 +1359,8 @@ enum {
 
 	EXTERN_API( ComponentResult  ) ADD_XMLPARSE_BASENAME(SetCommentHandler) (XMLPARSE_GLOBALS() ADD_XMLPARSE_COMMA CommentHandlerUPP  comment);
 
+	EXTERN_API( ComponentResult  ) ADD_XMLPARSE_BASENAME(SetCDataHandler) (XMLPARSE_GLOBALS() ADD_XMLPARSE_COMMA CDataHandlerUPP  cdata);
+
 
 	/* MixedMode ProcInfo constants for component calls */
 	enum {
@@ -1282,7 +1383,8 @@ enum {
 		uppXMLParseSetEndElementHandlerProcInfo = 0x000003F0,
 		uppXMLParseSetCharDataHandlerProcInfo = 0x000003F0,
 		uppXMLParseSetPreprocessInstructionHandlerProcInfo = 0x000003F0,
-		uppXMLParseSetCommentHandlerProcInfo = 0x000003F0
+		uppXMLParseSetCommentHandlerProcInfo = 0x000003F0,
+		uppXMLParseSetCDataHandlerProcInfo = 0x000003F0
 	};
 
 #endif	/* XMLPARSE_BASENAME */
@@ -1292,7 +1394,7 @@ enum {
 
 		#define SG_BASENAME()	Fred
 		#define SG_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeComponents.k.h>
+		#include <QuickTime/QuickTimeComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define SG_GLOBALS
 */
@@ -1435,6 +1537,8 @@ enum {
 
 	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(AddOutputDataRefToMedia) (SG_GLOBALS() ADD_SG_COMMA SGOutput  sgOut, Media  theMedia, SampleDescriptionHandle  desc);
 
+	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(SetSettingsSummary) (SG_GLOBALS() ADD_SG_COMMA Handle  summaryText);
+
 	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(SetChannelUsage) (SG_GLOBALS() ADD_SG_COMMA long  usage);
 
 	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(GetChannelUsage) (SG_GLOBALS() ADD_SG_COMMA long * usage);
@@ -1491,6 +1595,14 @@ enum {
 
 	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(GetChannelTimeBase) (SG_GLOBALS() ADD_SG_COMMA TimeBase * tb);
 
+	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(GetChannelRefCon) (SG_GLOBALS() ADD_SG_COMMA long * refCon);
+
+	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(GetChannelDeviceAndInputNames) (SG_GLOBALS() ADD_SG_COMMA Str255  outDeviceName, Str255  outInputName, short * outInputNumber);
+
+	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(SetChannelDeviceInput) (SG_GLOBALS() ADD_SG_COMMA short  inInputNumber);
+
+	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(SetChannelSettingsStateChanging) (SG_GLOBALS() ADD_SG_COMMA UInt32  inFlags);
+
 	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(InitChannel) (SG_GLOBALS() ADD_SG_COMMA SeqGrabComponent  owner);
 
 	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(WriteSamples) (SG_GLOBALS() ADD_SG_COMMA Movie  m, AliasHandle  theFile);
@@ -1524,6 +1636,8 @@ enum {
 	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(PanelValidateInput) (SG_GLOBALS() ADD_SG_COMMA Boolean * ok);
 
 	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(PanelSetEventFilter) (SG_GLOBALS() ADD_SG_COMMA SGModalFilterUPP  proc, long  refCon);
+
+	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(PanelGetDITLForSize) (SG_GLOBALS() ADD_SG_COMMA Handle * ditl, Point * requestedSize);
 
 	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(GetSrcVideoBounds) (SG_GLOBALS() ADD_SG_COMMA Rect * r);
 
@@ -1573,7 +1687,7 @@ enum {
 
 	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(GetUseScreenBuffer) (SG_GLOBALS() ADD_SG_COMMA Boolean * useScreenBuffer);
 
-	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(GrabCompressComplete) (SG_GLOBALS() ADD_SG_COMMA Boolean * done, SGCompressInfo * ci, TimeRecord * tr);
+	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(GrabCompressComplete) (SG_GLOBALS() ADD_SG_COMMA UInt8 * queuedFrameCount, SGCompressInfo * ci, TimeRecord * tr);
 
 	EXTERN_API( ComponentResult  ) ADD_SG_BASENAME(DisplayCompress) (SG_GLOBALS() ADD_SG_COMMA Ptr  dataPtr, ImageDescriptionHandle  desc, MatrixRecord * mp, RgnHandle  clipRgn);
 
@@ -1696,6 +1810,7 @@ enum {
 		uppSGGetNextExtendedFrameReferenceProcInfo = 0x00003FF0,
 		uppSGAddExtendedMovieDataProcInfo = 0x00EFFFF0,
 		uppSGAddOutputDataRefToMediaProcInfo = 0x00003FF0,
+		uppSGSetSettingsSummaryProcInfo = 0x000003F0,
 		uppSGSetChannelUsageProcInfo = 0x000003F0,
 		uppSGGetChannelUsageProcInfo = 0x000003F0,
 		uppSGSetChannelBoundsProcInfo = 0x000003F0,
@@ -1724,6 +1839,10 @@ enum {
 		uppSGChannelSetCodecSettingsProcInfo = 0x000003F0,
 		uppSGChannelGetCodecSettingsProcInfo = 0x000003F0,
 		uppSGGetChannelTimeBaseProcInfo = 0x000003F0,
+		uppSGGetChannelRefConProcInfo = 0x000003F0,
+		uppSGGetChannelDeviceAndInputNamesProcInfo = 0x00003FF0,
+		uppSGSetChannelDeviceInputProcInfo = 0x000002F0,
+		uppSGSetChannelSettingsStateChangingProcInfo = 0x000003F0,
 		uppSGInitChannelProcInfo = 0x000003F0,
 		uppSGWriteSamplesProcInfo = 0x00000FF0,
 		uppSGGetDataRateProcInfo = 0x000003F0,
@@ -1741,6 +1860,7 @@ enum {
 		uppSGPanelSetSettingsProcInfo = 0x00003FF0,
 		uppSGPanelValidateInputProcInfo = 0x000003F0,
 		uppSGPanelSetEventFilterProcInfo = 0x00000FF0,
+		uppSGPanelGetDITLForSizeProcInfo = 0x00000FF0,
 		uppSGGetSrcVideoBoundsProcInfo = 0x000003F0,
 		uppSGSetVideoRectProcInfo = 0x000003F0,
 		uppSGGetVideoRectProcInfo = 0x000003F0,
@@ -1802,7 +1922,7 @@ enum {
 
 		#define QTVIDEOOUTPUT_BASENAME()	Fred
 		#define QTVIDEOOUTPUT_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeComponents.k.h>
+		#include <QuickTime/QuickTimeComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define QTVIDEOOUTPUT_GLOBALS
 */
@@ -1851,6 +1971,10 @@ enum {
 
 	EXTERN_API( ComponentResult  ) ADD_QTVIDEOOUTPUT_BASENAME(GetIndImageDecompressor) (QTVIDEOOUTPUT_GLOBALS() ADD_QTVIDEOOUTPUT_COMMA long  index, Component * codec);
 
+	EXTERN_API( ComponentResult  ) ADD_QTVIDEOOUTPUT_BASENAME(BaseSetEchoPort) (QTVIDEOOUTPUT_GLOBALS() ADD_QTVIDEOOUTPUT_COMMA CGrafPtr  echoPort);
+
+	EXTERN_API( ComponentResult  ) ADD_QTVIDEOOUTPUT_BASENAME(CopyIndAudioOutputDeviceUID) (QTVIDEOOUTPUT_GLOBALS() ADD_QTVIDEOOUTPUT_COMMA long  index, CFStringRef * audioDeviceUID);
+
 
 	/* MixedMode ProcInfo constants for component calls */
 	enum {
@@ -1870,7 +1994,9 @@ enum {
 		uppQTVideoOutputGetIndSoundOutputProcInfo = 0x00000FF0,
 		uppQTVideoOutputGetClockProcInfo = 0x000003F0,
 		uppQTVideoOutputSetEchoPortProcInfo = 0x000003F0,
-		uppQTVideoOutputGetIndImageDecompressorProcInfo = 0x00000FF0
+		uppQTVideoOutputGetIndImageDecompressorProcInfo = 0x00000FF0,
+		uppQTVideoOutputBaseSetEchoPortProcInfo = 0x000003F0,
+		uppQTVideoOutputCopyIndAudioOutputDeviceUIDProcInfo = 0x00000FF0
 	};
 
 #endif	/* QTVIDEOOUTPUT_BASENAME */

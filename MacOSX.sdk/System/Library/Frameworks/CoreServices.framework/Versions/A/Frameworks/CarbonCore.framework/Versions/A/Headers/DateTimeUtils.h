@@ -3,9 +3,9 @@
  
      Contains:   International Date and Time Interfaces (previously in TextUtils)
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1994-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -24,8 +24,17 @@
 #include <CarbonCore/MacTypes.h>
 #endif
 
+#ifndef __UTCUTILS__
+#include <CarbonCore/UTCUtils.h>
+#endif
+
+#ifndef __CFDATE__
+#include <CoreFoundation/CFDate.h>
+#endif
 
 
+
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -35,13 +44,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /*
 
@@ -229,6 +232,208 @@ struct TogglePB {
 };
 typedef struct TogglePB                 TogglePB;
 /*
+    Conversion utilities between CF and Carbon time types. 
+*/
+/*
+ *  UCConvertUTCDateTimeToCFAbsoluteTime()
+ *  
+ *  Discussion:
+ *    Use UCConvertUTCDateTimeToCFAbsoluteTime to convert from a
+ *    UTCDDateTime to a CFAbsoluteTime. Remember that the epoch for
+ *    UTCDateTime is January 1, 1904 while the epoch for CFAbsoluteTime
+ *    is January 1, 2001.
+ *  
+ *  Parameters:
+ *    
+ *    iUTCDate:
+ *      A pointer to a UTCDateTime struct that represents the time you
+ *      wish to convert from.
+ *    
+ *    oCFTime:
+ *      A pointer to a CFAbsoluteTime. On successful return, this will
+ *      contain the converted time from the input time type.
+ *  
+ *  Result:
+ *    A result code indicating whether or not conversion was successful.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+UCConvertUTCDateTimeToCFAbsoluteTime(
+  const UTCDateTime *  iUTCDate,
+  CFAbsoluteTime *     oCFTime)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  UCConvertSecondsToCFAbsoluteTime()
+ *  
+ *  Discussion:
+ *    Use UCConvertSecondsToCFAbsoluteTime to convert from the normal
+ *    seconds representation of time to a CFAbsoluteTime. Remember that
+ *    the epoch for seconds is January 1, 1904 while the epoch for
+ *    CFAbsoluteTime is January 1, 2001.
+ *  
+ *  Parameters:
+ *    
+ *    iSeconds:
+ *      A UInt32 value that represents the time you wish to convert
+ *      from.
+ *    
+ *    oCFTime:
+ *      A pointer to a CFAbsoluteTime. On successful return, this will
+ *      contain the converted time from the input time type.
+ *  
+ *  Result:
+ *    A result code indicating whether or not conversion was successful.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+UCConvertSecondsToCFAbsoluteTime(
+  UInt32            iSeconds,
+  CFAbsoluteTime *  oCFTime)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  UCConvertLongDateTimeToCFAbsoluteTime()
+ *  
+ *  Discussion:
+ *    Use UCConvertLongDateTimeToCFAbsoluteTime to convert from a
+ *    LongDateTime to a CFAbsoluteTime. Remember that the epoch for
+ *    LongDateTime is January 1, 1904 while the epoch for
+ *    CFAbsoluteTime is January 1, 2001.
+ *  
+ *  Parameters:
+ *    
+ *    iLongTime:
+ *      A LongDateTime value that represents the time you wish to
+ *      convert from.
+ *    
+ *    oCFTime:
+ *      A pointer to a CFAbsoluteTime. On successful return, this will
+ *      contain the converted time from the input time type.
+ *  
+ *  Result:
+ *    A result code indicating whether or not conversion was successful.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+UCConvertLongDateTimeToCFAbsoluteTime(
+  LongDateTime      iLongTime,
+  CFAbsoluteTime *  oCFTime)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  UCConvertCFAbsoluteTimeToUTCDateTime()
+ *  
+ *  Discussion:
+ *    Use UCConvertCFAbsoluteTimeToUTCDateTime to convert from a
+ *    CFAbsoluteTime to a UTCDateTime. Remember that the epoch for
+ *    UTCDateTime is January 1, 1904 while the epoch for CFAbsoluteTime
+ *    is January 1, 2001.
+ *  
+ *  Parameters:
+ *    
+ *    iCFTime:
+ *      A CFAbsoluteTime value that represents the time you wish to
+ *      convert from.
+ *    
+ *    oUTCDate:
+ *      A pointer to a UTCDateTime. On successful return, this will
+ *      contain the converted time from the CFAbsoluteTime input.
+ *  
+ *  Result:
+ *    A result code indicating whether or not conversion was successful.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+UCConvertCFAbsoluteTimeToUTCDateTime(
+  CFAbsoluteTime   iCFTime,
+  UTCDateTime *    oUTCDate)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  UCConvertCFAbsoluteTimeToSeconds()
+ *  
+ *  Discussion:
+ *    Use UCConvertCFAbsoluteTimeToSeconds to convert from a
+ *    CFAbsoluteTime to a UInt32 representation of seconds. Remember
+ *    that the epoch for seconds is January 1, 1904 while the epoch for
+ *    CFAbsoluteTime is January 1, 2001.
+ *  
+ *  Parameters:
+ *    
+ *    iCFTime:
+ *      A CFAbsoluteTime value that represents the time you wish to
+ *      convert from.
+ *    
+ *    oSeconds:
+ *      A pointer to a UInt32. On successful return, this will contain
+ *      the converted time from the CFAbsoluteTime input.
+ *  
+ *  Result:
+ *    A result code indicating whether or not conversion was successful.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+UCConvertCFAbsoluteTimeToSeconds(
+  CFAbsoluteTime   iCFTime,
+  UInt32 *         oSeconds)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  UCConvertCFAbsoluteTimeToLongDateTime()
+ *  
+ *  Discussion:
+ *    Use UCConvertCFAbsoluteTimeToLongDateTime to convert from a
+ *    CFAbsoluteTime to a LongDateTime. Remember that the epoch for
+ *    LongDateTime is January 1, 1904 while the epoch for
+ *    CFAbsoluteTime is January 1, 2001.
+ *  
+ *  Parameters:
+ *    
+ *    iCFTime:
+ *      A CFAbsoluteTime value that represents the time you wish to
+ *      convert from.
+ *    
+ *    oLongDate:
+ *      A pointer to a LongDateTime. On successful return, this will
+ *      contain the converted time from the CFAbsoluteTime input.
+ *  
+ *  Result:
+ *    A result code indicating whether or not conversion was successful.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+UCConvertCFAbsoluteTimeToLongDateTime(
+  CFAbsoluteTime   iCFTime,
+  LongDateTime *   oLongDate)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+
+/*
     These routine are available in Carbon with their new name
 */
 /*
@@ -244,7 +449,7 @@ DateString(
   long       dateTime,
   DateForm   longFlag,
   Str255     result,
-  Handle     intlHandle);
+  Handle     intlHandle)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -260,7 +465,7 @@ TimeString(
   long      dateTime,
   Boolean   wantSeconds,
   Str255    result,
-  Handle    intlHandle);
+  Handle    intlHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -276,7 +481,7 @@ LongDateString(
   const LongDateTime *  dateTime,
   DateForm              longFlag,
   Str255                result,
-  Handle                intlHandle);
+  Handle                intlHandle)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -292,7 +497,7 @@ LongTimeString(
   const LongDateTime *  dateTime,
   Boolean               wantSeconds,
   Str255                result,
-  Handle                intlHandle);
+  Handle                intlHandle)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -308,7 +513,7 @@ LongTimeString(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-InitDateCache(DateCachePtr theCache);
+InitDateCache(DateCachePtr theCache)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -325,7 +530,7 @@ StringToDate(
   long           textLen,
   DateCachePtr   theCache,
   long *         lengthUsed,
-  LongDateRec *  dateTime);
+  LongDateRec *  dateTime)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -342,7 +547,7 @@ StringToTime(
   long           textLen,
   DateCachePtr   theCache,
   long *         lengthUsed,
-  LongDateRec *  dateTime);
+  LongDateRec *  dateTime)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -356,7 +561,7 @@ StringToTime(
 extern void 
 LongDateToSeconds(
   const LongDateRec *  lDate,
-  LongDateTime *       lSecs);
+  LongDateTime *       lSecs)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -370,7 +575,7 @@ LongDateToSeconds(
 extern void 
 LongSecondsToDate(
   const LongDateTime *  lSecs,
-  LongDateRec *         lDate);
+  LongDateRec *         lDate)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -387,7 +592,7 @@ ToggleDate(
   LongDateField     field,
   DateDelta         delta,
   short             ch,
-  const TogglePB *  params);
+  const TogglePB *  params)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -402,7 +607,7 @@ extern short
 ValidDate(
   const LongDateRec *  vDate,
   long                 flags,
-  LongDateTime *       newSecs);
+  LongDateTime *       newSecs)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -414,7 +619,7 @@ ValidDate(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-ReadDateTime(unsigned long * time);
+ReadDateTime(unsigned long * time)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -426,7 +631,7 @@ ReadDateTime(unsigned long * time);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GetDateTime(unsigned long * secs);
+GetDateTime(unsigned long * secs)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -438,7 +643,7 @@ GetDateTime(unsigned long * secs);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-SetDateTime(unsigned long time);
+SetDateTime(unsigned long time)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -450,7 +655,7 @@ SetDateTime(unsigned long time);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetTime(const DateTimeRec * d);
+SetTime(const DateTimeRec * d)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -462,7 +667,7 @@ SetTime(const DateTimeRec * d);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GetTime(DateTimeRec * d);
+GetTime(DateTimeRec * d)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -476,7 +681,7 @@ GetTime(DateTimeRec * d);
 extern void 
 DateToSeconds(
   const DateTimeRec *  d,
-  unsigned long *      secs);
+  unsigned long *      secs)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -490,7 +695,7 @@ DateToSeconds(
 extern void 
 SecondsToDate(
   unsigned long   secs,
-  DateTimeRec *   d);
+  DateTimeRec *   d)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -644,13 +849,7 @@ SecondsToDate(
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

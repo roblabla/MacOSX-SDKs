@@ -3,9 +3,9 @@
  
      Contains:   AppleEvents object packing Interfaces.
  
-     Version:    AppleEvents-116~3
+     Version:    AppleEvents-242~1
  
-     Copyright:  © 1991-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1991-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,6 +22,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -29,14 +30,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 /* These are the object packing routines.  */
@@ -51,7 +44,7 @@ extern "C" {
 extern OSErr 
 CreateOffsetDescriptor(
   long      theOffset,
-  AEDesc *  theDescriptor);
+  AEDesc *  theDescriptor)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -68,7 +61,7 @@ CreateCompDescriptor(
   AEDesc *   operand1,
   AEDesc *   operand2,
   Boolean    disposeInputs,
-  AEDesc *   theDescriptor);
+  AEDesc *   theDescriptor)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -84,7 +77,7 @@ CreateLogicalDescriptor(
   AEDescList *  theLogicalTerms,
   DescType      theLogicOperator,
   Boolean       disposeInputs,
-  AEDesc *      theDescriptor);
+  AEDesc *      theDescriptor)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -103,7 +96,7 @@ CreateObjSpecifier(
   DescType   keyForm,
   AEDesc *   keyData,
   Boolean    disposeInputs,
-  AEDesc *   objSpecifier);
+  AEDesc *   objSpecifier)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -119,17 +112,9 @@ CreateRangeDescriptor(
   AEDesc *  rangeStart,
   AEDesc *  rangeStop,
   Boolean   disposeInputs,
-  AEDesc *  theDescriptor);
+  AEDesc *  theDescriptor)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

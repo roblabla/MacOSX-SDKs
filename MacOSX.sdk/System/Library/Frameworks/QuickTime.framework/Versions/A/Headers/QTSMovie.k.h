@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime-142~1
+     Version:    QuickTime_6
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,7 +22,7 @@
 
 		#define QTSMEDIA_BASENAME()	Fred
 		#define QTSMEDIA_GLOBALS()	FredGlobalsHandle
-		#include <QTSMovie.k.h>
+		#include <QuickTime/QTSMovie.k.h>
 
 	To specify that your component implementation does not use globals, do not #define QTSMEDIA_GLOBALS
 */

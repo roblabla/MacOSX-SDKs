@@ -30,6 +30,8 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* memory_object_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 
 #ifdef __BeforeMigServerHeader
@@ -38,6 +40,8 @@ __BeforeMigServerHeader
 
 /* typedefs for all requests */
 
+#ifndef __Request__memory_object_subsystem__defined
+#define __Request__memory_object_subsystem__defined
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -96,9 +100,12 @@ __BeforeMigServerHeader
 		mach_msg_header_t Head;
 	} __Request__memory_object_unmap_t;
 
+#endif /* !__Request__memory_object_subsystem__defined */
 
 /* union of all requests */
 
+#ifndef __RequestUnion__memory_object_subsystem__defined
+#define __RequestUnion__memory_object_subsystem__defined
 union __RequestUnion__memory_object_subsystem {
 	__Request__memory_object_init_t Request_memory_object_init;
 	__Request__memory_object_terminate_t Request_memory_object_terminate;
@@ -109,8 +116,11 @@ union __RequestUnion__memory_object_subsystem {
 	__Request__memory_object_synchronize_t Request_memory_object_synchronize;
 	__Request__memory_object_unmap_t Request_memory_object_unmap;
 };
+#endif /* __RequestUnion__memory_object_subsystem__defined */
 /* typedefs for all replies */
 
+#ifndef __Reply__memory_object_subsystem__defined
+#define __Reply__memory_object_subsystem__defined
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -159,9 +169,12 @@ union __RequestUnion__memory_object_subsystem {
 		kern_return_t RetCode;
 	} __Reply__memory_object_unmap_t;
 
+#endif /* !__Reply__memory_object_subsystem__defined */
 
 /* union of all replies */
 
+#ifndef __ReplyUnion__memory_object_subsystem__defined
+#define __ReplyUnion__memory_object_subsystem__defined
 union __ReplyUnion__memory_object_subsystem {
 	__Reply__memory_object_init_t Reply_memory_object_init;
 	__Reply__memory_object_terminate_t Reply_memory_object_terminate;
@@ -172,6 +185,7 @@ union __ReplyUnion__memory_object_subsystem {
 	__Reply__memory_object_synchronize_t Reply_memory_object_synchronize;
 	__Reply__memory_object_unmap_t Reply_memory_object_unmap;
 };
+#endif /* __RequestUnion__memory_object_subsystem__defined */
 
 /* Routine memory_object_init */
 #ifdef	mig_external
@@ -288,11 +302,11 @@ extern mig_routine_t memory_object_server_routine(
 
 /* Description of this subsystem, for use in direct RPC */
 extern const struct memory_object_subsystem {
-	struct subsystem *	subsystem;	/* Reserved for system use */
+	mig_server_routine_t	server;	/* Server routine */
 	mach_msg_id_t	start;	/* Min routine number */
 	mach_msg_id_t	end;	/* Max routine number + 1 */
 	unsigned int	maxsize;	/* Max msg size */
-	vm_address_t	base_addr;	/* Base ddress */
+	vm_address_t	reserved;	/* Reserved */
 	struct routine_descriptor	/*Array of routine descriptors */
 		routine[8];
 } memory_object_subsystem;

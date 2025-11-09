@@ -3,9 +3,9 @@
  
      Contains:   Master include for QD private framework
  
-     Version:    Quickdraw-64.6.15~3
+     Version:    Quickdraw-96.21~1
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,9 +16,10 @@
 #ifndef __QD__
 #define __QD__
 
-#ifndef __CARBONCORE__
-#include <CarbonCore/CarbonCore.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
+
 
 #ifndef __COREGRAPHICS__
 #include <CoreGraphics/CoreGraphics.h>
@@ -43,6 +44,10 @@
 
 #ifndef __QDOFFSCREEN__
 #include <QD/QDOffscreen.h>
+#endif
+
+#ifndef __QDPICTTOCGCONTEXT__
+#include <QD/QDPictToCGContext.h>
 #endif
 
 #ifndef __QUICKDRAWTEXT__
@@ -75,6 +80,14 @@
 
 #ifndef __FONTSYNC__
 #include <QD/FontSync.h>
+#endif
+
+#ifndef __ATSUNICODEFLATTENING__
+#include <QD/ATSUnicodeFlattening.h>
+#endif
+
+#ifndef __ATSUNICODEDIRECTACCESS__
+#include <QD/ATSUnicodeDirectAccess.h>
 #endif
 
 

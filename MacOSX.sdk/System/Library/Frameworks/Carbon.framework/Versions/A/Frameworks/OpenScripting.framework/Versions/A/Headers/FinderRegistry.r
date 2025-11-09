@@ -3,9 +3,9 @@
  
      Contains:   Data types for Finder AppleEvents
  
-     Version:    OSA-30~10
+     Version:    OSA-48~15
  
-     Copyright:  © 1991-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1991-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,8 +17,8 @@
 #ifndef __FINDERREGISTRY_R__
 #define __FINDERREGISTRY_R__
 
-#ifndef __CONDITIONALMACROS_R__
-#include <CarbonCore/ConditionalMacros.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
 
 #define kAEFinderSuite 					'fndr'

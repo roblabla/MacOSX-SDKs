@@ -1,4 +1,7 @@
-// Copyright (C) 1997, 1998, 1999, 2000, 2001 Free Software Foundation, Inc.
+// istream classes -*- C++ -*-
+
+// Copyright (C) 1997, 1998, 1999, 2000, 2001, 2002
+// Free Software Foundation, Inc.
 //
 // This file is part of the GNU ISO C++ Library.  This library is free
 // software; you can redistribute it and/or modify it under the
@@ -29,6 +32,8 @@
 // ISO C++ 14882: 27.6.2  Output streams
 //
 
+#pragma GCC system_header
+
 #include <locale>
 #include <ostream> // For flush()
 
@@ -45,12 +50,13 @@ namespace std
 	  if (!__noskipws && (__in.flags() & ios_base::skipws))
 	    {	  
 	      const __int_type __eof = traits_type::eof();
-	      const __ctype_type* __ctype = __in._M_get_fctype_ios();
 	      __streambuf_type* __sb = __in.rdbuf();
 	      __int_type __c = __sb->sgetc();
-	      
-	      while (__c != __eof && __ctype->is(ctype_base::space, __c))
-		__c = __sb->snextc();
+
+	      if (__in._M_check_facet(__in._M_fctype))
+		while (__c != __eof
+		       && __in._M_fctype->is(ctype_base::space, __c))
+		  __c = __sb->snextc();
 
 #ifdef _GLIBCPP_RESOLVE_LIB_DEFECTS
 //195.  Should basic_istream::sentry's constructor ever set eofbit? 
@@ -573,28 +579,22 @@ namespace std
     {
       _M_gcount = 0;
       sentry __cerb(*this, true);
-      if (__cerb && __n > 1) 
+      if (__cerb) 
 	{
 	  try 
 	    {
 	      const int_type __idelim = traits_type::to_int_type(__delim);
 	      const int_type __eof = traits_type::eof();
 	      __streambuf_type* __sb = this->rdbuf();
-	      int_type __c = __sb->sbumpc();	
-	      bool __testdelim = __c == __idelim;
-	      bool __testeof =  __c == __eof;
+	      int_type __c = __sb->sgetc();	
 	      
-	      while (_M_gcount < __n - 1 && !__testeof && !__testdelim)
+	      while (_M_gcount + 1 < __n && __c != __eof && __c != __idelim)
 		{
 		  *__s++ = traits_type::to_char_type(__c);
+		  __c = __sb->snextc();
 		  ++_M_gcount;
-		  __c = __sb->sbumpc();
-		  __testeof = __c == __eof;
-		  __testdelim = __c == __idelim;
 		}
-	      if (__testdelim || _M_gcount == __n - 1)
-		__sb->sputbackc(__c);
-	      if (__testeof)
+	      if (__c == __eof)
 		this->setstate(ios_base::eofbit);
 	    }
 	  catch(exception& __fail)
@@ -621,35 +621,29 @@ namespace std
       sentry __cerb(*this, true);
       if (__cerb) 
 	{
-	  int_type __c;
-	  __streambuf_type* __this_sb = this->rdbuf();
 	  try 
 	    {
 	      const int_type __idelim = traits_type::to_int_type(__delim);
 	      const int_type __eof = traits_type::eof();	      
-	      __c = __this_sb->sbumpc();
-	      bool __testdelim = __c == __idelim;
-	      bool __testeof =  __c == __eof;
-	      bool __testput = true;
+	      __streambuf_type* __this_sb = this->rdbuf();
+	      int_type __c = __this_sb->sgetc();
 	      
-	      while (!__testeof && !__testdelim 
-		    && (__testput = __sb.sputc(traits_type::to_char_type(__c)) 
-			 != __eof))
+	      while (__c != __eof && __c != __idelim 
+		     && (__sb.sputc(traits_type::to_char_type(__c)) != __eof))
 		{
 		  ++_M_gcount;
-		  __c = __this_sb->sbumpc();
-		  __testeof = __c == __eof;
-		  __testdelim = __c == __idelim;
+		  __c = __this_sb->snextc();
 		}
-	      if (__testdelim || !__testput)
-		__this_sb->sputbackc(traits_type::to_char_type(__c));
-	      if (__testeof)
+	      if (__c == __eof)
 		this->setstate(ios_base::eofbit);
 	    }
 	  catch(exception& __fail)
 	    {
-	      // Exception may result from sputc->overflow.
-	      __this_sb->sputbackc(traits_type::to_char_type(__c));
+	      // 27.6.1.3 paragraph 1
+	      // Turn this on without causing an ios::failure to be thrown.
+	      this->setstate(ios_base::badbit);
+	      if ((this->exceptions() & ios_base::badbit) != 0)
+		__throw_exception_again;
 	    }
 	}
       if (!_M_gcount)
@@ -668,33 +662,28 @@ namespace std
 	{
           try 
 	    {
-	      __streambuf_type* __sb = this->rdbuf();
-	      int_type __c = __sb->sbumpc();
-	      ++_M_gcount;
 	      const int_type __idelim = traits_type::to_int_type(__delim);
 	      const int_type __eof = traits_type::eof();
-	      bool __testdelim = __c == __idelim;
-	      bool __testeof =  __c == __eof;
+	      __streambuf_type* __sb = this->rdbuf();
+	      int_type __c = __sb->sgetc();
 	    
-	      while (_M_gcount < __n && !__testeof && !__testdelim)
+	      while (_M_gcount + 1 < __n && __c != __eof && __c != __idelim)
 		{
 		  *__s++ = traits_type::to_char_type(__c);
-		  __c = __sb->sbumpc();
+		  __c = __sb->snextc();
 		  ++_M_gcount;
-		  __testeof = __c == __eof;
-		  __testdelim = __c == __idelim;
 		}
-	      
-	      if (__testeof)
+	      if (__c == __eof)
+		this->setstate(ios_base::eofbit);
+	      else
 		{
-		  --_M_gcount;
-		  this->setstate(ios_base::eofbit);
-		}
-	      else if (!__testdelim)
-		{
-		  --_M_gcount;
-		  __sb->sputbackc(traits_type::to_char_type(__c));
-		  this->setstate(ios_base::failbit);
+		  if (__c == __idelim)
+		    {
+		      __sb->snextc();
+		      ++_M_gcount;
+		    }
+		  else
+		    this->setstate(ios_base::failbit);
 		}
 	    }
 	  catch(exception& __fail)
@@ -788,39 +777,28 @@ namespace std
       sentry __cerb(*this, true);
       if (__cerb) 
 	{
-	  if (__n > 0)
+	  try 
 	    {
-	      try 
+	      const int_type __eof = traits_type::eof();
+	      __streambuf_type* __sb = this->rdbuf();
+	      int_type __c = __sb->sgetc();	
+	      
+	      while (_M_gcount < __n && __c != __eof)
 		{
-		  const int_type __eof = traits_type::eof();
-		  __streambuf_type* __sb = this->rdbuf();
-		  int_type __c = __sb->sbumpc();	
-		  bool __testeof =  __c == __eof;
-		  
-		  while (_M_gcount < __n - 1 && !__testeof)
-		    {
-		      *__s++ = traits_type::to_char_type(__c);
-		      ++_M_gcount;
-		      __c = __sb->sbumpc();
-		      __testeof = __c == __eof;
-		    }
-		  if (__testeof)
-		    this->setstate(ios_base::eofbit | ios_base::failbit);
-		  else
-		    {
-		      // _M_gcount == __n - 1
-		      *__s++ = traits_type::to_char_type(__c);
-		      ++_M_gcount;
-		    }	    
+		  *__s++ = traits_type::to_char_type(__c);
+		  ++_M_gcount;
+		  __c = __sb->snextc();
 		}
-	      catch(exception& __fail)
-		{
-		  // 27.6.1.3 paragraph 1
-		  // Turn this on without causing an ios::failure to be thrown.
-		  this->setstate(ios_base::badbit);
-		  if ((this->exceptions() & ios_base::badbit) != 0)
-		    __throw_exception_again;
-		}
+	      if (__c == __eof)
+		this->setstate(ios_base::eofbit | ios_base::failbit);
+	    }	    
+	  catch(exception& __fail)
+	    {
+	      // 27.6.1.3 paragraph 1
+	      // Turn this on without causing an ios::failure to be thrown.
+	      this->setstate(ios_base::badbit);
+	      if ((this->exceptions() & ios_base::badbit) != 0)
+		__throw_exception_again;
 	    }
 	}
       else
@@ -833,32 +811,30 @@ namespace std
     basic_istream<_CharT, _Traits>::
     readsome(char_type* __s, streamsize __n)
     {
-      const int_type __eof = traits_type::eof();
       _M_gcount = 0;
       sentry __cerb(*this, true);
       if (__cerb) 
 	{
-	  if (__n > 0)
+	  try 
 	    {
-	      try 
+	      const int_type __eof = traits_type::eof(); 
+	      streamsize __num = this->rdbuf()->in_avail();
+	      if (__num != static_cast<streamsize>(__eof))
 		{
-		  streamsize __num = this->rdbuf()->in_avail();
-		  if (__num != static_cast<streamsize>(__eof))
-		    {
-		      __num = min(__num, __n);
-		      _M_gcount = this->rdbuf()->sgetn(__s, __num);
-		    }
-		  else
-		    this->setstate(ios_base::eofbit);		    
+		  __num = min(__num, __n);
+		  if (__num)
+		    _M_gcount = this->rdbuf()->sgetn(__s, __num);
 		}
-	      catch(exception& __fail)
-		{
-		  // 27.6.1.3 paragraph 1
-		  // Turn this on without causing an ios::failure to be thrown.
-		  this->setstate(ios_base::badbit);
-		  if ((this->exceptions() & ios_base::badbit) != 0)
-		    __throw_exception_again;
-		}
+	      else
+		this->setstate(ios_base::eofbit);		    
+	    }
+	  catch(exception& __fail)
+	    {
+	      // 27.6.1.3 paragraph 1
+	      // Turn this on without causing an ios::failure to be thrown.
+	      this->setstate(ios_base::badbit);
+	      if ((this->exceptions() & ios_base::badbit) != 0)
+		__throw_exception_again;
 	    }
 	}
       else
@@ -1093,25 +1069,19 @@ namespace std
 	      if (__num == 0)
 		__num = numeric_limits<streamsize>::max();
 	      
-	      __streambuf_type* __sb = __in.rdbuf();
-	      const __ctype_type* __ctype = __in._M_get_fctype_ios();
-	      int_type __c = __sb->sbumpc();
+	      const __ctype_type& __ctype = use_facet<__ctype_type>(__in.getloc());
 	      const int_type __eof = _Traits::eof();
-	      bool __testsp = __ctype->is(ctype_base::space, __c);
-	      bool __testeof =  __c == __eof;
+	      __streambuf_type* __sb = __in.rdbuf();
+	      int_type __c = __sb->sgetc();
 	      
-	      while (__extracted < __num - 1 && !__testeof && !__testsp)
+	      while (__extracted < __num - 1 
+		     && __c != __eof && !__ctype.is(ctype_base::space, __c))
 		{
 		  *__s++ = __c;
 		  ++__extracted;
-		  __c = __sb->sbumpc();
-		  __testeof = __c == __eof;
-		  __testsp = __ctype->is(ctype_base::space, __c);
+		  __c = __sb->snextc();
 		}
-	      
-	      if (!__testeof)
-		__sb->sputbackc(__c);
-	      else
+	      if (__c == __eof)
 		__in.setstate(ios_base::eofbit);
 
 #ifdef _GLIBCPP_RESOLVE_LIB_DEFECTS
@@ -1143,26 +1113,15 @@ namespace std
       typedef typename __istream_type::__streambuf_type __streambuf_type;
       typedef typename __istream_type::__ctype_type 	__ctype_type;
       typedef typename __istream_type::int_type 	__int_type;
-      typedef typename __istream_type::char_type 	__char_type;
 
-      __streambuf_type* __sb = __in.rdbuf();
-      const __ctype_type* __ctype = __in._M_get_fctype_ios();
+      const __ctype_type& __ctype = use_facet<__ctype_type>(__in.getloc());
       const __int_type __eof = _Traits::eof();	      
-      __int_type __c;
-      bool __testeof;
-      bool __testsp;
+      __streambuf_type* __sb = __in.rdbuf();
+      __int_type __c = __sb->sgetc();
 
-      do 
-	{
-	  __c = __sb->sbumpc();
-	  __testeof = __c == __eof;
-	  __testsp = __ctype->is(ctype_base::space, __c);
-	}
-      while (!__testeof && __testsp);
-
-      if (!__testeof && !__testsp)
-	__sb->sputbackc(__c);
-      else
+      while (__c != __eof && __ctype.is(ctype_base::space, __c))
+	__c = __sb->snextc();
+      if (__c == __eof)
 	__in.setstate(ios_base::eofbit);
 
       return __in;
@@ -1190,24 +1149,19 @@ namespace std
 	  __size_type __n;
 	  __n = __w > 0 ? static_cast<__size_type>(__w) : __str.max_size();
 
-	  __streambuf_type* __sb = __in.rdbuf();
-	  const __ctype_type* __ctype = __in._M_get_fctype_ios();
-	  __int_type __c = __sb->sbumpc();
+	  const __ctype_type& __ctype = use_facet<__ctype_type>(__in.getloc());
 	  const __int_type __eof = _Traits::eof();
-	  bool __testsp = __ctype->is(ctype_base::space, __c);
-	  bool __testeof =  __c == __eof;
-
-	  while (__extracted < __n && !__testeof && !__testsp)
+	  __streambuf_type* __sb = __in.rdbuf();
+	  __int_type __c = __sb->sgetc();
+	  
+	  while (__extracted < __n 
+		 && __c != __eof && !__ctype.is(ctype_base::space, __c))
 	    {
 	      __str += _Traits::to_char_type(__c);
 	      ++__extracted;
-	      __c = __sb->sbumpc();
-	      __testeof = __c == __eof;
-	      __testsp = __ctype->is(ctype_base::space, __c);
+	      __c = __sb->snextc();
 	    }
-	  if (!__testeof)
-	    __sb->sputbackc(__c);
-	  else
+	  if (__c == __eof)
 	    __in.setstate(ios_base::eofbit);
 	  __in.width(0);
 	}
@@ -1244,17 +1198,15 @@ namespace std
 	  __int_type __c = __sb->sbumpc();
 	  const __int_type __eof = _Traits::eof();
 	  __testdelim = __c ==  __idelim;
-	  bool __testeof =  __c == __eof;
 
-	  while (__extracted <= __n && !__testeof && !__testdelim)
+	  while (__extracted <= __n && __c != __eof && !__testdelim)
 	    {
 	      __str += _Traits::to_char_type(__c);
 	      ++__extracted;
 	      __c = __sb->sbumpc();
-	      __testeof = __c == __eof;
 	      __testdelim = __c == __idelim;
 	    }
-	  if (__testeof)
+	  if (__c == __eof)
 	    __in.setstate(ios_base::eofbit);
 	}
       if (!__extracted && !__testdelim)
@@ -1267,8 +1219,21 @@ namespace std
     getline(basic_istream<_CharT, _Traits>& __in, 
 	    basic_string<_CharT,_Traits,_Alloc>& __str)
     { return getline(__in, __str, __in.widen('\n')); }
-} // namespace std
 
-// Local Variables:
-// mode:C++
-// End:
+  // Inhibit implicit instantiations for required instantiations,
+  // which are defined via explicit instantiations elsewhere.  
+  // NB:  This syntax is a GNU extension.
+  extern template class basic_istream<char>;
+  extern template istream& ws(istream&);
+  extern template istream& operator>>(istream&, char&);
+  extern template istream& operator>>(istream&, char*);
+  extern template istream& operator>>(istream&, unsigned char&);
+  extern template istream& operator>>(istream&, signed char&);
+  extern template istream& operator>>(istream&, unsigned char*);
+  extern template istream& operator>>(istream&, signed char*);
+
+  extern template class basic_istream<wchar_t>;
+  extern template wistream& ws(wistream&);
+  extern template wistream& operator>>(wistream&, wchar_t&);
+  extern template wistream& operator>>(wistream&, wchar_t*);
+} // namespace std

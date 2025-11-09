@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime-142~1
+     Version:    QuickTime_6
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,7 +22,7 @@
 
 		#define QTMIDI_BASENAME()	Fred
 		#define QTMIDI_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeMusic.k.h>
+		#include <QuickTime/QuickTimeMusic.k.h>
 
 	To specify that your component implementation does not use globals, do not #define QTMIDI_GLOBALS
 */
@@ -58,7 +58,7 @@
 
 		#define MUSIC_BASENAME()	Fred
 		#define MUSIC_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeMusic.k.h>
+		#include <QuickTime/QuickTimeMusic.k.h>
 
 	To specify that your component implementation does not use globals, do not #define MUSIC_GLOBALS
 */
@@ -247,7 +247,7 @@
 
 		#define NA_BASENAME()	Fred
 		#define NA_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeMusic.k.h>
+		#include <QuickTime/QuickTimeMusic.k.h>
 
 	To specify that your component implementation does not use globals, do not #define NA_GLOBALS
 */
@@ -373,7 +373,7 @@
 
 		#define TUNE_BASENAME()	Fred
 		#define TUNE_GLOBALS()	FredGlobalsHandle
-		#include <QuickTimeMusic.k.h>
+		#include <QuickTime/QuickTimeMusic.k.h>
 
 	To specify that your component implementation does not use globals, do not #define TUNE_GLOBALS
 */

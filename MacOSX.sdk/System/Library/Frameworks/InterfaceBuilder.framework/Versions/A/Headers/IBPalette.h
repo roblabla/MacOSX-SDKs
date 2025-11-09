@@ -53,4 +53,7 @@ IB_EXTERN NSString * const IBScriptControllerPboardType;
 /* Allows a palette to prevent the installation of another palette.
  * Default implementation returns YES. */
 - (BOOL)shouldInstallPaletteWithPath:(NSString *)path;
+
+// Returns the string to display in an help tag for a given object
+- (NSString*)toolTipForObject:(id)object;
 @end

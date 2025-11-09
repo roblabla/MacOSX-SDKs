@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime-142~1
+     Version:    QuickTime_6
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,8 +17,8 @@
 #ifndef __QUICKTIMECOMPONENTS_R__
 #define __QUICKTIMECOMPONENTS_R__
 
-#ifndef __CONDITIONALMACROS_R__
-#include <CarbonCore/ConditionalMacros.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
 
 #define canMovieImportHandles 			0x01
@@ -40,6 +40,7 @@
 #define canMovieImportAvoidBlocking 	0x8000
 #define canMovieExportFromProcedures 	0x8000
 #define canMovieExportValidateMovie 	0x00010000
+#define movieImportMustGetDestinationMediaType  0x00010000
 #define movieExportNeedsResourceFork 	0x00020000
 #define canMovieImportDataReferences 	0x00040000
 #define movieExportMustGetSourceMediaType  0x00080000
@@ -51,6 +52,8 @@
 #define kQTMediaConfigResourceVersion 	2
 #define kQTMediaGroupResourceType 		'mgrp'
 #define kQTMediaGroupResourceVersion 	1
+#define kQTBrowserInfoResourceType 		'brws'
+#define kQTBrowserInfoResourceVersion 	1
 
 #define kQTMediaMIMEInfoHasChanged 		0x00000002			/*  the MIME type(s) is(are) new or has changed since the last time */
 															/*   someone asked about it */
@@ -62,11 +65,14 @@
 #define kQTMediaConfigBinaryFile 		0x00800000			/*  file should be transfered in binary mode */
 #define kQTMediaConfigTextFile 			0					/*  not a bit, defined for clarity */
 #define kQTMediaConfigMacintoshFile 	0x01000000			/*  file's resource fork is significant */
-#define kQTMediaConfigAssociateByDefault  0x08000000		/*  take this file association by default */
+#define kQTMediaConfigCanDoFileAssociation  0x04000000		/*  can configure this file association  */
+#define kQTMediaConfigAssociateByDefault  0x08000000		/*  Deprecated, use kQTMediaConfigTakeFileAssociationByDefault instead */
+#define kQTMediaConfigTakeFileAssociationByDefault  0x08000000 /*  take this file association by default */
 #define kQTMediaConfigUseAppByDefault 	0x10000000			/*  use the app by default for this MIME type */
 #define kQTMediaConfigUsePluginByDefault  0x20000000		/*  use the plug-in by default for this MIME type */
 #define kQTMediaConfigDefaultsMask 		0x30000000
-#define kQTMediaConfigDefaultsShift 	12					/*  ((flags & kQTMediaConfigDefaultsMask) >> kQTMediaConfigDefaultsShift) to get default setting */
+#define kQTMediaConfigDefaultsShift 	12					/*  ((flags & kQTMediaConfigDefaultsMask) >> kQTMediaConfigDefaultsShift) to get default setting  */
+#define kQTMediaConfigHasFileHasQTAtoms  0x40000000			/*  the file has a "QuickTime like" file format  */
 
 #define kQTMediaConfigStreamGroupID 	'strm'
 #define kQTMediaConfigInteractiveGroupID  'intr'
@@ -177,8 +183,8 @@ type 'mcfg'
      unsigned hex longint    kAnyComponentFlagsMask = 0;     // component flags mask
 
        literal longint;                // default file extension (OSType) -- all caps to match subType of eat and grip components
-
-        literal longint;                // QT file group (OSType, one of kQTMediaInfoNetGroup, etc.)
+     
+       literal longint;                // QT file group (OSType, one of kQTMediaInfoNetGroup, etc.)
        
 
 
@@ -209,6 +215,25 @@ type 'mcfg'
        };
      align long;                     // align
    };
+};
+
+#define kQTBrowserInfoCanUseSystemFolderPlugin  0x00000001	/*  Mac browser can use plug-in from System "Internet Plug-ins" folder  */
+
+type 'brws' 
+{
+    longint = kQTBrowserInfoResourceVersion;        // resource version (long) 
+
+   literal longint;                    // flags (kQTBrowserInfoCanUseSystemFolderPlugin, etc) 
+
+   literal longint;                    // browser Mac OS creator code 
+
+   pstring;                            // name of plug-ins folder if kQTBrowserInfoCanUseSystemFolderPlugin not set 
+};
+
+#define kQTPreFlightOpenComponent 		0x00000002			/*  Open component as preflight check */
+
+type 'prfl' {
+    longint;
 };
 
 
@@ -274,6 +299,9 @@ type 'src#' {
 };
 
 type 'trk#' as 'src#';
+
+#define channelFlagDontOpenResFile 		2
+#define channelFlagHasDependency 		4
 
 
 #endif /* __QUICKTIMECOMPONENTS_R__ */

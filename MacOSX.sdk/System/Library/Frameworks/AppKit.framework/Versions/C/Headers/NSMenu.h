@@ -38,6 +38,11 @@
 
 + (void)popUpContextMenu:(NSMenu*)menu withEvent:(NSEvent*)event forView:(NSView*)view;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
++ (void)setMenuBarVisible:(BOOL)visible;
++ (BOOL)menuBarVisible;
+#endif
+
 - (id)initWithTitle:(NSString *)aTitle;
 
 - (void)setTitle:(NSString *)aString;

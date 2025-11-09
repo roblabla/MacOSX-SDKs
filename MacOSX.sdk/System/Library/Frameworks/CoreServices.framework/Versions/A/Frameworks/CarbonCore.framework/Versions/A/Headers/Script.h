@@ -3,9 +3,9 @@
  
      Contains:   Script Manager interfaces
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1986-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1986-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -35,13 +36,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* Meta script codes:*/
 enum {
@@ -311,8 +306,8 @@ enum {
   verDenmark                    = 9,    /* DK da_DK*/
   verPortugal                   = 10,   /* PO pt_PT     Portuguese for Portugal*/
   verFrCanada                   = 11,   /* C  fr_CA       French for Canada*/
-  verNorway                     = 12,   /* H  no_NO       Bokmål*/
-  verIsrael                     = 13,   /* HB iw_IL     Hebrew*/
+  verNorway                     = 12,   /* H  no_NO,nb_NO  Bokmål*/
+  verIsrael                     = 13,   /* HB he_IL,iw_IL Hebrew*/
   verJapan                      = 14,   /* J  ja_JP*/
   verAustralia                  = 15,   /* X  en_AU       English for Australia*/
   verArabic                     = 16,   /* AB ar       Arabic for N Africa, Arabian peninsula, Levant*/
@@ -345,7 +340,7 @@ enum {
   verInternational              = 37,   /* Z  en      English for international use               */
                                         /*              38 is unassigned*/
   verRomania                    = 39,   /* RO ro_RO*/
-  verGreecePoly                 = 40,   /*              Polytonic Greek (classical)                   */
+  verGreecePoly                 = 40,   /*       grc      Polytonic Greek (classical)                  */
   verLithuania                  = 41,   /* LT lt_LT*/
   verPoland                     = 42,   /* PL pl_PL*/
   verHungary                    = 43,   /* MG hu_HU*/
@@ -373,16 +368,16 @@ enum {
   verUkraine                    = 62,   /* UA uk_UA*/
                                         /*              63 is unassigned*/
   verGreeceAlt                  = 64,   /*              unused                              */
-  verSerbian                    = 65,   /* SR sr_YU, sh_YU                                  */
+  verSerbian                    = 65,   /* SR sr_YU,sh_YU                                   */
   verSlovenian                  = 66,   /* SV sl_SI                                    */
   verMacedonian                 = 67,   /* MD mk_MK                                    */
-  verCroatia                    = 68,   /* CR hr_HR, sh_HR*/
+  verCroatia                    = 68,   /* CR hr_HR,sh_HR*/
                                         /*              69 is unassigned*/
   verGermanReformed             = 70,   /*       de_DE     Reformed orthography (used formerly unassigned 70) */
   verBrazil                     = 71,   /* BR pt_BR     Portuguese for Brazil*/
   verBulgaria                   = 72,   /* BG bg_BG*/
   verCatalonia                  = 73,   /* CA ca_ES     Catalan for Spain*/
-  verMultilingual               = 74,   /* ZM          (no language or script)*/
+  verMultilingual               = 74,   /* ZM mul        (no language or script)*/
   verScottishGaelic             = 75,   /* GD gd*/
   verManxGaelic                 = 76,   /* GV gv       Isle of Man*/
   verBreton                     = 77,   /* BZ br*/
@@ -412,13 +407,14 @@ enum {
   verFrBelgium                  = 98,   /* BF fr_BE     French for Belgium                       */
   verUzbek                      = 99,   /* BD uz_UZ                                    */
   verSingapore                  = 100,  /* SG                                         */
-  verNynorsk                    = 101,  /* NY   _NO     Norwegian Nynorsk                        */
+  verNynorsk                    = 101,  /* NY nn_NO     Norwegian Nynorsk                        */
   verAfrikaans                  = 102,  /* AK af_ZA                                    */
   verEsperanto                  = 103,  /*       eo                                        */
   verMarathi                    = 104,  /*       mr_IN                                      */
   verTibetan                    = 105,  /*       bo                                        */
   verNepal                      = 106,  /*       ne_NP                                      */
-  verGreenland                  = 107   /*       kl                                        */
+  verGreenland                  = 107,  /*       kl                                        */
+  verIrelandEnglish             = 108   /*       en_IE     English for Ireland, with Euro for currency*/
 };
 
 /*
@@ -1015,7 +1011,7 @@ typedef TokenBlock *                    TokenBlockPtr;
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-GetSysDirection(void);
+GetSysDirection(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1027,7 +1023,7 @@ GetSysDirection(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetSysDirection(short value);
+SetSysDirection(short value)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1039,7 +1035,7 @@ SetSysDirection(short value);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-FontScript(void);
+FontScript(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1051,7 +1047,7 @@ FontScript(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-IntlScript(void);
+IntlScript(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1063,7 +1059,7 @@ IntlScript(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-FontToScript(short fontNumber);
+FontToScript(short fontNumber)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1075,7 +1071,7 @@ FontToScript(short fontNumber);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-GetScriptManagerVariable(short selector);
+GetScriptManagerVariable(short selector)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1089,7 +1085,7 @@ GetScriptManagerVariable(short selector);
 extern OSErr 
 SetScriptManagerVariable(
   short   selector,
-  long    param);
+  long    param)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1103,7 +1099,7 @@ SetScriptManagerVariable(
 extern long 
 GetScriptVariable(
   short   script,
-  short   selector);
+  short   selector)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1118,7 +1114,7 @@ extern OSErr
 SetScriptVariable(
   short   script,
   short   selector,
-  long    param);
+  long    param)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1133,7 +1129,7 @@ extern short
 CharacterByteType(
   Ptr          textBuf,
   short        textOffset,
-  ScriptCode   script);
+  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1148,7 +1144,7 @@ extern short
 CharacterType(
   Ptr          textBuf,
   short        textOffset,
-  ScriptCode   script);
+  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1165,7 +1161,7 @@ TransliterateText(
   Handle       dstHandle,
   short        target,
   long         srcMask,
-  ScriptCode   script);
+  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1179,7 +1175,7 @@ TransliterateText(
 extern Boolean 
 FillParseTable(
   CharByteTable   table,
-  ScriptCode      script);
+  ScriptCode      script)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1191,7 +1187,7 @@ FillParseTable(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-GetIntlResource(short theID);
+GetIntlResource(short theID)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1203,7 +1199,7 @@ GetIntlResource(short theID);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ClearIntlResourceCache(void);
+ClearIntlResourceCache(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1220,7 +1216,7 @@ GetIntlResourceTable(
   short        tableCode,
   Handle *     itlHandle,
   long *       offset,
-  long *       length);
+  long *       length)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1323,7 +1319,7 @@ GetIntlResourceTable(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern TokenResults 
-IntlTokenize(TokenBlockPtr tokenParam);
+IntlTokenize(TokenBlockPtr tokenParam)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #if OLDROUTINENAMES
@@ -1343,13 +1339,7 @@ IntlTokenize(TokenBlockPtr tokenParam);
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

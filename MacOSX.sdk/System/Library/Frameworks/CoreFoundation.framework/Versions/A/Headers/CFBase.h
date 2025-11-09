@@ -1,31 +1,17 @@
 /*	CFBase.h
-	Copyright 1998-2001, Apple, Inc. All rights reserved.
+	Copyright 1998-2002, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFBASE__)
 #define __COREFOUNDATION_CFBASE__ 1
 
-#if !defined(DARWIN)
-    #if defined(__CF_USE_FRAMEWORK_INCLUDES__) || (defined(__MACH__) && !defined(__MWERKS__)) 
-	#include <CoreServices/../Frameworks/CarbonCore.framework/Headers/ConditionalMacros.h>
-    #else
-	#include <ConditionalMacros.h>
-    #endif
-#endif /* !DARWIN */
-#if defined(DARWIN)
-#include <CarbonCore/ConditionalMacros.h>
-#endif /* DARWIN */
-
-/* Have to include ConditionalMacros.h here, explicitly, because there is no
- * way to define TYPE_BOOL before it is included (it always overrides) and no
- * way to undefine true and false after MacTypes.h is included, if we don't
- * stop it here by defining TYPE_BOOL.
- */
-#undef TYPE_BOOL
-#define TYPE_BOOL 1
+#if defined(__WIN32__)
+#include <windows.h>
+#endif
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <AvailabilityMacros.h>
 
 #if !defined(DARWIN)
     #if defined(__CF_USE_FRAMEWORK_INCLUDES__) || (defined(__MACH__) && !defined(__MWERKS__)) 
@@ -35,7 +21,31 @@
     #endif
 #endif /* !DARWIN */
 #if defined(DARWIN)
-#include <CarbonCore/MacTypes.h>
+#if defined(__MACH__)
+    #include <CarbonCore/MacTypes.h>
+#else
+    typedef unsigned char           Boolean;
+    typedef unsigned char           UInt8;
+    typedef signed char             SInt8;
+    typedef unsigned short          UInt16;
+    typedef signed short            SInt16;
+    typedef unsigned long           UInt32;
+    typedef signed long             SInt32;
+    typedef uint64_t		    UInt64;
+    typedef int64_t		    SInt64;
+    typedef float                   Float32;
+    typedef double                  Float64;
+    typedef unsigned short          UniChar;
+    typedef unsigned char *         StringPtr;
+    typedef const unsigned char *   ConstStringPtr;
+    typedef unsigned char           Str255[256];
+    typedef const unsigned char *   ConstStr255Param;
+    typedef SInt16                  OSErr;
+    typedef SInt32                  OSStatus;
+    typedef UInt32                  UTF32Char;
+    typedef UInt16                  UTF16Char;
+    typedef UInt8                   UTF8Char;
+#endif
 #endif /* DARWIN */
 
 #if defined(__cplusplus)
@@ -76,21 +86,42 @@ extern "C" {
 	#define CF_INLINE static __inline__
     #elif defined(__MWERKS__) || defined(__cplusplus)
 	#define CF_INLINE static inline
+    #elif defined(__WIN32__)
+	#define CF_INLINE static __inline__
     #endif
+#endif
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#if !defined(NS_NEW_API)
+#define NS_NEW_API 1
+#endif
 #endif
 
 CF_EXPORT double kCFCoreFoundationVersionNumber;
 
 #define kCFCoreFoundationVersionNumber10_0 196.4
 #define kCFCoreFoundationVersionNumber10_0_3 196.5
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#define kCFCoreFoundationVersionNumber10_1 226.0
+#endif
 
 typedef UInt32 CFTypeID;
 typedef UInt32 CFOptionFlags;
 typedef UInt32 CFHashCode;
 typedef SInt32 CFIndex;
 
+/* Base "type" of all "CF objects", and polymorphic functions on them */
+typedef const void * CFTypeRef;
+
 typedef const struct __CFString * CFStringRef;
 typedef struct __CFString * CFMutableStringRef;
+
+/*
+        Type to mean any instance of a property list type;
+        currently, CFString, CFData, CFNumber, CFBoolean, CFDate,
+        CFArray, and CFDictionary.
+*/
+typedef CFTypeRef CFPropertyListRef;
 
 /* Values returned from comparison functions */
 typedef enum {
@@ -107,6 +138,7 @@ typedef CFComparisonResult (*CFComparatorFunction)(const void *val1, const void 
 enum {
     kCFNotFound = -1
 };
+
 
 /* Range type */
 typedef struct {
@@ -128,6 +160,21 @@ CF_INLINE CFRange CFRangeMake(CFIndex loc, CFIndex len) {
 /* Private; do not use */
 CF_EXPORT
 CFRange __CFRangeMake(CFIndex loc, CFIndex len);
+
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+/* Null representant */
+
+typedef const struct __CFNull * CFNullRef;
+
+CF_EXPORT
+CFTypeID CFNullGetTypeID(void);
+
+CF_EXPORT
+const CFNullRef kCFNull;	// the singleton null instance
+
+#endif
+
 
 /* Allocator API
 
@@ -240,8 +287,8 @@ CFIndex CFAllocatorGetPreferredSizeForSize(CFAllocatorRef allocator, CFIndex siz
 CF_EXPORT
 void CFAllocatorGetContext(CFAllocatorRef allocator, CFAllocatorContext *context);
 
-/* Base "type" of all "CF objects", and polymorphic functions on them */
-typedef const void * CFTypeRef;
+
+/* Polymorphic CF functions */
 
 CF_EXPORT
 CFTypeID CFGetTypeID(CFTypeRef cf);

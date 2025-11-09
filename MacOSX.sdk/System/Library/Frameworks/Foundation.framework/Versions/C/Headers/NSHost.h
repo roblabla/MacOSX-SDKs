@@ -1,5 +1,5 @@
 /*	NSHost.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -8,26 +8,27 @@
 
 @interface NSHost : NSObject {
 @private
-    NSMutableArray 	*names;
-    NSMutableArray 	*addresses;
-    void		*reserved;
+    NSArray 	*names;
+    NSArray 	*addresses;
+    void	*reserved;
 }
 
 + (NSHost *)currentHost;
 + (NSHost *)hostWithName:(NSString *)name;
 + (NSHost *)hostWithAddress:(NSString *)address;
 
+// NSHost does not implement any caching any longer
 + (void)setHostCacheEnabled:(BOOL)flag;
 + (BOOL)isHostCacheEnabled;
 + (void)flushHostCache;
 
 - (BOOL)isEqualToHost:(NSHost *)aHost;
 
-- (NSString *)name;
-- (NSArray *)names;
+- (NSString *)name;	// arbitrary choice
+- (NSArray *)names;	// unordered list
 
-- (NSString *)address;
-- (NSArray *)addresses;
+- (NSString *)address;	// arbitrary choice
+- (NSArray *)addresses;	// unordered list of IPv6 and IPv4 addresses
 
 @end
 

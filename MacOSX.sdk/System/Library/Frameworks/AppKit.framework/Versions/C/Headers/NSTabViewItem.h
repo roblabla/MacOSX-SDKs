@@ -17,6 +17,8 @@ typedef enum _NSTabState {
     NSPressedTab = 2
 } NSTabState;
 
+typedef struct NSTabViewItemAuxiliary NSTabViewItemAuxiliaryOpaque;
+
 @interface NSTabViewItem : NSObject <NSCoding>
 {
     @private
@@ -41,8 +43,7 @@ typedef enum _NSTabState {
     NSSize		_labelSize;			// Cached label size. Valid if _labelSizeValid equal YES
     NSRect		_tabRect;			// Cached tabRect
     NSToolTipTag	_tabToolTipTag;			// Saved tool tip tag, for when text label is truncated.
-    NSView		*_priorFirstResponder;
-
+    NSTabViewItemAuxiliaryOpaque *_auxiliaryStorage;
 }
 
 	/* Initialization */
@@ -70,16 +71,15 @@ typedef enum _NSTabState {
 	/* Tab Drawing/Measuring */
 
 - (void)drawLabel:(BOOL)shouldTruncateLabel inRect:(NSRect)labelRect;
-    // Override to change the drawing of the label
-    // This method draws the tab label in labelRect.
+    // This method draws the tab label assuming a local coordinate system whose label axis runs along the x axis.
     // 'labelRect' is the area in between the curved end caps.
     // 'shouldTruncateLabel' is a hint that the label should be truncated.
-    //             ie. if shouldTruncateLabel is YES, then
-    //             labelRect < ceil([... sizeOfLabel:YES])
+    //    ie. if shouldTruncateLabel is YES, then labelRect.size < ceil([sizeOfLabel:YES])
+    // Assume the label axis runs along the length of the label (perpendicular to the direction of the tab).
 
 - (NSSize)sizeOfLabel:(BOOL)computeMin;
-    // Override if width is not the label width
-    // This method returns the minimum or nominal size of the tab label.
+    // This method returns the minimum or nominal size of the tab label.  The width of the label is measured
+    // along the label axis, and height is measured in the direction parallel to the tab direction.
     // 'computeMin' indicates whether you should return the minimum or
     //              nominal label size.  The returned value is used to
     //              compute the range of legal sizes for the tab label.

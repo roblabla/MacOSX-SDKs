@@ -24,7 +24,6 @@
 #define _IOKIT_IOPCCARD_H
 
 #include <IOKit/IOService.h>
-#include <IOKit/IOCommandGate.h>
 
 #include <sys/cdefs.h>
 

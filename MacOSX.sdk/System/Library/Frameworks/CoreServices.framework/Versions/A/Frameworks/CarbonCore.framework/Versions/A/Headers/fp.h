@@ -3,9 +3,9 @@
  
      Contains:   FPCE Floating-Point Definitions and Declarations.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1987-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1987-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -24,7 +24,7 @@
 #include <CarbonCore/MacTypes.h>
 #endif
 
-
+#include <math.h>
 /********************************************************************************
 *                                                                               *
 *    A collection of numerical functions designed to facilitate a wide          *
@@ -42,6 +42,7 @@
 ********************************************************************************/
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -51,13 +52,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /********************************************************************************
 *                                                                               *
@@ -73,8 +68,8 @@ extern "C" {
 *    x86              double(64)                   double(64)                   *
 *                                                                               *
 ********************************************************************************/
-#if defined(__MWERKS__) && defined(__cmath__)
-/* these types were already defined in MSL's math.h */
+#if (defined(__MWERKS__) && defined(__cmath__)) || (TARGET_RT_MAC_MACHO && defined(__MATH__))
+/* these types were already defined in math.h */
 #else
 #if TARGET_CPU_PPC
 typedef float                           float_t;
@@ -110,13 +105,11 @@ typedef double                          double_t;
 *                                                                               *
 ********************************************************************************/
 #if TARGET_OS_MAC
-  #if TARGET_RT_MAC_MACHO
-    #define   HUGE_VAL                1e500 /* compatible with bsd math.h */
-  #else
+  #if !TARGET_RT_MAC_MACHO
     #define   HUGE_VAL                __inf()
+    #define   INFINITY                __inf()
+    #define   NAN                     nan("255")
   #endif
-  #define     INFINITY                __inf()
-  #define     NAN                     nan("255")
 #else
   #define     NAN                     sqrt(-1)
 #endif
@@ -126,9 +119,9 @@ typedef double                          double_t;
 #elif TARGET_CPU_68K
   #define      DECIMAL_DIG              21
 #endif      
-#endif  /* __MWERKS__ && __cmath__ */
-/* MSL already defines these */
-#if !defined(__MWERKS__) || !defined(__cmath__)
+#endif  /* (defined(__MWERKS__) && defined(__cmath__)) || (TARGET_RT_MAC_MACHO && defined(__MATH__)) */
+/* MSL or math.h already defines these */
+#if (!defined(__MWERKS__) || !defined(__cmath__)) && (!TARGET_RT_MAC_MACHO || !defined(__MATH__))
 /********************************************************************************
 *                                                                               *
 *                            Trigonometric functions                            *
@@ -340,7 +333,7 @@ extern double_t  expm1(double_t x);
  *  exp2()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
@@ -384,7 +377,7 @@ extern double_t  log(double_t x);
  *  log2()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
@@ -453,7 +446,7 @@ extern double_t  modf(double_t x, double_t *iptr);
  *  modff()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
@@ -759,7 +752,7 @@ extern double_t  remainder(double_t x, double_t y);
  *  remquo()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
@@ -801,7 +794,7 @@ extern double_t  copysign(double_t x, double_t y);
  *  nan()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
@@ -812,11 +805,12 @@ extern double  nan(const char * tagp);
  *  nanf()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
 extern float  nanf(const char * tagp);
+
 
 
 /*
@@ -841,7 +835,7 @@ extern long double  nanl(const char * tagp);
  *  nextafterd()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
@@ -852,11 +846,12 @@ extern double  nextafterd(double x, double y);
  *  nextafterf()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
 extern float  nextafterf(float x, float y);
+
 
 
 /*
@@ -875,6 +870,7 @@ extern long double  nextafterl(long double x, long double y);
     #define nextafterl(x, y) ((long double) nextafterd((double)(x),(double)(y)))
   #endif
 #endif
+
 
 
 
@@ -898,6 +894,7 @@ extern long  __fpclassifyd(double x);
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
 extern long  __fpclassifyf(float x);
+
 
 
 /*
@@ -940,6 +937,7 @@ extern long  __isnormald(double x);
 extern long  __isnormalf(float x);
 
 
+
 /*
  *  __isnormal()
  *  
@@ -956,6 +954,7 @@ extern long  __isnormal(long double x);
     #define __isnormal(x) (__isnormald((double)(x)))
   #endif
 #endif
+
 
 
 /*
@@ -978,6 +977,7 @@ extern long  __isfinited(double x);
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
 extern long  __isfinitef(float x);
+
 
 
 /*
@@ -1020,6 +1020,7 @@ extern long  __isnand(double x);
 extern long  __isnanf(float x);
 
 
+
 /*
  *  __isnan()
  *  
@@ -1036,6 +1037,7 @@ extern long  __isnan(long double x);
     #define __isnan(x) (__isnand((double)(x)))
   #endif
 #endif
+
 
 
 /*
@@ -1060,6 +1062,7 @@ extern long  __signbitd(double x);
 extern long  __signbitf(float x);
 
 
+
 /*
  *  __signbit()
  *  
@@ -1082,7 +1085,7 @@ extern long  __signbit(long double x);
  *  __inf()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
@@ -1103,16 +1106,6 @@ extern double_t  __inf(void);
 *                   negative.  This includes, NaNs, infinities and zeros.       *
 *                                                                               *
 ********************************************************************************/
-enum {
-  FP_SNAN                       = 0,    /*      signaling NaN                         */
-  FP_QNAN                       = 1,    /*      quiet NaN                             */
-  FP_INFINITE                   = 2,    /*      + or - infinity                       */
-  FP_ZERO                       = 3,    /*      + or - zero                           */
-  FP_NORMAL                     = 4,    /*      all normal numbers                    */
-  FP_SUBNORMAL                  = 5     /*      denormal numbers                      */
-};
-
-
 #define      fpclassify(x)    ( ( sizeof ( x ) == sizeof(double) ) ?           \
                               __fpclassifyd  ( x ) :                           \
                                 ( sizeof ( x ) == sizeof(float) ) ?            \
@@ -1167,7 +1160,7 @@ enum {
  *  fdim()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
@@ -1178,7 +1171,7 @@ extern double_t  fdim(double_t x, double_t y);
  *  fmax()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
@@ -1189,14 +1182,14 @@ extern double_t  fmax(double_t x, double_t y);
  *  fmin()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
 extern double_t  fmin(double_t x, double_t y);
 
 
-#endif /* !defined(__MWERKS__) || !defined(__cmath__) */
+#endif /* (defined(__MWERKS__) && defined(__cmath__)) || (TARGET_RT_MAC_MACHO && defined(__MATH__)) */
 
 /*******************************************************************************
 *                                Constants                                     *
@@ -1238,7 +1231,7 @@ extern const double_t pi;
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern double_t  compound(double_t rate, double_t periods);
+extern double_t  compound(double_t rate, double_t periods)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1249,7 +1242,7 @@ extern double_t  compound(double_t rate, double_t periods);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern double_t  annuity(double_t rate, double_t periods);
+extern double_t  annuity(double_t rate, double_t periods)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1270,7 +1263,7 @@ extern double_t  annuity(double_t rate, double_t periods);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern double_t  randomx(double_t * x);
+extern double_t  randomx(double_t * x)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1296,7 +1289,7 @@ enum {
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern relop  relation(double_t x, double_t y);
+extern relop  relation(double_t x, double_t y)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #endif /* !defined(__MWERKS__) || !defined(__cmath__) */
@@ -1364,7 +1357,7 @@ typedef struct decform decform;
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern void  num2dec(const decform *f, double_t x, decimal *d);
+extern void  num2dec(const decform *f, double_t x, decimal *d)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1375,7 +1368,7 @@ extern void  num2dec(const decform *f, double_t x, decimal *d);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern double_t  dec2num(const decimal * d);
+extern double_t  dec2num(const decimal * d)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1386,7 +1379,7 @@ extern double_t  dec2num(const decimal * d);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern void  dec2str(const decform *f, const decimal *d, char *s);
+extern void  dec2str(const decform *f, const decimal *d, char *s)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1397,7 +1390,7 @@ extern void  dec2str(const decform *f, const decimal *d, char *s);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern void  str2dec(const char *s, short *ix, decimal *d, short *vp);
+extern void  str2dec(const char *s, short *ix, decimal *d, short *vp)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1408,7 +1401,7 @@ extern void  str2dec(const char *s, short *ix, decimal *d, short *vp);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern float  dec2f(const decimal * d);
+extern float  dec2f(const decimal * d)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1419,7 +1412,7 @@ extern float  dec2f(const decimal * d);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern short  dec2s(const decimal * d);
+extern short  dec2s(const decimal * d)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1430,7 +1423,7 @@ extern short  dec2s(const decimal * d);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern long  dec2l(const decimal * d);
+extern long  dec2l(const decimal * d)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2402,7 +2395,7 @@ extern long double  dec2numl(const decimal * d);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 2.0 and later
  */
-extern double  x80tod(const extended80 * x80);
+extern double  x80tod(const extended80 * x80)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2413,7 +2406,7 @@ extern double  x80tod(const extended80 * x80);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 2.0 and later
  */
-extern void  dtox80(const double *x, extended80 *x80);
+extern void  dtox80(const double *x, extended80 *x80)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2456,13 +2449,7 @@ extern void  ldtox80(const long double *x, extended80 *x80);
 #endif  /* !defined(__NOEXTENSIONS__) */
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

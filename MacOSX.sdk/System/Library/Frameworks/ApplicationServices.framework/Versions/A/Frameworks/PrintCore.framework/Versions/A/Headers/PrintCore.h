@@ -3,9 +3,9 @@
  
      Contains:   Printing functions that have no UI
  
-     Version:    PrintingCore-61~16
+     Version:    PrintingCore-102.1~1
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,16 +16,13 @@
 #ifndef __PRINTCORE__
 #define __PRINTCORE__
 
-#ifndef __CARBONCORE__
-#include <CarbonCore/CarbonCore.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
+
 
 #ifndef __COLORSYNC__
 #include <ColorSync/ColorSync.h>
-#endif
-
-#ifndef __COREFOUNDATION__
-#include <CoreFoundation/CoreFoundation.h>
 #endif
 
 #ifndef __QD__

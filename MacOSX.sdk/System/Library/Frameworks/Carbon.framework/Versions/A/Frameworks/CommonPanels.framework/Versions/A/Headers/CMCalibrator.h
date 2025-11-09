@@ -3,9 +3,9 @@
  
      Contains:   ColorSync Calibration API
  
-     Version:    CommonPanels-51~48
+     Version:    CommonPanels-61~261
  
-     Copyright:  © 1998-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1998-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,8 +16,8 @@
 #ifndef __CMCALIBRATOR__
 #define __CMCALIBRATOR__
 
-#ifndef __CMAPPLICATION__
-#include <ColorSync/CMApplication.h>
+#ifndef __APPLICATIONSERVICES__
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 #ifndef __EVENTS__
@@ -27,6 +27,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -36,13 +37,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 typedef CALLBACK_API( void , CalibrateEventProcPtr )(EventRecord * event);
 typedef STACK_UPP_TYPE(CalibrateEventProcPtr)                   CalibrateEventUPP;
@@ -75,7 +70,7 @@ typedef STACK_UPP_TYPE(CalibrateProcPtr)                        CalibrateUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern CalibrateEventUPP
-NewCalibrateEventUPP(CalibrateEventProcPtr userRoutine);
+NewCalibrateEventUPP(CalibrateEventProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewCanCalibrateUPP()
@@ -108,7 +103,7 @@ NewCalibrateUPP(CalibrateProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeCalibrateEventUPP(CalibrateEventUPP userUPP);
+DisposeCalibrateEventUPP(CalibrateEventUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeCanCalibrateUPP()
@@ -143,7 +138,7 @@ DisposeCalibrateUPP(CalibrateUPP userUPP);
 extern void
 InvokeCalibrateEventUPP(
   EventRecord *      event,
-  CalibrateEventUPP  userUPP);
+  CalibrateEventUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeCanCalibrateUPP()
@@ -181,18 +176,12 @@ InvokeCalibrateUPP(
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
-CMCalibrateDisplay(CalibratorInfo * theInfo);
+CMCalibrateDisplay(CalibratorInfo * theInfo)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

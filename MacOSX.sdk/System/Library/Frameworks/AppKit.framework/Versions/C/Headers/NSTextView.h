@@ -194,6 +194,12 @@ typedef enum _NSSelectionAffinity {
 - (void)cleanUpAfterDragOperation;
     // If you set up persistent state that should go away when the drag operation finishes, you can clean it up here.  Such state is usually set up in -dragOperationForDraggingInfo:type:.  You should probably never need to call this except to message super in an override.
 
+
+/************************* Glyph info support *************************/
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (BOOL)acceptsGlyphInfo;
+- (void)setAcceptsGlyphInfo:(BOOL)flag;
+#endif
 @end
 
 @interface NSTextView (NSSharing)
@@ -287,7 +293,6 @@ typedef enum _NSSelectionAffinity {
 
 - (void)startSpeaking:(id)sender;
 - (void)stopSpeaking:(id)sender;
-
 @end
 
 // Note that all delegation messages come from the first textView

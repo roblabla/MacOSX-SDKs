@@ -1,6 +1,7 @@
 // Exception Handling support header for -*- C++ -*-
 
-// Copyright (C) 1995, 1996, 1997, 1998, 2000, 2001 Free Software Foundation
+// Copyright (C) 1995, 1996, 1997, 1998, 2000, 2001, 2002
+// Free Software Foundation
 //
 // This file is part of GNU CC.
 //
@@ -62,6 +63,9 @@ namespace std
   {
   public:
     bad_exception() throw() { }
+    // This declaration is not useless:
+    // http://gcc.gnu.org/onlinedocs/gcc-3.0.2/gcc_6.html#SEC118
+    virtual ~bad_exception() throw();
   };
 
   /// If you write a replacement %terminate handler, it must be of this type.
@@ -97,11 +101,13 @@ namespace std
 namespace __gnu_cxx
 {
   /** A replacement for the standard terminate_handler which prints more
-      information about the terminating exception (if any) on stderr.
-
+      information about the terminating exception (if any) on stderr.  Call
+      @code
         std::set_terminate (__gnu_cxx::__verbose_terminate_handler)
-
-      to use.  */
+      @endcode
+      to use.  For more info, see
+      http://gcc.gnu.org/onlinedocs/libstdc++/19_diagnostics/howto.html#4
+  */
   void __verbose_terminate_handler ();
 } // namespace __gnu_cxx
   

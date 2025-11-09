@@ -55,5 +55,11 @@
 
 // Allows special behavior after the nib document has been loaded.
 - (void)awakeFromDocument:(id <IBDocuments>)document;
+
+// --------------------------------------------------------------------------------
+// Returns an array of strings to be listed in the Incompatible Properties Window
+//
+- (NSArray*)ibIncompatibleProperties;
+
 @end
 

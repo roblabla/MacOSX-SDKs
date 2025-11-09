@@ -9,9 +9,12 @@
  *
  * HISTORY:
  * Create by Linas Vepstas
+ * Added tube.h include to define gleDouble, tad February 2002
  */
 
 /* ============================================================ */
+
+#include "tube.h"
 
 extern void draw_segment_plain (int ncp,       /* number of contour points */
                            gleDouble front_contour[][3],

@@ -6,6 +6,7 @@
 */
 
 #import <AppKit/NSControl.h>
+#import <AppKit/NSTextFieldCell.h>
 
 @interface NSTextField : NSControl
 {
@@ -28,10 +29,6 @@
 - (void)setEditable:(BOOL)flag;
 - (BOOL)isSelectable;
 - (void)setSelectable:(BOOL)flag;
-- (void)setPreviousText:(id)anObject;
-- (id)previousText;
-- (void)setNextText:(id)anObject;
-- (id)nextText;
 - (void)selectText:(id)sender;
 - (id)delegate;
 - (void)setDelegate:(id)anObject;
@@ -41,6 +38,11 @@
 - (void)textDidEndEditing:(NSNotification *)notification;
 - (void)textDidChange:(NSNotification *)notification;
 - (BOOL)acceptsFirstResponder;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (void)setBezelStyle:(NSTextFieldBezelStyle)style;
+- (NSTextFieldBezelStyle)bezelStyle;
+#endif
 @end
 
 @interface NSTextField(NSKeyboardUI)

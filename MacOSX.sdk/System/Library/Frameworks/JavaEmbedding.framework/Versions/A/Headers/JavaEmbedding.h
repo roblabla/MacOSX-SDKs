@@ -3,9 +3,9 @@
  
      Contains:   Master include for JavaEmbedding
  
-     Version:    JavaEmbedding-7~2
+     Version:    JavaEmbedding-12~208
  
-     Copyright:  © 2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2001-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

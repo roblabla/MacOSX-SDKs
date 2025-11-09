@@ -30,6 +30,7 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* clock_reply_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 
 #ifdef __BeforeMigServerHeader
@@ -38,6 +39,8 @@ __BeforeMigServerHeader
 
 /* typedefs for all requests */
 
+#ifndef __Request__clock_reply_subsystem__defined
+#define __Request__clock_reply_subsystem__defined
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -46,26 +49,36 @@ __BeforeMigServerHeader
 		mach_timespec_t alarm_time;
 	} __Request__clock_alarm_reply_t;
 
+#endif /* !__Request__clock_reply_subsystem__defined */
 
 /* union of all requests */
 
+#ifndef __RequestUnion__clock_reply_subsystem__defined
+#define __RequestUnion__clock_reply_subsystem__defined
 union __RequestUnion__clock_reply_subsystem {
 	__Request__clock_alarm_reply_t Request_clock_alarm_reply;
 };
+#endif /* __RequestUnion__clock_reply_subsystem__defined */
 /* typedefs for all replies */
 
+#ifndef __Reply__clock_reply_subsystem__defined
+#define __Reply__clock_reply_subsystem__defined
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__clock_alarm_reply_t;
 
+#endif /* !__Reply__clock_reply_subsystem__defined */
 
 /* union of all replies */
 
+#ifndef __ReplyUnion__clock_reply_subsystem__defined
+#define __ReplyUnion__clock_reply_subsystem__defined
 union __ReplyUnion__clock_reply_subsystem {
 	__Reply__clock_alarm_reply_t Reply_clock_alarm_reply;
 };
+#endif /* __RequestUnion__clock_reply_subsystem__defined */
 
 /* SimpleRoutine clock_alarm_reply */
 #ifdef	mig_external
@@ -91,11 +104,11 @@ extern mig_routine_t clock_reply_server_routine(
 
 /* Description of this subsystem, for use in direct RPC */
 extern const struct clock_reply_subsystem {
-	struct subsystem *	subsystem;	/* Reserved for system use */
+	mig_server_routine_t	server;	/* Server routine */
 	mach_msg_id_t	start;	/* Min routine number */
 	mach_msg_id_t	end;	/* Max routine number + 1 */
 	unsigned int	maxsize;	/* Max msg size */
-	vm_address_t	base_addr;	/* Base ddress */
+	vm_address_t	reserved;	/* Reserved */
 	struct routine_descriptor	/*Array of routine descriptors */
 		routine[1];
 } clock_reply_subsystem;

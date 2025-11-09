@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -30,7 +30,7 @@
 #include <IOKit/IOCommand.h>
 #include <IOKit/IOLib.h>
 
-#include <IOKit/firewire/IOFWRegs.h>
+#include <IOKit/firewire/IOFireWireFamilyCommon.h>
 
 class IOMemoryDescriptor;
 class IOSyncer;
@@ -40,14 +40,10 @@ class IOFireWireNub;
 class IOFWAddressSpace;	// Description of chunk of local FW address space
 class IOFWCommand;
 class IOFWBusCommand;
+class IOFWAsyncStreamCommand;
 class IOCommandGate;
+
 struct AsyncPendingTrans;
-
-// Callback when device command completes asynchronously
-typedef void (*FWDeviceCallback)(void *refcon, IOReturn status, IOFireWireNub *device, IOFWCommand *fwCmd);
-
-// Callback when bus command completes asynchronously
-typedef void (*FWBusCallback)(void *refcon, IOReturn status, IOFireWireBus *bus, IOFWBusCommand *fwCmd);
 
 // Struct for head of command queue
 /*!
@@ -67,9 +63,20 @@ struct IOFWCmdQ
     virtual void headChanged(IOFWCommand *oldHead);
 };
 
+// Callback when device command completes asynchronously
+typedef void (*FWDeviceCallback)(void *refcon, IOReturn status, IOFireWireNub *device, IOFWCommand *fwCmd);
+
+// Callback when bus command completes asynchronously
+typedef void (*FWBusCallback)(void *refcon, IOReturn status, IOFireWireBus *bus, IOFWBusCommand *fwCmd);
+
+// Callback when async stream command completes asynchronously
+typedef void (*FWAsyncStreamCallback)(void *refcon, IOReturn status, IOFireWireBus *bus, IOFWAsyncStreamCommand *fwCmd);
+
 /*
  * Base class for FireWire commands
  */
+/*! @class IOFWCommand
+*/
 class IOFWCommand : public IOCommand
 {
     OSDeclareAbstractStructors(IOFWCommand)
@@ -156,6 +163,9 @@ public:
 
     bool Busy() const
         { return fStatus == kIOReturnBusy || fStatus == kIOFireWirePending;};
+    
+    void setTimeout( UInt32 timeout )
+        { fTimeout = timeout; };
         
     friend class IOFWCmdQ;
 
@@ -168,6 +178,8 @@ private:
 /*
  * Bus control commands
  */
+/*! @class IOFWBusCommand
+*/
 class IOFWBusCommand : public IOFWCommand
 {
     OSDeclareAbstractStructors(IOFWBusCommand)
@@ -201,6 +213,8 @@ private:
  * All it does is timeout after the specified delay, hence calling the completion
  * callback.
  */
+/*! @class IOFWDelayCommand
+*/
 class IOFWDelayCommand : public IOFWBusCommand
 {
     OSDeclareDefaultStructors(IOFWDelayCommand)
@@ -232,13 +246,12 @@ private:
  */
 class IOFWUserReadQuadletCommand ;
 class IOFWUserWriteCommand ;
+
+/*! @class IOFWAsyncCommand
+*/
 class IOFWAsyncCommand : public IOFWCommand
 {
-	// temporary for debugging:
-	friend class IOFWUserReadQuadletCommand ;
-	friend class IOFWUserWriteCommand ;
-
-    OSDeclareAbstractStructors(IOFWAsyncCommand)
+	OSDeclareAbstractStructors(IOFWAsyncCommand)
 
 protected:
     IOFireWireNub *	fDevice;
@@ -259,16 +272,19 @@ protected:
     bool		fFailOnReset;
     bool		fWrite;
 
-/*! @struct ExpansionData
-    @discussion This structure will be used to expand the capablilties of the class in the future.
-    */    
-    struct ExpansionData { };
+	typedef struct 
+	{ 
+		// some of our subclasses didn't have room for expansion data, so
+		// we've reserved space for their use here.
+		
+		void *	fSubclassMembers; 
+	} 
+	MemberVariables;
 
-/*! @var reserved
-    Reserved for future use.  (Internal use only)  */
-    ExpansionData *reserved;
+    MemberVariables * fMembers;
 
     virtual IOReturn	complete(IOReturn status);
+	virtual bool	initWithController(IOFireWireController *control);
     virtual bool	initAll(IOFireWireNub *device, FWAddress devAddress,
 				IOMemoryDescriptor *hostMem,
 				FWDeviceCallback completion, void *refcon, bool failOnReset);
@@ -276,11 +292,13 @@ protected:
                                 UInt32 generation, FWAddress devAddress,
                                 IOMemoryDescriptor *hostMem,
                                 FWDeviceCallback completion, void *refcon);
+	virtual void free( void );
     virtual IOReturn	reinit(FWAddress devAddress, IOMemoryDescriptor *hostMem,
 				FWDeviceCallback completion, void *refcon, bool failOnReset);
     virtual IOReturn	reinit(UInt32 generation, FWAddress devAddress, IOMemoryDescriptor *hostMem,
                                 FWDeviceCallback completion, void *refcon);
-
+	bool createMemberVariables( void );
+	void destroyMemberVariables( void );
 public:
 	// Utility for setting generation on newly created command
 	virtual void	setGeneration(UInt32 generation)
@@ -340,6 +358,7 @@ class IOFWReadCommand : public IOFWAsyncCommand
     OSDeclareDefaultStructors(IOFWReadCommand)
 
 protected:
+	
     virtual void 	gotPacket(int rcode, const void* data, int size);
 
     virtual IOReturn	execute();
@@ -363,13 +382,14 @@ private:
     OSMetaClassDeclareReservedUnused(IOFWReadCommand, 1);
 };
 
-    /*!
-        @class IOFWReadQuadCommand
-        @discussion An easier to use version of IOFWReadCommand for use when the data to be transferred
-        is an integer number of quads.
-        Note that block read requests will be used for transfers greater than one quad unless setMaxPacket(4)
-        is called.
-    */
+/*!
+	@class IOFWReadQuadCommand
+	@discussion An easier to use version of IOFWReadCommand for use when the data to be transferred
+	is an integer number of quads.
+	Note that block read requests will be used for transfers greater than one quad unless setMaxPacket(4)
+	is called.
+*/
+
 class IOFWReadQuadCommand : public IOFWAsyncCommand
 {
     OSDeclareDefaultStructors(IOFWReadQuadCommand)
@@ -377,7 +397,7 @@ class IOFWReadQuadCommand : public IOFWAsyncCommand
 protected:
 
     UInt32 *	fQuads;
-
+	
     virtual void 	gotPacket(int rcode, const void* data, int size);
 
     virtual IOReturn	execute();
@@ -407,81 +427,159 @@ private:
 
 class IOFWWriteCommand : public IOFWAsyncCommand
 {
+
     OSDeclareDefaultStructors(IOFWWriteCommand)
-    virtual IOReturn	execute();
 
 protected:
 
     int			fPackSize;
+	
+	typedef struct 
+	{ 
+		bool 	fDeferredNotify;
+	}
+	MemberVariables;
+		
+    virtual IOReturn	execute();
 
-    virtual void 	gotPacket(int rcode, const void* data, int size);
+    virtual void 	gotPacket( int rcode, const void* data, int size );
 
+	bool createMemberVariables( void );
+	void destroyMemberVariables( void );
+	
 public:
-    virtual bool	initAll(IOFireWireNub *device, FWAddress devAddress,
-				IOMemoryDescriptor *hostMem,
-				FWDeviceCallback completion, void *refcon, bool failOnReset);
-    virtual bool	initAll(IOFireWireController *control,
-                                UInt32 generation, FWAddress devAddress,
-                                IOMemoryDescriptor *hostMem,
-                                FWDeviceCallback completion, void *refcon);
-    virtual IOReturn	reinit(FWAddress devAddress, IOMemoryDescriptor *hostMem,
-				FWDeviceCallback completion=NULL, void *refcon=NULL,
-				bool failOnReset=false);
-    virtual IOReturn	reinit(UInt32 generation, FWAddress devAddress, IOMemoryDescriptor *hostMem,
-                                FWDeviceCallback completion=NULL, void *refcon=NULL);
-    
+
+	virtual bool	initWithController(IOFireWireController *control);
+    virtual bool	initAll(	IOFireWireNub *			device, 
+								FWAddress 				devAddress,
+								IOMemoryDescriptor *	hostMem,
+								FWDeviceCallback 		completion, 
+								void *					refcon, 
+								bool 					failOnReset );
+								
+    virtual bool	initAll(	IOFireWireController *	control,
+                                UInt32 					generation, 
+								FWAddress 				devAddress,
+                                IOMemoryDescriptor *	hostMem,
+                                FWDeviceCallback 		completion, 
+								void *					refcon );
+	virtual void free( void );
+								
+    virtual IOReturn	reinit(	FWAddress 				devAddress, 
+								IOMemoryDescriptor *	hostMem,
+								FWDeviceCallback 		completion = NULL, 
+								void *					refcon = NULL,
+								bool 					failOnReset = false );
+								
+    virtual IOReturn	reinit(	UInt32 					generation, 
+								FWAddress 				devAddress, 
+								IOMemoryDescriptor *	hostMem,
+                                FWDeviceCallback		completion = NULL, 
+								void *					refcon = NULL );
+
+	void setDeferredNotify( bool state ) 
+		{ ((MemberVariables*)fMembers->fSubclassMembers)->fDeferredNotify = state; };
+	
 private:
+
     OSMetaClassDeclareReservedUnused(IOFWWriteCommand, 0);
     OSMetaClassDeclareReservedUnused(IOFWWriteCommand, 1);
+
 };
 
-    /*!
-        @class IOFWWriteQuadCommand
-        @discussion An easier to use version of IOFWWriteCommand for use when the data to be transferred
-        is small and an integer number of quads.
-        Note that block read requests will be used for transfers greater than one quad unless setMaxPacket(4)
-        is called.
-        kMaxWriteQuads is the largest legal number of quads that this object can be asked to transfer
-        (the data is copied into an internal buffer in init() and reinit()).
-    */
+/*!
+	@class IOFWWriteQuadCommand
+	@discussion An easier to use version of IOFWWriteCommand for use when the data to be transferred
+	is small and an integer number of quads.
+	Note that block read requests will be used for transfers greater than one quad unless setMaxPacket(4)
+	is called.
+	kMaxWriteQuads is the largest legal number of quads that this object can be asked to transfer
+	(the data is copied into an internal buffer in init() and reinit()).
+*/
+
 class IOFWWriteQuadCommand : public IOFWAsyncCommand
 {
+
     OSDeclareDefaultStructors(IOFWWriteQuadCommand)
 
 public:
-    enum {
+
+    enum 
+	{
         kMaxWriteQuads = 8
     };
     
 protected:
 
-    UInt32	fQuads[kMaxWriteQuads];
-    UInt32 *	fQPtr;
-    int		fPackSize;
-
-    virtual void 	gotPacket(int rcode, const void* data, int size);
+    UInt32					fQuads[kMaxWriteQuads];
+    UInt32 *				fQPtr;
+    int						fPackSize;
+	
+	typedef struct 
+	{ 
+		bool 					fDeferredNotify;
+		IOMemoryDescriptor *	fMemory;
+	} 
+	MemberVariables;
+	
+    virtual void 	gotPacket( int rcode, const void* data, int size );
 
     virtual IOReturn	execute();
 
+	bool createMemberVariables( void );
+	void destroyMemberVariables( void );
+	
 public:
-    virtual bool	initAll(IOFireWireNub *device, FWAddress devAddress,
-				UInt32 *quads, int numQuads,
-				FWDeviceCallback completion, void *refcon, bool failOnReset);
-    virtual bool	initAll(IOFireWireController *control,
-                                UInt32 generation, FWAddress devAddress,
-                                UInt32 *quads, int numQuads,
-                                FWDeviceCallback completion, void *refcon);
-
-    virtual IOReturn	reinit(FWAddress devAddress, UInt32 *quads, int numQuads,
-				FWDeviceCallback completion=NULL, void *refcon=NULL,
-				bool failOnReset=false);
-    virtual IOReturn	reinit(UInt32 generation, FWAddress devAddress, UInt32 *quads, int numQuads,
-                                FWDeviceCallback completion=NULL, void *refcon=NULL);
-
+	virtual bool	initWithController(IOFireWireController *control);
     
+	virtual bool	initAll(	IOFireWireNub *		device, 
+								FWAddress 			devAddress,
+								UInt32 *			quads, 
+								int 				numQuads,
+								FWDeviceCallback	completion, 
+								void *				refcon, 
+								bool 				failOnReset );
+								
+    virtual bool	initAll(	IOFireWireController *	control,
+                                UInt32 					generation, 
+								FWAddress 				devAddress,
+                                UInt32 *				quads, 
+								int 					numQuads,
+                                FWDeviceCallback 		completion, 
+								void *					refcon );
+
+	virtual void free( void );
+
+    virtual IOReturn	reinit(	FWAddress 			devAddress, 
+								UInt32 *			quads, 
+								int 				numQuads,
+								FWDeviceCallback	completion = NULL, 
+								void *				refcon = NULL,
+								bool 				failOnReset = false );
+								
+    virtual IOReturn	reinit(	UInt32 				generation, 
+								FWAddress 			devAddress, 
+								UInt32 *			quads, 
+								int 				numQuads,
+                                FWDeviceCallback 	completion = NULL, 
+								void *				refcon = NULL );
+
+protected:
+	
+	void setQuads( UInt32 * quads, int numQuads );
+	bool createMemoryDescriptor( void );
+	void destroyMemoryDescriptor( void );
+
+public:
+
+ 	void setDeferredNotify( bool state ) 
+		{ ((MemberVariables*)fMembers->fSubclassMembers)->fDeferredNotify = state; };
+	
 private:
-    OSMetaClassDeclareReservedUnused(IOFWWriteQuadCommand, 0);
+    
+	OSMetaClassDeclareReservedUnused(IOFWWriteQuadCommand, 0);
     OSMetaClassDeclareReservedUnused(IOFWWriteQuadCommand, 1);
+
 };
 
 
@@ -489,22 +587,23 @@ private:
  * May need more parameters for some of these,
  * and/or derive from a base Lock transaction command
  */
+/*! @class IOFWCompareAndSwapCommand
+*/
 class IOFWCompareAndSwapCommand : public IOFWAsyncCommand
 {
     OSDeclareDefaultStructors(IOFWCompareAndSwapCommand)
 
 protected:
-    UInt32 fInputVals[4];
-    UInt32 fOldVal[2];
-
-/*! @struct ExpansionData
-    @discussion This structure will be used to expand the capablilties of the class in the future.
-    */    
-    struct ExpansionData { };
-
-/*! @var reserved
-    Reserved for future use.  (Internal use only)  */
-    ExpansionData *reserved;
+    UInt32 					fInputVals[4];
+    UInt32 					fOldVal[2];
+	
+	typedef struct 
+	{ 
+		IOMemoryDescriptor *	fMemory;
+	} 
+	MemberVariables;
+	
+	MemberVariables * fMembers;
 
     virtual void 	gotPacket(int rcode, const void* data, int size);
 
@@ -513,6 +612,7 @@ protected:
 public:
     // Compare to cmpVal, and if equal replace with newVal.
     // Size = 1 for 32 bit operation (one quad), 2 for 64 bit (two quads)
+	virtual bool	initWithController(IOFireWireController *control);
     virtual bool	initAll(IOFireWireNub *device, FWAddress devAddress,
 				const UInt32 *cmpVal, const UInt32 *newVal, int size,
 				FWDeviceCallback completion, void *refcon, bool failOnReset);
@@ -530,12 +630,115 @@ public:
     // sets oldVal to the old value returned by the device, and
     // returns true if it was the expected value, ie. the lock succeeded
     virtual bool	locked(UInt32 *oldVal);
+
+	virtual void free( void );
+
+protected:
+
+	bool createMemberVariables( void );
+	void destroyMemberVariables( void );
+	
+	void setInputVals( const UInt32 *	cmpVal, const UInt32 * newVal, int size );
+
+	bool createMemoryDescriptor( void );
+	void destroyMemoryDescriptor( void );
     
 private:
     OSMetaClassDeclareReservedUnused(IOFWCompareAndSwapCommand, 0);
     OSMetaClassDeclareReservedUnused(IOFWCompareAndSwapCommand, 1);
     OSMetaClassDeclareReservedUnused(IOFWCompareAndSwapCommand, 2);
     OSMetaClassDeclareReservedUnused(IOFWCompareAndSwapCommand, 3);
+
+};
+
+/*
+ * Send an async stream packet
+ */
+
+/*! @class IOFWAsyncStreamCommand
+*/
+class IOFWAsyncStreamCommand : public IOFWCommand
+{
+	// temporary for debugging:
+	friend class IOFireWireUserClient ;
+
+	OSDeclareDefaultStructors(IOFWAsyncStreamCommand)
+
+protected:
+    FWAsyncStreamCallback	fComplete;
+    void *					fRefCon;
+    IOMemoryDescriptor 		* fMemDesc;
+    int						fSpeed;
+    int						fSize;
+    int						fCurRetries;
+    int						fMaxRetries;
+    int						fChannel;
+    int						fSyncBits;
+    int						fTag;
+    UInt32					fGeneration;	// bus topology fNodeID is valid for.
+    bool					fFailOnReset;
+		
+	/*! 
+		@struct ExpansionData
+		@discussion This structure will be used to expand the capablilties of the class in the future.
+    */    
+    struct ExpansionData { };
+
+	/*! 
+		@var reserved
+		Reserved for future use.  (Internal use only)  
+	*/
+    ExpansionData *reserved;
+
+    virtual IOReturn	complete(
+    							IOReturn 				status);
+    							
+	// To be called by IOFireWireController and derived classes.
+    virtual IOReturn	execute();
+
+public:
+
+    virtual bool		initAll(
+    							IOFireWireController 	* control,
+                                UInt32 					generation, 
+                                UInt32 					channel,
+                                UInt32 					sync,
+                                UInt32 					tag,
+                                IOMemoryDescriptor 		* hostMem,
+                                UInt32					size,
+                                int						speed,
+                                FWAsyncStreamCallback	completion,
+                                void 					* refcon);
+    virtual IOReturn	reinit(	UInt32 					generation, 
+                                UInt32 					channel,
+                                UInt32 					sync,
+                                UInt32 					tag,
+                                IOMemoryDescriptor 		* hostMem,
+                                UInt32					size,
+                                int						speed,
+                               	FWAsyncStreamCallback	completion,
+                                void 					* refcon);
+
+    virtual void				gotAck(
+    							int 					ackCode);
+	// Utility for setting generation on newly created command
+	virtual void				setGeneration(
+								UInt32 					generation)
+	{ fGeneration = generation; }
+
+ 
+    // update nodeID/generation after bus reset, from the device object
+    IOReturn		updateGeneration();
+    
+    bool		failOnReset() const
+    { return fFailOnReset; }
+    
+
+private:
+    OSMetaClassDeclareReservedUnused(IOFWAsyncStreamCommand, 0);
+    OSMetaClassDeclareReservedUnused(IOFWAsyncStreamCommand, 1);
+    OSMetaClassDeclareReservedUnused(IOFWAsyncStreamCommand, 2);
+    OSMetaClassDeclareReservedUnused(IOFWAsyncStreamCommand, 3);
 
 };
 

@@ -3,9 +3,9 @@
  
      Contains:   MathLib style functions for vectors
  
-     Version:    vecLib-1.1_8~32
+     Version:    vecLib-138.1~9
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,7 @@
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -28,14 +29,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 /*
@@ -64,7 +57,7 @@ extern "C" {
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vdivf(vector float A, vector float B);
+extern vector float  vdivf(vector float A, vector float B)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -75,7 +68,7 @@ extern vector float  vdivf(vector float A, vector float B);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vsqrtf(vector float X);
+extern vector float  vsqrtf(vector float X)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -86,7 +79,7 @@ extern vector float  vsqrtf(vector float X);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vrsqrtf(vector float X);
+extern vector float  vrsqrtf(vector float X)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -117,7 +110,7 @@ extern vector float  vrsqrtf(vector float X);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vexpf(vector float X);
+extern vector float  vexpf(vector float X)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -128,7 +121,7 @@ extern vector float  vexpf(vector float X);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vexpm1f(vector float X);
+extern vector float  vexpm1f(vector float X)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -139,7 +132,7 @@ extern vector float  vexpm1f(vector float X);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vlogf(vector float X);
+extern vector float  vlogf(vector float X)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -150,7 +143,7 @@ extern vector float  vlogf(vector float X);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vlog1pf(vector float X);
+extern vector float  vlog1pf(vector float X)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -161,7 +154,7 @@ extern vector float  vlog1pf(vector float X);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vlogbf(vector float X);
+extern vector float  vlogbf(vector float X)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -172,7 +165,7 @@ extern vector float  vlogbf(vector float X);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vscalbf(vector float X, vector signed int n);
+extern vector float  vscalbf(vector float X, vector signed int n)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -200,7 +193,7 @@ extern vector float  vscalbf(vector float X, vector signed int n);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vfabf(vector float v);
+extern vector float  vfabf(vector float v)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -211,7 +204,7 @@ extern vector float  vfabf(vector float v);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vcopysignf(vector float arg2, vector float arg1);
+extern vector float  vcopysignf(vector float arg2, vector float arg1)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -222,7 +215,7 @@ extern vector float  vcopysignf(vector float arg2, vector float arg1);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vnextafterf(vector float x, vector float y);
+extern vector float  vnextafterf(vector float x, vector float y)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -244,7 +237,7 @@ extern vector float  vnextafterf(vector float x, vector float y);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector unsigned int  vclassifyf(vector float arg);
+extern vector unsigned int  vclassifyf(vector float arg)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -255,7 +248,7 @@ extern vector unsigned int  vclassifyf(vector float arg);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector unsigned int  vsignbitf(vector float arg);
+extern vector unsigned int  vsignbitf(vector float arg)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -277,7 +270,7 @@ extern vector unsigned int  vsignbitf(vector float arg);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vsinf(vector float arg);
+extern vector float  vsinf(vector float arg)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -288,7 +281,7 @@ extern vector float  vsinf(vector float arg);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vcosf(vector float arg);
+extern vector float  vcosf(vector float arg)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -299,7 +292,7 @@ extern vector float  vcosf(vector float arg);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vtanf(vector float arg);
+extern vector float  vtanf(vector float arg)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -323,7 +316,7 @@ extern vector float  vtanf(vector float arg);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vasinf(vector float arg);
+extern vector float  vasinf(vector float arg)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -334,7 +327,7 @@ extern vector float  vasinf(vector float arg);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vacosf(vector float arg);
+extern vector float  vacosf(vector float arg)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -345,7 +338,7 @@ extern vector float  vacosf(vector float arg);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vatanf(vector float arg);
+extern vector float  vatanf(vector float arg)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -356,7 +349,7 @@ extern vector float  vatanf(vector float arg);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vatan2f(vector float arg1, vector float arg2);
+extern vector float  vatan2f(vector float arg1, vector float arg2)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -381,7 +374,7 @@ extern vector float  vatan2f(vector float arg1, vector float arg2);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vsinhf(vector float X);
+extern vector float  vsinhf(vector float X)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -392,7 +385,7 @@ extern vector float  vsinhf(vector float X);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vcoshf(vector float X);
+extern vector float  vcoshf(vector float X)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -403,7 +396,7 @@ extern vector float  vcoshf(vector float X);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vtanhf(vector float X);
+extern vector float  vtanhf(vector float X)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -414,7 +407,7 @@ extern vector float  vtanhf(vector float X);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vasinhf(vector float X);
+extern vector float  vasinhf(vector float X)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -425,7 +418,7 @@ extern vector float  vasinhf(vector float X);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vacoshf(vector float X);
+extern vector float  vacoshf(vector float X)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -436,7 +429,7 @@ extern vector float  vacoshf(vector float X);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vatanhf(vector float X);
+extern vector float  vatanhf(vector float X)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -460,7 +453,7 @@ extern vector float  vatanhf(vector float X);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vfmodf(vector float X, vector float Y);
+extern vector float  vfmodf(vector float X, vector float Y)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -471,7 +464,7 @@ extern vector float  vfmodf(vector float X, vector float Y);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vremainderf(vector float X, vector float Y);
+extern vector float  vremainderf(vector float X, vector float Y)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -482,7 +475,7 @@ extern vector float  vremainderf(vector float X, vector float Y);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vremquof(vector float X, vector float Y, vector unsigned int *QUO);
+extern vector float  vremquof(vector float X, vector float Y, vector unsigned int *QUO)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -504,7 +497,7 @@ extern vector float  vremquof(vector float X, vector float Y, vector unsigned in
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vipowf(vector float X, vector signed int Y);
+extern vector float  vipowf(vector float X, vector signed int Y)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -515,7 +508,7 @@ extern vector float  vipowf(vector float X, vector signed int Y);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector float  vpowf(vector float X, vector float Y);
+extern vector float  vpowf(vector float X, vector float Y)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -533,19 +526,11 @@ extern vector float  vpowf(vector float X, vector float Y);
  *    CarbonLib:        not in Carbon, but vecLib is compatible with Carbon
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vector unsigned int  vtablelookup(vector signed int Index_Vect, unsigned long *Table);
+extern vector unsigned int  vtablelookup(vector signed int Index_Vect, unsigned long *Table)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #endif  /* defined(__VEC__) */
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

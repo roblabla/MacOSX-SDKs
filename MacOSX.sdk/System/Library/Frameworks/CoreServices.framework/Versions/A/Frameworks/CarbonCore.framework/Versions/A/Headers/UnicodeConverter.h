@@ -3,9 +3,9 @@
  
      Contains:   Types, constants, and prototypes for Unicode Converter
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1994-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -30,6 +30,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -39,13 +40,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* Unicode conversion contexts: */
 typedef struct OpaqueTextToUnicodeInfo*  TextToUnicodeInfo;
@@ -81,7 +76,8 @@ enum {
   kUnicodeKeepSameEncodingBit   = 8,
   kUnicodeForceASCIIRangeBit    = 9,
   kUnicodeNoHalfwidthCharsBit   = 10,
-  kUnicodeTextRunHeuristicsBit  = 11
+  kUnicodeTextRunHeuristicsBit  = 11,
+  kUnicodeMapLineFeedToReturnBit = 12
 };
 
 enum {
@@ -95,7 +91,8 @@ enum {
   kUnicodeKeepSameEncodingMask  = 1L << kUnicodeKeepSameEncodingBit,
   kUnicodeForceASCIIRangeMask   = 1L << kUnicodeForceASCIIRangeBit,
   kUnicodeNoHalfwidthCharsMask  = 1L << kUnicodeNoHalfwidthCharsBit,
-  kUnicodeTextRunHeuristicsMask = 1L << kUnicodeTextRunHeuristicsBit
+  kUnicodeTextRunHeuristicsMask = 1L << kUnicodeTextRunHeuristicsBit,
+  kUnicodeMapLineFeedToReturnMask = 1L << kUnicodeMapLineFeedToReturnBit
 };
 
 /* Values for kUnicodeDirectionality field */
@@ -183,7 +180,7 @@ typedef STACK_UPP_TYPE(UnicodeToTextFallbackProcPtr)            UnicodeToTextFal
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern UnicodeToTextFallbackUPP
-NewUnicodeToTextFallbackUPP(UnicodeToTextFallbackProcPtr userRoutine);
+NewUnicodeToTextFallbackUPP(UnicodeToTextFallbackProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeUnicodeToTextFallbackUPP()
@@ -194,7 +191,7 @@ NewUnicodeToTextFallbackUPP(UnicodeToTextFallbackProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeUnicodeToTextFallbackUPP(UnicodeToTextFallbackUPP userUPP);
+DisposeUnicodeToTextFallbackUPP(UnicodeToTextFallbackUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeUnicodeToTextFallbackUPP()
@@ -214,7 +211,7 @@ InvokeUnicodeToTextFallbackUPP(
   ByteCount *               oDestConvLen,
   LogicalAddress            iInfoPtr,
   ConstUnicodeMappingPtr    iUnicodeMappingPtr,
-  UnicodeToTextFallbackUPP  userUPP);
+  UnicodeToTextFallbackUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /* Function prototypes */
 /*
@@ -228,7 +225,7 @@ InvokeUnicodeToTextFallbackUPP(
 extern OSStatus 
 CreateTextToUnicodeInfo(
   ConstUnicodeMappingPtr   iUnicodeMapping,
-  TextToUnicodeInfo *      oTextToUnicodeInfo);
+  TextToUnicodeInfo *      oTextToUnicodeInfo)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -242,7 +239,7 @@ CreateTextToUnicodeInfo(
 extern OSStatus 
 CreateTextToUnicodeInfoByEncoding(
   TextEncoding         iEncoding,
-  TextToUnicodeInfo *  oTextToUnicodeInfo);
+  TextToUnicodeInfo *  oTextToUnicodeInfo)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -256,7 +253,7 @@ CreateTextToUnicodeInfoByEncoding(
 extern OSStatus 
 CreateUnicodeToTextInfo(
   ConstUnicodeMappingPtr   iUnicodeMapping,
-  UnicodeToTextInfo *      oUnicodeToTextInfo);
+  UnicodeToTextInfo *      oUnicodeToTextInfo)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -270,7 +267,7 @@ CreateUnicodeToTextInfo(
 extern OSStatus 
 CreateUnicodeToTextInfoByEncoding(
   TextEncoding         iEncoding,
-  UnicodeToTextInfo *  oUnicodeToTextInfo);
+  UnicodeToTextInfo *  oUnicodeToTextInfo)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -285,7 +282,7 @@ extern OSStatus
 CreateUnicodeToTextRunInfo(
   ItemCount               iNumberOfMappings,
   const UnicodeMapping    iUnicodeMappings[],
-  UnicodeToTextRunInfo *  oUnicodeToTextInfo);
+  UnicodeToTextRunInfo *  oUnicodeToTextInfo)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -300,7 +297,7 @@ extern OSStatus
 CreateUnicodeToTextRunInfoByEncoding(
   ItemCount               iNumberOfEncodings,
   const TextEncoding      iEncodings[],
-  UnicodeToTextRunInfo *  oUnicodeToTextInfo);
+  UnicodeToTextRunInfo *  oUnicodeToTextInfo)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -315,7 +312,7 @@ extern OSStatus
 CreateUnicodeToTextRunInfoByScriptCode(
   ItemCount               iNumberOfScriptCodes,
   const ScriptCode        iScripts[],
-  UnicodeToTextRunInfo *  oUnicodeToTextInfo);
+  UnicodeToTextRunInfo *  oUnicodeToTextInfo)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Change the TextToUnicodeInfo to another mapping. */
@@ -330,7 +327,7 @@ CreateUnicodeToTextRunInfoByScriptCode(
 extern OSStatus 
 ChangeTextToUnicodeInfo(
   TextToUnicodeInfo        ioTextToUnicodeInfo,
-  ConstUnicodeMappingPtr   iUnicodeMapping);
+  ConstUnicodeMappingPtr   iUnicodeMapping)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Change the UnicodeToTextInfo to another mapping. */
@@ -345,7 +342,7 @@ ChangeTextToUnicodeInfo(
 extern OSStatus 
 ChangeUnicodeToTextInfo(
   UnicodeToTextInfo        ioUnicodeToTextInfo,
-  ConstUnicodeMappingPtr   iUnicodeMapping);
+  ConstUnicodeMappingPtr   iUnicodeMapping)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -358,7 +355,7 @@ ChangeUnicodeToTextInfo(
  *    Non-Carbon CFM:   in UnicodeConverter 1.1 and later
  */
 extern OSStatus 
-DisposeTextToUnicodeInfo(TextToUnicodeInfo * ioTextToUnicodeInfo);
+DisposeTextToUnicodeInfo(TextToUnicodeInfo * ioTextToUnicodeInfo) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -370,7 +367,7 @@ DisposeTextToUnicodeInfo(TextToUnicodeInfo * ioTextToUnicodeInfo);
  *    Non-Carbon CFM:   in UnicodeConverter 1.1 and later
  */
 extern OSStatus 
-DisposeUnicodeToTextInfo(UnicodeToTextInfo * ioUnicodeToTextInfo);
+DisposeUnicodeToTextInfo(UnicodeToTextInfo * ioUnicodeToTextInfo) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -382,7 +379,7 @@ DisposeUnicodeToTextInfo(UnicodeToTextInfo * ioUnicodeToTextInfo);
  *    Non-Carbon CFM:   in UnicodeConverter 1.1 and later
  */
 extern OSStatus 
-DisposeUnicodeToTextRunInfo(UnicodeToTextRunInfo * ioUnicodeToTextRunInfo);
+DisposeUnicodeToTextRunInfo(UnicodeToTextRunInfo * ioUnicodeToTextRunInfo) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -406,7 +403,7 @@ ConvertFromTextToUnicode(
   ByteCount             iOutputBufLen,
   ByteCount *           oSourceRead,
   ByteCount *           oUnicodeLen,
-  UniChar               oUnicodeStr[]);
+  UniChar               oUnicodeStr[])                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -430,7 +427,7 @@ ConvertFromUnicodeToText(
   ByteCount           iOutputBufLen,
   ByteCount *         oInputRead,
   ByteCount *         oOutputLen,
-  LogicalAddress      oOutputStr);
+  LogicalAddress      oOutputStr)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -457,7 +454,7 @@ ConvertFromUnicodeToTextRun(
   LogicalAddress         oOutputStr,
   ItemCount              iEncodingRunBufLen,
   ItemCount *            oEncodingRunOutLen,
-  TextEncodingRun        oEncodingRuns[]);
+  TextEncodingRun        oEncodingRuns[])                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -484,7 +481,7 @@ ConvertFromUnicodeToScriptCodeRun(
   LogicalAddress         oOutputStr,
   ItemCount              iScriptRunBufLen,
   ItemCount *            oScriptRunOutLen,
-  ScriptCodeRun          oScriptCodeRuns[]);
+  ScriptCodeRun          oScriptCodeRuns[])                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Truncate a multibyte string at a safe place. */
@@ -502,7 +499,7 @@ TruncateForTextToUnicode(
   ByteCount                iSourceLen,
   ConstLogicalAddress      iSourceStr,
   ByteCount                iMaxLen,
-  ByteCount *              oTruncatedLen);
+  ByteCount *              oTruncatedLen)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Truncate a Unicode string at a safe place. */
@@ -521,7 +518,7 @@ TruncateForUnicodeToText(
   const UniChar            iSourceStr[],
   OptionBits               iControlFlags,
   ByteCount                iMaxLen,
-  ByteCount *              oTruncatedLen);
+  ByteCount *              oTruncatedLen)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Convert a Pascal string to Unicode string. */
@@ -539,7 +536,7 @@ ConvertFromPStringToUnicode(
   ConstStr255Param    iPascalStr,
   ByteCount           iOutputBufLen,
   ByteCount *         oUnicodeLen,
-  UniChar             oUnicodeStr[]);
+  UniChar             oUnicodeStr[])                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Convert a Unicode string to Pascal string. */
@@ -556,7 +553,7 @@ ConvertFromUnicodeToPString(
   UnicodeToTextInfo   iUnicodeToTextInfo,
   ByteCount           iUnicodeLen,
   const UniChar       iUnicodeStr[],
-  Str255              oPascalStr);
+  Str255              oPascalStr)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Count the available conversion mappings. */
@@ -572,7 +569,7 @@ extern OSStatus
 CountUnicodeMappings(
   OptionBits               iFilter,
   ConstUnicodeMappingPtr   iFindMapping,
-  ItemCount *              oActualCount);
+  ItemCount *              oActualCount)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Get a list of the available conversion mappings. */
@@ -590,7 +587,7 @@ QueryUnicodeMappings(
   ConstUnicodeMappingPtr   iFindMapping,
   ItemCount                iMaxCount,
   ItemCount *              oActualCount,
-  UnicodeMapping           oReturnedMappings[]);
+  UnicodeMapping           oReturnedMappings[])               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Setup the fallback handler for converting Unicode To Text. */
@@ -607,7 +604,7 @@ SetFallbackUnicodeToText(
   UnicodeToTextInfo          iUnicodeToTextInfo,
   UnicodeToTextFallbackUPP   iFallback,
   OptionBits                 iControlFlags,
-  LogicalAddress             iInfoPtr);
+  LogicalAddress             iInfoPtr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Setup the fallback handler for converting Unicode To TextRuns. */
@@ -624,7 +621,7 @@ SetFallbackUnicodeToTextRun(
   UnicodeToTextRunInfo       iUnicodeToTextRunInfo,
   UnicodeToTextFallbackUPP   iFallback,
   OptionBits                 iControlFlags,
-  LogicalAddress             iInfoPtr);
+  LogicalAddress             iInfoPtr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Re-initialize all state information kept by the context objects. */
@@ -637,7 +634,7 @@ SetFallbackUnicodeToTextRun(
  *    Non-Carbon CFM:   in UnicodeConverter 1.3 and later
  */
 extern OSStatus 
-ResetTextToUnicodeInfo(TextToUnicodeInfo ioTextToUnicodeInfo);
+ResetTextToUnicodeInfo(TextToUnicodeInfo ioTextToUnicodeInfo) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Re-initialize all state information kept by the context objects. */
@@ -650,7 +647,7 @@ ResetTextToUnicodeInfo(TextToUnicodeInfo ioTextToUnicodeInfo);
  *    Non-Carbon CFM:   in UnicodeConverter 1.1 and later
  */
 extern OSStatus 
-ResetUnicodeToTextInfo(UnicodeToTextInfo ioUnicodeToTextInfo);
+ResetUnicodeToTextInfo(UnicodeToTextInfo ioUnicodeToTextInfo) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Re-initialize all state information kept by the context objects in TextRun conversions. */
@@ -663,18 +660,12 @@ ResetUnicodeToTextInfo(UnicodeToTextInfo ioUnicodeToTextInfo);
  *    Non-Carbon CFM:   in UnicodeConverter 1.1 and later
  */
 extern OSStatus 
-ResetUnicodeToTextRunInfo(UnicodeToTextRunInfo ioUnicodeToTextRunInfo);
+ResetUnicodeToTextRunInfo(UnicodeToTextRunInfo ioUnicodeToTextRunInfo) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

@@ -30,7 +30,7 @@
 
 #ifndef _NETAT_ADSP_H_
 #define _NETAT_ADSP_H_
-
+#include <sys/appleapiopts.h>
 /* ADSP flags for read, write, and close routines */
 
 #define	ADSP_EOM	0x01	/* Sent or received EOM with data */
@@ -473,7 +473,7 @@ typedef struct {
 } DDP_FRAME;
 
 #define DDPS_FRAME_LEN     5
-#endif NOT_USED
+#endif /* NOT_USED */
 
 typedef struct {
   ua_short   ddpx_length;            /* length and hop count        */
@@ -591,7 +591,7 @@ typedef struct
    u_char  ResponderLink;
    u_char  data[1];
 } RESPONDER_FRAME;
-#endif NOT_USED
+#endif /* NOT_USED */
 
 /*
  * ADSP Frame
@@ -664,6 +664,7 @@ typedef struct {
 #define ADSPGETPEER	((AT_MID_ADSP<<8) | 238)
 
 #ifdef KERNEL
+#ifdef __APPLE_API_PRIVATE
 
 /* from h/adsp_adsp.h */
 
@@ -700,5 +701,6 @@ struct adsp_debug {
     int ad_sendWdwSeq;
 };
 
-#endif
+#endif /* __APPLE_API_PRIVATE */
+#endif /* KERNEL */
 #endif /* _NETAT_ADSP_H_ */

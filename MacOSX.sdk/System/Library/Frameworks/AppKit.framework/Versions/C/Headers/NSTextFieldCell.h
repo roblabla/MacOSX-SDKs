@@ -7,6 +7,13 @@
 
 #import <AppKit/NSActionCell.h>
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+typedef enum {
+    NSTextFieldSquareBezel  = 0,
+    NSTextFieldRoundedBezel = 1
+} NSTextFieldBezelStyle;
+#endif
+
 @class NSColor;
 
 @interface NSTextFieldCell : NSActionCell  {
@@ -15,7 +22,8 @@
     NSColor *_textColor;
     struct __tfFlags {
 	unsigned int drawsBackground:1;
-	unsigned int reservedTextFieldCell:31;
+	unsigned int bezelStyle:3;
+	unsigned int reservedTextFieldCell:28;
     } _tfFlags;
 }
 
@@ -27,6 +35,11 @@
 - (void)setTextColor:(NSColor *)color;
 - (NSColor *)textColor;
 - (NSText *)setUpFieldEditorAttributes:(NSText *)textObj;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (void)setBezelStyle:(NSTextFieldBezelStyle)style;
+- (NSTextFieldBezelStyle)bezelStyle;
+#endif
 
 @end
 

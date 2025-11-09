@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -20,7 +20,7 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 /*
- * Copyright (c) 1999 Apple Computer, Inc.  All rights reserved.
+ * Copyright (c) 1999-2002 Apple Computer, Inc.  All rights reserved.
  *
  * IOFWIsochPort is an abstract object that represents hardware on the bus
  * (locally or remotely) that sends or receives isochronous packets.
@@ -36,7 +36,7 @@
 #define _IOKIT_IOFWISOCHPORT_H
 
 #include <libkern/c++/OSObject.h>
-#include <IOKit/firewire/IOFWRegs.h>
+#include <IOKit/firewire/IOFireWireFamilyCommon.h>
 
 class IOFWIsochPort : public OSObject
 {

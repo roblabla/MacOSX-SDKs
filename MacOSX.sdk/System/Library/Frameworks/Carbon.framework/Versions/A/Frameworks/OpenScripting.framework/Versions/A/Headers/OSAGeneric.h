@@ -3,9 +3,9 @@
  
      Contains:   AppleScript Generic Component Interfaces.
  
-     Version:    OSA-30~10
+     Version:    OSA-48~15
  
-     Copyright:  © 1992-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1992-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,12 +16,8 @@
 #ifndef __OSAGENERIC__
 #define __OSAGENERIC__
 
-#ifndef __MACERRORS__
-#include <CarbonCore/MacErrors.h>
-#endif
-
-#ifndef __APPLEEVENTS__
-#include <AE/AppleEvents.h>
+#ifndef __APPLICATIONSERVICES__
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 #ifndef __OSA__
@@ -30,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -37,14 +34,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 /*    NOTE:   This interface defines a "generic scripting component."
@@ -85,7 +74,7 @@ typedef OSAID                           GenericID;
 extern OSAError 
 OSAGetDefaultScriptingComponent(
   ComponentInstance             genericScriptingComponent,
-  ScriptingComponentSelector *  scriptingSubType);
+  ScriptingComponentSelector *  scriptingSubType)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -99,7 +88,7 @@ OSAGetDefaultScriptingComponent(
 extern OSAError 
 OSASetDefaultScriptingComponent(
   ComponentInstance            genericScriptingComponent,
-  ScriptingComponentSelector   scriptingSubType);
+  ScriptingComponentSelector   scriptingSubType)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* get a scripting component instance from its subtype code */
@@ -115,7 +104,7 @@ extern OSAError
 OSAGetScriptingComponent(
   ComponentInstance            genericScriptingComponent,
   ScriptingComponentSelector   scriptingSubType,
-  ComponentInstance *          scriptingInstance);
+  ComponentInstance *          scriptingInstance)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* get a scripting component selector (subType) from a stored script */
@@ -131,7 +120,7 @@ extern OSAError
 OSAGetScriptingComponentFromStored(
   ComponentInstance             genericScriptingComponent,
   const AEDesc *                scriptData,
-  ScriptingComponentSelector *  scriptingSubType);
+  ScriptingComponentSelector *  scriptingSubType)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* get a real component instance and script id from a generic id */
@@ -147,7 +136,7 @@ extern OSAError
 OSAGenericToRealID(
   ComponentInstance    genericScriptingComponent,
   OSAID *              theScriptID,
-  ComponentInstance *  theExactComponent);
+  ComponentInstance *  theExactComponent)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* get a generic id from a real component instance and script id */
@@ -163,19 +152,11 @@ extern OSAError
 OSARealToGenericID(
   ComponentInstance   genericScriptingComponent,
   OSAID *             theScriptID,
-  ComponentInstance   theExactComponent);
+  ComponentInstance   theExactComponent)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

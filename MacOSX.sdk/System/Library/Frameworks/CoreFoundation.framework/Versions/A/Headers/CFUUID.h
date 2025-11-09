@@ -1,5 +1,5 @@
 /*	CFUUID.h
-	Copyright 1999-2001, Apple, Inc. All rights reserved.
+	Copyright 1999-2002, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFUUID__)

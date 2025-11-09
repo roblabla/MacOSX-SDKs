@@ -1,7 +1,9 @@
 /*
-     File:       AvailabilityMacros.h
+     File:       AvailabilityMacros.h (QuickTime 6.4 edition)
  
-     Copyright:  (c) 2001-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 2001-2003 by Apple Computer, Inc., all rights reserved.
+
+     More Info:  See TechNote 2064
 
      Contains:   Autoconfiguration of AVAILABLE_ macros for Mac OS X
 
@@ -76,20 +78,21 @@
 
 
 /* 
- * If developer did not specify minimum OS, assume 10.0
+ * If min OS not specified, assume 10.0
+ * Note: gcc driver may set MAC_OS_X_VERSION_MIN_REQUIRED based on MACOSX_DEPLOYMENT_TARGET environment variable
  */
 #ifndef MAC_OS_X_VERSION_MIN_REQUIRED
     #define MAC_OS_X_VERSION_MIN_REQUIRED MAC_OS_X_VERSION_10_0
 #endif
 
 /*
- * if developer does not specify maximum OS, assume largerof(10.1, min)
+ * if max OS not specified, assume largerof(10.3, min) (Modified for QuickTime)
  */
 #ifndef MAC_OS_X_VERSION_MAX_ALLOWED
-    #if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_1
+    #if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_3
         #define MAC_OS_X_VERSION_MAX_ALLOWED MAC_OS_X_VERSION_MIN_REQUIRED
     #else
-        #define MAC_OS_X_VERSION_MAX_ALLOWED MAC_OS_X_VERSION_10_1
+        #define MAC_OS_X_VERSION_MAX_ALLOWED MAC_OS_X_VERSION_10_2
     #endif
 #endif
 
@@ -273,6 +276,69 @@
     #define DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER
 #endif
 
+
+
+
+
+/*
+ * AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER
+ * 
+ * Used on declarations introduced in Mac OS X 10.3 (Modified for QuickTime)
+ */
+#if MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_2
+    #define AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER     UNAVAILABLE_ATTRIBUTE
+#elif MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_3
+    #define AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER     WEAK_IMPORT_ATTRIBUTE
+#else
+    #define AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER
+#endif
+
+/*
+ * AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED
+ * 
+ * Used on declarations introduced in Mac OS X 10.3, 
+ * and deprecated in Mac OS X 10.3
+ */
+#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_3
+    #define AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED    DEPRECATED_ATTRIBUTE
+#else
+    #define AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER
+#endif
+
+/*
+ * AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3
+ * 
+ * Used on declarations introduced in Mac OS X 10.0, 
+ * but later deprecated in Mac OS X 10.3
+ */
+#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_3
+    #define AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3    DEPRECATED_ATTRIBUTE
+#else
+    #define AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER
+#endif
+
+/*
+ * AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3
+ * 
+ * Used on declarations introduced in Mac OS X 10.1, 
+ * but later deprecated in Mac OS X 10.3
+ */
+#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_3
+    #define AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3    DEPRECATED_ATTRIBUTE
+#else
+    #define AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER
+#endif
+
+/*
+ * DEPRECATED_IN_MAC_OS_X_VERSION_10_3_AND_LATER
+ * 
+ * Used on types deprecated in Mac OS X 10.3 
+ */
+#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_3
+    #define DEPRECATED_IN_MAC_OS_X_VERSION_10_3_AND_LATER    DEPRECATED_ATTRIBUTE
+#else
+    #define DEPRECATED_IN_MAC_OS_X_VERSION_10_3_AND_LATER
+#endif
 
 
 

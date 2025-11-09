@@ -3,9 +3,9 @@
  
      Contains:   Time Manager interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -30,6 +30,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -39,13 +40,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
                                         /* high bit of qType is set if task is active */
@@ -74,7 +69,7 @@ struct TMTask {
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-InsTime(QElemPtr tmTaskPtr);
+InsTime(QElemPtr tmTaskPtr)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -86,7 +81,7 @@ InsTime(QElemPtr tmTaskPtr);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-InsXTime(QElemPtr tmTaskPtr);
+InsXTime(QElemPtr tmTaskPtr)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -100,7 +95,7 @@ InsXTime(QElemPtr tmTaskPtr);
 extern void 
 PrimeTime(
   QElemPtr   tmTaskPtr,
-  long       count);
+  long       count)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -112,7 +107,7 @@ PrimeTime(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-RmvTime(QElemPtr tmTaskPtr);
+RmvTime(QElemPtr tmTaskPtr)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -128,7 +123,7 @@ RmvTime(QElemPtr tmTaskPtr);
  *    Non-Carbon CFM:   in InterfaceLib 9.1 and later
  */
 extern OSErr 
-InstallTimeTask(QElemPtr tmTaskPtr);
+InstallTimeTask(QElemPtr tmTaskPtr)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -140,7 +135,7 @@ InstallTimeTask(QElemPtr tmTaskPtr);
  *    Non-Carbon CFM:   in InterfaceLib 9.1 and later
  */
 extern OSErr 
-InstallXTimeTask(QElemPtr tmTaskPtr);
+InstallXTimeTask(QElemPtr tmTaskPtr)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -154,7 +149,7 @@ InstallXTimeTask(QElemPtr tmTaskPtr);
 extern OSErr 
 PrimeTimeTask(
   QElemPtr   tmTaskPtr,
-  long       count);
+  long       count)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -166,7 +161,7 @@ PrimeTimeTask(
  *    Non-Carbon CFM:   in InterfaceLib 9.1 and later
  */
 extern OSErr 
-RemoveTimeTask(QElemPtr tmTaskPtr);
+RemoveTimeTask(QElemPtr tmTaskPtr)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -179,7 +174,7 @@ RemoveTimeTask(QElemPtr tmTaskPtr);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-Microseconds(UnsignedWide * microTickCount);
+Microseconds(UnsignedWide * microTickCount)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -191,7 +186,7 @@ Microseconds(UnsignedWide * microTickCount);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern TimerUPP
-NewTimerUPP(TimerProcPtr userRoutine);
+NewTimerUPP(TimerProcPtr userRoutine)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeTimerUPP()
@@ -202,7 +197,7 @@ NewTimerUPP(TimerProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeTimerUPP(TimerUPP userUPP);
+DisposeTimerUPP(TimerUPP userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeTimerUPP()
@@ -215,18 +210,12 @@ DisposeTimerUPP(TimerUPP userUPP);
 extern void
 InvokeTimerUPP(
   TMTaskPtr  tmTaskPtr,
-  TimerUPP   userUPP);
+  TimerUPP   userUPP)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -28,12 +28,60 @@
 #ifndef _IOKIT_IOFIREWIREUNIT_H
 #define _IOKIT_IOFIREWIREUNIT_H
 
+// public
 #include <IOKit/firewire/IOFireWireNub.h>
-class IOFireWireDevice;
 
+class IOFireWireDevice;
+class IOFireWireUnit;
+
+#pragma mark -
+
+/*! 
+	@class IOFireWireUnitAux
+*/
+
+class IOFireWireUnitAux : public IOFireWireNubAux
+{
+    OSDeclareDefaultStructors(IOFireWireUnitAux)
+
+	friend class IOFireWireUnit;
+	
+protected:
+	
+	/*! 
+		@struct ExpansionData
+		@discussion This structure will be used to expand the capablilties of the class in the future.
+    */  
+	  
+    struct ExpansionData { };
+
+	/*! 
+		@var reserved
+		Reserved for future use.  (Internal use only)  
+	*/
+    
+	ExpansionData * reserved;
+
+    virtual bool init( IOFireWireUnit * primary );
+	virtual	void free();
+	
+private:
+    OSMetaClassDeclareReservedUnused(IOFireWireUnitAux, 0);
+    OSMetaClassDeclareReservedUnused(IOFireWireUnitAux, 1);
+    OSMetaClassDeclareReservedUnused(IOFireWireUnitAux, 2);
+    OSMetaClassDeclareReservedUnused(IOFireWireUnitAux, 3);
+	
+};
+
+#pragma mark -
+
+/*! @class IOFireWireUnit
+*/
 class IOFireWireUnit : public IOFireWireNub
 {
     OSDeclareDefaultStructors(IOFireWireUnit)
+
+	friend class IOFireWireUnitAux;
 
 protected:
     IOFireWireDevice *fDevice;	// The device unit is part of
@@ -57,6 +105,8 @@ public:
      */
     virtual bool attach(IOService * provider );
 
+    virtual void free();
+	
     /*
      * Matching language support
      * Match on the following properties of the unit:
@@ -78,7 +128,21 @@ public:
     virtual void handleClose(   IOService *	  forClient,
                                 IOOptionBits	  options );
     
-    
+    virtual void setNodeFlags( UInt32 flags );
+	virtual void clearNodeFlags( UInt32 flags );
+    virtual UInt32 getNodeFlags( void );
+
+    /*
+     * Create local FireWire address spaces for the device to access
+     */
+    virtual IOFWPhysicalAddressSpace *createPhysicalAddressSpace(IOMemoryDescriptor *mem);
+    virtual IOFWPseudoAddressSpace *createPseudoAddressSpace(FWAddress *addr, UInt32 len,
+                    FWReadCallback reader, FWWriteCallback writer, void *refcon);
+
+protected:
+	
+	virtual IOFireWireNubAux * createAuxiliary( void );
+	    
 private:
     OSMetaClassDeclareReservedUnused(IOFireWireUnit, 0);
     OSMetaClassDeclareReservedUnused(IOFireWireUnit, 1);

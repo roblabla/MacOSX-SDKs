@@ -19,9 +19,9 @@
 #define __PMPRINTERBROWSERS__
 
 #include <ApplicationServices/ApplicationServices.h>
-#include <HIToolbox/HIToolbox.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/CFBundle.h>	
+#include <Carbon/Carbon.h>
 
 #if COREFOUNDATION_CFPLUGINCOM_SEPARATE
 	#include <CoreFoundation/CFPlugInCOM.h>
@@ -69,6 +69,7 @@ These flags are passed by PrintCenter in the Prologue() function.
 enum {
 	kPMPrBrowserPCNoFlags		= 0x00000000,	/* Empty flag word. */
 	kPMPrBrowserPCNoUI			= 0x00000001,	/* PBM will be loaded without UI. */
+	kPMPrBrowserPCGetTitle		= 0x00000010,	/* [Internal] used to obtain the title for the browser [never passed to plugins] */
 	kPMPrBrowserPCAllFlags		= (UInt32) -1	/* All flags set. */
 };
 

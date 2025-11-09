@@ -30,12 +30,40 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* memory_object_name_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 
 #ifdef __BeforeMigUserHeader
 __BeforeMigUserHeader
 #endif /* __BeforeMigUserHeader */
 
+/* typedefs for all requests */
+
+#ifndef __Request__memory_object_name_subsystem__defined
+#define __Request__memory_object_name_subsystem__defined
+#endif /* !__Request__memory_object_name_subsystem__defined */
+
+/* union of all requests */
+
+#ifndef __RequestUnion__memory_object_name_subsystem__defined
+#define __RequestUnion__memory_object_name_subsystem__defined
+union __RequestUnion__memory_object_name_subsystem {
+};
+#endif /* !__RequestUnion__memory_object_name_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__memory_object_name_subsystem__defined
+#define __Reply__memory_object_name_subsystem__defined
+#endif /* !__Reply__memory_object_name_subsystem__defined */
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__memory_object_name_subsystem__defined
+#define __ReplyUnion__memory_object_name_subsystem__defined
+union __ReplyUnion__memory_object_name_subsystem {
+};
+#endif /* !__RequestUnion__memory_object_name_subsystem__defined */
 
 #ifndef subsystem_to_name_map_memory_object_name
 #define subsystem_to_name_map_memory_object_name \

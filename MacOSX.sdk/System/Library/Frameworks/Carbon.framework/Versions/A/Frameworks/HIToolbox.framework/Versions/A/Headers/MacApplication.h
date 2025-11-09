@@ -3,9 +3,9 @@
  
      Contains:   Application-level APIs
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,15 +16,21 @@
 #ifndef __MACAPPLICATION__
 #define __MACAPPLICATION__
 
-#ifndef __COREGRAPHICS__
-#include <CoreGraphics/CoreGraphics.h>
+#ifndef __APPLICATIONSERVICES__
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
-#ifndef __QD__
-#include <QD/QD.h>
+#ifndef __MENUS__
+#include <HIToolbox/Menus.h>
+#endif
+
+#ifndef __HIOBJECT__
+#include <HIToolbox/HIObject.h>
 #endif
 
 
+
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -34,13 +40,197 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+
+/*
+ *  Summary:
+ *    Controls the presentation of system-provided user interface
+ *    elements.
+ *  
+ *  Discussion:
+ *    Note that the system UI mode is a per-process state. Switching
+ *    from a process that is suppressing system UI to another process
+ *    that is not will cause system UI elements to become visible
+ *    automatically. Switching back to the first process will suppress
+ *    system UI elements again.
+ */
+enum {
+
+  /*
+   * In this mode, all standard system UI elements are visible.
+   */
+  kUIModeNormal                 = 0,
+
+  /*
+   * In this mode, system UI elements which cover the "content area" of
+   * the screen (the area other than the menubar) are hidden. However,
+   * these elements may automatically show themselves in response to
+   * mouse movements or other user activity; specifically, the Dock
+   * will still show itself automatically when the mouse moves into the
+   * Dock's auto-show region.
+   */
+  kUIModeContentSuppressed      = 1,
+
+  /*
+   * In this mode, system UI elements which cover the "content area" of
+   * the screen (the area other than the menubar) are hidden. Unlike
+   * kUIModeContentSuppressed, most UI elements will not automatically
+   * show themselves in this mode.
+   */
+  kUIModeContentHidden          = 2,
+
+  /*
+   * In this mode, all system UI elements, including the menubar, are
+   * hidden. Most system UI elements will not automatically show
+   * themselves in this mode. The application may request that the
+   * menubar automatically show itself while in this mode by passing
+   * the kUIOptionAutoShowMenuBar flag to SetSystemUIMode.
+   */
+  kUIModeAllHidden              = 3
+};
+
+typedef UInt32                          SystemUIMode;
+
+/*
+ *  Summary:
+ *    Controls optional behavior of system-provided user interface
+ *    elements.
+ */
+enum {
+
+  /*
+   * Requests that the menubar automatically show itself when the user
+   * moves the mouse into the screen area that would ordinarily be
+   * occupied by the menubar. Only valid with kUIModeAllHidden.
+   */
+  kUIOptionAutoShowMenuBar      = 1 << 0,
+
+  /*
+   * Disables all items in the Apple menu. Valid for all modes.
+   */
+  kUIOptionDisableAppleMenu     = 1 << 2,
+
+  /*
+   * The active application may not be changed while this process is
+   * active. Currently disables the Command-Tab and Command-Shift-Tab
+   * key sequences to switch the active process, and the global window
+   * rotation key sequence selected by the user in the Keyboard
+   * preference pane. SetFrontProcess may still be used to explicitly
+   * switch the active process. Only valid with modes other than
+   * kUIModeNormal.
+   */
+  kUIOptionDisableProcessSwitch = 1 << 3,
+
+  /*
+   * The Force Quit window may not be displayed while this process is
+   * active. Currently disables the Command-Option-Escape key sequence
+   * to open the Force Quit window and the Force Quit menu item in the
+   * Apple menu. Only valid with modes other than kUIModeNormal.
+   */
+  kUIOptionDisableForceQuit     = 1 << 4,
+
+  /*
+   * The current login session may not be terminated while this process
+   * is active. Currently disables the Power key and the Restart, Shut
+   * Down, and Log Out menu items in the Apple menu. Only valid with
+   * modes other than kUIModeNormal.
+   */
+  kUIOptionDisableSessionTerminate = 1 << 5
+};
+
+typedef OptionBits                      SystemUIOptions;
+/*
+ *  SetSystemUIMode()
+ *  
+ *  Summary:
+ *    Sets the presentation mode for system-provided user interface
+ *    elements.
+ *  
+ *  Discussion:
+ *    The presentation mode of an application determines which
+ *    system-provided user interface elements are visible on thes
+ *    screen. When the frontmost application changes its presentation
+ *    mode, a kEventAppSystemUIModeChanged Carbon event is sent to all
+ *    applications that have registered for the event. This event is
+ *    also sent when an application is activated; it contains the newly
+ *    active application's presentation mode.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inMode:
+ *      The new mode.
+ *    
+ *    inOptions:
+ *      Options controlling how the new mode behaves.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+SetSystemUIMode(
+  SystemUIMode      inMode,
+  SystemUIOptions   inOptions)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  GetSystemUIMode()
+ *  
+ *  Summary:
+ *    Returns the current presentation mode of the application.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    outMode:
+ *      On exit, contains the current mode. You may pass NULL if you
+ *      don't need this information.
+ *    
+ *    outOptions:
+ *      On exit, contains the current options for the mode. You may
+ *      pass NULL if you don't need this information.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+GetSystemUIMode(
+  SystemUIMode *     outMode,          /* can be NULL */
+  SystemUIOptions *  outOptions)       /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  HIApplicationGetCurrent()
+ *  
+ *  Discussion:
+ *    Returns the HIObjectRef of the currently running application
+ *    object. This HIObject's EventTargetRef is what will be returned
+ *    from GetApplicationEventTarget.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Result:
+ *    The HIObjectRef of the currently running application object.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern HIObjectRef 
+HIApplicationGetCurrent(void)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
 
 /*
  *  SetApplicationDockTileImage()
@@ -48,8 +238,11 @@ extern "C" {
  *  Discussion:
  *    Sets the image for the tile in the dock that represents your
  *    application while it is running. If you set the image, it will
- *    revert back to its original image when your application
- *    terminates automatically. You do not need to manually restore it.
+ *    NOT revert back to its original image when your application
+ *    terminates. You need to manually restore it before quitting.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -65,7 +258,7 @@ extern "C" {
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-SetApplicationDockTileImage(CGImageRef inImage);
+SetApplicationDockTileImage(CGImageRef inImage)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -76,6 +269,9 @@ SetApplicationDockTileImage(CGImageRef inImage);
  *    image of your application's dock tile. You might do this to put a
  *    standard badge over your application's icon to indicate something
  *    to the user.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -91,7 +287,7 @@ SetApplicationDockTileImage(CGImageRef inImage);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-OverlayApplicationDockTileImage(CGImageRef inImage);
+OverlayApplicationDockTileImage(CGImageRef inImage)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -102,6 +298,9 @@ OverlayApplicationDockTileImage(CGImageRef inImage);
  *    image (your application icon). You would use this if some overlay
  *    or change of the application icon needed to be removed.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Result:
  *    An operating system status code.
  *  
@@ -111,7 +310,7 @@ OverlayApplicationDockTileImage(CGImageRef inImage);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-RestoreApplicationDockTileImage(void);
+RestoreApplicationDockTileImage(void)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -125,6 +324,9 @@ RestoreApplicationDockTileImage(void);
  *    If you call CGEndContext, the dock will never know you are done
  *    with the tile.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Result:
  *    An Quartz (Core Graphics) context reference.
  *  
@@ -134,7 +336,7 @@ RestoreApplicationDockTileImage(void);
  *    Non-Carbon CFM:   not available
  */
 extern CGContextRef 
-BeginCGContextForApplicationDockTile(void);
+BeginCGContextForApplicationDockTile(void)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -146,6 +348,9 @@ BeginCGContextForApplicationDockTile(void);
  *    NOT CGEndContext when using BeginCGContextForApplicationDockTile,
  *    as it locks your application's tile in the dock. If you call
  *    CGEndContext, the dock will never know you are done with the tile.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -159,7 +364,7 @@ BeginCGContextForApplicationDockTile(void);
  *    Non-Carbon CFM:   not available
  */
 extern void 
-EndCGContextForApplicationDockTile(CGContextRef inContext);
+EndCGContextForApplicationDockTile(CGContextRef inContext)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -176,6 +381,9 @@ EndCGContextForApplicationDockTile(CGContextRef inContext);
  *    call DisposePort, the dock will never know you are done with the
  *    tile.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Result:
  *    A Quickdraw port reference.
  *  
@@ -185,7 +393,7 @@ EndCGContextForApplicationDockTile(CGContextRef inContext);
  *    Non-Carbon CFM:   not available
  */
 extern CGrafPtr 
-BeginQDContextForApplicationDockTile(void);
+BeginQDContextForApplicationDockTile(void)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -197,6 +405,9 @@ BeginQDContextForApplicationDockTile(void);
  *    routine and NOT DisposePort when using
  *    BeginQDContextForApplicationDockTile, else the dock will never
  *    know you are done with the tile.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -210,7 +421,7 @@ BeginQDContextForApplicationDockTile(void);
  *    Non-Carbon CFM:   not available
  */
 extern void 
-EndQDContextForApplicationDockTile(CGrafPtr inContext);
+EndQDContextForApplicationDockTile(CGrafPtr inContext)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -236,6 +447,9 @@ EndQDContextForApplicationDockTile(CGrafPtr inContext);
  *    chosen, a kEventCommandProcess Carbon event containing the item's
  *    command ID will be sent to the user focus target.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inMenu:
@@ -248,7 +462,7 @@ EndQDContextForApplicationDockTile(CGrafPtr inContext);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-SetApplicationDockTileMenu(MenuRef inMenu);
+SetApplicationDockTileMenu(MenuRef inMenu)                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -256,6 +470,9 @@ SetApplicationDockTileMenu(MenuRef inMenu);
  *  
  *  Summary:
  *    Returns the menu that is displayed by the application's dock tile.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Result:
  *    The application's dock tile menu, or NULL if none.
@@ -266,13 +483,15 @@ SetApplicationDockTileMenu(MenuRef inMenu);
  *    Non-Carbon CFM:   not available
  */
 extern MenuRef 
-GetApplicationDockTileMenu(void);
+GetApplicationDockTileMenu(void)                              AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
-/* This API needs to go into Quickdraw.h sometime...*/
 /*
  *  CreateCGImageFromPixMaps()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -283,18 +502,61 @@ extern OSStatus
 CreateCGImageFromPixMaps(
   PixMapHandle   inImage,
   PixMapHandle   inMask,
-  CGImageRef *   outImage);
+  CGImageRef *   outImage)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  GetApplicationTextEncoding()
+ *  
+ *  Summary:
+ *    Returns the application's primary text encoding.
+ *  
+ *  Discussion:
+ *    The application text encoding is used when you create a
+ *    CFStringRef from text stored in Resource Manager resources, which
+ *    typically uses one of the Mac encodings such as MacRoman or
+ *    MacJapanese. The encoding is determined by: (a) if your app is
+ *    bundled, the encoding of the .lproj directory chosen by CFBundle,
+ *    (b) else if your plist has a CFBundleDevelopmentRegionKey, the
+ *    encoding specified by that key, (c) else if your app has a 'vers'
+ *    resource, the encoding for the region field in the 'vers', (d)
+ *    else the current localization of the operating system.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern TextEncoding 
+GetApplicationTextEncoding(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  GetApplicationScript()
+ *  
+ *  Summary:
+ *    Returns the application script.
+ *  
+ *  Discussion:
+ *    The application script is used when you need a ScriptCode to pass
+ *    to some other API, such as UseThemeFont.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern ScriptCode 
+GetApplicationScript(void)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

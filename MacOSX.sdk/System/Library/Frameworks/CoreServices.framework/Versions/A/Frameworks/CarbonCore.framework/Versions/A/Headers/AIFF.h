@@ -3,9 +3,9 @@
  
      Contains:   Definition of AIFF file format components.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1989-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1989-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,22 +22,13 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   AIFFID                        = 'AIFF',
@@ -214,17 +205,8 @@ struct TextChunk {
 typedef struct TextChunk                TextChunk;
 typedef TextChunk *                     TextChunkPtr;
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __AIFF__ */
 

@@ -3,9 +3,9 @@
  
      Contains:   Master include for LangAnalysis private framework
  
-     Version:    LanguageAnalysis-66~9
+     Version:    LanguageAnalysis-85.2.1~3
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

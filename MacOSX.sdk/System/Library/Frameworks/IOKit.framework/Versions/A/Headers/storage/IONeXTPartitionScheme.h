@@ -20,10 +20,20 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
+/*
+ * This header contains the IONeXTPartitionScheme class definition.
+ */
+
 #ifndef _IONEXTPARTITIONSCHEME_H
 #define _IONEXTPARTITIONSCHEME_H
 
 #include <IOKit/IOTypes.h>
+
+/*
+ * kIONeXTPartitionSchemeClass is the name of the IONeXTPartitionScheme class.
+ */
+
+#define kIONeXTPartitionSchemeClass "IONeXTPartitionScheme"
 
 /*
  * NeXT Partition Map Definitions
@@ -98,138 +108,5 @@ typedef struct disk_label
 #define DL_UNINIT       0x80000000                     /* (is uninitialized?) */
 
 #pragma options align=reset              /* (reset to default struct packing) */
-
-/*
- * Kernel
- */
-
-#if defined(KERNEL) && defined(__cplusplus)
-
-#include <IOKit/storage/IOPartitionScheme.h>
-
-/*
- * Class
- */
-
-class IONeXTPartitionScheme : public IOPartitionScheme
-{
-    OSDeclareDefaultStructors(IONeXTPartitionScheme);
-
-private:
-
-    /*
-     * Compute a 16-bit (big-endian) checksum over the specified data range.
-     */
-
-    UInt16 checksum16(void * data, UInt32 bytes) const;
-
-protected:
-
-    struct ExpansionData { /* */ };
-    ExpansionData * _expansionData;
-
-    OSSet * _partitions;    /* (set of media objects representing partitions) */
-
-    /*
-     * Free all of this object's outstanding resources.
-     */
-
-    virtual void free(void);
-
-    /*
-     * Scan the provider media for a NeXT partition map.    Returns the set
-     * of media objects representing each of the partitions (the retain for
-     * the set is passed to the caller), or null should no partition map be
-     * found.  The default probe score can be adjusted up or down, based on
-     * the confidence of the scan.
-     */
-
-    virtual OSSet * scan(SInt32 * score);
-
-    /*
-     * Ask whether the given partition is used.
-     */
-
-    virtual bool isPartitionUsed(partition_t * partition);
-
-    /*
-     * Ask whether the given partition appears to be corrupt. A partition that
-     * is corrupt will cause the failure of the NeXT partition map recognition
-     * altogether.
-     */
-
-    virtual bool isPartitionCorrupt( partition_t *  partition,
-                                     UInt32         partitionID,
-                                     UInt64         nextBase,
-                                     disk_label_t * nextMap );
-
-    /*
-     * Ask whether the given partition appears to be invalid.  A partition that
-     * is invalid will cause it to be skipped in the scan, but will not cause a
-     * failure of the NeXT partition map recognition.
-     */
-
-    virtual bool isPartitionInvalid( partition_t *  partition,
-                                     UInt32         partitionID,
-                                     UInt64         nextBase,
-                                     disk_label_t * nextMap );
-
-    /*
-     * Instantiate a new media object to represent the given partition.
-     */
-
-    virtual IOMedia * instantiateMediaObject( partition_t *  partition,
-                                              UInt32         partitionID,
-                                              UInt64         nextBase,
-                                              disk_label_t * nextMap );
-
-    /*
-     * Allocate a new media object (called from instantiateMediaObject).
-     */
-
-    virtual IOMedia * instantiateDesiredMediaObject( partition_t *  partition,
-                                                     UInt32         partitionID,
-                                                     UInt64         nextBase,
-                                                     disk_label_t * nextMap );
-
-public:
-
-    /*
-     * Initialize this object's minimal state.
-     */
-
-    virtual bool init(OSDictionary * properties = 0);
-
-    /*
-     * Determine whether the provider media contains a NeXT partition map.
-     */
-
-    virtual IOService * probe(IOService * provider, SInt32 * score);
-
-    /*
-     * Publish the new media objects which represent our partitions.
-     */
-
-    virtual bool start(IOService * provider);
-
-    OSMetaClassDeclareReservedUnused(IONeXTPartitionScheme,  0);
-    OSMetaClassDeclareReservedUnused(IONeXTPartitionScheme,  1);
-    OSMetaClassDeclareReservedUnused(IONeXTPartitionScheme,  2);
-    OSMetaClassDeclareReservedUnused(IONeXTPartitionScheme,  3);
-    OSMetaClassDeclareReservedUnused(IONeXTPartitionScheme,  4);
-    OSMetaClassDeclareReservedUnused(IONeXTPartitionScheme,  5);
-    OSMetaClassDeclareReservedUnused(IONeXTPartitionScheme,  6);
-    OSMetaClassDeclareReservedUnused(IONeXTPartitionScheme,  7);
-    OSMetaClassDeclareReservedUnused(IONeXTPartitionScheme,  8);
-    OSMetaClassDeclareReservedUnused(IONeXTPartitionScheme,  9);
-    OSMetaClassDeclareReservedUnused(IONeXTPartitionScheme, 10);
-    OSMetaClassDeclareReservedUnused(IONeXTPartitionScheme, 11);
-    OSMetaClassDeclareReservedUnused(IONeXTPartitionScheme, 12);
-    OSMetaClassDeclareReservedUnused(IONeXTPartitionScheme, 13);
-    OSMetaClassDeclareReservedUnused(IONeXTPartitionScheme, 14);
-    OSMetaClassDeclareReservedUnused(IONeXTPartitionScheme, 15);
-};
-
-#endif /* defined(KERNEL) && defined(__cplusplus) */
 
 #endif /* !_IONEXTPARTITIONSCHEME_H */

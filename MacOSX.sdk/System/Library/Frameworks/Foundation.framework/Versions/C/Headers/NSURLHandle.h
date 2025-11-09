@@ -1,16 +1,33 @@
 /*	NSURLHandle.h
-	Copyright 1997-2001, Apple, Inc. All rights reserved.
+	Copyright 1997-2002, Apple, Inc. All rights reserved.
 */
-
+ 
 #import <Foundation/NSObject.h>
 
 @class NSURLHandle, NSMutableArray, NSMutableData, NSData, NSURL;
 
+	// HTTP Specific Property Keys
 FOUNDATION_EXPORT NSString *NSHTTPPropertyStatusCodeKey;
 FOUNDATION_EXPORT NSString *NSHTTPPropertyStatusReasonKey;
 FOUNDATION_EXPORT NSString *NSHTTPPropertyServerHTTPVersionKey;
 FOUNDATION_EXPORT NSString *NSHTTPPropertyRedirectionHeadersKey;
 FOUNDATION_EXPORT NSString *NSHTTPPropertyErrorPageDataKey;
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+FOUNDATION_EXPORT NSString *NSHTTPPropertyHTTPProxy; // NSDictionary containing proxy information to use in place of proxy identified in SystemConfiguration.framework
+													// To avoid any proxy use, pass an empty dictionary
+#endif
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+// FTP Specific Property Keys
+	// All keys are optional.  The default configuration allows an
+	// anonymous, passive-mode, one-off transfer of the specified URL.
+FOUNDATION_EXPORT NSString *NSFTPPropertyUserLoginKey; // NSString - default "anonymous"
+FOUNDATION_EXPORT NSString *NSFTPPropertyUserPasswordKey; // NSString - default "NSURLHandle@apple.com"
+FOUNDATION_EXPORT NSString *NSFTPPropertyActiveTransferModeKey; // NSNumber BOOL - default NO (i.e. passive mode)
+FOUNDATION_EXPORT NSString *NSFTPPropertyFileOffsetKey; // NSNumber - default 0
+
+#endif
 
 typedef enum {
     NSURLHandleNotLoaded = 0,

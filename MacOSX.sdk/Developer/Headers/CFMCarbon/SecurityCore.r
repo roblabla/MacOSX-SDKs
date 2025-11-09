@@ -1,1 +1,1 @@
-../../../System/Library/Frameworks/CoreServices.framework/Frameworks/SecurityCore.framework/Headers/SecurityCore.r
+../../../System/Library/Frameworks/CoreServices.framework/Frameworks/OSServices.framework/Headers/SecurityCore.r

@@ -3,9 +3,9 @@
  
      Contains:   General purpose Image Capture definitions
  
-     Version:    ImageCapture-84.1~4
+     Version:    ImageCapture-125~203
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,20 +16,12 @@
 #ifndef __ICAAPPLICATION__
 #define __ICAAPPLICATION__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __FILES__
-#include <CarbonCore/Files.h>
-#endif
-
-#ifndef __CFDICTIONARY__
-#include <CoreFoundation/CFDictionary.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -39,17 +31,13 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 typedef struct OpaqueICAObject*         ICAObject;
 typedef struct OpaqueICAProperty*       ICAProperty;
 typedef struct OpaqueICAConnectionID*   ICAConnectionID;
+typedef struct OpaqueICAEventDataCookie*  ICAEventDataCookie;
+typedef struct OpaqueICAScannerSessionID*  ICAScannerSessionID;
 /*
 --------------- Defines --------------- 
 */
@@ -178,6 +166,13 @@ enum {
   kRotateImage                  = 0x00000040
 };
 
+/* extended notification */
+enum {
+  kExtendedNotificationPB       = 'extd',
+  kMessageGetEventData          = 'mged',
+  kEventClassPTPStandard        = 'PTPs',
+  kEventClassPTPVendor          = 'PTPv'
+};
 
 /*
 --------------- Structures --------------- 
@@ -187,6 +182,8 @@ struct ICAObjectInfo {
   OSType              objectSubtype;          /* i.e. kICAFileImage  */
 };
 typedef struct ICAObjectInfo            ICAObjectInfo;
+ 
+ 
 struct ICAPropertyInfo {
   OSType              propertyType;
   OSType              dataType;
@@ -194,15 +191,18 @@ struct ICAPropertyInfo {
   UInt32              dataFlags;
 };
 typedef struct ICAPropertyInfo          ICAPropertyInfo;
+ 
+ 
 struct ICAMessage {
   OSType              messageType;            /* <--  i.e. kICAMessageCameraCaptureNewImage */
-
   UInt32              startByte;              /* <-- */
   void *              dataPtr;                /* <-- */
   UInt32              dataSize;               /* <-- */
   OSType              dataType;               /* <-- */
 };
 typedef struct ICAMessage               ICAMessage;
+ 
+ 
 struct ICAThumbnail {
   UInt32              width;
   UInt32              height;
@@ -229,6 +229,8 @@ typedef CALLBACK_API_C( void , ICACompletion )(ICAHeader * pb);
 /* 
 --------------- ICAHeader --------------- 
 */
+ 
+ 
 struct ICAHeader {
   OSErr               err;                    /* --> */
   UInt32              refcon;                 /* <-- */
@@ -237,121 +239,121 @@ struct ICAHeader {
 /*
 --------------- Object parameter blocks --------------- 
 */
+ 
+ 
 struct ICAGetChildCountPB {
   ICAHeader           header;
-
   ICAObject           object;                 /* <-- */
-
   UInt32              count;                  /* --> */
 };
 typedef struct ICAGetChildCountPB       ICAGetChildCountPB;
+ 
+ 
 struct ICAGetNthChildPB {
   ICAHeader           header;
-
   ICAObject           parentObject;           /* <-- */
   UInt32              index;                  /* <-- zero based */
-
   ICAObject           childObject;            /* --> */
   ICAObjectInfo       childInfo;              /* --> */
 };
 typedef struct ICAGetNthChildPB         ICAGetNthChildPB;
+ 
+ 
 struct ICAGetObjectInfoPB {
   ICAHeader           header;
-
   ICAObject           object;                 /* <-- */
-
   ICAObjectInfo       objectInfo;             /* --> */
 };
 typedef struct ICAGetObjectInfoPB       ICAGetObjectInfoPB;
+ 
+ 
 struct ICAGetParentOfObjectPB {
   ICAHeader           header;
-
   ICAObject           object;                 /* <-- */
-
   ICAObject           parentObject;           /* --> */
   ICAObjectInfo       parentInfo;             /* --> */
 };
 typedef struct ICAGetParentOfObjectPB   ICAGetParentOfObjectPB;
+ 
+ 
 struct ICAGetRootOfObjectPB {
   ICAHeader           header;
-
   ICAObject           object;                 /* <-- */
-
   ICAObject           rootObject;             /* --> */
   ICAObjectInfo       rootInfo;               /* --> */
 };
 typedef struct ICAGetRootOfObjectPB     ICAGetRootOfObjectPB;
+ 
+ 
 struct ICAGetObjectRefConPB {
   ICAHeader           header;
-
   ICAObject           object;                 /* <-- */
-
   UInt32              objectRefCon;           /* --> */
 };
 typedef struct ICAGetObjectRefConPB     ICAGetObjectRefConPB;
+ 
+ 
 struct ICASetObjectRefConPB {
   ICAHeader           header;
-
   ICAObject           object;                 /* <-- */
-
   UInt32              objectRefCon;           /* <-- */
 };
 typedef struct ICASetObjectRefConPB     ICASetObjectRefConPB;
 /*
 --------------- Property parameter blocks --------------- 
 */
+ 
+ 
 struct ICAGetPropertyCountPB {
   ICAHeader           header;
-
   ICAObject           object;                 /* <-- */
-
   UInt32              count;                  /* --> */
 };
 typedef struct ICAGetPropertyCountPB    ICAGetPropertyCountPB;
+ 
+ 
 struct ICAGetNthPropertyPB {
   ICAHeader           header;
-
   ICAObject           object;                 /* <-- */
   UInt32              index;                  /* <-- zero based */
-
   ICAProperty         property;               /* --> */
   ICAPropertyInfo     propertyInfo;           /* --> */
 };
 typedef struct ICAGetNthPropertyPB      ICAGetNthPropertyPB;
+ 
+ 
 struct ICAGetPropertyByTypePB {
   ICAHeader           header;
-
   ICAObject           object;                 /* <-- */
   OSType              propertyType;           /* <-- */
-
   ICAProperty         property;               /* --> */
   ICAPropertyInfo     propertyInfo;           /* --> */
 };
 typedef struct ICAGetPropertyByTypePB   ICAGetPropertyByTypePB;
+ 
+ 
 struct ICAGetPropertyInfoPB {
   ICAHeader           header;
-
   ICAProperty         property;               /* <-- */
-
   ICAPropertyInfo     propertyInfo;           /* --> */
 };
 typedef struct ICAGetPropertyInfoPB     ICAGetPropertyInfoPB;
+ 
+ 
 struct ICAGetPropertyDataPB {
   ICAHeader           header;
-
   ICAProperty         property;               /* <-- */
   UInt32              startByte;              /* <-- */
   UInt32              requestedSize;          /* <-- */
-
   void *              dataPtr;                /* <-> */
-
   UInt32              actualSize;             /* --> */
   OSType              dataType;               /* --> */
 };
 typedef struct ICAGetPropertyDataPB     ICAGetPropertyDataPB;
+ 
+ 
 struct ICASetPropertyDataPB {
   ICAHeader           header;
-
   ICAProperty         property;               /* <-- */
   UInt32              startByte;              /* <-- */
   void *              dataPtr;                /* <-- */
@@ -359,35 +361,36 @@ struct ICASetPropertyDataPB {
   OSType              dataType;               /* <-- */
 };
 typedef struct ICASetPropertyDataPB     ICASetPropertyDataPB;
+ 
+ 
 struct ICAGetParentOfPropertyPB {
   ICAHeader           header;
-
   ICAProperty         property;               /* <-- */
-
   ICAObject           parentObject;           /* --> */
   ICAObjectInfo       parentInfo;             /* --> */
 };
 typedef struct ICAGetParentOfPropertyPB ICAGetParentOfPropertyPB;
+ 
+ 
 struct ICAGetRootOfPropertyPB {
   ICAHeader           header;
-
   ICAProperty         property;               /* <-- */
-
   ICAObject           rootObject;             /* --> */
   ICAObjectInfo       rootInfo;               /* --> */
 };
 typedef struct ICAGetRootOfPropertyPB   ICAGetRootOfPropertyPB;
+ 
+ 
 struct ICAGetPropertyRefConPB {
   ICAHeader           header;
-
   ICAProperty         property;               /* <-- */
-
   UInt32              propertyRefCon;         /* --> */
 };
 typedef struct ICAGetPropertyRefConPB   ICAGetPropertyRefConPB;
+ 
+ 
 struct ICASetPropertyRefConPB {
   ICAHeader           header;
-
   ICAProperty         property;               /* <-- */
   UInt32              propertyRefCon;         /* <-- */
 };
@@ -395,31 +398,51 @@ typedef struct ICASetPropertyRefConPB   ICASetPropertyRefConPB;
 /*
 --------------- Device parameter blocks --------------- 
 */
+ 
+ 
 struct ICAGetDeviceListPB {
   ICAHeader           header;
-
   ICAObject           object;                 /* --> */
 };
 typedef struct ICAGetDeviceListPB       ICAGetDeviceListPB;
+ 
+ 
 struct ICAObjectSendMessagePB {
   ICAHeader           header;
-
   ICAObject           object;                 /* <-- */
   ICAMessage          message;                /* <-- */
   UInt32              result;                 /* --> message specific result*/
 };
 typedef struct ICAObjectSendMessagePB   ICAObjectSendMessagePB;
+ 
+ 
 struct ICARegisterEventNotificationPB {
   ICAHeader           header;
-
-  ICAObject           object;                 /* <-- */
-  OSType              notifyType;             /* <-- */
+  ICAObject           object;                 /* <-> */
+  OSType              notifyType;             /* <-> */
   ICACompletion       notifyProc;             /* <-- */
 };
 typedef struct ICARegisterEventNotificationPB ICARegisterEventNotificationPB;
+ 
+ 
+struct ICAExtendedRegisterEventNotificationPB {
+  ICAHeader           header;
+  ICAObject           object;                 /* <-> */
+  OSType              extd;                   /* <-- */
+  ICACompletion       notifyProc;             /* <-- */
+
+  UInt32              rawEventType;           /* -->*/
+  OSType              eventType;              /* <->*/
+  OSType              eventClass;             /* -->*/
+  UInt32              eventDataSize;          /* -->*/
+  ICAEventDataCookie  eventDataCookie;        /* -->*/
+  ICAObject           deviceObject;           /* -->*/
+};
+typedef struct ICAExtendedRegisterEventNotificationPB ICAExtendedRegisterEventNotificationPB;
+ 
+ 
 struct ICADownloadFilePB {
   ICAHeader           header;
-
   ICAObject           object;                 /* <-- */
   FSRef *             dirFSRef;               /* <-- */
   UInt32              flags;                  /* <-- */
@@ -429,9 +452,10 @@ struct ICADownloadFilePB {
   FSRef *             fileFSRef;              /* --> can be NULL*/
 };
 typedef struct ICADownloadFilePB        ICADownloadFilePB;
+ 
+ 
 struct ICACopyObjectPropertyDictionaryPB {
   ICAHeader           header;
-
   ICAObject           object;                 /* <-- */
   CFDictionaryRef *   theDict;                /* --> */
 };
@@ -451,12 +475,12 @@ typedef struct ICACopyObjectPropertyDictionaryPB ICACopyObjectPropertyDictionary
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAGetChildCount(
   ICAGetChildCountPB *  pb,
-  ICACompletion         completion);      /* can be NULL */
+  ICACompletion         completion)       /* can be NULL */   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -465,12 +489,12 @@ ICAGetChildCount(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAGetNthChild(
   ICAGetNthChildPB *  pb,
-  ICACompletion       completion);      /* can be NULL */
+  ICACompletion       completion)       /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -479,12 +503,12 @@ ICAGetNthChild(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAGetObjectInfo(
   ICAGetObjectInfoPB *  pb,
-  ICACompletion         completion);      /* can be NULL */
+  ICACompletion         completion)       /* can be NULL */   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -493,12 +517,12 @@ ICAGetObjectInfo(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAGetParentOfObject(
   ICAGetParentOfObjectPB *  pb,
-  ICACompletion             completion);      /* can be NULL */
+  ICACompletion             completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -507,12 +531,12 @@ ICAGetParentOfObject(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAGetRootOfObject(
   ICAGetRootOfObjectPB *  pb,
-  ICACompletion           completion);      /* can be NULL */
+  ICACompletion           completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -521,12 +545,12 @@ ICAGetRootOfObject(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAGetObjectRefCon(
   ICAGetObjectRefConPB *  pb,
-  ICACompletion           completion);      /* can be NULL */
+  ICACompletion           completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -535,12 +559,12 @@ ICAGetObjectRefCon(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICASetObjectRefCon(
   ICASetObjectRefConPB *  pb,
-  ICACompletion           completion);      /* can be NULL */
+  ICACompletion           completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -553,12 +577,12 @@ ICASetObjectRefCon(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAGetPropertyCount(
   ICAGetPropertyCountPB *  pb,
-  ICACompletion            completion);      /* can be NULL */
+  ICACompletion            completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -567,12 +591,12 @@ ICAGetPropertyCount(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAGetNthProperty(
   ICAGetNthPropertyPB *  pb,
-  ICACompletion          completion);      /* can be NULL */
+  ICACompletion          completion)       /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -581,12 +605,12 @@ ICAGetNthProperty(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAGetPropertyByType(
   ICAGetPropertyByTypePB *  pb,
-  ICACompletion             completion);      /* can be NULL */
+  ICACompletion             completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -595,12 +619,12 @@ ICAGetPropertyByType(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAGetPropertyInfo(
   ICAGetPropertyInfoPB *  pb,
-  ICACompletion           completion);      /* can be NULL */
+  ICACompletion           completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -609,12 +633,12 @@ ICAGetPropertyInfo(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAGetPropertyData(
   ICAGetPropertyDataPB *  pb,
-  ICACompletion           completion);      /* can be NULL */
+  ICACompletion           completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -623,12 +647,12 @@ ICAGetPropertyData(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICASetPropertyData(
   ICASetPropertyDataPB *  pb,
-  ICACompletion           completion);      /* can be NULL */
+  ICACompletion           completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -637,12 +661,12 @@ ICASetPropertyData(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAGetParentOfProperty(
   ICAGetParentOfPropertyPB *  pb,
-  ICACompletion               completion);      /* can be NULL */
+  ICACompletion               completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -651,12 +675,12 @@ ICAGetParentOfProperty(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAGetRootOfProperty(
   ICAGetRootOfPropertyPB *  pb,
-  ICACompletion             completion);      /* can be NULL */
+  ICACompletion             completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -665,12 +689,12 @@ ICAGetRootOfProperty(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAGetPropertyRefCon(
   ICAGetPropertyRefConPB *  pb,
-  ICACompletion             completion);      /* can be NULL */
+  ICACompletion             completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -679,12 +703,12 @@ ICAGetPropertyRefCon(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICASetPropertyRefCon(
   ICASetPropertyRefConPB *  pb,
-  ICACompletion             completion);      /* can be NULL */
+  ICACompletion             completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -697,12 +721,12 @@ ICASetPropertyRefCon(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAGetDeviceList(
   ICAGetDeviceListPB *  pb,
-  ICACompletion         completion);      /* can be NULL */
+  ICACompletion         completion)       /* can be NULL */   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -711,12 +735,12 @@ ICAGetDeviceList(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAObjectSendMessage(
   ICAObjectSendMessagePB *  pb,
-  ICACompletion             completion);      /* can be NULL */
+  ICACompletion             completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -725,12 +749,12 @@ ICAObjectSendMessage(
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICARegisterEventNotification(
   ICARegisterEventNotificationPB *  pb,
-  ICACompletion                     completion);      /* can be NULL */
+  ICACompletion                     completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -744,12 +768,12 @@ ICARegisterEventNotification(
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.4 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICADownloadFile(
   ICADownloadFilePB *  pb,
-  ICACompletion        completion);      /* can be NULL */
+  ICACompletion        completion)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -759,22 +783,171 @@ ICADownloadFile(
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.4 and later
- *    Non-Carbon CFM:   in ImageCaptureLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICACopyObjectPropertyDictionary(
   ICACopyObjectPropertyDictionaryPB *  pb,
-  ICACompletion                        completion);      /* can be NULL */
+  ICACompletion                        completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+/* 
+--- scanner support --------------------------------------------- 
+*/
+struct ICAScannerOpenSessionPB {
+  ICAHeader           header;
+  ICAObject           object;                 /* <-- */
+  ICAScannerSessionID  sessionID;             /* --> */
+};
+typedef struct ICAScannerOpenSessionPB  ICAScannerOpenSessionPB;
+ 
+ 
+struct ICAScannerCloseSessionPB {
+  ICAHeader           header;
+  ICAScannerSessionID  sessionID;             /* <-- */
+};
+typedef struct ICAScannerCloseSessionPB ICAScannerCloseSessionPB;
+ 
+ 
+struct ICAScannerInitializePB {
+  ICAHeader           header;
+  ICAScannerSessionID  sessionID;             /* <-- */
+};
+typedef struct ICAScannerInitializePB   ICAScannerInitializePB;
+ 
+ 
+struct ICAScannerGetParametersPB {
+  ICAHeader           header;
+  ICAScannerSessionID  sessionID;             /* <-- */
+  CFMutableDictionaryRef  theDict;            /* --> */
+};
+typedef struct ICAScannerGetParametersPB ICAScannerGetParametersPB;
+ 
+ 
+struct ICAScannerSetParametersPB {
+  ICAHeader           header;
+  ICAScannerSessionID  sessionID;             /* <-- */
+  CFMutableDictionaryRef  theDict;            /* <-> */
+};
+typedef struct ICAScannerSetParametersPB ICAScannerSetParametersPB;
+ 
+ 
+struct ICAScannerStatusPB {
+  ICAHeader           header;
+  ICAScannerSessionID  sessionID;             /* <-- */
+  UInt32              status;                 /* --> */
+};
+typedef struct ICAScannerStatusPB       ICAScannerStatusPB;
+ 
+ 
+struct ICAScannerStartPB {
+  ICAHeader           header;
+  ICAScannerSessionID  sessionID;             /* <-- */
+};
+typedef struct ICAScannerStartPB        ICAScannerStartPB;
+ 
+ 
+/*
+ *  ICAScannerOpenSession()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+ICAScannerOpenSession(
+  ICAScannerOpenSessionPB *  pb,
+  ICACompletion              completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+/*
+ *  ICAScannerCloseSession()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+ICAScannerCloseSession(
+  ICAScannerCloseSessionPB *  pb,
+  ICACompletion               completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+/*
+ *  ICAScannerInitialize()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+ICAScannerInitialize(
+  ICAScannerInitializePB *  pb,
+  ICACompletion             completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+/*
+ *  ICAScannerGetParameters()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+ICAScannerGetParameters(
+  ICAScannerGetParametersPB *  pb,
+  ICACompletion                completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+/*
+ *  ICAScannerSetParameters()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+ICAScannerSetParameters(
+  ICAScannerSetParametersPB *  pb,
+  ICACompletion                completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+/*
+ *  ICAScannerStatus()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+ICAScannerStatus(
+  ICAScannerStatusPB *  pb,
+  ICACompletion         completion)       /* can be NULL */   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+/*
+ *  ICAScannerStart()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+ICAScannerStart(
+  ICAScannerStartPB *  pb,
+  ICACompletion        completion)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

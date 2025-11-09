@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime-142~1
+     Version:    QuickTime_6
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -27,6 +27,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -36,13 +37,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 typedef CALLBACK_API( void , PrePrerollCompleteProcPtr )(MediaHandler mh, OSErr err, void *refcon);
 typedef STACK_UPP_TYPE(PrePrerollCompleteProcPtr)               PrePrerollCompleteUPP;
@@ -103,14 +98,10 @@ enum {
   mInvisible                    = 1L << 1
 };
 
-
 /* MediaSetPublicInfo/MediaGetPublicInfo selectors */
 enum {
   kMediaQTIdleFrequencySelector = 'idfq'
 };
-
-
-
 
 struct GetMovieCompleteParams {
   short               version;
@@ -132,6 +123,7 @@ struct GetMovieCompleteParams {
   GDHandle            movieGD;
   PixMapHandle        trackMatte;
   QTAtomContainer     inputMap;
+  QTMediaContextID    mediaContextID;
 };
 typedef struct GetMovieCompleteParams   GetMovieCompleteParams;
 enum {
@@ -192,13 +184,92 @@ CallComponentExecuteWiredAction(
   QTAtomContainer           actionContainer,
   QTAtom                    actionAtom,
   QTCustomActionTargetPtr   target,
-  QTEventRecordPtr          event);
+  QTEventRecordPtr          event)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /* MediaCallRange2 */
 /* These are unique to each type of media handler */
 /* They are also included in the public interfaces */
+
+
+/* Flags for MediaSetChunkManagementFlags*/
+enum {
+  kEmptyPurgableChunksOverAllowance = 1
+};
+
+/*
+ *  MediaSetChunkManagementFlags()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+MediaSetChunkManagementFlags(
+  MediaHandler   mh,
+  UInt32         flags,
+  UInt32         flagsMask)                                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  MediaGetChunkManagementFlags()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+MediaGetChunkManagementFlags(
+  MediaHandler   mh,
+  UInt32 *       flags)                                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  MediaSetPurgeableChunkMemoryAllowance()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+MediaSetPurgeableChunkMemoryAllowance(
+  MediaHandler   mh,
+  Size           allowance)                                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  MediaGetPurgeableChunkMemoryAllowance()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+MediaGetPurgeableChunkMemoryAllowance(
+  MediaHandler   mh,
+  Size *         allowance)                                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  MediaEmptyAllPurgeableChunks()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+MediaEmptyAllPurgeableChunks(MediaHandler mh)                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /***** These are the calls for dealing with the Generic media handler *****/
@@ -214,7 +285,7 @@ CallComponentExecuteWiredAction(
 extern ComponentResult 
 MediaInitialize(
   MediaHandler              mh,
-  GetMovieCompleteParams *  gmc);
+  GetMovieCompleteParams *  gmc)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -230,7 +301,7 @@ extern ComponentResult
 MediaSetHandlerCapabilities(
   MediaHandler   mh,
   long           flags,
-  long           flagsMask);
+  long           flagsMask)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -248,7 +319,7 @@ MediaIdle(
   TimeValue           atMediaTime,
   long                flagsIn,
   long *              flagsOut,
-  const TimeRecord *  movieTime);
+  const TimeRecord *  movieTime)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -263,7 +334,7 @@ MediaIdle(
 extern ComponentResult 
 MediaGetMediaInfo(
   MediaHandler   mh,
-  Handle         h);
+  Handle         h)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -278,7 +349,7 @@ MediaGetMediaInfo(
 extern ComponentResult 
 MediaPutMediaInfo(
   MediaHandler   mh,
-  Handle         h);
+  Handle         h)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -293,7 +364,7 @@ MediaPutMediaInfo(
 extern ComponentResult 
 MediaSetActive(
   MediaHandler   mh,
-  Boolean        enableMedia);
+  Boolean        enableMedia)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -308,7 +379,7 @@ MediaSetActive(
 extern ComponentResult 
 MediaSetRate(
   MediaHandler   mh,
-  Fixed          rate);
+  Fixed          rate)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -323,7 +394,7 @@ MediaSetRate(
 extern ComponentResult 
 MediaGGetStatus(
   MediaHandler       mh,
-  ComponentResult *  statusErr);
+  ComponentResult *  statusErr)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -336,7 +407,7 @@ MediaGGetStatus(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern ComponentResult 
-MediaTrackEdited(MediaHandler mh);
+MediaTrackEdited(MediaHandler mh)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -351,7 +422,7 @@ MediaTrackEdited(MediaHandler mh);
 extern ComponentResult 
 MediaSetMediaTimeScale(
   MediaHandler   mh,
-  TimeScale      newTimeScale);
+  TimeScale      newTimeScale)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -366,7 +437,7 @@ MediaSetMediaTimeScale(
 extern ComponentResult 
 MediaSetMovieTimeScale(
   MediaHandler   mh,
-  TimeScale      newTimeScale);
+  TimeScale      newTimeScale)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -382,7 +453,7 @@ extern ComponentResult
 MediaSetGWorld(
   MediaHandler   mh,
   CGrafPtr       aPort,
-  GDHandle       aGD);
+  GDHandle       aGD)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -398,7 +469,7 @@ extern ComponentResult
 MediaSetDimensions(
   MediaHandler   mh,
   Fixed          width,
-  Fixed          height);
+  Fixed          height)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -413,7 +484,7 @@ MediaSetDimensions(
 extern ComponentResult 
 MediaSetClip(
   MediaHandler   mh,
-  RgnHandle      theClip);
+  RgnHandle      theClip)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -428,7 +499,7 @@ MediaSetClip(
 extern ComponentResult 
 MediaSetMatrix(
   MediaHandler    mh,
-  MatrixRecord *  trackMovieMatrix);
+  MatrixRecord *  trackMovieMatrix)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -443,7 +514,7 @@ MediaSetMatrix(
 extern ComponentResult 
 MediaGetTrackOpaque(
   MediaHandler   mh,
-  Boolean *      trackIsOpaque);
+  Boolean *      trackIsOpaque)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -459,7 +530,7 @@ extern ComponentResult
 MediaSetGraphicsMode(
   MediaHandler      mh,
   long              mode,
-  const RGBColor *  opColor);
+  const RGBColor *  opColor)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -475,7 +546,7 @@ extern ComponentResult
 MediaGetGraphicsMode(
   MediaHandler   mh,
   long *         mode,
-  RGBColor *     opColor);
+  RGBColor *     opColor)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -490,7 +561,7 @@ MediaGetGraphicsMode(
 extern ComponentResult 
 MediaGSetVolume(
   MediaHandler   mh,
-  short          volume);
+  short          volume)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -505,7 +576,7 @@ MediaGSetVolume(
 extern ComponentResult 
 MediaSetSoundBalance(
   MediaHandler   mh,
-  short          balance);
+  short          balance)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -520,7 +591,7 @@ MediaSetSoundBalance(
 extern ComponentResult 
 MediaGetSoundBalance(
   MediaHandler   mh,
-  short *        balance);
+  short *        balance)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -535,7 +606,7 @@ MediaGetSoundBalance(
 extern ComponentResult 
 MediaGetNextBoundsChange(
   MediaHandler   mh,
-  TimeValue *    when);
+  TimeValue *    when)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -551,7 +622,7 @@ extern ComponentResult
 MediaGetSrcRgn(
   MediaHandler   mh,
   RgnHandle      rgn,
-  TimeValue      atMediaTime);
+  TimeValue      atMediaTime)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -567,7 +638,7 @@ extern ComponentResult
 MediaPreroll(
   MediaHandler   mh,
   TimeValue      time,
-  Fixed          rate);
+  Fixed          rate)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -582,7 +653,7 @@ MediaPreroll(
 extern ComponentResult 
 MediaSampleDescriptionChanged(
   MediaHandler   mh,
-  long           index);
+  long           index)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -598,7 +669,7 @@ extern ComponentResult
 MediaHasCharacteristic(
   MediaHandler   mh,
   OSType         characteristic,
-  Boolean *      hasIt);
+  Boolean *      hasIt)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -615,7 +686,7 @@ MediaGetOffscreenBufferSize(
   MediaHandler   mh,
   Rect *         bounds,
   short          depth,
-  CTabHandle     ctab);
+  CTabHandle     ctab)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -630,7 +701,7 @@ MediaGetOffscreenBufferSize(
 extern ComponentResult 
 MediaSetHints(
   MediaHandler   mh,
-  long           hints);
+  long           hints)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -647,7 +718,7 @@ MediaGetName(
   MediaHandler   mh,
   Str255         name,
   long           requestedLanguage,
-  long *         actualLanguage);
+  long *         actualLanguage)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -662,7 +733,7 @@ MediaGetName(
 extern ComponentResult 
 MediaForceUpdate(
   MediaHandler   mh,
-  long           forceUpdateFlags);
+  long           forceUpdateFlags)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -677,7 +748,7 @@ MediaForceUpdate(
 extern ComponentResult 
 MediaGetDrawingRgn(
   MediaHandler   mh,
-  RgnHandle *    partialRgn);
+  RgnHandle *    partialRgn)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -693,7 +764,7 @@ extern ComponentResult
 MediaGSetActiveSegment(
   MediaHandler   mh,
   TimeValue      activeStart,
-  TimeValue      activeDuration);
+  TimeValue      activeDuration)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -708,7 +779,7 @@ MediaGSetActiveSegment(
 extern ComponentResult 
 MediaInvalidateRegion(
   MediaHandler   mh,
-  RgnHandle      invalRgn);
+  RgnHandle      invalRgn)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -726,7 +797,7 @@ MediaGetNextStepTime(
   short          flags,
   TimeValue      mediaTimeIn,
   TimeValue *    mediaTimeOut,
-  Fixed          rate);
+  Fixed          rate)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -748,7 +819,7 @@ MediaSetNonPrimarySourceData(
   long                         dataSize,
   ICMCompletionProcRecordPtr   asyncCompletionProc,
   ICMConvertDataFormatUPP      transferProc,
-  void *                       refCon);
+  void *                       refCon)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -763,7 +834,7 @@ MediaSetNonPrimarySourceData(
 extern ComponentResult 
 MediaChangedNonPrimarySource(
   MediaHandler   mh,
-  long           inputIndex);
+  long           inputIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -776,7 +847,7 @@ MediaChangedNonPrimarySource(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern ComponentResult 
-MediaTrackReferencesChanged(MediaHandler mh);
+MediaTrackReferencesChanged(MediaHandler mh)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -794,7 +865,7 @@ MediaGetSampleDataPointer(
   long           sampleNum,
   Ptr *          dataPtr,
   long *         dataSize,
-  long *         sampleDescIndex);
+  long *         sampleDescIndex)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -809,7 +880,7 @@ MediaGetSampleDataPointer(
 extern ComponentResult 
 MediaReleaseSampleDataPointer(
   MediaHandler   mh,
-  long           sampleNum);
+  long           sampleNum)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -822,7 +893,7 @@ MediaReleaseSampleDataPointer(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern ComponentResult 
-MediaTrackPropertyAtomChanged(MediaHandler mh);
+MediaTrackPropertyAtomChanged(MediaHandler mh)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -837,7 +908,7 @@ MediaTrackPropertyAtomChanged(MediaHandler mh);
 extern ComponentResult 
 MediaSetTrackInputMapReference(
   MediaHandler      mh,
-  QTAtomContainer   inputMap);
+  QTAtomContainer   inputMap)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -854,7 +925,7 @@ extern ComponentResult
 MediaSetVideoParam(
   MediaHandler      mh,
   long              whichParam,
-  unsigned short *  value);
+  unsigned short *  value)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -870,7 +941,7 @@ extern ComponentResult
 MediaGetVideoParam(
   MediaHandler      mh,
   long              whichParam,
-  unsigned short *  value);
+  unsigned short *  value)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -887,7 +958,7 @@ MediaCompare(
   MediaHandler        mh,
   Boolean *           isOK,
   Media               srcMedia,
-  ComponentInstance   srcMediaComponent);
+  ComponentInstance   srcMediaComponent)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -902,7 +973,7 @@ MediaCompare(
 extern ComponentResult 
 MediaGetClock(
   MediaHandler         mh,
-  ComponentInstance *  clock);
+  ComponentInstance *  clock)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -917,7 +988,7 @@ MediaGetClock(
 extern ComponentResult 
 MediaSetSoundOutputComponent(
   MediaHandler   mh,
-  Component      outputComponent);
+  Component      outputComponent)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -932,7 +1003,7 @@ MediaSetSoundOutputComponent(
 extern ComponentResult 
 MediaGetSoundOutputComponent(
   MediaHandler   mh,
-  Component *    outputComponent);
+  Component *    outputComponent)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -947,9 +1018,7 @@ MediaGetSoundOutputComponent(
 extern ComponentResult 
 MediaSetSoundLocalizationData(
   MediaHandler   mh,
-  Handle         data);
-
-
+  Handle         data)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -965,7 +1034,7 @@ MediaSetSoundLocalizationData(
 extern ComponentResult 
 MediaGetInvalidRegion(
   MediaHandler   mh,
-  RgnHandle      rgn);
+  RgnHandle      rgn)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -981,7 +1050,7 @@ MediaGetInvalidRegion(
 extern ComponentResult 
 MediaSampleDescriptionB2N(
   MediaHandler              mh,
-  SampleDescriptionHandle   sampleDescriptionH);
+  SampleDescriptionHandle   sampleDescriptionH)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -996,7 +1065,7 @@ MediaSampleDescriptionB2N(
 extern ComponentResult 
 MediaSampleDescriptionN2B(
   MediaHandler              mh,
-  SampleDescriptionHandle   sampleDescriptionH);
+  SampleDescriptionHandle   sampleDescriptionH)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1019,7 +1088,7 @@ MediaQueueNonPrimarySourceData(
   ICMCompletionProcRecordPtr   asyncCompletionProc,
   const ICMFrameTimeRecord *   frameTime,
   ICMConvertDataFormatUPP      transferProc,
-  void *                       refCon);
+  void *                       refCon)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1034,7 +1103,7 @@ MediaQueueNonPrimarySourceData(
 extern ComponentResult 
 MediaFlushNonPrimarySourceData(
   MediaHandler   mh,
-  long           inputIndex);
+  long           inputIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1051,7 +1120,7 @@ extern ComponentResult
 MediaGetURLLink(
   MediaHandler   mh,
   Point          displayWhere,
-  Handle *       urlLink);
+  Handle *       urlLink)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1073,7 +1142,7 @@ MediaMakeMediaTimeTable(
   TimeValue      timeIncrement,
   short          firstDataRefIndex,
   short          lastDataRefIndex,
-  long *         retDataRefSkew);
+  long *         retDataRefSkew)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1090,7 +1159,7 @@ MediaHitTestForTargetRefCon(
   MediaHandler   mh,
   long           flags,
   Point          loc,
-  long *         targetRefCon);
+  long *         targetRefCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1108,7 +1177,7 @@ MediaHitTestTargetRefCon(
   long           targetRefCon,
   long           flags,
   Point          loc,
-  Boolean *      wasHit);
+  Boolean *      wasHit)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1126,7 +1195,7 @@ MediaGetActionsForQTEvent(
   QTEventRecordPtr   event,
   long               targetRefCon,
   QTAtomContainer *  container,
-  QTAtom *           atom);
+  QTAtom *           atom)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1141,7 +1210,7 @@ MediaGetActionsForQTEvent(
 extern ComponentResult 
 MediaDisposeTargetRefCon(
   MediaHandler   mh,
-  long           targetRefCon);
+  long           targetRefCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1158,7 +1227,7 @@ MediaTargetRefConsEqual(
   MediaHandler   mh,
   long           firstRefCon,
   long           secondRefCon,
-  Boolean *      equal);
+  Boolean *      equal)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1174,7 +1243,7 @@ extern ComponentResult
 MediaSetActionsCallback(
   MediaHandler   mh,
   ActionsUPP     actionsCallbackProc,
-  void *         refcon);
+  void *         refcon)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1192,7 +1261,7 @@ MediaPrePrerollBegin(
   TimeValue               time,
   Fixed                   rate,
   PrePrerollCompleteUPP   completeProc,
-  void *                  refcon);
+  void *                  refcon)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1207,7 +1276,7 @@ MediaPrePrerollBegin(
 extern ComponentResult 
 MediaPrePrerollCancel(
   MediaHandler   mh,
-  void *         refcon);
+  void *         refcon)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1220,7 +1289,7 @@ MediaPrePrerollCancel(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern ComponentResult 
-MediaEnterEmptyEdit(MediaHandler mh);
+MediaEnterEmptyEdit(MediaHandler mh)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1235,7 +1304,7 @@ MediaEnterEmptyEdit(MediaHandler mh);
 extern ComponentResult 
 MediaCurrentMediaQueuedData(
   MediaHandler   mh,
-  long *         milliSecs);
+  long *         milliSecs)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1250,7 +1319,7 @@ MediaCurrentMediaQueuedData(
 extern ComponentResult 
 MediaGetEffectiveVolume(
   MediaHandler   mh,
-  short *        volume);
+  short *        volume)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1267,7 +1336,7 @@ MediaResolveTargetRefCon(
   MediaHandler      mh,
   QTAtomContainer   container,
   QTAtom            atom,
-  long *            targetRefCon);
+  long *            targetRefCon)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1282,7 +1351,7 @@ MediaResolveTargetRefCon(
 extern ComponentResult 
 MediaGetSoundLevelMeteringEnabled(
   MediaHandler   mh,
-  Boolean *      enabled);
+  Boolean *      enabled)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1297,7 +1366,7 @@ MediaGetSoundLevelMeteringEnabled(
 extern ComponentResult 
 MediaSetSoundLevelMeteringEnabled(
   MediaHandler   mh,
-  Boolean        enable);
+  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1312,7 +1381,7 @@ MediaSetSoundLevelMeteringEnabled(
 extern ComponentResult 
 MediaGetSoundLevelMeterInfo(
   MediaHandler        mh,
-  LevelMeterInfoPtr   levelInfo);
+  LevelMeterInfoPtr   levelInfo)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1327,7 +1396,7 @@ MediaGetSoundLevelMeterInfo(
 extern ComponentResult 
 MediaGetEffectiveSoundBalance(
   MediaHandler   mh,
-  short *        balance);
+  short *        balance)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1342,7 +1411,7 @@ MediaGetEffectiveSoundBalance(
 extern ComponentResult 
 MediaSetScreenLock(
   MediaHandler   mh,
-  Boolean        lockIt);
+  Boolean        lockIt)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1358,7 +1427,7 @@ extern ComponentResult
 MediaSetDoMCActionCallback(
   MediaHandler    mh,
   DoMCActionUPP   doMCActionCallbackProc,
-  void *          refcon);
+  void *          refcon)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1374,7 +1443,7 @@ extern ComponentResult
 MediaGetErrorString(
   MediaHandler      mh,
   ComponentResult   theError,
-  Str255            errorString);
+  Str255            errorString)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1389,7 +1458,7 @@ MediaGetErrorString(
 extern ComponentResult 
 MediaGetSoundEqualizerBands(
   MediaHandler                    mh,
-  MediaEQSpectrumBandsRecordPtr   spectrumInfo);
+  MediaEQSpectrumBandsRecordPtr   spectrumInfo)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1404,7 +1473,7 @@ MediaGetSoundEqualizerBands(
 extern ComponentResult 
 MediaSetSoundEqualizerBands(
   MediaHandler                    mh,
-  MediaEQSpectrumBandsRecordPtr   spectrumInfo);
+  MediaEQSpectrumBandsRecordPtr   spectrumInfo)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1419,7 +1488,7 @@ MediaSetSoundEqualizerBands(
 extern ComponentResult 
 MediaGetSoundEqualizerBandLevels(
   MediaHandler   mh,
-  UInt8 *        bandLevels);
+  UInt8 *        bandLevels)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1432,7 +1501,7 @@ MediaGetSoundEqualizerBandLevels(
  *    Windows:          in qtmlClient.lib 4.0 and later
  */
 extern ComponentResult 
-MediaDoIdleActions(MediaHandler mh);
+MediaDoIdleActions(MediaHandler mh)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1448,7 +1517,7 @@ extern ComponentResult
 MediaSetSoundBassAndTreble(
   MediaHandler   mh,
   short          bass,
-  short          treble);
+  short          treble)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1464,7 +1533,7 @@ extern ComponentResult
 MediaGetSoundBassAndTreble(
   MediaHandler   mh,
   short *        bass,
-  short *        treble);
+  short *        treble)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1477,7 +1546,7 @@ MediaGetSoundBassAndTreble(
  *    Windows:          in qtmlClient.lib 4.0 and later
  */
 extern ComponentResult 
-MediaTimeBaseChanged(MediaHandler mh);
+MediaTimeBaseChanged(MediaHandler mh)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1493,7 +1562,7 @@ extern ComponentResult
 MediaMCIsPlayerEvent(
   MediaHandler         mh,
   const EventRecord *  e,
-  Boolean *            handledIt);
+  Boolean *            handledIt)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1508,7 +1577,7 @@ MediaMCIsPlayerEvent(
 extern ComponentResult 
 MediaGetMediaLoadState(
   MediaHandler   mh,
-  long *         mediaLoadState);
+  long *         mediaLoadState)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1523,7 +1592,7 @@ MediaGetMediaLoadState(
 extern ComponentResult 
 MediaVideoOutputChanged(
   MediaHandler        mh,
-  ComponentInstance   vout);
+  ComponentInstance   vout)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1539,7 +1608,7 @@ extern ComponentResult
 MediaEmptySampleCache(
   MediaHandler   mh,
   long           sampleNum,
-  long           sampleCount);
+  long           sampleCount)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1556,7 +1625,7 @@ MediaGetPublicInfo(
   MediaHandler   mh,
   OSType         infoSelector,
   void *         infoDataPtr,
-  Size *         ioDataSize);
+  Size *         ioDataSize)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1573,7 +1642,7 @@ MediaSetPublicInfo(
   MediaHandler   mh,
   OSType         infoSelector,
   void *         infoDataPtr,
-  Size           dataSize);
+  Size           dataSize)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1588,7 +1657,7 @@ MediaSetPublicInfo(
 extern ComponentResult 
 MediaGetUserPreferredCodecs(
   MediaHandler            mh,
-  CodecComponentHandle *  userPreferredCodecs);
+  CodecComponentHandle *  userPreferredCodecs)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1603,7 +1672,106 @@ MediaGetUserPreferredCodecs(
 extern ComponentResult 
 MediaSetUserPreferredCodecs(
   MediaHandler           mh,
-  CodecComponentHandle   userPreferredCodecs);
+  CodecComponentHandle   userPreferredCodecs)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/* Keyboard Focus Support*/
+
+/*
+ *  MediaRefConSetProperty()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+MediaRefConSetProperty(
+  MediaHandler   mh,
+  long           refCon,
+  long           propertyType,
+  void *         propertyValue)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  MediaRefConGetProperty()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+MediaRefConGetProperty(
+  MediaHandler   mh,
+  long           refCon,
+  long           propertyType,
+  void *         propertyValue)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  MediaNavigateTargetRefCon()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+MediaNavigateTargetRefCon(
+  MediaHandler   mh,
+  long           navigation,
+  long *         refCon)                                      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+
+/*
+ *  MediaGGetIdleManager()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+MediaGGetIdleManager(
+  MediaHandler   mh,
+  IdleManager *  pim)                                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  MediaGSetIdleManager()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
+ *    Windows:          in qtmlClient.lib 6.0 and later
+ */
+extern ComponentResult 
+MediaGSetIdleManager(
+  MediaHandler   mh,
+  IdleManager    im)                                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  MediaGGetLatency()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ *    Windows:          in qtmlClient.lib 6.5 and later
+ */
+extern ComponentResult 
+MediaGGetLatency(
+  MediaHandler   mh,
+  TimeRecord *   latency)                                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
 
 
 
@@ -1612,6 +1780,11 @@ MediaSetUserPreferredCodecs(
 /* selectors for component calls */
 enum {
     kCallComponentExecuteWiredActionSelect     = -9,
+    kMediaSetChunkManagementFlagsSelect        = 0x0415,
+    kMediaGetChunkManagementFlagsSelect        = 0x0416,
+    kMediaSetPurgeableChunkMemoryAllowanceSelect = 0x0417,
+    kMediaGetPurgeableChunkMemoryAllowanceSelect = 0x0418,
+    kMediaEmptyAllPurgeableChunksSelect        = 0x0419,
     kMediaInitializeSelect                     = 0x0501,
     kMediaSetHandlerCapabilitiesSelect         = 0x0502,
     kMediaIdleSelect                           = 0x0503,
@@ -1700,43 +1873,53 @@ enum {
     kMediaGetPublicInfoSelect                  = 0x0565,
     kMediaSetPublicInfoSelect                  = 0x0566,
     kMediaGetUserPreferredCodecsSelect         = 0x0567,
-    kMediaSetUserPreferredCodecsSelect         = 0x0568
+    kMediaSetUserPreferredCodecsSelect         = 0x0568,
+    kMediaRefConSetPropertySelect              = 0x0569,
+    kMediaRefConGetPropertySelect              = 0x056A,
+    kMediaNavigateTargetRefConSelect           = 0x056B,
+    kMediaGGetIdleManagerSelect                = 0x056C,
+    kMediaGSetIdleManagerSelect                = 0x056D,
+    kMediaGGetLatencySelect                    = 0x0571
 };
 /*
  *  NewPrePrerollCompleteUPP()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
+extern PrePrerollCompleteUPP
+NewPrePrerollCompleteUPP(PrePrerollCompleteProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposePrePrerollCompleteUPP()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
+extern void
+DisposePrePrerollCompleteUPP(PrePrerollCompleteUPP userUPP)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokePrePrerollCompleteUPP()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
+extern void
+InvokePrePrerollCompleteUPP(
+  MediaHandler           mh,
+  OSErr                  err,
+  void *                 refcon,
+  PrePrerollCompleteUPP  userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

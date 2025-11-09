@@ -32,6 +32,18 @@
 // and it has an associated dictionary which lists the protocol characteristics.
 #define	kIOPropertyProtocolCharacteristicsKey		"Protocol Characteristics"
 
+// An identifier that will uniquely identify this SCSI Domain for the Physical Interconnect type.
+// This identifier is only guaranteed to be unique for any given Physical Interconnect and is
+// not guaranteed to be the same across restarts or shutdowns.
+#define kIOPropertySCSIDomainIdentifierKey			"SCSI Domain Identifier"
+
+// This is the SCSI Target Identifier for a given SCSI Target Device
+#define kIOPropertySCSITargetIdentifierKey			"SCSI Target Identifier"
+
+// This key is the SCSI Logical Unit Number for the device server controlled
+// by the driver
+#define kIOPropertySCSILogicalUnitNumberKey			"SCSI Logical Unit Number"
+
 // This key is used to define the Physical Interconnect to which a device is
 // attached (e.g. ATAPI, FireWire).
 #define kIOPropertyPhysicalInterconnectTypeKey		"Physical Interconnect"
@@ -50,6 +62,10 @@
 // This key defines the location of Internal/External. If the device is connected to
 // a bus and it is indeterminate whether it it internal or external, this key should be set.
 #define kIOPropertyInternalExternalKey				"Internal/External"
+
+// This protocol characteristics key is used to inform the system that the protocol
+// supports having multiple devices that act as initiators.
+#define kIOPropertySCSIProtocolMultiInitKey		"Multiple Initiators"
 
 
 //

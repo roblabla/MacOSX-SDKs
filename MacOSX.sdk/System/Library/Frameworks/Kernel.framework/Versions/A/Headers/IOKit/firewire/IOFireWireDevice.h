@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -30,22 +30,83 @@
 
 #include <IOKit/firewire/IOFireWireNub.h>
 
+class IOFireWireROMCache;
+
 struct IOFWNodeScan;
 struct RomScan;
 
+class IOFireWireDevice;
+
+#pragma mark -
+
+/*! 
+	@class IOFireWireDeviceAux
+*/
+
+class IOFireWireDeviceAux : public IOFireWireNubAux
+{
+    OSDeclareDefaultStructors(IOFireWireDeviceAux)
+
+	friend class IOFireWireDevice;
+	
+protected:
+
+	bool fTerminated;
+	
+	/*! 
+		@struct ExpansionData
+		@discussion This structure will be used to expand the capablilties of the class in the future.
+    */  
+	  
+    struct ExpansionData { };
+
+	/*! 
+		@var reserved
+		Reserved for future use.  (Internal use only)  
+	*/
+    
+	ExpansionData * reserved;
+
+    virtual bool init( IOFireWireDevice * primary );
+	virtual	void free();
+
+	virtual bool isTerminated( void );
+	virtual void setTerminated( bool terminated );
+	
+private:
+    OSMetaClassDeclareReservedUnused(IOFireWireDeviceAux, 0);
+    OSMetaClassDeclareReservedUnused(IOFireWireDeviceAux, 1);
+    OSMetaClassDeclareReservedUnused(IOFireWireDeviceAux, 2);
+    OSMetaClassDeclareReservedUnused(IOFireWireDeviceAux, 3);	
+};
+
+#pragma mark -
+/*! @class IOFireWireDevice
+*/
 class IOFireWireDevice : public IOFireWireNub
 {
     OSDeclareDefaultStructors(IOFireWireDevice)
 
+    friend class IOFireWireController;
+	friend class IOFireWireDeviceAux;
+
 /*------------------Useful info about device (also available in the registry)--------*/
 protected:
 
-    OSData *	fDeviceROM;
+	enum RegistrationState
+	{
+		kDeviceRegistered,
+		kDeviceNeedsRegisterService,
+		kDeviceNotRegistered
+	};
+	
+    IOFireWireROMCache * fDeviceROM;
     bool		fOpenFromDevice;
     UInt32		fOpenFromUnitCount;
     UInt32		fROMGeneration;
     IORecursiveLock *fROMLock;
-    
+    RegistrationState	fRegistrationState;
+	
 /*! @struct ExpansionData
     @discussion This structure will be used to expand the capablilties of the class in the future.
     */    
@@ -58,6 +119,7 @@ protected:
     static	void readROMDirGlue(void *refcon, IOReturn status,
                                IOFireWireNub *device, IOFWCommand *fwCmd);
     static	void readROMThreadFunc(void *arg);
+    static	void terminateDevice(void *arg);
     
     void	processROM(RomScan *romScan);
     
@@ -98,7 +160,42 @@ public:
      * retain()s and hence memory leaks
      */
     virtual bool finalize( IOOptionBits options );
+
+    virtual void setNodeFlags( UInt32 flags );
+	virtual void clearNodeFlags( UInt32 flags );
+    virtual UInt32 getNodeFlags( void );
+	virtual IOReturn configureNode( void );
+
+    /*
+     * Create local FireWire address spaces for the device to access
+     */
+    virtual IOFWPhysicalAddressSpace *createPhysicalAddressSpace(IOMemoryDescriptor *mem);
+    virtual IOFWPseudoAddressSpace *createPseudoAddressSpace(FWAddress *addr, UInt32 len,
+                    FWReadCallback reader, FWWriteCallback writer, void *refcon);
+
+protected:
+	virtual IOReturn readRootDirectory( IOConfigDirectory * directory, OSDictionary * propTable );
+	virtual IOReturn processRootDirectory( OSDictionary * propTable );
+	virtual IOReturn readUnitDirectories( IOConfigDirectory * directory, OSSet * unitInfo );
+	virtual IOReturn processUnitDirectories( OSSet * unitSet );
     
+	virtual void setRegistrationState( RegistrationState fRegistrationState );
+	
+	virtual void preprocessDirectories( OSDictionary * rootPropTable, OSSet * unitSet );
+	
+	virtual void configurePhysicalFilter( void );
+
+protected:
+	virtual IOFireWireNubAux * createAuxiliary( void );
+
+public:
+	inline bool isTerminated( void )
+		{ return ((IOFireWireDeviceAux*)fAuxiliary)->isTerminated(); }
+
+protected:	
+	inline void setTerminated( bool terminated )
+		{ ((IOFireWireDeviceAux*)fAuxiliary)->setTerminated( terminated ); }
+		
 private:
     OSMetaClassDeclareReservedUnused(IOFireWireDevice, 0);
     OSMetaClassDeclareReservedUnused(IOFireWireDevice, 1);

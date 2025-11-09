@@ -3,9 +3,9 @@
  
      Contains:   Font file structures.
  
-     Version:    ATS-77.1~62
+     Version:    ATS-102.4~1
  
-     Copyright:  © 1994-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,28 +16,18 @@
 #ifndef __SFNTTYPES__
 #define __SFNTTYPES__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 struct sfntDirectoryEntry {
   FourCharCode        tableTag;
@@ -251,9 +241,9 @@ enum {
 
 /* The following are special "don't care" values to be used in interfaces */
 enum {
-  kFontNoPlatform               = -1,
-  kFontNoScript                 = -1,
-  kFontNoLanguage               = -1
+  kFontNoPlatformCode           = (unsigned long)(-1),
+  kFontNoScriptCode             = (unsigned long)(-1),
+  kFontNoLanguageCode           = (unsigned long)(-1)
 };
 
 struct sfntCMapSubHeader {
@@ -264,6 +254,17 @@ struct sfntCMapSubHeader {
 typedef struct sfntCMapSubHeader        sfntCMapSubHeader;
 enum {
   sizeof_sfntCMapSubHeader      = 6
+};
+
+struct sfntCMapExtendedSubHeader {
+  UInt16              format;
+  UInt16              reserved;
+  UInt32              length;
+  UInt32              language;
+};
+typedef struct sfntCMapExtendedSubHeader sfntCMapExtendedSubHeader;
+enum {
+  sizeof_sfntCMapExtendedSubHeader = 12
 };
 
 struct sfntCMapEncoding {
@@ -312,7 +313,7 @@ enum {
 
 /* The following is a special "don't care" value to be used in interfaces */
 enum {
-  kFontNoName                   = -1
+  kFontNoNameCode               = (unsigned long)(-1)
 };
 
 struct sfntNameRecord {
@@ -450,6 +451,19 @@ enum {
   nonGlyphID                    = 65535L
 };
 
+
+/*   Deprecated "don't care" values - use kFontNoPlatformCode, kFontNoScriptCode, 
+     kFontNoLanguageCode, kFontNoName instead
+*/
+enum {
+  kFontNoPlatform               = -1,
+  kFontNoScript                 = -1,
+  kFontNoLanguage               = -1,
+  kFontNoName                   = -1
+};
+
+
+
 /*  Data type used to access names from font name table */
 
 typedef UInt32                          FontNameCode;
@@ -467,17 +481,8 @@ struct FontVariation {
 };
 typedef struct FontVariation            FontVariation;
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __SFNTTYPES__ */
 

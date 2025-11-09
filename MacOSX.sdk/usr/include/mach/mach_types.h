@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2002,2000 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -96,16 +96,14 @@
  */
 typedef mach_port_t		task_t;
 typedef mach_port_t		thread_t;
+typedef	mach_port_t		thread_act_t;
 typedef mach_port_t		ipc_space_t;
 typedef mach_port_t		host_t;
 typedef mach_port_t		host_priv_t;
 typedef mach_port_t		host_security_t;
-typedef mach_port_t		processor_set_t;
-typedef mach_port_t		processor_set_name_t;
-typedef mach_port_t		processor_set_control_t;
 typedef mach_port_t		processor_t;
-typedef	mach_port_t		thread_act_t;
-typedef mach_port_t		subsystem_t;
+typedef mach_port_t		processor_set_t;
+typedef mach_port_t		processor_set_control_t;
 typedef mach_port_t		semaphore_t;
 typedef mach_port_t		lock_set_t;
 typedef mach_port_t		ledger_t;
@@ -114,6 +112,12 @@ typedef mach_port_t		clock_serv_t;
 typedef mach_port_t		clock_ctrl_t;
 
 
+/*
+ * These aren't really unique types.  They are just called
+ * out as unique types at one point in history.  So we list
+ * them here for compatibility.
+ */
+typedef processor_set_t		processor_set_name_t;
 
 /*
  * JMM - These types are just hard-coded as ports for now
@@ -141,6 +145,7 @@ typedef processor_set_t		*processor_set_name_array_t;
 typedef processor_t		*processor_array_t;
 typedef	thread_act_t		*thread_act_array_t;
 typedef ledger_t		*ledger_array_t;
+
 
 /*
  * However the real mach_types got declared, we also have to declare
@@ -173,17 +178,19 @@ typedef clock_ctrl_t		clock_ctrl_port_t;
 typedef exception_handler_t	exception_port_t;
 typedef exception_handler_array_t exception_port_arrary_t;
 
+
 #define TASK_NULL		((task_t) 0)
 #define THREAD_NULL		((thread_t) 0)
+#define THR_ACT_NULL 		((thread_act_t) 0)
+#define IPC_SPACE_NULL		((ipc_space_t) 0)
 #define HOST_NULL		((host_t) 0)
 #define HOST_PRIV_NULL		((host_priv_t)0)
 #define HOST_SECURITY_NULL	((host_security_t)0)
 #define PROCESSOR_SET_NULL	((processor_set_t) 0)
 #define PROCESSOR_NULL		((processor_t) 0)
-#define THR_ACT_NULL 		((thread_act_t) 0)
-#define SUBSYSTEM_NULL		((subsystem_t) 0)
 #define SEMAPHORE_NULL		((semaphore_t) 0)
 #define LOCK_SET_NULL		((lock_set_t) 0)
+#define LEDGER_NULL 		((ledger_t) 0)
 #define ALARM_NULL		((alarm_t) 0)
 #define CLOCK_NULL		((clock_t) 0)
 #define UND_SERVER_NULL		((UNDServerRef) 0)

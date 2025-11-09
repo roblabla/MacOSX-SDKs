@@ -3,9 +3,9 @@
  
      Contains:   AppleEvent Data Model Interfaces.
  
-     Version:    AppleEvents-116~3
+     Version:    AppleEvents-242~1
  
-     Copyright:  © 1996-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1996-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,8 +17,8 @@
 #ifndef __AEDATAMODEL_R__
 #define __AEDATAMODEL_R__
 
-#ifndef __CONDITIONALMACROS_R__
-#include <CarbonCore/ConditionalMacros.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
 
 /* Apple event descriptor types */
@@ -91,7 +91,7 @@
 #define keyOriginalAddressAttr 			'from'				/*  new in 1.0.1  */
 #define keyAcceptTimeoutAttr 			'actm'				/*  new for Mac OS X  */
 
-/* These bits are specified in the keyXMLDebugginAttr (an SInt32) */
+/* These bits are specified in the keyXMLDebuggingAttr (an SInt32) */
 #define kAEDebugPOSTHeader 				0x01				/*  headers of the HTTP post we sent - typeChar  */
 #define kAEDebugReplyHeader 			0x02				/*  headers returned by the server  */
 #define kAEDebugXMLRequest 				0x04				/*  the XML request we sent  */
@@ -120,6 +120,7 @@
 															/*  these parameters exist as part of the direct object of the event for both incoming and outgoing requests  */
 #define keyRPCMethodName 				'meth'				/*  name of the method to call  */
 #define keyRPCMethodParam 				'parm'				/*  the list (or structure) of parameters  */
+#define keyRPCMethodParamOrder 			'/ord'				/*  if a structure, the order of parameters (a list)  */
 															/*  when keyXMLDebugginAttr so specifies, these additional parameters will be part of the reply.  */
 #define keyAEPOSTHeaderData 			'phed'				/*  what we sent to the server  */
 #define keyAEReplyHeaderData 			'rhed'				/*  what the server sent to us  */
@@ -133,7 +134,7 @@
 #define keySOAPSchemaVersion 			'ssch'				/*  Optional XML Schema version, defaults to kSOAP1999Schama  */
 
 /* 
-   When serializing AERecords as SOAP structures, it is possible for
+   When serializing AERecords as SOAP structures, it is possible
    to specify the namespace and type of the structure.  To do this,
    add a keySOAPStructureMetaData record to the top level of the
    record to be serialized.  If present, this will be used to specify
@@ -151,6 +152,35 @@
 #define keySOAPSMDNamespace 			'ssns'				/*  "myNamespace" */
 #define keySOAPSMDNamespaceURI 			'ssnu'				/*  "http://myUri.org/xsd" */
 #define keySOAPSMDType 					'sstp'				/*  "MyStructType" */
+
+/* 
+ * Web Services Proxy support.  Available only on systems > 10.1.x.
+ * These constants should be added as attributes on the event that is
+ * being sent (not part of the direct object.)
+ */
+															/*  Automatically configure the proxy based on System Configuration  */
+#define kAEUseHTTPProxyAttr 			'xupr'				/*  a typeBoolean.  Defaults to true. */
+															/*  manually specify the proxy host and port.  */
+#define kAEHTTPProxyPortAttr 			'xhtp'				/*  a typeSInt32 */
+#define kAEHTTPProxyHostAttr 			'xhth'				/*  a typeChar */
+
+/*
+ * Web Services SOCKS support.  kAEUseSocksAttr is a boolean that
+ * specifies whether to automatically configure SOCKS proxies by
+ * querying System Configuration.
+ */
+#define kAESocks4Protocol 				4
+#define kAESocks5Protocol 				5
+
+#define kAEUseSocksAttr 				'xscs'				/*  a typeBoolean.  Defaults to true. */
+															/*  This attribute specifies a specific SOCKS protocol to be used  */
+#define kAESocksProxyAttr 				'xsok'				/*  a typeSInt32 */
+															/*  if version >= 4  */
+#define kAESocksHostAttr 				'xshs'				/*  a typeChar */
+#define kAESocksPortAttr 				'xshp'				/*  a typeSInt32 */
+#define kAESocksUserAttr 				'xshu'				/*  a typeChar */
+															/*  if version >= 5  */
+#define kAESocksPasswordAttr 			'xshw'				/*  a typeChar */
 
 #define kAENormalPriority 				0x00000000			/*  post message at the end of the event queue  */
 #define kAEHighPriority 				0x00000001			/*  post message at the front of the event queue (same as nAttnMsg)  */

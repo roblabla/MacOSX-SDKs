@@ -49,6 +49,10 @@ struct CGDataProviderDirectAccessCallbacks {
 };
 typedef struct CGDataProviderDirectAccessCallbacks CGDataProviderDirectAccessCallbacks;
 
+/* Return the CFTypeID for CGDataProviderRefs. */
+
+CG_EXTERN CFTypeID CGDataProviderGetTypeID(void);
+
 /* Create a sequential-access data provider using `callbacks' to provide
  * the data.  `info' is passed to each of the callback functions. */
 
@@ -69,13 +73,11 @@ CG_EXTERN CGDataProviderRef CGDataProviderCreateWithData(void *info, const void 
 
 CG_EXTERN CGDataProviderRef CGDataProviderCreateWithURL(CFURLRef url);
 
-/* Increment the retain count of `provider' and return it.  All data
- * providers are created with an initial retain count of 1. */
+/* Equivalent to `CFRetain(provider)'. */
 
 CG_EXTERN CGDataProviderRef CGDataProviderRetain(CGDataProviderRef provider);
 
-/* Decrement the retain count of `provider'.  If the retain count reaches
- * 0, then free `provider' and any associated resources. */
+/* Equivalent to `CFRelease(provider)'. */
 
 CG_EXTERN void CGDataProviderRelease(CGDataProviderRef provider);
 

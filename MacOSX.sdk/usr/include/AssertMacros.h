@@ -90,7 +90,7 @@
 
 
 /*
- *  DEBUG_ASSERT_MESSAGE(component, assertion, label, error, file, line, errorCode)
+ *  DEBUG_ASSERT_MESSAGE()
  *
  *  Summary:
  *    All assertion messages are routed through this macro. If you wish to use your
@@ -145,7 +145,7 @@
  *                           const char *exceptionLabelString, const char *errorString, 
  *                           const char *fileName, long lineNumber, int errorCode)
  *      {
- *          if ( (assertionString != NULL) && (*assertionString != '\0') )
+ *          if ( (assertionString != NULL) && (*assertionString != \'0') )
  *              fprintf(stderr, "Assertion failed: %s: %s\n", componentNameString, assertionString);
  *          else
  *              fprintf(stderr, "Check failed: %s:\n", componentNameString);
@@ -167,11 +167,11 @@
    #ifdef KERNEL
       #include <syslog.h>
       #define DEBUG_ASSERT_MESSAGE(name, assertion, label, message, file, line, value) \
-                                  syslog(LOG_ERR, "AssertMacros: %s, %s file: %s, line: %d\n", assertion, (message!=0) ? message : "", file, line);
+     								syslog(LOG_ERR, "AssertMacros: %s, %s file: %s, line: %d\n", assertion, (message!=0) ? message : "", file, line);
    #else
       #include <stdio.h>
       #define DEBUG_ASSERT_MESSAGE(name, assertion, label, message, file, line, value) \
-                                  fprintf(stderr, "AssertMacros: %s, %s file: %s, line: %d\n", assertion, (message!=0) ? message : "", file, line);
+     								fprintf(stderr, "AssertMacros: %s, %s file: %s, line: %d\n", assertion, (message!=0) ? message : "", file, line);
    #endif
 #endif
 
@@ -320,7 +320,7 @@
                   0,                                                          \
                   __FILE__,                                                   \
                   __LINE__,                                                   \
-                  evalOnceErrorCode);                                         \
+				  evalOnceErrorCode);                                         \
           }                                                                   \
       } while ( 0 )
 #endif
@@ -545,54 +545,6 @@
                   evalOnceErrorCode);                                         \
           }                                                                   \
       } while ( 0 )
-#endif
-
-
-/*
- *  verify_action(assertion, action)
- *
- *  Summary:
- *    Production builds: if the assertion expression evaluates to false,
- *    then execute the action statement or compound statement (block).
- *
- *    Non-production builds: if the assertion expression evaluates to false,
- *    call DEBUG_ASSERT_MESSAGE and then execute the action statement or compound
- *    statement (block).
- *
- *  Parameters:
- *
- *    assertion:
- *      The assertion expression.
- *
- *    action:
- *      The statement or compound statement (block).
- */
-#if DEBUG_ASSERT_PRODUCTION_CODE
-   #define verify_action(assertion, action)                                   \
-      do                                                                      \
-      {                                                                       \
-          if ( !(assertion) )                                                 \
-          {                                                                   \
-              action;                                                         \
-          }                                                                   \
-      } while ( 0 )
-#else
-   #define verify_action(assertion, action)                                  \
-     do                                                                      \
-      {                                                                      \
-          if ( !(assertion) )                                                \
-          {                                                                  \
-             DEBUG_ASSERT_MESSAGE(                                           \
-                  DEBUG_ASSERT_COMPONENT_NAME_STRING,                        \
-                  #assertion,                                                \
-                  0,                                                         \
-                  0,                                                         \
-                  __FILE__,                                                  \
-                  __LINE__,                                                  \
-                  0);                                                        \
-             { action; }                                                     \
-         }                                                                   \
-     } while ( 0 )
 #endif
 
 

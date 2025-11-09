@@ -25,6 +25,13 @@
  * Revision History
  *
  * $Log: IOATABusInfo.h,v $
+ * Revision 1.8  2002/11/09 03:46:38  barras
+ *
+ * Bug #: 3083512, 3090979
+ *
+ * Submitted by:
+ * Reviewed by:
+ *
  * Revision 1.7  2002/02/18 23:20:17  barras
  *
  * Fixing a i386 build failure due to a type mismatch in an extend lba call.

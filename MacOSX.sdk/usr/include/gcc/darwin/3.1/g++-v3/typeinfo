@@ -1,5 +1,6 @@
 // RTTI support for -*- C++ -*-
-// Copyright (C) 1994, 1995, 1996, 1997, 1998, 2000, 2001 Free Software Foundation
+// Copyright (C) 1994, 1995, 1996, 1997, 1998, 2000, 2001, 2002
+// Free Software Foundation
 //
 // This file is part of GNU CC.
 //
@@ -84,7 +85,7 @@ namespace std
     { return __name; }
 
 #if !__GXX_MERGED_TYPEINFO_NAMES
-    bool before(const type_info& arg) const;
+    bool before(const type_info& __arg) const;
     // In old abi, or when weak symbols are not supported, there can
     // be multiple instances of a type_info object for one
     // type. Uniqueness must use the _name value, not object address.
@@ -129,6 +130,9 @@ namespace std
   {
   public:
     bad_cast() throw() { }
+    // This declaration is not useless:
+    // http://gcc.gnu.org/onlinedocs/gcc-3.0.2/gcc_6.html#SEC118
+    virtual ~bad_cast() throw();
   };
   
   /** If you use a NULL pointer in a @c typeid expression, this is thrown.  */
@@ -136,6 +140,9 @@ namespace std
   {
   public:
     bad_typeid () throw() { }
+    // This declaration is not useless:
+    // http://gcc.gnu.org/onlinedocs/gcc-3.0.2/gcc_6.html#SEC118
+    virtual ~bad_typeid() throw();
   };
 } // namespace std
 

@@ -3,9 +3,9 @@
  
      Contains:   Device Manager Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -37,6 +37,7 @@
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -46,13 +47,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* Values of the 'message' parameter to a Chooser device package */
 enum {
@@ -577,7 +572,7 @@ typedef struct OpaqueIOCommandID*       IOCommandID;
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-PBCloseSync(ParmBlkPtr paramBlock);
+PBCloseSync(ParmBlkPtr paramBlock)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -589,7 +584,7 @@ PBCloseSync(ParmBlkPtr paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-PBCloseAsync(ParmBlkPtr paramBlock);
+PBCloseAsync(ParmBlkPtr paramBlock)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -611,7 +606,7 @@ PBCloseAsync(ParmBlkPtr paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-PBReadSync(ParmBlkPtr paramBlock);
+PBReadSync(ParmBlkPtr paramBlock)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -623,7 +618,7 @@ PBReadSync(ParmBlkPtr paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-PBReadAsync(ParmBlkPtr paramBlock);
+PBReadAsync(ParmBlkPtr paramBlock)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -645,7 +640,7 @@ PBReadAsync(ParmBlkPtr paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-PBWriteSync(ParmBlkPtr paramBlock);
+PBWriteSync(ParmBlkPtr paramBlock)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -657,7 +652,7 @@ PBWriteSync(ParmBlkPtr paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-PBWriteAsync(ParmBlkPtr paramBlock);
+PBWriteAsync(ParmBlkPtr paramBlock)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -686,7 +681,7 @@ PBWriteAsync(ParmBlkPtr paramBlock);
 extern OSErr 
 PBWaitIOComplete(
   ParmBlkPtr   paramBlock,
-  Duration     timeout);
+  Duration     timeout)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* AddDrive and GetDrvQHdr are now defined in Disks.h/p/a */
@@ -1027,13 +1022,7 @@ typedef CALLBACK_API( OSStatus , ShimEntryPoint )(Ptr paramBlock, Ptr refcon);
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

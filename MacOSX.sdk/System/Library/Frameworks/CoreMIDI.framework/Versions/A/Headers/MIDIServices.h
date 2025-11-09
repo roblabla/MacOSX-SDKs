@@ -6,7 +6,7 @@
  	Version:	Technology: Mac OS X
  				Release:	Mac OS X
  
- 	Copyright:  (c) 2000-2001 by Apple Computer, Inc., all rights reserved.
+ 	Copyright:  (c) 2000-2002 by Apple Computer, Inc., all rights reserved.
  
  	Bugs?:  	For bug reports, consult the following page on
  				the World Wide Web:
@@ -154,9 +154,9 @@
 //	Includes
 //=============================================================================
 
-#include <stddef.h>
 #include <CoreServices/CoreServices.h>
 #include <CoreFoundation/CoreFoundation.h>
+#include <stddef.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -243,7 +243,8 @@ typedef struct OpaqueMIDIEntity *		MIDIEntityRef;
 /*!
 	@typedef		MIDIEndpointRef
 	
-	@discussion		Derives from MIDIObjectRef, owned by a MIDIEntityRef.
+	@discussion		Derives from MIDIObjectRef, owned by a MIDIEntityRef,
+					unless it is a virtual endpoint.
 					
 					Entities have any number of MIDIEndpointRef's, sources
 					and destinations of 16-channel MIDI streams.				
@@ -273,6 +274,41 @@ typedef struct MIDINotification			MIDINotification;
 typedef UInt64							MIDITimeStamp;
 
 
+//  -----------------------------------------------------------------------------
+/*!
+	@enum			MIDIObjectType's
+	
+	@discussion		Provides information about the actual type of a MIDIObjectRef.
+*/
+enum {
+	kMIDIObjectType_Other				= -1,
+	kMIDIObjectType_Device				= 0,
+	kMIDIObjectType_Entity				= 1,
+	kMIDIObjectType_Source				= 2,
+	kMIDIObjectType_Destination			= 3,
+
+	kMIDIObjectType_ExternalMask		= 0x10,
+	kMIDIObjectType_ExternalDevice		= kMIDIObjectType_ExternalMask | kMIDIObjectType_Device,
+	kMIDIObjectType_ExternalEntity		= kMIDIObjectType_ExternalMask | kMIDIObjectType_Entity,
+	kMIDIObjectType_ExternalSource		= kMIDIObjectType_ExternalMask | kMIDIObjectType_Source,
+	kMIDIObjectType_ExternalDestination	= kMIDIObjectType_ExternalMask | kMIDIObjectType_Destination
+};
+
+/*!
+	@typedef		MIDIObjectType
+	
+	@discussion		Values are kMIDIObjectType_Device etc.
+*/
+typedef SInt32							MIDIObjectType;
+
+/*!
+	@typedef		MIDIUniqueID
+	
+	@discussion		An integer which uniquely identifies a MIDIObjectRef.
+*/
+typedef SInt32							MIDIUniqueID;
+
+
 //=============================================================================
 //	Callback functions
 //=============================================================================
@@ -284,7 +320,9 @@ typedef UInt64							MIDITimeStamp;
 	@discussion		This callback function is called when some aspect of the  
 					current MIDI setup changes.  Currently the only defined 
 					message is kMIDIMsgSetupChanged, which simply means, 
-					"something changed."  msgData is null in this case.
+					"something changed."  msgData is null in this case.  It
+					is called on the runloop (thread) on which MIDIClientCreate 
+					was first called.
 
 	@param			message	
 						A structure containing information about what changed.
@@ -349,16 +387,20 @@ typedef void
 	@field			timeStamp
 						The time at which the events occurred, if receiving MIDI,
 						or, if sending MIDI, the time at which the events are to
-						be played.  Zero means "now."
+						be played.  Zero means "now."  The time stamp applies
+						to the first MIDI byte in the packet.
 	@field			length		
 						The number of valid MIDI bytes which follow, in data. (It
 						may be larger than 256 bytes if the packet is dynamically
 						allocated.)
 	@field			data
-						A variable-length stream of MIDI messages. Running status
+						A variable-length stream of MIDI messages.  Running status
 						is not allowed.  In the case of system-exclusive
 						messages, a packet may only contain a single message, or
 						portion of one, with no other MIDI events.
+						
+						The MIDI messages in the packet must always be complete,
+						except for system-exclusive.
 
 						(This is declared to be 256 bytes in length so clients
 						don't have to create custom data structures in simple
@@ -441,6 +483,42 @@ struct MIDISysexSendRequest
 
 //  -----------------------------------------------------------------------------
 /*!
+	@typedef		MIDINotificationMessageID
+	
+	@discussion		
+*/
+typedef SInt32			MIDINotificationMessageID;
+
+/*!
+	@enum		MIDINotificationMessageID's
+
+	@constant	kMIDIMsgSetupChanged	Some aspect of the current MIDISetup
+										has changed.  No data.  Should ignore this
+										message if messages 2-6 are handled.
+	@constant	kMIDIMsgObjectAdded		A device, entity or endpoint was added.
+										Structure is MIDIObjectAddRemoveNotification.
+										New for CoreMIDI 1.3.
+	@constant	kMIDIMsgObjectRemoved	A device, entity or endpoint was removed.
+										Structure is MIDIObjectAddRemoveNotification.
+										New for CoreMIDI 1.3.
+	@constant	kMIDIMsgPropertyChanged	An object's property was changed.
+										Structure is MIDIObjectPropertyChangeNotification.
+										New for CoreMIDI 1.3.
+	@constant	kMIDIMsgThruConnectionsChanged	A persistent MIDI Thru connection was created
+										or destroyed.  No data.  New for CoreMIDI 1.3.
+	@constant	kMIDIMsgSerialPortOwnerChanged	A persistent MIDI Thru connection was created
+										or destroyed.  No data.  New for CoreMIDI 1.3.
+*/
+enum {
+	kMIDIMsgSetupChanged		= 1,
+	kMIDIMsgObjectAdded			= 2,
+	kMIDIMsgObjectRemoved		= 3,
+	kMIDIMsgPropertyChanged		= 4,
+	kMIDIMsgThruConnectionsChanged = 5,
+	kMIDIMsgSerialPortOwnerChanged = 6
+};
+
+/*!
 	@struct			MIDINotification
 	
 	@discussion		A MIDINotification is a structure passed to a MIDINotifyProc,
@@ -455,20 +533,29 @@ struct MIDISysexSendRequest
 */
 struct MIDINotification
 {
-	SInt32				messageID;
-	ByteCount			messageSize;
+	MIDINotificationMessageID	messageID;
+	ByteCount					messageSize;
 	// additional data may follow, depending on messageID
 };
 
-//  -----------------------------------------------------------------------------
-/*!
-	@enum			MIDINotificationMessageID's
-	@constant	kMIDIMsgSetupChanged	Some aspect of the current MIDISetup
-										has changed.  msgData is NULL.
-*/
-enum {
-	kMIDIMsgSetupChanged = 1			// msgData is NULL
-};
+typedef struct MIDIObjectAddRemoveNotification
+{
+	MIDINotificationMessageID	messageID;
+	ByteCount					messageSize;
+	MIDIObjectRef				parent;		// parent of added/removed object, or NULL
+	MIDIObjectType				parentType;	// undefined if parent is NULL
+	MIDIObjectRef				child;		// added/removed object
+	MIDIObjectType				childType;
+} MIDIObjectAddRemoveNotification;
+
+typedef struct MIDIObjectPropertyChangeNotification
+{
+	MIDINotificationMessageID	messageID;
+	ByteCount					messageSize;
+	MIDIObjectRef				object;
+	MIDIObjectType				objectType;
+	CFStringRef					propertyName;
+} MIDIObjectPropertyChangeNotification;
 
 //=============================================================================
 //	Error codes
@@ -486,8 +573,10 @@ enum {
 	kMIDIMessageSendErr		= -10838,		// communication with server failed
 	kMIDIServerStartErr		= -10839,		// couldn't start the server
 	kMIDISetupFormatErr		= -10840,		// unparseable saved state
-	kMIDIWrongThread		= -10841		// driver is calling non I/O function in server than
-											//		 from a thread other server's main one
+	kMIDIWrongThread		= -10841,		// driver is calling non I/O function in server
+											//		 from a thread other than server's main one
+	kMIDIObjectNotFound		= -10842,
+	kMIDIIDNotUnique		= -10843
 };
 
 
@@ -498,32 +587,61 @@ enum {
 /*!
 	@constant		kMIDIPropertyName
 	@discussion		device/entity/endpoint property, string
+	
+		Devices, entities, and endpoints may all have names.  The recommended way
+		to display an endpoint's name is to ask for the endpoint name, and display
+		only that name if it is unique.  If it is non-unique, prepend the device
+		name.
+		
+		A setup editor may allow the user to set the names of both driver-owned 
+		and external devices.
 */
 extern const CFStringRef	kMIDIPropertyName;		
 
 /*!
 	@constant		kMIDIPropertyManufacturer
-	@discussion		device/entity/endpoint property, string
+	@discussion		device/endpoint property, string
+	
+		Drivers should set this property on their devices.
+		
+		Setup editors may allow the user to set this property on external devices.
+		
+		Creators of virtual endpoints may set this property on their endpoints.
 */
 extern const CFStringRef	kMIDIPropertyManufacturer;
 
 /*!
 	@constant		kMIDIPropertyModel
-	@discussion		device/entity/endpoint property, string
+	@discussion		device/endpoint property, string
+
+		Drivers should set this property on their devices.
+		
+		Setup editors may allow the user to set this property on external devices.
+		
+		Creators of virtual endpoints may set this property on their endpoints.
 */
 extern const CFStringRef	kMIDIPropertyModel;
 
 /*!
 	@constant		kMIDIPropertyUniqueID
 	@discussion		devices, entities, endpoints all have unique ID's, integer
+	
+		The system assigns unique ID's to all objects.  Creators of virtual
+		endpoints may set this property on their endpoints, though doing so
+		may fail if the chosen ID is not unique.
 */
 extern const CFStringRef	kMIDIPropertyUniqueID;
 
 /*!
 	@constant		kMIDIPropertyDeviceID
-	@discussion		entity/endpoint property, integer
+	@discussion		device/entity property, integer
 	
-		the entity's system-exclusive ID, in user-visible form
+		The entity's system-exclusive ID, in user-visible form
+		
+		Drivers may set this property on their devices or entities.
+		
+		Setup editors may allow the user to set this property on
+		external devices.
 */
 extern const CFStringRef	kMIDIPropertyDeviceID;
 
@@ -531,14 +649,30 @@ extern const CFStringRef	kMIDIPropertyDeviceID;
 	@constant		kMIDIPropertyReceiveChannels
 	@discussion		endpoint property, integer
 
-		Set by the owning driver; should not be touched by other clients.
-		The value is a bitmap of channels on which it receives, (1<<0)=ch 1...(1<<15)=ch 16
+		The value is a bitmap of channels on which the object receives, (1<<0)=ch 1...(1<<15)=ch 16.
+		
+		Drivers may set this property on their entities or endpoints.
+		
+		Setup editors may allow the user to set this property on external
+		endpoints.
+		
+		Virtual destination may set this property on their endpoints.
 */
 extern const CFStringRef	kMIDIPropertyReceiveChannels;
 
 /*!
+	@constant		kMIDIPropertyTransmitChannels
+	@discussion		endpoint property, integer
+
+		The value is a bitmap of channels on which the object transmits, (1<<0)=ch 1...(1<<15)=ch 16
+		
+		New for CoreMIDI 1.3.
+*/
+extern const CFStringRef	kMIDIPropertyTransmitChannels;
+
+/*!
 	@constant		kMIDIPropertyMaxSysExSpeed
-	@discussion		entity/endpoint property, integer
+	@discussion		device/entity/endpoint property, integer
 
 		Set by the owning driver; should not be touched by other clients.
 		maximum bytes/second of sysex messages sent to it
@@ -559,6 +693,14 @@ extern const CFStringRef	kMIDIPropertyMaxSysExSpeed;
 		are sent by the client, via MIDISend, and the driver is responsible 
 		for scheduling events to be played at the right times according to their
 		timestamps.
+		
+		As of CoreMIDI 1.3, this property may also be set on virtual destinations
+		(but only the creator of the destination should do so).
+		When a client sends to a virtual destination with an advance schedule time
+		of 0, the virtual destination receives its messages at their scheduled
+		delivery time.  If a virtual destination has a non-zero advance schedule time,
+		it receives timestamped messages as soon as they are sent, and must do its
+		own scheduling of the events.
 */
 extern const CFStringRef	kMIDIPropertyAdvanceScheduleTimeMuSec;
 
@@ -567,23 +709,62 @@ extern const CFStringRef	kMIDIPropertyAdvanceScheduleTimeMuSec;
 	@discussion		entity/endpoint property, integer
 
 		0 if there are external MIDI connectors, 1 if not.
-		Set by the owning driver; should not be touched by other clients.
 
 		New for CoreMIDI 1.1.
 */
 extern const CFStringRef	kMIDIPropertyIsEmbeddedEntity;
 
+
+/*!
+	@constant		kMIDIPropertyIsBroadcast
+	@discussion		entity/endpoint property, integer
+
+		1 if the endpoint broadcasts messages to all of the other endpoints
+		in the device, 0 if not.  Set by the owning driver; should not be touched
+		by other clients.
+
+		New for CoreMIDI 1.3.
+*/
+extern const CFStringRef	kMIDIPropertyIsBroadcast;
+
+/*!
+	@constant		kMIDIPropertySingleRealtimeEntity
+	@discussion		device property, integer
+
+		Some MIDI interfaces cannot route MIDI realtime messages to individual
+		outputs; they are broadcast.  On such devices the inverse is usually
+		also true -- incoming realtime messages cannot be identified as originating
+		from any particular source.
+		
+		When this property is set on a driver device, it signifies the 0-based index of
+		the entity on which incoming realtime messages from the device will appear
+		to have originated from.
+
+		New for CoreMIDI 1.3.
+*/
+extern const CFStringRef	kMIDIPropertySingleRealtimeEntity;
+
 /*!
 	@constant		kMIDIPropertyConnectionUniqueID
-	@discussion		device/entity/endpoint property, integer
+	@discussion		device/entity/endpoint property, integer or CFDataRef
 
-		UniqueID of an external device attached to this entity or endpoint.
+		UniqueID of an external device/entity/endpoint attached to this one
+		(strongly recommended that it be an endpoint).
 		This is for the use of a setup editor UI; not currently used internally.
 		A driver-owned entity or endpoint has this property to refer
 		to an external MIDI device that is connected to it.
+		
+		The property is non-existant or 0 if there is no connection.
 
 		New for CoreMIDI 1.1.
-
+		
+		Beginning with CoreMIDI 1.3, this property may be a CFDataRef containing
+		an array of big-endian SInt32's, to allow specifying that a driver object connects
+		to multiple external objects (via MIDI thru-ing or splitting).
+		
+		This property may also exist for external devices/entities/endpoints,
+		in which case it signifies a MIDI Thru connection to another external
+		device/entity/endpoint (again, strongly recommended that it be an edpoint).
 */
 extern const CFStringRef	kMIDIPropertyConnectionUniqueID;
 
@@ -599,6 +780,18 @@ extern const CFStringRef	kMIDIPropertyConnectionUniqueID;
 		New for CoreMIDI 1.1.
 */
 extern const CFStringRef	kMIDIPropertyOffline;
+
+/*!
+	@constant		kMIDIPropertyPrivate
+	@discussion		device/entity/endpoint property, integer
+
+		1 = endpoint is private, hidden from other clients.
+		May be set on a device or entity, but they will still appear in the API; only
+		affects whether the owned endpoints are hidden.
+
+		New for CoreMIDI 1.3.
+*/
+extern const CFStringRef	kMIDIPropertyPrivate;
 
 /*!
 	@constant		kMIDIPropertyDriverOwner
@@ -618,7 +811,8 @@ extern const CFStringRef	kMIDIPropertyDriverOwner;
 
 		An alias to the device's current factory patch name file.
 
-		New for CoreMIDI 1.1.
+		Added in CoreMIDI 1.1.  DEPRECATED as of CoreMIDI 1.3.
+		Use kMIDIPropertyNameConfiguration instead.
 */
 extern const CFStringRef	kMIDIPropertyFactoryPatchNameFile;
 
@@ -629,10 +823,103 @@ extern const CFStringRef	kMIDIPropertyFactoryPatchNameFile;
 
 		An alias to the device's current user patch name file.
 
-		New for CoreMIDI 1.1.
+		Added in CoreMIDI 1.1.  DEPRECATED as of CoreMIDI 1.3.
+		Use kMIDIPropertyNameConfiguration instead.
 */
 extern const CFStringRef	kMIDIPropertyUserPatchNameFile;
 
+/*!
+	@constant		kMIDIPropertyNameConfiguration
+	@discussion		device/entity/endpoint property, CFDictionary
+
+					This specifies the device's current patch, note and control
+					name values using the MIDINameDocument XML format.  This
+					specification requires the use of higher-level, OS-specific constructs
+					outside of the specification, to fully define the current
+					names for a device.
+					
+					The MIDINameConfiguration property is implementated as a CFDictionary:
+					
+					key "master" maps to a CFDataRef containing an AliasHandle
+					referring to the device's master name document.
+					
+					key "banks" maps to a CFDictionaryRef.  This dictionary's keys
+					are CFStringRef names of patchBank elements in the master document,
+					and its values are each a CFDictionaryRef: key "file" maps to a CFDataRef
+					containing an AliasHandle to a document containing patches
+					that override those in the master document, and key "patchNameList"
+					maps to a CFStringRef which is the name of the patchNameList
+					element in the overriding document.
+					
+					key "currentModes" maps to a 16-element CFArrayRef, each element
+					of which is a CFStringRef of the name of the current mode for
+					each of the 16 MIDI channels.
+					
+					Clients setting this property must take particular care to preserve dictionary
+					values other than the ones they are interested in changing, and
+					to properly structure the dictionary.
+					
+					New for CoreMIDI 1.3.
+*/
+extern const CFStringRef	kMIDIPropertyNameConfiguration;
+
+/*!
+	@constant		kMIDIPropertyImage
+	@discussion		device property, CFStringRef which is a full POSIX path to a device
+					or external device's icon, stored in any standard graphic file format such as
+					JPEG, GIF, PNG and TIFF are all acceptable.  (See CFURL
+					for functions to convert between POSIX paths and other ways
+					of specifying files.)  The image's maximum size should be 128x128.
+					
+					Drivers should set the icon on the devices they add.
+					
+					A studio setup editor should allow the user to choose icons
+					for external devices.
+					
+					New for CoreMIDI 1.3.
+*/
+extern const CFStringRef	kMIDIPropertyImage;
+
+/*!
+	@constant		kMIDIPropertyDriverVersion
+	@discussion		device/entity/endpoint property, integer, returns the
+					driver version API of the owning driver (only for driver-
+					owned devices).  Drivers need not set this property;
+					applications should not write to it.
+					
+					New for CoreMIDI 1.3.
+*/
+extern const CFStringRef	kMIDIPropertyDriverVersion;
+
+// New for CoreMIDI 1.3, not yet documented
+// these are all set on devices/entities, and are all integer properties, 0/1
+extern const CFStringRef	kMIDIPropertySupportsGeneralMIDI;
+extern const CFStringRef	kMIDIPropertySupportsMMC;	// MIDI Machine Control
+extern const CFStringRef	kMIDIPropertyCanRoute;		// e.g. is patch bay
+
+extern const CFStringRef	kMIDIPropertyReceivesClock;
+extern const CFStringRef	kMIDIPropertyReceivesMTC;	// MIDI Time Code
+extern const CFStringRef	kMIDIPropertyReceivesNotes;
+extern const CFStringRef	kMIDIPropertyReceivesProgramChanges;
+extern const CFStringRef	kMIDIPropertyReceivesBankSelectMSB;
+extern const CFStringRef	kMIDIPropertyReceivesBankSelectLSB;
+
+extern const CFStringRef	kMIDIPropertyTransmitsClock;
+extern const CFStringRef	kMIDIPropertyTransmitsMTC;	// MIDI Time Code
+extern const CFStringRef	kMIDIPropertyTransmitsNotes;
+extern const CFStringRef	kMIDIPropertyTransmitsProgramChanges;
+extern const CFStringRef	kMIDIPropertyTransmitsBankSelectMSB;
+extern const CFStringRef	kMIDIPropertyTransmitsBankSelectLSB;
+
+extern const CFStringRef	kMIDIPropertyPanDisruptsStereo;
+extern const CFStringRef	kMIDIPropertyIsSampler;
+extern const CFStringRef	kMIDIPropertyIsDrumMachine;
+extern const CFStringRef	kMIDIPropertyIsMixer;
+extern const CFStringRef	kMIDIPropertyIsEffectUnit;
+
+// these are integers, 0-16, also set on devices/entities
+extern const CFStringRef	kMIDIPropertyMaxReceiveChannels;
+extern const CFStringRef	kMIDIPropertyMaxTransmitChannels;
 
 
 // ______________________________________________________________________________
@@ -644,6 +931,8 @@ extern const CFStringRef	kMIDIPropertyUserPatchNameFile;
 	@function		MIDIClientCreate
 
 	@abstract 		Create a MIDIClient object.
+	
+	@discussion		All clients must be created and disposed on the same thread.
 	
 	@param			name
 						The client's name.
@@ -674,7 +963,7 @@ MIDIClientCreate(	CFStringRef		name,
 	@discussion 	It is not essential to call this function; the CoreMIDI
 					framework will automatically dispose all MIDIClients when an
 					application terminates.
-
+	
 	@param  		client
 						The client to dispose.
 	@result			An OSStatus result code.
@@ -930,7 +1219,7 @@ extern ItemCount
 MIDIGetNumberOfExternalDevices();
 
 //  -----------------------------------------------------------------------------
-/*
+/*!
 	@function		MIDIGetExternalDevice
 
 	@abstract 		Return one of the external devices in the system.
@@ -947,6 +1236,58 @@ MIDIGetNumberOfExternalDevices();
 extern MIDIDeviceRef
 MIDIGetExternalDevice(	ItemCount deviceIndex0 );
 
+//  -----------------------------------------------------------------------------
+/*!
+	@function		MIDIObjectFindByUniqueID
+
+	@abstract 		Locate a device, external device, entity, or endpoint
+					by its uniqueID.
+
+	@discussion		New for CoreMIDI 1.3.
+
+	@param			inUniqueID
+						The uniqueID of the object to search for.  (This should
+						be the result of an earlier call to MIDIObjectGetIntegerProperty
+						for the property kMIDIPropertyUniqueID).
+	@param			outObject
+						The returned object, or NULL if the object was not found or
+						an error occurred.  This should be cast to the appropriate
+						type (MIDIDeviceRef, MIDIEntityRef, MIDIEndpointRef),
+						according to *outObjectType.
+	@param			outObjectType
+						On exit, the type of object which was found; undefined
+						if none found.
+	@result			An OSStatus error code, including kMIDIObjectNotFound if there
+					is no object with the specified uniqueID.
+*/
+extern OSStatus
+MIDIObjectFindByUniqueID(	MIDIUniqueID 		inUniqueID,
+							MIDIObjectRef *		outObject,
+							MIDIObjectType *	outObjectType);
+
+//  -----------------------------------------------------------------------------
+/*!
+	@function		MIDIEntityGetDevice
+
+	@abstract 		Returns an entity's device.
+	@discussion		New for CoreMIDI 1.3.
+*/
+extern OSStatus
+MIDIEntityGetDevice(		MIDIEntityRef		inEntity,
+							MIDIDeviceRef *		outDevice);
+
+//  -----------------------------------------------------------------------------
+/*!
+	@function		MIDIEndpointGetEntity
+
+	@abstract 		Returns an endpoint's entity.
+	@discussion		Virtual sources and destinations don't have entities.
+	
+					New for CoreMIDI 1.3.
+*/
+extern OSStatus
+MIDIEndpointGetEntity(		MIDIEndpointRef		inEndpoint,
+							MIDIEntityRef *		outEntity);
 
 // ______________________________________________________________________________
 //	Virtual endpoints
@@ -965,6 +1306,10 @@ MIDIGetExternalDevice(	ItemCount deviceIndex0 );
 
 					Drivers need not call this; when they create devices and
 					entities, sources and destinations are created at that time.
+					
+					See the discussion of kMIDIPropertyAdvanceScheduleTimeMuSec
+					for notes about the relationship between when a sender sends
+					MIDI to the destination and when it is received.
 	
 	@param			client
 						The client owning the virtual destination.
@@ -1255,6 +1600,54 @@ MIDIObjectSetDataProperty(		MIDIObjectRef	obj,
 
 //  -----------------------------------------------------------------------------
 /*!
+	@function		MIDIObjectGetDictionaryProperty
+
+	@abstract 		Get an object's dictionary-type property.
+
+	@discussion		(See the MIDIObjectRef documentation for information
+					about properties.)
+					
+					New for CoreMIDI 1.3.
+		
+	@param			obj
+						The object whose property is to be returned.
+	@param			propertyID
+						Name of the property to return.
+	@param			outDict
+						On successful return, the value of the property.
+	@result			An OSStatus result code.
+*/
+extern OSStatus
+MIDIObjectGetDictionaryProperty(	MIDIObjectRef		obj, 
+									CFStringRef			propertyID, 
+									CFDictionaryRef *	outDict );
+
+//  -----------------------------------------------------------------------------
+/*!
+	@function		MIDIObjectSetDictionaryProperty
+
+	@abstract 		Set an object's dictionary-type property.
+	
+	@discussion		(See the MIDIObjectRef documentation for information
+					about properties.)
+	
+					New for CoreMIDI 1.3.
+		
+	@param			obj
+						The object whose property is to be altered.
+	@param			propertyID
+						Name of the property to set.
+	@param			dict
+						New value of the property.
+	@result			An OSStatus result code.
+*/
+extern OSStatus
+MIDIObjectSetDictionaryProperty(MIDIObjectRef	obj, 
+								CFStringRef		propertyID, 
+								CFDictionaryRef	data );
+
+//  -----------------------------------------------------------------------------
+/*!
 	@function		MIDIObjectGetProperties
 	
 	@abstract		Get all of an object's properties.
@@ -1283,6 +1676,24 @@ extern OSStatus
 MIDIObjectGetProperties(		MIDIObjectRef 		obj, 
 								CFPropertyListRef *	outProperties,
 								Boolean				deep );
+
+//  -----------------------------------------------------------------------------
+/*!
+	@function		MIDIObjectRemoveProperty
+	
+	@abstract		Remove an object's property.
+
+	@param			obj
+						The object whose property is to be removed.
+	@param			propertyID
+						The property to be removed.
+	@result			An OSStatus result code.
+
+	@discussion		New for CoreMIDI 1.3.
+*/
+extern OSStatus
+MIDIObjectRemoveProperty(		MIDIObjectRef 		obj, 
+								CFStringRef			propertyID );
 
 
 // ______________________________________________________________________________

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -31,19 +31,83 @@
 #ifndef _IOKIT_IOFIREWIRENUB_H
 #define _IOKIT_IOFIREWIRENUB_H
 
+// public
 #include <IOKit/IOService.h>
 #include <IOKit/firewire/IOFWCommand.h>
 #include <IOKit/firewire/IOFWAddressSpace.h>
+
 class IOFireWireController;
 class IOFireWireBus;
 class IOConfigDirectory;
+class IOFireWireNub;
 
+#pragma mark -
+
+/*! 
+	@class IOFireWireNubAux
+*/
+
+class IOFireWireNubAux : public OSObject
+{
+    OSDeclareDefaultStructors(IOFireWireNubAux)
+
+	friend class IOFireWireNub;
+	
+protected:
+	
+	IOFireWireNub * 		fPrimary;
+	
+	/*! 
+		@struct ExpansionData
+		@discussion This structure will be used to expand the capablilties of the class in the future.
+    */  
+	  
+    struct ExpansionData { };
+
+	/*! 
+		@var reserved
+		Reserved for future use.  (Internal use only)  
+	*/
+    
+	ExpansionData * reserved;
+
+    virtual bool init( IOFireWireNub * primary );
+	virtual	void free();
+
+	virtual UInt32 hopCount( IOFireWireNub * nub );
+	virtual UInt32 hopCount( void );
+	
+private:
+    OSMetaClassDeclareReservedUnused(IOFireWireNubAux, 0);
+    OSMetaClassDeclareReservedUnused(IOFireWireNubAux, 1);
+    OSMetaClassDeclareReservedUnused(IOFireWireNubAux, 2);
+    OSMetaClassDeclareReservedUnused(IOFireWireNubAux, 3);
+    OSMetaClassDeclareReservedUnused(IOFireWireNubAux, 4);
+    OSMetaClassDeclareReservedUnused(IOFireWireNubAux, 5);
+    OSMetaClassDeclareReservedUnused(IOFireWireNubAux, 6);
+    OSMetaClassDeclareReservedUnused(IOFireWireNubAux, 7);
+    OSMetaClassDeclareReservedUnused(IOFireWireNubAux, 8);
+    OSMetaClassDeclareReservedUnused(IOFireWireNubAux, 9);
+    OSMetaClassDeclareReservedUnused(IOFireWireNubAux, 10);
+    OSMetaClassDeclareReservedUnused(IOFireWireNubAux, 11);
+    OSMetaClassDeclareReservedUnused(IOFireWireNubAux, 12);
+    OSMetaClassDeclareReservedUnused(IOFireWireNubAux, 13);
+    OSMetaClassDeclareReservedUnused(IOFireWireNubAux, 14);
+    OSMetaClassDeclareReservedUnused(IOFireWireNubAux, 15);
+	
+};
+
+#pragma mark -
+
+/*! @class IOFireWireNub
+*/
 class IOFireWireNub : public IOService
 {
     OSDeclareAbstractStructors(IOFireWireNub)
 
     friend class IOFireWireController;
-    
+    friend class IOFireWireNubAux;
+   
 /*------------------Useful info about device (also available in the registry)--------*/
 protected:
     int			fDeviceSpeed;	// Max supported by device
@@ -66,6 +130,10 @@ protected:
 
     UInt32		fNodeFlags;
     
+	OSSet *	 fConfigDirectorySet;
+
+	IOFireWireNubAux * fAuxiliary;
+		
 /*! @struct ExpansionData
     @discussion This structure will be used to expand the capablilties of the class in the future.
     */    
@@ -87,10 +155,8 @@ protected:
 public:
 
     // Get nodeID and bus generation info
-    IOReturn getNodeIDGeneration(UInt32 &generation, UInt16 &nodeID, UInt16 &localID) const
-    { generation = fGeneration; nodeID = fNodeID; localID = fLocalNodeID; return kIOReturnSuccess;};
-    IOReturn getNodeIDGeneration(UInt32 &generation, UInt16 &nodeID) const
-    { generation = fGeneration; nodeID = fNodeID; return kIOReturnSuccess;};
+    IOReturn getNodeIDGeneration(UInt32 &generation, UInt16 &nodeID, UInt16 &localID) const;
+    IOReturn getNodeIDGeneration(UInt32 &generation, UInt16 &nodeID) const;
     
     // How fast can this system talk to the node?
     virtual IOFWSpeed FWSpeed() const;
@@ -142,20 +208,21 @@ public:
     /*
      * Get Config directory for nub
      * Device nub directory is root directory, Unit nub directory is Unit directory.
-     */
-    virtual IOReturn getConfigDirectory(IOConfigDirectory *&dir);
+	 *
+	 * Depricated use getConfigDirectoryRef
+     *
+	 */
+    
+	virtual IOReturn getConfigDirectory(IOConfigDirectory *&dir);
 
     /*
      * Get bus for nub
      */
-    IOFireWireBus * getBus() const
-        { return (IOFireWireBus *)fControl; };
+    IOFireWireBus * getBus() const;
 
-    IOFireWireController * getController() const
-        { return fControl; };
+    IOFireWireController * getController() const;
 
-    const CSRNodeUniqueID &getUniqueID() const
-        { return fUniqueID; };
+    const CSRNodeUniqueID &getUniqueID() const;
 
     /*
      * Standard nub initialization
@@ -164,10 +231,24 @@ public:
 
     virtual void setNodeFlags( UInt32 flags );
     virtual UInt32 getNodeFlags( void );
+	virtual void clearNodeFlags( UInt32 flags );
+	
+	virtual IOReturn setConfigDirectory( IOConfigDirectory *directory );
+
+    virtual IOReturn getConfigDirectoryRef( IOConfigDirectory *&dir );
+
+	inline UInt32 hopCount( IOFireWireNub * nub )
+		{ return fAuxiliary->hopCount( nub ); }
+		
+	inline UInt32 hopCount( void )
+		{ return fAuxiliary->hopCount(); }
+		
+protected:
+	virtual IOFireWireNubAux * createAuxiliary( void );
     
 private:
-    OSMetaClassDeclareReservedUnused(IOFireWireNub, 0);
-    OSMetaClassDeclareReservedUnused(IOFireWireNub, 1);
+    OSMetaClassDeclareReservedUsed(IOFireWireNub, 0);
+	OSMetaClassDeclareReservedUsed(IOFireWireNub, 1);
     OSMetaClassDeclareReservedUnused(IOFireWireNub, 2);
     OSMetaClassDeclareReservedUnused(IOFireWireNub, 3);
 

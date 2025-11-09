@@ -38,6 +38,9 @@
 enum _NSGlyphAttribute {
     NSGlyphAttributeSoft = 0,
     NSGlyphAttributeElastic = 1,
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+    NSGlyphAttributeBidiLevel = 2,
+#endif
     NSGlyphAttributeInscribe = 5
 };
 
@@ -50,7 +53,18 @@ typedef enum {
     NSGlyphInscribeOverBelow = 4
 } NSGlyphInscription;
 
-@interface NSLayoutManager : NSObject {
+/* The typesetting behavior (compatibility setting) values.
+*/
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+typedef enum {
+    NSTypesetterLatestBehavior = -1,
+    NSTypesetterOriginalBehavior = 0, // Mac OS X ver 10.0 and 10.1 (uses NSSimpleHorizontalTypesetter)
+    NSTypesetterBehavior_10_2_WithCompatibility = 1, // 10.2 with backward compatibility layout (uses new ATS-based typestter)
+    NSTypesetterBehavior_10_2 = 2,
+} NSTypesetterBehavior;
+#endif
+
+@interface NSLayoutManager : NSObject <NSCoding> {
 
   /*All instance variables are private*/
 
@@ -100,8 +114,11 @@ typedef enum {
         unsigned int isLayoutRequestedFromSubthread:1;
         unsigned int defaultAttachmentScaling:2;
         unsigned int isInUILayoutMode:1;
-            
-        unsigned int _pad:6;
+        unsigned int seenRightToLeft:1;
+        unsigned int ignoresAntialiasThreshold:1;
+        unsigned int needToFlushGlyph:1;
+
+        unsigned int _pad:3;
     } _lmFlags;
 
     id _delegate;
@@ -160,7 +177,7 @@ typedef enum {
 
 - (NSTextStorage *)textStorage;
 - (void)setTextStorage:(NSTextStorage *)textStorage;
-    // The set method generally should not be called directly, but you may want to override it.  Used to get and set the text storage.  The set method is called by the NSTextStorage's addTextStorageObserver/removeTextStorageObserver methods.
+    // The set method generally should not be called directly, but you may want to override it.  Used to get and set the text storage.  The set method is called by the NSTextStorage's addLayoutManager:/removeLayoutManager: methods.
 
 - (void)replaceTextStorage:(NSTextStorage *)newTextStorage;
     // This method should be used instead of the primitive -setTextStorage: if you need to replace a NSLayoutManager's NSTextStorage with a new one leaving the rest of the web intact.  This method deals with all the work of making sure the NSLayoutManager doesn't get deallocated and transferring all the NSLayoutManager s on the old NSTextStorage to the new one.
@@ -389,9 +406,19 @@ typedef enum {
 
 /************************ Typesetting support ************************/
 
-// A bulk method to retrieve many glyphs, with their attributes, and fill buffers supplied by the caller.
+// Bulk methods to retrieve many glyphs, with their attributes, and fill buffers supplied by the caller.
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (unsigned)getGlyphsInRange:(NSRange)glyphsRange glyphs:(NSGlyph *)glyphBuffer characterIndexes:(unsigned *)charIndexBuffer glyphInscriptions:(NSGlyphInscription *)inscribeBuffer elasticBits:(BOOL *)elasticBuffer bidiLevels:(unsigned char *)bidiLevelBuffer;
+#endif
 - (unsigned)getGlyphsInRange:(NSRange)glyphsRange glyphs:(NSGlyph *)glyphBuffer characterIndexes:(unsigned *)charIndexBuffer glyphInscriptions:(NSGlyphInscription *)inscribeBuffer elasticBits:(BOOL *)elasticBuffer;
 
+/************************ Typesetting compatibility ************************/
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (NSTypesetterBehavior)typesetterBehavior;
+- (void)setTypesetterBehavior:(NSTypesetterBehavior)theBehavior;
+
+- (float)defaultLineHeightForFont:(NSFont *)theFont;
+#endif
 @end
 
 @interface NSLayoutManager (NSTextViewSupport)

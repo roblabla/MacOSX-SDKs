@@ -3,9 +3,9 @@
  
      Contains:   Carbon Printing Manager Interfaces.
  
-     Version:    PrintingCore-61~16
+     Version:    PrintingCore-102.1~1
  
-     Copyright:  © 1998-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1998-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,36 +16,18 @@
 #ifndef __PMDEFINITIONS__
 #define __PMDEFINITIONS__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __MACERRORS__
-#include <CarbonCore/MacErrors.h>
-#endif
-
-#ifndef __CFSTRING__
-#include <CoreFoundation/CFString.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* Printing objects */
 typedef const void *                    PMObject;
@@ -55,6 +37,7 @@ typedef struct OpaquePMPageFormat*      PMPageFormat;
 typedef struct OpaquePMPrintContext*    PMPrintContext;
 typedef struct OpaquePMPrintSession*    PMPrintSession;
 typedef struct OpaquePMPrinter*         PMPrinter;
+typedef struct OpaquePMServer*          PMServer;
 enum {
   kPMCancel                     = 0x0080 /* user hit cancel button in dialog */
 };
@@ -68,6 +51,8 @@ enum {
 #define kPMNoPrintSettings              ((PMPrintSettings)NULL)
 /* for parameters which take a PageFormat reference */
 #define kPMNoPageFormat                 ((PMPageFormat)NULL)
+/* for parameters which take a Server reference */
+#define kPMServerLocal                  ((PMServer)NULL)
 typedef UInt16 PMDestinationType;
 enum {
   kPMDestinationInvalid         = 0,
@@ -102,6 +87,14 @@ enum {
   kPMLandscape                  = 2,
   kPMReversePortrait            = 3,    /* will revert to kPortrait for current drivers */
   kPMReverseLandscape           = 4     /* will revert to kLandscape for current drivers */
+};
+
+/* Printer states */
+typedef UInt16 PMPrinterState;
+enum {
+  kPMPrinterIdle                = 3,
+  kPMPrinterProcessing          = 4,
+  kPMPrinterStopped             = 5
 };
 
 enum {
@@ -304,6 +297,11 @@ enum {
   kPMPrintAllPages              = -1
 };
 
+enum {
+  kPMUnlocked                   = false,
+  kPMLocked                     = true
+};
+
 struct PMRect {
   double              top;
   double              left;
@@ -323,17 +321,8 @@ struct PMLanguageInfo {
 };
 typedef struct PMLanguageInfo           PMLanguageInfo;
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __PMDEFINITIONS__ */
 

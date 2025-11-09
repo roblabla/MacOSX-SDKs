@@ -3,9 +3,9 @@
  
      Contains:   Pascal string manipulation routines that parallel ANSI C string.h
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,6 +22,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -29,14 +30,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 /*
@@ -50,7 +43,7 @@ extern "C" {
 extern short 
 PLstrcmp(
   ConstStr255Param   str1,
-  ConstStr255Param   str2);
+  ConstStr255Param   str2)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -65,7 +58,7 @@ extern short
 PLstrncmp(
   ConstStr255Param   str1,
   ConstStr255Param   str2,
-  short              num);
+  short              num)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -79,7 +72,7 @@ PLstrncmp(
 extern StringPtr 
 PLstrcpy(
   StringPtr          str1,
-  ConstStr255Param   str2);
+  ConstStr255Param   str2)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -94,7 +87,7 @@ extern StringPtr
 PLstrncpy(
   StringPtr          str1,
   ConstStr255Param   str2,
-  short              num);
+  short              num)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -108,7 +101,7 @@ PLstrncpy(
 extern StringPtr 
 PLstrcat(
   StringPtr          str1,
-  ConstStr255Param   str2);
+  ConstStr255Param   str2)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -123,7 +116,7 @@ extern StringPtr
 PLstrncat(
   StringPtr          str1,
   ConstStr255Param   str2,
-  short              num);
+  short              num)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -137,7 +130,7 @@ PLstrncat(
 extern Ptr 
 PLstrchr(
   ConstStr255Param   str1,
-  short              ch1);
+  short              ch1)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -151,7 +144,7 @@ PLstrchr(
 extern Ptr 
 PLstrrchr(
   ConstStr255Param   str1,
-  short              ch1);
+  short              ch1)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -165,7 +158,7 @@ PLstrrchr(
 extern Ptr 
 PLstrpbrk(
   ConstStr255Param   str1,
-  ConstStr255Param   str2);
+  ConstStr255Param   str2)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -179,7 +172,7 @@ PLstrpbrk(
 extern short 
 PLstrspn(
   ConstStr255Param   str1,
-  ConstStr255Param   str2);
+  ConstStr255Param   str2)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -193,7 +186,7 @@ PLstrspn(
 extern Ptr 
 PLstrstr(
   ConstStr255Param   str1,
-  ConstStr255Param   str2);
+  ConstStr255Param   str2)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -205,7 +198,7 @@ PLstrstr(
  *    Non-Carbon CFM:   not available
  */
 extern short 
-PLstrlen(ConstStr255Param str);
+PLstrlen(ConstStr255Param str)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -219,18 +212,10 @@ PLstrlen(ConstStr255Param str);
 extern short 
 PLpos(
   ConstStr255Param   str1,
-  ConstStr255Param   str2);
+  ConstStr255Param   str2)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

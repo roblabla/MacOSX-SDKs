@@ -6,7 +6,7 @@
      Version:    Technology: Mac OS X
                  Release:    1.0
  
-     Copyright:  © 1998-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1998-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,11 +17,19 @@
 #ifndef __PMTICKET__
 #define __PMTICKET__
 
-#if TARGET_API_MAC_OSX
+#ifndef __APPLICATIONSERVICES__
 	#include <ApplicationServices/ApplicationServices.h>
-	#include <CoreFoundation/CoreFoundation.h>
+#endif
+
+#ifndef	__PMERRORS__
 	#include <PrintCore/PMErrors.h>
-#else
+#endif
+
+#ifndef __COREFOUNDATION__
+#include <CoreFoundation/CoreFoundation.h>
+#endif
+
+#if TARGET_API_MAC_OS8
     #include <PMDefinitions.h>
 	#include <CFString.h>
 	#include <CFDictionary.h>
@@ -41,9 +49,7 @@ extern "C" {
 /* tickets can be saved as a list of references. */
 typedef struct OpaquePMTicketRef*       PMTicketRef;
 typedef struct OpaquePMTemplateRef*     PMTemplateRef;
-/* A few constants that will be useful in calling Job Ticket functions. */
-#define kPMLocked           true
-#define kPMUnlocked         false
+/* Constant that will be useful in calling Job Ticket functions. */
 #define kPMDontFetchItem    NULL            /* Used to ask GetItem if an item exists. */
 
 /* The following constant determines if the ticket code sets an item in the top level ticket */
@@ -245,6 +251,8 @@ enum {
 #define kPMPaperInfoPrelude                 "com.apple.print.PaperInfo."
 #define kPMPaperNameStr                     kPMPaperInfoPrelude "PMPaperName"
 #define kPMPaperNameKey                     CFSTR( kPMPaperNameStr )                    /* CFString for the name of the paper displayed in UI */
+#define kPMPPDPaperNameStr		    kPMPaperInfoPrelude "ppd.PMPaperName"
+#define kPMPPDPaperNameKey		    CFSTR( kPMPPDPaperNameStr )			/* CFString for the PPD name of the paper. */
 #define kPMUnadjustedPaperRectStr           kPMPaperInfoPrelude "PMUnadjustedPaperRect"
 #define kPMUnadjustedPaperRectKey           CFSTR( kPMUnadjustedPaperRectStr )          /* CFArray of 4 CFNumbers of kCFNumberDoubleType for paper size in points. */
 #define kPMUnadjustedPageRectStr            kPMPaperInfoPrelude "PMUnadjustedPageRect"
@@ -366,8 +374,12 @@ enum {
 #define kPMPSErrorOnScreenKey				CFSTR( kPMPSErrorOnScreenStr )				/* CFBoolean, Turns on PS error on screen notification.  */
 #define kPMPSTraySwitchStr					kPMPrintSettingsPrelude "PMPSTraySwitch"
 #define kPMPSTraySwitchKey					CFSTR( kPMPSTraySwitchStr )					/* CFArray - main & option PPD key for tray switching */
-#define kPMPPDDictStr						kPMPrintSettingsPrelude "kPMPPDDictStr"
-#define kPMPPDDictKey						CFSTR( kPMPPDDictStr )						/* CFDictionary - main & option PPD keys for additional features */
+
+
+#define kPMTotalBeginPagesStr		    		kPMPrintSettingsPrelude "PMTotalBeginPages"
+#define kPMTotalBeginPagesKey		    	CFSTR( kPMTotalBeginPagesStr )			/* CFNumber the total number of times beginpage was called */
+#define kPMTotalSidesImagedStr		    		kPMPrintSettingsPrelude "PMTotalSidesImaged"
+#define kPMTotalSidesImagedKey		    	CFSTR( kPMTotalSidesImagedStr )			/* CFNumber the total number of sides that will printed. Does not take into account duplex and collation */
 
 /* Ticket: PAGE TICKET
     Future Feature. Intended to hold Page Format and Print Settings ticket for a single
@@ -443,8 +455,12 @@ enum {
 #define kPMDoesReverseOrderKey              CFSTR( kPMDoesReverseOrderStr )             /* CFBoolean, If Non-zero, printer/PM can reverse the printing order. */
 #define kPMInputFileTypeListStr             kPMPrinterInfoPrelude "PMInputFileTypeList"
 #define kPMInputFileTypeListKey             CFSTR( kPMInputFileTypeListStr )            /* CFArray of CFStrings indicating file types. See PMDefinitions.h for complete list. */
-#define kPMOutputTypeListStr		    	kPMPrinterInfoPrelude "PMOutputTypeList"
-#define kPMOutputTypeListKey		    	CFSTR(kPMOutputTypeListStr)			/* CFArray of CFStrings indicating the MIME type for the data is can send to an IO module. */
+#define kPMOutputTypeListStr		    kPMPrinterInfoPrelude "PMOutputTypeList"
+#define kPMOutputTypeListKey		    CFSTR(kPMOutputTypeListStr)			/* CFArray of CFStrings indicating the MIME type for the data is can send to an IO module. */
+#define kPMPPDNameStr		    	    kPMPrinterInfoPrelude "PPD"
+#define kPMPPDNameKey			    CFSTR(kPMPPDNameStr)			/* CFString, containing the URL of the PPD to associate with printer. */
+
+
 
 /* Postscript printing related tags */
 #define kPMPostScriptLevelStr               kPMPrinterInfoPrelude "PMPostScriptLevel"
@@ -912,14 +928,9 @@ PMTicketSetItem                 (PMTicketRef            ticket,
                                  CFTypeRef              item,
                                  Boolean                locked);
 
-
-/* To add an item that doesn't need to be stored in the XML file, use the PMTicketSetMetaItem() */
-/* call. It allows simple addition of an item, but that item won't be written to XML when the */
-/* rest of the ticket is stored. By definition, all meta items are not locked, simply because */
-/* we have no easy mechanism for keeping track of a locked state for a meta item. */
-/* Our intent is to allow a caller to add items temporarily to a ticket, perhaps to keep track */
-/* of the "default" ticket in a list of tickets, or the "current" paper info in a list of */
-/* papers. */
+/*****
+Warning: PMTicketSetMetaItem is being deprecated.
+*****/
 EXTERN_API_C( OSStatus )
 PMTicketSetMetaItem             (PMTicketRef            ticket,
                                  CFStringRef            key,
@@ -1158,7 +1169,9 @@ PMTicketGetItem                 (PMTicketRef            ticket,
                                  CFStringRef            key,
                                  CFTypeRef *            item);
 
-/* Meta items don't get saved to XML. */
+/*****
+Warning: PMTicketGetMetaItem is being deprecated.
+*****/
 EXTERN_API_C( OSStatus )
 PMTicketGetMetaItem             (PMTicketRef            ticket,
                                  CFStringRef            key,
@@ -1184,7 +1197,7 @@ EXTERN_API_C( OSStatus )
 PMTicketGetTicket               (PMTicketRef            ticket,
                                  CFStringRef            requestedType,
                                  UInt32                 index,
-                                 PMTicketRef *          retreivedTicket);
+                                 PMTicketRef *          retrievedTicket);
 
 EXTERN_API_C( OSStatus )
 PMTicketRemoveTicket            (PMTicketRef            ticket,
@@ -1224,7 +1237,12 @@ PMTicketCreateDict		(PMTicketRef ticket);
 EXTERN_API_C( Boolean )
 PMTicketHasEqualValues		(PMTicketRef ticket1, PMTicketRef ticket2);
 
- 
+EXTERN_API_C( OSStatus )
+PMSessionGetTicketFromSession( PMPrintSession session, CFStringRef key, PMTicketRef* theTicket );
+
+EXTERN_API_C( OSStatus )
+PMSessionGetTemplateFromSession( PMPrintSession session, CFStringRef key, PMTemplateRef* theTemplate );
+
 #ifdef __cplusplus
 }
 #endif

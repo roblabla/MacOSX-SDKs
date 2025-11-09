@@ -132,6 +132,7 @@ private:
     int syncSIOCSIFADDR(IONetworkController * ctr);
     int syncSIOCADDMULTI(IONetworkController * ctr);
     int syncSIOCDELMULTI(IONetworkController * ctr);
+    int syncSIOCSIFMTU(IONetworkController * ctlr, struct ifreq * ifr);
 
     static int performGatedCommand(void *, void *, void *, void *, void *);
 
@@ -284,6 +285,12 @@ protected:
                                IOPMPowerFlags        flags,
                                UInt32                stateNumber,
                                IOService *           policyMaker);
+
+public:
+    /* Override IONetworkInterface::willTerminate() */
+
+    virtual bool willTerminate( IOService *  provider,
+                                IOOptionBits options );
 
     // Virtual function padding
     OSMetaClassDeclareReservedUnused( IOEthernetInterface,  0);

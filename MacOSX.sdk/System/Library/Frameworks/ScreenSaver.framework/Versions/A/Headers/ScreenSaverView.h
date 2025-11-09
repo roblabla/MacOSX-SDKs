@@ -1,11 +1,14 @@
 /*
 	ScreenSaverView.h
 	ScreenSaver
-	Copyright (c) 2000, Apple Computer, Inc.
+	Copyright (c) 2000-2, Apple Computer, Inc.
 	All rights reserved.
 */
 
 #import <AppKit/AppKit.h>
+
+#include <stdlib.h>
+#include <limits.h>
 
 @interface ScreenSaverView : NSView
 {

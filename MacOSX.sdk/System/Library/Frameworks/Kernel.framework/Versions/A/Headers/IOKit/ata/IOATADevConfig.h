@@ -24,6 +24,13 @@
  * Revision History
  *
  * $Log: IOATADevConfig.h,v $
+ * Revision 1.7  2002/11/09 03:46:39  barras
+ *
+ * Bug #: 3083512, 3090979
+ *
+ * Submitted by:
+ * Reviewed by:
+ *
  * Revision 1.6  2002/02/14 04:02:06  barras
  *
  * Adding API's for 48 bit lba

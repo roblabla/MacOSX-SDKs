@@ -3,9 +3,9 @@
  
      Contains:   Definitions of controls provided by the Control Manager
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,8 +21,8 @@
 #include <HIToolbox/Controls.r>
 #endif
 
-#ifndef __CONDITIONALMACROS_R__
-#include <CarbonCore/ConditionalMacros.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
 
 #define kControlTabListResType 			'tab#'				/*  used for tab control (Appearance 1.0 and later) */
@@ -143,9 +143,7 @@
 #define kControlBevelButtonMenuValueTag  'mval'				/*  SInt16 */
 #define kControlBevelButtonMenuHandleTag  'mhnd'			/*  MenuRef */
 #define kControlBevelButtonMenuRefTag 	'mhnd'				/*  MenuRef */
-#define kControlBevelButtonOwnedMenuRefTag  'omrf'			/*  MenuRef (control will dispose) */
 #define kControlBevelButtonCenterPopupGlyphTag  'pglc'		/*  Boolean: true = center, false = bottom right */
-#define kControlBevelButtonKindTag 		'bebk'				/*  ThemeButtonKind ( kTheme[Small,Medium,Large,Rounded]BevelButton ) */
 
 #define kControlBevelButtonLastMenuTag 	'lmnu'				/*  SInt16: menuID of last menu item selected from */
 #define kControlBevelButtonMenuDelayTag  'mdly'				/*  SInt32: ticks to delay before menu appears */
@@ -156,6 +154,9 @@
 															/*  scale; draw a smaller icon or clip a larger icon. */
 															/*  Default is false. Only applies to IconSuites and */
 #define kControlBevelButtonScaleIconTag  'scal'				/*  IconRefs. */
+#define kControlBevelButtonOwnedMenuRefTag  'omrf'			/*  MenuRef (control will dispose) */
+#define kControlBevelButtonKindTag 		'bebk'				/*  ThemeButtonKind ( kTheme[Small,Medium,Large,Rounded]BevelButton ) */
+
 #define kControlSliderProc 				48
 #define kControlSliderLiveFeedback 		0x01
 #define kControlSliderHasTickMarks 		0x02
@@ -301,7 +302,7 @@
 #define kControlEditTextTextTag 		'text'				/*  Buffer of chars - you supply the buffer */
 #define kControlEditTextTEHandleTag 	'than'				/*  The TEHandle of the text edit record */
 #define kControlEditTextKeyFilterTag 	'fltr'
-#define kControlEditTextSelectionTag 	'sele'				/*  EditTextSelectionRec */
+#define kControlEditTextSelectionTag 	'sele'				/*  ControlEditTextSelectionRec */
 #define kControlEditTextPasswordTag 	'pass'				/*  The clear text password text */
 
 #define kControlEditTextKeyScriptBehaviorTag  'kscr'		/*  ControlKeyScriptBehavior. Defaults to "PrefersRoman" for password fields, */
@@ -312,8 +313,8 @@
 #define kControlEditTextInlinePreUpdateProcTag  'prup'		/*  TSMTEPreUpdateUPP and TSMTEPostUpdateUpp. For use with inline input variant... */
 #define kControlEditTextInlinePostUpdateProcTag  'poup'		/*  ...The refCon parameter will contain the ControlRef. */
 
-#define kControlEditTextCFStringTag 	'cfst'				/*  CFStringRef */
-#define kControlEditTextPasswordCFStringTag  'pwcf'			/*  CFStringRef -- UnicodeEditText Only */
+#define kControlEditTextCFStringTag 	'cfst'				/*  CFStringRef (Also available on CarbonLib 1.5) */
+#define kControlEditTextPasswordCFStringTag  'pwcf'			/*  CFStringRef */
 
 #define kControlStaticTextProc 			288
 #define kControlKindStaticText 			'stxt'
@@ -322,7 +323,7 @@
 #define kControlStaticTextTextHeightTag  'thei'				/*  SInt16 */
 
 #define kControlStaticTextTruncTag 		'trun'				/*  TruncCode (-1 means no truncation) */
-#define kControlStaticTextCFStringTag 	'cfst'				/*  CFStringRef */
+#define kControlStaticTextCFStringTag 	'cfst'				/*  CFStringRef (Also available on CarbonLib 1.5) */
 #define kControlPictureProc 			304
 #define kControlPictureNoTrackProc 		305					/*  immediately returns kControlPicturePart */
 
@@ -398,8 +399,8 @@
 
 #define kControlPopupButtonExtraHeightTag  'exht'			/*  SInt16 - extra vertical whitespace within the button */
 #define kControlPopupButtonOwnedMenuRefTag  'omrf'			/*  MenuRef */
-#define kControlPopupButtonCheckCurrentTag  'chck'			/*  Boolean    - whether the popup puts a checkmark next to the current item (defaults to true) */
 
+#define kControlPopupButtonCheckCurrentTag  'chck'			/*  Boolean    - whether the popup puts a checkmark next to the current item (defaults to true) */
 #define kControlRadioGroupProc 			416
 #define kControlKindRadioGroup 			'rgrp'
 #define kControlScrollTextBoxProc 		432
@@ -501,6 +502,7 @@
 #define kDataBrowserListViewDefaultColumnFlags  0x00060000
 
 #define kControlKindEditUnicodeText 	'eutx'
+#define kControlEditTextSingleLineTag 	'sglc'
 
 /*--------------------------ldes ¥ List Box Description Template------------------------*/
 /*  Used in conjunction with the list box control.                                    */

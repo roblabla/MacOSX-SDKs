@@ -17,7 +17,10 @@ enum {
     NSHSBModeColorPanel			= 3,
     NSCustomPaletteModeColorPanel	= 4,
     NSColorListModeColorPanel		= 5,
-    NSWheelModeColorPanel		= 6
+    NSWheelModeColorPanel		= 6,
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+    NSCrayonModeColorPanel		= 7
+#endif
 };
 
 enum {
@@ -28,6 +31,9 @@ enum {
     NSColorPanelCustomPaletteModeMask	= 0x00000010,
     NSColorPanelColorListModeMask	= 0x00000020,
     NSColorPanelWheelModeMask		= 0x00000040,
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+    NSColorPanelCrayonModeMask		= 0x00000080,
+#endif
     NSColorPanelAllModesMask		= 0x0000ffff
 };
     
@@ -37,33 +43,36 @@ enum {
 {
     /*All instance variables are private*/
     id			_colorSwatch;
-    id			_colorSwatchBox;
+    id			_reserved1;
     id			_colorWell;
-    id			_colorWellView;
+    NSMutableArray     *_pickersWithLoadedViews;
     id			_magnifyButton;
     id			_middleView;
     id			_opacitySlider;
     id			_opacityText;
     id			_opacityView;
-    id			_paletteMatrix;
+    id			_modalButtons;
     id			_pickerView;
     id			_customViewsList;
     id			_customPickerList;
     id			_currViewObject;
-    id			_splitView;
+    id			_boxAboveSwatch;
     id			_target;
     id			_accessoryView;
     SEL			_action;
     NSSize		_minColorPanelSize;
     NSSize		_maxColorPanelSize;
-    NSSize		_minMiddleViewSize;
-    NSSize		_minSwatchSize;
-    float		_swatchOffsetFromBox;
-    float		_prevSwatchHeight;
+    NSSize		_reserved2;
+    NSSize		_reserved3;
+    float		_reserved4;
+    BOOL		_reserved5;
+    BOOL		_reserved6;
+    BOOL		_reserved7;
+    BOOL		_ignoreConstraints;
     BOOL		_continuous;
     BOOL		_allowColorSetting;
     BOOL		_stillInitializing;
-    unsigned int 	_reservedColorPanel;
+    id			_opacityTextController;
 }
 
 + (NSColorPanel *)sharedColorPanel;

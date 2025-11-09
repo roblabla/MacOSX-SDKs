@@ -3,9 +3,9 @@
  
      Contains:   SFNT file layout structures and constants.
  
-     Version:    ATS-77.1~62
+     Version:    ATS-102.4~1
  
-     Copyright:  © 1994-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,28 +16,18 @@
 #ifndef __SFNTLAYOUTTYPES__
 #define __SFNTLAYOUTTYPES__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* ----------------------------------------------------------------------------------------- */
 /* CONSTANTS */
@@ -1061,7 +1051,7 @@ typedef struct MorxTable                MorxTable;
 /* CONSTANTS */
 enum {
   kPROPTag                      = 0x70726F70, /* 'prop' */
-  kPROPCurrentVersion           = 0x00020000, /* current version number for 'prop' table */
+  kPROPCurrentVersion           = 0x00030000, /* current version number for 'prop' table */
   kPROPPairOffsetShift          = 8,
   kPROPPairOffsetSign           = 7,
   kPROPIsFloaterMask            = 0x8000, /* glyph is floater */
@@ -1413,17 +1403,8 @@ typedef struct BslnTable                BslnTable;
 typedef BslnTable *                     BslnTablePtr;
 /* --------------------------------------------------------------------------- */
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __SFNTLAYOUTTYPES__ */
 

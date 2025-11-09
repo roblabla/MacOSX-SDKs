@@ -22,7 +22,7 @@
 - (BOOL) hasMarkedText;
 - (long) conversationIdentifier;
 
-/* Returns attributed string at the range.  This allows input mangers to query any range in backing-store (Andy's request)
+/* Returns attributed string at the range.  This allows input mangers to query any range in backing-store.  May return nil.
 */
 - (NSAttributedString *) attributedSubstringFromRange:(NSRange)theRange;
 

@@ -1,6 +1,6 @@
 // Types used in iterator implementation -*- C++ -*-
 
-// Copyright (C) 2001 Free Software Foundation, Inc.
+// Copyright (C) 2001, 2002 Free Software Foundation, Inc.
 //
 // This file is part of the GNU ISO C++ Library.  This library is free
 // software; you can redistribute it and/or modify it under the
@@ -90,9 +90,12 @@ namespace std
 
 
   /**
-   *  This class does nothing but define nested typedefs.  Iterator classes
+   *  This class does nothing but define nested typedefs.  %Iterator classes
    *  can inherit from this class to save some work.  The typedefs are then
    *  used in specializations and overloading.
+   *
+   *  In particular, there are no default implementations of requirements
+   *  such as @c operator++ and the like.  (How could there be?)
   */
   template<typename _Category, typename _Tp, typename _Distance = ptrdiff_t,
 	   typename _Pointer = _Tp*, typename _Reference = _Tp&>
@@ -143,10 +146,10 @@ namespace std
     };
 
   /**
-   *  @maint
+   *  @if maint
    *  This function is not a part of the C++ standard but is syntactic
    *  sugar for internal library use only.
-   *  @endmaint
+   *  @endif
   */
   template<typename _Iter>
     inline typename iterator_traits<_Iter>::iterator_category
@@ -157,7 +160,3 @@ namespace std
 
 #endif /* __GLIBCPP_INTERNAL_ITERATOR_BASE_TYPES_H */
 
-
-// Local Variables:
-// mode:C++
-// End:

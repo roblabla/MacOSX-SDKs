@@ -1,5 +1,7 @@
-/*	NSScriptObjectSpecifiers.h
-	Copyright 1997-2001, Apple, Inc. All rights reserved.
+/*
+	NSScriptObjectSpecifiers.h
+	Copyright (c) 1997-2002, Apple Computer, Inc.
+	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -18,7 +20,7 @@ enum {
     NSUnknownKeySpecifierError, // Receivers do not understand the key.
     NSInvalidIndexSpecifierError, // Index out of bounds
     NSInternalSpecifierError, // Other internal error
-    NSOperationNotSupportedForKeySpecifierError, // Attempt made to perform an unsuppported opweration on some key
+    NSOperationNotSupportedForKeySpecifierError // Attempt made to perform an unsuppported opweration on some key
 };
 
 
@@ -27,7 +29,7 @@ typedef enum {
     NSPositionBefore,
     NSPositionBeginning,
     NSPositionEnd,
-    NSPositionReplace,
+    NSPositionReplace
 } NSInsertionPosition;
 
 
@@ -42,7 +44,7 @@ typedef enum {
     NSEverySubelement = 1,
     NSMiddleSubelement = 2,
     NSRandomSubelement = 3,
-    NSNoSubelement = 4, // Only valid for the end subelement
+    NSNoSubelement = 4 // Only valid for the end subelement
 } NSWhoseSubelementIdentifier;
 
 
@@ -139,25 +141,63 @@ typedef enum {
 @end
 
 
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+// A Name specifier returns the object with the specified name.
+
+@interface NSNameSpecifier : NSScriptObjectSpecifier {
+    @private
+    NSString *_name;
+}
+
+- (id)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(NSScriptObjectSpecifier *)container key:(NSString *)property name:(NSString *)name;
+
+- (NSString *)name;
+- (void)setName:(NSString *)name;
+
+@end
+
+#endif
+
+
 @interface NSPositionalSpecifier : NSObject {
     @private
     NSScriptObjectSpecifier *_specifier;
-    NSInsertionPosition _position;
-    BOOL _evaluated;
-    id _container;
-    int _index;
+    NSInsertionPosition _unadjustedPosition;
+    NSScriptClassDescription *_insertionClassDescription;
+    void *_moreVars;
+    void *_reserved0;
 }
 
+// Given an object specifier and an insertion position relative to the specified object, initialize.
 - (id)initWithPosition:(NSInsertionPosition)position objectSpecifier:(NSScriptObjectSpecifier *)specifier;
 
-- (void)evaluate;
-    // Evaluates the specifier and other stuff.
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
+// Set the class description for the object or objects to be inserted.  This message can be sent at any time after object initialization, but must be sent before evaluation to have any effect.
+- (void)setInsertionClassDescription:(NSScriptClassDescription *)classDescription;
+
+#endif
+
+// Evaluate this positional specifier.  If evaluation is successful, subsequent -insertionContainer, -insertionKey, -insertionIndex, and -insertionReplaces messages sent to this object will return the results of the evaluation.
+- (void)evaluate;
+
+// Return the container into which insertion should be done, if evaluation has been successful, or nil otherwise.  If this object has never been evaluated, evaluation is attempted.
 - (id)insertionContainer;
+
+// Return the key for the to-many relationship for which insertion should be done, if evaluation has been successful, or nil otherwise.  If this object has never been evaluated, evaluation is attempted.
 - (NSString *)insertionKey;
+
+// Return an index into the set of keyed to-many relationship objects before which insertion should be done in the insertion container, if evaluation has been successful, or -1 otherwise.  If this object has never been evaluated, evaluation is attempted.
 - (int)insertionIndex;
-    // Returns the container, key, and index that is identified by this positional specifier
-    
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+// Return YES if evaluation has been successful and the object to be inserted should actually replace the keyed, indexed object in the insertion container, instead of being inserted before it, or NO otherwise.  If this object has never been evaluated, evaluation is attempted.
+- (BOOL)insertionReplaces;
+
+#endif
+
 @end
 
 
@@ -210,6 +250,25 @@ typedef enum {
     // This is another object specifier (which will be evaluated within the same container objects that this specifier is evalutated in).  To find the indices for this specifier we will evaluate the base specifier and take the index before or after the indices returned.
 
 @end
+
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+// A Unique ID specifier returns the object with the specified ID.
+
+@interface NSUniqueIDSpecifier : NSScriptObjectSpecifier {
+    @private
+    id _uniqueID;
+}
+
+- (id)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(NSScriptObjectSpecifier *)container key:(NSString *)property uniqueID:(id)uniqueID;
+
+- (id)uniqueID;
+- (void)setUniqueID:(id)uniqueID;
+
+@end
+
+#endif
 
 
 // A Qualified specifier uses a qualifier and another object specifier to get a subset of the objects for the specifier's property.  The other object specifier is evaluated for each object using that object as the container and the objects that result are tested with the qualifier.  An example makes this easier to understand.

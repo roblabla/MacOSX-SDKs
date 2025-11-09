@@ -30,6 +30,8 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* vm_map_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 #include <mach_debug/mach_debug_types.h>
 
@@ -493,6 +495,611 @@ kern_return_t vm_upl_unmap
 	vm_map_t target_task,
 	upl_t upl
 );
+/* typedefs for all requests */
+
+#ifndef __Request__vm_map_subsystem__defined
+#define __Request__vm_map_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_region_flavor_t flavor;
+		mach_msg_type_number_t infoCnt;
+	} __Request__vm_region_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_size_t size;
+		int flags;
+	} __Request__vm_allocate_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_size_t size;
+	} __Request__vm_deallocate_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_size_t size;
+		boolean_t set_maximum;
+		vm_prot_t new_protection;
+	} __Request__vm_protect_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_size_t size;
+		vm_inherit_t new_inheritance;
+	} __Request__vm_inherit_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_size_t size;
+	} __Request__vm_read_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_read_entry_t data_list;
+		natural_t count;
+	} __Request__vm_read_list_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t data;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		vm_address_t address;
+		mach_msg_type_number_t dataCnt;
+	} __Request__vm_write_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t source_address;
+		vm_size_t size;
+		vm_address_t dest_address;
+	} __Request__vm_copy_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_size_t size;
+		vm_address_t data;
+	} __Request__vm_read_overwrite_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_size_t size;
+		vm_sync_t sync_flags;
+	} __Request__vm_msync_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_size_t size;
+		vm_behavior_t new_behavior;
+	} __Request__vm_behavior_set_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t object;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_size_t size;
+		vm_address_t mask;
+		int flags;
+		vm_offset_t offset;
+		boolean_t copy;
+		vm_prot_t cur_protection;
+		vm_prot_t max_protection;
+		vm_inherit_t inheritance;
+	} __Request__vm_map_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_size_t size;
+		vm_machine_attribute_t attribute;
+		vm_machine_attribute_val_t value;
+	} __Request__vm_machine_attribute_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t src_task;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		vm_address_t target_address;
+		vm_size_t size;
+		vm_address_t mask;
+		boolean_t anywhere;
+		vm_address_t src_address;
+		boolean_t copy;
+		vm_inherit_t inheritance;
+	} __Request__vm_remap_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		boolean_t must_wire;
+	} __Request__task_wire_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t parent_entry;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		vm_size_t size;
+		vm_offset_t offset;
+		vm_prot_t permission;
+	} __Request__mach_make_memory_entry_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_offset_t offset;
+	} __Request__vm_map_page_query_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t address;
+	} __Request__mach_vm_region_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__vm_mapped_pages_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_size_t size;
+	} __Request__vm_region_object_create_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t address;
+		natural_t nesting_depth;
+		mach_msg_type_number_t infoCnt;
+	} __Request__vm_region_recurse_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t address;
+		natural_t nesting_depth;
+		mach_msg_type_number_t infoCnt;
+	} __Request__vm_region_recurse_64_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t address;
+	} __Request__mach_vm_region_info_64_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_region_flavor_t flavor;
+		mach_msg_type_number_t infoCnt;
+	} __Request__vm_region_64_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t parent_entry;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		memory_object_size_t size;
+		memory_object_offset_t offset;
+		vm_prot_t permission;
+	} __Request__mach_make_memory_entry_64_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t object;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_size_t size;
+		vm_address_t mask;
+		int flags;
+		memory_object_offset_t offset;
+		boolean_t copy;
+		vm_prot_t cur_protection;
+		vm_prot_t max_protection;
+		vm_inherit_t inheritance;
+	} __Request__vm_map_64_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_size_t size;
+		mach_msg_type_number_t page_infoCnt;
+		integer_t flags;
+		integer_t force_data_sync;
+	} __Request__vm_map_get_upl_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t upl;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		vm_address_t address;
+	} __Request__vm_upl_map_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t upl;
+		/* end of the kernel processed data */
+	} __Request__vm_upl_unmap_t;
+
+#endif /* !__Request__vm_map_subsystem__defined */
+
+/* union of all requests */
+
+#ifndef __RequestUnion__vm_map_subsystem__defined
+#define __RequestUnion__vm_map_subsystem__defined
+union __RequestUnion__vm_map_subsystem {
+	__Request__vm_region_t Request_vm_region;
+	__Request__vm_allocate_t Request_vm_allocate;
+	__Request__vm_deallocate_t Request_vm_deallocate;
+	__Request__vm_protect_t Request_vm_protect;
+	__Request__vm_inherit_t Request_vm_inherit;
+	__Request__vm_read_t Request_vm_read;
+	__Request__vm_read_list_t Request_vm_read_list;
+	__Request__vm_write_t Request_vm_write;
+	__Request__vm_copy_t Request_vm_copy;
+	__Request__vm_read_overwrite_t Request_vm_read_overwrite;
+	__Request__vm_msync_t Request_vm_msync;
+	__Request__vm_behavior_set_t Request_vm_behavior_set;
+	__Request__vm_map_t Request_vm_map;
+	__Request__vm_machine_attribute_t Request_vm_machine_attribute;
+	__Request__vm_remap_t Request_vm_remap;
+	__Request__task_wire_t Request_task_wire;
+	__Request__mach_make_memory_entry_t Request_mach_make_memory_entry;
+	__Request__vm_map_page_query_t Request_vm_map_page_query;
+	__Request__mach_vm_region_info_t Request_mach_vm_region_info;
+	__Request__vm_mapped_pages_info_t Request_vm_mapped_pages_info;
+	__Request__vm_region_object_create_t Request_vm_region_object_create;
+	__Request__vm_region_recurse_t Request_vm_region_recurse;
+	__Request__vm_region_recurse_64_t Request_vm_region_recurse_64;
+	__Request__mach_vm_region_info_64_t Request_mach_vm_region_info_64;
+	__Request__vm_region_64_t Request_vm_region_64;
+	__Request__mach_make_memory_entry_64_t Request_mach_make_memory_entry_64;
+	__Request__vm_map_64_t Request_vm_map_64;
+	__Request__vm_map_get_upl_t Request_vm_map_get_upl;
+	__Request__vm_upl_map_t Request_vm_upl_map;
+	__Request__vm_upl_unmap_t Request_vm_upl_unmap;
+};
+#endif /* !__RequestUnion__vm_map_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__vm_map_subsystem__defined
+#define __Reply__vm_map_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t object_name;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_size_t size;
+		mach_msg_type_number_t infoCnt;
+		int info[9];
+	} __Reply__vm_region_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		vm_address_t address;
+	} __Reply__vm_allocate_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__vm_deallocate_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__vm_protect_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__vm_inherit_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t data;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t dataCnt;
+	} __Reply__vm_read_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		vm_read_entry_t data_list;
+	} __Reply__vm_read_list_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__vm_write_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__vm_copy_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		vm_size_t outsize;
+	} __Reply__vm_read_overwrite_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__vm_msync_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__vm_behavior_set_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		vm_address_t address;
+	} __Reply__vm_map_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		vm_machine_attribute_val_t value;
+	} __Reply__vm_machine_attribute_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		vm_address_t target_address;
+		vm_prot_t cur_protection;
+		vm_prot_t max_protection;
+	} __Reply__vm_remap_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__task_wire_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t object_handle;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		vm_size_t size;
+	} __Reply__mach_make_memory_entry_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		integer_t disposition;
+		integer_t ref_count;
+	} __Reply__vm_map_page_query_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t objects;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		vm_info_region_t region;
+		mach_msg_type_number_t objectsCnt;
+	} __Reply__mach_vm_region_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t pages;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t pagesCnt;
+	} __Reply__vm_mapped_pages_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t region_object;
+		/* end of the kernel processed data */
+	} __Reply__vm_region_object_create_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		vm_address_t address;
+		vm_size_t size;
+		natural_t nesting_depth;
+		mach_msg_type_number_t infoCnt;
+		int info[19];
+	} __Reply__vm_region_recurse_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		vm_address_t address;
+		vm_size_t size;
+		natural_t nesting_depth;
+		mach_msg_type_number_t infoCnt;
+		int info[19];
+	} __Reply__vm_region_recurse_64_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t objects;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		vm_info_region_64_t region;
+		mach_msg_type_number_t objectsCnt;
+	} __Reply__mach_vm_region_info_64_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t object_name;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		vm_address_t address;
+		vm_size_t size;
+		mach_msg_type_number_t infoCnt;
+		int info[10];
+	} __Reply__vm_region_64_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t object_handle;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		memory_object_size_t size;
+	} __Reply__mach_make_memory_entry_64_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		vm_address_t address;
+	} __Reply__vm_map_64_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t upl;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		vm_size_t size;
+		mach_msg_type_number_t page_infoCnt;
+		upl_page_info_t page_info[20];
+		integer_t flags;
+	} __Reply__vm_map_get_upl_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		vm_address_t address;
+	} __Reply__vm_upl_map_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__vm_upl_unmap_t;
+
+#endif /* !__Reply__vm_map_subsystem__defined */
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__vm_map_subsystem__defined
+#define __ReplyUnion__vm_map_subsystem__defined
+union __ReplyUnion__vm_map_subsystem {
+	__Reply__vm_region_t Reply_vm_region;
+	__Reply__vm_allocate_t Reply_vm_allocate;
+	__Reply__vm_deallocate_t Reply_vm_deallocate;
+	__Reply__vm_protect_t Reply_vm_protect;
+	__Reply__vm_inherit_t Reply_vm_inherit;
+	__Reply__vm_read_t Reply_vm_read;
+	__Reply__vm_read_list_t Reply_vm_read_list;
+	__Reply__vm_write_t Reply_vm_write;
+	__Reply__vm_copy_t Reply_vm_copy;
+	__Reply__vm_read_overwrite_t Reply_vm_read_overwrite;
+	__Reply__vm_msync_t Reply_vm_msync;
+	__Reply__vm_behavior_set_t Reply_vm_behavior_set;
+	__Reply__vm_map_t Reply_vm_map;
+	__Reply__vm_machine_attribute_t Reply_vm_machine_attribute;
+	__Reply__vm_remap_t Reply_vm_remap;
+	__Reply__task_wire_t Reply_task_wire;
+	__Reply__mach_make_memory_entry_t Reply_mach_make_memory_entry;
+	__Reply__vm_map_page_query_t Reply_vm_map_page_query;
+	__Reply__mach_vm_region_info_t Reply_mach_vm_region_info;
+	__Reply__vm_mapped_pages_info_t Reply_vm_mapped_pages_info;
+	__Reply__vm_region_object_create_t Reply_vm_region_object_create;
+	__Reply__vm_region_recurse_t Reply_vm_region_recurse;
+	__Reply__vm_region_recurse_64_t Reply_vm_region_recurse_64;
+	__Reply__mach_vm_region_info_64_t Reply_mach_vm_region_info_64;
+	__Reply__vm_region_64_t Reply_vm_region_64;
+	__Reply__mach_make_memory_entry_64_t Reply_mach_make_memory_entry_64;
+	__Reply__vm_map_64_t Reply_vm_map_64;
+	__Reply__vm_map_get_upl_t Reply_vm_map_get_upl;
+	__Reply__vm_upl_map_t Reply_vm_upl_map;
+	__Reply__vm_upl_unmap_t Reply_vm_upl_unmap;
+};
+#endif /* !__RequestUnion__vm_map_subsystem__defined */
 
 #ifndef subsystem_to_name_map_vm_map
 #define subsystem_to_name_map_vm_map \

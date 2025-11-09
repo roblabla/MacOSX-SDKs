@@ -1,24 +1,3 @@
-/*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
- *
- * @APPLE_LICENSE_HEADER_START@
- * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.1 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
- * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
- * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
- * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
- * License for the specific language governing rights and limitations
- * under the License.
- * 
- * @APPLE_LICENSE_HEADER_END@
- */
 /*-
  * Copyright (c) 1993
  *	The Regents of the University of California.  All rights reserved.
@@ -60,15 +39,22 @@
 #ifndef	_RUNETYPE_H_
 #define	_RUNETYPE_H_
 
-#include <machine/ansi.h>
 #include <sys/cdefs.h>
+#include <machine/ansi.h>
 
-#ifndef  _BSD_WCHAR_T_DEFINED_
-#define  _BSD_WCHAR_T_DEFINED_
-#ifndef _ANSI_SOURCE
-typedef _BSD_WCHAR_T_	rune_t;
+#ifndef	_BSD_RUNE_T_DEFINED_
+#define _BSD_RUNE_T_DEFINED_
+typedef	_BSD_RUNE_T_	rune_t;
 #endif
-typedef _BSD_WCHAR_T_	wchar_t;
+
+#ifndef	_BSD_SIZE_T_DEFINED_
+#define _BSD_SIZE_T_DEFINED_
+typedef	_BSD_SIZE_T_	size_t;
+#endif
+
+#ifndef	_BSD_WCHAR_T_DEFINED_
+#define _BSD_WCHAR_T_DEFINED_
+typedef	_BSD_WCHAR_T_	wchar_t;
 #endif
 
 #define	_CACHED_RUNES	(1 <<8 )	/* Must be a power of 2 */
@@ -94,9 +80,9 @@ typedef struct {
 	char		encoding[32];	/* ASCII name of this encoding */
 
 	rune_t		(*sgetrune)
-	    __P((const char *, unsigned int, char const **));
+	    __P((const char *, size_t, char const **));
 	int		(*sputrune)
-	    __P((rune_t, char *, unsigned int, char **));
+	    __P((rune_t, char *, size_t, char **));
 	rune_t		invalid_rune;
 
 	unsigned long	runetype[_CACHED_RUNES];

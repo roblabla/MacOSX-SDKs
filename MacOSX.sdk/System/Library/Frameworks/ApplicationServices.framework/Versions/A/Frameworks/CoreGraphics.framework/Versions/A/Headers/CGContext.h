@@ -14,8 +14,11 @@ typedef struct CGContext *CGContextRef;
 #include <CoreGraphics/CGColorSpace.h>
 #include <CoreGraphics/CGFont.h>
 #include <CoreGraphics/CGImage.h>
+#include <CoreGraphics/CGPath.h>
 #include <CoreGraphics/CGPattern.h>
 #include <CoreGraphics/CGPDFDocument.h>
+#include <CoreGraphics/CGShading.h>
+#include <CoreFoundation/CFBase.h>
 #include <limits.h>
 #include <stddef.h>
 
@@ -79,6 +82,10 @@ enum CGInterpolationQuality {
     kCGInterpolationHigh		/* Slow, high quality. */
 };
 typedef enum CGInterpolationQuality CGInterpolationQuality;
+
+/* Return the CFTypeID for CGContextRefs. */
+
+CG_EXTERN CFTypeID CGContextGetTypeID(void);
 
 /** Graphics state functions. **/
 
@@ -211,6 +218,11 @@ CG_EXTERN void CGContextAddArc(CGContextRef c, float x, float y, float radius, f
  * from `(x1, y1)' to `(x2, y2)'. */
 
 CG_EXTERN void CGContextAddArcToPoint(CGContextRef c, float x1, float y1, float x2, float y2, float radius);
+
+/* Add `path' to the path of context.  The points in `path' are transformed
+ * by the CTM of context before they are added. */
+
+CG_EXTERN void CGContextAddPath(CGContextRef context, CGPathRef path);
 
 /** Path information functions. **/
 
@@ -353,6 +365,10 @@ CG_EXTERN void CGContextSetFillPattern(CGContextRef c, CGPatternRef pattern, con
 
 CG_EXTERN void CGContextSetStrokePattern(CGContextRef c, CGPatternRef pattern, const float components[]);
 
+/* Set the pattern phase of context `c' to `phase'. */
+
+CG_EXTERN void CGContextSetPatternPhase(CGContextRef c, CGSize phase);
+
 /** Color convenience functions. **/
 
 /* Set the current fill colorspace in the context `c' to `DeviceGray' and
@@ -413,6 +429,12 @@ CG_EXTERN CGInterpolationQuality CGContextGetInterpolationQuality(CGContextRef c
 /* Set the interpolation quality of the context `c' to `quality'. */
 
 CG_EXTERN void CGContextSetInterpolationQuality(CGContextRef c, CGInterpolationQuality quality);
+
+/** Shading functions. **/
+
+/* Fill the current clipping region of `c' with `shading'. */
+
+CG_EXTERN void CGContextDrawShading(CGContextRef c, CGShadingRef shading);
 
 /** Text functions. **/
 
@@ -505,13 +527,11 @@ CG_EXTERN void CGContextEndPage(CGContextRef c);
 
 /** Context functions. **/
 
-/* Increment the retain count of `c' and return it.  All contexts are
- * created with an initial retain count of 1. */
+/* Equivalent to `CFRetain(c)'. */
 
 CG_EXTERN CGContextRef CGContextRetain(CGContextRef c);
 
-/* Decrement the retain count of `c'.  If the retain count reaches 0,
- * then free `c' and any associated resources. */
+/* Equivalent to `CFRelease(c)'. */
 
 CG_EXTERN void CGContextRelease(CGContextRef c);
 
@@ -525,10 +545,17 @@ CG_EXTERN void CGContextSynchronize(CGContextRef c);
 
 /** Antialiasing functions. **/
 
-/* Turn off antialiasing if `shouldAntialias' is zero; turn it on
+/* Turn on antialiasing if `shouldAntialias' is true; turn it off
  * otherwise.  This parameter is part of the graphics state. */
 
-CG_EXTERN void CGContextSetShouldAntialias(CGContextRef c, int shouldAntialias);
+CG_EXTERN void CGContextSetShouldAntialias(CGContextRef c, bool shouldAntialias);
+
+/** Font smoothing functions. **/
+
+/* Turn on font smoothing if `shouldSmoothFonts' is true; turn it off
+ * otherwise.  This parameter is part of the graphics state. */
+
+CG_EXTERN void CGContextSetShouldSmoothFonts(CGContextRef c, bool shouldSmoothFonts);
 
 CG_EXTERN_C_END
 

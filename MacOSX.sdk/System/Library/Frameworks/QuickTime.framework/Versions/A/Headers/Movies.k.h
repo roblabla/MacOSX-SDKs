@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime-142~1
+     Version:    QuickTime_6
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,7 +22,7 @@
 
 		#define VIDEOMEDIA_BASENAME()	Fred
 		#define VIDEOMEDIA_GLOBALS()	FredGlobalsHandle
-		#include <Movies.k.h>
+		#include <QuickTime/Movies.k.h>
 
 	To specify that your component implementation does not use globals, do not #define VIDEOMEDIA_GLOBALS
 */
@@ -64,7 +64,7 @@
 
 		#define TEXTMEDIA_BASENAME()	Fred
 		#define TEXTMEDIA_GLOBALS()	FredGlobalsHandle
-		#include <Movies.k.h>
+		#include <QuickTime/Movies.k.h>
 
 	To specify that your component implementation does not use globals, do not #define TEXTMEDIA_GLOBALS
 */
@@ -131,7 +131,7 @@ enum {
 
 		#define SPRITEMEDIA_BASENAME()	Fred
 		#define SPRITEMEDIA_GLOBALS()	FredGlobalsHandle
-		#include <Movies.k.h>
+		#include <QuickTime/Movies.k.h>
 
 	To specify that your component implementation does not use globals, do not #define SPRITEMEDIA_GLOBALS
 */
@@ -192,6 +192,14 @@ enum {
 
 	EXTERN_API( ComponentResult  ) ADD_SPRITEMEDIA_BASENAME(GetActionVariableAsString) (SPRITEMEDIA_GLOBALS() ADD_SPRITEMEDIA_COMMA QTAtomID  variableID, Handle * theCString);
 
+	EXTERN_API( ComponentResult  ) ADD_SPRITEMEDIA_BASENAME(NewImage) (SPRITEMEDIA_GLOBALS() ADD_SPRITEMEDIA_COMMA Handle  dataRef, OSType  dataRefType, QTAtomID  desiredID);
+
+	EXTERN_API( ComponentResult  ) ADD_SPRITEMEDIA_BASENAME(DisposeImage) (SPRITEMEDIA_GLOBALS() ADD_SPRITEMEDIA_COMMA short  imageIndex);
+
+	EXTERN_API( ComponentResult  ) ADD_SPRITEMEDIA_BASENAME(ImageIndexToID) (SPRITEMEDIA_GLOBALS() ADD_SPRITEMEDIA_COMMA short  imageIndex, QTAtomID * imageID);
+
+	EXTERN_API( ComponentResult  ) ADD_SPRITEMEDIA_BASENAME(ImageIDToIndex) (SPRITEMEDIA_GLOBALS() ADD_SPRITEMEDIA_COMMA QTAtomID  imageID, short * imageIndex);
+
 
 	/* MixedMode ProcInfo constants for component calls */
 	enum {
@@ -217,7 +225,11 @@ enum {
 		uppSpriteMediaNewSpriteProcInfo = 0x000003F0,
 		uppSpriteMediaDisposeSpriteProcInfo = 0x000003F0,
 		uppSpriteMediaSetActionVariableToStringProcInfo = 0x00000FF0,
-		uppSpriteMediaGetActionVariableAsStringProcInfo = 0x00000FF0
+		uppSpriteMediaGetActionVariableAsStringProcInfo = 0x00000FF0,
+		uppSpriteMediaNewImageProcInfo = 0x00003FF0,
+		uppSpriteMediaDisposeImageProcInfo = 0x000002F0,
+		uppSpriteMediaImageIndexToIDProcInfo = 0x00000EF0,
+		uppSpriteMediaImageIDToIndexProcInfo = 0x00000FF0
 	};
 
 #endif	/* SPRITEMEDIA_BASENAME */
@@ -227,7 +239,7 @@ enum {
 
 		#define FLASHMEDIA_BASENAME()	Fred
 		#define FLASHMEDIA_GLOBALS()	FredGlobalsHandle
-		#include <Movies.k.h>
+		#include <QuickTime/Movies.k.h>
 
 	To specify that your component implementation does not use globals, do not #define FLASHMEDIA_GLOBALS
 */
@@ -293,7 +305,7 @@ enum {
 
 		#define MOVIEMEDIA_BASENAME()	Fred
 		#define MOVIEMEDIA_GLOBALS()	FredGlobalsHandle
-		#include <Movies.k.h>
+		#include <QuickTime/Movies.k.h>
 
 	To specify that your component implementation does not use globals, do not #define MOVIEMEDIA_GLOBALS
 */
@@ -341,7 +353,7 @@ enum {
 
 		#define MEDIA3D_BASENAME()	Fred
 		#define MEDIA3D_GLOBALS()	FredGlobalsHandle
-		#include <Movies.k.h>
+		#include <QuickTime/Movies.k.h>
 
 	To specify that your component implementation does not use globals, do not #define MEDIA3D_GLOBALS
 */
@@ -407,7 +419,7 @@ enum {
 
 		#define MC_BASENAME()	Fred
 		#define MC_GLOBALS()	FredGlobalsHandle
-		#include <Movies.k.h>
+		#include <QuickTime/Movies.k.h>
 
 	To specify that your component implementation does not use globals, do not #define MC_GLOBALS
 */
@@ -520,6 +532,10 @@ enum {
 
 	EXTERN_API( ComponentResult  ) ADD_MC_BASENAME(TrimMovieSegment) (MC_GLOBALS());
 
+	EXTERN_API( ComponentResult  ) ADD_MC_BASENAME(SetIdleManager) (MC_GLOBALS() ADD_MC_COMMA IdleManager  im);
+
+	EXTERN_API( ComponentResult  ) ADD_MC_BASENAME(SetControllerCapabilities) (MC_GLOBALS() ADD_MC_COMMA long  flags, long  flagsMask);
+
 
 	/* MixedMode ProcInfo constants for component calls */
 	enum {
@@ -571,7 +587,9 @@ enum {
 		uppMCGetInterfaceElementProcInfo = 0x00000FF0,
 		uppMCGetDoActionsProcProcInfo = 0x00000FF0,
 		uppMCAddMovieSegmentProcInfo = 0x000007F0,
-		uppMCTrimMovieSegmentProcInfo = 0x000000F0
+		uppMCTrimMovieSegmentProcInfo = 0x000000F0,
+		uppMCSetIdleManagerProcInfo = 0x000003F0,
+		uppMCSetControllerCapabilitiesProcInfo = 0x00000FF0
 	};
 
 #endif	/* MC_BASENAME */
@@ -581,7 +599,7 @@ enum {
 
 		#define MUSICMEDIA_BASENAME()	Fred
 		#define MUSICMEDIA_GLOBALS()	FredGlobalsHandle
-		#include <Movies.k.h>
+		#include <QuickTime/Movies.k.h>
 
 	To specify that your component implementation does not use globals, do not #define MUSICMEDIA_GLOBALS
 */
@@ -597,6 +615,12 @@ enum {
 	#define ADD_MUSICMEDIA_BASENAME(name) MUSICMEDIA_STRCAT(MUSICMEDIA_BASENAME(),name)
 
 	EXTERN_API( ComponentResult  ) ADD_MUSICMEDIA_BASENAME(GetIndexedTunePlayer) (MUSICMEDIA_GLOBALS() ADD_MUSICMEDIA_COMMA long  sampleDescIndex, ComponentInstance * tp);
+
+
+	/* MixedMode ProcInfo constants for component calls */
+	enum {
+		uppMusicMediaGetIndexedTunePlayerProcInfo = 0x00000FF0
+	};
 
 #endif	/* MUSICMEDIA_BASENAME */
 

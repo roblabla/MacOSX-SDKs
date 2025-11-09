@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime-142~1
+     Version:    QuickTime_6
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -30,6 +30,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -39,13 +40,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   kQTSStreamMediaType           = 'strm'
@@ -141,7 +136,7 @@ extern ComponentResult
 QTSMediaSetInfo(
   MediaHandler   mh,
   OSType         inSelector,
-  void *         ioParams);
+  void *         ioParams)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -157,7 +152,7 @@ extern ComponentResult
 QTSMediaGetInfo(
   MediaHandler   mh,
   OSType         inSelector,
-  void *         ioParams);
+  void *         ioParams)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -174,7 +169,7 @@ QTSMediaSetIndStreamInfo(
   MediaHandler   mh,
   SInt32         inIndex,
   OSType         inSelector,
-  void *         ioParams);
+  void *         ioParams)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -191,7 +186,7 @@ QTSMediaGetIndStreamInfo(
   MediaHandler   mh,
   SInt32         inIndex,
   OSType         inSelector,
-  void *         ioParams);
+  void *         ioParams)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -218,13 +213,7 @@ enum {
     uppQTSMediaGetIndStreamInfoProcInfo        = 0x00003FF0
 };
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

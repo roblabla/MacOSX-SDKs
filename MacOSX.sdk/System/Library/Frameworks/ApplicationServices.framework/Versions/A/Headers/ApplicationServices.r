@@ -3,9 +3,9 @@
  
      Contains:   Master include for ApplicationServices public framework
  
-     Version:    ApplicationServices-16.1~63
+     Version:    ApplicationServices-18~229
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -27,6 +27,10 @@
 
 #ifndef __AE_R__
 #include <AE/AE.r>
+#endif
+
+#ifndef __HISERVICES_R__
+#include <HIServices/HIServices.r>
 #endif
 
 

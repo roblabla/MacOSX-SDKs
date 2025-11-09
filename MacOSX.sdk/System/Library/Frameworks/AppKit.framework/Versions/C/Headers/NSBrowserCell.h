@@ -22,6 +22,8 @@
 - (void)setLoaded:(BOOL)flag;
 - (void)reset;
 - (void)set;
+- (void)setImage:(NSImage *)image;
+- (NSImage *)image;
 - (void)setAlternateImage:(NSImage *)newAltImage;
 - (NSImage *)alternateImage;
 

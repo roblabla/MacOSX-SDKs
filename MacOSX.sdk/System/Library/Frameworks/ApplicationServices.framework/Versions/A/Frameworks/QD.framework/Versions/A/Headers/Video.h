@@ -3,9 +3,9 @@
  
      Contains:   Video Driver Interfaces.
  
-     Version:    Quickdraw-64.6.15~3
+     Version:    Quickdraw-96.21~1
  
-     Copyright:  © 1986-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1986-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,22 +22,13 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   mBaseOffset                   = 1,    /*Id of mBaseOffset.*/
@@ -1127,17 +1118,8 @@ struct VDCommunicationInfoRec {
 typedef struct VDCommunicationInfoRec   VDCommunicationInfoRec;
 typedef VDCommunicationInfoRec *        VDCommunicationInfoPtr;
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __VIDEO__ */
 

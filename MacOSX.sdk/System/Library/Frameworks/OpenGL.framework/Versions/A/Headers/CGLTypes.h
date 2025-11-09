@@ -37,6 +37,8 @@ typedef enum _CGLPixelFormatAttribute {
 	kCGLPFAFullScreen         =  54,	/* choose a full-screen capable renderer        */
 	kCGLPFASampleBuffers      =  55,	/* number of multi sample buffers               */
 	kCGLPFASamples            =  56,	/* number of samples per multi sample buffer    */
+	kCGLPFAAuxDepthStencil    =  57,	/* each aux buffer has its own depth stencil    */
+	kCGLPFAColorFloat         =  58,	/* color buffers store floating point pixels    */
 	kCGLPFARendererID         =  70,	/* request renderer by ID                       */
 	kCGLPFASingleRenderer     =  71,	/* choose a single renderer for all screens     */
 	kCGLPFANoRecovery         =  72,	/* disable all failure recovery systems         */
@@ -85,6 +87,7 @@ typedef enum _CGLRendererProperty {
 */
 typedef enum _CGLContextEnable {
 	kCGLCESwapRectangle    = 201,	/* Enable or disable the swap rectangle          */
+	kCGLCESwapLimit        = 203,	/* Enable or disable the swap async limit        */
 	kCGLCERasterization    = 221,	/* Enable or disable all rasterization           */
 	kCGLCEStateValidation  = 301,	/* Validate state for multi-screen functionality */
 } CGLContextEnable;
@@ -96,6 +99,14 @@ typedef enum _CGLContextParameter {
 	kCGLCPSwapRectangle    = 200,	/* 4 params.  Set or get the swap rectangle {x, y, w, h}  */
 	kCGLCPSwapInterval     = 222,	/* 1 param.   0 -> Don't sync, n -> Sync every n retrace  */
 	kCGLCPClientStorage    = 226,	/* 1 param.   Context specific generic storage            */
+/*  - Used by AGL - */
+/*  AGL_STATE_VALIDATION     230    */
+/*  AGL_BUFFER_NAME          231    */
+/*  AGL_ORDER_CONTEXT_TO_FRONT  232 */
+/*  AGL_CONTEXT_SURFACE_ID   233    */
+/*  AGL_CONTEXT_DISPLAY_ID   234    */
+	kCGLCPSurfaceOrder     = 235,   /* 1 param.   1 -> Above window, -1 -> Below Window       */
+	kCGLCPSurfaceOpacity   = 236,   /* 1 param.   1 -> Surface is opaque (default), 0 -> non-opaque */
 } CGLContextParameter;
 
 /*

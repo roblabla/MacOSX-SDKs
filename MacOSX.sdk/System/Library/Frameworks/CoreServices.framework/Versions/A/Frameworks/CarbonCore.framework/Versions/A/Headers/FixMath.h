@@ -3,9 +3,9 @@
  
      Contains:   Fixed Math Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,6 +22,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -29,14 +30,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 
@@ -58,7 +51,7 @@ extern "C" {
 extern Fixed 
 FixRatio(
   short   numer,
-  short   denom);
+  short   denom)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -72,7 +65,7 @@ FixRatio(
 extern Fixed 
 FixMul(
   Fixed   a,
-  Fixed   b);
+  Fixed   b)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -84,7 +77,7 @@ FixMul(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-FixRound(Fixed x);
+FixRound(Fixed x)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -96,7 +89,7 @@ FixRound(Fixed x);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fract 
-Fix2Frac(Fixed x);
+Fix2Frac(Fixed x)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -108,7 +101,7 @@ Fix2Frac(Fixed x);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-Fix2Long(Fixed x);
+Fix2Long(Fixed x)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -120,7 +113,7 @@ Fix2Long(Fixed x);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fixed 
-Long2Fix(long x);
+Long2Fix(long x)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -132,7 +125,7 @@ Long2Fix(long x);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fixed 
-Frac2Fix(Fract x);
+Frac2Fix(Fract x)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -146,7 +139,7 @@ Frac2Fix(Fract x);
 extern Fract 
 FracMul(
   Fract   x,
-  Fract   y);
+  Fract   y)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -160,7 +153,7 @@ FracMul(
 extern Fixed 
 FixDiv(
   Fixed   x,
-  Fixed   y);
+  Fixed   y)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -174,7 +167,7 @@ FixDiv(
 extern Fract 
 FracDiv(
   Fract   x,
-  Fract   y);
+  Fract   y)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -186,7 +179,7 @@ FracDiv(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fract 
-FracSqrt(Fract x);
+FracSqrt(Fract x)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -198,7 +191,7 @@ FracSqrt(Fract x);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fract 
-FracSin(Fixed x);
+FracSin(Fixed x)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -210,7 +203,7 @@ FracSin(Fixed x);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fract 
-FracCos(Fixed x);
+FracCos(Fixed x)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -224,7 +217,7 @@ FracCos(Fixed x);
 extern Fixed 
 FixATan2(
   long   x,
-  long   y);
+  long   y)                                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -245,7 +238,7 @@ FixATan2(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern double 
-Frac2X(Fract x);
+Frac2X(Fract x)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -257,7 +250,7 @@ Frac2X(Fract x);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern double 
-Fix2X(Fixed x);
+Fix2X(Fixed x)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -269,7 +262,7 @@ Fix2X(Fixed x);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fixed 
-X2Fix(double x);
+X2Fix(double x)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -281,7 +274,7 @@ X2Fix(double x);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fract 
-X2Frac(double x);
+X2Frac(double x)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* QuickTime 3.0 makes these Wide routines available on other platforms*/
@@ -297,7 +290,7 @@ X2Frac(double x);
 extern short 
 WideCompare(
   const wide *  target,
-  const wide *  source);
+  const wide *  source)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -311,7 +304,7 @@ WideCompare(
 extern wide * 
 WideAdd(
   wide *        target,
-  const wide *  source);
+  const wide *  source)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -325,7 +318,7 @@ WideAdd(
 extern wide * 
 WideSubtract(
   wide *        target,
-  const wide *  source);
+  const wide *  source)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -337,7 +330,7 @@ WideSubtract(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern wide * 
-WideNegate(wide * target);
+WideNegate(wide * target)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -351,7 +344,7 @@ WideNegate(wide * target);
 extern wide * 
 WideShift(
   wide *  target,
-  long    shift);
+  long    shift)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -363,7 +356,7 @@ WideShift(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern unsigned long 
-WideSquareRoot(const wide * source);
+WideSquareRoot(const wide * source)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -378,7 +371,7 @@ extern wide *
 WideMultiply(
   long    multiplicand,
   long    multiplier,
-  wide *  target);
+  wide *  target)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* returns the quotient */
@@ -394,7 +387,7 @@ extern long
 WideDivide(
   const wide *  dividend,
   long          divisor,
-  long *        remainder);
+  long *        remainder)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* quotient replaces dividend */
@@ -410,7 +403,7 @@ extern wide *
 WideWideDivide(
   wide *  dividend,
   long    divisor,
-  long *  remainder);
+  long *  remainder)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -424,20 +417,12 @@ WideWideDivide(
 extern wide * 
 WideBitShift(
   wide *  src,
-  long    shift);
+  long    shift)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #endif  /* TARGET_CPU_PPC */
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

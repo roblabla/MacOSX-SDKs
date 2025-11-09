@@ -3,9 +3,9 @@
  
      Contains:   File Manager (MFS, HFS, and HFS+) Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -43,7 +43,16 @@
 #endif
 
 
+#ifndef __CFURL__
+#include <CoreFoundation/CFURL.h>
+#endif
 
+#ifndef __CFRUNLOOP__
+#include <CoreFoundation/CFRunLoop.h>
+#endif
+
+
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -53,14 +62,9 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
+#include <sys/types.h>
 /* HFSUniStr255 is the Unicode equivalent of Str255 */
 struct HFSUniStr255 {
   UInt16              length;                 /* number of unicode characters */
@@ -216,7 +220,8 @@ enum {
                                         /* vMExtendedAttributes (GetVolParms) bit position constants */
   bSupportsSymbolicLinks        = 13,   /* volume supports the creation and use of symbolic links (Mac OS X only) */
   bIsAutoMounted                = 14,   /* volume was mounted automatically (Mac OS X only) */
-  bAllowCDiDataHandler          = 17    /* allow QuickTime's CDi data handler to examine this volume */
+  bAllowCDiDataHandler          = 17,   /* allow QuickTime's CDi data handler to examine this volume */
+  bSupportsExclusiveLocks       = 18    /* volume supports exclusive opens for writing */
 };
 
 enum {
@@ -411,6 +416,8 @@ struct GetVolParmsInfoBuffer {
                                               /*       vMVersion 3 GetVolParmsInfoBuffer ends here */
   void *              vMDeviceID;             /* device id name for interoperability with IOKit */
                                               /*       vMVersion 4 GetVolParmsInfoBuffer ends here */
+  UniCharCount        vMMaxNameLength;
+                                              /*       vMVersion 5 GetVolParmsInfoBuffer ends here */
 };
 typedef struct GetVolParmsInfoBuffer    GetVolParmsInfoBuffer;
 typedef union ParamBlockRec             ParamBlockRec;
@@ -1244,7 +1251,7 @@ typedef DrvQEl *                        DrvQElPtr;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern IOCompletionUPP
-NewIOCompletionUPP(IOCompletionProcPtr userRoutine);
+NewIOCompletionUPP(IOCompletionProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeIOCompletionUPP()
@@ -1255,7 +1262,7 @@ NewIOCompletionUPP(IOCompletionProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeIOCompletionUPP(IOCompletionUPP userUPP);
+DisposeIOCompletionUPP(IOCompletionUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeIOCompletionUPP()
@@ -1268,7 +1275,7 @@ DisposeIOCompletionUPP(IOCompletionUPP userUPP);
 extern void
 InvokeIOCompletionUPP(
   ParmBlkPtr       paramBlock,
-  IOCompletionUPP  userUPP);
+  IOCompletionUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1302,23 +1309,29 @@ InvokeIOCompletionUPP(
 /*
  *  PBXGetVolInfoSync()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
- */
-extern OSErr  PBXGetVolInfoSync(XVolumeParamPtr paramBlock);
-
-
-/*
- *  PBXGetVolInfoAsync()
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern OSErr  PBXGetVolInfoAsync(XVolumeParamPtr paramBlock);
+extern OSErr  PBXGetVolInfoSync(XVolumeParamPtr paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  PBXGetVolInfoAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
+ */
+extern OSErr  PBXGetVolInfoAsync(XVolumeParamPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1364,23 +1377,29 @@ extern OSErr  PBXGetVolInfoAsync(XVolumeParamPtr paramBlock);
 /*
  *  PBFlushVolSync()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBFlushVolSync(ParmBlkPtr paramBlock);
-
-
-/*
- *  PBFlushVolAsync()
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBFlushVolAsync(ParmBlkPtr paramBlock);
+extern OSErr  PBFlushVolSync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  PBFlushVolAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBFlushVolAsync(ParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1596,133 +1615,169 @@ extern OSErr  PBFlushVolAsync(ParmBlkPtr paramBlock);
 /*
  *  PBAllocateSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBAllocateSync(ParmBlkPtr paramBlock);
+extern OSErr  PBAllocateSync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBAllocateAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBAllocateAsync(ParmBlkPtr paramBlock);
+extern OSErr  PBAllocateAsync(ParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetEOFSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetEOFSync(ParmBlkPtr paramBlock);
+extern OSErr  PBGetEOFSync(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetEOFAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetEOFAsync(ParmBlkPtr paramBlock);
+extern OSErr  PBGetEOFAsync(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBSetEOFSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetEOFSync(ParmBlkPtr paramBlock);
+extern OSErr  PBSetEOFSync(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBSetEOFAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetEOFAsync(ParmBlkPtr paramBlock);
+extern OSErr  PBSetEOFAsync(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetFPosSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetFPosSync(ParmBlkPtr paramBlock);
+extern OSErr  PBGetFPosSync(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetFPosAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetFPosAsync(ParmBlkPtr paramBlock);
+extern OSErr  PBGetFPosAsync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBSetFPosSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetFPosSync(ParmBlkPtr paramBlock);
+extern OSErr  PBSetFPosSync(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBSetFPosAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetFPosAsync(ParmBlkPtr paramBlock);
+extern OSErr  PBSetFPosAsync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBFlushFileSync()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBFlushFileSync(ParmBlkPtr paramBlock);
-
-
-/*
- *  PBFlushFileAsync()
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBFlushFileAsync(ParmBlkPtr paramBlock);
+extern OSErr  PBFlushFileSync(ParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  PBFlushFileAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBFlushFileAsync(ParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1738,12 +1793,15 @@ extern OSErr  PBFlushFileAsync(ParmBlkPtr paramBlock);
 /*
  *  PBUnmountVol()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBUnmountVol(ParmBlkPtr paramBlock);
+extern OSErr  PBUnmountVol(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1779,23 +1837,29 @@ extern OSErr  PBUnmountVol(ParmBlkPtr paramBlock);
 /*
  *  PBCatSearchSync()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBCatSearchSync(CSParamPtr paramBlock);
-
-
-/*
- *  PBCatSearchAsync()
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBCatSearchAsync(CSParamPtr paramBlock);
+extern OSErr  PBCatSearchSync(CSParamPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  PBCatSearchAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBCatSearchAsync(CSParamPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1811,6 +1875,9 @@ extern OSErr  PBCatSearchAsync(CSParamPtr paramBlock);
 /*
  *  UnmountVol()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1819,7 +1886,7 @@ extern OSErr  PBCatSearchAsync(CSParamPtr paramBlock);
 extern OSErr 
 UnmountVol(
   ConstStr63Param   volName,       /* can be NULL */
-  short             vRefNum);
+  short             vRefNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1835,6 +1902,9 @@ UnmountVol(
 /*
  *  FlushVol()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1843,11 +1913,14 @@ UnmountVol(
 extern OSErr 
 FlushVol(
   ConstStr63Param   volName,       /* can be NULL */
-  short             vRefNum);
+  short             vRefNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  HSetVol()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1858,7 +1931,7 @@ extern OSErr
 HSetVol(
   ConstStr63Param   volName,       /* can be NULL */
   short             vRefNum,
-  long              dirID);
+  long              dirID)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* AddDrive() was moved to Devices.h*/
@@ -1886,17 +1959,23 @@ HSetVol(
 /*
  *  FSClose()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-FSClose(short refNum);
+FSClose(short refNum)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  FSRead()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1907,11 +1986,14 @@ extern OSErr
 FSRead(
   short   refNum,
   long *  count,
-  void *  buffPtr);
+  void *  buffPtr)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  FSWrite()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1922,7 +2004,7 @@ extern OSErr
 FSWrite(
   short         refNum,
   long *        count,
-  const void *  buffPtr);
+  const void *  buffPtr)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2028,6 +2110,9 @@ FSWrite(
 /*
  *  Allocate()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2036,11 +2121,14 @@ FSWrite(
 extern OSErr 
 Allocate(
   short   refNum,
-  long *  count);
+  long *  count)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetEOF()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -2050,11 +2138,14 @@ Allocate(
 extern OSErr 
 GetEOF(
   short   refNum,
-  long *  logEOF);
+  long *  logEOF)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetEOF()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -2064,11 +2155,14 @@ GetEOF(
 extern OSErr 
 SetEOF(
   short   refNum,
-  long    logEOF);
+  long    logEOF)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetFPos()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -2078,11 +2172,14 @@ SetEOF(
 extern OSErr 
 GetFPos(
   short   refNum,
-  long *  filePos);
+  long *  filePos)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetFPos()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -2093,11 +2190,14 @@ extern OSErr
 SetFPos(
   short   refNum,
   short   posMode,
-  long    posOff);
+  long    posOff)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetVRefNum()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -2107,7 +2207,7 @@ SetFPos(
 extern OSErr 
 GetVRefNum(
   short    fileRefNum,
-  short *  vRefNum);
+  short *  vRefNum)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2303,89 +2403,113 @@ GetVRefNum(
 /*
  *  PBHSetVolSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHSetVolSync(WDPBPtr paramBlock);
+extern OSErr  PBHSetVolSync(WDPBPtr paramBlock)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHSetVolAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHSetVolAsync(WDPBPtr paramBlock);
+extern OSErr  PBHSetVolAsync(WDPBPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHGetVolSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetVolSync(WDPBPtr paramBlock);
+extern OSErr  PBHGetVolSync(WDPBPtr paramBlock)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHGetVolAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetVolAsync(WDPBPtr paramBlock);
+extern OSErr  PBHGetVolAsync(WDPBPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBCatMoveSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBCatMoveSync(CMovePBPtr paramBlock);
+extern OSErr  PBCatMoveSync(CMovePBPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBCatMoveAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBCatMoveAsync(CMovePBPtr paramBlock);
+extern OSErr  PBCatMoveAsync(CMovePBPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDirCreateSync()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBDirCreateSync(HParmBlkPtr paramBlock);
-
-
-/*
- *  PBDirCreateAsync()
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDirCreateAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBDirCreateSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  PBDirCreateAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBDirCreateAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2411,419 +2535,533 @@ extern OSErr  PBDirCreateAsync(HParmBlkPtr paramBlock);
 /*
  *  PBGetFCBInfoSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetFCBInfoSync(FCBPBPtr paramBlock);
+extern OSErr  PBGetFCBInfoSync(FCBPBPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetFCBInfoAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetFCBInfoAsync(FCBPBPtr paramBlock);
+extern OSErr  PBGetFCBInfoAsync(FCBPBPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetCatInfoSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetCatInfoSync(CInfoPBPtr paramBlock);
+extern OSErr  PBGetCatInfoSync(CInfoPBPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetCatInfoAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetCatInfoAsync(CInfoPBPtr paramBlock);
+extern OSErr  PBGetCatInfoAsync(CInfoPBPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBSetCatInfoSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetCatInfoSync(CInfoPBPtr paramBlock);
+extern OSErr  PBSetCatInfoSync(CInfoPBPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBSetCatInfoAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetCatInfoAsync(CInfoPBPtr paramBlock);
+extern OSErr  PBSetCatInfoAsync(CInfoPBPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBAllocContigSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBAllocContigSync(ParmBlkPtr paramBlock);
+extern OSErr  PBAllocContigSync(ParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBAllocContigAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBAllocContigAsync(ParmBlkPtr paramBlock);
+extern OSErr  PBAllocContigAsync(ParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBLockRangeSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBLockRangeSync(ParmBlkPtr paramBlock);
+extern OSErr  PBLockRangeSync(ParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBLockRangeAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBLockRangeAsync(ParmBlkPtr paramBlock);
+extern OSErr  PBLockRangeAsync(ParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBUnlockRangeSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBUnlockRangeSync(ParmBlkPtr paramBlock);
+extern OSErr  PBUnlockRangeSync(ParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBUnlockRangeAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBUnlockRangeAsync(ParmBlkPtr paramBlock);
+extern OSErr  PBUnlockRangeAsync(ParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBSetVInfoSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetVInfoSync(HParmBlkPtr paramBlock);
+extern OSErr  PBSetVInfoSync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBSetVInfoAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetVInfoAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBSetVInfoAsync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHGetVInfoSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetVInfoSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHGetVInfoSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHGetVInfoAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetVInfoAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHGetVInfoAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHOpenSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHOpenSync(HParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHOpenAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHOpenAsync(HParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHOpenRFSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenRFSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHOpenRFSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHOpenRFAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenRFAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHOpenRFAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHOpenDFSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenDFSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHOpenDFSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHOpenDFAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenDFAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHOpenDFAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHCreateSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHCreateSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHCreateSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHCreateAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHCreateAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHCreateAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHDeleteSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHDeleteSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHDeleteSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHDeleteAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHDeleteAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHDeleteAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHRenameSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHRenameSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHRenameSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHRenameAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHRenameAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHRenameAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHRstFLockSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHRstFLockSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHRstFLockSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHRstFLockAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHRstFLockAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHRstFLockAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHSetFLockSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHSetFLockSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHSetFLockSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHSetFLockAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHSetFLockAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHSetFLockAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHGetFInfoSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetFInfoSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHGetFInfoSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHGetFInfoAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetFInfoAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHGetFInfoAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHSetFInfoSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHSetFInfoSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHSetFInfoSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHSetFInfoAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHSetFInfoAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHSetFInfoAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBMakeFSSpecSync()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBMakeFSSpecSync(HParmBlkPtr paramBlock);
-
-
-/*
- *  PBMakeFSSpecAsync()
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBMakeFSSpecAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBMakeFSSpecSync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  PBMakeFSSpecAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBMakeFSSpecAsync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2931,6 +3169,9 @@ extern OSErr  PBMakeFSSpecAsync(HParmBlkPtr paramBlock);
 /*
  *  HGetVol()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2940,11 +3181,14 @@ extern OSErr
 HGetVol(
   StringPtr   volName,
   short *     vRefNum,
-  long *      dirID);
+  long *      dirID)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  HOpen()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -2957,11 +3201,14 @@ HOpen(
   long               dirID,
   ConstStr255Param   fileName,
   SInt8              permission,
-  short *            refNum);
+  short *            refNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  HOpenDF()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -2974,11 +3221,14 @@ HOpenDF(
   long               dirID,
   ConstStr255Param   fileName,
   SInt8              permission,
-  short *            refNum);
+  short *            refNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  HOpenRF()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -2991,11 +3241,14 @@ HOpenRF(
   long               dirID,
   ConstStr255Param   fileName,
   SInt8              permission,
-  short *            refNum);
+  short *            refNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  AllocContig()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3005,11 +3258,14 @@ HOpenRF(
 extern OSErr 
 AllocContig(
   short   refNum,
-  long *  count);
+  long *  count)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  HCreate()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3022,11 +3278,14 @@ HCreate(
   long               dirID,
   ConstStr255Param   fileName,
   OSType             creator,
-  OSType             fileType);
+  OSType             fileType)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  DirCreate()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3038,11 +3297,14 @@ DirCreate(
   short              vRefNum,
   long               parentDirID,
   ConstStr255Param   directoryName,
-  long *             createdDirID);
+  long *             createdDirID)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  HDelete()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3053,11 +3315,14 @@ extern OSErr
 HDelete(
   short              vRefNum,
   long               dirID,
-  ConstStr255Param   fileName);
+  ConstStr255Param   fileName)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  HGetFInfo()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3069,11 +3334,14 @@ HGetFInfo(
   short              vRefNum,
   long               dirID,
   ConstStr255Param   fileName,
-  FInfo *            fndrInfo);
+  FInfo *            fndrInfo)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  HSetFInfo()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3085,11 +3353,14 @@ HSetFInfo(
   short              vRefNum,
   long               dirID,
   ConstStr255Param   fileName,
-  const FInfo *      fndrInfo);
+  const FInfo *      fndrInfo)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  HSetFLock()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3100,11 +3371,14 @@ extern OSErr
 HSetFLock(
   short              vRefNum,
   long               dirID,
-  ConstStr255Param   fileName);
+  ConstStr255Param   fileName)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  HRstFLock()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3115,11 +3389,14 @@ extern OSErr
 HRstFLock(
   short              vRefNum,
   long               dirID,
-  ConstStr255Param   fileName);
+  ConstStr255Param   fileName)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  HRename()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3131,11 +3408,14 @@ HRename(
   short              vRefNum,
   long               dirID,
   ConstStr255Param   oldName,
-  ConstStr255Param   newName);
+  ConstStr255Param   newName)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CatMove()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3148,7 +3428,7 @@ CatMove(
   long               dirID,
   ConstStr255Param   oldName,
   long               newDirID,
-  ConstStr255Param   newName);
+  ConstStr255Param   newName)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3185,718 +3465,913 @@ CatMove(
 /*
  *  PBHGetVolParmsSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetVolParmsSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHGetVolParmsSync(HParmBlkPtr paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHGetVolParmsAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetVolParmsAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHGetVolParmsAsync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHGetLogInInfoSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetLogInInfoSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHGetLogInInfoSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHGetLogInInfoAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetLogInInfoAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHGetLogInInfoAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHGetDirAccessSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetDirAccessSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHGetDirAccessSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHGetDirAccessAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetDirAccessAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHGetDirAccessAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHSetDirAccessSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHSetDirAccessSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHSetDirAccessSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHSetDirAccessAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHSetDirAccessAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHSetDirAccessAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHMapIDSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHMapIDSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHMapIDSync(HParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHMapIDAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHMapIDAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHMapIDAsync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHMapNameSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHMapNameSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHMapNameSync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHMapNameAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHMapNameAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHMapNameAsync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHCopyFileSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHCopyFileSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHCopyFileSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHCopyFileAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHCopyFileAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHCopyFileAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHMoveRenameSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHMoveRenameSync(HParmBlkPtr paramBlock);
+extern OSErr  PBHMoveRenameSync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHMoveRenameAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHMoveRenameAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHMoveRenameAsync(HParmBlkPtr paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHOpenDenySync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenDenySync(HParmBlkPtr paramBlock);
+extern OSErr  PBHOpenDenySync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHOpenDenyAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenDenyAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHOpenDenyAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHOpenRFDenySync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenRFDenySync(HParmBlkPtr paramBlock);
+extern OSErr  PBHOpenRFDenySync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBHOpenRFDenyAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenRFDenyAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBHOpenRFDenyAsync(HParmBlkPtr paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetXCatInfoSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern OSErr  PBGetXCatInfoSync(XCInfoPBPtr paramBlock);
+extern OSErr  PBGetXCatInfoSync(XCInfoPBPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetXCatInfoAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern OSErr  PBGetXCatInfoAsync(XCInfoPBPtr paramBlock);
+extern OSErr  PBGetXCatInfoAsync(XCInfoPBPtr paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBExchangeFilesSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBExchangeFilesSync(HParmBlkPtr paramBlock);
+extern OSErr  PBExchangeFilesSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBExchangeFilesAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBExchangeFilesAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBExchangeFilesAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBCreateFileIDRefSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBCreateFileIDRefSync(HParmBlkPtr paramBlock);
+extern OSErr  PBCreateFileIDRefSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBCreateFileIDRefAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBCreateFileIDRefAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBCreateFileIDRefAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBResolveFileIDRefSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBResolveFileIDRefSync(HParmBlkPtr paramBlock);
+extern OSErr  PBResolveFileIDRefSync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBResolveFileIDRefAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBResolveFileIDRefAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBResolveFileIDRefAsync(HParmBlkPtr paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDeleteFileIDRefSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDeleteFileIDRefSync(HParmBlkPtr paramBlock);
+extern OSErr  PBDeleteFileIDRefSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDeleteFileIDRefAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDeleteFileIDRefAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBDeleteFileIDRefAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetForeignPrivsSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetForeignPrivsSync(HParmBlkPtr paramBlock);
+extern OSErr  PBGetForeignPrivsSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetForeignPrivsAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetForeignPrivsAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBGetForeignPrivsAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBSetForeignPrivsSync()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBSetForeignPrivsSync(HParmBlkPtr paramBlock);
-
-
-/*
- *  PBSetForeignPrivsAsync()
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetForeignPrivsAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBSetForeignPrivsSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  PBSetForeignPrivsAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBSetForeignPrivsAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*  Desktop Manager  */
 /*
  *  PBDTGetPath()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetPath(DTPBPtr paramBlock);
+extern OSErr  PBDTGetPath(DTPBPtr paramBlock)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTCloseDown()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTCloseDown(DTPBPtr paramBlock);
+extern OSErr  PBDTCloseDown(DTPBPtr paramBlock)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTAddIconSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTAddIconSync(DTPBPtr paramBlock);
+extern OSErr  PBDTAddIconSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTAddIconAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTAddIconAsync(DTPBPtr paramBlock);
+extern OSErr  PBDTAddIconAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTGetIconSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetIconSync(DTPBPtr paramBlock);
+extern OSErr  PBDTGetIconSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTGetIconAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetIconAsync(DTPBPtr paramBlock);
+extern OSErr  PBDTGetIconAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTGetIconInfoSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetIconInfoSync(DTPBPtr paramBlock);
+extern OSErr  PBDTGetIconInfoSync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTGetIconInfoAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetIconInfoAsync(DTPBPtr paramBlock);
+extern OSErr  PBDTGetIconInfoAsync(DTPBPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTAddAPPLSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTAddAPPLSync(DTPBPtr paramBlock);
+extern OSErr  PBDTAddAPPLSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTAddAPPLAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTAddAPPLAsync(DTPBPtr paramBlock);
+extern OSErr  PBDTAddAPPLAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTRemoveAPPLSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTRemoveAPPLSync(DTPBPtr paramBlock);
+extern OSErr  PBDTRemoveAPPLSync(DTPBPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTRemoveAPPLAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTRemoveAPPLAsync(DTPBPtr paramBlock);
+extern OSErr  PBDTRemoveAPPLAsync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTGetAPPLSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetAPPLSync(DTPBPtr paramBlock);
+extern OSErr  PBDTGetAPPLSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTGetAPPLAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetAPPLAsync(DTPBPtr paramBlock);
+extern OSErr  PBDTGetAPPLAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTSetCommentSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTSetCommentSync(DTPBPtr paramBlock);
+extern OSErr  PBDTSetCommentSync(DTPBPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTSetCommentAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTSetCommentAsync(DTPBPtr paramBlock);
+extern OSErr  PBDTSetCommentAsync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTRemoveCommentSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTRemoveCommentSync(DTPBPtr paramBlock);
+extern OSErr  PBDTRemoveCommentSync(DTPBPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTRemoveCommentAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTRemoveCommentAsync(DTPBPtr paramBlock);
+extern OSErr  PBDTRemoveCommentAsync(DTPBPtr paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTGetCommentSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetCommentSync(DTPBPtr paramBlock);
+extern OSErr  PBDTGetCommentSync(DTPBPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTGetCommentAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetCommentAsync(DTPBPtr paramBlock);
+extern OSErr  PBDTGetCommentAsync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTFlushSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTFlushSync(DTPBPtr paramBlock);
+extern OSErr  PBDTFlushSync(DTPBPtr paramBlock)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTFlushAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTFlushAsync(DTPBPtr paramBlock);
+extern OSErr  PBDTFlushAsync(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTResetSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTResetSync(DTPBPtr paramBlock);
+extern OSErr  PBDTResetSync(DTPBPtr paramBlock)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTResetAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTResetAsync(DTPBPtr paramBlock);
+extern OSErr  PBDTResetAsync(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTGetInfoSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetInfoSync(DTPBPtr paramBlock);
+extern OSErr  PBDTGetInfoSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTGetInfoAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetInfoAsync(DTPBPtr paramBlock);
+extern OSErr  PBDTGetInfoAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTOpenInform()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTOpenInform(DTPBPtr paramBlock);
+extern OSErr  PBDTOpenInform(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDTDeleteSync()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBDTDeleteSync(DTPBPtr paramBlock);
-
-
-/*
- *  PBDTDeleteAsync()
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTDeleteAsync(DTPBPtr paramBlock);
+extern OSErr  PBDTDeleteSync(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  PBDTDeleteAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBDTDeleteAsync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*  VolumeMount traps  */
 /*
  *  PBGetVolMountInfoSize()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBGetVolMountInfoSize(ParmBlkPtr paramBlock);
-
-
-/*
- *  PBGetVolMountInfo()
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetVolMountInfo(ParmBlkPtr paramBlock);
+extern OSErr  PBGetVolMountInfoSize(ParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  PBGetVolMountInfo()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBGetVolMountInfo(ParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3907,12 +4382,15 @@ extern OSErr  PBGetVolMountInfo(ParmBlkPtr paramBlock);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBVolumeMount(ParmBlkPtr paramBlock);
+extern OSErr  PBVolumeMount(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*  FSp traps  */
 /*
  *  FSMakeFSSpec()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3924,11 +4402,14 @@ FSMakeFSSpec(
   short              vRefNum,
   long               dirID,
   ConstStr255Param   fileName,
-  FSSpec *           spec);
+  FSSpec *           spec)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  FSpOpenDF()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3939,11 +4420,14 @@ extern OSErr
 FSpOpenDF(
   const FSSpec *  spec,
   SInt8           permission,
-  short *         refNum);
+  short *         refNum)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  FSpOpenRF()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3954,11 +4438,14 @@ extern OSErr
 FSpOpenRF(
   const FSSpec *  spec,
   SInt8           permission,
-  short *         refNum);
+  short *         refNum)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  FSpCreate()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3970,11 +4457,14 @@ FSpCreate(
   const FSSpec *  spec,
   OSType          creator,
   OSType          fileType,
-  ScriptCode      scriptTag);
+  ScriptCode      scriptTag)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  FSpDirCreate()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3985,11 +4475,14 @@ extern OSErr
 FSpDirCreate(
   const FSSpec *  spec,
   ScriptCode      scriptTag,
-  long *          createdDirID);
+  long *          createdDirID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  FSpDelete()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3997,11 +4490,14 @@ FSpDirCreate(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-FSpDelete(const FSSpec * spec);
+FSpDelete(const FSSpec * spec)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  FSpGetFInfo()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4011,11 +4507,14 @@ FSpDelete(const FSSpec * spec);
 extern OSErr 
 FSpGetFInfo(
   const FSSpec *  spec,
-  FInfo *         fndrInfo);
+  FInfo *         fndrInfo)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  FSpSetFInfo()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4025,23 +4524,14 @@ FSpGetFInfo(
 extern OSErr 
 FSpSetFInfo(
   const FSSpec *  spec,
-  const FInfo *   fndrInfo);
+  const FInfo *   fndrInfo)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  FSpSetFLock()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr 
-FSpSetFLock(const FSSpec * spec);
-
-
-/*
- *  FSpRstFLock()
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4049,11 +4539,29 @@ FSpSetFLock(const FSSpec * spec);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-FSpRstFLock(const FSSpec * spec);
+FSpSetFLock(const FSSpec * spec)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  FSpRstFLock()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr 
+FSpRstFLock(const FSSpec * spec)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  FSpRename()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4063,11 +4571,14 @@ FSpRstFLock(const FSSpec * spec);
 extern OSErr 
 FSpRename(
   const FSSpec *     spec,
-  ConstStr255Param   newName);
+  ConstStr255Param   newName)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  FSpCatMove()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4077,11 +4588,14 @@ FSpRename(
 extern OSErr 
 FSpCatMove(
   const FSSpec *  source,
-  const FSSpec *  dest);
+  const FSSpec *  dest)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  FSpExchangeFiles()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4091,74 +4605,92 @@ FSpCatMove(
 extern OSErr 
 FSpExchangeFiles(
   const FSSpec *  source,
-  const FSSpec *  dest);
+  const FSSpec *  dest)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
  *  PBShareSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBShareSync(HParmBlkPtr paramBlock);
+extern OSErr  PBShareSync(HParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBShareAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBShareAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBShareAsync(HParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBUnshareSync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBUnshareSync(HParmBlkPtr paramBlock);
+extern OSErr  PBUnshareSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBUnshareAsync()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBUnshareAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBUnshareAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetUGEntrySync()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr  PBGetUGEntrySync(HParmBlkPtr paramBlock);
-
-
-/*
- *  PBGetUGEntryAsync()
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetUGEntryAsync(HParmBlkPtr paramBlock);
+extern OSErr  PBGetUGEntrySync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  PBGetUGEntryAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr  PBGetUGEntryAsync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4322,7 +4854,9 @@ enum {
   kFSNodeCopyProtectBit         = 6,
   kFSNodeCopyProtectMask        = 0x0040,
   kFSNodeForkOpenBit            = 7,    /* Set if the file or directory has any open fork */
-  kFSNodeForkOpenMask           = 0x0080
+  kFSNodeForkOpenMask           = 0x0080,
+  kFSNodeHardLinkBit            = 8,    /* Set if the file is a hard link */
+  kFSNodeHardLinkMask           = 0x00000100
 };
 
 /*  Constants for sharingFlags field of FSCatalogInfo */
@@ -4624,6 +5158,9 @@ typedef FSVolumeInfoParam *             FSVolumeInfoParamPtr;
 /*
  *  FSpMakeFSRef()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4632,11 +5169,14 @@ typedef FSVolumeInfoParam *             FSVolumeInfoParamPtr;
 extern OSErr 
 FSpMakeFSRef(
   const FSSpec *  source,
-  FSRef *         newRef);
+  FSRef *         newRef)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBMakeFSRefSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4644,11 +5184,14 @@ FSpMakeFSRef(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBMakeFSRefSync(FSRefParam * paramBlock);
+PBMakeFSRefSync(FSRefParam * paramBlock)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBMakeFSRefAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4656,7 +5199,7 @@ PBMakeFSRefSync(FSRefParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBMakeFSRefAsync(FSRefParam * paramBlock);
+PBMakeFSRefAsync(FSRefParam * paramBlock)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4675,6 +5218,9 @@ PBMakeFSRefAsync(FSRefParam * paramBlock);
 /*
  *  FSMakeFSRefUnicode()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4686,11 +5232,14 @@ FSMakeFSRefUnicode(
   UniCharCount     nameLength,
   const UniChar *  name,
   TextEncoding     textEncodingHint,
-  FSRef *          newRef);
+  FSRef *          newRef)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBMakeFSRefUnicodeSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4698,11 +5247,14 @@ FSMakeFSRefUnicode(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBMakeFSRefUnicodeSync(FSRefParam * paramBlock);
+PBMakeFSRefUnicodeSync(FSRefParam * paramBlock)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBMakeFSRefUnicodeAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4710,7 +5262,7 @@ PBMakeFSRefUnicodeSync(FSRefParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBMakeFSRefUnicodeAsync(FSRefParam * paramBlock);
+PBMakeFSRefUnicodeAsync(FSRefParam * paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4727,6 +5279,9 @@ PBMakeFSRefUnicodeAsync(FSRefParam * paramBlock);
 /*
  *  FSCompareFSRefs()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4735,11 +5290,14 @@ PBMakeFSRefUnicodeAsync(FSRefParam * paramBlock);
 extern OSErr 
 FSCompareFSRefs(
   const FSRef *  ref1,
-  const FSRef *  ref2);
+  const FSRef *  ref2)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBCompareFSRefsSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4747,11 +5305,14 @@ FSCompareFSRefs(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBCompareFSRefsSync(FSRefParam * paramBlock);
+PBCompareFSRefsSync(FSRefParam * paramBlock)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBCompareFSRefsAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4759,7 +5320,7 @@ PBCompareFSRefsSync(FSRefParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBCompareFSRefsAsync(FSRefParam * paramBlock);
+PBCompareFSRefsAsync(FSRefParam * paramBlock)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4780,6 +5341,9 @@ PBCompareFSRefsAsync(FSRefParam * paramBlock);
 /*
  *  FSCreateFileUnicode()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4793,11 +5357,14 @@ FSCreateFileUnicode(
   FSCatalogInfoBitmap    whichInfo,
   const FSCatalogInfo *  catalogInfo,       /* can be NULL */
   FSRef *                newRef,            /* can be NULL */
-  FSSpec *               newSpec);          /* can be NULL */
+  FSSpec *               newSpec)           /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBCreateFileUnicodeSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4805,11 +5372,14 @@ FSCreateFileUnicode(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBCreateFileUnicodeSync(FSRefParam * paramBlock);
+PBCreateFileUnicodeSync(FSRefParam * paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBCreateFileUnicodeAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4817,7 +5387,7 @@ PBCreateFileUnicodeSync(FSRefParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBCreateFileUnicodeAsync(FSRefParam * paramBlock);
+PBCreateFileUnicodeAsync(FSRefParam * paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4839,6 +5409,9 @@ PBCreateFileUnicodeAsync(FSRefParam * paramBlock);
 /*
  *  FSCreateDirectoryUnicode()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4853,11 +5426,14 @@ FSCreateDirectoryUnicode(
   const FSCatalogInfo *  catalogInfo,       /* can be NULL */
   FSRef *                newRef,            /* can be NULL */
   FSSpec *               newSpec,           /* can be NULL */
-  UInt32 *               newDirID);         /* can be NULL */
+  UInt32 *               newDirID)          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBCreateDirectoryUnicodeSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4865,11 +5441,14 @@ FSCreateDirectoryUnicode(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBCreateDirectoryUnicodeSync(FSRefParam * paramBlock);
+PBCreateDirectoryUnicodeSync(FSRefParam * paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBCreateDirectoryUnicodeAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4877,7 +5456,7 @@ PBCreateDirectoryUnicodeSync(FSRefParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBCreateDirectoryUnicodeAsync(FSRefParam * paramBlock);
+PBCreateDirectoryUnicodeAsync(FSRefParam * paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4891,17 +5470,8 @@ PBCreateDirectoryUnicodeAsync(FSRefParam * paramBlock);
 /*
  *  FSDeleteObject()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
- */
-extern OSErr 
-FSDeleteObject(const FSRef * ref);
-
-
-/*
- *  PBDeleteObjectSync()
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4909,11 +5479,29 @@ FSDeleteObject(const FSRef * ref);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBDeleteObjectSync(FSRefParam * paramBlock);
+FSDeleteObject(const FSRef * ref)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  PBDeleteObjectSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
+ */
+extern OSErr 
+PBDeleteObjectSync(FSRefParam * paramBlock)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDeleteObjectAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4921,7 +5509,7 @@ PBDeleteObjectSync(FSRefParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBDeleteObjectAsync(FSRefParam * paramBlock);
+PBDeleteObjectAsync(FSRefParam * paramBlock)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4943,6 +5531,9 @@ PBDeleteObjectAsync(FSRefParam * paramBlock);
 /*
  *  FSMoveObject()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4952,11 +5543,14 @@ extern OSErr
 FSMoveObject(
   const FSRef *  ref,
   const FSRef *  destDirectory,
-  FSRef *        newRef);             /* can be NULL */
+  FSRef *        newRef)              /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBMoveObjectSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4964,11 +5558,14 @@ FSMoveObject(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBMoveObjectSync(FSRefParam * paramBlock);
+PBMoveObjectSync(FSRefParam * paramBlock)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBMoveObjectAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4976,7 +5573,7 @@ PBMoveObjectSync(FSRefParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBMoveObjectAsync(FSRefParam * paramBlock);
+PBMoveObjectAsync(FSRefParam * paramBlock)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4991,6 +5588,9 @@ PBMoveObjectAsync(FSRefParam * paramBlock);
 /*
  *  FSExchangeObjects()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4999,11 +5599,14 @@ PBMoveObjectAsync(FSRefParam * paramBlock);
 extern OSErr 
 FSExchangeObjects(
   const FSRef *  ref,
-  const FSRef *  destRef);
+  const FSRef *  destRef)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBExchangeObjectsSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5011,11 +5614,14 @@ FSExchangeObjects(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBExchangeObjectsSync(FSRefParam * paramBlock);
+PBExchangeObjectsSync(FSRefParam * paramBlock)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBExchangeObjectsAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5023,7 +5629,7 @@ PBExchangeObjectsSync(FSRefParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBExchangeObjectsAsync(FSRefParam * paramBlock);
+PBExchangeObjectsAsync(FSRefParam * paramBlock)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5047,6 +5653,9 @@ PBExchangeObjectsAsync(FSRefParam * paramBlock);
 /*
  *  FSRenameUnicode()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5058,11 +5667,14 @@ FSRenameUnicode(
   UniCharCount     nameLength,
   const UniChar *  name,
   TextEncoding     textEncodingHint,
-  FSRef *          newRef);                /* can be NULL */
+  FSRef *          newRef)                 /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBRenameUnicodeSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5070,11 +5682,14 @@ FSRenameUnicode(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBRenameUnicodeSync(FSRefParam * paramBlock);
+PBRenameUnicodeSync(FSRefParam * paramBlock)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBRenameUnicodeAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5082,7 +5697,7 @@ PBRenameUnicodeSync(FSRefParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBRenameUnicodeAsync(FSRefParam * paramBlock);
+PBRenameUnicodeAsync(FSRefParam * paramBlock)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5103,6 +5718,9 @@ PBRenameUnicodeAsync(FSRefParam * paramBlock);
 /*
  *  FSGetCatalogInfo()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5115,11 +5733,14 @@ FSGetCatalogInfo(
   FSCatalogInfo *       catalogInfo,       /* can be NULL */
   HFSUniStr255 *        outName,           /* can be NULL */
   FSSpec *              fsSpec,            /* can be NULL */
-  FSRef *               parentRef);        /* can be NULL */
+  FSRef *               parentRef)         /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetCatalogInfoSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5127,11 +5748,14 @@ FSGetCatalogInfo(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBGetCatalogInfoSync(FSRefParam * paramBlock);
+PBGetCatalogInfoSync(FSRefParam * paramBlock)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetCatalogInfoAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5139,7 +5763,7 @@ PBGetCatalogInfoSync(FSRefParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBGetCatalogInfoAsync(FSRefParam * paramBlock);
+PBGetCatalogInfoAsync(FSRefParam * paramBlock)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5158,6 +5782,9 @@ PBGetCatalogInfoAsync(FSRefParam * paramBlock);
 /*
  *  FSSetCatalogInfo()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5167,11 +5794,14 @@ extern OSErr
 FSSetCatalogInfo(
   const FSRef *          ref,
   FSCatalogInfoBitmap    whichInfo,
-  const FSCatalogInfo *  catalogInfo);
+  const FSCatalogInfo *  catalogInfo)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBSetCatalogInfoSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5179,11 +5809,14 @@ FSSetCatalogInfo(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBSetCatalogInfoSync(FSRefParam * paramBlock);
+PBSetCatalogInfoSync(FSRefParam * paramBlock)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBSetCatalogInfoAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5191,7 +5824,7 @@ PBSetCatalogInfoSync(FSRefParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBSetCatalogInfoAsync(FSRefParam * paramBlock);
+PBSetCatalogInfoAsync(FSRefParam * paramBlock)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5210,6 +5843,9 @@ PBSetCatalogInfoAsync(FSRefParam * paramBlock);
 /*
  *  FSOpenIterator()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5219,11 +5855,14 @@ extern OSErr
 FSOpenIterator(
   const FSRef *     container,
   FSIteratorFlags   iteratorFlags,
-  FSIterator *      iterator);
+  FSIterator *      iterator)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBOpenIteratorSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5231,11 +5870,14 @@ FSOpenIterator(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBOpenIteratorSync(FSCatalogBulkParam * paramBlock);
+PBOpenIteratorSync(FSCatalogBulkParam * paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBOpenIteratorAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5243,7 +5885,7 @@ PBOpenIteratorSync(FSCatalogBulkParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBOpenIteratorAsync(FSCatalogBulkParam * paramBlock);
+PBOpenIteratorAsync(FSCatalogBulkParam * paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5257,17 +5899,8 @@ PBOpenIteratorAsync(FSCatalogBulkParam * paramBlock);
 /*
  *  FSCloseIterator()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
- */
-extern OSErr 
-FSCloseIterator(FSIterator iterator);
-
-
-/*
- *  PBCloseIteratorSync()
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5275,11 +5908,29 @@ FSCloseIterator(FSIterator iterator);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBCloseIteratorSync(FSCatalogBulkParam * paramBlock);
+FSCloseIterator(FSIterator iterator)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  PBCloseIteratorSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
+ */
+extern OSErr 
+PBCloseIteratorSync(FSCatalogBulkParam * paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBCloseIteratorAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5287,7 +5938,7 @@ PBCloseIteratorSync(FSCatalogBulkParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBCloseIteratorAsync(FSCatalogBulkParam * paramBlock);
+PBCloseIteratorAsync(FSCatalogBulkParam * paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5312,6 +5963,9 @@ PBCloseIteratorAsync(FSCatalogBulkParam * paramBlock);
 /*
  *  FSGetCatalogInfoBulk()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5327,11 +5981,14 @@ FSGetCatalogInfoBulk(
   FSCatalogInfo *       catalogInfos,           /* can be NULL */
   FSRef *               refs,                   /* can be NULL */
   FSSpec *              specs,                  /* can be NULL */
-  HFSUniStr255 *        names);                 /* can be NULL */
+  HFSUniStr255 *        names)                  /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetCatalogInfoBulkSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5339,11 +5996,14 @@ FSGetCatalogInfoBulk(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBGetCatalogInfoBulkSync(FSCatalogBulkParam * paramBlock);
+PBGetCatalogInfoBulkSync(FSCatalogBulkParam * paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetCatalogInfoBulkAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5351,7 +6011,7 @@ PBGetCatalogInfoBulkSync(FSCatalogBulkParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBGetCatalogInfoBulkAsync(FSCatalogBulkParam * paramBlock);
+PBGetCatalogInfoBulkAsync(FSCatalogBulkParam * paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5379,6 +6039,9 @@ PBGetCatalogInfoBulkAsync(FSCatalogBulkParam * paramBlock);
 /*
  *  FSCatalogSearch()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5395,11 +6058,14 @@ FSCatalogSearch(
   FSCatalogInfo *         catalogInfos,           /* can be NULL */
   FSRef *                 refs,                   /* can be NULL */
   FSSpec *                specs,                  /* can be NULL */
-  HFSUniStr255 *          names);                 /* can be NULL */
+  HFSUniStr255 *          names)                  /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBCatalogSearchSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5407,11 +6073,14 @@ FSCatalogSearch(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBCatalogSearchSync(FSCatalogBulkParam * paramBlock);
+PBCatalogSearchSync(FSCatalogBulkParam * paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBCatalogSearchAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5419,7 +6088,7 @@ PBCatalogSearchSync(FSCatalogBulkParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBCatalogSearchAsync(FSCatalogBulkParam * paramBlock);
+PBCatalogSearchAsync(FSCatalogBulkParam * paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5435,6 +6104,9 @@ PBCatalogSearchAsync(FSCatalogBulkParam * paramBlock);
 /*
  *  FSCreateFork()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5444,11 +6116,14 @@ extern OSErr
 FSCreateFork(
   const FSRef *    ref,
   UniCharCount     forkNameLength,
-  const UniChar *  forkName);            /* can be NULL */
+  const UniChar *  forkName)             /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBCreateForkSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5456,11 +6131,14 @@ FSCreateFork(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBCreateForkSync(FSForkIOParam * paramBlock);
+PBCreateForkSync(FSForkIOParam * paramBlock)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBCreateForkAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5468,7 +6146,7 @@ PBCreateForkSync(FSForkIOParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBCreateForkAsync(FSForkIOParam * paramBlock);
+PBCreateForkAsync(FSForkIOParam * paramBlock)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5484,6 +6162,9 @@ PBCreateForkAsync(FSForkIOParam * paramBlock);
 /*
  *  FSDeleteFork()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5493,11 +6174,14 @@ extern OSErr
 FSDeleteFork(
   const FSRef *    ref,
   UniCharCount     forkNameLength,
-  const UniChar *  forkName);            /* can be NULL */
+  const UniChar *  forkName)             /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDeleteForkSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5505,11 +6189,14 @@ FSDeleteFork(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBDeleteForkSync(FSForkIOParam * paramBlock);
+PBDeleteForkSync(FSForkIOParam * paramBlock)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBDeleteForkAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5517,7 +6204,7 @@ PBDeleteForkSync(FSForkIOParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBDeleteForkAsync(FSForkIOParam * paramBlock);
+PBDeleteForkAsync(FSForkIOParam * paramBlock)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5537,6 +6224,9 @@ PBDeleteForkAsync(FSForkIOParam * paramBlock);
 /*
  *  FSIterateForks()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5548,11 +6238,14 @@ FSIterateForks(
   CatPositionRec *  forkIterator,
   HFSUniStr255 *    forkName,               /* can be NULL */
   SInt64 *          forkSize,               /* can be NULL */
-  UInt64 *          forkPhysicalSize);      /* can be NULL */
+  UInt64 *          forkPhysicalSize)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBIterateForksSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5560,11 +6253,14 @@ FSIterateForks(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBIterateForksSync(FSForkIOParam * paramBlock);
+PBIterateForksSync(FSForkIOParam * paramBlock)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBIterateForksAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5572,7 +6268,7 @@ PBIterateForksSync(FSForkIOParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBIterateForksAsync(FSForkIOParam * paramBlock);
+PBIterateForksAsync(FSForkIOParam * paramBlock)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5593,6 +6289,9 @@ PBIterateForksAsync(FSForkIOParam * paramBlock);
 /*
  *  FSOpenFork()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5604,11 +6303,14 @@ FSOpenFork(
   UniCharCount     forkNameLength,
   const UniChar *  forkName,             /* can be NULL */
   SInt8            permissions,
-  SInt16 *         forkRefNum);
+  SInt16 *         forkRefNum)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBOpenForkSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5616,11 +6318,14 @@ FSOpenFork(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBOpenForkSync(FSForkIOParam * paramBlock);
+PBOpenForkSync(FSForkIOParam * paramBlock)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBOpenForkAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5628,7 +6333,7 @@ PBOpenForkSync(FSForkIOParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBOpenForkAsync(FSForkIOParam * paramBlock);
+PBOpenForkAsync(FSForkIOParam * paramBlock)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5648,6 +6353,9 @@ PBOpenForkAsync(FSForkIOParam * paramBlock);
 /*
  *  FSReadFork()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5660,11 +6368,14 @@ FSReadFork(
   SInt64       positionOffset,
   ByteCount    requestCount,
   void *       buffer,
-  ByteCount *  actualCount);         /* can be NULL */
+  ByteCount *  actualCount)          /* can be NULL */        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBReadForkSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5672,11 +6383,14 @@ FSReadFork(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBReadForkSync(FSForkIOParam * paramBlock);
+PBReadForkSync(FSForkIOParam * paramBlock)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBReadForkAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5684,7 +6398,7 @@ PBReadForkSync(FSForkIOParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBReadForkAsync(FSForkIOParam * paramBlock);
+PBReadForkAsync(FSForkIOParam * paramBlock)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5704,6 +6418,9 @@ PBReadForkAsync(FSForkIOParam * paramBlock);
 /*
  *  FSWriteFork()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5716,11 +6433,14 @@ FSWriteFork(
   SInt64        positionOffset,
   ByteCount     requestCount,
   const void *  buffer,
-  ByteCount *   actualCount);         /* can be NULL */
+  ByteCount *   actualCount)          /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBWriteForkSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5728,11 +6448,14 @@ FSWriteFork(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBWriteForkSync(FSForkIOParam * paramBlock);
+PBWriteForkSync(FSForkIOParam * paramBlock)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBWriteForkAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5740,7 +6463,7 @@ PBWriteForkSync(FSForkIOParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBWriteForkAsync(FSForkIOParam * paramBlock);
+PBWriteForkAsync(FSForkIOParam * paramBlock)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5756,6 +6479,9 @@ PBWriteForkAsync(FSForkIOParam * paramBlock);
 /*
  *  FSGetForkPosition()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5764,11 +6490,14 @@ PBWriteForkAsync(FSForkIOParam * paramBlock);
 extern OSErr 
 FSGetForkPosition(
   SInt16    forkRefNum,
-  SInt64 *  position);
+  SInt64 *  position)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetForkPositionSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5776,11 +6505,14 @@ FSGetForkPosition(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBGetForkPositionSync(FSForkIOParam * paramBlock);
+PBGetForkPositionSync(FSForkIOParam * paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetForkPositionAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5788,7 +6520,7 @@ PBGetForkPositionSync(FSForkIOParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBGetForkPositionAsync(FSForkIOParam * paramBlock);
+PBGetForkPositionAsync(FSForkIOParam * paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5805,6 +6537,9 @@ PBGetForkPositionAsync(FSForkIOParam * paramBlock);
 /*
  *  FSSetForkPosition()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5814,11 +6549,14 @@ extern OSErr
 FSSetForkPosition(
   SInt16   forkRefNum,
   UInt16   positionMode,
-  SInt64   positionOffset);
+  SInt64   positionOffset)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBSetForkPositionSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5826,11 +6564,14 @@ FSSetForkPosition(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBSetForkPositionSync(FSForkIOParam * paramBlock);
+PBSetForkPositionSync(FSForkIOParam * paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBSetForkPositionAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5838,7 +6579,7 @@ PBSetForkPositionSync(FSForkIOParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBSetForkPositionAsync(FSForkIOParam * paramBlock);
+PBSetForkPositionAsync(FSForkIOParam * paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5853,6 +6594,9 @@ PBSetForkPositionAsync(FSForkIOParam * paramBlock);
 /*
  *  FSGetForkSize()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5861,11 +6605,14 @@ PBSetForkPositionAsync(FSForkIOParam * paramBlock);
 extern OSErr 
 FSGetForkSize(
   SInt16    forkRefNum,
-  SInt64 *  forkSize);
+  SInt64 *  forkSize)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetForkSizeSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5873,11 +6620,14 @@ FSGetForkSize(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBGetForkSizeSync(FSForkIOParam * paramBlock);
+PBGetForkSizeSync(FSForkIOParam * paramBlock)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetForkSizeAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5885,7 +6635,7 @@ PBGetForkSizeSync(FSForkIOParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBGetForkSizeAsync(FSForkIOParam * paramBlock);
+PBGetForkSizeAsync(FSForkIOParam * paramBlock)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5902,6 +6652,9 @@ PBGetForkSizeAsync(FSForkIOParam * paramBlock);
 /*
  *  FSSetForkSize()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5911,11 +6664,14 @@ extern OSErr
 FSSetForkSize(
   SInt16   forkRefNum,
   UInt16   positionMode,
-  SInt64   positionOffset);
+  SInt64   positionOffset)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBSetForkSizeSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5923,11 +6679,14 @@ FSSetForkSize(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBSetForkSizeSync(FSForkIOParam * paramBlock);
+PBSetForkSizeSync(FSForkIOParam * paramBlock)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBSetForkSizeAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5935,7 +6694,7 @@ PBSetForkSizeSync(FSForkIOParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBSetForkSizeAsync(FSForkIOParam * paramBlock);
+PBSetForkSizeAsync(FSForkIOParam * paramBlock)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -5967,6 +6726,9 @@ PBSetForkSizeAsync(FSForkIOParam * paramBlock);
 /*
  *  FSAllocateFork()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5979,11 +6741,14 @@ FSAllocateFork(
   UInt16              positionMode,
   SInt64              positionOffset,
   UInt64              requestCount,
-  UInt64 *            actualCount);         /* can be NULL */
+  UInt64 *            actualCount)          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBAllocateForkSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -5991,11 +6756,14 @@ FSAllocateFork(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBAllocateForkSync(FSForkIOParam * paramBlock);
+PBAllocateForkSync(FSForkIOParam * paramBlock)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBAllocateForkAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -6003,7 +6771,7 @@ PBAllocateForkSync(FSForkIOParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBAllocateForkAsync(FSForkIOParam * paramBlock);
+PBAllocateForkAsync(FSForkIOParam * paramBlock)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -6018,17 +6786,8 @@ PBAllocateForkAsync(FSForkIOParam * paramBlock);
 /*
  *  FSFlushFork()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
- */
-extern OSErr 
-FSFlushFork(SInt16 forkRefNum);
-
-
-/*
- *  PBFlushForkSync()
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -6036,11 +6795,29 @@ FSFlushFork(SInt16 forkRefNum);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBFlushForkSync(FSForkIOParam * paramBlock);
+FSFlushFork(SInt16 forkRefNum)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  PBFlushForkSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
+ */
+extern OSErr 
+PBFlushForkSync(FSForkIOParam * paramBlock)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBFlushForkAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -6048,7 +6825,7 @@ PBFlushForkSync(FSForkIOParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBFlushForkAsync(FSForkIOParam * paramBlock);
+PBFlushForkAsync(FSForkIOParam * paramBlock)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -6063,17 +6840,8 @@ PBFlushForkAsync(FSForkIOParam * paramBlock);
 /*
  *  FSCloseFork()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
- */
-extern OSErr 
-FSCloseFork(SInt16 forkRefNum);
-
-
-/*
- *  PBCloseForkSync()
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -6081,11 +6849,29 @@ FSCloseFork(SInt16 forkRefNum);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBCloseForkSync(FSForkIOParam * paramBlock);
+FSCloseFork(SInt16 forkRefNum)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  PBCloseForkSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
+ */
+extern OSErr 
+PBCloseForkSync(FSForkIOParam * paramBlock)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBCloseForkAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -6093,7 +6879,7 @@ PBCloseForkSync(FSForkIOParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBCloseForkAsync(FSForkIOParam * paramBlock);
+PBCloseForkAsync(FSForkIOParam * paramBlock)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -6123,6 +6909,9 @@ PBCloseForkAsync(FSForkIOParam * paramBlock);
 /*
  *  FSGetForkCBInfo()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6136,11 +6925,14 @@ FSGetForkCBInfo(
   SInt16 *         actualRefNum,        /* can be NULL */
   FSForkInfo *     forkInfo,            /* can be NULL */
   FSRef *          ref,                 /* can be NULL */
-  HFSUniStr255 *   outForkName);        /* can be NULL */
+  HFSUniStr255 *   outForkName)         /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetForkCBInfoSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -6148,11 +6940,14 @@ FSGetForkCBInfo(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBGetForkCBInfoSync(FSForkCBInfoParam * paramBlock);
+PBGetForkCBInfoSync(FSForkCBInfoParam * paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetForkCBInfoAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -6160,7 +6955,7 @@ PBGetForkCBInfoSync(FSForkCBInfoParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBGetForkCBInfoAsync(FSForkCBInfoParam * paramBlock);
+PBGetForkCBInfoAsync(FSForkCBInfoParam * paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -6184,6 +6979,9 @@ PBGetForkCBInfoAsync(FSForkCBInfoParam * paramBlock);
 /*
  *  FSGetVolumeInfo()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6197,11 +6995,14 @@ FSGetVolumeInfo(
   FSVolumeInfoBitmap   whichInfo,
   FSVolumeInfo *       info,                /* can be NULL */
   HFSUniStr255 *       volumeName,          /* can be NULL */
-  FSRef *              rootDirectory);      /* can be NULL */
+  FSRef *              rootDirectory)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetVolumeInfoSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -6209,11 +7010,14 @@ FSGetVolumeInfo(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBGetVolumeInfoSync(FSVolumeInfoParam * paramBlock);
+PBGetVolumeInfoSync(FSVolumeInfoParam * paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBGetVolumeInfoAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -6221,7 +7025,7 @@ PBGetVolumeInfoSync(FSVolumeInfoParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBGetVolumeInfoAsync(FSVolumeInfoParam * paramBlock);
+PBGetVolumeInfoAsync(FSVolumeInfoParam * paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -6240,6 +7044,9 @@ PBGetVolumeInfoAsync(FSVolumeInfoParam * paramBlock);
 /*
  *  FSSetVolumeInfo()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6249,11 +7056,14 @@ extern OSErr
 FSSetVolumeInfo(
   FSVolumeRefNum        volume,
   FSVolumeInfoBitmap    whichInfo,
-  const FSVolumeInfo *  info);
+  const FSVolumeInfo *  info)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBSetVolumeInfoSync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -6261,11 +7071,14 @@ FSSetVolumeInfo(
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-PBSetVolumeInfoSync(FSVolumeInfoParam * paramBlock);
+PBSetVolumeInfoSync(FSVolumeInfoParam * paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  PBSetVolumeInfoAsync()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -6273,7 +7086,7 @@ PBSetVolumeInfoSync(FSVolumeInfoParam * paramBlock);
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern void 
-PBSetVolumeInfoAsync(FSVolumeInfoParam * paramBlock);
+PBSetVolumeInfoAsync(FSVolumeInfoParam * paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6283,13 +7096,16 @@ PBSetVolumeInfoAsync(FSVolumeInfoParam * paramBlock);
 /*
  *  FSGetDataForkName()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-FSGetDataForkName(HFSUniStr255 * dataForkName);
+FSGetDataForkName(HFSUniStr255 * dataForkName)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6300,13 +7116,16 @@ FSGetDataForkName(HFSUniStr255 * dataForkName);
 /*
  *  FSGetResourceForkName()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
 extern OSErr 
-FSGetResourceForkName(HFSUniStr255 * resourceForkName);
+FSGetResourceForkName(HFSUniStr255 * resourceForkName)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6314,6 +7133,9 @@ FSGetResourceForkName(HFSUniStr255 * resourceForkName);
  *  
  *  Summary:
  *    converts an FSRef to a POSIX path
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Parameters:
  *    
@@ -6336,7 +7158,7 @@ extern OSStatus
 FSRefMakePath(
   const FSRef *  ref,
   UInt8 *        path,
-  UInt32         maxPathSize);
+  UInt32         maxPathSize)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6344,6 +7166,9 @@ FSRefMakePath(
  *  
  *  Summary:
  *    converts a POSIX path to an FSRef
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Parameters:
  *    
@@ -6366,7 +7191,7 @@ extern OSStatus
 FSPathMakeRef(
   const UInt8 *  path,
   FSRef *        ref,
-  Boolean *      isDirectory);      /* can be NULL */
+  Boolean *      isDirectory)       /* can be NULL */         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -6380,9 +7205,6 @@ FSPathMakeRef(
  *    receive notifications when application code broadcasts change
  *    messages about that directory.
  */
-
-  /*
-   */
 typedef UInt32 FNMessage;
 enum {
   kFNDirectoryModifiedMessage   = 1
@@ -6393,6 +7215,16 @@ enum {
  *  
  *  Summary:
  *    Broadcasts notification of changes to the specified directory.
+ *  
+ *  Discussion:
+ *    FNNotify is used to notify system clients (such as the Finder) of
+ *    modifications to the contents of a directory, specifically
+ *    addition or removal of files or folders from the directory. The
+ *    Finder and other system clients will refresh their views of the
+ *    specified directory when they receive the change notification.
+ *    FNNotify is not meant to notify the Finder of changes to a
+ *    specific file (for example, changes to a file's type or creator);
+ *    for that purpose, use a kAESync AppleEvent sent to the Finder.
  *  
  *  Parameters:
  *    
@@ -6415,7 +7247,7 @@ extern OSStatus
 FNNotify(
   const FSRef *  ref,
   FNMessage      message,
-  OptionBits     flags);
+  OptionBits     flags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6445,7 +7277,7 @@ extern OSStatus
 FNNotifyByPath(
   const UInt8 *  path,
   FNMessage      message,
-  OptionBits     flags);
+  OptionBits     flags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -6473,7 +7305,7 @@ FNNotifyByPath(
 extern OSStatus 
 FNNotifyAll(
   FNMessage    message,
-  OptionBits   flags);
+  OptionBits   flags)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -6494,6 +7326,7 @@ typedef struct OpaqueFNSubscriptionRef*  FNSubscriptionRef;
  *  Discussion:
  *    Options that can be specified at subscription time.
  */
+enum {
 
   /*
    * Specify this option if you do not want to receive notifications on
@@ -6501,7 +7334,6 @@ typedef struct OpaqueFNSubscriptionRef*  FNSubscriptionRef;
    * subscription is also implicitly a subscription to wildcard
    * notifications
    */
-enum {
   kFNNoImplicitAllSubscription  = (1 << 0)
 };
 
@@ -6538,7 +7370,7 @@ typedef STACK_UPP_TYPE(FNSubscriptionProcPtr)                   FNSubscriptionUP
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern FNSubscriptionUPP
-NewFNSubscriptionUPP(FNSubscriptionProcPtr userRoutine);
+NewFNSubscriptionUPP(FNSubscriptionProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeFNSubscriptionUPP()
@@ -6549,7 +7381,7 @@ NewFNSubscriptionUPP(FNSubscriptionProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeFNSubscriptionUPP(FNSubscriptionUPP userUPP);
+DisposeFNSubscriptionUPP(FNSubscriptionUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeFNSubscriptionUPP()
@@ -6565,7 +7397,7 @@ InvokeFNSubscriptionUPP(
   OptionBits         flags,
   void *             refcon,
   FNSubscriptionRef  subscription,
-  FNSubscriptionUPP  userUPP);
+  FNSubscriptionUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  FNSubscribe()
@@ -6602,7 +7434,7 @@ FNSubscribe(
   FNSubscriptionUPP    callback,
   void *               refcon,
   OptionBits           flags,
-  FNSubscriptionRef *  subscription);
+  FNSubscriptionRef *  subscription)                          AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -6640,7 +7472,7 @@ FNSubscribeByPath(
   FNSubscriptionUPP    callback,
   void *               refcon,
   OptionBits           flags,
-  FNSubscriptionRef *  subscription);
+  FNSubscriptionRef *  subscription)                          AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -6661,7 +7493,7 @@ FNSubscribeByPath(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-FNUnsubscribe(FNSubscriptionRef subscription);
+FNUnsubscribe(FNSubscriptionRef subscription)                 AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -6691,17 +7523,745 @@ FNUnsubscribe(FNSubscriptionRef subscription);
 extern OSStatus 
 FNGetDirectoryForSubscription(
   FNSubscriptionRef   subscription,
-  FSRef *             ref);
+  FSRef *             ref)                                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+/* Async Volume Operation Status return values*/
+enum {
+  kAsyncMountInProgress         = 1,
+  kAsyncMountComplete           = 2,
+  kAsyncUnmountInProgress       = 3,
+  kAsyncUnmountComplete         = 4,
+  kAsyncEjectInProgress         = 5,
+  kAsyncEjectComplete           = 6
+};
+
+typedef UInt32                          FSMountStatus;
+typedef UInt32                          FSEjectStatus;
+typedef UInt32                          FSUnmountStatus;
+typedef struct OpaqueFSVolumeOperation*  FSVolumeOperation;
+typedef CALLBACK_API_C( void , FSVolumeMountProcPtr )(FSVolumeOperation volumeOp, void *clientData, OSStatus err, FSVolumeRefNum mountedVolumeRefNum);
+typedef CALLBACK_API_C( void , FSVolumeUnmountProcPtr )(FSVolumeOperation volumeOp, void *clientData, OSStatus err, FSVolumeRefNum volumeRefNum, pid_t dissenter);
+typedef CALLBACK_API_C( void , FSVolumeEjectProcPtr )(FSVolumeOperation volumeOp, void *clientData, OSStatus err, FSVolumeRefNum volumeRefNum, pid_t dissenter);
+typedef STACK_UPP_TYPE(FSVolumeMountProcPtr)                    FSVolumeMountUPP;
+typedef STACK_UPP_TYPE(FSVolumeUnmountProcPtr)                  FSVolumeUnmountUPP;
+typedef STACK_UPP_TYPE(FSVolumeEjectProcPtr)                    FSVolumeEjectUPP;
+/*
+ *  NewFSVolumeMountUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib on Mac OS X
+ *    Non-Carbon CFM:   not available
+ */
+extern FSVolumeMountUPP
+NewFSVolumeMountUPP(FSVolumeMountProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/*
+ *  NewFSVolumeUnmountUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib on Mac OS X
+ *    Non-Carbon CFM:   not available
+ */
+extern FSVolumeUnmountUPP
+NewFSVolumeUnmountUPP(FSVolumeUnmountProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/*
+ *  NewFSVolumeEjectUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib on Mac OS X
+ *    Non-Carbon CFM:   not available
+ */
+extern FSVolumeEjectUPP
+NewFSVolumeEjectUPP(FSVolumeEjectProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/*
+ *  DisposeFSVolumeMountUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib on Mac OS X
+ *    Non-Carbon CFM:   not available
+ */
+extern void
+DisposeFSVolumeMountUPP(FSVolumeMountUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/*
+ *  DisposeFSVolumeUnmountUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib on Mac OS X
+ *    Non-Carbon CFM:   not available
+ */
+extern void
+DisposeFSVolumeUnmountUPP(FSVolumeUnmountUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/*
+ *  DisposeFSVolumeEjectUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib on Mac OS X
+ *    Non-Carbon CFM:   not available
+ */
+extern void
+DisposeFSVolumeEjectUPP(FSVolumeEjectUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/*
+ *  InvokeFSVolumeMountUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib on Mac OS X
+ *    Non-Carbon CFM:   not available
+ */
+extern void
+InvokeFSVolumeMountUPP(
+  FSVolumeOperation  volumeOp,
+  void *             clientData,
+  OSStatus           err,
+  FSVolumeRefNum     mountedVolumeRefNum,
+  FSVolumeMountUPP   userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/*
+ *  InvokeFSVolumeUnmountUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib on Mac OS X
+ *    Non-Carbon CFM:   not available
+ */
+extern void
+InvokeFSVolumeUnmountUPP(
+  FSVolumeOperation   volumeOp,
+  void *              clientData,
+  OSStatus            err,
+  FSVolumeRefNum      volumeRefNum,
+  pid_t               dissenter,
+  FSVolumeUnmountUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/*
+ *  InvokeFSVolumeEjectUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        in CarbonLib on Mac OS X
+ *    Non-Carbon CFM:   not available
+ */
+extern void
+InvokeFSVolumeEjectUPP(
+  FSVolumeOperation  volumeOp,
+  void *             clientData,
+  OSStatus           err,
+  FSVolumeRefNum     volumeRefNum,
+  pid_t              dissenter,
+  FSVolumeEjectUPP   userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/*
+ *  FSCreateVolumeOperation()
+ *  
+ *  Discussion:
+ *    This routine will return an FSVolumeOperation which can be used
+ *    for an async volume operation.  When the operation is completed
+ *    the volumeOp should be disposed of to free the memory associated
+ *    with the operation using FSDisposeVolumeOperation.
+ *  
+ *  Parameters:
+ *    
+ *    volumeOp:
+ *      The new FSVolumeOperation.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FSCreateVolumeOperation(FSVolumeOperation * volumeOp)         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSDisposeVolumeOperation()
+ *  
+ *  Discussion:
+ *    This routine will release the memory associated with the passed
+ *    in volumeOp. It will return paramErr is the volumeOp is in use.
+ *  
+ *  Parameters:
+ *    
+ *    volumeOp:
+ *      The FSVolumeOperation to release.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FSDisposeVolumeOperation(FSVolumeOperation volumeOp)          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSMountLocalVolumeSync()
+ *  
+ *  Discussion:
+ *    This routine will mount the disk specified by diskID at mountDir
+ *    (or the default location if mountDir is NULL).  This routine
+ *    returns after the mount is complete.
+ *  
+ *  Parameters:
+ *    
+ *    diskID:
+ *      The disk to mount.
+ *    
+ *    mountDir:
+ *      Pass in NULL (currently only NULL is supported).
+ *    
+ *    mountedVolumeRefNum:
+ *      The volume ref num of the newly mounted volume.
+ *    
+ *    flags:
+ *      Options for future use.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FSMountLocalVolumeSync(
+  CFStringRef       diskID,
+  CFURLRef          mountDir,                  /* can be NULL */
+  FSVolumeRefNum *  mountedVolumeRefNum,
+  OptionBits        flags)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSMountLocalVolumeAsync()
+ *  
+ *  Discussion:
+ *    This routine will start the process to disk specified by diskID
+ *    at mountDir (or the default location if mountDir is NULL).  If a
+ *    callback is provided the provided function will be called when
+ *    the mount operation is complete.  Once this routine returns noErr
+ *    the status of the operation can be found using
+ *    FSGetAsyncMountStatus.
+ *  
+ *  Parameters:
+ *    
+ *    diskID:
+ *      The disk to mount.
+ *    
+ *    mountDir:
+ *      Pass in NULL (currently only NULL is supported).
+ *    
+ *    volumeOp:
+ *      An FSVolumeOperation returned by FSCreateVolumeOperation
+ *    
+ *    clientData:
+ *      client data associated with the operation.
+ *    
+ *    flags:
+ *      Options for future use.
+ *    
+ *    callback:
+ *      Function to call when mount is complete.
+ *    
+ *    runloop:
+ *      Runloop to run on.
+ *    
+ *    runloopMode:
+ *      Mode for runloop.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FSMountLocalVolumeAsync(
+  CFStringRef         diskID,
+  CFURLRef            mountDir,          /* can be NULL */
+  FSVolumeOperation   volumeOp,
+  void *              clientData,        /* can be NULL */
+  OptionBits          flags,
+  FSVolumeMountUPP    callback,          /* can be NULL */
+  CFRunLoopRef        runloop,
+  CFStringRef         runloopMode)                            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSMountServerVolumeSync()
+ *  
+ *  Discussion:
+ *    This routine will mount the server specified by url at mountDir
+ *    (or the default location if mountDir is NULL).  An optional user
+ *    and password can be passed in for authentication. If no user or
+ *    password is provided then the underlying file system will handle
+ *    authentication if required.  This routine returns after the mount
+ *    is complete.
+ *  
+ *  Parameters:
+ *    
+ *    url:
+ *      The server to mount.
+ *    
+ *    mountDir:
+ *      The directory to mount the server to (default if NULL).
+ *    
+ *    user:
+ *      String to pass as user for authentication.
+ *    
+ *    password:
+ *      String to pass as password for authenticated log in.
+ *    
+ *    mountedVolumeRefNum:
+ *      The volume ref num of the newly mounted volume.
+ *    
+ *    flags:
+ *      Options for future use.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FSMountServerVolumeSync(
+  CFURLRef          url,
+  CFURLRef          mountDir,
+  CFStringRef       user,
+  CFStringRef       password,
+  FSVolumeRefNum *  mountedVolumeRefNum,
+  OptionBits        flags)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSMountServerVolumeAsync()
+ *  
+ *  Discussion:
+ *    This routine will start the process to mount the server specified
+ *    by url at mountDir (or the default location if mountDir is NULL).
+ *     An optional user and password can be passed in for
+ *    authentication. If no user or password is provided then the
+ *    underlying file system will handle authentication if required. 
+ *    If a callback is provided the provided function will be called
+ *    when the mount operation is complete.  Once this routine returns
+ *    noErr the status of the operation can be found using
+ *    FSGetAsyncMountStatus.
+ *  
+ *  Parameters:
+ *    
+ *    url:
+ *      The server to mount.
+ *    
+ *    mountDir:
+ *      The directory to mount the server to (default if NULL).
+ *    
+ *    user:
+ *      String to pass as user for authentication.
+ *    
+ *    password:
+ *      String to pass as password for authenticated log in.
+ *    
+ *    volumeOp:
+ *      An FSVolumeOperation returned by FSCreateVolumeOperation
+ *    
+ *    clientData:
+ *      client data associated with the operation.
+ *    
+ *    flags:
+ *      Options for future use.
+ *    
+ *    callback:
+ *      Function to call when mount is complete.
+ *    
+ *    runloop:
+ *      Runloop run on.
+ *    
+ *    runloopMode:
+ *      Mode for runloop.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FSMountServerVolumeAsync(
+  CFURLRef            url,
+  CFURLRef            mountDir,          /* can be NULL */
+  CFStringRef         user,              /* can be NULL */
+  CFStringRef         password,          /* can be NULL */
+  FSVolumeOperation   volumeOp,
+  void *              clientData,        /* can be NULL */
+  OptionBits          flags,
+  FSVolumeMountUPP    callback,          /* can be NULL */
+  CFRunLoopRef        runloop,
+  CFStringRef         runloopMode)                            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSGetAsyncMountStatus()
+ *  
+ *  Discussion:
+ *    This routine returns the current status of an asynchronous mount
+ *    operation. A return value of noErr signifies that the status
+ *    parameter has been filled with valid information.  If the status
+ *    is kAsyncMountComplete then the rest of data returned is valid. 
+ *    If the status is anything else then the volumeOpStatus and
+ *    mountedVolumeRefNum parameters are invalid (The clientData will
+ *    be ok).
+ *  
+ *  Parameters:
+ *    
+ *    volumeOp:
+ *      The async volume operation to get status about.
+ *    
+ *    status:
+ *      The status of the operation.
+ *    
+ *    volumeOpStatus:
+ *      If status is kAsyncMountComplete then this contains the
+ *      OSStatus for the operation.
+ *    
+ *    mountedVolumeRefNum:
+ *      If status is kAsyncMountComplete and volumeOpStatus is noErr
+ *      then this is the volume ref num for the newly mounted volume.
+ *    
+ *    clientData:
+ *      client data associated with the original
+ *      FSMountServerVolumeAsync operation.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FSGetAsyncMountStatus(
+  FSVolumeOperation   volumeOp,
+  FSMountStatus *     status,
+  OSStatus *          volumeOpStatus,            /* can be NULL */
+  FSVolumeRefNum *    mountedVolumeRefNum,       /* can be NULL */
+  void **             clientData)                /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+/*
+ *  FSUnmountVolumeSync()
+ *  
+ *  Discussion:
+ *    This routine unmounts the volume specified by vRefNum.  If the
+ *    volume cannot be unmounted the pid of the process which denied
+ *    the unmount will be returned in the dissenter parameter.  This
+ *    routine returns after the unmount is complete.
+ *  
+ *  Parameters:
+ *    
+ *    vRefNum:
+ *      The volume reference number of the volume to unmount.
+ *    
+ *    flags:
+ *      Options for future use.
+ *    
+ *    dissenter:
+ *      pid of the process which denied the unmount if the unmount is
+ *      denied.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FSUnmountVolumeSync(
+  FSVolumeRefNum   vRefNum,
+  OptionBits       flags,
+  pid_t *          dissenter)       /* can be NULL */         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSUnmountVolumeAsync()
+ *  
+ *  Discussion:
+ *    This routine starts the process of unmounting the volume
+ *    specified by vRefNum. If a callback is provided the provided
+ *    function will be called when the unmount operation is complete. 
+ *    Once this routine returns noErr the status of the operation can
+ *    be found using FSGetAsyncUnmountStatus.
+ *  
+ *  Parameters:
+ *    
+ *    vRefNum:
+ *      The volume reference number of the volume to unmount.
+ *    
+ *    flags:
+ *      Options for future use.
+ *    
+ *    volumeOp:
+ *      An FSVolumeOperation returned by FSCreateVolumeOperation
+ *    
+ *    clientData:
+ *      client data associated with the operation.
+ *    
+ *    callback:
+ *      Function to call when unmount is complete.
+ *    
+ *    runloop:
+ *      Runloop to run on.
+ *    
+ *    runloopMode:
+ *      Mode for runloop.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FSUnmountVolumeAsync(
+  FSVolumeRefNum       vRefNum,
+  OptionBits           flags,
+  FSVolumeOperation    volumeOp,
+  void *               clientData,
+  FSVolumeUnmountUPP   callback,          /* can be NULL */
+  CFRunLoopRef         runloop,
+  CFStringRef          runloopMode)                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSGetAsyncUnmountStatus()
+ *  
+ *  Discussion:
+ *    This routine returns the current status of an asynchronous
+ *    unmount operation. A return value of noErr signifies that the
+ *    status parameter has been filled with valid information.
+ *  
+ *  Parameters:
+ *    
+ *    volumeOp:
+ *      The async volume operation to get status about.
+ *    
+ *    status:
+ *      The status of the operation.
+ *    
+ *    volumeOpStatus:
+ *      If status is kAsyncUnmountComplete then this contains the
+ *      OSStatus for the operation.
+ *    
+ *    volumeRefNum:
+ *      volume reference number of volume being unmounted.
+ *    
+ *    dissenter:
+ *      pid of the process which denied the unmount if the unmount is
+ *      denied.
+ *    
+ *    clientData:
+ *      client data associated with the original
+ *      FSMountServerVolumeAsync operation.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FSGetAsyncUnmountStatus(
+  FSVolumeOperation   volumeOp,
+  FSUnmountStatus *   status,
+  OSStatus *          volumeOpStatus,       /* can be NULL */
+  FSVolumeRefNum *    volumeRefNum,         /* can be NULL */
+  pid_t *             dissenter,            /* can be NULL */
+  void **             clientData)           /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSCancelVolumeOperation()
+ *  
+ *  Discussion:
+ *    This routine will cancel and outstanding asynchronous volume
+ *    mounting operation. It currently is only supported for server
+ *    mounts.
+ *  
+ *  Parameters:
+ *    
+ *    volumeOp:
+ *      The async volume operation to cancel.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FSCancelVolumeOperation(FSVolumeOperation volumeOp)           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSEjectVolumeSync()
+ *  
+ *  Discussion:
+ *    This routine ejects the volume specified by vRefNum.  If the
+ *    volume cannot be ejected the pid of the process which denied the
+ *    unmount will be returned in the dissenter parameter.  This
+ *    routine returns after the eject is complete.  Ejecting a volume
+ *    will result in the unmounting of other volumes on the same device.
+ *  
+ *  Parameters:
+ *    
+ *    vRefNum:
+ *      The volume reference number of the volume to eject.
+ *    
+ *    flags:
+ *      Options for future use.
+ *    
+ *    dissenter:
+ *      pid of the process which denied the unmount if the eject is
+ *      denied.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FSEjectVolumeSync(
+  FSVolumeRefNum   vRefNum,
+  OptionBits       flags,
+  pid_t *          dissenter)       /* can be NULL */         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSEjectVolumeAsync()
+ *  
+ *  Discussion:
+ *    This routine starts the process of ejecting the volume specified
+ *    by vRefNum. If a callback is provided the provided function will
+ *    be called when the eject operation is complete.  Once this
+ *    routine returns noErr the status of the operation can be found
+ *    using FSGetAsyncEjectStatus.
+ *  
+ *  Parameters:
+ *    
+ *    vRefNum:
+ *      The volume reference number of the volume to eject.
+ *    
+ *    flags:
+ *      Options for future use.
+ *    
+ *    volumeOp:
+ *      An FSVolumeOperation returned by FSCreateVolumeOperation
+ *    
+ *    clientData:
+ *      client data associated with the operation.
+ *    
+ *    callback:
+ *      Function to call when eject is complete.
+ *    
+ *    runloop:
+ *      Runloop to run on.
+ *    
+ *    runloopMode:
+ *      Mode for runloop.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FSEjectVolumeAsync(
+  FSVolumeRefNum      vRefNum,
+  OptionBits          flags,
+  FSVolumeOperation   volumeOp,
+  void *              clientData,
+  FSVolumeEjectUPP    callback,          /* can be NULL */
+  CFRunLoopRef        runloop,
+  CFStringRef         runloopMode)                            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSGetAsyncEjectStatus()
+ *  
+ *  Discussion:
+ *    This routine returns the current status of an asynchronous eject
+ *    operation. A return value of noErr signifies that the status
+ *    parameter has been filled with valid information.
+ *  
+ *  Parameters:
+ *    
+ *    volumeOp:
+ *      The async volume operation to get status about.
+ *    
+ *    status:
+ *      The status of the operation.
+ *    
+ *    volumeOpStatus:
+ *      If status is kAsyncEjectComplete then this contains the
+ *      OSStatus for the operation.
+ *    
+ *    volumeRefNum:
+ *      volume reference number of volume being ejected.
+ *    
+ *    dissenter:
+ *      pid of the process which denied the unmount if the eject is
+ *      denied.
+ *    
+ *    clientData:
+ *      client data associated with the original
+ *      FSMountServerVolumeAsync operation.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FSGetAsyncEjectStatus(
+  FSVolumeOperation   volumeOp,
+  FSEjectStatus *     status,
+  OSStatus *          volumeOpStatus,       /* can be NULL */
+  FSVolumeRefNum *    volumeRefNum,         /* can be NULL */
+  pid_t *             dissenter,            /* can be NULL */
+  void **             clientData)           /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSCopyDiskIDForVolume()
+ *  
+ *  Discussion:
+ *    This routine returns a copy of the diskID for the passed in
+ *    volume.  The caller is responsible for releasing the CFString
+ *    later.
+ *  
+ *  Parameters:
+ *    
+ *    vRefNum:
+ *      FSVolumeRefNum of the target volume.
+ *    
+ *    diskID:
+ *      The diskID string associated with the target volume.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FSCopyDiskIDForVolume(
+  FSVolumeRefNum   vRefNum,
+  CFStringRef *    diskID)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+
+
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

@@ -3,9 +3,9 @@
  
      Contains:   Macintosh Easy Open Translation Extension Interfaces.
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1993-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1993-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,24 +16,12 @@
 #ifndef __TRANSLATIONEXTENSIONS__
 #define __TRANSLATIONEXTENSIONS__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __FILES__
-#include <CarbonCore/Files.h>
-#endif
-
-#ifndef __QUICKDRAW__
-#include <QD/Quickdraw.h>
-#endif
-
-#ifndef __COMPONENTS__
-#include <CarbonCore/Components.h>
+#ifndef __APPLICATIONSERVICES__
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -43,13 +31,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   kSupportsFileTranslation      = 1,
@@ -138,6 +120,9 @@ typedef long                            TranslationRefNum;
 /*
  *  SetTranslationAdvertisement()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 thru 1.0.2
@@ -146,7 +131,7 @@ typedef long                            TranslationRefNum;
 extern OSErr 
 SetTranslationAdvertisement(
   TranslationRefNum   refNum,
-  PicHandle           advertisement);
+  PicHandle           advertisement)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -168,6 +153,9 @@ SetTranslationAdvertisement(
 /*
  *  UpdateTranslationProgress()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 thru 1.0.2
@@ -177,7 +165,7 @@ extern OSErr
 UpdateTranslationProgress(
   TranslationRefNum   refNum,
   short               percentDone,
-  Boolean *           canceled);
+  Boolean *           canceled)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*******************************************************************************************
@@ -210,13 +198,7 @@ typedef CALLBACK_API( ComponentResult , DoGetScrapTranslationListProcPtr )(Compo
 typedef CALLBACK_API( ComponentResult , DoIdentifyScrapProcPtr )(ComponentInstance self, const void *dataPtr, Size dataLength, ScrapType *dataFormat);
 typedef CALLBACK_API( ComponentResult , DoTranslateScrapProcPtr )(ComponentInstance self, TranslationRefNum refNum, const void *srcDataPtr, Size srcDataLength, ScrapType srcType, long srcTypeHint, Handle dstData, ScrapType dstType, long dstTypeHint);
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

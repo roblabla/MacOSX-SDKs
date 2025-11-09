@@ -81,6 +81,13 @@
 
 #define _POSIX_THREADS		/* We support pthreads */
 
+#ifndef _POSIX_SOURCE
+#define F_ULOCK         0      /* unlock locked section */
+#define F_LOCK          1      /* lock a section for exclusive use */
+#define F_TLOCK         2      /* test and lock a section for exclusive use */
+#define F_TEST          3      /* test a section for locks by other procs */
+#endif
+
 __BEGIN_DECLS
 __dead void
 	 _exit __P((int));
@@ -150,6 +157,7 @@ void	 endusershell __P((void));
 int	 exect __P((const char *, char * const *, char * const *));
 int	 fchdir __P((int));
 int	 fchown __P((int, int, int));
+char	*fflagstostr __P((u_long));
 int	 fsync __P((int));
 int	 ftruncate __P((int, off_t));
 int	 getdtablesize __P((void));
@@ -160,15 +168,21 @@ mode_t	 getmode __P((const void *, mode_t));
 __pure int
 	 getpagesize __P((void));
 char	*getpass __P((const char *));
+int	 getpgid __P((pid_t _pid));
+int	 getsid __P((pid_t _pid));
 char	*getusershell __P((void));
 char	*getwd __P((char *));			/* obsoleted by getcwd() */
 int	 initgroups __P((const char *, int));
 int	 iruserok __P((unsigned long, int, const char *, const char *));
+int	 issetugid __P((void));
+char	*mkdtemp __P((char *));
 int	 mknod __P((const char *, mode_t, dev_t));
 int	 mkstemp __P((char *));
+int	 mkstemps __P((char *, int));
 char	*mktemp __P((char *));
 int	 nfssvc __P((int, void *));
 int	 nice __P((int));
+ssize_t	 pread __P((int, void *, size_t, off_t));
 #if 0
 void	 psignal __P((unsigned int, const char *));
 extern __const char *__const sys_siglist[];
@@ -176,6 +190,7 @@ extern __const char *__const sys_siglist[];
 #include <signal.h>
 #endif
 int	 profil __P((char *, int, int, int));
+ssize_t	 pwrite __P((int, const void *, size_t, off_t));
 int	 rcmd __P((char **, int, const char *,
 		const char *, const char *, int *));
 char	*re_comp __P((const char *));
@@ -201,6 +216,7 @@ int	 setreuid __P((uid_t, uid_t));
 int	 setrgid __P((gid_t));
 int	 setruid __P((uid_t));
 void	 setusershell __P((void));
+int	 strtofflags __P((char **, u_long *, u_long *));
 int	 swapon __P((const char *));
 int	 symlink __P((const char *, const char *));
 void	 sync __P((void));
@@ -209,8 +225,8 @@ int	 truncate __P((const char *, off_t));
 int	 ttyslot __P((void));
 unsigned int	 ualarm __P((unsigned int, unsigned int));
 int	 unwhiteout __P((const char *));
-void	 usleep __P((unsigned int));
-void	*valloc __P((size_t));			/* obsoleted by malloc() */
+int	 usleep __P((unsigned int));
+void	*valloc __P((size_t));			
 pid_t	 vfork __P((void));
 
 extern char *suboptarg;			/* getsubopt(3) external variable */

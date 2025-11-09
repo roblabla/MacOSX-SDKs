@@ -3,9 +3,9 @@
  
      Contains:   Thread Manager Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1991-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1991-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -30,6 +30,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -39,13 +40,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* Thread states*/
 typedef UInt16 ThreadState;
@@ -130,7 +125,7 @@ typedef STACK_UPP_TYPE(DebuggerThreadSchedulerProcPtr)          DebuggerThreadSc
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ThreadEntryUPP
-NewThreadEntryUPP(ThreadEntryProcPtr userRoutine);
+NewThreadEntryUPP(ThreadEntryProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewThreadSchedulerUPP()
@@ -141,7 +136,7 @@ NewThreadEntryUPP(ThreadEntryProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ThreadSchedulerUPP
-NewThreadSchedulerUPP(ThreadSchedulerProcPtr userRoutine);
+NewThreadSchedulerUPP(ThreadSchedulerProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewThreadSwitchUPP()
@@ -152,7 +147,7 @@ NewThreadSchedulerUPP(ThreadSchedulerProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ThreadSwitchUPP
-NewThreadSwitchUPP(ThreadSwitchProcPtr userRoutine);
+NewThreadSwitchUPP(ThreadSwitchProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewThreadTerminationUPP()
@@ -163,7 +158,7 @@ NewThreadSwitchUPP(ThreadSwitchProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ThreadTerminationUPP
-NewThreadTerminationUPP(ThreadTerminationProcPtr userRoutine);
+NewThreadTerminationUPP(ThreadTerminationProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDebuggerNewThreadUPP()
@@ -174,7 +169,7 @@ NewThreadTerminationUPP(ThreadTerminationProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DebuggerNewThreadUPP
-NewDebuggerNewThreadUPP(DebuggerNewThreadProcPtr userRoutine);
+NewDebuggerNewThreadUPP(DebuggerNewThreadProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDebuggerDisposeThreadUPP()
@@ -185,7 +180,7 @@ NewDebuggerNewThreadUPP(DebuggerNewThreadProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DebuggerDisposeThreadUPP
-NewDebuggerDisposeThreadUPP(DebuggerDisposeThreadProcPtr userRoutine);
+NewDebuggerDisposeThreadUPP(DebuggerDisposeThreadProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDebuggerThreadSchedulerUPP()
@@ -196,7 +191,7 @@ NewDebuggerDisposeThreadUPP(DebuggerDisposeThreadProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DebuggerThreadSchedulerUPP
-NewDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerProcPtr userRoutine);
+NewDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeThreadEntryUPP()
@@ -207,7 +202,7 @@ NewDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeThreadEntryUPP(ThreadEntryUPP userUPP);
+DisposeThreadEntryUPP(ThreadEntryUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeThreadSchedulerUPP()
@@ -218,7 +213,7 @@ DisposeThreadEntryUPP(ThreadEntryUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeThreadSchedulerUPP(ThreadSchedulerUPP userUPP);
+DisposeThreadSchedulerUPP(ThreadSchedulerUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeThreadSwitchUPP()
@@ -229,7 +224,7 @@ DisposeThreadSchedulerUPP(ThreadSchedulerUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeThreadSwitchUPP(ThreadSwitchUPP userUPP);
+DisposeThreadSwitchUPP(ThreadSwitchUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeThreadTerminationUPP()
@@ -240,7 +235,7 @@ DisposeThreadSwitchUPP(ThreadSwitchUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeThreadTerminationUPP(ThreadTerminationUPP userUPP);
+DisposeThreadTerminationUPP(ThreadTerminationUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDebuggerNewThreadUPP()
@@ -251,7 +246,7 @@ DisposeThreadTerminationUPP(ThreadTerminationUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDebuggerNewThreadUPP(DebuggerNewThreadUPP userUPP);
+DisposeDebuggerNewThreadUPP(DebuggerNewThreadUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDebuggerDisposeThreadUPP()
@@ -262,7 +257,7 @@ DisposeDebuggerNewThreadUPP(DebuggerNewThreadUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDebuggerDisposeThreadUPP(DebuggerDisposeThreadUPP userUPP);
+DisposeDebuggerDisposeThreadUPP(DebuggerDisposeThreadUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDebuggerThreadSchedulerUPP()
@@ -273,7 +268,7 @@ DisposeDebuggerDisposeThreadUPP(DebuggerDisposeThreadUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerUPP userUPP);
+DisposeDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeThreadEntryUPP()
@@ -286,7 +281,7 @@ DisposeDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerUPP userUPP);
 extern voidPtr
 InvokeThreadEntryUPP(
   void *          threadParam,
-  ThreadEntryUPP  userUPP);
+  ThreadEntryUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeThreadSchedulerUPP()
@@ -299,7 +294,7 @@ InvokeThreadEntryUPP(
 extern ThreadID
 InvokeThreadSchedulerUPP(
   SchedulerInfoRecPtr  schedulerInfo,
-  ThreadSchedulerUPP   userUPP);
+  ThreadSchedulerUPP   userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeThreadSwitchUPP()
@@ -313,7 +308,7 @@ extern void
 InvokeThreadSwitchUPP(
   ThreadID         threadBeingSwitched,
   void *           switchProcParam,
-  ThreadSwitchUPP  userUPP);
+  ThreadSwitchUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeThreadTerminationUPP()
@@ -327,7 +322,7 @@ extern void
 InvokeThreadTerminationUPP(
   ThreadID              threadTerminated,
   void *                terminationProcParam,
-  ThreadTerminationUPP  userUPP);
+  ThreadTerminationUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDebuggerNewThreadUPP()
@@ -340,7 +335,7 @@ InvokeThreadTerminationUPP(
 extern void
 InvokeDebuggerNewThreadUPP(
   ThreadID              threadCreated,
-  DebuggerNewThreadUPP  userUPP);
+  DebuggerNewThreadUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDebuggerDisposeThreadUPP()
@@ -353,7 +348,7 @@ InvokeDebuggerNewThreadUPP(
 extern void
 InvokeDebuggerDisposeThreadUPP(
   ThreadID                  threadDeleted,
-  DebuggerDisposeThreadUPP  userUPP);
+  DebuggerDisposeThreadUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDebuggerThreadSchedulerUPP()
@@ -366,7 +361,7 @@ InvokeDebuggerDisposeThreadUPP(
 extern ThreadID
 InvokeDebuggerThreadSchedulerUPP(
   SchedulerInfoRecPtr         schedulerInfo,
-  DebuggerThreadSchedulerUPP  userUPP);
+  DebuggerThreadSchedulerUPP  userUPP)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
    Thread Manager function pointers (TPP):
@@ -401,7 +396,7 @@ NewThread(
   Size             stackSize,
   ThreadOptions    options,
   void **          threadResult,       /* can be NULL */
-  ThreadID *       threadMade);
+  ThreadID *       threadMade)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -413,7 +408,7 @@ NewThread(
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-SetThreadScheduler(ThreadSchedulerTPP threadScheduler);
+SetThreadScheduler(ThreadSchedulerTPP threadScheduler)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -429,7 +424,7 @@ SetThreadSwitcher(
   ThreadID          thread,
   ThreadSwitchTPP   threadSwitcher,
   void *            switchProcParam,
-  Boolean           inOrOut);
+  Boolean           inOrOut)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -444,7 +439,7 @@ extern OSErr
 SetThreadTerminator(
   ThreadID               thread,
   ThreadTerminationTPP   threadTerminator,
-  void *                 terminationProcParam);
+  void *                 terminationProcParam)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -459,7 +454,7 @@ extern OSErr
 SetDebuggerNotificationProcs(
   DebuggerNewThreadTPP         notifyNewThread,
   DebuggerDisposeThreadTPP     notifyDisposeThread,
-  DebuggerThreadSchedulerTPP   notifyThreadScheduler);
+  DebuggerThreadSchedulerTPP   notifyThreadScheduler)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -474,7 +469,7 @@ extern OSErr
 CreateThreadPool(
   ThreadStyle   threadStyle,
   SInt16        numToCreate,
-  Size          stackSize);
+  Size          stackSize)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -488,7 +483,7 @@ CreateThreadPool(
 extern OSErr 
 GetFreeThreadCount(
   ThreadStyle   threadStyle,
-  SInt16 *      freeCount);
+  SInt16 *      freeCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -503,7 +498,7 @@ extern OSErr
 GetSpecificFreeThreadCount(
   ThreadStyle   threadStyle,
   Size          stackSize,
-  SInt16 *      freeCount);
+  SInt16 *      freeCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -517,7 +512,7 @@ GetSpecificFreeThreadCount(
 extern OSErr 
 GetDefaultThreadStackSize(
   ThreadStyle   threadStyle,
-  Size *        stackSize);
+  Size *        stackSize)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -531,7 +526,7 @@ GetDefaultThreadStackSize(
 extern OSErr 
 ThreadCurrentStackSpace(
   ThreadID   thread,
-  UInt32 *   freeStack);
+  UInt32 *   freeStack)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -546,7 +541,7 @@ extern OSErr
 DisposeThread(
   ThreadID   threadToDump,
   void *     threadResult,
-  Boolean    recycleThread);
+  Boolean    recycleThread)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -558,7 +553,7 @@ DisposeThread(
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-YieldToThread(ThreadID suggestedThread);
+YieldToThread(ThreadID suggestedThread)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -570,7 +565,7 @@ YieldToThread(ThreadID suggestedThread);
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-YieldToAnyThread(void);
+YieldToAnyThread(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -585,7 +580,7 @@ YieldToAnyThread(void);
     #define MacGetCurrentThread GetCurrentThread
 #endif
 extern OSErr 
-MacGetCurrentThread(ThreadID * currentThreadID);
+MacGetCurrentThread(ThreadID * currentThreadID)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -599,7 +594,7 @@ MacGetCurrentThread(ThreadID * currentThreadID);
 extern OSErr 
 GetThreadState(
   ThreadID       threadToGet,
-  ThreadState *  threadState);
+  ThreadState *  threadState)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -614,7 +609,7 @@ extern OSErr
 SetThreadState(
   ThreadID      threadToSet,
   ThreadState   newState,
-  ThreadID      suggestedThread);
+  ThreadID      suggestedThread)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -629,7 +624,7 @@ extern OSErr
 SetThreadStateEndCritical(
   ThreadID      threadToSet,
   ThreadState   newState,
-  ThreadID      suggestedThread);
+  ThreadID      suggestedThread)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -641,7 +636,7 @@ SetThreadStateEndCritical(
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-ThreadBeginCritical(void);
+ThreadBeginCritical(void)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -653,7 +648,7 @@ ThreadBeginCritical(void);
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-ThreadEndCritical(void);
+ThreadEndCritical(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -665,7 +660,7 @@ ThreadEndCritical(void);
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-GetThreadCurrentTaskRef(ThreadTaskRef * threadTRef);
+GetThreadCurrentTaskRef(ThreadTaskRef * threadTRef)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -680,7 +675,7 @@ extern OSErr
 GetThreadStateGivenTaskRef(
   ThreadTaskRef   threadTRef,
   ThreadID        threadToGet,
-  ThreadState *   threadState);
+  ThreadState *   threadState)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -694,17 +689,11 @@ GetThreadStateGivenTaskRef(
 extern OSErr 
 SetThreadReadyGivenTaskRef(
   ThreadTaskRef   threadTRef,
-  ThreadID        threadToSet);
+  ThreadID        threadToSet)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

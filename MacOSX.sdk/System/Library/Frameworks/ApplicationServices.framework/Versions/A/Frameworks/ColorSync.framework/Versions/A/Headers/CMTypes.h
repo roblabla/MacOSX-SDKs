@@ -3,9 +3,9 @@
  
      Contains:   ColorSync types
  
-     Version:    ColorSync-81~8
+     Version:    ColorSync-98.1~196
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -18,20 +18,14 @@
 #ifndef __CMTYPES__
 #define __CMTYPES__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
-
-#ifndef __MIXEDMODE__
-#include <CarbonCore/MixedMode.h>
-#endif
-
-
-
 
 
 /* Standard type for ColorSync and other system error codes */
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -39,14 +33,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 typedef long                            CMError;
@@ -87,7 +73,7 @@ typedef STACK_UPP_TYPE(CMProfileAccessProcPtr)                  CMProfileAccessU
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern CMFlattenUPP
-NewCMFlattenUPP(CMFlattenProcPtr userRoutine);
+NewCMFlattenUPP(CMFlattenProcPtr userRoutine)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewCMBitmapCallBackUPP()
@@ -98,7 +84,7 @@ NewCMFlattenUPP(CMFlattenProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern CMBitmapCallBackUPP
-NewCMBitmapCallBackUPP(CMBitmapCallBackProcPtr userRoutine);
+NewCMBitmapCallBackUPP(CMBitmapCallBackProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewCMConcatCallBackUPP()
@@ -109,7 +95,7 @@ NewCMBitmapCallBackUPP(CMBitmapCallBackProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern CMConcatCallBackUPP
-NewCMConcatCallBackUPP(CMConcatCallBackProcPtr userRoutine);
+NewCMConcatCallBackUPP(CMConcatCallBackProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewCMProfileFilterUPP()
@@ -120,7 +106,7 @@ NewCMConcatCallBackUPP(CMConcatCallBackProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern CMProfileFilterUPP
-NewCMProfileFilterUPP(CMProfileFilterProcPtr userRoutine);
+NewCMProfileFilterUPP(CMProfileFilterProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewCMProfileAccessUPP()
@@ -131,7 +117,7 @@ NewCMProfileFilterUPP(CMProfileFilterProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern CMProfileAccessUPP
-NewCMProfileAccessUPP(CMProfileAccessProcPtr userRoutine);
+NewCMProfileAccessUPP(CMProfileAccessProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeCMFlattenUPP()
@@ -142,7 +128,7 @@ NewCMProfileAccessUPP(CMProfileAccessProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeCMFlattenUPP(CMFlattenUPP userUPP);
+DisposeCMFlattenUPP(CMFlattenUPP userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeCMBitmapCallBackUPP()
@@ -153,7 +139,7 @@ DisposeCMFlattenUPP(CMFlattenUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeCMBitmapCallBackUPP(CMBitmapCallBackUPP userUPP);
+DisposeCMBitmapCallBackUPP(CMBitmapCallBackUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeCMConcatCallBackUPP()
@@ -164,7 +150,7 @@ DisposeCMBitmapCallBackUPP(CMBitmapCallBackUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeCMConcatCallBackUPP(CMConcatCallBackUPP userUPP);
+DisposeCMConcatCallBackUPP(CMConcatCallBackUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeCMProfileFilterUPP()
@@ -175,7 +161,7 @@ DisposeCMConcatCallBackUPP(CMConcatCallBackUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeCMProfileFilterUPP(CMProfileFilterUPP userUPP);
+DisposeCMProfileFilterUPP(CMProfileFilterUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeCMProfileAccessUPP()
@@ -186,7 +172,7 @@ DisposeCMProfileFilterUPP(CMProfileFilterUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeCMProfileAccessUPP(CMProfileAccessUPP userUPP);
+DisposeCMProfileAccessUPP(CMProfileAccessUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeCMFlattenUPP()
@@ -202,7 +188,7 @@ InvokeCMFlattenUPP(
   long *        size,
   void *        data,
   void *        refCon,
-  CMFlattenUPP  userUPP);
+  CMFlattenUPP  userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeCMBitmapCallBackUPP()
@@ -216,7 +202,7 @@ extern Boolean
 InvokeCMBitmapCallBackUPP(
   long                 progress,
   void *               refCon,
-  CMBitmapCallBackUPP  userUPP);
+  CMBitmapCallBackUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeCMConcatCallBackUPP()
@@ -230,7 +216,7 @@ extern Boolean
 InvokeCMConcatCallBackUPP(
   long                 progress,
   void *               refCon,
-  CMConcatCallBackUPP  userUPP);
+  CMConcatCallBackUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeCMProfileFilterUPP()
@@ -244,7 +230,7 @@ extern Boolean
 InvokeCMProfileFilterUPP(
   CMProfileRef        prof,
   void *              refCon,
-  CMProfileFilterUPP  userUPP);
+  CMProfileFilterUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeCMProfileAccessUPP()
@@ -261,16 +247,8 @@ InvokeCMProfileAccessUPP(
   long *              size,
   void *              data,
   void *              refCon,
-  CMProfileAccessUPP  userUPP);
+  CMProfileAccessUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

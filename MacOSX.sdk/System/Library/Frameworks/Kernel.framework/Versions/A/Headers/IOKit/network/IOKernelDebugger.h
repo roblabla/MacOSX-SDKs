@@ -100,7 +100,13 @@ protected:
     IOService *            _client;      // client that has opened us.
     bool                   _pmDisabled;  // true if disabled by PM.
 
-    struct ExpansionData { };
+    struct ExpansionData {
+        thread_call_t  enableDebuggerThreadCall;
+        thread_call_t  disableDebuggerThreadCall;
+        thread_call_t  activationChangeThreadCall;
+        UInt32         stateVars[2];
+    };
+
     /*! @var reserved
         Reserved for future use.  (Internal use only)  */
     ExpansionData *	    _reserved;
@@ -288,6 +294,12 @@ public:
     static IOKernelDebugger * debugger( IOService *          target,
                                         IODebuggerTxHandler  txHandler,
                                         IODebuggerRxHandler  rxHandler );
+
+    /*
+     * Entry point for generic messages delivered from the provider.
+     */
+
+    virtual IOReturn message( UInt32 type, IOService * provider, void * arg );
 
     // Virtual function padding
     OSMetaClassDeclareReservedUnused( IOKernelDebugger,  0);

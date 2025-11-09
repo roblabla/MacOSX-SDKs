@@ -67,6 +67,15 @@ enum {
 #define kPMPaperInfoListStr      kPMTemplatePrelude "PMTemplatePaperInfoTicket"
 #define kPMPaperInfoList         CFSTR( kPMPaperInfoListStr )                      /* Will fetch the default value and constraint list for valid papers. */
 
+#define kPMCustomPageWidthStr      kPMTemplatePrelude "CustomPaperWidth"
+#define kPMCustomPageWidthKey         CFSTR( kPMCustomPageWidthStr )                      /* Will fetch the max and min range constraint for custom page width. */
+
+#define kPMCustomPageHeightStr      kPMTemplatePrelude "CustomPaperHeight"
+#define kPMCustomPageHeightKey         CFSTR( kPMCustomPageHeightStr )                      /* Will fetch the max and min range constraint for custom page height. */
+
+#define kPMCustomPageMarginsStr      	    kPMTemplatePrelude "PMCustomPageMargins"
+#define kPMCustomPageMarginsKey        	    CFSTR( kPMCustomPageMarginsStr )            /* Will fetch the margin data for a custom page. */
+
 
 /* Function Prototypes */
 /* The PMTemplateRef is defined in PMTicket.h to avoid circular references, and  */
@@ -84,6 +93,16 @@ PMTemplateDelete                (PMTemplateRef *        oldTemplate);
 
 /* Functions to send to and from XML. Also a function to tell us if the template is locked and */
 /* can't be modified. */
+
+/*!
+ * @function	PMTemplateWriteXML
+ * @abstract	Write an XML description of the specified template to a file
+ *		stream.
+ */
+EXTERN_API_C( OSStatus )
+PMTemplateWriteXML		(PMTemplateRef 		srcTemplate,
+				 FILE *			file);
+
 EXTERN_API_C( OSStatus )
 PMTemplateCreateXML             (PMTemplateRef          srcTemplate,
                                  CFDataRef *            xmlData);

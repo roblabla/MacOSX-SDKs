@@ -1,5 +1,5 @@
 /*	NSPathUtilities.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSString.h>
@@ -42,10 +42,6 @@
 
 @end
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
-
 FOUNDATION_EXPORT NSString *NSUserName(void);
 FOUNDATION_EXPORT NSString *NSFullUserName(void);
 
@@ -65,6 +61,9 @@ typedef enum {
     NSDeveloperDirectory,		// developer resources (Developer)
     NSUserDirectory,			// user home directories (Users)
     NSDocumentationDirectory,		// documentation (Documentation)
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+    NSDocumentDirectory,		// documents (Documents)
+#endif
     NSAllApplicationsDirectory = 100,	// all directories where applications can occur
     NSAllLibrariesDirectory = 101	// all directories where resources can occur
 } NSSearchPathDirectory;
@@ -79,7 +78,4 @@ typedef enum {
 
 FOUNDATION_EXPORT NSArray *NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory directory, NSSearchPathDomainMask domainMask, BOOL expandTilde);
 
-#if defined(__cplusplus)
-}
-#endif
 

@@ -3,9 +3,9 @@
  
      Contains:   QuickTime VR interfaces
  
-     Version:    QuickTime-142~1
+     Version:    QuickTime_6
  
-     Copyright:  © 1997-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1997-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -35,13 +36,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 typedef struct OpaqueQTVRInstance*      QTVRInstance;
 
@@ -67,7 +62,7 @@ enum {
   kQTVROldObjectType            = 'stna' /* Used in QTVR 1.0 release*/
 };
 
-#define kQTVRUnknownType '????'     /* Unknown node type */
+#define kQTVRUnknownType '\?\?\?\?' /* Unknown node type */
 /* QTVR hot spot types*/
 enum {
   kQTVRHotSpotLinkType          = 'link',
@@ -378,7 +373,7 @@ typedef STACK_UPP_TYPE(QTVRBackBufferImagingProcPtr)            QTVRBackBufferIm
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTVRLeavingNodeUPP
-NewQTVRLeavingNodeUPP(QTVRLeavingNodeProcPtr userRoutine);
+NewQTVRLeavingNodeUPP(QTVRLeavingNodeProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQTVREnteringNodeUPP()
@@ -389,7 +384,7 @@ NewQTVRLeavingNodeUPP(QTVRLeavingNodeProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTVREnteringNodeUPP
-NewQTVREnteringNodeUPP(QTVREnteringNodeProcPtr userRoutine);
+NewQTVREnteringNodeUPP(QTVREnteringNodeProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQTVRMouseOverHotSpotUPP()
@@ -400,7 +395,7 @@ NewQTVREnteringNodeUPP(QTVREnteringNodeProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTVRMouseOverHotSpotUPP
-NewQTVRMouseOverHotSpotUPP(QTVRMouseOverHotSpotProcPtr userRoutine);
+NewQTVRMouseOverHotSpotUPP(QTVRMouseOverHotSpotProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQTVRImagingCompleteUPP()
@@ -411,7 +406,7 @@ NewQTVRMouseOverHotSpotUPP(QTVRMouseOverHotSpotProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTVRImagingCompleteUPP
-NewQTVRImagingCompleteUPP(QTVRImagingCompleteProcPtr userRoutine);
+NewQTVRImagingCompleteUPP(QTVRImagingCompleteProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQTVRBackBufferImagingUPP()
@@ -422,7 +417,7 @@ NewQTVRImagingCompleteUPP(QTVRImagingCompleteProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTVRBackBufferImagingUPP
-NewQTVRBackBufferImagingUPP(QTVRBackBufferImagingProcPtr userRoutine);
+NewQTVRBackBufferImagingUPP(QTVRBackBufferImagingProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQTVRLeavingNodeUPP()
@@ -433,7 +428,7 @@ NewQTVRBackBufferImagingUPP(QTVRBackBufferImagingProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTVRLeavingNodeUPP(QTVRLeavingNodeUPP userUPP);
+DisposeQTVRLeavingNodeUPP(QTVRLeavingNodeUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQTVREnteringNodeUPP()
@@ -444,7 +439,7 @@ DisposeQTVRLeavingNodeUPP(QTVRLeavingNodeUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTVREnteringNodeUPP(QTVREnteringNodeUPP userUPP);
+DisposeQTVREnteringNodeUPP(QTVREnteringNodeUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQTVRMouseOverHotSpotUPP()
@@ -455,7 +450,7 @@ DisposeQTVREnteringNodeUPP(QTVREnteringNodeUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTVRMouseOverHotSpotUPP(QTVRMouseOverHotSpotUPP userUPP);
+DisposeQTVRMouseOverHotSpotUPP(QTVRMouseOverHotSpotUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQTVRImagingCompleteUPP()
@@ -466,7 +461,7 @@ DisposeQTVRMouseOverHotSpotUPP(QTVRMouseOverHotSpotUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTVRImagingCompleteUPP(QTVRImagingCompleteUPP userUPP);
+DisposeQTVRImagingCompleteUPP(QTVRImagingCompleteUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQTVRBackBufferImagingUPP()
@@ -477,7 +472,7 @@ DisposeQTVRImagingCompleteUPP(QTVRImagingCompleteUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTVRBackBufferImagingUPP(QTVRBackBufferImagingUPP userUPP);
+DisposeQTVRBackBufferImagingUPP(QTVRBackBufferImagingUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQTVRLeavingNodeUPP()
@@ -494,7 +489,7 @@ InvokeQTVRLeavingNodeUPP(
   UInt32              toNodeID,
   Boolean *           cancel,
   SInt32              refCon,
-  QTVRLeavingNodeUPP  userUPP);
+  QTVRLeavingNodeUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQTVREnteringNodeUPP()
@@ -509,7 +504,7 @@ InvokeQTVREnteringNodeUPP(
   QTVRInstance         qtvr,
   UInt32               nodeID,
   SInt32               refCon,
-  QTVREnteringNodeUPP  userUPP);
+  QTVREnteringNodeUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQTVRMouseOverHotSpotUPP()
@@ -525,7 +520,7 @@ InvokeQTVRMouseOverHotSpotUPP(
   UInt32                   hotSpotID,
   UInt32                   flags,
   SInt32                   refCon,
-  QTVRMouseOverHotSpotUPP  userUPP);
+  QTVRMouseOverHotSpotUPP  userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQTVRImagingCompleteUPP()
@@ -539,7 +534,7 @@ extern OSErr
 InvokeQTVRImagingCompleteUPP(
   QTVRInstance            qtvr,
   SInt32                  refCon,
-  QTVRImagingCompleteUPP  userUPP);
+  QTVRImagingCompleteUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQTVRBackBufferImagingUPP()
@@ -557,7 +552,7 @@ InvokeQTVRBackBufferImagingUPP(
   UInt32                    flagsIn,
   UInt32 *                  flagsOut,
   SInt32                    refCon,
-  QTVRBackBufferImagingUPP  userUPP);
+  QTVRBackBufferImagingUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
   =================================================================================================
@@ -607,7 +602,7 @@ typedef STACK_UPP_TYPE(QTVRInterceptProcPtr)                    QTVRInterceptUPP
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTVRInterceptUPP
-NewQTVRInterceptUPP(QTVRInterceptProcPtr userRoutine);
+NewQTVRInterceptUPP(QTVRInterceptProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQTVRInterceptUPP()
@@ -618,7 +613,7 @@ NewQTVRInterceptUPP(QTVRInterceptProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTVRInterceptUPP(QTVRInterceptUPP userUPP);
+DisposeQTVRInterceptUPP(QTVRInterceptUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQTVRInterceptUPP()
@@ -634,7 +629,7 @@ InvokeQTVRInterceptUPP(
   QTVRInterceptPtr  qtvrMsg,
   SInt32            refCon,
   Boolean *         cancel,
-  QTVRInterceptUPP  userUPP);
+  QTVRInterceptUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
   =================================================================================================
@@ -659,7 +654,7 @@ InvokeQTVRInterceptUPP(
 extern Track 
 QTVRGetQTVRTrack(
   Movie    theMovie,
-  SInt32   index);
+  SInt32   index)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -675,7 +670,7 @@ extern OSErr
 QTVRGetQTVRInstance(
   QTVRInstance *    qtvr,
   Track             qtvrTrack,
-  MovieController   mc);
+  MovieController   mc)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -699,7 +694,7 @@ QTVRSetViewParameter(
   QTVRInstance   qtvr,
   UInt32         viewParameter,
   void *         value,
-  UInt32         flagsIn);
+  UInt32         flagsIn)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* QTVRGetViewParameter requires QTVR 5.0 (kQTVRAPIMajorVersion05 + kQTVRAPIMinorVersion00)*/
@@ -718,7 +713,7 @@ QTVRGetViewParameter(
   UInt32         viewParameter,
   void *         value,
   UInt32         flagsIn,
-  UInt32 *       flagsOut);
+  UInt32 *       flagsOut)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -733,7 +728,7 @@ QTVRGetViewParameter(
 extern OSErr 
 QTVRSetPanAngle(
   QTVRInstance   qtvr,
-  float          panAngle);
+  float          panAngle)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -746,7 +741,7 @@ QTVRSetPanAngle(
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern float 
-QTVRGetPanAngle(QTVRInstance qtvr);
+QTVRGetPanAngle(QTVRInstance qtvr)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -761,7 +756,7 @@ QTVRGetPanAngle(QTVRInstance qtvr);
 extern OSErr 
 QTVRSetTiltAngle(
   QTVRInstance   qtvr,
-  float          tiltAngle);
+  float          tiltAngle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -774,7 +769,7 @@ QTVRSetTiltAngle(
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern float 
-QTVRGetTiltAngle(QTVRInstance qtvr);
+QTVRGetTiltAngle(QTVRInstance qtvr)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -789,7 +784,7 @@ QTVRGetTiltAngle(QTVRInstance qtvr);
 extern OSErr 
 QTVRSetFieldOfView(
   QTVRInstance   qtvr,
-  float          fieldOfView);
+  float          fieldOfView)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -802,7 +797,7 @@ QTVRSetFieldOfView(
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern float 
-QTVRGetFieldOfView(QTVRInstance qtvr);
+QTVRGetFieldOfView(QTVRInstance qtvr)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -815,7 +810,7 @@ QTVRGetFieldOfView(QTVRInstance qtvr);
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern OSErr 
-QTVRShowDefaultView(QTVRInstance qtvr);
+QTVRShowDefaultView(QTVRInstance qtvr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Object Specific*/
@@ -831,7 +826,7 @@ QTVRShowDefaultView(QTVRInstance qtvr);
 extern OSErr 
 QTVRSetViewCenter(
   QTVRInstance            qtvr,
-  const QTVRFloatPoint *  viewCenter);
+  const QTVRFloatPoint *  viewCenter)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -846,7 +841,7 @@ QTVRSetViewCenter(
 extern OSErr 
 QTVRGetViewCenter(
   QTVRInstance      qtvr,
-  QTVRFloatPoint *  viewCenter);
+  QTVRFloatPoint *  viewCenter)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -861,7 +856,7 @@ QTVRGetViewCenter(
 extern OSErr 
 QTVRNudge(
   QTVRInstance       qtvr,
-  QTVRNudgeControl   direction);
+  QTVRNudgeControl   direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* QTVRInteractionNudge requires QTVR 2.1 (kQTVRAPIMajorVersion02 + kQTVRAPIMinorVersion10)*/
@@ -877,7 +872,7 @@ QTVRNudge(
 extern OSErr 
 QTVRInteractionNudge(
   QTVRInstance       qtvr,
-  QTVRNudgeControl   direction);
+  QTVRNudgeControl   direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -898,7 +893,7 @@ QTVRInteractionNudge(
 extern OSErr 
 QTVRGetVRWorld(
   QTVRInstance       qtvr,
-  QTAtomContainer *  VRWorld);
+  QTAtomContainer *  VRWorld)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -914,7 +909,7 @@ extern OSErr
 QTVRGetNodeInfo(
   QTVRInstance       qtvr,
   UInt32             nodeID,
-  QTAtomContainer *  nodeInfo);
+  QTAtomContainer *  nodeInfo)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -929,7 +924,7 @@ QTVRGetNodeInfo(
 extern OSErr 
 QTVRGoToNodeID(
   QTVRInstance   qtvr,
-  UInt32         nodeID);
+  UInt32         nodeID)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -942,7 +937,7 @@ QTVRGoToNodeID(
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern UInt32 
-QTVRGetCurrentNodeID(QTVRInstance qtvr);
+QTVRGetCurrentNodeID(QTVRInstance qtvr)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -957,7 +952,7 @@ QTVRGetCurrentNodeID(QTVRInstance qtvr);
 extern OSType 
 QTVRGetNodeType(
   QTVRInstance   qtvr,
-  UInt32         nodeID);
+  UInt32         nodeID)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -979,7 +974,7 @@ extern OSErr
 QTVRPtToHotSpotID(
   QTVRInstance   qtvr,
   Point          pt,
-  UInt32 *       hotSpotID);
+  UInt32 *       hotSpotID)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* QTVRGetHotSpotType requires QTVR 2.1 (kQTVRAPIMajorVersion02 + kQTVRAPIMinorVersion10)*/
@@ -996,7 +991,7 @@ extern OSErr
 QTVRGetHotSpotType(
   QTVRInstance   qtvr,
   UInt32         hotSpotID,
-  OSType *       hotSpotType);
+  OSType *       hotSpotType)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1013,7 +1008,7 @@ QTVRTriggerHotSpot(
   QTVRInstance      qtvr,
   UInt32            hotSpotID,
   QTAtomContainer   nodeInfo,
-  QTAtom            selectedAtom);
+  QTAtom            selectedAtom)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1030,7 +1025,7 @@ QTVRSetMouseOverHotSpotProc(
   QTVRInstance              qtvr,
   QTVRMouseOverHotSpotUPP   mouseOverHotSpotProc,
   SInt32                    refCon,
-  UInt32                    flags);
+  UInt32                    flags)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1047,7 +1042,7 @@ QTVREnableHotSpot(
   QTVRInstance   qtvr,
   UInt32         enableFlag,
   UInt32         hotSpotValue,
-  Boolean        enable);
+  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1062,7 +1057,7 @@ QTVREnableHotSpot(
 extern UInt32 
 QTVRGetVisibleHotSpots(
   QTVRInstance   qtvr,
-  Handle         hotSpots);
+  Handle         hotSpots)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1078,7 +1073,7 @@ extern OSErr
 QTVRGetHotSpotRegion(
   QTVRInstance   qtvr,
   UInt32         hotSpotID,
-  RgnHandle      hotSpotRegion);
+  RgnHandle      hotSpotRegion)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1099,7 +1094,7 @@ QTVRGetHotSpotRegion(
 extern OSErr 
 QTVRSetMouseOverTracking(
   QTVRInstance   qtvr,
-  Boolean        enable);
+  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1112,7 +1107,7 @@ QTVRSetMouseOverTracking(
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern Boolean 
-QTVRGetMouseOverTracking(QTVRInstance qtvr);
+QTVRGetMouseOverTracking(QTVRInstance qtvr)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1127,7 +1122,7 @@ QTVRGetMouseOverTracking(QTVRInstance qtvr);
 extern OSErr 
 QTVRSetMouseDownTracking(
   QTVRInstance   qtvr,
-  Boolean        enable);
+  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1140,7 +1135,7 @@ QTVRSetMouseDownTracking(
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern Boolean 
-QTVRGetMouseDownTracking(QTVRInstance qtvr);
+QTVRGetMouseDownTracking(QTVRInstance qtvr)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1157,7 +1152,7 @@ QTVRMouseEnter(
   QTVRInstance   qtvr,
   Point          pt,
   UInt32 *       hotSpotID,
-  WindowRef      w);
+  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1174,7 +1169,7 @@ QTVRMouseWithin(
   QTVRInstance   qtvr,
   Point          pt,
   UInt32 *       hotSpotID,
-  WindowRef      w);
+  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1190,7 +1185,7 @@ extern OSErr
 QTVRMouseLeave(
   QTVRInstance   qtvr,
   Point          pt,
-  WindowRef      w);
+  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1209,7 +1204,7 @@ QTVRMouseDown(
   UInt32         when,
   UInt16         modifiers,
   UInt32 *       hotSpotID,
-  WindowRef      w);
+  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1226,7 +1221,7 @@ QTVRMouseStillDown(
   QTVRInstance   qtvr,
   Point          pt,
   UInt32 *       hotSpotID,
-  WindowRef      w);
+  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1243,7 +1238,7 @@ QTVRMouseUp(
   QTVRInstance   qtvr,
   Point          pt,
   UInt32 *       hotSpotID,
-  WindowRef      w);
+  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* These require QTVR 2.01 (kQTVRAPIMajorVersion02 + kQTVRAPIMinorVersion01)*/
@@ -1263,7 +1258,7 @@ QTVRMouseStillDownExtended(
   UInt32 *       hotSpotID,
   WindowRef      w,
   UInt32         when,
-  UInt16         modifiers);
+  UInt16         modifiers)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1282,7 +1277,7 @@ QTVRMouseUpExtended(
   UInt32 *       hotSpotID,
   WindowRef      w,
   UInt32         when,
-  UInt16         modifiers);
+  UInt16         modifiers)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1306,7 +1301,7 @@ QTVRInstallInterceptProc(
   QTVRProcSelector   selector,
   QTVRInterceptUPP   interceptProc,
   SInt32             refCon,
-  UInt32             flags);
+  UInt32             flags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1321,7 +1316,7 @@ QTVRInstallInterceptProc(
 extern OSErr 
 QTVRCallInterceptedProc(
   QTVRInstance           qtvr,
-  QTVRInterceptRecord *  qtvrMsg);
+  QTVRInterceptRecord *  qtvrMsg)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1340,7 +1335,7 @@ QTVRCallInterceptedProc(
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern UInt32 
-QTVRGetCurrentMouseMode(QTVRInstance qtvr);
+QTVRGetCurrentMouseMode(QTVRInstance qtvr)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1355,7 +1350,7 @@ QTVRGetCurrentMouseMode(QTVRInstance qtvr);
 extern OSErr 
 QTVRSetFrameRate(
   QTVRInstance   qtvr,
-  float          rate);
+  float          rate)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1368,7 +1363,7 @@ QTVRSetFrameRate(
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern float 
-QTVRGetFrameRate(QTVRInstance qtvr);
+QTVRGetFrameRate(QTVRInstance qtvr)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1383,7 +1378,7 @@ QTVRGetFrameRate(QTVRInstance qtvr);
 extern OSErr 
 QTVRSetViewRate(
   QTVRInstance   qtvr,
-  float          rate);
+  float          rate)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1396,7 +1391,7 @@ QTVRSetViewRate(
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern float 
-QTVRGetViewRate(QTVRInstance qtvr);
+QTVRGetViewRate(QTVRInstance qtvr)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1411,7 +1406,7 @@ QTVRGetViewRate(QTVRInstance qtvr);
 extern OSErr 
 QTVRSetViewCurrentTime(
   QTVRInstance   qtvr,
-  TimeValue      time);
+  TimeValue      time)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1424,7 +1419,7 @@ QTVRSetViewCurrentTime(
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern TimeValue 
-QTVRGetViewCurrentTime(QTVRInstance qtvr);
+QTVRGetViewCurrentTime(QTVRInstance qtvr)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1437,7 +1432,7 @@ QTVRGetViewCurrentTime(QTVRInstance qtvr);
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern TimeValue 
-QTVRGetCurrentViewDuration(QTVRInstance qtvr);
+QTVRGetCurrentViewDuration(QTVRInstance qtvr)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1459,7 +1454,7 @@ extern OSErr
 QTVRSetViewState(
   QTVRInstance        qtvr,
   QTVRViewStateType   viewStateType,
-  UInt16              state);
+  UInt16              state)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1475,7 +1470,7 @@ extern OSErr
 QTVRGetViewState(
   QTVRInstance        qtvr,
   QTVRViewStateType   viewStateType,
-  UInt16 *            state);
+  UInt16 *            state)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1488,7 +1483,7 @@ QTVRGetViewState(
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern UInt16 
-QTVRGetViewStateCount(QTVRInstance qtvr);
+QTVRGetViewStateCount(QTVRInstance qtvr)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1504,7 +1499,7 @@ extern OSErr
 QTVRSetAnimationSetting(
   QTVRInstance                 qtvr,
   QTVRObjectAnimationSetting   setting,
-  Boolean                      enable);
+  Boolean                      enable)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1520,7 +1515,7 @@ extern OSErr
 QTVRGetAnimationSetting(
   QTVRInstance                 qtvr,
   QTVRObjectAnimationSetting   setting,
-  Boolean *                    enable);
+  Boolean *                    enable)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1536,7 +1531,7 @@ extern OSErr
 QTVRSetControlSetting(
   QTVRInstance         qtvr,
   QTVRControlSetting   setting,
-  Boolean              enable);
+  Boolean              enable)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1552,7 +1547,7 @@ extern OSErr
 QTVRGetControlSetting(
   QTVRInstance         qtvr,
   QTVRControlSetting   setting,
-  Boolean *            enable);
+  Boolean *            enable)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1567,7 +1562,7 @@ QTVRGetControlSetting(
 extern OSErr 
 QTVREnableFrameAnimation(
   QTVRInstance   qtvr,
-  Boolean        enable);
+  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1580,7 +1575,7 @@ QTVREnableFrameAnimation(
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern Boolean 
-QTVRGetFrameAnimation(QTVRInstance qtvr);
+QTVRGetFrameAnimation(QTVRInstance qtvr)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1595,7 +1590,7 @@ QTVRGetFrameAnimation(QTVRInstance qtvr);
 extern OSErr 
 QTVREnableViewAnimation(
   QTVRInstance   qtvr,
-  Boolean        enable);
+  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1608,7 +1603,7 @@ QTVREnableViewAnimation(
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern Boolean 
-QTVRGetViewAnimation(QTVRInstance qtvr);
+QTVRGetViewAnimation(QTVRInstance qtvr)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1630,7 +1625,7 @@ QTVRGetViewAnimation(QTVRInstance qtvr);
 extern OSErr 
 QTVRSetVisible(
   QTVRInstance   qtvr,
-  Boolean        visible);
+  Boolean        visible)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1643,7 +1638,7 @@ QTVRSetVisible(
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern Boolean 
-QTVRGetVisible(QTVRInstance qtvr);
+QTVRGetVisible(QTVRInstance qtvr)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1660,7 +1655,7 @@ QTVRSetImagingProperty(
   QTVRInstance      qtvr,
   QTVRImagingMode   imagingMode,
   UInt32            imagingProperty,
-  SInt32            propertyValue);
+  SInt32            propertyValue)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1677,7 +1672,7 @@ QTVRGetImagingProperty(
   QTVRInstance      qtvr,
   QTVRImagingMode   imagingMode,
   UInt32            imagingProperty,
-  SInt32 *          propertyValue);
+  SInt32 *          propertyValue)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1692,7 +1687,7 @@ QTVRGetImagingProperty(
 extern OSErr 
 QTVRUpdate(
   QTVRInstance      qtvr,
-  QTVRImagingMode   imagingMode);
+  QTVRImagingMode   imagingMode)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1707,7 +1702,7 @@ QTVRUpdate(
 extern OSErr 
 QTVRBeginUpdateStream(
   QTVRInstance      qtvr,
-  QTVRImagingMode   imagingMode);
+  QTVRImagingMode   imagingMode)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1720,7 +1715,7 @@ QTVRBeginUpdateStream(
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern OSErr 
-QTVREndUpdateStream(QTVRInstance qtvr);
+QTVREndUpdateStream(QTVRInstance qtvr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1737,7 +1732,7 @@ QTVRSetTransitionProperty(
   QTVRInstance   qtvr,
   UInt32         transitionType,
   UInt32         transitionProperty,
-  SInt32         transitionValue);
+  SInt32         transitionValue)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1753,7 +1748,7 @@ extern OSErr
 QTVREnableTransition(
   QTVRInstance   qtvr,
   UInt32         transitionType,
-  Boolean        enable);
+  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1774,7 +1769,7 @@ QTVREnableTransition(
 extern OSErr 
 QTVRSetAngularUnits(
   QTVRInstance       qtvr,
-  QTVRAngularUnits   units);
+  QTVRAngularUnits   units)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1787,7 +1782,7 @@ QTVRSetAngularUnits(
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern QTVRAngularUnits 
-QTVRGetAngularUnits(QTVRInstance qtvr);
+QTVRGetAngularUnits(QTVRInstance qtvr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Pano specific routines*/
@@ -1805,7 +1800,7 @@ QTVRPtToAngles(
   QTVRInstance   qtvr,
   Point          pt,
   float *        panAngle,
-  float *        tiltAngle);
+  float *        tiltAngle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1822,7 +1817,7 @@ QTVRCoordToAngles(
   QTVRInstance      qtvr,
   QTVRFloatPoint *  coord,
   float *           panAngle,
-  float *           tiltAngle);
+  float *           tiltAngle)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1839,7 +1834,7 @@ QTVRAnglesToCoord(
   QTVRInstance      qtvr,
   float             panAngle,
   float             tiltAngle,
-  QTVRFloatPoint *  coord);
+  QTVRFloatPoint *  coord)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Object specific routines*/
@@ -1855,7 +1850,7 @@ QTVRAnglesToCoord(
 extern short 
 QTVRPanToColumn(
   QTVRInstance   qtvr,
-  float          panAngle);
+  float          panAngle)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* zero based   */
@@ -1871,7 +1866,7 @@ QTVRPanToColumn(
 extern float 
 QTVRColumnToPan(
   QTVRInstance   qtvr,
-  short          column);
+  short          column)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* zero based   */
@@ -1887,7 +1882,7 @@ QTVRColumnToPan(
 extern short 
 QTVRTiltToRow(
   QTVRInstance   qtvr,
-  float          tiltAngle);
+  float          tiltAngle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* zero based   */
@@ -1903,7 +1898,7 @@ QTVRTiltToRow(
 extern float 
 QTVRRowToTilt(
   QTVRInstance   qtvr,
-  short          row);
+  short          row)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* zero based               */
@@ -1921,7 +1916,7 @@ QTVRWrapAndConstrain(
   QTVRInstance   qtvr,
   short          kind,
   float          value,
-  float *        result);
+  float *        result)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1945,7 +1940,7 @@ QTVRSetEnteringNodeProc(
   QTVRInstance          qtvr,
   QTVREnteringNodeUPP   enteringNodeProc,
   SInt32                refCon,
-  UInt32                flags);
+  UInt32                flags)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1962,7 +1957,7 @@ QTVRSetLeavingNodeProc(
   QTVRInstance         qtvr,
   QTVRLeavingNodeUPP   leavingNodeProc,
   SInt32               refCon,
-  UInt32               flags);
+  UInt32               flags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1978,7 +1973,7 @@ extern OSErr
 QTVRSetInteractionProperty(
   QTVRInstance   qtvr,
   UInt32         property,
-  void *         value);
+  void *         value)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1994,7 +1989,7 @@ extern OSErr
 QTVRGetInteractionProperty(
   QTVRInstance   qtvr,
   UInt32         property,
-  void *         value);
+  void *         value)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2009,7 +2004,7 @@ QTVRGetInteractionProperty(
 extern OSErr 
 QTVRReplaceCursor(
   QTVRInstance        qtvr,
-  QTVRCursorRecord *  cursRecord);
+  QTVRCursorRecord *  cursRecord)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2032,7 +2027,7 @@ QTVRGetViewingLimits(
   QTVRInstance   qtvr,
   UInt16         kind,
   float *        minValue,
-  float *        maxValue);
+  float *        maxValue)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2045,7 +2040,7 @@ QTVRGetViewingLimits(
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern UInt32 
-QTVRGetConstraintStatus(QTVRInstance qtvr);
+QTVRGetConstraintStatus(QTVRInstance qtvr)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2062,7 +2057,7 @@ QTVRGetConstraints(
   QTVRInstance   qtvr,
   UInt16         kind,
   float *        minValue,
-  float *        maxValue);
+  float *        maxValue)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2079,7 +2074,7 @@ QTVRSetConstraints(
   QTVRInstance   qtvr,
   UInt16         kind,
   float          minValue,
-  float          maxValue);
+  float          maxValue)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2101,7 +2096,7 @@ QTVRSetConstraints(
 extern OSErr 
 QTVRGetAvailableResolutions(
   QTVRInstance   qtvr,
-  UInt16 *       resolutionsMask);
+  UInt16 *       resolutionsMask)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* These require QTVR 2.1 (kQTVRAPIMajorVersion02 + kQTVRAPIMinorVersion10)*/
@@ -2122,7 +2117,7 @@ QTVRGetBackBufferMemInfo(
   UInt32         cachePixelFormat,
   SInt32 *       minCacheBytes,
   SInt32 *       suggestedCacheBytes,
-  SInt32 *       fullCacheBytes);
+  SInt32 *       fullCacheBytes)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2140,7 +2135,7 @@ QTVRGetBackBufferSettings(
   UInt32 *       geometry,
   UInt16 *       resolution,
   UInt32 *       cachePixelFormat,
-  SInt16 *       cacheSize);
+  SInt16 *       cacheSize)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2158,7 +2153,7 @@ QTVRSetBackBufferPrefs(
   UInt32         geometry,
   UInt16         resolution,
   UInt32         cachePixelFormat,
-  SInt16         cacheSize);
+  SInt16         cacheSize)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2181,7 +2176,7 @@ QTVRSetPrescreenImagingCompleteProc(
   QTVRInstance             qtvr,
   QTVRImagingCompleteUPP   imagingCompleteProc,
   SInt32                   refCon,
-  UInt32                   flags);
+  UInt32                   flags)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2199,7 +2194,7 @@ QTVRSetBackBufferImagingProc(
   QTVRBackBufferImagingUPP   backBufferImagingProc,
   UInt16                     numAreas,
   QTVRAreaOfInterest         areasOfInterest[],
-  SInt32                     refCon);
+  SInt32                     refCon)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2214,7 +2209,7 @@ QTVRSetBackBufferImagingProc(
 extern OSErr 
 QTVRRefreshBackBuffer(
   QTVRInstance   qtvr,
-  UInt32         flags);
+  UInt32         flags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2242,13 +2237,7 @@ typedef QTVRBackBufferImagingUPP        BackBufferImagingUPP;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

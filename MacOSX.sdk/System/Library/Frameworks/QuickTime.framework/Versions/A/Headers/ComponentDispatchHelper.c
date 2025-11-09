@@ -1,7 +1,7 @@
 /*
 	File:		ComponentDispatchHelper.c
 
-	Copyright:	© 1995-2000 by Apple Computer, Inc., all rights reserved.
+	Copyright:	© 1995-2002 by Apple Computer, Inc., all rights reserved.
 
 */
 
@@ -100,10 +100,8 @@
 #else
 	#define PASCAL_RTN
 #endif
-#if !TARGET_OS_MAC || TARGET_CPU_PPC
-	#define C_DISPATCH_WITH_GLOBALS	1
-	#define C_DISPATCH_WITH_SWITCH	0
-#elif TARGET_CPU_68K
+
+#if TARGET_CPU_68K
 	#ifdef COMPONENT_C_DISPATCHER
 		#define C_DISPATCH_WITH_GLOBALS	0
 		#define C_DISPATCH_WITH_SWITCH	1
@@ -112,8 +110,11 @@
 		#define C_DISPATCH_WITH_SWITCH	0
 	#endif
 #else
-	#error "I have no idea what kind of machine you are using"
+	#define C_DISPATCH_WITH_GLOBALS	1
+	#define C_DISPATCH_WITH_SWITCH	0
 #endif
+
+
 
 /*
 	C_DISPATCH_WITH_GLOBALS implies global storage for dispatch information 
@@ -154,12 +155,14 @@
 	#define ComponentCallLittleEndian 		ComponentDelegate
 #endif
 
+
 #ifdef forPublicQTiRelease
 	#define ComponentQTiCall(procName)				ComponentCall(procName)
 	#define QTIComponentCall(procName)				ComponentCall(procName)
 #endif
 
 #define ADD_BASENAME(name) cdh_GLUE2(COMPONENT_BASENAME(),name)
+#define ADD_SCOPED_BASENAME(name) COMPONENT_BASENAME()::name
 
 #if C_DISPATCH_WITH_GLOBALS
 	PASCAL_RTN ComponentResult COMPONENT_DISPATCH_ENTRY(ComponentParameters *params, COMPONENT_GLOBALS());
@@ -246,25 +249,34 @@
 
 
 	#define StdComponentCall(procName)	\
-		(ComponentFunctionUPP)ADD_BASENAME(procName), cdh_GLUE3(uppCallComponent,procName,ProcInfo),
+		{(ComponentFunctionUPP)ADD_BASENAME(procName), cdh_GLUE3(uppCallComponent,procName,ProcInfo)},
+	
+	#define ScopedStdComponentCall(procName)	\
+		{(ComponentFunctionUPP)ADD_SCOPED_BASENAME(procName), cdh_GLUE3(uppCallComponent,procName,ProcInfo)},
 	
 	#define ComponentCall(procName)	\
-		(ComponentFunctionUPP)ADD_BASENAME(procName), cdh_GLUE3(COMPONENT_UPP_PREFIX(),procName,ProcInfo),
+		{(ComponentFunctionUPP)ADD_BASENAME(procName), cdh_GLUE3(COMPONENT_UPP_PREFIX(),procName,ProcInfo)},
+
+	#define ScopedComponentCall(procName)	\
+		{(ComponentFunctionUPP)ADD_SCOPED_BASENAME(procName), cdh_GLUE3(COMPONENT_UPP_PREFIX(),procName,ProcInfo)},
 
 	#define ComponentSubTypeCall(procName)	\
-		(ComponentFunctionUPP)ADD_BASENAME(procName), cdh_GLUE3(COMPONENT_SUBTYPE_UPP_PREFIX(),procName,ProcInfo),
+		{(ComponentFunctionUPP)ADD_BASENAME(procName), cdh_GLUE3(COMPONENT_SUBTYPE_UPP_PREFIX(),procName,ProcInfo)},
 
-	#define ComponentError(procName)			kCOMPONENT_ERROR, 0,
+	#define ScopedComponentSubTypeCall(procName)	\
+		{(ComponentFunctionUPP)ADD_SCOPED_BASENAME(procName), cdh_GLUE3(COMPONENT_SUBTYPE_UPP_PREFIX(),procName,ProcInfo)},
+
+	#define ComponentError(procName)			{kCOMPONENT_ERROR, 0},
 	
-	#define StdComponentNoError(procName) 		kCOMPONENT_NOERROR, 0,
-	#define ComponentNoError(procName)			kCOMPONENT_NOERROR, 0,
-	#define ComponentSubTypeNoError(procName) 	kCOMPONENT_NOERROR, 0,
+	#define StdComponentNoError(procName) 		{kCOMPONENT_NOERROR, 0},
+	#define ComponentNoError(procName)			{kCOMPONENT_NOERROR, 0},
+	#define ComponentSubTypeNoError(procName) 	{kCOMPONENT_NOERROR, 0},
 	
-	#define ComponentDelegate(procName)			kCOMPONENT_DELEGATE, 0,
+	#define ComponentDelegate(procName)			{kCOMPONENT_DELEGATE, 0},
 	
 	
 	#define ComponentRangeUnused(rangeNum) \
-		static CDHCONST cdhDispatchInfoRecord cdh_GLUE2(cdhDispatchInfo,rangeNum)[1] = { 0 };	\
+		static CDHCONST cdhDispatchInfoRecord cdh_GLUE2(cdhDispatchInfo,rangeNum)[1] = {{0, 0}};	\
 		enum {cdh_GLUE2(cdhDispatchMax,rangeNum) = 0};
 		
 	#define ComponentRangeBegin(rangeNum)	\
@@ -284,8 +296,11 @@
 	#undef ComponentRangeShift
 	#undef ComponentRangeMask
 	#undef StdComponentCall
+	#undef ScopedStdComponentCall
 	#undef ComponentCall
+	#undef ScopedComponentCall
 	#undef ComponentSubTypeCall
+	#undef ScopedComponentSubTypeCall
 	#undef ComponentError
 	#undef StdComponentNoError
 	#undef ComponentNoError
@@ -300,8 +315,11 @@
 	#define ComponentRangeShift(theShift)
 	#define ComponentRangeMask(theMask)
 	#define StdComponentCall(procName)
+	#define ScopedStdComponentCall(procName)
 	#define ComponentCall(procName)
+	#define ScopedComponentCall(procName)
 	#define ComponentSubTypeCall(procName)
+	#define ScopedComponentSubTypeCall(procName)
 	#define ComponentError(procName)
 	#define StdComponentNoError(procName)
 	#define ComponentNoError(procName)
@@ -321,7 +339,6 @@
 	
 	ComponentFunctionUPP COMPONENTSELECTORLOOKUP(short selector_num, ProcInfoType *procInfo)
 	{
-		ProcInfoType pinfo = 0;
 		ComponentFunctionUPP result = kCOMPONENT_DELEGATE;
 		CDHCONST cdhDispatchInfoRecord *infoP = nil;
 		short theRange;

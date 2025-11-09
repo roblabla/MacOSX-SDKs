@@ -1,5 +1,5 @@
 /*	NSObjCRuntime.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
 #if defined(__WIN32__)
@@ -36,7 +36,9 @@
 #endif
 
 #import <objc/objc.h>
-#import <stdarg.h>
+#include <stdarg.h>
+#include <stdint.h>
+#include <AvailabilityMacros.h>
 #if defined(__hpux__)
 #include <sys/param.h>
 #endif
@@ -44,12 +46,11 @@
 FOUNDATION_EXPORT double NSFoundationVersionNumber;
 
 #define NSFoundationVersionNumber10_0 397.4
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#define NSFoundationVersionNumber10_1 425.0
+#endif
 
 @class NSString;
-
-#if defined(__cplusplus)
-extern "C" {
-#endif
 
 FOUNDATION_EXPORT NSString *NSStringFromSelector(SEL aSelector);
 FOUNDATION_EXPORT SEL NSSelectorFromString(NSString *aSelectorName);
@@ -59,10 +60,6 @@ FOUNDATION_EXPORT const char *NSGetSizeAndAlignment(const char *typePtr, unsigne
 
 FOUNDATION_EXPORT void NSLog(NSString *format, ...);
 FOUNDATION_EXPORT void NSLogv(NSString *format, va_list args);
-
-#if defined(__cplusplus)
-}
-#endif
 
 typedef enum _NSComparisonResult {NSOrderedAscending = -1, NSOrderedSame, NSOrderedDescending} NSComparisonResult;
 

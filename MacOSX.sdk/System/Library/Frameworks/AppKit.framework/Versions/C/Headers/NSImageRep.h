@@ -24,7 +24,8 @@ enum {
 	unsigned int isOpaque:1;
         unsigned int cacheParamsComputed:1;
         unsigned int cacheAlphaComputed:1;
-        unsigned int reserved:4;
+        unsigned int loadState:2;
+        unsigned int reserved:2;
         unsigned int bitsPerSample:8;
 	unsigned int gsaved:16;
     } _repFlags;

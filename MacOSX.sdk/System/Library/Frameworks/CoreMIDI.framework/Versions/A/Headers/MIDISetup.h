@@ -18,7 +18,9 @@
 #ifndef __MIDISetup_h__
 #define __MIDISetup_h__
 
-#include <CoreFoundation/CoreFoundation.h>
+#ifndef __MIDIServices_h__
+#include <CoreMIDI/MIDIServices.h>
+#endif
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -55,6 +57,7 @@ typedef struct OpaqueMIDISetup *		MIDISetupRef;
 extern "C" {
 #endif
 
+// ______________________________________________________________________________
 //	MIDISetup
 // ______________________________________________________________________________
 
@@ -237,6 +240,24 @@ MIDIDeviceAddEntity(MIDIDeviceRef device, CFStringRef name,
 extern OSStatus
 MIDIDeviceRemoveEntity(MIDIDeviceRef device, MIDIEntityRef entity);
 
+//  -----------------------------------------------------------------------------
+/*!
+	@function		MIDIEntityAddOrRemoveEndpoints
+
+	@discussion		Drivers may call this function to add to or remove an
+					entity's endpoints.
+					
+					New for CoreMIDI 1.3.
+	
+	@param			device
+						The device from which an entity is to be removed.
+	@param			entity
+						The entity to be removed.
+	@result			An OSStatus result code.
+*/
+extern OSStatus
+MIDIEntityAddOrRemoveEndpoints(MIDIEntityRef entity, ItemCount numSourceEndpoints,
+					ItemCount numDestinationEndpoints);
 
 //  -----------------------------------------------------------------------------
 /*!

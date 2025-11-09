@@ -30,6 +30,8 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* lock_set_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 
 #ifdef __BeforeMigUserHeader
@@ -108,6 +110,116 @@ kern_return_t lock_handoff_accept
 	lock_set_t lock_set,
 	int lock_id
 );
+/* typedefs for all requests */
+
+#ifndef __Request__lock_set_subsystem__defined
+#define __Request__lock_set_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int lock_id;
+	} __Request__lock_acquire_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int lock_id;
+	} __Request__lock_release_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int lock_id;
+	} __Request__lock_try_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int lock_id;
+	} __Request__lock_make_stable_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int lock_id;
+	} __Request__lock_handoff_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int lock_id;
+	} __Request__lock_handoff_accept_t;
+
+#endif /* !__Request__lock_set_subsystem__defined */
+
+/* union of all requests */
+
+#ifndef __RequestUnion__lock_set_subsystem__defined
+#define __RequestUnion__lock_set_subsystem__defined
+union __RequestUnion__lock_set_subsystem {
+	__Request__lock_acquire_t Request_lock_acquire;
+	__Request__lock_release_t Request_lock_release;
+	__Request__lock_try_t Request_lock_try;
+	__Request__lock_make_stable_t Request_lock_make_stable;
+	__Request__lock_handoff_t Request_lock_handoff;
+	__Request__lock_handoff_accept_t Request_lock_handoff_accept;
+};
+#endif /* !__RequestUnion__lock_set_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__lock_set_subsystem__defined
+#define __Reply__lock_set_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__lock_acquire_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__lock_release_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__lock_try_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__lock_make_stable_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__lock_handoff_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__lock_handoff_accept_t;
+
+#endif /* !__Reply__lock_set_subsystem__defined */
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__lock_set_subsystem__defined
+#define __ReplyUnion__lock_set_subsystem__defined
+union __ReplyUnion__lock_set_subsystem {
+	__Reply__lock_acquire_t Reply_lock_acquire;
+	__Reply__lock_release_t Reply_lock_release;
+	__Reply__lock_try_t Reply_lock_try;
+	__Reply__lock_make_stable_t Reply_lock_make_stable;
+	__Reply__lock_handoff_t Reply_lock_handoff;
+	__Reply__lock_handoff_accept_t Reply_lock_handoff_accept;
+};
+#endif /* !__RequestUnion__lock_set_subsystem__defined */
 
 #ifndef subsystem_to_name_map_lock_set
 #define subsystem_to_name_map_lock_set \

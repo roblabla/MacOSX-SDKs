@@ -3,9 +3,9 @@
  
      Contains:   Color Management Device Interfaces
  
-     Version:    ColorSync-81~8
+     Version:    ColorSync-98.1~196
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,8 +16,8 @@
 #ifndef __CMDEVICEINTEGRATION__
 #define __CMDEVICEINTEGRATION__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __CMAPPLICATION__
@@ -28,12 +28,9 @@
 #include <ColorSync/CMICCProfile.h>
 #endif
 
-#ifndef __CFSTRING__
-#include <CoreFoundation/CFString.h>
-#endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -43,15 +40,8 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
-#if TARGET_API_MAC_OSX
 /*
     The current versions of the data structure
     containing information on registered devices.
@@ -262,7 +252,7 @@ CMRegisterColorDevice(
   CMDeviceClass          deviceClass,
   CMDeviceID             deviceID,
   CFDictionaryRef        deviceName,
-  const CMDeviceScope *  deviceScope);
+  const CMDeviceScope *  deviceScope)                         AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -276,7 +266,7 @@ CMRegisterColorDevice(
 extern CMError 
 CMUnregisterColorDevice(
   CMDeviceClass   deviceClass,
-  CMDeviceID      deviceID);
+  CMDeviceID      deviceID)                                   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -293,7 +283,7 @@ CMUnregisterColorDevice(
 extern CMError 
 CMSetDefaultDevice(
   CMDeviceClass   deviceClass,
-  CMDeviceID      deviceID);
+  CMDeviceID      deviceID)                                   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -307,7 +297,7 @@ CMSetDefaultDevice(
 extern CMError 
 CMGetDefaultDevice(
   CMDeviceClass   deviceClass,
-  CMDeviceID *    deviceID);
+  CMDeviceID *    deviceID)                                   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -326,7 +316,7 @@ CMSetDeviceFactoryProfiles(
   CMDeviceClass                 deviceClass,
   CMDeviceID                    deviceID,
   CMDeviceProfileID             defaultProfID,
-  const CMDeviceProfileArray *  deviceProfiles);
+  const CMDeviceProfileArray *  deviceProfiles)               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -343,7 +333,7 @@ CMGetDeviceFactoryProfiles(
   CMDeviceID              deviceID,
   CMDeviceProfileID *     defaultProfID,
   UInt32 *                arraySize,
-  CMDeviceProfileArray *  deviceProfiles);
+  CMDeviceProfileArray *  deviceProfiles)                     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -359,7 +349,7 @@ CMSetDeviceProfiles(
   CMDeviceClass                 deviceClass,
   CMDeviceID                    deviceID,
   const CMDeviceProfileScope *  profileScope,
-  const CMDeviceProfileArray *  deviceProfiles);
+  const CMDeviceProfileArray *  deviceProfiles)               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -375,7 +365,7 @@ CMGetDeviceProfiles(
   CMDeviceClass           deviceClass,
   CMDeviceID              deviceID,
   UInt32 *                arraySize,
-  CMDeviceProfileArray *  deviceProfiles);
+  CMDeviceProfileArray *  deviceProfiles)                     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -390,7 +380,7 @@ extern CMError
 CMSetDeviceDefaultProfileID(
   CMDeviceClass       deviceClass,
   CMDeviceID          deviceID,
-  CMDeviceProfileID   defaultProfID);
+  CMDeviceProfileID   defaultProfID)                          AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -405,7 +395,7 @@ extern CMError
 CMGetDeviceDefaultProfileID(
   CMDeviceClass        deviceClass,
   CMDeviceID           deviceID,
-  CMDeviceProfileID *  defaultProfID);
+  CMDeviceProfileID *  defaultProfID)                         AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -421,7 +411,7 @@ CMGetDeviceProfile(
   CMDeviceClass        deviceClass,
   CMDeviceID           deviceID,
   CMDeviceProfileID    profileID,
-  CMProfileLocation *  deviceProfLoc);
+  CMProfileLocation *  deviceProfLoc)                         AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -438,7 +428,7 @@ CMSetDeviceProfile(
   CMDeviceID                    deviceID,
   const CMDeviceProfileScope *  profileScope,
   CMDeviceProfileID             profileID,
-  const CMProfileLocation *     deviceProfLoc);
+  const CMProfileLocation *     deviceProfLoc)                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -456,7 +446,7 @@ extern CMError
 CMSetDeviceState(
   CMDeviceClass   deviceClass,
   CMDeviceID      deviceID,
-  CMDeviceState   deviceState);
+  CMDeviceState   deviceState)                                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -471,7 +461,7 @@ extern CMError
 CMGetDeviceState(
   CMDeviceClass    deviceClass,
   CMDeviceID       deviceID,
-  CMDeviceState *  deviceState);
+  CMDeviceState *  deviceState)                               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -486,7 +476,7 @@ extern CMError
 CMGetDeviceInfo(
   CMDeviceClass   deviceClass,
   CMDeviceID      deviceID,
-  CMDeviceInfo *  deviceInfo);
+  CMDeviceInfo *  deviceInfo)                                 AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -505,7 +495,7 @@ CMIterateColorDevices(
   CMIterateDeviceInfoProcPtr   proc,
   UInt32 *                     seed,
   UInt32 *                     count,
-  void *                       refCon);
+  void *                       refCon)                        AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -522,19 +512,11 @@ CMIterateDeviceProfiles(
   UInt32 *                        seed,
   UInt32 *                        count,
   UInt32                          flags,
-  void *                          refCon);
+  void *                          refCon)                     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
-#endif  /* TARGET_API_MAC_OSX */
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

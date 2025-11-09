@@ -94,7 +94,7 @@
 /* #undef WORDS_BIGENDIAN */
 
 /* Define if lex declares yytext as a char * by default, not a char[].  */
-/* #undef YYTEXT_POINTER */
+#define YYTEXT_POINTER 1
 
 /* #undef uint */
 #define ulong unsigned long 
@@ -115,7 +115,7 @@
 #define HAVE_ALARM 1
 
 /* Define if you have the asctime_r function.  */
-/* #undef HAVE_ASCTIME_R */
+#define HAVE_ASCTIME_R 1
 
 /* Define if you have the atod function.  */
 /* #undef HAVE_ATOD */
@@ -145,7 +145,7 @@
 #define HAVE_CTERMID 1
 
 /* Define if you have the ctime_r function.  */
-/* #undef HAVE_CTIME_R */
+#define HAVE_CTIME_R 1
 
 /* Define if you have the cuserid function.  */
 /* #undef HAVE_CUSERID */
@@ -217,7 +217,7 @@
 /* #undef HAVE_GETPASSPHRASE */
 
 /* Define if you have the getpgid function.  */
-/* #undef HAVE_GETPGID */
+#define HAVE_GETPGID 1
 
 /* Define if you have the getpid function.  */
 #define HAVE_GETPID 1
@@ -247,7 +247,7 @@
 #define HAVE_GETSERVBYPORT 1
 
 /* Define if you have the getsid function.  */
-/* #undef HAVE_GETSID */
+#define HAVE_GETSID 1
 
 /* Define if you have the gettimeofday function.  */
 #define HAVE_GETTIMEOFDAY 1
@@ -256,7 +256,7 @@
 #define HAVE_GETWD 1
 
 /* Define if you have the gmtime_r function.  */
-/* #undef HAVE_GMTIME_R */
+#define HAVE_GMTIME_R 1
 
 /* Define if you have the hstrerror function.  */
 /* #undef HAVE_HSTRERROR */
@@ -289,10 +289,10 @@
 #define HAVE_LOCALECONV 1
 
 /* Define if you have the localtime_r function.  */
-/* #undef HAVE_LOCALTIME_R */
+#define HAVE_LOCALTIME_R 1
 
 /* Define if you have the lockf function.  */
-/* #undef HAVE_LOCKF */
+#define HAVE_LOCKF 1
 
 /* Define if you have the locking function.  */
 /* #undef HAVE_LOCKING */
@@ -301,7 +301,7 @@
 #define HAVE_LONGJMP 1
 
 /* Define if you have the lrand48 function.  */
-/* #undef HAVE_LRAND48 */
+#define HAVE_LRAND48 1
 
 /* Define if you have the madvise function.  */
 #define HAVE_MADVISE 1
@@ -328,7 +328,7 @@
 #define HAVE_PERROR 1
 
 /* Define if you have the pread function.  */
-/* #undef HAVE_PREAD */
+#define HAVE_PREAD 1
 
 /* Define if you have the pthread_attr_create function.  */
 /* #undef HAVE_PTHREAD_ATTR_CREATE */
@@ -358,16 +358,16 @@
 #define HAVE_PTHREAD_SETSCHEDPARAM 1
 
 /* Define if you have the pthread_sigmask function.  */
-/* #undef HAVE_PTHREAD_SIGMASK */
+#define HAVE_PTHREAD_SIGMASK 1
 
 /* Define if you have the putenv function.  */
 #define HAVE_PUTENV 1
 
 /* Define if you have the pwrite function.  */
-/* #undef HAVE_PWRITE */
+#define HAVE_PWRITE 1
 
 /* Define if you have the rand_r function.  */
-/* #undef HAVE_RAND_R */
+#define HAVE_RAND_R 1
 
 /* Define if you have the random function.  */
 #define HAVE_RANDOM 1
@@ -424,7 +424,7 @@
 /* #undef HAVE_SIGACTION */
 
 /* Define if you have the sighold function.  */
-/* #undef HAVE_SIGHOLD */
+#define HAVE_SIGHOLD 1
 
 /* Define if you have the sigset function.  */
 /* #undef HAVE_SIGSET */
@@ -442,7 +442,7 @@
 #define HAVE_SOCKET 1
 
 /* Define if you have the srand48 function.  */
-/* #undef HAVE_SRAND48 */
+#define HAVE_SRAND48 1
 
 /* Define if you have the srandom function.  */
 #define HAVE_SRANDOM 1
@@ -472,10 +472,10 @@
 #define HAVE_STRFTIME 1
 
 /* Define if you have the strlcat function.  */
-/* #undef HAVE_STRLCAT */
+#define HAVE_STRLCAT 1
 
 /* Define if you have the strlcpy function.  */
-/* #undef HAVE_STRLCPY */
+#define HAVE_STRLCPY 1
 
 /* Define if you have the strnlen function.  */
 /* #undef HAVE_STRNLEN */
@@ -490,7 +490,7 @@
 #define HAVE_STRTOD 1
 
 /* Define if you have the strtok_r function.  */
-/* #undef HAVE_STRTOK_R */
+#define HAVE_STRTOK_R 1
 
 /* Define if you have the strtol function.  */
 #define HAVE_STRTOL 1
@@ -499,7 +499,7 @@
 #define HAVE_STRTOUL 1
 
 /* Define if you have the strtoull function.  */
-/* #undef HAVE_STRTOULL */
+#define HAVE_STRTOULL 1
 
 /* Define if you have the symlink function.  */
 #define HAVE_SYMLINK 1
@@ -712,7 +712,7 @@
 #define HAVE_SYSLOG_H 1
 
 /* Define if you have the <term.h> header file.  */
-/* #undef HAVE_TERM_H */
+#define HAVE_TERM_H 1
 
 /* Define if you have the <termio.h> header file.  */
 /* #undef HAVE_TERMIO_H */
@@ -748,7 +748,7 @@
 #define HAVE_LIBM 1
 
 /* Define if you have the pam library (-lpam).  */
-/* #undef HAVE_LIBPAM */
+#define HAVE_LIBPAM 1
 
 /* Define if you have the resolv library (-lresolv).  */
 /* #undef HAVE_LIBRESOLV */
@@ -847,19 +847,19 @@
 /* #undef SAPI_SERVLET */
 
 /* Whether localtime_r is declared */
-#define MISSING_LOCALTIME_R_DECL 1
+/* #undef MISSING_LOCALTIME_R_DECL */
 
 /* Whether gmtime_r is declared */
-#define MISSING_GMTIME_R_DECL 1
+/* #undef MISSING_GMTIME_R_DECL */
 
 /* Whether asctime_r is declared */
-#define MISSING_ASCTIME_R_DECL 1
+/* #undef MISSING_ASCTIME_R_DECL */
 
 /* Whether ctime_r is declared */
-#define MISSING_CTIME_R_DECL 1
+/* #undef MISSING_CTIME_R_DECL */
 
 /* Whether strtok_r is declared */
-#define MISSING_STRTOK_R_DECL 1
+/* #undef MISSING_STRTOK_R_DECL */
 
 /* whether you have sendmail */
 #define HAVE_SENDMAIL 1
@@ -919,13 +919,13 @@
 /* #undef PHP_IRIX_TIME_R */
 
 /* whether you have POSIX readdir_r */
-/* #undef HAVE_POSIX_READDIR_R */
+#define HAVE_POSIX_READDIR_R 1
 
 /* whether you have old-style readdir_r */
 /* #undef HAVE_OLD_READDIR_R */
 
 /*   */
-#define in_addr_t u_int
+/* #undef in_addr_t */
 
 /*   */
 #define PHP_SAFE_MODE 0
@@ -1525,7 +1525,7 @@
 /* #undef HAVE_INT_8_16_32 */
 
 /*   */
-#define SOCKET_SIZE_TYPE int
+#define SOCKET_SIZE_TYPE size_t
 
 /*   */
 #define RETQSORTTYPE void
@@ -1546,10 +1546,10 @@
 /* #undef HAVE_NONPOSIX_PTHREAD_MUTEX_INIT */
 
 /*   */
-/* #undef HAVE_READDIR_R */
+#define HAVE_READDIR_R 
 
 /*   */
-/* #undef HAVE_SIGWAIT */
+#define HAVE_SIGWAIT 
 
 /*   */
 /* #undef HAVE_NONPOSIX_SIGWAIT */
@@ -1804,7 +1804,7 @@
 /* #undef HAVE_LIBDL */
 
 /*   */
-/* #undef HAVE_LIBPAM */
+#define HAVE_LIBPAM 1
 
 /* Whether the system supports standard DES salt */
 #define PHP_STD_DES_CRYPT 1
@@ -2008,10 +2008,10 @@
 /* #undef PTHREADS */
 
 /* PHP build date */
-#define PHP_BUILD_DATE "2002-05-02"
+#define PHP_BUILD_DATE "2003-01-15"
 
 /* uname -a output */
-#define PHP_UNAME "Darwin smallsoldiers 1.4 Darwin Kernel Version 5.2: Fri Dec  7 21:39:35 PST 2001; root:xnu/xnu-201.14.obj~1/RELEASE_PPC  Power Macintosh powerpc"
+#define PHP_UNAME "Darwin sting 6.0 Darwin Kernel Version 6.0: Sat Jul 27 13:18:52 PDT 2002; root:xnu/xnu-344.obj~1/RELEASE_PPC  Power Macintosh powerpc"
 
 /* uname output */
 #define PHP_OS "Darwin"

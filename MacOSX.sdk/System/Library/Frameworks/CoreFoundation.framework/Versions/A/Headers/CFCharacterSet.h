@@ -1,5 +1,5 @@
 /*	CFCharacterSet.h
-	Copyright 1999-2001, Apple, Inc. All rights reserved.
+	Copyright 1999-2002, Apple, Inc. All rights reserved.
 */
 
 /*!
@@ -33,7 +33,6 @@
 
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFData.h>
-#include <CoreFoundation/CFString.h>
 
 #if defined(__cplusplus)
 extern "C" {
@@ -62,12 +61,16 @@ typedef enum {
     kCFCharacterSetDecimalDigit, /* Decimal digit character set */
     kCFCharacterSetLetter, /* Letter character set (Unicode General Category L* & M*) */
     kCFCharacterSetLowercaseLetter, /* Lowercase character set (Unicode General Category Ll) */
-    kCFCharacterSetUppercaseLetter, /* Uppercase character set (Unicode General Category Lu) */
+    kCFCharacterSetUppercaseLetter, /* Uppercase character set (Unicode General Category Lu and Lt) */
     kCFCharacterSetNonBase, /* Non-base character set (Unicode General Category M*) */
     kCFCharacterSetDecomposable, /* Canonically decomposable character set */
     kCFCharacterSetAlphaNumeric, /* Alpha Numeric character set (Unicode General Category L*, M*, & N*) */
     kCFCharacterSetPunctuation, /* Punctuation character set (Unicode General Category P*) */
     kCFCharacterSetIllegal /* Illegal character set */
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+    ,
+    kCFCharacterSetCapitalizedLetter /* Titlecase character set (Unicode General Category Lt) */
+#endif
 } CFCharacterSetPredefinedSet;
 
 /*!
@@ -140,7 +143,7 @@ CFCharacterSetRef CFCharacterSetCreateWithCharactersInString(CFAllocatorRef allo
                 representation could contain all the Unicode character
                 range starting from BMP to Plane 16.  The first 8K bytes
                 of the data represents the BMP range.  The BMP range 8K
-                bytes can be followed by zero to thirty-one 8K byte
+                bytes can be followed by zero to sixteen 8K byte
                 bitmaps, each one with the plane index byte prepended.
                 For example, the bitmap representing the BMP and Plane 2
                 has the size of 16385 bytes (8K bytes for BMP, 1 byte
@@ -153,6 +156,44 @@ CFCharacterSetRef CFCharacterSetCreateWithCharactersInString(CFAllocatorRef allo
 */
 CF_EXPORT
 CFCharacterSetRef CFCharacterSetCreateWithBitmapRepresentation(CFAllocatorRef alloc, CFDataRef theData);
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+/*!
+	@function CFCharacterSetCreateInvertedSet
+	Creates a new immutable character set that is the invert of the specified character set.
+	@param alloc The CFAllocator which should be used to allocate
+			memory for the array and its storage for values. This
+			parameter may be NULL in which case the current default
+			CFAllocator is used. If this reference is not a valid
+			CFAllocator, the behavior is undefined.
+	@param theSet The CFCharacterSet which is to be inverted.  If this
+                		parameter is not a valid CFCharacterSet, the behavior is
+              		undefined.
+	@result A reference to the new immutable CFCharacterSet.
+*/
+CF_EXPORT CFCharacterSetRef CFCharacterSetCreateInvertedSet(CFAllocatorRef alloc, CFCharacterSetRef theSet);
+
+/*!
+	@function CFCharacterSetIsSupersetOfSet
+	Reports whether or not the character set is a superset of the character set specified as the second parameter.
+	@param theSet  The character set to be checked for the membership of theOtherSet.
+		If this parameter is not a valid CFCharacterSet, the behavior is undefined.
+	@param theOtherset  The character set to be checked whether or not it is a subset of theSet.
+		If this parameter is not a valid CFCharacterSet, the behavior is undefined.
+*/
+CF_EXPORT Boolean CFCharacterSetIsSupersetOfSet(CFCharacterSetRef theSet, CFCharacterSetRef theOtherset);
+
+/*!
+	@function CFCharacterSetHasMemberInPlane
+	Reports whether or not the character set contains at least one member character in the specified plane.
+	@param theSet  The character set to be checked for the membership.  If this
+		parameter is not a valid CFCharacterSet, the behavior is undefined.
+	@param thePlane  The plane number to be checked for the membership.
+		The valid value range is from 0 to 16.  If the value is outside of the valid
+		plane number range, the behavior is undefined.
+*/
+CF_EXPORT Boolean CFCharacterSetHasMemberInPlane(CFCharacterSetRef theSet, CFIndex thePlane);
+#endif
 
 /*!
 	@function CFCharacterSetCreateMutable
@@ -196,6 +237,19 @@ CFMutableCharacterSetRef CFCharacterSetCreateMutableCopy(CFAllocatorRef alloc, C
 */
 CF_EXPORT
 Boolean CFCharacterSetIsCharacterMember(CFCharacterSetRef theSet, UniChar theChar);
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+/*!
+	@function CFCharacterSetIsLongCharacterMember
+	Reports whether or not the UTF-32 character is in the character set.
+	@param theSet The character set to be searched. If this parameter
+               		 is not a valid CFCharacterSet, the behavior is undefined.
+	@param theChar The UTF-32 character for which to test against the
+			character set.
+        @result true, if the value is in the character set, otherwise false.
+*/
+CF_EXPORT Boolean CFCharacterSetIsLongCharacterMember(CFCharacterSetRef theSet, UTF32Char theChar);
+#endif
 
 /*!
 	@function CFCharacterSetCreateBitmapRepresentation

@@ -18,7 +18,8 @@
         unsigned int completes:1;
 	unsigned int buttonBordered:1;
         unsigned int popUpIsUp:1;
-	unsigned int reserved:12;
+	unsigned int filteringEvents:1;
+	unsigned int reserved:11;
 	unsigned int visibleItems:16;
     } _cbcFlags;
     NSButtonCell *_buttonCell;

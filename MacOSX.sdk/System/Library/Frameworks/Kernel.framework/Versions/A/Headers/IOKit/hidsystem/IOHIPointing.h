@@ -55,6 +55,7 @@ typedef void (*ScrollWheelEventAction)(OSObject * target,
                                        AbsoluteTime ts);
 
 /* End Action Definitions */
+class IOHIDPointingDevice;
 
 class IOHIPointing : public IOHIDevice
 {
@@ -80,7 +81,53 @@ private:
     AbsolutePointerEventAction _absolutePointerEventAction;
     OSObject *                 _scrollWheelEventTarget;
     ScrollWheelEventAction     _scrollWheelEventAction;
-    void *		       _reserved;
+    
+    #define SCROLL_TIME_DELTA_COUNT		8
+
+    struct ExpansionData { 
+    
+        // Added for scroll whell accel support
+        IOFixed		scrollAcceleration;
+        void *		scrollScaleSegments;
+        IOItemCount	scrollScaleSegCount;
+
+        UInt32		scrollTimeDeltas1[SCROLL_TIME_DELTA_COUNT];
+        UInt32		scrollTimeDeltas2[SCROLL_TIME_DELTA_COUNT];
+        UInt32		scrollTimeDeltas3[SCROLL_TIME_DELTA_COUNT];
+        UInt8 		scrollTimeDeltaIndex1;
+        UInt8 		scrollTimeDeltaIndex2;
+        UInt8 		scrollTimeDeltaIndex3;
+        int		scrollLastDeltaAxis1;
+        int		scrollLastDeltaAxis2;
+        int		scrollLastDeltaAxis3;
+        AbsoluteTime	scrollLastEventTime1;
+        AbsoluteTime	scrollLastEventTime2;
+        AbsoluteTime	scrollLastEventTime3;
+
+        // Added to post events to the HID Manager
+        IOHIDPointingDevice  * hidPointingNub;
+
+    };
+
+    void *  _reserved;
+    
+    #define _scrollAcceleration		((ExpansionData *)_reserved)->scrollAcceleration
+    #define _scrollScaleSegments 	((ExpansionData *)_reserved)->scrollScaleSegments
+    #define _scrollScaleSegCount 	((ExpansionData *)_reserved)->scrollScaleSegCount
+    #define _scrollTimeDeltas1		((ExpansionData *)_reserved)->scrollTimeDeltas1
+    #define _scrollTimeDeltas2		((ExpansionData *)_reserved)->scrollTimeDeltas2
+    #define _scrollTimeDeltas3		((ExpansionData *)_reserved)->scrollTimeDeltas3
+    #define _scrollTimeDeltaIndex1	((ExpansionData *)_reserved)->scrollTimeDeltaIndex1
+    #define _scrollTimeDeltaIndex2	((ExpansionData *)_reserved)->scrollTimeDeltaIndex2
+    #define _scrollTimeDeltaIndex3	((ExpansionData *)_reserved)->scrollTimeDeltaIndex3
+    #define _scrollLastDeltaAxis1	((ExpansionData *)_reserved)->scrollLastDeltaAxis1
+    #define _scrollLastDeltaAxis2	((ExpansionData *)_reserved)->scrollLastDeltaAxis2
+    #define _scrollLastDeltaAxis3	((ExpansionData *)_reserved)->scrollLastDeltaAxis3
+    #define _scrollLastEventTime1	((ExpansionData *)_reserved)->scrollLastEventTime1
+    #define _scrollLastEventTime2	((ExpansionData *)_reserved)->scrollLastEventTime2
+    #define _scrollLastEventTime3	((ExpansionData *)_reserved)->scrollLastEventTime3
+
+    #define _hidPointingNub		((ExpansionData *)_reserved)->hidPointingNub
 
 protected:
   virtual void dispatchRelativePointerEvent(int        dx,
@@ -106,6 +153,7 @@ protected:
 public:
   virtual bool init(OSDictionary * properties = 0);
   virtual bool start(IOService * provider);
+  virtual void stop( IOService * provider );
   virtual void free();
 
   virtual bool open(IOService *                client,
@@ -128,10 +176,27 @@ protected: // for subclasses to implement
   virtual IOItemCount buttonCount();
   virtual IOFixed     resolution();
 
+  // RY: Adding method to copy scroll wheel accel table.
+  // Unfortunately, we don't have any padding, so this
+  // is going to be non-virtual.
+  /*virtual*/ OSData * copyScrollAccelerationTable();
+
 private:
   virtual bool resetPointer();
   virtual void scalePointer(int * dxp, int * dyp);
   virtual void setupForAcceleration(IOFixed accl);
+  
+  // RY: Adding methods to support scroll wheel accel.
+  // Unfortunately, we don't have any padding, so these
+  // are going to be non-virtual.
+  /*virtual*/ bool 	resetScroll();
+  /*virtual*/ void 	scaleScrollAxes(int * axis1p, int * axis2p, int * axis3p);
+  /*virtual*/ void 	setupScrollForAcceleration(IOFixed accl);
+  
+  // RY: We have to make sure that subclasses that will 
+  // take advantage of this have their defined resolution 
+  // in their property table.
+  /*virtual*/ IOFixed	scrollResolution();
 };
 
 #endif /* !_IOHIPOINTING_H */

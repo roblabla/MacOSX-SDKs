@@ -22,7 +22,7 @@ Alpha component defines opacity on devices which support it (1.0 == full opacity
 
 It's illegal to ask a color for components that are not defined for its colorspace. If you need to ask a color for a certain set of components (for instance, you need to know the RGB components of a color you got from the color panel), you should first convert the color to the appropriate colorspace using the colorUsingColorSpaceName: method.  If the color is already in the specified colorspace, you get the same color back; otherwise you get a conversion which is usually lossy or is correct only for the current device. You might also get back nil if the specified conversion cannot be done.
 
-Subclassers of NSColor need to implement the methods colorSpaceName, set, the various methods which return the components for that color space, and the NSCoding protocol. Some other methods such as colorWithAlphaComponent:, isEqual:, colorUsingColorSpaceName:device: may also be implemented if they make sense for the colorspace. Mutable subclassers (if any) should also implement copyWithZone: to a true copy.
+Subclassers of NSColor need to implement the methods colorSpaceName, set, the various methods which return the components for that color space, and the NSCoding protocol. Some other methods such as colorWithAlphaComponent:, isEqual:, colorUsingColorSpaceName:device: may also be implemented if they make sense for the colorspace. If isEqual: is overridden, so should hash (because if [a isEqual:b] then [a hash] == [b hash]). Mutable subclassers (if any) should also implement copyWithZone: to a true copy.
 */
 
 #import <Foundation/NSObject.h>
@@ -31,6 +31,9 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 #import <AppKit/NSCell.h>
 
 @class NSDictionary, NSPasteboard, NSImage;
+
+#define NSAppKitVersionNumberWithPatternColorLeakFix 641.0
+
 
 
 @interface NSColor : NSObject <NSCopying, NSCoding>
@@ -85,7 +88,7 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 + (NSColor *)controlTextColor;			// Text on controls
 + (NSColor *)controlBackgroundColor;		// Background of large controls (browser, tableview, clipview, ...)
 + (NSColor *)selectedControlColor;		// Control face for selected controls
-+ (NSColor *)secondarySelectedControlColor;	// Control face for selected controls when control is not active (key)
++ (NSColor *)secondarySelectedControlColor;	// Color for selected controls when control is not active (that is, not focused)
 + (NSColor *)selectedControlTextColor;		// Text on selected controls
 + (NSColor *)disabledControlTextColor;		// Text on disabled controls
 + (NSColor *)textColor;				// Document text
@@ -111,6 +114,11 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 
 + (NSColor *)headerColor;			// Background color for header cells in Table/OutlineView
 + (NSColor *)headerTextColor;			// Text color for header cells in Table/OutlineView
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
++ (NSColor *)alternateSelectedControlColor;	// Similar to selectedControlColor; for use in lists and tables 
++ (NSColor *)alternateSelectedControlTextColor;		// Similar to selectedControlTextColor; see alternateSelectedControlColor
+#endif
 
 - (NSColor *)highlightWithLevel:(float)val;	// val = 0 => receiver, val = 1 => highlightColor
 - (NSColor *)shadowWithLevel:(float)val;	// val = 0 => receiver, val = 1 => shadowColor
@@ -201,7 +209,7 @@ If colorSpace is nil, then the most appropriate color space is used.
 + (NSColor *)colorFromPasteboard:(NSPasteboard *)pasteBoard;
 - (void)writeToPasteboard:(NSPasteboard *)pasteBoard;
 
-/* Pattern methods
+/* Pattern methods. Note that colorWithPatternImage: mistakenly returns a non-autoreleased color in 10.1.x and earlier. This has been fixed in (NSAppKitVersionNumber >= NSAppKitVersionNumberWithPatternColorLeakFix), for apps linked post-10.1.x.
 */
 + (NSColor*)colorWithPatternImage:(NSImage*)image;
 - (NSImage*)patternImage; 

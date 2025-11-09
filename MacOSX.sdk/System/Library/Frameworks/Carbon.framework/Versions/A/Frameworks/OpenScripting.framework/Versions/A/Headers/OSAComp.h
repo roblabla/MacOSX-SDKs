@@ -3,9 +3,9 @@
  
      Contains:   AppleScript Component Implementor's Interfaces.
  
-     Version:    OSA-30~10
+     Version:    OSA-48~15
  
-     Copyright:  © 1992-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1992-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,16 +16,12 @@
 #ifndef __OSACOMP__
 #define __OSACOMP__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __AEDATAMODEL__
-#include <AE/AEDataModel.h>
+#ifndef __APPLICATIONSERVICES__
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -33,14 +29,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 /**************************************************************************
@@ -60,7 +48,7 @@ extern "C" {
 extern OSErr 
 OSAGetStorageType(
   AEDataStorage   scriptData,
-  DescType *      dscType);
+  DescType *      dscType)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -74,7 +62,7 @@ OSAGetStorageType(
 extern OSErr 
 OSAAddStorageType(
   AEDataStorage   scriptData,
-  DescType        dscType);
+  DescType        dscType)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -86,17 +74,9 @@ OSAAddStorageType(
  *    Non-Carbon CFM:   in AppleScriptLib 1.1 and later
  */
 extern OSErr 
-OSARemoveStorageType(AEDataStorage scriptData);
+OSARemoveStorageType(AEDataStorage scriptData)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

@@ -68,7 +68,7 @@ protected:
     IOPhysicalAddress		physicalFramebuffer;
     IODeviceMemory	*	vramRange;
 
-    UInt8			__reservedF;
+    UInt8			gammaWidth;
     UInt8			__reservedD;
     UInt8			lastGrayMode;
     VDClutBehavior		lastClutSetting;
@@ -94,7 +94,7 @@ protected:
     unsigned int		avJackState:1;
     unsigned int		grayMode:1;
     unsigned int		platformSleep:1;
-    unsigned int		__reservedG:1;
+    unsigned int		forceReadEDID:1;
     unsigned int		supportsProbe:1;
     unsigned int		__reservedB:25;
 
@@ -105,7 +105,12 @@ protected:
 private:
     struct IONDRVFramebufferPrivate * __private;
 
-    OSMetaClassDeclareReservedUnused(IONDRVFramebuffer, 0);
+public:
+    virtual IOReturn doDriverIO( UInt32 commandID, void * contents,
+                                 UInt32 commandCode, UInt32 commandKind );
+private:
+    OSMetaClassDeclareReservedUsed(IONDRVFramebuffer, 0);
+
     OSMetaClassDeclareReservedUnused(IONDRVFramebuffer, 1);
     OSMetaClassDeclareReservedUnused(IONDRVFramebuffer, 2);
     OSMetaClassDeclareReservedUnused(IONDRVFramebuffer, 3);
@@ -163,8 +168,11 @@ private:
                             const char * libraryName, const char * symbolName );
     static bool _videoJackStateChangeHandler( void * target, void * ref,
                             IOService * newService );
+    static void _avProbeAction( OSObject * p0, IOTimerEventSource * evtSrc );
     void displayI2CPower( bool enable );
     IOReturn ndrvSetPowerState( UInt32 newState );
+    IOReturn ndrvUpdatePowerState( void );
+    IOReturn ndrvSetDisplayPowerState( UInt32 newState );
     static IOReturn _probeAction( IONDRVFramebuffer * self, IOOptionBits options );
     IOReturn mirrorInfo( UInt32 index );
     friend class IONDRVI2CInterface;
@@ -174,6 +182,11 @@ private:
     IOReturn setMirror( IONDRVFramebuffer * other );
     IOReturn setConnectionFlags( void );
     bool getOnlineState( void );
+    IOReturn ndrvGetSetFeature( UInt32 feature, UInt32 newValue, UInt32 * currentValue );
+    static IOReturn _doControl( IONDRVFramebuffer * self, UInt32 code, void * params );
+    static IOReturn _doStatus( IONDRVFramebuffer * self, UInt32 code, void * params );
+    static IOReturn extControl( OSObject * owner, void * code, void * params );
+    static IOReturn extStatus( OSObject * owner, void * code, void * params );
 
 public:
     virtual IOReturn doControl( UInt32 code, void * params );
@@ -185,6 +198,8 @@ public:
 				SInt32 *	score );
 
     virtual bool start( IOService * provider );
+
+    virtual void stop( IOService * provider );
 
     virtual void free( void );
 

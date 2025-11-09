@@ -12,10 +12,12 @@
 @class NSGraphicsContext, NSImage, NSPasteboard, NSWindow;
 
 /* The version of the AppKit framework */
-APPKIT_EXTERN double NSAppKitVersionNumber;
+APPKIT_EXTERN const double NSAppKitVersionNumber;
 
 #define NSAppKitVersionNumber10_0 577
-
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+#define NSAppKitVersionNumber10_1 620
+#endif
 
 /* Modes passed to NSRunLoop */
 APPKIT_EXTERN NSString *NSModalPanelRunLoopMode;
@@ -76,7 +78,9 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
         unsigned int        _didNSOpenOrPrint:1;
         unsigned int	    _inDealloc:1;
         unsigned int	    _pendingDidFinish:1;
-	unsigned int        _reserved:12;
+        unsigned int	    _hasKeyFocus:1;
+        unsigned int	    _panelsNonactivating:1;
+	unsigned int        _reserved:10;
     }                   _appFlags;
     id                  _mainMenu;
     id                  _appIcon;
@@ -297,6 +301,12 @@ If not specified, obtain from CFBundleShortVersionString key in infoDictionary..
 /* An Application's startup function */
 
 APPKIT_EXTERN int NSApplicationMain(int argc, const char *argv[]);
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+/* The startup function to call for a Cocoa bundle */
+
+APPKIT_EXTERN BOOL NSApplicationLoad(void);
+#endif
 
 /*
  * Functions to enable/disable Services Menu items.  These should usually

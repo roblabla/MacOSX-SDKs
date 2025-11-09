@@ -3,9 +3,9 @@
  
      Contains:   Notification Manager interfaces
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1989-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1989-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,16 +16,12 @@
 #ifndef __NOTIFICATION__
 #define __NOTIFICATION__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __OSUTILS__
-#include <CarbonCore/OSUtils.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -35,13 +31,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 typedef struct NMRec                    NMRec;
 typedef NMRec *                         NMRecPtr;
@@ -70,7 +60,7 @@ struct NMRec {
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern NMUPP
-NewNMUPP(NMProcPtr userRoutine);
+NewNMUPP(NMProcPtr userRoutine)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeNMUPP()
@@ -81,7 +71,7 @@ NewNMUPP(NMProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeNMUPP(NMUPP userUPP);
+DisposeNMUPP(NMUPP userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeNMUPP()
@@ -94,10 +84,13 @@ DisposeNMUPP(NMUPP userUPP);
 extern void
 InvokeNMUPP(
   NMRecPtr  nmReqPtr,
-  NMUPP     userUPP);
+  NMUPP     userUPP)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NMInstall()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -105,30 +98,27 @@ InvokeNMUPP(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-NMInstall(NMRecPtr nmReqPtr);
+NMInstall(NMRecPtr nmReqPtr)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  NMRemove()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-NMRemove(NMRecPtr nmReqPtr);
+NMRemove(NMRecPtr nmReqPtr)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

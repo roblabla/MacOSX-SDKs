@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime-142~1
+     Version:    QuickTime_6
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,22 +26,13 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   kMovieVersion                 = 0     /* version number of the format here described */
@@ -77,7 +68,7 @@ typedef struct UserDataAtom             UserDataAtom;
 *       The MediaDirectory is tightly coupled to the data.
 *
 ****************************************/
-
+/* SampleDescription is in Movies.h */
 struct SampleDescriptionAtom {
   long                size;
   long                atomType;               /* = 'stsd' */
@@ -557,7 +548,11 @@ enum {
   ReferenceMovieCPURatingAID    = 'rmcs',
   ReferenceMovieAlternateGroupAID = 'rmag',
   ReferenceMovieNetworkStatusAID = 'rnet',
-  CloneMediaAID                 = 'clon'
+  CloneMediaAID                 = 'clon',
+  FileTypeAID                   = 'ftyp',
+  SecureContentInfoAID          = 'sinf',
+  SecureContentSchemeTypeAID    = 'schm',
+  SecureContentSchemeInfoAID    = 'schi'
 };
 
 /* Text ATOM definitions*/
@@ -676,18 +671,45 @@ struct CloneAtom {
   CloneRecord         cloneInfo;
 };
 typedef struct CloneAtom                CloneAtom;
+struct FileTypeAtom {
+  long                size;
+  long                atomType;               /* = 'ftyp' */
+  long                majorBrand;             /* best use brand */
+  long                minorVersion;
+  long                compatibleBrands[4];    /* 1 or greater */
+};
+typedef struct FileTypeAtom             FileTypeAtom;
+enum {
+  kQTFileTypeBrandQuickTimeMovie = 'qt  ', /* QuickTime movie files*/
+  kQTFileTypeBrandISOFile       = 'isom', /* ISO Base Media files*/
+  kQTFileTypeBrandMPEG4v1       = 'mp41', /* MPEG-4 (ISO/IEC 14496-1) version 1 files*/
+  kQTFileTypeBrandMPEG4v2       = 'mp42' /* MPEG-4 (ISO/IEC 14496-1) version 2 files*/
+};
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+struct SecureContentInfoAtom {
+  long                size;
+  long                atomType;               /* = 'sinf' */
+};
+typedef struct SecureContentInfoAtom    SecureContentInfoAtom;
+struct SecureContentSchemeTypeAtom {
+  long                size;
+  long                atomType;               /* = 'schm' */
 
-#ifdef __cplusplus
-}
-#endif
+  long                flags;                  /* 1 byte of version / 3 bytes of flags */
+
+  long                schemeType;
+  UInt32              schemeVersion;
+                                              /* if flags & 1, C string holding URL for security component server*/
+};
+typedef struct SecureContentSchemeTypeAtom SecureContentSchemeTypeAtom;
+struct SecureContentSchemeInfoAtom {
+  long                size;
+  long                atomType;               /* = 'schi' */
+};
+typedef struct SecureContentSchemeInfoAtom SecureContentSchemeInfoAtom;
+
+#pragma options align=reset
+
 
 #endif /* __MOVIESFORMAT__ */
 

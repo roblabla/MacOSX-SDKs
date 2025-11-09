@@ -3,9 +3,9 @@
  
      Contains:   Interface to API for using the NSL User Interface
  
-     Version:    CommonPanels-51~48
+     Version:    CommonPanels-61~261
  
-     Copyright:  © 1997-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1997-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,14 +16,17 @@
 #ifndef __NSL__
 #define __NSL__
 
-#ifndef __NSLCORE__
-#include <NSLCore/NSLCore.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
-#ifndef __HITOOLBOX__
-#include <HIToolbox/HIToolbox.h>
+#ifndef __EVENTS__
+#include <HIToolbox/Events.h>
 #endif
 
+
+
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -33,14 +36,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
-
+#pragma options align=mac68k
 
 typedef UInt32 NSLDialogOptionFlags;
 enum {
@@ -283,13 +279,7 @@ NSLSaveURLAliasToFolder(
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

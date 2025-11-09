@@ -29,6 +29,14 @@ typedef enum _NSProgressIndicatorThickness {
     NSProgressIndicatorPreferredAquaThickness	= 12
 } NSProgressIndicatorThickness;
 
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+typedef enum _NSProgressIndicatorStyle {
+    NSProgressIndicatorBarStyle = 0,
+    NSProgressIndicatorSpinningStyle = 1
+} NSProgressIndicatorStyle;
+#endif
+
 //================================================================================
 //	NSProgressIndicator interface
 //
@@ -62,7 +70,12 @@ typedef enum _NSProgressIndicatorThickness {
         unsigned int isLocked:1;
         unsigned int controlTint:3;
         unsigned int controlSize:2;
-        unsigned int RESERVED:24;
+	unsigned int style:1;
+        unsigned int _delayedStartup:1;
+        unsigned int _orderOutForResize:1;
+        unsigned int _lastImageIndex:4;
+ 	unsigned int hideWhenStopped:1;
+        unsigned int RESERVED:16;
     } _progressIndicatorFlags;
 
     /* For future use */
@@ -107,5 +120,18 @@ typedef enum _NSProgressIndicatorThickness {
 - (void)stopAnimation:(id)sender;
 
 - (void)animate:(id)sender;				// manual animation
+
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (void) setStyle: (NSProgressIndicatorStyle) style;
+- (NSProgressIndicatorStyle) style;
+
+// For the spinning style, it will size the spinning arrows to their default size.  
+// For the bar style, the height will be set to the recommended height. 
+- (void) sizeToFit;
+
+- (BOOL) isDisplayedWhenStopped;
+- (void) setDisplayedWhenStopped: (BOOL) isDisplayed;
+#endif
 
 @end

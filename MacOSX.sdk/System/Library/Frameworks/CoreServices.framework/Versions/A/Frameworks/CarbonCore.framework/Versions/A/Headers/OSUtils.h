@@ -3,9 +3,9 @@
  
      Contains:   OS Utilities Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -44,6 +44,7 @@
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -53,13 +54,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   useFree                       = 0,
@@ -134,7 +129,7 @@ typedef STACK_UPP_TYPE(DeferredTaskProcPtr)                     DeferredTaskUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DeferredTaskUPP
-NewDeferredTaskUPP(DeferredTaskProcPtr userRoutine);
+NewDeferredTaskUPP(DeferredTaskProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDeferredTaskUPP()
@@ -145,7 +140,7 @@ NewDeferredTaskUPP(DeferredTaskProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDeferredTaskUPP(DeferredTaskUPP userUPP);
+DisposeDeferredTaskUPP(DeferredTaskUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDeferredTaskUPP()
@@ -158,7 +153,7 @@ DisposeDeferredTaskUPP(DeferredTaskUPP userUPP);
 extern void
 InvokeDeferredTaskUPP(
   long             dtParam,
-  DeferredTaskUPP  userUPP);
+  DeferredTaskUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 struct DeferredTask {
   volatile QElemPtr   qLink;
@@ -170,15 +165,52 @@ struct DeferredTask {
 };
 typedef struct DeferredTask             DeferredTask;
 typedef DeferredTask *                  DeferredTaskPtr;
+/* 
+    In order for MachineLocation to be endian-safe, a new member 
+    has been added to the 'u' union in the structure. You are 
+    encouraged to use the new member instead of the old one.
+    
+    If your code looked like this:
+    
+        MachineLocation.u.dlsDelta = 1;
+    
+    you should change it to this:
+    
+        MachineLocation.u.dls.Delta = 1;
+    
+    to be endian safe. The gmtDelta remains the same; the low 24-bits
+    are used. Remember that order of assignment DOES matter:
+    
+    This will overwrite results:
+    
+        MachineLocation.u.dls.Delta = 0xAA;         // u = 0xAAGGGGGG; G=Garbage
+        MachineLocation.u.gmtDelta = 0xBBBBBB;      // u = 0x00BBBBBB;
+    
+    when in fact reversing the assignment would have preserved the values:
+
+        MachineLocation.u.gmtDelta = 0xBBBBBB;      // u = 0x00BBBBBB;  
+        MachineLocation.u.dls.Delta = 0xAA;         // u = 0xAABBBBBB;
+*/
 struct MachineLocation {
-  Fract               latitude;
-  Fract               longitude;
-  union {
-    SInt8               dlsDelta;             /* signed byte; daylight savings delta */
-    long                gmtDelta;             /* use low 24-bits only */
-  }                       u;
+    Fract   latitude;
+    Fract   longitude;
+    union {
+    #if TARGET_RT_BIG_ENDIAN
+        SInt8 dlsDelta;
+    #endif
+        long    gmtDelta;           /* use low 24-bits only */
+        struct {
+        #if TARGET_RT_LITTLE_ENDIAN
+            SInt8   pad[3];
+        #endif
+            SInt8   Delta;          /* signed byte; daylight savings delta */
+        } dls;
+    } u;
 };
-typedef struct MachineLocation          MachineLocation;
+typedef struct MachineLocation MachineLocation;
+
+
+
 /*
  *  IsMetric()
  *  
@@ -188,7 +220,7 @@ typedef struct MachineLocation          MachineLocation;
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
-IsMetric(void);
+IsMetric(void)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -200,7 +232,7 @@ IsMetric(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern SysPPtr 
-GetSysPPtr(void);
+GetSysPPtr(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -219,7 +251,7 @@ GetSysPPtr(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-DTInstall(DeferredTaskPtr dtTaskPtr);
+DTInstall(DeferredTaskPtr dtTaskPtr)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -260,7 +292,7 @@ DTInstall(DeferredTaskPtr dtTaskPtr);
 extern void 
 Delay(
   unsigned long    numTicks,
-  unsigned long *  finalTicks);
+  unsigned long *  finalTicks)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -272,7 +304,7 @@ Delay(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-WriteParam(void);
+WriteParam(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -286,7 +318,7 @@ WriteParam(void);
 extern void 
 Enqueue(
   QElemPtr   qElement,
-  QHdrPtr    qHeader);
+  QHdrPtr    qHeader)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -300,7 +332,7 @@ Enqueue(
 extern OSErr 
 Dequeue(
   QElemPtr   qElement,
-  QHdrPtr    qHeader);
+  QHdrPtr    qHeader)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -313,7 +345,7 @@ Dequeue(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-SetCurrentA5(void);
+SetCurrentA5(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -325,7 +357,7 @@ SetCurrentA5(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-SetA5(long newA5);
+SetA5(long newA5)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -337,7 +369,7 @@ SetA5(long newA5);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-InitUtil(void);
+InitUtil(void)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -352,7 +384,7 @@ InitUtil(void);
 extern void 
 MakeDataExecutable(
   void *          baseAddress,
-  unsigned long   length);
+  unsigned long   length)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -375,7 +407,7 @@ MakeDataExecutable(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ReadLocation(MachineLocation * loc);
+ReadLocation(MachineLocation * loc)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -388,7 +420,7 @@ ReadLocation(MachineLocation * loc);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-WriteLocation(const MachineLocation * loc);
+WriteLocation(const MachineLocation * loc)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -401,7 +433,7 @@ WriteLocation(const MachineLocation * loc);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern UInt32 
-TickCount(void);
+TickCount(void)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -410,11 +442,11 @@ TickCount(void);
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-CSCopyUserName(Boolean useShortName);
+CSCopyUserName(Boolean useShortName)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -422,11 +454,11 @@ CSCopyUserName(Boolean useShortName);
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
+ *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-CSCopyMachineName(void);
+CSCopyMachineName(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -509,13 +541,7 @@ enum {
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

@@ -167,6 +167,9 @@ The optional metricsExist argument specifies whether the metrics for the combina
 */
 - (NSMultibyteGlyphPacking) glyphPacking;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (NSCharacterSet *)coveredCharacterSet;
+#endif
 @end
 
 /* Take a buffer of NSGlyphs, of some given length, and a packing type, and a place to put some packed glyphs.  Pack up the NSGlyphs according to the NSMultibyteGlyphPacking, null-terminate the bytes, and then put them into the output buffer.  Return the count of bytes output, including the null-terminator.  The output buffer (packedGlyphs) provided by the caller is guaranteed to be at least "count*4+1" bytes long.

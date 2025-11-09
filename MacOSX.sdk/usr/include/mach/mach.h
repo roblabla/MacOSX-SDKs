@@ -56,12 +56,18 @@
 #define __MACH30__
 #define MACH_IPC_FLAVOR UNTYPED
 
+#include <mach/std_types.h>
 #include <mach/mach_types.h>
 #include <mach/mach_interface.h>
 #include <mach/mach_port.h>
 #include <mach/mach_init.h>
 #include <mach/mach_host.h>
 #include <mach/thread_switch.h>
+
+#include <mach/rpc.h>  		/* for compatibility only */
+#include <mach/mig.h>
+#include <mach/mig_errors.h>
+
 /*
  * Standard prototypes
  */

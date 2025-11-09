@@ -30,6 +30,8 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* upl_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 
 #ifdef __BeforeMigUserHeader
@@ -93,6 +95,97 @@ kern_return_t upl_commit_range
 	mach_msg_type_number_t page_listCnt,
 	boolean_t *empty
 );
+/* typedefs for all requests */
+
+#ifndef __Request__upl_subsystem__defined
+#define __Request__upl_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		integer_t abort_cond;
+	} __Request__upl_abort_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_offset_t offset;
+		vm_size_t size;
+		integer_t abort_cond;
+	} __Request__upl_abort_range_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t page_listCnt;
+		upl_page_info_t page_list[20];
+	} __Request__upl_commit_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		vm_offset_t offset;
+		vm_size_t size;
+		integer_t cntrl_flags;
+		mach_msg_type_number_t page_listCnt;
+		upl_page_info_t page_list[20];
+	} __Request__upl_commit_range_t;
+
+#endif /* !__Request__upl_subsystem__defined */
+
+/* union of all requests */
+
+#ifndef __RequestUnion__upl_subsystem__defined
+#define __RequestUnion__upl_subsystem__defined
+union __RequestUnion__upl_subsystem {
+	__Request__upl_abort_t Request_upl_abort;
+	__Request__upl_abort_range_t Request_upl_abort_range;
+	__Request__upl_commit_t Request_upl_commit;
+	__Request__upl_commit_range_t Request_upl_commit_range;
+};
+#endif /* !__RequestUnion__upl_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__upl_subsystem__defined
+#define __Reply__upl_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__upl_abort_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		boolean_t empty;
+	} __Reply__upl_abort_range_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__upl_commit_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		boolean_t empty;
+	} __Reply__upl_commit_range_t;
+
+#endif /* !__Reply__upl_subsystem__defined */
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__upl_subsystem__defined
+#define __ReplyUnion__upl_subsystem__defined
+union __ReplyUnion__upl_subsystem {
+	__Reply__upl_abort_t Reply_upl_abort;
+	__Reply__upl_abort_range_t Reply_upl_abort_range;
+	__Reply__upl_commit_t Reply_upl_commit;
+	__Reply__upl_commit_range_t Reply_upl_commit_range;
+};
+#endif /* !__RequestUnion__upl_subsystem__defined */
 
 #ifndef subsystem_to_name_map_upl
 #define subsystem_to_name_map_upl \

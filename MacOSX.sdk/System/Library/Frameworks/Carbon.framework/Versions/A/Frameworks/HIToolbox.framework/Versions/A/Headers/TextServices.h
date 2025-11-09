@@ -3,9 +3,9 @@
  
      Contains:   Text Services Manager Interfaces.
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1991-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1991-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,12 +16,8 @@
 #ifndef __TEXTSERVICES__
 #define __TEXTSERVICES__
 
-#ifndef __CONDITIONALMACROS__
-#include <CarbonCore/ConditionalMacros.h>
-#endif
-
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#ifndef __APPLICATIONSERVICES__
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 #ifndef __EVENTS__
@@ -32,28 +28,21 @@
 #include <HIToolbox/Menus.h>
 #endif
 
-#ifndef __AEDATAMODEL__
-#include <AE/AEDataModel.h>
-#endif
-
-#ifndef __AEREGISTRY__
-#include <AE/AERegistry.h>
-#endif
-
 #ifndef __AEINTERACTION__
 #include <HIToolbox/AEInteraction.h>
 #endif
-
-#ifndef __COMPONENTS__
-#include <CarbonCore/Components.h>
-#endif
-
 
 #ifndef __CARBONEVENTS__
 #include <HIToolbox/CarbonEvents.h>
 #endif
 
+#ifndef __ATSUNICODE__
+#include <QD/ATSUnicode.h>
+#endif
 
+
+
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -63,24 +52,42 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   kTextService                  = 'tsvc', /* component type for the component description */
-  kInputMethodService           = 'inpm', /* component subtype for the component description */
   kTSMVersion                   = 0x0150 /* Version of the Text Services Manager is 1.5 */
 };
 
+
+/*
+    TextServiceClass constants supported by TSM
+    Same as component subtype for the component description
+*/
+enum {
+  kKeyboardInputMethodClass     = 'inpm',
+  kInkInputMethodClass          = 'ink ',
+  kCharacterPaletteInputMethodClass = 'cplt'
+};
+
+typedef OSType                          TextServiceClass;
+enum {
+  kTSClassHonorUserSetting      = 1,
+  kTSClassForceSetting          = 2,
+  kTSClassForceToHonorUserSetting = 3
+};
+
+typedef UInt32                          TSClassEnablingForceLevel;
 enum {
   kUnicodeDocument              = 'udoc', /* TSM Document type for Unicode-savvy application */
   kUnicodeTextService           = 'utsv' /* Component type for Unicode Text Service */
 };
+
+/* TSMDocumentID property tags*/
+enum {
+  kTSMDocumentPropertySupportGlyphInfo = 'dpgi' /*  property value is arbitrary*/
+};
+
 
 /* Language and Script constants*/
 enum {
@@ -241,9 +248,25 @@ struct ScriptLanguageSupport {
 typedef struct ScriptLanguageSupport    ScriptLanguageSupport;
 typedef ScriptLanguageSupport *         ScriptLanguageSupportPtr;
 typedef ScriptLanguageSupportPtr *      ScriptLanguageSupportHandle;
+struct TSMGlyphInfo {
+  CFRange             range;                  /*    two SInt32s*/
+  ATSFontRef          fontRef;
+  UInt16              collection;             /*    kGlyphCollectionXXX enum*/
+  UInt16              glyphID;                /*    GID (when collection==0) or CID*/
+};
+typedef struct TSMGlyphInfo             TSMGlyphInfo;
+struct TSMGlyphInfoArray {
+  ItemCount           numGlyphInfo;           /*    UInt32*/
+  TSMGlyphInfo        glyphInfo[1];
+};
+typedef struct TSMGlyphInfoArray        TSMGlyphInfoArray;
+
 /* High level TSM Doucment routines */
 /*
  *  NewTSMDocument()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -255,47 +278,44 @@ NewTSMDocument(
   short               numOfInterface,
   InterfaceTypeList   supportedInterfaceTypes,
   TSMDocumentID *     idocID,
-  long                refcon);
+  long                refcon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  DeleteTSMDocument()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-DeleteTSMDocument(TSMDocumentID idocID);
+DeleteTSMDocument(TSMDocumentID idocID)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  ActivateTSMDocument()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-ActivateTSMDocument(TSMDocumentID idocID);
+ActivateTSMDocument(TSMDocumentID idocID)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  DeactivateTSMDocument()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr 
-DeactivateTSMDocument(TSMDocumentID idocID);
-
-
-/*
- *  FixTSMDocument()
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -303,11 +323,29 @@ DeactivateTSMDocument(TSMDocumentID idocID);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-FixTSMDocument(TSMDocumentID idocID);
+DeactivateTSMDocument(TSMDocumentID idocID)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  FixTSMDocument()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr 
+FixTSMDocument(TSMDocumentID idocID)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetServiceList()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -319,11 +357,14 @@ GetServiceList(
   short                    numOfInterface,
   OSType *                 supportedInterfaceTypes,
   TextServiceListHandle *  serviceInfo,
-  long *                   seedValue);
+  long *                   seedValue)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  OpenTextService()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -334,11 +375,14 @@ extern OSErr
 OpenTextService(
   TSMDocumentID        idocID,
   Component            aComponent,
-  ComponentInstance *  aComponentInstance);
+  ComponentInstance *  aComponentInstance)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CloseTextService()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -348,11 +392,14 @@ OpenTextService(
 extern OSErr 
 CloseTextService(
   TSMDocumentID       idocID,
-  ComponentInstance   aComponentInstance);
+  ComponentInstance   aComponentInstance)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SendAEFromTSMComponent()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -367,7 +414,7 @@ SendAEFromTSMComponent(
   AESendPriority      sendPriority,
   long                timeOutInTicks,
   AEIdleUPP           idleProc,
-  AEFilterUPP         filterProc);
+  AEFilterUPP         filterProc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -379,17 +426,23 @@ SendAEFromTSMComponent(
  *    based.  The Carbon TextInput events which they generate are
  *    provided to TSM for dispatching via this API.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib N.e.v.e.r and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-SendTextInputEvent(EventRef inEvent);
+SendTextInputEvent(EventRef inEvent)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetDefaultInputMethod()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -399,11 +452,14 @@ SendTextInputEvent(EventRef inEvent);
 extern OSErr 
 SetDefaultInputMethod(
   Component               ts,
-  ScriptLanguageRecord *  slRecordPtr);
+  ScriptLanguageRecord *  slRecordPtr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetDefaultInputMethod()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -413,23 +469,14 @@ SetDefaultInputMethod(
 extern OSErr 
 GetDefaultInputMethod(
   Component *             ts,
-  ScriptLanguageRecord *  slRecordPtr);
+  ScriptLanguageRecord *  slRecordPtr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetTextServiceLanguage()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern OSErr 
-SetTextServiceLanguage(ScriptLanguageRecord * slRecordPtr);
-
-
-/*
- *  GetTextServiceLanguage()
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -437,11 +484,29 @@ SetTextServiceLanguage(ScriptLanguageRecord * slRecordPtr);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-GetTextServiceLanguage(ScriptLanguageRecord * slRecordPtr);
+SetTextServiceLanguage(ScriptLanguageRecord * slRecordPtr)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  GetTextServiceLanguage()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern OSErr 
+GetTextServiceLanguage(ScriptLanguageRecord * slRecordPtr)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  UseInputWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -451,7 +516,7 @@ GetTextServiceLanguage(ScriptLanguageRecord * slRecordPtr);
 extern OSErr 
 UseInputWindow(
   TSMDocumentID   idocID,
-  Boolean         useWindow);
+  Boolean         useWindow)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -466,6 +531,9 @@ UseInputWindow(
  *    need to intercept mouse events in the entire content region as
  *    the default, when an input method is active, in order to ensure
  *    that input methods can manage user interaction properly.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -496,7 +564,7 @@ extern OSStatus
 TSMSetInlineInputRegion(
   TSMDocumentID   inTSMDocument,
   WindowRef       inWindow,
-  RgnHandle       inRegion);
+  RgnHandle       inRegion)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -609,6 +677,9 @@ TSMSetInlineInputRegion(
 /*
  *  GetScriptLanguageSupport()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -617,47 +688,44 @@ TSMSetInlineInputRegion(
 extern ComponentResult 
 GetScriptLanguageSupport(
   ComponentInstance              ts,
-  ScriptLanguageSupportHandle *  scriptHdl);
+  ScriptLanguageSupportHandle *  scriptHdl)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  InitiateTextService()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern ComponentResult 
-InitiateTextService(ComponentInstance ts);
+InitiateTextService(ComponentInstance ts)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  TerminateTextService()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern ComponentResult 
-TerminateTextService(ComponentInstance ts);
+TerminateTextService(ComponentInstance ts)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  ActivateTextService()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern ComponentResult 
-ActivateTextService(ComponentInstance ts);
-
-
-/*
- *  DeactivateTextService()
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -665,11 +733,29 @@ ActivateTextService(ComponentInstance ts);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern ComponentResult 
-DeactivateTextService(ComponentInstance ts);
+ActivateTextService(ComponentInstance ts)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  DeactivateTextService()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern ComponentResult 
+DeactivateTextService(ComponentInstance ts)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetTextServiceMenu()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -679,13 +765,16 @@ DeactivateTextService(ComponentInstance ts);
 extern ComponentResult 
 GetTextServiceMenu(
   ComponentInstance   ts,
-  MenuRef *           serviceMenu);
+  MenuRef *           serviceMenu)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* New Text Service call in Carbon. */
 /* Note: Only Raw Key and Mouse-flavored events are passed to Text Services on MacOS X. */
 /*
  *  TextServiceEventRef()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -695,7 +784,7 @@ GetTextServiceMenu(
 extern ComponentResult 
 TextServiceEventRef(
   ComponentInstance   ts,
-  EventRef            event);
+  EventRef            event)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -741,17 +830,8 @@ TextServiceEventRef(
 /*
  *  FixTextService()
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern ComponentResult 
-FixTextService(ComponentInstance ts);
-
-
-/*
- *  HidePaletteWindows()
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -759,11 +839,29 @@ FixTextService(ComponentInstance ts);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern ComponentResult 
-HidePaletteWindows(ComponentInstance ts);
+FixTextService(ComponentInstance ts)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  HidePaletteWindows()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern ComponentResult 
+HidePaletteWindows(ComponentInstance ts)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetTextServiceProperty()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -774,11 +872,14 @@ extern ComponentResult
 GetTextServiceProperty(
   ComponentInstance   ts,
   OSType              propertySelector,
-  SInt32 *            result);
+  SInt32 *            result)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetTextServiceProperty()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -789,7 +890,7 @@ extern ComponentResult
 SetTextServiceProperty(
   ComponentInstance   ts,
   OSType              propertySelector,
-  SInt32              value);
+  SInt32              value)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Get the active TSMDocument in the current application context.       */
@@ -798,24 +899,182 @@ SetTextServiceProperty(
 /*
  *  TSMGetActiveDocument()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   not available
  */
 extern TSMDocumentID 
-TSMGetActiveDocument(void);
+TSMGetActiveDocument(void)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  GetDefaultInputMethodOfClass()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+GetDefaultInputMethodOfClass(
+  Component *             aComp,
+  ScriptLanguageRecord *  slRecPtr,
+  TextServiceClass        tsClass)                            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+/*
+ *  SetDefaultInputMethodOfClass()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+SetDefaultInputMethodOfClass(
+  Component               aComp,
+  ScriptLanguageRecord *  slRecPtr,
+  TextServiceClass        tsClass)                            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  DeselectTextService()
+ *  
+ *  Discussion:
+ *    This API is currently only intended for use by Character Palette
+ *    class input methods. It allows such an input method to notify TSM
+ *    that it has been closed by the user as a result of interaction
+ *    with the input method's own UI, such a palette window's close
+ *    button, instead of via the normal UI provided by the System, such
+ *    as the Keyboard Menu.  Note that this API is only meant for use
+ *    with "additive" text service classes (such as Character
+ *    Palettes), and not with traditional input methods which are
+ *    exclusively selected in a given class and script, such as
+ *    keyboard input methods.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+DeselectTextService(Component aComp)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  SelectTextService()
+ *  
+ *  Discussion:
+ *    This API is currently only intended for use by the system UI
+ *    (Keyboard Menu or prefs panel) and input methods that wish to set
+ *    to the "selected" state a text service which is "additive" in
+ *    nature.  It is not intended for use with input methods that are
+ *    "exclusive" in nature (see DeselectTextService).  It allows an
+ *    input method to notify TSM that it has been selected by the user
+ *    as a result of interaction with some UI (possibly another input
+ *    method), instead of via the normal UI provided by the System,
+ *    such as the Keyboard Menu.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+SelectTextService(Component aComp)                            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  TSMSetDocumentProperty()
+ *  
+ *  Discussion:
+ *    This API is currently only needed for applications that wish to
+ *    signal to TSM that it supports GlyphID specification in TSM
+ *    events containing Unicode text (see
+ *    kTSMDocumentPropertySupportGlyphInfo).  Input Methods call
+ *    TSMGetDocumentProperty() against the currently active TSMDocument
+ *    to test whether the app supports this glyph info. These TSM
+ *    property API can also be freely used by applications to relate
+ *    arbitrary data to a given TSMDocument.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+TSMSetDocumentProperty(
+  TSMDocumentID   docID,
+  OSType          propertyTag,
+  UInt32          propertySize,
+  void *          propertyData)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  TSMGetDocumentProperty()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+TSMGetDocumentProperty(
+  TSMDocumentID   docID,
+  OSType          propertyTag,
+  UInt32          bufferSize,
+  UInt32 *        actualSize,
+  void *          propertyBuffer)       /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  TSMRemoveDocumentProperty()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+TSMRemoveDocumentProperty(
+  TSMDocumentID   docID,
+  OSType          propertyTag)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+#if OLDROUTINENAMES
+enum {
+  kInputMethodService           = kKeyboardInputMethodClass
+};
+
+#endif  /* OLDROUTINENAMES */
+
+
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

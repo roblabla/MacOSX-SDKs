@@ -1,5 +1,5 @@
 /*	CFPlugIn.h
-	Copyright 1999-2001, Apple, Inc. All rights reserved.
+	Copyright 1999-2002, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFPLUGIN__)
@@ -70,11 +70,11 @@ Boolean CFPlugInIsLoadOnDemand(CFPlugInRef plugIn);
 
 CF_EXPORT
 CFArrayRef CFPlugInFindFactoriesForPlugInType(CFUUIDRef typeUUID);
-    /* This function finds all the factories from any plugin for the given type.  */
+    /* This function finds all the factories from any plugin for the given type.  Returns an array that the caller must release. */
     
 CF_EXPORT
 CFArrayRef CFPlugInFindFactoriesForPlugInTypeInPlugIn(CFUUIDRef typeUUID, CFPlugInRef plugIn);
-    /* This function restricts the result to factories from the given plug-in that can create the given type */
+    /* This function restricts the result to factories from the given plug-in that can create the given type.  Returns an array that the caller must release. */
 
 CF_EXPORT
 void *CFPlugInInstanceCreate(CFAllocatorRef allocator, CFUUIDRef factoryUUID, CFUUIDRef typeUUID);

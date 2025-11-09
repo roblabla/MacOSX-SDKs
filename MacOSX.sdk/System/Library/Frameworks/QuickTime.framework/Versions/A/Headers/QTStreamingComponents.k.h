@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime-142~1
+     Version:    QuickTime_6
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,7 +22,7 @@
 
 		#define QTSSOURCER_BASENAME()	Fred
 		#define QTSSOURCER_GLOBALS()	FredGlobalsHandle
-		#include <QTStreamingComponents.k.h>
+		#include <QuickTime/QTStreamingComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define QTSSOURCER_GLOBALS
 */
@@ -73,7 +73,7 @@
 
 		#define RTPRSSM_BASENAME()	Fred
 		#define RTPRSSM_GLOBALS()	FredGlobalsHandle
-		#include <QTStreamingComponents.k.h>
+		#include <QuickTime/QTStreamingComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define RTPRSSM_GLOBALS
 */
@@ -134,6 +134,8 @@
 
 	EXTERN_API( ComponentResult  ) ADD_RTPRSSM_BASENAME(GetChunkAndIncrRefCount) (RTPRSSM_GLOBALS() ADD_RTPRSSM_COMMA UInt32  inChunkDataSize, const TimeValue64 * inChunkPresentationTime, SHChunkRecord ** outChunk);
 
+	EXTERN_API( ComponentResult  ) ADD_RTPRSSM_BASENAME(GetExtChunkAndIncrRefCount) (RTPRSSM_GLOBALS() ADD_RTPRSSM_COMMA UInt32  inChunkDataSize, const TimeValue64 * inChunkPresentationTime, SInt32  inFlags, SHExtendedChunkRecord ** outChunk);
+
 	EXTERN_API( ComponentResult  ) ADD_RTPRSSM_BASENAME(SendChunkAndDecrRefCount) (RTPRSSM_GLOBALS() ADD_RTPRSSM_COMMA SHChunkRecord * inChunk, const SHServerEditParameters * inServerEdit);
 
 	EXTERN_API( ComponentResult  ) ADD_RTPRSSM_BASENAME(SendLostChunk) (RTPRSSM_GLOBALS() ADD_RTPRSSM_COMMA const TimeValue64 * inChunkPresentationTime);
@@ -176,6 +178,7 @@
 		uppRTPRssmSendStreamHandlerChangedProcInfo = 0x000000F0,
 		uppRTPRssmSetSampleDescriptionProcInfo = 0x000003F0,
 		uppRTPRssmGetChunkAndIncrRefCountProcInfo = 0x00003FF0,
+		uppRTPRssmGetExtChunkAndIncrRefCountProcInfo = 0x0000FFF0,
 		uppRTPRssmSendChunkAndDecrRefCountProcInfo = 0x00000FF0,
 		uppRTPRssmSendLostChunkProcInfo = 0x000003F0,
 		uppRTPRssmSendStreamBufferRangeProcInfo = 0x000003F0,
@@ -193,7 +196,7 @@
 
 		#define RTPMP_BASENAME()	Fred
 		#define RTPMP_GLOBALS()	FredGlobalsHandle
-		#include <QTStreamingComponents.k.h>
+		#include <QuickTime/QTStreamingComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define RTPMP_GLOBALS
 */
@@ -301,7 +304,7 @@
 
 		#define RTPPB_BASENAME()	Fred
 		#define RTPPB_GLOBALS()	FredGlobalsHandle
-		#include <QTStreamingComponents.k.h>
+		#include <QuickTime/QTStreamingComponents.k.h>
 
 	To specify that your component implementation does not use globals, do not #define RTPPB_GLOBALS
 */

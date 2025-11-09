@@ -3,9 +3,9 @@
  
      Contains:   Collection Manager Interfaces
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1989-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1989-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -33,14 +34,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 /*************/
@@ -164,7 +157,7 @@ typedef STACK_UPP_TYPE(CollectionExceptionProcPtr)              CollectionExcept
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern CollectionFlattenUPP
-NewCollectionFlattenUPP(CollectionFlattenProcPtr userRoutine);
+NewCollectionFlattenUPP(CollectionFlattenProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewCollectionExceptionUPP()
@@ -175,7 +168,7 @@ NewCollectionFlattenUPP(CollectionFlattenProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern CollectionExceptionUPP
-NewCollectionExceptionUPP(CollectionExceptionProcPtr userRoutine);
+NewCollectionExceptionUPP(CollectionExceptionProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeCollectionFlattenUPP()
@@ -186,7 +179,7 @@ NewCollectionExceptionUPP(CollectionExceptionProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeCollectionFlattenUPP(CollectionFlattenUPP userUPP);
+DisposeCollectionFlattenUPP(CollectionFlattenUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeCollectionExceptionUPP()
@@ -197,7 +190,7 @@ DisposeCollectionFlattenUPP(CollectionFlattenUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeCollectionExceptionUPP(CollectionExceptionUPP userUPP);
+DisposeCollectionExceptionUPP(CollectionExceptionUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeCollectionFlattenUPP()
@@ -212,7 +205,7 @@ InvokeCollectionFlattenUPP(
   SInt32                size,
   void *                data,
   void *                refCon,
-  CollectionFlattenUPP  userUPP);
+  CollectionFlattenUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeCollectionExceptionUPP()
@@ -226,7 +219,7 @@ extern OSErr
 InvokeCollectionExceptionUPP(
   Collection              c,
   OSErr                   status,
-  CollectionExceptionUPP  userUPP);
+  CollectionExceptionUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*********************************************/
 /************* Public interfaces *************/
@@ -240,7 +233,7 @@ InvokeCollectionExceptionUPP(
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern Collection 
-NewCollection(void);
+NewCollection(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -253,7 +246,7 @@ NewCollection(void);
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern void 
-DisposeCollection(Collection c);
+DisposeCollection(Collection c)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -266,7 +259,7 @@ DisposeCollection(Collection c);
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern Collection 
-CloneCollection(Collection c);
+CloneCollection(Collection c)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -279,7 +272,7 @@ CloneCollection(Collection c);
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern SInt32 
-CountCollectionOwners(Collection c);
+CountCollectionOwners(Collection c)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -292,7 +285,7 @@ CountCollectionOwners(Collection c);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-RetainCollection(Collection c);
+RetainCollection(Collection c)                                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -305,7 +298,7 @@ RetainCollection(Collection c);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-ReleaseCollection(Collection c);
+ReleaseCollection(Collection c)                               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -318,7 +311,7 @@ ReleaseCollection(Collection c);
  *    Non-Carbon CFM:   not available
  */
 extern ItemCount 
-GetCollectionRetainCount(Collection c);
+GetCollectionRetainCount(Collection c)                        AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -333,7 +326,7 @@ GetCollectionRetainCount(Collection c);
 extern Collection 
 CopyCollection(
   Collection   srcCollection,
-  Collection   dstCollection);
+  Collection   dstCollection)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -346,7 +339,7 @@ CopyCollection(
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern SInt32 
-GetCollectionDefaultAttributes(Collection c);
+GetCollectionDefaultAttributes(Collection c)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -362,7 +355,7 @@ extern void
 SetCollectionDefaultAttributes(
   Collection   c,
   SInt32       whichAttributes,
-  SInt32       newAttributes);
+  SInt32       newAttributes)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -375,7 +368,7 @@ SetCollectionDefaultAttributes(
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern SInt32 
-CountCollectionItems(Collection c);
+CountCollectionItems(Collection c)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -393,7 +386,7 @@ AddCollectionItem(
   CollectionTag   tag,
   SInt32          id,
   SInt32          itemSize,
-  const void *    itemData);
+  const void *    itemData)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -411,7 +404,7 @@ GetCollectionItem(
   CollectionTag   tag,
   SInt32          id,
   SInt32 *        itemSize,
-  void *          itemData);
+  void *          itemData)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -427,7 +420,7 @@ extern OSErr
 RemoveCollectionItem(
   Collection      c,
   CollectionTag   tag,
-  SInt32          id);
+  SInt32          id)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -445,7 +438,7 @@ SetCollectionItemInfo(
   CollectionTag   tag,
   SInt32          id,
   SInt32          whichAttributes,
-  SInt32          newAttributes);
+  SInt32          newAttributes)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -464,7 +457,7 @@ GetCollectionItemInfo(
   SInt32          id,
   SInt32 *        index,
   SInt32 *        itemSize,
-  SInt32 *        attributes);
+  SInt32 *        attributes)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -481,7 +474,7 @@ ReplaceIndexedCollectionItem(
   Collection    c,
   SInt32        index,
   SInt32        itemSize,
-  const void *  itemData);
+  const void *  itemData)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -498,7 +491,7 @@ GetIndexedCollectionItem(
   Collection   c,
   SInt32       index,
   SInt32 *     itemSize,
-  void *       itemData);
+  void *       itemData)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -513,7 +506,7 @@ GetIndexedCollectionItem(
 extern OSErr 
 RemoveIndexedCollectionItem(
   Collection   c,
-  SInt32       index);
+  SInt32       index)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -530,7 +523,7 @@ SetIndexedCollectionItemInfo(
   Collection   c,
   SInt32       index,
   SInt32       whichAttributes,
-  SInt32       newAttributes);
+  SInt32       newAttributes)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -549,7 +542,7 @@ GetIndexedCollectionItemInfo(
   CollectionTag *  tag,
   SInt32 *         id,
   SInt32 *         itemSize,
-  SInt32 *         attributes);
+  SInt32 *         attributes)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -564,7 +557,7 @@ GetIndexedCollectionItemInfo(
 extern Boolean 
 CollectionTagExists(
   Collection      c,
-  CollectionTag   tag);
+  CollectionTag   tag)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -577,7 +570,7 @@ CollectionTagExists(
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern SInt32 
-CountCollectionTags(Collection c);
+CountCollectionTags(Collection c)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -593,7 +586,7 @@ extern OSErr
 GetIndexedCollectionTag(
   Collection       c,
   SInt32           tagIndex,
-  CollectionTag *  tag);
+  CollectionTag *  tag)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -608,7 +601,7 @@ GetIndexedCollectionTag(
 extern SInt32 
 CountTaggedCollectionItems(
   Collection      c,
-  CollectionTag   tag);
+  CollectionTag   tag)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -626,7 +619,7 @@ GetTaggedCollectionItem(
   CollectionTag   tag,
   SInt32          whichItem,
   SInt32 *        itemSize,
-  void *          itemData);
+  void *          itemData)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -646,7 +639,7 @@ GetTaggedCollectionItemInfo(
   SInt32 *        id,
   SInt32 *        index,
   SInt32 *        itemSize,
-  SInt32 *        attributes);
+  SInt32 *        attributes)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -662,7 +655,7 @@ extern void
 PurgeCollection(
   Collection   c,
   SInt32       whichAttributes,
-  SInt32       matchingAttributes);
+  SInt32       matchingAttributes)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -677,7 +670,7 @@ PurgeCollection(
 extern void 
 PurgeCollectionTag(
   Collection      c,
-  CollectionTag   tag);
+  CollectionTag   tag)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -690,7 +683,7 @@ PurgeCollectionTag(
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern void 
-EmptyCollection(Collection c);
+EmptyCollection(Collection c)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -705,7 +698,7 @@ extern OSErr
 FlattenCollection(
   Collection             c,
   CollectionFlattenUPP   flattenProc,
-  void *                 refCon);
+  void *                 refCon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -723,7 +716,7 @@ FlattenPartialCollection(
   CollectionFlattenUPP   flattenProc,
   void *                 refCon,
   SInt32                 whichAttributes,
-  SInt32                 matchingAttributes);
+  SInt32                 matchingAttributes)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -739,7 +732,7 @@ extern OSErr
 UnflattenCollection(
   Collection             c,
   CollectionFlattenUPP   flattenProc,
-  void *                 refCon);
+  void *                 refCon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -752,7 +745,7 @@ UnflattenCollection(
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern CollectionExceptionUPP 
-GetCollectionExceptionProc(Collection c);
+GetCollectionExceptionProc(Collection c)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -767,7 +760,7 @@ GetCollectionExceptionProc(Collection c);
 extern void 
 SetCollectionExceptionProc(
   Collection               c,
-  CollectionExceptionUPP   exceptionProc);
+  CollectionExceptionUPP   exceptionProc)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -780,7 +773,7 @@ SetCollectionExceptionProc(
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern Collection 
-GetNewCollection(SInt16 collectionID);
+GetNewCollection(SInt16 collectionID)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -800,7 +793,7 @@ AddCollectionItemHdl(
   Collection      aCollection,
   CollectionTag   tag,
   SInt32          id,
-  Handle          itemData);
+  Handle          itemData)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -817,7 +810,7 @@ GetCollectionItemHdl(
   Collection      aCollection,
   CollectionTag   tag,
   SInt32          id,
-  Handle          itemData);
+  Handle          itemData)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -833,7 +826,7 @@ extern OSErr
 ReplaceIndexedCollectionItemHdl(
   Collection   aCollection,
   SInt32       index,
-  Handle       itemData);
+  Handle       itemData)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -849,7 +842,7 @@ extern OSErr
 GetIndexedCollectionItemHdl(
   Collection   aCollection,
   SInt32       index,
-  Handle       itemData);
+  Handle       itemData)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -864,7 +857,7 @@ GetIndexedCollectionItemHdl(
 extern OSErr 
 FlattenCollectionToHdl(
   Collection   aCollection,
-  Handle       flattened);
+  Handle       flattened)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -879,7 +872,7 @@ FlattenCollectionToHdl(
 extern OSErr 
 UnflattenCollectionFromHdl(
   Collection   aCollection,
-  Handle       flattened);
+  Handle       flattened)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -973,14 +966,6 @@ enum {
 #endif  /* OLDROUTINENAMES */
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

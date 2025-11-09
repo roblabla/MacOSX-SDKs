@@ -3,9 +3,9 @@
  
      Contains:   Processor Exception Handling Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1993-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1993-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -35,13 +36,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=power
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=power
 
 /* Some basic declarations used throughout the kernel */
 typedef struct OpaqueAreaID*            AreaID;
@@ -103,7 +98,7 @@ struct FPUInformationPowerPC {
 typedef struct FPUInformationPowerPC    FPUInformationPowerPC;
 union Vector128 {
 #ifdef __VEC__
- vector unsigned long            v;
+ vector unsigned int         v;
 #endif
   unsigned long       l[4];
   unsigned short      s[8];
@@ -275,7 +270,7 @@ typedef STACK_UPP_TYPE(ExceptionHandlerProcPtr)                 ExceptionHandler
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ExceptionHandlerUPP
-NewExceptionHandlerUPP(ExceptionHandlerProcPtr userRoutine);
+NewExceptionHandlerUPP(ExceptionHandlerProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeExceptionHandlerUPP()
@@ -286,7 +281,7 @@ NewExceptionHandlerUPP(ExceptionHandlerProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeExceptionHandlerUPP(ExceptionHandlerUPP userUPP);
+DisposeExceptionHandlerUPP(ExceptionHandlerUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeExceptionHandlerUPP()
@@ -299,7 +294,7 @@ DisposeExceptionHandlerUPP(ExceptionHandlerUPP userUPP);
 extern OSStatus
 InvokeExceptionHandlerUPP(
   ExceptionInformation *  theException,
-  ExceptionHandlerUPP     userUPP);
+  ExceptionHandlerUPP     userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
    ExceptionHandler function pointers (TPP):
@@ -320,18 +315,12 @@ typedef ExceptionHandlerTPP             ExceptionHandler;
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern ExceptionHandlerTPP  InstallExceptionHandler(ExceptionHandlerTPP theHandler);
+extern ExceptionHandlerTPP  InstallExceptionHandler(ExceptionHandlerTPP theHandler) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

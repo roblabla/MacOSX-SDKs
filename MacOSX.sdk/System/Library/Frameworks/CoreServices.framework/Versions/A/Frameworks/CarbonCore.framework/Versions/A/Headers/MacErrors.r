@@ -3,9 +3,9 @@
  
      Contains:   OSErr codes.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -118,6 +118,7 @@
 #define errFSBadIteratorFlags 			(-1422)				/*  Flags passed to FSOpenIterator are bad  */
 #define errFSIteratorNotFound 			(-1423)				/*  Passed FSIterator is not an open iterator  */
 #define errFSIteratorNotSupported 		(-1424)				/*  The iterator's flags or container are not supported by this call  */
+#define errFSQuotaExceeded 				(-1425)				/*  The user's quota of disk blocks has been exhausted.  */
 #define envNotPresent 					(-5500)				/* returned by glue. */
 #define envBadVers 						(-5501)				/* Version non-positive */
 #define envVersTooBig 					(-5502)				/* Version bigger than call can handle */
@@ -221,7 +222,7 @@
 #define cDevErr 						(-155)				/* invalid type of graphics device */
 #define cResErr 						(-156)				/* invalid resolution for MakeITable */
 #define cDepthErr 						(-157)				/* invalid pixel depth  */
-#define rgnTooBigErr 					(-500)
+#define rgnTooBigErr 					(-500)				/*  should have never been added! (cf. rgnTooBigError = 147)  */
 #define updPixMemErr 					(-125)				/* insufficient memory to update a pixmap */
 #define pictInfoVersionErr 				(-11000)			/* wrong version of the PictInfo structure */
 #define pictInfoIDErr 					(-11001)			/* the internal consistancy check for the PictInfoID is wrong */
@@ -834,6 +835,9 @@
 #define tsmNoMoreTokens 				(-2522)				/*  No more tokens are available for the source text  */
 #define tsmNoStem 						(-2523)				/*  No stem exists for the token  */
 #define tsmDefaultIsNotInputMethodErr 	(-2524)				/*  Current Input source is KCHR or uchr, not Input Method  (GetDefaultInputMethod)  */
+#define tsmDocPropertyNotFoundErr 		(-2528)				/*  Requested TSM Document property not found  */
+#define tsmDocPropertyBufferTooSmallErr  (-2529)			/*  Buffer passed in for property value is too small  */
+#define tsmCantChangeForcedClassStateErr  (-2530)			/*  Enabled state of a TextService class has been forced and cannot be changed  */
 
 															/*  Mixed Mode error codes  */
 #define mmInternalError 				(-2526)
@@ -1096,6 +1100,12 @@
 #define kOTConfigurationChangedErr 		(-3283)				/*                            */
 #define kOTUserRequestedErr 			(-3284)				/*                            */
 #define kOTPortLostConnection 			(-3285)				/*                            */
+
+#define kQDNoPalette 					(-3950)				/*  PaletteHandle is NULL */
+#define kQDNoColorHWCursorSupport 		(-3951)				/*  CGSSystemSupportsColorHardwareCursors() returned false */
+#define kQDCursorAlreadyRegistered 		(-3952)				/*  can be returned from QDRegisterNamedPixMapCursor() */
+#define kQDCursorNotRegistered 			(-3953)				/*  can be returned from QDSetNamedPixMapCursor() */
+#define kQDCorruptPICTDataErr 			(-3954)
 
 #define firstPickerError 				(-4000)
 #define invalidPickerType 				(-4000)
@@ -1597,10 +1607,6 @@
 															/*     indicate that the returned offset is within a word since there was */
 															/*     only less than one word that could fit the requested width. */
 #define kATSUBusyObjectErr 				(-8809)				/*     An ATSUI object is being used by another thread  */
-#define kATSUInvalidFontFallbacksErr 	(-8810)				/*     An attempt was made to use a ATSUFontFallbacks  */
-															/*     which hadn't been initialized or is otherwise  */
-															/*     in an invalid state.  */
-#define kATSULastErr 					(-8811)				/*     The last ATSUI error code. */
 
 															/*  general text errors */
 #define kTextUnsupportedEncodingErr 	(-8738)				/*  specified encoding not supported for this operation */
@@ -1643,6 +1649,19 @@
 #define kUTCOverflowErr 				(-8851)
 #define kIllegalClockValueErr 			(-8852)
 
+#define kATSUInvalidFontFallbacksErr 	(-8900)				/*     An attempt was made to use a ATSUFontFallbacks which hadn't  */
+															/*     been initialized or is otherwise in an invalid state.  */
+#define kATSUUnsupportedStreamFormatErr  (-8901)			/*     An attempt was made to use a ATSUFlattenedDataStreamFormat */
+															/*     which is invalid is not compatible with this version of ATSUI. */
+#define kATSUBadStreamErr 				(-8902)				/*     An attempt was made to use a stream which is incorrectly */
+															/*     structured, contains bad or out of range values or is */
+															/*     missing required information. */
+#define kATSUOutputBufferTooSmallErr 	(-8903)				/*     An attempt was made to use an output buffer which was too small */
+															/*     for the requested operation. */
+#define kATSUInvalidCallInsideCallbackErr  (-8904)			/*     A call was made within the context of a callback that could */
+															/*     potetially cause an infinite recursion */
+#define kATSULastErr 					(-8959)				/*     The last ATSUI error code. */
+
 #define codecErr 						(-8960)
 #define noCodecErr 						(-8961)
 #define codecUnimpErr 					(-8962)
@@ -1677,6 +1696,8 @@
 #define directXObjectAlreadyExists 		(-8990)
 #define lockPortBitsWrongGDeviceErr 	(-8991)
 #define codecOffscreenFailedPleaseRetryErr  (-8992)
+#define badCodecCharacterizationErr 	(-8993)
+#define noThumbnailFoundErr 			(-8994)
 
 #define kBadAdapterErr 					(-9050)				/*  invalid adapter number */
 #define kBadAttributeErr 				(-9051)				/*  specified attributes field value is invalid */
@@ -2148,6 +2169,7 @@
 #define themeBadCursorIndexErr 			(-30565)
 #define themeScriptFontNotFoundErr 		(-30566)			/*  theme font requested for uninstalled script system  */
 #define themeMonitorDepthNotSupportedErr  (-30567)			/*  theme not supported at monitor depth  */
+#define themeNoAppropriateBrushErr 		(-30568)			/*  theme brush has no corresponding theme text color  */
 
 #define errMessageNotSupported 			(-30580)
 #define errDataNotSupported 			(-30581)

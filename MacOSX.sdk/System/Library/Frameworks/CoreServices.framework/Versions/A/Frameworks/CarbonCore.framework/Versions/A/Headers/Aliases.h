@@ -3,9 +3,9 @@
  
      Contains:   Alias Manager Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1989-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1989-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -35,13 +36,19 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
+
+typedef UInt32                          FSAliasInfoBitmap;
+enum {
+  kFSAliasInfoNone              = 0x00000000, /* no valid info*/
+  kFSAliasInfoVolumeCreateDate  = 0x00000001, /* volume creation date is valid*/
+  kFSAliasInfoTargetCreateDate  = 0x00000002, /* target creation date is valid*/
+  kFSAliasInfoFinderInfo        = 0x00000004, /* file type and creator are valid*/
+  kFSAliasInfoIsDirectory       = 0x00000008, /* isDirectory boolean is valid*/
+  kFSAliasInfoIDs               = 0x00000010, /* parentDirID and nodeID are valid*/
+  kFSAliasInfoFSInfo            = 0x00000020, /* filesystemID and signature are valid*/
+  kFSAliasInfoVolumeFlags       = 0x00000040 /* volumeIsBootVolume, volumeIsAutomounted, volumeIsEjectable and volumeHasPersistentFileIDs are valid*/
+};
 
 enum {
   rAliasType                    = 'alis' /* Aliases are stored as resources of this type */
@@ -54,7 +61,8 @@ enum {
   kARMMultVols                  = 0x00000008, /* search on multiple volumes */
   kARMSearch                    = 0x00000100, /* search quickly */
   kARMSearchMore                = 0x00000200, /* search further */
-  kARMSearchRelFirst            = 0x00000400 /* search target on a relative path first */
+  kARMSearchRelFirst            = 0x00000400, /* search target on a relative path first */
+  kARMTryFileIDFirst            = 0x00000800 /* search by file id before path */
 };
 
 enum {
@@ -68,7 +76,8 @@ enum {
 
 /* ResolveAliasFileWithMountFlags options */
 enum {
-  kResolveAliasFileNoUI         = 0x00000001 /* no user interaction during resolution */
+  kResolveAliasFileNoUI         = 0x00000001, /* no user interaction during resolution */
+  kResolveAliasTryFileIDFirst   = 0x00000002 /* search by file id before path */
 };
 
 /* define the alias record that will be the blackbox for the caller */
@@ -79,6 +88,24 @@ struct AliasRecord {
 typedef struct AliasRecord              AliasRecord;
 typedef AliasRecord *                   AliasPtr;
 typedef AliasPtr *                      AliasHandle;
+/* info block to pass to FSCopyAliasInfo */
+struct FSAliasInfo {
+  UTCDateTime         volumeCreateDate;
+  UTCDateTime         targetCreateDate;
+  OSType              fileType;
+  OSType              fileCreator;
+  UInt32              parentDirID;
+  UInt32              nodeID;
+  UInt16              filesystemID;
+  UInt16              signature;
+  Boolean             volumeIsBootVolume;
+  Boolean             volumeIsAutomounted;
+  Boolean             volumeIsEjectable;
+  Boolean             volumeHasPersistentFileIDs;
+  Boolean             isDirectory;
+};
+typedef struct FSAliasInfo              FSAliasInfo;
+typedef FSAliasInfo *                   FSAliasInfoPtr;
 /* alias record information type */
 typedef short                           AliasInfoType;
 /*
@@ -97,7 +124,7 @@ extern OSErr
 NewAlias(
   const FSSpec *  fromFile,       /* can be NULL */
   const FSSpec *  target,
-  AliasHandle *   alias);
+  AliasHandle *   alias)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -115,7 +142,7 @@ NewAlias(
 extern OSErr 
 NewAliasMinimal(
   const FSSpec *  target,
-  AliasHandle *   alias);
+  AliasHandle *   alias)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -136,7 +163,7 @@ NewAliasMinimalFromFullPath(
   const void *      fullPath,
   ConstStr32Param   zoneName,
   ConstStr31Param   serverName,
-  AliasHandle *     alias);
+  AliasHandle *     alias)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -156,7 +183,7 @@ ResolveAlias(
   const FSSpec *  fromFile,         /* can be NULL */
   AliasHandle     alias,
   FSSpec *        target,
-  Boolean *       wasChanged);
+  Boolean *       wasChanged)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -176,7 +203,7 @@ extern OSErr
 GetAliasInfo(
   AliasHandle     alias,
   AliasInfoType   index,
-  Str63           theString);
+  Str63           theString)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -192,7 +219,7 @@ extern OSErr
 IsAliasFile(
   const FSSpec *  fileFSSpec,
   Boolean *       aliasFileFlag,
-  Boolean *       folderFlag);
+  Boolean *       folderFlag)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -209,7 +236,7 @@ ResolveAliasWithMountFlags(
   AliasHandle     alias,
   FSSpec *        target,
   Boolean *       wasChanged,
-  unsigned long   mountFlags);
+  unsigned long   mountFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -231,7 +258,7 @@ ResolveAliasFile(
   FSSpec *   theSpec,
   Boolean    resolveAliasChains,
   Boolean *  targetIsFolder,
-  Boolean *  wasAliased);
+  Boolean *  wasAliased)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -249,7 +276,7 @@ ResolveAliasFileWithMountFlags(
   Boolean         resolveAliasChains,
   Boolean *       targetIsFolder,
   Boolean *       wasAliased,
-  unsigned long   mountFlags);
+  unsigned long   mountFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -266,7 +293,7 @@ FollowFinderAlias(
   AliasHandle     alias,
   Boolean         logon,
   FSSpec *        target,
-  Boolean *       wasChanged);
+  Boolean *       wasChanged)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* 
@@ -290,7 +317,7 @@ UpdateAlias(
   const FSSpec *  fromFile,         /* can be NULL */
   const FSSpec *  target,
   AliasHandle     alias,
-  Boolean *       wasChanged);
+  Boolean *       wasChanged)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -305,7 +332,7 @@ typedef STACK_UPP_TYPE(AliasFilterProcPtr)                      AliasFilterUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AliasFilterUPP
-NewAliasFilterUPP(AliasFilterProcPtr userRoutine);
+NewAliasFilterUPP(AliasFilterProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeAliasFilterUPP()
@@ -316,7 +343,7 @@ NewAliasFilterUPP(AliasFilterProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAliasFilterUPP(AliasFilterUPP userUPP);
+DisposeAliasFilterUPP(AliasFilterUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeAliasFilterUPP()
@@ -331,14 +358,14 @@ InvokeAliasFilterUPP(
   CInfoPBPtr      cpbPtr,
   Boolean *       quitFlag,
   Ptr             myDataPtr,
-  AliasFilterUPP  userUPP);
+  AliasFilterUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  MatchAlias()
  *  
  *  Summary:
  *    Given an alias handle and fromFile, match the alias and return
- *    aliased filename(s) and needsUpdate flag
+ *    FSSpecs to the aliased file(s) and needsUpdate flag
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -354,7 +381,7 @@ MatchAlias(
   FSSpecArrayPtr   aliasList,
   Boolean *        needsUpdate,
   AliasFilterUPP   aliasFilter,
-  void *           yourDataPtr);
+  void *           yourDataPtr)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -377,7 +404,7 @@ ResolveAliasFileWithMountFlagsNoUI(
   Boolean         resolveAliasChains,
   Boolean *       targetIsFolder,
   Boolean *       wasAliased,
-  unsigned long   mountFlags);
+  unsigned long   mountFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -400,7 +427,7 @@ MatchAliasNoUI(
   FSSpecArrayPtr   aliasList,
   Boolean *        needsUpdate,
   AliasFilterUPP   aliasFilter,
-  void *           yourDataPtr);
+  void *           yourDataPtr)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -415,7 +442,7 @@ extern OSErr
 FSNewAlias(
   const FSRef *  fromFile,       /* can be NULL */
   const FSRef *  target,
-  AliasHandle *  inAlias);
+  AliasHandle *  inAlias)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -429,7 +456,7 @@ FSNewAlias(
 extern OSErr 
 FSNewAliasMinimal(
   const FSRef *  target,
-  AliasHandle *  inAlias);
+  AliasHandle *  inAlias)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -444,7 +471,7 @@ extern OSErr
 FSIsAliasFile(
   const FSRef *  fileRef,
   Boolean *      aliasFileFlag,
-  Boolean *      folderFlag);
+  Boolean *      folderFlag)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -462,7 +489,7 @@ FSResolveAliasWithMountFlags(
   AliasHandle     inAlias,
   FSRef *         target,
   Boolean *       wasChanged,
-  unsigned long   mountFlags);
+  unsigned long   mountFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -479,7 +506,7 @@ FSResolveAlias(
   const FSRef *  fromFile,         /* can be NULL */
   AliasHandle    alias,
   FSRef *        target,
-  Boolean *      wasChanged);
+  Boolean *      wasChanged)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -497,7 +524,7 @@ FSResolveAliasFileWithMountFlags(
   Boolean         resolveAliasChains,
   Boolean *       targetIsFolder,
   Boolean *       wasAliased,
-  unsigned long   mountFlags);
+  unsigned long   mountFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -514,7 +541,7 @@ FSResolveAliasFile(
   FSRef *    theRef,
   Boolean    resolveAliasChains,
   Boolean *  targetIsFolder,
-  Boolean *  wasAliased);
+  Boolean *  wasAliased)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -532,7 +559,7 @@ FSFollowFinderAlias(
   AliasHandle   alias,
   Boolean       logon,
   FSRef *       target,
-  Boolean *     wasChanged);
+  Boolean *     wasChanged)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -548,19 +575,193 @@ FSUpdateAlias(
   const FSRef *  fromFile,         /* can be NULL */
   const FSRef *  target,
   AliasHandle    alias,
-  Boolean *      wasChanged);
+  Boolean *      wasChanged)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+ *  FSNewAliasUnicode()
+ *  
+ *  Summary:
+ *    Creates an alias given a ref to the target's parent directory and
+ *    the target's unicode name.  If the target does not exist fnfErr
+ *    will be returned but the alias will still be created.  This
+ *    allows the creation of aliases to targets that do not exist.
+ *  
+ *  Parameters:
+ *    
+ *    fromFile:
+ *      The starting point for a relative search.
+ *    
+ *    targetParentRef:
+ *      An FSRef to the parent directory of the target.
+ *    
+ *    targetNameLength:
+ *      Number of Unicode characters in the target's name.
+ *    
+ *    targetName:
+ *      A pointer to the Unicode name.
+ *    
+ *    inAlias:
+ *      A Handle to the newly created alias record.
+ *    
+ *    isDirectory:
+ *      On input, if target does not exist, a flag to indicate whether
+ *      or not the target is a directory.  On output, if the target did
+ *      exist, an flag indicating if the target is a directory.  Pass
+ *      NULL in the non-existant case if unsure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+FSNewAliasUnicode(
+  const FSRef *    fromFile,               /* can be NULL */
+  const FSRef *    targetParentRef,
+  UniCharCount     targetNameLength,
+  const UniChar *  targetName,
+  AliasHandle *    inAlias,
+  Boolean *        isDirectory)            /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSNewAliasMinimalUnicode()
+ *  
+ *  Summary:
+ *    Creates a minimal alias given a ref to the target's parent
+ *    directory and the target's unicode name.  If the target does not
+ *    exist fnfErr will be returned but the alias will still be created.
+ *  
+ *  Parameters:
+ *    
+ *    targetParentRef:
+ *      An FSRef to the parent directory of the target.
+ *    
+ *    targetNameLength:
+ *      Number of Unicode characters in the target's name.
+ *    
+ *    targetName:
+ *      A pointer to the Unicode name.
+ *    
+ *    inAlias:
+ *      A Handle to the newly created alias record.
+ *    
+ *    isDirectory:
+ *      On input, if target does not exist, a flag to indicate whether
+ *      or not the
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+FSNewAliasMinimalUnicode(
+  const FSRef *    targetParentRef,
+  UniCharCount     targetNameLength,
+  const UniChar *  targetName,
+  AliasHandle *    inAlias,
+  Boolean *        isDirectory)            /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSMatchAlias()
+ *  
+ *  Summary:
+ *    Given an alias handle and fromFile, match the alias and return
+ *    FSRefs to the aliased file(s) and needsUpdate flag
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+FSMatchAlias(
+  const FSRef *    fromFile,          /* can be NULL */
+  unsigned long    rulesMask,
+  AliasHandle      inAlias,
+  short *          aliasCount,
+  FSRef *          aliasList,
+  Boolean *        needsUpdate,
+  AliasFilterUPP   aliasFilter,
+  void *           yourDataPtr)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSMatchAliasNoUI()
+ *  
+ *  Summary:
+ *    variation on FSMatchAlias that does not prompt user with a dialog
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+FSMatchAliasNoUI(
+  const FSRef *    fromFile,          /* can be NULL */
+  unsigned long    rulesMask,
+  AliasHandle      inAlias,
+  short *          aliasCount,
+  FSRef *          aliasList,
+  Boolean *        needsUpdate,
+  AliasFilterUPP   aliasFilter,
+  void *           yourDataPtr)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSCopyAliasInfo()
+ *  
+ *  Discussion:
+ *    This routine will return the requested information from the
+ *    passed in aliasHandle.  The information is gathered only from the
+ *    alias record so it may not match what is on disk (no disk i/o is
+ *    performed).  The whichInfo paramter is an output parameter that
+ *    signifies which fields in the info record contain valid data.
+ *  
+ *  Parameters:
+ *    
+ *    inAlias:
+ *      A handle to the alias record to get the information from.
+ *    
+ *    targetName:
+ *      The name of the target item.
+ *    
+ *    volumeName:
+ *      The name of the volume the target resides on.
+ *    
+ *    pathString:
+ *      POSIX path to target.
+ *    
+ *    whichInfo:
+ *      An indication of which fields in the info block contain valid
+ *      data.
+ *    
+ *    info:
+ *      Returned information about the alias.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FSCopyAliasInfo(
+  AliasHandle          inAlias,
+  HFSUniStr255 *       targetName,       /* can be NULL */
+  HFSUniStr255 *       volumeName,       /* can be NULL */
+  CFStringRef *        pathString,       /* can be NULL */
+  FSAliasInfoBitmap *  whichInfo,        /* can be NULL */
+  FSAliasInfo *        info)             /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

@@ -46,31 +46,35 @@ extern void NSOpenGLGetVersion(long *major, long *minor);
 ** and [NSOpenGLPixelFormat getValues:forAttribute:forVirtualScreen].
 */
 typedef enum {
-	NSOpenGLPFAAllRenderers    =   1,	/* choose from all available renderers          */
-	NSOpenGLPFADoubleBuffer    =   5,	/* choose a double buffered pixel format        */
-	NSOpenGLPFAStereo          =   6,	/* stereo buffering supported                   */
-	NSOpenGLPFAAuxBuffers      =   7,	/* number of aux buffers                        */
-	NSOpenGLPFAColorSize       =   8,	/* number of color buffer bits                  */
-	NSOpenGLPFAAlphaSize       =  11,	/* number of alpha component bits               */
-	NSOpenGLPFADepthSize       =  12,	/* number of depth buffer bits                  */
-	NSOpenGLPFAStencilSize     =  13,	/* number of stencil buffer bits                */
-	NSOpenGLPFAAccumSize       =  14,	/* number of accum buffer bits                  */
-	NSOpenGLPFAMinimumPolicy   =  51,	/* never choose smaller buffers than requested  */
-	NSOpenGLPFAMaximumPolicy   =  52,	/* choose largest buffers of type requested     */
-	NSOpenGLPFAOffScreen       =  53,	/* choose an off-screen capable renderer        */
-	NSOpenGLPFAFullScreen      =  54,	/* choose a full-screen capable renderer        */
-	NSOpenGLPFARendererID      =  70,	/* request renderer by ID                       */
-	NSOpenGLPFASingleRenderer  =  71,	/* choose a single renderer for all screens     */
-	NSOpenGLPFANoRecovery      =  72,	/* disable all failure recovery systems         */
-	NSOpenGLPFAAccelerated     =  73,	/* choose a hardware accelerated renderer       */
-	NSOpenGLPFAClosestPolicy   =  74,	/* choose the closest color buffer to request   */
-	NSOpenGLPFARobust          =  75,	/* renderer does not need failure recovery      */
-	NSOpenGLPFABackingStore    =  76,	/* back buffer contents are valid after swap    */
-	NSOpenGLPFAMPSafe          =  78,	/* renderer is multi-processor safe             */
-	NSOpenGLPFAWindow          =  80,	/* can be used to render to an onscreen window  */
-	NSOpenGLPFAMultiScreen     =  81,	/* single window can span multiple screens      */
-	NSOpenGLPFACompliant       =  83,	/* renderer is opengl compliant                 */
-	NSOpenGLPFAScreenMask      =  84	/* bit mask of supported physical screens       */
+	NSOpenGLPFAAllRenderers       =   1,	/* choose from all available renderers          */
+	NSOpenGLPFADoubleBuffer       =   5,	/* choose a double buffered pixel format        */
+	NSOpenGLPFAStereo             =   6,	/* stereo buffering supported                   */
+	NSOpenGLPFAAuxBuffers         =   7,	/* number of aux buffers                        */
+	NSOpenGLPFAColorSize          =   8,	/* number of color buffer bits                  */
+	NSOpenGLPFAAlphaSize          =  11,	/* number of alpha component bits               */
+	NSOpenGLPFADepthSize          =  12,	/* number of depth buffer bits                  */
+	NSOpenGLPFAStencilSize        =  13,	/* number of stencil buffer bits                */
+	NSOpenGLPFAAccumSize          =  14,	/* number of accum buffer bits                  */
+	NSOpenGLPFAMinimumPolicy      =  51,	/* never choose smaller buffers than requested  */
+	NSOpenGLPFAMaximumPolicy      =  52,	/* choose largest buffers of type requested     */
+	NSOpenGLPFAOffScreen          =  53,	/* choose an off-screen capable renderer        */
+	NSOpenGLPFAFullScreen         =  54,	/* choose a full-screen capable renderer        */
+	NSOpenGLPFASampleBuffers      =  55,	/* number of multi sample buffers               */
+	NSOpenGLPFASamples            =  56,	/* number of samples per multi sample buffer    */
+	NSOpenGLPFAAuxDepthStencil    =  57,	/* each aux buffer has its own depth stencil    */
+	NSOpenGLPFARendererID         =  70,	/* request renderer by ID                       */
+	NSOpenGLPFASingleRenderer     =  71,	/* choose a single renderer for all screens     */
+	NSOpenGLPFANoRecovery         =  72,	/* disable all failure recovery systems         */
+	NSOpenGLPFAAccelerated        =  73,	/* choose a hardware accelerated renderer       */
+	NSOpenGLPFAClosestPolicy      =  74,	/* choose the closest color buffer to request   */
+	NSOpenGLPFARobust             =  75,	/* renderer does not need failure recovery      */
+	NSOpenGLPFABackingStore       =  76,	/* back buffer contents are valid after swap    */
+	NSOpenGLPFAMPSafe             =  78,	/* renderer is multi-processor safe             */
+	NSOpenGLPFAWindow             =  80,	/* can be used to render to an onscreen window  */
+	NSOpenGLPFAMultiScreen        =  81,	/* single window can span multiple screens      */
+	NSOpenGLPFACompliant          =  83,	/* renderer is opengl compliant                 */
+	NSOpenGLPFAScreenMask         =  84,	/* bit mask of supported physical screens       */
+	NSOpenGLPFAVirtualScreenCount = 128	/* number of virtual screens in this format     */
 } NSOpenGLPixelFormatAttribute;
 
 
@@ -109,11 +113,15 @@ typedef struct _CGLPixelFormatObject NSOpenGLPixelFormatAuxiliary;
 ** Parameter names for [NSOpenGLContext setParameter] and [NSOpenGLContext getParameter].
 */
 typedef enum {
-	NSOpenGLCPSwapRectangle       = 200,	/* Set or get the swap rectangle {x, y, w, h}    */
-	NSOpenGLCPSwapRectangleEnable = 201,	/* Enable or disable the swap rectangle          */
-	NSOpenGLCPRasterizationEnable = 221,	/* Enable or disable all rasterization           */
-	NSOpenGLCPSwapInterval        = 222,	/* 0 -> Don't sync, n -> Sync every n retrace    */
-	NSOpenGLCPStateValidation     = 301	/* Validate state for multi-screen functionality */
+	NSOpenGLCPSwapRectangle       = 200,	/* Set or get the swap rectangle {x, y, w, h}       */
+	NSOpenGLCPSwapRectangleEnable = 201,	/* Enable or disable the swap rectangle             */
+	NSOpenGLCPRasterizationEnable = 221,	/* Enable or disable all rasterization              */
+	NSOpenGLCPSwapInterval        = 222,	/* 0 -> Don't sync, n -> Sync every n retrace       */
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+	NSOpenGLCPSurfaceOrder        = 235,	/* 1 -> Above Window (default), -1 -> Below Window  */
+	NSOpenGLCPSurfaceOpacity      = 236,	/* 1-> Surface is opaque (default), 0 -> non-opaque */
+#endif
+	NSOpenGLCPStateValidation     = 301	/* Validate state for multi-screen functionality    */
 } NSOpenGLContextParameter;
 
 
@@ -154,6 +162,17 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 /* Context Parameter handling */
 - (void)setValues:(const long *)vals forParameter:(NSOpenGLContextParameter)param;
 - (void)getValues:(long *)vals forParameter:(NSOpenGLContextParameter)param;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+
+/* virtual screens */
+- (void)setCurrentVirtualScreen:(int)screen;
+- (int)currentVirtualScreen;
+
+/* creating textures */
+- (void)createTexture:(unsigned long/*GLenum*/)target fromView:(NSView*)view internalFormat:(unsigned long/*GLenum*/)format;
+
+#endif
 
 @end
 

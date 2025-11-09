@@ -1,5 +1,5 @@
 /*	NSDistributedNotificationCenter.h
-	Copyright 1996-2001, Apple, Inc. All rights reserved.
+	Copyright 1996-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSNotification.h>

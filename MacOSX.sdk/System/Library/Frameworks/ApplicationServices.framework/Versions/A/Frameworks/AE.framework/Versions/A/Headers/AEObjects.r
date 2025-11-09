@@ -3,9 +3,9 @@
  
      Contains:   Object Support Library Interfaces.
  
-     Version:    AppleEvents-116~3
+     Version:    AppleEvents-242~1
  
-     Copyright:  © 1991-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1991-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,8 +17,8 @@
 #ifndef __AEOBJECTS_R__
 #define __AEOBJECTS_R__
 
-#ifndef __CONDITIONALMACROS_R__
-#include <CarbonCore/ConditionalMacros.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
 
 															/* *** LOGICAL OPERATOR CONSTANTS  *** */

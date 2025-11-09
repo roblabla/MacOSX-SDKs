@@ -57,12 +57,12 @@ enum
     kSCSIDevTypeQualifierReserved   	= 0x40,
     kSCSIDevTypeQualifierMissing    	= 0x60, /* No such logical unit	*/
     kSCSIDevTypeQualifierVendorSpecific = 0x80, /* Non-standardized	*/
-    kSCSIDevTypeQualifierMask	    	= 0xE0,
+    kSCSIDevTypeQualifierMask	    	= 0xE0
 };
 
 enum
 {
-    kSCSIDevTypeModRemovable		= 0x80, /* Device has removable media */
+    kSCSIDevTypeModRemovable		= 0x80 /* Device has removable media */
 };
 
 enum _SCSIDevFlags 
@@ -73,7 +73,7 @@ enum _SCSIDevFlags
     kSCSIDevCapSync			= 0x10,
     kSCSIDevCapLinked			= 0x08,
     kSCSIDevCapCmdQue			= 0x02,
-    kSCSIDevCapSftRe			= 0x01,
+    kSCSIDevCapSftRe			= 0x01
 };
 
 typedef struct _SCSISenseData
@@ -101,7 +101,7 @@ enum _SCSIErrorCode
     kSCSISenseInfoValid	 		= 0x70,	/* Is sense key valid?		*/
     kSCSISenseInfoMask			= 0x70,	/* Mask for sense info		*/
     kSCSISenseCurrentErr		= 0x70,	/* Error code (byte 0 & 0x7F	*/
-    kSCSISenseDeferredErr		= 0x71,	/* Error code (byte 0 & 0x7F	*/
+    kSCSISenseDeferredErr		= 0x71	/* Error code (byte 0 & 0x7F	*/
 };
 
 /*
@@ -112,7 +112,7 @@ enum _SCSISenseKeyMasks
     kSCSISenseKeyMask			= 0x0F,
     kSCSISenseILI			= 0x20,	/* Illegal logical Length	*/
     kSCSISenseEOM			= 0x40,	/* End of media			*/
-    kSCSISenseFileMark			= 0x80,	/* End of file mark		*/
+    kSCSISenseFileMark			= 0x80	/* End of file mark		*/
 };
 /*
  * SCSI sense codes. (Returned after request sense).
@@ -133,7 +133,7 @@ enum _SCSISenseKeys
     kSCSISenseAbortedCmd		= 0x0b, /* Initiator aborted cmd.	*/
     kSCSISenseEqual			= 0x0c,	/* Comparison equal		*/
     kSCSISenseVolumeOverflow 		= 0x0d,	/* Write past end mark		*/
-    kSCSISenseMiscompare		= 0x0e, /* Comparison failed		*/
+    kSCSISenseMiscompare		= 0x0e /* Comparison failed		*/
 };
 
 enum _SCSIStatus
@@ -143,10 +143,10 @@ enum _SCSIStatus
     kSCSIStatusConditionMet		= 0x04,
     kSCSIStatusBusy			= 0x08,
     kSCSIStatusIntermediate		= 0x10,
-    kSCSIStatusIntermediateMet		= 0x0a,
+    kSCSIStatusIntermediateMet		= 0x14,
     kSCSIStatusReservationConfict	= 0x18,
     kSCSIStatusCommandTerminated	= 0x22,
-    kSCSIStatusQueueFull		= 0x28,
+    kSCSIStatusQueueFull		= 0x28
 };
 
 
@@ -166,19 +166,19 @@ enum _SCSIDevTypes
     kSCSIDevTypeGraphicArts0B,
     kSCSIDevTypeFirstReserved,			/* Reserved sequence start	*/
     kSCSIDevTypeUnknownOrMissing 	= 0x1F,
-    kSCSIDevTypeMask			= 0x1F,
+    kSCSIDevTypeMask			= 0x1F
 };
 
 enum _SCSIInqVersion
 {
-    kSCSIInqVersionSCSI3		= 0x03,
+    kSCSIInqVersionSCSI3		= 0x03
 };
 
 enum _SCSI3Options
 {
     kSCSI3InqOptionIUS			= 0x01,
     kSCSI3InqOptionQAS			= 0x02,
-    kSCSI3InqOptionClockDT		= 0x04,
+    kSCSI3InqOptionClockDT		= 0x04
 };
 
 
@@ -251,7 +251,7 @@ enum _SCSICmds
 /*
  * ANSI SCSI-II for CD-ROM devices.
  */
-     kSCSICmdReadCDTableOfContents	= 0x43,
+     kSCSICmdReadCDTableOfContents	= 0x43
 };
 
 /*
@@ -285,7 +285,7 @@ enum _SCSIMsgs
     kSCSIMsgWideDataXferReq	  	= 0x03, /* Extended msg	*/
     kSCSIMsgTerminateIOP	     	= 0x11,
     kSCSIMsgExtended	     		= 0x01,
-    kSCSIMsgEnableDisconnectMask  	= 0x40,
+    kSCSIMsgEnableDisconnectMask  	= 0x40
 };
 
 #endif

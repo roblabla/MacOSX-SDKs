@@ -1,5 +1,5 @@
 /*	CFXMLNode.h
-	Copyright 1998-2001, Apple, Inc. All rights reserved.
+	Copyright 1998-2002, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFXMLNODE__)
@@ -65,6 +65,7 @@ typedef struct {
     CFDictionaryRef attributes;
     CFArrayRef attributeOrder;
     Boolean isEmpty;
+    char _reserved[3];
 } CFXMLElementInfo;
 
 typedef struct {

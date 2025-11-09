@@ -3,9 +3,9 @@
  
      Contains:   Power Manager Interfaces.
  
-     Version:    OSServices-24~82
+     Version:    OSServices-39.2~411
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc.  All rights reserved
+     Copyright:  © 1990-2002 by Apple Computer, Inc.  All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -38,6 +38,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -47,13 +48,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
                                         /* Bit positions for ModemByte */
@@ -566,7 +561,7 @@ typedef PowerSourceParamBlock *         PowerSourceParamBlockPtr;
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-DisableWUTime(void);
+DisableWUTime(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -578,7 +573,7 @@ DisableWUTime(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-SetWUTime(long wuTime);
+SetWUTime(long wuTime)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -592,7 +587,7 @@ SetWUTime(long wuTime);
 extern OSErr 
 GetWUTime(
   long *  wuTime,
-  Byte *  wuFlag);
+  Byte *  wuFlag)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -606,7 +601,7 @@ GetWUTime(
 extern OSErr 
 BatteryStatus(
   Byte *  status,
-  Byte *  power);
+  Byte *  power)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -618,7 +613,7 @@ BatteryStatus(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-ModemStatus(Byte * status);
+ModemStatus(Byte * status)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -630,7 +625,7 @@ ModemStatus(Byte * status);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-IdleUpdate(void);
+IdleUpdate(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -642,7 +637,7 @@ IdleUpdate(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-GetCPUSpeed(void);
+GetCPUSpeed(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -654,7 +649,7 @@ GetCPUSpeed(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-EnableIdle(void);
+EnableIdle(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -666,7 +661,7 @@ EnableIdle(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DisableIdle(void);
+DisableIdle(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -678,7 +673,7 @@ DisableIdle(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SleepQInstall(SleepQRecPtr qRecPtr);
+SleepQInstall(SleepQRecPtr qRecPtr)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -690,7 +685,7 @@ SleepQInstall(SleepQRecPtr qRecPtr);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SleepQRemove(SleepQRecPtr qRecPtr);
+SleepQRemove(SleepQRecPtr qRecPtr)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -702,7 +697,7 @@ SleepQRemove(SleepQRecPtr qRecPtr);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-AOn(void);
+AOn(void)                                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -714,7 +709,7 @@ AOn(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-AOnIgnoreModem(void);
+AOnIgnoreModem(void)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -726,7 +721,7 @@ AOnIgnoreModem(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-BOn(void);
+BOn(void)                                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -738,7 +733,7 @@ BOn(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-AOff(void);
+AOff(void)                                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -750,7 +745,7 @@ AOff(void);
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-BOff(void);
+BOff(void)                                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -764,7 +759,7 @@ BOff(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern short 
-PMSelectorCount(void);
+PMSelectorCount(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -776,7 +771,7 @@ PMSelectorCount(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern UInt32 
-PMFeatures(void);
+PMFeatures(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -788,7 +783,7 @@ PMFeatures(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern UInt8 
-GetSleepTimeout(void);
+GetSleepTimeout(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -800,7 +795,7 @@ GetSleepTimeout(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-SetSleepTimeout(UInt8 timeout);
+SetSleepTimeout(UInt8 timeout)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -812,7 +807,7 @@ SetSleepTimeout(UInt8 timeout);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern UInt8 
-GetHardDiskTimeout(void);
+GetHardDiskTimeout(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -824,7 +819,7 @@ GetHardDiskTimeout(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-SetHardDiskTimeout(UInt8 timeout);
+SetHardDiskTimeout(UInt8 timeout)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -836,7 +831,7 @@ SetHardDiskTimeout(UInt8 timeout);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern Boolean 
-HardDiskPowered(void);
+HardDiskPowered(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -848,7 +843,7 @@ HardDiskPowered(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-SpinDownHardDisk(void);
+SpinDownHardDisk(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -860,7 +855,7 @@ SpinDownHardDisk(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern Boolean 
-IsSpindownDisabled(void);
+IsSpindownDisabled(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -872,7 +867,7 @@ IsSpindownDisabled(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-SetSpindownDisable(Boolean setDisable);
+SetSpindownDisable(Boolean setDisable)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -884,7 +879,7 @@ SetSpindownDisable(Boolean setDisable);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-HardDiskQInstall(HDQueueElement * theElement);
+HardDiskQInstall(HDQueueElement * theElement)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -896,7 +891,7 @@ HardDiskQInstall(HDQueueElement * theElement);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-HardDiskQRemove(HDQueueElement * theElement);
+HardDiskQRemove(HDQueueElement * theElement)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -910,7 +905,7 @@ HardDiskQRemove(HDQueueElement * theElement);
 extern void 
 GetScaledBatteryInfo(
   short          whichBattery,
-  BatteryInfo *  theInfo);
+  BatteryInfo *  theInfo)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -922,7 +917,7 @@ GetScaledBatteryInfo(
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-AutoSleepControl(Boolean enableSleep);
+AutoSleepControl(Boolean enableSleep)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -934,7 +929,7 @@ AutoSleepControl(Boolean enableSleep);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern UInt32 
-GetIntModemInfo(void);
+GetIntModemInfo(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -946,7 +941,7 @@ GetIntModemInfo(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-SetIntModemState(short theState);
+SetIntModemState(short theState)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -958,19 +953,19 @@ SetIntModemState(short theState);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern short 
-MaximumProcessorSpeed(void);
+MaximumProcessorSpeed(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  MinimumProcessorSpeed()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.1 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern short 
-MinimumProcessorSpeed(void);
+MinimumProcessorSpeed(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -982,7 +977,7 @@ MinimumProcessorSpeed(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern short 
-CurrentProcessorSpeed(void);
+CurrentProcessorSpeed(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -994,7 +989,7 @@ CurrentProcessorSpeed(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern Boolean 
-FullProcessorSpeed(void);
+FullProcessorSpeed(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1006,7 +1001,7 @@ FullProcessorSpeed(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern Boolean 
-SetProcessorSpeed(Boolean fullSpeed);
+SetProcessorSpeed(Boolean fullSpeed)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1018,7 +1013,7 @@ SetProcessorSpeed(Boolean fullSpeed);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern short 
-GetSCSIDiskModeAddress(void);
+GetSCSIDiskModeAddress(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1030,7 +1025,7 @@ GetSCSIDiskModeAddress(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-SetSCSIDiskModeAddress(short scsiAddress);
+SetSCSIDiskModeAddress(short scsiAddress)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1042,7 +1037,7 @@ SetSCSIDiskModeAddress(short scsiAddress);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-GetWakeupTimer(WakeupTime * theTime);
+GetWakeupTimer(WakeupTime * theTime)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1054,7 +1049,7 @@ GetWakeupTimer(WakeupTime * theTime);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-SetWakeupTimer(WakeupTime * theTime);
+SetWakeupTimer(WakeupTime * theTime)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1066,7 +1061,7 @@ SetWakeupTimer(WakeupTime * theTime);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern Boolean 
-IsProcessorCyclingEnabled(void);
+IsProcessorCyclingEnabled(void)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1078,7 +1073,7 @@ IsProcessorCyclingEnabled(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-EnableProcessorCycling(Boolean enable);
+EnableProcessorCycling(Boolean enable)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1090,7 +1085,7 @@ EnableProcessorCycling(Boolean enable);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern short 
-BatteryCount(void);
+BatteryCount(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1102,7 +1097,7 @@ BatteryCount(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern Fixed 
-GetBatteryVoltage(short whichBattery);
+GetBatteryVoltage(short whichBattery)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1116,7 +1111,7 @@ GetBatteryVoltage(short whichBattery);
 extern void 
 GetBatteryTimes(
   short             whichBattery,
-  BatteryTimeRec *  theTimes);
+  BatteryTimeRec *  theTimes)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1128,7 +1123,7 @@ GetBatteryTimes(
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern UInt8 
-GetDimmingTimeout(void);
+GetDimmingTimeout(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1140,7 +1135,7 @@ GetDimmingTimeout(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-SetDimmingTimeout(UInt8 timeout);
+SetDimmingTimeout(UInt8 timeout)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1152,7 +1147,7 @@ SetDimmingTimeout(UInt8 timeout);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-DimmingControl(Boolean enableSleep);
+DimmingControl(Boolean enableSleep)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1164,7 +1159,7 @@ DimmingControl(Boolean enableSleep);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern Boolean 
-IsDimmingControlDisabled(void);
+IsDimmingControlDisabled(void)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1176,7 +1171,7 @@ IsDimmingControlDisabled(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern Boolean 
-IsAutoSlpControlDisabled(void);
+IsAutoSlpControlDisabled(void)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1188,7 +1183,7 @@ IsAutoSlpControlDisabled(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-PMgrStateQInstall(PMgrQueueElement * theElement);
+PMgrStateQInstall(PMgrQueueElement * theElement)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1200,7 +1195,7 @@ PMgrStateQInstall(PMgrQueueElement * theElement);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-PMgrStateQRemove(PMgrQueueElement * theElement);
+PMgrStateQRemove(PMgrQueueElement * theElement)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1212,7 +1207,7 @@ PMgrStateQRemove(PMgrQueueElement * theElement);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-UpdateSystemActivity(UInt8 activity);
+UpdateSystemActivity(UInt8 activity)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1224,7 +1219,7 @@ UpdateSystemActivity(UInt8 activity);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-DelaySystemIdle(void);
+DelaySystemIdle(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1236,7 +1231,7 @@ DelaySystemIdle(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-GetStartupTimer(StartupTime * theTime);
+GetStartupTimer(StartupTime * theTime)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1248,7 +1243,7 @@ GetStartupTimer(StartupTime * theTime);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-SetStartupTimer(StartupTime * theTime);
+SetStartupTimer(StartupTime * theTime)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1260,7 +1255,7 @@ SetStartupTimer(StartupTime * theTime);
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-GetLastActivity(ActivityInfo * theActivity);
+GetLastActivity(ActivityInfo * theActivity)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1272,7 +1267,7 @@ GetLastActivity(ActivityInfo * theActivity);
  *    Non-Carbon CFM:   in PowerMgrLib 1.1 and later
  */
 extern OSErr 
-GetSoundMixerState(SoundMixerByte * theSoundMixerByte);
+GetSoundMixerState(SoundMixerByte * theSoundMixerByte)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1284,7 +1279,7 @@ GetSoundMixerState(SoundMixerByte * theSoundMixerByte);
  *    Non-Carbon CFM:   in PowerMgrLib 1.1 and later
  */
 extern OSErr 
-SetSoundMixerState(SoundMixerByte * theSoundMixerByte);
+SetSoundMixerState(SoundMixerByte * theSoundMixerByte)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1296,7 +1291,7 @@ SetSoundMixerState(SoundMixerByte * theSoundMixerByte);
  *    Non-Carbon CFM:   in PowerMgrLib 1.1 and later
  */
 extern Boolean 
-GetDimSuspendState(void);
+GetDimSuspendState(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1308,7 +1303,7 @@ GetDimSuspendState(void);
  *    Non-Carbon CFM:   in PowerMgrLib 1.1 and later
  */
 extern void 
-SetDimSuspendState(Boolean dimSuspendState);
+SetDimSuspendState(Boolean dimSuspendState)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1491,7 +1486,7 @@ SetDimSuspendState(Boolean dimSuspendState);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SleepQUPP
-NewSleepQUPP(SleepQProcPtr userRoutine);
+NewSleepQUPP(SleepQProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewHDSpindownUPP()
@@ -1502,7 +1497,7 @@ NewSleepQUPP(SleepQProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern HDSpindownUPP
-NewHDSpindownUPP(HDSpindownProcPtr userRoutine);
+NewHDSpindownUPP(HDSpindownProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewPMgrStateChangeUPP()
@@ -1513,7 +1508,7 @@ NewHDSpindownUPP(HDSpindownProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern PMgrStateChangeUPP
-NewPMgrStateChangeUPP(PMgrStateChangeProcPtr userRoutine);
+NewPMgrStateChangeUPP(PMgrStateChangeProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeSleepQUPP()
@@ -1524,7 +1519,7 @@ NewPMgrStateChangeUPP(PMgrStateChangeProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSleepQUPP(SleepQUPP userUPP);
+DisposeSleepQUPP(SleepQUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeHDSpindownUPP()
@@ -1535,7 +1530,7 @@ DisposeSleepQUPP(SleepQUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeHDSpindownUPP(HDSpindownUPP userUPP);
+DisposeHDSpindownUPP(HDSpindownUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposePMgrStateChangeUPP()
@@ -1546,7 +1541,7 @@ DisposeHDSpindownUPP(HDSpindownUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposePMgrStateChangeUPP(PMgrStateChangeUPP userUPP);
+DisposePMgrStateChangeUPP(PMgrStateChangeUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeSleepQUPP()
@@ -1560,7 +1555,7 @@ extern long
 InvokeSleepQUPP(
   long          message,
   SleepQRecPtr  qRecPtr,
-  SleepQUPP     userUPP);
+  SleepQUPP     userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeHDSpindownUPP()
@@ -1573,7 +1568,7 @@ InvokeSleepQUPP(
 extern void
 InvokeHDSpindownUPP(
   HDQueueElement *  theElement,
-  HDSpindownUPP     userUPP);
+  HDSpindownUPP     userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokePMgrStateChangeUPP()
@@ -1587,17 +1582,11 @@ extern void
 InvokePMgrStateChangeUPP(
   PMgrQueueElement *  theElement,
   long                stateBits,
-  PMgrStateChangeUPP  userUPP);
+  PMgrStateChangeUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

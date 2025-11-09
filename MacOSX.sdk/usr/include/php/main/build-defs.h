@@ -27,7 +27,7 @@
 #define PHP_FHTTPD_INCLUDE      ""
 #define PHP_FHTTPD_LIB          ""
 #define PHP_FHTTPD_TARGET       ""
-#define PHP_CFLAGS		"-arch i386 -arch ppc -g -O3 -pipe -no-cpp-precomp -prefer-pic"
+#define PHP_CFLAGS		"-arch i386 -arch ppc -g -Os -pipe -no-cpp-precomp -prefer-pic"
 #define PHP_DBASE_LIB		""
 #define PHP_BUILD_DEBUG		""
 #define PHP_GDBM_INCLUDE	""

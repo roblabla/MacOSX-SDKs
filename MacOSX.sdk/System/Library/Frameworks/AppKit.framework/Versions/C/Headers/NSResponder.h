@@ -51,6 +51,9 @@
 
 - (void)helpRequested:(NSEvent *)eventPtr;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (BOOL)shouldBeTreatedAsInkEvent:(NSEvent *)theEvent;
+#endif
 @end
 
 @interface NSResponder(NSKeyboardUI)

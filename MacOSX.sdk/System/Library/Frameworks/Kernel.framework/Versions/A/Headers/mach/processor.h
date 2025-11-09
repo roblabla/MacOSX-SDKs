@@ -30,6 +30,8 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* processor_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 
 #ifdef __BeforeMigUserHeader
@@ -111,6 +113,123 @@ kern_return_t processor_get_assignment
 	processor_t processor,
 	processor_set_name_t *assigned_set
 );
+/* typedefs for all requests */
+
+#ifndef __Request__processor_subsystem__defined
+#define __Request__processor_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__processor_start_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__processor_exit_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		processor_flavor_t flavor;
+		mach_msg_type_number_t processor_info_outCnt;
+	} __Request__processor_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t processor_cmdCnt;
+		integer_t processor_cmd[12];
+	} __Request__processor_control_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t new_set;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		boolean_t wait;
+	} __Request__processor_assign_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__processor_get_assignment_t;
+
+#endif /* !__Request__processor_subsystem__defined */
+
+/* union of all requests */
+
+#ifndef __RequestUnion__processor_subsystem__defined
+#define __RequestUnion__processor_subsystem__defined
+union __RequestUnion__processor_subsystem {
+	__Request__processor_start_t Request_processor_start;
+	__Request__processor_exit_t Request_processor_exit;
+	__Request__processor_info_t Request_processor_info;
+	__Request__processor_control_t Request_processor_control;
+	__Request__processor_assign_t Request_processor_assign;
+	__Request__processor_get_assignment_t Request_processor_get_assignment;
+};
+#endif /* !__RequestUnion__processor_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__processor_subsystem__defined
+#define __Reply__processor_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__processor_start_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__processor_exit_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t host;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t processor_info_outCnt;
+		integer_t processor_info_out[12];
+	} __Reply__processor_info_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__processor_control_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__processor_assign_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t assigned_set;
+		/* end of the kernel processed data */
+	} __Reply__processor_get_assignment_t;
+
+#endif /* !__Reply__processor_subsystem__defined */
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__processor_subsystem__defined
+#define __ReplyUnion__processor_subsystem__defined
+union __ReplyUnion__processor_subsystem {
+	__Reply__processor_start_t Reply_processor_start;
+	__Reply__processor_exit_t Reply_processor_exit;
+	__Reply__processor_info_t Reply_processor_info;
+	__Reply__processor_control_t Reply_processor_control;
+	__Reply__processor_assign_t Reply_processor_assign;
+	__Reply__processor_get_assignment_t Reply_processor_get_assignment;
+};
+#endif /* !__RequestUnion__processor_subsystem__defined */
 
 #ifndef subsystem_to_name_map_processor
 #define subsystem_to_name_map_processor \

@@ -34,7 +34,7 @@
 
 // Base Line support for guides
 - (BOOL)ibHasBaseLine;  // Default is NO
-- (float)ibBaseLineForCellBounds:(NSRect)bounds frameHeight:(float)height; 
+- (float)ibBaseLineForCellSize:(NSSize)cellSize; 
 
 // Call super and then matches this cell with the prototype. Call in NSMatrix inspector
 - (void)ibMatchPrototype:(NSCell*)prototype;

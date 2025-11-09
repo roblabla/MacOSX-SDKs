@@ -3,9 +3,9 @@
  
      Contains:   Games Sprockets: DrawSprocket interfaces
  
-     Version:    DrawSprocket-2.0.33~1
+     Version:    DrawSprocket-2.0.50~9
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,7 @@
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -30,27 +31,10 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=power
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=power
 
 #if PRAGMA_ENUM_ALWAYSINT
-    #if defined(__fourbyteints__) && !__fourbyteints__ 
-        #define __DRAWSPROCKET__RESTORE_TWOBYTEINTS
-        #pragma fourbyteints on
-    #endif
     #pragma enumsalwaysint on
-#elif PRAGMA_ENUM_OPTIONS
-    #pragma option enum=int
-#elif PRAGMA_ENUM_PACK
-    #if __option(pack_enums)
-        #define __DRAWSPROCKET__RESTORE_PACKED_ENUMS
-        #pragma options(!pack_enums)
-    #endif
 #endif
 
 /*
@@ -58,7 +42,6 @@ extern "C" {
 ** constants
 ********************************************************************************
 */
-
 enum DSpDepthMask {
   kDSpDepthMask_1               = 1 << 0,
   kDSpDepthMask_2               = 1 << 1,
@@ -70,14 +53,12 @@ enum DSpDepthMask {
 };
 typedef enum DSpDepthMask DSpDepthMask;
 
-
 enum DSpColorNeeds {
   kDSpColorNeeds_DontCare       = 0L,
   kDSpColorNeeds_Request        = 1L,
   kDSpColorNeeds_Require        = 2L
 };
 typedef enum DSpColorNeeds DSpColorNeeds;
-
 
 enum DSpContextState {
   kDSpContextState_Active       = 0L,
@@ -87,7 +68,6 @@ enum DSpContextState {
 typedef enum DSpContextState DSpContextState;
 
 /* kDSpContextOption_QD3DAccel not yet implemented */
-
 enum DSpContextOption {
                                         /*    kDSpContextOption_QD3DAccel       = 1<<0,*/
   kDSpContextOption_PageFlip    = 1 << 1,
@@ -96,18 +76,15 @@ enum DSpContextOption {
 };
 typedef enum DSpContextOption DSpContextOption;
 
-
 enum DSpAltBufferOption {
   kDSpAltBufferOption_RowBytesEqualsWidth = 1 << 0
 };
 typedef enum DSpAltBufferOption DSpAltBufferOption;
 
-
 enum DSpBufferKind {
   kDSpBufferKind_Normal         = 0
 };
 typedef enum DSpBufferKind DSpBufferKind;
-
 
 enum DSpBlitMode {
   kDSpBlitMode_Plain            = 0,
@@ -251,7 +228,7 @@ typedef DSpBlitInfo *                   DSpBlitInfoPtr;
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
-DSpStartup(void);
+DSpStartup(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -263,7 +240,7 @@ DSpStartup(void);
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
-DSpShutdown(void);
+DSpShutdown(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -275,7 +252,7 @@ DSpShutdown(void);
  *    Non-Carbon CFM:   in DrawSprocketLib 1.7 and later
  */
 extern NumVersion 
-DSpGetVersion(void);
+DSpGetVersion(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -289,7 +266,7 @@ DSpGetVersion(void);
 extern OSStatus 
 DSpGetFirstContext(
   DisplayIDType          inDisplayID,
-  DSpContextReference *  outContext);
+  DSpContextReference *  outContext)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -303,7 +280,7 @@ DSpGetFirstContext(
 extern OSStatus 
 DSpGetNextContext(
   DSpContextReference    inCurrentContext,
-  DSpContextReference *  outContext);
+  DSpContextReference *  outContext)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -317,7 +294,7 @@ DSpGetNextContext(
 extern OSStatus 
 DSpGetCurrentContext(
   DisplayIDType          inDisplayID,
-  DSpContextReference *  outContext);
+  DSpContextReference *  outContext)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -331,7 +308,7 @@ DSpGetCurrentContext(
 extern OSStatus 
 DSpFindBestContext(
   DSpContextAttributesPtr   inDesiredAttributes,
-  DSpContextReference *     outContext);
+  DSpContextReference *     outContext)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -346,7 +323,7 @@ extern OSStatus
 DSpFindBestContextOnDisplayID(
   DSpContextAttributesPtr   inDesiredAttributes,
   DSpContextReference *     outContext,
-  DisplayIDType             inDisplayID);
+  DisplayIDType             inDisplayID)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -380,7 +357,7 @@ DSpFindBestContextOnDisplayID(
 extern OSStatus 
 DSpProcessEvent(
   EventRecord *  inEvent,
-  Boolean *      outEventWasProcessed);
+  Boolean *      outEventWasProcessed)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -392,7 +369,7 @@ DSpProcessEvent(
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
-DSpSetBlankingColor(const RGBColor * inRGBColor);
+DSpSetBlankingColor(const RGBColor * inRGBColor)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -404,7 +381,7 @@ DSpSetBlankingColor(const RGBColor * inRGBColor);
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
-DSpSetDebugMode(Boolean inDebugMode);
+DSpSetDebugMode(Boolean inDebugMode)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -418,7 +395,7 @@ DSpSetDebugMode(Boolean inDebugMode);
 extern OSStatus 
 DSpFindContextFromPoint(
   Point                  inGlobalPoint,
-  DSpContextReference *  outContext);
+  DSpContextReference *  outContext)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -430,7 +407,7 @@ DSpFindContextFromPoint(
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
-DSpGetMouse(Point * outGlobalPoint);
+DSpGetMouse(Point * outGlobalPoint)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -491,7 +468,7 @@ DSpGetMouse(Point * outGlobalPoint);
 extern OSStatus 
 DSpContext_GetAttributes(
   DSpContextReferenceConst   inContext,
-  DSpContextAttributesPtr    outAttributes);
+  DSpContextAttributesPtr    outAttributes)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -505,7 +482,7 @@ DSpContext_GetAttributes(
 extern OSStatus 
 DSpContext_Reserve(
   DSpContextReference       inContext,
-  DSpContextAttributesPtr   inDesiredAttributes);
+  DSpContextAttributesPtr   inDesiredAttributes)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -520,7 +497,7 @@ extern OSStatus
 DSpContext_Queue(
   DSpContextReference       inParentContext,
   DSpContextReference       inChildContext,
-  DSpContextAttributesPtr   inDesiredAttributes);
+  DSpContextAttributesPtr   inDesiredAttributes)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -534,7 +511,7 @@ DSpContext_Queue(
 extern OSStatus 
 DSpContext_Switch(
   DSpContextReference   inOldContext,
-  DSpContextReference   inNewContext);
+  DSpContextReference   inNewContext)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -546,7 +523,7 @@ DSpContext_Switch(
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
-DSpContext_Release(DSpContextReference inContext);
+DSpContext_Release(DSpContextReference inContext)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -558,7 +535,7 @@ DSpContext_Release(DSpContextReference inContext);
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-DSpContext_Dispose(DSpContextReference inContext);
+DSpContext_Dispose(DSpContextReference inContext)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -572,7 +549,7 @@ DSpContext_Dispose(DSpContextReference inContext);
 extern OSStatus 
 DSpContext_GetDisplayID(
   DSpContextReferenceConst   inContext,
-  DisplayIDType *            outDisplayID);
+  DisplayIDType *            outDisplayID)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -586,7 +563,7 @@ DSpContext_GetDisplayID(
 extern OSStatus 
 DSpContext_GlobalToLocal(
   DSpContextReferenceConst   inContext,
-  Point *                    ioPoint);
+  Point *                    ioPoint)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -600,7 +577,7 @@ DSpContext_GlobalToLocal(
 extern OSStatus 
 DSpContext_LocalToGlobal(
   DSpContextReferenceConst   inContext,
-  Point *                    ioPoint);
+  Point *                    ioPoint)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -654,7 +631,7 @@ DSpContext_LocalToGlobal(
 extern OSStatus 
 DSpContext_GetMonitorFrequency(
   DSpContextReferenceConst   inContext,
-  Fixed *                    outFrequency);
+  Fixed *                    outFrequency)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -688,7 +665,7 @@ DSpContext_GetMonitorFrequency(
 extern OSStatus 
 DSpContext_SetState(
   DSpContextReference   inContext,
-  DSpContextState       inState);
+  DSpContextState       inState)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -702,7 +679,7 @@ DSpContext_SetState(
 extern OSStatus 
 DSpContext_GetState(
   DSpContextReferenceConst   inContext,
-  DSpContextState *          outState);
+  DSpContextState *          outState)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -716,7 +693,7 @@ DSpContext_GetState(
 extern OSStatus 
 DSpContext_IsBusy(
   DSpContextReferenceConst   inContext,
-  Boolean *                  outBusyFlag);
+  Boolean *                  outBusyFlag)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* dirty rectangles */
@@ -793,7 +770,7 @@ DSpContext_IsBusy(
 extern OSStatus 
 DSpContext_FadeGammaOut(
   DSpContextReference   inContext,
-  RGBColor *            inZeroIntensityColor);
+  RGBColor *            inZeroIntensityColor)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -807,7 +784,7 @@ DSpContext_FadeGammaOut(
 extern OSStatus 
 DSpContext_FadeGammaIn(
   DSpContextReference   inContext,
-  RGBColor *            inZeroIntensityColor);
+  RGBColor *            inZeroIntensityColor)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -822,7 +799,7 @@ extern OSStatus
 DSpContext_FadeGamma(
   DSpContextReference   inContext,
   SInt32                inPercentOfOriginalIntensity,
-  RGBColor *            inZeroIntensityColor);
+  RGBColor *            inZeroIntensityColor)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* buffering */
@@ -838,7 +815,7 @@ extern OSStatus
 DSpContext_SwapBuffers(
   DSpContextReference   inContext,
   DSpCallbackUPP        inBusyProc,
-  void *                inUserRefCon);
+  void *                inUserRefCon)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -853,7 +830,7 @@ extern OSStatus
 DSpContext_GetBackBuffer(
   DSpContextReference   inContext,
   DSpBufferKind         inBufferKind,
-  CGrafPtr *            outBackBuffer);
+  CGrafPtr *            outBackBuffer)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -867,7 +844,7 @@ DSpContext_GetBackBuffer(
 extern OSStatus 
 DSpContext_GetFrontBuffer(
   DSpContextReferenceConst   inContext,
-  CGrafPtr *                 outFrontBuffer);
+  CGrafPtr *                 outFrontBuffer)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* clut operations */
@@ -884,7 +861,7 @@ DSpContext_SetCLUTEntries(
   DSpContextReference   inContext,
   const ColorSpec *     inEntries,
   UInt16                inStartingEntry,
-  UInt16                inLastEntry);
+  UInt16                inLastEntry)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -900,7 +877,7 @@ DSpContext_GetCLUTEntries(
   DSpContextReferenceConst   inContext,
   ColorSpec *                outEntries,
   UInt16                     inStartingEntry,
-  UInt16                     inLastEntry);
+  UInt16                     inLastEntry)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* blit operations */
@@ -928,22 +905,9 @@ DSpContext_GetCLUTEntries(
 
 #if PRAGMA_ENUM_ALWAYSINT
     #pragma enumsalwaysint reset
-    #ifdef __DRAWSPROCKET__RESTORE_TWOBYTEINTS
-        #pragma fourbyteints off
-    #endif
-#elif PRAGMA_ENUM_OPTIONS
-    #pragma option enum=reset
-#elif defined(__DRAWSPROCKET__RESTORE_PACKED_ENUMS)
-    #pragma options(pack_enums)
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

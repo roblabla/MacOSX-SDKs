@@ -3,9 +3,9 @@
  
      Contains:   Text Encoding Conversion Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1994-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -35,13 +36,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 typedef OSType                          TECPluginSignature;
 typedef UInt32                          TECPluginVersion;
@@ -76,7 +71,7 @@ typedef struct TECConversionInfo        TECConversionInfo;
  *    Non-Carbon CFM:   in TextEncodingConverter 1.1 and later
  */
 extern OSStatus 
-TECCountAvailableTextEncodings(ItemCount * numberEncodings);
+TECCountAvailableTextEncodings(ItemCount * numberEncodings)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* fill in an array of type TextEncoding passed in by the user with types of encodings the current configuration of the encoder can handle. */
@@ -92,7 +87,7 @@ extern OSStatus
 TECGetAvailableTextEncodings(
   TextEncoding   availableEncodings[],
   ItemCount      maxAvailableEncodings,
-  ItemCount *    actualAvailableEncodings);
+  ItemCount *    actualAvailableEncodings)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* return number of from-to encoding conversion pairs supported  */
@@ -105,7 +100,7 @@ TECGetAvailableTextEncodings(
  *    Non-Carbon CFM:   in TextEncodingConverter 1.2 and later
  */
 extern OSStatus 
-TECCountDirectTextEncodingConversions(ItemCount * numberOfEncodings);
+TECCountDirectTextEncodingConversions(ItemCount * numberOfEncodings) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* fill in an array of type TextEncodingPair passed in by the user with types of encoding pairs the current configuration of the encoder can handle. */
@@ -121,7 +116,7 @@ extern OSStatus
 TECGetDirectTextEncodingConversions(
   TECConversionInfo   availableConversions[],
   ItemCount           maxAvailableConversions,
-  ItemCount *         actualAvailableConversions);
+  ItemCount *         actualAvailableConversions)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* return number of encodings a given encoding can be converter into */
@@ -136,7 +131,7 @@ TECGetDirectTextEncodingConversions(
 extern OSStatus 
 TECCountDestinationTextEncodings(
   TextEncoding   inputEncoding,
-  ItemCount *    numberOfEncodings);
+  ItemCount *    numberOfEncodings)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* fill in an array of type TextEncodingPair passed in by the user with types of encodings pairs the current configuration of the encoder can handle. */
@@ -153,7 +148,7 @@ TECGetDestinationTextEncodings(
   TextEncoding   inputEncoding,
   TextEncoding   destinationEncodings[],
   ItemCount      maxDestinationEncodings,
-  ItemCount *    actualDestinationEncodings);
+  ItemCount *    actualDestinationEncodings)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* get info about a text encoding */
@@ -168,7 +163,7 @@ TECGetDestinationTextEncodings(
 extern OSStatus 
 TECGetTextEncodingInternetName(
   TextEncoding   textEncoding,
-  Str255         encodingName);
+  Str255         encodingName)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -182,7 +177,7 @@ TECGetTextEncodingInternetName(
 extern OSStatus 
 TECGetTextEncodingFromInternetName(
   TextEncoding *     textEncoding,
-  ConstStr255Param   encodingName);
+  ConstStr255Param   encodingName)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* create/dispose converters */
@@ -198,7 +193,7 @@ extern OSStatus
 TECCreateConverter(
   TECObjectRef *  newEncodingConverter,
   TextEncoding    inputEncoding,
-  TextEncoding    outputEncoding);
+  TextEncoding    outputEncoding)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -213,7 +208,7 @@ extern OSStatus
 TECCreateConverterFromPath(
   TECObjectRef *       newEncodingConverter,
   const TextEncoding   inPath[],
-  ItemCount            inEncodings);
+  ItemCount            inEncodings)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -225,7 +220,7 @@ TECCreateConverterFromPath(
  *    Non-Carbon CFM:   in TextEncodingConverter 1.1 and later
  */
 extern OSStatus 
-TECDisposeConverter(TECObjectRef newEncodingConverter);
+TECDisposeConverter(TECObjectRef newEncodingConverter)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* convert text encodings */
@@ -238,7 +233,7 @@ TECDisposeConverter(TECObjectRef newEncodingConverter);
  *    Non-Carbon CFM:   in TextEncodingConverter 1.2 and later
  */
 extern OSStatus 
-TECClearConverterContextInfo(TECObjectRef encodingConverter);
+TECClearConverterContextInfo(TECObjectRef encodingConverter)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -257,7 +252,7 @@ TECConvertText(
   ByteCount *    actualInputLength,
   TextPtr        outputBuffer,
   ByteCount      outputBufferLength,
-  ByteCount *    actualOutputLength);
+  ByteCount *    actualOutputLength)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -273,7 +268,7 @@ TECFlushText(
   TECObjectRef   encodingConverter,
   TextPtr        outputBuffer,
   ByteCount      outputBufferLength,
-  ByteCount *    actualOutputLength);
+  ByteCount *    actualOutputLength)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* one-to-many routines */
@@ -288,7 +283,7 @@ TECFlushText(
 extern OSStatus 
 TECCountSubTextEncodings(
   TextEncoding   inputEncoding,
-  ItemCount *    numberOfEncodings);
+  ItemCount *    numberOfEncodings)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -304,7 +299,7 @@ TECGetSubTextEncodings(
   TextEncoding   inputEncoding,
   TextEncoding   subEncodings[],
   ItemCount      maxSubEncodings,
-  ItemCount *    actualSubEncodings);
+  ItemCount *    actualSubEncodings)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -319,7 +314,7 @@ extern OSStatus
 TECGetEncodingList(
   TECObjectRef   encodingConverter,
   ItemCount *    numEncodings,
-  Handle *       encodingList);
+  Handle *       encodingList)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -335,7 +330,7 @@ TECCreateOneToManyConverter(
   TECObjectRef *       newEncodingConverter,
   TextEncoding         inputEncoding,
   ItemCount            numOutputEncodings,
-  const TextEncoding   outputEncodings[]);
+  const TextEncoding   outputEncodings[])                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -357,7 +352,7 @@ TECConvertTextToMultipleEncodings(
   ByteCount *       actualOutputLength,
   TextEncodingRun   outEncodingsBuffer[],
   ItemCount         maxOutEncodingRuns,
-  ItemCount *       actualOutEncodingRuns);
+  ItemCount *       actualOutEncodingRuns)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -376,7 +371,7 @@ TECFlushMultipleEncodings(
   ByteCount *       actualOutputLength,
   TextEncodingRun   outEncodingsBuffer[],
   ItemCount         maxOutEncodingRuns,
-  ItemCount *       actualOutEncodingRuns);
+  ItemCount *       actualOutEncodingRuns)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* international internet info */
@@ -391,7 +386,7 @@ TECFlushMultipleEncodings(
 extern OSStatus 
 TECCountWebTextEncodings(
   RegionCode   locale,
-  ItemCount *  numberEncodings);
+  ItemCount *  numberEncodings)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -407,7 +402,7 @@ TECGetWebTextEncodings(
   RegionCode     locale,
   TextEncoding   availableEncodings[],
   ItemCount      maxAvailableEncodings,
-  ItemCount *    actualAvailableEncodings);
+  ItemCount *    actualAvailableEncodings)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -421,7 +416,7 @@ TECGetWebTextEncodings(
 extern OSStatus 
 TECCountMailTextEncodings(
   RegionCode   locale,
-  ItemCount *  numberEncodings);
+  ItemCount *  numberEncodings)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -437,7 +432,7 @@ TECGetMailTextEncodings(
   RegionCode     locale,
   TextEncoding   availableEncodings[],
   ItemCount      maxAvailableEncodings,
-  ItemCount *    actualAvailableEncodings);
+  ItemCount *    actualAvailableEncodings)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* examine text encodings */
@@ -450,7 +445,7 @@ TECGetMailTextEncodings(
  *    Non-Carbon CFM:   in TextEncodingConverter 1.2 and later
  */
 extern OSStatus 
-TECCountAvailableSniffers(ItemCount * numberOfEncodings);
+TECCountAvailableSniffers(ItemCount * numberOfEncodings)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -465,7 +460,7 @@ extern OSStatus
 TECGetAvailableSniffers(
   TextEncoding   availableSniffers[],
   ItemCount      maxAvailableSniffers,
-  ItemCount *    actualAvailableSniffers);
+  ItemCount *    actualAvailableSniffers)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -480,7 +475,7 @@ extern OSStatus
 TECCreateSniffer(
   TECSnifferObjectRef *  encodingSniffer,
   TextEncoding           testEncodings[],
-  ItemCount              numTextEncodings);
+  ItemCount              numTextEncodings)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -501,7 +496,7 @@ TECSniffTextEncoding(
   ItemCount             numErrsArray[],
   ItemCount             maxErrs,
   ItemCount             numFeaturesArray[],
-  ItemCount             maxFeatures);
+  ItemCount             maxFeatures)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -513,7 +508,7 @@ TECSniffTextEncoding(
  *    Non-Carbon CFM:   in TextEncodingConverter 1.2 and later
  */
 extern OSStatus 
-TECDisposeSniffer(TECSnifferObjectRef encodingSniffer);
+TECDisposeSniffer(TECSnifferObjectRef encodingSniffer)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -525,7 +520,7 @@ TECDisposeSniffer(TECSnifferObjectRef encodingSniffer);
  *    Non-Carbon CFM:   in TextEncodingConverter 1.2 and later
  */
 extern OSStatus 
-TECClearSnifferContextInfo(TECSnifferObjectRef encodingSniffer);
+TECClearSnifferContextInfo(TECSnifferObjectRef encodingSniffer) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -540,13 +535,7 @@ TECClearSnifferContextInfo(TECSnifferObjectRef encodingSniffer);
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

@@ -3,9 +3,9 @@
  
      Contains:   Master include for ATS private framework
  
-     Version:    ATS-77.1~62
+     Version:    ATS-102.4~1
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,12 +16,8 @@
 #ifndef __ATS__
 #define __ATS__
 
-#ifndef __CARBONCORE__
-#include <CarbonCore/CarbonCore.h>
-#endif
-
-#ifndef __COREFOUNDATION__
-#include <CoreFoundation/CoreFoundation.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 

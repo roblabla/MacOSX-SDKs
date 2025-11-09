@@ -1,5 +1,5 @@
 /*	NSSpellServer.h
-	Copyright 1990-2001, Apple, Inc. All rights reserved.
+	Copyright 1990-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>

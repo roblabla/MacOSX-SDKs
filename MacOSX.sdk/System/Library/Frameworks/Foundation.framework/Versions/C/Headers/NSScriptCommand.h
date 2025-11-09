@@ -1,5 +1,5 @@
 /*	NSScriptCommand.h
-	Copyright 1997-2001, Apple, Inc. All rights reserved.
+	Copyright 1997-2002, Apple, Inc. All rights reserved.
 */
 
 // An NSScriptCommand is what an AppleScript AppleEvent turns into when it enters the Foundation Framework's scripting system.  A command can be executed.  Executing a command means invoking the selector on the receivers with the arguments.  The arguments may be NSScriptObjectSpecifiers, in which case they are evaluated and the resulting object[s] are used as the argument.

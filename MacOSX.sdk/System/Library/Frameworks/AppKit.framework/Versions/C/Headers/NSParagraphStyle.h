@@ -11,9 +11,9 @@
 
 typedef enum _NSTextTabType {
     NSLeftTabStopType = 0,
-    NSRightTabStopType,		/* ??? Doesn't work yet */
-    NSCenterTabStopType,	/* ??? Doesn't work yet */
-    NSDecimalTabStopType	/* ??? Doesn't work yet */
+    NSRightTabStopType,
+    NSCenterTabStopType,
+    NSDecimalTabStopType
 } NSTextTabType;
 
 typedef enum _NSLineBreakMode {		/* What to do with long lines */
@@ -24,6 +24,11 @@ typedef enum _NSLineBreakMode {		/* What to do with long lines */
     NSLineBreakByTruncatingTail,	/* Truncate at tail of line: "abcd..." ??? Doesn't work yet */
     NSLineBreakByTruncatingMiddle	/* Truncate middle of line:  "ab...yz" ??? Doesn't work yet */
 } NSLineBreakMode;
+
+typedef enum _NSWritingDirection {
+    NSWritingDirectionLeftToRight = 0,	/* Left to right writing direction */
+    NSWritingDirectionRightToLeft	/* Right to left writing direction */
+} NSWritingDirection;
 
 @interface NSTextTab : NSObject <NSCopying, NSCoding> {
     /*All instance variables are private*/
@@ -53,13 +58,19 @@ typedef enum _NSLineBreakMode {		/* What to do with long lines */
 	NSTextAlignment alignment:4;
         NSLineBreakMode lineBreakMode:4;
         unsigned int tabStopsIsMutable:1;
-        unsigned int refCount:23;
+        unsigned int isNaturalDirection:1;
+        unsigned int rightToLeftDirection:1;
+        unsigned int refCount:21;
     } _flags;
     unsigned int _reserved1;
     unsigned int _reserved2;
 }
 
 + (NSParagraphStyle *)defaultParagraphStyle;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
++ (NSWritingDirection)defaultWritingDirectionForLanguage:(NSString *)languageName;  // languageName is in ISO lang region format
+#endif
 
 - (float)lineSpacing;		/* "Leading": distance between the bottom of one line fragment and top of next (applied between lines in the same container). Can't be negative. This value is included in the line fragment heights in layout manager. */
 - (float)paragraphSpacing; 	/* Distance between the bottom of this paragraph and top of next. */
@@ -77,6 +88,9 @@ typedef enum _NSLineBreakMode {		/* What to do with long lines */
 
 - (NSLineBreakMode)lineBreakMode;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (NSWritingDirection)baseWritingDirection;
+#endif
 @end
 
 @interface NSMutableParagraphStyle : NSParagraphStyle
@@ -94,5 +108,7 @@ typedef enum _NSLineBreakMode {		/* What to do with long lines */
 - (void)removeTabStop:(NSTextTab *)anObject;
 - (void)setTabStops:(NSArray *)array;
 - (void)setParagraphStyle:(NSParagraphStyle *)obj;
-
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
+- (void)setBaseWritingDirection:(NSWritingDirection)writingDirection;
+#endif
 @end

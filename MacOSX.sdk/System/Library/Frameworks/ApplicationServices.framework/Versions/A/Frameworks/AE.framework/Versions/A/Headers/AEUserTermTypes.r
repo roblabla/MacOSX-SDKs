@@ -3,9 +3,9 @@
  
      Contains:   AppleEvents AEUT resource format Interfaces.
  
-     Version:    AppleEvents-116~3
+     Version:    AppleEvents-242~1
  
-     Copyright:  © 1991-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1991-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,8 +17,8 @@
 #ifndef __AEUSERTERMTYPES_R__
 #define __AEUSERTERMTYPES_R__
 
-#ifndef __CONDITIONALMACROS_R__
-#include <CarbonCore/ConditionalMacros.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
 
 #define kAEUserTerminology 				'aeut'				/*   0x61657574   */
@@ -27,9 +27,11 @@
 #define kAEOSAXSizeResource 			'osiz'
 
 
-#include "AEObjects.r"
+#include <AE/AEObjects.r>
 
-// "reserved" needs to be defined to be false for resources
+
+
+//    "reserved" needs to be defined to be false for resources
 //   but undef'ed for type definitions.  We preserve its state
 //   and undef it here.
 

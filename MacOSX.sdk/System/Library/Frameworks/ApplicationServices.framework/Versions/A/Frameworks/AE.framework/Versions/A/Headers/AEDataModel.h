@@ -3,9 +3,9 @@
  
      Contains:   AppleEvent Data Model Interfaces.
  
-     Version:    AppleEvents-116~3
+     Version:    AppleEvents-242~1
  
-     Copyright:  © 1996-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1996-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,16 +16,12 @@
 #ifndef __AEDATAMODEL__
 #define __AEDATAMODEL__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __MIXEDMODE__
-#include <CarbonCore/MixedMode.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -35,13 +31,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* Apple event descriptor types */
 enum {
@@ -125,7 +115,7 @@ enum {
   keyAcceptTimeoutAttr          = 'actm' /* new for Mac OS X */
 };
 
-/* These bits are specified in the keyXMLDebugginAttr (an SInt32) */
+/* These bits are specified in the keyXMLDebuggingAttr (an SInt32) */
 enum {
   kAEDebugPOSTHeader            = (1 << 0), /* headers of the HTTP post we sent - typeChar */
   kAEDebugReplyHeader           = (1 << 1), /* headers returned by the server */
@@ -159,6 +149,7 @@ enum {
                                         /* these parameters exist as part of the direct object of the event for both incoming and outgoing requests */
   keyRPCMethodName              = 'meth', /* name of the method to call */
   keyRPCMethodParam             = 'parm', /* the list (or structure) of parameters */
+  keyRPCMethodParamOrder        = '/ord', /* if a structure, the order of parameters (a list) */
                                         /* when keyXMLDebugginAttr so specifies, these additional parameters will be part of the reply. */
   keyAEPOSTHeaderData           = 'phed', /* what we sent to the server */
   keyAEReplyHeaderData          = 'rhed', /* what the server sent to us */
@@ -173,7 +164,7 @@ enum {
 };
 
 /* 
-   When serializing AERecords as SOAP structures, it is possible for
+   When serializing AERecords as SOAP structures, it is possible
    to specify the namespace and type of the structure.  To do this,
    add a keySOAPStructureMetaData record to the top level of the
    record to be serialized.  If present, this will be used to specify
@@ -192,6 +183,41 @@ enum {
   keySOAPSMDNamespace           = 'ssns', /* "myNamespace"*/
   keySOAPSMDNamespaceURI        = 'ssnu', /* "http://myUri.org/xsd"*/
   keySOAPSMDType                = 'sstp' /* "MyStructType"*/
+};
+
+/* 
+ * Web Services Proxy support.  Available only on systems > 10.1.x.
+ * These constants should be added as attributes on the event that is
+ * being sent (not part of the direct object.)
+ */
+enum {
+                                        /* Automatically configure the proxy based on System Configuration */
+  kAEUseHTTPProxyAttr           = 'xupr', /* a typeBoolean.  Defaults to true.*/
+                                        /* manually specify the proxy host and port. */
+  kAEHTTPProxyPortAttr          = 'xhtp', /* a typeSInt32*/
+  kAEHTTPProxyHostAttr          = 'xhth' /* a typeChar*/
+};
+
+/*
+ * Web Services SOCKS support.  kAEUseSocksAttr is a boolean that
+ * specifies whether to automatically configure SOCKS proxies by
+ * querying System Configuration.
+ */
+enum {
+  kAESocks4Protocol             = 4,
+  kAESocks5Protocol             = 5
+};
+
+enum {
+  kAEUseSocksAttr               = 'xscs', /* a typeBoolean.  Defaults to true.*/
+                                        /* This attribute specifies a specific SOCKS protocol to be used */
+  kAESocksProxyAttr             = 'xsok', /* a typeSInt32*/
+                                        /* if version >= 4 */
+  kAESocksHostAttr              = 'xshs', /* a typeChar*/
+  kAESocksPortAttr              = 'xshp', /* a typeSInt32*/
+  kAESocksUserAttr              = 'xshu', /* a typeChar*/
+                                        /* if version >= 5 */
+  kAESocksPasswordAttr          = 'xshw' /* a typeChar*/
 };
 
 
@@ -318,7 +344,7 @@ typedef STACK_UPP_TYPE(AECoercePtrProcPtr)                      AECoercePtrUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AECoerceDescUPP
-NewAECoerceDescUPP(AECoerceDescProcPtr userRoutine);
+NewAECoerceDescUPP(AECoerceDescProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewAECoercePtrUPP()
@@ -329,7 +355,7 @@ NewAECoerceDescUPP(AECoerceDescProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AECoercePtrUPP
-NewAECoercePtrUPP(AECoercePtrProcPtr userRoutine);
+NewAECoercePtrUPP(AECoercePtrProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeAECoerceDescUPP()
@@ -340,7 +366,7 @@ NewAECoercePtrUPP(AECoercePtrProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAECoerceDescUPP(AECoerceDescUPP userUPP);
+DisposeAECoerceDescUPP(AECoerceDescUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeAECoercePtrUPP()
@@ -351,7 +377,7 @@ DisposeAECoerceDescUPP(AECoerceDescUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAECoercePtrUPP(AECoercePtrUPP userUPP);
+DisposeAECoercePtrUPP(AECoercePtrUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeAECoerceDescUPP()
@@ -367,7 +393,7 @@ InvokeAECoerceDescUPP(
   DescType         toType,
   long             handlerRefcon,
   AEDesc *         toDesc,
-  AECoerceDescUPP  userUPP);
+  AECoerceDescUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeAECoercePtrUPP()
@@ -385,7 +411,7 @@ InvokeAECoercePtrUPP(
   DescType        toType,
   long            handlerRefcon,
   AEDesc *        result,
-  AECoercePtrUPP  userUPP);
+  AECoercePtrUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /* a AECoercionHandlerUPP is by default a AECoerceDescUPP.  If you are registering a 
     Ptr based coercion handler you will have to add a cast to AECoerceDescUPP from 
@@ -407,7 +433,7 @@ AEInstallCoercionHandler(
   AECoercionHandlerUPP   handler,
   long                   handlerRefcon,
   Boolean                fromTypeIsDesc,
-  Boolean                isSysHandler);
+  Boolean                isSysHandler)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -423,7 +449,7 @@ AERemoveCoercionHandler(
   DescType               fromType,
   DescType               toType,
   AECoercionHandlerUPP   handler,
-  Boolean                isSysHandler);
+  Boolean                isSysHandler)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -442,7 +468,7 @@ AEGetCoercionHandler(
   AECoercionHandlerUPP *  handler,
   long *                  handlerRefcon,
   Boolean *               fromTypeIsDesc,
-  Boolean                 isSysHandler);
+  Boolean                 isSysHandler)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /**************************************************************************
@@ -462,7 +488,7 @@ AECoercePtr(
   const void *  dataPtr,
   Size          dataSize,
   DescType      toType,
-  AEDesc *      result);
+  AEDesc *      result)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -477,7 +503,7 @@ extern OSErr
 AECoerceDesc(
   const AEDesc *  theAEDesc,
   DescType        toType,
-  AEDesc *        result);
+  AEDesc *        result)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -497,7 +523,7 @@ AECoerceDesc(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-AEInitializeDesc(AEDesc * desc);
+AEInitializeDesc(AEDesc * desc)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -521,7 +547,7 @@ AECreateDesc(
   DescType      typeCode,
   const void *  dataPtr,
   Size          dataSize,
-  AEDesc *      result);
+  AEDesc *      result)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -533,7 +559,7 @@ AECreateDesc(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-AEDisposeDesc(AEDesc * theAEDesc);
+AEDisposeDesc(AEDesc * theAEDesc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -547,7 +573,40 @@ AEDisposeDesc(AEDesc * theAEDesc);
 extern OSErr 
 AEDuplicateDesc(
   const AEDesc *  theAEDesc,
-  AEDesc *        result);
+  AEDesc *        result)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+ * Create an AEDesc with memory "borrowed" from the application. The
+ * data passed in *must* be immutable and not freed until the Dispose
+ * callback is made.
+ * The dispose callback may be made at any time, including during the
+ * creation of the descriptor.
+ * If possible, the descriptor will be copied to the address space of
+ * any recipient process using virtual memory APIs and avoid an
+ * actual memory copy.
+ */
+typedef CALLBACK_API( void , AEDisposeExternalProcPtr )(const void *dataPtr, Size dataLength, long refcon);
+typedef STACK_UPP_TYPE(AEDisposeExternalProcPtr)                AEDisposeExternalUPP;
+/*
+ *  AECreateDescFromExternalPtr()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+AECreateDescFromExternalPtr(
+  OSType                 descriptorType,
+  const void *           dataPtr,
+  Size                   dataLength,
+  AEDisposeExternalUPP   disposeCallback,
+  long                   disposeRefcon,
+  AEDesc *               theDesc)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
 
 
 
@@ -571,7 +630,7 @@ AECreateList(
   const void *  factoringPtr,
   Size          factoredSize,
   Boolean       isRecord,
-  AEDescList *  resultList);
+  AEDescList *  resultList)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -585,7 +644,7 @@ AECreateList(
 extern OSErr 
 AECountItems(
   const AEDescList *  theAEDescList,
-  long *              theCount);
+  long *              theCount)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -602,7 +661,7 @@ AEPutPtr(
   long          index,
   DescType      typeCode,
   const void *  dataPtr,
-  Size          dataSize);
+  Size          dataSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -617,7 +676,7 @@ extern OSErr
 AEPutDesc(
   AEDescList *    theAEDescList,
   long            index,
-  const AEDesc *  theAEDesc);
+  const AEDesc *  theAEDesc)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -637,7 +696,7 @@ AEGetNthPtr(
   DescType *          typeCode,
   void *              dataPtr,
   Size                maximumSize,
-  Size *              actualSize);
+  Size *              actualSize)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -654,7 +713,7 @@ AEGetNthDesc(
   long                index,
   DescType            desiredType,
   AEKeyword *         theAEKeyword,
-  AEDesc *            result);
+  AEDesc *            result)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -670,7 +729,7 @@ AESizeOfNthItem(
   const AEDescList *  theAEDescList,
   long                index,
   DescType *          typeCode,
-  Size *              dataSize);
+  Size *              dataSize)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -689,7 +748,7 @@ AEGetArray(
   Size                 maximumSize,
   DescType *           itemType,
   Size *               itemSize,
-  long *               itemCount);
+  long *               itemCount)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -707,7 +766,7 @@ AEPutArray(
   const AEArrayData *  arrayPtr,
   DescType             itemType,
   Size                 itemSize,
-  long                 itemCount);
+  long                 itemCount)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -721,7 +780,7 @@ AEPutArray(
 extern OSErr 
 AEDeleteItem(
   AEDescList *  theAEDescList,
-  long          index);
+  long          index)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -744,7 +803,7 @@ AEDeleteItem(
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-AECheckIsRecord(const AEDesc * theDesc);
+AECheckIsRecord(const AEDesc * theDesc)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -756,7 +815,7 @@ AECheckIsRecord(const AEDesc * theDesc);
   “param” counterparts.  Since none of the “key” calls are currently available 
   in the PowerPC IntefaceLib, the #defines exploit the fact that “key” and 
   “param” routines can be used interchangeably, and makes sure that every 
-  invokation of a “key” API becomes an invokation of a “param” API.
+  invocation of a “key” API becomes an invocation of a “param” API.
 */
 #define AEPutKeyPtr(theAERecord, theAEKeyword, typeCode, dataPtr, dataSize) \
     AEPutParamPtr((theAERecord), (theAEKeyword), (typeCode), (dataPtr), (dataSize))
@@ -788,7 +847,7 @@ AECreateAppleEvent(
   const AEAddressDesc *  target,
   AEReturnID             returnID,
   AETransactionID        transactionID,
-  AppleEvent *           result);
+  AppleEvent *           result)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -813,7 +872,7 @@ AEPutParamPtr(
   AEKeyword     theAEKeyword,
   DescType      typeCode,
   const void *  dataPtr,
-  Size          dataSize);
+  Size          dataSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -828,7 +887,7 @@ extern OSErr
 AEPutParamDesc(
   AppleEvent *    theAppleEvent,
   AEKeyword       theAEKeyword,
-  const AEDesc *  theAEDesc);
+  const AEDesc *  theAEDesc)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -847,7 +906,7 @@ AEGetParamPtr(
   DescType *          typeCode,
   void *              dataPtr,
   Size                maximumSize,
-  Size *              actualSize);
+  Size *              actualSize)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -863,7 +922,7 @@ AEGetParamDesc(
   const AppleEvent *  theAppleEvent,
   AEKeyword           theAEKeyword,
   DescType            desiredType,
-  AEDesc *            result);
+  AEDesc *            result)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -879,7 +938,7 @@ AESizeOfParam(
   const AppleEvent *  theAppleEvent,
   AEKeyword           theAEKeyword,
   DescType *          typeCode,
-  Size *              dataSize);
+  Size *              dataSize)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -893,7 +952,7 @@ AESizeOfParam(
 extern OSErr 
 AEDeleteParam(
   AppleEvent *  theAppleEvent,
-  AEKeyword     theAEKeyword);
+  AEKeyword     theAEKeyword)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -920,7 +979,7 @@ AEGetAttributePtr(
   DescType *          typeCode,
   void *              dataPtr,
   Size                maximumSize,
-  Size *              actualSize);
+  Size *              actualSize)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -936,7 +995,7 @@ AEGetAttributeDesc(
   const AppleEvent *  theAppleEvent,
   AEKeyword           theAEKeyword,
   DescType            desiredType,
-  AEDesc *            result);
+  AEDesc *            result)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -952,7 +1011,7 @@ AESizeOfAttribute(
   const AppleEvent *  theAppleEvent,
   AEKeyword           theAEKeyword,
   DescType *          typeCode,
-  Size *              dataSize);
+  Size *              dataSize)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -969,7 +1028,7 @@ AEPutAttributePtr(
   AEKeyword     theAEKeyword,
   DescType      typeCode,
   const void *  dataPtr,
-  Size          dataSize);
+  Size          dataSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -984,7 +1043,7 @@ extern OSErr
 AEPutAttributeDesc(
   AppleEvent *    theAppleEvent,
   AEKeyword       theAEKeyword,
-  const AEDesc *  theAEDesc);
+  const AEDesc *  theAEDesc)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1015,7 +1074,7 @@ AEPutAttributeDesc(
  *    Non-Carbon CFM:   not available
  */
 extern Size 
-AESizeOfFlattenedDesc(const AEDesc * theAEDesc);
+AESizeOfFlattenedDesc(const AEDesc * theAEDesc)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1043,7 +1102,7 @@ AEFlattenDesc(
   const AEDesc *  theAEDesc,
   Ptr             buffer,
   Size            bufferSize,
-  Size *          actualSize);
+  Size *          actualSize)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1065,7 +1124,7 @@ AEFlattenDesc(
 extern OSStatus 
 AEUnflattenDesc(
   Ptr       buffer,
-  AEDesc *  result);
+  AEDesc *  result)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /**************************************************************************
@@ -1089,7 +1148,7 @@ extern OSErr
 AEGetDescData(
   const AEDesc *  theAEDesc,
   void *          dataPtr,
-  Size            maximumSize);
+  Size            maximumSize)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1101,7 +1160,7 @@ AEGetDescData(
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern Size 
-AEGetDescDataSize(const AEDesc * theAEDesc);
+AEGetDescDataSize(const AEDesc * theAEDesc)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1117,8 +1176,30 @@ AEReplaceDescData(
   DescType      typeCode,
   const void *  dataPtr,
   Size          dataSize,
-  AEDesc *      theAEDesc);
+  AEDesc *      theAEDesc)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*
+ * Retrieve a range of bytes from an AEDesc.  This obviates the need
+ * to retrieve the entire data from the event using AEGetDescData.
+ * This is only valid for data type AEDescs.  If the requested length
+ * and offset are such that they do not fit entirely with the data of the
+ * desc, errAEBufferTooSmall is returned.
+ */
+/*
+ *  AEGetDescDataRange()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+AEGetDescDataRange(
+  const AEDesc *  dataDesc,
+  void *          buffer,
+  Size            offset,
+  Size            length)                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /**************************************************************************
@@ -1126,6 +1207,17 @@ AEReplaceDescData(
 **************************************************************************/
 typedef CALLBACK_API( OSErr , AEEventHandlerProcPtr )(const AppleEvent *theAppleEvent, AppleEvent *reply, long handlerRefcon);
 typedef STACK_UPP_TYPE(AEEventHandlerProcPtr)                   AEEventHandlerUPP;
+/*
+ *  NewAEDisposeExternalUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib on Mac OS X
+ *    Non-Carbon CFM:   available as macro/inline
+ */
+extern AEDisposeExternalUPP
+NewAEDisposeExternalUPP(AEDisposeExternalProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
 /*
  *  NewAEEventHandlerUPP()
  *  
@@ -1135,7 +1227,18 @@ typedef STACK_UPP_TYPE(AEEventHandlerProcPtr)                   AEEventHandlerUP
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AEEventHandlerUPP
-NewAEEventHandlerUPP(AEEventHandlerProcPtr userRoutine);
+NewAEEventHandlerUPP(AEEventHandlerProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+/*
+ *  DisposeAEDisposeExternalUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib on Mac OS X
+ *    Non-Carbon CFM:   available as macro/inline
+ */
+extern void
+DisposeAEDisposeExternalUPP(AEDisposeExternalUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*
  *  DisposeAEEventHandlerUPP()
@@ -1146,7 +1249,22 @@ NewAEEventHandlerUPP(AEEventHandlerProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAEEventHandlerUPP(AEEventHandlerUPP userUPP);
+DisposeAEEventHandlerUPP(AEEventHandlerUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+/*
+ *  InvokeAEDisposeExternalUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        in CarbonLib on Mac OS X
+ *    Non-Carbon CFM:   available as macro/inline
+ */
+extern void
+InvokeAEDisposeExternalUPP(
+  const void *          dataPtr,
+  Size                  dataLength,
+  long                  refcon,
+  AEDisposeExternalUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*
  *  InvokeAEEventHandlerUPP()
@@ -1161,17 +1279,11 @@ InvokeAEEventHandlerUPP(
   const AppleEvent *  theAppleEvent,
   AppleEvent *        reply,
   long                handlerRefcon,
-  AEEventHandlerUPP   userUPP);
+  AEEventHandlerUPP   userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

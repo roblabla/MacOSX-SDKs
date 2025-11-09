@@ -3,9 +3,9 @@
  
      Contains:   interface to embedding a Java Applet in a Carbon Control
  
-     Version:    JavaEmbedding-7~2
+     Version:    JavaEmbedding-12~208
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,6 +26,9 @@
 
 
 
+
+#include <AvailabilityMacros.h>
+
 #if PRAGMA_ONCE
 #pragma once
 #endif
@@ -34,27 +37,10 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 #if PRAGMA_ENUM_ALWAYSINT
-    #if defined(__fourbyteints__) && !__fourbyteints__ 
-        #define __JAVAAPPLET__RESTORE_TWOBYTEINTS
-        #pragma fourbyteints on
-    #endif
     #pragma enumsalwaysint on
-#elif PRAGMA_ENUM_OPTIONS
-    #pragma option enum=int
-#elif PRAGMA_ENUM_PACK
-    #if __option(pack_enums)
-        #define __JAVAAPPLET__RESTORE_PACKED_ENUMS
-        #pragma options(!pack_enums)
-    #endif
 #endif
 
 
@@ -152,6 +138,30 @@ typedef CALLBACK_API_C( void , JE_ShowDocumentCallback )(jobject applet, CFURLRe
  */
 typedef CALLBACK_API_C( void , JE_SetStatusCallback )(jobject applet, CFStringRef statusMessage, void *userData);
 /*
+ *  GetEmbeddingVMParams()
+ *  
+ *  Discussion:
+ *    Gets a set of VM params that can be passed to JNI_CreateJavaVM.
+ *    These params are optimized for Java embedding, and also contain
+ *    all user-specified options.
+ *  
+ *  Parameters:
+ *    
+ *    ioJavaVMInitArgs:
+ *      A Java VM initialization argument structure that you create.
+ *      This function will clear any fields set in the structure and
+ *      filled in with new data on completion.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+GetEmbeddingVMParams(JavaVMInitArgs * ioJavaVMInitArgs)       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+/*
  *  CreateAppletArena()
  *  
  *  Discussion:
@@ -172,7 +182,8 @@ typedef CALLBACK_API_C( void , JE_SetStatusCallback )(jobject applet, CFStringRe
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-CreateAppletArena(AppletArena * outNewArena);
+CreateAppletArena(AppletArena * outNewArena)                  AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
 
 
 /*
@@ -198,8 +209,8 @@ CreateAppletArena(AppletArena * outNewArena);
  *      arena will be created. This is the typcial case for applets.
  *    
  *    outJavaFrame:
- *      The applet itself to be used for registering callbacks and
- *      creating controls.
+ *      Returns JNI global ref. Used for registering callbacks and
+ *      creating controls.  Call env->DeleteGlobalRef() on it when done.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
@@ -212,7 +223,7 @@ CreateJavaApplet(
   AppletDescriptor   applet,
   Boolean            trusted,
   AppletArena        arena,              /* can be NULL */
-  jobject *          outJavaFrame);
+  jobject *          outJavaFrame)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -222,7 +233,6 @@ CreateJavaApplet(
  *  Summary:
  *    Constants that are passed to SetJavaAppletState.
  */
-
 enum AppletState {
   kAppletStart                  = 1,    /* Starts the applet processing 3.*/
   kAppletStop                   = 2,    /* Halts the applet, but it can be started again.*/
@@ -260,7 +270,7 @@ extern OSStatus
 SetJavaAppletState(
   JNIEnv *      env,
   jobject       inAppletFrame,
-  AppletState   inNewState);
+  AppletState   inNewState)                                   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -303,7 +313,7 @@ RegisterStatusCallback(
   JNIEnv *               env,
   jobject                inJavaFrame,
   JE_SetStatusCallback   showStatusFunction,
-  void *                 userData);
+  void *                 userData)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -349,29 +359,16 @@ RegisterShowDocumentCallback(
   JNIEnv *                  env,
   jobject                   inJavaFrame,
   JE_ShowDocumentCallback   showDocumentFunction,
-  void *                    userData);
+  void *                    userData)                         AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
 
 #if PRAGMA_ENUM_ALWAYSINT
     #pragma enumsalwaysint reset
-    #ifdef __JAVAAPPLET__RESTORE_TWOBYTEINTS
-        #pragma fourbyteints off
-    #endif
-#elif PRAGMA_ENUM_OPTIONS
-    #pragma option enum=reset
-#elif defined(__JAVAAPPLET__RESTORE_PACKED_ENUMS)
-    #pragma options(pack_enums)
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

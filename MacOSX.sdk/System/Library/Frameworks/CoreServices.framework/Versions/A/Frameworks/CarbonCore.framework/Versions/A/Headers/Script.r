@@ -3,9 +3,9 @@
  
      Contains:   Script Manager interfaces
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1986-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1986-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -226,8 +226,8 @@
 #define verDenmark 						9					/*  DK da_DK */
 #define verPortugal 					10					/*  PO pt_PT     Portuguese for Portugal */
 #define verFrCanada 					11					/*  C  fr_CA       French for Canada */
-#define verNorway 						12					/*  H  no_NO       Bokmål */
-#define verIsrael 						13					/*  HB iw_IL     Hebrew */
+#define verNorway 						12					/*  H  no_NO,nb_NO  Bokmål */
+#define verIsrael 						13					/*  HB he_IL,iw_IL Hebrew */
 #define verJapan 						14					/*  J  ja_JP */
 #define verAustralia 					15					/*  X  en_AU       English for Australia */
 #define verArabic 						16					/*  AB ar       Arabic for N Africa, Arabian peninsula, Levant */
@@ -256,7 +256,7 @@
 #define verInternational 				37					/*  Z  en      English for international use                */
 															/*               38 is unassigned */
 #define verRomania 						39					/*  RO ro_RO */
-#define verGreecePoly 					40					/*               Polytonic Greek (classical)                    */
+#define verGreecePoly 					40					/*        grc      Polytonic Greek (classical)                   */
 #define verLithuania 					41					/*  LT lt_LT */
 #define verPoland 						42					/*  PL pl_PL */
 #define verHungary 						43					/*  MG hu_HU */
@@ -282,16 +282,16 @@
 #define verUkraine 						62					/*  UA uk_UA */
 															/*               63 is unassigned */
 #define verGreeceAlt 					64					/*               unused                               */
-#define verSerbian 						65					/*  SR sr_YU, sh_YU                                   */
+#define verSerbian 						65					/*  SR sr_YU,sh_YU                                    */
 #define verSlovenian 					66					/*  SV sl_SI                                     */
 #define verMacedonian 					67					/*  MD mk_MK                                     */
-#define verCroatia 						68					/*  CR hr_HR, sh_HR */
+#define verCroatia 						68					/*  CR hr_HR,sh_HR */
 															/*               69 is unassigned */
 #define verGermanReformed 				70					/*        de_DE     Reformed orthography (used formerly unassigned 70)  */
 #define verBrazil 						71					/*  BR pt_BR     Portuguese for Brazil */
 #define verBulgaria 					72					/*  BG bg_BG */
 #define verCatalonia 					73					/*  CA ca_ES     Catalan for Spain */
-#define verMultilingual 				74					/*  ZM          (no language or script) */
+#define verMultilingual 				74					/*  ZM mul        (no language or script) */
 #define verScottishGaelic 				75					/*  GD gd */
 #define verManxGaelic 					76					/*  GV gv       Isle of Man */
 #define verBreton 						77					/*  BZ br */
@@ -319,13 +319,14 @@
 #define verFrBelgium 					98					/*  BF fr_BE     French for Belgium                        */
 #define verUzbek 						99					/*  BD uz_UZ                                     */
 #define verSingapore 					100					/*  SG                                          */
-#define verNynorsk 						101					/*  NY   _NO     Norwegian Nynorsk                         */
+#define verNynorsk 						101					/*  NY nn_NO     Norwegian Nynorsk                         */
 #define verAfrikaans 					102					/*  AK af_ZA                                     */
 #define verEsperanto 					103					/*        eo                                         */
 #define verMarathi 						104					/*        mr_IN                                       */
 #define verTibetan 						105					/*        bo                                         */
 #define verNepal 						106					/*        ne_NP                                       */
 #define verGreenland 					107					/*        kl                                         */
+#define verIrelandEnglish 				108					/*        en_IE     English for Ireland, with Euro for currency */
 
 #define verFrBelgiumLux 				6					/*  Incorrect; 6 is Flemish, not French, for Belgium; use verFlemish      */
 #define verBelgiumLux 					6					/*  Use verFlemish */

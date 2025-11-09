@@ -3,9 +3,9 @@
  
      Contains:   Picture Utilities Interfaces.
  
-     Version:    Quickdraw-64.6.15~3
+     Version:    Quickdraw-96.21~1
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,8 +16,8 @@
 #ifndef __PICTUTILS__
 #define __PICTUTILS__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __PALETTES__
@@ -26,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -35,13 +36,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* verbs for the GetPictInfo, GetPixMapInfo, and NewPictInfo calls */
 enum {
@@ -132,7 +127,7 @@ typedef STACK_UPP_TYPE(DisposeColorPickMethodProcPtr)           DisposeColorPick
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern InitPickMethodUPP
-NewInitPickMethodUPP(InitPickMethodProcPtr userRoutine);
+NewInitPickMethodUPP(InitPickMethodProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewRecordColorsUPP()
@@ -143,7 +138,7 @@ NewInitPickMethodUPP(InitPickMethodProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern RecordColorsUPP
-NewRecordColorsUPP(RecordColorsProcPtr userRoutine);
+NewRecordColorsUPP(RecordColorsProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewCalcColorTableUPP()
@@ -154,7 +149,7 @@ NewRecordColorsUPP(RecordColorsProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern CalcColorTableUPP
-NewCalcColorTableUPP(CalcColorTableProcPtr userRoutine);
+NewCalcColorTableUPP(CalcColorTableProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewDisposeColorPickMethodUPP()
@@ -165,7 +160,7 @@ NewCalcColorTableUPP(CalcColorTableProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DisposeColorPickMethodUPP
-NewDisposeColorPickMethodUPP(DisposeColorPickMethodProcPtr userRoutine);
+NewDisposeColorPickMethodUPP(DisposeColorPickMethodProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeInitPickMethodUPP()
@@ -176,7 +171,7 @@ NewDisposeColorPickMethodUPP(DisposeColorPickMethodProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeInitPickMethodUPP(InitPickMethodUPP userUPP);
+DisposeInitPickMethodUPP(InitPickMethodUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeRecordColorsUPP()
@@ -187,7 +182,7 @@ DisposeInitPickMethodUPP(InitPickMethodUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeRecordColorsUPP(RecordColorsUPP userUPP);
+DisposeRecordColorsUPP(RecordColorsUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeCalcColorTableUPP()
@@ -198,7 +193,7 @@ DisposeRecordColorsUPP(RecordColorsUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeCalcColorTableUPP(CalcColorTableUPP userUPP);
+DisposeCalcColorTableUPP(CalcColorTableUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeDisposeColorPickMethodUPP()
@@ -209,7 +204,7 @@ DisposeCalcColorTableUPP(CalcColorTableUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDisposeColorPickMethodUPP(DisposeColorPickMethodUPP userUPP);
+DisposeDisposeColorPickMethodUPP(DisposeColorPickMethodUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeInitPickMethodUPP()
@@ -224,7 +219,7 @@ InvokeInitPickMethodUPP(
   SInt16             colorsRequested,
   UInt32 *           dataRef,
   SInt16 *           colorBankType,
-  InitPickMethodUPP  userUPP);
+  InitPickMethodUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeRecordColorsUPP()
@@ -240,7 +235,7 @@ InvokeRecordColorsUPP(
   RGBColor *       colorsArray,
   SInt32           colorCount,
   SInt32 *         uniqueColors,
-  RecordColorsUPP  userUPP);
+  RecordColorsUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeCalcColorTableUPP()
@@ -256,7 +251,7 @@ InvokeCalcColorTableUPP(
   SInt16             colorsRequested,
   void *             colorBankPtr,
   CSpecArray         resultPtr,
-  CalcColorTableUPP  userUPP);
+  CalcColorTableUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeDisposeColorPickMethodUPP()
@@ -269,7 +264,7 @@ InvokeCalcColorTableUPP(
 extern OSErr
 InvokeDisposeColorPickMethodUPP(
   UInt32                     dataRef,
-  DisposeColorPickMethodUPP  userUPP);
+  DisposeColorPickMethodUPP  userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  GetPictInfo()
@@ -286,7 +281,7 @@ GetPictInfo(
   short       verb,
   short       colorsRequested,
   short       colorPickMethod,
-  short       version);
+  short       version)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -304,7 +299,7 @@ GetPixMapInfo(
   short          verb,
   short          colorsRequested,
   short          colorPickMethod,
-  short          version);
+  short          version)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -321,7 +316,7 @@ NewPictInfo(
   short         verb,
   short         colorsRequested,
   short         colorPickMethod,
-  short         version);
+  short         version)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -335,7 +330,7 @@ NewPictInfo(
 extern OSErr 
 RecordPictInfo(
   PictInfoID   thePictInfoID,
-  PicHandle    thePictHandle);
+  PicHandle    thePictHandle)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -349,7 +344,7 @@ RecordPictInfo(
 extern OSErr 
 RecordPixMapInfo(
   PictInfoID     thePictInfoID,
-  PixMapHandle   thePixMapHandle);
+  PixMapHandle   thePixMapHandle)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -364,7 +359,7 @@ extern OSErr
 RetrievePictInfo(
   PictInfoID   thePictInfoID,
   PictInfo *   thePictInfo,
-  short        colorsRequested);
+  short        colorsRequested)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -376,7 +371,7 @@ RetrievePictInfo(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-DisposePictInfo(PictInfoID thePictInfoID);
+DisposePictInfo(PictInfoID thePictInfoID)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #if OLDROUTINENAMES
@@ -387,13 +382,7 @@ DisposePictInfo(PictInfoID thePictInfoID);
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

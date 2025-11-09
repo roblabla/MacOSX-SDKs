@@ -177,6 +177,8 @@ protected:
     // for user client
     OSAsyncReference			fCallbackAsyncRef;
 	
+	IOMemoryMap *				fResponseMap;
+	
 	////////////////////////////////////////        
 
     // init / destroy

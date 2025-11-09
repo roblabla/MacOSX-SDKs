@@ -3,9 +3,9 @@
  
      Contains:   Header for the Basic Linear Algebra Subprograms, with Apple extensions.
  
-     Version:    vecLib-1.1_8~32
+     Version:    vecLib-138.1~9
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -84,6 +84,7 @@
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -93,27 +94,8 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=power
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
-
 #if PRAGMA_ENUM_ALWAYSINT
-    #if defined(__fourbyteints__) && !__fourbyteints__ 
-        #define __VBLAS__RESTORE_TWOBYTEINTS
-        #pragma fourbyteints on
-    #endif
     #pragma enumsalwaysint on
-#elif PRAGMA_ENUM_OPTIONS
-    #pragma option enum=int
-#elif PRAGMA_ENUM_PACK
-    #if __option(pack_enums)
-        #define __VBLAS__RESTORE_PACKED_ENUMS
-        #pragma options(!pack_enums)
-    #endif
 #endif
 
 
@@ -124,13 +106,11 @@ extern "C" {
 */
 
 
-
 enum CBLAS_ORDER {
   CblasRowMajor                 = 101,
   CblasColMajor                 = 102
 };
 typedef enum CBLAS_ORDER CBLAS_ORDER;
-
 
 enum CBLAS_TRANSPOSE {
   CblasNoTrans                  = 111,
@@ -139,20 +119,17 @@ enum CBLAS_TRANSPOSE {
 };
 typedef enum CBLAS_TRANSPOSE CBLAS_TRANSPOSE;
 
-
 enum CBLAS_UPLO {
   CblasUpper                    = 121,
   CblasLower                    = 122
 };
 typedef enum CBLAS_UPLO CBLAS_UPLO;
 
-
 enum CBLAS_DIAG {
   CblasNonUnit                  = 131,
   CblasUnit                     = 132
 };
 typedef enum CBLAS_DIAG CBLAS_DIAG;
-
 
 enum CBLAS_SIDE {
   CblasLeft                     = 141,
@@ -200,7 +177,7 @@ cblas_sdot(
   const float *  X,
   int            incX,
   const float *  Y,
-  int            incY);
+  int            incY)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -215,7 +192,7 @@ extern float
 cblas_snrm2(
   int            N,
   const float *  X,
-  int            incX);
+  int            incX)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -230,7 +207,7 @@ extern float
 cblas_sasum(
   int            N,
   const float *  X,
-  int            incX);
+  int            incX)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -245,7 +222,7 @@ extern int
 cblas_isamax(
   int            N,
   const float *  X,
-  int            incX);
+  int            incX)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -262,7 +239,7 @@ cblas_sswap(
   float *  X,
   int      incX,
   float *  Y,
-  int      incY);
+  int      incY)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -279,7 +256,7 @@ cblas_scopy(
   const float *  X,
   int            incX,
   float *        Y,
-  int            incY);
+  int            incY)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -297,7 +274,7 @@ cblas_saxpy(
   const float *  X,
   int            incX,
   float *        Y,
-  int            incY);
+  int            incY)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -316,7 +293,7 @@ cblas_srot(
   float *  Y,
   int      incY,
   float    c,
-  float    s);
+  float    s)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -332,7 +309,7 @@ cblas_sscal(
   int      N,
   float    alpha,
   float *  X,
-  int      incX);
+  int      incX)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -384,7 +361,7 @@ cblas_sgemv(
   int               incX,
   float             beta,
   float *           Y,
-  int               incY);
+  int               incY)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -438,7 +415,7 @@ cblas_sgemm(
   int               ldb,
   float             beta,
   float *           C,
-  int               ldc);
+  int               ldc)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -506,7 +483,7 @@ extern void
 vMultVecMat_4x4(
   ConstVectorFloat   X[1],
   ConstVectorFloat   A[4][1],
-  vector float       Y[1]);
+  vector float       Y[1])                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -521,7 +498,7 @@ extern void
 vMultMatVec_4x4(
   ConstVectorFloat   A[4][1],
   ConstVectorFloat   X[1],
-  vector float       Y[1]);
+  vector float       Y[1])                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -536,7 +513,7 @@ extern void
 vMultMatMat_4x4(
   ConstVectorFloat   A[4][1],
   ConstVectorFloat   B[4][1],
-  vector float       C[4][1]);
+  vector float       C[4][1])                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -552,7 +529,7 @@ extern void
 vMultVecMat_8x8(
   ConstVectorFloat   X[2],
   ConstVectorFloat   A[8][2],
-  vector float       Y[2]);
+  vector float       Y[2])                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -567,7 +544,7 @@ extern void
 vMultMatVec_8x8(
   ConstVectorFloat   A[8][2],
   ConstVectorFloat   X[2],
-  vector float       Y[2]);
+  vector float       Y[2])                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -582,7 +559,7 @@ extern void
 vMultMatMat_8x8(
   ConstVectorFloat   A[8][2],
   ConstVectorFloat   B[8][2],
-  vector float       C[8][2]);
+  vector float       C[8][2])                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -598,7 +575,7 @@ extern void
 vMultVecMat_16x16(
   ConstVectorFloat   X[4],
   ConstVectorFloat   A[16][4],
-  vector float       Y[4]);
+  vector float       Y[4])                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -613,7 +590,7 @@ extern void
 vMultMatVec_16x16(
   ConstVectorFloat   A[16][4],
   ConstVectorFloat   X[4],
-  vector float       Y[4]);
+  vector float       Y[4])                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -628,7 +605,7 @@ extern void
 vMultMatMat_16x16(
   ConstVectorFloat   A[16][4],
   ConstVectorFloat   B[16][4],
-  vector float       C[16][4]);
+  vector float       C[16][4])                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -644,7 +621,7 @@ extern void
 vMultVecMat_32x32(
   ConstVectorFloat   X[8],
   ConstVectorFloat   A[32][8],
-  vector float       Y[8]);
+  vector float       Y[8])                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -659,7 +636,7 @@ extern void
 vMultMatVec_32x32(
   ConstVectorFloat   A[32][8],
   ConstVectorFloat   X[8],
-  vector float       Y[8]);
+  vector float       Y[8])                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -674,7 +651,7 @@ extern void
 vMultMatMat_32x32(
   ConstVectorFloat   A[32][8],
   ConstVectorFloat   B[32][8],
-  vector float       C[32][8]);
+  vector float       C[32][8])                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #endif  /* defined(__VEC__) */
@@ -714,7 +691,7 @@ typedef CALLBACK_API_C( void , BLASParamErrorProc )(const char *funcName, const 
  *    Non-Carbon CFM:   in vecLib 1.0.2 and later
  */
 extern void 
-SetBLASParamErrorProc(BLASParamErrorProc ErrorProc);
+SetBLASParamErrorProc(BLASParamErrorProc ErrorProc)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -744,7 +721,7 @@ SDOT(
   const float *  X,
   const int *    incX,
   const float *  Y,
-  const int *    incY);
+  const int *    incY)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -759,7 +736,7 @@ extern float
 SNRM2(
   const int *    N,
   const float *  X,
-  const int *    incX);
+  const int *    incX)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -774,7 +751,7 @@ extern float
 SASUM(
   const int *    N,
   const float *  X,
-  const int *    incX);
+  const int *    incX)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -789,7 +766,7 @@ extern int
 ISAMAX(
   const int *    N,
   const float *  X,
-  const int *    incX);
+  const int *    incX)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -806,7 +783,7 @@ SSWAP(
   float *      X,
   const int *  incX,
   float *      Y,
-  const int *  incY);
+  const int *  incY)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -823,7 +800,7 @@ SCOPY(
   const float *  X,
   const int *    incX,
   float *        Y,
-  const int *    incY);
+  const int *    incY)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -841,7 +818,7 @@ SAXPY(
   const float *  X,
   const int *    incX,
   float *        Y,
-  const int *    incY);
+  const int *    incY)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -860,7 +837,7 @@ SROT(
   float *        Y,
   const int *    incY,
   const float *  c,
-  const float *  s);
+  const float *  s)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -876,7 +853,7 @@ SSCAL(
   const int *    N,
   const float *  alpha,
   float *        X,
-  const int *    incX);
+  const int *    incX)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -899,7 +876,7 @@ SGEMV(
   const int *    incX,
   const float *  beta,
   float *        Y,
-  const int *    incY);
+  const int *    incY)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -924,7 +901,7 @@ SGEMM(
   const int *    ldb,
   const float *  beta,
   float *        C,
-  const int *    ldc);
+  const int *    ldc)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* ==========================================================================================================================*/
@@ -935,21 +912,6 @@ SGEMM(
 
 #if PRAGMA_ENUM_ALWAYSINT
     #pragma enumsalwaysint reset
-    #ifdef __VBLAS__RESTORE_TWOBYTEINTS
-        #pragma fourbyteints off
-    #endif
-#elif PRAGMA_ENUM_OPTIONS
-    #pragma option enum=reset
-#elif defined(__VBLAS__RESTORE_PACKED_ENUMS)
-    #pragma options(pack_enums)
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
 #endif
 
 #ifdef __cplusplus

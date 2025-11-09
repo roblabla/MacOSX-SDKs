@@ -3,9 +3,9 @@
  
      Contains:   Driver Synchronization Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -33,14 +34,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 /*
@@ -65,7 +58,7 @@ extern Boolean
 CompareAndSwap(
   UInt32    oldVvalue,
   UInt32    newValue,
-  UInt32 *  OldValueAdr);
+  UInt32 *  OldValueAdr)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -79,7 +72,7 @@ CompareAndSwap(
 extern Boolean 
 TestAndClear(
   UInt32   bit,
-  UInt8 *  startAddress);
+  UInt8 *  startAddress)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -93,7 +86,7 @@ TestAndClear(
 extern Boolean 
 TestAndSet(
   UInt32   bit,
-  UInt8 *  startAddress);
+  UInt8 *  startAddress)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -105,7 +98,7 @@ TestAndSet(
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern SInt8 
-IncrementAtomic8(SInt8 * value);
+IncrementAtomic8(SInt8 * value)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -117,7 +110,7 @@ IncrementAtomic8(SInt8 * value);
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern SInt8 
-DecrementAtomic8(SInt8 * value);
+DecrementAtomic8(SInt8 * value)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -131,7 +124,7 @@ DecrementAtomic8(SInt8 * value);
 extern SInt8 
 AddAtomic8(
   SInt32   amount,
-  SInt8 *  value);
+  SInt8 *  value)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -145,7 +138,7 @@ AddAtomic8(
 extern UInt8 
 BitAndAtomic8(
   UInt32   mask,
-  UInt8 *  value);
+  UInt8 *  value)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -159,7 +152,7 @@ BitAndAtomic8(
 extern UInt8 
 BitOrAtomic8(
   UInt32   mask,
-  UInt8 *  value);
+  UInt8 *  value)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -173,7 +166,7 @@ BitOrAtomic8(
 extern UInt8 
 BitXorAtomic8(
   UInt32   mask,
-  UInt8 *  value);
+  UInt8 *  value)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -185,7 +178,7 @@ BitXorAtomic8(
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern SInt16 
-IncrementAtomic16(SInt16 * value);
+IncrementAtomic16(SInt16 * value)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -197,7 +190,7 @@ IncrementAtomic16(SInt16 * value);
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern SInt16 
-DecrementAtomic16(SInt16 * value);
+DecrementAtomic16(SInt16 * value)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -211,7 +204,7 @@ DecrementAtomic16(SInt16 * value);
 extern SInt16 
 AddAtomic16(
   SInt32    amount,
-  SInt16 *  value);
+  SInt16 *  value)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -225,7 +218,7 @@ AddAtomic16(
 extern UInt16 
 BitAndAtomic16(
   UInt32    mask,
-  UInt16 *  value);
+  UInt16 *  value)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -239,7 +232,7 @@ BitAndAtomic16(
 extern UInt16 
 BitOrAtomic16(
   UInt32    mask,
-  UInt16 *  value);
+  UInt16 *  value)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -253,7 +246,7 @@ BitOrAtomic16(
 extern UInt16 
 BitXorAtomic16(
   UInt32    mask,
-  UInt16 *  value);
+  UInt16 *  value)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -265,7 +258,7 @@ BitXorAtomic16(
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern SInt32 
-IncrementAtomic(SInt32 * value);
+IncrementAtomic(SInt32 * value)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -277,7 +270,7 @@ IncrementAtomic(SInt32 * value);
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern SInt32 
-DecrementAtomic(SInt32 * value);
+DecrementAtomic(SInt32 * value)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -291,7 +284,7 @@ DecrementAtomic(SInt32 * value);
 extern SInt32 
 AddAtomic(
   SInt32    amount,
-  SInt32 *  value);
+  SInt32 *  value)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -305,7 +298,7 @@ AddAtomic(
 extern UInt32 
 BitAndAtomic(
   UInt32    mask,
-  UInt32 *  value);
+  UInt32 *  value)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -319,7 +312,7 @@ BitAndAtomic(
 extern UInt32 
 BitOrAtomic(
   UInt32    mask,
-  UInt32 *  value);
+  UInt32 *  value)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -333,18 +326,10 @@ BitOrAtomic(
 extern UInt32 
 BitXorAtomic(
   UInt32    mask,
-  UInt32 *  value);
+  UInt32 *  value)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

@@ -1,5 +1,7 @@
-/*	NSScriptClassDescription.h
-	Copyright 1997-2001, Apple, Inc. All rights reserved.
+/*
+	NSScriptClassDescription.h
+	Copyright (c) 1997-2002, Apple Computer, Inc.
+	All rights reserved.
 */
 
 #import <Foundation/NSClassDescription.h>
@@ -16,8 +18,8 @@
     NSDictionary *_attributes;
     NSDictionary *_toOneRelationships;
     NSDictionary *_toManyRelationships;
-    NSDictionary *_inverseRelationships;
     NSDictionary *_supportedCommands;
+    void *_privateVars;
 }
 
 - (id)initWithSuiteName:(NSString *)suiteName className:(NSString *)className dictionary:(NSDictionary *)dict;
@@ -45,6 +47,14 @@
     // Given an attribute or relationship key, return more information.
 - (NSString *)keyWithAppleEventCode:(unsigned long)code;
     // Find a key from its code
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+- (NSString *)defaultSubcontainerAttributeKey;
+
+- (BOOL)isLocationRequiredToCreateForKey:(NSString *)toManyRelationshipKey;
+
+#endif
 
 @end
 

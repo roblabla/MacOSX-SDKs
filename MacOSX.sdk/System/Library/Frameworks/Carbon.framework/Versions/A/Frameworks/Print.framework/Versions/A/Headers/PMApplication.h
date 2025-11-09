@@ -3,9 +3,9 @@
  
      Contains:   Carbon Printing Manager Interfaces.
  
-     Version:    Printing-91~3
+     Version:    Printing-135.1~1
  
-     Copyright:  © 1998-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1998-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,8 +16,8 @@
 #ifndef __PMAPPLICATION__
 #define __PMAPPLICATION__
 
-#ifndef __PMCORE__
-#include <PrintCore/PMCore.h>
+#ifndef __APPLICATIONSERVICES__
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 #ifndef __DIALOGS__
@@ -26,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -33,14 +34,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 /* Callbacks */
@@ -61,7 +54,7 @@ typedef STACK_UPP_TYPE(PMSheetDoneProcPtr)                      PMSheetDoneUPP;
  *    Non-Carbon CFM:   not available
  */
 extern PMItemUPP
-NewPMItemUPP(PMItemProcPtr userRoutine);
+NewPMItemUPP(PMItemProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewPMPrintDialogInitUPP()
@@ -72,7 +65,7 @@ NewPMItemUPP(PMItemProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern PMPrintDialogInitUPP
-NewPMPrintDialogInitUPP(PMPrintDialogInitProcPtr userRoutine);
+NewPMPrintDialogInitUPP(PMPrintDialogInitProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewPMPageSetupDialogInitUPP()
@@ -83,7 +76,7 @@ NewPMPrintDialogInitUPP(PMPrintDialogInitProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern PMPageSetupDialogInitUPP
-NewPMPageSetupDialogInitUPP(PMPageSetupDialogInitProcPtr userRoutine);
+NewPMPageSetupDialogInitUPP(PMPageSetupDialogInitProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewPMSheetDoneUPP()
@@ -94,7 +87,7 @@ NewPMPageSetupDialogInitUPP(PMPageSetupDialogInitProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern PMSheetDoneUPP
-NewPMSheetDoneUPP(PMSheetDoneProcPtr userRoutine);
+NewPMSheetDoneUPP(PMSheetDoneProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposePMItemUPP()
@@ -105,7 +98,7 @@ NewPMSheetDoneUPP(PMSheetDoneProcPtr userRoutine);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposePMItemUPP(PMItemUPP userUPP);
+DisposePMItemUPP(PMItemUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposePMPrintDialogInitUPP()
@@ -116,7 +109,7 @@ DisposePMItemUPP(PMItemUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposePMPrintDialogInitUPP(PMPrintDialogInitUPP userUPP);
+DisposePMPrintDialogInitUPP(PMPrintDialogInitUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposePMPageSetupDialogInitUPP()
@@ -127,7 +120,7 @@ DisposePMPrintDialogInitUPP(PMPrintDialogInitUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposePMPageSetupDialogInitUPP(PMPageSetupDialogInitUPP userUPP);
+DisposePMPageSetupDialogInitUPP(PMPageSetupDialogInitUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposePMSheetDoneUPP()
@@ -138,7 +131,7 @@ DisposePMPageSetupDialogInitUPP(PMPageSetupDialogInitUPP userUPP);
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposePMSheetDoneUPP(PMSheetDoneUPP userUPP);
+DisposePMSheetDoneUPP(PMSheetDoneUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokePMItemUPP()
@@ -152,7 +145,7 @@ extern void
 InvokePMItemUPP(
   DialogRef  theDialog,
   short      item,
-  PMItemUPP  userUPP);
+  PMItemUPP  userUPP)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokePMPrintDialogInitUPP()
@@ -166,7 +159,7 @@ extern void
 InvokePMPrintDialogInitUPP(
   PMPrintSettings       printSettings,
   PMDialog *            theDialog,
-  PMPrintDialogInitUPP  userUPP);
+  PMPrintDialogInitUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokePMPageSetupDialogInitUPP()
@@ -180,7 +173,7 @@ extern void
 InvokePMPageSetupDialogInitUPP(
   PMPageFormat              pageFormat,
   PMDialog *                theDialog,
-  PMPageSetupDialogInitUPP  userUPP);
+  PMPageSetupDialogInitUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokePMSheetDoneUPP()
@@ -195,7 +188,7 @@ InvokePMSheetDoneUPP(
   PMPrintSession  printSession,
   WindowRef       documentWindow,
   Boolean         accepted,
-  PMSheetDoneUPP  userUPP);
+  PMSheetDoneUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 #if PM_USE_SESSION_APIS
 /* Print loop */
@@ -211,7 +204,7 @@ extern OSStatus
 PMSessionBeginDocument(
   PMPrintSession    printSession,
   PMPrintSettings   printSettings,
-  PMPageFormat      pageFormat);
+  PMPageFormat      pageFormat)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -223,7 +216,7 @@ PMSessionBeginDocument(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMSessionEndDocument(PMPrintSession printSession);
+PMSessionEndDocument(PMPrintSession printSession)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -238,7 +231,7 @@ extern OSStatus
 PMSessionBeginPage(
   PMPrintSession   printSession,
   PMPageFormat     pageFormat,
-  const PMRect *   pageFrame);
+  const PMRect *   pageFrame)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -250,7 +243,7 @@ PMSessionBeginPage(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMSessionEndPage(PMPrintSession printSession);
+PMSessionEndPage(PMPrintSession printSession)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Session Printing Dialogs */
@@ -266,7 +259,7 @@ extern OSStatus
 PMSessionPageSetupDialog(
   PMPrintSession   printSession,
   PMPageFormat     pageFormat,
-  Boolean *        accepted);
+  Boolean *        accepted)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -282,7 +275,7 @@ PMSessionPrintDialog(
   PMPrintSession    printSession,
   PMPrintSettings   printSettings,
   PMPageFormat      constPageFormat,
-  Boolean *         accepted);
+  Boolean *         accepted)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -297,7 +290,7 @@ extern OSStatus
 PMSessionPageSetupDialogInit(
   PMPrintSession   printSession,
   PMPageFormat     pageFormat,
-  PMDialog *       newDialog);
+  PMDialog *       newDialog)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -313,7 +306,7 @@ PMSessionPrintDialogInit(
   PMPrintSession    printSession,
   PMPrintSettings   printSettings,
   PMPageFormat      constPageFormat,
-  PMDialog *        newDialog);
+  PMDialog *        newDialog)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -330,7 +323,7 @@ PMSessionPrintDialogMain(
   PMPrintSettings        printSettings,
   PMPageFormat           constPageFormat,
   Boolean *              accepted,
-  PMPrintDialogInitUPP   myInitProc);
+  PMPrintDialogInitUPP   myInitProc)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -346,7 +339,7 @@ PMSessionPageSetupDialogMain(
   PMPrintSession             printSession,
   PMPageFormat               pageFormat,
   Boolean *                  accepted,
-  PMPageSetupDialogInitUPP   myInitProc);
+  PMPageSetupDialogInitUPP   myInitProc)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /************************/
@@ -364,7 +357,7 @@ extern OSStatus
 PMSessionUseSheets(
   PMPrintSession   printSession,
   WindowRef        documentWindow,
-  PMSheetDoneUPP   sheetDoneProc);
+  PMSheetDoneUPP   sheetDoneProc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #else
@@ -381,7 +374,7 @@ extern OSStatus
 PMBeginDocument(
   PMPrintSettings   printSettings,
   PMPageFormat      pageFormat,
-  PMPrintContext *  printContext);
+  PMPrintContext *  printContext)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -393,7 +386,7 @@ PMBeginDocument(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMEndDocument(PMPrintContext printContext);
+PMEndDocument(PMPrintContext printContext)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -407,7 +400,7 @@ PMEndDocument(PMPrintContext printContext);
 extern OSStatus 
 PMBeginPage(
   PMPrintContext   printContext,
-  const PMRect *   pageFrame);
+  const PMRect *   pageFrame)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -419,7 +412,7 @@ PMBeginPage(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-PMEndPage(PMPrintContext printContext);
+PMEndPage(PMPrintContext printContext)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Printing Dialogs */
@@ -434,7 +427,7 @@ PMEndPage(PMPrintContext printContext);
 extern OSStatus 
 PMPageSetupDialog(
   PMPageFormat   pageFormat,
-  Boolean *      accepted);
+  Boolean *      accepted)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -449,7 +442,7 @@ extern OSStatus
 PMPrintDialog(
   PMPrintSettings   printSettings,
   PMPageFormat      constPageFormat,
-  Boolean *         accepted);
+  Boolean *         accepted)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -463,7 +456,7 @@ PMPrintDialog(
 extern OSStatus 
 PMPageSetupDialogInit(
   PMPageFormat   pageFormat,
-  PMDialog *     newDialog);
+  PMDialog *     newDialog)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /************************/
@@ -481,7 +474,7 @@ PMPageSetupDialogInit(
 extern OSStatus 
 PMPrintDialogInit(
   PMPrintSettings   printSettings,
-  PMDialog *        newDialog);
+  PMDialog *        newDialog)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -496,7 +489,7 @@ extern OSStatus
 PMPrintDialogInitWithPageFormat(
   PMPrintSettings   printSettings,
   PMPageFormat      constPageFormat,
-  PMDialog *        newDialog);
+  PMDialog *        newDialog)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -512,7 +505,7 @@ PMPrintDialogMain(
   PMPrintSettings        printSettings,
   PMPageFormat           constPageFormat,
   Boolean *              accepted,
-  PMPrintDialogInitUPP   myInitProc);
+  PMPrintDialogInitUPP   myInitProc)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -527,7 +520,7 @@ extern OSStatus
 PMPageSetupDialogMain(
   PMPageFormat               pageFormat,
   Boolean *                  accepted,
-  PMPageSetupDialogInitUPP   myInitProc);
+  PMPageSetupDialogInitUPP   myInitProc)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #endif  /* PM_USE_SESSION_APIS */
@@ -544,7 +537,7 @@ PMPageSetupDialogMain(
 extern OSStatus 
 PMGetDialogPtr(
   PMDialog     pmDialog,
-  DialogRef *  theDialog);
+  DialogRef *  theDialog)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #define PMGetDialogRef PMGetDialogPtr
@@ -559,7 +552,7 @@ PMGetDialogPtr(
 extern OSStatus 
 PMGetModalFilterProc(
   PMDialog          pmDialog,
-  ModalFilterUPP *  filterProc);
+  ModalFilterUPP *  filterProc)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -573,7 +566,7 @@ PMGetModalFilterProc(
 extern OSStatus 
 PMSetModalFilterProc(
   PMDialog         pmDialog,
-  ModalFilterUPP   filterProc);
+  ModalFilterUPP   filterProc)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -587,7 +580,7 @@ PMSetModalFilterProc(
 extern OSStatus 
 PMGetItemProc(
   PMDialog     pmDialog,
-  PMItemUPP *  itemProc);
+  PMItemUPP *  itemProc)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -601,7 +594,7 @@ PMGetItemProc(
 extern OSStatus 
 PMSetItemProc(
   PMDialog    pmDialog,
-  PMItemUPP   itemProc);
+  PMItemUPP   itemProc)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -615,7 +608,7 @@ PMSetItemProc(
 extern OSStatus 
 PMGetDialogAccepted(
   PMDialog   pmDialog,
-  Boolean *  process);
+  Boolean *  process)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -629,7 +622,7 @@ PMGetDialogAccepted(
 extern OSStatus 
 PMSetDialogAccepted(
   PMDialog   pmDialog,
-  Boolean    process);
+  Boolean    process)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -643,7 +636,7 @@ PMSetDialogAccepted(
 extern OSStatus 
 PMGetDialogDone(
   PMDialog   pmDialog,
-  Boolean *  done);
+  Boolean *  done)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -657,17 +650,67 @@ PMGetDialogDone(
 extern OSStatus 
 PMSetDialogDone(
   PMDialog   pmDialog,
-  Boolean    done);
+  Boolean    done)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/* Presets */
+/*
+ *  PMSessionEnablePrinterPresets()
+ *  
+ *  Summary:
+ *    Enable the use of printer presets in the print dialog.
+ *  
+ *  Discussion:
+ *    Displaying the print dialog on a session after making this call
+ *    will show the presets available for the specified graphis type.
+ *    In addition this call will enable the use of the simplified print
+ *    dialog. On OS 9 this function returns kPMNotImplemented.
+ *  
+ *  Parameters:
+ *    
+ *    session:
+ *      The session that will be used to present the print dialog.
+ *    
+ *    graphicsType:
+ *      The printer presets in the dialog should be suitable for
+ *      rendering this type of graphic. Currently defined graphics
+ *      types are: "Photo"
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSessionEnablePrinterPresets(
+  PMPrintSession   session,
+  CFStringRef      graphicsType)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+
+/*
+ *  PMSessionDisablePrinterPresets()
+ *  
+ *  Summary:
+ *    Disable the use of printer presets in the print dialog.
+ *  
+ *  Discussion:
+ *    On OS 9 this function returns noErr since presets are never used
+ *    in that OS.
+ *  
+ *  Parameters:
+ *    
+ *    session:
+ *      The session that will be used to present the print dialog.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSessionDisablePrinterPresets(PMPrintSession session)        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
 
 #ifdef __cplusplus
 }

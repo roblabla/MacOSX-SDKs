@@ -3,9 +3,9 @@
  
      Contains:   Master include for HIToolbox private framework
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,26 @@
 #endif
 
 
+#ifndef __HIOBJECT__
+#include <HIToolbox/HIObject.h>
+#endif
+
+#ifndef __HITOOLBAR__
+#include <HIToolbox/HIToolbar.h>
+#endif
+
+#ifndef __HIVIEW__
+#include <HIToolbox/HIView.h>
+#endif
+
+#ifndef __HITEXTUTILS__
+#include <HIToolbox/HITextUtils.h>
+#endif
+
+#ifndef __HISHAPE__
+#include <HIToolbox/HIShape.h>
+#endif
+
 #ifndef __BALLOONS__
 #include <HIToolbox/Balloons.h>
 #endif
@@ -29,20 +49,12 @@
 #include <HIToolbox/Events.h>
 #endif
 
-#ifndef __PROCESSES__
-#include <HIToolbox/Processes.h>
-#endif
-
 #ifndef __NOTIFICATION__
 #include <HIToolbox/Notification.h>
 #endif
 
 #ifndef __DRAG__
 #include <HIToolbox/Drag.h>
-#endif
-
-#ifndef __ICONS__
-#include <HIToolbox/Icons.h>
 #endif
 
 #ifndef __CONTROLS__
@@ -71,6 +83,10 @@
 
 #ifndef __LISTS__
 #include <HIToolbox/Lists.h>
+#endif
+
+#ifndef __CARBONEVENTSCORE__
+#include <HIToolbox/CarbonEventsCore.h>
 #endif
 
 #ifndef __CARBONEVENTS__
@@ -115,10 +131,6 @@
 
 #ifndef __TYPESELECT__
 #include <HIToolbox/TypeSelect.h>
-#endif
-
-#ifndef __INTERNETCONFIG__
-#include <HIToolbox/InternetConfig.h>
 #endif
 
 #ifndef __MACAPPLICATION__

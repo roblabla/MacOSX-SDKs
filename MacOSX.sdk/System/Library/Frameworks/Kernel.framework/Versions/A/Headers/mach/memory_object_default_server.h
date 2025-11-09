@@ -30,6 +30,8 @@ typedef function_table_entry 	*function_table_t;
 #endif	/* memory_object_default_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 
 #ifdef __BeforeMigServerHeader
@@ -38,20 +40,28 @@ __BeforeMigServerHeader
 
 /* typedefs for all requests */
 
+#ifndef __Request__memory_object_default_subsystem__defined
+#define __Request__memory_object_default_subsystem__defined
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		vm_size_t new_memory_object_size;
 	} __Request__memory_object_create_t;
 
+#endif /* !__Request__memory_object_default_subsystem__defined */
 
 /* union of all requests */
 
+#ifndef __RequestUnion__memory_object_default_subsystem__defined
+#define __RequestUnion__memory_object_default_subsystem__defined
 union __RequestUnion__memory_object_default_subsystem {
 	__Request__memory_object_create_t Request_memory_object_create;
 };
+#endif /* __RequestUnion__memory_object_default_subsystem__defined */
 /* typedefs for all replies */
 
+#ifndef __Reply__memory_object_default_subsystem__defined
+#define __Reply__memory_object_default_subsystem__defined
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -60,12 +70,16 @@ union __RequestUnion__memory_object_default_subsystem {
 		/* end of the kernel processed data */
 	} __Reply__memory_object_create_t;
 
+#endif /* !__Reply__memory_object_default_subsystem__defined */
 
 /* union of all replies */
 
+#ifndef __ReplyUnion__memory_object_default_subsystem__defined
+#define __ReplyUnion__memory_object_default_subsystem__defined
 union __ReplyUnion__memory_object_default_subsystem {
 	__Reply__memory_object_create_t Reply_memory_object_create;
 };
+#endif /* __RequestUnion__memory_object_default_subsystem__defined */
 
 /* Routine memory_object_create */
 #ifdef	mig_external
@@ -90,11 +104,11 @@ extern mig_routine_t memory_object_default_server_routine(
 
 /* Description of this subsystem, for use in direct RPC */
 extern const struct memory_object_default_subsystem {
-	struct subsystem *	subsystem;	/* Reserved for system use */
+	mig_server_routine_t	server;	/* Server routine */
 	mach_msg_id_t	start;	/* Min routine number */
 	mach_msg_id_t	end;	/* Max routine number + 1 */
 	unsigned int	maxsize;	/* Max msg size */
-	vm_address_t	base_addr;	/* Base ddress */
+	vm_address_t	reserved;	/* Reserved */
 	struct routine_descriptor	/*Array of routine descriptors */
 		routine[1];
 } memory_object_default_subsystem;

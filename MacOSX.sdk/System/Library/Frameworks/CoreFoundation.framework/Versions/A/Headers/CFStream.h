@@ -1,5 +1,5 @@
 /*	CFStream.h
-	Copyright 2000-2001, Apple, Inc. All rights reserved.
+	Copyright 2000-2002, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFSTREAM__)
@@ -89,6 +89,11 @@ CFReadStreamRef CFReadStreamCreateWithFile(CFAllocatorRef alloc, CFURLRef fileUR
 CF_EXPORT
 CFWriteStreamRef CFWriteStreamCreateWithFile(CFAllocatorRef alloc, CFURLRef fileURL);
 
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+/* Property for file write streams; value should be a CFBoolean.  Set to TRUE to append to a file, rather than to replace its contents */
+CF_EXPORT
+const CFStringRef kCFStreamPropertyAppendToFile;
+#endif
 
 /* Socket stream properties */
 
@@ -109,6 +114,10 @@ CF_EXPORT
 void CFStreamCreatePairWithSocket(CFAllocatorRef alloc, CFSocketNativeHandle sock, CFReadStreamRef *readStream, CFWriteStreamRef *writeStream);
 CF_EXPORT
 void CFStreamCreatePairWithSocketToHost(CFAllocatorRef alloc, CFStringRef host, UInt32 port, CFReadStreamRef *readStream, CFWriteStreamRef *writeStream);
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+CF_EXPORT
+void CFStreamCreatePairWithPeerSocketSignature(CFAllocatorRef alloc, const CFSocketSignature *signature, CFReadStreamRef *readStream, CFWriteStreamRef *writeStream);
+#endif
 
 
 /* Returns the current state of the stream */
@@ -184,14 +193,26 @@ CF_EXPORT
 CFIndex CFWriteStreamWrite(CFWriteStreamRef stream, const UInt8 *buffer, CFIndex bufferLength);
 
 /* Particular streams can name properties and assign meanings to them; you
-   access these properties through this call.  A property is any interesting
+   access these properties through the following calls.  A property is any interesting
    information about the stream other than the data being transmitted itself.
    Examples include the headers from an HTTP transmission, or the expected 
-   number of bytes, or permission information, etc. */
+   number of bytes, or permission information, etc.  Properties that can be set
+   configure the behavior of the stream, and may only be settable at particular times
+   (like before the stream has been opened).  See the documentation for particular 
+   properties to determine their get- and set-ability. */
 CF_EXPORT
 CFTypeRef CFReadStreamCopyProperty(CFReadStreamRef stream, CFStringRef propertyName);
 CF_EXPORT
 CFTypeRef CFWriteStreamCopyProperty(CFWriteStreamRef stream, CFStringRef propertyName);
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+/* Returns TRUE if the stream recognizes and accepts the given property-value pair; 
+   FALSE otherwise. */
+CF_EXPORT
+Boolean CFReadStreamSetProperty(CFReadStreamRef stream, CFStringRef propertyName, CFTypeRef propertyValue);
+CF_EXPORT
+Boolean CFWriteStreamSetProperty(CFWriteStreamRef stream, CFStringRef propertyName, CFTypeRef propertyValue);
+#endif
 
 /* Asynchronous processing - If you wish to neither poll nor block, you may register 
    a client to hear about interesting events that occur on a stream.  Only one client

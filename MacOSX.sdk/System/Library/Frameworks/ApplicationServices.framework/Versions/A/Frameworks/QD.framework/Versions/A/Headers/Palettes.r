@@ -3,9 +3,9 @@
  
      Contains:   Palette Manager Interfaces.
  
-     Version:    Quickdraw-64.6.15~3
+     Version:    Quickdraw-96.21~1
  
-     Copyright:  © 1987-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1987-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,8 +17,8 @@
 #ifndef __PALETTES_R__
 #define __PALETTES_R__
 
-#ifndef __CONDITIONALMACROS_R__
-#include <CarbonCore/ConditionalMacros.r>
+#ifndef __CORESERVICES_R__
+#include <CoreServices/CoreServices.r>
 #endif
 
 /*----------------------------pltt ¥ Color Palette--------------------------------------*/

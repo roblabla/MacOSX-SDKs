@@ -1,5 +1,5 @@
 /*	NSArray.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -25,7 +25,6 @@
 - (NSString *)description;
 - (NSString *)descriptionWithLocale:(NSDictionary *)locale;
 - (NSString *)descriptionWithLocale:(NSDictionary *)locale indent:(unsigned)level;
-- (void)exchangeObjectAtIndex:(unsigned)idx1 withObjectAtIndex:(unsigned)idx2;
 - (id)firstObjectCommonWithArray:(NSArray *)otherArray;
 - (void)getObjects:(id *)objects;
 - (void)getObjects:(id *)objects range:(NSRange)range;
@@ -58,6 +57,9 @@
 + (id)arrayWithObject:(id)anObject;
 + (id)arrayWithObjects:(id)firstObj, ...;
 - (id)initWithArray:(NSArray *)array;
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (id)initWithArray:(NSArray *)array copyItems:(BOOL)flag;
+#endif
 - (id)initWithContentsOfFile:(NSString *)path;
 - (id)initWithContentsOfURL:(NSURL *)url;
 - (id)initWithObjects:(id *)objects count:(unsigned)count;
@@ -83,6 +85,7 @@
 @interface NSMutableArray (NSExtendedMutableArray)
     
 - (void)addObjectsFromArray:(NSArray *)otherArray;
+- (void)exchangeObjectAtIndex:(unsigned)idx1 withObjectAtIndex:(unsigned)idx2;
 - (void)removeAllObjects;
 - (void)removeObject:(id)anObject inRange:(NSRange)range;
 - (void)removeObject:(id)anObject;

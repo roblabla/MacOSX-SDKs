@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime-142~1
+     Version:    QuickTime_6
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,7 +22,7 @@
 
 		#define CALLCOMPONENT_BASENAME()	Fred
 		#define CALLCOMPONENT_GLOBALS()	FredGlobalsHandle
-		#include <MediaHandlers.k.h>
+		#include <QuickTime/MediaHandlers.k.h>
 
 	To specify that your component implementation does not use globals, do not #define CALLCOMPONENT_GLOBALS
 */
@@ -46,7 +46,7 @@
 
 		#define MEDIA_BASENAME()	Fred
 		#define MEDIA_GLOBALS()	FredGlobalsHandle
-		#include <MediaHandlers.k.h>
+		#include <QuickTime/MediaHandlers.k.h>
 
 	To specify that your component implementation does not use globals, do not #define MEDIA_GLOBALS
 */
@@ -60,6 +60,16 @@
 	#define MEDIA_GLUE(a,b) a##b
 	#define MEDIA_STRCAT(a,b) MEDIA_GLUE(a,b)
 	#define ADD_MEDIA_BASENAME(name) MEDIA_STRCAT(MEDIA_BASENAME(),name)
+
+	EXTERN_API( ComponentResult  ) ADD_MEDIA_BASENAME(SetChunkManagementFlags) (MEDIA_GLOBALS() ADD_MEDIA_COMMA UInt32  flags, UInt32  flagsMask);
+
+	EXTERN_API( ComponentResult  ) ADD_MEDIA_BASENAME(GetChunkManagementFlags) (MEDIA_GLOBALS() ADD_MEDIA_COMMA UInt32 * flags);
+
+	EXTERN_API( ComponentResult  ) ADD_MEDIA_BASENAME(SetPurgeableChunkMemoryAllowance) (MEDIA_GLOBALS() ADD_MEDIA_COMMA Size  allowance);
+
+	EXTERN_API( ComponentResult  ) ADD_MEDIA_BASENAME(GetPurgeableChunkMemoryAllowance) (MEDIA_GLOBALS() ADD_MEDIA_COMMA Size * allowance);
+
+	EXTERN_API( ComponentResult  ) ADD_MEDIA_BASENAME(EmptyAllPurgeableChunks) (MEDIA_GLOBALS());
 
 	EXTERN_API( ComponentResult  ) ADD_MEDIA_BASENAME(Initialize) (MEDIA_GLOBALS() ADD_MEDIA_COMMA GetMovieCompleteParams * gmc);
 
@@ -239,12 +249,29 @@
 
 	EXTERN_API( ComponentResult  ) ADD_MEDIA_BASENAME(SetUserPreferredCodecs) (MEDIA_GLOBALS() ADD_MEDIA_COMMA CodecComponentHandle  userPreferredCodecs);
 
+	EXTERN_API( ComponentResult  ) ADD_MEDIA_BASENAME(RefConSetProperty) (MEDIA_GLOBALS() ADD_MEDIA_COMMA long  refCon, long  propertyType, void * propertyValue);
+
+	EXTERN_API( ComponentResult  ) ADD_MEDIA_BASENAME(RefConGetProperty) (MEDIA_GLOBALS() ADD_MEDIA_COMMA long  refCon, long  propertyType, void * propertyValue);
+
+	EXTERN_API( ComponentResult  ) ADD_MEDIA_BASENAME(NavigateTargetRefCon) (MEDIA_GLOBALS() ADD_MEDIA_COMMA long  navigation, long * refCon);
+
+	EXTERN_API( ComponentResult  ) ADD_MEDIA_BASENAME(GGetIdleManager) (MEDIA_GLOBALS() ADD_MEDIA_COMMA IdleManager * pim);
+
+	EXTERN_API( ComponentResult  ) ADD_MEDIA_BASENAME(GSetIdleManager) (MEDIA_GLOBALS() ADD_MEDIA_COMMA IdleManager  im);
+
+	EXTERN_API( ComponentResult  ) ADD_MEDIA_BASENAME(GGetLatency) (MEDIA_GLOBALS() ADD_MEDIA_COMMA TimeRecord * latency);
+
 #endif	/* MEDIA_BASENAME */
 
 
 /* MixedMode ProcInfo constants for component calls */
 enum {
 	uppCallComponentExecuteWiredActionProcInfo = 0x0000FFF0,
+	uppMediaSetChunkManagementFlagsProcInfo = 0x00000FF0,
+	uppMediaGetChunkManagementFlagsProcInfo = 0x000003F0,
+	uppMediaSetPurgeableChunkMemoryAllowanceProcInfo = 0x000003F0,
+	uppMediaGetPurgeableChunkMemoryAllowanceProcInfo = 0x000003F0,
+	uppMediaEmptyAllPurgeableChunksProcInfo = 0x000000F0,
 	uppMediaInitializeProcInfo = 0x000003F0,
 	uppMediaSetHandlerCapabilitiesProcInfo = 0x00000FF0,
 	uppMediaIdleProcInfo = 0x0000FFF0,
@@ -333,7 +360,13 @@ enum {
 	uppMediaGetPublicInfoProcInfo = 0x00003FF0,
 	uppMediaSetPublicInfoProcInfo = 0x00003FF0,
 	uppMediaGetUserPreferredCodecsProcInfo = 0x000003F0,
-	uppMediaSetUserPreferredCodecsProcInfo = 0x000003F0
+	uppMediaSetUserPreferredCodecsProcInfo = 0x000003F0,
+	uppMediaRefConSetPropertyProcInfo = 0x00003FF0,
+	uppMediaRefConGetPropertyProcInfo = 0x00003FF0,
+	uppMediaNavigateTargetRefConProcInfo = 0x00000FF0,
+	uppMediaGGetIdleManagerProcInfo = 0x000003F0,
+	uppMediaGSetIdleManagerProcInfo = 0x000003F0,
+	uppMediaGGetLatencyProcInfo = 0x000003F0
 };
 
 

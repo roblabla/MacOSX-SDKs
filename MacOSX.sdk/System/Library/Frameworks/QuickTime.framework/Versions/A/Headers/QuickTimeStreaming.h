@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime-142~1
+     Version:    QuickTime_6
  
-     Copyright:  © 1990-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -30,6 +30,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -39,13 +40,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 enum {
   kQTSInfiniteDuration          = 0x7FFFFFFF,
@@ -111,7 +106,10 @@ enum {
   kQTSSourceInputMapInfo        = 'oimp', /* QTAtomContainer */
   kQTSInfo_DataProc             = 'datp', /* QTSDataProcParams* */
   kQTSInfo_SendDataExtras       = 'dext', /* QTSSendDataExtrasParams* */
-  kQTSInfo_HintTrackID          = 'htid' /* long* */
+  kQTSInfo_HintTrackID          = 'htid', /* long* */
+  kQTSInfo_URL                  = 'url ', /* Handle*, cstring in handle */
+  kQTSInfo_Authentication       = 'auup', /* QTSAuthenticationParams */
+  kQTSInfo_MediaPacketizer      = 'rmpk' /* ComponentInstance */
 };
 
 /* get only */
@@ -129,10 +127,17 @@ enum {
   kQTSCanHandleSendDataType     = 'chsd', /* QTSCanHandleSendDataTypeParams* */
   kQTSAnnotationsInfo           = 'meta', /* QTAtomContainer */
   kQTSRemainingBufferTimeInfo   = 'btms', /* UInt32* remaining buffer time before playback, in microseconds */
-  kQTSInfo_SettingsText         = 'sttx' /* QTSSettingsTextParams* */
+  kQTSInfo_SettingsText         = 'sttx', /* QTSSettingsTextParams* */
+  kQTSInfo_AverageFrameRate     = 'fps ' /* UnsignedFixed* */
 };
 
 
+struct QTSAuthenticationParams {
+  SInt32              flags;
+  const char *        userID;                 /* caller disposes of pointer*/
+  const char *        password;               /* caller disposes of pointer*/
+};
+typedef struct QTSAuthenticationParams  QTSAuthenticationParams;
 enum {
   kQTSTargetBufferDurationTimeScale = 1000
 };
@@ -486,7 +491,7 @@ typedef struct QTSExportParams          QTSExportParams;
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern OSErr 
-InitializeQTS(void);
+InitializeQTS(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -499,7 +504,7 @@ InitializeQTS(void);
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern OSErr 
-TerminateQTS(void);
+TerminateQTS(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*-----------------------------------------
@@ -517,7 +522,7 @@ TerminateQTS(void);
 extern OSErr 
 QTSNewPresentation(
   const QTSNewPresentationParams *  inParams,
-  QTSPresentation *                 outPresentation);
+  QTSPresentation *                 outPresentation)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -535,7 +540,7 @@ QTSNewPresentationFromData(
   const void *           inData,
   const SInt64 *         inDataLength,
   const QTSPresParams *  inPresParams,
-  QTSPresentation *      outPresentation);
+  QTSPresentation *      outPresentation)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -551,7 +556,7 @@ extern OSErr
 QTSNewPresentationFromFile(
   const FSSpec *         inFileSpec,
   const QTSPresParams *  inPresParams,
-  QTSPresentation *      outPresentation);
+  QTSPresentation *      outPresentation)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -568,7 +573,7 @@ QTSNewPresentationFromDataRef(
   Handle                 inDataRef,
   OSType                 inDataRefType,
   const QTSPresParams *  inPresParams,
-  QTSPresentation *      outPresentation);
+  QTSPresentation *      outPresentation)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -583,7 +588,7 @@ QTSNewPresentationFromDataRef(
 extern OSErr 
 QTSDisposePresentation(
   QTSPresentation   inPresentation,
-  SInt32            inFlags);
+  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -599,7 +604,7 @@ extern OSErr
 QTSPresExport(
   QTSPresentation    inPresentation,
   QTSStream          inStream,
-  QTSExportParams *  inExportParams);
+  QTSExportParams *  inExportParams)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -614,7 +619,7 @@ QTSPresExport(
 extern void 
 QTSPresIdle(
   QTSPresentation      inPresentation,
-  QTSPresIdleParams *  ioParams);
+  QTSPresIdleParams *  ioParams)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -629,7 +634,7 @@ QTSPresIdle(
 extern OSErr 
 QTSPresInvalidateRegion(
   QTSPresentation   inPresentation,
-  RgnHandle         inRegion);
+  RgnHandle         inRegion)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*-----------------------------------------
@@ -648,7 +653,7 @@ extern OSErr
 QTSPresSetFlags(
   QTSPresentation   inPresentation,
   SInt32            inFlags,
-  SInt32            inFlagsMask);
+  SInt32            inFlagsMask)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -663,7 +668,7 @@ QTSPresSetFlags(
 extern OSErr 
 QTSPresGetFlags(
   QTSPresentation   inPresentation,
-  SInt32 *          outFlags);
+  SInt32 *          outFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -678,7 +683,7 @@ QTSPresGetFlags(
 extern OSErr 
 QTSPresGetTimeBase(
   QTSPresentation   inPresentation,
-  TimeBase *        outTimeBase);
+  TimeBase *        outTimeBase)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -693,7 +698,7 @@ QTSPresGetTimeBase(
 extern OSErr 
 QTSPresGetTimeScale(
   QTSPresentation   inPresentation,
-  TimeScale *       outTimeScale);
+  TimeScale *       outTimeScale)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -710,7 +715,7 @@ QTSPresSetInfo(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   OSType            inSelector,
-  void *            ioParam);
+  void *            ioParam)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -727,7 +732,7 @@ QTSPresGetInfo(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   OSType            inSelector,
-  void *            ioParam);
+  void *            ioParam)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -744,7 +749,7 @@ QTSPresHasCharacteristic(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   OSType            inCharacteristic,
-  Boolean *         outHasIt);
+  Boolean *         outHasIt)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -760,7 +765,7 @@ extern OSErr
 QTSPresSetNotificationProc(
   QTSPresentation      inPresentation,
   QTSNotificationUPP   inNotificationProc,
-  void *               inRefCon);
+  void *               inRefCon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -776,7 +781,7 @@ extern OSErr
 QTSPresGetNotificationProc(
   QTSPresentation       inPresentation,
   QTSNotificationUPP *  outNotificationProc,
-  void **               outRefCon);
+  void **               outRefCon)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*-----------------------------------------
@@ -796,7 +801,7 @@ QTSPresPreview(
   QTSStream            inStream,
   const TimeValue64 *  inTimeValue,
   Fixed                inRate,
-  SInt32               inFlags);
+  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -814,7 +819,7 @@ QTSPresPreroll(
   QTSStream         inStream,
   UInt32            inTimeValue,
   Fixed             inRate,
-  SInt32            inFlags);
+  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -832,7 +837,7 @@ QTSPresPreroll64(
   QTSStream            inStream,
   const TimeValue64 *  inPrerollTime,
   Fixed                inRate,
-  SInt32               inFlags);
+  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -848,7 +853,7 @@ extern OSErr
 QTSPresStart(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  SInt32            inFlags);
+  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -863,7 +868,7 @@ QTSPresStart(
 extern OSErr 
 QTSPresSkipTo(
   QTSPresentation   inPresentation,
-  UInt32            inTimeValue);
+  UInt32            inTimeValue)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -878,7 +883,7 @@ QTSPresSkipTo(
 extern OSErr 
 QTSPresSkipTo64(
   QTSPresentation      inPresentation,
-  const TimeValue64 *  inTimeValue);
+  const TimeValue64 *  inTimeValue)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -894,7 +899,7 @@ extern OSErr
 QTSPresStop(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  SInt32            inFlags);
+  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*============================================================================
@@ -919,7 +924,7 @@ QTSPresNewStream(
   const void *      inData,
   UInt32            inDataLength,
   SInt32            inFlags,
-  QTSStream *       outStream);
+  QTSStream *       outStream)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -934,7 +939,7 @@ QTSPresNewStream(
 extern OSErr 
 QTSDisposeStream(
   QTSStream   inStream,
-  SInt32      inFlags);
+  SInt32      inFlags)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -947,7 +952,7 @@ QTSDisposeStream(
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern UInt32 
-QTSPresGetNumStreams(QTSPresentation inPresentation);
+QTSPresGetNumStreams(QTSPresentation inPresentation)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -962,7 +967,7 @@ QTSPresGetNumStreams(QTSPresentation inPresentation);
 extern QTSStream 
 QTSPresGetIndStream(
   QTSPresentation   inPresentation,
-  UInt32            inIndex);
+  UInt32            inIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -975,7 +980,7 @@ QTSPresGetIndStream(
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern QTSPresentation 
-QTSGetStreamPresentation(QTSStream inStream);
+QTSGetStreamPresentation(QTSStream inStream)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -991,7 +996,7 @@ extern OSErr
 QTSPresSetPreferredRate(
   QTSPresentation   inPresentation,
   Fixed             inRate,
-  SInt32            inFlags);
+  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1006,7 +1011,7 @@ QTSPresSetPreferredRate(
 extern OSErr 
 QTSPresGetPreferredRate(
   QTSPresentation   inPresentation,
-  Fixed *           outRate);
+  Fixed *           outRate)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1022,7 +1027,7 @@ extern OSErr
 QTSPresSetEnable(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  Boolean           inEnableMode);
+  Boolean           inEnableMode)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1038,7 +1043,7 @@ extern OSErr
 QTSPresGetEnable(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  Boolean *         outEnableMode);
+  Boolean *         outEnableMode)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1054,7 +1059,7 @@ extern OSErr
 QTSPresSetPresenting(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  Boolean           inPresentingMode);
+  Boolean           inPresentingMode)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1070,7 +1075,7 @@ extern OSErr
 QTSPresGetPresenting(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  Boolean *         outPresentingMode);
+  Boolean *         outPresentingMode)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1087,7 +1092,7 @@ QTSPresSetActiveSegment(
   QTSPresentation      inPresentation,
   QTSStream            inStream,
   const TimeValue64 *  inStartTime,
-  const TimeValue64 *  inDuration);
+  const TimeValue64 *  inDuration)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1104,7 +1109,7 @@ QTSPresGetActiveSegment(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   TimeValue64 *     outStartTime,
-  TimeValue64 *     outDuration);
+  TimeValue64 *     outDuration)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1121,7 +1126,7 @@ QTSPresSetPlayHints(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   SInt32            inFlags,
-  SInt32            inFlagsMask);
+  SInt32            inFlagsMask)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1137,7 +1142,7 @@ extern OSErr
 QTSPresGetPlayHints(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  SInt32 *          outFlags);
+  SInt32 *          outFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*-----------------------------------------
@@ -1157,7 +1162,7 @@ QTSPresSetGWorld(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   CGrafPtr          inGWorld,
-  GDHandle          inGDHandle);
+  GDHandle          inGDHandle)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1174,7 +1179,7 @@ QTSPresGetGWorld(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   CGrafPtr *        outGWorld,
-  GDHandle *        outGDHandle);
+  GDHandle *        outGDHandle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1190,7 +1195,7 @@ extern OSErr
 QTSPresSetClip(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  RgnHandle         inClip);
+  RgnHandle         inClip)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1206,7 +1211,7 @@ extern OSErr
 QTSPresGetClip(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  RgnHandle *       outClip);
+  RgnHandle *       outClip)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1222,7 +1227,7 @@ extern OSErr
 QTSPresSetMatrix(
   QTSPresentation       inPresentation,
   QTSStream             inStream,
-  const MatrixRecord *  inMatrix);
+  const MatrixRecord *  inMatrix)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1238,7 +1243,7 @@ extern OSErr
 QTSPresGetMatrix(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  MatrixRecord *    outMatrix);
+  MatrixRecord *    outMatrix)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1255,7 +1260,7 @@ QTSPresSetDimensions(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   Fixed             inWidth,
-  Fixed             inHeight);
+  Fixed             inHeight)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1272,7 +1277,7 @@ QTSPresGetDimensions(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   Fixed *           outWidth,
-  Fixed *           outHeight);
+  Fixed *           outHeight)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1289,7 +1294,7 @@ QTSPresSetGraphicsMode(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   short             inMode,
-  const RGBColor *  inOpColor);
+  const RGBColor *  inOpColor)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1306,7 +1311,7 @@ QTSPresGetGraphicsMode(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   short *           outMode,
-  RGBColor *        outOpColor);
+  RGBColor *        outOpColor)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1322,7 +1327,7 @@ extern OSErr
 QTSPresGetPicture(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  PicHandle *       outPicture);
+  PicHandle *       outPicture)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*-----------------------------------------
@@ -1342,7 +1347,7 @@ QTSPresSetVolumes(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   short             inLeftVolume,
-  short             inRightVolume);
+  short             inRightVolume)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1359,7 +1364,7 @@ QTSPresGetVolumes(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   short *           outLeftVolume,
-  short *           outRightVolume);
+  short *           outRightVolume)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*-----------------------------------------
@@ -1370,7 +1375,7 @@ QTSPresGetVolumes(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in QuickTime.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0.1 and later
  */
 extern OSErr 
@@ -1381,7 +1386,7 @@ QTSPresGetSettingsAsText(
   OSType              inSettingsType,
   Handle *            outText,
   QTSPanelFilterUPP   inPanelFilterProc,
-  void *              inPanelFilterProcRefCon);
+  void *              inPanelFilterProcRefCon)                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -1398,7 +1403,7 @@ QTSPresSettingsDialog(
   QTSStream           inStream,
   SInt32              inFlags,
   QTSModalFilterUPP   inFilterProc,
-  void *              inFilterProcRefCon);
+  void *              inFilterProcRefCon)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1406,7 +1411,7 @@ QTSPresSettingsDialog(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in QuickTime.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0.1 and later
  */
 extern OSErr 
@@ -1417,7 +1422,7 @@ QTSPresSettingsDialogWithFilters(
   QTSModalFilterUPP   inFilterProc,
   void *              inFilterProcRefCon,
   QTSPanelFilterUPP   inPanelFilterProc,
-  void *              inPanelFilterProcRefCon);
+  void *              inPanelFilterProcRefCon)                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -1433,7 +1438,7 @@ QTSPresSetSettings(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   QTAtomSpecPtr     inSettings,
-  SInt32            inFlags);
+  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1449,7 +1454,7 @@ QTSPresGetSettings(
   QTSPresentation    inPresentation,
   QTSStream          inStream,
   QTAtomContainer *  outSettings,
-  SInt32             inFlags);
+  SInt32             inFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1465,7 +1470,7 @@ QTSPresAddSourcer(
   QTSPresentation     inPresentation,
   QTSStream           inStream,
   ComponentInstance   inSourcer,
-  SInt32              inFlags);
+  SInt32              inFlags)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1481,7 +1486,7 @@ QTSPresRemoveSourcer(
   QTSPresentation     inPresentation,
   QTSStream           inStream,
   ComponentInstance   inSourcer,
-  SInt32              inFlags);
+  SInt32              inFlags)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1495,7 +1500,7 @@ QTSPresRemoveSourcer(
 extern UInt32 
 QTSPresGetNumSourcers(
   QTSPresentation   inPresentation,
-  QTSStream         inStream);
+  QTSStream         inStream)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1511,7 +1516,7 @@ QTSPresGetIndSourcer(
   QTSPresentation      inPresentation,
   QTSStream            inStream,
   UInt32               inIndex,
-  ComponentInstance *  outSourcer);
+  ComponentInstance *  outSourcer)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*============================================================================
@@ -1534,7 +1539,7 @@ enum {
 extern OSErr 
 QTSSetNetworkAppName(
   const char *  inAppName,
-  SInt32        inFlags);
+  SInt32        inFlags)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1549,7 +1554,7 @@ QTSSetNetworkAppName(
 extern OSErr 
 QTSGetNetworkAppName(
   SInt32   inFlags,
-  char **  outCStringPtr);
+  char **  outCStringPtr)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*-----------------------------------------
@@ -1659,7 +1664,7 @@ QTSNewStatHelper(
   QTSStream         inStream,
   OSType            inStatType,
   SInt32            inFlags,
-  QTSStatHelper *   outStatHelper);
+  QTSStatHelper *   outStatHelper)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1672,7 +1677,7 @@ QTSNewStatHelper(
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern OSErr 
-QTSDisposeStatHelper(QTSStatHelper inStatHelper);
+QTSDisposeStatHelper(QTSStatHelper inStatHelper)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1685,7 +1690,7 @@ QTSDisposeStatHelper(QTSStatHelper inStatHelper);
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern OSErr 
-QTSStatHelperGetStats(QTSStatHelper inStatHelper);
+QTSStatHelperGetStats(QTSStatHelper inStatHelper)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1698,7 +1703,7 @@ QTSStatHelperGetStats(QTSStatHelper inStatHelper);
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern OSErr 
-QTSStatHelperResetIter(QTSStatHelper inStatHelper);
+QTSStatHelperResetIter(QTSStatHelper inStatHelper)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1713,7 +1718,7 @@ QTSStatHelperResetIter(QTSStatHelper inStatHelper);
 extern Boolean 
 QTSStatHelperNext(
   QTSStatHelper              inStatHelper,
-  QTSStatHelperNextParams *  ioParams);
+  QTSStatHelperNextParams *  ioParams)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1726,7 +1731,7 @@ QTSStatHelperNext(
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern UInt32 
-QTSStatHelperGetNumStats(QTSStatHelper inStatHelper);
+QTSStatHelperGetNumStats(QTSStatHelper inStatHelper)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* used by components to put statistics into the atom container */
@@ -1743,7 +1748,7 @@ extern OSErr
 QTSGetOrMakeStatAtomForStream(
   QTAtomContainer   inContainer,
   QTSStream         inStream,
-  QTAtom *          outParentAtom);
+  QTAtom *          outParentAtom)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1763,7 +1768,7 @@ QTSInsertStatistic(
   void *            inStatData,
   UInt32            inStatDataLength,
   OSType            inStatDataFormat,
-  SInt32            inFlags);
+  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1781,7 +1786,7 @@ QTSInsertStatisticName(
   QTAtom            inParentAtom,
   OSType            inStatType,
   const char *      inStatName,
-  UInt32            inStatNameLength);
+  UInt32            inStatNameLength)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -1800,7 +1805,7 @@ QTSInsertStatisticUnits(
   OSType            inStatType,
   OSType            inUnitsType,
   const char *      inUnitsName,
-  UInt32            inUnitsNameLength);
+  UInt32            inUnitsNameLength)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*============================================================================
@@ -1884,7 +1889,6 @@ typedef struct QTSClipRectAtom          QTSClipRectAtom;
 enum {
   kQTSEmptyEditStreamStartTime  = -1
 };
-
 
 
 typedef UInt32                          QTSStatus;
@@ -1973,6 +1977,17 @@ struct QTSNoProxyPref {
 };
 typedef struct QTSNoProxyPref           QTSNoProxyPref;
 enum {
+  kQTSInstantOnFlag_Enable      = (1L << 0), /* instant on is enabled (read/write)*/
+  kQTSInstantOnFlag_Permitted   = (1L << 1) /* instant on is possible (read only)*/
+};
+
+
+struct QTSInstantOnPref {
+  SInt32              flags;                  /* flags*/
+  SInt32              factor;                 /*    0-100; default is 50*/
+};
+typedef struct QTSInstantOnPref         QTSInstantOnPref;
+enum {
   kQTSTransAndProxyAtomType     = 'strp', /* transport/proxy prefs root atom*/
   kQTSConnectionPrefsVersion    = 'vers', /*   prefs format version*/
   kQTSTransportPrefsAtomType    = 'trns', /*   tranport prefs root atom*/
@@ -1983,10 +1998,11 @@ enum {
   kQTSProxyPrefsAtomType        = 'prxy', /*   proxy prefs root atom*/
   kQTSHTTPProxyPrefsType        = 'http', /*     http proxy settings*/
   kQTSRTSPProxyPrefsType        = 'rtsp', /*     rtsp proxy settings*/
-  kQTSSOCKSProxyPrefsType       = 'scks', /*     socks proxy settings*/
+  kQTSSOCKSProxyPrefsType       = 'sock', /*     socks proxy settings*/
   kQTSProxyUserInfoPrefsType    = 'user', /*   proxy username/password root atom*/
   kQTSDontProxyPrefsAtomType    = 'nopr', /*   no-proxy prefs root atom*/
-  kQTSDontProxyDataType         = 'data' /*     no proxy settings*/
+  kQTSDontProxyDataType         = 'data', /*     no proxy settings*/
+  kQTSInstantOnPrefsAtomType    = 'inon' /* instant on prefs*/
 };
 
 /*
@@ -2004,7 +2020,7 @@ QTSPrefsAddProxySetting(
   SInt32   portID,
   UInt32   flags,
   UInt32   seed,
-  Str255   srvrURL);
+  Str255   srvrURL)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2022,7 +2038,7 @@ QTSPrefsFindProxyByType(
   UInt32           flags,
   UInt32           flagsMask,
   QTSProxyPref **  proxyHndl,
-  SInt16 *         count);
+  SInt16 *         count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2039,7 +2055,7 @@ QTSPrefsAddConnectionSetting(
   OSType   protocol,
   SInt32   portID,
   UInt32   flags,
-  UInt32   seed);
+  UInt32   seed)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2057,7 +2073,7 @@ QTSPrefsFindConnectionByType(
   UInt32               flags,
   UInt32               flagsMask,
   QTSTransportPref **  connectionHndl,
-  SInt16 *             count);
+  SInt16 *             count)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2072,7 +2088,7 @@ QTSPrefsFindConnectionByType(
 extern OSErr 
 QTSPrefsGetActiveConnection(
   OSType              protocol,
-  QTSTransportPref *  connectInfo);
+  QTSTransportPref *  connectInfo)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2085,7 +2101,7 @@ QTSPrefsGetActiveConnection(
  *    Windows:          in QTSClient.lib 4.1 and later
  */
 extern OSErr 
-QTSPrefsGetNoProxyURLs(QTSNoProxyPref ** noProxyHndl);
+QTSPrefsGetNoProxyURLs(QTSNoProxyPref ** noProxyHndl)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2101,7 +2117,7 @@ extern OSErr
 QTSPrefsSetNoProxyURLs(
   char *   urls,
   UInt32   flags,
-  UInt32   seed);
+  UInt32   seed)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2109,7 +2125,7 @@ QTSPrefsSetNoProxyURLs(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in QuickTime.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0.1 and later
  *    Windows:          in QTSClient.lib 5.0.1 and later
  */
@@ -2119,7 +2135,7 @@ QTSPrefsAddProxyUserInfo(
   SInt32      flags,
   SInt32      flagsMask,
   StringPtr   username,
-  StringPtr   password);
+  StringPtr   password)                                       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -2127,7 +2143,7 @@ QTSPrefsAddProxyUserInfo(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in QuickTime.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0.1 and later
  *    Windows:          in QTSClient.lib 5.0.1 and later
  */
@@ -2137,8 +2153,37 @@ QTSPrefsFindProxyUserInfoByType(
   SInt32      flags,
   SInt32      flagsMask,
   StringPtr   username,
-  StringPtr   password);
+  StringPtr   password)                                       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
+
+/*
+ *  QTSPrefsGetInstantOnSettings()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QTStreamLib 6.0 and later
+ *    Windows:          in QTSClient.lib 6.0 and later
+ */
+extern OSErr 
+QTSPrefsGetInstantOnSettings(
+  QTSInstantOnPref *  outPref,
+  SInt32              inFlags)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  QTSPrefsSetInstantOnSettings()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   in QTStreamLib 6.0 and later
+ *    Windows:          in QTSClient.lib 6.0 and later
+ */
+extern OSErr 
+QTSPrefsSetInstantOnSettings(
+  QTSInstantOnPref *  inPref,
+  SInt32              inFlags)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
@@ -2166,7 +2211,7 @@ extern Ptr
 QTSNewPtr(
   UInt32    inByteCount,
   SInt32    inFlags,
-  SInt32 *  outFlags);
+  SInt32 *  outFlags)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2182,7 +2227,7 @@ extern Handle
 QTSNewHandle(
   UInt32    inByteCount,
   SInt32    inFlags,
-  SInt32 *  outFlags);
+  SInt32 *  outFlags)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #define QTSNewPtrClear(_s)      QTSNewPtr((_s), kQTSMemAllocClearMem, NULL)
@@ -2223,7 +2268,7 @@ typedef struct OpaqueQTSMemPtr*         QTSMemPtr;
 extern QTSMemPtr 
 QTSAllocMemPtr(
   UInt32   inByteCount,
-  SInt32   inFlags);
+  SInt32   inFlags)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2238,7 +2283,7 @@ QTSAllocMemPtr(
 extern void 
 QTSReleaseMemPtr(
   QTSMemPtr   inMemPtr,
-  SInt32      inFlags);
+  SInt32      inFlags)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2286,7 +2331,7 @@ extern OSErr
 QTSNewStreamBuffer(
   UInt32              inDataSize,
   SInt32              inFlags,
-  QTSStreamBuffer **  outStreamBuffer);
+  QTSStreamBuffer **  outStreamBuffer)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2299,7 +2344,7 @@ QTSNewStreamBuffer(
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern void 
-QTSFreeMessage(QTSStreamBuffer * inMessage);
+QTSFreeMessage(QTSStreamBuffer * inMessage)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2320,7 +2365,7 @@ extern OSErr
 QTSDuplicateMessage(
   QTSStreamBuffer *   inMessage,
   SInt32              inFlags,
-  QTSStreamBuffer **  outDuplicatedMessage);
+  QTSStreamBuffer **  outDuplicatedMessage)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2333,7 +2378,7 @@ QTSDuplicateMessage(
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern UInt32 
-QTSMessageLength(QTSStreamBuffer * inMessage);
+QTSMessageLength(QTSStreamBuffer * inMessage)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2349,7 +2394,7 @@ extern void
 QTSStreamBufferDataInfo(
   QTSStreamBuffer *  inStreamBuffer,
   unsigned char **   outDataStart,
-  UInt32 *           outDataMaxLength);
+  UInt32 *           outDataMaxLength)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* ---- old calls (don't use these)*/
@@ -2364,7 +2409,7 @@ QTSStreamBufferDataInfo(
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern QTSStreamBuffer * 
-QTSAllocBuffer(SInt32 inSize);
+QTSAllocBuffer(SInt32 inSize)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2377,7 +2422,7 @@ QTSAllocBuffer(SInt32 inSize);
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern QTSStreamBuffer * 
-QTSDupMessage(QTSStreamBuffer * inMessage);
+QTSDupMessage(QTSStreamBuffer * inMessage)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2390,7 +2435,7 @@ QTSDupMessage(QTSStreamBuffer * inMessage);
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern QTSStreamBuffer * 
-QTSCopyMessage(QTSStreamBuffer * inMessage);
+QTSCopyMessage(QTSStreamBuffer * inMessage)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2403,7 +2448,7 @@ QTSCopyMessage(QTSStreamBuffer * inMessage);
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern QTSStreamBuffer * 
-QTSFlattenMessage(QTSStreamBuffer * inMessage);
+QTSFlattenMessage(QTSStreamBuffer * inMessage)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -2425,7 +2470,7 @@ QTSGetErrorString(
   SInt32   inErrorCode,
   UInt32   inMaxErrorStringLength,
   char *   outErrorString,
-  SInt32   inFlags);
+  SInt32   inFlags)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2433,12 +2478,12 @@ QTSGetErrorString(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in QuickTime.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
+ *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0.1 and later
  *    Windows:          in QTSClient.lib 5.0.1 and later
  */
 extern OSErr 
-QTSInitializeMediaParams(QTSMediaParams * inMediaParams);
+QTSInitializeMediaParams(QTSMediaParams * inMediaParams)      AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 
@@ -2453,18 +2498,18 @@ QTSInitializeMediaParams(QTSMediaParams * inMediaParams);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTSNotificationUPP
-NewQTSNotificationUPP(QTSNotificationProcPtr userRoutine);
+NewQTSNotificationUPP(QTSNotificationProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewQTSPanelFilterUPP()
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in QuickTime.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTSPanelFilterUPP
-NewQTSPanelFilterUPP(QTSPanelFilterProcPtr userRoutine);
+NewQTSPanelFilterUPP(QTSPanelFilterProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  NewQTSModalFilterUPP()
@@ -2475,7 +2520,7 @@ NewQTSPanelFilterUPP(QTSPanelFilterProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTSModalFilterUPP
-NewQTSModalFilterUPP(QTSModalFilterProcPtr userRoutine);
+NewQTSModalFilterUPP(QTSModalFilterProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQTSNotificationUPP()
@@ -2486,18 +2531,18 @@ NewQTSModalFilterUPP(QTSModalFilterProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTSNotificationUPP(QTSNotificationUPP userUPP);
+DisposeQTSNotificationUPP(QTSNotificationUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeQTSPanelFilterUPP()
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in QuickTime.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTSPanelFilterUPP(QTSPanelFilterUPP userUPP);
+DisposeQTSPanelFilterUPP(QTSPanelFilterUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  DisposeQTSModalFilterUPP()
@@ -2508,7 +2553,7 @@ DisposeQTSPanelFilterUPP(QTSPanelFilterUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTSModalFilterUPP(QTSModalFilterUPP userUPP);
+DisposeQTSModalFilterUPP(QTSModalFilterUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQTSNotificationUPP()
@@ -2524,21 +2569,21 @@ InvokeQTSNotificationUPP(
   OSType              inNotificationType,
   void *              inNotificationParams,
   void *              inRefCon,
-  QTSNotificationUPP  userUPP);
+  QTSNotificationUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeQTSPanelFilterUPP()
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in QuickTime.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern Boolean
 InvokeQTSPanelFilterUPP(
   QTSPanelFilterParams *  inParams,
   void *                  inRefCon,
-  QTSPanelFilterUPP       userUPP);
+  QTSPanelFilterUPP       userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  InvokeQTSModalFilterUPP()
@@ -2554,16 +2599,10 @@ InvokeQTSModalFilterUPP(
   const EventRecord *  inEvent,
   SInt16 *             ioItemHit,
   void *               inRefCon,
-  QTSModalFilterUPP    userUPP);
+  QTSModalFilterUPP    userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

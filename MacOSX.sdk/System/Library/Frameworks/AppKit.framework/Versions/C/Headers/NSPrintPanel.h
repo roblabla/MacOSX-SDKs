@@ -1,21 +1,23 @@
 /*
 	NSPrintPanel.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2002, Apple Computer, Inc.
 	All rights reserved.
 */
 
-
+#import <AppKit/AppKitDefines.h>
 #import <Foundation/NSObject.h>
 
+@class NSPrintInfo, NSView, NSWindow;
 
-@class NSPopUpButton, NSPrintInfo, NSView, NSWindow;
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
+// Valid values for passing into -[NSPrintPanel setJobStyleHint:].
+APPKIT_EXTERN NSString *NSPrintPhotoJobStyleHint;
 
-#ifndef WIN32
+#endif
 
-
-// Tags for use with -viewWithTag:.  NSPAGELAYOUT IS NO LONGER A SUBCLASS OF NSPANEL.  THESE ARE ALL DEPRECATED.
+// Tags for use with -viewWithTag:.  NSPRINTPANEL IS NO LONGER A SUBCLASS OF NSPANEL.  THESE ARE ALL DEPRECATED.
 enum {
     NSPPSaveButton			= 3,
     NSPPPreviewButton			= 4,
@@ -37,7 +39,6 @@ enum {
     NSPPPaperFeedButton			= 55,
     NSPPLayoutButton			= 56
 };
-
 
 @interface NSPrintPanel : NSObject
 
@@ -63,6 +64,14 @@ enum {
 - (NSView *)accessoryView;
 - (void)setAccessoryView:(NSView *)aView;
 
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+// Set or get a string that provides a hint about the type of print job in which this print panel is being used.  This controls the set of items that appear in the Presets menu.  The string must be one of the job style hint strings declared above, or nil to provide no hint.
+- (void)setJobStyleHint:(NSString *)hint;
+- (NSString *)jobStyleHint;
+
+#endif
+
 // Communicating with the NSPrintInfo object.
 - (void)updateFromPrintInfo;
 - (void)finalWritePrintInfo;
@@ -73,38 +82,3 @@ enum {
 - (void)pickedLayoutList:(id)sender;
 
 @end // interface NSPrintPanel
-
-
-#else  WIN32
-
-
-@interface NSPrintPanel : NSObject
-
-// Instance variables.
-{
-
-    // All instance variables are private.
-    void *_printdlg;
-    NSPrintInfo *_printInfo;
-    id _accessoryView;
-    NSPopUpButton *_printServicesPopUp;
-    BOOL _checkedForPrintServicesPopUp;
-    unsigned int _reservedPrintPanel1;
-
-}
-
-// Class methods.
-+ (NSPrintPanel *)printPanel;
-
-// Instance methods.
-- (void)setAccessoryView:(NSView *)aView;
-- (NSView *)accessoryView;
-- (void)updateFromPrintInfo;
-- (void)finalWritePrintInfo;
-- (int) runModal;
-
-@end // interface NSPrintPanel
-
-
-#endif WIN32
-

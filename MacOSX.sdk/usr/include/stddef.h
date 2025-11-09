@@ -60,6 +60,7 @@
 #ifndef __STDDEF_H__
 #define __STDDEF_H__
 
+#include <machine/types.h>
 #include <machine/ansi.h>
 
 typedef	_BSD_PTRDIFF_T_	ptrdiff_t;
@@ -69,18 +70,22 @@ typedef	_BSD_PTRDIFF_T_	ptrdiff_t;
 typedef	_BSD_SIZE_T_	size_t;
 #endif
 
+#if !defined(_ANSI_SOURCE)
+#ifndef _BSD_RUNE_T_DEFINED_
+#define _BSD_RUNE_T_DEFINED_
+typedef _BSD_RUNE_T_    rune_t;
+#endif
+#endif
+
 #ifndef	_BSD_WCHAR_T_DEFINED_
 #define	_BSD_WCHAR_T_DEFINED_
 typedef	_BSD_WCHAR_T_	wchar_t;
-#ifndef _ANSI_SOURCE
-typedef	_BSD_RUNE_T_	rune_t;
-#endif
 #endif
 
 #ifndef	NULL
 #define	NULL	0
 #endif
 
-#define	offsetof(type, member)	((size_t)(&((type *)0)->member))
+#define         offsetof(type, member)  __offsetof(type, member)
 
 #endif /* __STDDEF_H__ */

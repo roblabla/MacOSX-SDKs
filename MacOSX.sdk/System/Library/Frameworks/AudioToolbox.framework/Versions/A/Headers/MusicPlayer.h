@@ -19,12 +19,10 @@
 #define __MusicPlayer
 
 #include <CoreServices/CoreServices.h>
-
-#if TARGET_API_MAC_OSX
+#include <CoreFoundation/CoreFoundation.h>
 #include <AudioUnit/MusicDevice.h>
 #include <AudioToolbox/AUGraph.h>
 #include <CoreMIDI/MIDIServices.h>
-#endif
 
 #if defined(__cplusplus)
 extern "C"
@@ -35,7 +33,7 @@ extern "C"
 // Basic idea behind the Sequencing Services APIs:
 //
 //		A MusicSequence contains an arbitrary number of tracks (MusicTrack)
-//		each of which contains time-stamped (typically in units of beats, or seconds )
+//		each of which contains time-stamped (in units of beats)
 //		events in time-increasing order.  There are various types of events, defined below,
 //		including the expected MIDI events, tempo, and extended events.
 //		A MusicTrack has properties which may be inspected and assigned, including support
@@ -56,13 +54,20 @@ extern "C"
 //
 // MusicTrack properties are:
 //		- AUNode (in the AUGraph) of the AudioUnit addressed by the MusicTrack
-//		- textual info
 //		- mute / solo state
 //		- offset time
 //		- loop time and number of loops
+//				The default looping behaviour is to loop once through the entire track
+//				pass zero in for inNumberOfLoops to loop forever
 //		- time units for the event timestamps (beats, seconds, ...)
 //			beats go through tempo map, seconds map absolute time
-
+//		- automated - in this case the track:
+//			(1) Can only contain parameter events
+//				- these events are interpreted as points in the automation curve
+//			(2) Track can only address a v2 AudioUnit 
+//		- duration - the time of the last event in the track plus any additional time that is allowed
+//			when for instance a MIDI file is read in and puts its end of track event past the last event
+//			to allow for fading out of ending notes
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -71,7 +76,7 @@ extern "C"
 // music event types, including both MIDI and "extended" protocol
 enum
 {
-	kMusicEventType_NULL					= 0,
+	kMusicEventType_NULL				= 0,
 	kMusicEventType_ExtendedNote,		// note with variable number of arguments (non-MIDI)
 	kMusicEventType_ExtendedControl,	// control change (non-MIDI)
 	kMusicEventType_ExtendedTempo,		// tempo change in BPM
@@ -80,8 +85,23 @@ enum
 	kMusicEventType_MIDINoteMessage,	// MIDI note-on with duration (for note-off)
 	kMusicEventType_MIDIChannelMessage,	// MIDI channel messages (other than note-on/off)
 	kMusicEventType_MIDIRawData,		// for system exclusive data
+	kMusicEventType_Parameter,			// general purpose AudioUnit parameter
+	kMusicEventType_AUPreset,			// this is the AU's user preset CFDictionaryRef (the ClassInfo property)
 	kMusicEventType_Last				// always keep at end
 };
+
+// these are flags that can be passed in with MusicSequenceLoadSMFDataWithFlags
+
+enum
+{
+	//if this flag is set the resultant Sequence will contain:
+	// a tempo track
+	// 1 track for each MIDI Channel that is found in the SMF
+	// 1 track for SysEx or MetaEvents - this will be the last track 
+	// in the sequence after the LoadSMFWithFlags calls
+	kMusicSequenceLoadSMF_ChannelsToTracks 	= (1 << 0)
+};
+typedef UInt32		MusicSequenceLoadFlags;
 
 typedef UInt32		MusicEventType;
 typedef Float64		MusicTimeStamp;
@@ -100,7 +120,7 @@ typedef struct MIDINoteMessage
 	UInt8		channel;
 	UInt8		note;
 	UInt8		velocity;
-	UInt8		reserved;
+	UInt8		releaseVelocity;	// was "reserved". 0 is the correct value when you don't know.
 	Float32		duration;
 } MIDINoteMessage;
 
@@ -123,10 +143,18 @@ typedef struct MIDIRawData
 typedef struct MIDIMetaEvent
 {
 	UInt8		metaEventType;
+	UInt8		unused1;
+	UInt8		unused2;
+	UInt8		unused3;
 	UInt32		dataLength;
 	UInt8		data[1];
 } MIDIMetaEvent;
 
+typedef struct MusicEventUserData
+{
+	UInt32		length;
+	UInt8		data[1];
+} MusicEventUserData;
 
 typedef struct ExtendedNoteOnEvent
 {
@@ -136,15 +164,6 @@ typedef struct ExtendedNoteOnEvent
 	MusicDeviceNoteParams		extendedParams;
 } ExtendedNoteOnEvent;
 
-// allocated space for 16 arguments
-typedef struct ExtendedNoteOnEvent16
-{
-	MusicDeviceInstrumentID		instrumentID;
-	MusicDeviceGroupID			groupID;
-	Float32						duration;
-	MusicDeviceNoteParams16		extendedParams;
-} ExtendedNoteOnEvent16;
-
 typedef struct ExtendedControlEvent
 {
 	MusicDeviceGroupID			groupID;
@@ -152,15 +171,39 @@ typedef struct ExtendedControlEvent
 	Float32						value;
 } ExtendedControlEvent;
 
+typedef struct ParameterEvent
+{
+	AudioUnitParameterID		parameterID;
+	AudioUnitScope				scope;
+    AudioUnitElement			element;
+	Float32						value;
+} ParameterEvent;
+
 typedef struct ExtendedTempoEvent
 {
 	Float64		bpm;
 } ExtendedTempoEvent;
 
+typedef struct AUPresetEvent
+{
+	AudioUnitScope				scope;
+    AudioUnitElement			element;
+	CFPropertyListRef 			preset;
+} AUPresetEvent;
+
 typedef struct OpaqueMusicPlayer		*MusicPlayer;
 typedef struct OpaqueMusicSequence		*MusicSequence;
 typedef struct OpaqueMusicTrack			*MusicTrack;
 typedef struct OpaqueMusicEventIterator *MusicEventIterator;
+
+// See MusicSequenceSetUserCallback
+typedef CALLBACK_API_C( void , MusicSequenceUserCallback )(void 	*inClientData,
+										MusicSequence					inSequence,
+										MusicTrack						inTrack,
+										MusicTimeStamp					inEventTime,
+										const MusicEventUserData		*inEventData,
+										MusicTimeStamp					inStartSliceBeat,
+										MusicTimeStamp					inEndSliceBeat);
 
 enum
 {
@@ -169,8 +212,16 @@ enum
 	kAudioToolboxErr_EndOfTrack				= -10857,
 	kAudioToolboxErr_StartOfTrack			= -10856,
     kAudioToolboxErr_IllegalTrackDestination = -10855,
-    kAudioToolboxErr_NoSequence 			= -10854
+    kAudioToolboxErr_NoSequence 			= -10854,
+	kAudioToolboxErr_InvalidEventType		= -10853,
+	kAudioToolboxErr_InvalidPlayerState		= -10852,
+	kAudioToolboxErr_CannotDoInCurrentContext = -10863
 };
+
+// Can't dispose a sequence whilst a MusicPlayer has it. Thus either, before disposing a MusicSequence
+// you either DiposeMusicPlayer or MusicPlayerSetSequence (NULL or another sequence)
+// DisposeMusicSequence will return kAudioToolboxErr_CannotDoInCurrentContext if disposing a sequence 
+// that is in use.
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // MusicPlayer (transport) API's
@@ -181,28 +232,70 @@ extern OSStatus			DisposeMusicPlayer(		MusicPlayer		inPlayer );
 
 
 extern OSStatus			MusicPlayerSetSequence(	MusicPlayer 	inPlayer,
-											MusicSequence 	inSequence);
+												MusicSequence 	inSequence);
+
+extern OSStatus			MusicPlayerGetSequence(	MusicPlayer 	inPlayer,
+												MusicSequence 	*outSequence);
 
 								
-
+// The Get and Set Time calls take a specification of time
+// as beats. This positions (or retrieves) the time as beats
+// based on the attached Sequence of the MusicPlayer 
 extern OSStatus			MusicPlayerSetTime(		MusicPlayer 	inPlayer,
-											MusicTimeStamp 	inTime );
+												MusicTimeStamp 	inTime );
 
 extern OSStatus			MusicPlayerGetTime(		MusicPlayer 	inPlayer,
-											MusicTimeStamp	*outTime );
+												MusicTimeStamp	*outTime );
+
+// Returns a host time value for a given beats time based on the
+// time that the sequence started playing.
+//
+// As this call is only valid if the player is playing this
+// call will return an error if the player is not playing or
+// the postion of the player (its "starting beat") when the
+// player was started.
+// (see the MusicSequence calls for beat<->seconds calls for these speculations)
+//
+// This call is totally dependent on the Sequence attached to the Player,
+// (primarily the tempo map of the Sequence), so the player must have
+// a sequence attached to it or an error is returned.
+extern OSStatus			MusicPlayerGetHostTimeForBeats (MusicPlayer 	inPlayer,
+												   MusicTimeStamp		inBeats,
+												   UInt64*				outHostTime);
+
+// Returns a time in beats given a host time based on the
+// time that the sequence started playing.
+//
+// As this call is only valid if the player is playing this
+// call will return an error if the player is not playing, or
+// if inHostTime is sometime before the Player was started.
+// (see the MusicSequence calls for beat<->seconds calls for these speculations)
+//
+// This call is totally dependent on the Sequence attached to the Player,
+// (primarily the tempo map of the Sequence), so the player must have
+// a sequence attached to it or an error is returned.
+extern OSStatus			MusicPlayerGetBeatsForHostTime (MusicPlayer 	inPlayer,
+												   UInt64				inHostTime,
+												   MusicTimeStamp		*outBeats );
 
 // allows synth devices to load instrument samples, etc.
 extern OSStatus			MusicPlayerPreroll(		MusicPlayer 	inPlayer);	
-
-
 
 extern OSStatus			MusicPlayerStart(		MusicPlayer 	inPlayer);
 
 extern OSStatus			MusicPlayerStop(		MusicPlayer 	inPlayer);
 
+// This call returns a non-zero value in outIsPlaying if the player has been
+// started and not stopped. It may have "played" past the valid events of the attached
+// MusicSequence, but it is still considered to be playing (and its time value increasing)
+// in that situation.
+extern OSStatus			MusicPlayerIsPlaying (	MusicPlayer 	inPlayer, Boolean* outIsPlaying);
 
+// This call will Scale the playback rate by the specified amount
+// It will alter the scheduling of events - so cannot be 0 or less than zero.
+extern OSStatus 		MusicPlayerSetPlayRateScalar (MusicPlayer inPlayer, Float64 inScaleRate);
 
-
+extern OSStatus			MusicPlayerGetPlayRateScalar (MusicPlayer inPlayer, Float64 *outScaleRate);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // MusicSequence API's
@@ -227,7 +320,7 @@ extern OSStatus			MusicSequenceGetIndTrack(	MusicSequence 		inSequence,
 													UInt32 				inTrackIndex,
 													MusicTrack 			*outTrack );
 
-// returns error code if track is not found in the sequence
+// returns error if track is not found in the sequence
 extern OSStatus			MusicSequenceGetTrackIndex(	MusicSequence 		inSequence,
 													MusicTrack 			inTrack,
 													UInt32				*outTrackIndex );
@@ -237,7 +330,7 @@ extern OSStatus			MusicSequenceGetTrackIndex(	MusicSequence 		inSequence,
 // MusicSequenceGetTrackCount / MusicSequenceGetIndTrack) have effect on playback.
 // This track may be edited like any other, however.
 extern OSStatus			MusicSequenceGetTempoTrack(	MusicSequence		inSequence,
-													MusicTrack			*outTrack);
+													MusicTrack			*outTrack );
 
 
 // To address the sequence events to a particular AUGraph, use MusicSequenceSetAUGraph()
@@ -256,7 +349,7 @@ extern OSStatus			MusicSequenceSetAUGraph(	MusicSequence 	inSequence,
 
 
 extern OSStatus			MusicSequenceGetAUGraph(	MusicSequence 	inSequence,
-													AUGraph 		*outGraph);
+													AUGraph 		*outGraph );
 
 // convenience function which sets the destination of each MusicTrack in the MusicSequence
 // to the given MIDIEndpointRef
@@ -270,12 +363,33 @@ extern OSStatus			MusicSequenceSetMIDIEndpoint(	MusicSequence 	inSequence,
 
 // MusicSequenceLoadSMF() also intelligently parses an RMID file to extract SMF part
 extern OSStatus			MusicSequenceLoadSMF(		MusicSequence 	inSequence,
-													FSSpec		 	*inFileSpec );
+													const FSSpec	*inFileSpec );
+
+extern OSStatus			MusicSequenceLoadSMFData(	MusicSequence	inSequence,
+													CFDataRef		inData );
+
+// passing a value of zero for the flags makes this call equivalent to MusicSequenceLoadSMFData
+// a paramErr is returned if the sequence has ANY data in it and the flags value is != 0
+// This will create a sequence with the first tracks containing MIDI Channel data
+// IF the MIDI file had Meta events or SysEx data, then the last track in the sequence
+// will contain that data.
+extern OSStatus			MusicSequenceLoadSMFWithFlags (MusicSequence			inSequence,
+													FSRef					*inFileRef,
+													MusicSequenceLoadFlags	inFlags );
+
+extern OSStatus			MusicSequenceLoadSMFDataWithFlags (	MusicSequence	inSequence,
+													CFDataRef				inData,
+													MusicSequenceLoadFlags	inFlags );
+
 								
 // inResolution is relationship between "tick" and quarter note for saving to SMF
 //  - pass in zero to use default (480 PPQ, normally)
-extern OSStatus			MusicSequenceSaveSMF(			MusicSequence 	inSequence,
-													FSSpec		 	*inFileSpec,
+extern OSStatus			MusicSequenceSaveSMF(		MusicSequence 	inSequence,
+													const FSSpec	*inFileSpec,
+													UInt16			inResolution );
+
+extern OSStatus			MusicSequenceSaveSMFData(	MusicSequence	inSequence,
+													CFDataRef		*outData,
 													UInt16			inResolution );
 
 // Additional APIs will be created for persistence (loading/saving) of MusicSequences
@@ -283,10 +397,35 @@ extern OSStatus			MusicSequenceSaveSMF(			MusicSequence 	inSequence,
 
 
 // "reverses" (in time) all events (including tempo events)
-extern OSStatus			MusicSequenceReverse(			MusicSequence inSequence);	
+extern OSStatus			MusicSequenceReverse(		MusicSequence	inSequence);
 
+// Returns a seconds value that would correspond to the supplied beats 
+extern OSStatus			MusicSequenceGetSecondsForBeats (MusicSequence	inSequence,
+												  MusicTimeStamp		inBeats,
+												  Float64*				outSeconds);
 
-													
+// Returns a beats value that would correspond to the supplied seconds 
+extern OSStatus			MusicSequenceGetBeatsForSeconds (MusicSequence	inSequence,
+												  Float64				inSeconds,
+												  MusicTimeStamp*		outBeats);
+
+// This call is used to register (or remove if inCallback is NULL) a callback 
+// that the MusicSequence will call for ANY UserEvents that are added to any of the
+// tracks of the sequence.
+// If there is a callback registered, then UserEvents WILL BE CHASED when 
+// MusicPlayerSetTime is called. In that case the inStartSliceBeat and inEndSliceBeat
+// will both be the same value and will be the beat that the player is chasing too.
+// In normal cases, where the sequence data is being scheduled for playback, the
+// following will apply:
+//	inStartSliceBeat <= inEventTime < inEndSliceBeat
+// The only exception to this is if the track that owns the MusicEvent is looping.
+// In this case the start beat will still be less than the end beat (so your callback
+// can still determine that it is playing, and what beats are currently being scheduled),
+// however, the inEventTime will be the original time-stamped time of the user event. 
+extern OSStatus			MusicSequenceSetUserCallback (MusicSequence		inSequence,
+										MusicSequenceUserCallback		inCallback,
+										void*							inClientData);
+												
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // MusicTrack API's
 
@@ -300,7 +439,6 @@ extern OSStatus			MusicTrackSetDestNode(	MusicTrack 			inTrack,
 // This overrides any previous MIDIEndpoint destination or AUNode destination
 extern OSStatus			MusicTrackSetDestMIDIEndpoint(	MusicTrack		inTrack,
 														MIDIEndpointRef	inEndpoint );
-
 
 // returns kAudioToolboxErr_IllegalTrackDestination if the track destination is
 // a MIDIEndpointRef and NOT an AUNode
@@ -318,31 +456,34 @@ extern OSStatus			MusicTrackGetDestMIDIEndpoint(	MusicTrack		inTrack,
 
 // inLength is currently ignored for the properties with fixed size...
 extern OSStatus			MusicTrackSetProperty(	MusicTrack 			inTrack,
-											UInt32 				inPropertyID,
-											void				*inData,
-											UInt32				inLength );
+												UInt32 				inPropertyID,
+												void				*inData,
+												UInt32				inLength );
 
-// if inData is NULL, then the length of the data will be passed back in outLength
+// if outData is NULL, then the length of the data will be passed back in outLength
 // This allows the client to allocate a buffer of the correct size (useful for variable
 // length properties -- currently all properties have fixed size)
 extern OSStatus			MusicTrackGetProperty(	MusicTrack 			inTrack,
-											UInt32 				inPropertyID,
-											void				*inData,
-											UInt32				*ioLength );
+												UInt32 				inPropertyID,
+												void				*outData,
+												UInt32				*ioLength );
 
-// Notes on properties
-//
-//	kSequenceTrackProperty_LoopInfo
-//		The default looping behaviour is to loop once through the entire track
-//		pass zero in for inNumberOfLoops to loop forever
-//		
 
+// the values for these properties are always passed by addressed (with get or set)
 enum
 {
-	kSequenceTrackProperty_LoopInfo = 0,		// struct {MusicTimeStamp loopLength; long numberOfLoops;};
-	kSequenceTrackProperty_OffsetTime = 1,		// struct {MusicTimeStamp offsetTime;};
-	kSequenceTrackProperty_MuteStatus = 2,		// struct {Boolean muteState;};
-	kSequenceTrackProperty_SoloStatus = 3		// struct {Boolean soloState;};
+		// struct {MusicTimeStamp loopLength; long numberOfLoops;};
+	kSequenceTrackProperty_LoopInfo = 0,	
+		// MusicTimeStamp offsetTime;
+	kSequenceTrackProperty_OffsetTime = 1,
+		// Boolean muteState;
+	kSequenceTrackProperty_MuteStatus = 2,
+		// Boolean soloState;
+	kSequenceTrackProperty_SoloStatus = 3,
+		//UInt32 automatedState;
+	kSequenceTrackProperty_AutomatedParameters = 4,
+		// MusicTimeStamp trackLength
+	kSequenceTrackProperty_TrackLength = 5
 };
 
 
@@ -356,41 +497,41 @@ enum
 
 // inMoveTime may be negative to move events backwards in time
 extern OSStatus			MusicTrackMoveEvents(	MusicTrack 			inTrack,
-											MusicTimeStamp		inStartTime,
-											MusicTimeStamp		inEndTime,
-											MusicTimeStamp		inMoveTime );
+												MusicTimeStamp		inStartTime,
+												MusicTimeStamp		inEndTime,
+												MusicTimeStamp		inMoveTime );
 
 
 extern OSStatus			NewMusicTrackFrom(	MusicTrack			inSourceTrack,
-										MusicTimeStamp		inSourceStartTime,
-										MusicTimeStamp		inSourceEndTime,
-										MusicTrack 			*outNewTrack );
+											MusicTimeStamp		inSourceStartTime,
+											MusicTimeStamp		inSourceEndTime,
+											MusicTrack 			*outNewTrack );
 												
 // removes all events in the given range												
 extern OSStatus			MusicTrackClear(	MusicTrack 			inTrack,
-										MusicTimeStamp		inStartTime,
-										MusicTimeStamp		inEndTime );
+											MusicTimeStamp		inStartTime,
+											MusicTimeStamp		inEndTime );
 // same as MusicTrackClear(), but also moves all following events back
 // by the range's duration
 extern OSStatus			MusicTrackCut(		MusicTrack 			inTrack,
-										MusicTimeStamp		inStartTime,
-										MusicTimeStamp		inEndTime );
+											MusicTimeStamp		inStartTime,
+											MusicTimeStamp		inEndTime );
 
 // the given source range is inserted at inDestInsertTime in inDestTrack
 // (all events at and after inDestInsertTime in inDestTrack are moved forward by the
 //  range's duration)
 extern OSStatus			MusicTrackCopyInsert(	MusicTrack 			inSourceTrack,
+												MusicTimeStamp		inSourceStartTime,
+												MusicTimeStamp		inSourceEndTime,
+												MusicTrack 			inDestTrack,
+												MusicTimeStamp		inDestInsertTime );
+
+// the given source range is merged with events starting at inDestInsertTime in inDestTrack
+extern OSStatus			MusicTrackMerge(	MusicTrack 			inSourceTrack,
 											MusicTimeStamp		inSourceStartTime,
 											MusicTimeStamp		inSourceEndTime,
 											MusicTrack 			inDestTrack,
 											MusicTimeStamp		inDestInsertTime );
-
-// the given source range is merged with events starting at inDestInsertTime in inDestTrack
-extern OSStatus			MusicTrackMerge(	MusicTrack 			inSourceTrack,
-										MusicTimeStamp		inSourceStartTime,
-										MusicTimeStamp		inSourceEndTime,
-										MusicTrack 			inDestTrack,
-										MusicTimeStamp		inDestInsertTime );
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -409,7 +550,7 @@ extern OSStatus			MusicTrackMerge(	MusicTrack 			inSourceTrack,
 
 // event iterator objects on tracks
 extern OSStatus			NewMusicEventIterator(			MusicTrack 			inTrack,
-													MusicEventIterator	*outIterator );
+														MusicEventIterator	*outIterator );
 													
 extern OSStatus			DisposeMusicEventIterator(		MusicEventIterator	inIterator );
 
@@ -417,18 +558,19 @@ extern OSStatus			DisposeMusicEventIterator(		MusicEventIterator	inIterator );
 //    	(which is pointing to the space just AFTER the last event)
 //		(use MusicEventIteratorPreviousEvent() to backup one, if you want last event)
 extern OSStatus			MusicEventIteratorSeek(			MusicEventIterator 	inIterator,
-													MusicTimeStamp 		inTimeStamp );
+														MusicTimeStamp 		inTimeStamp );
 
 // seeks track "iterator" to the next event
+//  (if the iterator is at the last event, then it moves PAST the last event and no longer points to an event
+// ALWAYS check to see if there is an event at the iterator
 extern OSStatus			MusicEventIteratorNextEvent(	MusicEventIterator 	inIterator);
 
 // seeks track "iterator" to the previous event
 //  (if the iterator is already at the first event, then it remains unchanged and
-//   an error code is returned)
+//   an error is returned)
 extern OSStatus			MusicEventIteratorPreviousEvent(MusicEventIterator 	inIterator);
 
-
-// returns an error code if the track's "iterator" is currently at the end of the track
+// returns an error if the track's "iterator" is currently at the end of the track
 
 // depending on the event type, cast the returned void* pointer to:
 //
@@ -440,62 +582,102 @@ extern OSStatus			MusicEventIteratorPreviousEvent(MusicEventIterator 	inIterator
 //		kMusicEventType_MIDINoteMessage			MIDINoteMessage*
 //		kMusicEventType_MIDIChannelMessage		MIDIChannelMessage*
 //		kMusicEventType_MIDIRawData				MIDIRawData*
-extern OSStatus			MusicEventIteratorGetEventInfo(	MusicEventIterator 	inIterator,
-													MusicTimeStamp		*outTimeStamp,
-													MusicEventType		*outEventType,
-													void				**outEventData,
-													UInt32				*outEventDataSize );
+//		kMusicEventType_Parameter				ParameterEvent*
+//		kMusicEventType_AUPreset				AUPresetEvent*
+extern OSStatus			MusicEventIteratorGetEventInfo(
+													MusicEventIterator 		inIterator,
+													MusicTimeStamp			*outTimeStamp,
+													MusicEventType			*outEventType,
+													const void*				*outEventData,
+													UInt32					*outEventDataSize );
+
+// replaces the current event; note that its type may change but its time may not
+extern OSStatus			MusicEventIteratorSetEventInfo(
+												MusicEventIterator 		inIterator,
+												MusicEventType			inEventType,
+												const void				*inEventData );
 
 // deletes the event at the current "iterator"
 extern OSStatus			MusicEventIteratorDeleteEvent(	MusicEventIterator 	inIterator);
 
 
 extern OSStatus			MusicEventIteratorSetEventTime(	MusicEventIterator 		inIterator,
-													MusicTimeStamp			inTimeStamp );
+														MusicTimeStamp			inTimeStamp );
 
+// We're NOT CHECKING THE ERROR CODE HERE!!!!!!
+// To use the iterator going forward when looping...
+// 	New Iterator (points at first event)
+//	bool hasCurrentEvent;
+//	MusicEventIteratorHasCurrentEvent(iter, &hasCurrentEvent);
+// 	while (hasCurrentEvent) {
+// 		do work... MusicEventIteratorGetEventInfo (iter, ...
+//		
+//		MusicEventIteratorNextEvent (iter)
+//		MusicEventIteratorHasCurrentEvent(iter, &hasCurrentEvent);
+//	}
+
+// Or to go back...
+// 	New Iterator
+// 	MusicEventIteratorSeek (iter, kMusicTimeStamp_EndOfTrack) -> will point it past the last event
+//
+// 	while (MusicEventIteratorPreviousEvent (iter) == noErr) {
+// 		do work... MusicEventIteratorGetEventInfo (iter, ...
+//
+// 	}
+
+// You can "rock" the Iterator back and forwards as well of course
 extern OSStatus			MusicEventIteratorHasPreviousEvent(	MusicEventIterator 	inIterator,
-														Boolean				*outHasPreviousEvent );
+														Boolean					*outHasPreviousEvent );
 
 extern OSStatus			MusicEventIteratorHasNextEvent(	MusicEventIterator 		inIterator,
-													Boolean					*outHasNextEvent );
+														Boolean					*outHasNextEvent );
+
+extern OSStatus			MusicEventIteratorHasCurrentEvent (MusicEventIterator 		inIterator,
+												        Boolean					*outHasCurrentEvent);
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // adding time-stamped events to the track
 
 extern OSStatus			MusicTrackNewMIDINoteEvent(		MusicTrack 				inTrack,
-													MusicTimeStamp			inTimeStamp,
-													const MIDINoteMessage	*inMessage );
+														MusicTimeStamp			inTimeStamp,
+														const MIDINoteMessage	*inMessage );
 										
 extern OSStatus			MusicTrackNewMIDIChannelEvent(	MusicTrack 				inTrack,
-													MusicTimeStamp			inTimeStamp,
-													const MIDIChannelMessage *inMessage );
+														MusicTimeStamp			inTimeStamp,
+														const MIDIChannelMessage *inMessage );
 
 extern OSStatus			MusicTrackNewMIDIRawDataEvent(	MusicTrack 				inTrack,
-													MusicTimeStamp			inTimeStamp,
-													const MIDIRawData		*inRawData );
+														MusicTimeStamp			inTimeStamp,
+														const MIDIRawData		*inRawData );
 
 extern OSStatus			MusicTrackNewExtendedNoteEvent(	MusicTrack 					inTrack,
-													MusicTimeStamp				inTimeStamp,
-													const ExtendedNoteOnEvent	*inInfo );
+														MusicTimeStamp				inTimeStamp,
+														const ExtendedNoteOnEvent	*inInfo );
 										
 extern OSStatus			MusicTrackNewExtendedControlEvent(	MusicTrack 					inTrack,
-														MusicTimeStamp				inTimeStamp,
-														const ExtendedControlEvent	*inInfo );
+															MusicTimeStamp				inTimeStamp,
+															const ExtendedControlEvent	*inInfo );
+
+extern OSStatus			MusicTrackNewParameterEvent(	MusicTrack 				inTrack,
+                                                        MusicTimeStamp			inTimeStamp,
+                                                        const ParameterEvent	*inInfo );
 										
 extern OSStatus			MusicTrackNewExtendedTempoEvent(	MusicTrack 				inTrack,
-														MusicTimeStamp			inTimeStamp,
-														Float64					inBPM);
+															MusicTimeStamp			inTimeStamp,
+															Float64					inBPM);
 										
-extern OSStatus			MusicTrackNewMetaEvent(			MusicTrack 				inTrack,
-													MusicTimeStamp			inTimeStamp,
-													void					*inMetaEventInfo,
-													UInt32					inMetaEventLength );
+extern OSStatus			MusicTrackNewMetaEvent(	MusicTrack 				inTrack,
+												MusicTimeStamp			inTimeStamp,
+												const MIDIMetaEvent		*inMetaEvent);
 										
-extern OSStatus			MusicTrackNewUserEvent(			MusicTrack 				inTrack,
-													MusicTimeStamp			inTimeStamp,
-													void					*inUserData,
-													UInt32					inUserDataLength );
+extern OSStatus			MusicTrackNewUserEvent(	MusicTrack 					inTrack,
+												MusicTimeStamp			 	inTimeStamp,
+										        const MusicEventUserData* 	inUserData);
+
+extern OSStatus			MusicTrackNewAUPresetEvent(	MusicTrack 					inTrack,
+													MusicTimeStamp			 	inTimeStamp,
+													const AUPresetEvent *		inPresetEvent);
 																												
 #if defined(__cplusplus)
 }

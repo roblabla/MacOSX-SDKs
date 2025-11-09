@@ -3,9 +3,9 @@
  
      Contains:   vector and matrix functions for AltiVec
  
-     Version:    vecLib-1.1_8~32
+     Version:    vecLib-138.1~9
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,7 @@
 #endif
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -28,14 +29,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
 #endif
 
 /*
@@ -76,7 +69,7 @@ extern "C" {
 extern long 
 vIsamax(
   long                 count,
-  const vector float   x[]);
+  const vector float   x[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -99,7 +92,7 @@ vIsamax(
 extern long 
 vIsamin(
   long                 count,
-  const vector float   x[]);
+  const vector float   x[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -122,7 +115,7 @@ vIsamin(
 extern long 
 vIsmax(
   long                 count,
-  const vector float   x[]);
+  const vector float   x[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -145,7 +138,7 @@ vIsmax(
 extern long 
 vIsmin(
   long                 count,
-  const vector float   x[]);
+  const vector float   x[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -168,7 +161,7 @@ vIsmin(
 extern float 
 vSasum(
   long                 count,
-  const vector float   x[]);
+  const vector float   x[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -191,7 +184,7 @@ vSasum(
 extern float 
 vSsum(
   long                 count,
-  const vector float   x[]);
+  const vector float   x[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -220,7 +213,7 @@ vSaxpy(
   long                 n,
   float                alpha,
   const vector float   x[],
-  vector float         y[]);
+  vector float         y[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -244,7 +237,7 @@ extern void
 vScopy(
   long                 n,
   const vector float   x[],
-  vector float         y[]);
+  vector float         y[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -267,7 +260,7 @@ extern float
 vSdot(
   long                 n,
   const vector float   x[],
-  const vector float   y[]);
+  const vector float   y[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -298,7 +291,7 @@ vSnaxpy(
   long                 m,
   const vector float   a[],
   const vector float   x[],
-  vector float         y[]);
+  vector float         y[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -339,7 +332,7 @@ vSndot(
   float                s[],
   long                 isw,
   const vector float   x[],
-  const vector float   y[]);
+  const vector float   y[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -362,7 +355,7 @@ vSndot(
 extern float 
 vSnrm2(
   long                 count,
-  const vector float   x[]);
+  const vector float   x[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -384,7 +377,7 @@ vSnrm2(
 extern float 
 vSnorm2(
   long                 count,
-  const vector float   x[]);
+  const vector float   x[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -417,7 +410,7 @@ vSrot(
   vector float   x[],
   vector float   y[],
   float          c,
-  float          s);
+  float          s)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -443,7 +436,7 @@ extern void
 vSscal(
   long           n,
   float          alpha,
-  vector float   x[]);
+  vector float   x[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -468,7 +461,7 @@ extern void
 vSswap(
   long           n,
   vector float   x[],
-  vector float   y[]);
+  vector float   y[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -496,7 +489,7 @@ vSyax(
   long                 n,
   float                alpha,
   const vector float   x[],
-  vector float         y[]);
+  vector float         y[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -528,7 +521,7 @@ vSzaxpy(
   float                alpha,
   const vector float   x[],
   const vector float   yY[],
-  vector float         z[]);
+  vector float         z[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -590,7 +583,7 @@ vSgemv(
   const vector float   a[],
   const vector float   x[],
   float                beta,
-  vector float         y[]);
+  vector float         y[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -628,7 +621,7 @@ vSgemx(
   float                alpha,
   const vector float   a[],
   const vector float   x[],
-  vector float         y[]);
+  vector float         y[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -666,7 +659,7 @@ vSgemtx(
   float                alpha,
   const vector float   a[],
   const vector float   x[],
-  vector float         y[]);
+  vector float         y[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -730,7 +723,7 @@ vSgeadd(
   char                 forma,
   const vector float   b[],
   char                 formb,
-  vector float         c[]);
+  vector float         c[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -787,7 +780,7 @@ vSgesub(
   char                 forma,
   const vector float   b[],
   char                 formb,
-  vector float         c[]);
+  vector float         c[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -847,7 +840,7 @@ vSgemul(
   char                 forma,
   const vector float   b[],
   char                 formb,
-  vector float         matrix[]);
+  vector float         matrix[])                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -917,7 +910,7 @@ vSgemm(
   vector float         c[],
   float                alpha,
   float                beta,
-  vector float         matrix[]);
+  vector float         matrix[])                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -939,7 +932,7 @@ vSgemm(
 extern void 
 vSgetmi(
   long           size,
-  vector float   x[]);
+  vector float   x[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -965,7 +958,7 @@ vSgetmo(
   long                 height,
   long                 width,
   const vector float   x[],
-  vector float         y[]);
+  vector float         y[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -999,19 +992,11 @@ vSgevv(
   long                 n,
   const vector float   a[],
   const vector float   b[],
-  vector float         m[]);
+  vector float         m[])                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 #endif  /* defined(__VEC__) */
 
-
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
 
 #ifdef __cplusplus
 }

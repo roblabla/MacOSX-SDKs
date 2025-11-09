@@ -3,9 +3,9 @@
  
      Contains:   Master include for OSServices private framework
  
-     Version:    OSServices-24~82
+     Version:    OSServices-39.2~411
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,10 @@
 #endif
 
 
+#ifndef __APPLEDISKPARTITIONS__
+#include <OSServices/AppleDiskPartitions.h>
+#endif
+
 #ifndef __POWER__
 #include <OSServices/Power.h>
 #endif
@@ -29,12 +33,20 @@
 #include <OSServices/SCSI.h>
 #endif
 
-#ifndef __APPLEDISKPARTITIONS__
-#include <OSServices/AppleDiskPartitions.h>
+#ifndef __SYSTEMSOUND__
+#include <OSServices/SystemSound.h>
+#endif
+
+#ifndef __ICONSTORAGE__
+#include <OSServices/IconStorage.h>
 #endif
 
 
-
+#include <OSServices/OpenTransport.h>
+#include <OSServices/OpenTransportProviders.h>
+#include <OSServices/OpenTransportProtocol.h>
+#include <OSServices/NSLCore.h>
+#include <OSServices/SecurityCore.h>
 
 #endif /* __OSSERVICES__ */
 

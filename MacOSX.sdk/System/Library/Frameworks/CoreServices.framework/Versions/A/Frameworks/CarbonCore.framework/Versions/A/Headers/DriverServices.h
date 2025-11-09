@@ -3,9 +3,9 @@
  
      Contains:   Driver Services Interfaces.
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1985-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -46,6 +46,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -55,13 +56,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=power
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=power
 
 /******************************************************************
  *
@@ -529,7 +524,7 @@ typedef UnsignedWide                    Nanoseconds;
  *    Non-Carbon CFM:   in InterfaceLib 8.6 and later
  */
 extern AbsoluteTime 
-UpTime(void);
+UpTime(void)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -552,7 +547,7 @@ UpTime(void);
  *    Non-Carbon CFM:   in InterfaceLib 8.6 and later
  */
 extern Nanoseconds 
-AbsoluteToNanoseconds(AbsoluteTime absoluteTime);
+AbsoluteToNanoseconds(AbsoluteTime absoluteTime)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -564,7 +559,7 @@ AbsoluteToNanoseconds(AbsoluteTime absoluteTime);
  *    Non-Carbon CFM:   in InterfaceLib 8.6 and later
  */
 extern Duration 
-AbsoluteToDuration(AbsoluteTime absoluteTime);
+AbsoluteToDuration(AbsoluteTime absoluteTime)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -576,7 +571,7 @@ AbsoluteToDuration(AbsoluteTime absoluteTime);
  *    Non-Carbon CFM:   in InterfaceLib 8.6 and later
  */
 extern AbsoluteTime 
-NanosecondsToAbsolute(Nanoseconds nanoseconds);
+NanosecondsToAbsolute(Nanoseconds nanoseconds)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -588,7 +583,7 @@ NanosecondsToAbsolute(Nanoseconds nanoseconds);
  *    Non-Carbon CFM:   in InterfaceLib 8.6 and later
  */
 extern AbsoluteTime 
-DurationToAbsolute(Duration duration);
+DurationToAbsolute(Duration duration)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -602,7 +597,7 @@ DurationToAbsolute(Duration duration);
 extern AbsoluteTime 
 AddAbsoluteToAbsolute(
   AbsoluteTime   absoluteTime1,
-  AbsoluteTime   absoluteTime2);
+  AbsoluteTime   absoluteTime2)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -616,7 +611,7 @@ AddAbsoluteToAbsolute(
 extern AbsoluteTime 
 SubAbsoluteFromAbsolute(
   AbsoluteTime   leftAbsoluteTime,
-  AbsoluteTime   rightAbsoluteTime);
+  AbsoluteTime   rightAbsoluteTime)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -630,7 +625,7 @@ SubAbsoluteFromAbsolute(
 extern AbsoluteTime 
 AddNanosecondsToAbsolute(
   Nanoseconds    nanoseconds,
-  AbsoluteTime   absoluteTime);
+  AbsoluteTime   absoluteTime)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -644,7 +639,7 @@ AddNanosecondsToAbsolute(
 extern AbsoluteTime 
 AddDurationToAbsolute(
   Duration       duration,
-  AbsoluteTime   absoluteTime);
+  AbsoluteTime   absoluteTime)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -658,7 +653,7 @@ AddDurationToAbsolute(
 extern AbsoluteTime 
 SubNanosecondsFromAbsolute(
   Nanoseconds    nanoseconds,
-  AbsoluteTime   absoluteTime);
+  AbsoluteTime   absoluteTime)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -672,7 +667,7 @@ SubNanosecondsFromAbsolute(
 extern AbsoluteTime 
 SubDurationFromAbsolute(
   Duration       duration,
-  AbsoluteTime   absoluteTime);
+  AbsoluteTime   absoluteTime)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -686,7 +681,7 @@ SubDurationFromAbsolute(
 extern Nanoseconds 
 AbsoluteDeltaToNanoseconds(
   AbsoluteTime   leftAbsoluteTime,
-  AbsoluteTime   rightAbsoluteTime);
+  AbsoluteTime   rightAbsoluteTime)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -700,7 +695,7 @@ AbsoluteDeltaToNanoseconds(
 extern Duration 
 AbsoluteDeltaToDuration(
   AbsoluteTime   leftAbsoluteTime,
-  AbsoluteTime   rightAbsoluteTime);
+  AbsoluteTime   rightAbsoluteTime)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -712,7 +707,7 @@ AbsoluteDeltaToDuration(
  *    Non-Carbon CFM:   in InterfaceLib 8.6 and later
  */
 extern Nanoseconds 
-DurationToNanoseconds(Duration theDuration);
+DurationToNanoseconds(Duration theDuration)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -724,7 +719,7 @@ DurationToNanoseconds(Duration theDuration);
  *    Non-Carbon CFM:   in InterfaceLib 8.6 and later
  */
 extern Duration 
-NanosecondsToDuration(Nanoseconds theNanoseconds);
+NanosecondsToDuration(Nanoseconds theNanoseconds)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1093,13 +1088,7 @@ typedef OptionBits                      InterruptSetOptions;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

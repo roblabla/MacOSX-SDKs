@@ -3,9 +3,9 @@
  
      Contains:   Text Services Managerfor TextEdit Interfaces.
  
-     Version:    HIToolbox-79.9~1
+     Version:    HIToolbox-124.14~2
  
-     Copyright:  © 1991-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1991-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -24,10 +24,6 @@
 #include <HIToolbox/Dialogs.h>
 #endif
 
-#ifndef __APPLEEVENTS__
-#include <AE/AppleEvents.h>
-#endif
-
 #ifndef __TEXTSERVICES__
 #include <HIToolbox/TextServices.h>
 #endif
@@ -35,6 +31,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -44,13 +41,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* signature, interface types*/
 enum {
@@ -117,7 +108,7 @@ typedef TSMDialogPtr                    TSMDialogPeek;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern TSMTEPreUpdateUPP
-NewTSMTEPreUpdateUPP(TSMTEPreUpdateProcPtr userRoutine);
+NewTSMTEPreUpdateUPP(TSMTEPreUpdateProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewTSMTEPostUpdateUPP()
@@ -128,7 +119,7 @@ NewTSMTEPreUpdateUPP(TSMTEPreUpdateProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern TSMTEPostUpdateUPP
-NewTSMTEPostUpdateUPP(TSMTEPostUpdateProcPtr userRoutine);
+NewTSMTEPostUpdateUPP(TSMTEPostUpdateProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeTSMTEPreUpdateUPP()
@@ -139,7 +130,7 @@ NewTSMTEPostUpdateUPP(TSMTEPostUpdateProcPtr userRoutine);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeTSMTEPreUpdateUPP(TSMTEPreUpdateUPP userUPP);
+DisposeTSMTEPreUpdateUPP(TSMTEPreUpdateUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeTSMTEPostUpdateUPP()
@@ -150,7 +141,7 @@ DisposeTSMTEPreUpdateUPP(TSMTEPreUpdateUPP userUPP);
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeTSMTEPostUpdateUPP(TSMTEPostUpdateUPP userUPP);
+DisposeTSMTEPostUpdateUPP(TSMTEPostUpdateUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeTSMTEPreUpdateUPP()
@@ -164,7 +155,7 @@ extern void
 InvokeTSMTEPreUpdateUPP(
   TEHandle           textH,
   long               refCon,
-  TSMTEPreUpdateUPP  userUPP);
+  TSMTEPreUpdateUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeTSMTEPostUpdateUPP()
@@ -183,10 +174,13 @@ InvokeTSMTEPostUpdateUPP(
   long                pinStart,
   long                pinEnd,
   long                refCon,
-  TSMTEPostUpdateUPP  userUPP);
+  TSMTEPostUpdateUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  IsTSMTEDialog()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -194,12 +188,15 @@ InvokeTSMTEPostUpdateUPP(
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
 extern Boolean 
-IsTSMTEDialog(DialogRef dialog);
+IsTSMTEDialog(DialogRef dialog)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Getters */
 /*
  *  GetTSMTEDialogDocumentID()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -207,11 +204,14 @@ IsTSMTEDialog(DialogRef dialog);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
 extern TSMDocumentID 
-GetTSMTEDialogDocumentID(DialogRef dialog);
+GetTSMTEDialogDocumentID(DialogRef dialog)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  GetTSMTEDialogTSMTERecHandle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -219,12 +219,15 @@ GetTSMTEDialogDocumentID(DialogRef dialog);
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
 extern TSMTERecHandle 
-GetTSMTEDialogTSMTERecHandle(DialogRef dialog);
+GetTSMTEDialogTSMTERecHandle(DialogRef dialog)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Setters */
 /*
  *  SetTSMTEDialogDocumentID()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -234,11 +237,14 @@ GetTSMTEDialogTSMTERecHandle(DialogRef dialog);
 extern void 
 SetTSMTEDialogDocumentID(
   DialogRef       dialog,
-  TSMDocumentID   documentID);
+  TSMDocumentID   documentID)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SetTSMTEDialogTSMTERecHandle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -248,17 +254,11 @@ SetTSMTEDialogDocumentID(
 extern void 
 SetTSMTEDialogTSMTERecHandle(
   DialogRef        dialog,
-  TSMTERecHandle   tsmteRecHandle);
+  TSMTERecHandle   tsmteRecHandle)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

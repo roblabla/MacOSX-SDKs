@@ -1,5 +1,5 @@
 /*	NSUserDefaults.h
-	Copyright 1994-2001, Apple, Inc. All rights reserved.
+	Copyright 1994-2002, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -60,6 +60,12 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 - (void)removePersistentDomainForName:(NSString *)domainName;
 
 - (BOOL)synchronize;
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (BOOL)objectIsForcedForKey:(NSString *)key;
+- (BOOL)objectIsForcedForKey:(NSString *)key inDomain:(NSString *)domain;
+#endif
+
 
 @end
 

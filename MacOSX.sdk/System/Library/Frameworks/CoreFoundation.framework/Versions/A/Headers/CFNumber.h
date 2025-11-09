@@ -1,5 +1,5 @@
 /*	CFNumber.h
-	Copyright 1999-2001, Apple, Inc. All rights reserved.
+	Copyright 1999-2002, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFNUMBER__)
@@ -111,7 +111,7 @@ Boolean CFNumberGetValue(CFNumberRef number, CFNumberType theType, void *valuePt
 	compares greater than the other number if it is negative, and
 	smaller than the other number if it is positive. (Note that in
 	CFEqual() with two CFNumbers, if either or both of the numbers
-	is NaN, false is returned.)
+	is NaN, true is returned.)
 */
 CF_EXPORT
 CFComparisonResult CFNumberCompare(CFNumberRef number, CFNumberRef otherNumber, void *context);

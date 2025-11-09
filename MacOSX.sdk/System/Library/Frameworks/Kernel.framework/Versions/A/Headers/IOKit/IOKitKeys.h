@@ -64,6 +64,7 @@
 #define kIOPropertyMatchKey		"IOPropertyMatch"
 #define kIOPathMatchKey			"IOPathMatch"
 #define kIOLocationMatchKey		"IOLocationMatch"
+#define kIOParentMatchKey		"IOParentMatch"
 #define kIOResourceMatchKey		"IOResourceMatch"
 #define kIOMatchedServiceCountKey	"IOMatchedServiceCountMatch"
 
@@ -95,10 +96,29 @@
 #define kIOCommandPoolSizeKey	       "IOCommandPoolSize"          // (OSNumber)
 
 // properties found in services that have transfer constraints
-#define kIOMaximumBlockCountReadKey    "IOMaximumBlockCountRead"    // (OSNumber)
-#define kIOMaximumBlockCountWriteKey   "IOMaximumBlockCountWrite"   // (OSNumber)
-#define kIOMaximumSegmentCountReadKey  "IOMaximumSegmentCountRead"  // (OSNumber)
-#define kIOMaximumSegmentCountWriteKey "IOMaximumSegmentCountWrite" // (OSNumber)
+#define kIOMaximumBlockCountReadKey        "IOMaximumBlockCountRead"        // (OSNumber)
+#define kIOMaximumBlockCountWriteKey       "IOMaximumBlockCountWrite"       // (OSNumber)
+#define kIOMaximumByteCountReadKey         "IOMaximumByteCountRead"         // (OSNumber)
+#define kIOMaximumByteCountWriteKey        "IOMaximumByteCountWrite"        // (OSNumber)
+#define kIOMaximumSegmentCountReadKey      "IOMaximumSegmentCountRead"      // (OSNumber)
+#define kIOMaximumSegmentCountWriteKey     "IOMaximumSegmentCountWrite"     // (OSNumber)
+#define kIOMaximumSegmentByteCountReadKey  "IOMaximumSegmentByteCountRead"  // (OSNumber)
+#define kIOMaximumSegmentByteCountWriteKey "IOMaximumSegmentByteCountWrite" // (OSNumber)
+
+// properties found in services that wish to describe an icon
+//
+// IOIcon = 
+// {
+//     CFBundleIdentifier   = "com.example.driver.example";
+//     IOBundleResourceFile = "example.icns";
+// };
+//
+// where IOBundleResourceFile is the filename of the resource
+
+#define kIOIconKey               "IOIcon"               // (OSDictionary)
+#define kIOBundleResourceFileKey "IOBundleResourceFile" // (OSString)
+
+#define kIOBusBadgeKey           "IOBusBadge"           // (OSDictionary)
+#define kIODeviceIconKey         "IODeviceIcon"         // (OSDictionary)
 
 #endif /* ! _IOKIT_IOKITKEYS_H */
-

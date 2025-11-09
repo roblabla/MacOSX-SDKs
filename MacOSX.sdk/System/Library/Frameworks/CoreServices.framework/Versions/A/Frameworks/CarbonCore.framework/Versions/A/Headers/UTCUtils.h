@@ -3,9 +3,9 @@
  
      Contains:   Interface for UTC to Local Time conversion and 64 Bit Clock routines
  
-     Version:    CarbonCore-317~6
+     Version:    CarbonCore-472~1
  
-     Copyright:  © 1999-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,6 +26,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -35,13 +36,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* Options for Set & Get DateTime Routines */
 enum {
@@ -77,7 +72,7 @@ typedef LocalDateTimePtr *              LocalDateTimeHandle;
 extern OSStatus 
 ConvertLocalTimeToUTC(
   UInt32    localSeconds,
-  UInt32 *  utcSeconds);
+  UInt32 *  utcSeconds)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -91,7 +86,7 @@ ConvertLocalTimeToUTC(
 extern OSStatus 
 ConvertUTCToLocalTime(
   UInt32    utcSeconds,
-  UInt32 *  localSeconds);
+  UInt32 *  localSeconds)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* 64 bit clock conversion routines */
@@ -106,7 +101,7 @@ ConvertUTCToLocalTime(
 extern OSStatus 
 ConvertUTCToLocalDateTime(
   const UTCDateTime *  utcDateTime,
-  LocalDateTime *      localDateTime);
+  LocalDateTime *      localDateTime)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -120,7 +115,7 @@ ConvertUTCToLocalDateTime(
 extern OSStatus 
 ConvertLocalToUTCDateTime(
   const LocalDateTime *  localDateTime,
-  UTCDateTime *          utcDateTime);
+  UTCDateTime *          utcDateTime)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Getter and Setter Clock routines using 64 Bit values */
@@ -135,7 +130,7 @@ ConvertLocalToUTCDateTime(
 extern OSStatus 
 GetUTCDateTime(
   UTCDateTime *  utcDateTime,
-  OptionBits     options);
+  OptionBits     options)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -149,7 +144,7 @@ GetUTCDateTime(
 extern OSStatus 
 SetUTCDateTime(
   const UTCDateTime *  utcDateTime,
-  OptionBits           options);
+  OptionBits           options)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -163,7 +158,7 @@ SetUTCDateTime(
 extern OSStatus 
 GetLocalDateTime(
   LocalDateTime *  localDateTime,
-  OptionBits       options);
+  OptionBits       options)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -177,17 +172,11 @@ GetLocalDateTime(
 extern OSStatus 
 SetLocalDateTime(
   const LocalDateTime *  localDateTime,
-  OptionBits             options);
+  OptionBits             options)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

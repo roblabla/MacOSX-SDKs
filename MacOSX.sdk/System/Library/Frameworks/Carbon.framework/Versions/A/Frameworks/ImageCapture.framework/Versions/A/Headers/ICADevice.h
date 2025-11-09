@@ -3,9 +3,9 @@
  
      Contains:   Low level Image Capture device definitions.
  
-     Version:    ImageCapture-84.1~4
+     Version:    ImageCapture-125~203
  
-     Copyright:  © 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,6 +22,7 @@
 
 
 
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -31,13 +32,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=mac68k
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=mac68k
 
 /* 
 --------------- Completion Procs --------------- 
@@ -114,7 +109,7 @@ typedef struct ICD_DisposePropertyPB    ICD_DisposePropertyPB;
 extern OSErr 
 ICDNewObject(
   ICD_NewObjectPB *  pb,
-  ICDCompletion      completion);      /* can be NULL */
+  ICDCompletion      completion)       /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -128,7 +123,7 @@ ICDNewObject(
 extern OSErr 
 ICDDisposeObject(
   ICD_DisposeObjectPB *  pb,
-  ICDCompletion          completion);      /* can be NULL */
+  ICDCompletion          completion)       /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -142,7 +137,7 @@ ICDDisposeObject(
 extern OSErr 
 ICDNewProperty(
   ICD_NewPropertyPB *  pb,
-  ICDCompletion        completion);      /* can be NULL */
+  ICDCompletion        completion)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -156,7 +151,7 @@ ICDNewProperty(
 extern OSErr 
 ICDDisposeProperty(
   ICD_DisposePropertyPB *  pb,
-  ICDCompletion            completion);      /* can be NULL */
+  ICDCompletion            completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -164,13 +159,7 @@ ICDDisposeProperty(
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }

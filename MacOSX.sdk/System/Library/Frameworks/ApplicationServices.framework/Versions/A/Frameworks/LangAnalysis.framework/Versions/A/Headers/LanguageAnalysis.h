@@ -3,9 +3,9 @@
  
      Contains:   Language Analysis Manager Interfaces
  
-     Version:    LanguageAnalysis-66~9
+     Version:    LanguageAnalysis-85.2.1~3
  
-     Copyright:  © 1996-2001 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1996-2002 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,12 +16,8 @@
 #ifndef __LANGUAGEANALYSIS__
 #define __LANGUAGEANALYSIS__
 
-#ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
-#endif
-
-#ifndef __FILES__
-#include <CarbonCore/Files.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __AEREGISTRY__
@@ -32,16 +28,9 @@
 #include <LangAnalysis/Dictionary.h>
 #endif
 
-#ifndef __TEXTCOMMON__
-#include <CarbonCore/TextCommon.h>
-#endif
-
-#ifndef __MACERRORS__
-#include <CarbonCore/MacErrors.h>
-#endif
 
 
-
+#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -51,13 +40,7 @@
 extern "C" {
 #endif
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=power
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(push, 2)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack(2)
-#endif
+#pragma options align=power
 
 typedef struct OpaqueLAEnvironmentRef*  LAEnvironmentRef;
 typedef struct OpaqueLAContextRef*      LAContextRef;
@@ -162,7 +145,7 @@ enum {
  *    Non-Carbon CFM:   in LanguageAnalysisLib 1.0 and later
  */
 extern UInt32 
-LALibraryVersion(void);
+LALibraryVersion(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -186,7 +169,7 @@ LATextToMorphemes(
   OptionBits            convertFlags,
   UInt32                structureVersion,
   ByteCount *           acceptedLength,
-  LAMorphemesArrayPtr   resultBuffer);
+  LAMorphemesArrayPtr   resultBuffer)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -203,7 +186,7 @@ LATextToMorphemes(
 extern OSStatus 
 LAOpenAnalysisContext(
   LAEnvironmentRef   environ,
-  LAContextRef *     context);
+  LAContextRef *     context)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -215,7 +198,7 @@ LAOpenAnalysisContext(
  *    Non-Carbon CFM:   in LanguageAnalysisLib 1.0 and later
  */
 extern OSStatus 
-LACloseAnalysisContext(LAContextRef context);
+LACloseAnalysisContext(LAContextRef context)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -233,7 +216,7 @@ extern OSStatus
 LAGetEnvironmentList(
   UInt32             maxCount,
   UInt32 *           actualCount,
-  LAEnvironmentRef   environmentList[]);
+  LAEnvironmentRef   environmentList[])                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -247,7 +230,7 @@ LAGetEnvironmentList(
 extern OSStatus 
 LAGetEnvironmentName(
   LAEnvironmentRef   environment,
-  Str63              environmentName);
+  Str63              environmentName)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -261,7 +244,7 @@ LAGetEnvironmentName(
 extern OSStatus 
 LAGetEnvironmentRef(
   ConstStr63Param     targetEnvironmentName,
-  LAEnvironmentRef *  environment);
+  LAEnvironmentRef *  environment)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -277,7 +260,7 @@ LACreateCustomEnvironment(
   LAEnvironmentRef    baseEnvironment,
   ConstStr63Param     newEnvironmentName,
   Boolean             persistent,
-  LAEnvironmentRef *  newEnvironment);
+  LAEnvironmentRef *  newEnvironment)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -289,7 +272,7 @@ LACreateCustomEnvironment(
  *    Non-Carbon CFM:   in LanguageAnalysisLib 1.0 and later
  */
 extern OSStatus 
-LADeleteCustomEnvironment(LAEnvironmentRef environment);
+LADeleteCustomEnvironment(LAEnvironmentRef environment)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -306,7 +289,7 @@ LADeleteCustomEnvironment(LAEnvironmentRef environment);
 extern OSStatus 
 LAOpenDictionary(
   LAEnvironmentRef   environ,
-  const FSSpec *     dictionary);
+  const FSSpec *     dictionary)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -320,7 +303,7 @@ LAOpenDictionary(
 extern OSStatus 
 LACloseDictionary(
   LAEnvironmentRef   environ,
-  const FSSpec *     dictionary);
+  const FSSpec *     dictionary)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -337,7 +320,7 @@ LAListAvailableDictionaries(
   ItemCount          maxCount,
   ItemCount *        actualCount,
   FSSpec             dictionaryList[],
-  Boolean            opened[]);
+  Boolean            opened[])                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -352,7 +335,7 @@ extern OSStatus
 LAAddNewWord(
   LAEnvironmentRef   environ,
   const FSSpec *     dictionary,
-  const AEDesc *     dataList);
+  const AEDesc *     dataList)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -374,7 +357,7 @@ LAMorphemeAnalysis(
   LAMorphemePath *       leadingPath,
   LAMorphemePath *       trailingPath,
   ItemCount              pathCount,
-  LAMorphemeBundle *     result);
+  LAMorphemeBundle *     result)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -393,7 +376,7 @@ LAContinuousMorphemeAnalysis(
   Boolean                incrementalText,
   LAMorphemePath *       leadingPath,
   LAMorphemePath *       trailingPath,
-  Boolean *              modified);
+  Boolean *              modified)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -407,7 +390,7 @@ LAContinuousMorphemeAnalysis(
 extern OSStatus 
 LAGetMorphemes(
   LAContextRef      context,
-  LAMorphemePath *  result);
+  LAMorphemePath *  result)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -423,7 +406,7 @@ LAShiftMorphemes(
   LAContextRef      context,
   ItemCount         morphemeCount,
   LAMorphemePath *  path,
-  UniCharCount *    shiftedLength);
+  UniCharCount *    shiftedLength)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -435,7 +418,7 @@ LAShiftMorphemes(
  *    Non-Carbon CFM:   in LanguageAnalysisLib 1.0 and later
  */
 extern OSStatus 
-LAResetAnalysis(LAContextRef context);
+LAResetAnalysis(LAContextRef context)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -598,13 +581,7 @@ enum {
 
 
 
-#if PRAGMA_STRUCT_ALIGN
-    #pragma options align=reset
-#elif PRAGMA_STRUCT_PACKPUSH
-    #pragma pack(pop)
-#elif PRAGMA_STRUCT_PACK
-    #pragma pack()
-#endif
+#pragma options align=reset
 
 #ifdef __cplusplus
 }
