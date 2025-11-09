@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F01280AE-D56D-3BFA-B7BC-89A36F4150FC
+    value:           699EABA9-49CC-395E-93F0-0E37BDDEA648
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4889F957-DFCB-3374-AF95-B2E3178FFE78
+    value:           E9CC9C90-6C61-3421-8EDA-3FFEEC058975
 install-name:    '/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller'
 current-version: 660
 exports:
@@ -36,11 +36,10 @@ exports:
                        _kRecoveredItemsPath, _kTemplatePackageGroup, _kTemplateReceiptIdentifier, 
                        _kValidTargetsDidUpdateNotificationName, _nullNotifyCallback, 
                        _stagedAppleUpgradePath ]
-    objc-classes:    [ APFSMachineSupport, OSIAIPostInstall, OSIAPFSCondenserElement, 
-                       OSIAttachLoggingElement, OSICleanUpElement, OSICleanupFailedInstallElement, 
-                       OSICleanupSharedSupportElement, OSICollectionInstallElement, 
-                       OSIConvertToAPFSElement, OSICopyTemplateElement, OSICreateBootSnapshot, 
-                       OSICreateSystemVolumeElement, OSIDIYInstallRecoveryElement, 
+    objc-classes:    [ OSIAIPostInstall, OSIAPFSCondenserElement, OSIAttachLoggingElement, 
+                       OSICleanUpElement, OSICleanupFailedInstallElement, OSICleanupSharedSupportElement, 
+                       OSICollectionInstallElement, OSIConvertToAPFSElement, OSICopyTemplateElement, 
+                       OSICreateBootSnapshot, OSICreateSystemVolumeElement, OSIDIYInstallRecoveryElement, 
                        OSIDebuggerTool, OSIDetachLoggingElement, OSIDisableFirmlinksElement, 
                        OSIEraseInstallElement, OSIEraseSystemVolumeElement, OSIError, 
                        OSIFirstBootController, OSIGatherGPUStatistics, OSIInstallElement, 

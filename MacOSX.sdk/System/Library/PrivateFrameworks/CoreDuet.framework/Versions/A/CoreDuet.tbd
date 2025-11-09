@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D987D8E3-F463-3090-BF85-DAC246028957
+    value:           BFE5CEBC-B808-3F63-AA63-2967D97B502D
   - target:          x86_64-maccatalyst
-    value:           D987D8E3-F463-3090-BF85-DAC246028957
+    value:           BFE5CEBC-B808-3F63-AA63-2967D97B502D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FFA4F3ED-5073-3DFB-9647-6572DC20E668
+    value:           B35EF884-7F04-3EEE-931A-B14975451803
   - target:          arm64e-maccatalyst
-    value:           FFA4F3ED-5073-3DFB-9647-6572DC20E668
+    value:           B35EF884-7F04-3EEE-931A-B14975451803
 install-name:    '/System/Library/PrivateFrameworks/CoreDuet.framework/Versions/A/CoreDuet'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -29,14 +29,16 @@ exports:
                        _InteractionAnalysisPETInteractionEventReadFrom, _InteractionAnalysisPETInteractionEventsReadFrom, 
                        _MailIntelligencePETContactEventReadFrom, _MailIntelligencePETContactEventsReadFrom, 
                        _MailIntelligencePETMailIntelligenceAnalysisEventReadFrom, 
-                       _MaxBatches, _PSStoreChangedNotification, __CDDomainAvailabilityDescription, 
-                       __CDFormattedDate, __CDInteractionMachServiceName, __CDInteractionNSXPCInterface, 
-                       __CDInteractionStoreDeletedInteractionsNotification, __CDInteractionStoreRecordedDistributedNotification, 
-                       __CDInteractionStoreRecordedInteractionsNotification, __CDInteractionUserConnectionOptions, 
-                       __CDInteractionUserMachServiceName, __CDInteractionsKey, __CDLoggingUUIDAsInteger, 
-                       __CDNormalizedStringFromQueryString, __CDPerfMetricInitialize, 
-                       __CDPerfMetricStartTimingWithTelemetry, __CDPeriodicSchedulerDefaultQueueName, 
-                       __CDPrettyPrintCollection, __CDSizeMetricInitialize, __CDSocialInteractionAdvisorMacMailBundleId, 
+                       _MaxBatches, _PSStoreChangedNotification, _PersonLinkingLinkedPairEventReadFrom, 
+                       _PersonLinkingPersonPairReadFrom, _PersonLinkingPersonReadFrom, 
+                       __CDDomainAvailabilityDescription, __CDFormattedDate, __CDInteractionMachServiceName, 
+                       __CDInteractionNSXPCInterface, __CDInteractionStoreDeletedInteractionsNotification, 
+                       __CDInteractionStoreRecordedDistributedNotification, __CDInteractionStoreRecordedInteractionsNotification, 
+                       __CDInteractionUserConnectionOptions, __CDInteractionUserMachServiceName, 
+                       __CDInteractionsKey, __CDLoggingUUIDAsInteger, __CDNormalizedStringFromQueryString, 
+                       __CDPerfMetricInitialize, __CDPerfMetricStartTimingWithTelemetry, 
+                       __CDPeriodicSchedulerDefaultQueueName, __CDPrettyPrintCollection, 
+                       __CDSizeMetricInitialize, __CDSocialInteractionAdvisorMacMailBundleId, 
                        __CDSocialInteractionAdvisorMobileMailBundleId, __CKEventRecordCreationDateKey, 
                        __CKEventRecordEncryptedEventKey, __CKEventRecordStreamNameKey, 
                        __CKEventRecordType, __DKAlarmStateCategoryValue, __DKAudioRouteCategoryValue, 
@@ -134,6 +136,7 @@ exports:
                        HomeControlAnalysisPETCoreBehaviorAnalysisEvent, InteractionAnalysisPETInteractionEvent, 
                        InteractionAnalysisPETInteractionEvents, MailIntelligencePETContactEvent, 
                        MailIntelligencePETContactEvents, MailIntelligencePETMailIntelligenceAnalysisEvent, 
+                       PersonLinkingLinkedPairEvent, PersonLinkingPerson, PersonLinkingPersonPair, 
                        _CDAdvisedInteraction, _CDAppActionRecorder, _CDAttachment, 
                        _CDAttachmentRecord, _CDAutoSuCache, _CDAutoSuConfig, _CDBatterySaver, 
                        _CDCachedPeopleSuggestion, _CDCommunicatorHelper, _CDComplications, 
@@ -162,21 +165,21 @@ exports:
                        _CDPSimpleModelParameterManagerTuningValue, _CDPaths, _CDPeopleSuggester, 
                        _CDPeopleSuggesterContext, _CDPeopleSuggesterSettings, _CDPerfMetric, 
                        _CDPerfMetricFamily, _CDPeriodicScheduler, _CDPeriodicSchedulerJob, 
-                       _CDPortraitMetadataKey, _CDPortraitStreams, _CDPrivacyPolicy, 
-                       _CDQueryInteractionAdvisor, _CDRateAndTotalLimiter, _CDRateLimiter, 
-                       _CDSerializableKeyedData, _CDServerRequest, _CDSharedMemoryKeyValueStore, 
-                       _CDSiriLearningSettings, _CDSizeMetric, _CDSizeMetricFamily, 
-                       _CDSleepForAutoSu, _CDSleepPredictor, _CDSleepPredictorMath, 
-                       _CDSocialInteractionAdvisor, _CDSpotlightEventIndexer, _CDSpotlightEventIndexerDataSource, 
-                       _CDSpotlightItemRecorder, _CDSpotlightItemRecorderOperation, 
-                       _CDSpotlightItemUtils, _CDSpotlightQuerier, _CDStats, _CDStatsPrinter, 
-                       _CDStringTokenizer, _CDSuggestedPerson, _CDTemporalInteractionAdvisor, 
-                       _CDTopicMetadataKey, _CDUserActivity, _CDVersionRecord, _DKActivityThrottler, 
-                       _DKAggregateEventQueryResult, _DKAirPlayPredictionCategory, 
-                       _DKAirPlayPredictionMetadataKey, _DKAlarmMetadataKey, _DKAlarmStateCategory, 
-                       _DKAnyDoubleQuantity, _DKAnyIntegerCategory, _DKAnyStringIdentifier, 
-                       _DKAppActivityStreamTombstoneRequirement, _DKAppClipUsageMetadataKey, 
-                       _DKAppInstallMetadataKey, _DKAppIntentsStreamTombstoneRequirement, 
+                       _CDPersonLinkingDataCollectionTask, _CDPortraitMetadataKey, 
+                       _CDPortraitStreams, _CDPrivacyPolicy, _CDQueryInteractionAdvisor, 
+                       _CDRateAndTotalLimiter, _CDRateLimiter, _CDSerializableKeyedData, 
+                       _CDServerRequest, _CDSharedMemoryKeyValueStore, _CDSiriLearningSettings, 
+                       _CDSizeMetric, _CDSizeMetricFamily, _CDSleepForAutoSu, _CDSleepPredictor, 
+                       _CDSleepPredictorMath, _CDSocialInteractionAdvisor, _CDSpotlightEventIndexer, 
+                       _CDSpotlightEventIndexerDataSource, _CDSpotlightItemRecorder, 
+                       _CDSpotlightItemRecorderOperation, _CDSpotlightItemUtils, 
+                       _CDSpotlightQuerier, _CDStats, _CDStatsPrinter, _CDStringTokenizer, 
+                       _CDSuggestedPerson, _CDTemporalInteractionAdvisor, _CDTopicMetadataKey, 
+                       _CDUserActivity, _CDVersionRecord, _DKActivityThrottler, _DKAggregateEventQueryResult, 
+                       _DKAirPlayPredictionCategory, _DKAirPlayPredictionMetadataKey, 
+                       _DKAlarmMetadataKey, _DKAlarmStateCategory, _DKAnyDoubleQuantity, 
+                       _DKAnyIntegerCategory, _DKAnyStringIdentifier, _DKAppActivityStreamTombstoneRequirement, 
+                       _DKAppClipUsageMetadataKey, _DKAppInstallMetadataKey, _DKAppIntentsStreamTombstoneRequirement, 
                        _DKAppMediaUsageMetadataKey, _DKAppUsageTombstoneRequirement, 
                        _DKApplicationActivityMetadataKey, _DKApplicationMetadataKey, 
                        _DKAudioMetadataKey, _DKAudioRouteCategory, _DKBacklightMetadataKey, 
@@ -416,11 +419,14 @@ exports:
                        MailIntelligencePETMailIntelligenceAnalysisEvent._contactEvents, 
                        MailIntelligencePETMailIntelligenceAnalysisEvent._mailIntelligenceUserId, 
                        MailIntelligencePETMailIntelligenceAnalysisEvent._sessionId, 
-                       _CDMutablePerfMetric._eventStatsTimerCounter, _CDMutablePerfMetric._os_activity, 
-                       _CDMutablePerfMetric._os_activity_scope_state, _CDPSimpleModelParameterManagerTuningValue._lambda, 
-                       _CDPSimpleModelParameterManagerTuningValue._score, _CDPSimpleModelParameterManagerTuningValue._threshold, 
-                       _CDPSimpleModelParameterManagerTuningValue._w0, _CDPerfMetric._count, 
-                       _CDPerfMetric._errorCount, _CDPerfMetric._lastElapsedTime, 
+                       PersonLinkingLinkedPairEvent._pairs, PersonLinkingLinkedPairEvent._userID, 
+                       PersonLinkingPerson._emails, PersonLinkingPerson._name, PersonLinkingPersonPair._grade, 
+                       PersonLinkingPersonPair._graphPerson, PersonLinkingPersonPair._has, 
+                       PersonLinkingPersonPair._sourcePerson, _CDMutablePerfMetric._eventStatsTimerCounter, 
+                       _CDMutablePerfMetric._os_activity, _CDMutablePerfMetric._os_activity_scope_state, 
+                       _CDPSimpleModelParameterManagerTuningValue._lambda, _CDPSimpleModelParameterManagerTuningValue._score, 
+                       _CDPSimpleModelParameterManagerTuningValue._threshold, _CDPSimpleModelParameterManagerTuningValue._w0, 
+                       _CDPerfMetric._count, _CDPerfMetric._errorCount, _CDPerfMetric._lastElapsedTime, 
                        _CDPerfMetric._lastResultCount, _CDPerfMetric._lastUpdateTime, 
                        _CDPerfMetric._lock, _CDPerfMetric._maximumElapsedTime, _CDPerfMetric._minimumElapsedTime, 
                        _CDPerfMetric._totalElapsedTime, _CDSizeMetric._count, _CDSizeMetric._firstSize, 

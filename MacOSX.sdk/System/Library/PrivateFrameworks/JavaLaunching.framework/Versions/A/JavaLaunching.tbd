@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           93D27F98-3D39-3630-84D7-6ABB389C92F7
+    value:           2888A057-6F7D-36DF-84DD-80F08142E333
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           78B87F7E-BD6C-3477-95D9-E7330D85CC7D
+    value:           92680BB1-33E5-3240-BBDD-ADA18F967DF8
 install-name:    '/System/Library/PrivateFrameworks/JavaLaunching.framework/Versions/A/JavaLaunching'
 current-version: 319
 exports:

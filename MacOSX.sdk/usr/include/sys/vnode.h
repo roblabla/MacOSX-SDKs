@@ -119,6 +119,7 @@ enum vtagtype   {
 #define VNODE_READ      0x01
 #define VNODE_WRITE     0x02
 #define VNODE_BLOCKMAP_NO_TRACK 0x04 // APFS Fusion: Do not track this request
+#define VNODE_CLUSTER_VERIFY 0x08 // Verification will be performed in the cluster layer
 
 
 /* flags for VNOP_ALLOCATE */

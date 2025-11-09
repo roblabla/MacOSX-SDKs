@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           95E22FE6-A567-3B2E-BA40-AF9962D0274C
+    value:           D57515E3-0F07-38D2-A5BA-0C656DD310D5
   - target:          x86_64-maccatalyst
-    value:           95E22FE6-A567-3B2E-BA40-AF9962D0274C
+    value:           D57515E3-0F07-38D2-A5BA-0C656DD310D5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ACA248A0-F0CF-3495-A9AB-0682900C819F
+    value:           214AB63E-EBAE-3F0D-820E-23A74800511F
   - target:          arm64e-maccatalyst
-    value:           ACA248A0-F0CF-3495-A9AB-0682900C819F
+    value:           214AB63E-EBAE-3F0D-820E-23A74800511F
 install-name:    '/System/Library/Frameworks/AutomaticAssessmentConfiguration.framework/Versions/A/AutomaticAssessmentConfiguration'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

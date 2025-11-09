@@ -14,6 +14,17 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /*
+ Actions that Siri will perform when users select the assistant cell.
+ 
+ These actions require that your app supports the required SiriKit intents, and your app is of a supporting category.
+ For CarPlay audio apps, this is limited to INPlayMediaIntent. For CarPlay communication apps, this is INStartCallIntent.
+ */
+typedef NS_ENUM(NSInteger, CPAssistantCellActionType) {
+    CPAssistantCellActionTypePlayMedia = 0,
+    CPAssistantCellActionTypeStartCall,
+} API_AVAILABLE(ios(15.0));
+
+/*
  Visibility of the Assistant Cell
  */
 typedef NS_ENUM(NSInteger, CPAssistantCellVisibility) {
@@ -33,6 +44,40 @@ typedef NS_ENUM(NSInteger, CPAssistantCellPosition) {
 @protocol CPListTemplateDelegate;
 @class CPListItem;
 
+API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, watchos, tvos)
+/**
+ @c CPAssistantCellConfiguration encapsulates the configuration options for your assistant cell.
+  
+ @note The Assistant Cell is only supported by CarPlay Audio and Communication apps.
+*/
+@interface CPAssistantCellConfiguration : NSObject <NSSecureCoding>
+
+/**
+ Initialize an Assistant Cell Configuration with a position, visibility, and action representing the SiriKit intent that should be invoked when users select the assistant cell.
+ */
+- (instancetype)initWithPosition:(CPAssistantCellPosition)position visibility:(CPAssistantCellVisibility)visibility assistantAction:(CPAssistantCellActionType)assistantAction;
+
+/**
+ The position of the Assistant Cell.
+ 
+ @note The default value of this property is @c CPAssistantCellPositionTop.
+ */
+@property (nonatomic, readonly) CPAssistantCellPosition position;
+
+/**
+ The visibility of the Assistant Cell.
+ 
+ @note The default value of this property is @c CPAssistantCellVisibilityOff.
+ */
+@property (nonatomic, readonly) CPAssistantCellVisibility visibility;
+
+/**
+ The action that Siri will perform when users select the assistant cell.
+ */
+@property (nonatomic, readonly) CPAssistantCellActionType assistantAction;
+
+@end
+
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface CPListTemplate : CPTemplate <CPBarButtonProviding>
 
@@ -46,10 +91,9 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
                      sections:(NSArray <CPListSection *> *)sections;
 
 /**
- Initialize a list template with one or more sections of items, an optional title, and specifications
- for the visibility and position of an Assistant Cell.
+ Initialize a list template with one or more sections of items, an optional title, and configuration for the assistant cell via a @c CPAssistantCellConfiguration object.
  
- @note The Assistant Cell will only be rendered for the Audio and Communication app categories.
+ @note The Assistant Cell is only supported by CarPlay Audio and Communication Apps.
  
  @discussion Unlike @c CPListItem, your application will not receive a callback when the user selects the cell.
  Instead, configure an Intents app extention to receive user requests from SiriKit, in order to turn the requests into an
@@ -57,8 +101,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  */
 - (instancetype)initWithTitle:(nullable NSString *)title
                      sections:(NSArray <CPListSection *> *)sections
-      assistantCellVisibility:(CPAssistantCellVisibility)visibility
-        assistantCellPosition:(CPAssistantCellPosition)position API_AVAILABLE(ios(15.0));
+   assistantCellConfiguration:(nullable CPAssistantCellConfiguration *)assistantCellConfiguration API_AVAILABLE(ios(15.0));
 
 /**
  The list template's delegate is informed of list selection events.
@@ -148,31 +191,17 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
 #pragma mark - Assistant Cell
 
 /**
- The visibility of the Assistant Cell.
+ The configuration of the Assistant Cell.
 
- Assigning to this property will dynamically update the List Template to reflect the visibility of the Assistant Cell.
- The default value of this property is @c CPAssistantCellVisibilityOff.
+ Assigning to this property will dynamically update the List Template to reflect the visibility, position, and intent identifier of the Assistant Cell.
 
- @note The Assistant Cell will only be rendered for the Audio and Communication app categories.
+ @note The Assistant Cell is only supported by CarPlay Audio and Communication Apps.
  
  @discussion Unlike @c CPListItem, your application will not receive a callback when the user selects the cell.
  Instead, configure an Intents app extention to receive user requests from SiriKit, in order to turn the requests into an
  app-specific actions.
  */
-@property (nonatomic, assign) CPAssistantCellVisibility assistantCellVisibility API_AVAILABLE(ios(15.0));
-
-/**
- The position of the Assistant Cell.
- Assigning to this property will dynamically update the List Template to reflect the position of the Assistant Cell.
- The default value of this property is @c CPAssistantCellPositionTop.
-
- @note The Assistant Cell will only be rendered for the Audio and Communication app categories.
- 
- @discussion Unlike @c CPListItem, your application will not receive a callback when the user selects the cell.
- Instead, configure an Intents app extention to receive user requests from SiriKit, in order to turn the requests into an
- app-specific actions.
- */
-@property (nonatomic, assign) CPAssistantCellPosition assistantCellPosition API_AVAILABLE(ios(15.0));
+@property (nonatomic, nullable, strong) CPAssistantCellConfiguration *assistantCellConfiguration API_AVAILABLE(ios(15.0));
 
 @end
 

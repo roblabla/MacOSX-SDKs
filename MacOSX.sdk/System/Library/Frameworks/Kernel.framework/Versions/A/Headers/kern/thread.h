@@ -86,6 +86,7 @@
 
 #include <mach/kern_return.h>
 #include <mach/mach_types.h>
+#include <mach/mach_param.h>
 #include <mach/message.h>
 #include <mach/boolean.h>
 #include <mach/vm_param.h>
@@ -98,40 +99,14 @@
 #include <sys/cdefs.h>
 
 
-
 __BEGIN_DECLS
-
-extern void thread_mtx_lock(thread_t thread);
-
-extern void thread_mtx_unlock(thread_t thread);
-
-extern thread_t         current_thread(void) __attribute__((const));
-
-extern void                     thread_reference(
-	thread_t        thread);
-
-extern void                     thread_deallocate(
-	thread_t        thread);
-
-
-__END_DECLS
-
-
-
-__BEGIN_DECLS
-
-extern uint64_t                 thread_tid(thread_t thread);
-
-__END_DECLS
-
-
-__BEGIN_DECLS
-
 
 
 /*! @function thread_has_thread_name
  *   @abstract Checks if a thread has a name.
- *   @discussion This function takes one input, a thread, and returns a boolean value indicating if that thread already has a name associated with it.
+ *   @discussion This function takes one input, a thread, and returns
+ *       a boolean value indicating if that thread already has a name associated
+ *       with it.
  *   @param th The thread to inspect.
  *   @result TRUE if the thread has a name, FALSE otherwise.
  */
@@ -139,16 +114,35 @@ extern boolean_t thread_has_thread_name(thread_t th);
 
 /*! @function thread_set_thread_name
  *   @abstract Set a thread's name.
- *   @discussion This function takes two input parameters: a thread to name, and the name to apply to the thread.  The name will be copied over to the thread in order to better identify the thread.  If the name is longer than MAXTHREADNAMESIZE - 1, it will be truncated.
+ *   @discussion This function takes two input parameters: a thread to name,
+ *       and the name to apply to the thread.  The name will be copied over to
+ *       the thread in order to better identify the thread.  If the name is
+ *       longer than MAXTHREADNAMESIZE - 1, it will be truncated.
  *   @param th The thread to be named.
  *   @param name The name to apply to the thread.
  */
 extern void thread_set_thread_name(thread_t th, const char* name);
 
+extern thread_t current_thread(void) __pure2;
+
+extern uint64_t thread_tid(thread_t thread) __pure2;
+
+extern void thread_reference(
+	thread_t        thread);
+
+extern void thread_deallocate(
+	thread_t        thread);
 
 /*! @function kernel_thread_start
  *   @abstract Create a kernel thread.
- *   @discussion This function takes three input parameters, namely reference to the function that the thread should execute, caller specified data and a reference which is used to return the newly created kernel thread. The function returns KERN_SUCCESS on success or an appropriate kernel code type indicating the error. It may be noted that the caller is responsible for explicitly releasing the reference to the created thread when no longer needed. This should be done by calling thread_deallocate(new_thread).
+ *   @discussion This function takes three input parameters, namely reference
+ *       to the function that the thread should execute, caller specified data
+ *       and a reference which is used to return the newly created kernel
+ *       thread. The function returns KERN_SUCCESS on success or an appropriate
+ *       kernel code type indicating the error. It may be noted that the caller
+ *       is responsible for explicitly releasing the reference to the created
+ *       thread when no longer needed. This should be done by calling
+ *       thread_deallocate(new_thread).
  *   @param continuation A C-function pointer where the thread will begin execution.
  *   @param parameter Caller specified data to be passed to the new thread.
  *   @param new_thread Reference to the new thread is returned in this parameter.
@@ -157,9 +151,8 @@ extern void thread_set_thread_name(thread_t th, const char* name);
 
 extern kern_return_t    kernel_thread_start(
 	thread_continue_t       continuation,
-	void                            *parameter,
-	thread_t                        *new_thread);
-
+	void                    *parameter,
+	thread_t                *new_thread);
 
 __END_DECLS
 

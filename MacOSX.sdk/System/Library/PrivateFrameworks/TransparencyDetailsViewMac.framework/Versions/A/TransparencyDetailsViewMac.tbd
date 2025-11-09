@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           99E25C3A-9230-3245-A947-0CCCE7E34603
+    value:           609571CC-A548-3F3C-A328-A5B5334AB5FF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3DF02279-4AA1-3314-83AA-157EE2038F86
+    value:           4E4A59B9-70ED-32E8-BCF9-36B0D53A7834
 install-name:    '/System/Library/PrivateFrameworks/TransparencyDetailsViewMac.framework/Versions/A/TransparencyDetailsViewMac'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

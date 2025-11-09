@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CB52F766-6B39-376F-95FF-DEB663D7882B
+    value:           67E79D38-3162-3C20-B184-EF1E4A1A2D15
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9234FCD2-2761-3DD1-8480-99AD83D5E896
+    value:           71735DA2-2110-34B8-8463-17EABC549B75
 install-name:    '/System/Library/Frameworks/ExceptionHandling.framework/Versions/A/ExceptionHandling'
 current-version: 14
 exports:

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           963CD655-BA96-3FE3-A17D-EF9F87D9B461
+    value:           492A2E12-8E48-3989-86DB-4F3196767251
   - target:          x86_64-maccatalyst
-    value:           963CD655-BA96-3FE3-A17D-EF9F87D9B461
+    value:           492A2E12-8E48-3989-86DB-4F3196767251
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5713D148-867A-3EDE-9B00-BF2507B49E66
+    value:           AF782B43-C742-3DCA-85C6-4839A883EC41
   - target:          arm64e-maccatalyst
-    value:           5713D148-867A-3EDE-9B00-BF2507B49E66
+    value:           AF782B43-C742-3DCA-85C6-4839A883EC41
 install-name:    '/System/Library/PrivateFrameworks/CoreDAV.framework/Versions/A/CoreDAV'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -364,8 +364,6 @@ exports:
                        CoreDAVSRVResourceRecord._serviceString, CoreDAVSRVResourceRecord._target, 
                        CoreDAVSRVResourceRecord._weight, CoreDAVSetItem._prop, CoreDAVSupportedReportItem._report, 
                        CoreDAVSupportedReportSetItem._supportedReports, CoreDAVSyncReportItem._syncToken, 
-                       CoreDAVSyncReportTask._moreToSync, CoreDAVSyncReportTask._nextSyncToken, 
-                       CoreDAVSyncReportTask._previousSyncToken, CoreDAVSyncReportTask._wasInvalidSyncToken, 
                        CoreDAVTask._accountInfoProvider, CoreDAVTask._depth, CoreDAVTask._numDownloadedElements, 
                        CoreDAVTask._taskManager, CoreDAVTaskGroup._accountInfoProvider, 
                        CoreDAVTaskGroup._isCancelling, CoreDAVTaskGroup._isFinished, 

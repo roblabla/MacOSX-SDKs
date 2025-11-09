@@ -285,7 +285,15 @@ protected:
      * @function SetLED
      *
      * @abstract
+     * DEPRECATED. Prefer SetLEDState instead.
      * Sets an LED on the service.
+     *
+     * @discussion
+     * By default if no implementation of SetLEDState is provided by
+     * the DriverKit Driver, SetLED will be called instead by a 
+     * default implementation in IOUserHIDEventService. The
+     * IOUserHIDEventService implementation always returns
+     * kIOReturnSuccess if the usagePage for SetLEDState is @{kHIDPage_LEDs}.
      *
      * @param usage
      * The LED usage to set. LED usages can be found in
@@ -295,6 +303,29 @@ protected:
      * Turn on or off the LED.
      */
     virtual void SetLED(uint32_t usage, bool on) LOCAL;
+
+    /*!
+     * @function SetLEDState
+     *
+     * @abstract
+     * Sets an LED on the service.
+     *
+     * @discussion
+     * If there is no matching LED, then kIOReturnUnsupported should be returned, so that the UserClient
+     * can be signaled that the usage requested doesn't exist. If the LED exists it should return
+     * kIOReturnSuccess.
+     *
+     * @param usagePage
+     * The usage page of the LED requested to set.
+     *
+     * @param usage
+     * The LED usage to set. LED usages can be found in
+     * <IOKit/hid/IOHIDUsageTables.h>.
+     *
+     * @param on
+     * Turn on or off the LED.
+     */
+    virtual kern_return_t SetLEDState(uint32_t usagePage, uint32_t usage, bool on) LOCAL;
     
     /*!
      * @function dispatchEvent
@@ -334,7 +365,7 @@ protected:
      * set properties on the event service
      *
      * @discussion
-     * This method should be overrided by the DriverKit class if it needs to respond to setProperties calls.
+     * This method should be overridden by the DriverKit class if it needs to respond to setProperties calls.
      * Calling SetProperties(properties, SUPERDISPATCH) from the DriverKit class will get the properties added to a dictionary in IOReg
      * that HID Event System Clients will be able to see.
      *
@@ -403,7 +434,7 @@ class EXTENDS (IOHIDEventService) IOHIDEventServicePrivate
      * @function CopyEvent
      *
      * @abstract
-     * Kernel to userspace OSAction callback definition for copying events.
+     * Kernel to user-space OSAction callback definition for copying events.
      *
      * @param matching
      * OSDictionary containing the event matching criteria.
@@ -514,6 +545,87 @@ class EXTENDS (IOHIDEventService) IOHIDEventServicePrivate
     virtual void _CompleteSetProperties(OSAction * action TYPE(SetUserProperties),
                                         IOReturn   result,
                                         uint64_t   context);
+
+    /*!
+     * @function _SetLED
+     *
+     * @abstract
+     * Set LED request called by kernel service. Private function, should not be used directly.
+     *
+     * @discussion
+     * _SetLED will call into SetLEDState and return the return value to the kernel.
+     * For backwards compatibility, there is a default implementation of SetLEDState in IOUserHIDEventService.
+     * Which will call SetLED if the UsagePage is kHIDPage_LEDs and return kIOReturnSuccess.
+     * If there is no matching LED, then kIOReturnUnsupported should be returned, so that the UserClient
+     * can be signaled that the usage requested doesn't exist.
+     *
+     * @param usagePage
+     * Usage page of the LED to change.
+     *
+     * @param usage
+     * Usage of the LED to change.
+     *
+     * @param on
+     * Whether the LED should be turned on, or off.
+     *
+     * @param context
+     * Kernel context for routing the results to the correct caller. Should be passed to _CompleteSetLED.
+     *
+     * @param action
+     * Completion action. Action should be passed to _CompleteSetLED.
+     */
+    virtual void _SetLED(uint32_t usagePage,
+                                    uint32_t usage,
+                                    bool on,
+                                    uint64_t       context,
+                                    OSAction     * action) LOCAL
+                                    TYPE(SetLEDAction);
+
+     /*!
+     * @function SetLEDAction
+     *
+     * @abstract
+     * Action definition for SetLEDAction call.
+     *
+     * @param usagePage
+     * Usage page of the LED to change.
+     *
+     * @param usage
+     * Usage of the LED to change.
+     *
+     * @param on
+     * Whether the LED should be turned on, or off.
+     *
+     * @param context
+     * Kernel context for routing the results to the correct caller. Should be passed to _CompleteSetLED.
+     *
+     * @param action
+     * Completion action. Action should be passed to _CompleteSetLED.
+     */
+    virtual void SetLEDAction(uint32_t usagePage,
+                                    uint32_t usage,
+                                    bool on,
+                                    uint64_t       context,
+                                    OSAction     * action TARGET) LOCAL = 0;
+
+    /*!
+     * @function _CompleteSetLED
+     *
+     * @abstract
+     * Complete a _SetLED call. Private function, should not be used directly.
+     *
+     * @param action
+     * Action from _SetLED call.
+     *
+     * @param result
+     * Result of the set LED call to return to the kernel.
+     *
+     * @param context
+     * Context from _SetLED call.
+     */
+     virtual void _CompleteSetLED(OSAction * action TYPE(SetLEDAction),
+                                  IOReturn result,
+                                  uint64_t context);
 };
 
 #endif /* ! _HIDDRIVERKIT_IOHIDEVENTSERVICE_H */

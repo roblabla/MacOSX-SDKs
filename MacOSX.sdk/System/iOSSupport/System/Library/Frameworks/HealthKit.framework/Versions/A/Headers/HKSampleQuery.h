@@ -50,11 +50,15 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
 
 /*!
  @method        initWithQueryDescriptors:limit:resultsHandler:
- @abstract      Returns a query that will retrieve HKSamples matching the given queryDescriptors.
+ @abstract      Returns a query that will retrieve HKSamples matching any of the given queryDescriptors.
  
- @param         queryDescriptors          An array of query descriptors that describes the sample types and predicates used for querying.
- @param         limit                     The maximum number of samples to return. Pass HKObjectQueryNoLimit for no limit.
- @param         resultsHandler            The block to invoke with results when the query has finished executing. This block is invoked once with results, an array of HKSamples matching the queryDescriptors passed in, or nil if an error occurred.
+ @param         queryDescriptors          An array of query descriptors that describes the sample types and predicates
+                                          used for querying.
+ @param         limit                     The maximum number of samples to return. Pass HKObjectQueryNoLimit
+                                          for no limit.
+ @param         resultsHandler            The block to invoke with results when the query has finished executing. This
+                                          block is invoked once with results, an array of HKSamples matching the
+                                          queryDescriptors passed in, or nil if an error occurred.
  */
 - (instancetype)initWithQueryDescriptors:(NSArray<HKQueryDescriptor *> *)queryDescriptors
                                    limit:(NSInteger)limit
@@ -62,12 +66,17 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
 
 /*!
  @method        initWithQueryDescriptors:limit:sortDescriptors:resultsHandler:
- @abstract      Returns a query that will retrieve HKSamples matching the given queryDescriptors.
+ @abstract      Returns a query that will retrieve HKSamples matching any of the given queryDescriptors.
  
- @param         queryDescriptors          An array of query descriptors that describes the sample types and predicates used for querying.
- @param         limit                     The maximum number of samples to return. Pass HKObjectQueryNoLimit for no limit.
+ @param         queryDescriptors          An array of query descriptors that describes the sample types and predicates
+                                          used for querying.
+ @param         limit                     The maximum number of samples to return. Pass HKObjectQueryNoLimit
+                                          for no limit.
  @param         sortDescriptors           The sort descriptors to use to order the resulting samples.
- @param         resultsHandler            The block to invoke with results when the query has finished executing. This block is invoked once with results, an array of HKSamples matching the queryDescriptors passed in, or nil if an error occurred. The HKSamples in the array are sorted by the specified sortDescriptors.
+ @param         resultsHandler            The block to invoke with results when the query has finished executing. This
+                                          block is invoked once with results, an array of HKSamples matching the
+                                          queryDescriptors passed in, or nil if an error occurred. The HKSamples in the
+                                          array are sorted by the specified sortDescriptors.
  */
 - (instancetype)initWithQueryDescriptors:(NSArray<HKQueryDescriptor *> *)queryDescriptors
                                    limit:(NSInteger)limit

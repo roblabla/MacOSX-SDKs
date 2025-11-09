@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           73F49009-90D6-31A6-B7FA-55FA6A942829
+    value:           9EF3F790-B46A-3449-8F7B-CB1C657F9ED1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E6792198-0BAB-3BBF-9DD4-F65E812B18D0
+    value:           57BC22DF-1ECE-3DB8-8D85-79AB1031D583
 install-name:    '/usr/lib/PN548_API.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

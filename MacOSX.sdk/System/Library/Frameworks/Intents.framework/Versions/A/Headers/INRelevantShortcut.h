@@ -55,7 +55,7 @@ API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macos, tvos)
  @abstract Links the relevant shortcut to a specific WidgetKit widget kind.
  @discussion When a relevant shortcut is linked to a WidgetKit widget, it hints to the system when to show the widget in a stack.
  */
-@property (copy, nullable, NS_NONATOMIC_IOSONLY) NSString *widgetKind;
+@property (copy, nullable, NS_NONATOMIC_IOSONLY) NSString *widgetKind API_AVAILABLE(ios(15.0), watchos(8.0));
 
 /*!
  @abstract The role of the relevant shortcut.

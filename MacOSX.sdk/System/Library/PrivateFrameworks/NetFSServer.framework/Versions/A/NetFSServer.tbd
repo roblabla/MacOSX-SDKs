@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           59B0694F-0E14-3DAF-88D4-783C13D67DFC
+    value:           1880068C-C9B8-3C29-918F-FA23647BCFAE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EC515E0D-0381-3721-98C7-05C4BCCAAF93
+    value:           A2ECBAAC-2156-3D4E-8A78-FC230E41CCD7
 install-name:    '/System/Library/PrivateFrameworks/NetFSServer.framework/Versions/A/NetFSServer'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

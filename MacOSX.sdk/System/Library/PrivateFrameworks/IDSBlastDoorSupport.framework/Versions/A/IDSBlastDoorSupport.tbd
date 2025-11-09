@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3DF9D64D-96AF-30D3-95D1-C9A8C0668CC6
+    value:           CF97796D-3559-3587-8DD6-B0808C686FBB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           288B0F9D-8FDE-3A46-9D0C-F0F60DB6751A
+    value:           A92D4751-A440-3157-9047-B70E34DA1D77
 install-name:    '/System/Library/PrivateFrameworks/IDSBlastDoorSupport.framework/Versions/A/IDSBlastDoorSupport'
 swift-abi-version: 7
 exports:

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0FE9A13A-4052-390C-B94E-B56CBAF8A852
+    value:           98619A8F-F19D-35F7-93CA-5C168C763774
   - target:          x86_64-maccatalyst
-    value:           0FE9A13A-4052-390C-B94E-B56CBAF8A852
+    value:           98619A8F-F19D-35F7-93CA-5C168C763774
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6ACC59B7-673F-3AE4-84F2-5B55B029B1B0
+    value:           C48A765C-9BC0-345E-ADF8-EF858D498844
   - target:          arm64e-maccatalyst
-    value:           6ACC59B7-673F-3AE4-84F2-5B55B029B1B0
+    value:           C48A765C-9BC0-345E-ADF8-EF858D498844
 install-name:    '/System/Library/PrivateFrameworks/DistributedEvaluation.framework/Versions/A/DistributedEvaluation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -63,36 +63,35 @@ exports:
                        __Z9normalCDFd, _allowCustomWakeUpPeriod, _almostEqual, _almostEqualDBL, 
                        _almostEqualDBLWithAccuracy, _almostEqualWithAccuracy, _binaryGCD, 
                        _calculateSigmaFromEpsilonAndDeltaForUnitL2Norm, _getfstype, 
-                       _is_apfs, _is_hfs, _is_msdos, _kClippingBoundKey, _kClippingBoundMin, 
-                       _kCoreEventMaxLimit, _kDESDistributedEvaluationErrorDomain, 
-                       _kDESDodMLPolicy_DefaultPeriod, _kDESDodMLPolicy_DefaultRecipeCountLimit, 
-                       _kDESDodMLPolicy_DefaultTimeLimit, _kDESDodMLPolicy_MaxTimeLimit, 
-                       _kDebugInfoDescriptionKey, _kDebugInfoResultKey, _kDebugInfoTimestampKey, 
-                       _kDediscoMessageLimitBytes, _kEncodedCategoricalMetadataKey, 
-                       _kEncodedNumericMetadataKey, _kHighMemoryExtensionPointName, 
-                       _kICloudAggServiceKey, _kL2NormBoundKey, _kLowMemoryExtensionPointName, 
-                       _kMaxNormKey, _kMetadataAlgoParamClippingBound, _kMetadataAlgoParamCohortSigma, 
-                       _kMetadataAlgoParamCurrentCohortSize, _kMetadataAlgoParamMaxCohortSize, 
-                       _kMetadataAlgoParamMechanism, _kMetadataAlgoParamMechanismGaussianFromSigma, 
-                       _kMetadataAlgoParamNumChunks, _kMetadataAlgoParamNumIterations, 
-                       _kMetadataAlgoParamOverallClippingBound, _kMetadataAlgoParamOverallDelta, 
-                       _kMetadataAlgoParamOverallEpsilon, _kMetadataAlgoParamPopulationSize, 
-                       _kMetadataAlgoParamRenyiOrder, _kMetadataAlgoParamRenyiOrderLowerBound, 
-                       _kMetadataAlgoParamRenyiOrderUpperBound, _kMetadataAlgoParamSigma, 
-                       _kMetadataAlgorithmParameters, _kMetadataCategoricalType, 
+                       _is_apfs, _is_hfs, _is_msdos, _kClippingBoundKey, _kCoreEventMaxLimit, 
+                       _kDESDistributedEvaluationErrorDomain, _kDESDodMLPolicy_DefaultPeriod, 
+                       _kDESDodMLPolicy_DefaultRecipeCountLimit, _kDESDodMLPolicy_DefaultTimeLimit, 
+                       _kDESDodMLPolicy_MaxTimeLimit, _kDebugInfoDescriptionKey, 
+                       _kDebugInfoResultKey, _kDebugInfoTimestampKey, _kDediscoMessageLimitBytes, 
+                       _kEncodedCategoricalMetadataKey, _kEncodedNumericMetadataKey, 
+                       _kHighMemoryExtensionPointName, _kICloudAggServiceKey, _kL2NormBoundKey, 
+                       _kLowMemoryExtensionPointName, _kMaxNormKey, _kMetadataAlgoParamClippingBound, 
+                       _kMetadataAlgoParamCohortSigma, _kMetadataAlgoParamCurrentCohortSize, 
+                       _kMetadataAlgoParamMaxCohortSize, _kMetadataAlgoParamMechanism, 
+                       _kMetadataAlgoParamMechanismGaussianFromSigma, _kMetadataAlgoParamNumChunks, 
+                       _kMetadataAlgoParamNumIterations, _kMetadataAlgoParamOverallClippingBound, 
+                       _kMetadataAlgoParamOverallDelta, _kMetadataAlgoParamOverallEpsilon, 
+                       _kMetadataAlgoParamPopulationSize, _kMetadataAlgoParamRenyiOrder, 
+                       _kMetadataAlgoParamRenyiOrderLowerBound, _kMetadataAlgoParamRenyiOrderUpperBound, 
+                       _kMetadataAlgoParamSigma, _kMetadataAlgorithmParameters, _kMetadataCategoricalType, 
                        _kMetadataEncodingKey, _kMetadataNumericType, _kMetadataSchemaBucketsKey, 
                        _kMetadataSchemaDescriptionKey, _kMetadataSchemaDictionaryItemTypeKey, 
                        _kMetadataSchemaDictionaryItemsKey, _kMetadataSchemaDictionaryKey, 
                        _kMetadataSchemaDictionaryPathKey, _kMetadataSchemaDictionaryRangeKey, 
                        _kMetadataSchemaTypeKey, _kNormBinCountKey, _kPrivacyIdentifierExtensionKey, 
-                       _kPrivacyIdentifierKey, _kRecipeLocalDPParametersDeltaKey, 
-                       _kRecipeLocalDPParametersEpsilonKey, _kRecipeLocalDPParametersKey, 
-                       _kRecipeLocalDPParametersMechanismGaussian, _kRecipeLocalDPParametersMechanismKey, 
-                       _kRecipeLocalDPParametersMomentsAccountantKey, _kRecipeMaxNormKey, 
-                       _kRecordRetentionDaysToExpiration, _kRecordRetentionMaxRecordCount, 
-                       _readdisk, _sDESCoreDuetEventLimitKey, _sDESCoreDuetEventPredicateKey, 
-                       _sDESCoreDuetSupportedEventStreamNamesKey, _sDESDaysToExpirationOfRecordsKey, 
-                       _sDESMaximumNumberOfRecordsKey, _sDESSupportedRecordTypesKey ]
+                       _kPrivacyIdentifierKey, _kRecipeDPParametersDeltaKey, _kRecipeDPParametersEpsilonKey, 
+                       _kRecipeDPParametersKey, _kRecipeDPParametersMechanismGaussian, 
+                       _kRecipeDPParametersMechanismKey, _kRecipeDPParametersMomentsAccountantKey, 
+                       _kRecipeLocalDPParametersKey, _kRecipeMaxNormKey, _kRecordRetentionDaysToExpiration, 
+                       _kRecordRetentionMaxRecordCount, _readdisk, _sDESCoreDuetEventLimitKey, 
+                       _sDESCoreDuetEventPredicateKey, _sDESCoreDuetSupportedEventStreamNamesKey, 
+                       _sDESDaysToExpirationOfRecordsKey, _sDESMaximumNumberOfRecordsKey, 
+                       _sDESSupportedRecordTypesKey ]
     objc-classes:    [ DESAggregatableMetadata, DESBfloat16Transport, DESBinary32Transport, 
                        DESBinary64Transport, DESBundlePluginManager, DESBundleRegistry, 
                        DESCategoricalMetadataEncoder, DESChunk, DESCoreAnalyticsEventManager, 

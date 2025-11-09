@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A1ADB8C1-E195-3658-9C8F-DCB21636DA39
+    value:           FFCE21B7-3D08-3110-B978-DE6A31E696FF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BDA55D91-5B59-3868-A1E2-B877469906F6
+    value:           3AB0ED04-7528-364F-9F12-1F310819D798
 install-name:    '/System/Library/PrivateFrameworks/LockoutUI.framework/Versions/A/LockoutUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C19D0308-CA13-3C90-9662-B6E50C491509
+    value:           61618707-CAC9-340D-9A38-4C7FD09A6FC0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1FC4E06D-BB5B-3C49-9241-316BA92CFC21
+    value:           FFEDCBFF-3BC5-30D5-913F-0EE1D5D29C0D
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticExtensionsDaemon.framework/Versions/A/DiagnosticExtensionsDaemon'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

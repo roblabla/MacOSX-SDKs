@@ -3,19 +3,20 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7B9004E9-CCE3-365C-9EB4-50D89C815855
+    value:           966AB856-F3B9-3B02-BE00-61AEB93CD390
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8AEF7516-9547-3FAB-A521-DA4BD6FAC1D3
+    value:           D5C89F5E-6711-3F2F-9044-85DA252F922A
 install-name:    '/System/Library/PrivateFrameworks/Hydra.framework/Versions/C/Hydra'
 current-version: 0
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__120__l_anchor_multilineIcEE, __ZTINSt3__120__r_anchor_multilineIcEE, 
+    weak-symbols:    [ __ZTINSt3__110__function6__baseIFbPKcEEE, __ZTINSt3__120__l_anchor_multilineIcEE, 
+                       __ZTINSt3__120__r_anchor_multilineIcEE, __ZTIU13block_pointerFbPKcE, 
                        __ZTIU13block_pointerFvvE, __ZTSN32pxrInternal_v0_20__pxrReserved__16Sdf_SpecTypeInfoE, 
-                       __ZTSNSt3__110shared_ptrIN10OpenSubdiv6v3_4_33Far15TopologyRefinerEE27__shared_ptr_default_deleteIS4_S4_EE, 
+                       __ZTSNSt3__110__function6__baseIFbPKcEEE, __ZTSNSt3__110shared_ptrIN10OpenSubdiv6v3_4_33Far15TopologyRefinerEE27__shared_ptr_default_deleteIS4_S4_EE, 
                        __ZTSNSt3__110shared_ptrIN16OpenImageIO_v2_110ImageInputEE27__shared_ptr_default_deleteIS2_S2_EE, 
                        __ZTSNSt3__110shared_ptrIN16OpenImageIO_v2_18Filter2DEE27__shared_ptr_default_deleteIS2_S2_EE, 
                        __ZTSNSt3__110shared_ptrIN16OpenImageIO_v2_18ImageBufEE27__shared_ptr_default_deleteIS2_S2_EE, 
@@ -124,7 +125,7 @@ exports:
                        __ZTSNSt3__110shared_ptrINS_11basic_regexIcNS_12regex_traitsIcEEEEE27__shared_ptr_default_deleteIS4_S4_EE, 
                        __ZTSNSt3__110shared_ptrINS_13__empty_stateIcEEE27__shared_ptr_default_deleteIS2_S2_EE, 
                        __ZTSNSt3__120__l_anchor_multilineIcEE, __ZTSNSt3__120__r_anchor_multilineIcEE, 
-                       __ZTSU13block_pointerFvvE ]
+                       __ZTSU13block_pointerFbPKcE, __ZTSU13block_pointerFvvE ]
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _TIFFInitLZMA, __Z14GetMetalDevicev, __Z14computeFrustumRKN32pxrInternal_v0_20__pxrReserved__10GfMatrix4dE6CGSizeRK12CameraParams, 
                        __Z14usd_initializev, __Z17pruneInvisibleRecP12HYDSceneNodeP5NSSetS2_l, 
@@ -132,13 +133,17 @@ exports:
                        __Z5TFAddPKcPFvPvS1_ES0_, __Z9isVisibleP12HYDSceneNodeP5NSSetS2_, 
                        __ZN16OpenImageIO_v2_111s_miplevelsEv, __ZN16OpenImageIO_v2_111s_subimagesEv, 
                        __ZN16OpenImageIO_v2_112s_fileformatEv, __ZN16OpenImageIO_v2_119exr_tag_to_oiio_stdEv, 
-                       __ZN16OpenImageIO_v2_13pvt22init_plugin_searchpathEv, __ZN32pxrInternal_v0_20__pxrReserved__15Tf_RegistryInitC1EPKc, 
+                       __ZN16OpenImageIO_v2_13pvt22init_plugin_searchpathEv, __ZN16ResourceServices11ErrorCreateElPK10__CFStringS2_, 
+                       __ZN16ResourceServices13IsPathAllowedEP8NSString, __ZN16ResourceServices15ConvertCFStringEPK10__CFString, 
+                       __ZN16ResourceServices19IsPathCaseSensitiveEP8NSString, __ZN32pxrInternal_v0_20__pxrReserved__15Tf_RegistryInitC1EPKc, 
                        __ZN32pxrInternal_v0_20__pxrReserved__15Tf_RegistryInitC2EPKc, 
                        __ZN32pxrInternal_v0_20__pxrReserved__15Tf_RegistryInitD1Ev, 
                        __ZN32pxrInternal_v0_20__pxrReserved__15Tf_RegistryInitD2Ev, 
                        __ZN32pxrInternal_v0_20__pxrReserved__15UsdPrimTypeInfo16GetEmptyPrimTypeEv, 
                        __ZN32pxrInternal_v0_20__pxrReserved__15UsdPrimTypeInfoC1EONS0_7_TypeIdE, 
                        __ZN32pxrInternal_v0_20__pxrReserved__15UsdPrimTypeInfoC2EONS0_7_TypeIdE, 
+                       __ZN32pxrInternal_v0_20__pxrReserved__17ArDefaultResolver19_sandboxingCallbackE, 
+                       __ZN32pxrInternal_v0_20__pxrReserved__17ArDefaultResolver21SetSandboxingCallbackENSt3__18functionIFbPKcEEE, 
                        __ZN32pxrInternal_v0_20__pxrReserved__18HdResourceRegistry24SetFrameProgressCallbackENSt3__18functionIFvvEEE, 
                        __ZN32pxrInternal_v0_20__pxrReserved__18UsdImagingDelegate11GetAnimatedERKNS_7SdfPathE, 
                        __ZN32pxrInternal_v0_20__pxrReserved__18UsdImagingGLEngine24SetFrameProgressCallbackENSt3__18functionIFvvEEE, 
@@ -154,7 +159,8 @@ exports:
                        __ZNK32pxrInternal_v0_20__pxrReserved__18HdResourceRegistry19SignalProgressEventEv, 
                        __ZNK32pxrInternal_v0_20__pxrReserved__21UsdImagingPrimAdapter11GetAnimatedERKNS_7UsdPrimE ]
     objc-classes:    [ HYDBlitter, HYDCamera, HYDExporter, HYDLoadingProgressRenderer, 
-                       HYDRenderer, HYDSceneNode, UsdDrawing, View ]
+                       HYDRenderer, HYDSceneNode, UsdDrawing, UsdResourceCoordinator, 
+                       View ]
     objc-ivars:      [ View._callback, View._ctx ]
     weak-symbols:    [ __ZGVN32pxrInternal_v0_20__pxrReserved__11TfSingletonINS_11NdrRegistryEE6_mutexE, 
                        __ZGVN32pxrInternal_v0_20__pxrReserved__11TfSingletonINS_11SdrRegistryEE6_mutexE, 

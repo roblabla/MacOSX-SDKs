@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8DDEB71C-A0FF-3DB1-B4C6-D6073E512A6A
+    value:           97ECC656-9F36-3B6A-928E-2B695613A4C2
   - target:          x86_64-maccatalyst
-    value:           8DDEB71C-A0FF-3DB1-B4C6-D6073E512A6A
+    value:           97ECC656-9F36-3B6A-928E-2B695613A4C2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AF3A041C-2998-3C9E-B7D1-4CF588AEF50B
+    value:           81D78F63-A583-37F5-9D09-23BE092F6F94
   - target:          arm64e-maccatalyst
-    value:           AF3A041C-2998-3C9E-B7D1-4CF588AEF50B
+    value:           81D78F63-A583-37F5-9D09-23BE092F6F94
 install-name:    '/System/Library/PrivateFrameworks/AdCore.framework/Versions/A/AdCore'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -36,10 +36,10 @@ exports:
                        _ADTransparencyDetailsReadFrom, _ADUserTargetingPropertiesReadFrom, 
                        _ADUserTransparencyRequestReadFrom, _ADUserTransparencyResponseReadFrom, 
                        _ADWriteDataToKeychain, _ADXPCConnectionOptions, _AMSBagIsSponsoredAdsEnabledForAdTrackingDStringKey, 
-                       _AMSBagIsSponsoredAdsEnabledStringKey, _APResourceConnectProxyKey, 
-                       _APServerConfigurationKey, _AdCoreVersionNumber, _AdCoreVersionString, 
-                       _AdSheetIdentifier, _AppStoreDefaultsBundleID, _ClientTypeToString, 
-                       _GetKeychainPropertyListForKey, _NewsWidgetDefaultsBundleID, 
+                       _AMSBagIsSponsoredAdsEnabledStringKey, _APDefaultsBundleID, 
+                       _APResourceConnectProxyKey, _APServerConfigurationKey, _AdCoreVersionNumber, 
+                       _AdCoreVersionString, _AdSheetIdentifier, _AppStoreDefaultsBundleID, 
+                       _ClientTypeToString, _GetKeychainPropertyListForKey, _NewsWidgetDefaultsBundleID, 
                        _PreferencesDefaultsBundleID, _PreferencesMacDefaultsBundleID, 
                        _RequestRetryDelay, _SetKeychainPropertyListForKey, _StringIsUUID, 
                        _StringIsZeroUUID, _StringMatch, __ADLog, _dumpObject, _kBagPropertyJingleRequest_OptInBagKey, 

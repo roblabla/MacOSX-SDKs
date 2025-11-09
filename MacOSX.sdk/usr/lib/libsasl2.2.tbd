@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           47B14E95-81F7-37F8-9455-E802BA5C0128
+    value:           8427F5B5-FB9E-3981-8070-B8E5EFCF0466
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E8C00944-F6A3-3877-A760-71806219D0E4
+    value:           8D13A1D6-D8FB-32EE-8131-D50165D96BE8
 install-name:    '/usr/lib/libsasl2.2.dylib'
 current-version: 3.15
 compatibility-version: 3

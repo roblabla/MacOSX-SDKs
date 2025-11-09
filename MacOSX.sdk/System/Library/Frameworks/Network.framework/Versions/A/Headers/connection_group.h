@@ -382,6 +382,7 @@ nw_connection_group_copy_protocol_metadata_for_message(nw_connection_group_t gro
  *		messages and backpressure.
  *		Any incoming messages from this remote endpoint which were saved from
  *		the receive handler may no longer be valid after a connection is returned.
+ *      An extracted connection must have a queue set and be started before it can be used.
  *
  * @param group
  *		The connection group object from which the context was received. If the context was
@@ -445,6 +446,7 @@ nw_connection_group_reply(nw_connection_group_t group,
  *
  *      The connection can be re-inserted into the group later. Once reinserted, the connection group
  *      will handle subsequent messages from this remote endpoint.
+ *      An extracted connection must have a queue set and be started before it can be used.
  *
  * @param group
  *      The connection group object from which to extract a connection.
@@ -567,6 +569,7 @@ nw_connection_group_send_message(nw_connection_group_t group,
  *		1) Take over the ownership of the connection. In this case, the connection is used by the client to
  *		   send and receive data as any other connection would be used. The client may insert this
  *		   connection back into the connection group at a later point if so desired.
+ *		   The connection must have a queue set and be started before it can be used.
  *      2) If you want the connection group to handle this connection, simply insert this connection back into
  *         the connection group right away.
  *      3) If you don't want to accept this connection, simply cancel the connection.

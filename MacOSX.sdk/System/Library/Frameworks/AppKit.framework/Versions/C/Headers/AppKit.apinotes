@@ -5915,6 +5915,14 @@ Classes:
   - Selector: "initWithScrollView:orientation:"
     MethodKind: Instance
     DesignatedInit: true
+- Name: NSScreen
+  Properties:
+  - Name: auxiliaryTopLeftArea
+    PropertyKind: Instance
+    SwiftPrivate: true
+  - Name: auxiliaryTopRightArea
+    PropertyKind: Instance
+    SwiftPrivate: true
 - Name: NSScroller
   Methods:
   - Selector: "drawArrow:highlight:"
@@ -8622,6 +8630,32 @@ Globals:
   SwiftName: macOS10_13_2
 - Name: NSAppKitVersionNumber10_13_4
   SwiftName: macOS10_13_4
+- Name: NSAppKitVersionNumber10_14
+  SwiftName: macOS10_14
+- Name: NSAppKitVersionNumber10_14_1
+  SwiftName: macOS10_14_1
+- Name: NSAppKitVersionNumber10_14_2
+  SwiftName: macOS10_14_2
+- Name: NSAppKitVersionNumber10_14_3
+  SwiftName: macOS10_14_3
+- Name: NSAppKitVersionNumber10_14_4
+  SwiftName: macOS10_14_4
+- Name: NSAppKitVersionNumber10_14_5
+  SwiftName: macOS10_14_5
+- Name: NSAppKitVersionNumber10_15
+  SwiftName: macOS10_15
+- Name: NSAppKitVersionNumber10_15_1
+  SwiftName: macOS10_15_1
+- Name: NSAppKitVersionNumber10_15_2
+  SwiftName: macOS10_15_2
+- Name: NSAppKitVersionNumber10_15_3
+  SwiftName: macOS10_15_3
+- Name: NSAppKitVersionNumber10_15_4
+  SwiftName: macOS10_15_4
+- Name: NSAppKitVersionNumber10_15_5
+  SwiftName: macOS10_15_5
+- Name: NSAppKitVersionNumber10_15_6
+  SwiftName: macOS10_15_6
 - Name: NSAppKitVersionNumber10_2
   SwiftName: macOS10_2
 - Name: NSAppKitVersionNumber10_2_3
@@ -8668,6 +8702,16 @@ Globals:
   SwiftName: macOS10_8
 - Name: NSAppKitVersionNumber10_9
   SwiftName: macOS10_9
+- Name: NSAppKitVersionNumber11_0
+  SwiftName: macOS11_0
+- Name: NSAppKitVersionNumber11_1
+  SwiftName: macOS11_1
+- Name: NSAppKitVersionNumber11_2
+  SwiftName: macOS11_2
+- Name: NSAppKitVersionNumber11_3
+  SwiftName: macOS11_3
+- Name: NSAppKitVersionNumber11_4
+  SwiftName: macOS11_4
 - Name: NSAppKitVersionNumberWithColumnResizingBrowser
   Availability: nonswift
 - Name: NSAppKitVersionNumberWithContinuousScrollingBrowser

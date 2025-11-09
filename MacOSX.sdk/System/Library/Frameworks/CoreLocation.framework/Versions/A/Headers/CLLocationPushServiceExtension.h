@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(15.0))
+API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos, macos, macCatalyst)
 @protocol CLLocationPushServiceExtension <NSObject>
 
 @required

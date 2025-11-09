@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BD6243E8-D3C0-3471-BDF5-4F5D8D8EF961
+    value:           3FE7918F-3079-3293-92A2-F95C3E802624
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           14E39E0E-9BC9-3C89-8500-874B6E40BB1C
+    value:           BFA24D22-22DC-31C8-B09C-7275BD439F48
 install-name:    '/System/Library/PrivateFrameworks/SMBClientEngine.framework/Versions/A/SMBClientEngine'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

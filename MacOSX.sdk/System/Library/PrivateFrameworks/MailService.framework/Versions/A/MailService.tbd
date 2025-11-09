@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           23325BA6-1B35-3B45-8724-D121AB2C7B86
+    value:           66BD94D9-B5AF-3FF7-B5D6-5DF0E8CDF80E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           08DC79A2-80BB-3682-AAFE-96250BF05741
+    value:           085B81CF-A1E9-3CD1-B40D-F727195BD815
 install-name:    '/System/Library/PrivateFrameworks/MailService.framework/Versions/A/MailService'
-current-version: 3689.0.4
+current-version: 3693.40
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ CalendarAgent, Mail, MailShareExtension, MailTests, MailUI, 

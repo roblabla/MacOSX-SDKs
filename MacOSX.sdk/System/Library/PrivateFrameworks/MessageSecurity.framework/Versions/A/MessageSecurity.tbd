@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           60D4C7E4-8E1B-3661-8E76-F8D976B12CF9
+    value:           256FB31F-A6FD-30B9-80EF-DFA77197E3FC
   - target:          x86_64-maccatalyst
-    value:           60D4C7E4-8E1B-3661-8E76-F8D976B12CF9
+    value:           256FB31F-A6FD-30B9-80EF-DFA77197E3FC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E804F201-96AA-37AC-BE9E-B130E858EA7B
+    value:           8B64932B-9456-3189-9611-09FCB0B8F22A
   - target:          arm64e-maccatalyst
-    value:           E804F201-96AA-37AC-BE9E-B130E858EA7B
+    value:           8B64932B-9456-3189-9611-09FCB0B8F22A
 install-name:    '/System/Library/PrivateFrameworks/MessageSecurity.framework/Versions/A/MessageSecurity'
 current-version: 0
 compatibility-version: 0

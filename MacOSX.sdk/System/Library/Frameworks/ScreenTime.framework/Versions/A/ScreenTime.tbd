@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ACB9C3A5-CCD5-3B69-BAD4-96333DFE8ADE
+    value:           3F199152-3314-39E8-A2AD-543CBC1517C9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5F0360A7-3535-3D31-986E-41380E942D22
+    value:           809FF062-C975-31A7-8401-6AD354610134
 install-name:    '/System/Library/Frameworks/ScreenTime.framework/Versions/A/ScreenTime'
-current-version: 500.0.19
+current-version: 500.6.1
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _STMachServiceNameScreenTime ]
     objc-classes:    [ STScreenTimeAgentConnection, STScreenTimeConfiguration, STScreenTimeConfigurationObserver, 
                        STWebHistory, STWebRemoteViewController, STWebService, STWebpageController ]

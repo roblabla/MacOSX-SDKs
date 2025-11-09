@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4DC9063C-DE33-35B0-B55E-F77BBADAE8CB
+    value:           9E579F0C-ACDF-32B8-A8A7-AA89B5796D7E
   - target:          x86_64-maccatalyst
-    value:           4DC9063C-DE33-35B0-B55E-F77BBADAE8CB
+    value:           9E579F0C-ACDF-32B8-A8A7-AA89B5796D7E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5CA948D6-E1FE-3C40-8282-AAB7B03AF9A5
+    value:           25C20B8F-D489-324A-8D20-F524D6DA0881
   - target:          arm64e-maccatalyst
-    value:           5CA948D6-E1FE-3C40-8282-AAB7B03AF9A5
+    value:           25C20B8F-D489-324A-8D20-F524D6DA0881
 install-name:    '/System/Library/PrivateFrameworks/BiomeStorage.framework/Versions/A/BiomeStorage'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

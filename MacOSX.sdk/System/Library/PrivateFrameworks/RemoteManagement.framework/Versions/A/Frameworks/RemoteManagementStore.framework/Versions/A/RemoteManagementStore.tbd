@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7F93DF4F-14D5-33AD-8C43-88358A5168E2
+    value:           55E5536A-5558-36F7-9D9D-E406C81BF148
   - target:          x86_64-maccatalyst
-    value:           7F93DF4F-14D5-33AD-8C43-88358A5168E2
+    value:           55E5536A-5558-36F7-9D9D-E406C81BF148
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6B7F6BC8-0B5D-3917-B59E-2B3795F4C503
+    value:           E6245B62-E7F7-3EB4-97DF-B8CBDDDE1AD4
   - target:          arm64e-maccatalyst
-    value:           6B7F6BC8-0B5D-3917-B59E-2B3795F4C503
+    value:           E6245B62-E7F7-3EB4-97DF-B8CBDDDE1AD4
 install-name:    '/System/Library/PrivateFrameworks/RemoteManagement.framework/Versions/A/Frameworks/RemoteManagementStore.framework/Versions/A/RemoteManagementStore'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -30,6 +30,7 @@ exports:
                        RMConfigurationSubscriberExtensionContext, RMConfigurationSubscriberExtensionRequestHandler, 
                        RMDeclarationManifest, RMDeclarationManifestItem, RMObserverStore, 
                        RMProviderStore, RMStoreConfigurationSubscriberDescription, 
-                       RMStoreResolvedAsset, RMStoreUnresolvedAsset, RMStoreXPCConnection, 
-                       RMStoreXPCProxy, RMSubscribedConfigurationReference, RMSubscriberStore ]
+                       RMStoreResolvedAsset, RMStoreUnresolvedAsset, RMStoreUtility, 
+                       RMStoreXPCConnection, RMStoreXPCProxy, RMSubscribedConfigurationReference, 
+                       RMSubscriberStore ]
 ...

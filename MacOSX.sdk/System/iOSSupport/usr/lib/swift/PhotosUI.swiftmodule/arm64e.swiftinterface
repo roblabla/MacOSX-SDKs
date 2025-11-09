@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
-// swift-module-flags: -target arm64e-apple-ios15.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPhotosUI -swift-version 5 -enforce-exclusivity=checked -O -module-name PhotosUI
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-module-flags: -target arm64e-apple-ios15.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPhotosUI -swift-version 5 -enforce-exclusivity=checked -O -module-name PhotosUI
 import Photos
 @_exported import PhotosUI
 import Swift
@@ -98,7 +98,7 @@ extension PhotosUI.PHPickerViewController {
     get
     set
   }
-  convenience public init(configuration: PhotosUI.PHPickerConfiguration)
+  @_Concurrency.MainActor(unsafe) convenience public init(configuration: PhotosUI.PHPickerConfiguration)
 }
 @available(iOS 14, *)
 @available(macOS, unavailable)

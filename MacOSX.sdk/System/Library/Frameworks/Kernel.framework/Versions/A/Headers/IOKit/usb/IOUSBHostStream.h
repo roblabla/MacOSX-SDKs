@@ -85,14 +85,12 @@ public:
      /*!
      * @brief       Enqueue a request on a stream
      * @discussion  See IOUSBHostIOSource::io for documentation
-     * @param       completionTimeoutMs Must be 0 for streams.
      */
     virtual IOReturn io(IOMemoryDescriptor* dataBuffer, uint32_t dataBufferLength, IOUSBHostCompletion* completion, uint32_t completionTimeoutMs = 0);
     
     /*!
      * @brief       Perform a request on a stream
      * @discussion  See IOUSBHostIOSource::io for documentation
-     * @param       completionTimeoutMs Must be 0 for streams.
      */
     virtual IOReturn io(IOMemoryDescriptor* dataBuffer, uint32_t dataBufferLength, uint32_t& bytesTransferred, uint32_t completionTimeoutMs = 0);
 

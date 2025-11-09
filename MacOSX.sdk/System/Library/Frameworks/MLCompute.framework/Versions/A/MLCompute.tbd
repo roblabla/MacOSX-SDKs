@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           40ADCDDD-1C24-3483-8FC7-220144942214
+    value:           7CE3593D-8B49-3E23-8C06-7483449AF68E
   - target:          x86_64-maccatalyst
-    value:           40ADCDDD-1C24-3483-8FC7-220144942214
+    value:           7CE3593D-8B49-3E23-8C06-7483449AF68E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0EEC5C77-11F4-3B02-854B-DD80C9DA2CBE
+    value:           FBF5BF97-33E3-3DC1-859E-D24405D5C9EC
   - target:          arm64e-maccatalyst
-    value:           0EEC5C77-11F4-3B02-854B-DD80C9DA2CBE
+    value:           FBF5BF97-33E3-3DC1-859E-D24405D5C9EC
 install-name:    '/System/Library/Frameworks/MLCompute.framework/Versions/A/MLCompute'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ANE_ANECDataTypeToMLCDataType, _ANE_ApplyPaddingSizes, _ANE_BuildArithmeticParams, 
                        _ANE_BuildConvolutionParams, _ANE_BuildNeuronParams, _ANE_BuildReductionParams, 

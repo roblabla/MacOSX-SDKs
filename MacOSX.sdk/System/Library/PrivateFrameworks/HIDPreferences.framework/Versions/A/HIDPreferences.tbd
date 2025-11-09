@@ -3,17 +3,21 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EA6CC367-CD27-3CAD-93BB-57CB5F303AD3
+    value:           6921BF73-1006-32D7-8A92-EF41AF0CDC2A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           772AC106-ACB2-3014-B7E9-3F416623EA29
+    value:           754AC7C6-AC85-3CDF-9588-17E821E488A4
 install-name:    '/System/Library/PrivateFrameworks/HIDPreferences.framework/Versions/A/HIDPreferences'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _HIDPreferencesCopy, _HIDPreferencesCopyDomain, _HIDPreferencesCopyMultiple, 
-                       _HIDPreferencesSet, _HIDPreferencesSetDomain, _HIDPreferencesSetMultiple, 
-                       _HIDPreferencesSynchronize, _HIDPreferencesVersionNumber, 
+    symbols:         [ _HIDPreferencesCopy, _HIDPreferencesCopyDomain, _HIDPreferencesCopyDomainForInstance, 
+                       _HIDPreferencesCopyForInstance, _HIDPreferencesCopyMultiple, 
+                       _HIDPreferencesCopyMultipleForInstance, _HIDPreferencesCreateInstance, 
+                       _HIDPreferencesSet, _HIDPreferencesSetDomain, _HIDPreferencesSetDomainForInstance, 
+                       _HIDPreferencesSetForInstance, _HIDPreferencesSetMultiple, 
+                       _HIDPreferencesSetMultipleForInstance, _HIDPreferencesSynchronize, 
+                       _HIDPreferencesSynchronizeForInstance, _HIDPreferencesVersionNumber, 
                        _HIDPreferencesVersionString ]
     objc-classes:    [ HIDPreferences, HIDPreferencesHelperClient, HIDPreferencesHelperListener ]
 ...

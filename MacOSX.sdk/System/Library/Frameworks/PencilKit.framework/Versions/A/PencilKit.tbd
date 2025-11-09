@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           849CCBE3-3E42-3C9D-B8F3-713CB6C622D3
+    value:           24596460-6B57-337A-B94C-A3A0537846F6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F6D3B256-6F57-306A-8001-66ACEC8E26B9
+    value:           2B339E10-F15F-373B-8E59-1A846F3B5717
 install-name:    '/System/Library/Frameworks/PencilKit.framework/Versions/A/PencilKit'
 swift-abi-version: 7
 exports:
@@ -468,11 +468,11 @@ exports:
                        PKIndexableContent, PKInk, PKInkBehavior, PKInkFeatheringDescriptor, 
                        PKInkFunction, PKInkParticleDescriptor, PKInkProperties, PKInkRenderingDescriptor, 
                        PKInkSmoothingDescriptor, PKInkingTool, PKLassoTool, PKLegacyDrawingRegressionTester, 
-                       PKLinedPaper, PKMacLinedPaperView, PKMutableStroke, PKReplicaManager, 
-                       PKSearchQueryItem, PKShape, PKStroke, PKStrokeDelta, PKStrokeMask, 
-                       PKStrokePath, PKStrokePoint, PKStrokeProvider, PKStrokeProviderSlice, 
-                       PKStrokeProviderSliceIdentifier, PKStrokeSelection, PKStrokeSelectionImage, 
-                       PKStrokeSelectionImageConfig, PKTextAttachmentDrawingView, 
+                       PKLinedPaper, PKMacLinedPaperView, PKMetalUtility, PKMutableStroke, 
+                       PKReplicaManager, PKSearchQueryItem, PKShape, PKStroke, PKStrokeDelta, 
+                       PKStrokeMask, PKStrokePath, PKStrokePoint, PKStrokeProvider, 
+                       PKStrokeProviderSlice, PKStrokeProviderSliceIdentifier, PKStrokeSelection, 
+                       PKStrokeSelectionImage, PKStrokeSelectionImageConfig, PKTextAttachmentDrawingView, 
                        PKTitleQuery, PKTitleQueryItem, PKTool, PKUndoCommand, PKVisualizationManager, 
                        _PKStrokeClipPlane, _PKStrokeConcrete ]
     objc-ivars:      [ PKDrawingConcrete.__bounds, PKDrawingConcrete.__canvasBounds ]

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F0F22956-727F-3D83-9196-4D680D44ED0E
+    value:           D822F3CE-2C75-37F0-A9B4-13DBD9370300
   - target:          x86_64-maccatalyst
-    value:           F0F22956-727F-3D83-9196-4D680D44ED0E
+    value:           D822F3CE-2C75-37F0-A9B4-13DBD9370300
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           74A44C65-6434-351B-82E1-5F3A87938D2C
+    value:           66243C96-7673-375F-8037-9015ECF1AEF1
   - target:          arm64e-maccatalyst
-    value:           74A44C65-6434-351B-82E1-5F3A87938D2C
+    value:           66243C96-7673-375F-8037-9015ECF1AEF1
 install-name:    '/System/Library/PrivateFrameworks/CalendarFoundation.framework/Versions/A/CalendarFoundation'
-current-version: 1195
+current-version: 1197.2.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

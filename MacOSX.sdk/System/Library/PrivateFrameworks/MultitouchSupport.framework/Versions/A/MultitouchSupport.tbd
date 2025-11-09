@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9FA19A99-03CC-317F-B36C-A41B0D6BFEA0
+    value:           12C881B4-BF51-3DCF-8A46-AFF71641D8C5
   - target:          x86_64-maccatalyst
-    value:           9FA19A99-03CC-317F-B36C-A41B0D6BFEA0
+    value:           12C881B4-BF51-3DCF-8A46-AFF71641D8C5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D3642A25-85FC-398F-B23C-C4DF6C502CCA
+    value:           2726CA18-7B6E-3BB5-832E-0F3DA3AC0FE3
   - target:          arm64e-maccatalyst
-    value:           D3642A25-85FC-398F-B23C-C4DF6C502CCA
+    value:           2726CA18-7B6E-3BB5-832E-0F3DA3AC0FE3
 install-name:    '/System/Library/PrivateFrameworks/MultitouchSupport.framework/Versions/A/MultitouchSupport'
-current-version: 5000.21
+current-version: 5430.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -48,8 +48,8 @@ exports:
                        _MTDeviceGetGUID, _MTDeviceGetGenerateRingCentroid, _MTDeviceGetMTActuator, 
                        _MTDeviceGetMinDigitizerPressureValue, _MTDeviceGetOpenRows, 
                        _MTDeviceGetParserEnabled, _MTDeviceGetParserOptions, _MTDeviceGetParserType, 
-                       _MTDeviceGetPathTimeMonitorReportID, _MTDeviceGetReport, _MTDeviceGetResetCount, 
-                       _MTDeviceGetResetOnLockMs, _MTDeviceGetResetOnUnlockMs, _MTDeviceGetSATelemetryReportID, 
+                       _MTDeviceGetReport, _MTDeviceGetResetCount, _MTDeviceGetResetOnLockMs, 
+                       _MTDeviceGetResetOnUnlockMs, _MTDeviceGetSATelemetryReportID, 
                        _MTDeviceGetSensorDimensions, _MTDeviceGetSensorRegionMaxTypes, 
                        _MTDeviceGetSensorRegionOfType, _MTDeviceGetSensorSurfaceDimensions, 
                        _MTDeviceGetSerialNumber, _MTDeviceGetService, _MTDeviceGetSubdeviceID, 

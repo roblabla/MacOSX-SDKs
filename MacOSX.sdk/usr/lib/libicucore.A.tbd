@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           24272A35-ABEB-36AB-8B82-A34903A9A834
+    value:           116C4D8B-D8CF-36C5-B7D5-74BFB18EE196
   - target:          x86_64-maccatalyst
-    value:           24272A35-ABEB-36AB-8B82-A34903A9A834
+    value:           116C4D8B-D8CF-36C5-B7D5-74BFB18EE196
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3E9DD62D-6AC1-34AF-98FD-B41EAF4D6CE0
+    value:           D828584A-44A9-3EE7-8AF9-28C71446B7AD
   - target:          arm64e-maccatalyst
-    value:           3E9DD62D-6AC1-34AF-98FD-B41EAF4D6CE0
+    value:           D828584A-44A9-3EE7-8AF9-28C71446B7AD
 install-name:    '/usr/lib/libicucore.A.dylib'
 current-version: 68.2
 exports:
@@ -1765,8 +1765,8 @@ exports:
                        __ZN3icu22FormattedStringBuilder16prepareForInsertEiiR10UErrorCode, 
                        __ZN3icu22FormattedStringBuilder22prepareForInsertHelperEiiR10UErrorCode, 
                        __ZN3icu22FormattedStringBuilder5clearEv, __ZN3icu22FormattedStringBuilder6appendERKS0_R10UErrorCode, 
-                       __ZN3icu22FormattedStringBuilder6insertEiRKNS_13UnicodeStringENS0_5FieldER10UErrorCode, 
-                       __ZN3icu22FormattedStringBuilder6insertEiRKNS_13UnicodeStringEiiNS0_5FieldER10UErrorCode, 
+                       __ZN3icu22FormattedStringBuilder6insertEiRKNS_13UnicodeStringENS0_5FieldEbR10UErrorCode, 
+                       __ZN3icu22FormattedStringBuilder6insertEiRKNS_13UnicodeStringEiiNS0_5FieldEbR10UErrorCode, 
                        __ZN3icu22FormattedStringBuilder6insertEiRKS0_R10UErrorCode, 
                        __ZN3icu22FormattedStringBuilder6removeEii, __ZN3icu22FormattedStringBuilder6spliceEiiRKNS_13UnicodeStringEiiNS0_5FieldER10UErrorCode, 
                        __ZN3icu22FormattedStringBuilderC1ERKS0_, __ZN3icu22FormattedStringBuilderC1Ev, 
@@ -2844,7 +2844,8 @@ exports:
                        __ZNK3icu13DecimalFormateqERKNS_6FormatE, __ZNK3icu13FieldPosition17getDynamicClassIDEv, 
                        __ZNK3icu13FieldPosition5cloneEv, __ZNK3icu13FormattedList12nextPositionERNS_24ConstrainedFieldPositionER10UErrorCode, 
                        __ZNK3icu13FormattedList12toTempStringER10UErrorCode, __ZNK3icu13FormattedList8appendToERNS_10AppendableER10UErrorCode, 
-                       __ZNK3icu13FormattedList8toStringER10UErrorCode, __ZNK3icu13ListFormatter20formatStringsToValueEPKNS_13UnicodeStringEiR10UErrorCode, 
+                       __ZNK3icu13FormattedList8toStringER10UErrorCode, __ZNK3icu13ListFormatter17needsBidiIsolatesERKNS_13UnicodeStringE, 
+                       __ZNK3icu13ListFormatter20formatStringsToValueEPKNS_13UnicodeStringEiR10UErrorCode, 
                        __ZNK3icu13ListFormatter6formatEPKNS_13UnicodeStringEiRS1_R10UErrorCode, 
                        __ZNK3icu13ListFormatter6formatEPKNS_13UnicodeStringEiRS1_iRiR10UErrorCode, 
                        __ZNK3icu13LocaleBuilder11copyErrorToER10UErrorCode, __ZNK3icu13LocaleMatcher12getBestMatchERKNS_6LocaleER10UErrorCode, 

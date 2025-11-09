@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7C6B5AC6-4A8E-32D5-8898-3924C0CB3054
+    value:           8A6146A5-F09E-3848-896B-D3B2830619A4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C97C35D7-0B64-39ED-B125-651EFC9225F2
+    value:           418CB966-9BF0-36C9-BEAB-4C0F46958591
 install-name:    '/System/Library/Frameworks/iTunesLibrary.framework/Versions/A/iTunesLibrary'
 current-version: 0
 compatibility-version: 0

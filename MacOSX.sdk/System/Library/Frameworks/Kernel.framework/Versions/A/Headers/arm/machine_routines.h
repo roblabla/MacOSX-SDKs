@@ -214,6 +214,7 @@ int ml_get_max_cluster_number(void);
 
 unsigned int ml_get_first_cpu_id(unsigned int cluster_id);
 
+
 #ifdef __arm64__
 int ml_get_cluster_number_local(void);
 #endif /* __arm64__ */
@@ -233,39 +234,11 @@ typedef struct ml_cpu_info ml_cpu_info_t;
 
 cluster_type_t ml_get_boot_cluster_type(void);
 
-/*!
- * @typedef ml_topology_cpu_t
- * @brief Describes one CPU core in the topology.
- *
- * @field cpu_id            Logical CPU ID (EDT: cpu-id): 0, 1, 2, 3, 4, ...
- * @field phys_id           Physical CPU ID (EDT: reg).  Same as MPIDR[15:0], i.e.
- *                          (cluster_id << 8) | core_number_within_cluster
- * @field cluster_id        Cluster ID (EDT: cluster-id)
- * @field die_id            Die ID (EDT: die-id)
- * @field cluster_type      The type of CPUs found in this cluster.
- * @field l2_access_penalty Indicates that the scheduler should try to de-prioritize a core because
- *                          L2 accesses are slower than on the boot processor.
- * @field l2_cache_size     Size of the L2 cache, in bytes.  0 if unknown or not present.
- * @field l2_cache_id       l2-cache-id property read from EDT.
- * @field l3_cache_size     Size of the L3 cache, in bytes.  0 if unknown or not present.
- * @field l3_cache_id       l3-cache-id property read from EDT.
- * @field cpu_IMPL_regs     IO-mapped virtual address of cpuX_IMPL (implementation-defined) register block.
- * @field cpu_IMPL_pa       Physical address of cpuX_IMPL register block.
- * @field cpu_IMPL_len      Length of cpuX_IMPL register block.
- * @field cpu_UTTDBG_regs   IO-mapped virtual address of cpuX_UTTDBG register block.
- * @field cpu_UTTDBG_pa     Physical address of cpuX_UTTDBG register block, if set in DT, else zero
- * @field cpu_UTTDBG_len    Length of cpuX_UTTDBG register block, if set in DT, else zero
- * @field coresight_regs    IO-mapped virtual address of CoreSight debug register block.
- * @field coresight_pa      Physical address of CoreSight register block.
- * @field coresight_len     Length of CoreSight register block.
- * @field die_cluster_id    Cluster ID within the local die (EDT: die-cluster-id)
- * @field cluster_core_id   Core ID within the local cluster (EDT: cluster-core-id)
- */
 typedef struct ml_topology_cpu {
 	unsigned int                    cpu_id;
 	uint32_t                        phys_id;
 	unsigned int                    cluster_id;
-	unsigned int                    die_id;
+	unsigned int                    reserved;
 	cluster_type_t                  cluster_type;
 	uint32_t                        l2_access_penalty;
 	uint32_t                        l2_cache_size;
@@ -347,7 +320,7 @@ typedef struct ml_topology_info {
 	unsigned int                    max_cpu_id;
 	unsigned int                    num_clusters;
 	unsigned int                    max_cluster_id;
-	unsigned int                    max_die_id;
+	unsigned int                    reserved;
 	ml_topology_cpu_t               *cpus;
 	ml_topology_cluster_t           *clusters;
 	ml_topology_cpu_t               *boot_cpu;

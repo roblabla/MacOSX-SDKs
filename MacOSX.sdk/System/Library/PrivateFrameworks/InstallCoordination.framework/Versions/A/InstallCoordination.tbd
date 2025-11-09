@@ -3,23 +3,23 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CE96608A-8353-37EB-98BB-6B78A407EB8B
+    value:           7FCDFE9A-F193-3DDA-B36B-814543B417A1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           99AC225E-A171-3650-9330-686E3287E1DD
+    value:           D30E28EC-3CC5-3C4F-9593-D46098D6841B
 install-name:    '/System/Library/PrivateFrameworks/InstallCoordination.framework/Versions/A/InstallCoordination'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _IXAlertUserErrorKey, _IXAppMayUninstallNotificationName, 
-                       _IXAppRemovabilityChangedNotificationName, _IXArrayContainsOnlyClass, 
-                       _IXArrayifyThing, _IXBooleanValue, _IXCopyClientNameForConnection, 
-                       _IXCopyItemAtURL, _IXCopyProcessNameForPid, _IXCopyRemovabilityStorageURL, 
-                       _IXCreateDirectoryAtURL, _IXCreateUserPresentableError, _IXDictionaryContainsOnlyClasses, 
-                       _IXDictionaryContainsOnlyClassesCheckingValueTypes, _IXDisplayUserPresentableErrorForApp, 
-                       _IXDisplayUserPresentableErrorForAppWithLocalizedName, _IXDisplayUserPresentableErrorForApps, 
-                       _IXErrorDomain, _IXFunctionNameErrorKey, _IXGetLoggingHandle, 
-                       _IXGetRemovabilityMetadataForApp, _IXGetUncachedRemovabilityMetadataForApp, 
+                       _IXAppRemovabilityChangedNotificationName, _IXApplicationRecordForRecordPromise, 
+                       _IXArrayContainsOnlyClass, _IXArrayifyThing, _IXBooleanValue, 
+                       _IXCopyClientNameForConnection, _IXCopyItemAtURL, _IXCopyProcessNameForPid, 
+                       _IXCopyRemovabilityStorageURL, _IXCreateDirectoryAtURL, _IXCreateUserPresentableError, 
+                       _IXDictionaryContainsOnlyClasses, _IXDictionaryContainsOnlyClassesCheckingValueTypes, 
+                       _IXDisplayUserPresentableErrorForApp, _IXDisplayUserPresentableErrorForAppWithLocalizedName, 
+                       _IXDisplayUserPresentableErrorForApps, _IXErrorDomain, _IXFunctionNameErrorKey, 
+                       _IXGetLoggingHandle, _IXGetRemovabilityMetadataForApp, _IXGetUncachedRemovabilityMetadataForApp, 
                        _IXHasMobileInstallationSPIEntitlement, _IXHasTrueValueForEntitlement, 
                        _IXItemExistsAtURL, _IXLocalizedBodyForFirstAppName, _IXLocalizedTitleForFirstAppName, 
                        _IXOncePerBootWorkNeeded, _IXPathArgumentErrorKey, _IXPresentErrorHighlightingLocalizedAppName, 

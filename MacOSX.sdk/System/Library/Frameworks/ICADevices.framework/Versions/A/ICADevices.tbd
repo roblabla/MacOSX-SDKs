@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8090C40B-3401-377D-9BA5-6CBBB0154837
+    value:           71837D93-E114-3936-A3AF-D18D268E8D8D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FD74D5FC-7890-3B99-AC52-DEFCFD43A0DB
+    value:           84CC79E7-12A1-3AF4-9946-DB901C9EE7ED
 install-name:    '/System/Library/Frameworks/ICADevices.framework/Versions/A/ICADevices'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _DisconnectFWDevice, _DisconnectFWDeviceWithIORegPath, _DisconnectMassStorageDevice, 
                        _DisconnectUSBDevice, _DisconnectUSBDeviceWithIORegPath, _FWDeviceSendScanEventNotification, 
                        _ICACloseSession, _ICAConvertJPEGDataToICADataInPlace, _ICAConvertTIFFDataToICADataInPlace, 

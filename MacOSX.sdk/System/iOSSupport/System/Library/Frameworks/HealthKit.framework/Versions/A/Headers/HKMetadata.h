@@ -595,4 +595,11 @@ HK_EXTERN NSString * const HKMetadataKeyLowCardioFitnessEventThreshold API_AVAIL
 */
 HK_EXTERN NSString * const HKMetadataKeyDateOfEarliestDataUsedForEstimate API_AVAILABLE(ios(15.0), watchos(8.0));
 
+/*!
+ @constant      HKMetadataKeyAlgorithmVersion
+ @abstract      The version of the algorithm used to generate the sample.
+ @discussion    The key for an NSNumber containing an NSInteger indicating the version of the algorithm used to generate the sample.
+ */
+HK_EXTERN NSString * const HKMetadataKeyAlgorithmVersion API_AVAILABLE(ios(15.0), watchos(8.0));
+
 NS_ASSUME_NONNULL_END

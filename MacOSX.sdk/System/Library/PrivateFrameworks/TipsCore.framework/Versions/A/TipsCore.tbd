@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           89DBFE8C-A6C3-3E9A-969C-D499CF56D4EF
+    value:           C281C76A-CAAC-3DD7-8553-B6CAA69F86DF
   - target:          x86_64-maccatalyst
-    value:           89DBFE8C-A6C3-3E9A-969C-D499CF56D4EF
+    value:           C281C76A-CAAC-3DD7-8553-B6CAA69F86DF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8EC41BC6-24CE-3E1B-903F-A7D8100EC561
+    value:           52A37B15-806B-3FD2-9441-392E0451B140
   - target:          arm64e-maccatalyst
-    value:           8EC41BC6-24CE-3E1B-903F-A7D8100EC561
+    value:           52A37B15-806B-3FD2-9441-392E0451B140
 install-name:    '/System/Library/PrivateFrameworks/TipsCore.framework/Versions/A/TipsCore'
-current-version: 609
+current-version: 613.8
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -192,10 +192,10 @@ exports:
                        _kTipsEventContentRetrievedKey, _kTipsEventHintReadyToBeDisplayed, 
                        _kTipsEventNewContentViewed, _kTipsEventRulesMatched, _kTipsEventServiceRequest, 
                        _kTipsEventTipShared, _kTipsEventViewed, _kTipsEventViewedWidget, 
-                       _kTipsHardwareWelcomeViewed, _kTipsHintActionTappedKey, _kTipsLaunchTypeKey, 
-                       _kTipsLinkUsedBundleIDKey, _kTipsLinkUsedContextKey, _kTipsLinkUsedDisplayTypeKey, 
-                       _kTipsLinkUsedURLKey, _kTipsMiniTipTappedKey, _kTipsNotificationCount, 
-                       _kTipsNotificationEventName, _kTipsNotificationsCount, _kTipsNotificationsPostedPersistenceKey, 
+                       _kTipsHardwareWelcomeViewed, _kTipsLaunchTypeKey, _kTipsLinkUsedBundleIDKey, 
+                       _kTipsLinkUsedContextKey, _kTipsLinkUsedDisplayTypeKey, _kTipsLinkUsedURLKey, 
+                       _kTipsMiniTipTappedKey, _kTipsNotificationCount, _kTipsNotificationEventName, 
+                       _kTipsNotificationsCount, _kTipsNotificationsPostedPersistenceKey, 
                        _kTipsPercentScreenArea, _kTipsPercentScreenHeight, _kTipsPercentScreenWidth, 
                        _kTipsPostedCollectionKey, _kTipsPostedTimeSinceOSInstallKey, 
                        _kTipsReferrerKey, _kTipsRemainingCountKey, _kTipsRequestTime, 
@@ -218,13 +218,12 @@ exports:
                        TPSAnalyticsEventEligibilityCheckPerformed, TPSAnalyticsEventFrequencyControl, 
                        TPSAnalyticsEventNotificationPosted, TPSAnalyticsEventRuleMatched, 
                        TPSAnalyticsEventServiceRequest, TPSAnalyticsEventSession, 
-                       TPSAnalyticsEventTipActionTapped, TPSAnalyticsEventTipDismissed, 
-                       TPSAnalyticsEventTipDisplayed, TPSAnalyticsEventTipNotDisplayed, 
-                       TPSAnalyticsEventTipReadyToBeDisplayed, TPSAnalyticsEventTipTapped, 
-                       TPSAnalyticsEventTipTimeSpent, TPSAnalyticsEventUsageObservations, 
-                       TPSAnalyticsPersistenceController, TPSAnalyticsSessionController, 
-                       TPSAppController, TPSAssetCacheController, TPSAssetSizes, 
-                       TPSAssets, TPSAssetsConfiguration, TPSAsyncBlockOperation, 
+                       TPSAnalyticsEventTipDismissed, TPSAnalyticsEventTipDisplayed, 
+                       TPSAnalyticsEventTipNotDisplayed, TPSAnalyticsEventTipReadyToBeDisplayed, 
+                       TPSAnalyticsEventTipTapped, TPSAnalyticsEventTipTimeSpent, 
+                       TPSAnalyticsEventUsageObservations, TPSAnalyticsPersistenceController, 
+                       TPSAnalyticsSessionController, TPSAppController, TPSAssetCacheController, 
+                       TPSAssetSizes, TPSAssets, TPSAssetsConfiguration, TPSAsyncBlockOperation, 
                        TPSAsyncOperation, TPSBiomeEventsProvider, TPSCloudController, 
                        TPSCollection, TPSCollectionStatus, TPSCommonDefines, TPSConstellationContentUtilities, 
                        TPSContent, TPSContentPackage, TPSContentStatusEventsProvider, 

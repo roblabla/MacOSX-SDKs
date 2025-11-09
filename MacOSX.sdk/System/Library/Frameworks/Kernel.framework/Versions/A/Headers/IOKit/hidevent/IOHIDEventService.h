@@ -95,6 +95,7 @@ struct KeyValueMask {
 
 typedef void (*DebugKeyActionProc) (IOHIDEventService *self, void * parameter);
 struct DebugKeyAction {
+  bool                debugArgRequired;
   uint32_t            mask;
   DebugKeyActionProc  action;
   void*               parameter;
@@ -934,13 +935,23 @@ protected:
      @abstract Completion of call to DriverKit to set properties call
      @discussion Called by DriverKit to complete set properties requests
      @param action Action
-     @param event  Copied event or NULL
+     @param status  Return status of the set properties call
      @param context Context associated with request
      */
     OSMetaClassDeclareReservedUsed(IOHIDEventService, 25);
     virtual void completeSetProperties(OSAction * action, IOReturn status, uint64_t context);
 
-    OSMetaClassDeclareReservedUnused(IOHIDEventService, 26);
+    /*!
+     @function completeSetLED
+     @abstract Completion of call to DriverKit to set LED call
+     @discussion Called by DriverKit to complete set LED requests
+     @param action Action
+     @param status  Return status of the set LED call
+     @param context Context associated with request
+     */
+    OSMetaClassDeclareReservedUsed(IOHIDEventService, 26);
+    virtual void completeSetLED(OSAction * action, IOReturn status, uint64_t context);
+
     OSMetaClassDeclareReservedUnused(IOHIDEventService, 27);
     OSMetaClassDeclareReservedUnused(IOHIDEventService, 28);
     OSMetaClassDeclareReservedUnused(IOHIDEventService, 29);

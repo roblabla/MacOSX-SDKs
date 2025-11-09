@@ -37,6 +37,7 @@ GAMECONTROLLER_EXTERN NSString *const GCInputRightThumbstickButton API_AVAILABLE
 GAMECONTROLLER_EXTERN NSString *const GCInputButtonHome API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 GAMECONTROLLER_EXTERN NSString *const GCInputButtonMenu API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 GAMECONTROLLER_EXTERN NSString *const GCInputButtonOptions API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXTERN NSString *const GCInputButtonShare API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
 /**
 A set of strings commonly used to access Xbox buttons

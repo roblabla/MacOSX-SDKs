@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A89D8A7C-C617-3C3B-9BE4-9E383675447B
+    value:           D9E03270-12C2-3E96-ACFB-B09CB772D64A
   - target:          x86_64-maccatalyst
-    value:           A89D8A7C-C617-3C3B-9BE4-9E383675447B
+    value:           D9E03270-12C2-3E96-ACFB-B09CB772D64A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9D256107-BC96-3D3C-B714-A2C5C4E93935
+    value:           523D0261-53F7-3CEE-8ED9-9EF83E2DFCC4
   - target:          arm64e-maccatalyst
-    value:           9D256107-BC96-3D3C-B714-A2C5C4E93935
+    value:           523D0261-53F7-3CEE-8ED9-9EF83E2DFCC4
 install-name:    '/System/Library/PrivateFrameworks/CoreSVG.framework/Versions/A/CoreSVG'
-current-version: 167
+current-version: 175.3.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -61,23 +61,25 @@ exports:
                        _CGSVGDocumentRelease, _CGSVGDocumentRetain, _CGSVGDocumentWriteToData, 
                        _CGSVGDocumentWriteToURL, _CGSVGGradientAddStop, _CGSVGGradientCreate, 
                        _CGSVGGradientGetCenter, _CGSVGGradientGetEnd, _CGSVGGradientGetFocal, 
-                       _CGSVGGradientGetNumberOfStops, _CGSVGGradientGetRadius, _CGSVGGradientGetSpread, 
-                       _CGSVGGradientGetStart, _CGSVGGradientGetStop, _CGSVGGradientGetType, 
-                       _CGSVGGradientGetTypeID, _CGSVGGradientRelease, _CGSVGGradientRetain, 
-                       _CGSVGGradientSetCenter, _CGSVGGradientSetEnd, _CGSVGGradientSetFocal, 
+                       _CGSVGGradientGetGradientTransform, _CGSVGGradientGetNumberOfStops, 
+                       _CGSVGGradientGetRadius, _CGSVGGradientGetSpread, _CGSVGGradientGetStart, 
+                       _CGSVGGradientGetStop, _CGSVGGradientGetType, _CGSVGGradientGetTypeID, 
+                       _CGSVGGradientRelease, _CGSVGGradientRetain, _CGSVGGradientSetCenter, 
+                       _CGSVGGradientSetEnd, _CGSVGGradientSetFocal, _CGSVGGradientSetGradientTransform, 
                        _CGSVGGradientSetRadius, _CGSVGGradientSetSpread, _CGSVGGradientSetStart, 
                        _CGSVGGradientStopCreateWithColor, _CGSVGGradientStopGetColor, 
-                       _CGSVGGradientStopGetOffset, _CGSVGGradientStopGetTypeID, 
-                       _CGSVGGradientStopRelease, _CGSVGGradientStopRetain, _CGSVGImageCreateWithNoImage, 
-                       _CGSVGImageCreateWithRasterImage, _CGSVGImageCreateWithSVGDocument, 
-                       _CGSVGImageGetRasterImage, _CGSVGImageGetSVGDocument, _CGSVGImageGetType, 
-                       _CGSVGImageGetTypeID, _CGSVGImageRelease, _CGSVGImageRetain, 
-                       _CGSVGLengthEqualToLength, _CGSVGLengthMake, _CGSVGLengthMakeWithType, 
-                       _CGSVGLengthScaledLength, _CGSVGMaskAddNode, _CGSVGMaskCreate, 
-                       _CGSVGMaskCreateMask, _CGSVGMaskGetChildAtIndex, _CGSVGMaskGetChildCount, 
-                       _CGSVGMaskGetTypeID, _CGSVGMaskRelease, _CGSVGMaskRemoveNode, 
-                       _CGSVGMaskRetain, _CGSVGNodeAddChild, _CGSVGNodeCopy, _CGSVGNodeCopyName, 
-                       _CGSVGNodeCopyStringIdentifier, _CGSVGNodeCopyText, _CGSVGNodeCreate, 
+                       _CGSVGGradientStopGetOffset, _CGSVGGradientStopGetOpacity, 
+                       _CGSVGGradientStopGetTypeID, _CGSVGGradientStopRelease, _CGSVGGradientStopRetain, 
+                       _CGSVGImageCreateWithNoImage, _CGSVGImageCreateWithRasterImage, 
+                       _CGSVGImageCreateWithSVGDocument, _CGSVGImageGetRasterImage, 
+                       _CGSVGImageGetSVGDocument, _CGSVGImageGetType, _CGSVGImageGetTypeID, 
+                       _CGSVGImageRelease, _CGSVGImageRetain, _CGSVGLengthEqualToLength, 
+                       _CGSVGLengthMake, _CGSVGLengthMakeWithType, _CGSVGLengthScaledLength, 
+                       _CGSVGMaskAddNode, _CGSVGMaskCreate, _CGSVGMaskCreateMask, 
+                       _CGSVGMaskGetChildAtIndex, _CGSVGMaskGetChildCount, _CGSVGMaskGetTypeID, 
+                       _CGSVGMaskRelease, _CGSVGMaskRemoveNode, _CGSVGMaskRetain, 
+                       _CGSVGNodeAddChild, _CGSVGNodeCopy, _CGSVGNodeCopyName, _CGSVGNodeCopyStringIdentifier, 
+                       _CGSVGNodeCopyText, _CGSVGNodeCreate, _CGSVGNodeCreateCompoundCGPath, 
                        _CGSVGNodeCreateGroupNode, _CGSVGNodeEnumerate, _CGSVGNodeExtractCompoundCGPath, 
                        _CGSVGNodeFindAttribute, _CGSVGNodeFindChildWithCStringIdentifier, 
                        _CGSVGNodeFindChildWithStringIdentifier, _CGSVGNodeGetAttributeMap, 
@@ -89,8 +91,9 @@ exports:
                        _CGSVGNodeSetCStringComment, _CGSVGNodeSetCStringIdentifier, 
                        _CGSVGNodeSetCStringText, _CGSVGNodeSetStringComment, _CGSVGNodeSetStringIdentifier, 
                        _CGSVGNodeSetStringText, _CGSVGPaintCreateNone, _CGSVGPaintCreateWithColor, 
-                       _CGSVGPaintCreateWithGradient, _CGSVGPaintGetColor, _CGSVGPaintGetGradient, 
-                       _CGSVGPaintGetOpacity, _CGSVGPaintGetType, _CGSVGPaintGetTypeID, 
+                       _CGSVGPaintCreateWithGradient, _CGSVGPaintCreateWithPattern, 
+                       _CGSVGPaintGetColor, _CGSVGPaintGetGradient, _CGSVGPaintGetOpacity, 
+                       _CGSVGPaintGetPattern, _CGSVGPaintGetType, _CGSVGPaintGetTypeID, 
                        _CGSVGPaintIsVisible, _CGSVGPaintRelease, _CGSVGPaintRetain, 
                        _CGSVGPaintSetOpacity, _CGSVGPathAppendCommand, _CGSVGPathCommandAppendFloats, 
                        _CGSVGPathCommandAppendPoint, _CGSVGPathCommandGetFloatAtIndex, 
@@ -98,13 +101,15 @@ exports:
                        _CGSVGPathCommandGetTypeID, _CGSVGPathCreate, _CGSVGPathCreateCGPath, 
                        _CGSVGPathCreateWithCGPath, _CGSVGPathGetCommandAtIndex, _CGSVGPathGetCommandCount, 
                        _CGSVGPathGetTypeID, _CGSVGPathRelease, _CGSVGPathRetain, 
-                       _CGSVGPointEqualToPoint, _CGSVGPointMake, _CGSVGPointMakeWithPoint, 
-                       _CGSVGPointMakeWithTypes, _CGSVGPointScaledPoint, _CGSVGRootNodeCreate, 
-                       _CGSVGRootNodeGetAspectRatio, _CGSVGRootNodeGetAspectRatioMeetOrSlice, 
-                       _CGSVGRootNodeGetSize, _CGSVGRootNodeGetViewbox, _CGSVGRootNodeSetAspectRatio, 
-                       _CGSVGRootNodeSetAspectRatioMeetOrSlice, _CGSVGRootNodeSetSize, 
-                       _CGSVGRootNodeSetViewbox, _CGSVGShapeNodeCopyText, _CGSVGShapeNodeCreate, 
-                       _CGSVGShapeNodeGetCircleGeometry, _CGSVGShapeNodeGetEllipseGeometry, 
+                       _CGSVGPatternAddNode, _CGSVGPatternCreate, _CGSVGPatternGetChildAtIndex, 
+                       _CGSVGPatternGetChildCount, _CGSVGPatternGetTypeID, _CGSVGPatternRelease, 
+                       _CGSVGPatternRemoveNode, _CGSVGPatternRetain, _CGSVGPointEqualToPoint, 
+                       _CGSVGPointMake, _CGSVGPointMakeWithPoint, _CGSVGPointMakeWithTypes, 
+                       _CGSVGPointScaledPoint, _CGSVGRootNodeCreate, _CGSVGRootNodeGetAspectRatio, 
+                       _CGSVGRootNodeGetAspectRatioMeetOrSlice, _CGSVGRootNodeGetSize, 
+                       _CGSVGRootNodeGetViewbox, _CGSVGRootNodeSetAspectRatio, _CGSVGRootNodeSetAspectRatioMeetOrSlice, 
+                       _CGSVGRootNodeSetSize, _CGSVGRootNodeSetViewbox, _CGSVGShapeNodeCopyText, 
+                       _CGSVGShapeNodeCreate, _CGSVGShapeNodeGetCircleGeometry, _CGSVGShapeNodeGetEllipseGeometry, 
                        _CGSVGShapeNodeGetFloatCount, _CGSVGShapeNodeGetFloats, _CGSVGShapeNodeGetLineGeometry, 
                        _CGSVGShapeNodeGetPath, _CGSVGShapeNodeGetPrimitive, _CGSVGShapeNodeGetRectGeometry, 
                        _CGSVGShapeNodeSetCircleGeometry, _CGSVGShapeNodeSetEllipseGeometry, 

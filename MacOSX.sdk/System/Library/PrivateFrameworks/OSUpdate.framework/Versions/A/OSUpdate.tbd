@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9DB294A6-A5AF-39C1-985B-2DA42AD62F5A
+    value:           CDC6A812-8BAA-3954-8876-AE670F702BEE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E5CFD9D5-0375-33BA-9ED9-224D2E440391
+    value:           E66E3CDF-063E-310C-8B65-3C017D6FC11E
 install-name:    '/System/Library/PrivateFrameworks/OSUpdate.framework/Versions/A/OSUpdate'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -139,13 +139,15 @@ exports:
                        _SUOSUMajorOSUpdatePendingType, _SUOSUMajorOSUpdateRestartingType, 
                        _SUOSUMajorOSVariantCustomer, _SUOSUMajorOSVariantInternal, 
                        _SUOSUMigrationInlineSUKey, _SUOSUNotNowAction, _SUOSUNotificationManagerServiceInterface, 
-                       _SUOSUNotificationRestartCountdownIdentifier, _SUOSUNotificationUserInfoMajorOSTagsKey, 
-                       _SUOSUNotificationUserInfoMajorOSURLKey, _SUOSUNotificationUserInfoSourceKey, 
-                       _SUOSUNotificationUserInfoTypeKey, _SUOSUNotificationUserInfoUpdateKeysKey, 
-                       _SUOSUOkAction, _SUOSUOtherUsersLoggedInIdentifier, _SUOSUPostDoItLaterSuccessIdentifier, 
-                       _SUOSUPostLogoutInstallOptionsDoItLaterKey, _SUOSUPostLogoutInstallOptionsForceRestartKey, 
-                       _SUOSUPostLogoutInstallOptionsIsInstallAssistantKey, _SUOSUPostLogoutInstallOptionsRestartNowKey, 
-                       _SUOSURemindAction, _SUOSURestartAction, _SUOSURestartCountdownDownloadErrorAction, 
+                       _SUOSUNotificationOfferLaterUserInfoKey, _SUOSUNotificationRestartCountdownIdentifier, 
+                       _SUOSUNotificationRestartRequiredUserInfoKey, _SUOSUNotificationUpdatesDownloadedUserInfoKey, 
+                       _SUOSUNotificationUserInfoMajorOSTagsKey, _SUOSUNotificationUserInfoMajorOSURLKey, 
+                       _SUOSUNotificationUserInfoSourceKey, _SUOSUNotificationUserInfoTypeKey, 
+                       _SUOSUNotificationUserInfoUpdateKeysKey, _SUOSUOkAction, _SUOSUOtherUsersLoggedInIdentifier, 
+                       _SUOSUPostDoItLaterSuccessIdentifier, _SUOSUPostLogoutInstallOptionsDoItLaterKey, 
+                       _SUOSUPostLogoutInstallOptionsForceRestartKey, _SUOSUPostLogoutInstallOptionsIsInstallAssistantKey, 
+                       _SUOSUPostLogoutInstallOptionsRestartNowKey, _SUOSURemindAction, 
+                       _SUOSURestartAction, _SUOSURestartCountdownDownloadErrorAction, 
                        _SUOSURestartCountdownDownloadFailedIdentifier, _SUOSURestartCountdownErrorDetailsAction, 
                        _SUOSURestartCountdownPostLogoutFailedIdentifier, _SUOSURestartWithoutCountdownIdentifier, 
                        _SUOSUServiceClientProtocol, _SUOSUServiceInterface, _SUOSUTonightAction, 
@@ -174,8 +176,9 @@ exports:
                        __scheduledWakePowerNotificationCallback, _acm_explicit_bzero, 
                        _acm_get_mem, _acm_mem_alloc, _acm_mem_alloc_data, _acm_mem_alloc_info, 
                        _acm_mem_alloc_type, _acm_mem_free, _acm_mem_free_data, _acm_mem_free_info, 
-                       _acm_mem_free_type, _gACMLoggingLevel, _gAllocatedBytes, _kRescanTimePeriod, 
-                       _kSUOSUCodeRedNotificationsMaxCountToPostUltimatum, _verifyAclConstraintInternal ]
+                       _acm_mem_free_type, _gACMLoggingLevel, _gAllocatedBytes, _k2GiB, 
+                       _kRescanTimePeriod, _kSUOSUCodeRedNotificationsMaxCountToPostUltimatum, 
+                       _verifyAclConstraintInternal ]
     objc-classes:    [ SUOSUAlarmObserver, SUOSUAppStoreAuditInfo, SUOSUAuthenticationManager, 
                        SUOSUAuthorizationController, SUOSUCatalogConfiguration, SUOSUCatalogManager, 
                        SUOSUCatalogRequester, SUOSUCatalogServer, SUOSUClient, SUOSUCustomTimeObserver, 

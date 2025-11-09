@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           64522800-5775-3999-8567-61F7B16F72ED
+    value:           0729DC47-819F-3E17-A0E4-1C3CC43DCF6D
   - target:          x86_64-maccatalyst
-    value:           64522800-5775-3999-8567-61F7B16F72ED
+    value:           0729DC47-819F-3E17-A0E4-1C3CC43DCF6D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4541D1BC-30D1-3623-AB77-A49B2B25BB5B
+    value:           D715CE79-63C3-39F6-8D05-D3B9383ECB8F
   - target:          arm64e-maccatalyst
-    value:           4541D1BC-30D1-3623-AB77-A49B2B25BB5B
+    value:           D715CE79-63C3-39F6-8D05-D3B9383ECB8F
 install-name:    '/System/Library/PrivateFrameworks/FMF.framework/Versions/A/FMF'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

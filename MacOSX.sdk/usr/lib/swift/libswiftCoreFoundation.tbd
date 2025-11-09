@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0EEA6C39-E441-3D25-A22D-C212172C7E86
+    value:           C7089EB0-5C49-3981-B058-8863497EBF58
   - target:          x86_64-maccatalyst
-    value:           0EEA6C39-E441-3D25-A22D-C212172C7E86
+    value:           C7089EB0-5C49-3981-B058-8863497EBF58
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           45C79BC9-7D7F-3689-A51C-18B75E7F5632
+    value:           C5440385-83D2-3AAC-9B9D-DA03A00593F7
   - target:          arm64e-maccatalyst
-    value:           45C79BC9-7D7F-3689-A51C-18B75E7F5632
+    value:           C5440385-83D2-3AAC-9B9D-DA03A00593F7
 install-name:    '/usr/lib/swift/libswiftCoreFoundation.dylib'
 current-version: 14
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCoreFoundation.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftCoreFoundation.dylib', 
@@ -27,7 +27,7 @@ exports:
                        '$ld$install_name$os10.13$@rpath/libswiftCoreFoundation.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftCoreFoundation.dylib', 
                        '$ld$install_name$os10.9$@rpath/libswiftCoreFoundation.dylib' ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '_$s14CoreFoundation9_CFObjectMp', '_$s14CoreFoundation9_CFObjectPAAE2eeoiySbx_xtFZ', 
                        '_$s14CoreFoundation9_CFObjectPAAE4hash4intoys6HasherVz_tF', 
                        '_$s14CoreFoundation9_CFObjectPAAE9hashValueSivg', '_$s14CoreFoundation9_CFObjectPAAE9hashValueSivpMV', 

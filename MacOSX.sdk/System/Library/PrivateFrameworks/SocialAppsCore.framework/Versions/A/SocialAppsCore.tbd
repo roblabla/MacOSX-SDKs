@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A92A47CD-6E84-3E07-874D-6CA2BFB50E34
+    value:           1E5A3C79-4E9C-39A4-A063-EA3F418B7F88
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6AB4AF71-1DEB-3862-B4CB-73ABECC05FD8
+    value:           A2486731-8F36-370A-926F-09204A0E2E3E
 install-name:    '/System/Library/PrivateFrameworks/SocialAppsCore.framework/Versions/A/SocialAppsCore'
 current-version: 5500
 reexported-libraries:
@@ -60,11 +60,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           248E91D5-F289-387E-A0CE-8A1B54EBA058
+    value:           113FB526-BF4F-39FD-BE73-C709CD2E5CD7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           947172E0-57E9-3D0D-A78E-72A20715096C
+    value:           A4BE26E1-978E-3896-B92B-9BD11A07C94C
 install-name:    '/System/Library/PrivateFrameworks/IMCore.framework/Versions/A/IMCore'
 current-version: 800
 reexported-libraries:
@@ -311,24 +311,24 @@ exports:
                        IMAutomationGroupChat, IMAutomationMessageSend, IMBalloonApp, 
                        IMBalloonAppExtension, IMBalloonBrowserPlugin, IMBalloonPlugin, 
                        IMBalloonPluginAttributionController, IMBalloonPluginDataSource, 
-                       IMBalloonPluginManager, IMBlackholeChatItem, IMChat, IMChatContext, 
-                       IMChatHistoryController, IMChatItem, IMChatRegistry, IMChatScrutinyController, 
-                       IMCloudKitAccountNeedsRepairSyncProgress, IMCloudKitCloudKitStorageIsFullSyncProgress, 
-                       IMCloudKitDeviceStorageIsFullSyncProgress, IMCloudKitErrorProgressTest, 
-                       IMCloudKitEventNotificationManager, IMCloudKitEventNotificationManagerRuntimeTest, 
-                       IMCloudKitEventNotificationRuntimeTestSuite, IMCloudKitHiddenSyncProgress, 
-                       IMCloudKitHookTestSingleton, IMCloudKitHooks, IMCloudKitKeyRollPendingErrorProgress, 
-                       IMCloudKitMockSyncState, IMCloudKitPausedSyncProgress, IMCloudKitSyncProgress, 
-                       IMCloudKitSyncProgressIsSyncing, IMCloudKitSyncProgressRuntimeTest, 
-                       IMCloudKitSyncProgressRuntimeTestDeleting, IMCloudKitSyncProgressRuntimeTestDownloading, 
-                       IMCloudKitSyncProgressRuntimeTestPaused, IMCloudKitSyncProgressRuntimeTestPreparing, 
-                       IMCloudKitSyncProgressRuntimeTestUploading, IMCloudKitSyncState, 
-                       IMCloudKitSyncStatistics, IMCommLimitsPolicyCache, IMCommSafetySummary, 
-                       IMCommSafetySummaryImage, IMCoreAutomationHook, IMDDController, 
-                       IMDNDList, IMDaemonController, IMDaemonListener, IMDaemonQuery, 
-                       IMDaemonQueryController, IMDateChatItem, IMDirectlyObservableObject, 
-                       IMDowntimeController, IMEmoteMessageChatItem, IMErrorMessagePartChatItem, 
-                       IMExpirableMessageChatItem, IMExpressiveSendAsTextChatItem, 
+                       IMBalloonPluginManager, IMBlackholeChatItem, IMBlockContactChatItem, 
+                       IMChat, IMChatContext, IMChatHistoryController, IMChatItem, 
+                       IMChatRegistry, IMChatScrutinyController, IMCloudKitAccountNeedsRepairSyncProgress, 
+                       IMCloudKitCloudKitStorageIsFullSyncProgress, IMCloudKitDeviceStorageIsFullSyncProgress, 
+                       IMCloudKitErrorProgressTest, IMCloudKitEventNotificationManager, 
+                       IMCloudKitEventNotificationManagerRuntimeTest, IMCloudKitEventNotificationRuntimeTestSuite, 
+                       IMCloudKitHiddenSyncProgress, IMCloudKitHookTestSingleton, 
+                       IMCloudKitHooks, IMCloudKitKeyRollPendingErrorProgress, IMCloudKitMockSyncState, 
+                       IMCloudKitPausedSyncProgress, IMCloudKitSyncProgress, IMCloudKitSyncProgressIsSyncing, 
+                       IMCloudKitSyncProgressRuntimeTest, IMCloudKitSyncProgressRuntimeTestDeleting, 
+                       IMCloudKitSyncProgressRuntimeTestDownloading, IMCloudKitSyncProgressRuntimeTestPaused, 
+                       IMCloudKitSyncProgressRuntimeTestPreparing, IMCloudKitSyncProgressRuntimeTestUploading, 
+                       IMCloudKitSyncState, IMCloudKitSyncStatistics, IMCommLimitsPolicyCache, 
+                       IMCommSafetySummary, IMCommSafetySummaryImage, IMCoreAutomationHook, 
+                       IMDDController, IMDNDList, IMDaemonController, IMDaemonListener, 
+                       IMDaemonQuery, IMDaemonQueryController, IMDateChatItem, IMDeletedMomentShareMessagePartChatItem, 
+                       IMDirectlyObservableObject, IMDowntimeController, IMEmoteMessageChatItem, 
+                       IMErrorMessagePartChatItem, IMExpirableMessageChatItem, IMExpressiveSendAsTextChatItem, 
                        IMFMFSession, IMFaceTimeUtilities, IMFileTransferCenter, IMGroupActionChatItem, 
                        IMGroupTitleChangeChatItem, IMHandle, IMHandleAvailabilityManager, 
                        IMHandleRegistrar, IMIDStatusController, IMInlineReplyChatItemRules, 
@@ -341,10 +341,11 @@ exports:
                        IMMessagePartHighlightChatItem, IMMessageReplyCountChatItem, 
                        IMMessageStatusChatItem, IMMutableChatContext, IMNicknameController, 
                        IMNotifyAnywayChatItem, IMNumberChangedChatItem, IMOneTimeCodeAccelerator, 
-                       IMOrderingMetricCollector, IMParentalControls, IMParticipantChangeChatItem, 
-                       IMParticipantSubscriptionSwitchChatItem, IMPendingMomentShareMessagePartChatItem, 
-                       IMPeople, IMPeopleCollection, IMPhotoLibraryPersistenceManager, 
-                       IMPinnedConversationsController, IMPluginPayload, IMReplyContextAggregateAttachmentMessagePartChatItem, 
+                       IMOrderingMetricCollector, IMOrganicAttachmentMessagePartChatItem, 
+                       IMParentalControls, IMParticipantChangeChatItem, IMParticipantSubscriptionSwitchChatItem, 
+                       IMPendingMomentShareMessagePartChatItem, IMPeople, IMPeopleCollection, 
+                       IMPhotoLibraryPersistenceManager, IMPinnedConversationsController, 
+                       IMPluginPayload, IMReplyContextAggregateAttachmentMessagePartChatItem, 
                        IMReplyContextAggregateMessagePartChatItem, IMReplyContextAttachmentMessagePartChatItem, 
                        IMReplyContextDeletedMessageChatItem, IMReplyContextTextMessagePartChatItem, 
                        IMReplyContextTranscriptPluginChatItem, IMReplySenderChatItem, 
@@ -353,13 +354,13 @@ exports:
                        IMSendProgress, IMSenderChatItem, IMServiceAgent, IMServiceChatItem, 
                        IMServiceImpl, IMSimSwitchedChatItem, IMSimulatedAccount, 
                        IMSimulatedAccountController, IMSimulatedChat, IMSimulatedDaemonController, 
-                       IMSuggestionsService, IMTUConversationChatItem, IMTextMessagePartChatItem, 
-                       IMTranscriptChatItem, IMTranscriptChatItemRules, IMTranscriptEffectHelper, 
-                       IMTranscriptLocationChatItem, IMTranscriptPluginBreadcrumbChatItem, 
+                       IMSuggestionsService, IMSyndicationStatusChatItem, IMTUConversationChatItem, 
+                       IMTextMessagePartChatItem, IMTranscriptChatItem, IMTranscriptChatItemRules, 
+                       IMTranscriptEffectHelper, IMTranscriptLocationChatItem, IMTranscriptPluginBreadcrumbChatItem, 
                        IMTranscriptPluginChatItem, IMTranscriptPluginStatusChatItem, 
                        IMTransientMessagePartChatItem, IMTypingChatItem, IMTypingPluginChatItem, 
-                       IMUnavailabilityIndicatorChatItem, IMUnreadCountChatItem, 
-                       _IMBalloonExtensionApp ]
+                       IMUnavailabilityIndicatorChatItem, IMUnavailableMomentShareMessagePartChatItem, 
+                       IMUnreadCountChatItem, _IMBalloonExtensionApp ]
     objc-ivars:      [ IMAccount._accountImage, IMAccount._asleep, IMAccount._service, 
                        IMAccount._smallImage, IMAccountController._accountMap, IMAssociatedMessageChatItem._geometryDescriptor, 
                        IMAttachment._createdDate, IMAttachment._guid, IMAttachment._isSticker, 
@@ -385,17 +386,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FBD36EAE-0350-3638-9E94-560BFD27CE1A
+    value:           38C0450C-94A9-379E-BE8F-E5059E2DC0FE
   - target:          x86_64-maccatalyst
-    value:           FBD36EAE-0350-3638-9E94-560BFD27CE1A
+    value:           38C0450C-94A9-379E-BE8F-E5059E2DC0FE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4F9207CA-19D2-30AC-AF3D-5ADF9C4DA14C
+    value:           746F8D3D-BC31-396B-B015-A31AD0967122
   - target:          arm64e-maccatalyst
-    value:           4F9207CA-19D2-30AC-AF3D-5ADF9C4DA14C
+    value:           746F8D3D-BC31-396B-B015-A31AD0967122
 install-name:    '/System/Library/PrivateFrameworks/IMFoundation.framework/Versions/A/IMFoundation'
 current-version: 800
 exports:

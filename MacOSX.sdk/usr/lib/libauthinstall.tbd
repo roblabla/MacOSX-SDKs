@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B243AB47-4E59-3779-80C5-2B5568EA5956
+    value:           8451B8C5-48E6-3E87-BAC9-BF0BA112BA6F
   - target:          x86_64-maccatalyst
-    value:           B243AB47-4E59-3779-80C5-2B5568EA5956
+    value:           8451B8C5-48E6-3E87-BAC9-BF0BA112BA6F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1202FDD4-EEE1-350F-BD7F-52B625BD06E9
+    value:           C615650A-F256-3CC5-B558-5C0FCD8CD50A
   - target:          arm64e-maccatalyst
-    value:           1202FDD4-EEE1-350F-BD7F-52B625BD06E9
+    value:           C615650A-F256-3CC5-B558-5C0FCD8CD50A
 install-name:    '/usr/lib/libauthinstall.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EB91B7CD-DA3D-3F98-9D41-7447F39B5E1E
+    value:           FD737ADE-119F-34B2-A06E-497CD5E2600F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F3F7C27B-DF2B-3F3C-AF17-2BC1FF9A855B
+    value:           E64FC230-920B-34C3-8B93-FDA925BE7335
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeUI.framework/Versions/A/ScreenTimeUI'
-current-version: 500.0.19
+current-version: 500.6.1
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _STBlockingViewDidHideNotification, _STIconCacheDidUpdatePersonImageNotificationName, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EB600D4A-DA7C-3858-85AA-275F58D3BF1F
+    value:           CDB0E6DE-EF39-325F-84D1-2AA05C93ADE9
   - target:          x86_64-maccatalyst
-    value:           EB600D4A-DA7C-3858-85AA-275F58D3BF1F
+    value:           CDB0E6DE-EF39-325F-84D1-2AA05C93ADE9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FB1D1DE8-9BAB-3C15-9B20-BACCF42F933B
+    value:           36C9CF4B-F8EA-3C44-8556-BE74D56AA9B6
   - target:          arm64e-maccatalyst
-    value:           FB1D1DE8-9BAB-3C15-9B20-BACCF42F933B
+    value:           36C9CF4B-F8EA-3C44-8556-BE74D56AA9B6
 install-name:    '/System/Library/PrivateFrameworks/LinguisticData.framework/Versions/A/LinguisticData'
 current-version: 399
 exports:

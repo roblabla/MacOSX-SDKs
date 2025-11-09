@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
-// swift-module-flags: -target x86_64-apple-macos12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name TabularData
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-module-flags: -target x86_64-apple-macos12.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name TabularData
 import Combine/*.TopLevelDecoder*/
 import Combine/*.TopLevelEncoder*/
 import Dispatch
@@ -1069,7 +1069,7 @@ extension TabularData.JSONReadingError : Swift.CustomStringConvertible {
   }
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-public struct CategoricalSummary<Element> : Swift.Hashable, Swift.CustomStringConvertible where Element : Swift.Hashable {
+public struct CategoricalSummary<Element> : Swift.Hashable, Swift.CustomDebugStringConvertible where Element : Swift.Hashable {
   public var someCount: Swift.Int
   public var noneCount: Swift.Int
   public var totalCount: Swift.Int {
@@ -1079,7 +1079,7 @@ public struct CategoricalSummary<Element> : Swift.Hashable, Swift.CustomStringCo
   public var mode: [Element]
   public init()
   public init(someCount: Swift.Int, noneCount: Swift.Int, uniqueCount: Swift.Int, mode: [Element])
-  public var description: Swift.String {
+  public var debugDescription: Swift.String {
     get
   }
   public func hash(into hasher: inout Swift.Hasher)
@@ -1590,7 +1590,7 @@ extension TabularData.RowGrouping : Swift.RandomAccessCollection {
   public typealias SubSequence = Swift.Slice<TabularData.RowGrouping<GroupingKey>>
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-public struct NumericSummary<Element> : Swift.Hashable, Swift.CustomStringConvertible where Element : Swift.BinaryFloatingPoint {
+public struct NumericSummary<Element> : Swift.Hashable, Swift.CustomDebugStringConvertible where Element : Swift.BinaryFloatingPoint {
   public var someCount: Swift.Int
   public var noneCount: Swift.Int
   public var totalCount: Swift.Int {
@@ -1605,7 +1605,7 @@ public struct NumericSummary<Element> : Swift.Hashable, Swift.CustomStringConver
   public var max: Element
   public init()
   public init(someCount: Swift.Int, noneCount: Swift.Int, mean: Element, standardDeviation: Element, min: Element, max: Element, median: Element, firstQuartile: Element, thirdQuartile: Element)
-  public var description: Swift.String {
+  public var debugDescription: Swift.String {
     get
   }
   public func hash(into hasher: inout Swift.Hasher)

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4B7B3331-3291-3168-8173-7284BC3F3267
+    value:           C0E72AD4-45D3-3545-ABAA-1705CFCE9215
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           818C7890-7F7B-36FC-A34F-93D3838B7F3B
+    value:           CC77E110-6291-3A0B-970B-376C163821CB
 install-name:    '/System/Library/PrivateFrameworks/NotesSupport.framework/Versions/A/NotesSupport'
-current-version: 1946
+current-version: 1974
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ICACAccountPropertyDidChooseToMigrate, _ICACAccountPropertyDidFinishMigration, 
@@ -20,9 +20,10 @@ exports:
                        _ICAccountThumbnailsDirectoryName, _ICAccountsDirectoryName, 
                        _ICActivityTypeShareToNote, _ICAssertBreakpoint, _ICAttachmentNameMaxLength, 
                        _ICCFTypeCast, _ICCGColorCopyInverse, _ICCGColorCreateWithString, 
-                       _ICCGColorEquivalentToColor, _ICCheckedDynamicCast, _ICCheckedProtocolCast, 
-                       _ICClassAndProtocolCast, _ICCryptoIterationCount, _ICCryptorErrorDomain, 
-                       _ICDataFromCGImage, _ICDataStoreServiceBundleIdentifier, _ICDebugModeEnabled, 
+                       _ICCGColorEquivalentToColor, _ICCachedClearedOnChangedNotification, 
+                       _ICCheckedDynamicCast, _ICCheckedProtocolCast, _ICClassAndProtocolCast, 
+                       _ICCryptoIterationCount, _ICCryptorErrorDomain, _ICDataFromCGImage, 
+                       _ICDataStoreServiceBundleIdentifier, _ICDebugModeEnabled, 
                        _ICDynamicCast, _ICEnableSandboxMode, _ICErrorAttachmentCountKey, 
                        _ICErrorDomain, _ICErrorFailureReasonKey, _ICFolderCustomNoteSortTypeQuerySortKey, 
                        _ICGenericError, _ICGroupContainerIdentifier, _ICHTMLFrameworkBundleIdentifier, 
@@ -34,8 +35,7 @@ exports:
                        _ICInternalSettingsIsMentionNotificationsDisabled, _ICInternalSettingsIsMentionsEnabled, 
                        _ICInternalSettingsIsPageViewControllerCrashWorkaroundDisabled, 
                        _ICInternalSettingsIsRedesignEnabled, _ICInternalSettingsIsSystemPaperEnabled, 
-                       _ICInternalSettingsIsTracingEnabled, _ICInternalSettingsShouldNotShowScrapNotesInManualFolders, 
-                       _ICInternalSettingsSmartFoldersCanIncludeRecentlyDeletedNotes, 
+                       _ICInternalSettingsIsTracingEnabled, _ICInternalSettingsSmartFoldersCanIncludeRecentlyDeletedNotes, 
                        _ICIsSandboxModeEnabled, _ICJPEGDataFromCGImage, _ICKeyPathFromSelectors, 
                        _ICLaunchConfigurationEnvironmentWithString, _ICLinkPresentationXPCPreviewGenerationEnabled, 
                        _ICLocalAccountDidChooseToMigrateKey, _ICLocalAccountDidChooseToMigrateNotification, 
@@ -135,9 +135,8 @@ exports:
                        _kICInternalSettingsDisableMentionNotifications, _kICInternalSettingsDisableNoteModificationDateUpdates, 
                        _kICInternalSettingsDisableSingleLineA, _kICInternalSettingsDisableTextViewContentOffsetWorkaround, 
                        _kICInternalSettingsDisableTextViewEmptyLastLineWorkaround, 
-                       _kICInternalSettingsDontShowScrapNotesInManualFolders, _kICInternalSettingsDrawingMarkerImageKey, 
-                       _kICInternalSettingsDrawingPencilImageKey, _kICInternalSettingsDrawingTouchPredictionPoints, 
-                       _kICInternalSettingsDrawingTouchPredictionPointsOverride, 
+                       _kICInternalSettingsDrawingMarkerImageKey, _kICInternalSettingsDrawingPencilImageKey, 
+                       _kICInternalSettingsDrawingTouchPredictionPoints, _kICInternalSettingsDrawingTouchPredictionPointsOverride, 
                        _kICInternalSettingsEnableBarBlurEffect, _kICInternalSettingsEnableCSAttributeEvaluator, 
                        _kICInternalSettingsEnableSettingCurrentQuickNote, _kICInternalSettingsFlexibleBottomContentPadding, 
                        _kICInternalSettingsForceDeviceListDownloadFailure, _kICInternalSettingsLogStateOnLaunchDefaultsKey, 
@@ -159,9 +158,9 @@ exports:
                        _performBlockOnMainThreadAndWait ]
     objc-classes:    [ ICAppGroupDefaults, ICArchive, ICArchiveReader, ICArchiveWriter, 
                        ICAssert, ICAtomicLRUCache, ICBackoffTimer, ICBaseSearchIndexerDataSource, 
-                       ICCDCSIReindexer, ICCFTypeWrapper, ICCache, ICCoreDataCoreSpotlightDelegate, 
-                       ICDebugTimer, ICDispatchAfterHandler, ICErrors, ICExclusiveLock, 
-                       ICFolderCustomNoteSortType, ICIndexItemsByIdentifiersOperation, 
+                       ICCDCSIReindexer, ICCFTypeWrapper, ICCache, ICClearOnNotificationLRUCache, 
+                       ICCoreDataCoreSpotlightDelegate, ICDebugTimer, ICDispatchAfterHandler, 
+                       ICErrors, ICExclusiveLock, ICFolderCustomNoteSortType, ICIndexItemsByIdentifiersOperation, 
                        ICIndexItemsOperation, ICLRUCache, ICLaunchConfiguration, 
                        ICLocalization, ICManagedObjectContextUpdater, ICMutableBool, 
                        ICNoCopyDictionary, ICNoteListSortUtilities, ICNoteSnippetUtilities, 

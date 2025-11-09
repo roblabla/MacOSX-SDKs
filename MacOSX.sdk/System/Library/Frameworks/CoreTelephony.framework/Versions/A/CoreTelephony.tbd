@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7AB74197-7BCE-38F1-83EC-12A683A9EA3D
+    value:           514A6947-24C6-3541-B85F-D4063AEF5B1F
   - target:          x86_64-maccatalyst
-    value:           7AB74197-7BCE-38F1-83EC-12A683A9EA3D
+    value:           514A6947-24C6-3541-B85F-D4063AEF5B1F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B4356C1B-A1E8-3FA1-AD81-5C6724EBB6FD
+    value:           5FD3D881-8298-33E2-ACBF-C6C1C575C1A2
   - target:          arm64e-maccatalyst
-    value:           B4356C1B-A1E8-3FA1-AD81-5C6724EBB6FD
+    value:           5FD3D881-8298-33E2-ACBF-C6C1C575C1A2
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Versions/A/CoreTelephony'
 current-version: 0
 exports:
@@ -332,9 +332,9 @@ exports:
                        __Z8formPLMNRK3MCCRK3MNC, __ZN14CSIPhoneNumber13setBaseNumberEPKc, 
                        __ZN14CSIPhoneNumber13setBaseNumberERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZN14CSIPhoneNumber13setDtmfStringERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
-                       __ZN14CSIPhoneNumber15setTypeOfNumberE15PhoneNumberType, __ZN14CSIPhoneNumber16kIMEIUssdCommandE, 
-                       __ZN14CSIPhoneNumber16setTypeOfAddressEi, __ZN14CSIPhoneNumber18kRFExposureCommandE, 
-                       __ZN14CSIPhoneNumber19setCLIRRequestStateE16CLIRRequestState, 
+                       __ZN14CSIPhoneNumber14setMMIValidityE11MMIValidity, __ZN14CSIPhoneNumber15setTypeOfNumberE15PhoneNumberType, 
+                       __ZN14CSIPhoneNumber16kIMEIUssdCommandE, __ZN14CSIPhoneNumber16setTypeOfAddressEi, 
+                       __ZN14CSIPhoneNumber18kRFExposureCommandE, __ZN14CSIPhoneNumber19setCLIRRequestStateE16CLIRRequestState, 
                        __ZN14CSIPhoneNumber20setEmergencyCategoryEj, __ZN14CSIPhoneNumber21setIsEmVoiceSupportedEb, 
                        __ZN14CSIPhoneNumber22setIsListedAsEmergencyEb, __ZN14CSIPhoneNumber23setIsEmSMSTextSupportedEb, 
                        __ZN14CSIPhoneNumber27convertLettersToPhoneNumberEv, __ZN14CSIPhoneNumberC1EPKc, 
@@ -373,9 +373,9 @@ exports:
                        __ZN9MCCAndMNCC2Ett, __ZN9MCCAndMNCC2Ev, __ZNK14CEPlanPropertyeqERKS_, 
                        __ZNK14CSIPhoneNumber12getFormattedEv, __ZNK14CSIPhoneNumber13getBaseNumberEv, 
                        __ZNK14CSIPhoneNumber13getDtmfStringEv, __ZNK14CSIPhoneNumber13getFullNumberEv, 
-                       __ZNK14CSIPhoneNumber15getTypeOfNumberEv, __ZNK14CSIPhoneNumber16getTypeOfAddressEv, 
-                       __ZNK14CSIPhoneNumber17hasSameBaseNumberERKS_, __ZNK14CSIPhoneNumber19getCLIRRequestStateEv, 
-                       __ZNK14CSIPhoneNumber19getFullNumberHelperENSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
+                       __ZNK14CSIPhoneNumber14getMMIValidityEv, __ZNK14CSIPhoneNumber15getTypeOfNumberEv, 
+                       __ZNK14CSIPhoneNumber16getTypeOfAddressEv, __ZNK14CSIPhoneNumber17hasSameBaseNumberERKS_, 
+                       __ZNK14CSIPhoneNumber19getCLIRRequestStateEv, __ZNK14CSIPhoneNumber19getFullNumberHelperENSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZNK14CSIPhoneNumber20getEmergencyCategoryEv, __ZNK14CSIPhoneNumber21getFullOriginalNumberEv, 
                        __ZNK14CSIPhoneNumber21getIsEmVoiceSupportedEv, __ZNK14CSIPhoneNumber22getIsListedAsEmergencyEv, 
                        __ZNK14CSIPhoneNumber23getIsEmSMSTextSupportedEv, __ZNK14CSIPhoneNumber23hasEmergencyCategorySetEv, 
@@ -779,13 +779,14 @@ exports:
                        _kCTRegistrationDataIndicator4G, _kCTRegistrationDataIndicator4G_5GE, 
                        _kCTRegistrationDataIndicator4G_LTEA, _kCTRegistrationDataIndicator4G_LTEPlus, 
                        _kCTRegistrationDataIndicator5G, _kCTRegistrationDataIndicator5G_Plus, 
-                       _kCTRegistrationDataIndicator5G_Uwb, _kCTRegistrationDataIndicator6G, 
-                       _kCTRegistrationDataIndicator7G, _kCTRegistrationDataIndicator8G, 
-                       _kCTRegistrationDataIndicator9G, _kCTRegistrationDataIndicatorH_Plus, 
-                       _kCTRegistrationDataIndicatorNone, _kCTRegistrationDataIndicatorOverride, 
-                       _kCTRegistrationDataRate2G, _kCTRegistrationDataRate3G, _kCTRegistrationDataRate4G, 
-                       _kCTRegistrationDataRate5G, _kCTRegistrationDataRate6G, _kCTRegistrationDataRate7G, 
-                       _kCTRegistrationDataRate8G, _kCTRegistrationDataRate9G, _kCTRegistrationDataRateUnknown, 
+                       _kCTRegistrationDataIndicator5G_UC, _kCTRegistrationDataIndicator5G_Uwb, 
+                       _kCTRegistrationDataIndicator6G, _kCTRegistrationDataIndicator7G, 
+                       _kCTRegistrationDataIndicator8G, _kCTRegistrationDataIndicator9G, 
+                       _kCTRegistrationDataIndicatorH_Plus, _kCTRegistrationDataIndicatorNone, 
+                       _kCTRegistrationDataIndicatorOverride, _kCTRegistrationDataRate2G, 
+                       _kCTRegistrationDataRate3G, _kCTRegistrationDataRate4G, _kCTRegistrationDataRate5G, 
+                       _kCTRegistrationDataRate6G, _kCTRegistrationDataRate7G, _kCTRegistrationDataRate8G, 
+                       _kCTRegistrationDataRate9G, _kCTRegistrationDataRateUnknown, 
                        _kCTRegistrationDataStatus, _kCTRegistrationDataStatusAttached, 
                        _kCTRegistrationDataStatusAttachedAndActive, _kCTRegistrationDataStatusChangedNotification, 
                        _kCTRegistrationDataStatusInternationalRoaming, _kCTRegistrationDataStatusUnattached, 

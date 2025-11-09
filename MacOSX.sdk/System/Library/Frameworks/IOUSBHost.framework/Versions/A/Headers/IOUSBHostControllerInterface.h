@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * @class   IOUSBHostControllerInterface
  * @brief   The object representing a user-mode USB host controller
- * @details This class provides functionality to interact with the kernel USB host controller interfaces.  The entitlement com.apple.developer.usb.hostcontrollerinterface is required to use this class.
+ * @details IOUSBHostControllerInterface enables a process to instantiate a USB host controller to provide access to remote USB devices or create synthetic USB devices.
+ *          The entitlement com.apple.developer.usb.host-controller-interface is required to use this class.
  *          The com.apple.iokit.usb.framework.IOUSBHost subsystem is used for logging.
  */
 

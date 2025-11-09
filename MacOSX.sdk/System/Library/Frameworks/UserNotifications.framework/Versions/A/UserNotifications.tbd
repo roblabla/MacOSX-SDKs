@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3A544A82-AC60-3CA1-AF3F-B7593569D1DB
+    value:           BE41003F-6646-3C96-ACCA-3699A5718678
   - target:          x86_64-maccatalyst
-    value:           3A544A82-AC60-3CA1-AF3F-B7593569D1DB
+    value:           BE41003F-6646-3C96-ACCA-3699A5718678
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           27BAA39D-E868-39BA-B16F-9401B2802541
+    value:           11FF91D2-70E5-3592-85DC-4BC2F2E93030
   - target:          arm64e-maccatalyst
-    value:           27BAA39D-E868-39BA-B16F-9401B2802541
+    value:           11FF91D2-70E5-3592-85DC-4BC2F2E93030
 install-name:    '/System/Library/Frameworks/UserNotifications.framework/Versions/A/UserNotifications'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -44,10 +44,11 @@ exports:
                        _UNSafeConforms, _UNShowPreviewsSettingString, _UNSimilarArrays, 
                        _UNSimilarSets, _UNSimilarStrings, _UNStringFromNotificationAttachmentDisplayLocation, 
                        _UNUserNotificationServiceName, __UNNotificationContentTypeAirDrop, 
-                       __UNNotificationContentTypeDefault, __UNNotificationContentTypeIncomingCall, 
-                       __UNNotificationContentTypeIntercom, __UNNotificationContentTypeMessagingDirect, 
-                       __UNNotificationContentTypeMessagingGroup, __UNNotificationContentTypeMissedCall, 
-                       __UNNotificationContentTypeVoicemail, _kUNResponseContextArchivedUserNotificationKey ]
+                       __UNNotificationContentTypeCallOther, __UNNotificationContentTypeDefault, 
+                       __UNNotificationContentTypeIncomingCall, __UNNotificationContentTypeIntercom, 
+                       __UNNotificationContentTypeMessagingDirect, __UNNotificationContentTypeMessagingGroup, 
+                       __UNNotificationContentTypeMissedCall, __UNNotificationContentTypeVoicemail, 
+                       _kUNResponseContextArchivedUserNotificationKey ]
     objc-classes:    [ UNCalendarNotificationTrigger, UNLegacyNotificationTrigger, 
                        UNLocalizedString, UNLocalizedStringFactory, UNLocationNotificationTrigger, 
                        UNMutableNotificationAttachmentOptions, UNMutableNotificationCategory, 

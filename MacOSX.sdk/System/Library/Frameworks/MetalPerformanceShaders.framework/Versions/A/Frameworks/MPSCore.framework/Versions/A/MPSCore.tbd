@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           002FAC3C-9CBD-37D4-8E32-470407C09649
+    value:           29C8ACBC-592F-3F67-863B-7B9540F06E96
   - target:          x86_64-maccatalyst
-    value:           002FAC3C-9CBD-37D4-8E32-470407C09649
+    value:           29C8ACBC-592F-3F67-863B-7B9540F06E96
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           991C5A09-B0BE-313B-8F98-F57C69CF3A4D
+    value:           ADE079B8-6A48-3F54-9EB1-E2DBFCA3492F
   - target:          arm64e-maccatalyst
-    value:           991C5A09-B0BE-313B-8F98-F57C69CF3A4D
+    value:           ADE079B8-6A48-3F54-9EB1-E2DBFCA3492F
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSCore.framework/Versions/A/MPSCore'
-current-version: 125.0.30
+current-version: 125.2.1
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ MPSImage, MPSMatrix, MPSNDArray, MPSNeuralNetwork, MPSParallelPrimitives, 
                        MPSRayIntersector, MetalPerformanceShaders ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MPSConvertFloatToHalf, _MPSConvertHalfToFloat, _MPSCopyToFromNetworkByteOrder16, 
                        _MPSCopyToFromNetworkByteOrder32, _MPSCreateFunctionConstantValues, 
@@ -46,6 +46,7 @@ exports:
                        __Z21MPSDecrementReadCountP7NSArrayIP8MPSImageE, __Z21MPSDecrementReadCountP7NSArrayIP8MPSStateE, 
                        __Z21MPSDecrementReadCountP8MPSImage, __Z21MPSDecrementReadCountP8MPSState, 
                        __Z25MPSGetEffectiveClipRegion7MTLSize9MPSRegion, __Z25MPSGetEffectiveClipRegion7MTLSize9MTLRegion, 
+                       __Z26_MPSNewSpecializedFunctionPU21objcproto10MTLLibrary11objc_objectP8NSStringS2_P25MTLFunctionConstantValuesPP7NSError, 
                        __ZN10BaseTensor14GetNumElementsEv, __ZN10BaseTensor16GetAccessPatternEP7NSArrayIP10MPSNDArrayES4_, 
                        __ZN10BaseTensorC1ERKNSt3__16vectorIlNS0_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN10BaseTensorC2ERKNSt3__16vectorIlNS0_9allocatorIlEEEE11MPSDataTypePKc, 
@@ -54,7 +55,7 @@ exports:
                        __ZN10MPSLibrary13ReleaseMPSKeyEP11MPSKey_data, __ZN10MPSLibrary14MPSKey_CompileEP11MPSKey_data, 
                        __ZN10MPSLibrary15GetComputeStateEjRK23MPSFunctionConstantList30MPSThreadGroupSizeMultipleType24MPSDriverCompilerOptionsP8NSStringm, 
                        __ZN10MPSLibrary17GetCacheKeyAtomicEPK17PrivateKernelInfoRK23MPSFunctionConstantListbPNSt3__16atomicIP11MPSKey_dataEE30MPSThreadGroupSizeMultipleType24MPSDriverCompilerOptionsP8NSStringm, 
-                       __ZN10MPSLibrary19CreateUberShaderKeyEP8NSStringRK23MPSFunctionConstantListyPFPU22objcproto11MTLFunction11objc_objectPU21objcproto10MTLLibrary11objc_objectPK13MPSKernelInfoS4_PP7NSErrorEy30MPSThreadGroupSizeMultipleType24MPSDriverCompilerOptionsP18MPSKernelDAGObjectS1_m, 
+                       __ZN10MPSLibrary19CreateUberShaderKeyEP8NSStringRK23MPSFunctionConstantListyPFPU22objcproto11MTLFunction11objc_objectPU21objcproto10MTLLibrary11objc_objectPK13MPSKernelInfoS4_S1_PP7NSErrorEy30MPSThreadGroupSizeMultipleType24MPSDriverCompilerOptionsP18MPSKernelDAGObjectS1_m, 
                        __ZN10MPSLibrary19ReleaseComputeStateEPU34objcproto23MTLComputePipelineState11objc_object, 
                        __ZN10MPSLibrary19getKernelDAGLibraryEv, __ZN10MPSLibrary20GetComputeStateAsyncEjRK23MPSFunctionConstantList30MPSThreadGroupSizeMultipleTypeP8NSStringm, 
                        __ZN10MPSLibrary20PrefetchComputeStateEjRK23MPSFunctionConstantList30MPSThreadGroupSizeMultipleTypeP8NSStringm, 
@@ -62,6 +63,7 @@ exports:
                        __ZN10MPSLibrary23NewComputePipelineStateEP8NSStringP25MTLFunctionConstantValues30MPSThreadGroupSizeMultipleType, 
                        __ZN10MPSLibrary25GetPipelineStateForMPSKeyEP11MPSKey_dataPU27objcproto16MTLCommandBuffer11objc_object, 
                        __ZN10MPSLibrary25LoadMPSDeviceSpecificInfoERK21MPSDeviceSpecificInfo, 
+                       __ZN10MPSLibrary27getComputePipelineStateInfoEPU34objcproto23MTLComputePipelineState11objc_object, 
                        __ZN10MPSLibraryC1EPU21objcproto10MTLLibrary11objc_objectPK14MPSLibraryInfoP9MPSDevice, 
                        __ZN10MPSLibraryC2EPU21objcproto10MTLLibrary11objc_objectPK14MPSLibraryInfoP9MPSDevice, 
                        __ZN10MPSLibraryD1Ev, __ZN10MPSLibraryD2Ev, __ZN12MPSAutoCache13GetTempBufferEmP15MTLSizeAndAlign, 

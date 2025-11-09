@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           945CE578-201C-3D2C-9B9B-A07857B0E8D3
+    value:           2C01DEF1-1C35-3A0F-8A9A-E13B9ABA4E9F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B771352D-31BD-317B-8DB4-57F7B4BEEC13
+    value:           39B56593-B1DF-3D78-BB9B-CAA10DC21411
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/LoginUIKit'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -24,26 +24,23 @@ exports:
                        _LUI2StatusViewContentHeight, _LUI2StatusViewTrailingEdgeBuffer, 
                        _LUI2UserPictureDiameter, _LUIAttributeTypeAvatarRepresentation, 
                        _LUIAvatarAvatarsSupported, _LUIAvatarCreateAvatarInfoFromData, 
-                       _LUIAvatarCreateIdleTimer, _LUIAvatarCreateWithData, _LUIAvatarDragToPickerDelay, 
-                       _LUIAvatarDragToPickerDelayKey, _LUIAvatarDragToPickerDelayTime, 
-                       _LUIAvatarDragToSelectedDelay, _LUIAvatarDragToSelectedDelayKey, 
+                       _LUIAvatarCreateIdleTimer, _LUIAvatarCreateWithData, _LUIAvatarDragToPickerDelayTime, 
                        _LUIAvatarDragToSelectedDelayTime, _LUIAvatarIdleTimerInterval, 
                        _LUIAvatarIdleTimerThreshold, _LUIAvatarIdleTimerUserInfoIsIdle, 
                        _LUIAvatarInfoAvatarKey, _LUIAvatarInfoBackgroundColorDescriptionKey, 
                        _LUIAvatarInfoBackgroundColorKey, _LUIAvatarInfoCropTransformKey, 
-                       _LUIAvatarInfoInitialPoseKey, _LUIAvatarInitialPoseDelay, 
-                       _LUIAvatarInitialPoseDelayKey, _LUIAvatarInitialPoseDelayTime, 
-                       _LUIAvatarQueue, _LUIAvatarSecondsUntilSleep, _LUIAvatarSecondsUntilSleepKey, 
-                       _LUIAvatarSetDragToPickerDelay, _LUIAvatarSetDragToSelectedDelay, 
-                       _LUIAvatarSetInitialPoseDelay, _LUIAvatarSetSecondsUntilSleep, 
-                       _LUIAvatarSetShowAnimationName, _LUIAvatarShowAnimationName, 
-                       _LUIAvatarShowAnimationNameKey, _LUIAvatarTrackingAreaInset, 
-                       _LUIBackgroundPressed, _LUIButtonBack, _LUIButtonCancel, _LUIButtonCancelKey, 
-                       _LUIButtonExit, _LUIButtonGo, _LUIButtonGuestUser, _LUIButtonHint, 
-                       _LUIButtonNetworkStatus, _LUIButtonNext, _LUIButtonPrevious, 
-                       _LUIButtonRestart, _LUIButtonRestartToSafari, _LUIButtonShiftLeft, 
-                       _LUIButtonShiftRight, _LUIButtonShutDown, _LUIButtonSleep, 
-                       _LUIButtonSwitchUser, _LUICopyDefaultDesktopPictureForEFILogin, 
+                       _LUIAvatarInfoInitialPoseKey, _LUIAvatarInfoStickerConfigurationKey, 
+                       _LUIAvatarInitialPoseDelay, _LUIAvatarInitialPoseDelayKey, 
+                       _LUIAvatarInitialPoseDelayTime, _LUIAvatarQueue, _LUIAvatarSecondsUntilSleep, 
+                       _LUIAvatarSecondsUntilSleepKey, _LUIAvatarSetInitialPoseDelay, 
+                       _LUIAvatarSetSecondsUntilSleep, _LUIAvatarSetShowAnimationName, 
+                       _LUIAvatarShowAnimationName, _LUIAvatarShowAnimationNameKey, 
+                       _LUIAvatarTrackingAreaInset, _LUIBackgroundPressed, _LUIButtonBack, 
+                       _LUIButtonCancel, _LUIButtonCancelKey, _LUIButtonExit, _LUIButtonGo, 
+                       _LUIButtonGuestUser, _LUIButtonHint, _LUIButtonNetworkStatus, 
+                       _LUIButtonNext, _LUIButtonPrevious, _LUIButtonRestart, _LUIButtonRestartToSafari, 
+                       _LUIButtonShiftLeft, _LUIButtonShiftRight, _LUIButtonShutDown, 
+                       _LUIButtonSleep, _LUIButtonSwitchUser, _LUICopyDefaultDesktopPictureForEFILogin, 
                        _LUICopyDefaultDesktopPictureForScreenLock, _LUICopyDesktopPicture, 
                        _LUICopyDesktopPictureForLoginWindowEFI, _LUICopyDesktopPictureForLoginWindowUI, 
                        _LUICopyDesktopPictureForScreenLock, _LUICopyDockDesktopPictureForDisplay, 
@@ -58,11 +55,11 @@ exports:
                        _LUIPinEntered, _LUISpinnerDictionary, _LUIStipViewHighlightTopBuffer, 
                        _LUITimePressed, _LUIToggleInfo, _LUITransitionDictionaryForDisplay, 
                        _LUIUserIconPressed, _RemoteProviderInterface, __CanDebug, 
-                       _gMinScreenOrigin, _kContinuityServiceProvider, _kExtraProgressSpace, 
-                       _kLUIFlagAuthenticationService, _kLUIFlagBattery, _kLUIFlagDesktopPicture, 
-                       _kLUIFlagGeneric, _kLUIFlagInputMethod, _kLUIFlagPasswordPolicy, 
-                       _kLUIFlagUsers, _kLUIFlagWindows, _kLocalAuthenticationServiceProvider, 
-                       _kSmartCardServiceProvider ]
+                       _gMinScreenOrigin, _getLUIAVTViewClass, _kContinuityServiceProvider, 
+                       _kExtraProgressSpace, _kLUIFlagAuthenticationService, _kLUIFlagBattery, 
+                       _kLUIFlagDesktopPicture, _kLUIFlagGeneric, _kLUIFlagInputMethod, 
+                       _kLUIFlagPasswordPolicy, _kLUIFlagUsers, _kLUIFlagWindows, 
+                       _kLocalAuthenticationServiceProvider, _kSmartCardServiceProvider ]
     objc-classes:    [ LUI2Appearance, LUI2AuthHintViewController, LUI2AuthorizationPluginViewController, 
                        LUI2AvatarBackgroundView, LUI2BackgroundViewController, LUI2BatteryView, 
                        LUI2BatteryViewController, LUI2Button, LUI2ButtonViewController, 
@@ -157,11 +154,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E2C27571-4E33-3CCA-B5C4-26F4B116FCB2
+    value:           1B25ED47-D08D-322A-AFCB-9A6268A8373E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           15275322-631D-3925-AD81-E829F5592A4D
+    value:           55E22657-376E-37B3-BF9A-8E347C25F0B1
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Frameworks/LoginUICore.framework/Versions/A/LoginUICore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7210590E-D5E8-3FEF-86A9-F3067C3371CB
+    value:           B5FEA673-B81F-34C8-95AF-FEC6C89F6D66
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E866D5CF-3E12-3C1B-B376-3608EDB4EAEF
+    value:           B0ACE78B-A6BE-3531-B737-3AB3FEC129EE
 install-name:    '/System/Library/PrivateFrameworks/PDSAgent.framework/Versions/A/PDSAgent'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5A304067-03A6-3496-B445-C9F1B258A328
+    value:           8D5B5946-AD23-32E8-98AD-2B6D49FA1DFE
   - target:          x86_64-maccatalyst
-    value:           5A304067-03A6-3496-B445-C9F1B258A328
+    value:           8D5B5946-AD23-32E8-98AD-2B6D49FA1DFE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C2214C19-FF09-381D-B093-3EE8C7A7145A
+    value:           8AFF2862-90EF-349A-92D7-430EC4557AE6
   - target:          arm64e-maccatalyst
-    value:           C2214C19-FF09-381D-B093-3EE8C7A7145A
+    value:           8AFF2862-90EF-349A-92D7-430EC4557AE6
 install-name:    '/System/Library/Frameworks/CoreSpotlight.framework/Versions/A/CoreSpotlight'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CSAccountTypeExchangeActiveSync, _CSAccountTypeExchangeWebServices, 
                        _CSAccountTypeIMAP, _CSAccountTypeLocal, _CSAccountTypePOP, 
@@ -40,7 +40,7 @@ exports:
                        _CSSearchQueryErrorDomain, _CSSearchQueryString, _CSSearchableItemActionType, 
                        _CSSearchableItemActivityIdentifier, _CSServiceName, _CSServiceSandboxExtensionName, 
                        _CSSimpleQueryCancel, _CSSimpleQueryHasResultsForQuery, _CSUserFSAppMachServiceName, 
-                       _CoreSpotlightVersionNumber, _CoreSpotlightVersionString, 
+                       _CS_simplifyItemArray, _CoreSpotlightVersionNumber, _CoreSpotlightVersionString, 
                        _MDAccountTypeExchangeActiveSync, _MDAccountTypeExchangeWebServices, 
                        _MDAccountTypeIMAP, _MDAccountTypeLocal, _MDAccountTypePOP, 
                        _MDAccountTypeUnknown, _MDAttachmentNames, _MDAttachmentPaths, 
@@ -110,26 +110,27 @@ exports:
                        _MDItemHiddenAdditionalRecipientPersons, _MDItemHiddenAdditionalRecipients, 
                        _MDItemHiddenAdditionalRecipientsDictionary, _MDItemISOSpeed, 
                        _MDItemIdentifier, _MDItemImageDirection, _MDItemImportComplete, 
+                       _MDItemImportExtensionCrashed, _MDItemImportExtensionNotFound, 
                        _MDItemImportHasSandboxExtension, _MDItemImportSandboxExtension, 
                        _MDItemImportantDates, _MDItemIncomingAudioCallDates, _MDItemIncomingCalendarCounts, 
                        _MDItemIncomingCounts, _MDItemIncomingFileProviderCounts, 
                        _MDItemIncomingMailCounts, _MDItemIncomingSMSCounts, _MDItemIncomingVideoCallDates, 
                        _MDItemIndexOID, _MDItemInformation, _MDItemInstantMessageAddresses, 
                        _MDItemInstructions, _MDItemIntentData, _MDItemIsAllDay, _MDItemIsApplicationManaged, 
-                       _MDItemIsDownloading, _MDItemIsExistingThread, _MDItemIsGeneralMIDISequence, 
-                       _MDItemIsLikelyJunk, _MDItemIsLocal, _MDItemIsPartiallyDownloaded, 
-                       _MDItemIsPlaceholder, _MDItemIsProResVideo, _MDItemIsReaderView, 
-                       _MDItemIsShared, _MDItemIsTrashed, _MDItemIsUploaded, _MDItemIsUploading, 
-                       _MDItemIsZombie, _MDItemKeySignature, _MDItemKeywords, _MDItemKind, 
-                       _MDItemLPMediaPaths, _MDItemLabelID, _MDItemLabelIcon, _MDItemLabelKind, 
-                       _MDItemLabelUUID, _MDItemLanguages, _MDItemLastEditorIdentifier, 
-                       _MDItemLastEditorName, _MDItemLastMotionActivityState, _MDItemLastUsedDate, 
-                       _MDItemLastUsedDate_Ranking, _MDItemLatitude, _MDItemLaunchString, 
-                       _MDItemLayerNames, _MDItemLensModel, _MDItemLogicalSize, _MDItemLongitude, 
-                       _MDItemLyricist, _MDItemMailDateReceived_Ranking, _MDItemMailboxArchive, 
-                       _MDItemMailboxDrafts, _MDItemMailboxInbox, _MDItemMailboxJunk, 
-                       _MDItemMailboxSent, _MDItemMailboxTrash, _MDItemMailboxes, 
-                       _MDItemMaxAperture, _MDItemMediaTypes, _MDItemMeteringMode, 
+                       _MDItemIsCinematicVideo, _MDItemIsDownloading, _MDItemIsExistingThread, 
+                       _MDItemIsGeneralMIDISequence, _MDItemIsLikelyJunk, _MDItemIsLocal, 
+                       _MDItemIsPartiallyDownloaded, _MDItemIsPlaceholder, _MDItemIsProResVideo, 
+                       _MDItemIsReaderView, _MDItemIsShared, _MDItemIsTrashed, _MDItemIsUploaded, 
+                       _MDItemIsUploading, _MDItemIsZombie, _MDItemKeySignature, 
+                       _MDItemKeywords, _MDItemKind, _MDItemLPMediaPaths, _MDItemLabelID, 
+                       _MDItemLabelIcon, _MDItemLabelKind, _MDItemLabelUUID, _MDItemLanguages, 
+                       _MDItemLastEditorIdentifier, _MDItemLastEditorName, _MDItemLastMotionActivityState, 
+                       _MDItemLastUsedDate, _MDItemLastUsedDate_Ranking, _MDItemLatitude, 
+                       _MDItemLaunchString, _MDItemLayerNames, _MDItemLensModel, 
+                       _MDItemLogicalSize, _MDItemLongitude, _MDItemLyricist, _MDItemMailDateReceived_Ranking, 
+                       _MDItemMailboxArchive, _MDItemMailboxDrafts, _MDItemMailboxInbox, 
+                       _MDItemMailboxJunk, _MDItemMailboxSent, _MDItemMailboxTrash, 
+                       _MDItemMailboxes, _MDItemMaxAperture, _MDItemMediaTypes, _MDItemMeteringMode, 
                        _MDItemMusicalGenre, _MDItemMusicalInstrumentCategory, _MDItemMusicalInstrumentName, 
                        _MDItemNamedLocation, _MDItemNumberOfPages, _MDItemOrganizations, 
                        _MDItemOrientation, _MDItemOriginalFormat, _MDItemOriginalSource, 
@@ -180,10 +181,11 @@ exports:
                        _MDItemSupportsNavigation, _MDItemSupportsPhoneCall, _MDItemSyndicatedContentServerDate, 
                        _MDItemSyndicationStatus, _MDItemTempo, _MDItemTextContent, 
                        _MDItemTextContentDataSource, _MDItemTextContentIndexExists, 
-                       _MDItemTextSelected, _MDItemTheme, _MDItemThoroughfare, _MDItemThumbnailData, 
-                       _MDItemThumbnailDataPath, _MDItemThumbnailURL, _MDItemTimeSignature, 
-                       _MDItemTimestamp, _MDItemTitle, _MDItemTopic, _MDItemTotalBitRate, 
-                       _MDItemURL, _MDItemUniqueIdentifier, _MDItemUploadError, _MDItemUseCount, 
+                       _MDItemTextContentLength, _MDItemTextSelected, _MDItemTheme, 
+                       _MDItemThoroughfare, _MDItemThumbnailData, _MDItemThumbnailDataPath, 
+                       _MDItemThumbnailURL, _MDItemTimeSignature, _MDItemTimestamp, 
+                       _MDItemTitle, _MDItemTopic, _MDItemTotalBitRate, _MDItemURL, 
+                       _MDItemUniqueIdentifier, _MDItemUploadError, _MDItemUseCount, 
                        _MDItemUsedDates, _MDItemUserActivityEligibleForPublicIndexing, 
                        _MDItemUserActivityRequiredString, _MDItemUserActivityType, 
                        _MDItemUserCreated, _MDItemUserCreatedDate, _MDItemUserCreatedUserHandle, 
@@ -229,8 +231,9 @@ exports:
                        _kSyndicatedContentDeleted, _kSyndicatedContentRefreshed, 
                        _logForCSLogCategoryDefault, _logForCSLogCategoryIndex, _logForCSLogCategoryQuery ]
     objc-classes:    [ CSAttributeEvaluator, CSCoder, CSContactsWrapper, CSCustomAttributeKey, 
-                       CSDataWrapper, CSDecoder, CSFPItem, CSFilesSearchQuery, CSFilesSearchQueryContext, 
-                       CSHashtagQuery, CSImportExtension, CSImporter, CSIndexExtensionRequestHandler, 
+                       CSDataWrapper, CSDecoder, CSFPItem, CSFileURLBatchResult, 
+                       CSFilesSearchQuery, CSFilesSearchQueryContext, CSHashtagQuery, 
+                       CSImportExtension, CSImporter, CSIndexExtensionRequestHandler, 
                        CSIndexJob, CSIndexingQueue, CSIntentsWrapper, CSLocalizedString, 
                        CSOCRTextLine, CSPerson, CSPrivateSearchQuery, CSPrivateSearchableIndex, 
                        CSReceiverPreferences, CSReceiverServerPreferences, CSSceneClassification, 
@@ -245,6 +248,6 @@ exports:
                        _MDImportExtensionManager, _MDIndexExtension, _MDIndexExtensionLoader, 
                        _MDIndexExtensionManager, _MDSearchableIndex, _MDSearchableItem, 
                        _MDUserAction ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _identifierToTagAndOid ]
 ...

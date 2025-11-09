@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 #if !__NSDATAASSET_SHARED_SECTION__
 #define __NSDATAASSET_SHARED_SECTION__ 1
 
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
+
 typedef NSString * NSDataAssetName NS_SWIFT_BRIDGED_TYPEDEF API_AVAILABLE(ios(9.0), macos(10.11), tvos(9.0), watchos(2.0));
 
 /// NSDataAsset represents the contents of data entries in your asset catalog.
@@ -36,6 +38,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0), macos(10.11), tvos(9.0), watchos(2.0)) @int
 
 @end
 
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
 #endif // __NSDATAASSET_SHARED_SECTION__
 
 NS_ASSUME_NONNULL_END

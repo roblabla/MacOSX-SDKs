@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           527AE586-4F46-3F73-B582-5C7A88658FFE
+    value:           DE01CE97-DCA1-3C65-93F4-FD222BE58B53
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4F1F724A-3E82-3C40-9C98-40A331D43E3F
+    value:           D64E53CB-6307-3BE5-B752-4478E752A33B
 install-name:    '/System/Library/Frameworks/AVKit.framework/Versions/A/AVKit'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/AVKitCore.framework/Versions/A/AVKitCore' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _AVAddAudibleMediaSelectionOptionsToMenu, _AVAddLegibleMediaSelectionOptionsToMenu, 
                        _AVAssetSlowMotionTimeRangeFromNormalizedSlowMotionTimeRange, 
                        _AVMarginEqual, _AVMarginFromString, _AVMarginZero, _AVNormalizedSlowMotionTimeRangeFromAssetSlowMotionTimeRange, 
@@ -37,17 +37,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FF6A5F70-19F8-3D10-B22C-0FEF28D5CA17
+    value:           537FBD08-FA83-330F-B14B-04275FFCD5F1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DB43928F-E808-3C41-AAFE-A6D61617A51E
+    value:           D207C54C-6D41-3F0C-B2F9-42355599EC93
 install-name:    '/System/Library/PrivateFrameworks/AVKitCore.framework/Versions/A/AVKitCore'
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ AVKit, AVKitMacHelper, OutputDeviceMenuService, RoutePickerViewService ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _AVMediaSelectionAutoOption, _AVMediaSelectionOffOption, _AVMicaPackageFilterNamePlusL, 
                        _AVMicaPackageNameRoutePickerCircularGlyph, _AVMicaPackageNameRoutePickerSquareGlyph, 
                        _AVMicaPackageNameVolumeGlyph, _AVPlayerControllerContentDimensionsChangedNotification, 

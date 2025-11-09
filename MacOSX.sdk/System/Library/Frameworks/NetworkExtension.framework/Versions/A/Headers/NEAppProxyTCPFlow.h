@@ -34,7 +34,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @discussion Read data from the flow.
  * @param completionHandler A block that will be executed when some data is read from the flow. The block is passed either the data that was read or a non-nil error if an error occurred. If data has a length of 0 then no data can be subsequently read from the flow. The completion handler is only called for the single read operation that was initiated by calling this method. If the caller wants to read more data then it should call this method again to schedule another read operation and another execution of the completion handler block.
  */
-- (void)readDataWithCompletionHandler:(void (^)(NSData * __nullable data, NSError * __nullable error))completionHandler API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (void)readDataWithCompletionHandler:(void (^)(NSData * __nullable data, NSError * __nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method writeData:completionHandler

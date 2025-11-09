@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           56E47BF2-49DF-398B-8EAD-9D0D47DA249E
+    value:           1C25D5D5-F211-3046-84CB-478D10198732
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           357BF83E-ACBA-3B8B-813F-BD55F15C4BA7
+    value:           ED72F046-C3F0-3FD0-869B-EC2C39F1B6DD
 install-name:    '/System/Library/PrivateFrameworks/SpeechObjects.framework/Versions/A/Frameworks/DictationServices.framework/Versions/A/DictationServices'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -168,8 +168,9 @@ exports:
                        SODictationHotKeyController._hotKeyField, SODictationHotKeyController._popUpButton, 
                        SODictationHotKeyController._previousTag, SODictationPreferences._builtInCommandsTableCache, 
                        SODictationPreferences._builtInLocalizedCommandStringsByLocaleIdentifier, 
-                       SODictationPreferences._propertyTransactions, SODictationPreferences._uuid, 
-                       SODictationPreferencesViewController._descriptionText, SODictationPreferencesViewController._dictationLanguagePopUpButton, 
+                       SODictationPreferences._nashvilleLangaugeStatus, SODictationPreferences._propertyTransactions, 
+                       SODictationPreferences._uuid, SODictationPreferencesViewController._descriptionText, 
+                       SODictationPreferencesViewController._dictationLanguagePopUpButton, 
                        SODictationPreferencesViewController._dictationShortcutLabelTextField, 
                        SODictationPreferencesViewController._disableDictationRadioButton, 
                        SODictationPreferencesViewController._disabledWarningImage, 

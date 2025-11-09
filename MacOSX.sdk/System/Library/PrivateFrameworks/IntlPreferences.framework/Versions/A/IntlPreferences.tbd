@@ -3,21 +3,22 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9EC5E612-579C-31E3-942C-70EDF26B260B
+    value:           07469531-4C68-3602-9218-D301E9D7A4E3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           313DCDBF-7936-3237-8F3C-AAAAC370E413
+    value:           E8E5EC23-16A8-338D-805A-22DBD5335827
 install-name:    '/System/Library/PrivateFrameworks/IntlPreferences.framework/Versions/A/IntlPreferences'
-current-version: 360
+current-version: 367.3
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _IPAllowToChangeEnablingStatePropertyKey, _IPAppleLanguagesSchemaVersionCurrent, 
                        _IPAppleLanguagesSchemaVersionGoldzulA, _IPAppleLanguagesSchemaVersionJazzkonA, 
                        _IPAppleLanguagesSchemaVersionJazzkonA_1, _IPBackstopLanguage, 
-                       _IPBackstopLocale, _IPBundleIDPropertyKey, _IPEnabledPropertyKey, 
-                       _IPIconImagePropertyKey, _IPInputSourceIDPropertyKey, _IPInputSourceObjectsPropertyKey, 
-                       _IPLanguageCodePropertyKey, _IPLanguageCodeUndefined, _IPLocalizedInputSourceNamePropertyKey, 
+                       _IPBackstopLocale, _IPBackstopRegion, _IPBundleIDPropertyKey, 
+                       _IPEnabledPropertyKey, _IPIconImagePropertyKey, _IPInputSourceIDPropertyKey, 
+                       _IPInputSourceObjectsPropertyKey, _IPLanguageCodePropertyKey, 
+                       _IPLanguageCodeUndefined, _IPLocalizedInputSourceNamePropertyKey, 
                        _IPLocalizedLanguagePropertyKey, _IPMetaDataPropertyKey, _IPSystemProvidedPropertyKey, 
                        _NSPersonNameDefaultDisplayNameOrderKey, _NSPersonNameDefaultNamePreferencesDomain, 
                        _NSPersonNameDefaultShortNameEnabledKey, _NSPersonNameDefaultShortNameFormatKey, 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           88ACCDB3-DF11-3A32-9B58-BB24002A541F
+    value:           07120945-1464-33AD-BA15-9C90D0EF76B0
   - target:          x86_64-maccatalyst
-    value:           88ACCDB3-DF11-3A32-9B58-BB24002A541F
+    value:           07120945-1464-33AD-BA15-9C90D0EF76B0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           33F26A5B-40DC-3C49-A065-0292F8196ABB
+    value:           2CC4C92C-E51D-35F9-8DC4-DA0E6874C94C
   - target:          arm64e-maccatalyst
-    value:           33F26A5B-40DC-3C49-A065-0292F8196ABB
+    value:           2CC4C92C-E51D-35F9-8DC4-DA0E6874C94C
 install-name:    '/System/Library/PrivateFrameworks/PhotosImagingFoundation.framework/Versions/A/PhotosImagingFoundation'
-current-version: 400.27.210
+current-version: 421.0.100
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -65,8 +65,9 @@ exports:
                        _IPAPhotoAdjustmentFormatVersion_1_4, _IPAPhotoAdjustmentFormatVersion_1_5, 
                        _IPAPhotoAdjustmentFormatVersion_1_5_1, _IPAPhotoAdjustmentFormatVersion_1_6, 
                        _IPAPhotoAdjustmentFormatVersion_1_7, _IPAPhotoAdjustmentFormatVersion_1_8, 
-                       _IPAPhotoAdjustmentFormatVersion_1_9, _IPAPhotoAdjustmentIdentifier_RawDecode, 
-                       _IPAPhotoAdjustmentMaskUUIDKey, _IPAPhotoAdjustment_Crop_Identifier, 
+                       _IPAPhotoAdjustmentFormatVersion_1_9, _IPAPhotoAdjustmentFormatVersion_1_9_1, 
+                       _IPAPhotoAdjustmentIdentifier_RawDecode, _IPAPhotoAdjustmentMaskUUIDKey, 
+                       _IPAPhotoAdjustment_CinematicDepthEffect_Identifier, _IPAPhotoAdjustment_Crop_Identifier, 
                        _IPAPhotoAdjustment_Crop_Key_ConstraintHeight, _IPAPhotoAdjustment_Crop_Key_ConstraintWidth, 
                        _IPAPhotoAdjustment_Crop_Key_Height, _IPAPhotoAdjustment_Crop_Key_StraightenAngleRadiansCW, 
                        _IPAPhotoAdjustment_Crop_Key_Width, _IPAPhotoAdjustment_Crop_Key_XOrigin, 

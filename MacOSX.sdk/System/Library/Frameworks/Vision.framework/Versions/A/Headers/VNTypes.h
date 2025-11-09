@@ -30,25 +30,6 @@ typedef NS_ENUM(NSUInteger, VNImageCropAndScaleOption)
 */
 typedef NSString *VNBarcodeSymbology NS_STRING_ENUM;
 
-// Deprecated symbols
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyAztec_SwiftDeprecated NS_SWIFT_NAME(Aztec) API_DEPRECATED_WITH_REPLACEMENT("VNBarcodeSymbologyAztec", macos(10.13, 12.0), ios(11.0, 15.0), tvos(11.0, 15.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCode39_SwiftDeprecated NS_SWIFT_NAME(Code39) API_DEPRECATED_WITH_REPLACEMENT("VNBarcodeSymbologyCode39", macos(10.13, 12.0), ios(11.0, 15.0), tvos(11.0, 15.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCode39Checksum_SwiftDeprecated NS_SWIFT_NAME(Code39Checksum) API_DEPRECATED_WITH_REPLACEMENT("VNBarcodeSymbologyCode39Checksum", macos(10.13, 12.0), ios(11.0, 15.0), tvos(11.0, 15.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCode39FullASCII_SwiftDeprecated NS_SWIFT_NAME(Code39FullASCII) API_DEPRECATED_WITH_REPLACEMENT("VNBarcodeSymbologyCode39FullASCII", macos(10.13, 12.0), ios(11.0, 15.0), tvos(11.0, 15.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCode39FullASCIIChecksum_SwiftDeprecated NS_SWIFT_NAME(Code39FullASCIIChecksum) API_DEPRECATED_WITH_REPLACEMENT("VNBarcodeSymbologyCode39FullASCIIChecksum", macos(10.13, 12.0), ios(11.0, 15.0), tvos(11.0, 15.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCode93_SwiftDeprecated NS_SWIFT_NAME(Code93) API_DEPRECATED_WITH_REPLACEMENT("VNBarcodeSymbologyCode93", macos(10.13, 12.0), ios(11.0, 15.0), tvos(11.0, 15.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCode93i_SwiftDeprecated NS_SWIFT_NAME(Code93i) API_DEPRECATED_WITH_REPLACEMENT("VNBarcodeSymbologyCode93i", macos(10.13, 12.0), ios(11.0, 15.0), tvos(11.0, 15.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCode128_SwiftDeprecated NS_SWIFT_NAME(Code128) API_DEPRECATED_WITH_REPLACEMENT("VNBarcodeSymbologyCode128", macos(10.13, 12.0), ios(11.0, 15.0), tvos(11.0, 15.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyDataMatrix_SwiftDeprecated NS_SWIFT_NAME(DataMatrix) API_DEPRECATED_WITH_REPLACEMENT("VNBarcodeSymbologyDataMatrix", macos(10.13, 12.0), ios(11.0, 15.0), tvos(11.0, 15.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyEAN8_SwiftDeprecated NS_SWIFT_NAME(EAN8) API_DEPRECATED_WITH_REPLACEMENT("VNBarcodeSymbologyEAN8", macos(10.13, 12.0), ios(11.0, 15.0), tvos(11.0, 15.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyEAN13_SwiftDeprecated NS_SWIFT_NAME(EAN13) API_DEPRECATED_WITH_REPLACEMENT("VNBarcodeSymbologyEAN13", macos(10.13, 12.0), ios(11.0, 15.0), tvos(11.0, 15.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyI2of5_SwiftDeprecated NS_SWIFT_NAME(I2of5) API_DEPRECATED_WITH_REPLACEMENT("VNBarcodeSymbologyI2of5", macos(10.13, 12.0), ios(11.0, 15.0), tvos(11.0, 15.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyI2of5Checksum_SwiftDeprecated NS_SWIFT_NAME(I2of5Checksum) API_DEPRECATED_WITH_REPLACEMENT("VNBarcodeSymbologyI2of5Checksum", macos(10.13, 12.0), ios(11.0, 15.0), tvos(11.0, 15.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyITF14_SwiftDeprecated NS_SWIFT_NAME(ITF14) API_DEPRECATED_WITH_REPLACEMENT("VNBarcodeSymbologyITF14", macos(10.13, 12.0), ios(11.0, 15.0), tvos(11.0, 15.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyPDF417_SwiftDeprecated NS_SWIFT_NAME(PDF417) API_DEPRECATED_WITH_REPLACEMENT("VNBarcodeSymbologyPDF417", macos(10.13, 12.0), ios(11.0, 15.0), tvos(11.0, 15.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyQR_SwiftDeprecated NS_SWIFT_NAME(QR) API_DEPRECATED_WITH_REPLACEMENT("VNBarcodeSymbologyQR", macos(10.13, 12.0), ios(11.0, 15.0), tvos(11.0, 15.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyUPCE_SwiftDeprecated NS_SWIFT_NAME(UPCE) API_DEPRECATED_WITH_REPLACEMENT("VNBarcodeSymbologyUPCE", macos(10.13, 12.0), ios(11.0, 15.0), tvos(11.0, 15.0));
-
 VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyAztec NS_SWIFT_NAME(aztec) API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCode39 NS_SWIFT_NAME(code39) API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCode39Checksum NS_SWIFT_NAME(code39Checksum) API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));

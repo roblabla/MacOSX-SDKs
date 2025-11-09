@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5AC2AA9E-7DB5-36AB-A392-1B4B6CC16CCC
+    value:           D68727CE-9324-35B5-B381-478C96491932
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9451D77B-F353-32DB-A790-809796EC2D51
+    value:           EFEB9323-34A2-3EA0-81BA-8B90CDA20CCC
 install-name:    '/System/Library/PrivateFrameworks/Lookup.framework/Versions/A/Lookup'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

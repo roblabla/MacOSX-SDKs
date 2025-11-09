@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F09B7817-6761-3E16-B3CC-7B44BAD0D8D3
+    value:           A5371EE4-35EE-3F8B-810E-FE632F6D3D3B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3FABC112-ABB6-3B95-967E-DE0C33A9D8B5
+    value:           6D6A6EEE-5201-3032-88E5-C51B3EB29122
 install-name:    '/System/Library/PrivateFrameworks/EmailDaemon.framework/Versions/A/EmailDaemon'
-current-version: 3689.0.4
+current-version: 3693.40
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _EDAttachmentsLog, _EDClientStateForegroundStateDidChangeKeyIsForeground, 
@@ -59,9 +59,9 @@ exports:
                        __ef_log_EDSyncableSettings, __expandForComparisonPredicate, 
                        __expandForCompoundPredicate, __expandPredicate, __indexedEmptySubjectDiags, 
                        _fuzzedCountForCount, _fuzzedIntervalForInterval, _kEDSearchableIndexMaximumBodySizeForBodyIndexing, 
-                       _kEDSearchableIndexOutboxIdentifier, _kEDSearchableIndexTransportIdentifier, 
-                       _kFailingVerificationFullReindexThreshold, _kMaximumNumberOfMessageIdsToSync, 
-                       _kSpotlightVerificationSampleSize ]
+                       _kEDSearchableIndexOutboxIdentifier, _kEDSearchableIndexTransactionAttributeKey, 
+                       _kEDSearchableIndexTransportIdentifier, _kFailingVerificationFullReindexThreshold, 
+                       _kMaximumNumberOfMessageIdsToSync, _kSpotlightVerificationSampleSize ]
     objc-classes:    [ EDAccountECAccountTransformer, EDAccountRepository, EDActivityPersistence, 
                        EDActivityRegistry, EDAddMessagesDeletedDateReceivedIndexUpgradeStep, 
                        EDAddMessagesSearchableMessageColumnUpgradeStep, EDAddRemoteContentLinksTableUpgradeStep, 
@@ -129,10 +129,11 @@ exports:
                        EDThreadPersistence, EDThreadQueryHandler, EDThreadReloadSummaryHelper, 
                        EDThreadScopeManager, EDTransactionService, EDUbiquitousConversationManager, 
                        EDUpdateThrottler, EDUserNotificationFilter, EDUserNotificationMailboxCutoffController, 
-                       EDVIPManager, EDVIPManagerProxy, EDWidgetUpdateController, 
-                       EDiCloudAliasSupport, _EDAssetDownloadSchedulerContinuation, 
-                       _EDLazyWrappedMessage, _EDMailboxServerCount, _EDMessageChangeManagerFlagChange, 
-                       _EDMessageDuplicateInfo, _EDMessageItemIDCollector, _EDPersistenceDatabaseConnectionWrapper, 
+                       EDVIPManager, EDVIPManagerProxy, EDVisibleMessagesReloadRegistry, 
+                       EDWidgetUpdateController, EDiCloudAliasSupport, _EDAssetDownloadSchedulerContinuation, 
+                       _EDEncodingDatum, _EDLazyWrappedMessage, _EDMailboxServerCount, 
+                       _EDMessageChangeManagerFlagChange, _EDMessageDuplicateInfo, 
+                       _EDMessageItemIDCollector, _EDPersistenceDatabaseConnectionWrapper, 
                        _EDThreadMigrationState, _EDThreadPersistence_PersistedThread, 
                        _EDThreadPersistence_SQLHelper, _EDThreadPersistence_StatementCache, 
                        _EDThreadPersistence_ThreadMessages, _EDThreadPersistence_ThreadScope, 

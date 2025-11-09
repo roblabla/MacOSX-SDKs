@@ -577,6 +577,57 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
 
 @end
 
+/*!
+ @enum AVCapturePrimaryConstituentDeviceSwitchingBehavior
+ @abstract
+    These constants can be used to control when the virtual device is allowed to switch the active primary constituent device.
+ 
+ @constant AVCapturePrimaryConstituentDeviceSwitchingBehaviorUnsupported
+    Indicates that the device does not support constituent device switching. This is reported for cameras that do not have more than one constituent device.
+ @constant AVCapturePrimaryConstituentDeviceSwitchingBehaviorAuto
+    Automatically select the best camera for the current scene. In this mode there are no restrictions on when a camera switch can occur.
+ @constant AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted
+    Restrict fallback camera selection to certain conditions (see AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions). Camera switches necessary to satisfy the requested video zoom factor are still allowed without restriction.
+ @constant AVCapturePrimaryConstituentDeviceSwitchingBehaviorLocked
+    Lock camera switching to the active primary constituent device. Note that this restricts the minAvailableVideoZoomFactor to the switch-over zoom factor of the activePrimaryConstituentDevice (as reported in AVCaptureDevice.virtualDeviceSwitchOverVideoZoomFactors).
+ 
+ @discussion
+    Virtual devices with multiple constituent video devices (such as the Dual Camera, Dual Wide Camera, or Triple Camera), consist of cameras that each have different properties such as focal length, maximum light sensitivity, and minimum focus distance. One of the constituent video devices is selected as the primary constituent device. For an AVCaptureSession, the primary constituent device produces for all outputs. For an AVCaptureMultiCamSession, the primary constituent device produces for all outputs connected to the virtual device's native AVCaptureDeviceInputPort (where its sourceDeviceType is equal to the virtual device's deviceType).
+
+    When the requested zoom factor can be achieved by multiple constituent cameras (see -virtualDeviceSwitchOverVideoZoomFactors), the virtual device chooses the best camera for the scene. The primary condition for this is the focal length; the camera with the longest focal length requires the least amount of digital upscaling and therefore normally provides the highest image quality. Secondary conditions are focus and exposure; when the scene requires focus or exposure to go beyond the limits of the active primary constituent device, a camera with a shorter focal length may be able to deliver a better quality image. Such a device is called a fallback primary constituent device. For example, a telephoto camera with a minimum focus distance of 40cm is not able to deliver a sharp image when the subject in the scene is closer than 40cm. For such a scene, the virtual device will switch to the wide-angle camera which typically has a smaller minimum focus distance and is able to achieve accurate focus on the subject. In this case the wide-angle camera is the fallback primary constitute device.
+ */
+typedef NS_ENUM(NSInteger, AVCapturePrimaryConstituentDeviceSwitchingBehavior) {
+    AVCapturePrimaryConstituentDeviceSwitchingBehaviorUnsupported  = 0,
+    AVCapturePrimaryConstituentDeviceSwitchingBehaviorAuto         = 1,
+    AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted   = 2,
+    AVCapturePrimaryConstituentDeviceSwitchingBehaviorLocked       = 3,
+} NS_SWIFT_NAME(AVCaptureDevice.PrimaryConstituentDeviceSwitchingBehavior) API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @enum AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions
+ @abstract
+    These constants can be used and combined to control the conditions that allow fallback camera selection when the primaryConstituentDeviceSelectionBehavior is set to AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted. Note that camera switching necessary to satisfy the requested zoom factor is still allowed.
+ 
+ @constant AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone
+    Disallow fallback switching.
+ @constant AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged
+    Restrict fallback camera switching to when the video zoom factor changes, either through AVCaptureDevice.videoZoomFactor or -[AVCaptureDevice rampToVideoZoomFactor:withRate:]. Note that any change in video zoom factor will allow a switch to a fallback camera, not just changes across switch-over zoom factors.
+ @constant AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged
+    Restrict fallback camera switches to when AVCaptureDevice.focusMode is set.
+ @constant AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionExposureModeChanged
+    Restrict fallback camera switches to when AVCaptureDevice.exposureMode is set.
+ 
+ @discussion
+    Whenever triggered by one or more of the enabled conditions, the fallback camera switching waits for exposure and focus to stabilize before deciding which camera to use as the primary constituent device.
+ 
+    Whenever AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged is not included in the restricted switching behavior conditions, AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted still allows camera selection when a change in video zoom factor makes a camera eligible or ineligible to be selected as the activePrimaryConstituentDevice. When the video zoom factor decreases to below the switch-over zoom factor of the activePrimaryConstituentDevice, a different camera will be selected to satisfy the requested zoom factor. When the video zoom factor increases and crosses a camera's switch-over zoom factor, this camera becomes eligible to be selected as the activePrimaryConstituentDevice. If exposure and focus allow, this camera then becomes the new activePrimaryConstituentDevice. Similar to the AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged this also waits for exposure and focus to stabilize. Otherwise the activePrimaryConstituentDevice remains unchanged.
+ */
+typedef NS_OPTIONS(NSUInteger, AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) {
+    AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone                = 0,
+    AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged    = 1 << 0,
+    AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged    = 1 << 1,
+    AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionExposureModeChanged = 1 << 2,
+} NS_SWIFT_NAME(AVCaptureDevice.PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceVirtual)
@@ -612,6 +663,90 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
     This array contains zoom factors at which one of the constituent device's field of view matches the next constituent device's full field of view. The number of switch over video zoom factors is always one less than the count of the constituentDevices property, and the factors progress in the same order as the devices listed in that property. On non-virtual devices this property returns an empty array.
  */
 @property(nonatomic, readonly) NSArray<NSNumber *> *virtualDeviceSwitchOverVideoZoomFactors API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @method setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions:
+ @abstract
+    The switching behavior and conditions, unless overwritten via -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions].
+ @param switchingBehavior
+    The desired switching behavior.
+ @param restrictedSwitchingBehaviorConditions
+    The desired conditions for restricting camera switching. This must be set to AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone whenever switchingBehavior is not equal to AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted.
+ 
+ @discussion
+    The switching behavior may be overridden on the AVCaptureMovieFileOutput while recording (see -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions]). This method throws an NSInvalidArgumentException if constituent device switching is not supported by the receiver or if restrictedSwitchingBehaviorConditions is not equal to AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone and switchingBehavior is not equal to AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted.
+ */
+- (void)setPrimaryConstituentDeviceSwitchingBehavior:(AVCapturePrimaryConstituentDeviceSwitchingBehavior)switchingBehavior restrictedSwitchingBehaviorConditions:(AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions)restrictedSwitchingBehaviorConditions API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property primaryConstituentDeviceSwitchingBehavior
+ @abstract
+    The primaryConstituentDeviceSwitchingBehavior as set by -[AVCaptureDevice setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions:].
+ 
+ @discussion
+    By default, this property is set to AVCapturePrimaryConstituentDeviceSwitchingBehaviorAuto for AVCaptureDevices that support it.  This property is key-value observable.
+ */
+@property(nonatomic, readonly) AVCapturePrimaryConstituentDeviceSwitchingBehavior primaryConstituentDeviceSwitchingBehavior API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property primaryConstituentDeviceRestrictedSwitchingBehaviorConditions
+ @abstract
+    The primaryConstituentDeviceRestrictedSwitchingBehaviorConditions as set by -[AVCaptureDevice setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions:].
+ 
+ @discussion
+    By default, this propety is set to AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone. This property is key-value observable.
+ */
+@property(nonatomic, readonly) AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions primaryConstituentDeviceRestrictedSwitchingBehaviorConditions API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property activePrimaryConstituentDeviceSwitchingBehavior
+ @abstract
+    The active constituent device switching behavior.
+ 
+ @discussion
+    For virtual devices with multiple constituent devices, this property returns the active switching behavior. This is equal to primaryConstituentDeviceSwitchingBehavior except while recording using an AVCaptureMovieFileOutput configured with a different switching behavior (see -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions]). Devices that do not support constituent device switching return AVCapturePrimaryConstituentDeviceSwitchingBehaviorUnsupported. This property is key-value observable.
+ */
+@property(nonatomic, readonly) AVCapturePrimaryConstituentDeviceSwitchingBehavior activePrimaryConstituentDeviceSwitchingBehavior API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property activePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions
+ @abstract
+    The active constituent device restricted  switching behavior.
+ 
+ @discussion
+    For virtual devices with multiple constituent devices, this property returns the active restricted switching behavior conditions. This is equal to primaryConstituentDeviceRestrictedSwitchingBehaviorConditions except while recording using an AVCaptureMovieFileOutput configured with different retricted switching behavior conditions (see -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions]). Devices that do not support constituent device switching return AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone. This property is key-value observable.
+ */
+@property(nonatomic, readonly) AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions activePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property activePrimaryConstituentDevice
+ @abstract
+    For virtual devices, this property indicates which constituent device is currently the primary constituent device. The primary constituent device may change when zoom, exposure, or focus changes.
+ 
+ @discussion
+    This property returns nil for non-virtual devices. On virtual devices this property returns nil until the device is used in a running AVCaptureSession. This property is key-value observable.
+ */
+@property(nonatomic, readonly, nullable) AVCaptureDevice *activePrimaryConstituentDevice API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property supportedFallbackPrimaryConstituentDevices
+ @abstract
+    The constituent devices that may be selected as a fallback for a longer focal length primary constituent device.
+ 
+ @discussion
+    This property returns an empty array for non-virtual devices. This property never changes for a given virtual device.
+ */
+@property(nonatomic, readonly) NSArray<AVCaptureDevice *> *supportedFallbackPrimaryConstituentDevices API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property fallbackPrimaryConstituentDevices
+ @abstract
+    The constituent devices that may be used as a fallback device when a constituent device with a longer focal length becomes limited by its light sensitivity or minimum focus distance.
+ 
+ @discussion
+    This may only be set to the supportedFallbackPrimaryConstituentDevices or a subset thereof. By default this is set to all supportedFallbackPrimaryConstituentDevices. This property will throw an NSInvalidArgumentException if the array includes any device not reported in supportedFallbackPrimaryConstituentDevices. This property is key-value observable.
+ */
+@property(nonatomic) NSArray<AVCaptureDevice *> *fallbackPrimaryConstituentDevices API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -2609,7 +2744,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) A
  @discussion
     This property returns YES if the format supports Portrait Effect, the application of a shallow depth of field effect to objects in the background. See +AVCaptureDevice.portraitEffectEnabled for a detailed discussion.
  */
-@property(nonatomic, readonly, getter=isPortraitEffectSupported) BOOL portraitEffectSupported API_UNAVAILABLE(macos, ios, macCatalyst, tvos) API_UNAVAILABLE(watchos);
+@property(nonatomic, readonly, getter=isPortraitEffectSupported) BOOL portraitEffectSupported API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property videoFrameRateRangeForPortraitEffect
@@ -2619,7 +2754,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) A
  @discussion
     Devices may support a limited frame rate range when Portrait Effect is active. If this device format does not support Portrait Effect, this property returns nil.
  */
-@property(nonatomic, readonly, nullable) AVFrameRateRange *videoFrameRateRangeForPortraitEffect API_UNAVAILABLE(macos, ios, macCatalyst, tvos) API_UNAVAILABLE(watchos);
+@property(nonatomic, readonly, nullable) AVFrameRateRange *videoFrameRateRangeForPortraitEffect API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 @end
 

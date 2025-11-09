@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           27189096-F5C2-3632-A391-9AD45DE4F93C
+    value:           1C6351DF-EB13-37DF-8002-FF4EDF364B12
   - target:          x86_64-maccatalyst
-    value:           27189096-F5C2-3632-A391-9AD45DE4F93C
+    value:           1C6351DF-EB13-37DF-8002-FF4EDF364B12
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D11162B7-1D71-3A9C-8003-EE27BF195834
+    value:           2E30B51C-0D00-3AFA-AB86-BBDDE68976CE
   - target:          arm64e-maccatalyst
-    value:           D11162B7-1D71-3A9C-8003-EE27BF195834
+    value:           2E30B51C-0D00-3AFA-AB86-BBDDE68976CE
 install-name:    '/System/Library/PrivateFrameworks/RemoteConfiguration.framework/Versions/A/RemoteConfiguration'
-current-version: 127
+current-version: 136.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -47,11 +47,12 @@ exports:
                        _RCDebugOverridesAdditionalSegmentSetIDsKey, _RCDebugOverridesDisableAbTestingKey, 
                        _RCDebugOverridesOverrideSegmentSetIDsKey, _RCDeviceInfoAppVersionKey, 
                        _RCDeviceInfoCountryCodeKey, _RCDeviceInfoDeviceTypeKey, _RCDeviceInfoDstOffsetKey, 
-                       _RCDeviceInfoOsVersionKey, _RCDeviceInfoPreferredLanguagesKey, 
-                       _RCDeviceInfoUtcOffsetKey, _RCDeviceModelString, _RCDeviceOSVersion, 
-                       _RCDispatchAfterWithQualityOfService, _RCDispatchAsyncWithQualityOfService, 
-                       _RCDispatchGroupIsEmpty, _RCDispatchGroupNotifyWithQualityOfService, 
-                       _RCDispatchGroupNotifyWithTimeout, _RCDispatchGroupWrap, _RCDispatchQueueForQualityOfService, 
+                       _RCDeviceInfoFormatVersionKey, _RCDeviceInfoOsVersionKey, 
+                       _RCDeviceInfoPreferredLanguagesKey, _RCDeviceInfoUtcOffsetKey, 
+                       _RCDeviceModelString, _RCDeviceOSVersion, _RCDispatchAfterWithQualityOfService, 
+                       _RCDispatchAsyncWithQualityOfService, _RCDispatchGroupIsEmpty, 
+                       _RCDispatchGroupNotifyWithQualityOfService, _RCDispatchGroupNotifyWithTimeout, 
+                       _RCDispatchGroupWrap, _RCDispatchQueueForQualityOfService, 
                        _RCDynamicCast, _RCEndpointErrorCodeKey, _RCEndpointErrorMessageKey, 
                        _RCEndpointErrorStacktraceKey, _RCErrorDomain, _RCErrorEndpointErrorsKey, 
                        _RCErrorHTTPRequestUUIDKey, _RCErrorHTTPResponseHeadersKey, 
@@ -68,8 +69,10 @@ exports:
                        _RCPerformBlockOnMainThread, _RCPerformIfNonNil, _RCProtocolCast, 
                        _RCQoSClassFromQoS, _RCQoSFromQoSClass, _RCQueuePriorityFromRelativePriority, 
                        _RCRandom, _RCRandomBetween, _RCRepeat, _RCRequestAppConfigurationKey, 
-                       _RCRequestBooksConfigurationKey, _RCRequestFeedTypeKey, _RCRequestFeedTypePremiumKey, 
-                       _RCRequestStocksConfigurationKey, _RCRequestWeatherConfigurationKey, 
+                       _RCRequestAudioConfigurationKey, _RCRequestBooksConfigurationKey, 
+                       _RCRequestFeedTypeKey, _RCRequestFeedTypePremiumKey, _RCRequestMagazinesConfigurationKey, 
+                       _RCRequestStocksConfigurationKey, _RCRequestTodayConfigurationKey, 
+                       _RCRequestWeather2ConfigurationKey, _RCRequestWeatherConfigurationKey, 
                        _RCRequestWidgetConfigurationKey, _RCResponseAppConfigurationWrapperKey, 
                        _RCResponseErrorWrapperKey, _RCResponseStocksConfigurationWrapperKey, 
                        _RCResponseUserInfoKey, _RCResponseWidgetConfigurationWrapperKey, 
@@ -102,5 +105,5 @@ exports:
                        RCOperationExternalSignal, RCOperationImmediateRetrySignal, 
                        RCOperationNotificationRetrySignal, RCOperationThrottler, 
                        RCRequestInfo, RCTimedOperationThrottler, RCURLFetchOperation, 
-                       RCUserSegmentationConfiguration ]
+                       RCUnfairLock, RCUserSegmentationConfiguration ]
 ...

@@ -526,7 +526,7 @@ NW_CONTENT_CONTEXT_TYPE_DECL(default_stream);
  *		in which case the send will be enqueued until the connection is ready to send.
  *		This is an asynchronous send and the completion block can be used to
  *		determine when the send is complete. There is nothing preventing a client
- *		from issuing an excessive number of outstanding sends. To minmize memory
+ *		from issuing an excessive number of outstanding sends. To minimize memory
  *		footprint and excessive latency as a consequence of buffer bloat, it is
  *		advisable to keep a low number of outstanding sends. The completion block
  *		can be used to pace subsequent sends.
@@ -609,7 +609,7 @@ nw_connection_send(nw_connection_t connection,
  *
  * @abstract
  *		Batch several send and/or receive operations together, to hint to
- *		the connection that multiple send or recieve operations are expected
+ *		the connection that multiple send or receive operations are expected
  *		in quick succession.
  *
  * @param connection

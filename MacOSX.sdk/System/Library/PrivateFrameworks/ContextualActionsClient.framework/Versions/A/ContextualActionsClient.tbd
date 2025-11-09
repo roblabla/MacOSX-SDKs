@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3B32BB32-5317-311F-8FDE-E556B61D86AC
+    value:           4E338D39-AA3F-3089-9DFF-26FC50D071EF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9E584ABD-CD10-323C-AE71-E398766C0D1F
+    value:           D101D568-0E9B-3AA6-A0E9-E0B88B49A9F7
 install-name:    '/System/Library/PrivateFrameworks/ContextualActionsClient.framework/Versions/A/ContextualActionsClient'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

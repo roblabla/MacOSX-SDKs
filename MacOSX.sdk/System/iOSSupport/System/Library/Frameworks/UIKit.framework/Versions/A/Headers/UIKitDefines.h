@@ -46,6 +46,14 @@
     #endif
 #endif
 
+#if !defined(UIKIT_HAS_UIFOUNDATION_SYMBOLS)
+    #if defined(UIKIT_BUILDING_UIKITMACHELPER)
+        #define UIKIT_HAS_UIFOUNDATION_SYMBOLS TARGET_OS_IPHONE
+    #else
+        #define UIKIT_HAS_UIFOUNDATION_SYMBOLS 1
+    #endif // defined(UIKIT_BUILDING_UIKITMACHELPER)
+#endif // !defined(UIKIT_HAS_UIFOUNDATION_SYMBOLS)
+
 #else
 #import <UIKitCore/UIKitDefines.h>
 #endif

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A90A203A-97E7-3E78-B9D8-FE95F67AC399
+    value:           48F7B01C-92D2-351A-9DC2-6F088488AAFC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8825FE4F-4020-336B-ABA1-77261C6A9119
+    value:           301655E1-A35C-3409-8BEA-95B452126F8F
 install-name:    '/usr/lib/swift/libswiftMetalKit.dylib'
 current-version: 1.2
 swift-abi-version: 7

@@ -85,6 +85,8 @@ typedef NS_ENUM(NSInteger,UICollectionLayoutSectionOrthogonalScrollingBehavior) 
     UICollectionLayoutSectionOrthogonalScrollingBehaviorGroupPagingCentered,
 } API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0));
 
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
+
 typedef void (^NSCollectionLayoutSectionVisibleItemsInvalidationHandler)(NSArray<id<NSCollectionLayoutVisibleItem>> *visibleItems, CGPoint contentOffset, id<NSCollectionLayoutEnvironment> layoutEnvironment);
 
 UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
@@ -570,6 +572,8 @@ API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @property(nonatomic,readonly) UICollectionElementCategory representedElementCategory;
 @property(nonatomic,readonly,nullable) NSString *representedElementKind;
 @end
+
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
 NS_ASSUME_NONNULL_END
 

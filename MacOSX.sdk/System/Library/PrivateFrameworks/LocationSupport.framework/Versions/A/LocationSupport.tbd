@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1455B8D2-D226-335F-95E5-03319B332FCF
+    value:           3FE714B9-EF2D-3793-8155-3597771FBECF
   - target:          x86_64-maccatalyst
-    value:           1455B8D2-D226-335F-95E5-03319B332FCF
+    value:           3FE714B9-EF2D-3793-8155-3597771FBECF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F7740914-3422-3C48-A34A-FA42638B4635
+    value:           38666031-6A2A-3800-B31C-A4B22D72E694
   - target:          arm64e-maccatalyst
-    value:           F7740914-3422-3C48-A34A-FA42638B4635
+    value:           38666031-6A2A-3800-B31C-A4B22D72E694
 install-name:    '/System/Library/PrivateFrameworks/LocationSupport.framework/Versions/A/LocationSupport'
-current-version: 2652
+current-version: 2665.0.9
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

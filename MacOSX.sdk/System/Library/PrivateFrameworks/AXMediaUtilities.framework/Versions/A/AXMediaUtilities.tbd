@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4B979D71-7DBD-392C-AD47-9C5A2016A3BA
+    value:           CA3CDA0B-E3D7-31C9-9214-855AEDCC135F
   - target:          x86_64-maccatalyst
-    value:           4B979D71-7DBD-392C-AD47-9C5A2016A3BA
+    value:           CA3CDA0B-E3D7-31C9-9214-855AEDCC135F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           05363FC3-F551-366A-AEFE-2F0FF8B12800
+    value:           555DBD43-3EE8-3BBA-8CE2-6E28FBFACD3F
   - target:          arm64e-maccatalyst
-    value:           05363FC3-F551-366A-AEFE-2F0FF8B12800
+    value:           555DBD43-3EE8-3BBA-8CE2-6E28FBFACD3F
 install-name:    '/System/Library/PrivateFrameworks/AXMediaUtilities.framework/Versions/A/AXMediaUtilities'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -54,9 +54,10 @@ exports:
                        _AXMNodeCodingKeyEnabled, _AXMNodeCodingKeyIdentifier, _AXMNormalizedFrameTransform, 
                        _AXMOCRDocumentTypeSceneIDDiagram, _AXMOCRDocumentTypeSceneIDEnvelope, 
                        _AXMOCRDocumentTypeSceneIDReceipt, _AXMOCRMinimumCharacterHeightMax, 
-                       _AXMOCRMinimumCharacterHeightMin, _AXMPhotoAssetDataCodingKeyAssetURL, 
-                       _AXMPhotoAssetDataCodingKeyCreationDate, _AXMPhotoAssetDataCodingKeyImageData, 
-                       _AXMPhotoAssetDataCodingKeyLocalIdentifier, _AXMPhotoAssetDataCodingKeyOrientation, 
+                       _AXMOCRMinimumCharacterHeightMin, _AXMPhotoAssetDataCodingKeyAllowNetworkAccess, 
+                       _AXMPhotoAssetDataCodingKeyAssetURL, _AXMPhotoAssetDataCodingKeyCreationDate, 
+                       _AXMPhotoAssetDataCodingKeyImageData, _AXMPhotoAssetDataCodingKeyLocalIdentifier, 
+                       _AXMPhotoAssetDataCodingKeyOrientation, _AXMPhotoAssetDataCodingKeyPhotoLibraryIdentifier, 
                        _AXMPhotoAssetDataCodingKeyUTI, _AXMPointDistance, _AXMQuadratureToleranceDefault, 
                        _AXMQuadratureToleranceMaximum, _AXMQuadratureToleranceMinimum, 
                        _AXMRatioOfIntersectedAreaToSmallerRectArea, _AXMRectApproxEqual, 
@@ -85,16 +86,17 @@ exports:
                        _AXMStringFromCGPoint, _AXMStringFromCGRect, _AXMStringFromCGSize, 
                        _AXMStringFromNormalizedCGRect, _AXMTextSpecialCaseTagNutritionLabel, 
                        _AXMTransformedNormalizedFrame, _AXMVisionEngineConfigurationDidChangeNotification, 
+                       _AXMVisionFeatureAssetMetadataCodingKeyAssetLocallyAvailableIdentifier, 
                        _AXMVisionFeatureAssetMetadataCodingKeyAssetURL, _AXMVisionFeatureAssetMetadataCodingKeyCreationDate, 
                        _AXMVisionFeatureAssetMetadataCodingKeyEXIFUserComment, _AXMVisionFeatureAssetMetadataCodingKeyIPTCCaptionAbstract, 
                        _AXMVisionFeatureAssetMetadataCodingKeyLocalIdentifier, _AXMVisionFeatureAssetMetadataCodingKeyLocalizedTypeDescription, 
                        _AXMVisionFeatureAssetMetadataCodingKeyName, _AXMVisionFeatureAssetMetadataCodingKeyPNGImageDescription, 
                        _AXMVisionFeatureAssetMetadataCodingKeyTIFFImageDescription, 
-                       _AXMVisionFeatureAssetMetadataCodingKeyUTI, _AXMVisionFeatureCodingKeyAesthetics, 
-                       _AXMVisionFeatureCodingKeyAssetMetadata, _AXMVisionFeatureCodingKeyBarcodeType, 
-                       _AXMVisionFeatureCodingKeyBlur, _AXMVisionFeatureCodingKeyBrightness, 
-                       _AXMVisionFeatureCodingKeyCameraType, _AXMVisionFeatureCodingKeyCanvasSize, 
-                       _AXMVisionFeatureCodingKeyCaptionMayContainSensitiveContent, 
+                       _AXMVisionFeatureAssetMetadataCodingKeyUTI, _AXMVisionFeatureAssetMetadataCodingkeyWellKnownPHPhotoLibraryIdentifier, 
+                       _AXMVisionFeatureCodingKeyAesthetics, _AXMVisionFeatureCodingKeyAssetMetadata, 
+                       _AXMVisionFeatureCodingKeyBarcodeType, _AXMVisionFeatureCodingKeyBlur, 
+                       _AXMVisionFeatureCodingKeyBrightness, _AXMVisionFeatureCodingKeyCameraType, 
+                       _AXMVisionFeatureCodingKeyCanvasSize, _AXMVisionFeatureCodingKeyCaptionMayContainSensitiveContent, 
                        _AXMVisionFeatureCodingKeyColorInfo, _AXMVisionFeatureCodingKeyConfidence, 
                        _AXMVisionFeatureCodingKeyDetectorSceneClassIds, _AXMVisionFeatureCodingKeyDeviceMotion, 
                        _AXMVisionFeatureCodingKeyDeviceOrientation, _AXMVisionFeatureCodingKeyFaceAttributes, 
@@ -172,11 +174,12 @@ exports:
                        _axMLElementsTabBarItemMinOverlapWithTabBar, _axMLElementsTabBarItemXCutExtensionRatio, 
                        _axMLElementsTabBarMaxTopiPad, _axMLElementsTabBarMaxTopiPhone, 
                        _axMLElementsTabBarRatio, _axMLElementsTextFieldGroupingContainment, 
-                       _axMLElementsToggleCheckboxGrouping, _axMLElementsTopBarTextHeightDivisor, 
-                       _axMLElementsTopBarTextWidthDivisor, _axMLElementsTopBarTextXCenter, 
-                       _axMLElementsTopBarTextYCenter, _axMLElementsTopLeftButtonGroupingDistance, 
-                       _axMLElementsTopLeftButtonHeightDivisorLandscape, _axMLElementsTopLeftButtonHeightDivisorPortrait, 
-                       _axMLElementsTopLeftButtonWidthDivisorLandscape, _axMLElementsTopLeftButtonWidthDivisorPortrait, 
+                       _axMLElementsToggleCheckboxGrouping, _axMLElementsToggleCheckboxMaxHeightRatio, 
+                       _axMLElementsTopBarTextHeightDivisor, _axMLElementsTopBarTextWidthDivisor, 
+                       _axMLElementsTopBarTextXCenter, _axMLElementsTopBarTextYCenter, 
+                       _axMLElementsTopLeftButtonGroupingDistance, _axMLElementsTopLeftButtonHeightDivisorLandscape, 
+                       _axMLElementsTopLeftButtonHeightDivisorPortrait, _axMLElementsTopLeftButtonWidthDivisorLandscape, 
+                       _axMLElementsTopLeftButtonWidthDivisorPortrait, _axMLElementsUnknownIconType, 
                        _axMLElementsYOverlap, _covariance, _kAXMBlurMeasureHigh, 
                        _kAXMBlurMeasureLow, _kAXMBlurMeasureMediumHigh, _kAXMBlurMeasureMediumLow, 
                        _kAXMBlurMeasureVeryHigh, _kAXMBlurMeasureVeryLow, _kAXMBrightnessMeasureHigh, 
@@ -200,7 +203,8 @@ exports:
                        AXMActiveSoundOutputActionHandleImpl, AXMAddressFormatter, 
                        AXMAssetManager, AXMAssetMetadataNode, AXMAudioDataSource, 
                        AXMAudioDataSourceMixer, AXMAudioEffect, AXMAudioSession, 
-                       AXMBarcodeNode, AXMCIMorphologyRectangle, AXMCIMorphologyRectangleMaximum, 
+                       AXMBarcodeNode, AXMBrailleCanvasDescription, AXMBrailleEdgeDetectorOptions, 
+                       AXMBrailleEdgesDetectorNode, AXMCIMorphologyRectangle, AXMCIMorphologyRectangleMaximum, 
                        AXMCIMorphologyRectangleMinimum, AXMCameraFrameContext, AXMCameraMetadataNode, 
                        AXMCaptionDetectorNode, AXMCaptureVideoDataOutput, AXMCategoricalDataAxisDescriptor, 
                        AXMCategoricalScale, AXMChartDescriptor, AXMCompressor, AXMCoreMotionNode, 
@@ -238,7 +242,7 @@ exports:
                        AXMVisionFeatureFaceDetectionResult, AXMVisionFeatureFaceLandmarks, 
                        AXMVisionFeatureRecognizedText, AXMVisionPipelineContext, 
                        AXMVisionResult, AXMVoiceOverVisionEngine, AXShotflowConfiguration, 
-                       AXShotflowDetector, AXShotflowFaceDetection, AXShotflowHelpers, 
+                       AXShotflowDetector, AXShotflowElementDetection, AXShotflowHelpers, 
                        AXShotflowNetwork, AXVNEspressoDetectedObject, AX_CVML_Error, 
                        ImageTools, KeyPitch, _AXMOutputRequestTask, _AXMPlayerItemLegibleOutput, 
                        _AXMSemanticTextCursor, _AXMSettingObserver, _AXMVisionEngineAnalysisTask ]

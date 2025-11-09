@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F6C82F78-FC94-37F3-9406-B6D50022B28F
+    value:           E7B1B7DD-D1B9-3731-ACCB-9F11FCE7B3F2
   - target:          x86_64-maccatalyst
-    value:           F6C82F78-FC94-37F3-9406-B6D50022B28F
+    value:           E7B1B7DD-D1B9-3731-ACCB-9F11FCE7B3F2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C78CAE43-D7B7-3E33-9C6C-6357AECF5D82
+    value:           33AD12B0-DE69-36ED-ACC0-B57EF0D19251
   - target:          arm64e-maccatalyst
-    value:           C78CAE43-D7B7-3E33-9C6C-6357AECF5D82
+    value:           33AD12B0-DE69-36ED-ACC0-B57EF0D19251
 install-name:    '/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Frameworks/ScreenReaderOutput.framework/Versions/A/ScreenReaderOutput'
 current-version: 390
 exports:
@@ -28,26 +28,27 @@ exports:
                        _kSCROBrailleCallbackReplaceTextRange_RangeKey, _kSCROBrailleCallbackReplaceTextRange_StringKey, 
                        _kSCROBrailleCallbackSpeechFeedback_SpeakLiterallyKey, _kSCROBrailleCallbackSpeechFeedback_SpokenTextKey, 
                        _kSCROBrailleDisplayBluetoothAddress, _kSCROBrailleDisplayBluetoothName, 
-                       _kSCROBrailleDisplayBrailleInputMode, _kSCROBrailleDisplayConnectedNotification, 
-                       _kSCROBrailleDisplayDriverIdentifier, _kSCROBrailleDisplayIsPrimary, 
-                       _kSCROBrailleDisplayMainSize, _kSCROBrailleDisplayModeAttribute, 
-                       _kSCROBrailleDisplayModelIdentifier, _kSCROBrailleDisplayPostsKeyboardEvents, 
-                       _kSCROBrailleDisplayState, _kSCROBrailleDisplayStatusSize, 
-                       _kSCROBrailleDisplayToken, _kSCROBrailleDisplayTransport, 
-                       _kSCROBrailleDriverAutoDetectDictionaries, _kSCROBrailleDriverBluetoothConnectionIsIncoming, 
-                       _kSCROBrailleDriverBluetoothDeviceNameRegexPatterns, _kSCROBrailleDriverBluetoothSPDUUID16ServiceClass, 
-                       _kSCROBrailleDriverBluetoothSearchDictionary, _kSCROBrailleDriverMainDisplaySize, 
-                       _kSCROBrailleDriverModels, _kSCROBrailleDriverSerialAdvertiseBytes, 
-                       _kSCROBrailleDriverStatusDisplaySize, _kSCROBrailleDriverType, 
-                       _kSCROBrailleEditingStringAttribute, _kSCROBrailleIBeamLocationAttribute, 
-                       _kSCROBrailleInputMemorizeHoldInterval, _kSCROBrailleInputMemorizeNowInterval, 
-                       _kSCROBrailleInputMemorizePulseInterval, _kSCROBrailleKeyboardKeyModifierCommand, 
-                       _kSCROBrailleKeyboardKeyModifierControl, _kSCROBrailleKeyboardKeyModifierNull, 
-                       _kSCROBrailleKeyboardKeyModifierOption, _kSCROBrailleKeyboardKeyModifierSecondaryFn, 
-                       _kSCROBrailleKeyboardKeyModifierShift, _kSCROBrailleOffsetAttribute, 
-                       _kSCROBrailleOriginalStringAttribute, _kSCROBrailleOverrideStringAttribute, 
-                       _kSCROBrailleRouterKeyAppToken, _kSCROBrailleRouterKeyLocation, 
-                       _kSCROBrailleRouterKeyToken, _kSCROBrailleSizeAttribute, _kSCROBrailleStatusAlignmentAttribute, 
+                       _kSCROBrailleDisplayBrailleInputMode, _kSCROBrailleDisplayCanvasDescriptor, 
+                       _kSCROBrailleDisplayConnectedNotification, _kSCROBrailleDisplayDriverIdentifier, 
+                       _kSCROBrailleDisplayIsPrimary, _kSCROBrailleDisplayMainSize, 
+                       _kSCROBrailleDisplayModeAttribute, _kSCROBrailleDisplayModelIdentifier, 
+                       _kSCROBrailleDisplayPostsKeyboardEvents, _kSCROBrailleDisplayState, 
+                       _kSCROBrailleDisplayStatusSize, _kSCROBrailleDisplayToken, 
+                       _kSCROBrailleDisplayTransport, _kSCROBrailleDriverAutoDetectDictionaries, 
+                       _kSCROBrailleDriverBluetoothConnectionIsIncoming, _kSCROBrailleDriverBluetoothDeviceNameRegexPatterns, 
+                       _kSCROBrailleDriverBluetoothSPDUUID16ServiceClass, _kSCROBrailleDriverBluetoothSearchDictionary, 
+                       _kSCROBrailleDriverMainDisplaySize, _kSCROBrailleDriverModels, 
+                       _kSCROBrailleDriverSerialAdvertiseBytes, _kSCROBrailleDriverStatusDisplaySize, 
+                       _kSCROBrailleDriverType, _kSCROBrailleEditingStringAttribute, 
+                       _kSCROBrailleIBeamLocationAttribute, _kSCROBrailleInputMemorizeHoldInterval, 
+                       _kSCROBrailleInputMemorizeNowInterval, _kSCROBrailleInputMemorizePulseInterval, 
+                       _kSCROBrailleKeyboardKeyModifierCommand, _kSCROBrailleKeyboardKeyModifierControl, 
+                       _kSCROBrailleKeyboardKeyModifierNull, _kSCROBrailleKeyboardKeyModifierOption, 
+                       _kSCROBrailleKeyboardKeyModifierSecondaryFn, _kSCROBrailleKeyboardKeyModifierShift, 
+                       _kSCROBrailleOffsetAttribute, _kSCROBrailleOriginalStringAttribute, 
+                       _kSCROBrailleOverrideStringAttribute, _kSCROBrailleRouterKeyAppToken, 
+                       _kSCROBrailleRouterKeyLocation, _kSCROBrailleRouterKeyToken, 
+                       _kSCROBrailleSizeAttribute, _kSCROBrailleStatusAlignmentAttribute, 
                        _kSCROBrailleStatusAttribute, _kSCROBrailleTranslationDefaultLanguageIdentifier, 
                        _kSCROBrailleUnicodeCharacterBase, _kSCROBrailleUnicodeCharacterDot7, 
                        _kSCROBrailleUnicodeCharacterDot78, _kSCROBrailleUnicodeCharacterDot8, 
@@ -59,18 +60,18 @@ exports:
                        _kSCROStatusAttribute, _kSCROStatusAttributeCellIndex, _kSCROStatusAttributeCellTitle, 
                        _kSCROStatusAttributeDotText, _kSCROTechnicalContextAttribute, 
                        _kSCROTokenAttribute ]
-    objc-classes:    [ SCROBrailleClient, SCROBrailleDisplay, SCROBrailleDisplayAutoDetector, 
-                       SCROBrailleDisplayCommandDispatcher, SCROBrailleDisplayHistory, 
-                       SCROBrailleDisplayInputManager, SCROBrailleDisplayManagedQueue, 
-                       SCROBrailleDisplayManager, SCROBrailleDisplayManagerStatus, 
-                       SCROBrailleDisplayStatus, SCROBrailleEvent, SCROBrailleEventDispatcher, 
-                       SCROBrailleFormatter, SCROBrailleHandler, SCROBrailleKey, 
-                       SCROBrailleKeyboardKey, SCROBrailleLine, SCROBrailleStealthDriver, 
-                       SCROBrailleSubstitutionManager, SCROBrailleTranslationManager, 
-                       SCROCallback, SCROClient, SCROConnection, SCROEvent, SCROHandler, 
-                       SCROIOElement, SCROIOHIDElement, SCROIOSerialElement, SCROIOUSBElement, 
-                       SCROMobileBrailleDisplayInputManager, SCROScriptClient, SCROServer, 
-                       SCROStealthBrailleDisplay ]
+    objc-classes:    [ SCRO2DBrailleCanvas, SCRO2DBrailleCanvasDescriptor, SCROBrailleClient, 
+                       SCROBrailleDisplay, SCROBrailleDisplayAutoDetector, SCROBrailleDisplayCommandDispatcher, 
+                       SCROBrailleDisplayHistory, SCROBrailleDisplayInputManager, 
+                       SCROBrailleDisplayManagedQueue, SCROBrailleDisplayManager, 
+                       SCROBrailleDisplayManagerStatus, SCROBrailleDisplayStatus, 
+                       SCROBrailleEvent, SCROBrailleEventDispatcher, SCROBrailleFormatter, 
+                       SCROBrailleHandler, SCROBrailleKey, SCROBrailleKeyboardKey, 
+                       SCROBrailleLine, SCROBrailleStealthDriver, SCROBrailleSubstitutionManager, 
+                       SCROBrailleTranslationManager, SCROCallback, SCROClient, SCROConnection, 
+                       SCROEvent, SCROHandler, SCROIODotPadElement, SCROIOElement, 
+                       SCROIOHIDElement, SCROIOSerialElement, SCROIOUSBElement, SCROMobileBrailleDisplayInputManager, 
+                       SCROScriptClient, SCROServer, SCROStealthBrailleDisplay ]
     objc-ivars:      [ SCROBrailleClient._aggregatedStatusCache, SCROBrailleClient._aggregatedStatusPending, 
                        SCROBrailleClient._connection, SCROBrailleClient._deathTimer, 
                        SCROBrailleClient._delegate, SCROBrailleClient._delegateWantsKeypresses, 
@@ -113,9 +114,9 @@ exports:
                        SCROBrailleDisplayManager._delegate, SCROBrailleDisplayManager._detectedIOElementsDict, 
                        SCROBrailleDisplayManager._displayConfigurationDict, SCROBrailleDisplayManager._displayModeStack, 
                        SCROBrailleDisplayManager._eventQueue, SCROBrailleDisplayManager._history, 
-                       SCROBrailleDisplayManager._inputAccessMode, SCROBrailleDisplayManager._inputContractionMode, 
-                       SCROBrailleDisplayManager._inputShowEightDot, SCROBrailleDisplayManager._isValid, 
-                       SCROBrailleDisplayManager._lineDescriptorDisplayCallbackEnabled, 
+                       SCROBrailleDisplayManager._imageData, SCROBrailleDisplayManager._inputAccessMode, 
+                       SCROBrailleDisplayManager._inputContractionMode, SCROBrailleDisplayManager._inputShowEightDot, 
+                       SCROBrailleDisplayManager._isValid, SCROBrailleDisplayManager._lineDescriptorDisplayCallbackEnabled, 
                        SCROBrailleDisplayManager._lineString, SCROBrailleDisplayManager._loadedIOElements, 
                        SCROBrailleDisplayManager._mainString, SCROBrailleDisplayManager._managedDisplayQueue, 
                        SCROBrailleDisplayManager._outputContractionMode, SCROBrailleDisplayManager._outputShowEightDot, 

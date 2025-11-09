@@ -55,7 +55,7 @@ TK_LIB_FLAG='-framework Tk'
 
 # String to pass to linker to pick up the Tk library from its
 # build directory.
-TK_BUILD_LIB_SPEC='-F/System/Volumes/Data/SWE/macOS/BuildRoots/0ed32b12e4/Library/Caches/com.apple.xbs/Binaries/tcl/install/TempContent/Objects/OBJROOT1/tk/Deployment -framework Tk'
+TK_BUILD_LIB_SPEC='-F/System/Volumes/Data/SWE/macOS/BuildRoots/5b2e67f8af/Library/Caches/com.apple.xbs/Binaries/tcl/install/TempContent/Objects/OBJROOT1/tk/Deployment -framework Tk'
 
 # String to pass to linker to pick up the Tk library from its
 # installed directory.
@@ -71,7 +71,7 @@ TK_INCLUDE_SPEC='-iwithsysroot /System/Library/Frameworks/Tk.framework/Versions/
 # different place than the directory containing the source files, this
 # points to the location of the sources, not the location where Tk was
 # compiled.
-TK_SRC_DIR='/System/Volumes/Data/SWE/macOS/BuildRoots/0ed32b12e4/Library/Caches/com.apple.xbs/Sources/tcl/tcl-134/tk/tk'
+TK_SRC_DIR='/System/Volumes/Data/SWE/macOS/BuildRoots/5b2e67f8af/Library/Caches/com.apple.xbs/Sources/tcl/tcl-134/tk/tk'
 
 # Needed if you want to make a 'fat' shared library library
 # containing tk objects or link a different wish.
@@ -86,14 +86,14 @@ TK_STUB_LIB_FLAG='-ltkstub8.5'
 
 # String to pass to linker to pick up the Tk stub library from its
 # build directory.
-TK_BUILD_STUB_LIB_SPEC='-L/System/Volumes/Data/SWE/macOS/BuildRoots/0ed32b12e4/Library/Caches/com.apple.xbs/Binaries/tcl/install/TempContent/Objects/OBJROOT1/tk/Deployment -ltkstub8.5'
+TK_BUILD_STUB_LIB_SPEC='-L/System/Volumes/Data/SWE/macOS/BuildRoots/5b2e67f8af/Library/Caches/com.apple.xbs/Binaries/tcl/install/TempContent/Objects/OBJROOT1/tk/Deployment -ltkstub8.5'
 
 # String to pass to linker to pick up the Tk stub library from its
 # installed directory.
 TK_STUB_LIB_SPEC='-L/System/Library/Frameworks/Tk.framework/Versions/8.5 -ltkstub8.5'
 
 # Path to the Tk stub library in the build directory.
-TK_BUILD_STUB_LIB_PATH='/System/Volumes/Data/SWE/macOS/BuildRoots/0ed32b12e4/Library/Caches/com.apple.xbs/Binaries/tcl/install/TempContent/Objects/OBJROOT1/tk/Deployment/libtkstub8.5.a'
+TK_BUILD_STUB_LIB_PATH='/System/Volumes/Data/SWE/macOS/BuildRoots/5b2e67f8af/Library/Caches/com.apple.xbs/Binaries/tcl/install/TempContent/Objects/OBJROOT1/tk/Deployment/libtkstub8.5.a'
 
 # Path to the Tk stub library in the install directory.
 TK_STUB_LIB_PATH='/System/Library/Frameworks/Tk.framework/Versions/8.5/libtkstub8.5.a'

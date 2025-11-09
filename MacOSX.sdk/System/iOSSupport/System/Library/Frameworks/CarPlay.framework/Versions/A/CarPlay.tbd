@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           F9B51269-609A-3C10-B88D-656E1B1186A4
+    value:           76FB8FBF-381B-3B39-B49E-4F5716ADB81F
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           0228F84A-5D8F-3CAB-8A3F-E013E8370A25
+    value:           4ECA5BC1-E452-3F26-B472-CA376132635D
 install-name:    '/System/iOSSupport/System/Library/Frameworks/CarPlay.framework/Versions/A/CarPlay'
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
@@ -34,8 +34,8 @@ exports:
                        _kCPSMapsEntitlementKey, _kCPSParkingEntitlementKey, _kCPSPublicSafetyEntitlementKey, 
                        _kCPSQuickOrderingEntitlementKey ]
     objc-classes:    [ CPAccNavInfoType, CPAccNavParam, CPAccNavParamKey, CPAccNavUpdate, 
-                       CPActionSheetTemplate, CPAlertAction, CPAlertTemplate, CPBarButton, 
-                       CPButton, CPContact, CPContactCallButton, CPContactDirectionsButton, 
+                       CPActionSheetTemplate, CPAlertAction, CPAlertTemplate, CPAssistantCellConfiguration, 
+                       CPBarButton, CPButton, CPContact, CPContactCallButton, CPContactDirectionsButton, 
                        CPContactEntity, CPContactMessageButton, CPContactTemplate, 
                        CPDashboardButton, CPDashboardController, CPEndpointListenerWrapper, 
                        CPEntity, CPGridButton, CPGridTemplate, CPImageSet, CPInformationItem, 

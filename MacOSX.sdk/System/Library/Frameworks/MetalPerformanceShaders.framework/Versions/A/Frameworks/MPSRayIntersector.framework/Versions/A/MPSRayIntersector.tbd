@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           45B4423F-FC56-37A1-ACBC-DDEFBB437DEF
+    value:           1B064766-7B1C-343C-8792-4EF5BF8C09FD
   - target:          x86_64-maccatalyst
-    value:           45B4423F-FC56-37A1-ACBC-DDEFBB437DEF
+    value:           1B064766-7B1C-343C-8792-4EF5BF8C09FD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           11503F87-AD79-3AEB-BB09-475358567C73
+    value:           5502FB3F-145A-310B-B504-299AB5A9BDF1
   - target:          arm64e-maccatalyst
-    value:           11503F87-AD79-3AEB-BB09-475358567C73
+    value:           5502FB3F-145A-310B-B504-299AB5A9BDF1
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSRayIntersector.framework/Versions/A/MPSRayIntersector'
-current-version: 125.0.30
+current-version: 125.2.1
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ MPSImage, MetalPerformanceShaders ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MPSAccelerationStructureBuilderCPU, _MPSAccelerationStructureBuilderGPU, 
                        _MPSAccelerationStructureGPUBuilderTypeDefault, _MPSAccelerationStructureGPUBuilderTypeFast, 

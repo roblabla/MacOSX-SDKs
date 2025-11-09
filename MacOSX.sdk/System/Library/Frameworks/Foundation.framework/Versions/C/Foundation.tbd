@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7B06DF10-290A-3010-AB29-C48930B472CC
+    value:           4F895069-27E3-3087-A30E-515F5FC9F493
   - target:          x86_64-maccatalyst
-    value:           7B06DF10-290A-3010-AB29-C48930B472CC
+    value:           4F895069-27E3-3087-A30E-515F5FC9F493
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0198F24B-F096-3DC2-8609-23164477E2B1
+    value:           CD7CDF11-986E-3754-8011-E628C3BE8380
   - target:          arm64e-maccatalyst
-    value:           0198F24B-F096-3DC2-8609-23164477E2B1
+    value:           CD7CDF11-986E-3754-8011-E628C3BE8380
 install-name:    '/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation'
-current-version: 1844
+current-version: 1856.105
 compatibility-version: 300
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -550,16 +550,16 @@ exports:
                        '$ld$hide$os10.9$_NSMetadataItemWhereFromsKey', '$ld$hide$os10.9$_NSMetadataItemWhiteBalanceKey', 
                        '$ld$hide$os10.9$_NSMetadataQueryIndexedLocalComputerScope', 
                        '$ld$hide$os10.9$_NSMetadataQueryIndexedNetworkScope' ]
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$$1$10.9$999$_NSDetailedErrorsKey$', 
-                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$$2$7.0$999$_NSDetailedErrorsKey$', 
-                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$$3$9.0$999$_NSDetailedErrorsKey$', 
-                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$$4$2.0$999$_NSDetailedErrorsKey$', 
-                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$$6$13.0$999$_NSDetailedErrorsKey$', 
-                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$$7$7.0$999$_NSDetailedErrorsKey$', 
-                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$$8$9.0$999$_NSDetailedErrorsKey$', 
-                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$$9$2.0$999$_NSDetailedErrorsKey$', 
+    symbols:         [ '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$1.0$1$10.9$12.0$_NSDetailedErrorsKey$', 
+                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$1.0$2$7.0$15.0$_NSDetailedErrorsKey$', 
+                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$1.0$3$9.0$15.0$_NSDetailedErrorsKey$', 
+                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$1.0$4$2.0$8.0$_NSDetailedErrorsKey$', 
+                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$1.0$6$13.0$15.0$_NSDetailedErrorsKey$', 
+                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$1.0$7$7.0$15.0$_NSDetailedErrorsKey$', 
+                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$1.0$8$9.0$15.0$_NSDetailedErrorsKey$', 
+                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$1.0$9$2.0$8.0$_NSDetailedErrorsKey$', 
                        _NSAffineTransformStructIdentity, _NSAllHashTableObjects, 
                        _NSAllMapTableKeys, _NSAllMapTableValues, _NSAllocateMemoryPages, 
                        _NSAllocateObject, _NSAllocateObjectArray, _NSAllocateScannedUncollectable, 
@@ -944,38 +944,39 @@ exports:
                        __NSFoundationBundle, __NSFoundationResourceDirectory, __NSFullMethodName, 
                        __NSGetUsingKeyValueGetter, __NSGetVoidValueWithMethod, __NSGrammarAttributeName, 
                        __NSIPCloneToTemporaryDir, __NSIPItemQueue, __NSImageURLAttributeName, 
-                       __NSIndentSpace, __NSInflectWithoutReplacements, __NSInflectableAttributeName, 
-                       __NSInflectionAlternativeAttributeName, __NSInlinePresentationIntentAttributeName, 
-                       __NSIsLocalizedString, __NSKeyValueCreateImplicitObservationInfo, 
-                       __NSKeyValueCreatePendingChangeNotificationArray, __NSKeyValueGetterForClassAndKey, 
-                       __NSKeyValueInvalidateAllCachesForContainerAndKey, __NSKeyValueMutableSetGetterForClassAndKey, 
-                       __NSKeyValueObserverRegistrationEnableLockingAssertions, __NSKeyValuePrimitiveGetterForClassAndKey, 
-                       __NSKeyValuePrimitiveSetterForClassAndKey, __NSKeyValueRemoveObservationInfoForObject, 
-                       __NSKeyValueSetterForClassAndKey, __NSLanguageAttributeName, 
-                       __NSLinguisticTagSchemeInternalClass, __NSLinguisticTagSchemePossibleClasses, 
-                       __NSLocalizedFileSizeDescription, __NSLogCStringFunction, 
-                       __NSMethodExceptionProem, __NSNewInlineCString, __NSNewStringByAppendingStrings, 
-                       __NSNewStringFromCString, __NSODRSandboxExtensionKey, __NSODRSandboxRootPathKey, 
-                       __NSODRURLKey, __NSObjectByConvertingAEDescriptorToTypeInSuite, 
-                       __NSPNCSettings, __NSPersonNameComponentPhoneticFamilyNameKeyPath, 
-                       __NSPersonNameComponentPhoneticGivenNameKeyPath, __NSPersonNameComponentPhoneticMiddleNameKeyPath, 
-                       __NSPersonNameComponentPhoneticNicknameKeyPath, __NSPersonNameComponentPhoneticPrefixKeyPath, 
-                       __NSPersonNameComponentPhoneticSuffixKeyPath, __NSPrintForDebugger, 
-                       __NSProgressRemoteLocalizedAdditionalDescriptionKey, __NSProgressRemoteLocalizedDescriptionKey, 
-                       __NSRaiseError, __NSReadExtendedAttributesFromFileDescriptor, 
-                       __NSRemoveAltHandler2, __NSRemoveExceptionHandlerForLock, 
-                       __NSReplacementIndexAttributeName, __NSRequestConcreteObject, 
-                       __NSSetExceptionRaiser, __NSSetLogCStringFunction, __NSSetUsingKeyValueSetter, 
-                       __NSSetupLibXML, __NSSoftLinkingGetFrameworkFunction, __NSSoftLinkingLoadFramework, 
-                       __NSUnitGetBestUnitsForUsage, __NSUserDefaults_Log_Nonsensical_Suites, 
-                       __NSWriteExtendedAttributesToFileDescriptor, __NSXMLCreateStringFromContentsOfHTML, 
-                       __NSXPCConnectionInvocationReplyToSelectorKey, __NSXPCConnectionInvocationReplyUserInfoKey, 
-                       __NS_os_log_callback, __NXAccessFile, __NXCurrentWorkingDir, 
-                       __NXMakeDirs, __NXRenameFile, __NXStatFile, ___NSCoderInvalidState, 
-                       ___NSDefaultStringEncodingFullyInited, ___NSDescribeDelayedPerformCallout, 
-                       ___NSDescribeNSMachPortCallout, ___NSDescribeTimerCallout, 
-                       ___NSFireDelayedPerform, ___NSFireMachPort, ___NSFireTimer, 
-                       ___NSPropertyListClasses_ForArchival_ErrorAndException, _getStackObservedValueClassAndBoxSize ]
+                       __NSIndentSpace, __NSInflect, __NSInflectWithoutReplacements, 
+                       __NSInflectableAttributeName, __NSInflectionAlternativeAttributeName, 
+                       __NSInlinePresentationIntentAttributeName, __NSIsLocalizedString, 
+                       __NSKeyValueCreateImplicitObservationInfo, __NSKeyValueCreatePendingChangeNotificationArray, 
+                       __NSKeyValueGetterForClassAndKey, __NSKeyValueInvalidateAllCachesForContainerAndKey, 
+                       __NSKeyValueMutableSetGetterForClassAndKey, __NSKeyValueObserverRegistrationEnableLockingAssertions, 
+                       __NSKeyValuePrimitiveGetterForClassAndKey, __NSKeyValuePrimitiveSetterForClassAndKey, 
+                       __NSKeyValueRemoveObservationInfoForObject, __NSKeyValueSetterForClassAndKey, 
+                       __NSLanguageAttributeName, __NSLinguisticTagSchemeInternalClass, 
+                       __NSLinguisticTagSchemePossibleClasses, __NSLocalizedFileSizeDescription, 
+                       __NSLogCStringFunction, __NSMethodExceptionProem, __NSNewInlineCString, 
+                       __NSNewStringByAppendingStrings, __NSNewStringFromCString, 
+                       __NSODRSandboxExtensionKey, __NSODRSandboxRootPathKey, __NSODRURLKey, 
+                       __NSObjectByConvertingAEDescriptorToTypeInSuite, __NSPNCSettings, 
+                       __NSPersonNameComponentPhoneticFamilyNameKeyPath, __NSPersonNameComponentPhoneticGivenNameKeyPath, 
+                       __NSPersonNameComponentPhoneticMiddleNameKeyPath, __NSPersonNameComponentPhoneticNicknameKeyPath, 
+                       __NSPersonNameComponentPhoneticPrefixKeyPath, __NSPersonNameComponentPhoneticSuffixKeyPath, 
+                       __NSPrintForDebugger, __NSProgressRemoteLocalizedAdditionalDescriptionKey, 
+                       __NSProgressRemoteLocalizedDescriptionKey, __NSRaiseError, 
+                       __NSReadExtendedAttributesFromFileDescriptor, __NSRemoveAltHandler2, 
+                       __NSRemoveExceptionHandlerForLock, __NSReplacementIndexAttributeName, 
+                       __NSRequestConcreteObject, __NSSetExceptionRaiser, __NSSetLogCStringFunction, 
+                       __NSSetUsingKeyValueSetter, __NSSetupLibXML, __NSSoftLinkingGetFrameworkFunction, 
+                       __NSSoftLinkingLoadFramework, __NSUnitGetBestUnitsForUsage, 
+                       __NSUserDefaults_Log_Nonsensical_Suites, __NSWriteExtendedAttributesToFileDescriptor, 
+                       __NSXMLCreateStringFromContentsOfHTML, __NSXPCConnectionInvocationReplyToSelectorKey, 
+                       __NSXPCConnectionInvocationReplyUserInfoKey, __NS_os_log_callback, 
+                       __NXAccessFile, __NXCurrentWorkingDir, __NXMakeDirs, __NXRenameFile, 
+                       __NXStatFile, ___NSCoderInvalidState, ___NSDefaultStringEncodingFullyInited, 
+                       ___NSDescribeDelayedPerformCallout, ___NSDescribeNSMachPortCallout, 
+                       ___NSDescribeTimerCallout, ___NSFireDelayedPerform, ___NSFireMachPort, 
+                       ___NSFireTimer, ___NSPropertyListClasses_ForArchival_ErrorAndException, 
+                       _getStackObservedValueClassAndBoxSize ]
     objc-classes:    [ NSAEDescriptorTranslator, NSAddressCheckingResult, NSAffineTransform, 
                        NSAlignmentLayoutRule, NSAppleEventDescriptor, NSAppleEventManager, 
                        NSAppleScript, NSArchiver, NSArrayChange, NSArrayChanges, 
@@ -1134,7 +1135,7 @@ exports:
                        NSXMLNode._objectValue, NSXMLNode._parent, _NSCloudSharingDescriptor._invitationsSentViaThirdPartyService, 
                        _NSCloudSharingDescriptor._numberOfInvitations, _NSCloudSharingDescriptor._operation, 
                        _NSCloudSharingDescriptor._publicShare, _NSCloudSharingDescriptor._sharedContentType ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _NSAMPMDesignation, _NSAllocateCollectable, _NSCurrencySymbol, 
                        _NSDateFormatString, _NSDateTimeOrdering, _NSDecimalDigits, 
                        _NSDecimalSeparator, _NSEarlierTimeDesignations, _NSHourNameDesignations, 

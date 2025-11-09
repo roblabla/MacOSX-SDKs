@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           656905EC-C172-3876-ACB8-BFF192701888
+    value:           73DAFA83-ECE9-3892-A074-E7D4515F4083
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           C256AA44-7603-382B-AAA4-E2A0B1C332C3
+    value:           5711CD24-F5A8-374D-8F00-760BCDA9D799
 install-name:    '/System/iOSSupport/System/Library/Frameworks/GameKit.framework/Versions/A/GameKit'
-current-version: 810.55.1
+current-version: 815.2.8
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/ModelIO.framework/Versions/A/ModelIO', 
@@ -28,17 +28,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AEB31E64-A9CA-3CD4-BD84-17CA6E3D48D8
+    value:           8ADEE51F-F3B1-318F-8DB9-A8FE55BB0F54
   - target:          x86_64-maccatalyst
-    value:           AEB31E64-A9CA-3CD4-BD84-17CA6E3D48D8
+    value:           8ADEE51F-F3B1-318F-8DB9-A8FE55BB0F54
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0A4B7D3E-C0A0-3CDD-B72D-754F6C6B4D21
+    value:           8395E440-DF6F-3D55-AE00-92DAB03CE5B0
   - target:          arm64e-maccatalyst
-    value:           0A4B7D3E-C0A0-3CDD-B72D-754F6C6B4D21
+    value:           8395E440-DF6F-3D55-AE00-92DAB03CE5B0
 install-name:    '/System/Library/PrivateFrameworks/GameCenterFoundation.framework/Versions/A/GameCenterFoundation'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -133,29 +133,30 @@ exports:
                        _GKGameKitBundle, _GKGameKitTesterIdentifier, _GKGameLayerDashboardAchievements, 
                        _GKGameLayerDashboardAchievementsDeepLink, _GKGameLayerDashboardArcade, 
                        _GKGameLayerDashboardChallenges, _GKGameLayerDashboardChallengesDeepLink, 
-                       _GKGameLayerDashboardLeaderboardScores, _GKGameLayerDashboardLeaderboardSets, 
-                       _GKGameLayerDashboardLeaderboards, _GKGameLayerDashboardLeaderboardsDeepLink, 
-                       _GKGameLayerDashboardLocalPlayerProfile, _GKGameLayerDashboardMainScreen, 
-                       _GKGameLayerDashboardOccurrenceChangedToCurrent, _GKGameLayerDashboardOccurrenceChangedToPrevious, 
-                       _GKGameLayerDashboardPlayerScopeChangedToFriends, _GKGameLayerDashboardPlayerScopeChangedToGlobal, 
-                       _GKGameLayerDashboardPlayerScopeChangedToRecents, _GKGameLayerDashboardProfileDeepLink, 
-                       _GKGameLayerDashboardScoresDeepLink, _GKGameLayerDashboardScoresViewPlayerChallenged, 
-                       _GKGameLayerDashboardScoresViewPlayerProfileViewed, _GKGameLayerDashboardScoresViewScoreShared, 
-                       _GKGameLayerDashboardScoresViewScrolledToTop, _GKGameLayerDashboardTimeScopeChangedToAllTime, 
-                       _GKGameLayerDashboardTimeScopeChangedToToday, _GKGameLayerDashboardTimeScopeChangedToWeek, 
-                       _GKGameLayerDashboardTimeSpentOnAchievementsScreen, _GKGameLayerDashboardTimeSpentOnArcadeScreen, 
-                       _GKGameLayerDashboardTimeSpentOnChallengesScreen, _GKGameLayerDashboardTimeSpentOnLeaderboardsScreen, 
-                       _GKGameLayerDashboardTimeSpentOnMainScreen, _GKGameLayerDashboardTimeSpentOnPlayerProfileScreen, 
-                       _GKGameMetadataKey, _GKGamePlayerIDKey, _GKGameScopedIDPrefix, 
-                       _GKGameSessionErrorDomain, _GKGetApplicationDidEnterBackgroundNotificationName, 
-                       _GKGetApplicationStateForBundleID, _GKGetApplicationWillEnterForegroundNotificationName, 
-                       _GKGetApplicationWillTerminateNotificationName, _GKGetGamesPlayedDescriptorsWithinSecondsKey, 
-                       _GKGetGamesPlayedMetadataWithinSecondsKey, _GKGetLocalizedStringFromTableInBundle, 
-                       _GKGetProtocolVersionString, _GKGetSystemLocalizedStringFromTableInBundle, 
-                       _GKGlobalFriendListAccessAllowed, _GKGlobalFriendListAccessDenied, 
-                       _GKGlobalFriendListAccessKey, _GKGlobalFriendListAccessUndetermined, 
-                       _GKHTTPShouldUsePipelining, _GKHideFriendRecommendationSendContactsButtonKey, 
-                       _GKICETimeoutKey, _GKIDSLookupPushResponsePlayerID, _GKIDSLookupPushSenderCloudID, 
+                       _GKGameLayerDashboardLeaderboardChicletTapped, _GKGameLayerDashboardLeaderboardScores, 
+                       _GKGameLayerDashboardLeaderboardSets, _GKGameLayerDashboardLeaderboards, 
+                       _GKGameLayerDashboardLeaderboardsDeepLink, _GKGameLayerDashboardLocalPlayerProfile, 
+                       _GKGameLayerDashboardMainScreen, _GKGameLayerDashboardOccurrenceChangedToCurrent, 
+                       _GKGameLayerDashboardOccurrenceChangedToPrevious, _GKGameLayerDashboardPlayerScopeChangedToFriends, 
+                       _GKGameLayerDashboardPlayerScopeChangedToGlobal, _GKGameLayerDashboardPlayerScopeChangedToRecents, 
+                       _GKGameLayerDashboardProfileDeepLink, _GKGameLayerDashboardScoresDeepLink, 
+                       _GKGameLayerDashboardScoresViewPlayerChallenged, _GKGameLayerDashboardScoresViewPlayerProfileViewed, 
+                       _GKGameLayerDashboardScoresViewScoreShared, _GKGameLayerDashboardScoresViewScrolledToTop, 
+                       _GKGameLayerDashboardTimeScopeChangedToAllTime, _GKGameLayerDashboardTimeScopeChangedToToday, 
+                       _GKGameLayerDashboardTimeScopeChangedToWeek, _GKGameLayerDashboardTimeSpentOnAchievementsScreen, 
+                       _GKGameLayerDashboardTimeSpentOnArcadeScreen, _GKGameLayerDashboardTimeSpentOnChallengesScreen, 
+                       _GKGameLayerDashboardTimeSpentOnLeaderboardsScreen, _GKGameLayerDashboardTimeSpentOnMainScreen, 
+                       _GKGameLayerDashboardTimeSpentOnPlayerProfileScreen, _GKGameMetadataKey, 
+                       _GKGamePlayerIDKey, _GKGameScopedIDPrefix, _GKGameSessionErrorDomain, 
+                       _GKGetApplicationDidEnterBackgroundNotificationName, _GKGetApplicationStateForBundleID, 
+                       _GKGetApplicationWillEnterForegroundNotificationName, _GKGetApplicationWillTerminateNotificationName, 
+                       _GKGetGamesPlayedDescriptorsWithinSecondsKey, _GKGetGamesPlayedMetadataWithinSecondsKey, 
+                       _GKGetLocalizedStringFromTableInBundle, _GKGetProtocolVersionString, 
+                       _GKGetSystemLocalizedStringFromTableInBundle, _GKGlobalFriendListAccessAllowed, 
+                       _GKGlobalFriendListAccessDenied, _GKGlobalFriendListAccessKey, 
+                       _GKGlobalFriendListAccessUndetermined, _GKHTTPShouldUsePipelining, 
+                       _GKHideFriendRecommendationSendContactsButtonKey, _GKICETimeoutKey, 
+                       _GKIDSLookupPushResponsePlayerID, _GKIDSLookupPushSenderCloudID, 
                        _GKIForgotURLKey, _GKIMDPersistenceIdentifier, _GKImageCachePathForSubdirectoryAndFilename, 
                        _GKImageCachePathForURL, _GKImageCacheRoot, _GKImageURLKeyForSize, 
                        _GKImageURLKeyForSizeAndScale, _GKImportFriendsKey, _GKInfoPlistKeyFriendsAPIUsageDescription, 
@@ -213,20 +214,20 @@ exports:
                        _GKPlayerProfileNearbyPlayersButtonToggled, _GKPlayerProfilePrivacyAndSettingsClicked, 
                        _GKPlayerProfilePrivacyClicked, _GKPlayerProfileRecentlyPlayedWithClicked, 
                        _GKPlayerProfileSettingsClicked, _GKPlayerProfileSignInButtonClicked, 
-                       _GKPlayerProfileSignOutButtonClicked, _GKPlayerStatusKey, 
-                       _GKPlayersToInviteNotification, _GKPredicatePrefix, _GKPreferencesIdentifier, 
-                       _GKPrimaryCredentialDidChangeNotification, _GKPrivacySettingsAchievementsKey, 
-                       _GKPrivacySettingsFriendsKey, _GKPrivacySettingsGamesPlayedKey, 
-                       _GKPrivacySettingsKey, _GKProgramaticInviteTime, _GKPurpleBuddyIdentifier, 
-                       _GKPushCommandKey, _GKPushDataKey, _GKPushEnvironmentKey, 
-                       _GKPushFriendsAuthorizationStatus, _GKPushFriendsAuthorizationStatusAuthorized, 
-                       _GKPushFriendsAuthorizationStatusDenied, _GKPushFriendsAuthorizationStatusNotDetermined, 
-                       _GKPushFriendsAuthorizationStatusRemoved, _GKPushInviteInitiate, 
-                       _GKPushProtocolKey, _GKPushTokenKey, _GKQueryParamsBagKey, 
-                       _GKRTAllConnectionAttempt, _GKRTAllMatchSuccess, _GKRTAllMatchTotal, 
-                       _GKRTAutoMatchSuccess, _GKRTAutoMatchTotal, _GKRTConnectionSuccessP2P, 
-                       _GKRTConnectionSuccessRelay, _GKRTIndirectMatchSuccess, _GKRTIndirectMatchTotal, 
-                       _GKRTMessageBasedMatchSuccess, _GKRTMessageBasedMatchTotal, 
+                       _GKPlayerProfileSignOutButtonClicked, _GKPlayerProfileVisitFromOrigin, 
+                       _GKPlayerStatusKey, _GKPlayersToInviteNotification, _GKPredicatePrefix, 
+                       _GKPreferencesIdentifier, _GKPrimaryCredentialDidChangeNotification, 
+                       _GKPrivacySettingsAchievementsKey, _GKPrivacySettingsFriendsKey, 
+                       _GKPrivacySettingsGamesPlayedKey, _GKPrivacySettingsKey, _GKProgramaticInviteTime, 
+                       _GKPurpleBuddyIdentifier, _GKPushCommandKey, _GKPushDataKey, 
+                       _GKPushEnvironmentKey, _GKPushFriendsAuthorizationStatus, 
+                       _GKPushFriendsAuthorizationStatusAuthorized, _GKPushFriendsAuthorizationStatusDenied, 
+                       _GKPushFriendsAuthorizationStatusNotDetermined, _GKPushFriendsAuthorizationStatusRemoved, 
+                       _GKPushInviteInitiate, _GKPushProtocolKey, _GKPushTokenKey, 
+                       _GKQueryParamsBagKey, _GKRTAllConnectionAttempt, _GKRTAllMatchSuccess, 
+                       _GKRTAllMatchTotal, _GKRTAutoMatchSuccess, _GKRTAutoMatchTotal, 
+                       _GKRTConnectionSuccessP2P, _GKRTConnectionSuccessRelay, _GKRTIndirectMatchSuccess, 
+                       _GKRTIndirectMatchTotal, _GKRTMessageBasedMatchSuccess, _GKRTMessageBasedMatchTotal, 
                        _GKRTNearbyMatchSuccess, _GKRTNearbyMatchTotal, _GKRTPushBasedMatchSuccess, 
                        _GKRTPushBasedMatchTotal, _GKRealtimeMatchFromAPI, _GKRealtimeMatchFromGameCenterUI, 
                        _GKRealtimeMatchPersistenceTime, _GKReceiverTappedViewPlayerProfileButton, 
@@ -366,8 +367,8 @@ exports:
                        GKActivity, GKAnalyticsServiceInterface, GKAnalyticsServicePrivateInterface, 
                        GKAnonymousGuestPlayerInternal, GKAnonymousPlayerInternal, 
                        GKApplicationProxy, GKApplicationStateMonitor, GKApplicationWorkspace, 
-                       GKAuthenticateResponse, GKAutomatchPlayerInternal, GKBasePlayer, 
-                       GKBulletinServiceInterface, GKBulletinServicePrivateInterface, 
+                       GKAuthenticateCredential, GKAuthenticateResponse, GKAutomatchPlayerInternal, 
+                       GKBasePlayer, GKBulletinServiceInterface, GKBulletinServicePrivateInterface, 
                        GKCache, GKChallenge, GKChallengeEventHandler, GKChallengeInternal, 
                        GKChallengeServiceInterface, GKChallengeServicePrivateInterface, 
                        GKClientInterface, GKCloudPlayer, GKCompatibilityEntryInternal, 
@@ -393,7 +394,7 @@ exports:
                        GKMatch, GKMatchRequest, GKMatchRequestInternal, GKMatchResponse, 
                        GKMatchmaker, GKMessageInboxEntryInternal, GKMultiplayerGroupInternal, 
                        GKMultiplayerServiceInterface, GKMultiplayerServicePrivateInterface, 
-                       GKPlayer, GKPlayerCredential, GKPlayerCredentialController, 
+                       GKOperationQueue, GKPlayer, GKPlayerCredential, GKPlayerCredentialController, 
                        GKPlayerEmailInternal, GKPlayerInternal, GKPreferences, GKProfileServiceInterface, 
                        GKProfileServicePrivateInterface, GKReachability, GKRecentMatchInternal, 
                        GKRecoveryAttempter, GKRecurrenceRule, GKReporter, GKSavedGame, 
@@ -440,17 +441,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AB6E1C6A-2166-3ACC-8A5B-EFD68BFD81D8
+    value:           9F5CB750-7DAE-3A52-B67F-6FB50C5C2EFE
   - target:          x86_64-maccatalyst
-    value:           AB6E1C6A-2166-3ACC-8A5B-EFD68BFD81D8
+    value:           9F5CB750-7DAE-3A52-B67F-6FB50C5C2EFE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6FB9CE2D-C471-37DC-A564-FB26C8A436BA
+    value:           2F88EAA1-F002-328D-BE3F-B73585BFB4F0
   - target:          arm64e-maccatalyst
-    value:           6FB9CE2D-C471-37DC-A564-FB26C8A436BA
+    value:           2F88EAA1-F002-328D-BE3F-B73585BFB4F0
 install-name:    '/System/Library/PrivateFrameworks/GameCenterUICore.framework/Versions/A/GameCenterUICore'
 exports:
   - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
@@ -501,11 +502,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           493B840B-77DA-3EF1-9E38-52AF6D99CABC
+    value:           FB701EA4-ACC6-32C5-9878-DD96ADDFFA4E
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           36EB624E-9A3D-392E-9F5A-A4BE8121D0FA
+    value:           E8CFB9CC-61E9-393B-B3AC-8D6D9B8CC700
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/GameCenterUI.framework/Versions/A/GameCenterUI'
 swift-abi-version: 7
 exports:

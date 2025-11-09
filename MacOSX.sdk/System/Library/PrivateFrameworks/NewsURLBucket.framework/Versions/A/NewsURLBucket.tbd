@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CBD22E9B-15C0-38C6-8071-831D81FF758C
+    value:           B4734899-1B73-3941-821E-96BF473FEE62
   - target:          x86_64-maccatalyst
-    value:           CBD22E9B-15C0-38C6-8071-831D81FF758C
+    value:           B4734899-1B73-3941-821E-96BF473FEE62
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DC404B76-3450-35E4-BC75-E88EC3F54815
+    value:           0169FB76-F2A4-3412-94C6-129A4EF5F8C1
   - target:          arm64e-maccatalyst
-    value:           DC404B76-3450-35E4-BC75-E88EC3F54815
+    value:           0169FB76-F2A4-3412-94C6-129A4EF5F8C1
 install-name:    '/System/Library/PrivateFrameworks/NewsURLBucket.framework/Versions/A/NewsURLBucket'
 swift-abi-version: 7
 exports:
@@ -96,8 +96,8 @@ exports:
                        '_$s13NewsURLBucket9URLHasherCACycfc', '_$s13NewsURLBucket9URLHasherCMa', 
                        '_$s13NewsURLBucket9URLHasherCMm', '_$s13NewsURLBucket9URLHasherCMn', 
                        '_$s13NewsURLBucket9URLHasherCN', '_$s13NewsURLBucket9URLHasherCfD', 
-                       '_$s13NewsURLBucket9URLHasherCfd', _NewsURLBucketVersionNumber, 
-                       _NewsURLBucketVersionString ]
+                       '_$s13NewsURLBucket9URLHasherCfd', '_$sSo5NSURLC13NewsURLBucketE9nb_domainSo8NSStringCSgyF', 
+                       _NewsURLBucketVersionNumber, _NewsURLBucketVersionString ]
     objc-classes:    [ NBBloomFilterReader, NBHashBucketer, NBObjCBloomFilterReader, 
                        NBObjCHashBucketer, NBObjCURLCanonicalizer, NBObjCURLHasher, 
                        NBURLCanonicalizer, NBURLHasher ]

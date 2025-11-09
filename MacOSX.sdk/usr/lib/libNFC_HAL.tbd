@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6CEC35ED-E7E6-3A8D-AF27-73953326BC51
+    value:           7B724398-B6F5-3810-A011-373CEDDF2D33
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           542A9769-C209-31B1-8D76-BB65A04E634F
+    value:           BF0F6AEA-6711-3C5C-BAEF-E695287547DA
 install-name:    '/usr/lib/libNFC_HAL.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

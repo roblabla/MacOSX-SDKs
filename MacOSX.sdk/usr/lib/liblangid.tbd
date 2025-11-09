@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           ECC7E710-3446-348B-ACE4-E137265C49A7
+    value:           3D5F4EEB-1D79-33C1-B54E-3A21AB0C54A4
   - target:          x86_64-maccatalyst
-    value:           ECC7E710-3446-348B-ACE4-E137265C49A7
+    value:           3D5F4EEB-1D79-33C1-B54E-3A21AB0C54A4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C35E6442-4EEE-3D59-8412-9EF24251784F
+    value:           0E23C2BB-D054-30EE-9079-2580B57A58B7
   - target:          arm64e-maccatalyst
-    value:           C35E6442-4EEE-3D59-8412-9EF24251784F
+    value:           0E23C2BB-D054-30EE-9079-2580B57A58B7
 install-name:    '/usr/lib/liblangid.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

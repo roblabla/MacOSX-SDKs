@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5050A11D-7A75-3B48-833C-F1A64330DB4D
+    value:           AA5D980C-B849-3CB4-ADF6-DD737564190A
   - target:          x86_64-maccatalyst
-    value:           5050A11D-7A75-3B48-833C-F1A64330DB4D
+    value:           AA5D980C-B849-3CB4-ADF6-DD737564190A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           51B6EDD0-1FD7-3036-9A48-5C60EA00E307
+    value:           BF66A148-79E0-3AC9-B3A5-E222D83CD5F9
   - target:          arm64e-maccatalyst
-    value:           51B6EDD0-1FD7-3036-9A48-5C60EA00E307
+    value:           BF66A148-79E0-3AC9-B3A5-E222D83CD5F9
 install-name:    '/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -26,8 +26,8 @@ exports:
                        __ZTSNSt3__110__function6__baseIFvjPKcPvEEE, __ZTSNSt3__117bad_function_callE ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _AnalyticsIsEventUsed, _AnalyticsRolloverEvents, _AnalyticsSendEvent, 
-                       _AnalyticsSendEventLazy, _AnalyticsSendEventLazyHighPriority, 
+    symbols:         [ _AnalyticsIsEventUsed, _AnalyticsRolloverEvents, _AnalyticsRolloverWithOptions, 
+                       _AnalyticsSendEvent, _AnalyticsSendEventLazy, _AnalyticsSendEventLazyHighPriority, 
                        _AnalyticsSetCallbackForQueriedEvent, _AnalyticsSetCallbackForQueriedEventWithQueue, 
                        __Z19analytics_tool_dumpNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __Z19analytics_tool_saveNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
@@ -76,10 +76,11 @@ exports:
                        __ZTVN13CoreAnalytics21ConfigurationObserverE, _ad_addScalarForKey, 
                        _analytics_cancel_queried_awd_metric, _analytics_is_awd_metric_enabled, 
                        _analytics_is_event_used, _analytics_mark_awd_queriable, _analytics_rollover_events, 
-                       _analytics_send_awd_metric, _analytics_send_awd_trigger, _analytics_send_event, 
-                       _analytics_send_event_lazy, _analytics_send_event_lazy_high_priority, 
-                       _analytics_send_queried_awd_metric, _analytics_send_queried_awd_trigger, 
-                       _analytics_set_awd_query_callback, _analytics_set_callback_for_queried_event, 
-                       _analytics_set_callback_for_queried_event_with_queue, _report_locale_prefs_to_analyticsd ]
+                       _analytics_rollover_with_options, _analytics_send_awd_metric, 
+                       _analytics_send_awd_trigger, _analytics_send_event, _analytics_send_event_lazy, 
+                       _analytics_send_event_lazy_high_priority, _analytics_send_queried_awd_metric, 
+                       _analytics_send_queried_awd_trigger, _analytics_set_awd_query_callback, 
+                       _analytics_set_callback_for_queried_event, _analytics_set_callback_for_queried_event_with_queue, 
+                       _report_locale_prefs_to_analyticsd ]
     objc-classes:    [ AnalyticsConfigurationObserver, AnalyticsEventObserver ]
 ...

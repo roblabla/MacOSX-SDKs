@@ -99,7 +99,7 @@ CFN_EXPORT const SInt32 kCFStreamErrorDomainNetServices CF_AVAILABLE(10_2, 2_0);
 typedef CF_ENUM(int, CFNetServicesError) {
 
   /*
-   * An error of unknown type has occured.
+   * An error of unknown type has occurred.
    */
   kCFNetServicesErrorUnknown	= -72000L,
 
@@ -418,7 +418,7 @@ CFNetServiceBrowserGetTypeID(void) API_DEPRECATED("Use nw_browser_t or nw_listen
  *	  dot (e.g. "_ftp._tcp").  The application protocol name should
  *	  be 14 characters or less, and should only contain lower-case
  *	  letters, digits, and hyphens.  New service types should be
- *	  registered at <htp://www.dns-sd.org/ServiceTypes.html>.  This
+ *	  registered at <http://www.dns-sd.org/ServiceTypes.html>.  This
  *	  value must be non-NULL.
  *	
  *	name:
@@ -618,7 +618,7 @@ CFNetServiceRegisterWithOptions(CFNetServiceRef theService, CFOptionFlags option
  *	timeout:
  *	  CFTimeInterval representing the maximum amount of time to take
  *	  to perform the resolve.  If the resolve can not be performed
- *	  within this timeout, the function or callback will recieve a
+ *	  within this timeout, the function or callback will receive a
  *	  timeout error.  Values less than or equal to zero indicate an
  *	  infinite timeout.
  *	
@@ -867,7 +867,7 @@ CFNetServiceCreateDictionaryWithTXTData(CFAllocatorRef __nullable alloc, CFDataR
  *  
  *  Result:
  *	CFDataRef containing the flattened form of the keys and values. 
- *	If the dictionary could not be flattend, NULL will be returned.
+ *	If the dictionary could not be flattened, NULL will be returned.
  *  
  */
 CFN_EXPORT __nullable CFDataRef
@@ -1226,7 +1226,7 @@ CFNetServiceBrowserInvalidate(CFNetServiceBrowserRef browser) API_DEPRECATED("Us
  *	Starts a search for domains.  The browser will either try to find
  *	"Browse" domains or will search for "Registration" domains.  If
  *	there is already an outstanding search, it will return FALSE.  In
- *	syncronous mode, this call blocks until the search is stopped. 
+ *	synchronous mode, this call blocks until the search is stopped.
  *	It will return FALSE if there is an error performing the search.
  *	It will return TRUE otherwise.  In asynchronous mode, this call
  *	will return TRUE or FALSE depending if the underlying network
@@ -1266,7 +1266,7 @@ CFNetServiceBrowserSearchForDomains(CFNetServiceBrowserRef browser, Boolean regi
  *  Discussion:
  *	Starts a search for a service type on the given domain.  If there
  *	is already an outstanding search, it will return FALSE.  In
- *	syncronous mode, this call blocks until the search is stopped. 
+ *	synchronous mode, this call blocks until the search is stopped.
  *	It will return FALSE if there is an error performing the search
  *	or if there is some other error.  It will return TRUE otherwise.
  *	In asynchronous mode, this call will return TRUE or FALSE

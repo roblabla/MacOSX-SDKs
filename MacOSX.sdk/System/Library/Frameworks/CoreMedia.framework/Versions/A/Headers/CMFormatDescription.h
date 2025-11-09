@@ -640,6 +640,9 @@ enum
 
 	kCMVideoCodecType_AppleProResRAW   = 'aprn',
 	kCMVideoCodecType_AppleProResRAWHQ = 'aprh',
+
+	kCMVideoCodecType_DisparityHEVC    = 'dish', // encodes kCVPixelFormatType_DisparityFloat16 in 10-bit monochrome HEVC
+	kCMVideoCodecType_DepthHEVC        = 'deph', // encodes kCVPixelFormatType_DepthFloat16 in 10-bit monochrome HEVC
 } API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!

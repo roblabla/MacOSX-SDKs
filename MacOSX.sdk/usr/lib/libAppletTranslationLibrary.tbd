@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EDE70821-0E4E-3D44-8A0C-518DA465ABA9
+    value:           83FBFA2D-C033-38C1-9CEF-7A9AB5A35F4E
   - target:          x86_64-maccatalyst
-    value:           EDE70821-0E4E-3D44-8A0C-518DA465ABA9
+    value:           83FBFA2D-C033-38C1-9CEF-7A9AB5A35F4E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           98CFD81D-5453-3914-AD20-4ACFD2A29894
+    value:           BBA5AF3B-BFAB-3D37-9031-911F2BD19601
   - target:          arm64e-maccatalyst
-    value:           98CFD81D-5453-3914-AD20-4ACFD2A29894
+    value:           BBA5AF3B-BFAB-3D37-9031-911F2BD19601
 install-name:    '/usr/lib/libAppletTranslationLibrary.dylib'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     objc-classes:    [ AppletTranslator ]
 ...

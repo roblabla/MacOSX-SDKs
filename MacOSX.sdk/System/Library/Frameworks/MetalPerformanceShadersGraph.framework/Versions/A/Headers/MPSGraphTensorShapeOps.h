@@ -17,10 +17,40 @@ NS_ASSUME_NONNULL_BEGIN
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraph(MPSGraphTensorShapeOps)
 
+/*!
+ *  @abstract   Create Reshape op and return the result tensor
+ *  @discussion Reshape the input tensor to the target shape
+ *              The shape must be compatible with the input tensor shape
+ *              shape is allowed to contain dynamic dimensions (-1) when the result type can be inferred unambiguously
+ *
+ *  @param      tensor                  Tensor to be reshaped.
+ *  @param      shape                    The result tensor shape
+ *  @param      name                      The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
 -(MPSGraphTensor *) reshapeTensor:(MPSGraphTensor *) tensor
                         withShape:(MPSShape *) shape
                              name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( reshape(_:shape:name:) );
+
+/*!
+ *  @abstract   Create Reshape op and return the result tensor
+ *  @discussion Reshape the input tensor to the target shapeTensor
+ *              The shape must be compatible with the input tensor shape
+ *              shapeTensor is allowed to contain dynamic dimensions (-1) when the result type can be inferred unambiguously
+ *
+ *  @param      tensor                  Tensor to be reshaped.
+ *  @param      shapeTensor       1D Int32 or Int64 tensor. The result tensor shape
+ *  @param      name                      The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *) reshapeTensor:(MPSGraphTensor *) tensor
+                  withShapeTensor:(MPSGraphTensor *) shapeTensor
+                             name:(NSString * _Nullable) name
+MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
+MPS_SWIFT_NAME( reshape(_:shapeTensor:name:) );
 
 -(MPSGraphTensor *) transposeTensor:(MPSGraphTensor *) tensor
                           dimension:(NSUInteger) dimensionIndex
@@ -331,6 +361,71 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 MPS_SWIFT_NAME( flatten2D(_:axisTensor:name:) )
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
+/*!
+ *  @abstract   Create broadcast op and return the result tensor
+ *  @discussion Broadcast values inside the tensor, starting from the trailing dimensions, to give it the correct shape.
+ *              This is equivalent to the broadcasting for arithmetic operations when operands have different shapes.
+ *
+ *  @param      tensor        Tensor to be broadcasted
+ *  @param      shape          Shape of the result tensor
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+
+-(MPSGraphTensor *) broadcastTensor:(MPSGraphTensor *) tensor
+                            toShape:(MPSShape *) shape
+                               name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( broadcast(_:shape:name:) )
+MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
+/*!
+ *  @abstract   Create broadcast op and return the result tensor
+ *  @discussion Broadcast values inside the tensor, starting from the trailing dimensions, to give it the correct shape.
+ *              This is equivalent to the broadcasting for arithmetic operations when operands have different shapes.
+ *
+ *  @param      tensor                Tensor to be broadcasted
+ *  @param      shapeTensor     1D Int32 or Int64 tensor. Shape of the result tensor
+ *  @param      name                     The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+
+-(MPSGraphTensor *) broadcastTensor:(MPSGraphTensor *) tensor
+                      toShapeTensor:(MPSGraphTensor *) shapeTensor
+                               name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( broadcast(_:shapeTensor:name:) )
+MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
+/*!
+ *  @abstract   Create shapeof op and return the result tensor
+ *  @discussion Returns a 1D Int32 tensor with value the static shape of the input tensor
+ *
+ *  @param      tensor        Input tensor
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+
+-(MPSGraphTensor *) shapeOfTensor:(MPSGraphTensor *) tensor
+                             name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( shapeOf(_:name:) )
+MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
+/*!
+ *  @abstract   Create cast op and return the result tensor
+ *  @discussion Returns input tensor casted to the dataType passed in
+ *
+ *  @param      tensor        Input tensor
+ *  @param      type        Input tensor
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *)castTensor:(MPSGraphTensor *)tensor
+                       toType:(MPSDataType)type
+                         name:(NSString *)name
+MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
 @end
 

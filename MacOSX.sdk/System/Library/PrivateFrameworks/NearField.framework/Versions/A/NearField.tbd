@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5B2B09B1-45A6-33F4-BAE2-9A31C63653FF
+    value:           BB7B4B0F-4D67-390A-B41E-430CBEBD63B3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9DB90151-B088-39E2-B56F-F5251F8C5BD5
+    value:           062D294A-F483-3FC4-B3A0-D6969E1A3643
 install-name:    '/System/Library/PrivateFrameworks/NearField.framework/Versions/A/NearField'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

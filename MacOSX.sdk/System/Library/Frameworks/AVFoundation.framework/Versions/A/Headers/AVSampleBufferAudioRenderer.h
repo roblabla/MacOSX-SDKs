@@ -141,6 +141,14 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  */
 AVF_EXPORT NSNotificationName const AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
+/*!
+	@constant		AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification
+	@abstract		A notification that indicates the hardware configuration does not match the enqueued data format.
+	@discussion
+		The output configuration of the playback hardware might change during the playback session if other clients play content with different format. In such cases, if the media content format does not match the hardware configuration it would produce suboptimal rendering of the enqueued media data. When the framework detects such mismatch it will issue this notification, so the client can flush the renderer and re-enqueue the sample buffers from the current media playhead, which will configure the hardware based on the format of newly enqueued sample buffers.
+ */
+AVF_EXPORT NSNotificationName const AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
 	/*!
 		@constant		AVSampleBufferAudioRendererFlushTimeKey
 		@abstract		The presentation timestamp of the first enqueued sample that was flushed.

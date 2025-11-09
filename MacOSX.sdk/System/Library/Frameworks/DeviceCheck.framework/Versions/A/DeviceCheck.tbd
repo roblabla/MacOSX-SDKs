@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D109184B-5D65-3F06-91F1-5B3F853F092E
+    value:           9195FF1C-8464-3CA3-9A16-D21C59FEA29F
   - target:          x86_64-maccatalyst
-    value:           D109184B-5D65-3F06-91F1-5B3F853F092E
+    value:           9195FF1C-8464-3CA3-9A16-D21C59FEA29F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B097ECA2-8FFC-39D1-836B-1E338F4BF7B4
+    value:           10EE5643-E1E2-3B5A-8C11-17A8C7E07322
   - target:          arm64e-maccatalyst
-    value:           B097ECA2-8FFC-39D1-836B-1E338F4BF7B4
+    value:           10EE5643-E1E2-3B5A-8C11-17A8C7E07322
 install-name:    '/System/Library/Frameworks/DeviceCheck.framework/Versions/A/DeviceCheck'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _DCErrorDomain, __DCAALogSystem, __DCLogSystem ]
+    symbols:         [ _DCErrorDomain ]
     objc-classes:    [ DCAppAttestService, DCContext, DCDevice, DCDeviceMetadataDaemonConnection, 
                        DCDeviceMetadataInterface ]
 ...

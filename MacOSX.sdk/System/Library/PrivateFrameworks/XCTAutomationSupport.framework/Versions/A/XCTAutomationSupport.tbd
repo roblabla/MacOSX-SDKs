@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6210A2B8-F972-3FB3-9850-7ABE68E68E1E
+    value:           E5BFA874-7A6D-3AB2-A1D7-82D7C938DD30
   - target:          x86_64-maccatalyst
-    value:           6210A2B8-F972-3FB3-9850-7ABE68E68E1E
+    value:           E5BFA874-7A6D-3AB2-A1D7-82D7C938DD30
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9379A80C-496E-3817-98E0-3B3C10548BA6
+    value:           0FF71616-722E-3F91-9E2E-23E45A967F41
   - target:          arm64e-maccatalyst
-    value:           9379A80C-496E-3817-98E0-3B3C10548BA6
+    value:           0FF71616-722E-3F91-9E2E-23E45A967F41
 install-name:    '/System/Library/PrivateFrameworks/XCTAutomationSupport.framework/Versions/A/XCTAutomationSupport'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -32,14 +32,14 @@ exports:
                        _XCElementSnapshotAttributeLabel, _XCElementSnapshotAttributePlaceholderValue, 
                        _XCElementSnapshotAttributeSelected, _XCElementSnapshotAttributeTitle, 
                        _XCElementSnapshotAttributeValue, _XCElementSnapshotAttributeVerticalSizeClass, 
-                       _XCElementSnapshotPrivilegedValuePlaceholder, _XCGetWrappedAXUIElementFromNotificationPayload, 
-                       _XCNSArrayFromAXValue, _XCNSObjectFromAXValue, _XCNSStringFromAXValue, 
-                       _XCSafeAttributeValue, _XCStringFromRect, _XCTASDebugLogger, 
-                       _XCTASDefaultLog, _XCTASDispatchAssertQueue, _XCTASDispatchAssertQueueNot, 
-                       _XCTASSetDebugLogger, _XCTAccessibilityErrorKey, _XCTAccessibilityFrameworkAssertThreadRequirement, 
-                       _XCTAutomationSupportErrorDomain, _XCTCapabilityAcceptRemoteConnection, 
-                       _XCTCapabilityBannerNotificationIsStickyAttribute, _XCTCapabilityElementIndexingTransformer, 
-                       _XCTCapabilityElementIndexingTransformer_VersionWithCorrectOrdering, 
+                       _XCElementSnapshotAttributeWindowContextID, _XCElementSnapshotPrivilegedValuePlaceholder, 
+                       _XCGetWrappedAXUIElementFromNotificationPayload, _XCNSArrayFromAXValue, 
+                       _XCNSObjectFromAXValue, _XCNSStringFromAXValue, _XCSafeAttributeValue, 
+                       _XCStringFromRect, _XCTASDebugLogger, _XCTASDefaultLog, _XCTASDispatchAssertQueue, 
+                       _XCTASDispatchAssertQueueNot, _XCTASSetDebugLogger, _XCTAccessibilityErrorKey, 
+                       _XCTAccessibilityFrameworkAssertThreadRequirement, _XCTAutomationSupportErrorDomain, 
+                       _XCTCapabilityAcceptRemoteConnection, _XCTCapabilityBannerNotificationIsStickyAttribute, 
+                       _XCTCapabilityElementIndexingTransformer, _XCTCapabilityElementIndexingTransformer_VersionWithCorrectOrdering, 
                        _XCTCapabilityElementIndexingTransformer_VersionWithCorrectOrderingForFirstMatch, 
                        _XCTCapabilityElementIndexingTransformer_VersionWithRelatedElements, 
                        _XCTCapabilityEvaluateQuery, _XCTCapabilityFetchAXAttributes, 
@@ -50,12 +50,14 @@ exports:
                        _XCTDefaultIdentifierFromSubrole, _XCTElementTypeFromAXAutomationType, 
                        _XCTElementTypeFromClassAndTraits, _XCTElementTypeFromRole, 
                        _XCTInvalidExpressionsKey, _XCTMakeSubcapability, _XCTPerformOnMainRunLoop, 
-                       _XCTProtectedResourceBluetoothIdentifier, _XCTProtectedResourceCalendarIdentifier, 
-                       _XCTProtectedResourceCameraIdentifier, _XCTProtectedResourceContactsIdentifier, 
+                       _XCTProtectedResourceAppleEventsIdentifier, _XCTProtectedResourceBluetoothIdentifier, 
+                       _XCTProtectedResourceCalendarIdentifier, _XCTProtectedResourceCameraIdentifier, 
+                       _XCTProtectedResourceContactsIdentifier, _XCTProtectedResourceFocusIdentifier, 
                        _XCTProtectedResourceHealthIdentifier, _XCTProtectedResourceHomeKitIdentifier, 
                        _XCTProtectedResourceKeyboardNetworkIdentifier, _XCTProtectedResourceLocationIdentifier, 
                        _XCTProtectedResourceMediaLibraryIdentifier, _XCTProtectedResourceMicrophoneIdentifier, 
-                       _XCTProtectedResourcePhotosIdentifier, _XCTProtectedResourceRemindersIdentifier, 
+                       _XCTProtectedResourceNetworkVolumesIdentifier, _XCTProtectedResourcePhotosIdentifier, 
+                       _XCTProtectedResourceRemindersIdentifier, _XCTProtectedResourceRemovableVolumesIdentifier, 
                        _XCTProtectedResourceSystemRootDirectoryIdentifier, _XCTProtectedResourceUserDesktopDirectoryIdentifier, 
                        _XCTProtectedResourceUserDocumentsDirectoryIdentifier, _XCTProtectedResourceUserDownloadsDirectoryIdentifier, 
                        _XCTProtectedResourceUserTrackingIdentifier, _XCTRuntimeIssueClasses, 
@@ -124,5 +126,5 @@ exports:
                        XCTMainRunLoopIdleNotifier, XCTMatchingElementIterator, XCTRuntimeIssueContext, 
                        XCTScreenshotRequest, XCTSerializedTransportWrapper2, XCTSignpostEvent, 
                        XCTSignpostInterval, XCTSpindumpRequestSpecification, XCTTimeoutControls, 
-                       XCUIElementSnapshotRequestResult ]
+                       XCUIElementSnapshotRequestResult, XCUIPoint, XCUIRect ]
 ...

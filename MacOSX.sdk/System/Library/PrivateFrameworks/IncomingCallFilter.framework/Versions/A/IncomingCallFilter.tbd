@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B643B072-C604-30AA-98AB-DD94C70B753D
+    value:           8F9ACED9-5100-36FA-9697-06B59C0D90BB
   - target:          x86_64-maccatalyst
-    value:           B643B072-C604-30AA-98AB-DD94C70B753D
+    value:           8F9ACED9-5100-36FA-9697-06B59C0D90BB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DFD17E05-3C21-3251-90E9-3A52CF883058
+    value:           21936D63-5766-3C2A-B927-1818C11C17A4
   - target:          arm64e-maccatalyst
-    value:           DFD17E05-3C21-3251-90E9-3A52CF883058
+    value:           21936D63-5766-3C2A-B927-1818C11C17A4
 install-name:    '/System/Library/PrivateFrameworks/IncomingCallFilter.framework/Versions/A/IncomingCallFilter'
 current-version: 800
 exports:

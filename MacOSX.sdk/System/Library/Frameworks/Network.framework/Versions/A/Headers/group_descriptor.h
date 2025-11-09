@@ -33,6 +33,26 @@ NW_OBJECT_DECL(nw_group_descriptor);
 #endif // NW_GROUP_DESCRIPTOR_IMPL
 
 /*!
+ * @function nw_group_descriptor_create_multiplex
+ *
+ * @abstract
+ *		Creates a new group descriptor object based on an endpoint
+ *		to which communication will be established using a multiplexing protocol,
+ *		represented as an nw_endpoint containing the remote endpoint
+ *		to use for communication.
+ *
+ * @param remote_endpoint
+ *		An endpoint that can be used for communication over a multiplexing protocol.
+ *
+ * @result
+ *		An instantiated group descriptor object or nil if the specified
+ *		endpoint is not valid.
+ */
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0))
+NW_RETURNS_RETAINED nw_group_descriptor_t
+nw_group_descriptor_create_multiplex(nw_endpoint_t remote_endpoint);
+
+/*!
  * @function nw_group_descriptor_create_multicast
  *
  * @abstract

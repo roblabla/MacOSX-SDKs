@@ -56,6 +56,13 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @property (readonly, copy) NSString *localizedName API_AVAILABLE(macos(10.15));
 
+/* Indicates the obscured distance from each edge of the screen */
+@property (readonly) NSEdgeInsets safeAreaInsets API_AVAILABLE(macos(12.0));
+
+/* The following two rects are at the top of the screen, outside the rectangle defined by safeAreaInsets, but also unobscured.  These rects are empty if there are no additional unobscured areas */
+@property (readonly) NSRect auxiliaryTopLeftArea API_AVAILABLE(macos(12.0));
+@property (readonly) NSRect auxiliaryTopRightArea API_AVAILABLE(macos(12.0));
+
 @end
 
 

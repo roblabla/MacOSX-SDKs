@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
-// swift-module-flags: -target arm64e-apple-ios15.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAccelerate -swift-version 5 -enforce-exclusivity=checked -O -module-name Accelerate
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-module-flags: -target arm64e-apple-ios15.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAccelerate -swift-version 5 -enforce-exclusivity=checked -O -module-name Accelerate
 @_exported import Accelerate
 @_exported import Accelerate.vecLib.BNNS
 import Swift
@@ -2308,6 +2308,84 @@ extension Accelerate.vDSP {
     }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+public protocol vDSP_DiscreteFourierTransformable {
+  associatedtype DiscreteFourierTransformFunctions : Accelerate.vDSP_DiscreteTransformLifecycleFunctions
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+public protocol vDSP_DiscreteTransformLifecycleFunctions {
+  static func makeDiscreteFourierTransform(previous: Swift.OpaquePointer?, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) throws -> Swift.OpaquePointer
+  static func destroySetup(_ setup: Swift.OpaquePointer)
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Swift.Float : Accelerate.vDSP_DiscreteFourierTransformable {
+  public typealias DiscreteFourierTransformFunctions = Accelerate.vDSP.DFTSinglePrecisionSplitComplexFunctions
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Swift.Double : Accelerate.vDSP_DiscreteFourierTransformable {
+  public typealias DiscreteFourierTransformFunctions = Accelerate.vDSP.DFTDoublePrecisionSplitComplexFunctions
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.DSPComplex : Accelerate.vDSP_DiscreteFourierTransformable {
+  public typealias DiscreteFourierTransformFunctions = Accelerate.vDSP.DFTSinglePrecisionInterleavedFunctions
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.DSPDoubleComplex : Accelerate.vDSP_DiscreteFourierTransformable {
+  public typealias DiscreteFourierTransformFunctions = Accelerate.vDSP.DFTDoublePrecisionInterleavedFunctions
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.vDSP {
+  public struct DFTSinglePrecisionSplitComplexFunctions : Accelerate.vDSP_DiscreteTransformLifecycleFunctions {
+    public static func makeDiscreteFourierTransform(previous: Swift.OpaquePointer? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) throws -> Swift.OpaquePointer
+    public static func destroySetup(_ setup: Swift.OpaquePointer)
+  }
+  public struct DFTDoublePrecisionSplitComplexFunctions : Accelerate.vDSP_DiscreteTransformLifecycleFunctions {
+    public static func makeDiscreteFourierTransform(previous: Swift.OpaquePointer? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) throws -> Swift.OpaquePointer
+    public static func destroySetup(_ setup: Swift.OpaquePointer)
+  }
+  public struct DFTSinglePrecisionInterleavedFunctions : Accelerate.vDSP_DiscreteTransformLifecycleFunctions {
+    public static func makeDiscreteFourierTransform(previous: Swift.OpaquePointer? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) throws -> Swift.OpaquePointer
+    public static func destroySetup(_ setup: Swift.OpaquePointer)
+  }
+  public struct DFTDoublePrecisionInterleavedFunctions : Accelerate.vDSP_DiscreteTransformLifecycleFunctions {
+    public static func makeDiscreteFourierTransform(previous: Swift.OpaquePointer? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) throws -> Swift.OpaquePointer
+    public static func destroySetup(_ setup: Swift.OpaquePointer)
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.vDSP {
+  public enum DFTError : Swift.Error {
+    case invalidSplitComplexCount(count: Swift.Int, transformType: Accelerate.vDSP.DFTTransformType)
+    case invalidInterleavedCount(count: Swift.Int)
+    public var errorDescription: Swift.String? {
+      get
+    }
+  }
+  public class DiscreteFourierTransform<T> where T : Accelerate.vDSP_DiscreteFourierTransformable {
+    public init(previous: Accelerate.vDSP.DiscreteFourierTransform<Swift.Float>? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType, ofType: T.Type) throws
+    @objc deinit
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.vDSP.DiscreteFourierTransform where T == Swift.Float {
+  public func transform<U>(real: U, imaginary: U) -> (real: [Swift.Float], imaginary: [Swift.Float]) where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float
+  public func transform<U, V>(inputReal: U, inputImaginary: U, outputReal: inout V, outputImaginary: inout V) where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == Swift.Float, V.Element == Swift.Float
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.vDSP.DiscreteFourierTransform where T == Swift.Double {
+  public func transform<U>(real: U, imaginary: U) -> (real: [Swift.Double], imaginary: [Swift.Double]) where U : Accelerate.AccelerateBuffer, U.Element == Swift.Double
+  public func transform<U, V>(inputReal: U, inputImaginary: U, outputReal: inout V, outputImaginary: inout V) where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == Swift.Double, V.Element == Swift.Double
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.vDSP.DiscreteFourierTransform where T == Accelerate.DSPComplex {
+  public func transform<U>(input: U) -> [Accelerate.DSPComplex] where U : Accelerate.AccelerateBuffer, U.Element == Accelerate.DSPComplex
+  public func transform<U, V>(input: U, output: inout V) where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == Accelerate.DSPComplex, V.Element == Accelerate.DSPComplex
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.vDSP.DiscreteFourierTransform where T == Accelerate.DSPDoubleComplex {
+  public func transform<U>(input: U) -> [Accelerate.DSPDoubleComplex] where U : Accelerate.AccelerateBuffer, U.Element == Accelerate.DSPDoubleComplex
+  public func transform<U, V>(input: U, output: inout V) where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == Accelerate.DSPDoubleComplex, V.Element == Accelerate.DSPDoubleComplex
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Accelerate.BNNS {
   public enum ArithmeticTernaryFunction {
     case multiplyAdd
@@ -2656,6 +2734,11 @@ extension Accelerate.vDSP {
       get
     }
   }
+  @available(macOS, deprecated, introduced: 10.15, message: "Use `vDSP.DiscreteFourierTransform`.")
+  @available(iOS, deprecated, introduced: 13.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+  @available(watchOS, deprecated, introduced: 6.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+  @available(tvOS, deprecated, introduced: 13.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+  @available(*, deprecated, message: "Use `vDSP.DiscreteFourierTransform`.")
   public class DFT<T> where T : Accelerate.vDSP_FloatingPointDiscreteFourierTransformable {
     public init?(previous: Accelerate.vDSP.DFT<T>? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType, ofType: T.Type)
     public func transform<U>(inputReal: U, inputImaginary: U) -> (real: [T], imaginary: [T]) where T == U.Element, U : Accelerate.AccelerateBuffer
@@ -2664,18 +2747,38 @@ extension Accelerate.vDSP {
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@available(macOS, deprecated, introduced: 10.15, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(iOS, deprecated, introduced: 13.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(watchOS, deprecated, introduced: 6.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(tvOS, deprecated, introduced: 13.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(*, deprecated, message: "Use `vDSP.DiscreteFourierTransform`.")
 public protocol vDSP_FloatingPointDiscreteFourierTransformable : Swift.BinaryFloatingPoint {
   associatedtype DFTFunctions : Accelerate.vDSP_DFTFunctions where Self == Self.DFTFunctions.Scalar
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@available(macOS, deprecated, introduced: 10.15, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(iOS, deprecated, introduced: 13.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(watchOS, deprecated, introduced: 6.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(tvOS, deprecated, introduced: 13.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(*, deprecated, message: "Use `vDSP.DiscreteFourierTransform`.")
 extension Swift.Float : Accelerate.vDSP_FloatingPointDiscreteFourierTransformable {
   public typealias DFTFunctions = Accelerate.vDSP.VectorizableFloat
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@available(macOS, deprecated, introduced: 10.15, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(iOS, deprecated, introduced: 13.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(watchOS, deprecated, introduced: 6.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(tvOS, deprecated, introduced: 13.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(*, deprecated, message: "Use `vDSP.DiscreteFourierTransform`.")
 extension Swift.Double : Accelerate.vDSP_FloatingPointDiscreteFourierTransformable {
   public typealias DFTFunctions = Accelerate.vDSP.VectorizableDouble
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@available(macOS, deprecated, introduced: 10.15, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(iOS, deprecated, introduced: 13.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(watchOS, deprecated, introduced: 6.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(tvOS, deprecated, introduced: 13.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(*, deprecated, message: "Use `vDSP.DiscreteFourierTransform`.")
 public protocol vDSP_DFTFunctions {
   associatedtype Scalar
   static func makeDFTSetup<T>(previous: Accelerate.vDSP.DFT<T>?, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) -> Swift.OpaquePointer? where T : Accelerate.vDSP_FloatingPointDiscreteFourierTransformable
@@ -2683,12 +2786,22 @@ public protocol vDSP_DFTFunctions {
   static func destroySetup(_ setup: Swift.OpaquePointer)
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@available(macOS, deprecated, introduced: 10.15, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(iOS, deprecated, introduced: 13.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(watchOS, deprecated, introduced: 6.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(tvOS, deprecated, introduced: 13.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(*, deprecated, message: "Use `vDSP.DiscreteFourierTransform`.")
 extension Accelerate.vDSP.VectorizableFloat : Accelerate.vDSP_DFTFunctions {
   public static func makeDFTSetup<T>(previous: Accelerate.vDSP.DFT<T>? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) -> Swift.OpaquePointer? where T : Accelerate.vDSP_FloatingPointDiscreteFourierTransformable
   public static func transform<U, V>(dftSetup: Swift.OpaquePointer, inputReal: U, inputImaginary: U, outputReal: inout V, outputImaginary: inout V) where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == Swift.Float, V.Element == Swift.Float
   public static func destroySetup(_ setup: Swift.OpaquePointer)
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@available(macOS, deprecated, introduced: 10.15, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(iOS, deprecated, introduced: 13.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(watchOS, deprecated, introduced: 6.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(tvOS, deprecated, introduced: 13.0, message: "Use `vDSP.DiscreteFourierTransform`.")
+@available(*, deprecated, message: "Use `vDSP.DiscreteFourierTransform`.")
 extension Accelerate.vDSP.VectorizableDouble : Accelerate.vDSP_DFTFunctions {
   public static func makeDFTSetup<T>(previous: Accelerate.vDSP.DFT<T>? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) -> Swift.OpaquePointer? where T : Accelerate.vDSP_FloatingPointDiscreteFourierTransformable
   public static func transform<U, V>(dftSetup: Swift.OpaquePointer, inputReal: U, inputImaginary: U, outputReal: inout V, outputImaginary: inout V) where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == Swift.Double, V.Element == Swift.Double
@@ -9847,11 +9960,8 @@ extension Accelerate.BNNS {
   public static func clip(to bounds: Swift.ClosedRange<Swift.Float>, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor) throws
   public static func clipByNorm(threshold: Swift.Float, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, axes: [Swift.Int]? = nil) throws
 }
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Accelerate.BNNS.Norm : Swift.Sendable {}
-#endif
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension Accelerate.BNNS.DataLayout : Swift.Equatable {}
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
@@ -9868,11 +9978,8 @@ extension Accelerate.BNNS.ConvolutionType : Swift.Hashable {}
 extension Accelerate.BNNS.LearningPhase : Swift.Equatable {}
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension Accelerate.BNNS.LearningPhase : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension Accelerate.BNNS.LearningPhase : Swift.Sendable {}
-#endif
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vDSP.RoundingMode : Swift.Equatable {}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
@@ -9907,11 +10014,8 @@ extension Accelerate.vImage.Error : Swift.Equatable {}
 extension Accelerate.vImage.Error : Swift.Hashable {}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vImage.Error : Swift.RawRepresentable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension Accelerate.BNNS.RelationalOperator : Swift.Sendable {}
-#endif
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension Accelerate.BNNS.DescriptorType : Swift.Equatable {}
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)

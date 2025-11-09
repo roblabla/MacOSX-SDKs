@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           719BD71E-4171-36E4-826D-83C98E72A091
+    value:           78068919-E25B-338B-97DA-B98618776D27
   - target:          x86_64-maccatalyst
-    value:           719BD71E-4171-36E4-826D-83C98E72A091
+    value:           78068919-E25B-338B-97DA-B98618776D27
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2844C72A-4E8C-3C5B-B304-A5A2AE82F791
+    value:           546FDDC6-0A64-3092-A32A-4BBE76C6E95C
   - target:          arm64e-maccatalyst
-    value:           2844C72A-4E8C-3C5B-B304-A5A2AE82F791
+    value:           546FDDC6-0A64-3092-A32A-4BBE76C6E95C
 install-name:    '/System/Library/PrivateFrameworks/PrototypeTools.framework/Versions/A/PrototypeTools'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -33,12 +33,13 @@ exports:
                        _PTValidateDictionary, _PTValidateSet ]
     objc-classes:    [ PTButtonRow, PTChoiceRow, PTDefaults, PTDomain, PTDomainInfo, 
                        PTDomainServer, PTDoubleTestRecipe, PTDrillDownRow, PTEditFloatRow, 
-                       PTEditStringRow, PTModule, PTOutlet, PTPointSettings, PTProxySettings, 
-                       PTProxySettingsDefinition, PTRestoreDefaultSettingsRowAction, 
-                       PTRow, PTRowAction, PTSButtonRow, PTSChoiceRow, PTSDrillDownRow, 
-                       PTSEditFloatRow, PTSEditStringRow, PTSModule, PTSRestoreDefaultSettingsRowAction, 
-                       PTSRow, PTSRowAction, PTSSection, PTSSliderRow, PTSSwitchRow, 
-                       PTSection, PTSettings, PTSettingsClassStructure, PTSingleTestRecipe, 
-                       PTSizeSettings, PTSliderRow, PTSwitchRow, PTTestRecipe, PTTestRecipeInfo, 
+                       PTEditStringRow, PTFrameRateRangeSettings, PTModule, PTOutlet, 
+                       PTPointSettings, PTProxySettings, PTProxySettingsDefinition, 
+                       PTRestoreDefaultSettingsRowAction, PTRow, PTRowAction, PTSButtonRow, 
+                       PTSChoiceRow, PTSDrillDownRow, PTSEditFloatRow, PTSEditStringRow, 
+                       PTSModule, PTSRestoreDefaultSettingsRowAction, PTSRow, PTSRowAction, 
+                       PTSSection, PTSSliderRow, PTSSwitchRow, PTSection, PTSettings, 
+                       PTSettingsClassStructure, PTSingleTestRecipe, PTSizeSettings, 
+                       PTSliderRow, PTSwitchRow, PTTestRecipe, PTTestRecipeInfo, 
                        PTToggleTestRecipe ]
 ...

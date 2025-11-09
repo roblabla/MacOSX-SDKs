@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2BA9584C-4A91-34A5-BC59-1809F6DF2707
+    value:           59EF3A7A-4BA8-36EB-BE77-7FF0FDDC94CA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BF579E99-A7AA-30A4-9C93-CC35B36D8361
+    value:           32915003-422B-349C-8771-195BBA0E99C0
 install-name:    '/System/Library/PrivateFrameworks/WebContentAnalysis.framework/Versions/A/WebContentAnalysis'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

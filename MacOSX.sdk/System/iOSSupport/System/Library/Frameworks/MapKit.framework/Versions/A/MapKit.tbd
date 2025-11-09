@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           5E76408B-7C9F-3471-B4B7-7CA81B5D435B
+    value:           ECD43529-0E28-31D7-82B4-61F914E76E4B
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           3F71FC11-6EA7-32F0-8DB5-71B692FA20D2
+    value:           F4155FE6-BAE5-3B09-8DDD-CDFE08A1E25A
 install-name:    '/System/iOSSupport/System/Library/Frameworks/MapKit.framework/Versions/A/MapKit'
 current-version: 14
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _CLLocationCoordinatesFromNSData, _DetailTextsForAdvisoryItem, 
                        _DidDisplayBrowseCategories, _DidFailDisplayBrowseCategories, 
                        _HTMLBodyWrapperStringWithFormat, _HTMLStringForAnnotatedSnapshotImageWithMapItems, 
@@ -172,12 +172,13 @@ exports:
                        _MapKitConfig_MinimumMapViewSizeToShowAppleLogoHeight, _MapKitConfig_MinimumMapViewSizeToShowControlsHeight, 
                        _MapKitConfig_MinimumMapViewSizeToShowControlsWidth, _MapKitConfig_MinimumSnapshotSizeToShowAppleLogoHeight, 
                        _MapKitConfig_MinimumSnapshotSizeToShowAppleLogoWidth, _MapKitConfig_NewPuckEnabled, 
-                       _MapKitConfig_PlaceCardCustomLayout, _MapKitConfig_PlaceCardShouldHideMuninForParsec, 
-                       _MapKitConfig_PlaceCardShouldShowPhotoGalleryInParsec, _MapKitConfig_PlaceCardShouldShowPhotoGalleryInSiri, 
-                       _MapKitConfig_PlaceLayoutDebugEnabled, _MapKitConfig_PlaceLayoutLogEnabled, 
-                       _MapKitConfig_PlaceShowGEOID, _MapKitConfig_RAPForceOverrideServerConfig, 
-                       _MapKitConfig_RAPForceShowSuggestAnEditButton, _MapKitConfig_ReportAProblemIsDisabled, 
-                       _MapKitConfig_RideBookingExtensionsAppBundleIdentifiers, _MapKitConfig_RideBookingShouldAutomaticallyEnableExtensions, 
+                       _MapKitConfig_PhotoAttributionProviderNameForApple, _MapKitConfig_PlaceCardCustomLayout, 
+                       _MapKitConfig_PlaceCardShouldHideMuninForParsec, _MapKitConfig_PlaceCardShouldShowPhotoGalleryInParsec, 
+                       _MapKitConfig_PlaceCardShouldShowPhotoGalleryInSiri, _MapKitConfig_PlaceLayoutDebugEnabled, 
+                       _MapKitConfig_PlaceLayoutLogEnabled, _MapKitConfig_PlaceShowGEOID, 
+                       _MapKitConfig_RAPForceOverrideServerConfig, _MapKitConfig_RAPForceShowSuggestAnEditButton, 
+                       _MapKitConfig_ReportAProblemIsDisabled, _MapKitConfig_RideBookingExtensionsAppBundleIdentifiers, 
+                       _MapKitConfig_RideBookingShouldAutomaticallyEnableExtensions, 
                        _MapKitConfig_SearchCompleteReplaceInterval, _MapKitConfig_SearchCompleteRequestInterval, 
                        _MapKitConfig_SearchCompleteRequestIntervalCellular, _MapKitConfig_SnapshotServiceEnabled, 
                        _MapKitConfig_SnapshotServiceMaxPixels, _MapKitConfig_SnapshotServicePerProcessSerializationEnabled, 
@@ -286,11 +287,13 @@ exports:
                        MKStandardCalloutView, MKStarRatingAndLabelView, MKStarRatingView, 
                        MKSystemController, MKTableViewCell, MKTileOverlay, MKTileOverlayRenderer, 
                        MKTrafficSupport, MKTransitArtwork, MKTransitArtworkManager, 
-                       MKTransitAttributionViewController, MKTransitDeparturesCell, 
+                       MKTransitAttributionViewController, MKTransitDepartureContainerHeaderCell, 
+                       MKTransitDepartureContainerHeaderViewModel, MKTransitDeparturesCell, 
                        MKTransitDeparturesDataSource, MKTransitDeparturesViewController, 
-                       MKTransitIcon, MKTransitIncidentStringProvider, MKTransitInfoLabelView, 
-                       MKTransitInfoPreloader, MKTransitItemIncidentCell, MKTransitItemIncidentView, 
-                       MKTransitItemIncidentsController, MKTransitItemReferenceDateUpdater, 
+                       MKTransitIcon, MKTransitIncidentStringProvider, MKTransitIncidentSymbolImageCell, 
+                       MKTransitIncidentViewModel, MKTransitInfoLabelView, MKTransitInfoPreloader, 
+                       MKTransitItemIncidentCell, MKTransitItemIncidentView, MKTransitItemIncidentsController, 
+                       MKTransitItemReferenceDateUpdater, MKTransitLineIncidentsViewController, 
                        MKTransitLineItemViewController, MKTransitMapItemUpdater, 
                        MKTransitShield, MKTransitText, MKUGCCallToActionViewAppearance, 
                        MKURLContext, MKURLParser, MKURLSerializer, MKUserLocation, 

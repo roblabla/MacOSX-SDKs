@@ -595,7 +595,7 @@ nw_quic_get_local_max_streams_unidirectional(nw_protocol_metadata_t metadata);
  * @function nw_quic_set_local_max_streams_unidirectional
  *
  * @abstract
- *		Sets the maximum number of undirectional streams that the peer can create.
+ *		Sets the maximum number of unidirectional streams that the peer can create.
  *
  * @param metadata
  *		A nw_protocol_metadata_t for QUIC.

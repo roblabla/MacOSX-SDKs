@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AB838FED-95DB-34EC-A5AB-B1BFD58F76DC
+    value:           31482DA3-73F0-3A0B-87ED-6BAE9D40F1AC
   - target:          x86_64-maccatalyst
-    value:           AB838FED-95DB-34EC-A5AB-B1BFD58F76DC
+    value:           31482DA3-73F0-3A0B-87ED-6BAE9D40F1AC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2FEDC451-B0F9-3B4E-BB5D-469748CAF20A
+    value:           978829C1-99DC-3B1A-BC23-876F03BC2C53
   - target:          arm64e-maccatalyst
-    value:           2FEDC451-B0F9-3B4E-BB5D-469748CAF20A
+    value:           978829C1-99DC-3B1A-BC23-876F03BC2C53
 install-name:    '/usr/lib/libnfshared.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

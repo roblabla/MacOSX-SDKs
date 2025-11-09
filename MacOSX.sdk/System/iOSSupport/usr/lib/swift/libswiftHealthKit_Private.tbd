@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           16B17CDD-01BE-375F-9AB1-B413A657C6A7
+    value:           252E3530-643F-37F0-9B1F-EB655643F8A2
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           BC90E323-B6A7-3A52-BBAF-EBAC70B2AEFD
+    value:           0AAF225C-1A01-3BE3-B2DE-5326139A0560
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftHealthKit_Private.dylib'
-current-version: 2221
+current-version: 2235.2.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ '_$s10Downstream17HealthKit_Private0A19HandlerSubscriptionPTl', 
                        '_$s17HealthKit_Private11DefaultableMp', '_$s17HealthKit_Private11DefaultableP7defaultxvgZTj', 
                        '_$s17HealthKit_Private11DefaultableP7defaultxvgZTq', '_$s17HealthKit_Private11DefaultableTL', 

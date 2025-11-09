@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CFBAFF1A-9589-329C-9738-82A30583CB6C
+    value:           798E1F51-14AE-360E-915F-FF9614B4D1B1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6D2D8322-EBAE-3F3F-A1A6-A710F8873462
+    value:           60C21620-1B00-3231-8F76-C967110AAB62
 install-name:    '/System/Library/PrivateFrameworks/PowerlogHelperdOperators.framework/Versions/A/PowerlogHelperdOperators'
 exports:
   - targets:         [ x86_64-macos ]
@@ -16,7 +16,7 @@ exports:
     symbols:         [ _ARSessionDidPauseDarwinNotification, _ARSessionDidRunDarwinNotification, 
                        _KPSlope, _PLLogBH, _PLLogCommon, _PLLogDisplay, _PLLogNetwork, 
                        _PLLogProcessMonitor, _PLLogScreenState, _PLLogSoC, _PLLogSubmission, 
-                       _PeakForce, _PeakForceMajorRadius, _PeakForceMillimetersFromEdge, 
+                       _PLLogXPC, _PeakForce, _PeakForceMajorRadius, _PeakForceMillimetersFromEdge, 
                        _PeakForceMinorRadius, _PeakForceProximity, __ZN12PLProcessCPU10reportCpusERKNSt3__13setINS0_4pairIyyEENS_9compare_tENS0_9allocatorIS3_EEEERy, 
                        __ZN12PLProcessCPU11addToReportERKyRNSt3__113unordered_mapIyyNS2_4hashIyEENS2_8equal_toIyEENS2_9allocatorINS2_4pairIS0_yEEEEEERNS2_3setINS9_IyyEENS_9compare_tENS8_ISF_EEEERySK_, 
                        __ZN12PLProcessCPU11findMissingEv, __ZN12PLProcessCPU11processPidsEv, 
@@ -36,13 +36,14 @@ exports:
                        _kPLBHMVersionFieldName, _kPLBHMVoltageEventName, _kPLBHMVoltageFieldName, 
                        _kPLBHMaximumCapacityEventName, _kPLBHServiceEventName, _kPLBatteryAgentAggregateNameUILevel, 
                        _kPLBatteryAgentCurrTimeRTC, _kPLBatteryAgentEAPencilPencil, 
-                       _kPLBatteryAgentEventBackwardNameBattery, _kPLBatteryAgentEventBackwardNameBatteryUI, 
-                       _kPLBatteryAgentEventBackwardNameChargingHeatMapA, _kPLBatteryAgentEventBackwardNameChargingHeatMapB, 
-                       _kPLBatteryAgentEventBackwardNameCurrentAccumulator, _kPLBatteryAgentEventBackwardNameDischargingHeatMap, 
-                       _kPLBatteryAgentEventBackwardNameEABattery, _kPLBatteryAgentEventBackwardNameKioskMode, 
-                       _kPLBatteryAgentEventForwardCalibration0Baseline, _kPLBatteryAgentEventForwardNameEAPencil, 
-                       _kPLBatteryAgentEventForwardNameEAPencilCharging, _kPLBatteryAgentEventForwardNameExternalCharger, 
-                       _kPLBatteryAgentEventForwardNameIOPMUBootLPMLog, _kPLBatteryAgentEventForwardNameLightningConnectorStatus, 
+                       _kPLBatteryAgentEventBackwardNameBTM, _kPLBatteryAgentEventBackwardNameBattery, 
+                       _kPLBatteryAgentEventBackwardNameBatteryUI, _kPLBatteryAgentEventBackwardNameChargingHeatMapA, 
+                       _kPLBatteryAgentEventBackwardNameChargingHeatMapB, _kPLBatteryAgentEventBackwardNameCurrentAccumulator, 
+                       _kPLBatteryAgentEventBackwardNameDischargingHeatMap, _kPLBatteryAgentEventBackwardNameEABattery, 
+                       _kPLBatteryAgentEventBackwardNameKioskMode, _kPLBatteryAgentEventForwardCalibration0Baseline, 
+                       _kPLBatteryAgentEventForwardNameEAPencil, _kPLBatteryAgentEventForwardNameEAPencilCharging, 
+                       _kPLBatteryAgentEventForwardNameExternalCharger, _kPLBatteryAgentEventForwardNameIOPMUBootLPMLog, 
+                       _kPLBatteryAgentEventForwardNameLightningConnectorStatus, 
                        _kPLBatteryAgentEventForwardNameMitigationState, _kPLBatteryAgentEventForwardNameSmartCharging, 
                        _kPLBatteryAgentEventForwardNameSmartChargingStatus, _kPLBatteryAgentEventForwardNameUPOStepper, 
                        _kPLBatteryAgentEventIntervalGasGauge, _kPLBatteryAgentEventNoneBatteryConfig, 
@@ -212,19 +213,17 @@ exports:
                        _kPLLocationAgentEventIntervalNameMapsBusyness, _kPLLocationAgentEventIntervalNameSeparationAlert, 
                        _kPLLocationAgentEventPointNameGeoFenceHandoff, _kPLMav1, 
                        _kPLMav10, _kPLMav13, _kPLMav16, _kPLMav16B, _kPLMav2, _kPLMav4, 
-                       _kPLMav5, _kPLMav7, _kPLMemoryPressureNotification, _kPLProcessMonitorAgentEventBackwardAppLaunchTimeSeries, 
-                       _kPLProcessMonitorAgentEventBackwardAppResumeTimeSeries, _kPLProcessMonitorAgentEventBackwardNameProcessMonitor, 
+                       _kPLMav5, _kPLMav7, _kPLMemoryPressureNotification, _kPLProcessMonitorAgentEventBackwardNameProcessMonitor, 
                        _kPLProcessMonitorAgentEventBackwardProcessExitHistogram, 
                        _kPLProcessMonitorAgentEventBackwardProcessPeakMemory, _kPLProcessMonitorAgentEventForwardAppResumeInferredCarry, 
                        _kPLProcessMonitorAgentEventForwardNameProcessID, _kPLProcessMonitorAgentEventIntervalNameKernelTaskMonitor, 
                        _kPLProcessMonitorAgentEventIntervalNameProcessMonitor, _kPLProcessMonitorAgentEventPointAppNotFrozen, 
-                       _kPLProcessMonitorAgentEventPointAppNotFrozenObfuscated, _kPLProcessMonitorAgentEventPointAppResumePredictions, 
-                       _kPLProcessMonitorAgentEventPointFreezerDemotion, _kPLProcessMonitorAgentEventPointFreezerDemotionObfuscated, 
-                       _kPLProcessMonitorAgentEventPointFreezerStats, _kPLProcessMonitorAgentEventPointFreezerStatsObfuscated, 
-                       _kPLProcessMonitorAgentEventPointMemoryTracking, _kPLProcessMonitorAgentEventPointProcessExit, 
-                       _kPLProcessMonitorAgentEventPointProcessSnapshot, _kPLProcessMonitorAgentEventPointSharedCacheReslid, 
-                       _kPLProcessMonitorAgentEventPointSystemFreezerStats, _kPLProcessNetworkAgentEventBackwardNameUsage, 
-                       _kPLProcessNetworkAgentEventBackwardNetworkBitmap, _kPLProcessNetworkAgentEventForwardHighCellularBWTransactions, 
+                       _kPLProcessMonitorAgentEventPointAppResumePredictions, _kPLProcessMonitorAgentEventPointFreezerDemotion, 
+                       _kPLProcessMonitorAgentEventPointFreezerStats, _kPLProcessMonitorAgentEventPointMemoryTracking, 
+                       _kPLProcessMonitorAgentEventPointProcessExit, _kPLProcessMonitorAgentEventPointProcessSnapshot, 
+                       _kPLProcessMonitorAgentEventPointSharedCacheReslid, _kPLProcessMonitorAgentEventPointSystemFreezerStats, 
+                       _kPLProcessNetworkAgentEventBackwardNameUsage, _kPLProcessNetworkAgentEventBackwardNetworkBitmap, 
+                       _kPLProcessNetworkAgentEventForwardHighCellularBWTransactions, 
                        _kPLProcessNetworkAgentEventForwardHighCellularBWTransactionsDetail, 
                        _kPLProcessNetworkAgentEventForwardNameLowInternet, _kPLProcessNetworkAgentEventIntervalUsageDiff, 
                        _kPLProcessNetworkAgentEventPointNameConnection, _kPLPushAgentAggregateNameAPSDConnected, 
@@ -339,8 +338,8 @@ exports:
                        _kPLXPCAgentEventSiriFalseAlarmCounter, _kPLXPCAgentEventSiriFalseAlarmSecondsSinceLastReport, 
                        _kPLXPCAgentExtensionCount, _kPLXPCAgentIndexCount, _kPLXPCAgentLimit, 
                        _kPLXPCAgentPortraitCacheDate, _kPLXPCAgentPortraitResultCount, 
-                       _kPLXPCAgentReason, _kPLXPCAgentResultCount, _kPLXPCAgentSource, 
-                       _kPLXPCAgentSpotlightResultCount, _kPLXPCAgentStartQueryCount, 
+                       _kPLXPCAgentReason, _kPLXPCAgentResultCount, _kPLXPCAgentSemanticType, 
+                       _kPLXPCAgentSource, _kPLXPCAgentSpotlightResultCount, _kPLXPCAgentStartQueryCount, 
                        _kPLXPCAgentTimestamp, _kPLXPCAgentTimestampEnd, _kPLXPCAgentWatchdogCount, 
                        _kPLXPCServiceAggregateXPCEvent, _kPLXPCServiceEventIntervalResponderEvent, 
                        _kPLXPCServiceEventPointNameClientLogging, _kPLXPCServiceEventPointNameClientLoggingDrops, 

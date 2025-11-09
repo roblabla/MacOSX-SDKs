@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           93E5BDB0-6E8E-3D56-8A66-1F997796FEB5
+    value:           01D66A6B-3811-3EFC-A145-D2CBD553D889
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           710A7D68-4BDF-3DC0-AEEB-D917B40C40FA
+    value:           0FE9391B-CA4A-3905-9E6F-08064B54A493
 install-name:    '/System/Library/PrivateFrameworks/AppleMobileFileIntegrity.framework/Versions/A/AppleMobileFileIntegrity'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1E5CA127-6537-3AB0-A0F8-90A5CADE0D99
+    value:           43AE9CB0-AA76-377E-A944-2CBD48F3E5E8
   - target:          x86_64-maccatalyst
-    value:           1E5CA127-6537-3AB0-A0F8-90A5CADE0D99
+    value:           43AE9CB0-AA76-377E-A944-2CBD48F3E5E8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A916CE78-A96E-3B61-B83E-48E9BF8A0112
+    value:           D9196A42-C69E-3BCA-A962-9A5DD235583F
   - target:          arm64e-maccatalyst
-    value:           A916CE78-A96E-3B61-B83E-48E9BF8A0112
+    value:           D9196A42-C69E-3BCA-A962-9A5DD235583F
 install-name:    '/System/Library/PrivateFrameworks/MailSupport.framework/Versions/A/MailSupport'
-current-version: 3689.0.4
+current-version: 3693.40
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

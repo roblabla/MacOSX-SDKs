@@ -865,6 +865,10 @@ Classes:
   SwiftName: UIImage.Configuration
 - Name: UIImageSymbolConfiguration
   SwiftName: UIImage.SymbolConfiguration
+  Methods:
+  - Selector: 'configurationPreferringMulticolor'
+    SwiftName: 'preferringMulticolor()'
+    MethodKind: Class
 - Name: UIDeferredMenuElement
   Methods:
   - Selector: 'elementWithProvider:'
@@ -1497,10 +1501,6 @@ Tags:
   SwiftName: UIImage.SymbolScale
 - Name: UIImageSymbolWeight
   SwiftName: UIImage.SymbolWeight
-- Name: UIImageVariantShape
-  SwiftName: UIImage.VariantShape
-- Name: UIImageVariantFill
-  SwiftName: UIImage.VariantFill
 - Name: UIPrinterCutterBehavior
   SwiftName: UIPrinter.CutterBehavior
 - Name: UIPrinterJobTypes

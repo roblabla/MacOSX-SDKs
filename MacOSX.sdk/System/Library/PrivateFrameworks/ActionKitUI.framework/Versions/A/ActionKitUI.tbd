@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0F45F67D-13BC-3EDB-B60B-34E702CF0AB6
+    value:           5C6D6279-78FD-3B5C-B191-DBCF0A297EC1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           63C06B88-63D9-3025-A3CF-EED22A67FA21
+    value:           A1F153F3-B770-324B-A799-3B217C438A9E
 install-name:    '/System/Library/PrivateFrameworks/ActionKitUI.framework/Versions/A/ActionKitUI'
 swift-abi-version: 7
 exports:
@@ -24,10 +24,12 @@ exports:
                        '_$s11ActionKitUI013WFSendMessagea3AppB13UserInterfaceCMu', 
                        '_$s11ActionKitUI013WFSendMessagea3AppB13UserInterfaceCN', 
                        '_$s11ActionKitUI013WFSendMessagea3AppB13UserInterfaceCfD', 
+                       '_$sSo17WFSSHKeyParameterC11ActionKitUIE18moduleSummarySlots3forSaySo18WFSlotTemplateSlotCGSgSo16WFParameterState_pSg_tF', 
+                       '_$sSo17WFSSHKeyParameterC11ActionKitUIE24moduleSummaryEditorClassyXlXpyFZ', 
+                       '_$sSo17WFSSHKeyParameterC11ActionKitUIE4view4with05SwiftE07AnyViewVAF7BindingVySo16WFParameterState_pSgG_tF', 
+                       '_$sSo17WFSSHKeyParameterC14WorkflowEditor08ViewableB011ActionKitUIMc', 
                        '_$sSo23WFAccountAccessResourceC11ActionKitUIE24accountConfigurationView05SwiftF003AnyI0Vvg', 
                        '_$sSo23WFAccountAccessResourceC11ActionKitUIE24accountConfigurationView05SwiftF003AnyI0VvpMV', 
-                       '_$sSo23WFAccountAccessResourceC14WorkflowEditor019AccountConfigurablebC011ActionKitUIMc', 
-                       '_$sSo24WFFinderImageConvertSizeV11ActionKitUIE8allCasesSayABGvgZ', 
-                       '_$sSo24WFFinderImageConvertSizeVs12CaseIterable11ActionKitUIMc' ]
+                       '_$sSo23WFAccountAccessResourceC14WorkflowEditor019AccountConfigurablebC011ActionKitUIMc' ]
     objc-classes:    [ WFSendMessageActionAppKitUserInterface, WFWebViewController ]
 ...

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6660F5E5-3339-3EC8-B4E5-7D032B714726
+    value:           ACED040F-AFD0-366F-8086-9C43843D68DA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2E6C4486-D6E1-3A13-8714-016E88E98B2F
+    value:           4381E6A4-80A2-3310-8272-824495DF5E7E
 install-name:    '/System/Library/PrivateFrameworks/IntentsUICardKitProviderSupport.framework/Versions/A/IntentsUICardKitProviderSupport'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

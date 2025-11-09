@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           E647AA84-A824-3133-9387-F1C049396A84
+    value:           C3E33E93-AADF-338D-A647-93355D0B16F1
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           C1C2C28E-80CB-344B-B3B0-343C72610C3A
+    value:           E5DA2254-6217-3085-B846-98AC07885F83
 install-name:    '/System/iOSSupport/System/Library/Frameworks/SafariServices.framework/Versions/A/SafariServices'
 exports:
   - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]

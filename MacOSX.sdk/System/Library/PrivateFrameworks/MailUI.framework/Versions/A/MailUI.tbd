@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CCD0DFBE-6E80-3BF3-97CD-CA98EA3C68F5
+    value:           78A4CFDB-104F-39B1-9857-7A948F020899
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3D6C42BA-C45C-3FEB-8278-AAEE72879C05
+    value:           011B4E4B-276A-3912-BC79-336E78D7D219
 install-name:    '/System/Library/PrivateFrameworks/MailUI.framework/Versions/A/MailUI'
-current-version: 3689.0.4
+current-version: 3693.40
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ Mail, MailNotificationContentExtension, MailQuickLookExtension, 
@@ -31,17 +31,19 @@ exports:
                        _MFImageGlyphComposeSignatureOn, _MFImageGlyphFavoritesDropDown, 
                        _MFImageGlyphFavoritesToolbarMore, _MFImageGlyphFilteringAttachments, 
                        _MFImageGlyphFilteringDisabled, _MFImageGlyphFilteringEnabled, 
-                       _MFImageGlyphFilteringFlagged, _MFImageGlyphFilteringMailbox, 
-                       _MFImageGlyphFilteringUnread, _MFImageGlyphFilteringVIP, _MFImageGlyphMessageDisplayAttachment, 
-                       _MFImageGlyphMessageDisplayEncrypted, _MFImageGlyphMessageDisplayEncryptionError, 
-                       _MFImageGlyphMessageDisplayFlag, _MFImageGlyphMessageDisplayFoundInMailbox, 
-                       _MFImageGlyphMessageDisplayFoundInSent, _MFImageGlyphMessageDisplayMailboxHeader, 
-                       _MFImageGlyphMessageDisplaySignatureError, _MFImageGlyphMessageDisplaySigned, 
-                       _MFImageGlyphMessageDisplayUnread, _MFImageGlyphMessageDisplayVIPFilled, 
-                       _MFImageGlyphMessageDisplayVIPOutline, _MFImageGlyphMessageListAttachment, 
-                       _MFImageGlyphMessageListBlocked, _MFImageGlyphMessageListClosedThread, 
-                       _MFImageGlyphMessageListExtension, _MFImageGlyphMessageListFlag, 
-                       _MFImageGlyphMessageListFlagFilled, _MFImageGlyphMessageListForward, 
+                       _MFImageGlyphFilteringFlagged, _MFImageGlyphFilteringHME, 
+                       _MFImageGlyphFilteringMailbox, _MFImageGlyphFilteringUnread, 
+                       _MFImageGlyphFilteringVIP, _MFImageGlyphMessageBannerDismiss, 
+                       _MFImageGlyphMessageDisplayAttachment, _MFImageGlyphMessageDisplayEncrypted, 
+                       _MFImageGlyphMessageDisplayEncryptionError, _MFImageGlyphMessageDisplayFlag, 
+                       _MFImageGlyphMessageDisplayFoundInMailbox, _MFImageGlyphMessageDisplayFoundInSent, 
+                       _MFImageGlyphMessageDisplayMailboxHeader, _MFImageGlyphMessageDisplaySignatureError, 
+                       _MFImageGlyphMessageDisplaySigned, _MFImageGlyphMessageDisplayUnread, 
+                       _MFImageGlyphMessageDisplayVIPFilled, _MFImageGlyphMessageDisplayVIPOutline, 
+                       _MFImageGlyphMessageListAttachment, _MFImageGlyphMessageListBlocked, 
+                       _MFImageGlyphMessageListClosedThread, _MFImageGlyphMessageListExtension, 
+                       _MFImageGlyphMessageListFlag, _MFImageGlyphMessageListFlagFilled, 
+                       _MFImageGlyphMessageListForward, _MFImageGlyphMessageListHideMyEmailWarningSign, 
                        _MFImageGlyphMessageListHighPriority, _MFImageGlyphMessageListJunk, 
                        _MFImageGlyphMessageListLowPriority, _MFImageGlyphMessageListMuteFilled, 
                        _MFImageGlyphMessageListMuteOutline, _MFImageGlyphMessageListOpenedThread, 

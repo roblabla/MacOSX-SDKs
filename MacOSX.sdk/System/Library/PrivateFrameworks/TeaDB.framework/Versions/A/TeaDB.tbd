@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A61416B2-D89B-3ECF-9A12-1707B14CB514
+    value:           74C425E9-25C8-3F43-A43C-41AF32C74A6C
   - target:          x86_64-maccatalyst
-    value:           A61416B2-D89B-3ECF-9A12-1707B14CB514
+    value:           74C425E9-25C8-3F43-A43C-41AF32C74A6C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3A774F44-C24A-39B4-805A-1C82E19E4CC2
+    value:           165B35FE-926E-339D-8B1A-8FEA03946E0D
   - target:          arm64e-maccatalyst
-    value:           3A774F44-C24A-39B4-805A-1C82E19E4CC2
+    value:           165B35FE-926E-339D-8B1A-8FEA03946E0D
 install-name:    '/System/Library/PrivateFrameworks/TeaDB.framework/Versions/A/TeaDB'
-current-version: 499
+current-version: 549.1
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -26,20 +26,20 @@ allowable-clients:
                        MarketingNotificationExtension, NVCDemo, News, NewsAds, NewsAdsTests, 
                        NewsAnalytics, NewsAnalyticsTests, NewsAnalyticsUpload, NewsArticleQuickLook, 
                        NewsArticleViewer, NewsArticles, NewsArticlesTests, NewsDES, 
-                       NewsDESTests, NewsEngagement, NewsEngagementTests, NewsFeed, 
-                       NewsFeedTests, NewsFormat, NewsFormatTests, NewsInternalExtras, 
+                       NewsDESTests, NewsEngagement, NewsEngagementCollector, NewsEngagementTests, 
+                       NewsFeed, NewsFeedTests, NewsFormat, NewsFormatTests, NewsInternalExtras, 
                        NewsInternalSettings, NewsPersonalization, NewsServices, NewsServicesInternal, 
                        NewsSettings, NewsSubscription, NewsSubscriptionTests, NewsTag, 
                        NewsToday, NewsToday2, NewsTodayIntents, NewsUI, NewsUI2, 
                        NewsUI2Tests, NewsWidgetIntents, OpenInNews, Silex, SilexDebugger, 
                        SilexWeb, Stocks, StocksAnalytics, StocksAnalyticsTests, StocksCore, 
-                       StocksCoreTests, StocksDetailIntents, StocksTests, StocksToday, 
-                       StocksUI, StocksUITests, StocksWidget, TeaCharts, TeaChartsTests, 
-                       TeaDB, TeaDBTests, TeaDemo, TeaFoundationTests, TeaSettings, 
-                       TeaSettingsTests, TeaSnappy, TeaSnappyTests, TeaTemplate, 
-                       TeaTemplateTests, TeaUI, TeaUITests, Weather, WeatherAnalytics, 
-                       WeatherCharts, WeatherCore, WeatherCoreTests, WeatherDaemon, 
-                       WeatherDaemonTests, WeatherDemo, WeatherDiagnosticExtension, 
+                       StocksCoreTests, StocksDetailIntents, StocksKit, StocksKitTests, 
+                       StocksTests, StocksToday, StocksUI, StocksUITests, StocksWidget, 
+                       TeaCharts, TeaChartsTests, TeaDB, TeaDBTests, TeaDemo, TeaFoundationTests, 
+                       TeaSettings, TeaSettingsTests, TeaSnappy, TeaSnappyTests, 
+                       TeaTemplate, TeaTemplateTests, TeaUI, TeaUITests, Weather, 
+                       WeatherAnalytics, WeatherCharts, WeatherCore, WeatherCoreTests, 
+                       WeatherDaemon, WeatherDaemonTests, WeatherDemo, WeatherDiagnosticExtension, 
                        WeatherIntents, WeatherKit, WeatherKitTests, WeatherUI, WeatherUITests, 
                        WeatherUnitTests, WeatherWidget, WeatherWidgetExtension, com.apple.news, 
                        newsd, weatherd ]
@@ -326,7 +326,8 @@ exports:
                        '_$s5TeaDB8DatabaseC10VacuumModeOMn', '_$s5TeaDB8DatabaseC10VacuumModeON', 
                        '_$s5TeaDB8DatabaseC10VacuumModeOSHAAMc', '_$s5TeaDB8DatabaseC10VacuumModeOSQAAMc', 
                        '_$s5TeaDB8DatabaseC10asyncWrite_5block0A10Foundation7PromiseCyytGAA11TransactionO_yyKctF', 
-                       '_$s5TeaDB8DatabaseC12RecoveryModeO2eeoiySbAE_AEtFZ', '_$s5TeaDB8DatabaseC12RecoveryModeO4hash4intoys6HasherVz_tF', 
+                       '_$s5TeaDB8DatabaseC10checkpointyyKF', '_$s5TeaDB8DatabaseC12RecoveryModeO2eeoiySbAE_AEtFZ', 
+                       '_$s5TeaDB8DatabaseC12RecoveryModeO4hash4intoys6HasherVz_tF', 
                        '_$s5TeaDB8DatabaseC12RecoveryModeO5throwyA2EmFWC', '_$s5TeaDB8DatabaseC12RecoveryModeO8truncateyA2EmFWC', 
                        '_$s5TeaDB8DatabaseC12RecoveryModeO9hashValueSivg', '_$s5TeaDB8DatabaseC12RecoveryModeO9hashValueSivpMV', 
                        '_$s5TeaDB8DatabaseC12RecoveryModeOMa', '_$s5TeaDB8DatabaseC12RecoveryModeOMn', 
@@ -346,13 +347,13 @@ exports:
                        '_$s5TeaDB8DatabaseC6ErrorsO8cantOpenyAESS_AC8LocationOtcAEmFWC', 
                        '_$s5TeaDB8DatabaseC6ErrorsOMa', '_$s5TeaDB8DatabaseC6ErrorsOMn', 
                        '_$s5TeaDB8DatabaseC6ErrorsON', '_$s5TeaDB8DatabaseC6ErrorsOs5ErrorAAMc', 
-                       '_$s5TeaDB8DatabaseC6vacuumyyKF', '_$s5TeaDB8DatabaseC8LocationO4pathyAESScAEmFWC', 
-                       '_$s5TeaDB8DatabaseC8LocationO8inMemoryyA2EmFWC', '_$s5TeaDB8DatabaseC8LocationO9documentsyAESS_tcAEmFWC', 
-                       '_$s5TeaDB8DatabaseC8LocationOMa', '_$s5TeaDB8DatabaseC8LocationOMn', 
-                       '_$s5TeaDB8DatabaseC8LocationON', '_$s5TeaDB8DatabaseC8location14journalingMode08recoveryF09cacheSize06vacuumF021shouldTakeRBAssertionA2C8LocationO_AC010JournalingF0OAC08RecoveryF0OAC05CacheI0OAC06VacuumF0OSbtKcfC', 
-                       '_$s5TeaDB8DatabaseC8location14journalingMode08recoveryF09cacheSize06vacuumF021shouldTakeRBAssertionA2C8LocationO_AC010JournalingF0OAC08RecoveryF0OAC05CacheI0OAC06VacuumF0OSbtKcfCTj', 
-                       '_$s5TeaDB8DatabaseC8location14journalingMode08recoveryF09cacheSize06vacuumF021shouldTakeRBAssertionA2C8LocationO_AC010JournalingF0OAC08RecoveryF0OAC05CacheI0OAC06VacuumF0OSbtKcfCTq', 
-                       '_$s5TeaDB8DatabaseC8location14journalingMode08recoveryF09cacheSize06vacuumF021shouldTakeRBAssertionA2C8LocationO_AC010JournalingF0OAC08RecoveryF0OAC05CacheI0OAC06VacuumF0OSbtKcfc', 
+                       '_$s5TeaDB8DatabaseC8LocationO4pathyAESScAEmFWC', '_$s5TeaDB8DatabaseC8LocationO8inMemoryyA2EmFWC', 
+                       '_$s5TeaDB8DatabaseC8LocationO9documentsyAESS_tcAEmFWC', '_$s5TeaDB8DatabaseC8LocationOMa', 
+                       '_$s5TeaDB8DatabaseC8LocationOMn', '_$s5TeaDB8DatabaseC8LocationON', 
+                       '_$s5TeaDB8DatabaseC8location14journalingMode08recoveryF09cacheSize06vacuumF021shouldTakeRBAssertion11busyTimeoutA2C8LocationO_AC010JournalingF0OAC08RecoveryF0OAC05CacheI0OAC06VacuumF0OSbs5Int32VSgtKcfC', 
+                       '_$s5TeaDB8DatabaseC8location14journalingMode08recoveryF09cacheSize06vacuumF021shouldTakeRBAssertion11busyTimeoutA2C8LocationO_AC010JournalingF0OAC08RecoveryF0OAC05CacheI0OAC06VacuumF0OSbs5Int32VSgtKcfCTj', 
+                       '_$s5TeaDB8DatabaseC8location14journalingMode08recoveryF09cacheSize06vacuumF021shouldTakeRBAssertion11busyTimeoutA2C8LocationO_AC010JournalingF0OAC08RecoveryF0OAC05CacheI0OAC06VacuumF0OSbs5Int32VSgtKcfCTq', 
+                       '_$s5TeaDB8DatabaseC8location14journalingMode08recoveryF09cacheSize06vacuumF021shouldTakeRBAssertion11busyTimeoutA2C8LocationO_AC010JournalingF0OAC08RecoveryF0OAC05CacheI0OAC06VacuumF0OSbs5Int32VSgtKcfc', 
                        '_$s5TeaDB8DatabaseC9CacheSizeO5pagesyAESucAEmFWC', '_$s5TeaDB8DatabaseC9CacheSizeO7defaultyA2EmFWC', 
                        '_$s5TeaDB8DatabaseC9CacheSizeOMa', '_$s5TeaDB8DatabaseC9CacheSizeOMn', 
                        '_$s5TeaDB8DatabaseC9CacheSizeON', '_$s5TeaDB8DatabaseC9asyncRead5block0A10Foundation7PromiseCyxGxyKc_tlF', 

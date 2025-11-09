@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           987A3E3D-6E46-3D6B-AD48-3D2AF928EA1D
+    value:           98ADC055-DEAC-34D6-A959-6DABCA0235BA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2B6E51CC-73E4-36BF-AA40-A7629D3A512D
+    value:           33681918-6C80-33CC-8D32-B83AB434DC72
 install-name:    '/System/Library/PrivateFrameworks/SiriGlobalReranker.framework/Versions/A/SiriGlobalReranker'
 swift-abi-version: 7
 exports:
@@ -55,13 +55,16 @@ exports:
                        '_$s18SiriGlobalReranker0B9RerankingMp', '_$s18SiriGlobalReranker0B9RerankingP4rank18hypothesesFeaturesSDy10Foundation4UUIDVSdGSDyAHSayAA7FeatureCGG_tFTj', 
                        '_$s18SiriGlobalReranker0B9RerankingP4rank18hypothesesFeaturesSDy10Foundation4UUIDVSdGSDyAHSayAA7FeatureCGG_tFTq', 
                        '_$s18SiriGlobalReranker0B9RerankingP7enabledSbvgTj', '_$s18SiriGlobalReranker0B9RerankingP7enabledSbvgTq', 
-                       '_$s18SiriGlobalReranker0B9RerankingTL', '_$s18SiriGlobalReranker0bC0C14grrFeatureFlag0D5ModelAcA0eF14StateProviding_p_So7MLModelCtcfC', 
-                       '_$s18SiriGlobalReranker0bC0C14grrFeatureFlag0D5ModelAcA0eF14StateProviding_p_So7MLModelCtcfCTj', 
-                       '_$s18SiriGlobalReranker0bC0C14grrFeatureFlag0D5ModelAcA0eF14StateProviding_p_So7MLModelCtcfCTq', 
-                       '_$s18SiriGlobalReranker0bC0C14grrFeatureFlag0D5ModelAcA0eF14StateProviding_p_So7MLModelCtcfc', 
-                       '_$s18SiriGlobalReranker0bC0C14grrFeatureFlag0D5ModelAcA0eF14StateProviding_p_So7MLModelCtcfcfA0_', 
+                       '_$s18SiriGlobalReranker0B9RerankingTL', '_$s18SiriGlobalReranker0bC0C14grrFeatureFlag0D5Model15processInfoUtilAcA0eF14StateProviding_p_So7MLModelCAA07ProcessI8Protocol_ptcfC', 
+                       '_$s18SiriGlobalReranker0bC0C14grrFeatureFlag0D5Model15processInfoUtilAcA0eF14StateProviding_p_So7MLModelCAA07ProcessI8Protocol_ptcfCTj', 
+                       '_$s18SiriGlobalReranker0bC0C14grrFeatureFlag0D5Model15processInfoUtilAcA0eF14StateProviding_p_So7MLModelCAA07ProcessI8Protocol_ptcfCTq', 
+                       '_$s18SiriGlobalReranker0bC0C14grrFeatureFlag0D5Model15processInfoUtilAcA0eF14StateProviding_p_So7MLModelCAA07ProcessI8Protocol_ptcfc', 
+                       '_$s18SiriGlobalReranker0bC0C14grrFeatureFlag0D5Model15processInfoUtilAcA0eF14StateProviding_p_So7MLModelCAA07ProcessI8Protocol_ptcfcfA0_', 
+                       '_$s18SiriGlobalReranker0bC0C14grrFeatureFlag0D5Model15processInfoUtilAcA0eF14StateProviding_p_So7MLModelCAA07ProcessI8Protocol_ptcfcfA1_', 
                        '_$s18SiriGlobalReranker0bC0C14grrFeatureFlagAA0eF14StateProviding_pvg', 
                        '_$s18SiriGlobalReranker0bC0C14grrFeatureFlagAA0eF14StateProviding_pvpMV', 
+                       '_$s18SiriGlobalReranker0bC0C15processInfoUtilAA07ProcessE8Protocol_pvg', 
+                       '_$s18SiriGlobalReranker0bC0C15processInfoUtilAA07ProcessE8Protocol_pvpMV', 
                        '_$s18SiriGlobalReranker0bC0C4rank18hypothesesFeaturesSDy10Foundation4UUIDVSdGSDyAHSayAA7FeatureCGG_tFTj', 
                        '_$s18SiriGlobalReranker0bC0C4rank18hypothesesFeaturesSDy10Foundation4UUIDVSdGSDyAHSayAA7FeatureCGG_tFTq', 
                        '_$s18SiriGlobalReranker0bC0C7enabledSbvgTj', '_$s18SiriGlobalReranker0bC0C7enabledSbvgTq', 
@@ -319,7 +322,17 @@ exports:
                        '_$s18SiriGlobalReranker15LoggingMetadataP5grrID10Foundation4UUIDVvgTq', 
                        '_$s18SiriGlobalReranker15LoggingMetadataP9requestID10Foundation4UUIDVSgvgTj', 
                        '_$s18SiriGlobalReranker15LoggingMetadataP9requestID10Foundation4UUIDVSgvgTq', 
-                       '_$s18SiriGlobalReranker15LoggingMetadataTL', '_$s18SiriGlobalReranker16ContactReferenceV12relationshipSSSgvM', 
+                       '_$s18SiriGlobalReranker15LoggingMetadataTL', '_$s18SiriGlobalReranker15ProcessInfoUtilC15getThermalStateSo09NSProcessehI0VyF', 
+                       '_$s18SiriGlobalReranker15ProcessInfoUtilC15getThermalStateSo09NSProcessehI0VyFTq', 
+                       '_$s18SiriGlobalReranker15ProcessInfoUtilC21isLowPowerModeEnabledSbyF', 
+                       '_$s18SiriGlobalReranker15ProcessInfoUtilC21isLowPowerModeEnabledSbyFTq', 
+                       '_$s18SiriGlobalReranker15ProcessInfoUtilCAA0dE8ProtocolAAMc', 
+                       '_$s18SiriGlobalReranker15ProcessInfoUtilCAA0dE8ProtocolAAWP', 
+                       '_$s18SiriGlobalReranker15ProcessInfoUtilCACycfC', '_$s18SiriGlobalReranker15ProcessInfoUtilCACycfCTq', 
+                       '_$s18SiriGlobalReranker15ProcessInfoUtilCACycfc', '_$s18SiriGlobalReranker15ProcessInfoUtilCMa', 
+                       '_$s18SiriGlobalReranker15ProcessInfoUtilCMm', '_$s18SiriGlobalReranker15ProcessInfoUtilCMn', 
+                       '_$s18SiriGlobalReranker15ProcessInfoUtilCN', '_$s18SiriGlobalReranker15ProcessInfoUtilCfD', 
+                       '_$s18SiriGlobalReranker15ProcessInfoUtilCfd', '_$s18SiriGlobalReranker16ContactReferenceV12relationshipSSSgvM', 
                        '_$s18SiriGlobalReranker16ContactReferenceV12relationshipSSSgvg', 
                        '_$s18SiriGlobalReranker16ContactReferenceV12relationshipSSSgvpMV', 
                        '_$s18SiriGlobalReranker16ContactReferenceV12relationshipSSSgvs', 
@@ -415,7 +428,11 @@ exports:
                        '_$s18SiriGlobalReranker19IsPhoneCallPossibleCMa', '_$s18SiriGlobalReranker19IsPhoneCallPossibleCMm', 
                        '_$s18SiriGlobalReranker19IsPhoneCallPossibleCMn', '_$s18SiriGlobalReranker19IsPhoneCallPossibleCN', 
                        '_$s18SiriGlobalReranker19IsPhoneCallPossibleCfD', '_$s18SiriGlobalReranker19IsPhoneCallPossibleCfd', 
-                       '_$s18SiriGlobalReranker19SmsAttachmentExistsC10isLoggableSbvg', 
+                       '_$s18SiriGlobalReranker19ProcessInfoProtocolMp', '_$s18SiriGlobalReranker19ProcessInfoProtocolP15getThermalStateSo09NSProcessehI0VyFTj', 
+                       '_$s18SiriGlobalReranker19ProcessInfoProtocolP15getThermalStateSo09NSProcessehI0VyFTq', 
+                       '_$s18SiriGlobalReranker19ProcessInfoProtocolP21isLowPowerModeEnabledSbyFTj', 
+                       '_$s18SiriGlobalReranker19ProcessInfoProtocolP21isLowPowerModeEnabledSbyFTq', 
+                       '_$s18SiriGlobalReranker19ProcessInfoProtocolTL', '_$s18SiriGlobalReranker19SmsAttachmentExistsC10isLoggableSbvg', 
                        '_$s18SiriGlobalReranker19SmsAttachmentExistsC19loggingPropertyNameSSvg', 
                        '_$s18SiriGlobalReranker19SmsAttachmentExistsC5value10confidenceACSb_AA10ConfidenceOtcfC', 
                        '_$s18SiriGlobalReranker19SmsAttachmentExistsC5value10confidenceACSb_AA10ConfidenceOtcfc', 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5B7F94F8-5F8E-3084-A5E7-F97ACCA1B56F
+    value:           47C1BB9F-34B1-36D5-B96A-5FD114BA3E51
   - target:          x86_64-maccatalyst
-    value:           5B7F94F8-5F8E-3084-A5E7-F97ACCA1B56F
+    value:           47C1BB9F-34B1-36D5-B96A-5FD114BA3E51
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           625E92C9-86E1-3235-9ACD-17075D552807
+    value:           CDC2BAC8-4DF7-39B3-BE4E-38282F077676
   - target:          arm64e-maccatalyst
-    value:           625E92C9-86E1-3235-9ACD-17075D552807
+    value:           CDC2BAC8-4DF7-39B3-BE4E-38282F077676
 install-name:    '/usr/lib/system/libsystem_product_info_filter.dylib'
 current-version: 10
 parent-umbrella:

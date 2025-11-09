@@ -655,16 +655,6 @@ typedef NS_OPTIONS(uint16_t, AVB17221ACMPFlags)
 	AVB17221ACMPFlagsStreamingUsingUDP API_AVAILABLE(macos(12))	= 0x0200,
 } API_AVAILABLE(macos(10.8));
 
-
-typedef NS_OPTIONS(uint16_t, AVB17221ACMPIPFlag)
-{
-	/*!
-	 @constant	AVB17221ACMPIPFlagNone
-	 @abstract	The IEEE Std 1722.1™-202x ACMP no ip_flags.
-	 */
-	AVB17221ACMPIPFlagNone												= 0x0000,
-} API_AVAILABLE(macos(12));
-
 typedef NS_ENUM(uint16_t, AVB17221AEMCommandType)
 {
 	/*!

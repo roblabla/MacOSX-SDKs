@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           DDB74C72-7D72-329B-89DD-3962B9D0EB08
+    value:           BE7375DD-1E03-3C31-AFB1-1F9CBC0F196F
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           698C2021-8770-3075-9F00-3364154108A2
+    value:           CDF4B215-7F72-33FE-B3D3-0931641717E9
 install-name:    '/System/iOSSupport/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/PluginProcessShim.dylib'
-current-version: 612.1.24
+current-version: 612.3.6
 ...

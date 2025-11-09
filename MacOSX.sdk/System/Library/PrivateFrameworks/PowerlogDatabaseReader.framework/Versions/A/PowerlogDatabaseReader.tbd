@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           70F28AA1-5B3E-3264-BD88-80FD8EDE9189
+    value:           29EEF35A-68F2-3612-AAED-3B9A90E05058
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4F58DDDC-321D-3B9E-90E5-B0FAD3F064B6
+    value:           278FBDC6-1CDF-33D1-8C37-26ECC8B65256
 install-name:    '/System/Library/PrivateFrameworks/PowerlogDatabaseReader.framework/Versions/A/PowerlogDatabaseReader'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

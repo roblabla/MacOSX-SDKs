@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2406DFB5-68FD-37C8-BD7C-B0193DA17C1D
+    value:           6BAF6B2B-2BCB-39A0-A0ED-52BFF1F5E48C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           372DD3D7-2F2A-3502-BDAB-B6CE380452BB
+    value:           57C54DF4-D1E7-38FE-8268-F96DCA3DCB42
 install-name:    '/System/Library/PrivateFrameworks/EFILogin.framework/Versions/A/EFILogin'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

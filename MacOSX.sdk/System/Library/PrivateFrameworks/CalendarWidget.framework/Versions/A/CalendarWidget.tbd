@@ -3,51 +3,27 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6C7563E2-4ECB-3857-B290-046C5C85BC05
+    value:           3086071B-80E6-374C-85FB-A999A7985FFF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F7946082-48D1-370E-96FD-D436642BD6F9
+    value:           B9F1967B-03F0-34D3-9C6B-BF6A2C4A39E1
 install-name:    '/System/Library/PrivateFrameworks/CalendarWidget.framework/Versions/A/CalendarWidget'
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ '_$s14CalendarWidget0a5MonthB0V4bodyQrvg', '_$s14CalendarWidget0a5MonthB0V4bodyQrvpMV', 
+    symbols:         [ '_$s14CalendarWidget0a4ListB0V4bodyQrvg', '_$s14CalendarWidget0a4ListB0V4bodyQrvpMV', 
+                       '_$s14CalendarWidget0a4ListB0V4bodyQrvpQOMQ', '_$s14CalendarWidget0a4ListB0V7SwiftUI0B0AAMc', 
+                       '_$s14CalendarWidget0a4ListB0VACycfC', '_$s14CalendarWidget0a4ListB0VMa', 
+                       '_$s14CalendarWidget0a4ListB0VMn', '_$s14CalendarWidget0a4ListB0VN', 
+                       '_$s14CalendarWidget0a5MonthB0V4bodyQrvg', '_$s14CalendarWidget0a5MonthB0V4bodyQrvpMV', 
                        '_$s14CalendarWidget0a5MonthB0V4bodyQrvpQOMQ', '_$s14CalendarWidget0a5MonthB0V7SwiftUI0B0AAMc', 
                        '_$s14CalendarWidget0a5MonthB0VACycfC', '_$s14CalendarWidget0a5MonthB0VMa', 
                        '_$s14CalendarWidget0a5MonthB0VMn', '_$s14CalendarWidget0a5MonthB0VN', 
-                       '_$s14CalendarWidget0a7SpatialB0V4bodyQrvg', '_$s14CalendarWidget0a7SpatialB0V4bodyQrvpMV', 
-                       '_$s14CalendarWidget0a7SpatialB0V4bodyQrvpQOMQ', '_$s14CalendarWidget0a7SpatialB0V7SwiftUI0B0AAMc', 
-                       '_$s14CalendarWidget0a7SpatialB0VACycfC', '_$s14CalendarWidget0a7SpatialB0VMa', 
-                       '_$s14CalendarWidget0a7SpatialB0VMn', '_$s14CalendarWidget0a7SpatialB0VN', 
-                       '_$s14CalendarWidget0a7SpatialB14IntentResponseC4code12userActivityAcA0acbdE4CodeO_So06NSUserH0CSgtcfC', 
-                       '_$s14CalendarWidget0a7SpatialB14IntentResponseC4code12userActivityAcA0acbdE4CodeO_So06NSUserH0CSgtcfc', 
-                       '_$s14CalendarWidget0a7SpatialB14IntentResponseC4codeAA0acbdE4CodeOvg', 
-                       '_$s14CalendarWidget0a7SpatialB14IntentResponseC4codeAA0acbdE4CodeOvgTq', 
-                       '_$s14CalendarWidget0a7SpatialB14IntentResponseC4codeAA0acbdE4CodeOvpMV', 
-                       '_$s14CalendarWidget0a7SpatialB14IntentResponseC4codeAA0acbdE4CodeOvpWvd', 
-                       '_$s14CalendarWidget0a7SpatialB14IntentResponseC4codeAA0acbdE4CodeOvpfi', 
-                       '_$s14CalendarWidget0a7SpatialB14IntentResponseC5coderACSgSo7NSCoderC_tcfC', 
-                       '_$s14CalendarWidget0a7SpatialB14IntentResponseC5coderACSgSo7NSCoderC_tcfc', 
-                       '_$s14CalendarWidget0a7SpatialB14IntentResponseC9calendarsSayAA12EKUICalendarCGSgvpMV', 
-                       '_$s14CalendarWidget0a7SpatialB14IntentResponseCACycfC', '_$s14CalendarWidget0a7SpatialB14IntentResponseCACycfc', 
-                       '_$s14CalendarWidget0a7SpatialB14IntentResponseCMa', '_$s14CalendarWidget0a7SpatialB14IntentResponseCMn', 
-                       '_$s14CalendarWidget0a7SpatialB14IntentResponseCN', '_$s14CalendarWidget0a7SpatialB14IntentResponseCfD', 
-                       '_$s14CalendarWidget0a7SpatialB18IntentResponseCodeO8rawValueACSgSi_tcfC', 
-                       '_$s14CalendarWidget0a7SpatialB18IntentResponseCodeO8rawValueSivg', 
-                       '_$s14CalendarWidget0a7SpatialB18IntentResponseCodeO8rawValueSivpMV', 
-                       '_$s14CalendarWidget0a7SpatialB18IntentResponseCodeOMa', '_$s14CalendarWidget0a7SpatialB18IntentResponseCodeOMn', 
-                       '_$s14CalendarWidget0a7SpatialB18IntentResponseCodeON', '_$s14CalendarWidget0a7SpatialB18IntentResponseCodeOSHAAMc', 
-                       '_$s14CalendarWidget0a7SpatialB18IntentResponseCodeOSQAAMc', 
-                       '_$s14CalendarWidget0a7SpatialB18IntentResponseCodeOSYAAMc', 
-                       '_$s14CalendarWidget0a7SpatialB6IntentC06mirrorA3AppSo8NSNumberCSgvpMV', 
-                       '_$s14CalendarWidget0a7SpatialB6IntentC16hideAllDayEventsSo8NSNumberCSgvpMV', 
-                       '_$s14CalendarWidget0a7SpatialB6IntentC5coderACSgSo7NSCoderC_tcfC', 
-                       '_$s14CalendarWidget0a7SpatialB6IntentC5coderACSgSo7NSCoderC_tcfc', 
-                       '_$s14CalendarWidget0a7SpatialB6IntentC9calendarsSayAA12EKUICalendarCGSgvpMV', 
-                       '_$s14CalendarWidget0a7SpatialB6IntentCACycfC', '_$s14CalendarWidget0a7SpatialB6IntentCACycfc', 
-                       '_$s14CalendarWidget0a7SpatialB6IntentCMa', '_$s14CalendarWidget0a7SpatialB6IntentCMn', 
-                       '_$s14CalendarWidget0a7SpatialB6IntentCN', '_$s14CalendarWidget0a7SpatialB6IntentCfD', 
+                       '_$s14CalendarWidget0a6UpNextB0V4bodyQrvg', '_$s14CalendarWidget0a6UpNextB0V4bodyQrvpMV', 
+                       '_$s14CalendarWidget0a6UpNextB0V4bodyQrvpQOMQ', '_$s14CalendarWidget0a6UpNextB0V7SwiftUI0B0AAMc', 
+                       '_$s14CalendarWidget0a6UpNextB0VACycfC', '_$s14CalendarWidget0a6UpNextB0VMa', 
+                       '_$s14CalendarWidget0a6UpNextB0VMn', '_$s14CalendarWidget0a6UpNextB0VN', 
                        '_$s14CalendarWidget12EKUICalendarC10identifier7display17pronunciationHintACSSSg_SSAGtcfC', 
                        '_$s14CalendarWidget12EKUICalendarC10identifier7display17pronunciationHintACSSSg_SSAGtcfc', 
                        '_$s14CalendarWidget12EKUICalendarC19acAccountIdentifierSSSgvpMV', 
@@ -97,12 +73,7 @@ exports:
                        '_$s14CalendarWidget31EKUICalendarsIntentResponseCodeOSHAAMc', 
                        '_$s14CalendarWidget31EKUICalendarsIntentResponseCodeOSQAAMc', 
                        '_$s14CalendarWidget31EKUICalendarsIntentResponseCodeOSYAAMc', 
-                       '_$s14CalendarWidgetAAV4bodyQrvg', '_$s14CalendarWidgetAAV4bodyQrvpMV', 
-                       '_$s14CalendarWidgetAAV4bodyQrvpQOMQ', '_$s14CalendarWidgetAAV7SwiftUI0B0AAMc', 
-                       '_$s14CalendarWidgetAAVABycfC', '_$s14CalendarWidgetAAVMa', 
-                       '_$s14CalendarWidgetAAVMn', '_$s14CalendarWidgetAAVN', _CalendarWidgetVersionNumber, 
-                       _CalendarWidgetVersionString ]
-    objc-classes:    [ CalendarSpatialWidgetIntent, CalendarSpatialWidgetIntentResponse, 
-                       EKUICalendar, EKUICalendarResolutionResult, EKUICalendarsIntent, 
+                       _CalendarWidgetVersionNumber, _CalendarWidgetVersionString ]
+    objc-classes:    [ EKUICalendar, EKUICalendarResolutionResult, EKUICalendarsIntent, 
                        EKUICalendarsIntentResponse ]
 ...

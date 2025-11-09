@@ -40,10 +40,6 @@ NS_SWIFT_UI_ACTOR
 - (void)updateSearchResultsForSearchController:(nonnull UISearchController *)searchController selectingSearchSuggestion:(nonnull id<UISearchSuggestion>)searchSuggestion API_AVAILABLE(tvos(14.0)) API_UNAVAILABLE(ios, watchos);
 @end
 
-/*!
- @note On tvOS, restoresFocusAfterTransition is set to NO if UISearchController, or UISearchContainerViewController containing it, is embedded in UITabBarController.
- */
-
 UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
 @interface UISearchController : UIViewController <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 

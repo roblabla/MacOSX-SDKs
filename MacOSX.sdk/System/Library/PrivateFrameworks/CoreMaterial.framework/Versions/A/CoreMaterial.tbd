@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           45FB8276-ED9A-3D51-8715-A5ECBB7DBAA0
+    value:           C7DAA069-0247-3FF8-9039-678E245F6297
   - target:          x86_64-maccatalyst
-    value:           45FB8276-ED9A-3D51-8715-A5ECBB7DBAA0
+    value:           C7DAA069-0247-3FF8-9039-678E245F6297
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C392D897-6307-3446-9A85-F767E4E8AD2E
+    value:           8007FD58-734E-3D3A-B2EB-32B59CB3C462
   - target:          arm64e-maccatalyst
-    value:           C392D897-6307-3446-9A85-F767E4E8AD2E
+    value:           8007FD58-734E-3D3A-B2EB-32B59CB3C462
 install-name:    '/System/Library/PrivateFrameworks/CoreMaterial.framework/Versions/A/CoreMaterial'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -40,7 +40,8 @@ exports:
                        _MTCoreMaterialConfigurationPrimaryOverlay, _MTCoreMaterialConfigurationSecondaryOverlay, 
                        _MTCoreMaterialRecipeCarPlayPlatters, _MTCoreMaterialRecipeCarPlayPlattersDark, 
                        _MTCoreMaterialRecipeDock, _MTCoreMaterialRecipeDockDark, 
-                       _MTCoreMaterialRecipeForVisualStyleFromStyleWithName, _MTCoreMaterialRecipeForVisualStyleFromStyleWithNameFromBundle, 
+                       _MTCoreMaterialRecipeForVisualStyleFromRecipeFromBundle, _MTCoreMaterialRecipeForVisualStyleFromStyleWithName, 
+                       _MTCoreMaterialRecipeForVisualStyleFromStyleWithNameFromBundle, 
                        _MTCoreMaterialRecipeKnowledgeBackground, _MTCoreMaterialRecipeKnowledgePlatters, 
                        _MTCoreMaterialRecipeKnowledgePlattersDark, _MTCoreMaterialRecipeKnowledgePlattersSheer, 
                        _MTCoreMaterialRecipeKnowledgePlattersSheerDark, _MTCoreMaterialRecipeModules, 

@@ -31,14 +31,14 @@ API_AVAILABLE_END
 API_AVAILABLE_BEGIN(macos(12), ios(15), tvos(15))
 
 /// Contains the cloud identifier result from looking up a local identifier via \c cloudIdentifierMappingsForLocalIdentifiers, or an \c error indicating why the lookup failed
-OS_EXPORT
+OS_EXPORT NS_REFINED_FOR_SWIFT
 @interface PHCloudIdentifierMapping : NSObject
 @property (nonatomic, readonly, nullable) PHCloudIdentifier *cloudIdentifier; /// The cloud identifier of the resource found for this local identifier
 @property (nonatomic, readonly, nullable) NSError *error; /// error An error indicating why the \c cloudIdentifier is nil. \c PHPhotosErrorIdentifierNotFound if no resource could be found for the provided local identifier.
 @end
 
 /// Contains the local identifier result from looking up a cloud identifier via \c localIdentifierMappingsForCloudIdentifiers, or an \c error indicating why the lookup failed
-OS_EXPORT
+OS_EXPORT NS_REFINED_FOR_SWIFT
 @interface PHLocalIdentifierMapping : NSObject
 @property (nonatomic, readonly, nullable) NSString *localIdentifier; /// The \c NSString representing the local identifier of the resource found for this cloud identifier, or nil if the match was not found.
 @property (nonatomic, readonly, nullable) NSError *error; /// An error indicating why the \c localIdentifier is nil. \c PHPhotosErrorIdentifierNotFound if no resource could be found for the provided cloud identifier. \c PHPhotosErrorMultipleLocalIdentifiersFound if the cloud identifier matched more than one photo libray resource, so there were multiple local identifiers found. The array of matching local identifiers can be retrieved from the error's user info via the \c PHLocalIdentifiersErrorKey
@@ -60,14 +60,14 @@ API_AVAILABLE_BEGIN(macos(10.13), ios(15), tvos(15))
  @discussion This method can be very expensive so they should be used sparingly for batch lookup of all needed identifiers. Clients should work in terms of local identifiers and call these methods only once after loading from and before saving to persistent storage.  If the attempt to lookup a local identifier for a given cloud identifier fails, the error parameter will indicate the reason.
  @param cloudIdentifiers The array of \c PHCloudIdentifier instances whose local identifiers are to being requested.
  */
-- (NSDictionary <PHCloudIdentifier *, PHLocalIdentifierMapping *> *)localIdentifierMappingsForCloudIdentifiers:(NSArray<PHCloudIdentifier *> *)cloudIdentifiers API_AVAILABLE(macos(12), ios(15), tvos(15));
+- (NSDictionary <PHCloudIdentifier *, PHLocalIdentifierMapping *> *)localIdentifierMappingsForCloudIdentifiers:(NSArray<PHCloudIdentifier *> *)cloudIdentifiers API_AVAILABLE(macos(12), ios(15), tvos(15)) NS_REFINED_FOR_SWIFT;
 
 /**
  @abstract Returns a dictionary that maps each local identifier from the provided array to a PLCloudIdentifierMapping result containing the cloud identifier found for that local identifier
  @discussion This method can be very expensive so they should be used sparingly for batch lookup of all needed identifiers. Clients should work in terms of local identifiers and call these methods only once after loading from and before saving to persistent storage.  If the attempt to lookup a cloud identifier for a given local identifier fails, the error parameter will indicate the reason.
  @param localIdentifiers The array of \c NSString instances whose cloud identifiers are to being requested.
  */
-- (NSDictionary <NSString *, PHCloudIdentifierMapping *> *)cloudIdentifierMappingsForLocalIdentifiers:(NSArray<NSString *> *)localIdentifiers API_AVAILABLE(macos(12), ios(15), tvos(15));
+- (NSDictionary <NSString *, PHCloudIdentifierMapping *> *)cloudIdentifierMappingsForLocalIdentifiers:(NSArray<NSString *> *)localIdentifiers API_AVAILABLE(macos(12), ios(15), tvos(15)) NS_REFINED_FOR_SWIFT;
 
 /// DEPRECATED: These two methods can be very expensive so they should be used sparingly for batch lookup of all needed identifiers. Clients should work in terms of local identifiers and call these methods only once after loading from and before saving to persistent storage.
 - (NSArray<NSString *> *)localIdentifiersForCloudIdentifiers:(NSArray<PHCloudIdentifier *> *)cloudIdentifiers

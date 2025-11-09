@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AF48FED2-F57C-3245-994A-62D04F2B5702
+    value:           BC809996-5C9F-364E-BF07-8B5A8F043071
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E7E46234-8A9D-3260-ADAC-6CB66EC69AF1
+    value:           E30E113D-B0E0-3E21-BC2E-AB9EB1E2DD89
 install-name:    '/System/Library/Frameworks/SyncServices.framework/Versions/A/SyncServices'
 current-version: 729
 compatibility-version: 48

@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           42258EB3-006C-35D8-BB5E-252729668CF5
+    value:           650E3053-B349-3B14-892F-8F44428E597C
   - target:          x86_64-maccatalyst
-    value:           42258EB3-006C-35D8-BB5E-252729668CF5
+    value:           650E3053-B349-3B14-892F-8F44428E597C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A0266FED-53C3-395B-8FDC-9BA1CCFE6842
+    value:           78847D4A-E296-3FEC-B7F9-7926212A397F
   - target:          arm64e-maccatalyst
-    value:           A0266FED-53C3-395B-8FDC-9BA1CCFE6842
+    value:           78847D4A-E296-3FEC-B7F9-7926212A397F
 install-name:    '/usr/lib/libAXSafeCategoryBundle.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AXSetUIAXReportSenderErrorLoggerFunction, _AXSetValidationErrorLoggingFunction, 
                        _UIAccessibilityInstallSafeCategories, _UIAccessibilityInstallSafeCategory ]

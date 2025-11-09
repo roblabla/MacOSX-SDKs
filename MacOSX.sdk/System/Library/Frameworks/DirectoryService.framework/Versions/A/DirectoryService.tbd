@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F69B2C96-5E6A-3249-BC7D-446C3012A5E9
+    value:           F0A77098-B137-3FE7-9EF5-F620738807B1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0E2C3E75-D416-32D2-8491-01727CCED3FB
+    value:           F7E11ECE-C6A6-35A1-A0C2-570C24ACB6F6
 install-name:    '/System/Library/Frameworks/DirectoryService.framework/Versions/A/DirectoryService'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

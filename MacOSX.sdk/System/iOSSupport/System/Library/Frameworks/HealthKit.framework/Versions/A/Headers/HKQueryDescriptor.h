@@ -2,7 +2,7 @@
 //  HKQueryDescriptor.h
 //  HealthKit
 //
-//  Copyright © 2020 Apple. All rights reserved.
+//  Copyright © 2021 Apple. All rights reserved.
 //
 
 #import <HealthKit/HKDefines.h>

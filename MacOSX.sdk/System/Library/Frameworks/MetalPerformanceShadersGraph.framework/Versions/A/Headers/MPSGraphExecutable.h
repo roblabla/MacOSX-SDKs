@@ -114,13 +114,13 @@ MPS_SWIFT_NAME( run(with:inputs:results:executionDescriptor:) );
                                                    inputsArray:(NSArray<MPSGraphTensorData *> *) inputsArray
                                                   resultsArray:(NSArray<MPSGraphTensorData *> * _Nullable) resultsArray
                                            executionDescriptor:(MPSGraphExecutableExecutionDescriptor * _Nullable) executionDescriptor
-MPS_SWIFT_NAME( run(with:inputs:results:executionDescriptor:) );
+MPS_SWIFT_NAME( runAsync(with:inputs:results:executionDescriptor:) );
 
 /*!
  *  @abstract   Runs the graph for given feeds to return targetTensor values, ensuring all target operations also executed.
  *              This call  is asynchronous and will return immediately if a completionHandler is set.
  *
- *  @param      commandBuffer                                     commandBuffer passed to exectute the graph on
+ *  @param      commandBuffer                                     commandBuffer passed to exectute the graph on, commitAndContinue might be called, please don't rely on underlying MTLCommandBuffer to remain uncommitted
  *  @param      inputsArray                                         Feeds tensorData for the placeholder tensors, same order as arguments of main function
  *  @param      resultsArray                                      Tensors for which the caller wishes MPSGraphTensorData to be returned
  *  @param      executionDescriptor                       ExecutionDescriptor to be passed in and used,

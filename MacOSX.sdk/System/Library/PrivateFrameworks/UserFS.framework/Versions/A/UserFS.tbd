@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C9A4F44C-F924-39E2-8DBC-BAFD4C902A35
+    value:           EEA7FAA3-B031-3611-956C-880B812775A8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C3256DB3-2B37-300C-A59A-95AE1567BF47
+    value:           5C60A34E-7359-3B23-9B05-08FD0BC9C207
 install-name:    '/System/Library/PrivateFrameworks/UserFS.framework/Versions/A/UserFS'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

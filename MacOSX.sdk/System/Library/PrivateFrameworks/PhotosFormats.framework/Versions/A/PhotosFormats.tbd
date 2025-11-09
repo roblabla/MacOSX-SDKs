@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           ACB6BDA9-E19D-3E76-B421-3B94E58FA1C6
+    value:           A0B601E7-DA94-3F50-AF4D-DD428DD62DB3
   - target:          x86_64-maccatalyst
-    value:           ACB6BDA9-E19D-3E76-B421-3B94E58FA1C6
+    value:           A0B601E7-DA94-3F50-AF4D-DD428DD62DB3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9F4E653A-562F-3684-BEE0-13002E6A96CA
+    value:           CF090A27-92FB-3487-A64E-7019051C4877
   - target:          arm64e-maccatalyst
-    value:           9F4E653A-562F-3684-BEE0-13002E6A96CA
+    value:           CF090A27-92FB-3487-A64E-7019051C4877
 install-name:    '/System/Library/PrivateFrameworks/PhotosFormats.framework/Versions/A/PhotosFormats'
-current-version: 400.27.210
+current-version: 421.0.100
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIN2pf17ArchiveLineParserE, __ZTIN5boost12interprocess14lock_exceptionE, 
@@ -82,9 +82,9 @@ exports:
                        _PFAssetBundleMetadataLibraryLocationLongitudeKey, _PFAssetBundleMetadataLibraryLocationSpeedKey, 
                        _PFAssetBundleMetadataLibraryLocationTimestampKey, _PFAssetBundleMetadataLibraryLocationVerticalAccuracyKey, 
                        _PFAssetBundleMetadataMediaSubtypesKey, _PFAssetBundleMetadataMediaTypeKey, 
-                       _PFAssetBundleMetadataPairingIdentifierKey, _PFAssetBundleMetadataPlaybackStyleKey, 
-                       _PFAssetBundleMetadataPlaybackVariationKey, _PFAssetBundleMetadataReframeVariationKey, 
-                       _PFAssetBundleMetadataSpatialOvercaptureResourcesPurgeableKey, 
+                       _PFAssetBundleMetadataOriginalFilenameKey, _PFAssetBundleMetadataPairingIdentifierKey, 
+                       _PFAssetBundleMetadataPlaybackStyleKey, _PFAssetBundleMetadataPlaybackVariationKey, 
+                       _PFAssetBundleMetadataReframeVariationKey, _PFAssetBundleMetadataSpatialOvercaptureResourcesPurgeableKey, 
                        _PFAssetBundleMetadataTimingInfoKey, _PFAssetBundleMetadataVersionKey, 
                        _PFAssetBundleMetadataVideoComplementVisibilityStateKey, _PFAssetBundlePathAdjustmentBasePairedVideoKey, 
                        _PFAssetBundlePathAdjustmentBasePhotoKey, _PFAssetBundlePathAdjustmentBaseVideoKey, 
@@ -118,6 +118,8 @@ exports:
                        _PFLargestSalientAspectFilledCropRect, _PFLegacyBundleRelativePath_DB, 
                        _PFLegacyBundleRelativePath_Recovery, _PFLivePhotoBundleExtension, 
                        _PFLocalDateFromGMTDate, _PFMap, _PFMapDictionary, _PFMediaCapabilitiesOptionsSupportsTranscodeChoice, 
+                       _PFMediaCapabilitiesOutOfBandHintsExtraSupportedContentTypesKey, 
+                       _PFMediaCapabilitiesOutOfBandHintsExtraSupportedVideoCodecsKey, 
                        _PFMediaCapabilitiesOutOfBandHintsPlatformKey, _PFMessagesStackLayoutDefaultHorizontalOffsets, 
                        _PFMessagesStackLayoutDefaultRotationAngle, _PFMessagesStackLayoutDefaultSizeTransform, 
                        _PFMessagesStackLayoutDefaultStackedItemsCount, _PFMessagesStackLayoutDefaultVerticalInsets, 
@@ -170,7 +172,8 @@ exports:
                        _PFStoryRecipeLibraryKindEnumerateSupportedValuesUsingBlock, 
                        _PFStoryRecipeSongCatalogAppleMusic, _PFStoryRecipeSongCatalogFlexMusic, 
                        _PFStoryRecipeSongCatalogMock, _PFStoryRecipeSongCatalogNull, 
-                       _PFStoryRecipeSongPaceDescription, _PFStoryRecipeSongPaceFromVisualTempo, 
+                       _PFStoryRecipeSongCategoryDescription, _PFStoryRecipeSongPaceDescription, 
+                       _PFStoryRecipeSongPaceFromVisualTempo, _PFStoryRecipeSongSubcategoryDescription, 
                        _PFStoryTitleCategoryDelightful, _PFStoryTitleCategoryFun, 
                        _PFStoryTitleCategoryGenerateWithWrappedIndex, _PFStoryTitleCategoryGetSerializedTitleCategory, 
                        _PFStoryTitleCategoryHipster, _PFStoryTitleCategoryNamed, 
@@ -219,16 +222,20 @@ exports:
                        _kPFImagePropertyExifLensMinimumMM, _kPFImagePropertyFrontFacingCamera, 
                        _kPFImagePropertyGPSDateTime, _kPFImagePropertyHDRGain, _kPFImagePropertyHasHDRGainMap, 
                        _kPFImagePropertyIsPhotoBooth, _kPFImagePropertyMakerAppleLivePhotoMinimumClientVersion, 
+                       _kPFImagePropertySemanticStylePreset, _kPFImagePropertySemanticStyleRenderingVersion, 
+                       _kPFImagePropertySemanticStyleSceneBias, _kPFImagePropertySemanticStyleWarmthBias, 
                        _kPFImagePropertySpatialOverCaptureIdentifier, _kPFMediaPropertyCreationDate, 
                        _kPFMediaPropertyCreationDateString, _kPFMediaPropertyLivePhotoPairingIdentifier, 
                        _kPFMediaPropertyOriginatingAssetIdentifier, _kPFMediaPropertyTimeZoneName, 
                        _kPFMediaPropertyTimeZoneOffsetSeconds, _kPFVideoPropertyAVDuration, 
                        _kPFVideoPropertyAVFPS, _kPFVideoPropertyCaptureMode, _kPFVideoPropertyCaptureModeTimelapse, 
-                       _kPFVideoPropertyCustomCodecFourCharCode, _kPFVideoPropertyPlaybackVariationIdentifier, 
-                       _kPFVideoPropertyVideoComplVideoDurationTimescale, _kPFVideoPropertyVideoComplVideoDurationValue, 
-                       _kPFVideoPropertyVideoComplVideoImageDisplayTimescale, _kPFVideoPropertyVideoComplVideoImageDisplayValue, 
+                       _kPFVideoPropertyCustomCodecFourCharCode, _kPFVideoPropertyIsProRes, 
+                       _kPFVideoPropertyPlaybackVariationIdentifier, _kPFVideoPropertyVideoComplVideoDurationTimescale, 
+                       _kPFVideoPropertyVideoComplVideoDurationValue, _kPFVideoPropertyVideoComplVideoImageDisplayTimescale, 
+                       _kPFVideoPropertyVideoComplVideoImageDisplayValue, _kPFVideoPropertyVideoContainsCinematicData, 
+                       _kPFVideoPropertyVideoDurationTimescale, _kPFVideoPropertyVideoDurationValue, 
                        _kPFVideoPropertyVideoDynamicRange, _kPFVideoPropertyVideoIsMontage, 
-                       _kUTTypePhotosAssetBundle, _m, _pf_estimateFullAnimatedImageMemoryCost ]
+                       _kUTTypePhotosAssetBundle, _m, _metadataLog, _pf_estimateFullAnimatedImageMemoryCost ]
     objc-classes:    [ PFAVReaderWriter, PFAnimatedImage, PFAssetAdjustmentFingerprintData, 
                        PFAssetAdjustments, PFAssetBundle, PFAuxiliaryImageRecord, 
                        PFCachingArchiveIndex, PFCameraAdjustments, PFCameraAdjustmentsSerialization, 
@@ -241,8 +248,8 @@ exports:
                        PFLivePhotoPlaybackSettings, PFMediaCapabilities, PFMediaCapabilitiesQuery, 
                        PFMediaUtilities, PFMessagesStackLayoutFrameSolver, PFMetadata, 
                        PFMetadataBuilder, PFMetadataStateBreadcrumb, PFMetadataStateHandler, 
-                       PFMutableCameraAdjustments, PFPhotoSharingOperation, PFPhotosFaceUtilities, 
-                       PFProportionalIntegralController, PFPseudoRandomNumberGenerator, 
+                       PFMetadataTypeVerifier, PFMutableCameraAdjustments, PFPhotoSharingOperation, 
+                       PFPhotosFaceUtilities, PFProportionalIntegralController, PFPseudoRandomNumberGenerator, 
                        PFRWSampleBufferChannel, PFSceneTaxonomy, PFSceneTaxonomyNode, 
                        PFSharingRemaker, PFSharingRemakerOperation, PFSharingRemakerOptions, 
                        PFSharingUtilities, PFSinglePassVideoExportItem, PFSinglePassVideoExportItemStatistics, 

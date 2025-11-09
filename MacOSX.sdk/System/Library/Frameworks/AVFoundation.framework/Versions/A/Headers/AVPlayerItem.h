@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 /* Note that NSNotifications posted by AVPlayerItem may be posted on a different thread from the one on which the observer was registered. */
 
 // notifications                                                                                description
-AVF_EXPORT NSString *const AVPlayerItemTimeJumpedNotification			 API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(1.0));	// the item's current time has changed discontinuously
+AVF_EXPORT NSNotificationName const AVPlayerItemTimeJumpedNotification	 API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(1.0));	// the item's current time has changed discontinuously
 AVF_EXPORT NSString *const AVPlayerItemDidPlayToEndTimeNotification      API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));   // item has played to its end time
 AVF_EXPORT NSString *const AVPlayerItemFailedToPlayToEndTimeNotification API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));   // item has failed to play to its end time
 AVF_EXPORT NSString *const AVPlayerItemPlaybackStalledNotification       API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(1.0));    // media did not arrive in time to continue playback
@@ -296,10 +296,8 @@ AV_INIT_UNAVAILABLE
  @property		configuredTimeOffsetFromLive
  @abstract		Indicates how close to the latest content in a live stream playback will begin after a live start or a seek to kCMTimePositiveInfinity.
  @discussion	For non-live assets this value is kCMTimeInvalid.
- 
- This property must be accessed on the main thread/queue.
  */
-@property CMTime configuredTimeOffsetFromLive NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+@property CMTime configuredTimeOffsetFromLive API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
 /*!
  @property		recommendedTimeOffsetFromLive
@@ -319,11 +317,9 @@ AV_INIT_UNAVAILABLE
   Note that if the network cannot deliver media quickly enough to maintain the playback rate, playback may stall interminably.
  
  This property value has no effect if the asset is not a live stream. The default value of this property is NO.
- 
- This property must be accessed on the main thread/queue.
  */
 
-@property (nonatomic) BOOL automaticallyPreservesTimeOffsetFromLive NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0),watchos(6.0));
+@property (nonatomic) BOOL automaticallyPreservesTimeOffsetFromLive API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0),watchos(6.0));
 
 @end
 
@@ -557,10 +553,8 @@ AV_INIT_UNAVAILABLE
  @abstract Indicates the source audio channel layouts allowed by the receiver for spatialization.
  @discussion
    Spatialization uses psychoacoustic methods to create a more immersive audio rendering when the content is played on specialized headphones and speaker arrangements. When an AVPlayerItem's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMonoAndStereo the AVPlayer will attempt to spatialize content tagged with a stereo channel layout, two-channel content with no layout specified as well as mono. It is considered incorrect to render a binaural recording with spatialization. A binaural recording is captured using two carefully placed microphones at each ear where the intent, when played on headphones, is to reproduce a naturally occurring spatial effect. Content tagged with a binaural channel layout will ignore this property value. When an AVPlayerItem's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMultichannel the AVPlayer will attempt to spatialize any decodable multichannel layout. Setting this property to AVAudioSpatializationFormatMonoStereoAndMultichannel indicates that the sender allows the AVPlayer to spatialize any decodable mono, stereo or multichannel layout. This property is not observable. The default value for this property with video content is AVAudioSpatializationFormatMonoStereoAndMultichannel. Otherwise, audio only content default value is AVAudioSpatializationFormatMultichannel.
- 
- This property must be accessed on the main thread/queue.
  */
-@property (nonatomic, assign) AVAudioSpatializationFormats allowedAudioSpatializationFormats NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(11.0), ios(14.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, assign) AVAudioSpatializationFormats allowedAudioSpatializationFormats API_AVAILABLE(macos(11.0), ios(14.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property audioMix
@@ -653,10 +647,8 @@ AV_INIT_UNAVAILABLE
 	
 	Note that preferredPeakBitRate still applies unconditionally.  If preferredPeakBitRateForExpensiveNetworks is less restrictive (greater) than preferredPeakBitRate,
 	preferredPeakBitRateForExpensiveNetworks has no practical effect.
- 
-	This property must be accessed on the main thread/queue.
 */
-@property double preferredPeakBitRateForExpensiveNetworks NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+@property double preferredPeakBitRateForExpensiveNetworks API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  @property preferredMaximumResolution
@@ -678,10 +670,8 @@ AV_INIT_UNAVAILABLE
  
 	Note that preferredMaximumResolution still applies unconditionally.  If preferredMaximumResolutionForExpensiveNetworks is less restrictive (higher resolution)
 	than preferredMaximumResolution, preferredMaximumResolutionForExpensiveNetworks has no practical effect.
- 
-	This property must be accessed on the main thread/queue.
  */
-@property CGSize preferredMaximumResolutionForExpensiveNetworks NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+@property CGSize preferredMaximumResolutionForExpensiveNetworks API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property		startsOnFirstEligibleVariant

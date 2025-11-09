@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           98ECC37B-63D7-39A4-BB3E-FB41FEA155BC
+    value:           EE7D78E3-C8DA-3F37-8FA2-013273F7F7FC
   - target:          x86_64-maccatalyst
-    value:           98ECC37B-63D7-39A4-BB3E-FB41FEA155BC
+    value:           EE7D78E3-C8DA-3F37-8FA2-013273F7F7FC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           53DD8B73-93AF-3AFC-8FB7-D82ABC269E3C
+    value:           3CF490A1-0770-3288-ABAF-C3656717B3E1
   - target:          arm64e-maccatalyst
-    value:           53DD8B73-93AF-3AFC-8FB7-D82ABC269E3C
+    value:           3CF490A1-0770-3288-ABAF-C3656717B3E1
 install-name:    '/System/Library/PrivateFrameworks/WirelessProximity.framework/Versions/A/WirelessProximity'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

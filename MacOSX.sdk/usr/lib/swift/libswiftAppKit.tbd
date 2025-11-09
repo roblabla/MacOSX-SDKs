@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           637CDD79-F05A-365C-B0D8-E0DFD9095CC2
+    value:           DDC77461-98AB-3A5B-B17E-99BF23031E94
   - target:          x86_64-maccatalyst
-    value:           637CDD79-F05A-365C-B0D8-E0DFD9095CC2
+    value:           DDC77461-98AB-3A5B-B17E-99BF23031E94
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           07E89F19-7656-3C4D-9F3D-6608294DB275
+    value:           A52FC21C-3124-3EF0-9E69-93F9E76189B9
   - target:          arm64e-maccatalyst
-    value:           07E89F19-7656-3C4D-9F3D-6608294DB275
+    value:           A52FC21C-3124-3EF0-9E69-93F9E76189B9
 install-name:    '/usr/lib/swift/libswiftAppKit.dylib'
-current-version: 107
+current-version: 109
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -284,6 +284,8 @@ exports:
                        '_$s10Foundation15AttributeScopesO6AppKitE0dE10AttributesV11strokeWidthAF06StrokehB0OvpMV', 
                        '_$s10Foundation15AttributeScopesO6AppKitE0dE10AttributesV11superscriptAF011SuperscriptB0Ovg', 
                        '_$s10Foundation15AttributeScopesO6AppKitE0dE10AttributesV11superscriptAF011SuperscriptB0OvpMV', 
+                       '_$s10Foundation15AttributeScopesO6AppKitE0dE10AttributesV13accessibilityAC13AccessibilityE0hF0Vvg', 
+                       '_$s10Foundation15AttributeScopesO6AppKitE0dE10AttributesV13accessibilityAC13AccessibilityE0hF0VvpMV', 
                        '_$s10Foundation15AttributeScopesO6AppKitE0dE10AttributesV14baselineOffsetAF08BaselinehB0Ovg', 
                        '_$s10Foundation15AttributeScopesO6AppKitE0dE10AttributesV14baselineOffsetAF08BaselinehB0OvpMV', 
                        '_$s10Foundation15AttributeScopesO6AppKitE0dE10AttributesV14paragraphStyleAF09ParagraphhB0Ovg', 
@@ -491,7 +493,11 @@ exports:
                        '_$sSo14NSTouchBarItemCs38__DefaultCustomPlaygroundQuickLookable6AppKitMc', 
                        '_$sSo15NSAppKitVersiona03AppB001_dbB23NumericRawRepresentableACMc', 
                        '_$sSo15NSAppKitVersiona03AppB001_dbB23NumericRawRepresentableACWP', 
-                       '_$sSo15NSAppKitVersionaSL03AppB0Mc', '_$sSo15NSOpenGLContextC6AppKitE13openGLVersions5Int32V5major_AF5minortvgZ', 
+                       '_$sSo15NSAppKitVersiona03AppB0E11number10_14ABvgZ', '_$sSo15NSAppKitVersiona03AppB0E11number10_15ABvgZ', 
+                       '_$sSo15NSAppKitVersiona03AppB0E13number10_14_1ABvgZ', '_$sSo15NSAppKitVersiona03AppB0E13number10_14_2ABvgZ', 
+                       '_$sSo15NSAppKitVersiona03AppB0E13number10_14_3ABvgZ', '_$sSo15NSAppKitVersiona03AppB0E13number10_14_4ABvgZ', 
+                       '_$sSo15NSAppKitVersiona03AppB0E13number10_14_5ABvgZ', '_$sSo15NSAppKitVersionaSL03AppB0Mc', 
+                       '_$sSo15NSOpenGLContextC6AppKitE13openGLVersions5Int32V5major_AF5minortvgZ', 
                        '_$sSo16NSLayoutPrioritya6AppKit01_cdD23NumericRawRepresentableACMc', 
                        '_$sSo16NSLayoutPrioritya6AppKit01_cdD23NumericRawRepresentableACWP', 
                        '_$sSo16NSLayoutPriorityaSL6AppKitMc', '_$sSo16NSUnderlineStyleVSH6AppKitMc', 
@@ -624,5 +630,9 @@ exports:
                        '_$sSo8NSCursorC6AppKitE33_defaultCustomPlaygroundQuickLooks01_fgH0Ovg', 
                        '_$sSo8NSCursorC6AppKitE33_defaultCustomPlaygroundQuickLooks01_fgH0OvpMV', 
                        '_$sSo8NSCursorCs38__DefaultCustomPlaygroundQuickLookable6AppKitMc', 
+                       '_$sSo8NSScreenC6AppKitE20auxiliaryTopLeftAreaSo6CGRectVSgvg', 
+                       '_$sSo8NSScreenC6AppKitE20auxiliaryTopLeftAreaSo6CGRectVSgvpMV', 
+                       '_$sSo8NSScreenC6AppKitE21auxiliaryTopRightAreaSo6CGRectVSgvg', 
+                       '_$sSo8NSScreenC6AppKitE21auxiliaryTopRightAreaSo6CGRectVSgvpMV', 
                        '__swift_FORCE_LOAD_$_swiftAppKit' ]
 ...

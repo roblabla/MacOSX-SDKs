@@ -30,6 +30,15 @@
 #define B2P_DS_TAG_FWUP_BUD_TO_CASE_L  "b2c.l"
 #define B2P_DS_TAG_FWUP_BUD_TO_CASE_R  "b2c.r"
 
+  /*! Number of temperature ranges for battery health */
+#define BATT_HEALTH_NUM_TEMP_RANGES    6
+  /*! Number of voltage ranges for battery health */
+#define BATT_HEALTH_NUM_VOLTAGE_RANGES 5
+  /*! Number of milestones for battery health */
+#define BATT_HEALTH_MILESTONES         6
+  /*! Length of SN */
+#define B2P_SERIAL_NUM_LEN             (20)
+
 /**
  * @defgroup B2P_CMD_RSP_UNTETHERED B2P Command and Response codes for Untethered
  * @brief Opcode 0x400.
@@ -89,12 +98,12 @@
 #define B2P_CMD_BATTERY_INFO_GET        0x0432
 #define B2P_RSP_BATTERY_INFO_GET        0x0433 /**< See #B2P_RSP_BATTERY_INFO_GET_s. */
 #define B2P_CMD_CASE_INFO_SEND          0x0434 /**< See #B2P_CMD_CASE_INFO_SEND_s. */
-#define B2P_RSP_CASE_INFO_SEND          0x0435 
+#define B2P_RSP_CASE_INFO_SEND          0x0435
 #define B2P_CMD_SWEAT_RESET             0x0436
 #define B2P_RSP_SWEAT_RESET             0x0437
-#define B2P_CMD_BATMAN_GET              0x0438 
+#define B2P_CMD_BATMAN_GET              0x0438
 #define B2P_RSP_BATMAN_GET              0x0439 /**< See #B2P_RSP_BATMAN_GET_s. */
-#define B2P_CMD_CHARGER_REG_GET         0x0440 
+#define B2P_CMD_CHARGER_REG_GET         0x0440
 #define B2P_RSP_CHARGER_REG_GET         0x0441 /**< See #B2P_RSP_CHARGER_REG_GET_s. */
 #define B2P_CMD_CASE_SN_SEND            0x0442 /**< See #B2P_CMD_CASE_SN_SEND_s. */
 #define B2P_RSP_CASE_SN_SEND            0x0443
@@ -111,7 +120,7 @@
 #define B2P_CMD_BUD_COMMS_LVL_SET       0x044E /**< See #B2P_CMD_BUD_COMMS_LVL_SET_s. */
 #define B2P_RSP_BUD_COMMS_LVL_SET       0x044F
 #define B2P_CMD_BUD_COMMS_LVL_GET       0x0450
-#define B2P_RSP_BUD_COMMS_LVL_GET       0x0451 /**< See #B2P_RSP_BUD_COMMS_LVL_GET_s. */ 
+#define B2P_RSP_BUD_COMMS_LVL_GET       0x0451 /**< See #B2P_RSP_BUD_COMMS_LVL_GET_s. */
 #define B2P_CMD_BUD_SWAP_TRIGGER        0x0452
 #define B2P_RSP_BUD_SWAP_TRIGGER        0x0453
 #define B2P_CMD_BT_CADDR_GET            0x0454
@@ -122,7 +131,7 @@
 #define B2P_RSP_FWUP_CLEAR              0x0459
 #define B2P_CMD_BUD_SIDE_GET            0x045A
 #define B2P_RSP_BUD_SIDE_GET            0x045B /**< See #B2P_RSP_BUD_SIDE_GET_s. */
-#define B2P_CMD_BUD_UNCOUPLE            0x045C 
+#define B2P_CMD_BUD_UNCOUPLE            0x045C
 #define B2P_RSP_BUD_UNCOUPLE            0x045D
 #define B2P_CMD_SYS_DATA_FETCH          0x045E
 #define B2P_RSP_SYS_DATA_FETCH          0x045F /**< See #B2P_RSP_SYS_DATA_FETCH_s. */
@@ -158,11 +167,56 @@
 #define B2P_RSP_ONE_BUD_ANC_MODE_GET    0x047D /**< See #B2P_RSP_ONE_BUD_ANC_MODE_GET_s. */
 #define B2P_CMD_ONE_BUD_ANC_MODE_SET    0x047E /**< See #B2P_CMD_ONE_BUD_ANC_MODE_SET_s. */
 #define B2P_RSP_ONE_BUD_ANC_MODE_SET    0x047F
+#define B2P_CMD_BUD_DOCK_STATE_SET      0x0480 /**< See #B2P_CMD_BUD_DOCK_STATE_SET_s. */
+#define B2P_RSP_BUD_DOCK_STATE_SET      0x0481
+#define B2P_CMD_BUD_DOCK_STATE_GET      0x0482
+#define B2P_RSP_BUD_DOCK_STATE_GET      0x0483 /**< See #B2P_RSP_BUD_DOCK_STATE_GET_s. */
+#define B2P_CMD_BUD_LID_STATE_SET       0x0484 /**< See #B2P_CMD_BUD_LID_STATE_SET_s. */
+#define B2P_RSP_BUD_LID_STATE_SET       0x0485
+#define B2P_CMD_BUD_LID_STATE_GET       0x0486
+#define B2P_RSP_BUD_LID_STATE_GET       0x0487 /**< See #B2P_RSP_BUD_LID_STATE_GET_s. */
+#define B2P_CMD_STEM_CLICK_GET          0x0488
+#define B2P_RSP_STEM_CLICK_GET          0x0489
+#define B2P_CMD_STEM_CLICK_SET          0x048A
+#define B2P_RSP_STEM_CLICK_SET          0x048B
+#define B2P_CMD_CASE_MGR_STATE_LOCK_SET 0x048C /**< See #B2P_CMD_CASE_MGR_STATE_LOCK_SET_s. */
+#define B2P_RSP_CASE_MGR_STATE_LOCK_SET 0x048D
+#define B2P_CMD_CASE_MGR_STATE_LOCK_GET 0x048E
+#define B2P_RSP_CASE_MGR_STATE_LOCK_GET 0x048F /**< See #B2P_RSP_CASE_MGR_STATE_LOCK_GET_s. */
+#define B2P_CMD_IED_STATE_SET           0x0490 /**< See #B2P_CMD_IED_STATE_SET_s. */
+#define B2P_RSP_IED_STATE_SET           0x0491
+#define B2P_CMD_STILL_STATE_SET         0x0492 /**< See #B2P_CMD_STILL_STATE_SET_s. */
+#define B2P_RSP_STILL_STATE_SET         0x0493
+#define B2P_CMD_LOCATION_MGR_STATE_GET  0x0494
+#define B2P_RSP_LOCATION_MGR_STATE_GET  0x0495 /**< See #B2P_RSP_LOCATION_MGR_STATE_GET_s. */
+#define B2P_CMD_ROSE                    0x0496 /**< See #B2P_CMD_ROSE_s. */
+#define B2P_RSP_ROSE                    0x0497
+#define B2P_CMD_BLE_LOG_CONFIG          0x0498 /**< See #B2P_CMD_BLE_LOG_CONFIG_s. */
+#define B2P_RSP_BLE_LOG_CONFIG          0x0499
+#define B2P_CMD_BLE_DTM                 0x049A /**< See #B2P_CMD_BLE_DTM_s. */
+#define B2P_RSP_BLE_DTM                 0x049B
+#define B2P_CMD_FTU_NV_ERASE            0x049C /**< FTU = first time use (awd_ftu) **/
+#define B2P_RSP_FTU_NV_ERASE            0x049D
+#define B2P_CMD_CASE_COUPLING           0x049E /**< See #B2P_CMD_CASE_COUPLING_s. */
+#define B2P_RSP_CASE_COUPLING           0x049F /**< See #B2P_RSP_CASE_COUPLING_s. */
+
 
 /** @} */
 /*********
  * ENUMs *
  *********/
+
+/**
+ * @brief B2P serial number components for untethered platform.
+ */
+typedef enum
+{
+  B2P_SN_platform_start = B2P_SN_common_end,
+  B2P_SN_LEFT_BUD,
+  B2P_SN_RIGHT_BUD,
+  B2P_SN_CASE,
+  B2P_SN_platform_end
+} B2P_SN_PLATFORM_e;
 
 /**
  * @brief Pairing State Enable.
@@ -325,6 +379,115 @@ typedef enum
   B2P_ONE_BUD_ANC_MODE_enable
 } B2P_ONE_BUD_ANC_MODE_e;
 
+/**
+ * @brief Bud dock States.
+ */
+typedef enum
+{
+  B2P_BUD_DOCK_STATE_unknown,
+  B2P_BUD_DOCK_STATE_undocked,
+  B2P_BUD_DOCK_STATE_docked,
+  B2P_BUD_DOCK_STATE_docked_dead
+} B2P_BUD_DOCK_STATE_e;
+
+/**
+ * @brief Bud lid States.
+ */
+typedef enum
+{
+  B2P_BUD_LID_STATE_unknown,
+  B2P_BUD_LID_STATE_closed,
+  B2P_BUD_LID_STATE_open
+} B2P_BUD_LID_STATE_e;
+
+/**
+ * @brief Bud case manager state lock.
+ */
+typedef enum
+{
+  B2P_CASE_MGR_STATE_LOCK_disable,
+  B2P_CASE_MGR_STATE_LOCK_enable
+} B2P_CASE_MGR_STATE_LOCK_e;
+
+
+/**
+* @brief Bud stem click actions
+*/
+typedef enum
+{
+ B2P_STEM_ACTION_UNKNOWN,
+ B2P_STEM_ACTION_CLICK_DOWN,
+ B2P_STEM_ACTION_LIFT_UP,
+} B2P_STEM_ACTION_e;
+
+/**
+* @brief Bud stem click gestures
+*/
+typedef enum
+{
+ B2P_STEM_GESTURE_UNKNOWN,
+ B2P_STEM_GESTURE_SINGLE,
+ B2P_STEM_GESTURE_DOUBLE,
+ B2P_STEM_GESTURE_TRIPPLE,
+ B2P_STEM_GESTURE_CLICK_HOLD,
+ B2P_STEM_GESTURE_SWIPE_UP,
+ B2P_STEM_GESTURE_SWIPE_DOWN,
+}B2P_STEM_GESTURE_e;
+
+/**
+ * @brief IED States.
+ */
+typedef enum
+{
+  B2P_IED_STATE_in_ear,
+  B2P_IED_STATE_out_of_ear
+} B2P_IED_STATE_e;
+
+/**
+ * @brief Stillness service states.
+ */
+typedef enum
+{
+  B2P_STILL_STATE_moving,
+  B2P_STILL_STATE_still
+} B2P_STILL_STATE_e;
+
+/**
+ * @brief Location manager states, correspond to location_manager_state_e
+ * in location_manager_public.h
+ */
+typedef enum
+{
+  B2P_LOCATION_MGR_STATE_undocked,
+  B2P_LOCATION_MGR_STATE_undocked_tabletop,
+  B2P_LOCATION_MGR_STATE_undocked_out_of_ear,
+  B2P_LOCATION_MGR_STATE_undocked_in_ear,
+  B2P_LOCATION_MGR_STATE_docked,
+  B2P_LOCATION_MGR_STATE_docked_lid_open,
+  B2P_LOCATION_MGR_STATE_docked_lid_closed
+} B2P_LOCATION_MGR_STATE_e;
+
+/**
+ * @brief Rose subcommands
+ */
+typedef enum
+{
+  B2P_ROSE_boot,
+  B2P_ROSE_ping,
+  B2P_ROSE_range,
+  B2P_ROSE_passthrough,
+} B2P_ROSE_SUBCMDS_e;
+
+/**
+ * @brief BLE DTM actions
+ */
+typedef enum
+{
+  B2P_BLE_DTM_ACTION_disable,
+  B2P_BLE_DTM_ACTION_enable,
+  B2P_BLE_DTM_ACTION_execute,
+} B2P_BLE_DTM_ACTION_e;
+
 /***********
  * STRUCTs *
  ***********/
@@ -337,7 +500,7 @@ typedef struct ATTR_PACKED
   // Last us counters
   uint16_t lastUsCounter1[2];
   uint16_t lastUsCounter2[2];
-  
+
   // Min maxes
   uint16_t budDetectMinUsCounter_1[2];
   uint16_t budDetectMaxUsCounter_1[2];
@@ -353,7 +516,7 @@ typedef struct ATTR_PACKED
   uint16_t sweatMaxUsCounter_1[2];
   uint16_t sweatMinUsCounter_2[2];
   uint16_t sweatMaxUsCounter_2[2];
-  
+
   // Number of detections
   uint32_t numSweatDetections[2];
   uint32_t sweatToBudDetectCount[2];
@@ -369,7 +532,7 @@ typedef struct ATTR_PACKED
   uint16_t budBatteryVoltage[2];
   int16_t  budBatteryCurrent[2];
   int8_t   budBatteryTemp[2];
-  
+
   uint32_t caseBatteryVoltage;
   int16_t  caseBatteryCurrent;
 
@@ -698,7 +861,7 @@ typedef struct ATTR_PACKED
 
 /**
  * @brief Structure to get the battery info.
- *        should be same as "AACP_BATTERY_INFO" 
+ *        should be same as "AACP_BATTERY_INFO"
  */
 typedef struct ATTR_PACKED
 {
@@ -995,5 +1158,196 @@ typedef struct ATTR_PACKED
 {
   uint8_t anc_mode;     /**< See #B2P_ONE_BUD_ANC_MODE_e. */
 } B2P_CMD_ONE_BUD_ANC_MODE_SET_s;
+
+/**
+ * @brief The command format for bud dock state set
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t my_state; /**< See #B2P_BUD_DOCK_STATE_e. */
+} B2P_CMD_BUD_DOCK_STATE_SET_s;
+
+/**
+ * @brief The response format for bud dock state get
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t my_state; /**< See #B2P_BUD_DOCK_STATE_e. */
+} B2P_RSP_BUD_DOCK_STATE_GET_s;
+
+/**
+ * @brief The command format for bud lid state set
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t state; /**< See #B2P_BUD_LID_STATE_e. */
+} B2P_CMD_BUD_LID_STATE_SET_s;
+
+/**
+ * @brief The response format for bud lid state get
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t state; /**< See #B2P_BUD_LID_STATE_e. */
+} B2P_RSP_BUD_LID_STATE_GET_s;
+
+/**
+ * @brief The command format for bud case manager state lock set
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t lock; /**< See #B2P_CASE_MGR_STATE_LOCK_e. */
+} B2P_CMD_CASE_MGR_STATE_LOCK_SET_s;
+
+/**
+ * @brief The command format for bud case manager state lock get
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t lock; /**< See #B2P_CASE_MGR_STATE_LOCK_e. */
+} B2P_RSP_CASE_MGR_STATE_LOCK_GET_s;
+
+/**
+ * @brief The command format for previous stem click action and gesture being set
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t action;  /**< B2P_STEM_ACTION_e.*/
+  uint8_t gesture; /**< B2P_STEM_GESTURE_e.*/
+} B2P_CMD_STEM_CLICK_SET_s;
+
+/**
+ * @brief The command format for previous stem click action and gesture being set
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t action;    /**< B2P_STEM_ACTION_e.*/
+  uint8_t gesture;   /**< B2P_STEM_GESTURE_e.*/
+} B2P_RSP_STEM_CLICK_GET_s;
+
+/**
+ * @brief AWD battery health data (format per batteryAWD_health_logging_t in AudioProductsDrivers)
+ */
+typedef struct
+{
+  uint16_t cycle_count;                                                                               // unit = count
+  uint16_t time_at_voltage_tempMatrix_h[BATT_HEALTH_NUM_TEMP_RANGES][BATT_HEALTH_NUM_VOLTAGE_RANGES]; // unit = hours
+  uint16_t time_charging_total_h;                                                                     // unit = hours
+  uint16_t time_charging_wireless_total_h;                                                            // unit = hours
+  uint16_t time_charging_topOff_h;                                                                    // unit = hours
+  uint16_t time_charging_topOffWireless_h;                                                            // unit = hours
+  uint16_t time_charging_topOffWired_h;                                                               // unit = hours
+  int16_t  temp_batt_max_dC;                                          // unit = .1 degrees Celsius
+  int16_t  temp_batt_avg_dC;                                          // unit = .1 degrees Celsius
+  int16_t  temp_batt_min_dC;                                          // unit = .1 degrees Celsius
+  int16_t  tempMlb_max_dC;                                            // unit = .1 degrees Celsius
+  uint16_t voltage_max_mV;                                            // unit = mV
+  uint16_t voltage_min_mV;                                            // unit = mV
+  uint16_t capacity_mAh;                                              // unit = microAh
+  uint16_t cycle_at_capacity;                                         // unit = count
+  uint16_t resistance;                                                // unit = 0.01 Ohms
+  int16_t  temp_sip_max;
+  int16_t  current_discharge_max_mA;                                  // unit = mA
+  uint16_t battery_vendor;
+  uint8_t  capacity_milestone_mAh[BATT_HEALTH_MILESTONES];            // unit = mAh
+  uint8_t  cycle_count_at_capacity_milestone[BATT_HEALTH_MILESTONES]; // unit = cycles at mA, resolution 6 cycles
+  uint8_t  time_in_field_milestone[BATT_HEALTH_MILESTONES];
+} B2P_CMD_METRIC_SEND_BATTERY_HEALTH_s;
+
+/**
+ * @brief The command format for IED state set
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t state; /**< See #B2P_IED_STATE_e. */
+} B2P_CMD_IED_STATE_SET_s;
+
+/**
+ * @brief The command format for stillness service state set
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t state; /**< See #B2P_STILL_STATE_e. */
+} B2P_CMD_STILL_STATE_SET_s;
+
+/**
+ * @brief The response format for getting location manager state
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t state;     /**< See #B2P_LOCATION_MGR_STATE_e. */
+} B2P_RSP_LOCATION_MGR_STATE_GET_s;
+
+/**
+ * @brief The command metric for sending rose controller commands to R1 chip
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t sub_cmd; /**< B2P_ROSE_SUBCMDS_e */
+  uint8_t data[];  /**< memcpy subcmd structs here */
+} B2P_CMD_ROSE_s;
+
+typedef struct ATTR_PACKED
+{
+  uint8_t power;           /**< 0: power off R1, 1: power on R1. Below params are only applicable for power on R1 */
+  uint8_t routing;         /**< 0: regular, 1: factory passthrough, 2: full passthrough */
+  uint8_t boot_speed;      /**< 0: slow, 1: fast */
+  uint8_t fw_log_enable;   /**< 0: disable, 1: enable */
+  uint8_t operating_mode;  /**< 0: default/ranging, 1: crypto */
+} B2P_SUBCMD_ROSE_BOOT_s;
+
+typedef struct ATTR_PACKED
+{
+  uint8_t start_range;       /**< 0: start ranging, 1: stop ranging */
+  uint16_t ranging_interval; /**< interval in ms between ranging cycles */
+  uint8_t rf_channel;        /**< 0: channel5, 1: channel9 */
+  uint64_t base_mac_address; /**< desired base mac address */
+  uint8_t packet_type;       /**< packet type (only 0/3/4/5 are supported) */
+  uint8_t dual_ranging;      /**< 0: disable, 1: enable */
+  uint16_t retry_interval;   /**< ranging retry interval in millisecs */
+  uint16_t retry_count;      /**< ranging retry count */
+} B2P_SUBCMD_ROSE_RANGE_s;
+
+/**
+ * @brief The BLE logging settings
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t enable_timestamp;  /**< 0: disable timestamp, 1: enable timestamp */
+} B2P_CMD_BLE_LOG_CONFIG_s;
+
+/**
+ * @brief The BLE direct test mode parameters
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t  action;           /**< 0: disable dtm, 1: enable dtm, 2: execute opcode */
+  uint16_t opcode;           /**< dtm command opcode */
+  uint32_t result;           /**< dtm command result */
+} B2P_CMD_BLE_DTM_s;
+
+/**
+ * @brief The BLE direct test mode response
+ */
+typedef B2P_CMD_BLE_DTM_s B2P_RSP_BLE_DTM_s;
+
+/**
+ * @brief Case coupling info from case to bud
+ *
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t case_bdaddr[B2P_BT_ADDR_LEN];
+  uint8_t case_serial_num[B2P_SERIAL_NUM_LEN];
+} B2P_CMD_CASE_COUPLING_s;
+
+/**
+ * @brief Case Coupling info as response from to case
+ *
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t bud_serial_num[B2P_SERIAL_NUM_LEN];
+} B2P_RSP_CASE_COUPLING_s;
 
 #endif /* B2P_DICT_UNTETHERED_H_ */

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3D8572F8-F48F-3713-8D9B-3FD729E7FAF4
+    value:           16E0CDF2-297C-32A6-8DBF-CBC6A8BED81A
   - target:          x86_64-maccatalyst
-    value:           3D8572F8-F48F-3713-8D9B-3FD729E7FAF4
+    value:           16E0CDF2-297C-32A6-8DBF-CBC6A8BED81A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D4297914-95E6-3CB6-88EC-758D780C2301
+    value:           26958401-0140-3DC3-97AC-F85615422ED1
   - target:          arm64e-maccatalyst
-    value:           D4297914-95E6-3CB6-88EC-758D780C2301
+    value:           26958401-0140-3DC3-97AC-F85615422ED1
 install-name:    '/System/Library/Frameworks/ModelIO.framework/Versions/A/ModelIO'
-current-version: 253
+current-version: 256.1
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]

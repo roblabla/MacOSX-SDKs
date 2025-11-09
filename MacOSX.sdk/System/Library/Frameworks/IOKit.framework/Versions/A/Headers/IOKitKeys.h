@@ -109,9 +109,11 @@
 // Entitlements required to open dext IOUserClient
 // Property is an array of strings containing CFBundleIdentifiers of service being opened
 #define kIODriverKitUserClientEntitlementsKey "com.apple.developer.driverkit.userclient-access"
-// Property is an array of strings containing entitlements that need to be present in the
-// dext providing the user client being opened
-#define kIODriverKitRequiredEntitlementsKey "com.apple.developer.driverkit.driver-access"
+
+// Allows the entitled process to open a user client connection to any dext that has specific entitlements
+// Property is an array of strings containing entitlements, one of which needs to be present
+// in the dext providing the user client being opened
+#define kIODriverKitRequiredEntitlementsKey "com.apple.private.driverkit.driver-access"
 
 // Entitlement of a dext that allows any task to open one of its IOUserClients
 #define kIODriverKitUserClientEntitlementAllowAnyKey "com.apple.developer.driverkit.allow-any-userclient-access"

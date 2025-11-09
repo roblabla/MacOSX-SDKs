@@ -166,19 +166,20 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
 /**
  Identity of the backing store of the domain on the system.
 
- This property only applies for extension that implement NSFileProviderReplicatedExtension.
+ This property only applies for extensions that implement NSFileProviderReplicatedExtension.
 
  This provides an identifier that uniquely identifies the backing store used by the system for
  the domain. When this identifier has changed, the system has dropped its backing store and is
  building a new one.
 
- The system may decide to rebuild its backing store if it got corrupted. The provider can also
- cause the backing store to be rebuilt by calling
- `-[NSFileProviderManager reimportItemsBelowItemWithIdentifier:completionHandler:]`.
+ The system may decide to rebuild its backing store if it got corrupted. The backing store can also
+ be rebuilt as a response to the provider calling `-[NSFileProviderManager reimportItemsBelowItemWithIdentifier:completionHandler:]`.
+ It is guaranteed that calling reimport on the root item will cause the backing store to be rebuilt,
+ but the system can also decide to do so when reimport is called on other items.
 
  When rebuilding the backing store, the system will invalidate any extension instance associated
- to that domain. As a consequence, the identity of the backing store is guaranteed to be stable
- for the lifetime of the NSFileProviderReplicatedExtension instance.
+ to that domain. As a consequence, the identity of the backing store associated with that domain
+ is guaranteed to be stable for the lifetime of the NSFileProviderReplicatedExtension instance.
  */
 @property (nonatomic, readonly, nullable) NSData *backingStoreIdentity FILEPROVIDER_API_AVAILABILITY_V4_0;
 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5632CF1E-CB0D-30B4-A31D-F33C86588ED7
+    value:           2AE23E4B-DC19-3965-94C7-362F7E321DE7
   - target:          x86_64-maccatalyst
-    value:           5632CF1E-CB0D-30B4-A31D-F33C86588ED7
+    value:           2AE23E4B-DC19-3965-94C7-362F7E321DE7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4C40E075-DEA2-3227-B140-D0C580AC503B
+    value:           65BAC59D-074A-37F7-8ED6-52C3C3C3083C
   - target:          arm64e-maccatalyst
-    value:           4C40E075-DEA2-3227-B140-D0C580AC503B
+    value:           65BAC59D-074A-37F7-8ED6-52C3C3C3083C
 install-name:    '/System/Library/PrivateFrameworks/CMCaptureCore.framework/Versions/A/CMCaptureCore'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -51,14 +51,17 @@ exports:
                        _kFigAppleMakerNote_PhotosAppFeatureFlags, _kFigAppleMakerNote_PhotosOriginatingSignature, 
                        _kFigAppleMakerNote_PhotosRenderEffect, _kFigAppleMakerNote_PhotosRenderOriginatingSignature, 
                        _kFigAppleMakerNote_QRMOutputType, _kFigAppleMakerNote_SISMethod, 
-                       _kFigAppleMakerNote_SpatialOverCaptureGroupIdentifier, _kFigAppleMakerNote_SpatialOverCaptureImageType, 
-                       _kFigAppleMakerNote_SphereExternalForceOffset, _kFigAppleMakerNote_SphereHealthAverageCurrent, 
-                       _kFigAppleMakerNote_SphereHealthTrackingError, _kFigAppleMakerNote_SphereMotionDataStatus, 
-                       _kFigAppleMakerNote_SphereStatus, _kFigAppleMakerNote_StillImageCaptureFlags, 
-                       _kFigAppleMakerNote_StillImageCaptureType, _kFigAppleMakerNote_StillImageProcessingFlags, 
-                       _kFigAppleMakerNote_StillImageProcessingHomography, _kFigAppleMakerNote_StillImageSNR, 
-                       _kFigAppleMakerNote_StillImageSNRType, _kFigAppleMakerNote_StillImageSceneFlags, 
-                       _kFigAppleMakerNote_SystemPressureLevel, _kFigAppleMakerNote_TimeOfFlightAssistedAutoFocusEstimatorContainsBlindSpot, 
+                       _kFigAppleMakerNote_SemanticStyle, _kFigAppleMakerNote_SemanticStyleKey_Preset, 
+                       _kFigAppleMakerNote_SemanticStyleKey_RenderingVersion, _kFigAppleMakerNote_SemanticStyleKey_ToneBias, 
+                       _kFigAppleMakerNote_SemanticStyleKey_WarmthBias, _kFigAppleMakerNote_SpatialOverCaptureGroupIdentifier, 
+                       _kFigAppleMakerNote_SpatialOverCaptureImageType, _kFigAppleMakerNote_SphereExternalForceOffset, 
+                       _kFigAppleMakerNote_SphereHealthAverageCurrent, _kFigAppleMakerNote_SphereHealthTrackingError, 
+                       _kFigAppleMakerNote_SphereMotionDataStatus, _kFigAppleMakerNote_SphereStatus, 
+                       _kFigAppleMakerNote_StillImageCaptureFlags, _kFigAppleMakerNote_StillImageCaptureType, 
+                       _kFigAppleMakerNote_StillImageProcessingFlags, _kFigAppleMakerNote_StillImageProcessingHomography, 
+                       _kFigAppleMakerNote_StillImageSNR, _kFigAppleMakerNote_StillImageSNRType, 
+                       _kFigAppleMakerNote_StillImageSceneFlags, _kFigAppleMakerNote_SystemPressureLevel, 
+                       _kFigAppleMakerNote_TimeOfFlightAssistedAutoFocusEstimatorContainsBlindSpot, 
                        _kFigAppleMakerNote_TimeOfFlightAssistedAutoFocusEstimatorMSPMeasuredDepth, 
                        _kFigAppleMakerNote_TimeOfFlightAssistedAutoFocusEstimatorMSPSensorConfidence, 
                        _kFigAppleMakerNote_TimeOfFlightAssistedAutoFocusEstimatorMeasuredDepth, 
@@ -215,6 +218,10 @@ exports:
                        _kFigCaptureSampleBufferAttachmentKey_SceneStabilityMetric, 
                        _kFigCaptureSampleBufferAttachmentKey_SceneStable, _kFigCaptureSampleBufferAttachmentKey_SparePixelBuffer, 
                        _kFigCaptureSampleBufferAttachmentKey_StreamingForegroundSegmentationBuffer, 
+                       _kFigCaptureSampleBufferAttachmentKey_StreamingSemanticStyleBackgroundLUT, 
+                       _kFigCaptureSampleBufferAttachmentKey_StreamingSemanticStyleForegroundLUT, 
+                       _kFigCaptureSampleBufferAttachmentKey_StreamingSemanticStylePersonMaskSampleBuffer, 
+                       _kFigCaptureSampleBufferAttachmentKey_SubjectRelightingCurveParameter, 
                        _kFigCaptureSampleBufferAttachmentKey_SushiRaw, _kFigCaptureSampleBufferAttachmentKey_TextRegions, 
                        _kFigCaptureSampleBufferAttachmentKey_TextRegionsCount, _kFigCaptureSampleBufferAttachmentKey_TrackedFaces, 
                        _kFigCaptureSampleBufferAttachmentKey_VideoPreviewHistogramData, 
@@ -235,8 +242,11 @@ exports:
                        _kFigCaptureSampleBufferMetadata_NRFRegisteredBracketCount, 
                        _kFigCaptureSampleBufferMetadata_NRFSRLStatus, _kFigCaptureSampleBufferMetadata_NRFStatus, 
                        _kFigCaptureSampleBufferMetadata_RequestedExposureBias, _kFigCaptureSampleBufferMetadata_SISMethod, 
-                       _kFigCaptureSampleBufferMetadata_Stationary, _kFigCaptureSampleBufferMetadata_UBFusionMode, 
-                       _kFigCaptureSampleBufferMetadata_UnifiedExposureType, _kFigCaptureSampleBufferMetadata_ZoomDebugCoreMediaFactor, 
+                       _kFigCaptureSampleBufferMetadata_STFStillAnalyticsVersion, 
+                       _kFigCaptureSampleBufferMetadata_STFStillApplied, _kFigCaptureSampleBufferMetadata_STFStillCorrectionStrength, 
+                       _kFigCaptureSampleBufferMetadata_STFStillSupported, _kFigCaptureSampleBufferMetadata_Stationary, 
+                       _kFigCaptureSampleBufferMetadata_UBFusionMode, _kFigCaptureSampleBufferMetadata_UnifiedExposureType, 
+                       _kFigCaptureSampleBufferMetadata_ZoomDebugCoreMediaFactor, 
                        _kFigCaptureSampleBufferMetadata_ZoomDebugISPFactor, _kFigCaptureSampleBufferMetadata_ZoomDebugTargetFactor, 
                        _kFigCaptureSampleBufferProcessorOption_ActiveSensorPortTypes, 
                        _kFigCaptureSampleBufferProcessorOption_CameraInfoByPortType, 
@@ -495,6 +505,7 @@ exports:
                        _kFigCaptureStreamMetadata_SynchronizedStreamsSynchronizationSourceZoomFactor, 
                        _kFigCaptureStreamMetadata_TargetLogicalFocusLensPosition, 
                        _kFigCaptureStreamMetadata_TemporalMotion, _kFigCaptureStreamMetadata_TimeMachineIndex, 
+                       _kFigCaptureStreamMetadata_TimeOfFlightAssistedAutoFocusCurrentFrameRate, 
                        _kFigCaptureStreamMetadata_TimeOfFlightAssistedAutoFocusEstimatorData, 
                        _kFigCaptureStreamMetadata_TimeOfFlightAssistedAutoFocusEstimatorResultsReady, 
                        _kFigCaptureStreamMetadata_TimeOfFlightFlickerDetectionData, 
@@ -990,7 +1001,10 @@ exports:
                        _kFigCaptureTextRegionAttachmentKey_AngularOffset, _kFigCaptureTextRegionAttachmentKey_AngularOffsetBoundingRect, 
                        _kFigCaptureTextRegionAttachmentKey_BoundingRect, _kFigCaptureTextRegionAttachmentKey_Confidence, 
                        _kFigCaptureTextRegionAttachmentKey_RegionID, _kFigCaptureTextRegionAttachmentKey_Timestamp, 
-                       _kFigCaptureTimeOfFlightConfigurationKey_ProjectorMode, _kFigCaptureVideoStabilizationMetadata_CinematicFutureMetadata, 
+                       _kFigCaptureTimeOfFlightConfigurationKey_ProjectorMode, _kFigCaptureVideoSTFAnalyticsKey_AnalyticsVersion, 
+                       _kFigCaptureVideoSTFAnalyticsKey_CancellationReason, _kFigCaptureVideoSTFAnalyticsKey_MaxCorrectionLevel, 
+                       _kFigCaptureVideoSTFAnalyticsKey_MeanCorrectionLevel, _kFigCaptureVideoSTFAnalyticsKey_VideoSTFLTMApplied, 
+                       _kFigCaptureVideoStabilizationMetadata_CinematicFutureMetadata, 
                        _kFigCaptureVideoStabilizationMetadata_CinematicFutureMetadataInitializationArray, 
                        _kFigCaptureVideoStabilizationMetadata_CinematicFutureMetadataNoMetadataDueToFlush, 
                        _kFigCaptureVideoStabilizationMetadata_CinematicFutureMetadataSerialNumber, 
@@ -1088,8 +1102,10 @@ exports:
                        _kFigQuadraRemosaicSampleBufferProcessorProperty_PaddingBottom, 
                        _kFigQuadraRemosaicSampleBufferProcessorProperty_PaddingTop, 
                        _kFigQuadraRemosaicSampleBufferProcessorProperty_QHDRSensorDefectivePixelInfo, 
+                       _kFigQuicktimeLivePhotoMetadataKey_SubjectRelightingAppliedCurveParameter, 
                        _kFigQuicktimeMetadataKey_LimitStillImageTransform, _kFigSampleBufferAttachmentKey_DepthDataDiscardedReason, 
-                       _kFigSampleBufferAttachmentKey_DepthMetadata, _kFigSampleBufferAttachmentKey_HasCorrespondingDepthData, 
+                       _kFigSampleBufferAttachmentKey_DepthDataInvalid, _kFigSampleBufferAttachmentKey_DepthMetadata, 
+                       _kFigSampleBufferAttachmentKey_HasCorrespondingDepthData, 
                        _kFigSampleBufferAttachmentKey_HasCorrespondingVisionData, 
                        _kFigSampleBufferAttachmentKey_PortraitEffectsMatteMetadata, 
                        _kFigSampleBufferAttachmentKey_SemanticSegmentationMatteMetadata, 
@@ -1147,6 +1163,7 @@ exports:
                        _kFigVideoStabilizationSampleBufferAttachmentKey_StabilizedOutputCenterQuaternion, 
                        _kFigVideoStabilizationSampleBufferAttachmentKey_StabilizedTrajectoryHomography, 
                        _kFigVideoStabilizationSampleBufferAttachmentKey_StabilizedTrajectoryHomographyTimestamp, 
+                       _kFigVideoStabilizationSampleBufferAttachmentKey_VideoSTFAnalytics, 
                        _kFigVideoStabilizationSampleBufferProcessorMetadata_CinematicFutureOutputFramePTS, 
                        _kFigVideoStabilizationSampleBufferProcessorMetadata_DebugCenterStabilizedQuaternion, 
                        _kFigVideoStabilizationSampleBufferProcessorMetadata_DebugCinematicSigmaApplied, 
@@ -1178,8 +1195,10 @@ exports:
                        _kFigVideoStabilizationSampleBufferProcessorOption_SmoothingMethod, 
                        _kFigVideoStabilizationSampleBufferProcessorOption_SystemPressure, 
                        _kFigVideoStabilizationSampleBufferProcessorOption_SystemPressureFactors, 
+                       _kFigVideoStabilizationSampleBufferProcessorOption_ThermalSystemPressure, 
                        _kFigVideoStabilizationSampleBufferProcessorOption_TransformPlatform, 
                        _kFigVideoStabilizationSampleBufferProcessorOption_UseISPMotionData, 
+                       _kFigVideoStabilizationSampleBufferProcessorOption_VideoSTFParameters, 
                        _kFigVideoStabilizationSampleBufferProcessorOutputMode_BlackBar, 
                        _kFigVideoStabilizationSampleBufferProcessorOutputMode_Crop, 
                        _kFigVideoStabilizationSampleBufferProcessorProperty_FlipHorizontalOrientation, 

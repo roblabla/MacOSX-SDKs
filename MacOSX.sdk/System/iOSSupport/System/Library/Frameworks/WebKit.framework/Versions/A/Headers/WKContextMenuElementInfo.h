@@ -31,7 +31,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-WK_CLASS_AVAILABLE(ios(13.0))
+WK_EXTERN API_AVAILABLE(ios(13.0))
 @interface WKContextMenuElementInfo : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

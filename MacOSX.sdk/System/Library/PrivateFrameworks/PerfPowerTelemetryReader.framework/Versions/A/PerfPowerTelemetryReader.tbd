@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E8CA56AC-222B-3678-ADD7-A625F099896A
+    value:           8F37BA3F-5392-306E-A60A-35108C1BD913
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B46A5262-88FC-3F29-82DF-384A809F7906
+    value:           24F010EE-83B3-3020-A930-CBA1F303F1E3
 install-name:    '/System/Library/PrivateFrameworks/PerfPowerTelemetryReader.framework/Versions/A/PerfPowerTelemetryReader'
 exports:
   - targets:         [ x86_64-macos ]

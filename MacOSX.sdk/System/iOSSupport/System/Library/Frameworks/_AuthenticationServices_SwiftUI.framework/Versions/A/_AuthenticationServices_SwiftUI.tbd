@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           0B760393-854C-3E93-A86F-7883089AC92E
+    value:           FD0AC00F-79C6-3564-9D99-23FD1E0DC6A5
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           8F4844CD-C0CD-3C5C-852D-F4AAE29C28A6
+    value:           24C95420-ED7B-3CBB-B1E3-3A4EDC77BDB7
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_AuthenticationServices_SwiftUI.framework/Versions/A/_AuthenticationServices_SwiftUI'
-current-version: 612.1.24
+current-version: 612.3.6
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]

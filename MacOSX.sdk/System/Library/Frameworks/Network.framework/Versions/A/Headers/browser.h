@@ -17,6 +17,8 @@
 #include <Network/browse_result.h>
 #include <Network/error.h>
 
+#include <dispatch/dispatch.h>
+
 NW_ASSUME_NONNULL_BEGIN
 
 __BEGIN_DECLS

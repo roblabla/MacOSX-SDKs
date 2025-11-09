@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DDC4E356-6317-3061-993C-32AF4509194B
+    value:           AB95F896-5575-355C-9620-2891B504EA7F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F0A55282-8512-36DE-A443-7B7E8F0BE474
+    value:           D42EA92B-853E-3257-B8A9-7CD826C8F77B
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestionsUI.framework/Versions/A/CoreSuggestionsUI'
-current-version: 1150
+current-version: 1153.10
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -137,8 +137,10 @@ exports:
                        _SGUIAccessibilityIdentifierActionButton, _SGUIAccessibilityIdentifierCloseButton, 
                        _SGUIAccessibilityIdentifierSubtitleLabel, _SGUIAccessibilityIdentifierTitleLabel, 
                        _SGUICompositeImageNSCompositeOperationKey, _SGUICompositeImageNSImageKey, 
-                       _SGUICompositeImageNSRectKey, _dateStringForDate, _dispatchInContext, 
-                       _kSGSubscriptionsCategory, _timeStringForDate ]
+                       _SGUICompositeImageNSRectKey, __suggestionViewControllerPresenter, 
+                       _dateStringForDate, _dispatchInContext, _kSGSuggestionCategoryContactsId, 
+                       _kSGSuggestionCategoryEventsId, _kSGSuggestionCategoryRemindersId, 
+                       _kSGSuggestionCategorySubscriptionsId, _timeStringForDate ]
     objc-classes:    [ SGBanner, SGBannerUtility, SGBannerView, SGCalendarBannerIconCreator, 
                        SGContactSuggestion, SGContactSuggestionBase, SGEventSuggestion, 
                        SGEventSuggestionBase, SGFoundInSuggestionGuardedData, SGFoundInSuggestionPresenter, 

@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           51BA814B-75A6-3541-8420-6E1C802CDA98
+    value:           ED444E15-D575-3F0D-8FDE-09C5FF89B2B9
   - target:          x86_64-maccatalyst
-    value:           51BA814B-75A6-3541-8420-6E1C802CDA98
+    value:           ED444E15-D575-3F0D-8FDE-09C5FF89B2B9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7334FFE5-7054-3DCF-B911-E728AAC75967
+    value:           D394A37E-2377-3585-9BE6-28E9B5B1B107
   - target:          arm64e-maccatalyst
-    value:           7334FFE5-7054-3DCF-B911-E728AAC75967
+    value:           D394A37E-2377-3585-9BE6-28E9B5B1B107
 install-name:    '/usr/lib/swift/libswiftAccelerate.dylib'
-current-version: 26
+current-version: 27
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftAccelerate.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftAccelerate.dylib', 
@@ -27,7 +27,7 @@ exports:
                        '$ld$install_name$os10.13$@rpath/libswiftAccelerate.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftAccelerate.dylib', 
                        '$ld$install_name$os10.9$@rpath/libswiftAccelerate.dylib' ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '_$s10Accelerate0A13MutableBufferMp', '_$s10Accelerate0A13MutableBufferP010withUnsafebC7Pointeryqd__qd__Sry7ElementQzGzKXEKlFTj', 
                        '_$s10Accelerate0A13MutableBufferP010withUnsafebC7Pointeryqd__qd__Sry7ElementQzGzKXEKlFTq', 
                        '_$s10Accelerate0A13MutableBufferPAA0aC0Tb', '_$s10Accelerate0A13MutableBufferPAASMRzrlE010withUnsafebC7Pointeryqd__qd__Sry7ElementSTQzGzKXEKlF', 
@@ -150,11 +150,19 @@ exports:
                        '_$s10Accelerate30vDSP_FourierTransformFunctionsTL', '_$s10Accelerate32BNNSActivationFunctionScaledTanhSo0bC0avM', 
                        '_$s10Accelerate32BNNSActivationFunctionScaledTanhSo0bC0avg', 
                        '_$s10Accelerate32BNNSActivationFunctionScaledTanhSo0bC0avs', 
-                       '_$s10Accelerate34vDSP_FloatingPointBiquadFilterableMp', '_$s10Accelerate34vDSP_FloatingPointBiquadFilterableP0E9FunctionsAC_AA01vb1_eG0Tn', 
+                       '_$s10Accelerate33vDSP_DiscreteFourierTransformableMp', '_$s10Accelerate33vDSP_DiscreteFourierTransformableP0cD18TransformFunctionsAC_AA01vb1_cf9LifecycleG0Tn', 
+                       '_$s10Accelerate33vDSP_DiscreteFourierTransformableTL', '_$s10Accelerate34vDSP_FloatingPointBiquadFilterableMp', 
+                       '_$s10Accelerate34vDSP_FloatingPointBiquadFilterableP0E9FunctionsAC_AA01vb1_eG0Tn', 
                        '_$s10Accelerate34vDSP_FloatingPointBiquadFilterablePSBTb', 
                        '_$s10Accelerate34vDSP_FloatingPointBiquadFilterableTL', '_$s10Accelerate37BNNSActivationFunctionRectifiedLinearSo0bC0avM', 
                        '_$s10Accelerate37BNNSActivationFunctionRectifiedLinearSo0bC0avg', 
                        '_$s10Accelerate37BNNSActivationFunctionRectifiedLinearSo0bC0avs', 
+                       '_$s10Accelerate40vDSP_DiscreteTransformLifecycleFunctionsMp', 
+                       '_$s10Accelerate40vDSP_DiscreteTransformLifecycleFunctionsP04makec7FourierD08previous5count9direction13transformTypes13OpaquePointerVAJSg_SiAA01vB0O0hD9DirectionOAM012DFTTransformM0OtKFZTj', 
+                       '_$s10Accelerate40vDSP_DiscreteTransformLifecycleFunctionsP04makec7FourierD08previous5count9direction13transformTypes13OpaquePointerVAJSg_SiAA01vB0O0hD9DirectionOAM012DFTTransformM0OtKFZTq', 
+                       '_$s10Accelerate40vDSP_DiscreteTransformLifecycleFunctionsP12destroySetupyys13OpaquePointerVFZTj', 
+                       '_$s10Accelerate40vDSP_DiscreteTransformLifecycleFunctionsP12destroySetupyys13OpaquePointerVFZTq', 
+                       '_$s10Accelerate40vDSP_DiscreteTransformLifecycleFunctionsTL', 
                        '_$s10Accelerate42BNNSActivationFunctionLeakyRectifiedLinearSo0bC0avM', 
                        '_$s10Accelerate42BNNSActivationFunctionLeakyRectifiedLinearSo0bC0avg', 
                        '_$s10Accelerate42BNNSActivationFunctionLeakyRectifiedLinearSo0bC0avs', 
@@ -1236,6 +1244,21 @@ exports:
                        '_$s10Accelerate4vDSPO22integerToFloatingPoint_08floatingF4TypeSayq_Gx_q_mtAA0A6BufferRzAA01vb1_eF11ConvertableR_s6UInt32V7ElementRtzr0_lFZ', 
                        '_$s10Accelerate4vDSPO23indexOfMaximumMagnitudeySu_SdtxAA0A6BufferRzSd7ElementRtzlFZ', 
                        '_$s10Accelerate4vDSPO23indexOfMaximumMagnitudeySu_SftxAA0A6BufferRzSf7ElementRtzlFZ', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformC8previous5count9direction13transformType02ofJ0AEy_xGAEy_SfGSg_SiAC0dE9DirectionOAC012DFTTransformJ0OxmtKcfC', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformC8previous5count9direction13transformType02ofJ0AEy_xGAEy_SfGSg_SiAC0dE9DirectionOAC012DFTTransformJ0OxmtKcfCTj', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformC8previous5count9direction13transformType02ofJ0AEy_xGAEy_SfGSg_SiAC0dE9DirectionOAC012DFTTransformJ0OxmtKcfCTq', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformC8previous5count9direction13transformType02ofJ0AEy_xGAEy_SfGSg_SiAC0dE9DirectionOAC012DFTTransformJ0OxmtKcfc', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformCAASdRszrlE9transform4real9imaginarySaySdGAG_AiHtqd___qd__tAA0A6BufferRd__Sd7ElementRtd__lF', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformCAASdRszrlE9transform9inputReal0G9Imaginary06outputH00jI0yqd___qd__qd_0_zqd_0_ztAA0A6BufferRd__AA0a7MutableK0Rd_0_Sd7ElementRtd__SdAMRtd_0_r0_lF', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformCAASfRszrlE9transform4real9imaginarySaySfGAG_AiHtqd___qd__tAA0A6BufferRd__Sf7ElementRtd__lF', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformCAASfRszrlE9transform9inputReal0G9Imaginary06outputH00jI0yqd___qd__qd_0_zqd_0_ztAA0A6BufferRd__AA0a7MutableK0Rd_0_Sf7ElementRtd__SfAMRtd_0_r0_lF', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformCAASo10DSPComplexVRszrlE9transform5input6outputyqd___qd_0_ztAA0A6BufferRd__AA0a7MutableJ0Rd_0_AG7ElementRtd__AgMRtd_0_r0_lF', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformCAASo10DSPComplexVRszrlE9transform5inputSayAGGqd___tAA0A6BufferRd__AG7ElementRtd__lF', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformCAASo16DSPDoubleComplexVRszrlE9transform5input6outputyqd___qd_0_ztAA0A6BufferRd__AA0a7MutableK0Rd_0_AG7ElementRtd__AgMRtd_0_r0_lF', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformCAASo16DSPDoubleComplexVRszrlE9transform5inputSayAGGqd___tAA0A6BufferRd__AG7ElementRtd__lF', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformCMa', '_$s10Accelerate4vDSPO24DiscreteFourierTransformCMn', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformCMo', '_$s10Accelerate4vDSPO24DiscreteFourierTransformCMu', 
+                       '_$s10Accelerate4vDSPO24DiscreteFourierTransformCfD', '_$s10Accelerate4vDSPO24DiscreteFourierTransformCfd', 
                        '_$s10Accelerate4vDSPO25FourierTransformDirectionO03dftE0So01vb5_DFT_E0Vvg', 
                        '_$s10Accelerate4vDSPO25FourierTransformDirectionO03dftE0So01vb5_DFT_E0VvpMV', 
                        '_$s10Accelerate4vDSPO25FourierTransformDirectionO03fftE0s5Int32Vvg', 
@@ -1249,6 +1272,34 @@ exports:
                        '_$s10Accelerate4vDSPO25FourierTransformDirectionOMa', '_$s10Accelerate4vDSPO25FourierTransformDirectionOMn', 
                        '_$s10Accelerate4vDSPO25FourierTransformDirectionON', '_$s10Accelerate4vDSPO25FourierTransformDirectionOSHAAMc', 
                        '_$s10Accelerate4vDSPO25FourierTransformDirectionOSQAAMc', 
+                       '_$s10Accelerate4vDSPO38DFTDoublePrecisionInterleavedFunctionsV12destroySetupyys13OpaquePointerVFZ', 
+                       '_$s10Accelerate4vDSPO38DFTDoublePrecisionInterleavedFunctionsV28makeDiscreteFourierTransform8previous5count9direction13transformTypes13OpaquePointerVALSg_SiAC0iJ9DirectionOAC012DFTTransformO0OtKFZ', 
+                       '_$s10Accelerate4vDSPO38DFTDoublePrecisionInterleavedFunctionsVAA01vb27_DiscreteTransformLifecycleF0AAMc', 
+                       '_$s10Accelerate4vDSPO38DFTDoublePrecisionInterleavedFunctionsVAA01vb27_DiscreteTransformLifecycleF0AAWP', 
+                       '_$s10Accelerate4vDSPO38DFTDoublePrecisionInterleavedFunctionsVMa', 
+                       '_$s10Accelerate4vDSPO38DFTDoublePrecisionInterleavedFunctionsVMn', 
+                       '_$s10Accelerate4vDSPO38DFTDoublePrecisionInterleavedFunctionsVN', 
+                       '_$s10Accelerate4vDSPO38DFTSinglePrecisionInterleavedFunctionsV12destroySetupyys13OpaquePointerVFZ', 
+                       '_$s10Accelerate4vDSPO38DFTSinglePrecisionInterleavedFunctionsV28makeDiscreteFourierTransform8previous5count9direction13transformTypes13OpaquePointerVALSg_SiAC0iJ9DirectionOAC012DFTTransformO0OtKFZ', 
+                       '_$s10Accelerate4vDSPO38DFTSinglePrecisionInterleavedFunctionsVAA01vb27_DiscreteTransformLifecycleF0AAMc', 
+                       '_$s10Accelerate4vDSPO38DFTSinglePrecisionInterleavedFunctionsVAA01vb27_DiscreteTransformLifecycleF0AAWP', 
+                       '_$s10Accelerate4vDSPO38DFTSinglePrecisionInterleavedFunctionsVMa', 
+                       '_$s10Accelerate4vDSPO38DFTSinglePrecisionInterleavedFunctionsVMn', 
+                       '_$s10Accelerate4vDSPO38DFTSinglePrecisionInterleavedFunctionsVN', 
+                       '_$s10Accelerate4vDSPO39DFTDoublePrecisionSplitComplexFunctionsV12destroySetupyys13OpaquePointerVFZ', 
+                       '_$s10Accelerate4vDSPO39DFTDoublePrecisionSplitComplexFunctionsV28makeDiscreteFourierTransform8previous5count9direction13transformTypes13OpaquePointerVALSg_SiAC0jK9DirectionOAC012DFTTransformP0OtKFZ', 
+                       '_$s10Accelerate4vDSPO39DFTDoublePrecisionSplitComplexFunctionsVAA01vb27_DiscreteTransformLifecycleG0AAMc', 
+                       '_$s10Accelerate4vDSPO39DFTDoublePrecisionSplitComplexFunctionsVAA01vb27_DiscreteTransformLifecycleG0AAWP', 
+                       '_$s10Accelerate4vDSPO39DFTDoublePrecisionSplitComplexFunctionsVMa', 
+                       '_$s10Accelerate4vDSPO39DFTDoublePrecisionSplitComplexFunctionsVMn', 
+                       '_$s10Accelerate4vDSPO39DFTDoublePrecisionSplitComplexFunctionsVN', 
+                       '_$s10Accelerate4vDSPO39DFTSinglePrecisionSplitComplexFunctionsV12destroySetupyys13OpaquePointerVFZ', 
+                       '_$s10Accelerate4vDSPO39DFTSinglePrecisionSplitComplexFunctionsV28makeDiscreteFourierTransform8previous5count9direction13transformTypes13OpaquePointerVALSg_SiAC0jK9DirectionOAC012DFTTransformP0OtKFZ', 
+                       '_$s10Accelerate4vDSPO39DFTSinglePrecisionSplitComplexFunctionsVAA01vb27_DiscreteTransformLifecycleG0AAMc', 
+                       '_$s10Accelerate4vDSPO39DFTSinglePrecisionSplitComplexFunctionsVAA01vb27_DiscreteTransformLifecycleG0AAWP', 
+                       '_$s10Accelerate4vDSPO39DFTSinglePrecisionSplitComplexFunctionsVMa', 
+                       '_$s10Accelerate4vDSPO39DFTSinglePrecisionSplitComplexFunctionsVMn', 
+                       '_$s10Accelerate4vDSPO39DFTSinglePrecisionSplitComplexFunctionsVN', 
                        '_$s10Accelerate4vDSPO3DCTC8previous5count13transformTypeAESgAI_SiAC012DCTTransformG0OtcfC', 
                        '_$s10Accelerate4vDSPO3DCTC8previous5count13transformTypeAESgAI_SiAC012DCTTransformG0OtcfCTj', 
                        '_$s10Accelerate4vDSPO3DCTC8previous5count13transformTypeAESgAI_SiAC012DCTTransformG0OtcfCTq', 
@@ -1431,6 +1482,12 @@ exports:
                        '_$s10Accelerate4vDSPO7minimumySfxAA0A6BufferRzSf7ElementRtzlFZ', 
                        '_$s10Accelerate4vDSPO7reverseyyxzAA0A13MutableBufferRzSd7ElementRtzlFZ', 
                        '_$s10Accelerate4vDSPO7reverseyyxzAA0A13MutableBufferRzSf7ElementRtzlFZ', 
+                       '_$s10Accelerate4vDSPO8DFTErrorO16errorDescriptionSSSgvg', 
+                       '_$s10Accelerate4vDSPO8DFTErrorO16errorDescriptionSSSgvpMV', 
+                       '_$s10Accelerate4vDSPO8DFTErrorO23invalidInterleavedCountyAESi_tcAEmFWC', 
+                       '_$s10Accelerate4vDSPO8DFTErrorO24invalidSplitComplexCountyAESi_AC16DFTTransformTypeOtcAEmFWC', 
+                       '_$s10Accelerate4vDSPO8DFTErrorOMa', '_$s10Accelerate4vDSPO8DFTErrorOMn', 
+                       '_$s10Accelerate4vDSPO8DFTErrorON', '_$s10Accelerate4vDSPO8DFTErrorOs5ErrorAAMc', 
                        '_$s10Accelerate4vDSPO8absolute_6resultySo15DSPSplitComplexV_xztAA0A13MutableBufferRzSf7ElementRtzlFZ', 
                        '_$s10Accelerate4vDSPO8absolute_6resultySo21DSPDoubleSplitComplexV_xztAA0A13MutableBufferRzSd7ElementRtzlFZ', 
                        '_$s10Accelerate4vDSPO8absolute_6resultyx_q_ztAA0A6BufferRzAA0a7MutableE0R_Sd7ElementRtzSdAHRt_r0_lFZ', 
@@ -1754,6 +1811,7 @@ exports:
                        '_$s12FFTFunctions10Accelerate25vDSP_FourierTransformablePTl', 
                        '_$s12SplitComplex10Accelerate30vDSP_FourierTransformFunctionsPTl', 
                        '_$s15BiquadFunctions10Accelerate018vDSP_FloatingPointA10FilterablePTl', 
+                       '_$s33DiscreteFourierTransformFunctions10Accelerate05vDSP_aB13TransformablePTl', 
                        '_$s6Scalar10Accelerate17vDSP_DFTFunctionsPTl', '_$s6Scalar10Accelerate20vDSP_BiquadFunctionsPTl', 
                        '_$s7Element10Accelerate0B6BufferPTl', '_$sSRyxG10Accelerate0A6BufferABMc', 
                        '_$sSRyxG10Accelerate0A6BufferABWP', '_$sSa10AccelerateSdRszlE16fromSplitComplex5scale5countSaySdGSo09DSPDoublecD0V_SdSitcfC', 
@@ -1763,23 +1821,28 @@ exports:
                        '_$sSb10Accelerate10BNNSScalarAAMc', '_$sSb10Accelerate10BNNSScalarAAWP', 
                        '_$sSb10AccelerateE12bnnsDataTypeSo08BNNSDataD0avgZ', '_$sSd10Accelerate29vDSP_FloatingPointConvertableAAMc', 
                        '_$sSd10Accelerate29vDSP_FloatingPointConvertableAAWP', '_$sSd10Accelerate29vDSP_FloatingPointGeneratableAAMc', 
-                       '_$sSd10Accelerate29vDSP_FloatingPointGeneratableAAWP', '_$sSd10Accelerate34vDSP_FloatingPointBiquadFilterableAAMc', 
+                       '_$sSd10Accelerate29vDSP_FloatingPointGeneratableAAWP', '_$sSd10Accelerate33vDSP_DiscreteFourierTransformableAAMc', 
+                       '_$sSd10Accelerate33vDSP_DiscreteFourierTransformableAAWP', 
+                       '_$sSd10Accelerate34vDSP_FloatingPointBiquadFilterableAAMc', 
                        '_$sSd10Accelerate34vDSP_FloatingPointBiquadFilterableAAWP', 
                        '_$sSd10Accelerate46vDSP_FloatingPointDiscreteFourierTransformableAAMc', 
                        '_$sSd10Accelerate46vDSP_FloatingPointDiscreteFourierTransformableAAWP', 
                        '_$sSf10Accelerate10BNNSScalarAAMc', '_$sSf10Accelerate10BNNSScalarAAWP', 
                        '_$sSf10Accelerate29vDSP_FloatingPointConvertableAAMc', '_$sSf10Accelerate29vDSP_FloatingPointConvertableAAWP', 
                        '_$sSf10Accelerate29vDSP_FloatingPointGeneratableAAMc', '_$sSf10Accelerate29vDSP_FloatingPointGeneratableAAWP', 
+                       '_$sSf10Accelerate33vDSP_DiscreteFourierTransformableAAMc', 
+                       '_$sSf10Accelerate33vDSP_DiscreteFourierTransformableAAWP', 
                        '_$sSf10Accelerate34vDSP_FloatingPointBiquadFilterableAAMc', 
                        '_$sSf10Accelerate34vDSP_FloatingPointBiquadFilterableAAWP', 
                        '_$sSf10Accelerate46vDSP_FloatingPointDiscreteFourierTransformableAAMc', 
                        '_$sSf10Accelerate46vDSP_FloatingPointDiscreteFourierTransformableAAWP', 
-                       '_$sSf10AccelerateE12bnnsDataTypeSo08BNNSDataD0avgZ', '_$sSo12BNNSDataTypea10AccelerateE4int8ABvgZ', 
-                       '_$sSo12BNNSDataTypea10AccelerateE5floatABvgZ', '_$sSo12BNNSDataTypea10AccelerateE5int16ABvgZ', 
-                       '_$sSo12BNNSDataTypea10AccelerateE5int32ABvgZ', '_$sSo12BNNSDataTypea10AccelerateE5uint8ABvgZ', 
-                       '_$sSo12BNNSDataTypea10AccelerateE6uint16ABvgZ', '_$sSo12BNNSDataTypea10AccelerateE6uint32ABvgZ', 
-                       '_$sSo12BNNSDataTypea10AccelerateE7float16ABvgZ', '_$sSo12BNNSDataTypea10AccelerateE8indexed8ABvgZ', 
-                       '_$sSo13BNNSLayerDataa10AccelerateE4data0D5_type0D6_scale0D5_biasABSVSg_So12BNNSDataTypeaS2ftcfC', 
+                       '_$sSf10AccelerateE12bnnsDataTypeSo08BNNSDataD0avgZ', '_$sSo10DSPComplexV10Accelerate33vDSP_DiscreteFourierTransformableACMc', 
+                       '_$sSo10DSPComplexV10Accelerate33vDSP_DiscreteFourierTransformableACWP', 
+                       '_$sSo12BNNSDataTypea10AccelerateE4int8ABvgZ', '_$sSo12BNNSDataTypea10AccelerateE5floatABvgZ', 
+                       '_$sSo12BNNSDataTypea10AccelerateE5int16ABvgZ', '_$sSo12BNNSDataTypea10AccelerateE5int32ABvgZ', 
+                       '_$sSo12BNNSDataTypea10AccelerateE5uint8ABvgZ', '_$sSo12BNNSDataTypea10AccelerateE6uint16ABvgZ', 
+                       '_$sSo12BNNSDataTypea10AccelerateE6uint32ABvgZ', '_$sSo12BNNSDataTypea10AccelerateE7float16ABvgZ', 
+                       '_$sSo12BNNSDataTypea10AccelerateE8indexed8ABvgZ', '_$sSo13BNNSLayerDataa10AccelerateE4data0D5_type0D6_scale0D5_biasABSVSg_So12BNNSDataTypeaS2ftcfC', 
                        '_$sSo13BNNSLayerDataa10AccelerateE4zeroABvgZ', '_$sSo13BNNSLayerDataa10AccelerateE8indexed84data0E6_tableABSPys4Int8VGSg_SPySfGtFZ', 
                        '_$sSo13vImage_BufferV10AccelerateE02cgA05flagsABSo10CGImageRefa_AC01vA0O7OptionsVtKcfC', 
                        '_$sSo13vImage_BufferV10AccelerateE02cgA06format5flagsABSo10CGImageRefa_So01va1_G6FormatVAC01vA0O7OptionsVtKcfC', 
@@ -1795,6 +1858,8 @@ exports:
                        '_$sSo14BNNSActivationa10AccelerateE8identityABvgZ', '_$sSo15DSPSplitComplexV10Accelerate25vDSP_FourierTransformableACMc', 
                        '_$sSo15DSPSplitComplexV10Accelerate25vDSP_FourierTransformableACWP', 
                        '_$sSo15DSPSplitComplexV10AccelerateE14fromInputArray9realParts09imaginaryH0ABSaySfG_AGzAGztcfC', 
+                       '_$sSo16DSPDoubleComplexV10Accelerate33vDSP_DiscreteFourierTransformableACMc', 
+                       '_$sSo16DSPDoubleComplexV10Accelerate33vDSP_DiscreteFourierTransformableACWP', 
                        '_$sSo18vImageConverterRefa10AccelerateE13sourceBuffers10colorSpaceSayAC01vA0O10BufferTypeOSgGSo07CGColorhC0a_tF', 
                        '_$sSo18vImageConverterRefa10AccelerateE17sourceBufferCountSivg', 
                        '_$sSo18vImageConverterRefa10AccelerateE17sourceBufferCountSivpMV', 

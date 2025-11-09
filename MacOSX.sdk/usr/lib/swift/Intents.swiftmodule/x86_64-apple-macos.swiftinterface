@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
-// swift-module-flags: -target x86_64-apple-macos12.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftIntents -swift-version 5 -enforce-exclusivity=checked -O -module-name Intents
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-module-flags: -target x86_64-apple-macos12.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftIntents -swift-version 5 -enforce-exclusivity=checked -O -module-name Intents
 import Foundation
 @_exported import Intents
 import Swift
@@ -81,61 +81,84 @@ extension Intents.INPlayMediaIntent {
     get
   }
 }
-@available(macOS 10.15, iOS 10.0, watchOS 3.2, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(iOS, introduced: 10.0, deprecated: 15.0, message: "INSearchCallHistoryIntent is deprecated. There is no replacement.")
+@available(watchOS, introduced: 3.2, deprecated: 8.0, message: "INSearchCallHistoryIntent is deprecated. There is no replacement.")
 extension Intents.INSearchCallHistoryIntent {
-  @available(iOS 11.0, watchOS 4.0, *)
+  @available(iOS, introduced: 11.0, deprecated: 15.0, message: "INSearchCallHistoryIntent is deprecated. There is no replacement.")
+  @available(watchOS, introduced: 4.0, deprecated: 8.0, message: "INSearchCallHistoryIntent is deprecated. There is no replacement.")
   @nonobjc convenience public init(dateCreated: Intents.INDateComponentsRange? = nil, recipient: Intents.INPerson? = nil, callCapabilities: Intents.INCallCapabilityOptions, callTypes: Intents.INCallRecordTypeOptions, unseen: Swift.Bool? = nil)
-  @available(iOS 11.0, watchOS 4.0, *)
+  @available(iOS, introduced: 11.0, deprecated: 15.0, message: "unseen is deprecated. There is no replacement.")
+  @available(watchOS, introduced: 4.0, deprecated: 8.0, message: "unseen is deprecated. There is no replacement.")
   @nonobjc final public var unseen: Swift.Bool? {
     get
   }
 }
-@available(macOS 10.15, iOS 10.0, *)
+@available(iOS, introduced: 10.0, deprecated: 15.0, message: "INSetDefrosterSettingsInCarIntent is deprecated. There is no replacement.")
+@available(watchOS, introduced: 3.2, deprecated: 8.0, message: "INSetDefrosterSettingsInCarIntent is deprecated. There is no replacement.")
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 extension Intents.INSetDefrosterSettingsInCarIntent {
-  @available(iOS 12.0, *)
+  @available(iOS, introduced: 12.0, deprecated: 15.0, message: "INSetDefrosterSettingsInCarIntent is deprecated. There is no replacement.")
+  @available(watchOS, introduced: 3.2, deprecated: 8.0, message: "INSetDefrosterSettingsInCarIntent is deprecated. There is no replacement.")
   @nonobjc convenience public init(enable: Swift.Bool? = nil, defroster: Intents.INCarDefroster = .unknown, carName: Intents.INSpeakableString? = nil)
   @available(iOS, obsoleted: 12.0)
   @nonobjc convenience public init(enable: Swift.Bool? = nil, defroster: Intents.INCarDefroster = .unknown)
+  @available(iOS, deprecated: 15.0, message: "enable is deprecated. There is no replacement.")
+  @available(watchOS, introduced: 3.2, deprecated: 8.0, message: "enable is deprecated. There is no replacement.")
   @nonobjc final public var enable: Swift.Bool? {
     get
   }
 }
-@available(macOS 10.15, iOS 10.0, *)
+@available(iOS, introduced: 10.0, deprecated: 15.0, message: "INSetClimateSettingsInCarIntent is deprecated. There is no replacement.")
+@available(watchOS, introduced: 3.2, deprecated: 8.0, message: "INSetClimateSettingsInCarIntent is deprecated. There is no replacement.")
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 extension Intents.INSetClimateSettingsInCarIntent {
-  @available(iOS 12.0, *)
+  @available(iOS, introduced: 12.0, deprecated: 15.0, message: "INSetClimateSettingsInCarIntent is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "INSetClimateSettingsInCarIntent is deprecated. There is no replacement.")
   @nonobjc convenience public init(enableFan: Swift.Bool? = nil, enableAirConditioner: Swift.Bool? = nil, enableClimateControl: Swift.Bool? = nil, enableAutoMode: Swift.Bool? = nil, airCirculationMode: Intents.INCarAirCirculationMode = .unknown, fanSpeedIndex: Swift.Int? = nil, fanSpeedPercentage: Swift.Double? = nil, relativeFanSpeedSetting: Intents.INRelativeSetting = .unknown, temperature: Foundation.Measurement<Foundation.UnitTemperature>? = nil, relativeTemperatureSetting: Intents.INRelativeSetting = .unknown, climateZone: Intents.INCarSeat = .unknown, carName: Intents.INSpeakableString? = nil)
   @available(iOS, obsoleted: 12.0)
   @nonobjc convenience public init(enableFan: Swift.Bool? = nil, enableAirConditioner: Swift.Bool? = nil, enableClimateControl: Swift.Bool? = nil, enableAutoMode: Swift.Bool? = nil, airCirculationMode: Intents.INCarAirCirculationMode = .unknown, fanSpeedIndex: Swift.Int? = nil, fanSpeedPercentage: Swift.Double? = nil, relativeFanSpeedSetting: Intents.INRelativeSetting = .unknown, temperature: Foundation.Measurement<Foundation.UnitTemperature>? = nil, relativeTemperatureSetting: Intents.INRelativeSetting = .unknown, climateZone: Intents.INCarSeat = .unknown)
+  @available(iOS, deprecated: 15.0, message: "enableFan is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "enableFan is deprecated. There is no replacement.")
   @nonobjc final public var enableFan: Swift.Bool? {
     get
   }
+  @available(iOS, deprecated: 15.0, message: "enableAirConditioner is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "enableAirConditioner is deprecated. There is no replacement.")
   @nonobjc final public var enableAirConditioner: Swift.Bool? {
     get
   }
+  @available(iOS, deprecated: 15.0, message: "enableClimateControl is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "enableClimateControl is deprecated. There is no replacement.")
   @nonobjc final public var enableClimateControl: Swift.Bool? {
     get
   }
+  @available(iOS, deprecated: 15.0, message: "enableAutoMode is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "enableAutoMode is deprecated. There is no replacement.")
   @nonobjc final public var enableAutoMode: Swift.Bool? {
     get
   }
+  @available(iOS, deprecated: 15.0, message: "fanSpeedIndex is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "fanSpeedIndex is deprecated. There is no replacement.")
   @nonobjc final public var fanSpeedIndex: Swift.Int? {
     get
   }
+  @available(iOS, deprecated: 15.0, message: "fanSpeedPercentage is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "fanSpeedPercentage is deprecated. There is no replacement.")
   @nonobjc final public var fanSpeedPercentage: Swift.Double? {
     get
   }
 }
-@available(macOS 10.15, iOS 10.0, *)
+@available(iOS, introduced: 10.0, deprecated: 15.0, message: "INSetProfileInCarIntent is deprecated. There is no replacement.")
+@available(watchOS, introduced: 3.2, deprecated: 8.0, message: "INSetProfileInCarIntent is deprecated. There is no replacement.")
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @nonobjc extension Intents.INSetProfileInCarIntent {
-  @available(iOS 12.0, *)
+  @available(iOS, introduced: 12.0, deprecated: 15.0, message: "INSetProfileInCarIntent is deprecated. There is no replacement.")
+  @available(watchOS, introduced: 3.2, deprecated: 8.0, message: "INSetProfileInCarIntent is deprecated. There is no replacement.")
   convenience public init(profileNumber: Swift.Int? = nil, profileName: Swift.String? = nil, isDefaultProfile: Swift.Bool? = nil, carName: Intents.INSpeakableString? = nil)
   @available(iOS, introduced: 11.0, obsoleted: 12.0)
   convenience public init(profileNumber: Swift.Int? = nil, profileName: Swift.String? = nil, isDefaultProfile: Swift.Bool? = nil)
@@ -159,7 +182,8 @@ extension Intents.INSetClimateSettingsInCarIntent {
   convenience public init(profileNumber: Swift.Int?, profileLabel: Swift.String?, isDefaultProfile: Swift.Bool?)
   @available(iOS, deprecated: 11.0, renamed: "init(profileNumber:profileName:isDefaultProfile:)")
   convenience public init(profileNumber: Swift.Int?, profileName: Swift.String?, defaultProfile: Swift.Int?)
-  @available(iOS 10.0, *)
+  @available(iOS, deprecated: 15.0, message: "isDefaultProfile is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "isDefaultProfile is deprecated. There is no replacement.")
   public var isDefaultProfile: Swift.Bool? {
     get
   }
@@ -167,28 +191,39 @@ extension Intents.INSetClimateSettingsInCarIntent {
   public var defaultProfile: Swift.Int? {
     get
   }
-  @available(iOS 10.0, *)
+  @available(iOS, deprecated: 15.0, message: "profileNumber is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "profileNumber is deprecated. There is no replacement.")
   final public var profileNumber: Swift.Int? {
     get
   }
 }
-@available(macOS 10.15, iOS 10.0, *)
+@available(iOS, introduced: 10.0, deprecated: 15.0, message: "INSetSeatSettingsInCarIntent is deprecated. There is no replacement.")
+@available(watchOS, introduced: 3.2, deprecated: 8.0, message: "INSetSeatSettingsInCarIntent is deprecated. There is no replacement.")
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 extension Intents.INSetSeatSettingsInCarIntent {
-  @available(iOS 12.0, *)
+  @available(iOS, introduced: 12.0, deprecated: 15.0, message: "INSetSeatSettingsInCarIntent is deprecated. There is no replacement.")
+  @available(watchOS, introduced: 3.2, deprecated: 8.0, message: "INSetSeatSettingsInCarIntent is deprecated. There is no replacement.")
   @nonobjc convenience public init(enableHeating: Swift.Bool? = nil, enableCooling: Swift.Bool? = nil, enableMassage: Swift.Bool? = nil, seat: Intents.INCarSeat = .unknown, level: Swift.Int? = nil, relativeLevel: Intents.INRelativeSetting = .unknown, carName: Intents.INSpeakableString? = nil)
   @available(iOS, obsoleted: 12.0)
   @nonobjc convenience public init(enableHeating: Swift.Bool? = nil, enableCooling: Swift.Bool? = nil, enableMassage: Swift.Bool? = nil, seat: Intents.INCarSeat = .unknown, level: Swift.Int? = nil, relativeLevel: Intents.INRelativeSetting = .unknown)
+  @available(iOS, deprecated: 15.0, message: "enableHeating is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "enableHeating is deprecated. There is no replacement.")
   @nonobjc final public var enableHeating: Swift.Bool? {
     get
   }
+  @available(iOS, deprecated: 15.0, message: "enableCooling is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "enableCooling is deprecated. There is no replacement.")
   @nonobjc final public var enableCooling: Swift.Bool? {
     get
   }
+  @available(iOS, deprecated: 15.0, message: "enableMassage is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "enableMassage is deprecated. There is no replacement.")
   @nonobjc final public var enableMassage: Swift.Bool? {
     get
   }
+  @available(iOS, deprecated: 15.0, message: "level is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "level is deprecated. There is no replacement.")
   @nonobjc final public var level: Swift.Int? {
     get
   }
@@ -250,11 +285,16 @@ public protocol INIntentSetImageKeyPath : Intents._INIntentSetImageKeyPath {
 @available(iOS 10.0, macOS 11.0, watchOS 3.2, tvOS 14.0, *)
 extension Intents.INIntent : Intents.INIntentSetImageKeyPath {
 }
-@available(macOS 10.15, iOS 13.0, watchOS 6.0, *)
+@available(iOS, introduced: 13.0, deprecated: 15.0, message: "INDeleteTasksIntent is deprecated. There is no replacement.")
+@available(watchOS, introduced: 6.0, deprecated: 8.0, message: "INDeleteTasksIntent is deprecated. There is no replacement.")
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 extension Intents.INDeleteTasksIntent {
+  @available(iOS, introduced: 13.0, deprecated: 15.0, message: "INDeleteTasksIntent is deprecated. There is no replacement.")
+  @available(watchOS, introduced: 6.0, deprecated: 8.0, message: "INDeleteTasksIntent is deprecated. There is no replacement.")
   @nonobjc convenience public init(taskList: Intents.INTaskList? = nil, tasks: [Intents.INTask]? = nil, all: Swift.Bool? = nil)
+  @available(iOS, introduced: 13.0, deprecated: 15.0, message: "INDeleteTasksIntent is deprecated. There is no replacement.")
+  @available(watchOS, introduced: 6.0, deprecated: 8.0, message: "INDeleteTasksIntent is deprecated. There is no replacement.")
   @nonobjc final public var all: Swift.Bool? {
     get
   }
@@ -282,10 +322,14 @@ extension Intents.INGetCarPowerLevelStatusIntentResponse {
     set(newMinutesToFull)
   }
 }
-@available(macOS 10.15, iOS 10.0, watchOS 3.2, *)
+@available(macOS 10.15, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(iOS, introduced: 10.0, deprecated: 15.0, message: "INSearchForPhotosIntentResponse is deprecated. There is no replacement.")
+@available(watchOS, introduced: 3.2, deprecated: 8.0, message: "INSearchForPhotosIntentResponse is deprecated. There is no replacement.")
 extension Intents.INSearchForPhotosIntentResponse {
+  @available(iOS, introduced: 10.0, deprecated: 15.0, message: "searchResultsCount is deprecated. There is no replacement.")
+  @available(watchOS, introduced: 3.2, deprecated: 8.0, message: "searchResultsCount is deprecated. There is no replacement.")
   @nonobjc final public var searchResultsCount: Swift.Int? {
     get
     set
@@ -300,11 +344,16 @@ extension Intents.INSnoozeTasksIntent {
     get
   }
 }
-@available(macOS 10.15, iOS 10.0, *)
+@available(iOS, introduced: 10.0, deprecated: 15.0, message: "INSaveProfileInCarIntent is deprecated. There is no replacement.")
+@available(watchOS, introduced: 3.2, deprecated: 8.0, message: "INSaveProfileInCarIntent is deprecated. There is no replacement.")
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 extension Intents.INSaveProfileInCarIntent {
+  @available(iOS, deprecated: 15.0, message: "INSaveProfileInCarIntent is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "INSaveProfileInCarIntent is deprecated. There is no replacement.")
   @nonobjc convenience public init(profileNumber: Swift.Int? = nil, profileLabel: Swift.String? = nil)
+  @available(iOS, deprecated: 15.0, message: "profileNumber is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "profileNumber is deprecated. There is no replacement.")
   @nonobjc final public var profileNumber: Swift.Int? {
     get
   }
@@ -476,22 +525,33 @@ extension Intents.INFocusStatus {
     get
   }
 }
-@available(macOS 10.15, iOS 10.0, *)
+@available(iOS, introduced: 10.0, deprecated: 15.0, message: "INSetRadioStationIntent is deprecated. There is no replacement.")
+@available(watchOS, introduced: 3.2, deprecated: 8.0, message: "INSetRadioStationIntent is deprecated. There is no replacement.")
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 extension Intents.INSetRadioStationIntent {
+  @available(iOS, deprecated: 15.0, message: "INSetRadioStationIntent is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "INSetRadioStationIntent is deprecated. There is no replacement.")
   @nonobjc convenience public init(radioType: Intents.INRadioType = .unknown, frequency: Swift.Double? = nil, stationName: Swift.String? = nil, channel: Swift.String? = nil, presetNumber: Swift.Int? = nil)
+  @available(iOS, deprecated: 15.0, message: "frequency is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "frequency is deprecated. There is no replacement.")
   @nonobjc final public var frequency: Swift.Double? {
     get
   }
+  @available(iOS, deprecated: 15.0, message: "presetNumber is deprecated. There is no replacement.")
+  @available(watchOS, deprecated: 8.0, message: "presetNumber is deprecated. There is no replacement.")
   @nonobjc final public var presetNumber: Swift.Int? {
     get
   }
 }
-@available(macOS 10.15, iOS 10.0, watchOS 3.2, *)
+@available(macOS 10.15, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(iOS, introduced: 10.0, deprecated: 15.0, message: "INStartPhotoPlaybackIntentResponse is deprecated. There is no replacement.")
+@available(watchOS, introduced: 3.2, deprecated: 8.0, message: "INStartPhotoPlaybackIntentResponse is deprecated. There is no replacement.")
 extension Intents.INStartPhotoPlaybackIntentResponse {
+  @available(iOS, introduced: 10.0, deprecated: 15.0, message: "searchResultsCount is deprecated. There is no replacement.")
+  @available(watchOS, introduced: 3.2, deprecated: 8.0, message: "searchResultsCount is deprecated. There is no replacement.")
   @nonobjc final public var searchResultsCount: Swift.Int? {
     get
     set

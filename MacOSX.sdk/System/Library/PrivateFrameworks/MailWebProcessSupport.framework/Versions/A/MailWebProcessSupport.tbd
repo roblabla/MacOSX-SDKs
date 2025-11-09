@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8A2FEA6C-807E-3B4B-A55D-3138B38CED4F
+    value:           C544444D-63FF-3B4E-973B-381443FA3B2F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7735A688-5A7A-34B7-A5DD-5B6F5A0041B4
+    value:           458D1077-9C4B-3190-A8A8-1AD1852A9A37
 install-name:    '/System/Library/PrivateFrameworks/MailWebProcessSupport.framework/Versions/A/MailWebProcessSupport'
-current-version: 3689.0.4
+current-version: 3693.40
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _kBodyFieldSource, _kBodyFieldSourceLength, _kConstantsSource, 

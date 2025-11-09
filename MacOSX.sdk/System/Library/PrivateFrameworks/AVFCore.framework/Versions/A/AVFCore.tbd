@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B2B78884-F32D-35CE-800D-D7660B3D179B
+    value:           6BB3CA6B-FF2C-39D0-BBF2-C92732529FDD
   - target:          x86_64-maccatalyst
-    value:           B2B78884-F32D-35CE-800D-D7660B3D179B
+    value:           6BB3CA6B-FF2C-39D0-BBF2-C92732529FDD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4FBBE179-749E-361C-A888-26063439E6CC
+    value:           4F40A026-369E-3CF1-B26B-72A71255B602
   - target:          arm64e-maccatalyst
-    value:           4FBBE179-749E-361C-A888-26063439E6CC
+    value:           4F40A026-369E-3CF1-B26B-72A71255B602
 install-name:    '/System/Library/PrivateFrameworks/AVFCore.framework/Versions/A/AVFCore'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -83,9 +83,9 @@ exports:
                        _AVAssetExportPresetAppleProRes4444LPCM, _AVAssetExportPresetAuxSmall, 
                        _AVAssetExportPresetHEVC1920x1080, _AVAssetExportPresetHEVC1920x1080WithAlpha, 
                        _AVAssetExportPresetHEVC3840x2160, _AVAssetExportPresetHEVC3840x2160WithAlpha, 
-                       _AVAssetExportPresetHEVCHighestQuality, _AVAssetExportPresetHEVCHighestQualityWithAlpha, 
-                       _AVAssetExportPresetHighestQuality, _AVAssetExportPresetICPL, 
-                       _AVAssetExportPresetICPLAux, _AVAssetExportPresetICPLAuxHD, 
+                       _AVAssetExportPresetHEVC7680x4320, _AVAssetExportPresetHEVCHighestQuality, 
+                       _AVAssetExportPresetHEVCHighestQualityWithAlpha, _AVAssetExportPresetHighestQuality, 
+                       _AVAssetExportPresetICPL, _AVAssetExportPresetICPLAux, _AVAssetExportPresetICPLAuxHD, 
                        _AVAssetExportPresetICPLHD, _AVAssetExportPresetICPLHEVC1280x1280WithHDR, 
                        _AVAssetExportPresetICPLHEVC1920x1080, _AVAssetExportPresetICPLHEVC1920x1920WithHDR, 
                        _AVAssetExportPresetLowQuality, _AVAssetExportPresetMediumQuality, 
@@ -108,14 +108,13 @@ exports:
                        _AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData, 
                        _AVAudioTimePitchAlgorithmLowQualityZeroLatency, _AVAudioTimePitchAlgorithmSpectral, 
                        _AVAudioTimePitchAlgorithmTimeDomain, _AVAudioTimePitchAlgorithmVarispeed, 
-                       _AVBacktraceAsString, _AVBeginUpdatingIncrementalCodeCoverageData, 
-                       _AVCGPointFromNSValue, _AVCGRectFromNSValue, _AVCGSizeFromNSValue, 
-                       _AVCaptionConversionAdjustmentTypeTimeRange, _AVCaptionConversionWarningTypeExcessMediaData, 
-                       _AVCaptionDimensionMake, _AVCaptionMediaSubTypeKey, _AVCaptionMediaTypeKey, 
-                       _AVCaptionPointMake, _AVCaptionSizeMake, _AVCaptionTimeCodeFrameDurationKey, 
-                       _AVCaptionUseDropFrameTimeCodeKey, _AVContentAuthorizationInfoPlayInfoKey, 
-                       _AVContentAuthorizationInfoSessionIDKey, _AVContentKeyRequestProtocolVersionsKey, 
-                       _AVContentKeyRequestRequiresExtendedValidationDataInSecureTokenKey, 
+                       _AVBeginUpdatingIncrementalCodeCoverageData, _AVCGPointFromNSValue, 
+                       _AVCGRectFromNSValue, _AVCGSizeFromNSValue, _AVCaptionConversionAdjustmentTypeTimeRange, 
+                       _AVCaptionConversionWarningTypeExcessMediaData, _AVCaptionDimensionMake, 
+                       _AVCaptionMediaSubTypeKey, _AVCaptionMediaTypeKey, _AVCaptionPointMake, 
+                       _AVCaptionSizeMake, _AVCaptionTimeCodeFrameDurationKey, _AVCaptionUseDropFrameTimeCodeKey, 
+                       _AVContentAuthorizationInfoPlayInfoKey, _AVContentAuthorizationInfoSessionIDKey, 
+                       _AVContentKeyRequestProtocolVersionsKey, _AVContentKeyRequestRequiresExtendedValidationDataInSecureTokenKey, 
                        _AVContentKeyRequestRequiresValidationDataInSecureTokenKey, 
                        _AVContentKeyRequestRetryReasonReceivedObsoleteContentKey, 
                        _AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease, 
@@ -598,9 +597,9 @@ exports:
                        _AVOutputSettingsPreset640x480, _AVOutputSettingsPreset960x540, 
                        _AVOutputSettingsPresetHEVC1920x1080, _AVOutputSettingsPresetHEVC1920x1080WithAlpha, 
                        _AVOutputSettingsPresetHEVC3840x2160, _AVOutputSettingsPresetHEVC3840x2160WithAlpha, 
-                       _AVPerceptualQualityOptimizationKey, _AVPlatformIdentifierIOS, 
-                       _AVPlatformIdentifierMacOS, _AVPlatformIdentifierTVOS, _AVPlatformIdentifierWatchOS, 
-                       _AVPlaybackCoordinationParticipantStateKeyCoordinatingStart, 
+                       _AVOutputSettingsPresetHEVC7680x4320, _AVPerceptualQualityOptimizationKey, 
+                       _AVPlatformIdentifierIOS, _AVPlatformIdentifierMacOS, _AVPlatformIdentifierTVOS, 
+                       _AVPlatformIdentifierWatchOS, _AVPlaybackCoordinationParticipantStateKeyCoordinatingStart, 
                        _AVPlaybackCoordinationParticipantStateKeyCurrentItemIdentifier, 
                        _AVPlaybackCoordinationParticipantStateKeyExpectedEndTime, 
                        _AVPlaybackCoordinationParticipantStateKeyNextItemIdentifier, 
@@ -672,7 +671,7 @@ exports:
                        _AVPlayerRoleScanning, _AVPlayerWaitingDuringInterstitialEventReason, 
                        _AVPlayerWaitingForCoordinatedPlaybackReason, _AVPlayerWaitingToMinimizeStallsReason, 
                        _AVPlayerWaitingWhileEvaluatingBufferingRateReason, _AVPlayerWaitingWithNoItemToPlayReason, 
-                       _AVPropertyListForProxyCreationOption_ReduceMetadataForPhotoLibrary, 
+                       _AVPotentialRaceCondition, _AVPropertyListForProxyCreationOption_ReduceMetadataForPhotoLibrary, 
                        _AVProtectedContentProviderFairPlay, _AVRampsIncludesRampThatOverlapsTimeRange, 
                        _AVRequestConcreteImplementation, _AVRequireConcreteObject, 
                        _AVRouteDetectorMultipleRoutesDetectedDidChangeNotification, 
@@ -680,6 +679,7 @@ exports:
                        _AVRoutingSessionManagerCurrentSessionDidChangeNotification, 
                        _AVRoutingSessionManagerLikelyExternalDestinationsDidChangeNotification, 
                        _AVSampleBufferAttachContentKey, _AVSampleBufferAudioRendererFlushTimeKey, 
+                       _AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification, 
                        _AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification, 
                        _AVSampleBufferDisplayLayerFailedToDecodeNotification, _AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey, 
                        _AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification, 
@@ -787,11 +787,10 @@ exports:
                        _kAVFCoreSCMVersion, _my_UIApplicationDidEnterBackgroundNotification, 
                        _my_UIApplicationDidFinishSuspensionSnapshotNotification, 
                        _my_UIApplicationWillEnterForegroundNotification, _my_UIApplicationWillResignActiveNotification ]
-    objc-classes:    [ AVAggregateAssetDownloadTask, AVAppleITTCaptionPosition, AVAsset, 
-                       AVAssetAnalysisMessage, AVAssetAnalysisMovieParsingMessage, 
-                       AVAssetAnalysisReporter, AVAssetAnalysisTextParsingMessage, 
-                       AVAssetCache, AVAssetCollection, AVAssetCollectionFactory, 
-                       AVAssetDownloadConfiguration, AVAssetDownloadContentConfiguration, 
+    objc-classes:    [ AVAggregateAssetDownloadTask, AVAsset, AVAssetAnalysisMessage, 
+                       AVAssetAnalysisMovieParsingMessage, AVAssetAnalysisReporter, 
+                       AVAssetAnalysisTextParsingMessage, AVAssetCache, AVAssetCollection, 
+                       AVAssetCollectionFactory, AVAssetDownloadConfiguration, AVAssetDownloadContentConfiguration, 
                        AVAssetDownloadSession, AVAssetDownloadStorageManagementPolicy, 
                        AVAssetDownloadStorageManager, AVAssetExportSession, AVAssetFragment, 
                        AVAssetImageGenerator, AVAssetReader, AVAssetReaderAudioMixOutput, 
@@ -811,12 +810,12 @@ exports:
                        AVAssetWriterInputPixelBufferAdaptor, AVAsynchronousCIImageFilteringRequest, 
                        AVAsynchronousVideoCompositionRequest, AVAudioMix, AVAudioMixEffectParameters, 
                        AVAudioMixInputParameters, AVAudioMixSweepFilterEffectParameters, 
-                       AVAudioOutputSettings, AVCEA608CaptionPosition, AVCMNotificationDispatcher, 
-                       AVCallbackContextRegistry, AVCaption, AVCaptionConversionAdjustment, 
-                       AVCaptionConversionTimeRangeAdjustment, AVCaptionConversionValidator, 
-                       AVCaptionConversionWarning, AVCaptionFormatConformer, AVCaptionGroup, 
-                       AVCaptionGrouper, AVCaptionLength, AVCaptionOutputSettings, 
-                       AVCaptionPosition, AVCaptionRegion, AVCaptionRenderer, AVCaptionRendererScene, 
+                       AVAudioOutputSettings, AVCMNotificationDispatcher, AVCallbackContextRegistry, 
+                       AVCaption, AVCaptionConversionAdjustment, AVCaptionConversionTimeRangeAdjustment, 
+                       AVCaptionConversionValidator, AVCaptionConversionWarning, 
+                       AVCaptionFormatConformer, AVCaptionGroup, AVCaptionGrouper, 
+                       AVCaptionLength, AVCaptionOutputSettings, AVCaptionPosition, 
+                       AVCaptionRegion, AVCaptionRenderer, AVCaptionRendererScene, 
                        AVCaptionRuby, AVChapterMetadataItem, AVComposition, AVCompositionTrack, 
                        AVCompositionTrackFormatDescriptionReplacement, AVCompositionTrackSegment, 
                        AVContentKey, AVContentKeyReportGroup, AVContentKeyRequest, 

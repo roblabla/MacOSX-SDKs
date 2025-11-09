@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4803D596-62D8-3D33-AA92-E3294205DC43
+    value:           FBE6E122-8A02-3DEF-8F80-958EFCB8457E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6B531BF3-FD55-3551-ACDC-AF074647AF95
+    value:           91D8DDC5-0C5C-335C-BD5A-EBEC409D7364
 install-name:    '/System/Library/PrivateFrameworks/SocialServices.framework/Versions/A/SocialServices'
 current-version: 0
 exports:

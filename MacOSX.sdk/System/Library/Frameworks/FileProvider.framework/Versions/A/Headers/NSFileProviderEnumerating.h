@@ -64,7 +64,7 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  materialization of the folder by the system, ...). Each case has its own performance profile.
 
  By taking into account the suggested size, the enumeration will guarantee the best user experience possible. The
- system does not enforce the size of the page.
+ system enforces a maximum of 100 times the suggested size.
  */
 @property (nonatomic, readonly) NSInteger suggestedPageSize FILEPROVIDER_API_AVAILABILITY_V3;
 
@@ -84,10 +84,9 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
 - (void)didDeleteItemsWithIdentifiers:(NSArray <NSFileProviderItemIdentifier> *)deletedItemIdentifiers;
 
 /**
- Call the following method every so often while sending changes, particularly
- while enumerating changes to NSFileProviderWorkingSetContainerItemIdentifier.
- If the device reboots during an enumeration, it would later resume starting
- at the latest known sync anchor.
+ This method is used to complete a batch of changes. Follow the advice
+ in -[NSFileProviderChangeObserver suggestedBatchSize] to determine when to
+ call this method.
 
  It is expected that the sync anchor passed here be different than the sync
  anchor that the enumeration started at, unless the client was already up to
@@ -123,8 +122,12 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  it split the list of changes into several batches. If the enumerator does not have suggestedBatchSize ready to
  enumerator, the enumerator should finish immediately and not wait for more incoming changes to enumerate.
 
- By taking into account the suggested size, the enumeration will guarantee the best user experience possible. The
- system does not enforce the size of the batch.
+ By taking into account the suggested size, the enumeration will guarantee the best user experience possible. Large
+ batches can cause performance issues. And when the device reboots, enumerations will resume from the latest
+ known sync anchor. Telling the system about the latest sync anchor more frequently will reduce the number
+ of re-enumerations on system reboot.
+
+ The system enforces a maximum of 100 times the suggested size.
  */
 @property (nonatomic, readonly) NSInteger suggestedBatchSize FILEPROVIDER_API_AVAILABILITY_V3;
 

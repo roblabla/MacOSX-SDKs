@@ -1031,7 +1031,7 @@ typedef void (^nw_framer_block_t)(void);
  * @abstract
  *		Schedule a block asynchronously on the framer instance. This
  *		must be used anytime the caller wants to perform any other
- *		action on the framer instance while not directly in the callstack
+ *		action on the framer instance while not directly in the call stack
  *		of a callback from the framer.
  *
  * @param framer

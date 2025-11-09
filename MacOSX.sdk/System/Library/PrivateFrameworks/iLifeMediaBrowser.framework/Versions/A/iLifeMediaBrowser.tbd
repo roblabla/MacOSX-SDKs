@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           90CBF1B4-0D98-3DFF-B3EC-2322199923A3
+    value:           23508379-4ED8-354A-8AEE-F148C46DF5C8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C259229E-188D-3275-89B7-58BF64846D57
+    value:           4BFFDAC7-5C25-39AB-9A0C-A0D95B2428DE
 install-name:    '/System/Library/PrivateFrameworks/iLifeMediaBrowser.framework/Versions/A/iLifeMediaBrowser'
 current-version: 797
 exports:

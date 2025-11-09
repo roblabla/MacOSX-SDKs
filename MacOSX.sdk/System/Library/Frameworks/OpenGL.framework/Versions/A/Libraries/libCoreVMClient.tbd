@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8371D0AD-BB2A-3C36-9086-CDE2C286778F
+    value:           DD50D2D4-5848-3771-9A71-27BE85273AA3
   - target:          x86_64-maccatalyst
-    value:           8371D0AD-BB2A-3C36-9086-CDE2C286778F
+    value:           DD50D2D4-5848-3771-9A71-27BE85273AA3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9A73F806-97C9-375F-95FC-0999F0BDE615
+    value:           0389BA0B-CEAF-3EE8-95DA-D7BFACCAC583
   - target:          arm64e-maccatalyst
-    value:           9A73F806-97C9-375F-95FC-0999F0BDE615
+    value:           0389BA0B-CEAF-3EE8-95DA-D7BFACCAC583
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreVMClient.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

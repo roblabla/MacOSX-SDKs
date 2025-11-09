@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
-// swift-module-flags: -target x86_64-apple-macos12.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -module-name AVFoundation
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-module-flags: -target x86_64-apple-macos12.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -module-name AVFoundation
 @_exported import AVFoundation
 import CoreGraphics
 import CoreMedia
@@ -246,7 +246,7 @@ extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVAsset 
   public static var creationDate: AVFoundation.AVAsyncProperty<Root, AVFoundation.AVMetadataItem?> {
     get
   }
-  public static var lyrics: AVFoundation.AVAsyncProperty<Root, AVFoundation.AVMetadataItem?> {
+  public static var lyrics: AVFoundation.AVAsyncProperty<Root, Swift.String?> {
     get
   }
   public static var commonMetadata: AVFoundation.AVAsyncProperty<Root, [AVFoundation.AVMetadataItem]> {
@@ -530,7 +530,11 @@ extension Foundation.NSNotification.Name {
   @available(iOS, deprecated, introduced: 5.0, renamed: "AVPlayerItem.timeJumpedNotification")
   @available(tvOS, deprecated, introduced: 9.0, renamed: "AVPlayerItem.timeJumpedNotification")
   @available(watchOS, deprecated, introduced: 1.0, renamed: "AVPlayerItem.timeJumpedNotification")
-  public static let AVPlayerItemTimeJumped: Foundation.NSNotification.Name
+  @_alwaysEmitIntoClient public static var AVPlayerItemTimeJumped: Foundation.NSNotification.Name {
+    get {
+		Self("AVPlayerItemTimeJumpedNotification")
+	}
+  }
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVMutableComposition {

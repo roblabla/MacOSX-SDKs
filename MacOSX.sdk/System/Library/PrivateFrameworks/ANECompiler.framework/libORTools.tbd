@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F7FB1CB6-41F2-3ECF-B580-76BCEE32BD1D
+    value:           AA43BB09-4916-3214-9245-B4685008211C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           98B2351A-BA26-34F4-8276-E9A7C08B5033
+    value:           FA47E15F-A181-3D32-8F5D-EEA99E38D9C5
 install-name:    '/System/Library/PrivateFrameworks/ANECompiler.framework/libORTools.dylib'
 exports:
   - targets:         [ x86_64-macos ]

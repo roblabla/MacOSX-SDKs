@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CFC3987A-C60C-38D2-9008-6B4F0E05E3BC
+    value:           DF272FCF-78DD-3567-BBC2-4C19A7840C2F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B42B2274-045A-3039-A574-FFDDCF421268
+    value:           628B7CB5-36F7-3E14-B301-AE50FE2C5BF8
 install-name:    '/System/Library/Frameworks/_AuthenticationServices_SwiftUI.framework/Versions/A/_AuthenticationServices_SwiftUI'
-current-version: 612.1.24
+current-version: 612.3.6
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

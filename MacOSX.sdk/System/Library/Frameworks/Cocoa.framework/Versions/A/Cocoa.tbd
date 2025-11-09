@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BC4C54A7-7566-3F98-8A81-D93ED50342E4
+    value:           A3CFEA4B-A596-359C-B0E9-117BC9C4AC05
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C1E2AE02-98D8-398B-ABA4-DDCBA86E22B4
+    value:           9BA1D4DE-1877-3A60-87EA-B20DD9DFE698
 install-name:    '/System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa'
 current-version: 23
 reexported-libraries:

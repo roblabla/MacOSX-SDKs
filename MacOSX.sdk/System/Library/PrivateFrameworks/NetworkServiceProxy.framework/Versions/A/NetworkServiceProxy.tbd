@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5BB164B9-BEE2-39DA-8989-F97557E9FBE6
+    value:           FCAD42FA-E072-3A25-AB15-F3A80D888903
   - target:          x86_64-maccatalyst
-    value:           5BB164B9-BEE2-39DA-8989-F97557E9FBE6
+    value:           FCAD42FA-E072-3A25-AB15-F3A80D888903
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           55EB14EA-C513-3279-877B-EBFC15E6C9CC
+    value:           E8D1E009-E583-3782-B221-6333FE2EAA2D
   - target:          arm64e-maccatalyst
-    value:           55EB14EA-C513-3279-877B-EBFC15E6C9CC
+    value:           E8D1E009-E583-3782-B221-6333FE2EAA2D
 install-name:    '/System/Library/PrivateFrameworks/NetworkServiceProxy.framework/Versions/A/NetworkServiceProxy'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -81,18 +81,18 @@ exports:
                        _ne_privacy_multi_hop_proxy_netagent_id, _ne_privacy_single_hop_fallback_proxy_netagent_id, 
                        _ne_privacy_single_hop_proxy_netagent_id, _np_direct_protocol_get_id, 
                        _np_flow_output_finished, _np_loopback_protocol_get_id, _np_tunnel_protocol_get_id, 
-                       _nplog_large_obj, _nplog_obj, _nsp_print_backtrace, _privacyProxyErrorDomain, 
-                       _serviceNameToID, _tuscanyClientCreate, _tuscanyClientCreateFakeDayPass, 
-                       _tuscanyClientDestroy, _tuscanyClientGetAmountToRead, _tuscanyClientGetDataSize, 
-                       _tuscanyClientGetDayPassHostID, _tuscanyClientGetDayPassOriginAddressString, 
-                       _tuscanyClientGetDayPassPortID, _tuscanyClientGetDayPassSessionCount, 
-                       _tuscanyClientGetExceptionCounts, _tuscanyClientGetHeaderSize, 
-                       _tuscanyClientGetInitialData, _tuscanyClientGetInitialWindowSize, 
-                       _tuscanyClientGetMaxDataSendSize, _tuscanyClientGetMaximumFrameSize, 
-                       _tuscanyClientGetNameForException, _tuscanyClientHandleConnectionConnected, 
-                       _tuscanyClientHandleReadData, _tuscanyClientSendAcknowledge, 
-                       _tuscanyClientSendClose, _tuscanyClientSendData, _tuscanyClientSendException, 
-                       _tuscanyClientSendPing, _tuscanyClientSetDayPassSessionCount, 
+                       _nplog_large_obj, _nplog_obj, _nsp_print_backtrace, _nsp_privacy_bootstrap_dns_netagent_id, 
+                       _privacyProxyErrorDomain, _serviceNameToID, _tuscanyClientCreate, 
+                       _tuscanyClientCreateFakeDayPass, _tuscanyClientDestroy, _tuscanyClientGetAmountToRead, 
+                       _tuscanyClientGetDataSize, _tuscanyClientGetDayPassHostID, 
+                       _tuscanyClientGetDayPassOriginAddressString, _tuscanyClientGetDayPassPortID, 
+                       _tuscanyClientGetDayPassSessionCount, _tuscanyClientGetExceptionCounts, 
+                       _tuscanyClientGetHeaderSize, _tuscanyClientGetInitialData, 
+                       _tuscanyClientGetInitialWindowSize, _tuscanyClientGetMaxDataSendSize, 
+                       _tuscanyClientGetMaximumFrameSize, _tuscanyClientGetNameForException, 
+                       _tuscanyClientHandleConnectionConnected, _tuscanyClientHandleReadData, 
+                       _tuscanyClientSendAcknowledge, _tuscanyClientSendClose, _tuscanyClientSendData, 
+                       _tuscanyClientSendException, _tuscanyClientSendPing, _tuscanyClientSetDayPassSessionCount, 
                        _tuscanyClientValidateDayPass, _tuscanyLoopbackClientCreate, 
                        _tuscanyWindowAddCredits, _tuscanyWindowCreate, _tuscanyWindowDestroy, 
                        _tuscanyWindowGetAmountToAck, _tuscanyWindowGetCredits ]
@@ -110,8 +110,9 @@ exports:
                        NSPControlConnection, NSPDNSPacket, NSPDNSQuery, NSPDNSResourceRecord, 
                        NSPDeviceIdentityCertificate, NSPDeviceIdentityStats, NSPFallbackProxyPath, 
                        NSPFlowDivert, NSPFlowDivertProvider, NSPKeyNetworkAgent, 
-                       NSPManager, NSPNetworkAgent, NSPNetworkStatusStats, NSPPrivacyProxyAgentManager, 
-                       NSPPrivacyProxyAuthenticationInfo, NSPPrivacyProxyBAAValidation, 
+                       NSPManager, NSPNetworkAgent, NSPNetworkStatusStats, NSPOutageReasonStats, 
+                       NSPPrivacyProxyAgentManager, NSPPrivacyProxyAuthenticationInfo, 
+                       NSPPrivacyProxyBAAValidation, NSPPrivacyProxyBootstrapDNSAgent, 
                        NSPPrivacyProxyConfigAgent, NSPPrivacyProxyConfiguration, 
                        NSPPrivacyProxyDNSAgent, NSPPrivacyProxyLocationMonitor, NSPPrivacyProxyMultiHopFallbackNetworkRegistration, 
                        NSPPrivacyProxyMultiHopNetworkRegistration, NSPPrivacyProxyNetworkRegistration, 

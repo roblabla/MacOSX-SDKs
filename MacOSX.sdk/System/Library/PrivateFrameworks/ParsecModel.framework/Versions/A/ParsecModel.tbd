@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           89F0BAA4-F5E1-3748-8D7D-037C70937E44
+    value:           04C4EAAD-1A6D-3E6C-A1E6-C854EBC0AE61
   - target:          x86_64-maccatalyst
-    value:           89F0BAA4-F5E1-3748-8D7D-037C70937E44
+    value:           04C4EAAD-1A6D-3E6C-A1E6-C854EBC0AE61
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           740E9628-2799-3A90-AD9F-D5DEC866EFC5
+    value:           9F93C033-E654-3A9B-9D6F-DDBDE2D67718
   - target:          arm64e-maccatalyst
-    value:           740E9628-2799-3A90-AD9F-D5DEC866EFC5
+    value:           9F93C033-E654-3A9B-9D6F-DDBDE2D67718
 install-name:    '/System/Library/PrivateFrameworks/ParsecModel.framework/Versions/A/ParsecModel'
 swift-abi-version: 7
 exports:
@@ -31,9 +31,9 @@ exports:
                        '_$s11ParsecModel13PARFlushEventCAA9PAREntityAAMc', '_$s11ParsecModel13PARFlushEventCAA9PAREntityAAWP', 
                        '_$s11ParsecModel13PARFlushEventCMa', '_$s11ParsecModel13PARFlushEventCMn', 
                        '_$s11ParsecModel13PARFlushEventCN', '_$s11ParsecModel13PARFlushEventCfD', 
-                       '_$s11ParsecModel13PARUsageEventC10entityNameSSvau', '_$s11ParsecModel13PARUsageEventC10entityNameSSvgZ', 
-                       '_$s11ParsecModel13PARUsageEventC10entityNameSSvpZ', '_$s11ParsecModel13PARUsageEventC11invokedDaysSbvpMV', 
-                       '_$s11ParsecModel13PARUsageEventC12clientIntVals5Int32VvpMV', 
+                       '_$s11ParsecModel13PARUsageEventC10activeDaysSbvpMV', '_$s11ParsecModel13PARUsageEventC10entityNameSSvau', 
+                       '_$s11ParsecModel13PARUsageEventC10entityNameSSvgZ', '_$s11ParsecModel13PARUsageEventC10entityNameSSvpZ', 
+                       '_$s11ParsecModel13PARUsageEventC11invokedDaysSbvpMV', '_$s11ParsecModel13PARUsageEventC12clientIntVals5Int32VvpMV', 
                        '_$s11ParsecModel13PARUsageEventC12searchedDaysSbvpMV', '_$s11ParsecModel13PARUsageEventC14webEngagedDaysSbvpMV', 
                        '_$s11ParsecModel13PARUsageEventC14zkwEngagedDaysSbvpMV', 
                        '_$s11ParsecModel13PARUsageEventC15voiceSearchDaysSbvpMV', 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1EEA7482-D59B-3EF3-AA96-66C8745680FC
+    value:           9AA9C2A0-9553-3ECD-8CE4-72427C0A984D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F29B1DF1-A4CC-360C-B3C7-55158B619BD8
+    value:           E7A8F64D-892D-33EE-BE41-5767B352C1F0
 install-name:    '/System/Library/PrivateFrameworks/IOKitten.framework/Versions/A/IOKitten'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

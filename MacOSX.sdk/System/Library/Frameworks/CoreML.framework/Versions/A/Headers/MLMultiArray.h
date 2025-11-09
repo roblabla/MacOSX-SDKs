@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreML/MLExport.h>
+#import <CoreVideo/CVPixelBuffer.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,6 +18,7 @@ typedef NS_ENUM(NSInteger, MLMultiArrayDataType) {
     MLMultiArrayDataTypeDouble  = 0x10000 | 64,
     MLMultiArrayDataTypeFloat64 API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x10000 | 64,
     MLMultiArrayDataTypeFloat32 = 0x10000 | 32,
+    MLMultiArrayDataTypeFloat16 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos) = 0x10000 | 16,
     MLMultiArrayDataTypeFloat   API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x10000 | 32,
     MLMultiArrayDataTypeInt32   = 0x20000 | 32,
 } API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
@@ -48,6 +50,11 @@ ML_EXPORT
 /// Count of total number of elements
 @property (readonly, nonatomic) NSInteger count;
 
+/**
+   Returns the backing pixel buffer if exists, otherwise nil.
+ */
+@property (readonly, nullable, nonatomic) CVPixelBufferRef pixelBuffer API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
 @end
 
 @interface MLMultiArray (Creation)
@@ -65,6 +72,33 @@ ML_EXPORT
                                      strides:(NSArray<NSNumber *> *)strides
                                  deallocator:(void (^_Nullable)(void *bytes))deallocator
                                        error:(NSError **)error;
+
+/*!
+ * Create by wrapping a pixel buffer.
+ *
+ * Use this initializer to create IOSurface backed MLMultiArray, which can reduce the inference latency by avoiding the buffer copy.
+ *
+ * The instance will own the pixel buffer and release it on the deallocation.
+ *
+ * The pixel buffer's pixel format type must be OneComponent16Half. As such, MLMultiArray's data type will be MLMultiArrayDataTypeFloat16.
+ *
+ * \code
+ * CVPixelBufferRef pixelBuffer = NULL;
+ * NSDictionary* pixelBufferAttributes = @{
+ *     (id)kCVPixelBufferIOSurfacePropertiesKey: @{}
+ * };
+ *
+ * // Since shape == [2, 3, 4], width is 4 (= shape[2]) and height is 6 (= shape[0] * shape[1]).
+ * CVPixelBufferCreate(kCFAllocatorDefault, 4, 6, kCVPixelFormatType_OneComponent16Half, (__bridge CFDictionaryRef)pixelBufferAttributes, &pixelBuffer);
+ * MLMultiArray *multiArray = [[MLMultiArray alloc] initWithPixelBuffer:pixelBuffer shape:@[@2, @3, @4]];
+ * \endcode
+ *
+ * @param pixelBuffer The pixel buffer to be owned by the instance.
+ *
+ * @param shape The shape of the MLMultiArray. The last dimension of `shape` must match the pixel buffer's width. The product of the rest of the dimensions must match the height.
+ */
+- (instancetype)initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer
+                              shape:(NSArray<NSNumber *> *)shape API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 

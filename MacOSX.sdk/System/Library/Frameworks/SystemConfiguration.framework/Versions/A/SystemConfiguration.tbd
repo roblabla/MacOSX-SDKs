@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4A7F147D-1A09-3FB9-B9A7-5CAE8F8D82CE
+    value:           AABA3382-2715-376A-90BE-144DC43CE459
   - target:          x86_64-maccatalyst
-    value:           4A7F147D-1A09-3FB9-B9A7-5CAE8F8D82CE
+    value:           AABA3382-2715-376A-90BE-144DC43CE459
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2FF9AFD7-AE25-3060-A5C7-BB0227728792
+    value:           17311292-FF5E-3412-8935-3A67599869B2
   - target:          arm64e-maccatalyst
-    value:           2FF9AFD7-AE25-3060-A5C7-BB0227728792
+    value:           17311292-FF5E-3412-8935-3A67599869B2
 install-name:    '/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration'
-current-version: 1163.0.4
+current-version: 1163.60.3
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CNCopyCurrentNetworkInfo, _CNCopySupportedInterfaces, _CNMarkPortalOffline, 
                        _CNMarkPortalOnline, _CNSetSupportedSSIDs, _DHCPClientPreferencesCopyApplicationOptions, 
@@ -208,10 +208,11 @@ exports:
                        __SCNetworkInterfaceGetIORegistryEntryID, __SCNetworkInterfaceIsApplePreconfigured, 
                        __SCNetworkInterfaceIsBluetoothP2P, __SCNetworkInterfaceIsBluetoothPAN, 
                        __SCNetworkInterfaceIsBluetoothPAN_NAP, __SCNetworkInterfaceIsBuiltin, 
-                       __SCNetworkInterfaceIsCarPlay, __SCNetworkInterfaceIsHiddenConfiguration, 
-                       __SCNetworkInterfaceIsHiddenInterface, __SCNetworkInterfaceIsPhysicalEthernet, 
-                       __SCNetworkInterfaceIsQoSMarkingProfileInstalled, __SCNetworkInterfaceIsTethered, 
-                       __SCNetworkInterfaceIsThunderbolt, __SCNetworkInterfaceIsTrustRequired, 
+                       __SCNetworkInterfaceIsCarPlay, __SCNetworkInterfaceIsEphemeral, 
+                       __SCNetworkInterfaceIsHiddenConfiguration, __SCNetworkInterfaceIsHiddenInterface, 
+                       __SCNetworkInterfaceIsPhysicalEthernet, __SCNetworkInterfaceIsQoSMarkingProfileInstalled, 
+                       __SCNetworkInterfaceIsTethered, __SCNetworkInterfaceIsThunderbolt, 
+                       __SCNetworkInterfaceIsTrustRequired, __SCNetworkInterfaceIsVMNET, 
                        __SCNetworkMigrationAreConfigurationsIdentical, __SCNetworkProtocolCompare, 
                        __SCNetworkServiceCompare, __SCNetworkServiceCopyActive, __SCNetworkServiceCreatePreconfigured, 
                        __SCNetworkServiceIsVPN, __SCNetworkServiceSetServiceID, __SCNetworkSetCompare, 
@@ -237,6 +238,7 @@ exports:
                        ___SCNetworkConfigurationReport, ___SCNetworkConfigurationSaveModel, 
                        ___SCNetworkConfigurationUpgrade, ___SCNetworkConnectionCopyOnDemandInfoWithName, 
                        ___SCNetworkInterfaceCreateCapabilities, ___SCNetworkInterfaceCreateMediaOptions, 
+                       ___SCNetworkInterfaceGetDisablePrivateRelayValue, ___SCNetworkInterfaceGetDisableUntilNeededValue, 
                        ___SCNetworkInterfaceSetDisablePrivateRelayValue, ___SCNetworkInterfaceSetDisableUntilNeededValue, 
                        ___SC_Log, ___SC_log_enabled, ___SC_log_send, __sc_debug, 
                        __sc_log, __sc_verbose, __scprefs_observer_cancel, __scprefs_observer_watch, 
@@ -471,7 +473,7 @@ exports:
                        _kSCValNetVPNOnDemandRuleInterfaceTypeMatchWiFi, _kSCValNetVPNPluginCapabilityAuth, 
                        _kSCValNetVPNPluginCapabilityConnect, _kVPNConfigurationKeyCertificateRef, 
                        _kVPNConfigurationKeyPersistentRef, _kVPNConfigurationOptionTunnelType ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _VPNConfigurationSetAuthorization, __SC_dos_encoding_and_codepage, 
                        _kSCEntNetAppleTalk, _kSCEntNetNetInfo, _kSCPropNetAppleTalkConfigMethod, 
                        _kSCPropNetAppleTalkDefaultZone, _kSCPropNetAppleTalkNetworkID, 

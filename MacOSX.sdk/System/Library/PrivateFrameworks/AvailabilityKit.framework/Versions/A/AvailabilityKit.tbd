@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A6B5E675-8E98-331B-AC9B-810B825A7B59
+    value:           6B2BF082-F6D6-3624-9855-B164AF33A21B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4B3E80CC-75FB-37C7-BFB3-F730BB9DE19C
+    value:           1DCA1221-71A4-3A6E-BDD7-68796745636E
 install-name:    '/System/Library/PrivateFrameworks/AvailabilityKit.framework/Versions/A/AvailabilityKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

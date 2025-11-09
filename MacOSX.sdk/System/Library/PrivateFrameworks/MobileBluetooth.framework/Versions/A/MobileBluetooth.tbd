@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C9C28EB2-052E-31C3-A202-242E3C2FA17B
+    value:           7BD0BFD4-AF8C-338C-B585-86FFC5B88661
   - target:          x86_64-maccatalyst
-    value:           C9C28EB2-052E-31C3-A202-242E3C2FA17B
+    value:           7BD0BFD4-AF8C-338C-B585-86FFC5B88661
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0F619A59-6B5A-315E-B6CF-53DFCF6F7B68
+    value:           3D5F7179-C695-384A-837F-61D76C92EF2F
   - target:          arm64e-maccatalyst
-    value:           0F619A59-6B5A-315E-B6CF-53DFCF6F7B68
+    value:           3D5F7179-C695-384A-837F-61D76C92EF2F
 install-name:    '/System/Library/PrivateFrameworks/MobileBluetooth.framework/Versions/A/MobileBluetooth'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -34,7 +34,7 @@ exports:
                        _BTAccessoryManagerGetInEarStatus, _BTAccessoryManagerGetMicMode, 
                        _BTAccessoryManagerGetNonAppleHAEPairedDevices, _BTAccessoryManagerGetSettingFeatureBitMask, 
                        _BTAccessoryManagerGetSmartRouteMode, _BTAccessoryManagerGetSpatialAudioActive, 
-                       _BTAccessoryManagerGetSpatialAudioAllowed, _BTAccessoryManagerGetSpatialAudioFeatureMode, 
+                       _BTAccessoryManagerGetSpatialAudioAllowed, _BTAccessoryManagerGetSpatialAudioConfig, 
                        _BTAccessoryManagerGetSpatialAudioPlatformSupport, _BTAccessoryManagerGetTimeSyncId, 
                        _BTAccessoryManagerIsAccessory, _BTAccessoryManagerPlugInDevice, 
                        _BTAccessoryManagerReadDeviceVersionInfo, _BTAccessoryManagerRegisterCustomMessageClient, 
@@ -47,7 +47,7 @@ exports:
                        _BTAccessoryManagerSetIsHidden, _BTAccessoryManagerSetLinkKeyEx, 
                        _BTAccessoryManagerSetMicMode, _BTAccessoryManagerSetupCommand, 
                        _BTAccessoryManagerSmartRouteMode, _BTAccessoryManagerSpatialAudioAllowed, 
-                       _BTAccessoryManagerSpatialAudioFeatureMode, _BTAccessoryManagerUnplugDevice, 
+                       _BTAccessoryManagerSpatialAudioConfig, _BTAccessoryManagerUnplugDevice, 
                        _BTAccessoryManagerUpdateConnPriorityList, _BTDeviceAddressFromString, 
                        _BTDeviceAddressToString, _BTDeviceConfigureLinkKey, _BTDeviceConnect, 
                        _BTDeviceConnectServices, _BTDeviceConnectServicesWithParameters, 

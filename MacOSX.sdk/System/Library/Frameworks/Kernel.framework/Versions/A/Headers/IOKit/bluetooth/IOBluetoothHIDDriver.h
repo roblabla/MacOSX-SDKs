@@ -143,6 +143,12 @@ class IOBluetoothHIDDriver : public IOHIDDevice
 		UInt32					mPrintDebugDuration;
 		
 		uint32_t				mCanSendData;
+		
+		bool					mReturnDeviceError;
+		
+		UInt8					mHandshakeTimeoutCounter;
+		
+		bool					mUseSleepTimeout;
 };
     ExpansionData	*_expansionData;
 	

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           575C88C6-191C-36D9-BBBD-A319EDD3C304
+    value:           1A08514E-1980-38F4-B15B-1B38C0666CBF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EC80765F-7EE1-3E16-9DF5-4DB79BF9B95D
+    value:           92AE8970-A553-3915-97F8-ABB5B62D1890
 install-name:    '/System/Library/PrivateFrameworks/WebDriver.framework/Versions/A/WebDriver'
-current-version: 612.1.24
+current-version: 612.3.6
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DDExtractFileNameWithoutExtension, _DDIntersectionRange, 

@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9A39FBBC-44E9-3393-95B9-BF4B49F8734E
+    value:           17C4B8D3-6414-3E3C-8576-908A542B9344
   - target:          x86_64-maccatalyst
-    value:           9A39FBBC-44E9-3393-95B9-BF4B49F8734E
+    value:           17C4B8D3-6414-3E3C-8576-908A542B9344
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           434E42F6-1F3B-35B0-B700-F2DB81623E62
+    value:           D836EB39-880D-333F-B70E-A4271B075533
   - target:          arm64e-maccatalyst
-    value:           434E42F6-1F3B-35B0-B700-F2DB81623E62
+    value:           D836EB39-880D-333F-B70E-A4271B075533
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLVMPlugin.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos ]

@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
-// swift-module-flags: -target x86_64-apple-macos12.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftMetal -swift-version 5 -enforce-exclusivity=checked -O -module-name Metal
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-module-flags: -target x86_64-apple-macos12.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftMetal -swift-version 5 -enforce-exclusivity=checked -O -module-name Metal
 @_exported import Metal
 import Swift
 import _Concurrency
@@ -92,6 +92,9 @@ extension Metal.MTLDevice {
   public func getDefaultSamplePositions(sampleCount: Swift.Int) -> [Metal.MTLSamplePosition]
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, *)
   public func sampleTimestamps() -> (cpu: Metal.MTLTimestamp, gpu: Metal.MTLTimestamp)
+  @_alwaysEmitIntoClient public func makeLibrary(data: Dispatch.DispatchData) throws -> Metal.MTLLibrary {
+        return try makeLibrary(data: data as __DispatchData)
+    }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, *)
 extension Metal.MTLCounterSampleBuffer {
@@ -111,9 +114,7 @@ extension Metal.MTLArgumentEncoder {
   public func setTextures(_ textures: [Metal.MTLTexture?], range: Swift.Range<Swift.Int>)
   public func setSamplerStates(_ samplers: [Metal.MTLSamplerState?], range: Swift.Range<Swift.Int>)
   @available(macOS 10.14, iOS 13.0, tvOS 13.0, *)
-  @_alwaysEmitIntoClient public func setRenderPipelineStates(_ pipelines: [Metal.MTLRenderPipelineState?], range: Swift.Range<Swift.Int>) {
-        __setRenderPipelineStates(pipelines, with: NSRange(location: range.lowerBound, length: range.count))
-    }
+  public func setRenderPipelineStates(_ pipelines: [Metal.MTLRenderPipelineState?], range: Swift.Range<Swift.Int>)
   @available(iOS 13.0, tvOS 13.0, macOS 11.0, macCatalyst 14.0, *)
   @_alwaysEmitIntoClient public func setComputePipelineStates(_ pipelines: [Metal.MTLComputePipelineState?], range: Swift.Range<Swift.Int>) {
         __setComputePipelineStates(pipelines, with: NSRange(location: range.lowerBound, length: range.count))
@@ -134,13 +135,9 @@ extension Metal.MTLRenderCommandEncoder {
   @available(macOS 10.13, iOS 11.0, tvOS 11.0, *)
   public func useHeaps(_ heaps: [Metal.MTLHeap])
   @available(macOS 10.13, iOS 12.0, tvOS 14.5, *)
-  @_alwaysEmitIntoClient public func setViewports(_ viewports: [Metal.MTLViewport]) {
-        __setViewports(viewports, count: viewports.count)
-    }
+  public func setViewports(_ viewports: [Metal.MTLViewport])
   @available(macOS 10.13, iOS 12.0, tvOS 14.5, *)
-  @_alwaysEmitIntoClient public func setScissorRects(_ scissorRects: [Metal.MTLScissorRect]) {
-        __setScissorRects(scissorRects, count: scissorRects.count)
-    }
+  public func setScissorRects(_ scissorRects: [Metal.MTLScissorRect])
   public func setVertexBuffers(_ buffers: [Metal.MTLBuffer?], offsets: [Swift.Int], range: Swift.Range<Swift.Int>)
   public func setVertexTextures(_ textures: [Metal.MTLTexture?], range: Swift.Range<Swift.Int>)
   public func setVertexSamplerStates(_ samplers: [Metal.MTLSamplerState?], range: Swift.Range<Swift.Int>)
@@ -172,9 +169,7 @@ extension Metal.MTLRenderCommandEncoder {
   @available(macOS 10.14, iOS 12.0, tvOS 12.0, *)
   public func executeCommandsInBuffer(_ buffer: Metal.MTLIndirectCommandBuffer, range: Swift.Range<Swift.Int>)
   @available(macOS 10.14, iOS 13.0, tvOS 13.0, *)
-  @_alwaysEmitIntoClient public func executeCommandsInBuffer(_ buffer: Metal.MTLIndirectCommandBuffer, indirectBuffer indirectRangeBuffer: Metal.MTLBuffer, offset: Swift.Int) {
-        __executeCommands(in: buffer, indirectBuffer: indirectRangeBuffer, indirectBufferOffset: offset)
-    }
+  public func executeCommandsInBuffer(_ buffer: Metal.MTLIndirectCommandBuffer, indirectBuffer indirectRangeBuffer: Metal.MTLBuffer, offset: Swift.Int)
   @available(macOS 12.0, iOS 15.0, *)
   @available(tvOS, unavailable)
   public func setVertexVisibleFunctionTables(_ functionTables: [Metal.MTLVisibleFunctionTable?], bufferRange: Swift.Range<Swift.Int>)

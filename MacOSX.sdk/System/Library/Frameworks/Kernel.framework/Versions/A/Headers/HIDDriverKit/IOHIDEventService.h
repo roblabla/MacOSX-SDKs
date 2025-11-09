@@ -1,4 +1,4 @@
-/* iig(DriverKit-191) generated from IOHIDEventService.iig */
+/* iig(DriverKit-191.60.3) generated from IOHIDEventService.iig */
 
 /* IOHIDEventService.iig:1-48 */
 /*
@@ -49,7 +49,7 @@ typedef struct IOHIDDigitizerStylusData IOHIDDigitizerStylusData;
 typedef struct IOHIDDigitizerTouchData IOHIDDigitizerTouchData;
 
 
-/* source class IOHIDEventService IOHIDEventService.iig:49-350 */
+/* source class IOHIDEventService IOHIDEventService.iig:49-381 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -293,7 +293,15 @@ protected:
      * @function SetLED
      *
      * @abstract
+     * DEPRECATED. Prefer SetLEDState instead.
      * Sets an LED on the service.
+     *
+     * @discussion
+     * By default if no implementation of SetLEDState is provided by
+     * the DriverKit Driver, SetLED will be called instead by a 
+     * default implementation in IOUserHIDEventService. The
+     * IOUserHIDEventService implementation always returns
+     * kIOReturnSuccess if the usagePage for SetLEDState is @{kHIDPage_LEDs}.
      *
      * @param usage
      * The LED usage to set. LED usages can be found in
@@ -303,6 +311,29 @@ protected:
      * Turn on or off the LED.
      */
     virtual void SetLED(uint32_t usage, bool on) LOCAL;
+
+    /*!
+     * @function SetLEDState
+     *
+     * @abstract
+     * Sets an LED on the service.
+     *
+     * @discussion
+     * If there is no matching LED, then kIOReturnUnsupported should be returned, so that the UserClient
+     * can be signaled that the usage requested doesn't exist. If the LED exists it should return
+     * kIOReturnSuccess.
+     *
+     * @param usagePage
+     * The usage page of the LED requested to set.
+     *
+     * @param usage
+     * The LED usage to set. LED usages can be found in
+     * <IOKit/hid/IOHIDUsageTables.h>.
+     *
+     * @param on
+     * Turn on or off the LED.
+     */
+    virtual kern_return_t SetLEDState(uint32_t usagePage, uint32_t usage, bool on) LOCAL;
     
     /*!
      * @function dispatchEvent
@@ -342,7 +373,7 @@ protected:
      * set properties on the event service
      *
      * @discussion
-     * This method should be overrided by the DriverKit class if it needs to respond to setProperties calls.
+     * This method should be overridden by the DriverKit class if it needs to respond to setProperties calls.
      * Calling SetProperties(properties, SUPERDISPATCH) from the DriverKit class will get the properties added to a dictionary in IOReg
      * that HID Event System Clients will be able to see.
      *
@@ -361,8 +392,11 @@ protected:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOHIDEventService IOHIDEventService.iig:49-350 */
+/* generated class IOHIDEventService IOHIDEventService.iig:49-381 */
 
+#define IOHIDEventService__CompleteSetLED_ID            0x89830a8035210708ULL
+#define IOHIDEventService_SetLEDAction_ID            0xa095dc2c466d441dULL
+#define IOHIDEventService__SetLED_ID            0xecb4f77e69022d2dULL
 #define IOHIDEventService__CompleteSetProperties_ID            0xe1490a1f685db486ULL
 #define IOHIDEventService__SetUserProperties_ID            0xefd8a550b2092d2dULL
 #define IOHIDEventService_SetUserProperties_ID            0xe86319b882a5ed35ULL
@@ -377,7 +411,27 @@ protected:
 #define IOHIDEventService__DispatchRelativePointerEvent_ID            0xdfb3b21fdb3ea3b4ULL
 #define IOHIDEventService__DispatchKeyboardEvent_ID            0xd8dc8ce69e15f7d3ULL
 #define IOHIDEventService_SetLED_ID            0xfee475ac1384bab8ULL
+#define IOHIDEventService_SetLEDState_ID            0xa871aa31861269baULL
 #define IOHIDEventService_handleCopyMatchingEvent_ID            0xc7c97c024faede2dULL
+
+#define IOHIDEventService__CompleteSetLED_Args \
+        OSAction * action, \
+        IOReturn result, \
+        uint64_t context
+
+#define IOHIDEventService_SetLEDAction_Args \
+        uint32_t usagePage, \
+        uint32_t usage, \
+        bool on, \
+        uint64_t context, \
+        OSAction * action
+
+#define IOHIDEventService__SetLED_Args \
+        uint32_t usagePage, \
+        uint32_t usage, \
+        bool on, \
+        uint64_t context, \
+        OSAction * action
 
 #define IOHIDEventService__CompleteSetProperties_Args \
         OSAction * action, \
@@ -460,6 +514,11 @@ protected:
         uint32_t usage, \
         bool on
 
+#define IOHIDEventService_SetLEDState_Args \
+        uint32_t usagePage, \
+        uint32_t usage, \
+        bool on
+
 #define IOHIDEventService_handleCopyMatchingEvent_Args \
         OSDictionary * matching, \
         IOHIDEvent ** event
@@ -476,6 +535,25 @@ public:\
 \
     static kern_return_t\
     _Dispatch(IOHIDEventService * self, const IORPC rpc);\
+\
+    void\
+    _CompleteSetLED(\
+        OSAction * action,\
+        IOReturn result,\
+        uint64_t context,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    void\
+    SetLEDAction(\
+        uint32_t usagePage,\
+        uint32_t usage,\
+        bool on,\
+        uint64_t context,\
+        OSAction * action,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    CreateAction_SetLED(size_t referenceSize, OSAction ** action);\
 \
     void\
     _CompleteSetProperties(\
@@ -573,6 +651,13 @@ public:\
         OSDispatchMethod supermethod = NULL);\
 \
     kern_return_t\
+    SetLEDState(\
+        uint32_t usagePage,\
+        uint32_t usage,\
+        bool on,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
     handleCopyMatchingEvent(\
         OSDictionary * matching,\
         IOHIDEvent ** event,\
@@ -581,6 +666,9 @@ public:\
 \
 protected:\
     /* _Impl methods */\
+\
+    void\
+    _SetLED_Impl(IOHIDEventService__SetLED_Args);\
 \
     void\
     _SetUserProperties_Impl(IOHIDEventService__SetUserProperties_Args);\
@@ -598,11 +686,32 @@ protected:\
     SetLED_Impl(IOHIDEventService_SetLED_Args);\
 \
     kern_return_t\
+    SetLEDState_Impl(IOHIDEventService_SetLEDState_Args);\
+\
+    kern_return_t\
     handleCopyMatchingEvent_Impl(IOHIDEventService_handleCopyMatchingEvent_Args);\
 \
 \
 public:\
     /* _Invoke methods */\
+\
+    typedef void (*_CompleteSetLED_Handler)(OSMetaClassBase * target, IOHIDEventService__CompleteSetLED_Args);\
+    static kern_return_t\
+    _CompleteSetLED_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        _CompleteSetLED_Handler func);\
+\
+    typedef void (*SetLEDAction_Handler)(OSMetaClassBase * target, IOHIDEventService_SetLEDAction_Args);\
+    static kern_return_t\
+    SetLEDAction_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        SetLEDAction_Handler func,\
+        const OSMetaClass * targetActionClass);\
+\
+    static kern_return_t\
+    SetLEDAction_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        SetLEDAction_Handler func);\
 \
     typedef void (*_CompleteSetProperties_Handler)(OSMetaClassBase * target, IOHIDEventService__CompleteSetProperties_Args);\
     static kern_return_t\
@@ -688,6 +797,12 @@ public:\
         OSMetaClassBase * target,\
         SetLED_Handler func);\
 \
+    typedef kern_return_t (*SetLEDState_Handler)(OSMetaClassBase * target, IOHIDEventService_SetLEDState_Args);\
+    static kern_return_t\
+    SetLEDState_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        SetLEDState_Handler func);\
+\
     typedef kern_return_t (*handleCopyMatchingEvent_Handler)(OSMetaClassBase * target, IOHIDEventService_handleCopyMatchingEvent_Args);\
     static kern_return_t\
     handleCopyMatchingEvent_Invoke(const IORPC rpc,\
@@ -700,6 +815,9 @@ public:\
 \
 protected:\
     /* _Impl methods */\
+\
+    void\
+    _CompleteSetLED_Impl(IOHIDEventService__CompleteSetLED_Args);\
 \
     void\
     _CompleteSetProperties_Impl(IOHIDEventService__CompleteSetProperties_Args);\
@@ -947,6 +1065,99 @@ IOHIDEventService_DECLARE_IVARS
 #endif /* !KERNEL */
 
 
+#define OSAction_IOHIDEventService__SetLED_Methods \
+\
+public:\
+\
+    virtual kern_return_t\
+    Dispatch(const IORPC rpc) APPLE_KEXT_OVERRIDE;\
+\
+    static kern_return_t\
+    _Dispatch(OSAction_IOHIDEventService__SetLED * self, const IORPC rpc);\
+\
+\
+protected:\
+    /* _Impl methods */\
+\
+\
+public:\
+    /* _Invoke methods */\
+\
+
+
+#define OSAction_IOHIDEventService__SetLED_KernelMethods \
+\
+protected:\
+    /* _Impl methods */\
+\
+
+
+#define OSAction_IOHIDEventService__SetLED_VirtualMethods \
+\
+public:\
+\
+
+
+#if !KERNEL
+
+extern OSMetaClass          * gOSAction_IOHIDEventService__SetLEDMetaClass;
+extern const OSClassLoadInformation OSAction_IOHIDEventService__SetLED_Class;
+
+class OSAction_IOHIDEventService__SetLEDMetaClass : public OSMetaClass
+{
+public:
+    virtual kern_return_t
+    New(OSObject * instance) override;
+    virtual kern_return_t
+    Dispatch(const IORPC rpc) override;
+};
+
+#endif /* !KERNEL */
+
+class OSAction_IOHIDEventService__SetLEDInterface : public OSInterface
+{
+public:
+};
+
+struct OSAction_IOHIDEventService__SetLED_IVars;
+struct OSAction_IOHIDEventService__SetLED_LocalIVars;
+
+class __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_IOHIDEventService__SetLED : public OSAction, public OSAction_IOHIDEventService__SetLEDInterface
+{
+#if KERNEL
+    OSDeclareDefaultStructorsWithDispatch(OSAction_IOHIDEventService__SetLED);
+#endif /* KERNEL */
+
+#if !KERNEL
+    friend class OSAction_IOHIDEventService__SetLEDMetaClass;
+#endif /* !KERNEL */
+
+public:
+#ifdef OSAction_IOHIDEventService__SetLED_DECLARE_IVARS
+OSAction_IOHIDEventService__SetLED_DECLARE_IVARS
+#else /* OSAction_IOHIDEventService__SetLED_DECLARE_IVARS */
+    union
+    {
+        OSAction_IOHIDEventService__SetLED_IVars * ivars;
+        OSAction_IOHIDEventService__SetLED_LocalIVars * lvars;
+    };
+#endif /* OSAction_IOHIDEventService__SetLED_DECLARE_IVARS */
+#if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gOSAction_IOHIDEventService__SetLEDMetaClass; };
+    virtual const OSMetaClass *
+    getMetaClass() const APPLE_KEXT_OVERRIDE { return gOSAction_IOHIDEventService__SetLEDMetaClass; };
+#endif /* KERNEL */
+
+    using super = OSAction;
+
+#if !KERNEL
+    OSAction_IOHIDEventService__SetLED_Methods
+#endif /* !KERNEL */
+
+    OSAction_IOHIDEventService__SetLED_VirtualMethods
+};
+
 #define OSAction_IOHIDEventService__SetUserProperties_Methods \
 \
 public:\
@@ -1136,6 +1347,6 @@ OSAction_IOHIDEventService__CopyEvent_DECLARE_IVARS
 #endif /* !__DOCUMENTATION__ */
 
 
-/* IOHIDEventService.iig:518- */
+/* IOHIDEventService.iig:630- */
 
 #endif /* ! _HIDDRIVERKIT_IOHIDEVENTSERVICE_H */

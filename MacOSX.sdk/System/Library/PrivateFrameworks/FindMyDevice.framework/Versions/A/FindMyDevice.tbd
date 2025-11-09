@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           02299165-3AB2-3A25-8F9A-B541F1843F14
+    value:           A4C3A1B8-783A-3572-9293-9BE442840F5E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B6156E8C-64B1-3B9A-9A44-3A34489F59DD
+    value:           F6668227-6374-3717-9CA5-F46D8523130B
 install-name:    '/System/Library/PrivateFrameworks/FindMyDevice.framework/Versions/A/FindMyDevice'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -21,11 +21,12 @@ exports:
                        _kFMDFMIPAccountNameKey, _kFMDFMIPAccountPersonIDKey, _kFMDFMMNeedsLostModeExitAuth, 
                        _kFMDFMMUAServicesAccessEntitlement, _kFMDFMMUserAgentAccessEntitlement, 
                        _kFMDLocalActivationLockInfoChangedNotification, _kFMDLogPrefsChangedDarwinNotification, 
-                       _kFMDNotBackedUpPrefDomain, _kFMDOfflineFindingInfoChangedNotification, 
-                       _kFMDPlaySoundStartedDarwinNotification, _kFMDPlaySoundStoppedDarwinNotification, 
-                       _kFMDPostWipePrefDomain, _kFMDPrefDomain, _kFMDPublicNotBackedUpPrefDomain, 
-                       _kFMDSecureLocationModeLive, _kFMDSecureLocationModeProactive, 
-                       _kFMDSecureLocationModeProactiveShallow, _kFMDUserAgentPrefDomain, 
+                       _kFMDNotBackedUpMagSafePrefDomain, _kFMDNotBackedUpPrefDomain, 
+                       _kFMDOfflineFindingInfoChangedNotification, _kFMDPlaySoundStartedDarwinNotification, 
+                       _kFMDPlaySoundStoppedDarwinNotification, _kFMDPostWipePrefDomain, 
+                       _kFMDPrefDomain, _kFMDPublicNotBackedUpPrefDomain, _kFMDSecureLocationModeLive, 
+                       _kFMDSecureLocationModeProactive, _kFMDSecureLocationModeProactiveShallow, 
+                       _kFMDStartupCompleteNotification, _kFMDUserAgentPrefDomain, 
                        _kFMDWatchNotBackedUpPrefDomain, _kFMDWatchPrefDomain, _kFMIPAppBundleIdentifier, 
                        _kFMIPLowBatteryLocateStateDidChangeNotification, _kFMIPStateDidChangeNotification, 
                        _kFMMActivationLockEnabledPrefKey, _kFMMAuthRight, _kFMMEnabledPrefDomain, 

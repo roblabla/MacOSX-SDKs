@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           67D79A7F-3ED2-3A5B-875B-A159C8E3CB7D
+    value:           A78964A6-0DE6-3526-A908-A96FE21243CD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           53942699-AC0F-3B53-B0F7-A1DAE29905F3
+    value:           CC206006-02B4-35B6-84F1-B099B88084EC
 install-name:    '/System/Library/PrivateFrameworks/StoreUI.framework/Versions/A/StoreUI'
 current-version: 379
 exports:

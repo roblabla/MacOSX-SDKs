@@ -123,7 +123,7 @@ API_UNAVAILABLE(macos, tvos)
                             withCompletion:(void (^)(INStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveAlbumName(for:with:));
 
 - (void)resolveSearchTermsForSearchForPhotos:(INSearchForPhotosIntent *)intent
-                              withCompletion:(void (^)(NSArray<INStringResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveSearchTerms(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macos) API_DEPRECATED("", ios(10.0, 15.0), watchos(3.2, 8.0)) API_UNAVAILABLE(macos);
+                              withCompletion:(void (^)(NSArray<INStringResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveSearchTerms(for:with:)) API_DEPRECATED("", ios(11.0, 15.0), watchos(4.0, 8.0)) API_UNAVAILABLE(macos);
 
 - (void)resolvePeopleInPhotoForSearchForPhotos:(INSearchForPhotosIntent *)intent
                                 withCompletion:(void (^)(NSArray<INPersonResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolvePeopleInPhoto(for:with:));

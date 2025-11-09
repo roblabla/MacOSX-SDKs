@@ -331,7 +331,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 @property (nonatomic, strong, nullable) UIView *backgroundView API_AVAILABLE(ios(3.2)); // the background view will be automatically resized to track the size of the table view.  this will be placed as a subview of the table view behind all cells and headers/footers.  default may be non-nil for some devices.
 
-@property (nonatomic, readonly, nullable) UIContextMenuInteraction *contextMenuInteraction API_UNAVAILABLE(ios) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly, nullable) UIContextMenuInteraction *contextMenuInteraction API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
 // Info
 

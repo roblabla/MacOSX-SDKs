@@ -34,6 +34,17 @@ NSString* const OSBundleUsageDescriptionKey;
 OS_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 NSString* const NSSystemExtensionUsageDescriptionKey;
 
+/*!
+ @brief An optional property of a System Extension bundle naming the bundle
+ identifier of a kernel extension (kext) with similar purpose and capabilities.
+
+ @discussion The 'OSRelatedKernelExtension' key is optional. If one is present
+ and the related kernel extension has the same Team ID and is approved by the
+ system policy, this System Extension is also approved.
+ */
+OS_EXPORT API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos)
+NSString* const OSRelatedKernelExtensionKey;
+
 typedef NS_ERROR_ENUM(OSSystemExtensionErrorDomain, OSSystemExtensionErrorCode) {
     OSSystemExtensionErrorUnknown = 1,
     OSSystemExtensionErrorMissingEntitlement = 2,

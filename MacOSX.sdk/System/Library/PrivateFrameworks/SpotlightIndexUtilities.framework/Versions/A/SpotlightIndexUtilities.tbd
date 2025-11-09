@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           62B97A95-4996-3582-B336-F20DDC1A9A6A
+    value:           71F6EEEE-85FC-36FA-98C3-A2E6BC0E32B1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A03A40CA-0EC0-32BE-A6AD-61E8EB9E9BEF
+    value:           7E0C8D8A-58EF-39B7-9609-FA6E386EE62A
 install-name:    '/System/Library/PrivateFrameworks/SpotlightIndexUtilities.framework/Versions/A/SpotlightIndexUtilities'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -30,7 +30,7 @@ exports:
                        _open_directory_nosymlink, _packPostingChunkUpdatesWithType, 
                        _packPostingChunks, _partial_path, _separate_path_parent_child, 
                        _si_content_index_base, _si_content_index_count, _si_content_index_flags, 
-                       _si_content_index_name, _si_get_token_info, _tcmr, _unpackPostingChunk ]
+                       _si_content_index_name, _si_get_token_info, _si_tcmr, _unpackPostingChunk ]
     objc-classes:    [ SIIndexer, SIIndexerComplete, SIIndexerQuery, SIPostingsIterator, 
                        TermIndex ]
 ...

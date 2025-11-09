@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FBF66876-663D-3B92-AF14-20DE7DF1789C
+    value:           8B0008DC-19A0-3C4D-8270-B1E97B530570
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AF316DB2-8E70-33F1-A524-4E810E1EBE4A
+    value:           44A1E08C-2968-31BE-BA55-45010B96E98F
 install-name:    '/System/Library/Frameworks/ForceFeedback.framework/Versions/A/ForceFeedback'
 current-version: 1.0.2
 exports:

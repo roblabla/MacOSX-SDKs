@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F0275D17-C86C-3302-BBB0-745FBBF297BC
+    value:           228345FC-F379-3A47-924E-2003A0330610
   - target:          x86_64-maccatalyst
-    value:           F0275D17-C86C-3302-BBB0-745FBBF297BC
+    value:           228345FC-F379-3A47-924E-2003A0330610
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CD539580-0981-3C7E-9497-1AE5F124C2AD
+    value:           3015681A-B8EE-3513-80E4-A85F52FC4172
   - target:          arm64e-maccatalyst
-    value:           CD539580-0981-3C7E-9497-1AE5F124C2AD
+    value:           3015681A-B8EE-3513-80E4-A85F52FC4172
 install-name:    '/System/Library/PrivateFrameworks/CryptoKitPrivate.framework/Versions/A/CryptoKitPrivate'
 swift-abi-version: 7
 exports:

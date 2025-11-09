@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E2C27571-4E33-3CCA-B5C4-26F4B116FCB2
+    value:           1B25ED47-D08D-322A-AFCB-9A6268A8373E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           15275322-631D-3925-AD81-E829F5592A4D
+    value:           55E22657-376E-37B3-BF9A-8E347C25F0B1
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Frameworks/LoginUICore.framework/Versions/A/LoginUICore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

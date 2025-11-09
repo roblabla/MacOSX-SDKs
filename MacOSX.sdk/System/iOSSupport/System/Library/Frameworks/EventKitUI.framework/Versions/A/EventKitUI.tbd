@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           AB21DD9B-AB50-3239-ADA4-069D561C3C07
+    value:           EFF55B20-3371-3D42-BB0B-F3EAA77761A9
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           613198CD-B9E0-3471-B191-F7C5ACAA4F5E
+    value:           936FC8A6-DE08-38FC-B91C-5AD42EA16BC5
 install-name:    '/System/iOSSupport/System/Library/Frameworks/EventKitUI.framework/Versions/A/EventKitUI'
 current-version: 0
 compatibility-version: 0

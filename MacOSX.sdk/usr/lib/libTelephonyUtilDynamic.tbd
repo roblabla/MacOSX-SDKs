@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           48E44105-0B85-3E6A-B333-B9D15CC1B1EA
+    value:           B2C1FBBB-AA1A-353C-BC34-5831E3F3C045
   - target:          x86_64-maccatalyst
-    value:           48E44105-0B85-3E6A-B333-B9D15CC1B1EA
+    value:           B2C1FBBB-AA1A-353C-BC34-5831E3F3C045
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5656C395-0E11-3868-A087-0C76695E22F5
+    value:           E023851B-4215-3825-B0B4-D71023D3066D
   - target:          arm64e-maccatalyst
-    value:           5656C395-0E11-3868-A087-0C76695E22F5
+    value:           E023851B-4215-3825-B0B4-D71023D3066D
 install-name:    '/usr/lib/libTelephonyUtilDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]

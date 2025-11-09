@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CED787C5-9A9C-3751-B510-1B5094F3AF03
+    value:           BC777795-B41B-3C58-93D6-B41CE9D346FC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A50FE8D8-E87C-3C50-81C9-EEFB8DF9EF29
+    value:           57FFE0DF-E272-39ED-A197-23F82335D16D
 install-name:    '/System/Library/PrivateFrameworks/CoreAVCHD.framework/Versions/A/CoreAVCHD'
 current-version: 6000
 compatibility-version: 5600

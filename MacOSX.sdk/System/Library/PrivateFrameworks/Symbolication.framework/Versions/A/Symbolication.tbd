@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FE9EE5FD-4A83-372C-8CD6-AF23E40BEBFA
+    value:           184035F2-B93C-3DF2-BB65-9BA7E8622D71
   - target:          x86_64-maccatalyst
-    value:           FE9EE5FD-4A83-372C-8CD6-AF23E40BEBFA
+    value:           184035F2-B93C-3DF2-BB65-9BA7E8622D71
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F97454CA-E5A2-3EBA-BAE8-3EE481D12607
+    value:           7B83C2E3-65D5-3714-A615-C14CB6ACB4DB
   - target:          arm64e-maccatalyst
-    value:           F97454CA-E5A2-3EBA-BAE8-3EE481D12607
+    value:           7B83C2E3-65D5-3714-A615-C14CB6ACB4DB
 install-name:    '/System/Library/PrivateFrameworks/Symbolication.framework/Versions/A/Symbolication'
-current-version: 64550.75.2
+current-version: 64550.83.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -35,7 +35,8 @@ exports:
                        _VMUScanningMaskForOwningReferences, _VMUSortIndexForLibraryPath, 
                        _VMUUnionRange, _VMUVMRegionShareModeName, _VMUWithRootNodeMarkingMap, 
                        _VMUmallocMetadataLabel, _VMUmappedFileLabel, _VMUobjcAdditionalDataLabel, 
-                       _VMUunusedSharedLibLabelPrefix, __VMUEnumerateMarkedObjects, 
+                       _VMUunusedSharedLibDataLabel, _VMUunusedSharedLibLabelPrefix, 
+                       _VMUunusedSharedLibTextLabel, __VMUEnumerateMarkedObjects, 
                        _kVMUAutoreleasePoolBoundaryClassName, _kVMUAutoreleasePoolThreadSpecificDataKeyString, 
                        _kVMUPrintArchivingTiming, _kVMURootRetainCycle, _kVMUThreadSpecificDataKeyString, 
                        _pidFromHint, _psName, _task_enumerate_malloc_blocks, _task_find_leaks, 

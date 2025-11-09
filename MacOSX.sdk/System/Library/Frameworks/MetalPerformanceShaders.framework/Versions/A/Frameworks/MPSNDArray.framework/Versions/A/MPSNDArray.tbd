@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9FBBAD0E-3BD3-3F7F-90F7-1600C8E59778
+    value:           E0117B08-B700-3E43-9118-AD2956A6DE15
   - target:          x86_64-maccatalyst
-    value:           9FBBAD0E-3BD3-3F7F-90F7-1600C8E59778
+    value:           E0117B08-B700-3E43-9118-AD2956A6DE15
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1DDCE388-6A80-33A9-9479-EA5B666FE99D
+    value:           22520598-9778-30AE-83FD-1BB1B2AAE752
   - target:          arm64e-maccatalyst
-    value:           1DDCE388-6A80-33A9-9479-EA5B666FE99D
+    value:           22520598-9778-30AE-83FD-1BB1B2AAE752
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSNDArray.framework/Versions/A/MPSNDArray'
-current-version: 125.0.30
+current-version: 125.2.1
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ MPSImage, MetalPerformanceShaders ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MPSSetResourcesOnCommandEncoder ]
     objc-classes:    [ MPSExternalNDArrayBinary, MPSExternalNDArrayBinaryGradient, 
@@ -86,28 +86,32 @@ exports:
                        MPSNDArrayOR, MPSNDArrayORPrimaryGradient, MPSNDArrayORSecondaryGradient, 
                        MPSNDArrayPadGradientKernel, MPSNDArrayPadKernel, MPSNDArrayPoolingKernel, 
                        MPSNDArrayPower, MPSNDArrayPowerPrimaryGradient, MPSNDArrayPowerSecondaryGradient, 
-                       MPSNDArrayQRDecomposition, MPSNDArrayReciprocal, MPSNDArrayReciprocalGradient, 
-                       MPSNDArrayReduction, MPSNDArrayReductionGradient, MPSNDArrayReductionSum, 
-                       MPSNDArrayReductionSumGradient, MPSNDArrayResample, MPSNDArrayResampleGradient, 
-                       MPSNDArrayReverseSquareRoot, MPSNDArrayReverseSquareRootGradient, 
-                       MPSNDArrayRint, MPSNDArrayRintGradient, MPSNDArrayRound, MPSNDArrayRoundGradient, 
-                       MPSNDArrayScatter, MPSNDArrayScatterGradient, MPSNDArraySelect, 
-                       MPSNDArraySelectPrimaryGradient, MPSNDArraySelectSecondaryGradient, 
-                       MPSNDArraySelectTertiaryGradient, MPSNDArraySign, MPSNDArraySignGradient, 
-                       MPSNDArraySignbit, MPSNDArraySignbitGradient, MPSNDArraySin, 
-                       MPSNDArraySinGradient, MPSNDArraySinh, MPSNDArraySinhGradient, 
-                       MPSNDArraySoftMax, MPSNDArraySoftMaxGradient, MPSNDArraySquare, 
-                       MPSNDArraySquareGradient, MPSNDArraySquareRoot, MPSNDArraySquareRootGradient, 
-                       MPSNDArrayStencilKernel, MPSNDArrayStridedSlice, MPSNDArrayStridedSliceGradient, 
-                       MPSNDArraySubtraction, MPSNDArraySubtractionPrimaryGradient, 
-                       MPSNDArraySubtractionSecondaryGradient, MPSNDArrayTan, MPSNDArrayTanGradient, 
-                       MPSNDArrayTanh, MPSNDArrayTanhGradient, MPSNDArrayTileGradientKernel, 
-                       MPSNDArrayTileKernel, MPSNDArrayTopK, MPSNDArrayTopKGradient, 
-                       MPSNDArrayUnaryGradientKernel, MPSNDArrayUnaryKernel, MPSNDArrayXNOR, 
-                       MPSNDArrayXNORPrimaryGradient, MPSNDArrayXNORSecondaryGradient, 
+                       MPSNDArrayPrune, MPSNDArrayQRDecomposition, MPSNDArrayRandom, 
+                       MPSNDArrayRandomNormal, MPSNDArrayRandomState, MPSNDArrayRandomStateDescriptor, 
+                       MPSNDArrayRandomTruncatedNormal, MPSNDArrayRandomUniform, 
+                       MPSNDArrayReciprocal, MPSNDArrayReciprocalGradient, MPSNDArrayReduction, 
+                       MPSNDArrayReductionGradient, MPSNDArrayReductionSum, MPSNDArrayReductionSumGradient, 
+                       MPSNDArrayResample, MPSNDArrayResampleGradient, MPSNDArrayReverseSquareRoot, 
+                       MPSNDArrayReverseSquareRootGradient, MPSNDArrayRint, MPSNDArrayRintGradient, 
+                       MPSNDArrayRound, MPSNDArrayRoundGradient, MPSNDArrayScatter, 
+                       MPSNDArrayScatterGradient, MPSNDArraySelect, MPSNDArraySelectPrimaryGradient, 
+                       MPSNDArraySelectSecondaryGradient, MPSNDArraySelectTertiaryGradient, 
+                       MPSNDArraySign, MPSNDArraySignGradient, MPSNDArraySignbit, 
+                       MPSNDArraySignbitGradient, MPSNDArraySin, MPSNDArraySinGradient, 
+                       MPSNDArraySinh, MPSNDArraySinhGradient, MPSNDArraySoftMax, 
+                       MPSNDArraySoftMaxGradient, MPSNDArraySquare, MPSNDArraySquareGradient, 
+                       MPSNDArraySquareRoot, MPSNDArraySquareRootGradient, MPSNDArrayStencilKernel, 
+                       MPSNDArrayStridedSlice, MPSNDArrayStridedSliceGradient, MPSNDArraySubtraction, 
+                       MPSNDArraySubtractionPrimaryGradient, MPSNDArraySubtractionSecondaryGradient, 
+                       MPSNDArrayTan, MPSNDArrayTanGradient, MPSNDArrayTanh, MPSNDArrayTanhGradient, 
+                       MPSNDArrayTileGradientKernel, MPSNDArrayTileKernel, MPSNDArrayTopK, 
+                       MPSNDArrayTopKGradient, MPSNDArrayUnaryGradientKernel, MPSNDArrayUnaryKernel, 
+                       MPSNDArrayXNOR, MPSNDArrayXNORPrimaryGradient, MPSNDArrayXNORSecondaryGradient, 
                        MPSNDArrayXOR, MPSNDArrayXORPrimaryGradient, MPSNDArrayXORSecondaryGradient, 
                        MPSPluginNDArrayConvolutionDescriptor ]
     objc-ivars:      [ MPSNDArrayConvolution2D._autoTuningParams, MPSNDArrayConvolution2D._autoTuningTarget, 
+                       MPSNDArrayConvolution2DGradientWithInput._autoTuningParams, 
+                       MPSNDArrayConvolution2DGradientWithInput._autoTuningTarget, 
                        MPSNDArrayConvolution2DGradientWithWeights._autoTuning, MPSNDArrayConvolution2DGradientWithWeights._autoTuningParams, 
                        MPSNDArrayGatherGradientState._axis, MPSNDArrayGradientState._provenance, 
                        MPSNDArrayGradientState._srcCount, MPSNDArrayGradientState._srcInfo ]

@@ -4,6 +4,7 @@
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
+#import <QuartzCore/CAFrameRateRange.h>
 #import <Foundation/NSObject.h>
 
 @class NSArray, NSString, CAMediaTimingFunction, CAValueFunction;
@@ -52,6 +53,13 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
  * active duration has passed. Defaults to YES. */
 
 @property(getter=isRemovedOnCompletion) BOOL removedOnCompletion;
+
+/* Defines the range of desired frame rate in frames-per-second for this
+   animation. The actual frame rate is dynamically adjusted to better align
+   with other animation sources. */
+
+@property CAFrameRateRange preferredFrameRateRange
+    API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
 
 @end
 

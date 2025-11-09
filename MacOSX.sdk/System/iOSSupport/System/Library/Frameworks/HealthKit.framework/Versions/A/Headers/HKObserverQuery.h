@@ -34,7 +34,8 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
                 once you have processed data from this notification. Otherwise the system will continue
                 to notify you of this data.
  
- @param         queryDescriptors   An array of query descriptors that describes the sample types and predicates that you're interested in getting notified for.
+ @param         queryDescriptors   An array of query descriptors that describes the sample types and predicates for
+                                   which you are interested in getting notified.
  */
 - (instancetype)initWithQueryDescriptors:(NSArray<HKQueryDescriptor *> *)queryDescriptors
                            updateHandler:(void(^)(HKObserverQuery *query, NSSet<HKSampleType *> * _Nullable sampleTypesAdded, HKObserverQueryCompletionHandler completionHandler, NSError * _Nullable error))updateHandler API_AVAILABLE(ios(15.0), watchos(8.0));

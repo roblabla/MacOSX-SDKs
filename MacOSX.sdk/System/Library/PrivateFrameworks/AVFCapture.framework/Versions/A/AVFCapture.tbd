@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           37DDCD50-53DC-3F1B-B49C-B4142970E25A
+    value:           E69EFD5A-EB34-34EB-8669-4B65A5E023B0
   - target:          x86_64-maccatalyst
-    value:           37DDCD50-53DC-3F1B-B49C-B4142970E25A
+    value:           E69EFD5A-EB34-34EB-8669-4B65A5E023B0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FFAD0980-CB9F-31BF-A6A4-2620A1004E7D
+    value:           380DA586-B020-3788-B712-611AF981EB50
   - target:          arm64e-maccatalyst
-    value:           FFAD0980-CB9F-31BF-A6A4-2620A1004E7D
+    value:           380DA586-B020-3788-B712-611AF981EB50
 install-name:    '/System/Library/PrivateFrameworks/AVFCapture.framework/Versions/A/AVFCapture'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -35,6 +35,9 @@ exports:
                        _AVAppleMakerNote_PhotoProcessingFlags, _AVAppleMakerNote_PhotosAppFeatureFlags, 
                        _AVAppleMakerNote_PhotosOriginatingSignature, _AVAppleMakerNote_PhotosRenderEffect, 
                        _AVAppleMakerNote_PhotosRenderOriginatingSignature, _AVAppleMakerNote_SceneFlags, 
+                       _AVAppleMakerNote_SemanticStyle, _AVAppleMakerNote_SemanticStyleKey_Preset, 
+                       _AVAppleMakerNote_SemanticStyleKey_RenderingVersion, _AVAppleMakerNote_SemanticStyleKey_SceneBias, 
+                       _AVAppleMakerNote_SemanticStyleKey_ToneBias, _AVAppleMakerNote_SemanticStyleKey_WarmthBias, 
                        _AVAppleMakerNote_SpatialOverCaptureGroupIdentifier, _AVAppleMakerNote_SpatialOverCaptureImageType, 
                        _AVAppleMakerNote_StillImageProcessingHomography, _AVAppleMakerNote_iCloudServerSoftwareVersionForDynamicallyGeneratedMedia, 
                        _AVCaptureBravoCameraSelectionBehaviorEvaluatesContinuously, 
@@ -124,16 +127,23 @@ exports:
                        _AVControlCenterMicrophoneModesModuleSupportedMicrophoneModesDidChangeNotification, 
                        _AVControlCenterMicrophoneModesModuleVoiceProcessingBypassedDidChangeNotification, 
                        _AVControlCenterModulesNotificationBackgroundBlurUnavailableReasonsKey, 
-                       _AVControlCenterModulesNotificationBundleIdentifierKey, _AVControlCenterModulesNotificationVideoEffectKey, 
-                       _AVControlCenterModulesPrewarm, _AVControlCenterModulesShouldBeShownForBundleID, 
-                       _AVControlCenterPreferencesDomainForCurrentProcess, _AVControlCenterVideoEffectBackgroundBlur, 
-                       _AVControlCenterVideoEffectCenterStage, _AVControlCenterVideoEffectsModuleEffectControlModeDidChangeNotification, 
+                       _AVControlCenterModulesNotificationBundleIdentifierKey, _AVControlCenterModulesNotificationCenterStageUnavailableReasonsKey, 
+                       _AVControlCenterModulesNotificationVideoEffectKey, _AVControlCenterModulesPrewarm, 
+                       _AVControlCenterModulesShouldBeShownForBundleID, _AVControlCenterPreferencesDomainForCurrentProcess, 
+                       _AVControlCenterVideoEffectBackgroundBlur, _AVControlCenterVideoEffectCenterStage, 
+                       _AVControlCenterVideoEffectsCenterStageControlModePreferenceKey, 
+                       _AVControlCenterVideoEffectsCenterStageEnabledPreferenceKey, 
+                       _AVControlCenterVideoEffectsCenterStageUnavailableReasonsPreferenceKey, 
+                       _AVControlCenterVideoEffectsModuleEffectControlModeDidChangeNotification, 
                        _AVControlCenterVideoEffectsModuleEffectEnabledDidChangeNotification, 
                        _AVControlCenterVideoEffectsModuleEffectSupportedDidChangeNotification, 
                        _AVControlCenterVideoEffectsModuleGetEffectControlModeForBundleID, 
                        _AVControlCenterVideoEffectsModuleGetUnavailableReasons, _AVControlCenterVideoEffectsModuleIsEffectEnabledForBundleID, 
                        _AVControlCenterVideoEffectsModuleIsEffectSupportedForBundleID, 
                        _AVControlCenterVideoEffectsModuleSetEffectEnabledForBundleID, 
+                       _AVControlCenterVideoEffectsPortraitEffectControlModePreferenceKey, 
+                       _AVControlCenterVideoEffectsPortraitEffectEnabledPreferenceKey, 
+                       _AVControlCenterVideoEffectsPortraitEffectUnavailableReasonsPreferenceKey, 
                        _AVControlCenterVideoEffectsUnavailableReasonsDidChangeNotification, 
                        _AVGQAggregateDevicePhotoZoomFactor, _AVGQAggregateDeviceVideoZoomFactor, 
                        _AVGQCameraAppUIVersion, _AVGQCameraCapability, _AVGQCameraFlashCapability, 
@@ -142,9 +152,10 @@ exports:
                        _AVGQCaptureADOSupportsAudioCaptureWithPhotoFormats, _AVGQCaptureAppsMayUseHEVC, 
                        _AVGQCaptureConnectionAlwaysSelectsStandardVISFor720p30, _AVGQCaptureConnectionCinematicVISAwareAPIsAreAvailable, 
                        _AVGQCaptureConnectionFrameRatePropertiesAreDeprecated, _AVGQCaptureDefaultDevicePrefersUnsuspendedAndAllowsAnyPosition, 
-                       _AVGQCaptureDevicesShouldBeSortedByDeviceType, _AVGQCaptureExtendedCinematicVISSupported, 
-                       _AVGQCaptureHighPhotoQualityFrameDropAllowed, _AVGQCaptureMFOStabilizationIsAlwaysOn, 
-                       _AVGQCaptureMFOSupportsPhotoFormats, _AVGQCaptureMFOVideoSettingsSupportCompressionProperties, 
+                       _AVGQCaptureDeviceSupportsCinematicVideoFocusAtPoint, _AVGQCaptureDevicesShouldBeSortedByDeviceType, 
+                       _AVGQCaptureExtendedCinematicVISSupported, _AVGQCaptureHighPhotoQualityFrameDropAllowed, 
+                       _AVGQCaptureMFOStabilizationIsAlwaysOn, _AVGQCaptureMFOSupportsPhotoFormats, 
+                       _AVGQCaptureMFOVideoSettingsSupportCompressionProperties, 
                        _AVGQCaptureMetadataOutputCapturesFacesByDefault, _AVGQCaptureMicrophoneUsesDecoupledIO, 
                        _AVGQCapturePhotoSettingsSupportRawEmbeddedThumbnailFormat, 
                        _AVGQCaptureSessionMaxMultiCamRGBStreamsSupported, _AVGQCaptureSessionSupportsMultiCamCapture, 
@@ -214,23 +225,24 @@ exports:
                        AVCaptureMetadataInput, AVCaptureMetadataOutput, AVCaptureMovieFileOutput, 
                        AVCaptureMultiCamSession, AVCaptureOutput, AVCapturePhoto, 
                        AVCapturePhotoBracketSettings, AVCapturePhotoOutput, AVCapturePhotoPrivateClientMetadata, 
-                       AVCapturePhotoSettings, AVCapturePointCloudDataOutput, AVCaptureResolvedPhotoSettings, 
-                       AVCaptureScreenInput, AVCaptureSession, AVCaptureStillImageOutput, 
-                       AVCaptureSynchronizedCameraCalibrationData, AVCaptureSynchronizedData, 
-                       AVCaptureSynchronizedDataCollection, AVCaptureSynchronizedDepthData, 
-                       AVCaptureSynchronizedMetadataObjectData, AVCaptureSynchronizedPointCloudData, 
-                       AVCaptureSynchronizedSampleBufferData, AVCaptureSynchronizedVisionData, 
-                       AVCaptureSystemPressureState, AVCaptureVideoDataOutput, AVCaptureVideoPreviewLayer, 
-                       AVCaptureVideoThumbnailOutput, AVCaptureVisionDataOutput, 
-                       AVDepthData, AVFlashlight, AVFrameRateRange, AVMetadataBodyObject, 
-                       AVMetadataCatBodyObject, AVMetadataCatHeadObject, AVMetadataDogBodyObject, 
-                       AVMetadataDogHeadObject, AVMetadataFaceObject, AVMetadataHumanBodyObject, 
-                       AVMetadataHumanHeadObject, AVMetadataMachineReadableCodeObject, 
+                       AVCapturePhotoSettings, AVCapturePointCloudDataOutput, AVCaptureProprietaryDefaultsSingleton, 
+                       AVCaptureResolvedPhotoSettings, AVCaptureScreenInput, AVCaptureSession, 
+                       AVCaptureStillImageOutput, AVCaptureSynchronizedCameraCalibrationData, 
+                       AVCaptureSynchronizedData, AVCaptureSynchronizedDataCollection, 
+                       AVCaptureSynchronizedDepthData, AVCaptureSynchronizedMetadataObjectData, 
+                       AVCaptureSynchronizedPointCloudData, AVCaptureSynchronizedSampleBufferData, 
+                       AVCaptureSynchronizedVisionData, AVCaptureSystemPressureState, 
+                       AVCaptureVideoDataOutput, AVCaptureVideoPreviewLayer, AVCaptureVideoThumbnailOutput, 
+                       AVCaptureVisionDataOutput, AVDepthData, AVFlashlight, AVFrameRateRange, 
+                       AVMetadataBodyObject, AVMetadataCatBodyObject, AVMetadataCatHeadObject, 
+                       AVMetadataDogBodyObject, AVMetadataDogHeadObject, AVMetadataFaceObject, 
+                       AVMetadataHumanBodyObject, AVMetadataHumanHeadObject, AVMetadataMachineReadableCodeObject, 
                        AVMetadataObject, AVMetadataOfflineVideoStabilizationMotionObject, 
                        AVMetadataSaliencyHeatMap, AVMetadataSalientObject, AVMetadataTextRegionObject, 
                        AVMetadataTrackedFacesObject, AVMetadataVideoPreviewHistogramObject, 
                        AVMomentCaptureMovie, AVMomentCaptureMovieRecordingResolvedSettings, 
                        AVMomentCaptureMovieRecordingSettings, AVMomentCaptureSettings, 
                        AVOfflineVideoStabilizer, AVPointCloudData, AVPortraitEffectsMatte, 
-                       AVSemanticSegmentationMatte, AVSpatialOverCaptureVideoPreviewLayer ]
+                       AVSemanticSegmentationMatte, AVSemanticStyle, AVSpatialOverCaptureVideoPreviewLayer, 
+                       CMIOProprietaryDefaultsSource ]
 ...

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1AD2EF67-0C28-3E4F-926A-DE78E99294EA
+    value:           BC1F6308-254E-373E-AB4A-D15B24EDAEA7
   - target:          x86_64-maccatalyst
-    value:           1AD2EF67-0C28-3E4F-926A-DE78E99294EA
+    value:           BC1F6308-254E-373E-AB4A-D15B24EDAEA7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C5D0F10E-6003-33A3-A2F1-917202FD7129
+    value:           C2392FEF-E7EB-38CF-835C-2B271F536E17
   - target:          arm64e-maccatalyst
-    value:           C5D0F10E-6003-33A3-A2F1-917202FD7129
+    value:           C2392FEF-E7EB-38CF-835C-2B271F536E17
 install-name:    '/System/Library/PrivateFrameworks/FoundInAppsPlugins.framework/Versions/A/FoundInAppsPlugins'
-current-version: 1150
+current-version: 1153.10
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

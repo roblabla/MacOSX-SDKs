@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F1D158FA-ED0B-3CEB-84A2-B022F3870C3B
+    value:           5E0123F5-8AD4-33D5-BC21-B9AC579024D9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B48BC6C7-63CF-3844-89CC-1E72F7805331
+    value:           9262DA51-C7A5-35A2-BC93-0DACE458148E
 install-name:    '/System/Library/PrivateFrameworks/PerformanceAnalysis.framework/Versions/A/PerformanceAnalysis'
-current-version: 301
+current-version: 302.1
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _PACancelOperation, _PADetailedPerfLoggingWhiteListAddEntry, 

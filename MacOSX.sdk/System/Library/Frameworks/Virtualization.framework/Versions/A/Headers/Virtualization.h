@@ -41,6 +41,7 @@
 #import <Virtualization/VZMemoryBalloonDeviceConfiguration.h>
 #import <Virtualization/VZMultipleDirectoryShare.h>
 #import <Virtualization/VZNATNetworkDeviceAttachment.h>
+#import <Virtualization/VZNetworkDevice.h>
 #import <Virtualization/VZNetworkDeviceAttachment.h>
 #import <Virtualization/VZNetworkDeviceConfiguration.h>
 #import <Virtualization/VZPlatformConfiguration.h>

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4568DD51-C4C1-3CD0-9A79-2F298B667C46
+    value:           BE429D77-6080-3D27-B4EE-12EE022386B4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A96B5B4F-4CC5-382D-BA84-6E171FAAC895
+    value:           8A27CF70-79ED-3EBE-B835-962044896640
 install-name:    '/System/Library/Frameworks/JavaRuntimeSupport.framework/Versions/A/JavaRuntimeSupport'
 current-version: 79
 exports:

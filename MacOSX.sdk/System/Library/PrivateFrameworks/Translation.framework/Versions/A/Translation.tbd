@@ -4,27 +4,29 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A3F4791F-2779-3E59-9412-60A39BFB98EF
+    value:           0A2E790E-11AC-3FDA-BD5D-200B8DB165D1
   - target:          x86_64-maccatalyst
-    value:           A3F4791F-2779-3E59-9412-60A39BFB98EF
+    value:           0A2E790E-11AC-3FDA-BD5D-200B8DB165D1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AE3845D6-2139-3C48-9F92-7F8C31021185
+    value:           91A0621B-8CDD-3553-BB8D-D538B459C6C5
   - target:          arm64e-maccatalyst
-    value:           AE3845D6-2139-3C48-9F92-7F8C31021185
+    value:           91A0621B-8CDD-3553-BB8D-D538B459C6C5
 install-name:    '/System/Library/PrivateFrameworks/Translation.framework/Versions/A/Translation'
-current-version: 173.3
+current-version: 173.11.5
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ __LTBuildVersion, __LTDeviceName, __LTLanguageCodeToSupportedLocale, 
-                       __LTProductName, __LTProductType, __LTProductVersion, __LTTranslationErrorDomain, 
-                       __LTTranslationModelTaskString, __LTTranslationServiceDelegateXPCInterface, 
-                       __LTTranslationServiceXPCInterface, _kLTUnknownLanguageCode ]
+    symbols:         [ __LTBuildVersion, __LTDeviceName, __LTIsInternalInstall, __LTIsSeedInstall, 
+                       __LTLanguageCodeToSupportedLocale, __LTLocaleMappedForTTS, 
+                       __LTObjectMappedForKey, __LTProductName, __LTProductType, 
+                       __LTProductVersion, __LTTranslationErrorDomain, __LTTranslationModelTaskString, 
+                       __LTTranslationServiceDelegateXPCInterface, __LTTranslationServiceXPCInterface, 
+                       _kLTUnknownLanguageCode ]
     objc-classes:    [ _LTAlignment, _LTBatchTextTranslationRequest, _LTCombinedEngine, 
                        _LTCombinedRouteParagraphTranslationRequest, _LTDaemon, _LTInstallRequest, 
                        _LTLanguageDetectionResult, _LTLanguageDetector, _LTLanguageDetectorFeatureCombinationModel, 

@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D87307CE-0D05-38B5-82BE-BB34C58A1044
+    value:           26132D35-8BC0-391A-B04D-AC65272770C9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A315B672-0A10-300F-A1D3-B2A0A3E664C3
+    value:           80281FFB-8902-3D43-A11F-9ABCD4E0A954
 install-name:    '/usr/lib/libScreenReader.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ __SCRMessageProcessCopyInfo, __SCRSignalProcessWithStartUpOptions, 
                        __SCRSignalProcessWithStopOptions, __ScreenReaderCopyAudioIntroPath, 
                        __ScreenReaderCopyElement, __ScreenReaderCopyFocusedElement, 

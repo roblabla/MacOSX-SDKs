@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           859EBCB2-CD09-38B8-9295-E48175B105E5
+    value:           A1DD60F8-77F2-35C5-9944-391209A6A93E
   - target:          x86_64-maccatalyst
-    value:           859EBCB2-CD09-38B8-9295-E48175B105E5
+    value:           A1DD60F8-77F2-35C5-9944-391209A6A93E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CD1B1F94-D6F8-3DF7-A1CA-6DA268816B44
+    value:           61C14F3F-E0B2-3EDF-AEDE-7D4FC077B1C2
   - target:          arm64e-maccatalyst
-    value:           CD1B1F94-D6F8-3DF7-A1CA-6DA268816B44
+    value:           61C14F3F-E0B2-3EDF-AEDE-7D4FC077B1C2
 install-name:    '/System/Library/PrivateFrameworks/CoreSymbolication.framework/Versions/A/CoreSymbolication'
-current-version: 64550.84.1
+current-version: 64550.88.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -174,5 +174,5 @@ exports:
                        _task_get_mapped_memory_cache, _task_get_mapped_memory_cache_with_label, 
                        _task_is_64bit, _task_is_translated, _task_lookup_mapped_memory_cache, 
                        _task_release_mapped_memory_cache, _thread_name_for_thread_port, 
-                       _unmap_node ]
+                       _unmap_node, _vm_tag_is_malloc ]
 ...

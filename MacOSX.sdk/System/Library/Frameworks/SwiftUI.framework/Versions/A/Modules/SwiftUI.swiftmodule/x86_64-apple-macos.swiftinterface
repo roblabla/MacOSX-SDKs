@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
-// swift-module-flags: -target x86_64-apple-macos12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -enable-experimental-concurrency -module-name SwiftUI
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-module-flags: -target x86_64-apple-macos12.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -module-name SwiftUI
 import Accessibility
 import AppKit
 import Combine
@@ -17,6 +17,10 @@ import _Concurrency
 import os.log
 import os
 import os.signpost
+@available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension SwiftUI.EnvironmentValues {
   @usableFromInline
   internal var listRowSpacing: CoreGraphics.CGFloat? {
@@ -436,6 +440,7 @@ public struct SearchFieldPlacement {
   @available(watchOS, unavailable)
   public static func navigationBarDrawer(displayMode: SwiftUI.SearchFieldPlacement.NavigationBarDrawerDisplayMode) -> SwiftUI.SearchFieldPlacement
 }
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.SearchFieldPlacement {
   @available(iOS 15.0, *)
   @available(macOS, unavailable)
@@ -479,6 +484,7 @@ public struct PrimitiveButtonStyleConfiguration {
   public struct Label : SwiftUI.View {
     public typealias Body = Swift.Never
   }
+  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public let role: SwiftUI.ButtonRole?
   public let label: SwiftUI.PrimitiveButtonStyleConfiguration.Label
   public func trigger()
@@ -515,6 +521,7 @@ public struct ButtonStyleConfiguration {
   public struct Label : SwiftUI.View {
     public typealias Body = Swift.Never
   }
+  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public let role: SwiftUI.ButtonRole?
   public let label: SwiftUI.ButtonStyleConfiguration.Label
   public let isPressed: Swift.Bool
@@ -790,13 +797,25 @@ public struct TextField<Label> : SwiftUI.View where Label : SwiftUI.View {
 }
 extension SwiftUI.TextField where Label == SwiftUI.Text {
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-  public init(_ titleKey: SwiftUI.LocalizedStringKey, text: SwiftUI.Binding<Swift.String>, prompt: SwiftUI.Text? = nil)
+  public init(_ titleKey: SwiftUI.LocalizedStringKey, text: SwiftUI.Binding<Swift.String>, prompt: SwiftUI.Text?)
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-  @_disfavoredOverload public init<S>(_ title: S, text: SwiftUI.Binding<Swift.String>, prompt: SwiftUI.Text? = nil) where S : Swift.StringProtocol
+  @_disfavoredOverload public init<S>(_ title: S, text: SwiftUI.Binding<Swift.String>, prompt: SwiftUI.Text?) where S : Swift.StringProtocol
 }
 extension SwiftUI.TextField {
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public init(text: SwiftUI.Binding<Swift.String>, prompt: SwiftUI.Text? = nil, @SwiftUI.ViewBuilder label: () -> Label)
+}
+extension SwiftUI.TextField where Label == SwiftUI.Text {
+  @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+  @_alwaysEmitIntoClient public init(_ titleKey: SwiftUI.LocalizedStringKey, text: SwiftUI.Binding<Swift.String>) {
+        self.init(
+            titleKey, text: text, onEditingChanged: { _ in }, onCommit: {})
+    }
+  @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+  @_disfavoredOverload @_alwaysEmitIntoClient public init<S>(_ title: S, text: SwiftUI.Binding<Swift.String>) where S : Swift.StringProtocol {
+        self.init(
+            title, text: text, onEditingChanged: { _ in }, onCommit: {})
+    }
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.TextField where Label == SwiftUI.Text {
@@ -804,12 +823,48 @@ extension SwiftUI.TextField where Label == SwiftUI.Text {
   @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
   @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
   @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
-  @_disfavoredOverload public init(_ titleKey: SwiftUI.LocalizedStringKey, text: SwiftUI.Binding<Swift.String>, onEditingChanged: @escaping (Swift.Bool) -> Swift.Void = { _ in }, onCommit: @escaping () -> Swift.Void = {})
+  public init(_ titleKey: SwiftUI.LocalizedStringKey, text: SwiftUI.Binding<Swift.String>, onEditingChanged: @escaping (Swift.Bool) -> Swift.Void, onCommit: @escaping () -> Swift.Void)
   @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
   @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
   @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
   @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
-  @_disfavoredOverload public init<S>(_ title: S, text: SwiftUI.Binding<Swift.String>, onEditingChanged: @escaping (Swift.Bool) -> Swift.Void = { _ in }, onCommit: @escaping () -> Swift.Void = {}) where S : Swift.StringProtocol
+  @_alwaysEmitIntoClient public init(_ titleKey: SwiftUI.LocalizedStringKey, text: SwiftUI.Binding<Swift.String>, onEditingChanged: @escaping (Swift.Bool) -> Swift.Void) {
+        self.init(
+            titleKey, text: text,
+            onEditingChanged: onEditingChanged, onCommit: {})
+    }
+  @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @_alwaysEmitIntoClient public init(_ titleKey: SwiftUI.LocalizedStringKey, text: SwiftUI.Binding<Swift.String>, onCommit: @escaping () -> Swift.Void) {
+        self.init(
+            titleKey, text: text,
+            onEditingChanged: { _ in }, onCommit: onCommit)
+    }
+  @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @_disfavoredOverload public init<S>(_ title: S, text: SwiftUI.Binding<Swift.String>, onEditingChanged: @escaping (Swift.Bool) -> Swift.Void, onCommit: @escaping () -> Swift.Void) where S : Swift.StringProtocol
+  @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @_disfavoredOverload @_alwaysEmitIntoClient public init<S>(_ title: S, text: SwiftUI.Binding<Swift.String>, onEditingChanged: @escaping (Swift.Bool) -> Swift.Void) where S : Swift.StringProtocol {
+        self.init(
+            title, text: text,
+            onEditingChanged: onEditingChanged, onCommit: {})
+    }
+  @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @_disfavoredOverload @_alwaysEmitIntoClient public init<S>(_ title: S, text: SwiftUI.Binding<Swift.String>, onCommit: @escaping () -> Swift.Void) where S : Swift.StringProtocol {
+        self.init(
+            title, text: text,
+            onEditingChanged: { _ in }, onCommit: onCommit)
+    }
 }
 @available(macOS 12.0, *)
 @available(iOS, unavailable)
@@ -834,9 +889,9 @@ extension SwiftUI.TableColumn where RowValue == Sort.Compared, Label == SwiftUI.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUI.TableColumn where Sort == Swift.Never, Label == SwiftUI.Text {
-  @_disfavoredOverload public init(_ titleKey: SwiftUI.LocalizedStringKey, @SwiftUI.ViewBuilder content: @escaping (RowValue) -> Content)
+  public init(_ titleKey: SwiftUI.LocalizedStringKey, @SwiftUI.ViewBuilder content: @escaping (RowValue) -> Content)
   @_disfavoredOverload public init<S>(_ title: S, @SwiftUI.ViewBuilder content: @escaping (RowValue) -> Content) where S : Swift.StringProtocol
-  @_disfavoredOverload public init(_ titleKey: SwiftUI.LocalizedStringKey, value: Swift.KeyPath<RowValue, Swift.String>) where Content == SwiftUI.Text
+  public init(_ titleKey: SwiftUI.LocalizedStringKey, value: Swift.KeyPath<RowValue, Swift.String>) where Content == SwiftUI.Text
   @_disfavoredOverload public init<S>(_ title: S, value: Swift.KeyPath<RowValue, Swift.String>) where Content == SwiftUI.Text, S : Swift.StringProtocol
 }
 @available(macOS 12.0, *)
@@ -934,16 +989,6 @@ public struct AutomaticTableStyle : SwiftUI.TableStyle {
   public func makeBody(configuration: SwiftUI.AutomaticTableStyle.Configuration) -> some SwiftUI.View
   
   public typealias Body = @_opaqueReturnTypeOf("$s7SwiftUI19AutomaticTableStyleV8makeBody13configurationQrAA0dE13ConfigurationV_tF", 0) __
-}
-@available(iOS, unavailable)
-@available(macOS, introduced: 12.0, deprecated: 12.0, renamed: "AutomaticTableStyle")
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-public struct DefaultTableStyle : SwiftUI.TableStyle {
-  public init()
-  public func makeBody(configuration: SwiftUI.DefaultTableStyle.Configuration) -> some SwiftUI.View
-  
-  public typealias Body = @_opaqueReturnTypeOf("$s7SwiftUI17DefaultTableStyleV8makeBody13configurationQrAA0dE13ConfigurationV_tF", 0) __
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Font {
@@ -1488,8 +1533,8 @@ public protocol AXChartDescriptorRepresentable {
 extension SwiftUI.AXChartDescriptorRepresentable {
   public func updateChartDescriptor(_ descriptor: Accessibility.AXChartDescriptor)
 }
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.View {
-  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public func accessibilityChartDescriptor<R>(_ representable: R) -> some SwiftUI.View where R : SwiftUI.AXChartDescriptorRepresentable
   
 }
@@ -1829,6 +1874,15 @@ public struct ScrollViewProxy {
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct OpenURLAction {
+  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+  public struct Result {
+    public static let handled: SwiftUI.OpenURLAction.Result
+    public static let discarded: SwiftUI.OpenURLAction.Result
+    public static let systemAction: SwiftUI.OpenURLAction.Result
+    public static func systemAction(_ url: Foundation.URL) -> SwiftUI.OpenURLAction.Result
+  }
+  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+  public init(handler: @escaping (Foundation.URL) -> SwiftUI.OpenURLAction.Result)
   public func callAsFunction(_ url: Foundation.URL)
   @available(watchOS, unavailable)
   public func callAsFunction(_ url: Foundation.URL, completion: @escaping (_ accepted: Swift.Bool) -> Swift.Void)
@@ -1837,6 +1891,8 @@ public struct OpenURLAction {
 extension SwiftUI.EnvironmentValues {
   public var openURL: SwiftUI.OpenURLAction {
     get
+    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+    set
   }
   public var _openURL: SwiftUI.OpenURLAction {
     get
@@ -2006,17 +2062,18 @@ public struct _GraphValue<Value> : Swift.Equatable {
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.View {
   
-  #if compiler(>=5.3) && $AsyncAwait
-  @inlinable public func task(_ action: @escaping () async -> Swift.Void) -> some SwiftUI.View {
-        modifier(_TaskModifier(action: action))
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable && $InheritActorContext
+  @inlinable public func task(priority: _Concurrency.TaskPriority = .userInitiated, @_inheritActorContext _ action: @escaping @Sendable () async -> Swift.Void) -> some SwiftUI.View {
+        modifier(_TaskModifier(priority: priority, action: action))
     }
   
   #endif
 
   
-  #if compiler(>=5.3) && $AsyncAwait
-  @inlinable public func task<T>(id value: T, _ action: @escaping () async -> Swift.Void) -> some SwiftUI.View where T : Swift.Equatable {
-        modifier(_TaskValueModifier(value: value, action: action))
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable && $InheritActorContext
+  @inlinable public func task<T>(id value: T, priority: _Concurrency.TaskPriority = .userInitiated, @_inheritActorContext _ action: @escaping @Sendable () async -> Swift.Void) -> some SwiftUI.View where T : Swift.Equatable {
+        modifier(_TaskValueModifier(
+            value: value, priority: priority, action: action))
     }
   
   #endif
@@ -2024,10 +2081,12 @@ extension SwiftUI.View {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @frozen public struct _TaskModifier : SwiftUI.ViewModifier {
-  public var action: () async -> Swift.Void
+  public var action: @Sendable () async -> Swift.Void
+  public var priority: _Concurrency.TaskPriority
   
-  #if compiler(>=5.3) && $AsyncAwait
-  @inlinable public init(action: @escaping () async -> Swift.Void) {
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public init(priority: _Concurrency.TaskPriority, action: @escaping @Sendable () async -> Swift.Void) {
+        self.priority = priority
         self.action = action
     }
   #endif
@@ -2039,12 +2098,14 @@ extension SwiftUI.View {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @frozen public struct _TaskValueModifier<Value> : SwiftUI.ViewModifier where Value : Swift.Equatable {
-  public var action: () async -> Swift.Void
+  public var action: @Sendable () async -> Swift.Void
+  public var priority: _Concurrency.TaskPriority
   public var value: Value
   
-  #if compiler(>=5.3) && $AsyncAwait
-  @inlinable public init(value: Value, action: @escaping () async -> Swift.Void) {
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public init(value: Value, priority: _Concurrency.TaskPriority, action: @escaping @Sendable () async -> Swift.Void) {
         self.action = action
+        self.priority = priority
         self.value = value
     }
   #endif
@@ -2828,8 +2889,8 @@ public struct FetchedResults<Result> : Swift.RandomAccessCollection where Result
   public typealias SubSequence = Swift.Slice<SwiftUI.FetchedResults<Result>>
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-@propertyWrapper public struct FetchRequest<Result> where Result : CoreData.NSFetchRequestResult {
-  public var wrappedValue: SwiftUI.FetchedResults<Result> {
+@propertyWrapper @_Concurrency.MainActor(unsafe) public struct FetchRequest<Result> where Result : CoreData.NSFetchRequestResult {
+  @_Concurrency.MainActor(unsafe) public var wrappedValue: SwiftUI.FetchedResults<Result> {
     get
   }
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
@@ -2838,33 +2899,33 @@ public struct FetchedResults<Result> : Swift.RandomAccessCollection where Result
     public var nsPredicate: Foundation.NSPredicate?
   }
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-  public var projectedValue: SwiftUI.Binding<SwiftUI.FetchRequest<Result>.Configuration> {
+  @_Concurrency.MainActor(unsafe) public var projectedValue: SwiftUI.Binding<SwiftUI.FetchRequest<Result>.Configuration> {
     get
   }
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.FetchRequest : SwiftUI.DynamicProperty {
-  public mutating func update()
+  @_Concurrency.MainActor(unsafe) public mutating func update()
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.FetchRequest {
-  public static var _propertyBehaviors: Swift.UInt32 {
+  @_Concurrency.MainActor(unsafe) public static var _propertyBehaviors: Swift.UInt32 {
     get
   }
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.FetchRequest {
-  public init(entity: CoreData.NSEntityDescription, sortDescriptors: [Foundation.NSSortDescriptor], predicate: Foundation.NSPredicate? = nil, animation: SwiftUI.Animation? = nil)
-  public init(fetchRequest: CoreData.NSFetchRequest<Result>, animation: SwiftUI.Animation? = nil)
-  public init(fetchRequest: CoreData.NSFetchRequest<Result>, transaction: SwiftUI.Transaction)
+  @_Concurrency.MainActor(unsafe) public init(entity: CoreData.NSEntityDescription, sortDescriptors: [Foundation.NSSortDescriptor], predicate: Foundation.NSPredicate? = nil, animation: SwiftUI.Animation? = nil)
+  @_Concurrency.MainActor(unsafe) public init(fetchRequest: CoreData.NSFetchRequest<Result>, animation: SwiftUI.Animation? = nil)
+  @_Concurrency.MainActor(unsafe) public init(fetchRequest: CoreData.NSFetchRequest<Result>, transaction: SwiftUI.Transaction)
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.FetchRequest where Result : CoreData.NSManagedObject {
-  public init(sortDescriptors: [Foundation.NSSortDescriptor], predicate: Foundation.NSPredicate? = nil, animation: SwiftUI.Animation? = nil)
+  @_Concurrency.MainActor(unsafe) public init(sortDescriptors: [Foundation.NSSortDescriptor], predicate: Foundation.NSPredicate? = nil, animation: SwiftUI.Animation? = nil)
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.FetchRequest where Result : CoreData.NSManagedObject {
-  @_disfavoredOverload public init(sortDescriptors: [Foundation.SortDescriptor<Result>], predicate: Foundation.NSPredicate? = nil, animation: SwiftUI.Animation? = nil)
+  @_disfavoredOverload @_Concurrency.MainActor(unsafe) public init(sortDescriptors: [Foundation.SortDescriptor<Result>], predicate: Foundation.NSPredicate? = nil, animation: SwiftUI.Animation? = nil)
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.FetchRequest.Configuration where Result : CoreData.NSManagedObject {
@@ -2893,7 +2954,8 @@ public struct __FluidSpringTestLayout {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @frozen @propertyWrapper public struct FocusState<Value> : SwiftUI.DynamicProperty where Value : Swift.Hashable {
-  @propertyWrapper public struct Binding {
+  @frozen @propertyWrapper public struct Binding {
+    private var _binding: SwiftUI.Binding<Value>
     public var wrappedValue: Value {
       get
       nonmutating set
@@ -3015,9 +3077,11 @@ extension SwiftUI.View {
   @available(watchOS, unavailable)
   public func onDrag(_ data: @escaping () -> Foundation.NSItemProvider) -> some SwiftUI.View
   
-  @available(iOS 15.0, macOS 12.0, *)
-  @available(tvOS, unavailable)
-  @available(watchOS, unavailable)
+}
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension SwiftUI.View {
   public func onDrag<V>(_ data: @escaping () -> Foundation.NSItemProvider, @SwiftUI.ViewBuilder preview: () -> V) -> some SwiftUI.View where V : SwiftUI.View
   
 }
@@ -3221,6 +3285,22 @@ extension SwiftUI.List where SelectionValue == Swift.Never {
         }
     }
 }
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension SwiftUI.List {
+  public init<Data, RowContent>(_ data: SwiftUI.Binding<Data>, children: Swift.WritableKeyPath<Data.Element, Data?>, selection: SwiftUI.Binding<Swift.Set<SelectionValue>>?, @SwiftUI.ViewBuilder rowContent: @escaping (SwiftUI.Binding<Data.Element>) -> RowContent) where Content == SwiftUI.OutlineGroup<SwiftUI.Binding<Data>, Data.Element.ID, RowContent, RowContent, SwiftUI.DisclosureGroup<RowContent, SwiftUI.OutlineSubgroupChildren>>, Data : Swift.MutableCollection, Data : Swift.RandomAccessCollection, RowContent : SwiftUI.View, Data.Element : Swift.Identifiable
+  public init<Data, ID, RowContent>(_ data: SwiftUI.Binding<Data>, id: Swift.KeyPath<Data.Element, ID>, children: Swift.WritableKeyPath<Data.Element, Data?>, selection: SwiftUI.Binding<Swift.Set<SelectionValue>>?, @SwiftUI.ViewBuilder rowContent: @escaping (SwiftUI.Binding<Data.Element>) -> RowContent) where Content == SwiftUI.OutlineGroup<SwiftUI.Binding<Data>, ID, RowContent, RowContent, SwiftUI.DisclosureGroup<RowContent, SwiftUI.OutlineSubgroupChildren>>, Data : Swift.MutableCollection, Data : Swift.RandomAccessCollection, ID : Swift.Hashable, RowContent : SwiftUI.View
+  public init<Data, RowContent>(_ data: SwiftUI.Binding<Data>, children: Swift.WritableKeyPath<Data.Element, Data?>, selection: SwiftUI.Binding<SelectionValue?>?, @SwiftUI.ViewBuilder rowContent: @escaping (SwiftUI.Binding<Data.Element>) -> RowContent) where Content == SwiftUI.OutlineGroup<SwiftUI.Binding<Data>, Data.Element.ID, RowContent, RowContent, SwiftUI.DisclosureGroup<RowContent, SwiftUI.OutlineSubgroupChildren>>, Data : Swift.MutableCollection, Data : Swift.RandomAccessCollection, RowContent : SwiftUI.View, Data.Element : Swift.Identifiable
+  public init<Data, ID, RowContent>(_ data: SwiftUI.Binding<Data>, id: Swift.KeyPath<Data.Element, ID>, children: Swift.WritableKeyPath<Data.Element, Data?>, selection: SwiftUI.Binding<SelectionValue?>?, @SwiftUI.ViewBuilder rowContent: @escaping (SwiftUI.Binding<Data.Element>) -> RowContent) where Content == SwiftUI.OutlineGroup<SwiftUI.Binding<Data>, ID, RowContent, RowContent, SwiftUI.DisclosureGroup<RowContent, SwiftUI.OutlineSubgroupChildren>>, Data : Swift.MutableCollection, Data : Swift.RandomAccessCollection, ID : Swift.Hashable, RowContent : SwiftUI.View
+}
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension SwiftUI.List where SelectionValue == Swift.Never {
+  public init<Data, RowContent>(_ data: SwiftUI.Binding<Data>, children: Swift.WritableKeyPath<Data.Element, Data?>, @SwiftUI.ViewBuilder rowContent: @escaping (SwiftUI.Binding<Data.Element>) -> RowContent) where Content == SwiftUI.OutlineGroup<SwiftUI.Binding<Data>, Data.Element.ID, RowContent, RowContent, SwiftUI.DisclosureGroup<RowContent, SwiftUI.OutlineSubgroupChildren>>, Data : Swift.MutableCollection, Data : Swift.RandomAccessCollection, RowContent : SwiftUI.View, Data.Element : Swift.Identifiable
+  public init<Data, ID, RowContent>(_ data: SwiftUI.Binding<Data>, id: Swift.KeyPath<Data.Element, ID>, children: Swift.WritableKeyPath<Data.Element, Data?>, @SwiftUI.ViewBuilder rowContent: @escaping (SwiftUI.Binding<Data.Element>) -> RowContent) where Content == SwiftUI.OutlineGroup<SwiftUI.Binding<Data>, ID, RowContent, RowContent, SwiftUI.DisclosureGroup<RowContent, SwiftUI.OutlineSubgroupChildren>>, Data : Swift.MutableCollection, Data : Swift.RandomAccessCollection, ID : Swift.Hashable, RowContent : SwiftUI.View
+}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @usableFromInline
 @frozen internal struct IDView<Content, ID> : SwiftUI.View where Content : SwiftUI.View, ID : Swift.Hashable {
@@ -3259,8 +3339,8 @@ extension SwiftUI.IDView {
   @usableFromInline
   internal static func _viewListCount(inputs: SwiftUI._ViewListCountInputs) -> Swift.Int?
 }
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.View {
-  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public func privacySensitive(_ sensitive: Swift.Bool = true) -> some SwiftUI.View
   
 }
@@ -3343,11 +3423,17 @@ extension SwiftUI.Font {
   }
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(*, deprecated, message: "use Animatable directly")
 public protocol _AnimatableView : SwiftUI.Animatable, SwiftUI.View {
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @available(*, deprecated, message: "use Animatable directly")
 extension SwiftUI._AnimatableView {
+  public static func _makeView(view: SwiftUI._GraphValue<Self>, inputs: SwiftUI._ViewInputs) -> SwiftUI._ViewOutputs
+  public static func _makeViewList(view: SwiftUI._GraphValue<Self>, inputs: SwiftUI._ViewListInputs) -> SwiftUI._ViewListOutputs
+}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension SwiftUI.View where Self : SwiftUI.Animatable {
   public static func _makeView(view: SwiftUI._GraphValue<Self>, inputs: SwiftUI._ViewInputs) -> SwiftUI._ViewOutputs
   public static func _makeViewList(view: SwiftUI._GraphValue<Self>, inputs: SwiftUI._ViewListInputs) -> SwiftUI._ViewListOutputs
 }
@@ -3490,10 +3576,31 @@ public struct _AccessibilityRotorEntryOutputs {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @_functionBuilder public struct AccessibilityRotorContentBuilder {
-  public static func buildBlock<Content>(_ content: Content) -> some SwiftUI.AccessibilityRotorContent where Content : SwiftUI.AccessibilityRotorContent
+  @_alwaysEmitIntoClient public static func buildBlock<Content>(_ content: Content) -> some SwiftUI.AccessibilityRotorContent where Content : SwiftUI.AccessibilityRotorContent {
+        content
+    }
   
-  public static func buildIf<Content>(_ content: Content?) -> some SwiftUI.AccessibilityRotorContent where Content : SwiftUI.AccessibilityRotorContent
+  @_alwaysEmitIntoClient public static func buildIf<Content>(_ content: Content?) -> some SwiftUI.AccessibilityRotorContent where Content : SwiftUI.AccessibilityRotorContent {
+        AccessibilityOptionalRotorContent(content)
+    }
   
+}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@usableFromInline
+@frozen internal struct AccessibilityTupleRotorContent<T> : SwiftUI.AccessibilityRotorContent {
+  @usableFromInline
+  internal var value: T
+  @inlinable internal init(_ value: T) { self.value = value }
+  @usableFromInline
+  internal var body: Swift.Never {
+    get
+  }
+  @usableFromInline
+  internal static func _entryCount(inputs: SwiftUI._AccessibilityRotorEntryInputs) -> Swift.Int?
+  @usableFromInline
+  internal static func _makeEntries(content: SwiftUI._GraphValue<SwiftUI.AccessibilityTupleRotorContent<T>>, inputs: SwiftUI._AccessibilityRotorEntryInputs) -> SwiftUI._AccessibilityRotorEntryOutputs
+  @usableFromInline
+  internal typealias Body = Swift.Never
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.ForEach : SwiftUI.AccessibilityRotorContent where Content : SwiftUI.AccessibilityRotorContent {
@@ -3521,6 +3628,23 @@ extension SwiftUI.AccessibilityRotorEntry : SwiftUI.AccessibilityRotorContent {
   public typealias Body = Swift.Never
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@usableFromInline
+@frozen internal struct AccessibilityOptionalRotorContent<Content> where Content : SwiftUI.AccessibilityRotorContent {
+  @usableFromInline
+  internal var content: Content?
+  @inlinable internal init(_ content: Content?) {
+        self.content = content
+    }
+  @usableFromInline
+  internal var body: Swift.Never {
+    get
+  }
+  @usableFromInline
+  internal static func _makeEntries(content: SwiftUI._GraphValue<SwiftUI.AccessibilityOptionalRotorContent<Content>>, inputs: SwiftUI._AccessibilityRotorEntryInputs) -> SwiftUI._AccessibilityRotorEntryOutputs
+  @usableFromInline
+  internal typealias Body = Swift.Never
+}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.Group : SwiftUI.AccessibilityRotorContent where Content : SwiftUI.AccessibilityRotorContent {
   public var body: Swift.Never {
     get
@@ -3529,7 +3653,7 @@ extension SwiftUI.Group : SwiftUI.AccessibilityRotorContent where Content : Swif
   public static func _makeEntries(content: SwiftUI._GraphValue<SwiftUI.Group<Content>>, inputs: SwiftUI._AccessibilityRotorEntryInputs) -> SwiftUI._AccessibilityRotorEntryOutputs
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-@frozen public struct _AllowsHitTestingModifier : SwiftUI.ViewModifier, Swift.Equatable {
+@frozen public struct _AllowsHitTestingModifier : Swift.Equatable {
   public var allowsHitTesting: Swift.Bool
   @inlinable public init(allowsHitTesting: Swift.Bool) {
         self.allowsHitTesting = allowsHitTesting
@@ -3657,9 +3781,7 @@ extension SwiftUI.TableStyle where Self == SwiftUI.BorderedTableStyle {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct BorderedTableStyle : SwiftUI.TableStyle {
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `.bordered` instead.")
   public init()
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `.bordered(alternatesRowBackgrounds:)` instead.")
   public init(alternatesRowBackgrounds: Swift.Bool)
   public func makeBody(configuration: SwiftUI.BorderedTableStyle.Configuration) -> some SwiftUI.View
   
@@ -3741,10 +3863,6 @@ public enum Prominence {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.EnvironmentValues {
-  public var controlProminence: SwiftUI.Prominence {
-    get
-    set
-  }
   public var headerProminence: SwiftUI.Prominence {
     get
     set
@@ -3752,9 +3870,6 @@ extension SwiftUI.EnvironmentValues {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.View {
-  @available(*, deprecated, message: "Use .buttonStyle(.borderedProminent)")
-  public func controlProminence(_ prominence: SwiftUI.Prominence) -> some SwiftUI.View
-  
   public func headerProminence(_ prominence: SwiftUI.Prominence) -> some SwiftUI.View
   
 }
@@ -3896,7 +4011,11 @@ extension SwiftUI.ModifiedContent where Modifier == SwiftUI.AccessibilityAttachm
         self.bounds = bounds
     }
   public static func _makeView<S>(view: SwiftUI._GraphValue<SwiftUI._ShapeView<S, SwiftUI._AnchoredShapeStyle<S>>>, inputs: SwiftUI._ViewInputs) -> SwiftUI._ViewOutputs where S : SwiftUI.Shape
+}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension SwiftUI._AnchoredShapeStyle {
   public func _apply(to shape: inout SwiftUI._ShapeStyle_Shape)
+  public static func _apply(to type: inout SwiftUI._ShapeStyle_ShapeType)
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.ShapeStyle {
@@ -4029,10 +4148,6 @@ extension SwiftUI.TimelineSchedule where Self == SwiftUI.AnimationTimelineSchedu
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct AnimationTimelineSchedule : SwiftUI.TimelineSchedule {
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "Use `.animation(minimumInterval:paused:)` instead.")
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `.animation(minimumInterval:paused:)` instead.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "Use `.animation(minimumInterval:paused:)` instead.")
-  @available(watchOS, introduced: 8.0, deprecated: 8.0, message: "Use `.animation(minimumInterval:paused:)` instead.")
   public init(minimumInterval: Swift.Double? = nil, paused: Swift.Bool = false)
   public func entries(from start: Foundation.Date, mode: SwiftUI.TimelineScheduleMode) -> SwiftUI.AnimationTimelineSchedule.Entries
   public struct Entries : Swift.Sequence, Swift.IteratorProtocol {
@@ -4374,8 +4489,8 @@ public struct SubmitLabel {
     get
   }
 }
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.View {
-  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public func submitLabel(_ submitLabel: SwiftUI.SubmitLabel) -> some SwiftUI.View
   
 }
@@ -4699,11 +4814,13 @@ extension SwiftUI.View {
         return padding(.all, length)
     }
   
-  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-  public func scenePadding(_ edges: SwiftUI.Edge.Set = .all) -> some SwiftUI.View
-  
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   public func _tightPadding() -> some SwiftUI.View
+  
+}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension SwiftUI.View {
+  public func scenePadding(_ edges: SwiftUI.Edge.Set = .all) -> some SwiftUI.View
   
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -5036,16 +5153,6 @@ public struct AutomaticControlGroupStyle : SwiftUI.ControlGroupStyle {
   @_Concurrency.MainActor(unsafe) public func makeBody(configuration: SwiftUI.AutomaticControlGroupStyle.Configuration) -> some SwiftUI.View
   
   public typealias Body = @_opaqueReturnTypeOf("$s7SwiftUI26AutomaticControlGroupStyleV8makeBody13configurationQrAA0deF13ConfigurationV_tF", 0) __
-}
-@available(iOS, deprecated, renamed: "AutomaticControlGroupStyle")
-@available(macOS, introduced: 12.0, deprecated: 12.0, renamed: "AutomaticControlGroupStyle")
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-public struct DefaultControlGroupStyle : SwiftUI.ControlGroupStyle {
-  public init()
-  @_Concurrency.MainActor(unsafe) public func makeBody(configuration: SwiftUI.DefaultControlGroupStyle.Configuration) -> some SwiftUI.View
-  
-  public typealias Body = @_opaqueReturnTypeOf("$s7SwiftUI24DefaultControlGroupStyleV8makeBody13configurationQrAA0deF13ConfigurationV_tF", 0) __
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.EnvironmentValues {
@@ -6357,6 +6464,11 @@ extension SwiftUI.Shape {
     get
   }
 }
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension SwiftUI.Shape {
+  public static func _makeView(view: SwiftUI._GraphValue<Self>, inputs: SwiftUI._ViewInputs) -> SwiftUI._ViewOutputs
+  public static func _makeViewList(view: SwiftUI._GraphValue<Self>, inputs: SwiftUI._ViewListInputs) -> SwiftUI._ViewListOutputs
+}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.ShapeStyle where Self : SwiftUI.View, Self.Body == SwiftUI._ShapeView<SwiftUI.Rectangle, Self> {
   public var body: SwiftUI._ShapeView<SwiftUI.Rectangle, Self> {
@@ -6486,8 +6598,8 @@ extension SwiftUI.View {
 extension SwiftUI.AnyTransition {
   public static let opacity: SwiftUI.AnyTransition
 }
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.Text {
-  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public struct LineStyle : Swift.Hashable {
     public init(pattern: SwiftUI.Text.LineStyle.Pattern = .solid, color: SwiftUI.Color? = nil)
     public struct Pattern {
@@ -6506,8 +6618,8 @@ extension SwiftUI.Text {
     }
   }
 }
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension AppKit.NSUnderlineStyle {
-  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public init(_ lineStyle: SwiftUI.Text.LineStyle)
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
@@ -6558,8 +6670,8 @@ public struct SectionedFetchResults<SectionIdentifier, Result> : Swift.RandomAcc
   public typealias SubSequence = Swift.Slice<SwiftUI.SectionedFetchResults<SectionIdentifier, Result>>
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-@propertyWrapper public struct SectionedFetchRequest<SectionIdentifier, Result> where SectionIdentifier : Swift.Hashable, Result : CoreData.NSFetchRequestResult {
-  public var wrappedValue: SwiftUI.SectionedFetchResults<SectionIdentifier, Result> {
+@propertyWrapper @_Concurrency.MainActor(unsafe) public struct SectionedFetchRequest<SectionIdentifier, Result> where SectionIdentifier : Swift.Hashable, Result : CoreData.NSFetchRequestResult {
+  @_Concurrency.MainActor(unsafe) public var wrappedValue: SwiftUI.SectionedFetchResults<SectionIdentifier, Result> {
     get
   }
   public struct Configuration {
@@ -6567,27 +6679,27 @@ public struct SectionedFetchResults<SectionIdentifier, Result> : Swift.RandomAcc
     public var nsSortDescriptors: [Foundation.NSSortDescriptor]
     public var nsPredicate: Foundation.NSPredicate?
   }
-  public var projectedValue: SwiftUI.Binding<SwiftUI.SectionedFetchRequest<SectionIdentifier, Result>.Configuration> {
+  @_Concurrency.MainActor(unsafe) public var projectedValue: SwiftUI.Binding<SwiftUI.SectionedFetchRequest<SectionIdentifier, Result>.Configuration> {
     get
   }
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.SectionedFetchRequest : SwiftUI.DynamicProperty {
-  public static var _propertyBehaviors: Swift.UInt32 {
+  @_Concurrency.MainActor(unsafe) public static var _propertyBehaviors: Swift.UInt32 {
     get
   }
-  public func update()
+  @_Concurrency.MainActor(unsafe) public func update()
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.SectionedFetchRequest {
-  public init(entity: CoreData.NSEntityDescription, sectionIdentifier: Swift.KeyPath<Result, SectionIdentifier>, sortDescriptors: [Foundation.NSSortDescriptor], predicate: Foundation.NSPredicate? = nil, animation: SwiftUI.Animation? = nil)
-  public init(fetchRequest: CoreData.NSFetchRequest<Result>, sectionIdentifier: Swift.KeyPath<Result, SectionIdentifier>, animation: SwiftUI.Animation? = nil)
-  public init(fetchRequest: CoreData.NSFetchRequest<Result>, sectionIdentifier: Swift.KeyPath<Result, SectionIdentifier>, transaction: SwiftUI.Transaction)
+  @_Concurrency.MainActor(unsafe) public init(entity: CoreData.NSEntityDescription, sectionIdentifier: Swift.KeyPath<Result, SectionIdentifier>, sortDescriptors: [Foundation.NSSortDescriptor], predicate: Foundation.NSPredicate? = nil, animation: SwiftUI.Animation? = nil)
+  @_Concurrency.MainActor(unsafe) public init(fetchRequest: CoreData.NSFetchRequest<Result>, sectionIdentifier: Swift.KeyPath<Result, SectionIdentifier>, animation: SwiftUI.Animation? = nil)
+  @_Concurrency.MainActor(unsafe) public init(fetchRequest: CoreData.NSFetchRequest<Result>, sectionIdentifier: Swift.KeyPath<Result, SectionIdentifier>, transaction: SwiftUI.Transaction)
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.SectionedFetchRequest where Result : CoreData.NSManagedObject {
-  public init(sectionIdentifier: Swift.KeyPath<Result, SectionIdentifier>, sortDescriptors: [Foundation.NSSortDescriptor], predicate: Foundation.NSPredicate? = nil, animation: SwiftUI.Animation? = nil)
-  @_disfavoredOverload public init(sectionIdentifier: Swift.KeyPath<Result, SectionIdentifier>, sortDescriptors: [Foundation.SortDescriptor<Result>], predicate: Foundation.NSPredicate? = nil, animation: SwiftUI.Animation? = nil)
+  @_Concurrency.MainActor(unsafe) public init(sectionIdentifier: Swift.KeyPath<Result, SectionIdentifier>, sortDescriptors: [Foundation.NSSortDescriptor], predicate: Foundation.NSPredicate? = nil, animation: SwiftUI.Animation? = nil)
+  @_disfavoredOverload @_Concurrency.MainActor(unsafe) public init(sectionIdentifier: Swift.KeyPath<Result, SectionIdentifier>, sortDescriptors: [Foundation.SortDescriptor<Result>], predicate: Foundation.NSPredicate? = nil, animation: SwiftUI.Animation? = nil)
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.SectionedFetchRequest.Configuration where Result : CoreData.NSManagedObject {
@@ -6921,9 +7033,7 @@ extension SwiftUI.TableStyle where Self == SwiftUI.InsetTableStyle {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct InsetTableStyle : SwiftUI.TableStyle {
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `.inset` instead.")
   public init()
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `.inset(alternatesRowBackgrounds:)` instead.")
   public init(alternatesRowBackgrounds: Swift.Bool)
   public func makeBody(configuration: SwiftUI.InsetTableStyle.Configuration) -> some SwiftUI.View
   
@@ -8036,12 +8146,11 @@ extension SwiftUI.View {
   public func confirmationDialog<A, M, T>(_ title: SwiftUI.Text, isPresented: SwiftUI.Binding<Swift.Bool>, titleVisibility: SwiftUI.Visibility = .automatic, presenting data: T?, @SwiftUI.ViewBuilder actions: (T) -> A, @SwiftUI.ViewBuilder message: (T) -> M) -> some SwiftUI.View where A : SwiftUI.View, M : SwiftUI.View
   
 }
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.EnvironmentValues {
-  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public var isSearching: Swift.Bool {
     get
   }
-  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public var dismissSearch: SwiftUI.DismissSearchAction {
     get
   }
@@ -8589,8 +8698,8 @@ extension SwiftUI.Image {
   public func interpolation(_ interpolation: SwiftUI.Image.Interpolation) -> SwiftUI.Image
   public func antialiased(_ isAntialiased: Swift.Bool) -> SwiftUI.Image
 }
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.View {
-  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public func searchCompletion(_ completion: Swift.String) -> some SwiftUI.View
   
 }
@@ -8727,8 +8836,9 @@ extension SwiftUI.EnvironmentValues {
   }
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-@propertyWrapper public struct AccessibilityFocusState<Value> : SwiftUI.DynamicProperty where Value : Swift.Hashable {
-  @propertyWrapper public struct Binding {
+@propertyWrapper @frozen public struct AccessibilityFocusState<Value> : SwiftUI.DynamicProperty where Value : Swift.Hashable {
+  @propertyWrapper @frozen public struct Binding {
+    private var _binding: SwiftUI.Binding<Value>
     public var wrappedValue: Value {
       get
       nonmutating set
@@ -8737,6 +8847,10 @@ extension SwiftUI.EnvironmentValues {
       get
     }
   }
+  internal var technologies: SwiftUI.AccessibilityTechnologies? = nil
+  internal var value: Value
+  internal var location: SwiftUI.AnyLocation<Value>?
+  internal var resetValue: Value
   public var wrappedValue: Value {
     get
     nonmutating set
@@ -8833,25 +8947,75 @@ extension SwiftUI.TextField {
 }
 extension SwiftUI.TextField where Label == SwiftUI.Text {
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-  public init<T>(_ titleKey: SwiftUI.LocalizedStringKey, value: SwiftUI.Binding<T>, formatter: Foundation.Formatter, prompt: SwiftUI.Text? = nil)
+  public init<V>(_ titleKey: SwiftUI.LocalizedStringKey, value: SwiftUI.Binding<V>, formatter: Foundation.Formatter, prompt: SwiftUI.Text?)
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-  @_disfavoredOverload public init<S, T>(_ title: S, value: SwiftUI.Binding<T>, formatter: Foundation.Formatter, prompt: SwiftUI.Text? = nil) where S : Swift.StringProtocol
+  @_disfavoredOverload public init<S, V>(_ title: S, value: SwiftUI.Binding<V>, formatter: Foundation.Formatter, prompt: SwiftUI.Text?) where S : Swift.StringProtocol
 }
 extension SwiftUI.TextField {
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-  public init<T>(value: SwiftUI.Binding<T>, formatter: Foundation.Formatter, prompt: SwiftUI.Text? = nil, @SwiftUI.ViewBuilder label: () -> Label)
+  public init<V>(value: SwiftUI.Binding<V>, formatter: Foundation.Formatter, prompt: SwiftUI.Text? = nil, @SwiftUI.ViewBuilder label: () -> Label)
+}
+extension SwiftUI.TextField where Label == SwiftUI.Text {
+  @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+  @_alwaysEmitIntoClient public init<V>(_ titleKey: SwiftUI.LocalizedStringKey, value: SwiftUI.Binding<V>, formatter: Foundation.Formatter) {
+        self.init(
+            titleKey, value: value, formatter: formatter,
+            onEditingChanged: { _ in }, onCommit: {})
+    }
+  @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+  @_alwaysEmitIntoClient @_disfavoredOverload public init<S, V>(_ title: S, value: SwiftUI.Binding<V>, formatter: Foundation.Formatter) where S : Swift.StringProtocol {
+        self.init(
+            title, value: value, formatter: formatter,
+            onEditingChanged: { _ in }, onCommit: {})
+    }
 }
 extension SwiftUI.TextField where Label == SwiftUI.Text {
   @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
   @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
   @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
   @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
-  @_disfavoredOverload public init<T>(_ titleKey: SwiftUI.LocalizedStringKey, value: SwiftUI.Binding<T>, formatter: Foundation.Formatter, onEditingChanged: @escaping (Swift.Bool) -> Swift.Void = { _ in }, onCommit: @escaping () -> Swift.Void = {})
+  public init<V>(_ titleKey: SwiftUI.LocalizedStringKey, value: SwiftUI.Binding<V>, formatter: Foundation.Formatter, onEditingChanged: @escaping (Swift.Bool) -> Swift.Void, onCommit: @escaping () -> Swift.Void)
   @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
   @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
   @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
   @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
-  @_disfavoredOverload public init<S, T>(_ title: S, value: SwiftUI.Binding<T>, formatter: Foundation.Formatter, onEditingChanged: @escaping (Swift.Bool) -> Swift.Void = { _ in }, onCommit: @escaping () -> Swift.Void = {}) where S : Swift.StringProtocol
+  @_alwaysEmitIntoClient public init<V>(_ titleKey: SwiftUI.LocalizedStringKey, value: SwiftUI.Binding<V>, formatter: Foundation.Formatter, onEditingChanged: @escaping (Swift.Bool) -> Swift.Void) {
+        self.init(
+            titleKey, value: value, formatter: formatter,
+            onEditingChanged: onEditingChanged, onCommit: {})
+    }
+  @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @_alwaysEmitIntoClient public init<V>(_ titleKey: SwiftUI.LocalizedStringKey, value: SwiftUI.Binding<V>, formatter: Foundation.Formatter, onCommit: @escaping () -> Swift.Void) {
+        self.init(
+            titleKey, value: value, formatter: formatter,
+            onEditingChanged: { _ in }, onCommit: onCommit)
+    }
+  @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @_disfavoredOverload public init<S, V>(_ title: S, value: SwiftUI.Binding<V>, formatter: Foundation.Formatter, onEditingChanged: @escaping (Swift.Bool) -> Swift.Void, onCommit: @escaping () -> Swift.Void) where S : Swift.StringProtocol
+  @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @_disfavoredOverload @_alwaysEmitIntoClient public init<S, V>(_ title: S, value: SwiftUI.Binding<V>, formatter: Foundation.Formatter, onEditingChanged: @escaping (Swift.Bool) -> Swift.Void) where S : Swift.StringProtocol {
+        self.init(
+            title, value: value, formatter: formatter,
+            onEditingChanged: onEditingChanged, onCommit: {})
+    }
+  @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed TextField.init(_:value:formatter:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+  @_disfavoredOverload @_alwaysEmitIntoClient public init<S, V>(_ title: S, value: SwiftUI.Binding<V>, formatter: Foundation.Formatter, onCommit: @escaping () -> Swift.Void) where S : Swift.StringProtocol {
+        self.init(
+            title, value: value, formatter: formatter,
+            onEditingChanged: { _ in }, onCommit: onCommit)
+    }
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct _FixedSizeLayout {
@@ -9022,8 +9186,6 @@ extension SwiftUI.ToggleStyle where Self == SwiftUI.ButtonToggleStyle {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct ButtonToggleStyle : SwiftUI.ToggleStyle {
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "Use `.button` instead.")
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `.button` instead.")
   public init()
   public func makeBody(configuration: SwiftUI.ButtonToggleStyle.Configuration) -> some SwiftUI.View
   
@@ -9369,8 +9531,8 @@ internal class AnyViewStorageBase {
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.View {
   
-  #if compiler(>=5.3) && $AsyncAwait
-  public func refreshable(action: @escaping () async -> Swift.Void) -> some SwiftUI.View
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable && $InheritActorContext
+  public func refreshable(@_inheritActorContext action: @escaping @Sendable () async -> Swift.Void) -> some SwiftUI.View
   
   #endif
 
@@ -9411,14 +9573,6 @@ public struct RefreshAction {
     }
   public typealias AnimatableData = SwiftUI.EmptyAnimatableData
   public typealias Body = Swift.Never
-}
-@available(iOS, introduced: 15.0, deprecated: 15.0, message: "onFocus(_:) will be removed from a future seed. Use FocusState<T> and View.focused(_:equals:) to update view state as focus changes. Use View.onChange(_:) to perform focus-related side-effects.")
-@available(macOS, introduced: 12.0, deprecated: 12.0, message: "onFocus(_:) will be removed from a future seed. Use FocusState<T> and View.focused(_:equals:) to update view state as focus changes. Use View.onChange(_:) to perform focus-related side-effects.")
-@available(tvOS, introduced: 15.0, deprecated: 15.0, message: "onFocus(_:) will be removed from a future seed. Use FocusState<T> and View.focused(_:equals:) to update view state as focus changes. Use View.onChange(_:) to perform focus-related side-effects.")
-@available(watchOS, introduced: 8.0, deprecated: 8.0, message: "onFocus(_:) will be removed from a future seed. Use FocusState<T> and View.focused(_:equals:) to update view state as focus changes. Use View.onChange(_:) to perform focus-related side-effects.")
-extension SwiftUI.View {
-  public func onFocus(_ action: @escaping (_ isFocused: Swift.Bool) -> Swift.Void) -> some SwiftUI.View
-  
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.ListStyle where Self == SwiftUI.PlainListStyle {
@@ -9924,23 +10078,25 @@ public struct DefaultWindowToolbarStyle : SwiftUI.WindowToolbarStyle {
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.ShapeStyle where Self == SwiftUI.HierarchicalShapeStyle {
   @_alwaysEmitIntoClient public static var primary: SwiftUI.HierarchicalShapeStyle {
-    get { .init(id: 0) }
+    get { .primary }
   }
   @_alwaysEmitIntoClient public static var secondary: SwiftUI.HierarchicalShapeStyle {
-    get { .init(id: 1) }
+    get { .secondary }
   }
   @_alwaysEmitIntoClient public static var tertiary: SwiftUI.HierarchicalShapeStyle {
-    get { .init(id: 2) }
+    get { .tertiary }
   }
   @_alwaysEmitIntoClient public static var quaternary: SwiftUI.HierarchicalShapeStyle {
-    get { .init(id: 3) }
+    get { .quaternary }
   }
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @frozen public struct HierarchicalShapeStyle : SwiftUI.ShapeStyle {
-  @usableFromInline
   internal var id: Swift.UInt32
-  @inlinable internal init(id: Swift.UInt32) { self.id = id }
+  public static let primary: SwiftUI.HierarchicalShapeStyle
+  public static let secondary: SwiftUI.HierarchicalShapeStyle
+  public static let tertiary: SwiftUI.HierarchicalShapeStyle
+  public static let quaternary: SwiftUI.HierarchicalShapeStyle
   public func _apply(to shape: inout SwiftUI._ShapeStyle_Shape)
   public static func _apply(to type: inout SwiftUI._ShapeStyle_ShapeType)
 }
@@ -10316,13 +10472,23 @@ public struct SecureField<Label> : SwiftUI.View where Label : SwiftUI.View {
 }
 extension SwiftUI.SecureField where Label == SwiftUI.Text {
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-  public init(_ titleKey: SwiftUI.LocalizedStringKey, text: SwiftUI.Binding<Swift.String>, prompt: SwiftUI.Text? = nil)
+  public init(_ titleKey: SwiftUI.LocalizedStringKey, text: SwiftUI.Binding<Swift.String>, prompt: SwiftUI.Text?)
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-  public init<S>(_ title: S, text: SwiftUI.Binding<Swift.String>, prompt: SwiftUI.Text? = nil) where S : Swift.StringProtocol
+  @_disfavoredOverload public init<S>(_ title: S, text: SwiftUI.Binding<Swift.String>, prompt: SwiftUI.Text?) where S : Swift.StringProtocol
 }
 extension SwiftUI.SecureField {
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public init(text: SwiftUI.Binding<Swift.String>, prompt: SwiftUI.Text? = nil, @SwiftUI.ViewBuilder label: () -> Label)
+}
+extension SwiftUI.SecureField where Label == SwiftUI.Text {
+  @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+  @_alwaysEmitIntoClient public init(_ titleKey: SwiftUI.LocalizedStringKey, text: SwiftUI.Binding<Swift.String>) {
+        self.init(titleKey, text: text, onCommit: {})
+    }
+  @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+  @_alwaysEmitIntoClient @_disfavoredOverload public init<S>(_ title: S, text: SwiftUI.Binding<Swift.String>) where S : Swift.StringProtocol {
+        self.init(title, text: text, onCommit: {})
+    }
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.SecureField where Label == SwiftUI.Text {
@@ -10330,12 +10496,12 @@ extension SwiftUI.SecureField where Label == SwiftUI.Text {
   @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed SecureField.init(_:text:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter.")
   @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed SecureField.init(_:text:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter.")
   @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed SecureField.init(_:text:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter.")
-  public init(_ titleKey: SwiftUI.LocalizedStringKey, text: SwiftUI.Binding<Swift.String>, onCommit: @escaping () -> Swift.Void = {})
+  public init(_ titleKey: SwiftUI.LocalizedStringKey, text: SwiftUI.Binding<Swift.String>, onCommit: @escaping () -> Swift.Void)
   @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed SecureField.init(_:text:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter.")
   @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed SecureField.init(_:text:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter.")
   @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed SecureField.init(_:text:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter.")
   @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed SecureField.init(_:text:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter.")
-  @_disfavoredOverload public init<S>(_ title: S, text: SwiftUI.Binding<Swift.String>, onCommit: @escaping () -> Swift.Void = {}) where S : Swift.StringProtocol
+  @_disfavoredOverload public init<S>(_ title: S, text: SwiftUI.Binding<Swift.String>, onCommit: @escaping () -> Swift.Void) where S : Swift.StringProtocol
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.ShapeStyle where Self == SwiftUI.BackgroundStyle {
@@ -10349,6 +10515,8 @@ extension SwiftUI.ShapeStyle where Self == SwiftUI.BackgroundStyle {
   public static func _makeView<S>(view: SwiftUI._GraphValue<SwiftUI._ShapeView<S, SwiftUI.BackgroundStyle>>, inputs: SwiftUI._ViewInputs) -> SwiftUI._ViewOutputs where S : SwiftUI.Shape
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public func _apply(to shape: inout SwiftUI._ShapeStyle_Shape)
+  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+  public static func _apply(to type: inout SwiftUI._ShapeStyle_ShapeType)
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.View {
@@ -10864,8 +11032,6 @@ extension SwiftUI.ControlGroupStyle where Self == SwiftUI.NavigationControlGroup
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct NavigationControlGroupStyle : SwiftUI.ControlGroupStyle {
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "Use `.navigation` instead.")
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `.navigation` instead.")
   public init()
   @_Concurrency.MainActor(unsafe) public func makeBody(configuration: SwiftUI.NavigationControlGroupStyle.Configuration) -> some SwiftUI.View
   
@@ -10918,12 +11084,14 @@ extension SwiftUI.ExclusiveGesture.Value : Swift.Equatable where First.Value : S
 extension SwiftUI.View {
   public func keyboardShortcut(_ key: SwiftUI.KeyEquivalent, modifiers: SwiftUI.EventModifiers = .command) -> some SwiftUI.View
   
-  @available(iOS 15.0, macOS 12.0, *)
-  @available(tvOS, unavailable)
-  @available(watchOS, unavailable)
-  public func keyboardShortcut(_ key: SwiftUI.KeyEquivalent, modifiers: SwiftUI.EventModifiers = .command, localization: SwiftUI.KeyboardShortcut.Localization) -> some SwiftUI.View
-  
   public func keyboardShortcut(_ shortcut: SwiftUI.KeyboardShortcut) -> some SwiftUI.View
+  
+}
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension SwiftUI.View {
+  public func keyboardShortcut(_ key: SwiftUI.KeyEquivalent, modifiers: SwiftUI.EventModifiers = .command, localization: SwiftUI.KeyboardShortcut.Localization) -> some SwiftUI.View
   
 }
 @available(iOS 14.0, macOS 11.0, *)
@@ -11078,6 +11246,29 @@ extension SwiftUI.Anchor.Source where Value == CoreGraphics.CGPoint {
     get
   }
 }
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+public struct ContentShapeKinds : Swift.OptionSet {
+  public var rawValue: Swift.Int
+  public init(rawValue: Swift.Int)
+  public static let interaction: SwiftUI.ContentShapeKinds
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  public static let dragPreview: SwiftUI.ContentShapeKinds
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  public static let contextMenuPreview: SwiftUI.ContentShapeKinds
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  public static let hoverEffect: SwiftUI.ContentShapeKinds
+  @available(iOS, unavailable)
+  @available(tvOS, unavailable)
+  public static let focusEffect: SwiftUI.ContentShapeKinds
+  public typealias ArrayLiteralElement = SwiftUI.ContentShapeKinds
+  public typealias Element = SwiftUI.ContentShapeKinds
+  public typealias RawValue = Swift.Int
+}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct _FlipForRTLEffect : SwiftUI.ViewModifier, Swift.Equatable {
   public var isEnabled: Swift.Bool
@@ -11160,11 +11351,19 @@ public struct TitleBarWindowStyle : SwiftUI.WindowStyle {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct _DynamicPropertyBuffer {
 }
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS, introduced: 13.0, deprecated: 100000.0, message: "use Animatable directly")
+@available(macOS, introduced: 10.15, deprecated: 100000.0, message: "use Animatable directly")
+@available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "use Animatable directly")
+@available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "use Animatable directly")
 public protocol AnimatableModifier : SwiftUI.Animatable, SwiftUI.ViewModifier {
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.AnimatableModifier {
+  public static func _makeView(modifier: SwiftUI._GraphValue<Self>, inputs: SwiftUI._ViewInputs, body: @escaping (SwiftUI._Graph, SwiftUI._ViewInputs) -> SwiftUI._ViewOutputs) -> SwiftUI._ViewOutputs
+  public static func _makeViewList(modifier: SwiftUI._GraphValue<Self>, inputs: SwiftUI._ViewListInputs, body: @escaping (SwiftUI._Graph, SwiftUI._ViewListInputs) -> SwiftUI._ViewListOutputs) -> SwiftUI._ViewListOutputs
+}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension SwiftUI.ViewModifier where Self : SwiftUI.Animatable {
   public static func _makeView(modifier: SwiftUI._GraphValue<Self>, inputs: SwiftUI._ViewInputs, body: @escaping (SwiftUI._Graph, SwiftUI._ViewInputs) -> SwiftUI._ViewOutputs) -> SwiftUI._ViewOutputs
   public static func _makeViewList(modifier: SwiftUI._GraphValue<Self>, inputs: SwiftUI._ViewListInputs, body: @escaping (SwiftUI._Graph, SwiftUI._ViewListInputs) -> SwiftUI._ViewListOutputs) -> SwiftUI._ViewListOutputs
 }
@@ -11295,6 +11494,20 @@ extension SwiftUI.OutlineGroup : SwiftUI.View where Parent : SwiftUI.View, Leaf 
   }
   public typealias Body = @_opaqueReturnTypeOf("$s7SwiftUI12OutlineGroupVA2A4ViewR0_AaDR1_AaDR2_rlE4bodyQrvp", 0) __<Data, ID, Parent, Leaf, Subgroup>
 }
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension SwiftUI.OutlineGroup where ID == Data.Element.ID, Parent : SwiftUI.View, Parent == Leaf, Subgroup == SwiftUI.DisclosureGroup<Parent, SwiftUI.OutlineSubgroupChildren>, Data.Element : Swift.Identifiable {
+  public init<C, E>(_ root: SwiftUI.Binding<E>, children: Swift.WritableKeyPath<E, C?>, @SwiftUI.ViewBuilder content: @escaping (SwiftUI.Binding<E>) -> Leaf) where Data == SwiftUI.Binding<C>, ID == E.ID, C : Swift.MutableCollection, C : Swift.RandomAccessCollection, E : Swift.Identifiable, E == C.Element
+  public init<C, E>(_ data: SwiftUI.Binding<C>, children: Swift.WritableKeyPath<E, C?>, @SwiftUI.ViewBuilder content: @escaping (SwiftUI.Binding<E>) -> Leaf) where Data == SwiftUI.Binding<C>, ID == E.ID, C : Swift.MutableCollection, C : Swift.RandomAccessCollection, E : Swift.Identifiable, E == C.Element
+}
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension SwiftUI.OutlineGroup where Parent : SwiftUI.View, Parent == Leaf, Subgroup == SwiftUI.DisclosureGroup<Parent, SwiftUI.OutlineSubgroupChildren> {
+  public init<C, E>(_ root: SwiftUI.Binding<E>, id: Swift.KeyPath<E, ID>, children: Swift.WritableKeyPath<E, C?>, @SwiftUI.ViewBuilder content: @escaping (SwiftUI.Binding<E>) -> Leaf) where Data == SwiftUI.Binding<C>, C : Swift.MutableCollection, C : Swift.RandomAccessCollection, E == C.Element
+  public init<C, E>(_ data: SwiftUI.Binding<C>, id: Swift.KeyPath<E, ID>, children: Swift.WritableKeyPath<E, C?>, @SwiftUI.ViewBuilder content: @escaping (SwiftUI.Binding<E>) -> Leaf) where Data == SwiftUI.Binding<C>, C : Swift.MutableCollection, C : Swift.RandomAccessCollection, E == C.Element
+}
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -11357,21 +11570,17 @@ extension SwiftUI.Text {
   @_disfavoredOverload public init(_ attributedContent: Foundation.AttributedString)
 }
 extension Foundation.AttributeScopes {
-  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public var swiftUI: Foundation.AttributeScopes.SwiftUIAttributes.Type {
     get
   }
-  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public struct SwiftUIAttributes : Foundation.AttributeScope {
     public let font: Foundation.AttributeScopes.SwiftUIAttributes.FontAttribute
     public let foregroundColor: Foundation.AttributeScopes.SwiftUIAttributes.ForegroundColorAttribute
     public let backgroundColor: Foundation.AttributeScopes.SwiftUIAttributes.BackgroundColorAttribute
-    @available(*, deprecated, message: "Use strikethroughStyle attribute")
-    public let strikethroughColor: Foundation.AttributeScopes.SwiftUIAttributes.StrikethroughColorAttribute
     public let strikethroughStyle: Foundation.AttributeScopes.SwiftUIAttributes.StrikethroughStyleAttribute
     public let underlineStyle: Foundation.AttributeScopes.SwiftUIAttributes.UnderlineStyleAttribute
-    @available(*, deprecated, message: "Use underlineStyle attribute")
-    public let underlineColor: Foundation.AttributeScopes.SwiftUIAttributes.UnderlineColorAttribute
     public let kern: Foundation.AttributeScopes.SwiftUIAttributes.KerningAttribute
     public let tracking: Foundation.AttributeScopes.SwiftUIAttributes.TrackingAttribute
     public let baselineOffset: Foundation.AttributeScopes.SwiftUIAttributes.BaselineOffsetAttribute
@@ -11382,17 +11591,17 @@ extension Foundation.AttributeScopes {
   }
 }
 extension Foundation.AttributeScopes.SwiftUIAttributes {
-  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   @frozen public enum FontAttribute : Foundation.AttributedStringKey {
     public typealias Value = SwiftUI.Font
     public static let name: Swift.String
   }
-  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   @frozen public enum ForegroundColorAttribute : Foundation.AttributedStringKey {
     public typealias Value = SwiftUI.Color
     public static let name: Swift.String
   }
-  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   @frozen public enum BackgroundColorAttribute : Foundation.AttributedStringKey {
     public typealias Value = SwiftUI.Color
     public static let name: Swift.String
@@ -11402,40 +11611,28 @@ extension Foundation.AttributeScopes.SwiftUIAttributes {
     public typealias Value = SwiftUI.Text.LineStyle
     public static let name: Swift.String
   }
-  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-  @available(*, deprecated, message: "Use StrikethroughStyleAttribute")
-  @frozen public enum StrikethroughColorAttribute : Foundation.AttributedStringKey {
-    public typealias Value = SwiftUI.Color
-    public static let name: Swift.String
-  }
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   @frozen public enum UnderlineStyleAttribute : Foundation.AttributedStringKey {
     public typealias Value = SwiftUI.Text.LineStyle
     public static let name: Swift.String
   }
-  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-  @available(*, deprecated, message: "Use UnderlineStyleAttribute")
-  @frozen public enum UnderlineColorAttribute : Foundation.AttributedStringKey {
-    public typealias Value = SwiftUI.Color
-    public static let name: Swift.String
-  }
-  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   @frozen public enum KerningAttribute : Foundation.CodableAttributedStringKey {
     public typealias Value = CoreGraphics.CGFloat
     public static let name: Swift.String
   }
-  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   @frozen public enum TrackingAttribute : Foundation.CodableAttributedStringKey {
     public typealias Value = CoreGraphics.CGFloat
     public static let name: Swift.String
   }
-  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   @frozen public enum BaselineOffsetAttribute : Foundation.CodableAttributedStringKey {
     public typealias Value = CoreGraphics.CGFloat
     public static let name: Swift.String
   }
 }
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeDynamicLookup {
   public subscript<T>(dynamicMember keyPath: Swift.KeyPath<Foundation.AttributeScopes.SwiftUIAttributes, T>) -> T where T : Foundation.AttributedStringKey {
     get
@@ -11466,6 +11663,25 @@ extension SwiftUI.View {
   public func fileImporter(isPresented: SwiftUI.Binding<Swift.Bool>, allowedContentTypes: [UniformTypeIdentifiers.UTType], onCompletion: @escaping (_ result: Swift.Result<Foundation.URL, Swift.Error>) -> Swift.Void) -> some SwiftUI.View
   
   public func fileImporter(isPresented: SwiftUI.Binding<Swift.Bool>, allowedContentTypes: [UniformTypeIdentifiers.UTType], allowsMultipleSelection: Swift.Bool, onCompletion: @escaping (_ result: Swift.Result<[Foundation.URL], Swift.Error>) -> Swift.Void) -> some SwiftUI.View
+  
+}
+extension SwiftUI.EnvironmentValues {
+  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+  public var accessibilityLargeContentViewerEnabled: Swift.Bool {
+    get
+  }
+  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+  public var _accessibilityLargeContentViewerEnabled: Swift.Bool {
+    get
+    set
+  }
+}
+extension SwiftUI.View {
+  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+  public func accessibilityShowsLargeContentViewer<V>(@SwiftUI.ViewBuilder _ largeContentView: () -> V) -> some SwiftUI.View where V : SwiftUI.View
+  
+  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+  public func accessibilityShowsLargeContentViewer() -> some SwiftUI.View
   
 }
 @available(iOS 13.0, tvOS 13.0, *)
@@ -11982,7 +12198,9 @@ extension SwiftUI.View {
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   public func focusedValue<Value>(_ keyPath: Swift.WritableKeyPath<SwiftUI.FocusedValues, Value?>, _ value: Value) -> some SwiftUI.View
   
-  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension SwiftUI.View {
   public func focusedSceneValue<T>(_ keyPath: Swift.WritableKeyPath<SwiftUI.FocusedValues, T?>, _ value: T) -> some SwiftUI.View
   
 }
@@ -12472,10 +12690,6 @@ public struct PeriodicTimelineSchedule : SwiftUI.TimelineSchedule {
     public typealias Element = Foundation.Date
     public typealias Iterator = SwiftUI.PeriodicTimelineSchedule.Entries
   }
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "Use `.periodic(from:by:)` instead.")
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `.periodic(from:by:)` instead.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "Use `.periodic(from:by:)` instead.")
-  @available(watchOS, introduced: 8.0, deprecated: 8.0, message: "Use `.periodic(from:by:)` instead.")
   public init(from startDate: Foundation.Date, by interval: Foundation.TimeInterval)
   public func entries(from startDate: Foundation.Date, mode: SwiftUI.TimelineScheduleMode) -> SwiftUI.PeriodicTimelineSchedule.Entries
 }
@@ -12486,19 +12700,11 @@ public struct EveryMinuteTimelineSchedule : SwiftUI.TimelineSchedule {
     public typealias Element = Foundation.Date
     public typealias Iterator = SwiftUI.EveryMinuteTimelineSchedule.Entries
   }
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "Use `.everyMinute` instead.")
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `.everyMinute` instead.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "Use `.everyMinute` instead.")
-  @available(watchOS, introduced: 8.0, deprecated: 8.0, message: "Use `.everyMinute` instead.")
   public init()
   public func entries(from startDate: Foundation.Date, mode: SwiftUI.TimelineScheduleMode) -> SwiftUI.EveryMinuteTimelineSchedule.Entries
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct ExplicitTimelineSchedule<Entries> : SwiftUI.TimelineSchedule where Entries : Swift.Sequence, Entries.Element == Foundation.Date {
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "Use `.explicit(_:)` instead.")
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `.explicit(_:)` instead.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "Use `.explicit(_:)` instead.")
-  @available(watchOS, introduced: 8.0, deprecated: 8.0, message: "Use `.explicit(_:)` instead.")
   public init(_ dates: Entries)
   public func entries(from startDate: Foundation.Date, mode: SwiftUI.TimelineScheduleMode) -> Entries
 }
@@ -13121,28 +13327,17 @@ public struct ButtonBorderShape : Swift.Equatable {
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.View {
   @inlinable public func buttonBorderShape(_ shape: SwiftUI.ButtonBorderShape) -> some SwiftUI.View {
-        environment(\.buttonBorderShape, shape)
+        environment(\._buttonBorderShape, shape)
     }
   
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.EnvironmentValues {
   @usableFromInline
-  internal var buttonBorderShape: SwiftUI.ButtonBorderShape {
+  internal var _buttonBorderShape: SwiftUI.ButtonBorderShape {
     get
     set
   }
-}
-@available(*, deprecated, message: "Use View.buttonBorderShape(_:) instead.")
-extension SwiftUI.BorderedButtonStyle {
-  public struct BorderShape {
-    public static let automatic: SwiftUI.BorderedButtonStyle.BorderShape
-    @available(tvOS, unavailable)
-    @available(macOS, unavailable)
-    public static let capsule: SwiftUI.BorderedButtonStyle.BorderShape
-    public static let roundedRectangle: SwiftUI.BorderedButtonStyle.BorderShape
-  }
-  public init(shape: SwiftUI.BorderedButtonStyle.BorderShape)
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.PickerStyle where Self == SwiftUI.InlinePickerStyle {
@@ -13246,6 +13441,7 @@ public struct InlinePickerStyle : SwiftUI.PickerStyle {
     @_Concurrency.MainActor(unsafe) @objc get
   }
   @objc @_Concurrency.MainActor(unsafe) public func validateUserInterfaceItem(_ item: AppKit.NSValidatedUserInterfaceItem) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func keyDown(with event: AppKit.NSEvent)
   @objc override dynamic open func responds(to selector: ObjectiveC.Selector!) -> Swift.Bool
   @objc override dynamic open func forwardingTarget(for selector: ObjectiveC.Selector!) -> Any?
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func validRequestor(forSendType sendType: AppKit.NSPasteboard.PasteboardType?, returnType: AppKit.NSPasteboard.PasteboardType?) -> Any?
@@ -13515,13 +13711,6 @@ extension Swift.Never {
   public var body: Swift.Never {
     get
   }
-}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-extension Swift.Never : Swift.Identifiable {
-  public var id: Swift.Never {
-    get
-  }
-  public typealias ID = Swift.Never
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Optional : SwiftUI.Gesture where Wrapped : SwiftUI.Gesture {
@@ -13890,9 +14079,7 @@ extension SwiftUI.ListStyle where Self == SwiftUI.BorderedListStyle {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct BorderedListStyle : SwiftUI.ListStyle {
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `.bordered` instead.")
   public init()
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `.bordered(alternatesRowBackgrounds:)` instead.")
   public init(alternatesRowBackgrounds: Swift.Bool)
   public static func _makeView<SelectionValue>(value: SwiftUI._GraphValue<SwiftUI._ListValue<SwiftUI.BorderedListStyle, SelectionValue>>, inputs: SwiftUI._ViewInputs) -> SwiftUI._ViewOutputs where SelectionValue : Swift.Hashable
   public static func _makeViewList<SelectionValue>(value: SwiftUI._GraphValue<SwiftUI._ListValue<SwiftUI.BorderedListStyle, SelectionValue>>, inputs: SwiftUI._ViewListInputs) -> SwiftUI._ViewListOutputs where SelectionValue : Swift.Hashable
@@ -13963,6 +14150,7 @@ public struct SeparatorShapeStyle : SwiftUI.ShapeStyle {
 @available(watchOS, unavailable)
 extension SwiftUI.SeparatorShapeStyle {
   public func _apply(to shape: inout SwiftUI._ShapeStyle_Shape)
+  public static func _apply(to type: inout SwiftUI._ShapeStyle_ShapeType)
 }
 @available(macOS 10.15, *)
 @available(iOS, unavailable)
@@ -13981,6 +14169,7 @@ public struct _SystemShapeStyle : SwiftUI.ShapeStyle {
 @available(watchOS, unavailable)
 extension SwiftUI._SystemShapeStyle {
   public func _apply(to shape: inout SwiftUI._ShapeStyle_Shape)
+  public static func _apply(to type: inout SwiftUI._ShapeStyle_ShapeType)
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
 @available(tvOS, unavailable)
@@ -14109,8 +14298,7 @@ extension SwiftUI.ShapeStyle where Self == SwiftUI.SelectionShapeStyle {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct SelectionShapeStyle : SwiftUI.ShapeStyle {
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "Use `.selection` instead.")
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `.selection` instead.")
+  @available(macOS 12.0, *)
   public init()
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -14154,18 +14342,17 @@ public enum DynamicTypeSize : Swift.Hashable, Swift.Comparable, Swift.CaseIterab
     get
   }
 }
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.EnvironmentValues {
-  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public var dynamicTypeSize: SwiftUI.DynamicTypeSize {
     get
     set
   }
 }
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.View {
-  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public func dynamicTypeSize(_ size: SwiftUI.DynamicTypeSize) -> some SwiftUI.View
   
-  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public func dynamicTypeSize<T>(_ range: T) -> some SwiftUI.View where T : Swift.RangeExpression, T.Bound == SwiftUI.DynamicTypeSize
   
 }
@@ -14556,7 +14743,6 @@ extension SwiftUI.View {
 extension SwiftUI.ForEach : SwiftUI.TableRowContent where Content : SwiftUI.TableRowContent {
   public typealias TableRowValue = Content.TableRowValue
   public typealias TableRowBody = Swift.Never
-  public static func _tableRowCount(inputs: SwiftUI._TableRowInputs) -> Swift.Int?
   public static func _makeRows(content: SwiftUI._GraphValue<SwiftUI.ForEach<Data, ID, Content>>, inputs: SwiftUI._TableRowInputs) -> SwiftUI._TableRowOutputs
   public init(_ data: Data, @SwiftUI.TableRowBuilder<Data.Element> content: @escaping (Data.Element) -> Content) where ID == Data.Element.ID, Data.Element == Content.TableRowValue
   public init<V>(_ data: Data, id: Swift.KeyPath<Data.Element, ID>, @SwiftUI.TableRowBuilder<V> content: @escaping (Data.Element) -> Content) where V == Content.TableRowValue
@@ -14575,6 +14761,27 @@ public protocol DynamicTableRowContent : SwiftUI.TableRowContent {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUI.ForEach : SwiftUI.DynamicTableRowContent where Content : SwiftUI.TableRowContent {
+}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension SwiftUI.View {
+  @inlinable public func contentShape<S>(_ kind: SwiftUI.ContentShapeKinds, _ shape: S, eoFill: Swift.Bool = false) -> some SwiftUI.View where S : SwiftUI.Shape {
+        modifier(
+            _ContentShapeKindModifier(shape: shape, eoFill: eoFill, kind: kind))
+    }
+  
+}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@frozen public struct _ContentShapeKindModifier<ContentShape> : SwiftUI.ViewModifier where ContentShape : SwiftUI.Shape {
+  public var shape: ContentShape
+  public var eoFill: Swift.Bool
+  public var kind: SwiftUI.ContentShapeKinds
+  @inlinable public init(shape: ContentShape, eoFill: Swift.Bool = false, kind: SwiftUI.ContentShapeKinds) {
+        self.shape = shape
+        self.eoFill = eoFill
+        self.kind = kind
+    }
+  public static func _makeView(modifier: SwiftUI._GraphValue<SwiftUI._ContentShapeKindModifier<ContentShape>>, inputs: SwiftUI._ViewInputs, body: @escaping (SwiftUI._Graph, SwiftUI._ViewInputs) -> SwiftUI._ViewOutputs) -> SwiftUI._ViewOutputs
+  public typealias Body = Swift.Never
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Animation : Swift.Equatable {
@@ -14662,11 +14869,10 @@ extension SwiftUI.View {
     }
   
 }
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.View {
-  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public func onSubmit(of triggers: SwiftUI.SubmitTriggers = .text, _ action: @escaping (() -> Swift.Void)) -> some SwiftUI.View
   
-  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public func submitScope(_ isBlocking: Swift.Bool = true) -> some SwiftUI.View
   
 }
@@ -14709,15 +14915,16 @@ extension SwiftUI.EnvironmentValues {
   }
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-public struct TintShapeStyle : SwiftUI.ShapeStyle {
-  @usableFromInline
-  internal init()
-}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.ShapeStyle where Self == SwiftUI.TintShapeStyle {
   @_alwaysEmitIntoClient public static var tint: SwiftUI.TintShapeStyle {
     get { .init() }
   }
+}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+public struct TintShapeStyle : SwiftUI.ShapeStyle {
+  public func _apply(to shape: inout SwiftUI._ShapeStyle_Shape)
+  public static func _apply(to type: inout SwiftUI._ShapeStyle_ShapeType)
+  public init()
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @frozen public struct GraphicsContext {
@@ -15093,8 +15300,8 @@ extension SwiftUI.ListStyle where Self == SwiftUI.InsetListStyle {
 @available(watchOS, unavailable)
 public struct InsetListStyle : SwiftUI.ListStyle {
   public init()
+  @available(macOS 12.0, *)
   @available(iOS, unavailable)
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `.inset(alternatesRowBackgrounds:)` instead.")
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   public init(alternatesRowBackgrounds: Swift.Bool)
@@ -16091,6 +16298,17 @@ extension SwiftUI.View {
   public func listSectionSeparatorTint(_ color: SwiftUI.Color?, edges: SwiftUI.VerticalEdge.Set = .all) -> some SwiftUI.View
   
 }
+@available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension SwiftUI.EnvironmentValues {
+  @usableFromInline
+  internal var alignListSeparators: Swift.Bool {
+    get
+    set
+  }
+}
 @available(macOS 10.15, *)
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
@@ -16577,47 +16795,65 @@ extension SwiftUI.TableColumnBuilder {
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.AccessibilityRotorContentBuilder {
-  public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent
+  @_alwaysEmitIntoClient public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent {
+        AccessibilityTupleRotorContent<(C0, C1)>((c0, c1))
+    }
   
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.AccessibilityRotorContentBuilder {
-  public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent, C2 : SwiftUI.AccessibilityRotorContent
+  @_alwaysEmitIntoClient public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent, C2 : SwiftUI.AccessibilityRotorContent {
+        AccessibilityTupleRotorContent<(C0, C1, C2)>((c0, c1, c2))
+    }
   
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.AccessibilityRotorContentBuilder {
-  public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent, C2 : SwiftUI.AccessibilityRotorContent, C3 : SwiftUI.AccessibilityRotorContent
+  @_alwaysEmitIntoClient public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent, C2 : SwiftUI.AccessibilityRotorContent, C3 : SwiftUI.AccessibilityRotorContent {
+        AccessibilityTupleRotorContent<(C0, C1, C2, C3)>((c0, c1, c2, c3))
+    }
   
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.AccessibilityRotorContentBuilder {
-  public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent, C2 : SwiftUI.AccessibilityRotorContent, C3 : SwiftUI.AccessibilityRotorContent, C4 : SwiftUI.AccessibilityRotorContent
+  @_alwaysEmitIntoClient public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent, C2 : SwiftUI.AccessibilityRotorContent, C3 : SwiftUI.AccessibilityRotorContent, C4 : SwiftUI.AccessibilityRotorContent {
+        AccessibilityTupleRotorContent<(C0, C1, C2, C3, C4)>((c0, c1, c2, c3, c4))
+    }
   
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.AccessibilityRotorContentBuilder {
-  public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent, C2 : SwiftUI.AccessibilityRotorContent, C3 : SwiftUI.AccessibilityRotorContent, C4 : SwiftUI.AccessibilityRotorContent, C5 : SwiftUI.AccessibilityRotorContent
+  @_alwaysEmitIntoClient public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent, C2 : SwiftUI.AccessibilityRotorContent, C3 : SwiftUI.AccessibilityRotorContent, C4 : SwiftUI.AccessibilityRotorContent, C5 : SwiftUI.AccessibilityRotorContent {
+        AccessibilityTupleRotorContent<(C0, C1, C2, C3, C4, C5)>((c0, c1, c2, c3, c4, c5))
+    }
   
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.AccessibilityRotorContentBuilder {
-  public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent, C2 : SwiftUI.AccessibilityRotorContent, C3 : SwiftUI.AccessibilityRotorContent, C4 : SwiftUI.AccessibilityRotorContent, C5 : SwiftUI.AccessibilityRotorContent, C6 : SwiftUI.AccessibilityRotorContent
+  @_alwaysEmitIntoClient public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent, C2 : SwiftUI.AccessibilityRotorContent, C3 : SwiftUI.AccessibilityRotorContent, C4 : SwiftUI.AccessibilityRotorContent, C5 : SwiftUI.AccessibilityRotorContent, C6 : SwiftUI.AccessibilityRotorContent {
+        AccessibilityTupleRotorContent<(C0, C1, C2, C3, C4, C5, C6)>((c0, c1, c2, c3, c4, c5, c6))
+    }
   
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.AccessibilityRotorContentBuilder {
-  public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent, C2 : SwiftUI.AccessibilityRotorContent, C3 : SwiftUI.AccessibilityRotorContent, C4 : SwiftUI.AccessibilityRotorContent, C5 : SwiftUI.AccessibilityRotorContent, C6 : SwiftUI.AccessibilityRotorContent, C7 : SwiftUI.AccessibilityRotorContent
+  @_alwaysEmitIntoClient public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent, C2 : SwiftUI.AccessibilityRotorContent, C3 : SwiftUI.AccessibilityRotorContent, C4 : SwiftUI.AccessibilityRotorContent, C5 : SwiftUI.AccessibilityRotorContent, C6 : SwiftUI.AccessibilityRotorContent, C7 : SwiftUI.AccessibilityRotorContent {
+        AccessibilityTupleRotorContent<(C0, C1, C2, C3, C4, C5, C6, C7)>((c0, c1, c2, c3, c4, c5, c6, c7))
+    }
   
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.AccessibilityRotorContentBuilder {
-  public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent, C2 : SwiftUI.AccessibilityRotorContent, C3 : SwiftUI.AccessibilityRotorContent, C4 : SwiftUI.AccessibilityRotorContent, C5 : SwiftUI.AccessibilityRotorContent, C6 : SwiftUI.AccessibilityRotorContent, C7 : SwiftUI.AccessibilityRotorContent, C8 : SwiftUI.AccessibilityRotorContent
+  @_alwaysEmitIntoClient public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent, C2 : SwiftUI.AccessibilityRotorContent, C3 : SwiftUI.AccessibilityRotorContent, C4 : SwiftUI.AccessibilityRotorContent, C5 : SwiftUI.AccessibilityRotorContent, C6 : SwiftUI.AccessibilityRotorContent, C7 : SwiftUI.AccessibilityRotorContent, C8 : SwiftUI.AccessibilityRotorContent {
+        AccessibilityTupleRotorContent<(C0, C1, C2, C3, C4, C5, C6, C7, C8)>((c0, c1, c2, c3, c4, c5, c6, c7, c8))
+    }
   
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.AccessibilityRotorContentBuilder {
-  public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent, C2 : SwiftUI.AccessibilityRotorContent, C3 : SwiftUI.AccessibilityRotorContent, C4 : SwiftUI.AccessibilityRotorContent, C5 : SwiftUI.AccessibilityRotorContent, C6 : SwiftUI.AccessibilityRotorContent, C7 : SwiftUI.AccessibilityRotorContent, C8 : SwiftUI.AccessibilityRotorContent, C9 : SwiftUI.AccessibilityRotorContent
+  @_alwaysEmitIntoClient public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some SwiftUI.AccessibilityRotorContent where C0 : SwiftUI.AccessibilityRotorContent, C1 : SwiftUI.AccessibilityRotorContent, C2 : SwiftUI.AccessibilityRotorContent, C3 : SwiftUI.AccessibilityRotorContent, C4 : SwiftUI.AccessibilityRotorContent, C5 : SwiftUI.AccessibilityRotorContent, C6 : SwiftUI.AccessibilityRotorContent, C7 : SwiftUI.AccessibilityRotorContent, C8 : SwiftUI.AccessibilityRotorContent, C9 : SwiftUI.AccessibilityRotorContent {
+        AccessibilityTupleRotorContent<(C0, C1, C2, C3, C4, C5, C6, C7, C8, C9)>((c0, c1, c2, c3, c4, c5, c6, c7, c8, c9))
+    }
   
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -16908,24 +17144,15 @@ extension SwiftUI._ForegroundStyleModifier : SwiftUI.ViewModifier {}
 extension SwiftUI._ForegroundStyleModifier2 : SwiftUI.ViewModifier {}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI._ForegroundStyleModifier3 : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.ForegroundStyle : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.EdgeInsets : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 10.15, *)
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUI.NSViewRepresentableContext : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.__ViewRemovalLayout : SwiftUI._VariadicView_UnaryViewRoot {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -16936,18 +17163,12 @@ extension SwiftUI.AccessibilityHeadingLevel : Swift.Equatable {}
 extension SwiftUI.AccessibilityHeadingLevel : Swift.Hashable {}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.AccessibilityHeadingLevel : Swift.RawRepresentable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.AccessibilityHeadingLevel : Swift.Sendable {}
-#endif
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.TimelineView.Context.Cadence : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Font.Weight : Swift.Sendable {}
-#endif
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 11.0, *)
 extension SwiftUI.Image.Scale : Swift.Equatable {}
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 11.0, *)
@@ -16956,13 +17177,12 @@ extension SwiftUI.Image.Scale : Swift.Hashable {}
 extension SwiftUI.__FourUpLayout : SwiftUI._VariadicView_UnaryViewRoot {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.__FourUpLayout : SwiftUI.Animatable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUI.EmptyWidgetConfiguration : Swift.Sendable {}
-#endif
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension SwiftUI._TaskModifier : Swift.Sendable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.__SpiralLayout : SwiftUI._VariadicView_UnaryViewRoot {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -16975,11 +17195,8 @@ extension SwiftUI.Axis : Swift.Equatable {}
 extension SwiftUI.Axis : Swift.Hashable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Axis : Swift.RawRepresentable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Axis : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.PreviewPlatform : Swift.Equatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -16990,41 +17207,30 @@ extension SwiftUI.__ResizableImagesExampleLayout : SwiftUI._VariadicView_UnaryVi
 extension SwiftUI.__ResizableImagesExampleLayout : SwiftUI.Animatable {}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.Canvas : SwiftUI.View {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.EmptyView : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.__FluidSpringTestLayout : SwiftUI._VariadicView_UnaryViewRoot {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.__FluidSpringTestLayout : SwiftUI.Animatable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.AccessibilityLabeledPairRole : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Font.TextStyle : Swift.Equatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Font.TextStyle : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.ContainerRelativeShape : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.ContainerRelativeShape._Inset : Swift.Sendable {}
-#endif
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI._ContainerShapeModifier : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension SwiftUI.AccessibilityOptionalRotorContent : SwiftUI.AccessibilityRotorContent {}
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+extension SwiftUI._AllowsHitTestingModifier : SwiftUI.ViewModifier {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._AllowsHitTestingModifier : Swift.Sendable {}
-#endif
 @available(watchOS 6.0, *)
 @available(iOS, unavailable)
 @available(macOS, unavailable)
@@ -17035,21 +17241,12 @@ extension SwiftUI._CrownHapticsConfiguration.Notch.Strength : Swift.Equatable {}
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 extension SwiftUI._CrownHapticsConfiguration.Notch.Strength : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.HorizontalAlignment : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.VerticalAlignment : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.AlignmentKey : Swift.Sendable {}
-#endif
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.Prominence : Swift.Equatable {}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
@@ -17062,21 +17259,12 @@ extension SwiftUI.ColorScheme : Swift.Hashable {}
 extension SwiftUI.ColorSchemeContrast : Swift.Equatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.ColorSchemeContrast : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.GestureMask : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._ProjectionEffect : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.EmptyModifier : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._CircleLayout : SwiftUI._VariadicView_UnaryViewRoot {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -17097,152 +17285,95 @@ extension SwiftUI.DropOperation : Swift.Equatable {}
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUI.DropOperation : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.ContentMode : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._AspectRatioLayout : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._AspectRatioLayout : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._AspectRatioLayout : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._PaddingLayout : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._PaddingLayout : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._PaddingLayout : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.TextAlignment : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._VAlignment : Swift.Equatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._VAlignment : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._VAlignment : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._AlignmentLayout : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._AlignmentLayout : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._AlignmentLayout : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._OffsetEffect : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._PositionLayout : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._PositionLayout : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._PositionLayout : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Angle : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._TransformEffect : Swift.Sendable {}
-#endif
 @available(macOS 10.15, *)
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUI.NSHostingView : SwiftUI._BenchmarkHost {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._RotationEffect : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._ScaleEffect : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._TraitWritingModifier : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._HiddenModifier : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._BlurEffect : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._BlurEffect : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._BlurEffect : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._FrameLayout : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._FrameLayout : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._FrameLayout : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._FlexFrameLayout : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._FlexFrameLayout : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._FlexFrameLayout : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._BrightnessEffect : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._BrightnessEffect : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._BrightnessEffect : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._ColorInvertEffect : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._ColorInvertEffect : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._ColorInvertEffect : Swift.Sendable {}
-#endif
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._ColorMatrixEffect : SwiftUI.Animatable {}
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._ColorMatrixEffect : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._ColorMatrixEffect : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._ColorMultiplyEffect._Resolved : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -17251,65 +17382,44 @@ extension SwiftUI._ColorMultiplyEffect._Resolved : SwiftUI.ViewModifier {}
 extension SwiftUI._HStackLayout : SwiftUI._VariadicView_UnaryViewRoot {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._HStackLayout : SwiftUI.Animatable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._HStackLayout : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._ContrastEffect : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._ContrastEffect : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._ContrastEffect : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._GrayscaleEffect : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._GrayscaleEffect : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._GrayscaleEffect : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._HueRotationEffect : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._HueRotationEffect : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._HueRotationEffect : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._LuminanceToAlphaEffect : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._LuminanceToAlphaEffect : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._LuminanceToAlphaEffect : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._SaturationEffect : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._SaturationEffect : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._SaturationEffect : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._OpacityEffect : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._OpacityEffect : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._OpacityEffect : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._BlendModeEffect : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -17326,11 +17436,8 @@ extension SwiftUI.ColorRenderingMode : Swift.Hashable {}
 extension SwiftUI._CompositingGroupEffect : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._CompositingGroupEffect : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._CompositingGroupEffect : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._ShadowEffect._Resolved : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -17343,21 +17450,12 @@ extension SwiftUI.__GridLayout : SwiftUI.Animatable {}
 extension SwiftUI.__GridLayout.FillDirection : Swift.Equatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.__GridLayout.FillDirection : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.Visibility : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.Namespace : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.Namespace.ID : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._AligningContentProvider.AligningContentProviderLayout : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -17390,35 +17488,20 @@ extension SwiftUI.ControlActiveState : Swift.Hashable {}
 @available(tvOS, unavailable)
 @available(watchOS, deprecated, renamed: "WatchDisplayVariant")
 extension SwiftUI._DeviceVariant : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.ColorMatrix : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._ColorMatrix : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.EventModifiers : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Path.Element : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.RoundedCornerStyle : Swift.Equatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.RoundedCornerStyle : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.SafeAreaRegions : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.BlendMode : Swift.Equatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -17427,71 +17510,44 @@ extension SwiftUI.BlendMode : Swift.Hashable {}
 extension SwiftUI.__RadialLayout : SwiftUI._VariadicView_UnaryViewRoot {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.__RadialLayout : SwiftUI.Animatable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._EmptyScene : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Image.Interpolation : Swift.Equatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Image.Interpolation : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.FillStyle : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Spacer : SwiftUI.View {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Spacer : Swift.Sendable {}
-#endif
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._TextBaselineRelativeSpacer : SwiftUI.View {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._TextBaselineRelativeSpacer : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._HSpacer : SwiftUI.View {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._HSpacer : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._VSpacer : SwiftUI.View {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._VSpacer : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.StrokeStyle : Swift.Sendable {}
-#endif
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.ScenePhase : Swift.Hashable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Color.RGBColorSpace : Swift.Equatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Color.RGBColorSpace : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._FixedSizeLayout : Swift.Sendable {}
-#endif
 extension SwiftUI._FixedSizeLayout : SwiftUI.Animatable {}
 extension SwiftUI._FixedSizeLayout : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.GraphicsContext.BlendMode : Swift.Sendable {}
-#endif
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @available(*, deprecated, message: "will be removed")
 extension SwiftUI._ForegroundColorModifier : SwiftUI.ViewModifier {}
@@ -17501,20 +17557,14 @@ extension SwiftUI.ShapeRole : Swift.Equatable {}
 extension SwiftUI.ShapeRole : Swift.Hashable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._ViewModifier_Content : SwiftUI.View {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.ProjectionTransform : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.__SetFrameLayout : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.__SetFrameLayout : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.__SetFrameLayout : Swift.Sendable {}
-#endif
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 @available(macOS, unavailable)
 extension SwiftUI.NavigationBarItem.TitleDisplayMode : Swift.Equatable {}
@@ -17525,34 +17575,22 @@ extension SwiftUI.NavigationBarItem.TitleDisplayMode : Swift.Hashable {}
 extension SwiftUI._ScrollViewAnimationMode : Swift.Equatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._ScrollViewAnimationMode : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.HierarchicalShapeStyle : Swift.Sendable {}
-#endif
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.BackgroundStyle : SwiftUI.ShapeStyle {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.BackgroundStyle : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.EmptyAnimatableData : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._EndedGesture : SwiftUI.Gesture {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._ChangedGesture : SwiftUI.Gesture {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._MapGesture : SwiftUI.Gesture {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.UnitPoint : Swift.Sendable {}
-#endif
 @available(watchOS 6.0, *)
 @available(iOS, unavailable)
 @available(macOS, unavailable)
@@ -17563,18 +17601,12 @@ extension SwiftUI.DigitalCrownRotationalSensitivity : Swift.Equatable {}
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 extension SwiftUI.DigitalCrownRotationalSensitivity : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.MatchedGeometryProperties : Swift.Sendable {}
-#endif
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._MatchedGeometryEffect : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._FlipForRTLEffect : Swift.Sendable {}
-#endif
 @available(watchOS 6.0, *)
 @available(iOS, unavailable)
 @available(macOS, unavailable)
@@ -17585,58 +17617,22 @@ extension SwiftUI._DigitalCrownDecelerationRate : Swift.Equatable {}
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 extension SwiftUI._DigitalCrownDecelerationRate : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.SwiftUIAttributes.FontAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.SwiftUIAttributes.ForegroundColorAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.SwiftUIAttributes.BackgroundColorAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.SwiftUIAttributes.StrikethroughStyleAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-@available(*, deprecated, message: "Use StrikethroughStyleAttribute")
-extension Foundation.AttributeScopes.SwiftUIAttributes.StrikethroughColorAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.SwiftUIAttributes.UnderlineStyleAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-@available(*, deprecated, message: "Use UnderlineStyleAttribute")
-extension Foundation.AttributeScopes.SwiftUIAttributes.UnderlineColorAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.SwiftUIAttributes.KerningAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.SwiftUIAttributes.TrackingAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.SwiftUIAttributes.BaselineOffsetAttribute : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.__BedtimeTickLabelsLayout : SwiftUI._VariadicView_UnaryViewRoot {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -17655,63 +17651,42 @@ extension SwiftUI.Edge : Swift.Equatable {}
 extension SwiftUI.Edge : Swift.Hashable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Edge : Swift.RawRepresentable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Edge : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.AccessibilityAdjustmentDirection : Swift.Equatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.AccessibilityAdjustmentDirection : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._Rotation3DEffect : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._OverlayLayout : SwiftUI._VariadicView_UnaryViewRoot {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._OverlayLayout : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._OverlayLayout : SwiftUI._VariadicView_ViewRoot {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Edge.Set : Swift.Sendable {}
-#endif
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.HorizontalEdge : Swift.Equatable {}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.HorizontalEdge : Swift.Hashable {}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.HorizontalEdge : Swift.RawRepresentable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.HorizontalEdge : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.HorizontalEdge.Set : Swift.Sendable {}
-#endif
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.VerticalEdge : Swift.Equatable {}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.VerticalEdge : Swift.Hashable {}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.VerticalEdge : Swift.RawRepresentable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.VerticalEdge : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.VerticalEdge.Set : Swift.Sendable {}
-#endif
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.TimelineScheduleMode : Swift.Equatable {}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
@@ -17726,28 +17701,19 @@ extension SwiftUI.Font.Leading : Swift.Hashable {}
 extension SwiftUI._SafeAreaIgnoringLayout : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._SafeAreaIgnoringLayout : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._SafeAreaIgnoringLayout : Swift.Sendable {}
-#endif
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._SafeAreaRegionsIgnoringLayout : SwiftUI.Animatable {}
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._SafeAreaRegionsIgnoringLayout : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._SafeAreaRegionsIgnoringLayout : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 11.0, *)
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUI.NSApplicationDelegateAdaptor : Swift.Sendable {}
-#endif
 @available(macOS 10.15, *)
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
@@ -17765,11 +17731,8 @@ extension SwiftUI.Text.TruncationMode : Swift.Hashable {}
 extension SwiftUI.Text.Case : Swift.Equatable {}
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.Text.Case : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Axis.Set : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Image.ResizingMode : Swift.Equatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -17778,111 +17741,57 @@ extension SwiftUI.Image.ResizingMode : Swift.Hashable {}
 extension SwiftUI._BackdropEffect : SwiftUI.ViewModifier {}
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._BackdropEffectPlaceholder : SwiftUI.View {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._BackdropEffectPlaceholder : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Rectangle : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Ellipse : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Circle : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._VStackLayout : SwiftUI._VariadicView_UnaryViewRoot {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._VStackLayout : SwiftUI.Animatable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._VStackLayout : Swift.Sendable {}
-#endif
 extension SwiftUI._VStackLayout : SwiftUI._VariadicView_ViewRoot {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Image.Orientation : Swift.RawRepresentable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Image.Orientation : Swift.Sendable {}
-#endif
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._AccessibilityIgnoresInvertColorsViewModifier : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._AccessibilityIgnoresInvertColorsViewModifier : Swift.Sendable {}
-#endif
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._ForegroundLayerViewModifier : SwiftUI.Animatable {}
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._ForegroundLayerViewModifier : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._ForegroundLayerViewModifier : Swift.Sendable {}
-#endif
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._ForegroundLayerColorMatrixEffect : SwiftUI.ViewModifier {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI._ForegroundLayerColorMatrixEffect : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.GraphicsContext.ClipOptions : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.GraphicsContext.ShadowOptions : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.GraphicsContext.BlurOptions : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.GraphicsContext.FilterOptions : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.GraphicsContext.GradientOptions : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Rectangle._Inset : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Capsule._Inset : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Ellipse._Inset : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Circle._Inset : Swift.Sendable {}
-#endif
 @available(macOS 10.15, tvOS 13.0, *)
 @available(iOS, unavailable)
 @available(watchOS, unavailable)
@@ -17899,18 +17808,12 @@ extension SwiftUI._ColorMonochromeEffect._Resolved : SwiftUI.ViewModifier {}
 extension SwiftUI.__SimpleColumnLayout : SwiftUI._VariadicView_UnaryViewRoot {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.__SimpleColumnLayout : SwiftUI.Animatable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Alignment : Swift.Sendable {}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._ZStackLayout : SwiftUI._VariadicView_UnaryViewRoot {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._ZStackLayout : SwiftUI.Animatable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._ZStackLayout : Swift.Sendable {}
-#endif
 extension SwiftUI._ZStackLayout : SwiftUI._VariadicView_ViewRoot {}

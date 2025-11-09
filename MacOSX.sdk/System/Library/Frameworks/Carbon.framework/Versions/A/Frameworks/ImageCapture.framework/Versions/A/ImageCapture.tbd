@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           36495E0D-B610-3AA8-9D9B-B4BAAC77F278
+    value:           A7EA4A43-0CE9-3BEE-9680-875F40FDCE0D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E7719010-998C-3AAD-A0E4-42E874A8A360
+    value:           D378DF23-2D67-3220-ACD6-8BB4EC3A3864
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/ImageCapture.framework/Versions/A/ImageCapture'
 current-version: 5
 parent-umbrella:

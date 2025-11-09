@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7F36CB7B-DB8B-3348-BDBA-5068BA100EE5
+    value:           0F0267F5-A349-3258-BB72-A4840BFA391D
   - target:          x86_64-maccatalyst
-    value:           7F36CB7B-DB8B-3348-BDBA-5068BA100EE5
+    value:           0F0267F5-A349-3258-BB72-A4840BFA391D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A12F7812-BBD5-312F-B2F4-D71BF76FBB7E
+    value:           AA20AD3A-B499-300B-AF70-F0E78C541359
   - target:          arm64e-maccatalyst
-    value:           A12F7812-BBD5-312F-B2F4-D71BF76FBB7E
+    value:           AA20AD3A-B499-300B-AF70-F0E78C541359
 install-name:    '/System/Library/PrivateFrameworks/AudioSession.framework/Versions/A/AudioSession'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -81,6 +81,7 @@ exports:
                        _AVAudioSessionSilenceSecondaryAudioHintNotification, _AVAudioSessionSilenceSecondaryAudioHintTypeKey, 
                        _AVAudioSessionSourceContentBestAvailableContentTypeKey, _AVAudioSessionSourceContentCurrentlyPlayingChannelCountKey, 
                        _AVAudioSessionSourceContentCurrentlyPlayingFormatKey, _AVAudioSessionSourceContentCurrentlyPlayingIsEligibleForSpatializationKey, 
+                       _AVAudioSessionSourceContentCurrentlyPlayingIsSpatializedKey, 
                        _AVAudioSessionSpatialAudioEnabledKey, _AVAudioSessionSpatialPlaybackCapabilitiesChangedNotification ]
     objc-classes:    [ AVAudioAggregateStreamMapping, AVAudioAggregateStreamTopology, 
                        AVAudioDeviceBasedRouteTopology, AVAudioDoubleRange, AVAudioFloatRange, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1CF9E499-015A-3F04-AFC8-EBE9908D8EF6
+    value:           8D126EE4-2F33-3FB5-82D3-DFBFD74EC423
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5C2C5B5C-FE7D-3B70-955B-ADA607794768
+    value:           BCEB577E-9C19-3E8B-9146-65BA3588E4FF
 install-name:    '/usr/lib/libpartition2_dynamic.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

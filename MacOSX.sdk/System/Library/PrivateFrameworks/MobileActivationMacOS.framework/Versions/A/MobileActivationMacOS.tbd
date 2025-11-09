@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ADCF36C9-B776-3375-909D-F83663F9AEDD
+    value:           9CC0F0F5-BF9B-3F62-847D-EE384F22EF0A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           78817261-04A9-3357-86ED-57C0BF763E91
+    value:           2E6691D4-28BB-3044-A733-A47F4018154A
 install-name:    '/System/Library/PrivateFrameworks/MobileActivationMacOS.framework/Versions/A/MobileActivationMacOS'
 current-version: 0
 compatibility-version: 0
@@ -26,7 +26,7 @@ exports:
                        _kMANotificationUCRTOOBPerformed, _kMAOptionsActivationLockIntended, 
                        _kMAOptionsActivationResponseHeaders, _kMAOptionsDEPEnrolled, 
                        _kMAOptionsDeleteLocalPolicy, _kMAOptionsForceUCRTUpgrade, 
-                       _kMAOptionsIgnoreExistingDCRT, _kMAOptionsUserAdminCredentials, 
-                       _kMAOptionsValidateOIK, _kMAUCRTActivationLocked, _kMAUCRTActivationUnlocked, 
-                       _kMAUCRTUnavailable, _mobileactivationErrorHasDomainAndErrorCode ]
+                       _kMAOptionsIgnoreExistingDCRT, _kMAOptionsIgnoreExistingUCRT, 
+                       _kMAOptionsUserAdminCredentials, _kMAOptionsValidateOIK, _kMAUCRTActivationLocked, 
+                       _kMAUCRTActivationUnlocked, _kMAUCRTUnavailable, _mobileactivationErrorHasDomainAndErrorCode ]
 ...

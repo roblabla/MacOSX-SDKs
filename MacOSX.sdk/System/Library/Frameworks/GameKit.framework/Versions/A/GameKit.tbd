@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           106D503D-A0E5-3165-B539-FD5762BF66AD
+    value:           52FCCE0F-858F-39C9-8075-79B13952C397
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           381167B9-3766-3F7C-84A4-6410F26216D6
+    value:           B18F30F8-9405-367C-BF51-A9977F12EF97
 install-name:    '/System/Library/Frameworks/GameKit.framework/Versions/A/GameKit'
-current-version: 810.55.1
+current-version: 815.2.8
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/Frameworks/GameController.framework/Versions/A/GameController', 
@@ -27,17 +27,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AEB31E64-A9CA-3CD4-BD84-17CA6E3D48D8
+    value:           8ADEE51F-F3B1-318F-8DB9-A8FE55BB0F54
   - target:          x86_64-maccatalyst
-    value:           AEB31E64-A9CA-3CD4-BD84-17CA6E3D48D8
+    value:           8ADEE51F-F3B1-318F-8DB9-A8FE55BB0F54
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0A4B7D3E-C0A0-3CDD-B72D-754F6C6B4D21
+    value:           8395E440-DF6F-3D55-AE00-92DAB03CE5B0
   - target:          arm64e-maccatalyst
-    value:           0A4B7D3E-C0A0-3CDD-B72D-754F6C6B4D21
+    value:           8395E440-DF6F-3D55-AE00-92DAB03CE5B0
 install-name:    '/System/Library/PrivateFrameworks/GameCenterFoundation.framework/Versions/A/GameCenterFoundation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -134,28 +134,29 @@ exports:
                        _GKGameKitBundle, _GKGameKitTesterIdentifier, _GKGameLayerDashboardAchievements, 
                        _GKGameLayerDashboardAchievementsDeepLink, _GKGameLayerDashboardArcade, 
                        _GKGameLayerDashboardChallenges, _GKGameLayerDashboardChallengesDeepLink, 
-                       _GKGameLayerDashboardLeaderboardScores, _GKGameLayerDashboardLeaderboardSets, 
-                       _GKGameLayerDashboardLeaderboards, _GKGameLayerDashboardLeaderboardsDeepLink, 
-                       _GKGameLayerDashboardLocalPlayerProfile, _GKGameLayerDashboardMainScreen, 
-                       _GKGameLayerDashboardOccurrenceChangedToCurrent, _GKGameLayerDashboardOccurrenceChangedToPrevious, 
-                       _GKGameLayerDashboardPlayerScopeChangedToFriends, _GKGameLayerDashboardPlayerScopeChangedToGlobal, 
-                       _GKGameLayerDashboardPlayerScopeChangedToRecents, _GKGameLayerDashboardProfileDeepLink, 
-                       _GKGameLayerDashboardScoresDeepLink, _GKGameLayerDashboardScoresViewPlayerChallenged, 
-                       _GKGameLayerDashboardScoresViewPlayerProfileViewed, _GKGameLayerDashboardScoresViewScoreShared, 
-                       _GKGameLayerDashboardScoresViewScrolledToTop, _GKGameLayerDashboardTimeScopeChangedToAllTime, 
-                       _GKGameLayerDashboardTimeScopeChangedToToday, _GKGameLayerDashboardTimeScopeChangedToWeek, 
-                       _GKGameLayerDashboardTimeSpentOnAchievementsScreen, _GKGameLayerDashboardTimeSpentOnArcadeScreen, 
-                       _GKGameLayerDashboardTimeSpentOnChallengesScreen, _GKGameLayerDashboardTimeSpentOnLeaderboardsScreen, 
-                       _GKGameLayerDashboardTimeSpentOnMainScreen, _GKGameLayerDashboardTimeSpentOnPlayerProfileScreen, 
-                       _GKGameMetadataKey, _GKGamePlayerIDKey, _GKGameScopedIDPrefix, 
-                       _GKGameSessionErrorDomain, _GKGetApplicationDidEnterBackgroundNotificationName, 
-                       _GKGetApplicationStateForBundleID, _GKGetApplicationWillEnterForegroundNotificationName, 
-                       _GKGetApplicationWillTerminateNotificationName, _GKGetGamesPlayedDescriptorsWithinSecondsKey, 
-                       _GKGetGamesPlayedMetadataWithinSecondsKey, _GKGetLocalizedStringFromTableInBundle, 
-                       _GKGetProtocolVersionString, _GKGetSystemLocalizedStringFromTableInBundle, 
-                       _GKGlobalFriendListAccessAllowed, _GKGlobalFriendListAccessDenied, 
-                       _GKGlobalFriendListAccessKey, _GKGlobalFriendListAccessUndetermined, 
-                       _GKHTTPShouldUsePipelining, _GKHexStringFromBytes, _GKHideFriendRecommendationSendContactsButtonKey, 
+                       _GKGameLayerDashboardLeaderboardChicletTapped, _GKGameLayerDashboardLeaderboardScores, 
+                       _GKGameLayerDashboardLeaderboardSets, _GKGameLayerDashboardLeaderboards, 
+                       _GKGameLayerDashboardLeaderboardsDeepLink, _GKGameLayerDashboardLocalPlayerProfile, 
+                       _GKGameLayerDashboardMainScreen, _GKGameLayerDashboardOccurrenceChangedToCurrent, 
+                       _GKGameLayerDashboardOccurrenceChangedToPrevious, _GKGameLayerDashboardPlayerScopeChangedToFriends, 
+                       _GKGameLayerDashboardPlayerScopeChangedToGlobal, _GKGameLayerDashboardPlayerScopeChangedToRecents, 
+                       _GKGameLayerDashboardProfileDeepLink, _GKGameLayerDashboardScoresDeepLink, 
+                       _GKGameLayerDashboardScoresViewPlayerChallenged, _GKGameLayerDashboardScoresViewPlayerProfileViewed, 
+                       _GKGameLayerDashboardScoresViewScoreShared, _GKGameLayerDashboardScoresViewScrolledToTop, 
+                       _GKGameLayerDashboardTimeScopeChangedToAllTime, _GKGameLayerDashboardTimeScopeChangedToToday, 
+                       _GKGameLayerDashboardTimeScopeChangedToWeek, _GKGameLayerDashboardTimeSpentOnAchievementsScreen, 
+                       _GKGameLayerDashboardTimeSpentOnArcadeScreen, _GKGameLayerDashboardTimeSpentOnChallengesScreen, 
+                       _GKGameLayerDashboardTimeSpentOnLeaderboardsScreen, _GKGameLayerDashboardTimeSpentOnMainScreen, 
+                       _GKGameLayerDashboardTimeSpentOnPlayerProfileScreen, _GKGameMetadataKey, 
+                       _GKGamePlayerIDKey, _GKGameScopedIDPrefix, _GKGameSessionErrorDomain, 
+                       _GKGetApplicationDidEnterBackgroundNotificationName, _GKGetApplicationStateForBundleID, 
+                       _GKGetApplicationWillEnterForegroundNotificationName, _GKGetApplicationWillTerminateNotificationName, 
+                       _GKGetGamesPlayedDescriptorsWithinSecondsKey, _GKGetGamesPlayedMetadataWithinSecondsKey, 
+                       _GKGetLocalizedStringFromTableInBundle, _GKGetProtocolVersionString, 
+                       _GKGetSystemLocalizedStringFromTableInBundle, _GKGlobalFriendListAccessAllowed, 
+                       _GKGlobalFriendListAccessDenied, _GKGlobalFriendListAccessKey, 
+                       _GKGlobalFriendListAccessUndetermined, _GKHTTPShouldUsePipelining, 
+                       _GKHexStringFromBytes, _GKHideFriendRecommendationSendContactsButtonKey, 
                        _GKICETimeoutKey, _GKIDSLookupPushResponsePlayerID, _GKIDSLookupPushSenderCloudID, 
                        _GKIForgotURLKey, _GKIMDPersistenceIdentifier, _GKImageCachePathForSubdirectoryAndFilename, 
                        _GKImageCachePathForURL, _GKImageCacheRoot, _GKImageURLKeyForSize, 
@@ -216,21 +217,21 @@ exports:
                        _GKPlayerProfileNearbyPlayersButtonToggled, _GKPlayerProfilePrivacyAndSettingsClicked, 
                        _GKPlayerProfilePrivacyClicked, _GKPlayerProfileRecentlyPlayedWithClicked, 
                        _GKPlayerProfileSettingsClicked, _GKPlayerProfileSignInButtonClicked, 
-                       _GKPlayerProfileSignOutButtonClicked, _GKPlayerStatusKey, 
-                       _GKPlayersToInviteNotification, _GKPredicatePrefix, _GKPreferencesIdentifier, 
-                       _GKPrimaryCredentialDidChangeNotification, _GKPrivacySettingsAchievementsKey, 
-                       _GKPrivacySettingsFriendsKey, _GKPrivacySettingsGamesPlayedKey, 
-                       _GKPrivacySettingsKey, _GKProgramaticInviteTime, _GKPropertyListAchievementsCanReplayKey, 
-                       _GKPropertyListAchievementsEarnedDescriptionKey, _GKPropertyListAchievementsHiddenUntilSubmittedKey, 
-                       _GKPropertyListAchievementsIconImageNameKey, _GKPropertyListAchievementsIdentifierAliasesKey, 
-                       _GKPropertyListAchievementsIdentifierKey, _GKPropertyListAchievementsKey, 
-                       _GKPropertyListAchievementsMaximumPointsKey, _GKPropertyListAchievementsNameKey, 
-                       _GKPropertyListAchievementsUnearnedDescriptionKey, _GKPropertyListContainerIdentifierKey, 
-                       _GKPropertyListDashboardImagesKey, _GKPropertyListDashboardImagesLogoImageNameKey, 
-                       _GKPropertyListLeaderboardDefaultIdentifierKey, _GKPropertyListLeaderboardSetsIconImageNameKey, 
-                       _GKPropertyListLeaderboardSetsIdentifierAliasesKey, _GKPropertyListLeaderboardSetsIdentifierKey, 
-                       _GKPropertyListLeaderboardSetsKey, _GKPropertyListLeaderboardSetsLeaderboardsKey, 
-                       _GKPropertyListLeaderboardSetsLeaderboardsLeaderboardIdentifierKey, 
+                       _GKPlayerProfileSignOutButtonClicked, _GKPlayerProfileVisitFromOrigin, 
+                       _GKPlayerStatusKey, _GKPlayersToInviteNotification, _GKPredicatePrefix, 
+                       _GKPreferencesIdentifier, _GKPrimaryCredentialDidChangeNotification, 
+                       _GKPrivacySettingsAchievementsKey, _GKPrivacySettingsFriendsKey, 
+                       _GKPrivacySettingsGamesPlayedKey, _GKPrivacySettingsKey, _GKProgramaticInviteTime, 
+                       _GKPropertyListAchievementsCanReplayKey, _GKPropertyListAchievementsEarnedDescriptionKey, 
+                       _GKPropertyListAchievementsHiddenUntilSubmittedKey, _GKPropertyListAchievementsIconImageNameKey, 
+                       _GKPropertyListAchievementsIdentifierAliasesKey, _GKPropertyListAchievementsIdentifierKey, 
+                       _GKPropertyListAchievementsKey, _GKPropertyListAchievementsMaximumPointsKey, 
+                       _GKPropertyListAchievementsNameKey, _GKPropertyListAchievementsUnearnedDescriptionKey, 
+                       _GKPropertyListContainerIdentifierKey, _GKPropertyListDashboardImagesKey, 
+                       _GKPropertyListDashboardImagesLogoImageNameKey, _GKPropertyListLeaderboardDefaultIdentifierKey, 
+                       _GKPropertyListLeaderboardSetsIconImageNameKey, _GKPropertyListLeaderboardSetsIdentifierAliasesKey, 
+                       _GKPropertyListLeaderboardSetsIdentifierKey, _GKPropertyListLeaderboardSetsKey, 
+                       _GKPropertyListLeaderboardSetsLeaderboardsKey, _GKPropertyListLeaderboardSetsLeaderboardsLeaderboardIdentifierKey, 
                        _GKPropertyListLeaderboardSetsLeaderboardsNameKey, _GKPropertyListLeaderboardSetsNameKey, 
                        _GKPropertyListLeaderboardSetsPosterImageNameKey, _GKPropertyListLeaderboardsCombinesLeaderboardsKey, 
                        _GKPropertyListLeaderboardsCombinesLeaderboardsLeaderboardIdentifierKey, 
@@ -406,17 +407,17 @@ exports:
                        GKActivity, GKAnalyticsServiceInterface, GKAnalyticsServicePrivateInterface, 
                        GKAnonymousGuestPlayerInternal, GKAnonymousPlayerInternal, 
                        GKApplicationProxy, GKApplicationStateMonitor, GKApplicationWorkspace, 
-                       GKAuthenticateResponse, GKAuthenticationMachine, GKAutomatchPlayerInternal, 
-                       GKBasePlayer, GKBulletinServiceInterface, GKBulletinServicePrivateInterface, 
-                       GKCDFriendCodeDetail, GKCDGameAccessList, GKCDGameFriend, 
-                       GKCDGameFriendList, GKCDGameSettings, GKCache, GKCachePair, 
-                       GKChallenge, GKChallengeEventHandler, GKChallengeInternal, 
+                       GKAuthenticateCredential, GKAuthenticateResponse, GKAuthenticationMachine, 
+                       GKAutomatchPlayerInternal, GKBasePlayer, GKBulletinServiceInterface, 
+                       GKBulletinServicePrivateInterface, GKCDFriendCodeDetail, GKCDGameAccessList, 
+                       GKCDGameFriend, GKCDGameFriendList, GKCDGameSettings, GKCache, 
+                       GKCachePair, GKChallenge, GKChallengeEventHandler, GKChallengeInternal, 
                        GKChallengeServiceInterface, GKChallengeServicePrivateInterface, 
                        GKClientInterface, GKCloudPlayer, GKCompatibilityEntryInternal, 
                        GKConcernInternal, GKContentPropertyList, GKCustomTournamentManager, 
                        GKCustomTournamentRequest, GKCustomTournamentRequestInternal, 
-                       GKDaemonInterface, GKDaemonProxy, GKDevice, GKDigestVerification, 
-                       GKDispatchGroup, GKEventEmitter, GKFamiliarPlayerInternal, 
+                       GKDaemonInterface, GKDaemonProxy, GKDelayOperation, GKDevice, 
+                       GKDigestVerification, GKDispatchGroup, GKEventEmitter, GKFamiliarPlayerInternal, 
                        GKFriendCodeDetailInternal, GKFriendPlayerInternal, GKFriendRecommendationInternal, 
                        GKFriendRequestInternal, GKFriendRequestURLModel, GKFriendServiceInterface, 
                        GKFriendServicePrivateInterface, GKGame, GKGameDescriptor, 
@@ -438,7 +439,7 @@ exports:
                        GKMatchRequestInternal, GKMatchResponse, GKMatchmaker, GKMessageInboxEntryInternal, 
                        GKMultiplayerGroupInternal, GKMultiplayerServiceInterface, 
                        GKMultiplayerServicePrivateInterface, GKNearbyDevice, GKObserverTrampoline, 
-                       GKPlayer, GKPlayerCredential, GKPlayerCredentialController, 
+                       GKOperationQueue, GKPlayer, GKPlayerCredential, GKPlayerCredentialController, 
                        GKPlayerEmailInternal, GKPlayerInternal, GKPreferences, GKProfileServiceInterface, 
                        GKProfileServicePrivateInterface, GKReachability, GKRecentMatchInternal, 
                        GKRecoveryAttempter, GKRecurrenceRule, GKReporter, GKRequestIdentifier, 
@@ -493,11 +494,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C88AC845-C00F-3950-9E1E-3ADAB2F288A3
+    value:           D0D4F311-769D-3942-BF79-1601E40B630C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C1C50476-0BB5-32BB-A40F-6FA3B1903F52
+    value:           BA1FDA56-DDC6-370D-9F85-C86ED094F471
 install-name:    '/System/Library/PrivateFrameworks/GameCenterUI.framework/Versions/A/GameCenterUI'
 swift-abi-version: 7
 exports:
@@ -938,6 +939,7 @@ exports:
                        '_$s12GameCenterUI15AchievementCardC22backgroundEffectsGroupSSvg', 
                        '_$s12GameCenterUI15AchievementCardC22backgroundEffectsGroupSSvpMV', 
                        '_$s12GameCenterUI15AchievementCardC22backgroundEffectsGroupSSvs', 
+                       '_$s12GameCenterUI15AchievementCardC4menu3forSo6NSMenuCSgSo7NSEventC_tF', 
                        '_$s12GameCenterUI15AchievementCardC5frame7metrics5themeACSo6CGRectV_AA0dE6LayoutV7MetricsVAA17AchievementsThemeOSgtcfC', 
                        '_$s12GameCenterUI15AchievementCardC5frame7metrics5themeACSo6CGRectV_AA0dE6LayoutV7MetricsVAA17AchievementsThemeOSgtcfCTj', 
                        '_$s12GameCenterUI15AchievementCardC5frame7metrics5themeACSo6CGRectV_AA0dE6LayoutV7MetricsVAA17AchievementsThemeOSgtcfCTq', 
@@ -947,12 +949,12 @@ exports:
                        '_$s12GameCenterUI15AchievementCardC5frameACSo6CGRectV_tcfc', 
                        '_$s12GameCenterUI15AchievementCardC5modelAA0D0VSgvM', '_$s12GameCenterUI15AchievementCardC5modelAA0D0VSgvg', 
                        '_$s12GameCenterUI15AchievementCardC5modelAA0D0VSgvpMV', '_$s12GameCenterUI15AchievementCardC5modelAA0D0VSgvs', 
-                       '_$s12GameCenterUI15AchievementCardC6layoutyyF', '_$s12GameCenterUI15AchievementCardCACycfC', 
-                       '_$s12GameCenterUI15AchievementCardCACycfc', '_$s12GameCenterUI15AchievementCardCMa', 
-                       '_$s12GameCenterUI15AchievementCardCMn', '_$s12GameCenterUI15AchievementCardCMo', 
-                       '_$s12GameCenterUI15AchievementCardCMu', '_$s12GameCenterUI15AchievementCardCN', 
-                       '_$s12GameCenterUI15AchievementCardCfD', '_$s12GameCenterUI15AlignmentLayoutV03JetC00E0AAMc', 
-                       '_$s12GameCenterUI15AlignmentLayoutV03JetC010MeasurableAAMc', 
+                       '_$s12GameCenterUI15AchievementCardC6layoutyyF', '_$s12GameCenterUI15AchievementCardC7hitTestySo6NSViewCSgSo7CGPointVF', 
+                       '_$s12GameCenterUI15AchievementCardCACycfC', '_$s12GameCenterUI15AchievementCardCACycfc', 
+                       '_$s12GameCenterUI15AchievementCardCMa', '_$s12GameCenterUI15AchievementCardCMn', 
+                       '_$s12GameCenterUI15AchievementCardCMo', '_$s12GameCenterUI15AchievementCardCMu', 
+                       '_$s12GameCenterUI15AchievementCardCN', '_$s12GameCenterUI15AchievementCardCfD', 
+                       '_$s12GameCenterUI15AlignmentLayoutV03JetC00E0AAMc', '_$s12GameCenterUI15AlignmentLayoutV03JetC010MeasurableAAMc', 
                        '_$s12GameCenterUI15AlignmentLayoutV0D0O2eeoiySbAE_AEtFZ', 
                        '_$s12GameCenterUI15AlignmentLayoutV0D0O4hash4intoys6HasherVz_tF', 
                        '_$s12GameCenterUI15AlignmentLayoutV0D0O6centeryA2EmFWC', 
@@ -1670,7 +1672,6 @@ exports:
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV03JetC010MeasurableAAMc', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV12measurements7fitting2inSo14JUMeasurementsVSo6CGSizeV_03JetC00M16TraitEnvironment_ptF', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV13placeChildren10relativeTo2in03JetC00G4RectVSo6CGRectV_AG0M16TraitEnvironment_ptF', 
-                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV10avatarSize14titleTextSpace08subtitlelM0012friendStatuslM00oP19ImageTrailingMargin09buttonTopS007infoBaruS013layoutMarginsAESo6CGSizeV_03JetC012AnyDimension_pApQ_pApQ_pApQ_pApQ_pApQ_pSo12NSEdgeInsetsVtcfC', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV10avatarSizeSo6CGSizeVvM', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV10avatarSizeSo6CGSizeVvg', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV10avatarSizeSo6CGSizeVvpMV', 
@@ -1679,6 +1680,11 @@ exports:
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV13layoutMarginsSo12NSEdgeInsetsVvg', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV13layoutMarginsSo12NSEdgeInsetsVvpMV', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV13layoutMarginsSo12NSEdgeInsetsVvs', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV14avatarTopSpace0I4Size09titleTextK0012friendsTitlenK008subtitlenK00o8SubtitlenK0012friendStatusnK00sT19ImageTrailingMargin06buttonjW007infoBarjW013layoutMarginsAE12CoreGraphics7CGFloatV_So6CGSizeV03JetC012AnyDimension_pAvW_pAvW_pAvW_pAvW_pAvW_pAvW_pAvW_pSo12NSEdgeInsetsVtcfC', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV14avatarTopSpace12CoreGraphics7CGFloatVvM', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV14avatarTopSpace12CoreGraphics7CGFloatVvg', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV14avatarTopSpace12CoreGraphics7CGFloatVvpMV', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV14avatarTopSpace12CoreGraphics7CGFloatVvs', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV14titleTextSpace03JetC012AnyDimension_pvM', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV14titleTextSpace03JetC012AnyDimension_pvg', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV14titleTextSpace03JetC012AnyDimension_pvpMV', 
@@ -1699,6 +1705,14 @@ exports:
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV21friendStatusTextSpace03JetC012AnyDimension_pvg', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV21friendStatusTextSpace03JetC012AnyDimension_pvpMV', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV21friendStatusTextSpace03JetC012AnyDimension_pvs', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV21friendsTitleTextSpace03JetC012AnyDimension_pvM', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV21friendsTitleTextSpace03JetC012AnyDimension_pvg', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV21friendsTitleTextSpace03JetC012AnyDimension_pvpMV', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV21friendsTitleTextSpace03JetC012AnyDimension_pvs', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV24friendsSubtitleTextSpace03JetC012AnyDimension_pvM', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV24friendsSubtitleTextSpace03JetC012AnyDimension_pvg', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV24friendsSubtitleTextSpace03JetC012AnyDimension_pvpMV', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV24friendsSubtitleTextSpace03JetC012AnyDimension_pvs', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV31friendStatusImageTrailingMargin03JetC012AnyDimension_pvM', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV31friendStatusImageTrailingMargin03JetC012AnyDimension_pvg', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV31friendStatusImageTrailingMargin03JetC012AnyDimension_pvpMV', 
@@ -2807,17 +2821,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AB6E1C6A-2166-3ACC-8A5B-EFD68BFD81D8
+    value:           9F5CB750-7DAE-3A52-B67F-6FB50C5C2EFE
   - target:          x86_64-maccatalyst
-    value:           AB6E1C6A-2166-3ACC-8A5B-EFD68BFD81D8
+    value:           9F5CB750-7DAE-3A52-B67F-6FB50C5C2EFE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6FB9CE2D-C471-37DC-A564-FB26C8A436BA
+    value:           2F88EAA1-F002-328D-BE3F-B73585BFB4F0
   - target:          arm64e-maccatalyst
-    value:           6FB9CE2D-C471-37DC-A564-FB26C8A436BA
+    value:           2F88EAA1-F002-328D-BE3F-B73585BFB4F0
 install-name:    '/System/Library/PrivateFrameworks/GameCenterUICore.framework/Versions/A/GameCenterUICore'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

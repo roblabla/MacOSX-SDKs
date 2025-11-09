@@ -3,22 +3,22 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B59D2622-E0B9-3FFA-B266-CE67EC8BE00E
+    value:           CE254405-1664-3615-9DEE-07CFB2922090
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1D0500BB-CE0E-37AF-BD1B-83E146784059
+    value:           0BE59B64-F91E-374E-BE00-1A4A8206C2D4
 install-name:    '/System/Library/PrivateFrameworks/ConfigurationProfiles.framework/Versions/A/ConfigurationProfiles'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _BZip2Compress, _BZip2Decompress, _CPClearActivationInfo, 
                        _CPCloudConfigInfoDidFail, _CPCloudConfigInfoDidSucceed, _CPCloudConfigIsMDMv2Notification, 
                        _CPCloudDeviceEnabledBitsDidChange, _CPCreateProvisioningDictionaries, 
-                       _CPFetchActivationRecord, _CPGDI_AddDetailsRow, _CPGDI_AddDetailsRowWithStyle, 
-                       _CPGDI_GetLocStr, _CPGDI_GetOptLocStr, _CPGDI_RequestPayloadHidden, 
-                       _CPGDI_SetDetailsTitle, _CPGDI_SetPayloadLocStringsInfo, _CPGDI_SetSummary, 
-                       _CPGDI_SetSummaryNote, _CPGetActivationProfile, _CPGetActivationRecord, 
-                       _CPGetActivationRecordTrigger, _CPGetCachedActivationRecord, 
+                       _CPFetchActivationRecord, _CPForceActivationInfoToBeSet, _CPGDI_AddDetailsRow, 
+                       _CPGDI_AddDetailsRowWithStyle, _CPGDI_GetLocStr, _CPGDI_GetOptLocStr, 
+                       _CPGDI_RequestPayloadHidden, _CPGDI_SetDetailsTitle, _CPGDI_SetPayloadLocStringsInfo, 
+                       _CPGDI_SetSummary, _CPGDI_SetSummaryNote, _CPGetActivationProfile, 
+                       _CPGetActivationRecord, _CPGetActivationRecordTrigger, _CPGetCachedActivationRecord, 
                        _CPGetInstalledConfigurationInfo, _CPHasActivationRecord, 
                        _CPInstalledProfilesDidChangeNotification, _CPInstalledProfilesNeedsLogout, 
                        _CPInstalledProvisioningProfilesApplicationIdentifierKey, 
@@ -52,17 +52,18 @@ exports:
                        _CP_CloudConfigDeviceSetupBitsFileLocation, _CP_CloudConfigHasActivationRecordHintFlagFileLocation, 
                        _CP_CloudConfigNoActivationRecordHintFlagFileLocation, _CP_CloudConfigRecordFoundCacheFileLocation, 
                        _CP_CloudConfigRecordInstalledHintFlagFileLocation, _CP_CloudConfigRecordNotFoundHintFlagFileLocation, 
-                       _CP_CloudConfigRecordObtainedHintFlagFileLocation, _CP_CloudConfigSetupConfigurationFileLocation, 
-                       _CP_CloudConfigUSetupUserFileLocation, _CP_CloudConfigUserSkippedEnrollmentFlagFileLocation, 
-                       _CP_ConfigurationProfilesAreInstalled, _CP_ConfirmAlertQuery, 
-                       _CP_CreateBootstrapTokenWithACMContext, _CP_CreateBootstrapTokenWithAuthentication, 
-                       _CP_CreatePersistentStoreDirectory, _CP_DataToBootstrapToken, 
-                       _CP_DeleteBootstrapToken, _CP_DeviceIsEnrolledViaDEP, _CP_DeviceIsSupervised, 
-                       _CP_EnableRemoteDesktop, _CP_ExpandPayloadVariables, _CP_ExpandPayloadVariablesDidChange, 
-                       _CP_ExpandProfilePayloadVariables, _CP_FDEGetPRKEscrowRedirectionInfo, 
-                       _CP_FDEPRKEscrowRedirectionInfoForEFI, _CP_FDESavePRKForEscrow, 
-                       _CP_GetBootstrapToken, _CP_GetBootstrapTokenWithOptions, _CP_GetCertificateSignerSummary, 
-                       _CP_GetDeviceConfigurationBits, _CP_GetDeviceProfiles, _CP_GetKeychainItemReferencesFromPayload, 
+                       _CP_CloudConfigRecordObtainedHintFlagFileLocation, _CP_CloudConfigSetTemporaryDeviceBitLocation, 
+                       _CP_CloudConfigSetupConfigurationFileLocation, _CP_CloudConfigUSetupUserFileLocation, 
+                       _CP_CloudConfigUserSkippedEnrollmentFlagFileLocation, _CP_ConfigurationProfilesAreInstalled, 
+                       _CP_ConfirmAlertQuery, _CP_CreateBootstrapTokenWithACMContext, 
+                       _CP_CreateBootstrapTokenWithAuthentication, _CP_CreatePersistentStoreDirectory, 
+                       _CP_DataToBootstrapToken, _CP_DeleteBootstrapToken, _CP_DeviceIsEnrolledViaDEP, 
+                       _CP_DeviceIsSupervised, _CP_EnableRemoteDesktop, _CP_ExpandPayloadVariables, 
+                       _CP_ExpandPayloadVariablesDidChange, _CP_ExpandProfilePayloadVariables, 
+                       _CP_FDEGetPRKEscrowRedirectionInfo, _CP_FDEPRKEscrowRedirectionInfoForEFI, 
+                       _CP_FDESavePRKForEscrow, _CP_GetBootstrapToken, _CP_GetBootstrapTokenWithOptions, 
+                       _CP_GetCertificateSignerSummary, _CP_GetDeviceConfigurationBits, 
+                       _CP_GetDeviceProfiles, _CP_GetFirmwareStatus, _CP_GetKeychainItemReferencesFromPayload, 
                        _CP_GetManagedClientKeyPathRulesForFilteringPayload, _CP_GetManagedPreferencesFromPayload, 
                        _CP_GetManagementIdentityPersistRef, _CP_GetManagementStatus, 
                        _CP_GetPathForAuditToken, _CP_GetPathForPID, _CP_GetSharedWebCredentialsAssociatedDomains, 
@@ -85,8 +86,8 @@ exports:
                        _CP_ManagedAppsSigningInfoKeyDesignatedRequirement, _CP_ManagedClientLoginAgentCheckin, 
                        _CP_ManagedPreferencesInfo, _CP_ManagedPreferencesInfoKeyMDMOrgInfo, 
                        _CP_ManagedPreferencesInfoKeyManagedByMDM, _CP_ManagedPreferencesInfoKeyManagingProfiles, 
-                       _CP_PasscodePoliciesAreInstalledHintFlagFileLocation, _CP_PreLoginCheckIn, 
-                       _CP_ProfileInstalledFromScreenTime, _CP_ProfileInstalledFromUserApprovedManagementService, 
+                       _CP_MayHaveManagedComputerSettings, _CP_PasscodePoliciesAreInstalledHintFlagFileLocation, 
+                       _CP_PreLoginCheckIn, _CP_ProfileInstalledFromScreenTime, _CP_ProfileInstalledFromUserApprovedManagementService, 
                        _CP_ProfileInstalledFromUserEnrollmentMDM, _CP_ProfileSpecKeyIsDeviceProfile, 
                        _CP_ProfileSpecKeyProfileIdentifier, _CP_ProfilesAreInstalledHintFlagFileLocation, 
                        _CP_ReadSecureSettingsForDevice, _CP_ReadSecureSettingsForUser, 

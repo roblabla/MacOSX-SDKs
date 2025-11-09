@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           97B81BA5-555F-3545-A950-AD610764181D
+    value:           D7B29BD0-6353-3E24-8A51-D544DE9412E0
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           01C981B5-14E4-34CE-8C1F-09F05F21B8AD
+    value:           3B75A47A-9C41-3FAF-A58F-93815A59935F
 install-name:    '/System/iOSSupport/System/Library/Frameworks/Twitter.framework/Versions/A/Twitter'
 current-version: 164
 exports:

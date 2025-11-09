@@ -26,7 +26,7 @@ NW_ASSUME_NONNULL_BEGIN
  * @typedef nw_protocol_definition_t
  * @abstract
  *		A Network Protocol Definition is a handle that represents a protocol implementation
- *		that can be added into a protocol stack, configured, and used to tranmit data and
+ *		that can be added into a protocol stack, configured, and used to transmit data and
  *		metadata. For example, a protocol definition for TCP represents an implementation of
  *		TCP that can be used for a connection.
  *

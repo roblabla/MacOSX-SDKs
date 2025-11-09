@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7BFE7A08-E442-309E-BB77-04D507CF477A
+    value:           059823F6-10B1-3A55-9E83-D1C730AF651F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F354E412-608D-30BC-9101-138052D9F98B
+    value:           D8622A36-47AE-3B58-9A15-363125B5575E
 install-name:    '/System/Library/PrivateFrameworks/CoreHapticsTools.framework/Versions/A/CoreHapticsTools'
 swift-abi-version: 7
 exports:

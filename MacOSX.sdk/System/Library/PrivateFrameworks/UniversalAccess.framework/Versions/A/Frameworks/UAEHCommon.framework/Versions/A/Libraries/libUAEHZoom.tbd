@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6402EBBF-D0A3-31F9-967A-08AD006861FB
+    value:           BF1C8F6C-ECDA-3CC7-87AC-1F067C1185D0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9589AE97-6E75-3103-9D1A-7A834C61222E
+    value:           39E8BE88-C489-39E8-B104-4135BE0DDA67
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Frameworks/UAEHCommon.framework/Versions/A/Libraries/libUAEHZoom.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -3,9 +3,9 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           264152F6-B94B-3BED-AE02-5AC985FB96E0
+    value:           4FCBDDBA-3CDC-3496-A6E7-88AB96B631D4
   - target:          x86_64-maccatalyst
-    value:           264152F6-B94B-3BED-AE02-5AC985FB96E0
+    value:           4FCBDDBA-3CDC-3496-A6E7-88AB96B631D4
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/ImageFormats/float_rgx.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

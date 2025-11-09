@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9125C201-6BE8-314D-93A3-9DFA95AD2C19
+    value:           0F489840-937A-322E-8B1A-B5037DEC04E7
   - target:          x86_64-maccatalyst
-    value:           9125C201-6BE8-314D-93A3-9DFA95AD2C19
+    value:           0F489840-937A-322E-8B1A-B5037DEC04E7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BAE171F2-1BB1-30FF-AF89-2152C834452B
+    value:           E9679F90-CD6F-3590-A763-624DA7D23C74
   - target:          arm64e-maccatalyst
-    value:           BAE171F2-1BB1-30FF-AF89-2152C834452B
+    value:           E9679F90-CD6F-3590-A763-624DA7D23C74
 install-name:    '/System/Library/PrivateFrameworks/CallHistory.framework/Versions/A/CallHistory'
 current-version: 2
 exports:
@@ -62,15 +62,15 @@ exports:
                        _kTmpDBLocationKey, _maybeAppendStringWithSeparator, _maybeLogVersionInfo, 
                        _notifyClientsOfEvent ]
     objc-classes:    [ CHCallInteractionManager, CHConfiguration, CHConfigurationAggregator, 
-                       CHDelegateController, CHDelegateManager, CHDeviceDataSource, 
-                       CHDeviceObserver, CHHandle, CHLogger, CHManager, CHMigrator, 
-                       CHPhoneNumber, CHPluginHelper, CHRecentCall, CHSynchronizable, 
-                       CHSynchronizedLoggable, CHTransaction, CHUserConfiguration, 
-                       CallDBManager, CallDBManagerServer, CallHistoryDBClientHandle, 
+                       CHContactProvider, CHDelegateController, CHDelegateManager, 
+                       CHDeviceDataSource, CHDeviceObserver, CHHandle, CHLogServer, 
+                       CHLogger, CHManager, CHMigrator, CHPhoneNumber, CHPluginHelper, 
+                       CHRecentCall, CHSynchronizable, CHSynchronizedLoggable, CHTransaction, 
+                       CHUserConfiguration, CallDBManager, CallDBManagerServer, CallHistoryDBClientHandle, 
                        CallHistoryDBHandle, DBManager, DBMigrationResult, DeserializedTransaction ]
-    objc-ivars:      [ CHLogger._logHandle, CallHistoryDBClientHandle._observerCallTimersRef, 
-                       CallHistoryDBClientHandle.dbStoreHandle, CallHistoryDBHandle._dataStoreAddedRef, 
-                       CallHistoryDBHandle._moveCallRecordsFromTempStoreRef, CallHistoryDBHandle._observerCallDBPropRef, 
-                       CallHistoryDBHandle._observerCallRecordRef, CallHistoryDBHandle.callDBManager, 
-                       CallHistoryDBHandle.fCallDBPropertiesContext, CallHistoryDBHandle.fCallRecordContext ]
+    objc-ivars:      [ CallHistoryDBClientHandle._observerCallTimersRef, CallHistoryDBClientHandle.dbStoreHandle, 
+                       CallHistoryDBHandle._dataStoreAddedRef, CallHistoryDBHandle._moveCallRecordsFromTempStoreRef, 
+                       CallHistoryDBHandle._observerCallDBPropRef, CallHistoryDBHandle._observerCallRecordRef, 
+                       CallHistoryDBHandle.callDBManager, CallHistoryDBHandle.fCallDBPropertiesContext, 
+                       CallHistoryDBHandle.fCallRecordContext ]
 ...

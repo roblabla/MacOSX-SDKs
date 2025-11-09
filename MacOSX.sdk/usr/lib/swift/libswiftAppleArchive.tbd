@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C860AFE5-51FD-30BB-82C5-8432F0546BEA
+    value:           41E1F5E3-1A2A-36EC-A7B5-6452153CFEC1
   - target:          x86_64-maccatalyst
-    value:           C860AFE5-51FD-30BB-82C5-8432F0546BEA
+    value:           41E1F5E3-1A2A-36EC-A7B5-6452153CFEC1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           63E35499-05CC-3F27-AC84-35427633B9C0
+    value:           72713E62-5A4D-3796-845E-F276719BFB1A
   - target:          arm64e-maccatalyst
-    value:           63E35499-05CC-3F27-AC84-35427633B9C0
+    value:           72713E62-5A4D-3796-845E-F276719BFB1A
 install-name:    '/usr/lib/swift/libswiftAppleArchive.dylib'
-current-version: 277
+current-version: 279.60.2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '_$s12AppleArchive0B10ByteStreamC010decryptionD011readingFrom17encryptionContext5flags11threadCountACSgAC_AA0b10EncryptionI0CAA0B5FlagsVSitFZ', 
                        '_$s12AppleArchive0B10ByteStreamC010encryptionD011appendingTo0E7Context5flags11threadCountACSgAC_AA0b10EncryptionH0CAA0B5FlagsVSitFZ', 
                        '_$s12AppleArchive0B10ByteStreamC010encryptionD09writingTo0E7Context5flags11threadCountACSgAC_AA0b10EncryptionH0CAA0B5FlagsVSitFZ', 
@@ -315,13 +315,13 @@ exports:
                        '_$s12AppleArchive0B6HeaderC11FieldKeySetC10startIndexSivpMV', 
                        '_$s12AppleArchive0B6HeaderC11FieldKeySetC11descriptionSSvg', 
                        '_$s12AppleArchive0B6HeaderC11FieldKeySetC11descriptionSSvpMV', 
-                       '_$s12AppleArchive0B6HeaderC11FieldKeySetC12intersectionyA2EnF', 
-                       '_$s12AppleArchive0B6HeaderC11FieldKeySetC16formIntersectionyyAEnF', 
+                       '_$s12AppleArchive0B6HeaderC11FieldKeySetC12intersectionyA2EF', 
+                       '_$s12AppleArchive0B6HeaderC11FieldKeySetC16formIntersectionyyAEF', 
                        '_$s12AppleArchive0B6HeaderC11FieldKeySetC18defaultForManifestAEvgZ', 
                        '_$s12AppleArchive0B6HeaderC11FieldKeySetC19symmetricDifferenceyA2EnF', 
                        '_$s12AppleArchive0B6HeaderC11FieldKeySetC23formSymmetricDifferenceyyAEnF', 
                        '_$s12AppleArchive0B6HeaderC11FieldKeySetC2eeoiySbAE_AEtFZ', 
-                       '_$s12AppleArchive0B6HeaderC11FieldKeySetC5unionyA2EnF', '_$s12AppleArchive0B6HeaderC11FieldKeySetC6insertySb8inserted_AC0dE0V17memberAfterInserttAInF', 
+                       '_$s12AppleArchive0B6HeaderC11FieldKeySetC5unionyA2EF', '_$s12AppleArchive0B6HeaderC11FieldKeySetC6insertySb8inserted_AC0dE0V17memberAfterInserttAInF', 
                        '_$s12AppleArchive0B6HeaderC11FieldKeySetC6object5ownedAEs13OpaquePointerV_SbtcfC', 
                        '_$s12AppleArchive0B6HeaderC11FieldKeySetC6object5ownedAEs13OpaquePointerV_Sbtcfc', 
                        '_$s12AppleArchive0B6HeaderC11FieldKeySetC6removeyAC0dE0VSgAHF', 
@@ -334,7 +334,7 @@ exports:
                        '_$s12AppleArchive0B6HeaderC11FieldKeySetC8containsySbAC0dE0VF', 
                        '_$s12AppleArchive0B6HeaderC11FieldKeySetC8endIndexSivg', 
                        '_$s12AppleArchive0B6HeaderC11FieldKeySetC8endIndexSivpMV', 
-                       '_$s12AppleArchive0B6HeaderC11FieldKeySetC9formUnionyyAEnF', 
+                       '_$s12AppleArchive0B6HeaderC11FieldKeySetC9formUnionyyAEF', 
                        '_$s12AppleArchive0B6HeaderC11FieldKeySetCAEycfC', '_$s12AppleArchive0B6HeaderC11FieldKeySetCAEycfCTj', 
                        '_$s12AppleArchive0B6HeaderC11FieldKeySetCAEycfCTq', '_$s12AppleArchive0B6HeaderC11FieldKeySetCAEycfc', 
                        '_$s12AppleArchive0B6HeaderC11FieldKeySetCMa', '_$s12AppleArchive0B6HeaderC11FieldKeySetCMm', 

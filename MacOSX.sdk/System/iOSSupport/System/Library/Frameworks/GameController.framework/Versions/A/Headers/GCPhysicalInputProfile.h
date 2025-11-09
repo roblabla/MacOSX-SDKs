@@ -45,6 +45,13 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @property (atomic, readonly) NSTimeInterval lastEventTimestamp API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /**
+ Whether the user has remapped their physical input controls for this profile at the system level.
+ 
+ @discussion On iOS and tvOS, users can remap their game controller inputs in Settings.
+ */
+@property (nonatomic, readonly) BOOL hasRemappedElements API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+
+/**
  The following properties allow for runtime lookup of any input element on a profile, when provided with a valid alias.
 
  @example extendedGamepad.elements["Button A"] == extendedGamepad.buttonA // YES
@@ -93,6 +100,34 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
  @see GCController.snapshot
  */
 - (void)setStateFromPhysicalInput:(GCPhysicalInputProfile *)physicalInput API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
+/**
+ Returns the primary alias of the GCControllerElement that a given physical input maps to.
+ 
+ @discussion If the user were to map a physical press of the A button of their game controller to the B button, then
+    -[GCPhysicalInputProfile  mappedElementAliasForPhysicalInputName: GCInputButtonA] would return GCInputButtonB.
+    Note that mappings can change anytime your app is backgrounded, so make sure you update any relevant visuals when
+    returning to foreground.
+ 
+ @param inputName A GCInput string corresponding to the physical button you want the mapped element alias for.
+ 
+ @returns A GCInput string corresponding to the primary alias of the GCControllerElement that a given physical button maps to, or nil if there is no mapping.
+ */
+- (NSString *)mappedElementAliasForPhysicalInputName:(NSString *)inputName API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+
+/**
+ Returns a set of GCInput strings corresponding to physical inputs that are mapped to a given GCControllerElement.
+ 
+ @discussion If the user mapped the physical press of the A button, the B button, and the X button to the B button, then
+    -[GCPhysicalInputProfile mappedPhysicalInputNamesForElementAlias: GCInputButtonB] would return  [GCInputButtonA, GCInputButtonB, GCInputButtonX].
+    Note that mappings can change anytime your app is backgrounded, so make sure you update any relevant visuals when
+    returning to foreground.
+ 
+ @param elementAlias A GCInput string corresponding to an alias of the GCControllerElement you want the physical buttons for.
+ 
+ @returns A set of GCInput strings corresponding to physical inputs that are mapped to a given GCControllerElement, or an empty set if there are no mappings.
+ */
+- (NSSet<NSString *> *)mappedPhysicalInputNamesForElementAlias:(NSString *)elementAlias API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
 @end
 

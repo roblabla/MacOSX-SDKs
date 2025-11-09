@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9AB4762B-96E6-3E1E-9FF4-F60108BDD77D
+    value:           F9B32B73-D2B2-3C6A-9C96-9D5CA9B7EBF5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F37208AA-99C9-3119-AE94-48B8C423B76E
+    value:           299D2B0A-1940-33A8-AB2C-8DC1AE947C49
 install-name:    '/System/Library/PrivateFrameworks/RemoteXPC.framework/Versions/A/RemoteXPC'
-current-version: 2235.0.32
+current-version: 2235.60.3
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _XPC_REMOTE_CONNECTION_PROTOCOL_VERSION_CURRENT, __xpc_type_remote_connection, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5D73E0DC-044F-3174-A7F5-7BCA1F36C03B
+    value:           8223B187-56D0-3378-B80C-7A4409B8A908
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6924C29B-6BB7-3FF5-8CEF-A5641DFA9059
+    value:           C790CF65-9B51-313D-9505-2CE38C33BAD2
 install-name:    '/System/Library/PrivateFrameworks/JetUI.framework/Versions/A/JetUI'
 swift-abi-version: 7
 allowable-clients:

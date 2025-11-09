@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           59C5FF05-7300-3E8D-B03F-9D7A4AF69BA6
+    value:           1CDBCCC1-0019-3FFA-8096-49C71C7936FB
   - target:          x86_64-maccatalyst
-    value:           59C5FF05-7300-3E8D-B03F-9D7A4AF69BA6
+    value:           1CDBCCC1-0019-3FFA-8096-49C71C7936FB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CC98FCD7-104B-3CE9-85E1-5C2F9F06D4FF
+    value:           BA158D33-9DBD-3C23-B114-05DB53FD1B29
   - target:          arm64e-maccatalyst
-    value:           CC98FCD7-104B-3CE9-85E1-5C2F9F06D4FF
+    value:           BA158D33-9DBD-3C23-B114-05DB53FD1B29
 install-name:    '/System/Library/PrivateFrameworks/PersonalizationPortraitInternals.framework/Versions/A/PersonalizationPortraitInternals'
-current-version: 1150
+current-version: 1153.10
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -166,7 +166,7 @@ exports:
                        PPEventsAggregator, PPEvictingMinPriorityQueue, PPExtractionContext, 
                        PPFeatureRedactor, PPFeatureRedactorGuardedData, PPFeaturizerModel, 
                        PPFeedbackExclusionProvider, PPFeedbackStorage, PPFeedbackUtils, 
-                       PPFixup49995922Tuple, PPFlightAirport, PPFlightEventsAggregator, 
+                       PPFileErrorCode, PPFixup49995922Tuple, PPFlightAirport, PPFlightEventsAggregator, 
                        PPHealthKitImporter, PPInternalContactNameRecord, PPInternalFeedback, 
                        PPInternalRequestHandler, PPInternalServerDelegate, PPKVOObserver, 
                        PPLabelMatcher, PPLabelStrengthSets, PPLocalConnectionsStore, 
@@ -262,10 +262,10 @@ exports:
                        PPConfigurationGuardedData.locationDecayHalfLifeSeconds, PPConfigurationGuardedData.locationFeedbackUsesCoreML, 
                        PPConfigurationGuardedData.locationScoringUsesCoreML, PPConfigurationGuardedData.locationScoringUsesHybrid, 
                        PPConfigurationGuardedData.mapsSearchQueryFromDateInterval, 
-                       PPConfigurationGuardedData.mapsSearchQueryLimit, PPConfigurationGuardedData.maxItemsInFeatureDictionary, 
-                       PPConfigurationGuardedData.maxNEExtractions, PPConfigurationGuardedData.maxNumberMappedTopics, 
-                       PPConfigurationGuardedData.maxNumberNamedEntities, PPConfigurationGuardedData.maxRelevantHighlightContacts, 
-                       PPConfigurationGuardedData.musicDataCollectionAMPBundleIds, 
+                       PPConfigurationGuardedData.mapsSearchQueryLimit, PPConfigurationGuardedData.maxEmailHarvestingEligiblityInterval, 
+                       PPConfigurationGuardedData.maxItemsInFeatureDictionary, PPConfigurationGuardedData.maxNEExtractions, 
+                       PPConfigurationGuardedData.maxNumberMappedTopics, PPConfigurationGuardedData.maxNumberNamedEntities, 
+                       PPConfigurationGuardedData.maxRelevantHighlightContacts, PPConfigurationGuardedData.musicDataCollectionAMPBundleIds, 
                        PPConfigurationGuardedData.musicDataCollectionCollectNonAMPNowPlaying, 
                        PPConfigurationGuardedData.musicDataCollectionMaximumRecordsPerType, 
                        PPConfigurationGuardedData.musicDataCollectionSamplingRateForAMP, 
@@ -322,7 +322,8 @@ exports:
                        PPEventStorageGuardedData._calendarIdentifiers, PPEventStorageGuardedData._ekStorePurger, 
                        PPEventStorageGuardedData._invisibleCalendarIdentifiers, PPFeatureRedactorGuardedData._allowedFeatures, 
                        PPFeatureRedactorGuardedData._shouldRedactFeatures, PPFeatureRedactorGuardedData._shouldTranslateAllowedFeatures, 
-                       PPLocalNamedEntityStoreGuardedData._filter, PPLocalNamedEntityStoreGuardedData._pendingNamedEntityChangeNotification, 
+                       PPLocalNamedEntityStoreGuardedData._filter, PPLocalNamedEntityStoreGuardedData._mapsSearchQueryResult, 
+                       PPLocalNamedEntityStoreGuardedData._pendingNamedEntityChangeNotification, 
                        PPLocalTopicStoreGuardedData._pendingTopicChangeNotification, 
                        PPM2AttributedFeedback._activeTreatments, PPM2AttributedFeedback._algorithm, 
                        PPM2AttributedFeedback._category, PPM2AttributedFeedback._clientId, 

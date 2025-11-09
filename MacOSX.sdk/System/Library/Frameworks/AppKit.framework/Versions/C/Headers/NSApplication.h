@@ -83,6 +83,17 @@ static const NSAppKitVersion NSAppKitVersionNumber10_14_3 = 1671.3;
 static const NSAppKitVersion NSAppKitVersionNumber10_14_4 = 1671.4;
 static const NSAppKitVersion NSAppKitVersionNumber10_14_5 = 1671.5;
 static const NSAppKitVersion NSAppKitVersionNumber10_15 = 1894;
+static const NSAppKitVersion NSAppKitVersionNumber10_15_1 = 1894.1;
+static const NSAppKitVersion NSAppKitVersionNumber10_15_2 = 1894.2;
+static const NSAppKitVersion NSAppKitVersionNumber10_15_3 = 1894.3;
+static const NSAppKitVersion NSAppKitVersionNumber10_15_4 = 1894.4;
+static const NSAppKitVersion NSAppKitVersionNumber10_15_5 = 1894.5;
+static const NSAppKitVersion NSAppKitVersionNumber10_15_6 = 1894.6;
+static const NSAppKitVersion NSAppKitVersionNumber11_0 = 2022;
+static const NSAppKitVersion NSAppKitVersionNumber11_1 = 2022.2;
+static const NSAppKitVersion NSAppKitVersionNumber11_2 = 2022.3;
+static const NSAppKitVersion NSAppKitVersionNumber11_3 = 2022.4;
+static const NSAppKitVersion NSAppKitVersionNumber11_4 = 2022.5;
 
 /* Modes passed to NSRunLoop */
 APPKIT_EXTERN NSRunLoopMode NSModalPanelRunLoopMode;

@@ -196,8 +196,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // A controller that defines the presentation context can also specify the modal transition style if this property is true.
 @property(nonatomic,assign) BOOL providesPresentationContextTransitionStyle API_AVAILABLE(ios(5.0));
 
-/// If YES, when this view controller becomes visible and focusable, focus will be automatically restored to the item that was last focused. For example, when an item in this view controller is focused, and then another view controller is presented and dismissed, the original item will become focused again. Defaults to YES.
-/// @note On tvOS, this value for UISearchController is set to NO if the controller, or UISearchContainerViewController containing it, is embedded in UITabBarController.
+// If YES, when this view controller becomes visible and focusable, focus will be automatically restored to the item that was last focused. For example, when an item in this view controller is focused, and then another view controller is presented and dismissed, the original item will become focused again. Defaults to YES.
 @property (nonatomic) BOOL restoresFocusAfterTransition API_AVAILABLE(ios(10.0));
 
 /// The identifier of the focus group that this view controller belongs to. If this is nil, the view controller inherits the focus group of its parent focus environment.

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           85734783-DD70-3FF1-AB27-996B699813EE
+    value:           995E7B0D-6884-372E-9E0B-39B0D50FEDC7
   - target:          x86_64-maccatalyst
-    value:           85734783-DD70-3FF1-AB27-996B699813EE
+    value:           995E7B0D-6884-372E-9E0B-39B0D50FEDC7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0BD7BC0F-0A96-388D-A48A-C1FDF56AC04C
+    value:           AD25B8C9-9E28-3BAA-9D82-0ADB464949B8
   - target:          arm64e-maccatalyst
-    value:           0BD7BC0F-0A96-388D-A48A-C1FDF56AC04C
+    value:           AD25B8C9-9E28-3BAA-9D82-0ADB464949B8
 install-name:    '/System/Library/PrivateFrameworks/BookLibraryCore.framework/Versions/A/BookLibraryCore'
-current-version: 1591
+current-version: 1632
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -92,7 +92,8 @@ exports:
                        _BLDownloadQueuePropertyStoreItemIdentifier, _BLDownloadQueuePropertyStorePlaylistIdentifier, 
                        _BLDownloadQueuePropertySubTitle, _BLDownloadQueuePropertyThumbnailImageURL, 
                        _BLDownloadQueuePropertyTitle, _BLDownloadQueuePurchaseFailedNotification, 
-                       _BLDownloadQueuePurchaseSucceededNotification, _BLDownloadSupportedDownloadKinds, 
+                       _BLDownloadQueuePurchaseSucceededNotification, _BLDownloadQueueServerStarted, 
+                       _BLDownloadQueueServiceProgressMonitorLog, _BLDownloadSupportedDownloadKinds, 
                        _BLError, _BLErrorDomain, _BLErrorIsEqual, _BLErrorUserInfoKeyHTTPResponseCode, 
                        _BLErrorUserInfoKeyMessage, _BLErrorUserInfoKeyTitle, _BLErrorUserInfoKeyUnderlyingErrorDescription, 
                        _BLErrorWithDomain, _BLErrorWithUserInfo, _BLFamilyLog, _BLGetItemIdentifierFromValue, 
@@ -141,17 +142,18 @@ exports:
                        BLDAAPItemsRequest, BLDAAPLoginRequest, BLDAAPServerInfoRequest, 
                        BLDAAPURLRequest, BLDAAPUpdateRequest, BLDownload, BLDownloadManifestRequest, 
                        BLDownloadManifestResponse, BLDownloadMetadata, BLDownloadQueueNonUI, 
-                       BLDownloadStatus, BLEduCloudContainer, BLFamilyCircleController, 
-                       BLHLSAudiobookFetcher, BLHLSGroup, BLHLSKey, BLHLSMap, BLHLSMedia, 
-                       BLHLSPlaylist, BLHLSPlaylistState, BLHLSSegment, BLHLSStreamInf, 
-                       BLItemArtworkImage, BLItemContentRating, BLItemImageCollection, 
-                       BLJaliscoDAAPClient, BLJaliscoItem, BLJaliscoReadOnlyDAAPClient, 
-                       BLJaliscoServerDatabase, BLJaliscoServerInfo, BLJaliscoServerItem, 
-                       BLJaliscoServerSource, BLJaliscoVersion, BLLibrary, BLLibraryUtility, 
-                       BLM3U8Parser, BLMetrics, BLPurchaseDAAPItem, BLPurchaseDAAPParser, 
-                       BLPurchaseDAAPServer, BLPurchaseRequest, BLPurchaseResponse, 
-                       BLPurchaseResponseItem, BLRequest, BLServiceInterface, BLServiceProxy, 
-                       BLUIHostServiceNonUI, BLURLRequestEncoder, BLUtilities, IMLibraryPlist ]
+                       BLDownloadQueueServerProgressObserver, BLDownloadStatus, BLEduCloudContainer, 
+                       BLFamilyCircleController, BLHLSAudiobookFetcher, BLHLSGroup, 
+                       BLHLSKey, BLHLSMap, BLHLSMedia, BLHLSPlaylist, BLHLSPlaylistState, 
+                       BLHLSSegment, BLHLSStreamInf, BLItemArtworkImage, BLItemContentRating, 
+                       BLItemImageCollection, BLJaliscoDAAPClient, BLJaliscoItem, 
+                       BLJaliscoReadOnlyDAAPClient, BLJaliscoServerDatabase, BLJaliscoServerInfo, 
+                       BLJaliscoServerItem, BLJaliscoServerSource, BLJaliscoVersion, 
+                       BLLibrary, BLLibraryUtility, BLM3U8Parser, BLMetrics, BLPurchaseDAAPItem, 
+                       BLPurchaseDAAPParser, BLPurchaseDAAPServer, BLPurchaseRequest, 
+                       BLPurchaseResponse, BLPurchaseResponseItem, BLRequest, BLServiceInterface, 
+                       BLServiceProxy, BLServiceProxyConnectionFactory, BLUIHostServiceNonUI, 
+                       BLURLRequestEncoder, BLUtilities, IMLibraryPlist ]
     objc-ivars:      [ BLDAAPBuffer._data, BLPurchaseDAAPItem._containerItemID, BLPurchaseDAAPItem._downloadStatus, 
                        BLPurchaseDAAPItem._itemFlags, BLPurchaseDAAPItem._itemID, 
                        BLPurchaseDAAPItem._name, BLPurchaseDAAPItem._songalbum, BLPurchaseDAAPItem._songalbumartist, 

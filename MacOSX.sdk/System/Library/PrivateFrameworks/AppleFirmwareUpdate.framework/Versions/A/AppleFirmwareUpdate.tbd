@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           881CF36B-FD7F-360C-8D42-81E512BBA41D
+    value:           EFCE32FD-6507-3E45-8BBD-29C4CC9DE02B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5D5BBAE5-A8FF-3176-A13F-122C57471093
+    value:           2CAD02DC-5A97-3955-932D-29203ED05CAD
 install-name:    '/System/Library/PrivateFrameworks/AppleFirmwareUpdate.framework/Versions/A/AppleFirmwareUpdate'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EDEA5437-DAAA-3CB1-8229-5769AFF4BD0B
+    value:           7AA0AC70-D38C-31C8-AEE3-6338727F02F9
   - target:          x86_64-maccatalyst
-    value:           EDEA5437-DAAA-3CB1-8229-5769AFF4BD0B
+    value:           7AA0AC70-D38C-31C8-AEE3-6338727F02F9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2673C51C-68C9-3333-954B-0554F5624E7D
+    value:           F5F7877F-D21B-3660-916D-C1546E535FBF
   - target:          arm64e-maccatalyst
-    value:           2673C51C-68C9-3333-954B-0554F5624E7D
+    value:           F5F7877F-D21B-3660-916D-C1546E535FBF
 install-name:    '/System/Library/Frameworks/CallKit.framework/Versions/A/CallKit'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CXCallDirectoryDefaultHostBundleIdentifier, _CXCallDirectoryDefaultHostServiceName, 
                        _CXCallDirectoryMaintenanceHostBundleIdentifier, _CXCallDirectoryMaintenanceHostServiceName, 

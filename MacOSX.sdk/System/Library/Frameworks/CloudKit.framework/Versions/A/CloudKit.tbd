@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7160DE40-CBB1-3BD0-ABAF-EBBAD97DB7C8
+    value:           3B9FC61E-214B-30D9-8C50-724ECC8BD105
   - target:          x86_64-maccatalyst
-    value:           7160DE40-CBB1-3BD0-ABAF-EBBAD97DB7C8
+    value:           3B9FC61E-214B-30D9-8C50-724ECC8BD105
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C85173AA-319F-3D29-BAA5-AF5551B6BF3B
+    value:           8400441E-D678-32BA-A3AA-9A466AAE390E
   - target:          arm64e-maccatalyst
-    value:           C85173AA-319F-3D29-BAA5-AF5551B6BF3B
+    value:           8400441E-D678-32BA-A3AA-9A466AAE390E
 install-name:    '/System/Library/Frameworks/CloudKit.framework/Versions/A/CloudKit'
-current-version: 1041.2
+current-version: 1930.13
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]

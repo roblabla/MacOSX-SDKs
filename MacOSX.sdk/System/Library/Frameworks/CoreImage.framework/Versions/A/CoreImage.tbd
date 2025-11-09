@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8C2AD56F-9DF7-3219-8757-F69FBBC33271
+    value:           B034007F-4B20-35BE-8CA8-089E41412391
   - target:          x86_64-maccatalyst
-    value:           8C2AD56F-9DF7-3219-8757-F69FBBC33271
+    value:           B034007F-4B20-35BE-8CA8-089E41412391
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C47AAD33-C3F7-30A8-9974-B6ACEF081C8A
+    value:           B32A2DE1-389F-3387-AE4B-9C522384B2C7
   - target:          arm64e-maccatalyst
-    value:           C47AAD33-C3F7-30A8-9974-B6ACEF081C8A
+    value:           B32A2DE1-389F-3387-AE4B-9C522384B2C7
 install-name:    '/System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage'
 current-version: 5
 compatibility-version: 1.0.1
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CIDetectorAccuracy, _CIDetectorAccuracyHigh, _CIDetectorAccuracyLow, 
                        _CIDetectorAspectRatio, _CIDetectorBetterEyeLocs, _CIDetectorDetectDiacritics, 
@@ -204,7 +204,7 @@ exports:
                        CIRectangleFeature.topLeft, CIRectangleFeature.topRight, CIRenderDestination._priv, 
                        CIRenderInfo._priv, CIRenderTask._priv, CISampler._priv, CIVector._count, 
                        CIVector._u ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '$ld$install_name$os10.10$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore', 
                        '$ld$install_name$os10.11$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore', 
                        '$ld$install_name$os10.4$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore', 

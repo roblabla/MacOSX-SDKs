@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           94EF977F-0D2D-31CD-9D98-6D76C8B7E4D5
+    value:           81219DC9-625A-3229-8D51-F234A55FFDA4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           27B4C41A-915B-3A09-95B5-3731D42DC855
+    value:           BF3F4FBC-77BF-3110-B9BA-D32828224300
 install-name:    '/System/Library/PrivateFrameworks/LiveTranscription.framework/Versions/A/LiveTranscription'
 swift-abi-version: 7
 ...

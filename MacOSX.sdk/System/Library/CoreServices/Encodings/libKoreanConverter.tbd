@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D6BD3680-9EAD-3514-8ED6-E1D7EC958A75
+    value:           6B825A47-A96C-3CF9-9988-B1FD1461E4C4
   - target:          x86_64-maccatalyst
-    value:           D6BD3680-9EAD-3514-8ED6-E1D7EC958A75
+    value:           6B825A47-A96C-3CF9-9988-B1FD1461E4C4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4FA9EB82-80E3-3313-A716-219BE46C2EC3
+    value:           A323B4F2-28C0-336A-8683-FA3A6445FDBF
   - target:          arm64e-maccatalyst
-    value:           4FA9EB82-80E3-3313-A716-219BE46C2EC3
+    value:           A323B4F2-28C0-336A-8683-FA3A6445FDBF
 install-name:    '/System/Library/CoreServices/Encodings/libKoreanConverter.dylib'
 current-version: 100
 exports:

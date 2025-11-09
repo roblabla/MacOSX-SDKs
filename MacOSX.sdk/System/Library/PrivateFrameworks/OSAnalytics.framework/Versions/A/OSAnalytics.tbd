@@ -4,22 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           961CD57F-9D2B-3C52-8873-7C0A8A8DAE96
+    value:           A1FFC2BF-E8FC-3EDF-9B8D-47D7F23AEC4A
   - target:          x86_64-maccatalyst
-    value:           961CD57F-9D2B-3C52-8873-7C0A8A8DAE96
+    value:           A1FFC2BF-E8FC-3EDF-9B8D-47D7F23AEC4A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CE795577-9237-3B50-AC6F-9743669F4EF1
+    value:           19F84EC7-6918-3A3E-865C-836650829DB3
   - target:          arm64e-maccatalyst
-    value:           CE795577-9237-3B50-AC6F-9743669F4EF1
+    value:           19F84EC7-6918-3A3E-865C-836650829DB3
 install-name:    '/System/Library/PrivateFrameworks/OSAnalytics.framework/Versions/A/OSAnalytics'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _OSADateFormat, _OSANSDateFormat, _OSASafeMoveItem, _OSASafeMoveItemAtURL, 
+    symbols:         [ _OSADateFormat, _OSAIsDebugEnabledForRSD, _OSAIsRSDDevice, 
+                       _OSAIsRSDHost, _OSANSDateFormat, _OSASafeMoveItem, _OSASafeMoveItemAtURL, 
                        _OSASafeOpen, _OSASafeOpenReadOnly, _OSASafeOpenWriteOnly, 
                        _OSASafeRemoveFile, _OSASafeRemoveFileAtURL, _OSASanitizeOptionHomeDirectory, 
                        _OSASanitizeOptionKeepFilename, _OSASanitizeOptionMountedVolume, 
@@ -57,13 +58,13 @@ exports:
                        _legacyTemplate_9, _logEventForAppleCare, _logForAppleCare, 
                        _logLineForAppleCare, _mach_exception_raise, _mach_exception_raise_state, 
                        _mach_exception_raise_state_identity, _ns2xpc, _processName, 
-                       _rc_sync_request, _rollAppleCareLogs, _runCrashMoverService, 
+                       _rc_sync_request, _rollAppleCareLogs, _rtcsc_send, _runCrashMoverService, 
                        _symbolicateSpeedTracer, _xpc2ns ]
     objc-classes:    [ AWDClientHelpers, KCContainer, OSABinaryImageCatalog, OSABinaryImageSegment, 
-                       OSACrackShotReport, OSAGPUEventReport, OSAJetsamReport, OSALegacyXform, 
-                       OSALog, OSALogCounterObject, OSAProxyConfiguration, OSAReport, 
-                       OSAStackShotReport, OSASymbolInfo, OSASystemConfiguration, 
-                       OSATasking ]
+                       OSABridgeLinkProxy, OSACrackShotReport, OSAGPUEventReport, 
+                       OSAJetsamReport, OSALegacyXform, OSALog, OSALogCounterObject, 
+                       OSAProxyConfiguration, OSAReport, OSAStackShotReport, OSASymbolInfo, 
+                       OSASystemConfiguration, OSATasking ]
     objc-ivars:      [ OSABinaryImageCatalog._absolute_segment, OSABinaryImageCatalog._kernel_cache_segment, 
                        OSABinaryImageCatalog._kernel_segments, OSABinaryImageCatalog._kernel_text_exec_segments, 
                        OSABinaryImageCatalog._notes, OSABinaryImageCatalog._rootedCacheLibs, 

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           07667653-4CD7-3724-81F0-13B27553C722
+    value:           0276E459-436E-397A-A431-B8D985A7C2AC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           425E708B-B146-349D-81C8-7C38ED6A9BF0
+    value:           D26B2E95-6918-344E-8D0E-42C6C8406968
 install-name:    '/System/Library/PrivateFrameworks/LocalAuthenticationUI.framework/Versions/A/LocalAuthenticationUI'
-current-version: 983
+current-version: 984.60.3
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTISt11logic_error, __ZTISt12length_error, __ZTISt9exception, 

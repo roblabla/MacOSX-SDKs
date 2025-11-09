@@ -650,7 +650,7 @@ enum task_snapshot_flags {
 	kTaskSharedRegionNone                 = 0x20000000,     /* task doesn't have a shared region */
 	kTaskSharedRegionSystem               = 0x40000000,     /* task is attached to system shared region */
 	kTaskSharedRegionOther                = 0x80000000,     /* task is attached to a different shared region */
-};
+}; // Note: Add any new flags to kcdata.py (ts_ss_flags)
 
 enum task_transition_type {
 	kTaskIsTerminated                      = 0x1,// Past LPEXIT
@@ -673,7 +673,7 @@ enum thread_snapshot_flags {
 	kThreadTruncKernBT      = 0x4000, /* Unmapped pages caused truncated kernel BT */
 	kThreadTruncUserBT      = 0x8000, /* Unmapped pages caused truncated user BT */
 	kThreadTruncUserAsyncBT = 0x10000, /* Unmapped pages caused truncated user async BT */
-};
+}; // Note: Add any new flags to kcdata.py (ths_ss_flags)
 
 struct mem_and_io_snapshot {
 	uint32_t        snapshot_magic;
@@ -783,7 +783,7 @@ struct thread_group_snapshot {
 enum thread_group_flags {
 	kThreadGroupEfficient = 0x1,
 	kThreadGroupUIApp = 0x2
-};
+}; // Note: Add any new flags to kcdata.py (tgs_flags)
 
 struct thread_group_snapshot_v2 {
 	uint64_t tgs_id;
@@ -796,7 +796,7 @@ enum coalition_flags {
 	kCoalitionTerminated    = 0x2,
 	kCoalitionReaped        = 0x4,
 	kCoalitionPrivileged    = 0x8,
-};
+}; // Note: Add any new flags to kcdata.py (jcs_flags)
 
 struct jetsam_coalition_snapshot {
 	uint64_t jcs_id;
@@ -954,7 +954,7 @@ typedef struct stackshot_thread_turnstileinfo {
 #define STACKSHOT_TURNSTILE_STATUS_THREAD          0x08   /* The final inheritor is a thread */
 #define STACKSHOT_TURNSTILE_STATUS_BLOCKED_ON_TASK 0x10   /* blocked on task, dind't find thread */
 #define STACKSHOT_TURNSTILE_STATUS_HELD_IPLOCK     0x20   /* the ip_lock was held */
-	uint64_t turnstile_flags;
+	uint64_t turnstile_flags; // Note: Add any new flags to kcdata.py (turnstile_flags)
 } __attribute__((packed)) thread_turnstileinfo_t;
 
 #define STACKSHOT_WAITOWNER_KERNEL         (UINT64_MAX - 1)

@@ -460,11 +460,53 @@ __BEGIN_DECLS
 #define RMON_LOGWRITES_VIOLATED_K32B    0x025
 #define RMON_DISABLE_IO_MONITOR         0x02f
 
-/* Codes for Hypervisor (DBG_MACH_HV) */
-#define HV_GUEST_ENTER                  0x000
-#define HV_GUEST_ERROR                  0x001
-#define HV_TRAP_TASK                    0x002
-#define HV_TRAP_THREAD                  0x003
+/* Codes for x86 Hypervisor (DBG_MACH_HV) */
+#define HV_X86_ENTER                     0x00
+#define HV_X86_ENTER_ERROR               0x01
+#define HV_X86_TRAP_TASK                 0x02
+#define HV_X86_TRAP_THREAD               0x03
+#define HV_X86_INTERRUPT_INJECT          0x04
+#define HV_X86_INTERRUPT_RECV            0x05
+#define HV_X86_INTERRUPT_SEND            0x06
+#define HV_X86_IPI_SEND                  0x07
+#define HV_X86_NMI_INJECT                0x08
+#define HV_X86_NMI_SEND                  0x09
+#define HV_X86_LSC_HIT                   0x0a
+#define HV_X86_LSC_INSERT                0x0b
+#define HV_X86_LSC_INSERT_IMM32          0x0c
+#define HV_X86_LSC_INVALID               0x0d
+#define HV_X86_LSC_INVALIDATE            0x0e
+#define HV_X86_LSC_MISS                  0x0f
+#define HV_X86_TIMER_CANCEL              0x10
+#define HV_X86_TIMER_FIRE                0x11
+#define HV_X86_TIMER_SCHEDULE            0x12
+#define HV_X86_APIC_ACCESS_EXIT          0x13
+#define HV_X86_APIC_WRITE_EXIT           0x14
+#define HV_X86_EPT_VIOLATION_EXIT        0x15
+#define HV_X86_EXC_NMI_EXIT              0x16
+#define HV_X86_HLT_EXIT                  0x17
+#define HV_X86_IO_EXIT                   0x18
+#define HV_X86_IRQ_EXIT                  0x19
+#define HV_X86_IRQ_WND_EXIT              0x1a
+#define HV_X86_MOV_DR_EXIT               0x1b
+#define HV_X86_NMI_WND_EXIT              0x1c
+#define HV_X86_RDMSR_EXIT                0x1d
+#define HV_X86_RDPMC_EXIT                0x1e
+#define HV_X86_TPR_THRESHOLD_EXIT        0x1f
+#define HV_X86_VMX_TIMER_EXPIRED_EXIT    0x20
+#define HV_X86_WRMSR_EXIT                0x21
+#define HV_X86_VCPU_READ_APIC_TRAP       0x22
+#define HV_X86_VCPU_READ_VMCS_TRAP       0x23
+#define HV_X86_VCPU_RUN_TRAP             0x24
+#define HV_X86_VCPU_RUN_UNTIL_TRAP       0x25
+#define HV_X86_VCPU_WRITE_APIC_TRAP      0x26
+#define HV_X86_VM_ADDRSPACE_CREATE_TRAP  0x27
+#define HV_X86_VM_ADDRSPACE_DESTROY_TRAP 0x28
+#define HV_X86_VM_INTR_MSI_TRAP          0x29
+#define HV_X86_VM_MAP_TRAP               0x2a
+#define HV_X86_VM_PROTECT_TRAP           0x2b
+#define HV_X86_VM_UNMAP_TRAP             0x2c
+#define HV_X86_TSC_OFFSET_SET            0x2d
 
 /* **** The Kernel Debug Sub Classes for Network (DBG_NETWORK) **** */
 #define DBG_NETIP       1       /* Internet Protocol */

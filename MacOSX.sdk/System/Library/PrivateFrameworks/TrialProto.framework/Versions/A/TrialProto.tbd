@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4FEF5450-0B0D-3DE6-B13A-05C63FC79CFF
+    value:           7CE7A936-1FD5-372C-808D-BA6939C10045
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9123FD73-30ED-330C-A5F1-B7659FDBE771
+    value:           590D7A60-DFDF-30D9-9102-D4219E6AF8C8
 install-name:    '/System/Library/PrivateFrameworks/TrialProto.framework/Versions/A/TrialProto'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -120,10 +120,10 @@ exports:
                        _TRISystemDimensionsReadFrom, _TRITrialAssetPurgeFieldsReadFrom, 
                        _TRITrialCloudKitContainerOriginFieldsReadFrom, _TRITrialDownloadSettingsFieldsReadFrom, 
                        _TRITrialDownloadStatusFieldsReadFrom, _TRITrialExperimentFieldsReadFrom, 
-                       _TRITrialFactorFieldsReadFrom, _TRITrialRolloutFieldsReadFrom, 
-                       _TRITrialSystemTelemetryReadFrom, _TRIUnit_Device, _TRIUnit_Session, 
-                       _TRIUnit_Unknown, _TRIUnit_User, _TRIUserDimensionReadFrom, 
-                       _TrialProtoVersionNumber, _TrialProtoVersionString ]
+                       _TRITrialFactorFieldsReadFrom, _TRITrialOnDemandFactorFieldsReadFrom, 
+                       _TRITrialRolloutFieldsReadFrom, _TRITrialSystemTelemetryReadFrom, 
+                       _TRIUnit_Device, _TRIUnit_Session, _TRIUnit_Unknown, _TRIUnit_User, 
+                       _TRIUserDimensionReadFrom, _TrialProtoVersionNumber, _TrialProtoVersionString ]
     objc-classes:    [ TRIAsset, TRIAssignment, TRIClientExperiment, TRIClientFactorPack, 
                        TRIClientRollout, TRIClientSelectedNamespace, TRIClientTreatment, 
                        TRICloudKitSupport, TRICoreMLAssignmentLanguage, TRICoreMlassignmentRoot, 
@@ -185,10 +185,11 @@ exports:
                        TRISubject, TRISystemDimensions, TRITrialAssetPurgeFields, 
                        TRITrialCloudKitContainerOriginFields, TRITrialDownloadSettingsFields, 
                        TRITrialDownloadStatusFields, TRITrialExperimentFields, TRITrialFactorFields, 
-                       TRITrialRolloutFields, TRITrialSystemTelemetry, TRITriassignmentRoot, 
-                       TRITriclientExperimentRoot, TRITriclientRolloutRoot, TRITricloudKitSupportRoot, 
-                       TRITrideploymentEnvironmentRoot, TRITrifactorRoot, TRITrifactorTypesRoot, 
-                       TRITrinamespaceRoot, TRITriprojectIdRoot, TRITriprovisionalFactorPackMetadataRoot, 
+                       TRITrialOnDemandFactorFields, TRITrialRolloutFields, TRITrialSystemTelemetry, 
+                       TRITriassignmentRoot, TRITriclientExperimentRoot, TRITriclientRolloutRoot, 
+                       TRITricloudKitSupportRoot, TRITrideploymentEnvironmentRoot, 
+                       TRITrifactorRoot, TRITrifactorTypesRoot, TRITrinamespaceRoot, 
+                       TRITriprojectIdRoot, TRITriprovisionalFactorPackMetadataRoot, 
                        TRITripushNotificationRoot, TRITrishadowEvaluationRoot, TRIUIAssignment, 
                        TRIUIAssignmentLanguage, TRIUiassignmentRoot, TRIUserDimension ]
     objc-ivars:      [ TRIDenormalizedEvent._metrics, TRIDenormalizedEvent._subject, 
@@ -222,7 +223,8 @@ exports:
                        TRITrialDownloadSettingsFields._has, TRITrialDownloadStatusFields._has, 
                        TRITrialDownloadStatusFields._status, TRITrialExperimentFields._clientExperimentId, 
                        TRITrialExperimentFields._clientTreatmentId, TRITrialFactorFields._clientFactorPackId, 
-                       TRITrialFactorFields._namespaceName, TRITrialRolloutFields._clientFactorPackSetId, 
+                       TRITrialFactorFields._namespaceName, TRITrialOnDemandFactorFields._factorName, 
+                       TRITrialOnDemandFactorFields._namespaceName, TRITrialRolloutFields._clientFactorPackSetId, 
                        TRITrialRolloutFields._clientRampId, TRITrialRolloutFields._clientRolloutId, 
                        TRITrialRolloutFields._clientTargetingRuleGroupOrdinal, TRITrialRolloutFields._has, 
                        TRITrialSystemTelemetry._assetPurgeFields, TRITrialSystemTelemetry._clientDeploymentEnv, 
@@ -230,8 +232,9 @@ exports:
                        TRITrialSystemTelemetry._clientTeamId, TRITrialSystemTelemetry._containerOriginFields, 
                        TRITrialSystemTelemetry._downloadSettingsFields, TRITrialSystemTelemetry._downloadStatusFields, 
                        TRITrialSystemTelemetry._experimentFields, TRITrialSystemTelemetry._factorFields, 
-                       TRITrialSystemTelemetry._prevBcp47DeviceLocale, TRITrialSystemTelemetry._prevLanguageCode, 
-                       TRITrialSystemTelemetry._prevOsBuild, TRITrialSystemTelemetry._prevRegionCode, 
-                       TRITrialSystemTelemetry._rolloutFields, TRITrialSystemTelemetry._trialdTaskName, 
-                       TRIUserDimension._name, TRIUserDimension._value ]
+                       TRITrialSystemTelemetry._onDemandFactorFields, TRITrialSystemTelemetry._prevBcp47DeviceLocale, 
+                       TRITrialSystemTelemetry._prevLanguageCode, TRITrialSystemTelemetry._prevOsBuild, 
+                       TRITrialSystemTelemetry._prevRegionCode, TRITrialSystemTelemetry._rolloutFields, 
+                       TRITrialSystemTelemetry._trialdTaskName, TRIUserDimension._name, 
+                       TRIUserDimension._value ]
 ...

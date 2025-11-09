@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           72D06DA2-5B50-3433-B423-4B6CA53EC20F
+    value:           2E177C51-0767-378A-AD51-CEF125B77A49
   - target:          x86_64-maccatalyst
-    value:           72D06DA2-5B50-3433-B423-4B6CA53EC20F
+    value:           2E177C51-0767-378A-AD51-CEF125B77A49
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AD9C9AA0-875A-3C12-BA3D-988188F6B65D
+    value:           496E8B08-E1FC-340C-AE96-BB37FECCA37A
   - target:          arm64e-maccatalyst
-    value:           AD9C9AA0-875A-3C12-BA3D-988188F6B65D
+    value:           496E8B08-E1FC-340C-AE96-BB37FECCA37A
 install-name:    '/System/Library/Frameworks/OSLog.framework/Versions/A/OSLog'
-current-version: 1370
+current-version: 1375.40.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

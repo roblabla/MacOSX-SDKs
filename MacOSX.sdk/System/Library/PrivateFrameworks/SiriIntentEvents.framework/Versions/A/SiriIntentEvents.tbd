@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1F8BC297-68F8-3E22-A8C6-D5124995B61D
+    value:           BB30E95C-9006-3FB0-876E-7B53B077FA8C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           79A6F7E3-39CE-3441-9A09-AA216773AAA2
+    value:           53F85F2A-34E5-336F-8E5A-11904DD898B2
 install-name:    '/System/Library/PrivateFrameworks/SiriIntentEvents.framework/Versions/A/SiriIntentEvents'
 current-version: 0
 compatibility-version: 0
@@ -261,6 +261,7 @@ exports:
                        '_$s16SiriIntentEvents15EntityRejectionVN', '_$s16SiriIntentEvents15EntityRejectionVSEAAMc', 
                        '_$s16SiriIntentEvents15EntityRejectionVSeAAMc', '_$s16SiriIntentEvents16CustomSignalTypeO12appSelectionyA2CmFWC', 
                        '_$s16SiriIntentEvents16CustomSignalTypeO13speechLatticeyA2CmFWC', 
+                       '_$s16SiriIntentEvents16CustomSignalTypeO16messagesAutoSendyA2CmFWC', 
                        '_$s16SiriIntentEvents16CustomSignalTypeO8rawValueACSgSS_tcfC', 
                        '_$s16SiriIntentEvents16CustomSignalTypeO8rawValueSSvg', '_$s16SiriIntentEvents16CustomSignalTypeO8rawValueSSvpMV', 
                        '_$s16SiriIntentEvents16CustomSignalTypeOMa', '_$s16SiriIntentEvents16CustomSignalTypeOMn', 

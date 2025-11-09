@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Discussion:
  *    Delegate for CMHeadphoneMotionManager.
  */
-COREMOTION_EXPORT API_AVAILABLE(ios(14.0))
+COREMOTION_EXPORT API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos)
 @protocol CMHeadphoneMotionManagerDelegate<NSObject>
 
 @optional

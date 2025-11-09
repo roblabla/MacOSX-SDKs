@@ -160,7 +160,7 @@ enum tIOUSBHostPortStatus
 #pragma mark Entitlements
 #define kIOUSBTransportDextEntitlement                          "com.apple.developer.driverkit.transport.usb"
 #define kIOUSBHostVMEntitlement                                 "com.apple.vm.device-access"
-#define kIOUSBHostControllerInterfaceEntitlement                "com.apple.developer.usb.hostcontrollerinterface"
+#define kIOUSBHostControllerInterfaceEntitlement                "com.apple.developer.usb.host-controller-interface"
 
 #pragma mark Registry property names
 

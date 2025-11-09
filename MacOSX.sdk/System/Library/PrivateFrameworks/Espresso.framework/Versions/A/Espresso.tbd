@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BE79135C-175D-346F-9D5C-50EEFF67621C
+    value:           B9318351-FDE8-389A-8B68-B3FEC19102A4
   - target:          x86_64-maccatalyst
-    value:           BE79135C-175D-346F-9D5C-50EEFF67621C
+    value:           B9318351-FDE8-389A-8B68-B3FEC19102A4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           18FBC45D-3559-3BE7-A575-77FDD99E60CF
+    value:           E4A826AC-553E-32E4-92D6-CAD1C84AB4B4
   - target:          arm64e-maccatalyst
-    value:           18FBC45D-3559-3BE7-A575-77FDD99E60CF
+    value:           E4A826AC-553E-32E4-92D6-CAD1C84AB4B4
 install-name:    '/System/Library/PrivateFrameworks/Espresso.framework/Versions/A/Espresso'
 current-version: 123
 exports:
@@ -300,8 +300,9 @@ exports:
                        __ZTIN8Espresso4blobIjLi1EEE, __ZTIN8Espresso4blobIsLi1EEE, 
                        __ZTIN8Espresso4blobIsLi2EEE, __ZTIN8Espresso4blobItLi1EEE, 
                        __ZTIN8Espresso4blobItLi2EEE, __ZTIN8Espresso4blobItLi3EEE, 
-                       __ZTIN8Espresso4blobItLi4EEE, __ZTIN8Espresso6SerDes8layer_ioINS_12brick_kernelEEE, 
-                       __ZTIN8Espresso6SerDes8layer_ioINS_12no_op_kernelEEE, __ZTIN8Espresso6SerDes8layer_ioINS_18generic_lrn_kernelEEE, 
+                       __ZTIN8Espresso4blobItLi4EEE, __ZTIN8Espresso4blobItLi5EEE, 
+                       __ZTIN8Espresso6SerDes8layer_ioINS_12brick_kernelEEE, __ZTIN8Espresso6SerDes8layer_ioINS_12no_op_kernelEEE, 
+                       __ZTIN8Espresso6SerDes8layer_ioINS_18generic_lrn_kernelEEE, 
                        __ZTIN8Espresso6SerDes8layer_ioINS_18generic_rnn_kernelEEE, 
                        __ZTIN8Espresso6SerDes8layer_ioINS_18generic_sgd_kernelEEE, 
                        __ZTIN8Espresso6SerDes8layer_ioINS_19generic_adam_kernelEEE, 
@@ -392,6 +393,7 @@ exports:
                        __ZTIN8Espresso6SerDes8layer_ioINS_29generic_batchnorm_grad_kernelEEE, 
                        __ZTIN8Espresso6SerDes8layer_ioINS_29generic_general_concat_kernelEEE, 
                        __ZTIN8Espresso6SerDes8layer_ioINS_29generic_self_attention_kernelEEE, 
+                       __ZTIN8Espresso6SerDes8layer_ioINS_29generic_space_to_batch_kernelEEE, 
                        __ZTIN8Espresso6SerDes8layer_ioINS_29generic_space_to_depth_kernelEEE, 
                        __ZTIN8Espresso6SerDes8layer_ioINS_30generic_activation_grad_kernelEEE, 
                        __ZTIN8Espresso6SerDes8layer_ioINS_30generic_crop_and_resize_kernelEEE, 
@@ -765,8 +767,9 @@ exports:
                        __ZTSN8Espresso4blobIjLi1EEE, __ZTSN8Espresso4blobIsLi1EEE, 
                        __ZTSN8Espresso4blobIsLi2EEE, __ZTSN8Espresso4blobItLi1EEE, 
                        __ZTSN8Espresso4blobItLi2EEE, __ZTSN8Espresso4blobItLi3EEE, 
-                       __ZTSN8Espresso4blobItLi4EEE, __ZTSN8Espresso6SerDes8layer_ioINS_12brick_kernelEEE, 
-                       __ZTSN8Espresso6SerDes8layer_ioINS_12no_op_kernelEEE, __ZTSN8Espresso6SerDes8layer_ioINS_18generic_lrn_kernelEEE, 
+                       __ZTSN8Espresso4blobItLi4EEE, __ZTSN8Espresso4blobItLi5EEE, 
+                       __ZTSN8Espresso6SerDes8layer_ioINS_12brick_kernelEEE, __ZTSN8Espresso6SerDes8layer_ioINS_12no_op_kernelEEE, 
+                       __ZTSN8Espresso6SerDes8layer_ioINS_18generic_lrn_kernelEEE, 
                        __ZTSN8Espresso6SerDes8layer_ioINS_18generic_rnn_kernelEEE, 
                        __ZTSN8Espresso6SerDes8layer_ioINS_18generic_sgd_kernelEEE, 
                        __ZTSN8Espresso6SerDes8layer_ioINS_19generic_adam_kernelEEE, 
@@ -857,6 +860,7 @@ exports:
                        __ZTSN8Espresso6SerDes8layer_ioINS_29generic_batchnorm_grad_kernelEEE, 
                        __ZTSN8Espresso6SerDes8layer_ioINS_29generic_general_concat_kernelEEE, 
                        __ZTSN8Espresso6SerDes8layer_ioINS_29generic_self_attention_kernelEEE, 
+                       __ZTSN8Espresso6SerDes8layer_ioINS_29generic_space_to_batch_kernelEEE, 
                        __ZTSN8Espresso6SerDes8layer_ioINS_29generic_space_to_depth_kernelEEE, 
                        __ZTSN8Espresso6SerDes8layer_ioINS_30generic_activation_grad_kernelEEE, 
                        __ZTSN8Espresso6SerDes8layer_ioINS_30generic_crop_and_resize_kernelEEE, 
@@ -1077,20 +1081,14 @@ exports:
                        __ZN4E5RT14TensorDataTypeC2ENS_17ComponentDataTypeENS_13ComponentPackE, 
                        __ZN4E5RT14TensorDataTypeC2EOS0_, __ZN4E5RT14TensorDataTypeC2ERKS0_, 
                        __ZN4E5RT14TensorDataTypeD1Ev, __ZN4E5RT14TensorDataTypeD2Ev, 
-                       __ZN4E5RT14TensorQuantizeIaDF16_EEvRKNS_16TensorDescriptorERNS_12BufferObjectES3_RKS4_f, 
-                       __ZN4E5RT14TensorQuantizeIafEEvRKNS_16TensorDescriptorERNS_12BufferObjectES3_RKS4_f, 
-                       __ZN4E5RT14TensorQuantizeIhDF16_EEvRKNS_16TensorDescriptorERNS_12BufferObjectES3_RKS4_f, 
-                       __ZN4E5RT14TensorQuantizeIhfEEvRKNS_16TensorDescriptorERNS_12BufferObjectES3_RKS4_f, 
+                       __ZN4E5RT14TensorQuantizeERKNS_16TensorDescriptorERNS_12BufferObjectES2_RKS3_f, 
                        __ZN4E5RT15ExecutionStream21CreateExecutionStreamEv, __ZN4E5RT15ExecutionStreamC2Ev, 
                        __ZN4E5RT15ExecutionStreamD0Ev, __ZN4E5RT15ExecutionStreamD1Ev, 
                        __ZN4E5RT15ExecutionStreamD2Ev, __ZN4E5RT15TensorDimensionC2EOS0_, 
                        __ZN4E5RT15TensorDimensionC2ERKS0_, __ZN4E5RT15TensorDimensionC2Ev, 
                        __ZN4E5RT15TensorDimensionD0Ev, __ZN4E5RT15TensorDimensionD1Ev, 
                        __ZN4E5RT15TensorDimensionD2Ev, __ZN4E5RT15TensorDimensionaSEOS0_, 
-                       __ZN4E5RT15TensorDimensionaSERKS0_, __ZN4E5RT16TensorDequantizeIDF16_aEEvRKNS_16TensorDescriptorERNS_12BufferObjectES3_RKS4_f, 
-                       __ZN4E5RT16TensorDequantizeIDF16_hEEvRKNS_16TensorDescriptorERNS_12BufferObjectES3_RKS4_f, 
-                       __ZN4E5RT16TensorDequantizeIfaEEvRKNS_16TensorDescriptorERNS_12BufferObjectES3_RKS4_f, 
-                       __ZN4E5RT16TensorDequantizeIfhEEvRKNS_16TensorDescriptorERNS_12BufferObjectES3_RKS4_f, 
+                       __ZN4E5RT15TensorDimensionaSERKS0_, __ZN4E5RT16TensorDequantizeERKNS_16TensorDescriptorERNS_12BufferObjectES2_RKS3_f, 
                        __ZN4E5RT16TensorDescriptor16CreateTensorDescERKNSt3__16vectorImNS1_9allocatorImEEEERKNS_14TensorDataTypeE, 
                        __ZN4E5RT16TensorDescriptor33CreateTensorDescriptorWithStridesERKNSt3__16vectorImNS1_9allocatorImEEEERKNS2_IlNS3_IlEEEERKNS_14TensorDataTypeE, 
                        __ZN4E5RT16TensorDescriptor36CreateTensorDescriptorWithAlignmentsERKNSt3__16vectorImNS1_9allocatorImEEEES7_RKNS_14TensorDataTypeE, 
@@ -1102,7 +1100,9 @@ exports:
                        __ZN4E5RT17MemoryObjectErrorD2Ev, __ZN4E5RT18GetErrorCodeStringENS_9ErrorCodeE, 
                        __ZN4E5RT19ComputeRuntimeErrorC1ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEONS_6StatusE, 
                        __ZN4E5RT19ComputeRuntimeErrorC2ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEONS_6StatusE, 
-                       __ZN4E5RT6StatusC1ENS_9ErrorCodeERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
+                       __ZN4E5RT24ExecutionStreamOperation26CreatePreCompiledComputeOpERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES9_mb, 
+                       __ZN4E5RT24ExecutionStreamOperationD0Ev, __ZN4E5RT24ExecutionStreamOperationD1Ev, 
+                       __ZN4E5RT24ExecutionStreamOperationD2Ev, __ZN4E5RT6StatusC1ENS_9ErrorCodeERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN4E5RT6StatusC1Ev, __ZN4E5RT6StatusC2ENS_9ErrorCodeERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN4E5RT6StatusC2Ev, __ZN4E5RT9E5RTErrorC1ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEONS_6StatusE, 
                        __ZN4E5RT9E5RTErrorC2ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEONS_6StatusE, 
@@ -3374,8 +3374,10 @@ exports:
                        __ZN8Espresso8blob_cpu16__copy_from_hostERKNSt3__110shared_ptrINS_14abstract_batchEEERKNS2_INS_4blobIfLi4EEEEE, 
                        __ZN8Espresso8blob_cpu16set_reference_toERKNSt3__110shared_ptrINS_23abstract_blob_containerEEE, 
                        __ZN8Espresso8blob_cpu22resize_without_reallocERKNS_11layer_shapeENSt3__110shared_ptrINS_31abstract_blob_container_optionsEEE, 
+                       __ZN8Espresso8blob_cpu23__copy_to_CVPixelBufferERKNSt3__110shared_ptrINS_14abstract_batchEEERKNS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEP10__CVBuffer, 
+                       __ZN8Espresso8blob_cpu25__copy_from_CVPixelBufferERKNSt3__110shared_ptrINS_14abstract_batchEEERKNS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEP10__CVBufferRKNS_23abstract_blob_container11cv_settingsEm, 
                        __ZN8Espresso8blob_cpu6resizeERKNS_11layer_shapeENSt3__110shared_ptrINS_31abstract_blob_container_optionsEEE, 
-                       __ZN8Espresso8hardware17supports_platformENS_8platformE, __ZN8Espresso8hardware28enable_mpsgraph_for_hardwareEv, 
+                       __ZN8Espresso8hardware17supports_platformENS_8platformE, __ZN8Espresso8hardware28enable_mpsgraph_for_hardwareEPv, 
                        __ZN8Espresso8net_passD0Ev, __ZN8Espresso8net_passD1Ev, __ZN8Espresso8net_passD2Ev, 
                        __ZN8Espresso8on_allocEPvm, __ZN8Espresso9batch_cpu18log_profiler_eventEiyyyy, 
                        __ZN8Espresso9batch_cpu6commitEv, __ZN8Espresso9batch_cpu9sync_waitEv, 
@@ -3482,6 +3484,7 @@ exports:
                        __ZNK8Espresso32generic_static_dequantize_kernel19supports_weight_keyERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZNK8Espresso33generic_dynamic_dequantize_kernel19supports_weight_keyERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZNK8Espresso34pass_constant_if_conditions_result9serializeEv, 
+                       __ZNK8Espresso38generic_non_maximum_suppression_kernel21has_dynamic_top_shapeEm, 
                        __ZNK8Espresso3net11reload_copyEv, __ZNK8Espresso3net12model_is_milEv, 
                        __ZNK8Espresso3net13blobs_summaryEv, __ZNK8Espresso3net15is_fallback_gpuEv, 
                        __ZNK8Espresso3net16sync_copy_globalERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
@@ -3501,7 +3504,8 @@ exports:
                        __ZTIN4E5RT14ProgramLibraryE, __ZTIN4E5RT15ExecutionStreamE, 
                        __ZTIN4E5RT15TensorDimensionE, __ZTIN4E5RT16TensorDescriptorE, 
                        __ZTIN4E5RT17MemoryObjectErrorE, __ZTIN4E5RT19ComputeRuntimeErrorE, 
-                       __ZTIN4E5RT9E5RTErrorE, __ZTIN8Espresso10engine_cpuE, __ZTIN8Espresso11base_kernelE, 
+                       __ZTIN4E5RT24ExecutionStreamOperationE, __ZTIN4E5RT9E5RTErrorE, 
+                       __ZTIN8Espresso10engine_cpuE, __ZTIN8Espresso11base_kernelE, 
                        __ZTIN8Espresso11context_cpuE, __ZTIN8Espresso12brick_kernelE, 
                        __ZTIN8Espresso12compiler_cpuE, __ZTIN8Espresso12net_compilerE, 
                        __ZTIN8Espresso12no_op_kernelE, __ZTIN8Espresso12plane_rw_cpuE, 
@@ -3661,8 +3665,8 @@ exports:
                        __ZTSN4E5RT13SurfaceObjectE, __ZTSN4E5RT14ProgramLibraryE, 
                        __ZTSN4E5RT15ExecutionStreamE, __ZTSN4E5RT15TensorDimensionE, 
                        __ZTSN4E5RT16TensorDescriptorE, __ZTSN4E5RT17MemoryObjectErrorE, 
-                       __ZTSN4E5RT19ComputeRuntimeErrorE, __ZTSN4E5RT9E5RTErrorE, 
-                       __ZTSN8Espresso10engine_cpuE, __ZTSN8Espresso11base_kernelE, 
+                       __ZTSN4E5RT19ComputeRuntimeErrorE, __ZTSN4E5RT24ExecutionStreamOperationE, 
+                       __ZTSN4E5RT9E5RTErrorE, __ZTSN8Espresso10engine_cpuE, __ZTSN8Espresso11base_kernelE, 
                        __ZTSN8Espresso11context_cpuE, __ZTSN8Espresso12brick_kernelE, 
                        __ZTSN8Espresso12compiler_cpuE, __ZTSN8Espresso12net_compilerE, 
                        __ZTSN8Espresso12no_op_kernelE, __ZTSN8Espresso12plane_rw_cpuE, 
@@ -3822,8 +3826,8 @@ exports:
                        __ZTVN4E5RT13SurfaceObjectE, __ZTVN4E5RT14ProgramLibraryE, 
                        __ZTVN4E5RT15ExecutionStreamE, __ZTVN4E5RT15TensorDimensionE, 
                        __ZTVN4E5RT16TensorDescriptorE, __ZTVN4E5RT17MemoryObjectErrorE, 
-                       __ZTVN4E5RT19ComputeRuntimeErrorE, __ZTVN4E5RT9E5RTErrorE, 
-                       __ZTVN8Espresso10engine_cpuE, __ZTVN8Espresso11base_kernelE, 
+                       __ZTVN4E5RT19ComputeRuntimeErrorE, __ZTVN4E5RT24ExecutionStreamOperationE, 
+                       __ZTVN4E5RT9E5RTErrorE, __ZTVN8Espresso10engine_cpuE, __ZTVN8Espresso11base_kernelE, 
                        __ZTVN8Espresso11context_cpuE, __ZTVN8Espresso12brick_kernelE, 
                        __ZTVN8Espresso12compiler_cpuE, __ZTVN8Espresso12net_compilerE, 
                        __ZTVN8Espresso12no_op_kernelE, __ZTVN8Espresso12plane_rw_cpuE, 
@@ -4109,7 +4113,9 @@ exports:
                        _ANECompilerAnalytics ]
     objc-ivars:      [ EspressoNetwork._net ]
     weak-symbols:    [ __ZN8Espresso11base_kernel18get_parameter_blobItLi1EEENSt3__110shared_ptrINS_4blobIT_XT0_EEEEERKNS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
+                       __ZN8Espresso11base_kernel18get_parameter_blobItLi5EEENSt3__110shared_ptrINS_4blobIT_XT0_EEEEERKNS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN8Espresso11base_kernel18set_parameter_blobItLi1EEEvNSt3__110shared_ptrINS_16abstract_contextEEENS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEENS3_INS_4blobIT_XT0_EEEEE, 
+                       __ZN8Espresso11base_kernel18set_parameter_blobItLi5EEEvNSt3__110shared_ptrINS_16abstract_contextEEENS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEENS3_INS_4blobIT_XT0_EEEEE, 
                        __ZN8Espresso32generic_tunneled_ane_unit_kernel10kUInt8TypeE, 
                        __ZN8Espresso32generic_tunneled_ane_unit_kernel12kFloat16TypeE, 
                        __ZN8Espresso32generic_tunneled_ane_unit_kernel9kInt8TypeE ]

@@ -20,3 +20,5 @@
 #include <Hypervisor/hv_vmx.h>
 #include <Hypervisor/hv_intr.h>
 #endif
+
+#include <Hypervisor/hv_vm_allocate.h>

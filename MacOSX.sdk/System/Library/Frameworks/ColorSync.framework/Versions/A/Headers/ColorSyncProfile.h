@@ -37,6 +37,7 @@ CSEXTERN CFStringRef kColorSyncACESCGLinearProfile CS_AVAILABLE_PUBLIC_STARTING(
 CSEXTERN CFStringRef kColorSyncDCIP3Profile CS_AVAILABLE_PUBLIC_STARTING(10.4, CS_UNAVAILABLE_PUBLIC_EMBEDDED);                /* com.apple.ColorSync.DCIP3 */
 CSEXTERN CFStringRef kColorSyncITUR709Profile CS_AVAILABLE_PUBLIC_STARTING(10.4, CS_UNAVAILABLE_PUBLIC_EMBEDDED);              /* com.apple.ColorSync.ITUR709 */
 CSEXTERN CFStringRef kColorSyncITUR2020Profile CS_AVAILABLE_PUBLIC_STARTING(10.4, CS_UNAVAILABLE_PUBLIC_EMBEDDED);             /* com.apple.ColorSync.ITUR2020 */
+
 CSEXTERN CFStringRef kColorSyncROMMRGBProfile CS_AVAILABLE_PUBLIC_STARTING(10.4, CS_UNAVAILABLE_PUBLIC_EMBEDDED);              /* com.apple.ColorSync.ROMMRGB */
 
 CSEXTERN CFStringRef kColorSyncProfileHeader CS_AVAILABLE_PUBLIC_STARTING(10.4, CS_UNAVAILABLE_PUBLIC_EMBEDDED);      /* com.apple.ColorSync.ProfileHeader */
@@ -398,6 +399,8 @@ CSEXTERN bool ColorSyncProfileInstall(ColorSyncProfileRef profile, CFStringRef d
     * error     - (optional) pointer to the error which will be returned in case of failure.
     *
     *             bool value true is returned if success or false in case of error.
+    *
+    *             Using this fumction requires COLORSYNC_PROFILE_INSTALL_ENTITLEMENT
     */
     
 CSEXTERN bool ColorSyncProfileUninstall(ColorSyncProfileRef profile, CFErrorRef* __nullable error) CS_AVAILABLE_STARTING(10.4) CS_UNAVAILABLE_EMBEDDED;
@@ -409,6 +412,8 @@ CSEXTERN bool ColorSyncProfileUninstall(ColorSyncProfileRef profile, CFErrorRef*
     * error     - (optional) pointer to the error which will be returned in case of failure.
     *
     *             bool value true is returned if success or false in case of error.
+    *
+    *             Using this fumction requires COLORSYNC_PROFILE_INSTALL_ENTITLEMENT
     */
     
 

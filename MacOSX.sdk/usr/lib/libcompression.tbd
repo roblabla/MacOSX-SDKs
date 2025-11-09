@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           ACA7A963-B905-3C46-8A23-BF58090ED7BA
+    value:           C55B389E-8888-35B8-908E-045081256582
   - target:          x86_64-maccatalyst
-    value:           ACA7A963-B905-3C46-8A23-BF58090ED7BA
+    value:           C55B389E-8888-35B8-908E-045081256582
   - target:          x86_64h-macos
-    value:           487E970A-2645-3CAA-9050-C97E1D6D4A26
+    value:           8D6FC317-4E51-3D53-A369-1DB27260DDD8
   - target:          x86_64h-maccatalyst
-    value:           487E970A-2645-3CAA-9050-C97E1D6D4A26
+    value:           8D6FC317-4E51-3D53-A369-1DB27260DDD8
   - target:          arm64-macos
-    value:           E093BDE0-1338-35B2-B98F-C7C835397F46
+    value:           0D1266B2-134F-374E-A8A1-6A7ADDF61CD9
   - target:          arm64-maccatalyst
-    value:           E093BDE0-1338-35B2-B98F-C7C835397F46
+    value:           0D1266B2-134F-374E-A8A1-6A7ADDF61CD9
   - target:          arm64e-macos
-    value:           C4A5EE95-0CAF-3A91-9C20-7B4AAC59BC7D
+    value:           5F4FBCD5-4CD0-3A14-AC04-DC456E8BADE8
   - target:          arm64e-maccatalyst
-    value:           C4A5EE95-0CAF-3A91-9C20-7B4AAC59BC7D
+    value:           5F4FBCD5-4CD0-3A14-AC04-DC456E8BADE8
 install-name:    '/usr/lib/libcompression.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _compression_decode_buffer, _compression_decode_scratch_buffer_size, 
                        _compression_encode_buffer, _compression_encode_scratch_buffer_size, 

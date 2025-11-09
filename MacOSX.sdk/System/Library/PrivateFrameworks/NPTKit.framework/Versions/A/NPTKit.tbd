@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           45F6E5D5-D86C-3029-B0C0-E64F06BC3FE9
+    value:           AB07DE77-648E-3447-BBEC-88A54C10D105
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D4E65F0D-D6C7-3B4D-B6B6-4566DD58D791
+    value:           AB152C1E-9ACC-3D5C-81F0-8B487DB1B066
 install-name:    '/System/Library/PrivateFrameworks/NPTKit.framework/Versions/A/NPTKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

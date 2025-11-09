@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4ED6DF76-EB47-3A4E-AA49-91E250575234
+    value:           74C8CF35-C8EF-3B34-804F-CF82BB33D416
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           84244E17-385F-3FE8-A869-C1CF4E54F330
+    value:           47867819-AD88-346B-8DD7-ADB768A96ED4
 install-name:    '/System/Library/PrivateFrameworks/SiriKitInvocation.framework/Versions/A/SiriKitInvocation'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

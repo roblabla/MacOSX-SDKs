@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           41E7F5F3-DB50-3023-9CB0-77C96E376E31
+    value:           E55BF121-307C-3710-BE64-BA8581AA9EBE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FC420858-D7BB-36F5-9240-233BBF4BB98E
+    value:           28C0DAC1-1788-384B-ADD1-E876A8D63A13
 install-name:    '/System/Library/PrivateFrameworks/CDDataAccess.framework/Frameworks/DACalDAV.framework/Versions/A/DACalDAV'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -100,6 +100,7 @@ exports:
                        _kMobileCalDAVQuotaFreeBytes, _kMobileCalDAVSupportedCalendarComponentSets, 
                        _kMobileCalDAVSupportsCalendarUserSearch, _kMobileCalDAVSupportsFreebusy, 
                        _kMobileCalDAVSupportsPush, _kMobileCalDAVSupportsSyncToken, 
+                       _kRDCalDAVMobileAccountRefreshDidCompleteNotificationName, 
                        _mobileCalDAVProdID, _rem_ReminderSetPropertiesWithBlock, 
                        _rem_reminderFromICSTodoWithOptions ]
     objc-classes:    [ CalDAVAccountDelegatesRefreshOperation, CalDAVHTTPTrafficLog, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AC4818AD-F48A-3867-946C-329C83A4936B
+    value:           99EFF803-3657-3D7F-B62B-12FD868A8599
   - target:          x86_64-maccatalyst
-    value:           AC4818AD-F48A-3867-946C-329C83A4936B
+    value:           99EFF803-3657-3D7F-B62B-12FD868A8599
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EA89CDF6-617B-3BED-92DC-6A1B29D05258
+    value:           4DBC9717-9ECD-3825-BF31-B19E32493A27
   - target:          arm64e-maccatalyst
-    value:           EA89CDF6-617B-3BED-92DC-6A1B29D05258
+    value:           4DBC9717-9ECD-3825-BF31-B19E32493A27
 install-name:    '/System/Library/PrivateFrameworks/EasyConfig.framework/Versions/A/EasyConfig'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

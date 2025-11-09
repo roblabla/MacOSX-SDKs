@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           830E2905-23F4-327B-87AF-EA3B8FD8AB63
+    value:           CE6969CC-859A-30E3-B4E4-DEF81F60F3F9
   - target:          x86_64-maccatalyst
-    value:           830E2905-23F4-327B-87AF-EA3B8FD8AB63
+    value:           CE6969CC-859A-30E3-B4E4-DEF81F60F3F9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9067505E-E8AF-366D-8064-B23CA3609B6D
+    value:           5C479864-DBF4-3B44-8733-0D6C355D02D5
   - target:          arm64e-maccatalyst
-    value:           9067505E-E8AF-366D-8064-B23CA3609B6D
+    value:           5C479864-DBF4-3B44-8733-0D6C355D02D5
 install-name:    '/usr/lib/swift/libswiftCoreML.dylib'
-current-version: 1124
+current-version: 1127.60.2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '_$s6CoreML13MLShapedArrayV10startIndexSivg', '_$s6CoreML13MLShapedArrayV10startIndexSivpMV', 
                        '_$s6CoreML13MLShapedArrayV11bytesNoCopy5shape7strides11deallocatorACyxGSV_SaySiGAI10Foundation4DataV11DeallocatorOtcfC', 
                        '_$s6CoreML13MLShapedArrayV11descriptionSSvg', '_$s6CoreML13MLShapedArrayV11descriptionSSvpMV', 

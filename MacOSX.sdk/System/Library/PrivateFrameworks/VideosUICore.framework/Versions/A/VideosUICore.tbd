@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FB0D0A89-BFBC-3F7F-8940-1D376943CBAD
+    value:           E7CF05CC-5434-3225-BF50-8C907506AEA7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B0C80D94-E96B-31A7-A018-A02C5D3A0259
+    value:           79436DC2-3910-3BB9-BCF7-7283153EF53E
 install-name:    '/System/Library/PrivateFrameworks/VideosUICore.framework/Versions/A/VideosUICore'
-current-version: 644.0.10
+current-version: 644.23.1
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CALayerKeyBoundsSize, _CALayerKeyShadowPath, _VUIAccessibilityReduceMotionStatusDidChangeNotification, 
@@ -18,11 +18,12 @@ exports:
                        _VUIApplicationWillResignActiveNotification, _VUIApplicationWillTerminateNotification, 
                        _VUIAssetDidWriteNotification, _VUIAssetDidWriteNotificationAssetPathKey, 
                        _VUIAssetDidWriteNotificationErrorKey, _VUIBoolLogString, 
-                       _VUICALayerContentGravityFromVUIContentMode, _VUICornerRadiiZero, 
-                       _VUIDefaultsAvailabilityEndOverrideInSeconds, _VUIDefaultsCanaryURL, 
-                       _VUIDefaultsCoWatchStartsInPlayingStateInsteadOfPaused, _VUIDefaultsCollectionMaxCacheValueKey, 
-                       _VUIDefaultsCollectionRefreshTypeValueKey, _VUIDefaultsDownloadExpirationOverrideInSeconds, 
-                       _VUIDefaultsEnableDebugUI, _VUIDefaultsEnableDemoMode, _VUIDefaultsEnableMetricsExpandedClickLogging, 
+                       _VUICALayerContentGravityFromVUIContentMode, _VUICeilSnap, 
+                       _VUICeilValue, _VUICornerRadiiZero, _VUIDefaultsAvailabilityEndOverrideInSeconds, 
+                       _VUIDefaultsCanaryURL, _VUIDefaultsCoWatchStartsInPlayingStateInsteadOfPaused, 
+                       _VUIDefaultsCollectionMaxCacheValueKey, _VUIDefaultsCollectionRefreshTypeValueKey, 
+                       _VUIDefaultsDownloadExpirationOverrideInSeconds, _VUIDefaultsEnableDebugUI, 
+                       _VUIDefaultsEnableDemoMode, _VUIDefaultsEnableMetricsExpandedClickLogging, 
                        _VUIDefaultsEnableMetricsExpandedLogging, _VUIDefaultsEnableMetricsLogging, 
                        _VUIDefaultsEnableMetricsPageRenderLogging, _VUIDefaultsEnableRefreshEventDebug, 
                        _VUIDefaultsForceGDPRFirstTimeFlow, _VUIDefaultsForceGDPRWhatsNewFlow, 
@@ -34,14 +35,14 @@ exports:
                        _VUIFeatureFlagKeyFeatureDescription, _VUIFeatureFlagKeyFeatureName, 
                        _VUIFeatureFlagKeyIOSDomain, _VUIFeatureFlagKeyIsEnabledByDefault, 
                        _VUIFeatureFlagKeyIsIOS, _VUIFeatureFlagKeyIsTVOS, _VUIFeatureFlagKeyPlatform, 
-                       _VUIFeatureFlagKeyTVOSDomain, _VUIImageViewImageDidLoadNotification, 
-                       _VUIMakeLargestSizeWithGivenSizeAndAspectRatio, _VUIModalPresentationErrorDomain, 
-                       _VUIModalPresentationKeyActionStyle, _VUIModalPresentationKeyActionStyleCancel, 
-                       _VUIModalPresentationKeyActionStyleDefault, _VUIModalPresentationKeyActionStyleDestructive, 
-                       _VUIModalPresentationKeyAllowMenuDismissal, _VUIModalPresentationKeyAllowsModalOverModal, 
-                       _VUIModalPresentationKeyBarButtonItem, _VUIModalPresentationKeyNavigationBarHidden, 
-                       _VUIModalPresentationKeySourceRect, _VUIModalPresentationKeySourceView, 
-                       _VUIModalPresentationNavigationControllerDismissedNotification, 
+                       _VUIFeatureFlagKeyTVOSDomain, _VUIFloorSnap, _VUIFloorValue, 
+                       _VUIImageViewImageDidLoadNotification, _VUIMakeLargestSizeWithGivenSizeAndAspectRatio, 
+                       _VUIModalPresentationErrorDomain, _VUIModalPresentationKeyActionStyle, 
+                       _VUIModalPresentationKeyActionStyleCancel, _VUIModalPresentationKeyActionStyleDefault, 
+                       _VUIModalPresentationKeyActionStyleDestructive, _VUIModalPresentationKeyAllowMenuDismissal, 
+                       _VUIModalPresentationKeyAllowsModalOverModal, _VUIModalPresentationKeyBarButtonItem, 
+                       _VUIModalPresentationKeyNavigationBarHidden, _VUIModalPresentationKeySourceRect, 
+                       _VUIModalPresentationKeySourceView, _VUIModalPresentationNavigationControllerDismissedNotification, 
                        _VUIModalPresentationTypeKey, _VUIModalPresentationTypeKeyActionSheet, 
                        _VUIModalPresentationTypeKeyAlert, _VUIModalPresentationTypeKeyBlurOverFullScreen, 
                        _VUIModalPresentationTypeKeyCurrentContext, _VUIModalPresentationTypeKeyCustom, 

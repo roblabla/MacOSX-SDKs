@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CAB085BA-B532-3CC1-87CC-D13B532E1EE0
+    value:           6ED99E19-D782-38BA-BC38-91CEF3BBF184
   - target:          x86_64-maccatalyst
-    value:           CAB085BA-B532-3CC1-87CC-D13B532E1EE0
+    value:           6ED99E19-D782-38BA-BC38-91CEF3BBF184
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D8AC8D3B-D4D9-370E-9C9B-52EE060969EB
+    value:           947B196E-3D74-31B4-9E6C-32B36FE10A4C
   - target:          arm64e-maccatalyst
-    value:           D8AC8D3B-D4D9-370E-9C9B-52EE060969EB
+    value:           947B196E-3D74-31B4-9E6C-32B36FE10A4C
 install-name:    '/System/Library/PrivateFrameworks/DuetRecommendation.framework/DuetRecommendation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

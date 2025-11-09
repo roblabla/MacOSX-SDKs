@@ -10,7 +10,7 @@
 
 module RbConfig
   RUBY_VERSION.start_with?("2.6.") or
-    raise "ruby lib version (2.6.3) doesn't match executable version (#{RUBY_VERSION})"
+    raise "ruby lib version (2.6.8) doesn't match executable version (#{RUBY_VERSION})"
 
   # Ruby installed directory.
   TOPDIR = File.dirname(__FILE__).chomp!("/lib/ruby/2.6.0/universal-darwin21")
@@ -23,8 +23,8 @@ module RbConfig
   CONFIG["DESTDIR"] = DESTDIR
   CONFIG["MAJOR"] = "2"
   CONFIG["MINOR"] = "6"
-  CONFIG["TEENY"] = "3"
-  CONFIG["PATCHLEVEL"] = "62"
+  CONFIG["TEENY"] = "8"
+  CONFIG["PATCHLEVEL"] = "205"
   CONFIG["INSTALL"] = '/usr/bin/install -c'
   CONFIG["EXEEXT"] = ""
   CONFIG["prefix"] = (TOPDIR || DESTDIR + "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr")
@@ -46,7 +46,7 @@ module RbConfig
   CONFIG["RUBY_SEARCH_PATH"] = ""
   CONFIG["UNIVERSAL_INTS"] = "'long long' long int short"
   CONFIG["UNIVERSAL_ARCHNAMES"] = universal
-  CONFIG["configure_args"] = " '--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-dependency-tracking' '--prefix=/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr' '--sysconfdir=/Library/Ruby/Site' '--with-sitedir=/Library/Ruby/Site' '--enable-shared' '--with-arch=arm64e,x86_64' '--with-openssl-dir=/System/Volumes/Data/SWE/macOS/BuildRoots/0ed32b12e4/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.0.Internal.sdk/usr/local/libressl' '--without-ext=tk' '--disable-silent-rules' 'ac_cv_func_getcontext=no' 'ac_cv_func_setcontext=no' 'ac_cv_func_utimensat=no' 'ac_cv_c_compiler_gnu=no' 'ac_cv_header_net_if_h=yes' 'av_cv_header_ifaddrs_h=yes' 'rb_cv_pri_prefix_long_long=ll' 'rb_cv_stack_grow_dir_arm64e=-1' 'ac_cv_sizeof_struct_stat_st_size=SIZEOF_OFF_T' 'ac_cv_sizeof_struct_stat_st_blocks=SIZEOF_INT64_T' 'ac_cv_sizeof_struct_stat_st_ino=SIZEOF_UINT64_T' 'CC=/System/Volumes/Data/SWE/macOS/BuildRoots/0ed32b12e4/Applications/Xcode.app/Contents/Developer/Toolchains/OSX12.0.xctoolchain/usr/bin/cc' 'CFLAGS=-arch arm64e -arch x86_64 -g -Os -pipe -DHAVE_GCC_ATOMIC_BUILTINS -DUSE_FFI_CLOSURE_ALLOC' 'LDFLAGS=-arch arm64e -arch x86_64            ' 'CXX=/System/Volumes/Data/SWE/macOS/BuildRoots/0ed32b12e4/Applications/Xcode.app/Contents/Developer/Toolchains/OSX12.0.xctoolchain/usr/bin/c++' 'CXXFLAGS=-arch arm64e -arch x86_64 -g -Os -pipe '"
+  CONFIG["configure_args"] = " '--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-dependency-tracking' '--prefix=/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr' '--sysconfdir=/Library/Ruby/Site' '--with-sitedir=/Library/Ruby/Site' '--enable-shared' '--with-arch=arm64e,x86_64' '--with-openssl-dir=/System/Volumes/Data/SWE/macOS/BuildRoots/5b2e67f8af/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.Internal.sdk/usr/local/libressl-by-deployment-target/11.0' '--without-ext=tk' '--disable-silent-rules' 'ac_cv_func_getcontext=no' 'ac_cv_func_setcontext=no' 'ac_cv_func_utimensat=no' 'ac_cv_c_compiler_gnu=no' 'ac_cv_header_net_if_h=yes' 'av_cv_header_ifaddrs_h=yes' 'rb_cv_pri_prefix_long_long=ll' 'rb_cv_stack_grow_dir_arm64e=-1' 'ac_cv_sizeof_struct_stat_st_size=SIZEOF_OFF_T' 'ac_cv_sizeof_struct_stat_st_blocks=SIZEOF_INT64_T' 'ac_cv_sizeof_struct_stat_st_ino=SIZEOF_UINT64_T' 'CC=/System/Volumes/Data/SWE/macOS/BuildRoots/5b2e67f8af/Applications/Xcode.app/Contents/Developer/Toolchains/OSX12.1.xctoolchain/usr/bin/cc' 'CFLAGS=-arch arm64e -arch x86_64 -g -Os -pipe -DHAVE_GCC_ATOMIC_BUILTINS -DUSE_FFI_CLOSURE_ALLOC' 'LDFLAGS=-arch arm64e -arch x86_64            ' 'CXX=/System/Volumes/Data/SWE/macOS/BuildRoots/5b2e67f8af/Applications/Xcode.app/Contents/Developer/Toolchains/OSX12.1.xctoolchain/usr/bin/c++' 'CXXFLAGS=-arch arm64e -arch x86_64 -g -Os -pipe '"
   CONFIG["CONFIGURE"] = "configure"
   CONFIG["vendorarchdir"] = "$(vendorlibdir)/$(sitearch)"
   CONFIG["vendorlibdir"] = "$(vendordir)/$(ruby_version)"
@@ -167,8 +167,9 @@ module RbConfig
   CONFIG["AR"] = "libtool -static"
   CONFIG["RANLIB"] = ":"
   CONFIG["try_header"] = "try_compile"
-  CONFIG["CC_VERSION_MESSAGE"] = "Apple clang version 13.0.0 (clang-1300.0.27.2) [+internal-os, ptrauth-isa=deployment-target-based]\nTarget: x86_64-apple-darwin20.1.0\nThread model: posix\nInstalledDir: /System/Volumes/Data/SWE/macOS/BuildRoots/0ed32b12e4/Applications/Xcode.app/Contents/Developer/Toolchains/OSX12.0.xctoolchain/usr/bin"
+  CONFIG["CC_VERSION_MESSAGE"] = "Apple clang version 13.0.0 (clang-1300.0.29.10) [+internal-os, ptrauth-isa=deployment-target-based]\nTarget: x86_64-apple-darwin20.1.0\nThread model: posix\nInstalledDir: /System/Volumes/Data/SWE/macOS/BuildRoots/5b2e67f8af/Applications/Xcode.app/Contents/Developer/Toolchains/OSX12.1.xctoolchain/usr/bin"
   CONFIG["CC_VERSION"] = "$(CC) --version"
+  CONFIG["MJIT_CC"] = "/System/Volumes/Data/SWE/macOS/BuildRoots/5b2e67f8af/Applications/Xcode.app/Contents/Developer/Toolchains/OSX12.1.xctoolchain/usr/bin/cc"
   CONFIG["CSRCFLAG"] = ""
   CONFIG["COUTFLAG"] = "-o "
   CONFIG["OUTFLAG"] = "-o "
@@ -183,7 +184,7 @@ module RbConfig
   CONFIG["CXX"] = "xcrun clang++"
   CONFIG["OBJEXT"] = "o"
   CONFIG["CPPFLAGS"] = "-D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT $(DEFS) $(cppflags)"
-  CONFIG["LDFLAGS"] = "-L. -L/System/Volumes/Data/SWE/macOS/BuildRoots/0ed32b12e4/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.0.Internal.sdk/usr/local/lib"
+  CONFIG["LDFLAGS"] = "-L. -L/System/Volumes/Data/SWE/macOS/BuildRoots/5b2e67f8af/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.Internal.sdk/usr/local/lib"
   CONFIG["CFLAGS"] = " -g -Os -pipe -DHAVE_GCC_ATOMIC_BUILTINS -DUSE_FFI_CLOSURE_ALLOC"
   CONFIG["CC"] = "xcrun clang"
   CONFIG["target_os"] = "darwin21"
@@ -202,7 +203,7 @@ module RbConfig
   CONFIG["build_cpu"] = "x86_64"
   CONFIG["build"] = "x86_64-apple-darwin21"
   CONFIG["RUBY_API_VERSION"] = "$(MAJOR).$(MINOR)"
-  CONFIG["RUBY_PROGRAM_VERSION"] = "2.6.3"
+  CONFIG["RUBY_PROGRAM_VERSION"] = "2.6.8"
   CONFIG["HAVE_GIT"] = "yes"
   CONFIG["GIT"] = "git"
   CONFIG["cxxflags"] = "$(optflags) $(debugflags) $(warnflags)"
@@ -227,6 +228,7 @@ module RbConfig
   CONFIG["docdir"] = "$(datarootdir)/doc/$(PACKAGE)"
   CONFIG["oldincludedir"] = "/usr/include"
   CONFIG["includedir"] = (ENV['SDKROOT'] || (File.exist?(File.join(CONFIG['prefix'],'include')) ? '' : %x(xcode-select --print-path >/dev/null 2>&1 && xcrun --sdk macosx --show-sdk-path 2>/dev/null).chomp)) + "$(prefix)/include"
+  CONFIG["runstatedir"] = "$(localstatedir)/run"
   CONFIG["localstatedir"] = "$(prefix)/var"
   CONFIG["sharedstatedir"] = "$(prefix)/com"
   CONFIG["sysconfdir"] = "$(DESTDIR)/Library/Ruby/Site"
@@ -246,7 +248,7 @@ module RbConfig
   CONFIG["SHELL"] = "/bin/sh"
   CONFIG["UNICODE_VERSION"] = "12.1.0"
   CONFIG["UNICODE_EMOJI_VERSION"] = "12.0"
-  CONFIG["SDKROOT"] = ENV["SDKROOT"] || "" # don't run xcrun everytime, usually useless.
+  CONFIG["SDKROOT"] = "#{ENV['SDKROOT']}" # don't run xcrun every time, usually useless.
   CONFIG["archdir"] = "$(rubyarchdir)"
   CONFIG["topdir"] = File.dirname(__FILE__)
   # Almost same with CONFIG. MAKEFILE_CONFIG has other variable

@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
-// swift-module-flags: -target x86_64-apple-macos12.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAppKit -swift-version 5 -enforce-exclusivity=checked -O -module-name AppKit
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-module-flags: -target x86_64-apple-macos12.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAppKit -swift-version 5 -enforce-exclusivity=checked -O -module-name AppKit
+@_exported import Accessibility
 @_exported import AppKit
 import Foundation
 import OpenGL
@@ -544,6 +545,16 @@ extension AppKit.NSSound {
   @available(swift 4)
   public static func beep()
 }
+extension AppKit.NSScreen {
+  @available(macOS 12, *)
+  public var auxiliaryTopLeftArea: Foundation.NSRect? {
+    get
+  }
+  @available(macOS 12, *)
+  public var auxiliaryTopRightArea: Foundation.NSRect? {
+    get
+  }
+}
 extension AppKit.NSEvent {
   public struct SpecialKey : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
     public init(rawValue: Swift.Int)
@@ -671,6 +682,36 @@ extension Foundation.URLResourceValues {
     get
   }
 }
+extension AppKit.NSAppKitVersion {
+  @available(*, deprecated, renamed: "macOS10_14")
+  public static var number10_14: AppKit.NSAppKitVersion {
+    get
+  }
+  @available(*, deprecated, renamed: "macOS10_14_1")
+  public static var number10_14_1: AppKit.NSAppKitVersion {
+    get
+  }
+  @available(*, deprecated, renamed: "macOS10_14_2")
+  public static var number10_14_2: AppKit.NSAppKitVersion {
+    get
+  }
+  @available(*, deprecated, renamed: "macOS10_14_3")
+  public static var number10_14_3: AppKit.NSAppKitVersion {
+    get
+  }
+  @available(*, deprecated, renamed: "macOS10_14_4")
+  public static var number10_14_4: AppKit.NSAppKitVersion {
+    get
+  }
+  @available(*, deprecated, renamed: "macOS10_14_5")
+  public static var number10_14_5: AppKit.NSAppKitVersion {
+    get
+  }
+  @available(*, deprecated, renamed: "macOS10_15")
+  public static var number10_15: AppKit.NSAppKitVersion {
+    get
+  }
+}
 @available(macOS 12, *)
 extension Foundation.AttributeScopes {
   public var appKit: Foundation.AttributeScopes.AppKitAttributes.Type {
@@ -702,6 +743,7 @@ extension Foundation.AttributeScopes {
     public let textAlternatives: Foundation.AttributeScopes.AppKitAttributes.TextAlternativesAttribute
     public let glyphInfo: Foundation.AttributeScopes.AppKitAttributes.GlyphInfoAttribute
     public let cursor: Foundation.AttributeScopes.AppKitAttributes.CursorAttribute
+    public let accessibility: Foundation.AttributeScopes.AccessibilityAttributes
     public let foundation: Foundation.AttributeScopes.FoundationAttributes
     public typealias DecodingConfiguration = Foundation.AttributeScopeCodableConfiguration
     public typealias EncodingConfiguration = Foundation.AttributeScopeCodableConfiguration
@@ -841,128 +883,53 @@ extension AppKit.NSOpenGLContext {
     get
   }
 }
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.FontAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.ParagraphStyleAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.ForegroundColorAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.BackgroundColorAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.LigatureAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.KernAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.TrackingAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.StrikethroughStyleAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.UnderlineStyleAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.StrokeColorAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.StrokeWidthAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.ShadowAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.TextEffectAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.AttachmentAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.AppKitAttributes.BaselineOffsetAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.UnderlineColorAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.StrikethroughColorAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.ObliquenessAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.ExpansionAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.ToolTipAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.MarkedClauseSegmentAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.SuperscriptAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.TextAlternativesAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.GlyphInfoAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.CursorAttribute : Swift.Sendable {}
-#endif

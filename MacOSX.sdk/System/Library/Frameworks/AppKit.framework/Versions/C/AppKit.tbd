@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           224B07D7-F8FE-34A4-BE5B-F46AE5267328
+    value:           802EC934-D54F-3D9C-B3D6-598FBC7FB97F
   - target:          x86_64-maccatalyst
-    value:           224B07D7-F8FE-34A4-BE5B-F46AE5267328
+    value:           802EC934-D54F-3D9C-B3D6-598FBC7FB97F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F908FE8A-1D06-3A8A-BEE1-2F1A91BD2853
+    value:           A8BBC643-113D-310F-96B6-77A973BF2DBA
   - target:          arm64e-maccatalyst
-    value:           F908FE8A-1D06-3A8A-BEE1-2F1A91BD2853
+    value:           A8BBC643-113D-310F-96B6-77A973BF2DBA
 install-name:    '/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit'
-current-version: 2091.12
+current-version: 2113.20.111
 compatibility-version: 45
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -223,18 +223,18 @@ exports:
                        _NSAccessibilitySearchTextKey, _NSAccessibilitySectionDescriptionKey, 
                        _NSAccessibilitySectionListSubrole, _NSAccessibilitySectionObjectKey, 
                        _NSAccessibilitySectionUniqueIDKey, _NSAccessibilitySectionsAttribute, 
-                       _NSAccessibilitySecureTextFieldSubrole, _NSAccessibilitySelectedAttribute, 
-                       _NSAccessibilitySelectedCellsAttribute, _NSAccessibilitySelectedCellsChangedNotification, 
-                       _NSAccessibilitySelectedChildrenAttribute, _NSAccessibilitySelectedChildrenChangedNotification, 
-                       _NSAccessibilitySelectedChildrenMovedNotification, _NSAccessibilitySelectedColumnsAttribute, 
-                       _NSAccessibilitySelectedColumnsChangedNotification, _NSAccessibilitySelectedRowsAttribute, 
-                       _NSAccessibilitySelectedRowsChangedNotification, _NSAccessibilitySelectedTextAttribute, 
-                       _NSAccessibilitySelectedTextChangedNotification, _NSAccessibilitySelectedTextRangeAttribute, 
-                       _NSAccessibilitySelectedTextRangesAttribute, _NSAccessibilityServesAsTitleForUIElementsAttribute, 
-                       _NSAccessibilitySetAttributeValue, _NSAccessibilitySetMayContainProtectedContent, 
-                       _NSAccessibilitySetOverridesAlwaysTakePrecedence, _NSAccessibilityShadowTextAttribute, 
-                       _NSAccessibilitySharedCharacterRangeAttribute, _NSAccessibilitySharedFocusElementsAttribute, 
-                       _NSAccessibilitySharedTextElementForIndexParameterizedAttribute, 
+                       _NSAccessibilitySecureTextFieldSubrole, _NSAccessibilitySegmentSubrole, 
+                       _NSAccessibilitySelectedAttribute, _NSAccessibilitySelectedCellsAttribute, 
+                       _NSAccessibilitySelectedCellsChangedNotification, _NSAccessibilitySelectedChildrenAttribute, 
+                       _NSAccessibilitySelectedChildrenChangedNotification, _NSAccessibilitySelectedChildrenMovedNotification, 
+                       _NSAccessibilitySelectedColumnsAttribute, _NSAccessibilitySelectedColumnsChangedNotification, 
+                       _NSAccessibilitySelectedRowsAttribute, _NSAccessibilitySelectedRowsChangedNotification, 
+                       _NSAccessibilitySelectedTextAttribute, _NSAccessibilitySelectedTextChangedNotification, 
+                       _NSAccessibilitySelectedTextRangeAttribute, _NSAccessibilitySelectedTextRangesAttribute, 
+                       _NSAccessibilityServesAsTitleForUIElementsAttribute, _NSAccessibilitySetAttributeValue, 
+                       _NSAccessibilitySetMayContainProtectedContent, _NSAccessibilitySetOverridesAlwaysTakePrecedence, 
+                       _NSAccessibilityShadowTextAttribute, _NSAccessibilitySharedCharacterRangeAttribute, 
+                       _NSAccessibilitySharedFocusElementsAttribute, _NSAccessibilitySharedTextElementForIndexParameterizedAttribute, 
                        _NSAccessibilitySharedTextUIElementsAttribute, _NSAccessibilitySheetCreatedNotification, 
                        _NSAccessibilitySheetRole, _NSAccessibilityShouldShowAllObjectsForAccessibility, 
                        _NSAccessibilityShowAlternateUIAction, _NSAccessibilityShowDefaultUIAction, 
@@ -892,33 +892,37 @@ exports:
                        _NSWorkspaceVolumeURLKey, _NSWorkspaceWillLaunchApplicationNotification, 
                        _NSWorkspaceWillPowerOffNotification, _NSWorkspaceWillSleepNotification, 
                        _NSWorkspaceWillUnmountNotification, _ResetNSAlertConstraintBasedLayout, 
-                       _ResetNSAlertWeakDelegate, _ResetNSAutoFillHeuristicControllerEnabled, 
-                       _ResetNSAutomaticallyTrackKeyValueDependencies, _ResetNSCollectionViewWeakDelegate, 
-                       _ResetNSConservativeTAMICConstraintCreation, _ResetNSConstraintBasedLayoutDetectAmbiguousViews, 
-                       _ResetNSConstraintBasedLayoutEngageNonLazily, _ResetNSDynamicPropertiesCaptureDependencyContextMetadata, 
-                       _ResetNSImageCompositeFromRectIsInRepCoords, _ResetNSLifeguardOnDuty, 
-                       _ResetNSLifeguardTestable, _ResetNSOutlineViewValidateChanges, 
-                       _ResetNSPasteboardRequiresSecureCoding, _ResetNSPopoverWeakDelegate, 
+                       _ResetNSAlertWeakDelegate, _ResetNSAsyncBeginServicePanel, 
+                       _ResetNSAutoFillHeuristicControllerEnabled, _ResetNSAutomaticallyTrackKeyValueDependencies, 
+                       _ResetNSCollectionViewWeakDelegate, _ResetNSConservativeTAMICConstraintCreation, 
+                       _ResetNSConstraintBasedLayoutDetectAmbiguousViews, _ResetNSConstraintBasedLayoutEngageNonLazily, 
+                       _ResetNSDynamicPropertiesCaptureDependencyContextMetadata, 
+                       _ResetNSISIconPreparationMode, _ResetNSImageCompositeFromRectIsInRepCoords, 
+                       _ResetNSLifeguardOnDuty, _ResetNSLifeguardTestable, _ResetNSLoadNibDataPolicy, 
+                       _ResetNSOutlineViewValidateChanges, _ResetNSPasteboardRequiresSecureCoding, 
+                       _ResetNSPopoverWeakDelegate, _ResetNSSafeApertureCompatibilitySetsEnvironmentVariables, 
                        _ResetNSSavePanelForceMicrosoftAccessoryViewCentering, _ResetNSSavePanelWorkAroundBadAccessoryViewFittingSizes, 
                        _ResetNSScreenIsMutable, _ResetNSSplitViewWeakDelegate, _ResetNSStackViewWeakDelegate, 
                        _ResetNSUseRemoteSavePanel, _ResetNSViewControllerSupports10_10Features, 
-                       _ResetNSViewThrowUnsatisfiableConstraints, _ResetNSWindowAssertWhenDisplayCycleLimitReached, 
-                       _ResetNSWindowSnappingDoClientSide, _ResetNSWindowTabbingEnabled, 
-                       _ResetNSWorkspaceRaiseOnInvalidConfigurationDictionary, _SetNSAlertConstraintBasedLayout, 
-                       _SetNSAlertWeakDelegate, _SetNSAutoFillHeuristicControllerEnabled, 
+                       _ResetNSViewThrowUnsatisfiableConstraints, _ResetNSVisualEffectViewAlwaysUseBackdrop, 
+                       _ResetNSWindowAssertWhenDisplayCycleLimitReached, _ResetNSWindowSnappingDoClientSide, 
+                       _ResetNSWindowTabbingEnabled, _ResetNSWorkspaceRaiseOnInvalidConfigurationDictionary, 
+                       _SetNSAlertConstraintBasedLayout, _SetNSAlertWeakDelegate, 
+                       _SetNSAsyncBeginServicePanel, _SetNSAutoFillHeuristicControllerEnabled, 
                        _SetNSAutomaticallyTrackKeyValueDependencies, _SetNSCollectionViewWeakDelegate, 
                        _SetNSConservativeTAMICConstraintCreation, _SetNSConstraintBasedLayoutDetectAmbiguousViews, 
                        _SetNSConstraintBasedLayoutEngageNonLazily, _SetNSDynamicPropertiesCaptureDependencyContextMetadata, 
-                       _SetNSImageCompositeFromRectIsInRepCoords, _SetNSLifeguardOnDuty, 
-                       _SetNSLifeguardTestable, _SetNSOutlineViewValidateChanges, 
-                       _SetNSPasteboardRequiresSecureCoding, _SetNSPopoverWeakDelegate, 
+                       _SetNSISIconPreparationMode, _SetNSImageCompositeFromRectIsInRepCoords, 
+                       _SetNSLifeguardOnDuty, _SetNSLifeguardTestable, _SetNSLoadNibDataPolicy, 
+                       _SetNSOutlineViewValidateChanges, _SetNSPasteboardRequiresSecureCoding, 
+                       _SetNSPopoverWeakDelegate, _SetNSSafeApertureCompatibilitySetsEnvironmentVariables, 
                        _SetNSSavePanelForceMicrosoftAccessoryViewCentering, _SetNSSavePanelWorkAroundBadAccessoryViewFittingSizes, 
                        _SetNSScreenIsMutable, _SetNSSplitViewWeakDelegate, _SetNSStackViewWeakDelegate, 
                        _SetNSUseRemoteSavePanel, _SetNSViewControllerSupports10_10Features, 
-                       _SetNSViewThrowUnsatisfiableConstraints, _SetNSWindowAssertWhenDisplayCycleLimitReached, 
-                       _SetNSWindowSnappingDoClientSide, _SetNSWindowTabbingEnabled, 
-                       _SetNSWorkspaceRaiseOnInvalidConfigurationDictionary, __NSAccessibilityCustomActionsAttribute, 
-                       __NSAccessibilityCustomElementDataProviderSystemTypeFromDataElementSpecifier, 
+                       _SetNSViewThrowUnsatisfiableConstraints, _SetNSVisualEffectViewAlwaysUseBackdrop, 
+                       _SetNSWindowAssertWhenDisplayCycleLimitReached, _SetNSWindowSnappingDoClientSide, 
+                       _SetNSWindowTabbingEnabled, _SetNSWorkspaceRaiseOnInvalidConfigurationDictionary, 
+                       __NSAccessibilityCustomActionsAttribute, __NSAccessibilityCustomElementDataProviderSystemTypeFromDataElementSpecifier, 
                        __NSAccessibilityFrameAttribute, __NSAccessibilityFrameInParentSpaceAttribute, 
                        __NSAccessibilityLabelAttribute, __NSAddButtonRectToWindowWithActivation, 
                        __NSAddRectsToWindow, __NSAddSpecialCommandRectToWindow, __NSAppKitGlobalLock, 
@@ -927,16 +931,16 @@ exports:
                        __NSBrowserDidUserResizeColumns, __NSBrowserWillUserResizeColumns, 
                        __NSCenteredRectForImage, __NSClearButtonRectsInWindow, __NSClearDragRectsInWindow, 
                        __NSClearMarkedRange, __NSCloudKitContainerID, __NSCloudKitContainerIdentifier, 
-                       __NSCloudKitContainerSetupInfo, __NSCloudKitPostShareType, 
-                       __NSCloudKitPreShareType, __NSCloudKitShare, __NSCloudKitSourceAppBundleIdentifier, 
-                       __NSColorBaseUserHighlightColor, __NSColorCoreUICatalogMainBundleID, 
-                       __NSColorCoreUICatalogNamePrefix, __NSColorFromDefault, __NSColorSpaceNameFromNum, 
-                       __NSCompositeButtonImage, __NSCompositeNotScaled, __NSCompositePushButtonImage, 
-                       __NSCopyServiceActions, __NSCoreServicesPath, __NSCreateIconFamilyFromNSImage, 
-                       __NSCreateImageRef, __NSCreateKeyBindingState, __NSDefaultControlTint, 
-                       __NSDictionaryWithAdditionalKeyAndObject, __NSDockAlive, __NSDocumentSerializationInfo, 
-                       __NSDragWindowRelativeToMouseDown, __NSDrawCarbonThemeBezel, 
-                       __NSDrawCarbonThemeListBox, __NSDrawDisabledTextFieldBezel, 
+                       __NSCloudKitContainerSetupInfo, __NSCloudKitContainerType, 
+                       __NSCloudKitPostShareType, __NSCloudKitPreShareType, __NSCloudKitShare, 
+                       __NSCloudKitSourceAppBundleIdentifier, __NSColorBaseUserHighlightColor, 
+                       __NSColorCoreUICatalogMainBundleID, __NSColorCoreUICatalogNamePrefix, 
+                       __NSColorFromDefault, __NSColorSpaceNameFromNum, __NSCompositeButtonImage, 
+                       __NSCompositeNotScaled, __NSCompositePushButtonImage, __NSCopyServiceActions, 
+                       __NSCoreServicesPath, __NSCreateIconFamilyFromNSImage, __NSCreateImageRef, 
+                       __NSCreateKeyBindingState, __NSDefaultControlTint, __NSDictionaryWithAdditionalKeyAndObject, 
+                       __NSDockAlive, __NSDocumentSerializationInfo, __NSDragWindowRelativeToMouseDown, 
+                       __NSDrawCarbonThemeBezel, __NSDrawCarbonThemeListBox, __NSDrawDisabledTextFieldBezel, 
                        __NSDrawFourPartImage, __NSDrawMacintoshStyleBezel, __NSDrawNinePartImage, 
                        __NSDrawThreePartImage, __NSDrawThreePartImageWithOperation, 
                        __NSDrawThreeSectionImage, __NSDrawThreeSectionImageWithOperation, 
@@ -948,7 +952,7 @@ exports:
                        __NSGetCarbonMenu, __NSGetCarbonMenu2, __NSGetMenuItemForCommandKeyEvent, 
                        __NSHIViewDrawNSImage, __NSHelpMenuName, __NSIBProvideResolvedValueForRelationBetween, 
                        __NSImageGetSize, __NSIndexPathForItem, __NSInitializeKillRing, 
-                       __NSIsCarbonApp, __NSKeyEquivalentModifierMaskMatchesModifierFlags, 
+                       __NSInvalidateShortcutsServicesCache, __NSIsCarbonApp, __NSKeyEquivalentModifierMaskMatchesModifierFlags, 
                        __NSKeyboardUIHandleSymbolicHotKey, __NSKeyboardUIHotKeysCleanup, 
                        __NSKeyboardUIHotKeysInitialize, __NSKeyboardUISelectAnyValidResponder, 
                        __NSKitBundle, __NSLibraryPathsForType, __NSLoadMacSimpleTextFormatWithOptions, 
@@ -983,7 +987,8 @@ exports:
                        __NSQuickActionPresentationModeFinder, __NSQuickActionPresentationModeTouchBar, 
                        __NSReboundDeltaForElasticDelta, __NSReboundDeltaForElasticDelta2, 
                        __NSRecentDocumentsMenuName, __NSRecommendedScrollerStyle, 
-                       __NSResetKillRingOperationFlag, __NSResetServiceActions, __NSRevertDocumentMenuName, 
+                       __NSResetKillRingOperationFlag, __NSResetServiceActions, __NSResetUnusedServiceActions, 
+                       __NSRevertDocumentMenuName, __NSSavePanelFilenameExtensionIndexOfFileType, 
                        __NSSavePanelInitOptionKeyAuditToken, __NSSavePanelInitOptionKeyPID, 
                        __NSSavePanelInitOptionKeyService, __NSSavePanelPAPerfOperation, 
                        __NSSavePanelPAPerfOperationMarkInterval, __NSSavePanelPAPerfOperationMarkName, 
@@ -1102,14 +1107,14 @@ exports:
                        NSPopoverTouchBarItem, NSPredicateEditor, NSPredicateEditorRowTemplate, 
                        NSPreferences, NSPreferencesModule, NSPressGestureRecognizer, 
                        NSPressureConfiguration, NSPressureSensitivePanGestureRecognizer, 
-                       NSPrintInfo, NSPrintOperation, NSPrintPanel, NSPrinter, NSProgressIndicator, 
-                       NSProgressPanel, NSPulseGestureRecognizer, NSRectSet, NSRegion, 
-                       NSResponder, NSRotationGestureRecognizer, NSRuleEditor, NSRuleEditorButtonCell, 
-                       NSRuleEditorPopupButton, NSRuleEditorViewSliceRow, NSRulerMarker, 
-                       NSRulerView, NSRunningApplication, NSSavePanel, NSSavePanelCustomAction, 
-                       NSScreen, NSScreenBackgroundView, NSScrollAnimationHelper, 
-                       NSScrollView, NSScroller, NSScrollerImp, NSScrollerImpPair, 
-                       NSScrubber, NSScrubberArrangedView, NSScrubberFlowLayout, 
+                       NSPrintInfo, NSPrintOperation, NSPrintPanel, NSPrinter, NSPrivacyIndicatorView, 
+                       NSProgressIndicator, NSProgressPanel, NSPulseGestureRecognizer, 
+                       NSRectSet, NSRegion, NSResponder, NSRotationGestureRecognizer, 
+                       NSRuleEditor, NSRuleEditorButtonCell, NSRuleEditorPopupButton, 
+                       NSRuleEditorViewSliceRow, NSRulerMarker, NSRulerView, NSRunningApplication, 
+                       NSSavePanel, NSSavePanelCustomAction, NSScreen, NSScreenBackgroundView, 
+                       NSScrollAnimationHelper, NSScrollView, NSScroller, NSScrollerImp, 
+                       NSScrollerImpPair, NSScrubber, NSScrubberArrangedView, NSScrubberFlowLayout, 
                        NSScrubberImageItemView, NSScrubberItemView, NSScrubberLayout, 
                        NSScrubberLayoutAttributes, NSScrubberOutlineSelectionOverlayView, 
                        NSScrubberProportionalLayout, NSScrubberRoundedSelectionBackgroundView, 
@@ -1295,19 +1300,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           891E80A3-6DFC-304B-95DF-E215A19604A0
+    value:           B88DD7AD-8EE1-321B-9C99-540B94F2DA83
   - target:          x86_64-maccatalyst
-    value:           891E80A3-6DFC-304B-95DF-E215A19604A0
+    value:           B88DD7AD-8EE1-321B-9C99-540B94F2DA83
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           568113EF-753C-32C1-B0D0-05C18B39B701
+    value:           3F6B1694-D191-31A7-A7B5-1DF98F368E6F
   - target:          arm64e-maccatalyst
-    value:           568113EF-753C-32C1-B0D0-05C18B39B701
+    value:           3F6B1694-D191-31A7-A7B5-1DF98F368E6F
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 777
+current-version: 785.1
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

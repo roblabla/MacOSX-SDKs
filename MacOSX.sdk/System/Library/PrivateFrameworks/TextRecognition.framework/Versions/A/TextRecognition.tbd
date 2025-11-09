@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9F8D4E12-9672-35B9-9BE3-4CBAF91CA456
+    value:           7E941F9D-EACC-3C82-A19C-D31D85C45269
   - target:          x86_64-maccatalyst
-    value:           9F8D4E12-9672-35B9-9BE3-4CBAF91CA456
+    value:           7E941F9D-EACC-3C82-A19C-D31D85C45269
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1AF4DE00-D4FA-36FF-9819-713B1E10C2AF
+    value:           936AAD2E-9069-3A31-A601-12B454B5372C
   - target:          arm64e-maccatalyst
-    value:           1AF4DE00-D4FA-36FF-9819-713B1E10C2AF
+    value:           936AAD2E-9069-3A31-A601-12B454B5372C
 install-name:    '/System/Library/PrivateFrameworks/TextRecognition.framework/Versions/A/TextRecognition'
 current-version: 157
 exports:
@@ -283,13 +283,14 @@ exports:
                        __ZeqRK15CRTextTokenPathS1_, __ZltRK15CRTextTokenPathS1_, 
                        _adaptiveThresholdIntegralImage, _adaptiveThresholdIntegralImageWithBuffer, 
                        _adaptiveThresholdIntegralImageWithFiltering, _applyHomograpyMatrix, 
-                       _bestMatchInStringCandidates, _characterCount, _checkCardCode, 
-                       _checkCodePrefix, _checkPartialCodePrefix, _closestNameInContacts, 
-                       _compressData, _computeReferenceDateFromString, _correctHistogram, 
-                       _createCachedContact, _denormalizedPointForSize, _denormalizedPolygonForSize, 
-                       _denormalizedRectForSize, _deviceHasAppleNeuralEngine, _deviceModel, 
-                       _enrichedNumbersListHK, _extractBestDateString, _extractCardCode, 
-                       _extractCardCodeHK, _extractCardNumberResults, _extractCardholderNameResults, 
+                       _bestMatchInStringCandidates, _boundedAngle, _characterCount, 
+                       _checkCardCode, _checkCodePrefix, _checkPartialCodePrefix, 
+                       _closestNameInContacts, _compressData, _computeReferenceDateFromString, 
+                       _correctHistogram, _createCachedContact, _denormalizedPointForSize, 
+                       _denormalizedPolygonForSize, _denormalizedRectForSize, _deviceHasAppleNeuralEngine, 
+                       _deviceModel, _distanceFromPointToPoint, _enrichedNumbersListHK, 
+                       _extractBestDateString, _extractCardCode, _extractCardCodeHK, 
+                       _extractCardNumberResults, _extractCardholderNameResults, 
                        _extractExpirationDateResults, _extractValidDateStrings, _find_homography, 
                        _generateIntegralImage, _getJPHepburn, _getLMConfig, _getZhHansFN, 
                        _getZhHansLN, _houghTransformGlobalAngle, _isNonNameString, 
@@ -314,9 +315,9 @@ exports:
                        _writeBufferWithMetadata, _writeCGImage, _writeCGImageToPNG, 
                        _writeCGImageWithMetadata, _writeRawBuffer ]
     objc-classes:    [ ActivationMapToolsOCR, CRBlockOutputRegion, CRCHCharacterSetRules, 
-                       CRCHNetworkCursor, CRCHPatternNetwork, CRCTCCVNLPTextDecoder, 
-                       CRCTCTextDecoderV1, CRCTCTextDecoderV2, CRCTCTextDecoderV3, 
-                       CRCharacterOutputRegion, CRChineseLowConfidenceTextFeatureFilterV2, 
+                       CRCHNetworkCursor, CRCHPatternNetwork, CRCTCCVNLPOrientationDecoder, 
+                       CRCTCCVNLPTextDecoder, CRCTCTextDecoderV1, CRCTCTextDecoderV2, 
+                       CRCTCTextDecoderV3, CRCharacterOutputRegion, CRChineseLowConfidenceTextFeatureFilterV2, 
                        CRCodingUtilities, CRCompositeOutputRegion, CRConfidenceThresholds, 
                        CRCtcBeamSearch, CRCtcBeamState, CRCtcMaxDecoding, CRCtcPath, 
                        CRCtcTimeSample, CRDataDetectorsOutputRegion, CRDetectorConfiguration, 
@@ -342,13 +343,15 @@ exports:
                        CRTextDecodingUtils, CRTextDetectorModelV2, CRTextDetectorResults, 
                        CRTextFeature, CRTextFeatureGeometryInImageSpace, CRTextFeatureMultiRegion, 
                        CRTextFeatureOrderV1, CRTextFeatureOrderV2, CRTextFeaturesFilterV1, 
-                       CRTextFeaturesFilterV2, CRTextRecognizerModelChineseV2, CRTextRecognizerModelChineseV3, 
-                       CRTextRecognizerModelEspressoInput, CRTextRecognizerModelEspressoOutput, 
-                       CRTextRecognizerModelLatinV2, CRTextRecognizerModelLatinV3, 
-                       CRTextRecognizerModelV1, CRTextRecognizerResults, CRTextRecognizerTopKModelEspressoOutput, 
-                       CRTextResults, CRTextSequenceRecognizerModelEspresso, CRTextSequenceRecognizerTopKModelEspresso, 
-                       CRTitleParameters, CRWordOutputRegion, GeometricCutTools, 
-                       SymbolCandidate, TextColumn, TextResults, TextRow, TextToken ]
+                       CRTextFeaturesFilterV2, CRTextOrientationCorrector, CRTextOrientationModelV1, 
+                       CRTextOrientationRecognizerConfiguration, CRTextRecognizerModelChineseV2, 
+                       CRTextRecognizerModelChineseV3, CRTextRecognizerModelEspressoInput, 
+                       CRTextRecognizerModelEspressoOutput, CRTextRecognizerModelLatinV2, 
+                       CRTextRecognizerModelLatinV3, CRTextRecognizerModelV1, CRTextRecognizerResults, 
+                       CRTextRecognizerTopKModelEspressoOutput, CRTextResults, CRTextSequenceRecognizerModelEspresso, 
+                       CRTextSequenceRecognizerTopKModelEspresso, CRTitleParameters, 
+                       CRWordOutputRegion, GeometricCutTools, SymbolCandidate, TextColumn, 
+                       TextResults, TextRow, TextToken ]
     objc-ivars:      [ CRImage._pixelBuffer, CRMLModel._modelHeight, CRMLModel._modelWidth, 
                        CRMLModel.model ]
   - targets:         [ arm64e-maccatalyst, arm64e-macos, arm64-macos, arm64-maccatalyst ]

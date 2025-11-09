@@ -3,32 +3,32 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ABFA5B88-0508-308F-99D3-14E0A3D7ADDF
+    value:           EEB174A9-A759-3E96-A878-6975631DFFE4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D64E806B-B9C0-3807-9845-A0ECD92FB7E7
+    value:           143DE6B5-36FE-3A1C-B406-C2A11FB88E70
 install-name:    '/System/Library/PrivateFrameworks/MDMClientLibrary.framework/Versions/A/MDMClientLibrary'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CCConfigurationDidChangeNotification, _HTTPResponseKeyBody, 
                        _HTTPResponseKeyDownloadURL, _HTTPResponseKeyHeaders, _HTTPResponseKeyStatusCode, 
                        _MDMClientLibraryVersionNumber, _MDMClientLibraryVersionString, 
-                       _MDMManagedAppleAccountChangedNotification, _MDMManagedBooksChangedNotification, 
-                       _MDMManagingOrgInfoChangedNotification, _MDMTriggerRollKeybagsNotification, 
-                       _MDMUserXPCProtocolInitialize, _MDMXPCProtocolInitialize, 
-                       _kAppleMAIDSignInProvidedContext, _kCCAllowPairingKey, _kCCAnchorCertificatesKey, 
-                       _kCCAttemptedFaceTimeSignInKey, _kCCAutoAdvanceSetup, _kCCAwaitDeviceConfiguredKey, 
-                       _kCCCloudConfigurationUICompleteKey, _kCCCloudConfigurationWasAppliedKey, 
-                       _kCCConfigurationSourceKey, _kCCConfigurationURLKey, _kCCConfigurationWebURLKey, 
-                       _kCCDeviceConfiguredKey, _kCCEnrollmentAnchorCertificatesKey, 
-                       _kCCEnrollmentServerKey, _kCCEnrollmentURLKey, _kCCIsMDMUnremovable, 
-                       _kCCIsMandatoryKey, _kCCIsMultiUserKey, _kCCIsSupervisedKey, 
-                       _kCCLanguageKey, _kCCLanguageScriptKey, _kCCMAIDHasCredentialKey, 
-                       _kCCMAIDUsernameKey, _kCCMDMProtocolVersionKey, _kCCOrganizationAddressKey, 
-                       _kCCOrganizationAddressLine1Key, _kCCOrganizationAddressLine2Key, 
-                       _kCCOrganizationAddressLine3Key, _kCCOrganizationCityKey, 
-                       _kCCOrganizationCountryKey, _kCCOrganizationDepartmentKey, 
+                       _MDMManagedAppleAccountLongLivedTokenChangedNotification, 
+                       _MDMManagedBooksChangedNotification, _MDMManagingOrgInfoChangedNotification, 
+                       _MDMTriggerRollKeybagsNotification, _MDMUserXPCProtocolInitialize, 
+                       _MDMXPCProtocolInitialize, _kAppleMAIDSignInProvidedContext, 
+                       _kCCAllowPairingKey, _kCCAnchorCertificatesKey, _kCCAttemptedFaceTimeSignInKey, 
+                       _kCCAutoAdvanceSetup, _kCCAwaitDeviceConfiguredKey, _kCCCloudConfigurationUICompleteKey, 
+                       _kCCCloudConfigurationWasAppliedKey, _kCCConfigurationSourceKey, 
+                       _kCCConfigurationURLKey, _kCCConfigurationWebURLKey, _kCCDeviceConfiguredKey, 
+                       _kCCEnrollmentAnchorCertificatesKey, _kCCEnrollmentServerKey, 
+                       _kCCEnrollmentURLKey, _kCCIsMDMUnremovable, _kCCIsMandatoryKey, 
+                       _kCCIsMultiUserKey, _kCCIsSupervisedKey, _kCCLanguageKey, 
+                       _kCCLanguageScriptKey, _kCCMAIDHasCredentialKey, _kCCMAIDUsernameKey, 
+                       _kCCMDMProtocolVersionKey, _kCCOrganizationAddressKey, _kCCOrganizationAddressLine1Key, 
+                       _kCCOrganizationAddressLine2Key, _kCCOrganizationAddressLine3Key, 
+                       _kCCOrganizationCityKey, _kCCOrganizationCountryKey, _kCCOrganizationDepartmentKey, 
                        _kCCOrganizationEmailKey, _kCCOrganizationMagicKey, _kCCOrganizationNameKey, 
                        _kCCOrganizationPhoneKey, _kCCOrganizationRegionKey, _kCCOrganizationShortNameKey, 
                        _kCCOrganizationSupportEmailKey, _kCCOrganizationSupportPhoneKey, 
@@ -134,7 +134,8 @@ exports:
                        DEPDeviceUploadOrganization, DEPDeviceUploadRequestType, DEPDeviceUploadSubmissionResponse, 
                        DEPDeviceUploadSubmitDeviceRequestPayload, DEPDeviceUploadUser, 
                        MDMAccountUtilities, MDMBearerTokenAuthenticator, MDMBook, 
-                       MDMClient, MDMCloudConfiguration, MDMConfiguration, MDMDeclarativeManagement, 
-                       MDMDeviceQueryUtilities, MDMHTTPTransaction, MDMManagedMediaReader, 
-                       MDMOptionsUtilities, MDMUserClient ]
+                       MDMClient, MDMClientConcreteDataProvider, MDMCloudConfiguration, 
+                       MDMConfiguration, MDMDeclarativeManagement, MDMDeviceQueryUtilities, 
+                       MDMHTTPTransaction, MDMManagedMediaReader, MDMOptionsUtilities, 
+                       MDMUserClient ]
 ...

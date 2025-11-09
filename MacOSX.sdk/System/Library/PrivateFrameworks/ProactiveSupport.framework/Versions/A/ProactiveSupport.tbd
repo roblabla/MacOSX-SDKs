@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B77E8BE6-41B8-3AA8-B3F0-31E3A73EE601
+    value:           F1D75808-C165-39BF-BC1F-97A03627A85B
   - target:          x86_64-maccatalyst
-    value:           B77E8BE6-41B8-3AA8-B3F0-31E3A73EE601
+    value:           F1D75808-C165-39BF-BC1F-97A03627A85B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           23996023-C800-3255-A96B-BFDE8311B912
+    value:           042F81BA-E52D-3191-91FD-68C0695F23AD
   - target:          arm64e-maccatalyst
-    value:           23996023-C800-3255-A96B-BFDE8311B912
+    value:           042F81BA-E52D-3191-91FD-68C0695F23AD
 install-name:    '/System/Library/PrivateFrameworks/ProactiveSupport.framework/Versions/A/ProactiveSupport'
-current-version: 329
+current-version: 331.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

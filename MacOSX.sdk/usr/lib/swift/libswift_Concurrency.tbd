@@ -4,24 +4,39 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1B5E0BAF-DE5D-35D4-ACAE-ADCC7811A811
+    value:           52963064-5A01-37FA-8425-13AAF2E59822
   - target:          x86_64-maccatalyst
-    value:           1B5E0BAF-DE5D-35D4-ACAE-ADCC7811A811
+    value:           52963064-5A01-37FA-8425-13AAF2E59822
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           40B1448E-C55A-3797-96C2-4B0F35AADC69
+    value:           BE23506D-A9AF-34B5-B9CA-5E6B12EB1976
   - target:          arm64e-maccatalyst
-    value:           40B1448E-C55A-3797-96C2-4B0F35AADC69
+    value:           BE23506D-A9AF-34B5-B9CA-5E6B12EB1976
 install-name:    '/usr/lib/swift/libswift_Concurrency.dylib'
-current-version: 1300.0.27
+current-version: 1300.0.46
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ '_$s13AsyncIteratorSciTl', '_$s7ElementScITl', '_$s7ElementSciTl', 
+    symbols:         [ '$ld$install_name$os10.10$@rpath/libswift_Concurrency.dylib', 
+                       '$ld$install_name$os10.11$@rpath/libswift_Concurrency.dylib', 
+                       '$ld$install_name$os10.12$@rpath/libswift_Concurrency.dylib', 
+                       '$ld$install_name$os10.13$@rpath/libswift_Concurrency.dylib', 
+                       '$ld$install_name$os10.14$@rpath/libswift_Concurrency.dylib', 
+                       '$ld$install_name$os10.15$@rpath/libswift_Concurrency.dylib', 
+                       '$ld$install_name$os10.9$@rpath/libswift_Concurrency.dylib', 
+                       '$ld$install_name$os11.0$@rpath/libswift_Concurrency.dylib', 
+                       '$ld$install_name$os11.1$@rpath/libswift_Concurrency.dylib', 
+                       '$ld$install_name$os11.2$@rpath/libswift_Concurrency.dylib', 
+                       '$ld$install_name$os11.3$@rpath/libswift_Concurrency.dylib', 
+                       '$ld$install_name$os11.4$@rpath/libswift_Concurrency.dylib', 
+                       '$ld$install_name$os11.5$@rpath/libswift_Concurrency.dylib', 
+                       '$ld$install_name$os11.6$@rpath/libswift_Concurrency.dylib', 
+                       '$ld$previous$@rpath/libswift_Concurrency.dylib$$6$1.0$15.0$', 
+                       '_$s13AsyncIteratorSciTl', '_$s7ElementScITl', '_$s7ElementSciTl', 
                        '_$s9ActorTypes06GlobalA0PTl', '_$sS2cEycfC', '_$sScA15unownedExecutorScevgTj', 
                        '_$sScA15unownedExecutorScevgTq', '_$sScAMp', '_$sScATL', 
                        '_$sScC12continuation8functionScCyxq_GSccyxq_G_SStcfC', '_$sScC6resume8throwingyq_n_tF', 
@@ -164,8 +179,8 @@ exports:
                        '_$sScs12ContinuationVMn', '_$sScs17makeAsyncIteratorScs0C0Vyxq__GyF', 
                        '_$sScs8IteratorV4nextxSgyYaKF', '_$sScs8IteratorV4nextxSgyYaKFTu', 
                        '_$sScs8IteratorVMa', '_$sScs8IteratorVMn', '_$sScs8IteratorVyxq__GScIsMc', 
-                       '_$sScs9unfoldingScsyxq_GxSgyYaKc_tcfC', '_$sScsMa', '_$sScsMn', 
-                       '_$sScs_15bufferingPolicy_Scsyxs5Error_pGxm_Scs12ContinuationV09BufferingB0OyxsAB_p__GyAEyxsAB_p_GXEtcsAB_pRs_rlufC', 
+                       '_$sScs9unfoldingScsyxs5Error_pGxSgyYaKc_tcsAB_pRs_rlufC', 
+                       '_$sScsMa', '_$sScsMn', '_$sScs_15bufferingPolicy_Scsyxs5Error_pGxm_Scs12ContinuationV09BufferingB0OyxsAB_p__GyAEyxsAB_p_GXEtcsAB_pRs_rlufC', 
                        '_$sScsyxq_GScisMc', '_$sSct11isCancelledSbvg', '_$sSct11isCancelledSbvpMV', 
                        '_$sSct2eeoiySbSct_ScttFZ', '_$sSct4hash4intoys6HasherVz_tF', 
                        '_$sSct6cancelyyF', '_$sSct8priorityScPvg', '_$sSct8priorityScPvpMV', 
@@ -477,17 +492,20 @@ exports:
                        '_$ss9TaskLocalCyxGs23CustomStringConvertiblesMc', '_$ss9_contains_5whereSbx_Sb7ElementQzYaKXEtYaKSciRzlF', 
                        '_$ss9_contains_5whereSbx_Sb7ElementQzYaKXEtYaKSciRzlFTu', 
                        ___tsan_on_initialize, __swift_concurrency_debug_asyncTaskMetadata, 
-                       __swift_concurrency_debug_jobMetadata, _swift_asyncLet_end, 
-                       _swift_asyncLet_start, _swift_asyncLet_wait, _swift_asyncLet_wait_throwing, 
-                       _swift_async_extendedFramePointerFlags, _swift_continuation_init, 
-                       _swift_continuation_resume, _swift_continuation_throwingResume, 
-                       _swift_continuation_throwingResumeWithError, _swift_defaultActor_deallocate, 
-                       _swift_defaultActor_deallocateResilient, _swift_defaultActor_destroy, 
-                       _swift_defaultActor_enqueue, _swift_defaultActor_initialize, 
-                       _swift_deletedAsyncMethodError, _swift_deletedAsyncMethodErrorTu, 
-                       _swift_job_run, _swift_taskGroup_addPending, _swift_taskGroup_attachChild, 
-                       _swift_taskGroup_cancelAll, _swift_taskGroup_destroy, _swift_taskGroup_initialize, 
-                       _swift_taskGroup_isCancelled, _swift_taskGroup_isEmpty, _swift_taskGroup_wait_next_throwing, 
+                       __swift_concurrency_debug_jobMetadata, _swift_asyncLet_begin, 
+                       _swift_asyncLet_consume, _swift_asyncLet_consume_throwing, 
+                       _swift_asyncLet_end, _swift_asyncLet_finish, _swift_asyncLet_get, 
+                       _swift_asyncLet_get_throwing, _swift_asyncLet_start, _swift_asyncLet_wait, 
+                       _swift_asyncLet_wait_throwing, _swift_async_extendedFramePointerFlags, 
+                       _swift_continuation_await, _swift_continuation_init, _swift_continuation_resume, 
+                       _swift_continuation_throwingResume, _swift_continuation_throwingResumeWithError, 
+                       _swift_defaultActor_deallocate, _swift_defaultActor_deallocateResilient, 
+                       _swift_defaultActor_destroy, _swift_defaultActor_enqueue, 
+                       _swift_defaultActor_initialize, _swift_deletedAsyncMethodError, 
+                       _swift_deletedAsyncMethodErrorTu, _swift_job_run, _swift_taskGroup_addPending, 
+                       _swift_taskGroup_attachChild, _swift_taskGroup_cancelAll, 
+                       _swift_taskGroup_destroy, _swift_taskGroup_initialize, _swift_taskGroup_isCancelled, 
+                       _swift_taskGroup_isEmpty, _swift_taskGroup_wait_next_throwing, 
                        _swift_task_addCancellationHandler, _swift_task_addStatusRecord, 
                        _swift_task_alloc, _swift_task_asyncMainDrainQueue, _swift_task_attachChild, 
                        _swift_task_cancel, _swift_task_cancel_group_child_tasks, 
@@ -506,5 +524,5 @@ exports:
                        _swift_task_removeCancellationHandler, _swift_task_removeStatusRecord, 
                        _swift_task_reportIllegalTaskLocalBindingWithinWithTaskGroup, 
                        _swift_task_reportUnexpectedExecutor, _swift_task_runAndBlockThread, 
-                       _swift_task_switch, _swift_task_tryAddStatusRecord ]
+                       _swift_task_suspend, _swift_task_switch, _swift_task_tryAddStatusRecord ]
 ...

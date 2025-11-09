@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           298277F0-34E9-3F45-94D9-37BC0B4D67A5
+    value:           4164C571-0B5E-38BE-A46F-9C96C3C843A3
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           495FD583-22AA-370F-853A-40036C3D0527
+    value:           7C776B9B-7B7A-3B3F-8D19-86DB306DC5A3
 install-name:    '/System/iOSSupport/System/Library/Frameworks/ClockKit.framework/Versions/A/ClockKit'
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _CLKActiveComplicationsFromActivePairedDevice, _CLKActiveComplicationsFromActiveWatchChangedNotification, 
                        _CLKActiveComplicationsFromPairedDevice, _CLKActiveDeviceChangedNotification, 
                        _CLKActiveDeviceChangedTinkerState, _CLKAllComplicationFamilies, 
@@ -37,18 +37,19 @@ exports:
                        _CLKComplicationBundleOnePieceImage, _CLKComplicationBundlePrefersFilterOverTransition, 
                        _CLKComplicationBundleProgress, _CLKComplicationBundleRed, 
                        _CLKComplicationBundleRelativeDateStyle, _CLKComplicationBundleRelativeToDate, 
-                       _CLKComplicationBundleScale, _CLKComplicationBundleShortText, 
-                       _CLKComplicationBundleStartDate, _CLKComplicationBundleSupportedComplicationFamilies, 
-                       _CLKComplicationBundleSwiftUI, _CLKComplicationBundleSwiftUIExtension, 
-                       _CLKComplicationBundleSymbolName, _CLKComplicationBundleText, 
-                       _CLKComplicationBundleTextProviders, _CLKComplicationBundleTimeZone, 
-                       _CLKComplicationBundleTintColor, _CLKComplicationBundleTintedImageProvider, 
-                       _CLKComplicationBundleTwoPieceImageBackground, _CLKComplicationBundleTwoPieceImageForeground, 
-                       _CLKComplicationBundleUISensitivity, _CLKComplicationBundleVersion, 
-                       _CLKComplicationFamilyCircularMedium, _CLKComplicationFamilyDescription, 
-                       _CLKComplicationFamilyFromString, _CLKComplicationFamilySimpleText, 
-                       _CLKComplicationGraphicExtraLargeCircularScalingFactor, _CLKComplicationIconAssetName, 
-                       _CLKComplicationPrincipalClassKey, _CLKComplicationServerActiveComplicationsDidChangeNotification, 
+                       _CLKComplicationBundleSDKVersion, _CLKComplicationBundleScale, 
+                       _CLKComplicationBundleShortText, _CLKComplicationBundleStartDate, 
+                       _CLKComplicationBundleSupportedComplicationFamilies, _CLKComplicationBundleSwiftUI, 
+                       _CLKComplicationBundleSwiftUIExtension, _CLKComplicationBundleSymbolName, 
+                       _CLKComplicationBundleText, _CLKComplicationBundleTextProviders, 
+                       _CLKComplicationBundleTimeZone, _CLKComplicationBundleTintColor, 
+                       _CLKComplicationBundleTintedImageProvider, _CLKComplicationBundleTwoPieceImageBackground, 
+                       _CLKComplicationBundleTwoPieceImageForeground, _CLKComplicationBundleUISensitivity, 
+                       _CLKComplicationBundleVersion, _CLKComplicationFamilyCircularMedium, 
+                       _CLKComplicationFamilyDescription, _CLKComplicationFamilyFromString, 
+                       _CLKComplicationFamilySimpleText, _CLKComplicationGraphicExtraLargeCircularScalingFactor, 
+                       _CLKComplicationIconAssetName, _CLKComplicationPrincipalClassKey, 
+                       _CLKComplicationServerActiveComplicationsDidChangeNotification, 
                        _CLKComplicationSupportedFamiliesKey, _CLKComplicationTemplateSwiftUIArchiveErrorDomain, 
                        _CLKComplicationTimelineErrorDomain, _CLKCompressFraction, 
                        _CLKCurrentLocaleIs24HourMode, _CLKDateFor5PMOnDate, _CLKDateFor9AMOnDate, 
@@ -83,7 +84,7 @@ exports:
                        _CLKRectIntegralForDevice, _CLKRectIsPixelAlignedForDevice, 
                        _CLKRecursivelyValidateArray, _CLKRecursivelyValidateDictionary, 
                        _CLKRelativeDateStyleRelative, _CLKRelativeDateStyleRelativeShort, 
-                       _CLKRemoteComplicationReloadDarwinNotification, _CLKRemovesPunctuationFromWeekdayDay, 
+                       _CLKRemoteComplicationReloadIdentifier, _CLKRemovesPunctuationFromWeekdayDay, 
                        _CLKRequestConcreteImplementation, _CLKReverseInterpolateFromFloats, 
                        _CLKReversePoint, _CLKReverseSize, _CLKReverseVector, _CLKRoundForDevice, 
                        _CLKRoundedFontDesignName, _CLKRunningInProcess, _CLKScaledPointWithCompactLuxoDeviceMetrics, 

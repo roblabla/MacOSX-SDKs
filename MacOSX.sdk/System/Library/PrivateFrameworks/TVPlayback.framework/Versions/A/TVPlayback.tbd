@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6EA71CD2-3B5E-3969-80AA-60BB1A986B9A
+    value:           49D8C9F2-5334-3784-BFB0-9391C1B7A35A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DB9372D6-5EB4-3A3F-92DA-D3A4B46E988D
+    value:           16157EF4-3552-359D-9D96-D3D76DC2D701
 install-name:    '/System/Library/PrivateFrameworks/TVPlayback.framework/Versions/A/TVPlayback'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -4,6 +4,7 @@
    All rights reserved. */
 
 #import <QuartzCore/CABase.h>
+#import <QuartzCore/CAFrameRateRange.h>
 #import <Foundation/NSObject.h>
 
 @class NSString, NSRunLoop;
@@ -78,7 +79,19 @@ API_AVAILABLE(ios(3.1), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)
  * best-effort attempt at issuing callbacks at the requested rate. */
 
 @property(nonatomic) NSInteger preferredFramesPerSecond
-    API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0));
+  API_DEPRECATED_WITH_REPLACEMENT ("preferredFrameRateRange",
+                                   ios(10.0, API_TO_BE_DEPRECATED),
+                                   watchos(3.0, API_TO_BE_DEPRECATED),
+                                   tvos(10.0, API_TO_BE_DEPRECATED));
+
+/* Defines the range of desired callback rate in frames-per-second for this
+   display link. If the range contains the same minimum and maximum frame rate,
+   this property is identical as preferredFramesPerSecond. Otherwise, the actual
+   callback rate will be dynamically adjusted to better align with other
+   animation sources. */
+
+@property(nonatomic) CAFrameRateRange preferredFrameRateRange
+    API_AVAILABLE(ios(15.0), watchos(8.0), tvos(15.0));
 
 @end
 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BE5A781E-C353-3067-AF9E-9464F788299C
+    value:           6910FA09-4EBD-3B8A-BB51-55562453B02C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D97AABF3-F0E7-3039-8EBA-990E46E35D4F
+    value:           3094B6AA-878F-3298-8BFE-8D6300D656C5
 install-name:    '/System/Library/PrivateFrameworks/IMAPProtocol.framework/Versions/A/IMAPProtocol'
 swift-abi-version: 7
 allowable-clients:
@@ -68,6 +68,11 @@ exports:
                        '_$s12IMAPProtocol11MessageDataV13bodyStructure11NIOIMAPCore04BodyE0OSgvpMV', 
                        '_$s12IMAPProtocol11MessageDataV13bodyStructure11NIOIMAPCore04BodyE0OSgvpfi', 
                        '_$s12IMAPProtocol11MessageDataV13bodyStructure11NIOIMAPCore04BodyE0OSgvs', 
+                       '_$s12IMAPProtocol11MessageDataV20modificationSequence11NIOIMAPCore012ModificationE5ValueVSgvM', 
+                       '_$s12IMAPProtocol11MessageDataV20modificationSequence11NIOIMAPCore012ModificationE5ValueVSgvg', 
+                       '_$s12IMAPProtocol11MessageDataV20modificationSequence11NIOIMAPCore012ModificationE5ValueVSgvpMV', 
+                       '_$s12IMAPProtocol11MessageDataV20modificationSequence11NIOIMAPCore012ModificationE5ValueVSgvpfi', 
+                       '_$s12IMAPProtocol11MessageDataV20modificationSequence11NIOIMAPCore012ModificationE5ValueVSgvs', 
                        '_$s12IMAPProtocol11MessageDataV23__derived_struct_equalsySbAC_ACtFZ', 
                        '_$s12IMAPProtocol11MessageDataV3uid11NIOIMAPCore3UIDVSgvM', 
                        '_$s12IMAPProtocol11MessageDataV3uid11NIOIMAPCore3UIDVSgvg', 

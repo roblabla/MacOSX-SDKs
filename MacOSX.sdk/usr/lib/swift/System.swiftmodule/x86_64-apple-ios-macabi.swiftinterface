@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
 // swift-module-flags: -target x86_64-apple-ios15.0-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSystem -swift-version 5 -enforce-exclusivity=checked -O -module-name System
 import Darwin
 import Swift
@@ -337,7 +337,7 @@ extension System.FilePath {
   public struct ComponentView {
   }
   public var components: System.FilePath.ComponentView {
-    get
+    __consuming get
     _modify
   }
 }
@@ -388,9 +388,9 @@ extension System.FilePath.ComponentView {
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct FilePermissions : Swift.OptionSet, Swift.Hashable, Swift.Codable {
-  @_alwaysEmitIntoClient public let rawValue: System.CInterop.Mode
-  @_alwaysEmitIntoClient public init(rawValue: System.CInterop.Mode) { self.rawValue = rawValue }
-  @_alwaysEmitIntoClient private init(_ raw: System.CInterop.Mode) { self.init(rawValue: raw) }
+  @_alwaysEmitIntoClient public let rawValue: System.CModeT
+  @_alwaysEmitIntoClient public init(rawValue: System.CModeT) { self.rawValue = rawValue }
+  @_alwaysEmitIntoClient private init(_ raw: System.CModeT) { self.init(rawValue: raw) }
   @_alwaysEmitIntoClient public static var otherRead: System.FilePermissions {
     get { FilePermissions(0o4) }
   }
@@ -465,7 +465,7 @@ extension System.FilePath.ComponentView {
   }
   public typealias ArrayLiteralElement = System.FilePermissions
   public typealias Element = System.FilePermissions
-  public typealias RawValue = System.CInterop.Mode
+  public typealias RawValue = System.CModeT
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FilePermissions : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
@@ -476,10 +476,7 @@ extension System.FilePermissions : Swift.CustomStringConvertible, Swift.CustomDe
     get
   }
 }
-@available(macOS, introduced: 11, deprecated: 12.0, renamed: "CInterop.Mode")
-@available(iOS, introduced: 14.0, deprecated: 15.0, renamed: "CInterop.Mode")
-@available(watchOS, introduced: 7.0, deprecated: 8.0, renamed: "CInterop.Mode")
-@available(tvOS, introduced: 14.0, deprecated: 15.0, renamed: "CInterop.Mode")
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public typealias CModeT = Darwin.mode_t
 @available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 public enum CInterop {
@@ -1920,26 +1917,14 @@ extension System.Errno {
     return lhs == value
   }
 }
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FileDescriptor : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FileDescriptor.AccessMode : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FileDescriptor.OpenOptions : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FileDescriptor.SeekOrigin : Swift.Sendable {}
-#endif
 @available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component : Swift.Encodable {}
 @available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
@@ -1956,19 +1941,13 @@ extension System.FilePath.Root : Swift.Hashable {}
 extension System.FilePath.Component.Kind : Swift.Equatable {}
 @available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component.Kind : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component.Kind : Swift.Sendable {}
-#endif
 @available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView : Swift.Encodable {}
 @available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView : Swift.Decodable {}
 @available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FilePermissions : Swift.Sendable {}
-#endif

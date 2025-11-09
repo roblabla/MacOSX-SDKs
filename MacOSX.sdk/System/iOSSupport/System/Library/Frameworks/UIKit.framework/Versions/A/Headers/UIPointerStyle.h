@@ -106,7 +106,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_
 @interface UIPointerShape : NSObject <NSCopying>
 
 /*!
- * @abstract Morphs the pointer to the given path.
+ * @abstract UIBezierPath describing the pointer's shape. If used alongside a content effect, the shape must be
+ *           in the effect's preview's container view's coordinate space. When used as a standalone shape,
+ *           The path's bounds' origin corresponds to the pointer's physical location.
  */
 + (instancetype)shapeWithPath:(UIBezierPath *)path;
 

@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
-// swift-module-flags: -target arm64e-apple-ios15.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftNetwork -swift-version 5 -enforce-exclusivity=checked -O -module-name Network
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-module-flags: -target arm64e-apple-ios15.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftNetwork -swift-version 5 -enforce-exclusivity=checked -O -module-name Network
 import Darwin
 import Dispatch
 import Foundation
@@ -898,8 +898,6 @@ public enum NWEndpoint : Swift.Hashable, Swift.CustomDebugStringConvertible {
   case unix(path: Swift.String)
   @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   case url(_: Foundation.URL)
-  @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
-  case srv(_: Swift.String)
   public enum Host : Swift.Hashable, Swift.CustomDebugStringConvertible, Swift.ExpressibleByStringLiteral {
     public typealias StringLiteralType = Swift.String
     public func hash(into hasher: inout Swift.Hasher)
@@ -1251,6 +1249,7 @@ final public class NWConnectionGroup : Swift.CustomDebugStringConvertible {
   final public func cancel()
   @objc deinit
 }
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.NWConnection {
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   convenience public init?(message: Network.NWConnectionGroup.Message)
@@ -1503,9 +1502,11 @@ extension Network.NWConnection {
   public enum Attribution : Swift.Equatable {
     case developer
     case user
-    @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
-    case website(domain: Swift.String)
+    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Network.NWParameters.Attribution, b: Network.NWParameters.Attribution) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
   }
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   final public var attribution: Network.NWParameters.Attribution {
@@ -1600,3 +1601,5 @@ extension Network.NWParameters.MultipathServiceType : Swift.Hashable {}
 extension Network.NWParameters.ExpiredDNSBehavior : Swift.Equatable {}
 @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.NWParameters.ExpiredDNSBehavior : Swift.Hashable {}
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+extension Network.NWParameters.Attribution : Swift.Hashable {}

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A970B259-ED78-32A3-B17D-3DD2D9C73704
+    value:           464E870D-C37E-3601-BE95-8AD89CCEF1CE
   - target:          x86_64-maccatalyst
-    value:           A970B259-ED78-32A3-B17D-3DD2D9C73704
+    value:           464E870D-C37E-3601-BE95-8AD89CCEF1CE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           112D8C03-75CA-3D77-8947-FCC334661FBD
+    value:           BB3B2484-3A10-3131-88D7-5CE812A65AAC
   - target:          arm64e-maccatalyst
-    value:           112D8C03-75CA-3D77-8947-FCC334661FBD
+    value:           BB3B2484-3A10-3131-88D7-5CE812A65AAC
 install-name:    '/System/Library/PrivateFrameworks/RunningBoardServices.framework/Versions/A/RunningBoardServices'
-current-version: 617.0.30
+current-version: 617.60.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -95,8 +95,8 @@ exports:
                        RBSHereditaryGrant, RBSInheritance, RBSInheritanceChangeSet, 
                        RBSJetsamPriorityGrant, RBSLaunchContext, RBSLaunchGrant, 
                        RBSLaunchRequest, RBSLegacyAttribute, RBSLimitation, RBSMachPortTaskNameRight, 
-                       RBSMimicTaskSuspensionAttribute, RBSPersistentAttribute, RBSPreventIdleSleepGrant, 
-                       RBSPreventLaunchLimitation, RBSProcessApplicationPredicate, 
+                       RBSMimicTaskSuspensionAttribute, RBSNotPredicate, RBSPersistentAttribute, 
+                       RBSPreventIdleSleepGrant, RBSPreventLaunchLimitation, RBSProcessApplicationPredicate, 
                        RBSProcessAssertionInfo, RBSProcessBKSLegacyPredicate, RBSProcessBundle, 
                        RBSProcessEverythingPredicate, RBSProcessExitContext, RBSProcessExitEvent, 
                        RBSProcessExitStatus, RBSProcessHandle, RBSProcessIdentifier, 

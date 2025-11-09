@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class VZDirectorySharingDevice;
 @class VZMemoryBalloonDevice;
+@class VZNetworkDevice;
 @class VZSocketDevice;
 @class VZVirtualMachineConfiguration;
 @protocol VZVirtualMachineDelegate;
@@ -152,6 +153,13 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @see VZVirtualMachineConfiguration
  */
 @property (readonly, copy) NSArray<VZMemoryBalloonDevice *> *memoryBalloonDevices;
+
+/*!
+ @abstract Return the list of network devices configured on this virtual machine. Return an empty array if no network device is configured.
+ @see VZVirtioNetworkDeviceConfiguration
+ @see VZVirtualMachineConfiguration
+ */
+@property (readonly, copy) NSArray<VZNetworkDevice *> *networkDevices API_AVAILABLE(macos(12.0));
 
 /*!
  @abstract Return the list of socket devices configured on this virtual machine. Return an empty array if no socket device is configured.

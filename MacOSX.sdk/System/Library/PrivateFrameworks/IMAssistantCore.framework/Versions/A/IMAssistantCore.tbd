@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0D79A416-EA38-3AB7-9F49-315E84C4478E
+    value:           A975D110-FA91-3AA3-B711-DDF7D8EA5EEC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EA2ED43D-6FB7-3195-A5B5-F014C4C52652
+    value:           41B436FF-35FF-3510-9094-7BF17CAE058A
 install-name:    '/System/Library/PrivateFrameworks/IMAssistantCore.framework/Versions/A/IMAssistantCore'
 current-version: 800
 exports:
@@ -16,8 +16,9 @@ exports:
                        _IMAssistantContinuityHandlesKey, _IMAssistantMessageHandlerErrorDomain, 
                        __IMAssistantCoreGeneralSignpostLogHandle, __IMAssistantCoreSearchForMessageSignpostLogHandle, 
                        __IMAssistantCoreSendMessageSignpostLogHandle ]
-    objc-classes:    [ IMAssistantAudioPlayer, IMAssistantChatParticipant, IMAssistantHandleFromContact, 
-                       IMAssistantINMessageConverter, IMAssistantIntentHandler, IMAssistantMessageAttributeOptions, 
+    objc-classes:    [ IMAssistantAudioPlayer, IMAssistantChatParticipant, IMAssistantCommSafetyManager, 
+                       IMAssistantHandleFromContact, IMAssistantINMessageConverter, 
+                       IMAssistantIntentHandler, IMAssistantMessageAttributeOptions, 
                        IMAssistantMessageHandler, IMAssistantMessagePlayAudioHandler, 
                        IMAssistantMessagePlayMessageSoundHandler, IMAssistantMessageQueryHandler, 
                        IMAssistantMessageReadAttributeSanitizer, IMAssistantMessageSearchHandler, 

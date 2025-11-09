@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           69C88CE0-E408-3571-9251-FE001105AF7F
+    value:           4866D86D-FB8D-37DB-A594-1FB36D2F2209
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1EC0EEFB-84BB-3837-A723-22FC9165905B
+    value:           62FAD99C-0BF7-3FD3-865C-1B0157634DD9
 install-name:    '/System/Library/PrivateFrameworks/TrustedPeers.framework/Versions/A/TrustedPeers'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -41,7 +41,8 @@ exports:
                        TPPeerStableInfo, TPPolicy, TPPolicyDocument, TPPolicyVersion, 
                        TPRecoveryKeyPair, TPSyncingPolicy, TPVoucher ]
     objc-ivars:      [ TPPBAncientEpoch._candidateEpoch, TPPBAncientEpoch._has, TPPBAncientEpoch._myEpoch, 
-                       TPPBCustodianRecoveryKey._encryptionPublicKey, TPPBCustodianRecoveryKey._signingPublicKey, 
+                       TPPBCustodianRecoveryKey._encryptionPublicKey, TPPBCustodianRecoveryKey._has, 
+                       TPPBCustodianRecoveryKey._kind, TPPBCustodianRecoveryKey._signingPublicKey, 
                        TPPBCustodianRecoveryKey._uuid, TPPBDictionaryMatchingRule._ands, 
                        TPPBDictionaryMatchingRule._exists, TPPBDictionaryMatchingRule._has, 
                        TPPBDictionaryMatchingRule._match, TPPBDictionaryMatchingRule._not, 
@@ -69,18 +70,19 @@ exports:
                        TPPBPeerStableInfoX._userControllableViewStatus, TPPBPeerStableInfoX._walrus, 
                        TPPBPolicyCategoriesByView._categories, TPPBPolicyCategoriesByView._view, 
                        TPPBPolicyDocument._categoriesByViews, TPPBPolicyDocument._has, 
-                       TPPBPolicyDocument._introducersByCategorys, TPPBPolicyDocument._keyViewMappings, 
-                       TPPBPolicyDocument._modelToCategorys, TPPBPolicyDocument._piggybackViews, 
-                       TPPBPolicyDocument._policyVersion, TPPBPolicyDocument._priorityViews, 
-                       TPPBPolicyDocument._redactions, TPPBPolicyDocument._userControllableViews, 
-                       TPPBPolicyIntroducersByCategory._category, TPPBPolicyIntroducersByCategory._introducers, 
-                       TPPBPolicyKeyViewMapping._matchingRule, TPPBPolicyKeyViewMapping._view, 
-                       TPPBPolicyModelToCategory._category, TPPBPolicyModelToCategory._prefix, 
-                       TPPBPolicyProhibits._candidateCategory, TPPBPolicyProhibits._explanation, 
-                       TPPBPolicyProhibits._has, TPPBPolicyProhibits._policyVersion, 
-                       TPPBPolicyProhibits._sponsorCategory, TPPBPolicyProhibits._sponsorId, 
-                       TPPBPolicyRedaction._key, TPPBPolicyRedaction._value, TPPBPolicySecret._name, 
-                       TPPBPolicySecret._secret, TPPBSecureElementIdentity._peerData, 
-                       TPPBSecureElementIdentity._peerIdentifier, TPPBVoucher._beneficiary, 
-                       TPPBVoucher._has, TPPBVoucher._reason, TPPBVoucher._sponsor ]
+                       TPPBPolicyDocument._inheritedExcludedViews, TPPBPolicyDocument._introducersByCategorys, 
+                       TPPBPolicyDocument._keyViewMappings, TPPBPolicyDocument._modelToCategorys, 
+                       TPPBPolicyDocument._piggybackViews, TPPBPolicyDocument._policyVersion, 
+                       TPPBPolicyDocument._priorityViews, TPPBPolicyDocument._redactions, 
+                       TPPBPolicyDocument._userControllableViews, TPPBPolicyIntroducersByCategory._category, 
+                       TPPBPolicyIntroducersByCategory._introducers, TPPBPolicyKeyViewMapping._matchingRule, 
+                       TPPBPolicyKeyViewMapping._view, TPPBPolicyModelToCategory._category, 
+                       TPPBPolicyModelToCategory._prefix, TPPBPolicyProhibits._candidateCategory, 
+                       TPPBPolicyProhibits._explanation, TPPBPolicyProhibits._has, 
+                       TPPBPolicyProhibits._policyVersion, TPPBPolicyProhibits._sponsorCategory, 
+                       TPPBPolicyProhibits._sponsorId, TPPBPolicyRedaction._key, 
+                       TPPBPolicyRedaction._value, TPPBPolicySecret._name, TPPBPolicySecret._secret, 
+                       TPPBSecureElementIdentity._peerData, TPPBSecureElementIdentity._peerIdentifier, 
+                       TPPBVoucher._beneficiary, TPPBVoucher._has, TPPBVoucher._reason, 
+                       TPPBVoucher._sponsor ]
 ...

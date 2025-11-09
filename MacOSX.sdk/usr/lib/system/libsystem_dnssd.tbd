@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3FB85CF6-5212-3930-B3CC-B9A015349001
+    value:           23E1B6FF-AD92-365D-8863-780A8E048E88
   - target:          x86_64-maccatalyst
-    value:           3FB85CF6-5212-3930-B3CC-B9A015349001
+    value:           23E1B6FF-AD92-365D-8863-780A8E048E88
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E41A667F-B14A-3FA7-8779-3D6779499E69
+    value:           B09D4026-65C0-3697-A061-F9EFDD472524
   - target:          arm64e-maccatalyst
-    value:           E41A667F-B14A-3FA7-8779-3D6779499E69
+    value:           B09D4026-65C0-3697-A061-F9EFDD472524
 install-name:    '/usr/lib/system/libsystem_dnssd.dylib'
-current-version: 1552
+current-version: 1556.60.9
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _DNSServiceAddRecord, _DNSServiceBrowse, _DNSServiceConstructFullName, 
                        _DNSServiceCreateConnection, _DNSServiceCreateDelegateConnection, 

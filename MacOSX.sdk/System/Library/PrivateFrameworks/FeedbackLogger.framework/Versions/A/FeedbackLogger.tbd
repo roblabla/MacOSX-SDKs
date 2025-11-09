@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F0F39463-799C-316A-AFB2-FA00EDF10FB1
+    value:           B1309902-39C4-3C30-BE4A-5823967CA311
   - target:          x86_64-maccatalyst
-    value:           F0F39463-799C-316A-AFB2-FA00EDF10FB1
+    value:           B1309902-39C4-3C30-BE4A-5823967CA311
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C0EC6ABD-668E-3E7C-A37D-6906CFBC9CCC
+    value:           C77D62E8-FCAC-38A7-9809-62D455FA5191
   - target:          arm64e-maccatalyst
-    value:           C0EC6ABD-668E-3E7C-A37D-6906CFBC9CCC
+    value:           C77D62E8-FCAC-38A7-9809-62D455FA5191
 install-name:    '/System/Library/PrivateFrameworks/FeedbackLogger.framework/Versions/A/FeedbackLogger'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

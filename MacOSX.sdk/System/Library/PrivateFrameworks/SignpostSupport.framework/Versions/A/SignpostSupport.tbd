@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F48EDC6A-EED5-3825-8DC3-91334B7E4899
+    value:           A084ACFE-AD13-37D7-A433-14FDCDA42694
   - target:          x86_64-maccatalyst
-    value:           F48EDC6A-EED5-3825-8DC3-91334B7E4899
+    value:           A084ACFE-AD13-37D7-A433-14FDCDA42694
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0FBAFEB7-AA2C-3C01-AA26-764456743720
+    value:           38415BE2-05CA-39E5-9FD9-E18EDD48A417
   - target:          arm64e-maccatalyst
-    value:           0FBAFEB7-AA2C-3C01-AA26-764456743720
+    value:           38415BE2-05CA-39E5-9FD9-E18EDD48A417
 install-name:    '/System/Library/PrivateFrameworks/SignpostSupport.framework/Versions/A/SignpostSupport'
-current-version: 66
+current-version: 69
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -29,7 +29,8 @@ exports:
                        _SignpostReporterCrossPlatformSiriPersonalUpdateStringPasslist, 
                        _SignpostReporterCrossPlatformSiriPlaybackControlsStringPasslist, 
                        _SignpostReporterCrossPlatformSiriVideoUTSOperationRequestStringPasslist, 
-                       _SignpostReporterShouldUseAllowlist, _SignpostSupportAverageDurationMachContinuousTimeForIntervals, 
+                       _SignpostReporterShouldUseAllowlist, _SignpostSupportAllowlistedStringSetForCurrentDevice, 
+                       _SignpostSupportAverageDurationMachContinuousTimeForIntervals, 
                        _SignpostSupportAverageDurationNsForIntervals, _SignpostSupportAverageDurationOfLongestIntervalsInMachContinuousTime, 
                        _SignpostSupportAverageDurationOfLongestIntervalsInNs, _SignpostSupportAverageDurationOfShortestIntervalsInMachContinuousTime, 
                        _SignpostSupportAverageDurationOfShortestIntervalsInNs, _SignpostSupportDeserializationEnumerateObjectArrayFromData, 

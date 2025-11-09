@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E23BFE63-71B7-37FE-ADD6-90B2A44BFA80
+    value:           91C3FF56-ED18-32CD-B34A-4E99CDECC114
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D4823CCC-0893-3134-8966-50CD0C487814
+    value:           9F597F41-C54C-3379-B8AE-F458BDAB39EF
 install-name:    '/System/Library/Frameworks/Python.framework/Versions/2.7/Python'
-current-version: 2.7.16
+current-version: 2.7.18
 compatibility-version: 2.7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -23,10 +23,10 @@ allowable-clients:
                        appletrace_bindings-python2, ausiss, caffeconverter, cgdump, 
                        coremlpython, disasm, duallinkanalyse, eoslib, fastsim, gxtools, 
                        lldbPluginScriptInterpreterPython2, lldb_host, mrecfpu, pdsasm, 
-                       pmrec, pmrec.tmp, py_dasm, pydis, pyobjc, python.exe, python_modules, 
-                       pythonw, pytrace, quarantine_test, rogueasm, sim, sim_bindings-python2, 
-                       testbotctl, testbotd, testbotd-base, testbottask, timesyncanalyse, 
-                       timesynclogextract ]
+                       pmrec, pmrec.tmp, py_dasm, pydis, pydis-s2a8, pyobjc, python.exe, 
+                       python_modules, pythonw, pytrace, quarantine_test, rogueasm, 
+                       sim, sim_bindings-python2, testbotctl, testbotd, testbotd-base, 
+                       testbottask, timesyncanalyse, timesynclogextract ]
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AEDesc_Convert, _AEDesc_New, _AEDesc_NewBorrowed, _BMObj_Convert, 

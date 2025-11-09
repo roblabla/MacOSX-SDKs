@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7F8B4E91-B77C-3DC8-95A5-22DED2A573AB
+    value:           A0300B54-FB69-3C91-AD49-91ADDF2BE658
   - target:          x86_64-maccatalyst
-    value:           7F8B4E91-B77C-3DC8-95A5-22DED2A573AB
+    value:           A0300B54-FB69-3C91-AD49-91ADDF2BE658
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DEAE345A-3C1D-36A6-A89D-778485FAB425
+    value:           66078D92-7E91-38A3-A502-502D6C74E5EF
   - target:          arm64e-maccatalyst
-    value:           DEAE345A-3C1D-36A6-A89D-778485FAB425
+    value:           66078D92-7E91-38A3-A502-502D6C74E5EF
 install-name:    '/System/Library/PrivateFrameworks/FamilyCircle.framework/Versions/A/FamilyCircle'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -61,9 +61,10 @@ exports:
                        __FASignpostLogSystem, _kFAClientProcessOption, _kFAServicePasswordOption, 
                        _kFAServiceUsernameOption, _kFATearDownCFUHeader ]
     objc-classes:    [ FABroadcaster, FACircleStateResponse, FAClearFamilyCircleCacheRequest, 
-                       FAEligibilityRequirements, FAEligiblityEvaluationRequest, 
-                       FAFamilyCircle, FAFamilyCircleRequest, FAFamilyCloudKitProperties, 
-                       FAFamilyMember, FAFamilyMemberPhotoRequest, FAFamilyPresenterHostInterface, 
+                       FADeviceInfo, FAEligibilityRequirements, FAEligiblityEvaluationRequest, 
+                       FAFamilyCircle, FAFamilyCircleCache, FAFamilyCircleCacheResponse, 
+                       FAFamilyCircleRequest, FAFamilyCloudKitProperties, FAFamilyMember, 
+                       FAFamilyMemberPhotoRequest, FAFamilyPresenterHostInterface, 
                        FAFamilySettings, FAFetchFamilyCircleRequest, FAFetchFamilyPhotoRequest, 
                        FAFetchFollowupRequest, FAFollowupManager, FAHTTPResponse, 
                        FAHandleFamilyEventPushNotificationRequest, FAHeartbeatRequest, 

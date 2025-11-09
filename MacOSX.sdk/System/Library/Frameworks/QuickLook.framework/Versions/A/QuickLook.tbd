@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7256FAA8-DE84-3F9B-85F1-C3B4110687BC
+    value:           33BEC6D8-AD98-3842-B964-65B85B9A513E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           31FEEE56-0163-3DED-9177-60029F6EF33A
+    value:           2A5699D0-03E1-3641-B644-F8A582151160
 install-name:    '/System/Library/Frameworks/QuickLook.framework/Versions/A/QuickLook'
 current-version: 0
 exports:
@@ -163,7 +163,7 @@ exports:
                        __QLGeneratorIsFolderGeneratorAllowed, __QLGeneratorIsValid, 
                        __QLGeneratorMaxGlobalWeightIsSet, __QLGeneratorNeedsAccessToExternalResources, 
                        __QLGeneratorResetPluginCache, __QLGeneratorScore, __QLGeneratorSetMaxGlobalWeight, 
-                       __QLGeneratorSetPluginsWhiteList, __QLGeneratorSupportsSandboxing, 
+                       __QLGeneratorSetPluginsAllowList, __QLGeneratorSupportsSandboxing, 
                        __QLGlobalQuickLookPreferencesBooleanValueForKey, __QLIconCopyIconSetImageName, 
                        __QLIsOnServerSide, __QLIsRealQuickLookServer, __QLIsRunningEverythingLocally, 
                        __QLIsRunningForDebug, __QLIsUIProcess, __QLIsUsingSatellites, 

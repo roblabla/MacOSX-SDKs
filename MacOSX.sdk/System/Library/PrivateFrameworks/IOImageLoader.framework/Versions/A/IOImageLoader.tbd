@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E212191F-BDC9-3283-B782-CAD339405B43
+    value:           68B6FE19-E4B7-3A40-8260-6C48F7D1B0B3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           650CAF89-5BE0-32EE-954E-6035CAB4DEC2
+    value:           02C2FB6C-2A12-367A-9787-0AD06179B43C
 install-name:    '/System/Library/PrivateFrameworks/IOImageLoader.framework/Versions/A/IOImageLoader'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

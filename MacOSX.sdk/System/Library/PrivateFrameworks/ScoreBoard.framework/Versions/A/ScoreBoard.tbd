@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E9EE7D3F-E5B6-3AED-9D83-02D46B9760F1
+    value:           40DFEDAC-D076-337A-83B6-B6AB224F4CE7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F319C936-A83F-3711-8BCB-57CE93C26B7F
+    value:           765520A6-2B29-3092-91A7-3A178EB62111
 install-name:    '/System/Library/PrivateFrameworks/ScoreBoard.framework/Versions/A/ScoreBoard'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -27,7 +27,7 @@ typedef NS_ENUM(uint64_t, MPSGraphSparseStorageType) {
     MPSGraphSparseStorageCSR MPS_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0)) = 2L,
 };
 
-MPS_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
 @interface MPSGraphCreateSparseOpDescriptor : NSObject <NSCopying>
 
 @property(readwrite, nonatomic) MPSGraphSparseStorageType sparseStorageType;
@@ -39,7 +39,6 @@ MPS_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
 
 @end
 
-MPS_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
 @interface MPSGraph (MPSGraphSparseOps)
 
 /*!
@@ -64,6 +63,7 @@ MPS_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
                                    shape:(MPSShape *)shape
                                 dataType:(MPSDataType)dataType
                                     name:(NSString *_Nullable)name
+    MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
     MPS_SWIFT_NAME(sparseTensor(sparseTensorWithType:tensors:shape:dataType:name:));
 
 /*!
@@ -86,6 +86,7 @@ MPS_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
                                        tensors:(NSArray<MPSGraphTensor *> *)inputTensorArray
                                          shape:(MPSShape *)shape
                                           name:(NSString *_Nullable)name
+    MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
     MPS_SWIFT_NAME(sparseTensor(sparseTensorWithDescriptor:tensors:shape:name:));
 
 @end

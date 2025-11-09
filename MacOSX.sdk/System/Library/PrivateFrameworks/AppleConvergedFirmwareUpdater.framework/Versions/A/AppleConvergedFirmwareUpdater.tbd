@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           62CD4317-1D36-3FC3-B966-ACF58D1AEB45
+    value:           A80DF0B4-35E7-356C-93D7-074E1DC761C3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B46F35BD-A2F2-367C-9DAE-7D5D338478B9
+    value:           D638CBF0-7DF9-3EBE-9450-B642C98E02C1
 install-name:    '/System/Library/PrivateFrameworks/AppleConvergedFirmwareUpdater.framework/Versions/A/AppleConvergedFirmwareUpdater'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

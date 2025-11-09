@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9A7CFBC5-885B-3567-918C-B40F19F0C5AA
+    value:           CE19DFED-1CBC-3039-AC12-999E017F4548
   - target:          x86_64-maccatalyst
-    value:           9A7CFBC5-885B-3567-918C-B40F19F0C5AA
+    value:           CE19DFED-1CBC-3039-AC12-999E017F4548
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0637B06B-E849-34DE-9385-62DD938DE71D
+    value:           34A9BCB2-ED43-39E7-B87C-A0C9F0BBCFE2
   - target:          arm64e-maccatalyst
-    value:           0637B06B-E849-34DE-9385-62DD938DE71D
+    value:           34A9BCB2-ED43-39E7-B87C-A0C9F0BBCFE2
 install-name:    '/System/Library/PrivateFrameworks/CoreDuetSync.framework/Versions/A/CoreDuetSync'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

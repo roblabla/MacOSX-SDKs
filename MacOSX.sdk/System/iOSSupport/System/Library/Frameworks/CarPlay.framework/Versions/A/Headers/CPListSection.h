@@ -29,9 +29,16 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
 /**
  Create a section with a list of items and an optional header and identifier.
  */
+
+#if __swift__
+- (instancetype)initWithItems:(NSArray *)items
+                       header:(nullable NSString *)header
+            sectionIndexTitle:(nullable NSString *)sectionIndexTitle NS_REFINED_FOR_SWIFT;
+#else
 - (instancetype)initWithItems:(NSArray <id <CPListTemplateItem>> *)items
                        header:(nullable NSString *)header
             sectionIndexTitle:(nullable NSString *)sectionIndexTitle;
+#endif
 
 /**
  Create a section with a list of items and an optional header containing labels, an image, and a button.
@@ -59,7 +66,12 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
 /**
  Create a section by specifying a list of items.
  */
+
+#if __swift__
+- (instancetype)initWithItems:(NSArray *)items NS_REFINED_FOR_SWIFT;
+#else
 - (instancetype)initWithItems:(NSArray <id <CPListTemplateItem>> *)items;
+#endif
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -74,7 +86,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  */
 
 @property (nullable, nonatomic, readonly, copy) NSString *headerSubtitle API_AVAILABLE(ios(15.0));
-@property (nullable, nonatomic, readonly, copy) UIImage *headerImage API_AVAILABLE(ios(15.0));
+@property (nullable, nonatomic, copy) UIImage *headerImage API_AVAILABLE(ios(15.0));
 @property (nullable, nonatomic, readonly, copy) CPButton *headerButton API_AVAILABLE(ios(15.0));
 
 /**

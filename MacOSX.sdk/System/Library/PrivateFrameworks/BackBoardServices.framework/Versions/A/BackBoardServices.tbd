@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           007D6BC1-D9AA-3CC9-9D25-4EF55400EA08
+    value:           D1962798-8CA0-311B-AD3A-A0B9DCA205C4
   - target:          x86_64-maccatalyst
-    value:           007D6BC1-D9AA-3CC9-9D25-4EF55400EA08
+    value:           D1962798-8CA0-311B-AD3A-A0B9DCA205C4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C6BD97A4-BE00-34CF-9812-6EF2B4AE77CA
+    value:           F65AD9C9-AFA3-328C-9519-3EB9F91EC93C
   - target:          arm64e-maccatalyst
-    value:           C6BD97A4-BE00-34CF-9812-6EF2B4AE77CA
+    value:           F65AD9C9-AFA3-328C-9519-3EB9F91EC93C
 install-name:    '/System/Library/PrivateFrameworks/BackBoardServices.framework/Versions/A/BackBoardServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

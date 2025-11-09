@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4CF1BABB-A91A-3834-B523-3293F3BF26B8
+    value:           0CEDA9E4-48D2-3057-A855-629D68E105D9
   - target:          x86_64-maccatalyst
-    value:           4CF1BABB-A91A-3834-B523-3293F3BF26B8
+    value:           0CEDA9E4-48D2-3057-A855-629D68E105D9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E9F0E296-2F88-3889-BE04-A1795DAB2D69
+    value:           48BA797F-7867-3BE7-8551-1AC811651A65
   - target:          arm64e-maccatalyst
-    value:           E9F0E296-2F88-3889-BE04-A1795DAB2D69
+    value:           48BA797F-7867-3BE7-8551-1AC811651A65
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySharedSupport.framework/Versions/A/AccessibilitySharedSupport'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

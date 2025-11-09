@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B59B927F-E857-3B4B-BDA5-E5C60F060E7A
+    value:           1F1ED6FC-C843-3A15-AB2E-0CBEECEDB27A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           154E5BD7-AA41-3F0F-80CD-86E6C9BB669E
+    value:           11C35025-6CCC-3963-80DA-CB400E72E727
 install-name:    '/System/Library/PrivateFrameworks/WatchListKit.framework/Versions/A/WatchListKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -124,12 +124,12 @@ exports:
                        _WLKSystemLogObject, _WLKTVAppBundleID, _WLKTVAppEnabledOverride, 
                        _WLKTVDomain, _WLKViewServiceAccountNameKey, _WLKViewServiceAppBundlesKey, 
                        _WatchListKitVersionNumber, _WatchListKitVersionString, __CoderKeyBackingDictionary, 
-                       __DeltaKeyChanges, __DeltaKeyExpiration, __DeltaKeyTimeStamp, 
-                       __PrewarmSemaphoreTimeout, __SanitizedAMSError, __TemporalTolerance, 
-                       __WLKAppLibraryDidChangeNotification, __WLKChannelUtilitesDataShouldRefreshInternal, 
-                       __WLKOfferPeriodKeyDuration, __WLKOfferPeriodKeyType, __WLKSmootEntitlementKey, 
-                       __WLKSubscriptionStoreSubscriptionDataDidChangeInternal, __WLKSupportsTVInfoPlistKey, 
-                       __WLKSystemSubscriptionPID, __WLKUserEnvironmentPlatform, 
+                       __DeltaKeyChanges, __DeltaKeyExpiration, __DeltaKeyImages, 
+                       __DeltaKeyTimeStamp, __DeltaKeyWidgetImages, __PrewarmSemaphoreTimeout, 
+                       __SanitizedAMSError, __TemporalTolerance, __WLKAppLibraryDidChangeNotification, 
+                       __WLKChannelUtilitesDataShouldRefreshInternal, __WLKOfferPeriodKeyDuration, 
+                       __WLKOfferPeriodKeyType, __WLKSmootEntitlementKey, __WLKSubscriptionStoreSubscriptionDataDidChangeInternal, 
+                       __WLKSupportsTVInfoPlistKey, __WLKSystemSubscriptionPID, __WLKUserEnvironmentPlatform, 
                        __WLKUserEnvironmentPlatformMac, __WLKUserEnvironmentPlatformPad, 
                        __WLKUserEnvironmentPlatformPhone, __WLKUserEnvironmentPlatformTV, 
                        __WLKUserEnvironmentPlatformWatch, ___WLKLocationManagerLocationDidChangeNotification, 

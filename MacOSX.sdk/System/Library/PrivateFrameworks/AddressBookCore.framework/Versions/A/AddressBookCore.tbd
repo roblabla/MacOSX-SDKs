@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A916E221-072D-37A0-8EF0-B3BB8AABEB6B
+    value:           187E16BF-F115-327E-B904-D92582EF6CA6
   - target:          x86_64-maccatalyst
-    value:           A916E221-072D-37A0-8EF0-B3BB8AABEB6B
+    value:           187E16BF-F115-327E-B904-D92582EF6CA6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           29D9A50D-8E46-366E-8B15-3F6F16CA7769
+    value:           87F017F6-6AD1-3614-8A2F-D8157AF81FBF
   - target:          arm64e-maccatalyst
-    value:           29D9A50D-8E46-366E-8B15-3F6F16CA7769
+    value:           87F017F6-6AD1-3614-8A2F-D8157AF81FBF
 install-name:    '/System/Library/PrivateFrameworks/AddressBookCore.framework/Versions/A/AddressBookCore'
-current-version: 2488
+current-version: 2498.2.1
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -93,22 +93,25 @@ exports:
                        _ABCNPhoneMobileLabel, _ABCNPhoneNumbersKey, _ABCNPhonemeDataKey, 
                        _ABCNPhoneticCompanyNameKey, _ABCNPhoneticFirstNameKey, _ABCNPhoneticLastNameKey, 
                        _ABCNPhoneticMiddleNameKey, _ABCNPostalAddressFormatsCountryKey, 
-                       _ABCNPostalAddressesKey, _ABCNPreferredForNameKey, _ABCNPreferredForPhotoKey, 
-                       _ABCNRelatedNamesKey, _ABCNRingtoneKey, _ABCNSocialProfileDisplayNameKey, 
-                       _ABCNSocialProfileServiceFacebook, _ABCNSocialProfileServiceFlickr, 
-                       _ABCNSocialProfileServiceKey, _ABCNSocialProfileServiceLinkedIn, 
-                       _ABCNSocialProfileServiceMySpace, _ABCNSocialProfileServiceSinaWeibo, 
-                       _ABCNSocialProfileServiceTencentWeibo, _ABCNSocialProfileServiceTwitter, 
-                       _ABCNSocialProfileServiceUsernameURLTemplate, _ABCNSocialProfileServiceYelp, 
-                       _ABCNSocialProfileSyntheticURIScheme, _ABCNSocialProfileURLKey, 
-                       _ABCNSocialProfileUserIdentifierKey, _ABCNSocialProfileUsernameKey, 
-                       _ABCNSocialProfilesKey, _ABCNTexttoneKey, _ABCNUrlAddressesKey, 
-                       _ABCNWorkLabel, _ABCachedAccountCollectionKey, _ABCachedAccountIdentifierKey, 
-                       _ABCachedClearedDateKey, _ABCachedKnownPropertiesKey, _ABCachedPropertyTypesKey, 
-                       _ABCancelLoadingImageDataForTag, _ABCardDAVAccountType, _ABCardDAVCollectionPathKey, 
-                       _ABCardDAVEnabledKey, _ABCardDAVHUseSSLKey, _ABCardDAVHUserNameKey, 
-                       _ABCardDAVHomeInfoGuardianRestrictedKey, _ABCardDAVHomeInfoKey, 
-                       _ABCardDAVHomeInfoPathKey, _ABCardDAVHomeInfoPrivilegesKey, 
+                       _ABCNPostalAddressKeyCity, _ABCNPostalAddressKeyCountry, _ABCNPostalAddressKeyISOCountryCode, 
+                       _ABCNPostalAddressKeyPostalCode, _ABCNPostalAddressKeyState, 
+                       _ABCNPostalAddressKeyStreet, _ABCNPostalAddressKeySubAdministrativeArea, 
+                       _ABCNPostalAddressKeySubLocality, _ABCNPostalAddressesKey, 
+                       _ABCNPreferredForNameKey, _ABCNPreferredForPhotoKey, _ABCNRelatedNamesKey, 
+                       _ABCNRingtoneKey, _ABCNSocialProfileDisplayNameKey, _ABCNSocialProfileServiceFacebook, 
+                       _ABCNSocialProfileServiceFlickr, _ABCNSocialProfileServiceKey, 
+                       _ABCNSocialProfileServiceLinkedIn, _ABCNSocialProfileServiceMySpace, 
+                       _ABCNSocialProfileServiceSinaWeibo, _ABCNSocialProfileServiceTencentWeibo, 
+                       _ABCNSocialProfileServiceTwitter, _ABCNSocialProfileServiceUsernameURLTemplate, 
+                       _ABCNSocialProfileServiceYelp, _ABCNSocialProfileSyntheticURIScheme, 
+                       _ABCNSocialProfileURLKey, _ABCNSocialProfileUserIdentifierKey, 
+                       _ABCNSocialProfileUsernameKey, _ABCNSocialProfilesKey, _ABCNTexttoneKey, 
+                       _ABCNUrlAddressesKey, _ABCNWorkLabel, _ABCachedAccountCollectionKey, 
+                       _ABCachedAccountIdentifierKey, _ABCachedClearedDateKey, _ABCachedKnownPropertiesKey, 
+                       _ABCachedPropertyTypesKey, _ABCancelLoadingImageDataForTag, 
+                       _ABCardDAVAccountType, _ABCardDAVCollectionPathKey, _ABCardDAVEnabledKey, 
+                       _ABCardDAVHUseSSLKey, _ABCardDAVHUserNameKey, _ABCardDAVHomeInfoGuardianRestrictedKey, 
+                       _ABCardDAVHomeInfoKey, _ABCardDAVHomeInfoPathKey, _ABCardDAVHomeInfoPrivilegesKey, 
                        _ABCardDAVHostNameKey, _ABCardDAVRecordTypeKey, _ABCardDAVRecordTypeSystemGroup, 
                        _ABCardDAVRecordTypeUserGroup, _ABCardDAVSSLEnabledKey, _ABCardDAVServerNameKey, 
                        _ABCardDAVServerPortKey, _ABCardDAVServerRootPathKey, _ABCardPaneFrame, 
@@ -689,10 +692,9 @@ exports:
                        ABUndoManager._commandTargetsSinceCheckpoint, ABUndoManager._inCreationUndoGrouping, 
                        ABUndoer._undoManager, ABUnlinksLoneRemainingPeopleCommand._adapter, 
                        ABUnlinksLoneRemainingPeopleCommand._linkIds, ABUpdatesLinkingInformation._adapter, 
-                       ABVCardParser._reserved, ABVCardSingleFileSerializer._cardHandle, 
-                       ABVCardSingleFileSerializer._cardURL, ABVCardSingleFileSerializer._names, 
-                       ABVCardSingleFileSerializer._usePeopleNamesAsName, ABWorkQueue._delegate, 
-                       ABWorkQueue._delegateScheduler, ABXPCACAccountStore._connection, 
+                       ABVCardSingleFileSerializer._cardHandle, ABVCardSingleFileSerializer._cardURL, 
+                       ABVCardSingleFileSerializer._names, ABVCardSingleFileSerializer._usePeopleNamesAsName, 
+                       ABWorkQueue._delegate, ABWorkQueue._delegateScheduler, ABXPCACAccountStore._connection, 
                        PHXSource._addressBook, PHXSource._addressBookWasSetManually, 
                        PHXSource._allocationBacktrace, PHXSource._busy, PHXSource._canCreateGroups, 
                        PHXSource._canCreatePeople, PHXSource._currentStatus, PHXSource._isSetupComplete, 
@@ -707,17 +709,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           80FB5725-C494-330F-B9C8-FD089D87F341
+    value:           E4F53DF6-A324-33E8-A75E-D0BA58CE9588
   - target:          x86_64-maccatalyst
-    value:           80FB5725-C494-330F-B9C8-FD089D87F341
+    value:           E4F53DF6-A324-33E8-A75E-D0BA58CE9588
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ACEF6684-96F5-3F37-B2A6-F604D2D49388
+    value:           D9A21D76-D4B4-3726-9B9C-9E7E76383092
   - target:          arm64e-maccatalyst
-    value:           ACEF6684-96F5-3F37-B2A6-F604D2D49388
+    value:           D9A21D76-D4B4-3726-9B9C-9E7E76383092
 install-name:    '/System/Library/PrivateFrameworks/ContactsPersistence.framework/Versions/A/ContactsPersistence'
 swift-abi-version: 7
 exports:
@@ -802,13 +804,14 @@ exports:
                        _CNCDExternalURIKey, _CNCDExternalUUIDCardDAVLegacyCustomProperty, 
                        _CNCDExternalUUIDKey, _CNCDGroupKeyChildGroups, _CNCDGroupKeyContacts, 
                        _CNCDGroupKeyName, _CNCDGroupKeyParentGroups, _CNCDIOSLegacyIdentifierKey, 
-                       _CNCDInProcessDatabaseEntitlementName, _CNCDLocalContainerLocation, 
-                       _CNCDMessagingAddressKeyAddress, _CNCDMessagingAddressKeyBundleIdentifiers, 
-                       _CNCDMessagingAddressKeyBundleIdentifiersString, _CNCDMessagingAddressKeyService, 
-                       _CNCDMessagingAddressKeyTeamIdentifier, _CNCDMessagingAddressKeyUserIdentifier, 
-                       _CNCDNoteKeyContact, _CNCDNoteKeyText, _CNCDOwnedObjectKeyIOSLegacyIdentifier, 
+                       _CNCDLocalContainerLocation, _CNCDMessagingAddressKeyAddress, 
+                       _CNCDMessagingAddressKeyBundleIdentifiers, _CNCDMessagingAddressKeyBundleIdentifiersString, 
+                       _CNCDMessagingAddressKeyService, _CNCDMessagingAddressKeyTeamIdentifier, 
+                       _CNCDMessagingAddressKeyUserIdentifier, _CNCDNoteKeyContact, 
+                       _CNCDNoteKeyText, _CNCDOwnedObjectKeyIOSLegacyIdentifier, 
                        _CNCDOwnedObjectKeyIsPrimary, _CNCDOwnedObjectKeyLabel, _CNCDOwnedObjectKeyOrderingIndex, 
-                       _CNCDOwnedObjectKeyOwner, _CNCDOwnedObjectKeyUniqueID, _CNCDPersistenceContextIgnoresGuardianRestrictionsKey, 
+                       _CNCDOwnedObjectKeyOwner, _CNCDOwnedObjectKeyUniqueID, _CNCDOwnedObjectLabelHome, 
+                       _CNCDOwnedObjectLabelOther, _CNCDOwnedObjectLabelWork, _CNCDPersistenceContextIgnoresGuardianRestrictionsKey, 
                        _CNCDPhoneNumberFullNumberKey, _CNCDPhoneNumberLastFourDigitsKey, 
                        _CNCDPostalAddressCityKey, _CNCDPostalAddressCountryKey, _CNCDPostalAddressISOCountryCodeKey, 
                        _CNCDPostalAddressKeyCity, _CNCDPostalAddressKeyCountry, _CNCDPostalAddressKeyISOCountryCode, 
@@ -828,16 +831,17 @@ exports:
                        _CNCDRecordKeySyncStatus, _CNCDRecordKeyUniqueIdentifier, 
                        _CNCDRecordKeyUnknownProperties, _CNCDRelatedNameKeyName, 
                        _CNCDRemotePersistenceServiceName, _CNCDServiceKeyName, _CNCDSocialProfileKeyBundleIdentifiers, 
-                       _CNCDSocialProfileKeyCustomValueData, _CNCDSocialProfileKeyCustomValues, 
-                       _CNCDSocialProfileKeyCustomValuesData, _CNCDSocialProfileKeyDisplayName, 
-                       _CNCDSocialProfileKeyDisplayValue, _CNCDSocialProfileKeyServiceName, 
-                       _CNCDSocialProfileKeyTeamIdentifier, _CNCDSocialProfileKeyURLString, 
-                       _CNCDSocialProfileKeyUserIdentifier, _CNCDSocialProfileKeyUsername, 
-                       _CNCDSyncStatusCardDAVLegacyCustomProperty, _CNCDSyncStatusKey, 
-                       _CNCDURLAddressKeyURL, _CNCDUniqueIdentifierKey, _CNCoreDataImportCompletedKey, 
-                       _CNCoreDataMetaDataIOSLegacyIdentifierNamespaceKey, _CNCoreDataMetaDataVersionKey, 
-                       _CNFilenameContactsDatabase, _CNFilenameExchangeSyncDatabase, 
-                       _CNLocalAccountIdentifier, _CNPathComponentSources, _CNPersistentStoreURLForBaseURLAndIdentifier, 
+                       _CNCDSocialProfileKeyBundleIdentifiersString, _CNCDSocialProfileKeyCustomValueData, 
+                       _CNCDSocialProfileKeyCustomValues, _CNCDSocialProfileKeyCustomValuesData, 
+                       _CNCDSocialProfileKeyDisplayName, _CNCDSocialProfileKeyDisplayValue, 
+                       _CNCDSocialProfileKeyServiceName, _CNCDSocialProfileKeyTeamIdentifier, 
+                       _CNCDSocialProfileKeyURLString, _CNCDSocialProfileKeyUserIdentifier, 
+                       _CNCDSocialProfileKeyUsername, _CNCDSyncStatusCardDAVLegacyCustomProperty, 
+                       _CNCDSyncStatusKey, _CNCDURLAddressKeyURL, _CNCDUniqueIdentifierKey, 
+                       _CNCoreDataImportCompletedKey, _CNCoreDataMetaDataIOSLegacyIdentifierNamespaceKey, 
+                       _CNCoreDataMetaDataVersionKey, _CNFilenameContactsDatabase, 
+                       _CNFilenameExchangeSyncDatabase, _CNLocalAccountIdentifier, 
+                       _CNPathComponentSources, _CNPersistentStoreURLForBaseURLAndIdentifier, 
                        _kABAlertToneRelationshipName, _kABAlternateBirthdayRelationshipName, 
                        _kABCDContactAddressingGrammarKey, _kABCDContactBirthdayComponentsKey, 
                        _kABCDContactBirthdayKey, _kABCDContactBirthdayYearKey, _kABCDContactBirthdayYearlessKey, 
@@ -909,14 +913,16 @@ exports:
                        CNCDIOSLegacyIdentifierRegistrarState, CNCDIOSLegacyIdentifierRegistrationRequest, 
                        CNCDIOSLegacyIdentifierRegistrations, CNCDIOSLegacyIdentifierSaveDistributor, 
                        CNCDIOSLegacyIdentifierXPCRegistrar, CNCDManagedObjectContext, 
-                       CNCDManagedObjectContextSaveListener, CNCDMigrator, CNCDPersistenceContext, 
+                       CNCDManagedObjectContextSaveListener, CNCDMessagingAddress, 
+                       CNCDMigrator, CNCDOwnedObject, CNCDPersistenceContext, CNCDPersistenceMetrics, 
                        CNCDPersistenceStack, CNCDPersistentStoreCoordinator, CNCDPhoneNumber, 
-                       CNCDPostalAddress, CNCDRemoteExchangeSyncPersistentStoreEndpointFactory, 
+                       CNCDPostalAddress, CNCDRecord, CNCDRemoteExchangeSyncPersistentStoreEndpointFactory, 
                        CNCDRemotePersistence, CNCDRemotePersistentStoreDescriptor, 
                        CNCDRemotePersistentStoreEndpointFactory, CNCDRemotePersistentStoreEndpointFetchRequest, 
-                       CNCDRemotePersistentStoreEndpointFetchResponse, CNCDTestManagedObjectContextSession, 
-                       CNCDTestPersistenceStack, CNCDURLAddress, CNCDUnifiedContactInfo, 
-                       CNCDVCardSerialization, CNCustomPropertyMigrationTask, CNDelegateAccessAccountCollection, 
+                       CNCDRemotePersistentStoreEndpointFetchResponse, CNCDService, 
+                       CNCDTestManagedObjectContextSession, CNCDTestPersistenceStack, 
+                       CNCDURLAddress, CNCDUnifiedContactInfo, CNCDVCardSerialization, 
+                       CNCustomPropertyMigrationTask, CNDelegateAccessAccountCollection, 
                        CNEmptyAccountCollection, CNOnDiskAccountCollection, CNPersistentStoreBuilder, 
                        CNPersistentStoreCoordinatorCache, CNPersistentStoreCoordinatorCacheEntry, 
                        CNPersistentStoreCoordinatorFactory, CNPersistentStoreCoordinatorResult, 
@@ -924,7 +930,6 @@ exports:
     objc-ivars:      [ ABCDContainerPermissions._canCreateContacts, ABCDContainerPermissions._canCreateGroups, 
                        ABCDContainerPermissions._canDeleteContacts, ABCDLegacyFilesystemImageHelper._contactIdentifier, 
                        ABCDLegacyFilesystemImageHelper._emailAddresses, ABCDLegacyFilesystemImageHelper._imagesDirectory, 
-                       ABCDRecord._propertyValueCache, ABCDRecord._publicRecord, 
                        ABCDRecordNameFormatter._defaultNameOrder, ABCDRecordNameFormatter._defaultSortOrder, 
                        ABCDRecordNameFormatter._showCompany, ABCDRecordNameFormatter._showCompanyInFallback, 
                        ABCDRecordNameFormatter._showFallback, ABCDRecordNameFormatter._showNickname, 
@@ -932,10 +937,9 @@ exports:
                        ABCDRecordNameFormatter._showSuffix, CNACAccountCollection._accounts, 
                        CNACAccountCollection._baseURL, CNACAccountCollection._enabledAccountsObservable, 
                        CNACAccountCollection._includeLocalAccount, CNACAccountCollection._tag, 
-                       CNACAccountCollection._updateWatcher, CNCDPersistenceContext._changesNotifier, 
-                       CNCDPersistenceContext._managedObjectContext, CNCDPersistenceContext._owningAddressBook, 
-                       CNCDPersistenceContext._persistenceBackend, CNCDPersistenceStack._backendProvider, 
-                       CNCDPersistenceStack._notificationSource, CNEmptyAccountCollection._baseURL, 
+                       CNACAccountCollection._updateWatcher, CNCDPersistenceStack._backendProvider, 
+                       CNCDPersistenceStack._notificationSource, CNCDRecord._propertyValueCache, 
+                       CNCDRecord._publicRecord, CNEmptyAccountCollection._baseURL, 
                        CNEmptyAccountCollection._tag, CNOnDiskAccountCollection._allAccounts, 
                        CNOnDiskAccountCollection._baseURL, CNOnDiskAccountCollection._includeLocalAccount, 
                        CNOnDiskAccountCollection._tag, CNPersistentStoreBuilder._addAsReadOnly, 
@@ -969,15 +973,39 @@ exports:
                        '_$s19ContactsPersistence19CNCDFileSystemPhotoCMa', '_$s19ContactsPersistence19CNCDFileSystemPhotoCMn', 
                        '_$s19ContactsPersistence19CNCDFileSystemPhotoCMo', '_$s19ContactsPersistence19CNCDFileSystemPhotoCMu', 
                        '_$s19ContactsPersistence19CNCDFileSystemPhotoCN', '_$s19ContactsPersistence19CNCDFileSystemPhotoCfD', 
+                       '_$s19ContactsPersistence21CNOpenDirectoryFacadeC11currentUser10attributesSDySSypGSaySSG_tFTj', 
+                       '_$s19ContactsPersistence21CNOpenDirectoryFacadeC11currentUser10attributesSDySSypGSaySSG_tFTq', 
+                       '_$s19ContactsPersistence21CNOpenDirectoryFacadeCACycfC', 
+                       '_$s19ContactsPersistence21CNOpenDirectoryFacadeCACycfc', 
+                       '_$s19ContactsPersistence21CNOpenDirectoryFacadeCMa', '_$s19ContactsPersistence21CNOpenDirectoryFacadeCMn', 
+                       '_$s19ContactsPersistence21CNOpenDirectoryFacadeCMo', '_$s19ContactsPersistence21CNOpenDirectoryFacadeCMu', 
+                       '_$s19ContactsPersistence21CNOpenDirectoryFacadeCN', '_$s19ContactsPersistence21CNOpenDirectoryFacadeCfD', 
                        '_$s19ContactsPersistence27CNCDFileSystemPhotoMigratorCMa', 
                        '_$s19ContactsPersistence27CNCDFileSystemPhotoMigratorCMn', 
                        '_$s19ContactsPersistence27CNCDFileSystemPhotoMigratorCMo', 
                        '_$s19ContactsPersistence27CNCDFileSystemPhotoMigratorCMu', 
                        '_$s19ContactsPersistence27CNCDFileSystemPhotoMigratorCN', 
                        '_$s19ContactsPersistence27CNCDFileSystemPhotoMigratorCfD', 
+                       '_$s19ContactsPersistence31CNOpenDirectoryFacadeTestDoubleC11currentUser10attributesSDySSypGSaySSG_tFTj', 
+                       '_$s19ContactsPersistence31CNOpenDirectoryFacadeTestDoubleC11currentUser10attributesSDySSypGSaySSG_tFTq', 
+                       '_$s19ContactsPersistence31CNOpenDirectoryFacadeTestDoubleC14setCurrentUser9attribute3foryypSg_SStFTj', 
+                       '_$s19ContactsPersistence31CNOpenDirectoryFacadeTestDoubleC14setCurrentUser9attribute3foryypSg_SStFTq', 
+                       '_$s19ContactsPersistence31CNOpenDirectoryFacadeTestDoubleCACycfC', 
+                       '_$s19ContactsPersistence31CNOpenDirectoryFacadeTestDoubleCACycfc', 
+                       '_$s19ContactsPersistence31CNOpenDirectoryFacadeTestDoubleCMa', 
+                       '_$s19ContactsPersistence31CNOpenDirectoryFacadeTestDoubleCMn', 
+                       '_$s19ContactsPersistence31CNOpenDirectoryFacadeTestDoubleCMo', 
+                       '_$s19ContactsPersistence31CNOpenDirectoryFacadeTestDoubleCMu', 
+                       '_$s19ContactsPersistence31CNOpenDirectoryFacadeTestDoubleCN', 
+                       '_$s19ContactsPersistence31CNOpenDirectoryFacadeTestDoubleCfD', 
                        '_OBJC_CLASS_$__TtC19ContactsPersistence19CNCDFileSystemPhoto', 
+                       '_OBJC_CLASS_$__TtC19ContactsPersistence21CNOpenDirectoryFacade', 
                        '_OBJC_CLASS_$__TtC19ContactsPersistence27CNCDFileSystemPhotoMigrator', 
+                       '_OBJC_CLASS_$__TtC19ContactsPersistence31CNOpenDirectoryFacadeTestDouble', 
                        '_OBJC_METACLASS_$__TtC19ContactsPersistence19CNCDFileSystemPhoto', 
-                       '_OBJC_METACLASS_$__TtC19ContactsPersistence27CNCDFileSystemPhotoMigrator' ]
-    objc-classes:    [ _TtC19ContactsPersistence19CNCDFileSystemPhoto, _TtC19ContactsPersistence27CNCDFileSystemPhotoMigrator ]
+                       '_OBJC_METACLASS_$__TtC19ContactsPersistence21CNOpenDirectoryFacade', 
+                       '_OBJC_METACLASS_$__TtC19ContactsPersistence27CNCDFileSystemPhotoMigrator', 
+                       '_OBJC_METACLASS_$__TtC19ContactsPersistence31CNOpenDirectoryFacadeTestDouble' ]
+    objc-classes:    [ _TtC19ContactsPersistence19CNCDFileSystemPhoto, _TtC19ContactsPersistence21CNOpenDirectoryFacade, 
+                       _TtC19ContactsPersistence27CNCDFileSystemPhotoMigrator, _TtC19ContactsPersistence31CNOpenDirectoryFacadeTestDouble ]
 ...

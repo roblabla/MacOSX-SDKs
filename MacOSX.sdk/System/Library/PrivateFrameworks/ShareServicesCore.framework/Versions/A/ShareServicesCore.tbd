@@ -3,22 +3,23 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A0A2CA27-6AAC-30F1-8D94-F810B1CF9A34
+    value:           7024AAE7-75D1-3E11-83FC-C40132344BAE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           61EE24EE-C4E5-3716-9E49-CE3A5B7DA555
+    value:           9DC19E88-A06A-3D42-99A6-26418EA15EE1
 install-name:    '/System/Library/PrivateFrameworks/ShareServicesCore.framework/Versions/A/ShareServicesCore'
-current-version: 400.27.210
+current-version: 421.0.100
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _SBLDontAllowRAWForSharingService, _SBLFileURLFromFileURLs, 
-                       _SBLNeedsLivePhotoBundleForSharingService, _SBLShareKitShareableItemErrorDomain, 
-                       _SBLShareKitSharingParameterBounds, _SBLShareKitSharingParameterImage, 
-                       _SBLSharingServiceNameAddToNotes, _SBLSharingServiceNameCreateReminder, 
-                       _SBLSharingServiceNameSendToSimulator, _SBLShouldProvideImageForAsset, 
-                       _SBLShouldProvideMovieForAsset, _SBLSubsystemShareKit, _SBLTemporaryExportURLFromURL, 
-                       _SBLVariantFromVariants, _SBLVideoSharingServicePrefix, _ShareServicesCoreVersionNumber, 
+                       _SBLNeedsLivePhotoBundleForSharingService, _SBLShareKitPlaceholderImageSize, 
+                       _SBLShareKitShareableItemErrorDomain, _SBLShareKitSharingParameterBounds, 
+                       _SBLShareKitSharingParameterImage, _SBLSharingServiceNameAddToNotes, 
+                       _SBLSharingServiceNameCreateReminder, _SBLSharingServiceNameSendToSimulator, 
+                       _SBLShouldProvideImageForAsset, _SBLShouldProvideMovieForAsset, 
+                       _SBLSubsystemShareKit, _SBLTemporaryExportURLFromURL, _SBLVariantFromVariants, 
+                       _SBLVideoSharingServicePrefix, _ShareServicesCoreVersionNumber, 
                        _ShareServicesCoreVersionString, _kCompletedUnitCountProperty, 
                        _kSBLItemKey, _kSBLPreSharingAlertCancelButtonTitle, _kSBLPreSharingAlertConfirmButtonTitle, 
                        _kSBLPreSharingAlertMessage, _kSBLPreSharingAlertNeeded, _kSBLPreSharingAlertTitle, 
@@ -29,7 +30,8 @@ exports:
     objc-classes:    [ SBLAssetsShareKitManager, SBLDebugShareKitManager, SBLDownloadProvidersOperation, 
                        SBLFullfillProvidersOperation, SBLPrepareProvidersOperation, 
                        SBLProvidersOperation, SBLReconnectProvidersOperation, SBLSetDesktopSharingService, 
-                       SBLShareKitManager, SBLShareKitSession, SBLShareKitShareableItem, 
-                       SBLSharedAlbumsSharingService, SBLVideoStabilizationInternalService, 
-                       SharingServiceString ]
+                       SBLShareKitManager, SBLShareKitSession, SBLShareKitShareableAssetItem, 
+                       SBLShareKitShareableItem, SBLShareKitShareableStoryItem, SBLSharedAlbumsSharingService, 
+                       SBLVideoStabilizationInternalService, SharingServiceString ]
+    objc-ivars:      [ SBLShareKitShareableItem._didPrepare, SBLShareKitShareableItem._prepareLock ]
 ...

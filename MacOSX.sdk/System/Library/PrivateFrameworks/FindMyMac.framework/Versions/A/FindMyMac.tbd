@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F33CE693-F9E2-3B25-8A2A-1880857EA73A
+    value:           24587CF9-1171-3373-AE4A-9E01A23CE3E6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           764F2AB8-21DE-3596-9DED-281388E5A85B
+    value:           91A0A777-B5C8-312A-B552-3509A9768EBB
 install-name:    '/System/Library/PrivateFrameworks/FindMyMac.framework/Versions/A/FindMyMac'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

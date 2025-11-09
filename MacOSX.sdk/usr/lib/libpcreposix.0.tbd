@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2F198AAA-3099-3B25-9568-8588787C4427
+    value:           5EF1885D-6905-383A-ABA4-43121C96EF33
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DE1690EA-16EE-328E-9A4F-47046F75E4C6
+    value:           8F25879C-72F9-3B7C-ADBE-AF63A069FEAF
 install-name:    '/usr/lib/libpcreposix.0.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

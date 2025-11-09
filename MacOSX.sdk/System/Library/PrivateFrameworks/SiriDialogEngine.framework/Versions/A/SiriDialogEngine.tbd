@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           14764B88-F2EF-3059-A01E-3B5EC6FB2EE2
+    value:           988D2DDC-DD87-35A7-AF50-D85F3709F3C4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           68063465-F0D3-32BD-A096-761BB36D2231
+    value:           D3D531CF-E160-31E6-B69F-7A13028145FA
 install-name:    '/System/Library/PrivateFrameworks/SiriDialogEngine.framework/Versions/A/SiriDialogEngine'
 swift-abi-version: 7
 exports:
@@ -1349,6 +1349,8 @@ exports:
                        '_$s16SiriDialogEngine10CATGlobalsC6deviceAC0A7KitFlow11DeviceState_p_tcfC', 
                        '_$s16SiriDialogEngine10CATGlobalsC7BuilderC04withA11VoiceGenderyAEXDSSFTj', 
                        '_$s16SiriDialogEngine10CATGlobalsC7BuilderC04withA11VoiceGenderyAEXDSSFTq', 
+                       '_$s16SiriDialogEngine10CATGlobalsC7BuilderC04withA6LocaleyAEXD10Foundation0G0VFTj', 
+                       '_$s16SiriDialogEngine10CATGlobalsC7BuilderC04withA6LocaleyAEXD10Foundation0G0VFTq', 
                        '_$s16SiriDialogEngine10CATGlobalsC7BuilderC10siriLocaleAE10Foundation0G0V_tcfC', 
                        '_$s16SiriDialogEngine10CATGlobalsC7BuilderC10siriLocaleAE10Foundation0G0V_tcfCTj', 
                        '_$s16SiriDialogEngine10CATGlobalsC7BuilderC10siriLocaleAE10Foundation0G0V_tcfCTq', 

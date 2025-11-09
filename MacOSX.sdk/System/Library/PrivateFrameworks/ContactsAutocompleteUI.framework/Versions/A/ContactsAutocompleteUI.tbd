@@ -3,23 +3,25 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5634704D-5F83-38CB-A849-C6C73D130194
+    value:           42C0AD1E-867C-366F-9756-883117C271D2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ED9C6A25-E37A-35F6-B193-11FC3013E6AB
+    value:           A14EC4D7-0CAB-3EA6-B053-9845B5939D43
 install-name:    '/System/Library/PrivateFrameworks/ContactsAutocompleteUI.framework/Versions/A/ContactsAutocompleteUI'
 current-version: 9999.99.99
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CNAutocompleteColumnAccount, _CNAutocompleteColumnIcon, _CNAutocompleteColumnIdentifier, 
                        _CNAutocompleteColumnName, _CNAutocompleteMinWindowWidth, 
-                       _CNLeadDividerMarginKey, _CNLeadLabelMarginKey, _CNTrailDividerMarginKey, 
-                       _CNTrailLabelMargin, _CNViewIsAutocompleteHeaderView, _MFComposeRecipientStringMatchAddress, 
+                       _CNAutocompleteResultPresentationTypeToString, _CNLeadDividerMarginKey, 
+                       _CNLeadLabelMarginKey, _CNTrailDividerMarginKey, _CNTrailLabelMargin, 
+                       _CNViewIsAutocompleteHeaderView, _MFComposeRecipientStringMatchAddress, 
                        _MFComposeRecipientStringMatchFirstName, _MFComposeRecipientStringMatchLastName, 
                        _MFComposeRecipientStringMatchMiddleName, _MFComposeRecipientStringMatchType ]
     objc-classes:    [ CNAutocompleteColorRepository, CNAutocompleteGroupResultNamer, 
-                       CNAutocompleteHeaderView, CNAutocompleteResultFormatter, CNAutocompleteResultIconView, 
+                       CNAutocompleteHeaderView, CNAutocompletePresentation, CNAutocompletePresentationManager, 
+                       CNAutocompleteResultFormatter, CNAutocompleteResultIconView, 
                        CNAutocompleteResultNamer, CNAutocompleteResultPartitioner, 
                        CNAutocompleteResultTableView, CNAutocompleteResultView, CNAutocompleteResultWindow, 
                        CNAutocompleteResultWindowBase, CNAutocompleteRowView, CNAutocompleteSeparatorView, 

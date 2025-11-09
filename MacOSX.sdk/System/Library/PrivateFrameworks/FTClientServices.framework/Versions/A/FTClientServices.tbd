@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           877BF636-06B1-390F-907E-C842E456C0C9
+    value:           96D065D5-3F02-3425-B4B5-94A626E0EFBA
   - target:          x86_64-maccatalyst
-    value:           877BF636-06B1-390F-907E-C842E456C0C9
+    value:           96D065D5-3F02-3425-B4B5-94A626E0EFBA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           03CE1F82-2D6A-34A7-BAB2-79C19C6A4F7E
+    value:           869BDF49-0340-3CD2-A732-3F0F1AD9C08E
   - target:          arm64e-maccatalyst
-    value:           03CE1F82-2D6A-34A7-BAB2-79C19C6A4F7E
+    value:           869BDF49-0340-3CD2-A732-3F0F1AD9C08E
 install-name:    '/System/Library/PrivateFrameworks/FTClientServices.framework/Versions/A/FTClientServices'
 current-version: 800
 exports:

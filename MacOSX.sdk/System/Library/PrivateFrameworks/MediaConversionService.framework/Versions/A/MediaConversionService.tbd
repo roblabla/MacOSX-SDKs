@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1362FBBC-F248-3EFE-B7C9-D27A446C64BF
+    value:           D05E237B-93A9-3229-8634-88EE4DC59536
   - target:          x86_64-maccatalyst
-    value:           1362FBBC-F248-3EFE-B7C9-D27A446C64BF
+    value:           D05E237B-93A9-3229-8634-88EE4DC59536
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A3A6B0CF-A968-3F8B-AD68-8824323211D9
+    value:           BD34F75E-DC36-34A1-B949-7C966DA242F1
   - target:          arm64e-maccatalyst
-    value:           A3A6B0CF-A968-3F8B-AD68-8824323211D9
+    value:           BD34F75E-DC36-34A1-B949-7C966DA242F1
 install-name:    '/System/Library/PrivateFrameworks/MediaConversionService.framework/Versions/A/MediaConversionService'
-current-version: 400.27.210
+current-version: 421.0.100
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

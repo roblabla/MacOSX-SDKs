@@ -425,6 +425,115 @@ extern AXError AXUIElementSetMessagingTimeout (AXUIElementRef element, float tim
  */
 extern AXError AXUIElementPostKeyboardEvent (AXUIElementRef application, CGCharCode keyChar, CGKeyCode virtualKey, Boolean keyDown) CF_DEPRECATED_MAC(10_0, 10_9);;
 
+/*! @group Text Marker API                   */
+
+/*!
+ @typedef AXTextMarkerRef
+ 
+ @discussion
+ An AXTextMarkerRef is a CFType. Like all CFTypes, they are reference counted (@link //apple_ref/c/func/CFRetain CFRetain@/link, @link //apple_ref/c/func/CFRelease CFRelease@/link).
+ */
+typedef const struct CF_BRIDGED_TYPE(id) __AXTextMarker *AXTextMarkerRef;
+
+/*!
+ @function AXTextMarkerGetTypeID
+ @abstract Returns the unique type identifier for the AXTextMarkerRef type.
+ 
+ @result Returns the CFTypeID of the AXTextMarkerRef type.
+ */
+extern CFTypeID AXTextMarkerGetTypeID (void);
+
+/*!
+ @function AXTextMarkerCreate
+ @abstract Creates a new text marker.
+ 
+ @param bytes The data used to identify this location in text
+ @param length The length of the data
+ */
+extern AXTextMarkerRef AXTextMarkerCreate (CFAllocatorRef __nullable allocator, const UInt8 *bytes, CFIndex length);
+
+/*!
+ @function AXTextMarkerGetLength
+ @abstract Get the length of bytes stored in a text marker
+ 
+ @param marker The text marker
+  
+ @result The length of the data
+ */
+extern CFIndex AXTextMarkerGetLength (AXTextMarkerRef marker);
+
+/*!
+ @function AXTextMarkerGetBytePtr
+ @abstract Get the byte data used to identify this location in text.
+ 
+ @param marker The text marker
+  
+ @result a pointer to the byte data used to identify this location in text.
+ */
+extern const UInt8 *AXTextMarkerGetBytePtr (AXTextMarkerRef theTextMarker);
+
+/*!
+ @typedef AXTextMarkerRangeRef
+ 
+ @discussion
+ An AXTextMarkerRangeRef is a CFType. Like all CFTypes, they are reference counted (@link //apple_ref/c/func/CFRetain CFRetain@/link, @link //apple_ref/c/func/CFRelease CFRelease@/link).
+ */
+typedef const struct CF_BRIDGED_TYPE(id) __AXTextMarkerRange *AXTextMarkerRangeRef;
+
+/*!
+ @function AXTextMarkerRangeGetTypeID
+ @abstract Returns the unique type identifier for the AXTextMarkerRangeRef type.
+ 
+ @result Returns the CFTypeID of the AXTextMarkerRangeRef type.
+ */
+extern CFTypeID AXTextMarkerRangeGetTypeID (void);
+
+/*!
+ @function AXTextMarkerRangeGetTypeID
+ @abstract Creates a new text marker given a start and end marker
+ 
+ @param startMarker The text marker for the beginning of the range
+ @param endMarker The text marker for the end of the range
+
+ @result The text marker range object
+ */
+extern AXTextMarkerRangeRef AXTextMarkerRangeCreate (CFAllocatorRef __nullable allocator, AXTextMarkerRef startMarker, AXTextMarkerRef endMarker);
+
+
+/*!
+ @function AXTextMarkerRangeGetTypeID
+ @abstract Creates a new text marker given the bytes for a start marker and an end marker
+ 
+ @param startMarkerBytes The data used to identify the start marker location in text
+ @param startMarkerLength The length of the start marker data
+ @param endMarkeBytes The data used to identify the end marker location in text
+ @param endMarkerLength The length of the end marker data
+ 
+ @result The text marker range object
+ */
+extern AXTextMarkerRangeRef AXTextMarkerRangeCreateWithBytes (CFAllocatorRef __nullable allocator, const UInt8 *startMarkerBytes, CFIndex startMarkerLength, const UInt8 *endMarkerBytes, CFIndex endMarkerLength);
+
+/*!
+ @function AXTextMarkerRangeCopyStartMarker
+ @abstract Copies the start marker from a text marker range
+ 
+ @param textMarkerRange The text marker range
+ 
+ @result The start text marker object
+ */
+extern AXTextMarkerRef AXTextMarkerRangeCopyStartMarker (AXTextMarkerRangeRef textMarkerRange);
+
+/*!
+ @function AXTextMarkerRangeCopyEndMarker
+ @abstract Copies the end marker from a text marker range
+ 
+ @param textMarkerRange The text marker range
+ 
+ @result The end text marker object
+ */
+extern AXTextMarkerRef AXTextMarkerRangeCopyEndMarker (AXTextMarkerRangeRef textMarkerRange);
+
+
 /*! @group Notification API                   */
 
 /*!

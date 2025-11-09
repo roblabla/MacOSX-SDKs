@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D6CBEC38-886B-327E-A21B-D3E47E5E0211
+    value:           A257ACD8-BEC5-3529-921A-82211B1E82DF
   - target:          x86_64-maccatalyst
-    value:           D6CBEC38-886B-327E-A21B-D3E47E5E0211
+    value:           A257ACD8-BEC5-3529-921A-82211B1E82DF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4C306D16-6C26-30BE-A612-83CFB75562A5
+    value:           1E06E978-C894-3E21-938B-40894B4BAD4C
   - target:          arm64e-maccatalyst
-    value:           4C306D16-6C26-30BE-A612-83CFB75562A5
+    value:           1E06E978-C894-3E21-938B-40894B4BAD4C
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/WirelessDiagnostics'
 current-version: 757
 reexported-libraries:
@@ -717,17 +717,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E20250F1-D157-39CA-9AED-7B43D0E408EF
+    value:           A6A4BAD2-4639-3677-8EF2-721B58C111F2
   - target:          x86_64-maccatalyst
-    value:           E20250F1-D157-39CA-9AED-7B43D0E408EF
+    value:           A6A4BAD2-4639-3677-8EF2-721B58C111F2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2662D34B-BD80-35EC-9926-27CE6AA4A2F3
+    value:           0080DF6C-2A52-3E2C-AEE4-0648C3A53513
   - target:          arm64e-maccatalyst
-    value:           2662D34B-BD80-35EC-9926-27CE6AA4A2F3
+    value:           0080DF6C-2A52-3E2C-AEE4-0648C3A53513
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDSupportFramework.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -3354,12 +3354,26 @@ exports:
                        AWDWiFiNWActivityAggregateMetrics._kTxRetransmission, AWDWiFiNWActivityAggregateMetrics._kdot11MultipleRetryCount, 
                        AWDWiFiNWActivityAggregateMetrics._kdot11RTSFailureCount, 
                        AWDWiFiNWActivityAggregateMetrics._kdot11RTSSuccessCount, 
-                       AWDWiFiNWActivityAggregateMetrics._kdot11RetryCount, AWDWiFiNWActivityAssoc._assocFailed, 
-                       AWDWiFiNWActivityAssoc._assocSuccess, AWDWiFiNWActivityAssoc._authFailed, 
-                       AWDWiFiNWActivityAssoc._authSuccess, AWDWiFiNWActivityAssoc._has, 
-                       AWDWiFiNWActivityAssoc._linkChanged, AWDWiFiNWActivityAssoc._reassocFailed, 
-                       AWDWiFiNWActivityAssoc._reassocSuccess, AWDWiFiNWActivityAssoc._roamFailed, 
-                       AWDWiFiNWActivityAssoc._roamSuccess, AWDWiFiNWActivityBtCoex._a2dpdeny, 
+                       AWDWiFiNWActivityAggregateMetrics._kdot11RetryCount, AWDWiFiNWActivityAssoc._assocDoneFailed, 
+                       AWDWiFiNWActivityAssoc._assocDoneSuccess, AWDWiFiNWActivityAssoc._assocFailed, 
+                       AWDWiFiNWActivityAssoc._assocReady, AWDWiFiNWActivityAssoc._assocSuccess, 
+                       AWDWiFiNWActivityAssoc._authFailed, AWDWiFiNWActivityAssoc._authSuccess, 
+                       AWDWiFiNWActivityAssoc._bssDisallowEvent, AWDWiFiNWActivityAssoc._bssidChanged, 
+                       AWDWiFiNWActivityAssoc._chanSwitchEvent, AWDWiFiNWActivityAssoc._crashTracerTrig, 
+                       AWDWiFiNWActivityAssoc._deauthReceived, AWDWiFiNWActivityAssoc._decryptError, 
+                       AWDWiFiNWActivityAssoc._disassocReceived, AWDWiFiNWActivityAssoc._dpsSymptom, 
+                       AWDWiFiNWActivityAssoc._escoTrafficInd, AWDWiFiNWActivityAssoc._has, 
+                       AWDWiFiNWActivityAssoc._homeChanQualChanged, AWDWiFiNWActivityAssoc._linkChanged, 
+                       AWDWiFiNWActivityAssoc._macAddrChanged, AWDWiFiNWActivityAssoc._pruned, 
+                       AWDWiFiNWActivityAssoc._rc1Stats, AWDWiFiNWActivityAssoc._rc2Stats, 
+                       AWDWiFiNWActivityAssoc._reassocFailed, AWDWiFiNWActivityAssoc._reassocSuccess, 
+                       AWDWiFiNWActivityAssoc._roamFailed, AWDWiFiNWActivityAssoc._roamPrep, 
+                       AWDWiFiNWActivityAssoc._roamScanEnd, AWDWiFiNWActivityAssoc._roamScanStart, 
+                       AWDWiFiNWActivityAssoc._roamSuccess, AWDWiFiNWActivityAssoc._rssiChanged, 
+                       AWDWiFiNWActivityAssoc._scanDone, AWDWiFiNWActivityAssoc._scanInternalDone, 
+                       AWDWiFiNWActivityAssoc._scanResults, AWDWiFiNWActivityAssoc._scanSummary, 
+                       AWDWiFiNWActivityAssoc._slowWiFiSymptom, AWDWiFiNWActivityAssoc._ssidChanged, 
+                       AWDWiFiNWActivityAssoc._supplicant, AWDWiFiNWActivityBtCoex._a2dpdeny, 
                        AWDWiFiNWActivityBtCoex._a2dpgrant, AWDWiFiNWActivityBtCoex._aptxafterpm, 
                        AWDWiFiNWActivityBtCoex._audiodeny, AWDWiFiNWActivityBtCoex._audiogrant, 
                        AWDWiFiNWActivityBtCoex._btabort, AWDWiFiNWActivityBtCoex._btrequestReason, 

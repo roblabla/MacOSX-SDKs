@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           025E4B51-B6B9-3294-A3EA-3FC9D5BEAE6F
+    value:           F0E58DE8-DACA-394B-8312-FA10AC7B372C
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           C08EBAC9-5F5B-3B4F-A2CA-D7B88164D432
+    value:           8BEBDF3B-678F-3DB1-BDD9-77AD0777291C
 install-name:    '/System/iOSSupport/System/Library/Frameworks/HealthKitUI.framework/Versions/A/HealthKitUI'
 exports:
   - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]

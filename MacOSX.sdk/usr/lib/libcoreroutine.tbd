@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           66A039D8-787E-3DB2-8B59-6329F7DB98E5
+    value:           8931A6B4-1DC2-3903-8001-3D2F9A0FA955
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F2378839-5E26-334A-97FB-FB43A34ED82A
+    value:           0556CC66-BAED-371C-AC36-1D323921E7E1
 install-name:    '/usr/lib/libcoreroutine.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -281,7 +281,7 @@ exports:
                        RTFingerprintManager, RTFingerprintManagerNotificationAvailabilityDidChange, 
                        RTFingerprintManagerNotificationMonitorFingerprints, RTFingerprintStore, 
                        RTFusedInferredMapItem, RTFusionMetrics, RTGEOMapItemTransformer, 
-                       RTHintMO, RTHintManager, RTHintManagerNotificationDidUpdate, 
+                       RTHealthKitManager, RTHintMO, RTHintManager, RTHintManagerNotificationDidUpdate, 
                        RTHintStore, RTHistoryEntryPlaceDisplay, RTHistoryEntryRoute, 
                        RTInferredMapItemDeduper, RTInferredMapItemDeduperState, RTInferredMapItemFuser, 
                        RTInferredMapItemFuserParameters, RTInvocationDispatcher, 

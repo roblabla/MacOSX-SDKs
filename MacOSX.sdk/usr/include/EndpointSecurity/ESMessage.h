@@ -827,6 +827,31 @@ typedef struct {
 } es_event_clone_t;
 
 /**
+ * @brief Copy a file using the copyfile syscall
+ *
+ * @field source The file that will be cloned
+ * @field target_file The file existing at the target path that will be overwritten
+ *                    by the copyfile operation.  NULL if no such file exists.
+ * @field target_dir The directory into which the `source` file will be copied
+ * @field target_name The name of the new file to which `source` will be copied
+ * @field mode Corresponds to mode argument of the copyfile syscall
+ * @field flags Corresponds to flags argument of the copyfile syscall
+ *
+ * @note Not to be confused with copyfile(3).
+ * @note Prior to macOS 12.0, the copyfile syscall fired open, unlink and auth
+ *       create events, but no notify create, nor write or close events.
+ */
+typedef struct {
+	es_file_t * _Nonnull source;
+	es_file_t * _Nullable target_file;
+	es_file_t * _Nonnull target_dir;
+	es_string_token_t target_name;
+	mode_t mode;
+	int32_t flags;
+	uint8_t reserved[56];
+} es_event_copyfile_t;
+
+/**
  * @brief File control
  *
  * @field target The target file on which the file control command will be performed
@@ -1144,6 +1169,7 @@ typedef union {
 	es_event_chroot_t chroot;
 	es_event_clone_t clone;
 	es_event_close_t close;
+	es_event_copyfile_t copyfile;
 	es_event_create_t create;
 	es_event_cs_invalidated_t cs_invalidated;
 	es_event_deleteextattr_t deleteextattr;

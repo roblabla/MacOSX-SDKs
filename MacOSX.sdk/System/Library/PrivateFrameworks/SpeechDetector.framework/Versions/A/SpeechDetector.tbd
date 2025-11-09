@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F7FAE9CF-7936-3B6E-9AE2-A9E3E98E2E1B
+    value:           93F1A841-E5C8-390B-9AAB-9B92C7276CEC
   - target:          x86_64-maccatalyst
-    value:           F7FAE9CF-7936-3B6E-9AE2-A9E3E98E2E1B
+    value:           93F1A841-E5C8-390B-9AAB-9B92C7276CEC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           93F3A7B3-A524-3856-89B4-F51912FF515C
+    value:           BC2D716E-9CA1-315B-87B1-309E92D8B38D
   - target:          arm64e-maccatalyst
-    value:           93F3A7B3-A524-3856-89B4-F51912FF515C
+    value:           BC2D716E-9CA1-315B-87B1-309E92D8B38D
 install-name:    '/System/Library/PrivateFrameworks/SpeechDetector.framework/Versions/A/SpeechDetector'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

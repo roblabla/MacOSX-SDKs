@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           01F5FDBB-4D51-32BE-96D6-D58C30C59FA3
+    value:           85583759-BD66-3146-AF62-7D25102B0D76
   - target:          x86_64-maccatalyst
-    value:           01F5FDBB-4D51-32BE-96D6-D58C30C59FA3
+    value:           85583759-BD66-3146-AF62-7D25102B0D76
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EDDF01AF-6B94-3A6A-8E67-7B412D814C44
+    value:           F8351DD1-5FBF-3C05-B11B-467D295F1F27
   - target:          arm64e-maccatalyst
-    value:           EDDF01AF-6B94-3A6A-8E67-7B412D814C44
+    value:           F8351DD1-5FBF-3C05-B11B-467D295F1F27
 install-name:    '/System/Library/PrivateFrameworks/SPShared.framework/Versions/A/SPShared'
 swift-abi-version: 7
 allowable-clients:
@@ -77,8 +77,10 @@ exports:
                        '_$s7Combine19CurrentValueSubjectC8SPSharedE010eraseToAnybC9PublisherAD0hbcI0Cyxq_GyF', 
                        '_$s7Combine9PublisherP8SPSharedE10futureSinkyAA14AnyCancellableCys6ResultOy6OutputQz7FailureQzGcF', 
                        '_$s7Combine9PublisherP8SPSharedE14retryWithDelay7retries5delay9schedulerAA03AnyB0Vy6OutputQz7FailureQzGSi_17SchedulerTimeType_6StrideQYd__qd__tAA0M0Rd__lF', 
+                       '_$s7Combine9PublisherP8SPSharedE6unique2byAA03AnyB0Vy6OutputQz7FailureQzGqd__AJc_tSHRd__lF', 
                        '_$s7Combine9PublisherP8SPSharedE7oneshotyyys6ResultOy6OutputQz7FailureQzGcF', 
                        '_$s7Combine9PublisherP8SPSharedE7timeout_5queue11customErrorAA10PublishersO9ReceiveOnVy_AI7TimeoutVy_xSo9NSRunLoopCGSo012OS_dispatch_E0CGSd_AR7FailureQzycSgtF', 
+                       '_$s7Combine9PublisherP8SPSharedSH6OutputRpzrlE6uniqueAA03AnyB0VyAF7FailureQzGyF', 
                        '_$s7Failure8SPShared25AnyCurrentValuePublishingPTl', '_$s8SPShared10EndiannessO11descriptionSSvg', 
                        '_$s8SPShared10EndiannessO11descriptionSSvpMV', '_$s8SPShared10EndiannessO2eeoiySbAC_ACtFZ', 
                        '_$s8SPShared10EndiannessO3bigyA2CmFWC', '_$s8SPShared10EndiannessO4hash4intoys6HasherVz_tF', 
@@ -107,7 +109,8 @@ exports:
                        '_$s8SPShared10MACAddressV4data10Foundation4DataVvpMV', '_$s8SPShared10MACAddressV4data4typeACSg10Foundation4DataV_AC11AddressTypeOtcfC', 
                        '_$s8SPShared10MACAddressV4fromACs7Decoder_p_tKcfC', '_$s8SPShared10MACAddressV4hash4intoys6HasherVz_tF', 
                        '_$s8SPShared10MACAddressV4typeAC11AddressTypeOvg', '_$s8SPShared10MACAddressV4typeAC11AddressTypeOvpMV', 
-                       '_$s8SPShared10MACAddressV6encode2toys7Encoder_p_tKF', '_$s8SPShared10MACAddressV6string4typeACSgSS_AC11AddressTypeOtcfC', 
+                       '_$s8SPShared10MACAddressV6encode2toys7Encoder_p_tKF', '_$s8SPShared10MACAddressV6isNullSbvg', 
+                       '_$s8SPShared10MACAddressV6isNullSbvpMV', '_$s8SPShared10MACAddressV6string4typeACSgSS_AC11AddressTypeOtcfC', 
                        '_$s8SPShared10MACAddressV9hashValueSivg', '_$s8SPShared10MACAddressV9hashValueSivpMV', 
                        '_$s8SPShared10MACAddressV9hexStringSSvg', '_$s8SPShared10MACAddressV9hexStringSSvpMV', 
                        '_$s8SPShared10MACAddressVAA17DataRepresentableAAMc', '_$s8SPShared10MACAddressVAA17DataRepresentableAAWP', 
@@ -527,7 +530,9 @@ exports:
                        '_$s8SPShared24BinaryEncodingContainingP6encodeyyqd__KAA0B9EncodableRd__lFTq', 
                        '_$s8SPShared24BinaryEncodingContainingP6encodeyyqd__Ks17FixedWidthIntegerRd__lFTj', 
                        '_$s8SPShared24BinaryEncodingContainingP6encodeyyqd__Ks17FixedWidthIntegerRd__lFTq', 
-                       '_$s8SPShared24BinaryEncodingContainingTL', '_$s8SPShared24DarwinNotificationHelperC12currentValue4names6UInt64VSS_tFTj', 
+                       '_$s8SPShared24BinaryEncodingContainingTL', '_$s8SPShared24DarwinNotificationHelperC11descriptionSSvg', 
+                       '_$s8SPShared24DarwinNotificationHelperC11descriptionSSvpMV', 
+                       '_$s8SPShared24DarwinNotificationHelperC12currentValue4names6UInt64VSS_tFTj', 
                        '_$s8SPShared24DarwinNotificationHelperC12currentValue4names6UInt64VSS_tFTq', 
                        '_$s8SPShared24DarwinNotificationHelperC16notificationName9rateLimitACSo014CFNotificationF0a_SdtcfC', 
                        '_$s8SPShared24DarwinNotificationHelperC17subscribedToNamesACSaySSG_tcfC', 
@@ -544,6 +549,7 @@ exports:
                        '_$s8SPShared24DarwinNotificationHelperCMn', '_$s8SPShared24DarwinNotificationHelperCMo', 
                        '_$s8SPShared24DarwinNotificationHelperCMu', '_$s8SPShared24DarwinNotificationHelperCN', 
                        '_$s8SPShared24DarwinNotificationHelperCfD', '_$s8SPShared24DarwinNotificationHelperCfd', 
+                       '_$s8SPShared24DarwinNotificationHelperCs23CustomStringConvertibleAAMc', 
                        '_$s8SPShared25AnyCurrentValuePublishingMp', '_$s8SPShared25AnyCurrentValuePublishingP5value6OutputQzvgTj', 
                        '_$s8SPShared25AnyCurrentValuePublishingP5value6OutputQzvgTq', 
                        '_$s8SPShared25AnyCurrentValuePublishingP7FailureAC_s5ErrorTn', 

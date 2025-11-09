@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FBA92933-7BAC-3FB0-89B2-846E06DB277E
+    value:           C178CB4A-2B25-3774-A600-5CDF8F1A5F65
   - target:          x86_64-maccatalyst
-    value:           FBA92933-7BAC-3FB0-89B2-846E06DB277E
+    value:           C178CB4A-2B25-3774-A600-5CDF8F1A5F65
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F24422AE-5194-3045-97AE-F2ADAC33E3AD
+    value:           48AE81F6-CADA-3CD6-86A5-32D71A161DE0
   - target:          arm64e-maccatalyst
-    value:           F24422AE-5194-3045-97AE-F2ADAC33E3AD
+    value:           48AE81F6-CADA-3CD6-86A5-32D71A161DE0
 install-name:    '/System/Library/PrivateFrameworks/CMPhoto.framework/Versions/A/CMPhoto'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -140,16 +140,17 @@ exports:
                        _CMPhotoSurfacePoolMarkCachesVolatile, _CMPhotoUnifiedJPEGEncoderCreate, 
                        _CMPhotoUnifiedJPEGEncoderDestroy, _CMPhotoUnifiedJPEGEncoderDidUseHW, 
                        _CMPhotoUnifiedJPEGEncoderEncode, _CMPhotoUnifiedJPEGEncoderEncodeStripToStream, 
-                       _CMPhotoUnifiedJPEGEncoderGetAROTSegmentSize, _CMPhotoUnifiedJPEGEncoderIsHardwareAvailable, 
-                       _CMPhotoUnifiedJPEGEncoderWriteAROTTableToPtr, _JPEGDecompressSurface, 
-                       _JPEGParseJPEGInfo, _SlimVideoDecoder_CreateInstance, _SlimVideoEncoder_CreateInstance, 
-                       _kCMPhotoAuxiliaryImageTypeURN_Alpha, _kCMPhotoAuxiliaryImageTypeURN_Depth, 
-                       _kCMPhotoAuxiliaryImageTypeURN_DisparityInternal, _kCMPhotoAuxiliaryImageTypeURN_DisparityMIAFInternal, 
-                       _kCMPhotoAuxiliaryImageTypeURN_HDRGainMap, _kCMPhotoAuxiliaryImageTypeURN_MIAF_Alpha, 
-                       _kCMPhotoAuxiliaryImageTypeURN_MIAF_Depth, _kCMPhotoAuxiliaryImageTypeURN_PortraitEffectsMatte, 
-                       _kCMPhotoAuxiliaryImageTypeURN_SemanticGlassesMatte, _kCMPhotoAuxiliaryImageTypeURN_SemanticHairMatte, 
-                       _kCMPhotoAuxiliaryImageTypeURN_SemanticSkinMatte, _kCMPhotoAuxiliaryImageTypeURN_SemanticSkyMatte, 
-                       _kCMPhotoAuxiliaryImageTypeURN_SemanticTeethMatte, _kCMPhotoCodecSessionPoolOptionKey_IdleTimeoutMilliseconds, 
+                       _CMPhotoUnifiedJPEGEncoderGetAROTSegmentSize, _CMPhotoUnifiedJPEGEncoderHWSupportsRSTMarkerTable, 
+                       _CMPhotoUnifiedJPEGEncoderIsHardwareAvailable, _CMPhotoUnifiedJPEGEncoderWriteAROTTableToPtr, 
+                       _JPEGDecompressSurface, _JPEGParseJPEGInfo, _SlimVideoDecoder_CreateInstance, 
+                       _SlimVideoEncoder_CreateInstance, _kCMPhotoAuxiliaryImageTypeURN_Alpha, 
+                       _kCMPhotoAuxiliaryImageTypeURN_Depth, _kCMPhotoAuxiliaryImageTypeURN_DisparityInternal, 
+                       _kCMPhotoAuxiliaryImageTypeURN_DisparityMIAFInternal, _kCMPhotoAuxiliaryImageTypeURN_HDRGainMap, 
+                       _kCMPhotoAuxiliaryImageTypeURN_MIAF_Alpha, _kCMPhotoAuxiliaryImageTypeURN_MIAF_Depth, 
+                       _kCMPhotoAuxiliaryImageTypeURN_PortraitEffectsMatte, _kCMPhotoAuxiliaryImageTypeURN_SemanticGlassesMatte, 
+                       _kCMPhotoAuxiliaryImageTypeURN_SemanticHairMatte, _kCMPhotoAuxiliaryImageTypeURN_SemanticSkinMatte, 
+                       _kCMPhotoAuxiliaryImageTypeURN_SemanticSkyMatte, _kCMPhotoAuxiliaryImageTypeURN_SemanticTeethMatte, 
+                       _kCMPhotoCodecSessionPoolOptionKey_IdleTimeoutMilliseconds, 
                        _kCMPhotoCodecSessionPoolOptionKey_MaxSimultaneousCompressionSessions, 
                        _kCMPhotoCodecSessionPoolOptionKey_MaxSimultaneousDecompressionSessions, 
                        _kCMPhotoCompressedVideoOption_ParentImageIndex, _kCMPhotoCompressedVideoOption_ParentImageTimeAssociation, 

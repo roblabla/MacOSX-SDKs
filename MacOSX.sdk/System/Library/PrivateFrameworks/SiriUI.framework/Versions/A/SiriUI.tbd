@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           86A93DF3-4240-3F8D-B736-F9E485DB903C
+    value:           FD522361-7010-3604-A0DF-E5CDB8B9C7D7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E0E75D0E-ADA4-3E2E-9865-6F169A023461
+    value:           F26525EF-C1DE-3C2A-8AA2-D51D18F3BCE1
 install-name:    '/System/Library/PrivateFrameworks/SiriUI.framework/Versions/A/SiriUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

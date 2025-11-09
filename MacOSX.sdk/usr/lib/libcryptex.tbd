@@ -3,22 +3,23 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F46C6176-74AE-3BFE-86B4-D7F903B2097F
+    value:           68F56A30-36B1-37B0-A113-54354706EB88
   - target:          arm64-macos
-    value:           24143D0D-0C5D-36B8-B2C4-615CD3402F75
+    value:           C1630CEF-F0D1-3513-B8EC-1A2392B02937
   - target:          arm64e-macos
-    value:           ADC18ED7-8795-3F87-9D91-4F98703F960D
+    value:           2047DEC3-BAD2-3666-9591-CC531F3657E0
 install-name:    '/usr/lib/libcryptex.dylib'
-current-version: 169
+current-version: 169.60.2
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos ]
     symbols:         [ __cryptex_copy_list, __cryptex_create, __cryptex_identity_equal, 
                        __cryptex_install_core, __cryptex_set_actor, __cryptex_signing_service_image_spec_certificate, 
                        __cryptex_signing_service_image_spec_url, __cryptex_uninstall_by_name, 
                        __cryptex_version, _cryptex_attr_create, _cryptex_attr_set_authentication, 
                        _cryptex_attr_set_persistence, _cryptex_attr_set_personalization_flags, 
-                       _cryptex_attr_set_tss_url, _cryptex_bundle_copy_build_manifest, 
-                       _cryptex_bundle_copy_cryptex, _cryptex_bundle_create, _cryptex_bundle_create_with_directory, 
+                       _cryptex_attr_set_socks_proxy, _cryptex_attr_set_tss_url, 
+                       _cryptex_bundle_copy_build_manifest, _cryptex_bundle_copy_cryptex, 
+                       _cryptex_bundle_create, _cryptex_bundle_create_with_directory, 
                        _cryptex_bundle_set_cryptex, _cryptex_bundle_update_build_manifest, 
                        _cryptex_bundle_write, _cryptex_copy_list_4MSM, _cryptex_get_identity, 
                        _cryptex_get_variant, _cryptex_identity_set_host_identity, 

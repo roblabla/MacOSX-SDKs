@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           841AFA45-8388-3895-8771-9951357D15E0
+    value:           82F66D36-431C-393A-B9EB-676DACE3C92A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F4AD2C1C-AFA0-37C2-94BF-676BFEB7F955
+    value:           1D41960C-E665-3B8B-B664-B14F6E475B22
 install-name:    '/System/Library/PrivateFrameworks/AppleDisplayTCONControl.framework/Versions/A/AppleDisplayTCONControl'
-current-version: 24
+current-version: 31
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AppleDisplayTCONControlVersionNumber, _AppleDisplayTCONControlVersionString ]

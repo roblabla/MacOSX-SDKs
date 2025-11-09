@@ -144,7 +144,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param completionHandler A handler called when the write request has either succeeded or failed.
  */
 - (void)writeMultipleDatagrams:(NSArray<NSData *> *)datagramArray
-			 completionHandler:(void (^)(NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+			 completionHandler:(void (^)(NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method writeDatagram:completionHandler
@@ -154,7 +154,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param completionHandler A handler called when the write request has either succeeded or failed.
  */
 - (void)writeDatagram:(NSData *)datagram
-	completionHandler:(void (^)(NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+	completionHandler:(void (^)(NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method cancel

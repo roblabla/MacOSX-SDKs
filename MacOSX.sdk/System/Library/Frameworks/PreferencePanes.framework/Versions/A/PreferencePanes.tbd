@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7C9EDA72-FDB1-352D-8556-6EAC1F9AFA3D
+    value:           72C696D7-799A-3B73-A912-75C3594D9BEA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4BF1C244-4621-360A-A2BD-991176A16518
+    value:           8EA4B277-3C39-3203-8664-69597E9A5ACD
 install-name:    '/System/Library/Frameworks/PreferencePanes.framework/Versions/A/PreferencePanes'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _LegacyPreferencePaneMain, _NSPrefPaneHelpMenuAnchorKey, _NSPrefPaneHelpMenuInfoPListKey, 
                        _NSPrefPaneHelpMenuTitleKey, _NSPrefPaneSupportsAutoLayout, 
                        _NSPreferencePaneCancelUnselectNotification, _NSPreferencePaneDidCrashNotification, 

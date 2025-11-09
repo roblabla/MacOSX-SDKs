@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           58A2E913-03D0-3993-907F-3CB6654AC2AB
+    value:           57B4C9F9-079C-3F8C-8A93-A80C8B9D00D2
   - target:          x86_64-maccatalyst
-    value:           58A2E913-03D0-3993-907F-3CB6654AC2AB
+    value:           57B4C9F9-079C-3F8C-8A93-A80C8B9D00D2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D78E79C7-1A0A-3EEB-942D-355EB0866B67
+    value:           F2E76D9C-8265-32D4-A927-2C94CFE77CF7
   - target:          arm64e-maccatalyst
-    value:           D78E79C7-1A0A-3EEB-942D-355EB0866B67
+    value:           F2E76D9C-8265-32D4-A927-2C94CFE77CF7
 install-name:    '/System/Library/PrivateFrameworks/DistributedSensing.framework/Versions/A/DistributedSensing'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

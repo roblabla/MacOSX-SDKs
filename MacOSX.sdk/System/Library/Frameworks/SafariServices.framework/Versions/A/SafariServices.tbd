@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6172EBD0-B35D-3133-96D6-2212CAE82FFC
+    value:           9AB7A1C7-0E53-34A1-B967-09D56C391F9F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BE8EE8E2-90DC-3C0B-8B34-1FE8AD32F39F
+    value:           94F6D24F-5F29-3E4D-8F29-22F6BEAAE076
 install-name:    '/System/Library/Frameworks/SafariServices.framework/Versions/A/SafariServices'
-current-version: 612.1.24
+current-version: 612.3.6
 compatibility-version: 535
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -18,7 +18,8 @@ exports:
                        _SSGetSafariDateOfLastActiveUse, _SSGetSyncedDataClasses, 
                        _SSGetWebSearchURLForSearchQuery, _SSHasDefaultBookmarks, 
                        _SSRemoveSyncedKeychainData, _SSSyncedTabsServiceEnableStateChanged, 
-                       __SFAppleBNITeamIdentifier, __SFContentBlockerExtensionPointIdentifier, 
+                       __SFAppleBNITeamIdentifier, __SFContentBlockerContentHashKey, 
+                       __SFContentBlockerDidRequestReloadNotification, __SFContentBlockerExtensionPointIdentifier, 
                        __SFExtensionEnabledKey, __SFKeychainLabel, __SFKeychainService, 
                        __SFMacAppStoreCodingRequirement, __SFMacAppStoreOrDeveloperIDDistributionCodeSigningRequirement, 
                        __SFSafariContentBlockerDidChangeDistributedNotification, 
@@ -32,7 +33,8 @@ exports:
                        SFSafariTab, SFSafariToolbarItem, SFSafariWindow, SFUniversalLink, 
                        _SFAppExtensionsStateManager, _SFAutoFillManager, _SFBookmark, 
                        _SFBookmarkCollection, _SFBookmarkFolder, _SFBookmarkLeaf, 
-                       _SFCodeSigningUtilities, _SFExtensionUtilities, _SFExtensionsStateSecureStorage, 
-                       _SFKeyBagLockStatusManager, _SFSandboxUtilities, _SFSharablePasswordReceiver, 
-                       _SSHistoryAccessSession, _SSURLCompletionSession ]
+                       _SFCodeSigningUtilities, _SFExtensionHelperContentBlockerManager, 
+                       _SFExtensionUtilities, _SFExtensionsStateSecureStorage, _SFKeyBagLockStatusManager, 
+                       _SFSandboxUtilities, _SFSharablePasswordReceiver, _SSHistoryAccessSession, 
+                       _SSURLCompletionSession ]
 ...

@@ -16,6 +16,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
+
 UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0))
 @interface NSTextContainer : NSObject <NSSecureCoding, NSTextLayoutOrientationProvider>
 
@@ -73,6 +75,7 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0))
 
 @end
 
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
 NS_ASSUME_NONNULL_END
 

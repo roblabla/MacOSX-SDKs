@@ -138,9 +138,11 @@
 
 #define VM_MIN_ADDRESS64        ((user_addr_t) 0x0000000000000000ULL)
 /*
- * default top of user stack... it grows down from here
+ * Default top of user stack, grows down from here.
+ * Address chosen to be 1G (3rd level page table entry) below SHARED_REGION_BASE_X86_64
+ * minus additional 1Meg (1/2 1st level page table coverage) to allow a redzone after it.
  */
-#define VM_USRSTACK64           ((user_addr_t) 0x00007FFEEFC00000ULL)
+#define VM_USRSTACK64           ((user_addr_t) (0x00007FF7C0000000ull - (1024 * 1024)))
 
 /*
  * XXX TODO: Obsolete?

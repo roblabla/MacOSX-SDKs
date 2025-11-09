@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F5D9CFBC-EC5D-3266-ABE8-F93E31F01CE4
+    value:           B6776AB6-FB1F-34D3-A6FE-3F52DF3F399C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B04A0638-9735-3EB1-8540-B202E1CB1A07
+    value:           55CF62E1-D483-3F30-A09B-56E48EAE6C27
 install-name:    '/usr/lib/updaters/libSEUpdater.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

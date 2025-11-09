@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1150F9DE-B69B-337F-8A93-C36E15CF77C7
+    value:           DFC51E32-ED7F-355B-9EBF-26D47AE4904F
   - target:          x86_64-maccatalyst
-    value:           1150F9DE-B69B-337F-8A93-C36E15CF77C7
+    value:           DFC51E32-ED7F-355B-9EBF-26D47AE4904F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           84EB711F-CCD8-3293-8B3E-EBA7D3D2B539
+    value:           C468A1CA-EF39-31B9-B1CF-733E5B4D09C9
   - target:          arm64e-maccatalyst
-    value:           84EB711F-CCD8-3293-8B3E-EBA7D3D2B539
+    value:           C468A1CA-EF39-31B9-B1CF-733E5B4D09C9
 install-name:    '/System/Library/Frameworks/ClassKit.framework/Versions/A/ClassKit'
-current-version: 147.0.81
+current-version: 147.2.7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CLSAdminRequestNewAccountPlaceholderAppleID, _CLSAdoptPersona, 
                        _CLSAnswerActionFromString, _CLSAnswerStateFromString, _CLSAnswerTypeFromString, 
@@ -55,8 +55,10 @@ exports:
                        _CLSDevModeFromString, _CLSDeveloperModeDidChangeNotification, 
                        _CLSDispatchQueueName, _CLSEndpointServerInterface, _CLSErrorCodeDomain, 
                        _CLSErrorObjectKey, _CLSErrorSuccessfulObjectsKey, _CLSErrorUnderlyingErrorsKey, 
-                       _CLSExecutableLinkedOnOrAfter_iOS13_2, _CLSExecutableLinkedOnOrAfter_iOS14_0, 
-                       _CLSExecutableLinkedOnOrAfter_iOS14_2, _CLSExpectedPersonaKey, 
+                       _CLSExecutableLinkedOnOrAfter_iOS13_2, _CLSExecutableLinkedOnOrAfter_iOS13_2_macOS_10_15_1, 
+                       _CLSExecutableLinkedOnOrAfter_iOS14_0, _CLSExecutableLinkedOnOrAfter_iOS14_0_macOS_10_16, 
+                       _CLSExecutableLinkedOnOrAfter_iOS14_2, _CLSExecutableLinkedOnOrAfter_iOS14_2_macOS_10_16, 
+                       _CLSExecutableLinkedOnOrAfter_iOS15_1_macOS_12_0, _CLSExpectedPersonaKey, 
                        _CLSExtensionPropertiesForConnection, _CLSExtensionPropertiesForCurrentTask, 
                        _CLSFavoriteTypeFromString, _CLSHandoutAssignedItemPropertyBundleIDs, 
                        _CLSHandoutAssignedItemPropertyCurrentActivityID, _CLSHandoutAssignedItemPropertyType, 
@@ -74,8 +76,12 @@ exports:
                        _CLSMultipleChoiceTypeFromString, _CLSObjectsClasses, _CLSOnboardingClasses, 
                        _CLSOpenResponseTypeFromString, _CLSOriginatingSourceFromString, 
                        _CLSPerformWithPersona, _CLSPermissionTypeFromString, _CLSPersonalPersonaUniqueIdentifier, 
-                       _CLSPredicateKeyPathAlertType, _CLSPredicateKeyPathAssignable, 
-                       _CLSPredicateKeyPathBundleIdentifier, _CLSPredicateKeyPathClassTempID, 
+                       _CLSPredicateKeyPathAdminRequestorEmail, _CLSPredicateKeyPathAdminRequestorID, 
+                       _CLSPredicateKeyPathAlertType, _CLSPredicateKeyPathAssetItemID, 
+                       _CLSPredicateKeyPathAssetOwnerName, _CLSPredicateKeyPathAssetSchoolworkSyncStatus, 
+                       _CLSPredicateKeyPathAssetZoneName, _CLSPredicateKeyPathAssignable, 
+                       _CLSPredicateKeyPathBundleIdentifier, _CLSPredicateKeyPathClassID, 
+                       _CLSPredicateKeyPathClassName, _CLSPredicateKeyPathClassTempID, 
                        _CLSPredicateKeyPathContextIdentifier, _CLSPredicateKeyPathCurrentActivityID, 
                        _CLSPredicateKeyPathCurrentPerson, _CLSPredicateKeyPathDateCreated, 
                        _CLSPredicateKeyPathDateExpires, _CLSPredicateKeyPathDateLastModified, 
@@ -85,30 +91,38 @@ exports:
                        _CLSPredicateKeyPathIdentifier, _CLSPredicateKeyPathIsSearchable, 
                        _CLSPredicateKeyPathLength, _CLSPredicateKeyPathLocationID, 
                        _CLSPredicateKeyPathLocked, _CLSPredicateKeyPathObjectID, 
-                       _CLSPredicateKeyPathOwnerPersonID, _CLSPredicateKeyPathParent, 
-                       _CLSPredicateKeyPathParentObjectID, _CLSPredicateKeyPathPathEnd, 
-                       _CLSPredicateKeyPathPersonID, _CLSPredicateKeyPathPublishingState, 
-                       _CLSPredicateKeyPathReviewed, _CLSPredicateKeyPathRoles, _CLSPredicateKeyPathScore, 
-                       _CLSPredicateKeyPathSearchText, _CLSPredicateKeyPathStableObjectID, 
-                       _CLSPredicateKeyPathStart, _CLSPredicateKeyPathStartTime, 
-                       _CLSPredicateKeyPathState, _CLSPredicateKeyPathSuggestedAgeMax, 
-                       _CLSPredicateKeyPathSuggestedAgeMin, _CLSPredicateKeyPathSuggestedCompletionTimeMax, 
-                       _CLSPredicateKeyPathSuggestedCompletionTimeMin, _CLSPredicateKeyPathTitle, 
-                       _CLSPredicateKeyPathTopic, _CLSPredicateKeyPathType, _CLSPredicateKeyPathURL, 
-                       _CLSPredicateKeyPathUniversalLinkURL, _CLSProgressClasses, 
-                       _CLSProgressReportingCapabilityPropertyDetails, _CLSProgressReportingCapabilityPropertyKind, 
-                       _CLSProgressdBundleIdentifier, _CLSQueriableWithoutValidUserClasses, 
-                       _CLSQueryInterface, _CLSReportClasses, _CLSRosterClasses, 
-                       _CLSSaveResponseInterface, _CLSSearchClasses, _CLSServerAlertButtonTitleKey, 
-                       _CLSServerAlertButtonURLKey, _CLSServerAlertReceivedNotificationName, 
-                       _CLSSettingsVisibilityDidChangeNotification, _CLSShareTypeFromString, 
-                       _CLSSignificantBackingStoreChangeNotification, _CLSSliderAnswerFormatTypeFromString, 
-                       _CLSSourceFromString, _CLSStudentClassMembershipChangedDarwinNotificationName, 
-                       _CLSSurveyClasses, _CLSSurveyStepTypeFromString, _CLSSurveyTypeFromString, 
-                       _CLSSyncInitialHandoutSyncDateKey, _CLSSyncInitialRosterSyncDateKey, 
-                       _CLSSyncLatestHandoutSyncDateKey, _CLSSyncLatestHandoutSyncFailureDateKey, 
-                       _CLSSyncLatestRosterSyncDateKey, _CLSSyncLatestRosterSyncFailureDateKey, 
-                       _CLSUbiquitousContainerID, _CLSUserActivityActionType, _CLSUserActivityItemIdentifier, 
+                       _CLSPredicateKeyPathOrganizationID, _CLSPredicateKeyPathOwnerPersonID, 
+                       _CLSPredicateKeyPathParent, _CLSPredicateKeyPathParentObjectID, 
+                       _CLSPredicateKeyPathPathEnd, _CLSPredicateKeyPathPersonAppleID, 
+                       _CLSPredicateKeyPathPersonEmail, _CLSPredicateKeyPathPersonFamilyName, 
+                       _CLSPredicateKeyPathPersonGivenName, _CLSPredicateKeyPathPersonICloudID, 
+                       _CLSPredicateKeyPathPersonID, _CLSPredicateKeyPathPersonPersonNumber, 
+                       _CLSPredicateKeyPathPublishingState, _CLSPredicateKeyPathReportItemCompleted, 
+                       _CLSPredicateKeyPathReportItemGranularity, _CLSPredicateKeyPathReportItemHandoutID, 
+                       _CLSPredicateKeyPathReportItemStudentID, _CLSPredicateKeyPathReviewed, 
+                       _CLSPredicateKeyPathRoles, _CLSPredicateKeyPathScore, _CLSPredicateKeyPathSearchText, 
+                       _CLSPredicateKeyPathStableObjectID, _CLSPredicateKeyPathStart, 
+                       _CLSPredicateKeyPathStartTime, _CLSPredicateKeyPathState, 
+                       _CLSPredicateKeyPathSuggestedAgeMax, _CLSPredicateKeyPathSuggestedAgeMin, 
+                       _CLSPredicateKeyPathSuggestedCompletionTimeMax, _CLSPredicateKeyPathSuggestedCompletionTimeMin, 
+                       _CLSPredicateKeyPathSurveyID, _CLSPredicateKeyPathSurveyQuestionID, 
+                       _CLSPredicateKeyPathSurveyResponderPersonID, _CLSPredicateKeyPathSurveyUpdateStatus, 
+                       _CLSPredicateKeyPathTitle, _CLSPredicateKeyPathTopic, _CLSPredicateKeyPathType, 
+                       _CLSPredicateKeyPathURL, _CLSPredicateKeyPathUniversalLinkURL, 
+                       _CLSProgressClasses, _CLSProgressReportingCapabilityPropertyDetails, 
+                       _CLSProgressReportingCapabilityPropertyKind, _CLSProgressdBundleIdentifier, 
+                       _CLSQueriableWithoutValidUserClasses, _CLSQueryInterface, 
+                       _CLSReportClasses, _CLSRosterClasses, _CLSSaveResponseInterface, 
+                       _CLSSearchClasses, _CLSServerAlertButtonTitleKey, _CLSServerAlertButtonURLKey, 
+                       _CLSServerAlertReceivedNotificationName, _CLSSettingsVisibilityDidChangeNotification, 
+                       _CLSShareTypeFromString, _CLSSignificantBackingStoreChangeNotification, 
+                       _CLSSliderAnswerFormatTypeFromString, _CLSSourceFromString, 
+                       _CLSStudentClassMembershipChangedDarwinNotificationName, _CLSSurveyClasses, 
+                       _CLSSurveyStepTypeFromString, _CLSSurveyTypeFromString, _CLSSyncInitialHandoutSyncDateKey, 
+                       _CLSSyncInitialRosterSyncDateKey, _CLSSyncLatestHandoutSyncDateKey, 
+                       _CLSSyncLatestHandoutSyncFailureDateKey, _CLSSyncLatestRosterSyncDateKey, 
+                       _CLSSyncLatestRosterSyncFailureDateKey, _CLSUbiquitousContainerID, 
+                       _CLSUserActivityActionType, _CLSUserActivityItemIdentifier, 
                        _CLSUserDefaultEnableEnhancedDataObserver, _CLSUserDefaultEnableMescalVerification, 
                        _CLSUserDefaultEnableResponseStreaming, _CLSUserDefaultEnableVerboseLogging, 
                        _CLSUserDefaultRestoreCurrentDefaults, _CLSUserSettingDateKey, 
@@ -156,7 +170,7 @@ exports:
                        CLSServerAlert, CLSSettingsVisibilityController, CLSSliderAnswerFormat, 
                        CLSSurvey, CLSSurveyAnswerItem, CLSSurveyStep, CLSTimeInterval, 
                        CLSUserDefaults, CLSUtil, CLSUtilityService ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '$ld$install_name$os10.14$/System/Library/PrivateFrameworks/ClassKit.framework/Versions/A/ClassKit', 
                        '$ld$install_name$os10.15$/System/Library/PrivateFrameworks/ClassKit.framework/Versions/A/ClassKit' ]
 ...

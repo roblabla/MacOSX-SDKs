@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7B1A5C07-81B4-3147-8083-DFFA1B7D35C7
+    value:           1B981FE2-B3C4-3395-994B-268D0FAB76AA
 install-name:    '/System/Library/PrivateFrameworks/AppleVPA.framework/Versions/A/AppleVPA'
 exports:
   - targets:         [ x86_64-macos ]

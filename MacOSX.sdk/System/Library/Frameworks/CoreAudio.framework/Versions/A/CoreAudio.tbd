@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           44B712D4-FEBA-3C89-B02C-32851987A288
+    value:           33F55D9C-EAEF-3FBD-ADD5-ED3E54925762
   - target:          x86_64-maccatalyst
-    value:           44B712D4-FEBA-3C89-B02C-32851987A288
+    value:           33F55D9C-EAEF-3FBD-ADD5-ED3E54925762
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           172992D5-0FE7-39D8-9F36-883B463680E8
+    value:           FB9C653D-BCAD-308B-981B-F2C56C8C17C5
   - target:          arm64e-maccatalyst
-    value:           172992D5-0FE7-39D8-9F36-883B463680E8
+    value:           FB9C653D-BCAD-308B-981B-F2C56C8C17C5
 install-name:    '/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AudioConvertHostTimeToNanos, _AudioConvertNanosToHostTime, 
                        _AudioDeviceAddIOProc, _AudioDeviceAddPropertyListener, _AudioDeviceCreateIOProcID, 

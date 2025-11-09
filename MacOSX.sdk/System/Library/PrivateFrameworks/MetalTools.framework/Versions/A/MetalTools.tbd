@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EE0FFE42-38C3-3197-9AB3-67F0D0D2D056
+    value:           EFC6768F-8840-346A-B4B4-8967496501A4
   - target:          x86_64-maccatalyst
-    value:           EE0FFE42-38C3-3197-9AB3-67F0D0D2D056
+    value:           EFC6768F-8840-346A-B4B4-8967496501A4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A38BCD30-18BA-34E8-906C-BC1CF628C51D
+    value:           0151C670-0A29-3ABD-B5E2-BFB5168D5738
   - target:          arm64e-maccatalyst
-    value:           A38BCD30-18BA-34E8-906C-BC1CF628C51D
+    value:           0151C670-0A29-3ABD-B5E2-BFB5168D5738
 install-name:    '/System/Library/PrivateFrameworks/MetalTools.framework/Versions/A/MetalTools'
 current-version: 0
 compatibility-version: 0

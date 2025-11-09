@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           198F9A5F-72B9-37F5-A2BC-40A88042509B
+    value:           DEA962F7-D732-3EEC-AD37-5814A6A93709
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A6E68C17-DA26-337E-B81E-2E17635D0D2D
+    value:           83892A7B-7E03-3EF6-92C2-95FCB2AC817D
 install-name:    '/System/Library/Frameworks/WidgetKit.framework/Versions/A/WidgetKit'
-current-version: 176
+current-version: 181.5.6
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
@@ -297,6 +297,8 @@ exports:
                        '_$s9WidgetKit0A25ExtensionSessionOperationO11descriptionSSvpMV', 
                        '_$s9WidgetKit0A25ExtensionSessionOperationO11getTimelineyA2CmFWC', 
                        '_$s9WidgetKit0A25ExtensionSessionOperationO12getTimelinesyACSicACmFWC', 
+                       '_$s9WidgetKit0A25ExtensionSessionOperationO14defaultTimeoutSdvg', 
+                       '_$s9WidgetKit0A25ExtensionSessionOperationO14defaultTimeoutSdvpMV', 
                        '_$s9WidgetKit0A25ExtensionSessionOperationO14getDescriptorsyA2CmFWC', 
                        '_$s9WidgetKit0A25ExtensionSessionOperationO15getPlaceholdersyA2CmFWC', 
                        '_$s9WidgetKit0A25ExtensionSessionOperationO18attachPreviewAgentyA2CmFWC', 
@@ -355,6 +357,8 @@ exports:
                        '_$s9WidgetKit0A8ArchiverC14ArchivingErrorO10Foundation09LocalizedE0AAMc', 
                        '_$s9WidgetKit0A8ArchiverC14ArchivingErrorO13imageTooLargeyAESo6CGSizeV_AHtcAEmFWC', 
                        '_$s9WidgetKit0A8ArchiverC14ArchivingErrorO14failedToEncodeyAESayypXpG_tcAEmFWC', 
+                       '_$s9WidgetKit0A8ArchiverC14ArchivingErrorO16errorDescriptionSSSgvg', 
+                       '_$s9WidgetKit0A8ArchiverC14ArchivingErrorO16errorDescriptionSSSgvpMV', 
                        '_$s9WidgetKit0A8ArchiverC14ArchivingErrorO18bundleLookupFailedyAEs0E0_p_tcAEmFWC', 
                        '_$s9WidgetKit0A8ArchiverC14ArchivingErrorOMa', '_$s9WidgetKit0A8ArchiverC14ArchivingErrorOMn', 
                        '_$s9WidgetKit0A8ArchiverC14ArchivingErrorON', '_$s9WidgetKit0A8ArchiverC14ArchivingErrorOs0E0AAMc', 
@@ -750,7 +754,9 @@ exports:
                        '_$sSo15CHSWidgetFamilyV9WidgetKitE27stableIntegerRepresentationSivg', 
                        '_$sSo15CHSWidgetFamilyV9WidgetKitE27stableIntegerRepresentationSivpMV', 
                        '_$sSo15CHSWidgetFamilyV9WidgetKitEyAbC08InternalcB0OcfC', 
-                       '_$sSo15CHSWidgetFamilyV9WidgetKitEyAbC0cB0OcfC', '_$sSo19CHSWidgetFamilyMaskV9WidgetKitE08internalD8FamiliesSayAC08InternaldB0OGvg', 
+                       '_$sSo15CHSWidgetFamilyV9WidgetKitEyAbC0cB0OcfC', '_$sSo16CHSWidgetMetricsC9WidgetKitE18fontDefinitionType7SwiftUI04FontF0_pXpvg', 
+                       '_$sSo16CHSWidgetMetricsC9WidgetKitE18fontDefinitionType7SwiftUI04FontF0_pXpvpMV', 
+                       '_$sSo19CHSWidgetFamilyMaskV9WidgetKitE08internalD8FamiliesSayAC08InternaldB0OGvg', 
                        '_$sSo19CHSWidgetFamilyMaskV9WidgetKitE08internalD8FamiliesSayAC08InternaldB0OGvpMV', 
                        '_$sSo19CHSWidgetFamilyMaskV9WidgetKitE11sizeClassesSaySo0aB0VGvg', 
                        '_$sSo19CHSWidgetFamilyMaskV9WidgetKitE11sizeClassesSaySo0aB0VGvpMV', 

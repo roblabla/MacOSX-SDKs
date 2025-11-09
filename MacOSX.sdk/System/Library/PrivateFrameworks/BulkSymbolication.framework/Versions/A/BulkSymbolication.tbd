@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AEFBDB14-3FAD-302D-97C2-91EBB7C9A638
+    value:           756B05B1-45FF-3A60-9AD7-1B44B34AC047
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8EA98EAF-FF9D-3001-BD4B-8E7DB6B6BCBE
+    value:           219F10FB-E0E0-3630-BFE0-C08ADE41C0C4
 install-name:    '/System/Library/PrivateFrameworks/BulkSymbolication.framework/Versions/A/BulkSymbolication'
-current-version: 301
+current-version: 302.1
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _BulkSymbolicationVersionNumber, _BulkSymbolicationVersionString, 

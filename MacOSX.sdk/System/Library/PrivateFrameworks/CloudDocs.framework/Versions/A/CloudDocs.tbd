@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1D3B1DAF-C77A-332A-AD12-92857E8DFACA
+    value:           C0E794E9-5399-3FB4-A052-29F629129895
   - target:          x86_64-maccatalyst
-    value:           1D3B1DAF-C77A-332A-AD12-92857E8DFACA
+    value:           C0E794E9-5399-3FB4-A052-29F629129895
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           583F6DA9-DDB2-385F-A5CA-797BCB0AB2BD
+    value:           AEB10982-102E-3C1D-B2B1-0F7E08633D0A
   - target:          arm64e-maccatalyst
-    value:           583F6DA9-DDB2-385F-A5CA-797BCB0AB2BD
+    value:           AEB10982-102E-3C1D-B2B1-0F7E08633D0A
 install-name:    '/System/Library/PrivateFrameworks/CloudDocs.framework/Versions/A/CloudDocs'
-current-version: 773
+current-version: 902.60.2
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

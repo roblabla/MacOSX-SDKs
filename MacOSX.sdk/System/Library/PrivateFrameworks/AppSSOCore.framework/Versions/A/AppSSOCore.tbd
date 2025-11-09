@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           075CC5B0-69A4-306C-B367-D75DC80457C4
+    value:           4EC465AA-060B-3EB6-94BB-93151CAFF2B7
   - target:          x86_64-maccatalyst
-    value:           075CC5B0-69A4-306C-B367-D75DC80457C4
+    value:           4EC465AA-060B-3EB6-94BB-93151CAFF2B7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6D40479E-495F-3688-92AA-D12D2CB03681
+    value:           05C69104-0FEF-35B9-8D5C-4E3E00DB882A
   - target:          arm64e-maccatalyst
-    value:           6D40479E-495F-3688-92AA-D12D2CB03681
+    value:           05C69104-0FEF-35B9-8D5C-4E3E00DB882A
 install-name:    '/System/Library/PrivateFrameworks/AppSSOCore.framework/Versions/A/AppSSOCore'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

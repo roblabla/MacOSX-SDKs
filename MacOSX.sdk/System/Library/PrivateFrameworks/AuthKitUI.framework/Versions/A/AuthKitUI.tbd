@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DB37C520-907A-3C5A-A4FE-B34C4BE68E21
+    value:           0EA7715D-49DB-322F-A448-50D75D89BC59
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7C2066B1-40F5-3EC5-9BAF-9EE2B24156C9
+    value:           7EE2ECE9-825B-306B-BECB-6E32B48B6441
 install-name:    '/System/Library/PrivateFrameworks/AuthKitUI.framework/Versions/A/AuthKitUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -24,7 +24,8 @@ exports:
                        _AuthKitUIVersionNumber, _AuthKitUIVersionString, _CallJSFunctionWithParameters, 
                        _EvaluateJavaScript, _JSCopyStringValue, _JSValueFromNSString, 
                        _JSValueRefsAreEqual, _NSObjectFromJSValue, _NSStringFromJSString, 
-                       _NSStringFromJSValue, __AKUIMainBundle, __CreateAttributedStringWithFontSize, 
+                       _NSStringFromJSValue, __AKActionContinuation, __AKFollowUpPushMessageIDKey, 
+                       __AKIDMSAppleIDContinuationData, __AKUIMainBundle, __CreateAttributedStringWithFontSize, 
                        __DrawBorder, __DrawLogoPDFIntoContext, __IsJSValueAnArray, 
                        __MaximumFontSizeForStringInRect, __NSDictionaryFromJSObject, 
                        _kAKCAAppID, _kAKCAAuthorizationRequestSuccess, _kAKCAClientID, 
@@ -90,8 +91,9 @@ exports:
                        AKAppleIDAuthenticationInAssistantContext, AKAppleIDAuthenticationMacOSExtenstionContext, 
                        AKAppleIDAuthenticationUISurrogateContext, AKAppleIDAuthenticationiCloudPrefPaneContext, 
                        AKAppleIDAuthenticationiCloudPrefPaneSecondFactorViewController, 
-                       AKAppleIDAuthenticationiCloudPrefPaneViewController, AKAppleIDServerUIContextController, 
-                       AKAppleIDServerUIDataHarvester, AKAuthHandlerUIImpl, AKAuthWebTabView, 
+                       AKAppleIDAuthenticationiCloudPrefPaneViewController, AKAppleIDFollowUpServerUIPresenter, 
+                       AKAppleIDServerUIContextController, AKAppleIDServerUIDataHarvester, 
+                       AKAppleIDServerUIEventHandlerImp, AKAuthHandlerUIImpl, AKAuthWebTabView, 
                        AKAuthenticationPromptController, AKAuthenticationRVSBootstrapper, 
                        AKAuthenticationRVSRemoteViewController, AKAuthenticationRVSWindowController, 
                        AKAuthenticationUIProviderImp, AKAuthorizationAppleIDButton, 
@@ -114,11 +116,12 @@ exports:
                        AKCASatoriReporter, AKCATiburonAuthorizationUIReporter, AKCATiburonInputUIReporter, 
                        AKCATiburonPasswordUIReporter, AKCATiburonRequestAttemptReporter, 
                        AKCATiburonRequestReporter, AKCurvePoint, AKDateFormatter, 
-                       AKDefaultSignInPromptViewController, AKDeviceInfo, AKGeneratedComplexCodeFormatter, 
-                       AKICAWebKitViewController, AKIDPHandler, AKIDPProvidedSignInViewController, 
-                       AKIDPProvidedSignInWindow, AKIcon, AKInAppAuthenticationMacOSUIProvider, 
-                       AKInAssistantSecondFactorCodeEntry, AKInfoLabel, AKInlineSignInViewController, 
-                       AKKeepUsingController, AKLargeSignInBackground, AKLargeSignInPromptViewController, 
+                       AKDefaultSignInPromptViewController, AKDeviceInfo, AKExtensionlessFollowUpHelperContext, 
+                       AKGeneratedComplexCodeFormatter, AKICAWebKitViewController, 
+                       AKIDPHandler, AKIDPProvidedSignInViewController, AKIDPProvidedSignInWindow, 
+                       AKIcon, AKInAppAuthenticationMacOSUIProvider, AKInAssistantSecondFactorCodeEntry, 
+                       AKInfoLabel, AKInlineSignInViewController, AKKeepUsingController, 
+                       AKLargeSignInBackground, AKLargeSignInPromptViewController, 
                        AKLargeSignInSecureTextField, AKLargeSignInTextField, AKLargeSignInTextFieldBackgroundView, 
                        AKLegacyInlineSignInViewController, AKLoginRowData, AKMaxLengthFormatter, 
                        AKNameTextField, AKNavigationController, AKNavigationItem, 

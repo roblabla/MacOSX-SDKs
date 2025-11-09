@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8B40E22F-DA1A-3DE9-90E2-2DE1BEFB128E
+    value:           35929323-EAEE-324C-A641-F7E51D23481A
   - target:          x86_64-maccatalyst
-    value:           8B40E22F-DA1A-3DE9-90E2-2DE1BEFB128E
+    value:           35929323-EAEE-324C-A641-F7E51D23481A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6C01E1A4-83D5-3AB9-BAE6-E0AE3CCC1881
+    value:           CAD01F37-09D1-3801-A087-43884792656C
   - target:          arm64e-maccatalyst
-    value:           6C01E1A4-83D5-3AB9-BAE6-E0AE3CCC1881
+    value:           CAD01F37-09D1-3801-A087-43884792656C
 install-name:    '/System/Library/PrivateFrameworks/CoreUtilsExtras.framework/Versions/A/CoreUtilsExtras'
 current-version: 0
 compatibility-version: 0

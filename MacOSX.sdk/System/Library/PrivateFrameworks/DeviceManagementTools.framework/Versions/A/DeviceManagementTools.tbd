@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AACC7EE5-C9A3-306B-9241-D0440AA0554C
+    value:           176A9CDE-9557-3038-BA50-98ED98DD209C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           86D2B13B-8CA5-34F8-A2C4-06DBB879EB4B
+    value:           0FB1BE93-2FE2-30DB-ACF8-2D14857EAE93
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagementTools.framework/Versions/A/DeviceManagementTools'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

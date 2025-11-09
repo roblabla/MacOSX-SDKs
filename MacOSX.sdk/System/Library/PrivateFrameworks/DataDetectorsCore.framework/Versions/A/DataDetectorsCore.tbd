@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4A95D81D-9C74-357B-8B5D-77BF6370EB2D
+    value:           09DBF805-9531-3271-8624-FA0D1F4FA72B
   - target:          x86_64-maccatalyst
-    value:           4A95D81D-9C74-357B-8B5D-77BF6370EB2D
+    value:           09DBF805-9531-3271-8624-FA0D1F4FA72B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A2E8AB4F-9983-36C5-A5CD-9BA53D8E53CE
+    value:           7E93034C-219C-32D4-8835-C2F4144930AD
   - target:          arm64e-maccatalyst
-    value:           A2E8AB4F-9983-36C5-A5CD-9BA53D8E53CE
+    value:           7E93034C-219C-32D4-8835-C2F4144930AD
 install-name:    '/System/Library/PrivateFrameworks/DataDetectorsCore.framework/Versions/A/DataDetectorsCore'
-current-version: 692
+current-version: 697.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -45,16 +45,17 @@ exports:
                        _DDBinderTrackingInformationKey, _DDBinderTrackingNumberKey, 
                        _DDBinderUnquotedShortPhoneNumberKey, _DDBinderValueKey, _DDBinderWebURLKey, 
                        _DDBinderZipCodeKey, _DDCacheCopyStatsDescription, _DDCacheCreateWithSubTable, 
-                       _DDCacheSetTemporaryDirectory, _DDCacheWriteAtPath, _DDCacheWriteWithSuffix, 
-                       _DDCalendarAccessAllowed, _DDCopyPunycodedWebURLString, _DDCrash, 
-                       _DDCreateDataFromFileAtPath, _DDCreateDataFromFileAtUrl, _DDCreateRelatedResultsArray, 
-                       _DDCreateTimeZoneValuesFromResultValue, _DDDFACacheCreateFromBundle, 
-                       _DDDFACacheCreateFromFramework, _DDDFAScannerCopyResults, 
-                       _DDDFAScannerCreateFromCache, _DDDFAScannerEmitResult, _DDDFAScannerFirstResultInUnicharArray, 
-                       _DDDFAScannerGetCFTypeID, _DDDFAScannerReset, _DDDFAScannerScanQuery, 
-                       _DDDFAScannerScanString, _DDDFAScannerScanStringWithRange, 
-                       _DDDFAScannerScanUnicharArray, _DDDFAScannerScanUnicharArrayFragment, 
-                       _DDDFAScannerSimulateState, _DDDataDetectorBuilderSetup, _DDDataDetectorSetUsesDebugSource, 
+                       _DDCacheSetTemporaryDirectory, _DDCacheWriteAtPath, _DDCacheWriteAtPathCompressed, 
+                       _DDCacheWriteWithSuffix, _DDCalendarAccessAllowed, _DDCopyPunycodedWebURLString, 
+                       _DDCrash, _DDCreateDataFromFileAtPath, _DDCreateDataFromFileAtUrl, 
+                       _DDCreateRelatedResultsArray, _DDCreateTimeZoneValuesFromResultValue, 
+                       _DDDFACacheCreateFromBundle, _DDDFACacheCreateFromFramework, 
+                       _DDDFAScannerCopyResults, _DDDFAScannerCreateFromCache, _DDDFAScannerEmitResult, 
+                       _DDDFAScannerFirstResultInUnicharArray, _DDDFAScannerGetCFTypeID, 
+                       _DDDFAScannerReset, _DDDFAScannerScanQuery, _DDDFAScannerScanString, 
+                       _DDDFAScannerScanStringWithRange, _DDDFAScannerScanUnicharArray, 
+                       _DDDFAScannerScanUnicharArrayFragment, _DDDFAScannerSimulateState, 
+                       _DDDataDetectorBuilderSetup, _DDDataDetectorSetUsesDebugSource, 
                        _DDDateResultIsPartial, _DDError, _DDFastIntegerExtraction, 
                        _DDForce24HrsFormatProcessWideForExtraction, _DDInitialSetup, 
                        _DDInternalURLStringForResultIdentifier, _DDLog, _DDLogAssertionFailure, 
@@ -126,14 +127,15 @@ exports:
                        _DDSourcePushFile, _DDSourcePushSharedData, _DDSourcePushSharedDataWithSignature, 
                        _DDSourceSetStoragePath, _DDURLScheme, _DDURLStringForResult, 
                        _DDURLTapAndHoldSchemes, _DDURLWithPotentiallyInvalidURLString, 
-                       _DDWriteFileAtPath, _DataDetectorsProximitySort, _kDDHomeFAXLabel, 
-                       _kDDHomeLabel, _kDDInstantMessageServiceAIM, _kDDInstantMessageServiceFacebook, 
-                       _kDDInstantMessageServiceGaduGadu, _kDDInstantMessageServiceGoogleTalk, 
-                       _kDDInstantMessageServiceICQ, _kDDInstantMessageServiceJabber, 
-                       _kDDInstantMessageServiceMSN, _kDDInstantMessageServiceQQ, 
-                       _kDDInstantMessageServiceSkype, _kDDInstantMessageServiceYahoo, 
-                       _kDDMainLabel, _kDDMobileLabel, _kDDOtherLabel, _kDDPagerLabel, 
-                       _kDDWorkFAXLabel, _kDDWorkLabel, _kDDiPhoneLabel ]
+                       _DDWriteFileAtPath, _DDWriteFileAtPathCompressed, _DataDetectorsProximitySort, 
+                       _kDDHomeFAXLabel, _kDDHomeLabel, _kDDInstantMessageServiceAIM, 
+                       _kDDInstantMessageServiceFacebook, _kDDInstantMessageServiceGaduGadu, 
+                       _kDDInstantMessageServiceGoogleTalk, _kDDInstantMessageServiceICQ, 
+                       _kDDInstantMessageServiceJabber, _kDDInstantMessageServiceMSN, 
+                       _kDDInstantMessageServiceQQ, _kDDInstantMessageServiceSkype, 
+                       _kDDInstantMessageServiceYahoo, _kDDMainLabel, _kDDMobileLabel, 
+                       _kDDOtherLabel, _kDDPagerLabel, _kDDWorkFAXLabel, _kDDWorkLabel, 
+                       _kDDiPhoneLabel ]
     objc-classes:    [ DDCompilationNote, DDLRItem, DDLocation, DDRegexpManager, 
                        DDScanServer, DDScannerResult, DDScannerService, DDScannerServiceConfiguration, 
                        DDURLMatch, DDURLifier, DataDetectorsSourceAccess ]

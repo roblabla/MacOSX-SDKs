@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F8C3353B-5FB5-3612-B89A-65BD9F78B24C
+    value:           59E2A98F-F0B6-37FE-91F9-917156F93897
   - target:          x86_64-maccatalyst
-    value:           F8C3353B-5FB5-3612-B89A-65BD9F78B24C
+    value:           59E2A98F-F0B6-37FE-91F9-917156F93897
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4DAC85B9-5737-312E-9AE1-617E42EE9033
+    value:           8DE645A0-9D33-3277-8CAB-1AA144AE8030
   - target:          arm64e-maccatalyst
-    value:           4DAC85B9-5737-312E-9AE1-617E42EE9033
+    value:           8DE645A0-9D33-3277-8CAB-1AA144AE8030
 install-name:    '/usr/lib/swift/libswiftCompression.dylib'
 current-version: 2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '_$s11Compression11FilterErrorO11invalidDatayA2CmFWC', '_$s11Compression11FilterErrorO12invalidStateyA2CmFWC', 
                        '_$s11Compression11FilterErrorO2eeoiySbAC_ACtFZ', '_$s11Compression11FilterErrorO4hash4intoys6HasherVz_tF', 
                        '_$s11Compression11FilterErrorO9hashValueSivg', '_$s11Compression11FilterErrorO9hashValueSivpMV', 

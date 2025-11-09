@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7864DDDD-2739-3D1D-A831-CAE18870FA67
+    value:           FAB62555-A097-3D92-9096-A9EF66C2F3A8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3F6F4558-372E-35FF-9AB7-0384002804F2
+    value:           8A56EDB9-BF0C-3EF3-A98B-6B5F83B2CB85
 install-name:    '/System/Library/PrivateFrameworks/WeatherFoundation.framework/Versions/A/WeatherFoundation'
-current-version: 508
+current-version: 511
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AqiScaleForCountryCode, _AqiScaleFromIdentifier, _CLLocationCoordinate2DFromString, 
@@ -183,7 +183,7 @@ exports:
                        _WFWDSAPI, _WFWDSAPIEnvDev, _WFWDSAPIEnvKey, _WFWDSAPIEnvProd, 
                        _WFWDSAPIEnvProdOrigin, _WFWDSAPIEnvQA, _WFWDSAPIEnvStaging, 
                        _WFWDSAPIEnvTest, _WFWDSAPIVersionV1, _WFWeatherConditionComponent, 
-                       _WFWeatherDewpointComponent, _WFWeatherDewpointTemperatureComponent, 
+                       _WFWeatherDataProviderName, _WFWeatherDewpointComponent, _WFWeatherDewpointTemperatureComponent, 
                        _WFWeatherEventConfigAppKey, _WFWeatherEventConfigIosKey, 
                        _WFWeatherEventConfigKey, _WFWeatherEventConfigMacosKey, _WFWeatherFeelsLikeTemperatureComponent, 
                        _WFWeatherForecastDateComponent, _WFWeatherForecastExpirationDateComponent, 

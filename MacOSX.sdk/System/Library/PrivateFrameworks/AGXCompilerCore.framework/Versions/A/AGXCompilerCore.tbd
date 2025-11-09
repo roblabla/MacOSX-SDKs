@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3796F99E-6D8A-3CF8-8CA1-F70C44BB80C6
+    value:           3A00F88E-4778-3FA4-A76C-F77E298EE17E
   - target:          x86_64-maccatalyst
-    value:           3796F99E-6D8A-3CF8-8CA1-F70C44BB80C6
+    value:           3A00F88E-4778-3FA4-A76C-F77E298EE17E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FE55A222-44E9-32D8-B2B9-90A6B4CD9B82
+    value:           85D976AB-2DC7-3965-9287-9CFF6B1D048F
   - target:          arm64e-maccatalyst
-    value:           FE55A222-44E9-32D8-B2B9-90A6B4CD9B82
+    value:           85D976AB-2DC7-3965-9287-9CFF6B1D048F
 install-name:    '/System/Library/PrivateFrameworks/AGXCompilerCore.framework/Versions/A/AGXCompilerCore'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

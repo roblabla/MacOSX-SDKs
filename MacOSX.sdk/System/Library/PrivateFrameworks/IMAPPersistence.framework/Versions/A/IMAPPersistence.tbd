@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6136A7C4-EC6D-3F7F-85CA-096586499905
+    value:           142565FF-DF5B-37AC-BF02-1030BB21E621
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           591BA4AC-3DBB-370C-B683-0CDF204DEC34
+    value:           07987C38-3854-3A32-B84E-5DCEFC69B6E2
 install-name:    '/System/Library/PrivateFrameworks/IMAPPersistence.framework/Versions/A/IMAPPersistence'
 swift-abi-version: 7
 allowable-clients:

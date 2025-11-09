@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6B354451-B9FF-32E8-9CF8-34F8C1F28069
+    value:           C201035D-1946-3AA2-A56E-B59D580212BE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           40B7219A-C067-3821-A9B4-D4D2EF6EDBE4
+    value:           7A8BC827-ECFD-33CC-869A-8EEAB817831B
 install-name:    '/System/Library/PrivateFrameworks/AppleDepth.framework/Versions/A/AppleDepth'
 exports:
   - targets:         [ x86_64-macos ]
@@ -29,8 +29,8 @@ exports:
                        _FundamentalDistortionError_MeanVal, _FundamentalDistortionError_MeanValPlusGradient, 
                        _FundamentalEpipolarErrorForCalModel, _FundamentalEpipolarError_ABSVec, 
                        _FundamentalEpipolarError_MeanVal, _FundamentalEpipolarError_MeanValPlusGradient, 
-                       _FundamentalEpipolarError_precomputeFundamental, _SelectPointsWithEpipolarThreshold, 
-                       __Z11dumpTextureNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEPU21objcproto10MTLTexture11objc_object, 
+                       _FundamentalEpipolarError_precomputeFundamental, _PCE_BIAS_METADATA_KEY, 
+                       _SelectPointsWithEpipolarThreshold, __Z11dumpTextureNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEPU21objcproto10MTLTexture11objc_object, 
                        __Z11getterDummyP11objc_objectP13objc_selector, __Z11setterDummyP11objc_objectP13objc_selectorS0_, 
                        __Z16dumpRawImageFileNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEPfm, 
                        __Z16dumpRawImageFileNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEPhm, 
@@ -137,9 +137,11 @@ exports:
                        _kADEspressoBufferIDOutputDepth, _kADEspressoBufferIDOutputDisparity, 
                        _kADEspressoBufferIDOutputNormals, _kADEspressoBufferIDOutputOpaqueFeatures, 
                        _kADEspressoBufferIDPpx, _kADEspressoBufferIDPpy, _kADEspressoBufferIDRotationX, 
-                       _kADEspressoBufferIDRotationY, _kADNetworkIDJasperColor, _kADNetworkIDMonocular, 
-                       _kADNetworkIDMonocularV2, _kADNetworkIDSIJNetBackend, _kADNetworkIDSIJNetFrontend, 
-                       _kADNetworkIDStereoFSD, _kADNetworkIDStereoFSD60Deg, _kADNetworkIDStereoStillImages, 
+                       _kADEspressoBufferIDRotationY, _kADNetworkIDCinVidPearl, _kADNetworkIDCinVidStereoTeleWide, 
+                       _kADNetworkIDCinVidStereoWideSuperwide, _kADNetworkIDJasperColor, 
+                       _kADNetworkIDMonocular, _kADNetworkIDMonocularV2, _kADNetworkIDSIJNetBackend, 
+                       _kADNetworkIDSIJNetFrontend, _kADNetworkIDStereoFSD, _kADNetworkIDStereoFSD45Deg, 
+                       _kADNetworkIDStereoFSD60Deg, _kADNetworkIDStereoStillImages, 
                        _kADNetworkIDStillImage ]
     objc-classes:    [ ADAdaptiveCorrectionDualCameraCalibrationModel, ADAdaptiveCorrectionPipeline, 
                        ADAdaptiveCorrectionPipelineParameters, ADAggregationParameters, 
@@ -149,6 +151,7 @@ exports:
                        ADEspressoJasperColorInferenceDescriptor, ADEspressoJasperToColorTransformCorrectionBackendInfrerenceDescriptor, 
                        ADEspressoJasperToColorTransformCorrectionFrontendInfrerenceDescriptor, 
                        ADEspressoMonocularInferenceDescriptor, ADEspressoMonocularV2InferenceDescriptor, 
+                       ADEspressoPCEDisparityColorInferenceDescriptor, ADEspressoPCEStereoColorInferenceDescriptor, 
                        ADEspressoRunner, ADEspressoStereoInferenceDescriptor, ADEspressoStillImageInferenceDescriptor, 
                        ADEspressoWrapper, ADExecutor, ADExecutorParameters, ADFileLoggerHandler, 
                        ADImageDescriptor, ADImageSupportedSize, ADJasperColorExecutor, 
@@ -157,20 +160,23 @@ exports:
                        ADJasperColorStillsPipeline, ADJasperColorStillsPipelineParameters, 
                        ADJasperPointCloud, ADJasperPointCloudFilterParamaters, ADJasperPointCloudFilterParameters, 
                        ADJasperToColorTransformCorrectionResult, ADLKTExecutor, ADLKTOpticalFlow, 
-                       ADLKTTexturesDescriptor, ADLayoutUtils, ADLogger, ADLoggerHandler, 
-                       ADMagnificationForRadiusLensDistortionModel, ADMetalUtils, 
-                       ADMillimeterRadiusPairsLensDistortionModel, ADMonocularExecutor, 
-                       ADMonocularExecutorParameters, ADMonocularPipeline, ADMonocularPipelineParameters, 
-                       ADMonocularV2Executor, ADMonocularV2ExecutorParameters, ADMonocularV2Pipeline, 
-                       ADMonocularV2PipelineParameters, ADMutableCameraCalibration, 
+                       ADLKTTexturesDescriptor, ADLayoutUtils, ADMagnificationForRadiusLensDistortionModel, 
+                       ADMetalUtils, ADMillimeterRadiusPairsLensDistortionModel, 
+                       ADMonocularExecutor, ADMonocularExecutorParameters, ADMonocularPipeline, 
+                       ADMonocularPipelineParameters, ADMonocularV2Executor, ADMonocularV2ExecutorParameters, 
+                       ADMonocularV2Pipeline, ADMonocularV2PipelineParameters, ADMutableCameraCalibration, 
                        ADMutableJasperPointCloud, ADNetworkProvider, ADNilDistortionModel, 
-                       ADNormals, ADNormalsBuffer, ADPipelineParameters, ADPointCloudAggregator, 
-                       ADPolynomialsLensDistortionModel, ADRefinedPolynomialsLensDistortionModel, 
-                       ADReprojection, ADSignpostUtils, ADStereoExecutor, ADStereoExecutorParameters, 
-                       ADStereoPipeline, ADStereoPipelineParameters, ADTimeProfiler, 
-                       ADTimeSync, ADTimeSyncJasperParameters, ADTimeSyncNode, ADTimeSyncParameters, 
-                       ADTimeSyncPushResults, ADUtils, ADVisualLoggerHandler, ADWarperMeshLensDistortionModel, 
-                       ADXThetaDistortionModel ]
+                       ADNormals, ADNormalsBuffer, ADPCEDisparityColorExecutor, ADPCEDisparityColorExecutorParameters, 
+                       ADPCEDisparityColorPipeline, ADPCEDisparityColorPipelineParameters, 
+                       ADPCEStereoColorExecutor, ADPCEStereoColorExecutorParameters, 
+                       ADPCEStereoColorPipeline, ADPCEStereoColorPipelineParameters, 
+                       ADPipelineParameters, ADPointCloudAggregator, ADPolynomialsLensDistortionModel, 
+                       ADRefinedPolynomialsLensDistortionModel, ADReprojection, ADSignpostUtils, 
+                       ADStereoExecutor, ADStereoExecutorParameters, ADStereoPipeline, 
+                       ADStereoPipelineParameters, ADTimeProfiler, ADTimeSync, ADTimeSyncJasperParameters, 
+                       ADTimeSyncNode, ADTimeSyncParameters, ADTimeSyncPushResults, 
+                       ADUtils, ADVisualLoggerHandler, ADWarperMeshLensDistortionModel, 
+                       ADXThetaDistortionModel, AppleDepthLogger, AppleDepthLoggerHandler ]
     objc-ivars:      [ ADCameraCalibration._cameraToPlatformTransform, ADCameraCalibration._distortionModel, 
                        ADCameraCalibration._intrinsicMatrix, ADCameraCalibration._pixelSize, 
                        ADCameraCalibration._referenceDimensions, ADExecutor._engineType, 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4F7D4E31-6867-3C11-8D64-29795664E88C
+    value:           A77DFC76-DC93-31E8-9262-CEA8A6A794CF
   - target:          x86_64-maccatalyst
-    value:           4F7D4E31-6867-3C11-8D64-29795664E88C
+    value:           A77DFC76-DC93-31E8-9262-CEA8A6A794CF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F911430A-EFC9-3564-B4D3-A87C60F19BA5
+    value:           CA00C941-8CC1-33DF-A629-874AE905E67F
   - target:          arm64e-maccatalyst
-    value:           F911430A-EFC9-3564-B4D3-A87C60F19BA5
+    value:           CA00C941-8CC1-33DF-A629-874AE905E67F
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestions.framework/Versions/A/CoreSuggestions'
-current-version: 1150
+current-version: 1153.10
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

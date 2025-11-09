@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           64D24F6B-5180-3646-A591-80D7705C7C41
+    value:           8739F110-7A65-3230-B7E3-00125B76EBCD
   - target:          x86_64-maccatalyst
-    value:           64D24F6B-5180-3646-A591-80D7705C7C41
+    value:           8739F110-7A65-3230-B7E3-00125B76EBCD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2349D49D-ADA0-3746-9AD6-1566C5A45419
+    value:           814FCA06-BF5E-3892-992C-3F10A148C7A2
   - target:          arm64e-maccatalyst
-    value:           2349D49D-ADA0-3746-9AD6-1566C5A45419
+    value:           814FCA06-BF5E-3892-992C-3F10A148C7A2
 install-name:    '/System/Library/Frameworks/Vision.framework/Versions/A/Vision'
-current-version: 5.0.41
+current-version: 5.0.71
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
@@ -82,11 +82,12 @@ exports:
                        _VNCleanupLevel_Complete, _VNCleanupLevel_Partial, _VNCleanupPurgeAll, 
                        _VNClusteringAlgorithm_Greedy, _VNClusteringAlgorithm_GreedyWithTorso, 
                        _VNCropAndScaleFromURLToPixelBuffers, _VNCropAndScalePixelBufferToPixelBuffers, 
-                       _VNDGCsUiwnQwGz0qSSQPGGd177EyoSaoGN, _VNDetectBarcodesLocateModeCenterFiveEachDirection, 
-                       _VNDetectBarcodesLocateModeCenterOneEachDirection, _VNDetectBarcodesLocateModeCenterOneHorizontal, 
-                       _VNDetectBarcodesLocateModeCenterOneHorizontalThick, _VNDetectBarcodesLocateModeCenterOneVertical, 
-                       _VNDetectBarcodesLocateModeCenterOneVerticalThick, _VNDetectBarcodesLocateModeCenterThreeEachDirection, 
-                       _VNDetectBarcodesLocateModeCenterThreeEachDirectionAndCoverageAndDiagonals, 
+                       _VNDGCsUiwnQwGz0qSSQPGGd177EyoSaoGN, _VNDebugImageFromCGImage, 
+                       _VNDebugImageRenderNormalizedCGPathOnImage, _VNDebugPathFromNormalizedCGPath, 
+                       _VNDetectBarcodesLocateModeCenterFiveEachDirection, _VNDetectBarcodesLocateModeCenterOneEachDirection, 
+                       _VNDetectBarcodesLocateModeCenterOneHorizontal, _VNDetectBarcodesLocateModeCenterOneHorizontalThick, 
+                       _VNDetectBarcodesLocateModeCenterOneVertical, _VNDetectBarcodesLocateModeCenterOneVerticalThick, 
+                       _VNDetectBarcodesLocateModeCenterThreeEachDirection, _VNDetectBarcodesLocateModeCenterThreeEachDirectionAndCoverageAndDiagonals, 
                        _VNDetectBarcodesLocateModeCenterThreeHorizontal, _VNDetectBarcodesLocateModeCenterThreeHorizontalAndCoverageAndDiagonals, 
                        _VNDetectBarcodesLocateModeCenterThreeHorizontalCrossed, _VNDetectBarcodesLocateModeCenterThreeVertical, 
                        _VNDetectBarcodesLocateModeCenterThreeVerticalAndCoverageAndDiagonals, 

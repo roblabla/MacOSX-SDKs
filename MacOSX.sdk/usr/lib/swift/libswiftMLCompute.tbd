@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           29BA8342-B3DB-3B29-BEC3-DB526E57F8BC
+    value:           586213B9-1D39-3D29-9249-D8C361D62D46
   - target:          x86_64-maccatalyst
-    value:           29BA8342-B3DB-3B29-BEC3-DB526E57F8BC
+    value:           586213B9-1D39-3D29-9249-D8C361D62D46
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B27FED0A-466E-3F35-A2D5-5026E5C4E7DE
+    value:           5F0D4C60-2FCB-3C0C-B60F-D998C933D911
   - target:          arm64e-maccatalyst
-    value:           B27FED0A-466E-3F35-A2D5-5026E5C4E7DE
+    value:           5F0D4C60-2FCB-3C0C-B60F-D998C933D911
 install-name:    '/usr/lib/swift/libswiftMLCompute.dylib'
 current-version: 66
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '_$s9MLCompute14MLCPoolingTypeO011objcPoolingC0SoABVvg', '_$s9MLCompute14MLCPoolingTypeO011objcPoolingC0SoABVvpMV', 
                        '_$s9MLCompute14MLCPoolingTypeO16debugDescriptionSSvg', '_$s9MLCompute14MLCPoolingTypeO16debugDescriptionSSvpMV', 
                        '_$s9MLCompute14MLCPoolingTypeO3maxyA2CmFWC', '_$s9MLCompute14MLCPoolingTypeO6l2NormyA2CmFWC', 

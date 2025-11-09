@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           94267561-87C8-36D9-A787-22761CDA429E
+    value:           D070BD07-61E1-3EE0-B070-FF34383BC375
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F3115FD8-15E0-33B5-9540-7C56DC2F1C55
+    value:           B5985A3E-4209-373A-B236-D04579D4075C
 install-name:    '/usr/lib/swift/libswiftSpriteKit.dylib'
 current-version: 1.2
 swift-abi-version: 7

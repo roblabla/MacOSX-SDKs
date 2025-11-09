@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6F422B0B-9C48-3BFF-B814-824002F6C60A
+    value:           743B6A45-4F8D-376E-9A78-A06EB4577622
   - target:          x86_64-maccatalyst
-    value:           6F422B0B-9C48-3BFF-B814-824002F6C60A
+    value:           743B6A45-4F8D-376E-9A78-A06EB4577622
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C17A181F-88AF-3955-A61D-A5AFB3DEFB16
+    value:           D5589853-37DB-3C04-9656-23253BD37166
   - target:          arm64e-maccatalyst
-    value:           C17A181F-88AF-3955-A61D-A5AFB3DEFB16
+    value:           D5589853-37DB-3C04-9656-23253BD37166
 install-name:    '/System/Library/PrivateFrameworks/CoreCDP.framework/Versions/A/CoreCDP'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -30,9 +30,16 @@ exports:
                        _CoreCDPVersionNumber, _CoreCDPVersionString, __CDPLogSystem, 
                        __CDPSignpostCreate, __CDPSignpostGetNanoseconds, __CDPSignpostLogSystem, 
                        __CDPStateError, __CDPStateErrorWithUnderlying, __CDPSuffixForDeviceClass, 
-                       __CDPSuffixForSecretType, __CDPSuffixForUnqualifiedDeviceClass ]
-    objc-classes:    [ CDPAccount, CDPAuthProviderProxy, CDPCircleProxyImpl, CDPContext, 
-                       CDPController, CDPCustodianRecoveryInfo, CDPCustodianRecoveryKeyController, 
+                       __CDPSuffixForSecretType, __CDPSuffixForUnqualifiedDeviceClass, 
+                       _kCDPCABackupRecoveryAttemptBundleID, _kCDPCABackupRecoveryAttemptedMethods, 
+                       _kCDPCABackupRecoveryDidCancel, _kCDPCABackupRecoveryDidFail, 
+                       _kCDPCABackupRecoveryDidReset, _kCDPCABackupRecoveryDidSucceed, 
+                       _kCDPCABackupRecoveryDidSucceedWithoutLocalSecret, _kCDPCABackupRecoveryJoinMethod, 
+                       _kCDPCABackupRecoveryResult, _kCDPCADuration, _kCDPCAErrorCode, 
+                       _kCDPCAErrorDomain, _kCDPCAEventBackupRecovery, _kCDPCAWasSuccess ]
+    objc-classes:    [ CDPAccount, CDPAuthProviderProxy, CDPCABackupRecoveryReporter, 
+                       CDPCAReporter, CDPCircleProxyImpl, CDPContext, CDPController, 
+                       CDPCustodianRecoveryInfo, CDPCustodianRecoveryKeyController, 
                        CDPDaemonConnection, CDPDataPrivacyController, CDPDevice, 
                        CDPFollowUpContext, CDPFollowUpController, CDPInheritanceTrustController, 
                        CDPKeychainSync, CDPLocalDevice, CDPLocalDeviceSecretHandler, 

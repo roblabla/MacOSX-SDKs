@@ -95,6 +95,58 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                           name:(NSString *_Nullable)name;
 
 /*!
+ *  @abstract   Create  reduction max propagate NaN op and return the result tensor.
+ *
+ *  @param      tensor          input tensor
+ *  @param      axis              axis of reduction
+ *  @param      name              name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) reductionMaximumPropagateNaNWithTensor:(MPSGraphTensor *) tensor
+                                                      axis:(NSInteger) axis
+                                                      name:(NSString * _Nullable) name;
+
+/*!
+ *  @abstract   Create  reduction max propagate NaN op and return the result tensor.
+ *
+ *  @param      tensor          input tensor
+ *  @param      axes              axes of reduction
+ *  @param      name              name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) reductionMaximumPropagateNaNWithTensor:(MPSGraphTensor *)tensor
+                                                      axes:(NSArray<NSNumber *> *_Nullable)axes
+                                                      name:(NSString *_Nullable)name;
+
+/*!
+ *  @abstract   Create  reduction min propagate NaN op and return the result tensor.
+ *
+ *  @param      tensor          input tensor
+ *  @param      axis              axis of reduction
+ *  @param      name              name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) reductionMinimumPropagateNaNWithTensor:(MPSGraphTensor *) tensor
+                                                      axis:(NSInteger) axis
+                                                      name:(NSString * _Nullable) name;
+
+/*!
+ *  @abstract   Create  reduction min propagate NaN  op and return the result tensor.
+ *
+ *  @param      tensor          input tensor
+ *  @param      axes              axes of reduction
+ *  @param      name              name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) reductionMinimumPropagateNaNWithTensor:(MPSGraphTensor *)tensor
+                                                      axes:(NSArray<NSNumber *> *_Nullable)axes
+                                                      name:(NSString *_Nullable)name;
+
+/*!
  *  @abstract   Create  reduction product op and return the result tensor.
  *
  *  @param      tensor          input tensor

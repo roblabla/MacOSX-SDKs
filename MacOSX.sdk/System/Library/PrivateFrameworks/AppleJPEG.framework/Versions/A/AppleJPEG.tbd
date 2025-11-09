@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CC89F76B-A69D-312A-A73D-091E72B465AA
+    value:           674BFFB6-A2B8-31E3-9603-356C7243724F
   - target:          x86_64-maccatalyst
-    value:           CC89F76B-A69D-312A-A73D-091E72B465AA
+    value:           674BFFB6-A2B8-31E3-9603-356C7243724F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7702EB1D-7957-3632-A00A-FC46A84BB87D
+    value:           26E58DDB-0E6E-3D5F-A667-2A1D1B5B154E
   - target:          arm64e-maccatalyst
-    value:           7702EB1D-7957-3632-A00A-FC46A84BB87D
+    value:           26E58DDB-0E6E-3D5F-A667-2A1D1B5B154E
 install-name:    '/System/Library/PrivateFrameworks/AppleJPEG.framework/Versions/A/AppleJPEG'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

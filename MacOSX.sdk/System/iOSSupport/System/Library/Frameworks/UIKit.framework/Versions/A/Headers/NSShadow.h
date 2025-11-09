@@ -12,6 +12,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
+
 /*
  NSShadow stores the properties of a drop shadow for drawing text.
  To set a shadow on an NSAttributedString use it as a value for NSShadowAttributeName.
@@ -28,6 +30,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0))
 @property (nullable, nonatomic, strong) id shadowColor;           // color used for the shadow (default is black with an alpha value of 1/3)
 
 @end
+
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
 NS_ASSUME_NONNULL_END
 

@@ -291,7 +291,7 @@ nw_ip_metadata_get_ecn_flag(nw_protocol_metadata_t metadata);
  * @abstract
  *		Sets service class on IP metadata. This will not generally
  *		translate into TOS or Traffic Class bits unless the network
- *		explictly supports it, but it will impact local queuing of
+ *		explicitly supports it, but it will impact local queuing of
  *		packets.
  *
  * @param metadata

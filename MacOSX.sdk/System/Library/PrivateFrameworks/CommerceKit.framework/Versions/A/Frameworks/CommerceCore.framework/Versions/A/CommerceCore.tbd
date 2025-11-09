@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DE5F870A-BB2B-37A3-AEBE-7091B0BBCBF4
+    value:           F9C024EB-1C97-3350-9812-8C8B37912473
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7C148FE7-A439-39EC-804E-F4D837A35900
+    value:           1449013D-5D74-36C4-B35F-A1D7ABE5BEBB
 install-name:    '/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Frameworks/CommerceCore.framework/Versions/A/CommerceCore'
 current-version: 379
 exports:

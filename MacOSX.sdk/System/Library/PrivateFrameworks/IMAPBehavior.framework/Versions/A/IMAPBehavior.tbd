@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BE466869-0B22-3849-A627-71B9DE0F467B
+    value:           59732E60-B486-3DCE-8ECA-DFF0372E1D3D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6AEC5300-1BCD-371E-ABE1-31FABB894F08
+    value:           9520D469-A9D4-3752-87FF-17DFCF9D9E2B
 install-name:    '/System/Library/PrivateFrameworks/IMAPBehavior.framework/Versions/A/IMAPBehavior'
 swift-abi-version: 7
 allowable-clients:
@@ -41,7 +41,7 @@ exports:
                        '_$s12IMAPBehavior11FlagEncoderVs28CustomDebugStringConvertibleAAMc', 
                        '_$s12IMAPBehavior14StateWithTasksV22makeStatusDescriptionsSaySSGyF', 
                        '_$s12IMAPBehavior14StateWithTasksV6isIdle6loggerSb2os6LoggerV_tF', 
-                       '_$s12IMAPBehavior14StateWithTasksV6update6loggerAD4send7persisty2os6LoggerV_AA6UpdateO14IMAPConnection9CommandIDVSgAA0M0O_SbAM0M10ConnectionC0N0VXEtKXE15IMAPPersistence06ActionN0VAW0Q0OXEtF', 
+                       '_$s12IMAPBehavior14StateWithTasksV6update6loggerAD4send7persist22maximumConnectionCounty2os6LoggerV_AA6UpdateO14IMAPConnection9CommandIDVSgAA0P0O_AN23MailboxesSelectionUsageVtKXE15IMAPPersistence06ActionQ0VAV0V0OXESitF', 
                        '_$s12IMAPBehavior14StateWithTasksV9didChangeSbvpfi', '_$s12IMAPBehavior14StateWithTasksV9tracingID7logNameAC11IMAPTracing013EngineTracingF0V_SStcfC', 
                        '_$s12IMAPBehavior14StateWithTasksVMa', '_$s12IMAPBehavior14StateWithTasksVMn', 
                        '_$s12IMAPBehavior14StateWithTasksVN', '_$s12IMAPBehavior19FlagUpdatesToBeSentV23__derived_struct_equalsySbAC_ACtFZ', 

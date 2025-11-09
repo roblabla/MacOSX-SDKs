@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FB30F090-5F51-3438-A7B3-3E1FD84FB651
+    value:           BB1BB0DC-25F6-3B26-B7B7-C841A52C9173
   - target:          x86_64-maccatalyst
-    value:           FB30F090-5F51-3438-A7B3-3E1FD84FB651
+    value:           BB1BB0DC-25F6-3B26-B7B7-C841A52C9173
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3A8B8A85-38F4-32B0-A3F9-FEA75547EDF4
+    value:           9798C593-C575-3C60-8398-71B0E1859418
   - target:          arm64e-maccatalyst
-    value:           3A8B8A85-38F4-32B0-A3F9-FEA75547EDF4
+    value:           9798C593-C575-3C60-8398-71B0E1859418
 install-name:    '/System/Library/PrivateFrameworks/RemoteManagement.framework/Versions/A/RemoteManagement'
 current-version: 2
 allowable-clients:
@@ -54,10 +54,10 @@ exports:
                        _RMHTTPStatusCodeKey, _RMMobileKeyBagErrorCodeKey, _RMPersonaRestorationFailedException, 
                        _RMXPCAgentMachServiceName, _RMXPCDaemonMachServiceName ]
     objc-classes:    [ RMAccountHelper, RMAsset, RMAuthenticationCredential, RMBundle, 
-                       RMConfiguration, RMDebounceTimer, RMDeviceAuthenticationCredential, 
+                       RMConfiguration, RMDebounceTimer, RMDeclarationKey, RMDeviceAuthenticationCredential, 
                        RMEnrollmentController, RMErrorUtilities, RMFeatureFlags, 
-                       RMFeatureOverrides, RMGenericAuthenticationCredential, RMLegacyProfilesFilter, 
-                       RMLocations, RMLog, RMMDMHelper, RMManagementChannel, RMPersonaHelper, 
+                       RMFeatureOverrides, RMGenericAuthenticationCredential, RMLocations, 
+                       RMLog, RMMDMHelper, RMManagementChannel, RMPersonaHelper, 
                        RMProfilesAdapter, RMProfilesController, RMSynchronous, RMTimedDispatch, 
                        RMXPCProxy, RemoteManagement_Subsystem ]
 ...

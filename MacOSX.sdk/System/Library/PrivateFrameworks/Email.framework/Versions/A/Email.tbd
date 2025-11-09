@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A5A7B9F9-A69C-3F16-953F-4CBCF21A3D4C
+    value:           59C0DB86-FB10-37E7-BE69-AFEFB507CF28
   - target:          x86_64-maccatalyst
-    value:           A5A7B9F9-A69C-3F16-953F-4CBCF21A3D4C
+    value:           59C0DB86-FB10-37E7-BE69-AFEFB507CF28
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D94214D3-8CEB-357E-BAEC-3958271161FD
+    value:           136FC4EE-C8E8-391C-AB49-1A925FDF90EA
   - target:          arm64e-maccatalyst
-    value:           D94214D3-8CEB-357E-BAEC-3958271161FD
+    value:           136FC4EE-C8E8-391C-AB49-1A925FDF90EA
 install-name:    '/System/Library/PrivateFrameworks/Email.framework/Versions/A/Email'
-current-version: 3689.0.4
+current-version: 3693.40
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -44,8 +44,9 @@ exports:
                        _EMFetchTypeResume, _EMFetchTypeResumeWhileSuspendedEventsOnly, 
                        _EMFetchTypeScheduled, _EMFetchTypeStandardAccountList, _EMFetchTypeStandardMailbox, 
                        _EMFetchTypeUnlock, _EMFetchTypeUserInitiatedMailbox, _EMFileNamePersistenceInfo, 
-                       _EMInteractionLoggerShouldLog, _EMInternalErrorReasonKey, 
-                       _EMInvalidCount, _EMListUnsubscribeSuggestionTrailingComparator, 
+                       _EMHideMyEmailErrorDomain, _EMHideMyEmailTwoFactorSystemPreferenceURL, 
+                       _EMHideMyEmailmacOSSystemPreferencesURL, _EMInteractionLoggerShouldLog, 
+                       _EMInternalErrorReasonKey, _EMInvalidCount, _EMListUnsubscribeSuggestionTrailingComparator, 
                        _EMLogCategoryMessageLoading, _EMMailDropBannerClass, _EMMailDropImageArchiveName, 
                        _EMMailDropItemClass, _EMMailDropMetadataClass, _EMMailDropMetadataExpiration, 
                        _EMMailDropMetadataFilename, _EMMailDropMetadataSize, _EMMailDropMetadataURL, 
@@ -73,22 +74,23 @@ exports:
                        _EMPredicateMailboxKeyPathName, _EMPredicateMailboxKeyPathType, 
                        _EMPredicateMessageKeyPathFrom, _EMPredicateMessageKeyPathInternalID, 
                        _EMPredicateMessageKeyPathObjectID, _EMPredicateMessageKeyPathSubject, 
-                       _EMPromptUserForBlockedSenderKey, _EMTopHitsQueryDefaultLimit, 
-                       _EMUserDefaultAdditionalCursorInteractions, _EMUserDefaultAlwaysBCCSelf, 
-                       _EMUserDefaultAlwaysVerifyServerProvidedRemoteContentLinks, 
+                       _EMPrivacyProxyIsDisabledForNetwork, _EMPromptUserForBlockedSenderKey, 
+                       _EMTopHitsQueryDefaultLimit, _EMUserDefaultAdditionalCursorInteractions, 
+                       _EMUserDefaultAlwaysBCCSelf, _EMUserDefaultAlwaysVerifyServerProvidedRemoteContentLinks, 
                        _EMUserDefaultBlockedSenderAction, _EMUserDefaultBlockedSenderEnabled, 
                        _EMUserDefaultDisableInitialMessageSelection, _EMUserDefaultDisableSnapshotInvalidation, 
                        _EMUserDefaultDisableStateRestoration, _EMUserDefaultEnablePommesSearch, 
                        _EMUserDefaultEnableSmartSortInWidget, _EMUserDefaultEnableThreadedMessagesInWidget, 
                        _EMUserDefaultFavoriteFlagColorMailbox, _EMUserDefaultFilesMarkedPurgeable, 
-                       _EMUserDefaultForceDocumentsAreManaged, _EMUserDefaultForceInMemoryThreading, 
+                       _EMUserDefaultForceAccountIsManaged, _EMUserDefaultForceInMemoryThreading, 
                        _EMUserDefaultInteractionEventLogDebug, _EMUserDefaultLoadRemoteContentKey, 
                        _EMUserDefaultLogRemoteContentLinksUnredacted, _EMUserDefaultMessageSecurityExtension, 
                        _EMUserDefaultMutedThreadActionDidChangeNotification, _EMUserDefaultMutedThreadActionKey, 
                        _EMUserDefaultMutedThreadActionMarkAsRead, _EMUserDefaultMutedThreadActionMoveToArchiveOrDelete, 
                        _EMUserDefaultNewFilterCardEnabled, _EMUserDefaultNewQueryResults, 
                        _EMUserDefaultPrototypeUIEnabled, _EMUserDefaultProxyServerURL, 
-                       _EMUserDefaultQueryResultComparison, _EMUserDefaultRemoteContentRequestShortInterval, 
+                       _EMUserDefaultQueryResultComparison, _EMUserDefaultRemoteContentAlertDate, 
+                       _EMUserDefaultRemoteContentRequestShortInterval, _EMUserDefaultRemoteContentVPNBannerHasBeenDismissed, 
                        _EMUserDefaultSearchFlagColors, _EMUserDefaultSharingFromSafariUI, 
                        _EMUserDefaultShowDebugInfo, _EMUserDefaultUseLegacyMessageIDHashFormat, 
                        _EMUserDefaultsDidChangeNotification, _EMUserDefaultsMailAppGroup, 
@@ -119,8 +121,9 @@ exports:
                        EMContentRepresentation, EMContentRequestOptions, EMCreateMailboxChangeAction, 
                        EMDaemonBooster, EMDaemonInterface, EMDaemonInterfaceRequest, 
                        EMDeleteMailboxChangeAction, EMDeliveryAccount, EMDiagnosticInfoGatherer, 
-                       EMFetchController, EMInteractionLogger, EMInternalMessageID, 
-                       EMInternalPreferences, EMListUnsubscribeCommand, EMListUnsubscribeCommandMessageHeaders, 
+                       EMFetchController, EMHMERecipientCreationRequest, EMHMERecipientCreationResponse, 
+                       EMHideMyEmail, EMInteractionLogger, EMInternalMessageID, EMInternalPreferences, 
+                       EMListUnsubscribeCommand, EMListUnsubscribeCommandMessageHeaders, 
                        EMListUnsubscribeDetector, EMListUnsubscribeMessageGenerator, 
                        EMListUnsubscribeSuggestion, EMMailDropMetadata, EMMailDropParser, 
                        EMMailToURLComponents, EMMailbox, EMMailboxChangeAction, EMMailboxCollection, 

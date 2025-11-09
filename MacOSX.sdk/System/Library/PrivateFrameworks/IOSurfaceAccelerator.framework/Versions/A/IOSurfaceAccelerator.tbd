@@ -1,14 +1,16 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
+  - target:          x86_64-macos
+    value:           B64DC4B9-5AD5-346F-B7E6-2F3EC94E94A3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5F6CE4CF-CC44-3155-8BC9-6277494532EC
+    value:           B48BCDAF-4F38-304C-9FA7-B0F94B3F6A6C
 install-name:    '/System/Library/PrivateFrameworks/IOSurfaceAccelerator.framework/Versions/A/IOSurfaceAccelerator'
 exports:
-  - targets:         [ arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _IOSurfaceAcceleratorAbortCaptures, _IOSurfaceAcceleratorAbortTransfers, 
                        _IOSurfaceAcceleratorBlitSurface, _IOSurfaceAcceleratorBlitSurfaceWithSwap, 
                        _IOSurfaceAcceleratorCaptureSurface, _IOSurfaceAcceleratorConditionalTransferSurfaceWithSwap, 

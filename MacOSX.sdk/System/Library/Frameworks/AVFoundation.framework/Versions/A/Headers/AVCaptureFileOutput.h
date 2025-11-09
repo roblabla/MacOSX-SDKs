@@ -500,6 +500,46 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
  */
 - (void)setRecordsVideoOrientationAndMirroringChanges:(BOOL)doRecordChanges asMetadataTrackForConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(9.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
+/*!
+ @property primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled
+ @abstract
+    Enable or disable a constituent device selection behavior when recording.
+ 
+ @discussion
+    This property enables a camera selection behavior to be applied when recording a movie. Once recording starts, the specified behavior and conditions take effect. Once recording stops the camera selection will change back to the primaryConstituentDeviceSwitchingBehavior specified by the AVCaptureDevice. By default, this property is set to YES when connected to an AVCaptureDevice that supports constituent device switching.
+ */
+@property(nonatomic, getter=isPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled) BOOL primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @method setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions:
+ @abstract
+    When primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled is set to YES, this method controls the switching behavior and conditions, while a movie file is being recorded.
+ 
+ @discussion
+    This controls the camera selection behavior used while recording a movie, when enabled through primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled. Setting the switching behavior to anything other than AVCapturePrimaryConstituentDeviceSwitchingBehaviorUnsupported when connected to an AVCaptureDevice that does not suport constituent device selection throws an NSInvalidArgumentException. Setting restrictedSwitchingBehaviorConditions to something other than AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone while setting switchingBehavior to something other than AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted throws an NSInvalidArgumentException exception.
+ */
+- (void)setPrimaryConstituentDeviceSwitchingBehaviorForRecording:(AVCapturePrimaryConstituentDeviceSwitchingBehavior)switchingBehavior restrictedSwitchingBehaviorConditions:(AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions)restrictedSwitchingBehaviorConditions API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property primaryConstituentDeviceSwitchingBehaviorForRecording
+ @abstract
+    The primaryConstituentDeviceSwitchingBehavior as set by -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions:].
+ 
+ @discussion
+    By default, this property is set to AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted. This property is key-value observable.
+ */
+@property(nonatomic, readonly) AVCapturePrimaryConstituentDeviceSwitchingBehavior primaryConstituentDeviceSwitchingBehaviorForRecording API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property primaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording
+ @abstract
+    The primaryConstituentDeviceRestrictedSwitchingBehaviorConditions as set by -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions:].
+ 
+ @discussion
+    By default, this property is set to AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorCondition{VideoZoomChanged | FocusModeChanged | ExposureModeChanged}. This property is key-value observable.
+ */
+@property(nonatomic, readonly) AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions primaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
 @end
 
 

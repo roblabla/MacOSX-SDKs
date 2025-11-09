@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8FB9B319-C419-3464-A196-8B0E635CC238
+    value:           84D3881F-A767-389F-B82A-1E630018351C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B352A51A-A626-379D-B3E8-C93437AF89CB
+    value:           04C8C0DA-5A19-3BAB-A1E0-D942E310616F
 install-name:    '/System/Library/PrivateFrameworks/ACDEClient.framework/Versions/A/ACDEClient'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

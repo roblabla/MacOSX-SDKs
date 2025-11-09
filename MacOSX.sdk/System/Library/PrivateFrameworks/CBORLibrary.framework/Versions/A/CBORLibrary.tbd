@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           82C4ADAB-23B4-3E49-AD92-CDA2D010FEF9
+    value:           0F6AB1A8-1310-32A5-90BD-569EA33FDFB5
   - target:          x86_64-maccatalyst
-    value:           82C4ADAB-23B4-3E49-AD92-CDA2D010FEF9
+    value:           0F6AB1A8-1310-32A5-90BD-569EA33FDFB5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D473CCE8-5EDD-3BA4-A165-E74F3D1934E5
+    value:           C1491E26-7654-35F5-970E-90E1BB9F9BE1
   - target:          arm64e-maccatalyst
-    value:           D473CCE8-5EDD-3BA4-A165-E74F3D1934E5
+    value:           C1491E26-7654-35F5-970E-90E1BB9F9BE1
 install-name:    '/System/Library/PrivateFrameworks/CBORLibrary.framework/Versions/A/CBORLibrary'
 swift-abi-version: 7
 exports:

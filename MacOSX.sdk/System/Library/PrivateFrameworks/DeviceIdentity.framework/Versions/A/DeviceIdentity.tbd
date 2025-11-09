@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EEDAE068-EE29-3456-AD2B-396A6F7DB7DD
+    value:           A7BEF5ED-882B-359E-9ED8-10608396DF2D
   - target:          x86_64-maccatalyst
-    value:           EEDAE068-EE29-3456-AD2B-396A6F7DB7DD
+    value:           A7BEF5ED-882B-359E-9ED8-10608396DF2D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           77FC620B-AD3F-3C86-9DF5-8862F8E549D1
+    value:           017B4A87-90D1-33AF-86AC-C42C4F2D296E
   - target:          arm64e-maccatalyst
-    value:           77FC620B-AD3F-3C86-9DF5-8862F8E549D1
+    value:           017B4A87-90D1-33AF-86AC-C42C4F2D296E
 install-name:    '/System/Library/PrivateFrameworks/DeviceIdentity.framework/Versions/A/DeviceIdentity'
 current-version: 0
 compatibility-version: 0

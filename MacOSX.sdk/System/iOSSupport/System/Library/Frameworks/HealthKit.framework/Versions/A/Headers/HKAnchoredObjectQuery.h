@@ -61,12 +61,18 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
 
 /*!
  @method        initWithQueryDescriptors:anchor:limit:resultsHandler
- @abstract      Returns a query that will retrieve HKSamples and HKDeletedObjects matching the given query descriptors that are newer than the given anchor.
- @discussion    If no updateHandler is set on the query, the query will automatically stop after calling resultsHandler. Otherwise, the query continues to run and call updateHandler as samples matching the query descriptors are created or deleted.
+ @abstract      Returns a query that will retrieve HKSamples and HKDeletedObjects matching the given query descriptors
+                that are newer than the given anchor.
+ @discussion    If no updateHandler is set on the query, the query will automatically stop after calling resultsHandler.
+                Otherwise, the query continues to run and call updateHandler as samples matching the query descriptors
+                are created or deleted.
  
- @param         queryDescriptors   An array of query descriptors that describes the sample types and predicates that you're interested in getting notified for.
- @param         anchor             The anchor which was returned by a previous HKAnchoredObjectQuery result or update handler.  Pass nil when querying for the first time.
- @param         limit              The maximum number of samples and deleted objects to return. Pass HKObjectQueryNoLimit for no limit.
+ @param         queryDescriptors   An array of query descriptors that describes the sample types and predicates that
+                                   you are interested in getting notified for.
+ @param         anchor             The anchor which was returned by a previous HKAnchoredObjectQuery result or update
+                                   handler.  Pass nil when querying for the first time.
+ @param         limit              The maximum number of samples and deleted objects to return. Pass
+                                   HKObjectQueryNoLimit for no limit.
  @param         handler            The block to invoke with results when the query has finished finding.
 */
 - (instancetype)initWithQueryDescriptors:(NSArray<HKQueryDescriptor *> *)queryDescriptors

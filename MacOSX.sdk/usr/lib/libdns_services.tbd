@@ -4,24 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F7384BD1-5D0F-3B53-9AD4-D50202544FBD
+    value:           B7750F76-5576-3CE0-AE25-80D293D9D859
   - target:          x86_64-maccatalyst
-    value:           F7384BD1-5D0F-3B53-9AD4-D50202544FBD
+    value:           B7750F76-5576-3CE0-AE25-80D293D9D859
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E73B2F44-43DA-3D56-9C4D-8735107ED013
+    value:           4ED3451E-B92C-3E9C-8FB3-B82CAB3A3682
   - target:          arm64e-maccatalyst
-    value:           E73B2F44-43DA-3D56-9C4D-8735107ED013
+    value:           4ED3451E-B92C-3E9C-8FB3-B82CAB3A3682
 install-name:    '/usr/lib/libdns_services.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _DNSXEnableProxy, _DNSXEnableProxy64, _DNSXRefDeAlloc, _advertising_proxy_block_service, 
-                       _advertising_proxy_enable, _advertising_proxy_flush_entries, 
-                       _advertising_proxy_get_service_list, _advertising_proxy_ref_dealloc, 
+    symbols:         [ _DNSXEnableProxy, _DNSXEnableProxy64, _DNSXRefDeAlloc, _advertising_proxy_advertise_prefix, 
+                       _advertising_proxy_block_service, _advertising_proxy_enable, 
+                       _advertising_proxy_flush_entries, _advertising_proxy_get_service_list, 
+                       _advertising_proxy_get_ula, _advertising_proxy_ref_dealloc, 
                        _advertising_proxy_regenerate_ula, _advertising_proxy_unblock_service, 
                        _dnssd_cname_array_get_cname, _dnssd_cname_array_get_count, 
                        _dnssd_copy_description, _dnssd_getaddrinfo_activate, _dnssd_getaddrinfo_add_resolver_uuid, 

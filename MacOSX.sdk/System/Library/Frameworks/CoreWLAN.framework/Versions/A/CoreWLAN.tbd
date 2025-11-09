@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D068BED0-0768-3331-9E71-78A31BB0E955
+    value:           3751D537-001B-35A7-AF7F-9E2AE7A42631
   - target:          x86_64-maccatalyst
-    value:           D068BED0-0768-3331-9E71-78A31BB0E955
+    value:           3751D537-001B-35A7-AF7F-9E2AE7A42631
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3E2CF61F-5839-355A-8226-51BCD20DCA7B
+    value:           24121B3B-EAAE-3A13-8CB2-9D881824526F
   - target:          arm64e-maccatalyst
-    value:           3E2CF61F-5839-355A-8226-51BCD20DCA7B
+    value:           24121B3B-EAAE-3A13-8CB2-9D881824526F
 install-name:    '/System/Library/Frameworks/CoreWLAN.framework/Versions/A/CoreWLAN'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ACInterfaceCreate, _ACInterfaceDeviceNameCopy, _ACInterfaceGetPower, 
                        _ACInterfaceSetPower, _ACNetworkAssociate, _ACNetworkCopyBroadcastScanResults, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           297926AA-841D-3544-BCF8-182E2B3F8A05
+    value:           5FA7B253-B382-3FB8-94C9-7C99B7769C25
   - target:          x86_64-maccatalyst
-    value:           297926AA-841D-3544-BCF8-182E2B3F8A05
+    value:           5FA7B253-B382-3FB8-94C9-7C99B7769C25
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D938E709-D9FA-345A-87A8-08BD516D93A1
+    value:           7A426CC5-96E2-3CA9-B72B-A96775FE5462
   - target:          arm64e-maccatalyst
-    value:           D938E709-D9FA-345A-87A8-08BD516D93A1
+    value:           7A426CC5-96E2-3CA9-B72B-A96775FE5462
 install-name:    '/System/Library/PrivateFrameworks/SiriVirtualDeviceResolution.framework/Versions/A/SiriVirtualDeviceResolution'
 swift-abi-version: 7
 exports:
@@ -64,10 +64,16 @@ exports:
                        '_$s27SiriVirtualDeviceResolution09SVDDeviceD7ServiceC15devicesMatching22capabilityDescriptions10completionySayAA21CapabilityDescriptionCG_ySDyAA0C4UnitCAA12CapabilitiesCGctFTq', 
                        '_$s27SiriVirtualDeviceResolution09SVDDeviceD7ServiceC15devicesMatching22capabilityDescriptions10completionySayAA21CapabilityDescriptionCG_ySDyAA0E4UnitCAA12CapabilitiesCGctFTj', 
                        '_$s27SiriVirtualDeviceResolution09SVDDeviceD7ServiceC15devicesMatching22capabilityDescriptions10completionySayAA21CapabilityDescriptionCG_ySDyAA0E4UnitCAA12CapabilitiesCGctFTq', 
+                       '_$s27SiriVirtualDeviceResolution09SVDDeviceD7ServiceC15setEndpointUUIDyy10Foundation0I0VFTj', 
+                       '_$s27SiriVirtualDeviceResolution09SVDDeviceD7ServiceC15setEndpointUUIDyy10Foundation0I0VFTq', 
                        '_$s27SiriVirtualDeviceResolution09SVDDeviceD7ServiceC20devicesWithProximity11closerBound07fartherK010completionyAA0I0O_AIySayAA0C4UnitCGctFTj', 
                        '_$s27SiriVirtualDeviceResolution09SVDDeviceD7ServiceC20devicesWithProximity11closerBound07fartherK010completionyAA0I0O_AIySayAA0C4UnitCGctFTq', 
+                       '_$s27SiriVirtualDeviceResolution09SVDDeviceD7ServiceC20setHomeKitDataSourceyySo13HMHomeManagerCFTj', 
+                       '_$s27SiriVirtualDeviceResolution09SVDDeviceD7ServiceC20setHomeKitDataSourceyySo13HMHomeManagerCFTq', 
                        '_$s27SiriVirtualDeviceResolution09SVDDeviceD7ServiceC23getDevicesWithProximity11closerBound07fartherL010completionyAA12SVDProximityO_AIySayAA0E4UnitCGctFTj', 
                        '_$s27SiriVirtualDeviceResolution09SVDDeviceD7ServiceC23getDevicesWithProximity11closerBound07fartherL010completionyAA12SVDProximityO_AIySayAA0E4UnitCGctFTq', 
+                       '_$s27SiriVirtualDeviceResolution09SVDDeviceD7ServiceC7devices11matchingAny4withySayAA0C15UnitDescriptionVG_ySDyAA0cK0CSo11HMAccessoryCGctFTj', 
+                       '_$s27SiriVirtualDeviceResolution09SVDDeviceD7ServiceC7devices11matchingAny4withySayAA0C15UnitDescriptionVG_ySDyAA0cK0CSo11HMAccessoryCGctFTq', 
                        '_$s27SiriVirtualDeviceResolution09SVDDeviceD7ServiceCAA0cD9ProvidingAAMc', 
                        '_$s27SiriVirtualDeviceResolution09SVDDeviceD7ServiceCAA0cD9ProvidingAAWP', 
                        '_$s27SiriVirtualDeviceResolution09SVDDeviceD7ServiceCAA0eD9ServicingAAMc', 
@@ -95,11 +101,8 @@ exports:
                        '_$s27SiriVirtualDeviceResolution09SVDDeviceD9ServicingPAAE13sourceDevices3for10completionyShy10Foundation4UUIDVG_ySDyAiA0C4UnitCGctF', 
                        '_$s27SiriVirtualDeviceResolution09SVDDeviceD9ServicingPAAE15devicesMatching22capabilityDescriptions10completionySayAA21CapabilityDescriptionCG_ySDyAA0C4UnitCAA12CapabilitiesCGctF', 
                        '_$s27SiriVirtualDeviceResolution09SVDDeviceD9ServicingPAAE15devicesMatching22capabilityDescriptions10completionySayAA21CapabilityDescriptionCG_ySDyAA0E4UnitCAA12CapabilitiesCGctF', 
-                       '_$s27SiriVirtualDeviceResolution09SVDDeviceD9ServicingPAAE15setEndpointUUIDyy10Foundation0I0VF', 
                        '_$s27SiriVirtualDeviceResolution09SVDDeviceD9ServicingPAAE20devicesWithProximity11closerBound07fartherK010completionyAA0I0O_AIySayAA0C4UnitCGctF', 
-                       '_$s27SiriVirtualDeviceResolution09SVDDeviceD9ServicingPAAE20setHomeKitDataSourceyySo13HMHomeManagerCF', 
                        '_$s27SiriVirtualDeviceResolution09SVDDeviceD9ServicingPAAE23getDevicesWithProximity11closerBound07fartherL010completionyAA12SVDProximityO_AIySayAA0E4UnitCGctF', 
-                       '_$s27SiriVirtualDeviceResolution09SVDDeviceD9ServicingPAAE7devices11matchingAny4withySayAA0C15UnitDescriptionVG_ySDyAA0cK0CSo11HMAccessoryCGctF', 
                        '_$s27SiriVirtualDeviceResolution09SVDDeviceD9ServicingTL', 
                        '_$s27SiriVirtualDeviceResolution0C12UnitCategoryV11descriptionSSvg', 
                        '_$s27SiriVirtualDeviceResolution0C12UnitCategoryV11descriptionSSvpMV', 
@@ -141,6 +144,7 @@ exports:
                        '_$s27SiriVirtualDeviceResolution0C15UnitDescriptionVMn', 
                        '_$s27SiriVirtualDeviceResolution0C15UnitDescriptionVN', '_$s27SiriVirtualDeviceResolution0C4UnitC010isCommunalC0Sbvg', 
                        '_$s27SiriVirtualDeviceResolution0C4UnitC010isCommunalC0SbvpMV', 
+                       '_$s27SiriVirtualDeviceResolution0C4UnitC06deviceE4ObjCACSo09SVDDeviceE0C_tcfC', 
                        '_$s27SiriVirtualDeviceResolution0C4UnitC10identifier11assistantId7builderACSS_SSyAA0cE8Mutating_pcSgtcfC', 
                        '_$s27SiriVirtualDeviceResolution0C4UnitC10identifier11assistantId7builderACSS_SSyAA0cE8Mutating_pcSgtcfCTj', 
                        '_$s27SiriVirtualDeviceResolution0C4UnitC10identifier11assistantId7builderACSS_SSyAA0cE8Mutating_pcSgtcfCTq', 
@@ -189,17 +193,11 @@ exports:
                        '_$s27SiriVirtualDeviceResolution0cD13AnalyticsImplCMu', '_$s27SiriVirtualDeviceResolution0cD13AnalyticsImplCN', 
                        '_$s27SiriVirtualDeviceResolution0cD13AnalyticsImplCfD', '_$s27SiriVirtualDeviceResolution0cD13AnalyticsImplCfd', 
                        '_$s27SiriVirtualDeviceResolution0cD7ServiceC06sharedE0ACvgZ', 
-                       '_$s27SiriVirtualDeviceResolution0cD7ServiceC15setEndpointUUIDyy10Foundation0H0VFTj', 
-                       '_$s27SiriVirtualDeviceResolution0cD7ServiceC15setEndpointUUIDyy10Foundation0H0VFTq', 
                        '_$s27SiriVirtualDeviceResolution0cD7ServiceC15sharedAnalyticsAA0cdG4ImplCvgZ', 
-                       '_$s27SiriVirtualDeviceResolution0cD7ServiceC20setHomeKitDataSourceyySo13HMHomeManagerCFTj', 
-                       '_$s27SiriVirtualDeviceResolution0cD7ServiceC20setHomeKitDataSourceyySo13HMHomeManagerCFTq', 
                        '_$s27SiriVirtualDeviceResolution0cD7ServiceC25homeManagerDidUpdateHomesyySo06HMHomeG0CFTj', 
                        '_$s27SiriVirtualDeviceResolution0cD7ServiceC25homeManagerDidUpdateHomesyySo06HMHomeG0CFTq', 
                        '_$s27SiriVirtualDeviceResolution0cD7ServiceC28homeManagerDidUpdateDataSync10inProgressySo06HMHomeG0C_tFTj', 
                        '_$s27SiriVirtualDeviceResolution0cD7ServiceC28homeManagerDidUpdateDataSync10inProgressySo06HMHomeG0C_tFTq', 
-                       '_$s27SiriVirtualDeviceResolution0cD7ServiceC7devices11matchingAny4withySayAA0C15UnitDescriptionVG_ySDyAA0cJ0CSo11HMAccessoryCGctFTj', 
-                       '_$s27SiriVirtualDeviceResolution0cD7ServiceC7devices11matchingAny4withySayAA0C15UnitDescriptionVG_ySDyAA0cJ0CSo11HMAccessoryCGctFTq', 
                        '_$s27SiriVirtualDeviceResolution0cD7ServiceCMa', '_$s27SiriVirtualDeviceResolution0cD7ServiceCMn', 
                        '_$s27SiriVirtualDeviceResolution0cD7ServiceCMo', '_$s27SiriVirtualDeviceResolution0cD7ServiceCMu', 
                        '_$s27SiriVirtualDeviceResolution0cD7ServiceCN', '_$s27SiriVirtualDeviceResolution0cD7ServiceCfD', 
@@ -215,6 +213,9 @@ exports:
                        '_$s27SiriVirtualDeviceResolution0cD9ProvidingP7devices11matchingAny4withySayAA0C15UnitDescriptionVG_ySDyAA0cJ0CSo11HMAccessoryCGctFTj', 
                        '_$s27SiriVirtualDeviceResolution0cD9ProvidingP7devices11matchingAny4withySayAA0C15UnitDescriptionVG_ySDyAA0cJ0CSo11HMAccessoryCGctFTq', 
                        '_$s27SiriVirtualDeviceResolution0cD9ProvidingPAA09SVDDeviceD9ServicingTb', 
+                       '_$s27SiriVirtualDeviceResolution0cD9ProvidingPAAE15setEndpointUUIDyy10Foundation0H0VF', 
+                       '_$s27SiriVirtualDeviceResolution0cD9ProvidingPAAE20setHomeKitDataSourceyySo13HMHomeManagerCF', 
+                       '_$s27SiriVirtualDeviceResolution0cD9ProvidingPAAE7devices11matchingAny4withySayAA0C15UnitDescriptionVG_ySDyAA0cJ0CSo11HMAccessoryCGctF', 
                        '_$s27SiriVirtualDeviceResolution0cD9ProvidingTL', '_$s27SiriVirtualDeviceResolution12CapabilitiesC12voiceTriggerAA23CapabilitySupportStatusOvgTj', 
                        '_$s27SiriVirtualDeviceResolution12CapabilitiesC12voiceTriggerAA23CapabilitySupportStatusOvgTq', 
                        '_$s27SiriVirtualDeviceResolution12CapabilitiesC12voiceTriggerAA23CapabilitySupportStatusOvpMV', 
@@ -272,7 +273,26 @@ exports:
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV11executionId10Foundation4UUIDVvg', 
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV11executionId10Foundation4UUIDVvpMV', 
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV11executionId10Foundation4UUIDVvs', 
-                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV11executionId6actionAC10Foundation4UUIDV_AC6ActionOtcfC', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV11executionId6action21quickStopActionResultAC10Foundation4UUIDV_AC0L0OAC05QuickklM0OSgtcfC', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21QuickStopActionResultO09nothingToH0yA2EmFWC', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21QuickStopActionResultO10asNSNumberSo0L0Cvg', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21QuickStopActionResultO10asNSNumberSo0L0CvpMV', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21QuickStopActionResultO10stoppedTTSyA2EmFWC', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21QuickStopActionResultO23stoppedHomeAnnouncementyA2EmFWC', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21QuickStopActionResultO7unknownyA2EmFWC', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21QuickStopActionResultO8rawValueAESgSi_tcfC', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21QuickStopActionResultO8rawValueSivg', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21QuickStopActionResultO8rawValueSivpMV', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21QuickStopActionResultOMa', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21QuickStopActionResultOMn', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21QuickStopActionResultON', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21QuickStopActionResultOSHAAMc', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21QuickStopActionResultOSQAAMc', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21QuickStopActionResultOSYAAMc', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21quickStopActionResultAC05QuickhiJ0OSgvM', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21quickStopActionResultAC05QuickhiJ0OSgvg', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21quickStopActionResultAC05QuickhiJ0OSgvpMV', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV21quickStopActionResultAC05QuickhiJ0OSgvs', 
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO05mediaC14DisambiguationyA2EmFWC', 
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO09appLaunchC14DisambiguationyA2EmFWC', 
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO09appLaunchI0yA2EmFWC', 
@@ -282,7 +302,7 @@ exports:
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO10mediaPauseyA2EmFWC', 
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO11alarmSnoozeyA2EmFWC', 
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO11mediaResumeyA2EmFWC', 
-                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO11timerSnoozeyA2EmFWC', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO11timerDeleteyA2EmFWC', 
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO12alarmDismissyA2EmFWC', 
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO12timerDismissyA2EmFWC', 
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO13mediaSeekTimeyA2EmFWC', 
@@ -294,6 +314,7 @@ exports:
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO20mediaSetShuffleStateyA2EmFWC', 
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO21mediaSetAudioLanguageyA2EmFWC', 
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO21mediaSetSubtitleStateyA2EmFWC', 
+                       '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO21quickStopAnnouncementyA2EmFWC', 
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO21quickStopConfirmationyA2EmFWC', 
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO7unknownyA2EmFWC', 
                        '_$s27SiriVirtualDeviceResolution13ExecutionInfoV6ActionO8rawValueAESgSi_tcfC', 
@@ -364,9 +385,7 @@ exports:
                        '_$s27SiriVirtualDeviceResolution13SVDDeviceUnitCMo', '_$s27SiriVirtualDeviceResolution13SVDDeviceUnitCMu', 
                        '_$s27SiriVirtualDeviceResolution13SVDDeviceUnitCN', '_$s27SiriVirtualDeviceResolution13SVDDeviceUnitCSEAAMc', 
                        '_$s27SiriVirtualDeviceResolution13SVDDeviceUnitCSeAAMc', 
-                       '_$s27SiriVirtualDeviceResolution13SVDDeviceUnitCfD', '_$s27SiriVirtualDeviceResolution17ObjCCompatibilityC10deviceUnit4fromAA0cH0CSo09SVDDeviceH0C_tFZTj', 
-                       '_$s27SiriVirtualDeviceResolution17ObjCCompatibilityC10deviceUnit4fromAA0cH0CSo09SVDDeviceH0C_tFZTq', 
-                       '_$s27SiriVirtualDeviceResolution17ObjCCompatibilityC12capabilities4fromAA12CapabilitiesCSaySo13SVDCapabilityCG_tFZTj', 
+                       '_$s27SiriVirtualDeviceResolution13SVDDeviceUnitCfD', '_$s27SiriVirtualDeviceResolution17ObjCCompatibilityC12capabilities4fromAA12CapabilitiesCSaySo13SVDCapabilityCG_tFZTj', 
                        '_$s27SiriVirtualDeviceResolution17ObjCCompatibilityC12capabilities4fromAA12CapabilitiesCSaySo13SVDCapabilityCG_tFZTq', 
                        '_$s27SiriVirtualDeviceResolution17ObjCCompatibilityCMa', 
                        '_$s27SiriVirtualDeviceResolution17ObjCCompatibilityCMm', 

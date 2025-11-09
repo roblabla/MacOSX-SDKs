@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AE878C46-8BF7-34DF-A4FB-6FD76474AC6C
+    value:           00639D0D-E9E6-37E0-B70B-BFBDCAD5B0CF
   - target:          x86_64-maccatalyst
-    value:           AE878C46-8BF7-34DF-A4FB-6FD76474AC6C
+    value:           00639D0D-E9E6-37E0-B70B-BFBDCAD5B0CF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5FFBBB8C-69D3-3B31-B95C-A01F5F18A2B5
+    value:           50BA39F2-C50A-3E68-BF08-614914F83D0A
   - target:          arm64e-maccatalyst
-    value:           5FFBBB8C-69D3-3B31-B95C-A01F5F18A2B5
+    value:           50BA39F2-C50A-3E68-BF08-614914F83D0A
 install-name:    '/System/Library/PrivateFrameworks/FontServices.framework/Versions/A/FontServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

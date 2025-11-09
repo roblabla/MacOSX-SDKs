@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E981DA53-3AC1-37F6-8133-D0BC7F9C6BA1
+    value:           5083B5CE-5F19-347E-BBB9-7D32628D9D5A
   - target:          x86_64-maccatalyst
-    value:           E981DA53-3AC1-37F6-8133-D0BC7F9C6BA1
+    value:           5083B5CE-5F19-347E-BBB9-7D32628D9D5A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9FB7441E-0A4A-3F0F-B48A-AD6F151B83C2
+    value:           8146EE80-0999-3DA7-8417-37306E0D9CE3
   - target:          arm64e-maccatalyst
-    value:           9FB7441E-0A4A-3F0F-B48A-AD6F151B83C2
+    value:           8146EE80-0999-3DA7-8417-37306E0D9CE3
 install-name:    '/System/Library/Frameworks/Kerberos.framework/Versions/A/Libraries/libHeimdalProxy.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

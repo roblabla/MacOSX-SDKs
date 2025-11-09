@@ -17,6 +17,7 @@
 #include <Hypervisor/hv_types.h>
 #include <Hypervisor/hv_arch_x86.h>
 #include <Hypervisor/hv_intr.h>
+#include <Hypervisor/hv_vm_allocate.h>
 
 #define __HV_10_10 __API_AVAILABLE(macos(10.10))
 #define __HV_10_15 __API_AVAILABLE(macos(10.15))
@@ -108,28 +109,6 @@ extern hv_return_t hv_vm_unmap(hv_gpaddr_t gpa, size_t size) __HV_10_10;
 extern hv_return_t hv_vm_protect(hv_gpaddr_t gpa, size_t size,
 	hv_memory_flags_t flags) __HV_10_10;
 
-
-/*!
- * @function   hv_vm_allocate_map
- * @abstract   Allocate anonymous memory and map it into the guest physical
- *             address space of the VM
- * @param      uvap   Returned virtual address of the allocated memory
- * @param      gpa    Page aligned address in the guest physical address space
- * @param      size   Size in bytes of the region to be allocated and mapped
- * @param      flags  READ, WRITE and EXECUTE permissions of the guest mapped
- *                    region
- * @result     0 on success or error code
- * @discussion
- *             The region should be unmapped by calling hv_vm_unmap() and
- *             memory should be deallocated by calling mach_vm_deallocate().
- *             The memory returned by uvap is allocated with VM_PROT_DEFAULT
- *             permissions
- *             This API enables accurate memory accounting of the allocations
- *             it creates.
- */
-extern hv_return_t hv_vm_allocate_map(void * _Nullable * _Nonnull uvap,
-	hv_gpaddr_t gpa, size_t size, hv_memory_flags_t flags) __HV_12_0;
-
 /*!
  * @function   hv_vm_map_space
  * @abstract   Maps a region in the virtual address space of the current task
@@ -154,29 +133,6 @@ extern hv_return_t hv_vm_map_space(hv_vm_space_t asid, hv_uvaddr_t uva,
  */
 extern hv_return_t hv_vm_unmap_space(hv_vm_space_t asid, hv_gpaddr_t gpa,
 	size_t size) __HV_10_15;
-
-/*!
- * @function   hv_vm_allocate_map_space
- * @abstract   Allocate anonymous memory and map it into the guest physical
- *             address space of the VM
- * @param      asid   Address space ID
- * @param      uvap   Returned virtual address of the allocated memory
- * @param      gpa    Page aligned address in the guest physical address space
- * @param      size   Size in bytes of the region to be allocated and mapped
- * @param      flags  READ, WRITE and EXECUTE permissions of the guest mapped
- *                    region
- * @result     0 on success or error code
- * @discussion
- *             The region should be unmapped by calling hv_vm_unmap_space() and
- *             memory should be deallocated by calling mach_vm_deallocate().
- *             The memory returned by uvap is allocated with VM_PROT_DEFAULT
- *             permissions
- *             This API enables accurate memory accounting of the allocations it
- *             creates.
- */
-extern hv_return_t hv_vm_allocate_map_space(hv_vm_space_t asid,
-	void * _Nullable * _Nonnull uvap, hv_gpaddr_t gpa, size_t size,
-	hv_memory_flags_t flags) __HV_12_0;
 
 /*!
  * @function   hv_vm_protect_space
@@ -506,7 +462,8 @@ extern hv_return_t hv_vcpu_get_idle_time(hv_vcpuid_t vcpu,
  * @abstract	Returns the value of an abstract clock.
  * @description	The abstract clock ticks at the same rate as the host TSC,
  * 				offset by an implementation-dependent constant. The clock
- * 				value is monotonically increasing.
+ * 				value is monotonically increasing. Should only be called
+ * 				after the virtual machine has been created.
  */
 extern uint64_t hv_tsc_clock(void) __HV_11_0;
 

@@ -101,7 +101,7 @@
 
 __BEGIN_DECLS
 
-extern task_t   current_task(void);
+extern task_t   current_task(void) __pure2;
 
 extern bool task_is_driver(task_t task);
 

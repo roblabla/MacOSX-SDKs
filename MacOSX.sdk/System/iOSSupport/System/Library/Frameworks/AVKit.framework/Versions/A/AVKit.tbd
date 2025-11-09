@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           B2A22E03-05AA-3B1B-95B6-F3871444A6B3
+    value:           7D774908-A9AC-384A-AA5A-80F97294B6FC
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           0895B6DE-3721-3E1C-A056-D99CAD5B37D6
+    value:           49F0F8BF-3A87-31C0-A351-35D4926E4217
 install-name:    '/System/iOSSupport/System/Library/Frameworks/AVKit.framework/Versions/A/AVKit'
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/AVKitCore.framework/Versions/A/AVKitCore' ]
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _AVKitErrorDomain, _AVKitMetadataIdentifierBrandIdentifier, 
                        _AVKitMetadataIdentifierExternalContentIdentifier, _AVKitMetadataIdentifierExternalUserProfileIdentifier, 
                        _AVKitMetadataIdentifierPlaybackProgress, _AVKitMetadataIdentifierServiceIdentifier, 
@@ -37,17 +37,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FF6A5F70-19F8-3D10-B22C-0FEF28D5CA17
+    value:           537FBD08-FA83-330F-B14B-04275FFCD5F1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DB43928F-E808-3C41-AAFE-A6D61617A51E
+    value:           D207C54C-6D41-3F0C-B2F9-42355599EC93
 install-name:    '/System/Library/PrivateFrameworks/AVKitCore.framework/Versions/A/AVKitCore'
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ AVKit, AVKitMacHelper, OutputDeviceMenuService, RoutePickerViewService ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _AVMediaSelectionAutoOption, _AVMediaSelectionOffOption, _AVMicaPackageFilterNamePlusL, 
                        _AVMicaPackageNameRoutePickerCircularGlyph, _AVMicaPackageNameRoutePickerSquareGlyph, 
                        _AVMicaPackageNameVolumeGlyph, _AVPlayerControllerContentDimensionsChangedNotification, 

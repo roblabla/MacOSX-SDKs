@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FC2822FA-5D97-3647-847C-F929D251F74F
+    value:           10FCAEDD-32AA-3220-BD45-5954B0CF617E
   - target:          x86_64-maccatalyst
-    value:           FC2822FA-5D97-3647-847C-F929D251F74F
+    value:           10FCAEDD-32AA-3220-BD45-5954B0CF617E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E585CB9E-8406-383B-89D3-E2FFC8F0B4A0
+    value:           8D5604B3-FCE1-3307-AB75-33FE8505A8B7
   - target:          arm64e-maccatalyst
-    value:           E585CB9E-8406-383B-89D3-E2FFC8F0B4A0
+    value:           8D5604B3-FCE1-3307-AB75-33FE8505A8B7
 install-name:    '/System/Library/PrivateFrameworks/AppleMediaServices.framework/Versions/A/AppleMediaServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -69,20 +69,21 @@ exports:
                        _AMSDeviceOfferIdentifierAppleMusic, _AMSDeviceOfferIdentifierTV, 
                        _AMSDeviceOfferIdentifieriCloud, _AMSDeviceOffersChangedNotification, 
                        _AMSDialogRequestUserInfoKeyServerPayload, _AMSDialogResultDismissIdentifier, 
-                       _AMSEngagementEnqueueDefaultTimeout, _AMSEngagementSyncDefaultTimeout, 
-                       _AMSEngagementUserInfoKeyBuyParams, _AMSEphemeralDefaultsHARLoggingItemLimitDisabled, 
-                       _AMSError, _AMSErrorDomain, _AMSErrorIsEqual, _AMSErrorUserInfoKeyAnisetteErrorCode, 
+                       _AMSEngagementEnqueueDefaultTimeout, _AMSEngagementServiceName, 
+                       _AMSEngagementSyncDefaultTimeout, _AMSEngagementUserInfoKeyBuyParams, 
+                       _AMSEphemeralDefaultsHARLoggingItemLimitDisabled, _AMSError, 
+                       _AMSErrorDomain, _AMSErrorIsEqual, _AMSErrorUserInfoKeyAnisetteErrorCode, 
                        _AMSErrorUserInfoKeyContentType, _AMSErrorUserInfoKeyCryptoErrorCode, 
                        _AMSErrorUserInfoKeyEngagementPresented, _AMSErrorUserInfoKeyServerAllowed, 
                        _AMSErrorUserInfoKeyServerErrorCode, _AMSErrorUserInfoKeyServerPayload, 
                        _AMSErrorUserInfoKeyStatusCode, _AMSErrorUserInfoKeyURL, _AMSErrorWithFormat, 
                        _AMSErrorWithMultipleUnderlyingErrors, _AMSFamilyContentDeletionNotification, 
-                       _AMSFollowUpClientIdentifier, _AMSFollowUpItemUserInfoMetrics, 
-                       _AMSFollowUpItemUserInfoPriority, _AMSGenerateLogCorrelationKey, 
-                       _AMSHTTPHeaderAPSDeliveryType, _AMSHTTPHeaderAbsintheAction, 
-                       _AMSHTTPHeaderAbsintheSignature, _AMSHTTPHeaderAbsintheSrv, 
-                       _AMSHTTPHeaderAccept, _AMSHTTPHeaderAcceptLanguage, _AMSHTTPHeaderAltDSID, 
-                       _AMSHTTPHeaderAppleTimingApp, _AMSHTTPHeaderApplicationSite, 
+                       _AMSFeatureFlagRemoteDomain, _AMSFollowUpClientIdentifier, 
+                       _AMSFollowUpItemUserInfoMetrics, _AMSFollowUpItemUserInfoPriority, 
+                       _AMSGenerateLogCorrelationKey, _AMSHTTPHeaderABPayload, _AMSHTTPHeaderAPSDeliveryType, 
+                       _AMSHTTPHeaderAbsintheAction, _AMSHTTPHeaderAbsintheSignature, 
+                       _AMSHTTPHeaderAbsintheSrv, _AMSHTTPHeaderAccept, _AMSHTTPHeaderAcceptLanguage, 
+                       _AMSHTTPHeaderAltDSID, _AMSHTTPHeaderAppleTimingApp, _AMSHTTPHeaderApplicationSite, 
                        _AMSHTTPHeaderAuthorization, _AMSHTTPHeaderCacheControl, _AMSHTTPHeaderCachePolicy, 
                        _AMSHTTPHeaderCanaryIdentifier, _AMSHTTPHeaderClientApplication, 
                        _AMSHTTPHeaderClientVersions, _AMSHTTPHeaderConnectionType, 
@@ -160,12 +161,13 @@ exports:
                        _AMSMediaTaskFilterExtension, _AMSMediaTaskFilterIdentity, 
                        _AMSMediaTaskFilterIsbn, _AMSMediaTaskFilterIsrc, _AMSMediaTaskFilterScheme, 
                        _AMSMediaTaskFilterUti, _AMSMediaTaskPlatformAppleTV, _AMSMediaTaskPlatformAppleWatch, 
-                       _AMSMediaTaskPlatformMac, _AMSMediaTaskPlatformiPad, _AMSMediaTaskPlatformiPhone, 
-                       _AMSMetricsEventTypeAccount, _AMSMetricsEventTypeAppInstall, 
-                       _AMSMetricsEventTypeClick, _AMSMetricsEventTypeDialog, _AMSMetricsEventTypeEnter, 
-                       _AMSMetricsEventTypeExit, _AMSMetricsEventTypeImpressions, 
-                       _AMSMetricsEventTypeLoadURL, _AMSMetricsEventTypeLog, _AMSMetricsEventTypeMedia, 
-                       _AMSMetricsEventTypePage, _AMSMetricsEventTypePurchase, _AMSMetricsEventTypeSearch, 
+                       _AMSMediaTaskPlatformHomePod, _AMSMediaTaskPlatformMac, _AMSMediaTaskPlatformiPad, 
+                       _AMSMediaTaskPlatformiPhone, _AMSMetricsEventTypeAccount, 
+                       _AMSMetricsEventTypeAppInstall, _AMSMetricsEventTypeClick, 
+                       _AMSMetricsEventTypeDialog, _AMSMetricsEventTypeEnter, _AMSMetricsEventTypeExit, 
+                       _AMSMetricsEventTypeImpressions, _AMSMetricsEventTypeLoadURL, 
+                       _AMSMetricsEventTypeLog, _AMSMetricsEventTypeMedia, _AMSMetricsEventTypePage, 
+                       _AMSMetricsEventTypePurchase, _AMSMetricsEventTypeSearch, 
                        _AMSNetworkQualityInquiryInterfaceCellular, _AMSNetworkQualityInquiryInterfaceEthernet, 
                        _AMSNetworkQualityInquiryInterfaceWiFi, _AMSNetworkQualityInquiryReportKeyDataStalls, 
                        _AMSNetworkQualityInquiryReportKeyInterface, _AMSNetworkQualityInquiryReportKeyKnownGood, 
@@ -182,7 +184,8 @@ exports:
                        _AMSSetLogKeyIfNeeded, _AMSSizeLimitDisabled, _AMSSizeLimitNoLimit, 
                        _AMSSnapshotBagExpiredValueAccessedNotification, _AMSStorageDatabaseDefaultDomain, 
                        _AMSSubscriptionEntitlementsProductMusic, _AMSSubscriptionEntitlementsProductMusicMatch, 
-                       _NSStringFromBagValueType ]
+                       _AMSSystemEngagementTaskRemoteServiceName, _AMSTreatmentStoreServiceName, 
+                       _AMSUniversalLinksServiceName, _NSStringFromBagValueType ]
     objc-classes:    [ AMSAbsinthe, AMSAcknowledgePrivacyTask, AMSAgeVerificationPresentationResult, 
                        AMSAgeVerificationRequiredResult, AMSAgeVerificationTask, 
                        AMSAttestation, AMSAuthKitUpdateResult, AMSAuthKitUpdateTask, 
@@ -215,10 +218,11 @@ exports:
                        AMSEphemeralDefaults, AMSFailingMockBagBuilder, AMSFamilyAccountPair, 
                        AMSFamilyContentDeletionEvent, AMSFamilyInfoLookupResult, 
                        AMSFamilyInfoLookupTask, AMSFamilyMember, AMSFeatureFlag, 
-                       AMSFollowUp, AMSFollowUpAction, AMSFollowUpItem, AMSFraudReport, 
-                       AMSFraudReportResponse, AMSFraudScore, AMSHTTPArchive, AMSHTTPArchiveController, 
-                       AMSHTTPArchiveTaskInfo, AMSHandleDialogResultTask, AMSKeybag, 
-                       AMSKeychain, AMSKeychainOptions, AMSLRUCache, AMSLazyPromise, 
+                       AMSFeatureFlagController, AMSFeatureFlagGroup, AMSFeatureFlagITFE, 
+                       AMSFeatureFlagTask, AMSFollowUp, AMSFollowUpAction, AMSFollowUpItem, 
+                       AMSFraudReport, AMSFraudReportResponse, AMSFraudScore, AMSHTTPArchive, 
+                       AMSHTTPArchiveController, AMSHTTPArchiveTaskInfo, AMSHandleDialogResultTask, 
+                       AMSKeybag, AMSKeychain, AMSKeychainOptions, AMSLRUCache, AMSLazyPromise, 
                        AMSLocalizations, AMSLogConfig, AMSLookup, AMSLookupItem, 
                        AMSLookupItemArtwork, AMSLookupItemArtworkColor, AMSLookupItemOffer, 
                        AMSLookupResult, AMSMarketingItem, AMSMarketingItemAction, 
@@ -242,14 +246,15 @@ exports:
                        AMSRatingSystem, AMSRatingsProviderResult, AMSRatingsProviderTask, 
                        AMSRatingsStoreFront, AMSRatingsStorefrontResult, AMSRatingsStorefrontTask, 
                        AMSRemoteNotification, AMSRestrictions, AMSSetDemoAccountTask, 
-                       AMSSignInContext, AMSSignOutTask, AMSSnapshotBag, AMSSnapshotBagBuilder, 
-                       AMSStorage, AMSStorageDatabase, AMSSubscriptionBag, AMSSubscriptionEntitlement, 
-                       AMSSubscriptionEntitlementsResult, AMSSubscriptionEntitlementsTask, 
-                       AMSSyncPasswordSettingsResult, AMSSyncPasswordSettingsTask, 
-                       AMSSystemAlertDialogTask, AMSSystemEngagementTask, AMSTask, 
-                       AMSThreadSafeObject, AMSURLAction, AMSURLParser, AMSURLProtocolHandler, 
-                       AMSURLRequest, AMSURLRequestEncoder, AMSURLResponseDecoder, 
-                       AMSURLResult, AMSURLSecurityPolicy, AMSURLSession, AMSUniqueExecutionQueue, 
+                       AMSSharedStoreReview, AMSSignInContext, AMSSignOutTask, AMSSnapshotBag, 
+                       AMSSnapshotBagBuilder, AMSStorage, AMSStorageDatabase, AMSStreamHTTPArchiveEntryController, 
+                       AMSSubscriptionBag, AMSSubscriptionEntitlement, AMSSubscriptionEntitlementsResult, 
+                       AMSSubscriptionEntitlementsTask, AMSSyncPasswordSettingsResult, 
+                       AMSSyncPasswordSettingsTask, AMSSystemAlertDialogTask, AMSSystemEngagementTask, 
+                       AMSTask, AMSThreadSafeObject, AMSTreatment, AMSTreatmentStore, 
+                       AMSURLAction, AMSURLParser, AMSURLProtocolHandler, AMSURLRequest, 
+                       AMSURLRequestEncoder, AMSURLResponseDecoder, AMSURLResult, 
+                       AMSURLSecurityPolicy, AMSURLSession, AMSUniqueExecutionQueue, 
                        AMSUnitTests, AMSUniversalLinks, AMSUniversalLinksUpdateResult, 
                        AMSUserAgent, AMSUserNotification, AMSUserNotificationAction, 
                        AMSUserNotificationCenter, AMSUserNotificationMetricsEvent, 

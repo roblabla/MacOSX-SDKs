@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F79D6580-6141-332B-9E37-1B4F0BFBAD4E
+    value:           4D60CDAA-2B46-36FB-B10A-AE41843C6054
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           79AAA983-7147-3272-8242-A28F077A4802
+    value:           8E30E4D7-A616-3304-AF26-590FAC93F1D2
 install-name:    '/System/Library/Frameworks/AudioVideoBridging.framework/Versions/A/AudioVideoBridging'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
@@ -206,11 +206,11 @@ exports:
                        AVBBuiltInAVDECCEntity, AVBCentralManager, AVBConnectedTransformer, 
                        AVBCustomVirtualAudioEntityAEMValidator, AVBEUI64Transformer, 
                        AVBEthernetInterface, AVBIIDCStreamConfiguration, AVBIIDCUserInputStream, 
-                       AVBIIDCUserOutputStream, AVBIPAddress, AVBInputStream, AVBInterface, 
-                       AVBInterfaceStreamingManager, AVBMAAPMACAddress, AVBMACAddress, 
-                       AVBMACAddressFormatter, AVBMRP, AVBMSRPDomain, AVBMSRPDomainInfo, 
-                       AVBMSRPListener, AVBMSRPTalker, AVBMSRPTalkerAttribute, AVBMVRP, 
-                       AVBNub, AVBOutputStream, AVBStream, AVBVirtualAudioConfiguration, 
-                       AVBVirtualEntity, AVBVirtualStream, AVBVirtualStreamConnection, 
-                       AVBWiFiInterface, AVBgPTPEthernetPort ]
+                       AVBIIDCUserOutputStream, AVBInputStream, AVBInterface, AVBInterfaceStreamingManager, 
+                       AVBMAAPMACAddress, AVBMACAddress, AVBMACAddressFormatter, 
+                       AVBMRP, AVBMSRPDomain, AVBMSRPDomainInfo, AVBMSRPListener, 
+                       AVBMSRPTalker, AVBMSRPTalkerAttribute, AVBMVRP, AVBNub, AVBOutputStream, 
+                       AVBStream, AVBVirtualAudioConfiguration, AVBVirtualEntity, 
+                       AVBVirtualStream, AVBVirtualStreamConnection, AVBWiFiInterface, 
+                       AVBgPTPEthernetPort ]
 ...

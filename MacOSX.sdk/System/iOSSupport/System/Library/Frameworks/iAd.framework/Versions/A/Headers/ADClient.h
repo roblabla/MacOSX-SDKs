@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  *   • -[[ADClient SharedClient] requestAttributionDetailsWithBlock]
  *
  */
-extern NSString * const ADClientErrorDomain NS_DEPRECATED(10_14, 7_1, 12_0, 15_0);
+extern NSString * const ADClientErrorDomain NS_DEPRECATED(10_14, 12_0, 7_1, 15_0);
 
 /*!
  * @enum ADClientError
@@ -63,7 +63,7 @@ typedef NS_ENUM(NSInteger, ADClientError) {
     ADClientErrorRequestServerError = 5,
     ADClientErrorRequestNetworkError = 6,
     ADClientErrorUnsupportedPlatform = 7
-} NS_ENUM_DEPRECATED(10_14, 7_1, 12_0, 15_0);
+} NS_ENUM_DEPRECATED(10_14, 12_0, 7_1, 15_0);
 
 NS_DEPRECATED(10_14, 11_3, 7_1, 14_5, "This has been replaced by functionality in AdServices.framework's AAAttribution class.")
 @interface ADClient : NSObject

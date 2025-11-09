@@ -12,6 +12,7 @@
 
 */
 
+#include <TargetConditionals.h>
 #if TARGET_OS_OSX
 
 #ifndef __LSSHAREDFILELIST__

@@ -67,7 +67,7 @@ typedef CF_ENUM(int, CFStreamErrorHTTP) {
   kCFStreamErrorHTTPRedirectionLoop = -2,
 
   /*
-   * Could not retreive url for request/response.
+   * Could not retrieve url for request/response.
    */
   kCFStreamErrorHTTPBadURL	  = -3
 };
@@ -89,7 +89,7 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPResponseHeader CF_DEPRECATED(1
  *  Discussion:
  *	Stream property key, for copy operations. The response header
  *	value is the CFURL from the final request; will only differ from
- *	the URL in the original request if an autoredirection has
+ *	the URL in the original request if an auto-redirection has
  *	occurred.
  *  
  */
@@ -239,7 +239,7 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPRequestBytesWrittenCount CF_DE
  *  
  *  Result:
  *	A pointer to the CF read stream created, or NULL if failed. It is
- *	caller's responsibilty to release the memory allocated for the
+ *	caller's responsibility to release the memory allocated for the
  *	read stream.
  *  
  */
@@ -258,7 +258,7 @@ CFReadStreamCreateForHTTPRequest(CFAllocatorRef __nullable alloc, CFHTTPMessageR
  *	CFReadStreamCreateForHTTPRequest() when the body of the request
  *	is larger than you wish to be resident in memory.  Note that
  *	because streams cannot be reset, read streams created this way
- *	cannot have autoredirection enabled.  If the Content-Length
+ *	cannot have auto-redirection enabled.  If the Content-Length
  *	header is set in requestHeaders, it is assumed that the caller
  *	got the length right and that requestBody will report
  *	end-of-stream after precisely Content-Length bytes have been read
@@ -285,7 +285,7 @@ CFReadStreamCreateForHTTPRequest(CFAllocatorRef __nullable alloc, CFHTTPMessageR
  *  
  *  Result:
  *	A pointer to the CF read stream created, or NULL if failed. It is
- *	caller's responsibilty to release the memory allocated for the
+ *	caller's responsibility to release the memory allocated for the
  *	read stream.
  *  
  */

@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class MEAddressAnnotation;
+@class MEComposeContext;
 @class MEEmailAddress;
 @class MEExtensionViewController;
 @class MEMessage;
@@ -27,6 +28,9 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
 
 /// @brief An instance of @c MEMessage that represents properties of the mail message that author is composing in this @c MEComposeSession
 @property (nonatomic, readonly, strong) MEMessage *mailMessage;
+
+/// @brief An instance of @c MEComposeContext that provides additional information about the compose session.
+@property (nonatomic, readonly, strong) MEComposeContext *composeContext;
 
 /// @brief Requests Mail to refresh compose session with new information that the extension has.
 /// @discussion Extensions can use this call this method to regenerate @c MEAddressAnnotation instances to replace those that were previously generated for this session. This will result in invocations to @c -[MEComposeSessionHandler @c session:annotateAddressesWithCompletionHandler:].

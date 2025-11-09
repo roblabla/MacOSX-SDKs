@@ -13,6 +13,7 @@
 #define __NW_SET_INDIRECT__
 #endif // __NW_INDIRECT__
 
+#include <Network/nw_object.h>
 #include <Network/advertise_descriptor.h>
 #include <Network/browser.h>
 #include <Network/browse_result.h>

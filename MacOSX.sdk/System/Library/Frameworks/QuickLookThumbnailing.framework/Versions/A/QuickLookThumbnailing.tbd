@@ -4,27 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9971E03F-A759-39DE-88FA-D23544EC486E
+    value:           ABF6989E-44EF-39C0-8FF2-5E50EAE85967
   - target:          x86_64-maccatalyst
-    value:           9971E03F-A759-39DE-88FA-D23544EC486E
+    value:           ABF6989E-44EF-39C0-8FF2-5E50EAE85967
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A07C17DD-0223-35A1-BFEF-EA5E1543A2DE
+    value:           ED3E0ACB-4BF8-3212-A377-5EE2CE330B2D
   - target:          arm64e-maccatalyst
-    value:           A07C17DD-0223-35A1-BFEF-EA5E1543A2DE
+    value:           ED3E0ACB-4BF8-3212-A377-5EE2CE330B2D
 install-name:    '/System/Library/Frameworks/QuickLookThumbnailing.framework/Versions/A/QuickLookThumbnailing'
 current-version: 0
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _QLCGImageRefPNGRepresentation, _QLCompareVersion, _QLCreateCGImageWithData, 
-                       _QLCreateColorSpaceForThumbnailExtension, _QLIconAutoDisplayExtension, 
-                       _QLImageCreateForDefaultThumbnailGenerationFromData, _QLSetContainsContentType, 
-                       _QLShouldUseExtendedRangeForContextWithColorspace, _QLTCreateCGContext, 
-                       _QLTCreateCGContextWithSize, _QLTGetDefaultCacheLocation, 
+                       _QLCreateCGImageWithDataAndFormat, _QLCreateColorSpaceForThumbnailExtension, 
+                       _QLIconAutoDisplayExtension, _QLImageCreateForDefaultThumbnailGenerationFromData, 
+                       _QLSetContainsContentType, _QLShouldUseExtendedRangeForContextWithColorspace, 
+                       _QLTCreateCGContext, _QLTCreateCGContextWithSize, _QLTGetDefaultCacheLocation, 
                        _QLTImageClassWithError, _QLTInitLogging, _QLTPrefersExtendedRange, 
                        _QLTRunInMainThreadAsync, _QLTRunInMainThreadSync, _QLTSandboxWrapperForParentURLOf, 
                        _QLThumbnailAdditionMetadataKey, _QLThumbnailErrorDomain, 

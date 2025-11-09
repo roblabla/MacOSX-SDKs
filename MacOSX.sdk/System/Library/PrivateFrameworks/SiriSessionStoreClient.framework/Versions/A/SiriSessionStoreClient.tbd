@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6013CF93-EFB0-31C4-912C-C10F47247E04
+    value:           EB96DC43-B403-3627-AFF7-8A496A9CDCC1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B9A6234F-1E21-32D5-A8DE-89580B21EB8A
+    value:           B4827C78-2293-3B6A-BC97-A5437013BFB6
 install-name:    '/System/Library/PrivateFrameworks/SiriSessionStoreClient.framework/Versions/A/SiriSessionStoreClient'
 current-version: 0
 compatibility-version: 0

@@ -4,32 +4,33 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A51B70F0-4DE8-3CB4-BCCE-E7BA028BF60F
+    value:           CC4BE767-B0E6-37A4-A218-56DFA117DEE6
   - target:          x86_64-maccatalyst
-    value:           A51B70F0-4DE8-3CB4-BCCE-E7BA028BF60F
+    value:           CC4BE767-B0E6-37A4-A218-56DFA117DEE6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           286BB57D-0F85-3301-BAAD-D67063D5E454
+    value:           DE5834FC-0EA0-3D12-B924-B9B594A4D652
   - target:          arm64e-maccatalyst
-    value:           286BB57D-0F85-3301-BAAD-D67063D5E454
+    value:           DE5834FC-0EA0-3D12-B924-B9B594A4D652
 install-name:    '/System/Library/PrivateFrameworks/AppStoreFoundation.framework/Versions/A/AppStoreFoundation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _ASFStoreKitAdImpressionAdNetworkId, _ASFStoreKitAdImpressionAppAdamId, 
-                       _ASFStoreKitAdImpressionAttributionSignature, _ASFStoreKitAdImpressionCampaignId, 
-                       _ASFStoreKitAdImpressionFidelityType, _ASFStoreKitAdImpressionId, 
-                       _ASFStoreKitAdImpressionSourceAppAdamId, _ASFStoreKitAdImpressionTimestamp, 
-                       _ASFStoreKitAdImpressionVersion, _ASFStoreKitDefaultKeyEnableAppStoreDaemon, 
-                       _ASFStoreKitDefaultQueueIdentifier, _ASFStoreKitEntitlementDeveloperRequestData, 
-                       _ASFStoreKitEntitlementRequestData, _ASFStoreKitKeyAdditionalBuyParams, 
-                       _ASFStoreKitKeyAllowBoostrapCellularData, _ASFStoreKitKeyAppAccountToken, 
-                       _ASFStoreKitKeyApplicationName, _ASFStoreKitKeyApplicationUsername, 
-                       _ASFStoreKitKeyArgument, _ASFStoreKitKeyBundleIdentifier, 
-                       _ASFStoreKitKeyBundleVersion, _ASFStoreKitKeyBuyParams, _ASFStoreKitKeyCustomPurchaseOptions, 
+    symbols:         [ _AFSStoreKitKeyProductsRequestBundleIdentifier, _ASFStoreKitAdImpressionAdNetworkId, 
+                       _ASFStoreKitAdImpressionAppAdamId, _ASFStoreKitAdImpressionAttributionSignature, 
+                       _ASFStoreKitAdImpressionCampaignId, _ASFStoreKitAdImpressionFidelityType, 
+                       _ASFStoreKitAdImpressionId, _ASFStoreKitAdImpressionSourceAppAdamId, 
+                       _ASFStoreKitAdImpressionTimestamp, _ASFStoreKitAdImpressionVersion, 
+                       _ASFStoreKitDefaultKeyEnableAppStoreDaemon, _ASFStoreKitDefaultQueueIdentifier, 
+                       _ASFStoreKitEntitlementDeveloperRequestData, _ASFStoreKitEntitlementRequestData, 
+                       _ASFStoreKitKeyAdditionalBuyParams, _ASFStoreKitKeyAllowBoostrapCellularData, 
+                       _ASFStoreKitKeyAppAccountToken, _ASFStoreKitKeyApplicationName, 
+                       _ASFStoreKitKeyApplicationUsername, _ASFStoreKitKeyArgument, 
+                       _ASFStoreKitKeyBundleIdentifier, _ASFStoreKitKeyBundleVersion, 
+                       _ASFStoreKitKeyBuyParams, _ASFStoreKitKeyCustomPurchaseOptions, 
                        _ASFStoreKitKeyDescription, _ASFStoreKitKeyDiscountIdentifier, 
                        _ASFStoreKitKeyDiscountKeyIdentifier, _ASFStoreKitKeyDiscountNonceString, 
                        _ASFStoreKitKeyDiscountSignature, _ASFStoreKitKeyDiscountTimestamp, 
@@ -57,6 +58,7 @@ exports:
                        _ASFStoreKitKeyTransactions, _ASFStoreKitKeyType, _ASFStoreKitKeyUniqueIdentifier, 
                        _ASFStoreKitKeyVendorIdentifier, _ASFStoreKitNewStorefront, 
                        _ASFStoreKitNewStorefrontCountryCode, _ASFStoreKitOldStorefront, 
-                       _ASFStoreKitOldStorefrontCountryCode, _ASFStoreKitServiceName ]
+                       _ASFStoreKitOldStorefrontCountryCode, _ASFStoreKitServiceName, 
+                       _ASFStoreKitSimulatorToHostServiceName ]
     objc-classes:    [ ASFIAPItem, ASFReceipt ]
 ...

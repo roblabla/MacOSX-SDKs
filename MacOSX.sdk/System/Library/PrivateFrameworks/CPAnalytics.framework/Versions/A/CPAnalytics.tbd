@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           56E7C7A2-95D5-346B-B6D8-A188FAA04971
+    value:           FFC6F868-DDF2-32C4-9BA8-8D96EDC303B2
   - target:          x86_64-maccatalyst
-    value:           56E7C7A2-95D5-346B-B6D8-A188FAA04971
+    value:           FFC6F868-DDF2-32C4-9BA8-8D96EDC303B2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1E49423D-C57C-33C8-A662-6668C4255444
+    value:           7F271D46-022E-32C9-9A53-3F37BEF34FFC
   - target:          arm64e-maccatalyst
-    value:           1E49423D-C57C-33C8-A662-6668C4255444
+    value:           7F271D46-022E-32C9-9A53-3F37BEF34FFC
 install-name:    '/System/Library/PrivateFrameworks/CPAnalytics.framework/Versions/A/CPAnalytics'
-current-version: 400.27.210
+current-version: 421.0.100
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -59,49 +59,50 @@ exports:
                        _CPAnalyticsIgnoreIntervalsKey, _CPAnalyticsKnowledgeStoreSampleIdentifierKey, 
                        _CPAnalyticsKnowledgeStoreSampleSubsetKey, _CPAnalyticsKnowledgeStoreSavedEvent, 
                        _CPAnalyticsLog, _CPAnalyticsMediaPropertyAdjusted, _CPAnalyticsMediaPropertyCameraType, 
-                       _CPAnalyticsMediaPropertyFavorite, _CPAnalyticsMediaPropertyHasSyndicationIdentifier, 
-                       _CPAnalyticsMediaPropertyImportSource, _CPAnalyticsMediaPropertyLibraryType, 
-                       _CPAnalyticsMediaPropertyLocalIdentifier, _CPAnalyticsMediaPropertyMediaAge, 
-                       _CPAnalyticsMediaPropertyMediaAgeInMinutes, _CPAnalyticsMediaPropertyMediaCount, 
-                       _CPAnalyticsMediaPropertyMediaDuration, _CPAnalyticsMediaPropertyMediaSubtype, 
-                       _CPAnalyticsMediaPropertyMediaType, _CPAnalyticsMediaPropertyOrientation, 
-                       _CPAnalyticsMediaPropertySceneType, _CPAnalyticsMediaPropertySubject, 
-                       _CPAnalyticsMediaPropertySyndicationState, _CPAnalyticsMediaPropertyUUID, 
-                       _CPAnalyticsMusicPropertyHasAppleMusicSubscription, _CPAnalyticsPayloadAppEventNameKey, 
-                       _CPAnalyticsPayloadAssetCollectionKey, _CPAnalyticsPayloadAssetCollectionLocalIdentifierKey, 
-                       _CPAnalyticsPayloadAssetEditAdjustmentsKey, _CPAnalyticsPayloadAssetsKey, 
-                       _CPAnalyticsPayloadClassNameKey, _CPAnalyticsPayloadErrorKey, 
-                       _CPAnalyticsPayloadGenericAssetCollectionCountKey, _CPAnalyticsPayloadGenericAssetCountKey, 
-                       _CPAnalyticsPayloadIntervalDurationKey, _CPAnalyticsPayloadIntervalEndDateKey, 
-                       _CPAnalyticsPayloadIntervalNameKey, _CPAnalyticsPayloadIntervalStartDateKey, 
-                       _CPAnalyticsPayloadTabIdentifierDescriptionKey, _CPAnalyticsPayloadTimeOnScreenKey, 
-                       _CPAnalyticsPayloadViewIDKey, _CPAnalyticsPropertiesCacheFileName, 
-                       _CPAnalyticsScreenManagerIgnoreViewsKey, _CPAnalyticsScreenManagerMaxScreenViews, 
-                       _CPAnalyticsScreenManagerTrackViewsKey, _CPAnalyticsScreenViewAppSectionName, 
-                       _CPAnalyticsScreenViewCurrentScreen, _CPAnalyticsScreenViewIsTracked, 
-                       _CPAnalyticsScreenViewPriorScreen, _CPAnalyticsScreenViewScreensCount, 
-                       _CPAnalyticsScreenViewTrackerPriorScreen1, _CPAnalyticsScreenViewTrackerPriorScreen2, 
-                       _CPAnalyticsScreenViewTrackerPriorScreen3, _CPAnalyticsScreenViewTrackerPriorScreen4, 
-                       _CPAnalyticsScreenViewTrackerPriorScreen5, _CPAnalyticsScreenViewTrackerPriorScreen6, 
-                       _CPAnalyticsScreenViewTrackerPriorScreen7, _CPAnalyticsScreenViewTrackerPriorScreen8, 
-                       _CPAnalyticsScreenViewTrackerPriorScreen9, _CPAnalyticsSessionExitScreen, 
-                       _CPAnalyticsSessionScreenViewsCount, _CPAnalyticsSessionTimeInApp, 
-                       _CPAnalyticsSignpostDurationPayloadKey, _CPAnalyticsSignpostEndEvent, 
-                       _CPAnalyticsSignpostEventAppVisiblePeriod, _CPAnalyticsSignpostEventNamePayloadKey, 
-                       _CPAnalyticsSignpostEventViewTime, _CPAnalyticsSignpostIDPayloadKey, 
-                       _CPAnalyticsSignpostStartEvent, _CPAnalyticsStreamName, _CPAnalyticsSubsetName, 
-                       _CPAnalyticsSystemPropertyCollectionCount, _CPAnalyticsSystemPropertyDeviceFreeSpace, 
-                       _CPAnalyticsSystemPropertyDeviceModel, _CPAnalyticsSystemPropertyFaceAnalysisProgress, 
-                       _CPAnalyticsSystemPropertyFullAnalysisProgress, _CPAnalyticsSystemPropertyLibrarySizeRange, 
-                       _CPAnalyticsSystemPropertyLowPowerModeEnabled, _CPAnalyticsSystemPropertyMomentCount, 
-                       _CPAnalyticsSystemPropertyMomentCountRange, _CPAnalyticsSystemPropertyOSVersion, 
-                       _CPAnalyticsSystemPropertyPersonCount, _CPAnalyticsSystemPropertyPersonCountRange, 
-                       _CPAnalyticsSystemPropertyPhotosCount, _CPAnalyticsSystemPropertyProcess, 
-                       _CPAnalyticsSystemPropertySceneAnalysisProgress, _CPAnalyticsSystemPropertyVideosCount, 
-                       _CPAnalyticsTrackIntervalsKey, _CPAnalyticsUserPropertyiCPLEnabled, 
-                       _CPAnalyticsUserPropertyiCPLExceedingQuota, _CPAnalyticsUserPropertyiCPLHasChangesToProcess, 
-                       _CPAnalyticsUserPropertyiCPLLowDiskSpace, _CPAnalyticsVersionNumber, 
-                       _CPAnalyticsVersionString, _ScreenViewTrackerNoScreenName ]
+                       _CPAnalyticsMediaPropertyCurationScore, _CPAnalyticsMediaPropertyFavorite, 
+                       _CPAnalyticsMediaPropertyHasSyndicationIdentifier, _CPAnalyticsMediaPropertyImportSource, 
+                       _CPAnalyticsMediaPropertyLibraryType, _CPAnalyticsMediaPropertyLocalIdentifier, 
+                       _CPAnalyticsMediaPropertyMediaAge, _CPAnalyticsMediaPropertyMediaAgeInMinutes, 
+                       _CPAnalyticsMediaPropertyMediaCount, _CPAnalyticsMediaPropertyMediaDuration, 
+                       _CPAnalyticsMediaPropertyMediaSubtype, _CPAnalyticsMediaPropertyMediaType, 
+                       _CPAnalyticsMediaPropertyOrientation, _CPAnalyticsMediaPropertySceneType, 
+                       _CPAnalyticsMediaPropertySubject, _CPAnalyticsMediaPropertySyndicationProcessingValue, 
+                       _CPAnalyticsMediaPropertySyndicationProcessingVersion, _CPAnalyticsMediaPropertySyndicationState, 
+                       _CPAnalyticsMediaPropertyUUID, _CPAnalyticsMusicPropertyHasAppleMusicSubscription, 
+                       _CPAnalyticsPayloadAppEventNameKey, _CPAnalyticsPayloadAssetCollectionKey, 
+                       _CPAnalyticsPayloadAssetCollectionLocalIdentifierKey, _CPAnalyticsPayloadAssetEditAdjustmentsKey, 
+                       _CPAnalyticsPayloadAssetsKey, _CPAnalyticsPayloadClassNameKey, 
+                       _CPAnalyticsPayloadErrorKey, _CPAnalyticsPayloadGenericAssetCollectionCountKey, 
+                       _CPAnalyticsPayloadGenericAssetCountKey, _CPAnalyticsPayloadIntervalDurationKey, 
+                       _CPAnalyticsPayloadIntervalEndDateKey, _CPAnalyticsPayloadIntervalNameKey, 
+                       _CPAnalyticsPayloadIntervalStartDateKey, _CPAnalyticsPayloadTabIdentifierDescriptionKey, 
+                       _CPAnalyticsPayloadTimeOnScreenKey, _CPAnalyticsPayloadViewIDKey, 
+                       _CPAnalyticsPropertiesCacheFileName, _CPAnalyticsScreenManagerIgnoreViewsKey, 
+                       _CPAnalyticsScreenManagerMaxScreenViews, _CPAnalyticsScreenManagerTrackViewsKey, 
+                       _CPAnalyticsScreenViewAppSectionName, _CPAnalyticsScreenViewCurrentScreen, 
+                       _CPAnalyticsScreenViewIsTracked, _CPAnalyticsScreenViewPriorScreen, 
+                       _CPAnalyticsScreenViewScreensCount, _CPAnalyticsScreenViewTrackerPriorScreen1, 
+                       _CPAnalyticsScreenViewTrackerPriorScreen2, _CPAnalyticsScreenViewTrackerPriorScreen3, 
+                       _CPAnalyticsScreenViewTrackerPriorScreen4, _CPAnalyticsScreenViewTrackerPriorScreen5, 
+                       _CPAnalyticsScreenViewTrackerPriorScreen6, _CPAnalyticsScreenViewTrackerPriorScreen7, 
+                       _CPAnalyticsScreenViewTrackerPriorScreen8, _CPAnalyticsScreenViewTrackerPriorScreen9, 
+                       _CPAnalyticsSessionExitScreen, _CPAnalyticsSessionScreenViewsCount, 
+                       _CPAnalyticsSessionTimeInApp, _CPAnalyticsSignpostDurationPayloadKey, 
+                       _CPAnalyticsSignpostEndEvent, _CPAnalyticsSignpostEventAppVisiblePeriod, 
+                       _CPAnalyticsSignpostEventNamePayloadKey, _CPAnalyticsSignpostEventViewTime, 
+                       _CPAnalyticsSignpostIDPayloadKey, _CPAnalyticsSignpostStartEvent, 
+                       _CPAnalyticsStreamName, _CPAnalyticsSubsetName, _CPAnalyticsSystemPropertyCollectionCount, 
+                       _CPAnalyticsSystemPropertyDeviceFreeSpace, _CPAnalyticsSystemPropertyDeviceModel, 
+                       _CPAnalyticsSystemPropertyFaceAnalysisProgress, _CPAnalyticsSystemPropertyFullAnalysisProgress, 
+                       _CPAnalyticsSystemPropertyLibrarySizeRange, _CPAnalyticsSystemPropertyLowPowerModeEnabled, 
+                       _CPAnalyticsSystemPropertyMomentCount, _CPAnalyticsSystemPropertyMomentCountRange, 
+                       _CPAnalyticsSystemPropertyOSVersion, _CPAnalyticsSystemPropertyPersonCount, 
+                       _CPAnalyticsSystemPropertyPersonCountRange, _CPAnalyticsSystemPropertyPhotosCount, 
+                       _CPAnalyticsSystemPropertyProcess, _CPAnalyticsSystemPropertySceneAnalysisProgress, 
+                       _CPAnalyticsSystemPropertyVideosCount, _CPAnalyticsTrackIntervalsKey, 
+                       _CPAnalyticsUserPropertyiCPLEnabled, _CPAnalyticsUserPropertyiCPLExceedingQuota, 
+                       _CPAnalyticsUserPropertyiCPLHasChangesToProcess, _CPAnalyticsUserPropertyiCPLLowDiskSpace, 
+                       _CPAnalyticsVersionNumber, _CPAnalyticsVersionString, _ScreenViewTrackerNoScreenName ]
     objc-classes:    [ CPAnalytics, CPAnalyticsAppStateDestination, CPAnalyticsCompoundEventMatcher, 
                        CPAnalyticsConditional, CPAnalyticsCoreAnalyticsHelper, CPAnalyticsCoreDuetEventMatcher, 
                        CPAnalyticsDashboardDestination, CPAnalyticsDestinationsRegistry, 

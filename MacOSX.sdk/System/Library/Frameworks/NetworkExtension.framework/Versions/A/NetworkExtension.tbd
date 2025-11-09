@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           95678AF7-9365-38B8-A9FB-6FA7AA58F132
+    value:           7E3D08BA-8C85-3311-8D29-2B37EBA7C3E9
   - target:          x86_64-maccatalyst
-    value:           95678AF7-9365-38B8-A9FB-6FA7AA58F132
+    value:           7E3D08BA-8C85-3311-8D29-2B37EBA7C3E9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C1AA74C2-74C3-3D72-88BC-5AC742A7DF99
+    value:           DDE5C835-18D9-3713-A1EA-9CDABFDC6355
   - target:          arm64e-maccatalyst
-    value:           C1AA74C2-74C3-3D72-88BC-5AC742A7DF99
+    value:           DDE5C835-18D9-3713-A1EA-9CDABFDC6355
 install-name:    '/System/Library/Frameworks/NetworkExtension.framework/Versions/A/NetworkExtension'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/Network.framework/Versions/A/Network' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CFARRAY_TYPE, _CFBOOLEAN_TYPE, _CFDATA_TYPE, _CFDICTIONARY_TYPE, 
                        _CFNUMBER_TYPE, _CFSTRING_TYPE, _NEAddAddressToDictionary, 
@@ -106,23 +106,23 @@ exports:
                        _NESetValueIfPresent, _NETunnelProviderErrorDomain, _NEUIDForAuditToken, 
                        _NEVPNConfigurationChangeNotification, _NEVPNConnectionStartOptionPassword, 
                        _NEVPNConnectionStartOptionUsername, _NEVPNErrorDomain, _NEVPNStatusDidChangeNotification, 
-                       _NEVirtualInterfaceAddAddress, _NEVirtualInterfaceAddIPv4Route, 
-                       _NEVirtualInterfaceAddIPv6Route, _NEVirtualInterfaceCopyAddresses, 
-                       _NEVirtualInterfaceCopyDNSDomain, _NEVirtualInterfaceCopyDNSSearchDomains, 
-                       _NEVirtualInterfaceCopyDNSServers, _NEVirtualInterfaceCopyDNSSupplementalMatchDomains, 
-                       _NEVirtualInterfaceCopyDNSSupplementalMatchOrders, _NEVirtualInterfaceCopyDelegateInterfaceName, 
-                       _NEVirtualInterfaceCopyIPStateDictionary, _NEVirtualInterfaceCopyIPv4Router, 
-                       _NEVirtualInterfaceCopyIPv4Routes, _NEVirtualInterfaceCopyIPv6Router, 
-                       _NEVirtualInterfaceCopyIPv6Routes, _NEVirtualInterfaceCopyName, 
-                       _NEVirtualInterfaceCopyNexusInstances, _NEVirtualInterfaceCopyProxies, 
-                       _NEVirtualInterfaceCopyRouteCacheFromRoutes, _NEVirtualInterfaceCopyRoutes, 
-                       _NEVirtualInterfaceCopyStatistics, _NEVirtualInterfaceCopyVPNServerAddress, 
-                       _NEVirtualInterfaceCreate, _NEVirtualInterfaceCreateChannel, 
-                       _NEVirtualInterfaceCreateFromSocket, _NEVirtualInterfaceCreateNexus, 
-                       _NEVirtualInterfaceCreateNexusExtended, _NEVirtualInterfaceDidPublish, 
-                       _NEVirtualInterfaceDisableChannel, _NEVirtualInterfaceDupSocket, 
-                       _NEVirtualInterfaceEnableChannelAndGetNexusInstance, _NEVirtualInterfaceEnableFlowswitch, 
-                       _NEVirtualInterfaceGetDNSSupplementalMatchDomainsNoSearch, 
+                       _NEVirtualInterfaceAddAddress, _NEVirtualInterfaceAddAddressWithLifetime, 
+                       _NEVirtualInterfaceAddIPv4Route, _NEVirtualInterfaceAddIPv6Route, 
+                       _NEVirtualInterfaceCopyAddresses, _NEVirtualInterfaceCopyDNSDomain, 
+                       _NEVirtualInterfaceCopyDNSSearchDomains, _NEVirtualInterfaceCopyDNSServers, 
+                       _NEVirtualInterfaceCopyDNSSupplementalMatchDomains, _NEVirtualInterfaceCopyDNSSupplementalMatchOrders, 
+                       _NEVirtualInterfaceCopyDelegateInterfaceName, _NEVirtualInterfaceCopyIPStateDictionary, 
+                       _NEVirtualInterfaceCopyIPv4Router, _NEVirtualInterfaceCopyIPv4Routes, 
+                       _NEVirtualInterfaceCopyIPv6Router, _NEVirtualInterfaceCopyIPv6Routes, 
+                       _NEVirtualInterfaceCopyName, _NEVirtualInterfaceCopyNexusInstances, 
+                       _NEVirtualInterfaceCopyProxies, _NEVirtualInterfaceCopyRouteCacheFromRoutes, 
+                       _NEVirtualInterfaceCopyRoutes, _NEVirtualInterfaceCopyStatistics, 
+                       _NEVirtualInterfaceCopyVPNServerAddress, _NEVirtualInterfaceCreate, 
+                       _NEVirtualInterfaceCreateChannel, _NEVirtualInterfaceCreateFromSocket, 
+                       _NEVirtualInterfaceCreateNexus, _NEVirtualInterfaceCreateNexusExtended, 
+                       _NEVirtualInterfaceDidPublish, _NEVirtualInterfaceDisableChannel, 
+                       _NEVirtualInterfaceDupSocket, _NEVirtualInterfaceEnableChannelAndGetNexusInstance, 
+                       _NEVirtualInterfaceEnableFlowswitch, _NEVirtualInterfaceGetDNSSupplementalMatchDomainsNoSearch, 
                        _NEVirtualInterfaceGetIndex, _NEVirtualInterfaceGetMaxPendingPackets, 
                        _NEVirtualInterfaceGetReadAutomatically, _NEVirtualInterfaceGetType, 
                        _NEVirtualInterfaceInvalidate, _NEVirtualInterfaceIsPrimary, 
@@ -318,7 +318,7 @@ exports:
                        NEVPNManager, NEVPNNetworkAgent, NEVPNProtocol, NEVPNProtocolIKEv2, 
                        NEVPNProtocolIPSec, NEVPNProtocolL2TP, NEVPNProtocolPPP, NEVPNProtocolPPTP, 
                        NEVPNProtocolPlugin, NWTLSParameters ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _CertTypeFormat, _NEGetRefFromConfigProfileUUID, _NEImportKeychainPayload, 
                        _NEKeychainSystemRemoveWithPersistentID, _NEVerifyDesignatedRequirement, 
                        _kNEProfilePayloadVPNAppMappingDomain ]

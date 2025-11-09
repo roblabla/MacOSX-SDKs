@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           39858DB9-03C4-3521-8C9C-2544129B8255
+    value:           45848037-C33D-3E88-AD99-0B26467D6679
   - target:          x86_64-maccatalyst
-    value:           39858DB9-03C4-3521-8C9C-2544129B8255
+    value:           45848037-C33D-3E88-AD99-0B26467D6679
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8271E0D6-4322-3B05-8618-802A4DA9ACB6
+    value:           DE1A3739-6B5E-3080-B237-9FB6BD5A0DD8
   - target:          arm64e-maccatalyst
-    value:           8271E0D6-4322-3B05-8618-802A4DA9ACB6
+    value:           DE1A3739-6B5E-3080-B237-9FB6BD5A0DD8
 install-name:    '/System/Library/PrivateFrameworks/TipsDaemon.framework/Versions/A/TipsDaemon'
-current-version: 609
+current-version: 613.8
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

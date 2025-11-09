@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5DE22CDD-D46C-31BD-850A-44621C60AF5E
+    value:           585F68B7-053A-3BE4-BAA1-42884284A92B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           67470AB0-4BFA-34E7-AD4D-87D4B7CF4C4C
+    value:           BC2EEB71-53D2-3E67-B859-334C86647DDD
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Support/libSystemDetermination.dylib'
 exports:
   - targets:         [ x86_64-macos ]
@@ -17,10 +17,6 @@ exports:
                        __ZTI17SimInstanceLoggerIN2sd19IMSSubscriberConfigEN3ctu11OsLogLoggerEN10subscriber7SimSlotENSt3__18functionIFKPKcS5_EEEE, 
                        __ZTI17SimInstanceLoggerIN2sd23IMSSubscriberControllerEN3ctu11OsLogLoggerEN10subscriber7SimSlotENSt3__18functionIFKPKcS5_EEEE, 
                        __ZTI19SimInstanceLoggableI26SystemDeterminationManagerN3ctu11OsLogLoggerEN10subscriber7SimSlotEE, 
-                       __ZTI19SimInstanceLoggableIN2sd10DCNManagerEN3ctu11OsLogLoggerEN10subscriber7SimSlotEE, 
-                       __ZTI19SimInstanceLoggableIN2sd18IMSSubscriberModelEN3ctu11OsLogLoggerEN10subscriber7SimSlotEE, 
-                       __ZTI19SimInstanceLoggableIN2sd19IMSSubscriberConfigEN3ctu11OsLogLoggerEN10subscriber7SimSlotEE, 
-                       __ZTI19SimInstanceLoggableIN2sd23IMSSubscriberControllerEN3ctu11OsLogLoggerEN10subscriber7SimSlotEE, 
                        __ZTI24SimInstanceLoggerDefaultIN3ctu11OsLogLoggerEN10subscriber7SimSlotENSt3__18functionIFKPKcS3_EEEE, 
                        __ZTI26SimInstanceLoggerInterfaceIN3ctu11OsLogLoggerEN10subscriber7SimSlotEE, 
                        __ZTIFKPKcN10subscriber7SimSlotEE, __ZTIN14ServiceManager11FullServiceI26SystemDeterminationManagerEE, 
@@ -48,10 +44,6 @@ exports:
                        __ZTS17SimInstanceLoggerIN2sd19IMSSubscriberConfigEN3ctu11OsLogLoggerEN10subscriber7SimSlotENSt3__18functionIFKPKcS5_EEEE, 
                        __ZTS17SimInstanceLoggerIN2sd23IMSSubscriberControllerEN3ctu11OsLogLoggerEN10subscriber7SimSlotENSt3__18functionIFKPKcS5_EEEE, 
                        __ZTS19SimInstanceLoggableI26SystemDeterminationManagerN3ctu11OsLogLoggerEN10subscriber7SimSlotEE, 
-                       __ZTS19SimInstanceLoggableIN2sd10DCNManagerEN3ctu11OsLogLoggerEN10subscriber7SimSlotEE, 
-                       __ZTS19SimInstanceLoggableIN2sd18IMSSubscriberModelEN3ctu11OsLogLoggerEN10subscriber7SimSlotEE, 
-                       __ZTS19SimInstanceLoggableIN2sd19IMSSubscriberConfigEN3ctu11OsLogLoggerEN10subscriber7SimSlotEE, 
-                       __ZTS19SimInstanceLoggableIN2sd23IMSSubscriberControllerEN3ctu11OsLogLoggerEN10subscriber7SimSlotEE, 
                        __ZTS24SimInstanceLoggerDefaultIN3ctu11OsLogLoggerEN10subscriber7SimSlotENSt3__18functionIFKPKcS3_EEEE, 
                        __ZTS26SimInstanceLoggerInterfaceIN3ctu11OsLogLoggerEN10subscriber7SimSlotEE, 
                        __ZTSFKPKcN10subscriber7SimSlotEE, __ZTSN14ServiceManager11FullServiceI26SystemDeterminationManagerEE, 

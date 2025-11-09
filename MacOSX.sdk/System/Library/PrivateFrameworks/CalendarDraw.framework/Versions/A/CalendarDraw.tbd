@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           85DA8EB7-1E81-36D8-BC97-866C7B7AC9D5
+    value:           C9FB872F-F2D6-30C0-BC4D-C7A39390EBD1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           119BF697-0CDD-3EEE-98F8-73CA05E9BD49
+    value:           477C16F0-154C-34C5-BA24-D2F00D913535
 install-name:    '/System/Library/PrivateFrameworks/CalendarDraw.framework/Versions/A/CalendarDraw'
 current-version: 2395
 exports:

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6BB10966-4284-31BC-ABDA-02DDFAA817E0
+    value:           D19002E6-1A1E-3E48-8EC7-1E6D7746AF86
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B0177BD2-FC1E-3CCC-AC5E-F2B2251BC705
+    value:           8BF21730-3FF1-34EA-8EF1-F9E9D30D3919
 install-name:    '/System/Library/PrivateFrameworks/QuickLookThumbnailingDaemon.framework/Versions/A/QuickLookThumbnailingDaemon'
 current-version: 0
 exports:

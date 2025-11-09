@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F142AB4C-2A56-39BA-A3A3-3151E58CCF6A
+    value:           B88B2888-DD08-32E5-82BD-D48119347A64
   - target:          x86_64-maccatalyst
-    value:           F142AB4C-2A56-39BA-A3A3-3151E58CCF6A
+    value:           B88B2888-DD08-32E5-82BD-D48119347A64
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D1BDC89C-F1F5-39C7-9B43-E39E3F48D9A6
+    value:           F5FF24EF-6342-3493-825C-4497AC40E76A
   - target:          arm64e-maccatalyst
-    value:           D1BDC89C-F1F5-39C7-9B43-E39E3F48D9A6
+    value:           F5FF24EF-6342-3493-825C-4497AC40E76A
 install-name:    '/usr/lib/libresolv.9.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

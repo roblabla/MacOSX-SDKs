@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F316F3E0-2C26-3D56-86C6-4E1B6BCABE4A
+    value:           DADA08DF-B270-3BF5-B026-39196C2374D9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DCC0C925-AB42-323F-AA6D-5BE8EDADE234
+    value:           84BD8D0C-FB88-323A-ABEB-D6D59680B16C
 install-name:    '/usr/lib/libimg4.dylib'
-current-version: 155
+current-version: 157.60.2
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ __img4_chip_ap_category_ff02, __img4_chip_ap_category_ff03, 
@@ -35,6 +35,7 @@ exports:
                        _img4_firmware_new_from_fd_4MSM, _img4_firmware_select_chip, 
                        _img4_image_get_bytes, _img4_image_get_property_bool, _img4_image_get_property_data, 
                        _img4_image_get_property_uint32, _img4_image_get_property_uint64, 
-                       _img4_nonce_domain_copy_nonce, _img4_nonce_domain_roll_nonce, 
-                       _img4_runtime_copy_object, _img4_runtime_execute_object, _img4_runtime_find_object_spec ]
+                       _img4_nonce_domain_copy_nonce, _img4_nonce_domain_preroll_nonce, 
+                       _img4_nonce_domain_roll_nonce, _img4_runtime_copy_object, 
+                       _img4_runtime_execute_object, _img4_runtime_find_object_spec ]
 ...

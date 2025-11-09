@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A938ED34-B219-30BE-9503-AC7D19E66778
+    value:           C6B1D513-7F2C-3468-BF76-1FF370C8C0F1
   - target:          x86_64-maccatalyst
-    value:           A938ED34-B219-30BE-9503-AC7D19E66778
+    value:           C6B1D513-7F2C-3468-BF76-1FF370C8C0F1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BE9AD811-3136-3EF4-A516-84EB8F57726E
+    value:           DFE9031C-3834-3EFE-97C8-C0730F610B6A
   - target:          arm64e-maccatalyst
-    value:           BE9AD811-3136-3EF4-A516-84EB8F57726E
+    value:           DFE9031C-3834-3EFE-97C8-C0730F610B6A
 install-name:    '/System/Library/PrivateFrameworks/XCTTargetBootstrap.framework/Versions/A/XCTTargetBootstrap'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

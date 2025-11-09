@@ -115,6 +115,9 @@ enum
   kCVPixelFormatType_420YpCbCr8VideoRange_8A_TriPlanar   = 'v0a8', /* first and second planes as per 420YpCbCr8BiPlanarVideoRange (420v), alpha 8 bits in third plane full-range.  No CVPlanarPixelBufferInfo struct. */
   kCVPixelFormatType_16VersatileBayer    = 'bp16',   /* Single plane Bayer 16-bit little-endian sensor element ("sensel") samples from full-size decoding of ProRes RAW images; Bayer pattern (sensel ordering) and other raw conversion information is described via buffer attachments */
   kCVPixelFormatType_64RGBA_DownscaledProResRAW    = 'bp64',   /* Single plane 64-bit RGBA (16-bit little-endian samples) from downscaled decoding of ProRes RAW images; components--which may not be co-sited with one another--are sensel values and require raw conversion, information for which is described via buffer attachments */
+  kCVPixelFormatType_422YpCbCr16BiPlanarVideoRange       = 'sv22', /* 2 plane YCbCr16 4:2:2, video-range (luma=[4096,60160] chroma=[4096,61440]) */
+  kCVPixelFormatType_444YpCbCr16BiPlanarVideoRange       = 'sv44', /* 2 plane YCbCr16 4:4:4, video-range (luma=[4096,60160] chroma=[4096,61440]) */
+  kCVPixelFormatType_444YpCbCr16VideoRange_16A_TriPlanar = 's4as', /* 3 plane video-range YCbCr16 4:4:4 with 16-bit full-range alpha (luma=[4096,60160] chroma=[4096,61440] alpha=[0,65535]).  No CVPlanarPixelBufferInfo struct. */
 };
 
 	
@@ -146,6 +149,34 @@ enum
 	kCVPixelFormatType_Lossless_420YpCbCr8BiPlanarVideoRange         = '&8v0', /* Lossless-compressed form of kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange.  No CVPlanarPixelBufferInfo struct. */
 	kCVPixelFormatType_Lossless_420YpCbCr8BiPlanarFullRange          = '&8f0', /* Lossless-compressed form of kCVPixelFormatType_420YpCbCr8BiPlanarFullRange.  No CVPlanarPixelBufferInfo struct. */
 	kCVPixelFormatType_Lossless_420YpCbCr10PackedBiPlanarVideoRange  = '&xv0', /* Lossless-compressed-packed form of kCVPixelFormatType_420YpCbCr10BiPlanarVideoRange.  No CVPlanarPixelBufferInfo struct. Format is compressed-packed with no padding bits between pixels. */
+	kCVPixelFormatType_Lossless_422YpCbCr10PackedBiPlanarVideoRange  = '&xv2', /* Lossless-compressed form of kCVPixelFormatType_422YpCbCr10BiPlanarVideoRange.  No CVPlanarPixelBufferInfo struct. Format is compressed-packed with no padding bits between pixels. */
+};
+
+/*
+	Lossy-Compressed Pixel Formats
+	
+	The following pixel formats can be used to reduce memory bandwidth and memory footprint involved in large-scale pixel data flow, which can have benefits for battery life and thermal efficiency.
+	Similar to lossless pixel formats, they work by dividing pixel buffers into fixed-width, fixed-height, fixed-byte-size blocks. Pixel buffers allocated using lossy formats have reduced memory footprint than their lossless equivalents; this reduced footprint may or may not result in loss of quality depending on the content of the individual block. Hardware units (video codecs, GPU, ISP, etc.) attempt to write a compressed encoding for each block using either a lossless or lossy algorithm.  If a block of pixels is successfully encoded within its pre-defined memory footprint, then the lossless alogrithm is applied; if the encoded block of pixels exceeds the pre-defined memory footprint then the lossy algorithm is applied.  Each compressed pixel buffer has a separate area of metadata recording the encoding choices for each pixel block.
+	
+	IMPORTANT CAVEATS:
+	Some devices do not support these pixel formats at all.
+	Before using one of these pixel formats, call CVIsCompressedPixelFormatAvailable() to check that it is available on the current device.
+	On different devices, the concrete details of these formats may be different.
+	On different devices, the degree and details of support by hardware units (video codecs, GPU, ISP, etc.) may be different.
+	Do not ship code that reads the contents of lossless-compressed pixel buffers directly with the CPU, or which saves or transfers it to other devices, as this code will break with future hardware.
+	The bandwidth benefits of these formats are generally outweighed by the cost of buffer copies to convert to uncompressed pixel formats, so if you find that you need to perform a buffer copy to covert for CPU usage, it's likely that you would have been better served by using the equivalent uncompressed pixel formats in the first place.
+*/
+#if COREVIDEO_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : OSType
+#else
+enum
+#endif
+{
+	kCVPixelFormatType_Lossy_32BGRA									= '-BGA', /* Lossy-compressed form of kCVPixelFormatType_32BGRA. No CVPlanarPixelBufferInfo struct.  */
+	kCVPixelFormatType_Lossy_420YpCbCr8BiPlanarVideoRange			= '-8v0', /* Lossy-compressed form of kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange.  No CVPlanarPixelBufferInfo struct. */
+	kCVPixelFormatType_Lossy_420YpCbCr8BiPlanarFullRange			= '-8f0', /* Lossy-compressed form of kCVPixelFormatType_420YpCbCr8BiPlanarFullRange.  No CVPlanarPixelBufferInfo struct. */
+	kCVPixelFormatType_Lossy_420YpCbCr10PackedBiPlanarVideoRange	= '-xv0', /* Lossy-compressed form of kCVPixelFormatType_420YpCbCr10BiPlanarVideoRange.  No CVPlanarPixelBufferInfo struct. Format is compressed-packed with no padding bits between pixels. */
+	kCVPixelFormatType_Lossy_422YpCbCr10PackedBiPlanarVideoRange	= '-xv2', /* Lossy-compressed form of kCVPixelFormatType_422YpCbCr10BiPlanarVideoRange.  No CVPlanarPixelBufferInfo struct. Format is compressed-packed with no padding bits between pixels. */
 };
 
 /*!

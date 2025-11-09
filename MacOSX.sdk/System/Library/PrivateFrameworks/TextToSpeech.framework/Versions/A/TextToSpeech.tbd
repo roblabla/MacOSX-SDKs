@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9E900F8D-2AA0-3C56-B1E8-157A1CC5DE4D
+    value:           7B28CC83-DF52-3143-BF3F-864B450DB590
   - target:          x86_64-maccatalyst
-    value:           9E900F8D-2AA0-3C56-B1E8-157A1CC5DE4D
+    value:           7B28CC83-DF52-3143-BF3F-864B450DB590
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           38DFF082-AB3F-3DF7-B3CE-A4FE9C627FDB
+    value:           BC565DEB-0BD5-369C-B85A-3906EFEF9D63
   - target:          arm64e-maccatalyst
-    value:           38DFF082-AB3F-3DF7-B3CE-A4FE9C627FDB
+    value:           BC565DEB-0BD5-369C-B85A-3906EFEF9D63
 install-name:    '/System/Library/PrivateFrameworks/TextToSpeech.framework/Versions/A/TextToSpeech'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EB7ED39C-B753-3F47-A090-1E81692E916C
+    value:           66FB9E4F-B935-3618-B721-F325259DA59C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           087AAE37-1AB5-3EAD-AF50-E16EBC47CE74
+    value:           C87E3CF0-8874-305A-9EA5-B9736A38F763
 install-name:    '/System/Library/PrivateFrameworks/MDSChannel.framework/Versions/A/MDSChannel'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

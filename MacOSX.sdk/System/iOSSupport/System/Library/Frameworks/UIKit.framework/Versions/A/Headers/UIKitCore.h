@@ -98,7 +98,6 @@
 #import <UIKit/UIGraphicsPDFRenderer.h>
 #import <UIKit/UIImageAsset.h>
 #import <UIKit/UIImagePickerController.h>
-#import <UIKit/UIImageVariants.h>
 #import <UIKit/UIImageView.h>
 #import <UIKit/UIInputView.h>
 #import <UIKit/UIInputViewController.h>

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           856A37DA-6032-3F56-8946-DAA54A2A1851
+    value:           351B4E7F-EF84-33AA-9C5D-04EA21D50D6A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           16702FBC-22CC-352D-8737-96CF4BE6F99E
+    value:           601B9531-E572-35D6-8091-53A93F504322
 install-name:    '/System/Library/Frameworks/BusinessChat.framework/Versions/A/BusinessChat'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B092297F-DE8B-3F62-A14D-66D5BA8E2BDB
+    value:           03E5DF2D-6010-3C67-B4B2-55C57A81C225
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0C949866-732C-33A3-A049-F31531C7B962
+    value:           EC6F5D82-97CE-34BC-BFE6-44E10D83D4E6
 install-name:    '/System/Library/PrivateFrameworks/RTBuddyCrashlogDecoder.framework/Versions/A/RTBuddyCrashlogDecoder'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

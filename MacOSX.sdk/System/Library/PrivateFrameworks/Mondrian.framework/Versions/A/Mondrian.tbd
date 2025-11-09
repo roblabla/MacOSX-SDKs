@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           940DE1E5-1831-3B41-9AFE-F6D4F5B1D3D1
+    value:           0FD435C8-35A7-308D-8DCB-B55E595D19FA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6034A515-7F3B-32DA-91D0-AF1B57DF9F03
+    value:           72E7AD4B-9C5B-3E41-A25E-7A71998F1472
 install-name:    '/System/Library/PrivateFrameworks/Mondrian.framework/Versions/A/Mondrian'
-current-version: 400.27.210
+current-version: 421.0.100
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _GridRectEdgeOppositeEdge, _MOAVAssetCreateThumbnailWithURL, 

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           162500BF-E1C3-32F8-A071-090DD8BDC807
+    value:           44637E82-DB6A-3BAC-A3C0-023A5F01FDE9
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           6F4E08A6-9857-385B-BD27-E242ADE67268
+    value:           A90074E7-1627-3866-B217-C4CD03E51DB0
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftPassKit.dylib'
-current-version: 1504.1.40
+current-version: 1504.3.7
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]

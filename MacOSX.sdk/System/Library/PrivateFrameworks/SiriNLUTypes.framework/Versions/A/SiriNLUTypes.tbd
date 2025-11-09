@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           97B6B96F-7B41-31A5-AB3E-1EEF0E29DB55
+    value:           A4E675BE-9A14-3900-B1C9-4AA201E2A8E6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A16A0FE3-9FED-3A23-8E50-C3EF74B6B84F
+    value:           E37B3265-0BEE-3038-86C0-8D9924AC0EBD
 install-name:    '/System/Library/PrivateFrameworks/SiriNLUTypes.framework/Versions/A/SiriNLUTypes'
 swift-abi-version: 7
 exports:

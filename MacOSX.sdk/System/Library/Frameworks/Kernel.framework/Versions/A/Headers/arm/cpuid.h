@@ -177,6 +177,23 @@ typedef union {
 #define CPU_PART_FIRESTORM_TONGA    0x23
 
 
+/* H13J e-Core */
+#define CPU_PART_ICESTORM_JADE_CHOP    0x24
+#define CPU_PART_ICESTORM_JADE_DIE     0x28
+
+/* H13J p-Core */
+#define CPU_PART_FIRESTORM_JADE_CHOP   0x25
+#define CPU_PART_FIRESTORM_JADE_DIE    0x29
+
+
+
+/* H14 e-Core */
+#define CPU_PART_BLIZZARD           0x30
+
+/* H14 p-Core */
+#define CPU_PART_AVALANCHE          0x31
+
+
 
 
 

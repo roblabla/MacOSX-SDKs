@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2F8E0FC0-EEFA-3818-A019-7AC21F642CF6
+    value:           3BE3D9B9-FF45-3C35-8415-611BD4FC4A81
   - target:          x86_64-maccatalyst
-    value:           2F8E0FC0-EEFA-3818-A019-7AC21F642CF6
+    value:           3BE3D9B9-FF45-3C35-8415-611BD4FC4A81
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           77C01FF1-2E09-3493-8FEF-BAF3DDCC0930
+    value:           A7E44F10-6FF6-342E-8E66-3811942A0B41
   - target:          arm64e-maccatalyst
-    value:           77C01FF1-2E09-3493-8FEF-BAF3DDCC0930
+    value:           A7E44F10-6FF6-342E-8E66-3811942A0B41
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/ViceroyTrace.framework/Versions/A/ViceroyTrace'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -42,11 +42,11 @@ exports:
                        _reportingRegisterPeriodicTask, _reportingRegisterPeriodicTaskOnQueue, 
                        _reportingRegisterPeriodicTaskWeak, _reportingRegisterSystemStats, 
                        _reportingReleaseObject, _reportingRemoteFrameSize, _reportingSetAggregatorForClientType, 
-                       _reportingSetDigestKey, _reportingSetPeriodicAggregationOccuredHandler, 
-                       _reportingSetUserInfo, _reportingStartTimer, _reportingStopTimer, 
-                       _reportingStreamGroupFromStreamGroupID, _reportingSymptom, 
-                       _reportingSymptomSetCallback, _reportingThermal, _reportingTierLog, 
-                       _reportingUnregisterPeriodicTask, _reportingUploadFileWithName, 
+                       _reportingSetDigestKey, _reportingSetNWActivityReportingEnabled, 
+                       _reportingSetPeriodicAggregationOccuredHandler, _reportingSetUserInfo, 
+                       _reportingStartTimer, _reportingStopTimer, _reportingStreamGroupFromStreamGroupID, 
+                       _reportingSymptom, _reportingSymptomSetCallback, _reportingThermal, 
+                       _reportingTierLog, _reportingUnregisterPeriodicTask, _reportingUploadFileWithName, 
                        _reportingVideoPaused, _reportingVideoProp, _reportingVideoStreamEvent, 
                        _reportingVisualRectangle, _reportingWiFiCallingLogCallEnd, 
                        _reportingWiFiCallingLogCallStart, _reportingWiFiCallingLogMetricSample, 

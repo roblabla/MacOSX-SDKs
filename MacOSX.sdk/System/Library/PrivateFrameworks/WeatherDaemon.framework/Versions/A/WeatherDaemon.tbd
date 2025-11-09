@@ -4,28 +4,29 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           001C544F-C559-3AAC-AFDC-6E66C9D1505B
+    value:           48DFE9F9-8336-3D14-B63F-671826ECF06A
   - target:          x86_64-maccatalyst
-    value:           001C544F-C559-3AAC-AFDC-6E66C9D1505B
+    value:           48DFE9F9-8336-3D14-B63F-671826ECF06A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3DFE7ECF-2FAC-38DC-B1D4-D6A89567A35F
+    value:           0EA63253-45B2-3CB7-8122-12CB654472DA
   - target:          arm64e-maccatalyst
-    value:           3DFE7ECF-2FAC-38DC-B1D4-D6A89567A35F
+    value:           0EA63253-45B2-3CB7-8122-12CB654472DA
 install-name:    '/System/Library/PrivateFrameworks/WeatherDaemon.framework/Versions/A/WeatherDaemon'
-current-version: 92
+current-version: 163
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ ClimateProxy, Polaris, Weather, WeatherAnalytics, WeatherCore, 
-                       WeatherCoreTests, WeatherDaemon, WeatherDaemonTests, WeatherDiagnosticExtension, 
-                       WeatherIntents, WeatherInternalSettings, WeatherKit, WeatherKitTests, 
-                       WeatherSettings, WeatherUI, WeatherUIAutomationTests, WeatherUITests, 
-                       WeatherUnitTests, WeatherWidget, com.apple.weather.appremoval, 
+    clients:         [ ClimateProxy, Feldspar, NewsArticles, NewsArticlesTests, NewsFeed, 
+                       NewsFeedTests, NewsUI2, NewsUI2Tests, Polaris, Weather, WeatherAnalytics, 
+                       WeatherCore, WeatherCoreTests, WeatherDaemon, WeatherDaemonTests, 
+                       WeatherDiagnosticExtension, WeatherIntents, WeatherInternalSettings, 
+                       WeatherKit, WeatherKitTests, WeatherSettings, WeatherUI, WeatherUIAutomationTests, 
+                       WeatherUITests, WeatherUnitTests, WeatherWidget, com.apple.weather.appremoval, 
                        weatherd ]
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -37,7 +38,32 @@ exports:
                        '_$s10Foundation6LocaleV13WeatherDaemonE18languageIdentifierSSvgZ', 
                        '_$s10Foundation8CalendarV13WeatherDaemonE12withTimeZoneyAcA0fG0VF', 
                        '_$s11TeaSettings0B0C13WeatherDaemonEADV07useDemoC4DataAA7SettingCySbGvgZ', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesC0C12DataProviderO07defaultH0yA2ImFWC', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesC0C12DataProviderO13appleForecastyA2ImFWC', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesC0C12DataProviderO3twcyA2ImFWC', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesC0C12DataProviderO8rawValueAISgSS_tcfC', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesC0C12DataProviderO8rawValueSSvg', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesC0C12DataProviderO8rawValueSSvpMV', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesC0C12DataProviderOAA10OptionTypeADMc', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesC0C12DataProviderOAA8SettableADMc', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesC0C12DataProviderOMa', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesC0C12DataProviderOMn', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesC0C12DataProviderON', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesC0C12DataProviderOSHADMc', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesC0C12DataProviderOSQADMc', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesC0C12DataProviderOSYADMc', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesC12providerNameAA7SettingCyAG0C12DataProviderOGvgZ', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesC3key12defaultValue6accessAGSSSg_SbAA6AccessOtcfC', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesC3key12defaultValue6accessAGSSSg_SbAA6AccessOtcfc', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesCMa', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesCMm', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesCMn', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesCMo', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesCMs', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesCfD', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV20AttributionOverridesCfd', 
                        '_$s11TeaSettings0B0C13WeatherDaemonEADV27clearAQIScalesCacheOnLaunchAA7SettingCySbGvgZ', 
+                       '_$s11TeaSettings0B0C13WeatherDaemonEADV28treatmentIdentifierOverridesAA7SettingCySSGvgZ', 
                        '_$s11TeaSettings0B0C13WeatherDaemonEADV7enabledAA7SettingCySbGvgZ', 
                        '_$s11TeaSettings0B0C13WeatherDaemonEADVMa', '_$s11TeaSettings0B0C13WeatherDaemonEADVMn', 
                        '_$s11TeaSettings0B0C13WeatherDaemonEADVN', '_$s11TeaSettings6DomainO13WeatherDaemonE15weatherInternalACvgZ', 
@@ -400,13 +426,15 @@ exports:
                        '_$s13WeatherDaemon0A17DataProxyResponseCN', '_$s13WeatherDaemon0A17DataProxyResponseCfD', 
                        '_$s13WeatherDaemon0A18DataRequestOptionsV11countryCodeSSSgvg', 
                        '_$s13WeatherDaemon0A18DataRequestOptionsV11countryCodeSSSgvpMV', 
+                       '_$s13WeatherDaemon0A18DataRequestOptionsV20treatmentIdentifiersSays5Int64VGvg', 
+                       '_$s13WeatherDaemon0A18DataRequestOptionsV20treatmentIdentifiersSays5Int64VGvpMV', 
                        '_$s13WeatherDaemon0A18DataRequestOptionsV24locationDecimalPrecisionSiSgvg', 
                        '_$s13WeatherDaemon0A18DataRequestOptionsV24locationDecimalPrecisionSiSgvpMV', 
                        '_$s13WeatherDaemon0A18DataRequestOptionsV4fromACs7Decoder_p_tKcfC', 
                        '_$s13WeatherDaemon0A18DataRequestOptionsV5unitsAA5UnitsOvg', 
                        '_$s13WeatherDaemon0A18DataRequestOptionsV5unitsAA5UnitsOvpMV', 
                        '_$s13WeatherDaemon0A18DataRequestOptionsV6encode2toys7Encoder_p_tKF', 
-                       '_$s13WeatherDaemon0A18DataRequestOptionsV8language5units11countryCode24locationDecimalPrecisionACSS_AA5UnitsOSSSgSiSgtcfC', 
+                       '_$s13WeatherDaemon0A18DataRequestOptionsV8language5units11countryCode24locationDecimalPrecision20treatmentIdentifiersACSS_AA5UnitsOSSSgSiSgSays5Int64VGtcfC', 
                        '_$s13WeatherDaemon0A18DataRequestOptionsV8languageSSvg', 
                        '_$s13WeatherDaemon0A18DataRequestOptionsV8languageSSvpMV', 
                        '_$s13WeatherDaemon0A18DataRequestOptionsVMa', '_$s13WeatherDaemon0A18DataRequestOptionsVMn', 
@@ -1078,8 +1106,10 @@ exports:
                        '_$s13WeatherDaemon16NextHourForecastVMa', '_$s13WeatherDaemon16NextHourForecastVMn', 
                        '_$s13WeatherDaemon16NextHourForecastVN', '_$s13WeatherDaemon16NextHourForecastVSEAAMc', 
                        '_$s13WeatherDaemon16NextHourForecastVSeAAMc', '_$s13WeatherDaemon16WDSAuthenticatorC15createSignature4withAA12WDSSignatureVAA24WDSAuthenticationContextV_tKF', 
-                       '_$s13WeatherDaemon16WDSAuthenticatorCACycfC', '_$s13WeatherDaemon16WDSAuthenticatorCACycfCTj', 
-                       '_$s13WeatherDaemon16WDSAuthenticatorCACycfCTq', '_$s13WeatherDaemon16WDSAuthenticatorCACycfc', 
+                       '_$s13WeatherDaemon16WDSAuthenticatorC25signatureRoundingIntervalACSi_tcfC', 
+                       '_$s13WeatherDaemon16WDSAuthenticatorC25signatureRoundingIntervalACSi_tcfCTj', 
+                       '_$s13WeatherDaemon16WDSAuthenticatorC25signatureRoundingIntervalACSi_tcfCTq', 
+                       '_$s13WeatherDaemon16WDSAuthenticatorC25signatureRoundingIntervalACSi_tcfc', 
                        '_$s13WeatherDaemon16WDSAuthenticatorCMa', '_$s13WeatherDaemon16WDSAuthenticatorCMm', 
                        '_$s13WeatherDaemon16WDSAuthenticatorCMn', '_$s13WeatherDaemon16WDSAuthenticatorCMo', 
                        '_$s13WeatherDaemon16WDSAuthenticatorCMu', '_$s13WeatherDaemon16WDSAuthenticatorCN', 
@@ -1126,12 +1156,14 @@ exports:
                        '_$s13WeatherDaemon17ForecastConditionV13shortTemplateSSvpMV', 
                        '_$s13WeatherDaemon17ForecastConditionV13shortTemplateSSvs', 
                        '_$s13WeatherDaemon17ForecastConditionV4fromACs7Decoder_p_tKcfC', 
+                       '_$s13WeatherDaemon17ForecastConditionV5tokenSSSgvM', '_$s13WeatherDaemon17ForecastConditionV5tokenSSSgvg', 
+                       '_$s13WeatherDaemon17ForecastConditionV5tokenSSSgvpMV', '_$s13WeatherDaemon17ForecastConditionV5tokenSSSgvs', 
                        '_$s13WeatherDaemon17ForecastConditionV6encode2toys7Encoder_p_tKF', 
                        '_$s13WeatherDaemon17ForecastConditionV7endTime10Foundation4DateVSgvM', 
                        '_$s13WeatherDaemon17ForecastConditionV7endTime10Foundation4DateVSgvg', 
                        '_$s13WeatherDaemon17ForecastConditionV7endTime10Foundation4DateVSgvpMV', 
                        '_$s13WeatherDaemon17ForecastConditionV7endTime10Foundation4DateVSgvs', 
-                       '_$s13WeatherDaemon17ForecastConditionV9startTime03endF012longTemplate05shortI010parametersAC10Foundation4DateV_AKSgS2SSDySSAKGtcfC', 
+                       '_$s13WeatherDaemon17ForecastConditionV9startTime03endF012longTemplate05shortI010parameters5tokenAC10Foundation4DateV_ALSgS2SSDySSALGSSSgtcfC', 
                        '_$s13WeatherDaemon17ForecastConditionV9startTime10Foundation4DateVvM', 
                        '_$s13WeatherDaemon17ForecastConditionV9startTime10Foundation4DateVvg', 
                        '_$s13WeatherDaemon17ForecastConditionV9startTime10Foundation4DateVvpMV', 
@@ -1177,9 +1209,11 @@ exports:
                        '_$s13WeatherDaemon18NetworkMonitorTypeP17activityPublisher7Combine03AnyG0VyAA17TelemetryActivityOs5NeverOGvgTq', 
                        '_$s13WeatherDaemon18NetworkMonitorTypeP3logyyAA17TelemetryActivityOFTj', 
                        '_$s13WeatherDaemon18NetworkMonitorTypeP3logyyAA17TelemetryActivityOFTq', 
-                       '_$s13WeatherDaemon18NetworkMonitorTypeTL', '_$s13WeatherDaemon18XPCActivityManagerC16registerActivity_7handleryAA0C0V_AA0C11HandlerType_ptF', 
+                       '_$s13WeatherDaemon18NetworkMonitorTypeTL', '_$s13WeatherDaemon18XPCActivityManagerC10unregisteryySayAA0C0VGFZ', 
+                       '_$s13WeatherDaemon18XPCActivityManagerC16registerActivity_7handleryAA0C0V_AA0C11HandlerType_ptF', 
                        '_$s13WeatherDaemon18XPCActivityManagerC16scheduleActivity_2onyAA0C0V_10Foundation4DateVtF', 
                        '_$s13WeatherDaemon18XPCActivityManagerC18unscheduleActivityyyAA0C0VF', 
+                       '_$s13WeatherDaemon18XPCActivityManagerC5defer_10completionySayAA0C0VG_yyctFZ', 
                        '_$s13WeatherDaemon18XPCActivityManagerC7checkInyyF', '_$s13WeatherDaemon18XPCActivityManagerCAA0cD4TypeAAMc', 
                        '_$s13WeatherDaemon18XPCActivityManagerCAA0cD4TypeAAWP', '_$s13WeatherDaemon18XPCActivityManagerCACycfC', 
                        '_$s13WeatherDaemon18XPCActivityManagerCACycfCTj', '_$s13WeatherDaemon18XPCActivityManagerCACycfCTq', 
@@ -1604,10 +1638,22 @@ exports:
                        '_$sSo22CLLocationCoordinate2DV13WeatherDaemonE2idSSvg', '_$sSo22CLLocationCoordinate2DV13WeatherDaemonE2idSSvpMV', 
                        '_$sSo22CLLocationCoordinate2DV13WeatherDaemonE4path4withSSSiSg_tF', 
                        '_$sSo22CLLocationCoordinate2DVs12Identifiable13WeatherDaemonMc', 
-                       _WDDeviceUnlockedSinceBoot, _WDSystemDirectoryDirectoryPath, 
-                       _WDUserAccountHomeDirectoryPath, _WDWeatherLibraryDirectory, 
-                       _WeatherDaemonVersionNumber, _WeatherDaemonVersionString, 
-                       _wd_xpc_dictionary_set_requires_network_connectivity ]
+                       '_$sSo25NSURLSessionConfigurationC13WeatherDaemonE04makec7SessionB011serviceTypeA2bCE07ServiceH0O_tFZ', 
+                       '_$sSo25NSURLSessionConfigurationC13WeatherDaemonE11ServiceTypeO010weatherMapE0yA2EmFWC', 
+                       '_$sSo25NSURLSessionConfigurationC13WeatherDaemonE11ServiceTypeO011weatherDataE0yA2EmFWC', 
+                       '_$sSo25NSURLSessionConfigurationC13WeatherDaemonE11ServiceTypeO2eeoiySbAE_AEtFZ', 
+                       '_$sSo25NSURLSessionConfigurationC13WeatherDaemonE11ServiceTypeO4hash4intoys6HasherVz_tF', 
+                       '_$sSo25NSURLSessionConfigurationC13WeatherDaemonE11ServiceTypeO9hashValueSivg', 
+                       '_$sSo25NSURLSessionConfigurationC13WeatherDaemonE11ServiceTypeO9hashValueSivpMV', 
+                       '_$sSo25NSURLSessionConfigurationC13WeatherDaemonE11ServiceTypeOMa', 
+                       '_$sSo25NSURLSessionConfigurationC13WeatherDaemonE11ServiceTypeOMn', 
+                       '_$sSo25NSURLSessionConfigurationC13WeatherDaemonE11ServiceTypeON', 
+                       '_$sSo25NSURLSessionConfigurationC13WeatherDaemonE11ServiceTypeOSHACMc', 
+                       '_$sSo25NSURLSessionConfigurationC13WeatherDaemonE11ServiceTypeOSQACMc', 
+                       _WDDeviceUnlockedSinceBoot, _WDOSPlatform, _WDSystemDirectoryDirectoryPath, 
+                       _WDUserAccountHomeDirectoryPath, _WDWeatherAppIsInstalled, 
+                       _WDWeatherLibraryDirectory, _WeatherDaemonVersionNumber, _WeatherDaemonVersionString, 
+                       _wd_xpc_dictionary_set_requires_network_connectivity, _wd_xpc_transaction_exit_clean ]
     objc-classes:    [ _TtC13WeatherDaemon23WeatherDataProxyRequest, _TtC13WeatherDaemon23WeatherDataServiceProxy, 
                        _TtC13WeatherDaemon24AvailabilityProxyRequest, _TtC13WeatherDaemon24WeatherDataProxyResponse, 
                        _TtC13WeatherDaemon25AvailabilityProxyResponse, _TtC13WeatherDaemon27AirQualityScaleProxyRequest, 

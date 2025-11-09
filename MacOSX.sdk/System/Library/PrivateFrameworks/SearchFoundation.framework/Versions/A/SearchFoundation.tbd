@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           47C132FC-2AE4-391A-88C8-5526D753E37F
+    value:           F1B54A8F-9CDB-33CA-8DDC-B66894DE31AD
   - target:          x86_64-maccatalyst
-    value:           47C132FC-2AE4-391A-88C8-5526D753E37F
+    value:           F1B54A8F-9CDB-33CA-8DDC-B66894DE31AD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           100432B0-4833-30FD-9070-18D226807BC9
+    value:           59F4ABA3-F985-34F4-9A92-BAB0156723C3
   - target:          arm64e-maccatalyst
-    value:           100432B0-4833-30FD-9070-18D226807BC9
+    value:           59F4ABA3-F985-34F4-9A92-BAB0156723C3
 install-name:    '/System/Library/PrivateFrameworks/SearchFoundation.framework/Versions/A/SearchFoundation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -56,8 +56,8 @@ exports:
                        __SFPBHeroCardSectionReadFrom, __SFPBHorizontalButtonCardSectionReadFrom, 
                        __SFPBHorizontalScrollCardSectionReadFrom, __SFPBImageCopyItemReadFrom, 
                        __SFPBImageOptionReadFrom, __SFPBImageReadFrom, __SFPBImagesCardSectionReadFrom, 
-                       __SFPBIndexedUserActivityCommandReadFrom, __SFPBInfoCardSectionReadFrom, 
-                       __SFPBInfoTupleReadFrom, __SFPBInvokeSiriCommandReadFrom, 
+                       __SFPBIndexStateReadFrom, __SFPBIndexedUserActivityCommandReadFrom, 
+                       __SFPBInfoCardSectionReadFrom, __SFPBInfoTupleReadFrom, __SFPBInvokeSiriCommandReadFrom, 
                        __SFPBKeyValueDataCardSectionReadFrom, __SFPBKeyValueTupleReadFrom, 
                        __SFPBLatLngReadFrom, __SFPBLaunchAppCommandReadFrom, __SFPBLinkPresentationCardSectionReadFrom, 
                        __SFPBListenToCardSectionReadFrom, __SFPBLocalImageReadFrom, 
@@ -74,15 +74,16 @@ exports:
                        __SFPBOpenAppClipCommandReadFrom, __SFPBOpenCalculationCommandReadFrom, 
                        __SFPBOpenCoreSpotlightItemCommandReadFrom, __SFPBOpenFileProviderItemCommandReadFrom, 
                        __SFPBOpenMediaCommandReadFrom, __SFPBOpenPunchoutCommandReadFrom, 
-                       __SFPBOpenWebClipCommandReadFrom, __SFPBPerformContactQueryCommandReadFrom, 
-                       __SFPBPerformEntityQueryCommandReadFrom, __SFPBPerformIntentCommandReadFrom, 
-                       __SFPBPerformPersonEntityQueryCommandReadFrom, __SFPBPersonHeaderCardSectionReadFrom, 
-                       __SFPBPersonReadFrom, __SFPBPhotosLibraryImageReadFrom, __SFPBPinReadFrom, 
-                       __SFPBPlayMediaCommandReadFrom, __SFPBPlayVideoCommandReadFrom, 
-                       __SFPBPointSizeHandwrittenTranslator, __SFPBPointSizeReadFrom, 
-                       __SFPBProductAvailabilityReadFrom, __SFPBProductCardSectionReadFrom, 
-                       __SFPBProductInventoryReadFrom, __SFPBProductInventoryResultReadFrom, 
-                       __SFPBProductReadFrom, __SFPBPunchoutReadFrom, __SFPBQuickLookThumbnailImageReadFrom, 
+                       __SFPBOpenWebClipCommandReadFrom, __SFPBPerformContactActionCommandReadFrom, 
+                       __SFPBPerformContactQueryCommandReadFrom, __SFPBPerformEntityQueryCommandReadFrom, 
+                       __SFPBPerformIntentCommandReadFrom, __SFPBPerformPersonEntityQueryCommandReadFrom, 
+                       __SFPBPersonHeaderCardSectionReadFrom, __SFPBPersonReadFrom, 
+                       __SFPBPhotosLibraryImageReadFrom, __SFPBPinReadFrom, __SFPBPlayMediaCommandReadFrom, 
+                       __SFPBPlayVideoCommandReadFrom, __SFPBPointSizeHandwrittenTranslator, 
+                       __SFPBPointSizeReadFrom, __SFPBProductAvailabilityReadFrom, 
+                       __SFPBProductCardSectionReadFrom, __SFPBProductInventoryReadFrom, 
+                       __SFPBProductInventoryResultReadFrom, __SFPBProductReadFrom, 
+                       __SFPBPunchoutReadFrom, __SFPBQuickLookThumbnailImageReadFrom, 
                        __SFPBReferentialCommandReadFrom, __SFPBRequestAppClipInstallCommandReadFrom, 
                        __SFPBRequestUserReportCommandReadFrom, __SFPBResponseWrapperCardSectionReadFrom, 
                        __SFPBRichTextReadFrom, __SFPBRichTitleCardSectionReadFrom, 
@@ -136,7 +137,7 @@ exports:
                        SFFlight, SFFlightCardSection, SFFlightLeg, SFFormattedText, 
                        SFGridCardSection, SFHeroCardSection, SFHorizontalButtonCardSection, 
                        SFHorizontalScrollCardSection, SFImage, SFImageContext, SFImageCopyItem, 
-                       SFImageOption, SFImagesCardSection, SFIndexedUserActivityCommand, 
+                       SFImageOption, SFImagesCardSection, SFIndexState, SFIndexedUserActivityCommand, 
                        SFInfoCardSection, SFInfoTuple, SFInvokeSiriCommand, SFKeyValueDataCardSection, 
                        SFKeyValueTuple, SFLatLng, SFLateSectionsAppendedFeedback, 
                        SFLaunchAppCommand, SFLinkPresentationCardSection, SFListenToCardSection, 
@@ -151,8 +152,9 @@ exports:
                        SFNowPlayingCardSection, SFNullCardSection, SFOpenAppClipCommand, 
                        SFOpenCalculationCommand, SFOpenCoreSpotlightItemCommand, 
                        SFOpenFileProviderItemCommand, SFOpenMediaCommand, SFOpenPunchoutCommand, 
-                       SFOpenWebClipCommand, SFPBSerialization, SFPerformContactQueryCommand, 
-                       SFPerformEntityQueryCommand, SFPerformIntentCommand, SFPerformPersonEntityQueryCommand, 
+                       SFOpenWebClipCommand, SFPBSerialization, SFPerformContactActionCommand, 
+                       SFPerformContactQueryCommand, SFPerformEntityQueryCommand, 
+                       SFPerformIntentCommand, SFPerformPersonEntityQueryCommand, 
                        SFPerson, SFPersonHeaderCardSection, SFPhotosLibraryImage, 
                        SFPin, SFPlayMediaCommand, SFPlayVideoCommand, SFProduct, 
                        SFProductAvailability, SFProductCardSection, SFProductInventory, 
@@ -204,9 +206,9 @@ exports:
                        _SFPBGraphicalFloat, _SFPBGridCardSection, _SFPBHeroCardSection, 
                        _SFPBHorizontalButtonCardSection, _SFPBHorizontalScrollCardSection, 
                        _SFPBImage, _SFPBImageCopyItem, _SFPBImageOption, _SFPBImagesCardSection, 
-                       _SFPBIndexedUserActivityCommand, _SFPBInfoCardSection, _SFPBInfoTuple, 
-                       _SFPBInvokeSiriCommand, _SFPBKeyValueDataCardSection, _SFPBKeyValueTuple, 
-                       _SFPBLatLng, _SFPBLaunchAppCommand, _SFPBLinkPresentationCardSection, 
+                       _SFPBIndexState, _SFPBIndexedUserActivityCommand, _SFPBInfoCardSection, 
+                       _SFPBInfoTuple, _SFPBInvokeSiriCommand, _SFPBKeyValueDataCardSection, 
+                       _SFPBKeyValueTuple, _SFPBLatLng, _SFPBLaunchAppCommand, _SFPBLinkPresentationCardSection, 
                        _SFPBListenToCardSection, _SFPBLocalImage, _SFPBMapCardSection, 
                        _SFPBMapPlaceCardSection, _SFPBMapRegion, _SFPBMapsDetailedRowCardSection, 
                        _SFPBMediaArtworkImage, _SFPBMediaDetail, _SFPBMediaInfoCardSection, 
@@ -217,16 +219,17 @@ exports:
                        _SFPBNewsCardSection, _SFPBNowPlayingCardSection, _SFPBOpenAppClipCommand, 
                        _SFPBOpenCalculationCommand, _SFPBOpenCoreSpotlightItemCommand, 
                        _SFPBOpenFileProviderItemCommand, _SFPBOpenMediaCommand, _SFPBOpenPunchoutCommand, 
-                       _SFPBOpenWebClipCommand, _SFPBPerformContactQueryCommand, 
-                       _SFPBPerformEntityQueryCommand, _SFPBPerformIntentCommand, 
-                       _SFPBPerformPersonEntityQueryCommand, _SFPBPerson, _SFPBPersonHeaderCardSection, 
-                       _SFPBPhotosLibraryImage, _SFPBPin, _SFPBPlayMediaCommand, 
-                       _SFPBPlayVideoCommand, _SFPBPointSize, _SFPBProduct, _SFPBProductAvailability, 
-                       _SFPBProductCardSection, _SFPBProductInventory, _SFPBProductInventoryResult, 
-                       _SFPBPunchout, _SFPBQuickLookThumbnailImage, _SFPBReferentialCommand, 
-                       _SFPBRequestAppClipInstallCommand, _SFPBRequestUserReportCommand, 
-                       _SFPBResponseWrapperCardSection, _SFPBRichText, _SFPBRichTitleCardSection, 
-                       _SFPBRowCardSection, _SFPBRunVoiceShortcutCommand, _SFPBScoreboardCardSection, 
+                       _SFPBOpenWebClipCommand, _SFPBPerformContactActionCommand, 
+                       _SFPBPerformContactQueryCommand, _SFPBPerformEntityQueryCommand, 
+                       _SFPBPerformIntentCommand, _SFPBPerformPersonEntityQueryCommand, 
+                       _SFPBPerson, _SFPBPersonHeaderCardSection, _SFPBPhotosLibraryImage, 
+                       _SFPBPin, _SFPBPlayMediaCommand, _SFPBPlayVideoCommand, _SFPBPointSize, 
+                       _SFPBProduct, _SFPBProductAvailability, _SFPBProductCardSection, 
+                       _SFPBProductInventory, _SFPBProductInventoryResult, _SFPBPunchout, 
+                       _SFPBQuickLookThumbnailImage, _SFPBReferentialCommand, _SFPBRequestAppClipInstallCommand, 
+                       _SFPBRequestUserReportCommand, _SFPBResponseWrapperCardSection, 
+                       _SFPBRichText, _SFPBRichTitleCardSection, _SFPBRowCardSection, 
+                       _SFPBRunVoiceShortcutCommand, _SFPBScoreboardCardSection, 
                        _SFPBSearchInAppCommand, _SFPBSearchSuggestion, _SFPBSearchWebCommand, 
                        _SFPBSectionHeaderCardSection, _SFPBSelectableGridCardSection, 
                        _SFPBShareCommand, _SFPBShareItem, _SFPBShowAppStoreSheetCommand, 

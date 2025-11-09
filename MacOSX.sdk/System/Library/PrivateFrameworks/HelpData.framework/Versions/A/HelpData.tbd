@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           13A8AF0B-B621-3939-9B4E-6524EA70BBE9
+    value:           976A391C-5BAF-347F-B328-2EE02F6E9AB7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6C819239-FF1E-3763-B011-4D11CDFD0740
+    value:           C28C0853-D2A4-3CF3-A72F-27AFEB4BA6E1
 install-name:    '/System/Library/PrivateFrameworks/HelpData.framework/Versions/A/HelpData'
-current-version: 210
+current-version: 213
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DDMAppleDomain, _DDMAssetURLProtocolRequest, _DDMBookConfigKeyAppBundleID, 
@@ -78,11 +78,11 @@ exports:
                        _HVTaskType, _HVTopicTemplateFileName, _HVURLAnchorCommand, 
                        _HVURLBookIDKey, _HVURLBookmarkCommand, _HVURLOpenbookCommand, 
                        _HVURLSchemeHTTP, _HVURLSchemeHTTPS, _HVURLSchemeHelp, _HVURLSchemeHelpWithColon, 
-                       _HVUnknownString, _bookIDVersionNeedsUpdate, _clientPortNameForThisTask, 
-                       _getVersionFromAppBundle, _getVersionFromAppBundleURL, _getVersionedBookIDFromAppBundle, 
-                       _helpDirSort, _isVersionedBookID, _kHPDAuthenticationNetworkStateDidChangeNotification, 
-                       _kHPDAuthenticationUserSignInNotification, _kHPDAuthenticationUserSignOutNotification, 
-                       _versionedBookID ]
+                       _HVUnknownString, _WK_DDMAssetURLProtocolRequest, _bookIDVersionNeedsUpdate, 
+                       _clientPortNameForThisTask, _getVersionFromAppBundle, _getVersionFromAppBundleURL, 
+                       _getVersionedBookIDFromAppBundle, _helpDirSort, _isVersionedBookID, 
+                       _kHPDAuthenticationNetworkStateDidChangeNotification, _kHPDAuthenticationUserSignInNotification, 
+                       _kHPDAuthenticationUserSignOutNotification, _versionedBookID ]
     objc-classes:    [ DDMAssetURLProtocol, DDMAssetURLProtocolCoordinator, DDMAssetURLProtocolDelegate, 
                        DDMAssetURLProtocolOperation, DDMAssetURLSessionManager, DDMBook, 
                        DDMConfig, DDMContext, DDMInfo, DDMMeta, DDMMisc, DDMObject, 

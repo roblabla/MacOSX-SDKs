@@ -6,11 +6,14 @@
 //  Copyright © 2018-2019 Apple Inc. All rights reserved.
 //
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKitDefines.h>
 #import <UIKit/UICollectionView.h>
 #import <UIKit/UITableView.h>
 #import <UIKit/NSDiffableDataSourceSectionSnapshot.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
 // A NSDiffableDataSourceSnapshot represents the complete state of a UI element (e.g. UICollectionView)
 //
@@ -83,6 +86,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0))
 - (void)reloadSectionsWithIdentifiers:(NSArray<SectionIdentifierType>*)sectionIdentifiers;
 
 @end
+
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
 typedef UICollectionViewCell * _Nullable (^UICollectionViewDiffableDataSourceCellProvider)(UICollectionView * _Nonnull collectionView, NSIndexPath * _Nonnull indexPath, id _Nonnull itemIdentifier);
 typedef UICollectionReusableView * _Nullable (^UICollectionViewDiffableDataSourceSupplementaryViewProvider)(UICollectionView* _Nonnull collectionView, NSString * _Nonnull elementKind, NSIndexPath * _Nonnull indexPath);

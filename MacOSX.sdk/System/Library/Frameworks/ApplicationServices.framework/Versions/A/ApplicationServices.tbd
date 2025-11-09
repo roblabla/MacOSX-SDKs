@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C8664930-8F24-3146-9737-46785881BB67
+    value:           3AA5C213-212E-3507-A883-DA77A0D28161
   - target:          x86_64-maccatalyst
-    value:           C8664930-8F24-3146-9737-46785881BB67
+    value:           3AA5C213-212E-3507-A883-DA77A0D28161
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4E5B754F-7B44-356F-AA0C-68105686EDB9
+    value:           6CAF83A4-1277-3B59-98BA-161D2F7775D5
   - target:          arm64e-maccatalyst
-    value:           4E5B754F-7B44-356F-AA0C-68105686EDB9
+    value:           6CAF83A4-1277-3B59-98BA-161D2F7775D5
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices'
 current-version: 56
 reexported-libraries:
@@ -41,17 +41,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FE447E14-99A9-3C95-A06E-169D301D65A0
+    value:           F15EDF15-EC33-32A7-A042-28E4CE5410CA
   - target:          x86_64-maccatalyst
-    value:           FE447E14-99A9-3C95-A06E-169D301D65A0
+    value:           F15EDF15-EC33-32A7-A042-28E4CE5410CA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6214491F-6B56-364A-8E13-C3CE33FB17B7
+    value:           C74B12BC-1345-323D-8FD5-6157E189F800
   - target:          arm64e-maccatalyst
-    value:           6214491F-6B56-364A-8E13-C3CE33FB17B7
+    value:           C74B12BC-1345-323D-8FD5-6157E189F800
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS'
 current-version: 236
 parent-umbrella:
@@ -211,11 +211,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AB70CAE8-D0BD-3BAD-93A6-A73A69D710AD
+    value:           38BF232D-749E-3BA2-B156-1DE24057ADC9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F818E058-2CCC-367A-A26B-BAEE50D48E45
+    value:           8CF2ABB1-B43A-3326-8884-8D229D0E24DB
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATSUI.framework/Versions/A/ATSUI'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -279,11 +279,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3CE462B7-062B-3C87-B9D6-4A32B6DC5E30
+    value:           00FF93FE-A887-314A-B760-076F7ED60BB6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A86E772C-1275-33FD-8BF1-74B292AEC3E0
+    value:           404D58D0-4CED-3EF2-8820-9B62E41FBD06
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSyncLegacy.framework/Versions/A/ColorSyncLegacy'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -342,13 +342,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D77D814A-352E-3666-8AEC-8FA7540BFF4B
+    value:           D8B67D06-A916-3E96-969F-6667A640B18A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0D2CEC8F-7C9B-37CD-8D4D-9F1A2F9F6A2F
+    value:           1032F4D5-C154-3003-83AB-7BB3E5AFA130
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices'
-current-version: 736
+current-version: 739.1
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
@@ -460,9 +460,10 @@ exports:
                        _HIS_XPC_CFNotificationCenterPostNotification, _HIS_XPC_CFPreferencesCopyValue, 
                        _HIS_XPC_CFPreferencesSetValue, _HIS_XPC_CFPreferencesSynchronize, 
                        _HIS_XPC_CopyCapsLockKeyLabel, _HIS_XPC_CopyMacManagerPrefs, 
-                       _HIS_XPC_GetApplicationPolicyForURLs, _HIS_XPC_GetCapsLockLanguageSwitch, 
-                       _HIS_XPC_GetCapsLockModifierState, _HIS_XPC_GetGlobeKeyAvailability, 
-                       _HIS_XPC_GetMicKeyAvailability, _HIS_XPC_RevealFileInFinder, 
+                       _HIS_XPC_CopyPrimaryKeyboardLanguage, _HIS_XPC_GetApplicationPolicyForURLs, 
+                       _HIS_XPC_GetCapsLockLanguageSwitch, _HIS_XPC_GetCapsLockModifierState, 
+                       _HIS_XPC_GetGlobeKeyAvailability, _HIS_XPC_GetMicKeyAvailability, 
+                       _HIS_XPC_ResetMessageConnection, _HIS_XPC_RevealFileInFinder, 
                        _HIS_XPC_SendAppleEventToSystemProcess, _HIS_XPC_SetCapsLockDelayOverride, 
                        _HIS_XPC_SetCapsLockLED, _HIS_XPC_SetCapsLockLEDInhibit, _HIS_XPC_SetCapsLockModifierState, 
                        _HIS_XPC_SetNetworkLocation, _HIShapeContainsPoint, _HIShapeCreateCopy, 
@@ -585,18 +586,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A4909ACA-C4EA-3B4B-93D9-EA6E8F5E833A
+    value:           7CC8FCA8-1B6C-341B-B9E6-97B61CE45D4F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0C3892EC-4840-3AEB-A3EE-9EB22C85193B
+    value:           7C5732D2-DD61-3434-9722-4B4788DDDA52
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore'
-current-version: 541
+current-version: 544
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _CPLAutoSelectCancel, _CPLAutoSelectCreateContext, _CPLAutoSelectGetInfo, 
                        _CPLAutoSelectHasNewPPD, _CPLAutoSelectInstallableOptions, 
                        _CPLAutoSelectPPD, _CPLAutoSelectReleaseContext, _CPLAutoSelectSetIsBinaryOK, 
@@ -764,11 +765,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           12F18319-25EB-3167-BCD6-B7EB9B287395
+    value:           14F5DD47-EAE9-3EE9-B7C2-1F5F2052019B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B37B1352-FEEF-32C7-82A4-1CB99C0589D3
+    value:           57462D0B-FDD1-34B5-836D-4444DC66E303
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1163,11 +1164,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           85C29E57-BF98-3287-BE6F-6BDA686FE1E8
+    value:           2EA5BE1A-A2CC-39F6-A88D-8C5A38A3BEDD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7B92E6A4-02BF-361C-BA45-12AA760EE832
+    value:           9F7E93B7-C73D-3A47-9189-84784E2CBA36
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1176,7 +1177,8 @@ exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CancelSpokenNotification, _CancelSpokenNotificationForProcess, 
                        _CancelTalkingAlert, _ContinueSpeech, _CopyAvailableIntervals, 
-                       _CopyAvailablePhrases, _CopyIdentifierStringForVoiceSpec, 
+                       _CopyAvailablePhrases, _CopyIdentifierStringForPreferredVoiceInListWithLocale, 
+                       _CopyIdentifierStringForPreferredVoiceWithLocale, _CopyIdentifierStringForVoiceSpec, 
                        _CopyPhonemesFromText, _CopySpeechProperty, _CopySpeechSynthesisVoicesForMode, 
                        _CopyTimeAnnouncementsPreferences, _CountVoices, _CreateSpeechLanguageLocale, 
                        _DisposeSpeechChannel, _GetIdentifierStringForPreferredVoiceInListWithLocale, 
@@ -1244,20 +1246,18 @@ exports:
                        _kSpeechWordCallBack, _kVoiceIndividuallySpokenCharacters, 
                        _kVoiceSupportedCharacters ]
   - targets:         [ arm64e-macos, arm64-macos ]
-    symbols:         [ _CancelTalkingAlertForPID, _CopyIdentifierStringForPreferredVoiceInListWithLocale, 
-                       _CopyIdentifierStringForPreferredVoiceWithLocale, _DisposeServerConnection, 
-                       _DisposeSpeechDoneUPP, _DisposeSpeechErrorUPP, _DisposeSpeechPhonemeUPP, 
-                       _DisposeSpeechSyncUPP, _DisposeSpeechTextDoneUPP, _DisposeSpeechWordUPP, 
-                       _InitServerConnection, _InvokeSpeechDoneUPP, _InvokeSpeechErrorUPP, 
-                       _InvokeSpeechPhonemeUPP, _InvokeSpeechSyncUPP, _InvokeSpeechTextDoneUPP, 
-                       _InvokeSpeechWordUPP, _IsAppAlreadyRunning, _IsValueCArrayOK, 
-                       _MTUOpenResourceFile, _MTUReadResourceDataFile, _NewSpeechDoneUPP, 
-                       _NewSpeechErrorUPP, _NewSpeechPhonemeUPP, _NewSpeechSyncUPP, 
-                       _NewSpeechTextDoneUPP, _NewSpeechWordUPP, _SendMessagePrimitive, 
-                       _SendMessageToServer, _StartServerConnection, _TTSIsSpeakingSelection_XPC, 
-                       _TTSStartSpeakingSelectionWithString_XPC, _TTSStartSpeakingSelection_XPC, 
-                       _TTSStopSpeakingSelection_XPC, __Z16UseDictionaryPtrP19SpeechChannelRecordPKvm, 
-                       __Z36SetPreferredVoiceIdentifierForLocalePK10__CFLocalePK10__CFString, 
+    symbols:         [ _CancelTalkingAlertForPID, _DisposeServerConnection, _DisposeSpeechDoneUPP, 
+                       _DisposeSpeechErrorUPP, _DisposeSpeechPhonemeUPP, _DisposeSpeechSyncUPP, 
+                       _DisposeSpeechTextDoneUPP, _DisposeSpeechWordUPP, _InitServerConnection, 
+                       _InvokeSpeechDoneUPP, _InvokeSpeechErrorUPP, _InvokeSpeechPhonemeUPP, 
+                       _InvokeSpeechSyncUPP, _InvokeSpeechTextDoneUPP, _InvokeSpeechWordUPP, 
+                       _IsAppAlreadyRunning, _IsValueCArrayOK, _MTUOpenResourceFile, 
+                       _MTUReadResourceDataFile, _NewSpeechDoneUPP, _NewSpeechErrorUPP, 
+                       _NewSpeechPhonemeUPP, _NewSpeechSyncUPP, _NewSpeechTextDoneUPP, 
+                       _NewSpeechWordUPP, _SendMessagePrimitive, _SendMessageToServer, 
+                       _StartServerConnection, _TTSIsSpeakingSelection_XPC, _TTSStartSpeakingSelectionWithString_XPC, 
+                       _TTSStartSpeakingSelection_XPC, _TTSStopSpeakingSelection_XPC, 
+                       __Z16UseDictionaryPtrP19SpeechChannelRecordPKvm, __Z36SetPreferredVoiceIdentifierForLocalePK10__CFLocalePK10__CFString, 
                        __Z37CopyPreferredVoiceIdentifierForLocalePK10__CFLocale, 
                        __ZN13SpeechGlobals11CopyVoiceIDEPK9VoiceSpecPPK10__CFString, 
                        __ZN13SpeechGlobals13CopyVoicePathEPK9VoiceSpecPPK10__CFString, 

@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F874D9A4-5306-3EE8-B680-2E7E2C92C928
+    value:           E1CCA72A-11FC-3F8F-86E7-13891DFD8A00
   - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
+    value:           290592EF-EB4A-38BD-8636-A56694D06F73
   - target:          arm64e-macos
-    value:           29DAE32A-A51A-3D79-A35E-605E22E383AE
+    value:           C4C5BD96-1E0C-3046-A7B7-3F1D6FEC9FCF
 install-name:    '/usr/lib/libFDR.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos ]
     symbols:         [ _AMFDRAppendPermissionsString, _AMFDRCertificateSigningRequest, 
                        _AMFDRCertificationRequest, _AMFDRClearMemoryStore, _AMFDRCopyClientId, 
                        _AMFDRCopyDeviceKeys, _AMFDRCopyDisposableKeys, _AMFDRCopyLibraryVersionString, 
@@ -23,10 +23,11 @@ exports:
                        _AMFDRDataApTicketPopulate, _AMFDRDataAppendPermissionsString, 
                        _AMFDRDataCopy, _AMFDRDataCopyDigest, _AMFDRDataCopyManifest, 
                        _AMFDRDataCopyRawAndFormatted, _AMFDRDataCopySealingManifestProperty, 
-                       _AMFDRDataCopySslRoots, _AMFDRDataCopyTrustObject, _AMFDRDataCreatePermissionsString, 
-                       _AMFDRDataCreateSikInstanceString, _AMFDRDataDelete, _AMFDRDataDictCopy, 
-                       _AMFDRDataDictMultiCopy, _AMFDRDataDictMultiPut, _AMFDRDataDictPut, 
-                       _AMFDRDataExport, _AMFDRDataGetSigningVersion, _AMFDRDataHTTPChallengeClaim, 
+                       _AMFDRDataCopySslRoots, _AMFDRDataCopyTrustObject, _AMFDRDataCreateInstanceString, 
+                       _AMFDRDataCreatePermissionsString, _AMFDRDataCreateSikInstanceString, 
+                       _AMFDRDataDelete, _AMFDRDataDictCopy, _AMFDRDataDictMultiCopy, 
+                       _AMFDRDataDictMultiPut, _AMFDRDataDictPut, _AMFDRDataExport, 
+                       _AMFDRDataGetSigningVersion, _AMFDRDataHTTPChallengeClaim, 
                        _AMFDRDataIterate, _AMFDRDataLocalCreateFullKey, _AMFDRDataMake, 
                        _AMFDRDataMultiClaim, _AMFDRDataMultiCopy, _AMFDRDataMultiCopyDigest, 
                        _AMFDRDataMultiCopyManifest, _AMFDRDataMultiDelete, _AMFDRDataMultiExport, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           042AFDC0-A840-3418-9EE3-80E9C6EB0D47
+    value:           F99D11F4-3DD8-3545-92EC-25585C341AC7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5EFBE1A1-0354-319B-8F16-562CEAC2BE85
+    value:           E354CAE8-1177-33C8-9913-69D65B87F120
 install-name:    '/usr/lib/libskit.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
@@ -17,20 +17,26 @@ exports:
                        __ZN4skit11FieldBundle3addEtNS_9BufferRefIKSt4byteEEb, __ZN4skit11FieldBundle3addEtRKNS_11TokenStreamE, 
                        __ZN4skit11FieldBundle5clearEv, __ZN4skit11IndexReader4openEv, 
                        __ZN4skit11IndexReader5closeEv, __ZN4skit11IndexReaderC1ENSt3__14__fs10filesystem4pathE, 
-                       __ZN4skit11IndexReaderC2ENSt3__14__fs10filesystem4pathE, __ZN4skit11IndexReaderD1Ev, 
-                       __ZN4skit11IndexReaderD2Ev, __ZN4skit11IndexWriter11set_doc_wgtERKNS_4UuidEf, 
-                       __ZN4skit11IndexWriter12set_dp_classEi, __ZN4skit11IndexWriter15flush_thresholdEm, 
-                       __ZN4skit11IndexWriter25set_doc_store_write_cacheEm, __ZN4skit11IndexWriter26set_term_index_write_cacheEm, 
-                       __ZN4skit11IndexWriter5clearEv, __ZN4skit11IndexWriter5eraseERKNS_4UuidE, 
-                       __ZN4skit11IndexWriter5flushEv, __ZN4skit11IndexWriter6appendERKNS_11TokenStreamEfNS_4UuidEPK5ioveci, 
+                       __ZN4skit11IndexReaderC1EOS0_, __ZN4skit11IndexReaderC1ERKS0_, 
+                       __ZN4skit11IndexReaderC1Ev, __ZN4skit11IndexReaderC2ENSt3__14__fs10filesystem4pathE, 
+                       __ZN4skit11IndexReaderC2EOS0_, __ZN4skit11IndexReaderC2ERKS0_, 
+                       __ZN4skit11IndexReaderC2Ev, __ZN4skit11IndexReaderD1Ev, __ZN4skit11IndexReaderD2Ev, 
+                       __ZN4skit11IndexReaderaSEOS0_, __ZN4skit11IndexReaderaSERKS0_, 
+                       __ZN4skit11IndexWriter11set_doc_wgtERKNS_4UuidEf, __ZN4skit11IndexWriter12set_dp_classEi, 
+                       __ZN4skit11IndexWriter15flush_thresholdEm, __ZN4skit11IndexWriter25set_doc_store_write_cacheEm, 
+                       __ZN4skit11IndexWriter26set_term_index_write_cacheEm, __ZN4skit11IndexWriter5clearEv, 
+                       __ZN4skit11IndexWriter5eraseERKNS_4UuidE, __ZN4skit11IndexWriter5flushEv, 
+                       __ZN4skit11IndexWriter6appendERKNS_11TokenStreamEfNS_4UuidEPK5ioveci, 
                        __ZN4skit11IndexWriter7end_txnEv, __ZN4skit11IndexWriter8set_modeEt, 
                        __ZN4skit11IndexWriter9abort_txnEv, __ZN4skit11IndexWriter9start_txnEv, 
                        __ZN4skit11IndexWriterC1ENS_4UuidENSt3__14__fs10filesystem4pathES5_, 
+                       __ZN4skit11IndexWriterC1EOS0_, __ZN4skit11IndexWriterC1Ev, 
                        __ZN4skit11IndexWriterC2ENS_4UuidENSt3__14__fs10filesystem4pathES5_, 
-                       __ZN4skit11IndexWriterD1Ev, __ZN4skit11IndexWriterD2Ev, __ZN4skit11PostingListC1EPKSt4bytej, 
-                       __ZN4skit11PostingListC2EPKSt4bytej, __ZN4skit11TokenStream11deserializeEPKSt4bytel, 
-                       __ZN4skit11levenshteinEPKcS1_, __ZN4skit12IndexMemImpl6appendERKNS_4TermENS_7PostingE, 
-                       __ZN4skit12to_u16stringERNSt3__112basic_stringIDsNS0_11char_traitsIDsEENS0_9allocatorIDsEEEENS0_17basic_string_viewIcNS2_IcEEEE, 
+                       __ZN4skit11IndexWriterC2EOS0_, __ZN4skit11IndexWriterC2Ev, 
+                       __ZN4skit11IndexWriterD1Ev, __ZN4skit11IndexWriterD2Ev, __ZN4skit11IndexWriteraSEOS0_, 
+                       __ZN4skit11PostingListC1EPKSt4bytej, __ZN4skit11PostingListC2EPKSt4bytej, 
+                       __ZN4skit11TokenStream11deserializeEPKSt4bytel, __ZN4skit11levenshteinEPKcS1_, 
+                       __ZN4skit12IndexMemImpl6appendERKNS_4TermENS_7PostingE, __ZN4skit12to_u16stringERNSt3__112basic_stringIDsNS0_11char_traitsIDsEENS0_9allocatorIDsEEEENS0_17basic_string_viewIcNS2_IcEEEE, 
                        __ZN4skit13codepoint_cntENSt3__117basic_string_viewIDsNS0_11char_traitsIDsEEEE, 
                        __ZN4skit13codepoint_cntENSt3__117basic_string_viewIcNS0_11char_traitsIcEEEE, 
                        __ZN4skit14is_significantERKNSt3__117basic_string_viewIDsNS0_11char_traitsIDsEEEE, 
@@ -99,11 +105,12 @@ exports:
                        __ZNK4skit11IndexReader7is_openEv, __ZNK4skit11IndexWriter10record_cntEv, 
                        __ZNK4skit11IndexWriter10size_bytesEv, __ZNK4skit11IndexWriter11segment_cntEv, 
                        __ZNK4skit11IndexWriter12should_mergeEv, __ZNK4skit11IndexWriter13merge_indexesEv, 
-                       __ZNK4skit11IndexWriter15flush_thresholdEv, __ZNK4skit11IndexWriter2idEv, 
-                       __ZNK4skit11IndexWriter4sizeEv, __ZNK4skit11IndexWriter7last_tsEv, 
-                       __ZNK4skit11IndexWriter9is_activeEv, __ZNK4skit11PostingList10make_iovecEv, 
-                       __ZNK4skit11PostingList11seek_to_docEPKNS_7PostingExb, __ZNK4skit11PostingList13seek_to_blockEPKNS_7PostingEx, 
-                       __ZNK4skit11TokenStream9serializeEPSt4bytel, __ZNK4skit12IndexMemImpl14make_disk_implENSt3__14__fs10filesystem4pathE, 
+                       __ZNK4skit11IndexWriter15flush_thresholdEv, __ZNK4skit11IndexWriter21index_count_thresholdEm, 
+                       __ZNK4skit11IndexWriter2idEv, __ZNK4skit11IndexWriter4sizeEv, 
+                       __ZNK4skit11IndexWriter7last_tsEv, __ZNK4skit11IndexWriter9is_activeEv, 
+                       __ZNK4skit11PostingList10make_iovecEv, __ZNK4skit11PostingList11seek_to_docEPKNS_7PostingExb, 
+                       __ZNK4skit11PostingList13seek_to_blockEPKNS_7PostingEx, __ZNK4skit11TokenStream9serializeEPSt4bytel, 
+                       __ZNK4skit12IndexMemImpl14make_disk_implENSt3__14__fs10filesystem4pathE, 
                        __ZNK4skit12NumberFilter6filterENSt3__117basic_string_viewIDsNS1_11char_traitsIDsEEEE, 
                        __ZNK4skit12NumberFilter6filterERNS_11TokenStreamEm, __ZNK4skit12NumberFilter6filterERNS_5TokenE, 
                        __ZNK4skit16FieldSpanMatcher16match_with_aliasERNS_21FieldMatchesWithAliasERKNS_11TokenStreamERKNS_5AliasEt, 

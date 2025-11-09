@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DD78DB47-99D3-3212-92DC-4A5B9CFC4EC8
+    value:           13706400-E0E2-3577-8D35-1E4C50F2BAFA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           23C44E88-8091-3228-9505-8D1D3A7A1457
+    value:           02ADEE2B-896D-3B9C-B8D3-CB818A4943C8
 install-name:    '/System/Library/PrivateFrameworks/FamilyCircleUI.framework/Versions/A/FamilyCircleUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

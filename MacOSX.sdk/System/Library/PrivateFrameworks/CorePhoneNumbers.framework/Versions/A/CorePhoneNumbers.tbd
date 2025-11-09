@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A708074C-8735-38C3-951F-611D37BB8F35
+    value:           ABB0AE76-7862-3A0A-B03D-CD0BC35A4333
   - target:          x86_64-maccatalyst
-    value:           A708074C-8735-38C3-951F-611D37BB8F35
+    value:           ABB0AE76-7862-3A0A-B03D-CD0BC35A4333
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FA2F6F0C-0D28-3136-939E-88F85CC70436
+    value:           5DAC4DE9-8B49-3979-96FE-E569155BA995
   - target:          arm64e-maccatalyst
-    value:           FA2F6F0C-0D28-3136-939E-88F85CC70436
+    value:           5DAC4DE9-8B49-3979-96FE-E569155BA995
 install-name:    '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

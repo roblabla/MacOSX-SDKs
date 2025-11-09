@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B60ADF19-D09F-3876-9E1C-FD679D97EAA8
+    value:           3956B5AA-6714-32BE-8E24-25F78E291299
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EE095379-A0BF-3E83-A512-D1DAE46B00FD
+    value:           5D4CE4DC-DF17-3E80-88E0-D720308AF7D8
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/UniversalAccess'
 current-version: 236
 reexported-libraries:
@@ -54,11 +54,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           687DDE0F-5CAD-365D-86F9-02A4B32DC321
+    value:           54ECD09E-1C63-3420-ABA0-4067F9C4E8D0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A3BD9A70-A71F-3E1B-B09B-670BDE7E5F8F
+    value:           8F4AC7A5-3142-3A4E-808C-39AA02F2EE1F
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Frameworks/UniversalAccessCore.framework/Versions/A/UniversalAccessCore'
 current-version: 236
 reexported-libraries:
@@ -81,10 +81,11 @@ exports:
                        _UADisplayLog, _UADwellActionType, _UADwellAlwaysAllowInPanelsEnabled, 
                        _UADwellCursorColor, _UADwellHideProgressIndicators, _UADwellIsAutoRevertToLeftClickEnabled, 
                        _UADwellIsEnabled, _UADwellIsHomePanelAllowedToFollowTriggeredHotCorner, 
-                       _UADwellIsSingleAction, _UADwellIsZoomEnabled, _UADwellSetActionType, 
-                       _UADwellSetAlwaysAllowInPanelsEnabled, _UADwellSetAutoRevertToLeftClickEnabled, 
-                       _UADwellSetCursorColor, _UADwellSetHideProgressIndicators, 
-                       _UADwellSetHomePanelAllowedToFollowTriggeredHotCorner, _UADwellSetIsSingleAction, 
+                       _UADwellIsSingleAction, _UADwellIsZoomEnabled, _UADwellRetriggerTolerance, 
+                       _UADwellSetActionType, _UADwellSetAlwaysAllowInPanelsEnabled, 
+                       _UADwellSetAutoRevertToLeftClickEnabled, _UADwellSetCursorColor, 
+                       _UADwellSetHideProgressIndicators, _UADwellSetHomePanelAllowedToFollowTriggeredHotCorner, 
+                       _UADwellSetIsSingleAction, _UADwellSetRetriggerTolerance, 
                        _UADwellSetShowActionsInPanelsEnabled, _UADwellSetShowMenuExtraEnabled, 
                        _UADwellSetTolerance, _UADwellSetWaitTime, _UADwellSetZoomEnabled, 
                        _UADwellShowActionsInPanelsEnabled, _UADwellShowMenuExtraEnabled, 
@@ -155,31 +156,32 @@ exports:
                        _UAScrollZoomSetWasPreviouslyEnabled, _UAScrollZoomWasPreviouslyEnabled, 
                        _UASessionDidLoginNotification, _UASessionDidMoveOffConsoleNotification, 
                        _UASessionDidMoveOnConsoleNotification, _UASetUserSwitches, 
-                       _UASetUserSwitchesForType, _UASlowKeysDelayInterval, _UASlowKeysIsEnabled, 
-                       _UASlowKeysPlaySoundForKeyIsEnabled, _UASlowKeysPlaySoundForKeySetEnabled, 
-                       _UASlowKeysSetDelayInterval, _UASlowKeysSetEnabled, _UASpeakSelectionIsEnabled, 
-                       _UASpeakSelectionSetEnabled, _UASpeakSelectionSyncEnabledPref, 
-                       _UAStickyKeysActivate, _UAStickyKeysDeactivate, _UAStickyKeysDisplayModifierIsEnabled, 
-                       _UAStickyKeysDisplayModifierSetEnabled, _UAStickyKeysEnableWithShiftKeyIsEnabled, 
-                       _UAStickyKeysEnableWithShiftKeySetEnabled, _UAStickyKeysIsEnabled, 
-                       _UAStickyKeysPlaySoundForModifierIsEnabled, _UAStickyKeysPlaySoundForModifierSetEnabled, 
-                       _UAStickyKeysScreenLocation, _UAStickyKeysSetEnabled, _UAStickyKeysSetScreenLoctaion, 
-                       _UASwitchAutoScanSetElementInterval, _UASwitchControlAutoScanCycleCount, 
-                       _UASwitchControlAutoScanElementInterval, _UASwitchControlAutoScanEnabled, 
-                       _UASwitchControlAutoScanPanelInterval, _UASwitchControlAutoScanSetCycleCount, 
-                       _UASwitchControlAutoScanSetEnabled, _UASwitchControlAutoScanSetPanelInterval, 
-                       _UASwitchControlCoalescePressesDuration, _UASwitchControlCoalescePressesSetDuration, 
-                       _UASwitchControlCopyDeviceInputs, _UASwitchControlCopyLoginWindowPrefKeys, 
-                       _UASwitchControlCopyTheme, _UASwitchControlDoublePressInterval, 
-                       _UASwitchControlDoublePressSetInterval, _UASwitchControlElementRestartOption, 
-                       _UASwitchControlFirstElementDelay, _UASwitchControlFirstElementSetDelay, 
-                       _UASwitchControlGetCursorSize, _UASwitchControlGetMouseMoveStyle, 
-                       _UASwitchControlHasEverBeenEnabled, _UASwitchControlHideUIEnabled, 
-                       _UASwitchControlHideUITimeout, _UASwitchControlHoldBeforeRepeatDuration, 
-                       _UASwitchControlHoverTextToolbarEnabled, _UASwitchControlIsEnabled, 
-                       _UASwitchControlMinimumPressDuration, _UASwitchControlMinimumPressSetDuration, 
-                       _UASwitchControlPlatformSwitchingAllowed, _UASwitchControlPlaySounds, 
-                       _UASwitchControlResumeAutoScanningAfterSelectEnabled, _UASwitchControlReverseMouseWhenReachingScreenEdgeEnabled, 
+                       _UASetUserSwitchesForType, _UAShortcutsLog, _UASlowKeysDelayInterval, 
+                       _UASlowKeysIsEnabled, _UASlowKeysPlaySoundForKeyIsEnabled, 
+                       _UASlowKeysPlaySoundForKeySetEnabled, _UASlowKeysSetDelayInterval, 
+                       _UASlowKeysSetEnabled, _UASpeakSelectionIsEnabled, _UASpeakSelectionSetEnabled, 
+                       _UASpeakSelectionSyncEnabledPref, _UAStickyKeysActivate, _UAStickyKeysDeactivate, 
+                       _UAStickyKeysDisplayModifierIsEnabled, _UAStickyKeysDisplayModifierSetEnabled, 
+                       _UAStickyKeysEnableWithShiftKeyIsEnabled, _UAStickyKeysEnableWithShiftKeySetEnabled, 
+                       _UAStickyKeysIsEnabled, _UAStickyKeysPlaySoundForModifierIsEnabled, 
+                       _UAStickyKeysPlaySoundForModifierSetEnabled, _UAStickyKeysScreenLocation, 
+                       _UAStickyKeysSetEnabled, _UAStickyKeysSetScreenLoctaion, _UASwitchAutoScanSetElementInterval, 
+                       _UASwitchControlAutoScanCycleCount, _UASwitchControlAutoScanElementInterval, 
+                       _UASwitchControlAutoScanEnabled, _UASwitchControlAutoScanPanelInterval, 
+                       _UASwitchControlAutoScanSetCycleCount, _UASwitchControlAutoScanSetEnabled, 
+                       _UASwitchControlAutoScanSetPanelInterval, _UASwitchControlCoalescePressesDuration, 
+                       _UASwitchControlCoalescePressesSetDuration, _UASwitchControlCopyDeviceInputs, 
+                       _UASwitchControlCopyLoginWindowPrefKeys, _UASwitchControlCopyTheme, 
+                       _UASwitchControlDoublePressInterval, _UASwitchControlDoublePressSetInterval, 
+                       _UASwitchControlElementRestartOption, _UASwitchControlFirstElementDelay, 
+                       _UASwitchControlFirstElementSetDelay, _UASwitchControlGetCursorSize, 
+                       _UASwitchControlGetMouseMoveStyle, _UASwitchControlHasEverBeenEnabled, 
+                       _UASwitchControlHideUIEnabled, _UASwitchControlHideUITimeout, 
+                       _UASwitchControlHoldBeforeRepeatDuration, _UASwitchControlHoverTextToolbarEnabled, 
+                       _UASwitchControlIsEnabled, _UASwitchControlMinimumPressDuration, 
+                       _UASwitchControlMinimumPressSetDuration, _UASwitchControlPlatformSwitchingAllowed, 
+                       _UASwitchControlPlaySounds, _UASwitchControlResumeAutoScanningAfterSelectEnabled, 
+                       _UASwitchControlReverseMouseWhenReachingScreenEdgeEnabled, 
                        _UASwitchControlSetCursorSize, _UASwitchControlSetDeviceInputs, 
                        _UASwitchControlSetElementRestartOption, _UASwitchControlSetEnabled, 
                        _UASwitchControlSetHideUIEnabled, _UASwitchControlSetHideUITimeout, 
@@ -218,14 +220,13 @@ exports:
                        _UAZoomFlashScreenOnNotificationSetEnabled, _UAZoomFocusActivationZone, 
                        _UAZoomFocusChange, _UAZoomFocusFollowMode, _UAZoomFocusFollowsKeyboardIsEnabled, 
                        _UAZoomFocusFollowsKeyboardSetEnabled, _UAZoomFocusMovement, 
-                       _UAZoomFocusMovementSpeed, _UAZoomFullscreenTemporaryZoomIsEnabled, 
-                       _UAZoomFullscreenTemporaryZoomSetEnabled, _UAZoomIsEnabled, 
-                       _UAZoomLog, _UAZoomMaximum, _UAZoomMaximumSplitScreenRatio, 
+                       _UAZoomFullscreenTemporaryZoomIsEnabled, _UAZoomFullscreenTemporaryZoomSetEnabled, 
+                       _UAZoomIsEnabled, _UAZoomLog, _UAZoomMaximum, _UAZoomMaximumSplitScreenRatio, 
                        _UAZoomMaximumZoomScale, _UAZoomMinimum, _UAZoomMinimumSplitScreenRatio, 
                        _UAZoomMinimumZoomScale, _UAZoomPanningMode, _UAZoomRegionFrame, 
                        _UAZoomScale, _UAZoomSetDesiredScale, _UAZoomSetEnabled, _UAZoomSetFocusActivationZone, 
-                       _UAZoomSetFocusFollowMode, _UAZoomSetFocusMovement, _UAZoomSetFocusMovementSpeed, 
-                       _UAZoomSetMaximum, _UAZoomSetMinimum, _UAZoomSetMode, _UAZoomSetPanningMode, 
+                       _UAZoomSetFocusFollowMode, _UAZoomSetFocusMovement, _UAZoomSetMaximum, 
+                       _UAZoomSetMinimum, _UAZoomSetMode, _UAZoomSetPanningMode, 
                        _UAZoomSetScale, _UAZoomSetSplitScreenMode, _UAZoomShowPreviewIsEnabled, 
                        _UAZoomShowPreviewSetEnabled, _UAZoomSmoothImagesIsEnabled, 
                        _UAZoomSmoothImagesSetEnabled, _UAZoomTemporaryDetachIsEnabled, 
@@ -245,20 +246,22 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B8F433AE-4AB5-3055-9846-6DD0645A90A5
+    value:           B9838784-3FB5-3DD7-89B1-7BCB0EC92519
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B1A3BBB6-D9AB-363C-9F10-578A98AAB0C4
+    value:           0007C625-0C88-3BC3-9606-917E00D59484
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Libraries/libUAPreferences.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _UAAXFeatureIDAlternateMouseButtons, _UAAXFeatureIDDisplayContrast, 
-                       _UAAXFeatureIDDisplayFiltersColor, _UAAXFeatureIDFullKeyboardAccess, 
-                       _UAAXFeatureIDHeadMouse, _UAAXFeatureIDIncreaseContrast, _UAAXFeatureIDInvertDisplayColor, 
-                       _UAAXFeatureIDMouseKeys, _UAAXFeatureIDReduceTransparency, 
-                       _UAAXFeatureIDSlowKeys, _UAAXFeatureIDStickyKeys, _UAAXFeatureIDSwitchControl, 
-                       _UAAXFeatureIDVirtualKeyboard, _UAAXFeatureIDVoiceOver, _UAAXFeatureIDZoom, 
+    symbols:         [ _UAAXFeatureIDAlternateMouseButtons, _UAAXFeatureIDAudioDescriptions, 
+                       _UAAXFeatureIDCaptions, _UAAXFeatureIDDisplayContrast, _UAAXFeatureIDDisplayFiltersColor, 
+                       _UAAXFeatureIDFullKeyboardAccess, _UAAXFeatureIDHeadMouse, 
+                       _UAAXFeatureIDIncreaseContrast, _UAAXFeatureIDInvertDisplayColor, 
+                       _UAAXFeatureIDMonoAudio, _UAAXFeatureIDMouseKeys, _UAAXFeatureIDReduceMotion, 
+                       _UAAXFeatureIDReduceTransparency, _UAAXFeatureIDSlowKeys, 
+                       _UAAXFeatureIDStickyKeys, _UAAXFeatureIDSwitchControl, _UAAXFeatureIDVirtualKeyboard, 
+                       _UAAXFeatureIDVoiceControl, _UAAXFeatureIDVoiceOver, _UAAXFeatureIDZoom, 
                        _UAAXShortcutExposedFeatures, _UAAlternateMouseButtonsEnabledKey, 
                        _UAAlternateMouseButtonsPlaySoundKey, _UAAlternateMouseButtonsShowVisualFeedbackKey, 
                        _UAAssistiveControlAutomaticShiftEnabledKey, _UAAssistiveControlAutomaticSpaceEnabledKey, 
@@ -276,8 +279,9 @@ exports:
                        _UADwellActionTypeKey, _UADwellAlwaysAllowInPanelsKey, _UADwellAutoRevertToLeftClickEnabledKey, 
                        _UADwellBottomLeftCornerActionTypeKey, _UADwellBottomRightCornerActionTypeKey, 
                        _UADwellCursorColorTypeKey, _UADwellEnabledKey, _UADwellHideProgressIndicatorsKey, 
-                       _UADwellIsSingleActionKey, _UADwellShowActionsInPanelsKey, 
-                       _UADwellShowMenuExtraKey, _UADwellToleranceKey, _UADwellTopLeftCornerActionTypeKey, 
+                       _UADwellIsSingleActionKey, _UADwellRetriggerToleranceKey, 
+                       _UADwellShowActionsInPanelsKey, _UADwellShowMenuExtraKey, 
+                       _UADwellToleranceKey, _UADwellTopLeftCornerActionTypeKey, 
                        _UADwellTopRightCornerActionTypeKey, _UADwellWaitTimeAssistiveControlUIKey, 
                        _UADwellWaitTimeDefaultActionKey, _UADwellWaitTimeZoomKey, 
                        _UADwellZoomEnabledKey, _UAFlashScreenEnabledKey, _UAGrayscaleDidMigrateToDisplayFiltersKey, 
@@ -309,18 +313,19 @@ exports:
                        _UAPreferencesAppendMacBuddySettingsToTransfer, _UAPreferencesClearOverrides, 
                        _UAPreferencesCopyAppValue, _UAPreferencesCopyAppValueWithFallBack, 
                        _UAPreferencesCopyArray, _UAPreferencesCopyDictionary, _UAPreferencesCopyPerHostValueForKey, 
-                       _UAPreferencesCopyString, _UAPreferencesDomain, _UAPreferencesGetBoolean, 
-                       _UAPreferencesGetDouble, _UAPreferencesGetInteger, _UAPreferencesHasValue, 
-                       _UAPreferencesPerHostIntegerForKeyWithDefaultValue, _UAPreferencesSendNotification, 
-                       _UAPreferencesSetAppValue, _UAPreferencesSetArray, _UAPreferencesSetBoolean, 
-                       _UAPreferencesSetDictionary, _UAPreferencesSetDouble, _UAPreferencesSetInteger, 
-                       _UAPreferencesSetOverrides, _UAPreferencesSetString, _UAPreferencesSetValue, 
-                       _UAPreferencesSynchronize, _UAPreferencesValidateKeyType, 
-                       _UAScrollZoomEnabledKey, _UAScrollZoomModifiersKey, _UAScrollZoomPreviouslyEnabledKey, 
-                       _UASelectedTabKey, _UASessionChangeKey, _UAShowInternalSettings, 
-                       _UASlowKeysDelayIntervalKey, _UASlowKeysEnabledKey, _UASlowKeysPlaySoundForKeyKey, 
-                       _UAStickyKeysDisplayModifiersKey, _UAStickyKeysEnableWithShiftKeyKey, 
-                       _UAStickyKeysEnabledKey, _UAStickyKeysLocationKey, _UAStickyKeysPlaySoundForModifierKey, 
+                       _UAPreferencesCopyString, _UAPreferencesDefaultPrefs, _UAPreferencesDomain, 
+                       _UAPreferencesGetBoolean, _UAPreferencesGetDouble, _UAPreferencesGetInteger, 
+                       _UAPreferencesHasValue, _UAPreferencesPerHostIntegerForKeyWithDefaultValue, 
+                       _UAPreferencesSendNotification, _UAPreferencesSetAppValue, 
+                       _UAPreferencesSetArray, _UAPreferencesSetBoolean, _UAPreferencesSetDictionary, 
+                       _UAPreferencesSetDouble, _UAPreferencesSetInteger, _UAPreferencesSetOverrides, 
+                       _UAPreferencesSetString, _UAPreferencesSetValue, _UAPreferencesSynchronize, 
+                       _UAPreferencesValidateKeyType, _UAScrollZoomEnabledKey, _UAScrollZoomModifiersKey, 
+                       _UAScrollZoomPreviouslyEnabledKey, _UASelectedTabKey, _UASessionChangeKey, 
+                       _UAShowInternalSettings, _UASlowKeysDelayIntervalKey, _UASlowKeysEnabledKey, 
+                       _UASlowKeysPlaySoundForKeyKey, _UAStickyKeysDisplayModifiersKey, 
+                       _UAStickyKeysEnableWithShiftKeyKey, _UAStickyKeysEnabledKey, 
+                       _UAStickyKeysLocationKey, _UAStickyKeysPlaySoundForModifierKey, 
                        _UASwitchControlActionOpenApplicationKey, _UASwitchControlActionRunKey, 
                        _UASwitchControlActionRunShortcutKey, _UASwitchControlActionSelectKey, 
                        _UASwitchControlActionStepKey, _UASwitchControlActionStopKey, 
@@ -363,7 +368,7 @@ exports:
                        _UAZoomDesiredScaleKey, _UAZoomDisplayEnabledKey, _UAZoomDisplayIDKey, 
                        _UAZoomFlashScreenOnNotificationEnabledKey, _UAZoomFocusActivationZoneKey, 
                        _UAZoomFocusFollowModeKey, _UAZoomFocusFollowsKeyboardKey, 
-                       _UAZoomFocusMovementKey, _UAZoomFocusMovementSpeedKey, _UAZoomFullscreenTemporaryZoomEnabledKey, 
+                       _UAZoomFocusMovementDelayKey, _UAZoomFocusMovementKey, _UAZoomFullscreenTemporaryZoomEnabledKey, 
                        _UAZoomMaximumKey, _UAZoomMinimumKey, _UAZoomModeKey, _UAZoomPanningModeKey, 
                        _UAZoomRegionFrameKey, _UAZoomScaleKey, _UAZoomShowPreviewKey, 
                        _UAZoomSmoothImagesKey, _UAZoomSplitScreenModeKey, _UAZoomTemporaryDetachEnabledKey, 

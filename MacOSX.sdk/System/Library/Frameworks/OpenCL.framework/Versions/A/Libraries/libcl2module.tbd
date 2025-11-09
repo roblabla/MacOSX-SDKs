@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2A7833FB-B7AD-3A3D-938A-54034B0F839D
+    value:           FE20C39F-11E8-375F-B87C-B267F92A4E07
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/libcl2module.dylib'
 current-version: 2.5.2
 exports:

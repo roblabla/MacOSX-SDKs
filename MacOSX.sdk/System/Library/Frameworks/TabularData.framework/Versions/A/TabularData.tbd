@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           472E8135-58BD-36D1-AF83-7C2B0BE28CDF
+    value:           0BC2FB1F-F3DD-381E-96F5-6CD9F98067E3
   - target:          x86_64-maccatalyst
-    value:           472E8135-58BD-36D1-AF83-7C2B0BE28CDF
+    value:           0BC2FB1F-F3DD-381E-96F5-6CD9F98067E3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5048FD17-D974-32E1-AA47-AFBE1B75EDD7
+    value:           6BA06BCB-F2B4-314C-A569-ACA131D70604
   - target:          arm64e-maccatalyst
-    value:           5048FD17-D974-32E1-AA47-AFBE1B75EDD7
+    value:           6BA06BCB-F2B4-314C-A569-ACA131D70604
 install-name:    '/System/Library/Frameworks/TabularData.framework/Versions/A/TabularData'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '_$s10ColumnType11TabularData0D13FrameProtocolPTl', '_$s11TabularData06ShapedB0V5shape7strides8contentsACyxGSaySiG_AHSayxGtcfC', 
                        '_$s11TabularData06ShapedB0V5shapeSaySiGvg', '_$s11TabularData06ShapedB0V5shapeSaySiGvpMV', 
                        '_$s11TabularData06ShapedB0V7stridesSaySiGvg', '_$s11TabularData06ShapedB0V7stridesSaySiGvpMV', 
@@ -435,12 +435,13 @@ exports:
                        '_$s11TabularData14GroupSummariesPyAA0B5FrameVSgypSgd_tcigTj', 
                        '_$s11TabularData14GroupSummariesPyAA0B5FrameVSgypSgd_tcigTq', 
                        '_$s11TabularData14GroupSummariesTL', '_$s11TabularData14NumericSummaryV10totalCountSivg', 
-                       '_$s11TabularData14NumericSummaryV10totalCountSivpMV', '_$s11TabularData14NumericSummaryV11descriptionSSvg', 
-                       '_$s11TabularData14NumericSummaryV11descriptionSSvpMV', '_$s11TabularData14NumericSummaryV13firstQuartilexvM', 
+                       '_$s11TabularData14NumericSummaryV10totalCountSivpMV', '_$s11TabularData14NumericSummaryV13firstQuartilexvM', 
                        '_$s11TabularData14NumericSummaryV13firstQuartilexvg', '_$s11TabularData14NumericSummaryV13firstQuartilexvpMV', 
                        '_$s11TabularData14NumericSummaryV13firstQuartilexvs', '_$s11TabularData14NumericSummaryV13thirdQuartilexvM', 
                        '_$s11TabularData14NumericSummaryV13thirdQuartilexvg', '_$s11TabularData14NumericSummaryV13thirdQuartilexvpMV', 
-                       '_$s11TabularData14NumericSummaryV13thirdQuartilexvs', '_$s11TabularData14NumericSummaryV17standardDeviationxvM', 
+                       '_$s11TabularData14NumericSummaryV13thirdQuartilexvs', '_$s11TabularData14NumericSummaryV16debugDescriptionSSvg', 
+                       '_$s11TabularData14NumericSummaryV16debugDescriptionSSvpMV', 
+                       '_$s11TabularData14NumericSummaryV17standardDeviationxvM', 
                        '_$s11TabularData14NumericSummaryV17standardDeviationxvg', 
                        '_$s11TabularData14NumericSummaryV17standardDeviationxvpMV', 
                        '_$s11TabularData14NumericSummaryV17standardDeviationxvs', 
@@ -461,7 +462,7 @@ exports:
                        '_$s11TabularData14NumericSummaryV9someCountSivpMV', '_$s11TabularData14NumericSummaryV9someCountSivs', 
                        '_$s11TabularData14NumericSummaryVACyxGycfC', '_$s11TabularData14NumericSummaryVMa', 
                        '_$s11TabularData14NumericSummaryVMn', '_$s11TabularData14NumericSummaryVyxGSHAAMc', 
-                       '_$s11TabularData14NumericSummaryVyxGSQAAMc', '_$s11TabularData14NumericSummaryVyxGs23CustomStringConvertibleAAMc', 
+                       '_$s11TabularData14NumericSummaryVyxGSQAAMc', '_$s11TabularData14NumericSummaryVyxGs28CustomDebugStringConvertibleAAMc', 
                        '_$s11TabularData15CSVReadingErrorO11badEncodingyACSi_Si10Foundation0B0VtcACmFWC', 
                        '_$s11TabularData15CSVReadingErrorO11descriptionSSvg', '_$s11TabularData15CSVReadingErrorO11descriptionSSvpMV', 
                        '_$s11TabularData15CSVReadingErrorO13failedToParseyACSi_SiAA7CSVTypeO10Foundation0B0VtcACmFWC', 
@@ -601,12 +602,12 @@ exports:
                        '_$s11TabularData18AnyColumnPrototypeP4nameSSvsTj', '_$s11TabularData18AnyColumnPrototypeP4nameSSvsTq', 
                        '_$s11TabularData18AnyColumnPrototypeTL', '_$s11TabularData18CategoricalSummaryV10totalCountSivg', 
                        '_$s11TabularData18CategoricalSummaryV10totalCountSivpMV', 
-                       '_$s11TabularData18CategoricalSummaryV11descriptionSSvg', 
-                       '_$s11TabularData18CategoricalSummaryV11descriptionSSvpMV', 
                        '_$s11TabularData18CategoricalSummaryV11uniqueCountSivM', 
                        '_$s11TabularData18CategoricalSummaryV11uniqueCountSivg', 
                        '_$s11TabularData18CategoricalSummaryV11uniqueCountSivpMV', 
                        '_$s11TabularData18CategoricalSummaryV11uniqueCountSivs', 
+                       '_$s11TabularData18CategoricalSummaryV16debugDescriptionSSvg', 
+                       '_$s11TabularData18CategoricalSummaryV16debugDescriptionSSvpMV', 
                        '_$s11TabularData18CategoricalSummaryV2eeoiySbACyxG_AEtFZ', 
                        '_$s11TabularData18CategoricalSummaryV4hash4intoys6HasherVz_tF', 
                        '_$s11TabularData18CategoricalSummaryV4modeSayxGvM', '_$s11TabularData18CategoricalSummaryV4modeSayxGvg', 
@@ -619,7 +620,7 @@ exports:
                        '_$s11TabularData18CategoricalSummaryV9someCountSivpMV', '_$s11TabularData18CategoricalSummaryV9someCountSivs', 
                        '_$s11TabularData18CategoricalSummaryVACyxGycfC', '_$s11TabularData18CategoricalSummaryVMa', 
                        '_$s11TabularData18CategoricalSummaryVMn', '_$s11TabularData18CategoricalSummaryVyxGSHAAMc', 
-                       '_$s11TabularData18CategoricalSummaryVyxGSQAAMc', '_$s11TabularData18CategoricalSummaryVyxGs23CustomStringConvertibleAAMc', 
+                       '_$s11TabularData18CategoricalSummaryVyxGSQAAMc', '_$s11TabularData18CategoricalSummaryVyxGs28CustomDebugStringConvertibleAAMc', 
                        '_$s11TabularData18JSONReadingOptionsV11dateParsersSay10Foundation4DateVSgSScGvM', 
                        '_$s11TabularData18JSONReadingOptionsV11dateParsersSay10Foundation4DateVSgSScGvg', 
                        '_$s11TabularData18JSONReadingOptionsV11dateParsersSay10Foundation4DateVSgSScGvpMV', 

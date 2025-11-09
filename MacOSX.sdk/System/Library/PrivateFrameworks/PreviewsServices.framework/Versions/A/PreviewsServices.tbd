@@ -1,19 +1,28 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B20888F7-ADE3-3BE2-99A7-3557821379FF
+    value:           A1C6DF89-956D-3446-BB4A-056D6C4A7DEB
+  - target:          x86_64-maccatalyst
+    value:           A1C6DF89-956D-3446-BB4A-056D6C4A7DEB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B3A28A7D-18DD-32B3-AF0E-C94D62C59D6A
+    value:           810DDDD3-54E8-34C4-AB77-647ABD0287BE
+  - target:          arm64e-maccatalyst
+    value:           810DDDD3-54E8-34C4-AB77-647ABD0287BE
 install-name:    '/System/Library/PrivateFrameworks/PreviewsServices.framework/Versions/A/PreviewsServices'
-current-version: 19073
+current-version: 19.20.23
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ '_$s11MessageType16PreviewsServices05SceneA0PTl', '_$s16PreviewsServices0A17ServiceConnectionC0C0O13crashListeneryA2EmFWC', 
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ '_$s16PreviewsServices0A17ServiceConnectionC0C0O11processExityA2EmFWC', 
+                       '_$s16PreviewsServices0A17ServiceConnectionC0C0O13crashListeneryA2EmFWC', 
                        '_$s16PreviewsServices0A17ServiceConnectionC0C0O7installyA2EmFWC', 
                        '_$s16PreviewsServices0A17ServiceConnectionC0C0O7previewyA2EmFWC', 
                        '_$s16PreviewsServices0A17ServiceConnectionC0C0O8rawValueAESgSS_tcfC', 
@@ -62,17 +71,11 @@ exports:
                        '_$s16PreviewsServices0A22ServiceMessageReceiverP7receive7message12replyHandlerySo14UVPropertyListC_yAHSg_s5Error_pSgtctFTq', 
                        '_$s16PreviewsServices0A22ServiceMessageReceiverP7receive7messageySo14UVPropertyListC_tFTj', 
                        '_$s16PreviewsServices0A22ServiceMessageReceiverP7receive7messageySo14UVPropertyListC_tFTq', 
-                       '_$s16PreviewsServices0A22ServiceMessageReceiverTL', '_$s16PreviewsServices12SceneMessageMp', 
-                       '_$s16PreviewsServices12SceneMessageP0D4TypeAC_SYTn', '_$s16PreviewsServices12SceneMessageP11fenceHandleSo07UVFenceF0CSgvgTj', 
-                       '_$s16PreviewsServices12SceneMessageP11fenceHandleSo07UVFenceF0CSgvgTq', 
-                       '_$s16PreviewsServices12SceneMessageP11messageType0dF0QzvgTj', 
-                       '_$s16PreviewsServices12SceneMessageP11messageType0dF0QzvgTq', 
-                       '_$s16PreviewsServices12SceneMessageP11messageType11fenceHandle7payloadx0dF0Qz_So07UVFenceH0CSgSDySSypGtKcfCTj', 
-                       '_$s16PreviewsServices12SceneMessageP11messageType11fenceHandle7payloadx0dF0Qz_So07UVFenceH0CSgSDySSypGtKcfCTq', 
-                       '_$s16PreviewsServices12SceneMessageP7payloadSDySSypGSgvgTj', 
-                       '_$s16PreviewsServices12SceneMessageP7payloadSDySSypGSgvgTq', 
-                       '_$s16PreviewsServices12SceneMessageTL', '_$sSo9OS_os_logC16PreviewsServicesE8servicesABvgZ', 
-                       _PreviewsServicesVersionNumber, _PreviewsServicesVersionString, 
-                       _UVPreviewsInjectionLog, _UVPreviewsServicesError, _UVPreviewsServicesLog ]
-    objc-classes:    [ UVFenceHandle, UVPropertyList, _TtCC16PreviewsServices25PreviewsServiceConnection8Listener ]
+                       '_$s16PreviewsServices0A22ServiceMessageReceiverTL', '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsV9subsystemSSvgZ', 
+                       '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsVMa', 
+                       '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsVMn', 
+                       '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsVN', 
+                       '_$sSo9OS_os_logC16PreviewsServicesE8servicesABvgZ', _PreviewsServicesVersionNumber, 
+                       _PreviewsServicesVersionString, _UVPreviewsServicesLog ]
+    objc-classes:    [ UVPropertyList, _TtCC16PreviewsServices25PreviewsServiceConnection8Listener ]
 ...

@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E4F28644-C41D-3303-A282-B8682F3B7C4E
+    value:           42FD632E-F2DB-37A5-AEA2-A16D8A58FC5E
   - target:          x86_64-maccatalyst
-    value:           E4F28644-C41D-3303-A282-B8682F3B7C4E
+    value:           42FD632E-F2DB-37A5-AEA2-A16D8A58FC5E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           373FA85C-0500-31F1-9B83-F0612B0DBCEA
+    value:           FE5A1C44-9294-3406-827E-9B927C971B4A
   - target:          arm64e-maccatalyst
-    value:           373FA85C-0500-31F1-9B83-F0612B0DBCEA
+    value:           FE5A1C44-9294-3406-827E-9B927C971B4A
 install-name:    '/System/Library/Frameworks/Photos.framework/Versions/A/Photos'
-current-version: 400.27.210
+current-version: 421.0.100
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _NSStringFromPHErrorCode, _PHAccessLevelFromPLPhotosAccessScopeOptions, 
                        _PHAdjustmentBaseVersionDescription, _PHAdjustmentDataKey, 
@@ -63,7 +63,9 @@ exports:
                        _PHAssetNSFWGeneralSceneClassificationIdentifier, _PHAssetOriginalAccessibilityDescriptionForAsset, 
                        _PHAssetOriginalCaptionForAsset, _PHAssetOriginalCreationDateForAsset, 
                        _PHAssetOriginalLocationForAsset, _PHAssetPlaybackStyleDebugDescription, 
-                       _PHAssetPlaybackVariationDebugDescription, _PHAssetPropertySetAdjustment, 
+                       _PHAssetPlaybackVariationDebugDescription, _PHAssetPreviewAestheticsScorePercentileThresholdKey, 
+                       _PHAssetPreviewCurationScorePercentileThresholdKey, _PHAssetPreviewDefaultAestheticScorePercentileThreshold, 
+                       _PHAssetPreviewDefaultCurationScorePercentileThreshold, _PHAssetPropertySetAdjustment, 
                        _PHAssetPropertySetAesthetic, _PHAssetPropertySetAnalysisState, 
                        _PHAssetPropertySetCameraCaptureDevice, _PHAssetPropertySetCharacterRecognition, 
                        _PHAssetPropertySetCloudLocalState, _PHAssetPropertySetCoarseLocation, 
@@ -72,12 +74,12 @@ exports:
                        _PHAssetPropertySetFaceWorker, _PHAssetPropertySetGridMetadata, 
                        _PHAssetPropertySetIdentifier, _PHAssetPropertySetImageManager, 
                        _PHAssetPropertySetImport, _PHAssetPropertySetKeywords, _PHAssetPropertySetLocalDate, 
-                       _PHAssetPropertySetMediaAnalysis, _PHAssetPropertySetOriginalMetadata, 
-                       _PHAssetPropertySetPhotoIris, _PHAssetPropertySetPhotosInfoPanelExtended, 
-                       _PHAssetPropertySetPhotosOneUp, _PHAssetPropertySetPlacesCore, 
-                       _PHAssetPropertySetSceneAnalysis, _PHAssetPropertySetSceneprint, 
-                       _PHAssetPropertySetUserActivity, _PHAssetPropertySetVisualSearch, 
-                       _PHAssetReferenceType, _PHAssetResourceAnalysisTypeDescription, 
+                       _PHAssetPropertySetMediaAnalysis, _PHAssetPropertySetMontage, 
+                       _PHAssetPropertySetOriginalMetadata, _PHAssetPropertySetPhotoIris, 
+                       _PHAssetPropertySetPhotosInfoPanelExtended, _PHAssetPropertySetPhotosOneUp, 
+                       _PHAssetPropertySetPlacesCore, _PHAssetPropertySetSceneAnalysis, 
+                       _PHAssetPropertySetSceneprint, _PHAssetPropertySetUserActivity, 
+                       _PHAssetPropertySetVisualSearch, _PHAssetReferenceType, _PHAssetResourceAnalysisTypeDescription, 
                        _PHAssetSDFoodSceneClassificationConfidenceThreshold, _PHAssetSDFoodSceneClassificationIdentifier, 
                        _PHAssetSDSceneClassificationIdentifierFood, _PHAssetSDSceneClassificationIdentifierLandscapeCityscape, 
                        _PHAssetSceneClassificationIdentifierAdult, _PHAssetSceneClassificationIdentifierAnimal, 
@@ -89,9 +91,11 @@ exports:
                        _PHAssetSceneClassificationIdentifierRecreation, _PHAssetSceneClassificationIdentifierScreenshot, 
                        _PHAssetSceneClassificationIdentifierSport, _PHAssetSceneClassificationIdentifierTeen, 
                        _PHAssetSceneClassificationIdentifierVehicle, _PHAssetSourceTypeStringWithSourceType, 
-                       _PHAssetSyndicationCurrentAlgorithmVersion, _PHAssetSyndicationEligibilityDescription, 
-                       _PHAssetSyndicationEligibilityLatestSceneAnalysisVersion, 
-                       _PHAssetSyndicationEligibilityShortDescription, _PHAssetVideoDeferredProcessingInvalidatesContentWhenCompleted, 
+                       _PHAssetSyndicationCurrentAlgorithmVersion, _PHAssetSyndicationCurrentAlgorithmVersionFinal, 
+                       _PHAssetSyndicationEligibilityDescription, _PHAssetSyndicationEligibilityLatestSceneAnalysisVersion, 
+                       _PHAssetSyndicationEligibilityShortDescription, _PHAssetSyndicationProcessingCurrentVersionForAsset, 
+                       _PHAssetSyndicationProcessingVersionDescription, _PHAssetSyndicationProcessingVersionWithFacesProcessed, 
+                       _PHAssetVideoDeferredProcessingInvalidatesContentWhenCompleted, 
                        _PHAuthorizationStatusFromPhotosAccessAllowedResult, _PHBatchFetchedPropertySetFirstPropertyIndex, 
                        _PHBatchFetchingArrayBatchSizeOptionKey, _PHBatchFetchingArrayCacheSizeOptionKey, 
                        _PHBatchFetchingArrayFetchedObjectBatchPropertySetClassOptionKey, 
@@ -213,15 +217,15 @@ exports:
                        PHAssetDestinationAssetCopyProperties, PHAssetExportRequest, 
                        PHAssetExportRequestOptions, PHAssetGridMetadataProperties, 
                        PHAssetImportProperties, PHAssetKeywordProperties, PHAssetLocalDateProperties, 
-                       PHAssetMediaAnalysisProperties, PHAssetOriginalMetadataProperties, 
-                       PHAssetPLAdapter, PHAssetPhotoCommentProperties, PHAssetPhotoIrisProperties, 
-                       PHAssetPhotosInfoPanelExtendedProperties, PHAssetPhotosInfoPanelLocationProperties, 
-                       PHAssetPhotosOneUpProperties, PHAssetPropertySet, PHAssetReference, 
-                       PHAssetResource, PHAssetResourceBag, PHAssetResourceCreationOptions, 
-                       PHAssetResourceManager, PHAssetResourceQualityClass, PHAssetResourceRequestOptions, 
-                       PHAssetSceneAnalysisProperties, PHAssetSceneprintProperties, 
-                       PHAssetUserActivityProperties, PHAssetVisualSearchProperties, 
-                       PHAssociatedObjectsTable, PHBatchFetchedAssetPropertySet, 
+                       PHAssetMediaAnalysisProperties, PHAssetMontageProperties, 
+                       PHAssetOriginalMetadataProperties, PHAssetPLAdapter, PHAssetPhotoCommentProperties, 
+                       PHAssetPhotoIrisProperties, PHAssetPhotosInfoPanelExtendedProperties, 
+                       PHAssetPhotosInfoPanelLocationProperties, PHAssetPhotosOneUpProperties, 
+                       PHAssetPropertySet, PHAssetReference, PHAssetResource, PHAssetResourceBag, 
+                       PHAssetResourceCreationOptions, PHAssetResourceManager, PHAssetResourceQualityClass, 
+                       PHAssetResourceRequestOptions, PHAssetSceneAnalysisProperties, 
+                       PHAssetSceneprintProperties, PHAssetUserActivityProperties, 
+                       PHAssetVisualSearchProperties, PHAssociatedObjectsTable, PHBatchFetchedAssetPropertySet, 
                        PHBatchFetchingArray, PHBatchPerformChanges, PHCPAnalyticsCachedPropertyProvider, 
                        PHCPAnalyticsMediaPropertyProvider, PHCachingImageManager, 
                        PHChange, PHChangeBuilder, PHChangeRequest, PHChangeRequestHelper, 

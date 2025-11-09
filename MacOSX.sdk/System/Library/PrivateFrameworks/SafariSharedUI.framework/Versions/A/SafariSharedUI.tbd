@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EE2584B8-7128-3654-852E-C8B96A09EA34
+    value:           C53094C0-A4F5-354E-B692-DBC147537596
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           12081734-D121-3989-AE57-63D5DCC315AD
+    value:           C13A41E2-C535-3C9D-9ECA-67C0CC014D3E
 install-name:    '/System/Library/PrivateFrameworks/SafariSharedUI.framework/Versions/A/SafariSharedUI'
-current-version: 612.1.24
+current-version: 612.3.6
 compatibility-version: 0
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -44,7 +44,8 @@ exports:
                        _WBSLocalizationDictionaryDescriptionKey, _WBSLocalizationDictionaryJSONPathFormat, 
                        _WBSLocalizationDictionaryMessageKey, _WBSLocalizationDictionaryPlaceholdersKey, 
                        _WBSMLPhishingDetailsText, _WBSMLPhishingPageTitle, _WBSMLPhishingWarningText, 
-                       _WBSNotesPIPVisibilityChangedKey, _WBSNullPointer, _WBSParsecABGroupManagerDidChangeGroupIdentifierNotification, 
+                       _WBSNotesPIPVisibilityChangedKey, _WBSNotesSupportedInPrivateBrowsingPreferenceKey, 
+                       _WBSNullPointer, _WBSParsecABGroupManagerDidChangeGroupIdentifierNotification, 
                        _WBSParsecAuxiliaryInfoTextColorGreen, _WBSParsecAuxiliaryInfoTextColorRed, 
                        _WBSParsecDSessionDidLoadBagNotification, _WBSParsecEngagementActionArea, 
                        _WBSParsecEngagementActionAreaCard, _WBSParsecEngagementActionAreaResult, 
@@ -86,10 +87,8 @@ exports:
                        _WBSSearchProviderDefinitionSafeSearchURLQueryParametersKey, 
                        _WBSSearchProviderDefinitionSafeSearchURLTemplateMacKey, _WBSSearchProviderDefinitionScriptingNameKey, 
                        _WBSSearchProviderDefinitionSearchEngineIDKey, _WBSSearchProviderDefinitionSearchEngineIdentifierKey, 
-                       _WBSSearchProviderDefinitionSearchURLTemplateChinaIPadKey, 
-                       _WBSSearchProviderDefinitionSearchURLTemplateChinaIPodTouchKey, 
                        _WBSSearchProviderDefinitionSearchURLTemplateChinaKey, _WBSSearchProviderDefinitionSearchURLTemplateIPadKey, 
-                       _WBSSearchProviderDefinitionSearchURLTemplateIPodTouchKey, 
+                       _WBSSearchProviderDefinitionSearchURLTemplateIPhoneKey, _WBSSearchProviderDefinitionSearchURLTemplateIPodTouchKey, 
                        _WBSSearchProviderDefinitionSearchURLTemplateKey, _WBSSearchProviderDefinitionSearchURLTemplateMacKey, 
                        _WBSSearchProviderDefinitionShortNameKey, _WBSSearchProviderDefinitionSuggestionsURLTemplateIPadKey, 
                        _WBSSearchProviderDefinitionSuggestionsURLTemplateKey, _WBSSearchProviderDefinitionSuggestionsURLTemplateMacKey, 
@@ -682,34 +681,38 @@ exports:
                        _activeTabPermissionKey, _alarmsPermissionKey, _allSupportedTargetLocales, 
                        _allocAnalyticsWorkspaceInstance, _allocMAAssetInstance, _allocMAAssetQueryInstance, 
                        _allocMLModelInstance, _allocPKGlyphViewInstance, _allocPrivacyProxyClientInstance, 
-                       _allocUsageFeedInstance, _allocVNClassificationObservationInstance, 
-                       _allocVNCoreMLModelInstance, _allocVNCoreMLRequestInstance, 
-                       _allocVNImageRequestHandlerInstance, _alloc_LTAlignmentInstance, 
-                       _alloc_LTLanguageDetectionResultInstance, _alloc_LTLocalePairInstance, 
-                       _alloc_LTParagraphTranslationRequestInstance, _alloc_LTTextLanguageDetectionResultInstance, 
-                       _alloc_LTTranslationFeedbackInstance, _alloc_LTTranslationRangeInstance, 
-                       _alloc_LTTranslationRequestInstance, _alloc_LTTranslationSessionInstance, 
-                       _alloc_LTTranslatorInstance, _availablePreferredTargetLocalesFilteredBySupportedLocales, 
+                       _allocSYFeatureEligibilityInstance, _allocSYLinkContextClientInstance, 
+                       _allocSYNotesActivationObserverInstance, _allocUsageFeedInstance, 
+                       _allocVNClassificationObservationInstance, _allocVNCoreMLModelInstance, 
+                       _allocVNCoreMLRequestInstance, _allocVNImageRequestHandlerInstance, 
+                       _alloc_LTAlignmentInstance, _alloc_LTLanguageDetectionResultInstance, 
+                       _alloc_LTLocalePairInstance, _alloc_LTParagraphTranslationRequestInstance, 
+                       _alloc_LTTextLanguageDetectionResultInstance, _alloc_LTTranslationFeedbackInstance, 
+                       _alloc_LTTranslationRangeInstance, _alloc_LTTranslationRequestInstance, 
+                       _alloc_LTTranslationSessionInstance, _alloc_LTTranslatorInstance, 
+                       _availablePreferredTargetLocalesFilteredBySupportedLocales, 
                        _canLoadCoreML, _canLoadMobileAsset, _canLoadNetworkServiceProxy, 
                        _canLoadPassKitUIFoundation, _canLoadSymptomAnalytics, _canLoadSymptomPresentationFeed, 
-                       _canLoadSymptomPresentationLite, _canLoadTranslation, _canLoadVision, 
-                       _clipboardWritePermissionKey, _commandDescriptionKey, _commandNameKey, 
-                       _commandShortcutKey, _contextMenusPermissionKey, _cookiesPermissionKey, 
-                       _coreSpotlightHistoryContentType, _coreSpotlightPageVisitCountKey, 
+                       _canLoadSymptomPresentationLite, _canLoadSynapse, _canLoadTranslation, 
+                       _canLoadVision, _clipboardWritePermissionKey, _commandDescriptionKey, 
+                       _commandNameKey, _commandShortcutKey, _contextMenusPermissionKey, 
+                       _cookiesPermissionKey, _coreSpotlightHistoryContentType, _coreSpotlightPageVisitCountKey, 
                        _currentDeclarativeNetRequestHashVersion, _declarativeNetRequestPermissionKey, 
                        _defaultLocaleManifestKey, _defaultTranslationPreferenceValues, 
                        _extensionComposedIdentifierKey, _getASAttributeContentVersion, 
                        _getAnalyticsWorkspaceClass, _getMAAssetClass, _getMAAssetQueryClass, 
                        _getMLModelClass, _getMLModelVersionStringKey, _getPKGlyphViewClass, 
                        _getPrivacyProxyClientClass, _getPrivacyProxyConfigurationChangedNotification, 
-                       _getUsageFeedClass, _getVNClassificationObservationClass, 
+                       _getSYFeatureEligibilityClass, _getSYLinkContextClientClass, 
+                       _getSYNotesActivationObserverClass, _getUsageFeedClass, _getVNClassificationObservationClass, 
                        _getVNCoreMLModelClass, _getVNCoreMLRequestClass, _getVNImageRequestHandlerClass, 
                        _get_LTAlignmentClass, _get_LTLanguageDetectionResultClass, 
                        _get_LTLocalePairClass, _get_LTParagraphTranslationRequestClass, 
-                       _get_LTTextLanguageDetectionResultClass, _get_LTTranslationFeedbackClass, 
-                       _get_LTTranslationRangeClass, _get_LTTranslationRequestClass, 
-                       _get_LTTranslationSessionClass, _get_LTTranslationTaskHint, 
-                       _get_LTTranslationTaskHintWeb, _get_LTTranslatorClass, _getkSymptomAnalyticsServiceDomainTrackingClearHistoryBundleIDs, 
+                       _get_LTTextLanguageDetectionResultClass, _get_LTTranslationErrorDomain, 
+                       _get_LTTranslationFeedbackClass, _get_LTTranslationRangeClass, 
+                       _get_LTTranslationRequestClass, _get_LTTranslationSessionClass, 
+                       _get_LTTranslationTaskHint, _get_LTTranslationTaskHintWeb, 
+                       _get_LTTranslatorClass, _getkLTUnknownLanguageCode, _getkSymptomAnalyticsServiceDomainTrackingClearHistoryBundleIDs, 
                        _getkSymptomAnalyticsServiceDomainTrackingClearHistoryEndDate, 
                        _getkSymptomAnalyticsServiceDomainTrackingClearHistoryKey, 
                        _getkSymptomAnalyticsServiceDomainTrackingClearHistoryStartDate, 
@@ -724,7 +727,8 @@ exports:
                        WBSBundleWebExtensionBrowsingContext, WBSBundleWebExtensionsController, 
                        WBSCacheRetainReleasePolicy, WBSCachedFont, WBSCompletionListRankingObserver, 
                        WBSContextFeedbackManager, WBSContextResultGrouper, WBSExtensionMessageReplySender, 
-                       WBSExtensionsController, WBSFaviconProvider, WBSFaviconProviderDatabaseController, 
+                       WBSExtensionsAnalyticsEventCoalescer, WBSExtensionsController, 
+                       WBSFaviconProvider, WBSFaviconProviderDatabaseController, 
                        WBSFaviconProviderIconInfo, WBSFaviconProviderPersistenceController, 
                        WBSFaviconProviderPrivateCache, WBSFaviconProviderRecordCache, 
                        WBSFaviconProviderUtilities, WBSFaviconRequest, WBSFaviconRequestsController, 
@@ -853,19 +857,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B4C0AE58-412E-3E24-B870-56C8BEE66959
+    value:           7EDB2AF0-A1F6-3186-865D-DF8818EABD88
   - target:          x86_64-maccatalyst
-    value:           B4C0AE58-412E-3E24-B870-56C8BEE66959
+    value:           7EDB2AF0-A1F6-3186-865D-DF8818EABD88
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5DD247F6-835C-3AF1-A221-893950413CEF
+    value:           12CAFDC9-2D6D-3637-9DD1-55148441AA5C
   - target:          arm64e-maccatalyst
-    value:           5DD247F6-835C-3AF1-A221-893950413CEF
+    value:           12CAFDC9-2D6D-3637-9DD1-55148441AA5C
 install-name:    '/System/Library/PrivateFrameworks/SafariCore.framework/Versions/A/SafariCore'
-current-version: 612.1.24
+current-version: 612.3.6
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -905,7 +909,8 @@ exports:
                        _WBSCloudBookmarkListRecordNameReadingList, _WBSCloudBookmarkListRecordNameTemporaryParentFolder, 
                        _WBSCloudBookmarkListRecordNameTopBookmark, _WBSCloudBookmarksErrorDomain, 
                        _WBSCloudBookmarksMigrationCoordinatorDataDirectory, _WBSCloudBookmarksMigrationCoordinatorLogsDirectory, 
-                       _WBSCloudBookmarksMigrationCoordinatorLogsDirectoryURL, _WBSCloudTabsErrorDomain, 
+                       _WBSCloudBookmarksMigrationCoordinatorLogsDirectoryURL, _WBSCloudKitShareBearBundleIdentifier, 
+                       _WBSCloudKitStartPageSectionOrderPreferenceKey, _WBSCloudTabsErrorDomain, 
                        _WBSDPrintf, _WBSDispatchAsyncToMainQueueWithAutoreleasePool, 
                        _WBSDispatchSyncToMainQueueWithAutoreleasePool, _WBSEnableCloudKitBookmarkDebugUtilitiesPreferenceKey, 
                        _WBSEnableCloudSettingsSyncPreferenceKey, _WBSEnableSandboxStyleFileQuarantine, 
@@ -930,17 +935,17 @@ exports:
                        _WBSPasswordManagerURLSenderSiri, _WBSPasswordManagerURLShowChangePasswordController, 
                        _WBSPasswordManagerURLTrue, _WBSPasswordRuleParserErrorCodeNoError, 
                        _WBSPasswordRuleParserErrorDomain, _WBSPerformBlockOnMainRunLoopWithCommonModes, 
-                       _WBSPrintf, _WBSPrivacyPreservingDescription, _WBSReleaseOnMainQueueImpl, 
-                       _WBSRemoteAutoFillQuirksLastUpdateTimePreferenceKey, _WBSRunLoopRunUntilTerminationSignal, 
-                       _WBSSQLiteErrorDomain, _WBSSafariBookmarksSyncAgentBugIDsKey, 
-                       _WBSSafariBookmarksSyncAgentCloudTabsWereUpdatedOnServerNotificationName, 
+                       _WBSPrintf, _WBSPrivacyPreservingDescription, _WBSRangeEnumerateIndexesUsingBlock, 
+                       _WBSReleaseOnMainQueueImpl, _WBSRemoteAutoFillQuirksLastUpdateTimePreferenceKey, 
+                       _WBSRunLoopRunUntilTerminationSignal, _WBSSQLiteErrorDomain, 
+                       _WBSSafariBookmarksSyncAgentBugIDsKey, _WBSSafariBookmarksSyncAgentCloudTabsWereUpdatedOnServerNotificationName, 
                        _WBSSafariBookmarksSyncAgentDidDetectBugNotificationName, 
                        _WBSSafariBookmarksSyncAgentDidDetectHierarchyIssueNotificationName, 
                        _WBSSafariBookmarksSyncAgentDidUpdateBookmarksNotificationName, 
                        _WBSSafariBookmarksSyncAgentProxyConnectionWasInvalidatedNotification, 
                        _WBSSafariBookmarksSyncAgentServiceName, _WBSSafariBookmarksSyncAgentSyncResultKey, 
-                       _WBSSavedPasswordStoreDidChangeNotification, _WBSStatusCodeGroupFromStatusCode, 
-                       _WBSSuppressCloudKitBookmarkMigrationForCyclerTestPreferenceKey, 
+                       _WBSSafariTechnologyPreviewSyncServiceName, _WBSSavedPasswordStoreDidChangeNotification, 
+                       _WBSStatusCodeGroupFromStatusCode, _WBSSuppressCloudKitBookmarkMigrationForCyclerTestPreferenceKey, 
                        _WBSTeamIdentifierFromAuditToken, __WBSLocalizedString, __WBSLocalizedStringWithCurrentUserLocale, 
                        __WBSRunOnceImpl, _canonicalizedCharacterClasses, _parseCustomCharacterClass, 
                        _parseIdentifier, _parseNamedCharacterClass, _parsePasswordRequiredOrAllowedPropertyValue, 
@@ -990,7 +995,8 @@ exports:
                        WBSSandboxExtensionDataPair, WBSSavedPassword, WBSSavedPasswordAuditor, 
                        WBSSavedPasswordChangeRequest, WBSSavedPasswordSidecar, WBSSavedPasswordStore, 
                        WBSScopeExitHandler, WBSSoftLinkingUtilities, WBSTOTPGenerator, 
-                       WBSURLCredentialCache, WBSUserDefaultObservation, _WBSSavedPasswordPartialCredential ]
+                       WBSURLCredentialCache, WBSUnifiedBarAnalyticsRecorder, WBSUserDefaultObservation, 
+                       _WBSSavedPasswordPartialCredential ]
     objc-ivars:      [ WBSAnalyticsLogger._analyticsSynchronizationQueue, WBSAnalyticsSafariActivatedHomeScreenQuickActionEvent._has, 
                        WBSAnalyticsSafariActivatedHomeScreenQuickActionEvent._quickAction, 
                        WBSAnalyticsSafariActivatedHomeScreenQuickActionEvent._timestamp, 
@@ -1094,13 +1100,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FE9CB963-49D7-3EBD-B9A0-A1B8D38953EC
+    value:           7B91AB0F-214A-3C65-8DDA-1C8C20291718
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           188D4DC3-9D1F-3B58-B960-139B5F892DFA
+    value:           09B04129-DCD3-3481-8615-570D045B09F9
 install-name:    '/System/Library/PrivateFrameworks/SafariShared.framework/Versions/A/SafariShared'
-current-version: 612.1.24
+current-version: 612.3.6
 compatibility-version: 0
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1251,7 +1257,7 @@ exports:
                        _WBSFormMetadataUsernameElementUniqueIDKey, _WBSFormMetadataUsesGeneratedPasswordKey, 
                        _WBSFrequentlyVisitedSitesAlgorithmVersion, _WBSFrequentlyVisitedSitesDidChangeNotification, 
                        _WBSGeolocationPreferenceIdentifier, _WBSGetKeychainData, 
-                       _WBSGetKeychainPassword, _WBSHistoryAddAutocompleteTriggerToArray, 
+                       _WBSGetKeychainPassword, _WBSHasExtensionsInstalledKey, _WBSHistoryAddAutocompleteTriggerToArray, 
                        _WBSHistoryConnectionDefaultDatabaseID, _WBSHistoryConnectionInterface, 
                        _WBSHistoryConnectionOptionCheckIntegrity, _WBSHistoryConnectionOptionCryptographicKey, 
                        _WBSHistoryConnectionOptionDatabaseID, _WBSHistoryConnectionOptionDatabaseURL, 
@@ -1300,7 +1306,9 @@ exports:
                        _WBSKeychainAccessGroup, _WBSKeychainAccountSafari, _WBSKeychainItemExists, 
                        _WBSLastKnownStartPageAppearancePreferenceKey, _WBSLastKnownStartPageBackgroundImageNameKey, 
                        _WBSLastTimeManageExtensionSheetWasViewedPreferenceKey, _WBSLastWeakPasswordReportTimePreferenceKey, 
-                       _WBSLegacyHideFrequentlyVisitedSitesDefaultsKey, _WBSLegacySafariSettingsStartPageBackgroundImageVisibilityKey, 
+                       _WBSLaunchAgentEnabledTopicsKey, _WBSLaunchAgentIgnoredTopicsKey, 
+                       _WBSLaunchAgentSyncServiceBundePathKey, _WBSLegacyHideFrequentlyVisitedSitesDefaultsKey, 
+                       _WBSLegacySafariSettingsStartPageBackgroundImageVisibilityKey, 
                        _WBSLegacySafariSettingsStartPageCloudTabsVisibilityKey, _WBSLegacySafariSettingsStartPageFavoritesVisibilityKey, 
                        _WBSLegacySafariSettingsStartPageFrequentlyVisitedSitesVisibilityKey, 
                        _WBSLegacySafariSettingsStartPageHighlightsVisibilityKey, 
@@ -1363,10 +1371,11 @@ exports:
                        _WBSQuickWebsiteSearchProviderKey, _WBSQuickWebsiteSearchProviderWasAddedNotification, 
                        _WBSReaderFontDownloadDidBeginNotification, _WBSReaderFontDownloadDidFailNotification, 
                        _WBSReaderFontDownloadDidFinishNotification, _WBSReaderFontDownloadNotificationUserInfoKey, 
-                       _WBSReaderFontDownloadProgressDidChangeNotification, _WBSReaderPreferenceIdentifier, 
-                       _WBSRecentlyUsedAutoFillSetArrayKey, _WBSRecentlyUsedAutoFillSetDoNotFillArrayKey, 
-                       _WBSRecentlyUsedAutoFillSetDoNotFillIdentifier, _WBSRecentlyUsedAutoFillSetLabelKey, 
-                       _WBSRemoveKeychainData, _WBSRemoveKeychainDataIfExists, _WBSRemoveKeychainPasswordIfExists, 
+                       _WBSReaderFontDownloadProgressDidChangeNotification, _WBSReaderOrTranslationLastActivatedKey, 
+                       _WBSReaderPreferenceIdentifier, _WBSRecentlyUsedAutoFillSetArrayKey, 
+                       _WBSRecentlyUsedAutoFillSetDoNotFillArrayKey, _WBSRecentlyUsedAutoFillSetDoNotFillIdentifier, 
+                       _WBSRecentlyUsedAutoFillSetLabelKey, _WBSRemoveKeychainData, 
+                       _WBSRemoveKeychainDataIfExists, _WBSRemoveKeychainPasswordIfExists, 
                        _WBSReportAutoplaySignalIfNecessary, _WBSRequestDesktopSitePreferenceIdentifier, 
                        _WBSRespondWithRandomDelay, _WBSRingerIsSilent, _WBSSQLiteComputeLatestVisitFinal, 
                        _WBSSQLiteComputeLatestVisitStep, _WBSSQLiteDailyVisitCountsFinal, 
@@ -1385,11 +1394,12 @@ exports:
                        _WBSSafariSettingsStartPageFavoritesVisibilityKey, _WBSSafariSettingsStartPageFrequentlyVisitedSitesVisibilityKey, 
                        _WBSSafariSettingsStartPageHighlightsVisibilityKey, _WBSSafariSettingsStartPagePrivacyReportVisibilityKey, 
                        _WBSSafariSettingsStartPageReadingListVisibilityKey, _WBSSafariSettingsStartPageSectionOrderKey, 
-                       _WBSSafariSettingsStartPageSiriSuggestionsVisibilityKey, _WBSSampledPageTopColorEnabledKey, 
-                       _WBSScreenCapturePreferenceIdentifier, _WBSSearchRelevanceDecayResults, 
-                       _WBSSearchRelevanceHistoryDeduplication, _WBSSearchRelevanceHistoryDeduplicationSwitchToTab, 
-                       _WBSSearchRelevanceLocalPhantomTophitsDisabled, _WBSSearchRelevanceOverrideDefaults, 
-                       _WBSSearchRelevanceServerAssistedDeduplication, _WBSSearchRelevanceStrengthenAutocompleteTriggerExtensionMatching, 
+                       _WBSSafariSettingsStartPageSiriSuggestionsVisibilityKey, _WBSSafariSyncServiceInfoPreferenceKey, 
+                       _WBSSampledPageTopColorEnabledKey, _WBSScreenCapturePreferenceIdentifier, 
+                       _WBSSearchRelevanceDecayResults, _WBSSearchRelevanceHistoryDeduplication, 
+                       _WBSSearchRelevanceHistoryDeduplicationSwitchToTab, _WBSSearchRelevanceLocalPhantomTophitsDisabled, 
+                       _WBSSearchRelevanceOverrideDefaults, _WBSSearchRelevanceServerAssistedDeduplication, 
+                       _WBSSearchRelevanceStrengthenAutocompleteTriggerExtensionMatching, 
                        _WBSSetIsStringForUserTypedDomainExpansionInHistoryFunction, 
                        _WBSSetKeychainData, _WBSSetKeychainPassword, _WBSShortTimeSinceLastVisitPenalty, 
                        _WBSShowBackgroundImagePreferenceKey, _WBSSignalToSendForAutoplayEventWithFlags, 
@@ -1420,10 +1430,10 @@ exports:
                        _WBSUserAgentQuirksConfigurationUpdateDateKey, _WBSUserHasUsedNonVirtualCardPreferenceKey, 
                        _WBSWebDriverSecurePreferencesDidUpdateNotificationName, _WBSWebExtensionURLScheme, 
                        _WBSWebGLPreferenceIdentifier, _WBSWebsiteShouldStartWithReaderEnabledUserInfoKey, 
-                       _WBSWindowActiveTabGroupUUIDKey, _WBSWindowContentRectKey, 
-                       _WBSWindowCustomUnifiedFieldTextKey, _WBSWindowFavoritesBarHiddenKey, 
-                       _WBSWindowIsPopupWindowKey, _WBSWindowIsPrivateWindowKey, 
-                       _WBSWindowMinimizedKey, _WBSWindowPrefersSidebarVisibleKey, 
+                       _WBSWindowActiveTabGroupKey, _WBSWindowActiveTabGroupUUIDKey, 
+                       _WBSWindowContentRectKey, _WBSWindowCustomUnifiedFieldTextKey, 
+                       _WBSWindowFavoritesBarHiddenKey, _WBSWindowIsPopupWindowKey, 
+                       _WBSWindowIsPrivateWindowKey, _WBSWindowMinimizedKey, _WBSWindowPrefersSidebarVisibleKey, 
                        _WBSWindowPropertyTabWindowUUIDKey, _WBSWindowSelectedPinnedTabIndexKey, 
                        _WBSWindowStatusBarHiddenKey, _WBSWindowTabBarHiddenKey, _WBSWindowUnifiedSidebarModeKey, 
                        _WBSZoomPreferenceIdentifier, __CHCSVParserParse, __SSURLCompletionMatchLocationForWBSURLCompletionMatchLocation, 

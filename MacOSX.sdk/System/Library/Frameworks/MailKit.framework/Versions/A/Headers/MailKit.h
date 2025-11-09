@@ -18,9 +18,11 @@
 // Compose Extension
 #import <MailKit/MEAddressAnnotation.h>
 #import <MailKit/MEComposeSession.h>
+#import <MailKit/MEComposeContext.h>
 
 // Content Blocking
 #import <MailKit/MEContentBlocker.h>
+#import <MailKit/MEExtensionManager.h>
 
 // Message Security
 #import <MailKit/MEEncodedOutgoingMessage.h>
@@ -32,3 +34,4 @@
 #import <MailKit/MEDecodedMessage.h>
 #import <MailKit/MEMessageDecoder.h>
 #import <MailKit/MEMessageEncoder.h>
+#import <MailKit/MEDecodedMessageBanner.h>

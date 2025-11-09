@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0C372E74-9514-35A9-B959-A2AAA70E9CF2
+    value:           57641D29-7145-3120-AA57-27383F7EA2BC
   - target:          x86_64-maccatalyst
-    value:           0C372E74-9514-35A9-B959-A2AAA70E9CF2
+    value:           57641D29-7145-3120-AA57-27383F7EA2BC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AFA049F0-1930-3AE0-92A0-C21E5C87A11E
+    value:           8B551E14-03CA-376B-B71F-75E3CBB52FDF
   - target:          arm64e-maccatalyst
-    value:           AFA049F0-1930-3AE0-92A0-C21E5C87A11E
+    value:           8B551E14-03CA-376B-B71F-75E3CBB52FDF
 install-name:    '/usr/lib/swift/libswiftCoreMIDI.dylib'
-current-version: 3
+current-version: 5
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '_$s8CoreMIDI30UnsafeMutableMIDIPacketPointerV10startIndexSivg', 
                        '_$s8CoreMIDI30UnsafeMutableMIDIPacketPointerV10startIndexSivpMV', 
                        '_$s8CoreMIDI30UnsafeMutableMIDIPacketPointerV12makeIteratorSo0E0VAAE12ByteSequenceV0H0VyF', 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0D957B34-298D-316C-8EA7-915E62C3D059
+    value:           BA18E8D8-3872-351C-AFF6-844540213A4D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6000E34A-79E7-3BF3-95D8-666816912A4D
+    value:           90276EEF-FB59-3DB9-A13D-61F2F37F1D0F
 install-name:    '/System/Library/PrivateFrameworks/IMAPTracing.framework/Versions/A/IMAPTracing'
 swift-abi-version: 7
 allowable-clients:

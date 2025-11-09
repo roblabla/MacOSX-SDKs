@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FD66BEFC-9BEC-33FB-98D8-05212AD3AD57
+    value:           DADB89E1-28B4-3141-9698-76959D5E6C97
   - target:          x86_64-maccatalyst
-    value:           FD66BEFC-9BEC-33FB-98D8-05212AD3AD57
+    value:           DADB89E1-28B4-3141-9698-76959D5E6C97
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           25C46464-37E5-3FC2-8ADB-7EB6BF35243F
+    value:           5F38256E-A9D3-3EF0-B8F5-F0FD53741422
   - target:          arm64e-maccatalyst
-    value:           25C46464-37E5-3FC2-8ADB-7EB6BF35243F
+    value:           5F38256E-A9D3-3EF0-B8F5-F0FD53741422
 install-name:    '/System/Library/PrivateFrameworks/CVNLP.framework/Versions/A/CVNLP'
 current-version: 119
 exports:
@@ -39,12 +39,14 @@ exports:
                        _CVNLPCaptionScaleMethodCGInterpolationLow, _CVNLPCaptionScaleMethodCGInterpolationMedium, 
                        _CVNLPCaptionScaleMethodCGInterpolationNone, _CVNLPCaptionScaleMethodvImage, 
                        _CVNLPCaptionTrackPerformance, _CVNLPCaptions, _CVNLPCationErrorDomain, 
-                       _CVNLPCommSafetyErrorDomain, _CVNLPCommSafetyHandlerImageClassificationScores, 
-                       _CVNLPCommSafetyImageScaleMethod, _CVNLPCommSafetyImageScaleMethodCGInterpolationHigh, 
-                       _CVNLPCommSafetyImageScaleMethodCGInterpolationLow, _CVNLPCommSafetyImageScaleMethodCGInterpolationMedium, 
-                       _CVNLPCommSafetyImageScaleMethodCGInterpolationNone, _CVNLPCommSafetyImageScaleMethodvImage, 
-                       _CVNLPCommSafetyImageSensitivity, _CVNLPCommSafetyImageSensitivityScore, 
-                       _CVNLPCommSafetyUseANE, _CVNLPCommSafetyUseCPU, _CVNLPCommSafetyUseGPU, 
+                       _CVNLPCommSafetyEnableAllClasses, _CVNLPCommSafetyErrorDomain, 
+                       _CVNLPCommSafetyHandlerImageClassificationScores, _CVNLPCommSafetyImageScaleMethod, 
+                       _CVNLPCommSafetyImageScaleMethodCGInterpolationHigh, _CVNLPCommSafetyImageScaleMethodCGInterpolationLow, 
+                       _CVNLPCommSafetyImageScaleMethodCGInterpolationMedium, _CVNLPCommSafetyImageScaleMethodCGInterpolationNone, 
+                       _CVNLPCommSafetyImageScaleMethodvImage, _CVNLPCommSafetyImageSensitivity, 
+                       _CVNLPCommSafetyImageSensitivityScore, _CVNLPCommSafetyUseANE, 
+                       _CVNLPCommSafetyUseAnyAvailableDevice, _CVNLPCommSafetyUseCPU, 
+                       _CVNLPCommSafetyUseGPU, _CVNLPCommSafetyUseImageAnalyzer, 
                        _CVNLPCommSafetyUseMTLDevice, _CVNLPCommSafetyUseTextAnalyzer, 
                        _CVNLPErrorDomain, _CVNLPGeneratedCaption, _CVNLPGeneratedCaptionConfidenceLow, 
                        _CVNLPGeneratedCaptionScore, _CVNLPImageClassificationIdentifiers, 

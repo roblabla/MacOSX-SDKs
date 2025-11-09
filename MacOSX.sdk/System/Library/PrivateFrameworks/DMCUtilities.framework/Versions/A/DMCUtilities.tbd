@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7E9C3534-0078-37C8-85A1-093A082FDC12
+    value:           467E08A5-22DF-3960-B7A5-0DFB97084E0B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DE91A7B0-76E8-3DEB-B020-EDC6BECF63C1
+    value:           69341781-69CC-3BFE-A00D-38D53EC60209
 install-name:    '/System/Library/PrivateFrameworks/DMCUtilities.framework/Versions/A/DMCUtilities'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -21,11 +21,12 @@ exports:
                        _DMCAccountPropertyKeyEnrollmentToken, _DMCAccountPropertyKeyEnrollmentType, 
                        _DMCAccountPropertyKeyEnrollmentURL, _DMCAccountPropertyKeyIsManagementProfileLocked, 
                        _DMCAccountPropertyKeyManagementProfileIdentifier, _DMCAccountPropertyKeyPrimaryAccount, 
-                       _DMCAccountSchemeBearer, _DMCAccountSchemeMAID, _DMCAccountSchemeTest, 
-                       _DMCAppstoredBundleIdentifier, _DMCBYSetupAssistantNeedsToRun, 
-                       _DMCCTClearManagedCellularProfile, _DMCCTGetManagedCellularProfile, 
-                       _DMCCTHasCDMA, _DMCCTHasCellular, _DMCCTHasGSM, _DMCCTHasTelephony, 
-                       _DMCCTIMEI, _DMCCTMEID, _DMCCTSetManagedCellularProfile, _DMCCTSupportsVoiceRoaming, 
+                       _DMCAccountPropertyKeySignInUserIdentifier, _DMCAccountSchemeBearer, 
+                       _DMCAccountSchemeMAID, _DMCAccountSchemeTest, _DMCAppstoredBundleIdentifier, 
+                       _DMCBYSetupAssistantNeedsToRun, _DMCCTClearManagedCellularProfile, 
+                       _DMCCTGetManagedCellularProfile, _DMCCTHasCDMA, _DMCCTHasCellular, 
+                       _DMCCTHasGSM, _DMCCTHasTelephony, _DMCCTIMEI, _DMCCTMEID, 
+                       _DMCCTSetManagedCellularProfile, _DMCCTSupportsVoiceRoaming, 
                        _DMCCellularErrorDomain, _DMCCloudConfigErrorDomain, _DMCDeviceIsNetworkTethered, 
                        _DMCEnrollmentErrorDomain, _DMCErrorArray, _DMCErrorArrayFromLocalizedDescription, 
                        _DMCErrorTypeFatal, _DMCErrorTypeKey, _DMCErrorTypeNeedsRetry, 
@@ -35,8 +36,8 @@ exports:
                        _DMCGestaltGetDeviceClass, _DMCGestaltGetDeviceSerialNumber, 
                        _DMCGestaltGetDeviceUUID, _DMCGestaltGetModelNumber, _DMCGestaltGetProductName, 
                        _DMCGestaltHasInternetTetheringCapability, _DMCGestaltIsAppleTV, 
-                       _DMCGestaltIsHomePod, _DMCGestaltIsInternalBuild, _DMCGestaltIsPhone, 
-                       _DMCGestaltIsWatch, _DMCGestaltIsiPad, _DMCHCUCopyCertificateFromKeychainForMappedLabel, 
+                       _DMCGestaltIsHomePod, _DMCGestaltIsPhone, _DMCGestaltIsWatch, 
+                       _DMCGestaltIsiPad, _DMCHCUCopyCertificateFromKeychainForMappedLabel, 
                        _DMCHCUCopyHostCertificateForMappedLabel, _DMCHCUCreateCSR, 
                        _DMCHCUPrivateKeyKey, _DMCHCUPublicKeyKey, _DMCHCUSetCertificateDataForMappedLabel, 
                        _DMCHTTPAuthStringWithAuthToken, _DMCHTTPContentTypeApplicationJSON, 

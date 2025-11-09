@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           25F265BA-5000-34D6-87F4-E1354D1691A3
+    value:           5AF5A51E-EF32-39CF-9057-8A5DE03284DF
   - target:          x86_64-maccatalyst
-    value:           25F265BA-5000-34D6-87F4-E1354D1691A3
+    value:           5AF5A51E-EF32-39CF-9057-8A5DE03284DF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6FCFD383-ACF3-3AEA-805B-6FE5D4A761AD
+    value:           BDC309B5-C0BB-388B-B627-36B7F05F048A
   - target:          arm64e-maccatalyst
-    value:           6FCFD383-ACF3-3AEA-805B-6FE5D4A761AD
+    value:           BDC309B5-C0BB-388B-B627-36B7F05F048A
 install-name:    '/System/Library/PrivateFrameworks/SpotlightIndex.framework/Versions/A/SpotlightIndex'
-current-version: 2173
+current-version: 2183.10
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -65,9 +65,10 @@ exports:
                        _SIQueryCreateWithItemsAndCompletionStringWithWeights, _SIQueryCreateWithItemsAndCompletionStringWithWeightsForCurrentTime, 
                        _SIQueryCreateWithParameters, _SIQueryGetUniqueId, _SIQueryRelease, 
                        _SIQueryRetain, _SIQuerySetBatchingParameters, _SIQuerySetDominantRankingQueryCount, 
-                       _SIQuerySetFuzzyQueryInfo, _SIQuerySetStrongRankingQueryCount, 
-                       _SIQuerySetUniqueId, _SIReaderWriterLockCreate, _SIReaderWriterLockDestroy, 
-                       _SIReaderWriterLockReadLock, _SIReaderWriterLockReadUnlock, 
+                       _SIQuerySetFuzzyQueryInfo, _SIQuerySetHighMatchBit, _SIQuerySetHighRecencyBit, 
+                       _SIQuerySetLowMatchBit, _SIQuerySetLowRecencyBit, _SIQuerySetShortcutBit, 
+                       _SIQuerySetStrongRankingQueryCount, _SIQuerySetUniqueId, _SIReaderWriterLockCreate, 
+                       _SIReaderWriterLockDestroy, _SIReaderWriterLockReadLock, _SIReaderWriterLockReadUnlock, 
                        _SIReaderWriterLockWriteLock, _SIReaderWriterLockWriteUnlock, 
                        _SIRecomputeSizes, _SIResetCrashStr, _SIRestoreCacheData, 
                        _SIResultBatchFree, _SIResultQueueCancel, _SIResultQueueCreate, 
@@ -91,8 +92,8 @@ exports:
                        __SIChangeProtectionClassForFilesInDirectory, __SICheckIndexForDuplicateOids, 
                        __SICleanupStrings, __SIConsistencyCheck, __SICooldownIndexFilesForMerge, 
                        __SICopyPropertyIDMap, __SICreateContactMailCounts, __SICreateContactSMSCounts, 
-                       __SIDirectoryStoreIterate, __SIFlushAndSyncIndex, __SIGetAllOids, 
-                       __SIGetErrorString, __SIGetFileOptions, __SIGetIndexCount, 
+                       __SIDirectoryStoreIterate, __SIFilterValidatedCSImports, __SIFlushAndSyncIndex, 
+                       __SIGetAllOids, __SIGetErrorString, __SIGetFileOptions, __SIGetIndexCount, 
                        __SIGetLastUsedDate, __SIGetMissingParentOID, __SIGetRecoverTimeStamp, 
                        __SIIssueBadIndex, __SIIssueCacheCleanup, __SIIssueDefrag, 
                        __SIIssueFlush, __SIIssueFullMerge, __SIIssueFullMergeWithGroup, 

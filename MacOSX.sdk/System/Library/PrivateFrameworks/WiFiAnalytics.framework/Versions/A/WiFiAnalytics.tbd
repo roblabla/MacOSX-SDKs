@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6EB79DE2-5DA7-322A-BF2D-319370DF7B58
+    value:           8C744149-1804-3761-B331-585487EFB907
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           87E54F84-549C-392F-AF39-8C9BF166EAEA
+    value:           0B7E4341-B1E6-331C-B11B-F6CC27EEE957
 install-name:    '/System/Library/PrivateFrameworks/WiFiAnalytics.framework/Versions/A/WiFiAnalytics'
 swift-abi-version: 7
 exports:

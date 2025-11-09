@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0B1CDEC1-7B0E-350D-A419-80AEC5756282
+    value:           FE6F9D07-8A6E-3A80-AE3C-CCD7E68F0928
   - target:          x86_64-maccatalyst
-    value:           0B1CDEC1-7B0E-350D-A419-80AEC5756282
+    value:           FE6F9D07-8A6E-3A80-AE3C-CCD7E68F0928
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C19A06A9-43A8-37FC-A1D5-6E7206BCC7F3
+    value:           53C709F4-5181-316A-9EC4-23C5462F876C
   - target:          arm64e-maccatalyst
-    value:           C19A06A9-43A8-37FC-A1D5-6E7206BCC7F3
+    value:           53C709F4-5181-316A-9EC4-23C5462F876C
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDProtobufBluetooth.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -925,6 +925,7 @@ exports:
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo16kRssiFieldNumberE, 
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo17default_instance_E, 
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo19kInstantFieldNumberE, 
+                       __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo19kReTxAvgFieldNumberE, 
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo19kVersionFieldNumberE, 
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo20kVendorIDFieldNumberE, 
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo21CheckTypeAndMergeFromERKN20wireless_diagnostics6google8protobuf11MessageLiteE, 
@@ -959,13 +960,27 @@ exports:
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo32kAvgSwitchesPerSecondFieldNumberE, 
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo32kTotalEPAEnabledCountFieldNumberE, 
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo33kNfAverageGoodChannelsFieldNumberE, 
+                       __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo33kSpatialLatencyFlush60FieldNumberE, 
+                       __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo33kSpatialLatencyFlush80FieldNumberE, 
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo33kTotalConnectedDevicesFieldNumberE, 
+                       __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo34kSpatialLatencyFlush100FieldNumberE, 
+                       __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo34kSpatialLatencyFlush120FieldNumberE, 
+                       __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo34kSpatialLatencyFlush140FieldNumberE, 
+                       __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo34kSpatialLatencyFlush150FieldNumberE, 
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo38kAvgMaxGoodPacketsPerSwitchFieldNumberE, 
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo38kAvgMinGoodPacketsPerSwitchFieldNumberE, 
+                       __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo38kSpatialLatencyModePeriod60FieldNumberE, 
+                       __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo38kSpatialLatencyModePeriod80FieldNumberE, 
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo38kWirelessplittersessioninfoFieldNumberE, 
+                       __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo39kSpatialLatencyModePeriod100FieldNumberE, 
+                       __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo39kSpatialLatencyModePeriod120FieldNumberE, 
+                       __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo39kSpatialLatencyModePeriod140FieldNumberE, 
+                       __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo39kSpatialLatencyModePeriod150FieldNumberE, 
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo40kTotalPurgeCountDueToOverwaitFieldNumberE, 
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo42kTotalAudioDurationInLowLatencyFieldNumberE, 
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo43kTotalAudioDurationInHighLatencyFieldNumberE, 
+                       __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo45kSpatialLatencyLowLatencyExitCountFieldNumberE, 
+                       __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo46kSpatialLatencyLowLatencyEntryCountFieldNumberE, 
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo4SwapEPS1_, __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo5ClearEv, 
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo8CopyFromERKS1_, 
                        __ZN3awd7metrics26BluetoothA2DPAudioLinkInfo9MergeFromERKS1_, 

@@ -220,6 +220,7 @@ struct tPacketFilterMetadata
  */
 class __IOUSBHOSTFAMILY_DEPRECATED IOUSBHostIOSource : public OSObject
 {
+    friend class AppleUSBHostController;
     friend class AppleUSBIORequest;
     friend class IOUSBHostInterface;
 
@@ -372,7 +373,7 @@ public:
      * @param       dataBuffer IOMemoryDescriptor pointer containing the buffer to use for the transfer
      * @param       dataBufferLength Length of the request.  Must be <= <code>dataBuffer->getLength()</code>
      * @param       completion Pointer to a IOUSBHostCompletion structure.  This will be copied and can therefore be stack-allocated.
-     * @param       completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.  Must be 0 for interrupt pipes and streams.
+     * @param       completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.  Must be 0 for interrupt endpoints.
      * @return      kIOReuturnSuccess if the completion will be called in the future, otherwise error
      */
     virtual IOReturn io(IOMemoryDescriptor* dataBuffer, uint32_t dataBufferLength, IOUSBHostCompletion* completion, uint32_t completionTimeoutMs = 0);
@@ -383,7 +384,7 @@ public:
      * @param       dataBuffer IOMemoryDescriptor pointer containing the buffer to use for the transfer
      * @param       dataBufferLength Length of the request.  Must be <= <code>dataBuffer->getLength()</code>
      * @param       bytesTransferred uint32_t reference which will be updated with the bytes transferred during the request
-     * @param       completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.  Must be 0 for interrupt pipes and streams.
+     * @param       completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.  Must be 0 for interrupt endpoints.
      * @return      IOReturn value indicating the result of the IO request
      */
     virtual IOReturn io(IOMemoryDescriptor* dataBuffer, uint32_t dataBufferLength, uint32_t& bytesTransferred, uint32_t completionTimeoutMs = 0);
@@ -402,7 +403,7 @@ public:
      * @param       dataBuffer IOMemoryDescriptor pointer containing the buffer to use for the transfer
      * @param       dataBufferLength Length of the request.  Must be <= <code>dataBuffer->getLength()</code>
      * @param       completion Pointer to a IOUSBHostBundledCompletion structure.  This will be copied and can therefore be stack-allocated.
-     * @param       completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.  Must be 0 for interrupt pipes and streams.
+     * @param       completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.  Must be 0 for interrupt endpoints.
      * @return      kIOReuturnSuccess if the completion will be called in the future, otherwise error
      */
     virtual IOReturn io(IOMemoryDescriptor* dataBuffer, uint32_t dataBufferLength, IOUSBHostBundledCompletion* completion, uint32_t completionTimeoutMs = 0);

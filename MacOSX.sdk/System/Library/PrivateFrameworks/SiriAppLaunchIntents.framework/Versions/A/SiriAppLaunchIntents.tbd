@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C57DDC51-F731-3AFD-8BFA-978E6122F34E
+    value:           908F2DB0-4DA3-38B1-85D7-A6085B086CE8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C4B8B9C0-088F-3941-AC1A-1F7C8A89344D
+    value:           14E60076-1A2D-39DD-9ABE-D002F072EAB8
 install-name:    '/System/Library/PrivateFrameworks/SiriAppLaunchIntents.framework/Versions/A/SiriAppLaunchIntents'
 swift-abi-version: 7
 allowable-clients:

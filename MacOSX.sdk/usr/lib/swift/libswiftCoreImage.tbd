@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           163ACF13-4C76-310E-A0DB-440358D3A4D8
+    value:           9D7FA5A0-2B8F-3FB3-8A68-A76D1A6DD825
   - target:          x86_64-maccatalyst
-    value:           163ACF13-4C76-310E-A0DB-440358D3A4D8
+    value:           9D7FA5A0-2B8F-3FB3-8A68-A76D1A6DD825
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           34AD44BD-D527-3125-A52E-E4C3CBB2F852
+    value:           B41924BA-4562-3B4A-B56D-A8FDC87061BD
   - target:          arm64e-maccatalyst
-    value:           34AD44BD-D527-3125-A52E-E4C3CBB2F852
+    value:           B41924BA-4562-3B4A-B56D-A8FDC87061BD
 install-name:    '/usr/lib/swift/libswiftCoreImage.dylib'
 current-version: 2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCoreImage.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftCoreImage.dylib', 
@@ -27,6 +27,6 @@ exports:
                        '$ld$install_name$os10.13$@rpath/libswiftCoreImage.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftCoreImage.dylib', 
                        '$ld$install_name$os10.9$@rpath/libswiftCoreImage.dylib' ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '__swift_FORCE_LOAD_$_swiftCoreImage' ]
 ...

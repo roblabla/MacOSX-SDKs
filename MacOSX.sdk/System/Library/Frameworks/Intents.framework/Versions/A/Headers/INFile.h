@@ -46,6 +46,11 @@ API_UNAVAILABLE(tvos)
  */
 @property (nullable, readonly, strong, NS_NONATOMIC_IOSONLY) NSURL *fileURL;
 
+/**
+ Indicates whether the file should be automatically deleted from disk when the Shortcut is done running. `false` by default.
+ */
+@property (assign, NS_NONATOMIC_IOSONLY) BOOL removedOnCompletion API_AVAILABLE(ios(15.1), macos(12.0), watchos(8.1));
+
 @end
 
 NS_ASSUME_NONNULL_END

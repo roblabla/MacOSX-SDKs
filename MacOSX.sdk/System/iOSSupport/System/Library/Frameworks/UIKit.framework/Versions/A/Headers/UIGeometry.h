@@ -22,11 +22,12 @@ typedef NSEdgeInsets UIEdgeInsets;
 typedef struct __attribute__((objc_boxable)) UIEdgeInsets {
     CGFloat top, left, bottom, right;  // specify amount to inset (positive) for each of the edges. values can be negative to 'outset'
 } UIEdgeInsets;
-#endif
+#endif // FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
 
 /* Geometry type declarations marked with `#ifndef FOUNDATION_HAS_DIRECTIONAL_GEOMETRY` are being relocated to Foundation/NSGeometry.h */
 
 #ifndef FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
 /* Specifically for use in methods and functions supporting user interface layout direction
  */
@@ -34,7 +35,8 @@ typedef struct __attribute__((objc_boxable)) NSDirectionalEdgeInsets {
     CGFloat top, leading, bottom, trailing;  // specify amount to inset (positive) for each of the edges. values can be negative to 'outset'
 } NSDirectionalEdgeInsets API_AVAILABLE(ios(11.0),tvos(11.0),watchos(4.0));
 
-#endif
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
+#endif // FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
 
 typedef struct __attribute__((objc_boxable)) UIOffset {
     CGFloat horizontal, vertical; // specify amount to offset a position, positive for right or down, negative for left or up
@@ -79,6 +81,8 @@ enum {
 
 #else
 
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
+
 typedef NS_OPTIONS(NSUInteger, NSDirectionalRectEdge) {
     NSDirectionalRectEdgeNone       = 0,
     NSDirectionalRectEdgeTop        = 1 << 0,
@@ -110,7 +114,8 @@ typedef NS_ENUM(NSInteger, NSRectAlignment) {
     NSRectAlignmentTopTrailing,
 } API_AVAILABLE(ios(13.0));
 
-#endif
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
+#endif // FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
 
 UIKIT_STATIC_INLINE UIEdgeInsets UIEdgeInsetsMake(CGFloat top, CGFloat left, CGFloat bottom, CGFloat right) {
     UIEdgeInsets insets = {top, left, bottom, right};
@@ -118,12 +123,14 @@ UIKIT_STATIC_INLINE UIEdgeInsets UIEdgeInsetsMake(CGFloat top, CGFloat left, CGF
 }
 
 #ifndef FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 UIKIT_STATIC_INLINE NSDirectionalEdgeInsets NSDirectionalEdgeInsetsMake(CGFloat top, CGFloat leading, CGFloat bottom, CGFloat trailing) API_AVAILABLE(ios(11.0),tvos(11.0),watchos(4.0))
 {
     NSDirectionalEdgeInsets insets = {top, leading, bottom, trailing};
     return insets;
 }
-#endif
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
+#endif // FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
 
 UIKIT_STATIC_INLINE CGRect UIEdgeInsetsInsetRect(CGRect rect, UIEdgeInsets insets) {
     rect.origin.x    += insets.left;
@@ -143,11 +150,13 @@ UIKIT_STATIC_INLINE BOOL UIEdgeInsetsEqualToEdgeInsets(UIEdgeInsets insets1, UIE
 }
 
 #ifndef FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 UIKIT_STATIC_INLINE BOOL NSDirectionalEdgeInsetsEqualToDirectionalEdgeInsets(NSDirectionalEdgeInsets insets1, NSDirectionalEdgeInsets insets2) API_AVAILABLE(ios(11.0),tvos(11.0),watchos(4.0))
 {
     return insets1.leading == insets2.leading && insets1.top == insets2.top && insets1.trailing == insets2.trailing && insets1.bottom == insets2.bottom;
 }
-#endif
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
+#endif // FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
 
 UIKIT_STATIC_INLINE BOOL UIOffsetEqualToOffset(UIOffset offset1, UIOffset offset2) {
     return offset1.horizontal == offset2.horizontal && offset1.vertical == offset2.vertical;
@@ -155,8 +164,10 @@ UIKIT_STATIC_INLINE BOOL UIOffsetEqualToOffset(UIOffset offset1, UIOffset offset
 
 UIKIT_EXTERN const UIEdgeInsets UIEdgeInsetsZero;
 #ifndef FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 UIKIT_EXTERN const NSDirectionalEdgeInsets NSDirectionalEdgeInsetsZero API_AVAILABLE(ios(11.0),tvos(11.0),watchos(4.0));
-#endif
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
+#endif // FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
 UIKIT_EXTERN const UIOffset UIOffsetZero;
 
 UIKIT_EXTERN NSString *NSStringFromCGPoint(CGPoint point);
@@ -166,8 +177,10 @@ UIKIT_EXTERN NSString *NSStringFromCGRect(CGRect rect);
 UIKIT_EXTERN NSString *NSStringFromCGAffineTransform(CGAffineTransform transform);
 UIKIT_EXTERN NSString *NSStringFromUIEdgeInsets(UIEdgeInsets insets);
 #ifndef FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 UIKIT_EXTERN NSString *NSStringFromDirectionalEdgeInsets(NSDirectionalEdgeInsets insets) API_AVAILABLE(ios(11.0),tvos(11.0),watchos(4.0));
-#endif
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
+#endif // FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
 UIKIT_EXTERN NSString *NSStringFromUIOffset(UIOffset offset);
 
 UIKIT_EXTERN CGPoint CGPointFromString(NSString *string);
@@ -177,8 +190,10 @@ UIKIT_EXTERN CGRect CGRectFromString(NSString *string);
 UIKIT_EXTERN CGAffineTransform CGAffineTransformFromString(NSString *string);
 UIKIT_EXTERN UIEdgeInsets UIEdgeInsetsFromString(NSString *string);
 #ifndef FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 UIKIT_EXTERN NSDirectionalEdgeInsets NSDirectionalEdgeInsetsFromString(NSString *string) API_AVAILABLE(ios(11.0),tvos(11.0),watchos(4.0));
-#endif
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
+#endif // FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
 UIKIT_EXTERN UIOffset UIOffsetFromString(NSString *string);
 
 @interface NSValue (NSValueUIGeometryExtensions)
@@ -190,8 +205,10 @@ UIKIT_EXTERN UIOffset UIOffsetFromString(NSString *string);
 + (NSValue *)valueWithCGAffineTransform:(CGAffineTransform)transform;
 + (NSValue *)valueWithUIEdgeInsets:(UIEdgeInsets)insets;
 #ifndef FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 + (NSValue *)valueWithDirectionalEdgeInsets:(NSDirectionalEdgeInsets)insets API_AVAILABLE(ios(11.0),tvos(11.0),watchos(4.0));
-#endif
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
+#endif // FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
 + (NSValue *)valueWithUIOffset:(UIOffset)insets API_AVAILABLE(ios(5.0));
 
 @property(nonatomic, readonly) CGPoint CGPointValue;
@@ -201,8 +218,10 @@ UIKIT_EXTERN UIOffset UIOffsetFromString(NSString *string);
 @property(nonatomic, readonly) CGAffineTransform CGAffineTransformValue;
 @property(nonatomic, readonly) UIEdgeInsets UIEdgeInsetsValue;
 #ifndef FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 @property(nonatomic, readonly) NSDirectionalEdgeInsets directionalEdgeInsetsValue API_AVAILABLE(ios(11.0),tvos(11.0),watchos(4.0));
-#endif
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
+#endif // FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
 @property(nonatomic, readonly) UIOffset UIOffsetValue API_AVAILABLE(ios(5.0));
 
 @end
@@ -216,8 +235,10 @@ UIKIT_EXTERN UIOffset UIOffsetFromString(NSString *string);
 - (void)encodeCGAffineTransform:(CGAffineTransform)transform forKey:(NSString *)key;
 - (void)encodeUIEdgeInsets:(UIEdgeInsets)insets forKey:(NSString *)key;
 #ifndef FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 - (void)encodeDirectionalEdgeInsets:(NSDirectionalEdgeInsets)insets forKey:(NSString *)key API_AVAILABLE(ios(11.0),tvos(11.0),watchos(4.0));
-#endif
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
+#endif // FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
 - (void)encodeUIOffset:(UIOffset)offset forKey:(NSString *)key API_AVAILABLE(ios(5.0));
 
 - (CGPoint)decodeCGPointForKey:(NSString *)key;
@@ -227,8 +248,10 @@ UIKIT_EXTERN UIOffset UIOffsetFromString(NSString *string);
 - (CGAffineTransform)decodeCGAffineTransformForKey:(NSString *)key;
 - (UIEdgeInsets)decodeUIEdgeInsetsForKey:(NSString *)key;
 #ifndef FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 - (NSDirectionalEdgeInsets)decodeDirectionalEdgeInsetsForKey:(NSString *)key API_AVAILABLE(ios(11.0),tvos(11.0),watchos(4.0));
-#endif
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
+#endif // FOUNDATION_HAS_DIRECTIONAL_GEOMETRY
 - (UIOffset)decodeUIOffsetForKey:(NSString *)key API_AVAILABLE(ios(5.0));
 
 @end

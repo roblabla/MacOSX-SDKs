@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AD0595AC-0217-3CBE-8FCB-CF9414D08AD0
+    value:           95A6EB7F-340E-3202-964F-3912EB580A5E
   - target:          x86_64-maccatalyst
-    value:           AD0595AC-0217-3CBE-8FCB-CF9414D08AD0
+    value:           95A6EB7F-340E-3202-964F-3912EB580A5E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ABF34D98-EBAC-33A7-8151-3AB5D785B818
+    value:           B27C4863-5513-378C-99F2-B18183743D4D
   - target:          arm64e-maccatalyst
-    value:           ABF34D98-EBAC-33A7-8151-3AB5D785B818
+    value:           B27C4863-5513-378C-99F2-B18183743D4D
 install-name:    '/System/Library/PrivateFrameworks/UIKitServices.framework/Versions/A/UIKitServices'
-current-version: 5061.2
+current-version: 5205.0.255
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -29,11 +29,12 @@ exports:
                        _UISCreateImageFromDrawing, _UISDeviceContextDeviceClassKey, 
                        _UISDeviceContextDeviceCornerRadiusKey, _UISDeviceContextDeviceIdiomKey, 
                        _UISDeviceContextHomeButtonTypeKey, _UISDidCreateWindowForSceneNotification, 
-                       _UISGetFontContentSizeCategory, _UISMainHostWindowDidBecomeKeyNotification, 
-                       _UISMainHostWindowDidChangeNotification, _UISMainHostWindowDidResignKeyNotification, 
-                       _UISOpenApplicationOptionAppBasedViewService, _UISOpenApplicationOptionClickAttribution, 
-                       _UISOpenApplicationOptionKeySceneSessionPersistentIdentifier, 
+                       _UISFontWeightForIndex, _UISGetFontContentSizeCategory, _UISIndexForFontWeight, 
+                       _UISMainHostWindowDidBecomeKeyNotification, _UISMainHostWindowDidChangeNotification, 
+                       _UISMainHostWindowDidResignKeyNotification, _UISOpenApplicationOptionAppBasedViewService, 
+                       _UISOpenApplicationOptionClickAttribution, _UISOpenApplicationOptionKeySceneSessionPersistentIdentifier, 
                        _UISOpenApplicationOptionKeyTargetContentIdentifier, __UIKitServicesStateFacilityLogger, 
+                       __UISKBUndoInteractiveControlLabelSizeCategory, __UISKBUndoInteractiveControlLabelTextStyle, 
                        __UISVisibilityEnvironmentForSceneIdentityTokenString, __UISVisibilityEnvironmentForUIHostedWindowContextID, 
                        __UISVisibilityNamespace ]
     objc-classes:    [ UISActivityContinuationAction, UISApplicationInitializationContext, 

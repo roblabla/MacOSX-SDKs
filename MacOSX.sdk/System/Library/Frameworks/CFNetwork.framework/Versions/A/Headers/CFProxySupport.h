@@ -128,7 +128,7 @@ CFNetworkCopyProxiesForURL(CFURLRef url, CFDictionaryRef proxySettings) CF_AVAIL
  *	
  *	proxyList:
  *	  Upon success, the list of proxies returned by the
- *	  autoconfiguration script.  The list has the same format as
+ *	  auto-configuration script.  The list has the same format as
  *	  returned by CFProxyCopyProxiesForURL, above, except that no
  *	  entry may be of type kCFProxyTypeAutoConfigurationURL.  Note
  *	  that if the client wishes to keep this list, they must retain
@@ -143,7 +143,7 @@ typedef CALLBACK_API_C( void , CFProxyAutoConfigurationResultCallback )(void *cl
  *  CFNetworkCopyProxiesForAutoConfigurationScript()
  *  
  *  Discussion:
- *	Synchronously executes the given proxy autoconfiguration script
+ *	Synchronously executes the given proxy auto-configuration script
  *	and returns a valid proxyList and NULL error upon success or a
  *	NULL proxyList and valid error on failure.
  *  
@@ -153,7 +153,7 @@ typedef CALLBACK_API_C( void , CFProxyAutoConfigurationResultCallback )(void *cl
  *	  A CFString containing the code of the script to be executed.
  *	
  *	targetURL:
- *	  The URL that should be input in to the autoconfiguration script.
+ *	  The URL that should be input in to the auto-configuration script.
  *	
  *	error:
  *	  A return argument that will contain a valid error in case of
@@ -189,7 +189,7 @@ CFNetworkCopyProxiesForAutoConfigurationScript(CFStringRef proxyAutoConfiguratio
  *	  A CFString containing the code of the script to be executed.
  *	
  *	targetURL:
- *	  The URL that should be passed to the autoconfiguration script.
+ *	  The URL that should be passed to the auto-configuration script.
  *	
  *	cb:
  *	  A client callback to notify the caller of completion.
@@ -279,7 +279,7 @@ CFN_EXPORT const CFStringRef kCFProxyAutoConfigurationURLKey CF_AVAILABLE(10_5, 
  *  
  *  Discussion:
  *	Key for the proxy's PAC script
- *	The value is a CFString that contains the full JavaScript soure text for the PAC file.
+ *	The value is a CFString that contains the full JavaScript source text for the PAC file.
  *  
  */
 CFN_EXPORT const CFStringRef kCFProxyAutoConfigurationJavaScriptKey CF_AVAILABLE(10_7, 3_0);
@@ -316,7 +316,7 @@ CFN_EXPORT const CFStringRef kCFProxyPasswordKey CF_AVAILABLE(10_5, 2_0);
 	kCFProxyTypeHTTPS - the proxy is a tunneling proxy as used for HTTPS
 	kCFProxyTypeSOCKS - the proxy is a SOCKS proxy
 	kCFProxyTypeFTP - the proxy is an FTP proxy
-	kCFProxyTypeAutoConfigurationURL - the proxy is specified by a proxy autoconfiguration (PAC) file
+	kCFProxyTypeAutoConfigurationURL - the proxy is specified by a proxy auto-configuration (PAC) file
 */
 
 /*

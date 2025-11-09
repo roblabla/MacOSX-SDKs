@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6271FCB1-604A-326E-9B0F-A0241F2494AA
+    value:           29AF1F69-6D72-3257-88E6-987DBBDB827C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           95C8FB9F-BFBE-3D5F-894F-AE58CBC3C580
+    value:           907360AB-F7FF-3303-9527-B2A786103F8C
 install-name:    '/System/Library/PrivateFrameworks/MSUDataAccessor.framework/Versions/A/MSUDataAccessor'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

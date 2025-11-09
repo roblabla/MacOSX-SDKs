@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9A4CB03E-6132-33B5-8D67-B3EE35EC8A7D
+    value:           A8A58221-2867-39B8-9C82-6FAC9D6C0B8C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           38B3C593-9A25-36B7-807B-C2B82946C2BF
+    value:           5BB5E97E-6B34-3E61-A4FB-5C65D7B86740
 install-name:    '/System/Library/PrivateFrameworks/Safari.framework/Versions/A/Safari'
-current-version: 612.1.24
+current-version: 612.3.6
 compatibility-version: 528
 exports:
   - targets:         [ x86_64-macos ]
@@ -25,17 +25,19 @@ exports:
                        _ShowDevelopMenuPreferenceKey, _SyncedCreditCardsDidChangeExternallyNotification, 
                        _SyncedPasswordsDidChangeExternallyNotification, _WKBundleAdditionalClassesForParameterCoder, 
                        _WKBundleInitialize, __Z25safariDateOfLastActiveUsev, __Z31BrowserDataImportingServiceMainv, 
-                       __Z33safariApplicationBundleIdentifierv, __Z41creditCardDataControllerHasCreditCardDatav, 
-                       __Z43creditCardDataControllerClearCreditCardDatav, __Z52credentialAndProtectionSpaceCollectionHasCredentialsv, 
+                       __Z31ContentBlockerLoaderServiceMainPKcm, __Z33safariApplicationBundleIdentifierv, 
+                       __Z41creditCardDataControllerHasCreditCardDatav, __Z43creditCardDataControllerClearCreditCardDatav, 
+                       __Z52credentialAndProtectionSpaceCollectionHasCredentialsv, 
                        __Z58credentialAndProtectionSpaceCollectionRemoveAllCredentialsv, 
                        __ZN6Safari11Certificate14createFromDataEP6NSData, __ZN6Safari11Certificate5adoptEP16__SecCertificate, 
                        __ZN6Safari11Certificate6createEP16__SecCertificate, __ZN6Safari11CertificateC1EP16__SecCertificate, 
                        __ZN6Safari11CertificateC2EP16__SecCertificate, __ZN6Safari11CertificateD0Ev, 
                        __ZN6Safari11CertificateD1Ev, __ZN6Safari11CertificateD2Ev, 
-                       __ZN6Safari19appleIntermediateCAEv, __ZN6Safari23PasswordAutoFillStrings26titleForSFSafariCredentialEP18SFSafariCredential, 
+                       __ZN6Safari23PasswordAutoFillStrings26titleForSFSafariCredentialEP18SFSafariCredential, 
                        __ZN6Safari23PasswordAutoFillStrings26titleForWBSCredentialMatchEP18WBSCredentialMatch, 
                        __ZN6Safari23PasswordAutoFillStrings36titleForSFPasswordCredentialIdentityEP28SFPasswordCredentialIdentity, 
                        __ZN6Safari23PasswordAutoFillStrings48originDescriptionForSFPasswordCredentialIdentityEP28SFPasswordCredentialIdentityP8NSString, 
+                       __ZN6Safari31appleIntermediateCAExpiring2023Ev, __ZN6Safari31appleIntermediateCAExpiring2030Ev, 
                        __ZNK6Safari11Certificate11subjectNameEv, __ZNK6Safari11Certificate14secCertificateEv, 
                        __ZNK6Safari11Certificate16rawPublicKeyDataEv, __ZNK6Safari11Certificate19hasExtendedKeyUsageE9cssm_data, 
                        __ZNK6Safari11Certificate19hasExtensionWithOIDE9cssm_dataNS0_29RequireCriticalExtensionOrNotE, 

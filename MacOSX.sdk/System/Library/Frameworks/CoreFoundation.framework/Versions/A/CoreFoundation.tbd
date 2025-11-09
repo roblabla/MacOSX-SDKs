@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7826BEDD-1413-3A53-8B54-B64307D3359E
+    value:           7E1D1901-3F9E-3E2E-A090-3655E5F5E04B
   - target:          x86_64-maccatalyst
-    value:           7826BEDD-1413-3A53-8B54-B64307D3359E
+    value:           7E1D1901-3F9E-3E2E-A090-3655E5F5E04B
   - target:          x86_64h-macos
-    value:           45249D64-25D3-3E6E-B2F3-425F7CFC11DC
+    value:           EAB0E216-2A9E-31CE-9164-FDF3EBCF7BD3
   - target:          x86_64h-maccatalyst
-    value:           45249D64-25D3-3E6E-B2F3-425F7CFC11DC
+    value:           EAB0E216-2A9E-31CE-9164-FDF3EBCF7BD3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           13831554-B53F-3D1F-A50F-72411C14AF8A
+    value:           F5EA9592-4EF9-3D35-B23D-5C21283ACC52
   - target:          arm64e-maccatalyst
-    value:           13831554-B53F-3D1F-A50F-72411C14AF8A
+    value:           F5EA9592-4EF9-3D35-B23D-5C21283ACC52
 install-name:    '/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation'
-current-version: 1844
+current-version: 1856.105
 compatibility-version: 150
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
@@ -33,7 +33,7 @@ exports:
                        '$ld$add$os10.6$_OBJC_IVAR_$_NSObject.isa', '$ld$add$os10.6$_OBJC_METACLASS_$_NSObject', 
                        '$ld$add$os10.7$_OBJC_CLASS_$_NSObject', '$ld$add$os10.7$_OBJC_IVAR_$_NSObject.isa', 
                        '$ld$add$os10.7$_OBJC_METACLASS_$_NSObject' ]
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CFAbsoluteTimeAddGregorianUnits, _CFAbsoluteTimeGetCurrent, 
                        _CFAbsoluteTimeGetDayOfWeek, _CFAbsoluteTimeGetDayOfYear, 
@@ -890,10 +890,14 @@ exports:
                        __kCFURLApplicationHasSupportedFormatKey, __kCFURLApplicationHighResolutionModeIsMagnifiedKey, 
                        __kCFURLApplicationIsAppletKey, __kCFURLApplicationIsBetaKey, 
                        __kCFURLApplicationIsPlaceholderKey, __kCFURLApplicationNapIsDisabledKey, 
-                       __kCFURLApplicationPrefersExternalGPUKey, __kCFURLApplicationSupportedRegionsKey, 
-                       __kCFURLArchitecturesValidOnCurrentSystemKey, __kCFURLBookmarkURLStringKey, 
-                       __kCFURLBundleIdentifierKey, __kCFURLCanSetApplicationHighResolutionModeIsMagnifiedKey, 
+                       __kCFURLApplicationPrefersExternalGPUKey, __kCFURLApplicationPrefersSafeApertureAppFullScreenCompatibilityKey, 
+                       __kCFURLApplicationPrefersSafeApertureSystemFullScreenCompatibilityKey, 
+                       __kCFURLApplicationPrefersSafeApertureWindowedCompatibilityKey, 
+                       __kCFURLApplicationSupportedRegionsKey, __kCFURLArchitecturesValidOnCurrentSystemKey, 
+                       __kCFURLBookmarkURLStringKey, __kCFURLBundleIdentifierKey, 
+                       __kCFURLCanSetApplicationHighResolutionModeIsMagnifiedKey, 
                        __kCFURLCanSetApplicationNapIsDisabledKey, __kCFURLCanSetApplicationPrefersExternalGPUKey, 
+                       __kCFURLCanSetApplicationPrefersSafeApertureWindowedCompatibilityKey, 
                        __kCFURLCanSetHiddenExtensionKey, __kCFURLCanSetStrongBindingKey, 
                        __kCFURLCloudDocsPlaceholderDictionaryKey, __kCFURLCloudDocsPlaceholderLogicalNameKey, 
                        __kCFURLCompleteMountURLKey, __kCFURLComponentsNameKey, __kCFURLComponentsValueKey, 
@@ -1224,7 +1228,7 @@ exports:
                        _NSAutoCalendar.changedGregorianStartDate, _NSAutoCalendar.changedLocale, 
                        _NSAutoCalendar.changedMinimumDaysinFirstWeek, _NSAutoCalendar.changedTimeZone, 
                        _NSAutoCalendar.combinedNoteCount ]
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, arm64-macos ]
     symbols:         [ _CFMachPortBoostGetTypeID, _CFXMLCreateStringByEscapingEntities, 
                        _CFXMLCreateStringByUnescapingEntities, _CFXMLNodeCreate, 
                        _CFXMLNodeCreateCopy, _CFXMLNodeGetInfoPtr, _CFXMLNodeGetString, 
@@ -1258,6 +1262,6 @@ exports:
                        _kCFServiceControllerUserDataKey, _kCFXMLTreeErrorDescription, 
                        _kCFXMLTreeErrorLineNumber, _kCFXMLTreeErrorLocation, _kCFXMLTreeErrorStatusCode ]
     objc-ivars:      [ NSMessageBuilder._addr, NSMessageBuilder._target ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ ___CFObjCIsCollectable ]
 ...

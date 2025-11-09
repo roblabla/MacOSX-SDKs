@@ -280,7 +280,7 @@ __options_decl(stackshot_flags_t, uint64_t, {
 	STACKSHOT_ASID                             = 0x10000000,
 	STACKSHOT_PAGE_TABLES                      = 0x20000000,
 	STACKSHOT_DISABLE_LATENCY_INFO             = 0x40000000,
-});
+}); // Note: Add any new flags to kcdata.py (stackshot_in_flags)
 
 __options_decl(microstackshot_flags_t, uint32_t, {
 	STACKSHOT_GET_MICROSTACKSHOT               = 0x10,
@@ -308,6 +308,7 @@ __options_decl(microstackshot_flags_t, uint32_t, {
 #define KF_INTERRUPT_MASKED_DEBUG_STACKSHOT_OVRD (0x200)
 #define KF_INTERRUPT_MASKED_DEBUG_PMC_OVRD (0x400)
 #define KF_RW_LOCK_DEBUG_OVRD (0x800)
+#define KF_MADVISE_FREE_DEBUG_OVRD (0x1000)
 
 boolean_t kern_feature_override(uint32_t fmask);
 

@@ -17,6 +17,7 @@
 #import <QuartzCore/CAMetalLayer.h>
 #import <QuartzCore/CAEmitterCell.h>
 #import <QuartzCore/CAEmitterLayer.h>
+#import <QuartzCore/CAFrameRateRange.h>
 #import <QuartzCore/CAGradientLayer.h>
 #import <QuartzCore/CALayer.h>
 #import <QuartzCore/CAMediaTiming.h>

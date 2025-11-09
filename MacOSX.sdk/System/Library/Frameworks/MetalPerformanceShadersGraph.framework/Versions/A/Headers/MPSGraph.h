@@ -253,7 +253,7 @@ MPS_SWIFT_NAME( runAsync(with:feeds:targetOperations:resultsDictionary:execution
  *  @abstract   Encodes graph for given feeds to return targetTensor values, ensuring all target operations also executed.
  *              This call  is asynchronous and will return immediately if a completionHandler is set.
  *
- *  @param      commandBuffer                                      commandBuffer passed to exectute the graph on
+ *  @param      commandBuffer                                      commandBuffer passed to exectute the graph on, it is an MPSCommandBuffer, commitAndContinue might be called, please don't rely on underlying MTLCommandBuffer to remain uncommitted
  *  @param      feeds                                                       Feeds dictionary for the placeholder tensors
  *  @param      targetTensors                                     Tensors for which the caller wishes MPSGraphTensorData to be returned
  *  @param      targetOperations                              Operations to be completed at the end of the run
@@ -272,7 +272,7 @@ MPS_SWIFT_NAME( encode(to:feeds:targetTensors:targetOperations:executionDescript
  *  @abstract   Encodes the graph for given feeds to return targetTensor values in the resultsDictionary provided by the user,
  *              ensuring all target operations also executed. This call  is asynchronous and will return immediately if a completionHandler is set.
  *
- *  @param      commandBuffer                                      commandBuffer passed to exectute the graph on
+ *  @param      commandBuffer                                      commandBuffer passed to exectute the graph on, commitAndContinue might be called, please don't rely on underlying MTLCommandBuffer to remain uncommitted
  *  @param      feeds                                                       Feeds dictionary for the placeholder tensors
  *  @param      targetOperations                              Operations to be completed at the end of the run
  *  @param      resultsDictionary                            MPSGraphTensors dictionary passed by user, these will be filled with graph output data

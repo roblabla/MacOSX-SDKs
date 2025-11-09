@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           650D1147-A6A3-3579-B023-D010313636F3
+    value:           32BCDAFE-0993-3277-AE7A-2BD619C040A4
   - target:          x86_64-maccatalyst
-    value:           650D1147-A6A3-3579-B023-D010313636F3
+    value:           32BCDAFE-0993-3277-AE7A-2BD619C040A4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F606DE70-5F94-3F36-9024-3150909598E3
+    value:           275B9E24-D684-3754-9300-285AFAACDBF2
   - target:          arm64e-maccatalyst
-    value:           F606DE70-5F94-3F36-9024-3150909598E3
+    value:           275B9E24-D684-3754-9300-285AFAACDBF2
 install-name:    '/System/Library/PrivateFrameworks/NeutrinoCore.framework/Versions/A/NeutrinoCore'
-current-version: 400.27.210
+current-version: 421.0.100
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIN2NU10RectFinderE, __ZTIN2NU14PathRectFinderE, __ZTIN2NU16AnchorRectFinderE, 
@@ -30,12 +30,13 @@ exports:
     symbols:         [ _CGAffineTransformDeterminant, _CGAffineTransformDot, _CGAffineTransformFixedPoint, 
                        _CGAffineTransformForMappingFromRectToRect, _CGAffineTransformHasRotation, 
                        _CGAffineTransformIsValid, _CGAffineTransformMove, _CGAffineTransformRelative, 
-                       _CGAffineTransformRoot, _CGAffineTransformSubstract, _NSStringFromAffineTransform, 
-                       _NSStringFromNUPixelPoint, _NSStringFromNUPixelRect, _NSStringFromNUPixelSize, 
-                       _NUAbsolutePointInRect, _NUAbsoluteTime, _NUAbsoluteTimeToString, 
-                       _NUAdjustmentsVersionInfoAppVersionKey, _NUAdjustmentsVersionInfoBuildNumberKey, 
-                       _NUAdjustmentsVersionInfoPlatformKey, _NUAdjustmentsVersionInfoSchemaRevisionKey, 
-                       _NUAffineTransformDelta, _NUAffineTransformIdentity, _NUAffineTransformOrientation, 
+                       _CGAffineTransformRoot, _CGAffineTransformSubstract, _NSArrayFromNUPixelRect, 
+                       _NSStringFromAffineTransform, _NSStringFromNUPixelPoint, _NSStringFromNUPixelRect, 
+                       _NSStringFromNUPixelSize, _NUAbsolutePointInRect, _NUAbsoluteTime, 
+                       _NUAbsoluteTimeToString, _NUAdjustmentsVersionInfoAppVersionKey, 
+                       _NUAdjustmentsVersionInfoBuildNumberKey, _NUAdjustmentsVersionInfoPlatformKey, 
+                       _NUAdjustmentsVersionInfoSchemaRevisionKey, _NUAffineTransformDelta, 
+                       _NUAffineTransformIdentity, _NUAffineTransformOrientation, 
                        _NUAffineTransformStandardize, _NUAlignPixelRectToPixelGrid, 
                        _NUAlignRectToPixelGrid, _NUAnchorPointFromRectToRect, _NUAspectRatioCompare, 
                        _NUAspectRatioConstrain, _NUAspectRatioIsEqual, _NUAspectRatioIsUndefined, 
@@ -81,27 +82,28 @@ exports:
                        _NUPixelPointZero, _NUPixelRectAspectConstrain, _NUPixelRectConstrainToRect, 
                        _NUPixelRectContainingPoints, _NUPixelRectDilate, _NUPixelRectEnforceMinimumSize, 
                        _NUPixelRectEnforceMinimumSizeAndAspectRatio, _NUPixelRectEqualToRect, 
-                       _NUPixelRectErode, _NUPixelRectFlipYOrigin, _NUPixelRectFromCGRect, 
-                       _NUPixelRectInset, _NUPixelRectIntersection, _NUPixelRectIntersectsRect, 
-                       _NUPixelRectIsEmpty, _NUPixelRectIsNull, _NUPixelRectMaxCenteredInRect, 
-                       _NUPixelRectNull, _NUPixelRectOffset, _NUPixelRectResizeToFitInRect, 
-                       _NUPixelRectScale, _NUPixelRectScaleRational, _NUPixelRectSetOrigin, 
-                       _NUPixelRectToCGRect, _NUPixelRectUnion, _NUPixelRectVectexOpposite, 
-                       _NUPixelRectVertex, _NUPixelRectZero, _NUPixelSizeAlignToGrid, 
-                       _NUPixelSizeEqualToSize, _NUPixelSizeFromCGSize, _NUPixelSizeGreaterThanSize, 
-                       _NUPixelSizeIsEmpty, _NUPixelSizeLargestDimension, _NUPixelSizeToCGRect, 
-                       _NUPixelSizeToCGSize, _NUPixelSizeZero, _NUPlatform_OSX, _NUPlatform_iOS, 
-                       _NUPriorityLevelName, _NUPriorityLevelToDispatchQOS, _NURadianToDegree, 
-                       _NURecomposeAffineTransform, _NURectDenormalize, _NURectFlipYOrigin, 
-                       _NURectNormalize, _NURelatedObjectKey, _NURelativePointInRect, 
-                       _NURescaleRectRelative, _NURescaleRectRelativeXY, _NUResizeRectByMovingRelativePoint, 
-                       _NUResizeRectRelative, _NUSampleModeFromString, _NUSampleModeIsValid, 
-                       _NUSampleModeToString, _NUScaleCompare, _NUScaleDivide, _NUScaleEqual, 
-                       _NUScaleFromDouble, _NUScaleFromString, _NUScaleFromValue, 
-                       _NUScaleInvert, _NUScaleIsValid, _NUScaleMake, _NUScaleMultiply, 
-                       _NUScaleMultiplyInteger, _NUScaleOne, _NUScaleRect, _NUScaleToDouble, 
-                       _NUScaleToFillSizeInSize, _NUScaleToFitSizeInSize, _NUScaleToString, 
-                       _NUScaleToValue, _NUScaleUnknown, _NUScaleZero, _NUStandardLuminanceColorMatrix, 
+                       _NUPixelRectErode, _NUPixelRectFlipYOrigin, _NUPixelRectFromArray, 
+                       _NUPixelRectFromCGRect, _NUPixelRectInset, _NUPixelRectIntersection, 
+                       _NUPixelRectIntersectsRect, _NUPixelRectIsEmpty, _NUPixelRectIsNull, 
+                       _NUPixelRectMaxCenteredInRect, _NUPixelRectNull, _NUPixelRectOffset, 
+                       _NUPixelRectResizeToFitInRect, _NUPixelRectScale, _NUPixelRectScaleRational, 
+                       _NUPixelRectSetOrigin, _NUPixelRectToCGRect, _NUPixelRectUnion, 
+                       _NUPixelRectVectexOpposite, _NUPixelRectVertex, _NUPixelRectZero, 
+                       _NUPixelSizeAlignToGrid, _NUPixelSizeEqualToSize, _NUPixelSizeFromCGSize, 
+                       _NUPixelSizeGreaterThanSize, _NUPixelSizeIsEmpty, _NUPixelSizeLargestDimension, 
+                       _NUPixelSizeToCGRect, _NUPixelSizeToCGSize, _NUPixelSizeZero, 
+                       _NUPlatform_OSX, _NUPlatform_iOS, _NUPriorityLevelName, _NUPriorityLevelToDispatchQOS, 
+                       _NURadianToDegree, _NURecomposeAffineTransform, _NURectDenormalize, 
+                       _NURectFlipYOrigin, _NURectNormalize, _NURelatedObjectKey, 
+                       _NURelativePointInRect, _NURescaleRectRelative, _NURescaleRectRelativeXY, 
+                       _NUResizeRectByMovingRelativePoint, _NUResizeRectRelative, 
+                       _NUSampleModeFromString, _NUSampleModeIsValid, _NUSampleModeToString, 
+                       _NUScaleCompare, _NUScaleDivide, _NUScaleEqual, _NUScaleFromDouble, 
+                       _NUScaleFromString, _NUScaleFromValue, _NUScaleInvert, _NUScaleIsValid, 
+                       _NUScaleMake, _NUScaleMultiply, _NUScaleMultiplyInteger, _NUScaleOne, 
+                       _NUScaleRect, _NUScaleToDouble, _NUScaleToFillSizeInSize, 
+                       _NUScaleToFitSizeInSize, _NUScaleToString, _NUScaleToValue, 
+                       _NUScaleUnknown, _NUScaleZero, _NUStandardLuminanceColorMatrix, 
                        _NUStraightenAffineTransformWithDegrees, _NUStraightenAffineTransformWithRadians, 
                        _NUStringForTypeCode, _NUStringFromTime, _NUStringFromTimeRange, 
                        _NUTypeCodeFromString, _NUValueFromArrayAtTime, _NUWidth, 
@@ -277,19 +279,20 @@ exports:
                        _NUImageExportResult, _NUImageProperties, _NUImagePropertiesResult, 
                        _NUImageRenderResult, _NUImageTile, _NULivePhotoRenderResult, 
                        _NUObservation, _NUObserver, _NURAWCameraSpaceProperties, 
-                       _NURAWImageProperties, _NURAWNoiseReductionProperties, _NURenderPipelineBlockVariable, 
-                       _NURenderResult, _NUStripImageLayout, _NUSurfaceImage, _NUSurfaceRenderResult, 
-                       _NUTaggedSpace, _NUVideoAttributesResult, _NUVideoPlaybackFrameRequestResponse, 
-                       _NUVideoProperties, _NUVideoPropertiesResult, _NUVideoRenderResult, 
-                       _NUVisionDetectionResult ]
-    objc-ivars:      [ NUBrushStroke._data, NUBrushStroke._extent, NUBrushStroke._opacity, 
-                       NUBrushStroke._pressureMode, NUBrushStroke._radius, NUBrushStroke._softness, 
-                       NUBufferAdapter._bytes, NUBufferAdapter._format, NUBufferAdapter._rowBytes, 
-                       NUBufferAdapter._size, NUBufferAdapter._valid, NUBufferImageAdapter._validRegion, 
-                       NUDataSet._data, NUFitScalePolicy._size, NUHistogram._histogram, 
-                       NUImageHistogram._sampleCount, NUModel._attributes, NUMutablePixelBuffer._buffer, 
-                       NUMutablePixelBuffer._storage, NUPixelBuffer._buffer, NUPixelBuffer._storage, 
-                       NURegion._imp, _NUBrushStrokeCIImageProvider._closed, _NUBrushStrokeCIImageProvider._extent, 
+                       _NURAWImageProperties, _NURAWNoiseReductionProperties, _NURAWToneCurveProperties, 
+                       _NURenderPipelineBlockVariable, _NURenderResult, _NUStripImageLayout, 
+                       _NUSurfaceImage, _NUSurfaceRenderResult, _NUTaggedSpace, _NUVideoAttributesResult, 
+                       _NUVideoPlaybackFrameRequestResponse, _NUVideoProperties, 
+                       _NUVideoPropertiesResult, _NUVideoRenderResult, _NUVisionDetectionResult ]
+    objc-ivars:      [ NUBrushStroke._clipRect, NUBrushStroke._data, NUBrushStroke._extent, 
+                       NUBrushStroke._opacity, NUBrushStroke._pressureMode, NUBrushStroke._radius, 
+                       NUBrushStroke._softness, NUBufferAdapter._bytes, NUBufferAdapter._format, 
+                       NUBufferAdapter._rowBytes, NUBufferAdapter._size, NUBufferAdapter._valid, 
+                       NUBufferImageAdapter._validRegion, NUDataSet._data, NUFitScalePolicy._size, 
+                       NUHistogram._histogram, NUImageHistogram._sampleCount, NUModel._attributes, 
+                       NUMutablePixelBuffer._buffer, NUMutablePixelBuffer._storage, 
+                       NUPixelBuffer._buffer, NUPixelBuffer._storage, NURegion._imp, 
+                       _NUBrushStrokeCIImageProvider._closed, _NUBrushStrokeCIImageProvider._extent, 
                        _NUBrushStrokeCIImageProvider._pressureMode, _NUBrushStrokeCIImageProvider._stroke, 
                        _NUImageCIProvider._image ]
 ...

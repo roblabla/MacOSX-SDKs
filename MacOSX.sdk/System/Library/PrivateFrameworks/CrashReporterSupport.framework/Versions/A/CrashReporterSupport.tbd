@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7F405D9B-A5CB-3CB7-BBF6-5CEBA5E214BE
+    value:           8DE20A11-3475-3E1B-AFD8-F935D9865764
   - target:          x86_64-maccatalyst
-    value:           7F405D9B-A5CB-3CB7-BBF6-5CEBA5E214BE
+    value:           8DE20A11-3475-3E1B-AFD8-F935D9865764
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CCABF3FE-3AB6-370C-A06F-A3E21A0B9358
+    value:           C5F25BC2-0FA7-3302-8C20-2D8B17865D61
   - target:          arm64e-maccatalyst
-    value:           CCABF3FE-3AB6-370C-A06F-A3E21A0B9358
+    value:           C5F25BC2-0FA7-3302-8C20-2D8B17865D61
 install-name:    '/System/Library/PrivateFrameworks/CrashReporterSupport.framework/Versions/A/CrashReporterSupport'
-current-version: 15076.1
+current-version: 15088
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -98,16 +98,16 @@ exports:
                        _kCRProblemReportPathKey, _kCRProblemReportPlatformKey, _kCRProblemReportPlistDescriptionKey, 
                        _kCRProblemReportPluginNameKey, _kCRProblemReportPreferredInterfaceLanguageKey, 
                        _kCRProblemReportProblemTypeKey, _kCRProblemReportRadarAttachmentsList, 
-                       _kCRProblemReportRealURL, _kCRProblemReportReopenPathKey, 
-                       _kCRProblemReportRoutingKey, _kCRProblemReportSampleWeightKey, 
-                       _kCRProblemReportSignatureHashKey, _kCRProblemReportSubmissionPolicyKey, 
-                       _kCRProblemReportSubmissionSkippedKey, _kCRProblemReportSubmissionTimeStampKey, 
-                       _kCRProblemReportSubroutingKey, _kCRProblemReportSystemProfileKey, 
-                       _kCRProblemReportURLKey, _kCRProblemReportUserMissingLibraryKey, 
-                       _kCRProblemTypeAnonSystemStats, _kCRProblemTypeAssumptionViolation, 
-                       _kCRProblemTypeAutoBugCapture, _kCRProblemTypeBridge, _kCRProblemTypeBridgeRestore, 
-                       _kCRProblemTypeConnectionFailure, _kCRProblemTypeCoreAnalytics, 
-                       _kCRProblemTypeCrash, _kCRProblemTypeDifferentialPrivacy, 
+                       _kCRProblemReportRadarComponentID, _kCRProblemReportRealURL, 
+                       _kCRProblemReportReopenPathKey, _kCRProblemReportRoutingKey, 
+                       _kCRProblemReportSampleWeightKey, _kCRProblemReportSignatureHashKey, 
+                       _kCRProblemReportSubmissionPolicyKey, _kCRProblemReportSubmissionSkippedKey, 
+                       _kCRProblemReportSubmissionTimeStampKey, _kCRProblemReportSubroutingKey, 
+                       _kCRProblemReportSystemProfileKey, _kCRProblemReportURLKey, 
+                       _kCRProblemReportUserMissingLibraryKey, _kCRProblemTypeAnonSystemStats, 
+                       _kCRProblemTypeAssumptionViolation, _kCRProblemTypeAutoBugCapture, 
+                       _kCRProblemTypeBridge, _kCRProblemTypeBridgeRestore, _kCRProblemTypeConnectionFailure, 
+                       _kCRProblemTypeCoreAnalytics, _kCRProblemTypeCrash, _kCRProblemTypeDifferentialPrivacy, 
                        _kCRProblemTypeDuetDB2, _kCRProblemTypeEfiFirmwareIntegrity, 
                        _kCRProblemTypeExcResource, _kCRProblemTypeFirmwareIntegrity, 
                        _kCRProblemTypeGPURestart, _kCRProblemTypeHang, _kCRProblemTypeHeartbeat, 
@@ -133,22 +133,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           961CD57F-9D2B-3C52-8873-7C0A8A8DAE96
+    value:           A1FFC2BF-E8FC-3EDF-9B8D-47D7F23AEC4A
   - target:          x86_64-maccatalyst
-    value:           961CD57F-9D2B-3C52-8873-7C0A8A8DAE96
+    value:           A1FFC2BF-E8FC-3EDF-9B8D-47D7F23AEC4A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CE795577-9237-3B50-AC6F-9743669F4EF1
+    value:           19F84EC7-6918-3A3E-865C-836650829DB3
   - target:          arm64e-maccatalyst
-    value:           CE795577-9237-3B50-AC6F-9743669F4EF1
+    value:           19F84EC7-6918-3A3E-865C-836650829DB3
 install-name:    '/System/Library/PrivateFrameworks/OSAnalytics.framework/Versions/A/OSAnalytics'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _OSADateFormat, _OSANSDateFormat, _OSASafeMoveItemAtURL, _OSASafeOpen, 
+    symbols:         [ _OSADateFormat, _OSAIsDebugEnabledForRSD, _OSAIsRSDDevice, 
+                       _OSAIsRSDHost, _OSANSDateFormat, _OSASafeMoveItemAtURL, _OSASafeOpen, 
                        _OSASafeOpenReadOnly, _OSASafeOpenWriteOnly, _OSASafeRemoveFileAtURL, 
                        _OSASanitizeOptionHomeDirectory, _OSASanitizeOptionKeepFilename, 
                        _OSASanitizeOptionMountedVolume, _OSASanitizeOptionNetworkVolume, 
@@ -180,13 +181,13 @@ exports:
                        _kOSALogScanOptionIncludeOnlyUrgent, _kOSALogScanOptionIncludeProxiesKey, 
                        _kOSASubmissionDomain, _kOSASubmissionPolicyAlternate, _kPathOptionUntrusted, 
                        _logEventForAppleCare, _logForAppleCare, _logLineForAppleCare, 
-                       _ns2xpc, _rollAppleCareLogs, _runCrashMoverService, _symbolicateSpeedTracer, 
-                       _xpc2ns ]
+                       _ns2xpc, _rollAppleCareLogs, _rtcsc_send, _runCrashMoverService, 
+                       _symbolicateSpeedTracer, _xpc2ns ]
     objc-classes:    [ AWDClientHelpers, OSABinaryImageCatalog, OSABinaryImageSegment, 
-                       OSACrackShotReport, OSAGPUEventReport, OSAJetsamReport, OSALegacyXform, 
-                       OSALog, OSALogCounterObject, OSAProxyConfiguration, OSAReport, 
-                       OSAStackShotReport, OSASymbolInfo, OSASystemConfiguration, 
-                       OSATasking ]
+                       OSABridgeLinkProxy, OSACrackShotReport, OSAGPUEventReport, 
+                       OSAJetsamReport, OSALegacyXform, OSALog, OSALogCounterObject, 
+                       OSAProxyConfiguration, OSAReport, OSAStackShotReport, OSASymbolInfo, 
+                       OSASystemConfiguration, OSATasking ]
     objc-ivars:      [ OSABinaryImageCatalog._absolute_segment, OSABinaryImageCatalog._kernel_cache_segment, 
                        OSABinaryImageCatalog._kernel_segments, OSABinaryImageCatalog._kernel_text_exec_segments, 
                        OSABinaryImageCatalog._notes, OSABinaryImageCatalog._rootedCacheLibs, 

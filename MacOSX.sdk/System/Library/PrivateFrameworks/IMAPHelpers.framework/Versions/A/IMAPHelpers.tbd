@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           136DEFE1-5424-35F5-90BD-D5B99DD624BF
+    value:           E39B242E-A72B-3047-B9E3-44CDC5227DEF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A3A80C96-64DA-37CB-9038-0334D6F1AFB6
+    value:           72AAC24A-173A-34B7-883E-9478383ABAFE
 install-name:    '/System/Library/PrivateFrameworks/IMAPHelpers.framework/Versions/A/IMAPHelpers'
 swift-abi-version: 7
 allowable-clients:

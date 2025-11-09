@@ -2361,6 +2361,10 @@ struct log_data_args {
 struct memorystatus_available_memory_args {
 	int32_t dummy;
 };
+struct objc_bp_assist_cfg_np_args {
+	char adr_l_[PADL_(uint64_t)]; uint64_t adr; char adr_r_[PADR_(uint64_t)];
+	char ctl_l_[PADL_(uint64_t)]; uint64_t ctl; char ctl_r_[PADR_(uint64_t)];
+};
 struct shared_region_map_and_slide_2_np_args {
 	char files_count_l_[PADL_(uint32_t)]; uint32_t files_count; char files_count_r_[PADR_(uint32_t)];
 	char files_l_[PADL_(user_addr_t)]; user_addr_t files; char files_r_[PADR_(user_addr_t)];
@@ -3003,6 +3007,7 @@ int coalition_ledger(struct proc *, struct coalition_ledger_args *, int *);
 #endif // CONFIG_COALITIONS
 int log_data(struct proc *, struct log_data_args *, int *);
 int memorystatus_available_memory(struct proc *, struct memorystatus_available_memory_args *, uint64_t *);
+int objc_bp_assist_cfg_np(struct proc *, struct objc_bp_assist_cfg_np_args *, int *);
 int shared_region_map_and_slide_2_np(struct proc *, struct shared_region_map_and_slide_2_np_args *, int *);
 int pivot_root(struct proc *, struct pivot_root_args *, int *);
 int task_inspect_for_pid(struct proc *, struct task_inspect_for_pid_args *, int *);

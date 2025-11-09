@@ -8,5 +8,5 @@
 #import <Foundation/Foundation.h>
 
 #import <DataDetection/DataDetectionBase.h>
-#import <DataDetection/DDDetectedValue.h>
+#import <DataDetection/DDMatch.h>
 

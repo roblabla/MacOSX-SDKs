@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9AD5A86F-723C-39E0-86E6-CFFC6876BE9C
+    value:           A80BD8C1-8A80-3B08-AC9F-CE390CA0C547
   - target:          x86_64-maccatalyst
-    value:           9AD5A86F-723C-39E0-86E6-CFFC6876BE9C
+    value:           A80BD8C1-8A80-3B08-AC9F-CE390CA0C547
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2BAD633F-C09B-3909-B10B-8F6E0B0131DA
+    value:           844F9523-4043-3785-9EC0-ABE561EE9C7A
   - target:          arm64e-maccatalyst
-    value:           2BAD633F-C09B-3909-B10B-8F6E0B0131DA
+    value:           844F9523-4043-3785-9EC0-ABE561EE9C7A
 install-name:    '/System/Library/PrivateFrameworks/CloudKitCode.framework/Versions/A/CloudKitCode'
-current-version: 1041.2
+current-version: 1930.13
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9A50F173-88E4-3CDB-9D31-9E08515303EC
+    value:           39AB4872-1E8C-33C3-85AB-4D59F5F25AC4
   - target:          x86_64-maccatalyst
-    value:           9A50F173-88E4-3CDB-9D31-9E08515303EC
+    value:           39AB4872-1E8C-33C3-85AB-4D59F5F25AC4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5D4FCBDF-7EAC-3801-BE26-C84D1D5FF3BA
+    value:           73662979-EBA8-3C46-8B43-5D4EFD1721F1
   - target:          arm64e-maccatalyst
-    value:           5D4FCBDF-7EAC-3801-BE26-C84D1D5FF3BA
+    value:           73662979-EBA8-3C46-8B43-5D4EFD1721F1
 install-name:    '/System/Library/PrivateFrameworks/BiomeDSL.framework/Versions/A/BiomeDSL'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -28,6 +28,6 @@ exports:
                        BMDSLJSONArchiver, BMDSLJSONCoder, BMDSLJSONUnarchiver, BMDSLKeyPathSelector, 
                        BMDSLKeyPathTransform, BMDSLMap, BMDSLMerge, BMDSLOrderedMerge, 
                        BMDSLState, BMDSLSubscribeOn, BMDSLSubscriber, BMDSLTransformInvocation, 
-                       BMDSLTransforms, BMDSLTumblingWindowAssigner, BMDSLWindowAssigner, 
-                       BMDSLWindower, _BPSSubscribeOnInner ]
+                       BMDSLTransformValidator, BMDSLTransforms, BMDSLTumblingWindowAssigner, 
+                       BMDSLWindowAssigner, BMDSLWindower, _BPSSubscribeOnInner ]
 ...

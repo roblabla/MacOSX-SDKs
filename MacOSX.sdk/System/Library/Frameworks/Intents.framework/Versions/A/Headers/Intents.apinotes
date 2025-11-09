@@ -52,6 +52,17 @@ SwiftVersions:
     - Selector: 'resolveSignalsForActivateCarSignal:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveSignals(forActivateCarSignal:with:)'
+  - Name: INAddCallParticipantIntentHandling
+    Methods:
+    - Selector: 'confirmAddCallParticipant:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(addCallParticipant:completion:)'
+    - Selector: 'handleAddCallParticipant:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(addCallParticipant:completion:)'
+    - Selector: 'resolveParticipantsForAddCallParticipant:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveParticipants(forAddCallParticipant:with:)'
   - Name: INAddMediaIntentHandling
     Methods:
     - Selector: 'confirmAddMedia:completion:'

@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
-// swift-module-flags: -target x86_64-apple-macos12.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -enable-experimental-concurrency -enable-experimental-concurrency -module-name Foundation
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-module-flags: -target x86_64-apple-macos12.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -enable-experimental-concurrency -enable-experimental-concurrency -module-name Foundation
 import Combine
 import CoreFoundation
 import CoreGraphics
@@ -186,29 +186,17 @@ extension Foundation.URLSession {
     }
     public typealias Element = Swift.UInt8
     public typealias AsyncIterator = Foundation.URLSession.AsyncBytes.Iterator
-    public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+    @frozen public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      public typealias Element = Swift.UInt8
       @usableFromInline
-      internal var dataIterator: Foundation.Data.Iterator?
-      
-      #if compiler(>=5.3) && $AsyncAwait
-      @usableFromInline
-      internal func nextData() async throws -> Foundation.Data?
-      #endif
-
+      internal var buffer: Foundation._AsyncBytesBuffer
       
       #if compiler(>=5.3) && $AsyncAwait
       @inlinable @inline(__always) public mutating func next() async throws -> Swift.UInt8? {
-                repeat {
-                    if let byte = dataIterator?.next() {
-                        return byte
-                    }
-                    dataIterator = try await nextData()?.makeIterator()
-                } while dataIterator != nil
-                return nil
+                return try await buffer.next()
             }
       #endif
 
-      public typealias Element = Swift.UInt8
     }
     __consuming public func makeAsyncIterator() -> Foundation.URLSession.AsyncBytes.Iterator
   }
@@ -1181,16 +1169,16 @@ extension Foundation.FloatingPointParseStrategy : Foundation.ParseStrategy {
   public typealias ParseOutput = Format.FormatInput
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.FloatingPointParseStrategy where Format == Foundation.FloatingPointFormatStyle {
-  public init(format: Format, lenient: Swift.Bool = true)
+extension Foundation.FloatingPointParseStrategy {
+  public init<Value>(format: Format, lenient: Swift.Bool = true) where Format == Foundation.FloatingPointFormatStyle<Value>, Value : Swift.BinaryFloatingPoint
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.FloatingPointParseStrategy where Format == Foundation.FloatingPointFormatStyle.Currency {
-  public init(format: Format, lenient: Swift.Bool = true)
+extension Foundation.FloatingPointParseStrategy {
+  public init<Value>(format: Format, lenient: Swift.Bool = true) where Format == Foundation.FloatingPointFormatStyle<Value>.Currency, Value : Swift.BinaryFloatingPoint
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.FloatingPointParseStrategy where Format == Foundation.FloatingPointFormatStyle.Percent {
-  public init(format: Format, lenient: Swift.Bool = true)
+extension Foundation.FloatingPointParseStrategy {
+  public init<Value>(format: Format, lenient: Swift.Bool = true) where Format == Foundation.FloatingPointFormatStyle<Value>.Percent, Value : Swift.BinaryFloatingPoint
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes {
@@ -1212,6 +1200,7 @@ extension Foundation.AttributeScopes {
     public let replacementIndex: Foundation.AttributeScopes.FoundationAttributes.ReplacementIndexAttribute
     public let measurement: Foundation.AttributeScopes.FoundationAttributes.MeasurementAttribute
     public let inflectionAlternative: Foundation.AttributeScopes.FoundationAttributes.InflectionAlternativeAttribute
+    public let byteCount: Foundation.AttributeScopes.FoundationAttributes.ByteCountAttribute
     public typealias DecodingConfiguration = Foundation.AttributeScopeCodableConfiguration
     public typealias EncodingConfiguration = Foundation.AttributeScopeCodableConfiguration
   }
@@ -1386,6 +1375,42 @@ extension Foundation.AttributeScopes.FoundationAttributes {
       }
     }
   }
+  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+  @frozen public enum ByteCountAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = Foundation.AttributeScopes.FoundationAttributes.ByteCountAttribute.Component
+    public static let name: Swift.String
+    public enum Component : Swift.Codable, Swift.Hashable {
+      case value
+      case spelledOutValue
+      case unit(Foundation.AttributeScopes.FoundationAttributes.ByteCountAttribute.Unit)
+      case actualByteCount
+      public func hash(into hasher: inout Swift.Hasher)
+      public static func == (a: Foundation.AttributeScopes.FoundationAttributes.ByteCountAttribute.Component, b: Foundation.AttributeScopes.FoundationAttributes.ByteCountAttribute.Component) -> Swift.Bool
+      public func encode(to encoder: Swift.Encoder) throws
+      public var hashValue: Swift.Int {
+        get
+      }
+      public init(from decoder: Swift.Decoder) throws
+    }
+    public enum Unit : Swift.Codable {
+      case byte
+      case kb
+      case mb
+      case gb
+      case tb
+      case pb
+      case eb
+      case zb
+      case yb
+      public static func == (a: Foundation.AttributeScopes.FoundationAttributes.ByteCountAttribute.Unit, b: Foundation.AttributeScopes.FoundationAttributes.ByteCountAttribute.Unit) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
+      public func encode(to encoder: Swift.Encoder) throws
+      public var hashValue: Swift.Int {
+        get
+      }
+      public init(from decoder: Swift.Decoder) throws
+    }
+  }
 }
 extension Foundation.NSDictionary : Swift.ExpressibleByDictionaryLiteral {
   required convenience public init(dictionaryLiteral elements: (Any, Any)...)
@@ -1477,12 +1502,12 @@ extension Foundation.Measurement where UnitType : Foundation.Dimension {
     }
     public var width: Foundation.Measurement<UnitType>.FormatStyle.UnitWidth
     public var locale: Foundation.Locale
-    public var numberFormatStyle: Foundation.FloatingPointFormatStyle?
+    public var numberFormatStyle: Foundation.FloatingPointFormatStyle<Swift.Double>?
     public var usage: Foundation.MeasurementFormatUnitUsage<UnitType>?
     public var attributed: Foundation.Measurement<UnitType>.AttributedStyle {
       get
     }
-    public init(width: Foundation.Measurement<UnitType>.FormatStyle.UnitWidth, locale: Foundation.Locale = .autoupdatingCurrent, usage: Foundation.MeasurementFormatUnitUsage<UnitType> = .general, numberFormatStyle: Foundation.FloatingPointFormatStyle? = nil)
+    public init(width: Foundation.Measurement<UnitType>.FormatStyle.UnitWidth, locale: Foundation.Locale = .autoupdatingCurrent, usage: Foundation.MeasurementFormatUnitUsage<UnitType> = .general, numberFormatStyle: Foundation.FloatingPointFormatStyle<Swift.Double>? = nil)
     public func locale(_ locale: Foundation.Locale) -> Foundation.Measurement<UnitType>.FormatStyle
     public func format(_ measurement: Foundation.Measurement<UnitType>) -> Swift.String
     public static func == (a: Foundation.Measurement<UnitType>.FormatStyle, b: Foundation.Measurement<UnitType>.FormatStyle) -> Swift.Bool
@@ -1502,7 +1527,7 @@ extension Foundation.Measurement.FormatStyle where UnitType == Foundation.UnitTe
     get
     set
   }
-  public init(width: Foundation.Measurement<UnitType>.FormatStyle.UnitWidth = .abbreviated, locale: Foundation.Locale = .autoupdatingCurrent, usage: Foundation.MeasurementFormatUnitUsage<UnitType> = .general, hidesScaleName: Swift.Bool = false, numberFormatStyle: Foundation.FloatingPointFormatStyle? = nil)
+  public init(width: Foundation.Measurement<UnitType>.FormatStyle.UnitWidth = .abbreviated, locale: Foundation.Locale = .autoupdatingCurrent, usage: Foundation.MeasurementFormatUnitUsage<UnitType> = .general, hidesScaleName: Swift.Bool = false, numberFormatStyle: Foundation.FloatingPointFormatStyle<Swift.Double>? = nil)
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 public struct MeasurementFormatUnitUsage<UnitType> : Swift.Codable, Swift.Hashable where UnitType : Foundation.Dimension {
@@ -1563,8 +1588,8 @@ extension Foundation.Measurement where UnitType : Foundation.Dimension {
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.FormatStyle {
-  public static func measurement<UnitType>(width: Foundation.Measurement<UnitType>.FormatStyle.UnitWidth, usage: Foundation.MeasurementFormatUnitUsage<UnitType> = .general, numberFormatStyle: Foundation.FloatingPointFormatStyle? = nil) -> Self where Self == Foundation.Measurement<UnitType>.FormatStyle, UnitType : Foundation.Dimension
-  public static func measurement(width: Foundation.Measurement<Foundation.UnitTemperature>.FormatStyle.UnitWidth = .abbreviated, usage: Foundation.MeasurementFormatUnitUsage<Foundation.UnitTemperature> = .general, hidesScaleName: Swift.Bool = false, numberFormatStyle: Foundation.FloatingPointFormatStyle? = nil) -> Self where Self == Foundation.Measurement<Foundation.UnitTemperature>.FormatStyle
+  public static func measurement<UnitType>(width: Foundation.Measurement<UnitType>.FormatStyle.UnitWidth, usage: Foundation.MeasurementFormatUnitUsage<UnitType> = .general, numberFormatStyle: Foundation.FloatingPointFormatStyle<Swift.Double>? = nil) -> Self where Self == Foundation.Measurement<UnitType>.FormatStyle, UnitType : Foundation.Dimension
+  public static func measurement(width: Foundation.Measurement<Foundation.UnitTemperature>.FormatStyle.UnitWidth = .abbreviated, usage: Foundation.MeasurementFormatUnitUsage<Foundation.UnitTemperature> = .general, hidesScaleName: Swift.Bool = false, numberFormatStyle: Foundation.FloatingPointFormatStyle<Swift.Double>? = nil) -> Self where Self == Foundation.Measurement<Foundation.UnitTemperature>.FormatStyle
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Foundation.Timer {
@@ -1639,6 +1664,46 @@ extension Foundation.NSAttributedString {
   convenience public init(markdown: Foundation.Data, options: Foundation.AttributedString.MarkdownParsingOptions = .init(), baseURL: Foundation.URL? = nil) throws
   convenience public init(markdown: Swift.String, options: Foundation.AttributedString.MarkdownParsingOptions = .init(), baseURL: Foundation.URL? = nil) throws
 }
+
+#if compiler(>=5.3) && $RethrowsProtocol
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+public struct AsyncCharacterSequence<Base> : _Concurrency.AsyncSequence where Base : _Concurrency.AsyncSequence, Base.Element == Swift.UInt8 {
+  public typealias Element = Swift.Character
+  @frozen public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
+    @usableFromInline
+    internal var remaining: Foundation.AsyncUnicodeScalarSequence<Base>.AsyncIterator
+    @usableFromInline
+    internal var accumulator: Swift.String = ""
+    
+    #if compiler(>=5.3) && $AsyncAwait
+    @inlinable @inline(__always) public mutating func next() async rethrows -> Swift.Character? {
+            while let scalar = try await remaining.next() {
+                accumulator.unicodeScalars.append(scalar)
+                if accumulator.count > 1 {
+                    return accumulator.removeFirst()
+                }
+            }
+            return accumulator.count > 0 ? accumulator.removeFirst() : nil
+        }
+    #endif
+
+    public typealias Element = Swift.Character
+  }
+  public func makeAsyncIterator() -> Foundation.AsyncCharacterSequence<Base>.AsyncIterator
+}
+#endif
+
+
+#if compiler(>=5.3) && $RethrowsProtocol
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension _Concurrency.AsyncSequence where Self.Element == Swift.UInt8 {
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+  public var characters: Foundation.AsyncCharacterSequence<Self> {
+    get
+  }
+}
+#endif
+
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Foundation.NotificationCenter {
   public func publisher(for name: Foundation.Notification.Name, object: Swift.AnyObject? = nil) -> Foundation.NotificationCenter.Publisher
@@ -3542,9 +3607,8 @@ extension Foundation.Date {
   public func formatted<F>(_ format: F) -> F.FormatOutput where F : Foundation.FormatStyle, F.FormatInput == Foundation.Date
   public func formatted(date: Foundation.Date.FormatStyle.DateStyle, time: Foundation.Date.FormatStyle.TimeStyle) -> Swift.String
   public func formatted() -> Swift.String
-  public init<T, Value>(_ value: Value, strategy: T) throws where T : Foundation.ParseStrategy, Value : Swift.StringProtocol, T.ParseInput == Swift.String, T.ParseOutput == Foundation.Date
-  @available(*, deprecated, message: "Use init(_:) throws instead")
-  @_disfavoredOverload public init?<T>(_ value: T.ParseInput, strategy: T) where T : Foundation.ParseStrategy, T.ParseOutput == Foundation.Date
+  public init<T>(_ value: T.ParseInput, strategy: T) throws where T : Foundation.ParseStrategy, T.ParseOutput == Foundation.Date
+  @_disfavoredOverload public init<T, Value>(_ value: Value, strategy: T) throws where T : Foundation.ParseStrategy, Value : Swift.StringProtocol, T.ParseInput == Swift.String, T.ParseOutput == Foundation.Date
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.Date {
@@ -3628,8 +3692,6 @@ extension Foundation.Date.FormatStyle {
     public init(from decoder: Swift.Decoder) throws
   }
   public struct TimeStyle : Swift.Codable, Swift.Hashable {
-    @available(*, deprecated, renamed: "omitted")
-    public static let none: Foundation.Date.FormatStyle.TimeStyle
     public static let omitted: Foundation.Date.FormatStyle.TimeStyle
     public static let shortened: Foundation.Date.FormatStyle.TimeStyle
     public static let standard: Foundation.Date.FormatStyle.TimeStyle
@@ -4270,14 +4332,16 @@ extension Foundation.Date.FormatStyle.Symbol.Hour {
   }
   public static func defaultDigits(amPM: Foundation.Date.FormatStyle.Symbol.Hour.AMPMStyle) -> Foundation.Date.FormatStyle.Symbol.Hour
   public static func twoDigits(amPM: Foundation.Date.FormatStyle.Symbol.Hour.AMPMStyle) -> Foundation.Date.FormatStyle.Symbol.Hour
+  public static func conversationalDefaultDigits(amPM: Foundation.Date.FormatStyle.Symbol.Hour.AMPMStyle) -> Foundation.Date.FormatStyle.Symbol.Hour
+  public static func conversationalTwoDigits(amPM: Foundation.Date.FormatStyle.Symbol.Hour.AMPMStyle) -> Foundation.Date.FormatStyle.Symbol.Hour
+  @available(*, deprecated, renamed: "defaultDigits(amPM:)")
   public static var defaultDigitsNoAMPM: Foundation.Date.FormatStyle.Symbol.Hour {
     get
   }
+  @available(*, deprecated, renamed: "twoDigits(amPM:)")
   public static var twoDigitsNoAMPM: Foundation.Date.FormatStyle.Symbol.Hour {
     get
   }
-  public static func conversationalDefaultDigits(amPM: Foundation.Date.FormatStyle.Symbol.Hour.AMPMStyle) -> Foundation.Date.FormatStyle.Symbol.Hour
-  public static func conversationalTwoDigits(amPM: Foundation.Date.FormatStyle.Symbol.Hour.AMPMStyle) -> Foundation.Date.FormatStyle.Symbol.Hour
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.Date.FormatStyle.Symbol.VerbatimHour {
@@ -5099,22 +5163,22 @@ extension Foundation.NSDate : Swift._CustomPlaygroundQuickLookable {
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-public struct IntegerFormatStyle : Swift.Codable, Swift.Hashable {
+public struct IntegerFormatStyle<Value> : Swift.Codable, Swift.Hashable where Value : Swift.BinaryInteger {
   public var locale: Foundation.Locale
   public init(locale: Foundation.Locale = .autoupdatingCurrent)
-  public var attributed: Foundation.IntegerFormatStyle.Attributed {
+  public var attributed: Foundation.IntegerFormatStyle<Value>.Attributed {
     get
   }
   public typealias Configuration = Foundation.NumberFormatStyleConfiguration
-  public func grouping(_ group: Foundation.IntegerFormatStyle.Configuration.Grouping) -> Foundation.IntegerFormatStyle
-  public func precision(_ p: Foundation.IntegerFormatStyle.Configuration.Precision) -> Foundation.IntegerFormatStyle
-  public func sign(strategy: Foundation.IntegerFormatStyle.Configuration.SignDisplayStrategy) -> Foundation.IntegerFormatStyle
-  public func decimalSeparator(strategy: Foundation.IntegerFormatStyle.Configuration.DecimalSeparatorDisplayStrategy) -> Foundation.IntegerFormatStyle
-  public func rounded(rule: Foundation.IntegerFormatStyle.Configuration.RoundingRule = .toNearestOrEven, increment: Swift.Int? = nil) -> Foundation.IntegerFormatStyle
-  public func scale(_ multiplicand: Swift.Double) -> Foundation.IntegerFormatStyle
-  public func notation(_ notation: Foundation.IntegerFormatStyle.Configuration.Notation) -> Foundation.IntegerFormatStyle
+  public func grouping(_ group: Foundation.IntegerFormatStyle<Value>.Configuration.Grouping) -> Foundation.IntegerFormatStyle<Value>
+  public func precision(_ p: Foundation.IntegerFormatStyle<Value>.Configuration.Precision) -> Foundation.IntegerFormatStyle<Value>
+  public func sign(strategy: Foundation.IntegerFormatStyle<Value>.Configuration.SignDisplayStrategy) -> Foundation.IntegerFormatStyle<Value>
+  public func decimalSeparator(strategy: Foundation.IntegerFormatStyle<Value>.Configuration.DecimalSeparatorDisplayStrategy) -> Foundation.IntegerFormatStyle<Value>
+  public func rounded(rule: Foundation.IntegerFormatStyle<Value>.Configuration.RoundingRule = .toNearestOrEven, increment: Swift.Int? = nil) -> Foundation.IntegerFormatStyle<Value>
+  public func scale(_ multiplicand: Swift.Double) -> Foundation.IntegerFormatStyle<Value>
+  public func notation(_ notation: Foundation.IntegerFormatStyle<Value>.Configuration.Notation) -> Foundation.IntegerFormatStyle<Value>
   public func hash(into hasher: inout Swift.Hasher)
-  public static func == (a: Foundation.IntegerFormatStyle, b: Foundation.IntegerFormatStyle) -> Swift.Bool
+  public static func == (a: Foundation.IntegerFormatStyle<Value>, b: Foundation.IntegerFormatStyle<Value>) -> Swift.Bool
   public func encode(to encoder: Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
@@ -5126,19 +5190,19 @@ extension Foundation.IntegerFormatStyle {
   public struct Percent : Swift.Codable, Swift.Hashable {
     public var locale: Foundation.Locale
     public init(locale: Foundation.Locale = .autoupdatingCurrent)
-    public var attributed: Foundation.IntegerFormatStyle.Attributed {
+    public var attributed: Foundation.IntegerFormatStyle<Value>.Attributed {
       get
     }
     public typealias Configuration = Foundation.NumberFormatStyleConfiguration
-    public func grouping(_ group: Foundation.IntegerFormatStyle.Percent.Configuration.Grouping) -> Foundation.IntegerFormatStyle.Percent
-    public func precision(_ p: Foundation.IntegerFormatStyle.Percent.Configuration.Precision) -> Foundation.IntegerFormatStyle.Percent
-    public func sign(strategy: Foundation.IntegerFormatStyle.Percent.Configuration.SignDisplayStrategy) -> Foundation.IntegerFormatStyle.Percent
-    public func decimalSeparator(strategy: Foundation.IntegerFormatStyle.Percent.Configuration.DecimalSeparatorDisplayStrategy) -> Foundation.IntegerFormatStyle.Percent
-    public func rounded(rule: Foundation.IntegerFormatStyle.Percent.Configuration.RoundingRule = .toNearestOrEven, increment: Swift.Int? = nil) -> Foundation.IntegerFormatStyle.Percent
-    public func scale(_ multiplicand: Swift.Double) -> Foundation.IntegerFormatStyle.Percent
-    public func notation(_ notation: Foundation.IntegerFormatStyle.Percent.Configuration.Notation) -> Foundation.IntegerFormatStyle.Percent
+    public func grouping(_ group: Foundation.IntegerFormatStyle<Value>.Percent.Configuration.Grouping) -> Foundation.IntegerFormatStyle<Value>.Percent
+    public func precision(_ p: Foundation.IntegerFormatStyle<Value>.Percent.Configuration.Precision) -> Foundation.IntegerFormatStyle<Value>.Percent
+    public func sign(strategy: Foundation.IntegerFormatStyle<Value>.Percent.Configuration.SignDisplayStrategy) -> Foundation.IntegerFormatStyle<Value>.Percent
+    public func decimalSeparator(strategy: Foundation.IntegerFormatStyle<Value>.Percent.Configuration.DecimalSeparatorDisplayStrategy) -> Foundation.IntegerFormatStyle<Value>.Percent
+    public func rounded(rule: Foundation.IntegerFormatStyle<Value>.Percent.Configuration.RoundingRule = .toNearestOrEven, increment: Swift.Int? = nil) -> Foundation.IntegerFormatStyle<Value>.Percent
+    public func scale(_ multiplicand: Swift.Double) -> Foundation.IntegerFormatStyle<Value>.Percent
+    public func notation(_ notation: Foundation.IntegerFormatStyle<Value>.Percent.Configuration.Notation) -> Foundation.IntegerFormatStyle<Value>.Percent
     public func hash(into hasher: inout Swift.Hasher)
-    public static func == (a: Foundation.IntegerFormatStyle.Percent, b: Foundation.IntegerFormatStyle.Percent) -> Swift.Bool
+    public static func == (a: Foundation.IntegerFormatStyle<Value>.Percent, b: Foundation.IntegerFormatStyle<Value>.Percent) -> Swift.Bool
     public func encode(to encoder: Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
@@ -5151,18 +5215,18 @@ extension Foundation.IntegerFormatStyle {
     public var locale: Foundation.Locale
     public let currencyCode: Swift.String
     public init(code: Swift.String, locale: Foundation.Locale = .autoupdatingCurrent)
-    public var attributed: Foundation.IntegerFormatStyle.Attributed {
+    public var attributed: Foundation.IntegerFormatStyle<Value>.Attributed {
       get
     }
-    public func grouping(_ group: Foundation.IntegerFormatStyle.Currency.Configuration.Grouping) -> Foundation.IntegerFormatStyle.Currency
-    public func precision(_ p: Foundation.IntegerFormatStyle.Currency.Configuration.Precision) -> Foundation.IntegerFormatStyle.Currency
-    public func sign(strategy: Foundation.IntegerFormatStyle.Currency.Configuration.SignDisplayStrategy) -> Foundation.IntegerFormatStyle.Currency
-    public func decimalSeparator(strategy: Foundation.IntegerFormatStyle.Currency.Configuration.DecimalSeparatorDisplayStrategy) -> Foundation.IntegerFormatStyle.Currency
-    public func rounded(rule: Foundation.IntegerFormatStyle.Currency.Configuration.RoundingRule = .toNearestOrEven, increment: Swift.Int? = nil) -> Foundation.IntegerFormatStyle.Currency
-    public func scale(_ multiplicand: Swift.Double) -> Foundation.IntegerFormatStyle.Currency
-    public func presentation(_ p: Foundation.IntegerFormatStyle.Currency.Configuration.Presentation) -> Foundation.IntegerFormatStyle.Currency
+    public func grouping(_ group: Foundation.IntegerFormatStyle<Value>.Currency.Configuration.Grouping) -> Foundation.IntegerFormatStyle<Value>.Currency
+    public func precision(_ p: Foundation.IntegerFormatStyle<Value>.Currency.Configuration.Precision) -> Foundation.IntegerFormatStyle<Value>.Currency
+    public func sign(strategy: Foundation.IntegerFormatStyle<Value>.Currency.Configuration.SignDisplayStrategy) -> Foundation.IntegerFormatStyle<Value>.Currency
+    public func decimalSeparator(strategy: Foundation.IntegerFormatStyle<Value>.Currency.Configuration.DecimalSeparatorDisplayStrategy) -> Foundation.IntegerFormatStyle<Value>.Currency
+    public func rounded(rule: Foundation.IntegerFormatStyle<Value>.Currency.Configuration.RoundingRule = .toNearestOrEven, increment: Swift.Int? = nil) -> Foundation.IntegerFormatStyle<Value>.Currency
+    public func scale(_ multiplicand: Swift.Double) -> Foundation.IntegerFormatStyle<Value>.Currency
+    public func presentation(_ p: Foundation.IntegerFormatStyle<Value>.Currency.Configuration.Presentation) -> Foundation.IntegerFormatStyle<Value>.Currency
     public func hash(into hasher: inout Swift.Hasher)
-    public static func == (a: Foundation.IntegerFormatStyle.Currency, b: Foundation.IntegerFormatStyle.Currency) -> Swift.Bool
+    public static func == (a: Foundation.IntegerFormatStyle<Value>.Currency, b: Foundation.IntegerFormatStyle<Value>.Currency) -> Swift.Bool
     public func encode(to encoder: Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
@@ -5173,88 +5237,180 @@ extension Foundation.IntegerFormatStyle {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.IntegerFormatStyle : Foundation.FormatStyle {
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-  public func format(_ value: Swift.Int) -> Swift.String
-  public func locale(_ locale: Foundation.Locale) -> Foundation.IntegerFormatStyle
-  public typealias FormatInput = Swift.Int
+  public func format(_ value: Value) -> Swift.String
+  public func locale(_ locale: Foundation.Locale) -> Foundation.IntegerFormatStyle<Value>
+  public typealias FormatInput = Value
   public typealias FormatOutput = Swift.String
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.IntegerFormatStyle.Percent : Foundation.FormatStyle {
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-  public func format(_ value: Swift.Int) -> Swift.String
-  public func locale(_ locale: Foundation.Locale) -> Foundation.IntegerFormatStyle.Percent
-  public typealias FormatInput = Swift.Int
+  public func format(_ value: Value) -> Swift.String
+  public func locale(_ locale: Foundation.Locale) -> Foundation.IntegerFormatStyle<Value>.Percent
+  public typealias FormatInput = Value
   public typealias FormatOutput = Swift.String
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.IntegerFormatStyle.Currency : Foundation.FormatStyle {
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-  public func format(_ value: Swift.Int) -> Swift.String
-  public func locale(_ locale: Foundation.Locale) -> Foundation.IntegerFormatStyle.Currency
-  public typealias FormatInput = Swift.Int
+  public func format(_ value: Value) -> Swift.String
+  public func locale(_ locale: Foundation.Locale) -> Foundation.IntegerFormatStyle<Value>.Currency
+  public typealias FormatInput = Value
   public typealias FormatOutput = Swift.String
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.IntegerFormatStyle : Foundation.ParseableFormatStyle {
-  public var parseStrategy: Foundation.IntegerParseStrategy<Foundation.IntegerFormatStyle> {
+  public var parseStrategy: Foundation.IntegerParseStrategy<Foundation.IntegerFormatStyle<Value>> {
     get
   }
-  public typealias Strategy = Foundation.IntegerParseStrategy<Foundation.IntegerFormatStyle>
+  public typealias Strategy = Foundation.IntegerParseStrategy<Foundation.IntegerFormatStyle<Value>>
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.IntegerFormatStyle.Currency : Foundation.ParseableFormatStyle {
-  public var parseStrategy: Foundation.IntegerParseStrategy<Foundation.IntegerFormatStyle.Currency> {
+  public var parseStrategy: Foundation.IntegerParseStrategy<Foundation.IntegerFormatStyle<Value>.Currency> {
     get
   }
-  public typealias Strategy = Foundation.IntegerParseStrategy<Foundation.IntegerFormatStyle.Currency>
+  public typealias Strategy = Foundation.IntegerParseStrategy<Foundation.IntegerFormatStyle<Value>.Currency>
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.IntegerFormatStyle.Percent : Foundation.ParseableFormatStyle {
-  public var parseStrategy: Foundation.IntegerParseStrategy<Foundation.IntegerFormatStyle.Percent> {
+  public var parseStrategy: Foundation.IntegerParseStrategy<Foundation.IntegerFormatStyle<Value>.Percent> {
     get
   }
-  public typealias Strategy = Foundation.IntegerParseStrategy<Foundation.IntegerFormatStyle.Percent>
+  public typealias Strategy = Foundation.IntegerParseStrategy<Foundation.IntegerFormatStyle<Value>.Percent>
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle {
-  public static var number: Foundation.IntegerFormatStyle {
-    get
-  }
-}
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle.Percent {
-  public static var percent: Foundation.IntegerFormatStyle.Percent {
-    get
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.Int> {
+  @_alwaysEmitIntoClient public static var number: Foundation.IntegerFormatStyle<Swift.Int> {
+    get { Self() }
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle.Currency {
-  public static func currency(code: Swift.String) -> Self
-}
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.ParseableFormatStyle where Self == Foundation.IntegerFormatStyle {
-  public static var number: Foundation.IntegerFormatStyle {
-    get
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.Int16> {
+  @_alwaysEmitIntoClient public static var number: Foundation.IntegerFormatStyle<Swift.Int16> {
+    get { Self() }
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.ParseableFormatStyle where Self == Foundation.IntegerFormatStyle.Percent {
-  public static var percent: Foundation.IntegerFormatStyle.Percent {
-    get
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.Int32> {
+  @_alwaysEmitIntoClient public static var number: Foundation.IntegerFormatStyle<Swift.Int32> {
+    get { Self() }
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.ParseableFormatStyle where Self == Foundation.IntegerFormatStyle.Currency {
-  public static func currency(code: Swift.String) -> Self
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.Int64> {
+  @_alwaysEmitIntoClient public static var number: Foundation.IntegerFormatStyle<Swift.Int64> {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.Int8> {
+  @_alwaysEmitIntoClient public static var number: Foundation.IntegerFormatStyle<Swift.Int8> {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.UInt> {
+  @_alwaysEmitIntoClient public static var number: Foundation.IntegerFormatStyle<Swift.UInt> {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.UInt16> {
+  @_alwaysEmitIntoClient public static var number: Foundation.IntegerFormatStyle<Swift.UInt16> {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.UInt32> {
+  @_alwaysEmitIntoClient public static var number: Foundation.IntegerFormatStyle<Swift.UInt32> {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.UInt64> {
+  @_alwaysEmitIntoClient public static var number: Foundation.IntegerFormatStyle<Swift.UInt64> {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.UInt8> {
+  @_alwaysEmitIntoClient public static var number: Foundation.IntegerFormatStyle<Swift.UInt8> {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.Int>.Percent {
+  @_alwaysEmitIntoClient public static var percent: Foundation.IntegerFormatStyle<Swift.Int>.Percent {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.Int16>.Percent {
+  @_alwaysEmitIntoClient public static var percent: Foundation.IntegerFormatStyle<Swift.Int16>.Percent {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.Int32>.Percent {
+  @_alwaysEmitIntoClient public static var percent: Foundation.IntegerFormatStyle<Swift.Int32>.Percent {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.Int64>.Percent {
+  @_alwaysEmitIntoClient public static var percent: Foundation.IntegerFormatStyle<Swift.Int64>.Percent {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.Int8>.Percent {
+  @_alwaysEmitIntoClient public static var percent: Foundation.IntegerFormatStyle<Swift.Int8>.Percent {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.UInt>.Percent {
+  @_alwaysEmitIntoClient public static var percent: Foundation.IntegerFormatStyle<Swift.UInt>.Percent {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.UInt16>.Percent {
+  @_alwaysEmitIntoClient public static var percent: Foundation.IntegerFormatStyle<Swift.UInt16>.Percent {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.UInt32>.Percent {
+  @_alwaysEmitIntoClient public static var percent: Foundation.IntegerFormatStyle<Swift.UInt32>.Percent {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.UInt64>.Percent {
+  @_alwaysEmitIntoClient public static var percent: Foundation.IntegerFormatStyle<Swift.UInt64>.Percent {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle where Self == Foundation.IntegerFormatStyle<Swift.UInt8>.Percent {
+  @_alwaysEmitIntoClient public static var percent: Foundation.IntegerFormatStyle<Swift.UInt8>.Percent {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle {
+  public static func currency<V>(code: Swift.String) -> Self where Self == Foundation.IntegerFormatStyle<V>.Currency, V : Swift.BinaryInteger
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.IntegerFormatStyle {
   public struct Attributed : Swift.Codable, Swift.Hashable, Foundation.FormatStyle {
-    public func format(_ value: Swift.Int) -> Foundation.AttributedString
-    public func locale(_ locale: Foundation.Locale) -> Foundation.IntegerFormatStyle.Attributed
+    public func format(_ value: Value) -> Foundation.AttributedString
+    public func locale(_ locale: Foundation.Locale) -> Foundation.IntegerFormatStyle<Value>.Attributed
     public func hash(into hasher: inout Swift.Hasher)
-    public static func == (a: Foundation.IntegerFormatStyle.Attributed, b: Foundation.IntegerFormatStyle.Attributed) -> Swift.Bool
-    public typealias FormatInput = Swift.Int
+    public static func == (a: Foundation.IntegerFormatStyle<Value>.Attributed, b: Foundation.IntegerFormatStyle<Value>.Attributed) -> Swift.Bool
+    public typealias FormatInput = Value
     public typealias FormatOutput = Foundation.AttributedString
     public func encode(to encoder: Swift.Encoder) throws
     public var hashValue: Swift.Int {
@@ -5405,6 +5561,37 @@ extension Foundation.NSKeyedUnarchiver {
   @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
   @nonobjc public static func unarchivedDictionary(keysOfClasses keyClasses: [Swift.AnyClass], objectsOfClasses objectClasses: [Swift.AnyClass], from data: Foundation.Data) throws -> [Swift.AnyHashable : Any]?
 }
+
+#if compiler(>=5.3) && $RethrowsProtocol
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+public struct AsyncLineSequence<Base> : _Concurrency.AsyncSequence where Base : _Concurrency.AsyncSequence, Base.Element == Swift.UInt8 {
+  public typealias Element = Swift.String
+  public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
+    public typealias Element = Swift.String
+    
+    #if compiler(>=5.3) && $AsyncAwait
+    @_specialize(exported: false, kind: full, where Base == Foundation.URL.AsyncBytes)
+    @_specialize(exported: false, kind: full, where Base == Foundation.FileHandle.AsyncBytes)
+    @_specialize(exported: false, kind: full, where Base == Foundation.URLSession.AsyncBytes)
+    public mutating func next() async rethrows -> Swift.String?
+    #endif
+
+  }
+  public func makeAsyncIterator() -> Foundation.AsyncLineSequence<Base>.AsyncIterator
+}
+#endif
+
+
+#if compiler(>=5.3) && $RethrowsProtocol
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension _Concurrency.AsyncSequence where Self.Element == Swift.UInt8 {
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+  public var lines: Foundation.AsyncLineSequence<Self> {
+    get
+  }
+}
+#endif
+
 extension Dispatch.DispatchData : Foundation.DataProtocol {
   public struct Region : Foundation.DataProtocol, Foundation.ContiguousBytes {
     public var regions: Swift.CollectionOfOne<Dispatch.DispatchData.Region> {
@@ -5451,16 +5638,55 @@ extension Foundation.IntegerParseStrategy : Foundation.ParseStrategy {
   public typealias ParseOutput = Format.FormatInput
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.IntegerParseStrategy where Format == Foundation.IntegerFormatStyle {
-  public init(format: Format, lenient: Swift.Bool = true)
+extension Foundation.IntegerParseStrategy {
+  public init<Value>(format: Format, lenient: Swift.Bool = true) where Format == Foundation.IntegerFormatStyle<Value>, Value : Swift.BinaryInteger
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.IntegerParseStrategy where Format == Foundation.IntegerFormatStyle.Percent {
-  public init(format: Format, lenient: Swift.Bool = true)
+extension Foundation.IntegerParseStrategy {
+  public init<Value>(format: Format, lenient: Swift.Bool = true) where Format == Foundation.IntegerFormatStyle<Value>.Percent, Value : Swift.BinaryInteger
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.IntegerParseStrategy where Format == Foundation.IntegerFormatStyle.Currency {
-  public init(format: Format, lenient: Swift.Bool = true)
+extension Foundation.IntegerParseStrategy {
+  public init<Value>(format: Format, lenient: Swift.Bool = true) where Format == Foundation.IntegerFormatStyle<Value>.Currency, Value : Swift.BinaryInteger
+}
+extension Foundation.URL {
+  
+  #if compiler(>=5.3) && $RethrowsProtocol
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+  public struct AsyncBytes : _Concurrency.AsyncSequence {
+    public typealias Element = Swift.UInt8
+    @frozen public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
+      @usableFromInline
+      internal var buffer: Foundation._AsyncBytesBuffer = _AsyncBytesBuffer(capacity: 0)
+      
+      #if compiler(>=5.3) && $AsyncAwait
+      @inlinable @inline(__always) public mutating func next() async throws -> Swift.UInt8? {
+                return try await buffer.next()
+            }
+      #endif
+
+      public typealias Element = Swift.UInt8
+    }
+    public func makeAsyncIterator() -> Foundation.URL.AsyncBytes.AsyncIterator
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $RethrowsProtocol
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+  public var resourceBytes: Foundation.URL.AsyncBytes {
+    get
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $RethrowsProtocol
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+  public var lines: Foundation.AsyncLineSequence<Foundation.URL.AsyncBytes> {
+    get
+  }
+  #endif
+
 }
 @available(macOS 10.8, iOS 6.0, *)
 public struct UUID : Foundation.ReferenceConvertible, Swift.Hashable, Swift.Equatable, Swift.CustomStringConvertible {
@@ -5819,8 +6045,6 @@ extension Foundation.Date {
     public var locale: Foundation.Locale
     public var timeZone: Foundation.TimeZone
     public var calendar: Foundation.Calendar
-    public var dateStyle: Foundation.Date.IntervalFormatStyle.DateStyle?
-    public var timeStyle: Foundation.Date.IntervalFormatStyle.TimeStyle?
     public init(date: Foundation.Date.IntervalFormatStyle.DateStyle? = nil, time: Foundation.Date.IntervalFormatStyle.TimeStyle? = nil, locale: Foundation.Locale = .autoupdatingCurrent, calendar: Foundation.Calendar = .autoupdatingCurrent, timeZone: Foundation.TimeZone = .autoupdatingCurrent)
     public func format(_ v: Swift.Range<Foundation.Date>) -> Swift.String
     public func locale(_ locale: Foundation.Locale) -> Foundation.Date.IntervalFormatStyle
@@ -8643,22 +8867,22 @@ extension Foundation.Measurement : Swift.Codable {
   public func encode(to encoder: Swift.Encoder) throws
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-public struct FloatingPointFormatStyle : Swift.Codable, Swift.Hashable {
+public struct FloatingPointFormatStyle<Value> : Swift.Codable, Swift.Hashable where Value : Swift.BinaryFloatingPoint {
   public var locale: Foundation.Locale
   public init(locale: Foundation.Locale = .autoupdatingCurrent)
-  public var attributed: Foundation.FloatingPointFormatStyle.Attributed {
+  public var attributed: Foundation.FloatingPointFormatStyle<Value>.Attributed {
     get
   }
   public typealias Configuration = Foundation.NumberFormatStyleConfiguration
-  public func grouping(_ group: Foundation.FloatingPointFormatStyle.Configuration.Grouping) -> Foundation.FloatingPointFormatStyle
-  public func precision(_ p: Foundation.FloatingPointFormatStyle.Configuration.Precision) -> Foundation.FloatingPointFormatStyle
-  public func sign(strategy: Foundation.FloatingPointFormatStyle.Configuration.SignDisplayStrategy) -> Foundation.FloatingPointFormatStyle
-  public func decimalSeparator(strategy: Foundation.FloatingPointFormatStyle.Configuration.DecimalSeparatorDisplayStrategy) -> Foundation.FloatingPointFormatStyle
-  public func rounded(rule: Foundation.FloatingPointFormatStyle.Configuration.RoundingRule = .toNearestOrEven, increment: Swift.Double? = nil) -> Foundation.FloatingPointFormatStyle
-  public func scale(_ multiplicand: Swift.Double) -> Foundation.FloatingPointFormatStyle
-  public func notation(_ notation: Foundation.FloatingPointFormatStyle.Configuration.Notation) -> Foundation.FloatingPointFormatStyle
+  public func grouping(_ group: Foundation.FloatingPointFormatStyle<Value>.Configuration.Grouping) -> Foundation.FloatingPointFormatStyle<Value>
+  public func precision(_ p: Foundation.FloatingPointFormatStyle<Value>.Configuration.Precision) -> Foundation.FloatingPointFormatStyle<Value>
+  public func sign(strategy: Foundation.FloatingPointFormatStyle<Value>.Configuration.SignDisplayStrategy) -> Foundation.FloatingPointFormatStyle<Value>
+  public func decimalSeparator(strategy: Foundation.FloatingPointFormatStyle<Value>.Configuration.DecimalSeparatorDisplayStrategy) -> Foundation.FloatingPointFormatStyle<Value>
+  public func rounded(rule: Foundation.FloatingPointFormatStyle<Value>.Configuration.RoundingRule = .toNearestOrEven, increment: Swift.Double? = nil) -> Foundation.FloatingPointFormatStyle<Value>
+  public func scale(_ multiplicand: Swift.Double) -> Foundation.FloatingPointFormatStyle<Value>
+  public func notation(_ notation: Foundation.FloatingPointFormatStyle<Value>.Configuration.Notation) -> Foundation.FloatingPointFormatStyle<Value>
   public func hash(into hasher: inout Swift.Hasher)
-  public static func == (a: Foundation.FloatingPointFormatStyle, b: Foundation.FloatingPointFormatStyle) -> Swift.Bool
+  public static func == (a: Foundation.FloatingPointFormatStyle<Value>, b: Foundation.FloatingPointFormatStyle<Value>) -> Swift.Bool
   public func encode(to encoder: Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
@@ -8670,19 +8894,19 @@ extension Foundation.FloatingPointFormatStyle {
   public struct Percent : Swift.Codable, Swift.Hashable {
     public var locale: Foundation.Locale
     public init(locale: Foundation.Locale = .autoupdatingCurrent)
-    public var attributed: Foundation.FloatingPointFormatStyle.Attributed {
+    public var attributed: Foundation.FloatingPointFormatStyle<Value>.Attributed {
       get
     }
     public typealias Configuration = Foundation.NumberFormatStyleConfiguration
-    public func grouping(_ group: Foundation.FloatingPointFormatStyle.Percent.Configuration.Grouping) -> Foundation.FloatingPointFormatStyle.Percent
-    public func precision(_ p: Foundation.FloatingPointFormatStyle.Percent.Configuration.Precision) -> Foundation.FloatingPointFormatStyle.Percent
-    public func sign(strategy: Foundation.FloatingPointFormatStyle.Percent.Configuration.SignDisplayStrategy) -> Foundation.FloatingPointFormatStyle.Percent
-    public func decimalSeparator(strategy: Foundation.FloatingPointFormatStyle.Percent.Configuration.DecimalSeparatorDisplayStrategy) -> Foundation.FloatingPointFormatStyle.Percent
-    public func rounded(rule: Foundation.FloatingPointFormatStyle.Percent.Configuration.RoundingRule = .toNearestOrEven, increment: Swift.Double? = nil) -> Foundation.FloatingPointFormatStyle.Percent
-    public func scale(_ multiplicand: Swift.Double) -> Foundation.FloatingPointFormatStyle.Percent
-    public func notation(_ notation: Foundation.FloatingPointFormatStyle.Percent.Configuration.Notation) -> Foundation.FloatingPointFormatStyle.Percent
+    public func grouping(_ group: Foundation.FloatingPointFormatStyle<Value>.Percent.Configuration.Grouping) -> Foundation.FloatingPointFormatStyle<Value>.Percent
+    public func precision(_ p: Foundation.FloatingPointFormatStyle<Value>.Percent.Configuration.Precision) -> Foundation.FloatingPointFormatStyle<Value>.Percent
+    public func sign(strategy: Foundation.FloatingPointFormatStyle<Value>.Percent.Configuration.SignDisplayStrategy) -> Foundation.FloatingPointFormatStyle<Value>.Percent
+    public func decimalSeparator(strategy: Foundation.FloatingPointFormatStyle<Value>.Percent.Configuration.DecimalSeparatorDisplayStrategy) -> Foundation.FloatingPointFormatStyle<Value>.Percent
+    public func rounded(rule: Foundation.FloatingPointFormatStyle<Value>.Percent.Configuration.RoundingRule = .toNearestOrEven, increment: Swift.Double? = nil) -> Foundation.FloatingPointFormatStyle<Value>.Percent
+    public func scale(_ multiplicand: Swift.Double) -> Foundation.FloatingPointFormatStyle<Value>.Percent
+    public func notation(_ notation: Foundation.FloatingPointFormatStyle<Value>.Percent.Configuration.Notation) -> Foundation.FloatingPointFormatStyle<Value>.Percent
     public func hash(into hasher: inout Swift.Hasher)
-    public static func == (a: Foundation.FloatingPointFormatStyle.Percent, b: Foundation.FloatingPointFormatStyle.Percent) -> Swift.Bool
+    public static func == (a: Foundation.FloatingPointFormatStyle<Value>.Percent, b: Foundation.FloatingPointFormatStyle<Value>.Percent) -> Swift.Bool
     public func encode(to encoder: Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
@@ -8695,18 +8919,18 @@ extension Foundation.FloatingPointFormatStyle {
     public let currencyCode: Swift.String
     public typealias Configuration = Foundation.CurrencyFormatStyleConfiguration
     public init(code: Swift.String, locale: Foundation.Locale = .autoupdatingCurrent)
-    public var attributed: Foundation.FloatingPointFormatStyle.Attributed {
+    public var attributed: Foundation.FloatingPointFormatStyle<Value>.Attributed {
       get
     }
-    public func grouping(_ group: Foundation.FloatingPointFormatStyle.Currency.Configuration.Grouping) -> Foundation.FloatingPointFormatStyle.Currency
-    public func precision(_ p: Foundation.FloatingPointFormatStyle.Currency.Configuration.Precision) -> Foundation.FloatingPointFormatStyle.Currency
-    public func sign(strategy: Foundation.FloatingPointFormatStyle.Currency.Configuration.SignDisplayStrategy) -> Foundation.FloatingPointFormatStyle.Currency
-    public func decimalSeparator(strategy: Foundation.FloatingPointFormatStyle.Currency.Configuration.DecimalSeparatorDisplayStrategy) -> Foundation.FloatingPointFormatStyle.Currency
-    public func rounded(rule: Foundation.FloatingPointFormatStyle.Currency.Configuration.RoundingRule = .toNearestOrEven, increment: Swift.Double? = nil) -> Foundation.FloatingPointFormatStyle.Currency
-    public func scale(_ multiplicand: Swift.Double) -> Foundation.FloatingPointFormatStyle.Currency
-    public func presentation(_ p: Foundation.FloatingPointFormatStyle.Currency.Configuration.Presentation) -> Foundation.FloatingPointFormatStyle.Currency
+    public func grouping(_ group: Foundation.FloatingPointFormatStyle<Value>.Currency.Configuration.Grouping) -> Foundation.FloatingPointFormatStyle<Value>.Currency
+    public func precision(_ p: Foundation.FloatingPointFormatStyle<Value>.Currency.Configuration.Precision) -> Foundation.FloatingPointFormatStyle<Value>.Currency
+    public func sign(strategy: Foundation.FloatingPointFormatStyle<Value>.Currency.Configuration.SignDisplayStrategy) -> Foundation.FloatingPointFormatStyle<Value>.Currency
+    public func decimalSeparator(strategy: Foundation.FloatingPointFormatStyle<Value>.Currency.Configuration.DecimalSeparatorDisplayStrategy) -> Foundation.FloatingPointFormatStyle<Value>.Currency
+    public func rounded(rule: Foundation.FloatingPointFormatStyle<Value>.Currency.Configuration.RoundingRule = .toNearestOrEven, increment: Swift.Double? = nil) -> Foundation.FloatingPointFormatStyle<Value>.Currency
+    public func scale(_ multiplicand: Swift.Double) -> Foundation.FloatingPointFormatStyle<Value>.Currency
+    public func presentation(_ p: Foundation.FloatingPointFormatStyle<Value>.Currency.Configuration.Presentation) -> Foundation.FloatingPointFormatStyle<Value>.Currency
     public func hash(into hasher: inout Swift.Hasher)
-    public static func == (a: Foundation.FloatingPointFormatStyle.Currency, b: Foundation.FloatingPointFormatStyle.Currency) -> Swift.Bool
+    public static func == (a: Foundation.FloatingPointFormatStyle<Value>.Currency, b: Foundation.FloatingPointFormatStyle<Value>.Currency) -> Swift.Bool
     public func encode(to encoder: Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
@@ -8716,86 +8940,84 @@ extension Foundation.FloatingPointFormatStyle {
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.FloatingPointFormatStyle : Foundation.FormatStyle {
-  public func format(_ value: Swift.Double) -> Swift.String
-  public func locale(_ locale: Foundation.Locale) -> Foundation.FloatingPointFormatStyle
-  public typealias FormatInput = Swift.Double
+  public func format(_ value: Value) -> Swift.String
+  public func locale(_ locale: Foundation.Locale) -> Foundation.FloatingPointFormatStyle<Value>
+  public typealias FormatInput = Value
   public typealias FormatOutput = Swift.String
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.FloatingPointFormatStyle.Percent : Foundation.FormatStyle {
-  public func format(_ value: Swift.Double) -> Swift.String
-  public func locale(_ locale: Foundation.Locale) -> Foundation.FloatingPointFormatStyle.Percent
-  public typealias FormatInput = Swift.Double
+  public func format(_ value: Value) -> Swift.String
+  public func locale(_ locale: Foundation.Locale) -> Foundation.FloatingPointFormatStyle<Value>.Percent
+  public typealias FormatInput = Value
   public typealias FormatOutput = Swift.String
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.FloatingPointFormatStyle.Currency : Foundation.FormatStyle {
-  public func format(_ value: Swift.Double) -> Swift.String
-  public func locale(_ locale: Foundation.Locale) -> Foundation.FloatingPointFormatStyle.Currency
-  public typealias FormatInput = Swift.Double
+  public func format(_ value: Value) -> Swift.String
+  public func locale(_ locale: Foundation.Locale) -> Foundation.FloatingPointFormatStyle<Value>.Currency
+  public typealias FormatInput = Value
   public typealias FormatOutput = Swift.String
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.FloatingPointFormatStyle : Foundation.ParseableFormatStyle {
-  public var parseStrategy: Foundation.FloatingPointParseStrategy<Foundation.FloatingPointFormatStyle> {
+  public var parseStrategy: Foundation.FloatingPointParseStrategy<Foundation.FloatingPointFormatStyle<Value>> {
     get
   }
-  public typealias Strategy = Foundation.FloatingPointParseStrategy<Foundation.FloatingPointFormatStyle>
+  public typealias Strategy = Foundation.FloatingPointParseStrategy<Foundation.FloatingPointFormatStyle<Value>>
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.FloatingPointFormatStyle.Currency : Foundation.ParseableFormatStyle {
-  public var parseStrategy: Foundation.FloatingPointParseStrategy<Foundation.FloatingPointFormatStyle.Currency> {
+  public var parseStrategy: Foundation.FloatingPointParseStrategy<Foundation.FloatingPointFormatStyle<Value>.Currency> {
     get
   }
-  public typealias Strategy = Foundation.FloatingPointParseStrategy<Foundation.FloatingPointFormatStyle.Currency>
+  public typealias Strategy = Foundation.FloatingPointParseStrategy<Foundation.FloatingPointFormatStyle<Value>.Currency>
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.FloatingPointFormatStyle.Percent : Foundation.ParseableFormatStyle {
-  public var parseStrategy: Foundation.FloatingPointParseStrategy<Foundation.FloatingPointFormatStyle.Percent> {
+  public var parseStrategy: Foundation.FloatingPointParseStrategy<Foundation.FloatingPointFormatStyle<Value>.Percent> {
     get
   }
-  public typealias Strategy = Foundation.FloatingPointParseStrategy<Foundation.FloatingPointFormatStyle.Percent>
+  public typealias Strategy = Foundation.FloatingPointParseStrategy<Foundation.FloatingPointFormatStyle<Value>.Percent>
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.FormatStyle where Self == Foundation.FloatingPointFormatStyle {
-  public static var number: Foundation.FloatingPointFormatStyle {
-    get
-  }
-}
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.FormatStyle where Self == Foundation.FloatingPointFormatStyle.Percent {
-  public static var percent: Foundation.FloatingPointFormatStyle.Percent {
-    get
+extension Foundation.FormatStyle where Self == Foundation.FloatingPointFormatStyle<Swift.Double> {
+  @_alwaysEmitIntoClient public static var number: Foundation.FloatingPointFormatStyle<Swift.Double> {
+    get { Self() }
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.FormatStyle where Self == Foundation.FloatingPointFormatStyle.Currency {
-  public static func currency(code: Swift.String) -> Self
-}
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.ParseableFormatStyle where Self == Foundation.FloatingPointFormatStyle {
-  public static var number: Foundation.FloatingPointFormatStyle {
-    get
+extension Foundation.FormatStyle where Self == Foundation.FloatingPointFormatStyle<Swift.Float> {
+  @_alwaysEmitIntoClient public static var number: Foundation.FloatingPointFormatStyle<Swift.Float> {
+    get { Self() }
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.ParseableFormatStyle where Self == Foundation.FloatingPointFormatStyle.Percent {
-  public static var percent: Foundation.FloatingPointFormatStyle.Percent {
-    get
+extension Foundation.FormatStyle where Self == Foundation.FloatingPointFormatStyle<Swift.Double>.Percent {
+  @_alwaysEmitIntoClient public static var percent: Foundation.FloatingPointFormatStyle<Swift.Double>.Percent {
+    get { Self() }
   }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension Foundation.ParseableFormatStyle where Self == Foundation.FloatingPointFormatStyle.Currency {
-  public static func currency(code: Swift.String) -> Self
+extension Foundation.FormatStyle where Self == Foundation.FloatingPointFormatStyle<Swift.Float>.Percent {
+  @_alwaysEmitIntoClient public static var percent: Foundation.FloatingPointFormatStyle<Swift.Float>.Percent {
+    get { Self() }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.FormatStyle {
+  @_alwaysEmitIntoClient public static func currency<Value>(code: Swift.String) -> Self where Self == Foundation.FloatingPointFormatStyle<Value>.Currency, Value : Swift.BinaryFloatingPoint {
+        return Self(code: code)
+    }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.FloatingPointFormatStyle {
   public struct Attributed : Swift.Codable, Swift.Hashable, Foundation.FormatStyle {
-    public func format(_ value: Swift.Double) -> Foundation.AttributedString
-    public func locale(_ locale: Foundation.Locale) -> Foundation.FloatingPointFormatStyle.Attributed
+    public func format(_ value: Value) -> Foundation.AttributedString
+    public func locale(_ locale: Foundation.Locale) -> Foundation.FloatingPointFormatStyle<Value>.Attributed
     public func hash(into hasher: inout Swift.Hasher)
-    public static func == (a: Foundation.FloatingPointFormatStyle.Attributed, b: Foundation.FloatingPointFormatStyle.Attributed) -> Swift.Bool
-    public typealias FormatInput = Swift.Double
+    public static func == (a: Foundation.FloatingPointFormatStyle<Value>.Attributed, b: Foundation.FloatingPointFormatStyle<Value>.Attributed) -> Swift.Bool
+    public typealias FormatInput = Value
     public typealias FormatOutput = Foundation.AttributedString
     public func encode(to encoder: Swift.Encoder) throws
     public var hashValue: Swift.Int {
@@ -9007,9 +9229,10 @@ extension Swift.BinaryFloatingPoint {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Swift.BinaryFloatingPoint {
   public init<S>(_ value: S.ParseInput, strategy: S) throws where S : Foundation.ParseStrategy, S.ParseOutput : Swift.BinaryFloatingPoint
-  public init(_ value: Swift.String, format: Foundation.FloatingPointFormatStyle, lenient: Swift.Bool = true) throws
-  public init(_ value: Swift.String, format: Foundation.FloatingPointFormatStyle.Percent, lenient: Swift.Bool = true) throws
-  public init(_ value: Swift.String, format: Foundation.FloatingPointFormatStyle.Currency, lenient: Swift.Bool = true) throws
+  public init<S>(_ value: S.ParseInput, strategy: S) throws where Self == S.ParseOutput, S : Foundation.ParseStrategy
+  public init(_ value: Swift.String, format: Foundation.FloatingPointFormatStyle<Self>, lenient: Swift.Bool = true) throws
+  public init(_ value: Swift.String, format: Foundation.FloatingPointFormatStyle<Self>.Percent, lenient: Swift.Bool = true) throws
+  public init(_ value: Swift.String, format: Foundation.FloatingPointFormatStyle<Self>.Currency, lenient: Swift.Bool = true) throws
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 public protocol ParseableFormatStyle : Foundation.FormatStyle {
@@ -9325,14 +9548,30 @@ extension Swift.Slice : Foundation.ContiguousBytes where Base : Foundation.Conti
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 public struct ByteCountFormatStyle : Foundation.FormatStyle {
-  public var style: Foundation.ByteCountFormatStyle.Style
-  public var allowedUnits: Foundation.ByteCountFormatStyle.Units
-  public var spellsOutZero: Swift.Bool
-  public var includesExactByteCount: Swift.Bool
-  public var locale: Foundation.Locale
+  public var style: Foundation.ByteCountFormatStyle.Style {
+    get
+    set
+  }
+  public var allowedUnits: Foundation.ByteCountFormatStyle.Units {
+    get
+    set
+  }
+  public var spellsOutZero: Swift.Bool {
+    get
+    set
+  }
+  public var includesActualByteCount: Swift.Bool {
+    get
+    set
+  }
+  public var locale: Foundation.Locale {
+    get
+    set
+  }
+  public var attributed: Foundation.ByteCountFormatStyle.Attributed
   public func format(_ value: Swift.Int64) -> Swift.String
   public func locale(_ locale: Foundation.Locale) -> Foundation.ByteCountFormatStyle
-  public init(style: Foundation.ByteCountFormatStyle.Style = .file, allowedUnits: Foundation.ByteCountFormatStyle.Units = .all, spellsOutZero: Swift.Bool = true, includesExactByteCount: Swift.Bool = false, locale: Foundation.Locale = .autoupdatingCurrent)
+  public init(style: Foundation.ByteCountFormatStyle.Style = .file, allowedUnits: Foundation.ByteCountFormatStyle.Units = .all, spellsOutZero: Swift.Bool = true, includesActualByteCount: Swift.Bool = false, locale: Foundation.Locale = .autoupdatingCurrent)
   public enum Style : Swift.Int, Swift.Codable, Swift.Hashable {
     case file, memory, decimal, binary
     public init?(rawValue: Swift.Int)
@@ -9381,6 +9620,24 @@ public struct ByteCountFormatStyle : Foundation.FormatStyle {
     public typealias Element = Foundation.ByteCountFormatStyle.Units
     public typealias RawValue = Swift.UInt
   }
+  public struct Attributed : Foundation.FormatStyle {
+    public var style: Foundation.ByteCountFormatStyle.Style
+    public var allowedUnits: Foundation.ByteCountFormatStyle.Units
+    public var spellsOutZero: Swift.Bool
+    public var includesActualByteCount: Swift.Bool
+    public var locale: Foundation.Locale
+    public func locale(_ locale: Foundation.Locale) -> Foundation.ByteCountFormatStyle.Attributed
+    public func format(_ value: Swift.Int64) -> Foundation.AttributedString
+    public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: Foundation.ByteCountFormatStyle.Attributed, b: Foundation.ByteCountFormatStyle.Attributed) -> Swift.Bool
+    public typealias FormatInput = Swift.Int64
+    public typealias FormatOutput = Foundation.AttributedString
+    public func encode(to encoder: Swift.Encoder) throws
+    public var hashValue: Swift.Int {
+      get
+    }
+    public init(from decoder: Swift.Decoder) throws
+  }
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Foundation.ByteCountFormatStyle, b: Foundation.ByteCountFormatStyle) -> Swift.Bool
   public typealias FormatInput = Swift.Int64
@@ -9393,7 +9650,7 @@ public struct ByteCountFormatStyle : Foundation.FormatStyle {
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.FormatStyle where Self == Foundation.ByteCountFormatStyle {
-  public static func byteCount(style: Foundation.ByteCountFormatStyle.Style, allowedUnits: Foundation.ByteCountFormatStyle.Units = .all, spellsOutZero: Swift.Bool = true, includesExactByteCount: Swift.Bool = false) -> Self
+  public static func byteCount(style: Foundation.ByteCountFormatStyle.Style, allowedUnits: Foundation.ByteCountFormatStyle.Units = .all, spellsOutZero: Swift.Bool = true, includesActualByteCount: Swift.Bool = false) -> Self
 }
 extension Foundation._NSRange : Swift._ObjectiveCBridgeable {
   public func _bridgeToObjectiveC() -> Foundation.NSValue
@@ -9562,25 +9819,31 @@ extension Foundation.PresentationIntent : Swift._ObjectiveCBridgeable {
     public func callAsFunction(_ value: T.Value) -> Foundation.AttributeContainer
   }
   public init()
+  public mutating func merge(_ other: Foundation.AttributeContainer, mergePolicy: Foundation.AttributedString.AttributeMergePolicy = .keepNew)
+  public func merging(_ other: Foundation.AttributeContainer, mergePolicy: Foundation.AttributedString.AttributeMergePolicy = .keepNew) -> Foundation.AttributeContainer
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public protocol AttributedStringAttributeMutation {
   mutating func setAttributes(_ attributes: Foundation.AttributeContainer)
-  mutating func mergeAttributes(_ attributes: Foundation.AttributeContainer)
+  mutating func mergeAttributes(_ attributes: Foundation.AttributeContainer, mergePolicy: Foundation.AttributedString.AttributeMergePolicy)
   mutating func replaceAttributes(_ attributes: Foundation.AttributeContainer, with others: Foundation.AttributeContainer)
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-public protocol AttributedStringProtocol : Foundation.AttributedStringAttributeMutation, Swift.CustomStringConvertible, Swift.Hashable {
+@dynamicMemberLookup public protocol AttributedStringProtocol : Foundation.AttributedStringAttributeMutation, Swift.CustomStringConvertible, Swift.Hashable {
   var startIndex: Foundation.AttributedString.Index { get }
   var endIndex: Foundation.AttributedString.Index { get }
   var runs: Foundation.AttributedString.Runs { get }
   var characters: Foundation.AttributedString.CharacterView { get }
   var unicodeScalars: Foundation.AttributedString.UnicodeScalarView { get }
+  subscript<K>(_: K.Type) -> K.Value? where K : Foundation.AttributedStringKey { get set }
+  subscript<K>(dynamicMember keyPath: Swift.KeyPath<Foundation.AttributeDynamicLookup, K>) -> K.Value? where K : Foundation.AttributedStringKey { get set }
+  subscript<S>(dynamicMember keyPath: Swift.KeyPath<Foundation.AttributeScopes, S.Type>) -> Foundation.ScopedAttributeContainer<S> where S : Foundation.AttributeScope { get set }
+  subscript<R>(bounds: R) -> Foundation.AttributedSubstring where R : Swift.RangeExpression, R.Bound == Foundation.AttributedString.Index { get }
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributedStringProtocol {
   public func settingAttributes(_ attributes: Foundation.AttributeContainer) -> Foundation.AttributedString
-  public func mergingAttributes(_ attributes: Foundation.AttributeContainer) -> Foundation.AttributedString
+  public func mergingAttributes(_ attributes: Foundation.AttributeContainer, mergePolicy: Foundation.AttributedString.AttributeMergePolicy = .keepNew) -> Foundation.AttributedString
   public func replacingAttributes(_ attributes: Foundation.AttributeContainer, with others: Foundation.AttributeContainer) -> Foundation.AttributedString
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -9613,6 +9876,15 @@ extension Foundation.AttributedStringProtocol {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 @dynamicMemberLookup public struct AttributedString : Foundation.AttributedStringProtocol {
+  public enum AttributeMergePolicy {
+    case keepNew
+    case keepCurrent
+    public static func == (a: Foundation.AttributedString.AttributeMergePolicy, b: Foundation.AttributedString.AttributeMergePolicy) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
   public subscript<K>(_: K.Type) -> K.Value? where K : Foundation.AttributedStringKey {
     get
     set
@@ -9626,7 +9898,7 @@ extension Foundation.AttributedStringProtocol {
     _modify
   }
   public mutating func setAttributes(_ attributes: Foundation.AttributeContainer)
-  public mutating func mergeAttributes(_ attributes: Foundation.AttributeContainer)
+  public mutating func mergeAttributes(_ attributes: Foundation.AttributeContainer, mergePolicy: Foundation.AttributedString.AttributeMergePolicy = .keepNew)
   public mutating func replaceAttributes(_ attributes: Foundation.AttributeContainer, with others: Foundation.AttributeContainer)
   public func transformingAttributes<K>(_ k: K.Type, _ c: (inout Foundation.AttributedString.SingleAttributeTransformer<K>) -> Swift.Void) -> Foundation.AttributedString where K : Foundation.AttributedStringKey
   public func transformingAttributes<K1, K2>(_ k: K1.Type, _ k2: K2.Type, _ c: (inout Foundation.AttributedString.SingleAttributeTransformer<K1>, inout Foundation.AttributedString.SingleAttributeTransformer<K2>) -> Swift.Void) -> Foundation.AttributedString where K1 : Foundation.AttributedStringKey, K2 : Foundation.AttributedStringKey
@@ -9896,10 +10168,12 @@ extension Foundation.AttributedStringProtocol {
   }
   public var characters: Foundation.AttributedString.CharacterView {
     get
+    set
     _modify
   }
   public var unicodeScalars: Foundation.AttributedString.UnicodeScalarView {
     get
+    set
     _modify
   }
   public static func == (lhs: Foundation.AttributedString, rhs: Foundation.AttributedString) -> Swift.Bool
@@ -9908,12 +10182,15 @@ extension Foundation.AttributedStringProtocol {
   public init(_ substring: Swift.Substring, attributes: Foundation.AttributeContainer = .init())
   public init<S>(_ elements: S, attributes: Foundation.AttributeContainer = .init()) where S : Swift.Sequence, S.Element == Swift.Character
   public init(_ substring: Foundation.AttributedSubstring)
+  public init<S, T>(_ other: T, including scope: Swift.KeyPath<Foundation.AttributeScopes, S.Type>) where S : Foundation.AttributeScope, T : Foundation.AttributedStringProtocol
+  public init<S, T>(_ other: T, including scope: S.Type) where S : Foundation.AttributeScope, T : Foundation.AttributedStringProtocol
   public static func + <T>(lhs: Foundation.AttributedString, rhs: T) -> Foundation.AttributedString where T : Foundation.AttributedStringProtocol
   public static func += <T>(lhs: inout Foundation.AttributedString, rhs: T) where T : Foundation.AttributedStringProtocol
   public static func + (lhs: Foundation.AttributedString, rhs: Foundation.AttributedString) -> Foundation.AttributedString
   public static func += (lhs: inout Foundation.AttributedString, rhs: Foundation.AttributedString)
   public subscript<R>(bounds: R) -> Foundation.AttributedSubstring where R : Swift.RangeExpression, R.Bound == Foundation.AttributedString.Index {
     get
+    set
     _modify
   }
   public mutating func append<S>(_ s: S) where S : Foundation.AttributedStringProtocol
@@ -9957,7 +10234,7 @@ extension Foundation.AttributedSubstring : Foundation.AttributedStringProtocol {
   }
   public static func == (lhs: Foundation.AttributedSubstring, rhs: Foundation.AttributedSubstring) -> Swift.Bool
   public mutating func setAttributes(_ attributes: Foundation.AttributeContainer)
-  public mutating func mergeAttributes(_ attributes: Foundation.AttributeContainer)
+  public mutating func mergeAttributes(_ attributes: Foundation.AttributeContainer, mergePolicy: Foundation.AttributedString.AttributeMergePolicy = .keepNew)
   public mutating func replaceAttributes(_ attributes: Foundation.AttributeContainer, with others: Foundation.AttributeContainer)
   public var runs: Foundation.AttributedString.Runs {
     get
@@ -10010,6 +10287,8 @@ extension Foundation.NSIndexSet : Swift.Sequence {
 public struct PersonNameComponents : Foundation.ReferenceConvertible, Swift.Hashable, Swift.Equatable {
   public typealias ReferenceType = Foundation.NSPersonNameComponents
   public init()
+  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+  public init(namePrefix: Swift.String? = nil, givenName: Swift.String? = nil, middleName: Swift.String? = nil, familyName: Swift.String? = nil, nameSuffix: Swift.String? = nil, nickname: Swift.String? = nil, phoneticRepresentation: Foundation.PersonNameComponents? = nil)
   public var namePrefix: Swift.String? {
     get
     set
@@ -10311,6 +10590,99 @@ public struct SortDescriptor<Compared> : Foundation.SortComparator, Swift.Codabl
 extension Foundation.NSSortDescriptor {
   convenience public init<Compared>(_ sortDescriptor: Foundation.SortDescriptor<Compared>)
 }
+
+#if compiler(>=5.3) && $RethrowsProtocol
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+public struct AsyncUnicodeScalarSequence<Base> : _Concurrency.AsyncSequence where Base : _Concurrency.AsyncSequence, Base.Element == Swift.UInt8 {
+  public typealias Element = Swift.UnicodeScalar
+  @frozen public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
+    @usableFromInline
+    internal var _base: Base.AsyncIterator
+    @usableFromInline
+    internal var _leftover: Swift.UInt8? = nil
+    @inlinable @inline(__always) internal func _expectedContinuationCountForByte(_ byte: Swift.UInt8) -> Swift.Int? {
+            if byte & 0b11100000 == 0b11000000 {
+                return 1
+            }
+            if byte & 0b11110000 == 0b11100000 {
+                return 2
+            }
+            if byte & 0b11111000 == 0b11110000 {
+                return 3
+            }
+            if byte & 0b10000000 == 0b00000000 {
+                return 0
+            }
+            if byte & 0b11000000 == 0b10000000 {
+                //is a continuation itself
+                return nil
+            }
+            //is an invalid value
+            return nil
+        }
+    
+    #if compiler(>=5.3) && $AsyncAwait
+    @inlinable internal mutating func _nextComplexScalar(_ first: Swift.UInt8) async rethrows -> Swift.UnicodeScalar? {
+            guard let expectedContinuationCount = _expectedContinuationCountForByte(first) else {
+                //We only reach here for invalid UTF8, so just return a replacement character directly
+                return "\u{FFFD}"
+            }
+            var bytes: (UInt8, UInt8, UInt8, UInt8) = (first, 0, 0, 0)
+            var numContinuations = 0
+            while numContinuations < expectedContinuationCount, let next = try await _base.next() {
+                guard UTF8.isContinuation(next) else {
+                    //We read one more byte than we needed due to an invalid missing continuation byte. Store it in `leftover` for next time
+                    _leftover = next
+                    break
+                }
+                
+                numContinuations += 1
+                withUnsafeMutableBytes(of: &bytes) {
+                    $0[numContinuations] = next
+                }
+            }
+            return withUnsafeBytes(of: &bytes) {
+                return String(decoding: $0, as: UTF8.self).unicodeScalars.first
+            }
+        }
+    #endif
+
+    
+    #if compiler(>=5.3) && $AsyncAwait
+    @inlinable @inline(__always) public mutating func next() async rethrows -> Swift.UnicodeScalar? {
+            if let leftover = _leftover {
+                self._leftover = nil
+                return try await _nextComplexScalar(leftover)
+            }
+            if let byte = try await _base.next() {
+                if UTF8.isASCII(byte) {
+                    _onFastPath()
+                    return UnicodeScalar(byte)
+                }
+                return try await _nextComplexScalar(byte)
+            }
+            
+            return nil
+        }
+    #endif
+
+    public typealias Element = Swift.Unicode.Scalar
+  }
+  public func makeAsyncIterator() -> Foundation.AsyncUnicodeScalarSequence<Base>.AsyncIterator
+}
+#endif
+
+
+#if compiler(>=5.3) && $RethrowsProtocol
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension _Concurrency.AsyncSequence where Self.Element == Swift.UInt8 {
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+  public var unicodeScalars: Foundation.AsyncUnicodeScalarSequence<Self> {
+    get
+  }
+}
+#endif
+
 public struct URLComponents : Foundation.ReferenceConvertible, Swift.Hashable, Swift.Equatable {
   public typealias ReferenceType = Foundation.NSURLComponents
   public init()
@@ -10584,8 +10956,8 @@ extension Foundation.InflectionRule : Swift.Hashable {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.Morphology : Swift.Codable {
-  public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.Morphology.CustomPronoun : Swift.Codable {
@@ -10740,57 +11112,55 @@ extension Foundation.Date : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+@usableFromInline
+@frozen internal struct _AsyncBytesBuffer {
+  internal var storage: Swift.AnyObject? = nil
+  @usableFromInline
+  internal var nextPointer: Swift.UnsafeMutableRawPointer
+  @usableFromInline
+  internal var endPointer: Swift.UnsafeMutableRawPointer
+  @usableFromInline
+  internal init(capacity: Swift.Int)
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @usableFromInline
+  @inline(never) internal mutating func reloadBufferAndNext() async throws -> Swift.UInt8?
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @inlinable @inline(__always) internal mutating func next() async throws -> Swift.UInt8? {
+        if _fastPath(nextPointer != endPointer) {
+            let byte = nextPointer.load(fromByteOffset: 0, as: UInt8.self)
+            nextPointer = nextPointer + 1
+            return byte
+        }
+        return try await reloadBufferAndNext()
+    }
+  #endif
+
+}
 extension Foundation.FileHandle {
   
   #if compiler(>=5.3) && $RethrowsProtocol
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public struct AsyncBytes : _Concurrency.AsyncSequence {
     public typealias Element = Swift.UInt8
-    
-    #if compiler(>=5.3) && $Actors
     public typealias AsyncIterator = Foundation.FileHandle.AsyncBytes.Iterator
-    #endif
-
-    
-    #if compiler(>=5.3) && $Actors
     public func makeAsyncIterator() -> Foundation.FileHandle.AsyncBytes.Iterator
-    #endif
-
-    
-    #if compiler(>=5.3) && $Actors
-    @_hasMissingDesignatedInitializers final public actor Iterator : _Concurrency.AsyncIteratorProtocol {
+    @frozen public struct Iterator : _Concurrency.AsyncIteratorProtocol {
       public typealias Element = Swift.UInt8
       @usableFromInline
-      final internal var buffer: Swift.UnsafeMutableRawBufferPointer
-      @usableFromInline
-      final internal var bufferRange: Swift.Range<Swift.Int>
+      internal var buffer: Foundation._AsyncBytesBuffer
       
       #if compiler(>=5.3) && $AsyncAwait
-      @usableFromInline
-      @inline(never) final internal func reloadBufferAndNext() async throws -> Swift.UInt8?
-      #endif
-
-      
-      #if compiler(>=5.3) && $AsyncAwait
-      @inlinable @inline(__always) final public func next() async throws -> Swift.UInt8? {
-                if !bufferRange.isEmpty {
-                    defer {
-                        bufferRange = (bufferRange.lowerBound + MemoryLayout<UInt8>.stride) ..< bufferRange.upperBound
-                    }
-                    return buffer.load(fromByteOffset: bufferRange.lowerBound, as: UInt8.self)
-                }
-                return try await reloadBufferAndNext()
+      @inlinable @inline(__always) public mutating func next() async throws -> Swift.UInt8? {
+                return try await buffer.next()
             }
       #endif
 
-      @objc deinit
-      @available(tvOS 15.0, watchOS 8.0, iOS 15.0, macOS 12.0, *)
-      @_semantics("defaultActor") nonisolated final public var unownedExecutor: _Concurrency.UnownedSerialExecutor {
-        get
-      }
     }
-    #endif
-
   }
   #endif
 
@@ -10798,165 +11168,6 @@ extension Foundation.FileHandle {
   #if compiler(>=5.3) && $RethrowsProtocol
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public var bytes: Foundation.FileHandle.AsyncBytes {
-    get
-  }
-  #endif
-
-}
-
-#if compiler(>=5.3) && $RethrowsProtocol
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-public struct AsyncLineSequence<Base> : _Concurrency.AsyncSequence, _Concurrency.AsyncIteratorProtocol where Base : _Concurrency.AsyncSequence, Base.Element == Swift.UInt8 {
-  public typealias AsyncIterator = Foundation.AsyncLineSequence<Base>
-  public typealias Element = Swift.String
-  
-  #if compiler(>=5.3) && $AsyncAwait
-  public mutating func next() async throws -> Swift.String?
-  #endif
-
-  public func makeAsyncIterator() -> Foundation.AsyncLineSequence<Base>
-}
-#endif
-
-
-#if compiler(>=5.3) && $RethrowsProtocol
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-public struct AsyncUnicodeScalarSequence<Base> : _Concurrency.AsyncSequence, _Concurrency.AsyncIteratorProtocol where Base : _Concurrency.AsyncSequence, Base.Element == Swift.UInt8 {
-  public typealias AsyncIterator = Foundation.AsyncUnicodeScalarSequence<Base>
-  public typealias Element = Swift.UnicodeScalar
-  
-  #if compiler(>=5.3) && $AsyncAwait
-  @usableFromInline
-  internal mutating func nextMultiByte(_ first: Swift.UInt8) async throws -> Swift.UnicodeScalar?
-  #endif
-
-  
-  #if compiler(>=5.3) && $AsyncAwait
-  @inline(__always) public mutating func next() async throws -> Swift.UnicodeScalar?
-  #endif
-
-  public func makeAsyncIterator() -> Foundation.AsyncUnicodeScalarSequence<Base>
-}
-#endif
-
-
-#if compiler(>=5.3) && $RethrowsProtocol
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-public struct AsyncCharacterSequence<Base> : _Concurrency.AsyncSequence, _Concurrency.AsyncIteratorProtocol where Base : _Concurrency.AsyncSequence, Base.Element == Swift.UInt8 {
-  public typealias AsyncIterator = Foundation.AsyncCharacterSequence<Base>
-  public typealias Element = Swift.Character
-  @usableFromInline
-  internal var remaining: Foundation.AsyncUnicodeScalarSequence<Base>.AsyncIterator
-  @usableFromInline
-  internal var accumulator: Swift.String
-  
-  #if compiler(>=5.3) && $AsyncAwait
-  @inlinable @inline(__always) public mutating func next() async throws -> Swift.Character? {
-        while let scalar = try await remaining.next() {
-            accumulator.unicodeScalars.append(scalar)
-            if accumulator.count > 1 {
-                return accumulator.removeFirst()
-            }
-        }
-        return accumulator.count > 0 ? accumulator.removeFirst() : nil
-    }
-  #endif
-
-  public func makeAsyncIterator() -> Foundation.AsyncCharacterSequence<Base>
-}
-#endif
-
-
-#if compiler(>=5.3) && $RethrowsProtocol
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-extension _Concurrency.AsyncSequence where Self.Element == Swift.UInt8 {
-  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-  public var lines: Foundation.AsyncLineSequence<Self> {
-    get
-  }
-  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-  public var characters: Foundation.AsyncCharacterSequence<Self> {
-    get
-  }
-  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-  public var unicodeScalars: Foundation.AsyncUnicodeScalarSequence<Self> {
-    get
-  }
-}
-#endif
-
-extension Foundation.URL {
-  
-  #if compiler(>=5.3) && $RethrowsProtocol
-  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-  public struct AsyncBytes : _Concurrency.AsyncSequence, _Concurrency.AsyncIteratorProtocol {
-    public typealias AsyncIterator = Foundation.URL.AsyncBytes
-    public typealias Element = Swift.UInt8
-    @usableFromInline
-    internal enum Source {
-      case deferred(Foundation.URL)
-      case local(Foundation.FileHandle.AsyncBytes.Iterator)
-      case remote(Foundation.URLSession.AsyncBytes.Iterator)
-      case error(Swift.Error)
-      case empty
-    }
-    @usableFromInline
-    internal var source: Foundation.URL.AsyncBytes.Source
-    @usableFromInline
-    internal var finished: Swift.Bool
-    
-    #if compiler(>=5.3) && $AsyncAwait
-    @usableFromInline
-    internal mutating func activate() async throws
-    #endif
-
-    
-    #if compiler(>=5.3) && $AsyncAwait
-    @inlinable @inline(__always) public mutating func next() async throws -> Swift.UInt8? {
-            if finished { return nil }
-            switch source {
-            case .deferred(_):
-                try await activate()
-                return try await next()
-            case .local(let contents):
-                return try await contents.next()
-            case .remote(var contents):
-                source = .empty
-                let next = try await contents.next()
-                source = .remote(contents)
-                return next
-            case .error(let e):
-                finished = true
-                throw e
-            case .empty:
-                fallthrough
-            @unknown default:
-                throw CocoaError(
-                    .fileReadUnknown,
-                    userInfo: [
-                        NSURLErrorKey as String : self
-                    ]
-                )
-            }
-        }
-    #endif
-
-    public func makeAsyncIterator() -> Foundation.URL.AsyncBytes
-  }
-  #endif
-
-  
-  #if compiler(>=5.3) && $RethrowsProtocol
-  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-  public var resourceBytes: Foundation.URL.AsyncBytes {
-    get
-  }
-  #endif
-
-  
-  #if compiler(>=5.3) && $RethrowsProtocol
-  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-  public var lines: Foundation.AsyncLineSequence<Foundation.URL.AsyncBytes> {
     get
   }
   #endif
@@ -11744,32 +11955,31 @@ extension Foundation.NSSet : Swift.CustomReflectable {
 extension Swift.Set : Swift.CVarArg {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-public struct StringLocalizationKey : Swift.Equatable, Swift.ExpressibleByStringInterpolation {
-  public init(_ value: Swift.String)
-  @_semantics("localization_key.init_literal") public init(stringLiteral value: Swift.String)
-  @_semantics("localization_key.init_interpolation") public init(stringInterpolation: Foundation.StringLocalizationKey.StringInterpolation)
-  public struct StringInterpolation : Swift.StringInterpolationProtocol {
-    @_semantics("localization.interpolation_init") public init(literalCapacity: Swift.Int, interpolationCount: Swift.Int)
-    @_semantics("localization.interpolation.appendLiteral") public mutating func appendLiteral(_ literal: Swift.String)
-    @_semantics("localization.interpolation.appendInterpolation_@_specifier") public mutating func appendInterpolation(_ string: Swift.String)
-    @_semantics("localization.interpolation.appendInterpolation_@_specifier") public mutating func appendInterpolation<Subject>(_ subject: Subject) where Subject : ObjectiveC.NSObject
-    @_transparent public mutating func appendInterpolation<T>(_ value: T) where T : Foundation._FormatSpecifiable {
-            appendInterpolation(value, specifier: formatSpecifier(T.self))
-        }
-    @_semantics("localization.interpolation.appendInterpolation_param_specifier") public mutating func appendInterpolation<T>(_ value: T, specifier: Swift.String) where T : Foundation._FormatSpecifiable
-    @_semantics("localization.interpolation.appendInterpolation_@_specifier") public mutating func appendInterpolation<T, F>(_ value: T, format: F) where T == F.FormatInput, F : Foundation.FormatStyle, F.FormatOutput : Swift.StringProtocol
-    @_semantics("localization.interpolation.appendInterpolation_@_specifier") public mutating func appendInterpolation<T, F>(_ value: T, format: F) where T == F.FormatInput, F : Foundation.FormatStyle, F.FormatOutput : Foundation.AttributedStringProtocol
-    @_semantics("localization.interpolation.appendInterpolation_@_specifier") public mutating func appendInterpolation(_ attrStr: Foundation.AttributedString, options: Foundation.AttributedString.InterpolationOptions = [])
-    public typealias StringLiteralType = Swift.String
-  }
-  public static func == (a: Foundation.StringLocalizationKey, b: Foundation.StringLocalizationKey) -> Swift.Bool
-  public typealias ExtendedGraphemeClusterLiteralType = Swift.String
-  public typealias StringLiteralType = Swift.String
-  public typealias UnicodeScalarLiteralType = Swift.String
-}
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Swift.String {
-  @_semantics("string.init_localized") public init(localized key: Foundation.StringLocalizationKey, table: Swift.String? = nil, bundle: Foundation.Bundle? = nil, locale: Foundation.Locale = .current, comment: Swift.StaticString? = nil)
+  public struct LocalizationValue : Swift.Equatable, Swift.ExpressibleByStringInterpolation {
+    public init(_ value: Swift.String)
+    @_semantics("localization_key.init_literal") public init(stringLiteral value: Swift.String)
+    @_semantics("localization_key.init_interpolation") public init(stringInterpolation: Swift.String.LocalizationValue.StringInterpolation)
+    public struct StringInterpolation : Swift.StringInterpolationProtocol {
+      @_semantics("localization.interpolation_init") public init(literalCapacity: Swift.Int, interpolationCount: Swift.Int)
+      @_semantics("localization.interpolation.appendLiteral") public mutating func appendLiteral(_ literal: Swift.String)
+      @_semantics("localization.interpolation.appendInterpolation_@_specifier") public mutating func appendInterpolation(_ string: Swift.String)
+      @_semantics("localization.interpolation.appendInterpolation_@_specifier") public mutating func appendInterpolation<Subject>(_ subject: Subject) where Subject : ObjectiveC.NSObject
+      @_transparent public mutating func appendInterpolation<T>(_ value: T) where T : Foundation._FormatSpecifiable {
+                appendInterpolation(value, specifier: formatSpecifier(T.self))
+            }
+      @_semantics("localization.interpolation.appendInterpolation_param_specifier") public mutating func appendInterpolation<T>(_ value: T, specifier: Swift.String) where T : Foundation._FormatSpecifiable
+      @_semantics("localization.interpolation.appendInterpolation_@_specifier") public mutating func appendInterpolation<T, F>(_ value: T, format: F) where T == F.FormatInput, F : Foundation.FormatStyle, F.FormatOutput : Swift.StringProtocol
+      @_semantics("localization.interpolation.appendInterpolation_@_specifier") public mutating func appendInterpolation<T, F>(_ value: T, format: F) where T == F.FormatInput, F : Foundation.FormatStyle, F.FormatOutput : Foundation.AttributedStringProtocol
+      @_semantics("localization.interpolation.appendInterpolation_@_specifier") public mutating func appendInterpolation(_ attrStr: Foundation.AttributedString, options: Foundation.AttributedString.InterpolationOptions = [])
+      public typealias StringLiteralType = Swift.String
+    }
+    public static func == (a: Swift.String.LocalizationValue, b: Swift.String.LocalizationValue) -> Swift.Bool
+    public typealias ExtendedGraphemeClusterLiteralType = Swift.String
+    public typealias StringLiteralType = Swift.String
+    public typealias UnicodeScalarLiteralType = Swift.String
+  }
+  @_semantics("string.init_localized") public init(localized keyAndValue: Swift.String.LocalizationValue, table: Swift.String? = nil, bundle: Foundation.Bundle? = nil, locale: Foundation.Locale = .current, comment: Swift.StaticString? = nil)
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributedString {
@@ -11789,16 +11999,16 @@ extension Foundation.AttributedString {
     public typealias Element = Foundation.AttributedString.InterpolationOptions
     public typealias RawValue = Swift.UInt
   }
-  @_semantics("attributed_string.init_localized") public init(localized key: Foundation.StringLocalizationKey, options: Foundation.AttributedString.FormattingOptions = [], table: Swift.String? = nil, bundle: Foundation.Bundle? = nil, locale: Foundation.Locale? = nil, comment: Swift.StaticString? = nil)
-  @_semantics("attributed_string.init_localized") public init<S>(localized key: Foundation.StringLocalizationKey, options: Foundation.AttributedString.FormattingOptions = [], table: Swift.String? = nil, bundle: Foundation.Bundle? = nil, locale: Foundation.Locale? = nil, comment: Swift.StaticString? = nil, including scope: Swift.KeyPath<Foundation.AttributeScopes, S.Type>) where S : Foundation.AttributeScope
-  @_semantics("attributed_string.init_localized") public init<S>(localized key: Foundation.StringLocalizationKey, options: Foundation.AttributedString.FormattingOptions = [], table: Swift.String? = nil, bundle: Foundation.Bundle? = nil, locale: Foundation.Locale? = nil, comment: Swift.StaticString? = nil, including scope: S.Type) where S : Foundation.AttributeScope
+  @_semantics("attributed_string.init_localized") public init(localized key: Swift.String.LocalizationValue, options: Foundation.AttributedString.FormattingOptions = [], table: Swift.String? = nil, bundle: Foundation.Bundle? = nil, locale: Foundation.Locale? = nil, comment: Swift.StaticString? = nil)
+  @_semantics("attributed_string.init_localized") public init<S>(localized key: Swift.String.LocalizationValue, options: Foundation.AttributedString.FormattingOptions = [], table: Swift.String? = nil, bundle: Foundation.Bundle? = nil, locale: Foundation.Locale? = nil, comment: Swift.StaticString? = nil, including scope: Swift.KeyPath<Foundation.AttributeScopes, S.Type>) where S : Foundation.AttributeScope
+  @_semantics("attributed_string.init_localized") public init<S>(localized key: Swift.String.LocalizationValue, options: Foundation.AttributedString.FormattingOptions = [], table: Swift.String? = nil, bundle: Foundation.Bundle? = nil, locale: Foundation.Locale? = nil, comment: Swift.StaticString? = nil, including scope: S.Type) where S : Foundation.AttributeScope
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.StringLocalizationKey {
+extension Swift.String.LocalizationValue {
   @usableFromInline
   internal struct FormatArgument : Swift.Equatable {
     @usableFromInline
-    internal static func == (a: Foundation.StringLocalizationKey.FormatArgument, b: Foundation.StringLocalizationKey.FormatArgument) -> Swift.Bool
+    internal static func == (a: Swift.String.LocalizationValue.FormatArgument, b: Swift.String.LocalizationValue.FormatArgument) -> Swift.Bool
   }
 }
 @_alwaysEmitIntoClient @_semantics("constant_evaluable") private func formatSpecifier<T>(_ type: T.Type) -> Swift.String {
@@ -11965,9 +12175,10 @@ extension Swift.BinaryInteger {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Swift.BinaryInteger {
   public init<S>(_ value: S.ParseInput, strategy: S) throws where S : Foundation.ParseStrategy, S.ParseOutput : Swift.BinaryInteger
-  public init(_ value: Swift.String, format: Foundation.IntegerFormatStyle, lenient: Swift.Bool = true) throws
-  public init(_ value: Swift.String, format: Foundation.IntegerFormatStyle.Percent, lenient: Swift.Bool = true) throws
-  public init(_ value: Swift.String, format: Foundation.IntegerFormatStyle.Currency, lenient: Swift.Bool = true) throws
+  public init<S>(_ value: S.ParseInput, strategy: S) throws where Self == S.ParseOutput, S : Foundation.ParseStrategy
+  public init(_ value: Swift.String, format: Foundation.IntegerFormatStyle<Self>, lenient: Swift.Bool = true) throws
+  public init(_ value: Swift.String, format: Foundation.IntegerFormatStyle<Self>.Percent, lenient: Swift.Bool = true) throws
+  public init(_ value: Swift.String, format: Foundation.IntegerFormatStyle<Self>.Currency, lenient: Swift.Bool = true) throws
 }
 @available(*, deprecated, message: "Please use the struct type URLRequest")
 public typealias MutableURLRequest = Foundation.NSMutableURLRequest
@@ -12140,114 +12351,69 @@ extension Foundation.RunLoop : Combine.Scheduler {
     get
   }
 }
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeDynamicLookup : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.LinkAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.MorphologyAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.InflectionRuleAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.LanguageIdentifierAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.PersonNameComponentAttribute : Swift.Sendable {}
-#endif
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.PersonNameComponentAttribute.Component : Swift.Equatable {}
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.PersonNameComponentAttribute.Component : Swift.Hashable {}
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.PersonNameComponentAttribute.Component : Swift.RawRepresentable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.NumberFormatAttributes.NumberPartAttribute : Swift.Sendable {}
-#endif
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.NumberFormatAttributes.NumberPartAttribute.NumberPart : Swift.Equatable {}
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.NumberFormatAttributes.NumberPartAttribute.NumberPart : Swift.Hashable {}
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.NumberFormatAttributes.NumberPartAttribute.NumberPart : Swift.RawRepresentable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.NumberFormatAttributes.SymbolAttribute : Swift.Sendable {}
-#endif
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.NumberFormatAttributes.SymbolAttribute.Symbol : Swift.Equatable {}
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.NumberFormatAttributes.SymbolAttribute.Symbol : Swift.Hashable {}
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.NumberFormatAttributes.SymbolAttribute.Symbol : Swift.RawRepresentable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.DateFieldAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.InflectionAlternativeAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.InlinePresentationIntentAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.PresentationIntentAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.AlternateDescriptionAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.ImageURLAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.ReplacementIndexAttribute : Swift.Sendable {}
-#endif
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.MeasurementAttribute.Component : Swift.Equatable {}
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.MeasurementAttribute.Component : Swift.Hashable {}
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.FoundationAttributes.MeasurementAttribute.Component : Swift.RawRepresentable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
+@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+extension Foundation.AttributeScopes.FoundationAttributes.ByteCountAttribute : Swift.Sendable {}
+@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+extension Foundation.AttributeScopes.FoundationAttributes.ByteCountAttribute.Unit : Swift.Equatable {}
+@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+extension Foundation.AttributeScopes.FoundationAttributes.ByteCountAttribute.Unit : Swift.Hashable {}
 extension Foundation.Data.InlineData : Swift.Sendable {}
-#endif
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension Foundation.Scanner.NumberRepresentation : Swift.Equatable {}
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
@@ -12262,11 +12428,8 @@ extension Foundation.Date.FormatStyle.Symbol.TimeZone.Width : Swift.Equatable {}
 extension Foundation.Date.FormatStyle.Symbol.TimeZone.Width : Swift.Hashable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.PersonNameComponents.FormatStyle.Style : Swift.RawRepresentable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.SortOrder : Swift.Sendable {}
-#endif
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension Foundation.URLError.BackgroundTaskCancelledReason : Swift.Equatable {}
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
@@ -12295,6 +12458,10 @@ extension Foundation.ListFormatStyle.ListType : Swift.RawRepresentable {}
 extension Foundation.ByteCountFormatStyle.Style : Swift.RawRepresentable {}
 @available(macOS 12, iOS 15, watchOS 8, tvOS 15, *)
 extension Foundation.PresentationIntent.TableColumn.Alignment : Swift.RawRepresentable {}
+@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+extension Foundation.AttributedString.AttributeMergePolicy : Swift.Equatable {}
+@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+extension Foundation.AttributedString.AttributeMergePolicy : Swift.Hashable {}
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributedString.MarkdownParsingOptions.FailurePolicy : Swift.Equatable {}
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)

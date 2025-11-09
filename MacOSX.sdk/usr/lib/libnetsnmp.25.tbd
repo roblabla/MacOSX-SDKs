@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           618E84DF-1633-3987-B5C2-4FA634683DDE
+    value:           F158FEB9-2A68-3635-8899-DD0E736857B3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D81E3B8D-EE60-37F3-AC70-107A932CF49D
+    value:           4AE05E0B-B7BB-3D4F-AB2A-5CD0F9227525
 install-name:    '/usr/lib/libnetsnmp.25.dylib'
 current-version: 26.2
 compatibility-version: 26

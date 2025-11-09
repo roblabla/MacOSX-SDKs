@@ -235,7 +235,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 	@discussion	
 */
 
--(BOOL)hasOpenTransportConnection;
+-(Boolean)hasOpenTransportConnection;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@method		closeTransportConnection

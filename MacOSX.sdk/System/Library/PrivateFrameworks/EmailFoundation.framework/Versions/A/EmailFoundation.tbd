@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4ADCE68C-D236-3A5C-88A5-F4B1DE964E52
+    value:           15D5D7D1-2AF8-31C8-95BF-9563A58265D2
   - target:          x86_64-maccatalyst
-    value:           4ADCE68C-D236-3A5C-88A5-F4B1DE964E52
+    value:           15D5D7D1-2AF8-31C8-95BF-9563A58265D2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           665C98DF-B031-31EF-AD08-B2163D217802
+    value:           138923AD-0260-32AA-9E5C-FE59A5FA7B51
   - target:          arm64e-maccatalyst
-    value:           665C98DF-B031-31EF-AD08-B2163D217802
+    value:           138923AD-0260-32AA-9E5C-FE59A5FA7B51
 install-name:    '/System/Library/PrivateFrameworks/EmailFoundation.framework/Versions/A/EmailFoundation'
-current-version: 3689.0.4
+current-version: 3693.40
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -43,9 +43,10 @@ exports:
                        _EFStringWithInt, _EFStringWithInt64, _EFStringWithUInt64, 
                        _EFStringWithUnsignedInteger, _EFSystemBuildVersion, _EFSystemVersion, 
                        _EFUnregisterContentProtectionObserver, _EFVerboseVersion, 
-                       _EFVerifyFileProtectionType, __EFARC4NormallyDistributedRandomDouble, 
-                       __EFLocalizedString, __ef_xpc_activity_register, _ef_xpc_activity_register, 
-                       _ef_xpc_activity_register_withcriteria, _ef_xpc_activity_run_if_necessary ]
+                       _EFVerifyFileProtectionType, __DiagnosticStateDictionary, 
+                       __EFARC4NormallyDistributedRandomDouble, __EFLocalizedString, 
+                       __ef_xpc_activity_register, _ef_xpc_activity_register, _ef_xpc_activity_register_withcriteria, 
+                       _ef_xpc_activity_run_if_necessary ]
     objc-classes:    [ EFAutoBugCaptureReporter, EFAutoCancelationToken, EFByteSet, 
                        EFCancelationToken, EFCoalescer, EFDeallocInvocationToken, 
                        EFDebouncer, EFDevice, EFFileCompression, EFFileWrapper, EFFuture, 

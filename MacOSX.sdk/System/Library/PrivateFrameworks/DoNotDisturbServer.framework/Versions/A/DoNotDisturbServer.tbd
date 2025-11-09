@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F0C96071-59EA-37FC-A545-21452BFBCD42
+    value:           200778B8-E0C3-3A19-99F2-68E5F3A333B6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           189840B2-B7DB-316B-A94E-0CD1F0FAC670
+    value:           F3920414-0A05-377A-80DC-D0889A47DD6E
 install-name:    '/System/Library/PrivateFrameworks/DoNotDisturbServer.framework/Versions/A/DoNotDisturbServer'
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -21,11 +21,11 @@ exports:
                        _DNDResolvedPreventAutoReplySetting, _DNDSAppForegroundTriggerManagerAssertionIdentifierSuffix, 
                        _DNDSAppForegroundTriggerManagerClientIdentifier, _DNDSCollectSysdiagnoseState, 
                        _DNDSDrivingTriggerAssertionIdentifier, _DNDSDrivingTriggerManagerClientIdentifier, 
-                       _DNDSEnumerateBatchesInArray, _DNDSFocusActivityManagerClientIdentifier, 
-                       _DNDSGamingTriggerAssertionIdentifier, _DNDSGamingTriggerManagerClientIdentifier, 
-                       _DNDSGetLifetimePhase, _DNDSIsSysdiagnoseBeingCaptured, _DNDSLogAppForegroundTrigger, 
-                       _DNDSLogAssertionManager, _DNDSLogAssertionStore, _DNDSLogAvailabilityProvider, 
-                       _DNDSLogBiomeDonation, _DNDSLogCalendarEventLifetimeMonitor, 
+                       _DNDSFocusActivityManagerClientIdentifier, _DNDSGamingTriggerAssertionIdentifier, 
+                       _DNDSGamingTriggerManagerClientIdentifier, _DNDSGetLifetimePhase, 
+                       _DNDSIsSysdiagnoseBeingCaptured, _DNDSLogAppForegroundTrigger, 
+                       _DNDSLogAssertionManager, _DNDSLogAssertionStore, _DNDSLogAuxiliaryState, 
+                       _DNDSLogAvailabilityProvider, _DNDSLogBiomeDonation, _DNDSLogCalendarEventLifetimeMonitor, 
                        _DNDSLogCloudSync, _DNDSLogDataMigrator, _DNDSLogDateIntervalLifetimeMonitor, 
                        _DNDSLogDefaultLifetimeMonitor, _DNDSLogDrivingTrigger, _DNDSLogGamingTrigger, 
                        _DNDSLogGeneral, _DNDSLogGlobalConfiguration, _DNDSLogIDSSyncEngine, 
@@ -38,9 +38,9 @@ exports:
                        _DNDSLogSmartTrigger, _DNDSLogStateProvider, _DNDSLogSysdiagnose, 
                        _DNDSLogSystemState, _DNDSLogWorkoutTrigger, _DNDSMigrateLegacySettings, 
                        _DNDSMindfulnessTriggerAssertionIdentifier, _DNDSMindfulnessTriggerManagerClientIdentifier, 
-                       _DNDSPowerLogFocusInterruptionSuppresionEvent, _DNDSPowerLogFocusStatusChangeEvent, 
-                       _DNDSPowerLogFocusUpdateReasonForDNDStateUpdateReason, _DNDSPowerLogFocusUpdateSourceForDNDStateUpdateSource, 
-                       _DNDSPowerLogInterruptionSuppressionForDNDInterruptionSuppression, 
+                       _DNDSPowerLogFocusInterruptionSuppresionEvent, _DNDSPowerLogFocusModeSemanticTypeForDNDModeSemanticType, 
+                       _DNDSPowerLogFocusStatusChangeEvent, _DNDSPowerLogFocusUpdateReasonForDNDStateUpdateReason, 
+                       _DNDSPowerLogFocusUpdateSourceForDNDStateUpdateSource, _DNDSPowerLogInterruptionSuppressionForDNDInterruptionSuppression, 
                        _DNDSRegisterLogging, _DNDSRegisterSysdiagnose, _DNDSRegisterSysdiagnoseDataProvider, 
                        _DNDSResolutionOutcomeToString, _DNDSRunServer, _DNDSScheduleManagerClientIdentifier, 
                        _DNDSSleepingTriggerAssertionIdentifier, _DNDSSleepingTriggerManagerClientIdentifier, 
@@ -68,23 +68,24 @@ exports:
                        _kResolutionRecordDesiredCount, _kScheduleEnabledModes ]
     objc-classes:    [ DNDSAnyModeAssertionInvalidationPredicate, DNDSAppForegroundTriggerConfiguration, 
                        DNDSAppForegroundTriggerManager, DNDSAppInfoCache, DNDSApplicationConfigurationRecord, 
-                       DNDSApplicationIdentifierMapper, DNDSBackingStoreDictionaryContext, 
-                       DNDSBaseLifetimeMonitor, DNDSBehaviorSettingsRecord, DNDSBiomeDonationManager, 
-                       DNDSBypassSettingsRecord, DNDSCalendarEventLifetimeMonitor, 
-                       DNDSClientConnectionDetails, DNDSClientDetails, DNDSClientDetailsProvider, 
-                       DNDSConfigurationRecord, DNDSConfigurationSecureRecord, DNDSConfigurationsRecord, 
-                       DNDSConfigurationsSecureRecord, DNDSContactMonitor, DNDSContactMonitorChangeCollector, 
-                       DNDSContactProvider, DNDSContactRecord, DNDSDailyHeartbeatMetricsRecord, 
-                       DNDSDateIntervalLifetimeMonitor, DNDSDefaultLifetimeMonitor, 
-                       DNDSDrivingTriggerManager, DNDSEventBehaviorResolution, DNDSEventBehaviorResolver, 
-                       DNDSExplicitRegionLocationLifetimeMonitor, DNDSExplicitRegionStore, 
-                       DNDSFirstUnlockPurgedBackingStore, DNDSGamingTriggerManager, 
-                       DNDSGlobalConfiguration, DNDSGlobalConfigurationManager, DNDSGlobalConfigurationStore, 
-                       DNDSHeartbeatMetricsRecord, DNDSIDSRecord, DNDSIDSRecordID, 
-                       DNDSIDSRecordMetadata, DNDSIDSServerBagValues, DNDSIDSSyncEngine, 
-                       DNDSIDSSyncEngineMetadataStore, DNDSIDSSyncService, DNDSJSONBackingStore, 
-                       DNDSKeybag, DNDSLegacyBehaviorOverride, DNDSLegacyBehaviorOverrideEffectiveInterval, 
-                       DNDSLifetimeMonitorResult, DNDSLocationLifetimeMonitor, DNDSLocationTriggerConfiguration, 
+                       DNDSApplicationIdentifierMapper, DNDSAuxiliaryStateMonitor, 
+                       DNDSBackingStoreDictionaryContext, DNDSBaseLifetimeMonitor, 
+                       DNDSBehaviorSettingsRecord, DNDSBiomeDonationManager, DNDSBypassSettingsRecord, 
+                       DNDSCalendarEventLifetimeMonitor, DNDSClientConnectionDetails, 
+                       DNDSClientDetails, DNDSClientDetailsProvider, DNDSConfigurationRecord, 
+                       DNDSConfigurationSecureRecord, DNDSConfigurationsRecord, DNDSConfigurationsSecureRecord, 
+                       DNDSContactMonitor, DNDSContactMonitorChangeCollector, DNDSContactProvider, 
+                       DNDSContactRecord, DNDSDailyHeartbeatMetricsRecord, DNDSDateIntervalLifetimeMonitor, 
+                       DNDSDefaultLifetimeMonitor, DNDSDrivingTriggerManager, DNDSEventBehaviorResolution, 
+                       DNDSEventBehaviorResolver, DNDSExplicitRegionLocationLifetimeMonitor, 
+                       DNDSExplicitRegionStore, DNDSFirstUnlockPurgedBackingStore, 
+                       DNDSGamingTriggerManager, DNDSGlobalConfiguration, DNDSGlobalConfigurationManager, 
+                       DNDSGlobalConfigurationStore, DNDSHeartbeatMetricsRecord, 
+                       DNDSIDSRecord, DNDSIDSRecordID, DNDSIDSRecordMetadata, DNDSIDSServerBagValues, 
+                       DNDSIDSSyncEngine, DNDSIDSSyncEngineMetadataStore, DNDSIDSSyncService, 
+                       DNDSJSONBackingStore, DNDSKeybag, DNDSLegacyBehaviorOverride, 
+                       DNDSLegacyBehaviorOverrideEffectiveInterval, DNDSLifetimeMonitorResult, 
+                       DNDSLocationLifetimeMonitor, DNDSLocationTriggerConfiguration, 
                        DNDSMeDeviceService, DNDSMeDeviceStore, DNDSMemoryCachedBackingStore, 
                        DNDSMetricsManager, DNDSMetricsRecord, DNDSMindfulnessTriggerManager, 
                        DNDSModeAssertionClientIdentifierInvalidationPredicate, DNDSModeAssertionDateInvalidationPredicate, 
@@ -133,8 +134,8 @@ exports:
                        DNDSApplicationConfigurationRecord._minimumBreakthroughUrgency, 
                        DNDSBackingStoreDictionaryContext._applicationIdentifierMapper, 
                        DNDSBackingStoreDictionaryContext._contactProvider, DNDSBackingStoreDictionaryContext._destination, 
-                       DNDSBackingStoreDictionaryContext._partitionType, DNDSBehaviorSettingsRecord._interruptionBehaviorSetting, 
-                       DNDSBypassSettingsRecord._immediateBypassCNGroupIdentifier, 
+                       DNDSBackingStoreDictionaryContext._partitionType, DNDSBackingStoreDictionaryContext._redactSensitiveData, 
+                       DNDSBehaviorSettingsRecord._interruptionBehaviorSetting, DNDSBypassSettingsRecord._immediateBypassCNGroupIdentifier, 
                        DNDSBypassSettingsRecord._immediateBypassEventSourceType, 
                        DNDSBypassSettingsRecord._repeatEventSourceBehaviorEnabledSetting, 
                        DNDSClientConnectionDetails._activeAssertionUpdateClientIdentifiers, 

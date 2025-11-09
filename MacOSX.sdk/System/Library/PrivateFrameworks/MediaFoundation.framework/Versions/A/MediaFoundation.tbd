@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A07C52D3-B3AD-3901-A89D-5CAEED866E58
+    value:           DB77A8F8-A604-38C7-8223-7B94DD0AFA62
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           737A54B3-A0C2-3D12-9AAE-EAF4C76FA982
+    value:           59400FCD-CA81-3FEA-A09C-29E38B63191A
 install-name:    '/System/Library/PrivateFrameworks/MediaFoundation.framework/Versions/A/MediaFoundation'
 current-version: 0
 compatibility-version: 0
@@ -254,10 +254,10 @@ exports:
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8delegateAA0cdE8Delegate_pSgvpMV', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8delegateAA0cdE8Delegate_pSgvsTj', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8delegateAA0cdE8Delegate_pSgvsTq', 
-                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID05queueE011assetLoader05errorE0016externalPlaybackE005leaseE00I0ACSS_AA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternalnE0_pAA05LeaseQ0_pSo012OS_dispatch_I0CtcfC', 
-                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID05queueE011assetLoader05errorE0016externalPlaybackE005leaseE00I0ACSS_AA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternalnE0_pAA05LeaseQ0_pSo012OS_dispatch_I0CtcfCTj', 
-                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID05queueE011assetLoader05errorE0016externalPlaybackE005leaseE00I0ACSS_AA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternalnE0_pAA05LeaseQ0_pSo012OS_dispatch_I0CtcfCTq', 
-                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID05queueE011assetLoader05errorE0016externalPlaybackE005leaseE00I0ACSS_AA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternalnE0_pAA05LeaseQ0_pSo012OS_dispatch_I0Ctcfc', 
+                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID05queueE011assetLoader05errorE0016externalPlaybackE005leaseE08defaults0I0ACSS_AA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternalnE0_pAA05LeaseR0_pAA0N8Defaults_pSo012OS_dispatch_I0CtcfC', 
+                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID05queueE011assetLoader05errorE0016externalPlaybackE005leaseE08defaults0I0ACSS_AA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternalnE0_pAA05LeaseR0_pAA0N8Defaults_pSo012OS_dispatch_I0CtcfCTj', 
+                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID05queueE011assetLoader05errorE0016externalPlaybackE005leaseE08defaults0I0ACSS_AA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternalnE0_pAA05LeaseR0_pAA0N8Defaults_pSo012OS_dispatch_I0CtcfCTq', 
+                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID05queueE011assetLoader05errorE0016externalPlaybackE005leaseE08defaults0I0ACSS_AA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternalnE0_pAA05LeaseR0_pAA0N8Defaults_pSo012OS_dispatch_I0Ctcfc', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC9nextItemsSayAA15QueuePlayerItem_pGvpMV', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationCACycfC', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationCACycfc', 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           4B832E1D-5302-3F33-B834-4908DFAFDC9B
+    value:           913A79FB-22DF-3740-A123-0439FE5CECB1
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           8DA04F29-E6FD-3027-9E93-5AA9E039DD0A
+    value:           19A8269A-446B-3B95-95ED-3E1A2FEFE2B4
 install-name:    '/System/iOSSupport/System/Library/Frameworks/BusinessChat.framework/Versions/A/BusinessChat'
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]

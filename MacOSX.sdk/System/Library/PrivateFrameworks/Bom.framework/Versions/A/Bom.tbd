@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EA894D0B-88AA-3035-A663-FF3DF6D70052
+    value:           2DE2E2B1-A277-3407-8798-2232559A6F42
   - target:          x86_64-maccatalyst
-    value:           EA894D0B-88AA-3035-A663-FF3DF6D70052
+    value:           2DE2E2B1-A277-3407-8798-2232559A6F42
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F460A100-AFE8-328F-ADD6-C98B32EA6FC6
+    value:           54953ADD-98D3-3F99-8F78-AF4496A7ACCC
   - target:          arm64e-maccatalyst
-    value:           F460A100-AFE8-328F-ADD6-C98B32EA6FC6
+    value:           54953ADD-98D3-3F99-8F78-AF4496A7ACCC
 install-name:    '/System/Library/PrivateFrameworks/Bom.framework/Versions/A/Bom'
 current-version: 195
 compatibility-version: 2

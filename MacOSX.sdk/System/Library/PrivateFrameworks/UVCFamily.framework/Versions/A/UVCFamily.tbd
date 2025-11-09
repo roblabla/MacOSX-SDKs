@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D5664E60-8B1B-33A9-893D-99C9B83886C9
+    value:           309C2808-4416-376B-99C3-5C562F4E0F1B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D32ABCA7-40C4-3023-9D64-A44D0DFC7299
+    value:           281A6959-15E4-3597-B598-6FCBE68A5E72
 install-name:    '/System/Library/PrivateFrameworks/UVCFamily.framework/Versions/A/UVCFamily'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

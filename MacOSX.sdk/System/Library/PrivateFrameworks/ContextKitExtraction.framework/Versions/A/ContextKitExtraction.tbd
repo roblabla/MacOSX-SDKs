@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8E7D53AD-2450-37D1-A1C7-395307143971
+    value:           BDD5761C-C140-3A4F-B040-6D6E94E6EFA9
   - target:          x86_64-maccatalyst
-    value:           8E7D53AD-2450-37D1-A1C7-395307143971
+    value:           BDD5761C-C140-3A4F-B040-6D6E94E6EFA9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F279F6A2-5DAD-30F4-A577-A3BE6132B4F7
+    value:           F28F7FC3-0BE0-3DFA-A58D-02E3FF5998CC
   - target:          arm64e-maccatalyst
-    value:           F279F6A2-5DAD-30F4-A577-A3BE6132B4F7
+    value:           F28F7FC3-0BE0-3DFA-A58D-02E3FF5998CC
 install-name:    '/System/Library/PrivateFrameworks/ContextKitExtraction.framework/Versions/A/ContextKitExtraction'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

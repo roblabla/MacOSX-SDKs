@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           1F019EDF-5783-3DD6-9F7C-85A6372ED1B3
+    value:           0274D516-C5E9-3121-AE0B-865603A05B46
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           7C6D968F-1C67-3D17-A98D-6B0C1A8EA7D8
+    value:           212DE757-66F7-3EBF-801D-ADBB941ACFC1
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_MusicKit_SwiftUI.framework/Versions/A/_MusicKit_SwiftUI'
 swift-abi-version: 7
 exports:
@@ -79,43 +79,14 @@ exports:
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsVSHAAMc', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsVSQAAMc', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsVs23CustomStringConvertibleAAMc', 
-                       '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferVACycfC', '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferVMa', 
-                       '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferVMn', '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferVN', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageV0cD04ViewAAMc', '_$s17_MusicKit_SwiftUI12ArtworkImageV4bodyQrvg', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageV4bodyQrvpMV', '_$s17_MusicKit_SwiftUI12ArtworkImageV4bodyQrvpQOMQ', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageVMa', '_$s17_MusicKit_SwiftUI12ArtworkImageVMn', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageVN', '_$s17_MusicKit_SwiftUI12ArtworkImageV_5width6heightAC0aB00E0V_12CoreGraphics7CGFloatVAKtcfC', 
+                       '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferVMa', '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferVMn', 
+                       '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferVN', '_$s17_MusicKit_SwiftUI12ArtworkImageV0cD04ViewAAMc', 
+                       '_$s17_MusicKit_SwiftUI12ArtworkImageV4bodyQrvg', '_$s17_MusicKit_SwiftUI12ArtworkImageV4bodyQrvpMV', 
+                       '_$s17_MusicKit_SwiftUI12ArtworkImageV4bodyQrvpQOMQ', '_$s17_MusicKit_SwiftUI12ArtworkImageVMa', 
+                       '_$s17_MusicKit_SwiftUI12ArtworkImageVMn', '_$s17_MusicKit_SwiftUI12ArtworkImageVN', 
+                       '_$s17_MusicKit_SwiftUI12ArtworkImageV_5width6heightAC0aB00E0V_12CoreGraphics7CGFloatVAKtcfC', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV_5widthAC0aB00E0V_12CoreGraphics7CGFloatVtcfC', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV_6heightAC0aB00E0V_12CoreGraphics7CGFloatVtcfC', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC14lastParameters33_09659D70D0F5700E4EBF2ED75A9991ADLLAC0H0AELLVSgvM', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC14lastParameters33_09659D70D0F5700E4EBF2ED75A9991ADLLAC0H0AELLVSgvg', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC14lastParameters33_09659D70D0F5700E4EBF2ED75A9991ADLLAC0H0AELLVSgvs', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC16imageLoadingTask33_09659D70D0F5700E4EBF2ED75A9991ADLLScTyyts5NeverOGSgvM', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC16imageLoadingTask33_09659D70D0F5700E4EBF2ED75A9991ADLLScTyyts5NeverOGSgvg', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC16imageLoadingTask33_09659D70D0F5700E4EBF2ED75A9991ADLLScTyyts5NeverOGSgvs', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC4load_3for5width6heighty0aB00E0V_12CoreGraphics7CGFloatVA2MtF', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC4load_3for5width6heighty0aB00E0V_12CoreGraphics7CGFloatVA2MtFTq', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC5imageSo7UIImageCSgvM', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC5imageSo7UIImageCSgvMTq', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC5imageSo7UIImageCSgvg', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC5imageSo7UIImageCSgvgTq', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC5imageSo7UIImageCSgvpMV', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC5imageSo7UIImageCSgvs', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC5imageSo7UIImageCSgvsTq', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC6$image7Combine9PublishedV9PublisherVySo7UIImageCSg_GvM', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC6$image7Combine9PublishedV9PublisherVySo7UIImageCSg_GvMTq', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC6$image7Combine9PublishedV9PublisherVySo7UIImageCSg_Gvg', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC6$image7Combine9PublishedV9PublisherVySo7UIImageCSg_GvgTq', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC6$image7Combine9PublishedV9PublisherVySo7UIImageCSg_GvpMV', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC6$image7Combine9PublishedV9PublisherVySo7UIImageCSg_Gvs', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC6$image7Combine9PublishedV9PublisherVySo7UIImageCSg_GvsTq', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderC7Combine16ObservableObjectAAMc', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderCACycfC', '_$s17_MusicKit_SwiftUI13ArtworkLoaderCACycfCTq', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderCACycfc', '_$s17_MusicKit_SwiftUI13ArtworkLoaderCMa', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderCMm', '_$s17_MusicKit_SwiftUI13ArtworkLoaderCMn', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderCN', '_$s17_MusicKit_SwiftUI13ArtworkLoaderCfD', 
-                       '_$s17_MusicKit_SwiftUI13ArtworkLoaderCfd', '_$s7SwiftUI4ViewP010_MusicKit_aB0E22musicSubscriptionOffer11isPresented7options16onLoadCompletionQrAA7BindingVySbG_AD0dgH0V7OptionsVys5Error_pSgctF', 
-                       '_$s7SwiftUI4ViewP010_MusicKit_aB0E22musicSubscriptionOffer11isPresented7options16onLoadCompletionQrAA7BindingVySbG_AD0dgH0V7OptionsVys5Error_pSgctFQOMQ', 
-                       '_$sSo8NSBundleC17_MusicKit_SwiftUIE05musicc1_dE0ABvau', '_$sSo8NSBundleC17_MusicKit_SwiftUIE05musicc1_dE0ABvgZ', 
-                       '_$sSo8NSBundleC17_MusicKit_SwiftUIE05musicc1_dE0ABvpZ' ]
+                       '_$s7SwiftUI4ViewP010_MusicKit_aB0E22musicSubscriptionOffer11isPresented7options16onLoadCompletionQrAA7BindingVySbG_AD0dgH0V7OptionsVys5Error_pSgctF', 
+                       '_$s7SwiftUI4ViewP010_MusicKit_aB0E22musicSubscriptionOffer11isPresented7options16onLoadCompletionQrAA7BindingVySbG_AD0dgH0V7OptionsVys5Error_pSgctFQOMQ' ]
 ...

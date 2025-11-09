@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           368CA398-B455-3C34-B919-107871A2E2B9
+    value:           29E757FE-31C2-3BED-BB27-7C3CC81540C9
   - target:          x86_64-maccatalyst
-    value:           368CA398-B455-3C34-B919-107871A2E2B9
+    value:           29E757FE-31C2-3BED-BB27-7C3CC81540C9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9F059B65-1437-35A2-B22B-712995EC78DF
+    value:           D1B442F5-00C6-3ADA-B88B-70584C59627B
   - target:          arm64e-maccatalyst
-    value:           9F059B65-1437-35A2-B22B-712995EC78DF
+    value:           D1B442F5-00C6-3ADA-B88B-70584C59627B
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagement.framework/Versions/A/DeviceManagement'
-current-version: 59
+current-version: 65
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -138,8 +138,8 @@ exports:
                        _DMFSecurityPasscodeIsCompliantWithProfileRestrictionsKey, 
                        _DMFSecurityPasscodeIsSetKey, _DMFSecurityPasscodeLockGracePeriodEnforcedKey, 
                        _DMFSecurityPasscodeLockGracePeriodKey, _DMFSecuritySupportsBlockLevelEncryptionKey, 
-                       _DMFSecuritySystemIntegrityProtectionEnabledKey, _DMFURLStringErrorKey, 
-                       _DMFiCloudAccountDidChangeDarwinNotification ]
+                       _DMFSecuritySystemIntegrityProtectionEnabledKey, _DMFServerLog, 
+                       _DMFURLStringErrorKey, _DMFiCloudAccountDidChangeDarwinNotification ]
     objc-classes:    [ DMFActivityTransactionRequest, DMFApp, DMFAppManagementInformation, 
                        DMFAppRequest, DMFApplication, DMFApplicationInstallProgress, 
                        DMFApplicationPolicyMonitor, DMFAssignUserRequest, DMFBatchRequestOperation, 
@@ -223,19 +223,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F8E47CAF-0D8E-3B75-B428-7A8AAC2DBFB9
+    value:           F235EEAA-AC64-33C3-847A-B0172C57A27B
   - target:          x86_64-maccatalyst
-    value:           F8E47CAF-0D8E-3B75-B428-7A8AAC2DBFB9
+    value:           F235EEAA-AC64-33C3-847A-B0172C57A27B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0B9F243D-4B45-30F4-9002-EA78065068A2
+    value:           AFE4AEC9-DD27-3736-BA70-52B9609301A5
   - target:          arm64e-maccatalyst
-    value:           0B9F243D-4B45-30F4-9002-EA78065068A2
+    value:           AFE4AEC9-DD27-3736-BA70-52B9609301A5
 install-name:    '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst'
-current-version: 8.8
+current-version: 8.9
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]

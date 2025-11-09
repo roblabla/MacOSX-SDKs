@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1BC7CF50-0932-34C2-A75F-9AC941D25FAB
+    value:           8D78FE60-EC42-30AA-8A3C-D7D479460270
   - target:          x86_64-maccatalyst
-    value:           1BC7CF50-0932-34C2-A75F-9AC941D25FAB
+    value:           8D78FE60-EC42-30AA-8A3C-D7D479460270
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5900179B-2B59-3948-A371-1F1A762542F7
+    value:           42A85931-7983-3D80-AE3B-F2CEA1953E46
   - target:          arm64e-maccatalyst
-    value:           5900179B-2B59-3948-A371-1F1A762542F7
+    value:           42A85931-7983-3D80-AE3B-F2CEA1953E46
 install-name:    '/usr/lib/libarchive.2.dylib'
 current-version: 9.2
 compatibility-version: 9
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _archive_bzlib_version, _archive_clear_error, _archive_compression, 
                        _archive_compression_name, _archive_copy_error, _archive_entry_acl, 

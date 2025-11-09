@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1AC4B209-376D-3B6E-8673-088FDADA421E
+    value:           CA885F10-6AA5-3C43-804D-A6AFEE271206
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E0333490-9637-34B2-94B6-E3AB179219AF
+    value:           7E6E73F4-8B96-3835-961B-F763E949F41C
 install-name:    '/System/Library/PrivateFrameworks/SpanMatcher.framework/Versions/A/SpanMatcher'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

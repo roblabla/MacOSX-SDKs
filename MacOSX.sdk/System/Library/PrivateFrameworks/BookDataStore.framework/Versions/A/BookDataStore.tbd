@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8C05EDA2-E0F5-33FD-AE6A-CB294F2654F8
+    value:           493C189F-31C1-3A1F-8579-45E3D57386F4
   - target:          x86_64-maccatalyst
-    value:           8C05EDA2-E0F5-33FD-AE6A-CB294F2654F8
+    value:           493C189F-31C1-3A1F-8579-45E3D57386F4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B98FF371-CA7C-35D1-946B-70266FA607E7
+    value:           3370A554-C4FA-3D6C-ABBC-27A6542622B3
   - target:          arm64e-maccatalyst
-    value:           B98FF371-CA7C-35D1-946B-70266FA607E7
+    value:           3370A554-C4FA-3D6C-ABBC-27A6542622B3
 install-name:    '/System/Library/PrivateFrameworks/BookDataStore.framework/Versions/A/BookDataStore'
-current-version: 1591
+current-version: 1632
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

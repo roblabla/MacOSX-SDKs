@@ -176,8 +176,7 @@ FILEPROVIDER_API_AVAILABILITY_V3
  Any other error, including crashes of the extension process, will be considered to be transient
  and will cause the enumeration to be retried.
 
- Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain,
- or NSPOSIXErrorDomain.
+ Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain.
 
  For errors which can not be represented using an existing error code in one of these domains, the extension
  should construct an NSError with domain NSCocoaErrorDomain and code NSXPCConnectionReplyInvalid.
@@ -267,8 +266,7 @@ FILEPROVIDER_API_AVAILABILITY_V3
  Any other error, including crashes of the extension process, will be considered to be
  transient and will cause the lookup to be retried.
 
- Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain,
- or NSPOSIXErrorDomain.
+ Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain.
 
  For errors which can not be represented using an existing error code in one of these domains, the extension
  should construct an NSError with domain NSCocoaErrorDomain and code NSXPCConnectionReplyInvalid.
@@ -358,8 +356,7 @@ FILEPROVIDER_API_AVAILABILITY_V3
  Any other error, including crashes of the extension process, will be considered to be transient
  and will cause the download to be retried.
 
- Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain,
- or NSPOSIXErrorDomain.
+ Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain.
 
  For errors which can not be represented using an existing error code in one of these domains, the extension
  should construct an NSError with domain NSCocoaErrorDomain and code NSXPCConnectionReplyInvalid.
@@ -509,8 +506,7 @@ FILEPROVIDER_API_AVAILABILITY_V3
  Any other error, including crashes of the extension process, will be considered to be transient
  and will cause the creation to be retried.
 
- Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain,
- or NSPOSIXErrorDomain.
+ Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain.
 
  For errors which can not be represented using an existing error code in one of these domains, the extension
  should construct an NSError with domain NSCocoaErrorDomain and code NSXPCConnectionReplyInvalid.
@@ -601,6 +597,10 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  contentVersion in the completion handler's item. The system will subsequently call
  fetchContents to retrieve the new contents and replace them on disk.
 
+ The `baseVersion` might contain one or both component set to
+ `NSFileProviderItemVersionComponentZero` in case there has never been a version for
+ which the item on disk and the item in the provider were known to be in sync.
+
  Structural consistency and Cycle handling:
  ------------------------------------------
  In case the parentItemIdentifier is modified, the system guarantees that the new
@@ -670,8 +670,7 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  Any other error, including crashes of the extension process, will be considered to be transient
  and will cause the modification to be retried.
 
- Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain,
- or NSPOSIXErrorDomain.
+ Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain.
 
  For errors which can not be represented using an existing error code in one of these domains, the extension
  should construct an NSError with domain NSCocoaErrorDomain and code NSXPCConnectionReplyInvalid.
@@ -757,8 +756,7 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  Any other error, including crashes of the extension process, will be considered to be transient
  and will cause the deletion to be retried.
 
- Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain,
- or NSPOSIXErrorDomain.
+ Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain.
 
  For errors which can not be represented using an existing error code in one of these domains, the extension
  should construct an NSError with domain NSCocoaErrorDomain and code NSXPCConnectionReplyInvalid.

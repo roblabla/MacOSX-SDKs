@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6BCCE2EF-AEC0-33EC-8EAF-E658956025B1
+    value:           E0130B20-3101-3BCA-B242-FB81C9D8FFAB
   - target:          x86_64-maccatalyst
-    value:           6BCCE2EF-AEC0-33EC-8EAF-E658956025B1
+    value:           E0130B20-3101-3BCA-B242-FB81C9D8FFAB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           85F29AE1-1015-392E-89F1-D18C8FC44FD9
+    value:           9C9CE0F5-FF28-37F8-8E4E-1F251E6A54FC
   - target:          arm64e-maccatalyst
-    value:           85F29AE1-1015-392E-89F1-D18C8FC44FD9
+    value:           9C9CE0F5-FF28-37F8-8E4E-1F251E6A54FC
 install-name:    '/usr/lib/libMTLCapture.dylib'
 current-version: 210.52
 compatibility-version: 1.1

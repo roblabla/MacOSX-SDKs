@@ -4,28 +4,28 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F13B7F18-D1CC-367E-817A-3CC47251E93D
+    value:           211F3764-2F7A-396B-8927-98C21FBCE165
   - target:          x86_64-maccatalyst
-    value:           F13B7F18-D1CC-367E-817A-3CC47251E93D
+    value:           211F3764-2F7A-396B-8927-98C21FBCE165
   - target:          x86_64h-macos
-    value:           10DE81F5-3388-3175-8A5C-63A6EDBB651D
+    value:           4E0F5F1B-4DB2-36AA-9453-C7031A929D7E
   - target:          x86_64h-maccatalyst
-    value:           10DE81F5-3388-3175-8A5C-63A6EDBB651D
+    value:           4E0F5F1B-4DB2-36AA-9453-C7031A929D7E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           056515E1-8ABF-3A56-ADEE-175FBFE299CA
+    value:           B6AC5D38-DB1D-340A-A367-CFA7AE775B7C
   - target:          arm64e-maccatalyst
-    value:           056515E1-8ABF-3A56-ADEE-175FBFE299CA
+    value:           B6AC5D38-DB1D-340A-A367-CFA7AE775B7C
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBNNS.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ vecLib ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _BNNSApplyMultiheadAttention, _BNNSApplyMultiheadAttentionBackward, 
                        _BNNSApplyVectorActivationLayer, _BNNSArithmeticFilterApplyBackwardBatch, 

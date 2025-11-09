@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AFB62300-A659-3C5D-83F2-55CA1597AB86
+    value:           35086330-A652-3781-9F95-C061AF8D936F
   - target:          x86_64-maccatalyst
-    value:           AFB62300-A659-3C5D-83F2-55CA1597AB86
+    value:           35086330-A652-3781-9F95-C061AF8D936F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AF57119C-9EB1-3DA3-863A-C93C1C410508
+    value:           4865F937-3E03-3136-B604-157EF2E007A6
   - target:          arm64e-maccatalyst
-    value:           AF57119C-9EB1-3DA3-863A-C93C1C410508
+    value:           4865F937-3E03-3136-B604-157EF2E007A6
 install-name:    '/System/Library/PrivateFrameworks/PromotedContentPrediction.framework/Versions/A/PromotedContentPrediction'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

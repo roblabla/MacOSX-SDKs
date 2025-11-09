@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0D7131E5-7BA2-3C19-9401-FB4BE8B54C7D
+    value:           4A3D1CF7-87B6-3FEE-8767-F1CB54EB0D9F
   - target:          x86_64-maccatalyst
-    value:           0D7131E5-7BA2-3C19-9401-FB4BE8B54C7D
+    value:           4A3D1CF7-87B6-3FEE-8767-F1CB54EB0D9F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F15F52C2-22BB-3F5B-B0D5-9DD10F764DEB
+    value:           3A3A7DB7-5CB8-35BE-92F8-30D21083899E
   - target:          arm64e-maccatalyst
-    value:           F15F52C2-22BB-3F5B-B0D5-9DD10F764DEB
+    value:           3A3A7DB7-5CB8-35BE-92F8-30D21083899E
 install-name:    '/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo'
 current-version: 1.5
 compatibility-version: 1.2
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CVBufferCopyAttachment, _CVBufferCopyAttachments, _CVBufferDumpToQTES, 
                        _CVBufferGetAttachment, _CVBufferGetAttachments, _CVBufferHasAttachment, 
@@ -213,9 +213,9 @@ exports:
                        _kCVPixelFormatOpenGLFormat, _kCVPixelFormatOpenGLInternalFormat, 
                        _kCVPixelFormatOpenGLType, _kCVPixelFormatPlanes, _kCVPixelFormatQDCompatibility, 
                        _kCVPixelFormatVerticalSubsampling, _kCVZeroTime ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _CVPixelBufferCreateWithParentIOSurface, _CVPixelBufferCreateWithParentPixelBuffer ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64e-maccatalyst, arm64-macos, 
+  - targets:         [ arm64e-macos, x86_64-macos, arm64e-maccatalyst, arm64-macos, 
                        arm64-maccatalyst ]
     symbols:         [ _CVPixelBufferCalculateCompressedTileDataRegionMemoryUsedOfPlane, 
                        _CVPixelBufferCalculateSparseHistogramOfCompressedTileDataUsageOfPlane, 

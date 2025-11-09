@@ -49,13 +49,13 @@ typedef NS_ENUM(NSInteger, WKPermissionDecision) {
     WKPermissionDecisionPrompt,
     WKPermissionDecisionGrant,
     WKPermissionDecisionDeny,
-} WK_API_AVAILABLE(macos(12.0), ios(15.0));
+} API_AVAILABLE(macos(12.0), ios(15.0));
 
 typedef NS_ENUM(NSInteger, WKMediaCaptureType) {
     WKMediaCaptureTypeCamera,
     WKMediaCaptureTypeMicrophone,
     WKMediaCaptureTypeCameraAndMicrophone,
-} WK_API_AVAILABLE(macos(12.0), ios(15.0));
+} API_AVAILABLE(macos(12.0), ios(15.0));
 
 /*! A class conforming to the WKUIDelegate protocol provides methods for
  presenting native UI on behalf of a webpage.
@@ -83,7 +83,7 @@ typedef NS_ENUM(NSInteger, WKMediaCaptureType) {
   @discussion Your app should remove the web view from the view hierarchy and update
   the UI as needed, such as by closing the containing browser tab or window.
   */
-- (void)webViewDidClose:(WKWebView *)webView WK_API_AVAILABLE(macos(10.11), ios(9.0));
+- (void)webViewDidClose:(WKWebView *)webView API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*! @abstract Displays a JavaScript alert panel.
  @param webView The web view invoking the delegate method.
@@ -144,14 +144,14 @@ typedef NS_ENUM(NSInteger, WKMediaCaptureType) {
  @param decisionHandler The completion handler to call once the decision is made
  @discussion If not implemented, the result is the same as calling the decisionHandler with WKPermissionDecisionPrompt.
  */
-- (void)webView:(WKWebView *)webView requestMediaCapturePermissionForOrigin:(WKSecurityOrigin *)origin initiatedByFrame:(WKFrameInfo *)frame type:(WKMediaCaptureType)type decisionHandler:(void (^)(WKPermissionDecision decision))decisionHandler WK_SWIFT_ASYNC_NAME(webView(_:decideMediaCapturePermissionsFor:initiatedBy:type:)) WK_SWIFT_ASYNC(5) WK_API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)webView:(WKWebView *)webView requestMediaCapturePermissionForOrigin:(WKSecurityOrigin *)origin initiatedByFrame:(WKFrameInfo *)frame type:(WKMediaCaptureType)type decisionHandler:(void (^)(WKPermissionDecision decision))decisionHandler WK_SWIFT_ASYNC_NAME(webView(_:decideMediaCapturePermissionsFor:initiatedBy:type:)) WK_SWIFT_ASYNC(5) API_AVAILABLE(macos(12.0), ios(15.0));
 
 /*! @abstract Allows your app to determine whether or not the given security origin should have access to the device's orientation and motion.
  @param securityOrigin The security origin which requested access to the device's orientation and motion.
  @param frame The frame that initiated the request.
  @param decisionHandler The decision handler to call once the app has made its decision.
  */
-- (void)webView:(WKWebView *)webView requestDeviceOrientationAndMotionPermissionForOrigin:(WKSecurityOrigin *)origin initiatedByFrame:(WKFrameInfo *)frame decisionHandler:(void (^)(WKPermissionDecision decision))decisionHandler WK_API_AVAILABLE(ios(15.0)) WK_API_UNAVAILABLE(macos);
+- (void)webView:(WKWebView *)webView requestDeviceOrientationAndMotionPermissionForOrigin:(WKSecurityOrigin *)origin initiatedByFrame:(WKFrameInfo *)frame decisionHandler:(void (^)(WKPermissionDecision decision))decisionHandler API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos);
 
 #if TARGET_OS_IPHONE
 
@@ -165,7 +165,7 @@ typedef NS_ENUM(NSInteger, WKMediaCaptureType) {
  This method will only be invoked for elements that have default preview in WebKit, which is
  limited to links. In the future, it could be invoked for additional elements.
  */
-- (BOOL)webView:(WKWebView *)webView shouldPreviewElement:(WKPreviewElementInfo *)elementInfo WK_API_DEPRECATED_WITH_REPLACEMENT("webView:contextMenuConfigurationForElement:completionHandler:", ios(10.0, 13.0));
+- (BOOL)webView:(WKWebView *)webView shouldPreviewElement:(WKPreviewElementInfo *)elementInfo API_DEPRECATED_WITH_REPLACEMENT("webView:contextMenuConfigurationForElement:completionHandler:", ios(10.0, 13.0));
 
 /*! @abstract Allows your app to provide a custom view controller to show when the given element is peeked.
  @param webView The web view invoking the delegate method.
@@ -180,13 +180,13 @@ typedef NS_ENUM(NSInteger, WKMediaCaptureType) {
  Returning nil will result in WebKit's default preview behavior. webView:commitPreviewingViewController: will only be invoked
  if a non-nil view controller was returned.
  */
-- (nullable UIViewController *)webView:(WKWebView *)webView previewingViewControllerForElement:(WKPreviewElementInfo *)elementInfo defaultActions:(NSArray<id <WKPreviewActionItem>> *)previewActions WK_API_DEPRECATED_WITH_REPLACEMENT("webView:contextMenuConfigurationForElement:completionHandler:", ios(10.0, 13.0));
+- (nullable UIViewController *)webView:(WKWebView *)webView previewingViewControllerForElement:(WKPreviewElementInfo *)elementInfo defaultActions:(NSArray<id <WKPreviewActionItem>> *)previewActions API_DEPRECATED_WITH_REPLACEMENT("webView:contextMenuConfigurationForElement:completionHandler:", ios(10.0, 13.0));
 
 /*! @abstract Allows your app to pop to the view controller it created.
  @param webView The web view invoking the delegate method.
  @param previewingViewController The view controller that is being popped.
  */
-- (void)webView:(WKWebView *)webView commitPreviewingViewController:(UIViewController *)previewingViewController WK_API_DEPRECATED_WITH_REPLACEMENT("webView:contextMenuForElement:willCommitWithAnimator:", ios(10.0, 13.0));
+- (void)webView:(WKWebView *)webView commitPreviewingViewController:(UIViewController *)previewingViewController API_DEPRECATED_WITH_REPLACEMENT("webView:contextMenuForElement:willCommitWithAnimator:", ios(10.0, 13.0));
 #endif // TARGET_OS_IPHONE
 
 #if TARGET_OS_IOS
@@ -200,7 +200,7 @@ typedef NS_ENUM(NSInteger, WKMediaCaptureType) {
  * Pass a valid UIContextMenuConfiguration to show a context menu, or pass nil to not show a context menu.
  */
 
-- (void)webView:(WKWebView *)webView contextMenuConfigurationForElement:(WKContextMenuElementInfo *)elementInfo completionHandler:(void (^)(UIContextMenuConfiguration * _Nullable configuration))completionHandler WK_SWIFT_ASYNC_NAME(webView(_:contextMenuConfigurationFor:)) WK_API_AVAILABLE(ios(13.0));
+- (void)webView:(WKWebView *)webView contextMenuConfigurationForElement:(WKContextMenuElementInfo *)elementInfo completionHandler:(void (^)(UIContextMenuConfiguration * _Nullable configuration))completionHandler WK_SWIFT_ASYNC_NAME(webView(_:contextMenuConfigurationFor:)) API_AVAILABLE(ios(13.0));
 
 /**
  * @abstract Called when the context menu will be presented.
@@ -209,7 +209,7 @@ typedef NS_ENUM(NSInteger, WKMediaCaptureType) {
  * @param elementInfo The elementInfo for the element the user is touching.
  */
 
-- (void)webView:(WKWebView *)webView contextMenuWillPresentForElement:(WKContextMenuElementInfo *)elementInfo WK_API_AVAILABLE(ios(13.0));
+- (void)webView:(WKWebView *)webView contextMenuWillPresentForElement:(WKContextMenuElementInfo *)elementInfo API_AVAILABLE(ios(13.0));
 
 /**
  * @abstract Called when the context menu configured by the UIContextMenuConfiguration from
@@ -221,7 +221,7 @@ typedef NS_ENUM(NSInteger, WKMediaCaptureType) {
  * @param animator The animator to use for the commit animation.
  */
 
-- (void)webView:(WKWebView *)webView contextMenuForElement:(WKContextMenuElementInfo *)elementInfo willCommitWithAnimator:(id <UIContextMenuInteractionCommitAnimating>)animator WK_API_AVAILABLE(ios(13.0));
+- (void)webView:(WKWebView *)webView contextMenuForElement:(WKContextMenuElementInfo *)elementInfo willCommitWithAnimator:(id <UIContextMenuInteractionCommitAnimating>)animator API_AVAILABLE(ios(13.0));
 
 /**
  * @abstract Called when the context menu ends, either by being dismissed or when a menu action is taken.
@@ -230,7 +230,7 @@ typedef NS_ENUM(NSInteger, WKMediaCaptureType) {
  * @param elementInfo The elementInfo for the element the user is touching.
  */
 
-- (void)webView:(WKWebView *)webView contextMenuDidEndForElement:(WKContextMenuElementInfo *)elementInfo WK_API_AVAILABLE(ios(13.0));
+- (void)webView:(WKWebView *)webView contextMenuDidEndForElement:(WKContextMenuElementInfo *)elementInfo API_AVAILABLE(ios(13.0));
 
 #endif // TARGET_OS_IOS
 
@@ -244,7 +244,7 @@ typedef NS_ENUM(NSInteger, WKMediaCaptureType) {
 
  If you do not implement this method, the web view will behave as if the user selected the Cancel button.
  */
-- (void)webView:(WKWebView *)webView runOpenPanelWithParameters:(WKOpenPanelParameters *)parameters initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSArray<NSURL *> * _Nullable URLs))completionHandler WK_API_AVAILABLE(macos(10.12));
+- (void)webView:(WKWebView *)webView runOpenPanelWithParameters:(WKOpenPanelParameters *)parameters initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSArray<NSURL *> * _Nullable URLs))completionHandler API_AVAILABLE(macos(10.12));
 
 #endif
 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5D91F215-84ED-301E-BBE9-13FE54060753
+    value:           FC3E0E58-8F3B-3621-ADF9-F51AE65363EA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3AE9EC50-A1F7-3ECE-908B-EFE9168458B5
+    value:           9F6A21CC-11F7-35F4-8DF7-83B31996594D
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySharedUISupport.framework/Versions/A/AccessibilitySharedUISupport'
 swift-abi-version: 7
 exports:

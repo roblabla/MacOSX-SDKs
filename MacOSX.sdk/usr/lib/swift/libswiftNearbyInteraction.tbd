@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B6FB5A69-AAA5-3558-8D3E-8AE071B15884
+    value:           7BCFA704-D83A-3B92-BFC7-0ED49A79C90F
   - target:          x86_64-maccatalyst
-    value:           B6FB5A69-AAA5-3558-8D3E-8AE071B15884
+    value:           7BCFA704-D83A-3B92-BFC7-0ED49A79C90F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1C8F7CA1-333A-33EC-9C56-FC30F1C3604B
+    value:           79634C81-3BCD-3C10-85F8-75BE64D07047
   - target:          arm64e-maccatalyst
-    value:           1C8F7CA1-333A-33EC-9C56-FC30F1C3604B
+    value:           79634C81-3BCD-3C10-85F8-75BE64D07047
 install-name:    '/usr/lib/swift/libswiftNearbyInteraction.dylib'
-current-version: 277
+current-version: 282.0.11
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '_$sSo14NINearbyObjectC17NearbyInteractionE8distanceSfSgvg', 
                        '_$sSo14NINearbyObjectC17NearbyInteractionE8distanceSfSgvpMV', 
                        '_$sSo14NINearbyObjectC17NearbyInteractionE9directions5SIMD3VySfGSgvg', 

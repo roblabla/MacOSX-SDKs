@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0CA6B4BC-721C-3C1D-8553-44EF56D30160
+    value:           FE2D44C8-F0A8-304E-915C-63900E53D34F
   - target:          x86_64-maccatalyst
-    value:           0CA6B4BC-721C-3C1D-8553-44EF56D30160
+    value:           FE2D44C8-F0A8-304E-915C-63900E53D34F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           97ECD179-5935-30B3-8BAE-06A94AB99E82
+    value:           862B5C1A-18B9-34F3-92EE-EF7097E231B7
   - target:          arm64e-maccatalyst
-    value:           97ECD179-5935-30B3-8BAE-06A94AB99E82
+    value:           862B5C1A-18B9-34F3-92EE-EF7097E231B7
 install-name:    '/usr/lib/system/libsystem_coreservices.dylib'
 current-version: 133
 parent-umbrella:

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EA9AD7B9-6C4D-37E1-86D9-F0E5B9EE65F3
+    value:           B1028A11-931E-3AFF-8C5B-EFC2D937BED0
   - target:          x86_64-maccatalyst
-    value:           EA9AD7B9-6C4D-37E1-86D9-F0E5B9EE65F3
+    value:           B1028A11-931E-3AFF-8C5B-EFC2D937BED0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A81A87AC-F278-3759-A0D6-B28D0BC4E384
+    value:           846971AC-EBEF-31A1-A3D2-E3FF40B893B8
   - target:          arm64e-maccatalyst
-    value:           A81A87AC-F278-3759-A0D6-B28D0BC4E384
+    value:           846971AC-EBEF-31A1-A3D2-E3FF40B893B8
 install-name:    '/System/Library/PrivateFrameworks/IOAccelerator.framework/Versions/A/IOAccelerator'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

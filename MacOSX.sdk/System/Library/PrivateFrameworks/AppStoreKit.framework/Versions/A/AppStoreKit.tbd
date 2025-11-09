@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CC80A807-258B-37B7-95DE-FD59E6A35B24
+    value:           19186B55-4D36-36F4-A31D-8D0E1955F1A8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E726B025-F936-3D70-83DD-2B9EEF3DAFF1
+    value:           FDD1D787-A7F6-3799-9382-9ACD5ADF0A16
 install-name:    '/System/Library/PrivateFrameworks/AppStoreKit.framework/Versions/A/AppStoreKit'
 swift-abi-version: 7
 allowable-clients:
@@ -938,6 +938,7 @@ exports:
                        '_$sSo6CGSizeV11AppStoreKitE12minDimension12CoreGraphics7CGFloatVvpMV', 
                        '_$sSo6CGSizeV11AppStoreKitE15sizeByModifying5width6heightAB12CoreGraphics7CGFloatV_AItF', 
                        '_$sSo6CGSizeV11AppStoreKitE6scaledyAB12CoreGraphics7CGFloatVF', 
+                       '_$sSo6CGSizeV11AppStoreKitE7clamped6atMostA2B_tF', '_$sSo6CGSizeV11AppStoreKitE7clamped7atLeastA2B_tF', 
                        '_$sSo6CGSizeV11AppStoreKitE7fitting_4modeA2B_AC7ArtworkC11ContentModeOtF', 
                        '_$sSo6CGSizeV11AppStoreKitE7rounded_9toScaleOfABs25FloatingPointRoundingRuleO_5JetUI0M16TraitEnvironment_ptF', 
                        '_$sSo6CGSizeV11AppStoreKitE7rounded_9toScaleOfABs25FloatingPointRoundingRuleO_So17JUTraitCollectionCtF', 

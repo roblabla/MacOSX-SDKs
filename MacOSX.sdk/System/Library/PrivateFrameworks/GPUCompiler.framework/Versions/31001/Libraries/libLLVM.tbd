@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D9BFAEFA-01B6-30E6-B24E-6DAE754952BC
+    value:           225AC2D9-D9AD-3104-B612-4EFD1FD8170B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8F066624-2AB8-3DF6-8E65-3D9FABB39C22
+    value:           D2B8B137-6116-3113-8F88-4C18501D9797
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libLLVM.dylib'
-current-version: 31001.255.2
+current-version: 31001.255
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _BlockExtractorEraseFuncs, _EnableHotColdSplit, _FSEC, _ForceSummaryEdgesCold, 
@@ -1238,7 +1238,7 @@ exports:
                        __ZN4llvm13Float2IntPass7cleanupEv, __ZN4llvm13Float2IntPass7convertEPNS_11InstructionEPNS_4TypeE, 
                        __ZN4llvm13Float2IntPass7runImplERNS_8FunctionE, __ZN4llvm13Float2IntPass8badRangeEv, 
                        __ZN4llvm13Float2IntPass9findRootsERNS_8FunctionERNS_11SmallPtrSetIPNS_11InstructionELj8EEE, 
-                       __ZN4llvm13FunctionGroup17setGlobalResourceENS_19GlobalResourceSetIDEPKNS_11GlobalValueE, 
+                       __ZN4llvm13FunctionGroup15calcDMAListSizeEb, __ZN4llvm13FunctionGroup17setGlobalResourceENS_19GlobalResourceSetIDEPKNS_11GlobalValueE, 
                        __ZN4llvm13GVNExpression10ExpressionD0Ev, __ZN4llvm13GVNExpression10ExpressionD1Ev, 
                        __ZN4llvm13GVNExpression10ExpressionD2Ev, __ZN4llvm13GVNExpression13PHIExpressionD0Ev, 
                        __ZN4llvm13GVNExpression13PHIExpressionD1Ev, __ZN4llvm13GVNExpression13PHIExpressionD2Ev, 

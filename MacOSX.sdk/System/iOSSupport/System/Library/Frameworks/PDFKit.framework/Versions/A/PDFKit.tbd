@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           9A3A54E1-E50C-3185-8A7C-5385E73AF19F
+    value:           8BF754DE-755C-382A-A0A0-92F7FF69318C
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           4CFF68F9-3D53-3873-B28B-55F3E1786BF8
+    value:           F2848ABA-8C1E-3DAC-9AE1-99588FB7FAE7
 install-name:    '/System/iOSSupport/System/Library/Frameworks/PDFKit.framework/Versions/A/PDFKit'
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _PDFAnnotationHighlightingModeInvert, _PDFAnnotationHighlightingModeNone, 
                        _PDFAnnotationHighlightingModeOutline, _PDFAnnotationHighlightingModePush, 
                        _PDFAnnotationKeyAction, _PDFAnnotationKeyAdditionalActions, 

@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7ED92AF6-F167-3066-A776-0E72FAFE5E0F
+    value:           C9C06654-3409-380D-A4B0-12286F285E67
   - target:          x86_64-maccatalyst
-    value:           7ED92AF6-F167-3066-A776-0E72FAFE5E0F
+    value:           C9C06654-3409-380D-A4B0-12286F285E67
   - target:          x86_64h-macos
-    value:           6D4FBF94-2281-3B8A-AF91-D7D9189465DA
+    value:           2239A869-3275-3E4C-987B-B8AFCE4520E7
   - target:          x86_64h-maccatalyst
-    value:           6D4FBF94-2281-3B8A-AF91-D7D9189465DA
+    value:           2239A869-3275-3E4C-987B-B8AFCE4520E7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6AF5D433-8C53-3CEE-8B39-C99DEA11A29F
+    value:           8A930227-747E-381F-BB29-2DFE267A84F7
   - target:          arm64e-maccatalyst
-    value:           6AF5D433-8C53-3CEE-8B39-C99DEA11A29F
+    value:           8A930227-747E-381F-BB29-2DFE267A84F7
 install-name:    '/usr/lib/libobjc.A.dylib'
 current-version: 228
 exports:

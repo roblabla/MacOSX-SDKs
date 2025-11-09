@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           40812F7B-CB31-3CB0-8538-D05F2099DD88
+    value:           CD1ABA93-61F0-36A4-B605-0821FA221FE2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           236BB9F9-F6C3-30A8-B569-B2E095F04663
+    value:           66F9556B-1768-3D96-B1E6-E913D3B177BC
 install-name:    '/System/Library/PrivateFrameworks/DialogEngine.framework/Versions/A/DialogEngine'
-current-version: 3100.39
+current-version: 3102.2.1
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIN4YAML12EventHandlerE, __ZTIN4YAML13SettingChangeINS_13EMITTER_MANIPEEE, 
@@ -697,6 +697,7 @@ exports:
                        __ZN4siri12dialogengine11RequestInfo10SetLocalesERKNSt3__16vectorINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEENS7_IS9_EEEE, 
                        __ZN4siri12dialogengine11RequestInfo10SetOptionsEi, __ZN4siri12dialogengine11RequestInfo11SetSSMLModeENS0_8SSMLModeE, 
                        __ZN4siri12dialogengine11RequestInfo12SetGroundingEb, __ZN4siri12dialogengine11RequestInfo12SetMultiUserEb, 
+                       __ZN4siri12dialogengine11RequestInfo12SetPatternIdERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine11RequestInfo13SetLocalePathERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine11RequestInfo13SetParamsPathERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine11RequestInfo13SetPluginNameERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
@@ -711,8 +712,10 @@ exports:
                        __ZN4siri12dialogengine11RequestInfo15SetUseCaseStateERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine11RequestInfo15SetUserSettingsERKNSt3__13mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEE, 
                        __ZN4siri12dialogengine11RequestInfo15SetVisualStringERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
+                       __ZN4siri12dialogengine11RequestInfo16SetInteractionIdERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine11RequestInfo18SetRequestedLocaleERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine11RequestInfo22SetCustomProunciationsERKNSt3__16vectorINS2_4pairINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_EENS8_ISB_EEEE, 
+                       __ZN4siri12dialogengine11RequestInfo22SetRequestParamsStringERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine11RequestInfo8SetCatIdERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine11RequestInfo9AddOptionEi, __ZN4siri12dialogengine11RequestInfo9HasOptionEi, 
                        __ZN4siri12dialogengine11RequestInfoC1Ev, __ZN4siri12dialogengine11RequestInfoC2Ev, 
@@ -1351,7 +1354,7 @@ exports:
                        __ZN4siri12dialogengine17GetICUWeekOfMonthERKNS0_9TimeStampE, 
                        __ZN4siri12dialogengine17GetLocaleLanguageERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine17GetMorphunVersionEv, __ZN4siri12dialogengine17GetSecsSinceEpochEv, 
-                       __ZN4siri12dialogengine17StartsWithCapitalEPNS0_7ContextERKNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE, 
+                       __ZN4siri12dialogengine17RemoveAllUpdatersEv, __ZN4siri12dialogengine17StartsWithCapitalEPNS0_7ContextERKNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine17StringRegexSearchERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES9_, 
                        __ZN4siri12dialogengine17TemporaryVariable8SetIndexEm, __ZN4siri12dialogengine17TemporaryVariableC1EPNS0_7ContextERKNS0_8ListInfoE, 
                        __ZN4siri12dialogengine17TemporaryVariableC2EPNS0_7ContextERKNS0_8ListInfoE, 
@@ -1448,7 +1451,8 @@ exports:
                        __ZN4siri12dialogengine19ConditionExpression8SetValueERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine19ConditionExpressionC1ERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_SA_, 
                        __ZN4siri12dialogengine19ConditionExpressionC1Ev, __ZN4siri12dialogengine19ConditionExpressionC2ERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_SA_, 
-                       __ZN4siri12dialogengine19ConditionExpressionC2Ev, __ZN4siri12dialogengine19CountryCodeToStringERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES9_, 
+                       __ZN4siri12dialogengine19ConditionExpressionC2Ev, __ZN4siri12dialogengine19ConstructJSONStringERKNSt3__13mapINS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEENS1_10shared_ptrINS0_9JSONValueEEENS1_4lessIS8_EENS6_INS1_4pairIKS8_SB_EEEEEE, 
+                       __ZN4siri12dialogengine19CountryCodeToStringERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES9_, 
                        __ZN4siri12dialogengine19CreateJSONDoubleValEd, __ZN4siri12dialogengine19CreateJSONObjectValERKNSt3__13mapINS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEENS1_10shared_ptrINS0_9JSONValueEEENS1_4lessIS8_EENS6_INS1_4pairIKS8_SB_EEEEEE, 
                        __ZN4siri12dialogengine19CreateJSONStringValERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine19DialogCalendarRange13dateRangeLongEPNS0_7ContextEPKNS0_14VariableObjectE, 
@@ -1482,6 +1486,7 @@ exports:
                        __ZN4siri12dialogengine19WritePatternXmlFileENSt3__110shared_ptrINS0_11PatternFileEEERKNS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine19WritePatternXmlFileENSt3__110shared_ptrINS0_11PatternFileEEERKNS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEESC_, 
                        __ZN4siri12dialogengine20ApplySemanticConceptEPNS0_7ContextERKNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEESB_RKNS3_6vectorINS0_25SemanticFeatureConstraintENS7_ISD_EEEE, 
+                       __ZN4siri12dialogengine20ConvertJSONToJSONObjERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine20ConvertSSMLToTTSCodeEPNS0_7ContextEPKNS0_8ChunkTagEPNSt3__16vectorINS6_10shared_ptrINS0_9ChunkTextEEENS6_9allocatorISA_EEEE, 
                        __ZN4siri12dialogengine20DialogMetadataReader20GetNextSemanticValueEv, 
                        __ZN4siri12dialogengine20DialogMetadataReader4LoadERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_, 
@@ -1619,7 +1624,6 @@ exports:
                        __ZN4siri12dialogengine25SemanticFeatureConstraintC2Ev, __ZN4siri12dialogengine25StringSplitWithDelimitersERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES9_S9_, 
                        __ZN4siri12dialogengine25ValidateXmlElementVersionEPNS0_7ContextERKNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine25VersionGreaterThanOrEqualERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES9_, 
-                       __ZN4siri12dialogengine26ConstructJSONRequestStringERKNSt3__13mapINS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEENS1_10shared_ptrINS0_9JSONValueEEENS1_4lessIS8_EENS6_INS1_4pairIKS8_SB_EEEEEE, 
                        __ZN4siri12dialogengine26ConvertItemFormatSSMLToTagERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine26FindAndInsertJSONObjectValENSt3__110shared_ptrINS0_9JSONValueEEERKNS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEESC_S4_, 
                        __ZN4siri12dialogengine26GenerateValidationResponseEPNS0_7ContextE, 
@@ -1652,6 +1656,7 @@ exports:
                        __ZN4siri12dialogengine31GetPatternCombinationFromStringERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine31ReplaceSpecialUnicodeSpaceCharsERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine32DialogStateUseCaseToNSDictionaryERKNS0_18DialogStateUseCaseE, 
+                       __ZN4siri12dialogengine32LogCurareCATExecutionWithJsonStrERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES9_S9_S9_, 
                        __ZN4siri12dialogengine33DialogStateFamilyFromNSDictionaryEP12NSDictionary, 
                        __ZN4siri12dialogengine34DialogStateUseCaseFromNSDictionaryEP12NSDictionary, 
                        __ZN4siri12dialogengine34ExecuteDisambiguationClarification7ExecuteEv, 
@@ -2690,19 +2695,21 @@ exports:
                        __ZNK4siri12dialogengine11PatternFile7GetTypeEv, __ZNK4siri12dialogengine11RequestInfo10GetLocalesEv, 
                        __ZNK4siri12dialogengine11RequestInfo10GetOptionsEv, __ZNK4siri12dialogengine11RequestInfo11GetSSMLModeEv, 
                        __ZNK4siri12dialogengine11RequestInfo11IsMultiUserEv, __ZNK4siri12dialogengine11RequestInfo12GetGroundingEv, 
-                       __ZNK4siri12dialogengine11RequestInfo13GetLocalePathEv, __ZNK4siri12dialogengine11RequestInfo13GetParamsPathEv, 
-                       __ZNK4siri12dialogengine11RequestInfo13GetPluginNameEv, __ZNK4siri12dialogengine11RequestInfo13GetRandomSeedEv, 
-                       __ZNK4siri12dialogengine11RequestInfo13GetVisualPathEv, __ZNK4siri12dialogengine11RequestInfo14GetFamilyStateEv, 
-                       __ZNK4siri12dialogengine11RequestInfo14GetRequestTypeEv, __ZNK4siri12dialogengine11RequestInfo14GetTemplateDirEv, 
-                       __ZNK4siri12dialogengine11RequestInfo14GetUserSettingERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
+                       __ZNK4siri12dialogengine11RequestInfo12GetPatternIdEv, __ZNK4siri12dialogengine11RequestInfo13GetLocalePathEv, 
+                       __ZNK4siri12dialogengine11RequestInfo13GetParamsPathEv, __ZNK4siri12dialogengine11RequestInfo13GetPluginNameEv, 
+                       __ZNK4siri12dialogengine11RequestInfo13GetRandomSeedEv, __ZNK4siri12dialogengine11RequestInfo13GetVisualPathEv, 
+                       __ZNK4siri12dialogengine11RequestInfo14GetFamilyStateEv, __ZNK4siri12dialogengine11RequestInfo14GetRequestTypeEv, 
+                       __ZNK4siri12dialogengine11RequestInfo14GetTemplateDirEv, __ZNK4siri12dialogengine11RequestInfo14GetUserSettingERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZNK4siri12dialogengine11RequestInfo14GetVoiceGenderEv, __ZNK4siri12dialogengine11RequestInfo14HasUserSettingERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZNK4siri12dialogengine11RequestInfo15GetLocaleStringEv, 
                        __ZNK4siri12dialogengine11RequestInfo15GetParamsStringEv, 
                        __ZNK4siri12dialogengine11RequestInfo15GetUseCaseStateEv, 
                        __ZNK4siri12dialogengine11RequestInfo15GetUserSettingsEv, 
                        __ZNK4siri12dialogengine11RequestInfo15GetVisualStringEv, 
+                       __ZNK4siri12dialogengine11RequestInfo16GetInteractionIdEv, 
                        __ZNK4siri12dialogengine11RequestInfo18GetRequestedLocaleEv, 
                        __ZNK4siri12dialogengine11RequestInfo20GetRequestTypeStringEv, 
+                       __ZNK4siri12dialogengine11RequestInfo21GetRequestParamStringEv, 
                        __ZNK4siri12dialogengine11RequestInfo23GetCustomPronunciationsEv, 
                        __ZNK4siri12dialogengine11RequestInfo8GetCatIdEv, __ZNK4siri12dialogengine11StringValue6GetValEv, 
                        __ZNK4siri12dialogengine11TestResults10GetResultsEv, __ZNK4siri12dialogengine11TestResults16GetCountByStatusENS0_10TestStatusE, 

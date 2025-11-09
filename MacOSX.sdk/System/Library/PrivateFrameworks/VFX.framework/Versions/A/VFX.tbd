@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AF8B8F59-9F6A-30AA-99A0-49ABC033457E
+    value:           2FE88CCA-062C-378E-8339-71F986D09C80
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C636154D-3725-31CB-A3D4-F6961E2665D3
+    value:           A989F3A8-0E34-31E0-A8A6-803EE6873B0E
 install-name:    '/System/Library/PrivateFrameworks/VFX.framework/Versions/A/VFX'
 swift-abi-version: 7
 exports:
@@ -1376,8 +1376,10 @@ exports:
                        '_$s3ECS13EntityManagerC7VFXCoreE23unregisterUpdateHandleryyF', 
                        '_$s3ECS13EntityManagerC7VFXCoreE25makeREMaterialDefinitionsShyAD18MaterialDefinitionVGyF', 
                        '_$s3ECS13EntityManagerC7VFXCoreE28setupCompileBeforeFirstFrame_18cachedBuildResultsySb_AD19ScriptBuilderSystemC06CachedkL0VSgtF', 
+                       '_$s3ECS13EntityManagerC7VFXCoreE29applicationDidEnterBackgroundyyFZ', 
                        '_$s3ECS13EntityManagerC7VFXCoreE29reRecycleBuffersGetCompletionyycvg', 
                        '_$s3ECS13EntityManagerC7VFXCoreE29reRecycleBuffersGetCompletionyycvpMV', 
+                       '_$s3ECS13EntityManagerC7VFXCoreE30applicationWillEnterForegroundyyFZ', 
                        '_$s3ECS13EntityManagerC7VFXCoreE33createPrelitRenderPipelineFactory9albedoMap06normalK016colorPerInstance9blendModeAD0ghI0CAA0B0V_AMSbAD05BlendQ0OtF', 
                        '_$s3ECS13EntityManagerC7VFXCoreE36createAuthoringRenderPipelineFactory16colorPerInstanceAD0ghI0CSb_tF', 
                        '_$s3ECS13EntityManagerC7VFXCoreE4push5eventyAD16ReplicationEventO_tF', 
@@ -4403,16 +4405,16 @@ exports:
                        '_$s3VFX8VFXSceneC24internalPixelFormatDepthAA0deF0OvsTj', 
                        '_$s3VFX8VFXSceneC24internalPixelFormatDepthAA0deF0OvsTq', 
                        '_$s3VFX8VFXSceneC24vfxAssetsFrameworkBundleSo8NSBundleCSgvgZ', 
-                       '_$s3VFX8VFXSceneC29recordedMetalBinaryArchiveURL10Foundation0G0VSgvMTj', 
+                       '_$s3VFX8VFXSceneC29applicationDidEnterBackgroundyyFZ', '_$s3VFX8VFXSceneC29recordedMetalBinaryArchiveURL10Foundation0G0VSgvMTj', 
                        '_$s3VFX8VFXSceneC29recordedMetalBinaryArchiveURL10Foundation0G0VSgvMTq', 
                        '_$s3VFX8VFXSceneC29recordedMetalBinaryArchiveURL10Foundation0G0VSgvgTj', 
                        '_$s3VFX8VFXSceneC29recordedMetalBinaryArchiveURL10Foundation0G0VSgvgTq', 
                        '_$s3VFX8VFXSceneC29recordedMetalBinaryArchiveURL10Foundation0G0VSgvpMV', 
                        '_$s3VFX8VFXSceneC29recordedMetalBinaryArchiveURL10Foundation0G0VSgvsTj', 
                        '_$s3VFX8VFXSceneC29recordedMetalBinaryArchiveURL10Foundation0G0VSgvsTq', 
-                       '_$s3VFX8VFXSceneC5value6atPathypSgSS_tFTj', '_$s3VFX8VFXSceneC5value6atPathypSgSS_tFTq', 
-                       '_$s3VFX8VFXSceneC6update9deltaTimeySd_tFTj', '_$s3VFX8VFXSceneC6update9deltaTimeySd_tFTq', 
-                       '_$s3VFX8VFXSceneC7binding2of5namedAA10VFXBinding_pSgSS_SStFTj', 
+                       '_$s3VFX8VFXSceneC30applicationWillEnterForegroundyyFZ', '_$s3VFX8VFXSceneC5value6atPathypSgSS_tFTj', 
+                       '_$s3VFX8VFXSceneC5value6atPathypSgSS_tFTq', '_$s3VFX8VFXSceneC6update9deltaTimeySd_tFTj', 
+                       '_$s3VFX8VFXSceneC6update9deltaTimeySd_tFTq', '_$s3VFX8VFXSceneC7binding2of5namedAA10VFXBinding_pSgSS_SStFTj', 
                        '_$s3VFX8VFXSceneC7binding2of5namedAA10VFXBinding_pSgSS_SStFTq', 
                        '_$s3VFX8VFXSceneC7effectsSayAA9VFXEffectCGvgTj', '_$s3VFX8VFXSceneC7effectsSayAA9VFXEffectCGvgTq', 
                        '_$s3VFX8VFXSceneC7effectsSayAA9VFXEffectCGvpMV', '_$s3VFX8VFXSceneC7optionsA2C11LoadOptionsC_tcfC', 

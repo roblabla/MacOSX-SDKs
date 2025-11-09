@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BACA5CDA-5C34-39E6-98CE-77F7B5E5A6BC
+    value:           011B4901-098B-3F03-B4E4-9E931F4989BD
   - target:          x86_64-maccatalyst
-    value:           BACA5CDA-5C34-39E6-98CE-77F7B5E5A6BC
+    value:           011B4901-098B-3F03-B4E4-9E931F4989BD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           60652910-E57A-32DB-B921-DBEDAE5E9E94
+    value:           2BE5F20A-717D-3F17-90A9-07B3F9034FFB
   - target:          arm64e-maccatalyst
-    value:           60652910-E57A-32DB-B921-DBEDAE5E9E94
+    value:           2BE5F20A-717D-3F17-90A9-07B3F9034FFB
 install-name:    '/System/Library/PrivateFrameworks/ScreenReaderCore.framework/Versions/A/ScreenReaderCore'
 current-version: 390
 exports:

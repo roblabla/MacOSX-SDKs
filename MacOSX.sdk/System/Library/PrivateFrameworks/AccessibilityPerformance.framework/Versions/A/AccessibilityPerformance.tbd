@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AFEDF4B0-D4FF-3358-AE89-0F33C68650D8
+    value:           3ADC3B02-3CCC-3B4C-B670-DE78B832F654
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           87C3F130-CEEB-37BC-87CA-7D632B07691F
+    value:           0A8EE289-A5A3-3E0A-A9FC-1936F64F60D1
 install-name:    '/System/Library/PrivateFrameworks/AccessibilityPerformance.framework/Versions/A/AccessibilityPerformance'
 current-version: 0
 compatibility-version: 0

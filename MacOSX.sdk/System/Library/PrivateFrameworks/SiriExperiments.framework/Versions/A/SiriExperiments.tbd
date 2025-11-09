@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F4D37FB4-EAC9-37D7-8099-36B45D726F6A
+    value:           F4FFA827-FD81-3603-8DF4-A8E2FE5A2108
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1671F2D2-F4A6-30FD-B8FB-FAB31A7F3720
+    value:           89CB2ED6-AC2B-3BD3-94B0-B315DD2E17D7
 install-name:    '/System/Library/PrivateFrameworks/SiriExperiments.framework/Versions/A/SiriExperiments'
 current-version: 0
 compatibility-version: 0

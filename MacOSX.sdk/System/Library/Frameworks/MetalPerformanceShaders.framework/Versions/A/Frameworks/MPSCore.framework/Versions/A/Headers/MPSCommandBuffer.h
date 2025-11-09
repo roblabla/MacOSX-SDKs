@@ -161,6 +161,8 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(1
 
 /*!
  *  @abstract   Initializes a MPSCommandBuffer object with given MTLCommandBuffer.
+ *              Once we create this MPSCommandBuffer, any methods utilizing it could call commitAndContinue and so the users original commandBuffer may have been committed.
+ *              Please use the rootCommandBuffer method to get the current alive underlying MTLCommandBuffer.
  *  @result     A pointer to the newly initialized MPSCommandBuffer object.
  */
 +(__nonnull instancetype) commandBufferWithCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer;
@@ -174,6 +176,8 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(1
 
 /*!
  *  @abstract   Initializes an empty MPSCommandBuffer object with given MTLCommandBuffer.
+ *              Once we create this MPSCommandBuffer, any methods utilizing it could call commitAndContinue and so the users original commandBuffer may have been committed.
+ *              Please use the rootCommandBuffer method to get the current alive underlying MTLCommandBuffer.
  *  @result     A pointer to the newly initialized MPSCommandBuffer object.
  */
 -(nonnull instancetype) initWithCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer

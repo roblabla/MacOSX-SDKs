@@ -3,20 +3,20 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7EDD8C8E-7F79-3760-8D83-209E2DCD15C6
+    value:           981943B8-A071-36E5-8BC7-F90D7C6BDAB3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           65D679E4-7147-3F13-9716-AF1E4B36106A
+    value:           4C6A0714-28C4-33B6-9093-B91E704283F0
 install-name:    '/System/Library/PrivateFrameworks/JetEngine.framework/Versions/A/JetEngine'
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ AMPDesktopUI, AMSEngagementViewExtension, App Store, AppKing, 
-                       AppState, AppStateTests, AppStoreComponents, AppStoreComponentsDaemonTests, 
-                       AppStoreComponentsTests, AppStoreKit, AppStoreKitInternal, 
-                       AppStoreKitInternalMac, AppStoreKitInternalMacTests, AppStoreKitMac, 
-                       AppStoreKitMacTests, AppStoreKitTests, AppStoreOverlaysService, 
+    clients:         [ AMPDesktopUI, AMSEngagementViewExtension, AMSEngagementViewService, 
+                       App Store, AppKing, AppState, AppStateTests, AppStoreComponents, 
+                       AppStoreComponentsDaemonTests, AppStoreComponentsTests, AppStoreKit, 
+                       AppStoreKitInternal, AppStoreKitInternalMac, AppStoreKitInternalMacTests, 
+                       AppStoreKitMac, AppStoreKitMacTests, AppStoreKitTests, AppStoreOverlaysService, 
                        AppStoreOverlaysServiceTests, AppleMediaServicesUIDynamic, 
                        AppleMediaServicesUIDynamicService, AppleTV, CoreDynamicUIPlugin, 
                        GameCenterAccountsUIPlugin, GameCenterUI, GameCenterUICore, 
@@ -442,8 +442,18 @@ exports:
                        '_$s9JetEngine11LazyPromiseCMa', '_$s9JetEngine11LazyPromiseCMn', 
                        '_$s9JetEngine11LazyPromiseCMo', '_$s9JetEngine11LazyPromiseCMu', 
                        '_$s9JetEngine11LazyPromiseCfD', '_$s9JetEngine11LazyPromiseCfd', 
-                       '_$s9JetEngine11LazyPromiseCyxGAA6FutureAAMc', '_$s9JetEngine11MetricsDataV11shouldFlushSbvg', 
-                       '_$s9JetEngine11MetricsDataV11shouldFlushSbvpMV', '_$s9JetEngine11MetricsDataV13deserializing5usingAcA10JSONObjectV_AA11JSONContextVtKcfC', 
+                       '_$s9JetEngine11LazyPromiseCyxGAA6FutureAAMc', '_$s9JetEngine11MetricsDataV04makeC16PageRenderFields06timingC06fieldsSDySSypGAA020JSNetworkPerformanceC0V_AGtFZ', 
+                       '_$s9JetEngine11MetricsDataV04makec10MediaClickD08targetID0H4Type6fields13configurationACSS_SSSDySSypGAC13ConfigurationVtFZ', 
+                       '_$s9JetEngine11MetricsDataV04makec11ImpressionsD06fields13configuration23impressionsEventVersionACSDySSypG_AC13ConfigurationVSitFZ', 
+                       '_$s9JetEngine11MetricsDataV04makec4PageD06fields06timingC013configurationACSDySSypG_AA020JSNetworkPerformanceC0VAC13ConfigurationVtFZ', 
+                       '_$s9JetEngine11MetricsDataV04makec5ClickD08targetID0G4Type6fields13configurationACSS_SSSDySSypGAC13ConfigurationVtFZ', 
+                       '_$s9JetEngine11MetricsDataV04makec5MediaD06fields13configurationACSDySSypG_AC13ConfigurationVtFZ', 
+                       '_$s9JetEngine11MetricsDataV04makec6SearchD04term10targetType06actionI00J3URL6fields13configurationACSS_S3SSgSDySSypGAC13ConfigurationVtFZ', 
+                       '_$s9JetEngine11MetricsDataV04makec9BackClickD06fields13configurationACSDySSypG_AC13ConfigurationVtFZ', 
+                       '_$s9JetEngine11MetricsDataV11shouldFlushSbvg', '_$s9JetEngine11MetricsDataV11shouldFlushSbvpMV', 
+                       '_$s9JetEngine11MetricsDataV13ConfigurationV12defaultTopic0F15IncludingFields0f9ExcludingI011shouldFlushAESSSg_SDyAA0C9EventTypeVShyAA0C21FieldInclusionRequestVGGSDyALShyAA0co9ExclusionQ0VGGSbSDySSypGcSgtcfC', 
+                       '_$s9JetEngine11MetricsDataV13ConfigurationVMa', '_$s9JetEngine11MetricsDataV13ConfigurationVMn', 
+                       '_$s9JetEngine11MetricsDataV13ConfigurationVN', '_$s9JetEngine11MetricsDataV13deserializing5usingAcA10JSONObjectV_AA11JSONContextVtKcfC', 
                        '_$s9JetEngine11MetricsDataV15excludingFieldsShyAA0C21FieldExclusionRequestVGvM', 
                        '_$s9JetEngine11MetricsDataV15excludingFieldsShyAA0C21FieldExclusionRequestVGvg', 
                        '_$s9JetEngine11MetricsDataV15excludingFieldsShyAA0C21FieldExclusionRequestVGvpMV', 
@@ -1408,10 +1418,12 @@ exports:
                        '_$s9JetEngine18LintedMetricsEventV5IssueVAA17ExpressibleByJSONAAMc', 
                        '_$s9JetEngine18LintedMetricsEventV5IssueVAA17ExpressibleByJSONAAWP', 
                        '_$s9JetEngine18LintedMetricsEventV5IssueVMa', '_$s9JetEngine18LintedMetricsEventV5IssueVMn', 
-                       '_$s9JetEngine18LintedMetricsEventV5IssueVN', '_$s9JetEngine18LintedMetricsEventV6fields6issuesACSDySSypG_SayAC5IssueVGtcfC', 
+                       '_$s9JetEngine18LintedMetricsEventV5IssueVN', '_$s9JetEngine18LintedMetricsEventV5emptyACvgZ', 
+                       '_$s9JetEngine18LintedMetricsEventV6fields6issuesACSDySSypG_SayAC5IssueVGtcfC', 
                        '_$s9JetEngine18LintedMetricsEventV6fieldsSDySSypGvg', '_$s9JetEngine18LintedMetricsEventV6fieldsSDySSypGvpMV', 
                        '_$s9JetEngine18LintedMetricsEventV6issuesSayAC5IssueVGvg', 
                        '_$s9JetEngine18LintedMetricsEventV6issuesSayAC5IssueVGvpMV', 
+                       '_$s9JetEngine18LintedMetricsEventV7isEmptySbvg', '_$s9JetEngine18LintedMetricsEventV7isEmptySbvpMV', 
                        '_$s9JetEngine18LintedMetricsEventVAA17ExpressibleByJSONAAMc', 
                        '_$s9JetEngine18LintedMetricsEventVAA17ExpressibleByJSONAAWP', 
                        '_$s9JetEngine18LintedMetricsEventVMa', '_$s9JetEngine18LintedMetricsEventVMn', 
@@ -1651,14 +1663,12 @@ exports:
                        '_$s9JetEngine19SentryConfigurationV13eventRecorder11projectName5topic17javascriptVersionAcA012MetricsEventF0_p_S3StcfC', 
                        '_$s9JetEngine19SentryConfigurationV13eventRecorderAA012MetricsEventF0_pvg', 
                        '_$s9JetEngine19SentryConfigurationV13eventRecorderAA012MetricsEventF0_pvpMV', 
-                       '_$s9JetEngine19SentryConfigurationV15withEnvironmentyySSSgF', 
                        '_$s9JetEngine19SentryConfigurationV17javascriptVersionSSvg', 
                        '_$s9JetEngine19SentryConfigurationV17javascriptVersionSSvpMV', 
                        '_$s9JetEngine19SentryConfigurationV20defaultEventRecorder3bagAA07MetricsfG0_pAA3BagV_tFZ', 
                        '_$s9JetEngine19SentryConfigurationV4tagsSDyS2SGSgvM', '_$s9JetEngine19SentryConfigurationV4tagsSDyS2SGSgvg', 
                        '_$s9JetEngine19SentryConfigurationV4tagsSDyS2SGSgvpMV', '_$s9JetEngine19SentryConfigurationV4tagsSDyS2SGSgvs', 
                        '_$s9JetEngine19SentryConfigurationV5topicSSvg', '_$s9JetEngine19SentryConfigurationV5topicSSvpMV', 
-                       '_$s9JetEngine19SentryConfigurationV8withTagsyySDyS2SGSgF', 
                        '_$s9JetEngine19SentryConfigurationVMa', '_$s9JetEngine19SentryConfigurationVMn', 
                        '_$s9JetEngine19SentryConfigurationVN', '_$s9JetEngine19TransientStateStoreC06removeD02at11recursivelyyAA0D4PathVyxG_SbtF', 
                        '_$s9JetEngine19TransientStateStoreC06updateD02at2toyAA0D4PathVyxG_AA11AnyStateful_ptF', 
@@ -1977,7 +1987,16 @@ exports:
                        '_$s9JetEngine24ImpressionsTrackerFormatON', '_$s9JetEngine24ImpressionsTrackerFormatOSHAAMc', 
                        '_$s9JetEngine24ImpressionsTrackerFormatOSQAAMc', '_$s9JetEngine24InvalidFileEncodingErrorVMa', 
                        '_$s9JetEngine24InvalidFileEncodingErrorVMn', '_$s9JetEngine24InvalidFileEncodingErrorVN', 
-                       '_$s9JetEngine24InvalidFileEncodingErrorVs0F0AAMc', '_$s9JetEngine25EmptyActionImplementationV7perform_8asPartOfAA7PromiseCyAA0D7OutcomeOGAA0cD0V_xtF', 
+                       '_$s9JetEngine24InvalidFileEncodingErrorVs0F0AAMc', '_$s9JetEngine24PageHistoryFieldProviderC16addMetricsFields4into5usingyAA0hI7Builder_pz_AA0hI7ContextVtKF', 
+                       '_$s9JetEngine24PageHistoryFieldProviderC8categoryAA013MetricsFieldsF8CategoryOvg', 
+                       '_$s9JetEngine24PageHistoryFieldProviderC8categoryAA013MetricsFieldsF8CategoryOvpMV', 
+                       '_$s9JetEngine24PageHistoryFieldProviderCAA013MetricsFieldsF0AAMc', 
+                       '_$s9JetEngine24PageHistoryFieldProviderCAA013MetricsFieldsF0AAWP', 
+                       '_$s9JetEngine24PageHistoryFieldProviderCMa', '_$s9JetEngine24PageHistoryFieldProviderCMm', 
+                       '_$s9JetEngine24PageHistoryFieldProviderCMn', '_$s9JetEngine24PageHistoryFieldProviderCMo', 
+                       '_$s9JetEngine24PageHistoryFieldProviderCMu', '_$s9JetEngine24PageHistoryFieldProviderCN', 
+                       '_$s9JetEngine24PageHistoryFieldProviderCfD', '_$s9JetEngine24PageHistoryFieldProviderCfd', 
+                       '_$s9JetEngine25EmptyActionImplementationV7perform_8asPartOfAA7PromiseCyAA0D7OutcomeOGAA0cD0V_xtF', 
                        '_$s9JetEngine25EmptyActionImplementationVACyxGycfC', '_$s9JetEngine25EmptyActionImplementationVMa', 
                        '_$s9JetEngine25EmptyActionImplementationVMn', '_$s9JetEngine25EmptyActionImplementationVyxGAA0dE0AAMc', 
                        '_$s9JetEngine25JSPromiseLogExecutorErroryyF', '_$s9JetEngine25PackageSerializationErrorO10Foundation09LocalizedE0AAMc', 
@@ -2132,6 +2151,7 @@ exports:
                        '_$s9JetEngine28LanguagesMetricFieldProviderVMn', '_$s9JetEngine28LanguagesMetricFieldProviderVN', 
                        '_$s9JetEngine28MetricsFieldExclusionRequestV03amsC2IDACvgZ', 
                        '_$s9JetEngine28MetricsFieldExclusionRequestV10systemInfoACvgZ', 
+                       '_$s9JetEngine28MetricsFieldExclusionRequestV11pageHistoryACvgZ', 
                        '_$s9JetEngine28MetricsFieldExclusionRequestV13deserializing5usingAcA10JSONObjectV_AA11JSONContextVtKcfC', 
                        '_$s9JetEngine28MetricsFieldExclusionRequestV3appACvgZ', '_$s9JetEngine28MetricsFieldExclusionRequestV6screenACvgZ', 
                        '_$s9JetEngine28MetricsFieldExclusionRequestV8capacityACvgZ', 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D9DB5ABF-BEA6-3DE8-BEEB-0382456B98E6
+    value:           2010A04B-AB27-3BEC-9F83-6DE35DA8C19F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           11B1262C-75A2-3DB9-B855-3C442E3CB288
+    value:           F2123A7C-CE3F-3987-BE38-FF0819584A9F
 install-name:    '/System/Library/PrivateFrameworks/oncrpc.framework/Versions/A/oncrpc'
 current-version: 61
 exports:

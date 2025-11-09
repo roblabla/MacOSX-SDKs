@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3DDC1D58-C00F-34CF-B705-6F5C3EFDC6A7
+    value:           D100D2AE-1FAA-3440-B468-FC8530A59EE0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7F6498C2-D8FC-3A23-872F-E4B89B5B41BA
+    value:           EE2F59F2-8A16-3FFA-8710-DF9B7F974256
 install-name:    '/System/Library/PrivateFrameworks/TVRemoteCore.framework/Versions/A/TVRemoteCore'
-current-version: 190.0.9
+current-version: 190.20.1
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _NSStringFromRMSMessageType, _NSStringFromRMSResponseCode, 
@@ -17,7 +17,7 @@ exports:
                        _TVRCButtonTypeDescription, _TVRCConnectionInvalidatedNotification, 
                        _TVRCDeviceConnectionTypeDescription, _TVRCDeviceModelTypeAirplaySetTopBox, 
                        _TVRCDeviceModelTypeAirplayStick, _TVRCDeviceModelTypeAirplayTelevision, 
-                       _TVRCErrorDomain, _TVRCErrorMediaRemotePairingLockoutDelayKey, 
+                       _TVRCDeviceNameKey, _TVRCErrorDomain, _TVRCErrorMediaRemotePairingLockoutDelayKey, 
                        _TVRCFetchLaunchableApplicationsEvent, _TVRCFetchUserAccountsEvent, 
                        _TVRCMakeError, _TVRCMatchPointServiceAddedNotification, _TVRCMatchPointServiceNameChangedNotification, 
                        _TVRCMatchPointServiceRemovedNotification, _TVRCMediaRemoteIDKey, 

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           C6ABF829-E021-338A-AAAC-7BDD599A7610
+    value:           EE4ACEF6-B89F-3125-BE38-00EECF4DD1C0
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           015C312E-EF27-3235-B930-CCB1A18C8E27
+    value:           A5F1C6D6-7EE3-3BC6-A705-A4A190CA1748
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftHomeKit.dylib'
-current-version: 799
+current-version: 807.3.22
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]

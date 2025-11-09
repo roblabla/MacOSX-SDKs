@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DEF6C011-9B42-351F-837D-E84B57DD97F9
+    value:           F1869540-C8D2-336B-A707-850B32FB762A
   - target:          x86_64-maccatalyst
-    value:           DEF6C011-9B42-351F-837D-E84B57DD97F9
+    value:           F1869540-C8D2-336B-A707-850B32FB762A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           86DD92F7-5FC0-38B5-B461-5493E003EE97
+    value:           CBB93201-F479-3630-9374-72E37181A816
   - target:          arm64e-maccatalyst
-    value:           86DD92F7-5FC0-38B5-B461-5493E003EE97
+    value:           CBB93201-F479-3630-9374-72E37181A816
 install-name:    '/System/Library/PrivateFrameworks/AvatarPersistence.framework/Versions/A/AvatarPersistence'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -30,8 +30,9 @@ exports:
                        _AVTAvatarUIMultipleErrorsKey, _AVTCoreDataPersistentStoreTransactionAuthorAvatarUI, 
                        _AVTDBFilename, _AVTDefaultFileProtectionDataWritingOptions, 
                        _AVTDefaultFileProtectionType, _AVTInternalSettingsBundleIDStaryu, 
-                       _AVTIsPersistentChangeOfInterest, _AVTRecentStickersChangedExternallyNotification, 
-                       _AVTSBIconVisibility, _AVTTypeMismatchExceptionName, _AVTUIAdaptativeFrameRate, 
+                       _AVTIsPersistentChangeOfInterest, _AVTIsRunningAsSetupUser, 
+                       _AVTRecentStickersChangedExternallyNotification, _AVTSBIconVisibility, 
+                       _AVTTypeMismatchExceptionName, _AVTUIAdaptativeFrameRate, 
                        _AVTUIAlwaysShowPaddleView, _AVTUIAlwaysShowPaddleView_once, 
                        _AVTUIAlwaysShowRecentStickersSplashScreen, _AVTUIAlwaysShowRecentStickersSplashScreen_once, 
                        _AVTUIAlwaysShowSplashScreen, _AVTUIAlwaysShowSplashScreen_once, 
@@ -144,7 +145,7 @@ exports:
                        AVTPushNotificationsConnectionFactory, AVTPushNotificationsSupport, 
                        AVTSerializedAvatarRecord, AVTSideCoreDataStoreMigratableSource, 
                        AVTStickerChangeObserver, AVTStickerFetchRequest, AVTStickerRecord, 
-                       AVTStickerUserDefaultsBackend, AVTStoreBackendMigrator, AVTStubbedStoreBackend, 
-                       AVTSyncSchedulingAuthority, AVTUILogger, _AVTCoreDataPersistentStoreLocalConfiguration, 
-                       _AVTCoreDataPersistentStoreRemoteConfiguration ]
+                       AVTStickerUserDefaultsBackend, AVTStoreBackendMigrator, AVTStoreSetupUserRecordImporter, 
+                       AVTStubbedStoreBackend, AVTSyncSchedulingAuthority, AVTUILogger, 
+                       _AVTCoreDataPersistentStoreLocalConfiguration, _AVTCoreDataPersistentStoreRemoteConfiguration ]
 ...

@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           29246B55-E9B8-3E19-A5AB-1151CD6431EC
+    value:           F179210A-AFA5-3D27-8F90-C95848B4A2AB
   - target:          x86_64-maccatalyst
-    value:           29246B55-E9B8-3E19-A5AB-1151CD6431EC
+    value:           F179210A-AFA5-3D27-8F90-C95848B4A2AB
   - target:          x86_64h-macos
-    value:           1E3807F1-C45B-329F-AB96-F73C1164C687
+    value:           8B453E5D-0E60-39C6-B993-F35A8354A182
   - target:          x86_64h-maccatalyst
-    value:           1E3807F1-C45B-329F-AB96-F73C1164C687
+    value:           8B453E5D-0E60-39C6-B993-F35A8354A182
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DF3BA356-179B-3695-B219-059D062EDEE5
+    value:           9BA37C3A-5D12-3648-9ED9-058AF455F6A1
   - target:          arm64e-maccatalyst
-    value:           DF3BA356-179B-3695-B219-059D062EDEE5
+    value:           9BA37C3A-5D12-3648-9ED9-058AF455F6A1
 install-name:    '/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO'
 exports:
   - targets:         [ x86_64-macos, x86_64h-macos, x86_64-maccatalyst, x86_64h-maccatalyst ]
     symbols:         [ _CGImageCreateByMatchingToDisplay ]
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CGAnimateImageAtURLWithBlock, _CGAnimateImageDataWithBlock, 
                        _CGCopyBasicPropertiesOfImageAtPath, _CGImageCopyFileWithGPSInformation, 
@@ -531,7 +531,7 @@ exports:
                        _kImageIOInfoHeader_skipLabFixup, _kImageIOInfoHeader_supportsMultipleResolutions, 
                        _kImageIOInfoHeader_usesImageAndMask, _kIsAdobeRGB, _kIsNotICC, 
                        _kIsSRGB, _kIsUnknownICC ]
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, arm64-macos ]
     symbols:         [ '$ld$install_name$os10.4$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.5$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.6$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 

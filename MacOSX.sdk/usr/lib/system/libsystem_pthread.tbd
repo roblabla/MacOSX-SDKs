@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           64E69AF9-3964-396D-AA39-95B86BF68F55
+    value:           6C7561B4-4B92-3F45-921E-ABE669299844
   - target:          x86_64-maccatalyst
-    value:           64E69AF9-3964-396D-AA39-95B86BF68F55
+    value:           6C7561B4-4B92-3F45-921E-ABE669299844
   - target:          arm64-macos
-    value:           E97E7EB5-7CB5-314E-A9FF-894F5D8FA632
+    value:           0C35CA59-6C83-3758-966F-C69972E2CEE8
   - target:          arm64-maccatalyst
-    value:           E97E7EB5-7CB5-314E-A9FF-894F5D8FA632
+    value:           0C35CA59-6C83-3758-966F-C69972E2CEE8
   - target:          arm64e-macos
-    value:           FABC5FCE-C7A9-3DC8-8405-8ACF6F58BB9B
+    value:           ED328B18-EEEF-3B15-8858-798B19B0C2CD
   - target:          arm64e-maccatalyst
-    value:           FABC5FCE-C7A9-3DC8-8405-8ACF6F58BB9B
+    value:           ED328B18-EEEF-3B15-8858-798B19B0C2CD
 install-name:    '/usr/lib/system/libsystem_pthread.dylib'
-current-version: 485.0.2
+current-version: 485.60.2
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -24,8 +24,8 @@ parent-umbrella:
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ __pthread_is_threaded, _cthread_yield ]
-  - targets:         [ arm64-macos, x86_64-macos, arm64e-macos, x86_64-maccatalyst, 
+    symbols:         [ __pthread_is_threaded, _cthread_yield, _pthread_prefer_alternate_amx_self ]
+  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos, x86_64-maccatalyst, 
                        arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ ____chkstk_darwin, ___is_threaded, ___pthread_init, ___pthread_late_init, 
                        ___pthread_workqueue_setkill, ___unix_conforming, __pthread_atfork_child, 
@@ -47,7 +47,8 @@ exports:
                        __pthread_workqueue_override_reset, __pthread_workqueue_override_start_direct, 
                        __pthread_workqueue_override_start_direct_check_owner, __pthread_workqueue_set_event_manager_priority, 
                        __pthread_workqueue_should_narrow, __pthread_workqueue_supported, 
-                       __pthread_wqthread, _posix_spawnattr_get_qos_class_np, _posix_spawnattr_set_qos_class_np, 
+                       __pthread_wqthread, __pthread_yield_to_enqueuer_4dispatch, 
+                       _posix_spawnattr_get_qos_class_np, _posix_spawnattr_set_qos_class_np, 
                        _pthread_atfork, _pthread_attr_destroy, _pthread_attr_get_qos_class_np, 
                        _pthread_attr_getdetachstate, _pthread_attr_getguardsize, 
                        _pthread_attr_getinheritsched, _pthread_attr_getschedparam, 
@@ -74,21 +75,21 @@ exports:
                        _pthread_getspecific, _pthread_install_workgroup_functions_np, 
                        _pthread_introspection_getspecific_np, _pthread_introspection_hook_install, 
                        _pthread_introspection_setspecific_np, _pthread_is_threaded_np, 
-                       _pthread_jit_write_protect_np, _pthread_jit_write_protect_supported_np, 
-                       _pthread_jit_write_with_callback_np, _pthread_join, '_pthread_join$NOCANCEL', 
-                       _pthread_key_create, _pthread_key_delete, _pthread_key_init_np, 
-                       _pthread_kill, _pthread_layout_offsets, _pthread_mach_thread_np, 
-                       _pthread_main_np, _pthread_main_thread_np, _pthread_mutex_destroy, 
-                       _pthread_mutex_getprioceiling, _pthread_mutex_init, _pthread_mutex_lock, 
-                       _pthread_mutex_setprioceiling, _pthread_mutex_trylock, _pthread_mutex_unlock, 
-                       _pthread_mutexattr_destroy, _pthread_mutexattr_getpolicy_np, 
-                       _pthread_mutexattr_getprioceiling, _pthread_mutexattr_getprotocol, 
-                       _pthread_mutexattr_getpshared, _pthread_mutexattr_gettype, 
-                       _pthread_mutexattr_init, _pthread_mutexattr_setpolicy_np, 
+                       _pthread_jit_write_freeze_callbacks_np, _pthread_jit_write_protect_np, 
+                       _pthread_jit_write_protect_supported_np, _pthread_jit_write_with_callback_np, 
+                       _pthread_join, '_pthread_join$NOCANCEL', _pthread_key_create, 
+                       _pthread_key_delete, _pthread_key_init_np, _pthread_kill, 
+                       _pthread_layout_offsets, _pthread_mach_thread_np, _pthread_main_np, 
+                       _pthread_main_thread_np, _pthread_mutex_destroy, _pthread_mutex_getprioceiling, 
+                       _pthread_mutex_init, _pthread_mutex_lock, _pthread_mutex_setprioceiling, 
+                       _pthread_mutex_trylock, _pthread_mutex_unlock, _pthread_mutexattr_destroy, 
+                       _pthread_mutexattr_getpolicy_np, _pthread_mutexattr_getprioceiling, 
+                       _pthread_mutexattr_getprotocol, _pthread_mutexattr_getpshared, 
+                       _pthread_mutexattr_gettype, _pthread_mutexattr_init, _pthread_mutexattr_setpolicy_np, 
                        _pthread_mutexattr_setprioceiling, _pthread_mutexattr_setprotocol, 
                        _pthread_mutexattr_setpshared, _pthread_mutexattr_settype, 
                        _pthread_once, _pthread_override_qos_class_end_np, _pthread_override_qos_class_start_np, 
-                       _pthread_prefer_alternate_amx_self, _pthread_qos_max_parallelism, 
+                       _pthread_prefer_alternate_cluster_self, _pthread_qos_max_parallelism, 
                        _pthread_rwlock_destroy, _pthread_rwlock_init, _pthread_rwlock_rdlock, 
                        _pthread_rwlock_tryrdlock, _pthread_rwlock_trywrlock, _pthread_rwlock_unlock, 
                        _pthread_rwlock_wrlock, _pthread_rwlockattr_destroy, _pthread_rwlockattr_getpshared, 

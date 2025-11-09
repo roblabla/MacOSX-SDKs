@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           172148E0-3B21-3E22-B9D5-D2D614CF2A23
+    value:           8E9E0B65-D1A7-3025-9488-C7C54634B681
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DEF3A6A0-15B0-3CC2-8CB2-FBCA2F476357
+    value:           961B5695-703B-3B1C-B0B3-BFBDAA14B019
 install-name:    '/System/Library/PrivateFrameworks/ProactiveHarvesting.framework/Versions/A/ProactiveHarvesting'
-current-version: 1150
+current-version: 1153.10
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ CoreSuggestions, CoreSuggestionsInternals, CoreSuggestionsML, 
@@ -77,8 +77,8 @@ exports:
                        HVConsumerReply, HVConsumerState, HVConsumptionContext, HVContentAdmission, 
                        HVContentAdmissionGuardedData, HVContentAdmissionKVOObserver, 
                        HVContentState, HVDataSourceContentState, HVDonationReceiver, 
-                       HVEligibilityCheckResult, HVHarvestEligibility, HVInteraction, 
-                       HVNotifications, HVPBContentState, HVPBContentStateEntry, 
+                       HVEligibilityCheckResult, HVFileErrorCode, HVHarvestEligibility, 
+                       HVInteraction, HVNotifications, HVPBContentState, HVPBContentStateEntry, 
                        HVPBDataSourceContentState, HVPaths, HVPathsBase, HVPowerBudget, 
                        HVPowerBudgetThrottlingState, HVProactiveHarvestingSystem, 
                        HVQueue, HVQueueGuardedData, HVQueues, HVQueuesGuardedData, 

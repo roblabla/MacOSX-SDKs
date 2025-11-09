@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6B512BEB-EFD7-31B8-ADE9-A2D33D34943C
+    value:           BB2A7D8F-4F20-3196-91B3-A600364D84CE
   - target:          x86_64-maccatalyst
-    value:           6B512BEB-EFD7-31B8-ADE9-A2D33D34943C
+    value:           BB2A7D8F-4F20-3196-91B3-A600364D84CE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           10756BEC-BB19-378A-BBBF-92FA7D807DB9
+    value:           D9DED868-6035-399C-B773-63022C6D4925
   - target:          arm64e-maccatalyst
-    value:           10756BEC-BB19-378A-BBBF-92FA7D807DB9
+    value:           D9DED868-6035-399C-B773-63022C6D4925
 install-name:    '/usr/lib/swift/libswiftUniformTypeIdentifiers.dylib'
-current-version: 717
+current-version: 722
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '_$s10Foundation17URLResourceValuesV22UniformTypeIdentifiersE07contentE0AD6UTTypeVSgvg', 
                        '_$s10Foundation17URLResourceValuesV22UniformTypeIdentifiersE07contentE0AD6UTTypeVSgvpMV', 
                        '_$s10Foundation3URLV22UniformTypeIdentifiersE19appendPathComponent_12conformingToySS_AD6UTTypeVtF', 

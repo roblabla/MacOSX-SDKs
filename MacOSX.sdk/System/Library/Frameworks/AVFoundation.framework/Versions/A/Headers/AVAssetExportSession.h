@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2020 Apple Inc. All rights reserved.
+	Copyright 2010-2021 Apple Inc. All rights reserved.
 
 */
 
@@ -53,6 +53,7 @@ AVF_EXPORT NSString *const AVAssetExportPresetHEVC1920x1080				API_AVAILABLE(mac
 AVF_EXPORT NSString *const AVAssetExportPresetHEVC1920x1080WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 AVF_EXPORT NSString *const AVAssetExportPresetHEVC3840x2160				API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 AVF_EXPORT NSString *const AVAssetExportPresetHEVC3840x2160WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSString *const AVAssetExportPresetHEVC7680x4320				API_AVAILABLE(macos(12.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*  This export option will produce an audio-only .m4a file with appropriate iTunes gapless playback data */
 AVF_EXPORT NSString *const AVAssetExportPresetAppleM4A			API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
@@ -62,15 +63,11 @@ AVF_EXPORT NSString *const AVAssetExportPresetAppleM4A			API_AVAILABLE(macos(10.
    This option is not included in the arrays returned by -allExportPresets and -exportPresetsCompatibleWithAsset. */
 AVF_EXPORT NSString *const AVAssetExportPresetPassthrough		API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
-
-#if TARGET_OS_OSX
 /* This export option will produce a QuickTime movie with Apple ProRes 422 video and LPCM audio. */
-AVF_EXPORT NSString *const AVAssetExportPresetAppleProRes422LPCM	API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, tvos, watchos);
+AVF_EXPORT NSString *const AVAssetExportPresetAppleProRes422LPCM	API_AVAILABLE(macos(10.7), ios(15.0)) API_UNAVAILABLE(tvos, watchos);
 
 /* This export option will produce a QuickTime movie with Apple ProRes 4444 video and LPCM audio. */
-AVF_EXPORT NSString *const AVAssetExportPresetAppleProRes4444LPCM  API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos);
-#endif // TARGET_OS_OSX
-
+AVF_EXPORT NSString *const AVAssetExportPresetAppleProRes4444LPCM  API_AVAILABLE(macos(10.15), ios(15.0)) API_UNAVAILABLE(tvos, watchos);
 
 #if TARGET_OS_OSX
 

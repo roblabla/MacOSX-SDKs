@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ECA6D592-DBAE-38B9-8E10-03808BF3DFDA
+    value:           65985AE1-720C-3C87-848A-2611DCE555B7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7A92863D-7F18-3FB3-870D-8A6581A41583
+    value:           57DFCAF9-F2A4-3495-8AAF-84C7F36BF65F
 install-name:    '/System/Library/PrivateFrameworks/SpotlightDaemon.framework/Versions/A/SpotlightDaemon'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -16,18 +16,18 @@ exports:
                        _SDTransactionCreate, _SDTransactionDone, _SISynchedOpWithBlock, 
                        _SISynchedOpWithBlockPropagatingPriority, _SpotlightDaemonVersionNumber, 
                        _SpotlightDaemonVersionString, _blockRoutine, _delayedOpBlockCompleteCallback, 
-                       _kSecEntitlementCSDisableQuota, _sClintServiceDisabledBitMap, 
+                       _gIsSystemOnBattery, _kSecEntitlementCSDisableQuota, _sClintServiceDisabledBitMap, 
                        _sSpotlightSenderState, _startAgents, _startAllAgents, _startIndexAgent, 
                        _syncFinished, _unpauseCallback ]
-    objc-classes:    [ CSIndexAgent, CSIndexClientConnection, CSIndexClientConnectionKey, 
+    objc-classes:    [ CSImportInfo, CSIndexAgent, CSIndexClientConnection, CSIndexClientConnectionKey, 
                        CSRecieverState, CSSearchAgent, CSSearchClientConnection, 
                        CSSearchClientConnectionKey, MDAgent, MDSearchableIndexService, 
                        SDConnectionConfiguration, SDDirtyIdleTimer, SDEventMonitor, 
                        SDLockHandler, SDMigrationMonitor, SDSignalHandler, SDTrace, 
-                       SDTraceItem, SPConcreteCoreSpotlightIndexer, SPCoreSpotlightContactsUpdater, 
-                       SPCoreSpotlightExtensionsTask, SPCoreSpotlightIndexer, SPCoreSpotlightIndexerTask, 
-                       SPCoreSpotlightLiveQueryTask, SPCoreSpotlightTask, SPQueryJob, 
-                       SPQueryResultsQueue, SPUAProgressItem, SpotlightDaemonClientConnection, 
+                       SDTraceItem, SDXPCClientConnection, SPConcreteCoreSpotlightIndexer, 
+                       SPCoreSpotlightContactsUpdater, SPCoreSpotlightExtensionsTask, 
+                       SPCoreSpotlightIndexer, SPCoreSpotlightIndexerTask, SPCoreSpotlightLiveQueryTask, 
+                       SPCoreSpotlightTask, SPQueryJob, SPQueryResultsQueue, SPUAProgressItem, 
                        SpotlightDaemonServer, SpotlightReceiverConnection, SpotlightSender, 
                        SpotlightSenderState, _SPBucketSet ]
     objc-ivars:      [ SDTrace._items, SPConcreteCoreSpotlightIndexer._cancelPtr, 

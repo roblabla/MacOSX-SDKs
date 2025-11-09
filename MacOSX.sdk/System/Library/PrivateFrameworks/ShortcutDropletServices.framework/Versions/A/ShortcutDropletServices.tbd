@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6A90079B-2AD3-37C1-B83A-BDF8EF471C31
+    value:           F19B026A-B044-32F1-AF7D-72D20DBE6A38
   - target:          arm64-macos
-    value:           A86A627F-27B7-3BF9-A4C1-C6C5A3B46C46
+    value:           242B1DAF-C69A-39E8-A158-0C44E8AAE1E8
   - target:          arm64e-macos
-    value:           20825DFD-6406-3979-9AB4-B53E9662F18C
+    value:           37AA8B10-D1DB-3A05-8DB7-043403E27055
 install-name:    '/System/Library/PrivateFrameworks/ShortcutDropletServices.framework/Versions/A/ShortcutDropletServices'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ShortcutDropletServicesVersionNumber, _ShortcutDropletServicesVersionString, 
-                       _WFShortcutDropletServicesMain ]
+                       _WFLogCategoryDroplet, _WFShortcutDropletServicesMain, _getWFDropletLogObject ]
     objc-classes:    [ WFShortcutDropletAppDelegate ]
 ...

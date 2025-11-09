@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ADD2A418-3122-3454-8D93-B2380EA159B8
+    value:           60B7015F-5A86-3CD1-BD07-ADBEDB7F36D9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           884BB905-0D70-31CD-B585-AA8757CDA31C
+    value:           BC441F75-EE01-3595-B945-243E35532F1E
 install-name:    '/System/Library/Frameworks/DiscRecording.framework/Versions/A/DiscRecording'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

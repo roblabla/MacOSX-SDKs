@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AB6E1C6A-2166-3ACC-8A5B-EFD68BFD81D8
+    value:           9F5CB750-7DAE-3A52-B67F-6FB50C5C2EFE
   - target:          x86_64-maccatalyst
-    value:           AB6E1C6A-2166-3ACC-8A5B-EFD68BFD81D8
+    value:           9F5CB750-7DAE-3A52-B67F-6FB50C5C2EFE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6FB9CE2D-C471-37DC-A564-FB26C8A436BA
+    value:           2F88EAA1-F002-328D-BE3F-B73585BFB4F0
   - target:          arm64e-maccatalyst
-    value:           6FB9CE2D-C471-37DC-A564-FB26C8A436BA
+    value:           2F88EAA1-F002-328D-BE3F-B73585BFB4F0
 install-name:    '/System/Library/PrivateFrameworks/GameCenterUICore.framework/Versions/A/GameCenterUICore'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

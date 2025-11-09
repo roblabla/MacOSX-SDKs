@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
-// swift-module-flags: -target x86_64-apple-macos12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-concurrency -module-name MusicKit
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-module-flags: -target x86_64-apple-macos12.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-concurrency -module-name MusicKit
 import Combine
 import CoreGraphics
 import Foundation
@@ -150,9 +150,6 @@ extension MusicKit.MusicPlayer {
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer {
   public enum RepeatMode {
-    @available(iOS, introduced: 15.0, deprecated: 15.0, message: "`RepeatMode.userPreference` was replaced by a `nil` value in `state.repeatMode` and will be removed shortly.")
-    @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "`RepeatMode.userPreference` was replaced by a `nil` value in `state.repeatMode` and will be removed shortly.")
-    case userPreference
     case none
     case one
     case all
@@ -168,14 +165,8 @@ extension MusicKit.MusicPlayer {
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer {
   public enum ShuffleMode {
-    @available(iOS, introduced: 15.0, deprecated: 15.0, message: "`ShuffleMode.userPreference` was replaced by a `nil` value in `state.shuffleMode` and will be removed shortly.")
-    @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "`ShuffleMode.userPreference` was replaced by a `nil` value in `state.shuffleMode` and will be removed shortly.")
-    case userPreference
     case off
     case songs
-    @available(iOS, introduced: 15.0, deprecated: 15.0, message: "`ShuffleMode.albums` is no longer supported and will be removed shortly.")
-    @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "`ShuffleMode.albums` is no longer supported and will be removed shortly.")
-    case albums
     public static func == (a: MusicKit.MusicPlayer.ShuffleMode, b: MusicKit.MusicPlayer.ShuffleMode) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -346,30 +337,6 @@ public enum ContentRating : Swift.Codable, Swift.Equatable, Swift.Hashable {
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public protocol MusicItem {
   var id: MusicKit.MusicItemID { get }
-}
-@available(iOS, introduced: 15.0, deprecated: 15.0, message: "Observing the `playbackStatus` using `MusicPlayer.PropertyUpdates` was replaced with observing a music player's `state`, and will be removed shortly.")
-@available(macOS, unavailable)
-@available(tvOS, introduced: 15.0, deprecated: 15.0, message: "Observing the `playbackStatus` using `MusicPlayer.PropertyUpdates` was replaced with observing a music player's `state`, and will be removed shortly.")
-@available(watchOS, unavailable)
-extension MusicKit.MusicPlayer {
-  
-  #if compiler(>=5.3) && $RethrowsProtocol
-  public struct PropertyUpdates<Value> : _Concurrency.AsyncSequence {
-    @_hasMissingDesignatedInitializers public class Iterator : _Concurrency.AsyncIteratorProtocol {
-      @objc deinit
-      
-      #if compiler(>=5.3) && $AsyncAwait
-      public func next() async -> Value?
-      #endif
-
-      public typealias Element = Value
-    }
-    public typealias Element = Value
-    public func makeAsyncIterator() -> MusicKit.MusicPlayer.PropertyUpdates<Value>.Iterator
-    public typealias AsyncIterator = MusicKit.MusicPlayer.PropertyUpdates<Value>.Iterator
-  }
-  #endif
-
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct MusicAuthorization {
@@ -585,34 +552,6 @@ extension MusicKit.MusicAuthorization.Status : Swift.CustomStringConvertible {
     get
   }
 }
-@available(iOS, introduced: 15.0, deprecated: 15.0, message: "Observing the `playbackStatus` using `ObservableMusicPlayer` was replaced with observing a music player's `state`, and will be removed shortly.")
-@available(macOS, unavailable)
-@available(tvOS, introduced: 15.0, deprecated: 15.0, message: "Observing the `playbackStatus` using `ObservableMusicPlayer` was replaced with observing a music player's `state`, and will be removed shortly.")
-@available(watchOS, unavailable)
-public protocol ObservableMusicPlayer {
-  var playbackStatus: MusicKit.MusicPlayer.PlaybackStatus { get }
-  
-  #if compiler(>=5.3) && $RethrowsProtocol
-  func updates<Value>(for keyPath: Swift.KeyPath<MusicKit.ObservableMusicPlayer, Value>) -> MusicKit.MusicPlayer.PropertyUpdates<Value>
-  #endif
-
-}
-@available(iOS, introduced: 15.0, deprecated: 15.0, message: "`updates(for: \\.playbackStatus)` was replaced with observing a music player's `state`, and will be removed shortly.")
-@available(macOS, unavailable)
-@available(tvOS, introduced: 15.0, deprecated: 15.0, message: "`updates(for: \\.playbackStatus)` was replaced with observing a music player's `state`, and will be removed shortly.")
-@available(watchOS, unavailable)
-extension MusicKit.MusicPlayer : MusicKit.ObservableMusicPlayer {
-  
-  #if compiler(>=5.3) && $RethrowsProtocol
-  public func updates(for keyPath: Swift.KeyPath<MusicKit.ObservableMusicPlayer, MusicKit.MusicPlayer.PlaybackStatus>) -> MusicKit.MusicPlayer.PropertyUpdates<MusicKit.MusicPlayer.PlaybackStatus>
-  #endif
-
-  
-  #if compiler(>=5.3) && $RethrowsProtocol
-  public func updates<Value>(for keyPath: Swift.KeyPath<MusicKit.ObservableMusicPlayer, Value>) -> MusicKit.MusicPlayer.PropertyUpdates<Value>
-  #endif
-
-}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct MusicDataResponse : Swift.Equatable, Swift.Hashable {
   public let data: Foundation.Data
@@ -684,7 +623,7 @@ public enum Track : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.I
   public var artwork: MusicKit.Artwork? {
     get
   }
-  public var albumName: Swift.String? {
+  public var albumTitle: Swift.String? {
     get
   }
   public var artistName: Swift.String {
@@ -887,30 +826,7 @@ extension MusicKit.PreviewAsset : Swift.CustomStringConvertible, Swift.CustomDeb
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 public class MusicPlayer {
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "Set the queue property of `ApplicationMusicPlayer` or `SystemMusicPlayer` instead; `setQueue` will be removed shortly.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "Set the queue property of `ApplicationMusicPlayer` or `SystemMusicPlayer` instead; `setQueue` will be removed shortly.")
-  public func setQueue<PlayableMusicItemType>(with musicItem: PlayableMusicItemType) where PlayableMusicItemType : MusicKit.PlayableMusicItem
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "Set the queue property of `ApplicationMusicPlayer` or `SystemMusicPlayer` instead; `setQueue` will be removed shortly.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "Set the queue property of `ApplicationMusicPlayer` or `SystemMusicPlayer` instead; `setQueue` will be removed shortly.")
-  public func setQueue<PlayableMusicItemCollectionType>(with musicItems: PlayableMusicItemCollectionType, startingAt startMusicItem: PlayableMusicItemCollectionType.Element? = nil) where PlayableMusicItemCollectionType : Swift.RandomAccessCollection, PlayableMusicItemCollectionType.Element : MusicKit.PlayableMusicItem
   final public let state: MusicKit.MusicPlayer.State
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "`playbackStatus` was replaced by `state.playbackStatus` and will be removed shortly.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "`playbackStatus` was replaced by `state.playbackStatus` and will be removed shortly.")
-  public var playbackStatus: MusicKit.MusicPlayer.PlaybackStatus {
-    get
-  }
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "`repeatMode` was replaced by `state.repeatMode` and will be removed shortly.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "`repeatMode` was replaced by `state.repeatMode` and will be removed shortly.")
-  public var repeatMode: MusicKit.MusicPlayer.RepeatMode {
-    get
-    set
-  }
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "`shuffleMode` was replaced by `state.shuffleMode` and will be removed shortly.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "`shuffleMode` was replaced by `state.shuffleMode` and will be removed shortly.")
-  public var shuffleMode: MusicKit.MusicPlayer.ShuffleMode {
-    get
-    set
-  }
   public var isPreparedToPlay: Swift.Bool {
     get
   }
@@ -930,18 +846,6 @@ public class MusicPlayer {
     get
     set
   }
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "`currentPlaybackTime` was replaced by `playbackTime` and will be removed shortly.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "`currentPlaybackTime` was replaced by `playbackTime` and will be removed shortly.")
-  public var currentPlaybackTime: Foundation.TimeInterval {
-    get
-    set
-  }
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "`currentPlaybackRate` was replaced by `state.playbackRate` and will be removed shortly.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "`currentPlaybackRate` was replaced by `state.playbackRate` and will be removed shortly.")
-  public var currentPlaybackRate: Swift.Float {
-    get
-    set
-  }
   public func beginSeekingForward()
   public func beginSeekingBackward()
   public func endSeeking()
@@ -950,21 +854,12 @@ public class MusicPlayer {
   public func skipToNextEntry() async throws
   #endif
 
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "`skipToNextItem()` was replaced by `skipToNextEntry()` and will be removed shortly.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "`skipToNextItem()` was replaced by `skipToNextEntry()` and will be removed shortly.")
-  public func skipToNextItem()
   public func restartCurrentEntry()
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "`skipToBeginning()` was replaced by `restartCurrentEntry()` and will be removed shortly.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "`skipToBeginning()` was replaced by `restartCurrentEntry()` and will be removed shortly.")
-  public func skipToBeginning()
   
   #if compiler(>=5.3) && $AsyncAwait
   public func skipToPreviousEntry() async throws
   #endif
 
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "`skipToPreviousItem()` was replaced by `skipToPreviousEntry()` and will be removed shortly.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "`skipToPreviousItem()` was replaced by `skipToPreviousEntry()` and will be removed shortly.")
-  public func skipToPreviousItem()
   @objc deinit
 }
 @available(iOS 15.0, tvOS 15.0, *)
@@ -1092,7 +987,7 @@ public struct MusicVideo : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, 
   public var artwork: MusicKit.Artwork? {
     get
   }
-  public var albumName: Swift.String? {
+  public var albumTitle: Swift.String? {
     get
   }
   public var artistName: Swift.String {
@@ -1119,10 +1014,10 @@ public struct MusicVideo : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, 
   public var hasHDR: Swift.Bool? {
     get
   }
-  public var isrc: Swift.String? {
+  public var isPreview: Swift.Bool {
     get
   }
-  public var kind: MusicKit.MusicVideo.Kind? {
+  public var isrc: Swift.String? {
     get
   }
   public var playParameters: MusicKit.PlayParameters? {
@@ -1207,19 +1102,6 @@ extension MusicKit.MusicVideo : Swift.CustomStringConvertible, Swift.CustomDebug
   }
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-extension MusicKit.MusicVideo {
-  public enum Kind : Swift.Codable, Swift.Equatable, Swift.Hashable {
-    case preview
-    public static func == (a: MusicKit.MusicVideo.Kind, b: MusicKit.MusicVideo.Kind) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
-    public func encode(to encoder: Swift.Encoder) throws
-    public var hashValue: Swift.Int {
-      get
-    }
-    public init(from decoder: Swift.Decoder) throws
-  }
-}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct Genre : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable {
   public let id: MusicKit.MusicItemID
   public var name: Swift.String {
@@ -1287,14 +1169,7 @@ public struct Artist : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swif
   public var playlists: MusicKit.MusicItemCollection<MusicKit.Playlist>? {
     get
   }
-  public var station: MusicKit.MusicItemCollection<MusicKit.Station>? {
-    get
-  }
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "Use `topSongs` instead; `songs` will be removed shortly.")
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `topSongs` instead; `songs` will be removed shortly.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "Use `topSongs` instead; `songs` will be removed shortly.")
-  @available(watchOS, introduced: 8.0, deprecated: 8.0, message: "Use `topSongs` instead; `songs` will be removed shortly.")
-  public var songs: MusicKit.MusicItemCollection<MusicKit.Song>? {
+  public var station: MusicKit.Station? {
     get
   }
   public var appearsOnAlbums: MusicKit.MusicItemCollection<MusicKit.Album>? {
@@ -1309,17 +1184,10 @@ public struct Artist : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swif
   public var featuredPlaylists: MusicKit.MusicItemCollection<MusicKit.Playlist>? {
     get
   }
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "Use `latestRelease` instead; `featuredRelease` will be removed shortly.")
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `latestRelease` instead; `featuredRelease` will be removed shortly.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "Use `latestRelease` instead; `featuredRelease` will be removed shortly.")
-  @available(watchOS, introduced: 8.0, deprecated: 8.0, message: "Use `latestRelease` instead; `featuredRelease` will be removed shortly.")
-  public var featuredRelease: MusicKit.MusicItemCollection<MusicKit.Album>? {
-    get
-  }
   public var fullAlbums: MusicKit.MusicItemCollection<MusicKit.Album>? {
     get
   }
-  public var latestRelease: MusicKit.MusicItemCollection<MusicKit.Album>? {
+  public var latestRelease: MusicKit.Album? {
     get
   }
   public var liveAlbums: MusicKit.MusicItemCollection<MusicKit.Album>? {
@@ -1354,20 +1222,10 @@ extension MusicKit.PartialMusicProperty where Root == MusicKit.Artist {
   public static let musicVideos: MusicKit.MusicRelationshipProperty<MusicKit.Artist, MusicKit.MusicVideo>
   public static let playlists: MusicKit.MusicRelationshipProperty<MusicKit.Artist, MusicKit.Playlist>
   public static let station: MusicKit.MusicRelationshipProperty<MusicKit.Artist, MusicKit.Station>
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "Use `topSongs` instead; `songs` will be removed shortly.")
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `topSongs` instead; `songs` will be removed shortly.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "Use `topSongs` instead; `songs` will be removed shortly.")
-  @available(watchOS, introduced: 8.0, deprecated: 8.0, message: "Use `topSongs` instead; `songs` will be removed shortly.")
-  public static let songs: MusicKit.MusicRelationshipProperty<MusicKit.Artist, MusicKit.Song>
   public static let appearsOnAlbums: MusicKit.MusicRelationshipProperty<MusicKit.Artist, MusicKit.Album>
   public static let compilationAlbums: MusicKit.MusicRelationshipProperty<MusicKit.Artist, MusicKit.Album>
   public static let featuredAlbums: MusicKit.MusicRelationshipProperty<MusicKit.Artist, MusicKit.Album>
   public static let featuredPlaylists: MusicKit.MusicRelationshipProperty<MusicKit.Artist, MusicKit.Playlist>
-  @available(iOS, introduced: 15.0, deprecated: 15.0, message: "Use `latestRelease` instead; `featuredRelease` will be removed shortly.")
-  @available(macOS, introduced: 12.0, deprecated: 12.0, message: "Use `latestRelease` instead; `featuredRelease` will be removed shortly.")
-  @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "Use `latestRelease` instead; `featuredRelease` will be removed shortly.")
-  @available(watchOS, introduced: 8.0, deprecated: 8.0, message: "Use `latestRelease` instead; `featuredRelease` will be removed shortly.")
-  public static let featuredRelease: MusicKit.MusicRelationshipProperty<MusicKit.Artist, MusicKit.Album>
   public static let fullAlbums: MusicKit.MusicRelationshipProperty<MusicKit.Artist, MusicKit.Album>
   public static let latestRelease: MusicKit.MusicRelationshipProperty<MusicKit.Artist, MusicKit.Album>
   public static let liveAlbums: MusicKit.MusicRelationshipProperty<MusicKit.Artist, MusicKit.Album>
@@ -1634,7 +1492,7 @@ public struct Song : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.
   public var artwork: MusicKit.Artwork? {
     get
   }
-  public var albumName: Swift.String? {
+  public var albumTitle: Swift.String? {
     get
   }
   public var artistName: Swift.String {
@@ -1709,7 +1567,7 @@ public struct Song : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.
   public var genres: MusicKit.MusicItemCollection<MusicKit.Genre>? {
     get
   }
-  public var station: MusicKit.MusicItemCollection<MusicKit.Station>? {
+  public var station: MusicKit.Station? {
     get
   }
   public var composers: MusicKit.MusicItemCollection<MusicKit.Artist>? {
@@ -2055,8 +1913,5 @@ extension MusicKit.MusicAuthorization.Status : Swift.Equatable {}
 extension MusicKit.MusicAuthorization.Status : Swift.Hashable {}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.MusicAuthorization.Status : Swift.RawRepresentable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.MusicItemID : Swift.Sendable {}
-#endif

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           856CA034-CDF5-3F89-AAD9-60760C65940C
+    value:           741318F1-B113-3609-BBBB-976ABC3301DD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5FEC0A59-7078-3BBF-B874-055F874FEC8A
+    value:           5C0A686B-6DBA-3807-A161-C8A26B1CA710
 install-name:    '/System/Library/PrivateFrameworks/CoreHAP.framework/Versions/A/CoreHAP'
-current-version: 799
+current-version: 807.3.22
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CBUUIDCharacteristicValidRange, _HAP2AccessoryServerDiscoveryBonjourDiscoveryInfoServiceDomainKey, 
@@ -351,8 +351,7 @@ exports:
                        _kMinBandwidthBTGC, _kMinBandwidthBTKB, _kMinBandwidthEAcc, 
                        _kMinBandwidthHK, _kMinBandwidthLEAcc, _kMinBandwidthLERemote, 
                        _kPrimaryAccessoryInstanceIDString, _localizedDescriptionKeyForError, 
-                       _mapInternalCameraErrorCodes, _numbersAreNotEqualNilSafe, 
-                       _servicePropertiesString, _sizeForHAPCharacteristicFormat, 
+                       _numbersAreNotEqualNilSafe, _servicePropertiesString, _sizeForHAPCharacteristicFormat, 
                        _stringsAreNotEqualNilSafe, _validateAndNormalizeUUIDString ]
     objc-classes:    [ ATVModel, CBConnectionsObserver, HAP2Accessory, HAP2AccessoryServer, 
                        HAP2AccessoryServerAccessoryCache, HAP2AccessoryServerBrowser, 
@@ -406,7 +405,7 @@ exports:
                        HAPAccessoryServerBrowserHAP2Adapter, HAPAccessoryServerBrowserIP, 
                        HAPAccessoryServerBrowserRelay, HAPAccessoryServerBrowserWiProxBTLE, 
                        HAPAccessoryServerHAP2Adapter, HAPAccessoryServerIP, HAPAccessoryServerRelay, 
-                       HAPAccessoryWiFiConfiguration, HAPAddRemovePairingOperation, 
+                       HAPAccessoryWakeTuple, HAPAccessoryWiFiConfiguration, HAPAddRemovePairingOperation, 
                        HAPArrayWrapper, HAPAudioCodecBitRateWrapper, HAPAudioCodecSampleRateWrapper, 
                        HAPAudioCodecTypeWrapper, HAPAudioStreamCodecConfiguration, 
                        HAPAudioStreamCodecParameters, HAPAuthSession, HAPBLEAccessoryCache, 
@@ -439,8 +438,8 @@ exports:
                        HAPFieldWrapper, HAPFirmwareUpdateReadiness, HAPFirmwareUpdateStateWrapper, 
                        HAPFirmwareUpdateStatus, HAPFragmentationPacket, HAPFragmentationStream, 
                        HAPHTTPClient, HAPHardwareFinish, HAPJSONValueTransformer, 
-                       HAPKeychainItem, HAPKeychainStoreRemovedAccessory, HAPMetadata, 
-                       HAPMetadataCharacteristic, HAPMetadataCharacteristicValue, 
+                       HAPKeyBag, HAPKeychainItem, HAPKeychainStoreRemovedAccessory, 
+                       HAPMetadata, HAPMetadataCharacteristic, HAPMetadataCharacteristicValue, 
                        HAPMetadataConstraints, HAPMetadataProperty, HAPMetadataService, 
                        HAPMetadataTuple, HAPMetadataUnit, HAPMetricsDispatcher, HAPMetricsPairVerifyEvent, 
                        HAPMutableKeychainItem, HAPNFCAccessControl, HAPNFCAccessDeviceCredentialKeyRequest, 

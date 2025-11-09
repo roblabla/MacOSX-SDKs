@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6A9E995A-391B-3C3F-9F0D-60B4E35FF8FE
+    value:           755E6DCD-699C-3512-91D0-5FB7F69F7200
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B97A6FB4-3C5C-348B-AA37-173DF865B767
+    value:           6B7BE468-8DCB-32E3-ADF0-48E21FF96667
 install-name:    '/System/Library/PrivateFrameworks/MessagesBlastDoorSupport.framework/Versions/A/MessagesBlastDoorSupport'
 swift-abi-version: 7
 allowable-clients:

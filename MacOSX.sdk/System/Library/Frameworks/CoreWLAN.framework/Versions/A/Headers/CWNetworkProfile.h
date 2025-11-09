@@ -98,6 +98,10 @@ NS_CLASS_AVAILABLE_MAC(10_7)
     NSUInteger      _networkGroupPriority;
     
     BOOL            _privacyProxyEnabled;
+    
+    NSInteger       _movingAttribute;
+    
+    NSInteger       _publicAttribute;
 }
 
 /*!

@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           08CF6020-D5AA-3DA3-94C7-D73512C61340
+    value:           E379634C-7EB2-3252-AD10-373ED17A43E1
   - target:          x86_64-maccatalyst
-    value:           08CF6020-D5AA-3DA3-94C7-D73512C61340
+    value:           E379634C-7EB2-3252-AD10-373ED17A43E1
   - target:          x86_64h-macos
-    value:           EE81C0DF-5C7D-3835-A185-6EA4C9E1A5E9
+    value:           E9FA2322-57A0-325E-95D2-53004A38B478
   - target:          x86_64h-maccatalyst
-    value:           EE81C0DF-5C7D-3835-A185-6EA4C9E1A5E9
+    value:           E9FA2322-57A0-325E-95D2-53004A38B478
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           341D72BD-B5BD-38AA-A1A6-31F32FBADE45
+    value:           EE8A6440-1407-39A5-A6D0-98A95A0727AC
   - target:          arm64e-maccatalyst
-    value:           341D72BD-B5BD-38AA-A1A6-31F32FBADE45
+    value:           EE8A6440-1407-39A5-A6D0-98A95A0727AC
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage'
-current-version: 554.1
+current-version: 555
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
@@ -316,9 +316,9 @@ exports:
                        _vImageSelectChannels_ARGBFFFF, _vImageSepConvolve_Planar16U, 
                        _vImageSepConvolve_Planar8, _vImageSepConvolve_Planar8to16S, 
                        _vImageSepConvolve_Planar8to16U, _vImageSepConvolve_PlanarF, 
-                       _vImageSymmetricPiecewiseGamma_Planar16Q12, _vImageSymmetricPiecewiseGamma_PlanarF, 
-                       _vImageSymmetricPiecewisePolynomial_PlanarF, _vImageTableLookUp_ARGB8888, 
-                       _vImageTableLookUp_Planar8, _vImageTentConvolve_ARGB8888, 
+                       _vImageSquareBoxConvolve_Planar8, _vImageSymmetricPiecewiseGamma_Planar16Q12, 
+                       _vImageSymmetricPiecewiseGamma_PlanarF, _vImageSymmetricPiecewisePolynomial_PlanarF, 
+                       _vImageTableLookUp_ARGB8888, _vImageTableLookUp_Planar8, _vImageTentConvolve_ARGB8888, 
                        _vImageTentConvolve_Planar8, _vImageTransformHLGLuminanceScaling_Planar16Q12, 
                        _vImageTransformHLGLuminanceScaling_PlanarF, _vImageTransformHLGSceneReferredMapping_Planar16Q12, 
                        _vImageTransformHLGSceneReferredMapping_PlanarF, _vImageTransformPQToneMapping_Planar16Q12, 

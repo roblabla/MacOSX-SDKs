@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           189AC884-2E20-30E3-B609-9984818E21D8
+    value:           3F491A73-398F-3508-AEA5-0B92C40E6D43
   - target:          x86_64-maccatalyst
-    value:           189AC884-2E20-30E3-B609-9984818E21D8
+    value:           3F491A73-398F-3508-AEA5-0B92C40E6D43
   - target:          arm64-macos
-    value:           158AB40A-17E0-3DA8-A537-D4F0A371DE9D
+    value:           B86323DF-4E13-3BAC-8FC0-515B5C5A4007
   - target:          arm64-maccatalyst
-    value:           158AB40A-17E0-3DA8-A537-D4F0A371DE9D
+    value:           B86323DF-4E13-3BAC-8FC0-515B5C5A4007
   - target:          arm64e-macos
-    value:           D106ABE6-F7C8-38AE-9545-B538E8031F03
+    value:           D2CB318A-8F40-333F-914C-0877963AE237
   - target:          arm64e-maccatalyst
-    value:           D106ABE6-F7C8-38AE-9545-B538E8031F03
+    value:           D2CB318A-8F40-333F-914C-0877963AE237
 install-name:    '/usr/lib/system/libsystem_kernel.dylib'
-current-version: 8019.0.72
+current-version: 8019.61.4
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -269,13 +269,14 @@ exports:
                        _netagent_trigger, _netname_check_in, _netname_check_out, 
                        _netname_look_up, _netname_version, _nfsclnt, _nfssvc, _non_boost_assertion_token, 
                        _normal_boost_assertion_token, _ntp_adjtime, _ntp_gettime, 
-                       _open, '_open$NOCANCEL', _open_dprotected_np, _openat, '_openat$NOCANCEL', 
-                       _openbyid_np, _os_buflet_get_data_address, _os_buflet_get_data_length, 
-                       _os_buflet_get_data_limit, _os_buflet_get_data_offset, _os_buflet_get_object_address, 
-                       _os_buflet_get_object_limit, _os_buflet_set_data_length, _os_buflet_set_data_offset, 
-                       _os_channel_advance_slot, _os_channel_attr_clone, _os_channel_attr_create, 
-                       _os_channel_attr_destroy, _os_channel_attr_get, _os_channel_attr_get_key, 
-                       _os_channel_attr_set, _os_channel_attr_set_key, _os_channel_available_slot_count, 
+                       _objc_bp_assist_cfg_np, _open, '_open$NOCANCEL', _open_dprotected_np, 
+                       _openat, '_openat$NOCANCEL', _openbyid_np, _os_buflet_get_data_address, 
+                       _os_buflet_get_data_length, _os_buflet_get_data_limit, _os_buflet_get_data_offset, 
+                       _os_buflet_get_object_address, _os_buflet_get_object_limit, 
+                       _os_buflet_set_data_length, _os_buflet_set_data_offset, _os_channel_advance_slot, 
+                       _os_channel_attr_clone, _os_channel_attr_create, _os_channel_attr_destroy, 
+                       _os_channel_attr_get, _os_channel_attr_get_key, _os_channel_attr_set, 
+                       _os_channel_attr_set_key, _os_channel_available_slot_count, 
                        _os_channel_buflet_alloc, _os_channel_buflet_free, _os_channel_configure_interface_advisory, 
                        _os_channel_create, _os_channel_create_extended, _os_channel_destroy, 
                        _os_channel_event_free, _os_channel_event_get_event_data, 

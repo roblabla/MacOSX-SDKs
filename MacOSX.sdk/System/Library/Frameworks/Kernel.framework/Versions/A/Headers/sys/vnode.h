@@ -121,6 +121,7 @@ enum vtagtype   {
 #define VNODE_READ      0x01
 #define VNODE_WRITE     0x02
 #define VNODE_BLOCKMAP_NO_TRACK 0x04 // APFS Fusion: Do not track this request
+#define VNODE_CLUSTER_VERIFY 0x08 // Verification will be performed in the cluster layer
 
 
 /* flags for VNOP_ALLOCATE */
@@ -1187,7 +1188,7 @@ int vfs_context_rele(vfs_context_t ctx);
  *  @discussion Kexts should not use this function--it is preferred to use vfs_context_create(NULL) and vfs_context_rele(), which ensure proper reference counting of underlying structures.
  *  @return Context for current thread, or kernel context if thread context is unavailable.
  */
-vfs_context_t vfs_context_current(void);
+vfs_context_t vfs_context_current(void) __pure2;
 
 /* Supported filesystem tags for vfs_[set|get]_thread_fs_private */
 #define FS_PRIVATE_TAG_APFS (1)

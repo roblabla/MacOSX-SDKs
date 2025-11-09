@@ -34,6 +34,15 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
  */
 @property (readonly, strong, nonnull) MXHistogram<NSUnitDuration *> *histogrammedApplicationResumeTime;
 
+/*!
+@property      histogrammedOptimizedTimeToFirstDraw
+@abstract      Histogrammed optimized application time-to-first-draw data.
+@discussion    Dimensioned as NSUnitDuration.
+@discussion    This represents the time when the first CA commit is finished where the application launch has been optimized by the system.
+@discussion    In iOS 15, the system will opportunistically start applications that are not running in the background to reduce the amount of time a user may have to wait before an application is usable. These launches can occur after a system reboot and periodically as system conditions allow.
+*/
+@property (readonly, strong, nonnull) MXHistogram<NSUnitDuration *> *histogrammedOptimizedTimeToFirstDraw API_AVAILABLE(ios(15.2)) API_UNAVAILABLE(macos, tvos, watchos);
+
 @end
 
 NS_ASSUME_NONNULL_END

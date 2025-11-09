@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CEC84C1D-6EC6-3FA6-95F9-801F51431582
+    value:           7E0F557F-93A3-3E26-8472-F6E3610C1D08
   - target:          x86_64-maccatalyst
-    value:           CEC84C1D-6EC6-3FA6-95F9-801F51431582
+    value:           7E0F557F-93A3-3E26-8472-F6E3610C1D08
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F8773735-5568-3DEC-A1C0-674DBCCEFED0
+    value:           6A53DDBB-A5BB-3D0A-8A24-DF20F0CA105B
   - target:          arm64e-maccatalyst
-    value:           F8773735-5568-3DEC-A1C0-674DBCCEFED0
+    value:           6A53DDBB-A5BB-3D0A-8A24-DF20F0CA105B
 install-name:    '/System/Library/Frameworks/ColorSync.framework/Versions/A/ColorSync'
 current-version: 4.7
 exports:
@@ -112,8 +112,9 @@ exports:
                        _kColorSyncGenericLabProfile, _kColorSyncGenericRGBProfile, 
                        _kColorSyncGenericXYZProfile, _kColorSyncITUR2020Profile, 
                        _kColorSyncITUR2020_HLGProfile, _kColorSyncITUR2020_PQProfile, 
-                       _kColorSyncITUR2100_HLGProfile, _kColorSyncITUR2100_PQProfile, 
-                       _kColorSyncITUR709Profile, _kColorSyncMainDisplayProfile, 
+                       _kColorSyncITUR2020_sRGBGammaProfile, _kColorSyncITUR2100_HLGProfile, 
+                       _kColorSyncITUR2100_PQProfile, _kColorSyncITUR709Profile, 
+                       _kColorSyncITUR709_PQProfile, _kColorSyncMainDisplayProfile, 
                        _kColorSyncMaxProfileDataSize, _kColorSyncMissingDescription, 
                        _kColorSyncNormalQuality, _kColorSyncPerceptualStandardRGBProfile, 
                        _kColorSyncPreferredCMM, _kColorSyncPrinterDeviceClass, _kColorSyncProfile, 

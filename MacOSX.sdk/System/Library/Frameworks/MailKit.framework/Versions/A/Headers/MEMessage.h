@@ -5,7 +5,9 @@
 //  Copyright © 2020 Apple Inc. All rights reserved.
 //
 
-#import <MailKit/MEEmailAddress.h>
+#import <Foundation/Foundation.h>
+
+@class MEEmailAddress;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,12 +17,21 @@ typedef NS_ENUM(NSInteger, MEMessageState) {
     MEMessageStateSending = 2,
 } API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst);
 
+typedef NS_ENUM(NSInteger, MEMessageEncryptionState) {
+    MEMessageEncryptionStateUnknown = 0,
+    MEMessageEncryptionStateNotEncrypted = 1,
+    MEMessageEncryptionStateEncrypted = 2,
+} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst);
+
 /// @brief Contains information about a mail message on which actions can be performed.
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
 @interface MEMessage : NSObject <NSSecureCoding>
 
 /// @brief The state of the mail message.
-@property (nonatomic, readonly, assign) MEMessageState state NS_REFINED_FOR_SWIFT;
+@property (nonatomic, readonly, assign) MEMessageState state;
+
+/// @brief The encryption state of the mail message.
+@property (nonatomic, readonly, assign) MEMessageEncryptionState encryptionState;
 
 /// @brief The subject of the mail message.
 @property (nonatomic, readonly, copy) NSString *subject;

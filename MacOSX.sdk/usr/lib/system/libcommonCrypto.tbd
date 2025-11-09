@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2AA12973-2647-3D2A-A6F5-AE3BD7230750
+    value:           E61C9299-ECC9-3E13-8436-1F798E768933
   - target:          x86_64-maccatalyst
-    value:           2AA12973-2647-3D2A-A6F5-AE3BD7230750
+    value:           E61C9299-ECC9-3E13-8436-1F798E768933
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2FC2845B-0F8A-3672-B3BB-C9F6C410A74E
+    value:           7ACD9142-CC3E-3F0F-AD9F-F87C302D573E
   - target:          arm64e-maccatalyst
-    value:           2FC2845B-0F8A-3672-B3BB-C9F6C410A74E
+    value:           7ACD9142-CC3E-3F0F-AD9F-F87C302D573E
 install-name:    '/usr/lib/system/libcommonCrypto.dylib'
 current-version: 60190
 parent-umbrella:

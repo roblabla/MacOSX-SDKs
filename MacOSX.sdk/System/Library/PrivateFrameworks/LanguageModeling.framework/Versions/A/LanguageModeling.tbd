@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           38D6FF9E-1EAF-3AD6-8658-407AD123A945
+    value:           3F7D450B-7BEB-3D0A-BD11-3E512537934B
   - target:          x86_64-maccatalyst
-    value:           38D6FF9E-1EAF-3AD6-8658-407AD123A945
+    value:           3F7D450B-7BEB-3D0A-BD11-3E512537934B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           80405EB3-3B25-35FB-8C04-2D300B22AE25
+    value:           B6E4B8F5-E3D9-376D-8FE0-0615613D16A1
   - target:          arm64e-maccatalyst
-    value:           80405EB3-3B25-35FB-8C04-2D300B22AE25
+    value:           B6E4B8F5-E3D9-376D-8FE0-0615613D16A1
 install-name:    '/System/Library/PrivateFrameworks/LanguageModeling.framework/Versions/A/LanguageModeling'
-current-version: 276
+current-version: 277.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFbRKN17language_modeling2v110PredictionEEEE, 

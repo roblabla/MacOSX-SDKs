@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D27E24FF-393C-3F13-A9C2-D643248B6ADD
+    value:           B22BBF71-6B30-3322-9FD8-C2AC365237F8
   - target:          x86_64-maccatalyst
-    value:           D27E24FF-393C-3F13-A9C2-D643248B6ADD
+    value:           B22BBF71-6B30-3322-9FD8-C2AC365237F8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           84576CE6-1DC4-3A29-BE49-EF6FA6D609CF
+    value:           696D6B37-46FB-3EFC-8639-D7D03D20902F
   - target:          arm64e-maccatalyst
-    value:           84576CE6-1DC4-3A29-BE49-EF6FA6D609CF
+    value:           696D6B37-46FB-3EFC-8639-D7D03D20902F
 install-name:    '/usr/lib/swift/libswiftAVFoundation.dylib'
-current-version: 2036.19.1
+current-version: 2070.8.1
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -106,7 +106,7 @@ exports:
                        '_$s12AVFoundation22AVPartialAsyncPropertyCAASo7AVAssetCRbzlE28isCompatibleWithAirPlayVideoAA07AVAsyncD0CyxSbGvgZ', 
                        '_$s12AVFoundation22AVPartialAsyncPropertyCAASo7AVAssetCRbzlE32isCompatibleWithSavedPhotosAlbumAA07AVAsyncD0CyxSbGvgZ', 
                        '_$s12AVFoundation22AVPartialAsyncPropertyCAASo7AVAssetCRbzlE32providesPreciseDurationAndTimingAA07AVAsyncD0CyxSbGvgZ', 
-                       '_$s12AVFoundation22AVPartialAsyncPropertyCAASo7AVAssetCRbzlE6lyricsAA07AVAsyncD0CyxSo14AVMetadataItemCSgGvgZ', 
+                       '_$s12AVFoundation22AVPartialAsyncPropertyCAASo7AVAssetCRbzlE6lyricsAA07AVAsyncD0CyxSSSgGvgZ', 
                        '_$s12AVFoundation22AVPartialAsyncPropertyCAASo7AVAssetCRbzlE6tracksAA07AVAsyncD0CyxSaySo0E5TrackCGGvgZ', 
                        '_$s12AVFoundation22AVPartialAsyncPropertyCAASo7AVAssetCRbzlE8durationAA07AVAsyncD0CyxSo6CMTimeaGvgZ', 
                        '_$s12AVFoundation22AVPartialAsyncPropertyCAASo7AVAssetCRbzlE8metadataAA07AVAsyncD0CyxSaySo14AVMetadataItemCGGvgZ', 
@@ -165,7 +165,6 @@ exports:
                        '_$sSo16AVMutableCaptionC12AVFoundationE7setRuby_2inySo09AVCaptionE0C_So8_NSRangeVtF', 
                        '_$sSo18AVVideoCompositionC12AVFoundationE24sourceSampleDataTrackIDsSays5Int32VGvg', 
                        '_$sSo18AVVideoCompositionC12AVFoundationE24sourceSampleDataTrackIDsSays5Int32VGvpMV', 
-                       '_$sSo18NSNotificationNamea12AVFoundationE22AVPlayerItemTimeJumpedABvgZ', 
                        '_$sSo20AVCapturePhotoOutputC12AVFoundationE012availableRawB16PixelFormatTypesSays6UInt32VGvg', 
                        '_$sSo20AVCapturePhotoOutputC12AVFoundationE012availableRawB16PixelFormatTypesSays6UInt32VGvpMV', 
                        '_$sSo20AVCapturePhotoOutputC12AVFoundationE09availableB16PixelFormatTypesSays6UInt32VGvg', 

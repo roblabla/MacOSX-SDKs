@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4309F38D-4E90-3FA9-9D78-BBF129CEA56C
+    value:           68AE27E2-08FB-31F9-9164-3D3601FF8A3C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           503ABD82-EF6E-38DB-AC40-565B2A845207
+    value:           59986AA8-47E2-35BD-AA7D-14B7151CD37A
 install-name:    '/System/Library/PrivateFrameworks/QueryParser.framework/Versions/A/QueryParser'
-current-version: 17
+current-version: 23.3
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _QPParseAttributeDateKey, _QPParseAttributeRecipientKey, _QPParseAttributeSenderKey, 
@@ -26,12 +26,12 @@ exports:
                        _QPQueryParserOptionLocaleKey, _QPQueryParserOptionReferenceDateKey, 
                        _QPQueryParserSetContext, _QPQueryParserSetCustomResourceDirectory, 
                        _QPQueryParserSetFormat, _QPQueryParserSetIgnoreAttributedParses, 
-                       _QPQueryParserSetLocale, _QPQueryParserSetReferenceDate, _QPQueryParserUseKnowledgeSource, 
-                       _kQPParseAttributeApplicationKey, _kQPParseAttributeAttachmentKey, 
-                       _kQPParseAttributeCompanyKey, _kQPParseAttributeDateExtensionKey, 
-                       _kQPParseAttributeDateKey, _kQPParseAttributeDescriptionKey, 
-                       _kQPParseAttributeDisplayKey, _kQPParseAttributeKeywordKey, 
-                       _kQPParseAttributeKindKey, _kQPParseAttributeLocationKey, 
+                       _QPQueryParserSetLocale, _QPQueryParserSetReferenceDate, _QPQueryParserSetUseSystemLocale, 
+                       _QPQueryParserUseKnowledgeSource, _kQPParseAttributeApplicationKey, 
+                       _kQPParseAttributeAttachmentKey, _kQPParseAttributeCompanyKey, 
+                       _kQPParseAttributeDateExtensionKey, _kQPParseAttributeDateKey, 
+                       _kQPParseAttributeDescriptionKey, _kQPParseAttributeDisplayKey, 
+                       _kQPParseAttributeKeywordKey, _kQPParseAttributeKindKey, _kQPParseAttributeLocationKey, 
                        _kQPParseAttributePersonKey, _kQPParseAttributeRecipientKey, 
                        _kQPParseAttributeSenderKey, _kQPParseAttributeTaggedPersonKey, 
                        _kQPParseAttributeTitleKey, _kQPParseAttributeTopicKey, _kQPParseAttributeValueDateComponentsKey, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AAAB3459-20A0-3ABD-AAE0-1533AB076C9A
+    value:           F0B37B81-F85D-31CD-9CC9-E58B21A27084
   - target:          x86_64-maccatalyst
-    value:           AAAB3459-20A0-3ABD-AAE0-1533AB076C9A
+    value:           F0B37B81-F85D-31CD-9CC9-E58B21A27084
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           73CB80D4-5AFD-3648-8792-7CBDD04D6E52
+    value:           5E119E6A-735C-3A7E-902C-474689AEB406
   - target:          arm64e-maccatalyst
-    value:           73CB80D4-5AFD-3648-8792-7CBDD04D6E52
+    value:           5E119E6A-735C-3A7E-902C-474689AEB406
 install-name:    '/System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -156,19 +156,19 @@ exports:
                        _kCMObjectLibraryClassID_VideoEncoder, _kVTAlphaChannelMode_PremultipliedAlpha, 
                        _kVTAlphaChannelMode_StraightAlpha, _kVTCGImageCreationKey_DeferFormatConversion, 
                        _kVTCGImageCreationKey_ForceImmediateFormatConversion, _kVTCGImageCreationKey_PrefersStandardDynamicRange, 
-                       _kVTCompressionPropertyKey_AllowCleanRandomAccessFrames, _kVTCompressionPropertyKey_AllowFrameReordering, 
-                       _kVTCompressionPropertyKey_AllowOpenGOP, _kVTCompressionPropertyKey_AllowPixelTransfer, 
-                       _kVTCompressionPropertyKey_AllowTemporalCompression, _kVTCompressionPropertyKey_AlphaChannelMode, 
-                       _kVTCompressionPropertyKey_AmbientViewingEnvironment, _kVTCompressionPropertyKey_AspectRatio16x9, 
-                       _kVTCompressionPropertyKey_AuxiliaryTypeInfo, _kVTCompressionPropertyKey_AverageBitRate, 
-                       _kVTCompressionPropertyKey_AverageDataRate, _kVTCompressionPropertyKey_AverageNonDroppableFrameRate, 
-                       _kVTCompressionPropertyKey_BaseLayerBitRateFraction, _kVTCompressionPropertyKey_BaseLayerFrameRate, 
-                       _kVTCompressionPropertyKey_BaseLayerFrameRateFraction, _kVTCompressionPropertyKey_CanvasPixelBufferAttributes, 
-                       _kVTCompressionPropertyKey_ChromaLocationBottomField, _kVTCompressionPropertyKey_ChromaLocationTopField, 
-                       _kVTCompressionPropertyKey_CleanAperture, _kVTCompressionPropertyKey_ClientPID, 
-                       _kVTCompressionPropertyKey_CloudEncoderDeviceID, _kVTCompressionPropertyKey_ColorPrimaries, 
-                       _kVTCompressionPropertyKey_ConnectionID, _kVTCompressionPropertyKey_ContentLightLevelInfo, 
-                       _kVTCompressionPropertyKey_ConvergenceDurationForAverageDataRate, 
+                       _kVTCompressionPropertyKey_AllowCleanRandomAccessFrames, _kVTCompressionPropertyKey_AllowCompressedPixelFormats, 
+                       _kVTCompressionPropertyKey_AllowFrameReordering, _kVTCompressionPropertyKey_AllowOpenGOP, 
+                       _kVTCompressionPropertyKey_AllowPixelTransfer, _kVTCompressionPropertyKey_AllowTemporalCompression, 
+                       _kVTCompressionPropertyKey_AlphaChannelMode, _kVTCompressionPropertyKey_AmbientViewingEnvironment, 
+                       _kVTCompressionPropertyKey_AspectRatio16x9, _kVTCompressionPropertyKey_AuxiliaryTypeInfo, 
+                       _kVTCompressionPropertyKey_AverageBitRate, _kVTCompressionPropertyKey_AverageDataRate, 
+                       _kVTCompressionPropertyKey_AverageNonDroppableFrameRate, _kVTCompressionPropertyKey_BaseLayerBitRateFraction, 
+                       _kVTCompressionPropertyKey_BaseLayerFrameRate, _kVTCompressionPropertyKey_BaseLayerFrameRateFraction, 
+                       _kVTCompressionPropertyKey_CanvasPixelBufferAttributes, _kVTCompressionPropertyKey_ChromaLocationBottomField, 
+                       _kVTCompressionPropertyKey_ChromaLocationTopField, _kVTCompressionPropertyKey_CleanAperture, 
+                       _kVTCompressionPropertyKey_ClientPID, _kVTCompressionPropertyKey_CloudEncoderDeviceID, 
+                       _kVTCompressionPropertyKey_ColorPrimaries, _kVTCompressionPropertyKey_ConnectionID, 
+                       _kVTCompressionPropertyKey_ContentLightLevelInfo, _kVTCompressionPropertyKey_ConvergenceDurationForAverageDataRate, 
                        _kVTCompressionPropertyKey_DataRateLimits, _kVTCompressionPropertyKey_Depth, 
                        _kVTCompressionPropertyKey_DroppablePFramesOnly, _kVTCompressionPropertyKey_EnableLTR, 
                        _kVTCompressionPropertyKey_EnableQPModulation, _kVTCompressionPropertyKey_EncodeRawIfPresent, 
@@ -316,15 +316,16 @@ exports:
                        _kVTLowLatencyMode_Low, _kVTLowLatencyMode_Medium, _kVTLowLatencyMode_Minimum, 
                        _kVTMetalDeviceList_AbsentIORegKeys, _kVTMetalDeviceList_Available, 
                        _kVTMetalDeviceList_IORegistryName, _kVTMetalDeviceList_IsAfterburner, 
-                       _kVTMetalDeviceList_IsBridge, _kVTMetalDeviceList_IsExternal, 
-                       _kVTMetalDeviceList_IsLowPowerGPU, _kVTMetalDeviceList_IsOfflineGPU, 
-                       _kVTMetalDeviceList_IsSlotted, _kVTMetalDeviceList_PresentIORegKeysAndValues, 
-                       _kVTMetalDeviceList_RegistryID, _kVTMetalDeviceList_Service, 
-                       _kVTMinAndMaxDepth_Maximum, _kVTMinAndMaxDepth_Minimum, _kVTMinAndMaxDisparity_Maximum, 
-                       _kVTMinAndMaxDisparity_Minimum, _kVTMultiPassStorageCreationOption_DoNotDelete, 
-                       _kVTMultiPassStorageStep_GetCurrentTimeStamp, _kVTMultiPassStorageStep_GetFirstTimeStamp, 
-                       _kVTMultiPassStorageStep_GetLastTimeStamp, _kVTMultiPassStorageStep_GetNextTimeStamp, 
-                       _kVTMultiPassStorageStep_GetPreviousTimeStamp, _kVTPixelBufferAttributesMediatorNotification_MediatedPixelBufferAttributesChanged, 
+                       _kVTMetalDeviceList_IsAppleProResHW, _kVTMetalDeviceList_IsBridge, 
+                       _kVTMetalDeviceList_IsExternal, _kVTMetalDeviceList_IsLowPowerGPU, 
+                       _kVTMetalDeviceList_IsOfflineGPU, _kVTMetalDeviceList_IsSlotted, 
+                       _kVTMetalDeviceList_PresentIORegKeysAndValues, _kVTMetalDeviceList_RegistryID, 
+                       _kVTMetalDeviceList_Service, _kVTMinAndMaxDepth_Maximum, _kVTMinAndMaxDepth_Minimum, 
+                       _kVTMinAndMaxDisparity_Maximum, _kVTMinAndMaxDisparity_Minimum, 
+                       _kVTMultiPassStorageCreationOption_DoNotDelete, _kVTMultiPassStorageStep_GetCurrentTimeStamp, 
+                       _kVTMultiPassStorageStep_GetFirstTimeStamp, _kVTMultiPassStorageStep_GetLastTimeStamp, 
+                       _kVTMultiPassStorageStep_GetNextTimeStamp, _kVTMultiPassStorageStep_GetPreviousTimeStamp, 
+                       _kVTPixelBufferAttributesMediatorNotification_MediatedPixelBufferAttributesChanged, 
                        _kVTPixelBufferAttributesMediatorProperty_AlwaysVendsNonNULLAttributes, 
                        _kVTPixelBufferAttributesMediatorProperty_LayersAreSuppressed, 
                        _kVTPixelBufferAttributesMediatorProperty_MediatedPixelBufferAttributes, 

@@ -89,6 +89,7 @@ uint32_t        thread_group_count(void);
 const char *    thread_group_get_name(struct thread_group *tg);
 void *          thread_group_get_machine_data(struct thread_group *tg);
 uint32_t        thread_group_machine_data_size(void);
+boolean_t       thread_group_uses_immediate_ipi(struct thread_group *tg);
 cluster_type_t  thread_group_recommendation(struct thread_group *tg);
 
 typedef         void (*thread_group_iterate_fn_t)(void*, int, struct thread_group *);

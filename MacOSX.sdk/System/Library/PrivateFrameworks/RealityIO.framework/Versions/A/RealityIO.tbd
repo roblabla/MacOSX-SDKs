@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           78BFE9A3-2972-347A-A5AE-329767A1F912
+    value:           9E1A3552-44C7-3DDF-9198-6CAD7F586DB3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C43934C6-CE97-367F-8789-361BFFB2406C
+    value:           54355483-614B-39B4-8F34-A3F0C72187F5
 install-name:    '/System/Library/PrivateFrameworks/RealityIO.framework/Versions/A/RealityIO'
 swift-abi-version: 7
 exports:

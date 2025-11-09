@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           698D0A1E-89AA-31AD-AE1F-2797CCD56465
+    value:           D775A808-72E9-3F64-813F-D786166B9C89
   - target:          x86_64-maccatalyst
-    value:           698D0A1E-89AA-31AD-AE1F-2797CCD56465
+    value:           D775A808-72E9-3F64-813F-D786166B9C89
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F6E5C644-A663-3CE1-B9C6-9C8B066039B5
+    value:           8059C898-C83B-3918-9252-1FBD1D17CF21
   - target:          arm64e-maccatalyst
-    value:           F6E5C644-A663-3CE1-B9C6-9C8B066039B5
+    value:           8059C898-C83B-3918-9252-1FBD1D17CF21
 install-name:    '/System/Library/PrivateFrameworks/CoreBrightness.framework/Versions/A/CoreBrightness'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

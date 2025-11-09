@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CA747DF9-9616-34FA-AF5A-CD4D158BD141
+    value:           63AD4B0D-B09F-3425-B1CC-63B4D0FB658F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           138A8321-1F3B-3A2C-A411-D35EE304D77F
+    value:           D66B0E01-BC62-3E7E-88F5-3C97BECD174D
 install-name:    '/System/Library/PrivateFrameworks/IMAPCHelpers.framework/Versions/A/IMAPCHelpers'
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -227,7 +227,7 @@ struct MIDIDriverInterface
 	/*!
 		@fn SendPackets
 		@discussion
-	 		Only for provisional drivers.
+	 		Only for version 3 drivers (new for macOS 12.0).
 	 
 			Send a MIDIEventList to the destination endpoint whose refCons are being passed as
 			arguments.
@@ -237,7 +237,7 @@ struct MIDIDriverInterface
     /*!
 		@fn MonitorEvents
 		@discussion
-			Only for provisional drivers.
+			Only for version 3 drivers (new for macOS 12.0).
 
 			Same as Monitor but uses MIDEventList, whose protocol may vary from MIDI 1.0.
 	*/
@@ -302,9 +302,9 @@ CFPlugInTypes                   Dictionary      1 key/value pair
 					See the description of the MIDIDriverInterface structure for
 					information about different versions of the MIDI driver interface.
  
-					This provisional driver interface is provided for the purpose of
-                    prototyping MIDI 2.0 driver support. This driver interface will be replaced
-                    in the future when transport specifications are defined.
+					The version 3 driver interface may be used to send MIDI 1.0 as
+					universal packets (MIDI-1UP) or as MIDI 2.0 using MIDIEventList,
+					in favor of which MIDIPacketList has been deprecated.
 */
 #define kMIDIDriverInterface3ID \
 	CFUUIDGetConstantUUIDWithBytes(NULL, 0x2F, 0xD9, 0x4D, 0x0F, 0x8C, 0x2A, 0x48, 0x2A, 0x8A, 0xD8, 0x7D, 0x9E, 0xA3, 0x81, 0xC9, 0xC1)

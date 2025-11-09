@@ -5,9 +5,9 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           59D8DB24-8FA8-3E16-88F0-00D1FDB46476
+    value:           AE749886-3C8B-3E37-A946-9CCE021D40F6
 install-name:    '/System/Library/PrivateFrameworks/AppleHIDTransportSupport.framework/Versions/A/AppleHIDTransportSupport'
-current-version: 5400.29
+current-version: 5400.30
 exports:
   - targets:         [ arm64e-macos, arm64-macos ]
     objc-classes:    [ AHTBootLoader, AHTCommon, AHTDevice, AHTInterface, AHTLoader ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           024E525C-54CC-3ED8-82E4-B1392ECD737B
+    value:           335BEDE2-3E0B-3309-A926-6BD2A349775C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           09775B73-6D7A-3716-915A-B184E1C7666C
+    value:           31CF4789-70F1-37DB-81EB-C3E1902DD671
 install-name:    '/System/Library/PrivateFrameworks/SiriContactsIntents.framework/Versions/A/SiriContactsIntents'
 swift-abi-version: 7
 allowable-clients:
@@ -254,10 +254,8 @@ exports:
                        '_$s19SiriContactsIntents13ContactIntentV11isRejectionSbvg', 
                        '_$s19SiriContactsIntents13ContactIntentV11isRejectionSbvpMV', 
                        '_$s19SiriContactsIntents13ContactIntentV14nameAttributes33_CE70EA7E5AC8129300E732019CEF9519LLSaySSGvpfi', 
-                       '_$s19SiriContactsIntents13ContactIntentV15emailAttributes33_CE70EA7E5AC8129300E732019CEF9519LLSaySSGvpfi', 
                        '_$s19SiriContactsIntents13ContactIntentV15hasAgeAttributeSbvg', 
                        '_$s19SiriContactsIntents13ContactIntentV15hasAgeAttributeSbvpMV', 
-                       '_$s19SiriContactsIntents13ContactIntentV15phoneAttributes33_CE70EA7E5AC8129300E732019CEF9519LLSaySSGvpfi', 
                        '_$s19SiriContactsIntents13ContactIntentV16hasNameAttributeSbvg', 
                        '_$s19SiriContactsIntents13ContactIntentV16hasNameAttributeSbvpMV', 
                        '_$s19SiriContactsIntents13ContactIntentV16requestedAgeDateAA0gH4TimeCSgvg', 

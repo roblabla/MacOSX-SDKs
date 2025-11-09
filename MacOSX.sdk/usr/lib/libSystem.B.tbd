@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           77BE68A2-82AA-3E61-AD5E-2DA28937FF48
+    value:           5B0BDCF1-476E-30DD-964E-81C4044DA9E4
   - target:          x86_64-maccatalyst
-    value:           77BE68A2-82AA-3E61-AD5E-2DA28937FF48
+    value:           5B0BDCF1-476E-30DD-964E-81C4044DA9E4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C2EFE69F-D7EE-3B87-80A0-9008C8DFA76A
+    value:           A45BC32A-FE8C-3ADB-B190-2E664ADDFAB3
   - target:          arm64e-maccatalyst
-    value:           C2EFE69F-D7EE-3B87-80A0-9008C8DFA76A
+    value:           A45BC32A-FE8C-3ADB-B190-2E664ADDFAB3
 install-name:    '/usr/lib/libSystem.B.dylib'
 current-version: 1311
 reexported-libraries:
@@ -59,17 +59,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C8453A64-A403-313E-A72B-EBA1A0E80D91
+    value:           8166E07B-1043-3B06-AB67-7852BC6D52EE
   - target:          x86_64-maccatalyst
-    value:           C8453A64-A403-313E-A72B-EBA1A0E80D91
+    value:           8166E07B-1043-3B06-AB67-7852BC6D52EE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           23B9DE80-BF2E-3F88-A534-E3BCBEA3A264
+    value:           22B0DDF8-19B1-3F56-973C-3F639D4564AF
   - target:          arm64e-maccatalyst
-    value:           23B9DE80-BF2E-3F88-A534-E3BCBEA3A264
+    value:           22B0DDF8-19B1-3F56-973C-3F639D4564AF
 install-name:    '/usr/lib/system/libcache.dylib'
 current-version: 85
 parent-umbrella:
@@ -96,17 +96,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2AA12973-2647-3D2A-A6F5-AE3BD7230750
+    value:           E61C9299-ECC9-3E13-8436-1F798E768933
   - target:          x86_64-maccatalyst
-    value:           2AA12973-2647-3D2A-A6F5-AE3BD7230750
+    value:           E61C9299-ECC9-3E13-8436-1F798E768933
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2FC2845B-0F8A-3672-B3BB-C9F6C410A74E
+    value:           7ACD9142-CC3E-3F0F-AD9F-F87C302D573E
   - target:          arm64e-maccatalyst
-    value:           2FC2845B-0F8A-3672-B3BB-C9F6C410A74E
+    value:           7ACD9142-CC3E-3F0F-AD9F-F87C302D573E
 install-name:    '/usr/lib/system/libcommonCrypto.dylib'
 current-version: 60190
 parent-umbrella:
@@ -190,11 +190,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           56DBCF27-2C89-3A5A-8AD7-64FD854113E6
+    value:           1D3425CD-6DAC-3A87-99EB-DDF5BBA45F09
   - target:          arm64-macos
-    value:           120C10D5-3970-330C-9BC5-3237614FEE02
+    value:           D1AEA7B2-4E88-3203-91FD-DBE274E45C1D
   - target:          arm64e-macos
-    value:           B7DCB2D2-83F4-36D5-8CED-A7075DB6F9C9
+    value:           8FFA49FC-3CF7-3EC6-8A48-ED197724041B
 install-name:    '/usr/lib/system/libcompiler_rt.dylib'
 current-version: 102.2
 parent-umbrella:
@@ -237,7 +237,7 @@ exports:
                        ___paritysi2, ___parityti2, ___popcountdi2, ___popcountsi2, 
                        ___popcountti2, ___powixf2, ___subvdi3, ___subvsi3, ___subvti3, 
                        ___ucmpdi2, ___ucmpti2, ___udivdi3, ___udivmoddi4, ___umoddi3 ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos ]
     symbols:         [ '$ld$hide$os10.10$___chkstk_darwin', '$ld$hide$os10.10$___extendhfsf2', 
                        '$ld$hide$os10.10$___truncdfhf2', '$ld$hide$os10.10$___truncsfhf2', 
                        '$ld$hide$os10.10$_atomic_flag_clear', '$ld$hide$os10.10$_atomic_flag_clear_explicit', 
@@ -425,17 +425,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           58751955-733B-3893-9923-E7D4A13F5F7C
+    value:           BF9FF1B9-A8FC-3509-AB2D-A05DEF46B1E4
   - target:          x86_64-maccatalyst
-    value:           58751955-733B-3893-9923-E7D4A13F5F7C
+    value:           BF9FF1B9-A8FC-3509-AB2D-A05DEF46B1E4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           645461A9-399D-3F1D-ADB2-45817A5A2566
+    value:           E7763C71-16EC-3BB4-847D-102DE8458168
   - target:          arm64e-maccatalyst
-    value:           645461A9-399D-3F1D-ADB2-45817A5A2566
+    value:           E7763C71-16EC-3BB4-847D-102DE8458168
 install-name:    '/usr/lib/system/libcopyfile.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -453,19 +453,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BB64F784-4695-33B3-AD28-EB9B664359C8
+    value:           83533038-933D-34D1-9699-0E93D57ECFCA
   - target:          x86_64-maccatalyst
-    value:           BB64F784-4695-33B3-AD28-EB9B664359C8
+    value:           83533038-933D-34D1-9699-0E93D57ECFCA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5A530570-B9BB-37D3-81E4-9830D0E5D731
+    value:           62B5D2A2-7CF7-3D1B-96EC-0E8898A7A0DA
   - target:          arm64e-maccatalyst
-    value:           5A530570-B9BB-37D3-81E4-9830D0E5D731
+    value:           62B5D2A2-7CF7-3D1B-96EC-0E8898A7A0DA
 install-name:    '/usr/lib/system/libcorecrypto.dylib'
-current-version: 1212
+current-version: 1217.60.7
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -578,11 +578,12 @@ exports:
                        _ccdh_gp_rfc5114_MODP_1024_160, _ccdh_gp_rfc5114_MODP_2048_224, 
                        _ccdh_gp_rfc5114_MODP_2048_256, _ccdh_gp_size, _ccdh_import_full, 
                        _ccdh_import_priv, _ccdh_import_pub, _ccdh_init_gp_from_bytes, 
-                       _ccdigest, _ccdigest_init, _ccdigest_oid_lookup, _ccdigest_update, 
-                       _ccdrbg_factory_nistctr, _ccdrbg_factory_nisthmac, _ccec_blind, 
-                       _ccec_compact_export, _ccec_compact_export_pub, _ccec_compact_generate_key, 
-                       _ccec_compact_import_priv, _ccec_compact_import_priv_size, 
-                       _ccec_compact_import_pub, _ccec_compact_import_pub_size, _ccec_compact_transform_key, 
+                       _ccdh_init_safe_gp_from_bytes, _ccdigest, _ccdigest_init, 
+                       _ccdigest_oid_lookup, _ccdigest_update, _ccdrbg_factory_nistctr, 
+                       _ccdrbg_factory_nisthmac, _ccec_blind, _ccec_compact_export, 
+                       _ccec_compact_export_pub, _ccec_compact_generate_key, _ccec_compact_import_priv, 
+                       _ccec_compact_import_priv_size, _ccec_compact_import_pub, 
+                       _ccec_compact_import_pub_size, _ccec_compact_transform_key, 
                        _ccec_compressed_x962_export_pub, _ccec_compressed_x962_export_pub_size, 
                        _ccec_compressed_x962_import_pub, _ccec_compute_key, _ccec_cp_192, 
                        _ccec_cp_224, _ccec_cp_256, _ccec_cp_384, _ccec_cp_521, _ccec_curve_for_length_lookup, 
@@ -658,8 +659,7 @@ exports:
                        _ccrng_pbkdf2_prng_init, _ccrng_rsafips_test_init, _ccrng_rsafips_test_set_next, 
                        _ccrng_sequence_init, _ccrng_system_done, _ccrng_system_init, 
                        _ccrng_test_done, _ccrng_test_init, _ccrng_uniform, _ccrsa_decrypt_eme_pkcs1v15, 
-                       _ccrsa_decrypt_eme_pkcs1v15_blinded, _ccrsa_decrypt_oaep, 
-                       _ccrsa_decrypt_oaep_blinded, _ccrsa_dump_full_key, _ccrsa_dump_public_key, 
+                       _ccrsa_decrypt_oaep, _ccrsa_dump_full_key, _ccrsa_dump_public_key, 
                        _ccrsa_eme_pkcs1v15_decode, _ccrsa_eme_pkcs1v15_encode, _ccrsa_emsa_pkcs1v15_encode, 
                        _ccrsa_emsa_pkcs1v15_verify, _ccrsa_emsa_pss_decode, _ccrsa_emsa_pss_encode, 
                        _ccrsa_encrypt_eme_pkcs1v15, _ccrsa_encrypt_oaep, _ccrsa_export_pub, 
@@ -667,52 +667,51 @@ exports:
                        _ccrsa_get_fullkey_components, _ccrsa_get_pubkey_components, 
                        _ccrsa_import_pub, _ccrsa_init_pub, _ccrsa_make_priv, _ccrsa_make_pub, 
                        _ccrsa_oaep_decode_parameter, _ccrsa_oaep_encode_parameter, 
-                       _ccrsa_priv_crypt, _ccrsa_priv_crypt_blinded, _ccrsa_pub_crypt, 
-                       _ccrsa_pubkeylength, _ccrsa_recover_priv, _ccrsa_sign_pkcs1v15, 
-                       _ccrsa_sign_pkcs1v15_msg, _ccrsa_sign_pss, _ccrsa_sign_pss_msg, 
-                       _ccrsa_verify_pkcs1v15, _ccrsa_verify_pkcs1v15_allowshortsigs, 
-                       _ccrsa_verify_pkcs1v15_digest, _ccrsa_verify_pkcs1v15_msg, 
-                       _ccrsa_verify_pss_digest, _ccrsa_verify_pss_msg, _ccrsabssa_blind_message, 
-                       _ccrsabssa_ciphersuite_rsa2048_sha256, _ccrsabssa_ciphersuite_rsa2048_sha384, 
-                       _ccrsabssa_ciphersuite_rsa3072_sha256, _ccrsabssa_ciphersuite_rsa3072_sha384, 
-                       _ccrsabssa_ciphersuite_rsa4096_sha384, _ccrsabssa_sign_blinded_message, 
-                       _ccrsabssa_unblind_signature, _ccsae_gen_kck_and_pmk, _ccsae_gen_password_value, 
-                       _ccsae_generate_commitment, _ccsae_generate_commitment_finalize, 
-                       _ccsae_generate_commitment_init, _ccsae_generate_commitment_partial, 
-                       _ccsae_generate_confirmation, _ccsae_generate_h2c_commit, 
-                       _ccsae_generate_h2c_pt, _ccsae_get_keys, _ccsae_init, _ccsae_init_p256_sha256, 
-                       _ccsae_lexographic_order_key, _ccsae_sizeof_commitment, _ccsae_sizeof_confirmation, 
-                       _ccsae_sizeof_ctx, _ccsae_sizeof_pt, _ccsae_verify_commitment, 
-                       _ccsae_verify_confirmation, _ccscrypt, _ccscrypt_storage_size, 
-                       _ccsha1_di, _ccsha1_eay_di, _ccsha1_ltc_di, _ccsha224_di, 
-                       _ccsha224_ltc_di, _ccsha256_di, _ccsha256_ltc_di, _ccsha384_di, 
-                       _ccsha384_ltc_di, _ccsha512_256_di, _ccsha512_256_ltc_di, 
-                       _ccsha512_di, _ccsha512_ltc_di, _ccsigma_clear, _ccsigma_clear_key, 
-                       _ccsigma_compute_mac, _ccsigma_derive_session_keys, _ccsigma_export_key_share, 
-                       _ccsigma_import_peer_key_share, _ccsigma_import_peer_verification_key, 
-                       _ccsigma_import_signing_key, _ccsigma_init, _ccsigma_kex_init_ctx, 
-                       _ccsigma_kex_resp_ctx, _ccsigma_mfi_info, _ccsigma_open, _ccsigma_peer_role, 
-                       _ccsigma_seal, _ccsigma_set_signing_function, _ccsigma_sign, 
-                       _ccsigma_verify, _ccsiv_hmac_aad, _ccsiv_hmac_ciphertext_size, 
-                       _ccsiv_hmac_crypt, _ccsiv_hmac_init, _ccsiv_hmac_one_shot, 
-                       _ccsiv_hmac_plaintext_size, _ccsiv_hmac_reset, _ccsiv_hmac_set_nonce, 
-                       _ccspake_cp_256, _ccspake_cp_384, _ccspake_cp_521, _ccspake_generate_L, 
-                       _ccspake_kex_generate, _ccspake_kex_process, _ccspake_mac_compute, 
-                       _ccspake_mac_hkdf_cmac_aes128_sha256, _ccspake_mac_hkdf_hmac_sha256, 
-                       _ccspake_mac_hkdf_hmac_sha512, _ccspake_mac_verify_and_get_session_key, 
-                       _ccspake_prover_init, _ccspake_sizeof_ctx, _ccspake_sizeof_point, 
-                       _ccspake_sizeof_w, _ccspake_verifier_init, _ccsrp_client_process_challenge, 
-                       _ccsrp_client_start_authentication, _ccsrp_client_verify_session, 
-                       _ccsrp_generate_salt_and_verification, _ccsrp_generate_verifier, 
-                       _ccsrp_gp_rfc5054_1024, _ccsrp_gp_rfc5054_2048, _ccsrp_gp_rfc5054_3072, 
-                       _ccsrp_gp_rfc5054_4096, _ccsrp_gp_rfc5054_8192, _ccsrp_server_compute_session, 
-                       _ccsrp_server_generate_public_key, _ccsrp_server_start_authentication, 
-                       _ccsrp_server_verify_session, _ccss_shamir_parameters_init, 
-                       _ccss_shamir_parameters_maximum_secret_length, _ccss_shamir_share_bag_add_share, 
-                       _ccss_shamir_share_bag_init, _ccss_shamir_share_bag_recover_secret, 
-                       _ccss_shamir_share_export, _ccss_shamir_share_generator_deserialize, 
-                       _ccss_shamir_share_generator_generate_share, _ccss_shamir_share_generator_init, 
-                       _ccss_shamir_share_generator_init_with_secrets_less_than_prime, 
+                       _ccrsa_priv_crypt, _ccrsa_pub_crypt, _ccrsa_pubkeylength, 
+                       _ccrsa_recover_priv, _ccrsa_sign_pkcs1v15, _ccrsa_sign_pkcs1v15_msg, 
+                       _ccrsa_sign_pss, _ccrsa_sign_pss_msg, _ccrsa_verify_pkcs1v15, 
+                       _ccrsa_verify_pkcs1v15_allowshortsigs, _ccrsa_verify_pkcs1v15_digest, 
+                       _ccrsa_verify_pkcs1v15_msg, _ccrsa_verify_pss_digest, _ccrsa_verify_pss_msg, 
+                       _ccrsabssa_blind_message, _ccrsabssa_ciphersuite_rsa2048_sha256, 
+                       _ccrsabssa_ciphersuite_rsa2048_sha384, _ccrsabssa_ciphersuite_rsa3072_sha256, 
+                       _ccrsabssa_ciphersuite_rsa3072_sha384, _ccrsabssa_ciphersuite_rsa4096_sha384, 
+                       _ccrsabssa_sign_blinded_message, _ccrsabssa_unblind_signature, 
+                       _ccsae_gen_kck_and_pmk, _ccsae_gen_password_value, _ccsae_generate_commitment, 
+                       _ccsae_generate_commitment_finalize, _ccsae_generate_commitment_init, 
+                       _ccsae_generate_commitment_partial, _ccsae_generate_confirmation, 
+                       _ccsae_generate_h2c_commit, _ccsae_generate_h2c_pt, _ccsae_get_keys, 
+                       _ccsae_init, _ccsae_init_p256_sha256, _ccsae_lexographic_order_key, 
+                       _ccsae_sizeof_commitment, _ccsae_sizeof_confirmation, _ccsae_sizeof_ctx, 
+                       _ccsae_sizeof_pt, _ccsae_verify_commitment, _ccsae_verify_confirmation, 
+                       _ccscrypt, _ccscrypt_storage_size, _ccsha1_di, _ccsha1_eay_di, 
+                       _ccsha1_ltc_di, _ccsha224_di, _ccsha224_ltc_di, _ccsha256_di, 
+                       _ccsha256_ltc_di, _ccsha384_di, _ccsha384_ltc_di, _ccsha512_256_di, 
+                       _ccsha512_256_ltc_di, _ccsha512_di, _ccsha512_ltc_di, _ccsigma_clear, 
+                       _ccsigma_clear_key, _ccsigma_compute_mac, _ccsigma_derive_session_keys, 
+                       _ccsigma_export_key_share, _ccsigma_import_peer_key_share, 
+                       _ccsigma_import_peer_verification_key, _ccsigma_import_signing_key, 
+                       _ccsigma_init, _ccsigma_kex_init_ctx, _ccsigma_kex_resp_ctx, 
+                       _ccsigma_mfi_info, _ccsigma_open, _ccsigma_peer_role, _ccsigma_seal, 
+                       _ccsigma_set_signing_function, _ccsigma_sign, _ccsigma_verify, 
+                       _ccsiv_hmac_aad, _ccsiv_hmac_ciphertext_size, _ccsiv_hmac_crypt, 
+                       _ccsiv_hmac_init, _ccsiv_hmac_one_shot, _ccsiv_hmac_plaintext_size, 
+                       _ccsiv_hmac_reset, _ccsiv_hmac_set_nonce, _ccspake_cp_256, 
+                       _ccspake_cp_384, _ccspake_cp_521, _ccspake_generate_L, _ccspake_kex_generate, 
+                       _ccspake_kex_process, _ccspake_mac_compute, _ccspake_mac_hkdf_cmac_aes128_sha256, 
+                       _ccspake_mac_hkdf_hmac_sha256, _ccspake_mac_hkdf_hmac_sha512, 
+                       _ccspake_mac_verify_and_get_session_key, _ccspake_prover_init, 
+                       _ccspake_sizeof_ctx, _ccspake_sizeof_point, _ccspake_sizeof_w, 
+                       _ccspake_verifier_init, _ccsrp_client_process_challenge, _ccsrp_client_start_authentication, 
+                       _ccsrp_client_verify_session, _ccsrp_generate_salt_and_verification, 
+                       _ccsrp_generate_verifier, _ccsrp_gp_rfc5054_1024, _ccsrp_gp_rfc5054_2048, 
+                       _ccsrp_gp_rfc5054_3072, _ccsrp_gp_rfc5054_4096, _ccsrp_gp_rfc5054_8192, 
+                       _ccsrp_server_compute_session, _ccsrp_server_generate_public_key, 
+                       _ccsrp_server_start_authentication, _ccsrp_server_verify_session, 
+                       _ccss_shamir_parameters_init, _ccss_shamir_parameters_maximum_secret_length, 
+                       _ccss_shamir_share_bag_add_share, _ccss_shamir_share_bag_init, 
+                       _ccss_shamir_share_bag_recover_secret, _ccss_shamir_share_export, 
+                       _ccss_shamir_share_generator_deserialize, _ccss_shamir_share_generator_generate_share, 
+                       _ccss_shamir_share_generator_init, _ccss_shamir_share_generator_init_with_secrets_less_than_prime, 
                        _ccss_shamir_share_generator_serialize, _ccss_shamir_share_import, 
                        _ccss_shamir_share_init, _ccss_shamir_share_sizeof_y, _ccss_sizeof_generator, 
                        _ccss_sizeof_parameters, _ccss_sizeof_shamir_share_generator_serialization, 
@@ -746,19 +745,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5AF10671-5C08-3AEA-8642-74A10F415978
+    value:           C8F7BFB6-4B1A-37CD-A32D-CD5069C916DF
   - target:          x86_64-maccatalyst
-    value:           5AF10671-5C08-3AEA-8642-74A10F415978
+    value:           C8F7BFB6-4B1A-37CD-A32D-CD5069C916DF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           66D4B2BB-BA87-3B16-9F70-84E1ADDC5270
+    value:           3A9E9A1E-72B6-3F66-AA17-D955384C1A39
   - target:          arm64e-maccatalyst
-    value:           66D4B2BB-BA87-3B16-9F70-84E1ADDC5270
+    value:           3A9E9A1E-72B6-3F66-AA17-D955384C1A39
 install-name:    '/usr/lib/system/libdispatch.dylib'
-current-version: 1324.0.10
+current-version: 1324.60.3
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -801,23 +800,22 @@ exports:
                        __os_object_retain_with_resurrect, _dispatch_activate, _dispatch_after, 
                        _dispatch_after_f, _dispatch_allocator_layout, _dispatch_apply, 
                        _dispatch_apply_attr_destroy, _dispatch_apply_attr_init, _dispatch_apply_attr_query, 
-                       _dispatch_apply_attr_set_amx_parallelism, _dispatch_apply_f, 
-                       _dispatch_apply_with_attr, _dispatch_apply_with_attr_f, _dispatch_assert_queue, 
-                       '_dispatch_assert_queue$V2', _dispatch_assert_queue_barrier, 
-                       _dispatch_assert_queue_not, '_dispatch_assert_queue_not$V2', 
-                       _dispatch_async, _dispatch_async_and_wait, _dispatch_async_and_wait_f, 
-                       _dispatch_async_enforce_qos_class_f, _dispatch_async_f, _dispatch_async_swift_job, 
-                       _dispatch_atfork_child, _dispatch_atfork_parent, _dispatch_atfork_prepare, 
-                       _dispatch_barrier_async, _dispatch_barrier_async_and_wait, 
-                       _dispatch_barrier_async_and_wait_f, _dispatch_barrier_async_f, 
-                       _dispatch_barrier_sync, _dispatch_barrier_sync_f, _dispatch_benchmark, 
-                       _dispatch_benchmark_f, _dispatch_block_cancel, _dispatch_block_create, 
-                       _dispatch_block_create_with_qos_class, _dispatch_block_create_with_voucher, 
-                       _dispatch_block_create_with_voucher_and_qos_class, _dispatch_block_notify, 
-                       _dispatch_block_perform, _dispatch_block_testcancel, _dispatch_block_wait, 
-                       _dispatch_channel_async, _dispatch_channel_async_f, _dispatch_channel_cancel, 
-                       _dispatch_channel_create, _dispatch_channel_drain, _dispatch_channel_drain_f, 
-                       _dispatch_channel_enqueue, _dispatch_channel_foreach_work_item_peek, 
+                       _dispatch_apply_attr_set_parallelism, _dispatch_apply_f, _dispatch_apply_with_attr, 
+                       _dispatch_apply_with_attr_f, _dispatch_assert_queue, '_dispatch_assert_queue$V2', 
+                       _dispatch_assert_queue_barrier, _dispatch_assert_queue_not, 
+                       '_dispatch_assert_queue_not$V2', _dispatch_async, _dispatch_async_and_wait, 
+                       _dispatch_async_and_wait_f, _dispatch_async_enforce_qos_class_f, 
+                       _dispatch_async_f, _dispatch_async_swift_job, _dispatch_atfork_child, 
+                       _dispatch_atfork_parent, _dispatch_atfork_prepare, _dispatch_barrier_async, 
+                       _dispatch_barrier_async_and_wait, _dispatch_barrier_async_and_wait_f, 
+                       _dispatch_barrier_async_f, _dispatch_barrier_sync, _dispatch_barrier_sync_f, 
+                       _dispatch_benchmark, _dispatch_benchmark_f, _dispatch_block_cancel, 
+                       _dispatch_block_create, _dispatch_block_create_with_qos_class, 
+                       _dispatch_block_create_with_voucher, _dispatch_block_create_with_voucher_and_qos_class, 
+                       _dispatch_block_notify, _dispatch_block_perform, _dispatch_block_testcancel, 
+                       _dispatch_block_wait, _dispatch_channel_async, _dispatch_channel_async_f, 
+                       _dispatch_channel_cancel, _dispatch_channel_create, _dispatch_channel_drain, 
+                       _dispatch_channel_drain_f, _dispatch_channel_enqueue, _dispatch_channel_foreach_work_item_peek, 
                        _dispatch_channel_foreach_work_item_peek_f, _dispatch_channel_testcancel, 
                        _dispatch_channel_wakeup, _dispatch_data_apply, _dispatch_data_apply_f, 
                        _dispatch_data_copy_region, _dispatch_data_create, _dispatch_data_create_alloc, 
@@ -919,26 +917,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3AEF59E6-876D-365F-ADEB-671489C218D0
+    value:           AFE6C76A-B47A-35F5-91D0-4E9FC439E90D
   - target:          x86_64-maccatalyst
-    value:           3AEF59E6-876D-365F-ADEB-671489C218D0
+    value:           AFE6C76A-B47A-35F5-91D0-4E9FC439E90D
   - target:          arm64-macos
-    value:           DD04B7F6-1570-37D6-947F-2B47DFA4C5A3
+    value:           2EA09BDB-811B-33AA-BB58-4B53AA2DB522
   - target:          arm64-maccatalyst
-    value:           DD04B7F6-1570-37D6-947F-2B47DFA4C5A3
+    value:           2EA09BDB-811B-33AA-BB58-4B53AA2DB522
   - target:          arm64e-macos
-    value:           0A1BCAC9-FD98-3C38-BDBF-83952D424107
+    value:           09AB3723-C26D-3762-93BA-98E9C38B89C1
   - target:          arm64e-maccatalyst
-    value:           0A1BCAC9-FD98-3C38-BDBF-83952D424107
+    value:           09AB3723-C26D-3762-93BA-98E9C38B89C1
 install-name:    '/usr/lib/system/libdyld.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos ]
     symbols:         [ _dyld_shared_cache_for_each_subcache4Rosetta, _dyld_shared_subcache_get_info4Rosetta ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos, x86_64-maccatalyst, 
                        arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _NSAddImage, _NSAddLibrary, _NSAddLibraryWithSearching, _NSAddressOfSymbol, 
                        _NSCreateObjectFileImageFromFile, _NSCreateObjectFileImageFromMemory, 
@@ -1001,24 +999,25 @@ exports:
                        _dyld_shared_cache_for_each_image, _dyld_shared_cache_for_file, 
                        _dyld_shared_cache_get_base_address, _dyld_shared_cache_get_mapped_size, 
                        _dyld_shared_cache_is_mapped_private, _dyld_shared_cache_iterate_text, 
-                       _dyld_shared_cache_some_image_overridden, _environ, dyld_stub_binder ]
+                       _dyld_shared_cache_pin_mapping, _dyld_shared_cache_some_image_overridden, 
+                       _dyld_shared_cache_unpin_mapping, _environ, dyld_stub_binder ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8793E596-3200-3968-A002-F9F86A36EB09
+    value:           197BE4E9-EA0B-3CAF-AB8B-6AB3E90E9525
   - target:          x86_64-maccatalyst
-    value:           8793E596-3200-3968-A002-F9F86A36EB09
+    value:           197BE4E9-EA0B-3CAF-AB8B-6AB3E90E9525
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           58FEFE1B-9BD9-3E2C-8360-39280B192C74
+    value:           A5A2F70A-E083-3298-88C2-AD550AE48370
   - target:          arm64e-maccatalyst
-    value:           58FEFE1B-9BD9-3E2C-8360-39280B192C74
+    value:           A5A2F70A-E083-3298-88C2-AD550AE48370
 install-name:    '/usr/lib/system/libkeymgr.dylib'
 current-version: 31
 parent-umbrella:
@@ -1038,24 +1037,24 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A92DDF36-EC5B-3C0C-877A-240A6653591A
+    value:           12BAAB7B-0213-356B-A248-A74D6BF1B99D
   - target:          x86_64-maccatalyst
-    value:           A92DDF36-EC5B-3C0C-877A-240A6653591A
+    value:           12BAAB7B-0213-356B-A248-A74D6BF1B99D
   - target:          arm64-macos
-    value:           B965792C-E461-3F9B-9A00-EA6ECAB479CA
+    value:           4CA91773-89B9-3FF1-B776-E4BC1451F511
   - target:          arm64-maccatalyst
-    value:           B965792C-E461-3F9B-9A00-EA6ECAB479CA
+    value:           4CA91773-89B9-3FF1-B776-E4BC1451F511
   - target:          arm64e-macos
-    value:           40740CAA-C0D7-3AF6-B8FD-76624926741C
+    value:           83C8661F-D9F2-3931-952C-6247173649FB
   - target:          arm64e-maccatalyst
-    value:           40740CAA-C0D7-3AF6-B8FD-76624926741C
+    value:           83C8661F-D9F2-3931-952C-6247173649FB
 install-name:    '/usr/lib/system/libmacho.dylib'
 current-version: 987
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
     umbrella:        System
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos, x86_64-maccatalyst ]
+  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ _NXCombineCpuSubtypes, _NXFindBestFatArch, _NXFindBestFatArch_64, 
                        _NXFreeArchInfo, _NXGetAllArchInfos, _NXGetArchInfoFromCpuType, 
                        _NXGetArchInfoFromName, _NXGetLocalArchInfo, _get_edata, _get_end, 
@@ -1098,19 +1097,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F97DC960-CC0A-3214-9AE9-C860FBAC4C96
+    value:           69A71B56-CEA7-379B-8A08-757209815C7B
   - target:          x86_64-maccatalyst
-    value:           F97DC960-CC0A-3214-9AE9-C860FBAC4C96
+    value:           69A71B56-CEA7-379B-8A08-757209815C7B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           228E3C78-358A-32A5-9933-B8B9DA4C334A
+    value:           0F140B2F-8214-30B8-9CDA-7F0DB8DE13FE
   - target:          arm64e-maccatalyst
-    value:           228E3C78-358A-32A5-9933-B8B9DA4C334A
+    value:           0F140B2F-8214-30B8-9CDA-7F0DB8DE13FE
 install-name:    '/usr/lib/system/libquarantine.dylib'
-current-version: 129
+current-version: 133
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1139,9 +1138,10 @@ exports:
                        _responsibility_identity_get_binary_entitlement_data, _responsibility_identity_get_binary_is_platform, 
                        _responsibility_identity_get_binary_offset, _responsibility_identity_get_binary_path, 
                        _responsibility_identity_get_binary_signing_id, _responsibility_identity_get_binary_team_id, 
-                       _responsibility_identity_get_hosted_path, _responsibility_identity_get_persistent_identifier, 
-                       _responsibility_identity_get_user_uuid, _responsibility_identity_release, 
-                       _responsibility_init, _responsibility_set_audittoken_responsible_for_caller, 
+                       _responsibility_identity_get_csflags, _responsibility_identity_get_hosted_path, 
+                       _responsibility_identity_get_persistent_identifier, _responsibility_identity_get_platform, 
+                       _responsibility_identity_get_sdk, _responsibility_identity_get_user_uuid, 
+                       _responsibility_identity_release, _responsibility_init, _responsibility_set_audittoken_responsible_for_caller, 
                        _responsibility_set_audittoken_responsible_for_self, _responsibility_set_caller_responsible_for_self, 
                        _responsibility_set_hosted_path, _responsibility_set_pid_responsible_for_pid, 
                        _responsibility_spawnattrs_getdisclaim, _responsibility_spawnattrs_setdisclaim ]
@@ -1151,17 +1151,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4AB0C69A-3DCA-3FA9-98BB-B1BD8791FCA0
+    value:           3611DC3A-03D7-3B5E-A7F3-89C5FB002F2B
   - target:          x86_64-maccatalyst
-    value:           4AB0C69A-3DCA-3FA9-98BB-B1BD8791FCA0
+    value:           3611DC3A-03D7-3B5E-A7F3-89C5FB002F2B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2EF78366-6EBF-371D-AC69-670FCBC60F8F
+    value:           DCBB4D26-765D-3FE9-825D-40CB4CBD2D6A
   - target:          arm64e-maccatalyst
-    value:           2EF78366-6EBF-371D-AC69-670FCBC60F8F
+    value:           DCBB4D26-765D-3FE9-825D-40CB4CBD2D6A
 install-name:    '/usr/lib/system/libremovefile.dylib'
 current-version: 60
 parent-umbrella:
@@ -1182,19 +1182,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F9C3A462-6928-3591-88F4-DC5481598D3A
+    value:           FBBB3B65-3035-371C-8CA3-2014558AA52E
   - target:          x86_64-maccatalyst
-    value:           F9C3A462-6928-3591-88F4-DC5481598D3A
+    value:           FBBB3B65-3035-371C-8CA3-2014558AA52E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           59E3058D-9D1F-3E7F-B476-E9BD928D564A
+    value:           1B8BB485-301C-3D2C-88C6-30A36748F370
   - target:          arm64e-maccatalyst
-    value:           59E3058D-9D1F-3E7F-B476-E9BD928D564A
+    value:           1B8BB485-301C-3D2C-88C6-30A36748F370
 install-name:    '/usr/lib/system/libsystem_asl.dylib'
-current-version: 390
+current-version: 392
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1276,17 +1276,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1D0FA752-55CD-30A1-A8F9-A618A6CA73E0
+    value:           5A764E2F-FC3E-3288-8C65-C56BEC2886F1
   - target:          x86_64-maccatalyst
-    value:           1D0FA752-55CD-30A1-A8F9-A618A6CA73E0
+    value:           5A764E2F-FC3E-3288-8C65-C56BEC2886F1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A77F5F54-9E2C-346A-A2FB-1BDB3BBE74C0
+    value:           B7B7480C-F144-3501-8B95-AF95ACEF7BED
   - target:          arm64e-maccatalyst
-    value:           A77F5F54-9E2C-346A-A2FB-1BDB3BBE74C0
+    value:           B7B7480C-F144-3501-8B95-AF95ACEF7BED
 install-name:    '/usr/lib/system/libsystem_blocks.dylib'
 current-version: 79
 parent-umbrella:
@@ -1308,19 +1308,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           88124E02-2312-32F0-AE1C-39861FD7CBFD
+    value:           E58814CC-DCB7-35A5-BADC-E367ED3AC207
   - target:          x86_64-maccatalyst
-    value:           88124E02-2312-32F0-AE1C-39861FD7CBFD
+    value:           E58814CC-DCB7-35A5-BADC-E367ED3AC207
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           585BBEF8-97B0-3CF3-ABF7-C75DC0766D49
+    value:           00FC01C7-36BC-3193-86A3-5C03046B45FB
   - target:          arm64e-maccatalyst
-    value:           585BBEF8-97B0-3CF3-ABF7-C75DC0766D49
+    value:           00FC01C7-36BC-3193-86A3-5C03046B45FB
 install-name:    '/usr/lib/system/libsystem_c.dylib'
-current-version: 1506
+current-version: 1506.40.4
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1615,19 +1615,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           40EAE7A9-1B03-3056-A16A-0C14D0C9F049
+    value:           853B47ED-3771-3136-9693-E58B2F05AD3C
   - target:          x86_64-maccatalyst
-    value:           40EAE7A9-1B03-3056-A16A-0C14D0C9F049
+    value:           853B47ED-3771-3136-9693-E58B2F05AD3C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E54B796C-EFBC-39E8-AF3F-2918ADB181DB
+    value:           9D3DA336-7A42-33CA-BB73-992322C43A79
   - target:          arm64e-maccatalyst
-    value:           E54B796C-EFBC-39E8-AF3F-2918ADB181DB
+    value:           9D3DA336-7A42-33CA-BB73-992322C43A79
 install-name:    '/usr/lib/system/libsystem_collections.dylib'
-current-version: 1506
+current-version: 1506.40.4
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1658,25 +1658,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C92BFB7A-E525-31AC-BE56-C6D4B48376BB
+    value:           2DFAAFFA-D0AB-3205-8BEA-94C7BC6A91C6
   - target:          x86_64-maccatalyst
-    value:           C92BFB7A-E525-31AC-BE56-C6D4B48376BB
+    value:           2DFAAFFA-D0AB-3205-8BEA-94C7BC6A91C6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8225E874-8290-3DD9-B71C-936C6FA95A66
+    value:           E7DED043-0BA8-309E-A2B8-CEF538EDB42C
   - target:          arm64e-maccatalyst
-    value:           8225E874-8290-3DD9-B71C-936C6FA95A66
+    value:           E7DED043-0BA8-309E-A2B8-CEF538EDB42C
 install-name:    '/usr/lib/system/libsystem_configuration.dylib'
-current-version: 1163.0.4
+current-version: 1163.60.3
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ __dns_configuration_ack, __libSC_info_fork_child, __libSC_info_fork_parent, 
                        __libSC_info_fork_prepare, __nwi_config_agent_copy_data, __nwi_state_ack, 
@@ -1698,17 +1698,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           19FFA022-247C-39C4-9335-5F14C0696C6B
+    value:           E52D090E-286C-33F1-B571-DF4A4716FF99
   - target:          x86_64-maccatalyst
-    value:           19FFA022-247C-39C4-9335-5F14C0696C6B
+    value:           E52D090E-286C-33F1-B571-DF4A4716FF99
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0C98ADC1-2D9D-399C-AC87-E8EB7B5DADD3
+    value:           A52DED3E-8E83-3E73-81EE-D6652530C896
   - target:          arm64e-maccatalyst
-    value:           0C98ADC1-2D9D-399C-AC87-E8EB7B5DADD3
+    value:           A52DED3E-8E83-3E73-81EE-D6652530C896
 install-name:    '/usr/lib/system/libsystem_containermanager.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1788,17 +1788,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0CA6B4BC-721C-3C1D-8553-44EF56D30160
+    value:           FE2D44C8-F0A8-304E-915C-63900E53D34F
   - target:          x86_64-maccatalyst
-    value:           0CA6B4BC-721C-3C1D-8553-44EF56D30160
+    value:           FE2D44C8-F0A8-304E-915C-63900E53D34F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           97ECD179-5935-30B3-8BAE-06A94AB99E82
+    value:           862B5C1A-18B9-34F3-92EE-EF7097E231B7
   - target:          arm64e-maccatalyst
-    value:           97ECD179-5935-30B3-8BAE-06A94AB99E82
+    value:           862B5C1A-18B9-34F3-92EE-EF7097E231B7
 install-name:    '/usr/lib/system/libsystem_coreservices.dylib'
 current-version: 133
 parent-umbrella:
@@ -1822,17 +1822,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           54E50EFB-0D8D-39FF-B935-D2A984819E40
+    value:           88F69B74-233C-32A0-8D4A-3FCDD556D829
   - target:          x86_64-maccatalyst
-    value:           54E50EFB-0D8D-39FF-B935-D2A984819E40
+    value:           88F69B74-233C-32A0-8D4A-3FCDD556D829
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AD79E62F-CE8D-3E22-BBBE-5C4D93342CEC
+    value:           3E100E89-39E4-3EB8-B107-74F2128EF205
   - target:          arm64e-maccatalyst
-    value:           AD79E62F-CE8D-3E22-BBBE-5C4D93342CEC
+    value:           3E100E89-39E4-3EB8-B107-74F2128EF205
 install-name:    '/usr/lib/system/libsystem_darwin.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1858,10 +1858,11 @@ exports:
                        _os_simple_hash_string, _os_simple_hash_string_with_seed, 
                        _os_simple_hash_with_seed, _os_subcommand_fprintf, _os_subcommand_main, 
                        _os_subcommand_vfprintf, _os_variant_allows_internal_security_policies, 
-                       _os_variant_check, _os_variant_copy_description, _os_variant_has_factory_content, 
-                       _os_variant_has_internal_content, _os_variant_has_internal_diagnostics, 
-                       _os_variant_has_internal_ui, _os_variant_init_4launchd, _os_variant_is_basesystem, 
-                       _os_variant_is_darwinos, _os_variant_is_recovery, _os_variant_uses_ephemeral_storage, 
+                       _os_variant_allows_security_research, _os_variant_check, _os_variant_copy_description, 
+                       _os_variant_has_factory_content, _os_variant_has_internal_content, 
+                       _os_variant_has_internal_diagnostics, _os_variant_has_internal_ui, 
+                       _os_variant_init_4launchd, _os_variant_is_basesystem, _os_variant_is_darwinos, 
+                       _os_variant_is_recovery, _os_variant_uses_ephemeral_storage, 
                        _realpath_np, _strerror_np, _strexit_np, _symerror_np, _symexit_np, 
                        _sysctl_get_data_np, _sysctlbyname_get_data_np, _sysexit_np, 
                        _vcrfprintf_np, _verr_np, _verrc_np, _vwarn_np, _vwfprintf_np, 
@@ -1872,25 +1873,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3FB85CF6-5212-3930-B3CC-B9A015349001
+    value:           23E1B6FF-AD92-365D-8863-780A8E048E88
   - target:          x86_64-maccatalyst
-    value:           3FB85CF6-5212-3930-B3CC-B9A015349001
+    value:           23E1B6FF-AD92-365D-8863-780A8E048E88
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E41A667F-B14A-3FA7-8779-3D6779499E69
+    value:           B09D4026-65C0-3697-A061-F9EFDD472524
   - target:          arm64e-maccatalyst
-    value:           E41A667F-B14A-3FA7-8779-3D6779499E69
+    value:           B09D4026-65C0-3697-A061-F9EFDD472524
 install-name:    '/usr/lib/system/libsystem_dnssd.dylib'
-current-version: 1552
+current-version: 1556.60.9
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _DNSServiceAddRecord, _DNSServiceBrowse, _DNSServiceConstructFullName, 
                        _DNSServiceCreateConnection, _DNSServiceCreateDelegateConnection, 
@@ -1915,25 +1916,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4E1B66D0-9ED0-3A14-A628-5C091D5589FE
+    value:           036CD6A1-CD55-3558-86E5-8AA371ABAB39
   - target:          x86_64-maccatalyst
-    value:           4E1B66D0-9ED0-3A14-A628-5C091D5589FE
+    value:           036CD6A1-CD55-3558-86E5-8AA371ABAB39
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6F506B0C-F0AC-3F83-A8E7-133DA56049EE
+    value:           D945ABFC-8F6D-355B-A72B-530E52C1AC9B
   - target:          arm64e-maccatalyst
-    value:           6F506B0C-F0AC-3F83-A8E7-133DA56049EE
+    value:           D945ABFC-8F6D-355B-A72B-530E52C1AC9B
 install-name:    '/usr/lib/system/libsystem_featureflags.dylib'
-current-version: 53
+current-version: 56
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ __os_feature_enabled_impl, __os_feature_enabled_simple_impl ]
 --- !tapi-tbd
@@ -1942,17 +1943,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5647341B-A623-3B80-A708-AF91CEC80587
+    value:           E77D39ED-6694-3419-91A2-A771BF5E4CB8
   - target:          x86_64-maccatalyst
-    value:           5647341B-A623-3B80-A708-AF91CEC80587
+    value:           E77D39ED-6694-3419-91A2-A771BF5E4CB8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           94B35115-133F-33A9-A4A0-687DF921795A
+    value:           84ADA565-384C-3208-A670-861402A357CE
   - target:          arm64e-maccatalyst
-    value:           94B35115-133F-33A9-A4A0-687DF921795A
+    value:           84ADA565-384C-3208-A670-861402A357CE
 install-name:    '/usr/lib/system/libsystem_info.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -2079,19 +2080,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           189AC884-2E20-30E3-B609-9984818E21D8
+    value:           3F491A73-398F-3508-AEA5-0B92C40E6D43
   - target:          x86_64-maccatalyst
-    value:           189AC884-2E20-30E3-B609-9984818E21D8
+    value:           3F491A73-398F-3508-AEA5-0B92C40E6D43
   - target:          arm64-macos
-    value:           158AB40A-17E0-3DA8-A537-D4F0A371DE9D
+    value:           B86323DF-4E13-3BAC-8FC0-515B5C5A4007
   - target:          arm64-maccatalyst
-    value:           158AB40A-17E0-3DA8-A537-D4F0A371DE9D
+    value:           B86323DF-4E13-3BAC-8FC0-515B5C5A4007
   - target:          arm64e-macos
-    value:           D106ABE6-F7C8-38AE-9545-B538E8031F03
+    value:           D2CB318A-8F40-333F-914C-0877963AE237
   - target:          arm64e-maccatalyst
-    value:           D106ABE6-F7C8-38AE-9545-B538E8031F03
+    value:           D2CB318A-8F40-333F-914C-0877963AE237
 install-name:    '/usr/lib/system/libsystem_kernel.dylib'
-current-version: 8019.0.72
+current-version: 8019.61.4
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -2344,13 +2345,14 @@ exports:
                        _netagent_trigger, _netname_check_in, _netname_check_out, 
                        _netname_look_up, _netname_version, _nfsclnt, _nfssvc, _non_boost_assertion_token, 
                        _normal_boost_assertion_token, _ntp_adjtime, _ntp_gettime, 
-                       _open, '_open$NOCANCEL', _open_dprotected_np, _openat, '_openat$NOCANCEL', 
-                       _openbyid_np, _os_buflet_get_data_address, _os_buflet_get_data_length, 
-                       _os_buflet_get_data_limit, _os_buflet_get_data_offset, _os_buflet_get_object_address, 
-                       _os_buflet_get_object_limit, _os_buflet_set_data_length, _os_buflet_set_data_offset, 
-                       _os_channel_advance_slot, _os_channel_attr_clone, _os_channel_attr_create, 
-                       _os_channel_attr_destroy, _os_channel_attr_get, _os_channel_attr_get_key, 
-                       _os_channel_attr_set, _os_channel_attr_set_key, _os_channel_available_slot_count, 
+                       _objc_bp_assist_cfg_np, _open, '_open$NOCANCEL', _open_dprotected_np, 
+                       _openat, '_openat$NOCANCEL', _openbyid_np, _os_buflet_get_data_address, 
+                       _os_buflet_get_data_length, _os_buflet_get_data_limit, _os_buflet_get_data_offset, 
+                       _os_buflet_get_object_address, _os_buflet_get_object_limit, 
+                       _os_buflet_set_data_length, _os_buflet_set_data_offset, _os_channel_advance_slot, 
+                       _os_channel_attr_clone, _os_channel_attr_create, _os_channel_attr_destroy, 
+                       _os_channel_attr_get, _os_channel_attr_get_key, _os_channel_attr_set, 
+                       _os_channel_attr_set_key, _os_channel_available_slot_count, 
                        _os_channel_buflet_alloc, _os_channel_buflet_free, _os_channel_configure_interface_advisory, 
                        _os_channel_create, _os_channel_create_extended, _os_channel_destroy, 
                        _os_channel_event_free, _os_channel_event_get_event_data, 
@@ -2563,21 +2565,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0E11E04D-32A5-33F2-890D-7248C417105E
+    value:           CDFE5BD4-FEFD-3B97-9A90-0513B05F91D4
   - target:          x86_64-maccatalyst
-    value:           0E11E04D-32A5-33F2-890D-7248C417105E
+    value:           CDFE5BD4-FEFD-3B97-9A90-0513B05F91D4
   - target:          x86_64h-macos
-    value:           B146BF9F-C24F-3D6B-925C-9FDF489F49BD
+    value:           7E808C0B-093E-3488-9C32-5C58A3606357
   - target:          x86_64h-maccatalyst
-    value:           B146BF9F-C24F-3D6B-925C-9FDF489F49BD
+    value:           7E808C0B-093E-3488-9C32-5C58A3606357
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           02513AEE-7E5D-3D6D-AF7D-DFD80AC5B5C4
+    value:           2F0D5F29-693F-36A2-8C57-0D6E1919586B
   - target:          arm64e-maccatalyst
-    value:           02513AEE-7E5D-3D6D-AF7D-DFD80AC5B5C4
+    value:           2F0D5F29-693F-36A2-8C57-0D6E1919586B
 install-name:    '/usr/lib/system/libsystem_m.dylib'
 current-version: 3204
 parent-umbrella:
@@ -2793,19 +2795,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           959F931E-3221-31DA-9AAE-556F11C812B9
+    value:           CA14841A-43F1-3F98-AD36-4A7C5C2447DA
   - target:          x86_64-maccatalyst
-    value:           959F931E-3221-31DA-9AAE-556F11C812B9
+    value:           CA14841A-43F1-3F98-AD36-4A7C5C2447DA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           95C941B7-A049-3814-8262-BE1DB734B609
+    value:           0E4E31E8-030C-3527-94A1-42E266F3DF58
   - target:          arm64e-maccatalyst
-    value:           95C941B7-A049-3814-8262-BE1DB734B609
+    value:           0E4E31E8-030C-3527-94A1-42E266F3DF58
 install-name:    '/usr/lib/system/libsystem_malloc.dylib'
-current-version: 372
+current-version: 374.60.3
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -2856,24 +2858,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1362F4D5-516D-35E2-8FFE-F2902388209F
+    value:           D723F4CC-5646-3E1C-BA53-368347C41CE3
   - target:          x86_64-maccatalyst
-    value:           1362F4D5-516D-35E2-8FFE-F2902388209F
+    value:           D723F4CC-5646-3E1C-BA53-368347C41CE3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           937682F9-690C-3793-8CD7-06D91248E9BE
+    value:           4C204B86-D6D2-325E-BDA1-C25A88CC8E0E
   - target:          arm64e-maccatalyst
-    value:           937682F9-690C-3793-8CD7-06D91248E9BE
+    value:           4C204B86-D6D2-325E-BDA1-C25A88CC8E0E
 install-name:    '/usr/lib/system/libsystem_networkextension.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _NEHelperCacheAddRedirectedAddress, _NEHelperCacheClearRedirectedAddresses, 
                        _NEHelperCacheClearUUIDs, _NEHelperCacheCopyAppUUIDMapping, 
@@ -2881,25 +2883,26 @@ exports:
                        _NEHelperCacheCopySigningIdentifierMapping, _NEHelperCacheSetDomainDictionaries, 
                        _NEHelperCacheSetRoutes, _NEHelperCopyAggregatePathRules, 
                        _NEHelperCopyAppInfo, _NEHelperCopyCurrentNetworkAsync, _NEHelperCopyCurrentNetworkInfo, 
-                       _NEHelperCopyPerAppDomains, _NEHelperCopyPreferredBundleID, 
-                       _NEHelperCopyResponse, _NEHelperGetIKESocket, _NEHelperGetIKESocketWithResult, 
-                       _NEHelperGetKernelControlSocket, _NEHelperGetKernelControlSocketExtended, 
-                       _NEHelperGetNECPSessionFD, _NEHelperGetPFKeySocket, _NEHelperHandleConfigurationsChangedBySC, 
+                       _NEHelperCopyPerAppDomains, _NEHelperCopyResponse, _NEHelperGetIKESocket, 
+                       _NEHelperGetIKESocketWithResult, _NEHelperGetKernelControlSocket, 
+                       _NEHelperGetKernelControlSocketExtended, _NEHelperGetNECPSessionFD, 
+                       _NEHelperGetPFKeySocket, _NEHelperHandleConfigurationsChangedBySC, 
                        _NEHelperInit, _NEHelperInterfaceRemoveAddress, _NEHelperInterfaceSetAddress, 
-                       _NEHelperInterfaceSetMTU, _NEHelperInterfaceSetOption, _NEHelperSendRequest, 
-                       _NEHelperSettingsSetArray, _NEHelperSettingsSetBool, _NEHelperSettingsSetNumber, 
-                       _NEHelperVPNConfigurationExists, _NEHelperVPNSetEnabled, _g_ne_read_uuid_cache, 
-                       _g_ne_uuid_cache_hit, _ne_copy_cached_bundle_identifier_for_uuid, 
-                       _ne_copy_cached_preferred_bundle_for_bundle_identifier, _ne_copy_cached_uuids_for_bundle_identifier, 
-                       _ne_copy_signature_info_for_pid, _ne_copy_signing_identifier_for_pid, 
-                       _ne_copy_uuid_cache, _ne_force_reset_uuid_cache, _ne_get_configuration_generation, 
+                       _NEHelperInterfaceSetAddressWithLifetime, _NEHelperInterfaceSetMTU, 
+                       _NEHelperInterfaceSetOption, _NEHelperSendRequest, _NEHelperSettingsSetArray, 
+                       _NEHelperSettingsSetBool, _NEHelperSettingsSetNumber, _NEHelperVPNConfigurationExists, 
+                       _NEHelperVPNSetEnabled, _g_ne_read_uuid_cache, _g_ne_uuid_cache_hit, 
+                       _ne_copy_cached_bundle_identifier_for_uuid, _ne_copy_cached_preferred_bundle_for_bundle_identifier, 
+                       _ne_copy_cached_uuids_for_bundle_identifier, _ne_copy_signature_info_for_pid, 
+                       _ne_copy_signing_identifier_for_pid, _ne_copy_uuid_cache, 
+                       _ne_force_reset_uuid_cache, _ne_get_configuration_generation, 
                        _ne_is_sockaddr_valid, _ne_log_large_obj, _ne_log_obj, _ne_print_backtrace, 
                        _ne_privacy_dns_netagent_id, _ne_privacy_proxy_netagent_id, 
                        _ne_session_add_necp_drop_dest_from_dest_list, _ne_session_add_necp_drop_dest_from_path, 
                        _ne_session_address_matches_subnets, _ne_session_agent_get_advisory, 
                        _ne_session_agent_get_advisory_interface_index, _ne_session_always_on_vpn_configs_present, 
                        _ne_session_always_on_vpn_configs_present_at_boot, _ne_session_app_vpn_configs_present, 
-                       _ne_session_cancel, _ne_session_content_filter_configs_present, 
+                       _ne_session_cancel, _ne_session_clear_caches, _ne_session_content_filter_configs_present, 
                        _ne_session_copy_app_data_from_flow_divert_socket, _ne_session_copy_app_data_from_flow_divert_token, 
                        _ne_session_copy_os_version_string, _ne_session_copy_policy_match, 
                        _ne_session_copy_security_session_info, _ne_session_copy_socket_attributes, 
@@ -2947,17 +2950,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CECF6C3C-8E36-347E-A8A4-7D2BA8393F60
+    value:           852A8374-47B3-3491-9934-E21875225FB2
   - target:          x86_64-maccatalyst
-    value:           CECF6C3C-8E36-347E-A8A4-7D2BA8393F60
+    value:           852A8374-47B3-3491-9934-E21875225FB2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           80A7ACB1-4826-3920-98DB-DFB29E0B1D94
+    value:           8B7B82AA-4714-3EAF-9DED-EBFA363295EB
   - target:          arm64e-maccatalyst
-    value:           80A7ACB1-4826-3920-98DB-DFB29E0B1D94
+    value:           8B7B82AA-4714-3EAF-9DED-EBFA363295EB
 install-name:    '/usr/lib/system/libsystem_notify.dylib'
 current-version: 301
 parent-umbrella:
@@ -2980,19 +2983,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E1F35BF9-4157-3DC7-B705-EE11A6E0BC7D
+    value:           11149C06-9EC7-3AF6-BC27-8FFC328845B8
   - target:          x86_64-maccatalyst
-    value:           E1F35BF9-4157-3DC7-B705-EE11A6E0BC7D
+    value:           11149C06-9EC7-3AF6-BC27-8FFC328845B8
   - target:          arm64-macos
-    value:           424BDCC2-5CF3-34E0-8477-32ED803BB23B
+    value:           7A48E1C6-39F1-3987-8DA1-F881A40819F6
   - target:          arm64-maccatalyst
-    value:           424BDCC2-5CF3-34E0-8477-32ED803BB23B
+    value:           7A48E1C6-39F1-3987-8DA1-F881A40819F6
   - target:          arm64e-macos
-    value:           359EA557-83A6-349C-8843-1CEE9BCDBBFA
+    value:           EF6555F4-7A8E-3E51-9B40-5381482DEE4D
   - target:          arm64e-maccatalyst
-    value:           359EA557-83A6-349C-8843-1CEE9BCDBBFA
+    value:           EF6555F4-7A8E-3E51-9B40-5381482DEE4D
 install-name:    '/usr/lib/system/libsystem_platform.dylib'
-current-version: 272
+current-version: 273.40.1
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -3072,17 +3075,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5B7F94F8-5F8E-3084-A5E7-F97ACCA1B56F
+    value:           47C1BB9F-34B1-36D5-B96A-5FD114BA3E51
   - target:          x86_64-maccatalyst
-    value:           5B7F94F8-5F8E-3084-A5E7-F97ACCA1B56F
+    value:           47C1BB9F-34B1-36D5-B96A-5FD114BA3E51
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           625E92C9-86E1-3235-9ACD-17075D552807
+    value:           CDC2BAC8-4DF7-39B3-BE4E-38282F077676
   - target:          arm64e-maccatalyst
-    value:           625E92C9-86E1-3235-9ACD-17075D552807
+    value:           CDC2BAC8-4DF7-39B3-BE4E-38282F077676
 install-name:    '/usr/lib/system/libsystem_product_info_filter.dylib'
 current-version: 10
 parent-umbrella:
@@ -3095,19 +3098,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           64E69AF9-3964-396D-AA39-95B86BF68F55
+    value:           6C7561B4-4B92-3F45-921E-ABE669299844
   - target:          x86_64-maccatalyst
-    value:           64E69AF9-3964-396D-AA39-95B86BF68F55
+    value:           6C7561B4-4B92-3F45-921E-ABE669299844
   - target:          arm64-macos
-    value:           E97E7EB5-7CB5-314E-A9FF-894F5D8FA632
+    value:           0C35CA59-6C83-3758-966F-C69972E2CEE8
   - target:          arm64-maccatalyst
-    value:           E97E7EB5-7CB5-314E-A9FF-894F5D8FA632
+    value:           0C35CA59-6C83-3758-966F-C69972E2CEE8
   - target:          arm64e-macos
-    value:           FABC5FCE-C7A9-3DC8-8405-8ACF6F58BB9B
+    value:           ED328B18-EEEF-3B15-8858-798B19B0C2CD
   - target:          arm64e-maccatalyst
-    value:           FABC5FCE-C7A9-3DC8-8405-8ACF6F58BB9B
+    value:           ED328B18-EEEF-3B15-8858-798B19B0C2CD
 install-name:    '/usr/lib/system/libsystem_pthread.dylib'
-current-version: 485.0.2
+current-version: 485.60.2
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -3115,8 +3118,8 @@ parent-umbrella:
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ __pthread_is_threaded, _cthread_yield ]
-  - targets:         [ arm64-macos, x86_64-macos, arm64e-macos, x86_64-maccatalyst, 
+    symbols:         [ __pthread_is_threaded, _cthread_yield, _pthread_prefer_alternate_amx_self ]
+  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos, x86_64-maccatalyst, 
                        arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ ____chkstk_darwin, ___is_threaded, ___pthread_init, ___pthread_late_init, 
                        ___pthread_workqueue_setkill, ___unix_conforming, __pthread_atfork_child, 
@@ -3138,7 +3141,8 @@ exports:
                        __pthread_workqueue_override_reset, __pthread_workqueue_override_start_direct, 
                        __pthread_workqueue_override_start_direct_check_owner, __pthread_workqueue_set_event_manager_priority, 
                        __pthread_workqueue_should_narrow, __pthread_workqueue_supported, 
-                       __pthread_wqthread, _posix_spawnattr_get_qos_class_np, _posix_spawnattr_set_qos_class_np, 
+                       __pthread_wqthread, __pthread_yield_to_enqueuer_4dispatch, 
+                       _posix_spawnattr_get_qos_class_np, _posix_spawnattr_set_qos_class_np, 
                        _pthread_atfork, _pthread_attr_destroy, _pthread_attr_get_qos_class_np, 
                        _pthread_attr_getdetachstate, _pthread_attr_getguardsize, 
                        _pthread_attr_getinheritsched, _pthread_attr_getschedparam, 
@@ -3165,21 +3169,21 @@ exports:
                        _pthread_getspecific, _pthread_install_workgroup_functions_np, 
                        _pthread_introspection_getspecific_np, _pthread_introspection_hook_install, 
                        _pthread_introspection_setspecific_np, _pthread_is_threaded_np, 
-                       _pthread_jit_write_protect_np, _pthread_jit_write_protect_supported_np, 
-                       _pthread_jit_write_with_callback_np, _pthread_join, '_pthread_join$NOCANCEL', 
-                       _pthread_key_create, _pthread_key_delete, _pthread_key_init_np, 
-                       _pthread_kill, _pthread_layout_offsets, _pthread_mach_thread_np, 
-                       _pthread_main_np, _pthread_main_thread_np, _pthread_mutex_destroy, 
-                       _pthread_mutex_getprioceiling, _pthread_mutex_init, _pthread_mutex_lock, 
-                       _pthread_mutex_setprioceiling, _pthread_mutex_trylock, _pthread_mutex_unlock, 
-                       _pthread_mutexattr_destroy, _pthread_mutexattr_getpolicy_np, 
-                       _pthread_mutexattr_getprioceiling, _pthread_mutexattr_getprotocol, 
-                       _pthread_mutexattr_getpshared, _pthread_mutexattr_gettype, 
-                       _pthread_mutexattr_init, _pthread_mutexattr_setpolicy_np, 
+                       _pthread_jit_write_freeze_callbacks_np, _pthread_jit_write_protect_np, 
+                       _pthread_jit_write_protect_supported_np, _pthread_jit_write_with_callback_np, 
+                       _pthread_join, '_pthread_join$NOCANCEL', _pthread_key_create, 
+                       _pthread_key_delete, _pthread_key_init_np, _pthread_kill, 
+                       _pthread_layout_offsets, _pthread_mach_thread_np, _pthread_main_np, 
+                       _pthread_main_thread_np, _pthread_mutex_destroy, _pthread_mutex_getprioceiling, 
+                       _pthread_mutex_init, _pthread_mutex_lock, _pthread_mutex_setprioceiling, 
+                       _pthread_mutex_trylock, _pthread_mutex_unlock, _pthread_mutexattr_destroy, 
+                       _pthread_mutexattr_getpolicy_np, _pthread_mutexattr_getprioceiling, 
+                       _pthread_mutexattr_getprotocol, _pthread_mutexattr_getpshared, 
+                       _pthread_mutexattr_gettype, _pthread_mutexattr_init, _pthread_mutexattr_setpolicy_np, 
                        _pthread_mutexattr_setprioceiling, _pthread_mutexattr_setprotocol, 
                        _pthread_mutexattr_setpshared, _pthread_mutexattr_settype, 
                        _pthread_once, _pthread_override_qos_class_end_np, _pthread_override_qos_class_start_np, 
-                       _pthread_prefer_alternate_amx_self, _pthread_qos_max_parallelism, 
+                       _pthread_prefer_alternate_cluster_self, _pthread_qos_max_parallelism, 
                        _pthread_rwlock_destroy, _pthread_rwlock_init, _pthread_rwlock_rdlock, 
                        _pthread_rwlock_tryrdlock, _pthread_rwlock_trywrlock, _pthread_rwlock_unlock, 
                        _pthread_rwlock_wrlock, _pthread_rwlockattr_destroy, _pthread_rwlockattr_getpshared, 
@@ -3201,25 +3205,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           52B80C16-A457-3246-91AC-BF34D49C784B
+    value:           37213968-2E58-3780-95A4-7861D0859A6B
   - target:          x86_64-maccatalyst
-    value:           52B80C16-A457-3246-91AC-BF34D49C784B
+    value:           37213968-2E58-3780-95A4-7861D0859A6B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0260217A-B800-36E8-BBAB-416BE87D55DA
+    value:           1485320D-2587-35BA-AAD4-441D6C39C98C
   - target:          arm64e-maccatalyst
-    value:           0260217A-B800-36E8-BBAB-416BE87D55DA
+    value:           1485320D-2587-35BA-AAD4-441D6C39C98C
 install-name:    '/usr/lib/system/libsystem_sandbox.dylib'
-current-version: 1654
+current-version: 1656.60.9
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _APP_SANDBOX_IOKIT_CLIENT, _APP_SANDBOX_MACH, _APP_SANDBOX_READ, 
                        _APP_SANDBOX_READ_WRITE, _IOS_SANDBOX_APPLICATION_GROUP, _IOS_SANDBOX_CONTAINER, 
@@ -3239,6 +3243,8 @@ exports:
                        _rootless_convert_to_datavault, _rootless_manifest_free, _rootless_manifest_parse, 
                        _rootless_mkdir_datavault, _rootless_mkdir_nounlink, _rootless_mkdir_restricted, 
                        _rootless_preflight, _rootless_protected_volume, _rootless_register_trusted_storage_class, 
+                       _rootless_remove_datavault_in_favor_of_static_storage_class, 
+                       _rootless_remove_restricted_in_favor_of_static_storage_class, 
                        _rootless_restricted_environment, _rootless_suspend, _rootless_trusted_by_self_token, 
                        _rootless_verify_trusted_by_self_token, _sandbox_builtin_query, 
                        _sandbox_check, _sandbox_check_bulk, _sandbox_check_by_audit_token, 
@@ -3277,19 +3283,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8913DC40-2947-33EA-892D-DB965A15F016
+    value:           796A0F0D-1FDE-3417-AB55-9584022AB706
   - target:          x86_64-maccatalyst
-    value:           8913DC40-2947-33EA-892D-DB965A15F016
+    value:           796A0F0D-1FDE-3417-AB55-9584022AB706
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           38BFF78F-837D-3382-84EE-442148CA290F
+    value:           6A8FEE92-740F-3963-8F1B-98112A619010
   - target:          arm64e-maccatalyst
-    value:           38BFF78F-837D-3382-84EE-442148CA290F
+    value:           6A8FEE92-740F-3963-8F1B-98112A619010
 install-name:    '/usr/lib/system/libsystem_secinit.dylib'
-current-version: 106
+current-version: 106.40.3
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -3306,24 +3312,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           72389369-83CF-3384-A544-A02CEC78C198
+    value:           26DE61C0-0368-3443-8C22-FBDFE6EE41B3
   - target:          x86_64-maccatalyst
-    value:           72389369-83CF-3384-A544-A02CEC78C198
+    value:           26DE61C0-0368-3443-8C22-FBDFE6EE41B3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5A01596A-F9B7-323D-870A-063CC6189217
+    value:           843F619F-8A94-378D-B840-CB8D2CABB98E
   - target:          arm64e-maccatalyst
-    value:           5A01596A-F9B7-323D-870A-063CC6189217
+    value:           843F619F-8A94-378D-B840-CB8D2CABB98E
 install-name:    '/usr/lib/system/libsystem_symptoms.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ __symptoms_daemon_fallback_initial_disposition, __symptoms_daemon_fallback_subseq_disposition, 
                        __symptoms_is_daemon_fallback_blacklisted, _symptom_framework_init, 
@@ -3336,19 +3342,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C3EFB8A3-C895-3D9B-909C-8AF2EDFE3B7A
+    value:           65585D12-C73E-3C71-950A-5BEA94DCE5F1
   - target:          x86_64-maccatalyst
-    value:           C3EFB8A3-C895-3D9B-909C-8AF2EDFE3B7A
+    value:           65585D12-C73E-3C71-950A-5BEA94DCE5F1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D82CB702-FC6D-373A-98DE-C60000ABA75A
+    value:           CB31B40D-D932-3628-A4DC-DC2135F9AECE
   - target:          arm64e-maccatalyst
-    value:           D82CB702-FC6D-373A-98DE-C60000ABA75A
+    value:           CB31B40D-D932-3628-A4DC-DC2135F9AECE
 install-name:    '/usr/lib/system/libsystem_trace.dylib'
-current-version: 1370
+current-version: 1375.40.2
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -3412,17 +3418,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6403EC7A-E990-3062-BB0A-6626FAC25B06
+    value:           3807BCE8-1DCD-3D24-9A10-47D5C0374EEB
   - target:          x86_64-maccatalyst
-    value:           6403EC7A-E990-3062-BB0A-6626FAC25B06
+    value:           3807BCE8-1DCD-3D24-9A10-47D5C0374EEB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DD225AC0-9557-363F-BCA0-03E1B30AE50A
+    value:           04A666D5-2FB4-3D5A-82F8-0EAB2E35EB91
   - target:          arm64e-maccatalyst
-    value:           DD225AC0-9557-363F-BCA0-03E1B30AE50A
+    value:           04A666D5-2FB4-3D5A-82F8-0EAB2E35EB91
 install-name:    '/usr/lib/system/libunwind.dylib'
 current-version: 201
 parent-umbrella:
@@ -3485,19 +3491,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4F2E9B76-DE65-311E-8007-5CD1C89E3410
+    value:           40C9FF9E-4B1A-3776-A46E-D7BD96AF1FEE
   - target:          x86_64-maccatalyst
-    value:           4F2E9B76-DE65-311E-8007-5CD1C89E3410
+    value:           40C9FF9E-4B1A-3776-A46E-D7BD96AF1FEE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FB8A7709-F8D3-3E8B-BD5C-C436E6C765CE
+    value:           1428B9B3-F8A0-3B15-9087-3995662B6252
   - target:          arm64e-maccatalyst
-    value:           FB8A7709-F8D3-3E8B-BD5C-C436E6C765CE
+    value:           1428B9B3-F8A0-3B15-9087-3995662B6252
 install-name:    '/usr/lib/system/libxpc.dylib'
-current-version: 2235.0.32
+current-version: 2235.60.3
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

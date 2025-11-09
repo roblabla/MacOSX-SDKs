@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A1BE8278-9AF3-3E71-A9F6-F45EB0CAC57F
+    value:           BE0FD1EE-92F5-352E-AC12-88FE832C0D84
   - target:          x86_64-maccatalyst
-    value:           A1BE8278-9AF3-3E71-A9F6-F45EB0CAC57F
+    value:           BE0FD1EE-92F5-352E-AC12-88FE832C0D84
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A6868F54-BDD6-30E1-9023-3E691DDABC3C
+    value:           C07AE2DF-BDB2-3888-A617-BF03FCF5794E
   - target:          arm64e-maccatalyst
-    value:           A6868F54-BDD6-30E1-9023-3E691DDABC3C
+    value:           C07AE2DF-BDB2-3888-A617-BF03FCF5794E
 install-name:    '/usr/lib/libenergytrace.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

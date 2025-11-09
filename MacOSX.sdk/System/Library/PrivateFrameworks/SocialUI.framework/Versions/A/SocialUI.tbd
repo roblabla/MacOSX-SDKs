@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           137A93D2-1E25-364E-B4DE-467C65B6BCAA
+    value:           EB6122BE-16F1-35E1-A425-5535D7AA7C84
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           64FE7133-19BB-3D34-B3C5-C6913D81EDEB
+    value:           ED9DDCE2-C326-3E24-97D8-4BD09D02B050
 install-name:    '/System/Library/PrivateFrameworks/SocialUI.framework/Versions/A/SocialUI'
 current-version: 5500
 exports:

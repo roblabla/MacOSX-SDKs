@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E35F0C98-4287-39AF-8633-F9F94773A51D
+    value:           8AA13EB7-29A0-36B0-B303-8EB7B23AAE23
   - target:          x86_64-maccatalyst
-    value:           E35F0C98-4287-39AF-8633-F9F94773A51D
+    value:           8AA13EB7-29A0-36B0-B303-8EB7B23AAE23
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           69A1CC5A-C778-3110-95BA-3F277F60A52B
+    value:           C35495F8-0591-328E-BFD1-C79AFD4B7BF6
   - target:          arm64e-maccatalyst
-    value:           69A1CC5A-C778-3110-95BA-3F277F60A52B
+    value:           C35495F8-0591-328E-BFD1-C79AFD4B7BF6
 install-name:    '/System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation'
 current-version: 55253
 reexported-libraries:

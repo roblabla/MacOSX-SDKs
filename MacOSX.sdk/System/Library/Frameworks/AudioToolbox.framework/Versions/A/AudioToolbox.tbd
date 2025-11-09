@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A9AA0AB8-BE52-3F22-9F90-8C0E954BC751
+    value:           56B338E2-0FD3-3FD1-8899-9B2BA2862D60
   - target:          x86_64-maccatalyst
-    value:           A9AA0AB8-BE52-3F22-9F90-8C0E954BC751
+    value:           56B338E2-0FD3-3FD1-8899-9B2BA2862D60
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DE8320F5-CB8F-3961-BB93-15C1BD6D29F2
+    value:           BF0442D1-43FB-32AD-BE44-3AA838842871
   - target:          arm64e-maccatalyst
-    value:           DE8320F5-CB8F-3961-BB93-15C1BD6D29F2
+    value:           BF0442D1-43FB-32AD-BE44-3AA838842871
 install-name:    '/System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox'
 current-version: 1000
 reexported-libraries:
@@ -275,13 +275,14 @@ exports:
                        __ZN2AT9IOBindingC1EP14AVAudioSession, __ZN2AT9IOBindingC1EPK10__CFString, 
                        __ZN2AT9IOBindingC1Ej, __ZN2AT9IOBindingC2EP14AVAudioSession, 
                        __ZN2AT9IOBindingC2EPK10__CFString, __ZN2AT9IOBindingC2Ej, 
-                       __ZNK2AT9IOBinding11descriptionEv, __ZNK2AT9IOBinding14serializedObjCEv, 
-                       __ZNK2AT9IOBinding7sessionEv, __ZNK2AT9IOBinding8deviceIDEv, 
-                       __ZNK2AT9IOBinding8objcCopyEv, __ZNK2AT9IOBinding9deviceUIDEv, 
-                       __ZNK2AT9IOBinding9sessionIDEv, __ZNK2AT9IOBindingeqERKS0_, 
-                       __ZTV14AQIONodeClient, _allocateHapticSharedMemory, _clearHapticSharedMemory, 
-                       _createHapticSharedMemory, _destroyHapticSharedMemory, _freeHapticSharedMemory, 
-                       _kAudioServicesCreateSystemSoundIDOptionAudioFileURLKey, _kAudioServicesCreateSystemSoundIDOptionLongFormMediaKey, 
+                       __ZNK14AQIONodeClient20IsNowPlayingEligibleEv, __ZNK2AT9IOBinding11descriptionEv, 
+                       __ZNK2AT9IOBinding14serializedObjCEv, __ZNK2AT9IOBinding7sessionEv, 
+                       __ZNK2AT9IOBinding8deviceIDEv, __ZNK2AT9IOBinding8objcCopyEv, 
+                       __ZNK2AT9IOBinding9deviceUIDEv, __ZNK2AT9IOBinding9sessionIDEv, 
+                       __ZNK2AT9IOBindingeqERKS0_, __ZTV14AQIONodeClient, _allocateHapticSharedMemory, 
+                       _clearHapticSharedMemory, _createHapticSharedMemory, _destroyHapticSharedMemory, 
+                       _freeHapticSharedMemory, _kAudioServicesCreateSystemSoundIDOptionAudioFileURLKey, 
+                       _kAudioServicesCreateSystemSoundIDOptionLongFormMediaKey, 
                        _kAudioServicesPlaySystemSoundOptionBehaviorKey, _kAudioServicesPlaySystemSoundOptionFlagsKey, 
                        _kAudioServicesPlaySystemSoundOptionLoopKey, _kAudioSessionInputRoute_BluetoothHFP, 
                        _kAudioSessionInputRoute_BuiltInMic, _kAudioSessionInputRoute_CarAudio, 
@@ -336,17 +337,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E1EE3262-FDEF-34CB-B860-56BA1C656DFD
+    value:           821E4EB4-AB5B-3FA7-AC66-208FFA94E72E
   - target:          x86_64-maccatalyst
-    value:           E1EE3262-FDEF-34CB-B860-56BA1C656DFD
+    value:           821E4EB4-AB5B-3FA7-AC66-208FFA94E72E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3F34609F-1065-3C3B-91D4-4CAE99659742
+    value:           4FFE1A69-3F5F-30E5-94B3-B78DC5ABE07C
   - target:          arm64e-maccatalyst
-    value:           3F34609F-1065-3C3B-91D4-4CAE99659742
+    value:           4FFE1A69-3F5F-30E5-94B3-B78DC5ABE07C
 install-name:    '/System/Library/PrivateFrameworks/AudioToolboxCore.framework/Versions/A/AudioToolboxCore'
 exports:
   - targets:         [ x86_64-macos ]

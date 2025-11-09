@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DA6D3192-DCD5-3699-B794-B3E3627DC96F
+    value:           3AC6FAAB-153D-340E-B4BD-07D113B0EAC7
   - target:          x86_64-maccatalyst
-    value:           DA6D3192-DCD5-3699-B794-B3E3627DC96F
+    value:           3AC6FAAB-153D-340E-B4BD-07D113B0EAC7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2CB735DD-8DB1-3A7A-89FE-B3738BA86252
+    value:           0D91FC7D-D25F-34F3-9E55-2548FA622F28
   - target:          arm64e-maccatalyst
-    value:           2CB735DD-8DB1-3A7A-89FE-B3738BA86252
+    value:           0D91FC7D-D25F-34F3-9E55-2548FA622F28
 install-name:    '/System/Library/Frameworks/LocalAuthentication.framework/Support/SharedUtils.framework/Versions/A/SharedUtils'
-current-version: 983
+current-version: 984.60.3
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -103,7 +103,7 @@ exports:
                        _verifyAclConstraintInternal ]
     objc-classes:    [ LAACMHelper, LAADMUser, LAAssertionsProxy, LABaseService, 
                        LABaseServiceManager, LACachedExternalizedContext, LADFR, 
-                       LADefaultServiceSession, LAErrorHelper, LAIdleWatchdog, LAInternalProtocols, 
+                       LADefaultServiceSession, LAErrorHelper, LAInternalProtocols, 
                        LAManagedACMParameter, LAMobileGestalt, LAParamChecker, LAPasscodeHelper, 
                        LASecureData, LASerialSchedulerInternal, LAUtils, LAWeakBox ]
     objc-ivars:      [ LABaseService._clients, LABaseService._listener, LABaseService._terminating, 

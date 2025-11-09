@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9C61120B-5070-3CB2-AB91-5653B326D072
+    value:           425EDBB8-5503-3226-BAF3-73006A252F9B
   - target:          x86_64-maccatalyst
-    value:           9C61120B-5070-3CB2-AB91-5653B326D072
+    value:           425EDBB8-5503-3226-BAF3-73006A252F9B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0F262599-0B73-34B0-BDE6-D165E9464168
+    value:           185BF372-C14C-357C-94D7-DF146BC3CC44
   - target:          arm64e-maccatalyst
-    value:           0F262599-0B73-34B0-BDE6-D165E9464168
+    value:           185BF372-C14C-357C-94D7-DF146BC3CC44
 install-name:    '/usr/lib/libAudioToolboxUtility.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -46,8 +46,8 @@ exports:
                        __Z20CAIsDebuggerAttachedv, __Z20MIDIPacketList_SplitP14MIDIPacketListm, 
                        __Z21CAShowAudioBufferListRK15AudioBufferListiRK27AudioStreamBasicDescriptionPKc, 
                        __Z21CAShowAudioBufferListRK15AudioBufferListiiPKc, __Z21DFT_split_180_executeP20vDSP_DFT_SetupStructPKfS2_PfS3_18vDSP_DFT_Direction, 
-                       __Z27CACFPreferencesCopyAppValuePK10__CFStringS1_, __Z31CACFPreferencesGetAppFloatValuePK10__CFStringS1_Pb, 
-                       __Z32CACFPreferencesGetAppFourCCValuePK10__CFStringS1_Pb, 
+                       __Z23OpaqueObjectMgrInstancev, __Z27CACFPreferencesCopyAppValuePK10__CFStringS1_, 
+                       __Z31CACFPreferencesGetAppFloatValuePK10__CFStringS1_Pb, __Z32CACFPreferencesGetAppFourCCValuePK10__CFStringS1_Pb, 
                        __Z33CACFPreferencesGetAppBooleanValuePK10__CFStringS1_Pb, 
                        __Z33CACFPreferencesGetAppIntegerValuePK10__CFStringS1_Pb, 
                        __Z4ReadR14CADeserializerRP18AudioChannelLayoutRm, __Z9GetKaiserjd, 
@@ -207,24 +207,25 @@ exports:
                        __ZN15CASharedLibrary31LoadLibraryAndGetRoutineAddressEPKcS1_S1_, 
                        __ZN15CASharedLibrary32GetRoutineAddressIfLibraryLoadedEPKcS1_S1_, 
                        __ZN15CATimeUtilities23GetCurrentGregorianDateEv, __ZN15CATimeUtilities29GregorianDateFromAbsoluteTimeEd, 
-                       __ZN15OpaqueObjectMgr3addEP16BaseOpaqueObject, __ZN15OpaqueObjectMgr6lookupEj, 
-                       __ZN15OpaqueObjectMgr6removeEj, __ZN15OpaqueObjectMgr9sInstanceE, 
-                       __ZN15OpaqueObjectMgrC1Ev, __ZN15OpaqueObjectMgrC2Ev, __ZN16BaseOpaqueObject16ResolveOpaqueRefERKNS_4RTTIENS_3RefE, 
+                       __ZN15OpaqueObjectMgr3addEP16BaseOpaqueObject, __ZN15OpaqueObjectMgr3addEjP16BaseOpaqueObject, 
+                       __ZN15OpaqueObjectMgr6lookupEj, __ZN15OpaqueObjectMgr6removeEj, 
+                       __ZN15OpaqueObjectMgr9sInstanceE, __ZN15OpaqueObjectMgrC1Ev, 
+                       __ZN15OpaqueObjectMgrC2Ev, __ZN16BaseOpaqueObject16ResolveOpaqueRefERKNS_4RTTIENS_3RefE, 
                        __ZN16BaseOpaqueObject16destroyOpaqueRefEv, __ZN16BaseOpaqueObject9checkRTTIERKNS_4RTTIE, 
-                       __ZN16BaseOpaqueObject9sBaseRTTIE, __ZN16BaseOpaqueObjectC2Ev, 
-                       __ZN16BaseOpaqueObjectD0Ev, __ZN16BaseOpaqueObjectD1Ev, __ZN16BaseOpaqueObjectD2Ev, 
-                       __ZN16CAAppWorkArounds10CSCheckFixEPK10__CFString, __ZN16CAAppWorkArounds16PrimeWorkaroundsEv, 
-                       __ZN16CAAppWorkArounds18CheckFixForOlderSTEv, __ZN16CAAppWorkArounds18PrimeUIWorkaroundsEv, 
-                       __ZN16CAAppWorkArounds19CheckFixForOlderFCPEv, __ZN16CAAppWorkArounds22Needs3310485WorkAroundEv, 
-                       __ZN16CAAppWorkArounds22Needs3385081WorkAroundEv, __ZN16CAAppWorkArounds22Needs3413239WorkAroundEv, 
-                       __ZN16CAAppWorkArounds22Needs3416629WorkAroundEv, __ZN16CAAppWorkArounds22Needs3853060WorkAroundEv, 
-                       __ZN16CAAppWorkArounds22Needs3908162WorkAroundEv, __ZN16CAAppWorkArounds22Needs4906044WorkAroundEv, 
-                       __ZN16CAAppWorkArounds22Needs5360194WorkAroundEv, __ZN16CAAppWorkArounds22Needs5403797WorkAroundEv, 
-                       __ZN16CAAppWorkArounds22Needs6164787WorkAroundEv, __ZN16CAAppWorkArounds22Needs6442415WorkAroundEv, 
-                       __ZN16CAAppWorkArounds22Needs6513185WorkaroundEv, __ZN16CAAppWorkArounds22Needs6858274WorkAroundEv, 
-                       __ZN16CAAppWorkArounds22Needs7025278WorkaroundEv, __ZN16CAAppWorkArounds22Neesd6552759WorkAroundEv, 
-                       __ZN16CAAppWorkArounds23Needs32137910WorkaroundEv, __ZN16CAAppWorkArounds24Needs6860184UIWorkaroundEv, 
-                       __ZN16CAAppWorkArounds24NeedsNoPluginsWorkaroundEv, __ZN17PlatformUtilities11ProcessNameEi, 
+                       __ZN16BaseOpaqueObject9sBaseRTTIE, __ZN16BaseOpaqueObjectC2Ej, 
+                       __ZN16BaseOpaqueObjectC2Ev, __ZN16BaseOpaqueObjectD0Ev, __ZN16BaseOpaqueObjectD1Ev, 
+                       __ZN16BaseOpaqueObjectD2Ev, __ZN16CAAppWorkArounds10CSCheckFixEPK10__CFString, 
+                       __ZN16CAAppWorkArounds16PrimeWorkaroundsEv, __ZN16CAAppWorkArounds18CheckFixForOlderSTEv, 
+                       __ZN16CAAppWorkArounds18PrimeUIWorkaroundsEv, __ZN16CAAppWorkArounds19CheckFixForOlderFCPEv, 
+                       __ZN16CAAppWorkArounds22Needs3310485WorkAroundEv, __ZN16CAAppWorkArounds22Needs3385081WorkAroundEv, 
+                       __ZN16CAAppWorkArounds22Needs3413239WorkAroundEv, __ZN16CAAppWorkArounds22Needs3416629WorkAroundEv, 
+                       __ZN16CAAppWorkArounds22Needs3853060WorkAroundEv, __ZN16CAAppWorkArounds22Needs3908162WorkAroundEv, 
+                       __ZN16CAAppWorkArounds22Needs4906044WorkAroundEv, __ZN16CAAppWorkArounds22Needs5360194WorkAroundEv, 
+                       __ZN16CAAppWorkArounds22Needs5403797WorkAroundEv, __ZN16CAAppWorkArounds22Needs6164787WorkAroundEv, 
+                       __ZN16CAAppWorkArounds22Needs6442415WorkAroundEv, __ZN16CAAppWorkArounds22Needs6513185WorkaroundEv, 
+                       __ZN16CAAppWorkArounds22Needs6858274WorkAroundEv, __ZN16CAAppWorkArounds22Needs7025278WorkaroundEv, 
+                       __ZN16CAAppWorkArounds22Neesd6552759WorkAroundEv, __ZN16CAAppWorkArounds23Needs32137910WorkaroundEv, 
+                       __ZN16CAAppWorkArounds24Needs6860184UIWorkaroundEv, __ZN17PlatformUtilities11ProcessNameEi, 
                        __ZN17PlatformUtilities11processNameEi, __ZN17PlatformUtilities18CopyAcousticIDNameEv, 
                        __ZN17PlatformUtilities25CopyHardwareModelFullNameEv, __ZN17PlatformUtilities26CopyHardwareModelShortNameEv, 
                        __ZN17SincKernelFactory17ReleaseSincKernelEP10SincKernel, 

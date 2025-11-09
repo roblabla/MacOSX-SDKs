@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C88AC845-C00F-3950-9E1E-3ADAB2F288A3
+    value:           D0D4F311-769D-3942-BF79-1601E40B630C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C1C50476-0BB5-32BB-A40F-6FA3B1903F52
+    value:           BA1FDA56-DDC6-370D-9F85-C86ED094F471
 install-name:    '/System/Library/PrivateFrameworks/GameCenterUI.framework/Versions/A/GameCenterUI'
 swift-abi-version: 7
 exports:
@@ -448,6 +448,7 @@ exports:
                        '_$s12GameCenterUI15AchievementCardC22backgroundEffectsGroupSSvg', 
                        '_$s12GameCenterUI15AchievementCardC22backgroundEffectsGroupSSvpMV', 
                        '_$s12GameCenterUI15AchievementCardC22backgroundEffectsGroupSSvs', 
+                       '_$s12GameCenterUI15AchievementCardC4menu3forSo6NSMenuCSgSo7NSEventC_tF', 
                        '_$s12GameCenterUI15AchievementCardC5frame7metrics5themeACSo6CGRectV_AA0dE6LayoutV7MetricsVAA17AchievementsThemeOSgtcfC', 
                        '_$s12GameCenterUI15AchievementCardC5frame7metrics5themeACSo6CGRectV_AA0dE6LayoutV7MetricsVAA17AchievementsThemeOSgtcfCTj', 
                        '_$s12GameCenterUI15AchievementCardC5frame7metrics5themeACSo6CGRectV_AA0dE6LayoutV7MetricsVAA17AchievementsThemeOSgtcfCTq', 
@@ -457,12 +458,12 @@ exports:
                        '_$s12GameCenterUI15AchievementCardC5frameACSo6CGRectV_tcfc', 
                        '_$s12GameCenterUI15AchievementCardC5modelAA0D0VSgvM', '_$s12GameCenterUI15AchievementCardC5modelAA0D0VSgvg', 
                        '_$s12GameCenterUI15AchievementCardC5modelAA0D0VSgvpMV', '_$s12GameCenterUI15AchievementCardC5modelAA0D0VSgvs', 
-                       '_$s12GameCenterUI15AchievementCardC6layoutyyF', '_$s12GameCenterUI15AchievementCardCACycfC', 
-                       '_$s12GameCenterUI15AchievementCardCACycfc', '_$s12GameCenterUI15AchievementCardCMa', 
-                       '_$s12GameCenterUI15AchievementCardCMn', '_$s12GameCenterUI15AchievementCardCMo', 
-                       '_$s12GameCenterUI15AchievementCardCMu', '_$s12GameCenterUI15AchievementCardCN', 
-                       '_$s12GameCenterUI15AchievementCardCfD', '_$s12GameCenterUI15AlignmentLayoutV03JetC00E0AAMc', 
-                       '_$s12GameCenterUI15AlignmentLayoutV03JetC010MeasurableAAMc', 
+                       '_$s12GameCenterUI15AchievementCardC6layoutyyF', '_$s12GameCenterUI15AchievementCardC7hitTestySo6NSViewCSgSo7CGPointVF', 
+                       '_$s12GameCenterUI15AchievementCardCACycfC', '_$s12GameCenterUI15AchievementCardCACycfc', 
+                       '_$s12GameCenterUI15AchievementCardCMa', '_$s12GameCenterUI15AchievementCardCMn', 
+                       '_$s12GameCenterUI15AchievementCardCMo', '_$s12GameCenterUI15AchievementCardCMu', 
+                       '_$s12GameCenterUI15AchievementCardCN', '_$s12GameCenterUI15AchievementCardCfD', 
+                       '_$s12GameCenterUI15AlignmentLayoutV03JetC00E0AAMc', '_$s12GameCenterUI15AlignmentLayoutV03JetC010MeasurableAAMc', 
                        '_$s12GameCenterUI15AlignmentLayoutV0D0O2eeoiySbAE_AEtFZ', 
                        '_$s12GameCenterUI15AlignmentLayoutV0D0O4hash4intoys6HasherVz_tF', 
                        '_$s12GameCenterUI15AlignmentLayoutV0D0O6centeryA2EmFWC', 
@@ -1180,7 +1181,6 @@ exports:
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV03JetC010MeasurableAAMc', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV12measurements7fitting2inSo14JUMeasurementsVSo6CGSizeV_03JetC00M16TraitEnvironment_ptF', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV13placeChildren10relativeTo2in03JetC00G4RectVSo6CGRectV_AG0M16TraitEnvironment_ptF', 
-                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV10avatarSize14titleTextSpace08subtitlelM0012friendStatuslM00oP19ImageTrailingMargin09buttonTopS007infoBaruS013layoutMarginsAESo6CGSizeV_03JetC012AnyDimension_pApQ_pApQ_pApQ_pApQ_pApQ_pSo12NSEdgeInsetsVtcfC', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV10avatarSizeSo6CGSizeVvM', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV10avatarSizeSo6CGSizeVvg', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV10avatarSizeSo6CGSizeVvpMV', 
@@ -1189,6 +1189,11 @@ exports:
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV13layoutMarginsSo12NSEdgeInsetsVvg', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV13layoutMarginsSo12NSEdgeInsetsVvpMV', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV13layoutMarginsSo12NSEdgeInsetsVvs', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV14avatarTopSpace0I4Size09titleTextK0012friendsTitlenK008subtitlenK00o8SubtitlenK0012friendStatusnK00sT19ImageTrailingMargin06buttonjW007infoBarjW013layoutMarginsAE12CoreGraphics7CGFloatV_So6CGSizeV03JetC012AnyDimension_pAvW_pAvW_pAvW_pAvW_pAvW_pAvW_pAvW_pSo12NSEdgeInsetsVtcfC', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV14avatarTopSpace12CoreGraphics7CGFloatVvM', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV14avatarTopSpace12CoreGraphics7CGFloatVvg', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV14avatarTopSpace12CoreGraphics7CGFloatVvpMV', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV14avatarTopSpace12CoreGraphics7CGFloatVvs', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV14titleTextSpace03JetC012AnyDimension_pvM', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV14titleTextSpace03JetC012AnyDimension_pvg', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV14titleTextSpace03JetC012AnyDimension_pvpMV', 
@@ -1209,6 +1214,14 @@ exports:
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV21friendStatusTextSpace03JetC012AnyDimension_pvg', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV21friendStatusTextSpace03JetC012AnyDimension_pvpMV', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV21friendStatusTextSpace03JetC012AnyDimension_pvs', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV21friendsTitleTextSpace03JetC012AnyDimension_pvM', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV21friendsTitleTextSpace03JetC012AnyDimension_pvg', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV21friendsTitleTextSpace03JetC012AnyDimension_pvpMV', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV21friendsTitleTextSpace03JetC012AnyDimension_pvs', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV24friendsSubtitleTextSpace03JetC012AnyDimension_pvM', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV24friendsSubtitleTextSpace03JetC012AnyDimension_pvg', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV24friendsSubtitleTextSpace03JetC012AnyDimension_pvpMV', 
+                       '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV24friendsSubtitleTextSpace03JetC012AnyDimension_pvs', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV31friendStatusImageTrailingMargin03JetC012AnyDimension_pvM', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV31friendStatusImageTrailingMargin03JetC012AnyDimension_pvg', 
                        '_$s12GameCenterUI25PlayerProfileHeaderLayoutV7MetricsV31friendStatusImageTrailingMargin03JetC012AnyDimension_pvpMV', 

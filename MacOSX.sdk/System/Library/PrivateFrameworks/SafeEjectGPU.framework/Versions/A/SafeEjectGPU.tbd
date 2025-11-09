@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5DB393C5-413D-3A08-B748-F73D371D05CF
+    value:           01FE93BE-45A5-3569-9D1E-F688A74DF473
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C5C0D3A7-FD7C-3966-8FEB-547A7A4929EA
+    value:           6E9BFE51-9E42-334C-B991-73D6A03BA6D7
 install-name:    '/System/Library/PrivateFrameworks/SafeEjectGPU.framework/Versions/A/SafeEjectGPU'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

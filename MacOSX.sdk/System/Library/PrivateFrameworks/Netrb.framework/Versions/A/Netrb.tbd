@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           343C79F7-06B7-3891-8E0D-9FBFFAD44814
+    value:           9BDA581A-ED5B-305C-B94A-4917CF2BB403
   - target:          x86_64-maccatalyst
-    value:           343C79F7-06B7-3891-8E0D-9FBFFAD44814
+    value:           9BDA581A-ED5B-305C-B94A-4917CF2BB403
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CC240F68-3E9D-35C9-A821-D287B8F1B075
+    value:           4F9477F3-1B87-310D-864A-DFFB65471581
   - target:          arm64e-maccatalyst
-    value:           CC240F68-3E9D-35C9-A821-D287B8F1B075
+    value:           4F9477F3-1B87-310D-864A-DFFB65471581
 install-name:    '/System/Library/PrivateFrameworks/Netrb.framework/Versions/A/Netrb'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           24303579-8C3B-343B-AD6A-4ED4D1D97AEB
+    value:           2AD00985-8CD4-39D0-814E-700924FD4584
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F4E340A9-DC71-39F6-B233-4216CEBB73DA
+    value:           3007E2E8-3D3D-395F-9906-463239936CE0
 install-name:    '/usr/lib/libcsfde.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

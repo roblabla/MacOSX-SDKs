@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DB13C758-8BB3-323B-8008-D5691952C67F
+    value:           B40EBC1E-4269-38ED-B7DE-5B02DEE676CA
   - target:          x86_64-maccatalyst
-    value:           DB13C758-8BB3-323B-8008-D5691952C67F
+    value:           B40EBC1E-4269-38ED-B7DE-5B02DEE676CA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F08AB8F0-B480-3C25-A3DE-8A35944926B1
+    value:           85B74234-A818-34E0-8CFD-C10D9F303EA8
   - target:          arm64e-maccatalyst
-    value:           F08AB8F0-B480-3C25-A3DE-8A35944926B1
+    value:           85B74234-A818-34E0-8CFD-C10D9F303EA8
 install-name:    '/System/Library/PrivateFrameworks/PhotoVision.framework/Versions/A/PhotoVision'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -70,7 +70,10 @@ exports:
                        _PVMetricsKey_QuickClassification_Throughput_Value, _PVMinimumFaceAlgorithmUmbrellaVersionValue, 
                        _PVMinimumSceneAlgorithmUmbrellaVersionValue, _PVNotificationClustererNeedsToBeSyncedWithPhotoLibrary, 
                        _PVNotificationClustererReady, _PVNotificationClusteringFinished, 
-                       _PVNotificationClusteringStarted, _PVPersonPromoterQuiescentStateRequirementsMinimumNumberOfFacesOnSourceForUpgrading, 
+                       _PVNotificationClusteringStarted, _PVPersonClusterManagerMinimiumDistanceRequiredForCommonAssetDistance, 
+                       _PVPersonClusterManagerMinimiumDistanceRequiredForCommonAssetDistanceForBaby, 
+                       _PVPersonClusterManagerMinimiumDistanceRequiredForCommonAssetDistanceForChild, 
+                       _PVPersonPromoterQuiescentStateRequirementsMinimumNumberOfFacesOnSourceForUpgrading, 
                        _PVPersonPromoterVersion, _PVSuggestionUpdateCancelled, _PVSuggestionUpdateFinished, 
                        _PVSuggestionUpdateProgress, _PVSuggestionUpdateStarted, _PVVisionClustersMinusLibraryClusters, 
                        _PVVisionFaceLandmarkConfidenceThreshold, _PVVisionFaceSmilingThreshold, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           78C1FA01-83C1-38B3-ACC2-A2E853DA5B44
+    value:           5154BAAA-A5BF-32F7-92A5-C61FE80D172C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5E0A50F2-F571-3773-930E-3A2ABB1E5F09
+    value:           45A4D750-3552-3FC3-9AD1-522A8BC7C2CB
 install-name:    '/System/Library/PrivateFrameworks/NetworkStatistics.framework/Versions/A/NetworkStatistics'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

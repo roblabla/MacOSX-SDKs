@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DABFCF4A-1B5C-3FCA-8179-FCFBDD92370F
+    value:           C1607661-45EA-3E2B-A4A5-794A0F3F2979
   - target:          x86_64-maccatalyst
-    value:           DABFCF4A-1B5C-3FCA-8179-FCFBDD92370F
+    value:           C1607661-45EA-3E2B-A4A5-794A0F3F2979
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8708A602-8901-3537-9836-205993DDABED
+    value:           A44081C9-A038-3CC3-BB4D-7DFE165F4536
   - target:          arm64e-maccatalyst
-    value:           8708A602-8901-3537-9836-205993DDABED
+    value:           A44081C9-A038-3CC3-BB4D-7DFE165F4536
 install-name:    '/System/Library/PrivateFrameworks/VisualIntelligence.framework/Versions/A/VisualIntelligence'
 swift-abi-version: 7
 exports:
@@ -205,7 +205,10 @@ exports:
                        '_$s18VisualIntelligence0aB5ImageC_11orientationACSo11CVBufferRefa_So26CGImagePropertyOrientationVtcfCTq', 
                        '_$s18VisualIntelligence0aB5ImageC_11orientationACSo11CVBufferRefa_So26CGImagePropertyOrientationVtcfc', 
                        '_$s18VisualIntelligence0aB5ImageCfD', '_$s18VisualIntelligence0aB5ImageCfd', 
-                       '_$s18VisualIntelligence0aB6LoggerC5osLogSo03OS_D4_logCvgZ', 
+                       '_$s18VisualIntelligence0aB6LoggerC18logErrorIfExisting_5error4fileySS_s0E0_pSgSStFZ', 
+                       '_$s18VisualIntelligence0aB6LoggerC3log_4fileySS_SStFZ', '_$s18VisualIntelligence0aB6LoggerC5osLogSo03OS_D4_logCvgZ', 
+                       '_$s18VisualIntelligence0aB6LoggerC8logDebug_4fileySS_SStFZ', 
+                       '_$s18VisualIntelligence0aB6LoggerC8logError_4fileySS_SStFZ', 
                        '_$s18VisualIntelligence0aB6LoggerCACycfC', '_$s18VisualIntelligence0aB6LoggerCACycfc', 
                        '_$s18VisualIntelligence0aB6LoggerCMa', '_$s18VisualIntelligence0aB6LoggerCMn', 
                        '_$s18VisualIntelligence0aB6LoggerCMo', '_$s18VisualIntelligence0aB6LoggerCN', 

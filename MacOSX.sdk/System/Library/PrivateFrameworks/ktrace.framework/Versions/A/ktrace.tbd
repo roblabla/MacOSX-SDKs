@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FCCA44CF-F8B2-374E-A2A4-4A723FB534B2
+    value:           D4E0D21A-C8E5-3305-838F-BFF106C4B28C
   - target:          x86_64-maccatalyst
-    value:           FCCA44CF-F8B2-374E-A2A4-4A723FB534B2
+    value:           D4E0D21A-C8E5-3305-838F-BFF106C4B28C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           632380A8-EE6A-3E9F-A23B-DA88BD7C76AF
+    value:           B3E931DE-AC03-3323-9780-03DF32C8B0D6
   - target:          arm64e-maccatalyst
-    value:           632380A8-EE6A-3E9F-A23B-DA88BD7C76AF
+    value:           B3E931DE-AC03-3323-9780-03DF32C8B0D6
 install-name:    '/System/Library/PrivateFrameworks/ktrace.framework/Versions/A/ktrace'
-current-version: 451
+current-version: 453
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIN11flatbuffers15ToStringVisitorE, __ZTIN11flatbuffers16DefaultAllocatorE, 

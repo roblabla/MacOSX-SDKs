@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E6FD4252-EA8B-3CF8-A27C-AB6CB0F28406
+    value:           6FC46BCF-4060-3521-B0A1-C138D567D4D4
   - target:          x86_64-maccatalyst
-    value:           E6FD4252-EA8B-3CF8-A27C-AB6CB0F28406
+    value:           6FC46BCF-4060-3521-B0A1-C138D567D4D4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B4D6FC82-51F2-3094-851E-2030933DF76B
+    value:           A9EAA37F-5B2B-36C3-BA78-89BA51C72312
   - target:          arm64e-maccatalyst
-    value:           B4D6FC82-51F2-3094-851E-2030933DF76B
+    value:           A9EAA37F-5B2B-36C3-BA78-89BA51C72312
 install-name:    '/usr/lib/libsandbox.1.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

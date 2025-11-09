@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           554BEB57-D58D-3474-9B65-1B2BFB9CE1DE
+    value:           354A0A94-0A08-3EA8-B700-B50DBDE431DC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           58A11800-3BCC-3DBE-AF3D-A2BB4CC75EA5
+    value:           D79FFC31-BE78-380A-8EF2-7D336527E7D5
 install-name:    '/System/Library/PrivateFrameworks/SiriRequestDispatcher.framework/Versions/A/SiriRequestDispatcher'
 swift-abi-version: 7
 exports:
@@ -101,6 +101,15 @@ exports:
                        '_$s21SiriRequestDispatcher026StartUnderstandingOnServerB7MessageCMo', 
                        '_$s21SiriRequestDispatcher026StartUnderstandingOnServerB7MessageCN', 
                        '_$s21SiriRequestDispatcher026StartUnderstandingOnServerB7MessageCfD', 
+                       '_$s21SiriRequestDispatcher030StartUnderstandingOnServerTextB7MessageC10withSource11assistantId07sessionM007requestM011inputOriginACSgAA0iK0O_SS10Foundation4UUIDVSSAA05InputQ0OtcfC', 
+                       '_$s21SiriRequestDispatcher030StartUnderstandingOnServerTextB7MessageC10withSource11assistantId07sessionM007requestM011inputOriginACSgAA0iK0O_SS10Foundation4UUIDVSSAA05InputQ0Otcfc', 
+                       '_$s21SiriRequestDispatcher030StartUnderstandingOnServerTextB7MessageC4fromACs7Decoder_p_tKcfC', 
+                       '_$s21SiriRequestDispatcher030StartUnderstandingOnServerTextB7MessageC4fromACs7Decoder_p_tKcfc', 
+                       '_$s21SiriRequestDispatcher030StartUnderstandingOnServerTextB7MessageCMa', 
+                       '_$s21SiriRequestDispatcher030StartUnderstandingOnServerTextB7MessageCMn', 
+                       '_$s21SiriRequestDispatcher030StartUnderstandingOnServerTextB7MessageCMo', 
+                       '_$s21SiriRequestDispatcher030StartUnderstandingOnServerTextB7MessageCN', 
+                       '_$s21SiriRequestDispatcher030StartUnderstandingOnServerTextB7MessageCfD', 
                        '_$s21SiriRequestDispatcher03EndB11MessageBaseC10withSource11assistantId07sessionJ007requestJ0ACSgAA0eH0O_SS10Foundation4UUIDVSStcfC', 
                        '_$s21SiriRequestDispatcher03EndB11MessageBaseC10withSource11assistantId07sessionJ007requestJ0ACSgAA0eH0O_SS10Foundation4UUIDVSStcfc', 
                        '_$s21SiriRequestDispatcher03EndB11MessageBaseC4fromACs7Decoder_p_tKcfC', 
@@ -236,7 +245,8 @@ exports:
                        '_$s21SiriRequestDispatcher0B16CompletedMessageCMo', '_$s21SiriRequestDispatcher0B16CompletedMessageCN', 
                        '_$s21SiriRequestDispatcher0B16CompletedMessageCfD', '_$s21SiriRequestDispatcher0B4TypeO12directActionyA2CmFWC', 
                        '_$s21SiriRequestDispatcher0B4TypeO3uosyA2CmFWC', '_$s21SiriRequestDispatcher0B4TypeO4textyA2CmFWC', 
-                       '_$s21SiriRequestDispatcher0B4TypeO5localyA2CmFWC', '_$s21SiriRequestDispatcher0B4TypeO6speechyA2CmFWC', 
+                       '_$s21SiriRequestDispatcher0B4TypeO5localyA2CmFWC', '_$s21SiriRequestDispatcher0B4TypeO6remoteyA2CmFWC', 
+                       '_$s21SiriRequestDispatcher0B4TypeO6speechyA2CmFWC', '_$s21SiriRequestDispatcher0B4TypeO7uosTextyA2CmFWC', 
                        '_$s21SiriRequestDispatcher0B4TypeO8rawValueACSgSS_tcfC', 
                        '_$s21SiriRequestDispatcher0B4TypeO8rawValueSSvg', '_$s21SiriRequestDispatcher0B4TypeO8rawValueSSvpMV', 
                        '_$s21SiriRequestDispatcher0B4TypeOMa', '_$s21SiriRequestDispatcher0B4TypeOMn', 
@@ -345,8 +355,8 @@ exports:
                        '_$s21SiriRequestDispatcher19ClearContextMessageCMo', '_$s21SiriRequestDispatcher19ClearContextMessageCN', 
                        '_$s21SiriRequestDispatcher19ClearContextMessageCfD', '_$s21SiriRequestDispatcher19InstrumentationUtilC03logB9LinkEvent9requestId15sourceComponent011destinationL0So08SISchemabG0CSgSS_So0nL4NameVALtFTj', 
                        '_$s21SiriRequestDispatcher19InstrumentationUtilC03logB9LinkEvent9requestId15sourceComponent011destinationL0So08SISchemabG0CSgSS_So0nL4NameVALtFTq', 
-                       '_$s21SiriRequestDispatcher19InstrumentationUtilC24buildWrapperEventMessageySo020ORCHSchemaORCHClientH0CSgSS_SSSgtFTj', 
-                       '_$s21SiriRequestDispatcher19InstrumentationUtilC24buildWrapperEventMessageySo020ORCHSchemaORCHClientH0CSgSS_SSSgtFTq', 
+                       '_$s21SiriRequestDispatcher19InstrumentationUtilC24buildWrapperEventMessage__22logResourceUtilizationSo020ORCHSchemaORCHClientH0CSgSS_SSSgSbtFTj', 
+                       '_$s21SiriRequestDispatcher19InstrumentationUtilC24buildWrapperEventMessage__22logResourceUtilizationSo020ORCHSchemaORCHClientH0CSgSS_SSSgSbtFTq', 
                        '_$s21SiriRequestDispatcher19InstrumentationUtilCACycfC', 
                        '_$s21SiriRequestDispatcher19InstrumentationUtilCMa', '_$s21SiriRequestDispatcher19InstrumentationUtilCMm', 
                        '_$s21SiriRequestDispatcher19InstrumentationUtilCMn', '_$s21SiriRequestDispatcher19InstrumentationUtilCMo', 
@@ -547,5 +557,6 @@ exports:
                        _TtC21SiriRequestDispatcher34DirectActionResultCandidateMessage, 
                        _TtC21SiriRequestDispatcher34StartCorrectedSpeechRequestMessage, 
                        _TtC21SiriRequestDispatcher37CorrectedSpeechResultCandidateMessage, 
-                       _TtC21SiriRequestDispatcher40StartUnderstandingOnServerRequestMessage ]
+                       _TtC21SiriRequestDispatcher40StartUnderstandingOnServerRequestMessage, 
+                       _TtC21SiriRequestDispatcher44StartUnderstandingOnServerTextRequestMessage ]
 ...

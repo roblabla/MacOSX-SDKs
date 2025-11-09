@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           52B80C16-A457-3246-91AC-BF34D49C784B
+    value:           37213968-2E58-3780-95A4-7861D0859A6B
   - target:          x86_64-maccatalyst
-    value:           52B80C16-A457-3246-91AC-BF34D49C784B
+    value:           37213968-2E58-3780-95A4-7861D0859A6B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0260217A-B800-36E8-BBAB-416BE87D55DA
+    value:           1485320D-2587-35BA-AAD4-441D6C39C98C
   - target:          arm64e-maccatalyst
-    value:           0260217A-B800-36E8-BBAB-416BE87D55DA
+    value:           1485320D-2587-35BA-AAD4-441D6C39C98C
 install-name:    '/usr/lib/system/libsystem_sandbox.dylib'
-current-version: 1654
+current-version: 1656.60.9
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _APP_SANDBOX_IOKIT_CLIENT, _APP_SANDBOX_MACH, _APP_SANDBOX_READ, 
                        _APP_SANDBOX_READ_WRITE, _IOS_SANDBOX_APPLICATION_GROUP, _IOS_SANDBOX_CONTAINER, 
@@ -42,6 +42,8 @@ exports:
                        _rootless_convert_to_datavault, _rootless_manifest_free, _rootless_manifest_parse, 
                        _rootless_mkdir_datavault, _rootless_mkdir_nounlink, _rootless_mkdir_restricted, 
                        _rootless_preflight, _rootless_protected_volume, _rootless_register_trusted_storage_class, 
+                       _rootless_remove_datavault_in_favor_of_static_storage_class, 
+                       _rootless_remove_restricted_in_favor_of_static_storage_class, 
                        _rootless_restricted_environment, _rootless_suspend, _rootless_trusted_by_self_token, 
                        _rootless_verify_trusted_by_self_token, _sandbox_builtin_query, 
                        _sandbox_check, _sandbox_check_bulk, _sandbox_check_by_audit_token, 

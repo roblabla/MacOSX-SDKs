@@ -1,6 +1,6 @@
 /**
  * @file b2p_dict.h
- * @brief B2P Dictionary Version 0.0.133
+ * @brief B2P Dictionary Version 0.0.146
  */
 
 #ifndef B2P_DICT_H_
@@ -18,13 +18,17 @@
 
 #define B2P_DICTIONARY_VERSION_MAJOR        0
 #define B2P_DICTIONARY_VERSION_MINOR        0
-#define B2P_DICTIONARY_VERSION_BUILD        133
+#define B2P_DICTIONARY_VERSION_BUILD        146
 
 
     /*! B2P packet header size: SoF (2bytes) + Length (2bytes) + SeqNum (1byte) + Opcode (2bytes) + CRC32 (4bytes) */
 #define B2P_PACKET_HEADER_SIZE              (11)
-    /*! Maximum data size in a B2P packet */
-#define B2P_PACKET_MAX_DATA_SIZE            ((1UL << 16) - 1 - B2P_PACKET_HEADER_SIZE)
+
+#ifndef B2P_PACKET_MAX_DATA_SIZE
+    /*! Maximum data size in a B2P packet (overrideable) */
+#define B2P_PACKET_MAX_DATA_SIZE            ((1UL << 9) - 1 - B2P_PACKET_HEADER_SIZE)
+#endif // B2P_PACKET_MAX_DATA_SIZE
+
     /*! Maximum data size in a B2P command/notification packet */
 #define B2P_PACKET_MAX_CMD_DATA_SIZE        (B2P_PACKET_MAX_DATA_SIZE)
     /*! Maximum data size in a B2P response packet */
@@ -37,6 +41,8 @@
 #define B2P_BT_ADDR_LEN                     (6)
     /*! 128 bits for security key for a BT pairing. */
 #define B2P_BT_LINKKEY_LEN                  (16)
+    /*! Max number of supported connections. */
+#define B2P_BT_MAX_CONNECTIONS                  (2)
     /*! Macro to get the automation command data size */
 #define B2P_AUTOMATION_CMD_DATA_LEN(cmd)    (cmd->size - sizeof(*cmd))
     /*! Macro to get the automation response data size */
@@ -107,6 +113,8 @@ enum
 #define B2P_RSP_DS_DISCOVERY                0x0027 /**< See #B2P_RSP_DS_DISCOVERY_s. */
 #define B2P_CMD_CBITS_READ                  0x0028 /**< See #B2P_CMD_CBITS_READ_s. */
 #define B2P_RSP_CBITS_READ                  0x0029 /**< See #B2P_RSP_CBITS_READ_s. */
+#define B2P_CMD_SYNC_TIMESTAMP              0x0098
+#define B2P_RSP_SYNC_TIMESTAMP              0x0099 /**< See #B2P_RSP_SYNC_TIMESTAMP_s. */
 #define B2P_CMD_LOOPBACK                    0x0100 /**< See #B2P_CMD_LOOPBACK_s. */
 #define B2P_RSP_LOOPBACK                    0x0101 /**< See #B2P_CMD_LOOPBACK_s. */
 #define B2P_CMD_BERYL_RESETCODE             0x0102 /**< See #B2P_CMD_BERYL_RESETCODE_s. */
@@ -247,6 +255,14 @@ enum
 #define B2P_RSP_TRAIN_BUILD_GET             0x018F /**< See #B2P_RSP_TRAIN_BUILD_GET_s. */
 #define B2P_CMD_BLUE_AVENGERS_CONFIG        0x0190 /**< See #B2P_CMD_BLUE_AVENGERS_CONFIG_s. */
 #define B2P_RSP_BLUE_AVENGERS_CONFIG        0x0191 /**< See #B2P_RSP_BLUE_AVENGERS_CONFIG_s. */
+#define B2P_CMD_BT_SNIFF_INFO_GET           0x0192
+#define B2P_RSP_BT_SNIFF_INFO_GET           0x0193 /**< See #B2P_RSP_BT_SNIFF_INFO_GET_s. */
+#define B2P_CMD_AUDIO_STATUS_GET            0x0194
+#define B2P_RSP_AUDIO_STATUS_GET            0x0195 /**< See #B2P_RSP_AUDIO_STATUS_GET_s. */
+#define B2P_CMD_BT_SNOOP_INFO_GET           0x0196
+#define B2P_RSP_BT_SNOOP_INFO_GET           0x0197 /**< See #B2P_RSP_BT_SNOOP_INFO_GET_s. */
+#define B2P_CMD_GET_R1_PERSO_PARAMS         0x0198
+#define B2P_RSP_GET_R1_PERSO_PARAMS         0x0199 /**< See #B2P_RSP_GET_R1_PERSO_PARAMS_s. */
 
 // reserve 0xF00-0xFFD for platform/silicon specific B2P
 #define B2P_CMD_LOCUST_SET_LOW_RDSON        0x0F00 /**< See #B2P_CMD_LOCUST_SET_LOW_RDSON. */
@@ -356,6 +372,7 @@ typedef enum
   B2P_SN_USB,
   B2P_SN_SYSTEM_CONFIG,
   B2P_SN_DRIVER_00 = 0x10,
+  B2P_SN_common_end = 0x80,
   B2P_SN_END
 } B2P_SN_e;
 
@@ -405,11 +422,11 @@ typedef enum
  */
 typedef enum
 {
-	B2P_FWUP_TRANSPORT_BUDDY,
-	B2P_FWUP_TRANSPORT_AACP,
-	B2P_FWUP_TRANSPORT_UTP,
-	B2P_FWUP_TRANSPORT_B2P_HID,
-	B2P_FWUP_TRANSPORT_B2P_SPP,
+  B2P_FWUP_TRANSPORT_BUDDY,
+  B2P_FWUP_TRANSPORT_AACP,
+  B2P_FWUP_TRANSPORT_UTP,
+  B2P_FWUP_TRANSPORT_B2P_HID,
+  B2P_FWUP_TRANSPORT_B2P_SPP,
 } B2P_FWUP_TRANSPORT_e;
 
 /**
@@ -531,6 +548,24 @@ typedef enum
   B2P_LISTENING_MODE_ANC,
   B2P_LISTENING_MODE_TRANSPARENCY
 } B2P_LISTENING_MODE_LEVEL_e;
+
+/**
+ * @brief Listening mode: ANC enable
+ */
+typedef enum
+{
+  B2P_ANC_OFF = 0,
+  B2P_ANC_ON = 100,
+} B2P_ANC_ENABLE_e;
+
+/**
+ * @brief Listening mode: AWARE enable
+ */
+typedef enum
+{
+  B2P_AWARE_OFF = 0,
+  B2P_AWARE_ON = 100,
+} B2P_AWARE_ENABLE_e;
 
 /**
  * @brief Listening mode rotation (aka configs on aacp side) values
@@ -666,6 +701,43 @@ typedef enum
   B2P_BT_LINKKEY_TYPE_SHARING_W3            = 0xF1,
 } B2P_BT_LINKKEY_TYPE_e;
 
+/**
+ * @brief Audio states
+ */
+typedef enum
+{
+  B2P_AUDIO_STATE_disconnected,
+  B2P_AUDIO_STATE_a2dp,
+  B2P_AUDIO_STATE_hfp_incall,
+  B2P_AUDIO_STATE_hfp_insiri,
+  B2P_AUDIO_STATE_hfp_other,
+  B2P_AUDIO_STATE_doap,
+  B2P_AUDIO_STATE_doap_insiri,
+  B2P_AUDIO_STATE_a2dp_doap,
+  B2P_AUDIO_STATE_a2dp_insiri
+} B2P_AUDIO_STATE_e;
+
+/**
+ * @brief Audio call setup status types
+ */
+typedef enum
+{
+  B2P_CALL_SETUP_STATUS_unknown,
+  B2P_CALL_SETUP_STATUS_idle,
+  B2P_CALL_SETUP_STATUS_incoming,
+  B2P_CALL_SETUP_STATUS_outgoing
+} B2P_CALL_SETUP_STATUS_e;
+
+/**
+ * @brief Audio call hold status types
+ */
+typedef enum
+{
+  B2P_CALL_HOLD_STATUS_idle,
+  B2P_CALL_HOLD_STATUS_withactive,
+  B2P_CALL_HOLD_STATUS_noactive
+} B2P_CALL_HOLD_STATUS_e;
+
 /***********
  * STRUCTs *
  ***********/
@@ -723,6 +795,9 @@ typedef struct ATTR_PACKED
 
 /**
  * @brief The identification response format for info id 1 (SN).
+ *
+ * @note Max size -1 because this is being used as a B2P_RSP_IDENTIFICATION_s
+ *       payload which has "info_id" as a first byte.
  */
 typedef struct ATTR_PACKED
 {
@@ -1737,6 +1812,7 @@ typedef struct ATTR_PACKED
   uint32_t bni_minor_version;
 } B2P_RSP_TRAIN_BUILD_GET_s;
 
+
 /**
  * @brief The command from case for BlueAvengers.
  */
@@ -1761,5 +1837,88 @@ typedef struct ATTR_PACKED
   uint8_t  sound : 1;
   uint8_t  unused : 5;
 } B2P_RSP_BLUE_AVENGERS_CONFIG_s;
+
+/**
+ * @brief Sniff info per connection for the response payload
+ *        for retrieving the BT sniff from the device
+ *
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t           bdaddr[B2P_BT_ADDR_LEN];
+  uint8_t           currentMode;
+  uint16_t          currentInterval;
+  uint8_t           reasonsToStayActive;
+} B2P_RSP_BT_SNIFF_INFO_PER_CONN_s;
+
+/**
+ * @brief The response payload for retrieving the BT sniff from
+ *        the device
+ *
+ */
+typedef struct ATTR_PACKED
+{
+  B2P_RSP_BT_SNIFF_INFO_PER_CONN_s info[B2P_BT_MAX_CONNECTIONS];
+} B2P_RSP_BT_SNIFF_INFO_GET_s;
+
+/**
+ * @brief Audio status per connection for the response payload
+ *        for retrieving the audio status from the device
+ *
+ */
+typedef struct ATTR_PACKED
+{
+  uint8_t           audio_state;       /**< See #B2P_AUDIO_STATE_e. */
+  uint8_t           call_setup_status; /**< See #B2P_CALL_SETUP_STATUS_e. */
+  uint8_t           call_hold_status;  /**< See #B2P_CALL_HOLD_STATUS_e. */
+} B2P_RSP_AUDIO_STATUS_PER_CONN_s;
+
+/**
+ * @brief The response payload for retrieving the audio status from
+ *        the device
+ *
+ */
+typedef struct ATTR_PACKED
+{
+  B2P_RSP_AUDIO_STATUS_PER_CONN_s info[B2P_BT_MAX_CONNECTIONS];
+} B2P_RSP_AUDIO_STATUS_GET_s;
+
+/**
+ * @brief Snoop info for the response payload for
+ *        retrieving the BT snoop from the device
+ *
+ */
+typedef struct ATTR_PACKED
+{
+  uint16_t          state;
+  uint8_t           current_addr[B2P_BT_ADDR_LEN];
+  uint8_t           target_addr[B2P_BT_ADDR_LEN];
+} B2P_RSP_BT_SNOOP_INFO_GET_s;
+
+/**
+ * @brief The response payload for timestamp sync
+ *
+ */
+typedef struct ATTR_PACKED
+{
+  uint32_t          timestamp_s;
+} B2P_RSP_SYNC_TIMESTAMP_s;
+
+/**
+ * @brief Parameters required to personalize R1 firmware.
+ */
+typedef struct ATTR_PACKED
+{
+  uint64_t ecid;
+  uint32_t board_id;
+  uint32_t chip_id;
+  uint32_t chip_rev;
+  uint32_t prod_mode;
+  uint32_t security_mode;
+  uint32_t security_domain;
+  uint32_t min_epoch;
+  uint8_t nonce[8];
+  uint8_t nonce_hash[32];
+} B2P_RSP_GET_R1_PERSO_PARAMS_s;
 
 #endif /* B2P_DICT_H_ */

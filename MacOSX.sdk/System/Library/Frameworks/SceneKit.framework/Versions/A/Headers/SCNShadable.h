@@ -225,7 +225,7 @@ typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, S
 /*!
  @property minimumLanguageVersion
  @abstract The minimum language version required to interpret the shadable source code (wrapped MTLLanguageVersion). Defaults to nil.
- @discussion By default SceneKit does not use the most recent language version in order to reduce compilation times. If set to nil the shadable source code is assumed to compiled with any language version greater than or equal to Metal 2.0.
+ @discussion By default SceneKit does not use the most recent language version in order to reduce compilation times. If set to nil the shadable source code is assumed to compile with any language version greater than or equal to Metal 2.0.
  */
 @property(nonatomic, retain, nullable) NSNumber *minimumLanguageVersion API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 

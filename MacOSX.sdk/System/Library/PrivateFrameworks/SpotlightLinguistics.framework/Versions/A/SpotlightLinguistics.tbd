@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           42836927-1C37-3371-9483-48BD668C902E
+    value:           124A256F-A472-3725-848C-D2F5081C985D
   - target:          x86_64-maccatalyst
-    value:           42836927-1C37-3371-9483-48BD668C902E
+    value:           124A256F-A472-3725-848C-D2F5081C985D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1AFEB036-7BA5-32AF-BD56-86140DE498C0
+    value:           287518F2-1E91-32B3-9D63-9D7336BCB004
   - target:          arm64e-maccatalyst
-    value:           1AFEB036-7BA5-32AF-BD56-86140DE498C0
+    value:           287518F2-1E91-32B3-9D63-9D7336BCB004
 install-name:    '/System/Library/PrivateFrameworks/SpotlightLinguistics.framework/Versions/A/SpotlightLinguistics'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

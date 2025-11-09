@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           97B14A9E-1FFA-346A-94DC-3B97E8CBEA2E
+    value:           7FF0EFEB-DF7C-3104-8B52-3F9DCE55CC1B
   - target:          x86_64-maccatalyst
-    value:           97B14A9E-1FFA-346A-94DC-3B97E8CBEA2E
+    value:           7FF0EFEB-DF7C-3104-8B52-3F9DCE55CC1B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           32EB478E-A977-388A-B44B-F41802337D8A
+    value:           07FC66C9-D6DD-364E-81B4-746EB28C5FFC
   - target:          arm64e-maccatalyst
-    value:           32EB478E-A977-388A-B44B-F41802337D8A
+    value:           07FC66C9-D6DD-364E-81B4-746EB28C5FFC
 install-name:    '/System/Library/PrivateFrameworks/ChunkingLibrary.framework/Versions/A/ChunkingLibrary'
 current-version: 337.1
 exports:

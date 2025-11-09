@@ -43,6 +43,18 @@ GAMECONTROLLER_EXTERN NSString *const GCInputMicroGamepadButtonA API_AVAILABLE(m
 GAMECONTROLLER_EXTERN NSString *const GCInputMicroGamepadButtonX API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
 /**
+ The primary menu button for the microgamepad
+ 
+ @note Equivalent to microgamepad.buttonMenu
+ 
+ @note For the 1st generation Siri Remote, this represents pressing the play/pause button. For the 2nd generation Siri Remote, this represents pressing the back button.
+ 
+ @note You should avoid polling this button every frame. tvOS will run a gesture recognizer on events before forwarding them to your application that can reduce the window
+    to poll button changes. Instead, register a pressedChangedHandler or a valueChangedHandler.
+*/
+GAMECONTROLLER_EXTERN NSString *const GCInputMicroGamepadButtonMenu API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+
+/**
  Micro Gamepad profile.
  
  All controller profiles provide a base level of information about the controller they belong to.

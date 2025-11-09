@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class AVBMACAddress;
-@class AVBIPAddress;
 
 /*!
 	@class		AVB17221ACMPMessage
@@ -85,43 +84,6 @@ API_AVAILABLE(macos(10.8))
 	@abstract	The stream_vlan_id field of the ACMP message.
  */
 @property (assign) uint16_t vlanID;
-
-/*!
- @property	connectedListenersEntries
- @abstract	The connected_listeners_entries field of the ACMP message.
- */
-@property (assign) uint16_t connectedListenersEntries API_AVAILABLE(macos(12));
-/*!
- @property	connectedListenersEntriesValid
- @abstract	The CL_ENTRIES_VALID flag in the flags field of the ACMP message.
- */
-@property (assign) bool connectedListenersEntriesValid API_AVAILABLE(macos(12));
-
-/*!
- @property	ipFlags
- @abstract	The ip_flags field of the ACMP message.
- */
-@property (assign) AVB17221ACMPIPFlag ipFlags API_AVAILABLE(macos(12));
-/*!
- @property	sourcePort
- @abstract	The source_port field of the ACMP message.
- */
-@property (assign) uint16_t sourcePort API_AVAILABLE(macos(12));
-/*!
- @property	destinationPort
- @abstract	The destination_port field of the ACMP message.
- */
-@property (assign) uint16_t destinationPort API_AVAILABLE(macos(12));
-/*!
- @property	sourceAddress
- @abstract	The source_ip_address field of the ACMP message.
- */
-@property (copy) AVBIPAddress *sourceIPAddress API_AVAILABLE(macos(12));
-/*!
- @property	destinationAddress
- @abstract	The destination_ip_address field of the ACMP message.
- */
-@property (copy) AVBIPAddress *destinationIPAddress API_AVAILABLE(macos(12));
 
 /*!
 	@property	sourceMAC

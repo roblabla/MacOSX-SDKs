@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           78499BD2-1963-3709-BAAE-DB42D91BD498
+    value:           ECA7E5A2-9F43-3F25-846D-30838B737940
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D63BC430-D7AB-30EF-A38D-7A070B82AB7F
+    value:           7E71EB3A-7C96-3D5B-A43D-ECA25448FD50
 install-name:    '/System/Library/PrivateFrameworks/TranslationUI.framework/Versions/A/TranslationUI'
-current-version: 173.3
+current-version: 173.11.5
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -25,8 +25,11 @@ exports:
                        '_$s10Foundation6LocaleV13TranslationUIE18languageIdentifierSSvpMV', 
                        '_$s10Foundation6LocaleV13TranslationUIE20isTraditionalChineseSbyF', 
                        '_$s10Foundation6LocaleV13TranslationUIE20ltLocalizedAppString_5table6bundleS2S_SSSo8NSBundleCtF', 
-                       '_$s10Foundation6LocaleV13TranslationUIE5isRTLSbyF', '_$s13TranslationUI10PlayButtonV05SwiftB04ViewAAMc', 
-                       '_$s13TranslationUI10PlayButtonV4SizeO2eeoiySbAE_AEtFZ', '_$s13TranslationUI10PlayButtonV4SizeO4hash4intoys6HasherVz_tF', 
+                       '_$s10Foundation6LocaleV13TranslationUIE27shouldCapitalizeDisplayName7context06targetB0SbSo09IUDisplayH7ContextV_ACtF', 
+                       '_$s10Foundation6LocaleV13TranslationUIE5isRTLSbyF', '_$s10Foundation6LocaleV13TranslationUIE9isChineseSbvg', 
+                       '_$s10Foundation6LocaleV13TranslationUIE9isChineseSbvpMV', 
+                       '_$s13TranslationUI10PlayButtonV05SwiftB04ViewAAMc', '_$s13TranslationUI10PlayButtonV4SizeO2eeoiySbAE_AEtFZ', 
+                       '_$s13TranslationUI10PlayButtonV4SizeO4hash4intoys6HasherVz_tF', 
                        '_$s13TranslationUI10PlayButtonV4SizeO5largeyA2EmFWC', '_$s13TranslationUI10PlayButtonV4SizeO7regularyA2EmFWC', 
                        '_$s13TranslationUI10PlayButtonV4SizeO9hashValueSivg', '_$s13TranslationUI10PlayButtonV4SizeO9hashValueSivpMV', 
                        '_$s13TranslationUI10PlayButtonV4SizeOMa', '_$s13TranslationUI10PlayButtonV4SizeOMn', 
@@ -55,7 +58,7 @@ exports:
                        '_$s13TranslationUI13ExpandingTextV05SwiftB04ViewAAMc', '_$s13TranslationUI13ExpandingTextV4bodyQrvg', 
                        '_$s13TranslationUI13ExpandingTextV4bodyQrvpMV', '_$s13TranslationUI13ExpandingTextV4bodyQrvpQOMQ', 
                        '_$s13TranslationUI13ExpandingTextVMa', '_$s13TranslationUI13ExpandingTextVMn', 
-                       '_$s13TranslationUI13ExpandingTextVN', '_$s13TranslationUI13ExpandingTextV_10isExpanded_12buttonActionACSS_05SwiftB07BindingVySbGSg10Foundation6LocaleVSgyycSgtcfC', 
+                       '_$s13TranslationUI13ExpandingTextVN', '_$s13TranslationUI13ExpandingTextV_10isExpanded_12buttonActionACSS_05SwiftB07BindingVySbGSg10Foundation6LocaleVyycSgtcfC', 
                        '_$s13TranslationUI13NetworkStatusO12notReachableyA2CmFWC', 
                        '_$s13TranslationUI13NetworkStatusO4wifiyA2CmFWC', '_$s13TranslationUI13NetworkStatusO8cellularyA2CmFWC', 
                        '_$s13TranslationUI13NetworkStatusO8rawValueACSgSS_tcfC', 
@@ -95,8 +98,8 @@ exports:
                        '_$s13TranslationUI14LanguagesModelC19airplaneModeEnabledSbvpMV', 
                        '_$s13TranslationUI14LanguagesModelC19airplaneModeEnabledSbvsTj', 
                        '_$s13TranslationUI14LanguagesModelC19airplaneModeEnabledSbvsTq', 
-                       '_$s13TranslationUI14LanguagesModelC19queryLanguageStatusyyyycSgFTj', 
-                       '_$s13TranslationUI14LanguagesModelC19queryLanguageStatusyyyycSgFTq', 
+                       '_$s13TranslationUI14LanguagesModelC19queryLanguageStatusyyySay10Foundation6LocaleVGcSgFTj', 
+                       '_$s13TranslationUI14LanguagesModelC19queryLanguageStatusyyySay10Foundation6LocaleVGcSgFTq', 
                        '_$s13TranslationUI14LanguagesModelC20$airplaneModeEnabled7Combine9PublishedV9PublisherVySb_GvMTj', 
                        '_$s13TranslationUI14LanguagesModelC20$airplaneModeEnabled7Combine9PublishedV9PublisherVySb_GvMTq', 
                        '_$s13TranslationUI14LanguagesModelC20$airplaneModeEnabled7Combine9PublishedV9PublisherVySb_GvgTj', 
@@ -265,6 +268,7 @@ exports:
                        '_$s7SwiftUI5ColorV011TranslationB0E015translateAccentC0ACvgZ', 
                        '_$sSS13TranslationUIE17TRANSLATION_LIMITSivMZ', '_$sSS13TranslationUIE17TRANSLATION_LIMITSivgZ', 
                        '_$sSS13TranslationUIE17TRANSLATION_LIMITSivsZ', '_$sSS13TranslationUIE24localizedSettingsAppNameSSvgZ', 
+                       '_$sSS13TranslationUIE9resegmentySS10Foundation6LocaleVF', 
                        '_$sSS13TranslationUIE9truncated5limitSb_SStSi_tF', '_$sST13TranslationUI10Foundation6LocaleV7ElementRtzrlE15sortedLocalized3forSayADGAD_tF', 
                        '_$sSo14NSUserDefaultsC13TranslationUIE016translationGroupB0ABvgZ', 
                        '_$sSo14NSUserDefaultsC13TranslationUIE12onDeviceOnlySbvM', 
@@ -280,7 +284,8 @@ exports:
                        '_$sSo14NSUserDefaultsC13TranslationUIE24lastUsedLocaleIdentifierSSSgvpMV', 
                        '_$sSo14NSUserDefaultsC13TranslationUIE24lastUsedLocaleIdentifierSSSgvs', 
                        '_$sSo14NSUserDefaultsC13TranslationUIE9ConstantsOMa', '_$sSo14NSUserDefaultsC13TranslationUIE9ConstantsOMn', 
-                       '_$sSo14NSUserDefaultsC13TranslationUIE9ConstantsON', '_$sSo18NSAttributedStringC13TranslationUIE9truncated5limitSb_ABtSi_tF', 
+                       '_$sSo14NSUserDefaultsC13TranslationUIE9ConstantsON', '_$sSo18NSAttributedStringC13TranslationUIE9resegmentyAB10Foundation6LocaleVF', 
+                       '_$sSo18NSAttributedStringC13TranslationUIE9truncated5limitSb_ABtSi_tF', 
                        '_$sSo7NSArrayC13TranslationUIE15sortedLocalized3forSayypG10Foundation6LocaleV_tF', 
                        '_$sSo7NSColorC13TranslationUIE20translateAccentColorABvgZ', 
                        '_$sSo8NSBundleC13TranslationUIE17ltLocalizedString_6locale5tableSSSgSS_10Foundation6LocaleVSStF', 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CE399ECD-1A0B-3CD6-B61B-48A89336484E
+    value:           A7F7C81B-5450-30EE-B795-3463FB6A5F6B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           48934721-3BC7-34EC-9C2F-26ED85990303
+    value:           55CCE701-AAB9-3204-BAFB-7B30D0C7E685
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon'
 current-version: 165
 compatibility-version: 2
@@ -31,11 +31,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6F02BB90-0CB0-3D2E-917B-AAC2C387152F
+    value:           5747A72A-645A-3C2A-B695-6AFBBBDC5C3A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7126C973-0493-3022-93B4-C964AB4E778E
+    value:           CE79985E-8557-3A85-BD94-0EFCF8E12B07
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/CommonPanels.framework/Versions/A/CommonPanels'
 current-version: 101
 parent-umbrella:
@@ -75,13 +75,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C8F45942-B703-35CF-BAEB-5C0C7DC41EC6
+    value:           535DBC28-4D26-3609-86BB-5C40227B648C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B535623E-720B-3B96-BD3F-FAA4CEBC19A1
+    value:           01B981B8-A2D8-374D-9A0E-C4AC8C1009DA
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox'
-current-version: 1105
+current-version: 1113.6
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        Carbon
@@ -397,8 +397,8 @@ exports:
                        __GetActiveSystemUIModeAndOptions, __GetAggregateUIMode, __GetAllEventsOfClass, 
                        __GetCurrentMenuContext, __GetDefaultMenuFont, __GetMenuItemBoundsU, 
                        __GetMenuItemHierarchicalMenuU, __GetMenuMinimumWidth, __GetMenuTitleBounds, 
-                       __GetOpenMenuDirection, __GetSymbolicHotKeyValue, __GetWindowCGContext, 
-                       __GetWindowCGOrderingEnabled, __GetWindowReshapingEnabled, 
+                       __GetOpenMenuDirection, __GetSymbolicHotKeyValue, __GetSymbolicHotKeyValue2, 
+                       __GetWindowCGContext, __GetWindowCGOrderingEnabled, __GetWindowReshapingEnabled, 
                        __GetWindowZOrderingEnabled, __HIBevelButtonRegisterClass, 
                        __HIChasingArrowsRegisterClass, __HICheckBoxRegisterClass, 
                        __HIDisableSuddenTerminationForSendEvent, __HIDisclosureButtonRegisterClass, 
@@ -420,11 +420,12 @@ exports:
                        __HIMenuPerformKeyboardNavigation, __HIMenuSendItemSelectedEvent, 
                        __HIMenuSetCommandKey, __HIMenuSetContentDirectionality, __HIMenuSetContentSize, 
                        __HIMenuSetEventProc, __HIMenuSetIndentWidth, __HIMenuSetItemIndent, 
-                       __HIMenuSetItemViewClass, __HIMenuSetNSImageInterface, __HIMenuSetNewItemsCount, 
-                       __HIMenuUseBackdrops, __HIMenuViewRegisterClass, __HIPopupButtonRegisterClass, 
-                       __HIPresentationInstanceCreateForFullScreenSpace, __HIPresentationInstanceCreateWithFullScreenMode, 
-                       __HIPresentationInstanceDisplayDidChange, __HIPresentationInstanceRelease, 
-                       __HIPresentationInstanceSetAutoHideHeight, __HIPresentationInstanceSetSpace, 
+                       __HIMenuSetItemViewClass, __HIMenuSetKeyEquivalentForMatching, 
+                       __HIMenuSetNSImageInterface, __HIMenuSetNewItemsCount, __HIMenuUseBackdrops, 
+                       __HIMenuViewRegisterClass, __HIPopupButtonRegisterClass, __HIPresentationInstanceCreateForFullScreenSpace, 
+                       __HIPresentationInstanceCreateWithFullScreenMode, __HIPresentationInstanceDisplayDidChange, 
+                       __HIPresentationInstanceRelease, __HIPresentationInstanceSetAutoHideHeight, 
+                       __HIPresentationInstanceSetHasAlwaysVisibleMenuBar, __HIPresentationInstanceSetSpace, 
                        __HIPresentationInstanceSetUIMode, __HIPresentationInstanceStartMenuBarAnimation, 
                        __HIProgressBarRegisterClass, __HIPushButtonRegisterClass, 
                        __HIRadioGroupRegisterClass, __HIRawObjectRegisterClass, __HIRegisterAEWillInteractProc, 
@@ -460,10 +461,10 @@ exports:
                        __SetCGEventConversionFilter, __SetDefaultMenuFont, __SetFullTabbingEnabled, 
                        __SetJavaThreadHook, __SetMenuCallout, __SetMenuItemIconSize, 
                        __SetMenuMinimumWidth, __SetMenuTrackingShouldReraiseNSExceptions, 
-                       __SetMenuWindowLevel, __SetOpenMenuOrigin, __SetWindowCGOrderingEnabled, 
-                       __SetWindowReshapingEnabled, __SetWindowZOrderingEnabled, 
-                       __SimulateMenuClosed, __SimulateMenuOpening, __SimulateMenuSelection, 
-                       __SimulateMenuSelectionU, __StartSystemUIModeMenuBarAnimation, 
+                       __SetMenuWindowLevel, __SetOpenMenuOrigin, __SetSharedFullScreenHasAlwaysVisibleMenuBar, 
+                       __SetWindowCGOrderingEnabled, __SetWindowReshapingEnabled, 
+                       __SetWindowZOrderingEnabled, __SimulateMenuClosed, __SimulateMenuOpening, 
+                       __SimulateMenuSelection, __SimulateMenuSelectionU, __StartSystemUIModeMenuBarAnimation, 
                        __SyncWindowWithCGAfterMove, __TISCopyParentInputMethodForInputSource, 
                        __TISCreateEnabledInputSourcePrefs, __TISGetPhysicalKeyboardLanguage, 
                        __TISRestrictToReadOnlyMachinePrefs, __TISUpdateEnabledInputSourcePrefs, 
@@ -550,11 +551,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8105C355-A656-3B5A-924E-C9220DB0E565
+    value:           6873DD08-6FDC-31BE-9DC2-773E3CF997BB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3F40ABAF-1B19-3FF3-B5AD-EE4C7B791F16
+    value:           8580845E-B987-3CD8-A3FC-1FA1F82C8000
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Help.framework/Versions/A/Help'
 current-version: 71
 parent-umbrella:
@@ -577,11 +578,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           36495E0D-B610-3AA8-9D9B-B4BAAC77F278
+    value:           A7EA4A43-0CE9-3BEE-9680-875F40FDCE0D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E7719010-998C-3AAD-A0E4-42E874A8A360
+    value:           D378DF23-2D67-3220-ACD6-8BB4EC3A3864
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/ImageCapture.framework/Versions/A/ImageCapture'
 current-version: 5
 parent-umbrella:
@@ -697,11 +698,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ADBDCD04-D910-3E0A-B245-1F8F5C2FE53D
+    value:           0461D93A-0A2D-388F-BE5B-5DD75C1C78CC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           985868A5-D8CA-39C2-A412-A61F29671785
+    value:           DEF130E4-94F7-3C15-BD11-1EFB07B567FD
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Ink.framework/Versions/A/Ink'
 current-version: 227
 parent-umbrella:
@@ -721,17 +722,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           156DF1D9-9BB5-32DF-A0F3-76A7B1D3662A
+    value:           3E7FADB4-DAA3-3429-BDF5-13B758067123
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9F44FFBE-5907-3324-AB6B-C986E6301915
+    value:           09017452-2A8D-35F2-8756-F57BD3FC73F1
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/OpenScripting.framework/Versions/A/OpenScripting'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        Carbon
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _ASCopySourceAttributes, _ASGetSourceStyleNames, _ASGetSourceStyles, 
                        _ASInit, _ASSetSourceAttributes, _ASSetSourceStyles, _OSAAddStorageType, 
                        _OSAAppletShowStartupScreenKey, _OSAAppletStayOpenKey, _OSAAuthorizeEvent, 
@@ -779,11 +780,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           182174DE-0061-332A-879F-E5FA4ED92618
+    value:           BF0EF296-2D6D-3415-9F70-D1447C549335
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           88968683-C98E-32B9-9863-EF0C4D5524C0
+    value:           453ACA17-8D5C-3FC0-A849-B388084D963B
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Print.framework/Versions/A/Print'
 current-version: 272
 parent-umbrella:
@@ -794,11 +795,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5D8428F4-1CDD-3FDC-ADC8-558AE1808FF3
+    value:           B378928B-66D0-359C-B729-57A16D4A58EB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           55438EEF-79B3-3879-BA1E-7511F3B920A0
+    value:           230D07DB-ACA3-39E5-8535-F5A63384646F
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SecurityHI.framework/Versions/A/SecurityHI'
 current-version: 55008
 parent-umbrella:
@@ -823,11 +824,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DF9F6685-C71E-30C1-BB82-22F483C52587
+    value:           B9A884C8-775F-3BB2-86C3-B476A97ADCB1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E539D79B-E614-35A4-9382-4CB15C831A66
+    value:           BAFA9784-6BE6-3C04-B05E-121A22CFEFF9
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

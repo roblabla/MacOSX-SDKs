@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1E6C66E1-B561-34D3-BEC2-1084D7295E0B
+    value:           0E1889D7-2CE0-324C-ACA7-5DB47CD86D72
   - target:          x86_64-maccatalyst
-    value:           1E6C66E1-B561-34D3-BEC2-1084D7295E0B
+    value:           0E1889D7-2CE0-324C-ACA7-5DB47CD86D72
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6330C439-3D50-332E-8461-3A1C00DDFD37
+    value:           48EBD5A1-178A-3146-9E74-51DDB1D0FE1E
   - target:          arm64e-maccatalyst
-    value:           6330C439-3D50-332E-8461-3A1C00DDFD37
+    value:           48EBD5A1-178A-3146-9E74-51DDB1D0FE1E
 install-name:    '/usr/lib/swift/libswiftsimd.dylib'
 current-version: 9
 swift-abi-version: 7

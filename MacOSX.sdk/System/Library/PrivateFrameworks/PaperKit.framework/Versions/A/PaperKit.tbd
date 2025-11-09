@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FA2E4E20-4A55-3FCF-89DC-DE2FB7354295
+    value:           CD48094C-B2FF-3795-AB48-C36F5ED6AEB4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           690B2221-B1F9-3199-887A-BCC37B07206F
+    value:           76500870-E451-36BA-9695-BBCD462A306D
 install-name:    '/System/Library/PrivateFrameworks/PaperKit.framework/Versions/A/PaperKit'
 swift-abi-version: 7
 allowable-clients:
@@ -491,10 +491,13 @@ exports:
                        '_$s8PaperKit26CanvasElementImageRendererCMa', '_$s8PaperKit26CanvasElementImageRendererCMm', 
                        '_$s8PaperKit26CanvasElementImageRendererCMn', '_$s8PaperKit26CanvasElementImageRendererCN', 
                        '_$s8PaperKit26CanvasElementImageRendererCfD', '_$s8PaperKit26CanvasElementImageRendererCfd', 
-                       '_$s8PaperKit26PKPaperLinksViewControllerC04loadE0yyF', '_$s8PaperKit26PKPaperLinksViewControllerC11viewDidLoadyyF', 
+                       '_$s8PaperKit26PKPaperLinksViewControllerC04loadE0yyF', '_$s8PaperKit26PKPaperLinksViewControllerC07maximumE15WidthConstraint33_0EDA932587816ED8C5159F517B822EF7LLSo08NSLayoutI0CSgvpfi', 
+                       '_$s8PaperKit26PKPaperLinksViewControllerC07minimumE15WidthConstraint33_0EDA932587816ED8C5159F517B822EF7LLSo08NSLayoutI0CSgvpfi', 
+                       '_$s8PaperKit26PKPaperLinksViewControllerC11viewDidLoadyyF', 
                        '_$s8PaperKit26PKPaperLinksViewControllerC13viewDidAppearyyF', 
                        '_$s8PaperKit26PKPaperLinksViewControllerC18fetchLinkableItems10completionyySayAA8LinkItem_pGc_tF', 
                        '_$s8PaperKit26PKPaperLinksViewControllerC18fetchLinkableItems9excluding10completionySaySo14NSUserActivityCG_ySayAA8LinkItem_pGctF', 
+                       '_$s8PaperKit26PKPaperLinksViewControllerC19viewWidthConstraint33_0EDA932587816ED8C5159F517B822EF7LLSo08NSLayoutI0CSgvpfi', 
                        '_$s8PaperKit26PKPaperLinksViewControllerC20viewHeightConstraint33_0EDA932587816ED8C5159F517B822EF7LLSo08NSLayoutI0CSgvpfi', 
                        '_$s8PaperKit26PKPaperLinksViewControllerC31$__lazy_storage_$_addLinkClient33_0EDA932587816ED8C5159F517B822EF7LLSo05SYAddj7ContextK0CSgvpfi', 
                        '_$s8PaperKit26PKPaperLinksViewControllerC7nibName6bundleACSSSg_So8NSBundleCSgtcfC', 

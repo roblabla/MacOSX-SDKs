@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           572B6014-A893-34BE-8A9F-F06D90B725F0
+    value:           AFCD5909-7466-3F2C-9295-7B545722DF38
   - target:          x86_64-maccatalyst
-    value:           572B6014-A893-34BE-8A9F-F06D90B725F0
+    value:           AFCD5909-7466-3F2C-9295-7B545722DF38
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8FBC8180-B925-3861-9121-1CC235AF7B03
+    value:           4CCEE3B7-5167-388B-A5CF-4FD3570520A3
   - target:          arm64e-maccatalyst
-    value:           8FBC8180-B925-3861-9121-1CC235AF7B03
+    value:           4CCEE3B7-5167-388B-A5CF-4FD3570520A3
 install-name:    '/System/Library/PrivateFrameworks/AXRuntime.framework/Versions/A/AXRuntime'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -139,12 +139,12 @@ exports:
                        __AXNextIgnoredNotification, __AXNotificationObserverClientDied, 
                        __AXObserverCreateInternal, __AXPidFromAuditToken, __AXPidIsAssociatedInternal, 
                        __AXPidIsSuspended, __AXPidIsSuspendedWithDisplayType, __AXPutPidOnTimeoutProbation, 
-                       __AXRemoveFromElementCache, __AXRemoveNotificationObserver, 
-                       __AXRemoveObserverForPort, __AXRequestingClientForSelfMachMessage, 
-                       __AXResetRequestingClient, __AXRetrieveExistingAXUIElementWithElement, 
-                       __AXRuntimeGetCallbacksForUnitTesting, __AXSetAllowsSuspendedAppServer, 
-                       __AXSetApplicationElementHandler, __AXSetNextElementCacheUniqueUID, 
-                       __AXSetObserverForPort, __AXSetRequestingClient, __AXShouldDispatchNonMainThreadCallbacksOnMainThread, 
+                       __AXRemoveNotificationObserver, __AXRemoveObserverForPort, 
+                       __AXRequestingClientForSelfMachMessage, __AXResetRequestingClient, 
+                       __AXRetrieveExistingAXUIElementWithElement, __AXRuntimeGetCallbacksForUnitTesting, 
+                       __AXSetAllowsSuspendedAppServer, __AXSetApplicationElementHandler, 
+                       __AXSetNextElementCacheUniqueUID, __AXSetObserverForPort, 
+                       __AXSetRequestingClient, __AXShouldDispatchNonMainThreadCallbacksOnMainThread, 
                        __AXShouldDispatchNonMainThreadCallbacksOnMainThreadPopReason, 
                        __AXShouldDispatchNonMainThreadCallbacksOnMainThreadPushReason, 
                        __AXTraitsAsString, __AXTraitsAsStringInternal, __AXTraitsRemoveTrait, 
@@ -224,23 +224,24 @@ exports:
                        _kAXTextOperationActionDefine, _kAXTextOperationActionDelete, 
                        _kAXTextOperationActionIncreaseFontSize, _kAXTextOperationActionItalics, 
                        _kAXTextOperationActionPaste, _kAXTextOperationActionRedo, 
-                       _kAXTextOperationActionReplace, _kAXTextOperationActionSelect, 
-                       _kAXTextOperationActionSelectAll, _kAXTextOperationActionShare, 
-                       _kAXTextOperationActionSpeak, _kAXTextOperationActionSpeakSentence, 
-                       _kAXTextOperationActionSpeakSpellOut, _kAXTextOperationActionUnderline, 
-                       _kAXTextOperationActionUndo, _kAXTextOperationsAvailableTrait, 
-                       _kAXToggleTrait, _kAXTouchContainerTrait, _kAXUIServerFakePid, 
-                       _kAXUpdatesFrequentlyTrait, _kAXValueChangeTypeAutofill, _kAXValueChangeTypeDelete, 
-                       _kAXValueChangeTypeDictation, _kAXValueChangeTypeInsert, _kAXValueChangeTypeReplacement, 
-                       _kAXValueChangeTypeSingleInsert, _kAXValueChangeUserInfoKeyChangeType, 
-                       _kAXValueChangeUserInfoKeyInsertedTextOrNil, _kAXValueChangeUserInfoKeyIsQuiet, 
-                       _kAXValueChangeUserInfoKeyIsSecureText, _kAXValueChangeUserInfoKeyValueAfter, 
-                       _kAXValueChangeUserInfoKeyValueBefore, _kAXVisitedTrait, _kAXWebContentTrait, 
-                       _kAXWebInteractiveVideoTrait, _kAXXCAttributeAbsoluteValue, 
-                       _kAXXCAttributeActiveKeyboard, _kAXXCAttributeApplication, 
-                       _kAXXCAttributeApplicationBundleIdentifier, _kAXXCAttributeApplicationOrientation, 
-                       _kAXXCAttributeAssistiveTechnologyFocused, _kAXXCAttributeAutomationType, 
-                       _kAXXCAttributeAvailableKeyplanes, _kAXXCAttributeBannerIsStickyAttribute, 
+                       _kAXTextOperationActionReplace, _kAXTextOperationActionScanText, 
+                       _kAXTextOperationActionSelect, _kAXTextOperationActionSelectAll, 
+                       _kAXTextOperationActionShare, _kAXTextOperationActionSpeak, 
+                       _kAXTextOperationActionSpeakSentence, _kAXTextOperationActionSpeakSpellOut, 
+                       _kAXTextOperationActionUnderline, _kAXTextOperationActionUndo, 
+                       _kAXTextOperationsAvailableTrait, _kAXToggleTrait, _kAXTouchContainerTrait, 
+                       _kAXUIServerFakePid, _kAXUpdatesFrequentlyTrait, _kAXValueChangeTypeAutofill, 
+                       _kAXValueChangeTypeDelete, _kAXValueChangeTypeDictation, _kAXValueChangeTypeInsert, 
+                       _kAXValueChangeTypeReplacement, _kAXValueChangeTypeSingleInsert, 
+                       _kAXValueChangeUserInfoKeyChangeType, _kAXValueChangeUserInfoKeyInsertedTextOrNil, 
+                       _kAXValueChangeUserInfoKeyIsQuiet, _kAXValueChangeUserInfoKeyIsSecureText, 
+                       _kAXValueChangeUserInfoKeyValueAfter, _kAXValueChangeUserInfoKeyValueBefore, 
+                       _kAXVisitedTrait, _kAXWebContentTrait, _kAXWebInteractiveVideoTrait, 
+                       _kAXXCAttributeAbsoluteValue, _kAXXCAttributeActiveKeyboard, 
+                       _kAXXCAttributeApplication, _kAXXCAttributeApplicationBundleIdentifier, 
+                       _kAXXCAttributeApplicationOrientation, _kAXXCAttributeAssistiveTechnologyFocused, 
+                       _kAXXCAttributeAutomationType, _kAXXCAttributeAvailableKeyplanes, 
+                       _kAXXCAttributeBackgroundTextColor, _kAXXCAttributeBannerIsStickyAttribute, 
                        _kAXXCAttributeCallState, _kAXXCAttributeCarPlayAppApplication, 
                        _kAXXCAttributeCenterPoint, _kAXXCAttributeChildren, _kAXXCAttributeChildrenCount, 
                        _kAXXCAttributeCustomActions, _kAXXCAttributeCustomAutomationProperties, 
@@ -249,7 +250,8 @@ exports:
                        _kAXXCAttributeExpandedStatusCollapsed, _kAXXCAttributeExpandedStatusExpanded, 
                        _kAXXCAttributeExpandedStatusUnsupported, _kAXXCAttributeFauxCollectionViewCellsDisabled, 
                        _kAXXCAttributeFauxTableViewCellsDisabled, _kAXXCAttributeFocusedApplications, 
-                       _kAXXCAttributeFrame, _kAXXCAttributeHasNativeFocus, _kAXXCAttributeHasVariantKeys, 
+                       _kAXXCAttributeForegroundTextColor, _kAXXCAttributeFrame, 
+                       _kAXXCAttributeHasNativeFocus, _kAXXCAttributeHasVariantKeys, 
                        _kAXXCAttributeHeaderElements, _kAXXCAttributeHint, _kAXXCAttributeHorizontalSizeClass, 
                        _kAXXCAttributeIdentifier, _kAXXCAttributeInputIdentifier, 
                        _kAXXCAttributeIsAppSwitcherVisible, _kAXXCAttributeIsComboBox, 

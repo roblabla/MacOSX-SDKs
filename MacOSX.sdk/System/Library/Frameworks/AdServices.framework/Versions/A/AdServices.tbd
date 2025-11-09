@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           04C299BE-9ED2-30A9-98D5-E4DFC0F8650A
+    value:           FFB3D0DC-766B-390F-B183-9DAA78E801EC
   - target:          x86_64-maccatalyst
-    value:           04C299BE-9ED2-30A9-98D5-E4DFC0F8650A
+    value:           FFB3D0DC-766B-390F-B183-9DAA78E801EC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B7B7D462-62B6-33D8-B5C3-E22B6BED2C5D
+    value:           7351EACD-6F38-32A1-8ED4-A66D6FF45F2A
   - target:          arm64e-maccatalyst
-    value:           B7B7D462-62B6-33D8-B5C3-E22B6BED2C5D
+    value:           7351EACD-6F38-32A1-8ED4-A66D6FF45F2A
 install-name:    '/System/Library/Frameworks/AdServices.framework/Versions/A/AdServices'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AAAttributionErrorDomain, _kAAAttributionXPCMachServiceName ]
     objc-classes:    [ AAAttribution ]

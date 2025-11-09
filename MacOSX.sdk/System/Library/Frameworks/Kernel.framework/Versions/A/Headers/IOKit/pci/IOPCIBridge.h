@@ -101,6 +101,7 @@ private:
     void spaceFromProperties( IORegistryEntry * regEntry,
                               IOPCIAddressSpace * space );
     void updateWakeReason(IOPCIDevice * device);
+    bool childPrefersMSIX( IOPCIDevice * device );
 
 protected:
 #if !defined(__arm64__)

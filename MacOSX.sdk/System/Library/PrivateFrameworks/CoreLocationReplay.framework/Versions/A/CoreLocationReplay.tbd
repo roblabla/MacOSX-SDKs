@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           55877BC9-8490-34ED-82C7-C7E322ACC5F5
+    value:           B4F68DF8-722E-3AEC-861F-AFBA659AAE2F
   - target:          x86_64-maccatalyst
-    value:           55877BC9-8490-34ED-82C7-C7E322ACC5F5
+    value:           B4F68DF8-722E-3AEC-861F-AFBA659AAE2F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B8C393E5-4889-3AC9-8A86-660C5778FFF2
+    value:           179C3349-FD2A-33A2-B44E-50B49703A8AD
   - target:          arm64e-maccatalyst
-    value:           B8C393E5-4889-3AC9-8A86-660C5778FFF2
+    value:           179C3349-FD2A-33A2-B44E-50B49703A8AD
 install-name:    '/System/Library/PrivateFrameworks/CoreLocationReplay.framework/Versions/A/CoreLocationReplay'
-current-version: 2652
+current-version: 2665.0.9
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

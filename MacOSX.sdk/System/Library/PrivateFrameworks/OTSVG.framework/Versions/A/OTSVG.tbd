@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           47C7ED51-5019-32CB-8067-35022F03CD04
+    value:           8F39EAF8-7041-38AA-B87E-9C27432D03AA
   - target:          x86_64-maccatalyst
-    value:           47C7ED51-5019-32CB-8067-35022F03CD04
+    value:           8F39EAF8-7041-38AA-B87E-9C27432D03AA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2A1EE420-0F27-3444-8ACC-96D23083D471
+    value:           E020464A-8821-38EE-A8D7-2568E1D6F23B
   - target:          arm64e-maccatalyst
-    value:           2A1EE420-0F27-3444-8ACC-96D23083D471
+    value:           E020464A-8821-38EE-A8D7-2568E1D6F23B
 install-name:    '/System/Library/PrivateFrameworks/OTSVG.framework/Versions/A/OTSVG'
 current-version: 0
 compatibility-version: 0

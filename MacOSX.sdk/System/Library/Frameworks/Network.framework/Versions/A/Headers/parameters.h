@@ -32,7 +32,7 @@ NW_ASSUME_NONNULL_BEGIN
  * @abstract
  *		A Network Parameters object contains the parameters necessary to create
  *		a network connection or listener. Parameters include any preferences for
- *		network paths (such as requried, prohibited, and preferred networks, and local
+ *		network paths (such as required, prohibited, and preferred networks, and local
  *		endpoint requirements); preferences for data transfer and quality of service;
  *		and the protocols to be used for a connection along with any protocol-specific
  *		options.

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6C04CA8E-18BD-3D02-904D-59DF64843CE6
+    value:           9928D413-EDAC-34CE-92A9-714152967EAB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3897C938-CBAE-3595-B962-8CA77DE49C2A
+    value:           D0176A23-C9D3-3C26-933C-BA299015A3A4
 install-name:    '/System/Library/PrivateFrameworks/SystemPolicy.framework/Versions/A/SystemPolicy'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

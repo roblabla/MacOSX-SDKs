@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           94410FF5-1F56-37DC-B75C-3E42B8DC9E2A
+    value:           2F72BC81-DFC3-3E68-9F10-C3A17C0067A9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FD5DF18E-4B6C-3A63-90A1-824BCCDD1DE5
+    value:           EA06D31D-59FC-3F28-A868-CE1C2AAFCACF
 install-name:    '/System/Library/PrivateFrameworks/SiriAnalytics.framework/Versions/A/SiriAnalytics'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -23,14 +23,14 @@ exports:
                        _kAssistantSiriAnalyticsServiceName, _kSiriAnalyticsErrorDomain ]
     objc-classes:    [ AssistantSiriAnalytics, AssistantSiriAnalyticsClockWatcher, 
                        AssistantSiriAnalyticsMessageTailing, AssistantSiriAnalyticsService, 
-                       SiriAnalyticsClient, SiriAnalyticsClientMessageStream, SiriAnalyticsError, 
-                       SiriAnalyticsFBFMessageStorageProvider, SiriAnalyticsInternalTelemetry, 
-                       SiriAnalyticsLargeMessageStorage, SiriAnalyticsLogicalClock, 
-                       SiriAnalyticsLogicalClockStatistics, SiriAnalyticsLogicalTimeStamp, 
-                       SiriAnalyticsMessage, SiriAnalyticsMessageObserverHandle, 
+                       SiriAnalyticsClient, SiriAnalyticsClientMessageStream, SiriAnalyticsDerivativeClock, 
+                       SiriAnalyticsError, SiriAnalyticsFBFMessageStorageProvider, 
+                       SiriAnalyticsInternalTelemetry, SiriAnalyticsLargeMessageStorage, 
+                       SiriAnalyticsLogicalClock, SiriAnalyticsLogicalClockStatistics, 
+                       SiriAnalyticsLogicalTimeStamp, SiriAnalyticsMessage, SiriAnalyticsMessageObserverHandle, 
                        SiriAnalyticsMessageObserverStream, SiriAnalyticsMessageResolutionPipeline, 
-                       SiriAnalyticsPreferences, SiriAnalyticsRemoteService, SiriAnalyticsTimeAnnotatedMessage, 
-                       SiriAnalyticsTimePeriodBuffer, SiriAnalyticsWhiteRose, SiriAnalyticsXPCConnection, 
-                       SiriAnalyticsXPCLargeMessageEnvelope, SiriAnalyticsXPCMessageEnvelope, 
-                       SiriAnalyticsXPCServiceListener ]
+                       SiriAnalyticsPreferences, SiriAnalyticsRemoteService, SiriAnalyticsRootClock, 
+                       SiriAnalyticsTimeAnnotatedMessage, SiriAnalyticsTimePeriodBuffer, 
+                       SiriAnalyticsWhiteRose, SiriAnalyticsXPCConnection, SiriAnalyticsXPCLargeMessageEnvelope, 
+                       SiriAnalyticsXPCMessageEnvelope, SiriAnalyticsXPCServiceListener ]
 ...

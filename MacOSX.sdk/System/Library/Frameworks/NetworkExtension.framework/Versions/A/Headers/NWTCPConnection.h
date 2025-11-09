@@ -162,7 +162,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param length The exact number of bytes the application wants to read
  * @param completion The completion handler to be invoked when there is data to read or an error occurred
  */
-- (void)readLength:(NSUInteger)length completionHandler:(void (^)(NSData * _Nullable data, NSError * _Nullable error))completion API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (void)readLength:(NSUInteger)length completionHandler:(void (^)(NSData * _Nullable data, NSError * _Nullable error))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method readMinimumLength:maximumLength:completionHandler:
@@ -189,7 +189,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param maximum The maximum number of bytes the caller wants to read
  * @param completion The completion handler to be invoked when there is data to read or an error occurred
  */
-- (void)readMinimumLength:(NSUInteger)minimum maximumLength:(NSUInteger)maximum completionHandler:(void (^)(NSData * _Nullable data, NSError * _Nullable error))completion API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (void)readMinimumLength:(NSUInteger)minimum maximumLength:(NSUInteger)maximum completionHandler:(void (^)(NSData * _Nullable data, NSError * _Nullable error))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method write:completionHandler:
@@ -199,7 +199,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param completion The completion handler to be invoked when the data content has been written or an error has occurred.
  * 		If the error is nil, the write succeeded and the caller can write more data.
  */
-- (void)write:(NSData *)data completionHandler:(void (^)(NSError * _Nullable error))completion API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (void)write:(NSData *)data completionHandler:(void (^)(NSError * _Nullable error))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method writeClose:
@@ -247,7 +247,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  *		completion handler invocation.
  */
 - (void)provideIdentityForConnection:(NWTCPConnection *)connection
-				   completionHandler:(void (^)(SecIdentityRef identity, NSArray<id> *certificateChain))completion API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+				   completionHandler:(void (^)(SecIdentityRef identity, NSArray<id> *certificateChain))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method shouldEvaluateTrustForConnection:
@@ -276,7 +276,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  */
 - (void)evaluateTrustForConnection:(NWTCPConnection *)connection
 			  peerCertificateChain:(NSArray<id> *)peerCertificateChain
-				 completionHandler:(void (^)(SecTrustRef trust))completion API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+				 completionHandler:(void (^)(SecTrustRef trust))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 @end
 

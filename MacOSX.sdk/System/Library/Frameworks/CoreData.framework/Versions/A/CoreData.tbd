@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           267E7F30-D406-34C1-9DBF-8EDCC6C6C994
+    value:           990E8B73-E361-345F-8921-3DA1729478B7
   - target:          x86_64-maccatalyst
-    value:           267E7F30-D406-34C1-9DBF-8EDCC6C6C994
+    value:           990E8B73-E361-345F-8921-3DA1729478B7
   - target:          x86_64h-macos
-    value:           11C60489-4E02-3A38-A32F-1835CAF1BA1A
+    value:           CBF0B3EC-6B70-30AF-995C-7DFEC1EEEBD1
   - target:          x86_64h-maccatalyst
-    value:           11C60489-4E02-3A38-A32F-1835CAF1BA1A
+    value:           CBF0B3EC-6B70-30AF-995C-7DFEC1EEEBD1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F4182F86-D099-3CE1-AB4E-5D4798A27A63
+    value:           1A00531F-6DEF-3DD6-943C-E0DED9374CC7
   - target:          arm64e-maccatalyst
-    value:           F4182F86-D099-3CE1-AB4E-5D4798A27A63
+    value:           1A00531F-6DEF-3DD6-943C-E0DED9374CC7
 install-name:    '/System/Library/Frameworks/CoreData.framework/Versions/A/CoreData'
-current-version: 1130
+current-version: 1145
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _NSAddedPersistentStoresKey, _NSAffectedObjectsErrorKey, _NSAffectedStoresErrorKey, 
                        _NSAutomaticMigrationUseDocumentDestinationOption, _NSBinaryExternalRecordType, 
@@ -87,7 +87,8 @@ exports:
                        _NSXPCStoreAnonymousListenerKey, _NSXPCStoreDaemonizeKey, 
                        _NSXPCStoreEntitlementNamesKey, _NSXPCStorePostUpdateNotificationsKey, 
                        _NSXPCStoreServerEndpointFactoryKey, _NSXPCStoreServiceNameKey, 
-                       _NSXPCStoreSkipModelCheckKey, _NSXPCStoreType, __NSBackgroundThreadConfinementConcurrencyType, 
+                       _NSXPCStoreSkipModelCheckKey, _NSXPCStoreSkipRetryWaitKey, 
+                       _NSXPCStoreType, __NSBackgroundThreadConfinementConcurrencyType, 
                        __NSCoreDataLog, __NSManagedObjectContextObjectsDidChangePrivateNotification, 
                        __NSPersistentStoreCoordinatorStoresDidChangePrivateNotification, 
                        __NSTriggerModifiedObjectIDsKey, __NSTriggerModifiedObjectsKey ]

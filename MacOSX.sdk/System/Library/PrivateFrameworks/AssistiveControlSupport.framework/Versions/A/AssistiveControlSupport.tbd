@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DE16FAE3-48EA-36DF-839D-E916B5A63495
+    value:           2D55F33F-FE9A-3501-B6C3-9862DC490A0A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BE7F3D4A-67B4-3F70-A3C1-4DF5C54F288A
+    value:           5BADB325-115D-3FEC-9706-4482F9F1089E
 install-name:    '/System/Library/PrivateFrameworks/AssistiveControlSupport.framework/Versions/A/AssistiveControlSupport'
 current-version: 87
 exports:

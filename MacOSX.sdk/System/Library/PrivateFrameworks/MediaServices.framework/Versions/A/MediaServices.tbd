@@ -4,25 +4,30 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           36F8B95F-3E2F-3D2E-A215-296176AD423A
+    value:           15D19E29-BDC8-3AB6-979D-64CC3B86EA26
   - target:          x86_64-maccatalyst
-    value:           36F8B95F-3E2F-3D2E-A215-296176AD423A
+    value:           15D19E29-BDC8-3AB6-979D-64CC3B86EA26
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           78DFC2F4-2BF9-372C-979E-E43E8F9B29A0
+    value:           BABFB842-9D75-3C34-BE27-6CE1D8FC486E
   - target:          arm64e-maccatalyst
-    value:           78DFC2F4-2BF9-372C-979E-E43E8F9B29A0
+    value:           BABFB842-9D75-3C34-BE27-6CE1D8FC486E
 install-name:    '/System/Library/PrivateFrameworks/MediaServices.framework/Versions/A/MediaServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MSVArchivedDataWithRootObject, _MSVArtworkServiceErrorDomain, 
-                       _MSVAuditTokenForCurrentProcess, _MSVBundleIDForAuditToken, 
-                       _MSVBundleIDForPID, _MSVCopyDeviceName, _MSVCopyDeviceUniqueIdentifier, 
-                       _MSVCopyLocalizedModelName, _MSVCopySystemBuildVersion, _MSVCreateTemporaryFileHandle, 
+                       _MSVAuditTokenForCurrentProcess, _MSVAutoBugCaptureDomainAirTraffic, 
+                       _MSVAutoBugCaptureDomainMediaFoundation, _MSVAutoBugCaptureDomainMediaLibrary, 
+                       _MSVAutoBugCaptureDomainMediaPlayer, _MSVAutoBugCaptureDomainMusicLibrary, 
+                       _MSVAutoBugCaptureDomainRadio, _MSVAutoBugCaptureDomainStoreBookKeeper, 
+                       _MSVAutoBugCaptureDomainiTunesCloud, _MSVBundleIDForAuditToken, 
+                       _MSVBundleIDForPID, _MSVBundleIDForTCCIdentity, _MSVCopyDeviceName, 
+                       _MSVCopyDeviceUniqueIdentifier, _MSVCopyLocalizedModelName, 
+                       _MSVCopySystemBuildVersion, _MSVCreateTemporaryFileHandle, 
                        _MSVCryptoDigestForContentsOfFile, _MSVCryptoDigestForContentsOfInputStream, 
                        _MSVCryptoDigestForData, _MSVCryptoDigestForString, _MSVCryptoUtilitiesDigestDataFromHexString, 
                        _MSVCryptoUtilitiesHexStringFromDigest, _MSVDeviceHasCellularBaseband, 
@@ -63,8 +68,9 @@ exports:
                        _MSVSignedIntersectionRange, _MSVSignedRangeFromString, _MSVSignedRangeNotFound, 
                        _MSVSignedRangeZero, _MSVSignedSubtractedRange, _MSVSignedUnionRange, 
                        _MSVStreamReaderErrorDomain, _MSVStreamWriterErrorDomain, 
-                       _MSVSystemRootDirectory, _MSVTCCIdentityForBundleID, _MSVTCCIdentityForCurrentProcess, 
-                       _MSVTimelineChartPrefix, _MSVUnarchivedObjectOfClass, _MSVUnarchivedObjectOfClasses, 
+                       _MSVSystemRootDirectory, _MSVTCCIdentityForAuditToken, _MSVTCCIdentityForBundleID, 
+                       _MSVTCCIdentityForCurrentProcess, _MSVTimelineChartPrefix, 
+                       _MSVUnarchivedObjectOfClass, _MSVUnarchivedObjectOfClasses, 
                        _MSVWeakLinkClass, _MSVWeakLinkProtocol, _MSVWeakLinkStringConstant, 
                        _MSVWeakLinkSymbol, _NSStringFromMSVErrorCode, _NSStringFromMSVHasherErrorCode, 
                        _NSStringFromMSVSignedRange, _msv_dispatch_async_on_queue, 
@@ -76,8 +82,8 @@ exports:
                        MSVArtworkServiceConversionRequest, MSVArtworkServiceOperation, 
                        MSVArtworkServiceRequest, MSVArtworkServiceResizeRequest, 
                        MSVArtworkServiceResizeRequestDestination, MSVAsyncOperation, 
-                       MSVBidirectionalDictionary, MSVBlockGuard, MSVBloomFilter, 
-                       MSVCallback, MSVDefaultDictionary, MSVDistributedNotificationObserver, 
+                       MSVAutoBugCapture, MSVBidirectionalDictionary, MSVBlockGuard, 
+                       MSVBloomFilter, MSVCallback, MSVDefaultDictionary, MSVDistributedNotificationObserver, 
                        MSVEntitlementUtilities, MSVFileBufferedPipe, MSVFinally, 
                        MSVFrameworkDescription, MSVLRUDictionary, MSVLyricsAgent, 
                        MSVLyricsElement, MSVLyricsLine, MSVLyricsSection, MSVLyricsSongInfo, 

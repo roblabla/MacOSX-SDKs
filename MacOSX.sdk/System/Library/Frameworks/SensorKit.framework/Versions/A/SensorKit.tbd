@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           720BC6A9-A24F-312F-AAEC-888FEE3BC7A1
+    value:           FEAE2857-E788-31B7-B932-DB90AE8195DB
   - target:          x86_64-maccatalyst
-    value:           720BC6A9-A24F-312F-AAEC-888FEE3BC7A1
+    value:           FEAE2857-E788-31B7-B932-DB90AE8195DB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           27DE4BA8-6F53-350C-BE93-5861E6B818CF
+    value:           7A99016A-3C98-3005-8A11-9177E9D265D9
   - target:          arm64e-maccatalyst
-    value:           27DE4BA8-6F53-350C-BE93-5861E6B818CF
+    value:           7A99016A-3C98-3005-8A11-9177E9D265D9
 install-name:    '/System/Library/Frameworks/SensorKit.framework/Versions/A/SensorKit'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

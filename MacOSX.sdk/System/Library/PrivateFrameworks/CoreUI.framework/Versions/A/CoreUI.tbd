@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           89BE7FCD-B0B8-3AFB-BC25-98947DC5ABDE
+    value:           4342C193-D8C6-3D14-992B-F517E88D79D5
   - target:          x86_64-maccatalyst
-    value:           89BE7FCD-B0B8-3AFB-BC25-98947DC5ABDE
+    value:           4342C193-D8C6-3D14-992B-F517E88D79D5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CED761BA-B26C-3B45-ADFC-17E7A6AA427F
+    value:           7833995C-A46B-391C-B2E3-E05F7472B137
   - target:          arm64e-maccatalyst
-    value:           CED761BA-B26C-3B45-ADFC-17E7A6AA427F
+    value:           7833995C-A46B-391C-B2E3-E05F7472B137
 install-name:    '/System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/CoreUI'
-current-version: 733
+current-version: 737.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -58,11 +58,11 @@ exports:
                        _CUIRenditionKeyFormatRemoveAttribute, _CUIRenditionKeyHasIdentifier, 
                        _CUIRenditionKeySetValueForAttribute, _CUIRenditionKeyStandardize, 
                        _CUIRenditionKeyTokenCount, _CUIRenditionKeyValueForAttribute, 
-                       _CUISVGNodeCanBeRepresentedAsPath, _CUISVGNodeGetTransform, 
-                       _CUISetCustomColorInContext, _CUISetDebugValue, _CUISetUpContext, 
-                       _CUISystemTheme, _CUISystemThemeRenditionKeyFormat, _CUIThemeInfoVersion, 
-                       _CUIUncompressQuantizedImageData, _CoreUIVersionNumber, __CUILog, 
-                       __LookupStructuredThemeProvider, __RegisterThemeProvider, 
+                       _CUISVGAttributeGetBoolean, _CUISVGNodeCanBeRepresentedAsPath, 
+                       _CUISVGNodeGetTransform, _CUISetCustomColorInContext, _CUISetDebugValue, 
+                       _CUISetUpContext, _CUISystemTheme, _CUISystemThemeRenditionKeyFormat, 
+                       _CUIThemeInfoVersion, _CUIUncompressQuantizedImageData, _CoreUIVersionNumber, 
+                       __CUILog, __LookupStructuredThemeProvider, __RegisterThemeProvider, 
                        _gColorStatuses, _gColors, _gEffectBevelStyles, _gEffectBlendModes, 
                        _gEffectParameterTypes, _gEffectTypes, _gMetafontSelectors, 
                        _gMetafontSizes, _gRenditionSubtypes, _gRenditionTypes, _gThemeCompressionTypes, 
@@ -450,11 +450,12 @@ exports:
                        _kCUIVariantPopoverMaterial, _kCUIVariantScrollBarArrowsDoubleBoth, 
                        _kCUIVariantScrollBarArrowsDoubleMax, _kCUIVariantScrollBarArrowsDoubleMin, 
                        _kCUIVariantScrollBarArrowsNone, _kCUIVariantScrollBarArrowsSingle, 
-                       _kCUIVariantSelectionMaterial, _kCUIVariantSheetMaterial, 
-                       _kCUIVariantSheetUnderlayMaterial, _kCUIVariantSidebarMaterial, 
-                       _kCUIVariantSpotlightBackgroundMaterial, _kCUIVariantStyledRectsLabel, 
-                       _kCUIVariantStyledRectsLabelWithShadow, _kCUIVariantSystemBezelMaterial, 
-                       _kCUIVariantTabPaneOpaque, _kCUIVariantTextContent, _kCUIVariantTextFieldRoundToolbar, 
+                       _kCUIVariantSeamlessTitlebarMaterial, _kCUIVariantSelectionMaterial, 
+                       _kCUIVariantSheetMaterial, _kCUIVariantSheetUnderlayMaterial, 
+                       _kCUIVariantSidebarMaterial, _kCUIVariantSpotlightBackgroundMaterial, 
+                       _kCUIVariantStyledRectsLabel, _kCUIVariantStyledRectsLabelWithShadow, 
+                       _kCUIVariantSystemBezelMaterial, _kCUIVariantTabPaneOpaque, 
+                       _kCUIVariantTextContent, _kCUIVariantTextFieldRoundToolbar, 
                        _kCUIVariantTextFieldToolbar, _kCUIVariantTintable, _kCUIVariantTintableDefault, 
                        _kCUIVariantTitlebarMaterial, _kCUIVariantToolTipMaterial, 
                        _kCUIVariantToolbarConfiguration, _kCUIVariantTranslucent, 

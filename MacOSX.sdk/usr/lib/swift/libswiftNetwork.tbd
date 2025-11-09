@@ -4,27 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           053D2CA5-01BF-349E-AAFF-B8CA82A26E30
+    value:           9EC6BB2A-C3F1-3A31-B7BF-73F7A4BC3470
   - target:          x86_64-maccatalyst
-    value:           053D2CA5-01BF-349E-AAFF-B8CA82A26E30
+    value:           9EC6BB2A-C3F1-3A31-B7BF-73F7A4BC3470
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           150057E6-0E94-3F2C-A8E2-DE0FDCB74148
+    value:           4E223842-4EE2-397B-8F13-35AADE1D9CDA
   - target:          arm64e-maccatalyst
-    value:           150057E6-0E94-3F2C-A8E2-DE0FDCB74148
+    value:           4E223842-4EE2-397B-8F13-35AADE1D9CDA
 install-name:    '/usr/lib/swift/libswiftNetwork.dylib'
-current-version: 2727
+current-version: 2750.60.12
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftNetwork.dylib', '$ld$install_name$os10.11$@rpath/libswiftNetwork.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftNetwork.dylib', '$ld$install_name$os10.13$@rpath/libswiftNetwork.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftNetwork.dylib', '$ld$install_name$os10.9$@rpath/libswiftNetwork.dylib' ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '_$s7Network10HTTPFieldsV10startIndexSivg', '_$s7Network10HTTPFieldsV10startIndexSivpMV', 
                        '_$s7Network10HTTPFieldsV15replaceSubrange_4withySnySiG_xtSlRzAA9HTTPFieldV7ElementRtzlF', 
                        '_$s7Network10HTTPFieldsV16debugDescriptionSSvg', '_$s7Network10HTTPFieldsV16debugDescriptionSSvpMV', 
@@ -49,8 +49,7 @@ exports:
                        '_$s7Network10HTTPFieldsVySSSgAA9HTTPFieldV4NameVcipMV', '_$s7Network10HTTPFieldsVySSSgAA9HTTPFieldV4NameVcis', 
                        '_$s7Network10NWEndpointO16debugDescriptionSSvg', '_$s7Network10NWEndpointO16debugDescriptionSSvpMV', 
                        '_$s7Network10NWEndpointO2eeoiySbAC_ACtFZ', '_$s7Network10NWEndpointO2nwSo03OS_C9_endpoint_pSgvg', 
-                       '_$s7Network10NWEndpointO2nwSo03OS_C9_endpoint_pSgvpMV', '_$s7Network10NWEndpointO3srvyACSScACmFWC', 
-                       '_$s7Network10NWEndpointO3urlyAC10Foundation3URLVcACmFWC', 
+                       '_$s7Network10NWEndpointO2nwSo03OS_C9_endpoint_pSgvpMV', '_$s7Network10NWEndpointO3urlyAC10Foundation3URLVcACmFWC', 
                        '_$s7Network10NWEndpointO4HostO13stringLiteralAESS_tcfC', 
                        '_$s7Network10NWEndpointO4HostO16debugDescriptionSSvg', '_$s7Network10NWEndpointO4HostO16debugDescriptionSSvpMV', 
                        '_$s7Network10NWEndpointO4HostO2eeoiySbAE_AEtFZ', '_$s7Network10NWEndpointO4HostO4hash4intoys6HasherVz_tF', 
@@ -645,11 +644,13 @@ exports:
                        '_$s7Network12NWParametersC10quicStreamAcA20NWProtocolQUICStreamC7OptionsC_tcfC', 
                        '_$s7Network12NWParametersC10quicStreamAcA20NWProtocolQUICStreamC7OptionsC_tcfc', 
                        '_$s7Network12NWParametersC11AttributionO2eeoiySbAE_AEtFZ', 
-                       '_$s7Network12NWParametersC11AttributionO4useryA2EmFWC', '_$s7Network12NWParametersC11AttributionO7websiteyAESS_tcAEmFWC', 
-                       '_$s7Network12NWParametersC11AttributionO9developeryA2EmFWC', 
+                       '_$s7Network12NWParametersC11AttributionO4hash4intoys6HasherVz_tF', 
+                       '_$s7Network12NWParametersC11AttributionO4useryA2EmFWC', '_$s7Network12NWParametersC11AttributionO9developeryA2EmFWC', 
+                       '_$s7Network12NWParametersC11AttributionO9hashValueSivg', 
+                       '_$s7Network12NWParametersC11AttributionO9hashValueSivpMV', 
                        '_$s7Network12NWParametersC11AttributionOMa', '_$s7Network12NWParametersC11AttributionOMn', 
-                       '_$s7Network12NWParametersC11AttributionON', '_$s7Network12NWParametersC11AttributionOSQAAMc', 
-                       '_$s7Network12NWParametersC11attributionAC11AttributionOvM', 
+                       '_$s7Network12NWParametersC11AttributionON', '_$s7Network12NWParametersC11AttributionOSHAAMc', 
+                       '_$s7Network12NWParametersC11AttributionOSQAAMc', '_$s7Network12NWParametersC11attributionAC11AttributionOvM', 
                        '_$s7Network12NWParametersC11attributionAC11AttributionOvg', 
                        '_$s7Network12NWParametersC11attributionAC11AttributionOvpMV', 
                        '_$s7Network12NWParametersC11attributionAC11AttributionOvs', 

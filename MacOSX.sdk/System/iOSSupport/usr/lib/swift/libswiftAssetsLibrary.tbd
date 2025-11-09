@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           F51F9493-1E26-3C05-B320-3DE3D5BFFFC9
+    value:           E1805B61-038A-3561-854D-6694D8AE3810
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           119BC811-9321-30A3-8234-7AB6C699D602
+    value:           5483D2F9-B22D-373E-AB7E-57ABF2D4E809
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftAssetsLibrary.dylib'
-current-version: 400.27.210
+current-version: 421.0.100
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]

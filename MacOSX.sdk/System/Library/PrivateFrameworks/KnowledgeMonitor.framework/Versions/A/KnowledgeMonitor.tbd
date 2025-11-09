@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CC31581E-C68F-3009-BCBD-5AAC46A465F0
+    value:           85AA8296-FAA9-30E7-92FB-A435B00B90A4
   - target:          x86_64-maccatalyst
-    value:           CC31581E-C68F-3009-BCBD-5AAC46A465F0
+    value:           85AA8296-FAA9-30E7-92FB-A435B00B90A4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F3511D31-D434-36BF-B399-5F5AB6E875EE
+    value:           3E6FFAE1-9405-31C3-90FE-122C0A12084C
   - target:          arm64e-maccatalyst
-    value:           F3511D31-D434-36BF-B399-5F5AB6E875EE
+    value:           3E6FFAE1-9405-31C3-90FE-122C0A12084C
 install-name:    '/System/Library/PrivateFrameworks/KnowledgeMonitor.framework/Versions/A/KnowledgeMonitor'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -25,7 +25,7 @@ exports:
     objc-classes:    [ _DKApplicationMonitor, _DKApplicationUsageMonitor, _DKAssertionsPreventingRestartMonitor, 
                        _DKBacklightMonitor, _DKBatteryMonitor, _DKBluetoothMonitor, 
                        _DKCPUUsageMonitor, _DKDeviceActivityLevelMonitor, _DKDoNotDisturbMonitor, 
-                       _DKLocationMonitor, _DKMonitor, _DKNetworkQualityMonitor, 
+                       _DKLocationMonitor, _DKLowPowerModeMonitor, _DKMonitor, _DKNetworkQualityMonitor, 
                        _DKNextAlarmForTopOffProtectionMonitor, _DKNowPlayingMonitor, 
                        _DKPeriod, _DKPluggedInMonitor, _DKScreenSharingMonitor, _DKSunriseSunsetMonitor, 
                        _DKTemporalNumericState, _DKThermalPressureMonitor, _DKUserNearbyMonitor, 

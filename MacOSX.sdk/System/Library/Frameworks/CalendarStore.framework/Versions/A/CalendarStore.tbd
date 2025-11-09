@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D69D2BB4-F36C-384D-96D2-D08D92653ED2
+    value:           62254405-CA4D-33E2-AB29-B1898B2F76E1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3070BD78-D5F3-3FCF-AFFA-1CF35D68D132
+    value:           E7832085-427A-309C-A190-809DDFA718FA
 install-name:    '/System/Library/Frameworks/CalendarStore.framework/Versions/A/CalendarStore'
 current-version: 2034
 exports:

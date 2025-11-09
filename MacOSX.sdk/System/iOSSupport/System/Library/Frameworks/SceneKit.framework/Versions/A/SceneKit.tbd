@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           CCD2C959-B092-3313-BBDD-D27B53ABD3FE
+    value:           DD7DC39C-D830-3498-B3E1-C9DDAD56435F
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           88B63E12-1215-3044-BAB4-FCD5AF38F83F
+    value:           5480F68A-7799-3F76-9B01-8D88AB1A1DA0
 install-name:    '/System/iOSSupport/System/Library/Frameworks/SceneKit.framework/Versions/A/SceneKit'
-current-version: 568.1
+current-version: 568.201
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _C3DGetFileDecryptionCallbacks, _C3DSetFileDecryptionCallbacks, 
                        _SCNAnimationCommitOnCompletion, _SCNBindingValueTransformerKey, 
                        _SCNCaptureDeviceOutputConsumerOptionContainsAlpha, _SCNConsistencyElementIDErrorKey, 

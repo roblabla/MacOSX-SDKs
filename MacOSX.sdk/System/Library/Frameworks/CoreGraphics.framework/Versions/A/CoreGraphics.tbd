@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FECE78D2-B9BA-357C-90F1-2A3253E88132
+    value:           47A66707-68B8-3769-AEFD-57C53AD3F8A7
   - target:          x86_64-maccatalyst
-    value:           FECE78D2-B9BA-357C-90F1-2A3253E88132
+    value:           47A66707-68B8-3769-AEFD-57C53AD3F8A7
   - target:          x86_64h-macos
-    value:           F3646BCE-33EE-30D1-8A18-A77B3682FCAB
+    value:           01B48EF5-4ED3-3615-A7CC-19B7B92F6619
   - target:          x86_64h-maccatalyst
-    value:           F3646BCE-33EE-30D1-8A18-A77B3682FCAB
+    value:           01B48EF5-4ED3-3615-A7CC-19B7B92F6619
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3BFBBC6F-DF65-35E0-A963-0CD9489B0AB9
+    value:           254CB973-15D6-3068-9AC4-96A63BC39FF9
   - target:          arm64e-maccatalyst
-    value:           3BFBBC6F-DF65-35E0-A963-0CD9489B0AB9
+    value:           254CB973-15D6-3068-9AC4-96A63BC39FF9
 install-name:    '/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics'
-current-version: 1540
+current-version: 1557.3.2
 compatibility-version: 64
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.4$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.5$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
@@ -320,23 +320,24 @@ exports:
                        _CGDataProviderCreateDirect, _CGDataProviderCreateDirectAccess, 
                        _CGDataProviderCreateMultiRangeDirectAccess, _CGDataProviderCreateSequential, 
                        _CGDataProviderCreateWithCFData, _CGDataProviderCreateWithCopyOfData, 
-                       _CGDataProviderCreateWithData, _CGDataProviderCreateWithFilename, 
-                       _CGDataProviderCreateWithSwappedProvider, _CGDataProviderCreateWithURL, 
-                       _CGDataProviderGetBytePtr, _CGDataProviderGetBytes, _CGDataProviderGetBytesAtPosition, 
-                       _CGDataProviderGetBytesInRanges, _CGDataProviderGetInfo, _CGDataProviderGetProperty, 
-                       _CGDataProviderGetSize, _CGDataProviderGetSize2, _CGDataProviderGetSizeOfData, 
-                       _CGDataProviderGetTypeID, _CGDataProviderHasDataPtr, _CGDataProviderLock, 
-                       _CGDataProviderRelease, _CGDataProviderReleaseBytePtr, _CGDataProviderRetain, 
-                       _CGDataProviderRetainBytePtr, _CGDataProviderRewind, _CGDataProviderSetProperty, 
-                       _CGDataProviderSkipForward, _CGDataProviderUngetBytePtr, _CGDataProviderUnlock, 
-                       _CGDefaultsCopyString, _CGDefaultsGetBoolean, _CGDefaultsGetInteger, 
-                       _CGDigesterAddBytes, _CGDigesterCreateMD5, _CGDigesterGetDigest, 
-                       _CGDigesterRelease, _CGDirectDisplayCopyCurrentMetalDevice, 
-                       _CGDisplayAddressForPosition, _CGDisplayAvailableModes, _CGDisplayBaseAddress, 
-                       _CGDisplayBestModeForParameters, _CGDisplayBestModeForParametersAndRefreshRate, 
-                       _CGDisplayBitsPerPixel, _CGDisplayBitsPerSample, _CGDisplayBounds, 
-                       _CGDisplayBytesPerRow, _CGDisplayCanSetPalette, _CGDisplayCapture, 
-                       _CGDisplayCaptureWithOptions, _CGDisplayColorSpaceConversionCreateInvertedLinearizationCurve, 
+                       _CGDataProviderCreateWithData, _CGDataProviderCreateWithDataNoCopy, 
+                       _CGDataProviderCreateWithFilename, _CGDataProviderCreateWithSwappedProvider, 
+                       _CGDataProviderCreateWithURL, _CGDataProviderGetBytePtr, _CGDataProviderGetBytes, 
+                       _CGDataProviderGetBytesAtPosition, _CGDataProviderGetBytesInRanges, 
+                       _CGDataProviderGetInfo, _CGDataProviderGetProperty, _CGDataProviderGetSize, 
+                       _CGDataProviderGetSize2, _CGDataProviderGetSizeOfData, _CGDataProviderGetTypeID, 
+                       _CGDataProviderHasDataPtr, _CGDataProviderLock, _CGDataProviderRelease, 
+                       _CGDataProviderReleaseBytePtr, _CGDataProviderRetain, _CGDataProviderRetainBytePtr, 
+                       _CGDataProviderRewind, _CGDataProviderSetProperty, _CGDataProviderSkipForward, 
+                       _CGDataProviderUngetBytePtr, _CGDataProviderUnlock, _CGDefaultsCopyString, 
+                       _CGDefaultsGetBoolean, _CGDefaultsGetInteger, _CGDigesterAddBytes, 
+                       _CGDigesterCreateMD5, _CGDigesterGetDigest, _CGDigesterRelease, 
+                       _CGDirectDisplayCopyCurrentMetalDevice, _CGDisplayAddressForPosition, 
+                       _CGDisplayAvailableModes, _CGDisplayBaseAddress, _CGDisplayBestModeForParameters, 
+                       _CGDisplayBestModeForParametersAndRefreshRate, _CGDisplayBitsPerPixel, 
+                       _CGDisplayBitsPerSample, _CGDisplayBounds, _CGDisplayBytesPerRow, 
+                       _CGDisplayCanSetPalette, _CGDisplayCapture, _CGDisplayCaptureWithOptions, 
+                       _CGDisplayColorSpaceConversionCreateInvertedLinearizationCurve, 
                        _CGDisplayColorSpaceConversionCreateLinearizationCurve, _CGDisplayColorSpaceConversionCreatePostMatrixToneMapping, 
                        _CGDisplayColorSpaceConversionCreatePreMatrixToneMapping, 
                        _CGDisplayColorSpaceConversionGetConversionMatrix, _CGDisplayCopyAllDisplayModes, 
@@ -599,7 +600,7 @@ exports:
                        _CGPDFCMapGetCIDsForText, _CGPDFCMapGetMaxUnicodes, _CGPDFCMapGetName, 
                        _CGPDFCMapGetROS, _CGPDFCMapGetUnicodeCMap, _CGPDFCMapGetUnicodesForIndex, 
                        _CGPDFCMapGetZapfTable, _CGPDFCMapIsHorizontal, _CGPDFCMapRelease, 
-                       _CGPDFContentStreamCreateWithPage, _CGPDFContentStreamCreateWithStream, 
+                       _CGPDFCMapRetain, _CGPDFContentStreamCreateWithPage, _CGPDFContentStreamCreateWithStream, 
                        _CGPDFContentStreamGetResource, _CGPDFContentStreamGetStreams, 
                        _CGPDFContentStreamRelease, _CGPDFContentStreamRetain, _CGPDFContextAddAnnotation, 
                        _CGPDFContextAddCatalogEntry, _CGPDFContextAddDestinationAtPoint, 
@@ -1223,8 +1224,10 @@ exports:
                        _kCGColorSpaceGenericLab, _kCGColorSpaceGenericRGB, _kCGColorSpaceGenericRGBLinear, 
                        _kCGColorSpaceGenericXYZ, _kCGColorSpaceITUR_2020, _kCGColorSpaceITUR_2020_HLG, 
                        _kCGColorSpaceITUR_2020_PQ, _kCGColorSpaceITUR_2020_PQ_EOTF, 
-                       _kCGColorSpaceITUR_2100_HLG, _kCGColorSpaceITUR_2100_PQ, _kCGColorSpaceITUR_709, 
-                       _kCGColorSpaceLinearGray, _kCGColorSpaceLinearSRGB, _kCGColorSpacePerceptualStandardRGB, 
+                       _kCGColorSpaceITUR_2020_sRGBGamma, _kCGColorSpaceITUR_2100_HLG, 
+                       _kCGColorSpaceITUR_2100_PQ, _kCGColorSpaceITUR_709, _kCGColorSpaceITUR_709_PQ, 
+                       _kCGColorSpaceLinearDisplayP3, _kCGColorSpaceLinearGray, _kCGColorSpaceLinearITUR_2020, 
+                       _kCGColorSpaceLinearSRGB, _kCGColorSpacePerceptualStandardRGB, 
                        _kCGColorSpaceROMMRGB, _kCGColorSpaceSRGB, _kCGColorSpaceUncalibratedCMYK, 
                        _kCGColorSpaceUncalibratedGray, _kCGColorSpaceUncalibratedRGB, 
                        _kCGColorTransformBlackPointCompensation, _kCGColorTransformConvertImageHeight, 
@@ -1383,6 +1386,6 @@ exports:
                        CGVirtualDisplaySettings ]
     weak-symbols:    [ __Z15CGDefaultsCheckI31CGResamplingAllowTemplateMethodENT_10ResultTypeEv, 
                        __Z18CGPreferencesCheckI31CGResamplingAllowTemplateMethodENT_10ResultTypeEv ]
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, arm64-macos ]
     symbols:         [ _CGSSetDisplayAcceleratorBoost, _CGVirtualDisplaySettingsRefreshDeadlineNone ]
 ...

@@ -36,6 +36,8 @@ typedef float NSLayoutPriority NS_TYPED_EXTENSIBLE_ENUM;
 #define NSLAYOUTCONSTRAINT_EXTERN extern __attribute((visibility("default")))
 #endif
 
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
+
 typedef NS_ENUM(NSInteger, NSLayoutRelation) {
     NSLayoutRelationLessThanOrEqual = -1,
     NSLayoutRelationEqual = 0,
@@ -194,6 +196,8 @@ NSLAYOUTCONSTRAINT_EXTERN NSDictionary<NSString *, id> *_NSDictionaryOfVariableB
 @property (nullable, copy) NSString *identifier API_AVAILABLE(macos(10.7), ios(7.0));
 
 @end
+
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
 #endif // NSLAYOUTCONSTRAINT_H
 

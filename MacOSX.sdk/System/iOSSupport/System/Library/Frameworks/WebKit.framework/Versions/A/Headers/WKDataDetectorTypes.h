@@ -52,8 +52,8 @@ typedef NS_OPTIONS(NSUInteger, WKDataDetectorTypes) {
     WKDataDetectorTypeLookupSuggestion = 1 << 6,
     WKDataDetectorTypeAll = NSUIntegerMax,
 
-    WKDataDetectorTypeSpotlightSuggestion WK_API_DEPRECATED_WITH_REPLACEMENT("WKDataDetectorTypeLookupSuggestion", ios(10.0, 10.0)) = WKDataDetectorTypeLookupSuggestion,
-} WK_API_AVAILABLE(ios(10.0));
+    WKDataDetectorTypeSpotlightSuggestion API_DEPRECATED_WITH_REPLACEMENT("WKDataDetectorTypeLookupSuggestion", ios(10.0, 10.0)) = WKDataDetectorTypeLookupSuggestion,
+} API_AVAILABLE(ios(10.0));
 
 #endif
 

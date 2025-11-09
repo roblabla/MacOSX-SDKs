@@ -39,6 +39,9 @@
  @constant BNNSDataTypeFloat32
  32-bit single precision floating point
 
+ @constant BNNSDataTypeBFloat16
+ 16-bit brain floating Point
+
  @constant BNNSDataTypeIntBit
  Common bit to signed integer types, this constant is not a valid type
 
@@ -93,6 +96,7 @@ BNNS_ENUM(BNNSDataType, uint32_t,
   BNNSDataTypeFloatBit         __API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = 0x10000,
   BNNSDataTypeFloat16          __API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = BNNSDataTypeFloatBit | 16,
   BNNSDataTypeFloat32          __API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = BNNSDataTypeFloatBit | 32,
+  BNNSDataTypeBFloat16         __API_AVAILABLE(macos(12.0),  ios(15.0), watchos(8.0), tvos(15.0)) = BNNSDataTypeFloatBit | 0x8000 | 16,
 
   BNNSDataTypeIntBit           __API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = 0x20000,
   BNNSDataTypeInt1             __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = BNNSDataTypeIntBit | 1,

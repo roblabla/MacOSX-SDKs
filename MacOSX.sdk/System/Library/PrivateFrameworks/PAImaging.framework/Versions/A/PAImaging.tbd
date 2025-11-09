@@ -3,32 +3,33 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           91053B01-C12D-3A80-9EBC-0B6C23E9BBF2
+    value:           FB6BD6DD-0026-3AA2-BB3C-4CA357501382
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6DAD9B11-60BD-3550-B2A6-79D8ABA06EF6
+    value:           FE618DFE-44DA-3A1D-87D4-4EC964392E29
 install-name:    '/System/Library/PrivateFrameworks/PAImaging.framework/Versions/A/PAImaging'
-current-version: 400.27.210
+current-version: 421.0.100
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CATransform3DFromNSString, _CGAffineTransformFromNSString, 
                        _CGVectorEqualWithAbsError, _NSStringFromCATransform3D, _PAAnimationDuration, 
-                       _PACanvasItemViewFrameSizeDidChangeNotification, _PAImageItemViewDidChangeDisplayNotification, 
-                       _PAImageItemViewOldBackingScaleFactorUserInfoKey, _PAImagingVersionNumber, 
-                       _PAImagingVersionString, _PAImplicitAnimationEnabled, _RKAudioMaster100x67FactoryImageName, 
-                       _RKAudioMaster1200x800FactoryImageName, _RKAudioMaster1800x1200FactoryImageName, 
-                       _RKAudioMaster200x133FactoryImageName, _RKAudioMaster300x200FactoryImageName, 
-                       _RKAudioMaster600x400FactoryImageName, _RKAudioMaster900x600FactoryImageName, 
-                       _RKBlankAudioMasterFactoryImageName, _RKUnsupported100x67FactoryImageName, 
-                       _RKUnsupported1200x800FactoryImageName, _RKUnsupported1800x1200FactoryImageName, 
-                       _RKUnsupported200x133FactoryImageName, _RKUnsupported300x200FactoryImageName, 
-                       _RKUnsupported600x400FactoryImageName, _RKUnsupported900x600FactoryImageName, 
-                       _RKVideoContent16x9_1920x1080FactoryImageName, _RKVideoContent2x3FactoryImageName, 
-                       _RKVideoContent3x2_900x600FactoryImageName, _RKVideoContent3x4_480x640FactoryImageName, 
-                       _RKVideoContent4x3FactoryImageName, _RKVideoContent4x3_1024x768FactoryImageName, 
-                       _gDebugFileNumber, _g_extensions, _g_sharedPAGLUtilities, 
-                       _g_supportsARBFragmentProgram, _kCompositionName, _kIPADebugAnimationAssertLayerDrawCount, 
+                       _PACanvasItemViewFrameSizeDidChangeNotification, _PAFrameTimeKey, 
+                       _PAImageItemViewDidChangeDisplayNotification, _PAImageItemViewOldBackingScaleFactorUserInfoKey, 
+                       _PAImagingVersionNumber, _PAImagingVersionString, _PAImplicitAnimationEnabled, 
+                       _RKAudioMaster100x67FactoryImageName, _RKAudioMaster1200x800FactoryImageName, 
+                       _RKAudioMaster1800x1200FactoryImageName, _RKAudioMaster200x133FactoryImageName, 
+                       _RKAudioMaster300x200FactoryImageName, _RKAudioMaster600x400FactoryImageName, 
+                       _RKAudioMaster900x600FactoryImageName, _RKBlankAudioMasterFactoryImageName, 
+                       _RKUnsupported100x67FactoryImageName, _RKUnsupported1200x800FactoryImageName, 
+                       _RKUnsupported1800x1200FactoryImageName, _RKUnsupported200x133FactoryImageName, 
+                       _RKUnsupported300x200FactoryImageName, _RKUnsupported600x400FactoryImageName, 
+                       _RKUnsupported900x600FactoryImageName, _RKVideoContent16x9_1920x1080FactoryImageName, 
+                       _RKVideoContent2x3FactoryImageName, _RKVideoContent3x2_900x600FactoryImageName, 
+                       _RKVideoContent3x4_480x640FactoryImageName, _RKVideoContent4x3FactoryImageName, 
+                       _RKVideoContent4x3_1024x768FactoryImageName, _gDebugFileNumber, 
+                       _g_extensions, _g_sharedPAGLUtilities, _g_supportsARBFragmentProgram, 
+                       _kCompositionName, _kIPADebugAnimationAssertLayerDrawCount, 
                        _kIPADebugAnimationDumpLayerTree, _kIPADebugAnimationHideBackgroundLayer, 
                        _kIPADebugAnimationHideDestinationLayer, _kIPADebugAnimationHideSourceLayer, 
                        _kIPADebugAnimationShowLayerBorder, _kIPADebugAnimationShowLayerOverlayColor, 

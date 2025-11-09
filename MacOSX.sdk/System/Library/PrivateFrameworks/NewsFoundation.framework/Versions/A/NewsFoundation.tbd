@@ -4,46 +4,30 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           896E1A0C-1DD2-393A-B136-75F45B19F7B3
+    value:           9DCDF038-E27D-3ABF-A02A-95E25A139EDA
   - target:          x86_64-maccatalyst
-    value:           896E1A0C-1DD2-393A-B136-75F45B19F7B3
+    value:           9DCDF038-E27D-3ABF-A02A-95E25A139EDA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           66AC3CD5-EFA4-3D6D-BC41-8F12BC05086B
+    value:           4A87FE1B-E651-3744-92D1-1D6E96414BE3
   - target:          arm64e-maccatalyst
-    value:           66AC3CD5-EFA4-3D6D-BC41-8F12BC05086B
+    value:           4A87FE1B-E651-3744-92D1-1D6E96414BE3
 install-name:    '/System/Library/PrivateFrameworks/NewsFoundation.framework/Versions/A/NewsFoundation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _NFCallbackScopeAny, _NFCallbackScopeName, _NFCallbackScopeNames, 
-                       _NFDeviceHasExtendedColorDisplay, _NFDeviceIsA7, _NFDeviceIsA8, 
+    symbols:         [ _NFDeviceHasExtendedColorDisplay, _NFDeviceIsA7, _NFDeviceIsA8, 
                        _NFDeviceModelString, _NFDeviceOSVersion, _NFDevicePlatform, 
-                       _NFGeneralDeviceString, _NFInternalBuild, _NFLockSync, _NFPoolMakeWeakObjectsPool, 
-                       _NFPromiseInvokeOnQueue, _NFSeedBuild, _NFStateMachineErrorDomain, 
-                       _NFStoreDemoMode, _NFWaiterErrorDomain, _NewsFoundationVersionNumber, 
-                       _NewsFoundationVersionString, __UIValueCGRectValue, _kNFPromiseSealingErrorCode, 
-                       _kNFPromiseSealingErrorName, _kNFReachabilityChangedNotification, 
-                       _zalgo, _zalgoIfMain ]
-    objc-classes:    [ NFArchiver, NFCallbackDefinition, NFCallbackRegistration, 
-                       NFCallbackScope, NFCallbackStore, NFContainer, NFContainerCircularDependencyDetectedException, 
-                       NFContainerContextMismatchException, NFContainerDefinitionMismatchException, 
-                       NFContainerDefinitionNilFactoryException, NFContainerDefinitionNotOverridableException, 
-                       NFContainerEnsuringNullableDefinitionException, NFContainerException, 
-                       NFContainerMissingDefinitionException, NFContainerPool, NFContainerPoolObject, 
-                       NFContainerRegistry, NFContext, NFDefinition, NFEventManager, 
-                       NFEventTrigger, NFKey, NFLazy, NFMultiDelegate, NFMutexLock, 
-                       NFObjectReuseManager, NFPendingPromise, NFPromise, NFPromiseSeal, 
-                       NFProxyContainer, NFProxyResolver, NFReachability, NFRouter, 
-                       NFRouterException, NFRouterRouteToNonRoutable, NFStateMachine, 
-                       NFStateMachineEvent, NFStateMachineState, NFStateMachineTransition, 
-                       NFUnfairLock, NFVoid, NFWaiter ]
-    objc-eh-types:   [ NFContainerCircularDependencyDetectedException, NFContainerContextMismatchException, 
-                       NFContainerDefinitionMismatchException, NFContainerDefinitionNilFactoryException, 
-                       NFContainerDefinitionNotOverridableException, NFContainerEnsuringNullableDefinitionException, 
-                       NFContainerException, NFContainerMissingDefinitionException, 
-                       NFRouterException, NFRouterRouteToNonRoutable ]
+                       _NFGeneralDeviceString, _NFInternalBuild, _NFLockSync, _NFPromiseInvokeOnQueue, 
+                       _NFSeedBuild, _NFStateMachineErrorDomain, _NFStoreDemoMode, 
+                       _NewsFoundationVersionNumber, _NewsFoundationVersionString, 
+                       __UIValueCGRectValue, _kNFPromiseSealingErrorCode, _kNFPromiseSealingErrorName, 
+                       _kNFReachabilityChangedNotification, _zalgo, _zalgoIfMain ]
+    objc-classes:    [ NFArchiver, NFEventManager, NFEventTrigger, NFLazy, NFMultiDelegate, 
+                       NFMutexLock, NFPendingPromise, NFPromise, NFPromiseSeal, NFReachability, 
+                       NFStateMachine, NFStateMachineEvent, NFStateMachineState, 
+                       NFStateMachineTransition, NFUnfairLock, NFVoid ]
 ...

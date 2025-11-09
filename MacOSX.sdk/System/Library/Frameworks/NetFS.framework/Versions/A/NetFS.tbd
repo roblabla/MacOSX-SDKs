@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           70505BB2-B4A3-3D0F-ABAF-A268EA3A8982
+    value:           ECD365AF-27FC-3F45-8AE0-68FD3C27DDFB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4DD3C145-64F3-30E3-8F26-B4E8C53B2134
+    value:           09E574D0-4F54-3324-8607-B36E2CCB674E
 install-name:    '/System/Library/Frameworks/NetFS.framework/Versions/A/NetFS'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

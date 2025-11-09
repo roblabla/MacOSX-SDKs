@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0040BDC7-0A93-31A2-A1ED-BC2986A511F4
+    value:           A4CB0C69-463D-3D5A-910A-7A06FE9DA4DE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           045DF2CC-FA31-3997-8D64-2C930B1D3DF0
+    value:           4EC5B675-6BD3-303C-A334-46AC9C84163F
 install-name:    '/System/Library/Frameworks/SystemExtensions.framework/Versions/A/SystemExtensions'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

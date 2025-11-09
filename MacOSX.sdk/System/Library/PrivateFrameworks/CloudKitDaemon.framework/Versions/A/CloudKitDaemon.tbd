@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           400E52FE-629F-3E2B-B21A-23C61775FE74
+    value:           92E85302-F316-3F27-97A8-CC9ED2676370
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           18DC4202-C2DE-35A6-BC16-8798A7AAD48C
+    value:           BC6525BA-D640-302A-BCC7-67C757FC10B3
 install-name:    '/System/Library/PrivateFrameworks/CloudKitDaemon.framework/Versions/A/CloudKitDaemon'
-current-version: 1041.2
+current-version: 1930.13
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CKAdoptPersonaID, _CKCurrentPersonaID, _CKDAssetCacheDbSchema, 

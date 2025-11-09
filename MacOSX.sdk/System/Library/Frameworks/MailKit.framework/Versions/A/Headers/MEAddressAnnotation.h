@@ -14,7 +14,7 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
 @interface MEAddressAnnotation : NSObject <NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)new NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 /// @brief An annotation to denote a recipeint email address has an error when composing a mail message.
 /// @param localizedDescription - A localized string with a brief description of the error that may be presented to the user.

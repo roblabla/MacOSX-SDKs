@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BB99EE64-D7BC-3F83-A627-68025E94E5D6
+    value:           B7E46076-6387-3265-8A32-81A43D0631CA
   - target:          x86_64-maccatalyst
-    value:           BB99EE64-D7BC-3F83-A627-68025E94E5D6
+    value:           B7E46076-6387-3265-8A32-81A43D0631CA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           943B817D-D147-30E4-AF33-471508C0D6E8
+    value:           22228D26-400F-391E-A638-40C510B60FA6
   - target:          arm64e-maccatalyst
-    value:           943B817D-D147-30E4-AF33-471508C0D6E8
+    value:           22228D26-400F-391E-A638-40C510B60FA6
 install-name:    '/System/Library/PrivateFrameworks/BoardServices.framework/Versions/A/BoardServices'
 current-version: 0
 exports:

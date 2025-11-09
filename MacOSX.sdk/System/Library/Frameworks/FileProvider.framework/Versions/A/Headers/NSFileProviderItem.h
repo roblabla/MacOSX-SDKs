@@ -64,6 +64,21 @@ FILEPROVIDER_API_AVAILABILITY_V3
 @interface NSFileProviderItemVersion : NSObject
 
 /**
+ Version component exposed by the system to denote a state that predates a version returned by the provider.
+
+ In case an item was created by calling `createItemBasedOnTemplate` and the item returned by the provider in
+ the completion handler of that call didn't match the item template passed by the system, the system will try
+ to apply the changes asked by the provider to the disk. However, the system may detect conflicts when applying
+ those content back to the disk, which will cause the system to send the new disk version to the extension,
+ by calling `modifyItem` or `deleteItemWithIdentifier` with a `baseVersion` that represents the item as passed in
+ the template of the `createItemBasedOnTemplate` call.
+
+ This constant is used by the system to represent that specific version that was communicated by the system to
+ the extension but does not have a corresponding version assigned by the extension.
+ */
+@property (class, readonly, nonnull) NSData *beforeFirstSyncComponent FILEPROVIDER_API_AVAILABILITY_V4_0;
+
+/**
  Items versions have two distinct components, one for the file contents and one
  for metadata.
 
@@ -566,6 +581,7 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
                              This will ensure that the system does not display it's warnings when the user is deleting a file.
                  'ExcludeFromSync' : deleting items(s) because the user chose to exclude those from sync (available in macOS 12.0 and later)
                  'Rename'  : renaming item(s) (available in macOS 11.3 and later)
+                             The destinationItem has only the `filename` field populated (available in macOS 12.0.1 and later).
             - `sourceItem` : current item that the predicate is evaluating. Present for Move/MoveOut/Copy/CopyOut/Create/Trash/Delete/ExcludeFromSync/Rename
             - `sourceItemsCount` :
                 - In userInteraction, represents the count of sourceItems of an action operation
@@ -607,11 +623,16 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  matches, then both of the UserInteraction alerts will be shown to the user. However, as soon as the user
  denies any of the alerts, the remainder will not be shown, and the action will be denied.
 
+ If the provider wishes to take full responsibility for showing a custom contextual menu item for Download,
+ the provider can set NSExtensionFileProviderAllowsContextualMenuDownloadEntry=0 in the provider's Info.plist.
+ This will ensure that the system does not display the "Download Now" button in the contextual menu.
+
  Here is a sample extension Info.plist:
 
  ```
  <key>NSExtension</key>
- ...
+ <key>NSExtensionFileProviderAllowsContextualMenuDownloadEntry</key>
+ <false/>
  <key>NSFileProviderUserInteractions</key>
  <array>
     <key>ActivationRule</key>

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2FB0EF70-DAA6-3E02-B370-C5EA40F78B7B
+    value:           ECE5B0B1-264B-36A0-8DDC-4A4985B62905
   - target:          x86_64-maccatalyst
-    value:           2FB0EF70-DAA6-3E02-B370-C5EA40F78B7B
+    value:           ECE5B0B1-264B-36A0-8DDC-4A4985B62905
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CB61E4AA-A8F9-38D8-9187-9E1C35ED8D11
+    value:           F1AB6003-09ED-3395-9E57-6A4F477037E2
   - target:          arm64e-maccatalyst
-    value:           CB61E4AA-A8F9-38D8-9187-9E1C35ED8D11
+    value:           F1AB6003-09ED-3395-9E57-6A4F477037E2
 install-name:    '/System/Library/Frameworks/CoreMotion.framework/Versions/A/CoreMotion'
-current-version: 2652
+current-version: 2665.0.9
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
@@ -45,13 +45,13 @@ exports:
                        _CLWeatherNotifyForecast, _CMAbsoluteAltitudeKey, _CMActivityData, 
                        _CMAnomalyDetectorEnabled, _CMAnomalyDetectorEvent, _CMAnomalyEventType, 
                        _CMAnomalySensorTestModeEnabled, _CMAuthorized, _CMAvailable, 
-                       _CMCameraVcmActuatorId, _CMCompassCalibrationData, _CMCyclingWorkoutDistanceDataArray, 
-                       _CMDatabaseType, _CMDeviceHasOriginalBackCamera, _CMDistributedSensingVehicleStateUpdateKey, 
-                       _CMDyskinesiaResultsKey, _CMErrorDomain, _CMErrorMessage, 
-                       _CMExerciseMinuteDataArray, _CMExerciseMinuteRecordId, _CMExerciseMinuteSourceId, 
-                       _CMExerciseMinuteStartDate, _CMExtensions, _CMFallBehavioralConfig, 
-                       _CMFallConfig, _CMFallConfigUserAge, _CMFallConfigUserMets, 
-                       _CMFallConfiguration, _CMFallConfiguration_isBridgeToggleEnabled, 
+                       _CMCameraVcmActuatorId, _CMCompassCalibrationData, _CMContextConfigurationKey, 
+                       _CMCyclingWorkoutDistanceDataArray, _CMDatabaseType, _CMDeviceHasOriginalBackCamera, 
+                       _CMDistributedSensingVehicleStateUpdateKey, _CMDyskinesiaResultsKey, 
+                       _CMErrorDomain, _CMErrorMessage, _CMExerciseMinuteDataArray, 
+                       _CMExerciseMinuteRecordId, _CMExerciseMinuteSourceId, _CMExerciseMinuteStartDate, 
+                       _CMExtensions, _CMFallBehavioralConfig, _CMFallConfig, _CMFallConfigUserAge, 
+                       _CMFallConfigUserMets, _CMFallConfiguration, _CMFallConfiguration_isBridgeToggleEnabled, 
                        _CMFallConfiguration_isFallDetectionFeatureEnabled, _CMFallConfiguration_shouldDetectorBeRunning, 
                        _CMFallConfiguration_userStudyFallStatsEnabled, _CMFallConfiguration_userStudyPressureDataCollection, 
                        _CMFallDataCollectionConfigurationKey, _CMFallDefaults, _CMFallDefaults_fallDelayBeforeSendingSPUConfiguration, 
@@ -190,19 +190,19 @@ exports:
                        CMActivityAlarm, CMActivityManager, CMAltimeter, CMAltitudeData, 
                        CMAmbientPressureData, CMAmbientPressureDataArray, CMAnomalyEvent, 
                        CMAttitude, CMAudioAccessoryManager, CMCalorieUserInfo, CMCatherineData, 
-                       CMCatherineFeeder, CMDeviceMotion, CMDeviceMotionLite, CMDeviceOrientation, 
-                       CMDistributedSensingManager, CMDistributedSensingManagerInternal, 
-                       CMDyskineticSymptomResult, CMElevation, CMElevationData, CMExerciseMinute, 
-                       CMExerciseMinuteData, CMFall, CMFallDetectionClient, CMFallDetectionEvent, 
-                       CMFallDetectionManager, CMFallDetectionManagerInternal, CMFallDetectionServer, 
-                       CMFitnessJuniorGoals, CMFitnessMachine, CMFitnessMachineData, 
-                       CMFitnessMachineWorkout, CMFitnessShared, CMGenericWorkout, 
-                       CMGestureManager, CMGyroData, CMGyroDataArray, CMHeadphoneMotionManager, 
-                       CMHealthTracker, CMHeartRateData, CMIndoorOutdoorManager, 
-                       CMIndoorOutdoorState, CMKappa, CMKappaData, CMKappaInternal, 
-                       CMLogItem, CMMagnetometerData, CMMediaSession, CMMetMinute, 
-                       CMMotionActivity, CMMotionActivityManager, CMMotionAlarm, 
-                       CMMotionAlarmManager, CMMotionManager, CMMotionTimeRange, 
+                       CMCatherineFeeder, CMContextConfigurationManager, CMDeviceMotion, 
+                       CMDeviceMotionLite, CMDeviceOrientation, CMDistributedSensingManager, 
+                       CMDistributedSensingManagerInternal, CMDyskineticSymptomResult, 
+                       CMElevation, CMElevationData, CMExerciseMinute, CMExerciseMinuteData, 
+                       CMFall, CMFallDetectionClient, CMFallDetectionEvent, CMFallDetectionManager, 
+                       CMFallDetectionManagerInternal, CMFallDetectionServer, CMFitnessJuniorGoals, 
+                       CMFitnessMachine, CMFitnessMachineData, CMFitnessMachineWorkout, 
+                       CMFitnessShared, CMGenericWorkout, CMGestureManager, CMGyroData, 
+                       CMGyroDataArray, CMHeadphoneMotionManager, CMHealthTracker, 
+                       CMHeartRateData, CMIndoorOutdoorManager, CMIndoorOutdoorState, 
+                       CMKappa, CMKappaData, CMKappaInternal, CMLogItem, CMMagnetometerData, 
+                       CMMediaSession, CMMetMinute, CMMotionActivity, CMMotionActivityManager, 
+                       CMMotionAlarm, CMMotionAlarmManager, CMMotionManager, CMMotionTimeRange, 
                        CMMotionUtils, CMNatalieData, CMNatalimeter, CMOdometer, CMOdometerData, 
                        CMOdometerSuitability, CMOnBodyStatus, CMOnBodyStatusManager, 
                        CMPedometer, CMPedometerBin, CMPedometerData, CMPedometerEvent, 

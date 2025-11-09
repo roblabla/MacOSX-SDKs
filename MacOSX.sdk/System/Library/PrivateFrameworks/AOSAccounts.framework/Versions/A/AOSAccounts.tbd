@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B910785B-788A-3E6A-933B-07D3B413463C
+    value:           FF2271D4-3D1F-3559-A775-FD72DC59A773
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           03EDAC54-08C0-39B7-B7AC-E62ADB2F6202
+    value:           77D7C226-4E6B-3A3E-99EA-8C539FA6D444
 install-name:    '/System/Library/PrivateFrameworks/AOSAccounts.framework/Versions/A/AOSAccounts'
 current-version: 1.9.95
 exports:

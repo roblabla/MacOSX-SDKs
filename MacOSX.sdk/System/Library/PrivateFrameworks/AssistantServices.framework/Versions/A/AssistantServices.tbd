@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9680EA30-A112-3FBF-8885-4F7E03174A25
+    value:           08C4B689-2DC5-3805-815F-0E02AE17540B
   - target:          x86_64-maccatalyst
-    value:           9680EA30-A112-3FBF-8885-4F7E03174A25
+    value:           08C4B689-2DC5-3805-815F-0E02AE17540B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8E281E30-345D-394B-8278-A522893FE8F9
+    value:           1352A9D4-396E-3066-B25D-8C80136D15D3
   - target:          arm64e-maccatalyst
-    value:           8E281E30-345D-394B-8278-A522893FE8F9
+    value:           1352A9D4-396E-3066-B25D-8C80136D15D3
 install-name:    '/System/Library/PrivateFrameworks/AssistantServices.framework/Versions/A/AssistantServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -123,8 +123,9 @@ exports:
                        _AFDeviceRequestHandlingRolesGetNames, _AFDeviceRequestHandlingRolesValidate, 
                        _AFDeviceRingerSwitchStateGetFromName, _AFDeviceRingerSwitchStateGetIsValid, 
                        _AFDeviceRingerSwitchStateGetIsValidAndSpecified, _AFDeviceRingerSwitchStateGetName, 
-                       _AFDeviceSupportsANE, _AFDeviceSupportsAOP, _AFDeviceSupportsAudioSessionCoordination, 
-                       _AFDeviceSupportsBargeIn, _AFDeviceSupportsCarPlay, _AFDeviceSupportsEchoCancellation, 
+                       _AFDeviceSetupIsActive, _AFDeviceSupportsANE, _AFDeviceSupportsAOP, 
+                       _AFDeviceSupportsAudioSessionCoordination, _AFDeviceSupportsBargeIn, 
+                       _AFDeviceSupportsCarPlay, _AFDeviceSupportsEchoCancellation, 
                        _AFDeviceSupportsNavigation, _AFDeviceSupportsSiriUOD, _AFDeviceSupportsSpokenMessages, 
                        _AFDeviceSupportsTTS, _AFDeviceSupportsWiFiLPASMode, _AFDeviceSupportsZLL, 
                        _AFDiagnosticsSubmissionAllowed, _AFDictationCapable, _AFDictationEnablementDidChangeDarwinNotification, 
@@ -285,27 +286,27 @@ exports:
                        _AFPreferencesLanguageIsSupported, _AFPreferencesLanguageIsSupportedForDeviceSettings, 
                        _AFPreferencesLanguageIsSupportedForDictation, _AFPreferencesManualEndpointingThreshold, 
                        _AFPreferencesManualEndpointingThresholdDidChangeNotification, 
-                       _AFPreferencesMobileUserSessionLanguage, _AFPreferencesNavStatusDidChangeNotification, 
-                       _AFPreferencesProfanityFilterForced, _AFPreferencesSessionContextNavigationKey, 
-                       _AFPreferencesSetAlwaysEyesFreeEnabled, _AFPreferencesSetBorealisEducationHeaderDisplayCount, 
-                       _AFPreferencesSetHoldToTalkForTypeToSiriEnabled, _AFPreferencesSetHorsemanSupplementalLanguageDictionary, 
-                       _AFPreferencesSetIgnoreServerManualEndpointingThreshold, _AFPreferencesSetManualEndpointingThreshold, 
-                       _AFPreferencesSetShouldIgnoreInternalConfig, _AFPreferencesSetStartAlertEnabled, 
-                       _AFPreferencesSetStreamingDictationEnabled, _AFPreferencesSetTypeToSiriEnabled, 
-                       _AFPreferencesShouldIgnoreInternalConfig, _AFPreferencesSimulateImmediateSpeechCapture, 
-                       _AFPreferencesSiriTaskBackgroundAssertionTimeout, _AFPreferencesSiriTaskResponseTimeout, 
-                       _AFPreferencesStartAlertEnabled, _AFPreferencesStreamingDictationEnabled, 
-                       _AFPreferencesSupplementalLanguages, _AFPreferencesSupplementalLanguagesModificationDate, 
-                       _AFPreferencesSupportedDictationLanguages, _AFPreferencesSupportedDictationLanguagesSet, 
-                       _AFPreferencesSupportedLanguages, _AFPreferencesSupportedLanguagesForCurrentStoreFront, 
-                       _AFPreferencesSupportedLanguagesForRemote, _AFPreferencesSupportedLanguagesForStorefrontIdentifier, 
-                       _AFPreferencesSupportedMultiUserLanguages, _AFPreferencesTestAccessEnabled, 
-                       _AFPreferencesTypeToSiriEnabled, _AFPreferencesUserGeneratedContentAllowed, 
-                       _AFPreheatStylePreheatsSpeechManager, _AFPresentationPluginsURL, 
-                       _AFPreviousConversationIdentifier, _AFProcessGetInstanceUUID, 
-                       _AFProcessIsRunningAsInstance, _AFProductAndBuildVersion, 
-                       _AFProductName, _AFProductType, _AFProductTypeForInstrumentation, 
-                       _AFProductVersion, _AFProviderServiceDelegateXPCInterface, 
+                       _AFPreferencesMobileUserSessionLanguage, _AFPreferencesMultiUserCompanionNotificationLanguageCodesForHomePodVersion, 
+                       _AFPreferencesNavStatusDidChangeNotification, _AFPreferencesProfanityFilterForced, 
+                       _AFPreferencesSessionContextNavigationKey, _AFPreferencesSetAlwaysEyesFreeEnabled, 
+                       _AFPreferencesSetBorealisEducationHeaderDisplayCount, _AFPreferencesSetHoldToTalkForTypeToSiriEnabled, 
+                       _AFPreferencesSetHorsemanSupplementalLanguageDictionary, _AFPreferencesSetIgnoreServerManualEndpointingThreshold, 
+                       _AFPreferencesSetManualEndpointingThreshold, _AFPreferencesSetShouldIgnoreInternalConfig, 
+                       _AFPreferencesSetStartAlertEnabled, _AFPreferencesSetStreamingDictationEnabled, 
+                       _AFPreferencesSetTypeToSiriEnabled, _AFPreferencesShouldIgnoreInternalConfig, 
+                       _AFPreferencesSimulateImmediateSpeechCapture, _AFPreferencesSiriTaskBackgroundAssertionTimeout, 
+                       _AFPreferencesSiriTaskResponseTimeout, _AFPreferencesStartAlertEnabled, 
+                       _AFPreferencesStreamingDictationEnabled, _AFPreferencesSupplementalLanguages, 
+                       _AFPreferencesSupplementalLanguagesModificationDate, _AFPreferencesSupportedDictationLanguages, 
+                       _AFPreferencesSupportedDictationLanguagesSet, _AFPreferencesSupportedLanguages, 
+                       _AFPreferencesSupportedLanguagesForCurrentStoreFront, _AFPreferencesSupportedLanguagesForRemote, 
+                       _AFPreferencesSupportedLanguagesForStorefrontIdentifier, _AFPreferencesSupportedMultiUserLanguages, 
+                       _AFPreferencesTestAccessEnabled, _AFPreferencesTypeToSiriEnabled, 
+                       _AFPreferencesUserGeneratedContentAllowed, _AFPreheatStylePreheatsSpeechManager, 
+                       _AFPresentationPluginsURL, _AFPreviousConversationIdentifier, 
+                       _AFProcessGetInstanceUUID, _AFProcessIsRunningAsInstance, 
+                       _AFProductAndBuildVersion, _AFProductName, _AFProductType, 
+                       _AFProductTypeForInstrumentation, _AFProductVersion, _AFProviderServiceDelegateXPCInterface, 
                        _AFProviderServiceXPCInterface, _AFRecordCoreDuetContext, 
                        _AFRecordCoreDuetEvent, _AFRecordCoreDuetEventAtTimestamps, 
                        _AFRecordCoreDuetEventWithStream, _AFRecordRouteIsHearst, 
@@ -431,8 +432,8 @@ exports:
                        _AFTestRequestPathGetIsValid, _AFTestRequestPathGetIsValidAndSpecified, 
                        _AFTestRequestPathGetName, _AFTruncateMachTimeToTenthOfASecond, 
                        _AFTurnIdentifierCreateFromBytes, _AFTurnIdentifierGenerate, 
-                       _AFTurnIdentifierGetBytes, _AFTurnIdentifierGetString, _AFUserAssignedDeviceName, 
-                       _AFUserNotificationAnnouncementSpeakingStateDidChangeIdentifier, 
+                       _AFTurnIdentifierGetBytes, _AFTurnIdentifierGetString, _AFUpdateAnnouncementEligibilityDarwinNotification, 
+                       _AFUserAssignedDeviceName, _AFUserNotificationAnnouncementSpeakingStateDidChangeIdentifier, 
                        _AFUserNotificationAnnouncementSpeakingStateIdentifiersKey, 
                        _AFUserNotificationAnnouncementSpeakingStateStateKey, _AFUserSupportDirectoryPath, 
                        _AFUserUtteranceConfidenceAverageKey, _AFUserUtteranceConfidenceCountKey, 

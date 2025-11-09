@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           669C3078-9F71-3627-8A0B-B302C1BA408E
+    value:           ADFDF5E2-48E4-3B64-B34D-6126EDE43B1C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C77D1F88-0546-3A77-8688-A6D6DEA77B1C
+    value:           211E30D3-6329-3239-B008-3299890E2507
 install-name:    '/usr/lib/libATCommandStudioDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos ]

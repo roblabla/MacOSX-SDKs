@@ -293,9 +293,10 @@ int kpc_set_config_arch(struct kpc_config_remote *mp_config);
 int kpc_set_period_arch(struct kpc_config_remote *mp_config);
 
 __options_decl(kperf_kpc_flags_t, uint16_t, {
-	KPC_KERNEL_PC = 0x01,
-	KPC_KERNEL_COUNTING = 0x02,
-	KPC_USER_COUNTING = 0x04,
+	KPC_KERNEL_PC = 0x01, // the PC is a kernel address
+	KPC_KERNEL_COUNTING = 0x02, // the counter counts while running in the kernel
+	KPC_USER_COUNTING = 0x04, // the counter counts while running in user space
+	KPC_CAPTURED_PC = 0x08, // the PC was captured by hardware
 });
 
 void kpc_sample_kperf(uint32_t actionid, uint32_t counter, uint64_t config,

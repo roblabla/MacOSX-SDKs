@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           96D23CBE-A6F0-39A4-B5A9-350B38C3A23F
+    value:           F36D11EB-8154-36C5-82FC-233D9BF88588
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           5433044B-A6DF-3936-BF81-41771D26E2F4
+    value:           7B5E796E-FA63-3584-B90D-96ABFC0A8B6E
 install-name:    '/System/iOSSupport/System/Library/Frameworks/AddressBook.framework/Versions/A/AddressBook'
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]

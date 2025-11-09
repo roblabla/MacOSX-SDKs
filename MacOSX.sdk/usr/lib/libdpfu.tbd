@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           063577F5-BC95-36BA-8653-C27CCFE6EBA5
+    value:           5C4A9922-8E92-3BBA-A537-B1C736D4E479
 install-name:    '/usr/lib/libdpfu.dylib'
 exports:
   - targets:         [ arm64e-macos, arm64-macos ]

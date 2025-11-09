@@ -296,7 +296,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
  */
 @property (nonatomic) BOOL dragInteractionEnabled API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 
-@property (nonatomic, readonly, nullable) UIContextMenuInteraction *contextMenuInteraction API_UNAVAILABLE(ios) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly, nullable) UIContextMenuInteraction *contextMenuInteraction API_AVAILABLE(ios(13.2)) API_UNAVAILABLE(watchos, tvos);
 
 /* Reordering cadence affects how easily reordering occurs while dragging around a reorder-capable drop destination.
  * Default is UICollectionViewReorderingCadenceImmediate.

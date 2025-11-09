@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E7F11418-AAD6-3467-B01C-5ECE7B43B2CE
+    value:           78BA1476-0B9D-3EA8-B0C2-958C031E52A0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5A60585F-D7AF-3CEA-88DB-1E8B1D2A112D
+    value:           9A9BCF67-38A8-35AC-BBD3-5D8937107678
 install-name:    '/System/Library/PrivateFrameworks/Mail.framework/Versions/A/Mail'
-current-version: 3689.0.4
+current-version: 3693.40
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -238,18 +238,18 @@ exports:
                        _MFStringKeyCreateMailboxFailedLocalDescription, _MFStringKeyCreateMailboxFailedLocalFormat, 
                        _MFStringKeyDeliveryNoConnection, _MFStringKeyDraftsMailboxName, 
                        _MFStringKeyDraftsSpecialMailboxName, _MFStringKeyErrorTitle, 
-                       _MFStringKeyGenericMailboxTypeFormat, _MFStringKeyGetUnreadCountFormat, 
-                       _MFStringKeyGetUnreadCountsFormat, _MFStringKeyGettingHeadersFormat, 
-                       _MFStringKeyGettingMailboxHierarchyFormat, _MFStringKeyGettingMailboxSizeStatusFormat, 
-                       _MFStringKeyGettingMessageBodyFormat, _MFStringKeyIMAPAddingMessages, 
-                       _MFStringKeyIMAPChangingFlagsTaskName, _MFStringKeyInboxMailboxName, 
-                       _MFStringKeyInboxSpecialMailboxName, _MFStringKeyInsertOrUpdateFailed, 
-                       _MFStringKeyInternalDeliveryErrorFormat, _MFStringKeyInvalidMailboxNameFormat, 
-                       _MFStringKeyInvalidRuleTitle, _MFStringKeyJunkMailboxName, 
-                       _MFStringKeyJunkSpecialMailboxName, _MFStringKeyMailboxDisplayFormat, 
-                       _MFStringKeyMailboxExistsFormat, _MFStringKeyMigrateMailDatabaseUpgradeMessage, 
-                       _MFStringKeyModifyMailDatabaseUpgradeMessage, _MFStringKeyNoOfflineMailboxRenaming, 
-                       _MFStringKeyNoRecipients, _MFStringKeyNoneMenuItem, _MFStringKeyPOPClosingConnection, 
+                       _MFStringKeyGetUnreadCountFormat, _MFStringKeyGetUnreadCountsFormat, 
+                       _MFStringKeyGettingHeadersFormat, _MFStringKeyGettingMailboxHierarchyFormat, 
+                       _MFStringKeyGettingMailboxSizeStatusFormat, _MFStringKeyGettingMessageBodyFormat, 
+                       _MFStringKeyIMAPAddingMessages, _MFStringKeyIMAPChangingFlagsTaskName, 
+                       _MFStringKeyInboxMailboxName, _MFStringKeyInboxSpecialMailboxName, 
+                       _MFStringKeyInsertOrUpdateFailed, _MFStringKeyInternalDeliveryErrorFormat, 
+                       _MFStringKeyInvalidMailboxNameFormat, _MFStringKeyInvalidRuleTitle, 
+                       _MFStringKeyJunkMailboxName, _MFStringKeyJunkSpecialMailboxName, 
+                       _MFStringKeyMailboxDisplayFormat, _MFStringKeyMailboxExistsFormat, 
+                       _MFStringKeyMigrateMailDatabaseUpgradeMessage, _MFStringKeyModifyMailDatabaseUpgradeMessage, 
+                       _MFStringKeyNoOfflineMailboxRenaming, _MFStringKeyNoRecipients, 
+                       _MFStringKeyNoneMenuItem, _MFStringKeyPOPClosingConnection, 
                        _MFStringKeyPOPFetchErrorTitle, _MFStringKeyPOPInUse, _MFStringKeyPOPPermanentSystemError, 
                        _MFStringKeyPOPSenderUnknown, _MFStringKeyPOPTemporarySystemError, 
                        _MFStringKeyQuitButton, _MFStringKeyRecoveredMailboxNameFormat, 
@@ -261,7 +261,7 @@ exports:
                        _MFStringKeyUpdatingJunkMailLevelFormat, _MFStringKeyValidatingMailboxesFormat, 
                        _MFStringKeyWarningTitle, _MFStringKeyWritingChangesToDiskFormat, 
                        _MFSyncedFileDidChangeNotification, _MFSyncedFilesInfoKeyLastVersionPresent, 
-                       _MFTestForCommentBegin, _MFTestForCommentEnd, _MFTestForScriptOrStyle, 
+                       _MFTestForCommentBegin, _MFTestForCommentEnd, _MFTestForIgnoredTags, 
                        _MFThreadKeyBodyCriterionCache, _MFUCKeyNumberOfMessagesEvaluatedAsJunkMail, 
                        _MFUCKeyNumberOfMessagesJunkMailFilterEvaluated, _MFUCKeyNumberOfMessagesManuallyMarkedAsJunkMail, 
                        _MFUCKeyNumberOfMessagesManuallyMarkedNotJunkMail, _MFUCKeyNumberOfMessagesRouted, 

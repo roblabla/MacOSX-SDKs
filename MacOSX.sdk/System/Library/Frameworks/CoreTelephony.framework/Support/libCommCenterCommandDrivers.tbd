@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F39C579E-427E-3DFA-A90D-C3778680B021
+    value:           19636E6A-65A3-3CC6-BEBB-72C991930A9D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C8C14864-CFB3-326C-85C6-556D32A11163
+    value:           E2DF4CBC-493D-30F7-997E-245D7E3FBE2E
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Support/libCommCenterCommandDrivers.dylib'
 exports:
   - targets:         [ x86_64-macos ]
@@ -426,7 +426,9 @@ exports:
                        __ZN21NetworkListScanResult8setStateENS_5StateE, __ZN21SetupCallAlphaDisplayD0Ev, 
                        __ZN21SetupCallAlphaDisplayD1Ev, __ZN21SetupCallAlphaDisplayD2Ev, 
                        __ZN22AttachApnCommandDriver10start_syncEv, __ZN22AttachApnCommandDriver13shutdown_syncEv, 
-                       __ZN22AttachApnCommandDriver14bootstrap_syncEv, __ZN22AttachApnCommandDriverC2ENSt3__110shared_ptrIK8RegistryEERKN8dispatch5queueEN10subscriber7SimSlotE, 
+                       __ZN22AttachApnCommandDriver14bootstrap_syncEv, __ZN22AttachApnCommandDriver19AttachApnPushConfigC1ERKN8dispatch13group_sessionEbRKNSt3__16vectorItNS5_9allocatorItEEEE, 
+                       __ZN22AttachApnCommandDriver19AttachApnPushConfigC2ERKN8dispatch13group_sessionEbRKNSt3__16vectorItNS5_9allocatorItEEEE, 
+                       __ZN22AttachApnCommandDriverC2ENSt3__110shared_ptrIK8RegistryEERKN8dispatch5queueEN10subscriber7SimSlotE, 
                        __ZN22AttachApnCommandDriverD0Ev, __ZN22AttachApnCommandDriverD1Ev, 
                        __ZN22AttachApnCommandDriverD2Ev, __ZN22BasebandSettingsDriver11readSegmentERKNSt3__110shared_ptrINS0_13basic_istreamIcNS0_11char_traitsIcEEEEEE, 
                        __ZN22BasebandSettingsDriver13sendCsimFilesEN10subscriber7SimSlotENSt3__110shared_ptrINS2_13basic_istreamIcNS2_11char_traitsIcEEEEEEm, 

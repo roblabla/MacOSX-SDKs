@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           02D1D643-B9D5-38AF-944F-F6F7D8F86E46
+    value:           D5DCE0CC-3A9F-3242-BA3C-F69C50A78276
   - target:          x86_64-maccatalyst
-    value:           02D1D643-B9D5-38AF-944F-F6F7D8F86E46
+    value:           D5DCE0CC-3A9F-3242-BA3C-F69C50A78276
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3FAC0A36-70FF-3B54-B6BD-3D3E88C1AF7E
+    value:           AB97083F-4533-368A-B257-D3A4C7440A3E
   - target:          arm64e-maccatalyst
-    value:           3FAC0A36-70FF-3B54-B6BD-3D3E88C1AF7E
+    value:           AB97083F-4533-368A-B257-D3A4C7440A3E
 install-name:    '/usr/lib/libexslt.0.dylib'
 current-version: 9.15
 compatibility-version: 9

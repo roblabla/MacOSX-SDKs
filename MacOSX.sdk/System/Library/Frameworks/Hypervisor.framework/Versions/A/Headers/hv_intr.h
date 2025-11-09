@@ -14,6 +14,12 @@ OS_ASSUME_NONNULL_BEGIN
 
 __BEGIN_DECLS
 
+enum hv_boot_state : uint32_t {
+	HV_BS_INIT = 0,
+	HV_BS_SIPI = 1,
+	HV_BS_RUNNING = 2,
+} __OS_ENUM_ATTR_CLOSED;
+
 /* - local apic - */
 
 struct hv_apic_state {
@@ -37,7 +43,7 @@ struct hv_apic_state {
 	uint32_t dcr_timer;
 	uint32_t ccr_timer;
 	uint32_t esr_pending;
-	uint32_t boot_state;
+	enum hv_boot_state boot_state;
 	uint32_t aeoi[8];
 };
 

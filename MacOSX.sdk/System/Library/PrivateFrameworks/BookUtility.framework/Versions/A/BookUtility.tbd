@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D92E229A-893B-3752-97B5-5D16A7B549AF
+    value:           915639E2-2A15-361B-AB91-4AADE6671A02
   - target:          x86_64-maccatalyst
-    value:           D92E229A-893B-3752-97B5-5D16A7B549AF
+    value:           915639E2-2A15-361B-AB91-4AADE6671A02
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DFFCE316-801E-3F2F-A67B-E625E9D6058F
+    value:           5346ECFE-BEC0-3B0D-A43F-6A39AF54AFAD
   - target:          arm64e-maccatalyst
-    value:           DFFCE316-801E-3F2F-A67B-E625E9D6058F
+    value:           5346ECFE-BEC0-3B0D-A43F-6A39AF54AFAD
 install-name:    '/System/Library/PrivateFrameworks/BookUtility.framework/Versions/A/BookUtility'
-current-version: 1591
+current-version: 1632
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2012-2017 Apple Inc. All rights reserved.
+	Copyright 2012-2021 Apple Inc. All rights reserved.
 
 */
 
@@ -31,6 +31,7 @@ AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC1920x1080				A
 AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC1920x1080WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC3840x2160				API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC3840x2160WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC7680x4320				API_AVAILABLE(macos(12.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 @class AVOutputSettingsAssistantInternal;
 

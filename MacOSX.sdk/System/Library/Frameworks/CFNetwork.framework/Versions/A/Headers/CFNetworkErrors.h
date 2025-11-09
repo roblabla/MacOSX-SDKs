@@ -232,7 +232,8 @@ CFN_EXPORT const CFStringRef kCFSOCKSNegotiationMethodKey CF_AVAILABLE(10_5, 2_0
  *  Discussion:
  *	When an error of kCFNetServicesErrorDNSServiceFailure is
  *	returned, this key's value is set to a CFNumber containing the
- *	value returned from DNS; interret it using the values dns_sd.h
+ *	value returned from DNS; interpret it using the values in
+ *	<dns_sd.h>.
  *  
  */
 CFN_EXPORT const CFStringRef kCFDNSServiceFailureKey CF_AVAILABLE(10_5, 2_0);

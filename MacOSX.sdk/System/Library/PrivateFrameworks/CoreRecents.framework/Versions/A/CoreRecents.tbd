@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C0DC2A48-B815-3305-82B2-046BB8ED090B
+    value:           F1B2B2DE-1C99-37A7-928C-8EFC4CEC4275
   - target:          x86_64-maccatalyst
-    value:           C0DC2A48-B815-3305-82B2-046BB8ED090B
+    value:           F1B2B2DE-1C99-37A7-928C-8EFC4CEC4275
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1A84DF8B-C33E-38BD-8057-81D83109A53A
+    value:           13C687B8-8A93-34B6-AC70-8848F0735DF7
   - target:          arm64e-maccatalyst
-    value:           1A84DF8B-C33E-38BD-8057-81D83109A53A
+    value:           13C687B8-8A93-34B6-AC70-8848F0735DF7
 install-name:    '/System/Library/PrivateFrameworks/CoreRecents.framework/Versions/A/CoreRecents'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

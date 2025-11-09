@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AC4D1925-7323-3F9E-AFC1-4CA2F1F7B496
+    value:           A6FAD3BA-3290-3826-B24A-34EFB90F253C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0F186122-C9B2-33DC-8AAA-D33D7F5973A9
+    value:           6F245737-8DB4-3893-B9BF-CB3F8411EA65
 install-name:    '/System/Library/PrivateFrameworks/Geode.framework/Versions/A/Geode'
-current-version: 400.27.210
+current-version: 421.0.100
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
@@ -40,16 +40,17 @@ exports:
                        _DGRectCenteredScale, _DGRectCenteredScaleToContain, _DGRectCenteredScaleToFill, 
                        _DGRectCenteredScaleToFit, _DGRectClampPoint, _DGRectClampRect, 
                        _DGRectContainPoint, _DGRectContainRect, _DGRectCouldContainRect, 
-                       _DGRectDivideFloatXY, _DGRectFromString, _DGRectGetCornerPoints, 
-                       _DGRectIterateTiles, _DGRectIterateTilesOnQueue, _DGRectMakeBoundingRect, 
-                       _DGRectMapPoint, _DGRectMapRect, _DGRectMultiplyFloatXY, _DGRectPoint, 
-                       _DGRectRotateByQuartersWithSize, _DGRectRotateSubRectInAreaByQuarters, 
-                       _DGRectScale, _DGRectScaleToFill, _DGRectScaleToFillOutScale, 
-                       _DGRectScaleToFit, _DGRectTileAlign, _DGRectTransform, _DGRectTranslateWithTransform, 
-                       _DGRectUniformScale, _DGRelativeCCWRotation, _DGRelativeCWRotation, 
-                       _DGRelativeRotationForvImage, _DGSizeClampPoint, _DGSizeDifference, 
-                       _DGSizeFitAspectInSize, _DGSizeFitSizeInSize, _DGSizeFitSizeInSquare, 
-                       _DGSizeFromString, _DGSizeGetScaleToFit, _DGSizeRotate, _DGSizeUniformScale, 
+                       _DGRectDivideFloatXY, _DGRectFromArray, _DGRectFromString, 
+                       _DGRectGetCornerPoints, _DGRectIterateTiles, _DGRectIterateTilesOnQueue, 
+                       _DGRectMakeBoundingRect, _DGRectMapPoint, _DGRectMapRect, 
+                       _DGRectMultiplyFloatXY, _DGRectPoint, _DGRectRotateByQuartersWithSize, 
+                       _DGRectRotateSubRectInAreaByQuarters, _DGRectScale, _DGRectScaleToFill, 
+                       _DGRectScaleToFillOutScale, _DGRectScaleToFit, _DGRectTileAlign, 
+                       _DGRectTransform, _DGRectTranslateWithTransform, _DGRectUniformScale, 
+                       _DGRelativeCCWRotation, _DGRelativeCWRotation, _DGRelativeRotationForvImage, 
+                       _DGSizeClampPoint, _DGSizeDifference, _DGSizeFitAspectInSize, 
+                       _DGSizeFitSizeInSize, _DGSizeFitSizeInSquare, _DGSizeFromString, 
+                       _DGSizeGetScaleToFit, _DGSizeRotate, _DGSizeUniformScale, 
                        _DGSpotPatchInitialAngleValue, _DGSpotPatchInitialDetailValue, 
                        _DGSpotPatchInitialOpacityValue, _DGSpotPatchInitialSoftnessValue, 
                        _DGUnionRect, _DGZeroPoint, _DGZeroRect, _DG_RGBToTempTint, 
@@ -58,9 +59,10 @@ exports:
                        _GeodeVersionString, _IPACIFilter_PhotoEffect, _IPAPhotoEffectFilter_Input_EffectNumber, 
                        _IPAPhotoEffectFilter_Input_EffectVersion, _IPAPhotoEffectNumber_None, 
                        _IPAPhotoEffectOperation_Input_EffectIntensity, _IPAPhotoEffectOperation_Input_EffectNumber, 
-                       _IPAPhotoEffectOperation_Input_EffectVersion, _NSStringFromDGPoint, 
-                       _NSStringFromDGRect, _NSStringFromDGSize, _PADiscreteFileLoadRequest_urlKey, 
-                       _PAImagingErrorDomain, _PALoadRequest_CGOptionsKey, _PALoadRequest_imageSizePolicyKey, 
+                       _IPAPhotoEffectOperation_Input_EffectVersion, _NSArrayFromDGRect, 
+                       _NSStringFromDGPoint, _NSStringFromDGRect, _NSStringFromDGSize, 
+                       _PADiscreteFileLoadRequest_urlKey, _PAImagingErrorDomain, 
+                       _PALoadRequest_CGOptionsKey, _PALoadRequest_imageSizePolicyKey, 
                        _PANonLocalizedErrorKey, _PARenderPipeline_CalculateGeometry, 
                        _PARenderPipeline_RenderType_CalculateGeometry, _PARenderPipeline_StraightenCrop, 
                        _PARenderPipeline_legacyCropRectForInputSize, _PAValidationErrorsKey, 
@@ -457,8 +459,9 @@ exports:
                        PA2DBufferTiledBacking._width, PALoadRequest._cgOptions, PFCopyOnWriteHolder._interestCount, 
                        PFCopyOnWriteHolder._object, PFCopyOnWriteInterest._copyOnWriteHandler, 
                        PFCopyOnWriteInterest._holder, PFCopyOnWriteInterest._queue, 
-                       RKRetouchBrushStroke.m_brushStroke, RKRetouchBrushStroke.m_closed, 
-                       RKRetouchBrushStroke.m_detectedEdges, RKRetouchBrushStroke.m_edgeDetectionPerformed, 
-                       RKRetouchBrushStroke.m_hasSource, RKRetouchBrushStroke.m_mode, 
-                       RKRetouchBrushStroke.m_repairEdges, RKRetouchBrushStroke.m_sourceOffset ]
+                       RKRetouchBrushStroke.m_brushStroke, RKRetouchBrushStroke.m_clipRect, 
+                       RKRetouchBrushStroke.m_closed, RKRetouchBrushStroke.m_detectedEdges, 
+                       RKRetouchBrushStroke.m_edgeDetectionPerformed, RKRetouchBrushStroke.m_hasSource, 
+                       RKRetouchBrushStroke.m_mode, RKRetouchBrushStroke.m_repairEdges, 
+                       RKRetouchBrushStroke.m_sourceOffset ]
 ...

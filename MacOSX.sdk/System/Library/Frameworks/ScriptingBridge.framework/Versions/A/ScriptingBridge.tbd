@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8E53D68E-4B6B-3286-9A78-DD7F7FD7EA1A
+    value:           3702AB90-FFF4-322A-AFDD-C12A33E594CC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E7B66C48-53E9-367B-8F2F-E3B9DB67A8CC
+    value:           DE7B67D8-BCD2-32AF-B632-8D08E74A2374
 install-name:    '/System/Library/Frameworks/ScriptingBridge.framework/Versions/A/ScriptingBridge'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

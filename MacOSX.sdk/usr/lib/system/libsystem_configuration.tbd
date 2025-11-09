@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C92BFB7A-E525-31AC-BE56-C6D4B48376BB
+    value:           2DFAAFFA-D0AB-3205-8BEA-94C7BC6A91C6
   - target:          x86_64-maccatalyst
-    value:           C92BFB7A-E525-31AC-BE56-C6D4B48376BB
+    value:           2DFAAFFA-D0AB-3205-8BEA-94C7BC6A91C6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8225E874-8290-3DD9-B71C-936C6FA95A66
+    value:           E7DED043-0BA8-309E-A2B8-CEF538EDB42C
   - target:          arm64e-maccatalyst
-    value:           8225E874-8290-3DD9-B71C-936C6FA95A66
+    value:           E7DED043-0BA8-309E-A2B8-CEF538EDB42C
 install-name:    '/usr/lib/system/libsystem_configuration.dylib'
-current-version: 1163.0.4
+current-version: 1163.60.3
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ __dns_configuration_ack, __libSC_info_fork_child, __libSC_info_fork_parent, 
                        __libSC_info_fork_prepare, __nwi_config_agent_copy_data, __nwi_state_ack, 

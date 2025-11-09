@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C8453A64-A403-313E-A72B-EBA1A0E80D91
+    value:           8166E07B-1043-3B06-AB67-7852BC6D52EE
   - target:          x86_64-maccatalyst
-    value:           C8453A64-A403-313E-A72B-EBA1A0E80D91
+    value:           8166E07B-1043-3B06-AB67-7852BC6D52EE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           23B9DE80-BF2E-3F88-A534-E3BCBEA3A264
+    value:           22B0DDF8-19B1-3F56-973C-3F639D4564AF
   - target:          arm64e-maccatalyst
-    value:           23B9DE80-BF2E-3F88-A534-E3BCBEA3A264
+    value:           22B0DDF8-19B1-3F56-973C-3F639D4564AF
 install-name:    '/usr/lib/system/libcache.dylib'
 current-version: 85
 parent-umbrella:

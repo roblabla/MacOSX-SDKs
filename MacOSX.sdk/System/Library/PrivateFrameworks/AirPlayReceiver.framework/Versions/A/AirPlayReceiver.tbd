@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FFB00A09-9D7A-3C42-AD28-9C64EA4C355F
+    value:           63D71489-5FAF-380D-9997-B7FE1D5C4DC2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C3D64E4C-1460-362D-8215-C83D2C61A742
+    value:           4FA58C06-338C-3B24-ADB8-2F3BC019825B
 install-name:    '/System/Library/PrivateFrameworks/AirPlayReceiver.framework/Versions/A/AirPlayReceiver'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -112,7 +112,9 @@ exports:
                        _kAPReceiverAudioSessionStopPacketProcessorOption_CCCountAPSender, 
                        _kAPReceiverAudioSessionStopPacketProcessorOption_CCCountNonAPSender, 
                        _kAPReceiverAudioSessionStopPacketProcessorOption_CCCountSender, 
+                       _kAPReceiverAudioSessionStopPacketProcessorOption_SenderIODiscontinuityCount, 
                        _kAPReceiverAudioSessionStopPacketProcessorOption_SenderNANWifiStats, 
+                       _kAPReceiverAudioSessionStopPacketProcessorOption_SenderPrimaryPacketDropCount, 
                        _kAPReceiverNTPClientProperty_TimingPortLocal, _kAPReceiverRemoteControlSessionProperty_ClientTypeUUID, 
                        _kAPReceiverRemoteControlSessionProperty_ListenPort, _kAPReceiverRemoteControlSessionProperty_RoutingToken, 
                        _kAPReceiverRemoteControlSessionProperty_SessionID, _kAPReceiverScreenSessionEventPayload_ErrorCode, 

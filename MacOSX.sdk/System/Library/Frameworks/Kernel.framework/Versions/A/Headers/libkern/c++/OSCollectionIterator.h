@@ -38,6 +38,7 @@ class OSCollectionIterator;
 
 typedef OSCollectionIterator* OSCollectionIteratorPtr;
 
+
 /*!
  * @header
  *
@@ -99,9 +100,10 @@ class OSCollectionIterator : public OSIterator
 protected:
 // xx-review: Do we want to document these?
 	OSPtr<const OSCollection> collection;
-	void               * collIterator;
+	void * collIterator;
 	unsigned int         initialUpdateStamp;
 	bool                 valid;
+
 
 public:
 /*!

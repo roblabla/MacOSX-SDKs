@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CCC57125-A348-3685-94C7-17D5ADCF94C4
+    value:           3E5DCAD1-750E-3A2F-93AE-F79A5C6BB7AD
   - target:          x86_64-maccatalyst
-    value:           CCC57125-A348-3685-94C7-17D5ADCF94C4
+    value:           3E5DCAD1-750E-3A2F-93AE-F79A5C6BB7AD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5CF2D4E7-3002-31FF-A093-F2E356FEDC37
+    value:           31E0C8D2-50F4-33BC-A99A-43C6D7F7E276
   - target:          arm64e-maccatalyst
-    value:           5CF2D4E7-3002-31FF-A093-F2E356FEDC37
+    value:           31E0C8D2-50F4-33BC-A99A-43C6D7F7E276
 install-name:    '/System/Library/PrivateFrameworks/BookKitFoundation.framework/Versions/A/BookKitFoundation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

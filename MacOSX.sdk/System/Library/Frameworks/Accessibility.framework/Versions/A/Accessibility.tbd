@@ -4,30 +4,30 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           64CA91AF-1854-324B-BC73-AF472F08F963
+    value:           488AB2C6-5299-3EDE-A441-D1ACB7510FFD
   - target:          x86_64-maccatalyst
-    value:           64CA91AF-1854-324B-BC73-AF472F08F963
+    value:           488AB2C6-5299-3EDE-A441-D1ACB7510FFD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A1C535D4-4B76-3782-B6D2-F75495502B9D
+    value:           E4CA4D97-FC33-3BA2-8179-EF5A7F7B3608
   - target:          arm64e-maccatalyst
-    value:           A1C535D4-4B76-3782-B6D2-F75495502B9D
+    value:           E4CA4D97-FC33-3BA2-8179-EF5A7F7B3608
 install-name:    '/System/Library/Frameworks/Accessibility.framework/Versions/A/Accessibility'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AXMFiHearingDevicePairedUUIDs, _AXMFiHearingDevicePairedUUIDsDidChangeNotification, 
                        _AXMFiHearingDeviceStreamingEar, _AXMFiHearingDeviceStreamingEarDidChangeNotification, 
                        _AXNameFromColor, _AXSupportsBidirectionalAXMFiHearingDeviceStreaming ]
-    objc-classes:    [ AXCategoricalDataAxisDescriptor, AXCategoricalScale, AXChartDescriptor, 
-                       AXCustomContent, AXDataAnnotation, AXDataPoint, AXDataPointValue, 
-                       AXDataSeriesDescriptor, AXLiveAudioGraph, AXNumericDataAxisDescriptor, 
-                       AXNumericScale, AXScale ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    objc-classes:    [ AXBrailleMap, AXCategoricalDataAxisDescriptor, AXCategoricalScale, 
+                       AXChartDescriptor, AXCustomContent, AXDataAnnotation, AXDataPoint, 
+                       AXDataPointValue, AXDataSeriesDescriptor, AXLiveAudioGraph, 
+                       AXNumericDataAxisDescriptor, AXNumericScale, AXScale ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '_$s10Foundation15AttributeScopesO13AccessibilityE0D10AttributesV010TextCustomB0O12markdownNameSSvgZ', 
                        '_$s10Foundation15AttributeScopesO13AccessibilityE0D10AttributesV010TextCustomB0O4nameSSvgZ', 
                        '_$s10Foundation15AttributeScopesO13AccessibilityE0D10AttributesV010TextCustomB0OAA19AttributedStringKeyADMc', 
@@ -181,7 +181,9 @@ exports:
                        '_$sSo11AXDataPointC13AccessibilityE5ValueO6numberyAESdcAEmFWC', 
                        '_$sSo11AXDataPointC13AccessibilityE5ValueO8categoryyAESScAEmFWC', 
                        '_$sSo11AXDataPointC13AccessibilityE5ValueOMa', '_$sSo11AXDataPointC13AccessibilityE5ValueOMn', 
-                       '_$sSo11AXDataPointC13AccessibilityE5ValueON', '_$sSo17AXChartDescriptorC13AccessibilityE14additionalAxesSaySo010AXDataAxisB0_pGvM', 
+                       '_$sSo11AXDataPointC13AccessibilityE5ValueON', '_$sSo12AXBrailleMapC13AccessibilityEySfSo7CGPointVciM', 
+                       '_$sSo12AXBrailleMapC13AccessibilityEySfSo7CGPointVcig', '_$sSo12AXBrailleMapC13AccessibilityEySfSo7CGPointVcipMV', 
+                       '_$sSo12AXBrailleMapC13AccessibilityEySfSo7CGPointVcis', '_$sSo17AXChartDescriptorC13AccessibilityE14additionalAxesSaySo010AXDataAxisB0_pGvM', 
                        '_$sSo17AXChartDescriptorC13AccessibilityE14additionalAxesSaySo010AXDataAxisB0_pGvg', 
                        '_$sSo17AXChartDescriptorC13AccessibilityE14additionalAxesSaySo010AXDataAxisB0_pGvpMV', 
                        '_$sSo17AXChartDescriptorC13AccessibilityE14additionalAxesSaySo010AXDataAxisB0_pGvs', 

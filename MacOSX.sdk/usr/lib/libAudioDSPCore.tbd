@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D64B6B9E-A274-3E4F-BBFF-C9FB49718850
+    value:           775F9E3D-6FE6-3EA1-AEBD-780EBC2C392A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AE95488B-8785-3323-85D4-D1C514501D2D
+    value:           D23E7859-797A-3B6D-BD61-273ADCBFF23B
 install-name:    '/usr/lib/libAudioDSPCore.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ __ZN2IR12IRDataLoader10fileExistsEN10applesauce2CF6URLRefE, 
                        __ZN2IR12IRDataLoader10fileExistsENS_16IRDataAttributesE, 
                        __ZN2IR12IRDataLoader10fileExistsENS_8IRPresetE, __ZN2IR12IRDataLoader11getLoadedIRENS_16IRDataAttributesE, 
@@ -51,8 +51,11 @@ exports:
                        __ZN2IR15FFTFilterKernelaSERKS0_, __ZN2IR16FFTSubFilterData10accumulateERKS0_f, 
                        __ZN2IR16FFTSubFilterData5resetEv, __ZN2IR16FFTSubFilterData5scaleEf, 
                        __ZN2IR16FFTSubFilterData9SetFilterEPKfjfP17MultiRadixRealFFT, 
-                       __ZN2IR16FFTSubFilterData9overwriteERKS0_f, __ZN2IR16FFTSubFilterDataC1Ejj, 
-                       __ZN2IR16FFTSubFilterDataC2Ejj, __ZN2IR20getGenericIRBasePathEv, 
+                       __ZN2IR16FFTSubFilterData9overwriteERKS0_f, __ZN2IR16FFTSubFilterDataC1EOS0_, 
+                       __ZN2IR16FFTSubFilterDataC1ERKS0_, __ZN2IR16FFTSubFilterDataC1Ejj, 
+                       __ZN2IR16FFTSubFilterDataC2EOS0_, __ZN2IR16FFTSubFilterDataC2ERKS0_, 
+                       __ZN2IR16FFTSubFilterDataC2Ejj, __ZN2IR16FFTSubFilterDataaSEOS0_, 
+                       __ZN2IR16FFTSubFilterDataaSERKS0_, __ZN2IR20getGenericIRBasePathEv, 
                        __ZN2IR23getPresetDataAttributesENS_8IRPresetE, __ZN2IR27getProductTypeXTCIRFullPathEv, 
                        __ZN2IR29getProductTypeXTCIRFilePrefixEv, __ZN2IR6IRData10printNodesEv, 
                        __ZN2IR6IRData11forEachNodeENSt3__18functionIFvRNS_10IRDataNodeEjEEEPS3_j, 

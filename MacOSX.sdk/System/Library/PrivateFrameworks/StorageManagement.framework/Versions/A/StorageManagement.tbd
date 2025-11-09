@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4A126A46-5630-3E3D-8C2F-4E97ACEE316A
+    value:           265736E4-F764-32EB-B204-3F93CEA03718
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B21400E4-2EE5-348B-BDC8-C76B12F7EDCB
+    value:           A2FFBA52-DD85-316F-94E7-0203332423A0
 install-name:    '/System/Library/PrivateFrameworks/StorageManagement.framework/Versions/A/StorageManagement'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

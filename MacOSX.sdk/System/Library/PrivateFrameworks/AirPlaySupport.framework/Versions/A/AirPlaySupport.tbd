@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           46B9ABED-C01D-3880-8B64-52A6154080B7
+    value:           1CA45D4F-EECE-3F63-901A-ADF4A2F04A76
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B7944BB5-342F-3AB7-8A31-B973CACAD332
+    value:           437B4B12-4C06-398D-B302-4332BCAEF496
 install-name:    '/System/Library/PrivateFrameworks/AirPlaySupport.framework/Versions/A/AirPlaySupport'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -121,8 +121,8 @@ exports:
                        _APSNetworkAddressIsIPv6, _APSNetworkAddressSetInterfaceName, 
                        _APSNetworkAddressSetPort, _APSNetworkClockAddOrUpdatePeerFromSerializablePeerDictionary, 
                        _APSNetworkClockAddOrUpdatePeerWithAddressAndInterfaceNameStrings, 
-                       _APSNetworkClockCopyInitialSerializablePeerList, _APSNetworkClockCopyPeerAsSerializableAddresses, 
-                       _APSNetworkClockCopyPeerAsSerializablePeerDictionary, _APSNetworkClockCopySerializablePeerListForPeer, 
+                       _APSNetworkClockCopyPeerAsSerializableAddresses, _APSNetworkClockCopyPeerAsSerializablePeerDictionary, 
+                       _APSNetworkClockCreateSerializableRepresentationOfPeerList, 
                        _APSNetworkClockDetermineAndSetOrUpdateLocalPeerInfo, _APSNetworkClockGetCMBaseObject, 
                        _APSNetworkClockGetClassID, _APSNetworkClockGetTypeID, _APSNetworkClockLogCurrentNetworkTime, 
                        _APSNetworkClockNTPClientCreate, _APSNetworkClockNTPConvertNTPToUpTicks, 
@@ -158,10 +158,13 @@ exports:
                        _APSRTPPassThroughJitterBufferFlush, _APSRTPPassThroughJitterBufferGetInsertedNodeCount, 
                        _APSRTPPassThroughJitterBufferGetTypeID, _APSRTPPassThroughJitterBufferInsertNode, 
                        _APSRTPPassThroughJitterBufferIsFlushing, _APSRTPPassThroughJitterBufferRelinquishNode, 
-                       _APSRandomLatencyMs, _APSRealTimeAllocatorGetDefault, _APSRealTimePTPClockCreate, 
-                       _APSRealTimePTPClockGetEstimatedHostTimeForPTPTime, _APSRealTimePTPClockGetEstimatedPTPTimeForHostTime, 
-                       _APSRealTimePTPClockGetTypeID, _APSRealTimeReadableCreate, 
-                       _APSRealTimeReadableGetTypeID, _APSRealTimeReadableRead, _APSRealTimeReadableRingBufferCreate, 
+                       _APSRandomLatencyMs, _APSRealTimeAllocatorAllocate, _APSRealTimeAllocatorDeallocate, 
+                       _APSRealTimeAllocatorGetDefault, _APSRealTimeDispatcherAsync, 
+                       _APSRealTimeDispatcherCreate, _APSRealTimeDispatcherGetTypeID, 
+                       _APSRealTimePTPClockCreate, _APSRealTimePTPClockGetEstimatedHostTimeForPTPTime, 
+                       _APSRealTimePTPClockGetEstimatedPTPTimeForHostTime, _APSRealTimePTPClockGetTypeID, 
+                       _APSRealTimeReadableCreate, _APSRealTimeReadableGetTypeID, 
+                       _APSRealTimeReadableRead, _APSRealTimeReadableRingBufferCreate, 
                        _APSRealTimeReadableRingBufferGetTypeID, _APSRealTimeReadableRingBufferRead, 
                        _APSRealTimeReadableRingBufferReadWithBlock, _APSRealTimeReadableRingBufferWrite, 
                        _APSRealTimeReadableWrite, _APSRealTimeSafeSemaphoreCreate, 
@@ -253,7 +256,8 @@ exports:
                        _gLogCategory_APSRTPPassThroughJitterBuffer, _gLogCategory_APSRealTimePTPClock, 
                        _gLogCategory_APSRemoteConfig, _gLogCategory_APSSharedRingBuffer, 
                        _gLogCategory_APSSimulatedReceiver, _gLogCategory_APSSystemUtils, 
-                       _gLogCategory_APSTimeProfiler, _gLogCategory_APSW5Log, _gLogCategory_APSWirelessCoexManager, 
+                       _gLogCategory_APSTapToRadar, _gLogCategory_APSTimeProfiler, 
+                       _gLogCategory_APSW5Log, _gLogCategory_APSWirelessCoexManager, 
                        _gLogCategory_APSXPCService, _gLogCategory_AirPlayHTTPUtilities, 
                        _gLogCategory_AirPlayPairing, _gQblcfSzZBQsYCCV, _h4BvW7X, 
                        _i9kF3TCOFmU, _kAPDiscoveryRapportGetInfoResponseKey_BonjourDeviceID, 
@@ -261,9 +265,10 @@ exports:
                        _kAPSAudioFormatEndpointStreamDescriptorKey_TightSyncUUID, 
                        _kAPSEndpointStreamAudioHoseProtocolProperty_ArrivalToRenderTicks, 
                        _kAPSEndpointStreamAudioHoseProtocolProperty_AudioBufferSize, 
-                       _kAPSEndpointStreamAudioHoseProtocolProperty_IsTimelineEstablished, 
+                       _kAPSEndpointStreamAudioHoseProtocolProperty_IsCritical, _kAPSEndpointStreamAudioHoseProtocolProperty_IsTimelineEstablished, 
                        _kAPSEndpointStreamAudioHoseProtocolProperty_Name, _kAPSEndpointStreamAudioHoseProtocolProperty_SupportsRFC2198Redundancy, 
                        _kAPSEndpointStreamAudioHoseRegistrarRegistrationOption_AudioTransportStream, 
+                       _kAPSEndpointStreamAudioHoseSBARCreationOption_AudioSessionID, 
                        _kAPSEndpointStreamAudioHoseSBARCreationOption_ClientPID, 
                        _kAPSEndpointStreamAudioHoseSBARCreationOption_IsSystemAudio, 
                        _kAPSEndpointStreamAudioHoseSBARCreationOption_StreamID, _kAPSEndpointStreamAudioHoseSBARCreationOption_SupportedAudioFormats, 
@@ -274,13 +279,14 @@ exports:
                        _kAPSEndpointStreamAudioHoseSBARNotification_EnqueuedAudioFormatChanged, 
                        _kAPSEndpointStreamAudioHoseSBARNotification_RateChanged, 
                        _kAPSEndpointStreamAudioHoseSBARNotification_Underrun, _kAPSEndpointStreamAudioHoseSBARNotification_UnderrunEnded, 
+                       _kAPSEndpointStreamAudioHoseSBARProperty_AudioProcessingTap, 
                        _kAPSEndpointStreamAudioHoseSBARProperty_BufferedClientAudioSessionID, 
                        _kAPSEndpointStreamAudioHoseSBARProperty_BufferingPriority, 
                        _kAPSEndpointStreamAudioHoseSBARProperty_Rate, _kAPSEndpointStreamAudioHoseSBARProperty_VolumeLinear, 
-                       _kAPSIssueReportKey_Glitch_RTPSequenceNumber, _kAPSIssueReportKey_Glitch_RTPTimestamp, 
-                       _kAPSIssueReportKey_Type, _kAPSIssueReportType_Glitch, _kAPSLatencyManager, 
-                       _kAPSLatencyManagerNotification_HDMILatencyDidChange, _kAPSNetworkClockNotificationPayloadKey_PeerList, 
-                       _kAPSNetworkClockNotificationPayloadKey_PeerListExtended, 
+                       _kAPSIssueReportKey_Glitch_IsSevere, _kAPSIssueReportKey_Glitch_RTPSequenceNumber, 
+                       _kAPSIssueReportKey_Glitch_RTPTimestamp, _kAPSIssueReportKey_Type, 
+                       _kAPSIssueReportType_Glitch, _kAPSLatencyManager, _kAPSLatencyManagerNotification_HDMILatencyDidChange, 
+                       _kAPSNetworkClockNotificationPayloadKey_PeerList, _kAPSNetworkClockNotificationPayloadKey_PeerListExtended, 
                        _kAPSNetworkClockNotificationPayloadKey_PeerListHT, _kAPSNetworkClockNotification_GrandmasterChanged, 
                        _kAPSNetworkClockNotification_LockStateChanged, _kAPSNetworkClockNotification_PeerListChanged, 
                        _kAPSNetworkClockPTPUpdateRate_PowerSaveMs, _kAPSNetworkClockPTP_GMStabilizationTimerDurationMSec, 
@@ -312,6 +318,7 @@ exports:
                        _kAPSTransportMessageEncryptionDataKey, _kAPSTransportMessageMediaControlSessionToken, 
                        _kAPSTransportMessageReadKey, _kAPSTransportMessageSpecialKey_URL, 
                        _kAPSTransportMessageStatus, _kAPSTransportMessageWriteKey, 
-                       _kAPSXPCServerOption_EntitlementName, _o4IBrWf, _rJPl3sdBfc0E3yB, 
+                       _kAPSXPCServerOption_EntitlementName, _o4IBrWf, _ptpClock_CopyInitialSerializablePeerList, 
+                       _ptpClock_CopySerializablePeerListForPeer, _rJPl3sdBfc0E3yB, 
                        _tGvVBtfGSsOH67XQ, _xOvZekdnwD6 ]
 ...

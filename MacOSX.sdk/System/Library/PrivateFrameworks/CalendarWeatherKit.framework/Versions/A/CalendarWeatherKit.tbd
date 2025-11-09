@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EFCA7A8D-18AF-342E-B4A0-3D2B895A1AE0
+    value:           FFAA1D84-44DA-3CE4-8E41-573AB817832D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           262B9D82-D6CB-35F1-8884-8EAF290FB32E
+    value:           E9E316F9-C95D-3055-9039-AD50D225B9FE
 install-name:    '/System/Library/PrivateFrameworks/CalendarWeatherKit.framework/Versions/A/CalendarWeatherKit'
 current-version: 689
 exports:

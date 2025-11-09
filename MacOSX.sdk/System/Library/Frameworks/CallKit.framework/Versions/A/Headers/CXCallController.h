@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class CXCallObserver;
 @class CXTransaction;
 
-CX_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(11.0))  API_UNAVAILABLE(watchos, tvos)
+CX_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0))  API_UNAVAILABLE(macos, tvos, watchos)
 @interface CXCallController : NSObject
 
 /// Initialize call controller with a private, serial queue.

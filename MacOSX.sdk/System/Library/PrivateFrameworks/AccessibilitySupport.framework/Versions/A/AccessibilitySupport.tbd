@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           889CB933-ACEA-306C-85CF-941021344C00
+    value:           94A13E41-F5B1-3138-8924-0AD85CF4308A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FDBE82CC-2A6E-31D1-AD07-D1BB4D1C5380
+    value:           7F6AAC82-2D0A-3E58-B64C-C5F6E4B333AC
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/AccessibilitySupport'
 current-version: 0
 compatibility-version: 0
@@ -25,11 +25,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FCE6AA63-FD8B-36B9-80DB-FF4BFA1938DF
+    value:           E6E836FB-FA3D-31C3-B10E-CDEAB2EEB779
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5120C8A0-4D12-309A-BF46-0973B4B14769
+    value:           A6CF119C-FFB0-39E0-A3A8-F06ABBD3E6BB
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityEvents.framework/Versions/A/AccessibilityEvents'
 current-version: 2
 compatibility-version: 0
@@ -68,11 +68,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B8DE7186-6F17-3890-A103-E28507359309
+    value:           0A5FA336-EA57-3BD0-8226-47C5ABB2E4B8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1E57FBF5-57A3-3545-BA02-49086352C49C
+    value:           D05A98BF-74F0-3E83-9867-6631D27CABA1
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityFoundation.framework/Versions/A/AccessibilityFoundation'
 current-version: 2
 compatibility-version: 0
@@ -114,32 +114,34 @@ exports:
                        _AXFGeometrySortRects, _AXFGeometryStandardDeviationOfPoints, 
                        _AXFGeometryStandardDeviationOfPointsWithPrecalculatedCentroid, 
                        _AXFGeometryVectorFromPointToPoint, _AXFGetLog, _AXFHasLoadedUnitTestsReturningRunningCurrently, 
-                       _AXFHeadingAttribute, _AXFHelpTagCreatedNotification, _AXFIsRunningAsRootOrInRootSession, 
-                       _AXFIsRunningOutsideLoggedInSession, _AXFKeyPathFromSelectors, 
-                       _AXFLayoutChangedNotification, _AXFLocalizedString, _AXFLocalizedStringForComposedCharacter, 
-                       _AXFLocalizedStringWithTable, _AXFLocalizedStringWithTableAndBundle, 
-                       _AXFLocalizedTableLiteralOutput, _AXFMainWindowChangedNotification, 
-                       _AXFMap, _AXFMenuClosedNotification, _AXFMenuItemSelectedNotification, 
-                       _AXFMenuOpenedNotification, _AXFMovedNotification, _AXFPSNFromPID, 
-                       _AXFPSNIsEqualToPSN, _AXFResizedNotification, _AXFRowCollapsedNotification, 
-                       _AXFRowCountChangedNotification, _AXFRowExpandedNotification, 
-                       _AXFScreenCaptureBorderFrameKey, _AXFScreenCaptureDisplayNativeScaleKey, 
-                       _AXFScreenCaptureImageDataKey, _AXFScreenManagerPointOffsetEpsilon, 
-                       _AXFSearchAllElementsCount, _AXFSearchAnyTypePredicateKey, 
-                       _AXFSearchBlockquotePredicateKey, _AXFSearchBlockquoteSameLevelPredicateKey, 
-                       _AXFSearchBoldFontPredicateKey, _AXFSearchButtonPredicateKey, 
-                       _AXFSearchCheckBoxPredicateKey, _AXFSearchControlPredicateKey, 
-                       _AXFSearchDifferentTypePredicateKey, _AXFSearchDirectionNextPredicateValue, 
-                       _AXFSearchDirectionPredicateKey, _AXFSearchDirectionPreviousPredicateValue, 
-                       _AXFSearchFontChangePredicateKey, _AXFSearchFontColorChangePredicateKey, 
-                       _AXFSearchFramePredicateKey, _AXFSearchGraphicsPredicateKey, 
-                       _AXFSearchHeadingPredicateKey, _AXFSearchHeadingSameLevelPredicateKey, 
-                       _AXFSearchItalicFontPredicateKey, _AXFSearchKeyPredicateKey, 
-                       _AXFSearchKeyboardFocusablePredicateKey, _AXFSearchLandmarkPredicateKey, 
-                       _AXFSearchLevel1PredicateKey, _AXFSearchLevel2PredicateKey, 
-                       _AXFSearchLevel3PredicateKey, _AXFSearchLevel4PredicateKey, 
-                       _AXFSearchLevel5PredicateKey, _AXFSearchLevel6PredicateKey, 
-                       _AXFSearchLinkPredicateKey, _AXFSearchListPredicateKey, _AXFSearchLiveRegionPredicateKey, 
+                       _AXFHeadingAttribute, _AXFHelpTagCreatedNotification, _AXFIsDebuggerAttached, 
+                       _AXFIsRunningAsRootOrInRootSession, _AXFIsRunningOutsideLoggedInSession, 
+                       _AXFKeyPathFromSelectors, _AXFLayoutChangedNotification, _AXFLocalizedString, 
+                       _AXFLocalizedStringForComposedCharacter, _AXFLocalizedStringWithTable, 
+                       _AXFLocalizedStringWithTableAndBundle, _AXFLocalizedTableLiteralOutput, 
+                       _AXFMainWindowChangedNotification, _AXFMap, _AXFMenuClosedNotification, 
+                       _AXFMenuItemSelectedNotification, _AXFMenuOpenedNotification, 
+                       _AXFMovedNotification, _AXFPSNFromPID, _AXFPSNIsEqualToPSN, 
+                       _AXFPerformPrivilegedAttributedStringTransformation, _AXFPerformPrivilegedAttributedStringTransformations, 
+                       _AXFResizedNotification, _AXFRowCollapsedNotification, _AXFRowCountChangedNotification, 
+                       _AXFRowExpandedNotification, _AXFScreenCaptureBorderFrameKey, 
+                       _AXFScreenCaptureDisplayNativeScaleKey, _AXFScreenCaptureImageDataKey, 
+                       _AXFScreenManagerPointOffsetEpsilon, _AXFSearchAllElementsCount, 
+                       _AXFSearchAnyTypePredicateKey, _AXFSearchBlockquotePredicateKey, 
+                       _AXFSearchBlockquoteSameLevelPredicateKey, _AXFSearchBoldFontPredicateKey, 
+                       _AXFSearchButtonPredicateKey, _AXFSearchCheckBoxPredicateKey, 
+                       _AXFSearchControlPredicateKey, _AXFSearchDifferentTypePredicateKey, 
+                       _AXFSearchDirectionNextPredicateValue, _AXFSearchDirectionPredicateKey, 
+                       _AXFSearchDirectionPreviousPredicateValue, _AXFSearchFontChangePredicateKey, 
+                       _AXFSearchFontColorChangePredicateKey, _AXFSearchFramePredicateKey, 
+                       _AXFSearchGraphicsPredicateKey, _AXFSearchHeadingPredicateKey, 
+                       _AXFSearchHeadingSameLevelPredicateKey, _AXFSearchItalicFontPredicateKey, 
+                       _AXFSearchKeyPredicateKey, _AXFSearchKeyboardFocusablePredicateKey, 
+                       _AXFSearchLandmarkPredicateKey, _AXFSearchLevel1PredicateKey, 
+                       _AXFSearchLevel2PredicateKey, _AXFSearchLevel3PredicateKey, 
+                       _AXFSearchLevel4PredicateKey, _AXFSearchLevel5PredicateKey, 
+                       _AXFSearchLevel6PredicateKey, _AXFSearchLinkPredicateKey, 
+                       _AXFSearchListPredicateKey, _AXFSearchLiveRegionPredicateKey, 
                        _AXFSearchMisspelledWordPredicateKey, _AXFSearchPlainTextPredicateKey, 
                        _AXFSearchRadioGroupPredicateKey, _AXFSearchResultsLimitPredicateKey, 
                        _AXFSearchSameTypePredicateKey, _AXFSearchStartElementPredicateKey, 
@@ -151,7 +153,7 @@ exports:
                        _AXFSelectedCellsChangedNotification, _AXFSelectedChildrenChangedNotification, 
                        _AXFSelectedChildrenMovedNotification, _AXFSelectedColumnsChangedNotification, 
                        _AXFSelectedRowsChangedNotification, _AXFSelectedTextChangedNotification, 
-                       _AXFSheetCreatedNotification, _AXFSynthesizedEventSourceID, 
+                       _AXFSheetCreatedNotification, _AXFStopInDebugger, _AXFSynthesizedEventSourceID, 
                        _AXFTitleChangedNotification, _AXFUIElementDestroyedNotification, 
                        _AXFUTF16Encoding, _AXFUTF32Encoding, _AXFUnGZIPData, _AXFUnitsChangedNotification, 
                        _AXFValueChangedNotification, _AXFWebAreaRole, _AXFWindowCreatedNotification, 
@@ -184,19 +186,20 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7C5C51FD-C5F0-3A0F-95F7-E78FFB0E2ADB
+    value:           6A25FFA4-3C81-3005-B5EA-F20B6F3D8D86
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CF0C60DD-BD15-3F66-9EC7-94D22F5377CC
+    value:           FA696738-D867-3DBC-AB15-60BC874E6E4A
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityKit.framework/Versions/A/AccessibilityKit'
 current-version: 2
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _AXKContrastRatioForColor, _AXKDebugPrintHierarchy, _AXKHsv2rgb, 
-                       _AXKLuminanceForColor, _AXKRecommendedColorForColors, _AXKRgb2hsv, 
-                       _AXKThreadingCheckAssertCurrentQueueIsAppQueueForApp, _AXKThreadingCheckAssertCurrentQueueIsAppQueueForElement, 
+    symbols:         [ _AXKContrastRatioForColor, _AXKDebugPrintHierarchy, _AXKEnumerateEmojiDescriptionsInString, 
+                       _AXKHsv2rgb, _AXKLuminanceForColor, _AXKRecommendedColorForColors, 
+                       _AXKRgb2hsv, _AXKStringByReplacingEmojiWithDescriptions, _AXKThreadingCheckAssertCurrentQueueIsAppQueueForApp, 
+                       _AXKThreadingCheckAssertCurrentQueueIsAppQueueForElement, 
                        _AXKThreadingCheckAssertCurrentQueueIsAppQueueForUIElement, 
                        _AXKThreadingCheckAssertCurrentQueueIsEqual, _AXKThreadingCheckAssertCurrentQueueIsMain, 
                        _AXKThreadingCheckAssertCurrentQueueNotMain, _FKAAvailableCommands, 
@@ -218,22 +221,22 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CDCC8C52-7B3A-3333-9133-26B1AD7DFC78
+    value:           F33E3331-AD28-35D2-87BF-7478773209A5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5251347E-D45A-3746-9413-C2641CFBEB54
+    value:           6627B260-F84B-39EF-8F92-B6D649633230
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityVisuals.framework/Versions/A/AccessibilityVisuals'
 current-version: 2
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AXVAccessibilityVisualsSpaceUUID, _AXVBrailleTransliterationAttribute, 
-                       _AXVBundle, _AXVCreateIconWithImageMask, _AXVDefaultVoiceOverStyleBorderWidth, 
-                       _AXVFiniteRectForRect, _AXVGetIdealFont, _AXVGetIdealSizeForFont, 
-                       _AXVImageRepresentationFileExtension, _AXVLocalizedString, 
-                       _AXVScrollDeltaEqual, _AXVScrollDirectionNull, _AXVTintImage, 
-                       _AXVisualsAgentXPCInterface ]
+                       _AXVBundle, _AXVCaptionWindowLevel, _AXVCreateIconWithImageMask, 
+                       _AXVDefaultVoiceOverStyleBorderWidth, _AXVFiniteRectForRect, 
+                       _AXVGetIdealFont, _AXVGetIdealSizeForFont, _AXVImageRepresentationFileExtension, 
+                       _AXVLocalizedString, _AXVScrollDeltaEqual, _AXVScrollDirectionNull, 
+                       _AXVTintImage, _AXVisualsAgentDelegateXPCInterface, _AXVisualsAgentXPCInterface ]
     objc-classes:    [ AXVAHUDFeature, AXVBorderedLayer, AXVBorderedView, AXVBorderedWindow, 
                        AXVBorderedWindowController, AXVBorderedZoomWindow, AXVBrailleInfo, 
                        AXVBrailleWindow, AXVCGFullscreenZoomController, AXVCaptionWindow, 

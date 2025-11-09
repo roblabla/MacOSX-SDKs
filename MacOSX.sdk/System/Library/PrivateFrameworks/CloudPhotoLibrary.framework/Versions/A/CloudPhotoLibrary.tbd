@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E1B8DD7F-0C80-3421-A423-B5E61E8480F2
+    value:           D3EDA43B-39A0-319F-8D09-28B286E4BC87
   - target:          x86_64-maccatalyst
-    value:           E1B8DD7F-0C80-3421-A423-B5E61E8480F2
+    value:           D3EDA43B-39A0-319F-8D09-28B286E4BC87
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           43753FC0-2C66-30F7-A895-C641BDC033D4
+    value:           D76CA886-4E36-3762-B739-62AD735AC9F6
   - target:          arm64e-maccatalyst
-    value:           43753FC0-2C66-30F7-A895-C641BDC033D4
+    value:           D76CA886-4E36-3762-B739-62AD735AC9F6
 install-name:    '/System/Library/PrivateFrameworks/CloudPhotoLibrary.framework/Versions/A/CloudPhotoLibrary'
-current-version: 400.27.210
+current-version: 421.0.100
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

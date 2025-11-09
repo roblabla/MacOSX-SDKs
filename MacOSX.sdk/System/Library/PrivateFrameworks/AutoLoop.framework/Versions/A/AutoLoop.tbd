@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           958C94C2-A875-345E-B5A8-7E4F937753A0
+    value:           6799350D-D702-383D-9579-BC1922827CE1
   - target:          x86_64-maccatalyst
-    value:           958C94C2-A875-345E-B5A8-7E4F937753A0
+    value:           6799350D-D702-383D-9579-BC1922827CE1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2334D48D-AD82-34D6-B57C-F99B5E5A38DE
+    value:           D2D6174C-65F9-34FD-A904-3C95A8AC50F8
   - target:          arm64e-maccatalyst
-    value:           2334D48D-AD82-34D6-B57C-F99B5E5A38DE
+    value:           D2D6174C-65F9-34FD-A904-3C95A8AC50F8
 install-name:    '/System/Library/PrivateFrameworks/AutoLoop.framework/Versions/A/AutoLoop'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

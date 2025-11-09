@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class HMCHIPServiceTopology;
+@class HMMatterTopology;
 
 HM_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(macos, macCatalyst)
 @interface HMAccessorySetupManager : NSObject
@@ -23,7 +23,7 @@ HM_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos) API_UNAVAILABL
  *
  * @param topology  A configuration object representing the topology of the initiating ecosystem
  */
-- (void)addAndSetUpAccessoriesForTopology:(HMCHIPServiceTopology *)topology completionHandler:(HMErrorBlock)completion;
+- (void)addAndSetUpAccessoriesForTopology:(HMMatterTopology *)topology completionHandler:(HMErrorBlock)completion;
 
 @end
 

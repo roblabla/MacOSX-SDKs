@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           601C5E39-D7D5-35DD-AB5C-0B9227633FEC
+    value:           2A0921A7-A1D7-3611-8350-F83865676330
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           27418E26-2524-31FB-94F4-1E99F5562385
+    value:           492D8ED3-EB2F-37F3-9F0A-6BF9BD563888
 install-name:    '/System/Library/PrivateFrameworks/ConsoleKit.framework/Versions/A/ConsoleKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

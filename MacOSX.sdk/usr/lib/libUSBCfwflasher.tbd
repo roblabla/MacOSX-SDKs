@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2764136E-8289-3A9F-BC95-1BD7202AE35F
+    value:           45442FA9-2734-336C-A913-B6FA6403AC07
 install-name:    '/usr/lib/libUSBCfwflasher.dylib'
 exports:
   - targets:         [ arm64e-macos, arm64-macos ]
@@ -13,10 +13,11 @@ exports:
                        _USBCFlasherSupported ]
     objc-classes:    [ IECSInterface, IOKitUtilities, flashUpdater, iecsUpdater, 
                        swdUpdater ]
-    objc-ivars:      [ flashUpdater.currentDevice, flashUpdater.fConnection, flashUpdater.fGAIDEnabled, 
-                       flashUpdater.fRetriesEnabled, flashUpdater.fUpcomingFirmwareVersionStash, 
-                       flashUpdater.locatedDeviceEnumerator, flashUpdater.locatedDevices, 
-                       iecsUpdater.device_id, iecsUpdater.fConnection, iecsUpdater.fInterface, 
+    objc-ivars:      [ IECSInterface._cfPlugInInterface, IECSInterface._deviceInterface, 
+                       IECSInterface._userClientActive, flashUpdater.currentDevice, 
+                       flashUpdater.fConnection, flashUpdater.fGAIDEnabled, flashUpdater.fRetriesEnabled, 
+                       flashUpdater.fUpcomingFirmwareVersionStash, flashUpdater.locatedDeviceEnumerator, 
+                       flashUpdater.locatedDevices, iecsUpdater.device_id, iecsUpdater.fInterface, 
                        iecsUpdater.gaidEnabled, iecsUpdater.retriesEnabled, iecsUpdater.upcomingFirmwareVersionStash, 
                        iecsUpdater.updated, iecsUpdater.uuid, iecsUpdater.verbose, 
                        swdUpdater.device, swdUpdater.entryID, swdUpdater.name, swdUpdater.retriesEnabled, 

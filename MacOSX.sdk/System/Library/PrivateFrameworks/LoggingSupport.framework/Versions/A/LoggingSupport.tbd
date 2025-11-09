@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E5B3ED2C-1991-365D-B760-C18BBDDC132A
+    value:           66493583-4DB7-353A-BE9C-C1D8BC45D45E
   - target:          x86_64-maccatalyst
-    value:           E5B3ED2C-1991-365D-B760-C18BBDDC132A
+    value:           66493583-4DB7-353A-BE9C-C1D8BC45D45E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F498437F-9416-3BB5-B85C-C8E1510085DE
+    value:           6154C763-2258-3B02-B20F-AEF60C3AED33
   - target:          arm64e-maccatalyst
-    value:           F498437F-9416-3BB5-B85C-C8E1510085DE
+    value:           6154C763-2258-3B02-B20F-AEF60C3AED33
 install-name:    '/System/Library/PrivateFrameworks/LoggingSupport.framework/Versions/A/LoggingSupport'
-current-version: 1370
+current-version: 1375.40.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

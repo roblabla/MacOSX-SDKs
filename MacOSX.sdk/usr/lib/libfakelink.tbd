@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3E1270F9-F4F2-3E1D-A1D5-3A47F044DD0B
+    value:           8D4F409B-6B1C-369D-91C1-203C0964FDE8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A5459335-1E40-3CB1-BCB7-65871800B96A
+    value:           3213B59D-649B-3842-95CA-6AE6F5046302
 install-name:    '/usr/lib/libfakelink.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

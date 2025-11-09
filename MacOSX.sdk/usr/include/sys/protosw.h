@@ -74,9 +74,10 @@
 
 /*
  * The arguments to the ctlinput routine are
- *      (*protosw[].pr_ctlinput)(cmd, sa, arg);
- * where cmd is one of the commands below, sa is a pointer to a sockaddr,
- * and arg is a `void *' argument used within a protocol family.
+ *      (*protosw[].pr_ctlinput)(cmd, sa, arg, ifnet);
+ * where `cmd' is one of the commands below, `sa' is a pointer to a sockaddr,
+ * `arg' is a `void *' argument used within a protocol family (typically
+ * that's a `struct ipctlparam *') and `ifp' is a pointer to the network interface.
  */
 #define PRC_IFDOWN              0       /* interface transition */
 #define PRC_ROUTEDEAD           1       /* select new route if possible ??? */

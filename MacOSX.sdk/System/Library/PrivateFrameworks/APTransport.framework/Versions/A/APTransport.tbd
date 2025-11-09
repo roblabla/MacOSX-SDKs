@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B270F83D-1DFA-3D3E-A490-A8DD432DE07F
+    value:           9807500C-A5B4-3253-9257-149F4ACAAF32
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BDECA091-271D-36BC-90FD-F2814C19B920
+    value:           B4092358-A595-3BA1-9337-B9BD67400EC3
 install-name:    '/System/Library/PrivateFrameworks/APTransport.framework/Versions/A/APTransport'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -242,16 +242,29 @@ exports:
                        _kAPTNANDataSessionWiFiP2PError_InvalidConnection, _kAPTNANDataSessionWiFiP2PError_InvalidHandle, 
                        _kAPTNANDataSessionWiFiP2PError_InvalidRequest, _kAPTNANDataSessionWiFiP2PError_InvalidSecurityParameters, 
                        _kAPTNANDataSessionWiFiP2PError_NoInstanceIDsAvailable, _kAPTNANDataSessionWiFiP2PError_Unavailable, 
-                       _kAPTNANDataSessionWifiStatsKey_CSACount, _kAPTNANDataSessionWifiStatsKey_DFSChannelsCount, 
-                       _kAPTNANDataSessionWifiStatsKey_InfraChannel, _kAPTNANDataSessionWifiStatsKey_InfraRelayOperationStatus, 
+                       _kAPTNANDataSessionWifiStatsKey_CSACount, _kAPTNANDataSessionWifiStatsKey_ChannelSequenceMismatchOn2GCount, 
+                       _kAPTNANDataSessionWifiStatsKey_ChannelSequenceMismatchOn5GCount, 
+                       _kAPTNANDataSessionWifiStatsKey_CountryCode, _kAPTNANDataSessionWifiStatsKey_DFSChannelsCount, 
+                       _kAPTNANDataSessionWifiStatsKey_InfraAssocCount, _kAPTNANDataSessionWifiStatsKey_InfraChannel, 
+                       _kAPTNANDataSessionWifiStatsKey_InfraDisassocCount, _kAPTNANDataSessionWifiStatsKey_InfraRelayOperationStatus, 
                        _kAPTNANDataSessionWifiStatsKey_InfraRelayRequestersCount, 
-                       _kAPTNANDataSessionWifiStatsKey_PacketsHOFOn2GCount, _kAPTNANDataSessionWifiStatsKey_PacketsNAVOn2GCount, 
-                       _kAPTNANDataSessionWifiStatsKey_PacketsOn2GCount, _kAPTNANDataSessionWifiStatsKey_PacketsOn5GCount, 
-                       _kAPTNANDataSessionWifiStatsKey_PacketsOverridenOn5GCount, 
+                       _kAPTNANDataSessionWifiStatsKey_InfraScanCount, _kAPTNANDataSessionWifiStatsKey_PacketsHOFOn2GCount, 
+                       _kAPTNANDataSessionWifiStatsKey_PacketsNAVOn2GCount, _kAPTNANDataSessionWifiStatsKey_PacketsOn2GCount, 
+                       _kAPTNANDataSessionWifiStatsKey_PacketsOn5GCount, _kAPTNANDataSessionWifiStatsKey_PacketsOverridenOn5GCount, 
                        _kAPTNANDataSessionWifiStatsKey_Preferred2GChannelsCount, 
                        _kAPTNANDataSessionWifiStatsKey_Preferred5GChannelsCount, 
-                       _kAPTNANDataSessionWifiStatsKey_QuietIECount, _kAPTNANDataSessionWifiStatsKey_RxRSSI, 
-                       _kAPTNANDataSessionWifiStatsKey_TxCCA, _kAPTNANDataSessionWifiStatsKey_TxErrorCount, 
+                       _kAPTNANDataSessionWifiStatsKey_QuietIECount, _kAPTNANDataSessionWifiStatsKey_RxFWDelayHistogram, 
+                       _kAPTNANDataSessionWifiStatsKey_RxIPCDelayHistogram, _kAPTNANDataSessionWifiStatsKey_RxRSSI, 
+                       _kAPTNANDataSessionWifiStatsKey_TxCCA, _kAPTNANDataSessionWifiStatsKey_TxChipModeErrorCount, 
+                       _kAPTNANDataSessionWifiStatsKey_TxConsecutiveErrorsHistogram, 
+                       _kAPTNANDataSessionWifiStatsKey_TxDroppedCount, _kAPTNANDataSessionWifiStatsKey_TxErrorCount, 
+                       _kAPTNANDataSessionWifiStatsKey_TxExpiredCount, _kAPTNANDataSessionWifiStatsKey_TxFailedCount, 
+                       _kAPTNANDataSessionWifiStatsKey_TxFirmwareFreePacketCount, 
+                       _kAPTNANDataSessionWifiStatsKey_TxForceLifetimeExpiredCount, 
+                       _kAPTNANDataSessionWifiStatsKey_TxIOErrorCount, _kAPTNANDataSessionWifiStatsKey_TxInternalErrorCount, 
+                       _kAPTNANDataSessionWifiStatsKey_TxMaxRetriesCount, _kAPTNANDataSessionWifiStatsKey_TxMemoryErrorCount, 
+                       _kAPTNANDataSessionWifiStatsKey_TxNoACKCount, _kAPTNANDataSessionWifiStatsKey_TxNoRemotePeerCount, 
+                       _kAPTNANDataSessionWifiStatsKey_TxNoResourcesCount, _kAPTNANDataSessionWifiStatsKey_TxPacketExpiryHistogram, 
                        _kAPTransportConnectionNetworkInfo_AverageLoss, _kAPTransportConnectionNetworkInfo_AverageRTT, 
                        _kAPTransportConnectionNetworkInfo_AverageTxCapacity, _kAPTransportConnectionNetworkInfo_TxCapacity, 
                        _kAPTransportConnectionNotification_Disconnected, _kAPTransportConnectionNotification_StallStateChanged, 
@@ -274,7 +287,8 @@ exports:
                        _kAPTransportConnectionProperty_MaxPackageSize, _kAPTransportConnectionProperty_NWConnectionUUID, 
                        _kAPTransportConnectionProperty_NetTransportType, _kAPTransportConnectionProperty_NetworkInfo, 
                        _kAPTransportConnectionProperty_PackageSendTimeout, _kAPTransportConnectionProperty_PackageType, 
-                       _kAPTransportConnectionProperty_Password, _kAPTransportConnectionProperty_RemoteNetworkIPAddress, 
+                       _kAPTransportConnectionProperty_Password, _kAPTransportConnectionProperty_PrimaryPacketDropCount, 
+                       _kAPTransportConnectionProperty_QualityOfService, _kAPTransportConnectionProperty_RemoteNetworkIPAddress, 
                        _kAPTransportConnectionProperty_RemoteNetworkIPAddressCandidates, 
                        _kAPTransportConnectionProperty_RemoteNetworkInfo, _kAPTransportConnectionProperty_RemoteNetworkMACAddress, 
                        _kAPTransportConnectionProperty_RemoteNetworkPort, _kAPTransportConnectionProperty_TransportDevice, 
@@ -316,6 +330,7 @@ exports:
                        _kAPTransportStreamProperty_MessageSendTimeout, _kAPTransportStreamProperty_NANDataSession, 
                        _kAPTransportStreamProperty_NWConnectionUUID, _kAPTransportStreamProperty_NetTransportType, 
                        _kAPTransportStreamProperty_NetworkInfo, _kAPTransportStreamProperty_Password, 
+                       _kAPTransportStreamProperty_PrimaryPacketDropCount, _kAPTransportStreamProperty_QualityOfService, 
                        _kAPTransportStreamProperty_ReadyToSendThresholdBytes, _kAPTransportStreamProperty_RemoteNetworkIPAddress, 
                        _kAPTransportStreamProperty_RemoteNetworkIPAddressCandidates, 
                        _kAPTransportStreamProperty_RemoteNetworkInfo, _kAPTransportStreamProperty_RemoteNetworkMACAddress, 

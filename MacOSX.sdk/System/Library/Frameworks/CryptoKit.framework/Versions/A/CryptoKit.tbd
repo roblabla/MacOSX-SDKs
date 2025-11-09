@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           081CA852-B549-3458-BEC2-BE8DF3E1FECF
+    value:           891919B7-D904-3717-BA0E-8080EF4F246F
   - target:          x86_64-maccatalyst
-    value:           081CA852-B549-3458-BEC2-BE8DF3E1FECF
+    value:           891919B7-D904-3717-BA0E-8080EF4F246F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           612C0B73-422C-3A21-8702-46960E077EB2
+    value:           F5233B2B-9EEF-3855-BA38-B81D18AC365F
   - target:          arm64e-maccatalyst
-    value:           612C0B73-422C-3A21-8702-46960E077EB2
+    value:           F5233B2B-9EEF-3855-BA38-B81D18AC365F
 install-name:    '/System/Library/Frameworks/CryptoKit.framework/Versions/A/CryptoKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '_$s6Digest9CryptoKit12HashFunctionPTl', '_$s9CryptoKit03ChaC4PolyO4open_5using10Foundation4DataVAC9SealedBoxV_AA12SymmetricKeyVtKFZ', 
                        '_$s9CryptoKit03ChaC4PolyO4open_5using14authenticating10Foundation4DataVAC9SealedBoxV_AA12SymmetricKeyVxtKAG0I8ProtocolRzlFZ', 
                        '_$s9CryptoKit03ChaC4PolyO4seal_5using5nonce14authenticatingAC9SealedBoxVx_AA12SymmetricKeyVAC5NonceVSgq_tK10Foundation12DataProtocolRzAoPR_r0_lFZ', 

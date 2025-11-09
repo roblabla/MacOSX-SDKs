@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B74F80D7-BC0E-3F6C-87EA-BC26920881D9
+    value:           A371DE03-445B-3B81-8B29-640F90B85558
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4CDA962C-E586-3C3A-A0F7-0C58131E31E0
+    value:           7561C775-5F94-3CB8-AE88-676F063AABB8
 install-name:    '/System/Library/PrivateFrameworks/IMDaemonCore.framework/Versions/A/IMDaemonCore'
 current-version: 800
 exports:
@@ -31,13 +31,14 @@ exports:
                        _CKRecordIMItemSummaryInfo, _CKRecordIMItemTime, _CKRecordIMItemTimeDelivered, 
                        _CKRecordIMItemTimePlayed, _CKRecordIMItemTimeRead, _CKRecordIMItemUnencryptedTime, 
                        _CKRecordIMMessageIncompatibleDeleteNotification, _CKRecordKeyChatClientGroupID, 
-                       _CKRecordKeyChatDisplayName, _CKRecordKeyChatGuid, _CKRecordKeyChatIdentifier, 
-                       _CKRecordKeyChatIsFiltered, _CKRecordKeyChatLastAddressedHandle, 
-                       _CKRecordKeyChatOriginalGroupID, _CKRecordKeyChatParticipants, 
-                       _CKRecordKeyChatProperties, _CKRecordKeyChatProperties001, 
-                       _CKRecordKeyChatProperties001SyndicationDate, _CKRecordKeyChatProperties001SyndicationType, 
-                       _CKRecordKeyChatReadWaterMark, _CKRecordKeyChatService, _CKRecordKeyChatState, 
-                       _CKRecordKeyChatStyle, _CKRecordKeyChatSuccessFullQuery, _CKRecordUpdateCompressedProtobuf, 
+                       _CKRecordKeyChatDisplayName, _CKRecordKeyChatGroupPhotoAsset, 
+                       _CKRecordKeyChatGuid, _CKRecordKeyChatIdentifier, _CKRecordKeyChatIsFiltered, 
+                       _CKRecordKeyChatLastAddressedHandle, _CKRecordKeyChatOriginalGroupID, 
+                       _CKRecordKeyChatParticipants, _CKRecordKeyChatProperties, 
+                       _CKRecordKeyChatProperties001, _CKRecordKeyChatProperties001SyndicationDate, 
+                       _CKRecordKeyChatProperties001SyndicationType, _CKRecordKeyChatReadWaterMark, 
+                       _CKRecordKeyChatService, _CKRecordKeyChatState, _CKRecordKeyChatStyle, 
+                       _CKRecordKeyChatSuccessFullQuery, _CKRecordUpdateCompressedProtobuf, 
                        _CKRecordUpdateType, _IMAttachmentMetadataSyncCompleted, _IMAttachmentSyncFailed, 
                        _IMAttachmentSyncStarted, _IMAttachmentSyncStoppedDueToDeviceConditions, 
                        _IMBackUpCompletedRecently, _IMBackUpNotCompletedRecently, 
@@ -48,7 +49,7 @@ exports:
                        _IMCrashDuringFirstSync, _IMDAttachmentRecordRefFromIMFileTransfer, 
                        _IMDCKAllAliases, _IMDCKCacheDeleteAutoCaptureSubtype, _IMDCKSelectedAliases, 
                        _IMDCKUpdateSyncControllerErrorDomain, _IMDCKUtilitiesABCSubtype, 
-                       _IMDCKUtilitiesErrorDomain, _IMDCreateIMMessageItemFromIMDMessageRecordLoadAttachmentIfNeededRef, 
+                       _IMDCKUtilitiesErrorDomain, _IMDChatsLoadedNotification, _IMDCreateIMMessageItemFromIMDMessageRecordLoadAttachmentIfNeededRef, 
                        _IMDCreateIMMessageItemFromIMDMessageRecordRef, _IMDFileTransferAcceptedNotification, 
                        _IMDFileTransferArchiveFailedNotification, _IMDFileTransferArchiveSucceededNotification, 
                        _IMDFileTransferCreatedNotification, _IMDFileTransferExplicitDownloadCompletedErrorKey, 
@@ -113,8 +114,9 @@ exports:
                        _kIMUpdateTypeForType2, _kMaxCloudKitRetries ]
     objc-classes:    [ CKRecordUtilities, IMBlastdoor, IMDAccount, IMDAccountController, 
                        IMDAppleServiceSession, IMDAttachmentStore, IMDAvailabilityVerificationManager, 
-                       IMDBadgeUtilities, IMDCKAbstractSyncController, IMDCKAttachmentSyncCKOperationFactory, 
-                       IMDCKAttachmentSyncController, IMDCKCacheDeleteManager, IMDCKChatSyncCKOperationFactory, 
+                       IMDAvailabilityVerificationTokens, IMDBadgeUtilities, IMDCKAbstractSyncController, 
+                       IMDCKAttachmentSyncCKOperationFactory, IMDCKAttachmentSyncController, 
+                       IMDCKCacheDeleteManager, IMDCKChatSyncCKOperationFactory, 
                        IMDCKChatSyncController, IMDCKDatabaseManager, IMDCKExitManager, 
                        IMDCKMessageSyncCKOperationFactory, IMDCKMessageSyncController, 
                        IMDCKRampManager, IMDCKRecordSaltManager, IMDCKSyncController, 

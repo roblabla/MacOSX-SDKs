@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0CF6ECCD-C38B-30FE-B694-2538D860715F
+    value:           FE830ABB-D169-38B7-8E5C-FD821F1C1052
   - target:          x86_64-maccatalyst
-    value:           0CF6ECCD-C38B-30FE-B694-2538D860715F
+    value:           FE830ABB-D169-38B7-8E5C-FD821F1C1052
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F7C7A3F7-DAA7-365A-9A9F-BC83C6CBAF5C
+    value:           014BE76C-37FD-33B4-AFB0-98DC8BBAF4C8
   - target:          arm64e-maccatalyst
-    value:           F7C7A3F7-DAA7-365A-9A9F-BC83C6CBAF5C
+    value:           014BE76C-37FD-33B4-AFB0-98DC8BBAF4C8
 install-name:    '/System/Library/PrivateFrameworks/AAAFoundationSwift.framework/Versions/A/AAAFoundationSwift'
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '_$s10Foundation4DataV18AAAFoundationSwiftE11randomBytes5countACSi_tKFZ', 
-                       '_$s10Foundation4DataV18AAAFoundationSwiftE4hash9algorithmAcD13HashAlgorithmO_tF', 
-                       '_$s10Foundation4DataV18AAAFoundationSwiftE4hmac3key9algorithmA2C_AD13HmacAlgorithmOtF', 
+                       '_$s10Foundation4DataV18AAAFoundationSwiftE4hash5usingACx_t9CryptoKit12HashFunctionRzlF', 
+                       '_$s10Foundation4DataV18AAAFoundationSwiftE4hmac3key5usingA2C_xmt9CryptoKit12HashFunctionRzlF', 
                        '_$s10Foundation4DataV18AAAFoundationSwiftE7encrypt3keyAD09EncryptedB0VAC_tKF', 
                        '_$s10Foundation4DataV18AAAFoundationSwiftE9hexStringSSvg', 
                        '_$s10Foundation4DataV18AAAFoundationSwiftE9hexStringSSvpMV', 
@@ -96,22 +96,7 @@ exports:
                        '_$s18AAAFoundationSwift13EncryptedDataV7decrypt3key10Foundation0D0VAH_tKF', 
                        '_$s18AAAFoundationSwift13EncryptedDataVMa', '_$s18AAAFoundationSwift13EncryptedDataVMn', 
                        '_$s18AAAFoundationSwift13EncryptedDataVN', '_$s18AAAFoundationSwift13EncryptedDataVSEAAMc', 
-                       '_$s18AAAFoundationSwift13EncryptedDataVSeAAMc', '_$s18AAAFoundationSwift13HashAlgorithmO2eeoiySbAC_ACtFZ', 
-                       '_$s18AAAFoundationSwift13HashAlgorithmO4hash4intoys6HasherVz_tF', 
-                       '_$s18AAAFoundationSwift13HashAlgorithmO6sha256yA2CmFWC', 
-                       '_$s18AAAFoundationSwift13HashAlgorithmO9hashValueSivg', '_$s18AAAFoundationSwift13HashAlgorithmO9hashValueSivpMV', 
-                       '_$s18AAAFoundationSwift13HashAlgorithmOMa', '_$s18AAAFoundationSwift13HashAlgorithmOMn', 
-                       '_$s18AAAFoundationSwift13HashAlgorithmON', '_$s18AAAFoundationSwift13HashAlgorithmOSHAAMc', 
-                       '_$s18AAAFoundationSwift13HashAlgorithmOSQAAMc', '_$s18AAAFoundationSwift13HmacAlgorithmO2eeoiySbAC_ACtFZ', 
-                       '_$s18AAAFoundationSwift13HmacAlgorithmO3md5yA2CmFWC', '_$s18AAAFoundationSwift13HmacAlgorithmO4hash4intoys6HasherVz_tF', 
-                       '_$s18AAAFoundationSwift13HmacAlgorithmO4sha1yA2CmFWC', '_$s18AAAFoundationSwift13HmacAlgorithmO6sha224yA2CmFWC', 
-                       '_$s18AAAFoundationSwift13HmacAlgorithmO6sha256yA2CmFWC', 
-                       '_$s18AAAFoundationSwift13HmacAlgorithmO6sha384yA2CmFWC', 
-                       '_$s18AAAFoundationSwift13HmacAlgorithmO6sha512yA2CmFWC', 
-                       '_$s18AAAFoundationSwift13HmacAlgorithmO9hashValueSivg', '_$s18AAAFoundationSwift13HmacAlgorithmO9hashValueSivpMV', 
-                       '_$s18AAAFoundationSwift13HmacAlgorithmOMa', '_$s18AAAFoundationSwift13HmacAlgorithmOMn', 
-                       '_$s18AAAFoundationSwift13HmacAlgorithmON', '_$s18AAAFoundationSwift13HmacAlgorithmOSHAAMc', 
-                       '_$s18AAAFoundationSwift13HmacAlgorithmOSQAAMc', '_$s18AAAFoundationSwift13MessageSenderC4send_10completionyx_ys6ResultOy12ResponseTypeQzs5Error_pGctAA0C0RzlFTj', 
+                       '_$s18AAAFoundationSwift13EncryptedDataVSeAAMc', '_$s18AAAFoundationSwift13MessageSenderC4send_10completionyx_ys6ResultOy12ResponseTypeQzs5Error_pGctAA0C0RzlFTj', 
                        '_$s18AAAFoundationSwift13MessageSenderC4send_10completionyx_ys6ResultOy12ResponseTypeQzs5Error_pGctAA0C0RzlFTq', 
                        '_$s18AAAFoundationSwift13MessageSenderC4sendy12ResponseTypeQzxYaKAA0C0RzlFTj', 
                        '_$s18AAAFoundationSwift13MessageSenderC4sendy12ResponseTypeQzxYaKAA0C0RzlFTjTu', 

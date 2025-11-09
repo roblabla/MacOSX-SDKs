@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DEE5381F-45BE-3377-A333-708F4A151343
+    value:           E71ACB66-5166-3AE1-8652-95C87B7DB917
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2FCF7F18-7069-3C1D-88B4-6A911D3DFC1A
+    value:           F2E2FECE-DB03-3014-BB43-E92BEB8670BB
 install-name:    '/usr/lib/libmdns.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _DNSComputeDNSKeyTag, _DNSMessageCollapse, _DNSMessageExtractDomainName, 
                        _DNSMessageExtractDomainNameString, _DNSMessageExtractQuestion, 
                        _DNSMessageExtractRecord, _DNSMessageGetAnswerSection, _DNSMessageGetOptRecord, 

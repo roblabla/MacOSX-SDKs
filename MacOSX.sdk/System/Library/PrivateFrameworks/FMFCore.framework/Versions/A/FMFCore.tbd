@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4A6821A4-8164-3E66-8685-7554BB37AECF
+    value:           C8ECDD73-0CCE-3C12-BC41-6F94FA07525A
   - target:          x86_64-maccatalyst
-    value:           4A6821A4-8164-3E66-8685-7554BB37AECF
+    value:           C8ECDD73-0CCE-3C12-BC41-6F94FA07525A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FBB3F5C8-07FF-30EE-854E-2E3CC5BC5F7E
+    value:           6FF2E555-1574-3BDF-B0BE-6993C2002C34
   - target:          arm64e-maccatalyst
-    value:           FBB3F5C8-07FF-30EE-854E-2E3CC5BC5F7E
+    value:           6FF2E555-1574-3BDF-B0BE-6993C2002C34
 install-name:    '/System/Library/PrivateFrameworks/FMFCore.framework/Versions/A/FMFCore'
 swift-abi-version: 7
 allowable-clients:
@@ -188,7 +188,11 @@ exports:
                        '_$s7FMFCore11FMFFeaturesVs9OptionSetAAMc', '_$s7FMFCore11FMFLocationV10identifierSSSgvg', 
                        '_$s7FMFCore11FMFLocationV10identifierSSSgvpMV', '_$s7FMFCore11FMFLocationV12displayLabelSSSgvg', 
                        '_$s7FMFCore11FMFLocationV12displayLabelSSSgvpMV', '_$s7FMFCore11FMFLocationV12isInaccurateSbvg', 
-                       '_$s7FMFCore11FMFLocationV12isInaccurateSbvpMV', '_$s7FMFCore11FMFLocationV13poiIdentifier10Foundation4UUIDVSgvM', 
+                       '_$s7FMFCore11FMFLocationV12isInaccurateSbvpMV', '_$s7FMFCore11FMFLocationV12isLivePausedSbvM', 
+                       '_$s7FMFCore11FMFLocationV12isLivePausedSbvg', '_$s7FMFCore11FMFLocationV12isLivePausedSbvpMV', 
+                       '_$s7FMFCore11FMFLocationV12isLivePausedSbvs', '_$s7FMFCore11FMFLocationV13isLivePendingSbvM', 
+                       '_$s7FMFCore11FMFLocationV13isLivePendingSbvg', '_$s7FMFCore11FMFLocationV13isLivePendingSbvpMV', 
+                       '_$s7FMFCore11FMFLocationV13isLivePendingSbvs', '_$s7FMFCore11FMFLocationV13poiIdentifier10Foundation4UUIDVSgvM', 
                        '_$s7FMFCore11FMFLocationV13poiIdentifier10Foundation4UUIDVSgvg', 
                        '_$s7FMFCore11FMFLocationV13poiIdentifier10Foundation4UUIDVSgvpMV', 
                        '_$s7FMFCore11FMFLocationV13poiIdentifier10Foundation4UUIDVSgvs', 
@@ -331,8 +335,11 @@ exports:
                        '_$s7FMFCore13FMNetworkUtilCfD', '_$s7FMFCore13FMNetworkUtilCfd', 
                        '_$s7FMFCore14FMFConfigValueO03rawC0ACSgSS_tcfC', '_$s7FMFCore14FMFConfigValueO03rawC0SSvg', 
                        '_$s7FMFCore14FMFConfigValueO03rawC0SSvpMV', '_$s7FMFCore14FMFConfigValueO14fenceSetupLinkyA2CmFWC', 
+                       '_$s7FMFCore14FMFConfigValueO20liveTimeoutThresholdyA2CmFWC', 
                        '_$s7FMFCore14FMFConfigValueO21liveAnimationIntervalyA2CmFWC', 
+                       '_$s7FMFCore14FMFConfigValueO24reverseGeocodingThrottleyA2CmFWC', 
                        '_$s7FMFCore14FMFConfigValueO25inaccuracyRadiusThresholdyA2CmFWC', 
+                       '_$s7FMFCore14FMFConfigValueO29fallbackToLegacyIntervalInSecyA2CmFWC', 
                        '_$s7FMFCore14FMFConfigValueOMa', '_$s7FMFCore14FMFConfigValueOMn', 
                        '_$s7FMFCore14FMFConfigValueON', '_$s7FMFCore14FMFConfigValueOSHAAMc', 
                        '_$s7FMFCore14FMFConfigValueOSQAAMc', '_$s7FMFCore14FMFConfigValueOSYAAMc', 
@@ -528,6 +535,8 @@ exports:
                        '_$s7FMFCore18FMFManagerDelegateP10fmfManager_35friendsOperationsRestrictionChangedyAA0B0C_SbtFTq', 
                        '_$s7FMFCore18FMFManagerDelegateP23fmfManagerDidInitializeyyAA0B0CFTj', 
                        '_$s7FMFCore18FMFManagerDelegateP23fmfManagerDidInitializeyyAA0B0CFTq', 
+                       '_$s7FMFCore18FMFManagerDelegateP31fmfManagerDidCompleteFirstFetchyyAA0B0CFTj', 
+                       '_$s7FMFCore18FMFManagerDelegateP31fmfManagerDidCompleteFirstFetchyyAA0B0CFTq', 
                        '_$s7FMFCore18FMFManagerDelegatePAAE10fmfManager_10didReceive10fromServeryAA0B0C_SayAA9FMFDeviceVGSbtF', 
                        '_$s7FMFCore18FMFManagerDelegatePAAE10fmfManager_10didReceive10fromServeryAA0B0C_SayAA9FMFFriendVGSbtF', 
                        '_$s7FMFCore18FMFManagerDelegatePAAE10fmfManager_10didReceive3foryAA0B0C_AA16FMFActionURLInfoVSg10Foundation3URLVtF', 
@@ -542,6 +551,7 @@ exports:
                        '_$s7FMFCore18FMFManagerDelegatePAAE10fmfManager_21initializationDidFailyAA0B0C_s5Error_pSgtF', 
                        '_$s7FMFCore18FMFManagerDelegatePAAE10fmfManager_35friendsOperationsRestrictionChangedyAA0B0C_SbtF', 
                        '_$s7FMFCore18FMFManagerDelegatePAAE23fmfManagerDidInitializeyyAA0B0CF', 
+                       '_$s7FMFCore18FMFManagerDelegatePAAE31fmfManagerDidCompleteFirstFetchyyAA0B0CF', 
                        '_$s7FMFCore18FMFManagerDelegateTL', '_$s7FMFCore19FMFAddressLevelTypeO4cityyA2CmFWC', 
                        '_$s7FMFCore19FMFAddressLevelTypeO5stateyA2CmFWC', '_$s7FMFCore19FMFAddressLevelTypeO6streetyA2CmFWC', 
                        '_$s7FMFCore19FMFAddressLevelTypeO7countryyA2CmFWC', '_$s7FMFCore19FMFAddressLevelTypeO7unknownyA2CmFWC', 
@@ -773,12 +783,13 @@ exports:
                        '_$s7FMFCore23FMFManagerConfigurationC15preferredLocale10Foundation0E0VvpMV', 
                        '_$s7FMFCore23FMFManagerConfigurationC16snapshotHandlersAA011FMFSnapshotE0CSgvg', 
                        '_$s7FMFCore23FMFManagerConfigurationC16snapshotHandlersAA011FMFSnapshotE0CSgvpMV', 
-                       '_$s7FMFCore23FMFManagerConfigurationC17enabledSubsystems15preferredLocale16snapshotHandlers17useOptimizedFetchAcA0B9SubsystemV_10Foundation0G0VAA011FMFSnapshotI0CSgSbtcfC', 
+                       '_$s7FMFCore23FMFManagerConfigurationC17enabledSubsystems15preferredLocale14cacheDirectory8useCache16snapshotHandlers0J14OptimizedFetchAcA0B9SubsystemV_10Foundation0G0VSSSbAA011FMFSnapshotM0CSgSbtcfC', 
                        '_$s7FMFCore23FMFManagerConfigurationC17enabledSubsystemsAA0B9SubsystemVvg', 
                        '_$s7FMFCore23FMFManagerConfigurationC17enabledSubsystemsAA0B9SubsystemVvpMV', 
                        '_$s7FMFCore23FMFManagerConfigurationC17useOptimizedFetchSbvg', 
                        '_$s7FMFCore23FMFManagerConfigurationC17useOptimizedFetchSbvpMV', 
-                       '_$s7FMFCore23FMFManagerConfigurationC7defaultACvgZ', '_$s7FMFCore23FMFManagerConfigurationCMa', 
+                       '_$s7FMFCore23FMFManagerConfigurationC7defaultACvgZ', '_$s7FMFCore23FMFManagerConfigurationC8useCacheSbvg', 
+                       '_$s7FMFCore23FMFManagerConfigurationC8useCacheSbvpMV', '_$s7FMFCore23FMFManagerConfigurationCMa', 
                        '_$s7FMFCore23FMFManagerConfigurationCMm', '_$s7FMFCore23FMFManagerConfigurationCMn', 
                        '_$s7FMFCore23FMFManagerConfigurationCMo', '_$s7FMFCore23FMFManagerConfigurationCMu', 
                        '_$s7FMFCore23FMFManagerConfigurationCN', '_$s7FMFCore23FMFManagerConfigurationCfD', 
@@ -1037,7 +1048,10 @@ exports:
                        '_$s7FMFCore9FMFFriendV13favoriteOrderSivg', '_$s7FMFCore9FMFFriendV13favoriteOrderSivpMV', 
                        '_$s7FMFCore9FMFFriendV14contactHandlesShySSGvg', '_$s7FMFCore9FMFFriendV14contactHandlesShySSGvpMV', 
                        '_$s7FMFCore9FMFFriendV15optedNotToShareSbSgvg', '_$s7FMFCore9FMFFriendV15optedNotToShareSbSgvpMV', 
+                       '_$s7FMFCore9FMFFriendV15pushIdentifiersSaySSGSgvg', '_$s7FMFCore9FMFFriendV15pushIdentifiersSaySSGSgvpMV', 
                        '_$s7FMFCore9FMFFriendV16debugDescriptionSSvg', '_$s7FMFCore9FMFFriendV16debugDescriptionSSvpMV', 
+                       '_$s7FMFCore9FMFFriendV16fallbackToLegacySbvM', '_$s7FMFCore9FMFFriendV16fallbackToLegacySbvg', 
+                       '_$s7FMFCore9FMFFriendV16fallbackToLegacySbvpMV', '_$s7FMFCore9FMFFriendV16fallbackToLegacySbvs', 
                        '_$s7FMFCore9FMFFriendV16relationshipTypeAA015FMFRelationshipD0Vvg', 
                        '_$s7FMFCore9FMFFriendV16relationshipTypeAA015FMFRelationshipD0VvpMV', 
                        '_$s7FMFCore9FMFFriendV18locationAlertsOnMeSayAA16FMFLocationAlertVGSgvg', 
@@ -1048,7 +1062,9 @@ exports:
                        '_$s7FMFCore9FMFFriendV19pendingUpdateReasonAA010FMFPendingdE0OSgvs', 
                        '_$s7FMFCore9FMFFriendV22locationAlertsOnFriendSayAA16FMFLocationAlertVGSgvg', 
                        '_$s7FMFCore9FMFFriendV22locationAlertsOnFriendSayAA16FMFLocationAlertVGSgvpMV', 
-                       '_$s7FMFCore9FMFFriendV26supportsProactiveLocationsSbSgvg', 
+                       '_$s7FMFCore9FMFFriendV23fallbackToLegacyAllowedSbSgvM', '_$s7FMFCore9FMFFriendV23fallbackToLegacyAllowedSbSgvg', 
+                       '_$s7FMFCore9FMFFriendV23fallbackToLegacyAllowedSbSgvpMV', 
+                       '_$s7FMFCore9FMFFriendV23fallbackToLegacyAllowedSbSgvs', '_$s7FMFCore9FMFFriendV26supportsProactiveLocationsSbSgvg', 
                        '_$s7FMFCore9FMFFriendV26supportsProactiveLocationsSbSgvpMV', 
                        '_$s7FMFCore9FMFFriendV2eeoiySbAC_ACtFZ', '_$s7FMFCore9FMFFriendV30supportsShallowOrLiveLocationsSbSgvg', 
                        '_$s7FMFCore9FMFFriendV30supportsShallowOrLiveLocationsSbSgvpMV', 
@@ -1074,7 +1090,7 @@ exports:
                        '_$s7FMFCore9FMFMyInfoVMn', '_$s7FMFCore9FMFMyInfoVN', '_$s7FMFCore9FMFMyInfoVSEAAMc', 
                        '_$s7FMFCore9FMFMyInfoVSQAAMc', '_$s7FMFCore9FMFMyInfoVSeAAMc', 
                        '_$s7FMFCore9FMFMyInfoVs28CustomDebugStringConvertibleAAMc', 
-                       '_$s7Request7FMFCore21FMImageCacheOperationPTl' ]
+                       '_$s7Request7FMFCore21FMImageCacheOperationPTl', '_$sSo10CLLocationC7FMFCoreE12fmifIsNearBy_25inBTRangeDistanceInMetersSbAB_SdtF' ]
     objc-classes:    [ _TtC7FMFCore13FMFCoreHelper, _TtC7FMFCore17FMPhoneNumberUtil, 
                        _TtC7FMFCore22FMAPSConnectionHandler, _TtC7FMFCore23FMFMyLocationController, 
                        _TtC7FMFCore25FMFGenericResponseHandler ]

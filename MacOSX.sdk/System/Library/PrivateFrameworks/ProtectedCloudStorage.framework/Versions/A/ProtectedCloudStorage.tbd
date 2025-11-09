@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           17759706-4E26-3B2D-8B0A-54DECEB3831C
+    value:           F760FB04-2B82-344B-A785-0623668EF867
   - target:          x86_64-maccatalyst
-    value:           17759706-4E26-3B2D-8B0A-54DECEB3831C
+    value:           F760FB04-2B82-344B-A785-0623668EF867
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AFFD5151-685C-3CDD-B062-687DB27A0EC9
+    value:           0B629FDD-C8C2-3A4B-B6DA-912DC3985D0B
   - target:          arm64e-maccatalyst
-    value:           AFFD5151-685C-3CDD-B062-687DB27A0EC9
+    value:           0B629FDD-C8C2-3A4B-B6DA-912DC3985D0B
 install-name:    '/System/Library/PrivateFrameworks/ProtectedCloudStorage.framework/Versions/A/ProtectedCloudStorage'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -76,8 +76,8 @@ exports:
                        _PCSIdentityCreateService, _PCSIdentityCreateSignature, _PCSIdentityCreateWithExportedPrivateKey, 
                        _PCSIdentityCreateWithPrivateKeyV1, _PCSIdentityGetCDPStatus, 
                        _PCSIdentityGetCreationTime, _PCSIdentityGetKeyID, _PCSIdentityGetPrivateKey, 
-                       _PCSIdentityGetPublicKey, _PCSIdentityGetService, _PCSIdentityGetServiceID, 
-                       _PCSIdentityGetServiceName, _PCSIdentityGetServiceStatus, 
+                       _PCSIdentityGetPublicKey, _PCSIdentityGetService, _PCSIdentityGetServiceAccessGroup, 
+                       _PCSIdentityGetServiceID, _PCSIdentityGetServiceName, _PCSIdentityGetServiceStatus, 
                        _PCSIdentityGetServiceViewHint, _PCSIdentityGetTypeID, _PCSIdentityIsFullManatee, 
                        _PCSIdentityIsNewManatee, _PCSIdentityIsPartial, _PCSIdentityLegacySetup, 
                        _PCSIdentityMasterCopyParentKeyID, _PCSIdentityMigrateCloseDoor, 
@@ -125,15 +125,17 @@ exports:
                        _PCSRestoreCKBackupWithCompletion, _PCSServiceIdentityCopyExportedPublicKey, 
                        _PCSServiceIdentityCopyPublicKeyInfo, _PCSServiceIdentityCopyUnwrappedKey, 
                        _PCSServiceItemAllowKeyExportByIndex, _PCSServiceItemAllowSyntheticManateeSharing, 
-                       _PCSServiceItemCanRoll, _PCSServiceItemEscrowManateeIdentityByName, 
-                       _PCSServiceItemGetAccessClassByName, _PCSServiceItemGetCKKSViewByName, 
-                       _PCSServiceItemGetFlagsByName, _PCSServiceItemGetIndexByName, 
-                       _PCSServiceItemGetNameByIndex, _PCSServiceItemGetNumberByIndex, 
-                       _PCSServiceItemGetNumberByName, _PCSServiceItemGetRollIntervalByName, 
-                       _PCSServiceItemGetTypeID, _PCSServiceItemGetViewHintByIndex, 
-                       _PCSServiceItemGetViewHintByName, _PCSServiceItemRequireAuthorship, 
-                       _PCSServiceItemTypeIsManatee, _PCSServiceItemTypeIsShareableManatee, 
-                       _PCSServiceItemsCount, _PCSServiceItemsCountByFlags, _PCSServiceItemsGetCFArrayOfNames, 
+                       _PCSServiceItemAnonymousSharingByIndex, _PCSServiceItemCanRoll, 
+                       _PCSServiceItemEscrowManateeIdentityByName, _PCSServiceItemGetAccessClassByName, 
+                       _PCSServiceItemGetAccessGroupByIndex, _PCSServiceItemGetAccessGroupByName, 
+                       _PCSServiceItemGetCKKSViewByName, _PCSServiceItemGetFlagsByName, 
+                       _PCSServiceItemGetIndexByName, _PCSServiceItemGetNameByIndex, 
+                       _PCSServiceItemGetNumberByIndex, _PCSServiceItemGetNumberByName, 
+                       _PCSServiceItemGetRollIntervalByName, _PCSServiceItemGetTypeID, 
+                       _PCSServiceItemGetViewHintByIndex, _PCSServiceItemGetViewHintByName, 
+                       _PCSServiceItemRequireAuthorship, _PCSServiceItemTypeIsManatee, 
+                       _PCSServiceItemTypeIsShareableManatee, _PCSServiceItemsCount, 
+                       _PCSServiceItemsCountByFlags, _PCSServiceItemsGetCFArrayOfNames, 
                        _PCSServiceItemsGetCFArraySortedByIndex, _PCSServiceItemsGetEachName, 
                        _PCSServiceItemsGetInfoSortedByIndex, _PCSServiceItemsInfoIteration, 
                        _PCSSetKeyRollingFlags, _PCSShareProtectionAddKeyWithAttributes, 
@@ -217,7 +219,7 @@ exports:
                        _kPCSServiceBulkMail, _kPCSServiceCloudKitApple, _kPCSServiceContinuity, 
                        _kPCSServiceEscrow, _kPCSServiceFDE, _kPCSServiceFeldspar, 
                        _kPCSServiceGaming, _kPCSServiceHealthSync, _kPCSServiceHyperion, 
-                       _kPCSServiceKeyboardServices, _kPCSServiceKeyboardServicesSecure, 
+                       _kPCSServiceKTAccountKey, _kPCSServiceKeyboardServices, _kPCSServiceKeyboardServicesSecure, 
                        _kPCSServiceKnowledgestore, _kPCSServiceLiverpool, _kPCSServiceMaster, 
                        _kPCSServiceName, _kPCSServiceNews, _kPCSServiceNewsContent, 
                        _kPCSServiceNoTest, _kPCSServiceNotes, _kPCSServicePianoMover, 
@@ -239,10 +241,10 @@ exports:
                        _kPCSSetupRecoverMode, _kPCSSetupRegistryCleanup, _kPCSSetupRollIdentity, 
                        _kPCSSetupService, _kPCSSetupStatistics, _kPCSSetupStingray, 
                        _kPCSSetupStingrayLargeDataSupport, _kPCSSetupStingrayUpdateSupport, 
-                       _kPCSSetupTimeout, _kPCSSetupUsername, _kPCSSetupiCloudEnvironment, 
-                       _kPCSSiriKnowledge2, _kPCSSiriProfile2, _kPCSWalletPaymentServices2, 
-                       _kPCSiCDPEnabled, _kPCSiCDPUseStingray, _kPCSiCloudServiceMarkerName, 
-                       _kPCSiCloudServiceName, _pcsLogObjForScope ]
+                       _kPCSSetupSyncIdentity, _kPCSSetupTimeout, _kPCSSetupUsername, 
+                       _kPCSSetupiCloudEnvironment, _kPCSSiriKnowledge2, _kPCSSiriProfile2, 
+                       _kPCSWalletPaymentServices2, _kPCSiCDPEnabled, _kPCSiCDPUseStingray, 
+                       _kPCSiCloudServiceMarkerName, _kPCSiCloudServiceName, _pcsLogObjForScope ]
     objc-classes:    [ PCSAccountManager, PCSAnalytics, PCSCKKS, PCSCKKSCreateIdentityOperation, 
                        PCSCKKSEnsurePCSFieldsOperation, PCSCKKSFetchCurrentOperation, 
                        PCSCKKSItemModifyContext, PCSCKKSOperation, PCSCKKSSyncViewOperation, 

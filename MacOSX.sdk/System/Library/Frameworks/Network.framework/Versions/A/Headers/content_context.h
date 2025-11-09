@@ -164,13 +164,13 @@ nw_content_context_set_relative_priority(nw_content_context_t context,
  *		completed. If any of the antecedents fail with an error, this content will
  *		fail as well.
  * @param context The context object
- * @param antecendent_context A context associated with content that should precede
+ * @param antecedent_context A context associated with content that should precede
  *		this content.
  */
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 void
 nw_content_context_set_antecedent(nw_content_context_t context,
-								  _Nullable nw_content_context_t antecendent_context);
+								  _Nullable nw_content_context_t antecedent_context);
 
 /*!
  * @function nw_content_context_copy_antecedent

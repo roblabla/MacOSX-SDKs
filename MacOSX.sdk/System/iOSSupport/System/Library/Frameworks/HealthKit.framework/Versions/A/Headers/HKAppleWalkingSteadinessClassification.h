@@ -2,7 +2,7 @@
 //  HKAppleWalkingSteadinessClassification.h
 //  HealthKit
 //
-//  Copyright © 2020 Apple. All rights reserved.
+//  Copyright © 2021 Apple. All rights reserved.
 //
 
 #import <HealthKit/HKDefines.h>
@@ -27,9 +27,9 @@ typedef NS_ENUM(NSInteger, HKAppleWalkingSteadinessClassification) {
 /*!
  @abstract Determines the Apple Walking Steadiness classification for the provided Apple Walking Steadiness value.
  @param value Apple Walking Steadiness quantity with expected value between 0% and 100%.
- @param classificationOut a pointer to the classification determined for the provided value
+ @param classificationOut A pointer to the classification determined for the provided value.
  @param errorOut A pointer to an error describing why an unknown classification was returned.
- @return YES if the classification was successful. NO otherwise if the provided value could not be classified.
+ @return YES if the classification was successful. NO otherwise, meaning the provided value could not be classified.
  */
 HK_EXTERN BOOL HKAppleWalkingSteadinessClassificationForQuantity(HKQuantity *value, HKAppleWalkingSteadinessClassification *classificationOut, NSError **errorOut) API_AVAILABLE(ios(15.0), watchos(8.0)) NS_REFINED_FOR_SWIFT;
 

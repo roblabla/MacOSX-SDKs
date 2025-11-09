@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           81B31D63-E401-3D83-8ACB-C457731E66A3
+    value:           4E44E496-2B58-3DC8-9564-985A8E93A273
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F46DA9F0-777B-3321-880D-D7AD36927B78
+    value:           52FDD530-578D-364D-8ED6-7E2BEF0CB1A7
 install-name:    '/System/Library/PrivateFrameworks/DFRFoundation.framework/Versions/A/DFRFoundation'
-current-version: 269
+current-version: 271
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DFRAccessibilityRemoteUIElementsChangedNotification, _DFRControlStripPlayPauseButtonIdentifier, 
@@ -66,11 +66,12 @@ exports:
                        _DFRUpdateAccessibilityCursor, _DFRVisiblePlacementsChangedNotification, 
                        __DFRConnectionReconnect, __DFRControlStripInitialize, __DFRControlStripPlacementIsVisible, 
                        __DFRControlStripRegisterFocusChangeHandler, __DFRControlStripRegisterPresenceHandler, 
-                       __DFRControlStripSetExpanded, __DFRGetBezelBrightness, __DFRGetColorTemperature, 
-                       __DFRGetGlyphBrightness, __DFRGetServerPID, __DFRGetTouchBarAgentPID, 
-                       __DFRPresentationModeDefaultFNMode, __DFRPresentationModeFNBehaviors, 
-                       __DFRPresentationModeFromKey, __DFRPresentationModeGetActiveMode, 
-                       __DFRPresentationModeKey, __DFRRegisterSystemEventHandler, 
-                       __DFRSystemAppButtonChanged, __DFRSystemButtonClose, __DFRSystemPresenceEnded ]
+                       __DFRControlStripSetExpanded, __DFRForceScreenLock, __DFRGetBezelBrightness, 
+                       __DFRGetColorTemperature, __DFRGetGlyphBrightness, __DFRGetServerPID, 
+                       __DFRGetTouchBarAgentPID, __DFRPresentationModeDefaultFNMode, 
+                       __DFRPresentationModeFNBehaviors, __DFRPresentationModeFromKey, 
+                       __DFRPresentationModeGetActiveMode, __DFRPresentationModeKey, 
+                       __DFRRegisterSystemEventHandler, __DFRSystemAppButtonChanged, 
+                       __DFRSystemButtonClose, __DFRSystemPresenceEnded ]
     objc-classes:    [ DFRAccessibilityRemoteUIElement ]
 ...

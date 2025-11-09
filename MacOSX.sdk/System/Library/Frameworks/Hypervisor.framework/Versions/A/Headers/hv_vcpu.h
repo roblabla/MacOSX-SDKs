@@ -313,8 +313,7 @@ hv_vcpu_set_vtimer_mask(hv_vcpu_t vcpu, bool vtimer_is_masked);
  * @param      vcpu  ID of the vCPU instance.
  * @param      vtimer_offset Pointer to VTimer offset. (Written on success).
  * @result     0 on success or error code.
- * @discussion
- *             This corresponds to the CNTVOFF_EL2 register.
+ * @seealso    hv_vcpu_set_vtimer_offset
  */
 API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
 OS_EXPORT
@@ -328,7 +327,9 @@ hv_vcpu_get_vtimer_offset(hv_vcpu_t vcpu, uint64_t *vtimer_offset);
  * @param      vtimer_offset New VTimer offset.
  * @result     0 on success or error code.
  * @discussion
- *             This corresponds to the CNTVOFF_EL2 register.
+ *             This specifies how the CNTVCT_EL0 register relates to mach_absolute_time():
+ *
+ *             CNTVCT_EL0 = mach_absolute_time() - vtimer_offset.
  */
 API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
 OS_EXPORT

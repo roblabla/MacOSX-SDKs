@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F4B5DCC2-C12D-39CF-943D-0696AEF990EF
+    value:           34B8BF32-7D81-3E47-BDD5-5E0D7ABC904E
   - target:          x86_64-maccatalyst
-    value:           F4B5DCC2-C12D-39CF-943D-0696AEF990EF
+    value:           34B8BF32-7D81-3E47-BDD5-5E0D7ABC904E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AEBF5D4A-3C6C-3DE9-9ACE-CCCCAAC22C30
+    value:           A577227D-1372-37D3-BF14-7DEB61AFCA3E
   - target:          arm64e-maccatalyst
-    value:           AEBF5D4A-3C6C-3DE9-9ACE-CCCCAAC22C30
+    value:           A577227D-1372-37D3-BF14-7DEB61AFCA3E
 install-name:    '/System/Library/Frameworks/DeveloperToolsSupport.framework/Versions/A/DeveloperToolsSupport'
 current-version: 12
 swift-abi-version: 7

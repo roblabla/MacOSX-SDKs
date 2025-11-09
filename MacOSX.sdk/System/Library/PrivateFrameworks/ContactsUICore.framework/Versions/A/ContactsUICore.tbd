@@ -4,31 +4,30 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6E5042AA-82DE-3872-82E8-D7C409B61635
+    value:           F3B9C546-35FA-335F-8F0C-E5CD331BCB6D
   - target:          x86_64-maccatalyst
-    value:           6E5042AA-82DE-3872-82E8-D7C409B61635
+    value:           F3B9C546-35FA-335F-8F0C-E5CD331BCB6D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5E6D650D-5FC4-3434-82D7-C85A6A390818
+    value:           6F09CD5A-E7FA-31FE-B89A-8EA162C18964
   - target:          arm64e-maccatalyst
-    value:           5E6D650D-5FC4-3434-82D7-C85A6A390818
+    value:           6F09CD5A-E7FA-31FE-B89A-8EA162C18964
 install-name:    '/System/Library/PrivateFrameworks/ContactsUICore.framework/Versions/A/ContactsUICore'
-current-version: 3440
+current-version: 3448.4
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CNContactsUIErrorDialRequestKey, _CNContactsUIErrorDomain, 
                        _CNContactsUIErrorURLKey, _CNContactsUIErrorUserActivityKey, 
-                       _CNLaunchServicesAppicationDatabaseLookupEntitlement, _CNTUCallProviderIdentifierSUIUNTool, 
-                       _CNTUCallProviderIdentifierTinCan, _CNUIActivityTypeEditingContact, 
-                       _CNUIActivityTypeViewingContact, _CNUIActivityTypeViewingList, 
-                       _CNUIActivityUserInformationDisplayedContactKey, _CNUIActivityUserInformationListTopContactKey, 
-                       _CNUIActivityUserInformationSearchStringKey, _CNUIAddCircleToContextInRect, 
-                       _CNUIAddRoundedRectToContextInRect, _CNUIApplyOutlineToContext, 
-                       _CNUIBitmapContextCreate, _CNUICalculateSubRectsForOverlappingLikenesses, 
+                       _CNTUCallProviderIdentifierSUIUNTool, _CNTUCallProviderIdentifierTinCan, 
+                       _CNUIActivityTypeEditingContact, _CNUIActivityTypeViewingContact, 
+                       _CNUIActivityTypeViewingList, _CNUIActivityUserInformationDisplayedContactKey, 
+                       _CNUIActivityUserInformationListTopContactKey, _CNUIActivityUserInformationSearchStringKey, 
+                       _CNUIAddCircleToContextInRect, _CNUIAddRoundedRectToContextInRect, 
+                       _CNUIApplyOutlineToContext, _CNUIBitmapContextCreate, _CNUICalculateSubRectsForOverlappingLikenesses, 
                        _CNUICircularImageCreate, _CNUIClipContextWithCircleInRect, 
                        _CNUIClipContextWithRoundedRectInRect, _CNUIClipPathInRect, 
                        _CNUIDrawCircularImagesInRects, _CNUIDrawImagesInRects, _CNUIDrawLikenessPlatterInContext, 

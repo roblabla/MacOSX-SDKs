@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           27B4D811-949C-32FB-A01B-0D2795280266
+    value:           7049C1CB-0E37-348F-9052-71AFBEC1315E
   - target:          x86_64-maccatalyst
-    value:           27B4D811-949C-32FB-A01B-0D2795280266
+    value:           7049C1CB-0E37-348F-9052-71AFBEC1315E
   - target:          x86_64h-macos
-    value:           80E6A631-70A1-3DAE-B1DA-C8E43BBCF6FC
+    value:           93CD4039-94EF-3881-8224-4FD2F3B1A6A5
   - target:          x86_64h-maccatalyst
-    value:           80E6A631-70A1-3DAE-B1DA-C8E43BBCF6FC
+    value:           93CD4039-94EF-3881-8224-4FD2F3B1A6A5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FEA118F1-D3AA-3066-8D88-C7DB51C48817
+    value:           575A5DBF-4C4A-3FCD-8C78-5C49A1461BEA
   - target:          arm64e-maccatalyst
-    value:           FEA118F1-D3AA-3066-8D88-C7DB51C48817
+    value:           575A5DBF-4C4A-3FCD-8C78-5C49A1461BEA
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvDSP.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _vDSP_DCT_CreateSetup, _vDSP_DCT_Execute, _vDSP_DFT_CreateSetup, 
                        _vDSP_DFT_DestroySetup, _vDSP_DFT_DestroySetupD, _vDSP_DFT_Execute, 

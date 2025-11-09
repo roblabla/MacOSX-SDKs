@@ -1225,16 +1225,24 @@ Globals:
   SwiftName: CGColorSpace.acescgLinear
 - Name: kCGColorSpaceITUR_709
   SwiftName: CGColorSpace.itur_709
+- Name: kCGColorSpaceITUR_709_PQ
+  SwiftName: CGColorSpace.itur_709_PQ
 - Name: kCGColorSpaceITUR_2020
   SwiftName: CGColorSpace.itur_2020
+- Name: kCGColorSpaceITUR_2020_sRGBGamma
+  SwiftName: CGColorSpace.itur_2020_sRGBGamma
 - Name: kCGColorSpaceROMMRGB
   SwiftName: CGColorSpace.rommrgb
 - Name: kCGColorSpaceDCIP3
   SwiftName: CGColorSpace.dcip3
 - Name: kCGColorSpaceExtendedITUR_2020
   SwiftName: CGColorSpace.extendedITUR_2020
+- Name: kCGColorSpaceLinearITUR_2020
+  SwiftName: CGColorSpace.linearITUR_2020
 - Name: kCGColorSpaceExtendedLinearITUR_2020
   SwiftName: CGColorSpace.extendedLinearITUR_2020
+- Name: kCGColorSpaceLinearDisplayP3
+  SwiftName: CGColorSpace.linearDisplayP3
 - Name: kCGColorSpaceExtendedDisplayP3
   SwiftName: CGColorSpace.extendedDisplayP3
 - Name: kCGColorSpaceExtendedLinearDisplayP3

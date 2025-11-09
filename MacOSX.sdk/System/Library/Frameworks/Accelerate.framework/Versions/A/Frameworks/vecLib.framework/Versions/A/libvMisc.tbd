@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4D3D8FB1-191B-3903-893C-9FECE67C8D01
+    value:           6AE9FCA9-C250-3C2B-8DED-73CD85464E87
   - target:          x86_64-maccatalyst
-    value:           4D3D8FB1-191B-3903-893C-9FECE67C8D01
+    value:           6AE9FCA9-C250-3C2B-8DED-73CD85464E87
   - target:          x86_64h-macos
-    value:           BF5A7A34-7502-3BF1-9B7F-71CACAA73F3A
+    value:           36241909-993B-3BB6-A8F4-13AEFB991EF5
   - target:          x86_64h-maccatalyst
-    value:           BF5A7A34-7502-3BF1-9B7F-71CACAA73F3A
+    value:           36241909-993B-3BB6-A8F4-13AEFB991EF5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AC8572BE-32AF-3E06-A914-F96782FA001A
+    value:           E63F023F-903D-331B-823C-EA23842858B9
   - target:          arm64e-maccatalyst
-    value:           AC8572BE-32AF-3E06-A914-F96782FA001A
+    value:           E63F023F-903D-331B-823C-EA23842858B9
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib'
-current-version: 793
+current-version: 794.40.2
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _VVACOS, _VVACOSF, _VVACOSF_, _VVACOSH, _VVACOSHF, _VVACOSHF_, 
                        _VVACOSH_, _VVACOS_, _VVASIN, _VVASINF, _VVASINF_, _VVASINH, 

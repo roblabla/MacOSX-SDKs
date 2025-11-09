@@ -572,7 +572,7 @@
 #define	SYS_coalition_ledger 532
 #define	SYS_log_data       533
 #define	SYS_memorystatus_available_memory 534
-			/* 535  */
+#define	SYS_objc_bp_assist_cfg_np 535
 #define	SYS_shared_region_map_and_slide_2_np 536
 #define	SYS_pivot_root     537
 #define	SYS_task_inspect_for_pid 538

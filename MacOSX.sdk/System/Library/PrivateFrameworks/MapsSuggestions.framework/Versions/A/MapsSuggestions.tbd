@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7B75AE9F-58F5-3C7E-8C3C-06F1883DB8D9
+    value:           4A3C7E42-2624-3E1B-AD6E-D5013B04B170
   - target:          x86_64-maccatalyst
-    value:           7B75AE9F-58F5-3C7E-8C3C-06F1883DB8D9
+    value:           4A3C7E42-2624-3E1B-AD6E-D5013B04B170
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8366FA02-EA50-3E85-9772-D49C880857A5
+    value:           A71ABBCE-80E2-3B56-A85A-35AB1207FC61
   - target:          arm64e-maccatalyst
-    value:           8366FA02-EA50-3E85-9772-D49C880857A5
+    value:           A71ABBCE-80E2-3B56-A85A-35AB1207FC61
 install-name:    '/System/Library/PrivateFrameworks/MapsSuggestions.framework/Versions/A/MapsSuggestions'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -253,7 +253,8 @@ exports:
                        _GEOConfigMapsSuggestionsServerSideFilterEnabled, _GEOConfigMapsSuggestionsShorcutStorageMaxLoadDelay, 
                        _GEOConfigMapsSuggestionsShortcutAtMapItemEnabled, _GEOConfigMapsSuggestionsShortcutDeduperEnabled, 
                        _GEOConfigMapsSuggestionsShortcutExpirationDuration, _GEOConfigMapsSuggestionsShortcutFilterEnabled, 
-                       _GEOConfigMapsSuggestionsShortcutInitialWeight, _GEOConfigMapsSuggestionsShortcutManagerProposesHiddenSetupPlaceholders, 
+                       _GEOConfigMapsSuggestionsShortcutInitialWeight, _GEOConfigMapsSuggestionsShortcutManagerBehaviorSetupPlaceholderWhenNoContactsConsent, 
+                       _GEOConfigMapsSuggestionsShortcutManagerProposesHiddenSetupPlaceholders, 
                        _GEOConfigMapsSuggestionsShortcutMaxDistanceForETAs, _GEOConfigMapsSuggestionsShortcutMaxUpdateInterval, 
                        _GEOConfigMapsSuggestionsShortcutMaxValidDistanceForNearby, 
                        _GEOConfigMapsSuggestionsShortcutMinVisualDistance, _GEOConfigMapsSuggestionsShortcutMinVisualETA, 
@@ -380,29 +381,29 @@ exports:
                        _GEOMapItemsFromMapsSuggestionsEntry, _GEOTransportModeForTransportTypePreference, 
                        _GEOTransportModeFromGEOTransportType, _GEOTransportTypeFromGEOTransportTypePreference, 
                        _GEOTransportTypePreferenceFromGEOTransportType, _LogCategory, 
-                       _MapsSuggestionsAdvanceNow, _MapsSuggestionsAlmostSameCoordinate, 
-                       _MapsSuggestionsAlmostSameLocation, _MapsSuggestionsAlmostSameLocationDegree, 
-                       _MapsSuggestionsAtLeastOneEntryIsShortcut, _MapsSuggestionsBestConfidence, 
-                       _MapsSuggestionsBestLocation, _MapsSuggestionsBucketizedValueForType, 
-                       _MapsSuggestionsCondition, _MapsSuggestionsConfidenceDefinitelyFalse, 
-                       _MapsSuggestionsConfidenceDefinitelyTrue, _MapsSuggestionsConfidenceDontKnow, 
-                       _MapsSuggestionsConfidenceEpsilon, _MapsSuggestionsConfidenceIsAlmostEqual, 
-                       _MapsSuggestionsConfidenceLevelFromPrecent, _MapsSuggestionsConfidenceLikelyFalse, 
-                       _MapsSuggestionsConfidenceLikelyTrue, _MapsSuggestionsConfidenceToNSNumber, 
-                       _MapsSuggestionsCoordinateFromEntry, _MapsSuggestionsCoordinateFromMapItem, 
-                       _MapsSuggestionsCurrentBestLocation, _MapsSuggestionsDateFromString, 
-                       _MapsSuggestionsDateIntervalFormatter, _MapsSuggestionsDateRangeStringForDates, 
-                       _MapsSuggestionsDefaultCacheDirectory, _MapsSuggestionsDefaultCachePathForProcessName, 
-                       _MapsSuggestionsDestinationKey, _MapsSuggestionsDispatchSyncIfDifferent, 
-                       _MapsSuggestionsDistanceBetweenEntries, _MapsSuggestionsDistanceFromHereToEntry, 
-                       _MapsSuggestionsDistanceFromHereToMapItem, _MapsSuggestionsDistanceString, 
-                       _MapsSuggestionsDistanceToRouteConfidenceFactor, _MapsSuggestionsEntriesAreBothOfType, 
-                       _MapsSuggestionsEntriesAtLeastOneIsOfType, _MapsSuggestionsEntriesFromNSData, 
-                       _MapsSuggestionsEntriesShouldBeOfOneOfEachType, _MapsSuggestionsEntryFromShortcut, 
-                       _MapsSuggestionsEntryIsNearbyTransit, _MapsSuggestionsEntryTypeCouldBeShortcut, 
-                       _MapsSuggestionsEntryTypeEnumerate, _MapsSuggestionsEntryTypeFromShortcutType, 
-                       _MapsSuggestionsEntryTypeFromString, _MapsSuggestionsFakeNow, 
-                       _MapsSuggestionsFakeTimeZone, _MapsSuggestionsFlightUpdateAlreadyThere, 
+                       _MapsContactsAuthorizationGrantedNotification, _MapsSuggestionsAdvanceNow, 
+                       _MapsSuggestionsAlmostSameCoordinate, _MapsSuggestionsAlmostSameLocation, 
+                       _MapsSuggestionsAlmostSameLocationDegree, _MapsSuggestionsAtLeastOneEntryIsShortcut, 
+                       _MapsSuggestionsBestConfidence, _MapsSuggestionsBestLocation, 
+                       _MapsSuggestionsBucketizedValueForType, _MapsSuggestionsCondition, 
+                       _MapsSuggestionsConfidenceDefinitelyFalse, _MapsSuggestionsConfidenceDefinitelyTrue, 
+                       _MapsSuggestionsConfidenceDontKnow, _MapsSuggestionsConfidenceEpsilon, 
+                       _MapsSuggestionsConfidenceIsAlmostEqual, _MapsSuggestionsConfidenceLevelFromPrecent, 
+                       _MapsSuggestionsConfidenceLikelyFalse, _MapsSuggestionsConfidenceLikelyTrue, 
+                       _MapsSuggestionsConfidenceToNSNumber, _MapsSuggestionsCoordinateFromEntry, 
+                       _MapsSuggestionsCoordinateFromMapItem, _MapsSuggestionsCurrentBestLocation, 
+                       _MapsSuggestionsDateFromString, _MapsSuggestionsDateIntervalFormatter, 
+                       _MapsSuggestionsDateRangeStringForDates, _MapsSuggestionsDefaultCacheDirectory, 
+                       _MapsSuggestionsDefaultCachePathForProcessName, _MapsSuggestionsDestinationKey, 
+                       _MapsSuggestionsDispatchSyncIfDifferent, _MapsSuggestionsDistanceBetweenEntries, 
+                       _MapsSuggestionsDistanceFromHereToEntry, _MapsSuggestionsDistanceFromHereToMapItem, 
+                       _MapsSuggestionsDistanceString, _MapsSuggestionsDistanceToRouteConfidenceFactor, 
+                       _MapsSuggestionsEntriesAreBothOfType, _MapsSuggestionsEntriesAtLeastOneIsOfType, 
+                       _MapsSuggestionsEntriesFromNSData, _MapsSuggestionsEntriesShouldBeOfOneOfEachType, 
+                       _MapsSuggestionsEntryFromShortcut, _MapsSuggestionsEntryIsNearbyTransit, 
+                       _MapsSuggestionsEntryTypeCouldBeShortcut, _MapsSuggestionsEntryTypeEnumerate, 
+                       _MapsSuggestionsEntryTypeFromShortcutType, _MapsSuggestionsEntryTypeFromString, 
+                       _MapsSuggestionsFakeNow, _MapsSuggestionsFakeTimeZone, _MapsSuggestionsFlightUpdateAlreadyThere, 
                        _MapsSuggestionsGetTransportationModeDebugPanelSetting, _MapsSuggestionsIPCPayloadForNSString, 
                        _MapsSuggestionsIPCPeerIdentifier, _MapsSuggestionsIPCProcessName, 
                        _MapsSuggestionsIsAboutDate, _MapsSuggestionsIsAboutNow, _MapsSuggestionsIsExactlyNow, 
@@ -448,7 +449,7 @@ exports:
                        _MapsSuggestionsLocalizedSubtitleFormatForPortraitSiriSuggestionEntry, 
                        _MapsSuggestionsLocalizedTicketedEvent_SeatNumberString, _MapsSuggestionsLocalizedTicketedEvent_SeatRowString, 
                        _MapsSuggestionsLocalizedTicketedEvent_SectionString, _MapsSuggestionsLocalizedTitleForShortcutType, 
-                       _MapsSuggestionsLocalizedTitleFormatForEVResumeRouteEntry, 
+                       _MapsSuggestionsLocalizedTitleFormatForEVResumeRouteEntryWithChargePercentage, 
                        _MapsSuggestionsLocalizedTitleFormatForStandardResumeRouteEntry, 
                        _MapsSuggestionsLocalizedTitleFormatForVehicleSetup, _MapsSuggestionsLocalizedTitleFormatForVenueWelcomeNotification, 
                        _MapsSuggestionsLocalizedVisitedTimeAgo, _MapsSuggestionsLocalizedVisitedToday, 
@@ -505,7 +506,8 @@ exports:
                        _NSStringFromMapsSuggestionsMapItem, _NSStringFromMapsSuggestionsRemovalBehavior, 
                        _NSStringFromMapsSuggestionsShortETA, _NSStringFromMapsSuggestionsShortcutType, 
                        _NSStringFromMapsSuggestionsSignalType, __Z21MapsSuggestionsIsTrueP7NSArrayIPU35objcproto24MapsSuggestionsCondition11objc_objectE, 
-                       __ZN3MSg7jsonForEP10CLLocation, __ZN3MSg7jsonForEP12NSDictionaryIP8NSStringPU33objcproto22MapsSuggestionsAnyJSON11objc_objectE, 
+                       __Z25isAuthorizedToUseContactsv, __ZN3MSg7jsonForEP10CLLocation, 
+                       __ZN3MSg7jsonForEP12NSDictionaryIP8NSStringPU33objcproto22MapsSuggestionsAnyJSON11objc_objectE, 
                        __ZN3MSg7jsonForEP14NSDateInterval, __ZN3MSg7jsonForEP18NSAttributedString, 
                        __ZN3MSg7jsonForEP6NSDate, __ZN3MSg7jsonForEP7NSArrayIPU33objcproto22MapsSuggestionsAnyJSON11objc_objectE, 
                        __ZN3MSg7jsonForEPU33objcproto22MapsSuggestionsAnyJSON11objc_object, 

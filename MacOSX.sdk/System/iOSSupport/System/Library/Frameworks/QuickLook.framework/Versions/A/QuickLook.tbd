@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           5CD56870-006E-32D7-8CD6-E690EDDDD191
+    value:           3EB62AC1-E514-313D-88C4-A864F296A9B3
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           C677F6F4-9C65-3FE9-9C57-CC9D6B969F34
+    value:           1A8073C9-1D5B-3314-AB07-ACD477061837
 install-name:    '/System/iOSSupport/System/Library/Frameworks/QuickLook.framework/Versions/A/QuickLook'
-current-version: 844
+current-version: 849.1
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/QuickLookIosmac.framework/Versions/A/QuickLookIosmac' ]
@@ -26,17 +26,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FD15DF27-DA85-3217-BEFC-A0156A11C836
+    value:           627356ED-83AF-31C9-BF52-1C9778E438D2
   - target:          x86_64-maccatalyst
-    value:           FD15DF27-DA85-3217-BEFC-A0156A11C836
+    value:           627356ED-83AF-31C9-BF52-1C9778E438D2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ECF7AC43-8940-3EF2-B221-293229A4FB95
+    value:           AA1F3FFB-92F6-3F00-8B52-A077F526B699
   - target:          arm64e-maccatalyst
-    value:           ECF7AC43-8940-3EF2-B221-293229A4FB95
+    value:           AA1F3FFB-92F6-3F00-8B52-A077F526B699
 install-name:    '/System/Library/PrivateFrameworks/QuickLookIosmac.framework/Versions/A/QuickLookIosmac'
 current-version: 0
 exports:
@@ -193,7 +193,7 @@ exports:
                        __QLGeneratorIsFolderGeneratorAllowed, __QLGeneratorIsValid, 
                        __QLGeneratorMaxGlobalWeightIsSet, __QLGeneratorNeedsAccessToExternalResources, 
                        __QLGeneratorResetPluginCache, __QLGeneratorScore, __QLGeneratorSetMaxGlobalWeight, 
-                       __QLGeneratorSetPluginsWhiteList, __QLGeneratorSupportsSandboxing, 
+                       __QLGeneratorSetPluginsAllowList, __QLGeneratorSupportsSandboxing, 
                        __QLGlobalQuickLookPreferencesBooleanValueForKey, __QLIconCopyIconSetImageName, 
                        __QLIsOnServerSide, __QLIsRealQuickLookServer, __QLIsRunningEverythingLocally, 
                        __QLIsRunningForDebug, __QLIsUIProcess, __QLIsUsingSatellites, 

@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3AEF59E6-876D-365F-ADEB-671489C218D0
+    value:           AFE6C76A-B47A-35F5-91D0-4E9FC439E90D
   - target:          x86_64-maccatalyst
-    value:           3AEF59E6-876D-365F-ADEB-671489C218D0
+    value:           AFE6C76A-B47A-35F5-91D0-4E9FC439E90D
   - target:          arm64-macos
-    value:           DD04B7F6-1570-37D6-947F-2B47DFA4C5A3
+    value:           2EA09BDB-811B-33AA-BB58-4B53AA2DB522
   - target:          arm64-maccatalyst
-    value:           DD04B7F6-1570-37D6-947F-2B47DFA4C5A3
+    value:           2EA09BDB-811B-33AA-BB58-4B53AA2DB522
   - target:          arm64e-macos
-    value:           0A1BCAC9-FD98-3C38-BDBF-83952D424107
+    value:           09AB3723-C26D-3762-93BA-98E9C38B89C1
   - target:          arm64e-maccatalyst
-    value:           0A1BCAC9-FD98-3C38-BDBF-83952D424107
+    value:           09AB3723-C26D-3762-93BA-98E9C38B89C1
 install-name:    '/usr/lib/system/libdyld.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos ]
     symbols:         [ _dyld_shared_cache_for_each_subcache4Rosetta, _dyld_shared_subcache_get_info4Rosetta ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos, x86_64-maccatalyst, 
                        arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _NSAddImage, _NSAddLibrary, _NSAddLibraryWithSearching, _NSAddressOfSymbol, 
                        _NSCreateObjectFileImageFromFile, _NSCreateObjectFileImageFromMemory, 
@@ -86,5 +86,6 @@ exports:
                        _dyld_shared_cache_for_each_image, _dyld_shared_cache_for_file, 
                        _dyld_shared_cache_get_base_address, _dyld_shared_cache_get_mapped_size, 
                        _dyld_shared_cache_is_mapped_private, _dyld_shared_cache_iterate_text, 
-                       _dyld_shared_cache_some_image_overridden, _environ, dyld_stub_binder ]
+                       _dyld_shared_cache_pin_mapping, _dyld_shared_cache_some_image_overridden, 
+                       _dyld_shared_cache_unpin_mapping, _environ, dyld_stub_binder ]
 ...

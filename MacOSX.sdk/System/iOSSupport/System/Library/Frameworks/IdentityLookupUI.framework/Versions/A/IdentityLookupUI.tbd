@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           0F6A1DD4-4CA4-3231-A208-A08DEC5E4B03
+    value:           11D31B40-7295-30F3-B107-6EC50079C04C
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           AA8C5775-CD32-3007-A579-8201935BD15E
+    value:           DA377BC2-5A6B-3F5B-B21F-355533F752AB
 install-name:    '/System/iOSSupport/System/Library/Frameworks/IdentityLookupUI.framework/Versions/A/IdentityLookupUI'
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     objc-classes:    [ ILClassificationUIExtensionContext, ILClassificationUIExtensionHostContext, 
                        ILClassificationUIExtensionHostViewController, ILClassificationUIExtensionViewController ]
 ...

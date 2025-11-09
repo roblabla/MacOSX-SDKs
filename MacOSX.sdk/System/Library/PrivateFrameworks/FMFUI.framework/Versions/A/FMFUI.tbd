@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           94A061A5-8394-3391-A599-D19E8D2C3141
+    value:           6D18BCB8-8239-306F-8AC8-D77E9FFBFA2D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8821216B-93D3-3472-8843-2A1918692B3F
+    value:           1B7DBAC2-81FB-3ECF-B399-B1074B38C3BC
 install-name:    '/System/Library/PrivateFrameworks/FMFUI.framework/Versions/A/FMFUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

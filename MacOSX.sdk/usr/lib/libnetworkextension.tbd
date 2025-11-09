@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DE6998FC-0189-33B3-AD45-9BCD07133DBC
+    value:           93B18B67-B40E-387A-8796-F7B71B5D54A2
   - target:          x86_64-maccatalyst
-    value:           DE6998FC-0189-33B3-AD45-9BCD07133DBC
+    value:           93B18B67-B40E-387A-8796-F7B71B5D54A2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E1C15D5C-C994-3B42-9301-D4356EB3E6D2
+    value:           2F441AC2-0C57-3FF4-8BBC-24DF7FE17281
   - target:          arm64e-maccatalyst
-    value:           E1C15D5C-C994-3B42-9301-D4356EB3E6D2
+    value:           2F441AC2-0C57-3FF4-8BBC-24DF7FE17281
 install-name:    '/usr/lib/libnetworkextension.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _NEHelperTrackerAddIP, _NEHelperTrackerAddIPForAllFlows, _NEHelperTrackerAddIPWithDisposition, 
                        _NEHelperTrackerAppInfoIsBrowser, _NEHelperTrackerAppInfoSetAuditToken, 

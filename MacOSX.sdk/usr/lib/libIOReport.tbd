@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8D189BCD-2217-3EEB-BCB5-0359CEE1A311
+    value:           E63CA965-19E1-32A2-BCEF-00470AA5D12A
   - target:          x86_64-maccatalyst
-    value:           8D189BCD-2217-3EEB-BCB5-0359CEE1A311
+    value:           E63CA965-19E1-32A2-BCEF-00470AA5D12A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C2D4A950-59FB-3ED6-BFF9-13357E702BD0
+    value:           5B049D87-9C08-3BC9-9B1F-24D39E223A3F
   - target:          arm64e-maccatalyst
-    value:           C2D4A950-59FB-3ED6-BFF9-13357E702BD0
+    value:           5B049D87-9C08-3BC9-9B1F-24D39E223A3F
 install-name:    '/usr/lib/libIOReport.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -29,8 +29,8 @@ exports:
                        _IOReportCopyChannelsInCategories, _IOReportCopyChannelsInGroup, 
                        _IOReportCopyChannelsOfFormat, _IOReportCopyChannelsWithID, 
                        _IOReportCopyChannelsWithUnit, _IOReportCopyCurrentProcessName, 
-                       _IOReportCopyDriverName, _IOReportCreateAggregate, _IOReportCreateSamples, 
-                       _IOReportCreateSamplesDelta, _IOReportCreateSamplesProcessed, 
+                       _IOReportCopyDriverName, _IOReportCopyFilteredChannels, _IOReportCreateAggregate, 
+                       _IOReportCreateSamples, _IOReportCreateSamplesDelta, _IOReportCreateSamplesProcessed, 
                        _IOReportCreateSamplesRaw, _IOReportCreateSubscription, _IOReportCreateUnitInfo, 
                        _IOReportGetChannelCount, _IOReportHistogramGetBucketBounds, 
                        _IOReportHistogramGetBucketCount, _IOReportHistogramGetBucketHits, 

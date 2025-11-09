@@ -158,7 +158,7 @@ API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAIL
  *
  *  @param      request     Information for the add accessory request.
  */
-- (void)homeManager:(HMHomeManager *)manager didReceiveAddAccessoryRequest:(HMAddAccessoryRequest *)request API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos) NS_SWIFT_NAME(homeManager(_:didReceiveAddAccessoryRequest:));
+- (void)homeManager:(HMHomeManager *)manager didReceiveAddAccessoryRequest:(HMAddAccessoryRequest *)request API_DEPRECATED("No longer supported", ios(13.0, 15.0)) API_UNAVAILABLE(ios, macos, watchos, tvos, macCatalyst) NS_SWIFT_NAME(homeManager(_:didReceiveAddAccessoryRequest:));
 
 @end
 

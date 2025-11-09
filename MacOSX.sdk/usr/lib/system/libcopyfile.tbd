@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           58751955-733B-3893-9923-E7D4A13F5F7C
+    value:           BF9FF1B9-A8FC-3509-AB2D-A05DEF46B1E4
   - target:          x86_64-maccatalyst
-    value:           58751955-733B-3893-9923-E7D4A13F5F7C
+    value:           BF9FF1B9-A8FC-3509-AB2D-A05DEF46B1E4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           645461A9-399D-3F1D-ADB2-45817A5A2566
+    value:           E7763C71-16EC-3BB4-847D-102DE8458168
   - target:          arm64e-maccatalyst
-    value:           645461A9-399D-3F1D-ADB2-45817A5A2566
+    value:           E7763C71-16EC-3BB4-847D-102DE8458168
 install-name:    '/usr/lib/system/libcopyfile.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

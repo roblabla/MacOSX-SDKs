@@ -37,6 +37,8 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 
 /**
  The product category the controller belongs to. This is useful for setting appropriate UI elements based on what type of device is connected.
+ 
+ @see GCProductCategories.h
  */
 @property (nonatomic, readonly) NSString *productCategory API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
 

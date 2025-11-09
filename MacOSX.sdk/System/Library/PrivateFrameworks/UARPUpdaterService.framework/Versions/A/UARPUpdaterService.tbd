@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D9362E32-5D51-3E63-A49B-4ED1DDC16AF7
+    value:           E0EC251B-70AD-3D32-B7DA-0C70690D3300
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           38D191E1-0F0C-3C48-A54B-C591875CD87B
+    value:           A85D2C00-F696-3CD4-818F-4AEF4AABB715
 install-name:    '/System/Library/PrivateFrameworks/UARPUpdaterService.framework/Versions/A/UARPUpdaterService'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _UARPUpdaterServiceVersionNumber, _UARPUpdaterServiceVersionString ]
     objc-classes:    [ UARPServiceUpdaterAccessoryMatchingRule, UARPServiceUpdaterDASMatchingRule, 
-                       UARPServiceUpdaterMatchedIOKitRule ]
+                       UARPServiceUpdaterMatchedIOKitRule, UARPUpdaterServiceBase ]
 ...

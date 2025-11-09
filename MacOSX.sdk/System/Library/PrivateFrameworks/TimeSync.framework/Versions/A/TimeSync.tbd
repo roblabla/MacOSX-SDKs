@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0741EA29-2975-3FA1-8077-933314B3AF27
+    value:           4A919E69-88DC-3059-9D05-8E1A698BD1D3
   - target:          x86_64-maccatalyst
-    value:           0741EA29-2975-3FA1-8077-933314B3AF27
+    value:           4A919E69-88DC-3059-9D05-8E1A698BD1D3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D9E3E655-AE28-3A8B-A45B-C5B835528EBE
+    value:           C57B71C3-B4CA-3D13-86CA-7DCFC3F2B37B
   - target:          arm64e-maccatalyst
-    value:           D9E3E655-AE28-3A8B-A45B-C5B835528EBE
+    value:           C57B71C3-B4CA-3D13-86CA-7DCFC3F2B37B
 install-name:    '/System/Library/PrivateFrameworks/TimeSync.framework/Versions/A/TimeSync'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FA25B66D-B9A8-3C18-B011-F0B42BE0122F
+    value:           60B8F0CD-BB4A-3179-89F9-DBE0B0F80CB9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3A7FFE3D-A79A-3AA7-8A18-74DC992BD95C
+    value:           95ABF5E5-7356-3011-96CA-9F535A41DE67
 install-name:    '/System/Library/PrivateFrameworks/SoftwareUpdate.framework/Versions/A/SoftwareUpdate'
 current-version: 747
 exports:
@@ -39,17 +39,19 @@ exports:
                        _SUDailyTimeInterval, _SUDebugLoggingEnabled, _SUDebugSettingEnabled, 
                        _SUDebugSkipPostLogoutProgress, _SUDebugSkipPostLogoutReboot, 
                        _SUDefaultScanInterval, _SUDisableAppleSoftwareLookupJsonDownload, 
-                       _SUEnableMobileSoftwareUpdateFlow, _SUEnableRequireLocalAuthenticationContext, 
-                       _SUError, _SUErrorDomain, _SUErrorDomainRelatedCodeKey, _SUErrorFromHttpCode, 
-                       _SUErrorInfoSpaceAvailableKey, _SUErrorInfoSpaceRequiredForInstallKey, 
-                       _SUErrorSetCurrentUpdateServerName, _SUErrorUpdateProductKeyKey, 
-                       _SUErrorUpdateServerNameKey, _SUErrorUpdateTitleKey, _SUFakeCustomerProduct, 
-                       _SUFakePreparedUpdate, _SUFakeProductionCatalog, _SUFirmwarePostInstallStatusKey, 
-                       _SUForceRequireAlternateInstaller, _SUForceRequireFullReplacement, 
-                       _SUForceRosettaVersionMismatch, _SUForceSuccessfulDownloadAndPrepare, 
-                       _SUHelperDMachServiceName, _SUHelperProxyAvailableRightsDidChangeNotification, 
-                       _SUHideCatalogEnrollment, _SUHideCatalogSelector, _SUIgnorePallasMDMFiltering, 
-                       _SUJournalEntryInstallDate, _SUJournalEntryInstallState, _SUJournalEntryIsMobileSoftwareUpdate, 
+                       _SUDoItLaterTonightAttemptsCount, _SUEnableMobileSoftwareUpdateFlow, 
+                       _SUEnableRequireLocalAuthenticationContext, _SUError, _SUErrorDomain, 
+                       _SUErrorDomainRelatedCodeKey, _SUErrorFromHttpCode, _SUErrorInfoSpaceAvailableKey, 
+                       _SUErrorInfoSpaceRequiredForInstallKey, _SUErrorSetCurrentUpdateServerName, 
+                       _SUErrorUpdateProductKeyKey, _SUErrorUpdateServerNameKey, 
+                       _SUErrorUpdateTitleKey, _SUFakeCustomerProduct, _SUFakeNoLoggedInUser, 
+                       _SUFakePreparedUpdate, _SUFakeProductionCatalog, _SUFakeSpeedyBackgroundDownload, 
+                       _SUFirmwarePostInstallStatusKey, _SUForceRequireAlternateInstaller, 
+                       _SUForceRequireFullReplacement, _SUForceRosettaVersionMismatch, 
+                       _SUForceSuccessfulDownloadAndPrepare, _SUHelperDMachServiceName, 
+                       _SUHelperProxyAvailableRightsDidChangeNotification, _SUHideCatalogEnrollment, 
+                       _SUHideCatalogSelector, _SUIgnorePallasMDMFiltering, _SUJournalEntryInstallDate, 
+                       _SUJournalEntryInstallState, _SUJournalEntryIsMobileSoftwareUpdate, 
                        _SUJournalEntryIsSoftwareUpdate, _SUJournalEntryProductKey, 
                        _SUJournalEntryReleaseNotes, _SUJournalEntryTitle, _SUJournalEntryVersion, 
                        _SULAOptionsUserId, _SULivabilityAPIBaseURL, _SULogObject, 
@@ -138,14 +140,14 @@ exports:
                        _SUStatisticsRTCPayloadKeyNotificationResponseNonRestartRequiredInstallNow, 
                        _SUStatisticsRTCPayloadKeyNotificationResponseRemindTomorrow, 
                        _SUStatisticsRTCPayloadKeyNotificationResponseRestartRequiredInstallNow, 
-                       _SUStatisticsRTCPayloadKeyNumberOfRetryAttempts, _SUStatisticsRTCPayloadKeyOperationInitiatedBy, 
-                       _SUStatisticsRTCPayloadKeyPreviousBuildVersion, _SUStatisticsRTCPayloadKeyProductID, 
-                       _SUStatisticsRTCPayloadKeyProductTitle, _SUStatisticsRTCPayloadKeyResult, 
-                       _SUStatisticsRTCPayloadKeyTimeElapsed, _SUStatisticsRTCPayloadKeyTimeElapsedSinceLastScan, 
-                       _SUURLConnectionSessionHeaderKey, _SUUpdateClientInterface, 
-                       _SUUpdateInfoDisplayName, _SUUpdateInfoDisplayVersion, _SUUpdateInfoIdentifier, 
-                       _SUUpdateInfoIsMobileSoftwareUpdate, _SUUpdateInfoProductKey, 
-                       _SUUpdateServiceInterface, _SUUpdateServiceRegularActivityDelay, 
+                       _SUStatisticsRTCPayloadKeyNotificationType, _SUStatisticsRTCPayloadKeyNumberOfRetryAttempts, 
+                       _SUStatisticsRTCPayloadKeyOperationInitiatedBy, _SUStatisticsRTCPayloadKeyPreviousBuildVersion, 
+                       _SUStatisticsRTCPayloadKeyProductID, _SUStatisticsRTCPayloadKeyProductTitle, 
+                       _SUStatisticsRTCPayloadKeyResult, _SUStatisticsRTCPayloadKeyTimeElapsed, 
+                       _SUStatisticsRTCPayloadKeyTimeElapsedSinceLastScan, _SUURLConnectionSessionHeaderKey, 
+                       _SUUpdateClientInterface, _SUUpdateInfoDisplayName, _SUUpdateInfoDisplayVersion, 
+                       _SUUpdateInfoIdentifier, _SUUpdateInfoIsMobileSoftwareUpdate, 
+                       _SUUpdateInfoProductKey, _SUUpdateServiceInterface, _SUUpdateServiceRegularActivityDelay, 
                        _SUUpdateServiceUnfinishedWorkActivityDelay, _SUUpdateServicesErrorDomain, 
                        _SUUpdateServicesStatusBytesDownloadedKey, _SUUpdateServicesStatusBytesTotalKey, 
                        _SUUpdateServicesStatusCurrentStateDownloading, _SUUpdateServicesStatusCurrentStateInstalling, 

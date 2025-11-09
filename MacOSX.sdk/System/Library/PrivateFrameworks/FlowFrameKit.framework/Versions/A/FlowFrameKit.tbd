@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1A8ECF41-B2EA-360E-BC46-F71DC0334A75
+    value:           5B054F3B-57FD-3800-89F2-D0BA9CE49CD0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7D376F5D-E933-3A4F-BB7A-34521EA7FEB3
+    value:           4B3B5302-1C3C-33E0-8EF6-CBAE26651D2F
 install-name:    '/System/Library/PrivateFrameworks/FlowFrameKit.framework/Versions/A/FlowFrameKit'
 swift-abi-version: 7
 exports:

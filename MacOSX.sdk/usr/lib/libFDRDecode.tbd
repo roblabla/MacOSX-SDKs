@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           19C68C31-8D6A-394C-B931-0B06AD3E0907
+    value:           9E03B6A5-709E-34C6-95DF-8434BB5C5FA6
   - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
+    value:           C93593A9-0CA8-3386-8727-0A4CF9D793DF
   - target:          arm64e-macos
-    value:           EE40CB71-5C69-3035-A631-4C2F8BC05D36
+    value:           6D48187E-D0F1-3647-A43E-ED7990CD041F
 install-name:    '/usr/lib/libFDRDecode.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos ]
     symbols:         [ _AMFDRDecodeCertificate, _AMFDRDecodeCheckCertRevocation, 
                        _AMFDRDecodeCheckProducerIDRevocation, _AMFDRDecodeCombined, 
                        _AMFDRDecodeEvaluateTrust, _AMFDRDecodeEvaluateTrustCombined, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           16AB3379-B79C-3C5A-BC21-BCD31205D685
+    value:           A9A96580-B02B-37CC-829F-632EEA4EB6C7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A2B6C662-6596-3649-85E4-3988C9F00797
+    value:           EEA9D8D4-6005-38B6-9E2A-09654CB554F9
 install-name:    '/usr/lib/libMemoryResourceException.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           303C9BFF-A2F6-3C19-AC4A-7C2B1BDD2F8B
+    value:           1B680C55-48C6-333F-B725-EBA2083A7347
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           D9DB4CE9-2A9A-36A4-831E-2FD9B7A08C6F
+    value:           3DE3D0A3-0697-327D-9B0D-7096EC7D5124
 install-name:    '/System/iOSSupport/System/Library/Frameworks/IntentsUI.framework/Versions/A/IntentsUI'
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _INUIRemoteViewControllerErrorDomain, _INUIVoiceShortcutExtensionItemBundleURLKey, 
                        _INUIVoiceShortcutExtensionItemSandboxExtensionDataKey, _IntentsUIVersionNumber, 
                        _IntentsUIVersionString, __INUIRemoteViewControllerErrorDomain, 

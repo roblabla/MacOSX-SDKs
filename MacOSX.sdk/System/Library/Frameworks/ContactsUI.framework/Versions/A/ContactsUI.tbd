@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           63D12019-8C52-3EAD-8D5A-21921F6D5DF6
+    value:           5191F305-5B4A-3B4E-A68E-C91B05C719E9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           84786073-F2A8-3BBB-A4B1-34DE6DA1B367
+    value:           B55669D0-CC16-353E-9B2B-3815E55ADF61
 install-name:    '/System/Library/Frameworks/ContactsUI.framework/Versions/A/ContactsUI'
-current-version: 2488
+current-version: 2498.2.1
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
@@ -36,6 +36,13 @@ exports:
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC17hostingControllerSo06NSViewH0CvpMV', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC17hostingControllerSo06NSViewH0CvsTj', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC17hostingControllerSo06NSViewH0CvsTq', 
+                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC19setIsRunningInBuddyyySbFTj', 
+                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC19setIsRunningInBuddyyySbFTq', 
+                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC26setupUserMemojiRecordsDataSDySS10Foundation0K0VGvgTj', 
+                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC26setupUserMemojiRecordsDataSDySS10Foundation0K0VGvgTq', 
+                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC26setupUserMemojiRecordsDataSDySS10Foundation0K0VGvpMV', 
+                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC29setUserSetupMemojiRecordsDatayySDySS10Foundation0L0VGFTj', 
+                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC29setUserSetupMemojiRecordsDatayySDySS10Foundation0L0VGFTq', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC8cropRectSo6CGRectVvgTj', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC8cropRectSo6CGRectVvgTq', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC8cropRectSo6CGRectVvpMV', 
@@ -60,13 +67,15 @@ exports:
                        _sCNUIConvertABPersonToCNContact ]
     objc-classes:    [ ABCNContactNameFormatter, CNAvatarCache, CNAvatarEditorViewController, 
                        CNAvatarImageLoading, CNAvatarImageLoadingOptions, CNAvatarImageRenderer, 
-                       CNAvatarImageRenderingScope, CNAvatarViewController, CNBadgingAvatarViewController, 
-                       CNCollectionViewTouchBar, CNContactAvatarNameCompositeViewController, 
-                       CNContactCardViewControlContext, CNContactCardViewController, 
-                       CNContactCardViewControllerABPersonViewMediator, CNContactCardViewControllerDataSourceDelegate, 
-                       CNContactPicker, CNContactPickerSection, CNContactPickerService, 
-                       CNContactPickerViewController, CNContactPickerViewControllerConfiguration, 
-                       CNContactUpdatesReflector, CNContactViewController, CNDelegateRetainingEditAuthorizationViewController, 
+                       CNAvatarImageRenderingScope, CNAvatarPickerUserSetupMemojiData, 
+                       CNAvatarPickerUserSetupPictureData, CNAvatarViewController, 
+                       CNBadgingAvatarViewController, CNCollectionViewTouchBar, CNContactActionsDisambiguationMenuGenerator, 
+                       CNContactAvatarNameCompositeViewController, CNContactCardViewControlContext, 
+                       CNContactCardViewController, CNContactCardViewControllerABPersonViewMediator, 
+                       CNContactCardViewControllerDataSourceDelegate, CNContactPicker, 
+                       CNContactPickerSection, CNContactPickerService, CNContactPickerViewController, 
+                       CNContactPickerViewControllerConfiguration, CNContactUpdatesReflector, 
+                       CNContactViewController, CNDelegateRetainingEditAuthorizationViewController, 
                        CNEditAuthorizationViewController, CNFamilyMemberContactsViewController, 
                        CNFamilyMemberWhitelistedContactsViewController, CNFromABCNConversions, 
                        CNFunctionBarController, CNIntegerFormatter, CNLikenessEditorBuddyController, 

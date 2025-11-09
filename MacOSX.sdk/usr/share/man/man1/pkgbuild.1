@@ -1,4 +1,4 @@
-.Dd January 19, 2021
+.Dd July 1, 2021
 .Dt pkgbuild 1 
 .Os macOS
 .\"																				NAME 
@@ -219,6 +219,36 @@ The
 option generates packages that are only compatible with
 .Cm macOS 12.0
 and above. Packages using this feature will fail to install or extract on previous releases.
+Specifying this option requires the user to pass
+.Cm [--min-os-version 12.0]
+or later to acknowledge this requirement.
+.It Cm --compression Ar compression-mode
+Allows control over the compression used for the package. This option does not
+affect the compression used for plugins or scripts. Not specifying this option will
+leave the chosen compression algorithm up to the operating system. Two
+.Ar compression-mode
+arguments are supported:
+.El
+.Bl -bullet -offset indent-two
+.It
+.Sy legacy
+forces a 10.5-compatible compression algorithm for the package.
+.It
+.Sy latest
+enables
+.Cm pkgbuild
+to automatically select newer, more efficient compression algorithms based on
+what is provided to
+.Cm [--min-os-version <version>].
+.El
+.Bl -tag
+.It Cm --min-os-version Ar os-version
+Specifying a minimum OS version allows the system to create a package with the
+latest supported features. Some features can have major benefits such as a better
+compression ratio. However, specifying a minimum version will make the package require
+that version when presented to
+.Cm productbuild(1).
+Some of the options in this tool require this argument to be provided.
 .It Cm --sign Ar identity-name
 Adds a digital signature to the resulting package. See
 .Sx SIGNED PACKAGES

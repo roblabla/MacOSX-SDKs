@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D20DB9A1-EC21-3328-84CF-80B7FBC63CF1
+    value:           65F670E1-1293-3B83-A4ED-C63D1F1427E0
   - target:          x86_64-maccatalyst
-    value:           D20DB9A1-EC21-3328-84CF-80B7FBC63CF1
+    value:           65F670E1-1293-3B83-A4ED-C63D1F1427E0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C7982865-B015-39DD-9733-47A9BDDA7A24
+    value:           3E412911-52C1-35E2-9284-1506E9018655
   - target:          arm64e-maccatalyst
-    value:           C7982865-B015-39DD-9733-47A9BDDA7A24
+    value:           3E412911-52C1-35E2-9284-1506E9018655
 install-name:    '/System/Library/PrivateFrameworks/Rapport.framework/Versions/A/Rapport'
 current-version: 0
 compatibility-version: 0

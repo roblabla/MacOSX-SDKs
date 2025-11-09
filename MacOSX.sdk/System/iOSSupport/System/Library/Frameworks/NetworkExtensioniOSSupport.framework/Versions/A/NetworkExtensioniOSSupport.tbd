@@ -3,10 +3,10 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           78888F09-1151-3ACE-90AF-03055AEF2223
+    value:           2AE88D29-689F-30D3-9807-E13308A5ED93
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A8631F8F-BB7E-37A3-A624-7AF067A94FA2
+    value:           E6218381-4E0B-3345-8DC9-CC66925A031B
 install-name:    '@rpath/NetworkExtensioniOSSupport.framework/Versions/A/NetworkExtensioniOSSupport'
 ...

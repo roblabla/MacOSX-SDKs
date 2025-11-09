@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9EB83868-9207-33F3-9DD1-0CA63AE8CA7D
+    value:           19660D96-985A-3340-B961-DE0E06270478
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D8178170-2E9A-3BE0-9581-25683EAB4E3C
+    value:           6A5EEC43-D6F5-3E21-AF8A-3128B683AFFD
 install-name:    '/System/Library/PrivateFrameworks/VoiceShortcuts.framework/Versions/A/VoiceShortcuts'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _VCAccessSyncServiceState, _VCAssertUniqueMessageTypes, _VCClearSyncServiceState, 
-                       _VCDarwinNotificationStateUserInfoKey, _VCDescriptionForChange, 
-                       _VCDescriptionForChangeType, _VCDescriptionForMessageType, 
+                       _VCDaemonXPCInterface, _VCDarwinNotificationStateUserInfoKey, 
+                       _VCDescriptionForChange, _VCDescriptionForChangeType, _VCDescriptionForMessageType, 
                        _VCGetLocalSpotlightState, _VCIntentDefinitionChangeAppInfoFilename, 
                        _VCLSDatabaseSequenceNumberKey, _VCLSDatabaseUUIDKey, _VCLatestUniqueChanges, 
                        _VCLocalSpotlightStateFileURL, _VCLocaleIsRTL, _VCNotificationTitleForTriggerWithPendingCount, 
@@ -30,27 +30,26 @@ exports:
                        _VCXPCEventStreamDistributedNotifications, _VCXPCEventTimeChange, 
                        _VCXPCEventTimezoneChange, _VoiceShortcutsVersionNumber, _VoiceShortcutsVersionString, 
                        _WFDatabaseChangesContainObjectType, _WFDialogNotificationUserInfoRunningContextKey, 
-                       _WFDialogXPCHostInterface, _WFDialogXPCInterface, _WFEnterSandbox, 
-                       _WFEventInfoKeyNewValue, _WFEventInfoKeyOldValue, _WFLogCategoryDefaultShortcuts, 
-                       _WFLogCategoryRunQueue, _WFLogCategoryUserNotificationManager, 
+                       _WFDialogXPCHostInterface, _WFDialogXPCInterface, _WFEventInfoKeyNewValue, 
+                       _WFEventInfoKeyOldValue, _WFLogCategoryApplicationTerminationMonitor, 
+                       _WFLogCategoryDefaultShortcuts, _WFLogCategoryRunQueue, _WFLogCategoryUserNotificationManager, 
                        _WFServiceEntryForWorkflow, _WFWorkflowRunCoordinatorErrorDomain, 
-                       _getWFDefaultShortcutsLogObject, _getWFRunQueueLogObject, 
-                       _getWFUserNotificationManagerLogObject ]
+                       _getWFApplicationTerminationMonitorLogObject, _getWFDefaultShortcutsLogObject, 
+                       _getWFRunQueueLogObject, _getWFUserNotificationManagerLogObject ]
     objc-classes:    [ VCCKApplicationStateObserver, VCCKShortcutSyncCoordinator, 
                        VCCKShortcutSyncService, VCCKSyncEngine, VCCoreDuetListener, 
                        VCDaemon, VCDaemonDatabaseProvider, VCDaemonSyncDataEndpoint, 
-                       VCDaemonXPCEventHandler, VCDailyMetricSubmitter, VCDatabaseChange, 
-                       VCDatabaseSyncDataHandler, VCGuardedPreferencesManager, VCIDApplicationSyncState, 
-                       VCIntentDefinitionChange, VCIntentDefinitionManager, VCIntentDefinitionSyncDataHandler, 
-                       VCIntentDefinitionSyncState, VCMetricCheckIn, VCMetricSubmitter, 
-                       VCPBChange, VCPBIntentDefinition, VCPBIntentDefinitionChange, 
-                       VCPBIntentDefinitionFile, VCPBSpotlightBookmark, VCPBSpotlightPair, 
-                       VCPBWorkflow, VCSYChangeEnumerator, VCSpotlightState, VCSpotlightSyncOperation, 
-                       VCSpotlightSyncService, VCSyncDataHandler, VCTriggerEventQueue, 
-                       VCTriggerEventRunner, VCTriggerNotificationDebouncer, VCTriggerNotificationDebouncerItem, 
-                       VCUserDefaults, VCUserNotificationManager, VCVoiceShortcutManager, 
-                       VCVoiceShortcutManagerAccessWrapper, VCWeeklyMetricSubmitter, 
-                       VCWorkflowChange, VCWorkflowSyncDataHandler, VCXPCServer, 
+                       VCDaemonXPCEventHandler, VCDailyMetricSubmitter, VCGuardedPreferencesManager, 
+                       VCIDApplicationSyncState, VCIntentDefinitionChange, VCIntentDefinitionManager, 
+                       VCIntentDefinitionSyncDataHandler, VCIntentDefinitionSyncState, 
+                       VCMetricCheckIn, VCMetricSubmitter, VCPBChange, VCPBIntentDefinition, 
+                       VCPBIntentDefinitionChange, VCPBIntentDefinitionFile, VCPBSpotlightBookmark, 
+                       VCPBSpotlightPair, VCPBWorkflow, VCSYChangeEnumerator, VCSpotlightState, 
+                       VCSpotlightSyncOperation, VCSpotlightSyncService, VCSyncDataHandler, 
+                       VCTriggerEventQueue, VCTriggerEventRunner, VCTriggerNotificationDebouncer, 
+                       VCTriggerNotificationDebouncerItem, VCUserDefaults, VCUserNotificationManager, 
+                       VCVoiceShortcutManager, VCVoiceShortcutManagerAccessWrapper, 
+                       VCWeeklyMetricSubmitter, VCXPCServer, WFApplicationTerminationMonitor, 
                        WFBiomeListener, WFDialogNotificationManager, WFDialogPresentationManager, 
                        WFOnScreenContentManager, WFPresentedDialog, WFQueuedRunRequest, 
                        WFShareSheetWorkflowProvider, WFSiriWorkflowVocabularyUpdater, 

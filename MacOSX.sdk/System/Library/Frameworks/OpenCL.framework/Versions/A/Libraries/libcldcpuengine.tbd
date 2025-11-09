@@ -3,9 +3,9 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           76572455-FE80-339C-A745-F5AEC1532AA0
+    value:           1E4992E5-F009-30A2-A0DF-C4D77016ABD7
   - target:          x86_64-maccatalyst
-    value:           76572455-FE80-339C-A745-F5AEC1532AA0
+    value:           1E4992E5-F009-30A2-A0DF-C4D77016ABD7
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/libcldcpuengine.dylib'
 current-version: 2.19
 exports:

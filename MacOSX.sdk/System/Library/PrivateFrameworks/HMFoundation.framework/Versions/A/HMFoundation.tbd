@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6ECF0C19-02E7-312E-9C13-63FAB6B430FA
+    value:           1B0DAB04-8A09-3483-93B4-D1846859E918
   - target:          x86_64-maccatalyst
-    value:           6ECF0C19-02E7-312E-9C13-63FAB6B430FA
+    value:           1B0DAB04-8A09-3483-93B4-D1846859E918
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8EDD8C71-939D-356A-B960-2181EE2DC0C3
+    value:           5557282A-CDCC-3F88-A2FD-E9433EF4E164
   - target:          arm64e-maccatalyst
-    value:           8EDD8C71-939D-356A-B960-2181EE2DC0C3
+    value:           5557282A-CDCC-3F88-A2FD-E9433EF4E164
 install-name:    '/System/Library/PrivateFrameworks/HMFoundation.framework/Versions/A/HMFoundation'
-current-version: 659
+current-version: 665.3.3
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -25,7 +25,7 @@ exports:
                        _HMFDetailedErrorsKey, _HMFDigestAlgorithmFromString, _HMFDigestAlgorithmToString, 
                        _HMFDispatchQueueName, _HMFEnabledStatusToString, _HMFEqualObjects, 
                        _HMFErrorDomain, _HMFEventDictionaryFromFormat, _HMFEventDictionaryFromFormatWithSession, 
-                       _HMFEventDictionaryFromFormatWithUUID, _HMFGetActivityIdentifier, 
+                       _HMFEventDictionaryFromFormatWithUUID, _HMFEventNameKey, _HMFGetActivityIdentifier, 
                        _HMFGetDefaultOSLogHandle, _HMFGetLogIdentifier, _HMFGetOsLogHandle, 
                        _HMFHTTPContentLengthHeaderField, _HMFHTTPContentTypeHeaderField, 
                        _HMFHTTPDateHeaderField, _HMFHTTPHostHeaderField, _HMFHTTPServerDefaultConnectionIdleTimeout, 
@@ -35,13 +35,14 @@ exports:
                        _HMFLogCategoryDefault, _HMFLogCategoryDumpState, _HMFLoggingSubsystem, 
                        _HMFMACAddressLength, _HMFMainThreadAsyncContext, _HMFMemoryMonitorProcessMemoryPressureNotification, 
                        _HMFMemoryMonitorSystemMemoryStateDidChangeNotification, _HMFMessageActivityPrefix, 
-                       _HMFMethodDescription, _HMFObjectDescription, _HMFOperatingSystemVersionCompare, 
+                       _HMFMetaEventNameKey, _HMFMetaEventServiceName, _HMFMethodDescription, 
+                       _HMFObjectDescription, _HMFOperatingSystemVersionCompare, 
                        _HMFPairingKeyLength, _HMFPowerLogEventTypeKey, _HMFPowerLogHomeKitCameraConfigurationTable, 
-                       _HMFPowerLogHomeKitHomeConfigurationTable, _HMFPowerLogHomeKitStandardEventTable, 
-                       _HMFPowerManagerBatteryLevelDidChangeNotification, _HMFPowerManagerBatteryStateDidChangeNotification, 
-                       _HMFPreferenceUpdatedNotification, _HMFProcessMemoryStateToString, 
-                       _HMFProcessMemoryStateUpdateKey, _HMFProductClassFromString, 
-                       _HMFProductClassToString, _HMFProductInfoArcherBOSVersion, 
+                       _HMFPowerLogHomeKitHomeConfigurationTable, _HMFPowerLogHomeKitRegistrationEventTable, 
+                       _HMFPowerLogHomeKitStandardEventTable, _HMFPowerManagerBatteryLevelDidChangeNotification, 
+                       _HMFPowerManagerBatteryStateDidChangeNotification, _HMFPreferenceUpdatedNotification, 
+                       _HMFProcessMemoryStateToString, _HMFProcessMemoryStateUpdateKey, 
+                       _HMFProductClassFromString, _HMFProductClassToString, _HMFProductInfoArcherBOSVersion, 
                        _HMFProductInfoArcherEOSVersion, _HMFProductInfoArcherGOSVersion, 
                        _HMFProductInfoArcherHWOSVersion, _HMFProductInfoArcherOSVersion, 
                        _HMFProductInfoAzulBOSVersion, _HMFProductInfoAzulEOSVersion, 
@@ -68,12 +69,16 @@ exports:
                        _HMFProductInfoHunterEOSVersion, _HMFProductInfoHunterGOSVersion, 
                        _HMFProductInfoHunterOSVersion, _HMFProductInfoJazzBOSVersion, 
                        _HMFProductInfoJazzFOSVersion, _HMFProductInfoJazzOSVersion, 
+                       _HMFProductInfoJupiterBOSVersion, _HMFProductInfoJupiterCOSVersion, 
                        _HMFProductInfoJupiterOSVersion, _HMFProductInfoLibertyBOSVersion, 
                        _HMFProductInfoLibertyCOSVersion, _HMFProductInfoLibertyGOSVersion, 
                        _HMFProductInfoLibertyOSVersion, _HMFProductInfoMonarchOSVersion, 
                        _HMFProductInfoPeaceBOSVersion, _HMFProductInfoPeaceCOSVersion, 
                        _HMFProductInfoPeaceGOSVersion, _HMFProductInfoPeaceOSVersion, 
-                       _HMFProductInfoSatelliteOSVersion, _HMFProductInfoSkyOSVersion, 
+                       _HMFProductInfoSatelliteBOSVersion, _HMFProductInfoSatelliteCOSVersion, 
+                       _HMFProductInfoSatelliteOSVersion, _HMFProductInfoSkyBOSVersion, 
+                       _HMFProductInfoSkyCOSVersion, _HMFProductInfoSkyOSVersion, 
+                       _HMFProductInfoStarBravoOSVersion, _HMFProductInfoStarCOSVersion, 
                        _HMFProductInfoStarOSVersion, _HMFProductInfoTigrisOSVersion, 
                        _HMFProductInfoTildenOSVersion, _HMFProductInfoTopazOSVersion, 
                        _HMFProductInfoUnionOSVersion, _HMFProductInfoWhitetailOSVersion, 
@@ -84,10 +89,10 @@ exports:
                        _HMFProductVariantToString, _HMFQOSClassFromQualityOfService, 
                        _HMFQualityOfServiceCompare, _HMFQualityOfServiceToString, 
                        _HMFRequireCurrentAsyncContext, _HMFReverseIntrinsicComparator, 
-                       _HMFSecondsFromMachTime, _HMFSystemInfoMigratingUpdatedNotification, 
+                       _HMFSecondsFromMachTime, _HMFSessionIdentifierKey, _HMFSystemInfoMigratingUpdatedNotification, 
                        _HMFSystemInfoNameNotificationKey, _HMFSystemInfoNameUpdatedNotification, 
                        _HMFSystemMemoryStateToString, _HMFSystemMemoryStateUpdateKey, 
-                       _HMFTimeIntervalDescription, _HMFWiFiManagerCurrentNetworkDidChangeNotification, 
+                       _HMFTimeIntervalDescription, _HMFTimestampKey, _HMFWiFiManagerCurrentNetworkDidChangeNotification, 
                        _HMFoundationVersionNumber, _HMFoundationVersionString, _NSOperatingSystemVersionToString, 
                        __HMFHashWithSalt, __HMFLogFormatDelimit, __HMFPreconditionFailure, 
                        __HMFThreadLocalAsyncContextPop, __HMFThreadLocalAsyncContextPush, 
@@ -125,17 +130,17 @@ exports:
                        HMFMemoryMonitor, HMFMessage, HMFMessageDestination, HMFMessageDispatcher, 
                        HMFMessageFilter, HMFMessageInternal, HMFMessagePolicy, HMFMessageTransport, 
                        HMFMutableHTTPRequest, HMFMutableHTTPResponse, HMFMutableMessage, 
-                       HMFMutableNetService, HMFMutableOrderedDictionary, HMFNetAddress, 
-                       HMFNetManager, HMFNetMonitor, HMFNetService, HMFNetServiceBrowser, 
-                       HMFNotificationCenter, HMFOSTransaction, HMFObject, HMFObjectCacheNSString, 
-                       HMFObjectCacheNSUUID, HMFObjectObserver, HMFOperation, HMFOperationBudget, 
-                       HMFOrderedDictionary, HMFPairingIdentity, HMFPairingKey, HMFPowerAssertion, 
-                       HMFPowerLogger, HMFPowerManager, HMFPreference, HMFPreferences, 
-                       HMFPrivateObjectFormatter, HMFProcessInfo, HMFProductInfo, 
-                       HMFPromise, HMFRingBuffer, HMFScheduler, HMFSoftwareVersion, 
-                       HMFStagedValue, HMFStringIndentation, HMFSystemInfo, HMFSystemPreference, 
-                       HMFTimer, HMFUnfairLock, HMFVersion, HMFWeakObject, HMFWiFiManager, 
-                       HMFWiFiManagerDataSource, HMFWiFiNetworkInfo, HMUIndent, _HMFCFHTTPServer, 
-                       __HMFMessageHandler ]
+                       HMFMutableNetService, HMFMutableOrderedDictionary, HMFMutableThreadSafeDictionary, 
+                       HMFNetAddress, HMFNetManager, HMFNetMonitor, HMFNetService, 
+                       HMFNetServiceBrowser, HMFNotificationCenter, HMFOSTransaction, 
+                       HMFObject, HMFObjectCacheNSString, HMFObjectCacheNSUUID, HMFObjectObserver, 
+                       HMFOperation, HMFOperationBudget, HMFOrderedDictionary, HMFPairingIdentity, 
+                       HMFPairingKey, HMFPowerAssertion, HMFPowerLogger, HMFPowerManager, 
+                       HMFPreference, HMFPreferences, HMFPrivateObjectFormatter, 
+                       HMFProcessInfo, HMFProductInfo, HMFPromise, HMFRingBuffer, 
+                       HMFScheduler, HMFSoftwareVersion, HMFStagedValue, HMFStringIndentation, 
+                       HMFSystemInfo, HMFSystemPreference, HMFTimer, HMFUnfairLock, 
+                       HMFVersion, HMFWeakObject, HMFWiFiManager, HMFWiFiManagerDataSource, 
+                       HMFWiFiNetworkInfo, HMUIndent, _HMFCFHTTPServer, __HMFMessageHandler ]
     objc-ivars:      [ HMFAssertion._valid ]
 ...

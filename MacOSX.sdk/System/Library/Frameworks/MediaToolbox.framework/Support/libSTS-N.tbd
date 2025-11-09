@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D68FA3A4-E2AE-32D2-8047-46D6B30F6C8A
+    value:           33451599-79E2-3A06-92DB-611E4FAF6112
   - target:          x86_64-maccatalyst
-    value:           D68FA3A4-E2AE-32D2-8047-46D6B30F6C8A
+    value:           33451599-79E2-3A06-92DB-611E4FAF6112
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0B5A5FB8-FAB2-3F2A-96CE-1FA8E16921A2
+    value:           FFA98E4A-35D1-3C8C-B410-55517FDB89FA
   - target:          arm64e-maccatalyst
-    value:           0B5A5FB8-FAB2-3F2A-96CE-1FA8E16921A2
+    value:           FFA98E4A-35D1-3C8C-B410-55517FDB89FA
 install-name:    '/System/Library/Frameworks/MediaToolbox.framework/Support/libSTS-N.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           937C5DD2-0C26-36D2-AB3C-0DBF5353CCA6
+    value:           3C9B7A94-53C9-3A29-9642-99B6E058D657
   - target:          x86_64-maccatalyst
-    value:           937C5DD2-0C26-36D2-AB3C-0DBF5353CCA6
+    value:           3C9B7A94-53C9-3A29-9642-99B6E058D657
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           72B136AD-1B19-34E3-A841-C6497626C8C8
+    value:           B4704AFD-38CD-31F0-884A-70CEAFB2FB05
   - target:          arm64e-maccatalyst
-    value:           72B136AD-1B19-34E3-A841-C6497626C8C8
+    value:           B4704AFD-38CD-31F0-884A-70CEAFB2FB05
 install-name:    '/System/Library/Frameworks/SoundAnalysis.framework/Versions/A/SoundAnalysis'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _SNClassifierIdentifierVersion1, _SNErrorDomain, _SNSoundIdentifierApplause, 
                        _SNSoundIdentifierBabble, _SNSoundIdentifierBeep, _SNSoundIdentifierBuzzer, 

@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 #define NSLAYOUTANCHOR_EXTERN extern __attribute((visibility("default")))
 #endif
 
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
+
 @class NSLayoutConstraint, NSLayoutDimension;
 
 /*
@@ -95,6 +97,7 @@ NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
 #endif // NSLAYOUTANCHOR_H
 
 @interface NSLayoutXAxisAnchor (UIViewDynamicSystemSpacingSupport)

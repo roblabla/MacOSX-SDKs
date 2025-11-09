@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8865849C-DE33-36A5-A510-EAFC06974869
+    value:           BB2243F6-1BB9-3B04-8254-4971162B2241
   - target:          x86_64-maccatalyst
-    value:           8865849C-DE33-36A5-A510-EAFC06974869
+    value:           BB2243F6-1BB9-3B04-8254-4971162B2241
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1FF3124F-2E10-3419-A446-9DCF75E29B0A
+    value:           F5407AC2-EA45-38A1-9D7E-55EDD051BB09
   - target:          arm64e-maccatalyst
-    value:           1FF3124F-2E10-3419-A446-9DCF75E29B0A
+    value:           F5407AC2-EA45-38A1-9D7E-55EDD051BB09
 install-name:    '/System/Library/PrivateFrameworks/PodcastsKit.framework/Versions/A/PodcastsKit'
 swift-abi-version: 7
 allowable-clients:
@@ -33,16 +33,16 @@ allowable-clients:
                        PodcastsDatabaseCore, PodcastsFoundation, PodcastsFoundationTests, 
                        PodcastsKit, PodcastsKitTests, PodcastsNanoPreferencesSyncClient, 
                        PodcastsNanoPreferencesSyncServer, PodcastsNotificationExtension, 
-                       PodcastsPlatformSupport, PodcastsPodcastsTodayExtension, PodcastsStoreUI, 
-                       PodcastsStoreUITests, PodcastsTVTopShelfExtension, PodcastsTestSupport, 
-                       PodcastsTests, PodcastsTestsMock, PodcastsTodayExtension, 
-                       PodcastsUI, PodcastsUITests, PodcastsUIUtil, PodcastsWidget, 
-                       SPI, SiriAudioDESPlugin, SiriAudioHeavyweightTests, SiriAudioInternal, 
-                       SiriAudioInternalTests, SiriAudioSupport, SiriAudioSupportIntegrationTests, 
-                       SiriAudioSupportTests, UnifiedSiriTest, com.apple.podcasts.DiagnosticExtension, 
-                       com.apple.podcasts.PodcastsProductPageExtension, com.apple.podcasts.SpotlightIndexExtension, 
-                       com.apple.podcasts.appremoval, iTunesPodcastLibrary, podcastsTool, 
-                       siriaudio_helper ]
+                       PodcastsPlatformSupport, PodcastsPodcastsTodayExtension, PodcastsSettingsPlugin, 
+                       PodcastsStoreUI, PodcastsStoreUITests, PodcastsTVTopShelfExtension, 
+                       PodcastsTestSupport, PodcastsTests, PodcastsTestsMock, PodcastsTodayExtension, 
+                       PodcastsUI, PodcastsUITests, PodcastsUIUtil, PodcastsUsagePlugin, 
+                       PodcastsWidget, SPI, SiriAudioDESPlugin, SiriAudioHeavyweightTests, 
+                       SiriAudioInternal, SiriAudioInternalTests, SiriAudioSupport, 
+                       SiriAudioSupportIntegrationTests, SiriAudioSupportTests, UnifiedSiriTest, 
+                       com.apple.podcasts.DiagnosticExtension, com.apple.podcasts.PodcastsProductPageExtension, 
+                       com.apple.podcasts.SpotlightIndexExtension, com.apple.podcasts.appremoval, 
+                       iTunesPodcastLibrary, podcastsTool, podcastsctl, siriaudio_helper ]
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

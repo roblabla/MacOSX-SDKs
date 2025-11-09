@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F6763FBE-38CF-3D6E-A967-CE89E75C4321
+    value:           BA695FC9-6E18-3C01-8ADC-A2093EC8BD23
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           03EC9D39-BB4C-30C1-BAA7-421C0DAF6ADF
+    value:           FDA014CD-71F3-31D9-B554-91BC2C519F95
 install-name:    '/System/Library/PrivateFrameworks/IMAPConnectionControl.framework/Versions/A/IMAPConnectionControl'
 swift-abi-version: 7
 allowable-clients:
@@ -44,11 +44,11 @@ exports:
                        '_$s21IMAPConnectionControl13ConfigurationV8endpoint7Network10NWEndpointOvg', 
                        '_$s21IMAPConnectionControl13ConfigurationV8endpoint7Network10NWEndpointOvpMV', 
                        '_$s21IMAPConnectionControl13ConfigurationVMa', '_$s21IMAPConnectionControl13ConfigurationVMn', 
-                       '_$s21IMAPConnectionControl13ConfigurationVN', '_$s21IMAPConnectionControl6EngineC04makeC14AndPersistence13configuration0dF013statusChanged7connectAC_xtAA13ConfigurationV_xy15IMAPPersistence5EventOcXEyAC6StatusVc0A018ConnectionProtocol_pSo17OS_dispatch_queueC_AP0oK0VtcSgtAA0F0RzlFZ', 
+                       '_$s21IMAPConnectionControl13ConfigurationVN', '_$s21IMAPConnectionControl6EngineC04makeC14AndPersistence13configuration0dF013statusChangedAC_xtAA13ConfigurationV_xy15IMAPPersistence5EventOcXEyAC6StatusVctAA0F0RzlFZ', 
                        '_$s21IMAPConnectionControl6EngineC11connectionsAA14ConnectionPoolCSgvpfi', 
-                       '_$s21IMAPConnectionControl6EngineC13configuration7connect8workloop10sendAction13statusChangedAcA13ConfigurationV_0A018ConnectionProtocol_pAK0lK0VcSgSo17OS_dispatch_queueC15IMAPPersistence0H2IDVAR0H0OcyAC6StatusVctcfC', 
-                       '_$s21IMAPConnectionControl6EngineC13configuration7connect8workloop10sendAction13statusChangedAcA13ConfigurationV_0A018ConnectionProtocol_pAK0lK0VcSgSo17OS_dispatch_queueC15IMAPPersistence0H2IDVAR0H0OcyAC6StatusVctcfCTq', 
-                       '_$s21IMAPConnectionControl6EngineC13configuration7connect8workloop10sendAction13statusChangedAcA13ConfigurationV_0A018ConnectionProtocol_pAK0lK0VcSgSo17OS_dispatch_queueC15IMAPPersistence0H2IDVAR0H0OcyAC6StatusVctcfc', 
+                       '_$s21IMAPConnectionControl6EngineC13configuration8workloop10sendAction13statusChangedAcA13ConfigurationV_So17OS_dispatch_queueC15IMAPPersistence0G2IDVAL0G0OcyAC6StatusVctcfC', 
+                       '_$s21IMAPConnectionControl6EngineC13configuration8workloop10sendAction13statusChangedAcA13ConfigurationV_So17OS_dispatch_queueC15IMAPPersistence0G2IDVAL0G0OcyAC6StatusVctcfCTq', 
+                       '_$s21IMAPConnectionControl6EngineC13configuration8workloop10sendAction13statusChangedAcA13ConfigurationV_So17OS_dispatch_queueC15IMAPPersistence0G2IDVAL0G0OcyAC6StatusVctcfc', 
                        '_$s21IMAPConnectionControl6EngineC14pendingUpdatesSay12IMAPBehavior6UpdateOGvpfi', 
                        '_$s21IMAPConnectionControl6EngineC18persistenceDidSendyy15IMAPPersistence5EventOF', 
                        '_$s21IMAPConnectionControl6EngineC19isProcessingUpdatesSbvpfi', 

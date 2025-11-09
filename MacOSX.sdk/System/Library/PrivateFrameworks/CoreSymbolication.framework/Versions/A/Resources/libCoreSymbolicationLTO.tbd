@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C4CBF5B3-968C-344E-B382-3ECDF2D2C617
+    value:           F7F24EA1-67B4-3827-9F52-0479E68B14C3
   - target:          x86_64-maccatalyst
-    value:           C4CBF5B3-968C-344E-B382-3ECDF2D2C617
+    value:           F7F24EA1-67B4-3827-9F52-0479E68B14C3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5C8B0F62-BDBE-3124-863B-230DCF38EF25
+    value:           DAAA750F-6A35-3BCD-A53D-EAABADEB7092
   - target:          arm64e-maccatalyst
-    value:           5C8B0F62-BDBE-3124-863B-230DCF38EF25
+    value:           DAAA750F-6A35-3BCD-A53D-EAABADEB7092
 install-name:    '/System/Library/PrivateFrameworks/CoreSymbolication.framework/Versions/A/Resources/libCoreSymbolicationLTO.dylib'
-current-version: 64550.84.1
+current-version: 64550.88.2
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

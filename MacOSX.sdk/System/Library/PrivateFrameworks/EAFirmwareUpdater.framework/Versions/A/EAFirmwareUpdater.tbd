@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B186195E-25B8-3642-A6BC-B9450393C692
+    value:           065DEF20-6177-357A-BC2D-663C9320269A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1877EAB2-27D6-3C07-BFA8-FEC8D34E52C4
+    value:           A09F142F-AD4E-3603-8D56-0C1CF690E27A
 install-name:    '/System/Library/PrivateFrameworks/EAFirmwareUpdater.framework/Versions/A/EAFirmwareUpdater'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

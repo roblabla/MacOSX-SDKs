@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           341D3B3D-04BE-3FAE-9575-328D67E0E1A1
+    value:           5A404CB1-DE34-3B51-B531-33E7A8CA83D9
   - target:          x86_64-maccatalyst
-    value:           341D3B3D-04BE-3FAE-9575-328D67E0E1A1
+    value:           5A404CB1-DE34-3B51-B531-33E7A8CA83D9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A2AC7342-3B2F-3BE2-9DDF-ADFD6F4D7314
+    value:           E84E60AA-9944-308E-A142-8F99B9144F73
   - target:          arm64e-maccatalyst
-    value:           A2AC7342-3B2F-3BE2-9DDF-ADFD6F4D7314
+    value:           E84E60AA-9944-308E-A142-8F99B9144F73
 install-name:    '/System/Library/PrivateFrameworks/Navigation.framework/Versions/A/Navigation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -28,17 +28,17 @@ exports:
                        _MNGetMNDirectionsRequestLog, _MNGetMNLocationProviderLog, 
                        _MNGetMNLocationTrackerLog, _MNGetMNNavigationDetailsLog, 
                        _MNGetMNNavigationStateManagerLog, _MNGetMNRouteAttributesLog, 
-                       _MNGetMNRouteStorageLog, _MNGetMNXPCTransactionManagerLog, 
-                       _MNGetProcessHandlingLog, _MNGetRouteWithID, _MNGuidanceEventFeedbackReadFrom, 
-                       _MNHeadphonesAreInUse, _MNInstructionsCalculateDistanceUnits, 
-                       _MNInstructionsCalculateScaledDistanceUnits, _MNInstructionsDistanceTypeConvertToMeters, 
-                       _MNInstructionsInitOptionsWithDefault, _MNInstructionsLocalizedImperialUnits, 
-                       _MNInstructionsLocalizedMetricUnits, _MNInstructionsShortPromptTypeForManeuver, 
-                       _MNJSONForBool, _MNJSONForCoordinate, _MNJSONForDate, _MNJSONForError, 
-                       _MNJSONForLatLng, _MNJSONForLocation, _MNJSONForMapRegion, 
-                       _MNJSONForObject, _MNJSONForRoute, _MNJSONForRoutes, _MNJSONForWaypoint, 
-                       _MNJSONForWaypointAndTransportType, _MNJSONStringForObject, 
-                       _MNLPRRuleMatcherErrorDomain, _MNLocaleDidChangeNotification, 
+                       _MNGetMNRouteStorageLog, _MNGetMNVirtualGarageManagerLog, 
+                       _MNGetMNXPCTransactionManagerLog, _MNGetProcessHandlingLog, 
+                       _MNGetRouteWithID, _MNGuidanceEventFeedbackReadFrom, _MNHeadphonesAreInUse, 
+                       _MNInstructionsCalculateDistanceUnits, _MNInstructionsCalculateScaledDistanceUnits, 
+                       _MNInstructionsDistanceTypeConvertToMeters, _MNInstructionsInitOptionsWithDefault, 
+                       _MNInstructionsLocalizedImperialUnits, _MNInstructionsLocalizedMetricUnits, 
+                       _MNInstructionsShortPromptTypeForManeuver, _MNJSONForBool, 
+                       _MNJSONForCoordinate, _MNJSONForDate, _MNJSONForError, _MNJSONForLatLng, 
+                       _MNJSONForLocation, _MNJSONForMapRegion, _MNJSONForObject, 
+                       _MNJSONForRoute, _MNJSONForRoutes, _MNJSONForWaypoint, _MNJSONForWaypointAndTransportType, 
+                       _MNJSONStringForObject, _MNLPRRuleMatcherErrorDomain, _MNLocaleDidChangeNotification, 
                        _MNLogFacilityAssert, _MNLogFacilityCoreLocationRouteHints, 
                        _MNLogFacilityDirectionsRequest, _MNLogFacilityDodgeball, 
                        _MNLogFacilityETAUpdateRequest, _MNLogFacilityEVChargingStateMonitor, 
@@ -102,14 +102,15 @@ exports:
                        _NavigationConfig_ShouldSpeakWrittenPlaceNames, _NavigationConfig_ShouldThrottlePreArrivalReroute, 
                        _NavigationConfig_SimulationEnabled, _NavigationConfig_SimulationGPSError, 
                        _NavigationConfig_SimulationKeepLocationAfterEndingNavigation, 
-                       _NavigationConfig_SimulationShouldShowPrompt, _NavigationConfig_SimulationSpeedOverride, 
-                       _NavigationConfig_SimulationStartDistanceBeforeWaypoint, _NavigationConfig_SimulationStartWaypoint, 
-                       _NavigationConfig_SimulationType, _NavigationConfig_SimulationWaitAtWaypointDuration, 
-                       _NavigationConfig_SpokenGuidanceVolume, _NavigationConfig_TimeIntervalToIgnoreCellLocations, 
-                       _NavigationConfig_TimeballDefaultCacheAge, _NavigationConfig_TimeballDeferredRefresh, 
-                       _NavigationConfig_TimeballDestinationComparisonCriteria, _NavigationConfig_TimeballEnabled, 
-                       _NavigationConfig_TimeballLocationAccuracy, _NavigationConfig_TimeballLocationAttempts, 
-                       _NavigationConfig_TimeballLocationTimeoutInterval, _NavigationConfig_TimeballRefreshPolicyMaximumIntervalForTTL, 
+                       _NavigationConfig_SimulationShouldShowPrompt, _NavigationConfig_SimulationSimulateGeoFences, 
+                       _NavigationConfig_SimulationSpeedOverride, _NavigationConfig_SimulationStartDistanceBeforeWaypoint, 
+                       _NavigationConfig_SimulationStartWaypoint, _NavigationConfig_SimulationType, 
+                       _NavigationConfig_SimulationWaitAtWaypointDuration, _NavigationConfig_SpokenGuidanceVolume, 
+                       _NavigationConfig_TimeIntervalToIgnoreCellLocations, _NavigationConfig_TimeballDefaultCacheAge, 
+                       _NavigationConfig_TimeballDeferredRefresh, _NavigationConfig_TimeballDestinationComparisonCriteria, 
+                       _NavigationConfig_TimeballEnabled, _NavigationConfig_TimeballLocationAccuracy, 
+                       _NavigationConfig_TimeballLocationAttempts, _NavigationConfig_TimeballLocationTimeoutInterval, 
+                       _NavigationConfig_TimeballRefreshPolicyMaximumIntervalForTTL, 
                        _NavigationConfig_TimeballRefreshPolicyRateForForeground, 
                        _NavigationConfig_TimeballRequestRouteCount, _NavigationConfig_TracePlaybackDefaultSpeedMultiplier, 
                        _NavigationConfig_TracePlaybackInitialRouteSource, _NavigationConfig_TracePlaybackIsCameraTestMode, 
@@ -158,8 +159,8 @@ exports:
                        MNTimeballRoutingProvider, MNTimeballServer, MNTimeballService, 
                        MNTimepoint, MNTrace, MNTraceAnnotatedUserBehaviorRow, MNTraceAnnotatedUserEnvironmentRow, 
                        MNTraceBookmark, MNTraceBookmarkRecorder, MNTraceDirectionsRow, 
-                       MNTraceETAUpdateRow, MNTraceHeadingDataRow, MNTraceLoader, 
-                       MNTraceLocationRow, MNTraceMiscInfo, MNTraceMotionDataRow, 
+                       MNTraceETAUpdateRow, MNTraceEVDataRow, MNTraceHeadingDataRow, 
+                       MNTraceLoader, MNTraceLocationRow, MNTraceMiscInfo, MNTraceMotionDataRow, 
                        MNTraceNavigationEventRow, MNTracePlaybackDetails, MNTracePlayer, 
                        MNTracePlayerScheduler, MNTracePlayerTimelineStream, MNTraceRecorder, 
                        MNTraceRecordingData, MNTraceVehicleHeadingRow, MNTraceVehicleSpeedRow, 

@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7EBD4EEA-7C42-35D5-8521-B6782231E536
+    value:           648E7EFF-1C07-32F2-A1C3-BFFC197BD0A1
   - target:          x86_64-maccatalyst
-    value:           7EBD4EEA-7C42-35D5-8521-B6782231E536
+    value:           648E7EFF-1C07-32F2-A1C3-BFFC197BD0A1
   - target:          arm64-macos
-    value:           2782E051-34F7-3244-9841-3F4A89806A1A
+    value:           6B4AD4FC-F8FD-3F09-A72C-D0C88F303F0D
   - target:          arm64-maccatalyst
-    value:           2782E051-34F7-3244-9841-3F4A89806A1A
+    value:           6B4AD4FC-F8FD-3F09-A72C-D0C88F303F0D
   - target:          arm64e-macos
-    value:           ED3B8976-4AD8-3468-801F-B0F11A85368C
+    value:           959F89E0-0423-3742-9DB0-BB17C065617A
   - target:          arm64e-maccatalyst
-    value:           ED3B8976-4AD8-3468-801F-B0F11A85368C
+    value:           959F89E0-0423-3742-9DB0-BB17C065617A
 install-name:    '/usr/lib/libAppleArchive.dylib'
 exports:
-  - targets:         [ arm64-macos, x86_64-macos, arm64e-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos, x86_64-maccatalyst, 
                        arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _AAArchiveStreamCancel, _AAArchiveStreamClose, _AAArchiveStreamProcess, 
                        _AAArchiveStreamReadBlob, _AAArchiveStreamReadHeader, _AAArchiveStreamWriteBlob, 
@@ -27,40 +27,41 @@ exports:
                        _AAByteRangeAdd, _AAByteRangeClone, _AAByteRangeCreate, _AAByteRangeDestroy, 
                        _AAByteRangeFirst, _AAByteRangeNext, _AAByteRangeOffsetAtSize, 
                        _AAByteRangeSizeAtOffset, _AAByteRangeSub, _AAByteStreamCancel, 
-                       _AAByteStreamClose, _AAByteStreamPRead, _AAByteStreamPWrite, 
-                       _AAByteStreamProcess, _AAByteStreamRead, _AAByteStreamSeek, 
-                       _AAByteStreamWrite, _AAChunkInputStreamOpen, _AAChunkOutputStreamOpen, 
-                       _AACompressionOutputStreamOpen, _AACompressionOutputStreamOpenExisting, 
-                       _AAConvertArchiveOutputStreamOpen, _AACustomArchiveStreamOpen, 
-                       _AACustomArchiveStreamSetCancelProc, _AACustomArchiveStreamSetCloseProc, 
-                       _AACustomArchiveStreamSetData, _AACustomArchiveStreamSetReadBlobProc, 
-                       _AACustomArchiveStreamSetReadHeaderProc, _AACustomArchiveStreamSetWriteBlobProc, 
-                       _AACustomArchiveStreamSetWriteHeaderProc, _AACustomByteStreamOpen, 
-                       _AACustomByteStreamSetCancelProc, _AACustomByteStreamSetCloseProc, 
-                       _AACustomByteStreamSetData, _AACustomByteStreamSetPReadProc, 
-                       _AACustomByteStreamSetPWriteProc, _AACustomByteStreamSetReadProc, 
-                       _AACustomByteStreamSetSeekProc, _AACustomByteStreamSetWriteProc, 
-                       _AADecodeArchiveInputStreamOpen, _AADecompressionInputStreamOpen, 
-                       _AADecompressionRandomAccessInputStreamOpen, _AAEncodeArchiveOutputStreamOpen, 
-                       _AAEntryACLBlobAppendEntry, _AAEntryACLBlobApplyToPath, _AAEntryACLBlobClear, 
-                       _AAEntryACLBlobCreate, _AAEntryACLBlobCreateWithEncodedData, 
-                       _AAEntryACLBlobCreateWithPath, _AAEntryACLBlobDestroy, _AAEntryACLBlobGetEncodedData, 
-                       _AAEntryACLBlobGetEncodedSize, _AAEntryACLBlobGetEntry, _AAEntryACLBlobGetEntryCount, 
-                       _AAEntryACLBlobRemoveEntry, _AAEntryACLBlobSetEntry, _AAEntryXATBlobAppendEntry, 
-                       _AAEntryXATBlobApplyToPath, _AAEntryXATBlobClear, _AAEntryXATBlobCreate, 
-                       _AAEntryXATBlobCreateWithEncodedData, _AAEntryXATBlobCreateWithPath, 
-                       _AAEntryXATBlobDestroy, _AAEntryXATBlobGetEncodedData, _AAEntryXATBlobGetEncodedSize, 
-                       _AAEntryXATBlobGetEntry, _AAEntryXATBlobGetEntryCount, _AAEntryXATBlobRemoveEntry, 
-                       _AAEntryXATBlobSetEntry, _AAEntryYECBlobApplyToPath, _AAEntryYECBlobCreate, 
-                       _AAEntryYECBlobCreateWithEncodedData, _AAEntryYECBlobCreateWithPath, 
-                       _AAEntryYECBlobDestroy, _AAEntryYECBlobGetEncodedData, _AAEntryYECBlobGetEncodedSize, 
-                       _AAExtractArchiveOutputStreamOpen, _AAFieldKeySetClear, _AAFieldKeySetClone, 
-                       _AAFieldKeySetContainsKey, _AAFieldKeySetCreate, _AAFieldKeySetCreateWithString, 
-                       _AAFieldKeySetDestroy, _AAFieldKeySetGetKey, _AAFieldKeySetGetKeyCount, 
-                       _AAFieldKeySetInsertKey, _AAFieldKeySetInsertKeySet, _AAFieldKeySetRemoveKey, 
-                       _AAFieldKeySetRemoveKeySet, _AAFieldKeySetSelectKeySet, _AAFieldKeySetSerialize, 
-                       _AAFileStreamOpenWithFD, _AAFileStreamOpenWithPath, _AAHeaderAssign, 
-                       _AAHeaderClear, _AAHeaderClone, _AAHeaderCreate, _AAHeaderCreateWithEncodedData, 
+                       _AAByteStreamClose, _AAByteStreamPRead, _AAByteStreamPReadAsync, 
+                       _AAByteStreamPWrite, _AAByteStreamProcess, _AAByteStreamRead, 
+                       _AAByteStreamSeek, _AAByteStreamTruncate, _AAByteStreamWrite, 
+                       _AAChunkInputStreamOpen, _AAChunkOutputStreamOpen, _AACompressionOutputStreamOpen, 
+                       _AACompressionOutputStreamOpenExisting, _AAConvertArchiveOutputStreamOpen, 
+                       _AACustomArchiveStreamOpen, _AACustomArchiveStreamSetCancelProc, 
+                       _AACustomArchiveStreamSetCloseProc, _AACustomArchiveStreamSetData, 
+                       _AACustomArchiveStreamSetReadBlobProc, _AACustomArchiveStreamSetReadHeaderProc, 
+                       _AACustomArchiveStreamSetWriteBlobProc, _AACustomArchiveStreamSetWriteHeaderProc, 
+                       _AACustomByteStreamOpen, _AACustomByteStreamSetCancelProc, 
+                       _AACustomByteStreamSetCloseProc, _AACustomByteStreamSetData, 
+                       _AACustomByteStreamSetPReadProc, _AACustomByteStreamSetPWriteProc, 
+                       _AACustomByteStreamSetReadProc, _AACustomByteStreamSetSeekProc, 
+                       _AACustomByteStreamSetWriteProc, _AADecodeArchiveInputStreamOpen, 
+                       _AADecompressionInputStreamOpen, _AADecompressionRandomAccessInputStreamOpen, 
+                       _AAEncodeArchiveOutputStreamOpen, _AAEntryACLBlobAppendEntry, 
+                       _AAEntryACLBlobApplyToPath, _AAEntryACLBlobClear, _AAEntryACLBlobCreate, 
+                       _AAEntryACLBlobCreateWithEncodedData, _AAEntryACLBlobCreateWithPath, 
+                       _AAEntryACLBlobDestroy, _AAEntryACLBlobGetEncodedData, _AAEntryACLBlobGetEncodedSize, 
+                       _AAEntryACLBlobGetEntry, _AAEntryACLBlobGetEntryCount, _AAEntryACLBlobRemoveEntry, 
+                       _AAEntryACLBlobSetEntry, _AAEntryXATBlobAppendEntry, _AAEntryXATBlobApplyToPath, 
+                       _AAEntryXATBlobClear, _AAEntryXATBlobCreate, _AAEntryXATBlobCreateWithEncodedData, 
+                       _AAEntryXATBlobCreateWithPath, _AAEntryXATBlobDestroy, _AAEntryXATBlobGetEncodedData, 
+                       _AAEntryXATBlobGetEncodedSize, _AAEntryXATBlobGetEntry, _AAEntryXATBlobGetEntryCount, 
+                       _AAEntryXATBlobRemoveEntry, _AAEntryXATBlobSetEntry, _AAEntryYECBlobApplyToPath, 
+                       _AAEntryYECBlobCreate, _AAEntryYECBlobCreateWithEncodedData, 
+                       _AAEntryYECBlobCreateWithPath, _AAEntryYECBlobDestroy, _AAEntryYECBlobGetEncodedData, 
+                       _AAEntryYECBlobGetEncodedSize, _AAExtractArchiveOutputStreamOpen, 
+                       _AAFieldKeySetClear, _AAFieldKeySetClone, _AAFieldKeySetContainsKey, 
+                       _AAFieldKeySetCreate, _AAFieldKeySetCreateWithString, _AAFieldKeySetDestroy, 
+                       _AAFieldKeySetGetKey, _AAFieldKeySetGetKeyCount, _AAFieldKeySetInsertKey, 
+                       _AAFieldKeySetInsertKeySet, _AAFieldKeySetRemoveKey, _AAFieldKeySetRemoveKeySet, 
+                       _AAFieldKeySetSelectKeySet, _AAFieldKeySetSerialize, _AAFileStreamOpenWithFD, 
+                       _AAFileStreamOpenWithPath, _AAHeaderAssign, _AAHeaderClear, 
+                       _AAHeaderClone, _AAHeaderCreate, _AAHeaderCreateWithEncodedData, 
                        _AAHeaderCreateWithPath, _AAHeaderDestroy, _AAHeaderGetEncodedData, 
                        _AAHeaderGetEncodedSize, _AAHeaderGetFieldBlob, _AAHeaderGetFieldCount, 
                        _AAHeaderGetFieldHash, _AAHeaderGetFieldKey, _AAHeaderGetFieldString, 

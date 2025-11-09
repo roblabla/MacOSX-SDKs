@@ -38,11 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, WKUserScriptInjectionTime) {
     WKUserScriptInjectionTimeAtDocumentStart,
     WKUserScriptInjectionTimeAtDocumentEnd
-} WK_API_AVAILABLE(macos(10.10), ios(8.0));
+} API_AVAILABLE(macos(10.10), ios(8.0));
 
 /*! A @link WKUserScript @/link object represents a script that can be injected into webpages.
  */
-WK_CLASS_AVAILABLE(macos(10.10), ios(8.0))
+WK_EXTERN API_AVAILABLE(macos(10.10), ios(8.0))
 @interface WKUserScript : NSObject <NSCopying>
 
 /* @abstract The script source code. */
@@ -68,7 +68,7 @@ WK_CLASS_AVAILABLE(macos(10.10), ios(8.0))
  @param forMainFrameOnly Whether the script should be injected into all frames or just the main frame.
  @param contentWorld The WKContentWorld in which to inject the script.
  */
-- (instancetype)initWithSource:(NSString *)source injectionTime:(WKUserScriptInjectionTime)injectionTime forMainFrameOnly:(BOOL)forMainFrameOnly inContentWorld:(WKContentWorld *)contentWorld WK_API_AVAILABLE(macos(11.0), ios(14.0));
+- (instancetype)initWithSource:(NSString *)source injectionTime:(WKUserScriptInjectionTime)injectionTime forMainFrameOnly:(BOOL)forMainFrameOnly inContentWorld:(WKContentWorld *)contentWorld API_AVAILABLE(macos(11.0), ios(14.0));
 
 @end
 

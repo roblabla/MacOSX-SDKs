@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F92B3BA7-D559-38F0-9EB8-361D9B3EE2FC
+    value:           0C446D0E-9C1C-3E77-8E64-6EA1CC278A67
   - target:          x86_64-maccatalyst
-    value:           F92B3BA7-D559-38F0-9EB8-361D9B3EE2FC
+    value:           0C446D0E-9C1C-3E77-8E64-6EA1CC278A67
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           93DF1386-20B8-3BF1-AA51-644B81E85469
+    value:           92B9A907-1113-3313-9A02-AA576D4407F4
   - target:          arm64e-maccatalyst
-    value:           93DF1386-20B8-3BF1-AA51-644B81E85469
+    value:           92B9A907-1113-3313-9A02-AA576D4407F4
 install-name:    '/System/Library/Frameworks/PHASE.framework/Versions/A/PHASE'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _PHASEActionTreePrepareStatePrepareInProgress, _PHASEActionTreePrepareStatePrepareNotStarted, 
                        _PHASEActionTreePrepareStatePrepared, _PHASEAssetErrorDomain, 
@@ -57,7 +57,8 @@ exports:
                        PHASESpatialPipeline, PHASESpatialPipelineEntry, PHASESphericalCapDirectivityModelParameters, 
                        PHASEStringMetaParameter, PHASEStringMetaParameterDefinition, 
                        PHASESubband, PHASESubtreeView, PHASESwitchNodeDefinition, 
-                       PHASETapRegistry, PHASETransmissionModelerSourcePointSet, 
+                       PHASETapDescription, PHASETapRegistry, PHASETargetRoomAcousticParameters, 
+                       PHASETargetRoomAcousticSubbandParameters, PHASETransmissionModelerSourcePointSet, 
                        PHASETransmissionModelerView, PHASETriangleSet, PHASEVoxelLevelView, 
                        PHASEVoxelSet3D, PHASEVoxelTreeView, PHASEWaterProcedureNodeDefinition, 
                        PHASEXPCService ]

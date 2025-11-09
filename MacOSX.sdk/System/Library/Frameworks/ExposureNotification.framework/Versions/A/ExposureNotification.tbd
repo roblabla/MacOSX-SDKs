@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9AA9C83F-1464-39D9-960B-1C4F20465E39
+    value:           429C2F80-A6D1-3059-8F44-85FCAB97FEC7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4F5616D6-898E-3E50-9CB8-E9595A83E022
+    value:           2EB67727-0DCA-3DF5-B529-EF9D01B19C77
 install-name:    '/System/Library/Frameworks/ExposureNotification.framework/Versions/A/ExposureNotification'
 current-version: 0
 compatibility-version: 0

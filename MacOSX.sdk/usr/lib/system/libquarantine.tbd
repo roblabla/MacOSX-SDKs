@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F97DC960-CC0A-3214-9AE9-C860FBAC4C96
+    value:           69A71B56-CEA7-379B-8A08-757209815C7B
   - target:          x86_64-maccatalyst
-    value:           F97DC960-CC0A-3214-9AE9-C860FBAC4C96
+    value:           69A71B56-CEA7-379B-8A08-757209815C7B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           228E3C78-358A-32A5-9933-B8B9DA4C334A
+    value:           0F140B2F-8214-30B8-9CDA-7F0DB8DE13FE
   - target:          arm64e-maccatalyst
-    value:           228E3C78-358A-32A5-9933-B8B9DA4C334A
+    value:           0F140B2F-8214-30B8-9CDA-7F0DB8DE13FE
 install-name:    '/usr/lib/system/libquarantine.dylib'
-current-version: 129
+current-version: 133
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -45,9 +45,10 @@ exports:
                        _responsibility_identity_get_binary_entitlement_data, _responsibility_identity_get_binary_is_platform, 
                        _responsibility_identity_get_binary_offset, _responsibility_identity_get_binary_path, 
                        _responsibility_identity_get_binary_signing_id, _responsibility_identity_get_binary_team_id, 
-                       _responsibility_identity_get_hosted_path, _responsibility_identity_get_persistent_identifier, 
-                       _responsibility_identity_get_user_uuid, _responsibility_identity_release, 
-                       _responsibility_init, _responsibility_set_audittoken_responsible_for_caller, 
+                       _responsibility_identity_get_csflags, _responsibility_identity_get_hosted_path, 
+                       _responsibility_identity_get_persistent_identifier, _responsibility_identity_get_platform, 
+                       _responsibility_identity_get_sdk, _responsibility_identity_get_user_uuid, 
+                       _responsibility_identity_release, _responsibility_init, _responsibility_set_audittoken_responsible_for_caller, 
                        _responsibility_set_audittoken_responsible_for_self, _responsibility_set_caller_responsible_for_self, 
                        _responsibility_set_hosted_path, _responsibility_set_pid_responsible_for_pid, 
                        _responsibility_spawnattrs_getdisclaim, _responsibility_spawnattrs_setdisclaim ]

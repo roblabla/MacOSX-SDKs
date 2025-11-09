@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AB70CAE8-D0BD-3BAD-93A6-A73A69D710AD
+    value:           38BF232D-749E-3BA2-B156-1DE24057ADC9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F818E058-2CCC-367A-A26B-BAEE50D48E45
+    value:           8CF2ABB1-B43A-3326-8884-8D229D0E24DB
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATSUI.framework/Versions/A/ATSUI'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

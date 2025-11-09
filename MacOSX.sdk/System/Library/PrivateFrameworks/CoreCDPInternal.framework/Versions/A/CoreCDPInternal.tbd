@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6698842C-FB84-3860-9A38-7E81984F8045
+    value:           63DB4EC4-0C3B-3944-B14C-C0590F912E5E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           25C014B7-BE8D-3A03-9EAE-0AD835DC63EF
+    value:           441D9368-F551-31FA-A6ED-B7C187B99890
 install-name:    '/System/Library/PrivateFrameworks/CoreCDPInternal.framework/Versions/A/CoreCDPInternal'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -17,19 +17,20 @@ exports:
                        _CDPBackupMetadataDevicePlatformKey, _CDPBackupMetadataMIDKey, 
                        _CDPBackupMetadataPasswordResetKey, _CDPDConnectionInvalidatedNotification, 
                        _CoreCDPInternalVersionNumber, _CoreCDPInternalVersionString, 
+                       _kCDPCABackupRecoveryAttemptBundleID, _kCDPCABackupRecoveryAttemptedMethods, 
                        _kCDPCABackupRecoveryDidCancel, _kCDPCABackupRecoveryDidFail, 
                        _kCDPCABackupRecoveryDidReset, _kCDPCABackupRecoveryDidSucceed, 
-                       _kCDPCABackupRecoveryDidSucceedWithoutLocalSecret, _kCDPCABackupRecoveryResult, 
-                       _kCDPCADidAttemptEscrowPreRecord, _kCDPCADidChangeLocalSecret, 
-                       _kCDPCADidRemoveLocalSecret, _kCDPCADuration, _kCDPCAErrorCode, 
-                       _kCDPCAErrorDomain, _kCDPCAEscrowPreRecordResult, _kCDPCAEventBackupRecovery, 
-                       _kCDPCAEventEscrowPreRecord, _kCDPCAEventLocalSecret, _kCDPCALocalSecretResult, 
-                       _kCDPCAPreRecordIdentifier, _kCDPCAWasSuccess, _kConfirmExistingSecretActionContinue, 
-                       _kConfirmExistingSecretIdentifier, _kOfflineLocalSecretChangeActionContinue, 
-                       _kOfflineLocalSecretChangeItemIdentifier, _kRegenerateRecoveryKeyIdentifier, 
-                       _kRepairCDPStateActionContinue, _kRepairCDPStateActionRecoveryKey, 
-                       _kRepairCDPStateItemIdentifier, _kSecureTermsActionContinue, 
-                       _kSecureTermsIdentifier, _kSetupBiometricsFaceIDIdentifier, 
+                       _kCDPCABackupRecoveryDidSucceedWithoutLocalSecret, _kCDPCABackupRecoveryJoinMethod, 
+                       _kCDPCABackupRecoveryResult, _kCDPCADidAttemptEscrowPreRecord, 
+                       _kCDPCADidChangeLocalSecret, _kCDPCADidRemoveLocalSecret, 
+                       _kCDPCADuration, _kCDPCAErrorCode, _kCDPCAErrorDomain, _kCDPCAEscrowPreRecordResult, 
+                       _kCDPCAEventBackupRecovery, _kCDPCAEventEscrowPreRecord, _kCDPCAEventLocalSecret, 
+                       _kCDPCALocalSecretResult, _kCDPCAPreRecordIdentifier, _kCDPCAWasSuccess, 
+                       _kConfirmExistingSecretActionContinue, _kConfirmExistingSecretIdentifier, 
+                       _kOfflineLocalSecretChangeActionContinue, _kOfflineLocalSecretChangeItemIdentifier, 
+                       _kRegenerateRecoveryKeyIdentifier, _kRepairCDPStateActionContinue, 
+                       _kRepairCDPStateActionRecoveryKey, _kRepairCDPStateItemIdentifier, 
+                       _kSecureTermsActionContinue, _kSecureTermsIdentifier, _kSetupBiometricsFaceIDIdentifier, 
                        _kSetupBiometricsFlowSkipIdentifier, _kSetupBiometricsIdentifier, 
                        _kSetupBiometricsTouchIDIdentifier, _kSetupBiometricsURL ]
     objc-classes:    [ CDPAuthenticationHelper, CDPBroadcaster, CDPCABackupRecoveryReporter, 

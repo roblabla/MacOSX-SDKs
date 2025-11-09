@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8E52660F-EEE3-3453-A76B-45A3F92E80D5
+    value:           793233D1-0ECF-3ED2-AAC9-D51264C54AC7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3A2E305F-AEE6-3230-945F-CF00F6BC4343
+    value:           38BF8A37-9819-3C8E-A8B5-B03F2D38D5BB
 install-name:    '/usr/lib/swift/libswiftExtensionKit.dylib'
 current-version: 34.5
 swift-abi-version: 7

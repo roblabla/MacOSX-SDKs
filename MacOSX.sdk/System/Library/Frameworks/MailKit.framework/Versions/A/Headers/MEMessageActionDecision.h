@@ -12,8 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
 @interface MEMessageActionDecision : NSObject <NSSecureCoding>
 @property (class, readonly) MEMessageActionDecision *invokeAgainWithBody;
-+ (MEMessageActionDecision *)applyAction:(MEMessageAction *)action NS_SWIFT_NAME(action(_:));
-- (instancetype)new NS_UNAVAILABLE;
++ (instancetype)decisionApplyingAction:(MEMessageAction *)action NS_SWIFT_NAME(action(_:));
+/// @brief Creates an @c MEMessageActionDecision with multiple actions. Conflicting actions will be ignored.
++ (instancetype)decisionApplyingActions:(NSArray<MEMessageAction *> *)actions NS_SWIFT_NAME(actions(_:));
+
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 @end
 

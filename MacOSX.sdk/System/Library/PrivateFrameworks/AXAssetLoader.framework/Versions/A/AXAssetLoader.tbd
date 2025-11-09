@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           655ADB01-1DCC-3F1D-85C5-BAA827F55939
+    value:           9C5E0E3A-0F7B-3FCE-B28E-BCD2D58014F9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3FBCC893-31CC-32C2-9AEE-BC21235BCA47
+    value:           262F4BD8-18F6-3326-BC6C-B42181B9AA9C
 install-name:    '/System/Library/PrivateFrameworks/AXAssetLoader.framework/Versions/A/AXAssetLoader'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

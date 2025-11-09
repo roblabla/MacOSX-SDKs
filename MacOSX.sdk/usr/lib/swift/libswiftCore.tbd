@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A6D2F84B-2531-3FA2-AF8A-F8631CF27BD4
+    value:           BA7D85D3-F6D5-3CA8-A775-D049F8DAAD2D
   - target:          x86_64-maccatalyst
-    value:           A6D2F84B-2531-3FA2-AF8A-F8631CF27BD4
+    value:           BA7D85D3-F6D5-3CA8-A775-D049F8DAAD2D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7B0AD73F-3C8C-3F5F-9C2E-34398188F130
+    value:           6923CDBF-7AE0-3339-9767-ECCEF4909653
   - target:          arm64e-maccatalyst
-    value:           7B0AD73F-3C8C-3F5F-9C2E-34398188F130
+    value:           6923CDBF-7AE0-3339-9767-ECCEF4909653
 install-name:    '/usr/lib/swift/libswiftCore.dylib'
-current-version: 1300.0.27
+current-version: 1300.0.46
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -7388,27 +7388,27 @@ exports:
                        _swift_stdlib_NSStringHashValue, _swift_stdlib_NSStringHashValuePointer, 
                        _swift_stdlib_connectNSBaseClasses, _swift_stdlib_getDescription, 
                        _swift_stdlib_random, _swift_stdlib_readLine_stdin, _swift_storeEnumTagMultiPayload, 
-                       _swift_storeEnumTagSinglePayloadGeneric, _swift_tryRetain, 
-                       _swift_uint64ToString, _swift_unexpectedError, _swift_unknownObjectRelease, 
-                       _swift_unknownObjectRelease_n, _swift_unknownObjectRetain, 
-                       _swift_unknownObjectRetain_n, _swift_unknownObjectUnownedAssign, 
-                       _swift_unknownObjectUnownedCopyAssign, _swift_unknownObjectUnownedCopyInit, 
-                       _swift_unknownObjectUnownedDestroy, _swift_unknownObjectUnownedInit, 
-                       _swift_unknownObjectUnownedIsEqual, _swift_unknownObjectUnownedLoadStrong, 
-                       _swift_unknownObjectUnownedTakeAssign, _swift_unknownObjectUnownedTakeInit, 
-                       _swift_unknownObjectUnownedTakeStrong, _swift_unknownObjectWeakAssign, 
-                       _swift_unknownObjectWeakCopyAssign, _swift_unknownObjectWeakCopyInit, 
-                       _swift_unknownObjectWeakDestroy, _swift_unknownObjectWeakInit, 
-                       _swift_unknownObjectWeakLoadStrong, _swift_unknownObjectWeakTakeAssign, 
-                       _swift_unknownObjectWeakTakeInit, _swift_unknownObjectWeakTakeStrong, 
-                       _swift_unownedCheck, _swift_unownedRelease, _swift_unownedRelease_n, 
-                       _swift_unownedRetain, _swift_unownedRetainCount, _swift_unownedRetainStrong, 
-                       _swift_unownedRetainStrongAndRelease, _swift_unownedRetain_n, 
-                       _swift_updateClassMetadata, _swift_updateClassMetadata2, _swift_verifyEndOfLifetime, 
-                       _swift_weakAssign, _swift_weakCopyAssign, _swift_weakCopyInit, 
-                       _swift_weakDestroy, _swift_weakInit, _swift_weakLoadStrong, 
-                       _swift_weakRetainCount, _swift_weakTakeAssign, _swift_weakTakeInit, 
-                       _swift_weakTakeStrong, _swift_willThrow ]
+                       _swift_storeEnumTagSinglePayloadGeneric, _swift_task_enterThreadLocalContext, 
+                       _swift_task_exitThreadLocalContext, _swift_tryRetain, _swift_uint64ToString, 
+                       _swift_unexpectedError, _swift_unknownObjectRelease, _swift_unknownObjectRelease_n, 
+                       _swift_unknownObjectRetain, _swift_unknownObjectRetain_n, 
+                       _swift_unknownObjectUnownedAssign, _swift_unknownObjectUnownedCopyAssign, 
+                       _swift_unknownObjectUnownedCopyInit, _swift_unknownObjectUnownedDestroy, 
+                       _swift_unknownObjectUnownedInit, _swift_unknownObjectUnownedIsEqual, 
+                       _swift_unknownObjectUnownedLoadStrong, _swift_unknownObjectUnownedTakeAssign, 
+                       _swift_unknownObjectUnownedTakeInit, _swift_unknownObjectUnownedTakeStrong, 
+                       _swift_unknownObjectWeakAssign, _swift_unknownObjectWeakCopyAssign, 
+                       _swift_unknownObjectWeakCopyInit, _swift_unknownObjectWeakDestroy, 
+                       _swift_unknownObjectWeakInit, _swift_unknownObjectWeakLoadStrong, 
+                       _swift_unknownObjectWeakTakeAssign, _swift_unknownObjectWeakTakeInit, 
+                       _swift_unknownObjectWeakTakeStrong, _swift_unownedCheck, _swift_unownedRelease, 
+                       _swift_unownedRelease_n, _swift_unownedRetain, _swift_unownedRetainCount, 
+                       _swift_unownedRetainStrong, _swift_unownedRetainStrongAndRelease, 
+                       _swift_unownedRetain_n, _swift_updateClassMetadata, _swift_updateClassMetadata2, 
+                       _swift_verifyEndOfLifetime, _swift_weakAssign, _swift_weakCopyAssign, 
+                       _swift_weakCopyInit, _swift_weakDestroy, _swift_weakInit, 
+                       _swift_weakLoadStrong, _swift_weakRetainCount, _swift_weakTakeAssign, 
+                       _swift_weakTakeInit, _swift_weakTakeStrong, _swift_willThrow ]
     objc-classes:    [ SwiftNativeNSObject, _TtCs12_SwiftObject, _TtCs15__RawSetStorage, 
                        _TtCs18__SwiftNativeNSSet, _TtCs19__EmptyArrayStorage, _TtCs19__EmptySetSingleton, 
                        _TtCs20_SwiftNSMutableArray, _TtCs20__SwiftNativeNSArray, 

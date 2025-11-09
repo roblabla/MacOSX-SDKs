@@ -18,6 +18,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
+
 typedef NS_OPTIONS(NSUInteger, NSTextStorageEditActions) {
     NSTextStorageEditedAttributes = (1 << 0),
     NSTextStorageEditedCharacters = (1 << 1)
@@ -126,7 +128,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 - (void)performEditingTransactionForTextStorage:(NSTextStorage *)textStorage usingBlock:(void (NS_NOESCAPE ^) (void))transaction;
 @end
 
-
+#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
 NS_ASSUME_NONNULL_END
 

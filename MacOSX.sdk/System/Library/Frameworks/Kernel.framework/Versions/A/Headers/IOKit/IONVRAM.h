@@ -39,6 +39,12 @@
 #endif /* __cplusplus */
 #include <uuid/uuid.h>
 
+enum NVRAMPartitionType {
+	kIONVRAMPartitionTypeUnknown,
+	kIONVRAMPartitionSystem,
+	kIONVRAMPartitionCommon
+};
+
 enum IONVRAMVariableType {
 	kOFVariableTypeBoolean = 1,
 	kOFVariableTypeNumber,
@@ -47,6 +53,7 @@ enum IONVRAMVariableType {
 };
 
 enum IONVRAMOperation {
+	kIONVRAMOperationInit,
 	kIONVRAMOperationRead,
 	kIONVRAMOperationWrite,
 	kIONVRAMOperationDelete,
@@ -115,6 +122,7 @@ private:
 
 	IOReturn serializeVariables(void);
 
+	NVRAMPartitionType getDictionaryType(const OSDictionary *dict) const;
 	IOReturn chooseDictionary(IONVRAMOperation operation, const uuid_t *varGuid,
 	    const char *variableName, OSDictionary **dict) const;
 	IOReturn flushDict(const uuid_t *guid, IONVRAMOperation op);
@@ -136,6 +144,8 @@ private:
 	    OSSharedPtr<OSObject>& propObject);
 	bool convertObjectToProp(UInt8 *buffer, UInt32 *length,
 	    const OSSymbol *propSymbol, OSObject *propObject);
+	bool convertObjectToProp(UInt8 *buffer, UInt32 *length,
+	    const char *propSymbol, OSObject *propObject);
 
 	OSPtr<OSData> unescapeBytesToData(const UInt8 *bytes, UInt32 length);
 	OSPtr<OSData> escapeDataToData(OSData * value);

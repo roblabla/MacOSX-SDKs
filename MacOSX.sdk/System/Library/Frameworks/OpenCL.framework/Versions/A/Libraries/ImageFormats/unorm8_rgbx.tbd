@@ -3,9 +3,9 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           27687884-9F0B-334B-A576-5C725DE29275
+    value:           5371B3E3-55B5-36A3-B975-1BF36E2190CB
   - target:          x86_64-maccatalyst
-    value:           27687884-9F0B-334B-A576-5C725DE29275
+    value:           5371B3E3-55B5-36A3-B975-1BF36E2190CB
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/ImageFormats/unorm8_rgbx.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

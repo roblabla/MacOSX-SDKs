@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5DE67CEC-DE40-3369-B00D-4822A951CE8A
+    value:           5BB5C5B8-1FFB-3424-8BB6-ECFC01C2FB43
   - target:          x86_64-maccatalyst
-    value:           5DE67CEC-DE40-3369-B00D-4822A951CE8A
+    value:           5BB5C5B8-1FFB-3424-8BB6-ECFC01C2FB43
   - target:          x86_64h-macos
-    value:           6C463405-8A39-33EB-8851-8FF897C8A3B1
+    value:           C478ECA8-BB78-36B3-B637-45390C178772
   - target:          x86_64h-maccatalyst
-    value:           6C463405-8A39-33EB-8851-8FF897C8A3B1
+    value:           C478ECA8-BB78-36B3-B637-45390C178772
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ADCD89E3-6A68-333C-A3DC-94F12A433A9D
+    value:           98224EE2-9855-3B51-9CF7-45F4C4B57D9B
   - target:          arm64e-maccatalyst
-    value:           ADCD89E3-6A68-333C-A3DC-94F12A433A9D
+    value:           98224EE2-9855-3B51-9CF7-45F4C4B57D9B
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 

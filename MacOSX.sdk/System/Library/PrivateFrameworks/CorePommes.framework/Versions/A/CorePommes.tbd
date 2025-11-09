@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ABDC5B61-2E19-3B36-A98C-A08D1691A49D
+    value:           5C2B05DC-9EF4-39D5-8547-BF81C30AF09A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9EDA2783-7832-3C85-B826-BE13522764F9
+    value:           4E2CD385-285B-37CF-9834-118E1C700ED1
 install-name:    '/System/Library/PrivateFrameworks/CorePommes.framework/Versions/A/CorePommes'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           44B303A9-F935-3E10-800F-642F3F0DBA58
+    value:           855D34B0-8FC7-3298-A236-BADA47CD44DE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           990B37C7-BF10-3A7C-81D8-2592F84EBCE6
+    value:           44E2BB0C-325F-3194-A81F-7757160A5953
 install-name:    '/System/Library/PrivateFrameworks/DoNotDisturb.framework/Versions/A/DoNotDisturb'
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -22,8 +22,8 @@ allowable-clients:
                        HealthDaemon, KnowledgeMonitor, MessageUI, Messages, MobilePhone, 
                        MobilePhone Tests, MobileSMS, MobileTimer, NanoHealthAlertBundle, 
                        NanoSettings, NanoSettingsGlance, NotificationCenter, Notifications, 
-                       PBBridgeSupport, PhoneCarouselAlert, SUIAKit, SUIATPTests, 
-                       SUICITests, SUIMacTests, SUISimulatorTests, SUIWatchTests, 
+                       PBBridgeSupport, PhoneCarouselAlert, SSInvitationAgent, SUIAKit, 
+                       SUIATPTests, SUICITests, SUIMacTests, SUISimulatorTests, SUIWatchTests, 
                        ScreenSharingServer, Settings, SiriUI, Sleep, SleepDaemon, 
                        SpringBoard, SpringBoardCore, StatusKitTester, UserNotificationsUIKit, 
                        VisualAlert, WorkoutAlertBundle, callservicesd, callservicesdTests, 
@@ -35,10 +35,10 @@ exports:
                        _DNDDeviceClassFromMGDeviceClass, _DNDEnabledSettingToString, 
                        _DNDEnumerateDaysOfWeekStartingOnDay, _DNDErrorDomain, _DNDEventSourceTypeToString, 
                        _DNDIdentifierStringForWeekdays, _DNDInterruptionBehaviorToString, 
-                       _DNDInterruptionSuppressionToString, _DNDLogBehaviorResolution, 
-                       _DNDLogGlobalConfiguration, _DNDLogMeDeviceService, _DNDLogModeAssertion, 
-                       _DNDLogModeConfiguration, _DNDLogModeSelection, _DNDLogRemoteConnection, 
-                       _DNDLogSettings, _DNDLogState, _DNDMeDeviceStatusToString, 
+                       _DNDInterruptionSuppressionToString, _DNDLogAuxiliaryState, 
+                       _DNDLogBehaviorResolution, _DNDLogGlobalConfiguration, _DNDLogMeDeviceService, 
+                       _DNDLogModeAssertion, _DNDLogModeConfiguration, _DNDLogModeSelection, 
+                       _DNDLogRemoteConnection, _DNDLogSettings, _DNDLogState, _DNDMeDeviceStatusToString, 
                        _DNDModeAssertionInvalidationReasonOverrideToString, _DNDModeAssertionInvalidationReasonToString, 
                        _DNDModeAssertionReasonToString, _DNDModeLocalizedNameForSemanticType, 
                        _DNDModeLocalizedNameKeyForSemanticType, _DNDModeSemanticTypeToString, 
@@ -72,17 +72,17 @@ exports:
                        _kDefaultScheduleEnabledSetting, _kDefaultSetting, _kDefaultSettingCanUILock, 
                        _kMaximumLifetimeDuration ]
     objc-classes:    [ DNDAppInfo, DNDAppInfoService, DNDApplicationConfiguration, 
-                       DNDApplicationIdentifier, DNDAvailabilityService, DNDBehaviorSettings, 
-                       DNDBypassSettings, DNDClientEventBehavior, DNDClientEventDetails, 
-                       DNDConfiguration, DNDContact, DNDContactHandle, DNDDevice, 
-                       DNDEventBehaviorResolutionService, DNDGlobalConfigurationService, 
-                       DNDMeDeviceService, DNDMeDeviceState, DNDMode, DNDModeAssertion, 
-                       DNDModeAssertionCalendarEventLifetime, DNDModeAssertionCurrentLocationLifetime, 
-                       DNDModeAssertionDateIntervalLifetime, DNDModeAssertionDetails, 
-                       DNDModeAssertionExplicitRegionLifetime, DNDModeAssertionInvalidation, 
-                       DNDModeAssertionInvalidationDetails, DNDModeAssertionLifetime, 
-                       DNDModeAssertionScheduleLifetime, DNDModeAssertionService, 
-                       DNDModeAssertionSource, DNDModeAssertionUserRequestedLifetime, 
+                       DNDApplicationIdentifier, DNDAuxiliaryStateService, DNDAvailabilityService, 
+                       DNDBehaviorSettings, DNDBypassSettings, DNDClientEventBehavior, 
+                       DNDClientEventDetails, DNDConfiguration, DNDContact, DNDContactHandle, 
+                       DNDDevice, DNDDiffBuilder, DNDEventBehaviorResolutionService, 
+                       DNDGlobalConfigurationService, DNDMeDeviceService, DNDMeDeviceState, 
+                       DNDMode, DNDModeAssertion, DNDModeAssertionCalendarEventLifetime, 
+                       DNDModeAssertionCurrentLocationLifetime, DNDModeAssertionDateIntervalLifetime, 
+                       DNDModeAssertionDetails, DNDModeAssertionExplicitRegionLifetime, 
+                       DNDModeAssertionInvalidation, DNDModeAssertionInvalidationDetails, 
+                       DNDModeAssertionLifetime, DNDModeAssertionScheduleLifetime, 
+                       DNDModeAssertionService, DNDModeAssertionSource, DNDModeAssertionUserRequestedLifetime, 
                        DNDModeConfiguration, DNDModeConfigurationAppForegroundTrigger, 
                        DNDModeConfigurationDrivingTrigger, DNDModeConfigurationGameControllerTrigger, 
                        DNDModeConfigurationLocationTrigger, DNDModeConfigurationMindfulnessTrigger, 

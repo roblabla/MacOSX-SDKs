@@ -41,19 +41,19 @@ IMAGEIO_EXTERN const CFStringRef kCGImageAnimationLoopCount  IMAGEIO_AVAILABLE_S
 
 typedef void (^CGImageSourceAnimationBlock)(size_t index, CGImageRef image, bool* stop);
 
-/* Animate the sequence of images contained in the file at `url'. Currently supported image
+/** Animate the sequence of images contained in the file at `url'. Currently supported image
  * formats are GIF and APNG. The `options' dictionary may be used to request additional playback
  * options; see the list of keys above for more information. The block is called on the main queue
  * at time intervals specified by the `delay time' of the image. The animation can be stopped by
- * setting the boolean parameter of the block to false.
+ * setting the boolean parameter of the block to true.
  */
 IMAGEIO_EXTERN OSStatus CGAnimateImageAtURLWithBlock(CFURLRef url, CFDictionaryRef _iio_Nullable options, CGImageSourceAnimationBlock block) IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
 
-/* Animate the sequence of images contained in `data'. Currently supported image
+/** Animate the sequence of images contained in `data'. Currently supported image
  * formats are GIF and APNG. The `options' dictionary may be used to request additional playback
  * options; see the list of keys above for more information. The block is called on the main queue
  * at time intervals specified by the `delay time' of the image. The animation can be stopped by
- * setting the boolean parameter of the block to false.
+ * setting the boolean parameter of the block to true.
  */
 IMAGEIO_EXTERN OSStatus CGAnimateImageDataWithBlock(CFDataRef data, CFDictionaryRef _iio_Nullable options, CGImageSourceAnimationBlock block) IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
 

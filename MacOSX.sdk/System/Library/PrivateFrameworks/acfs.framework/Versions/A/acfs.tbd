@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           63C3577F-36FF-3E6F-9521-98D71EDC5679
+    value:           852A05A2-2DC1-3A68-9222-F905F82B0460
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7E458D13-E12A-3752-B198-B833E3C02EE5
+    value:           DE7112EA-EF26-3874-A570-28E46F8DC68D
 install-name:    '/System/Library/PrivateFrameworks/acfs.framework/Versions/A/acfs'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

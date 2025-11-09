@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
 // swift-module-flags: -target x86_64-apple-ios14.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name _SpriteKit_SwiftUI
 @_exported import SpriteKit
 import Swift
@@ -34,8 +34,9 @@ public struct SpriteView : SwiftUI.View {
   public init(scene: SpriteKit.SKScene, transition: SpriteKit.SKTransition? = nil, isPaused: Swift.Bool = false, preferredFramesPerSecond: Swift.Int = 60)
   @available(watchOS, unavailable)
   public init(scene: SpriteKit.SKScene, transition: SpriteKit.SKTransition? = nil, isPaused: Swift.Bool = false, preferredFramesPerSecond: Swift.Int = 60, options: _SpriteKit_SwiftUI.SpriteView.Options = [.shouldCullNonVisibleNodes], shouldRender: @escaping (Foundation.TimeInterval) -> Swift.Bool = { _ in true })
+  @available(iOS 15.0, macOS 12.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
-  public init(scene: SpriteKit.SKScene, transition: SpriteKit.SKTransition? = nil, isPaused: Swift.Bool = false, preferredFramesPerSecond: Swift.Int = 60, options: _SpriteKit_SwiftUI.SpriteView.Options = [.shouldCullNonVisibleNodes], debugOptions: _SpriteKit_SwiftUI.SpriteView.DebugOptions = [], shouldRender: @escaping (Foundation.TimeInterval) -> Swift.Bool = { _ in true })
+  public init(scene: SpriteKit.SKScene, transition: SpriteKit.SKTransition? = nil, isPaused: Swift.Bool = false, preferredFramesPerSecond: Swift.Int = 60, options: _SpriteKit_SwiftUI.SpriteView.Options = [.shouldCullNonVisibleNodes], debugOptions: _SpriteKit_SwiftUI.SpriteView.DebugOptions, shouldRender: @escaping (Foundation.TimeInterval) -> Swift.Bool = { _ in true })
   @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
     get
   }

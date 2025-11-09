@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           82D70502-4C44-311E-830B-5BD320FF20DF
+    value:           D0C719E7-429E-3EFB-8C0C-3222C40A6771
   - target:          x86_64-maccatalyst
-    value:           82D70502-4C44-311E-830B-5BD320FF20DF
+    value:           D0C719E7-429E-3EFB-8C0C-3222C40A6771
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A949CB3C-0753-36F4-BD15-5E87E4C275BA
+    value:           EFA91247-7C04-359B-80A4-341EB0BC511A
   - target:          arm64e-maccatalyst
-    value:           A949CB3C-0753-36F4-BD15-5E87E4C275BA
+    value:           EFA91247-7C04-359B-80A4-341EB0BC511A
 install-name:    '/System/Library/PrivateFrameworks/UIKitMacHelper.framework/Versions/A/UIKitMacHelper'
-current-version: 5061.2
+current-version: 5205.0.255
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -27,11 +27,12 @@ exports:
                        _UINSAllConnectedScenesExcludingInternal, _UINSAppearanceGetApplicationAppearance, 
                        _UINSAppearanceGetMacAppearanceName, _UINSAppearanceIsMacAppearanceName, 
                        _UINSApplicationInstantiate, _UINSApplicationIsSingleWindowFullScreen, 
-                       _UINSApplicationMain, _UINSApplicationSceneTransitionContext, 
-                       _UINSApplicationWaitUntilSystemAppIsReady, _UINSAttemptDestructionOfScene, 
-                       _UINSColorGetSystemColor, _UINSColorUserAccentColorIsDefault, 
-                       _UINSColorUserAccentColorIsMulticolor, _UINSConfigureMenuToolbarItemWithMenu, 
-                       _UINSConfigureSharingTouchBarItemWithActivityItemsConfiguration, 
+                       _UINSApplicationIsSingleWindowFullScreenTrueDisplaySize, _UINSApplicationLaunchToFullScreen, 
+                       _UINSApplicationMain, _UINSApplicationOrientationIsLandscape, 
+                       _UINSApplicationSceneTransitionContext, _UINSApplicationWaitUntilSystemAppIsReady, 
+                       _UINSAttemptDestructionOfScene, _UINSColorGetSystemColor, 
+                       _UINSColorUserAccentColorIsDefault, _UINSColorUserAccentColorIsMulticolor, 
+                       _UINSConfigureMenuToolbarItemWithMenu, _UINSConfigureSharingTouchBarItemWithActivityItemsConfiguration, 
                        _UINSConfigureToolbarItemMenuFormRepresentation, _UINSCreateUIWindowForHostingViewInScene, 
                        _UINSCursorHide, _UINSCursorUnhide, _UINSDefaultsAllowMissingSettingsDefaultValues, 
                        _UINSDefaultsAllowMissingSettingsDefaultValuesKey, _UINSDefaultsForceRequiresFullScreen, 
@@ -61,16 +62,18 @@ exports:
                        _UINSNewTrackingShadowRemoteController, _UINSPersistentIdentifierForUIScene, 
                        _UINSRotateDeviceForFullScreenApp, _UINSSceneHasApplicationRole, 
                        _UINSSceneIDUserInfoKey, _UINSSceneIdentifierForUIScene, _UINSSceneShouldHideHostWindowValueUserInfoKey, 
-                       _UINSSearchToolbarItemWithUISearchTextField, _UINSShareSheetLog, 
-                       _UINSSharedApplicationDelegate, _UINSSharedGraphicsContextStack, 
+                       _UINSSceneViewControllerNeedsUpdateForDisplayChangeNotification, 
+                       _UINSSearchToolbarItemWithUISearchTextField, _UINSSetEnableTrackingShadowRemoteControllerDebugOverlay, 
+                       _UINSShareSheetLog, _UINSSharedApplicationDelegate, _UINSSharedGraphicsContextStack, 
                        _UINSSharedRevealController, _UINSSharedShareSheetController, 
                        _UINSSharedTouchBar, _UINSSharingServiceItemsFromActivityItemsConfiguration, 
                        _UINSSharingServicePickerDidChooseSharingServiceNotification, 
                        _UINSSharingServicePickerSharingServiceKey, _UINSSharingServicesFromActivityItemsConfiguration, 
                        _UINSShouldHideHostWindowDidChangeNotification, _UINSShouldHideHostWindowForScene, 
                        _UINSSizeRestrictionsForScene, _UINSSupportedInterfaceOrientationsForFullScreenScene, 
-                       _UINSSystemAppearanceDecodeColor, _UINSUIWindowsForScene, 
-                       _UINSViewBridgeLog, _UINSWindowProxyForScene, __UINSDragSessionIDForDraggingInfo, 
+                       _UINSSystemAppearanceDecodeColor, _UINSTrackingShadowRemoteControllerDebugOverlayEnabled, 
+                       _UINSUIWindowsForScene, _UINSViewBridgeLog, _UINSWindowProxyForScene, 
+                       _UINSWindowScaleLog, __UINSContextIDForDraggingInfo, __UINSDragSessionIDForDraggingInfo, 
                        __UINSDragSessionIDForSequenceAndContext, _catalyst_text_input_subsystem, 
                        _kUINSWindowSizeBiasUIDisabledUserDefaultsKey, _kUINSWindowSizeBiasUserDefaultsKey ]
     objc-classes:    [ UINSApplicationDelegate, UINSApplicationShortcutManager, UINSBlockTextInputDelegate, 

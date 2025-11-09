@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C38B0B1A-1B36-3474-882E-7FC48E0550B9
+    value:           00E72792-0AFC-3994-99DF-D1C0D017356D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           79849BFB-8605-345F-B966-E9342113E3EC
+    value:           5A17627B-18F3-3C0A-A3DE-EB02A55C863E
 install-name:    '/System/Library/PrivateFrameworks/HDAInterface.framework/Versions/A/HDAInterface'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

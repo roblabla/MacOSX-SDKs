@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8423598F-745F-36E0-9EC8-71322F142E94
+    value:           3D75BAB2-4A81-3E53-BACF-1078C281C2B2
   - target:          x86_64-maccatalyst
-    value:           8423598F-745F-36E0-9EC8-71322F142E94
+    value:           3D75BAB2-4A81-3E53-BACF-1078C281C2B2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7C40CC22-9253-3050-82F5-A11F50B6FEC6
+    value:           69E3AD82-D6BF-3F69-AFE6-85FDAC3B5001
   - target:          arm64e-maccatalyst
-    value:           7C40CC22-9253-3050-82F5-A11F50B6FEC6
+    value:           69E3AD82-D6BF-3F69-AFE6-85FDAC3B5001
 install-name:    '/System/Library/Frameworks/AVFAudio.framework/Versions/A/AVFAudio'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$previous$/System/Library/Frameworks/AVFoundation.framework/Versions/A/AVFoundation$$1$1.0$11.3$$', 
                        '$ld$previous$/System/Library/Frameworks/AVFoundation.framework/Versions/A/AVFoundation$$6$1.0$14.5$$', 
@@ -74,6 +74,7 @@ exports:
                        _AVAudioSessionSilenceSecondaryAudioHintTypeKey, _AVAudioSessionSourceContentBestAvailableContentTypeKey, 
                        _AVAudioSessionSourceContentCurrentlyPlayingChannelCountKey, 
                        _AVAudioSessionSourceContentCurrentlyPlayingFormatKey, _AVAudioSessionSourceContentCurrentlyPlayingIsEligibleForSpatializationKey, 
+                       _AVAudioSessionSourceContentCurrentlyPlayingIsSpatializedKey, 
                        _AVAudioSessionSpatialAudioEnabledKey, _AVAudioSessionSpatialPlaybackCapabilitiesChangedNotification, 
                        _AVAudioUnitComponentManagerRegistrationsChangedNotification, 
                        _AVAudioUnitComponentTagsDidChangeNotification, _AVAudioUnitManufacturerNameApple, 

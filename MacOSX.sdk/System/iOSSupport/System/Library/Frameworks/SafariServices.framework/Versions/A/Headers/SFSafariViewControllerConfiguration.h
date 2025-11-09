@@ -32,6 +32,11 @@ NS_SWIFT_NAME(SFSafariViewController.Configuration)
  */
 @property (nonatomic, nullable, copy) SFSafariViewControllerActivityButton *activityButton API_AVAILABLE(ios(15.0));
 
+/*! @abstract An event attribution associated with a click that caused this SFSafariViewController to be opened.
+ @discussion This attribute is ignored if the SFSafariViewController initialURL has a scheme of 'http'.
+ */
+@property (nonatomic, nullable, copy) UIEventAttribution *eventAttribution API_AVAILABLE(ios(15.2)) API_UNAVAILABLE(watchos, tvos);
+
 @end
 
 NS_ASSUME_NONNULL_END

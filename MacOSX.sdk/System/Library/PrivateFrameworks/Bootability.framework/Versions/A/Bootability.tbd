@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F8F88CBB-B3AC-3734-9D36-69B2A7968456
+    value:           41C1AE0F-EBA8-33BE-B969-C65180AF3664
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6D258145-27F2-39B8-ACEF-E33656A5804C
+    value:           BB9DA786-D4F0-35B9-A2D2-F98A768DAA9C
 install-name:    '/System/Library/PrivateFrameworks/Bootability.framework/Versions/A/Bootability'
-current-version: 54
+current-version: 56
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _BYAMAuthInstallLogHandler, _BYBless2LogHandler, _BYBootOptionAllowAppleConnectPrompt, 

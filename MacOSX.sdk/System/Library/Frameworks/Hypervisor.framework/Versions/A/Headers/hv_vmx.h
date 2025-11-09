@@ -20,6 +20,7 @@
 #define __HV_10_10 __API_AVAILABLE(macos(10.10))
 #define __HV_10_15 __API_AVAILABLE(macos(10.15))
 #define __HV_11_0 __API_AVAILABLE(macos(11.0))
+#define __HV_12_0 __API_AVAILABLE(macos(12.0))
 
 OS_ASSUME_NONNULL_BEGIN
 
@@ -232,6 +233,21 @@ extern hv_return_t hv_vmx_get_msr_info(hv_vmx_msr_info_t field, uint64_t *value)
  */
 extern hv_return_t hv_vmx_vcpu_set_apic_address(hv_vcpuid_t vcpu,
 	hv_gpaddr_t gpa) __HV_10_10;
+
+/*!
+ * @function   hv_vmx_vcpu_set_apic_address_space
+ * @abstract   Set the address of the guest APIC for a vCPU in the
+ *             guest physical address space of the VM for the specified space
+ * @param      vcpu  vCPU ID
+ * @param      asid  Address space ID
+ * @param      gpa   Page aligned address in the guest physical address space
+ * @result     0 on success or error code
+ * @discussion
+ *             Must be called by the owning thread
+ */
+extern hv_return_t hv_vmx_vcpu_set_apic_address_space(hv_vcpuid_t vcpu,
+	hv_vm_space_t asid, hv_gpaddr_t gpa) __HV_12_0;
+
 
 __END_DECLS
 

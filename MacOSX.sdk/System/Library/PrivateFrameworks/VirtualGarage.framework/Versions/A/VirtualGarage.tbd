@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BD3292CA-F3DA-3A2D-8CE5-C20EA86EEFDF
+    value:           153F253C-DDEA-3023-B48C-AB90E25631D9
   - target:          x86_64-maccatalyst
-    value:           BD3292CA-F3DA-3A2D-8CE5-C20EA86EEFDF
+    value:           153F253C-DDEA-3023-B48C-AB90E25631D9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B86C3C5B-4790-367A-A70A-37489A9FABA8
+    value:           4952FE28-63A0-34CA-B413-B3C4E31FDAAD
   - target:          arm64e-maccatalyst
-    value:           B86C3C5B-4790-367A-A70A-37489A9FABA8
+    value:           4952FE28-63A0-34CA-B413-B3C4E31FDAAD
 install-name:    '/System/Library/PrivateFrameworks/VirtualGarage.framework/Versions/A/VirtualGarage'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

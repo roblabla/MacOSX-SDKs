@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7E29F619-B3EB-34C1-9EFD-7FA5DC666DDC
+    value:           79227A49-C8E4-326E-BDEC-80DACBACD9A6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8C314E6C-A58C-3CD2-964E-414ADFBE2158
+    value:           1149BB87-B0E7-39E3-BAF7-51C48F2B1C4E
 install-name:    '/System/Library/PrivateFrameworks/MobileObliteration.framework/Versions/A/MobileObliteration'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -18,9 +18,10 @@ exports:
                        _kObliterationDelayAfterReplyKey, _kObliterationExclusionPathsKey, 
                        _kObliterationFailedOSBroken, _kObliterationFailedOSValid, 
                        _kObliterationIgnoreMissingPathKey, _kObliterationManagedDeviceWipeKey, 
-                       _kObliterationMessageKey, _kObliterationPreservedVolumeGroupUUID, 
+                       _kObliterationMessageKey, _kObliterationOptionsFilePathKey, 
+                       _kObliterationPreservedItemsDictKey, _kObliterationPreservedVolumeGroupUUID, 
                        _kObliterationResultStateKey, _kObliterationResultStringKey, 
                        _kObliterationReturnDictKey, _kObliterationTypeBrickOnly, 
                        _kObliterationTypeKey, _kObliterationTypeMarkStart, _kObliterationTypeWipeAndBrick, 
-                       _kSkipDataObliteration, _kTemplateMigrationCookiePathKey ]
+                       _kSkipDataObliteration ]
 ...

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FB846010-ECE6-35F6-AA98-7D291892690F
+    value:           194700C5-1627-329C-848E-4BC8F8A0FAFB
   - target:          x86_64-maccatalyst
-    value:           FB846010-ECE6-35F6-AA98-7D291892690F
+    value:           194700C5-1627-329C-848E-4BC8F8A0FAFB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F144C867-7D78-3BAE-B6F5-F39B2D8E55B0
+    value:           1BF1A675-E78D-31BA-AD9F-BDFECE4D3C5C
   - target:          arm64e-maccatalyst
-    value:           F144C867-7D78-3BAE-B6F5-F39B2D8E55B0
+    value:           1BF1A675-E78D-31BA-AD9F-BDFECE4D3C5C
 install-name:    '/System/Library/PrivateFrameworks/CameraImagingFramework.framework/Versions/A/CameraImagingFramework'
 current-version: 100.1
 exports:

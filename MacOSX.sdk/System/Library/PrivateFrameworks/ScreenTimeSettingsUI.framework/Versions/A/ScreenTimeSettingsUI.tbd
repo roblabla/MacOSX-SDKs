@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4B69F150-59DA-330C-A401-4C1E9DEE48C1
+    value:           ECFDE7EF-B814-361A-857D-04DC12A29B4E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           334ECC1D-B26D-3686-8C0F-58EF75221C69
+    value:           22957E73-D21E-3E5C-B4E3-7E11F0508AA5
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeSettingsUI.framework/Versions/A/ScreenTimeSettingsUI'
-current-version: 500.0.19
+current-version: 500.6.1
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     objc-classes:    [ STAlwaysAllowedController, STAlwaysAllowedItem, STContentAndPrivacyController, 

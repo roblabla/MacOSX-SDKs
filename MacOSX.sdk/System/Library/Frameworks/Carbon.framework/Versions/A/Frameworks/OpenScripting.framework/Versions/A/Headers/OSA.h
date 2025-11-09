@@ -146,6 +146,8 @@ typedef CALLBACK_API( OSErr , OSACreateAppleEventProcPtr )(AEEventClass theAEEve
 typedef CALLBACK_API( OSErr , OSASendProcPtr )(const AppleEvent *theAppleEvent, AppleEvent *reply, AESendMode sendMode, AESendPriority sendPriority, SInt32 timeOutInTicks, AEIdleUPP idleProc, AEFilterUPP filterProc, SRefCon refCon);
 typedef STACK_UPP_TYPE(OSACreateAppleEventProcPtr)              OSACreateAppleEventUPP;
 typedef STACK_UPP_TYPE(OSASendProcPtr)                          OSASendUPP;
+
+#if !__LP64__
 /*
  *  NewOSACreateAppleEventUPP()
  *  
@@ -228,6 +230,7 @@ InvokeOSASendUPP(
   AEFilterUPP         filterProc,
   SRefCon             refCon,
   OSASendUPP          userUPP)                                __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+#endif
 
 #if __MACH__
   #ifdef __cplusplus
@@ -905,6 +908,7 @@ OSAGetScriptInfo(
 */
 typedef CALLBACK_API( OSErr , OSAActiveProcPtr )(SRefCon refCon);
 typedef STACK_UPP_TYPE(OSAActiveProcPtr)                        OSAActiveUPP;
+#if !__LP64__
 /*
  *  NewOSAActiveUPP()
  *  
@@ -939,6 +943,7 @@ extern OSErr
 InvokeOSAActiveUPP(
   SRefCon       refCon,
   OSAActiveUPP  userUPP)                                      __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+#endif
 
 #if __MACH__
   #ifdef __cplusplus

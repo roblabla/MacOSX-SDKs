@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C8F45942-B703-35CF-BAEB-5C0C7DC41EC6
+    value:           535DBC28-4D26-3609-86BB-5C40227B648C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B535623E-720B-3B96-BD3F-FAA4CEBC19A1
+    value:           01B981B8-A2D8-374D-9A0E-C4AC8C1009DA
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox'
-current-version: 1105
+current-version: 1113.6
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        Carbon
@@ -325,8 +325,8 @@ exports:
                        __GetActiveSystemUIModeAndOptions, __GetAggregateUIMode, __GetAllEventsOfClass, 
                        __GetCurrentMenuContext, __GetDefaultMenuFont, __GetMenuItemBoundsU, 
                        __GetMenuItemHierarchicalMenuU, __GetMenuMinimumWidth, __GetMenuTitleBounds, 
-                       __GetOpenMenuDirection, __GetSymbolicHotKeyValue, __GetWindowCGContext, 
-                       __GetWindowCGOrderingEnabled, __GetWindowReshapingEnabled, 
+                       __GetOpenMenuDirection, __GetSymbolicHotKeyValue, __GetSymbolicHotKeyValue2, 
+                       __GetWindowCGContext, __GetWindowCGOrderingEnabled, __GetWindowReshapingEnabled, 
                        __GetWindowZOrderingEnabled, __HIBevelButtonRegisterClass, 
                        __HIChasingArrowsRegisterClass, __HICheckBoxRegisterClass, 
                        __HIDisableSuddenTerminationForSendEvent, __HIDisclosureButtonRegisterClass, 
@@ -348,11 +348,12 @@ exports:
                        __HIMenuPerformKeyboardNavigation, __HIMenuSendItemSelectedEvent, 
                        __HIMenuSetCommandKey, __HIMenuSetContentDirectionality, __HIMenuSetContentSize, 
                        __HIMenuSetEventProc, __HIMenuSetIndentWidth, __HIMenuSetItemIndent, 
-                       __HIMenuSetItemViewClass, __HIMenuSetNSImageInterface, __HIMenuSetNewItemsCount, 
-                       __HIMenuUseBackdrops, __HIMenuViewRegisterClass, __HIPopupButtonRegisterClass, 
-                       __HIPresentationInstanceCreateForFullScreenSpace, __HIPresentationInstanceCreateWithFullScreenMode, 
-                       __HIPresentationInstanceDisplayDidChange, __HIPresentationInstanceRelease, 
-                       __HIPresentationInstanceSetAutoHideHeight, __HIPresentationInstanceSetSpace, 
+                       __HIMenuSetItemViewClass, __HIMenuSetKeyEquivalentForMatching, 
+                       __HIMenuSetNSImageInterface, __HIMenuSetNewItemsCount, __HIMenuUseBackdrops, 
+                       __HIMenuViewRegisterClass, __HIPopupButtonRegisterClass, __HIPresentationInstanceCreateForFullScreenSpace, 
+                       __HIPresentationInstanceCreateWithFullScreenMode, __HIPresentationInstanceDisplayDidChange, 
+                       __HIPresentationInstanceRelease, __HIPresentationInstanceSetAutoHideHeight, 
+                       __HIPresentationInstanceSetHasAlwaysVisibleMenuBar, __HIPresentationInstanceSetSpace, 
                        __HIPresentationInstanceSetUIMode, __HIPresentationInstanceStartMenuBarAnimation, 
                        __HIProgressBarRegisterClass, __HIPushButtonRegisterClass, 
                        __HIRadioGroupRegisterClass, __HIRawObjectRegisterClass, __HIRegisterAEWillInteractProc, 
@@ -388,10 +389,10 @@ exports:
                        __SetCGEventConversionFilter, __SetDefaultMenuFont, __SetFullTabbingEnabled, 
                        __SetJavaThreadHook, __SetMenuCallout, __SetMenuItemIconSize, 
                        __SetMenuMinimumWidth, __SetMenuTrackingShouldReraiseNSExceptions, 
-                       __SetMenuWindowLevel, __SetOpenMenuOrigin, __SetWindowCGOrderingEnabled, 
-                       __SetWindowReshapingEnabled, __SetWindowZOrderingEnabled, 
-                       __SimulateMenuClosed, __SimulateMenuOpening, __SimulateMenuSelection, 
-                       __SimulateMenuSelectionU, __StartSystemUIModeMenuBarAnimation, 
+                       __SetMenuWindowLevel, __SetOpenMenuOrigin, __SetSharedFullScreenHasAlwaysVisibleMenuBar, 
+                       __SetWindowCGOrderingEnabled, __SetWindowReshapingEnabled, 
+                       __SetWindowZOrderingEnabled, __SimulateMenuClosed, __SimulateMenuOpening, 
+                       __SimulateMenuSelection, __SimulateMenuSelectionU, __StartSystemUIModeMenuBarAnimation, 
                        __SyncWindowWithCGAfterMove, __TISCopyParentInputMethodForInputSource, 
                        __TISCreateEnabledInputSourcePrefs, __TISGetPhysicalKeyboardLanguage, 
                        __TISRestrictToReadOnlyMachinePrefs, __TISUpdateEnabledInputSourcePrefs, 

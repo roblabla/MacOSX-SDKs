@@ -69,6 +69,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0)) NS_SWIFT_UI_ACTO
 + (instancetype)grayButtonConfiguration;
 + (instancetype)filledButtonConfiguration;
 
++ (instancetype)borderlessButtonConfiguration;
++ (instancetype)borderedButtonConfiguration;
++ (instancetype)borderedTintedButtonConfiguration;
++ (instancetype)borderedProminentButtonConfiguration;
+
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -99,6 +104,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0)) NS_SWIFT_UI_ACTO
 
 /// Shows an activity indicator in place of an image. Its placement is controlled by the imagePlacement property.
 @property (nonatomic, readwrite, assign) BOOL showsActivityIndicator;
+@property (nonatomic, readwrite, copy, nullable) UIConfigurationColorTransformer activityIndicatorColorTransformer;
 
 @property (nonatomic, readwrite, copy, nullable) NSString *title;
 @property (nonatomic, readwrite, copy, nullable) NSAttributedString *attributedTitle;
@@ -110,6 +116,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0)) NS_SWIFT_UI_ACTO
 
 /// Insets from the bounds of the button to create the content region. Defaults styles provide insets based on the button size.
 @property (nonatomic, readwrite, assign) NSDirectionalEdgeInsets contentInsets;
+/// Restore the default content insets.
+- (void)setDefaultContentInsets;
 /// Defaults to Leading, only single edge values (top/leading/bottom/trailing) are supported.
 @property (nonatomic, readwrite, assign) NSDirectionalRectEdge imagePlacement;
 /// When a button has both image and text content, this value is the padding between the image and the text.
@@ -118,6 +126,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0)) NS_SWIFT_UI_ACTO
 @property (nonatomic, readwrite, assign) CGFloat titlePadding;
 /// The alignment to use for relative layout between title & subtitle.
 @property (nonatomic, readwrite, assign) UIButtonConfigurationTitleAlignment titleAlignment;
+/// If the style should automatically update when the button is selected. Default varies by style. Disable to customize selection behavior.
+@property (nonatomic, readwrite, assign) BOOL automaticallyUpdateForSelection;
 
 @end
 

@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4320A8CD-F74B-3C76-879A-E87C8103BDE2
+    value:           76DA6CE5-99D2-3485-AB61-A19ECAD625C2
   - target:          x86_64-maccatalyst
-    value:           4320A8CD-F74B-3C76-879A-E87C8103BDE2
+    value:           76DA6CE5-99D2-3485-AB61-A19ECAD625C2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           97EC0D60-7FD5-3578-8B80-A6D28A86AA08
+    value:           81A724A3-F979-311D-B891-418B067D1D42
   - target:          arm64e-maccatalyst
-    value:           97EC0D60-7FD5-3578-8B80-A6D28A86AA08
+    value:           81A724A3-F979-311D-B891-418B067D1D42
 install-name:    '/usr/lib/swift/libswiftCryptoTokenKit.dylib'
-current-version: 554
+current-version: 554.60.2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCryptoTokenKit.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftCryptoTokenKit.dylib', 
@@ -27,7 +27,7 @@ exports:
                        '$ld$install_name$os10.13$@rpath/libswiftCryptoTokenKit.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftCryptoTokenKit.dylib', 
                        '$ld$install_name$os10.9$@rpath/libswiftCryptoTokenKit.dylib' ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '_$sSo11TKSmartCardC14CryptoTokenKitE11withSessionyxxyKcKlF', 
                        '_$sSo11TKSmartCardC14CryptoTokenKitE4send3ins2p12p24data2le5replyys5UInt8V_A2L10Foundation4DataVSgSiSgyAP_s6UInt16Vs5Error_pSgtctF', 
                        '_$sSo11TKSmartCardC14CryptoTokenKitE4send3ins2p12p24data2les6UInt16V2sw_10Foundation4DataV8responsets5UInt8V_A2rOSgSiSgtKF', 

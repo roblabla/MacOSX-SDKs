@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           44929C92-E234-35DC-83F8-120ECF441E05
+    value:           83B3F56B-92BA-3864-868C-E037906E841E
   - target:          x86_64-maccatalyst
-    value:           44929C92-E234-35DC-83F8-120ECF441E05
+    value:           83B3F56B-92BA-3864-868C-E037906E841E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           01CB1029-EF96-3A75-B465-EB7841C5CE6D
+    value:           F110BE21-4635-31B2-9115-D3F8256B1FC4
   - target:          arm64e-maccatalyst
-    value:           01CB1029-EF96-3A75-B465-EB7841C5CE6D
+    value:           F110BE21-4635-31B2-9115-D3F8256B1FC4
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/ICE.framework/Versions/A/ICE'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           841894AB-1DB1-31FA-9297-8E283ED81A0A
+    value:           4349D652-01FA-372B-B720-2150DAA22683
   - target:          x86_64-maccatalyst
-    value:           841894AB-1DB1-31FA-9297-8E283ED81A0A
+    value:           4349D652-01FA-372B-B720-2150DAA22683
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           623FA50C-104A-3F68-97EF-B751F25369E8
+    value:           AA75138E-B7A1-36D0-918A-6D1D8E109F47
   - target:          arm64e-maccatalyst
-    value:           623FA50C-104A-3F68-97EF-B751F25369E8
+    value:           AA75138E-B7A1-36D0-918A-6D1D8E109F47
 install-name:    '/System/Library/PrivateFrameworks/MIL.framework/Versions/A/MIL'
-current-version: 3.5.3
+current-version: 3.5.4
 compatibility-version: 3.5
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -341,6 +341,7 @@ exports:
                        __ZN3MIL9Operators6Common5ios1521NonMaximumSuppression4MakeERNS_10MILContextENSt3__112basic_stringIcNS6_11char_traitsIcEENS6_9allocatorIcEEEE, 
                        __ZN3MIL9Operators6Common5ios1521ResizeNearestNeighbor4MakeERNS_10MILContextENSt3__112basic_stringIcNS6_11char_traitsIcEENS6_9allocatorIcEEEE, 
                        __ZN3MIL9Operators6Common5ios1523BaseActivationWithAlpha4MakeERNS_10MILContextENSt3__112basic_stringIcNS6_11char_traitsIcEENS6_9allocatorIcEEEENS6_8functionIFNS_16ValidationResultERKNS_11IROperationEEEE, 
+                       __ZN3MIL9Operators6Common5ios1523ElementwiseUnaryWithInt4MakeERNS_10MILContextENSt3__112basic_stringIcNS6_11char_traitsIcEENS6_9allocatorIcEEEENS6_8functionIFNS_16ValidationResultERKNS_11IROperationEEEE, 
                        __ZN3MIL9Operators6Common5ios1523UpsampleNearestNeighbor4MakeERNS_10MILContextENSt3__112basic_stringIcNS6_11char_traitsIcEENS6_9allocatorIcEEEE, 
                        __ZN3MIL9Operators6Common5ios1524ElementwiseBinaryLogical4MakeERNS_10MILContextENSt3__112basic_stringIcNS6_11char_traitsIcEENS6_9allocatorIcEEEENS6_8functionIFNS_16ValidationResultERKNS_11IROperationEEEE, 
                        __ZN3MIL9Operators6Common5ios1527BaseActivationWithAlphaBeta4MakeERNS_10MILContextENSt3__112basic_stringIcNS6_11char_traitsIcEENS6_9allocatorIcEEEENS6_8functionIFNS_16ValidationResultERKNS_11IROperationEEEE, 

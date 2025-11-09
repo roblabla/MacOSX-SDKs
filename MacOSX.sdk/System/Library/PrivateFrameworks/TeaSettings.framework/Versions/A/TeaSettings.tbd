@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9061FCCC-B2D8-3D84-A501-740951775902
+    value:           D8473FF6-22EF-3ED3-8CF2-12BC8B5B1E45
   - target:          x86_64-maccatalyst
-    value:           9061FCCC-B2D8-3D84-A501-740951775902
+    value:           D8473FF6-22EF-3ED3-8CF2-12BC8B5B1E45
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CEF083B7-09D7-3A03-A438-CE31C2C59554
+    value:           0F23DB28-5CA8-39A6-B83B-901E2D7BAED4
   - target:          arm64e-maccatalyst
-    value:           CEF083B7-09D7-3A03-A438-CE31C2C59554
+    value:           0F23DB28-5CA8-39A6-B83B-901E2D7BAED4
 install-name:    '/System/Library/PrivateFrameworks/TeaSettings.framework/Versions/A/TeaSettings'
-current-version: 499
+current-version: 549.1
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -26,20 +26,20 @@ allowable-clients:
                        MarketingNotificationExtension, NVCDemo, News, NewsAds, NewsAdsTests, 
                        NewsAnalytics, NewsAnalyticsTests, NewsAnalyticsUpload, NewsArticleQuickLook, 
                        NewsArticleViewer, NewsArticles, NewsArticlesTests, NewsDES, 
-                       NewsDESTests, NewsEngagement, NewsEngagementTests, NewsFeed, 
-                       NewsFeedTests, NewsFormat, NewsFormatTests, NewsInternalExtras, 
+                       NewsDESTests, NewsEngagement, NewsEngagementCollector, NewsEngagementTests, 
+                       NewsFeed, NewsFeedTests, NewsFormat, NewsFormatTests, NewsInternalExtras, 
                        NewsInternalSettings, NewsPersonalization, NewsServices, NewsServicesInternal, 
                        NewsSettings, NewsSubscription, NewsSubscriptionTests, NewsTag, 
                        NewsToday, NewsToday2, NewsTodayIntents, NewsUI, NewsUI2, 
                        NewsUI2Tests, NewsWidgetIntents, OpenInNews, Silex, SilexDebugger, 
                        SilexWeb, Stocks, StocksAnalytics, StocksAnalyticsTests, StocksCore, 
-                       StocksCoreTests, StocksDetailIntents, StocksTests, StocksToday, 
-                       StocksUI, StocksUITests, StocksWidget, TeaCharts, TeaChartsTests, 
-                       TeaDB, TeaDBTests, TeaDemo, TeaFoundationTests, TeaSettings, 
-                       TeaSettingsTests, TeaSnappy, TeaSnappyTests, TeaTemplate, 
-                       TeaTemplateTests, TeaUI, TeaUITests, Weather, WeatherAnalytics, 
-                       WeatherCharts, WeatherCore, WeatherCoreTests, WeatherDaemon, 
-                       WeatherDaemonTests, WeatherDemo, WeatherDiagnosticExtension, 
+                       StocksCoreTests, StocksDetailIntents, StocksKit, StocksKitTests, 
+                       StocksTests, StocksToday, StocksUI, StocksUITests, StocksWidget, 
+                       TeaCharts, TeaChartsTests, TeaDB, TeaDBTests, TeaDemo, TeaFoundationTests, 
+                       TeaSettings, TeaSettingsTests, TeaSnappy, TeaSnappyTests, 
+                       TeaTemplate, TeaTemplateTests, TeaUI, TeaUITests, Weather, 
+                       WeatherAnalytics, WeatherCharts, WeatherCore, WeatherCoreTests, 
+                       WeatherDaemon, WeatherDaemonTests, WeatherDemo, WeatherDiagnosticExtension, 
                        WeatherIntents, WeatherKit, WeatherKitTests, WeatherUI, WeatherUITests, 
                        WeatherUnitTests, WeatherWidget, WeatherWidgetExtension, com.apple.news, 
                        newsd, weatherd ]
@@ -307,7 +307,7 @@ exports:
                        '_$s11TeaSettings7PresetsCMn', '_$s11TeaSettings7PresetsCMo', 
                        '_$s11TeaSettings7PresetsCMu', '_$s11TeaSettings7PresetsCN', 
                        '_$s11TeaSettings7PresetsCfD', '_$s11TeaSettings7PresetsCfd', 
-                       '_$s11TeaSettings7SettingC7migrateyACyxGxSgAA12Configurable_pXEF', 
+                       '_$s11TeaSettings7SettingC7migrate4fromACyxGAF_tF', '_$s11TeaSettings7SettingC7migrateyACyxGxSgAA12Configurable_pXEF', 
                        '_$s11TeaSettings7SettingCA2A10OptionTypeRzrlE_12defaultValue6domain6access7optionsACyxGSS_xAA6DomainOAA6AccessOSayAA0D0VyxGGtcfC', 
                        '_$s11TeaSettings7SettingCA2A12FeatureStateORszrlE_12defaultValue6accessACyAEGSS_AeA6AccessOtcfC', 
                        '_$s11TeaSettings7SettingCA2A9RangeTypeRzrlE_12defaultValue3min3max6accessACyxGSS_xxxAA6AccessOtcfC', 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           36F839A4-15CE-3676-A185-954B321498F6
+    value:           9EA4533B-0572-370A-9A49-A1B66F5AA740
   - target:          x86_64-maccatalyst
-    value:           36F839A4-15CE-3676-A185-954B321498F6
+    value:           9EA4533B-0572-370A-9A49-A1B66F5AA740
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7752D298-72F8-3BAD-AA58-FB80EC1FCF3E
+    value:           86E8CDBC-A8EF-3221-84DC-05C74CE92D82
   - target:          arm64e-maccatalyst
-    value:           7752D298-72F8-3BAD-AA58-FB80EC1FCF3E
+    value:           86E8CDBC-A8EF-3221-84DC-05C74CE92D82
 install-name:    '/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -46,19 +46,19 @@ exports:
                        _CTFontCopyShapingLanguages, _CTFontCopySupportedLanguages, 
                        _CTFontCopySystemUIFontExcessiveLineHeightCharacterSet, _CTFontCopyTable, 
                        _CTFontCopyTraits, _CTFontCopyVariantsOfGlyph, _CTFontCopyVariation, 
-                       _CTFontCopyVariationAxes, _CTFontCreateCopyOfSystemUIFontWithGrade, 
-                       _CTFontCreateCopyWithAttributes, _CTFontCreateCopyWithFamily, 
-                       _CTFontCreateCopyWithSymbolicTraits, _CTFontCreateEmojiFontForFont, 
-                       _CTFontCreateForCharacterRange, _CTFontCreateForCharacters, 
-                       _CTFontCreateForCharactersWithLanguage, _CTFontCreateForCharactersWithLanguageAndOption, 
-                       _CTFontCreateForString, _CTFontCreateForStringWithLanguage, 
-                       _CTFontCreatePathForGlyph, _CTFontCreateUIFontForLanguage, 
-                       _CTFontCreateWithFontDescriptor, _CTFontCreateWithFontDescriptorAndOptions, 
-                       _CTFontCreateWithFontToken, _CTFontCreateWithGraphicsFont, 
-                       _CTFontCreateWithName, _CTFontCreateWithNameAndOptions, _CTFontCreateWithPlatformFont, 
-                       _CTFontCreateWithQuickdrawInstance, _CTFontDescriptorCanCreateWithTextStyle, 
-                       _CTFontDescriptorCopyAttribute, _CTFontDescriptorCopyAttributes, 
-                       _CTFontDescriptorCopyDownloadableFontAttributesForRequests, 
+                       _CTFontCopyVariationAxes, _CTFontCopyVariationAxesInternal, 
+                       _CTFontCreateCopyOfSystemUIFontWithGrade, _CTFontCreateCopyWithAttributes, 
+                       _CTFontCreateCopyWithFamily, _CTFontCreateCopyWithSymbolicTraits, 
+                       _CTFontCreateEmojiFontForFont, _CTFontCreateForCharacterRange, 
+                       _CTFontCreateForCharacters, _CTFontCreateForCharactersWithLanguage, 
+                       _CTFontCreateForCharactersWithLanguageAndOption, _CTFontCreateForString, 
+                       _CTFontCreateForStringWithLanguage, _CTFontCreatePathForGlyph, 
+                       _CTFontCreateUIFontForLanguage, _CTFontCreateWithFontDescriptor, 
+                       _CTFontCreateWithFontDescriptorAndOptions, _CTFontCreateWithFontToken, 
+                       _CTFontCreateWithGraphicsFont, _CTFontCreateWithName, _CTFontCreateWithNameAndOptions, 
+                       _CTFontCreateWithPlatformFont, _CTFontCreateWithQuickdrawInstance, 
+                       _CTFontDescriptorCanCreateWithTextStyle, _CTFontDescriptorCopyAttribute, 
+                       _CTFontDescriptorCopyAttributes, _CTFontDescriptorCopyDownloadableFontAttributesForRequests, 
                        _CTFontDescriptorCopyLocalizedAttribute, _CTFontDescriptorCopyName, 
                        _CTFontDescriptorCopyNameForSystemFontOfWeight, _CTFontDescriptorCreateCopyWithAttributes, 
                        _CTFontDescriptorCreateCopyWithFamily, _CTFontDescriptorCreateCopyWithFeature, 
@@ -167,21 +167,22 @@ exports:
                        _CTRunGetAttachmentCountsPtr, _CTRunGetAttributes, _CTRunGetBackgroundBounds, 
                        _CTRunGetBaseAdvancesAndOrigins, _CTRunGetFont, _CTRunGetGlyphCount, 
                        _CTRunGetGlyphStorage, _CTRunGetGlyphs, _CTRunGetGlyphsPtr, 
-                       _CTRunGetImageBounds, _CTRunGetInitialAdvance, _CTRunGetMetrics, 
-                       _CTRunGetPositions, _CTRunGetPositionsPtr, _CTRunGetPropertiesPtr, 
-                       _CTRunGetScript, _CTRunGetStatus, _CTRunGetStretchFactors, 
-                       _CTRunGetStringIndices, _CTRunGetStringIndicesPtr, _CTRunGetStringRange, 
-                       _CTRunGetTextMatrix, _CTRunGetTypeID, _CTRunGetTypographicBounds, 
-                       _CTRunSyncWithStorage, _CTSwapLineBreakEpsilon, _CTTextTabCreate, 
-                       _CTTextTabGetAlignment, _CTTextTabGetLocation, _CTTextTabGetOptions, 
-                       _CTTextTabGetTypeID, _CTTypesetterCreateLine, _CTTypesetterCreateLineWithOffset, 
-                       _CTTypesetterCreateWithAttributedString, _CTTypesetterCreateWithAttributedStringAndOptions, 
-                       _CTTypesetterCreateWithRunArray, _CTTypesetterCreateWithRunArrayAndOptions, 
-                       _CTTypesetterCreateWithUniCharProvider, _CTTypesetterCreateWithUniCharProviderAndOptions, 
-                       _CTTypesetterGetTypeID, _CTTypesetterSuggestClusterBreak, 
-                       _CTTypesetterSuggestClusterBreakWithOffset, _CTTypesetterSuggestLineBreak, 
-                       _CTTypesetterSuggestLineBreakWithOffset, _CTWriteDescriptionDictionaryToFile, 
-                       _NSFontCollectionActionKey, _NSFontCollectionAllFonts, _NSFontCollectionDidChangeNotification, 
+                       _CTRunGetImageBounds, _CTRunGetInitialAdvance, _CTRunGetInitialBaseAdvance, 
+                       _CTRunGetMetrics, _CTRunGetPositions, _CTRunGetPositionsPtr, 
+                       _CTRunGetPropertiesPtr, _CTRunGetScript, _CTRunGetStatus, 
+                       _CTRunGetStretchFactors, _CTRunGetStringIndices, _CTRunGetStringIndicesPtr, 
+                       _CTRunGetStringRange, _CTRunGetTextMatrix, _CTRunGetTypeID, 
+                       _CTRunGetTypographicBounds, _CTRunSyncWithStorage, _CTSwapLineBreakEpsilon, 
+                       _CTTextTabCreate, _CTTextTabGetAlignment, _CTTextTabGetLocation, 
+                       _CTTextTabGetOptions, _CTTextTabGetTypeID, _CTTypesetterCreateLine, 
+                       _CTTypesetterCreateLineWithOffset, _CTTypesetterCreateWithAttributedString, 
+                       _CTTypesetterCreateWithAttributedStringAndOptions, _CTTypesetterCreateWithRunArray, 
+                       _CTTypesetterCreateWithRunArrayAndOptions, _CTTypesetterCreateWithUniCharProvider, 
+                       _CTTypesetterCreateWithUniCharProviderAndOptions, _CTTypesetterGetTypeID, 
+                       _CTTypesetterSuggestClusterBreak, _CTTypesetterSuggestClusterBreakWithOffset, 
+                       _CTTypesetterSuggestLineBreak, _CTTypesetterSuggestLineBreakWithOffset, 
+                       _CTWriteDescriptionDictionaryToFile, _NSFontCollectionActionKey, 
+                       _NSFontCollectionAllFonts, _NSFontCollectionDidChangeNotification, 
                        _NSFontCollectionDisallowAutoActivationOption, _NSFontCollectionFavorites, 
                        _NSFontCollectionIncludeDisabledFontsOption, _NSFontCollectionNameKey, 
                        _NSFontCollectionOldNameKey, _NSFontCollectionRecentlyUsed, 

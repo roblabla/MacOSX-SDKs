@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4F470861-DE33-3A1B-97C6-84DB345F8EA3
+    value:           D65A1151-BC33-391F-B4C2-F571310AFA8E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           75A7298C-F58A-3065-8EBD-E5A3F9BDFDF2
+    value:           15CA26D7-10CF-3F4B-B296-6593BCCE134E
 install-name:    '/System/Library/PrivateFrameworks/CoreSpotlightImportDaemon.framework/Versions/A/CoreSpotlightImportDaemon'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

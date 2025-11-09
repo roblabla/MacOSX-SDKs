@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E9FBB4F9-E247-3757-8625-F076788E6B1D
+    value:           DB5B38BF-02FB-3444-8D05-788F251D79F7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9922B0CB-D384-3A72-919A-9B554F3D00C5
+    value:           748039DD-50BC-3D65-B954-C38851D1D3FA
 install-name:    '/System/Library/Frameworks/InstantMessage.framework/Versions/A/InstantMessage'
 current-version: 800
 exports:

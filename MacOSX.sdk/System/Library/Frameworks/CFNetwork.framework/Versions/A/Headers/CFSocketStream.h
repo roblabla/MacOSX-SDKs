@@ -187,7 +187,7 @@ CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeVoIP       CF_DEPRECATED
  *  Discussion:
  *  Stream property value, for both set and copy operations.
  *  The value is a CFBooleanRef which indicates whether the connection
- *  is allowed to use the built-in celluar radios.  A value of kCFBooleanTrue 
+ *  is allowed to use the built-in cellular radios.  A value of kCFBooleanTrue
  *  disallows use of cellular interfaces.  kCFBooleanFalse (the default)
  *  allows use of cellular interfaces.
  *  
@@ -200,7 +200,7 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyNoCellular CF_AVAILABLE(10_8, 5_0)
  *  Discussion:
  *  Stream property key for copy operations.  Returns a CFBooleanRef value
  *  of kCFBooleanTrue if the stream has connected using the built in cellular radios.
- *  It returns kCFBooleanFalse if the stream is conneceted over a non-cellular
+ *  It returns kCFBooleanFalse if the stream is connected over a non-cellular
  *  interface or has not yet established a connection.
  */
 CFN_EXPORT const CFStringRef kCFStreamPropertyConnectionIsCellular CF_AVAILABLE(10_8, 6_0);
@@ -224,7 +224,7 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyAllowExpensiveNetworkAccess API_AV
  *  Discussion:
  *  Stream property key for copy operations.  Returns a CFBooleanRef value
  *  of kCFBooleanTrue if the stream has connected using an "expensive" interface.
- *  It returns kCFBooleanFalse if the stream is conneceted over an "inexpensive"
+ *  It returns kCFBooleanFalse if the stream is connected over an "inexpensive"
  *  interface.  If the connection has not been established yet NULL will be returned.
  */
 CFN_EXPORT const CFStringRef kCFStreamPropertyConnectionIsExpensive API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));

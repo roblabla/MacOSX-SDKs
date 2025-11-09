@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D144DBD1-3F63-3595-9CA3-1E3431FC0729
+    value:           77D4E657-4867-39B0-9BD4-56A19D608498
   - target:          x86_64-maccatalyst
-    value:           D144DBD1-3F63-3595-9CA3-1E3431FC0729
+    value:           77D4E657-4867-39B0-9BD4-56A19D608498
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           995EC954-51A5-3D9B-9F93-9A520D861BFD
+    value:           A1216D29-43DF-3D12-B5D6-BB86DA036F80
   - target:          arm64e-maccatalyst
-    value:           995EC954-51A5-3D9B-9F93-9A520D861BFD
+    value:           A1216D29-43DF-3D12-B5D6-BB86DA036F80
 install-name:    '/usr/lib/libxslt.1.dylib'
 current-version: 3.26
 compatibility-version: 3

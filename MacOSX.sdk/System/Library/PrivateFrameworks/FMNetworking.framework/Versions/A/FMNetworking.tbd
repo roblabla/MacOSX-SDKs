@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           10F282C4-B294-3591-BA3C-C67C4D3E97FF
+    value:           6FAD916E-955B-32BF-9117-5250E6D6F2FD
   - target:          x86_64-maccatalyst
-    value:           10F282C4-B294-3591-BA3C-C67C4D3E97FF
+    value:           6FAD916E-955B-32BF-9117-5250E6D6F2FD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           84385F2F-2C81-3760-85E2-200FCE2C53B7
+    value:           DB289A4A-45B9-380A-B749-DC067B08CC2A
   - target:          arm64e-maccatalyst
-    value:           84385F2F-2C81-3760-85E2-200FCE2C53B7
+    value:           DB289A4A-45B9-380A-B749-DC067B08CC2A
 install-name:    '/System/Library/PrivateFrameworks/FMNetworking.framework/Versions/A/FMNetworking'
 swift-abi-version: 7
 allowable-clients:

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AE732881-8C9A-31BC-BEB4-7086D520B20B
+    value:           D7E9532D-011B-3938-B482-E2A988A258B4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A8A5A32E-4C18-3BC0-AAC5-8DD929BFDBA2
+    value:           401C1123-A9AC-3F08-B4D5-44CF767B5898
 install-name:    '/System/Library/PrivateFrameworks/FilesActionsUI.framework/Versions/A/FilesActionsUI'
-current-version: 39
+current-version: 40
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _FAUICreatePDFFromDocumentURLs, _FAUICreateTempFileURLInTemporaryDirectory, 

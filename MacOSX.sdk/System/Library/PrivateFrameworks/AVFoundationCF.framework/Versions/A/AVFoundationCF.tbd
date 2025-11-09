@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           96CA59A8-9B6A-37EB-85CD-70A0F6472B3C
+    value:           CA668A9A-6936-304D-A0F8-FA384FE047D4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8AE689D5-90AD-380D-95D0-326B020F9515
+    value:           C3302DE9-028A-31BF-A0EA-50BFECC333E6
 install-name:    '/System/Library/PrivateFrameworks/AVFoundationCF.framework/Versions/A/AVFoundationCF'
 current-version: 2
 exports:
@@ -174,7 +174,8 @@ exports:
                        _AVCFContentKeySession_RemoveRecipient, _AVCFContentKeySession_RenewExpiringResponseData, 
                        _AVCFCoordinatedPlaybackParticipant_CopyPlaybackSuspensionReasons, 
                        _AVCFCoordinatedPlaybackParticipant_CopyUUID, _AVCFCoordinatedPlaybackParticipant_GetTypeID, 
-                       _AVCFCoordinatedPlaybackParticipant_IsReadyToPlay, _AVCFCoordinatedPlaybackSuspensionReason_AudioSessionInterrupted, 
+                       _AVCFCoordinatedPlaybackParticipant_IsReadyToPlay, _AVCFCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime, 
+                       _AVCFCoordinatedPlaybackSuspensionReason_AudioSessionInterrupted, 
                        _AVCFCoordinatedPlaybackSuspensionReason_CoordinatedPlaybackNotPossible, 
                        _AVCFCoordinatedPlaybackSuspensionReason_PlayingInterstitial, 
                        _AVCFCoordinatedPlaybackSuspensionReason_StallRecovery, _AVCFCoordinatedPlaybackSuspensionReason_UserActionRequired, 

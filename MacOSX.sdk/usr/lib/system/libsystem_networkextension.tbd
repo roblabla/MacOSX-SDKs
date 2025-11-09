@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1362F4D5-516D-35E2-8FFE-F2902388209F
+    value:           D723F4CC-5646-3E1C-BA53-368347C41CE3
   - target:          x86_64-maccatalyst
-    value:           1362F4D5-516D-35E2-8FFE-F2902388209F
+    value:           D723F4CC-5646-3E1C-BA53-368347C41CE3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           937682F9-690C-3793-8CD7-06D91248E9BE
+    value:           4C204B86-D6D2-325E-BDA1-C25A88CC8E0E
   - target:          arm64e-maccatalyst
-    value:           937682F9-690C-3793-8CD7-06D91248E9BE
+    value:           4C204B86-D6D2-325E-BDA1-C25A88CC8E0E
 install-name:    '/usr/lib/system/libsystem_networkextension.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _NEHelperCacheAddRedirectedAddress, _NEHelperCacheClearRedirectedAddresses, 
                        _NEHelperCacheClearUUIDs, _NEHelperCacheCopyAppUUIDMapping, 
@@ -29,25 +29,26 @@ exports:
                        _NEHelperCacheCopySigningIdentifierMapping, _NEHelperCacheSetDomainDictionaries, 
                        _NEHelperCacheSetRoutes, _NEHelperCopyAggregatePathRules, 
                        _NEHelperCopyAppInfo, _NEHelperCopyCurrentNetworkAsync, _NEHelperCopyCurrentNetworkInfo, 
-                       _NEHelperCopyPerAppDomains, _NEHelperCopyPreferredBundleID, 
-                       _NEHelperCopyResponse, _NEHelperGetIKESocket, _NEHelperGetIKESocketWithResult, 
-                       _NEHelperGetKernelControlSocket, _NEHelperGetKernelControlSocketExtended, 
-                       _NEHelperGetNECPSessionFD, _NEHelperGetPFKeySocket, _NEHelperHandleConfigurationsChangedBySC, 
+                       _NEHelperCopyPerAppDomains, _NEHelperCopyResponse, _NEHelperGetIKESocket, 
+                       _NEHelperGetIKESocketWithResult, _NEHelperGetKernelControlSocket, 
+                       _NEHelperGetKernelControlSocketExtended, _NEHelperGetNECPSessionFD, 
+                       _NEHelperGetPFKeySocket, _NEHelperHandleConfigurationsChangedBySC, 
                        _NEHelperInit, _NEHelperInterfaceRemoveAddress, _NEHelperInterfaceSetAddress, 
-                       _NEHelperInterfaceSetMTU, _NEHelperInterfaceSetOption, _NEHelperSendRequest, 
-                       _NEHelperSettingsSetArray, _NEHelperSettingsSetBool, _NEHelperSettingsSetNumber, 
-                       _NEHelperVPNConfigurationExists, _NEHelperVPNSetEnabled, _g_ne_read_uuid_cache, 
-                       _g_ne_uuid_cache_hit, _ne_copy_cached_bundle_identifier_for_uuid, 
-                       _ne_copy_cached_preferred_bundle_for_bundle_identifier, _ne_copy_cached_uuids_for_bundle_identifier, 
-                       _ne_copy_signature_info_for_pid, _ne_copy_signing_identifier_for_pid, 
-                       _ne_copy_uuid_cache, _ne_force_reset_uuid_cache, _ne_get_configuration_generation, 
+                       _NEHelperInterfaceSetAddressWithLifetime, _NEHelperInterfaceSetMTU, 
+                       _NEHelperInterfaceSetOption, _NEHelperSendRequest, _NEHelperSettingsSetArray, 
+                       _NEHelperSettingsSetBool, _NEHelperSettingsSetNumber, _NEHelperVPNConfigurationExists, 
+                       _NEHelperVPNSetEnabled, _g_ne_read_uuid_cache, _g_ne_uuid_cache_hit, 
+                       _ne_copy_cached_bundle_identifier_for_uuid, _ne_copy_cached_preferred_bundle_for_bundle_identifier, 
+                       _ne_copy_cached_uuids_for_bundle_identifier, _ne_copy_signature_info_for_pid, 
+                       _ne_copy_signing_identifier_for_pid, _ne_copy_uuid_cache, 
+                       _ne_force_reset_uuid_cache, _ne_get_configuration_generation, 
                        _ne_is_sockaddr_valid, _ne_log_large_obj, _ne_log_obj, _ne_print_backtrace, 
                        _ne_privacy_dns_netagent_id, _ne_privacy_proxy_netagent_id, 
                        _ne_session_add_necp_drop_dest_from_dest_list, _ne_session_add_necp_drop_dest_from_path, 
                        _ne_session_address_matches_subnets, _ne_session_agent_get_advisory, 
                        _ne_session_agent_get_advisory_interface_index, _ne_session_always_on_vpn_configs_present, 
                        _ne_session_always_on_vpn_configs_present_at_boot, _ne_session_app_vpn_configs_present, 
-                       _ne_session_cancel, _ne_session_content_filter_configs_present, 
+                       _ne_session_cancel, _ne_session_clear_caches, _ne_session_content_filter_configs_present, 
                        _ne_session_copy_app_data_from_flow_divert_socket, _ne_session_copy_app_data_from_flow_divert_token, 
                        _ne_session_copy_os_version_string, _ne_session_copy_policy_match, 
                        _ne_session_copy_security_session_info, _ne_session_copy_socket_attributes, 

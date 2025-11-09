@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F9C3A462-6928-3591-88F4-DC5481598D3A
+    value:           FBBB3B65-3035-371C-8CA3-2014558AA52E
   - target:          x86_64-maccatalyst
-    value:           F9C3A462-6928-3591-88F4-DC5481598D3A
+    value:           FBBB3B65-3035-371C-8CA3-2014558AA52E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           59E3058D-9D1F-3E7F-B476-E9BD928D564A
+    value:           1B8BB485-301C-3D2C-88C6-30A36748F370
   - target:          arm64e-maccatalyst
-    value:           59E3058D-9D1F-3E7F-B476-E9BD928D564A
+    value:           1B8BB485-301C-3D2C-88C6-30A36748F370
 install-name:    '/usr/lib/system/libsystem_asl.dylib'
-current-version: 390
+current-version: 392
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

@@ -4,16 +4,16 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C20B6078-43C6-3D25-A4A6-4D122B36DA48
+    value:           653B492C-9CF5-37A2-B64C-F1CA9342E407
   - target:          x86_64-maccatalyst
-    value:           C20B6078-43C6-3D25-A4A6-4D122B36DA48
+    value:           653B492C-9CF5-37A2-B64C-F1CA9342E407
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BFFDC699-3DBB-3E61-BF1B-F7C1AF5E829C
+    value:           ECB9C284-68CD-35CE-A8AE-025CBBAE7466
   - target:          arm64e-maccatalyst
-    value:           BFFDC699-3DBB-3E61-BF1B-F7C1AF5E829C
+    value:           ECB9C284-68CD-35CE-A8AE-025CBBAE7466
 install-name:    '/usr/lib/libLeaksAtExit.dylib'
 ...

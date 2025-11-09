@@ -18,7 +18,19 @@ typedef NS_ENUM(NSInteger,  MEMessageActionMessageColor) {
     MEMessageActionMessageColorPurple,
     MEMessageActionMessageColorBlue,
     MEMessageActionMessageColorGray,
-} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst);
+} NS_SWIFT_NAME(MEMessageAction.MessageColor) API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst);
+
+typedef NS_ENUM(NSInteger, MEMessageActionFlag) {
+    MEMessageActionFlagNone,
+    MEMessageActionFlagDefaultColor,
+    MEMessageActionFlagRed,
+    MEMessageActionFlagOrange,
+    MEMessageActionFlagYellow,
+    MEMessageActionFlagGreen,
+    MEMessageActionFlagBlue,
+    MEMessageActionFlagPurple,
+    MEMessageActionFlagGray,
+} NS_SWIFT_NAME(MEMessageAction.Flag) API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst);
 
 /// @brief An action that can be performed on a mail message.
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
@@ -39,14 +51,11 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
 /// @brief Marks the mail  message as unread.
 @property (class, readonly) MEMessageAction *markAsUnreadAction;
 
-/// @brief Marks the mail message as flagged.
-@property (class, readonly) MEMessageAction *flagAction;
-
-/// @brief Removes any flags from the mail message.
-@property (class, readonly) MEMessageAction *unflagAction;
+/// @brief Marks the message as flagged with the provided color.
++ (instancetype)flagActionWithFlag:(MEMessageActionFlag)flag NS_SWIFT_NAME(flag(_:));
 
 /// @brief Adds a color to the message when shown in the message list.
-+ (MEMessageAction *)setColorActionWithColor:(MEMessageActionMessageColor)color NS_SWIFT_NAME(setColor(_:));
++ (instancetype)setBackgroundColorActionWithColor:(MEMessageActionMessageColor)color NS_SWIFT_NAME(setBackgroundColor(_:));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

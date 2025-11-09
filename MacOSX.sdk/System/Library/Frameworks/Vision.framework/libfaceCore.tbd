@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F21057A8-CC9B-3CAF-892F-2388087BFD30
+    value:           154F6446-1BC3-3C98-8697-A23B37BA4B4F
   - target:          x86_64-maccatalyst
-    value:           F21057A8-CC9B-3CAF-892F-2388087BFD30
+    value:           154F6446-1BC3-3C98-8697-A23B37BA4B4F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A27EF1B8-68AC-3119-B858-1786C19CC99D
+    value:           88FA7A84-2CAC-3961-B29E-BBEA161A686D
   - target:          arm64e-maccatalyst
-    value:           A27EF1B8-68AC-3119-B858-1786C19CC99D
+    value:           88FA7A84-2CAC-3961-B29E-BBEA161A686D
 install-name:    '/System/Library/Frameworks/Vision.framework/libfaceCore.dylib'
-current-version: 5.0.41
+current-version: 5.0.71
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 

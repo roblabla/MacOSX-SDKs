@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7ABC5FDC-3BDF-3B89-8397-D23FEDFB438D
+    value:           62E1193A-62D2-34CF-B6EB-A0EE56CDD8A7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6920DAED-A5D1-3C4D-9C19-6F23C33A50B4
+    value:           3109E05A-47E0-352C-A993-A4B27091140F
 install-name:    '/System/Library/PrivateFrameworks/FusionTracker.framework/Versions/A/FusionTracker'
 exports:
   - targets:         [ x86_64-macos ]
@@ -16,6 +16,8 @@ exports:
                        __ZTIN2ik18PixelBufferStorageE, __ZTIN2ik21EspressoBufferStorageE, 
                        __ZTIN2ik6TensorE, __ZTINSt3__117bad_function_callE, __ZTINSt3__120__shared_ptr_emplaceIN2ft10ProxyTrackENS_9allocatorIS2_EEEE, 
                        __ZTINSt3__120__shared_ptr_emplaceIN2ft11KalmanTrackENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__120__shared_ptr_emplaceIN2ft16CinematicTrackerENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__120__shared_ptr_emplaceIN2ft5FrameENS_9allocatorIS2_EEEE, 
                        __ZTINSt3__120__shared_ptr_emplaceIN2ik18PixelBufferStorageENS_9allocatorIS2_EEEE, 
                        __ZTINSt3__120__shared_ptr_emplaceIN2ik21EspressoBufferStorageENS_9allocatorIS2_EEEE, 
                        __ZTINSt3__120__shared_ptr_pointerIP10__CVBufferPFvS2_ENS_9allocatorIS1_EEEE, 
@@ -24,6 +26,8 @@ exports:
                        __ZTSN2ik18PixelBufferStorageE, __ZTSN2ik21EspressoBufferStorageE, 
                        __ZTSN2ik6TensorE, __ZTSNSt3__117bad_function_callE, __ZTSNSt3__120__shared_ptr_emplaceIN2ft10ProxyTrackENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceIN2ft11KalmanTrackENS_9allocatorIS2_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_emplaceIN2ft16CinematicTrackerENS_9allocatorIS2_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_emplaceIN2ft5FrameENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceIN2ik18PixelBufferStorageENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceIN2ik21EspressoBufferStorageENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIP10__CVBufferPFvS2_ENS_9allocatorIS1_EEEE, 
@@ -33,13 +37,13 @@ exports:
                        _AcAttrPreProcess, _AcAttrPreProcessCropResizeRef, _AcAttrStart, 
                        _AcAttrStop, _AcCommitHash, _AcDetCreate, _AcDetDestroy, _AcDetGetParams, 
                        _AcDetPostProcess, _AcDetPostProcessMultiNetOutputs, _AcDetPreProcessRef, 
-                       _AcDetStart, _AcDetStop, _AcDetUseLowThresholds, _FTFillPixelBufferWithColor, 
-                       _FTResolveEspressoNetPath, _FusionTrackerVersionNumber, _FusionTrackerVersionString, 
-                       _TtAssocObjectRemoveOldOverlapObjects, _TtAssociateTrackerBboxes, 
-                       _TtDetCreate, _TtDetDestroy, _TtDetGetParams, _TtDetGetTrkScheduleInfo, 
-                       _TtDetPostProcess, _TtDetPostProcessMultiNetOutputs, _TtDetPreProcessRef, 
-                       _TtDetStart, _TtDetStop, _TtTrkRpnCreate, _TtTrkRpnDestroy, 
-                       _TtTrkRpnExemplarPostProcess, _TtTrkRpnExemplarPreProcess, 
+                       _AcDetStart, _AcDetStop, _AcDetUseLowThresholds, _FTCinematicHighPriorityTrackerOpDescription, 
+                       _FTFillPixelBufferWithColor, _FTResolveEspressoNetPath, _FusionTrackerVersionNumber, 
+                       _FusionTrackerVersionString, _TtAssocObjectRemoveOldOverlapObjects, 
+                       _TtAssociateTrackerBboxes, _TtDetCreate, _TtDetDestroy, _TtDetGetParams, 
+                       _TtDetGetTrkScheduleInfo, _TtDetPostProcess, _TtDetPostProcessMultiNetOutputs, 
+                       _TtDetPreProcessRef, _TtDetStart, _TtDetStop, _TtTrkRpnCreate, 
+                       _TtTrkRpnDestroy, _TtTrkRpnExemplarPostProcess, _TtTrkRpnExemplarPreProcess, 
                        _TtTrkRpnGetExemplarCrop, _TtTrkRpnGetExtState, _TtTrkRpnGetInstanceCrop, 
                        _TtTrkRpnGetParams, _TtTrkRpnInstancePostProcess, _TtTrkRpnInstancePreProcess, 
                        _TtTrkRpnPreProcessCropResizeRef, _TtTrkRpnPreProcessCropResizeTempBytes, 
@@ -226,7 +230,11 @@ exports:
                        _kAcDetFaceNodeConfigDefaultRawData_len, _kAcODNodeConfigDefaultRawData, 
                        _kAcODNodeConfigDefaultRawData_len, _kAcSaliencyNodeConfigDefaultRawData, 
                        _kAcSaliencyNodeConfigDefaultRawData_len, _kFTInvalidTrackId ]
-    objc-classes:    [ FTBipartiteMatcher, FTEspressoBuffer, FTImageTensorDescriptor, 
-                       FTNetworkDescriptor, FTTapToBox, FTTensorReference, FTVTScaler ]
+    objc-classes:    [ FTBipartiteMatcher, FTCinematicConfig, FTCinematicHighPriorityTrackerState, 
+                       FTCinematicInput, FTCinematicTapRequest, FTCinematicTapResponse, 
+                       FTCinematicTapToTrack, FTCinematicTrack, FTCinematicTracker, 
+                       FTCinematicTrackingResult, FTCinematicTrackingState, FTEspressoBuffer, 
+                       FTImageTensorDescriptor, FTNetworkDescriptor, FTTapToBox, 
+                       FTTapToTrackPreprocessor, FTTensorReference, FTVTScaler ]
     weak-symbols:    [ __ZN2ft10ProxyTrack4KINDE ]
 ...

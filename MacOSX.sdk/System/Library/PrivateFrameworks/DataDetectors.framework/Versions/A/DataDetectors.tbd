@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D2372F94-FA65-330C-9828-370C3E98592D
+    value:           1201C512-0EC9-3D56-860E-28E0580B864A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3BF9596C-F3EB-32B5-8224-C7317BFE8A23
+    value:           82D1D9D5-632E-368B-9789-D1A567E42AF7
 install-name:    '/System/Library/PrivateFrameworks/DataDetectors.framework/Versions/A/DataDetectors'
 current-version: 435
 exports:

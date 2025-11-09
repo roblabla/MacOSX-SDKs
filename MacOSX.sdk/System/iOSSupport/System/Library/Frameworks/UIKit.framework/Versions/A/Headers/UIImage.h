@@ -18,7 +18,6 @@
 #if __has_include(<UIKit/NSTextAttachment.h>)
 #import <UIKit/NSTextAttachment.h>
 #endif
-#import <UIKit/UIImageVariants.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -304,29 +303,6 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIImage : NSObject <NSSecureCodi
 
 @end
 
-
-@interface UIImage (UIImageVariant)
-
-/// Get a system symbol with a certain variant.
-+ (nullable UIImage *)systemImageNamed:(NSString *)name variant:(UIImageVariant)variant API_AVAILABLE(ios(15.0),tvos(15.0),watchos(8.0));
-/// Get a system symbol with a certain variant with a specific configuration.
-+ (nullable UIImage *)systemImageNamed:(NSString *)name variant:(UIImageVariant)variant withConfiguration:(nullable UIImageConfiguration *)configuration API_AVAILABLE(ios(15.0),tvos(15.0),watchos(8.0));
-
-/// Get a custom image with a certain variant.
-+ (nullable UIImage *)imageNamed:(NSString *)name variant:(UIImageVariant)variant API_AVAILABLE(ios(15.0),tvos(15.0),watchos(8.0));
-/// Get a custom image with a certain variant with a specific configuration.
-+ (nullable UIImage *)imageNamed:(NSString *)name variant:(UIImageVariant)variant withConfiguration:(nullable UIImageConfiguration *)configuration API_AVAILABLE(ios(15.0),tvos(15.0),watchos(8.0));
-
-/// Get an image with a variant.
-- (nullable UIImage *)imageByApplyingVariant:(UIImageVariant)variant API_AVAILABLE(ios(15.0),tvos(15.0),watchos(8.0));
-
-/// Get an image with a variant the same as another (variant) image.
-- (nullable UIImage *)imageByApplyingVariantFromImage:(UIImage *)image API_AVAILABLE(ios(15.0),tvos(15.0),watchos(8.0));
-
-/// Remove all variants from a (variant) image.
-- (nullable UIImage *)imageByRemovingVariant API_AVAILABLE(ios(15.0),tvos(15.0),watchos(8.0));
-
-@end
 
 #if TARGET_OS_IOS
 @interface UIImage (NSItemProvider) <NSItemProviderReading, NSItemProviderWriting, UIItemProviderPresentationSizeProviding>

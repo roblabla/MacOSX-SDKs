@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7BDE587B-C4A9-3E4B-8FD9-74DFA1305F1A
+    value:           BE5D1D1C-B17B-3706-BC42-F63CB119B333
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           45F7367E-EAED-3F41-AA7C-E4F0500A7FDB
+    value:           AC6D1734-A4D8-3E2D-9A64-A4F3DD0784E9
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/ImageKit.framework/Versions/A/ImageKit'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _IKAnimationDelayKey, _IKAnimationDurationKey, _IKAnimationFrameRateKey, 
                        _IKAnimationVelocityCurveKey, _IKBestRepresentationFromNSImageForPhysicalSize, 
                        _IKCGBitmapContextRefFromCGImageRef, _IKCGBitmapContextRefFromData, 

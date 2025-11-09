@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7BD1911E-B965-3406-BE76-16387CD8827E
+    value:           EBA11AC6-6924-311A-A92F-5CE302E48FA8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           57DEED29-6A61-3BB9-8F01-5EC55E5A75EE
+    value:           EFB2E0D8-7CB2-3950-82B3-5BE2A2C4F1E2
 install-name:    '/System/Library/PrivateFrameworks/SetupAssistantSupport.framework/Versions/A/SetupAssistantSupport'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -22,13 +22,13 @@ exports:
                        _kSASProximityHandshakePlatformMac, _kSASProximityHandshakePlatformTypeKey, 
                        _kSASProximityHandshakePlatformiOS, _kSASProximityHandshakeSimplePasscodeTypeKey, 
                        _kSASProximityHandshakeUnlockTypeKey, _kSASProximityInformationAcessibilitySettingsKey, 
-                       _kSASProximityInformationAppAnalyticsKey, _kSASProximityInformationAppleIDKey, 
-                       _kSASProximityInformationAutoTimeZoneKey, _kSASProximityInformationBackupEnabledKey, 
-                       _kSASProximityInformationBackupMetadataKey, _kSASProximityInformationBackupUUIDKey, 
-                       _kSASProximityInformationClassKey, _kSASProximityInformationConnectedToWiFiKey, 
-                       _kSASProximityInformationDateOfLastBackupKey, _kSASProximityInformationDeviceAnalyticsKey, 
-                       _kSASProximityInformationDeviceNameKey, _kSASProximityInformationDeviceTermsIdentifierKey, 
-                       _kSASProximityInformationDeviceToDeviceMigrationVersionKey, 
+                       _kSASProximityInformationAllowMoreOn5G, _kSASProximityInformationAppAnalyticsKey, 
+                       _kSASProximityInformationAppleIDKey, _kSASProximityInformationAutoTimeZoneKey, 
+                       _kSASProximityInformationBackupEnabledKey, _kSASProximityInformationBackupMetadataKey, 
+                       _kSASProximityInformationBackupUUIDKey, _kSASProximityInformationClassKey, 
+                       _kSASProximityInformationConnectedToWiFiKey, _kSASProximityInformationDateOfLastBackupKey, 
+                       _kSASProximityInformationDeviceAnalyticsKey, _kSASProximityInformationDeviceNameKey, 
+                       _kSASProximityInformationDeviceTermsIdentifierKey, _kSASProximityInformationDeviceToDeviceMigrationVersionKey, 
                        _kSASProximityInformationFindMyDeviceKey, _kSASProximityInformationHasHomeButtonKey, 
                        _kSASProximityInformationHasInexpensiveCellularNetwork, _kSASProximityInformationKey, 
                        _kSASProximityInformationKeyboardsKey, _kSASProximityInformationLocalePreferencesKey, 

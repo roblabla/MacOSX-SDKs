@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           99541E82-1683-3548-909F-D07D93DAECD2
+    value:           527036E3-3E70-3E28-BAE4-DCB53709B489
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B85BB7C2-5A8D-371B-A8AD-FB7F0B44C979
+    value:           82A6FE17-7C99-3A9C-80B3-0827EC3A4A68
 install-name:    '/System/Library/PrivateFrameworks/ContactsMetrics.framework/Versions/A/ContactsMetrics'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -44,9 +44,10 @@ exports:
                        _CNMetricsKeyMeCardRelationshipsCount, _CNMetricsKeyMeCardRelationshipsSet, 
                        _CNMetricsKeyMeCardSet, _CNMetricsKeyMemojiMetadataFraction, 
                        _CNMetricsKeyNestedGroupsMaxDepth, _CNMetricsKeyNonemptyAccountsCount, 
-                       _CNMetricsKeyOldestContactAge, _CNMetricsKeyPhoneAverageCount, 
-                       _CNMetricsKeyPhoneDefaultLabelFraction, _CNMetricsKeyPhoneFraction, 
-                       _CNMetricsKeyPhoneMaxCount, _CNMetricsKeyPhoneWithPrefixFraction, 
+                       _CNMetricsKeyOldestContactAge, _CNMetricsKeyPersistenceHasNoStores, 
+                       _CNMetricsKeyPersistenceRepairsAddedStores, _CNMetricsKeyPersistenceRepairsRemovedStores, 
+                       _CNMetricsKeyPhoneAverageCount, _CNMetricsKeyPhoneDefaultLabelFraction, 
+                       _CNMetricsKeyPhoneFraction, _CNMetricsKeyPhoneMaxCount, _CNMetricsKeyPhoneWithPrefixFraction, 
                        _CNMetricsKeyPhoneWithRemotePrefixFraction, _CNMetricsKeyPhotoFraction, 
                        _CNMetricsKeyPostalAverageCount, _CNMetricsKeyPostalDefaultLabelFraction, 
                        _CNMetricsKeyPostalFraction, _CNMetricsKeyPostalMaxCount, 
@@ -58,5 +59,6 @@ exports:
                        _CNMetricsKeyUIIsSelection, _CNMetricsKeyUIIsSuggestion, _CNMetricsKeyUIMediaType, 
                        _CNMetricsKeyUIPropertyName, _CNMetricsKeyUISearchAction, 
                        _CNMetricsKeyUISearchPerformed, _CNMetricsKeyUIShareType ]
-    objc-classes:    [ CNMetricsReporter, CNMetricsUIReporter ]
+    objc-classes:    [ CNMetricsReporter, CNMetricsReporterSpiedEntry, CNMetricsReporterSpy, 
+                       CNMetricsReporterStub, CNMetricsUIReporter ]
 ...

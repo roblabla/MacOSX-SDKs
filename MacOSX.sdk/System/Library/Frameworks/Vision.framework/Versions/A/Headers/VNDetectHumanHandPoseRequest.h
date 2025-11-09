@@ -167,7 +167,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 
 /*!
 	@brief Defines an upper bounds to the maximum number of hands that will be processed for key points in an image.
-	@discussion The complexity in key points determination is scalable by the number of hands to be processed.  All hands detected in an image will be ordered by relative size, with only the N largest ones having key points determined.  The default value for this property is 2.
+	@discussion The complexity in key points determination is scalable by the number of hands to be processed.  All hands detected in an image will be ordered by relative size, with only the N largest ones having key points determined.  The default value for this property is 2. The maximum value for VNDetectHumanHandPoseRequestRevision1 is 6.
 */
 @property (readwrite, assign) NSUInteger maximumHandCount;
 

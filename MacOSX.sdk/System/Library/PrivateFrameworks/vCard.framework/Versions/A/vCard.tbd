@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F2B994C4-1436-3897-BFF4-0D8C6604EA56
+    value:           D36DE1AA-1793-3E62-9B02-C1090D7543B7
   - target:          x86_64-maccatalyst
-    value:           F2B994C4-1436-3897-BFF4-0D8C6604EA56
+    value:           D36DE1AA-1793-3E62-9B02-C1090D7543B7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F0339B23-1A14-3269-A34F-81024FFD711C
+    value:           F2C472AF-64C8-32D1-A3BF-027480EB4795
   - target:          arm64e-maccatalyst
-    value:           F0339B23-1A14-3269-A34F-81024FFD711C
+    value:           F2C472AF-64C8-32D1-A3BF-027480EB4795
 install-name:    '/System/Library/PrivateFrameworks/vCard.framework/Versions/A/vCard'
-current-version: 3525
+current-version: 3535.5
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

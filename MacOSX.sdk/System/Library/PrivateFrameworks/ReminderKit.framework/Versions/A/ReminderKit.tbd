@@ -4,36 +4,40 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CAE5B389-B02C-3B2B-B809-7825CD60A243
+    value:           BC9C46EF-74C3-3FB2-BF5B-CE16726EDC53
   - target:          x86_64-maccatalyst
-    value:           CAE5B389-B02C-3B2B-B809-7825CD60A243
+    value:           BC9C46EF-74C3-3FB2-BF5B-CE16726EDC53
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E604B286-CC03-3AC0-8293-513517CA598C
+    value:           C14EC365-57EC-3B7C-98E4-1EA4898DD439
   - target:          arm64e-maccatalyst
-    value:           E604B286-CC03-3AC0-8293-513517CA598C
+    value:           C14EC365-57EC-3B7C-98E4-1EA4898DD439
 install-name:    '/System/Library/PrivateFrameworks/ReminderKit.framework/Versions/A/ReminderKit'
-current-version: 482
+current-version: 560
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _DADREMAccountSetPersonIDAuthorKey, _DADREMDAChangeTrackingHelperClientName, 
-                       _DADREMSaveRequestAuthorKey, _NSStringFromPriorityLevel, _NSStringFromREMAccountType, 
-                       _NSStringFromREMFetchRequestType, _NewBase64Decode, _NewBase64Encode, 
-                       _PropertyNameFromREMReminderChangeTrackingProperty, _RDHashtagLabelUpdaterAuthor, 
-                       _RDNotificationConsumerLastBannerPresentationDateAuthor, _RDStoreControllerCKParentReminderIdentifierMigrationAuthor, 
+    symbols:         [ _CompletedRemindersCount, _CompletedRemindersCountInList, 
+                       _CustomSmartListsCount, _DADREMAccountSetPersonIDAuthorKey, 
+                       _DADREMDAChangeTrackingHelperClientName, _DADREMSaveRequestAuthorKey, 
+                       _HashtagsCount, _ListsCount, _ListsWithCustomBadgeCount, _NSStringFromPriorityLevel, 
+                       _NSStringFromREMAccountType, _NSStringFromREMFetchRequestType, 
+                       _NewBase64Decode, _NewBase64Encode, _PropertyNameFromREMReminderChangeTrackingProperty, 
+                       _RDHashtagLabelUpdaterAuthor, _RDNotificationConsumerLastBannerPresentationDateAuthor, 
+                       _RDStoreControllerCKParentReminderIdentifierMigrationAuthor, 
                        _RDStoreControllerDefaultValuesMigrationAuthor, _RDStoreControllerDeleteAccountStoreAuthor, 
+                       _RDStoreControllerDiacriticsInsensitiveHashtagLabelsMigrationAuthor, 
                        _RDStoreControllerDisplayDateUpdaterAuthor, _RDStoreControllerICCloudContextAuthor, 
-                       _RDStoreControllerICCloudContextInternalAuthor, _RDStoreControllerJSONPropertiesMigrationAuthor, 
-                       _RDStoreControllerOrphanedListMigrationAuthor, _RDTodayNotificationLastBannerPresentationDateAuthor, 
-                       _REMACAccountPropertyDidChooseToMigrate, _REMACAccountPropertyDidFinishMigration, 
-                       _REMAccountTypeMaskContainsType, _REMAppBundleIdentifier, 
-                       _REMAppGroupBundleIdentifier, _REMBundleGet, _REMCFTypeCast, 
-                       _REMChangeErrorDomain, _REMCheckedDynamicCast, _REMCheckedProtocolCast, 
-                       _REMClassAndProtocolCast, _REMDA_kCalDAVMobileAccountDelegatePrincipalPath, 
+                       _RDStoreControllerICCloudContextInternalAuthor, _RDStoreControllerICCloudContextServerChangeTokenAuthor, 
+                       _RDStoreControllerJSONPropertiesMigrationAuthor, _RDStoreControllerOrphanedListMigrationAuthor, 
+                       _RDTodayNotificationLastBannerPresentationDateAuthor, _REMACAccountPropertyDidChooseToMigrate, 
+                       _REMACAccountPropertyDidFinishMigration, _REMAccountTypeMaskContainsType, 
+                       _REMAppBundleIdentifier, _REMAppGroupBundleIdentifier, _REMBundleGet, 
+                       _REMCFTypeCast, _REMChangeErrorDomain, _REMCheckedDynamicCast, 
+                       _REMCheckedProtocolCast, _REMClassAndProtocolCast, _REMDA_kCalDAVMobileAccountDelegatePrincipalPath, 
                        _REMDaemonAPSNamedDelegatePort, _REMDaemonBundleIdentifier, 
                        _REMDaemonCoreSpotlightIndexName, _REMDaemonExecutableName, 
                        _REMDaemonMachServiceName, _REMDaemonMachServiceName_userInteractive, 
@@ -88,14 +92,12 @@ exports:
                        _REMSymbolicColorNameGray, _REMSymbolicColorNameGreen, _REMSymbolicColorNameIndigo, 
                        _REMSymbolicColorNameLightBlue, _REMSymbolicColorNameOrange, 
                        _REMSymbolicColorNamePink, _REMSymbolicColorNamePurple, _REMSymbolicColorNameRed, 
-                       _REMSymbolicColorNameRose, _REMSymbolicColorNameYellow, _REMTipKitDataViewFetchCloudKitAccountsCountResultKey, 
-                       _REMTipKitDataViewFetchCompletedRemindersCountResultKey, _REMTipKitDataViewFetchCustomSmartListsCountResultKey, 
-                       _REMTipKitDataViewFetchHashtagsCountResultKey, _REMTipKitDataViewFetchListsWithCustomBadgeCountResultKey, 
-                       _REMToolBundleIdentifier, _REMUniversalAppBundleIdentifier, 
-                       _REMiCalendarDataFromICSCalendar, _ReminderKitVersionNumber, 
-                       _ReminderKitVersionString, _TTNSAttachmentAttributeName, _TTREMHashtagAttributeName, 
-                       __REMGetLocalizedString, __REMStoreChangedNotificationName, 
-                       __REMStoreMustRefreshNotificationName, __REMStoreShouldNotifyOfInteractionWithPeopleNotificationName, 
+                       _REMSymbolicColorNameRose, _REMSymbolicColorNameYellow, _REMToolBundleIdentifier, 
+                       _REMUniversalAppBundleIdentifier, _REMiCalendarDataFromICSCalendar, 
+                       _ReminderKitVersionNumber, _ReminderKitVersionString, _TTNSAttachmentAttributeName, 
+                       _TTREMHashtagAttributeName, _UncompletedRemindersCount, __REMGetLocalizedString, 
+                       __REMStoreChangedNotificationName, __REMStoreMustRefreshNotificationName, 
+                       __REMStoreShouldNotifyOfInteractionWithPeopleNotificationName, 
                        _cloudBasedAccountTypes, _kREMCurrentRuntimeVersion, _kREMObjectIDURLScheme, 
                        _kREMSupportedVersionUnset, _kStructuredLocationABIDKey, _kStructuredLocationABIDKey_oldAndBusted, 
                        _kStructuredLocationRadiusKey, _kStructuredLocationRadiusKey_oldAndBusted, 
@@ -188,8 +190,10 @@ exports:
                        REMStoreInvocationValueStorage, REMStoreSwiftInvocation, REMStoreSwiftInvocationResult, 
                        REMStructuredLocation, REMSuggestedAttributesPerformer, REMSyncInterface, 
                        REMSystemUtilities, REMTTHashtag, REMTipKitDataView, REMTipKitDataViewInvocation_fetchCompletedRemindersCount, 
+                       REMTipKitDataViewInvocation_fetchCompletedRemindersCountInList, 
                        REMTipKitDataViewInvocation_fetchCustomSmartListsCount, REMTipKitDataViewInvocation_fetchHashtagsCount, 
-                       REMTipKitDataViewInvocation_fetchListsWithCustomBadgeCount, 
+                       REMTipKitDataViewInvocation_fetchListsCount, REMTipKitDataViewInvocation_fetchListsWithCustomBadgeCount, 
+                       REMTipKitDataViewInvocation_fetchUncompletedRemindersCount, 
                        REMURLAttachment, REMUserActivity, REMUserDefaults, REMUserDefaultsObserver, 
                        REMXPCChangeTrackingPerformerInterface, REMXPCClientInterface, 
                        REMXPCDaemonController, REMXPCDaemonControllerExportedObject, 

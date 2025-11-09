@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
-// swift-module-flags: -target x86_64-apple-macos12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-concurrency -module-name StoreKit
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-module-flags: -target x86_64-apple-macos12.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-concurrency -module-name StoreKit
+import AppKit
 import CoreFoundation
 import CryptoKit
 import CryptoKit/*.P256*/
@@ -12,6 +13,66 @@ import Swift
 import _Concurrency
 import os.log
 import os
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension StoreKit.VerificationResult where SignedType == StoreKit.Transaction {
+  public var jwsRepresentation: Swift.String {
+    get
+  }
+  public var headerData: Foundation.Data {
+    get
+  }
+  public var payloadData: Foundation.Data {
+    get
+  }
+  public var signatureData: Foundation.Data {
+    get
+  }
+  public var signature: CryptoKit.P256.Signing.ECDSASignature {
+    get
+  }
+  public var signedData: Foundation.Data {
+    get
+  }
+  public var signedDate: Foundation.Date {
+    get
+  }
+  public var deviceVerification: Foundation.Data {
+    get
+  }
+  public var deviceVerificationNonce: Foundation.UUID {
+    get
+  }
+}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension StoreKit.VerificationResult where SignedType == StoreKit.Product.SubscriptionInfo.RenewalInfo {
+  public var jwsRepresentation: Swift.String {
+    get
+  }
+  public var headerData: Foundation.Data {
+    get
+  }
+  public var payloadData: Foundation.Data {
+    get
+  }
+  public var signatureData: Foundation.Data {
+    get
+  }
+  public var signature: CryptoKit.P256.Signing.ECDSASignature {
+    get
+  }
+  public var signedData: Foundation.Data {
+    get
+  }
+  public var signedDate: Foundation.Date {
+    get
+  }
+  public var deviceVerification: Foundation.Data {
+    get
+  }
+  public var deviceVerificationNonce: Foundation.UUID {
+    get
+  }
+}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct Transaction : Swift.Identifiable {
   public struct RevocationReason : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
@@ -36,27 +97,11 @@ public struct Transaction : Swift.Identifiable {
     public static var familyShared: StoreKit.Transaction.OwnershipType
     public typealias RawValue = Swift.String
   }
-  public var jwsRepresentation: Swift.String {
-    get
-  }
-  public var headerData: Foundation.Data {
-    get
-  }
-  public var payloadData: Foundation.Data {
-    get
-  }
-  public var signatureData: Foundation.Data {
-    get
-  }
-  public typealias Signature = CryptoKit.P256.Signing.ECDSASignature
-  public var signature: StoreKit.Transaction.Signature {
-    get
-  }
-  public var signedData: Foundation.Data {
-    get
-  }
   @usableFromInline
   internal let backing: StoreKit.BackingValue
+  public var jsonRepresentation: Foundation.Data {
+    get
+  }
   public let id: Swift.UInt64
   public let originalID: Swift.UInt64
   public let webOrderLineItemID: Swift.String?
@@ -87,23 +132,21 @@ public struct Transaction : Swift.Identifiable {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension StoreKit.Transaction : Swift.Equatable {
-  @inlinable public static func == (lhs: StoreKit.Transaction, rhs: StoreKit.Transaction) -> Swift.Bool {
-        lhs.jwsRepresentation == rhs.jwsRepresentation
-    }
+  public static func == (lhs: StoreKit.Transaction, rhs: StoreKit.Transaction) -> Swift.Bool
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension StoreKit.Transaction : Swift.Hashable {
-  @inlinable public func hash(into hasher: inout Swift.Hasher) {
-        hasher.combine(jwsRepresentation)
-    }
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension StoreKit.Transaction : Swift.CustomDebugStringConvertible {
-  public var debugDescription: Swift.String {
-    get
+  @inlinable public var debugDescription: Swift.String {
+    get {
+        backing.debugDescription
+    }
   }
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
@@ -112,11 +155,10 @@ extension StoreKit.Transaction {
   #if compiler(>=5.3) && $RethrowsProtocol
   public struct Transactions : _Concurrency.AsyncSequence {
     public typealias Element = StoreKit.VerificationResult<StoreKit.Transaction>
-    @_hasMissingDesignatedInitializers public class AsyncIterator : _Concurrency.AsyncIteratorProtocol {
-      @objc deinit
+    public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
       
       #if compiler(>=5.3) && $AsyncAwait
-      public func next() async -> StoreKit.VerificationResult<StoreKit.Transaction>?
+      public mutating func next() async -> StoreKit.VerificationResult<StoreKit.Transaction>?
       #endif
 
       public typealias Element = StoreKit.VerificationResult<StoreKit.Transaction>
@@ -167,7 +209,7 @@ extension StoreKit.Transaction {
   #endif
 
 }
-@available(iOS 15.0, macOS 12.0, *)
+@available(iOS 15.0, macCatalyst 15.0, macOS 12.0, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension StoreKit.Transaction {
@@ -249,7 +291,7 @@ extension StoreKit.Storefront {
     public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
       
       #if compiler(>=5.3) && $AsyncAwait
-      public func next() async -> StoreKit.Storefront?
+      public mutating func next() async -> StoreKit.Storefront?
       #endif
 
       public typealias Element = StoreKit.Storefront
@@ -372,23 +414,7 @@ extension StoreKit.Product.SubscriptionInfo {
     }
     @usableFromInline
     internal let backing: StoreKit.BackingValue
-    public var jwsRepresentation: Swift.String {
-      get
-    }
-    public var headerData: Foundation.Data {
-      get
-    }
-    public var payloadData: Foundation.Data {
-      get
-    }
-    public var signatureData: Foundation.Data {
-      get
-    }
-    public typealias Signature = CryptoKit.P256.Signing.ECDSASignature
-    public var signature: StoreKit.Product.SubscriptionInfo.RenewalInfo.Signature {
-      get
-    }
-    public var signedData: Foundation.Data {
+    public var jsonRepresentation: Foundation.Data {
       get
     }
     public let originalTransactionID: Swift.UInt64
@@ -436,11 +462,10 @@ extension StoreKit.Product.SubscriptionInfo.Status {
   #if compiler(>=5.3) && $RethrowsProtocol
   public struct Statuses : _Concurrency.AsyncSequence {
     public typealias Element = StoreKit.Product.SubscriptionInfo.Status
-    @_hasMissingDesignatedInitializers public class AsyncIterator : _Concurrency.AsyncIteratorProtocol {
-      @objc deinit
+    public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
       
       #if compiler(>=5.3) && $AsyncAwait
-      public func next() async -> StoreKit.Product.SubscriptionInfo.Status?
+      public mutating func next() async -> StoreKit.Product.SubscriptionInfo.Status.Statuses.Element?
       #endif
 
       public typealias Element = StoreKit.Product.SubscriptionInfo.Status
@@ -459,29 +484,53 @@ extension StoreKit.Product.SubscriptionInfo.Status {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension StoreKit.Product.SubscriptionInfo.RenewalInfo : Swift.Equatable {
-  @inlinable public static func == (lhs: StoreKit.Product.SubscriptionInfo.RenewalInfo, rhs: StoreKit.Product.SubscriptionInfo.RenewalInfo) -> Swift.Bool {
-        lhs.jwsRepresentation == rhs.jwsRepresentation
-    }
+  public static func == (lhs: StoreKit.Product.SubscriptionInfo.RenewalInfo, rhs: StoreKit.Product.SubscriptionInfo.RenewalInfo) -> Swift.Bool
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension StoreKit.Product.SubscriptionInfo.RenewalInfo : Swift.Hashable {
-  @inlinable public func hash(into hasher: inout Swift.Hasher) {
-        hasher.combine(jwsRepresentation)
-    }
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension StoreKit.Product.SubscriptionInfo.RenewalInfo : Swift.CustomDebugStringConvertible {
-  public var debugDescription: Swift.String {
-    get
+  @inlinable public var debugDescription: Swift.String {
+    get {
+        backing.debugDescription
+    }
   }
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @frozen public enum VerificationResult<SignedType> {
-  case unverified(SignedType)
+  case unverified(SignedType, StoreKit.VerificationResult<SignedType>.VerificationError)
   case verified(SignedType)
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  public var payloadValue: SignedType {
+    get throws
+  }
+  #endif
+
+  public var unsafePayloadValue: SignedType {
+    get
+  }
+}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension StoreKit.VerificationResult {
+  public enum VerificationError : Swift.Error {
+    case revokedCertificate
+    case invalidCertificateChain
+    case invalidDeviceVerification
+    case invalidEncoding
+    case invalidSignature
+    case missingRequiredProperties
+    public static func == (a: StoreKit.VerificationResult<SignedType>.VerificationError, b: StoreKit.VerificationResult<SignedType>.VerificationError) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension StoreKit.VerificationResult : Swift.Equatable where SignedType : Swift.Equatable {
@@ -506,6 +555,7 @@ public enum StoreKitError : Swift.Error {
   case userCancelled
   case networkError(Foundation.URLError)
   case systemError(Swift.Error)
+  case notAvailableInStorefront
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension StoreKit.BackingValue : Swift.Decodable {
@@ -585,13 +635,14 @@ extension StoreKit.Product {
     public static func appAccountToken(_ token: Foundation.UUID) -> StoreKit.Product.PurchaseOption
     @usableFromInline
     internal static func custom(key: Swift.String, value: StoreKit.BackingValue) -> StoreKit.Product.PurchaseOption
-    public static func custom(key: Swift.String, stringValue value: Swift.String) -> StoreKit.Product.PurchaseOption
-    public static func custom(key: Swift.String, numberValue value: Swift.Double) -> StoreKit.Product.PurchaseOption
-    public static func custom(key: Swift.String, boolValue value: Swift.Bool) -> StoreKit.Product.PurchaseOption
-    public static func custom(key: Swift.String, dataValue value: Foundation.Data) -> StoreKit.Product.PurchaseOption
+    public static func custom(key: Swift.String, value: Swift.String) -> StoreKit.Product.PurchaseOption
+    public static func custom(key: Swift.String, value: Swift.Double) -> StoreKit.Product.PurchaseOption
+    public static func custom(key: Swift.String, value: Swift.Bool) -> StoreKit.Product.PurchaseOption
+    public static func custom(key: Swift.String, value: Foundation.Data) -> StoreKit.Product.PurchaseOption
     public static func promotionalOffer(offerID: Swift.String, keyID: Swift.String, nonce: Foundation.UUID, signature: Foundation.Data, timestamp: Swift.Int) -> StoreKit.Product.PurchaseOption
     public static func quantity(_ quantity: Swift.Int) -> StoreKit.Product.PurchaseOption
     public static func simulatesAskToBuyInSandbox(_ simulateAskToBuy: Swift.Bool) -> StoreKit.Product.PurchaseOption
+    public static func onStorefrontChange(shouldContinuePurchase: @escaping (StoreKit.Storefront) -> Swift.Bool) -> StoreKit.Product.PurchaseOption
     public static func == (a: StoreKit.Product.PurchaseOption, b: StoreKit.Product.PurchaseOption) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {

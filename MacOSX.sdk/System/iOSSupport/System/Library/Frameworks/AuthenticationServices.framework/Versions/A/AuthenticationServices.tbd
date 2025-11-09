@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           953572C1-23E4-3A5E-812B-1725C4640DDE
+    value:           8A0AF353-3290-3DB2-9100-1E17B1D4E8F5
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           97095090-FAF5-3AEC-8B36-C9CBC34E124D
+    value:           F8E48FA0-EDB0-319E-8080-7562C5EF0061
 install-name:    '/System/iOSSupport/System/Library/Frameworks/AuthenticationServices.framework/Versions/A/AuthenticationServices'
-current-version: 612.1.24
+current-version: 612.3.6
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports, 

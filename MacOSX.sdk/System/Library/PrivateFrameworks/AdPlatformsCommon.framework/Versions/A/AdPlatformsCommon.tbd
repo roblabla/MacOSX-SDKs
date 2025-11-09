@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A2774769-B8F8-3C02-9472-85EFD46834EE
+    value:           68ED6A38-C552-39E6-A071-61F79F3124E2
   - target:          x86_64-maccatalyst
-    value:           A2774769-B8F8-3C02-9472-85EFD46834EE
+    value:           68ED6A38-C552-39E6-A071-61F79F3124E2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C163A0A9-E78C-3F6F-9B86-64FFE056F86E
+    value:           B7A580B9-CBA4-3B4E-BAF4-00396F54250A
   - target:          arm64e-maccatalyst
-    value:           C163A0A9-E78C-3F6F-9B86-64FFE056F86E
+    value:           B7A580B9-CBA4-3B4E-BAF4-00396F54250A
 install-name:    '/System/Library/PrivateFrameworks/AdPlatformsCommon.framework/Versions/A/AdPlatformsCommon'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -23,7 +23,8 @@ exports:
                        _APSimulateCrash, _APSimulateCrashNoKillProcess, _AdPlatformsCommonVersionNumber, 
                        _AdPlatformsCommonVersionString, _kAPAccountChangedNotification, 
                        _kAPAdLibBundleID, _kAPAnalyticsAdEventTypeNavigationAttemptBlockedDueToAccidentalTapForMRAIDActionType, 
-                       _kAPAutomationLoggingEnabled, _kAPMetricAreNetworkDatesKey, 
+                       _kAPAutomationLoggingEnabled, _kAPDisplayServerQE1Base, _kAPDisplayServerQE2Base, 
+                       _kAPDisplayServerQE3Base, _kAPDisplayServerQE4Base, _kAPMetricAreNetworkDatesKey, 
                        _kAPMetricBundleIdentifierKey, _kAPMetricClientIdentifierKey, 
                        _kAPMetricClientInfoKey, _kAPMetricClientSourceKey, _kAPMetricContentIdentifierKey, 
                        _kAPMetricContextIdentifierKey, _kAPMetricDeviceIdentifierKey, 
@@ -46,14 +47,15 @@ exports:
                        _kAPServerEnvironmentQE4BaseURL ]
     objc-classes:    [ APAMSClientBagManager, APAnalytics, APClientInfo, APContentData, 
                        APContentDepiction, APContext, APControllerRequesterCoordinator, 
-                       APInstallAttribution, APLocationInfo, APLocationManager, APMescalSigning, 
-                       APMescalSigningRequestor, APMetric, APMetricDaemonDelivery, 
-                       APMetricNotificationRegistrar, APOrderedMutableDictionary, 
-                       APPCControllerRequester, APRepresentationData, APSupportedSecureEncodedClass, 
-                       APSystemInternal, APTapAction, APUnfairLock, APUnfairRecursiveLock, 
-                       APXPCActionRequester, APXPCConnection, APXPCListenerManager, 
-                       APXPCRemoteConnection, MetricsModuleCommon, PCNativeAsset, 
-                       PCNativeAssetInfo, PCNativeBorderStyle, PCNativeButton, PCNativeButtonStyle, 
-                       PCNativeColor, PCNativeElement, PCNativePrimitiveColor, PCNativeRepresentation, 
-                       PCNativeShadowStyle, PCNativeStyle ]
+                       APFrequencyCapData, APInstallAttribution, APLocationInfo, 
+                       APLocationManager, APMescalSigning, APMescalSigningRequestor, 
+                       APMetric, APMetricDaemonDelivery, APMetricNotificationRegistrar, 
+                       APOrderedMutableDictionary, APPCControllerRequester, APRepresentationData, 
+                       APSupportedSecureEncodedClass, APSystemInternal, APTapAction, 
+                       APUnfairLock, APUnfairRecursiveLock, APXPCActionRequester, 
+                       APXPCConnection, APXPCListenerManager, APXPCRemoteConnection, 
+                       MetricsModuleCommon, PCNativeAsset, PCNativeAssetInfo, PCNativeBorderStyle, 
+                       PCNativeButton, PCNativeButtonStyle, PCNativeColor, PCNativeElement, 
+                       PCNativePrimitiveColor, PCNativeRepresentation, PCNativeShadowStyle, 
+                       PCNativeStyle ]
 ...

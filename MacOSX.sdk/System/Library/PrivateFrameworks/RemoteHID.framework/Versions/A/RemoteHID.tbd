@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AADE3B20-4FAC-3EE0-9000-E5869FCDCBC0
+    value:           4D24731F-FA90-3747-8860-1ED4B4794EE7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8886676A-0052-3AF8-92F5-151CEAB514BE
+    value:           CE99CA7B-EA58-37EB-A7AA-314ED1C23880
 install-name:    '/System/Library/PrivateFrameworks/RemoteHID.framework/Versions/A/RemoteHID'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

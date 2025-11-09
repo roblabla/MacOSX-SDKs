@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           27CE110B-4C01-359C-BA58-5ED54D092BE4
+    value:           0B3996CE-F4F8-36E6-A54F-86DDE4A6DB1A
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           5580C6CB-4093-36C4-870B-25E1B966D1CC
+    value:           D00667D4-01E0-3A76-B723-27DFFAF02A1C
 install-name:    '/System/iOSSupport/System/Library/Frameworks/PencilKit.framework/Versions/A/PencilKit'
 swift-abi-version: 7
 exports:

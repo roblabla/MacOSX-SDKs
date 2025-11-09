@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E27230DD-453D-33BC-8A81-93509F00543A
+    value:           77C8C160-F159-3D88-AAC9-A48D2B6D16FA
   - target:          x86_64-maccatalyst
-    value:           E27230DD-453D-33BC-8A81-93509F00543A
+    value:           77C8C160-F159-3D88-AAC9-A48D2B6D16FA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5F4387BA-ECFD-3DF0-A5C5-93C2408FC6B5
+    value:           1504EEC9-0B0A-3572-9D5D-1BB275C9024B
   - target:          arm64e-maccatalyst
-    value:           5F4387BA-ECFD-3DF0-A5C5-93C2408FC6B5
+    value:           1504EEC9-0B0A-3572-9D5D-1BB275C9024B
 install-name:    '/usr/lib/libbsm.0.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

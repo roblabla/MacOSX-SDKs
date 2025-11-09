@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           75794CC6-BD1B-318E-8BF1-3211B122175E
+    value:           65C27F4C-E0A8-309A-98C9-87B1B35F1CD2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4F731C73-C039-3A63-AC48-966001A3BD2E
+    value:           D0EAFB6A-E6D7-354E-B67E-18A5E90A89E4
 install-name:    '/System/Library/PrivateFrameworks/AmbientDisplay.framework/Versions/A/AmbientDisplay'
 current-version: 110
 exports:
@@ -148,10 +148,10 @@ exports:
                        _matrix3IsIdentity, _matrix3Matrix3Multiply, _matrix3Matrix3elementMultiply, 
                        _matrix3Vector3Multiply, _matrix3scalarMultiply, _matrixIsIdentity, 
                        _matrixIsLUTable, _matrixScalarMultiply, _max2, _max3, _max3VectorValue, 
-                       _maxMatrixDifference, _maxVectorValue, _modifyAndSetIntentionForWhitePoint, 
-                       _modifyAndSetIntentionForWhitePointLegacy, _modifyAndSetIntentionForWhitePointOnEveryDevice, 
-                       _modifyAndSetIntentionForWhitePointOnEveryDeviceLegacy, _nitToLux, 
-                       _normalize3, _normalize3Y, _onlineDisplaysOnDeviceContext, 
+                       _maxAbsVectorValue, _maxMatrixDifference, _maxVectorValue, 
+                       _modifyAndSetIntentionForWhitePoint, _modifyAndSetIntentionForWhitePointLegacy, 
+                       _modifyAndSetIntentionForWhitePointOnEveryDevice, _modifyAndSetIntentionForWhitePointOnEveryDeviceLegacy, 
+                       _nitToLux, _normalize3, _normalize3Y, _onlineDisplaysOnDeviceContext, 
                        _onlineDisplaysOnDeviceContextLegacy, _overridesExistForDisplay, 
                        _overridesExistForDisplayLegacy, _perceptibleDistance, _perceptibleDistanceReference, 
                        _perceptualBrightnessLoss, _perceptualDistanceComputingReference, 

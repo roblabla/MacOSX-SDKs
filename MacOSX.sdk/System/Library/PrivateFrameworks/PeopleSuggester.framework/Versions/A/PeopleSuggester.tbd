@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           133E8798-5575-3967-90B3-FD7952603606
+    value:           1341D8D1-FCD3-3C0C-AD66-1D096171E682
   - target:          x86_64-maccatalyst
-    value:           133E8798-5575-3967-90B3-FD7952603606
+    value:           1341D8D1-FCD3-3C0C-AD66-1D096171E682
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4C5C877E-0D5B-389E-BCBA-D7F9AD5DCC41
+    value:           9BC6C802-AB81-3775-B46D-8AFBB90BF4E4
   - target:          arm64e-maccatalyst
-    value:           4C5C877E-0D5B-389E-BCBA-D7F9AD5DCC41
+    value:           9BC6C802-AB81-3775-B46D-8AFBB90BF4E4
 install-name:    '/System/Library/PrivateFrameworks/PeopleSuggester.framework/Versions/A/PeopleSuggester'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -43,19 +43,21 @@ exports:
                        CAPContactFillerShareEvent, CAPContactFillerUserEvent, ContactEmbeddingAnalysisPETContactEmbeddingAnalysisEvent, 
                        ContactEmbeddingAnalysisPETContactEmbeddingArrayEvent, ContactEmbeddingAnalysisPETNeuralNetEmbedding, 
                        CoreBehaviorAnalysisPETCoreBehaviorAnalysisEvent, FeatureVectorCoordinates, 
+                       FidesPHSEvaluatorDataSource, GBDTEvaluator, LighthouseShareSheetPFLTraining, 
                        ModelHyperparameters, PSDESPlugin, _PSAlter, _PSAppUsageUtilities, 
                        _PSAttachment, _PSAutocompleteSearchUtilities, _PSAutocompleteSuggestion, 
                        _PSBehaviorRuleFeatureExtraction, _PSBehaviorRuleRankingUtilities, 
-                       _PSCNAutocompleteFeedback, _PSCNAutocompleteFeedbackAccumulator, 
+                       _PSCNAutocompleteFeedback, _PSCNAutocompleteFeedbackActionStatistics, 
                        _PSCNAutocompleteFeedbackEntered, _PSCNAutocompleteFeedbackErasedHandle, 
-                       _PSCNAutocompleteFeedbackExited, _PSCNAutocompleteFeedbackInteractionIterator, 
-                       _PSCNAutocompleteFeedbackProcessingTask, _PSCNAutocompleteFeedbackTappedSuggestion, 
-                       _PSCNAutocompleteFeedbackTypedHandle, _PSCNAutocompleteFeedbackVendedSuggestions, 
-                       _PSCachedContact, _PSCachedFaceTimeableHandle, _PSCalendarEventPredictor, 
-                       _PSCalendarEventPredictorDelegateWrapper, _PSCluster, _PSClusterPoint, 
-                       _PSClustersArchive, _PSConfidenceModel, _PSConfidenceModelArchive, 
-                       _PSConfidenceModelDriver, _PSConfidenceModelForSharing, _PSConstants, 
-                       _PSContact, _PSContactCache, _PSContactEmbeddingDataCollectionUtilities, 
+                       _PSCNAutocompleteFeedbackExited, _PSCNAutocompleteFeedbackImpressionStatistics, 
+                       _PSCNAutocompleteFeedbackInteractionIterator, _PSCNAutocompleteFeedbackProcessingTask, 
+                       _PSCNAutocompleteFeedbackSessionAccumulator, _PSCNAutocompleteFeedbackTappedSuggestion, 
+                       _PSCNAutocompleteFeedbackTracker, _PSCNAutocompleteFeedbackTypedHandle, 
+                       _PSCNAutocompleteFeedbackVendedSuggestions, _PSCachedContact, 
+                       _PSCachedFaceTimeableHandle, _PSCalendarEventPredictor, _PSCalendarEventPredictorDelegateWrapper, 
+                       _PSCluster, _PSClusterPoint, _PSClustersArchive, _PSConfidenceModel, 
+                       _PSConfidenceModelArchive, _PSConfidenceModelDriver, _PSConfidenceModelForSharing, 
+                       _PSConstants, _PSContact, _PSContactCache, _PSContactEmbeddingDataCollectionUtilities, 
                        _PSContactEmbeddingUtilities, _PSContactFillerDataCollectionStatistics, 
                        _PSContactFillerDataCollectionUtilities, _PSContactFillerNormalizationConstants, 
                        _PSContactFillerRecipient, _PSContactPrior, _PSContactResolver, 

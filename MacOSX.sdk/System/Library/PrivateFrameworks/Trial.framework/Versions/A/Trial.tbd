@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B71100FA-13B2-3D14-8535-ACD5FAEC77CB
+    value:           2311E46E-3F73-3A05-B04A-AC8F75920AAB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           17D53E73-574D-3502-B894-9A66E8BE3BB5
+    value:           1D7BB797-9BB2-3B84-B27C-BEC1EC05B700
 install-name:    '/System/Library/PrivateFrameworks/Trial.framework/Versions/A/Trial'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -52,7 +52,7 @@ exports:
                        _TRICloudKitRecord_RecordName, _TRICloudKitServerEnvironmentKey, 
                        _TRILogCategory_Archiving, _TRILogCategory_Backtrace, _TRILogCategory_ClientFramework, 
                        _TRILogCategory_Daemon, _TRILogCategory_InternalTool, _TRILogCategory_Server, 
-                       _TRILogCategory_XCTest, _TRINamespaceUpdateNotificationName, 
+                       _TRILogCategory_XCTest, _TRILoggedNamespaceName, _TRINamespaceUpdateNotificationName, 
                        _TRIPersistedFactorsState_ClearStateOneOfCase, _TRIPersistedNetworkBehavior_DiscretionaryBehavior_EnumDescriptor, 
                        _TRIPersistedNetworkBehavior_DiscretionaryBehavior_IsValidValue, 
                        _TRIPurgeabilityLevel_EnumDescriptor, _TRIPurgeabilityLevel_IsValidValue, 
@@ -66,14 +66,15 @@ exports:
                        _TRIValidateAssetId, _TRIValidateFactorPackId, _TRIValidateFactorPackSetId, 
                        _TRIValidateMLRuntimeEvaluationId, _TRIValidateRampId, _TrialVersionNumber, 
                        _TrialVersionString, _kRotationDateSecondsSinceReferenceDate, 
-                       _kTRIAllocationStatusEntitlement, _kTRIBundleIdentifierTrialcontroller, 
-                       _kTRIBundleIdentifierTriald, _kTRIBundleIdentifierTrialtool, 
-                       _kTRIDatavaultEntitlement, _kTRIEvaluationStatusEntitlement, 
-                       _kTRITrialClientEntitlement ]
+                       _kTRIAllocationStatusEntitlement, _kTRIAllocationStatusNamespaceNameEntitlment, 
+                       _kTRIBundleIdentifierTrialcontroller, _kTRIBundleIdentifierTriald, 
+                       _kTRIBundleIdentifierTrialtool, _kTRIDatavaultEntitlement, 
+                       _kTRIEvaluationStatusEntitlement, _kTRITrialClientEntitlement ]
     objc-classes:    [ TRIAllocationStatus, TRIAllocationStatusCursor, TRIAllocationStatusDefaultProvider, 
-                       TRIAllocationStatusProviderGuardedData, TRIAppContainer, TRICKServerEnvironmentReader, 
-                       TRIClient, TRIClientFactorPackStreamingParser, TRIClientFactorPackStreamingWriter, 
-                       TRIClientGuardedData, TRIClientNamespaceMetadata, TRIClientNamespaceMetadataStorage, 
+                       TRIAllocationStatusProviderGuardedData, TRIAppContainer, TRIAssetIdFactorName, 
+                       TRICKServerEnvironmentReader, TRIClient, TRIClientFactorPackStreamingParser, 
+                       TRIClientFactorPackStreamingWriter, TRIClientGuardedData, 
+                       TRIClientNamespaceMetadata, TRIClientNamespaceMetadataStorage, 
                        TRIDefaultFactorProvider, TRIDefaultFactorProviderGuardedData, 
                        TRIDownloadNotification, TRIDownloadOptions, TRIEntitlement, 
                        TRIEvaluationStatus, TRIEvaluationStatusCursor, TRIEvaluationStatusDefaultProvider, 

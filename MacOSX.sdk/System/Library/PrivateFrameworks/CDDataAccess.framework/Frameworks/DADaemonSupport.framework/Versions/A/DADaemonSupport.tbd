@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DFD99AF7-3624-3FA2-9172-2703A8F5F5C8
+    value:           5EA29856-82AE-31FE-9E42-2EE629FBD3DB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           19B215B9-69FC-3BC4-8ABA-CF7204376A76
+    value:           31C078A9-1073-303B-943A-DED78F53E9B5
 install-name:    '/System/Library/PrivateFrameworks/CDDataAccess.framework/Frameworks/DADaemonSupport.framework/Versions/A/DADaemonSupport'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6938B849-FE1C-38F7-9976-2A2A9947DDE8
+    value:           5A507C80-A0F8-382B-A9D4-0C11BD56F548
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B31665E6-C37F-3D57-AA6C-D9FDE218D76F
+    value:           316232E2-7E1A-3D43-BD15-5FD7F565B8F5
 install-name:    '/usr/lib/swift/libswiftDemangle.dylib'
 current-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ __ZN5swift6Mangle10isNonAsciiEN4llvm9StringRefE, __ZN5swift6Mangle17translateOperatorEN4llvm9StringRefE, 
-                       __ZN5swift6Mangle20getStandardTypeSubstEN4llvm9StringRefE, 
+                       __ZN5swift6Mangle20getStandardTypeSubstEN4llvm9StringRefEb, 
                        __ZN5swift6Mangle21needsPunycodeEncodingEN4llvm9StringRefE, 
                        __ZN5swift6Mangle21translateOperatorCharEc, __ZN5swift8Demangle10CharVector6appendEN4llvm9StringRefERNS0_11NodeFactoryE, 
                        __ZN5swift8Demangle10CharVector6appendEiRNS0_11NodeFactoryE, 

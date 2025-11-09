@@ -31,3 +31,4 @@
 #import <MetalPerformanceShadersGraph/MPSGraphScatterNDOps.h>
 #import <MetalPerformanceShadersGraph/MPSGraphStencilOps.h>
 #import <MetalPerformanceShadersGraph/MPSGraphTensorShapeOps.h>
+#import <MetalPerformanceShadersGraph/MPSGraphTopKOps.h>

@@ -842,6 +842,7 @@
 	        typedef _type _name; enum __VA_ARGS__ __enum_closed __enum_options
 #endif
 
+
 #if defined(KERNEL) && __has_attribute(xnu_usage_semantics)
 /*
  * These macros can be used to annotate type definitions or scalar structure

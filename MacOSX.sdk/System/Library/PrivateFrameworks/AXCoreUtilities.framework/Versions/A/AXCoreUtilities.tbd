@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CA7AAFAD-2A33-3F3C-ABE2-8249978C861D
+    value:           AD80A7AE-185A-3E7C-993D-AD5143C830B2
   - target:          x86_64-maccatalyst
-    value:           CA7AAFAD-2A33-3F3C-ABE2-8249978C861D
+    value:           AD80A7AE-185A-3E7C-993D-AD5143C830B2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           337402F9-1706-3E11-ADC8-814E940C6BAB
+    value:           061CFC5F-702C-3D3A-B64F-0DBA4B8A31AF
   - target:          arm64e-maccatalyst
-    value:           337402F9-1706-3E11-ADC8-814E940C6BAB
+    value:           061CFC5F-702C-3D3A-B64F-0DBA4B8A31AF
 install-name:    '/System/Library/PrivateFrameworks/AXCoreUtilities.framework/Versions/A/AXCoreUtilities'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -71,13 +71,13 @@ exports:
                        _GAXLogCommon, _GAXLogIntegrity, _GAXLogTimeRestrictions, 
                        _MAGLogBrightness, _MAGLogCommon, _SWCHLogCommon, _SWCHLogElementNav, 
                        _SWCHLogHW, _SWCHLogPauseResume, _VOTLogActivities, _VOTLogAudio, 
-                       _VOTLogBraille, _VOTLogBrailleGestures, _VOTLogCommon, _VOTLogElement, 
-                       _VOTLogEvent, _VOTLogHandwriting, _VOTLogIAP, _VOTLogICloud, 
-                       _VOTLogKeyboard, _VOTLogLayoutChange, _VOTLogLifeCycle, _VOTLogMagicTap, 
-                       _VOTLogNotifications, _VOTLogQuickSettings, _VOTLogRotor, 
-                       _VOTLogSimpleTap, _VOTLogSpeech, _VOTLogTVExplorer, _VOTLogTVFocus, 
-                       _VOTLogWebPageMovement, _ZOOMLogCommon, _ZOOMLogEvents, __AXAssertIsMainThread, 
-                       __AXAssertIsThread, __AXAssertIsThreadNamed ]
+                       _VOTLogBraille, _VOTLogBrailleGestures, _VOTLogCommands, _VOTLogCommon, 
+                       _VOTLogElement, _VOTLogEvent, _VOTLogHandwriting, _VOTLogIAP, 
+                       _VOTLogICloud, _VOTLogKeyboard, _VOTLogLayoutChange, _VOTLogLifeCycle, 
+                       _VOTLogMagicTap, _VOTLogNotifications, _VOTLogQuickSettings, 
+                       _VOTLogRotor, _VOTLogSimpleTap, _VOTLogSpeech, _VOTLogTVExplorer, 
+                       _VOTLogTVFocus, _VOTLogWebPageMovement, _ZOOMLogCommon, _ZOOMLogEvents, 
+                       __AXAssertIsMainThread, __AXAssertIsThread, __AXAssertIsThreadNamed ]
     objc-classes:    [ AXAccessQueue, AXAccessQueueTimer, AXBaseSettings, AXBlockMetric, 
                        AXBookendMetric, AXDispatchTimer, AXMetric, AXMetricSession, 
                        AXXPCUtilities ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           725595C5-437B-314B-A5FA-3713575E0B37
+    value:           D85B5137-BD95-3B82-97DA-94E54C4BF01B
   - target:          x86_64-maccatalyst
-    value:           725595C5-437B-314B-A5FA-3713575E0B37
+    value:           D85B5137-BD95-3B82-97DA-94E54C4BF01B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A21DFE30-1253-3CCE-92D5-B11606666873
+    value:           C69B9DEA-A5BD-3B8F-9D82-DABC135F6A38
   - target:          arm64e-maccatalyst
-    value:           A21DFE30-1253-3CCE-92D5-B11606666873
+    value:           C69B9DEA-A5BD-3B8F-9D82-DABC135F6A38
 install-name:    '/usr/lib/libform.5.4.dylib'
 current-version: 5.4
 compatibility-version: 5.4

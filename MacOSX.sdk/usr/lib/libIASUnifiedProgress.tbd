@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           17E1CE05-2EF1-37F0-9784-F3613F5079F2
+    value:           A8F86E5A-BAE6-3954-B8D0-D9BC9FD1802B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6D29966F-7D6B-3446-91A4-63661D0FD601
+    value:           69A41095-82BA-39D1-B292-7E4E2E77FC2A
 install-name:    '/usr/lib/libIASUnifiedProgress.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

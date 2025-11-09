@@ -21,10 +21,12 @@
 #import <CHIP/CHIPDeviceController.h>
 #import <CHIP/CHIPDevicePairingDelegate.h>
 #import <CHIP/CHIPError.h>
+#import <CHIP/CHIPKeypair.h>
 #import <CHIP/CHIPManualSetupPayloadParser.h>
 #import <CHIP/CHIPPersistentStorageDelegate.h>
 #import <CHIP/CHIPQRCodeSetupPayloadParser.h>
 #import <CHIP/CHIPSetupPayload.h>
+#import <CHIP/CHIPThreadOperationalDataset.h>
 
 #import <Foundation/Foundation.h>
 //! Project version number for CHIP.

@@ -602,8 +602,8 @@ CF_ENUM(AudioUnitScope) {
 						Access:				read
 
 						Used to determine how many MIDI output streams the audio unit can generate  (and the name for 
-						each of these outputs). Each MIDI output is a complete MIDI data stream, such as embodied by a 
-						MIDIEndpointRef in CoreMIDI.
+						each of these outputs). Each MIDI output is a complete MIDI or MIDIEventList data stream, such as embodied
+						by a  MIDIEndpointRef in CoreMIDI.
 						
 						The host can retrieve an array of CFStringRefs published by the audio unit, where :
 							- the size of the array is the number of MIDI Outputs the Audio Unit supports
@@ -790,32 +790,9 @@ CF_ENUM(AudioUnitScope) {
 						Indicates whether an Audio Unit is loaded out-of-process, which might happen
 						at the request of the host or when loading in-process is not possible.
 
-	@constant		kAudioUnitProperty_MIDIOutputEventListCallbackInfo
-						Scope:                       Global
-						Value Type:               CFArrayRef
-						Access:                     read
-
-						Used to determine how many MIDIEventList output streams the audio unit can generate (and the name for
-						each of these outputs). Each MIDIEventList output is a complete MIDI data stream, such as embodied by a
-						MIDIEndpointRef in CoreMIDI.
-
-						The host can retrieve an array of CFStringRefs published by the Audio Unit, where :
-						 - the size of the array is the number of MIDIEventList Outputs the audio unit supports
-						 - each item in the array is the name for that output at that index
-
-						The host owns this array and its elements and should release them when it is finished.
-
-						Once the host has determined that the Audio Unit supports this feature, it can then provide a
-						callback, through which the audio unit can send the MIDIEventList data.
-						See the documentation for the kAudioUnitProperty_MIDIOutputEventListCallback property.
-
-						Note: The CFArrayRef's returned from this property must return a +1 reference.
-
-						Compare to property kAudioUnitProperty_MIDIOutputCallbackInfo.
-
     @constant        kAudioUnitProperty_MIDIOutputEventListCallback
 						Scope:                Global
-						Value Type:         block: void (^)(AUEventSampleTime, const struct MIDIEventList *)
+						Value Type:         AUMIDIEventListBlock
 						Access:               write
 
 						The host sets this property on the Audio Unit with the callback set appropriately.
@@ -828,6 +805,7 @@ CF_ENUM(AudioUnitScope) {
 						The Audio Unit in the callback provides:
 						    - the AUEventSampleTime that was provided to the audio unit for this particular call of
 						    AudioUnitRender
+						    - the output number to associate this MIDI data with
 						    - a MIDIEventList containing MIDI data. The time stamp values contained within the
 						    MIDIEventPacket in this list are **sample offsets*** from the AudioTimeStamp provided.
 						    This allows MIDI data to be time-stamped with a sample offset that is directly associated
@@ -838,12 +816,14 @@ CF_ENUM(AudioUnitScope) {
 						- Set kAudioUnitProperty_MIDIOutputEventListCallback
 						- Initialize the Audio Unit
  
-						Note: kAudioUnitProperty_HostMIDIProtocol can not be changed while the Audio Unit is initialized.
- 
+						Notes:
+							- kAudioUnitProperty_HostMIDIProtocol can not be changed while the Audio Unit is initialized.
+							- The Audio Unit takes ownership of the provided block.
+
 						There is no implied or expected association between the number (or position) of an audio unit's
 						audio or MIDI outputs.
  
-						Compare to property kAudioUnitProperty_MIDIOutputEventCallback.
+						Compare to property kAudioUnitProperty_MIDIOutputCallback.
  
     @constant        kAudioUnitProperty_AudioUnitMIDIProtocol
 						Scope:                Global
@@ -933,11 +913,10 @@ CF_ENUM(AudioUnitPropertyID)
 	kAudioUnitProperty_MIDIOutputCallbackInfo       = 47,
 	kAudioUnitProperty_MIDIOutputCallback           = 48,
 
-	kAudioUnitProperty_MIDIOutputEventListCallbackInfo  = 63,
-    kAudioUnitProperty_MIDIOutputEventListCallback      = 64,
+    kAudioUnitProperty_MIDIOutputEventListCallback      = 63,
 
-    kAudioUnitProperty_AudioUnitMIDIProtocol            = 65,
-    kAudioUnitProperty_HostMIDIProtocol                 = 66
+    kAudioUnitProperty_AudioUnitMIDIProtocol            = 64,
+    kAudioUnitProperty_HostMIDIProtocol                 = 65
 };
 
 #if AU_SUPPORT_INTERAPP_AUDIO

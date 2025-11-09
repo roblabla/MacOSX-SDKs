@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CB614DAA-6839-3DBE-B60E-ADA4329D971E
+    value:           937C7409-3FFA-3161-AA08-0DFF8BBB0E1F
   - target:          x86_64-maccatalyst
-    value:           CB614DAA-6839-3DBE-B60E-ADA4329D971E
+    value:           937C7409-3FFA-3161-AA08-0DFF8BBB0E1F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2D10B6D2-CCE3-3D97-8DDD-6A8BC7A3AD4E
+    value:           F5F2DBCD-1DF5-3DFC-BD80-4BFECBB9018C
   - target:          arm64e-maccatalyst
-    value:           2D10B6D2-CCE3-3D97-8DDD-6A8BC7A3AD4E
+    value:           F5F2DBCD-1DF5-3DFC-BD80-4BFECBB9018C
 install-name:    '/System/Library/PrivateFrameworks/CorePhotogrammetry.framework/Versions/A/CorePhotogrammetry'
-current-version: 1.20
-compatibility-version: 1.20
+current-version: 1.24
+compatibility-version: 1.24
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIFvvE, __ZTINSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKjEEE, 

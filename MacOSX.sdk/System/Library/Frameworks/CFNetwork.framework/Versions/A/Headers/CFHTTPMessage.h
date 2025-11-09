@@ -191,7 +191,7 @@ CFHTTPMessageGetTypeID(void) CF_AVAILABLE(10_1, 2_0);
  *  
  *  Result:
  *	A pointer to the CFHTTPMessage created, or NULL if failed. It is
- *	caller's responsibilty to release the memory allocated for the
+ *	caller's responsibility to release the memory allocated for the
  *	message.
  *  
  */
@@ -230,7 +230,7 @@ CFHTTPMessageCreateRequest(CFAllocatorRef __nullable alloc, CFStringRef requestM
  *  
  *  Result:
  *	A pointer to the CFHTTPMessage created, or NULL if failed. It is
- *	caller's responsibilty to release the memory allocated for the
+ *	caller's responsibility to release the memory allocated for the
  *	message.
  *  
  */
@@ -266,7 +266,7 @@ CFHTTPMessageCreateResponse(
  *  
  *  Result:
  *	A pointer to the CFHTTPMessage created, or NULL if failed. It is
- *	caller's responsibilty to release the memory allocated for the
+ *	caller's responsibility to release the memory allocated for the
  *	message.
  *  
  */
@@ -297,7 +297,7 @@ CFHTTPMessageCreateEmpty(CFAllocatorRef __nullable alloc, Boolean isRequest) CF_
  *  
  *  Result:
  *	A pointer to the CFHTTPMessage created, or NULL if failed. It is
- *	caller's responsibilty to release the memory allocated for the
+ *	caller's responsibility to release the memory allocated for the
  *	message.
  *  
  */
@@ -347,7 +347,7 @@ CFHTTPMessageIsRequest(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
  *  
  *  Result:
  *	A pointer to a CFString, or NULL if failed. It is caller's
- *	responsibilty to release the memory allocated for the string.
+ *	responsibility to release the memory allocated for the string.
  *  
  */
 CFN_EXPORT CFStringRef 
@@ -371,7 +371,7 @@ CFHTTPMessageCopyVersion(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
  *  
  *  Result:
  *	A pointer to a CFData, or NULL if failed. It is caller's
- *	responsibilty to release the memory allocated for the data.
+ *	responsibility to release the memory allocated for the data.
  *  
  */
 CFN_EXPORT __nullable CFDataRef
@@ -423,7 +423,7 @@ CFHTTPMessageSetBody(CFHTTPMessageRef message, CFDataRef bodyData) CF_AVAILABLE(
  *  
  *  Result:
  *	A pointer to a CFString, or NULL if failed. It is caller's
- *	responsibilty to release the memory allocated for the string.
+ *	responsibility to release the memory allocated for the string.
  *  
  */
 CFN_EXPORT __nullable CFStringRef
@@ -447,7 +447,7 @@ CFHTTPMessageCopyHeaderFieldValue(CFHTTPMessageRef message, CFStringRef headerFi
  *  
  *  Result:
  *	A pointer to a CFDictionary, or NULL if failed. It is caller's
- *	responsibilty to release the memory allocated for the dictionary.
+ *	responsibility to release the memory allocated for the dictionary.
  *  
  */
 CFN_EXPORT __nullable CFDictionaryRef
@@ -543,7 +543,7 @@ CFHTTPMessageIsHeaderComplete(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
  *  
  *  Discussion:
  *	Creates a self-contained copy of a CFHTTPMessage. This would be
- *	suitable for persistant storage or for transmitting over the
+ *	suitable for persistent storage or for transmitting over the
  *	network independently.
  *  
  *  Mac OS X threading:
@@ -552,11 +552,11 @@ CFHTTPMessageIsHeaderComplete(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
  *  Parameters:
  *	
  *	request:
- *	  A pointer to the CFHTTPMessage to be seralized.
+ *	  A pointer to the CFHTTPMessage to be serialized.
  *  
  *  Result:
  *	A pointer to a CFData, or NULL if failed. It is caller's
- *	responsibilty to release the memory allocated for the data.
+ *	responsibility to release the memory allocated for the data.
  *  
  */
 CFN_EXPORT __nullable CFDataRef
@@ -583,7 +583,7 @@ CFHTTPMessageCopySerializedMessage(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 
  *  
  *  Result:
  *	A pointer to a CFURL, or NULL if failed. It is caller's
- *	responsibilty to release the memory allocated for the url.
+ *	responsibility to release the memory allocated for the url.
  *  
  */
 CFN_EXPORT __nullable CFURLRef
@@ -606,7 +606,7 @@ CFHTTPMessageCopyRequestURL(CFHTTPMessageRef request) CF_AVAILABLE(10_1, 2_0);
  *  
  *  Result:
  *	A pointer to a CFString, or NULL if failed. It is caller's
- *	responsibilty to release the memory allocated for the string.
+ *	responsibility to release the memory allocated for the string.
  *  
  */
 CFN_EXPORT __nullable CFStringRef
@@ -651,7 +651,7 @@ CFHTTPMessageCopyRequestMethod(CFHTTPMessageRef request) CF_AVAILABLE(10_1, 2_0)
  *  
  *  Result:
  *	A pointer to a CFString, or NULL if failed. It is caller's
- *	responsibilty to release the memory allocated for the string.
+ *	responsibility to release the memory allocated for the string.
  *  
  */
 CFN_EXPORT Boolean 
@@ -708,7 +708,7 @@ CFHTTPMessageGetResponseStatusCode(CFHTTPMessageRef response) CF_AVAILABLE(10_1,
  *  
  *  Result:
  *	A CFString indicating the status code, or NULL if failed. It is
- *	caller's responsibilty to release the memory allocated for the
+ *	caller's responsibility to release the memory allocated for the
  *	string.
  *  
  */

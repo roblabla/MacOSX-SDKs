@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B95419E9-8ACC-3BB0-9A8D-E80AD21505CB
+    value:           CAE5A51D-2F68-31E5-80FA-36C67C974665
   - target:          x86_64-maccatalyst
-    value:           B95419E9-8ACC-3BB0-9A8D-E80AD21505CB
+    value:           CAE5A51D-2F68-31E5-80FA-36C67C974665
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DD12C240-A087-3278-907A-8D3B98F6BF9F
+    value:           744E19C0-433E-38DD-89EF-9501C1421F33
   - target:          arm64e-maccatalyst
-    value:           DD12C240-A087-3278-907A-8D3B98F6BF9F
+    value:           744E19C0-433E-38DD-89EF-9501C1421F33
 install-name:    '/System/Library/PrivateFrameworks/TextInput.framework/Versions/A/TextInput'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -33,12 +33,12 @@ exports:
                        _TICharIsJapaneseScript, _TICharIsLeftAssociative, _TICharIsNewlineOrReturn, 
                        _TICharIsNumber, _TICharIsNumberDelimiter, _TICharIsNumberModifier, 
                        _TICharIsPunctuation, _TICharIsSpace, _TICharIsSpaceOrReturn, 
-                       _TIConversionOnSearchFieldPreference, _TICurrentTypologyLogVersion, 
-                       _TIDeltaUnigramsFilePathForInputModeAndFileExtension, _TIDictationLangaugesEnabledPreference, 
-                       _TIDictationLangaugesLastUsedPreference, _TIDictationLanguagesEnabledPreference, 
-                       _TIDictationLanguagesLastUsedPreference, _TIDidShowContinuousPathIntroductionPreference, 
-                       _TIDidShowGestureKeyboardIntroductionPreference, _TIDispatchAsync, 
-                       _TIDispatchCount, _TIDispatchSync, _TIDispatchWaitForAllBlocks, 
+                       _TICompactAssistantBarPersistentLocationPreference, _TIConversionOnSearchFieldPreference, 
+                       _TICurrentTypologyLogVersion, _TIDeltaUnigramsFilePathForInputModeAndFileExtension, 
+                       _TIDictationLangaugesEnabledPreference, _TIDictationLangaugesLastUsedPreference, 
+                       _TIDictationLanguagesEnabledPreference, _TIDictationLanguagesLastUsedPreference, 
+                       _TIDidShowContinuousPathIntroductionPreference, _TIDidShowGestureKeyboardIntroductionPreference, 
+                       _TIDispatchAsync, _TIDispatchCount, _TIDispatchSync, _TIDispatchWaitForAllBlocks, 
                        _TIEmailRecentInputIdentifier, _TIEnabledInputModesAllowOneToManyShortcuts, 
                        _TIFeatureUsageAllowedValues, _TIFuzzyPinyinPairsPreference, 
                        _TIFuzzyPinyinPreference, _TIGetAddKeyboardUsesPickerForInputMode, 

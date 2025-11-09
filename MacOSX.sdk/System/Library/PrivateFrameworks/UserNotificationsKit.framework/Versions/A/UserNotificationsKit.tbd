@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           96571CCC-AA06-33E9-A485-7F5470DAA6C1
+    value:           C39756EA-6A85-3D13-BDB5-D5E406228BCA
   - target:          x86_64-maccatalyst
-    value:           96571CCC-AA06-33E9-A485-7F5470DAA6C1
+    value:           C39756EA-6A85-3D13-BDB5-D5E406228BCA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           761D4A1D-6752-3222-A47C-26118C1CB171
+    value:           098EDBBC-B0FE-3319-857B-A20FE29D27B6
   - target:          arm64e-maccatalyst
-    value:           761D4A1D-6752-3222-A47C-26118C1CB171
+    value:           098EDBBC-B0FE-3319-857B-A20FE29D27B6
 install-name:    '/System/Library/PrivateFrameworks/UserNotificationsKit.framework/Versions/A/UserNotificationsKit'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -31,8 +31,8 @@ exports:
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _NCIsEqual, _NCIsEqualToArray, _NCIsEqualToDictionary, _NCIsEqualToSet, 
                        _NCNotificationActionEnvironmentDefault, _NCNotificationActionEnvironmentMinimal, 
-                       _NCNotificationAlertOptionsSuppressionReasonToString, _NCNotificationAlertOptionsSuppressionToString, 
-                       _NCNotificationRequestTestingDestination, _NCRegisterUserNotificationsUILogging, 
+                       _NCNotificationDeliveryReasonToString, _NCNotificationRequestTestingDestination, 
+                       _NCNotificationSuppressionToString, _NCRegisterUserNotificationsUILogging, 
                        _NCUILogClient, _NCUILogCommunicationNotifications, _NCUILogDispatch, 
                        _NCUILogIcons, _NCUILogLists, _NCUILogManagement, _NCUILogOnboarding, 
                        _NCUILogSubsystem, _NCUserNotificationsKitFrameworkBundle, 
@@ -46,8 +46,10 @@ exports:
                        NCNotificationMutableSystemSettings, NCNotificationOptions, 
                        NCNotificationRequest, NCNotificationSectionMuteAssertion, 
                        NCNotificationSectionSettings, NCNotificationSound, NCNotificationSystemSettings, 
-                       NCNotificationThreadsMuteAssertion, _UNImageProvider, _UNNotificationCommunicationContextService, 
-                       _UNNotificationContactService ]
+                       NCNotificationThreadsMuteAssertion, _UNCNContactResolver, 
+                       _UNCNContactResolverResult, _UNImageProvider, _UNNotificationCommunicationContextService, 
+                       _UNNotificationContactService, _UNNotificationContactServiceMatchDetails, 
+                       _UNNotificationContactServiceRecord ]
     objc-ivars:      [ NCNotificationAction._actionRunner, NCNotificationAction._activationMode, 
                        NCNotificationAction._behavior, NCNotificationAction._behaviorParameters, 
                        NCNotificationAction._destructiveAction, NCNotificationAction._iconImageBundlePath, 
@@ -111,6 +113,6 @@ exports:
                        NCNotificationSound._ringtoneName, NCNotificationSound._songPath, 
                        NCNotificationSound._soundBehavior, NCNotificationSound._soundType, 
                        NCNotificationSound._systemSoundID, NCNotificationSound._vibrationPattern, 
-                       NCNotificationSystemSettings._scheduledDeliveryEnabled, NCNotificationSystemSettings._scheduledDeliveryTimes, 
-                       NCNotificationSystemSettings._scheduledDeliveryUninitialized ]
+                       NCNotificationSystemSettings._scheduledDeliveryEnabled, NCNotificationSystemSettings._scheduledDeliveryShowNextSummary, 
+                       NCNotificationSystemSettings._scheduledDeliveryTimes, NCNotificationSystemSettings._scheduledDeliveryUninitialized ]
 ...

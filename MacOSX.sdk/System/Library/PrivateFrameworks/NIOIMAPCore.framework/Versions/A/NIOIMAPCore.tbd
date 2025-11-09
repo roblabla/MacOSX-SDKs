@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           37B6188B-9BE3-3FDA-98E8-5472D573AA04
+    value:           3B93D5CA-BC47-34EF-96ED-112BB54E864A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B12AA828-A4C5-34C8-BDA1-0BA72A6BC8F5
+    value:           68730720-585F-391F-81C7-78683F92F0ED
 install-name:    '/System/Library/PrivateFrameworks/NIOIMAPCore.framework/Versions/A/NIOIMAPCore'
 swift-abi-version: 7
 allowable-clients:

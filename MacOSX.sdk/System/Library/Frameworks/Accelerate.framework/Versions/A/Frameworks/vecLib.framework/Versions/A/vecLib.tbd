@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C2C2824E-46E4-39D7-99C2-C712C8187458
+    value:           D7480DF8-26BD-3770-A9FD-9A8D9BF95131
   - target:          x86_64-maccatalyst
-    value:           C2C2824E-46E4-39D7-99C2-C712C8187458
+    value:           D7480DF8-26BD-3770-A9FD-9A8D9BF95131
   - target:          x86_64h-macos
-    value:           AE5D3BC3-068D-320D-AD07-FF1A744698E5
+    value:           AD43C5E2-4D08-3AF7-8670-B874FA67A890
   - target:          x86_64h-maccatalyst
-    value:           AE5D3BC3-068D-320D-AD07-FF1A744698E5
+    value:           AD43C5E2-4D08-3AF7-8670-B874FA67A890
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4DFEBE07-E367-35F7-BEC7-80B1B5CBF448
+    value:           3597336D-1C1A-31BF-A033-F991BAB5D3E3
   - target:          arm64e-maccatalyst
-    value:           4DFEBE07-E367-35F7-BEC7-80B1B5CBF448
+    value:           3597336D-1C1A-31BF-A033-F991BAB5D3E3
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/vecLib'
-current-version: 793
+current-version: 794.40.2
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
@@ -43,21 +43,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           846B6692-9CBB-39B8-8608-34A9C34CEF15
+    value:           26754079-18F0-3066-8AFA-3A3C6D5E21BC
   - target:          x86_64-maccatalyst
-    value:           846B6692-9CBB-39B8-8608-34A9C34CEF15
+    value:           26754079-18F0-3066-8AFA-3A3C6D5E21BC
   - target:          x86_64h-macos
-    value:           505CFB48-5B95-381B-8284-7A3C53042ACB
+    value:           F144CD86-98F2-3321-AE9C-063AED4CED51
   - target:          x86_64h-maccatalyst
-    value:           505CFB48-5B95-381B-8284-7A3C53042ACB
+    value:           F144CD86-98F2-3321-AE9C-063AED4CED51
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B3FB73B0-AD75-3215-8994-028BDB73107D
+    value:           A416CA6A-AF03-3853-9326-A5F55C47DDFB
   - target:          arm64e-maccatalyst
-    value:           B3FB73B0-AD75-3215-8994-028BDB73107D
+    value:           A416CA6A-AF03-3853-9326-A5F55C47DDFB
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
@@ -201,28 +201,28 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F13B7F18-D1CC-367E-817A-3CC47251E93D
+    value:           211F3764-2F7A-396B-8927-98C21FBCE165
   - target:          x86_64-maccatalyst
-    value:           F13B7F18-D1CC-367E-817A-3CC47251E93D
+    value:           211F3764-2F7A-396B-8927-98C21FBCE165
   - target:          x86_64h-macos
-    value:           10DE81F5-3388-3175-8A5C-63A6EDBB651D
+    value:           4E0F5F1B-4DB2-36AA-9453-C7031A929D7E
   - target:          x86_64h-maccatalyst
-    value:           10DE81F5-3388-3175-8A5C-63A6EDBB651D
+    value:           4E0F5F1B-4DB2-36AA-9453-C7031A929D7E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           056515E1-8ABF-3A56-ADEE-175FBFE299CA
+    value:           B6AC5D38-DB1D-340A-A367-CFA7AE775B7C
   - target:          arm64e-maccatalyst
-    value:           056515E1-8ABF-3A56-ADEE-175FBFE299CA
+    value:           B6AC5D38-DB1D-340A-A367-CFA7AE775B7C
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBNNS.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ vecLib ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _BNNSApplyMultiheadAttention, _BNNSApplyMultiheadAttentionBackward, 
                        _BNNSApplyVectorActivationLayer, _BNNSArithmeticFilterApplyBackwardBatch, 
@@ -277,21 +277,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5DE67CEC-DE40-3369-B00D-4822A951CE8A
+    value:           5BB5C5B8-1FFB-3424-8BB6-ECFC01C2FB43
   - target:          x86_64-maccatalyst
-    value:           5DE67CEC-DE40-3369-B00D-4822A951CE8A
+    value:           5BB5C5B8-1FFB-3424-8BB6-ECFC01C2FB43
   - target:          x86_64h-macos
-    value:           6C463405-8A39-33EB-8851-8FF897C8A3B1
+    value:           C478ECA8-BB78-36B3-B637-45390C178772
   - target:          x86_64h-maccatalyst
-    value:           6C463405-8A39-33EB-8851-8FF897C8A3B1
+    value:           C478ECA8-BB78-36B3-B637-45390C178772
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ADCD89E3-6A68-333C-A3DC-94F12A433A9D
+    value:           98224EE2-9855-3B51-9CF7-45F4C4B57D9B
   - target:          arm64e-maccatalyst
-    value:           ADCD89E3-6A68-333C-A3DC-94F12A433A9D
+    value:           98224EE2-9855-3B51-9CF7-45F4C4B57D9B
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
@@ -1151,21 +1151,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8531B08A-41AB-3B26-BE50-2B0097621122
+    value:           54BE5942-EE13-31F0-ACFB-19A3A828F2E9
   - target:          x86_64-maccatalyst
-    value:           8531B08A-41AB-3B26-BE50-2B0097621122
+    value:           54BE5942-EE13-31F0-ACFB-19A3A828F2E9
   - target:          x86_64h-macos
-    value:           7E3FD96C-6A05-39CC-A342-80AE863DC246
+    value:           98A35C4E-B257-3E07-99CA-B5A28ABDC560
   - target:          x86_64h-maccatalyst
-    value:           7E3FD96C-6A05-39CC-A342-80AE863DC246
+    value:           98A35C4E-B257-3E07-99CA-B5A28ABDC560
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BC781200-1ED5-34D6-95D2-CB9FF2AD4C59
+    value:           CFC87BC3-C056-3D84-9575-8AF4F9B90739
   - target:          arm64e-maccatalyst
-    value:           BC781200-1ED5-34D6-95D2-CB9FF2AD4C59
+    value:           CFC87BC3-C056-3D84-9575-8AF4F9B90739
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLinearAlgebra.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
@@ -1194,17 +1194,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           47BFE731-EEF5-3B2E-BAA4-F074CE44E231
+    value:           CB27191F-1310-359A-B05D-5C8998A0BA4D
   - target:          x86_64-maccatalyst
-    value:           47BFE731-EEF5-3B2E-BAA4-F074CE44E231
+    value:           CB27191F-1310-359A-B05D-5C8998A0BA4D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BC3769C1-78FE-30C4-B416-FBE017B7B323
+    value:           982D8311-129E-3496-B06C-C0B4AB0CE27C
   - target:          arm64e-maccatalyst
-    value:           BC3769C1-78FE-30C4-B416-FBE017B7B323
+    value:           982D8311-129E-3496-B06C-C0B4AB0CE27C
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libQuadrature.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1220,17 +1220,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           91D82D24-DADC-3814-BF53-38DE9E226653
+    value:           4F60B7A0-3B8B-3AF2-B857-FB6078F2F985
   - target:          x86_64-maccatalyst
-    value:           91D82D24-DADC-3814-BF53-38DE9E226653
+    value:           4F60B7A0-3B8B-3AF2-B857-FB6078F2F985
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           080C1D22-6C8C-3031-B917-48BD034DF4C8
+    value:           33F06C3B-0B04-3EFE-8771-0D5BCFFAD15B
   - target:          arm64e-maccatalyst
-    value:           080C1D22-6C8C-3031-B917-48BD034DF4C8
+    value:           33F06C3B-0B04-3EFE-8771-0D5BCFFAD15B
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparse.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1400,21 +1400,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3B2DD327-DDEA-395E-AA69-DB9A29092AAE
+    value:           795CF22D-A78B-3C0D-BB94-3C17766F1B7A
   - target:          x86_64-maccatalyst
-    value:           3B2DD327-DDEA-395E-AA69-DB9A29092AAE
+    value:           795CF22D-A78B-3C0D-BB94-3C17766F1B7A
   - target:          x86_64h-macos
-    value:           E21B7EC2-F59D-367E-BD91-4CDCBA258B61
+    value:           CFEF4C01-C03C-3D67-AEDC-E48B9C0F67BE
   - target:          x86_64h-maccatalyst
-    value:           E21B7EC2-F59D-367E-BD91-4CDCBA258B61
+    value:           CFEF4C01-C03C-3D67-AEDC-E48B9C0F67BE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CA8BBD4E-AF1F-3E49-A586-7B18F044CF14
+    value:           69A2A96A-00C4-3060-ADC5-B95904B51F94
   - target:          arm64e-maccatalyst
-    value:           CA8BBD4E-AF1F-3E49-A586-7B18F044CF14
+    value:           69A2A96A-00C4-3060-ADC5-B95904B51F94
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparseBLAS.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
@@ -1460,24 +1460,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           27B4D811-949C-32FB-A01B-0D2795280266
+    value:           7049C1CB-0E37-348F-9052-71AFBEC1315E
   - target:          x86_64-maccatalyst
-    value:           27B4D811-949C-32FB-A01B-0D2795280266
+    value:           7049C1CB-0E37-348F-9052-71AFBEC1315E
   - target:          x86_64h-macos
-    value:           80E6A631-70A1-3DAE-B1DA-C8E43BBCF6FC
+    value:           93CD4039-94EF-3881-8224-4FD2F3B1A6A5
   - target:          x86_64h-maccatalyst
-    value:           80E6A631-70A1-3DAE-B1DA-C8E43BBCF6FC
+    value:           93CD4039-94EF-3881-8224-4FD2F3B1A6A5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FEA118F1-D3AA-3066-8D88-C7DB51C48817
+    value:           575A5DBF-4C4A-3FCD-8C78-5C49A1461BEA
   - target:          arm64e-maccatalyst
-    value:           FEA118F1-D3AA-3066-8D88-C7DB51C48817
+    value:           575A5DBF-4C4A-3FCD-8C78-5C49A1461BEA
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvDSP.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _vDSP_DCT_CreateSetup, _vDSP_DCT_Execute, _vDSP_DFT_CreateSetup, 
                        _vDSP_DFT_DestroySetup, _vDSP_DFT_DestroySetupD, _vDSP_DFT_Execute, 
@@ -1596,25 +1596,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4D3D8FB1-191B-3903-893C-9FECE67C8D01
+    value:           6AE9FCA9-C250-3C2B-8DED-73CD85464E87
   - target:          x86_64-maccatalyst
-    value:           4D3D8FB1-191B-3903-893C-9FECE67C8D01
+    value:           6AE9FCA9-C250-3C2B-8DED-73CD85464E87
   - target:          x86_64h-macos
-    value:           BF5A7A34-7502-3BF1-9B7F-71CACAA73F3A
+    value:           36241909-993B-3BB6-A8F4-13AEFB991EF5
   - target:          x86_64h-maccatalyst
-    value:           BF5A7A34-7502-3BF1-9B7F-71CACAA73F3A
+    value:           36241909-993B-3BB6-A8F4-13AEFB991EF5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AC8572BE-32AF-3E06-A914-F96782FA001A
+    value:           E63F023F-903D-331B-823C-EA23842858B9
   - target:          arm64e-maccatalyst
-    value:           AC8572BE-32AF-3E06-A914-F96782FA001A
+    value:           E63F023F-903D-331B-823C-EA23842858B9
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib'
-current-version: 793
+current-version: 794.40.2
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _VVACOS, _VVACOSF, _VVACOSF_, _VVACOSH, _VVACOSHF, _VVACOSHF_, 
                        _VVACOSH_, _VVACOS_, _VVASIN, _VVASINF, _VVASINF_, _VVASINH, 

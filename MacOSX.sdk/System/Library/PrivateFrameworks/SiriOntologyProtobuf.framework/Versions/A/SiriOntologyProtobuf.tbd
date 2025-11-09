@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9E08BB52-ABB9-3253-963A-47270C192C6E
+    value:           7D4A273A-155D-346A-9430-3DFA17C0BC95
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           569B61C5-1F77-308F-A25B-AB21D4F1CE00
+    value:           9BE65C1C-223D-3A9B-96CF-738862F32BB7
 install-name:    '/System/Library/PrivateFrameworks/SiriOntologyProtobuf.framework/Versions/A/SiriOntologyProtobuf'
 swift-abi-version: 7
 exports:

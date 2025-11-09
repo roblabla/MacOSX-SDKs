@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6596A2C9-3DB5-3DBC-A9F1-20F18837E134
+    value:           4B953810-1750-31F7-9A7B-A8194AA080D5
   - target:          x86_64-maccatalyst
-    value:           6596A2C9-3DB5-3DBC-A9F1-20F18837E134
+    value:           4B953810-1750-31F7-9A7B-A8194AA080D5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7B49C600-3737-3EE4-B964-943C31C41D03
+    value:           DB84BEE2-C819-32F2-81AA-315A87713386
   - target:          arm64e-maccatalyst
-    value:           7B49C600-3737-3EE4-B964-943C31C41D03
+    value:           DB84BEE2-C819-32F2-81AA-315A87713386
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices'
 current-version: 1141.1
 parent-umbrella:
@@ -215,6 +215,7 @@ exports:
                        __LSSharedMemorySetSessionLauncherASNLow, __LSSharedMemorySetSystemProcessASNLow, 
                        __LSSharedMemorySetSystemUIPresentationMode, __LSSharedMemorySetSystemUIPresentationOptions, 
                        __LSSharedMemoryUnlock, __LSSignalApplicationReady, __LSStartLaunchedApplication, 
+                       __LSSuggestedFilesystemNameForWrapperWrappingBundleAtURL, 
                        __LSURLBindingReasonKey, __LSURLIsDataContainer4IS, __LSUnregisterPluginsInDirectory, 
                        __LSUnregisterURL, __LSUnregisterURLsRelativeToURL, __LSUnscheduleNotificationFunction, 
                        __LSUpdateRegistrationForURLsRelativeToURL, __LSUseCoreApplicationServices, 
@@ -447,11 +448,11 @@ exports:
                        LSIconResource, LSObserver, LSOpenWithMenuConstructor, LSPlugInKitProxy, 
                        LSPlugInQuery, LSPlugInQueryWithIdentifier, LSPlugInQueryWithQueryDictionary, 
                        LSPlugInQueryWithURL, LSPropertyList, LSRecord, LSRecordPromise, 
-                       LSResourceProxy, LSServiceRecord, UTTypeRecord, _LSApplicationState, 
-                       _LSDatabase, _LSDefaults, _LSDiskUsage, _LSDisplayNameConstructor, 
-                       _LSExceptions, _LSInternetLocator, _LSLazyPropertyList, _LSOpenConfiguration, 
-                       _LSQuery, _LSQueryContext, _LSQueryResult, _LSRecordEnumerator, 
-                       _LSStringLocalizer, _LSURLOverride ]
+                       LSResourceProxy, LSServiceRecord, LSSpotlightAction, UTTypeRecord, 
+                       _LSApplicationState, _LSDatabase, _LSDefaults, _LSDiskUsage, 
+                       _LSDisplayNameConstructor, _LSExceptions, _LSInternetLocator, 
+                       _LSLazyPropertyList, _LSOpenConfiguration, _LSQuery, _LSQueryContext, 
+                       _LSQueryResult, _LSRecordEnumerator, _LSStringLocalizer, _LSURLOverride ]
     objc-ivars:      [ _LSDatabase.schema, _LSDatabase.store ]
 reexports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           92296DE6-60CD-333C-A56B-F2B95E147CCC
+    value:           F099C3EC-6CE2-344B-9A6E-7CFA2ED86313
   - target:          x86_64-maccatalyst
-    value:           92296DE6-60CD-333C-A56B-F2B95E147CCC
+    value:           F099C3EC-6CE2-344B-9A6E-7CFA2ED86313
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CE11E7D0-EA51-3E62-BFE8-ECB6CDABCC3F
+    value:           8ECCA223-5286-3CE0-9535-E7127C331C6D
   - target:          arm64e-maccatalyst
-    value:           CE11E7D0-EA51-3E62-BFE8-ECB6CDABCC3F
+    value:           8ECCA223-5286-3CE0-9535-E7127C331C6D
 install-name:    '/System/Library/PrivateFrameworks/MetricMeasurement.framework/Versions/A/MetricMeasurement'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

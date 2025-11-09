@@ -192,7 +192,7 @@ typedef unsigned char nw_ethernet_address_t[6];
 /*!
  * @typedef nw_ethernet_channel_receive_handler_t
  * @abstract
- *		This receive handler is invoked when a frame of the set Ethertype is received from the Ethernet
+ *		This receive handler is invoked when a frame of the set EtherType is received from the Ethernet
  *      channel.
  *
  * @param content

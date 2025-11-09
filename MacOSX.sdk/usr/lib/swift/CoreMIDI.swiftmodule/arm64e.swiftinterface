@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
-// swift-module-flags: -target arm64e-apple-macos12.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreMIDI -swift-version 5 -enforce-exclusivity=checked -O -module-name CoreMIDI
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-module-flags: -target arm64e-apple-macos12.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreMIDI -swift-version 5 -enforce-exclusivity=checked -O -module-name CoreMIDI
 @_exported import CoreMIDI
 import Foundation
 import Swift
@@ -329,4 +329,20 @@ extension CoreMIDI.MIDIPacketList {
     public func withUnsafePointer<Result>(_ body: (Swift.UnsafePointer<CoreMIDI.MIDIPacketList>) -> Result) -> Result
     public func withUnsafeMutableMIDIPacketListPointer<Result>(_ body: (inout CoreMIDI.UnsafeMutableMIDIPacketListPointer) -> Result) -> Result
   }
+}
+@available(*, deprecated, renamed: "MIDINoteAttribute.none")
+@_alwaysEmitIntoClient public var kMIDINoteAttributeNone: Swift.Int {
+  get { 0x0 }
+}
+@available(*, deprecated, renamed: "MIDINoteAttribute.manufacturerSpecific")
+@_alwaysEmitIntoClient public var kMIDINoteAttributeManufacturerSpecific: Swift.Int {
+  get { 0x1 }
+}
+@available(*, deprecated, renamed: "MIDINoteAttribute.profileSpecific")
+@_alwaysEmitIntoClient public var kMIDINoteAttributeProfileSpecific: Swift.Int {
+  get { 0x2 }
+}
+@available(*, deprecated, renamed: "MIDINoteAttribute.pitch")
+@_alwaysEmitIntoClient public var kMIDINoteAttributePitch: Swift.Int {
+  get { 0x3 }
 }

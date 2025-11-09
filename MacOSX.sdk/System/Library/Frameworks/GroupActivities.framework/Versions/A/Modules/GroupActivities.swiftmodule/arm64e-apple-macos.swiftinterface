@@ -1,8 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
-// swift-module-flags: -target arm64e-apple-macos12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-concurrency -module-name GroupActivities
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-module-flags: -target arm64e-apple-macos12.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-concurrency -module-name GroupActivities
 import AVFoundation
-import AVKit
 import Combine
 import CoreGraphics
 import CryptoKit
@@ -101,7 +100,11 @@ extension GroupActivities.GroupActivity {
   public func prepareForActivation() async -> GroupActivities.GroupActivityActivationResult
   #endif
 
-  public func activate()
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func activate() async throws -> Swift.Bool
+  #endif
+
 }
 @_hasMissingDesignatedInitializers @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
@@ -115,6 +118,16 @@ final public class GroupStateObserver : Combine.ObservableObject {
   convenience public init()
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
+}
+@available(iOS 15, macOS 12, tvOS 15, *)
+@available(watchOS, unavailable)
+public struct BroadcastOptions : Swift.OptionSet {
+  public let rawValue: Swift.Int
+  public init(rawValue: Swift.Int)
+  public static let mirroredVideo: GroupActivities.BroadcastOptions
+  public typealias ArrayLiteralElement = GroupActivities.BroadcastOptions
+  public typealias Element = GroupActivities.BroadcastOptions
+  public typealias RawValue = Swift.Int
 }
 @_hasMissingDesignatedInitializers @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
@@ -132,6 +145,11 @@ extension GroupActivities.GroupSessionMessenger {
 extension GroupActivities.GroupSessionMessenger {
   final public func send<Message>(_ value: Message, to participants: GroupActivities.Participants = .all, completion: @escaping (Swift.Error?) -> Swift.Void) where Message : Swift.Decodable, Message : Swift.Encodable
   final public func send(_ value: Foundation.Data, to participants: GroupActivities.Participants = .all, completion: @escaping (Swift.Error?) -> Swift.Void)
+}
+@available(iOS 15, macOS 12, tvOS 15, *)
+@available(watchOS, unavailable)
+public protocol CustomMessageIdentifiable {
+  static var messageIdentifier: Swift.String { get }
 }
 @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
@@ -162,10 +180,22 @@ extension GroupActivities.GroupSessionEvent {
     public static func skip(item: Swift.String) -> GroupActivities.GroupSessionEvent.Action
   }
 }
+extension GroupActivities.GroupSessionEvent.Action {
+  public struct QueueChange {
+    public struct Item {
+      public static func song(_ name: Swift.String) -> GroupActivities.GroupSessionEvent.Action.QueueChange.Item
+      public static func container(_ name: Swift.String) -> GroupActivities.GroupSessionEvent.Action.QueueChange.Item
+    }
+    public static func setUpNext(_ item: GroupActivities.GroupSessionEvent.Action.QueueChange.Item) -> GroupActivities.GroupSessionEvent.Action.QueueChange
+    public static func added(_ item: GroupActivities.GroupSessionEvent.Action.QueueChange.Item) -> GroupActivities.GroupSessionEvent.Action.QueueChange
+  }
+  public static let updatedQueue: GroupActivities.GroupSessionEvent.Action
+  public static func updatedQueue(_ change: GroupActivities.GroupSessionEvent.Action.QueueChange) -> GroupActivities.GroupSessionEvent.Action
+}
 extension GroupActivities.GroupSession {
   @available(iOS 15, macOS 12, tvOS 15, *)
   @available(watchOS, unavailable)
-  final public func postEvent(_ event: GroupActivities.GroupSessionEvent)
+  final public func showNotice(_ event: GroupActivities.GroupSessionEvent)
 }
 extension GroupActivities.GroupSession {
   @available(iOS 15, macOS 12, tvOS 15, *)
@@ -302,6 +332,8 @@ public struct GroupActivityMetadata : Swift.Equatable {
   public var subtitle: Swift.String?
   public var previewImage: CoreGraphics.CGImage?
   public var fallbackURL: Foundation.URL?
+  public var preferredBroadcastOptions: GroupActivities.BroadcastOptions
+  public var supportsContinuationOnTV: Swift.Bool
   public init()
   public static func == (a: GroupActivities.GroupActivityMetadata, b: GroupActivities.GroupActivityMetadata) -> Swift.Bool
 }

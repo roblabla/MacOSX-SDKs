@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           93D62B0A-F5BC-3734-92E1-F0D8F3109F0E
+    value:           0B963CFE-44A4-3B85-9EC3-B176EF056E11
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EFAD008D-7CC8-3F5B-B699-F944035BA353
+    value:           97CAD5D6-6A56-317E-8B0F-BFA895F5D47D
 install-name:    '/usr/lib/libAudioStatistics.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _CAReporterProxyKeyReporterID, _CAReporterProxyKeyServiceType, 
                        _CAReportingApplicationName, _CAReportingAriadneOutputFileDirectory, 
                        _CAReportingAriadneOutputFileName, _CAReportingAriadnePlistFilePath, 
@@ -32,11 +32,12 @@ exports:
                        _CAReportingServiceNameTelephony, _CAReportingServiceNameTest, 
                        _CAReportingServiceNameUnknown, _CAReportingSessionBlacklistFieldsKey, 
                        _CAReportingSessionThrottleSecondsKey, _CAReportingTestName, 
-                       _CAReportingTraceType, _CAReportingTraceTypeArtrace, _CAReportingTraceTypeKtrace, 
-                       _CAReportingTracingLogsDirectory, _CAReportingUtilityAddDates, 
-                       _CAReportingUtilityExtractSessionIDFromReporterID, _CAReportingUtilityGenerateServiceNameFromServiceType, 
-                       _CAReportingUtilityGenerateServiceTypeFromServiceName, _CAReportingUtilityGetReportingServerQueue, 
-                       _CAReportingUtilityIsInternalBuild, _CAReportingUtilityShouldSendMessage, 
-                       _CAReportingVersionNumber, _CreateSharedCAReportingClient ]
+                       _CAReportingTraceType, _CAReportingTraceTypeArtrace, _CAReportingTraceTypeArtraceProfile, 
+                       _CAReportingTraceTypeKtrace, _CAReportingTracingLogsDirectory, 
+                       _CAReportingUtilityAddDates, _CAReportingUtilityExtractSessionIDFromReporterID, 
+                       _CAReportingUtilityGenerateServiceNameFromServiceType, _CAReportingUtilityGenerateServiceTypeFromServiceName, 
+                       _CAReportingUtilityGetReportingServerQueue, _CAReportingUtilityIsInternalBuild, 
+                       _CAReportingUtilityShouldSendMessage, _CAReportingVersionNumber, 
+                       _CreateSharedCAReportingClient ]
     objc-classes:    [ CAReporter, CATestReporter ]
 ...

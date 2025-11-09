@@ -3,18 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           31003332-0655-3670-8195-B9A0537C1884
+    value:           17AED761-574D-3A53-845D-B46E820AF849
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           14BDCB24-2646-39A6-9DC2-804ABCF62A16
+    value:           EEFFE61D-FF6B-3E08-93FA-D8D9E827E710
 install-name:    '/System/Library/PrivateFrameworks/DeauthorizationKit.framework/Versions/A/DeauthorizationKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _APMechanismSetContextValue, _APMechanismSetResult, _DKEACSAccountOptionAdminUserID, 
                        _DKEACSAccountOptionAdminUserPassword, _DKEACSAdminInitiated, 
-                       _DKEACSConsiderPreliminaryChecksNonFatal, _DKEACSPassword, 
-                       _DKEACSSkipSystemModalBlur, _DKEACSTaskIdentifiersToSkip, 
+                       _DKEACSBootstrapTokenString, _DKEACSConsiderPreliminaryChecksNonFatal, 
+                       _DKEACSPassword, _DKEACSSkipSystemModalBlur, _DKEACSTaskIdentifiersToSkip, 
                        _DKEACSUID, _DKErrorDomain, _DKHelperDaemonServiceInterface, 
                        _DKIntegrityCheckErrorDomain, _DKLogObject, _DKNotificationEACSDomain, 
                        _DKNotificationNameEACSTerminated, _DKPrefEnableFeature, _DKPrefFakeAccountRemoval, 
@@ -41,11 +41,12 @@ exports:
                        DKConstants, DKContainerViewController, DKDiskLayoutWarningWindowController, 
                        DKDiskManagementUtilities, DKEraseAllContentAndSettingsManager, 
                        DKHelperDaemon, DKHelperDaemonController, DKHelperDaemonInterfaces, 
-                       DKMultipleUsersWarningWindowController, DKPrefs, DKSignOutDataSyncTableCellView, 
-                       DKSignOutDataSyncWindowController, DKSyncingApp, DKTask, DKTaskAccountRemoval, 
-                       DKTaskClearCTNetworkSettings, DKTaskDeactivateFindMy, DKTaskEFICheck, 
-                       DKTaskIntegrityCheck, DKTaskMessagesFaceTimeSignOut, DKTaskOtherUsersCheck, 
-                       DKTaskOtherVolumesCheck, DKTaskPrepareForReboot, DKTaskTimeMachineBackUp, 
-                       DKTaskUnregisterAppleIDs, DKTaskUserConfirmationCheck, DKTaskiCloudDataUploadCheck, 
+                       DKLogging, DKMultipleUsersWarningWindowController, DKPrefs, 
+                       DKSignOutDataSyncTableCellView, DKSignOutDataSyncWindowController, 
+                       DKSyncingApp, DKTask, DKTaskAccountRemoval, DKTaskClearCTNetworkSettings, 
+                       DKTaskDeactivateFindMy, DKTaskEFICheck, DKTaskIntegrityCheck, 
+                       DKTaskMessagesFaceTimeSignOut, DKTaskOtherUsersCheck, DKTaskOtherVolumesCheck, 
+                       DKTaskPrepareForReboot, DKTaskTimeMachineBackUp, DKTaskUnregisterAppleIDs, 
+                       DKTaskUserConfirmationCheck, DKTaskiCloudDataUploadCheck, 
                        DKTimeMachineBackupWindowController, DKUtilities, DKWindow ]
 ...

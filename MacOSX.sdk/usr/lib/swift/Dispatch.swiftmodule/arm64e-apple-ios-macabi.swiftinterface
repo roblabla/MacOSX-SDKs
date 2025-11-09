@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
-// swift-module-flags: -target arm64e-apple-ios15.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -module-name Dispatch
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-module-flags: -target arm64e-apple-ios15.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -module-name Dispatch
 import Combine
 @_exported import Dispatch
 import Swift
@@ -404,7 +404,10 @@ extension Dispatch.DispatchQueue : Combine.Scheduler {
       public typealias FloatLiteralType = Swift.Double
       public typealias IntegerLiteralType = Swift.Int
       public typealias Magnitude = Swift.Int
-      public var magnitude: Swift.Int
+      public var magnitude: Swift.Int {
+        get
+        set
+      }
       public var timeInterval: Dispatch.DispatchTimeInterval {
         get
       }
@@ -827,7 +830,4 @@ extension Dispatch.DispatchQoS.QoSClass : Swift.Equatable {}
 extension Dispatch.DispatchQoS.QoSClass : Swift.Hashable {}
 extension Dispatch.DispatchTimeoutResult : Swift.Equatable {}
 extension Dispatch.DispatchTimeoutResult : Swift.Hashable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 extension Dispatch.DispatchTimeoutResult : Swift.Sendable {}
-#endif

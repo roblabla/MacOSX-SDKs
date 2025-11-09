@@ -147,59 +147,8 @@ struct kauth_cache_sizes {
 /*
  * Credentials.
  */
-
-#if 0
-/*
- * Supplemental credential data.
- *
- * This interface allows us to associate arbitrary data with a credential.
- * As with the credential, the data is considered immutable.
- */
-struct kauth_cred_supplement {
-	TAILQ_ENTRY(kauth_cred_supplement) kcs_link;
-
-	int     kcs_ref;                /* reference count */
-	int     kcs_id;                 /* vended identifier */
-	size_t  kcs_size;               /* size of data field */
-	char    kcs_data[0];
-};
-
-typedef struct kauth_cred_supplement *kauth_cred_supplement_t;
-
-struct kauth_cred {
-	TAILQ_ENTRY(kauth_cred) kc_link;
-
-	int     kc_ref;                 /* reference count */
-	uid_t   kc_uid;                 /* effective user id */
-	uid_t   kc_ruid;                /* real user id */
-	uid_t   kc_svuid;               /* saved user id */
-	gid_t   kc_gid;                 /* effective group id */
-	gid_t   kc_rgid;                /* real group id */
-	gid_t   kc_svgid;               /* saved group id */
-
-	int     kc_flags;
-#define KAUTH_CRED_GRPOVERRIDE          (1<<0)  /* private group list is authoritative */
-
-	int     kc_npvtgroups;          /* private group list, advisory or authoritative */
-	gid_t   kc_pvtgroups[NGROUPS];  /* based on KAUTH_CRED_GRPOVERRIDE flag */
-
-	int     kc_nsuppgroups;         /* supplementary group list */
-	gid_t   *kc_suppgroups;
-
-	int     kc_nwhtgroups;          /* whiteout group list */
-	gid_t   *kc_whtgroups;
-
-	struct au_session cr_audit;     /* user auditing data */
-
-	int     kc_nsupplement;         /* entry count in supplemental data pointer array */
-	kauth_cred_supplement_t *kc_supplement;
-};
-#else
-
 /* XXX just for now */
 #include <sys/ucred.h>
-// typedef struct ucred *kauth_cred_t;
-#endif
 
 /* Kernel SPI for now */
 __BEGIN_DECLS

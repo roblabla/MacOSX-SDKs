@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           3DA84105-1060-39C8-A0EA-D3F7C202FAC6
+    value:           D59D9729-798E-36E1-AB6A-FE89FFC5BF9A
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           9897454F-CE54-336A-8AE8-3B9AE67895CA
+    value:           3C18FFF4-DD11-3861-9936-0E0D06466212
 install-name:    '/System/iOSSupport/System/Library/Frameworks/ARKit.framework/Versions/A/ARKit'
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _ARBlendShapeLocationBrowDownLeft, _ARBlendShapeLocationBrowDownRight, 
                        _ARBlendShapeLocationBrowInnerUp, _ARBlendShapeLocationBrowOuterUpLeft, 
                        _ARBlendShapeLocationBrowOuterUpRight, _ARBlendShapeLocationCheekPuff, 

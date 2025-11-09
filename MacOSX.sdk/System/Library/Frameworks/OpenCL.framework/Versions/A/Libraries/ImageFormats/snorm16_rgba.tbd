@@ -3,9 +3,9 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E5D0DB77-A57C-3057-BED2-9E4E52579D68
+    value:           89093A58-52C7-3B12-880A-CFB8C9CCF298
   - target:          x86_64-maccatalyst
-    value:           E5D0DB77-A57C-3057-BED2-9E4E52579D68
+    value:           89093A58-52C7-3B12-880A-CFB8C9CCF298
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/ImageFormats/snorm16_rgba.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

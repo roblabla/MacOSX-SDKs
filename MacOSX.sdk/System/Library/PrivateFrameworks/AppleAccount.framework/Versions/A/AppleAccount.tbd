@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0A92DDF9-CA13-3037-98BF-035C3043985B
+    value:           B0F20DE2-7B29-3C09-980E-2D4493879800
   - target:          x86_64-maccatalyst
-    value:           0A92DDF9-CA13-3037-98BF-035C3043985B
+    value:           B0F20DE2-7B29-3C09-980E-2D4493879800
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B1B91086-8A86-3565-803D-31DBF7FDA565
+    value:           19F4AC53-FA71-3B55-8F3F-ABA16CA34169
   - target:          arm64e-maccatalyst
-    value:           B1B91086-8A86-3565-803D-31DBF7FDA565
+    value:           19F4AC53-FA71-3B55-8F3F-ABA16CA34169
 install-name:    '/System/Library/PrivateFrameworks/AppleAccount.framework/Versions/A/AppleAccount'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -88,30 +88,31 @@ exports:
                        _AASetupAssistantUpdateAppleIDURLKey, _AASetupAssistantUpgradeStatusKey, 
                        _AASetupAssistantUpgradeStatusURLKey, _AASetupAssistantUpgradeiOSTermsUIURLKey, 
                        _AASetupAssistantXMLUIKey, _AASetupAssistantiForgotUIURLKey, 
-                       _AASignInErrorDomain, _AATermsEntryBeta, _AATermsEntryDevice, 
-                       _AATermsEntryGameCenter, _AATermsEntryPrivacy, _AATermsEntryWarranty, 
-                       _AATermsEntryiCloud, _AATermsEntryiTunes, _AAURLEndpointAbout, 
-                       _AAURLEndpointAuthenticate, _AAURLEndpointCreateDelegateAccounts, 
-                       _AAURLEndpointGetAccountSettings, _AAURLEndpointLoginDelegates, 
-                       _AAURLEndpointLoginOrCreateAccount, _AAURLEndpointQualifyCertificate, 
-                       _AAURLEndpointQualifySession, _AAURLKeyFlowType, _AAURLKeyFlowTypeBeneficiary, 
-                       _AAURLKeyFlowTypeCustodian, _AAURLKeyFlowTypePrivateEmailManage, 
-                       _AAURLKeyID, _AAURLProtocolScheme, _IDSRegistrationPropertySupportsCustodian, 
-                       _IDSRegistrationPropertyUnknown, __AABeneficiaryClaimUIURLKey, 
-                       __AAErrorUnderlyingError, __AALogSystem, __AAMessageDestinationMailToPrefix, 
-                       __AAMessageDestinationSelfTokenPrefix, __AAMessageDestinationTelToPrefix, 
-                       __AAMessageDestinationTokenPrefix, __AAMessagesInviteContextURL, 
-                       __AASignpostCreate, __AASignpostGetNanoseconds, __AASignpostLogSystem, 
-                       _kAAAccountAlternateDSID, _kAAAccountAppleIDAliasesKey, _kAAAccountAppleIDKey, 
-                       _kAAAccountClassKey, _kAAAccountCloudDocsMigrationComplete, 
-                       _kAAAccountDataclass, _kAAAccountDataclassesDisabledForCellularKey, 
-                       _kAAAccountDataclassesPropertiesKey, _kAAAccountEmailAddress, 
-                       _kAAAccountFirstNameKey, _kAAAccountHasOptionalTerms, _kAAAccountIsCloudSubscriber, 
-                       _kAAAccountIsFamilyEligible, _kAAAccountIsManagedAppleID, 
-                       _kAAAccountIsSandboxAccount, _kAAAccountLastAgreedTerms, _kAAAccountLastKnownQuota, 
-                       _kAAAccountLastNameKey, _kAAAccountMiddleNameKey, _kAAAccountMobileMeStatusKey, 
-                       _kAAAccountNeedsToVerifyTerms, _kAAAccountNotesMigrated, _kAAAccountPasswordKey, 
-                       _kAAAccountPersonIDKey, _kAAAccountPrimaryAccountKey, _kAAAccountPrimaryEmailKey, 
+                       _AASignInErrorDomain, _AASpyGlassOptionNone, _AASpyGlassOptionPrimaryAccount, 
+                       _AATermsEntryBeta, _AATermsEntryDevice, _AATermsEntryGameCenter, 
+                       _AATermsEntryPrivacy, _AATermsEntryWarranty, _AATermsEntryiCloud, 
+                       _AATermsEntryiTunes, _AAURLEndpointAbout, _AAURLEndpointAuthenticate, 
+                       _AAURLEndpointCreateDelegateAccounts, _AAURLEndpointGetAccountSettings, 
+                       _AAURLEndpointLoginDelegates, _AAURLEndpointLoginOrCreateAccount, 
+                       _AAURLEndpointQualifyCertificate, _AAURLEndpointQualifySession, 
+                       _AAURLKeyFlowType, _AAURLKeyFlowTypeBeneficiary, _AAURLKeyFlowTypeCustodian, 
+                       _AAURLKeyFlowTypePrivateEmailManage, _AAURLKeyID, _AAURLProtocolScheme, 
+                       _IDSRegistrationPropertySupportsCustodian, _IDSRegistrationPropertyUnknown, 
+                       __AABeneficiaryClaimUIURLKey, __AAErrorUnderlyingError, __AAIDSServiceName, 
+                       __AALogSystem, __AAMessageDestinationMailToPrefix, __AAMessageDestinationSelfTokenPrefix, 
+                       __AAMessageDestinationTelToPrefix, __AAMessageDestinationTokenPrefix, 
+                       __AAMessagesInviteContextURL, __AASignpostCreate, __AASignpostGetNanoseconds, 
+                       __AASignpostLogSystem, _kAAAccountAlternateDSID, _kAAAccountAppleIDAliasesKey, 
+                       _kAAAccountAppleIDKey, _kAAAccountBenefactorAccountKey, _kAAAccountClassKey, 
+                       _kAAAccountCloudDocsMigrationComplete, _kAAAccountDataclass, 
+                       _kAAAccountDataclassesDisabledForCellularKey, _kAAAccountDataclassesPropertiesKey, 
+                       _kAAAccountEmailAddress, _kAAAccountFirstNameKey, _kAAAccountHasOptionalTerms, 
+                       _kAAAccountIsCloudSubscriber, _kAAAccountIsFamilyEligible, 
+                       _kAAAccountIsManagedAppleID, _kAAAccountIsSandboxAccount, 
+                       _kAAAccountLastAgreedTerms, _kAAAccountLastKnownQuota, _kAAAccountLastNameKey, 
+                       _kAAAccountMiddleNameKey, _kAAAccountMobileMeStatusKey, _kAAAccountNeedsToVerifyTerms, 
+                       _kAAAccountNotesMigrated, _kAAAccountPasswordKey, _kAAAccountPersonIDKey, 
+                       _kAAAccountPrimaryAccountKey, _kAAAccountPrimaryEmailKey, 
                        _kAAAccountPrimaryEmailVerifiedKey, _kAAAccountProtocolVersionKey, 
                        _kAAAccountRegionInfoKey, _kAAAccountRemindersAutoMigratableToCK, 
                        _kAAAccountRemindersMigrated, _kAAAccountRepairStateKey, _kAAAccountRepairerPID, 
@@ -261,17 +262,17 @@ exports:
                        AAMessagingDestination, AAMessagingDevice, AAMessagingService, 
                        AAMobileMeOfferResponse, AAMyPhotoRequest, AAOBAddTrustedContactsModel, 
                        AAOBBulletPointModel, AAOBCustodianContactSelectorModel, AAOBCustodianHelpNowModel, 
-                       AAOBCustodianInvitationModel, AAOBInheritanceContactPickerModel, 
-                       AAOBInheritanceInvitationModel, AAOBInheritanceInviteMessageModel, 
-                       AAOBInheritanceSetupCompleteModel, AAOBInheritanceShareAccessKeyOptionsModel, 
-                       AAOBInheritanceShareDataModel, AAOBInvitationSentModel, AAOBModelHelper, 
-                       AAOBTrustedContactInviteMessageModel, AAPasswordSecurityUIRequest, 
-                       AAPaymentSummaryRequest, AAPaymentSummaryResponse, AAPaymentUIRequest, 
-                       AAPersonaUtility, AAPersonalInfoUIRequest, AAPhotoResponse, 
-                       AAPreferences, AAProvisioningResponse, AAQuotaDepletionAlert, 
-                       AAQuotaInfoRequest, AAQuotaInfoResponse, AARegionInfo, AARegisterRequest, 
-                       AARemoteServer, AARemoteServerConfigurationCache, AARequest, 
-                       AARequester, AAResponse, AASecondaryAuthenticationRequest, 
+                       AAOBCustodianInvitationModel, AAOBCustodiansListViewModel, 
+                       AAOBInheritanceContactPickerModel, AAOBInheritanceInvitationModel, 
+                       AAOBInheritanceInviteMessageModel, AAOBInheritanceSetupCompleteModel, 
+                       AAOBInheritanceShareAccessKeyOptionsModel, AAOBInheritanceShareDataModel, 
+                       AAOBInvitationSentModel, AAOBModelHelper, AAOBTrustedContactInviteMessageModel, 
+                       AAPasswordSecurityUIRequest, AAPaymentSummaryRequest, AAPaymentSummaryResponse, 
+                       AAPaymentUIRequest, AAPendingIDSMessage, AAPersonaUtility, 
+                       AAPersonalInfoUIRequest, AAPhotoResponse, AAPreferences, AAProvisioningResponse, 
+                       AAQuotaDepletionAlert, AAQuotaInfoRequest, AAQuotaInfoResponse, 
+                       AARegionInfo, AARegisterRequest, AARemoteServer, AARemoteServerConfigurationCache, 
+                       AARequest, AARequester, AAResponse, AASecondaryAuthenticationRequest, 
                        AASecondaryAuthenticationResponse, AASetupAssistantAuthenticateRequest, 
                        AASetupAssistantConfigRequest, AASetupAssistantConfigResponse, 
                        AASetupAssistantCreateRequest, AASetupAssistantCreateResponse, 

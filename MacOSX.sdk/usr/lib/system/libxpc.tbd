@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4F2E9B76-DE65-311E-8007-5CD1C89E3410
+    value:           40C9FF9E-4B1A-3776-A46E-D7BD96AF1FEE
   - target:          x86_64-maccatalyst
-    value:           4F2E9B76-DE65-311E-8007-5CD1C89E3410
+    value:           40C9FF9E-4B1A-3776-A46E-D7BD96AF1FEE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FB8A7709-F8D3-3E8B-BD5C-C436E6C765CE
+    value:           1428B9B3-F8A0-3B15-9087-3995662B6252
   - target:          arm64e-maccatalyst
-    value:           FB8A7709-F8D3-3E8B-BD5C-C436E6C765CE
+    value:           1428B9B3-F8A0-3B15-9087-3995662B6252
 install-name:    '/usr/lib/system/libxpc.dylib'
-current-version: 2235.0.32
+current-version: 2235.60.3
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

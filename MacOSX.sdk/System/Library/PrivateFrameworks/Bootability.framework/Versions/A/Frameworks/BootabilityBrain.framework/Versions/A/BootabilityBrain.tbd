@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           77A1DB9E-5C24-3752-8790-7D3B8C34FA22
+    value:           ABA57175-C3FC-3BCF-8E78-A48B1C9E9562
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A03EDF9B-1153-3089-AF97-CDF483B7B03C
+    value:           F50971D8-E07A-3348-9BF8-3113145010E7
 install-name:    '/System/Library/PrivateFrameworks/Bootability.framework/Versions/A/Frameworks/BootabilityBrain.framework/Versions/A/BootabilityBrain'
-current-version: 54
+current-version: 56
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ACMContextAddCredential, _ACMContextAddCredentialWithScope, 

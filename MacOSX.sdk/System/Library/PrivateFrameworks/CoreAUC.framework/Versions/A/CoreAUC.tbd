@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           676A3FA8-0A67-35FF-9A3E-88896BB819CB
+    value:           A0261156-C436-3A7F-8DF1-2847AEE346E0
   - target:          x86_64-maccatalyst
-    value:           676A3FA8-0A67-35FF-9A3E-88896BB819CB
+    value:           A0261156-C436-3A7F-8DF1-2847AEE346E0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           13CECBFF-9C56-3BDB-A67D-E20661E2C3E2
+    value:           B56D3DA6-5FA4-3942-BE0E-3698C8BBC3A8
   - target:          arm64e-maccatalyst
-    value:           13CECBFF-9C56-3BDB-A67D-E20661E2C3E2
+    value:           B56D3DA6-5FA4-3942-BE0E-3698C8BBC3A8
 install-name:    '/System/Library/PrivateFrameworks/CoreAUC.framework/Versions/A/CoreAUC'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

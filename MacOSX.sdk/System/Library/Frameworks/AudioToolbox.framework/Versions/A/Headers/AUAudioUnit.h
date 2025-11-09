@@ -649,17 +649,6 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 */
 @property (NS_NONATOMIC_IOSONLY, readonly, copy) NSArray<NSString *> *MIDIOutputNames API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
-/*! @property	MIDIEventListOutputNames
-	@brief		The names of a plug-in's MIDI event list outputs.
-	@discussion
-		A plug-in may override this method to inform hosts about its MIDIEventList outputs. The size of the
-		array is the number of outputs the Audio Unit supports. Each item in the array is the name
-		of the MIDIEventList output at that index.
-
-		This is bridged to the v2 API property kAudioUnitProperty_MIDIOutputEventListCallbackInfo.
-*/
-@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSArray<NSString *> *MIDIEventListOutputNames API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
-
 /*!	@property	providesUserInterface
 	@brief		Specifies whether an audio unit provides UI (normally in the form of a view controller).
 	@discussion

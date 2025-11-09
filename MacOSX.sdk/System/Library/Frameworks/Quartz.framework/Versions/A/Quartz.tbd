@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           209DBB18-0930-3C3E-88E4-E83EA9691D07
+    value:           E1D737BB-BDFD-3D7D-8B77-0530DFD76CD8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           927BE907-FEE0-3B97-88A8-0B33C9FABEB2
+    value:           930AF9B1-E722-3C03-AAF6-307E1BC08064
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -22,14 +22,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7BDE587B-C4A9-3E4B-8FD9-74DFA1305F1A
+    value:           BE5D1D1C-B17B-3706-BC42-F63CB119B333
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           45F7367E-EAED-3F41-AA7C-E4F0500A7FDB
+    value:           AC6D1734-A4D8-3E2D-9A64-A4F3DD0784E9
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/ImageKit.framework/Versions/A/ImageKit'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _IKAnimationDelayKey, _IKAnimationDurationKey, _IKAnimationFrameRateKey, 
                        _IKAnimationVelocityCurveKey, _IKBestRepresentationFromNSImageForPhysicalSize, 
                        _IKCGBitmapContextRefFromCGImageRef, _IKCGBitmapContextRefFromData, 
@@ -243,11 +243,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E9B24092-8A6E-390E-9691-733B1C1EFB8B
+    value:           3BA9D52B-29EC-3FBF-A60E-8023F60B15DB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           69008890-A184-3B4E-9EA6-0094905EB639
+    value:           78C77531-2F20-3922-A262-2A9B8EE10C92
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzComposer.framework/Versions/A/QuartzComposer'
 current-version: 168
 exports:
@@ -3148,14 +3148,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           385057F5-9ABF-3D01-A5CE-A616C21994F2
+    value:           F5530D01-E0DF-3896-97C4-CAF47A8974EA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           251E29EB-5888-3551-A5CE-4AE484999440
+    value:           9B2EFDCE-0F4B-31F6-98EB-C816A9CFB99D
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzFilters.framework/Versions/A/QuartzFilters'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _QuartzFilterApplyToContext, _QuartzFilterCopyContextDict, 
                        _QuartzFilterCreateHostMatchingFilter, _QuartzFilterCreateImageCoverter, 
                        _QuartzFilterCreateWithOutputIntents, _QuartzFilterCreateWithURL, 

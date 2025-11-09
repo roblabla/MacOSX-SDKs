@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           17EB85AC-64CB-3C5D-AA52-1217C82F9D38
+    value:           2E157BE6-32AB-3C9E-9CA2-593A93931544
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CC05AF71-FF15-3891-A450-B0F08D387D04
+    value:           21819BB0-B065-38A3-A2B6-802B914F7069
 install-name:    '/System/Library/PrivateFrameworks/CoreMLTestFramework.framework/Versions/A/CoreMLTestFramework'
 exports:
   - targets:         [ x86_64-macos ]

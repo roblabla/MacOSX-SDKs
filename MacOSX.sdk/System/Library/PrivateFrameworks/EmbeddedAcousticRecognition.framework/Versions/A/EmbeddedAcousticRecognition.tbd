@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DB79CEA2-8E9A-3615-9070-EB75CE04390A
+    value:           770BEF93-D1F9-3EEB-B91E-4D16FC85E3C4
   - target:          x86_64-maccatalyst
-    value:           DB79CEA2-8E9A-3615-9070-EB75CE04390A
+    value:           770BEF93-D1F9-3EEB-B91E-4D16FC85E3C4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2520C94F-980F-3C57-B04D-0D474296A37B
+    value:           92523B21-E143-3ABB-BEB3-27C87D59A2AF
   - target:          arm64e-maccatalyst
-    value:           2520C94F-980F-3C57-B04D-0D474296A37B
+    value:           92523B21-E143-3ABB-BEB3-27C87D59A2AF
 install-name:    '/System/Library/PrivateFrameworks/EmbeddedAcousticRecognition.framework/Versions/A/EmbeddedAcousticRecognition'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -49,7 +49,8 @@ exports:
                        _EARCWordPartGetTagName, _EARContextualNamedEntityCategoryKey, 
                        _EARContextualNamedEntityLanguageKey, _EARContextualNamedEntityRequestApplicationKey, 
                        _EARContextualNamedEntityScoreKey, _EARContextualNamedEntitySourceApplicationKey, 
-                       _EARDocumentDataTypeKey, _EARErrorDomain, _EARLanguageDetectorRequestContextFromJson, 
+                       _EARContextualNamedEntitySourceFrameworkKey, _EARDocumentDataTypeKey, 
+                       _EARErrorDomain, _EARLanguageDetectorRequestContextFromJson, 
                        _EARLanguageDetectorRequestContextFromJsonStr, _EARModelAssetsVersionKey, 
                        _EARModelDataHashKey, _EARModelLanguageKey, _EARModelOovsKey, 
                        _EARModelTrainingDataKey, _EARPhoneticMatchBuildingKey, _EARPhoneticMatchFeedTypeAlbumsArtistsKey, 

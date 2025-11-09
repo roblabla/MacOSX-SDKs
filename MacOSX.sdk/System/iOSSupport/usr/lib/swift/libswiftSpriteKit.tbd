@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           3A0E741D-DB02-37BD-AC61-409E14B4FC8D
+    value:           DB2FC8F3-AA3B-3110-BEB7-F7299BE81EAF
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           CA9B7CF1-E441-361E-934A-1020038F4C80
+    value:           8BE4479B-8C59-3BAF-851A-98BD57405DB0
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftSpriteKit.dylib'
 current-version: 1.2
 swift-abi-version: 7

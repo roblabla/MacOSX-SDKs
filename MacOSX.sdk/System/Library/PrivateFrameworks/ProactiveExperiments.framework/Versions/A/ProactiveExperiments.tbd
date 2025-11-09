@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DEE3E540-1F54-30BF-8D2D-EFB3DC2DCAE4
+    value:           D1F308B4-D0FB-3B69-9024-D77844BEEFFE
   - target:          x86_64-maccatalyst
-    value:           DEE3E540-1F54-30BF-8D2D-EFB3DC2DCAE4
+    value:           D1F308B4-D0FB-3B69-9024-D77844BEEFFE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C493E566-496B-3368-8D25-D1F03D2D2A06
+    value:           37EAC768-0A24-3291-B1A2-2696817CF4E4
   - target:          arm64e-maccatalyst
-    value:           C493E566-496B-3368-8D25-D1F03D2D2A06
+    value:           37EAC768-0A24-3291-B1A2-2696817CF4E4
 install-name:    '/System/Library/PrivateFrameworks/ProactiveExperiments.framework/Versions/A/ProactiveExperiments'
-current-version: 1150
+current-version: 1153.10
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FC0FEC47-4C4E-38F1-9D13-BBA2BF5706EF
+    value:           8A93553B-3828-3013-AFC9-5586276D66D0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DF880602-FE23-3542-A5D8-3C61BC0ED802
+    value:           3E54C449-C7E6-3F2F-88FE-5C46ABCB9BEE
 install-name:    '/System/Library/PrivateFrameworks/IMAPConnection.framework/Versions/A/IMAPConnection'
 swift-abi-version: 7
 allowable-clients:
@@ -144,9 +144,9 @@ exports:
                        '_$s14IMAPConnection17CommandConnectionC2IDVN', '_$s14IMAPConnection17CommandConnectionC2IDVSHAAMc', 
                        '_$s14IMAPConnection17CommandConnectionC2IDVSQAAMc', '_$s14IMAPConnection17CommandConnectionC2IDVSYAAMc', 
                        '_$s14IMAPConnection17CommandConnectionC2IDVs23CustomStringConvertibleAAMc', 
-                       '_$s14IMAPConnection17CommandConnectionC2id8engineID11credentials7connect13configuration5queue8delegateA2C0F0V_11IMAPTracing013EngineTracingF0VSay15IMAPPersistence11CredentialsOGAA0C8Protocol_pAA0C13ConfigurationVcSgAVSo012OS_dispatch_J0CAA0bC8Delegate_ptcfC', 
-                       '_$s14IMAPConnection17CommandConnectionC2id8engineID11credentials7connect13configuration5queue8delegateA2C0F0V_11IMAPTracing013EngineTracingF0VSay15IMAPPersistence11CredentialsOGAA0C8Protocol_pAA0C13ConfigurationVcSgAVSo012OS_dispatch_J0CAA0bC8Delegate_ptcfCTq', 
-                       '_$s14IMAPConnection17CommandConnectionC2id8engineID11credentials7connect13configuration5queue8delegateA2C0F0V_11IMAPTracing013EngineTracingF0VSay15IMAPPersistence11CredentialsOGAA0C8Protocol_pAA0C13ConfigurationVcSgAVSo012OS_dispatch_J0CAA0bC8Delegate_ptcfc', 
+                       '_$s14IMAPConnection17CommandConnectionC2id8engineID11credentials13configuration5queue8delegateA2C0F0V_11IMAPTracing013EngineTracingF0VSay15IMAPPersistence11CredentialsOGAA0C13ConfigurationVSo012OS_dispatch_I0CAA0bC8Delegate_ptcfC', 
+                       '_$s14IMAPConnection17CommandConnectionC2id8engineID11credentials13configuration5queue8delegateA2C0F0V_11IMAPTracing013EngineTracingF0VSay15IMAPPersistence11CredentialsOGAA0C13ConfigurationVSo012OS_dispatch_I0CAA0bC8Delegate_ptcfCTq', 
+                       '_$s14IMAPConnection17CommandConnectionC2id8engineID11credentials13configuration5queue8delegateA2C0F0V_11IMAPTracing013EngineTracingF0VSay15IMAPPersistence11CredentialsOGAA0C13ConfigurationVSo012OS_dispatch_I0CAA0bC8Delegate_ptcfc', 
                        '_$s14IMAPConnection17CommandConnectionC2idAC2IDVvg', '_$s14IMAPConnection17CommandConnectionC2idAC2IDVvpMV', 
                        '_$s14IMAPConnection17CommandConnectionC2idAC2IDVvpWvd', '_$s14IMAPConnection17CommandConnectionC4sendyAA0B2IDVSg12IMAPProtocol06ClientB0OF', 
                        '_$s14IMAPConnection17CommandConnectionC4sendyAA0B2IDVSg12IMAPProtocol06ClientB0OFTq', 
@@ -168,8 +168,23 @@ exports:
                        '_$s14IMAPConnection18AuthenticatedStateVMa', '_$s14IMAPConnection18AuthenticatedStateVMn', 
                        '_$s14IMAPConnection18AuthenticatedStateVN', '_$s14IMAPConnection18AuthenticatedStateVSQAAMc', 
                        '_$s14IMAPConnection18ConnectionDelegateMp', '_$s14IMAPConnection18ConnectionDelegateTL', 
-                       '_$s14IMAPConnection18ConnectionProtocolMp', '_$s14IMAPConnection18ConnectionProtocolTL', 
-                       '_$s14IMAPConnection23ConnectionConfigurationV10parameters7Network12NWParametersCvM', 
+                       '_$s14IMAPConnection21MailboxSelectionUsageO21__derived_enum_equalsySbAC_ACtFZ', 
+                       '_$s14IMAPConnection21MailboxSelectionUsageO24__derived_enum_less_thanySbAC_ACtFZ', 
+                       '_$s14IMAPConnection21MailboxSelectionUsageO8PriorityV1loiySbAE_AEtFZ', 
+                       '_$s14IMAPConnection21MailboxSelectionUsageO8PriorityV8rawValueAESi_tcfC', 
+                       '_$s14IMAPConnection21MailboxSelectionUsageO8PriorityV8rawValueSivM', 
+                       '_$s14IMAPConnection21MailboxSelectionUsageO8PriorityV8rawValueSivg', 
+                       '_$s14IMAPConnection21MailboxSelectionUsageO8PriorityV8rawValueSivpMV', 
+                       '_$s14IMAPConnection21MailboxSelectionUsageO8PriorityV8rawValueSivs', 
+                       '_$s14IMAPConnection21MailboxSelectionUsageO8PriorityVMa', 
+                       '_$s14IMAPConnection21MailboxSelectionUsageO8PriorityVMn', 
+                       '_$s14IMAPConnection21MailboxSelectionUsageO8PriorityVN', 
+                       '_$s14IMAPConnection21MailboxSelectionUsageO8PriorityVSLAAMc', 
+                       '_$s14IMAPConnection21MailboxSelectionUsageO8PriorityVSQAAMc', 
+                       '_$s14IMAPConnection21MailboxSelectionUsageO8PriorityVSYAAMc', 
+                       '_$s14IMAPConnection21MailboxSelectionUsageOMa', '_$s14IMAPConnection21MailboxSelectionUsageOMn', 
+                       '_$s14IMAPConnection21MailboxSelectionUsageON', '_$s14IMAPConnection21MailboxSelectionUsageOSLAAMc', 
+                       '_$s14IMAPConnection21MailboxSelectionUsageOSQAAMc', '_$s14IMAPConnection23ConnectionConfigurationV10parameters7Network12NWParametersCvM', 
                        '_$s14IMAPConnection23ConnectionConfigurationV10parameters7Network12NWParametersCvg', 
                        '_$s14IMAPConnection23ConnectionConfigurationV10parameters7Network12NWParametersCvpMV', 
                        '_$s14IMAPConnection23ConnectionConfigurationV10parameters7Network12NWParametersCvs', 
@@ -179,8 +194,21 @@ exports:
                        '_$s14IMAPConnection23ConnectionConfigurationV8endpoint7Network10NWEndpointOvpMV', 
                        '_$s14IMAPConnection23ConnectionConfigurationV8endpoint7Network10NWEndpointOvs', 
                        '_$s14IMAPConnection23ConnectionConfigurationVMa', '_$s14IMAPConnection23ConnectionConfigurationVMn', 
-                       '_$s14IMAPConnection23ConnectionConfigurationVN', '_$s14IMAPConnection25CommandConnectionDelegateMp', 
-                       '_$s14IMAPConnection25CommandConnectionDelegateTL', '_$s14IMAPConnection5EventV10connectionAA17CommandConnectionC2IDVvM', 
+                       '_$s14IMAPConnection23ConnectionConfigurationVN', '_$s14IMAPConnection23MailboxesSelectionUsageV21sortedIdleConnectionsySayAA17CommandConnectionC2IDVGAIF', 
+                       '_$s14IMAPConnection23MailboxesSelectionUsageV23__derived_struct_equalsySbAC_ACtFZ', 
+                       '_$s14IMAPConnection23MailboxesSelectionUsageV3minAA07MailboxcD0OSgvg', 
+                       '_$s14IMAPConnection23MailboxesSelectionUsageV3minAA07MailboxcD0OSgvpMV', 
+                       '_$s14IMAPConnection23MailboxesSelectionUsageV5countSivg', 
+                       '_$s14IMAPConnection23MailboxesSelectionUsageV5countSivpMV', 
+                       '_$s14IMAPConnection23MailboxesSelectionUsageV8elementsSayAC7ElementVGvpfi', 
+                       '_$s14IMAPConnection23MailboxesSelectionUsageVACycfC', '_$s14IMAPConnection23MailboxesSelectionUsageVMa', 
+                       '_$s14IMAPConnection23MailboxesSelectionUsageVMn', '_$s14IMAPConnection23MailboxesSelectionUsageVN', 
+                       '_$s14IMAPConnection23MailboxesSelectionUsageVSQAAMc', '_$s14IMAPConnection23MailboxesSelectionUsageVyAA07MailboxcD0OSgAA17CommandConnectionC2IDVciM', 
+                       '_$s14IMAPConnection23MailboxesSelectionUsageVyAA07MailboxcD0OSgAA17CommandConnectionC2IDVcig', 
+                       '_$s14IMAPConnection23MailboxesSelectionUsageVyAA07MailboxcD0OSgAA17CommandConnectionC2IDVcipMV', 
+                       '_$s14IMAPConnection23MailboxesSelectionUsageVyAA07MailboxcD0OSgAA17CommandConnectionC2IDVcis', 
+                       '_$s14IMAPConnection25CommandConnectionDelegateMp', '_$s14IMAPConnection25CommandConnectionDelegateTL', 
+                       '_$s14IMAPConnection5EventV10connectionAA17CommandConnectionC2IDVvM', 
                        '_$s14IMAPConnection5EventV10connectionAA17CommandConnectionC2IDVvg', 
                        '_$s14IMAPConnection5EventV10connectionAA17CommandConnectionC2IDVvpMV', 
                        '_$s14IMAPConnection5EventV10connectionAA17CommandConnectionC2IDVvs', 

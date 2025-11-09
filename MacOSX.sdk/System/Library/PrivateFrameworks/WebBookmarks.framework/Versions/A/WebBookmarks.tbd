@@ -3,24 +3,24 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           29AEDB01-E548-3EA0-BE7E-1F2D70312546
+    value:           9258725A-D749-376E-9EBD-9AC52E265B8F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           241FC38A-32ED-3A2C-A9EA-3EFB79364A19
+    value:           AC2DAF0A-ED08-3000-A5DC-3BAD66ABD2F4
 install-name:    '/System/Library/PrivateFrameworks/WebBookmarks.framework/Versions/A/WebBookmarks'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _BookmarksBarSpecialID, _BookmarksFrequentlyVisitedSitesSpecialID, 
                        _BookmarksMenuSpecialID, _BookmarksNotificationBookmarkIdentifierKey, 
                        _BookmarksReadingListSpecialID, _BookmarksRootID, _BookmarksWebFilterWhiteListSpecialID, 
-                       _DidDownloadBookmarkIconsNotification, _WBCurrentProcessContainerPath, 
+                       _DidDownloadBookmarkIconsNotification, _WBChangeTypeKey, _WBCurrentProcessContainerPath, 
                        _WBDatabaseLockAcquisitorDefaultTimeout, _WBLocalAttributesCurrentVersion, 
                        _WBLocalAttributesVersionKey, _WBLocalURLKey, _WBNSStringFromCollectionStoreOwner, 
                        _WBNSStringFromCollectionType, _WBPageWebArchiveName, _WBReaderWebArchiveName, 
                        _WBSafariContainerPath, _WBSafariDirectoryPath, _WBSafariPreferencesDomain, 
-                       _WBTabGroupSyncAgentErrorDomain, _WBTabGroupSyncAgentServiceName, 
-                       _WBTabGroupsDatabaseDidUpdateNotification, _WebBookmarkChangeSetFirstBookmarkIDForAddingBookmarkInMemory, 
+                       _WBTabGroupSyncAgentErrorDomain, _WBTabGroupsDatabaseDidUpdateNotification, 
+                       _WebBookmarkChangeSetFirstBookmarkIDForAddingBookmarkInMemory, 
                        _WebBookmarkIDFromNSString, _WebBookmarksBookmarksBarFolderTitle, 
                        _WebBookmarksBookmarksMenuFolderTitle, _WebBookmarksChangedFolderIDKey, 
                        _WebBookmarksDatabaseResetReasonKey, _WebBookmarksDataclassDidChangeNotification, 
@@ -61,7 +61,7 @@ exports:
                        WBReadonlyTabCollection, WBReusableTabManager, WBSavedStateManager, 
                        WBSettingsSyncEngineAccess, WBSettingsTask, WBTab, WBTabCollection, 
                        WBTabGroup, WBTabGroupManager, WBTabGroupSyncAgent, WBWebsiteDataRecord, 
-                       WBWindowState, WebBookmark, WebBookmarkChange, WebBookmarkChangeSet, 
+                       WBWindow, WBWindowState, WebBookmark, WebBookmarkChange, WebBookmarkChangeSet, 
                        WebBookmarkCollection, WebBookmarkDeviceIdentifier, WebBookmarkList, 
                        WebBookmarkListQuery, WebBookmarkProductionSafariTabCollection, 
                        WebBookmarkReadonlyCollection, WebBookmarkSafariAutomationTabCollection, 

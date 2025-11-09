@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F9099687-784A-3783-82C4-3FC98A9F699F
+    value:           723ABB9A-CE75-3BFA-ACBE-0F4300341A46
   - target:          x86_64-maccatalyst
-    value:           F9099687-784A-3783-82C4-3FC98A9F699F
+    value:           723ABB9A-CE75-3BFA-ACBE-0F4300341A46
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6FF741A8-BB89-37A7-A4FC-7FA3DF7EDA11
+    value:           B550238C-6BE1-390B-9AD7-0D05243800B1
   - target:          arm64e-maccatalyst
-    value:           6FF741A8-BB89-37A7-A4FC-7FA3DF7EDA11
+    value:           B550238C-6BE1-390B-9AD7-0D05243800B1
 install-name:    '/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore'
 current-version: 1.11
 compatibility-version: 1.2
@@ -25,7 +25,7 @@ reexported-libraries:
                        '/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo', 
                        '/usr/lib/libobjc.A.dylib' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CAAtomGetString, _CABackingStoreBeginUpdate, _CABackingStoreCollect, 
                        _CABackingStoreCollectBlocking, _CABackingStoreCopyCGImage, 
@@ -160,17 +160,19 @@ exports:
                        _CAEncodeBackingStores, _CAEncodeIOSurfacesAsCGImages, _CAEncodeLayerTree, 
                        _CAEncodeLayerTreeToFile, _CAEncodeLayerTreeToFileWithInfo, 
                        _CAEncodeLayerTreeWithInfo, _CAFenceCreateSetCallbackBlock, 
-                       _CAGetCurrentImageBytes, _CAGetDebugFlags, _CAGetDebugMessage, 
-                       _CAGetDebugMessageColor, _CAGetDebugOption, _CAGetDebugOptionEnvVariableName, 
-                       _CAGetDebugValue, _CAGetDebugValueEnvVariableName, _CAGetDebugValueFloat, 
-                       _CAGetFrameCounter, _CAGetLUTFile, _CAGetMaximumImageBytes, 
-                       _CAGetRuntimeSeparatedVersion, _CAGetScreenTelemetryInterval, 
-                       _CAGetScreenTelemetryParameters, _CAGetTransactionCounter, 
-                       _CAIOSurfaceContextVTable, _CAIOSurfaceCreateDefault, _CAIOSurfaceWriteToFile, 
-                       _CAIOSurfaceWriteToFileWithSuffix, _CAImageProviderCreate, 
-                       _CAImageProviderDraw, _CAImageProviderGetFillColor, _CAImageProviderGetFlags, 
-                       _CAImageProviderGetImageHeight, _CAImageProviderGetImageWidth, 
-                       _CAImageProviderGetLODBias, _CAImageProviderGetLODCount, _CAImageProviderGetLODHeight, 
+                       _CAFrameRateRangeDefault, _CAFrameRateRangeDefaultDoNotUse, 
+                       _CAFrameRateRangeIsEqualToRange, _CAFrameRateRangeMake, _CAGetCurrentImageBytes, 
+                       _CAGetDebugFlags, _CAGetDebugMessage, _CAGetDebugMessageColor, 
+                       _CAGetDebugOption, _CAGetDebugOptionEnvVariableName, _CAGetDebugValue, 
+                       _CAGetDebugValueEnvVariableName, _CAGetDebugValueFloat, _CAGetFrameCounter, 
+                       _CAGetLUTFile, _CAGetMaximumImageBytes, _CAGetRuntimeSeparatedVersion, 
+                       _CAGetScreenTelemetryInterval, _CAGetScreenTelemetryParameters, 
+                       _CAGetTransactionCounter, _CAIOSurfaceContextVTable, _CAIOSurfaceCreateDefault, 
+                       _CAIOSurfaceWriteToFile, _CAIOSurfaceWriteToFileWithSuffix, 
+                       _CAImageProviderCreate, _CAImageProviderDraw, _CAImageProviderGetFillColor, 
+                       _CAImageProviderGetFlags, _CAImageProviderGetImageHeight, 
+                       _CAImageProviderGetImageWidth, _CAImageProviderGetLODBias, 
+                       _CAImageProviderGetLODCount, _CAImageProviderGetLODHeight, 
                        _CAImageProviderGetLODScale, _CAImageProviderGetLODWidth, 
                        _CAImageProviderGetSubImageHeight, _CAImageProviderGetSubImageWidth, 
                        _CAImageProviderGetTypeID, _CAImageProviderInvalidate, _CAImageProviderInvalidateLOD, 
@@ -470,15 +472,16 @@ exports:
                        _kCAFilterMultiplyColor, _kCAFilterNearest, _kCAFilterNormalBlendMode, 
                        _kCAFilterOpacityPair, _kCAFilterOverlayBlendMode, _kCAFilterPageCurl, 
                        _kCAFilterPinLightBlendMode, _kCAFilterPlusD, _kCAFilterPlusL, 
-                       _kCAFilterSDRNormalize, _kCAFilterSaturationBlendMode, _kCAFilterScreenBlendMode, 
-                       _kCAFilterSoftLightBlendMode, _kCAFilterSourceAtop, _kCAFilterSourceIn, 
-                       _kCAFilterSourceOut, _kCAFilterSourceOver, _kCAFilterSubtractBlendMode, 
-                       _kCAFilterSubtractD, _kCAFilterSubtractS, _kCAFilterTrilinear, 
-                       _kCAFilterVariableBlur, _kCAFilterVibrantColorMatrix, _kCAFilterVibrantColorMatrixSourceOver, 
-                       _kCAFilterVibrantDark, _kCAFilterVibrantLight, _kCAFilterXor, 
-                       _kCAGradientLayerAxial, _kCAGradientLayerConic, _kCAGradientLayerRadial, 
-                       _kCAGravityBottom, _kCAGravityBottomLeft, _kCAGravityBottomRight, 
-                       _kCAGravityCenter, _kCAGravityLeft, _kCAGravityResize, _kCAGravityResizeAspect, 
+                       _kCAFilterSDRNormalize, _kCAFilterSRL, _kCAFilterSaturationBlendMode, 
+                       _kCAFilterScreenBlendMode, _kCAFilterSoftLightBlendMode, _kCAFilterSourceAtop, 
+                       _kCAFilterSourceIn, _kCAFilterSourceOut, _kCAFilterSourceOver, 
+                       _kCAFilterSubtractBlendMode, _kCAFilterSubtractD, _kCAFilterSubtractS, 
+                       _kCAFilterTrilinear, _kCAFilterVariableBlur, _kCAFilterVibrantColorMatrix, 
+                       _kCAFilterVibrantColorMatrixSourceOver, _kCAFilterVibrantDark, 
+                       _kCAFilterVibrantLight, _kCAFilterXor, _kCAGradientLayerAxial, 
+                       _kCAGradientLayerConic, _kCAGradientLayerRadial, _kCAGravityBottom, 
+                       _kCAGravityBottomLeft, _kCAGravityBottomRight, _kCAGravityCenter, 
+                       _kCAGravityLeft, _kCAGravityResize, _kCAGravityResizeAspect, 
                        _kCAGravityResizeAspectFill, _kCAGravityRight, _kCAGravityTop, 
                        _kCAGravityTopLeft, _kCAGravityTopRight, _kCAImageQueueCapacity, 
                        _kCAImageQueueIdentifier, _kCAImageQueueReceiverDisplayRefreshRate, 
@@ -569,10 +572,10 @@ exports:
                        CADisplayPreferences, CADisplayProperties, CADistanceFieldLayer, 
                        CADynamicFrameRateSource, CAEAGLLayer, CAEDRMetadata, CAEmitterBehavior, 
                        CAEmitterCell, CAEmitterLayer, CAExternalAnimation, CAFenceHandle, 
-                       CAFilter, CAGradientLayer, CAKeyframeAnimation, CALayer, CALayerHost, 
-                       CALinearMaskLayer, CAMLParser, CAMLWriter, CAMatchMoveAnimation, 
-                       CAMatchPropertyAnimation, CAMediaTimingFunction, CAMeshTransform, 
-                       CAMetalDrawable, CAMetalLayer, CAMutableDisplayPreferences, 
+                       CAFilter, CAFrameRateRangeGroup, CAGradientLayer, CAKeyframeAnimation, 
+                       CALayer, CALayerHost, CALinearMaskLayer, CAMLParser, CAMLWriter, 
+                       CAMatchMoveAnimation, CAMatchPropertyAnimation, CAMediaTimingFunction, 
+                       CAMeshTransform, CAMetalDrawable, CAMetalLayer, CAMutableDisplayPreferences, 
                        CAMutableMeshTransform, CAOpenGLLayer, CAPackage, CAPluginLayer, 
                        CAPortalLayer, CAPresentationModifier, CAPresentationModifierGroup, 
                        CAPropertyAnimation, CAProxyLayer, CARemoteLayerClient, CARemoteLayerServer, 
@@ -590,6 +593,6 @@ exports:
                        CAStateAddElement._keyPath, CAStateAddElement._object, CAStateElement._source, 
                        CAStateElement._target, CAStateRemoveElement._keyPath, CAStateRemoveElement._object, 
                        CAValueFunction._impl, CAValueFunction._string ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _CARenderContextGetRemoteInputMachTime ]
 ...

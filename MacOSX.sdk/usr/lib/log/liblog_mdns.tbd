@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           43DBE478-56CC-34FE-967A-B171C86424AF
+    value:           BF942A0C-67C3-3CD9-9708-9A5A51C911BD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8EE433A8-E874-376C-9732-06941375827F
+    value:           1FD02DA3-2E2A-3857-B82F-B4CEA8B454E7
 install-name:    '/usr/lib/log/liblog_mdns.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -21,5 +21,6 @@ exports:
                        _DomainLabelEqual, _DomainNameAppendDomainName, _DomainNameAppendString, 
                        _DomainNameDupEx, _DomainNameEqual, _DomainNameFromString, 
                        _DomainNameLabelCount, _DomainNameLength, _DomainNameToString, 
-                       _OSLogCopyFormattedString ]
+                       _OSLogCopyFormattedString, __log_mdns_negative_reason_to_string, 
+                       __log_mdns_protocol_to_string ]
 ...

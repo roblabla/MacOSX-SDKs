@@ -1,10 +1,17 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
-// swift-module-flags: -target x86_64-apple-ios15.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Accessibility
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-module-flags: -target x86_64-apple-ios15.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Accessibility
 @_exported import Accessibility
 import Foundation
 import Swift
 import _Concurrency
+@available(macOS 12.2, iOS 15.2, tvOS 15.2, watchOS 8.2, *)
+extension Accessibility.AXBrailleMap {
+  public subscript(point: CoreGraphics.CGPoint) -> Swift.Float {
+    get
+    set
+  }
+}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Accessibility.AXNumericDataAxisDescriptor {
   public var range: Swift.ClosedRange<Swift.Double> {
@@ -157,55 +164,31 @@ extension Foundation.AttributeScopes.AccessibilityAttributes {
     public static let markdownName: Swift.String
   }
 }
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.HeadingLevelAttribute : Swift.Sendable {}
-#endif
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.HeadingLevelAttribute.HeadingLevel : Swift.Equatable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.HeadingLevelAttribute.HeadingLevel : Swift.Hashable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.HeadingLevelAttribute.HeadingLevel : Swift.RawRepresentable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.TextCustomAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.TextualContextAttribute : Swift.Sendable {}
-#endif
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.TextualContextAttribute.TextualContext : Swift.Equatable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.TextualContextAttribute.TextualContext : Swift.Hashable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.TextualContextAttribute.TextualContext : Swift.RawRepresentable {}
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.IncludesPunctuationAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.AdjustedPitchAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.SpellOutAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.QueueAnnouncementAttribute : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.IPANotationAttribute : Swift.Sendable {}
-#endif

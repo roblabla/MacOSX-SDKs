@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8C03B9A6-E9A1-30BB-A811-ACC317A32B18
+    value:           5EDEEDBB-749E-38B9-ABA3-F054E89530D7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A25DE402-9E2A-38DE-8D83-94F234DC8AC9
+    value:           031FED08-6183-31BA-B576-9CB91526E009
 install-name:    '/usr/lib/libsysmon.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

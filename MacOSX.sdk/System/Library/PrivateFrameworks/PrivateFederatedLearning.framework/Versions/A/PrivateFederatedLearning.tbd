@@ -3,21 +3,22 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           39DF633F-6FE5-3619-A79E-77743F43EB25
+    value:           7AD0512A-2BDD-35DB-AE56-8AAF2DD4EE17
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           584689E0-3A5D-3555-B8C2-EB208D7627F1
+    value:           E5F3B1BB-28EC-3972-BFC4-864E53472569
 install-name:    '/System/Library/PrivateFrameworks/PrivateFederatedLearning.framework/Versions/A/PrivateFederatedLearning'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _PFLClientIsAllowedForIdentifier, _PFLClientIsEntitled, _PFLFetchModelRequestReadFrom, 
-                       _PFLFetchModelResponseReadFrom, _PFLFetchPatchRequestReadFrom, 
-                       _PFLFetchPatchResponseReadFrom, _PFLFetchTasksRequestReadFrom, 
-                       _PFLFetchTasksResponseReadFrom, _PFLInvernessServiceDomain, 
-                       _PFLPrivatize, _PFLPrivatizeCustomNorm, _PFLPrivatizeCustomNormWithLowerEpsilon, 
-                       _PFLPrivatizeNoValidate, _PFLSeparatedDPCustom, _PFLSimulateCrashIfNecessary, 
-                       _PFLTaskErrorDomain, _PFLTaskLocalPrivacyParamsReadFrom, _PFLTaskLocalTrainingParamsReadFrom, 
+    symbols:         [ _BOUND_MAX, _FedStatsErrorDomain, _PFLClientIsAllowedForIdentifier, 
+                       _PFLClientIsEntitled, _PFLFetchModelRequestReadFrom, _PFLFetchModelResponseReadFrom, 
+                       _PFLFetchPatchRequestReadFrom, _PFLFetchPatchResponseReadFrom, 
+                       _PFLFetchTasksRequestReadFrom, _PFLFetchTasksResponseReadFrom, 
+                       _PFLInvernessServiceDomain, _PFLPrivatize, _PFLPrivatizeCustomNorm, 
+                       _PFLPrivatizeCustomNormWithLowerEpsilon, _PFLPrivatizeNoValidate, 
+                       _PFLSeparatedDPCustom, _PFLSimulateCrashIfNecessary, _PFLTaskErrorDomain, 
+                       _PFLTaskLocalPrivacyParamsReadFrom, _PFLTaskLocalTrainingParamsReadFrom, 
                        _PFLTaskReadFrom, _PFLUploadDataPointRequestReadFrom, _PFLUploadDataPointResponseReadFrom, 
                        _PrivateFederatedLearningVersionNumber, _PrivateFederatedLearningVersionString, 
                        __FindEpsilon, __FindEpsilonFromReconstruction, __PFLFetchBundleIdentifier, 
@@ -34,18 +35,28 @@ exports:
                        __ZN20PFLRejectionSampling19sampleUniformSphereEPfm, __ZN21PFLUniformRVGenerator27uniformRandomVariableSampleEv, 
                        __ZN21PFLUniformRVGenerator34uniformRandomVariableInRangeSampleEdd, 
                        __ZN22PFLGaussianRVGenerator31PFLGaussianRandomVariableSampleEdd, 
-                       _count, _kPFLAllowedEntitlement, _kPFLPrivatizeIdentifierAppEmbeddings, 
+                       _count, _gFedStatsBoundedULongTypeOutOfBoundsNumber, _kDataType, 
+                       _kDataTypeName, _kFedStatsBoundedULongTypeBound, _kFedStatsBucketedTypeBucketBoundaries, 
+                       _kFedStatsBucketedTypeBucketCount, _kFedStatsBucketedTypeMaxValue, 
+                       _kFedStatsBucketedTypeMinValue, _kFedStatsCategoricalTypeCategories, 
+                       _kFedStatsCombinationTypeAvailableTypes, _kFedStatsCombinationTypeStructure, 
+                       _kPFLAllowedEntitlement, _kPFLPrivatizeIdentifierAppEmbeddings, 
                        _kPFLPrivatizeIdentifierArcadeRanking, _kPFLPrivatizeIdentifierCoreSuggestionsSemlPlugin, 
                        _kPFLPrivatizeIdentifierEmbeddingTraining, _kPFLPrivatizeIdentifierHomeAI, 
-                       _kPFLPrivatizeIdentifierPhotos, _kPFLPrivatizeIdentifierPhotosLarge, 
-                       _kPFLPrivatizeIdentifierPhotosSmall, _kPFLPrivatizeIdentifierProactivePhoneEn, 
-                       _kPFLPrivatizeIdentifierProactiveResponses, _kPFLPrivatizeIdentifierQuickTypeLM, 
+                       _kPFLPrivatizeIdentifierPeopleSuggesterShareSheetPlugin, _kPFLPrivatizeIdentifierPhotos, 
+                       _kPFLPrivatizeIdentifierPhotosLarge, _kPFLPrivatizeIdentifierPhotosSmall, 
+                       _kPFLPrivatizeIdentifierProactivePhoneEn, _kPFLPrivatizeIdentifierProactiveResponses, 
+                       _kPFLPrivatizeIdentifierQuickTypeLM, _kPFLPrivatizeIdentifierReminderKitREMMLPlugin, 
                        _kPFLPrivatizeIdentifierSearchAds, _kPFLPrivatizeIdentifierSiriInference, 
                        _kPFLPrivatizeIdentifierSiriSpeechNNLM, _kPFLPrivatizeIdentifierTips, 
                        _kPFLPrivatizeIdentifierVocalClassifier, _kPFLPrivatizeIdentifierVocalGBDTClassifier, 
                        _kPFLPrivatizeTaskIdentifierQuickTypeCNNTextClassification, 
-                       _kPFLPrivatizeTaskIdentifierQuickTypeLM, _temp ]
-    objc-classes:    [ CKRecordValueConverter, PFLAnalyticsSubmitter, PFLBackgroundSession, 
+                       _kPFLPrivatizeTaskIdentifierQuickTypeLM, _stringsToDataTypesMap, 
+                       _temp ]
+    objc-classes:    [ CKRecordValueConverter, FedStatsBooleanType, FedStatsBoundedULongType, 
+                       FedStatsBucketedType, FedStatsCategoricalType, FedStatsCombinationType, 
+                       FedStatsDataEncoder, FedStatsDataTypeFactory, FedStatsError, 
+                       FedStatsInvalidDataType, PFLAnalyticsSubmitter, PFLBackgroundSession, 
                        PFLCKNetworkHandler, PFLCloudKitStorage, PFLCompletionContext, 
                        PFLDeviceResults, PFLDiagnosticReporting, PFLFetchModelRequest, 
                        PFLFetchModelResponse, PFLFetchPatchRequest, PFLFetchPatchResponse, 

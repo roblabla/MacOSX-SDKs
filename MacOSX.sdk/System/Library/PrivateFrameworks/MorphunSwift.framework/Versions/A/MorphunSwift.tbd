@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F172FA0A-8368-3B64-BD03-86E05FF5C83B
+    value:           9FD5D529-8F7A-3197-8A4C-C16B49ABF315
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D04B7E8F-5786-3CBC-88A2-AF31928A2CAC
+    value:           260E5D4A-A624-3619-BFE9-BDE4A9A10BF9
 install-name:    '/System/Library/PrivateFrameworks/MorphunSwift.framework/Versions/A/MorphunSwift'
 swift-abi-version: 7
 exports:

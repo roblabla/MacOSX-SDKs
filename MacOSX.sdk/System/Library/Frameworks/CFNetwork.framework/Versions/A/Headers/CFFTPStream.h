@@ -313,7 +313,7 @@ CFN_EXPORT const CFStringRef kCFFTPResourceModDate CF_DEPRECATED(10_3, 10_11, 2_
  *  
  *  Result:
  *	A pointer to the CF read stream created, or NULL if failed. It is
- *	caller's responsibilty to release the memory allocated for the
+ *	caller's responsibility to release the memory allocated for the
  *	read stream.
  *  
  */
@@ -353,7 +353,7 @@ CFReadStreamCreateWithFTPURL(CFAllocatorRef __nullable alloc, CFURLRef ftpURL) C
  *	parsed:
  *	  A pointer to a CFDictionary pointer.  The dictionary holds the
  *	  extracted resource information.  When parsing fails, a NULL
- *	  pointer will be returned.  It is caller's responsibilty to
+ *	  pointer will be returned.  It is caller's responsibility to
  *	  release the memory allocated for the dictionary.
  *  
  *  Result:
@@ -395,7 +395,7 @@ CFFTPCreateParsedResourceListing(CFAllocatorRef __nullable alloc, const UInt8 *b
  *  
  *  Result:
  *	A pointer to the CF write stream created, or NULL if failed. It
- *	is caller's responsibilty to release the memory allocated for the
+ *	is caller's responsibility to release the memory allocated for the
  *	write stream.
  *  
  */

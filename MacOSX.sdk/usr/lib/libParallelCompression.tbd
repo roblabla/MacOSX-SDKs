@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EEF430F2-C3A2-3CB7-99D9-664DAD35B920
+    value:           FC0A4E54-5763-3CE3-A565-871D8809F225
   - target:          x86_64-maccatalyst
-    value:           EEF430F2-C3A2-3CB7-99D9-664DAD35B920
+    value:           FC0A4E54-5763-3CE3-A565-871D8809F225
   - target:          arm64-macos
-    value:           C0BD64CA-DEAE-3C13-A4E6-F2E713E083B8
+    value:           FA74B964-8DC8-3EB9-9168-B9283537FED4
   - target:          arm64-maccatalyst
-    value:           C0BD64CA-DEAE-3C13-A4E6-F2E713E083B8
+    value:           FA74B964-8DC8-3EB9-9168-B9283537FED4
   - target:          arm64e-macos
-    value:           BFCB3799-E1A0-34C5-9575-5E543A9A984C
+    value:           9BF06B0B-169D-3DC1-B22F-353E25B1A787
   - target:          arm64e-maccatalyst
-    value:           BFCB3799-E1A0-34C5-9575-5E543A9A984C
+    value:           9BF06B0B-169D-3DC1-B22F-353E25B1A787
 install-name:    '/usr/lib/libParallelCompression.dylib'
 exports:
-  - targets:         [ arm64-macos, x86_64-macos, arm64e-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos, x86_64-maccatalyst, 
                        arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _BXDiff5, _BXDiff5WithIndividualPatches, _BXPatch5, _BXPatch5FileWithFlags, 
                        _BXPatch5InPlace, _BXPatch5StreamWithFlags, _BXPatch5WithFlags, 

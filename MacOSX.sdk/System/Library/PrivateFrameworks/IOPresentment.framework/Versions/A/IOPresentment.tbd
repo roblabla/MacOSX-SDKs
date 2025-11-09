@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5A81B630-2D20-3C7F-984B-DAD247CA226D
+    value:           A7F13B88-C6E3-3530-9AC5-6939766EBB1B
   - target:          x86_64-maccatalyst
-    value:           5A81B630-2D20-3C7F-984B-DAD247CA226D
+    value:           A7F13B88-C6E3-3530-9AC5-6939766EBB1B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8E6505E7-C743-366A-B517-2CD05C1A0C00
+    value:           6DABCA96-F610-3DFF-A980-86B73E49B4F6
   - target:          arm64e-maccatalyst
-    value:           8E6505E7-C743-366A-B517-2CD05C1A0C00
+    value:           6DABCA96-F610-3DFF-A980-86B73E49B4F6
 install-name:    '/System/Library/PrivateFrameworks/IOPresentment.framework/Versions/A/IOPresentment'
 current-version: 62
 exports:

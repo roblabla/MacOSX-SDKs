@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FE447E14-99A9-3C95-A06E-169D301D65A0
+    value:           F15EDF15-EC33-32A7-A042-28E4CE5410CA
   - target:          x86_64-maccatalyst
-    value:           FE447E14-99A9-3C95-A06E-169D301D65A0
+    value:           F15EDF15-EC33-32A7-A042-28E4CE5410CA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6214491F-6B56-364A-8E13-C3CE33FB17B7
+    value:           C74B12BC-1345-323D-8FD5-6157E189F800
   - target:          arm64e-maccatalyst
-    value:           6214491F-6B56-364A-8E13-C3CE33FB17B7
+    value:           C74B12BC-1345-323D-8FD5-6157E189F800
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS'
 current-version: 236
 parent-umbrella:

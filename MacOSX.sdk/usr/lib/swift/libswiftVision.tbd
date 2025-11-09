@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E6194505-A2FE-3096-AB77-3AA0DCE3C6B9
+    value:           6B6B7438-4507-32A3-83E4-D219AA658C16
   - target:          x86_64-maccatalyst
-    value:           E6194505-A2FE-3096-AB77-3AA0DCE3C6B9
+    value:           6B6B7438-4507-32A3-83E4-D219AA658C16
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0C8F2159-08DC-3C5D-902A-50724A919668
+    value:           20C5EB42-645B-32B9-BC76-99920A3CC50D
   - target:          arm64e-maccatalyst
-    value:           0C8F2159-08DC-3C5D-902A-50724A919668
+    value:           20C5EB42-645B-32B9-BC76-99920A3CC50D
 install-name:    '/usr/lib/swift/libswiftVision.dylib'
-current-version: 2.1.1
+current-version: 2.1.2
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

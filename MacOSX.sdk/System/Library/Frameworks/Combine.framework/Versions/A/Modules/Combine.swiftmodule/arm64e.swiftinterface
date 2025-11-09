@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
-// swift-module-flags: -target arm64e-apple-macos12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -module-name Combine
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-module-flags: -target arm64e-apple-macos12.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -module-name Combine
 import Darwin
 import Swift
 import _Concurrency
@@ -51,14 +51,18 @@ final public class AnyCancellable : Combine.Cancellable, Swift.Hashable {
     get
   }
 }
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.AnyCancellable {
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   final public func store<C>(in collection: inout C) where C : Swift.RangeReplaceableCollection, C.Element == Combine.AnyCancellable
+  @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   final public func store(in set: inout Swift.Set<Combine.AnyCancellable>)
 }
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Cancellable {
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   public func store<C>(in collection: inout C) where C : Swift.RangeReplaceableCollection, C.Element == Combine.AnyCancellable
+  @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   public func store(in set: inout Swift.Set<Combine.AnyCancellable>)
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
@@ -819,6 +823,7 @@ public protocol Publisher {
 extension Combine.Publisher {
   @inline(never) public func subscribe<S>(_ subscriber: S) where S : Combine.Subscriber, Self.Failure == S.Failure, Self.Output == S.Input
 }
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher where Self.Failure == Swift.Never {
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   public func assign(to published: inout Combine.Published<Self.Output>.Publisher)
@@ -1283,6 +1288,7 @@ extension Combine._Introspection {
     get
   }
 }
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher where Self.Failure == Swift.Never {
   
   #if compiler(>=5.3) && $RethrowsProtocol
@@ -1293,6 +1299,7 @@ extension Combine.Publisher where Self.Failure == Swift.Never {
   #endif
 
 }
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
   
   #if compiler(>=5.3) && $RethrowsProtocol
@@ -2526,6 +2533,7 @@ extension Combine.Publishers {
 extension Combine.Publishers.Drop : Swift.Equatable where Upstream : Swift.Equatable {
   public static func == (lhs: Combine.Publishers.Drop<Upstream>, rhs: Combine.Publishers.Drop<Upstream>) -> Swift.Bool
 }
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Future where Failure == Swift.Never {
   
   #if compiler(>=5.3) && $EffectfulProp
@@ -2536,6 +2544,7 @@ extension Combine.Future where Failure == Swift.Never {
   #endif
 
 }
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Future {
   
   #if compiler(>=5.3) && $EffectfulProp
@@ -2586,16 +2595,10 @@ extension Combine.Publishers {
 extension Combine.Publishers.First : Swift.Equatable where Upstream : Swift.Equatable {
   public static func == (lhs: Combine.Publishers.First<Upstream>, rhs: Combine.Publishers.First<Upstream>) -> Swift.Bool
 }
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Subscribers.Completion : Swift.Sendable {}
-#endif
-
-#if compiler(>=5.3) && $MarkerProtocol && $Sendable
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Subscribers.Demand : Swift.Sendable {}
-#endif
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers.PrefetchStrategy : Swift.Equatable {}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)

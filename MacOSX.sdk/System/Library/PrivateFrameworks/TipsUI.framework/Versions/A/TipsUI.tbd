@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           32471262-A1AC-3845-A7A1-59A448E38476
+    value:           96E8ACD0-98DB-3598-AFCA-52FE33A3F0A5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9F466570-5F7D-3558-B3E6-9DA4F5D555F0
+    value:           5E14968E-9DF5-373D-AB96-5CF6AAA62013
 install-name:    '/System/Library/PrivateFrameworks/TipsUI.framework/Versions/A/TipsUI'
-current-version: 609
+current-version: 613.8
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -123,13 +123,14 @@ exports:
                        '_$s6TipsUI0A12ContentModelC8$loading7Combine9PublishedV9PublisherVySb_GvsTq', 
                        '_$s6TipsUI0A12ContentModelC8assetURL3for4type10Foundation0F0VSgSo22TPSAssetsConfigurationCSg_So0jK4TypeVtFTj', 
                        '_$s6TipsUI0A12ContentModelC8assetURL3for4type10Foundation0F0VSgSo22TPSAssetsConfigurationCSg_So0jK4TypeVtFTq', 
-                       '_$s6TipsUI0A12ContentModelC9hasLoadedSbvMTj', '_$s6TipsUI0A12ContentModelC9hasLoadedSbvMTq', 
-                       '_$s6TipsUI0A12ContentModelC9hasLoadedSbvgTj', '_$s6TipsUI0A12ContentModelC9hasLoadedSbvgTq', 
-                       '_$s6TipsUI0A12ContentModelC9hasLoadedSbvpMV', '_$s6TipsUI0A12ContentModelC9hasLoadedSbvsTj', 
-                       '_$s6TipsUI0A12ContentModelC9hasLoadedSbvsTq', '_$s6TipsUI0A12ContentModelCMa', 
-                       '_$s6TipsUI0A12ContentModelCMn', '_$s6TipsUI0A12ContentModelCMo', 
-                       '_$s6TipsUI0A12ContentModelCMu', '_$s6TipsUI0A12ContentModelCN', 
-                       '_$s6TipsUI0A12ContentModelCfD', '_$s6TipsUI0A15AnalyticsHelperC13setCurrentTipyySo6TPSTipCSgFTj', 
+                       '_$s6TipsUI0A12ContentModelC9appActiveyyFZ', '_$s6TipsUI0A12ContentModelC9hasLoadedSbvMTj', 
+                       '_$s6TipsUI0A12ContentModelC9hasLoadedSbvMTq', '_$s6TipsUI0A12ContentModelC9hasLoadedSbvgTj', 
+                       '_$s6TipsUI0A12ContentModelC9hasLoadedSbvgTq', '_$s6TipsUI0A12ContentModelC9hasLoadedSbvpMV', 
+                       '_$s6TipsUI0A12ContentModelC9hasLoadedSbvsTj', '_$s6TipsUI0A12ContentModelC9hasLoadedSbvsTq', 
+                       '_$s6TipsUI0A12ContentModelCMa', '_$s6TipsUI0A12ContentModelCMn', 
+                       '_$s6TipsUI0A12ContentModelCMo', '_$s6TipsUI0A12ContentModelCMu', 
+                       '_$s6TipsUI0A12ContentModelCN', '_$s6TipsUI0A12ContentModelCfD', 
+                       '_$s6TipsUI0A15AnalyticsHelperC13setCurrentTipyySo6TPSTipCSgFTj', 
                        '_$s6TipsUI0A15AnalyticsHelperC13setCurrentTipyySo6TPSTipCSgFTq', 
                        '_$s6TipsUI0A15AnalyticsHelperC14logAppLaunched6sourceySS_tFTj', 
                        '_$s6TipsUI0A15AnalyticsHelperC14logAppLaunched6sourceySS_tFTq', 
@@ -310,6 +311,7 @@ exports:
                        '_$s6TipsUI30ConstellationContentAttributesVMa', '_$s6TipsUI30ConstellationContentAttributesVMn', 
                        '_$s6TipsUI30ConstellationContentAttributesVN', '_$s7SwiftUI4ViewP04TipsB0E14onTipActionURL7performQry10Foundation0H0Vc_tF', 
                        '_$s7SwiftUI4ViewP04TipsB0E14onTipActionURL7performQry10Foundation0H0Vc_tFQOMQ', 
+                       '_$sSo6NSFontC6TipsUIE24defaultHyphenationFactor12CoreGraphics7CGFloatVvgZ', 
                        _TipsUIVersionNumber, _TipsUIVersionString ]
     objc-classes:    [ TPSImageAssetController, TPSTipsAssetPrefetchingManager, _TtC6TipsUI10PlayerView, 
                        _TtC6TipsUI16TipsContentModel ]

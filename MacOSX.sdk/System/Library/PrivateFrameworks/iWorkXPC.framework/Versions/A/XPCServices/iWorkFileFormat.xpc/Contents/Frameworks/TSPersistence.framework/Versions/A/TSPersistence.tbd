@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1DC0A163-E554-3183-BCCD-E6A9F23A0F7A
+    value:           7059D541-DC14-33C0-8A27-DDE81445DEA5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           73C9F5CC-965C-3800-A38A-EF129E3A0A52
+    value:           3D51AE97-8C53-3B72-8DF0-51277E12C259
 install-name:    '/System/Library/PrivateFrameworks/iWorkXPC.framework/Versions/A/XPCServices/iWorkFileFormat.xpc/Contents/Frameworks/TSPersistence.framework/Versions/A/TSPersistence'
 swift-abi-version: 7
 exports:

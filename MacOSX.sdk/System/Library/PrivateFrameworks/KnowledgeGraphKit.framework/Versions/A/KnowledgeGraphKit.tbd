@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           93620BC0-FD5E-302E-B2E0-8DB6D92486AD
+    value:           324241A6-7EC6-3276-A48A-C6D0CCA51385
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E1EEAEC7-D415-379A-B32D-392D5B877A11
+    value:           3A47ADE8-978B-3E93-98A5-57145A0A7E1D
 install-name:    '/System/Library/PrivateFrameworks/KnowledgeGraphKit.framework/Versions/A/KnowledgeGraphKit'
 swift-abi-version: 7
 allowable-clients:

@@ -148,6 +148,8 @@ typedef enum {
   , ES_EVENT_TYPE_NOTIFY_SETEGID
   , ES_EVENT_TYPE_NOTIFY_SETREUID
   , ES_EVENT_TYPE_NOTIFY_SETREGID
+  , ES_EVENT_TYPE_AUTH_COPYFILE
+  , ES_EVENT_TYPE_NOTIFY_COPYFILE
     // ES_EVENT_TYPE_LAST is not a valid event type but a convenience
     // value for operating on the range of defined event types.
     // This value may change between releases and was available

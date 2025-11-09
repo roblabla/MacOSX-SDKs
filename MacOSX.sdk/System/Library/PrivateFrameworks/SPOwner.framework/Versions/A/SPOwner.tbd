@@ -4,37 +4,37 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AB1DD40A-077A-3DA5-82B7-7FE7EEF66499
+    value:           DF6A70A2-C12F-3A7D-8323-181A4815EA35
   - target:          x86_64-maccatalyst
-    value:           AB1DD40A-077A-3DA5-82B7-7FE7EEF66499
+    value:           DF6A70A2-C12F-3A7D-8323-181A4815EA35
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D0DECC22-D0C4-3F73-905F-B9C69DF63ADA
+    value:           BB0FC57F-D7F0-3195-889B-3F816744A99D
   - target:          arm64e-maccatalyst
-    value:           D0DECC22-D0C4-3F73-905F-B9C69DF63ADA
+    value:           BB0FC57F-D7F0-3195-889B-3F816744A99D
 install-name:    '/System/Library/PrivateFrameworks/SPOwner.framework/Versions/A/SPOwner'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _SPAccessoryDidPairNotification, _SPAccessoryDiscoveryAndPairingSessionErrorDomain, 
-                       _SPBeaconEstimatedLocationChangedNotification, _SPBeaconLocationSourceConnection, 
-                       _SPBeaconLocationSourceConnectionMaintenance, _SPBeaconLocationSourceDisconnection, 
-                       _SPBeaconLocationSourceHarvesterNetwork, _SPBeaconLocationSourceHarvesterOnDiskNearOwner, 
-                       _SPBeaconLocationSourceHarvesterOnDiskWild, _SPBeaconLocationSourceIntentLocationUpdate, 
-                       _SPBeaconLocationSourceIntentResponse, _SPBeaconLocationSourceLocalReductiveFilter, 
-                       _SPBeaconLocationSourcePairingLocationManager, _SPBeaconLocationSourceSelfPublish, 
-                       _SPBeaconLocationSourceUnknown, _SPBeaconRoleIdOther, _SPBeaconRoleIdUndefined, 
-                       _SPBeaconTaskNameAcceptShare, _SPBeaconTaskNameAccessoryFirmwareUpdate, 
-                       _SPBeaconTaskNameBeginBTFinding, _SPBeaconTaskNameBeginLeashing, 
-                       _SPBeaconTaskNameBeginRanging, _SPBeaconTaskNameConnect, _SPBeaconTaskNameDeclineShare, 
-                       _SPBeaconTaskNameDisableLostMode, _SPBeaconTaskNameDisableNotifyWhenFound, 
-                       _SPBeaconTaskNameEnableLostMode, _SPBeaconTaskNameEnableNotifyWhenFound, 
-                       _SPBeaconTaskNameEndBTFinding, _SPBeaconTaskNameEndLeashing, 
-                       _SPBeaconTaskNameEndRanging, _SPBeaconTaskNameFetchFirmwareVersion, 
-                       _SPBeaconTaskNameLocating, _SPBeaconTaskNamePlaySound, _SPBeaconTaskNamePlaySoundInitiated, 
+                       _SPBeaconLocationSourceConnection, _SPBeaconLocationSourceConnectionMaintenance, 
+                       _SPBeaconLocationSourceDisconnection, _SPBeaconLocationSourceHarvesterNetwork, 
+                       _SPBeaconLocationSourceHarvesterOnDiskNearOwner, _SPBeaconLocationSourceHarvesterOnDiskWild, 
+                       _SPBeaconLocationSourceIntentLocationUpdate, _SPBeaconLocationSourceIntentResponse, 
+                       _SPBeaconLocationSourceLocalReductiveFilter, _SPBeaconLocationSourcePairingLocationManager, 
+                       _SPBeaconLocationSourceSelfPublish, _SPBeaconLocationSourceUnknown, 
+                       _SPBeaconRoleIdOther, _SPBeaconRoleIdUndefined, _SPBeaconTaskNameAcceptShare, 
+                       _SPBeaconTaskNameAccessoryFirmwareUpdate, _SPBeaconTaskNameBeginBTFinding, 
+                       _SPBeaconTaskNameBeginLeashing, _SPBeaconTaskNameBeginRanging, 
+                       _SPBeaconTaskNameConnect, _SPBeaconTaskNameDeclineShare, _SPBeaconTaskNameDisableLostMode, 
+                       _SPBeaconTaskNameDisableNotifyWhenFound, _SPBeaconTaskNameEnableLostMode, 
+                       _SPBeaconTaskNameEnableNotifyWhenFound, _SPBeaconTaskNameEndBTFinding, 
+                       _SPBeaconTaskNameEndLeashing, _SPBeaconTaskNameEndRanging, 
+                       _SPBeaconTaskNameFetchFirmwareVersion, _SPBeaconTaskNameLocating, 
+                       _SPBeaconTaskNamePlaySound, _SPBeaconTaskNamePlaySoundInitiated, 
                        _SPBeaconTaskNameRename, _SPBeaconTaskNameSetObfuscatedIdentifier, 
                        _SPBeaconTaskNameStartSharing, _SPBeaconTaskNameStopSharing, 
                        _SPBeaconTaskNameStopSound, _SPBeaconTaskNameUnknown, _SPBeaconTaskNameUnpair, 
@@ -83,21 +83,21 @@ exports:
                        _sp_key_subsequence_map_get_last_index, _sp_key_subsequence_print_description, 
                        _sp_key_subsequence_print_records_description ]
     objc-classes:    [ SPAccessoryDiscoveryAndPairingSession, SPAccessoryDiscoverySessionState, 
-                       SPAccessoryInformation, SPAccessoryPairingConfiguration, SPBeacon, 
-                       SPBeaconDescription, SPBeaconGroup, SPBeaconLocation, SPBeaconManager, 
-                       SPBeaconObservation, SPBeaconRole, SPBeaconRoleCategory, SPBeaconScanningSession, 
-                       SPBeaconShare, SPBeaconTaskInformation, SPBeaconUpdates, SPBeaconingKey, 
-                       SPCommand, SPCommandKey, SPCommandKeys, SPCommandKeysCriteria, 
-                       SPCrypto, SPDiscoveredAccessory, SPDiscoveredAccessoryMetadata, 
-                       SPDiscoveredAccessoryProductInformation, SPFirmwareUpdateSession, 
-                       SPFirmwareUpdateStateResult, SPHandle, SPIndexInformation, 
-                       SPKeyReconciler, SPLocationFetchContext, SPLocationFetchResult, 
-                       SPLocationProvider, SPLostModeInfo, SPMacBeaconConfig, SPMutableSafeLocation, 
-                       SPObservationLocation, SPOfflineAdvertisingConfiguration, 
-                       SPOfflineAdvertisingKeys, SPOwnerInterface, SPOwnerSession, 
-                       SPOwnerSessionState, SPPairingConfiguration, SPPairingManager, 
-                       SPPairingSession, SPPairingState, SPRawSearchResult, SPSafeLocation, 
-                       SPScannedObject, SPSecureLocation, SPSecureLocationsManager, 
+                       SPAccessoryInformation, SPAccessoryLayoutTemplate, SPAccessoryPairingConfiguration, 
+                       SPBeacon, SPBeaconDescription, SPBeaconGroup, SPBeaconLocation, 
+                       SPBeaconManager, SPBeaconObservation, SPBeaconRole, SPBeaconRoleCategory, 
+                       SPBeaconScanningSession, SPBeaconShare, SPBeaconTaskInformation, 
+                       SPBeaconUpdates, SPBeaconingKey, SPCommand, SPCommandKey, 
+                       SPCommandKeys, SPCommandKeysCriteria, SPCrypto, SPDiscoveredAccessory, 
+                       SPDiscoveredAccessoryMetadata, SPDiscoveredAccessoryProductInformation, 
+                       SPFirmwareUpdateSession, SPFirmwareUpdateStateResult, SPHandle, 
+                       SPIndexInformation, SPKeyReconciler, SPLocationFetchContext, 
+                       SPLocationFetchResult, SPLocationProvider, SPLostModeInfo, 
+                       SPMacBeaconConfig, SPMutableSafeLocation, SPObservationLocation, 
+                       SPOfflineAdvertisingConfiguration, SPOfflineAdvertisingKeys, 
+                       SPOwnerInterface, SPOwnerSession, SPOwnerSessionState, SPPairingConfiguration, 
+                       SPPairingManager, SPPairingSession, SPPairingState, SPRawSearchResult, 
+                       SPSafeLocation, SPScannedObject, SPSecureLocation, SPSecureLocationsManager, 
                        SPSecureLocationsSubscriptionContext, SPSecureLocationsSubscriptionResult, 
                        SPSettingsConfiguration, SPTagUserStats, SPUnauthorizedTrackingAdvertisement, 
                        SPUnauthorizedTrackingObservation, SPUnknownBeacon, SPUnknownDiscoverySession, 

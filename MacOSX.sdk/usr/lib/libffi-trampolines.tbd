@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E6573F5F-0450-3F7C-A424-AA17F0831A1D
+    value:           196EC526-D6C3-3B10-BD21-E8DC7BCB1CD3
   - target:          x86_64-maccatalyst
-    value:           E6573F5F-0450-3F7C-A424-AA17F0831A1D
+    value:           196EC526-D6C3-3B10-BD21-E8DC7BCB1CD3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           84B1BFD9-75E5-36A3-AA31-4D86A05F46BB
+    value:           88C11217-A29A-3A89-855F-B73F745D1580
   - target:          arm64e-maccatalyst
-    value:           84B1BFD9-75E5-36A3-AA31-4D86A05F46BB
+    value:           88C11217-A29A-3A89-855F-B73F745D1580
 install-name:    '/usr/lib/libffi-trampolines.dylib'
 current-version: 27
 allowable-clients:

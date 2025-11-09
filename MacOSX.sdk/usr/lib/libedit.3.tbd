@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A84D9866-FEE2-3A78-920B-8C51C89ABEA3
+    value:           D63FEB74-8317-363D-BFDB-90F2595DF252
   - target:          x86_64-maccatalyst
-    value:           A84D9866-FEE2-3A78-920B-8C51C89ABEA3
+    value:           D63FEB74-8317-363D-BFDB-90F2595DF252
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5DDD243B-0FE6-3A37-85D4-EF63D0DBA980
+    value:           74A21F66-1BDD-3A14-A39F-1770F7453EA9
   - target:          arm64e-maccatalyst
-    value:           5DDD243B-0FE6-3A37-85D4-EF63D0DBA980
+    value:           74A21F66-1BDD-3A14-A39F-1770F7453EA9
 install-name:    '/usr/lib/libedit.3.dylib'
 current-version: 3
 compatibility-version: 2
