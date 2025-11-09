@@ -3,9 +3,9 @@
  
      Contains:   Set up for compiler independent conditionals
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1993-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1993-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -56,17 +56,10 @@
 
 
     TARGET_RT_Å 
-    These conditionals specify in which runtime the generated code will
-    run. This is needed when the OS and CPU support more than one runtime
-    (e.g. MacOS on 68K supports CFM68K and Classic 68k).
-
-        TARGET_RT_LITTLE_ENDIAN - Generated code uses little endian format for integers
-        TARGET_RT_BIG_ENDIAN    - Generated code uses big endian format for integers    
-        TARGET_RT_MAC_CFM       - TARGET_OS_MAC is true and CFM68K or PowerPC CFM (TVectors) are used
-        TARGET_RT_MAC_MACHO     - TARGET_OS_MAC is true and Mach-O style runtime
-        TARGET_RT_MAC_68881     - TARGET_OS_MAC is true and 68881 floating point instructions used  
-
-
+    Rez is a data description language, and it doesn't make sense to try to say which
+    architecture will eventually look at the data.  Therefore, the TARGET_RT_ macros will
+    not be defined for Rez builds.
+    
     TARGET__API_Å_Å 
     These conditionals are used to differentiate between sets of API's on the same
     processor under the same OS.  The first section after _API_ is the OS.  The

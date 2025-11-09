@@ -1,7 +1,7 @@
 /*
         NSTextView.h
         Application Kit
-        Copyright (c) 1994-2003, Apple Computer, Inc.
+        Copyright (c) 1994-2005, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -42,6 +42,11 @@ typedef enum {
     NSFindPanelActionReplaceAndFind = 6,
     NSFindPanelActionSetFindString = 7,
     NSFindPanelActionReplaceAllInSelection = 8
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+    ,
+    NSFindPanelActionSelectAll = 9,
+    NSFindPanelActionSelectAllInSelection = 10
+#endif
 } NSFindPanelAction;
 
 
@@ -92,6 +97,10 @@ typedef enum {
 - (void)setAlignment:(NSTextAlignment)alignment range:(NSRange)range;
     // These complete the set of range: type set methods. to be equivalent to the set of non-range taking varieties.
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (void)setBaseWritingDirection:(NSWritingDirection)writingDirection range:(NSRange)range;
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
+
 /*************************** New Font menu commands ***************************/
 
 - (void)turnOffKerning:(id)sender;
@@ -122,6 +131,12 @@ typedef enum {
 - (void)changeAttributes:(id)sender;
 - (void)changeDocumentBackgroundColor:(id)sender;
 - (void)toggleBaseWritingDirection:(id)sender;
+#endif
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (void)orderFrontSpacingPanel:(id)sender;
+- (void)orderFrontLinkPanel:(id)sender;
+- (void)orderFrontListPanel:(id)sender;
+- (void)orderFrontTablePanel:(id)sender;
 #endif
 
 /*************************** Ruler support ***************************/
@@ -263,6 +278,13 @@ typedef enum {
 
 /*************************** Selected/Marked range ***************************/
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (NSArray *)selectedRanges;
+- (void)setSelectedRanges:(NSArray *)ranges affinity:(NSSelectionAffinity)affinity stillSelecting:(BOOL)stillSelectingFlag;
+- (void)setSelectedRanges:(NSArray *)ranges;
+    // These multiple-range methods supersede the corresponding single-range methods.  The ranges argument must be a non-nil, non-empty array of objects responding to rangeValue.  The return value of selectedRanges obeys the same restrictions, and in addition its elements are sorted, non-overlapping, non-contiguous, and (except for the case of a single range) have non-zero-length.
+#endif
+
 - (void)setSelectedRange:(NSRange)charRange affinity:(NSSelectionAffinity)affinity stillSelecting:(BOOL)stillSelectingFlag;
 - (NSSelectionAffinity)selectionAffinity;
 - (NSSelectionGranularity)selectionGranularity;
@@ -299,6 +321,14 @@ typedef enum {
 - (NSDictionary *)typingAttributes;
 - (void)setTypingAttributes:(NSDictionary *)attrs;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+    // These multiple-range methods supersede the corresponding single-range methods.  For the first method, the affectedRanges argument obeys the same restrictions as the argument to setSelectedRanges:, and the replacementStrings array should either be nil (for attribute-only changes) or have the same number of elements as affectedRanges.  For the remaining three methods, the return values obey the same restrictions as that for selectedRanges, except that they will be nil if the corresponding change is not permitted, where the corresponding single-range methods return (NSNotFound, 0).
+- (BOOL)shouldChangeTextInRanges:(NSArray *)affectedRanges replacementStrings:(NSArray *)replacementStrings;
+- (NSArray *)rangesForUserTextChange;
+- (NSArray *)rangesForUserCharacterAttributeChange;
+- (NSArray *)rangesForUserParagraphAttributeChange;
+#endif
+
 - (BOOL)shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString;
 - (void)didChangeText;
 
@@ -316,6 +346,10 @@ typedef enum {
 - (void)setDefaultParagraphStyle:(NSParagraphStyle *)paragraphStyle;
 - (NSParagraphStyle *)defaultParagraphStyle;
 #endif
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (void)breakUndoCoalescing;
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
 /*************************** NSText methods ***************************/
 
@@ -380,7 +414,15 @@ typedef enum {
 - (BOOL)textView:(NSTextView *)view writeCell:(id <NSTextAttachmentCell>)cell atIndex:(unsigned)charIndex toPasteboard:(NSPasteboard *)pboard type:(NSString *)type ;	// Delegate only.  In this method, the delegate should attempt to write the given attachment to the pasteboard with the given type, and return success or failure.
 
 - (NSRange)textView:(NSTextView *)textView willChangeSelectionFromCharacterRange:(NSRange)oldSelectedCharRange toCharacterRange:(NSRange)newSelectedCharRange;
-    // Delegate only.
+    // Delegate only.  Will not be called if textView:willChangeSelectionFromCharacterRanges:toCharacterRanges: is implemented.  Effectively prevents multiple selection.
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (NSArray *)textView:(NSTextView *)textView willChangeSelectionFromCharacterRanges:(NSArray *)oldSelectedCharRanges toCharacterRanges:(NSArray *)newSelectedCharRanges;    // Delegate only.  Supersedes textView:willChangeSelectionFromCharacterRange:toCharacterRange:.  Return value must be a non-nil, non-empty array of objects responding to rangeValue.
+
+- (BOOL)textView:(NSTextView *)textView shouldChangeTextInRanges:(NSArray *)affectedRanges replacementStrings:(NSArray *)replacementStrings; // Delegate only.  Supersedes textView:shouldChangeTextInRange:replacementString:.  The affectedRanges argument obeys the same restrictions as selectedRanges, and the replacementStrings argument will either be nil (for attribute-only changes) or have the same number of elements as affectedRanges.
+
+- (NSDictionary *)textView:(NSTextView *)textView shouldChangeTypingAttributes:(NSDictionary *)oldTypingAttributes toAttributes:(NSDictionary *)newTypingAttributes;    // Delegate only.  The delegate should return newTypingAttributes to allow the change, oldTypingAttributes to prevent it, or some other dictionary to modify it.
+#endif
 
 - (void)textViewDidChangeSelection:(NSNotification *)notification;
 
@@ -395,7 +437,7 @@ typedef enum {
 #endif
 
 - (BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString;
-    // Delegate only.  If characters are changing, replacementString is what will replace the affectedCharRange.  If attributes only are changing, replacementString will be nil.
+    // Delegate only.  If characters are changing, replacementString is what will replace the affectedCharRange.  If attributes only are changing, replacementString will be nil.  Will not be called if textView:shouldChangeTextInRanges:replacementStrings: is implemented.
 
 - (BOOL)textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector;
 

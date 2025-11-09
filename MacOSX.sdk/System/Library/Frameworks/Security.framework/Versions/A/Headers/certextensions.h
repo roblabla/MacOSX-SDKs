@@ -1,28 +1,27 @@
 /*
- * Copyright (c) 2000-2001 Apple Computer, Inc. All Rights Reserved.
+ * Copyright (c) 2000-2004 Apple Computer, Inc. All Rights Reserved.
  * 
- * The contents of this file constitute Original Code as defined in and are
- * subject to the Apple Public Source License Version 1.2 (the 'License').
- * You may not use this file except in compliance with the License. Please obtain
- * a copy of the License at http://www.apple.com/publicsource and read it before
- * using this file.
+ * @APPLE_LICENSE_HEADER_START@
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS
- * OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES, INCLUDING WITHOUT
- * LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT. Please see the License for the
- * specific language governing rights and limitations under the License.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ * 
+ * @APPLE_LICENSE_HEADER_END@
+ *
+ * CertExtensions.h -- X.509 Cert Extensions as C structs
  */
-
-
-/*
-	File:		CertExtensions.h
-
-	Contains:	X.509 Cert Extensions as C structs
-
-	Copyright:	(c) 2000 by Apple Computer, Inc., all rights reserved.
-*/
 
 #ifndef	_CERT_EXTENSIONS_H_
 #define _CERT_EXTENSIONS_H_
@@ -369,7 +368,7 @@ typedef struct {
 	union {
 		CE_GeneralNames					*fullName;
 		CSSM_X509_RDN_PTR				rdn;
-	};
+	} dpn;
 } CE_DistributionPointName;
 
 /*
@@ -388,6 +387,28 @@ typedef struct {
 	CE_CRLDistributionPoint				*distPoints;
 } CE_CRLDistPointsSyntax;
 
+/* 
+ * Authority Information Access and Subject Information Access.
+ *
+ * CSSM OID = CSSMOID_AuthorityInfoAccess
+ * CSSM OID = CSSMOID_SubjectInfoAccess
+ *
+ * SubjAuthInfoAccessSyntax  ::=
+ *		SEQUENCE SIZE (1..MAX) OF AccessDescription
+ * 
+ * AccessDescription  ::=  SEQUENCE {
+ *		accessMethod          OBJECT IDENTIFIER,
+ *		accessLocation        GeneralName  }
+ */
+typedef struct {
+	CSSM_OID				accessMethod;
+	CE_GeneralName			accessLocation;
+} CE_AccessDescription;
+
+typedef struct {
+	uint32					numAccessDescriptions;
+	CE_AccessDescription	*accessDescriptions;
+} CE_AuthorityInfoAccess;
 
 /*** CRL extensions ***/
 
@@ -450,6 +471,7 @@ typedef enum {
 	DT_CrlReason,				// CE_CrlReason
 	DT_CrlDistributionPoints,	// CE_CRLDistPointsSyntax
 	DT_IssuingDistributionPoint,// CE_IssuingDistributionPoint
+	DT_AuthorityInfoAccess,		// CE_AuthorityInfoAccess
 	DT_Other					// unknown, raw data as a CSSM_DATA
 } CE_DataType;
 
@@ -471,6 +493,7 @@ typedef union {
 	CE_CrlReason				crlReason;
 	CE_CRLDistPointsSyntax		crlDistPoints;
 	CE_IssuingDistributionPoint	issuingDistPoint;
+	CE_AuthorityInfoAccess		authorityInfoAccess;
 	CSSM_DATA					rawData;			// unknown, not decoded
 } CE_Data;
 

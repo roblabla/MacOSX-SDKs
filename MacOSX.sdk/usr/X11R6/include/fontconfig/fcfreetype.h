@@ -1,5 +1,5 @@
 /*
- * $XFree86: xc/lib/fontconfig/fontconfig/fcfreetype.h,v 1.4 2002/10/11 17:53:03 keithp Exp $
+ * $XFree86: xc/extras/fontconfig/fontconfig/fcfreetype.h,v 1.2 2003/11/20 22:36:33 dawes Exp $
  *
  * Copyright © 2001 Keith Packard, member of The XFree86 Project, Inc.
  *
@@ -24,7 +24,8 @@
 
 #ifndef _FCFREETYPE_H_
 #define _FCFREETYPE_H_
-#include <freetype/freetype.h>
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 FT_UInt
 FcFreeTypeCharIndex (FT_Face face, FcChar32 ucs4);

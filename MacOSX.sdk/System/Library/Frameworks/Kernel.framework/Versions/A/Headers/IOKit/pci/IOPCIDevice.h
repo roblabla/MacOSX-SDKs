@@ -19,12 +19,6 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
-/*
- * Copyright (c) 1998-2003 Apple Computer, Inc.  All rights reserved. 
- *
- * HISTORY
- *
- */
 
 
 #ifndef _IOKIT_IOPCIDEVICE_H
@@ -81,7 +75,12 @@ enum {
     kIOPCIAGP8Capability       		= 0x0e,
     kIOPCISecureCapability       	= 0x0f,
     kIOPCIPCIExpressCapability       	= 0x10,
-    kIOPCIMSIXCapability       		= 0x11
+    kIOPCIMSIXCapability       		= 0x11,
+
+    kIOPCIExpressErrorReportingCapability     = -1UL,
+    kIOPCIExpressVirtualChannelCapability     = -2UL,
+    kIOPCIExpressDeviceSerialNumberCapability = -3UL,
+    kIOPCIExpressPowerBudgetCapability        = -4UL
 };
 
 /* Space definitions */
@@ -177,6 +176,23 @@ union IOPCIAddressSpace {
         unsigned int	reloc:1;
 #endif
     } s;
+    struct {
+#if __BIG_ENDIAN__
+        unsigned int	resv:4;
+        unsigned int	registerNumExtended:4;
+        unsigned int	busNum:8;
+        unsigned int	deviceNum:5;
+        unsigned int	functionNum:3;
+        unsigned int	registerNum:8;
+#elif __LITTLE_ENDIAN__
+        unsigned int	registerNum:8;
+        unsigned int	functionNum:3;
+        unsigned int	deviceNum:5;
+        unsigned int	busNum:8;
+        unsigned int	registerNumExtended:4;
+        unsigned int	resv:4;
+#endif
+    } es;
 };
 
 struct IOPCIPhysicalAddress {
@@ -196,6 +212,11 @@ struct IOPCIPhysicalAddress {
 // property to control PCI default config space save on sleep
 #define kIOPMPCIConfigSpaceVolatileKey	"IOPMPCIConfigSpaceVolatile"
 
+// pci express link status
+#define kIOPCIExpressLinkStatusKey	 "IOPCIExpressLinkStatus"
+// pci express link capabilities
+#define kIOPCIExpressLinkCapabilitiesKey "IOPCIExpressLinkCapabilities"
+
 enum {
     kIOPCIDevicePowerStateCount = 3,
     kIOPCIDeviceOffState	= 0,
@@ -203,9 +224,15 @@ enum {
     kIOPCIDeviceOnState		= 2,
 };
 
+enum
+{
+    // bits getInterruptType result
+    kIOInterruptTypePCIMessaged = 0x00010000
+};
+
 /*! @class IOPCIDevice : public IOService
     @abstract An IOService class representing a PCI device.
-    @discussion The discovery of an PCI device by the PCI bus family results in an instance of the IOPCIDevice being created and published. It provides services for looking up and mapping memory mapped hardware, and access to the PCI configuration and I/O spaces. 
+    @discussion The discovery of a PCI device by the PCI bus family results in an instance of the IOPCIDevice being created and published. It provides services for looking up and mapping memory mapped hardware, and access to the PCI configuration and I/O spaces. 
 
 <br><br>Matching Supported by IOPCIDevice<br><br>
 
@@ -265,12 +292,16 @@ Matches a device whose class code is 0x0200zz, an ethernet device.
 
 */
 
+class IOPCIBridge;
+class IOPCI2PCIBridge;
+
 class IOPCIDevice : public IOService
 {
     OSDeclareDefaultStructors(IOPCIDevice)
 
     friend class IOPCIBridge;
     friend class IOPCI2PCIBridge;
+    friend class IOPCIMessagedInterruptController;
 
 protected:
     IOPCIBridge *	parent;
@@ -284,6 +315,11 @@ protected:
 	bool					PMsleepEnabled;		// T if a client has enabled PCI Power Management
 	UInt8					PMcontrolStatus;	// if >0 this device supports PCI Power Management
 	UInt16					sleepControlBits;	// bits to set the control/status register to for sleep
+
+	UInt16					expressConfig;
+	UInt16					msiConfig;
+	UInt8					msiBlockSize;
+	UInt8					msiMode;
     };
 
 /*! @var reserved
@@ -304,11 +340,13 @@ public:
     virtual bool attach( IOService * provider );
     virtual void detach( IOService * provider );
     virtual IOReturn setPowerState( unsigned long, IOService * );
+
     virtual bool compareName( OSString * name, OSString ** matched = 0 ) const;
     virtual bool matchPropertyTable( OSDictionary *	table,
                                      SInt32       *	score );
     virtual IOService * matchLocation( IOService * client );
     virtual IOReturn getResources( void );
+    virtual IOReturn setProperties(OSObject * properties);
 
     /* Config space accessors */
 
@@ -410,7 +448,7 @@ public:
 
 /*! @function findPCICapability
     @abstract Search configuration space for a PCI capability register.
-    @discussion This method searchs the device's config space for a PCI capability register matching the passed capability ID, if the device supports PCI capabilities.
+    @discussion This method searches the device's config space for a PCI capability register matching the passed capability ID, if the device supports PCI capabilities. To search for PCI Express extended capabilities or for multiple capablities with the same ID, use the extendedFindPCICapability() method.
     @param capabilityID An 8-bit PCI capability ID.
     @param offset An optional pointer to return the offset into config space where the capability was found.
     @result The 32-bit value of the capability register if one was found, zero otherwise. */
@@ -540,8 +578,17 @@ public:
     @result kIOReturnSuccess if there were no errors */
     virtual IOReturn enablePCIPowerManagement(IOOptionBits state = 0xffffffff);
     
+    OSMetaClassDeclareReservedUsed(IOPCIDevice,  2);
+/*! @function extendedFindPCICapability
+    @abstract Search configuration space for a PCI capability register.
+    @discussion This method searches the device's config space for a PCI capability register matching the passed capability ID, if the device supports PCI capabilities.
+    @param capabilityID A PCI capability ID. PCI Express devices may support extended capabilities in config space starting at offset 0x100. To search this space, the ID passed should be the negated value of the PCI-SIG assigned ID for the extended capability.
+    @param offset An optional in/out parameter to return the offset into config space where the capability was found, and to set the start point of the next search. Initialize the offset to zero before the first call to extendedFindPCICapability() and subsequent calls will find all capabilty blocks that may exist on the device with the same ID.
+    @result The 32-bit value of the capability register if one was found, zero otherwise. */
+
+    virtual UInt32 extendedFindPCICapability( UInt32 capabilityID, IOByteCount * offset = 0 );
+
     // Unused Padding
-    OSMetaClassDeclareReservedUnused(IOPCIDevice,  2);
     OSMetaClassDeclareReservedUnused(IOPCIDevice,  3);
     OSMetaClassDeclareReservedUnused(IOPCIDevice,  4);
     OSMetaClassDeclareReservedUnused(IOPCIDevice,  5);
@@ -555,6 +602,56 @@ public:
     OSMetaClassDeclareReservedUnused(IOPCIDevice, 13);
     OSMetaClassDeclareReservedUnused(IOPCIDevice, 14);
     OSMetaClassDeclareReservedUnused(IOPCIDevice, 15);
+
+public:
+
+/*! @function extendedConfigRead32
+    @abstract Reads a 32-bit value from the PCI device's configuration space.
+    @discussion This method reads a 32-bit configuration space register on the device and returns its value.
+    @param offset A byte offset into configuration space, of which bits 0-1 are ignored.
+    @result An 32-bit value in host byte order (big endian on PPC). */
+
+    UInt32 extendedConfigRead32( IOByteCount offset );
+
+/*! @function extendedConfigRead16
+    @abstract Reads a 16-bit value from the PCI device's configuration space.
+    @discussion This method reads a 16-bit configuration space register on the device and returns its value.
+    @param offset A byte offset into configuration space, of which bit 0 is ignored.
+    @result An 16-bit value in host byte order (big endian on PPC). */
+
+    UInt16 extendedConfigRead16( IOByteCount offset );
+
+/*! @function extendedConfigRead8
+    @abstract Reads a 8-bit value from the PCI device's configuration space.
+    @discussion This method reads a 8-bit configuration space register on the device and returns its value.
+    @param offset A byte offset into configuration space.
+    @result An 8-bit value. */
+
+    UInt8 extendedConfigRead8( IOByteCount offset );
+
+/*! @function extendedConfigWrite32
+    @abstract Writes a 32-bit value to the PCI device's configuration space.
+    @discussion This method writes a 32-bit value to a configuration space register on the device.
+    @param offset A byte offset into configuration space, of which bits 0-1 are ignored.
+    @param data An 32-bit value to be written in host byte order (big endian on PPC). */
+
+    void extendedConfigWrite32( IOByteCount offset, UInt32 data );
+
+/*! @function extendedConfigWrite16
+    @abstract Writes a 16-bit value to the PCI device's configuration space.
+    @discussion This method writes a 16-bit value to a configuration space register on the device.
+    @param offset A byte offset into configuration space, of which bit 0 is ignored.
+    @param data An 16-bit value to be written in host byte order (big endian on PPC). */
+
+    void extendedConfigWrite16( IOByteCount offset, UInt16 data );
+
+/*! @function extendedConfigWrite8
+    @abstract Writes a 8-bit value to the PCI device's configuration space.
+    @discussion This method writes a 8-bit value to a configuration space register on the device.
+    @param offset A byte offset into configuration space.
+    @param data An 8-bit value to be written. */
+
+    void extendedConfigWrite8( IOByteCount offset, UInt8 data );
 };
 
 #endif /* ! _IOKIT_IOPCIDEVICE_H */

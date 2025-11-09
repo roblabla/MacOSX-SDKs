@@ -207,6 +207,8 @@ enum {
 	errSSLPeerNoRenegotiation	= -9840,	/* no renegotiation allowed */
 
 	/* more errors detected by us */
+	errSSLHostNameMismatch		= -9843,	/* peer host name mismatch */
+	errSSLConnectionRefused		= -9844,	/* peer dropped connection before responding */
 	errSSLDecryptionFail		= -9845,	/* decryption failure */
 	errSSLBadRecordMac			= -9846,	/* bad MAC */
 	errSSLRecordOverflow		= -9847,	/* Record Overflow */
@@ -355,7 +357,7 @@ SSLGetConnection			(SSLContextRef		context,
  * Specify the fully qualified doman name of the peer, e.g., "store.apple.com."
  * Optional; used to verify the common name field in peer's certificate. 
  * Name is in the form of a C string; NULL termination optional, i.e., 
- * peerName[peerNameLen[1] may or may not have a NULL. In any case peerNameLen
+ * peerName[peerNameLen+1] may or may not have a NULL. In any case peerNameLen
  * is the number of bytes of the peer domain name.
  */
 OSStatus

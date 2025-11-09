@@ -6,7 +6,7 @@
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        | 
-   | available at through the world-wide-web at                           |
+   | available through the world-wide-web at the following url:           |
    | http://www.zend.com/license/2_00.txt.                                |
    | If you did not receive a copy of the Zend license and are unable to  |
    | obtain it through the world-wide-web, please send a note to          |
@@ -29,6 +29,7 @@
 typedef unsigned long ulong;
 typedef unsigned int uint;
 
+#define USE_ZEND_ALLOC 1
 #define HAVE_ALLOCA 1
 #define HAVE_LIMITS_H 1
 #include <malloc.h>
@@ -45,6 +46,7 @@ typedef unsigned int uint;
 #define HAVE_STDARG_H	1
 #define HAVE_SNPRINTF	1
 #define HAVE_VSNPRINTF	1
+#define HAVE_STRCOLL   1
 
 #define snprintf _snprintf
 #define strcasecmp(s1, s2) stricmp(s1, s2)

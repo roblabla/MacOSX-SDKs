@@ -1,7 +1,7 @@
 /*
 	NSFontManager.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -48,7 +48,7 @@ enum {
 /*All instance variables are private*/
 @private
     id                  _panel;
-    unsigned int        _reservedFMInt1;
+    unsigned int        _myNotification;
     SEL                 _action;
     int                 _whatToDo;
     NSFontTraitMask     _traitToChange;
@@ -57,13 +57,12 @@ enum {
 	unsigned int        multipleFont:1;
 	unsigned int        disabled:1;
 	unsigned int	    makePanelKey:1;
-	unsigned int        myNotification:1;
-	unsigned int        _RESERVED:12;
+	unsigned int        _RESERVED:13;
     }                   _fmFlags;
     unsigned short      _lastPos;
     id		        _delegate;
     id			_collections;
-    unsigned int        _reservedFMint3;
+    id			_hiddenCollections;
     unsigned int        _reservedFMint4;
 }
 

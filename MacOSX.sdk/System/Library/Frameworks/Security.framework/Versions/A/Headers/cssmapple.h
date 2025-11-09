@@ -1,26 +1,27 @@
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All Rights Reserved.
+ * Copyright (c) 2000-2004 Apple Computer, Inc. All Rights Reserved.
  * 
- * The contents of this file constitute Original Code as defined in and are
- * subject to the Apple Public Source License Version 1.2 (the 'License').
- * You may not use this file except in compliance with the License. Please obtain
- * a copy of the License at http://www.apple.com/publicsource and read it before
- * using this file.
+ * @APPLE_LICENSE_HEADER_START@
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS
- * OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES, INCLUDING WITHOUT
- * LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT. Please see the License for the
- * specific language governing rights and limitations under the License.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ * 
+ * @APPLE_LICENSE_HEADER_END@
+ *
+ * cssmapple.h -- CSSM features specific to Apple's Implementation
  */
-
-
-/*
-   File:      cssmapple.h
-
-   Contains:  CSSM features specific to Apple's Implementation
-*/
 
 #ifndef _CSSMAPPLE_H_
 #define _CSSMAPPLE_H_  1
@@ -37,23 +38,35 @@ extern "C" {
 
 /* Guids for standard Apple addin modules. */
 
-/* {87191ca0-0fc9-11d4-849a-000502b52122} */
+/* CSSM itself: {87191ca0-0fc9-11d4-849a-000502b52122} */
 extern const CSSM_GUID gGuidCssm;
 
-/* {87191ca1-0fc9-11d4-849a-000502b52122} */
+/* File based DL (aka "Keychain DL"): {87191ca1-0fc9-11d4-849a-000502b52122} */
 extern const CSSM_GUID gGuidAppleFileDL;
 
-/* {87191ca2-0fc9-11d4-849a-000502b52122} */
+/* Core CSP (local space): {87191ca2-0fc9-11d4-849a-000502b52122} */
 extern const CSSM_GUID gGuidAppleCSP;
 
-/* {87191ca3-0fc9-11d4-849a-000502b52122} */
+/* Secure CSP/DL (aka "Keychain CSPDL): {87191ca3-0fc9-11d4-849a-000502b52122} */
 extern const CSSM_GUID gGuidAppleCSPDL;
 
-/* {87191ca4-0fc9-11d4-849a-000502b52122} */
+/* X509 Certificate CL: {87191ca4-0fc9-11d4-849a-000502b52122} */
 extern const CSSM_GUID gGuidAppleX509CL;
 
-/* {87191ca5-0fc9-11d4-849a-000502b52122} */
+/* X509 Certificate TP: {87191ca5-0fc9-11d4-849a-000502b52122} */
 extern const CSSM_GUID gGuidAppleX509TP;
+
+/* DLAP/OpenDirectory access DL: {87191ca6-0fc9-11d4-849a-000502b52122} */
+extern const CSSM_GUID gGuidAppleLDAPDL;
+
+/* TP for ".mac" related policies: {87191ca7-0fc9-11d4-849a-000502b52122} */
+extern const CSSM_GUID gGuidAppleDotMacTP;
+
+/* Smartcard CSP/DL: {87191ca8-0fc9-11d4-849a-000502b52122} */
+extern const CSSM_GUID gGuidAppleSdCSPDL;
+
+/* DL for ".mac" certificate access: {87191ca9-0fc9-11d4-849a-000502b52122} */
+extern const CSSM_GUID gGuidAppleDotMacDL;
 
 
 /* Apple defined WORDID values */
@@ -63,9 +76,13 @@ enum
     CSSM_WORDID_KEYCHAIN_LOCK,
     CSSM_WORDID_KEYCHAIN_CHANGE_LOCK,
 	CSSM_WORDID_PROCESS,
-	CSSM_WORDID__RESERVED_1,		// was used in 10.2 test seeds; no longer in use
+	CSSM_WORDID__RESERVED_1,		/* was used in 10.2 test seeds; no longer in use */
 	CSSM_WORDID_SYMMETRIC_KEY,
 	CSSM_WORDID_SYSTEM,
+	CSSM_WORDID_KEY,
+	CSSM_WORDID_PIN,
+	CSSM_WORDID_PREAUTH,
+	CSSM_WORDID_PREAUTH_SOURCE,
 	CSSM_WORDID__FIRST_UNUSED
 };
 
@@ -75,7 +92,10 @@ enum
 	CSSM_ACL_SUBJECT_TYPE_KEYCHAIN_PROMPT = CSSM_WORDID_KEYCHAIN_PROMPT,
 	CSSM_ACL_SUBJECT_TYPE_PROCESS = CSSM_WORDID_PROCESS,
 	CSSM_ACL_SUBJECT_TYPE_CODE_SIGNATURE = CSSM_WORDID_SIGNATURE,
-	CSSM_ACL_SUBJECT_TYPE_COMMENT = CSSM_WORDID_COMMENT
+	CSSM_ACL_SUBJECT_TYPE_COMMENT = CSSM_WORDID_COMMENT,
+	CSSM_ACL_SUBJECT_TYPE_SYMMETRIC_KEY = CSSM_WORDID_SYMMETRIC_KEY,
+	CSSM_ACL_SUBJECT_TYPE_PREAUTH = CSSM_WORDID_PREAUTH,
+	CSSM_ACL_SUBJECT_TYPE_PREAUTH_SOURCE = CSSM_WORDID_PREAUTH_SOURCE
 };
 
 enum
@@ -85,15 +105,32 @@ enum
     CSSM_SAMPLE_TYPE_KEYCHAIN_CHANGE_LOCK = CSSM_WORDID_KEYCHAIN_CHANGE_LOCK,
 	CSSM_SAMPLE_TYPE_PROCESS = CSSM_WORDID_PROCESS,
 	CSSM_SAMPLE_TYPE_COMMENT = CSSM_WORDID_COMMENT,
-	CSSM_SAMPLE_TYPE_RETRY_ID = CSSM_WORDID_PROPAGATE
+	CSSM_SAMPLE_TYPE_RETRY_ID = CSSM_WORDID_PROPAGATE,
+	CSSM_SAMPLE_TYPE_SYMMETRIC_KEY = CSSM_WORDID_SYMMETRIC_KEY,
+	CSSM_SAMPLE_TYPE_PREAUTH = CSSM_WORDID_PREAUTH
+	// there is no CSSM_SAMPLE_TYPE_PREAUTH_SOURCE
 };
 
 
 /* Apple-defined ACL authorization tags */
 enum {
 	CSSM_ACL_AUTHORIZATION_CHANGE_ACL = CSSM_ACL_AUTHORIZATION_TAG_VENDOR_DEFINED_START,
-	CSSM_ACL_AUTHORIZATION_CHANGE_OWNER
+	CSSM_ACL_AUTHORIZATION_CHANGE_OWNER,
+	
+	// the "pre-auth" tags form a contiguous range of (up to) 64K pre-authorizations
+	CSSM_ACL_AUTHORIZATION_PREAUTH_BASE =
+		CSSM_ACL_AUTHORIZATION_TAG_VENDOR_DEFINED_START + 0x1000000,
+	CSSM_ACL_AUTHORIZATION_PREAUTH_END = CSSM_ACL_AUTHORIZATION_PREAUTH_BASE + 0x10000
 };
+
+/* pre-authorization conversions (auth-tag to slot and back) */
+#define CSSM_ACL_AUTHORIZATION_PREAUTH(slot) \
+		(CSSM_ACL_AUTHORIZATION_PREAUTH_BASE + (slot))
+#define CSSM_ACL_AUTHORIZATION_PREAUTH_SLOT(auth) \
+		((auth) - CSSM_ACL_AUTHORIZATION_PREAUTH_BASE)
+#define CSSM_ACL_AUTHORIZATION_IS_PREAUTH(auth) \
+		((auth) >= CSSM_ACL_AUTHORIZATION_PREAUTH_BASE && \
+		 (auth) < CSSM_ACL_AUTHORIZATION_PREAUTH_END)
 
 
 /* Parameters and structures for Apple-defined ACL subjects and samples */
@@ -138,6 +175,24 @@ typedef struct cssm_acl_keychain_prompt_selector { /* KEYCHAIN_PROMPT selector *
 	uint16 flags;			/* flag bits */
 } CSSM_ACL_KEYCHAIN_PROMPT_SELECTOR;
 
+/* ACL subjects of type CSSM_ACL_SUBJECT_TYPE_PREAUTH_SOURCE */
+typedef uint32 CSSM_ACL_PREAUTH_TRACKING_STATE;
+enum {	/* preauth tracking state */
+	CSSM_ACL_PREAUTH_TRACKING_COUNT_MASK	= 0xff,		/* mask for count status */
+	CSSM_ACL_PREAUTH_TRACKING_BLOCKED		= 0,		/* retries exhausted; the slot is blocked */
+	/* 0 .. 255 is a count of (re)tries remaining */
+	
+	/* bits or'ed into any count given */
+	CSSM_ACL_PREAUTH_TRACKING_UNKNOWN		= 0x40000000, /* status of slot is unknown (ignore count) */
+	CSSM_ACL_PREAUTH_TRACKING_AUTHORIZED	= 0x80000000 /* the slot is currently authorized (or'ed in) */
+};
+
+
+/* Apple defined values of a CSSM_DB_ACCESS_TYPE */
+enum {
+	CSSM_DB_ACCESS_RESET			= 0x10000	/* clear pre-authentications (or'ed bit) */
+};
+
 
 /* Apple defined algorithm IDs */
 enum
@@ -154,6 +209,17 @@ enum
 	CSSM_ALGID_KEYCHAIN_KEY,	/* derive or manipulate keychain master keys */
 	CSSM_ALGID_PKCS12_PBE_ENCR,	/* PKCS12, encrypt/decrypt key */
 	CSSM_ALGID_PKCS12_PBE_MAC,	/* PKCS12, MAC key */
+	CSSM_ALGID_SECURE_PASSPHRASE,   /* passphrase acquired by SecurityServer */
+	CSSM_ALGID_PBE_OPENSSL_MD5, /* traditional openssl key derivation */
+	CSSM_ALGID_SHA256,			/* 256-bit SHA2 */
+	CSSM_ALGID_SHA384,			/* 384-bit SHA2 */
+	CSSM_ALGID_SHA512,			/* 512-bit SHA2 */
+	CSSM_ALGID_ENTROPY_DEFAULT,	/* default entropy source of (CSP) device, if any */
+	CSSM_ALGID_SHA224,			/* SHA2, 224 bit */
+	CSSM_ALGID_SHA224WithRSA,	/* RSA signature on SHA224 digest */
+	CSSM_ALGID_SHA256WithRSA,	/* RSA signature on SHA256 digest */
+	CSSM_ALGID_SHA384WithRSA,	/* RSA signature on SHA384 digest */
+	CSSM_ALGID_SHA512WithRSA,	/* RSA signature on SHA512 digest */
     CSSM_ALGID__FIRST_UNUSED
 };
 
@@ -178,7 +244,9 @@ enum
     CSSM_ERRCODE_NO_USER_INTERACTION =				0x00e0,
     CSSM_ERRCODE_USER_CANCELED =					0x00e1,
 	CSSM_ERRCODE_SERVICE_NOT_AVAILABLE =			0x00e2,
-	CSSM_ERRCODE_INSUFFICIENT_CLIENT_IDENTIFICATION =		0x00e3
+	CSSM_ERRCODE_INSUFFICIENT_CLIENT_IDENTIFICATION = 0x00e3,
+	CSSM_ERRCODE_DEVICE_RESET =						0x00e4,
+	CSSM_ERRCODE_DEVICE_FAILED =					0x00e5
 };
 
 enum {
@@ -208,7 +276,21 @@ enum {
 	CSSMERR_CSP_INSUFFICIENT_CLIENT_IDENTIFICATION = CSSM_CSP_BASE_ERROR + CSSM_ERRCODE_INSUFFICIENT_CLIENT_IDENTIFICATION,
 	CSSMERR_CL_INSUFFICIENT_CLIENT_IDENTIFICATION = CSSM_CL_BASE_ERROR + CSSM_ERRCODE_INSUFFICIENT_CLIENT_IDENTIFICATION,
 	CSSMERR_DL_INSUFFICIENT_CLIENT_IDENTIFICATION = CSSM_DL_BASE_ERROR + CSSM_ERRCODE_INSUFFICIENT_CLIENT_IDENTIFICATION,
-	CSSMERR_TP_INSUFFICIENT_CLIENT_IDENTIFICATION = CSSM_TP_BASE_ERROR + CSSM_ERRCODE_INSUFFICIENT_CLIENT_IDENTIFICATION
+	CSSMERR_TP_INSUFFICIENT_CLIENT_IDENTIFICATION = CSSM_TP_BASE_ERROR + CSSM_ERRCODE_INSUFFICIENT_CLIENT_IDENTIFICATION,
+
+	CSSMERR_CSSM_DEVICE_RESET = CSSM_CSSM_BASE_ERROR + CSSM_ERRCODE_DEVICE_RESET,
+	CSSMERR_AC_DEVICE_RESET = CSSM_AC_BASE_ERROR + CSSM_ERRCODE_DEVICE_RESET,
+	CSSMERR_CSP_DEVICE_RESET = CSSM_CSP_BASE_ERROR + CSSM_ERRCODE_DEVICE_RESET,
+	CSSMERR_CL_DEVICE_RESET = CSSM_CL_BASE_ERROR + CSSM_ERRCODE_DEVICE_RESET,
+	CSSMERR_DL_DEVICE_RESET = CSSM_DL_BASE_ERROR + CSSM_ERRCODE_DEVICE_RESET,
+	CSSMERR_TP_DEVICE_RESET = CSSM_TP_BASE_ERROR + CSSM_ERRCODE_DEVICE_RESET,
+
+	CSSMERR_CSSM_DEVICE_FAILED = CSSM_CSSM_BASE_ERROR + CSSM_ERRCODE_DEVICE_FAILED,
+	CSSMERR_AC_DEVICE_FAILED = CSSM_AC_BASE_ERROR + CSSM_ERRCODE_DEVICE_FAILED,
+	CSSMERR_CSP_DEVICE_FAILED = CSSM_CSP_BASE_ERROR + CSSM_ERRCODE_DEVICE_FAILED,
+	CSSMERR_CL_DEVICE_FAILED = CSSM_CL_BASE_ERROR + CSSM_ERRCODE_DEVICE_FAILED,
+	CSSMERR_DL_DEVICE_FAILED = CSSM_DL_BASE_ERROR + CSSM_ERRCODE_DEVICE_FAILED,
+	CSSMERR_TP_DEVICE_FAILED = CSSM_TP_BASE_ERROR + CSSM_ERRCODE_DEVICE_FAILED
 };
 
 /* AppleCSPDL, AppleCSP private error codes. */
@@ -225,7 +307,10 @@ enum {
 	
 	/* Key StartDate/EndDate invalid */
 	CSSMERR_CSP_APPLE_INVALID_KEY_START_DATE = CSSM_CSP_PRIVATE_ERROR + 3,
-	CSSMERR_CSP_APPLE_INVALID_KEY_END_DATE = CSSM_CSP_PRIVATE_ERROR + 4
+	CSSMERR_CSP_APPLE_INVALID_KEY_END_DATE = CSSM_CSP_PRIVATE_ERROR + 4,
+	
+	/* Keychain Syncing error codes */
+	CSSMERR_CSPDL_APPLE_DL_CONVERSION_ERROR = CSSM_CSP_PRIVATE_ERROR + 5
 };
 
 
@@ -239,6 +324,7 @@ enum
     CSSM_DL_DB_RECORD_X509_CERTIFICATE = CSSM_DB_RECORDTYPE_APP_DEFINED_START + 0x1000,
 	CSSM_DL_DB_RECORD_USER_TRUST,
 	CSSM_DL_DB_RECORD_X509_CRL,
+	CSSM_DL_DB_RECORD_UNLOCK_REFERRAL,
     CSSM_DL_DB_RECORD_METADATA = CSSM_DB_RECORDTYPE_APP_DEFINED_START + 0x8000
 };
 
@@ -254,6 +340,12 @@ enum {
 	
 	// Rollback and discard any pending changes to the database.
 	CSSM_APPLEFILEDL_ROLLBACK
+};
+
+/* UNLOCK_REFERRAL "type" attribute values */
+enum {
+	CSSM_APPLE_UNLOCK_TYPE_KEY_DIRECT			= 1,	// master secret key stored directly
+	CSSM_APPLE_UNLOCK_TYPE_WRAPPED_PRIVATE		= 2		// master key wrapped by public key
 };
 
 /* Apple DL private error codes. */
@@ -344,7 +436,78 @@ enum
 	CSSMERR_APPLETP_SMIME_NO_EMAIL_ADDRS =			CSSM_TP_PRIVATE_ERROR + 28,
 	/* S/MIME, leaf with empty subject name, SubjectAltName 
 	 * not critical */
-	CSSMERR_APPLETP_SMIME_SUBJ_ALT_NAME_NOT_CRIT =	CSSM_TP_PRIVATE_ERROR + 29
+	CSSMERR_APPLETP_SMIME_SUBJ_ALT_NAME_NOT_CRIT =	CSSM_TP_PRIVATE_ERROR + 29,
+	/* Appropriate SSL ExtendedKeyUsage not found */
+	CSSMERR_APPLETP_SSL_BAD_EXT_KEY_USE =			CSSM_TP_PRIVATE_ERROR + 30,
+	/* unparseable OCSP response */
+	CSSMERR_APPLETP_OCSP_BAD_RESPONSE =				CSSM_TP_PRIVATE_ERROR + 31,
+	/* unparseable OCSP request */
+	CSSMERR_APPLETP_OCSP_BAD_REQUEST =				CSSM_TP_PRIVATE_ERROR + 32,
+	/* OCSP service unavailable */
+	CSSMERR_APPLETP_OCSP_UNAVAILABLE =				CSSM_TP_PRIVATE_ERROR + 33,
+	/* OCSP status: cert unrecognized */
+	CSSMERR_APPLETP_OCSP_STATUS_UNRECOGNIZED =		CSSM_TP_PRIVATE_ERROR + 34,
+	/* revocation check not successful for each cert */
+	CSSMERR_APPLETP_INCOMPLETE_REVOCATION_CHECK =	CSSM_TP_PRIVATE_ERROR + 35,
+	/* general network error */
+	CSSMERR_APPLETP_NETWORK_FAILURE =				CSSM_TP_PRIVATE_ERROR + 36,
+	/* OCSP response not verifiable to anchor or root */
+	CSSMERR_APPLETP_OCSP_NOT_TRUSTED =				CSSM_TP_PRIVATE_ERROR + 37,
+	/* OCSP response verified to untrusted root */
+	CSSMERR_APPLETP_OCSP_INVALID_ANCHOR_CERT =		CSSM_TP_PRIVATE_ERROR + 38,
+	/* OCSP response signature error */
+	CSSMERR_APPLETP_OCSP_SIG_ERROR =				CSSM_TP_PRIVATE_ERROR + 39,
+	/* No signer for OCSP response found */
+	CSSMERR_APPLETP_OCSP_NO_SIGNER =				CSSM_TP_PRIVATE_ERROR + 40,
+	/* OCSP responder status: malformed request */
+	CSSMERR_APPLETP_OCSP_RESP_MALFORMED_REQ =		CSSM_TP_PRIVATE_ERROR + 41,
+	/* OCSP responder status: internal error */
+	CSSMERR_APPLETP_OCSP_RESP_INTERNAL_ERR =		CSSM_TP_PRIVATE_ERROR + 42,
+	/* OCSP responder status: try later */
+	CSSMERR_APPLETP_OCSP_RESP_TRY_LATER =			CSSM_TP_PRIVATE_ERROR + 43,
+	/* OCSP responder status: signature required */
+	CSSMERR_APPLETP_OCSP_RESP_SIG_REQUIRED =		CSSM_TP_PRIVATE_ERROR + 44,
+	/* OCSP responder status: unauthorized */
+	CSSMERR_APPLETP_OCSP_RESP_UNAUTHORIZED =		CSSM_TP_PRIVATE_ERROR + 45,
+	/* OCSP response nonce did not match request */
+	CSSMERR_APPLETP_OCSP_NONCE_MISMATCH =			CSSM_TP_PRIVATE_ERROR + 46,
+	/* Illegal cert chain length for Code Signing  */
+	CSSMERR_APPLETP_CS_BAD_CERT_CHAIN_LENGTH =		CSSM_TP_PRIVATE_ERROR + 47,
+	/* Missing Basic Constraints for Code Signing */
+	CSSMERR_APPLETP_CS_NO_BASIC_CONSTRAINTS =		CSSM_TP_PRIVATE_ERROR + 48,
+	/* Bad PathLengthConstraint for Code Signing */
+	CSSMERR_APPLETP_CS_BAD_PATH_LENGTH =			CSSM_TP_PRIVATE_ERROR + 49,
+	/* Missing ExtendedKeyUSage for Code Signing */
+	CSSMERR_APPLETP_CS_NO_EXTENDED_KEY_USAGE =		CSSM_TP_PRIVATE_ERROR + 50,
+	/* Development style Code Signing Cert Detected */
+	CSSMERR_APPLETP_CODE_SIGN_DEVELOPMENT =			CSSM_TP_PRIVATE_ERROR + 51 
+};
+
+/* Apple .mac TP private error codes. */
+enum 
+{
+	/* cert request queued */
+	CSSMERR_APPLE_DOTMAC_REQ_QUEUED =				CSSM_TP_PRIVATE_ERROR + 100,
+	/* cert request redirected */
+	CSSMERR_APPLE_DOTMAC_REQ_REDIRECT =				CSSM_TP_PRIVATE_ERROR + 101,
+	/* general server-reported error */
+	CSSMERR_APPLE_DOTMAC_REQ_SERVER_ERR =			CSSM_TP_PRIVATE_ERROR + 102,
+	/* server-reported parameter error */
+	CSSMERR_APPLE_DOTMAC_REQ_SERVER_PARAM =			CSSM_TP_PRIVATE_ERROR + 103,
+	/* server-reported authorization error */
+	CSSMERR_APPLE_DOTMAC_REQ_SERVER_AUTH =			CSSM_TP_PRIVATE_ERROR + 104,
+	/* server-reported unimplemented */
+	CSSMERR_APPLE_DOTMAC_REQ_SERVER_UNIMPL =		CSSM_TP_PRIVATE_ERROR + 105,
+	/* server-reported not available */
+	CSSMERR_APPLE_DOTMAC_REQ_SERVER_NOT_AVAIL =		CSSM_TP_PRIVATE_ERROR + 106,
+	/* server-reported already exists */
+	CSSMERR_APPLE_DOTMAC_REQ_SERVER_ALREADY_EXIST = CSSM_TP_PRIVATE_ERROR + 107,
+	/* server-reported service error */
+	CSSMERR_APPLE_DOTMAC_REQ_SERVER_SERVICE_ERROR = CSSM_TP_PRIVATE_ERROR + 108,
+	/* request already pending for specified user */
+	CSSMERR_APPLE_DOTMAC_REQ_IS_PENDING	=			CSSM_TP_PRIVATE_ERROR + 109,
+	/* no request pending for specified user */
+	CSSMERR_APPLE_DOTMAC_NO_REQ_PENDING	=			CSSM_TP_PRIVATE_ERROR + 110
 };
 
 enum
@@ -451,6 +614,15 @@ enum
 	/* Given a CSSM_KEY for the CSPDL, return the SecurityServer key handle */
 	CSSM_APPLESCPDL_CSP_GET_KEYHANDLE =	7,
 	
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_8 = 8,
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_9 = 9,
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_10 = 10,
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_11 = 11,
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_12 = 12,
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_13 = 13,
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_14 = 14,
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_15 = 15,
+	
 	/* Given a CSSM_KEY_PTR in any format, obtain the SHA-1 hash of the 
 	 * associated key blob. 
 	 * Key is specified in CSSM_CSP_CreatePassThroughContext.
@@ -480,9 +652,10 @@ typedef struct cssm_applecspdl_db_change_password_parameters
 	CSSM_ACCESS_CREDENTIALS *accessCredentials;
 } CSSM_APPLECSPDL_DB_CHANGE_PASSWORD_PARAMETERS, *CSSM_APPLECSPDL_DB_CHANGE_PASSWORD_PARAMETERS_PTR;
 
-/* Custom wrapped key format */
+/* Custom wrapped key formats */
 enum {
-	CSSM_KEYBLOB_WRAPPED_FORMAT_APPLE_CUSTOM = 100
+	CSSM_KEYBLOB_WRAPPED_FORMAT_APPLE_CUSTOM = 100,
+	CSSM_KEYBLOB_WRAPPED_FORMAT_OPENSSL			// traditional openssl 
 };
 
 /*
@@ -526,7 +699,30 @@ enum {
 	 * parameters.
 	 */
 	CSSM_ATTRIBUTE_PARAM_KEY = 
-			(CSSM_ATTRIBUTE_DATA_KEY | (CSSM_ATTRIBUTE_VENDOR_DEFINED + 5))
+			(CSSM_ATTRIBUTE_DATA_KEY | (CSSM_ATTRIBUTE_VENDOR_DEFINED + 5)),
+			
+	/*
+	 * Prompt string for CSSM_ALGID_SECURE_PASSPHRASE key acquisition.
+	 * Data is a UTF8-encoded external representation of a CFString. 
+	 */
+	CSSM_ATTRIBUTE_PROMPT = 
+			(CSSM_ATTRIBUTE_DATA_CSSM_DATA | (CSSM_ATTRIBUTE_VENDOR_DEFINED + 6)),
+
+	/*
+	 * Alert panel title for CSSM_ALGID_SECURE_PASSPHRASE key acquisition.
+	 * Data is a UTF8-encoded external representation of a CFString. 
+	 */
+	CSSM_ATTRIBUTE_ALERT_TITLE = 
+			(CSSM_ATTRIBUTE_DATA_CSSM_DATA | (CSSM_ATTRIBUTE_VENDOR_DEFINED + 7)),
+
+	/*
+	 * Boolean to specify whether secure passphrase is being used to encrypt or to 
+	 * recover data. In the former case the user will be prompted to enter the 
+	 * passphrase twice. Value is integer, nonzero (verify passphrase) or zero.
+	 */
+	CSSM_ATTRIBUTE_VERIFY_PASSPHRASE = 
+			(CSSM_ATTRIBUTE_DATA_UINT32 | (CSSM_ATTRIBUTE_VENDOR_DEFINED + 8))
+
 };
 
 /*
@@ -592,7 +788,7 @@ typedef struct {
 	CSSM_CL_HANDLE			clHand;			// and this CL
 	uint32					serialNumber;
 	uint32 					numSubjectNames;// size subjectNames[]
-	CSSM_APPLE_TP_NAME_OID	*subjectNames;	// from certextensions.h
+	CSSM_APPLE_TP_NAME_OID	*subjectNames;	
 	
 	/*
 	 * Issuer name can be expressed in the simplified CSSM_APPLE_TP_NAME_OID
@@ -627,7 +823,15 @@ typedef struct {
  * A pointer to, and length of, one of these is optionally placed in 
  * CSSM_TP_VERIFY_CONTEXT.Cred->Policy.PolicyIds[n].FieldValue.
  */
-#define CSSM_APPLE_TP_SSL_OPTS_VERSION		0
+#define CSSM_APPLE_TP_SSL_OPTS_VERSION		1
+
+/*
+ * Values for CSSM_APPLE_TP_SSL_OPTIONS.flags.
+ *
+ * Set this flag when evaluating a client cert.
+ */
+#define CSSM_APPLE_TP_SSL_CLIENT		0x00000001
+
 typedef struct {
 	uint32      Version;        // CSSM_APPLE_TP_SSL_OPTS_VERSION
 
@@ -639,6 +843,9 @@ typedef struct {
 	 */
 	uint32      ServerNameLen;
 	const char  *ServerName;    // optional
+	
+	/* new fields for struct version 1 */
+	uint32		Flags;
 } CSSM_APPLE_TP_SSL_OPTIONS;
 
 /* 
@@ -654,7 +861,12 @@ enum {
 	// require CRL verification for each cert; default is "try"
 	CSSM_TP_ACTION_REQUIRE_CRL_PER_CERT 	= 0x00000001,	
 	// enable fetch from network
-	CSSM_TP_ACTION_FETCH_CRL_FROM_NET 		= 0x00000002
+	CSSM_TP_ACTION_FETCH_CRL_FROM_NET 		= 0x00000002,
+	// if set and positive OCSP verify for given cert, no further revocation
+	// checking need be done on that cert
+	CSSM_TP_ACTION_CRL_SUFFICIENT			= 0x00000004,
+	// require CRL verification for certs which claim a CRL provider
+	CSSM_TP_ACTION_REQUIRE_CRL_IF_PRESENT 	= 0x00000008
 };
 
 typedef struct {
@@ -709,6 +921,8 @@ enum {
 	CSSM_TP_ACTION_LEAF_IS_CA 	 		= 0x00000002,	// first cert is a CA 
 	CSSM_TP_ACTION_FETCH_CERT_FROM_NET 	= 0x00000004,	// enable net fetch of CA cert
 	CSSM_TP_ACTION_ALLOW_EXPIRED_ROOT 	= 0x00000008, 	// allow expired roots
+	CSSM_TP_ACTION_REQUIRE_REV_PER_CERT	= 0x00000010, 	// require positive revocation
+														//   check per cert
 };
 
 #define CSSM_APPLE_TP_ACTION_VERSION		0
@@ -801,7 +1015,7 @@ enum {
 /*
  * Used in CL's CSSM_APPLEX509_OBTAIN_CSR Passthrough. This is the 
  * input; the output is a CSSM_DATA * containing the signed and 
- * PEM-encoded CSR.
+ * DER-encoded CSR.
  */
 typedef struct {
 	CSSM_X509_NAME_PTR		subjectNameX509;		

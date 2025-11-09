@@ -26,13 +26,13 @@
 /*!
 	@const		DRBurnIcon
 	@abstract	The name of the burn icon image.
-	@discussion	The icon is available to applications through the @link //apple_ref/occ/instm/NSImage/imageNamed%58 -[NSImage imageNamed:] @/link method.
+	@discussion	The icon is available to applications through the @link //apple_ref/occ/instm/NSImage/imageNamed: -[NSImage imageNamed:] @/link method.
 */
 extern NSString* const DRBurnIcon		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const		DREraseIcon
 	@abstract	The name of the erase icon image.
-	@discussion	The icon is available to applications through the @link //apple_ref/occ/instm/NSImage/imageNamed%58 -[NSImage imageNamed:] @/link method.
+	@discussion	The icon is available to applications through the @link //apple_ref/occ/instm/NSImage/imageNamed: -[NSImage imageNamed:] @/link method.
 */
 extern NSString* const DREraseIcon		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;

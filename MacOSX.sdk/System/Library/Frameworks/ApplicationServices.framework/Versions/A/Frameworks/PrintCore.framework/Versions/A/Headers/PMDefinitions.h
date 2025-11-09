@@ -3,9 +3,9 @@
  
      Contains:   Carbon Printing Manager Interfaces.
  
-     Version:    PrintingCore-135~3
+     Version:    PrintingCore-177.13~362
  
-     Copyright:  © 1998-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1998-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -31,10 +31,8 @@
 
 /* Printing objects */
 typedef const void *                    PMObject;
-typedef struct OpaquePMDialog*          PMDialog;
 typedef struct OpaquePMPrintSettings*   PMPrintSettings;
 typedef struct OpaquePMPageFormat*      PMPageFormat;
-typedef struct OpaquePMPrintContext*    PMPrintContext;
 typedef struct OpaquePMPrintSession*    PMPrintSession;
 typedef struct OpaquePMPrinter*         PMPrinter;
 typedef struct OpaquePMServer*          PMServer;
@@ -49,6 +47,7 @@ enum {
 #define kPMDontWantData     NULL        /* for parameters which return data */
 #define kPMDontWantBoolean  NULL        /* for parameters which take a boolean reference */
 #define kPMNoReference      NULL        /* for parameters which take an address pointer */
+#define kPMDuplexDefault    kPMDuplexNone   /* Default duplex value */
 /* for parameters which take a PrintSettings reference */
 #define kPMNoPrintSettings              ((PMPrintSettings)NULL)
 /* for parameters which take a PageFormat reference */
@@ -61,7 +60,8 @@ enum {
   kPMDestinationPrinter         = 1,
   kPMDestinationFile            = 2,
   kPMDestinationFax             = 3,
-  kPMDestinationPreview         = 4
+  kPMDestinationPreview         = 4,
+  kPMDestinationProcessPDF      = 5
 };
 
 #define kPMDestinationTypeDefault       kPMDestinationPrinter
@@ -99,19 +99,6 @@ enum {
   kPMPrinterStopped             = 5
 };
 
-enum {
-  kSizeOfTPrint                 = 120   /* size of old TPrint record */
-};
-
-typedef UInt16 PMColorMode;
-enum {
-  kPMBlackAndWhite              = 1,
-  kPMGray                       = 2,
-  kPMColor                      = 3,
-  kPMColorModeDuotone           = 4,    /* 2 channels */
-  kPMColorModeSpecialColor      = 5     /* to allow for special colors such as metalic, light cyan, etc. */
-};
-
 typedef UInt32 PMColorSpaceModel;
 enum {
   kPMUnknownColorSpaceModel     = 0,
@@ -122,19 +109,6 @@ enum {
 };
 
 #define kPMColorSpaceModelCount 4   /* total number of color space models supported */
-/* Constants to define the ColorSync Intents. These intents may be used */
-/* to set an intent part way through a page or for an entire document. */
-typedef UInt32 PMColorSyncIntent;
-enum {
-  kPMColorIntentUndefined       = 0x0000, /* User or application have not declared an intent, use the printer's default. */
-  kPMColorIntentAutomatic       = 0x0001, /* Automatically match for photos and graphics anywhere on the page. */
-  kPMColorIntentPhoto           = 0x0002, /* Use Photographic (cmPerceptual) intent for all contents. */
-  kPMColorIntentBusiness        = 0x0004, /* Use Business Graphics (cmSaturation) intent for all contents. */
-  kPMColorIntentRelColor        = 0x0008, /* Use Relative Colormetrics (Logo Colors) for the page. */
-  kPMColorIntentAbsColor        = 0x0010, /* Use absolute colormetric for the page. */
-  kPMColorIntentUnused          = 0xFFE0 /* Remaining bits unused at this time. */
-};
-
 /* Print quality modes "standard options" */
 typedef UInt32 PMQualityMode;
 enum {
@@ -178,6 +152,15 @@ enum {
   kPMDuplexBindingTopDown       = 2
 };
 
+/* Duplex Mode: */
+typedef UInt32 PMDuplexMode;
+enum {
+  kPMDuplexNone                 = 0x0001, /* Print only on one side of sheet of paper */
+  kPMDuplexNoTumble             = 0x0002, /* Print on both sides of the paper, with no tumbling. */
+  kPMDuplexTumble               = 0x0003, /* Print on both sides of the paper, tumbling on. */
+  kPMSimplexTumble              = 0x0004 /* Print on only one side of the paper, but tumble the images while printing. */
+};
+
 /* Layout directions: */
 typedef UInt16 PMLayoutDirection;
 enum {
@@ -200,6 +183,119 @@ enum {
   kPMBorderSingleThickline      = 3,
   kPMBorderDoubleThickline      = 4
 };
+
+typedef UInt16 PMPPDDomain;
+enum {
+  kAllPPDDomains                = 1,
+  kSystemPPDDomain              = 2,
+  kLocalPPDDomain               = 3,
+  kNetworkPPDDomain             = 4,
+  kUserPPDDomain                = 5,
+  kCUPSPPDDomain                = 6
+};
+
+
+/* Description types */
+#define kPMPPDDescriptionType           CFSTR("PMPPDDescriptionType")
+/* Document format strings */
+#define kPMDocumentFormatDefault        CFSTR("com.apple.documentformat.default")
+#define kPMDocumentFormatPDF            CFSTR("application/pdf")
+/* Graphic context strings */
+#define kPMGraphicsContextDefault       CFSTR("com.apple.graphicscontext.default")
+#define kPMGraphicsContextQuickdraw     CFSTR("com.apple.graphicscontext.quickdraw")
+#define kPMGraphicsContextCoreGraphics  CFSTR("com.apple.graphicscontext.coregraphics")
+/* Data format strings */
+#define kPMDataFormatPDF                kPMDocumentFormatPDF
+/* PDF Workflow Keys */
+#define kPDFWorkFlowItemURLKey          CFSTR("itemURL")
+#define kPDFWorkflowForlderURLKey       CFSTR("folderURL")
+#define kPDFWorkflowDisplayNameKey      CFSTR("displayName")
+#define kPDFWorkflowItemsKey            CFSTR("items")
+
+/* OSStatus return codes */
+enum {
+  kPMNoError                    = noErr,
+  kPMGeneralError               = -30870,
+  kPMOutOfScope                 = -30871, /* an API call is out of scope */
+  kPMInvalidParameter           = paramErr, /* a required parameter is missing or invalid */
+  kPMNoDefaultPrinter           = -30872, /* no default printer selected */
+  kPMNotImplemented             = -30873, /* this API call is not supported */
+  kPMNoSuchEntry                = -30874, /* no such entry */
+  kPMInvalidPrintSettings       = -30875, /* the printsettings reference is invalid */
+  kPMInvalidPageFormat          = -30876, /* the pageformat reference is invalid */
+  kPMValueOutOfRange            = -30877, /* a value passed in is out of range */
+  kPMLockIgnored                = -30878 /* the lock value was ignored */
+};
+
+enum {
+  kPMInvalidPrintSession        = -30879, /* the print session is invalid */
+  kPMInvalidPrinter             = -30880, /* the printer reference is invalid */
+  kPMObjectInUse                = -30881, /* the object is in use */
+  kPMInvalidPreset              = -30882 /* the preset is invalid */
+};
+
+
+enum {
+  kPMPrintAllPages              = -1
+};
+
+enum {
+  kPMUnlocked                   = false,
+  kPMLocked                     = true
+};
+
+struct PMRect {
+  double              top;
+  double              left;
+  double              bottom;
+  double              right;
+};
+typedef struct PMRect                   PMRect;
+struct PMResolution {
+  double              hRes;
+  double              vRes;
+};
+typedef struct PMResolution             PMResolution;
+struct PMLanguageInfo {
+  Str32               level;
+  Str32               version;
+  Str32               release;
+};
+typedef struct PMLanguageInfo           PMLanguageInfo;
+
+typedef PMRect                          PMPaperMargins;
+/**************/
+/* DEPRECATED */
+/**************/
+/* Printing objects */
+typedef struct OpaquePMPrintContext*    PMPrintContext;
+typedef struct OpaquePMDialog*          PMDialog;
+enum {
+  kSizeOfTPrint                 = 120   /* size of old TPrint record */
+};
+
+typedef UInt16 PMColorMode;
+enum {
+  kPMBlackAndWhite              = 1,
+  kPMGray                       = 2,
+  kPMColor                      = 3,
+  kPMColorModeDuotone           = 4,    /* 2 channels */
+  kPMColorModeSpecialColor      = 5     /* to allow for special colors such as metalic, light cyan, etc. */
+};
+
+/* Constants to define the ColorSync Intents. These intents may be used */
+/* to set an intent part way through a page or for an entire document. */
+typedef UInt32 PMColorSyncIntent;
+enum {
+  kPMColorIntentUndefined       = 0x0000, /* User or application have not declared an intent, use the printer's default. */
+  kPMColorIntentAutomatic       = 0x0001, /* Automatically match for photos and graphics anywhere on the page. */
+  kPMColorIntentPhoto           = 0x0002, /* Use Photographic (cmPerceptual) intent for all contents. */
+  kPMColorIntentBusiness        = 0x0004, /* Use Business Graphics (cmSaturation) intent for all contents. */
+  kPMColorIntentRelColor        = 0x0008, /* Use Relative Colormetrics (Logo Colors) for the page. */
+  kPMColorIntentAbsColor        = 0x0010, /* Use absolute colormetric for the page. */
+  kPMColorIntentUnused          = 0xFFE0 /* Remaining bits unused at this time. */
+};
+
 
 /* Useful Constants for PostScript Injection */
 enum {
@@ -259,32 +355,13 @@ enum {
   kInjectionSubEndPageSetup     = 31    /* EndPageSetup          */
 };
 
-typedef UInt16 PMPPDDomain;
-enum {
-  kAllPPDDomains                = 1,
-  kSystemPPDDomain              = 2,
-  kLocalPPDDomain               = 3,
-  kNetworkPPDDomain             = 4,
-  kUserPPDDomain                = 5,
-  kCUPSPPDDomain                = 6
-};
-
-/* Description types */
-#define kPMPPDDescriptionType           CFSTR("PMPPDDescriptionType")
 /* Document format strings */
-#define kPMDocumentFormatDefault        CFSTR("com.apple.documentformat.default")
-#define kPMDocumentFormatPDF            CFSTR("application/pdf")
 #define kPMDocumentFormatPICT           CFSTR("application/vnd.apple.printing-pict")
 #define kPMDocumentFormatPICTPS         CFSTR("application/vnd.apple.printing-pict-ps")
 #define kPMDocumentFormatPICTPSwPSNormalizer  CFSTR("application/vnd.apple.printing-pict-ps-viapsnormalizer")
 #define kPMDocumentFormatPostScript     CFSTR("application/postscript")
-/* Graphic context strings */
-#define kPMGraphicsContextDefault       CFSTR("com.apple.graphicscontext.default")
-#define kPMGraphicsContextQuickdraw     CFSTR("com.apple.graphicscontext.quickdraw")
-#define kPMGraphicsContextCoreGraphics  CFSTR("com.apple.graphicscontext.coregraphics")
 /* Data format strings */
 #define kPMDataFormatPS                 kPMDocumentFormatPostScript
-#define kPMDataFormatPDF                kPMDocumentFormatPDF
 #define kPMDataFormatPICT               kPMDocumentFormatPICT
 #define kPMDataFormatPICTwPS            kPMDocumentFormatPICTPS
 /* PostScript Injection Dictionary Keys */
@@ -293,63 +370,6 @@ enum {
 #define kPSInjectionPageKey             CFSTR("page")
 #define kPSInjectionPlacementKey        CFSTR("place")
 #define kPSInjectionPostScriptKey       CFSTR("psdata")
-/* PDF Workflow Keys */
-#define kPDFWorkFlowItemURLKey          CFSTR("itemURL")
-#define kPDFWorkflowForlderURLKey       CFSTR("folderURL")
-#define kPDFWorkflowDisplayNameKey      CFSTR("displayName")
-#define kPDFWorkflowItemsKey            CFSTR("items")
-/* OSStatus return codes */
-enum {
-  kPMNoError                    = noErr,
-  kPMGeneralError               = -30870,
-  kPMOutOfScope                 = -30871, /* an API call is out of scope */
-  kPMInvalidParameter           = paramErr, /* a required parameter is missing or invalid */
-  kPMNoDefaultPrinter           = -30872, /* no default printer selected */
-  kPMNotImplemented             = -30873, /* this API call is not supported */
-  kPMNoSuchEntry                = -30874, /* no such entry */
-  kPMInvalidPrintSettings       = -30875, /* the printsettings reference is invalid */
-  kPMInvalidPageFormat          = -30876, /* the pageformat reference is invalid */
-  kPMValueOutOfRange            = -30877, /* a value passed in is out of range */
-  kPMLockIgnored                = -30878 /* the lock value was ignored */
-};
-
-enum {
-  kPMInvalidPrintSession        = -30879, /* the print session is invalid */
-  kPMInvalidPrinter             = -30880, /* the printer reference is invalid */
-  kPMObjectInUse                = -30881, /* the object is in use */
-  kPMInvalidPreset              = -30882 /* the preset is invalid */
-};
-
-
-enum {
-  kPMPrintAllPages              = -1
-};
-
-enum {
-  kPMUnlocked                   = false,
-  kPMLocked                     = true
-};
-
-struct PMRect {
-  double              top;
-  double              left;
-  double              bottom;
-  double              right;
-};
-typedef struct PMRect                   PMRect;
-struct PMResolution {
-  double              hRes;
-  double              vRes;
-};
-typedef struct PMResolution             PMResolution;
-struct PMLanguageInfo {
-  Str32               level;
-  Str32               version;
-  Str32               release;
-};
-typedef struct PMLanguageInfo           PMLanguageInfo;
-
-typedef PMRect                          PMPaperMargins;
 
 #pragma options align=reset
 

@@ -35,7 +35,11 @@ extern NSString * const kABOrganizationProperty;          // Company name - kABS
 
 extern NSString * const kABJobTitleProperty;              // Job Title - kABStringProperty
 
+// Deprecated in Mac OS 10.4. You should use kABURLsProperty.
 extern NSString * const kABHomePageProperty;              // Home Web page - kABStringProperty
+
+extern NSString * const kABURLsProperty AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;          // URLs - kABMultiStringProperty
+        extern NSString * const kABHomePageLabel AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // Homepage URL
 
 extern NSString * const kABEmailProperty;                 // Email(s) - kABMultiStringProperty
         extern NSString * const kABEmailWorkLabel;        // Home email
@@ -55,6 +59,7 @@ extern NSString * const kABAddressProperty;                // Street Addresses -
  * kABAddressCountryCodeKey code must be one of the following:
  * iso country codes
  *
+ *    ae = United Arab Emirates
  *    ar = Argentina
  *    at = Austria
  *    au = Australia
@@ -113,6 +118,7 @@ extern NSString * const kABAddressProperty;                // Street Addresses -
  *    uk = United Kingdom
  *    us = United States
  *    ye = Yemen
+ *    yu = Serbia and Montenegro
  *    za = South Africa
  *
  */
@@ -195,7 +201,7 @@ extern NSString * const kABWorkLabel;
     // All kABXXXXHomeLabel are equivalent to this label
 extern NSString * const kABHomeLabel;
 
-    // Can be use with any Mutli-value property
+    // Can be used with any multi-value property
 extern NSString * const kABOtherLabel;
 
 // ================================================================

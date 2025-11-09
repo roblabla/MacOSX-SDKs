@@ -3,9 +3,9 @@
  
      Contains:   Text Services Manager Interfaces.
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1991-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1991-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -62,7 +62,8 @@ enum {
   kTSMVersion                   = 0x0150, /* Version 1.5 of the Text Services Manager */
   kTSM15Version                 = kTSMVersion,
   kTSM20Version                 = 0x0200, /* Version 2.0 as of MacOSX 10.0 */
-  kTSM22Version                 = 0x0220 /* Version 2.2 as of MacOSX 10.3 */
+  kTSM22Version                 = 0x0220, /* Version 2.2 as of MacOSX 10.3 */
+  kTSM23Version                 = 0x0230 /* Version 2.3 as of MacOSX 10.4 */
 };
 
 
@@ -124,12 +125,16 @@ typedef OSType                          TextServiceClass;
  *    Text Service classes fall in two categories or behaviors.  Text
  *    services that belong to some classes are exclusive of oneanother
  *    within a given Mac script code, such input methods of the
- *    keyboard class. Input Methods of other classes are additive in
- *    nature, regardless of the current keyboard script. Within a given
- *    class and script, exclusive input methods can only be activated
- *    one at a time.  Input methods in additive classes are keyboard
- *    script agnostic and can be active in parallel with other text
- *    services in the same class, such as multiple character palettes.
+ *    keyboard class.
+ *    
+ *    Input Methods of other classes are additive in nature, regardless
+ *    of the current keyboard script.
+ *    
+ *    Within a given class and script, exclusive input methods can only
+ *    be activated one at a time.  Input methods in additive classes
+ *    are keyboard script agnostic and can be active in parallel with
+ *    other text services in the same class, such as multiple character
+ *    palettes.
  */
 enum {
 
@@ -137,7 +142,8 @@ enum {
    * Text service class for keyboard input methods.  Behavior is
    * exclusive. Input Methods in this class are normally associated
    * with a Mac ScriptCode or Unicode, although they can be associated
-   * with several scripts by adopting the Input Mode protocol.
+   * with several scripts by adopting the Input Mode protocol. 
+   * Keyboard input methods are always visible in the System UI.
    */
   kKeyboardInputMethodClass     = 'inpm',
 
@@ -151,10 +157,16 @@ enum {
    * the keyboard class they can still profess to produce only those
    * Unicodes that are encoded in the mac encoding specified in their
    * component description record or their implementation of the
-   * GetScriptLanguageSupport component call. Unlike input methods in
-   * the keyboard class, multiple such text services can be activate in
-   * parallel, although Mac OS X only provides System UI for Apple's
-   * Ink input method currently.
+   * GetScriptLanguageSupport component call.
+   * 
+   * Unlike input methods in the keyboard class, multiple such text
+   * services can be activate in parallel.
+   * 
+   * Dictionary Service input methods are visible in the system UI by
+   * default.  Use the kComponentBundleInvisibleInSystemUIKey plist key
+   * to make them invisible if a developer-provided UI is to be used
+   * instead.  Mac OS X only provides System UI for Apple's Ink input
+   * method.
    */
   kInkInputMethodClass          = 'ink ',
 
@@ -168,25 +180,34 @@ enum {
    * input methods of the keyboard class they can still profess to
    * produce only those Unicodes that are encoded in the mac encoding
    * specified in their component description record or their
-   * implementation of the GetScriptLanguageSupport component call.
+   * implementation of the GetScriptLanguageSupport component
+   * call.
+   * 
    * Unlike input methods in the keyboard class, multiple such text
    * services can be activate in parallel, and unlike input methods in
    * the Ink class, Mac OS X provides System UI to allow the user to
    * both enable and select multiple such input methods.
+   * 
+   * Use the kComponentBundleInvisibleInSystemUIKey plist key to make
+   * Character Palette input methods invisible to the System UI.
    */
   kCharacterPaletteInputMethodClass = 'cplt',
 
   /*
    * Text Service class for Speech input methods.  Behavior is
-   * Additive. Similar to Character palette class.  System UI for these
-   * has not yet been determined.
+   * Additive.
+   * 
+   * Similar to Character palette class.  System UI for these has not
+   * yet been determined.
    */
   kSpeechInputMethodClass       = 'voic',
 
   /*
    * Text Service class for Optical Character Recognition input
-   * methods.  Behavior is Additive. Similar to Character palette
-   * class.  System UI for these has not yet been determined.
+   * methods.  Behavior is Additive.
+   * 
+   * Similar to Character palette class.  System UI for these has not
+   * yet been determined.
    */
   kOCRInputMethodClass          = 'ocr '
 };
@@ -347,7 +368,23 @@ enum {
    * CFString... in either case the caller is responsible for releasing
    * its reference. Property available in TSM 2.2 and later
    */
-  kTSMDocumentInputModePropertyTag = 'imim' /*    Input mode property for input methods (CFStringRef - see Input Modes below)*/
+  kTSMDocumentInputModePropertyTag = 'imim', /*    Input mode property for input methods (CFStringRef - see Input Modes below)*/
+
+  /*
+   * Property is value-dependent.  The property value indicates the
+   * level of the window that will host inline input sessions for a
+   * given TSMDocument. Input Methods will query this property to
+   * determine the level above which its "candidate" (floating)
+   * window(s) should be positioned, typically by adding its window to
+   * a window group (see Carbon's WindowGroup API) and incrementing the
+   * level for the group.  If no level is available, the input method
+   * is expected to use the default behavior, i.e. let the Window
+   * Manager manage the level for floating windows. Window levels are
+   * typed as CGWindowLevel. NSWindow levels are accessed through
+   * NSWindow's (int)level method. Property available in TSM 2.3 and
+   * later
+   */
+  kTSMDocumentWindowLevelPropertyTag = 'twlp' /*    document window level (CGWindowLevel)*/
 };
 
 
@@ -476,7 +513,9 @@ enum {
   kCMGetTextServiceProperty     = 0x000C, /* Component Manager call selector 12 */
   kCMSetTextServiceProperty     = 0x000D, /* Component Manager call selector 13 */
   kCMUCTextServiceEvent         = 0x000E, /* Component Manager call selector 14 */
-  kCMCopyTextServiceInputModeList = 0x000F /* Component Manager call selector 15 */
+  kCMCopyTextServiceInputModeList = 0x000F, /* Component Manager call selector 15 */
+  kCMInputModePaletteItemHit    = 0x0010, /* Component Manager call selector 16 */
+  kCMGetInputModePaletteMenu    = 0x0011 /* Component Manager call selector 17 */
 };
 
 
@@ -1378,6 +1417,14 @@ CopyTextServiceInputModeList(
             case, the array should contain only the set of visible input modes that are also enabled.
 */
 #define kTSVisibleInputModeOrderedArrayKey  CFSTR("tsVisibleInputModeOrderedArrayKey")
+
+/*
+    Key for Component bundle's Info.plist, controls visibility in System UI.
+    Value is a CFBoolean.
+    NOTE:  Keyboard input methods are always visible in System UI.
+*/
+#define kComponentBundleInvisibleInSystemUIKey  CFSTR("ComponentInvisibleInSystemUI")
+
 /*
  *  TSMCopyInputMethodEnabledInputModes()
  *  
@@ -1575,6 +1622,276 @@ enum {
 };
 
 #endif  /* OLDROUTINENAMES */
+
+
+/*-------------------------------------------*/
+/* Input Mode Palette configuration routines */
+/*-------------------------------------------*/
+
+/*
+ *  TSMInputModePaletteLoadButtons()
+ *  
+ *  Discussion:
+ *    Notifies the Input Mode Palette of changes in an input method's
+ *    controls.  Replaces the current controls with the new control
+ *    array.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    paletteButtonsArray:
+ *      CFArray containing descriptions of the controls.  Each control
+ *      is described using a CFDictionary, using the keys described
+ *      below.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+TSMInputModePaletteLoadButtons(CFArrayRef paletteButtonsArray) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  TSMInputModePaletteUpdateButtons()
+ *  
+ *  Discussion:
+ *    Notifies the Input Mode Palette of updates in an input method's
+ *    controls.  Will update controls based on the control tag ID. 
+ *    Does not replace/remove existing controls.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    paletteButtonsArray:
+ *      CFArray containing descriptions of the controls.  Each control
+ *      is described using a CFDictionary, using the keys described
+ *      below.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+TSMInputModePaletteUpdateButtons(CFArrayRef paletteButtonsArray) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+
+/*----------------------------------------------------------------------------*/
+/* CFDictionary keys used to build the control description passed             */
+/* to TSMInputModePaletteLoadButtons() and TSMInputModePaletteUpdateButtons() */
+/*----------------------------------------------------------------------------*/
+
+
+/*******************************************************
+
+Example of palette controls CFArray passed to TSMInputModePaletteLoadButtons():
+
+    Buttons consist of a CFDictionary containing:
+        - itemType
+        - icon
+        - alternate icon
+        - ID
+        - enabled
+        - state
+        
+    Pulldown menus consist of a CFDictionary containing:
+        - itemType
+        - icon
+        - alternate icon
+        - ID
+
+    <array>    
+        <dict>
+        <!-- item 1 - a push button -->
+            <key>tsInputModePaletteItemTypeKey</key>
+            <integer>0</integer>
+            <key>tsInputModePaletteItemIconKey</key>
+            <string>modeButton1.tif</string>
+            <key>tsInputModePaletteItemAltIconKey</key>
+            <string>modeButton1Alt.tif</string>
+            <key>tsInputModePaletteItemIDKey</key>
+            <integer>1</integer>
+            <key>tsInputModePaletteItemEnabledKey</key>
+            <true/>
+            <key>tsInputModePaletteItemStateKey</key>
+            <integer>0</integer>
+        </dict>
+        <dict>
+        <!-- item 2 - a pulldown menu -->
+            <key>tsInputModePaletteItemTypeKey</key>
+            <integer>2</integer>
+            <key>tsInputModePaletteItemIconKey</key>
+            <string>modeMenu1.tif</string>
+            <key>tsInputModePaletteItemAltIconKey</key>
+            <string>modeMenu1Alt.tif</string>
+            <key>tsInputModePaletteItemIDKey</key>
+            <integer>2</integer>
+        </dict>
+    </array>         
+
+*******************************************************/
+
+
+#define kTSInputModePaletteItemTypeKey  CFSTR("tsInputModePaletteItemTypeKey")
+/* CFNumber - the type of control (0: push button, 1: toggle button, 2: pulldown menu) */
+
+#define kTSInputModePaletteItemIconKey  CFSTR("tsInputModePaletteItemIconKey")
+/* CFString - icon file name (File located in IM bundle's resource directory, so this is just the file name, not full path) */
+
+#define kTSInputModePaletteItemAltIconKey  CFSTR("tsInputModePaletteItemAltIconKey")
+/* CFString - alternate icon file name (File located in IM bundle's resource directory, so this is just the file name, not full path) */
+
+#define kTSInputModePaletteItemStateKey  CFSTR("tsInputModePaletteItemStateKey")
+/* CFNumber - state of the control (0: clear/unpressed, 1: checked/pressed, 2: mixed) */
+
+#define kTSInputModePaletteItemEnabledKey  CFSTR("tsInputModePaletteItemEnabledKey")
+/* CFBoolean - enabled state of the control */
+
+#define kTSInputModePaletteItemIDKey    CFSTR("tsInputModePaletteItemIDKey")
+/* CFNumber - UInt32 tag ID for control */
+
+
+/*
+ *  InputModePaletteItemHit()
+ *  
+ *  Discussion:
+ *    Component Manager call to tell an Input Method that a function
+ *    button on the Input Mode Palette was pressed.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inInstance:
+ *      The component instance.
+ *    
+ *    inItemID:
+ *      The item ID of the function button pressed on the palette.
+ *    
+ *    inItemState:
+ *      The new state of the button.
+ *  
+ *  Result:
+ *    Return non-null on successful handling of call.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern ComponentResult 
+InputModePaletteItemHit(
+  ComponentInstance   inInstance,
+  UInt32              inItemID,
+  UInt32              inItemState)                            AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  GetInputModePaletteMenu()
+ *  
+ *  Discussion:
+ *    Component Manager call to ask an Input Method for the menu to
+ *    display for a pull-down menu on the Input Mode Palette.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inInstance:
+ *      The component instance.
+ *    
+ *    inItemID:
+ *      The item ID of the pull-down menu button.
+ *    
+ *    outMenuItemsArray:
+ *      The menu array to return to the Input Mode Palette.
+ *  
+ *  Result:
+ *    Return non-null on successful handling of call.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern ComponentResult 
+GetInputModePaletteMenu(
+  ComponentInstance   inInstance,
+  UInt32              inItemID,
+  CFArrayRef *        outMenuItemsArray)                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+/*----------------------------------------------------------*/
+/* CFDictionary keys for menu definition returned           */
+/* for kCMGetInputModePaletteMenu/GetInputModePaletteMenu() */
+/*----------------------------------------------------------*/
+/*******************************************************
+
+Example of menu CFArray returned to GetInputModePaletteMenu():
+
+    Pull-down menus consist of an array of CFDictionary's containing:
+        - title
+        - ID
+        - state
+        - enabled
+        - key equivalent (optional)
+        - key equivalent modifiers (optional)
+
+    <array>    
+        <dict>
+        <!-- menu item w/ modifiers -->
+            <key>tsInputModePaletteItemTitleKey</key>
+            <string>menu item 1</string>
+            <key>tsInputModePaletteItemIDKey</key>
+            <integer>10</integer>
+            <key>tsInputModePaletteItemEnabledKey</key>
+            <true/>
+            <key>tsInputModePaletteItemStateKey</key>
+            <integer>0</integer>
+            <key>tsInputModePaletteItemKeyEquivalentKey</key>
+            <string>j</string>
+            <key>tsInputModePaletteItemKeyEquivalentModifiersKey</key>
+            <integer>2048</integer>
+        </dict>
+        <dict>
+        <!-- divider -->
+            <key>tsInputModePaletteItemTypeKey</key>
+            <string>-</string>
+        </dict>
+        <!-- menu item w/o modifiers -->
+            <key>tsInputModePaletteItemTitleKey</key>
+            <string>menu item 2</string>
+            <key>tsInputModePaletteItemIDKey</key>
+            <integer>11</integer>
+            <key>tsInputModePaletteItemEnabledKey</key>
+            <true/>
+            <key>tsInputModePaletteItemStateKey</key>
+            <integer>0</integer>
+        </dict>
+    </array>         
+
+*******************************************************/
+#define kTSInputModePaletteItemTitleKey  CFSTR("tsInputModePaletteItemTitleKey")
+/* CFString - menu item title (use '-' for a separator) */
+
+#define kTSInputModePaletteItemKeyEquivalentKey  CFSTR("tsInputModePaletteItemKeyEquivalentKey")
+/* CFString - menu item keyboard shortcut (example: 'j') */
+
+#define kTSInputModePaletteItemKeyEquivalentModifiersKey  CFSTR("tsInputModePaletteItemKeyEquivalentModifiersKey")
+/* CFNumber - menu item keyboard shortcut modifiers (from Events.h) */
+
+
 
 
 #pragma options align=reset

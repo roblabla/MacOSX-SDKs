@@ -3,9 +3,9 @@
  
      Contains:   Basic Macintosh data types.
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -34,6 +34,32 @@ extern "C" {
 #endif
 
 #pragma options align=mac68k
+
+
+/*
+        CarbonCore Deprecation flags.
+
+     Certain Carbon API functions are deprecated in 10.3 and later
+      systems.  These will produce a warning when compiling on 10.3.
+
+        Other functions and constants do not produce meaningful
+        results when building Carbon for Mac OS X.  For these
+      functions, no-op macros are provided, but only when the
+        ALLOW_OBSOLETE_CARBON flag is defined to be 0: eg
+      -DALLOW_OBSOLETE_CARBON=0.
+*/
+
+#if  ! defined(ALLOW_OBSOLETE_CARBON) || ! ALLOW_OBSOLETE_CARBON
+
+#define ALLOW_OBSOLETE_CARBON_MACMEMORY        0
+#define ALLOW_OBSOLETE_CARBON_OSUTILS     0
+
+#else
+
+#define ALLOW_OBSOLETE_CARBON_MACMEMORY       1       /* Removes obsolete constants; turns HLock/HUnlock into no-op macros */
+#define ALLOW_OBSOLETE_CARBON_OSUTILS       1       /* Removes obsolete structures */
+
+#endif
 
 /********************************************************************************
 
@@ -69,8 +95,15 @@ typedef unsigned char                   UInt8;
 typedef signed char                     SInt8;
 typedef unsigned short                  UInt16;
 typedef signed short                    SInt16;
+
+#if __LP64__
+typedef unsigned int                    UInt32;
+typedef signed int                      SInt32;
+#else
 typedef unsigned long                   UInt32;
 typedef signed long                     SInt32;
+#endif
+
 /* avoid redeclaration if libkern/OSTypes.h */
 #ifndef _OS_OSTYPES_H
 #if TARGET_RT_BIG_ENDIAN
@@ -136,11 +169,11 @@ typedef UnsignedWide                    UInt64;
         ShortFixed      8-bit signed integer plus 8-bit fraction
         
 *********************************************************************************/
-typedef long                            Fixed;
+typedef SInt32                          Fixed;
 typedef Fixed *                         FixedPtr;
-typedef long                            Fract;
+typedef SInt32                          Fract;
 typedef Fract *                         FractPtr;
-typedef unsigned long                   UnsignedFixed;
+typedef UInt32                          UnsignedFixed;
 typedef UnsignedFixed *                 UnsignedFixedPtr;
 typedef short                           ShortFixed;
 typedef ShortFixed *                    ShortFixedPtr;
@@ -237,7 +270,7 @@ typedef UInt32                          PBVersion;
 typedef SInt16                          ScriptCode;
 typedef SInt16                          LangCode;
 typedef SInt16                          RegionCode;
-typedef unsigned long                   FourCharCode;
+typedef UInt32                          FourCharCode;
 typedef FourCharCode                    OSType;
 typedef FourCharCode                    ResType;
 typedef OSType *                        OSTypePtr;
@@ -423,6 +456,18 @@ inline unsigned char StrLength(ConstStr255Param string) { return (*string); }
 
 /********************************************************************************
 
+    Process Manager type ProcessSerialNumber (previously in Processes.h)
+
+*********************************************************************************/
+/* type for unique process identifier */
+struct ProcessSerialNumber {
+  UInt32              highLongOfPSN;
+  UInt32              lowLongOfPSN;
+};
+typedef struct ProcessSerialNumber      ProcessSerialNumber;
+typedef ProcessSerialNumber *           ProcessSerialNumberPtr;
+/********************************************************************************
+
     Quickdraw Types
     
         Point               2D Quickdraw coordinate, range: -32K to +32K
@@ -493,8 +538,8 @@ typedef Style                           StyleField;
         TimeRecord          Package of TimeBase, duration, and scale
         
 *********************************************************************************/
-typedef long                            TimeValue;
-typedef long                            TimeScale;
+typedef SInt32                          TimeValue;
+typedef SInt32                          TimeScale;
 typedef wide                            CompTimeValue;
 typedef SInt64                          TimeValue64;
 typedef struct TimeBaseRecord*          TimeBase;
@@ -566,7 +611,7 @@ enum {
 union NumVersionVariant {
                                               /* NumVersionVariant is a wrapper so NumVersion can be accessed as a 32-bit value */
   NumVersion          parts;
-  unsigned long       whole;
+  UInt32              whole;
 };
 typedef union NumVersionVariant         NumVersionVariant;
 typedef NumVersionVariant *             NumVersionVariantPtr;

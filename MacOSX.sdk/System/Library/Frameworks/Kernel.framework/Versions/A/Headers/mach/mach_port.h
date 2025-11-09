@@ -354,7 +354,7 @@ extern
 kern_return_t mach_port_space_info
 (
 	ipc_space_t task,
-	ipc_info_space_t *info,
+	ipc_info_space_t *space_info,
 	ipc_info_name_array_t *table_info,
 	mach_msg_type_number_t *table_infoCnt,
 	ipc_info_tree_name_array_t *tree_info,
@@ -371,8 +371,8 @@ kern_return_t mach_port_dnrequest_info
 (
 	ipc_space_t task,
 	mach_port_name_t name,
-	unsigned *total,
-	unsigned *used
+	unsigned *dnr_total,
+	unsigned *dnr_used
 );
 
 /* Routine mach_port_kernel_object */
@@ -432,55 +432,107 @@ __END_DECLS
 
 #ifndef __Request__mach_port_subsystem__defined
 #define __Request__mach_port_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__mach_port_names_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
 	} __Request__mach_port_type_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t old_name;
 		mach_port_name_t new_name;
 	} __Request__mach_port_rename_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_right_t right;
 		mach_port_name_t name;
 	} __Request__mach_port_allocate_name_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_right_t right;
 	} __Request__mach_port_allocate_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
 	} __Request__mach_port_destroy_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
 	} __Request__mach_port_deallocate_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
 		mach_port_right_t right;
 	} __Request__mach_port_get_refs_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -488,27 +540,51 @@ __END_DECLS
 		mach_port_right_t right;
 		mach_port_delta_t delta;
 	} __Request__mach_port_mod_refs_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
 		mach_port_mscount_t mscount;
 	} __Request__mach_port_set_mscount_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
 	} __Request__mach_port_get_set_status_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t member;
 		mach_port_name_t after;
 	} __Request__mach_port_move_member_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -520,7 +596,13 @@ __END_DECLS
 		mach_msg_id_t msgid;
 		mach_port_mscount_t sync;
 	} __Request__mach_port_request_notification_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -530,21 +612,39 @@ __END_DECLS
 		NDR_record_t NDR;
 		mach_port_name_t name;
 	} __Request__mach_port_insert_right_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
 		mach_msg_type_name_t msgt_name;
 	} __Request__mach_port_extract_right_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
 		mach_port_seqno_t seqno;
 	} __Request__mach_port_set_seqno_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -552,7 +652,13 @@ __END_DECLS
 		mach_port_flavor_t flavor;
 		mach_msg_type_number_t port_info_outCnt;
 	} __Request__mach_port_get_attributes_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -561,14 +667,26 @@ __END_DECLS
 		mach_msg_type_number_t port_infoCnt;
 		integer_t port_info[10];
 	} __Request__mach_port_set_attributes_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_right_t right;
 		mach_port_qos_t qos;
 	} __Request__mach_port_allocate_qos_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -580,49 +698,93 @@ __END_DECLS
 		mach_port_qos_t qos;
 		mach_port_name_t name;
 	} __Request__mach_port_allocate_full_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int table_entries;
 	} __Request__task_set_port_space_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
 	} __Request__mach_port_get_srights_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__mach_port_space_info_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
 	} __Request__mach_port_dnrequest_info_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
 	} __Request__mach_port_kernel_object_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
 		mach_port_name_t pset;
 	} __Request__mach_port_insert_member_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
 		mach_port_name_t pset;
 	} __Request__mach_port_extract_member_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__mach_port_subsystem__defined */
 
 /* union of all requests */
@@ -663,6 +825,10 @@ union __RequestUnion__mach_port_subsystem {
 
 #ifndef __Reply__mach_port_subsystem__defined
 #define __Reply__mach_port_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -674,64 +840,124 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_type_number_t namesCnt;
 		mach_msg_type_number_t typesCnt;
 	} __Reply__mach_port_names_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_port_type_t ptype;
 	} __Reply__mach_port_type_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__mach_port_rename_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__mach_port_allocate_name_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_port_name_t name;
 	} __Reply__mach_port_allocate_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__mach_port_destroy_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__mach_port_deallocate_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_port_urefs_t refs;
 	} __Reply__mach_port_get_refs_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__mach_port_mod_refs_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__mach_port_set_mscount_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -741,13 +967,25 @@ union __RequestUnion__mach_port_subsystem {
 		NDR_record_t NDR;
 		mach_msg_type_number_t membersCnt;
 	} __Reply__mach_port_get_set_status_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__mach_port_move_member_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -755,13 +993,25 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_port_descriptor_t previous;
 		/* end of the kernel processed data */
 	} __Reply__mach_port_request_notification_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__mach_port_insert_right_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -769,13 +1019,25 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_port_descriptor_t poly;
 		/* end of the kernel processed data */
 	} __Reply__mach_port_extract_right_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__mach_port_set_seqno_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -783,13 +1045,25 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_type_number_t port_info_outCnt;
 		integer_t port_info_out[10];
 	} __Reply__mach_port_get_attributes_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__mach_port_set_attributes_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -797,7 +1071,13 @@ union __RequestUnion__mach_port_subsystem {
 		mach_port_qos_t qos;
 		mach_port_name_t name;
 	} __Reply__mach_port_allocate_qos_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -805,20 +1085,38 @@ union __RequestUnion__mach_port_subsystem {
 		mach_port_qos_t qos;
 		mach_port_name_t name;
 	} __Reply__mach_port_allocate_full_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__task_set_port_space_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_port_rights_t srights;
 	} __Reply__mach_port_get_srights_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -827,19 +1125,31 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_ool_descriptor_t tree_info;
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
-		ipc_info_space_t info;
+		ipc_info_space_t space_info;
 		mach_msg_type_number_t table_infoCnt;
 		mach_msg_type_number_t tree_infoCnt;
 	} __Reply__mach_port_space_info_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-		unsigned total;
-		unsigned used;
+		unsigned dnr_total;
+		unsigned dnr_used;
 	} __Reply__mach_port_dnrequest_info_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -847,19 +1157,33 @@ union __RequestUnion__mach_port_subsystem {
 		unsigned object_type;
 		vm_offset_t object_addr;
 	} __Reply__mach_port_kernel_object_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__mach_port_insert_member_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__mach_port_extract_member_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__mach_port_subsystem__defined */
 
 /* union of all replies */

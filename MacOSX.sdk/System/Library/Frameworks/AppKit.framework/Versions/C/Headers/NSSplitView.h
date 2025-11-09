@@ -1,7 +1,7 @@
 /*
 	NSSplitView.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -11,7 +11,7 @@
 
 @interface NSSplitView : NSView {
     /*All instance variables are private*/
-    void *_data;
+    id _data;
 }
 
 - (void)setDelegate:(id)anObject;

@@ -3,9 +3,9 @@
  
      Contains:   ATSUI font handling functions.
  
-     Version:    Quickdraw-150.7~2
+     Version:    Quickdraw-192.24~58
  
-     Copyright:  © 2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -654,9 +654,12 @@ ATSUGetFontIDs(
  *    if one exists.
  *  
  *  Discussion:
- *    This function is not recommended. Instead, use the function
- *    FMGetFontFromFontFamilyInstance (see Fonts.h). FMFont values are
- *    equivalent to ATSUFontID values.
+ *    This function is not recommended. It is specifically associated
+ *    with old QD data types (i.e. the QD font family or 'FOND'
+ *    identifier) that has no equivalent in the newer API sets. The
+ *    concept of FOND ID and font family instances are all QD-specific
+ *    concepts that are not supported in Cocoa, Quartz, and the
+ *    non-deprecated parts of ATS and ATSUI.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -678,9 +681,12 @@ ATSUFONDtoFontID(
  *    ATSUI font ID, if these exist.
  *  
  *  Discussion:
- *    This function is not recommended. Instead, use the function
- *    FMGetFontFamilyInstanceFromFont (see Fonts.h). FMFont values are
- *    equivalent to ATSUFontID values.
+ *    This function is not recommended. It is specifically associated
+ *    with old QD data types (i.e. the QD font family or 'FOND'
+ *    identifier) that has no equivalent in the newer API sets. The
+ *    concept of FOND ID and font family instances are all QD-specific
+ *    concepts that are not supported in Cocoa, Quartz, and the
+ *    non-deprecated parts of ATS and ATSUI.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework

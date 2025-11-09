@@ -67,7 +67,6 @@
  */
 struct ufs_args {
 	char	*fspec;			/* block special device to mount */
-	struct	export_args export;	/* network export information */
 };
 #endif /* __APPLE_API_UNSTABLE */
 
@@ -78,51 +77,11 @@ struct ufs_args {
  */
 struct mfs_args {
 	char	*fspec;			/* name to export for statfs */
-	struct	export_args export;	/* if exported MFSes are supported */
 	caddr_t	base;			/* base of file system in memory */
 	u_long	size;			/* size of file system */
 };
 #endif /* MFS */
 #endif /* __APPLE_API_OBSOLETE */
 
-#ifdef KERNEL
-#ifdef __APPLE_API_PRIVATE
-struct fs;
-struct mount;
-struct vnode;
-struct netexport;
-
-/* This structure describes the UFS specific mount structure data. */
-struct ufsmount {
-	struct	mount *um_mountp;		/* filesystem vfs structure */
-	dev_t	um_dev;				/* device mounted */
-	struct	vnode *um_devvp;		/* block device mounted vnode */
-
-	union {					/* pointer to superblock */
-		struct	fs *fs;			/* FFS */
-	} ufsmount_u;
-#define	um_fs	ufsmount_u.fs
-
-	struct	quotafile um_qfiles[MAXQUOTAS];	/* quota files */
-	u_long	um_nindir;			/* indirect ptrs per block */
-	u_long	um_bptrtodb;			/* indir ptr to disk block */
-	u_long	um_seqinc;			/* inc between seq blocks */
-	struct	netexport um_export;		/* export information */
-	int64_t	um_savedmaxfilesize;		/* XXX - limit maxfilesize */
-};
-
-
-/* Convert mount ptr to ufsmount ptr. */
-#define VFSTOUFS(mp)	((struct ufsmount *)((mp)->mnt_data))
-
-/*
- * Macros to access file system parameters in the ufsmount structure.
- * Used by ufs_bmap.
- */
-#define MNINDIR(ump)			((ump)->um_nindir)
-#define	blkptrtodb(ump, b)		((b) << (ump)->um_bptrtodb)
-#define	is_sequential(ump, a, b)	((b) == (a) + ump->um_seqinc)
-#endif /* __APPLE_API_PRIVATE */
-#endif /* KERNEL */
 
 #endif /* ! _UFS_UFSMOUNT_H_ */

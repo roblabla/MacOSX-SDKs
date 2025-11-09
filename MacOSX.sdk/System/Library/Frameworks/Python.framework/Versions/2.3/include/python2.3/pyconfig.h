@@ -45,8 +45,11 @@
 /* Define if nice() returns success/failure instead of the new priority. */
 #define HAVE_BROKEN_NICE 1
 
+/* Define if poll() sets errno on invalid file descriptors. */
+/* #undef HAVE_BROKEN_POLL */
+
 /* Define if the Posix semaphores do not work on your system */
-/* #undef HAVE_BROKEN_POSIX_SEMAPHORES */
+#define HAVE_BROKEN_POSIX_SEMAPHORES 1
 
 /* Define if pthread_sigmask() does not work on your system. */
 /* #undef HAVE_BROKEN_PTHREAD_SIGMASK */
@@ -68,6 +71,9 @@
 
 /* Define if you have the 'ctermid_r' function. */
 #define HAVE_CTERMID_R 1
+
+/* Define to 1 if you have the <curses.h> header file. */
+#define HAVE_CURSES_H 1
 
 /* Define to 1 if you have the device macros. */
 #define HAVE_DEVICE_MACROS 1
@@ -97,13 +103,13 @@
 /* Define to 1 if you have the `execv' function. */
 #define HAVE_EXECV 1
 
-/* Define to 1 if you have the `fchdir' function. */
+/* Define if you have the 'fchdir' function. */
 #define HAVE_FCHDIR 1
 
 /* Define to 1 if you have the <fcntl.h> header file. */
 #define HAVE_FCNTL_H 1
 
-/* Define to 1 if you have the `fdatasync' function. */
+/* Define if you have the 'fdatasync' function. */
 /* #undef HAVE_FDATASYNC */
 
 /* Define if you have the 'flock' function. */
@@ -125,9 +131,9 @@
 #define HAVE_FSEEKO 1
 
 /* Define to 1 if you have the `fstatvfs' function. */
-/* #undef HAVE_FSTATVFS */
+#define HAVE_FSTATVFS 1
 
-/* Define to 1 if you have the `fsync' function. */
+/* Define if you have the 'fsync' function. */
 #define HAVE_FSYNC 1
 
 /* Define to 1 if you have the `ftell64' function. */
@@ -137,7 +143,7 @@
 #define HAVE_FTELLO 1
 
 /* Define to 1 if you have the `ftime' function. */
-/* #undef HAVE_FTIME */
+#define HAVE_FTIME 1
 
 /* Define to 1 if you have the `ftruncate' function. */
 #define HAVE_FTRUNCATE 1
@@ -218,7 +224,7 @@
 #define HAVE_HYPOT 1
 
 /* Define if you have the 'inet_aton' function. */
-/* #undef HAVE_INET_ATON */
+#define HAVE_INET_ATON 1
 
 /* Define if you have the 'inet_pton' function. */
 #define HAVE_INET_PTON 1
@@ -242,7 +248,7 @@
 #define HAVE_LARGEFILE_SUPPORT 1
 
 /* Define to 1 if you have the `lchown' function. */
-/* #undef HAVE_LCHOWN */
+#define HAVE_LCHOWN 1
 
 /* Define to 1 if you have the `dl' library (-ldl). */
 #define HAVE_LIBDL 1
@@ -323,10 +329,10 @@
 /* #undef HAVE_PLOCK */
 
 /* Define to 1 if you have the `poll' function. */
-#define HAVE_POLL 1
+/* #undef HAVE_POLL */
 
 /* Define to 1 if you have the <poll.h> header file. */
-#define HAVE_POLL_H 1
+/* #undef HAVE_POLL_H */
 
 /* Define if your compiler supports function prototype */
 #define HAVE_PROTOTYPES 1
@@ -359,13 +365,13 @@
 #define HAVE_REALPATH 1
 
 /* Define if you have readline 2.2 */
-/* #undef HAVE_RL_COMPLETION_APPEND_CHARACTER */
+#define HAVE_RL_COMPLETION_APPEND_CHARACTER 1
 
 /* Define if you have readline 4.2 */
 /* #undef HAVE_RL_COMPLETION_MATCHES */
 
 /* Define if you have readline 4.0 */
-/* #undef HAVE_RL_PRE_INPUT_HOOK */
+#define HAVE_RL_PRE_INPUT_HOOK 1
 
 /* Define to 1 if you have the `select' function. */
 #define HAVE_SELECT 1
@@ -428,7 +434,7 @@
 #define HAVE_SOCKADDR_STORAGE 1
 
 /* Define to 1 if you have the `statvfs' function. */
-/* #undef HAVE_STATVFS */
+#define HAVE_STATVFS 1
 
 /* Define if you have struct stat.st_mtim.tv_nsec */
 /* #undef HAVE_STAT_TV_NSEC */
@@ -525,7 +531,7 @@
 #define HAVE_SYS_PARAM_H 1
 
 /* Define to 1 if you have the <sys/poll.h> header file. */
-/* #undef HAVE_SYS_POLL_H */
+#define HAVE_SYS_POLL_H 1
 
 /* Define to 1 if you have the <sys/resource.h> header file. */
 #define HAVE_SYS_RESOURCE_H 1
@@ -570,7 +576,7 @@
 #define HAVE_TERMIOS_H 1
 
 /* Define to 1 if you have the <term.h> header file. */
-#define HAVE_TERM_H 1
+/* #undef HAVE_TERM_H */
 
 /* Define to 1 if you have the <thread.h> header file. */
 /* #undef HAVE_THREAD_H */
@@ -600,6 +606,9 @@
 /* Define to 1 if you don't have `tm_zone' but do have the external array
    `tzname'. */
 /* #undef HAVE_TZNAME */
+
+/* Define this if you have tcl and TCL_UTF_MAX==6 */
+/* #undef HAVE_UCS4_TCL */
 
 /* Define this if you have the type uintptr_t. */
 /* #undef HAVE_UINTPTR_T */
@@ -820,14 +829,17 @@
 /* # undef _ALL_SOURCE */
 #endif
 
+/* Define on Irix to enable u_int */
+#define _BSD_TYPES 1
+
 /* This must be set to 64 on some systems to enable large file support. */
-/* #undef _FILE_OFFSET_BITS */
+#define _FILE_OFFSET_BITS 64
 
 /* Define on Linux to activate all library features */
 #define _GNU_SOURCE 1
 
 /* This must be defined on some systems to enable large file support. */
-/* #undef _LARGEFILE_SOURCE */
+#define _LARGEFILE_SOURCE 1
 
 /* Define to 1 if on MINIX. */
 /* #undef _MINIX */
@@ -843,7 +855,7 @@
 /* #undef _POSIX_1_SOURCE */
 
 /* Define to activate features from IEEE Stds 1003.1-2001 */
-#define _POSIX_C_SOURCE 200112L
+/* #undef _POSIX_C_SOURCE */
 
 /* Define to 1 if you need to in order for `stat' and other things to work. */
 /* #undef _POSIX_SOURCE */
@@ -855,10 +867,10 @@
 #define _REENTRANT 1
 
 /* Define to the level of X/Open that your system supports */
-#define _XOPEN_SOURCE 600
+/* #undef _XOPEN_SOURCE */
 
 /* Define to activate Unix95-and-earlier features */
-#define _XOPEN_SOURCE_EXTENDED 1
+/* #undef _XOPEN_SOURCE_EXTENDED */
 
 /* Define on FreeBSD to activate all library features */
 #define __BSD_VISIBLE 1

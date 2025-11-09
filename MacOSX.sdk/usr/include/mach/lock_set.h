@@ -31,7 +31,6 @@ typedef function_table_entry 	*function_table_t;
 
 #include <mach/std_types.h>
 #include <mach/mig.h>
-#include <mach/mig.h>
 #include <mach/mach_types.h>
 
 #ifdef __BeforeMigUserHeader
@@ -131,42 +130,78 @@ __END_DECLS
 
 #ifndef __Request__lock_set_subsystem__defined
 #define __Request__lock_set_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int lock_id;
 	} __Request__lock_acquire_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int lock_id;
 	} __Request__lock_release_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int lock_id;
 	} __Request__lock_try_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int lock_id;
 	} __Request__lock_make_stable_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int lock_id;
 	} __Request__lock_handoff_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int lock_id;
 	} __Request__lock_handoff_accept_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__lock_set_subsystem__defined */
 
 /* union of all requests */
@@ -186,42 +221,78 @@ union __RequestUnion__lock_set_subsystem {
 
 #ifndef __Reply__lock_set_subsystem__defined
 #define __Reply__lock_set_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__lock_acquire_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__lock_release_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__lock_try_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__lock_make_stable_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__lock_handoff_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__lock_handoff_accept_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__lock_set_subsystem__defined */
 
 /* union of all replies */

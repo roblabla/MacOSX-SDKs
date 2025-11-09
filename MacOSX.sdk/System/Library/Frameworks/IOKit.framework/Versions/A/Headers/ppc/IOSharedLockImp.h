@@ -49,37 +49,6 @@
 #define _IOKIT_IOSHAREDLOCKIMP_H
 
 #include <architecture/ppc/asm_help.h>
-#ifdef KERNEL
-#undef END
-#include <mach/ppc/asm.h>
-#endif
-
-.macro DISABLE_PREEMPTION
-#ifdef KERNEL
-	stwu	r1,-(FM_SIZE)(r1)
-	mflr	r0
-	stw		r3,FM_ARG0(r1)
-	stw		r0,(FM_SIZE+FM_LR_SAVE)(r1)
-	bl		EXT(_disable_preemption)
-	lwz		r3,FM_ARG0(r1)
-	lwz		r1,0(r1)
-	lwz		r0,FM_LR_SAVE(r1)
-	mtlr	r0
-#endif
-.endmacro
-.macro ENABLE_PREEMPTION
-#ifdef KERNEL
-	stwu	r1,-(FM_SIZE)(r1)
-	mflr	r0
-	stw		r3,FM_ARG0(r1)
-	stw		r0,(FM_SIZE+FM_LR_SAVE)(r1)
-	bl		EXT(_enable_preemption)
-	lwz		r3,FM_ARG0(r1)
-	lwz		r1,0(r1)
-	lwz		r0,FM_LR_SAVE(r1)
-	mtlr	r0
-#endif
-.endmacro
 
 /*
  *	void
@@ -91,7 +60,6 @@
  */
 	TEXT
 
-#ifndef KERNEL
 LEAF(_ev_lock)
 
 		li		a6,1			// lock value
@@ -135,7 +103,6 @@ LEAF(_IOSpinLock)
 		stwcx.	a7,a7,r1		// Kill reservation
 		b		8b				// Go wait some more...
 END(_IOSpinLock)
-#endif
 
 /*
  *	void
@@ -149,7 +116,6 @@ LEAF(_ev_unlock)
 	sync
 	li	a7,0
 	stw	a7,0(a0)
-	ENABLE_PREEMPTION()
 	blr
 END(_ev_unlock)
 
@@ -157,7 +123,6 @@ LEAF(_IOSpinUnlock)
 	sync
 	li	a7,0
 	stw	a7,0(a0)
-	ENABLE_PREEMPTION()
 	blr
 END(_IOSpinUnlock)
 
@@ -170,9 +135,6 @@ END(_IOSpinUnlock)
  */
 
 LEAF(_ev_try_lock)
-	
-		DISABLE_PREEMPTION()
-
 		li		a6,1			// lock value
 		
 		lwz		a7,0(a0)		// Get lock word
@@ -192,16 +154,12 @@ LEAF(_ev_try_lock)
 		stwcx.	a7,a7,r1		// Kill reservation
 
 6:
-		ENABLE_PREEMPTION()
 		li	a0,0				// return FALSE
 		blr
 		
 END(_ev_try_lock)
 
 LEAF(_IOTrySpinLock)
-	
-		DISABLE_PREEMPTION()
-
 		li		a6,1			// lock value
 		
 		lwz		a7,0(a0)		// Get lock word
@@ -221,7 +179,6 @@ LEAF(_IOTrySpinLock)
 		stwcx.	a7,a7,r1		// Kill reservation
 
 6:
-		ENABLE_PREEMPTION()
 		li	a0,0				// return FALSE
 		blr
 		

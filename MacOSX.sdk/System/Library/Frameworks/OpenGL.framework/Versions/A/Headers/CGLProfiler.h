@@ -27,7 +27,6 @@ extern "C" {
         /* param is GL_TRUE to enable "force flush" mode or GL_FALSE to disable. */
 	/* Availability: set and get. */
 
-
 /* Profiler extensions for CGLGlobalOption */
 
 /* Use these as the parameter name for CGLSetOption to control global profiling
@@ -72,6 +71,24 @@ extern "C" {
         /* Turns proflier attach feature on and off.  Off by default, you can
 	   override this with the environment variable GL_ENABLE_DEBUG_ATTACH */
 	/* Availability: set only, get is ignored. */
+
+#define kCGLGOHideObjects ((CGLGlobalOption)1513)
+        /* param is GL_TRUE to hide all resources from Profiler or GL_FALSE to expose resources to
+		   Profiler.  Default is GL_FALSE (expose resources to Profiler). */
+	/* Availability: set and get. */
+
+
+#define kCGLProfBreakBefore  0x0001
+#define kCGLProfBreakAfter   0x0002
+
+#define kCGLGOEnableBreakpoint ((CGLGlobalOption)1514)
+        /* param is an array of 3 GLints:
+				param[0] is function ID (see CGLProfilerFunctionEnum.h)
+				param[1] is the logical OR of kCGLProfBreakBefore or kCGLProfBreakAfter, indicating how
+				         you want the breakpoint to stop: before entering OpenGL, on return from OpenGL, or both.
+				param[2] is a boolean which turns the breakpoint on or off.
+		*/
+	/* Availability: set and get. */
 
 
 /* Hardware accelerator controls

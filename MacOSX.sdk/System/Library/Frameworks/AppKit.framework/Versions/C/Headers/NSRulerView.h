@@ -1,7 +1,7 @@
 /*
         NSRulerView.h
         Application Kit
-        Copyright (c) 1994-2003, Apple Computer, Inc.
+        Copyright (c) 1994-2005, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -41,7 +41,7 @@ typedef enum {
     // Dragging related caching
     NSRulerMarker *_draggingMarker;
 
-    void *_reservedRulerView1;
+    id _reservedRulerView1;
 }
 
 /************************* Registering new units *************************/

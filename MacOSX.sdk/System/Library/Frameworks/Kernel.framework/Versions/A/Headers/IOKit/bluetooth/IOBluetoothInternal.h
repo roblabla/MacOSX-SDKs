@@ -30,7 +30,8 @@ enum
 enum IOBluetoothHCIControllerSleepOptions
 {
 	kIOBluetoothHCIControllerAllowWakeFromExistingConnection				= 0x00000001,
-	kIOBluetoothHCIControllerAllowWakeFromNewConnection						= 0x00000002
+	kIOBluetoothHCIControllerAllowWakeFromNewConnection						= 0x00000002,
+	kIOBluetoothHCIControllerTemporaryOnFromIdle							= 0x00000004
 };
 
 #define HCI_CONTROLLER_POWER_OFF_SUPPORTED( _controllerPowerOptions )	( ( _controllerPowerOptions & kIOBluetoothHCIControllerPowerOptionPowerOffSupported ) == kIOBluetoothHCIControllerPowerOptionPowerOffSupported )
@@ -43,8 +44,16 @@ typedef enum IOBluetoothHCIControllerInternalPowerState
 {
 	kIOBluetoothHCIControllerInternalPowerStateOff		= 0,
 	kIOBluetoothHCIControllerInternalPowerStateOn		= 1,
-	kIOBluetoothHCIControllerInternalPowerStateSleep	= 2
+	kIOBluetoothHCIControllerInternalPowerStateSleep	= 2,
+	kIOBluetoothHCIControllerInternalPowerStateIdle		= 3
 } IOBluetoothHCIControllerInternalPowerState;
+
+enum IOBluetoothHCIControllerPowerStateOrdinal
+{
+	kIOBluetoothHCIControllerPowerStateOrdinalOff		= 0,
+	kIOBluetoothHCIControllerPowerStateOrdinalIdle		= 1,
+	kIOBluetoothHCIControllerPowerStateOrdinalOn		= 2
+};
 
 typedef UInt32 IOBluetoothHCIControllerFeatureFlags;
 

@@ -1,27 +1,27 @@
 /*
 	NSApplication.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSResponder.h>
 #import <AppKit/AppKitDefines.h>
 
-@class NSDate, NSDictionary, NSException, NSNotification;
+@class NSDate, NSDictionary, NSError, NSException, NSNotification;
 @class NSGraphicsContext, NSImage, NSPasteboard, NSWindow;
 
 /* The version of the AppKit framework */
 APPKIT_EXTERN const double NSAppKitVersionNumber;
 
 #define NSAppKitVersionNumber10_0 577
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 #define NSAppKitVersionNumber10_1 620
-#endif
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 #define NSAppKitVersionNumber10_2 663
 #define NSAppKitVersionNumber10_2_3 663.6
-#endif
+#define NSAppKitVersionNumber10_3 743
+#define NSAppKitVersionNumber10_3_2 743.14
+#define NSAppKitVersionNumber10_3_3 743.2
+#define NSAppKitVersionNumber10_3_5 743.24
 
 /* Modes passed to NSRunLoop */
 APPKIT_EXTERN NSString *NSModalPanelRunLoopMode;
@@ -57,7 +57,7 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
     id            	*_hiddenList;
     int                 _hiddenCount;
     void		*_context;
-    id                  obsolete1;
+    void		*_appleEventSuspensionID;
     id			obsolete2;
     short               _unusedApp;
     short               _running;
@@ -85,11 +85,13 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
         unsigned int	    _hasKeyFocus:1;
         unsigned int	    _panelsNonactivating:1;
         unsigned int	    _hiddenOnLaunch:1;
-	unsigned int        _reserved:9;
+        unsigned int	    _openStatus:2;
+	unsigned int	    _batchOrdering:1;
+	unsigned int        _reserved:6;
     }                   _appFlags;
     id                  _mainMenu;
     id                  _appIcon;
-    id                  _nameTable;
+    id                  _nameTable;	// unused
     id                  _eventDelegate;
     _NSThreadPrivate     *_threadingSupport;
 }
@@ -239,6 +241,16 @@ typedef enum NSApplicationTerminateReply {
         NSTerminateLater = 2
 } NSApplicationTerminateReply;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+// return values for -application:printFiles:withSettings:showPrintPanels:.
+typedef enum NSApplicationPrintReply {
+    NSPrintingCancelled = 0,
+    NSPrintingSuccess = 1, 
+    NSPrintingFailure = 3,
+    NSPrintingReplyLater = 2
+} NSApplicationPrintReply;
+#endif
+
 @interface NSObject(NSApplicationDelegate)
 /* 
     Allowable return values are:
@@ -257,16 +269,19 @@ typedef enum NSApplicationTerminateReply {
 - (BOOL)applicationOpenUntitledFile:(NSApplication *)sender;
 - (BOOL)application:(id)sender openFileWithoutUI:(NSString *)filename;
 - (BOOL)application:(NSApplication *)sender printFile:(NSString *)filename;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (NSApplicationPrintReply)application:(NSApplication *)application printFiles:(NSArray *)fileNames withSettings:(NSDictionary *)printSettings showPrintPanels:(BOOL)showPrintPanels;
+#endif
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+// -application:printFiles: is now deprecated. Implement application:printFiles:withSettings:showPrintPanels: in your application delegate instead.
 - (void)application:(NSApplication *)sender printFiles:(NSArray *)filenames;
 #endif
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender;
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag;
 - (NSMenu *)applicationDockMenu:(NSApplication *)sender;
-@end
-
-@interface NSApplication(NSAppleMenu)
-- (void)setAppleMenu:(NSMenu *)menu;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (NSError *)application:(NSApplication *)application willPresentError:(NSError *)error;
+#endif
 @end
 
 @interface NSApplication(NSServicesMenu)
@@ -306,11 +321,11 @@ specified, use [NSImage imageNamed:@"NSApplicationIcon"]; if not available, gene
 obtain from the value of NSHumanReadableCopyright (localizable) in infoDictionary; if not available, leave blank.
 
 @"Version": NSString containing the build version number of the application
-("58.4", "1.2d3"); displayed as "Version 58.4" or "1.0 (v58.4) depending on the presence of ApplicationVersion. 
+("58.4", "1.2d3"); displayed as "Version 58.4" or "Version 1.0 (58.4) depending on the presence of ApplicationVersion. 
 If not specified, obtain from the CFBundleVersion key in infoDictionary; if not specified or empty string, leave blank.
 
-@"ApplicationVersion": NSString displayed as the application version  ("1.0", "Mac OS X", "3", "WebObjects 3.5", ...), before the build version.
-If not specified, obtain from CFBundleShortVersionString key in infoDictionary..
+@"ApplicationVersion": NSString displayed as the marketing version  ("1.0", "Mac OS X", "3", "WebObjects 3.5", ...), before the build version.
+If not specified, obtain from CFBundleShortVersionString key in infoDictionary. Prefixed with word "Version" if it looks like a number.
 */
 
 @end

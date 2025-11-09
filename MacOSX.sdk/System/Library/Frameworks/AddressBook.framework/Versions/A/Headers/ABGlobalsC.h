@@ -42,7 +42,11 @@ extern CFStringRef const kABOrganizationProperty;          // Company name - kAB
 
 extern CFStringRef const kABJobTitleProperty;              // Job Title - kABStringProperty
 
-extern CFStringRef const kABHomePageProperty;              // Home Web pag - kABStringProperty
+// Deprecated in Mac OS 10.4. You should use kABURLsProperty.
+extern CFStringRef const kABHomePageProperty;              // Home Web page - kABStringProperty
+
+extern CFStringRef * const kABURLsProperty AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // URLs - kABMultiStringProperty
+    extern CFStringRef * const kABHomePageLabel AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // Homepage URL
 
 extern CFStringRef const kABEmailProperty;                 // Email(s) - kABMultiStringProperty
         extern CFStringRef const kABEmailWorkLabel;        // Work email
@@ -183,7 +187,6 @@ extern CFStringRef const kABICQInstantProperty;              // ICQ Instant Mess
 
 extern CFStringRef const kABNoteProperty;                    // Note (string)
 
-// ----- Person Properties not Currently supported in the AddressBook UI
 extern CFStringRef const kABMiddleNameProperty;              // kABStringProperty
 extern CFStringRef const kABMiddleNamePhoneticProperty;      // kABStringProperty
 extern CFStringRef const kABTitleProperty;                   // kABStringProperty "Sir" "Duke" "General" "Lord"
@@ -203,7 +206,7 @@ extern CFStringRef const kABWorkLabel;
     // All kABXXXXHomeLabel are equivalent to this label
 extern CFStringRef const kABHomeLabel;
 
-    // Can be use with any Mutli-value property
+    // Can be used with any multi-value property
 extern CFStringRef const kABOtherLabel;
 
 // ================================================================

@@ -43,68 +43,70 @@
 #include <PCSC/pcsclite.h>
 #endif
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-	long SCardEstablishContext(unsigned long dwScope,
-		const void *pvReserved1, const void *pvReserved2, long *phContext);
+	int32_t SCardEstablishContext(uint32_t dwScope,
+		const void *pvReserved1, const void *pvReserved2, LPSCARDCONTEXT phContext);
 
-	long SCardReleaseContext(long hContext);
+	int32_t SCardReleaseContext(int32_t hContext);
 
-	long SCardSetTimeout(long hContext, unsigned long dwTimeout);
+	int32_t SCardSetTimeout(int32_t hContext, uint32_t dwTimeout);
 
-	long SCardConnect(long hContext,
+	int32_t SCardConnect(int32_t hContext,
 		const char *szReader,
-		unsigned long dwShareMode,
-		unsigned long dwPreferredProtocols,
-		long *phCard, unsigned long *pdwActiveProtocol);
+		uint32_t dwShareMode,
+		uint32_t dwPreferredProtocols,
+		int32_t *phCard, uint32_t *pdwActiveProtocol);
 
-	long SCardReconnect(long hCard,
-		unsigned long dwShareMode,
-		unsigned long dwPreferredProtocols,
-		unsigned long dwInitialization, unsigned long *pdwActiveProtocol);
+	int32_t SCardReconnect(int32_t hCard,
+		uint32_t dwShareMode,
+		uint32_t dwPreferredProtocols,
+		uint32_t dwInitialization, uint32_t *pdwActiveProtocol);
 
-	long SCardDisconnect(long hCard, unsigned long dwDisposition);
+	int32_t SCardDisconnect(int32_t hCard, uint32_t dwDisposition);
 
-	long SCardBeginTransaction(long hCard);
+	int32_t SCardBeginTransaction(int32_t hCard);
 
-	long SCardEndTransaction(long hCard, unsigned long dwDisposition);
+	int32_t SCardEndTransaction(int32_t hCard, uint32_t dwDisposition);
 
-	long SCardCancelTransaction(long hCard);
+	int32_t SCardCancelTransaction(int32_t hCard);
 
-	long SCardStatus(long hCard,
+	int32_t SCardStatus(int32_t hCard,
 		char *mszReaderNames,
-		unsigned long *pcchReaderLen,
-		unsigned long *pdwState,
-		unsigned long *pdwProtocol,
-		unsigned char *pbAtr, unsigned long *pcbAtrLen);
+		uint32_t *pcchReaderLen,
+		uint32_t *pdwState,
+		uint32_t *pdwProtocol,
+		unsigned char *pbAtr, uint32_t *pcbAtrLen);
 
-	long SCardGetStatusChange(long hContext,
-		unsigned long dwTimeout,
-		LPSCARD_READERSTATE_A rgReaderStates, unsigned long cReaders);
+	int32_t SCardGetStatusChange(int32_t hContext,
+		uint32_t dwTimeout,
+		LPSCARD_READERSTATE_A rgReaderStates, uint32_t cReaders);
 
-	long SCardControl(long hCard,
+	int32_t SCardControl(int32_t hCard,
 		const unsigned char *pbSendBuffer,
-		unsigned long cbSendLength,
-		unsigned char *pbRecvBuffer, unsigned long *pcbRecvLength);
+		uint32_t cbSendLength,
+		unsigned char *pbRecvBuffer, uint32_t *pcbRecvLength);
 
-	long SCardTransmit(long hCard,
+	int32_t SCardTransmit(int32_t hCard,
 		LPCSCARD_IO_REQUEST pioSendPci,
 		const unsigned char *pbSendBuffer,
-		unsigned long cbSendLength,
+		uint32_t cbSendLength,
 		LPSCARD_IO_REQUEST pioRecvPci,
-		unsigned char *pbRecvBuffer, unsigned long *pcbRecvLength);
+		unsigned char *pbRecvBuffer, uint32_t *pcbRecvLength);
 
-	long SCardListReaderGroups(long hContext,
-		char *mszGroups, unsigned long *pcchGroups);
+	int32_t SCardListReaderGroups(int32_t hContext,
+		char *mszGroups, uint32_t *pcchGroups);
 
-	long SCardListReaders(long hContext,
+	int32_t SCardListReaders(int32_t hContext,
 		const char *mszGroups,
-		char *mszReaders, unsigned long *pcchReaders);
+		char *mszReaders, uint32_t *pcchReaders);
 
-	long SCardCancel(long hContext);
+	int32_t SCardCancel(int32_t hContext);
 
 #ifdef __cplusplus
 }

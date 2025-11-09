@@ -3,9 +3,9 @@
  
      Contains:   Scaler streaming data structures and constants for OFA 1.x
  
-     Version:    ATS-135.7~1
+     Version:    ATS-184.7.7~42
  
-     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

@@ -1,18 +1,23 @@
 /*	Foundation.h
-	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
 */
 
-#import <objc/objc.h>
 
 #include <CoreFoundation/CoreFoundation.h>
 
+#import <AvailabilityMacros.h>
+#import <objc/objc.h>
+#import <objc/objc-auto.h>
+
 #import <Foundation/NSObjCRuntime.h>
+#import <Foundation/NSAffineTransform.h>
 #import <Foundation/NSArchiver.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSAttributedString.h>
 #import <Foundation/NSAutoreleasePool.h>
 #import <Foundation/NSBundle.h>
 #import <Foundation/NSByteOrder.h>
+#import <Foundation/NSCalendar.h>
 #import <Foundation/NSCalendarDate.h>
 #import <Foundation/NSCharacterSet.h>
 #import <Foundation/NSClassDescription.h>
@@ -37,14 +42,17 @@
 #import <Foundation/NSHashTable.h>
 #import <Foundation/NSHFSFileTypes.h>
 #import <Foundation/NSHost.h>
+#import <Foundation/NSIndexPath.h>
 #import <Foundation/NSIndexSet.h>
 #import <Foundation/NSInvocation.h>
 #import <Foundation/NSJavaSetup.h>
 #import <Foundation/NSKeyValueCoding.h>
 #import <Foundation/NSKeyValueObserving.h>
 #import <Foundation/NSKeyedArchiver.h>
+#import <Foundation/NSLocale.h>
 #import <Foundation/NSLock.h>
 #import <Foundation/NSMapTable.h>
+#import <Foundation/NSMetadata.h>
 #import <Foundation/NSMethodSignature.h>
 #import <Foundation/NSNetServices.h>
 #import <Foundation/NSNotification.h>
@@ -79,8 +87,19 @@
 #import <Foundation/NSUserDefaults.h>
 #import <Foundation/NSValue.h>
 #import <Foundation/NSValueTransformer.h>
+#import <Foundation/NSXMLDTD.h>
+#import <Foundation/NSXMLDTDNode.h>
+#import <Foundation/NSXMLDocument.h>
+#import <Foundation/NSXMLElement.h>
+#import <Foundation/NSXMLNode.h>
+#import <Foundation/NSXMLNodeOptions.h>
 #import <Foundation/NSXMLParser.h>
 #import <Foundation/NSZone.h>
+
+#import <Foundation/NSExpression.h>
+#import <Foundation/NSPredicate.h>
+#import <Foundation/NSComparisonPredicate.h>
+#import <Foundation/NSCompoundPredicate.h>
 
 #import <Foundation/NSAppleEventDescriptor.h>
 #import <Foundation/NSAppleEventManager.h>
@@ -99,7 +118,6 @@
 
 // Note: To use the APIs described in these headers, you must perform
 // a runtime check for Foundation-462.1 or later.
-#import <AvailabilityMacros.h>
 #if defined(MAC_OS_X_VERSION_10_2) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2)
 #import <Foundation/NSURLAuthenticationChallenge.h>
 #import <Foundation/NSURLCredential.h>
@@ -115,6 +133,8 @@
 #import <Foundation/NSURLDownload.h>
 #import <Foundation/NSURLError.h>
 #endif
+
+#import <Foundation/FoundationErrors.h>
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_2
 	#import <Foundation/NSSerialization.h>

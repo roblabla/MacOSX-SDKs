@@ -57,10 +57,10 @@
     
         typedef struct vImage_Buffer
         {
-            void	*data;		// Pointer to the top left pixel of the buffer.	
-            uint32_t	height;		// The height (in pixels) of the buffer		
-            uint32_t	width;		// The width (in pixels) of the buffer 		
-            uint32_t	rowBytes;	// The number of bytes in a pixel row		
+            void                *data;		// Pointer to the top left pixel of the buffer.	
+            vImagePixelCount	height;		// The height (in pixels) of the buffer		
+            vImagePixelCount	width;		// The width (in pixels) of the buffer 		
+            size_t              rowBytes;	// The number of bytes in a pixel row		
         }vImage_Buffer;
             
     Some functions may operate only on a rectangular subset of pixels in the input buffer. This is useful for tiling
@@ -135,9 +135,9 @@
         ------------------	----
         planar uint8		sizeof( Pixel_8)		// 1 byte
         planar float		sizeof( Pixel_F )		// 4 bytes
-        ARGB uint8		sizeof( Pixel_8888)		// 4 bytes
-        ARGB float		sizeof( Pixel_FFFF )		// 16 bytes
-        
+        ARGB uint8			sizeof( Pixel_8888)		// 4 bytes
+        ARGB float			sizeof( Pixel_FFFF )	// 16 bytes
+			
     
 
     Tiling / Strip Mining and Multithreading
@@ -196,6 +196,7 @@
 #include <vImage/Geometry.h>
 #include <vImage/Histogram.h>
 #include <vImage/Morphology.h>
-
+#include <vImage/BasicImageTypes.h>         /* New for MacOS X.4 and later */
+#include <vImage/Transform.h>               /* New for MacOS X.4 and later */
 
 #endif /* VIMAGE_H */

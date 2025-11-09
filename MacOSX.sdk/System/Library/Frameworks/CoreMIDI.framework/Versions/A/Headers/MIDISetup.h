@@ -6,7 +6,7 @@
  	Version:	Technology: Mac OS X
  				Release:	Mac OS X
  
- 	Copyright:  (c) 2000-2001 by Apple Computer, Inc., all rights reserved.
+ 	Copyright:  (c) 2000-2005 by Apple Computer, Inc., all rights reserved.
  
  	Bugs?:  	For bug reports, consult the following page on
  				the World Wide Web:
@@ -24,7 +24,7 @@
 
 //  -----------------------------------------------------------------------------
 /*!
-	@header MIDISetup
+	@header MIDISetup.h
 
 	This header defines functions that manipulate and customize the global
 	state of the MIDI system.  These functions are generally only needed by 
@@ -79,7 +79,7 @@ extern "C" {
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupCreate(	MIDISetupRef *outSetup );
+MIDISetupCreate(	MIDISetupRef *outSetup )					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 //  -----------------------------------------------------------------------------
@@ -97,7 +97,7 @@ MIDISetupCreate(	MIDISetupRef *outSetup );
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupDispose(	MIDISetupRef setup );
+MIDISetupDispose(	MIDISetupRef setup )						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -121,7 +121,7 @@ MIDISetupDispose(	MIDISetupRef setup );
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupInstall(	MIDISetupRef setup );
+MIDISetupInstall(	MIDISetupRef setup )						AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 //  -----------------------------------------------------------------------------
@@ -142,7 +142,7 @@ MIDISetupInstall(	MIDISetupRef setup );
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupGetCurrent(	MIDISetupRef *outSetup );
+MIDISetupGetCurrent(	MIDISetupRef *outSetup )				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 //  -----------------------------------------------------------------------------
@@ -166,7 +166,7 @@ MIDISetupGetCurrent(	MIDISetupRef *outSetup );
 */
 extern OSStatus
 MIDISetupToData(	MIDISetupRef	setup,
-					CFDataRef *		outData );
+					CFDataRef *		outData )					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -189,7 +189,7 @@ MIDISetupToData(	MIDISetupRef	setup,
 */
 extern OSStatus
 MIDISetupFromData(	CFDataRef 		data, 
-					MIDISetupRef *	outSetup);
+					MIDISetupRef *	outSetup)					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -220,7 +220,8 @@ MIDISetupFromData(	CFDataRef 		data,
 extern OSStatus		
 MIDIDeviceAddEntity(MIDIDeviceRef device, CFStringRef name, 
 					Boolean embedded, ItemCount numSourceEndpoints,
-					ItemCount numDestinationEndpoints, MIDIEntityRef *newEntity);
+					ItemCount numDestinationEndpoints, MIDIEntityRef *newEntity)
+																AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -238,26 +239,29 @@ MIDIDeviceAddEntity(MIDIDeviceRef device, CFStringRef name,
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDIDeviceRemoveEntity(MIDIDeviceRef device, MIDIEntityRef entity);
+MIDIDeviceRemoveEntity(MIDIDeviceRef device, MIDIEntityRef entity)
+																AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
 	@function		MIDIEntityAddOrRemoveEndpoints
 
-	@discussion		Drivers may call this function to add to or remove an
-					entity's endpoints.
+	@discussion		Drivers and configuration editors may call this function to add to 
+					or remove an entity's endpoints.
 					
 					New for CoreMIDI 1.3.
 	
-	@param			device
-						The device from which an entity is to be removed.
 	@param			entity
-						The entity to be removed.
+						The entity whose endpoints are to be manipulated.
+	@param			numSourceEndpoints
+						The desired new number of source endpoints.
+	@param			numDestinationEndpoints
+						The desired new number of destination endpoints.
 	@result			An OSStatus result code.
 */
 extern OSStatus
 MIDIEntityAddOrRemoveEndpoints(MIDIEntityRef entity, ItemCount numSourceEndpoints,
-					ItemCount numDestinationEndpoints);
+					ItemCount numDestinationEndpoints)			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -274,7 +278,7 @@ MIDIEntityAddOrRemoveEndpoints(MIDIEntityRef entity, ItemCount numSourceEndpoint
 						The device to be added.
 */
 extern OSStatus
-MIDISetupAddDevice(		MIDIDeviceRef device );
+MIDISetupAddDevice(		MIDIDeviceRef device )					AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -296,7 +300,7 @@ MIDISetupAddDevice(		MIDIDeviceRef device );
 						The device to be added.
 */
 extern OSStatus
-MIDISetupRemoveDevice(	MIDIDeviceRef device );
+MIDISetupRemoveDevice(	MIDIDeviceRef device )				AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -310,7 +314,7 @@ MIDISetupRemoveDevice(	MIDIDeviceRef device );
 						The device to be added.
 */
 extern OSStatus
-MIDISetupAddExternalDevice(	MIDIDeviceRef device );
+MIDISetupAddExternalDevice(	MIDIDeviceRef device )			AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -324,7 +328,7 @@ MIDISetupAddExternalDevice(	MIDIDeviceRef device );
 						The device to be removed.
 */
 extern OSStatus
-MIDISetupRemoveExternalDevice( MIDIDeviceRef device );
+MIDISetupRemoveExternalDevice( MIDIDeviceRef device )		AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 //  -----------------------------------------------------------------------------
@@ -355,7 +359,7 @@ MIDISetupRemoveExternalDevice( MIDIDeviceRef device );
 */
 extern OSStatus
 MIDIGetSerialPortOwner(	CFStringRef			portName, 
-						CFStringRef *		outDriverName );
+						CFStringRef *		outDriverName )	AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -378,7 +382,7 @@ MIDIGetSerialPortOwner(	CFStringRef			portName,
 */
 extern OSStatus
 MIDISetSerialPortOwner(	CFStringRef			portName, 
-						CFStringRef			driverName );
+						CFStringRef			driverName )	AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -400,7 +404,7 @@ MIDISetSerialPortOwner(	CFStringRef			portName,
 	@result			An OSStatus result code.	
 */
 extern OSStatus
-MIDIGetSerialPortDrivers(	CFArrayRef *outDriverNames );
+MIDIGetSerialPortDrivers(	CFArrayRef *outDriverNames )	AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -426,7 +430,8 @@ MIDIGetSerialPortDrivers(	CFArrayRef *outDriverNames );
 */
 extern OSStatus		
 MIDIExternalDeviceCreate(CFStringRef name, CFStringRef manufacturer, 
-							CFStringRef model, MIDIDeviceRef *outDevice);
+							CFStringRef model, MIDIDeviceRef *outDevice)
+															AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 #ifdef __cplusplus

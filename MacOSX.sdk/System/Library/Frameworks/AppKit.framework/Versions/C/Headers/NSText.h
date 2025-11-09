@@ -1,7 +1,7 @@
 /*
 	NSText.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -28,9 +28,17 @@ typedef enum _NSTextAlignment {
     NSLeftTextAlignment		= 0, /* Visually left aligned */
     NSRightTextAlignment	= 1, /* Visually right aligned */
     NSCenterTextAlignment	= 2,
-    NSJustifiedTextAlignment	= 3,
+    NSJustifiedTextAlignment	= 3, /* Fully-justified. The last line in a paragraph is natural-aligned. */
     NSNaturalTextAlignment	= 4  /* Indicates the default alignment for script */
 } NSTextAlignment;
+
+typedef enum _NSWritingDirection {
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+    NSWritingDirectionNatural = -1, /* Determines direction using the Unicode Bidi Algorithm rules P2 and P3 */
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
+    NSWritingDirectionLeftToRight = 0,	/* Left to right writing direction */
+    NSWritingDirectionRightToLeft	/* Right to left writing direction */
+} NSWritingDirection;
 
 /* Movement codes for movement between fields; these codes are the intValue of the NSTextMovement key in NSTextDidEndEditing notifications, and are used when completions change in the NSTextView method insertCompletion:forPartialWordRange:movement:isFinal:.  Note that the value 0 is used for movements that do not fall under any of the other values, hence NSOtherTextMovement is a more appropriate name than the previous NSIllegalTextMovement.
 */
@@ -53,7 +61,7 @@ enum {
 
 @interface NSText : NSView <NSChangeSpelling, NSIgnoreMisspelledWords> {
     /*All instance variables are private*/
-    void *_ivars;
+    id _ivars;
 }
 
 - (NSString *)string;
@@ -91,6 +99,10 @@ enum {
 - (NSColor *)textColor;
 - (NSTextAlignment)alignment;
 - (void)setAlignment:(NSTextAlignment)mode;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (NSWritingDirection)baseWritingDirection;
+- (void)setBaseWritingDirection:(NSWritingDirection)writingDirection;
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
 - (void)setFieldEditor:(BOOL)flag; /* A BOOL to indicate whether to end on CR, TAB, etc */
 - (BOOL)isFieldEditor;

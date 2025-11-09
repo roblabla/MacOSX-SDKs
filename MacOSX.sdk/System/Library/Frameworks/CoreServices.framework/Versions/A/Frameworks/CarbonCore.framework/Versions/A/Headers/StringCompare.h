@@ -3,9 +3,9 @@
  
      Contains:   Public interfaces for String Comparison and related operations
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -99,10 +99,17 @@ enum {
  *  These routines are available in Carbon with the new names.
  */
 /*
- *  [Mac]ReplaceText()
+ *  [Mac]ReplaceText()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringReplace instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringReplace instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -113,28 +120,42 @@ extern short
 MacReplaceText(
   Handle   baseText,
   Handle   substitutionText,
-  Str15    key)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str15    key)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  ScriptOrder()
+ *  ScriptOrder()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringCompare or UCCompareText instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringCompare or UCCompareText instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
 ScriptOrder(
   ScriptCode   script1,
-  ScriptCode   script2)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ScriptCode   script2)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  [Mac]CompareString()
+ *  [Mac]CompareString()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringCompare or UCCompareText instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringCompare or UCCompareText instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -145,14 +166,21 @@ extern short
 MacCompareString(
   ConstStr255Param   aStr,
   ConstStr255Param   bStr,
-  Handle             itl2Handle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle             itl2Handle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  IdenticalString()
+ *  IdenticalString()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringCompare instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringCompare instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -160,14 +188,21 @@ extern short
 IdenticalString(
   ConstStr255Param   aStr,
   ConstStr255Param   bStr,
-  Handle             itl2Handle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle             itl2Handle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  StringOrder()
+ *  StringOrder()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringCompare or UCCompareText instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringCompare or UCCompareText instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -178,14 +213,21 @@ StringOrder(
   ScriptCode         aScript,
   ScriptCode         bScript,
   LangCode           aLang,
-  LangCode           bLang)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  LangCode           bLang)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  CompareText()
+ *  CompareText()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringCompare or UCCompareText instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringCompare or UCCompareText instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -195,14 +237,21 @@ CompareText(
   const void *  bPtr,
   short         aLen,
   short         bLen,
-  Handle        itl2Handle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle        itl2Handle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  IdenticalText()
+ *  IdenticalText()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringCompare instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringCompare instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -212,14 +261,21 @@ IdenticalText(
   const void *  bPtr,
   short         aLen,
   short         bLen,
-  Handle        itl2Handle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle        itl2Handle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  TextOrder()
+ *  TextOrder()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringCompare or UCCompareText instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringCompare or UCCompareText instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -232,21 +288,28 @@ TextOrder(
   ScriptCode    aScript,
   ScriptCode    bScript,
   LangCode      aLang,
-  LangCode      bLang)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  LangCode      bLang)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  LanguageOrder()
+ *  LanguageOrder()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringCompare or UCCompareText instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringCompare or UCCompareText instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern short 
 LanguageOrder(
   LangCode   language1,
-  LangCode   language2)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  LangCode   language2)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
@@ -292,6 +355,7 @@ LanguageOrder(
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
+
 
 
 /*
@@ -444,10 +508,17 @@ LanguageOrder(
 
 
 /*
- *  RelString()
+ *  RelString()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringCompare or UCCompareText instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringCompare or UCCompareText instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -456,14 +527,21 @@ RelString(
   ConstStr255Param   str1,
   ConstStr255Param   str2,
   Boolean            caseSensitive,
-  Boolean            diacSensitive)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean            diacSensitive)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  EqualString()
+ *  EqualString()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringCompare instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringCompare instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -472,14 +550,21 @@ EqualString(
   ConstStr255Param   str1,
   ConstStr255Param   str2,
   Boolean            caseSensitive,
-  Boolean            diacSensitive)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean            diacSensitive)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  relstring()
+ *  relstring()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringCompare or UCCompareText instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringCompare or UCCompareText instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -488,7 +573,7 @@ relstring(
   const char *  str1,
   const char *  str2,
   Boolean       caseSensitive,
-  Boolean       diacSensitive)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean       diacSensitive)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*

@@ -22,35 +22,14 @@
 /*
  * @OSF_COPYRIGHT@
  */
-/*
- * HISTORY
- * 
- * Revision 1.1.1.1  1998/09/22 21:05:31  wsanchez
- * Import of Mac OS X kernel (~semeria)
- *
- * Revision 1.1.1.1  1998/03/07 02:25:47  wsanchez
- * Import of OSF Mach kernel (~mburg)
- *
- * Revision 1.1.6.3  1995/01/10  05:16:26  devrcs
- * 	mk6 CR801 - copyright marker not FREE_
- * 	[1994/12/01  19:25:21  dwm]
- *
- * Revision 1.1.6.1  1994/08/07  20:48:54  bolinger
- * 	Merge up to colo_b7.
- * 	[1994/08/01  21:01:26  bolinger]
- * 
- * Revision 1.1.4.1  1994/06/25  03:47:07  dwm
- * 	mk6 CR98 - new file to hold MD THREAD_STATE_MAX
- * 	[1994/06/24  21:54:48  dwm]
- * 
- * $EndLog$
- */
+
 #ifndef _MACH_I386_THREAD_STATE_H_
 #define _MACH_I386_THREAD_STATE_H_
 
-#define I386_THREAD_STATE_MAX	144
+/* Size of maximum exported thread state in words */
+#define I386_THREAD_STATE_MAX	(144)    /* Size of biggest state possible */
 
-#if defined (__i386__)
+#if defined (__i386__) || defined(__x86_64__)
 #define THREAD_STATE_MAX	I386_THREAD_STATE_MAX
 #endif
 

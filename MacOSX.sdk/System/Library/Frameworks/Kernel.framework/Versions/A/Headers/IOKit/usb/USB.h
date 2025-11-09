@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2003 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -21,69 +21,6 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef __OPEN_SOURCE__
-/*
- *
- *	$Log: USB.h,v $
- *	Revision 1.44.8.3  2005/01/11 23:29:22  rhoads
- *	commit the Tiger EHCI driver to the update
- *	
- *	Revision 1.44.8.2  2004/10/25 15:38:06  nano
- *	Call close with gate held if indicated by property.
- *	
- *	Revision 1.44.8.1.28.1  2004/10/20 15:27:38  nano
- *	Potential submissions to Sandbox -- create their own branch
- *	
- *	Bug #:
- *	<rdar://problem/3826068> USB devices on a P30 attached to Q88 do not function after restart
- *	<rdar://problem/3779852> Q16B EVT Build run in fail Checkconfig Bluetooth *2
- *	<rdar://problem/3816739>IOUSBFamily needs to support polling interval for High Speed devices
- *	<rdar://problem/3816743> Low latency for hi-speed API do not fill frTimeStamp.hi and low in completion.
- *	<rdar://problem/3816749> Low latency for hi-speed API incorrectly treats buffer striding across mem-page
- *	
- *	Submitted by:
- *	Reviewed by:
- *	
- *	Revision 1.44.8.1  2003/12/21 22:38:01  nano
- *	Add couple of defines to munge packet size and to key  the loading of the interface drivers with the gate held.
- *	
- *	Revision 1.45.16.3  2003/12/04 20:39:25  rhoads
- *	bug fix to the mungeMaxPacketSize macro
- *	
- *	Revision 1.45.16.2  2003/11/20 20:29:46  barryt
- *	Fix off by one error in shift
- *	
- *	Revision 1.45.16.1  2003/11/20 19:52:34  barryt
- *	Munge high-speed, high-bandwidth endpoint sizes to be correct.
- *	
- *	Revision 1.45  2003/10/14 22:06:18  nano
- *	Ådded kCallInterfaceOpenWithGate.
- *	
- *	Revision 1.44  2003/09/10 19:07:17  nano
- *	Merge in branches to fix #3406994 (make SuspendDevice synchronous)
- *	
- *	Revision 1.43.2.1  2003/09/10 18:33:40  nano
- *	Add port has been suspended message.
- *	
- *	Revision 1.43  2003/09/10 16:28:00  nano
- *	Added missing iFunction in IOUSBInterfaceAssociationDescriptor.
- *	
- *	Revision 1.42  2003/08/20 19:41:40  nano
- *	
- *	Bug #:
- *	New version's of Nima's USB Prober (2.2b17)
- *	3382540  Panther: Ejecting a USB CardBus card can freeze a machine
- *	3358482  Device Busy message with Modems and IOUSBFamily 201.2.14 after sleep
- *	3385948  Need to implement device recovery on High Speed Transaction errors to full speed devices
- *	3377037  USB EHCI: returnTransactions can cause unstable queue if transactions are aborted
- *	
- *	Also, updated most files to use the id/log functions of cvs
- *	
- *	Submitted by: nano
- *	Reviewed by: rhoads/barryt/nano
- *	
- */
-#endif
 #ifndef _USB_H
 #define _USB_H
 
@@ -255,15 +192,9 @@ enum {
 
 /*!
 @defined kCallInterfaceOpenWithGate
- @discussion If the USB Device Nub has this property, drivers for any of its interfaces will have their handleOpen method called while holding the workloop gate.
+ @discussion If the USB Device has this property, drivers for any of its interfaces will have their handleOpen method called while holding the workloop gate.
  */
 #define kCallInterfaceOpenWithGate	"kCallInterfaceOpenWithGate"
-
-/*!
-@defined kCallInterfaceCloseWithGate
- @discussion If the USB Device Nub has this property, drivers for any of its interfaces will have their handleclose method called while holding the workloop gate.
- */
-#define kCallInterfaceCloseWithGate	"kCallInterfaceCloseWithGate"
 
 // TYPES
 
@@ -302,18 +233,18 @@ struct IOUSBLowLatencyIsocFrame {
 typedef struct IOUSBLowLatencyIsocFrame IOUSBLowLatencyIsocFrame;
 
 /*!
-    @typedef IOUSBCompletionAction
-    @discussion Function called when USB I/O completes.
-    @param target The target specified in the IOUSBCompletion struct.
-    @param parameter The parameter specified in the IOUSBCompletion struct.
-    @param status Completion status.
-    @param bufferSizeRemaining Bytes left to be transferred.
-*/
+@typedef IOUSBCompletionAction
+ @discussion Function called when USB I/O completes.
+ @param target The target specified in the IOUSBCompletion struct.
+ @param parameter The parameter specified in the IOUSBCompletion struct.
+ @param status Completion status.
+ @param bufferSizeRemaining Bytes left to be transferred.
+ */
 typedef void (*IOUSBCompletionAction)(
-                void *			target,
-                void *			parameter,
-                IOReturn		status,
-                UInt32			bufferSizeRemaining);
+                                      void *			target,
+                                      void *			parameter,
+                                      IOReturn		status,
+                                      UInt32			bufferSizeRemaining);
 
 /*!
 @typedef IOUSBCompletionActionWithTimeStamp
@@ -360,12 +291,12 @@ typedef void (*IOUSBLowLatencyIsocCompletionAction)(
                 IOUSBLowLatencyIsocFrame	*pFrames);
 
 /*!
-    @typedef IOUSBCompletion
-    @discussion Struct specifying action to perform when a USB I/O completes.
-    @param target The target to pass to the action function.
-    @param action The function to call.
-    @param parameter The parameter to pass to the action function.
-*/
+@typedef IOUSBCompletion
+ @discussion Struct specifying action to perform when a USB I/O completes.
+ @param target The target to pass to the action function.
+ @param action The function to call.
+ @param parameter The parameter to pass to the action function.
+ */
 typedef struct IOUSBCompletion {
     void * 			target;
     IOUSBCompletionAction	action;
@@ -432,6 +363,7 @@ typedef struct IOUSBLowLatencyIsocCompletion {
 #define kIOUSBLowLatencyFrameListNotPreviouslyAllocated     iokit_usb_err(76)  // 0xe000404c  Attempted to use user land low latency isoc calls w/out calling PrepareBuffer (on the frame list) first
 #define kIOUSBHighSpeedSplitError     iokit_usb_err(75) // 0xe000404b Error to hub on high speed bus trying to do split transaction
 #define kIOUSBSyncRequestOnWLThread	iokit_usb_err(74)	// 0xe000404a  A synchronous USB request was made on the workloop thread (from a callback?).  Only async requests are permitted in that case
+#define kIOUSBDeviceNotHighSpeed	iokit_usb_err(73)	// 0xe0004049  The device is not a high speed device, so the EHCI driver returns an error
 
 /*!
 @defined IOUSBFamily hardware error codes
@@ -464,18 +396,22 @@ Completion Code         Error Returned              Description
 @defined IOUSBFamily message codes
 @discussion  Messages specific to the IOUSBFamily.  Note that the iokit_usb_msg(x) translates to 0xe0004xxx, where xxx is the value in parenthesis as a hex number.
 */
-#define iokit_usb_msg(message)              (UInt32)(sys_iokit|sub_iokit_usb|message)
-#define kIOUSBMessageHubResetPort           iokit_usb_msg(1)   // 0xe00004001  Message sent to a hub to reset a particular port
-#define kIOUSBMessageHubSuspendPort         iokit_usb_msg(2)   // 0xe00004002  Message sent to a hub to suspend a particular port
-#define kIOUSBMessageHubResumePort          iokit_usb_msg(3)   // 0xe00004003  Message sent to a hub to resume a particular port
-#define kIOUSBMessageHubIsDeviceConnected   iokit_usb_msg(4)   // 0xe00004004  Message sent to a hub to inquire whether a particular port has a device connected or not
-#define kIOUSBMessageHubIsPortEnabled       iokit_usb_msg(5)   // 0xe00004005  Message sent to a hub to inquire whether a particular port is enabled or not
-#define kIOUSBMessageHubReEnumeratePort     iokit_usb_msg(6)   // 0xe00004006  Message sent to a hub to reenumerate the device attached to a particular port
-#define kIOUSBMessagePortHasBeenReset       iokit_usb_msg(10)  // 0xe0000400a  Message sent to a device indicating that the port it is attached to has been reset
-#define kIOUSBMessagePortHasBeenResumed     iokit_usb_msg(11)  // 0xe0000400b  Message sent to a device indicating that the port it is attached to has been resumed
-#define kIOUSBMessageHubPortClearTT         iokit_usb_msg(12)  // 0xe0000400c  Message sent to a hub to clear the transaction translator
-#define kIOUSBMessagePortHasBeenSuspended   iokit_usb_msg(13)  // 0xe0000400d  Message sent to a device indicating that the port it is attached to has been suspended
-#define kIOUSBMessageFromThirdParty         iokit_usb_msg(14)  // 0xe0000400d  Message send from a third party.  Uses IOUSBThirdPartyParam to encode the sender's ID
+#define iokit_usb_msg(message)						(UInt32)(sys_iokit|sub_iokit_usb|message)
+#define kIOUSBMessageHubResetPort					iokit_usb_msg(1)   // 0xe00004001  Message sent to a hub to reset a particular port
+#define kIOUSBMessageHubSuspendPort					iokit_usb_msg(2)   // 0xe00004002  Message sent to a hub to suspend a particular port
+#define kIOUSBMessageHubResumePort					iokit_usb_msg(3)   // 0xe00004003  Message sent to a hub to resume a particular port
+#define kIOUSBMessageHubIsDeviceConnected			iokit_usb_msg(4)   // 0xe00004004  Message sent to a hub to inquire whether a particular port has a device connected or not
+#define kIOUSBMessageHubIsPortEnabled				iokit_usb_msg(5)   // 0xe00004005  Message sent to a hub to inquire whether a particular port is enabled or not
+#define kIOUSBMessageHubReEnumeratePort				iokit_usb_msg(6)   // 0xe00004006  Message sent to a hub to reenumerate the device attached to a particular port
+#define kIOUSBMessagePortHasBeenReset				iokit_usb_msg(10)  // 0xe0000400a  Message sent to a device indicating that the port it is attached to has been reset
+#define kIOUSBMessagePortHasBeenResumed				iokit_usb_msg(11)  // 0xe0000400b  Message sent to a device indicating that the port it is attached to has been resumed
+#define kIOUSBMessageHubPortClearTT					iokit_usb_msg(12)  // 0xe0000400c  Message sent to a hub to clear the transaction translator
+#define kIOUSBMessagePortHasBeenSuspended			iokit_usb_msg(13)  // 0xe0000400d  Message sent to a device indicating that the port it is attached to has been suspended
+#define kIOUSBMessageFromThirdParty					iokit_usb_msg(14)  // 0xe0000400e  Message sent from a third party.  Uses IOUSBThirdPartyParam to encode the sender's ID
+#define kIOUSBMessagePortWasNotSuspended			iokit_usb_msg(15)  // 0xe0000400f  Message indicating that the hub driver received a resume request for a port that was not suspended
+#define kIOUSBMessageExpressCardCantWake			iokit_usb_msg(16)  // 0xe00004010  Message from a driver to a bus that an express card will disconnect on sleep and thus shouldn't wake
+#define kIOUSBMessageCompositeDriverReconfigured    iokit_usb_msg(17)  // 0xe00004011  Message from the composite driver indicating that it has finished re-configuring the device after a reset
+#define kIOUSBMessageRequestExtraPower				iokit_usb_msg(18)  // 0xe00004012  Message indicating a desire to have more power than the 500ma normally available
 
 // Obsolete
 //
@@ -983,13 +919,14 @@ enum {
     kUSBHighSpeedMicrosecondsInFrame		= 125
 };
 
-//  This is a debugging tool used for low latency transfers
+//  During low latency transfers, the stack will set the frStatus for each frame to this value.  A client can check that to see if the transfer has completed.  We set the frStatus to a 
+//  valid return code when the transfer completes.
 //
 enum {
         kUSBLowLatencyIsochTransferKey	= 'llit'	// Set frStatus field of first frame in isoch transfer to designate as low latency
     };
     
-// This structure is used to pass information for the low latency calls between user space and the kernel.  
+// This structure is DEPRECATED.  See the LowLatencyUserBufferInfoV2  
 //
 typedef struct LowLatencyUserBufferInfo LowLatencyUserBufferInfo;
 
@@ -1000,6 +937,21 @@ struct LowLatencyUserBufferInfo {
     UInt32				bufferType;
     Boolean				isPrepared;
     LowLatencyUserBufferInfo *	nextBuffer;
+};
+
+// This structure is used to pass information for the low latency calls between user space and the kernel.  
+//
+typedef struct LowLatencyUserBufferInfoV2 LowLatencyUserBufferInfoV2;
+
+struct LowLatencyUserBufferInfoV2 
+{
+    UInt32							cookie;
+    void *							bufferAddress;
+    IOByteCount						bufferSize;
+    UInt32							bufferType;
+    Boolean							isPrepared;
+	void *							mappedUHCIAddress;
+    LowLatencyUserBufferInfoV2 *	nextBuffer;
 };
 
 
@@ -1033,7 +985,11 @@ enum {
 #define kUSBDevicePropertyBusPowerAvailable     "Bus Power Available"
 #define kUSBDevicePropertyAddress               "USB Address"
 #define kUSBDevicePropertyLocationID            "locationID"
-
+#define kUSBProductIDMask						"idProductMask"
+#define kUSBPreferredConfiguration				"Preferred Configuration"
+#define kUSBSuspendPort							"kSuspendPort"
+#define kUSBExpressCardCantWake					"ExpressCardCantWake"
+#define kUSBControllerNeedsContiguousMemoryForIsoch	"Need contiguous memory for isoch"
 /*!
 @enum USBReEnumerateOptions
  @discussion Options used when calling ReEnumerateDevice. 

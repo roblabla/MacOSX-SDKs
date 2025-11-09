@@ -3,9 +3,9 @@
  
      Contains:   Keychain low-level Interfaces
  
-     Version:    SecurityCore-61~29
+     Version:    SecurityCore-25606~262
  
-     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -536,10 +536,10 @@ InvokeKCCallbackUPP(
 extern OSStatus 
 KCFindAppleSharePassword(
   AFPServerSignature *  serverSignature,       /* can be NULL */
-  StringPtr             serverAddress,         /* can be NULL */
-  StringPtr             serverName,            /* can be NULL */
-  StringPtr             volumeName,            /* can be NULL */
-  StringPtr             accountName,           /* can be NULL */
+  ConstStringPtr        serverAddress,         /* can be NULL */
+  ConstStringPtr        serverName,            /* can be NULL */
+  ConstStringPtr        volumeName,            /* can be NULL */
+  ConstStringPtr        accountName,           /* can be NULL */
   UInt32                maxLength,
   void *                passwordData,
   UInt32 *              actualLength,
@@ -556,16 +556,16 @@ KCFindAppleSharePassword(
  */
 extern OSStatus 
 KCFindInternetPassword(
-  StringPtr    serverName,           /* can be NULL */
-  StringPtr    securityDomain,       /* can be NULL */
-  StringPtr    accountName,          /* can be NULL */
-  UInt16       port,
-  OSType       protocol,
-  OSType       authType,
-  UInt32       maxLength,
-  void *       passwordData,
-  UInt32 *     actualLength,
-  KCItemRef *  item)                 /* can be NULL */        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstStringPtr   serverName,           /* can be NULL */
+  ConstStringPtr   securityDomain,       /* can be NULL */
+  ConstStringPtr   accountName,          /* can be NULL */
+  UInt16           port,
+  OSType           protocol,
+  OSType           authType,
+  UInt32           maxLength,
+  void *           passwordData,
+  UInt32 *         actualLength,
+  KCItemRef *      item)                 /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -578,17 +578,17 @@ KCFindInternetPassword(
  */
 extern OSStatus 
 KCFindInternetPasswordWithPath(
-  StringPtr    serverName,           /* can be NULL */
-  StringPtr    securityDomain,       /* can be NULL */
-  StringPtr    accountName,          /* can be NULL */
-  StringPtr    path,                 /* can be NULL */
-  UInt16       port,
-  OSType       protocol,
-  OSType       authType,
-  UInt32       maxLength,
-  void *       passwordData,
-  UInt32 *     actualLength,
-  KCItemRef *  item)                 /* can be NULL */        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstStringPtr   serverName,           /* can be NULL */
+  ConstStringPtr   securityDomain,       /* can be NULL */
+  ConstStringPtr   accountName,          /* can be NULL */
+  ConstStringPtr   path,                 /* can be NULL */
+  UInt16           port,
+  OSType           protocol,
+  OSType           authType,
+  UInt32           maxLength,
+  void *           passwordData,
+  UInt32 *         actualLength,
+  KCItemRef *      item)                 /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -601,12 +601,12 @@ KCFindInternetPasswordWithPath(
  */
 extern OSStatus 
 KCFindGenericPassword(
-  StringPtr    serviceName,        /* can be NULL */
-  StringPtr    accountName,        /* can be NULL */
-  UInt32       maxLength,
-  void *       passwordData,
-  UInt32 *     actualLength,
-  KCItemRef *  item)               /* can be NULL */          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstStringPtr   serviceName,        /* can be NULL */
+  ConstStringPtr   accountName,        /* can be NULL */
+  UInt32           maxLength,
+  void *           passwordData,
+  UInt32 *         actualLength,
+  KCItemRef *      item)               /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Keychain Manager callbacks */

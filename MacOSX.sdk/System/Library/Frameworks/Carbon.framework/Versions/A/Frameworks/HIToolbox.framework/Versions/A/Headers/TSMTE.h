@@ -1,11 +1,11 @@
 /*
      File:       HIToolbox/TSMTE.h
  
-     Contains:   Text Services Managerfor TextEdit Interfaces.
+     Contains:   Text Services Managerfor TextEdit Interfaces. All Textedit functions as well all functions in
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1991-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1991-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -13,6 +13,13 @@
                      http://developer.apple.com/bugreporter/
  
 */
+/*****************************************************************************************************************
+    
+    All Textedit functions as well all functions in this file are deprecated for Mac OS 10.4. The Multilingual Text 
+    Engine (MLTE) API is recommended instead. MLTE support for inline input is built-in so there is no need for an 
+    API parallel to TSMTE on Mac OS X. Please see MacTextEditor.h file for a description of the MLTE API.
+
+******************************************************************************************************************/
 #ifndef __TSMTE__
 #define __TSMTE__
 
@@ -108,7 +115,7 @@ typedef TSMDialogPtr                    TSMDialogPeek;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern TSMTEPreUpdateUPP
-NewTSMTEPreUpdateUPP(TSMTEPreUpdateProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewTSMTEPreUpdateUPP(TSMTEPreUpdateProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  NewTSMTEPostUpdateUPP()
@@ -119,7 +126,7 @@ NewTSMTEPreUpdateUPP(TSMTEPreUpdateProcPtr userRoutine)       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern TSMTEPostUpdateUPP
-NewTSMTEPostUpdateUPP(TSMTEPostUpdateProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewTSMTEPostUpdateUPP(TSMTEPostUpdateProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  DisposeTSMTEPreUpdateUPP()
@@ -130,7 +137,7 @@ NewTSMTEPostUpdateUPP(TSMTEPostUpdateProcPtr userRoutine)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeTSMTEPreUpdateUPP(TSMTEPreUpdateUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeTSMTEPreUpdateUPP(TSMTEPreUpdateUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  DisposeTSMTEPostUpdateUPP()
@@ -141,7 +148,7 @@ DisposeTSMTEPreUpdateUPP(TSMTEPreUpdateUPP userUPP)           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeTSMTEPostUpdateUPP(TSMTEPostUpdateUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeTSMTEPostUpdateUPP(TSMTEPostUpdateUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  InvokeTSMTEPreUpdateUPP()
@@ -155,7 +162,7 @@ extern void
 InvokeTSMTEPreUpdateUPP(
   TEHandle           textH,
   long               refCon,
-  TSMTEPreUpdateUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TSMTEPreUpdateUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  InvokeTSMTEPostUpdateUPP()
@@ -174,87 +181,87 @@ InvokeTSMTEPostUpdateUPP(
   long                pinStart,
   long                pinEnd,
   long                refCon,
-  TSMTEPostUpdateUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TSMTEPostUpdateUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
- *  IsTSMTEDialog()
+ *  IsTSMTEDialog()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
 extern Boolean 
-IsTSMTEDialog(DialogRef dialog)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+IsTSMTEDialog(DialogRef dialog)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* Getters */
 /*
- *  GetTSMTEDialogDocumentID()
+ *  GetTSMTEDialogDocumentID()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
 extern TSMDocumentID 
-GetTSMTEDialogDocumentID(DialogRef dialog)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetTSMTEDialogDocumentID(DialogRef dialog)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetTSMTEDialogTSMTERecHandle()
+ *  GetTSMTEDialogTSMTERecHandle()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
 extern TSMTERecHandle 
-GetTSMTEDialogTSMTERecHandle(DialogRef dialog)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetTSMTEDialogTSMTERecHandle(DialogRef dialog)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* Setters */
 /*
- *  SetTSMTEDialogDocumentID()
+ *  SetTSMTEDialogDocumentID()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
 extern void 
 SetTSMTEDialogDocumentID(
   DialogRef       dialog,
-  TSMDocumentID   documentID)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TSMDocumentID   documentID)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SetTSMTEDialogTSMTERecHandle()
+ *  SetTSMTEDialogTSMTERecHandle()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
 extern void 
 SetTSMTEDialogTSMTERecHandle(
   DialogRef        dialog,
-  TSMTERecHandle   tsmteRecHandle)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TSMTERecHandle   tsmteRecHandle)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 

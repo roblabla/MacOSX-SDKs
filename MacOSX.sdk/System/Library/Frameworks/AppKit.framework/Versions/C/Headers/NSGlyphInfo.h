@@ -1,6 +1,6 @@
 /*	
 	NSGlyphInfo.h
-	Copyright (c) 2002-2003, Apple Computer, Inc.
+	Copyright (c) 2002-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -17,7 +17,7 @@ typedef enum {
     NSAdobeKorea1CharacterCollection = 5, // Adobe-Korea1
 } NSCharacterCollection;
 
-@interface NSGlyphInfo : NSObject <NSCoding> {
+@interface NSGlyphInfo : NSObject <NSCopying, NSCoding> {
     NSString *_baseString;
 }
 

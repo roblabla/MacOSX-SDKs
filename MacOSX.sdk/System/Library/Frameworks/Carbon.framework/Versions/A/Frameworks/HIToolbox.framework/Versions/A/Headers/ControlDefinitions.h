@@ -3,9 +3,9 @@
  
      Contains:   Definitions of controls provided by the Control Manager
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -825,9 +825,8 @@ SetDisclosureTriangleLastValue(
 /*  ¥ PROGRESS INDICATOR (CDEF 5)                                                       */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  This CDEF implements both determinate and indeterminate progress bars. To switch,   */
-/*  just use SetControlData to set the indeterminate flag to make it indeterminate call */
-/*  IdleControls to step thru the animation. IdleControls should be called at least     */
-/*  once during your event loop.                                                        */
+/*  just use SetControlData to set the indeterminate flag to make it indeterminate. Any */
+/*  animation will automatically be handled by the toolbox on an event timer.           */
 /*                                                                                      */
 /*  We also use this same CDEF for Relevance bars. At this time this control does not   */
 /*  idle.                                                                               */
@@ -954,7 +953,7 @@ CreateLittleArrowsControl(
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  ¥ CHASING ARROWS (CDEF 7)                                                           */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/*  To animate this control, make sure to call IdleControls repeatedly.                 */
+/*  This control will automatically animate via an event loop timer.                    */
 /*                                                                                      */
 /* Chasing Arrows proc IDs */
 enum {
@@ -1009,6 +1008,17 @@ enum {
 /*  with the kControlTabInfoTag, passing in a pointer to a ControlTabInfoRec. This sets */
 /*  the name and optionally an icon for a tab. Pass the 1-based tab index as the part   */
 /*  code parameter to SetControlData to indicate the tab that you want to modify.       */
+/*                                                                                      */
+/*  Accessibility Notes: Those of you who wish to customize the accessibility           */
+/*  information provided for individual tabs of a tabs control -- by handling various   */
+/*  kEventClassAccessibility Carbon Events, by calling                                  */
+/*  HIObjectSetAuxiliaryAccessibilityAttribute, etc. -- need to know how to interpret   */
+/*  and/or build AXUIElementRefs that represent individual tabs. The AXUIElement        */
+/*  representing an individual tab will/must be constructed using the tab control's     */
+/*  ControlRef and the UInt64 identifier of the one-based index of the tab the element  */
+/*  refers to. As usual, a UInt64 identifier of zero represents the tabs control as a   */
+/*  whole. You must neither interpret nor create tab control elements whose identifiers */
+/*  are greater than the count of tabs in the tabs control.                             */
 /* Tabs proc IDs */
 enum {
   kControlTabLargeProc          = 128,  /* Large tab size, north facing   */
@@ -1568,8 +1578,8 @@ enum {
  *  Parameters:
  *    
  *    window:
- *      The window that should contain the control. May be NULL on Mac
- *      OS X 10.3 and later.
+ *      The window that should contain the control. May be NULL on 10.3
+ *      and later.
  *    
  *    boundsRect:
  *      The bounding box of the control.
@@ -1624,8 +1634,8 @@ enum {
  *  Parameters:
  *    
  *    window:
- *      The window that should contain the control. May be NULL on Mac
- *      OS X 10.3 and later.
+ *      The window that should contain the control. May be NULL on 10.3
+ *      and later.
  *    
  *    boundsRect:
  *      The bounding box of the control.
@@ -1760,6 +1770,8 @@ enum {
   kControlKindUserPane          = 'upan'
 };
 
+/* The HIObject class ID for the HIUserPane class. */
+#define kHIUserPaneClassID              CFSTR("com.apple.HIUserPane")
 /* Creation API: Carbon only */
 /*
  *  CreateUserPaneControl()
@@ -2122,7 +2134,10 @@ enum {
 };
 
 /*
- *  CreateEditTextControl()
+ *  CreateEditTextControl()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CreateEditUnicodeTextControl API instead.
  *  
  *  Summary:
  *    Creates a new edit text control.
@@ -2130,8 +2145,7 @@ enum {
  *  Discussion:
  *    This control is a legacy control. It is deprecated in favor of
  *    the EditUnicodeText control, which handles Unicode and draws its
- *    text using antialiasing. If you are creating a new text field,
- *    please use CreateEditUnicodeTextControl.
+ *    text using antialiasing.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -2140,7 +2154,7 @@ enum {
  *    
  *    window:
  *      The window in which the control should be placed. May be NULL
- *      in Mac OS X 10.3 and later.
+ *      in 10.3 and later.
  *    
  *    boundsRect:
  *      The bounds of the control, in local coordinates of the window.
@@ -2171,7 +2185,7 @@ enum {
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -2183,7 +2197,7 @@ CreateEditTextControl(
   Boolean                      isPassword,
   Boolean                      useInlineInput,
   const ControlFontStyleRec *  style,                /* can be NULL */
-  ControlRef *                 outControl)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ControlRef *                 outControl)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
@@ -2194,7 +2208,8 @@ enum {
   kControlEditTextTEHandleTag   = 'than', /* The TEHandle of the text edit record*/
   kControlEditTextKeyFilterTag  = kControlKeyFilterTag,
   kControlEditTextSelectionTag  = 'sele', /* ControlEditTextSelectionRec*/
-  kControlEditTextPasswordTag   = 'pass' /* The clear text password text*/
+  kControlEditTextPasswordTag   = 'pass', /* The clear text password text*/
+  kControlEditTextCharCount     = 'chrc' /* Count of characters in the control's text*/
 };
 
 /* tags available with Appearance 1.1 or later */
@@ -2306,7 +2321,7 @@ enum {
  *    
  *    window:
  *      The window in which the control should be placed. May be NULL
- *      in Mac OS X 10.3 and later.
+ *      in 10.3 and later.
  *    
  *    boundsRect:
  *      The bounds of the control, in local coordinates of the window.
@@ -2430,8 +2445,8 @@ enum {
  *  Parameters:
  *    
  *    window:
- *      The window that should contain the control. May be NULL on Mac
- *      OS X 10.3 and later.
+ *      The window that should contain the control. May be NULL on 10.3
+ *      and later.
  *    
  *    boundsRect:
  *      The bounding box of the control.
@@ -2514,7 +2529,7 @@ enum {
  *    
  *    inWindow:
  *      The WindowRef into which the Icon control will be created. May
- *      be NULL on Mac OS X 10.3 and later.
+ *      be NULL on 10.3 and later.
  *    
  *    inBoundsRect:
  *      The desired position (in coordinates local to the window's
@@ -2740,8 +2755,26 @@ enum {
 /*
  *  CreatePushButtonControl()
  *  
+ *  Summary:
+ *    Creates a push button control.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window that should contain the control. May be NULL on 10.3
+ *      and later.
+ *    
+ *    boundsRect:
+ *      The bounds of the control, in local coordinates of the window.
+ *    
+ *    title:
+ *      The control title. May be NULL.
+ *    
+ *    outControl:
+ *      On exit, contains the new control.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2752,15 +2785,40 @@ extern OSStatus
 CreatePushButtonControl(
   WindowRef     window,
   const Rect *  boundsRect,
-  CFStringRef   title,
+  CFStringRef   title,            /* can be NULL */
   ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CreatePushButtonWithIconControl()
  *  
+ *  Summary:
+ *    Creates a push button control containing an icon or other
+ *    graphical content.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window that should contain the control. May be NULL on 10.3
+ *      and later.
+ *    
+ *    boundsRect:
+ *      The bounds of the control, in local coordinates of the window.
+ *    
+ *    title:
+ *      The control title. May be NULL.
+ *    
+ *    icon:
+ *      The control graphic content.
+ *    
+ *    iconAlignment:
+ *      The alignment of the control graphic content.
+ *    
+ *    outControl:
+ *      On exit, contains the new control.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2771,17 +2829,49 @@ extern OSStatus
 CreatePushButtonWithIconControl(
   WindowRef                        window,
   const Rect *                     boundsRect,
-  CFStringRef                      title,
+  CFStringRef                      title,               /* can be NULL */
   ControlButtonContentInfo *       icon,
   ControlPushButtonIconAlignment   iconAlignment,
   ControlRef *                     outControl)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+
 /*
  *  CreateRadioButtonControl()
  *  
+ *  Summary:
+ *    Creates a radio button control.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window that should contain the control. May be NULL on 10.3
+ *      and later.
+ *    
+ *    boundsRect:
+ *      The bounds of the control, in local coordinates of the window.
+ *    
+ *    title:
+ *      The control title. May be NULL.
+ *    
+ *    initialValue:
+ *      The initial value of the control. Should be zero (off), one
+ *      (on), or two (mixed). The control is automatically given a
+ *      minimum value of zero and a maximum value of two.
+ *    
+ *    autoToggle:
+ *      Whether this control should have auto-toggle behavior. If true,
+ *      the control will automatically toggle between on and off states
+ *      when clicked. This parameter should be false if the control
+ *      will be embedded into a radio group control; in that case, the
+ *      radio group will handle setting the correct control value in
+ *      response to a click.
+ *    
+ *    outControl:
+ *      On exit, contains the new control.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2792,7 +2882,7 @@ extern OSStatus
 CreateRadioButtonControl(
   WindowRef     window,
   const Rect *  boundsRect,
-  CFStringRef   title,
+  CFStringRef   title,              /* can be NULL */
   SInt32        initialValue,
   Boolean       autoToggle,
   ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -2801,8 +2891,36 @@ CreateRadioButtonControl(
 /*
  *  CreateCheckBoxControl()
  *  
+ *  Summary:
+ *    Creates a checkbox control.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window that should contain the control. May be NULL on 10.3
+ *      and later.
+ *    
+ *    boundsRect:
+ *      The bounds of the control, in local coordinates of the window.
+ *    
+ *    title:
+ *      The control title. May be NULL.
+ *    
+ *    initialValue:
+ *      The initial value of the control. Should be zero (off), one
+ *      (on), or two (mixed). The control is automatically given a
+ *      minimum value of zero and a maximum value of two.
+ *    
+ *    autoToggle:
+ *      Whether this control should have auto-toggle behavior. If true,
+ *      the control will automatically toggle between on and off states
+ *      when clicked.
+ *    
+ *    outControl:
+ *      On exit, contains the new control.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2813,7 +2931,7 @@ extern OSStatus
 CreateCheckBoxControl(
   WindowRef     window,
   const Rect *  boundsRect,
-  CFStringRef   title,
+  CFStringRef   title,              /* can be NULL */
   SInt32        initialValue,
   Boolean       autoToggle,
   ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -2885,8 +3003,8 @@ enum {
  *  Parameters:
  *    
  *    window:
- *      The window that should contain the control. May be NULL on Mac
- *      OS X 10.3 and later.
+ *      The window that should contain the control. May be NULL on 10.3
+ *      and later.
  *    
  *    boundsRect:
  *      The bounding box of the control.
@@ -2901,8 +3019,7 @@ enum {
  *      The maximum value of the control.
  *    
  *    viewSize:
- *      Whether the width of the control is allowed to vary according
- *      to the width of the
+ *      The size of the visible area of the scroll bar content.
  *    
  *    liveTracking:
  *      A Boolean indicating whether or not live tracking is enabled
@@ -2986,8 +3103,8 @@ enum {
  *  Parameters:
  *    
  *    window:
- *      The window that should contain the control. May be NULL on Mac
- *      OS X 10.3 and later.
+ *      The window that should contain the control. May be NULL on 10.3
+ *      and later.
  *    
  *    boundsRect:
  *      The bounding box of the control.
@@ -3069,6 +3186,11 @@ enum {
 /*  The current value of the control is the index of the sub-control that is the current*/
 /*  'on' radio button. To get the current radio button control handle, you can use the  */
 /*  control manager call GetIndSubControl, passing in the value of the radio group.     */
+/*                                                                                      */
+/*  Note that when creating radio buttons for use in a radio group control, you should  */
+/*  not use the autoToggle version of the radio button. The radio group control will    */
+/*  handling toggling the radio button values itself; auto-toggle radio buttons do not  */
+/*  work properly in a radio group control on Mac OS 9.                                 */
 /*                                                                                      */
 /*  NOTE: This control is only available with Appearance 1.0.1.                         */
 /* Radio Group Proc ID */
@@ -3303,7 +3425,7 @@ enum {
  *    
  *    inWindow:
  *      The WindowRef in which to create the control. May be NULL in
- *      Mac OS X 10.3 and later.
+ *      10.3 and later.
  *    
  *    inBoundsRect:
  *      The bounding rectangle for the control. The height and width of
@@ -3379,6 +3501,8 @@ CreateRoundButtonControl(
 /*        CarbonLib 1.1 through 1.4. In Mac OS X and CarbonLib 1.5 and later, you       */
 /*        may use the control's procID (29) to create the control with NewControl       */
 /*        or with a 'CNTL' resource.                                                    */
+/* The HIObject class ID for the HIDataBrowser class. */
+#define kHIDataBrowserClassID           CFSTR("com.apple.HIDataBrowser")
 /* Control Kind Tag */
 enum {
   kControlKindDataBrowser       = 'datb'
@@ -3505,8 +3629,14 @@ enum {
   kDataBrowserSelectionSetChanged = 14  /* The selection set has been modified (net result may be the same) */
 };
 
-/* DataBrowser Property Management */
-/* 0-1023 reserved; >= 1024 for client use */
+
+/*
+ *  DataBrowserPropertyID
+ *  
+ *  Discussion:
+ *    Properties with values 0 through 1023 are reserved for Apple's
+ *    use. Values greater than or equal to 1024 are for client use.
+ */
 typedef UInt32 DataBrowserPropertyID;
 enum {
                                         /* Predefined attribute properties, optional & non-display unless otherwise stated */
@@ -3519,8 +3649,64 @@ enum {
   kDataBrowserContainerIsClosableProperty = 6L, /* Boolean typed data (defaults to true) */
   kDataBrowserContainerIsSortableProperty = 7L, /* Boolean typed data (defaults to true) */
   kDataBrowserItemSelfIdentityProperty = 8L, /* kDataBrowserIconAndTextType (display property; ColumnView only) */
+
+  /*
+   * kDataBrowserContainerAliasIDProperty is sent to your
+   * DataBrowserItemDataProcPtr callback to give you a chance to follow
+   * an alias or symlink that the item might represent. If the incoming
+   * item is an alias to another item, you can call
+   * SetDataBrowserItemDataItemID to let Data Browser know which other
+   * item the incoming item points to. 
+   * 
+   * This is only sent from column view, and your support for it is
+   * optional. It allows Data Browser to be more memory efficient with
+   * its internal storage. If a given container item is an alias to an
+   * item whose contents are already displayed in an existing column
+   * view column, the contents can be shared between those two columns.
+   */
   kDataBrowserContainerAliasIDProperty = 9L, /* DataBrowserItemID (alias/symlink an item to a container item) */
+
+  /*
+   * kDataBrowserColumnViewPreviewProperty is sent to various callbacks
+   * to give you a chance to draw or track in the preview column of
+   * column view. 
+   * 
+   * You can also pass kDataBrowserColumnViewPreviewProperty in the
+   * property parameter of RevealDataBrowserItem in conjunction with
+   * the appropriate DataBrowserItemID of the item whose preview is
+   * being displayed when you want to make sure the preview column is
+   * visible to the user. 
+   * 
+   * kDataBrowserColumnViewPreviewProperty is only supported in column
+   * view.
+   */
   kDataBrowserColumnViewPreviewProperty = 10L, /* kDataBrowserCustomType (display property; ColumnView only) */
+
+  /*
+   * kDataBrowserItemParentContainerProperty is sent to your
+   * DataBrowserItemDataProcPtr callback when Data Browser needs to
+   * know the parent container item for a given item. 
+   * 
+   * In column view, this allows the internals of SetDataBrowserTarget
+   * to work. The target is the container whose contents you wish to
+   * display, which is the rightmost column in column view. However,
+   * unlike SetDataBrowserColumnViewPath, SetDataBrowserTarget doesn't
+   * offer a way for you to communicate the DataBrowserItemIDs of the
+   * rest of the column containers, so SetDataBrowserTarget needs to
+   * ask for them explicitly by asking for the container's parent, then
+   * the container's parent's parent, and so on. 
+   * 
+   * In list view, this allows you to pass a non-container to
+   * SetDataBrowserTarget. In this situation, Data Browser will ask you
+   * for the parent of the target so it knows which container to
+   * display the contents of in the list view. 
+   * 
+   * In both list and column views, your DataBrowserItemDataProcPtr
+   * callback might be called with
+   * kDataBrowserItemParentContainerProperty at a variety of other
+   * times, so you should be sure to support this property if your Data
+   * Browser displays a containment hierarchy.
+   */
   kDataBrowserItemParentContainerProperty = 11L /* DataBrowserItemID (the parent of the specified item, used by ColumnView) */
 };
 
@@ -3570,6 +3756,11 @@ enum {
 };
 
 /* Next 8 bits contain property-specific modifiers */
+
+/*
+ *  Summary:
+ *    Data Browser Property Flags
+ */
 enum {
   kDataBrowserPropertyFlagsOffset = 8,
   kDataBrowserPropertyFlagsMask = 0xFF << kDataBrowserPropertyFlagsOffset,
@@ -3585,6 +3776,15 @@ enum {
   kDataBrowserTruncateTextAtEnd = 2 << kDataBrowserPropertyFlagsOffset, /* kDataBrowserTextType && kDataBrowserIconAndTextType */
   kDataBrowserTruncateTextMiddle = 0 << kDataBrowserPropertyFlagsOffset, /* kDataBrowserTextType && kDataBrowserIconAndTextType */
   kDataBrowserTruncateTextAtStart = 1 << kDataBrowserPropertyFlagsOffset, /* kDataBrowserTextType && kDataBrowserIconAndTextType */
+
+  /*
+   * This flag is only for use with columns of type
+   * kDataBrowserPopupMenuType. This flag indicates that the popup be
+   * drawn in a sleek buttonless fashion. The text will be drawn next
+   * to a popup glyph, and the whole cell will be clickable. Available
+   * on 10.4 and later.
+   */
+  kDataBrowserPopupMenuButtonless = 1 << kDataBrowserPropertyFlagsOffset, /* kDataBrowserPopupMenuType*/
   kDataBrowserPropertyModificationFlags = kDataBrowserPropertyFlagsMask, /* support for an old name*/
   kDataBrowserRelativeDateTime  = kDataBrowserDateTimeRelative /* support for an old name*/
 };
@@ -3704,6 +3904,258 @@ extern OSStatus
 SetDataBrowserViewStyle(
   ControlRef             browser,
   DataBrowserViewStyle   style)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+ *  Summary:
+ *    Data Browser attributes
+ *  
+ *  Discussion:
+ *    For use with DataBrowserChangeAttributes and
+ *    DataBrowserGetAttributes. Available in Mac OS X 10.4 and later.
+ */
+enum {
+
+  /*
+   * A constant with value zero; the lack of any attributes.
+   */
+  kDataBrowserAttributeNone     = 0,
+
+  /*
+   * In Column View, this Data Browser is allowed to resize the owning
+   * window whenever necessary. This includes, but is not necessarily
+   * limited to, situations where column resize operations need more
+   * visible space in the window. If you turn this attribute on, your
+   * window must tolerate being resized behind your app's back. If your
+   * window needs to react to bounds changes, use a
+   * kEventWindowBoundsChanged event handler. If you need to constrain
+   * your window's minimum and maximum bounds, use
+   * kEventWindowGetMinimum/MaximumSize handlers, the
+   * SetWindowResizeLimits API, or something similar.
+   */
+  kDataBrowserAttributeColumnViewResizeWindow = (1 << 0),
+
+  /*
+   * In List View, this Data Browser should draw alternating row
+   * background colors.
+   */
+  kDataBrowserAttributeListViewAlternatingRowColors = (1 << 1),
+
+  /*
+   * In List View, this Data Browser should draw a vertical line
+   * between the columns.
+   */
+  kDataBrowserAttributeListViewDrawColumnDividers = (1 << 2)
+};
+
+/*
+ *  DataBrowserChangeAttributes()
+ *  
+ *  Summary:
+ *    Set the attributes for the given Data Browser.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDataBrowser:
+ *      The Data Browser whose attributes to change.
+ *    
+ *    inAttributesToSet:
+ *      The attributes to set.
+ *    
+ *    inAttributesToClear:
+ *      The attributes to clear.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+DataBrowserChangeAttributes(
+  ControlRef   inDataBrowser,
+  OptionBits   inAttributesToSet,
+  OptionBits   inAttributesToClear)                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  DataBrowserGetAttributes()
+ *  
+ *  Summary:
+ *    Returns the attributes of a given Data Browser.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDataBrowser:
+ *      The Data Browser whose attributes to query.
+ *    
+ *    outAttributes:
+ *      On exit, will contain the attributes of the Data Browser. This
+ *      parameter cannot be NULL.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+DataBrowserGetAttributes(
+  ControlRef    inDataBrowser,
+  OptionBits *  outAttributes)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+
+/*
+ *  Summary:
+ *    DataBrowserMetric values
+ *  
+ *  Discussion:
+ *    For use with DataBrowserSetMetric.
+ */
+enum {
+
+  /*
+   * The content (icon, text, etc.) within a cell is drawn a certain
+   * amount in from the left & right edges of the cell. This metric
+   * governs the amount of inset.
+   */
+  kDataBrowserMetricCellContentInset = 1,
+
+  /*
+   * This metric controls the space between the icon and text within a
+   * column of type kDataBrowserIconAndTextType.
+   */
+  kDataBrowserMetricIconAndTextGap = 2,
+
+  /*
+   * In List View only, this metric is similar to
+   * kDataBrowserMetricCellContentInset, but it only affects the
+   * disclosure column and it only affects the side of the cell that
+   * displays the disclosure triangle. In other words, this metric is
+   * used instead of (not in addition to)
+   * DataBrowserMetricCellContentInset for one side of the disclosure
+   * column.
+   */
+  kDataBrowserMetricDisclosureColumnEdgeInset = 3,
+
+  /*
+   * In List View only, this metric controls the amount of space
+   * between the disclosure triangle and the cell's content.
+   */
+  kDataBrowserMetricDisclosureTriangleAndContentGap = 4,
+
+  /*
+   * In List View only, this metric controls the amount of space in the
+   * disclosure column for each level of indentation in progressively
+   * deeper hierarchies of disclosed items.
+   */
+  kDataBrowserMetricDisclosureColumnPerDepthGap = 5,
+  kDataBrowserMetricLast        = kDataBrowserMetricDisclosureColumnPerDepthGap
+};
+
+
+typedef UInt32                          DataBrowserMetric;
+/*
+ *  DataBrowserSetMetric()
+ *  
+ *  Summary:
+ *    Sets a value for a specified Data Browser metric.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDataBrowser:
+ *      The Data Browser instance whose metric is being changed.
+ *    
+ *    inMetric:
+ *      The DataBrowserMetric whose value is being changed.
+ *    
+ *    inUseDefaultValue:
+ *      A Boolean indicating whether you want the Data Browser instance
+ *      to revert to the default value for the metric. If you pass
+ *      true, inValue will be ignored and a suitable default value will
+ *      be used. If you pass false, inValue will be used as the value
+ *      of the metric.
+ *    
+ *    inValue:
+ *      When you pass false for inUseDefaultValue, this parameter is
+ *      the value to use for the metric.
+ *  
+ *  Result:
+ *    An operating system status code. If the incoming ControlRef isn't
+ *    a Data Browser instance, or if the incoming metric isn't known,
+ *    this function will return paramErr.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+DataBrowserSetMetric(
+  ControlRef          inDataBrowser,
+  DataBrowserMetric   inMetric,
+  Boolean             inUseDefaultValue,
+  float               inValue)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  DataBrowserGetMetric()
+ *  
+ *  Summary:
+ *    Gets the value for a specified Data Browser metric.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDataBrowser:
+ *      The Data Browser instance whose metric value to get.
+ *    
+ *    inMetric:
+ *      The DataBrowserMetric value to get.
+ *    
+ *    outUsingDefaultValue:
+ *      On exit, this is a Boolean indicating whether the metric's
+ *      value is determined by Data Browser's default values. You may
+ *      pass NULL if you don't need this information.
+ *    
+ *    outValue:
+ *      On exit, this is the value of the metric.
+ *  
+ *  Result:
+ *    An operating system status code. If the incoming ControlRef isn't
+ *    a Data Browser instance, or if the incoming metric isn't known,
+ *    this function will return paramErr.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+DataBrowserGetMetric(
+  ControlRef          inDataBrowser,
+  DataBrowserMetric   inMetric,
+  Boolean *           outUsingDefaultValue,       /* can be NULL */
+  float *             outValue)                               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
 
 
 /* Item Manipulation */
@@ -4049,8 +4501,8 @@ SetDataBrowserSelectedItems(
  */
 extern OSStatus 
 SetDataBrowserUserState(
-  ControlRef   browser,
-  CFDataRef    stateInfo)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ControlRef        browser,
+  CFDictionaryRef   stateInfo)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -4066,8 +4518,8 @@ SetDataBrowserUserState(
  */
 extern OSStatus 
 GetDataBrowserUserState(
-  ControlRef   browser,
-  CFDataRef *  stateInfo)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ControlRef         browser,
+  CFDictionaryRef *  stateInfo)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* All items are active/enabled or not */
@@ -4506,7 +4958,6 @@ GetDataBrowserItemPartBounds(
 
 
 /* DataBrowser ItemData Accessors (used within DataBrowserItemData callback) */
-
 typedef void *                          DataBrowserItemDataRef;
 /*
  *  SetDataBrowserItemDataIcon()
@@ -6343,10 +6794,22 @@ enum {
    * flag also causes Data Browser to gather all keyboard input via a
    * carbon event handler instead of relying on calls to
    * HandleControlKey; therefore, you will never see these keyboard
-   * events come out of WaitNextEvent. Only available on Mac OS X 10.3
-   * and later.
+   * events come out of WaitNextEvent. Only available on 10.3 and later.
    */
   kDataBrowserListViewTypeSelectColumn = 1 << (kDataBrowserViewSpecificFlagsOffset + 3),
+
+  /*
+   * Normally the text in a header button for a column of type
+   * kDataBrowserIconAndTextType is aligned as though it has an icon
+   * next to it even if no icon is specified for the header button; in
+   * other words, space is reserved for an icon in the header button
+   * even if no icon is displayed. However, this flag indicates that
+   * space should not be reserved for an icon if no icon is provided
+   * for the header button. This flag allows a client to justify the
+   * left edge of the text in a header button to the left edge of the
+   * icon in the cells beneath it. Available on 10.4 and later.
+   */
+  kDataBrowserListViewNoGapForIconInHeaderButton = 1 << (kDataBrowserViewSpecificFlagsOffset + 4),
   kDataBrowserListViewDefaultColumnFlags = kDataBrowserListViewMovableColumn + kDataBrowserListViewSortableColumn
 };
 
@@ -6414,8 +6877,32 @@ AddDataBrowserListViewColumn(
 /*
  *  GetDataBrowserListViewHeaderDesc()
  *  
+ *  Summary:
+ *    Returns information about a specified column header in a list
+ *    view.
+ *  
+ *  Discussion:
+ *    Note that this API does not correctly use CoreFoundation naming
+ *    conventions. Although the API name begins with "Get", implying
+ *    that you do not need to release the CFStringRef and IconRef
+ *    returned by this API, in fact you do actually need to release
+ *    these objects.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    browser:
+ *      The data browser for which you need header information.
+ *    
+ *    column:
+ *      The column ID for which you need header information.
+ *    
+ *    desc:
+ *      On exit, contains header information for the specified column.
+ *      You must release the CFStringRef and IconRef contained in this
+ *      structure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in Carbon.framework
@@ -6641,6 +7128,371 @@ GetDataBrowserColumnViewDisplayType(
 
 
 /* DataBrowser UPP macros */
+/*
+    Customizing Data Browser Accessibility Information
+    
+    Warning: The following assumes you already understand how to handle the
+    Accessibility Carbon Events described in CarbonEvents.h.
+    
+    Data Browser automatically handles the various Accessibility Carbon
+    Events to provide a large amount of Accessibility information. However,
+    your application may need to override or augment the default information
+    that Data Browser provides.
+    
+    Though it is already possible for your application to install various
+    Accessibility Carbon Event handlers on a Data Browser instance, it is
+    impossible to interpret the AXUIElementRefs contained in the events
+    without the help of the Data Browser. A given AXUIElementRef that is
+    passed to Data Browser list view in an Accessibility Carbon Event could
+    represent a row, a cell, or the list view as a whole. If your
+    application needs to add an attribute to only the rows in a list view,
+    your application will need to ask Data Browser what any given
+    AXUIElementRef represents. The AXUIElementGetDataBrowserItemInfo allows
+    your application to ask that question.
+    
+    Additionally, your application may want to generate its own AXUIElementRefs
+    that represent children of or point to various rows or cells of a Data Browser
+    instance. The AXUIElementCreateWithDataBrowserAndItemInfo API allows your
+    application to manufacture AXUIElementRefs that represent certain parts of a
+    Data Browser so you can provide them in your Accessibility Carbon Event
+    handlers.
+    
+    Typical Usage Scenario: You want to add an Accessibility attribute to
+    all rows in a Data Browser list view.
+    
+        Step 1: Install the appropriate Accessibility Carbon Event handlers
+        on your Data Browser instance. Call InstallEventHandler or a similar
+        API to install a handler onto your Data Browser ControlRef for the
+        kEventAccessibleGetAllAttributeNames,
+        kEventAccessibleGetNamedAttribute, and other appropriate events.
+        
+        Step 2: Your handler should find out what part of the Data Browser
+        is being asked for its accessibility information. Extract the
+        kEventParamAccessibleObject parameter out of the Carbon Event and
+        pass it to AXUIElementGetDataBrowserItemInfo. See that API
+        description for more usage information and calling requirements.
+        Examine the DataBrowserAccessibilityItemInfo structure that is
+        filled out to determine whether it represents the part of the Data
+        Browser you are interested in adding an attribute to. In this case,
+        you are looking for a row, so you would make sure the item field is
+        not kDataBrowserNoItem, and that the columnProperty is
+        kDataBrowserItemNoProperty.
+        
+        Step 3: Your event handler should call CallNextEventHandler to allow
+        the Data Browser to do the default handling of the event. This is
+        particularly important if the AXUIElementRef did not represent a
+        row, since you don't want to disrupt the Data Browser's handling of
+        the event for parts other than rows.
+        
+        Step 4: If you determined that the part was a row in step 2, your
+        handler should now do whatever custom work it deems necessary. For
+        the kEventAccessibleGetAllAttributeNames, your handler would extract
+        the kEventParamAccessibleAttributeNames parameter out of the event
+        and add your custom attribute name to the array. For the
+        kEventAccessibleGetNamedAttribute event, your handler would test the
+        kEventParamAccessibleAttributeName parameter to see if it matches
+        your custom attribute name; if so, your handler would put its custom
+        data in the kEventParamAccessibleAttributeValue parameter. Any other
+        events would be handled similarly.
+        
+        Step 5: Your event handler should return an appropriate result code.
+        In cases where the AXUIElementRef does not represent a row or when
+        the attribute name is not your custom attribute, your handler can
+        return the same result code that was returned by
+        CallNextEventHandler in step 3. In cases where your handler decided
+        to augment or override the default handling of the event, your
+        handler will typically want to return noErr. See the Carbon Event
+        documentation for more details on the meanings of result codes
+        returned by event handlers.
+*/
+
+/*
+ *  DataBrowserAccessibilityItemInfoV0
+ *  
+ *  Summary:
+ *    A specific description of Data Browser accessibility item
+ *    information.
+ *  
+ *  Discussion:
+ *    If you fill this structure as part of a
+ *    DataBrowserAccessibilityItemInfo, you must set the
+ *    DataBrowserAccessibilityItemInfo's version field to zero.
+ */
+struct DataBrowserAccessibilityItemInfoV0 {
+
+  /*
+   * The DataBrowserItemID of the container the AXUIElementRef
+   * represents or lives within. Even kDataBrowserNoItem might be
+   * meaningful, since it is the root container ID if you haven't
+   * overridden it via SetDataBrowserTarget. In list view, the
+   * container helps narrow down the AXUIElementRef to either a
+   * disclosed child of another row, or the list as a whole. In column
+   * view, the container helps narrow down the AXUIElementRef to a
+   * column; also see the columnProperty description below.
+   */
+  DataBrowserItemID   container;
+
+  /*
+   * The DataBrowserItemID of the item the AXUIElementRef represents or
+   * lives within. If item is kDataBrowserNoItem, the AXUIElementRef
+   * represents just the container. In list view, the item helps narrow
+   * down the AXUIElementRef to either a row, or the root container as
+   * a whole. In column view, the item helps narrow down the
+   * AXUIElementRef to either a cell, or a column as a whole; also see
+   * the columnProperty description below.
+   */
+  DataBrowserItemID   item;
+
+  /*
+   * The DataBrowserPropertyID of the column the AXUIElementRef
+   * represents or lives within. If columnProperty is
+   * kDataBrowserItemNoProperty and item is not kDataBrowserNoItem, the
+   * AXUIElementRef represents a whole row. In list view, this field
+   * helps narrow down the AXUIElementRef to either a cell, or a row as
+   * a whole. In column view, the columnProperty will/must always be
+   * set to kDataBrowserItemNoProperty unless the AXUIElementRef
+   * represents the preview column. When the AXUIElementRef represents
+   * the preview column, the columnProperty will/must always be set to
+   * kDataBrowserColumnViewPreviewProperty, and the other fields of
+   * this structure will/must be set to zero or the equivalent constant.
+   */
+  DataBrowserPropertyID  columnProperty;
+
+  /*
+   * The DataBrowserPropertyPart of the sub-cell part the
+   * AXUIElementRef represents. Examples include the disclosure
+   * triangle in a cell, the text in a cell, and the check box in a
+   * cell. If propertyPart is kDataBrowserPropertyEnclosingPart and
+   * columnProperty is not kDataBrowserItemNoProperty, the
+   * AXUIElementRef represents the cell as a whole. In both list view
+   * and column view, this field helps narrow down the AXUIElementRef
+   * to either a sub-cell part, or a cell as a whole. For column view,
+   * also see the columnProperty description above.
+   */
+  DataBrowserPropertyPart  propertyPart;
+};
+typedef struct DataBrowserAccessibilityItemInfoV0 DataBrowserAccessibilityItemInfoV0;
+
+/*
+ *  DataBrowserAccessibilityItemInfoV1
+ *  
+ *  Summary:
+ *    A specific description of Data Browser accessibility item
+ *    information.
+ *  
+ *  Discussion:
+ *    If you fill this structure as part of a
+ *    DataBrowserAccessibilityItemInfo, you must set the
+ *    DataBrowserAccessibilityItemInfo's version field to one. 
+ *     
+ *    This structure is identical to the V0 structure except for the
+ *    inclusion of row and column indicies. These indicies may be
+ *    useful to clients who call AXUIElementGetDataBrowserItemInfo.
+ *    
+ *    If your Data Browser instance allows a given item and/or
+ *    container to be displayed more than once at a given point in
+ *    time, you can use the row and column indicies to differentiate
+ *    the particular visual occurances of that item when calling
+ *    AXUIElementCreateWithDataBrowserAndItemInfo. See the additional
+ *    details in the rowIndex and columnIndex discussions below.
+ */
+struct DataBrowserAccessibilityItemInfoV1 {
+
+  /*
+   * The DataBrowserItemID of the container the AXUIElementRef
+   * represents or lives within. Even kDataBrowserNoItem might be
+   * meaningful, since it is the root container ID if you haven't
+   * overridden it via SetDataBrowserTarget. In list view, the
+   * container helps narrow down the AXUIElementRef to either a
+   * disclosed child of another row, or the list as a whole. In column
+   * view, the container helps narrow down the AXUIElementRef to a
+   * column; also see the columnProperty description below.
+   */
+  DataBrowserItemID   container;
+
+  /*
+   * The DataBrowserItemID of the item the AXUIElementRef represents or
+   * lives within. If item is kDataBrowserNoItem, the AXUIElementRef
+   * represents just the container. In list view, the item helps narrow
+   * down the AXUIElementRef to either a row, or the root container as
+   * a whole. In column view, the item helps narrow down the
+   * AXUIElementRef to either a cell, or a column as a whole; also see
+   * the columnProperty description below.
+   */
+  DataBrowserItemID   item;
+
+  /*
+   * The DataBrowserPropertyID of the column the AXUIElementRef
+   * represents or lives within. If columnProperty is
+   * kDataBrowserItemNoProperty and item is not kDataBrowserNoItem, the
+   * AXUIElementRef represents a whole row. In list view, this field
+   * helps narrow down the AXUIElementRef to either a cell, or a row as
+   * a whole. In column view, the columnProperty will/must always be
+   * set to kDataBrowserItemNoProperty unless the AXUIElementRef
+   * represents the preview column. When the AXUIElementRef represents
+   * the preview column, the columnProperty will/must always be set to
+   * kDataBrowserColumnViewPreviewProperty, and the other fields of
+   * this structure will/must be set to zero or the equivalent constant.
+   */
+  DataBrowserPropertyID  columnProperty;
+
+  /*
+   * The DataBrowserPropertyPart of the sub-cell part the
+   * AXUIElementRef represents. Examples include the disclosure
+   * triangle in a cell, the text in a cell, and the check box in a
+   * cell. If propertyPart is kDataBrowserPropertyEnclosingPart and
+   * columnProperty is not kDataBrowserItemNoProperty, the
+   * AXUIElementRef represents the cell as a whole. In both list view
+   * and column view, this field helps narrow down the AXUIElementRef
+   * to either a sub-cell part, or a cell as a whole. For column view,
+   * also see the columnProperty description above.
+   */
+  DataBrowserPropertyPart  propertyPart;
+
+  /*
+   * The zero-based DataBrowserTableViewRowIndex of the row specified
+   * by the other parts of this structure. If the other parts of this
+   * structure do not specify a row or a part thereof, this field
+   * will/must be set to zero; because this field is zero based, you
+   * must test the other parts this structure to see whether this field
+   * is meaningful. In list view, when the other parts of this
+   * structure specify an item or part thereof, this field will/must be
+   * set to the row index at which the specified item can be found. In
+   * column view, when the other parts of this structure specify a cell
+   * or part thereof, this field will/must be set to the row index at
+   * which the specified cell can be found.
+   */
+  DataBrowserTableViewRowIndex  rowIndex;
+
+  /*
+   * The zero-based DataBrowserTableViewColumnIndex of the column
+   * specified by the other parts of this structure. If the other parts
+   * of this structure do not specify a column or a part thereof, this
+   * field will/must be set to zero; because this field is zero based,
+   * you must test the other parts this structure to see whether this
+   * field is meaningful. In list view, when the other parts of this
+   * structure specify a cell or part thereof, this field will/must be
+   * set to the column index at which the specified cell can be found.
+   * In column view, when the other parts of this structure specify a
+   * column or part thereof, this field will/must be set to the column
+   * index at which the specified cell can be found.
+   */
+  DataBrowserTableViewColumnIndex  columnIndex;
+};
+typedef struct DataBrowserAccessibilityItemInfoV1 DataBrowserAccessibilityItemInfoV1;
+
+/*
+ *  DataBrowserAccessibilityItemInfo
+ *  
+ *  Summary:
+ *    A generalized description of Data Browser accessibility item
+ *    information.
+ *  
+ *  Discussion:
+ *    Pass this structure to AXUIElementGetDataBrowserItemInfo or
+ *    AXUIElementCreateWithDataBrowserAndItemInfo.
+ */
+struct DataBrowserAccessibilityItemInfo {
+
+  /*
+   * A UInt32 which identifies how to interpret the following union.
+   * Set this field to zero if you fill out the union's data in the
+   * form of a DataBrowserAccessibilityItemInfoV0 structure. Set this
+   * field to one if you fill out the union's data in the form of a
+   * DataBrowserAccessibilityItemInfoV1 structure.
+   */
+  UInt32              version;
+  union {
+    DataBrowserAccessibilityItemInfoV0  v0;
+    DataBrowserAccessibilityItemInfoV1  v1;
+  }                       u;
+};
+typedef struct DataBrowserAccessibilityItemInfo DataBrowserAccessibilityItemInfo;
+/*
+ *  AXUIElementGetDataBrowserItemInfo()
+ *  
+ *  Summary:
+ *    Gets a description of the part of a Data Browser represented by a
+ *    given AXUIElementRef.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inElement:
+ *      An AXUIElementRef representing part of a Data Browser.
+ *    
+ *    inDataBrowser:
+ *      A Data Browser ControlRef.
+ *    
+ *    inDesiredInfoVersion:
+ *      A UInt32 indicating the the version you want the ioInfo
+ *      structure passed back as. Currently, the only supported version
+ *      is zero, so you must pass zero in the inDesiredInfoVersion
+ *      parameter.
+ *    
+ *    outInfo:
+ *      A DataBrowserAccessibilityItemInfo that will be filled in with
+ *      a description of the part of the Data Browser that the
+ *      AXUIElementRef represents.
+ *  
+ *  Result:
+ *    An OSStatus result code. The function will return noErr if it was
+ *    able to generate a description of the AXUIElementRef. If the
+ *    AXUIElementRef does not represent the Data Browser you passed in,
+ *    the function will return paramErr. If the AXUIElementRef
+ *    represents some non-item part of the Data Browser, the function
+ *    will return errDataBrowserItemNotFound.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+AXUIElementGetDataBrowserItemInfo(
+  AXUIElementRef                      inElement,
+  ControlRef                          inDataBrowser,
+  UInt32                              inDesiredInfoVersion,
+  DataBrowserAccessibilityItemInfo *  outInfo)                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+/*
+ *  AXUIElementCreateWithDataBrowserAndItemInfo()
+ *  
+ *  Summary:
+ *    Creates an AXUIElementRef to represent some part of a Data
+ *    Browser accessibility hierarchy.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDataBrowser:
+ *      A Data Browser ControlRef.
+ *    
+ *    inInfo:
+ *      A DataBrowserAccessibilityItemInfo describing the part of the
+ *      Data Browser for which you want to create an AXUIElementRef.
+ *  
+ *  Result:
+ *    An AXUIElementRef representing the part, or NULL if one cannot be
+ *    created to represent the part you specified.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern AXUIElementRef 
+AXUIElementCreateWithDataBrowserAndItemInfo(
+  ControlRef                                inDataBrowser,
+  const DataBrowserAccessibilityItemInfo *  inInfo)           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
 /*---------------------------------------------------------------------------------------*/
 /* EditUnicodeText Control                                                               */
 /*---------------------------------------------------------------------------------------*/
@@ -6724,7 +7576,7 @@ enum {
  *    
  *    window:
  *      The window in which the control should be placed. May be NULL
- *      in Mac OS X 10.3 and later.
+ *      in 10.3 and later.
  *    
  *    boundsRect:
  *      The bounds of the control, in local coordinates of the window.

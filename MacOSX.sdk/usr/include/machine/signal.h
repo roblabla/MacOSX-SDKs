@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2004 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -23,9 +23,9 @@
 #define _BSD_MACHINE_SIGNAL_H_
 
 
-#if defined (__ppc__)
+#if defined (__ppc__) || defined (__ppc64__)
 #include "ppc/signal.h"
-#elif defined (__i386__)
+#elif defined (__i386__) || defined(__x86_64__)
 #include "i386/signal.h"
 #else
 #error architecture not supported

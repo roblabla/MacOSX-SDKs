@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2004 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -57,8 +57,11 @@
 
 #ifndef _NET_IF_H_
 #define	_NET_IF_H_
-#include <sys/appleapiopts.h>
 
+#define	IF_NAMESIZE	16
+
+#ifndef _POSIX_C_SOURCE
+#include <sys/appleapiopts.h>
 #ifdef __APPLE__
 /*
  * Define Data-Link event subclass, and associated
@@ -82,17 +85,10 @@
 #define KEV_DL_LINK_ON	    13
 #define KEV_DL_PROTO_ATTACHED	14
 #define KEV_DL_PROTO_DETACHED	15
-#endif
+#define KEV_DL_LINK_ADDRESS_CHANGED	16
 
-/*
- * <net/if.h> does not depend on <sys/time.h> on most other systems.  This
- * helps userland compatability.  (struct timeval ifi_lastchange)
- */
-#include <sys/time.h>
-
-
-#ifdef __APPLE__
 #include <net/if_var.h>
+#include <sys/types.h>
 #endif
 
 
@@ -115,41 +111,35 @@
 #define	IFF_MULTICAST	0x8000		/* supports multicast */
 
 
-
-/* flags set internally only: */
-#define	IFF_CANTCHANGE \
-	(IFF_BROADCAST|IFF_POINTOPOINT|IFF_RUNNING|IFF_OACTIVE|\
-	    IFF_SIMPLEX|IFF_MULTICAST|IFF_ALLMULTI)
-
 #define	IFQ_MAXLEN	50
 #define	IFNET_SLOWHZ	1		/* granularity is 1 second */
 
 /*
  * Message format for use in obtaining information about interfaces
- * from getkerninfo and the routing socket
+ * from sysctl and the routing socket
  */
 struct if_msghdr {
-	u_short	ifm_msglen;	/* to skip over non-understood messages */
-	u_char	ifm_version;	/* future binary compatability */
-	u_char	ifm_type;	/* message type */
-	int	ifm_addrs;	/* like rtm_addrs */
-	int	ifm_flags;	/* value of if_flags */
-	u_short	ifm_index;	/* index for associated ifp */
-	struct	if_data ifm_data;/* statistics and other data about if */
+	unsigned short	ifm_msglen;	/* to skip over non-understood messages */
+	unsigned char	ifm_version;	/* future binary compatability */
+	unsigned char	ifm_type;	/* message type */
+	int		ifm_addrs;	/* like rtm_addrs */
+	int		ifm_flags;	/* value of if_flags */
+	unsigned short	ifm_index;	/* index for associated ifp */
+	struct	if_data ifm_data;	/* statistics and other data about if */
 };
 
 /*
  * Message format for use in obtaining information about interface addresses
- * from getkerninfo and the routing socket
+ * from sysctl and the routing socket
  */
 struct ifa_msghdr {
-	u_short	ifam_msglen;	/* to skip over non-understood messages */
-	u_char	ifam_version;	/* future binary compatability */
-	u_char	ifam_type;	/* message type */
-	int	ifam_addrs;	/* like rtm_addrs */
-	int	ifam_flags;	/* value of ifa_flags */
-	u_short	ifam_index;	/* index for associated ifp */
-	int	ifam_metric;	/* value of ifa_metric */
+	unsigned short	ifam_msglen;	/* to skip over non-understood messages */
+	unsigned char	ifam_version;	/* future binary compatability */
+	unsigned char	ifam_type;	/* message type */
+	int		ifam_addrs;	/* like rtm_addrs */
+	int		ifam_flags;	/* value of ifa_flags */
+	unsigned short	ifam_index;	/* index for associated ifp */
+	int		ifam_metric;	/* value of ifa_metric */
 };
 
 /*
@@ -157,12 +147,55 @@ struct ifa_msghdr {
  * from the routing socket
  */
 struct ifma_msghdr {
+	unsigned short	ifmam_msglen;	/* to skip over non-understood messages */
+	unsigned char	ifmam_version;	/* future binary compatability */
+	unsigned char	ifmam_type;	/* message type */
+	int		ifmam_addrs;	/* like rtm_addrs */
+	int		ifmam_flags;	/* value of ifa_flags */
+	unsigned short	ifmam_index;	/* index for associated ifp */
+};
+
+/*
+ * Message format for use in obtaining information about interfaces
+ * from sysctl 
+ */
+struct if_msghdr2 {
+	u_short	ifm_msglen;	/* to skip over non-understood messages */
+	u_char	ifm_version;	/* future binary compatability */
+	u_char	ifm_type;	/* message type */
+	int	ifm_addrs;	/* like rtm_addrs */
+	int	ifm_flags;	/* value of if_flags */
+	u_short	ifm_index;	/* index for associated ifp */
+	int	ifm_snd_len;	/* instantaneous length of send queue */
+	int	ifm_snd_maxlen;	/* maximum length of send queue */
+	int	ifm_snd_drops;	/* number of drops in send queue */
+	int	ifm_timer;	/* time until if_watchdog called */
+	struct if_data64	ifm_data;	/* statistics and other data about if */
+};
+
+/*
+ * Message format for use in obtaining information about multicast addresses
+ * from sysctl
+ */
+struct ifma_msghdr2 {
 	u_short	ifmam_msglen;	/* to skip over non-understood messages */
 	u_char	ifmam_version;	/* future binary compatability */
 	u_char	ifmam_type;	/* message type */
 	int	ifmam_addrs;	/* like rtm_addrs */
 	int	ifmam_flags;	/* value of ifa_flags */
 	u_short	ifmam_index;	/* index for associated ifp */
+	int32_t ifmam_refcount;
+};
+
+/*
+ * ifdevmtu: interface device mtu
+ *    Used with SIOCGIFDEVMTU to get the current mtu in use by the device,
+ *    as well as the minimum and maximum mtu allowed by the device.
+ */
+struct ifdevmtu {
+	int	ifdm_current;
+	int	ifdm_min;
+	int	ifdm_max;
 };
 
 /*
@@ -171,9 +204,10 @@ struct ifma_msghdr {
  * definitions which begin with ifr_name.  The
  * remainder may be interface specific.
  */
-#define	IF_NAMESIZE	IFNAMSIZ
 struct	ifreq {
-#define	IFNAMSIZ	16
+#ifndef IFNAMSIZ
+#define	IFNAMSIZ	IF_NAMESIZE
+#endif
 	char	ifr_name[IFNAMSIZ];		/* if name, e.g. "en0" */
 	union {
 		struct	sockaddr ifru_addr;
@@ -184,7 +218,9 @@ struct	ifreq {
 		int	ifru_mtu;
 		int	ifru_phys;
 		int	ifru_media;
+		int 	ifru_intval;
 		caddr_t	ifru_data;
+		struct	ifdevmtu ifru_devmtu;
 	} ifr_ifru;
 #define	ifr_addr	ifr_ifru.ifru_addr	/* address */
 #define	ifr_dstaddr	ifr_ifru.ifru_dstaddr	/* other end of p-to-p link */
@@ -200,6 +236,8 @@ struct	ifreq {
 #define ifr_phys	ifr_ifru.ifru_phys	/* physical wire */
 #define ifr_media	ifr_ifru.ifru_media	/* physical media */
 #define	ifr_data	ifr_ifru.ifru_data	/* for use by interface */
+#define ifr_devmtu	ifr_ifru.ifru_devmtu	
+#define ifr_intval	ifr_ifru.ifru_intval	/* integer value */
 };
 
 #define	_SIZEOF_ADDR_IFREQ(ifr) \
@@ -228,6 +266,7 @@ struct ifmediareq {
 	int	ifm_count;		/* # entries in ifm_ulist array */
 	int	*ifm_ulist;		/* media words */
 };
+
 
 /* 
  * Structure used to retrieve aux status data from interfaces.
@@ -258,60 +297,41 @@ struct	ifconf {
 #define	ifc_req	ifc_ifcu.ifcu_req	/* array of structures returned */
 };
 
-#ifdef __APPLE__
-#ifdef __APPLE_API_UNSTABLE
+
 /*
  * DLIL KEV_DL_PROTO_ATTACHED/DETACHED structure
  */
 struct kev_dl_proto_data {
      struct net_event_data   	link_data;
-     u_long			proto_family;
-     u_long			proto_remaining_count;
+     unsigned long		proto_family;
+     unsigned long		proto_remaining_count;
 };
-#endif /* __APPLE_API_UNSTABLE */
-#endif
-
 
 /*
  * Structure for SIOC[AGD]LIFADDR
  */
 struct if_laddrreq {
-	char	iflr_name[IFNAMSIZ];
-	u_int	flags;
+	char			iflr_name[IFNAMSIZ];
+	unsigned int		flags;
 #define	IFLR_PREFIX	0x8000  /* in: prefix given  out: kernel fills id */
-	u_int	prefixlen;         /* in/out */
-	struct	sockaddr_storage addr;   /* in/out */
-	struct	sockaddr_storage dstaddr; /* out */
+	unsigned int		prefixlen;         /* in/out */
+	struct sockaddr_storage	addr;   /* in/out */
+	struct sockaddr_storage	dstaddr; /* out */
 };
 
-#ifdef KERNEL
-#ifdef MALLOC_DECLARE
-MALLOC_DECLARE(M_IFADDR);
-MALLOC_DECLARE(M_IFMADDR);
-#endif
-#endif
+#endif /* _POSIX_C_SOURCE */
 
-#ifndef KERNEL
 struct if_nameindex {
-	u_int	if_index;	/* 1, 2, ... */
-	char	*if_name;	/* null terminated name: "le0", ... */
+	unsigned int	 if_index;	/* 1, 2, ... */
+	char		*if_name;	/* null terminated name: "le0", ... */
 };
 
 __BEGIN_DECLS
-u_int	 if_nametoindex __P((const char *));
-char	*if_indextoname __P((u_int, char *));
-struct	 if_nameindex *if_nameindex __P((void));
-void	 if_freenameindex __P((struct if_nameindex *));
+unsigned int	 if_nametoindex(const char *);
+char		*if_indextoname(unsigned int, char *);
+struct		 if_nameindex *if_nameindex(void);
+void		 if_freenameindex(struct if_nameindex *);
 __END_DECLS
-#endif
 
-#ifdef KERNEL
-#ifndef __APPLE__
-struct proc;
-
-int	prison_if __P((struct proc *p, struct sockaddr *sa));
-#endif
-
-#endif
 
 #endif /* !_NET_IF_H_ */

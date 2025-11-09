@@ -1,5 +1,5 @@
 /*	NSBundle.h
-	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -51,12 +51,13 @@
 
 - (Class)principalClass;
 
-+ (NSString *)pathForResource:(NSString *)name ofType:(NSString *)ext inDirectory:(NSString *)path;
+/* In the following methods, bundlePath is an absolute path to a bundle, and may not be nil; subpath is a relative path to a subdirectory inside the relevant global or localized resource directory, and should be nil if the resource file in question is not in a subdirectory. */
++ (NSString *)pathForResource:(NSString *)name ofType:(NSString *)ext inDirectory:(NSString *)bundlePath;
 - (NSString *)pathForResource:(NSString *)name ofType:(NSString *)ext;
 - (NSString *)pathForResource:(NSString *)name ofType:(NSString *)ext inDirectory:(NSString *)subpath;
 - (NSString *)pathForResource:(NSString *)name ofType:(NSString *)ext inDirectory:(NSString *)subpath forLocalization:(NSString *)localizationName;
 
-+ (NSArray *)pathsForResourcesOfType:(NSString *)ext inDirectory:(NSString *)subpath;
++ (NSArray *)pathsForResourcesOfType:(NSString *)ext inDirectory:(NSString *)bundlePath;
 - (NSArray *)pathsForResourcesOfType:(NSString *)ext inDirectory:(NSString *)subpath;
 - (NSArray *)pathsForResourcesOfType:(NSString *)ext inDirectory:(NSString *)subpath forLocalization:(NSString *)localizationName;
 

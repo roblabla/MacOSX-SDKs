@@ -3,9 +3,9 @@
  
      Contains:   SCSI Family Interfaces.
  
-     Version:    OSServices-63~113
+     Version:    OSServices-101.1~790
  
-     Copyright:  © 1986-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1986-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

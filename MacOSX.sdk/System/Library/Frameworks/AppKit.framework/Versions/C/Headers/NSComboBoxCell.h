@@ -1,7 +1,7 @@
 /*
 	NSComboBoxCell.h
 	Application Kit
-	Copyright (c) 1996-2003, Apple Computer, Inc.
+	Copyright (c) 1996-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -19,8 +19,9 @@
 	unsigned int buttonBordered:1;
         unsigned int popUpIsUp:1;
 	unsigned int filteringEvents:1;
-    unsigned int drawing:1;
-    unsigned int reserved:10;
+        unsigned int drawing:1;
+        unsigned int synchronizingSelection:1;
+        unsigned int reserved:9;
 	unsigned int visibleItems:16;
     } _cbcFlags;
     NSButtonCell *_buttonCell;

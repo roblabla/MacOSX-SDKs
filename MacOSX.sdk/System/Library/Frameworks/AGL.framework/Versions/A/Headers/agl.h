@@ -6,7 +6,7 @@
     Version:	Technology:	Mac OS X
                 Release:	GM
  
-     Copyright:  (c) 2000, 2001, 2002, 2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 2000, 2001, 2002, 2003, 2004, 2005 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -19,10 +19,11 @@
 #define _AGL_H
 
 #if defined (__MACH__)
-	#import <AvailabilityMacros.h>
-	#import <Carbon/Carbon.h>
-	#import <OpenGL/gl.h>
+	#include <AvailabilityMacros.h>
+	#include <Carbon/Carbon.h>
+	#include <OpenGL/gl.h>
 #else
+	#define AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER 
 	#define AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER 
 	#define AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER 
 	#include <Carbon.h>
@@ -115,7 +116,7 @@ typedef struct __AGLPBufferRec       *AGLPbuffer;
 #define AGL_COMPLIANT             83  /* renderer is opengl compliant                 */
 
 #define AGL_PBUFFER               90  /* can be used to render to a pbuffer           */
-#define AGL_REMOTE_PBUFFER        91, /* can be used to render offline to a pbuffer	  */
+#define AGL_REMOTE_PBUFFER        91  /* can be used to render offline to a pbuffer	  */
 
 /*
 ** Property names for aglDescribeRenderer
@@ -162,7 +163,9 @@ typedef struct __AGLPBufferRec       *AGLPbuffer;
 #define AGL_SURFACE_OPACITY      236  /* Opacity of OpenGL surface: 1 -> Surface is opaque (default), 0 -> non-opaque */
 #define AGL_CLIP_REGION          254  /* Enable or set the drawable clipping region */
 #define AGL_FS_CAPTURE_SINGLE    255  /* Enable the capture of only a single display for aglFullScreen, normally disabled */
-
+#define AGL_SURFACE_BACKING_SIZE 304  /* 2 params.   Width/height of surface backing size     */
+#define AGL_ENABLE_SURFACE_BACKING_SIZE  305  /* Enable or disable surface backing size override */
+#define AGL_SURFACE_VOLATILE     306  /* Flag surface to candidate for deletion */
 /*
 ** Option names for aglConfigure.
 */
@@ -358,6 +361,12 @@ extern GLboolean aglTexImagePBuffer (AGLContext ctx, AGLPbuffer pbuffer, GLint s
 */
 extern GLboolean aglSetPBuffer (AGLContext ctx, AGLPbuffer pbuffer, GLint face, GLint level, GLint screen)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern GLboolean aglGetPBuffer (AGLContext ctx, AGLPbuffer *pbuffer, GLint *face, GLint *level, GLint *screen)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+/*
+** CGL functions
+*/
+extern GLboolean aglGetCGLContext(AGLContext ctx, void **cgl_ctx) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern GLboolean aglGetCGLPixelFormat(AGLPixelFormat pix, void **cgl_pix) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 #ifdef __cplusplus
 }

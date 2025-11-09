@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2004 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -60,102 +60,9 @@
 #ifndef	_VM_VM_KERN_H_
 #define _VM_VM_KERN_H_
 
+#include <mach/mach_types.h>
 #include <mach/boolean.h>
 #include <mach/kern_return.h>
-#include <mach/machine/vm_types.h>
-#include <vm/vm_map.h>
 
-extern void		kmem_init(
-				vm_offset_t	start,
-				vm_offset_t	end);
-
-extern kern_return_t	kernel_memory_allocate(
-				vm_map_t	map,
-				vm_offset_t	*addrp,
-				vm_size_t	size,
-				vm_offset_t	mask,
-				int		flags);
-
-/* flags for kernel_memory_allocate */
-#define KMA_HERE	0x01
-#define KMA_NOPAGEWAIT	0x02
-#define KMA_KOBJECT	0x04
-
-extern kern_return_t kmem_alloc_contig(
-				vm_map_t	map,
-				vm_offset_t	*addrp,
-				vm_size_t	size,
-				vm_offset_t 	mask,
-				int 		flags);
-
-extern kern_return_t	kmem_alloc(
-				vm_map_t	map,
-				vm_offset_t	*addrp,
-				vm_size_t	size);
-
-extern kern_return_t	kmem_alloc_pageable(
-				vm_map_t	map,
-				vm_offset_t	*addrp,
-				vm_size_t	size);
-
-extern kern_return_t	kmem_alloc_wired(
-				vm_map_t	map,
-				vm_offset_t	*addrp,
-				vm_size_t	size);
-
-extern kern_return_t	kmem_alloc_aligned(
-				vm_map_t	map,
-				vm_offset_t	*addrp,
-				vm_size_t	size);
-
-extern kern_return_t	kmem_realloc(
-				vm_map_t	map,
-				vm_offset_t	oldaddr,
-				vm_size_t	oldsize,
-				vm_offset_t	*newaddrp,
-				vm_size_t	newsize);
-
-extern void		kmem_free(
-				vm_map_t	map,
-				vm_offset_t	addr,
-				vm_size_t	size);
-
-extern kern_return_t	kmem_suballoc(
-				vm_map_t	parent,
-				vm_offset_t	*addr,
-				vm_size_t	size,
-				boolean_t	pageable,
-				boolean_t	anywhere,
-				vm_map_t	*new_map);
-
-extern void		kmem_io_object_deallocate(
-				vm_map_copy_t	copy);
-
-extern kern_return_t	kmem_io_object_trunc(
-				vm_map_copy_t	copy,
-				vm_size_t	new_size);
-
-extern boolean_t	copyinmap(
-				vm_map_t	map,
-				vm_offset_t	fromaddr,
-				vm_offset_t	toaddr,
-				vm_size_t	length);
-
-extern boolean_t	copyoutmap(
-				vm_map_t	map,
-				vm_offset_t	fromaddr,
-				vm_offset_t	toaddr,
-				vm_size_t	length);
-
-extern kern_return_t	vm_conflict_check(
-				vm_map_t		map,
-				vm_offset_t		off,
-				vm_size_t		len,
-				memory_object_t		pager,
-				vm_object_offset_t	file_off);
-
-extern vm_map_t	kernel_map;
-extern vm_map_t	kernel_pageable_map;
-extern vm_map_t ipc_kernel_map;
 
 #endif	/* _VM_VM_KERN_H_ */

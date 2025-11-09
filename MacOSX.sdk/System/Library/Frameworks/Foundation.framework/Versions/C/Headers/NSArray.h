@@ -1,11 +1,11 @@
 /*	NSArray.h
-	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSRange.h>
 
-@class NSData, NSDictionary, NSEnumerator, NSString, NSURL;
+@class NSData, NSDictionary, NSEnumerator, NSIndexSet, NSString, NSURL;
 
 /****************	Immutable Array		****************/
 
@@ -46,6 +46,10 @@
 
 - (void)makeObjectsPerformSelector:(SEL)aSelector;
 - (void)makeObjectsPerformSelector:(SEL)aSelector withObject:(id)argument;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (NSArray *)objectsAtIndexes:(NSIndexSet *)indexes;
+#endif
 
 @end
 
@@ -99,6 +103,12 @@
 - (void)setArray:(NSArray *)otherArray;
 - (void)sortUsingFunction:(int (*)(id, id, void *))compare context:(void *)context;
 - (void)sortUsingSelector:(SEL)comparator;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (void)insertObjects:(NSArray *)objects atIndexes:(NSIndexSet *)indexes;
+- (void)removeObjectsAtIndexes:(NSIndexSet *)indexes;
+- (void)replaceObjectsAtIndexes:(NSIndexSet *)indexes withObjects:(NSArray *)objects;
+#endif
 
 @end
 

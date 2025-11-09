@@ -6,7 +6,7 @@
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        | 
-   | available at through the world-wide-web at                           |
+   | available through the world-wide-web at the following url:           |
    | http://www.zend.com/license/2_00.txt.                                |
    | If you did not receive a copy of the Zend license and are unable to  |
    | obtain it through the world-wide-web, please send a note to          |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend.h,v 1.164.2.22 2004/07/28 19:06:48 andi Exp $ */
+/* $Id: zend.h,v 1.164.2.27.2.3 2007/03/13 01:22:02 stas Exp $ */
 
 #ifndef ZEND_H
 #define ZEND_H
@@ -42,15 +42,26 @@
 # include "zend_config.w32.h"
 # define ZEND_PATHS_SEPARATOR		';'
 #elif defined(NETWARE)
-# include "zend_config.nw.h"
-# include "acconfig.h"
+# include <zend_config.h>
 # define ZEND_PATHS_SEPARATOR		';'
 #elif defined(__riscos__)
-# include "zend_config.h"
+# include <zend_config.h>
 # define ZEND_PATHS_SEPARATOR		';'
 #else
-# include "zend_config.h"
+# include <zend_config.h>
 # define ZEND_PATHS_SEPARATOR		':'
+#endif
+
+
+#ifdef ZEND_WIN32
+/* Only use this macro if you know for sure that all of the switches values
+   are covered by its case statements */
+#define EMPTY_SWITCH_DEFAULT_CASE() \
+			default:				\
+				__assume(0);		\
+				break;
+#else
+#define EMPTY_SWITCH_DEFAULT_CASE()
 #endif
 
 /* all HAVE_XXX test have to be after the include of zend_config above */
@@ -78,7 +89,6 @@ const char *zend_mh_bundle_error(void);
 
 #endif /* HAVE_MACH_O_DYLD_H */
 
-
 #if defined(HAVE_LIBDL) && !defined(HAVE_MACH_O_DYLD_H)
 
 # ifndef RTLD_LAZY
@@ -91,11 +101,13 @@ const char *zend_mh_bundle_error(void);
 
 # if defined(RTLD_GROUP) && defined(RTLD_WORLD) && defined(RTLD_PARENT)
 #  define DL_LOAD(libname)			dlopen(libname, RTLD_LAZY | RTLD_GLOBAL | RTLD_GROUP | RTLD_WORLD | RTLD_PARENT)
+# elif defined(RTLD_DEEPBIND)
+#  define DL_LOAD(libname)			dlopen(libname, RTLD_LAZY | RTLD_GLOBAL | RTLD_DEEPBIND)
 # else
 #  define DL_LOAD(libname)			dlopen(libname, RTLD_LAZY | RTLD_GLOBAL)
 # endif
 # define DL_UNLOAD					dlclose
-# if DLSYM_NEEDS_UNDERSCORE
+# if defined(DLSYM_NEEDS_UNDERSCORE)
 #  define DL_FETCH_SYMBOL(h,s)		dlsym((h), "_" s)
 # else
 #  define DL_FETCH_SYMBOL			dlsym
@@ -105,7 +117,7 @@ const char *zend_mh_bundle_error(void);
 # define ZEND_EXTENSIONS_SUPPORT	1
 #elif defined(HAVE_MACH_O_DYLD_H)
 # define DL_LOAD(libname)			zend_mh_bundle_load(libname)
-# define DL_UNLOAD(handle)			zend_mh_bundle_unload(handle)
+# define DL_UNLOAD			zend_mh_bundle_unload
 # define DL_FETCH_SYMBOL(h,s)		zend_mh_bundle_symbol(h,s)
 # define DL_ERROR					zend_mh_bundle_error
 # define DL_HANDLE					void *
@@ -234,6 +246,7 @@ char *alloca ();
 
 #define INTERNAL_FUNCTION_PARAMETERS int ht, zval *return_value, zval *this_ptr, int return_value_used TSRMLS_DC
 #define INTERNAL_FUNCTION_PARAM_PASSTHRU ht, return_value, this_ptr, return_value_used TSRMLS_CC
+
 
 /*
  * zval
@@ -441,7 +454,9 @@ ZEND_API void free_estring(char **str_p);
 
 /* output support */
 #define ZEND_WRITE(str, str_len)		zend_write((str), (str_len))
+#define ZEND_WRITE_EX(str, str_len)		write_func((str), (str_len))
 #define ZEND_PUTS(str)					zend_write((str), strlen((str)))
+#define ZEND_PUTS_EX(str)				write_func((str), strlen((str)))
 #define ZEND_PUTC(c)					zend_write(&(c), 1), (c)
 
 
@@ -464,7 +479,7 @@ void zenderror(char *error);
 /* The following #define is used for code duality in PHP for Engine 1 & 2 */
 #define ZEND_STANDARD_CLASS_DEF_PTR &zend_standard_class_def
 extern ZEND_API zend_class_entry zend_standard_class_def;
-ZEND_API extern zend_utility_values zend_uv;
+extern ZEND_API zend_utility_values zend_uv;
 extern ZEND_API zval zval_used_for_init;
 
 END_EXTERN_C()
@@ -477,9 +492,8 @@ END_EXTERN_C()
 
 BEGIN_EXTERN_C()
 ZEND_API void zend_message_dispatcher(long message, void *data);
-END_EXTERN_C()
-
 ZEND_API int zend_get_configuration_directive(char *name, uint name_length, zval *contents);
+END_EXTERN_C()
 
 
 /* Messages for applications of Zend */
@@ -562,17 +576,6 @@ ZEND_API int zend_get_configuration_directive(char *name, uint name_length, zval
 }
 
 #define ZEND_MAX_RESERVED_RESOURCES	4
-
-#ifdef ZEND_WIN32
-/* Only use this macro if you know for sure that all of the switches values
-   are covered by its case statements */
-#define EMPTY_SWITCH_DEFAULT_CASE() \
-			default:				\
-				__assume(0);		\
-				break;
-#else
-#define EMPTY_SWITCH_DEFAULT_CASE()
-#endif
 
 #endif /* ZEND_H */
 

@@ -3,9 +3,9 @@
  
      Contains:   interface to embedding Java code in a Carbon Control
  
-     Version:    JavaEmbedding-24~506
+     Version:    JavaEmbedding-34~361
  
-     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -57,7 +57,11 @@ enum {
 
 
 /*
- *  MoveAndClipJavaControl()
+ *  MoveAndClipJavaControl()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The JavaEmbedding framework is deprecated. Use the Java
+ *    Applet.plugin instead (in /Library/Internet Plug-Ins)
  *  
  *  Summary:
  *    Positions the control in the containing window, and sets the clip
@@ -99,7 +103,7 @@ enum {
  *      height)
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -112,17 +116,21 @@ MoveAndClipJavaControl(
   int          clipX,
   int          clipY,
   int          clipWidth,
-  int          clipHeight)                                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  int          clipHeight)                                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SizeJavaControl()
+ *  SizeJavaControl()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The JavaEmbedding framework is deprecated. Use the Java
+ *    Applet.plugin instead (in /Library/Internet Plug-Ins)
  *  
  *  Summary:
  *    Sets the size of the Java control.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -131,11 +139,15 @@ SizeJavaControl(
   JNIEnv *     env,
   ControlRef   theControl,
   int          width,
-  int          height)                                        AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  int          height)                                        AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  ShowHideJavaControl()
+ *  ShowHideJavaControl()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The JavaEmbedding framework is deprecated. Use the Java
+ *    Applet.plugin instead (in /Library/Internet Plug-Ins)
  *  
  *  Summary:
  *    Makes a Java control visible or invisible.
@@ -152,7 +164,7 @@ SizeJavaControl(
  *      True shows the control.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -160,11 +172,15 @@ extern OSStatus
 ShowHideJavaControl(
   JNIEnv *     env,
   ControlRef   theControl,
-  Boolean      visible)                                       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  Boolean      visible)                                       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  StopJavaControlAsyncDrawing()
+ *  StopJavaControlAsyncDrawing()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The JavaEmbedding framework is deprecated. Use the Java
+ *    Applet.plugin instead (in /Library/Internet Plug-Ins)
  *  
  *  Summary:
  *    Stops a Java applet from drawing asynchonously.
@@ -190,18 +206,22 @@ ShowHideJavaControl(
  *      The Java control (applet).
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 StopJavaControlAsyncDrawing(
   JNIEnv *     env,
-  ControlRef   theControl)                                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  ControlRef   theControl)                                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  RestartJavaControlAsyncDrawing()
+ *  RestartJavaControlAsyncDrawing()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The JavaEmbedding framework is deprecated. Use the Java
+ *    Applet.plugin instead (in /Library/Internet Plug-Ins)
  *  
  *  Summary:
  *    Allows a Java applet to draw asynchonously.
@@ -219,18 +239,22 @@ StopJavaControlAsyncDrawing(
  *      The Java control (applet).
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 RestartJavaControlAsyncDrawing(
   JNIEnv *     env,
-  ControlRef   theControl)                                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  ControlRef   theControl)                                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DrawJavaControl()
+ *  DrawJavaControl()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The JavaEmbedding framework is deprecated. Use the Java
+ *    Applet.plugin instead (in /Library/Internet Plug-Ins)
  *  
  *  Summary:
  *    Causes a Java control that to be drawn.
@@ -253,14 +277,14 @@ RestartJavaControlAsyncDrawing(
  *      The corresponding Java control (applet) that is to be drawn.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 DrawJavaControl(
   JNIEnv *     env,
-  ControlRef   theControl)                                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  ControlRef   theControl)                                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
@@ -271,7 +295,11 @@ DrawJavaControl(
 */
 
 /*
- *  GetJavaWindowFromWindow()
+ *  GetJavaWindowFromWindow()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The JavaEmbedding framework is deprecated. Use the Java
+ *    Applet.plugin instead (in /Library/Internet Plug-Ins)
  *  
  *  Discussion:
  *    Given a native Carbon window this returns the corresponding Java
@@ -290,7 +318,7 @@ DrawJavaControl(
  *      when done.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -298,11 +326,15 @@ extern OSStatus
 GetJavaWindowFromWindow(
   JNIEnv *    env,
   WindowRef   inMacWindow,
-  jobject *   outJavaWindow)                                  AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  jobject *   outJavaWindow)                                  AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetWindowFromJavaWindow()
+ *  GetWindowFromJavaWindow()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The JavaEmbedding framework is deprecated. Use the Java
+ *    Applet.plugin instead (in /Library/Internet Plug-Ins)
  *  
  *  Discussion:
  *    Given a Java window this returns the corresponding native Carbon
@@ -320,7 +352,7 @@ GetJavaWindowFromWindow(
  *      The corresponding native window.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -328,11 +360,15 @@ extern OSStatus
 GetWindowFromJavaWindow(
   JNIEnv *     env,
   jobject      inJavaWindow,
-  WindowRef *  outMacWindow)                                  AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  WindowRef *  outMacWindow)                                  AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetJavaFrameFromControl()
+ *  GetJavaFrameFromControl()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The JavaEmbedding framework is deprecated. Use the Java
+ *    Applet.plugin instead (in /Library/Internet Plug-Ins)
  *  
  *  Discussion:
  *    Given an embedded control this returns the corresponding Java
@@ -351,7 +387,7 @@ GetWindowFromJavaWindow(
  *      when done.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -359,11 +395,15 @@ extern OSStatus
 GetJavaFrameFromControl(
   JNIEnv *     env,
   ControlRef   inMacControl,
-  jobject *    outJavaFrame)                                  AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  jobject *    outJavaFrame)                                  AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetControlFromJavaFrame()
+ *  GetControlFromJavaFrame()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The JavaEmbedding framework is deprecated. Use the Java
+ *    Applet.plugin instead (in /Library/Internet Plug-Ins)
  *  
  *  Discussion:
  *    Given a Java applet frame reference this returns the embedded
@@ -381,7 +421,7 @@ GetJavaFrameFromControl(
  *      A reference to the control for the applet.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -389,12 +429,16 @@ extern OSStatus
 GetControlFromJavaFrame(
   JNIEnv *      env,
   jobject       inJavaFrame,
-  ControlRef *  outMacControl)                                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  ControlRef *  outMacControl)                                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
 /*
- *  CreateJavaControl()
+ *  CreateJavaControl()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The JavaEmbedding framework is deprecated. Use the Java
+ *    Applet.plugin instead (in /Library/Internet Plug-Ins)
  *  
  *  Discussion:
  *    Creates a control for the specified applet whose content is drawn
@@ -423,7 +467,7 @@ GetControlFromJavaFrame(
  *      A reference to the control that is created for the applet.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -434,7 +478,7 @@ CreateJavaControl(
   const Rect *  inBounds,
   jobject       inAppletFrame,
   Boolean       inVisible,
-  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 

@@ -11,7 +11,6 @@
 #include <CoreGraphics/CGDataProvider.h>
 #include <CoreFoundation/CFDictionary.h>
 #include <CoreFoundation/CFString.h>
-#include <AvailabilityMacros.h>
 
 typedef struct CGPSConverter *CGPSConverterRef;
 

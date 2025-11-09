@@ -1,7 +1,7 @@
 /*
 	NSImageView.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -11,7 +11,11 @@
 @interface NSImageView : NSControl
 {
     /*All instance variables are private*/
-    BOOL _editable;
+    struct __IVFlags {
+        unsigned int _unused:30;
+        unsigned int _allowsCutCopyPaste:1;
+        unsigned int _editable:1;
+    } _ivFlags;
     id _target;                    // for action messages
     SEL _action;                   // call here after an image drag-drop
 }
@@ -32,6 +36,11 @@
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)setAnimates:(BOOL)flag;
 - (BOOL)animates;
+#endif
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (BOOL)allowsCutCopyPaste;
+- (void)setAllowsCutCopyPaste:(BOOL)allow;
 #endif
 
 @end

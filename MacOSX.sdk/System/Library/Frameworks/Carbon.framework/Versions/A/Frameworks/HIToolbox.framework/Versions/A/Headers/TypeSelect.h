@@ -3,9 +3,9 @@
  
      Contains:   TypeSelect Utilties
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -50,18 +50,25 @@ typedef struct TypeSelectRecord         TypeSelectRecord;
 typedef CALLBACK_API( Boolean , IndexToStringProcPtr )(short item, ScriptCode *itemsScript, StringPtr *itemsStringPtr, void *yourDataPtr);
 typedef STACK_UPP_TYPE(IndexToStringProcPtr)                    IndexToStringUPP;
 /*
- *  TypeSelectClear()
+ *  TypeSelectClear()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringUppercase instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringUppercase instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern void 
-TypeSelectClear(TypeSelectRecord * tsr)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TypeSelectClear(TypeSelectRecord * tsr)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -71,30 +78,44 @@ TypeSelectClear(TypeSelectRecord * tsr)                       AVAILABLE_MAC_OS_X
         just in case someone tries to run on an older system.
     */
 /*
- *  TypeSelectNewKey()
+ *  TypeSelectNewKey()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use UCTypeSelect instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use UCTypeSelect
+ *    instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
 TypeSelectNewKey(
   const EventRecord *  theEvent,
-  TypeSelectRecord *   tsr)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TypeSelectRecord *   tsr)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  TypeSelectFindItem()
+ *  TypeSelectFindItem()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use UCTypeSelect instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use UCTypeSelect
+ *    instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -104,18 +125,25 @@ TypeSelectFindItem(
   short                     listSize,
   TSCode                    selectMode,
   IndexToStringUPP          getStringProc,
-  void *                    yourDataPtr)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                    yourDataPtr)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
 /*
- *  TypeSelectCompare()
+ *  TypeSelectCompare()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringUppercase instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringUppercase instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -123,7 +151,7 @@ extern short
 TypeSelectCompare(
   const TypeSelectRecord *  tsr,
   ScriptCode                testStringScript,
-  StringPtr                 testStringPtr)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  StringPtr                 testStringPtr)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*

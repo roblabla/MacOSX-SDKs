@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2003 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -21,28 +21,6 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef __OPEN_SOURCE__
-/*
- *
- *	$Id: USBHub.h,v 1.12 2003/08/20 19:41:41 nano Exp $
- *
- *	$Log: USBHub.h,v $
- *	Revision 1.12  2003/08/20 19:41:41  nano
- *	
- *	Bug #:
- *	New version's of Nima's USB Prober (2.2b17)
- *	3382540  Panther: Ejecting a USB CardBus card can freeze a machine
- *	3358482  Device Busy message with Modems and IOUSBFamily 201.2.14 after sleep
- *	3385948  Need to implement device recovery on High Speed Transaction errors to full speed devices
- *	3377037  USB EHCI: returnTransactions can cause unstable queue if transactions are aborted
- *	
- *	Also, updated most files to use the id/log functions of cvs
- *	
- *	Submitted by: nano
- *	Reviewed by: rhoads/barryt/nano
- *	
- */
-#endif
 #ifndef _USBHUB_H
 #define _USBHUB_H
 
@@ -83,7 +61,9 @@ enum {
     kUSBHubPortEnableChangeFeature      = 17,
     kUSBHubPortSuspendChangeFeature     = 18,
     kUSBHubPortOverCurrentChangeFeature = 19,
-    kUSBHubPortResetChangeFeature       = 20
+    kUSBHubPortResetChangeFeature       = 20,
+    kUSBHubPortTestFeature				= 21,
+	kUSBHubPortIndicatorFeature			= 22
 };
 
     /*!
@@ -127,8 +107,34 @@ enum {
     kNoPowerSwitchingBit    = (1 << 1),
     kCompoundDeviceBit      = (1 << 2),
     kPerPortOverCurrentBit  = (1 << 3),
-    kNoOverCurrentBit       = (1 << 4)
+    kNoOverCurrentBit       = (1 << 4),
+	
+	kHubPortIndicatorBit	= 7,
+	kHubPortIndicatorMask	= 0x0080
 };
+
+/*!
+@enum PowerSwitching
+ @discussion 
+ */
+enum {
+	kHubSupportsGangPower	= 0,
+	kHubSupportsIndividualPortPower = 1,
+	kHubPortSetPowerOff		= 0,
+	kHubPortSetPowerOn		= 1
+};
+
+/*!
+@enum PortIndicatorSelectors
+ @discussion 
+ */
+enum {
+	kHubPortIndicatorAutomatic	= 0,
+	kHubPortIndicatorAmber,
+	kHubPortIndicatorGreen,
+	kHubPortIndicatorOff
+};
+
 
 /*!
 @enum Hub Device Requests
@@ -216,9 +222,9 @@ struct IOUSBHubPortClearTTParam {
     UInt32	 options;
 #if 0
     UInt8 	 deviceAddress;  <<0
-        UInt8	 endpointNum;    <<8
-            UInt8 	 endpointType;	 <<16 // As split transaction. 00 Control, 10 Bulk
-                UInt8 	 IN;		 <<24 // Direction, 1 = IN, 0 = OUT
+	UInt8	 endpointNum;    <<8
+	UInt8 	 endpointType;	 <<16 // As split transaction. 00 Control, 10 Bulk
+	UInt8 	 IN;		 <<24 // Direction, 1 = IN, 0 = OUT
 #endif
 };
 

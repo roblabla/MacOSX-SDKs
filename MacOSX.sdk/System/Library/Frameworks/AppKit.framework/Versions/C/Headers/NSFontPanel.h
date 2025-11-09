@@ -1,7 +1,7 @@
 /*
 	NSFontPanel.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -62,7 +62,8 @@
 	unsigned int	    _sizeDisabled; // used by validate font panel modes. 
 	unsigned int	    _faceDisabled; // used by validate font panel modes. 
 	unsigned int	    _lastFaceSelection; 
-        unsigned int        RESERVED2:12;
+        unsigned int        showEffects:1;
+        unsigned int        RESERVED2:11;
     } _fpFlags;
     float		_cachedSizeValue;
     id			_separator; 
@@ -180,14 +181,23 @@ enum {
     NSFPCurrentField			= 134
 };
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 enum {
     NSFontPanelFaceModeMask = 1 << 0,
     NSFontPanelSizeModeMask = 1 << 1,
     NSFontPanelCollectionModeMask = 1 << 2,
+#endif
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+    NSFontPanelUnderlineEffectModeMask = 1<<8,
+    NSFontPanelStrikethroughEffectModeMask = 1<<9,
+    NSFontPanelTextColorEffectModeMask = 1<< 10,
+    NSFontPanelDocumentColorEffectModeMask = 1<<11,
+    NSFontPanelShadowEffectModeMask = 1<<12,
+    NSFontPanelAllEffectsModeMask = 0XFFF00,
+#endif
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
     NSFontPanelStandardModesMask = 0xFFFF,
     NSFontPanelAllModesMask = 0xFFFFFFFF
 };
-
 #endif

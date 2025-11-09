@@ -1,7 +1,7 @@
 /*
 	NSWindow.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -14,7 +14,7 @@
 
 @class NSButton, NSButtonCell, NSColor, NSImage, NSPasteboard, NSScreen;
 @class NSNotification, NSText, NSView, NSMutableSet, NSSet, NSDate;
-@class NSToolbar;
+@class NSToolbar, NSGraphicsContext;
 
 #define NSAppKitVersionNumberWithCustomSheetPosition 686.0
 
@@ -28,10 +28,26 @@ enum {
 };
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
-// window stylemask additions
+/* Specifies a window with textured background (eg. metal)
+*/
 enum {
     NSTexturedBackgroundWindowMask	= 1 << 8
 };
+#endif
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+/* Specifies a window that ignores the userSpaceScaleFactor of the NSScreen on which it is created.  Currently restricted to borderless windows (NSBorderlessWindowMask)
+*/
+enum {
+    NSUnscaledWindowMask		= 1 << 11
+};
+
+/* Specifies a window whose titlebar and toolbar have a unified look - that is, a continuous background
+*/
+enum {
+    NSUnifiedTitleAndToolbarWindowMask	= 1 << 12
+};
+
 #endif
 
 /* used with NSRunLoop's performSelector:target:argument:order:modes: */
@@ -39,9 +55,6 @@ enum {
     NSDisplayWindowRunLoopOrdering	= 600000,
     NSResetCursorRectsRunLoopOrdering	= 700000
 };
-
-APPKIT_EXTERN NSSize NSIconSize;
-APPKIT_EXTERN NSSize NSTokenSize;
 
 #define NSNormalWindowLevel              kCGNormalWindowLevel
 #define NSFloatingWindowLevel		 kCGFloatingWindowLevel
@@ -73,8 +86,7 @@ typedef enum {
 } NSWindowButton;
 #endif
 
-typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
-
+@class NSWindowAuxiliary;
 @class NSEvent;
 @class NSWindowController;
 
@@ -168,7 +180,7 @@ typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
     }                   _wFlags;
     id			_defaultButtonCell;
     NSView 		*_initialFirstResponder;
-    NSWindowAuxiliaryOpaque 	*_auxiliaryStorage;
+    NSWindowAuxiliary   *_auxiliaryStorage;
 }
 
 + (NSRect)frameRectForContentRect:(NSRect)cRect styleMask:(unsigned int)aStyle;
@@ -244,6 +256,11 @@ typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
 - (void)display;
 - (void)setAutodisplay:(BOOL)flag;
 - (BOOL)isAutodisplay;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (BOOL)preservesContentDuringLiveResize;
+- (void)setPreservesContentDuringLiveResize:(BOOL)flag;
+#endif
 
 - (void)update;
 - (BOOL)makeFirstResponder:(NSResponder *)aResponder;
@@ -351,6 +368,13 @@ typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
 - (void)setOpaque:(BOOL)isOpaque;
 - (BOOL)isOpaque;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (BOOL)displaysWhenScreenProfileChanges;
+- (void)setDisplaysWhenScreenProfileChanges:(BOOL)flag;
+
+- (void)disableScreenUpdatesUntilFlush;
+#endif
+
 
 - (NSString *)stringWithSavedFrame;
 - (void)setFrameFromString:(NSString *)string;
@@ -413,6 +437,16 @@ typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
 - (void)setParentWindow:(NSWindow *)window;
 #endif
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+/* Returns NSGraphicsContext used to render the receiver's content on the screen for the calling thread.
+*/
+- (NSGraphicsContext *)graphicsContext;
+
+/* Returns scale factor applied to view coordinate system to get to base coordinate system of window 
+*/
+- (float)userSpaceScaleFactor;
+
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 @end
 
 @interface NSWindow(NSKeyboardUI)
@@ -427,6 +461,11 @@ typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
 - (NSButtonCell *)defaultButtonCell;
 - (void)disableKeyEquivalentForDefaultButtonCell;
 - (void)enableKeyEquivalentForDefaultButtonCell;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (void)setAutorecalculatesKeyViewLoop:(BOOL)flag;
+- (BOOL)autorecalculatesKeyViewLoop;
+- (void)recalculateKeyViewLoop;
+#endif
 @end
 
 @interface NSWindow (NSToolbarSupport)
@@ -434,6 +473,10 @@ typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
 - (NSToolbar *)toolbar;
 - (void)toggleToolbarShown:(id)sender;
 - (void)runToolbarCustomizationPalette:(id)sender;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (void)setShowsToolbarButton:(BOOL)show;
+- (BOOL)showsToolbarButton;
+#endif
 @end
 
 @interface NSWindow(NSDrag)
@@ -472,6 +515,9 @@ typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
 - (void)windowDidDeminiaturize:(NSNotification *)notification;
 - (void)windowDidUpdate:(NSNotification *)notification;
 - (void)windowDidChangeScreen:(NSNotification *)notification;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (void)windowDidChangeScreenProfile:(NSNotification *)notification;
+#endif
 - (void)windowWillBeginSheet:(NSNotification *)notification;
 - (void)windowDidEndSheet:(NSNotification *)notification;
 @end
@@ -506,4 +552,5 @@ APPKIT_EXTERN NSString *NSWindowWillMiniaturizeNotification;
 APPKIT_EXTERN NSString *NSWindowWillMoveNotification;
 APPKIT_EXTERN NSString *NSWindowWillBeginSheetNotification;
 APPKIT_EXTERN NSString *NSWindowDidEndSheetNotification;
+APPKIT_EXTERN NSString *NSWindowDidChangeScreenProfileNotification  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 

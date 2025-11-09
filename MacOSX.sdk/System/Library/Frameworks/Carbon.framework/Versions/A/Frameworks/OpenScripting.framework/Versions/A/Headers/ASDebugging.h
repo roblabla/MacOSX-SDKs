@@ -3,9 +3,9 @@
  
      Contains:   AppleScript Debugging Interfaces.
  
-     Version:    OSA-63~8
+     Version:    OSA-97~629
  
-     Copyright:  © 1992-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -217,6 +217,36 @@ OSAGetSysTerminology(
 
         terminologyID = ((scriptCode & 0x7F) << 8) | (langCode & 0xFF)
 */
+/*
+ *  OSACopyScriptingDefinition()
+ *  
+ *  Discussion:
+ *    Gets the scripting definition of the specified bundle.  See
+ *    sdef(5) for details of the sdef format.
+ *  
+ *  Parameters:
+ *    
+ *    ref:
+ *      The file (or bundle) to look in.
+ *    
+ *    modeFlags:
+ *      There are no flags defined at this time; pass 0.
+ *    
+ *    sdef:
+ *      The resulting sdef as XML data.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSAError 
+OSACopyScriptingDefinition(
+  const FSRef *  ref,
+  SInt32         modeFlags,
+  CFDataRef *    sdef)                                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
 /**************************************************************************
     Obsolete versions provided for backward compatibility:
 */

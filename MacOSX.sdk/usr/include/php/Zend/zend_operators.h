@@ -6,7 +6,7 @@
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        | 
-   | available at through the world-wide-web at                           |
+   | available through the world-wide-web at the following url:           |
    | http://www.zend.com/license/2_00.txt.                                |
    | If you did not receive a copy of the Zend license and are unable to  |
    | obtain it through the world-wide-web, please send a note to          |
@@ -16,8 +16,6 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
 */
-
-#include "zend_strtod.h"
 
 #ifndef ZEND_OPERATORS_H
 #define ZEND_OPERATORS_H
@@ -35,7 +33,7 @@
 #include "ext/bcmath/libbcmath/src/bcmath.h"
 #endif
 
-#define MAX_LENGTH_OF_LONG 18
+#define MAX_LENGTH_OF_LONG 20
 #define MAX_LENGTH_OF_DOUBLE 32
 
 ZEND_API int add_function(zval *result, zval *op1, zval *op2 TSRMLS_DC);
@@ -83,7 +81,7 @@ static inline int is_numeric_string(char *str, int length, long *lval, double *d
 				*lval = local_lval;
 			}
 			return IS_LONG;
-		} else if (end_ptr_long == str && *end_ptr_long != '\0' && *str != '.') { /* ignore partial string matches */
+		} else if (end_ptr_long == str && *end_ptr_long != '\0' && *str != '.' && *str != '-') { /* ignore partial string matches */
 			return 0;
 		}
 	} else {
@@ -171,6 +169,9 @@ ZEND_API int zval_is_true(zval *op);
 ZEND_API int compare_function(zval *result, zval *op1, zval *op2 TSRMLS_DC);
 ZEND_API int numeric_compare_function(zval *result, zval *op1, zval *op2 TSRMLS_DC);
 ZEND_API int string_compare_function(zval *result, zval *op1, zval *op2 TSRMLS_DC);
+#if HAVE_STRCOLL
+ZEND_API int string_locale_compare_function(zval *result, zval *op1, zval *op2 TSRMLS_DC);
+#endif
 
 ZEND_API void zend_str_tolower(char *str, unsigned int length);
 ZEND_API int zend_binary_zval_strcmp(zval *s1, zval *s2);

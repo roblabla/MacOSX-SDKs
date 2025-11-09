@@ -45,9 +45,8 @@
 {
     /*All instance variables are private*/
 	IBOutlet NSMatrix*		_eraseTypes;
-
-	id						_state;
-	void*					_auxStorage;
+	void*					_reservedEraseSetupPanel[2];
+	void*					_esp_privateStorage;
 }
 
 /* --------------------------------------------------------------------------- */
@@ -70,7 +69,7 @@
 				when the user clicks the OK button.
 				
 				Do not invoke this method within a modal session (@link //apple_ref/occ/instm/DRSetupPanel/runSetupPanel runSetupPanel @/link or
-				@link //apple_ref/occ/instm/DRSetupPanel/beginSetupSheetForWindow%58modalDelegate%58didEndSelector%58contextInfo%58 beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: @/link)
+				@link //apple_ref/occ/instm/DRSetupPanel/beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: @/link)
 				because the erase object information is only updated just before the
 				modal session ends.
 	@result  	A new DRErase object.

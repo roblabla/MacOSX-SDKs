@@ -39,7 +39,17 @@ enum IOFWAVCUserClientCommandCodes {
     kIOFWAVCUserClientBreakP2PInputConnection,	// KIOUCScalarIScalarO 1, 0
     kIOFWAVCUserClientMakeP2POutputConnection,	// KIOUCScalarIScalarO 1, 0
     kIOFWAVCUserClientBreakP2POutputConnection,	// KIOUCScalarIScalarO 1, 0
+	kIOFWAVCUserClientCreateAsyncAVCCommand,	// kIOUCStructIStructO -1,-1
+	kIOFWAVCUserClientSubmitAsyncAVCCommand,	// kIOUCScalarIScalarO 1, 0
+	kIOFWAVCUserClientCancelAsyncAVCCommand,	// kIOUCScalarIScalarO 1, 0
+	kIOFWAVCUserClientReleaseAsyncAVCCommand,	// kIOUCScalarIScalarO 1, 0
+	kIOFWAVCUserClientReinitAsyncAVCCommand,	// // kIOUCScalarIStructI 1, -1
     kIOFWAVCUserClientNumCommands
+};
+
+enum IOFWAVCUserClientAsyncCommandCodes {
+    kIOFWAVCUserClientInstallAsyncAVCCommandCallback,	// kIOUCScalarIScalarO 1, 1
+    kIOFWAVCUserClientNumAsyncCommands
 };
 
 
@@ -82,8 +92,8 @@ typedef struct _AVCConnectTargetPlugsInParams
 	UInt32 destSubunitTypeAndID;
 	IOFWAVCPlugTypes destPlugType;
 	UInt32 destPlugNum;
-	bool lockConnection;
-	bool permConnection;
+	Boolean lockConnection;
+	Boolean permConnection;
 }AVCConnectTargetPlugsInParams;
 
 typedef struct _AVCConnectTargetPlugsOutParams
@@ -104,8 +114,11 @@ typedef struct _AVCGetTargetPlugConnectionOutParams
 	UInt32 connectedSubunitTypeAndID;
 	IOFWAVCPlugTypes connectedPlugType;
 	UInt32 connectedPlugNum;
-	bool lockConnection;
-	bool permConnection;
+	Boolean lockConnection;
+	Boolean permConnection;
 }AVCGetTargetPlugConnectionOutParams;
+
+#define kAsyncCmdSharedBufInterimRespOffset 0
+#define kAsyncCmdSharedBufFinalRespOffset 512
 
 #endif // _IOKIT_IOFIREWIREAVCUSERCLIENTCOMMON_H_

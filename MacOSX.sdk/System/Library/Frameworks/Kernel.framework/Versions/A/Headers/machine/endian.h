@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2004 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -19,17 +19,20 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
-#ifndef _MACHINE_ENDIAN_H
-#define _MACHINE_ENDIAN_H
+/*
+ * Copyright 1995 NeXT Computer, Inc. All rights reserved.
+ */
+#ifndef _BSD_MACHINE_ENDIAN_H_
+#define _BSD_MACHINE_ENDIAN_H_
 
 
-#if defined (__ppc__)
+#if defined (__ppc__) || defined(__ppc64__)
 #include "ppc/endian.h"
-#elif defined (__i386__)
+#elif defined (__i386__) || defined(__x86_64__)
 #include "i386/endian.h"
 #else
 #error architecture not supported
 #endif
 
 
-#endif /* _MACHINE_ENDIAN_H */
+#endif /* _BSD_MACHINE_ENDIAN_H_ */

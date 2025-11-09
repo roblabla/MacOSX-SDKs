@@ -60,3 +60,5 @@
 
 extern NSString *NSInvalidJavaClassException;
 
+typedef char * (*SYM_getVMVersionToUsePtr)(CFDictionaryRef);
+extern SYM_getVMVersionToUsePtr sSYM_getVMVersionToUse;

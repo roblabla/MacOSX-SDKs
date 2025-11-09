@@ -3,9 +3,9 @@
  
      Contains:   Carbon Printing Manager Interfaces.
  
-     Version:    Printing-163~3
+     Version:    Printing-192.4~592
  
-     Copyright:  © 1998-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1998-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -36,48 +36,22 @@
 extern "C" {
 #endif
 
+#ifndef PM_USE_SESSION_APIS
+#define PM_USE_SESSION_APIS 1
+#endif  /* !defined(PM_USE_SESSION_APIS) */
+
 /* Callbacks */
+typedef CALLBACK_API( void , PMSheetDoneProcPtr )(PMPrintSession printSession, WindowRef documentWindow, Boolean accepted);
+/******************************************/
+/* The following callbacks are deprecated */
+/******************************************/
 typedef CALLBACK_API( void , PMItemProcPtr )(DialogRef theDialog, short item);
 typedef CALLBACK_API( void , PMPrintDialogInitProcPtr )(PMPrintSettings printSettings, PMDialog *theDialog);
 typedef CALLBACK_API( void , PMPageSetupDialogInitProcPtr )(PMPageFormat pageFormat, PMDialog *theDialog);
-typedef CALLBACK_API( void , PMSheetDoneProcPtr )(PMPrintSession printSession, WindowRef documentWindow, Boolean accepted);
+typedef STACK_UPP_TYPE(PMSheetDoneProcPtr)                      PMSheetDoneUPP;
 typedef STACK_UPP_TYPE(PMItemProcPtr)                           PMItemUPP;
 typedef STACK_UPP_TYPE(PMPrintDialogInitProcPtr)                PMPrintDialogInitUPP;
 typedef STACK_UPP_TYPE(PMPageSetupDialogInitProcPtr)            PMPageSetupDialogInitUPP;
-typedef STACK_UPP_TYPE(PMSheetDoneProcPtr)                      PMSheetDoneUPP;
-/*
- *  NewPMItemUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern PMItemUPP
-NewPMItemUPP(PMItemProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-/*
- *  NewPMPrintDialogInitUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern PMPrintDialogInitUPP
-NewPMPrintDialogInitUPP(PMPrintDialogInitProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-/*
- *  NewPMPageSetupDialogInitUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern PMPageSetupDialogInitUPP
-NewPMPageSetupDialogInitUPP(PMPageSetupDialogInitProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
 /*
  *  NewPMSheetDoneUPP()
  *  
@@ -90,37 +64,37 @@ extern PMSheetDoneUPP
 NewPMSheetDoneUPP(PMSheetDoneProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
- *  DisposePMItemUPP()
+ *  NewPMItemUPP()
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
-extern void
-DisposePMItemUPP(PMItemUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern PMItemUPP
+NewPMItemUPP(PMItemProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
- *  DisposePMPrintDialogInitUPP()
+ *  NewPMPrintDialogInitUPP()
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
-extern void
-DisposePMPrintDialogInitUPP(PMPrintDialogInitUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern PMPrintDialogInitUPP
+NewPMPrintDialogInitUPP(PMPrintDialogInitProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
- *  DisposePMPageSetupDialogInitUPP()
+ *  NewPMPageSetupDialogInitUPP()
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
-extern void
-DisposePMPageSetupDialogInitUPP(PMPageSetupDialogInitUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern PMPageSetupDialogInitUPP
+NewPMPageSetupDialogInitUPP(PMPageSetupDialogInitProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  DisposePMSheetDoneUPP()
@@ -134,7 +108,7 @@ extern void
 DisposePMSheetDoneUPP(PMSheetDoneUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
- *  InvokePMItemUPP()
+ *  DisposePMItemUPP()
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -142,13 +116,10 @@ DisposePMSheetDoneUPP(PMSheetDoneUPP userUPP)                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern void
-InvokePMItemUPP(
-  DialogRef  theDialog,
-  short      item,
-  PMItemUPP  userUPP)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposePMItemUPP(PMItemUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
- *  InvokePMPrintDialogInitUPP()
+ *  DisposePMPrintDialogInitUPP()
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -156,13 +127,10 @@ InvokePMItemUPP(
  *    Non-Carbon CFM:   not available
  */
 extern void
-InvokePMPrintDialogInitUPP(
-  PMPrintSettings       printSettings,
-  PMDialog *            theDialog,
-  PMPrintDialogInitUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposePMPrintDialogInitUPP(PMPrintDialogInitUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
- *  InvokePMPageSetupDialogInitUPP()
+ *  DisposePMPageSetupDialogInitUPP()
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -170,10 +138,7 @@ InvokePMPrintDialogInitUPP(
  *    Non-Carbon CFM:   not available
  */
 extern void
-InvokePMPageSetupDialogInitUPP(
-  PMPageFormat              pageFormat,
-  PMDialog *                theDialog,
-  PMPageSetupDialogInitUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposePMPageSetupDialogInitUPP(PMPageSetupDialogInitUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  InvokePMSheetDoneUPP()
@@ -190,8 +155,79 @@ InvokePMSheetDoneUPP(
   Boolean         accepted,
   PMSheetDoneUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+/*
+ *  InvokePMItemUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern void
+InvokePMItemUPP(
+  DialogRef  theDialog,
+  short      item,
+  PMItemUPP  userUPP)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+/*
+ *  InvokePMPrintDialogInitUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern void
+InvokePMPrintDialogInitUPP(
+  PMPrintSettings       printSettings,
+  PMDialog *            theDialog,
+  PMPrintDialogInitUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+/*
+ *  InvokePMPageSetupDialogInitUPP()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern void
+InvokePMPageSetupDialogInitUPP(
+  PMPageFormat              pageFormat,
+  PMDialog *                theDialog,
+  PMPageSetupDialogInitUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
 #if PM_USE_SESSION_APIS
 /* Print loop */
+/*
+ *  PMSessionBeginCGDocument()
+ *  
+ *  Summary:
+ *    Begin a new print job that uses only drawing to a CoreGraphics
+ *    context.
+ *  
+ *  Discussion:
+ *    This is an updated version of the function
+ *    PMSessionBeginDocument. The functionality is identical to
+ *    PMSessionBeginDocument except that during a print job, the caller
+ *    cannot obtain a Quickdraw grafPort for the printing context but
+ *    can only obtain a Quartz graphics context (CGContextRef). This
+ *    function should be used in conjunction with
+ *    PMSessionGetCGGraphicsContext instead of
+ *    PMSessionGetGraphicsContext.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSessionBeginCGDocument(
+  PMPrintSession    printSession,
+  PMPrintSettings   printSettings,
+  PMPageFormat      pageFormat)                               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
 /*
  *  PMSessionBeginDocument()
  *  
@@ -246,7 +282,6 @@ extern OSStatus
 PMSessionEndPage(PMPrintSession printSession)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/* Session Printing Dialogs */
 /*
  *  PMSessionPageSetupDialog()
  *  
@@ -279,74 +314,10 @@ PMSessionPrintDialog(
 
 
 /*
- *  PMSessionPageSetupDialogInit()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMSessionPageSetupDialogInit(
-  PMPrintSession   printSession,
-  PMPageFormat     pageFormat,
-  PMDialog *       newDialog)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMSessionPrintDialogInit()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMSessionPrintDialogInit(
-  PMPrintSession    printSession,
-  PMPrintSettings   printSettings,
-  PMPageFormat      constPageFormat,
-  PMDialog *        newDialog)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMSessionPrintDialogMain()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMSessionPrintDialogMain(
-  PMPrintSession         printSession,
-  PMPrintSettings        printSettings,
-  PMPageFormat           constPageFormat,
-  Boolean *              accepted,
-  PMPrintDialogInitUPP   myInitProc)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMSessionPageSetupDialogMain()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMSessionPageSetupDialogMain(
-  PMPrintSession             printSession,
-  PMPageFormat               pageFormat,
-  Boolean *                  accepted,
-  PMPageSetupDialogInitUPP   myInitProc)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/************************/
-/*  Sheets are not available on classic. */
-/************************/
-/*
  *  PMSessionUseSheets()
+ *  
+ *  Discussion:
+ *    Sheets are not available on classic.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -358,299 +329,6 @@ PMSessionUseSheets(
   PMPrintSession   printSession,
   WindowRef        documentWindow,
   PMSheetDoneUPP   sheetDoneProc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-#else
-/* Print loop */
-/*
- *  PMBeginDocument()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMBeginDocument(
-  PMPrintSettings   printSettings,
-  PMPageFormat      pageFormat,
-  PMPrintContext *  printContext)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMEndDocument()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMEndDocument(PMPrintContext printContext)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMBeginPage()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMBeginPage(
-  PMPrintContext   printContext,
-  const PMRect *   pageFrame)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMEndPage()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMEndPage(PMPrintContext printContext)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/* Printing Dialogs */
-/*
- *  PMPageSetupDialog()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMPageSetupDialog(
-  PMPageFormat   pageFormat,
-  Boolean *      accepted)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMPrintDialog()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMPrintDialog(
-  PMPrintSettings   printSettings,
-  PMPageFormat      constPageFormat,
-  Boolean *         accepted)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMPageSetupDialogInit()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMPageSetupDialogInit(
-  PMPageFormat   pageFormat,
-  PMDialog *     newDialog)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/************************/
-/*  PMPrintDialogInit is not recommended. You should instead use */
-/*  PMPrintDialogInitWithPageFormat or PMSessionPrintDialogInit */
-/************************/
-/*
- *  PMPrintDialogInit()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMPrintDialogInit(
-  PMPrintSettings   printSettings,
-  PMDialog *        newDialog)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMPrintDialogInitWithPageFormat()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMPrintDialogInitWithPageFormat(
-  PMPrintSettings   printSettings,
-  PMPageFormat      constPageFormat,
-  PMDialog *        newDialog)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMPrintDialogMain()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMPrintDialogMain(
-  PMPrintSettings        printSettings,
-  PMPageFormat           constPageFormat,
-  Boolean *              accepted,
-  PMPrintDialogInitUPP   myInitProc)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMPageSetupDialogMain()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMPageSetupDialogMain(
-  PMPageFormat               pageFormat,
-  Boolean *                  accepted,
-  PMPageSetupDialogInitUPP   myInitProc)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-#endif  /* PM_USE_SESSION_APIS */
-
-/* Printing Dialog accessors */
-/*
- *  PMGetDialogPtr()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMGetDialogPtr(
-  PMDialog     pmDialog,
-  DialogRef *  theDialog)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-#define PMGetDialogRef PMGetDialogPtr
-/*
- *  PMGetModalFilterProc()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMGetModalFilterProc(
-  PMDialog          pmDialog,
-  ModalFilterUPP *  filterProc)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMSetModalFilterProc()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMSetModalFilterProc(
-  PMDialog         pmDialog,
-  ModalFilterUPP   filterProc)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMGetItemProc()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMGetItemProc(
-  PMDialog     pmDialog,
-  PMItemUPP *  itemProc)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMSetItemProc()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMSetItemProc(
-  PMDialog    pmDialog,
-  PMItemUPP   itemProc)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMGetDialogAccepted()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMGetDialogAccepted(
-  PMDialog   pmDialog,
-  Boolean *  process)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMSetDialogAccepted()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMSetDialogAccepted(
-  PMDialog   pmDialog,
-  Boolean    process)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMGetDialogDone()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMGetDialogDone(
-  PMDialog   pmDialog,
-  Boolean *  done)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  PMSetDialogDone()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMSetDialogDone(
-  PMDialog   pmDialog,
-  Boolean    done)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Presets */
@@ -709,6 +387,453 @@ PMSessionEnablePrinterPresets(
  */
 extern OSStatus 
 PMSessionDisablePrinterPresets(PMPrintSession session)        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+#endif  /* PM_USE_SESSION_APIS */
+
+#pragma mark -
+#pragma mark DEPRECATED
+#pragma mark
+#if PM_USE_SESSION_APIS
+/*
+ *  PMSessionPageSetupDialogInit()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.1 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSessionPageSetupDialogInit(
+  PMPrintSession   printSession,
+  PMPageFormat     pageFormat,
+  PMDialog *       newDialog)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMSessionPrintDialogInit()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.1 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSessionPrintDialogInit(
+  PMPrintSession    printSession,
+  PMPrintSettings   printSettings,
+  PMPageFormat      constPageFormat,
+  PMDialog *        newDialog)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMSessionPrintDialogMain()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.1 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSessionPrintDialogMain(
+  PMPrintSession         printSession,
+  PMPrintSettings        printSettings,
+  PMPageFormat           constPageFormat,
+  Boolean *              accepted,
+  PMPrintDialogInitUPP   myInitProc)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMSessionPageSetupDialogMain()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.1 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSessionPageSetupDialogMain(
+  PMPrintSession             printSession,
+  PMPageFormat               pageFormat,
+  Boolean *                  accepted,
+  PMPageSetupDialogInitUPP   myInitProc)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+#else
+/* Print loop */
+/*
+ *  PMBeginDocument()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    Use PMSessionBeginDocument instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMBeginDocument(
+  PMPrintSettings   printSettings,
+  PMPageFormat      pageFormat,
+  PMPrintContext *  printContext)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMEndDocument()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    Use PMSessionEndDocument instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMEndDocument(PMPrintContext printContext)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMBeginPage()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    Use PMSessionBeginPage instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMBeginPage(
+  PMPrintContext   printContext,
+  const PMRect *   pageFrame)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMEndPage()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    Use PMSessionEndPage instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMEndPage(PMPrintContext printContext)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMPageSetupDialog()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    Use PMSessionPageSetupDialog instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPageSetupDialog(
+  PMPageFormat   pageFormat,
+  Boolean *      accepted)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMPrintDialog()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    Use PMSessionPrintDialog instead.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPrintDialog(
+  PMPrintSettings   printSettings,
+  PMPageFormat      constPageFormat,
+  Boolean *         accepted)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMPageSetupDialogInit()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPageSetupDialogInit(
+  PMPageFormat   pageFormat,
+  PMDialog *     newDialog)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMPrintDialogInit()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPrintDialogInit(
+  PMPrintSettings   printSettings,
+  PMDialog *        newDialog)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMPrintDialogInitWithPageFormat()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.1 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPrintDialogInitWithPageFormat(
+  PMPrintSettings   printSettings,
+  PMPageFormat      constPageFormat,
+  PMDialog *        newDialog)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMPrintDialogMain()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPrintDialogMain(
+  PMPrintSettings        printSettings,
+  PMPageFormat           constPageFormat,
+  Boolean *              accepted,
+  PMPrintDialogInitUPP   myInitProc)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMPageSetupDialogMain()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPageSetupDialogMain(
+  PMPageFormat               pageFormat,
+  Boolean *                  accepted,
+  PMPageSetupDialogInitUPP   myInitProc)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+#endif  /* PM_USE_SESSION_APIS */
+
+/*
+ *  PMGetDialogPtr()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMGetDialogPtr(
+  PMDialog     pmDialog,
+  DialogRef *  theDialog)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+#define PMGetDialogRef PMGetDialogPtr
+/*
+ *  PMGetModalFilterProc()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMGetModalFilterProc(
+  PMDialog          pmDialog,
+  ModalFilterUPP *  filterProc)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMSetModalFilterProc()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSetModalFilterProc(
+  PMDialog         pmDialog,
+  ModalFilterUPP   filterProc)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMGetItemProc()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMGetItemProc(
+  PMDialog     pmDialog,
+  PMItemUPP *  itemProc)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMSetItemProc()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSetItemProc(
+  PMDialog    pmDialog,
+  PMItemUPP   itemProc)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMGetDialogAccepted()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMGetDialogAccepted(
+  PMDialog   pmDialog,
+  Boolean *  process)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMSetDialogAccepted()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSetDialogAccepted(
+  PMDialog   pmDialog,
+  Boolean    process)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMGetDialogDone()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMGetDialogDone(
+  PMDialog   pmDialog,
+  Boolean *  done)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  PMSetDialogDone()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    You should create a PDE for your application instead of relying
+ *    on this function.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSetDialogDone(
+  PMDialog   pmDialog,
+  Boolean    done)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 

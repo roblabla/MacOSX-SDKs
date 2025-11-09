@@ -1,6 +1,6 @@
 /*	
     NSURLRequest.h
-    Copyright (C) 2003 Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2003-2005, Apple Computer, Inc. All rights reserved.    
     
     Public header file.
 */
@@ -15,6 +15,7 @@
 
 @class NSData;
 @class NSDictionary;
+@class NSInputStream;
 @class NSString;
 @class NSURL;
 @class NSURLRequestInternal;
@@ -354,6 +355,22 @@ typedef enum
 */
 - (NSData *)HTTPBody;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+/*!
+    @method HTTPBodyStream
+    @abstract Returns the request body stream of the receiver
+    if any has been set
+    @discussion The stream is returned for examination only; it is
+    not safe for the caller to manipulate the stream in any way.  Also
+    note that the HTTPBodyStream and HTTPBody are mutually exclusive - only
+    one can be set on a given request.  Also note that the body stream is
+    preserved across copies, but is LOST when the request is coded via the 
+    NSCoding protocol
+    @result The request body stream of the receiver.
+*/
+- (NSInputStream *)HTTPBodyStream;
+#endif
+
 /*! 
     @method HTTPShouldHandleCookies
     @abstract Determine whether default cookie handling will happen for 
@@ -435,6 +452,20 @@ typedef enum
     @param data the new request body data for the receiver.
 */
 - (void)setHTTPBody:(NSData *)data;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+/*!
+    @method setHTTPBodyStream:
+    @abstract Sets the request body to be the contents of the given stream. 
+    @discussion The provided stream should be unopened; the request will take
+    over the stream's delegate.  The entire stream's contents will be 
+    transmitted as the HTTP body of the request.  Note that the body stream
+    and the body data (set by setHTTPBody:, above) are mutually exclusive 
+    - setting one will clear the other. 
+    @param inputStream the new input stream for use by the receiver
+*/
+- (void)setHTTPBodyStream:(NSInputStream *)inputStream;
+#endif
 
 /*! 
     @method setHTTPShouldHandleCookies

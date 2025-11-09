@@ -44,6 +44,14 @@ CG_EXTERN CFDictionaryRef CGSessionCopyCurrentDictionary(void);
 #define kCGSessionLoginDoneKey		CFSTR("kCGSessionLoginDoneKey")
         /* value is a CFBoolean, kCFBooleanTrue if login operation has been done, otherwise kCFBooleanFalse */
 
+/*
+ * When the GUI session on a console changes, a notification
+ * is posted via the notify_post() API.  See notify (3) and
+ * notify.h for details.
+ */
+#define kCGNotifyGUIConsoleSessionChanged		"com.apple.coregraphics.GUIConsoleSessionChanged"
+/* When a user logs in or out of a session we post a notification via notify_post() */
+#define kCGNotifyGUISessionUserChanged			"com.apple.coregraphics.GUISessionUserChanged"
 
 CG_EXTERN_C_END
 

@@ -29,24 +29,5 @@
 
 #include <sys/appleapiopts.h>
 
-#ifdef KERNEL
-#ifdef __APPLE_API_UNSTABLE
-/*
- * Block interrupts during mcount so that those interrupts can also be
- * counted (as soon as we get done with the current counting).  On the
- * PPC platfom, can't do splhigh/splx as those are C routines and can
- * recursively invoke mcount.
- */
-extern unsigned long disable_ee();
-extern void restore_ee(unsigned long smsr);
-
-#define MCOUNT_INIT		register unsigned long smsr;
-
-#define	MCOUNT_ENTER	smsr = disable_ee();
-
-#define	MCOUNT_EXIT		restore_ee(smsr);
-
-#endif /* __APPLE_API_UNSTABLE */
-#endif /* KERNEL */
 
 #endif /* _BSD_PPC_PROFILE_H_ */

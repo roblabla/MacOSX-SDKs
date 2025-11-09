@@ -13,14 +13,14 @@
 // ================================================================================
 //      interface ABPerson
 // ================================================================================
-// ABPerson is a subclass of ABRecord and represents a person.See ABGlobals.h for
+// ABPerson is a subclass of ABRecord and represents a person. See ABGlobals.h for
 // a list of built-in properties
 
 @interface ABPerson : ABRecord
 
 - (NSArray *)parentGroups;
     // Returns an array of ABGroup this group belongs to.
-    // Returns an empty array if this person doesn't belong to any group
+    // Returns an empty array if this person doesn't belong to any groups
 
 @end
 
@@ -33,14 +33,14 @@
 
 + (int)addPropertiesAndTypes:(NSDictionary *)properties;
     // Adds properties to all people records. The dictionary must be of the form:
-    //          key: propety name
+    //          key: property name
     //          value: property type
     // Property name must be unique
-    // Returns the number of properties successfuly added
+    // Returns the number of properties successfully added
 
 + (int)removeProperties:(NSArray *)properties;
     // Removes properties from all people
-    // Returns the number of properties successfuly removed
+    // Returns the number of properties successfully removed
 
 + (NSArray *)properties;
     // Returns an array of property names

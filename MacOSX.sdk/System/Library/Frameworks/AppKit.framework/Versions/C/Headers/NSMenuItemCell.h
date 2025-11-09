@@ -1,7 +1,7 @@
 /*
         NSMenuItemCell.h
         Application Kit
-        Copyright (c) 1997-2003, Apple Computer, Inc.
+        Copyright (c) 1997-2005, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -14,7 +14,7 @@
 @interface NSMenuItemCell : NSButtonCell {
     /*All instance variables are private*/
     @private
-    void *_extraData;
+    id _extraData;
     NSSize _stateImageSize;
     NSSize _imageSize;
     NSSize _titleSize;
@@ -61,5 +61,6 @@
 - (void)drawKeyEquivalentWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 - (void)drawBorderAndBackgroundWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 
+- (int)tag;
 
 @end

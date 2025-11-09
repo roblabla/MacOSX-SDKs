@@ -39,6 +39,8 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 
+#ifdef __APPLE_API_OBSOLETE
+
 /* 
    Non-aligned types are used in packet headers. 
 */
@@ -70,10 +72,22 @@ struct atalk_addr {
 #define	UAL_UAL(x,y)	*(unsigned long *) &(x[0]) = *(unsigned long *) &(y[0])
 #define	UAL_VALUE(x)	(*(unsigned long *) &(x[0]))
 
+/* Macros to assign unaligned fields with byte swapping */
+#define	UAS_ASSIGN_HTON(x,s)	*(unsigned short *) &(x[0]) = htons((unsigned short) (s))
+#define	UAS_ASSIGN_NTOH(x,s)	*(unsigned short *) &(x[0]) = ntohs((unsigned short) (s))
+#define	UAS_VALUE_HTON(x)		htons((*(unsigned short *) &(x[0])))
+#define	UAS_VALUE_NTOH(x)		ntohs((*(unsigned short *) &(x[0])))
+#define	UAL_ASSIGN_HTON(x,l)	*(unsigned long *) &(x[0]) = htonl((unsigned long) (l))
+#define	UAL_ASSIGN_NTOH(x,l)	*(unsigned long *) &(x[0]) = ntohl((unsigned long) (l))
+#define	UAL_VALUE_HTON(x)		htonl((*(unsigned long *) &(x[0])))
+#define	UAL_VALUE_NTOH(x)		ntohl((*(unsigned long *) &(x[0])))
+
 /* Macros to manipulate at_net variables */
-#define	NET_ASSIGN(x,s)	*(unsigned short *)&(x[0]) = (unsigned short)(s)
-#define	NET_NET(x, y)	*(unsigned short *)&(x[0]) = *(unsigned short *)&(y[0])
-#define	NET_VALUE(x)	(*(unsigned short *) &(x[0]))
+#define	NET_ASSIGN(x,s)		*(unsigned short *)&(x[0]) = htons((unsigned short)(s))
+#define	NET_ASSIGN_NOSWAP(x,s)		*(unsigned short *)&(x[0]) = (unsigned short)(s)
+#define	NET_NET(x, y)		*(unsigned short *)&(x[0]) = *(unsigned short *)&(y[0])
+#define	NET_VALUE(x)		ntohs((*(unsigned short *) &(x[0])))
+#define	NET_VALUE_NOSWAP(x)		(*(unsigned short *) &(x[0]))
 #define ATALK_ASSIGN(a, net, node, unused ) \
   a.atalk_unused = unused; a.atalk_node = node; NET_ASSIGN(a.atalk_net, net)
 
@@ -259,7 +273,6 @@ typedef struct {
 #define	IFID_HOME	1 		/* home port in ifID_table */
 
 #define	ATALK_VALUE(a)		((*(u_long *) &(a))&0x00ffffff)
-#define	ATALK_EQUAL(a, b)	(ATALK_VALUE(a) == ATALK_VALUE(b))
 
 #define VERSION_LENGTH		80	/* length of version string */
 
@@ -281,19 +294,11 @@ typedef struct at_state {
 #define AT_ST_ZT_CHANGED 	0x0800  /* zone table changed (for SNMP) */
 #define AT_ST_NBP_CHANGED	0x1000  /* if nbp table changed (for SNMP)*/
 
-#ifdef KERNEL
-#ifdef __APPLE_API_PRIVATE
-extern at_state_t at_state;		/* global state of AT network */
-
-#define ROUTING_MODE	(at_state.flags & AT_ST_ROUTER)
-#define MULTIHOME_MODE	(at_state.flags & AT_ST_MULTIHOME)
-#define MULTIPORT_MODE (ROUTING_MODE || MULTIHOME_MODE)
-#endif /* __APPLE_API_PRIVATE */
-#endif /* KERNEL */
 
 /* defines originally from h/at_elap.h */
 #define AT_ADDR			0
 #define ET_ADDR			1
 #define AT_ADDR_NO_LOOP		2	/* disables packets from looping back */
 
+#endif /* __APPLE_API_OBSOLETE */
 #endif /* _NETAT_APPLETALK_H_ */

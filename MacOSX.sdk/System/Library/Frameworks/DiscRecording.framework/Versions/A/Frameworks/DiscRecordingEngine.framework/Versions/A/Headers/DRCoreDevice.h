@@ -528,11 +528,26 @@ extern const CFStringRef kDRDeviceCanWriteDVDRAMKey					AVAILABLE_MAC_OS_X_VERSI
 extern const CFStringRef kDRDeviceCanWriteDVDPlusRKey				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
+	@const kDRDeviceCanWriteDVDPlusRDoubleLayerKey
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
+				is a reference to a CFBoolean object indicating whether the device can write to DVD+R double
+				layer media.
+*/
+extern const CFStringRef kDRDeviceCanWriteDVDPlusRDoubleLayerKey	AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
 	@const kDRDeviceCanWriteDVDPlusRWKey
 	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
 				is a reference to a CFBoolean object indicating whether the device can write to DVD+RW media.
 */
 extern const CFStringRef kDRDeviceCanWriteDVDPlusRWKey				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+/*!
+	@const kDRDeviceCanWriteCDTextKey
+	@discussion	A key for the @link kDRDeviceWriteCapabilitiesKey kDRDeviceWriteCapabilitiesKey @/link dictionary in the device info dictionary.  The value
+				is a reference to a CFBoolean object indicating whether the device can write CD-Text information.
+*/
+extern const CFStringRef kDRDeviceCanWriteCDTextKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
 	@const kDRDeviceCanWriteIndexPointsKey
@@ -778,6 +793,13 @@ extern const CFStringRef kDRDeviceMediaBlocksFreeKey				AVAILABLE_MAC_OS_X_VERSI
 extern const CFStringRef kDRDeviceMediaBlocksUsedKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
+	@const kDRDeviceMediaDoubleLayerL0DataZoneBlocksKey
+	@discussion	A key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary. The value of this key is a reference to a CFNumber
+				object containing the number of blocks on layer 0 of a double layer burnable disc.
+*/
+extern const CFStringRef kDRDeviceMediaDoubleLayerL0DataZoneBlocksKey		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+	
+/*!
 	@const kDRDeviceMediaTrackCountKey
 	@discussion	A key in the @link kDRDeviceMediaInfoKey kDRDeviceMediaInfoKey @/link dictionary. The value of this key is a reference to a CFNumber
 				object containing the total number of tracks on the disc in all sessions.
@@ -885,6 +907,13 @@ extern const CFStringRef kDRDeviceMediaTypeDVDRW					AVAILABLE_MAC_OS_X_VERSION_
 				This value indicates that the disc is a DVD+R.
 */
 extern const CFStringRef kDRDeviceMediaTypeDVDPlusR					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+/*!
+	@const	kDRDeviceMediaTypeDVDPlusRDoubleLayer
+	@discussion	One value for the @link kDRDeviceMediaTypeKey kDRDeviceMediaTypeKey @/link dictionary key in the media info dictionary.
+				This value indicates that the disc is a DVD+R Double Layer.
+*/
+extern const CFStringRef kDRDeviceMediaTypeDVDPlusRDoubleLayer		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
 	@const	kDRDeviceMediaTypeDVDPlusRW

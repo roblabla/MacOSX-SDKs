@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2004 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -58,56 +58,50 @@
 #ifndef _SYS_UIO_H_
 #define	_SYS_UIO_H_
 
-/*
- * XXX
- * iov_base should be a void *.
- */
-struct iovec {
-	char	*iov_base;	/* Base address. */
-	size_t	 iov_len;	/* Length. */
-};
-
-enum	uio_rw { UIO_READ, UIO_WRITE };
-
-/* Segment flag values. */
-enum uio_seg {
-	UIO_USERSPACE,		/* kernel address is virtual,  to/from user virtual */
-	UIO_USERISPACE,		/* kernel address is virtual,  to/from user virtual */
-	UIO_SYSSPACE,		/* kernel address is virtual,  to/from system virtual */
-	UIO_PHYS_USERSPACE,     /* kernel address is physical, to/from user virtual */
-	UIO_PHYS_SYSSPACE,      /* kernel address is physical, to/from system virtual */
-};
-
-#ifdef KERNEL
-struct uio {
-	struct	iovec *uio_iov;
-	int	uio_iovcnt;
-	off_t	uio_offset;
-	int	uio_resid;
-	enum	uio_seg uio_segflg;
-	enum	uio_rw uio_rw;
-	struct	proc *uio_procp;
-};
-
-/*
- * Limits
- */
-#define UIO_MAXIOV	1024		/* max 1K of iov's */
-#define UIO_SMALLIOV	8		/* 8 on stack, else malloc */
-
-extern int uiomove __P((caddr_t cp, int n, struct uio *uio));
-extern int uiomove64 __P((unsigned long long cp, int n, struct uio *uio));
-extern int ureadc __P((int c, struct uio *uio));
-extern int uwritec __P((struct uio *uio));
-
-#endif /* KERNEL */
-
-#ifndef	KERNEL
 #include <sys/cdefs.h>
+#include <sys/_types.h>
+
+/*
+ * [XSI] The ssize_t and size_t types shall be defined as described
+ * in <sys/types.h>.
+ */
+#ifndef _SIZE_T
+#define _SIZE_T
+typedef __darwin_size_t		size_t;
+#endif
+
+#ifndef	_SSIZE_T
+#define	_SSIZE_T
+typedef	__darwin_ssize_t	ssize_t;
+#endif
+
+/*
+ * [XSI] Structure whose address is passed as the second parameter to the
+ * readv() and writev() functions.
+ */
+#ifndef _STRUCT_IOVEC
+#define	_STRUCT_IOVEC
+struct iovec {
+	void *   iov_base;	/* [XSI] Base address of I/O memory region */
+	size_t	 iov_len;	/* [XSI] Size of region iov_base points to */
+};
+#endif
+
+
+#ifndef _POSIX_C_SOURCE
+/*
+ * IO direction for uio_t.
+ *	UIO_READ - data moves into iovec(s) associated with uio_t
+ *	UIO_WRITE - data moves out of iovec(s) associated with uio_t
+ */
+enum uio_rw { UIO_READ, UIO_WRITE };
+#endif
+
+
 
 __BEGIN_DECLS
-ssize_t	readv __P((int, const struct iovec *, int));
-ssize_t	writev __P((int, const struct iovec *, int));
+ssize_t	readv(int, const struct iovec *, int);
+ssize_t	writev(int, const struct iovec *, int);
 __END_DECLS
-#endif /* !KERNEL */
+
 #endif /* !_SYS_UIO_H_ */

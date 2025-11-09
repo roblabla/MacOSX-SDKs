@@ -48,11 +48,19 @@ protected:
 
 public:
 	virtual void sendChangeNotification(UInt32 notificationType);
+#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
+    // OSMetaClassDeclareReservedUsed(IOAudioControlUserClient, 1);
+    virtual bool initWithAudioControl(IOAudioControl *control, task_t owningTask, void *securityID, UInt32 type, OSDictionary *properties);
+#endif
 
 private:
     OSMetaClassDeclareReservedUsed(IOAudioControlUserClient, 0);
-
+#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
+    OSMetaClassDeclareReservedUsed(IOAudioControlUserClient, 1);
+#else
     OSMetaClassDeclareReservedUnused(IOAudioControlUserClient, 1);
+#endif
+
     OSMetaClassDeclareReservedUnused(IOAudioControlUserClient, 2);
     OSMetaClassDeclareReservedUnused(IOAudioControlUserClient, 3);
     OSMetaClassDeclareReservedUnused(IOAudioControlUserClient, 4);
@@ -70,8 +78,10 @@ private:
 
 public:
     static IOAudioControlUserClient *withAudioControl(IOAudioControl *control, task_t clientTask, void *securityID, UInt32 type);
+    static IOAudioControlUserClient *withAudioControl(IOAudioControl *control, task_t clientTask, void *securityID, UInt32 type, OSDictionary *properties);
 
     virtual bool initWithAudioControl(IOAudioControl *control, task_t owningTask, void *securityID, UInt32 type);
+	
     virtual void free();
 
     virtual IOReturn registerNotificationPort(mach_port_t port, UInt32 type, UInt32 refCon);

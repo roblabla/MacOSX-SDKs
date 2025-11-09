@@ -27,14 +27,23 @@
 #ifndef __ATA_SMART_LIB_H__
 #define __ATA_SMART_LIB_H__
 
+
+/*! @defined kIOPropertySMARTCapableKey
+	@discussion Property to search for in IORegistry to find SMART capable devices
+	without hardcoding the search to a particular device class. */
+#define kIOPropertySMARTCapableKey		"SMART Capable"
+
+
+#include <IOKit/IOReturn.h>
+#include <IOKit/IOTypes.h>
+
+
 #if !KERNEL
 	#include <CoreFoundation/CFPlugIn.h>
 	#if COREFOUNDATION_CFPLUGINCOM_SEPARATE
 		#include <CoreFoundation/CFPlugInCOM.h>
 	#endif
 	
-	#include <IOKit/IOReturn.h>
-	#include <IOKit/IOTypes.h>
 	#include <IOKit/IOCFPlugIn.h>
 	#include <IOKit/storage/ata/IOATAStorageDefines.h>
 	

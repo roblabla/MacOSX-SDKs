@@ -1,5 +1,5 @@
 /* CoreGraphics - CGPDFObject.h
- * Copyright (c) 2002-2003 Apple Computer, Inc.
+ * Copyright (c) 2002-2004 Apple Computer, Inc.
  * All rights reserved.
  */
 
@@ -7,7 +7,6 @@
 #define CGPDFOBJECT_H_
 
 #include <CoreGraphics/CGBase.h>
-#include <AvailabilityMacros.h>
 
 /* A type for boolean values. */
 

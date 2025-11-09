@@ -3,9 +3,9 @@
  
      Contains:   AppleEvents Registry Interface.
  
-     Version:    AppleEvents-287~1
+     Version:    AppleEvents-316.2~623
  
-     Copyright:  © 1993-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1993-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -96,7 +96,6 @@
 #define enumSaveOptions 				'savo'				/*   0x7361766f   */
 #define enumStyle 						'styl'				/*   0x7374796c   */
 #define enumTransferMode 				'tran'				/*   0x7472616e   */
-#define formUniqueID 					'ID  '				/*   0x49442020   */
 #define kAEAbout 						'abou'				/*   0x61626f75   */
 #define kAEAfter 						'afte'				/*   0x61667465   */
 #define kAEAliasSelection 				'sali'				/*   0x73616c69   */
@@ -341,6 +340,7 @@
 #define keyAESaveOptions 				'savo'				/*   0x7361766f   */
 #define keyAEScale 						'pscl'				/*   0x7073636c   */
 #define keyAEScriptTag 					'psct'				/*   0x70736374   */
+#define keyAESearchText 				'stxt'				/*   0x73747874   */
 #define keyAEShowWhere 					'show'				/*   0x73686f77   */
 #define keyAEStartAngle 				'pang'				/*   0x70616e67   */
 #define keyAEStartPoint 				'pstp'				/*   0x70737470   */
@@ -589,14 +589,27 @@
 #define kNextBody 						1
 #define kPreviousBody 					2
 
-#define kCaretPosition 					1					/*  specify caret position  */
-#define kRawText 						2					/*  specify range of raw text  */
-#define kSelectedRawText 				3					/*  specify range of selected raw text  */
-#define kConvertedText 					4					/*  specify range of converted text  */
-#define kSelectedConvertedText 			5					/*  specify range of selected converted text  */
-#define kBlockFillText 					6					/*  Block Fill hilite style  */
-#define kOutlineText 					7					/*  Outline hilite style  */
-#define kSelectedText 					8					/*  Selected hilite style  */
+#define kTSMHiliteCaretPosition 		1					/*  specify caret position  */
+#define kTSMHiliteRawText 				2					/*  specify range of raw text  */
+#define kTSMHiliteSelectedRawText 		3					/*  specify range of selected raw text  */
+#define kTSMHiliteConvertedText 		4					/*  specify range of converted text  */
+#define kTSMHiliteSelectedConvertedText  5					/*  specify range of selected converted text  */
+#define kTSMHiliteBlockFillText 		6					/*  Block Fill hilite style  */
+#define kTSMHiliteOutlineText 			7					/*  Outline hilite style  */
+#define kTSMHiliteSelectedText 			8					/*  Selected hilite style  */
+#define kTSMHiliteNoHilite 				9					/*  specify range of non-hilited text  */
+
+#if OLDROUTINENAMES
+#define kCaretPosition 					1
+#define kRawText 						2
+#define kSelectedRawText 				3
+#define kConvertedText 					4
+#define kSelectedConvertedText 			5
+#define kBlockFillText 					6
+#define kOutlineText 					7
+#define kSelectedText 					8
+
+#endif  /* OLDROUTINENAMES */
 
 #define keyAEHiliteRange 				'hrng'				/*  typeTextRangeArray for System 7, typeHiliteRangeArray for System 8  */
 #define keyAEPinRange 					'pnrg'				/*  typeTextRange for System 7, typeTextRegionRange for System 8    */
@@ -610,14 +623,6 @@
 #if OLDROUTINENAMES
 #define keyAELeadingEdge 				'klef'
 #endif  /* OLDROUTINENAMES */
-
-															/*  AppleScript 1.3: New Text types  */
-#define typeUnicodeText 				'utxt'
-#define typeStyledUnicodeText 			'sutx'
-#define typeUTF8Text 					'utf8'
-#define typeEncodedString 				'encs'
-#define typeCString 					'cstr'
-#define typePString 					'pstr'
 
 															/*  AppleScript 1.3: Unit types  */
 #define typeMeters 						'metr'				/*  Base Unit  */
@@ -873,6 +878,7 @@
 #define eF14Key 						0x6B736B00
 #define eF15Key 						0x6B737100
 
+#define keyAEQuitWithoutUI 				'noui'				/*  If present in a kAEQuitApplication event, autosave any documents with uncommitted changes and quit  */
 
 #endif /* __AEREGISTRY_R__ */
 

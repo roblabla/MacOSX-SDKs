@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2001 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2005 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -26,9 +26,9 @@
 
 #include <IOKit/storage/IOStorageProtocolCharacteristics.h>
 
-//
-//	Device Characteristics - Characteristics defined for devices.
-//
+/*
+ *	Device Characteristics - Characteristics defined for devices.
+ */
 
 /*!
 @defined kIOPropertyDeviceCharacteristicsKey

@@ -226,4 +226,32 @@ extern const CFStringRef	kDRStatusStateFinishing			AVAILABLE_MAC_OS_X_VERSION_10
 extern const CFStringRef kDRStatusStateErasing				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
+
+
+#pragma mark Extended progress dictionary values
+/*!
+	@const kDRStatusProgressInfoKey
+	@abstract	A dictionary of extended progress information.
+	@discussion A key for the status dictionary. The value of this key is a reference to a CFDictionary
+				object containing extended progress information.
+*/
+extern const CFStringRef kDRStatusProgressInfoKey			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
+	@const kDRStatusProgressCurrentKPS
+	@abstract	The current burn speed in kilobytes per second.
+	@discussion This is an optional key within the kDRStatusProgressInfo dictionary. The value of this
+				key, if present, is a CFNumber object containing the write speed of the burn.
+*/
+extern const CFStringRef kDRStatusProgressCurrentKPS		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
+	@const kDRStatusProgressCurrentXFactor
+	@abstract	The current burn speed in a media appropriate x-factor
+	@discussion This is an optional key within the kDRStatusProgressInfo dictionary. The value of this
+				key, if present, is a CFNumber object containing the appropriate x-factor for the media.
+*/
+extern const CFStringRef kDRStatusProgressCurrentXFactor	AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
 #endif 	/* _H_DRCoreStatus */

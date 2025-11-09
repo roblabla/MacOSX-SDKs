@@ -6,7 +6,7 @@
      Version:    Technology: Mac OS X
                  Release:    Mac OS X
 
-     Copyright:  (c) 1985-2004 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 1985-2005 by Apple Computer, Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -595,7 +595,7 @@ enum
 };
 
 /*!
-    @enum           Commonly Combinations of AudioTimeStamp Flags
+    @enum           Commonly Used Combinations of AudioTimeStamp Flags
     @abstract       Some commonly used combinations of AudioTimeStamp flags.
     @constant       kAudioTimeStampSampleHostTimeValid
                         The sample frame time and the host time are valid.
@@ -819,6 +819,7 @@ enum
 */
 enum
 {
+	kAudioChannelFlags_AllOff					= 0,
     kAudioChannelFlags_RectangularCoordinates   = (1L<<0),
     kAudioChannelFlags_SphericalCoordinates     = (1L<<1),
     kAudioChannelFlags_Meters                   = (1L<<2)
@@ -856,9 +857,9 @@ enum
 };
 
 /*!
-    @defined        AudioChannelLayoutTag_GetNumberOfChannels
+    @function       AudioChannelLayoutTag_GetNumberOfChannels
     @abstract       A macro to get the number of channels out of an AudioChannelLayoutTag
-    @discusion      The low 16 bits of an AudioChannelLayoutTag gives the number of channels except
+    @discussion     The low 16 bits of an AudioChannelLayoutTag gives the number of channels except
                     for kAudioChannelLayoutTag_UseChannelDescriptions and
                     kAudioChannelLayoutTag_UseChannelBitmap.
     @param          layoutTag

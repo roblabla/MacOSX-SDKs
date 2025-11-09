@@ -3,9 +3,9 @@
  
      Contains:   Games Sprockets: DrawSprocket interfaces
  
-     Version:    DrawSprocket-2.0.50~1360
+     Version:    DrawSprocket-2.0.80~1362
  
-     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -36,6 +36,15 @@ extern "C" {
 #if PRAGMA_ENUM_ALWAYSINT
     #pragma enumsalwaysint on
 #endif
+
+
+/******************** DEPRECATION NOTICE *********************
+ *
+ * The DrawSprocket API is being deprecated, and should be replaced
+ * by the CGDirectDisplay API in the CoreGraphics framework in 
+ * ApplicationServices.framework.
+ *
+ *************************************************************/
 
 /*
 ********************************************************************************
@@ -220,102 +229,102 @@ typedef DSpBlitInfo *                   DSpBlitInfoPtr;
 ** global operations
 */
 /*
- *  DSpStartup()
+ *  DSpStartup()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
-DSpStartup(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DSpStartup(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpShutdown()
+ *  DSpShutdown()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
-DSpShutdown(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DSpShutdown(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpGetVersion()
+ *  DSpGetVersion()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.7 and later
  */
 extern NumVersion 
-DSpGetVersion(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DSpGetVersion(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpGetFirstContext()
+ *  DSpGetFirstContext()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
 DSpGetFirstContext(
   DisplayIDType          inDisplayID,
-  DSpContextReference *  outContext)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DSpContextReference *  outContext)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpGetNextContext()
+ *  DSpGetNextContext()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
 DSpGetNextContext(
   DSpContextReference    inCurrentContext,
-  DSpContextReference *  outContext)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DSpContextReference *  outContext)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpGetCurrentContext()
+ *  DSpGetCurrentContext()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.7 and later
  */
 extern OSStatus 
 DSpGetCurrentContext(
   DisplayIDType          inDisplayID,
-  DSpContextReference *  outContext)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DSpContextReference *  outContext)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpFindBestContext()
+ *  DSpFindBestContext()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
 DSpFindBestContext(
   DSpContextAttributesPtr   inDesiredAttributes,
-  DSpContextReference *     outContext)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DSpContextReference *     outContext)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpFindBestContextOnDisplayID()
+ *  DSpFindBestContextOnDisplayID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.7 and later
  */
@@ -323,7 +332,7 @@ extern OSStatus
 DSpFindBestContextOnDisplayID(
   DSpContextAttributesPtr   inDesiredAttributes,
   DSpContextReference *     outContext,
-  DisplayIDType             inDisplayID)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DisplayIDType             inDisplayID)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -347,67 +356,67 @@ DSpFindBestContextOnDisplayID(
 
 
 /*
- *  DSpProcessEvent()
+ *  DSpProcessEvent()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
 DSpProcessEvent(
   EventRecord *  inEvent,
-  Boolean *      outEventWasProcessed)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *      outEventWasProcessed)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpSetBlankingColor()
+ *  DSpSetBlankingColor()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
-DSpSetBlankingColor(const RGBColor * inRGBColor)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DSpSetBlankingColor(const RGBColor * inRGBColor)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpSetDebugMode()
+ *  DSpSetDebugMode()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
-DSpSetDebugMode(Boolean inDebugMode)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DSpSetDebugMode(Boolean inDebugMode)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpFindContextFromPoint()
+ *  DSpFindContextFromPoint()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
 DSpFindContextFromPoint(
   Point                  inGlobalPoint,
-  DSpContextReference *  outContext)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DSpContextReference *  outContext)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpGetMouse()
+ *  DSpGetMouse()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
-DSpGetMouse(Point * outGlobalPoint)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DSpGetMouse(Point * outGlobalPoint)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -458,38 +467,38 @@ DSpGetMouse(Point * outGlobalPoint)                           AVAILABLE_MAC_OS_X
 */
 /* general */
 /*
- *  DSpContext_GetAttributes()
+ *  DSpContext_GetAttributes()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
 DSpContext_GetAttributes(
   DSpContextReferenceConst   inContext,
-  DSpContextAttributesPtr    outAttributes)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DSpContextAttributesPtr    outAttributes)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpContext_Reserve()
+ *  DSpContext_Reserve()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
 DSpContext_Reserve(
   DSpContextReference       inContext,
-  DSpContextAttributesPtr   inDesiredAttributes)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DSpContextAttributesPtr   inDesiredAttributes)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpContext_Queue()
+ *  DSpContext_Queue()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.7 and later
  */
@@ -497,87 +506,87 @@ extern OSStatus
 DSpContext_Queue(
   DSpContextReference       inParentContext,
   DSpContextReference       inChildContext,
-  DSpContextAttributesPtr   inDesiredAttributes)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DSpContextAttributesPtr   inDesiredAttributes)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpContext_Switch()
+ *  DSpContext_Switch()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.7 and later
  */
 extern OSStatus 
 DSpContext_Switch(
   DSpContextReference   inOldContext,
-  DSpContextReference   inNewContext)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DSpContextReference   inNewContext)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpContext_Release()
+ *  DSpContext_Release()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
-DSpContext_Release(DSpContextReference inContext)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DSpContext_Release(DSpContextReference inContext)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpContext_Dispose()
+ *  DSpContext_Dispose()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-DSpContext_Dispose(DSpContextReference inContext)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DSpContext_Dispose(DSpContextReference inContext)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpContext_GetDisplayID()
+ *  DSpContext_GetDisplayID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
 DSpContext_GetDisplayID(
   DSpContextReferenceConst   inContext,
-  DisplayIDType *            outDisplayID)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DisplayIDType *            outDisplayID)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpContext_GlobalToLocal()
+ *  DSpContext_GlobalToLocal()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
 DSpContext_GlobalToLocal(
   DSpContextReferenceConst   inContext,
-  Point *                    ioPoint)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Point *                    ioPoint)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpContext_LocalToGlobal()
+ *  DSpContext_LocalToGlobal()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
 DSpContext_LocalToGlobal(
   DSpContextReferenceConst   inContext,
-  Point *                    ioPoint)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Point *                    ioPoint)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -621,17 +630,17 @@ DSpContext_LocalToGlobal(
 
 
 /*
- *  DSpContext_GetMonitorFrequency()
+ *  DSpContext_GetMonitorFrequency()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
 DSpContext_GetMonitorFrequency(
   DSpContextReferenceConst   inContext,
-  Fixed *                    outFrequency)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed *                    outFrequency)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -655,45 +664,45 @@ DSpContext_GetMonitorFrequency(
 
 
 /*
- *  DSpContext_SetState()
+ *  DSpContext_SetState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
 DSpContext_SetState(
   DSpContextReference   inContext,
-  DSpContextState       inState)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DSpContextState       inState)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpContext_GetState()
+ *  DSpContext_GetState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
 DSpContext_GetState(
   DSpContextReferenceConst   inContext,
-  DSpContextState *          outState)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DSpContextState *          outState)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpContext_IsBusy()
+ *  DSpContext_IsBusy()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
 DSpContext_IsBusy(
   DSpContextReferenceConst   inContext,
-  Boolean *                  outBusyFlag)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *                  outBusyFlag)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* dirty rectangles */
@@ -760,38 +769,38 @@ DSpContext_IsBusy(
 
 /* gamma */
 /*
- *  DSpContext_FadeGammaOut()
+ *  DSpContext_FadeGammaOut()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
 DSpContext_FadeGammaOut(
   DSpContextReference   inContext,
-  RGBColor *            inZeroIntensityColor)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RGBColor *            inZeroIntensityColor)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpContext_FadeGammaIn()
+ *  DSpContext_FadeGammaIn()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
 extern OSStatus 
 DSpContext_FadeGammaIn(
   DSpContextReference   inContext,
-  RGBColor *            inZeroIntensityColor)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RGBColor *            inZeroIntensityColor)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpContext_FadeGamma()
+ *  DSpContext_FadeGamma()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
@@ -799,15 +808,15 @@ extern OSStatus
 DSpContext_FadeGamma(
   DSpContextReference   inContext,
   SInt32                inPercentOfOriginalIntensity,
-  RGBColor *            inZeroIntensityColor)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RGBColor *            inZeroIntensityColor)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* buffering */
 /*
- *  DSpContext_SwapBuffers()
+ *  DSpContext_SwapBuffers()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
@@ -815,14 +824,14 @@ extern OSStatus
 DSpContext_SwapBuffers(
   DSpContextReference   inContext,
   DSpCallbackUPP        inBusyProc,
-  void *                inUserRefCon)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                inUserRefCon)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpContext_GetBackBuffer()
+ *  DSpContext_GetBackBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
@@ -830,29 +839,29 @@ extern OSStatus
 DSpContext_GetBackBuffer(
   DSpContextReference   inContext,
   DSpBufferKind         inBufferKind,
-  CGrafPtr *            outBackBuffer)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CGrafPtr *            outBackBuffer)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpContext_GetFrontBuffer()
+ *  DSpContext_GetFrontBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.1 and later
  */
 extern OSStatus 
 DSpContext_GetFrontBuffer(
   DSpContextReferenceConst   inContext,
-  CGrafPtr *                 outFrontBuffer)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CGrafPtr *                 outFrontBuffer)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* clut operations */
 /*
- *  DSpContext_SetCLUTEntries()
+ *  DSpContext_SetCLUTEntries()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
@@ -861,14 +870,14 @@ DSpContext_SetCLUTEntries(
   DSpContextReference   inContext,
   const ColorSpec *     inEntries,
   UInt16                inStartingEntry,
-  UInt16                inLastEntry)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt16                inLastEntry)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DSpContext_GetCLUTEntries()
+ *  DSpContext_GetCLUTEntries()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework
+ *    Mac OS X:         in version 10.0 and later in DrawSprocket.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in DrawSprocketLib 1.0 and later
  */
@@ -877,7 +886,7 @@ DSpContext_GetCLUTEntries(
   DSpContextReferenceConst   inContext,
   ColorSpec *                outEntries,
   UInt16                     inStartingEntry,
-  UInt16                     inLastEntry)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt16                     inLastEntry)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* blit operations */

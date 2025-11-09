@@ -71,7 +71,7 @@ CG_EXTERN_C_BEGIN
  *   Return the CFTypeID for CGFunctionRefs.
  */
 
-CG_EXTERN CFTypeID CGFunctionGetTypeID(void);
+CG_EXTERN CFTypeID CGFunctionGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*! @function CGFunctionCreate
  *   Create a function.
@@ -114,21 +114,21 @@ CG_EXTERN CFTypeID CGFunctionGetTypeID(void);
  *   is copied, so, for example, a pointer to a structure on the stack can
  *   be passed in.  */
 
-CG_EXTERN CGFunctionRef CGFunctionCreate(void *info, size_t domainDimension, const float *domain, size_t rangeDimension, const float *range, const CGFunctionCallbacks *callbacks);
+CG_EXTERN CGFunctionRef CGFunctionCreate(void *info, size_t domainDimension, const float *domain, size_t rangeDimension, const float *range, const CGFunctionCallbacks *callbacks) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*! @function CGFunctionRetain
  *
  * Equivalent to <tt>CFRetain(function)</tt>.
  */
 
-CG_EXTERN CGFunctionRef CGFunctionRetain(CGFunctionRef function);
+CG_EXTERN CGFunctionRef CGFunctionRetain(CGFunctionRef function) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*! @function CGFunctionRelease
  *
  * Equivalent to <tt>CFRelease(function)</tt>.
  */
 
-CG_EXTERN void CGFunctionRelease(CGFunctionRef function);
+CG_EXTERN void CGFunctionRelease(CGFunctionRef function) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 CG_EXTERN_C_END
 

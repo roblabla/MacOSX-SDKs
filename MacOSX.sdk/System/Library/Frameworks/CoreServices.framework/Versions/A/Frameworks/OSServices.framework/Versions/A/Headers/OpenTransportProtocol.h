@@ -3,9 +3,9 @@
  
      Contains:   Definitions likely to be used by low-level protocol stack implementation.
  
-     Version:    OpenTransport-90~46
+     Version:    OpenTransport-105~810
  
-     Copyright:  © 1993-2003 by Apple Computer, Inc. and Mentat Inc., all rights reserved.
+     Copyright:  © 1993-2006 by Apple Computer, Inc. and Mentat Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -53,6 +53,10 @@ extern "C" {
 
 #pragma options align=mac68k
 
+/*
+    All OpenTransport Manager APIs are deprecated in MacOSX 10.4, instead of using OpenTransport,
+    consider using CFNetwork or socket library.
+*/
 #if defined(__MWERKS__) && TARGET_CPU_68K
     #pragma push
     #pragma pointers_in_D0
@@ -3175,10 +3179,10 @@ typedef long                            OTTimerTask;
    valid client context.
 */
 /*
- *  OTCreateTimerTaskInContext()
+ *  OTCreateTimerTaskInContext()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -3186,7 +3190,7 @@ extern long
 OTCreateTimerTaskInContext(
   OTProcessUPP         upp,
   void *               arg,
-  OTClientContextPtr   clientContext)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OTClientContextPtr   clientContext)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -3200,41 +3204,41 @@ OTCreateTimerTaskInContext(
 
 
 /*
- *  OTCancelTimerTask()
+ *  OTCancelTimerTask()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-OTCancelTimerTask(OTTimerTask timerTask)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+OTCancelTimerTask(OTTimerTask timerTask)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  OTDestroyTimerTask()
+ *  OTDestroyTimerTask()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern void 
-OTDestroyTimerTask(OTTimerTask timerTask)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+OTDestroyTimerTask(OTTimerTask timerTask)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  OTScheduleTimerTask()
+ *  OTScheduleTimerTask()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
 OTScheduleTimerTask(
   OTTimerTask   timerTask,
-  OTTimeout     milliSeconds)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OTTimeout     milliSeconds)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 #if OTCARBONAPPLICATION
@@ -3254,22 +3258,22 @@ OTScheduleTimerTask(
    See "Open Tranport Advanced Client Programming" for documentation.
 */
 /*
- *  OTBufferDataSize()
+ *  OTBufferDataSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in OTUtilityLib 1.0 and later
  */
 extern OTByteCount 
-OTBufferDataSize(OTBuffer * buffer)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+OTBufferDataSize(OTBuffer * buffer)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  OTReadBuffer()
+ *  OTReadBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in OTUtilityLib 1.0 and later
  */
@@ -3277,19 +3281,19 @@ extern Boolean
 OTReadBuffer(
   OTBufferInfo *  buffer,
   void *          dest,
-  OTByteCount *   len)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OTByteCount *   len)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  OTReleaseBuffer()
+ *  OTReleaseBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in OTUtilityLib 1.0 and later
  */
 extern void 
-OTReleaseBuffer(OTBuffer * buffer)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+OTReleaseBuffer(OTBuffer * buffer)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
@@ -4267,10 +4271,10 @@ typedef CALLBACK_API_C( Boolean , OTGetPortIconProcPtr )(OTPortRecord *port, OTR
    a kOTNotFoundErr if there was no clear bit available
 */
 /*
- *  OTSetFirstClearBit()
+ *  OTSetFirstClearBit()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in OTUtilityLib 1.0 and later
  */
@@ -4278,50 +4282,50 @@ extern OTResult
 OTSetFirstClearBit(
   UInt8 *       bitMap,
   OTByteCount   startBit,
-  OTByteCount   numBits)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OTByteCount   numBits)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* Standard clear, set and test bit functions*/
 /*
- *  OTClearBit()
+ *  OTClearBit()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in OTUtilityLib 1.0 and later
  */
 extern Boolean 
 OTClearBit(
   UInt8 *       bitMap,
-  OTByteCount   bitNo)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OTByteCount   bitNo)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  OTSetBit()
+ *  OTSetBit()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in OTUtilityLib 1.0 and later
  */
 extern Boolean 
 OTSetBit(
   UInt8 *       bitMap,
-  OTByteCount   bitNo)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OTByteCount   bitNo)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  OTTestBit()
+ *  OTTestBit()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in OTUtilityLib 1.0 and later
  */
 extern Boolean 
 OTTestBit(
   UInt8 *       bitMap,
-  OTByteCount   bitNo)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OTByteCount   bitNo)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* OTHashList*/

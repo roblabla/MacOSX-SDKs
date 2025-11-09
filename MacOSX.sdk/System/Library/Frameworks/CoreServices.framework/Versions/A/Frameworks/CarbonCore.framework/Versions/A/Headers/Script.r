@@ -3,9 +3,9 @@
  
      Contains:   Script Manager interfaces
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1986-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1986-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -255,7 +255,7 @@
 #define verPakistanUrdu 				34					/*  UR ur_PK     Urdu for Pakistan                         */
 #define verTurkishModified 				35					/*        tr_TR */
 #define verItalianSwiss 				36					/*  ST it_CH     Italian Swiss */
-#define verInternational 				37					/*  Z  en-ASCII English for international use; ASCII chars only      */
+#define verInternational 				37					/*  Z  en-ascii English for international use; ASCII chars only      */
 															/*               38 is unassigned */
 #define verRomania 						39					/*  RO ro_RO */
 #define verGreekAncient 				40					/*        grc      Ancient Greek, polytonic orthography           */
@@ -284,7 +284,7 @@
 #define verUkraine 						62					/*  UA uk_UA */
 															/*               63 is unassigned */
 #define verGreeceAlt 					64					/*        el_GR     unused                               */
-#define verSerbian 						65					/*  SR sr_YU                                     */
+#define verSerbian 						65					/*  SR sr_CS                                     */
 #define verSlovenian 					66					/*  SV sl_SI                                     */
 #define verMacedonian 					67					/*  MD mk_MK                                     */
 #define verCroatia 						68					/*  CR hr_HR */
@@ -300,7 +300,7 @@
 #define verNunavut 						78					/*  IU iu_CA     Inuktitut for Canada */
 #define verWelsh 						79					/*  CU cy */
 															/*               80 is ID for KCHR resource - Canadian CSA */
-#define verIrishGaelicScript 			81					/*  GS ga-dots_IE  Irish Gaelic for Ireland (using dot above) */
+#define verIrishGaelicScript 			81					/*  GS ga-Latg_IE  Irish Gaelic for Ireland (using dot above) */
 #define verEngCanada 					82					/*  V  en_CA       English for Canada */
 #define verBhutan 						83					/*  BH dz_BT     Dzongkha for Bhutan */
 #define verArmenian 					84					/*  HY hy_AM */

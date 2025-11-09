@@ -100,6 +100,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 						options are a lone DRTrack object, and a CFArray of homogeneous CFArrays of 
 						DRTracks. If  the layout is not one of these kinds, or if any of the objects is 
 						not valid, this function's behavior is undefined.
+	@result		An error code indicating if the burn could begin.
 */
 extern
 OSStatus DRBurnWriteLayout(DRBurnRef burn, CFTypeRef layout)
@@ -128,6 +129,8 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 	@abstract	Obtains the progress and status of the burn.
 	@discussion	Returns a CFDictionary object containing the progress and status of the burn. 
 				This dictionary will contain the state, percentage complete, and any errors reported.
+	@param		burn	The burn for which status is wanted. If this parameter is not a valid
+				DRBurn object, the behavior is undefined.
 	@result		Returns a reference to a CFDictionary object. The reference is implicitly retained 
 				by the caller. This is the same dictionary sent to observers of the 
 				@link kDRBurnStatusChangedNotification kDRBurnStatusChangedNotification @/link notification.
@@ -351,6 +354,26 @@ extern const CFStringRef kDRMediaCatalogNumberKey
 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
+	@const		DRBurnDoubleLayerL0DataZoneBlocksKey
+	@discussion	This burn property key corresponds to a CFNumber containing the number of blocks desired
+				for the layer 0 data zone on a double layer writable disc.
+				
+				The size of the layer 0 data zone dictates where the transition point is from layer 0 to
+				layer 1. If this key is present, the data zone size will be set prior to the start of the
+				burn using the value for this key. If it is not present, the default layer 0 data zone will 
+				be used (half the available blocks on an empty disc).
+				
+				The transition point can be specified two ways. If the value specified in this key is
+				greater than 1.0, then it will designate an absolute block number for the transition point. In
+				this case, the block number should be a multiple of 16 and at least 40000h per specification. If
+				the value is less than 1.0, it will specify the percentage of the burn that should reside on
+				layer 0. A typical value is 0.5, designating half the burn for each layer. A value of 0.0 or 1.0
+				will not change the layer 0 transition point.
+*/				
+extern const CFStringRef kDRBurnDoubleLayerL0DataZoneBlocksKey
+AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
 	@const		kDRBurnStrategyKey
 	@abstract	One or more suggested burn strategies.
 	@discussion	This burn property key corresponds to a CFString object, or to a CFArray object containing
@@ -394,6 +417,23 @@ AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 */
 extern const CFStringRef kDRBurnStrategyIsRequiredKey
 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+/*!
+	@const		kDRCDTextKey
+	@discussion	This burn property key corresponds to a @link //apple_ref/c/tdef/DRCDTextBlockRef DRCDTextBlockRef @/link object, or to an array of @link //apple_ref/c/tdef/DRCDTextBlockRef DRCDTextBlockRef @/link
+				objects, containing the CD-Text information for the disc.  If this key
+				is not present, the burn will not write CD-Text.
+				
+				Before using this key you should ensure that the device
+				supports CD-Text by checking the value of the @link //apple_ref/c/data/kDRDeviceCanWriteCDTextKey kDRDeviceCanWriteCDTextKey @/link
+				key in the device's write capabilities dictionary.
+				
+				If this value is set to <tt>true</tt> and the device does
+				not support writing CD-Text, the burn will fail with a value of
+				@link //apple_ref/c/econst/kDRDeviceCantWriteCDTextErr kDRDeviceCantWriteCDTextErr @/link.  
+*/
+extern const CFStringRef kDRCDTextKey
+AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* ---------------------------------- */
 /* Completion actions */

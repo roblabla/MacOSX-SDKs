@@ -1,13 +1,14 @@
 /*
 	NSCell.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
 #import <AppKit/NSText.h>
+#import <AppKit/NSParagraphStyle.h>
 
 @class NSAttributedString, NSEvent, NSFont, NSFormatter, NSImage, NSMenu, NSText, NSView;
 
@@ -107,10 +108,11 @@ typedef struct __CFlags {
     unsigned int        isLeaf:1;
     unsigned int        invalidObjectValue:1;
     unsigned int        invalidFont:1;
-    unsigned int        reserved1:6;
+    NSLineBreakMode     lineBreakMode:3;
+    unsigned int        reserved1:3;
     unsigned int        actOnMouseDragged:1;
     unsigned int        isLoaded:1;
-    unsigned int        noWrap:1;
+    unsigned int        reserved2:1;
     unsigned int        dontActOnMouseUp:1;
     unsigned int        isWhite:1;
     unsigned int        useUserKeyEquivalent:1;
@@ -125,7 +127,7 @@ typedef struct __CFlags {
     unsigned int        retainCount:7;
     unsigned int        refusesFirstResponder:1;
     unsigned int        needsHighlightedText:1;
-    unsigned int        reserved2:1;
+    unsigned int        dontAllowsUndo:1;
     unsigned int        currentlyEditing:1;
     unsigned int	allowsMixedState:1;
     unsigned int	inMixedState:1;
@@ -135,7 +137,7 @@ typedef struct __CFlags {
     unsigned int        controlTint:3;
     unsigned int        controlSize:2;
     unsigned int	branchImageDisabled:1;
-    unsigned int	drawingInClipTip:1;
+    unsigned int	drawingInRevealover:1;
     unsigned int        needsHighlightedTextHint:1;
 } _CFlags;
 
@@ -160,6 +162,9 @@ typedef struct __CFlags {
 - (id)initImageCell:(NSImage *)image;
 
 - (NSView *)controlView;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (void)setControlView:(NSView*)view;
+#endif
 - (NSCellType)type;
 - (void)setType:(NSCellType)aType;
 - (int)state;
@@ -260,6 +265,16 @@ typedef struct __CFlags {
 - (void)setSendsActionOnEndEditing:(BOOL)flag;
 - (BOOL)sendsActionOnEndEditing;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (NSWritingDirection)baseWritingDirection;
+- (void)setBaseWritingDirection:(NSWritingDirection)writingDirection;
+
+- (void)setLineBreakMode:(NSLineBreakMode)mode;
+- (NSLineBreakMode)lineBreakMode;
+
+- (void)setAllowsUndo:(BOOL)allowsUndo;
+- (BOOL)allowsUndo;
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 @end
 
 @interface NSCell(NSKeyboardUI)

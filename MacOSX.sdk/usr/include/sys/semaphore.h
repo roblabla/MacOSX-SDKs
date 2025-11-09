@@ -39,7 +39,6 @@ typedef int sem_t;
 #define SEM_VALUE_MAX 32767
 #define SEM_FAILED -1
 
-#ifndef KERNEL
 #include <sys/cdefs.h>
 
 __BEGIN_DECLS
@@ -54,6 +53,5 @@ int sem_unlink(const char *);
 int sem_wait(sem_t *);
 __END_DECLS
 
-#endif /* KERNEL */
 
 #endif	/* _SYS_SEMAPHORE_H_ */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1999 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1999-2005 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -27,15 +27,15 @@
 extern "C" {
 #endif /* __cplusplus */
 
-#if defined(__MWERKS__) && !defined(__private_extern__)
-#define __private_extern__ __declspec(private_extern)
+#include <stddef.h>
+#include <stdint.h>
+#if __cplusplus
+  /* C++ has bool type built in */
+#else
+ #include <stdbool.h>
 #endif
-
 #include <mach-o/loader.h>
 #include <AvailabilityMacros.h>
-#ifndef AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER
-#define AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER
-#endif
 
 #ifndef ENUM_DYLD_BOOL
 #define ENUM_DYLD_BOOL
@@ -61,7 +61,7 @@ typedef enum {
     NSObjectFileImageAccess
 } NSObjectFileImageReturnCode;
 
-typedef void * NSObjectFileImage;
+typedef struct __NSObjectFileImage*  NSObjectFileImage;
 
 /* limited implementation, only MH_BUNDLE files can be used */
 extern NSObjectFileImageReturnCode NSCreateObjectFileImageFromFile(
@@ -70,49 +70,48 @@ extern NSObjectFileImageReturnCode NSCreateObjectFileImageFromFile(
 extern NSObjectFileImageReturnCode NSCreateCoreFileImageFromFile(
     const char *pathName,
     NSObjectFileImage *objectFileImage);
-/* not yet implemented */
 extern NSObjectFileImageReturnCode NSCreateObjectFileImageFromMemory(
-    void *address,
-    unsigned long size, 
+    const void *address,
+    size_t size, 
     NSObjectFileImage *objectFileImage);
-extern enum DYLD_BOOL NSDestroyObjectFileImage(
+extern bool NSDestroyObjectFileImage(
     NSObjectFileImage objectFileImage);
 /*
  * API on NSObjectFileImage's for:
  *   "for Each Symbol Definition In Object File Image" (for Dynamic Bundles)
  *   and the same thing for references
  */
-extern unsigned long NSSymbolDefinitionCountInObjectFileImage(
+extern uint32_t NSSymbolDefinitionCountInObjectFileImage(
     NSObjectFileImage objectFileImage);
 extern const char * NSSymbolDefinitionNameInObjectFileImage(
     NSObjectFileImage objectFileImage,
-    unsigned long ordinal);
-extern unsigned long NSSymbolReferenceCountInObjectFileImage(
+    uint32_t ordinal);
+extern uint32_t NSSymbolReferenceCountInObjectFileImage(
     NSObjectFileImage objectFileImage);
 extern const char * NSSymbolReferenceNameInObjectFileImage(
     NSObjectFileImage objectFileImage,
-    unsigned long ordinal,
-    enum DYLD_BOOL *tentative_definition); /* can be NULL */
+    uint32_t ordinal,
+    bool *tentative_definition); /* can be NULL */
 /*
  * API on NSObjectFileImage:
  *   "does Object File Image define symbol name X" (using sorted symbol table)
  *   and a way to get the named objective-C section
  */
-extern enum DYLD_BOOL NSIsSymbolDefinedInObjectFileImage(
+extern bool NSIsSymbolDefinedInObjectFileImage(
     NSObjectFileImage objectFileImage,
-    const char *symbolName);
+    const char *symbolName) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 extern void * NSGetSectionDataInObjectFileImage(
     NSObjectFileImage objectFileImage,
     const char *segmentName,
     const char *sectionName,
-    unsigned long *size); /* can be NULL */
+    size_t *size); /* can be NULL */
 /* SPI first appeared in Mac OS X 10.3 */
-extern enum DYLD_BOOL NSHasModInitObjectFileImage(
+extern bool NSHasModInitObjectFileImage(
     NSObjectFileImage objectFileImage)
     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /* module API */
-typedef void * NSModule;
+typedef struct __NSModule* NSModule;
 extern const char * NSNameOfModule(
     NSModule m); 
 extern const char * NSLibraryNameForModule(
@@ -122,7 +121,7 @@ extern const char * NSLibraryNameForModule(
 extern NSModule NSLinkModule(
     NSObjectFileImage objectFileImage, 
     const char *moduleName,
-    unsigned long options);
+    uint32_t options);
 #define NSLINKMODULE_OPTION_NONE		0x0
 #define NSLINKMODULE_OPTION_BINDNOW		0x1
 #define NSLINKMODULE_OPTION_PRIVATE		0x2
@@ -132,9 +131,9 @@ extern NSModule NSLinkModule(
 
 /* limited implementation, only modules loaded with NSLinkModule() can be
    unlinked */
-extern enum DYLD_BOOL NSUnLinkModule(
+extern bool NSUnLinkModule(
     NSModule module, 
-    unsigned long options);
+    uint32_t options);
 #define NSUNLINKMODULE_OPTION_NONE			0x0
 #define NSUNLINKMODULE_OPTION_KEEP_MEMORY_MAPPED	0x1
 #define NSUNLINKMODULE_OPTION_RESET_LAZY_REFERENCES	0x2
@@ -143,30 +142,30 @@ extern enum DYLD_BOOL NSUnLinkModule(
 extern NSModule NSReplaceModule(
     NSModule moduleToReplace,
     NSObjectFileImage newObjectFileImage, 
-    unsigned long options);
+    uint32_t options);
 
 /* symbol API */
-typedef void * NSSymbol;
-extern enum DYLD_BOOL NSIsSymbolNameDefined(
-    const char *symbolName);
-extern enum DYLD_BOOL NSIsSymbolNameDefinedWithHint(
+typedef struct __NSSymbol* NSSymbol;
+extern bool NSIsSymbolNameDefined(
+    const char *symbolName) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern bool NSIsSymbolNameDefinedWithHint(
     const char *symbolName,
-    const char *libraryNameHint);
-extern enum DYLD_BOOL NSIsSymbolNameDefinedInImage(
+    const char *libraryNameHint) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern bool NSIsSymbolNameDefinedInImage(
     const struct mach_header *image,
-    const char *symbolName);
+    const char *symbolName) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 extern NSSymbol NSLookupAndBindSymbol(
-    const char *symbolName);
+    const char *symbolName) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 extern NSSymbol NSLookupAndBindSymbolWithHint(
     const char *symbolName,
-    const char *libraryNameHint);
+    const char *libraryNameHint) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 extern NSSymbol NSLookupSymbolInModule(
     NSModule module,
     const char *symbolName);
 extern NSSymbol NSLookupSymbolInImage(
     const struct mach_header *image,
     const char *symbolName,
-    unsigned long options);
+    uint32_t options);
 #define NSLOOKUPSYMBOLINIMAGE_OPTION_BIND            0x0
 #define NSLOOKUPSYMBOLINIMAGE_OPTION_BIND_NOW        0x1
 #define NSLOOKUPSYMBOLINIMAGE_OPTION_BIND_FULLY      0x2
@@ -218,54 +217,49 @@ typedef struct {
 } NSLinkEditErrorHandlers;
 
 extern void NSInstallLinkEditErrorHandlers(
-    NSLinkEditErrorHandlers *handlers);
+    const NSLinkEditErrorHandlers *handlers);
 
 /* other API */
-extern enum DYLD_BOOL NSAddLibrary(
-    const char *pathName);
-extern enum DYLD_BOOL NSAddLibraryWithSearching(
-    const char *pathName);
+extern bool NSAddLibrary(
+    const char *pathName) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern bool NSAddLibraryWithSearching(
+    const char *pathName) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 extern const struct mach_header * NSAddImage(
     const char *image_name,
-    unsigned long options);
+    uint32_t options);
 #define NSADDIMAGE_OPTION_NONE                  	0x0
 #define NSADDIMAGE_OPTION_RETURN_ON_ERROR       	0x1
 #define NSADDIMAGE_OPTION_WITH_SEARCHING        	0x2
 #define NSADDIMAGE_OPTION_RETURN_ONLY_IF_LOADED 	0x4
 #define NSADDIMAGE_OPTION_MATCH_FILENAME_BY_INSTALLNAME	0x8
-extern long NSVersionOfRunTimeLibrary(
+extern int32_t NSVersionOfRunTimeLibrary(
     const char *libraryName);
-extern long NSVersionOfLinkTimeLibrary(
+extern int32_t NSVersionOfLinkTimeLibrary(
     const char *libraryName);
 extern int _NSGetExecutablePath( /* SPI first appeared in Mac OS X 10.2 */
     char *buf,
-    unsigned long *bufsize);
+    uint32_t *bufsize);
 
 /*
  * The low level _dyld_... API.
  * (used by the objective-C runtime primarily)
  */
-extern unsigned long _dyld_present(
+extern bool _dyld_present(
     void);
 
-extern unsigned long _dyld_image_count(
+extern uint32_t _dyld_image_count(
     void);
-#ifdef __LP64__
-extern struct mach_header_64 * _dyld_get_image_header(
+extern const struct mach_header * _dyld_get_image_header(
     uint32_t image_index);
-#else /* !defined(__LP64__) */
-extern struct mach_header * _dyld_get_image_header(
-    unsigned long image_index);
-#endif /* !defined(__LP64__) */
-extern unsigned long _dyld_get_image_vmaddr_slide(
-    unsigned long image_index);
-extern char * _dyld_get_image_name(
-    unsigned long image_index);
+extern intptr_t _dyld_get_image_vmaddr_slide(
+    uint32_t image_index);
+extern const char * _dyld_get_image_name(
+    uint32_t image_index);
 
 extern void _dyld_register_func_for_add_image(
-    void (*func)(struct mach_header *mh, unsigned long vmaddr_slide));
+    void (*func)(const struct mach_header *mh, intptr_t vmaddr_slide));
 extern void _dyld_register_func_for_remove_image(
-    void (*func)(struct mach_header *mh, unsigned long vmaddr_slide));
+    void (*func)(const struct mach_header *mh, intptr_t vmaddr_slide));
 extern void _dyld_register_func_for_link_module(
     void (*func)(NSModule module));
 /* not yet implemented */
@@ -277,48 +271,48 @@ extern void _dyld_register_func_for_replace_module(
 extern void _dyld_get_objc_module_sect_for_module(
     NSModule module,
     void **objc_module,
-    unsigned long *size);
+    size_t *size);
 extern void _dyld_bind_objc_module(
-    void *objc_module);
-extern enum DYLD_BOOL _dyld_bind_fully_image_containing_address(
-    unsigned long *address);
-extern enum DYLD_BOOL _dyld_image_containing_address(
-    unsigned long address);
+    const void *objc_module);
+extern bool _dyld_bind_fully_image_containing_address(
+    const void *address);
+extern bool _dyld_image_containing_address(
+    const void* address);
 /* SPI first appeared in Mac OS X 10.3 */
-extern struct mach_header * _dyld_get_image_header_containing_address(
-    unsigned long address)
+extern const struct mach_header * _dyld_get_image_header_containing_address(
+    const void* address)
     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 extern void _dyld_moninit(
     void (*monaddition)(char *lowpc, char *highpc));
-extern enum DYLD_BOOL _dyld_launched_prebound(
+extern bool _dyld_launched_prebound(
     void);
 /* SPI first appeared in Mac OS X 10.3 */
-extern enum DYLD_BOOL _dyld_all_twolevel_modules_prebound(
+extern bool _dyld_all_twolevel_modules_prebound(
     void)
     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 extern void _dyld_lookup_and_bind(
     const char *symbol_name,
-    unsigned long *address,
-    void **module);
+    void **address,
+    NSModule* module) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 extern void _dyld_lookup_and_bind_with_hint(
     const char *symbol_name,
     const char *library_name_hint,
-    unsigned long *address,
-    void **module);
+    void **address,
+    NSModule* module) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 extern void _dyld_lookup_and_bind_objc(
     const char *symbol_name,
-    unsigned long *address,
-    void **module);
+    void **address,
+    NSModule* module);
 extern void _dyld_lookup_and_bind_fully(
     const char *symbol_name,
-    unsigned long *address,
-    void **module);
+    void **address,
+    NSModule* module);
 
-__private_extern__ int _dyld_func_lookup(
+extern int _dyld_func_lookup(
     const char *dyld_func_name,
-    unsigned long *address);
+    void **address);
 
 #if __cplusplus
 }

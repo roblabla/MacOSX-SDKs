@@ -3,9 +3,9 @@
  
      Contains:   Drag and Drop Interfaces.
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1992-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -24,6 +24,10 @@
 #include <HIToolbox/Events.h>
 #endif
 
+#ifndef __HIGEOMETRY__
+#include <HIToolbox/HIGeometry.h>
+#endif
+
 
 
 #include <AvailabilityMacros.h>
@@ -38,44 +42,6 @@ extern "C" {
 
 #pragma options align=mac68k
 
-
-/*
- *  HIPoint
- *  
- *  Discussion:
- *    HIPoint is a new, floating point-based type to help express
- *    coordinates in a much richer fashion than the classic QuickDraw
- *    points. It will, in time, be more heavily used throughout the
- *    Toolbox. For now, it is replacing our use of typeQDPoint in mouse
- *    events. This is to better support sub-pixel tablet coordinates.
- *    If you ask for a mouse location with typeQDPoint, and the point
- *    is actually stored as typeHIPoint, it will automatically be
- *    coerced to typeQDPoint for you, so this change should be largely
- *    transparent to applications. HIPoints are in screen space, i.e.
- *    the top left of the screen is 0, 0.
- */
-typedef CGPoint                         HIPoint;
-
-/*
- *  HISize
- *  
- *  Discussion:
- *    HISize is a floating point-based type to help express dimensions
- *    in a much richer fashion than the classic QuickDraw coordinates.
- */
-typedef CGSize                          HISize;
-
-/*
- *  HIRect
- *  
- *  Discussion:
- *    HIRect is a new, floating point-based type to help express
- *    rectangles in a much richer fashion than the classic QuickDraw
- *    rects. It will, in time, be more heavily used throughout the
- *    Toolbox. HIRects are in screen space, i.e. the top left of the
- *    screen is 0, 0.
- */
-typedef CGRect                          HIRect;
 /*
   _________________________________________________________________________________________________________
       
@@ -116,9 +82,30 @@ enum {
    ¥ DRAG IMAGE FLAGS
   _________________________________________________________________________________________________________
 */
+
+/*
+ *  DragImageFlags
+ *  
+ *  Summary:
+ *    Parameters to SetDragImage and SetDragImageWithCGImage.
+ */
 typedef UInt32 DragImageFlags;
 enum {
-  kDragRegionAndImage           = (1L << 4) /* drag region and image*/
+
+  /*
+   * Indicates that the outline region passed to TrackDrag should be
+   * drawn onscreen, in addition to the translucent drag image.
+   */
+  kDragRegionAndImage           = 1 << 4,
+
+  /*
+   * Indicates that the image and offset being passed in are already at
+   * device resolution, and the image should be drawn as-is. If this
+   * option is not specified, the image will be scaled according to the
+   * user's current scaling factor. Available in Mac OS X 10.4 and
+   * later.
+   */
+  kDragDoNotScaleImage          = 1 << 5
 };
 
 /*
@@ -904,26 +891,6 @@ SetDragDrawingProc(
    ¥ SETTING THE DRAG IMAGE
   _________________________________________________________________________________________________________
 */
-
-/*
- *  SetDragImage()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in DragLib 7.5 and later
- */
-extern OSErr 
-SetDragImage(
-  DragRef          theDrag,
-  PixMapHandle     imagePixMap,
-  RgnHandle        imageRgn,
-  Point            imageOffsetPt,
-  DragImageFlags   theImageFlags)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
 
 /*
  *  SetDragImageWithCGImage()
@@ -1731,6 +1698,73 @@ ZoomRegion(
   Point              zoomDistance,
   SInt16             zoomSteps,
   ZoomAcceleration   acceleration)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*--------------------------------------------------------------------------------------*/
+/*  ¥ DEPRECATED                                                                        */
+/*                                                                                      */
+/*  All functions below this point are either deprecated (they continue to function     */
+/*  but are not the most modern nor most efficient solution to a problem), or they are  */
+/*  completely unavailable on Mac OS X.                                                 */
+/*--------------------------------------------------------------------------------------*/
+
+
+/*
+ *  SetDragImage()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Applications should use SetDragImageWithCGImage instead.
+ *  
+ *  Summary:
+ *    Associates an image with a drag reference.
+ *  
+ *  Discussion:
+ *    Used by the sender of the drag to set the image, in PixMapHandle
+ *    format, to be displayed as user feedback during the drag.  This
+ *    API may be called  at any point during the drag to update the
+ *    image.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDrag:
+ *      The drag reference for which the image will be displayed.
+ *    
+ *    inImagePixMap:
+ *      The PixMapHandle for the image to be displayed during the drag.
+ *    
+ *    inImageRgn:
+ *      A mask describing the portion of the PixMap contained in the
+ *      imagePixMap parameter which contains the drag image. Pass NULL
+ *      for inImageRgn if the entire PixMap, including white space,
+ *      should be dragged.
+ *    
+ *    inImageOffsetPt:
+ *      The offset required to move the PixMap specified in the
+ *      imagePixMap parameter to the global coordinates where the image
+ *      initially appears. If this parameter is (0,0), the PixMap
+ *      should already be in global coordinates.
+ *    
+ *    inImageFlags:
+ *      Flags controlling the appearance of the drag image.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in DragLib 7.5 and later
+ */
+extern OSErr 
+SetDragImage(
+  DragRef          inDrag,
+  PixMapHandle     inImagePixMap,
+  RgnHandle        inImageRgn,
+  Point            inImageOffsetPt,
+  DragImageFlags   inImageFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 

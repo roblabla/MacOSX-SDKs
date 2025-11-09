@@ -25,6 +25,10 @@
 #include <DiscRecordingEngine/DRCoreBurn.h>
 #endif
 
+#ifndef _H_DRCoreCDText
+#include <DiscRecordingEngine/DRCoreCDText.h>
+#endif
+
 #ifndef _H_DRCoreDevice
 #include <DiscRecordingEngine/DRCoreDevice.h>
 #endif
@@ -55,6 +59,7 @@
 
 #ifdef __OBJC__
 #import <DiscRecordingEngine/DRBurn.h>
+#import <DiscRecordingEngine/DRCDText.h>
 #import <DiscRecordingEngine/DRDevice.h>
 #import <DiscRecordingEngine/DRMSF.h>
 #import <DiscRecordingEngine/DRMSFFormatter.h>

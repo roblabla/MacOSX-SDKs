@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2003 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -21,28 +21,6 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef __OPEN_SOURCE__
-/*
- *
- *	$Id: IOUSBRootHubDevice.h,v 1.9 2003/08/20 19:41:40 nano Exp $
- *
- *	$Log: IOUSBRootHubDevice.h,v $
- *	Revision 1.9  2003/08/20 19:41:40  nano
- *	
- *	Bug #:
- *	New version's of Nima's USB Prober (2.2b17)
- *	3382540  Panther: Ejecting a USB CardBus card can freeze a machine
- *	3358482  Device Busy message with Modems and IOUSBFamily 201.2.14 after sleep
- *	3385948  Need to implement device recovery on High Speed Transaction errors to full speed devices
- *	3377037  USB EHCI: returnTransactions can cause unstable queue if transactions are aborted
- *	
- *	Also, updated most files to use the id/log functions of cvs
- *	
- *	Submitted by: nano
- *	Reviewed by: rhoads/barryt/nano
- *	
- */
-#endif
 #ifndef _IOKIT_IOUSBROOTHUBDEVICE_H
 #define _IOKIT_IOUSBROOTHUBDEVICE_H
 
@@ -50,17 +28,44 @@
 #include <IOKit/usb/IOUSBController.h>
 #include <IOKit/usb/USBHub.h>
 
+// this is a legacy name for a property that was available on some very old machines
+#define kAppleCurrentAvailable	"AAPL,current-available"
+
+typedef struct AppleRootHubExtraPowerRequest
+{
+	SInt32			requestedExtraPower;					// total "extra" power requested on my port - above and beyond the 500ms available on a root hub (negative to give it back)
+	UInt32			extraPowerAvailable;					// total "extra" power available after returning from the call - should be zero on the call in
+} AppleRootHubExtraPowerRequest;
+
 class IOUSBRootHubDevice : public IOUSBDevice
 {
     OSDeclareDefaultStructors(IOUSBRootHubDevice)
 
     UInt16 	configuration;
 
-    struct ExpansionData { /* */ };
-    ExpansionData * _expansionData;
+    struct ExpansionData { 
+		IOCommandGate		*_commandGate;
+	  };
+    ExpansionData *_expansionData;
 
 public:
+	// static methods
     static IOUSBRootHubDevice *NewRootHubDevice(void);
+    static IOReturn 		GatedDeviceRequest (OSObject *	owner, 
+												void *		arg0, 
+												void *		arg1, 
+												void *		arg2, 
+												void *		arg3 );
+    
+	// IOKit methods
+    virtual bool		init();
+	virtual bool		start( IOService * provider );
+    virtual void		stop( IOService *provider );
+    virtual void		free();
+    virtual IOReturn 	message( UInt32 type, IOService * provider,  void * argument = 0 );
+	
+	// a non static but non-virtual function
+	IOReturn DeviceRequestWorker(IOUSBDevRequest *request, UInt32 noDataTimeout, UInt32 completionTimeout, IOUSBCompletion *completion);
     
     virtual IOReturn DeviceRequest(IOUSBDevRequest *request, IOUSBCompletion *completion = 0);
 

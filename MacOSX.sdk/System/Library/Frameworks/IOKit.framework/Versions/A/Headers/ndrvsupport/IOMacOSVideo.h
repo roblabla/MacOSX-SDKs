@@ -236,7 +236,8 @@ enum {
     kBuiltInConnection          = 11,                           /* Set when connection is KNOWN to be built-in (this is not the same as kHasDirectConnection). */
     kOverrideConnection         = 12,                           /* Set when the reported connection is not the true one, but is one that has been forced through a SetConnection call */
     kFastCheckForDDC            = 13,                           /* Set when all 3 are true: 1) sense codes indicate DDC display could be attached 2) attempted fast check 3) DDC failed */
-    kReportsHotPlugging         = 14                            /* Detects and reports hot pluggging on connector (via VSL also implies DDC will be up to date w/o force read) */
+    kReportsHotPlugging         = 14,                           /* Detects and reports hot pluggging on connector (via VSL also implies DDC will be up to date w/o force read) */
+    kStereoSyncConnection       = 15                            /* Connection supports stereo sync signalling */
 };
 
 
@@ -1208,12 +1209,27 @@ typedef VDDetailedTimingRec *           VDDetailedTimingPtr;
 enum {
     kScaleStretchOnlyMask	  = (1<<0),			/* True means the driver cannot add borders to avoid non-square pixels */
     kScaleCanUpSamplePixelsMask	  = (1<<1),			/* True means timings with more active clocks than pixels (ie 640x480 pixels on a 1600x1200 timing) */
-    kScaleCanDownSamplePixelsMask = (1<<2)			/* True means timings with fewer active clocks than pixels (ie 1600x1200  pixels on a 640x480 timing) */
+    kScaleCanDownSamplePixelsMask = (1<<2),			/* True means timings with fewer active clocks than pixels (ie 1600x1200  pixels on a 640x480 timing) */
+    kScaleCanScaleInterlacedMask  = (1<<3),			/* True means can scale an interlaced timing */
+    kScaleCanSupportInsetMask     = (1<<4),			/* True means can scale a timing with insets */
+    kScaleCanRotateMask           = (1<<5),			/* True means can rotate image */
+    kScaleCanBorderInsetOnlyMask  = (1<<6)			/* True means can scale a timing with insets */
 };
 
 /* csScalerFlags */
 enum {
-    kScaleStretchToFitMask	  = (1<<0)			/* True means the driver should avoid borders and allow non-square pixels */
+    kScaleStretchToFitMask	= 0x00000001,			/* True means the driver should avoid borders and allow non-square pixels */
+
+    kScaleRotateFlagsMask	= 0x000000f0,
+
+    kScaleSwapAxesMask		= 0x00000010,
+    kScaleInvertXMask		= 0x00000020,
+    kScaleInvertYMask		= 0x00000040,
+
+    kScaleRotate0Mask		= 0x00000000,
+    kScaleRotate90Mask		= kScaleSwapAxesMask | kScaleInvertXMask,
+    kScaleRotate180Mask		= kScaleInvertXMask  | kScaleInvertYMask,
+    kScaleRotate270Mask		= kScaleSwapAxesMask | kScaleInvertYMask
 };
 
 typedef UInt32			VDClutBehavior;
@@ -1284,9 +1300,8 @@ struct VDScalerRec {
     UInt32                          csScalerFlags;		/* Init to 0 */
     UInt32                          csHorizontalPixels;		/* Graphics system addressable pixels */
     UInt32                          csVerticalPixels;		/* Graphics system addressable lines */
-    UInt32                          csReserved4;		/* Init to 0 */
-
-    UInt32                          csReserved5;		/* Init to 0 */
+    UInt32                          csHorizontalInset;          /* Border pixels for underscan */
+    UInt32                          csVerticalInset;            /* Border lines for underscan */
     UInt32                          csReserved6;		/* Init to 0 */
     UInt32                          csReserved7;		/* Init to 0 */
     UInt32                          csReserved8;		/* Init to 0 */

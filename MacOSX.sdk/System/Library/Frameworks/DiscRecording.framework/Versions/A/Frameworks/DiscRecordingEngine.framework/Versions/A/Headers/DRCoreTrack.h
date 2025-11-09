@@ -95,7 +95,7 @@ typedef struct DRTrackProductionInfo DRTrackProductionInfo;
 	@abstract	Creates a new track object.
 	@param		properties	A CFDictionary object containing the track properties. If this
 							parameter is not a valid CFDictionary object the behavior is undefined.
-	@param		callbacks	A pointer to a @link DRTrackCallbackProc DRTrackCallbackProc @/link callback. If this callback is NULL
+	@param		callback	A pointer to a @link DRTrackCallbackProc DRTrackCallbackProc @/link callback. If this callback is NULL
 							the behavior is undefined.
 	@result		A reference to the new DRTrack object.
 */
@@ -297,6 +297,22 @@ extern const CFStringRef kDRMaxBurnSpeedKey			AVAILABLE_MAC_OS_X_VERSION_10_2_AN
 extern const CFStringRef kDRPreGapLengthKey			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
+	@const		kDRPreGapIsRequiredKey
+	@discussion	Optional key. This track property key corresponds to a CFBoolean object indicating whether 
+				the pregap listed for the track is required.  If this key is not present, 
+				the track will behave as though the key were <tt>false</tt>.
+				
+				If this key's value is set to <tt>true</tt> and the device does
+				not support the exact pregap length, the burn
+				will fail with a return value of @link //apple_ref/c/econst/kDRDevicePregapLengthNotAvailableErr @/link.
+				
+				If this key's value is set to <tt>false</tt> and the device does
+				not support the suggested pregap length, the engine
+				will choose an alternate pregap length. 
+*/
+extern const CFStringRef kDRPreGapIsRequiredKey					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
 	@const		kDRTrackISRCKey
 	@discussion	Optional key. For CD-DA audio tracks only.  This track property key corresponds to a CFData
 				object containing exactly 12 bytes, which will be written to the disc as the
@@ -391,6 +407,13 @@ extern const CFStringRef kDRVerificationTypeProduceAgain		AVAILABLE_MAC_OS_X_VER
 				through a series of calls to the callback.
 */
 extern const CFStringRef kDRVerificationTypeReceiveData			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/*!
+	@const		kDRVerificationTypeChecksum
+	@discussion One value for the @link kDRVerificationTypeKey kDRVerificationTypeKey @/link dictionary key. This value indicates
+				the engine will verify the track data with an internally calculated checksum.
+*/
+extern const CFStringRef kDRVerificationTypeChecksum			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* ------------------------------------ */
 /* SCMS states */
@@ -550,68 +573,84 @@ extern const CFStringRef kDRBurnKey					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATE
 #pragma mark - Block Sizes
 /*!
 	@enum 		Block Sizes
-	@discussion Common block sizes for different types of track data.
-	@constant	kDRBlockSizeAudio		Audio data.
-	@constant	kDRBlockSizeMode1Data	Mode 1 data.
-	@constant	kDRBlockSizeMode2Data	Mode 2 data. Photo CD and CD-i use this.
-	@constant	kDRBlockSizeDVDData		DVD data.
+	@discussion	Common block sizes for different types of track data.
+	@constant	kDRBlockSizeAudio			Audio data.
+	@constant	kDRBlockSizeMode1Data		Mode 1 data.
+	@constant	kDRBlockSizeMode2Data		Mode 2 data. Photo CD and CD-i use this.
+	@constant	kDRBlockSizeMode2Form1Data	Mode 2 Form 1 data.
+	@constant	kDRBlockSizeMode2Form2Data	Mode 2 Form 2 data.
+	@constant	kDRBlockSizeDVDData			DVD data.
 */	
 enum
 {
-	kDRBlockSizeAudio		= 2352,
-	kDRBlockSizeMode1Data	= 2048,
-	kDRBlockSizeMode2Data	= 2332,
-	kDRBlockSizeDVDData		= 2048
+	kDRBlockSizeAudio			= 2352,
+	kDRBlockSizeMode1Data		= 2048,
+	kDRBlockSizeMode2Data		= 2332,
+	kDRBlockSizeMode2Form1Data	= 2048,
+	kDRBlockSizeMode2Form2Data	= 2324,
+	kDRBlockSizeDVDData			= 2048
 };
 
 #pragma mark - Block Types
 /*!
 	@enum 		Block Types
-	@discussion Common block type values for types of track data.
-	@constant	kDRBlockTypeAudio		Audio data.
-	@constant	kDRBlockTypeMode1Data	Mode 1 data.
-	@constant	kDRBlockTypeMode2Data	Mode 2 data. Photo CD and CD-i use this.
-	@constant	kDRBlockTypeDVDData		DVD data.
+	@discussion	Common block type values for types of track data.
+	@constant	kDRBlockTypeAudio			Audio data.
+	@constant	kDRBlockTypeMode1Data		Mode 1 data.
+	@constant	kDRBlockTypeMode2Data		Mode 2 data. Photo CD and CD-i use this.
+	@constant	kDRBlockTypeMode2Form1Data	Mode 2 Form 1 data.
+	@constant	kDRBlockTypeMode2Form2Data	Mode 2 Form 2 data.
+	@constant	kDRBlockTypeDVDData			DVD data.
 */
 enum
 {
-	kDRBlockTypeAudio		= 0,
-	kDRBlockTypeMode1Data	= 8,
-	kDRBlockTypeMode2Data	= 13,
-	kDRBlockTypeDVDData		= 8
+	kDRBlockTypeAudio			= 0,
+	kDRBlockTypeMode1Data		= 8,
+	kDRBlockTypeMode2Data		= 13,
+	kDRBlockTypeMode2Form1Data	= 10,
+	kDRBlockTypeMode2Form2Data	= 12,
+	kDRBlockTypeDVDData			= 8
 };
 
 #pragma mark - Data Forms
 /*!
 	@enum 		Data Forms
 	@discussion	Common data form values for types of track data.
-	@constant	kDRDataFormAudio		Audio data.
-	@constant	kDRDataFormMode1Data	Mode 1 data.
-	@constant	kDRDataFormMode2Data	Mode 2 data. Photo CD and CD-i use this.
-	@constant	kDRDataFormDVDData		DVD data.
+	@constant	kDRDataFormAudio			Audio data.
+	@constant	kDRDataFormMode1Data		Mode 1 data.
+	@constant	kDRDataFormMode2Data		Mode 2 data. Photo CD and CD-i use this.
+	@constant	kDRDataFormMode2Form1Data	Mode 2 Form 1 data.
+	@constant	kDRDataFormMode2Form2Data	Mode 2 Form 2 data.
+	@constant	kDRDataFormDVDData			DVD data.
 */	
 enum
 {
-	kDRDataFormAudio		= 0,
-	kDRDataFormMode1Data	= 16,
-	kDRDataFormMode2Data	= 32,
-	kDRDataFormDVDData		= 16
+	kDRDataFormAudio			= 0,
+	kDRDataFormMode1Data		= 16,
+	kDRDataFormMode2Data		= 32,
+	kDRDataFormMode2Form1Data	= 32,
+	kDRDataFormMode2Form2Data	= 32,
+	kDRDataFormDVDData			= 16
 };
 
 #pragma mark - Track Modes
 /*!
 	@enum 		Track Modes
 	@discussion	Common track mode values for types of track data.
-	@constant	kDRTrackModeAudio		Audio data.
-	@constant	kDRTrackMode1Data		Mode 1 data.
-	@constant	kDRTrackMode2Data		Mode 2 data. Photo CD and CD-i use this.
-	@constant	kDRTrackModeDVDData		DVD data.
+	@constant	kDRTrackModeAudio			Audio data.
+	@constant	kDRTrackMode1Data			Mode 1 data.
+	@constant	kDRTrackMode2Data			Mode 2 data. Photo CD and CD-i use this.
+	@constant	kDRTrackMode2Form1Data		Mode 2 Form 1 data.
+	@constant	kDRTrackMode2Form2Data		Mode 2 Form 2 data.
+	@constant	kDRTrackModeDVDData			DVD data.
 */
 enum
 {
 	kDRTrackModeAudio		= 0,
 	kDRTrackMode1Data		= 4,
 	kDRTrackMode2Data		= 4,
+	kDRTrackMode2Form1Data	= 4,
+	kDRTrackMode2Form2Data	= 4,
 	kDRTrackModeDVDData		= 5
 };
 
@@ -694,6 +733,13 @@ enum
 													produce the next chunk of the pregap.
 													
 													The ioParam parameter is a pointer to a @link DRTrackProductionInfo DRTrackProductionInfo @/link structure.
+
+	@constant kDRTrackMessageVerifyPreGap			Message sent to the track production callback when the client has chosen
+													the @link kDRVerificationTypeReceiveData kDRVerificationTypeReceiveData @/link option. The data produced by the client 
+													for the @link kDRTrackMessageProducePreGap kDRTrackMessageProducePreGap @/link should be verified.
+													
+													The ioParam parameter is a pointer to a @link DRTrackProductionInfo DRTrackProductionInfo @/link structure describing 
+    												the data passed to the callback.   												
 */
 enum
 {
@@ -704,7 +750,8 @@ enum
 	kDRTrackMessageVerificationDone		= 'vdon',
 	kDRTrackMessagePostBurn				= 'post',
 	kDRTrackMessageEstimateLength		= 'esti',	/* added in 10.3 */
-	kDRTrackMessageProducePreGap		= 'prpr'	/* added in 10.3 */
+	kDRTrackMessageProducePreGap		= 'prpr',	/* added in 10.3 */
+	kDRTrackMessageVerifyPreGap			= 'vrpr'	/* added in 10.4 */
 };
 
 /*!

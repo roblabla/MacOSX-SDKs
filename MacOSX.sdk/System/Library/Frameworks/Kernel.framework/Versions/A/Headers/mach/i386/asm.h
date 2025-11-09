@@ -67,14 +67,18 @@
 #endif	/* MACH_KERNEL || _KERNEL */
 
 
+#define S_PC	 0(%esp)
 #define S_ARG0	 4(%esp)
 #define S_ARG1	 8(%esp)
 #define S_ARG2	12(%esp)
 #define S_ARG3	16(%esp)
+#define S_ARG4	20(%esp)
 
 #define FRAME	pushl %ebp; movl %esp, %ebp
 #define EMARF	leave
 
+#define B_LINK	 0(%ebp)
+#define B_PC	 4(%ebp)
 #define B_ARG0	 8(%ebp)
 #define B_ARG1	12(%ebp)
 #define B_ARG2	16(%ebp)
@@ -82,7 +86,7 @@
 
 /* There is another definition of ALIGN for .c sources */
 #ifdef ASSEMBLER
-#define ALIGN 2,0x90
+#define ALIGN 4,0x90
 #endif /* ASSEMBLER */
 
 #ifndef FALIGN
@@ -151,13 +155,7 @@
 			call *(%eax);
 
 #else	/* !GPROF, !__SHARED__ */
-#define MCOUNT		; .data;\
-			.align ALIGN;\
-			LBc(x, 8) .long 0;\
-			.text;\
-			movl LBb(x,8),%edx;\
-			call *EXT(_mcount_ptr);
-
+#define MCOUNT		; call mcount;
 #endif /* GPROF */
 
 #ifdef __ELF__

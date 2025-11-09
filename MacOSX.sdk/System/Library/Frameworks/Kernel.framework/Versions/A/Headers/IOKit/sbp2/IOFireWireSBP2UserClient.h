@@ -60,9 +60,8 @@ protected:
 
 public:
 
-    static IOFireWireSBP2UserClient* withTask( task_t owningTask );
-
-    virtual bool init( OSDictionary * dictionary = 0 );
+	virtual bool initWithTask( task_t owningTask, void * securityToken, UInt32 type, OSDictionary * properties );
+				
     virtual bool start( IOService * provider );
 
     virtual IOReturn clientClose( void );

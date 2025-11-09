@@ -31,7 +31,6 @@ typedef function_table_entry 	*function_table_t;
 
 #include <mach/std_types.h>
 #include <mach/mig.h>
-#include <mach/mig.h>
 #include <mach/mach_types.h>
 #include <mach/mach_types.h>
 
@@ -86,12 +85,22 @@ __END_DECLS
 
 #ifndef __Request__clock_priv_subsystem__defined
 #define __Request__clock_priv_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_timespec_t new_time;
 	} __Request__clock_set_time_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -99,7 +108,9 @@ __END_DECLS
 		mach_msg_type_number_t clock_attrCnt;
 		int clock_attr[1];
 	} __Request__clock_set_attributes_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__clock_priv_subsystem__defined */
 
 /* union of all requests */
@@ -115,18 +126,30 @@ union __RequestUnion__clock_priv_subsystem {
 
 #ifndef __Reply__clock_priv_subsystem__defined
 #define __Reply__clock_priv_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__clock_set_time_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__clock_set_attributes_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__clock_priv_subsystem__defined */
 
 /* union of all replies */

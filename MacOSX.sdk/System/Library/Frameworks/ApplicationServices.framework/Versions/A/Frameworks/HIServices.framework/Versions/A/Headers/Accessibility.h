@@ -12,5 +12,6 @@
 #include <HIServices/AXConstants.h>
 #include <HIServices/AXUIElement.h>
 #include <HIServices/AXValue.h>
+#include <HIServices/AXTextAttributedString.h>
 
 #endif // __ACCESSIBILITY__

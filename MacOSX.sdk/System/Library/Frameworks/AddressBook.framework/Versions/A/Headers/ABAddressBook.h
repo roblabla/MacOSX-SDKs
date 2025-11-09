@@ -38,6 +38,7 @@
 {
 @private
     id                   _personIndexer;
+    id                   _subscribedPersonIndexer;
     NSMutableDictionary *_masterCache;
 
     NSMutableSet        *_insertedRecords;
@@ -49,7 +50,7 @@
     NSTimer             *_inactivityTimer;
     NSString            *_meUniqueId;
 
-    unsigned int         _reserved1;
+    void                *_reserved1;
 
     struct __ABBookflags {
         unsigned int     hasUnsavedChanges:1;
@@ -58,7 +59,8 @@
         unsigned int     needConversion:1;
         unsigned int     cleanedUp:1;
         unsigned int     importTips:1;
-        unsigned int     _reserved:26;
+        unsigned int     restoreFromMetaData:1;
+        unsigned int     _reserved:25;
     } _flags;
 }
 
@@ -66,13 +68,13 @@
     // Returns the unique shared instance of ABAddressBook
 
 - (NSArray *)recordsMatchingSearchElement:(ABSearchElement *)search;
-    // Returns an array of record matching the given search element
+    // Returns an array of records matching the given search element
     // Raises if search is nil
     // Returns an empty array if no matches
 
 - (BOOL)save;
     // Saves changes made since the last save
-    // Return YES if sucessfull (or there was no change)
+    // Return YES if successful (or there was no change)
 
 - (BOOL)hasUnsavedChanges;
     // Returns YES if they are unsaved changes

@@ -3,9 +3,9 @@
  
      Contains:   Appearance Manager Interfaces.
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -185,26 +185,75 @@ enum {
 };
 
 
+
+/*
+ *  Discussion:
+ *    ThemeBrushes
+ */
 enum {
-  kThemeBrushDialogBackgroundActive = 1, /* use with kModalWindowClass */
-  kThemeBrushDialogBackgroundInactive = 2, /* use with kModalWindowClass */
-  kThemeBrushAlertBackgroundActive = 3, /* use with kAlertWindowClass and kMovableAlertWindowClass */
-  kThemeBrushAlertBackgroundInactive = 4, /* use with kAlertWindowClass and kMovableAlertWindowClass */
-  kThemeBrushModelessDialogBackgroundActive = 5, /* use with kDocumentWindowClass */
-  kThemeBrushModelessDialogBackgroundInactive = 6, /* use with kDocumentWindowClass */
-  kThemeBrushUtilityWindowBackgroundActive = 7, /* use with kFloatingWindowClass and kUtilityWindowClass */
-  kThemeBrushUtilityWindowBackgroundInactive = 8, /* use with kFloatingWindowClass and kUtilityWindowClass */
-  kThemeBrushListViewSortColumnBackground = 9, /* Finder list views */
+
+  /*
+   * Use with kModalWindowClass.
+   */
+  kThemeBrushDialogBackgroundActive = 1,
+
+  /*
+   * Use with kModalWindowClass.
+   */
+  kThemeBrushDialogBackgroundInactive = 2,
+
+  /*
+   * Use with kAlertWindowClass and kMovableAlertWindowClass.
+   */
+  kThemeBrushAlertBackgroundActive = 3,
+
+  /*
+   * Use with kAlertWindowClass and kMovableAlertWindowClass.
+   */
+  kThemeBrushAlertBackgroundInactive = 4,
+
+  /*
+   * Use with kDocumentWindowClass.
+   */
+  kThemeBrushModelessDialogBackgroundActive = 5,
+
+  /*
+   * Use with kDocumentWindowClass.
+   */
+  kThemeBrushModelessDialogBackgroundInactive = 6,
+
+  /*
+   * Use with kFloatingWindowClass and kUtilityWindowClass.
+   */
+  kThemeBrushUtilityWindowBackgroundActive = 7,
+
+  /*
+   * Use with kFloatingWindowClass and kUtilityWindowClass.
+   */
+  kThemeBrushUtilityWindowBackgroundInactive = 8,
+
+  /*
+   * The background used for Finder list views.
+   */
+  kThemeBrushListViewSortColumnBackground = 9,
   kThemeBrushListViewBackground = 10,
   kThemeBrushIconLabelBackground = 11,
   kThemeBrushListViewSeparator  = 12,
   kThemeBrushChasingArrows      = 13,
   kThemeBrushDragHilite         = 14,
-  kThemeBrushDocumentWindowBackground = 15, /* use with kDocumentWindowClass */
+
+  /*
+   * Use with kDocumentWindowClass.
+   */
+  kThemeBrushDocumentWindowBackground = 15,
   kThemeBrushFinderWindowBackground = 16
 };
 
-/* Brushes introduced in Appearance 1.1 (Mac OS 8.5) and later */
+
+/*
+ *  Discussion:
+ *    ThemeBrushes introduced in Appearance 1.1 (Mac OS 8.5) and later
+ */
 enum {
   kThemeBrushScrollBarDelimiterActive = 17,
   kThemeBrushScrollBarDelimiterInactive = 18,
@@ -239,36 +288,150 @@ enum {
   kThemeBrushBevelInactiveDark  = 47
 };
 
-/* Brushes introduced in Appearance 1.1.1 (Mac OS 9.0) and later */
+
+/*
+ *  Discussion:
+ *    ThemeBrushes introduced in Appearance 1.1.1 (Mac OS 9.0) and
+ *    later.
+ */
 enum {
   kThemeBrushNotificationWindowBackground = 48
 };
 
-/* Brushes introduced in Carbon */
+
+/*
+ *  Discussion:
+ *    ThemeBrushes introduced in Carbon. Available in Mac OS X, and
+ *    Carbon Lib 1.3 and later.
+ */
 enum {
-  kThemeBrushMovableModalBackground = 49, /* use with kMovableModalWindowClass; available in Mac OS X, and CarbonLib 1.3 and later */
-  kThemeBrushSheetBackgroundOpaque = 50, /* use with kSheetWindowClass and kSheetAlertWindowClass; available in Mac OS X, and CarbonLib 1.3 and later */
-  kThemeBrushDrawerBackground   = 51,   /* use with kDrawerWindowClass; available in Mac OS X, and CarbonLib 1.3 and later */
-  kThemeBrushToolbarBackground  = 52,   /* use with kToolbarWindowClass; available in Mac OS X, and CarbonLib 1.6 and later */
-  kThemeBrushSheetBackgroundTransparent = 53, /* use with kSheetWindowClass and kSheetAlertWindowClass; available in Mac OS X 10.1 and CarbonLib 1.6, and later */
-  kThemeBrushMenuBackground     = 54,   /* available in Mac OS X 10.1 and CarbonLib 1.6, and later */
-  kThemeBrushMenuBackgroundSelected = 55 /* available in Mac OS X 10.1 and CarbonLib 1.6, and later */
+
+  /*
+   * Use with kMovableModalWindowClass windows. Available in Mac OS X,
+   * and CarbonLib 1.3 and later.
+   */
+  kThemeBrushMovableModalBackground = 49,
+
+  /*
+   * Use with kSheetWindowClass and kSheetAlertWindowClass. This is the
+   * backwardly compatible sheet background.
+   * kThemeBrushSheetBackgroundTransparent is preferred. Available in
+   * Mac OS X, and CarbonLib 1.3 and later.
+   */
+  kThemeBrushSheetBackgroundOpaque = 50,
+
+  /*
+   * Use with kDrawerWindowClass. Available in Mac OS X, and CarbonLib
+   * 1.3 and later.
+   */
+  kThemeBrushDrawerBackground   = 51
 };
 
-/* Appearance X or later theme brush compatibility synonyms */
+
+/*
+ *  Discussion:
+ *    ThemeBrushes introduced in Carbon. Available in Mac OS X, and
+ *    Carbon Lib 1.6 and later.
+ */
+enum {
+
+  /*
+   * Use with kToolbarWindowClass.
+   */
+  kThemeBrushToolbarBackground  = 52
+};
+
+
+/*
+ *  Discussion:
+ *    ThemeBrushes introduced in Mac OS X 10.1. Available in Mac OS X
+ *    10.1 and CarbonLib 1.6, and later.
+ */
+enum {
+
+  /*
+   * Use with kSheetWindowClass and kSheetAlertWindowClass. Not fully
+   * transparent -- this brush is the semi-transparent background seen
+   * with modern sheets. Available in Mac OS X 10.1 and CarbonLib 1.6,
+   * and later.
+   */
+  kThemeBrushSheetBackgroundTransparent = 53,
+
+  /*
+   * Available in Mac OS X 10.1 and CarbonLib 1.6, and later.
+   */
+  kThemeBrushMenuBackground     = 54,
+
+  /*
+   * Available in Mac OS X 10.1 and CarbonLib 1.6, and later.
+   */
+  kThemeBrushMenuBackgroundSelected = 55
+};
+
+
+/*
+ *  Discussion:
+ *    ThemeBrushes introduced in Mac OS X 10.3.
+ */
+enum {
+
+  /*
+   * For lists that use different colors as the background for odd and
+   * even rows (like iTunes), this brush is the background for the odd
+   * numbered rows. Available in Mac OS X 10.4 and later.
+   */
+  kThemeBrushListViewOddRowBackground = 56,
+
+  /*
+   * For lists that use different colors as the background for odd and
+   * even rows (like iTunes), this brush is the background for the even
+   * numbered rows. Available in Mac OS X 10.4 and later.
+   */
+  kThemeBrushListViewEvenRowBackground = 57,
+
+  /*
+   * The color for the divider lines drawn between columns in some list
+   * views. This brush may have an alpha value associated with it.
+   * Drawing this brush with QuickDraw or fetching it as an RGBColor
+   * will not necessarily yield satisfactory results.
+   */
+  kThemeBrushListViewColumnDivider = 58
+};
+
+
+
+/*
+ *  Discussion:
+ *    ThemeBrush compatibility synonyms. The newer names are preferred.
+ */
 enum {
   kThemeBrushSheetBackground    = kThemeBrushSheetBackgroundOpaque
 };
 
-/* These values are meta-brushes, specific colors that do not       */
-/* change from theme to theme. You can use them instead of using    */
-/* direct RGB values.                                               */
+
+/*
+ *  Discussion:
+ *    Theme meta-brushes. They are specific colors that do not change
+ *    from theme to theme. Use them instead of using direct RGB values.
+ */
 enum {
   kThemeBrushBlack              = -1,
   kThemeBrushWhite              = -2,
-  kThemeBrushPrimaryHighlightColor = -3, /* available in Mac OS 10.1 and CarbonLib 1.6, and later*/
-  kThemeBrushSecondaryHighlightColor = -4, /* available in Mac OS 10.1 and CarbonLib 1.6, and later*/
-  kThemeBrushAlternatePrimaryHighlightColor = -5 /* available in Mac OS 10.2 and later*/
+
+  /*
+   * Available in Mac OS 10.1 and CarbonLib 1.6, and later.
+   */
+  kThemeBrushPrimaryHighlightColor = -3,
+
+  /*
+   * Available in Mac OS 10.1 and CarbonLib 1.6, and later.
+   */
+  kThemeBrushSecondaryHighlightColor = -4,
+
+  /*
+   * Available in Mac OS 10.1 and CarbonLib 1.6, and later.
+   */
+  kThemeBrushAlternatePrimaryHighlightColor = -5
 };
 
 typedef SInt16                          ThemeBrush;
@@ -473,22 +636,47 @@ enum {
 };
 
 typedef UInt16                          ThemeMenuItemType;
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Theme Backgrounds                                                                        */
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 
 /*
+ *  Discussion:
+ *    ThemeBackgroundKinds
  */
 enum {
+
+  /*
+   * The theme background used to draw the fill of a tab pane.
+   */
   kThemeBackgroundTabPane       = 1,
+
+  /*
+   * The theme background used to draw the fill of a window placard.
+   */
   kThemeBackgroundPlacard       = 2,
+
+  /*
+   * The theme background used to draw the window header of a window of
+   * a window that does not contain content that has a hard-lined top
+   * edge. An example of this would be icon view in the non side panel
+   * Finder.
+   */
   kThemeBackgroundWindowHeader  = 3,
+
+  /*
+   * The theme background used to draw the window header of a window of
+   * a window that does contain content that has a hard-lined top edge.
+   * An example of this would be list view in the non side panel Finder.
+   */
   kThemeBackgroundListViewWindowHeader = 4,
+
+  /*
+   * The theme background used to draw the fill of a secondary group
+   * box.
+   */
   kThemeBackgroundSecondaryGroupBox = 5,
 
   /*
    * A special theme brush for drawing metal backgrounds. Currently,
-   * this brush only works with HIThemeApplyBackground.
+   * this brush only works with HIThemeDrawBackground.
    */
   kThemeBackgroundMetal         = 6
 };
@@ -789,25 +977,72 @@ enum {
   kThemeLargeTabHeightMax       = 24
 };
 
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Track kinds                                                                              */
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ *  Discussion:
+ *    ThemeTrackKinds
+ */
 enum {
-  kThemeMediumScrollBar         = 0,
-  kThemeSmallScrollBar          = 1,
-  kThemeMediumSlider            = 2,
-  kThemeMediumProgressBar       = 3,
-  kThemeMediumIndeterminateBar  = 4,
+
+  /*
+   * This is the primitive used to draw the normal variant of the
+   * scroll bar control.
+   */
+  kThemeScrollBarMedium         = 0,
+
+  /*
+   * This is the primitive used to draw the small variant of the scroll
+   * bar control.
+   */
+  kThemeScrollBarSmall          = 1,
+
+  /*
+   * This is the primitive used to draw the normal variant of the
+   * slider control.
+   */
+  kThemeSliderMedium            = 2,
+
+  /*
+   * This is the primitive used to draw the normal variant of the
+   * progress bar control.
+   */
+  kThemeProgressBarMedium       = 3,
+
+  /*
+   * This is the primitive used to draw the normal variant of the
+   * indeterminate progress bar control.
+   */
+  kThemeIndeterminateBarMedium  = 4,
+
+  /*
+   * This is the primitive used to draw the normal variant of the
+   * relevance bar control.
+   */
   kThemeRelevanceBar            = 5,
-  kThemeSmallSlider             = 6,
-  kThemeLargeProgressBar        = 7,
-  kThemeLargeIndeterminateBar   = 8
+
+  /*
+   * This is the primitive used to draw the small variant of the slider
+   * control.
+   */
+  kThemeSliderSmall             = 6,
+
+  /*
+   * This is the primitive used to draw the large variant of the
+   * progress bar control.
+   */
+  kThemeProgressBarLarge        = 7,
+
+  /*
+   * This is the primitive used to draw the large variant of the
+   * indeterminate progress bar control.
+   */
+  kThemeIndeterminateBarLarge   = 8
 };
 
 
 /*
  *  Discussion:
- *    New TThemeTrackKinds on Mac OS X 10.3 and later. Not all of them
+ *    New ThemeTrackKinds on Mac OS X 10.3 and later. Not all of them
  *    are implemented.
  */
 enum {
@@ -815,22 +1050,43 @@ enum {
   /*
    * Not implemented. Will return paramErr if used.
    */
-  kThemeMiniScrollBar           = 9,
+  kThemeScrollBarMini           = 9,
 
   /*
    * A miniature version of the slider.
    */
-  kThemeMiniSlider              = 10,
+  kThemeSliderMini              = 10,
 
   /*
    * Not implemented. Will return paramErr if used.
    */
-  kThemeMiniProgressBar         = 11,
+  kThemeProgressBarMini         = 11,
 
   /*
    * Not implemented. Will return paramErr if used.
    */
-  kThemeMiniIndeterminateBar    = 12
+  kThemeIndeterminateBarMini    = 12
+};
+
+
+/*
+ *  Discussion:
+ *    These are legacy synonyms for previously defined ThemeTrackKinds.
+ *    Please use the modern constant names.
+ */
+enum {
+  kThemeMediumScrollBar         = kThemeScrollBarMedium,
+  kThemeSmallScrollBar          = kThemeScrollBarSmall,
+  kThemeMediumSlider            = kThemeSliderMedium,
+  kThemeMediumProgressBar       = kThemeProgressBarMedium,
+  kThemeMediumIndeterminateBar  = kThemeIndeterminateBarMedium,
+  kThemeSmallSlider             = kThemeSliderSmall,
+  kThemeLargeProgressBar        = kThemeProgressBarLarge,
+  kThemeLargeIndeterminateBar   = kThemeIndeterminateBarLarge,
+  kThemeMiniScrollBar           = kThemeScrollBarMini,
+  kThemeMiniSlider              = kThemeSliderMini,
+  kThemeMiniProgressBar         = kThemeProgressBarMini,
+  kThemeMiniIndeterminateBar    = kThemeIndeterminateBarMini
 };
 
 typedef UInt16                          ThemeTrackKind;
@@ -924,33 +1180,132 @@ enum {
 };
 
 typedef UInt16                          ThemeTrackAttributes;
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Track info block                                                                         */
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ *  ScrollBarTrackInfo
+ *  
+ *  Summary:
+ *    Drawing parameters passed to scroll bar drawing and measuring
+ *    theme APIs.
+ *  
+ *  Discussion:
+ *    Used in both the old theme APIs and the newer HITheme APIs.
+ */
 struct ScrollBarTrackInfo {
+
+  /*
+   * The current view range size.
+   */
   SInt32              viewsize;               /* current view range size */
+
+  /*
+   * ThemeTrackPressState bits that indicate the pressed parts state.
+   */
   ThemeTrackPressState  pressState;           /* pressed parts state */
 };
 typedef struct ScrollBarTrackInfo       ScrollBarTrackInfo;
+
+/*
+ *  SliderTrackInfo
+ *  
+ *  Summary:
+ *    Drawing parameters passed to slider drawing and measuring theme
+ *    APIs.
+ *  
+ *  Discussion:
+ *    Used in both the old theme APIs and the newer HITheme APIs.
+ */
 struct SliderTrackInfo {
+
+  /*
+   * A ThemeThumbDirection indicating the thumb direction.
+   */
   ThemeThumbDirection  thumbDir;              /* thumb direction */
+
+  /*
+   * ThemeTrackPressState bits that indicate the pressed parts state.
+   */
   ThemeTrackPressState  pressState;           /* pressed parts state */
 };
 typedef struct SliderTrackInfo          SliderTrackInfo;
+
+/*
+ *  ProgressTrackInfo
+ *  
+ *  Summary:
+ *    Drawing parameters passed to (indeterminate) progress bar drawing
+ *    and measuring theme APIs.
+ *  
+ *  Discussion:
+ *    Used in both the old theme APIs and the newer HITheme APIs.
+ */
 struct ProgressTrackInfo {
+
+  /*
+   * A UInt8 indicating the current phase of the track fill.
+   */
   UInt8               phase;                  /* phase for indeterminate progress */
 };
 typedef struct ProgressTrackInfo        ProgressTrackInfo;
+
+/*
+ *  ThemeTrackDrawInfo
+ *  
+ *  Summary:
+ *    Drawing parameters passed to track drawing and measuring theme
+ *    APIs.
+ *  
+ *  Discussion:
+ *    Use the newer HITheme APIs.
+ */
 struct ThemeTrackDrawInfo {
-  ThemeTrackKind      kind;                   /* what kind of track this info is for */
-  Rect                bounds;                 /* track basis rectangle */
-  SInt32              min;                    /* min track value */
-  SInt32              max;                    /* max track value */
-  SInt32              value;                  /* current thumb value */
+
+  /*
+   * The ThemeTrackKind of the track being drawn or measured.
+   */
+  ThemeTrackKind      kind;
+
+  /*
+   * The bounds of the track is being drawn or measured.
+   */
+  Rect                bounds;
+
+  /*
+   * The minimum allowable value for the track being drawn or measured.
+   */
+  SInt32              min;
+
+  /*
+   * The maximum allowable value for the track being drawn or measured.
+   */
+  SInt32              max;
+
+  /*
+   * The value for the track being drawn or measured.
+   */
+  SInt32              value;
+
+  /*
+   * Leave this reserved field set to 0.
+   */
   UInt32              reserved;
 
-  ThemeTrackAttributes  attributes;           /* various track attributes */
-  ThemeTrackEnableState  enableState;         /* enable state */
+
+  /*
+   * A set of ThemeTrackAttributes for the track to be drawn or
+   * measured.
+   */
+  ThemeTrackAttributes  attributes;
+
+  /*
+   * A ThemeTrackEnableState describing the state of the track to be
+   * drawn or measured.
+   */
+  ThemeTrackEnableState  enableState;
+
+  /*
+   * Leave this reserved field set to 0.
+   */
   UInt8               filler1;
 
   union {
@@ -960,26 +1315,87 @@ struct ThemeTrackDrawInfo {
   }                       trackInfo;
 };
 typedef struct ThemeTrackDrawInfo       ThemeTrackDrawInfo;
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* ThemeWindowAttributes                                                                    */
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ *  Summary:
+ *    ThemeWindowAttributes
+ *  
+ *  Discussion:
+ *    Theme window attributes control the look of the window elements
+ *    as drawn by the DrawThemeWindowFrame.
+ */
 enum {
-  kThemeWindowHasGrow           = (1 << 0), /* can the size of the window be changed by the user? */
-  kThemeWindowHasHorizontalZoom = (1 << 3), /* window can zoom only horizontally */
-  kThemeWindowHasVerticalZoom   = (1 << 4), /* window can zoom only vertically */
-  kThemeWindowHasFullZoom       = kThemeWindowHasHorizontalZoom + kThemeWindowHasVerticalZoom, /* window zooms in all directions */
-  kThemeWindowHasCloseBox       = (1 << 5), /* window has a close box */
-  kThemeWindowHasCollapseBox    = (1 << 6), /* window has a collapse box */
-  kThemeWindowHasTitleText      = (1 << 7), /* window has a title/title icon */
-  kThemeWindowIsCollapsed       = (1 << 8), /* window is in the collapsed state */
-  kThemeWindowHasDirty          = (1 << 9)
+
+  /*
+   * This bit means that the size of the window can be changed by the
+   * user. The window is drawn with a grow box.
+   */
+  kThemeWindowHasGrow           = (1 << 0),
+
+  /*
+   * This bit means that the window can be zoomed horizontally. The
+   * window is drawn with a zoom box.
+   */
+  kThemeWindowHasHorizontalZoom = (1 << 3),
+
+  /*
+   * This bit means that the window can be zoomed vertically. The
+   * window is drawn with a zoom box.
+   */
+  kThemeWindowHasVerticalZoom   = (1 << 4),
+
+  /*
+   * This bit means that the window can be zoomed horizontally and
+   * vertically. The window is drawn with a zoom box.
+   */
+  kThemeWindowHasFullZoom       = kThemeWindowHasHorizontalZoom + kThemeWindowHasVerticalZoom,
+
+  /*
+   * This bit means that the window can be closed. The window is drawn
+   * with a close box.
+   */
+  kThemeWindowHasCloseBox       = (1 << 5),
+
+  /*
+   * This bit means that the window can be collapsed. The window is
+   * drawn with a collapse box.
+   */
+  kThemeWindowHasCollapseBox    = (1 << 6),
+
+  /*
+   * This bit means that the window has title text and/or a title icon.
+   */
+  kThemeWindowHasTitleText      = (1 << 7),
+
+  /*
+   * This bit means that the window has been collapsed.
+   */
+  kThemeWindowIsCollapsed       = (1 << 8),
+
+  /*
+   * This bit means that the window has dirty content. Get your mind
+   * out of the gutter. That means that the content of the window has
+   * changed and needs to be saved. If the window is drawing a close
+   * box, it will be drawn dirty.
+   */
+  kThemeWindowHasDirty          = (1 << 9),
+
+  /*
+   * This bit means that the window has a toolbar toggling button.
+   */
+  kThemeWindowHasToolbarButton  = (1 << 11)
 };
 
 
 typedef UInt32                          ThemeWindowAttributes;
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Window Types Supported by the Appearance Manager                                         */
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ *  Summary:
+ *    ThemeWindowTypes
+ *  
+ *  Discussion:
+ *    Window Types Supported by the Appearance Manager.
+ */
 enum {
   kThemeDocumentWindow          = 0,
   kThemeDialogWindow            = 1,
@@ -996,9 +1412,14 @@ enum {
 };
 
 typedef UInt16                          ThemeWindowType;
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Window Widgets Supported by the Appearance Manager                                       */
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ *  Summary:
+ *    ThemeTitleBarWidgets
+ *  
+ *  Discussion:
+ *    Window Widgets Supported by the Appearance Manager.
+ */
 enum {
   kThemeWidgetCloseBox          = 0,
   kThemeWidgetZoomBox           = 1,
@@ -1014,9 +1435,14 @@ enum {
 };
 
 typedef UInt16                          ThemeTitleBarWidget;
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Popup arrow orientations                                                                 */
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ *  Summary:
+ *    ThemeArrowOrientation
+ *  
+ *  Discussion:
+ *    Popup arrow orientations.
+ */
 enum {
   kThemeArrowLeft               = 0,
   kThemeArrowDown               = 1,
@@ -1025,9 +1451,14 @@ enum {
 };
 
 typedef UInt16                          ThemeArrowOrientation;
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Popup arrow sizes                                                                        */
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ *  Summary:
+ *    ThemePopupArrowSizes
+ *  
+ *  Discussion:
+ *    Popup arrow sizes.
+ */
 enum {
   kThemeArrow3pt                = 0,
   kThemeArrow5pt                = 1,
@@ -1036,9 +1467,14 @@ enum {
 };
 
 typedef UInt16                          ThemePopupArrowSize;
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Grow box directions                                                                      */
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ *  Summary:
+ *    ThemeGrowDirections
+ *  
+ *  Discussion:
+ *    Grow box directions.
+ */
 enum {
   kThemeGrowLeft                = (1 << 0), /* can grow to the left */
   kThemeGrowRight               = (1 << 1), /* can grow to the right */
@@ -1047,9 +1483,6 @@ enum {
 };
 
 typedef UInt16                          ThemeGrowDirection;
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Button kinds                                                                             */
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 
 /*
  *  Discussion:
@@ -1091,7 +1524,12 @@ enum {
    * explicitly-sized kThemePopupButton{Normal,Small,Mini} constants.
    */
   kThemePopupButton             = 5,
-  kThemeDisclosureButton        = 6,
+
+  /*
+   * This is a disclosure triangle with a label beside it. Used to be
+   * confusingly named kThemeDisclosureTriangle.
+   */
+  kThemeDisclosureTriangle      = 6,
 
   /*
    * Increment/decrement buttons (no label). This is the primitive used
@@ -1102,29 +1540,64 @@ enum {
   /*
    * Small-shadow bevel button
    */
-  kThemeSmallBevelButton        = 8,
+  kThemeBevelButtonSmall        = 8,
 
   /*
    * Med-shadow bevel button
    */
-  kThemeMediumBevelButton       = 3,
+  kThemeBevelButtonMedium       = 3,
 
   /*
    * Large-shadow bevel button
    */
-  kThemeLargeBevelButton        = 9,
+  kThemeBevelButtonLarge        = 9,
 
   /*
    * Sort button for top of a list. This is the theme primitive used to
    * draw the top of the columns in the data browser.
    */
   kThemeListHeaderButton        = 10,
+
+  /*
+   * This is the primitive used to draw the normal variant of the round
+   * button control.
+   */
   kThemeRoundButton             = 11,
-  kThemeLargeRoundButton        = 12,
-  kThemeSmallCheckBox           = 13,
-  kThemeSmallRadioButton        = 14,
+
+  /*
+   * This is the primitive used to draw the large variant of the round
+   * button control.
+   */
+  kThemeRoundButtonLarge        = 12,
+
+  /*
+   * This is the primitive used to draw the small variant of the check
+   * box control.
+   */
+  kThemeCheckBoxSmall           = 13,
+
+  /*
+   * This is the primitive used to draw the small variant of the radio
+   * button control.
+   */
+  kThemeRadioButtonSmall        = 14,
+
+  /*
+   * This is the primitive used to draw the rounded-corner variant of
+   * the bevel button control.
+   */
   kThemeRoundedBevelButton      = 15,
+
+  /*
+   * This is the primitive used to draw the normal variant of the combo
+   * box control.
+   */
   kThemeComboBox                = 16,
+
+  /*
+   * This is the primitive used to draw the small variant of the combo
+   * box control.
+   */
   kThemeComboBoxSmall           = 17
 };
 
@@ -1134,9 +1607,24 @@ enum {
  *    New ThemeButtonKinds available on Mac OS X 10.3 and later.
  */
 enum {
+
+  /*
+   * This is the primitive used to draw the mini variant of the combo
+   * box control.
+   */
   kThemeComboBoxMini            = 18,
-  kThemeMiniCheckBox            = 19,
-  kThemeMiniRadioButton         = 20,
+
+  /*
+   * This is the primitive used to draw the mini variant of the check
+   * box control.
+   */
+  kThemeCheckBoxMini            = 19,
+
+  /*
+   * This is the primitive used to draw the mini variant of the radio
+   * button control.
+   */
+  kThemeRadioButtonMini         = 20,
 
   /*
    * This is the primitive used to draw the small variant of the
@@ -1228,18 +1716,65 @@ enum {
 
 /*
  *  Discussion:
+ *    New ThemeButtonKinds available on Mac OS X 10.4 and later.
+ */
+enum {
+
+  /*
+   * This is the primitive used to draw the inset variant of the bevel
+   * button control.
+   */
+  kThemeBevelButtonInset        = 31,
+
+  /*
+   * This is the primitive used to draw the inset variant of the push
+   * button. Similar to kThemePushButtonNormal, but inset.
+   */
+  kThemePushButtonInset         = 32,
+
+  /*
+   * This is the primitive used to draw the small, inset variant of the
+   * push button. Similar to kThemePushButtonSmall, but inset.
+   */
+  kThemePushButtonInsetSmall    = 33,
+
+  /*
+   * This is the primitive used to draw the help variant of the round
+   * button.
+   */
+  kThemeRoundButtonHelp         = 34
+};
+
+
+
+/*
+ *  Discussion:
  *    These are legacy synonyms for previously defined
  *    ThemeButtonKinds. Please use the modern constant names.
  */
 enum {
   kThemeNormalCheckBox          = kThemeCheckBox,
-  kThemeNormalRadioButton       = kThemeRadioButton
+  kThemeNormalRadioButton       = kThemeRadioButton,
+  kThemeLargeBevelButton        = kThemeBevelButtonLarge,
+  kThemeMediumBevelButton       = kThemeBevelButtonMedium,
+  kThemeMiniCheckBox            = kThemeCheckBoxMini,
+  kThemeMiniRadioButton         = kThemeRadioButtonMini,
+  kThemeSmallBevelButton        = kThemeBevelButtonSmall,
+  kThemeSmallCheckBox           = kThemeCheckBoxSmall,
+  kThemeSmallRadioButton        = kThemeRadioButtonSmall,
+  kThemeLargeRoundButton        = kThemeRoundButtonLarge,
+  kThemeDisclosureButton        = kThemeDisclosureTriangle
 };
 
 typedef UInt16                          ThemeButtonKind;
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Common button values                                                                     */
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ *  Summary:
+ *    ThemeButtonValues
+ *  
+ *  Discussion:
+ *    Common button values
+ */
 enum {
   kThemeButtonOff               = 0,
   kThemeButtonOn                = 1,
@@ -1250,36 +1785,146 @@ enum {
 };
 
 typedef UInt16                          ThemeButtonValue;
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Button adornment types                                                                   */
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+
+/*
+ *  Summary:
+ *    ThemeButtonAdornments
+ *  
+ *  Discussion:
+ *    Use these adornments when drawing buttons using the theme
+ *    primitive. Note that the bits starting at (1 << 6) are recycled
+ *    and have different meanings depending on ThemeButtonKind.
+ */
 enum {
+
+  /*
+   * No adornments.
+   */
   kThemeAdornmentNone           = 0,
-  kThemeAdornmentDefault        = (1 << 0), /* if set, draw default ornamentation ( for push button and generic well ) */
-  kThemeAdornmentFocus          = (1 << 2), /* if set, draw focus */
-  kThemeAdornmentRightToLeft    = (1 << 4), /* if set, draw right to left label */
-  kThemeAdornmentDrawIndicatorOnly = (1 << 5), /* if set, don't draw or erase label ( radio, check, disclosure ) */
-  kThemeAdornmentHeaderButtonLeftNeighborSelected = (1 << 6), /* if set, draw the left border of the button as selected ( list header button only ) */
-  kThemeAdornmentHeaderButtonRightNeighborSelected = (1 << 7), /* if set, draw the right border of the button ( list header button only ) */
-  kThemeAdornmentHeaderButtonSortUp = (1 << 8), /* if set, draw the sort indicator pointing upward ( list header button only ) */
-  kThemeAdornmentHeaderMenuButton = (1 << 9), /* if set, draw as a header menu button ( list header button only ) */
-  kThemeAdornmentHeaderButtonNoShadow = (1 << 10), /* if set, draw the non-shadow area of the button ( list header button only ) */
-  kThemeAdornmentHeaderButtonShadowOnly = (1 << 11), /* if set, draw the only the shadow area of the button ( list header button only ) */
-  kThemeAdornmentNoShadow       = kThemeAdornmentHeaderButtonNoShadow, /* old name */
-  kThemeAdornmentShadowOnly     = kThemeAdornmentHeaderButtonShadowOnly, /* old name */
-  kThemeAdornmentArrowLeftArrow = (1 << 6), /* If set, draw a left arrow on the arrow button */
-  kThemeAdornmentArrowDownArrow = (1 << 7), /* If set, draw a down arrow on the arrow button */
-  kThemeAdornmentArrowDoubleArrow = (1 << 8), /* If set, draw a double arrow on the arrow button */
-  kThemeAdornmentArrowUpArrow   = (1 << 9) /* If set, draw a up arrow on the arrow button */
+
+  /*
+   * Draw default ornamentation (for push button and generic well).
+   */
+  kThemeAdornmentDefault        = (1 << 0),
+
+  /*
+   * Draw focus.
+   */
+  kThemeAdornmentFocus          = (1 << 2),
+
+  /*
+   * Draw right to left label.
+   */
+  kThemeAdornmentRightToLeft    = (1 << 4),
+
+  /*
+   * Don't draw or erase label (radio, check, disclosure).
+   */
+  kThemeAdornmentDrawIndicatorOnly = (1 << 5),
+
+  /*
+   * Draw the left border of the button as selected (list header button
+   * only).
+   */
+  kThemeAdornmentHeaderButtonLeftNeighborSelected = (1 << 6),
+
+  /*
+   * Draw the right border of the button (list header button only).
+   */
+  kThemeAdornmentHeaderButtonRightNeighborSelected = (1 << 7),
+
+  /*
+   * Draw the sort indicator pointing upward (list header button only).
+   */
+  kThemeAdornmentHeaderButtonSortUp = (1 << 8),
+
+  /*
+   * Draw as a header menu button (list header button only).
+   */
+  kThemeAdornmentHeaderMenuButton = (1 << 9),
+
+  /*
+   * Draw the non-shadow area of the button (list header button only).
+   */
+  kThemeAdornmentHeaderButtonNoShadow = (1 << 10),
+
+  /*
+   * Draw the only the shadow area of the button (list header button
+   * only).
+   */
+  kThemeAdornmentHeaderButtonShadowOnly = (1 << 11),
+
+  /*
+   * When drawn selected, do not draw the sort direction arrow (list
+   * header button only). Mac OS X 10.4 and later.
+   */
+  kThemeAdornmentHeaderButtonNoSortArrow = (1 << 12),
+
+  /*
+   * Draw a left arrow on the arrow button or draw left disclosure
+   * triangle. Can be combined with kThemeAdornmentArrowDownArrow to
+   * draw an intermediate disclosure triangle.
+   */
+  kThemeAdornmentArrowLeftArrow = (1 << 6),
+
+  /*
+   * Draw a down arrow on the arrow button or draw right disclosure
+   * triangle. Can be combined with kThemeAdornmentArrowLeftArrow to
+   * draw an intermediate disclosure triangle.
+   */
+  kThemeAdornmentArrowDownArrow = (1 << 7),
+
+  /*
+   * Draw a double arrow on the arrow button.
+   */
+  kThemeAdornmentArrowDoubleArrow = (1 << 8),
+
+  /*
+   * Draw a up arrow on the arrow button.
+   */
+  kThemeAdornmentArrowUpArrow   = (1 << 9)
+};
+
+
+/*
+ *  Discussion:
+ *    These are legacy synonyms for previously defined
+ *    ThemeButtonAdornments. Please use the modern constant names.
+ */
+enum {
+  kThemeAdornmentNoShadow       = kThemeAdornmentHeaderButtonNoShadow,
+  kThemeAdornmentShadowOnly     = kThemeAdornmentHeaderButtonShadowOnly
 };
 
 typedef UInt16                          ThemeButtonAdornment;
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Button drawing info block                                                                */
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ *  ThemeButtonDrawInfo
+ *  
+ *  Summary:
+ *    Drawing parameters passed to button drawing and measuring theme
+ *    APIs.
+ *  
+ *  Discussion:
+ *    Use the newer HITheme APIs.
+ */
 struct ThemeButtonDrawInfo {
+
+  /*
+   * The ThemeDrawState of the button being drawn or measured.
+   */
   ThemeDrawState      state;
+
+  /*
+   * The ThemeButtonValue of the button being drawn or measured.
+   */
   ThemeButtonValue    value;
+
+  /*
+   * The ThemeButtonAdornment(s) with which the button is being drawn
+   * or measured.
+   */
   ThemeButtonAdornment  adornment;
 };
 typedef struct ThemeButtonDrawInfo      ThemeButtonDrawInfo;
@@ -1503,14 +2148,14 @@ struct ThemeWindowMetrics {
 };
 typedef struct ThemeWindowMetrics       ThemeWindowMetrics;
 typedef ThemeWindowMetrics *            ThemeWindowMetricsPtr;
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Theme Metrics                                                                            */
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 
 /*
- *  Discussion:
+ *  Summary:
  *    Theme metrics allow you to find out sizes of things in the
  *    current environment, such as how wide a scroll bar is, etc.
+ *  
+ *  Discussion:
+ *    ThemeMetrics
  */
 enum {
 
@@ -1980,6 +2625,54 @@ enum {
    */
   kThemeMetricSmallPaneSplitterHeight = 127
 };
+
+
+/*
+ *  Discussion:
+ *    The following metrics are only available in Mac OS X 10.4 and
+ *    later.
+ */
+enum {
+
+  /*
+   * The horizontal start offset for the first tick mark on a
+   * horizontal slider.
+   */
+  kThemeMetricHSliderTickOffset = 128,
+
+  /*
+   * The vertical start offset for the first tick mark on a vertical
+   * slider.
+   */
+  kThemeMetricVSliderTickOffset = 129,
+
+  /*
+   * The minimum thumb height for a thumb on a slider.
+   */
+  kThemeMetricSliderMinThumbHeight = 130,
+  kThemeMetricSliderMinThumbWidth = 131,
+
+  /*
+   * The minimum thumb height for a thumb on a scroll bar.
+   */
+  kThemeMetricScrollBarMinThumbHeight = 132,
+
+  /*
+   * The minimum thumb width for a thumb on a scroll bar.
+   */
+  kThemeMetricScrollBarMinThumbWidth = 133,
+
+  /*
+   * The minimum thumb height for a thumb on a small scroll bar.
+   */
+  kThemeMetricSmallScrollBarMinThumbHeight = 134,
+
+  /*
+   * The minimum thumb width for a thumb on a small scroll bar.
+   */
+  kThemeMetricSmallScrollBarMinThumbWidth = 135
+};
+
 
 typedef UInt32                          ThemeMetric;
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/

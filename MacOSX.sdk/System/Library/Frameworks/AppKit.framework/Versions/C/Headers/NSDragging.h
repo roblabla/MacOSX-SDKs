@@ -1,7 +1,7 @@
 /*
 	NSDragging.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -61,6 +61,10 @@ enum {
 - (void)concludeDragOperation:(id <NSDraggingInfo>)sender;
 // draggingEnded: is not yet implemented
 - (void)draggingEnded:(id <NSDraggingInfo>)sender;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+/* the receiver of -wantsPeriodicDraggingUpdates should return NO if it does not require periodic -draggingUpdated messages (eg. not autoscrolling or otherwise dependent on draggingUpdated: sent while mouse is stationary) */
+- (BOOL)wantsPeriodicDraggingUpdates;
+#endif
 @end
 
 

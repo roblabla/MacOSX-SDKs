@@ -1,5 +1,5 @@
 /*	NSPathUtilities.h
-	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSString.h>
@@ -63,6 +63,14 @@ typedef enum {
     NSDocumentationDirectory,		// documentation (Documentation)
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
     NSDocumentDirectory,		// documents (Documents)
+#endif
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+    NSCoreServiceDirectory,             // locate of core services (System/Library/CoreServices)
+#endif
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
+    NSDesktopDirectory = 12,            // location of user's desktop
+    NSCachesDirectory = 13,             // location of discardable cache files (Library/Caches)
+    NSApplicationSupportDirectory = 14, // location of application support files (plug-ins, etc) (Library/Application Support)
 #endif
     NSAllApplicationsDirectory = 100,	// all directories where applications can occur
     NSAllLibrariesDirectory = 101	// all directories where resources can occur

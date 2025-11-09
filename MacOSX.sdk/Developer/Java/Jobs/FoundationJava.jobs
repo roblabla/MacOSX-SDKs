@@ -54,6 +54,7 @@ postinit-callout _FoundationStructureTypesInitialization
 type
     NSCalculationError = int
     NSComparisonResult = int
+    NSExpressionType = int
     NSNotificationSuspensionBehavior = int
     NSPoint = com.apple.cocoa.foundation.NSPoint using _NSConvertPointToJavaFromStack _NSConvertPointToJava _NSConvertPointFromJava struct-size 8
     NSPointPointer = com.apple.cocoa.foundation.NSMutablePoint using _NSConvertPointPointerToJavaFromStack _NSConvertPointPointerToJava _NSConvertPointPointerFromJava struct-size 4
@@ -98,8 +99,10 @@ selector
     +classNameEncodedForTrueClassName: = classNameGloballyEncodedForTrueClassName
     +decodeClassName:asClassName: = globallyDecodeClassNameAsClassName
     +encodeClassName:intoClassName: = globallyEncodeClassNameIntoClassName
+    +expressionForFunction:arguments: = expressionForFunction
     +localizedStringFromTable::: = localizedString
     +localizedStringFromTableInBundle:::: = localizedString
+    +predicateWithFormat:argumentArray: = predicateWithFormat
     +preferredLocalizationsFromArray: = preferredLocalizations
     +preferredLocalizationsFromArray:forPreferences: = preferredLocalizations
     +setValueTransformer:forName: = setValueTransformerForName
@@ -134,6 +137,7 @@ selector
     -effectiveRangeForAttribute:atIndex: = effectiveRangeForAttributeAtIndex
     -encodeClassName:intoClassName: = encodeClassNameIntoClassName
     -enqueueNotification:postingStyle:coalesceMask:forModes: = enqueueNotificationWithCoalesceMaskForModes
+    -expressionValueWithObject:context: = expressionValueWithObject
     -formIntersectionWithCharacterSet: = intersectCharacterSet
     -formUnionWithCharacterSet: = unionCharacterSet
     -initWithBool: = initWithBoolean
@@ -150,6 +154,7 @@ selector
     -initWithYear:month:day:hour:minute:second:timeZone: = initWithYearMonthDayHourMinuteSecondTimeZone
     -insertAttributedString:atIndex: = insertAttributedStringAtIndex
     -insertObject:atIndex: = insertObjectAtIndex
+    -insertObjects:atIndexes: = insertObjectsAtIndexes
     -insertString:atIndex: = insertStringAtIndex
     -insertStringReference:atIndex: = insertStringAtIndex
     -invertedSet = characterSetByInvertingCharacterSet
@@ -264,6 +269,9 @@ selector
     -_compileAndFillInErrorDict: = compile
     -_executeAndFillInErrorDict: = execute
     -_executeAppleEvent:andFillInErrorDict: = executeAppleEvent
+    -metadataQuery:replacementObjectForResultObject: =   metadataQueryReplacementObjectForResultObject
+    -metadataQuery:replacementValueForAttribute:value: = metadataQueryReplacementValueForAttributeValue
+    -valueOfAttribute:forResultAtIndex: = valueOfAttributeForResultAtIndex
 
 # Default mappings of Objective-C selectors to overloaded Java methods.
 
@@ -303,6 +311,16 @@ selector
     -initWithContainerClassDescription:containerSpecifier:key:test: = initWithContainerClassDescription
     -initWithSuiteName:className:dictionary: = initWithSuiteNameAndClassName
     -initWithSuiteName:commandName:dictionary: = initWithSuiteNameAndCommandName
+    -initWithDomain:type:name:port: = initWithDomain
+    -initWithDomain:type:name: = initWithDomain
+    -netService:didUpdateTXTRecordData: = netServiceDidUpdateTXTRecordData
+    -netService:didNotPublish: = netServiceDidNotPublish
+    -netService:didNotResolve: = netServiceDidNotResolve
+    -netServiceBrowser:didNotSearch: = netServiceBrowserDidNotSearch
+    -netServiceBrowser:didFindDomain:moreComing: = netServiceBrowserDidFindDomain
+    -netServiceBrowser:didFindService:moreComing: = netServiceBrowserDidFindService
+    -netServiceBrowser:didRemoveDomain:moreComing: = netServiceBrowserDidRemoveDomain
+    -netServiceBrowser:didRemoveService:moreComing: = netServiceBrowserDidRemoveService
 
 # Exposed category interfaces.
 
@@ -523,11 +541,13 @@ class NSArray = com.apple.cocoa.foundation.NSArray
     +componentsSeparatedByString::
     -containsObject:
     -count
+    -filteredArrayUsingPredicate:
     -firstObjectCommonWithArray:
     constructor -init
     constructor -initWithArray:
     -isEqualToArray:
     -lastObject
+    -objectsAtIndexes:
     -sortedArrayUsingDescriptors:
     -sortedArrayUsingSelector:
     -subarrayWithRange:
@@ -1049,6 +1069,10 @@ class NSError = com.apple.cocoa.foundation.NSError
     -domain
     constructor -initWithDomain:code:userInfo:
     -localizedDescription
+    -localizedFailureReason
+    -localizedRecoveryOptions
+    -localizedRecoverySuggestion
+    -recoveryAttempter
     -userInfo
 
     @{
@@ -1056,7 +1080,15 @@ class NSError = com.apple.cocoa.foundation.NSError
 	protected NSError(com.apple.cocoa.foundation.NSCoder decoder, long token) { super(false, 0); initWithCoder(decoder, token); }
 
 	public static final String LocalizedDescriptionKey = "NSLocalizedDescription";
+	public static final String LocalizedFailureReasonErrorKey = "NSLocalizedFailureReason";
+	public static final String LocalizedRecoverySuggestionErrorKey = "NSLocalizedRecoverySuggestion";
+	public static final String LocalizedRecoveryOptionsErrorKey = "NSLocalizedRecoveryOptions";
+	public static final String RecoveryAttempterErrorKey = "NSRecoveryAttempter";
 	public static final String UnderlyingErrorKey = "NSUnderlyingError";
+	public static final String StringEncodingErrorKey = "NSStringEncoding";
+	public static final String URLErrorKey = "NSURL";
+	public static final String FilePathErrorKey = "NSFilePath";
+
 	public static final String POSIXErrorDomain = "NSPOSIXErrorDomain";
 	public static final String OSStatusErrorDomain = "NSOSStatusErrorDomain";
 	public static final String MachErrorDomain = "NSMachErrorDomain";
@@ -1254,15 +1286,19 @@ public static final double FoundationVersionNumber10_1 = 425.0d;
 
 class NSMutableArray = com.apple.cocoa.foundation.NSMutableArray
     -addObjectsFromArray:
+    -filterUsingPredicate:
     constructor -init
     constructor -initWithArray:
+    -insertObjects:atIndexes:
     -removeAllObjects
     -removeLastObject
     -removeObject:inRange:
     -removeObjectAtIndex:
+    -removeObjectsAtIndexes:
     deprecated -removeObjectIdenticalTo:inRange:
     -removeObjectsInArray:
     -removeObjectsInRange:
+    -replaceObjectsAtIndexes:withObjects:
     -replaceObjectsInRange:withObjectsFromArray:range:
     -setArray:
     -sortUsingDescriptors:
@@ -1835,7 +1871,7 @@ public static final String PriorDayDesignations = "NSPriorDayDesignations";
 public static final String DateTimeOrdering = "NSDateTimeOrdering";
 public static final String InternationalCurrencyString = "NSInternationalCurrencyString";
 public static final String ShortDateFormatString = "NSShortDateFormatString";
-public static final String PositiveCurrencyFormatString = "NSPositiveCurrencegativeCurrencyFormatString";
+public static final String PositiveCurrencyFormatString = "NSPositiveCurrencyFormatString";
 public static final String NegativeCurrencyFormatString = "NSNegativeCurrencyFormatString";
 
 /** @deprecated NSUserDefaults.setSearchList() is obsolete */
@@ -2417,3 +2453,160 @@ class NSAppleScript = com.apple.cocoa.foundation.NSAppleScript
         public static final String AppleScriptErrorRange = "NSAppleScriptErrorRange";
 
     @}
+
+class NSNetService = com.apple.cocoa.foundation.NSNetService
+    constructor -initWithDomain:type:name:
+    constructor -initWithDomain:type:name:port:
+    -delegate
+    -setDelegate:
+    -scheduleInRunLoop:forMode:
+    -removeFromRunLoop:forMode:
+    -domain
+    -type
+    -name
+    -resolveWithTimeout:
+    -TXTRecordData
+    -setTXTRecordData:
+    -hostName
+    -addresses
+    -publish
+    deprecated -resolve
+    deprecated -protocolSpecificInformation
+    deprecated -setProtocolSpecificInformation:
+    -stop
+    
+    @{
+    public static final String NSNetServicesErrorCode = "NSNetServicesErrorCode";
+    public static final String NSNetServicesErrorDomain = "NSNetServicesErrorDomain";
+    @}
+    
+class NSNetServiceBrowser = com.apple.cocoa.foundation.NSNetServiceBrowser
+    constructor -init
+    -delegate
+    -setDelegate:
+    -scheduleInRunLoop:forMode:
+    -removeFromRunLoop:forMode:
+    deprecated -searchForAllDomains
+    -searchForBrowsableDomains
+    -searchForRegistrationDomains
+    -searchForServicesOfType:inDomain:
+    -stop
+
+category NSObject(NSNetServiceDelegateMethods) = com.apple.cocoa.foundation.NSNetService.Delegate
+    -netServiceWillPublish:
+    -netServiceWillResolve:
+    -netService:didNotPublish:
+    -netServiceDidResolveAddress:
+    -netService:didNotResolve:
+    -netServiceDidStop:
+    -netService:didUpdateTXTRecordData:
+    
+category NSObject(NSNetServiceBrowserDelegateMethods) = com.apple.cocoa.foundation.NSNetServiceBrowser.Delegate
+    -netServiceBrowserWillSearch:
+    -netServiceBrowser:didFindDomain:moreComing:
+    -netServiceBrowser:didFindService:moreComing:
+    -netServiceBrowser:didNotSearch:
+    -netServiceBrowserDidStopSearch:
+    -netServiceBrowser:didRemoveDomain:moreComing:
+    -netServiceBrowser:didRemoveService:moreComing:
+
+class NSExpression = com.apple.cocoa.foundation.NSExpression
+    implements NSCoding
+    -arguments
+    -constantValue
+    +expressionForConstantValue:
+    +expressionForEvaluatedObject
+    +expressionForFunction:arguments:
+    +expressionForKeyPath:
+    +expressionForVariable:
+    -expressionType
+    -expressionValueWithObject:context:
+    -function
+    constructor -initWithExpressionType:
+    -keyPath
+    -operand
+    -variable
+
+    @{
+	public static final int ConstantValueExpressionType = 0;
+	public static final int EvaluatedObjectExpressionType = 1;
+	public static final int VariableExpressionType = 2;
+	public static final int KeyPathExpressionType = 3;
+	public static final int FunctionExpressionType = 4;
+
+	protected native void encodeWithCoder(com.apple.cocoa.foundation.NSCoder encoder);
+	protected NSExpression(com.apple.cocoa.foundation.NSCoder decoder, long token) { super(false, 0); initWithCoder(decoder, token); }
+    @}
+
+class NSPredicate = com.apple.cocoa.foundation.NSPredicate
+    implements NSCoding
+    -evaluateWithObject:
+    -predicateFormat
+    +predicateWithFormat:argumentArray:
+    -predicateWithSubstitutionVariables:
+    +predicateWithValue:
+
+    @{	
+	protected native void encodeWithCoder(com.apple.cocoa.foundation.NSCoder encoder);
+	protected NSPredicate(com.apple.cocoa.foundation.NSCoder decoder, long token) { super(false, 0); initWithCoder(decoder, token); }
+    @}
+
+class NSMetadataQuery = com.apple.cocoa.foundation.NSMetadataQuery
+    -delegate
+    -setDelegate:
+    -predicate
+    -setPredicate:
+    -sortDescriptors
+    -setSortDescriptors:
+    -valueListAttributes
+    -setValueListAttributes:
+    -groupingAttributes
+    -setGroupingAttributes:
+    -notificationBatchingInterval
+    -setNotificationBatchingInterval:
+    -searchScopes
+    -setSearchScopes:
+    -startQuery
+    -stopQuery
+    -isStarted
+    -isGathering
+    -isStopped
+    -disableUpdates
+    -enableUpdates
+    -resultCount
+    -resultAtIndex:
+    -results
+    -indexOfResult:
+    -valueLists
+    -groupedResults
+    -valueOfAttribute:forResultAtIndex:
+
+    @{
+	public static final String NSMetadataQueryDidStartGatheringNotification = "NSMetadataQueryDidStartGatheringNotification";
+	public static final String NSMetadataQueryGatheringProgressNotification = "NSMetadataQueryGatheringProgressNotification";
+	public static final String NSMetadataQueryDidFinishGatheringNotification = "NSMetadataQueryDidFinishGatheringNotification";
+	public static final String NSMetadataQueryDidUpdateNotification = "NSMetadataQueryDidUpdateNotification";
+	public static final String NSMetadataQueryResultContentRelevanceAttribute = "NSMetadataQueryResultContentRelevanceAttribute";
+	public static final String NSMetadataQueryUserHomeScope = "kMDQueryScopeHome";
+	public static final String NSMetadataQueryLocalComputerScope = "kMDQueryScopeComputer";
+	public static final String NSMetadataQueryNetworkScope = "kMDQueryScopeNetwork";
+    @}
+
+class NSMetadataItem = com.apple.cocoa.foundation.NSMetadataItem
+    -valueForAttribute:
+    -valuesForAttributes:
+    -attributes
+
+class NSMetadataQueryAttributeValueTuple = com.apple.cocoa.foundation.NSMetadataQueryAttributeValueTuple
+    -attribute
+    -value
+    -count
+
+class NSMetadataQueryResultGroup = com.apple.cocoa.foundation.NSMetadataQueryResultGroup
+    -attribute
+    -value
+    -subgroups
+    -resultCount
+    -resultAtIndex:
+    -results
+

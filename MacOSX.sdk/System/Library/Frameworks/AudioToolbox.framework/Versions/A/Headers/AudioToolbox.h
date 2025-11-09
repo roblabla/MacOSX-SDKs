@@ -16,15 +16,32 @@
  
 */
 
-#include <AudioToolbox/AudioConverter.h>
-#include <AudioToolbox/AudioFile.h>
-#include <AudioToolbox/AudioFileComponent.h>
-#include <AudioToolbox/AudioFormat.h>
-#include <AudioToolbox/AudioUnitUtilities.h>
-#include <AudioToolbox/AUGraph.h>
-#include <AudioToolbox/AUMIDIController.h>
-#include <AudioToolbox/DefaultAudioOutput.h>
-#include <AudioToolbox/MusicPlayer.h>
+#include <TargetConditionals.h>
+#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
+	#include <AudioToolbox/AudioConverter.h>
+	#include <AudioToolbox/AudioFile.h>
+	#include <AudioToolbox/AudioFileComponent.h>
+	#include <AudioToolbox/AudioFormat.h>
+	#include <AudioToolbox/AudioUnitUtilities.h>
+	#include <AudioToolbox/AUGraph.h>
+	#include <AudioToolbox/AUMIDIController.h>
+	#include <AudioToolbox/DefaultAudioOutput.h>
+	#include <AudioToolbox/MusicPlayer.h>
+	#include <AudioToolbox/ExtendedAudioFile.h>
+	#include <AudioToolbox/CoreAudioClock.h>
+#else
+	#include <AudioConverter.h>
+	#include <AudioFile.h>
+	#include <AudioFileComponent.h>
+	#include <AudioFormat.h>
+	#include <AudioUnitUtilities.h>
+	#include <AUGraph.h>
+	#include <AUMIDIController.h>
+	#include <DefaultAudioOutput.h>
+	#include <MusicPlayer.h>
+	#include <ExtendedAudioFile.h>
+	#include <CoreAudioClock.h>
+#endif
 
 #ifndef __AudioToolbox_H
 #define __AudioToolbox_H

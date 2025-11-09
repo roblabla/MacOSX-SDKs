@@ -1,5 +1,5 @@
 /* CoreGraphics - CGColorSpace.h
- * Copyright (c) 1999-2003 Apple Computer, Inc.
+ * Copyright (c) 1999-2004 Apple Computer, Inc.
  * All rights reserved.
  */
 
@@ -21,15 +21,17 @@ enum CGColorRenderingIntent {
 };
 typedef enum CGColorRenderingIntent CGColorRenderingIntent;
 
-#define kCGColorSpaceUserGray CFSTR("kCGColorSpaceUserGray")
-#define kCGColorSpaceUserRGB  CFSTR("kCGColorSpaceUserRGB")
-#define kCGColorSpaceUserCMYK CFSTR("kCGColorSpaceUserCMYK")
+CG_EXTERN CFStringRef kCGColorSpaceGenericGray AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+CG_EXTERN CFStringRef kCGColorSpaceGenericRGB AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+CG_EXTERN CFStringRef kCGColorSpaceGenericCMYK AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 CG_EXTERN_C_BEGIN
 
 /* Return the CFTypeID for CGColorSpaces. */
 
-CG_EXTERN CFTypeID CGColorSpaceGetTypeID(void);
+CG_EXTERN CFTypeID CGColorSpaceGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /** Device-dependent color spaces.  **/
 
@@ -121,7 +123,7 @@ CG_EXTERN CGColorSpaceRef CGColorSpaceCreateWithPlatformColorSpace(void *platfor
 
 /* Create a colorspace using `name' as the identifier for the colorspace. */
 
-CG_EXTERN CGColorSpaceRef CGColorSpaceCreateWithName(CFStringRef name);
+CG_EXTERN CGColorSpaceRef CGColorSpaceCreateWithName(CFStringRef name) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /** Colorspace information. **/
 
@@ -140,5 +142,16 @@ CG_EXTERN CGColorSpaceRef CGColorSpaceRetain(CGColorSpaceRef cs);
 CG_EXTERN void CGColorSpaceRelease(CGColorSpaceRef cs);
 
 CG_EXTERN_C_END
+
+/** Deprecated APIs. **/
+
+/* Use "kCGColorSpaceGenericGray" instead. */
+#define kCGColorSpaceUserGray CFSTR("kCGColorSpaceUserGray")
+
+/* Use "kCGColorSpaceGenericRGB" instead. */
+#define kCGColorSpaceUserRGB  CFSTR("kCGColorSpaceUserRGB")
+
+/* Use "kCGColorSpaceGenericCMYK" instead. */
+#define kCGColorSpaceUserCMYK CFSTR("kCGColorSpaceUserCMYK")
 
 #endif	/* CGCOLORSPACE_H_ */

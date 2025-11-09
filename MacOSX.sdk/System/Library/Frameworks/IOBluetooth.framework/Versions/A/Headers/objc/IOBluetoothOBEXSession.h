@@ -25,7 +25,7 @@
 //	IOBluetoothOBEXSession Class
 //===========================================================================================================================
 
-#pragma mark еее IOBluetoothOBEXSession еее
+#pragma mark === IOBluetoothOBEXSession ===
 
 @interface IOBluetoothOBEXSession : OBEXSession
 {
@@ -152,8 +152,9 @@
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@method		getRFCOMMChannel
 	@abstract	Get the Bluetooth RFCOMM channel being used by the session object.
-	@result		An IOBluetoothRFCOMMChannel object.
-	@discussion	
+	@result		A IOBluetoothRFCOMMChannel object.
+	@discussion	This could potentially be nil even though you have a valid OBEX session, because the RFCOMM channel is
+				only valid when the session is connected.
 */
 	
 -(IOBluetoothRFCOMMChannel*)getRFCOMMChannel;
@@ -184,10 +185,21 @@
 */
 - (void)restartTransmission;
 
+//--------------------------------------------------------------------------------------------------------------------------
+/*!	@method		isSessionTargetAMac
+	@abstract	Tells whether the target device is a Mac by checking its service record.
+	@result		TRUE only if device service record has Mac entry, FALSE for all else.
+	@discussion	Tells whether the target device is a Mac by checking its service record.
+*/
+- (BOOL)isSessionTargetAMac;
+
+
+
+
 /* OBEXSession overrides */
 
 #pragma mark -
-#pragma mark еее OBEXSession overrides еее
+#pragma mark === OBEXSession overrides ===
 
 
 //--------------------------------------------------------------------------------------------------------------------------

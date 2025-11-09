@@ -14,7 +14,7 @@
 // ================================================================
 //	Action Support
 // ================================================================
-// This API allows developers to populate AddressBook.app's roll-over menus with custom
+// This API allows developers to populate Address Book.app's roll-over menus with custom
 // entries. Your NSBundle must implement actionProperty:, titleForPerson:identifier: and
 // performActionForPerson:identifier:.
 //
@@ -38,7 +38,7 @@
 
 // The Principle class of the NSBundle is the object that is expected to implement the
 // methods below.
-// There can be only 1 Action plug in per bundle.
+// There can be only 1 Action plugin per bundle.
 
 @interface NSObject (ABActionDelegate)
 - (NSString *)actionProperty;

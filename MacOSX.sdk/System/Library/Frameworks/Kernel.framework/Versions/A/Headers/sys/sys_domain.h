@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2005 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -26,6 +26,9 @@
 
 
 #include <sys/appleapiopts.h>
+#include <sys/cdefs.h>
+#include <sys/types.h>
+
 
 /* Kernel Events Protocol */ 
 #define SYSPROTO_EVENT 		1	/* kernel events protocol */
@@ -37,24 +40,13 @@
 /* System family socket address */
 struct sockaddr_sys
 {
-    u_char	ss_len;		/* sizeof(struct sockaddr_sys) */
-    u_char	ss_family;	/* AF_SYSTEM */
-    u_int16_t 	ss_sysaddr; 	/* protocol address in AF_SYSTEM */
-    u_int32_t 	ss_reserved[7]; /* reserved to the protocol use */
+	u_char	ss_len;				/* sizeof(struct sockaddr_sys) */
+	u_char	ss_family;			/* AF_SYSTEM */
+	u_int16_t 	ss_sysaddr; 	/* protocol address in AF_SYSTEM */
+	u_int32_t 	ss_reserved[7]; /* reserved to the protocol use */
 };
 
 
-#ifdef KERNEL
-#ifdef __APPLE_API_PRIVATE
-
-extern struct domain systemdomain;
-
-/* built in system domain protocols init function */
-int kern_event_init();
-int kern_control_init();
-
-#endif /* __APPLE_API_PRIVATE */
-#endif /* KERNEL */
 
 #endif /* _SYSTEM_DOMAIN_H_ */
 

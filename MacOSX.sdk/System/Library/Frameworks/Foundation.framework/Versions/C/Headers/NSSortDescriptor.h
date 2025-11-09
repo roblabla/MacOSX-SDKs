@@ -1,7 +1,7 @@
 /*
 	NSSortDescriptor.h
 	Foundation
-	Copyright (c) 2002-2003, Apple Computer, Inc.
+	Copyright (c) 2002-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 

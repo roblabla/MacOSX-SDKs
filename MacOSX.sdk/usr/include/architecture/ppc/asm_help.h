@@ -48,7 +48,7 @@
 #ifndef	_ARCH_PPC_ASM_HELP_H_
 #define	_ARCH_PPC_ASM_HELP_H_
 
-#import	<architecture/ppc/reg_help.h>
+#include	<architecture/ppc/reg_help.h>
 
 #ifdef	__ASSEMBLER__
 /*
@@ -384,8 +384,8 @@ name:
 	bcl	20,31,1f			@\
 1:	mflr	PICIFY_REG			@\
 	mtlr	r0				@\
-	addis	PICIFY_REG, PICIFY_REG, ha16(L ## var ## $non_lazy_ptr - 1b) @\
-	lwz	PICIFY_REG, lo16(L ## var ## $non_lazy_ptr - 1b)(PICIFY_REG)
+	addis	PICIFY_REG, PICIFY_REG, ha16(L ## var ## __non_lazy_ptr - 1b) @\
+	lwz	PICIFY_REG, lo16(L ## var ## __non_lazy_ptr - 1b)(PICIFY_REG)
 
 #define CALL_EXTERN_AGAIN(var)			\
 	PICIFY(var)				@\
@@ -401,7 +401,7 @@ name:
 #define NON_LAZY_STUB(var)			\
 	.non_lazy_symbol_pointer		@\
 	.align 2				@\
-L ## var ## $non_lazy_ptr:			@\
+L ## var ## __non_lazy_ptr:			@\
 	.indirect_symbol var			@\
 	.long 0					@\
 	.text					@\

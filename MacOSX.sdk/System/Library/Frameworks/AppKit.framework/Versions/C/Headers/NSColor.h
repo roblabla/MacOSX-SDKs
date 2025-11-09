@@ -1,7 +1,7 @@
 /*
 	NSColor.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -29,15 +29,17 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 #import <Foundation/NSGeometry.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSCell.h>
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#import <QuartzCore/CIColor.h>
+#endif
 
-@class NSDictionary, NSPasteboard, NSImage;
+@class NSDictionary, NSPasteboard, NSImage, NSColorSpace;
 
 #define NSAppKitVersionNumberWithPatternColorLeakFix 641.0
 
 
 
 @interface NSColor : NSObject <NSCopying, NSCoding>
-
 
 /* Create NSCalibratedWhiteColorSpace colors.
 */
@@ -61,6 +63,14 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 /* Create named colors from standard color catalogs (such as Pantone).
 */
 + (NSColor *)colorWithCatalogName:(NSString *)listName colorName:(NSString *)colorName;
+
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+/* Create colors with arbitrary colorspace. The number of components in the provided array should match the number dictated by the specified colorspace, plus one for alpha (supply 1.0 for opaque colors); otherwise an exception will be raised.  If the colorspace is one which cannot be used with NSColors, nil is returned.
+*/
++ (NSColor *)colorWithColorSpace:(NSColorSpace *)space components:(const float *)components count:(int)numberOfComponents;
+#endif
+
 
 /* Some convenience methods to create colors in the calibrated color spaces...
 */
@@ -150,7 +160,7 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 - (NSString *)colorSpaceName;
 
 
-/* Convert the color to another colorspace. This may return nil if the specified conversion cannot be done. The abstract implementation of this method returns the receiver if the specified colorspace matches that of the receiver; otherwise it returns nil. Subclassers who can convert themselves to other colorspaces override this method to do something better.
+/* Convert the color to another colorspace, using a colorspace name. This may return nil if the specified conversion cannot be done. The abstract implementation of this method returns the receiver if the specified colorspace matches that of the receiver; otherwise it returns nil. Subclassers who can convert themselves to other colorspaces override this method to do something better.
 
 The version of this method which takes a device description allows the color to specialize itself for the given device.  Device descriptions can be obtained from windows, screens, and printers with the "deviceDescription" method.
 
@@ -160,6 +170,13 @@ If colorSpace is nil, then the most appropriate color space is used.
 */ 
 - (NSColor *)colorUsingColorSpaceName:(NSString *)colorSpace;
 - (NSColor *)colorUsingColorSpaceName:(NSString *)colorSpace device:(NSDictionary *)deviceDescription;
+
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+/* colorUsingColorSpace: will convert existing color to a new colorspace and create a new color, which will likely have different component values but look the same. It will return the same color if the colorspace is already the same as the one specified.  Will return nil if conversion is not possible.
+*/
+- (NSColor *)colorUsingColorSpace:(NSColorSpace *)space;
+#endif
 
 
 /* Blend using the NSCalibratedRGB color space. Both colors are converted into the calibrated RGB color space, and they are blended by taking fraction of color and 1 - fraction of the receiver. The result is in the calibrated RGB color space. If the colors cannot be converted into the calibrated RGB color space the blending fails and nil is returned.
@@ -214,6 +231,15 @@ If colorSpace is nil, then the most appropriate color space is used.
 - (void)getCyan:(float *)cyan magenta:(float *)magenta yellow:(float *)yellow black:(float *)black alpha:(float *)alpha;
 
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+/* For colors with custom colorspace; get the colorspace and individual floating point components, including alpha. Note that all these methods will work for other NSColors which have floating point components. They will raise exceptions otherwise, like other existing colorspace-specific methods.
+*/
+- (NSColorSpace *)colorSpace;
+- (int)numberOfComponents;
+- (void)getComponents:(float *)components;
+#endif
+
+
 /* Get the alpha component. For colors which do not have alpha components, this will return 1.0 (opaque).
 */
 - (float)alphaComponent;
@@ -226,8 +252,8 @@ If colorSpace is nil, then the most appropriate color space is used.
 
 /* Pattern methods. Note that colorWithPatternImage: mistakenly returns a non-autoreleased color in 10.1.x and earlier. This has been fixed in (NSAppKitVersionNumber >= NSAppKitVersionNumberWithPatternColorLeakFix), for apps linked post-10.1.x.
 */
-+ (NSColor*)colorWithPatternImage:(NSImage*)image;
-- (NSImage*)patternImage; 
++ (NSColor *)colorWithPatternImage:(NSImage*)image;
+- (NSImage *)patternImage; 
 
 /* Draws the color and adorns it to indicate the type of color. Used by colorwells, swatches, and other UI objects that need to display colors. Implementation in NSColor simply draws the color (with an indication of transparency if the color isn't fully opaque); subclassers can draw more stuff as they see fit.
 */
@@ -243,6 +269,16 @@ This method provides a global approach to removing alpha which might not always 
 
 @end
 
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+@interface NSColor (NSQuartzCoreAdditions)
++ (NSColor *)colorWithCIColor:(CIColor *)color;
+@end
+
+@interface CIColor (NSAppKitAdditions)
+- (id)initWithColor:(NSColor *)color;
+@end
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
 @interface NSCoder(NSAppKitColorExtensions)
 

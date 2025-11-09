@@ -1,5 +1,5 @@
 /* CoreGraphics - CGPDFStream.h
- * Copyright (c) 2002-2003 Apple Computer, Inc.
+ * Copyright (c) 2002-2004 Apple Computer, Inc.
  * All rights reserved.
  */
 
@@ -9,7 +9,7 @@
 typedef struct CGPDFStream *CGPDFStreamRef;
 
 enum CGPDFDataFormat {
-    CGPDFDataFormatRaw, CGPDFDataFormatJPEGEncoded
+    CGPDFDataFormatRaw, CGPDFDataFormatJPEGEncoded, CGPDFDataFormatJPEG2000
 };
 typedef enum CGPDFDataFormat CGPDFDataFormat;
 
@@ -21,11 +21,11 @@ CG_EXTERN_C_BEGIN
 
 /* Return the dictionary of `stream'. */
 
-CGPDFDictionaryRef CGPDFStreamGetDictionary(CGPDFStreamRef stream);
+CGPDFDictionaryRef CGPDFStreamGetDictionary(CGPDFStreamRef stream) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /* Return the data of `stream'. */
 
-CFDataRef CGPDFStreamCopyData(CGPDFStreamRef stream, CGPDFDataFormat *format);
+CFDataRef CGPDFStreamCopyData(CGPDFStreamRef stream, CGPDFDataFormat *format) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 CG_EXTERN_C_END
 

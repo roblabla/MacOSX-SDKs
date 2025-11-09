@@ -338,10 +338,10 @@
 
 	@param		channelID		The RFCOMM channel ID for the new channel.
 								
-	@param		openRFCOMMChannelSync the object that will play the role of delegate for the channel.
+	@param		delegate the object that will play the role of delegate for the channel.
 				A channel delegate is the object the rfcomm uses as target for  data and events. The
 				developer will implement only the the methods he/she is interested in. A list of the
-				possible methods is at the end of the file "IObluetoothRFCOMMChannel.h in the definition
+				possible methods is at the end of the file "IOBluetoothRFCOMMChannel.h in the definition
 				of the protocol IOBluetoothRFCOMMChannelDelegate.
 
 	@result		Returns kIOReturnSuccess if the open process was successfully started (or if an existing
@@ -695,7 +695,7 @@
 	@discussion	The resulting array contains IOBluetoothSDPServiceRecord objects.  The service records are only
                 present if an SDP query has been done on the target object.  This can be determined by calling
                 -getLastServicesUpdate.  It will return the last date/time of the SDP query.  Currently, the only
-                way to have an SDP query executed is to use the search manager (IOBluetoothDeviceSearchGetSDPData()).
+                way to have an SDP query executed is to use the search manager (IOBluetoothDevicePerformSDPQuery()).
                 This will change in the future as API will be added to IOBluetoothDevice to initiate the SDP
                 query. 
                 

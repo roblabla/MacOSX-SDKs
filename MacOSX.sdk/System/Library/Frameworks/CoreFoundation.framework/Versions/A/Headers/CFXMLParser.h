@@ -1,5 +1,5 @@
 /*	CFXMLParser.h
-	Copyright (c) 1998-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFXMLPARSER__)
@@ -162,12 +162,10 @@ CFTypeID CFXMLParserGetTypeID(void);
 CF_EXPORT
 CFXMLParserRef CFXMLParserCreate(CFAllocatorRef allocator, CFDataRef xmlData, CFURLRef dataSource, CFOptionFlags parseOptions, CFIndex versionOfNodes, CFXMLParserCallBacks *callBacks, CFXMLParserContext *context);
 
-#if !defined(DARWIN)
 /* Arguments as above, except that the data to be parsed is loaded directly 
    from dataSource.  dataSource may not be NULL.  */
 CF_EXPORT
 CFXMLParserRef CFXMLParserCreateWithDataFromURL(CFAllocatorRef allocator, CFURLRef dataSource, CFOptionFlags parseOptions, CFIndex versionOfNodes, CFXMLParserCallBacks *callBacks, CFXMLParserContext *context);
-#endif /* !DARWIN */
 
 CF_EXPORT
 void CFXMLParserGetContext(CFXMLParserRef parser, CFXMLParserContext *context);
@@ -228,11 +226,9 @@ CFXMLTreeRef CFXMLTreeCreateFromData(CFAllocatorRef allocator, CFDataRef xmlData
 CF_EXPORT
 CFXMLTreeRef CFXMLTreeCreateFromDataWithError(CFAllocatorRef allocator, CFDataRef xmlData, CFURLRef dataSource, CFOptionFlags parseOptions, CFIndex versionOfNodes, CFDictionaryRef *errorDict) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
-#if !defined(DARWIN)
 /* Loads the data to be parsed directly from dataSource.  Arguments as above. */
 CF_EXPORT
 CFXMLTreeRef CFXMLTreeCreateWithDataFromURL(CFAllocatorRef allocator, CFURLRef dataSource, CFOptionFlags parseOptions, CFIndex versionOfNodes);
-#endif /* !DARWIN */
 
 /* Generate the XMLData (ready to be written to whatever permanent storage is to be
    used) from an CFXMLTree.  Will NOT regenerate entity references (except those

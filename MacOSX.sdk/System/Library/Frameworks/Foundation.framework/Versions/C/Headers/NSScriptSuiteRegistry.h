@@ -1,62 +1,80 @@
-/*	NSScriptSuiteRegistry.h
-	Copyright (c) 1997-2003, Apple, Inc. All rights reserved.
+/*
+	NSScriptSuiteRegistry.h
+	Copyright (c) 1997-2005, Apple Computer, Inc.
+	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSArray;
-@class NSBundle;
-@class NSData;
-@class NSDictionary;
-@class NSMutableArray;
-@class NSMutableData;
-@class NSMutableDictionary;
-@class NSMutableSet;
-@class NSScriptCommandDescription;
-@class NSScriptClassDescription;
+@class NSArray, NSBundle, NSData, NSDictionary, NSMutableArray, NSMutableDictionary, NSMutableSet, NSScriptClassDescription, NSScriptCommandDescription;
 
 @interface NSScriptSuiteRegistry : NSObject {
     @private
-    NSMutableArray *_suiteNames;
-    NSMutableDictionary *_appleEventCodes;
-    NSMutableDictionary *_bundles;
-    NSMutableDictionary *_classes;
-    NSMutableDictionary *_synonyms;
-    NSMutableDictionary *_synonymTables;
-    NSMutableDictionary *_commands;
-    NSMutableDictionary *_enumerations;
-    NSMutableDictionary *_valueTypes;
-    NSMutableDictionary *_terminologies;
-    NSMutableDictionary *_usedFeatures;
+    BOOL _isLoadingSDEFFiles;
+    char _reserved1[3];
     NSMutableSet *_seenBundles;
-
-    void *_codeToSuiteNameTable;
-    void *_codeToCommandLookupTable;
-    void *_codeToClassDescTable;
-    void *_codeToKeyTable;
+    NSMutableArray *_suiteDescriptionsBeingCollected;
+    NSScriptClassDescription *_classDescriptionNeedingRegistration;
+    NSMutableArray *_suiteDescriptions;
+    NSScriptCommandDescription *_commandDescriptionNeedingRegistration;
+    NSMutableDictionary *_cachedClassDescriptionsByAppleEventCode;
+    NSMutableDictionary *_cachedCommandDescriptionsByAppleEventCodes;
+    NSDictionary *_cachedSuiteDescriptionsByName;
+    NSMutableDictionary *_complexTypeDescriptionsByName;
+    NSMutableDictionary *_listTypeDescriptionsByName;
+    unsigned int _nextComplexTypeAppleEventCode;
+    void *_reserved2[4];
 }
 
+/* Get or set the program's single NSScriptSuiteRegistry.
+*/
 + (NSScriptSuiteRegistry *)sharedScriptSuiteRegistry;
 + (void)setSharedScriptSuiteRegistry:(NSScriptSuiteRegistry *)registry;
 
+/* Given a bundle, register class and command descriptions from any .scriptSuite/.scriptTerminology resource files in the bundle. Redundant invocations of this method are ignored.
+*/
+- (void)loadSuitesFromBundle:(NSBundle *)bundle;
+
+/* Given a scripting suite declaration dictionary of the sort that is valid in .scriptSuite property list files, and a pointer to the bundle that contains the code that implements the suite, register class and command descriptions for the suite.
+*/
+- (void)loadSuiteWithDictionary:(NSDictionary *)suiteDeclaration fromBundle:(NSBundle *)bundle;
+
+/* Register a scripting class or command description.
+*/
+- (void)registerClassDescription:(NSScriptClassDescription *)classDescription;
+- (void)registerCommandDescription:(NSScriptCommandDescription *)commandDescription;
+
+/* Return a list of all registered suite names.
+*/
 - (NSArray *)suiteNames;
-- (NSDictionary *)commandDescriptionsInSuite:(NSString *)suiteName;
-- (NSDictionary *)classDescriptionsInSuite:(NSString *)suiteName;
 
+/* Return the four character code used to identify the named suite.
+*/
 - (unsigned long)appleEventCodeForSuite:(NSString *)suiteName;
-- (NSString *)suiteForAppleEventCode:(unsigned long)code;
 
+/* Return the bundle that contains the code that implements the named suite.
+*/
 - (NSBundle *)bundleForSuite:(NSString *)suiteName;
 
-- (NSScriptCommandDescription *)commandDescriptionWithAppleEventClass:(unsigned long)eventClass andAppleEventCode:(unsigned long)commandCode;
-- (NSScriptClassDescription *)classDescriptionWithAppleEventCode:(unsigned long)classCode;
+/* Return a dictionary containing the descriptions of all of the classes or commands in the named suite, keyed by class or comand name.
+*/
+- (NSDictionary *)classDescriptionsInSuite:(NSString *)suiteName;
+- (NSDictionary *)commandDescriptionsInSuite:(NSString *)suiteName;
 
-- (void)registerCommandDescription:(NSScriptCommandDescription *)commandDef;
-- (void)registerClassDescription:(NSScriptClassDescription *)classDesc;
+/* Given a four character code used to identify a scripting suite, return the name of the suite.
+*/
+- (NSString *)suiteForAppleEventCode:(unsigned long)appleEventCode;
 
-- (void)loadSuitesFromBundle:(NSBundle *)bundle;
-- (void)loadSuiteWithDictionary:(NSDictionary *)dict fromBundle:(NSBundle *)bundle;
+/* Given a four character code used to identify a scriptable class in Apple events, return the class description.
+*/
+- (NSScriptClassDescription *)classDescriptionWithAppleEventCode:(unsigned long)appleEventCode;
 
+/* Given the pair of four character codes used to identify a scripting command in Apple events, return the command description.
+*/
+- (NSScriptCommandDescription *)commandDescriptionWithAppleEventClass:(unsigned long)appleEventClassCode andAppleEventCode:(unsigned long)appleEventIDCode;
+
+/* Return suitable reply data for the standard Get AETE Apple event, given the set of scripting suites currently registered.
+*/
 - (NSData *)aeteResource:(NSString *)languageName;
 
 @end

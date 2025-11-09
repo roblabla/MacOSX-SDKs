@@ -505,8 +505,6 @@ struct icmp6_filter {
 	u_int32_t icmp6_filt[8];
 };
 
-#ifdef KERNEL
-#ifdef __APPLE_API_UNSTABLE
 #define	ICMP6_FILTER_SETPASSALL(filterp) \
 do {								\
 	int i; u_char *p;					\
@@ -516,13 +514,6 @@ do {								\
 } while (0)
 #define	ICMP6_FILTER_SETBLOCKALL(filterp) \
 	bzero(filterp, sizeof(struct icmp6_filter))
-#endif /* __APPLE_API_UNSTABLE */
-#else /* KERNEL */
-#define	ICMP6_FILTER_SETPASSALL(filterp) \
-	memset(filterp, 0xff, sizeof(struct icmp6_filter))
-#define	ICMP6_FILTER_SETBLOCKALL(filterp) \
-	memset(filterp, 0x00, sizeof(struct icmp6_filter))
-#endif /* KERNEL */
 
 #define	ICMP6_FILTER_SETPASS(type, filterp) \
 	(((filterp)->icmp6_filt[(type) >> 5]) |= (1 << ((type) & 31)))
@@ -533,7 +524,6 @@ do {								\
 #define	ICMP6_FILTER_WILLBLOCK(type, filterp) \
 	((((filterp)->icmp6_filt[(type) >> 5]) & (1 << ((type) & 31))) == 0)
 
-#ifdef __APPLE_API_UNSTABLE
 /*
  * Variables related to this implementation
  * of the internet control message protocol version 6.
@@ -618,119 +608,5 @@ struct icmp6stat {
 #define ICMPV6CTL_ND6_PRLIST	20
 #define ICMPV6CTL_MAXID		21
 
-#define ICMPV6CTL_NAMES { \
-	{ 0, 0 }, \
-	{ 0, 0 }, \
-	{ "rediraccept", CTLTYPE_INT }, \
-	{ "redirtimeout", CTLTYPE_INT }, \
-	{ 0, 0 }, \
-	{ 0, 0 }, \
-	{ "nd6_prune", CTLTYPE_INT }, \
-	{ 0, 0 }, \
-	{ "nd6_delay", CTLTYPE_INT }, \
-	{ "nd6_umaxtries", CTLTYPE_INT }, \
-	{ "nd6_mmaxtries", CTLTYPE_INT }, \
-	{ "nd6_useloopback", CTLTYPE_INT }, \
-	{ 0, 0 }, \
-	{ "nodeinfo", CTLTYPE_INT }, \
-	{ "errppslimit", CTLTYPE_INT }, \
-	{ "nd6_maxnudhint", CTLTYPE_INT }, \
-	{ "mtudisc_hiwat", CTLTYPE_INT }, \
-	{ "mtudisc_lowat", CTLTYPE_INT }, \
-	{ "nd6_debug", CTLTYPE_INT }, \
-	{ 0, 0 }, \
-	{ 0, 0 }, \
-}
-#endif /* __APPLE_API_UNSTABLE */
-
-#define RTF_PROBEMTU	RTF_PROTO1
-
-#ifdef KERNEL
-# ifdef __STDC__
-struct	rtentry;
-struct	rttimer;
-struct	in6_multi;
-# endif
-#ifdef __APPLE_API_PRIVATE
-void	icmp6_init __P((void));
-void	icmp6_paramerror __P((struct mbuf *, int));
-void	icmp6_error __P((struct mbuf *, int, int, int));
-int	icmp6_input __P((struct mbuf **, int *));
-void	icmp6_fasttimo __P((void));
-void	icmp6_reflect __P((struct mbuf *, size_t));
-void	icmp6_prepare __P((struct mbuf *));
-void	icmp6_redirect_input __P((struct mbuf *, int));
-void	icmp6_redirect_output __P((struct mbuf *, struct rtentry *));
-
-struct	ip6ctlparam;
-void	icmp6_mtudisc_update __P((struct ip6ctlparam *, int));
-
-/* XXX: is this the right place for these macros? */
-#define icmp6_ifstat_inc(ifp, tag) \
-do {								\
-	if ((ifp) && (ifp)->if_index <= if_index			\
-	 && (ifp)->if_index < icmp6_ifstatmax			\
-	 && icmp6_ifstat && icmp6_ifstat[(ifp)->if_index]) {	\
-		icmp6_ifstat[(ifp)->if_index]->tag++;		\
-	}							\
-} while (0)
-
-#define icmp6_ifoutstat_inc(ifp, type, code) \
-do { \
-		icmp6_ifstat_inc(ifp, ifs6_out_msg); \
- 		if (type < ICMP6_INFOMSG_MASK) \
- 			icmp6_ifstat_inc(ifp, ifs6_out_error); \
-		switch(type) { \
-		 case ICMP6_DST_UNREACH: \
-			 icmp6_ifstat_inc(ifp, ifs6_out_dstunreach); \
-			 if (code == ICMP6_DST_UNREACH_ADMIN) \
-				 icmp6_ifstat_inc(ifp, ifs6_out_adminprohib); \
-			 break; \
-		 case ICMP6_PACKET_TOO_BIG: \
-			 icmp6_ifstat_inc(ifp, ifs6_out_pkttoobig); \
-			 break; \
-		 case ICMP6_TIME_EXCEEDED: \
-			 icmp6_ifstat_inc(ifp, ifs6_out_timeexceed); \
-			 break; \
-		 case ICMP6_PARAM_PROB: \
-			 icmp6_ifstat_inc(ifp, ifs6_out_paramprob); \
-			 break; \
-		 case ICMP6_ECHO_REQUEST: \
-			 icmp6_ifstat_inc(ifp, ifs6_out_echo); \
-			 break; \
-		 case ICMP6_ECHO_REPLY: \
-			 icmp6_ifstat_inc(ifp, ifs6_out_echoreply); \
-			 break; \
-		 case MLD6_LISTENER_QUERY: \
-			 icmp6_ifstat_inc(ifp, ifs6_out_mldquery); \
-			 break; \
-		 case MLD6_LISTENER_REPORT: \
-			 icmp6_ifstat_inc(ifp, ifs6_out_mldreport); \
-			 break; \
-		 case MLD6_LISTENER_DONE: \
-			 icmp6_ifstat_inc(ifp, ifs6_out_mlddone); \
-			 break; \
-		 case ND_ROUTER_SOLICIT: \
-			 icmp6_ifstat_inc(ifp, ifs6_out_routersolicit); \
-			 break; \
-		 case ND_ROUTER_ADVERT: \
-			 icmp6_ifstat_inc(ifp, ifs6_out_routeradvert); \
-			 break; \
-		 case ND_NEIGHBOR_SOLICIT: \
-			 icmp6_ifstat_inc(ifp, ifs6_out_neighborsolicit); \
-			 break; \
-		 case ND_NEIGHBOR_ADVERT: \
-			 icmp6_ifstat_inc(ifp, ifs6_out_neighboradvert); \
-			 break; \
-		 case ND_REDIRECT: \
-			 icmp6_ifstat_inc(ifp, ifs6_out_redirect); \
-			 break; \
-		} \
-} while (0)
-
-extern int	icmp6_rediraccept;	/* accept/process redirects */
-extern int	icmp6_redirtimeout;	/* cache time for redirect routes */
-#endif /* __APPLE_API_PRIVATE */
-#endif /* KERNEL */
 
 #endif /* !_NETINET_ICMP6_H_ */

@@ -1,6 +1,6 @@
 /*
 	NSAppleEventManager.h
-	Copyright (c) 1997-2003, Apple Computer, Inc.
+	Copyright (c) 1997-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -59,7 +59,7 @@ extern NSString *NSAppleEventManagerWillProcessFirstEventNotification;
 // Given a nonzero suspension ID returned by an invocation of -suspendCurrentAppleEvent, set the values that will be returned by subsequent invocations of -currentAppleEvent and -currentReplyAppleEvent to be the event whose handling was suspended and its corresponding reply event, respectively.  Redundant invocations of this method will be ignored.
 - (void)setCurrentAppleEventAndReplyEventWithSuspensionID:(NSAppleEventManagerSuspensionID)suspensionID;
 
-// Given a nonzero suspension ID returned by an invocation of -suspendCurrentAppleEvent, signal that handling of the suspended event may now continue.  This may result in the immediate sending of the reply event to the sender of the suspended event, if the sender has requested a reply.  If the suspension ID has been used in a previous invocation of -setCurrentAppleEventAndReplyEventWithSuspensionID: the effects of that invocation will be completely undone.  Redundant invocations of this method will be ignored.  Subsequent invocations of other NSAppleEventManager methods using the same suspension ID are invalid.  This method may be invoked in any thread, not just the one in which the corresponding invocation of -suspendCurrentAppleEvent occurred.
+// Given a nonzero suspension ID returned by an invocation of -suspendCurrentAppleEvent, signal that handling of the suspended event may now continue.  This may result in the immediate sending of the reply event to the sender of the suspended event, if the sender has requested a reply.  If the suspension ID has been used in a previous invocation of -setCurrentAppleEventAndReplyEventWithSuspensionID: the effects of that invocation will be completely undone.  Subsequent invocations of other NSAppleEventManager methods using the same suspension ID are invalid.  This method may be invoked in any thread, not just the one in which the corresponding invocation of -suspendCurrentAppleEvent occurred.
 - (void)resumeWithSuspensionID:(NSAppleEventManagerSuspensionID)suspensionID;
 
 #endif

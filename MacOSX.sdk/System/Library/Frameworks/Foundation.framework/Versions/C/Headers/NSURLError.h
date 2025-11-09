@@ -1,6 +1,6 @@
 /*	
     NSURLError.h
-    Copyright (C) 2003 Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2003-2005, Apple Computer, Inc. All rights reserved.    
     
     Public header file.
 */
@@ -58,6 +58,8 @@ enum
     NSURLErrorServerCertificateHasBadDate = 	-1201,
     NSURLErrorServerCertificateUntrusted = 	-1202,
     NSURLErrorServerCertificateHasUnknownRoot = -1203,
+    NSURLErrorServerCertificateNotYetValid = 	-1204,
+	NSURLErrorClientCertificateRejected = 	-1205,
     NSURLErrorCannotLoadFromNetwork = 		-2000,
 
     // Download and file I/O errors

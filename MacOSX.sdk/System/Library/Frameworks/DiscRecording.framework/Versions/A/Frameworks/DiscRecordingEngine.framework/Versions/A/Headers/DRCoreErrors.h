@@ -60,7 +60,7 @@ extern "C" {
 	@constant kDRMediaNotSupportedErr  Disc isn't supported for the requested burn operation. 
 	@constant kDRMediaNotBlankErr  Disc isn't blank, and the requested operation needs it to be. 
 	@constant kDRMediaNotErasableErr  Disc isn't erasable, and the requested operation needs it to be. 
-	@constant kDRBurnUnderrunErr  Device drained buffer without burn underrun protection. 
+	@constant kDRBurnUnderrunErr  The burn failed because the device drained its buffer without burn underrun protection. 
 	@constant kDRBurnNotAllowedErr  User is not allowed to burn to this device on this system. 
 	@constant kDRDataProductionErr  Error while producing data for the burn 
 	@constant kDRVerificationFailedErr  Data verification failed 
@@ -68,13 +68,16 @@ extern "C" {
 	@constant kDRBadLayoutErr  Too many tracks or sessions 
 	@constant kDRUserCanceledErr  User canceled the burn 
 	@constant kDRFunctionNotSupportedErr  Track producer cannot perform requested function 
+	@constant kDRTrackReusedErr One or more tracks were included multiple times in the burn
 	@constant kDRFileModifiedDuringBurnErr  File changed during flatten or burn 
 	@constant kDRFileLocationConflictErr  Conflicting locations specified for two files 
 	@constant kDRTooManyNameConflictsErr  Too many filename conflicts to resolve (10,000,000 or more) 
+	@constant kDRDeviceCantWriteCDTextErr Device does not support writing CD-Text
 	@constant kDRDeviceBurnStrategyNotAvailableErr  Device does not support the required burn strategy for this burn 
 	@constant kDRDeviceCantWriteIndexPointsErr  Device does not support writing index points 
 	@constant kDRDeviceCantWriteISRCErr  Device does not support writing ISRC 
 	@constant kDRDeviceCantWriteSCMSErr  Device does not support writing SCMS 
+	@constant kDRDevicePreGapLengthNotValidErr	Device does not support the required pregap length for the track
 */
 enum
 {
@@ -103,17 +106,20 @@ enum
 	kDRBadLayoutErr					= 0x80020065,
 	kDRUserCanceledErr				= 0x80020066,
 	kDRFunctionNotSupportedErr		= 0x80020067,
-	
+	kDRTrackReusedErr				= 0x8002006F,
+
 	/* content errors */
 	kDRFileModifiedDuringBurnErr	= 0x80020100,
 	kDRFileLocationConflictErr		= 0x80020101,
 	kDRTooManyNameConflictsErr		= 0x80020102,
+	kDRDeviceCantWriteCDTextErr		= 0x80020201,
 	
 	/* drive feature errors */
 	kDRDeviceBurnStrategyNotAvailableErr	= 0x80020200,
 	kDRDeviceCantWriteIndexPointsErr		= 0x80020202,
 	kDRDeviceCantWriteISRCErr				= 0x80020203,
-	kDRDeviceCantWriteSCMSErr				= 0x80020204
+	kDRDeviceCantWriteSCMSErr				= 0x80020204,
+	kDRDevicePreGapLengthNotValidErr		= 0x80020205
 };
 
 /*!
@@ -175,6 +181,14 @@ extern const CFStringRef kDRErrorStatusErrorKey						AVAILABLE_MAC_OS_X_VERSION_
 				may not be present if a suitable string does not exist to describe the failure.
 */
 extern const CFStringRef kDRErrorStatusErrorStringKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/*!
+	@const kDRErrorStatusErrorInfoStringKey
+	@discussion	A key for the DRErrorStatus dictionary. The value of this key is a CFString object containing
+				a string providing additional information for the error.  This value is optional and
+				may not be present if a suitable string does not exist to describe the failure.
+*/
+extern const CFStringRef kDRErrorStatusErrorInfoStringKey			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
 	@const kDRErrorStatusSenseKey

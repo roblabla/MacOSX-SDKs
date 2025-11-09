@@ -62,6 +62,33 @@ CGError CGConfigureDisplayMode(CGDisplayConfigRef configRef,
                                 CFDictionaryRef mode);
 
 /*
+ * Enable or disable stereo operation.
+ *
+ * Note that the system normally detects the presence of a stereo window,
+ * and will automatically switch a display containing a stereo window to
+ * stereo operation.  This function provides a mechanism to force a display
+ * to stereo operation, and to set options (blue line sync signal) when in
+ * stereo operation.
+ *
+ * Returns kCGErrorSuccess on success.
+ * Returns kCGErrorRangeCheck if the display does not support
+ * the stereo operation settings requested.
+ *
+ * On success, the display resolution, mirroring mode, and
+ * available display modes may change, due to hardware-specific
+ * capabilities and limitations.
+ * Please check settings to verify that they are appropriate for
+ * your application.
+ *
+ * When in stereo operation, a display may need to generate a special stereo
+ * sync signal as part of the video output.  The sync signal consists of a blue
+ * line which occupies the first 25% of the last scanline for the left eye view,
+ * and the first 75% of the last scanline for the right eye view.  The remainder
+ * of the scanline is black.   It may be set using the forceBlueLine option.
+ */
+CGError CGConfigureDisplayStereoOperation(CGDisplayConfigRef configRef, CGDirectDisplayID display, boolean_t stereo, boolean_t forceBlueLine);
+
+/*
  * Make a display a mirror of masterDisplay.
  *
  * Use a CGDirectDisplayID of kCGNullDirectDisplay for the masterDisplay to disable
@@ -182,6 +209,53 @@ CGError CGDisplayRegisterReconfigurationCallback(CGDisplayReconfigurationCallBac
 CGError CGDisplayRemoveReconfigurationCallback(CGDisplayReconfigurationCallBack proc, void *userInfo) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*
+ * Specialized configuration changes should be done outside of the
+ * scope of a CGBeginDisplayConfiguration/CGCompleteDisplayConfiguration
+ * pair, as they may alter things such as the available display modes
+ * which a normal reconfiguration sequence might assume are invariant.
+ */
+/*
+ * Enable or disable stereo operation.
+ *
+ * Note that the system normally detects the presence of a stereo window,
+ * and will automatically switch a display containing a stereo window to
+ * stereo operation.  This function provides a mechanism to force a display
+ * to stereo operation, and to set options (blue line sync signal) when in
+ * stereo operation.
+ *
+ * Returns kCGErrorSuccess on success.
+ * Returns kCGErrorRangeCheck if the display does not support
+ * the stereo operation settings requested.
+ *
+ * On success, the display resolution, mirroring mode, and
+ * available display modes may change, due to hardware-specific
+ * capabilities and limitations.
+ * Please check settings to verify that they are appropriate for
+ * your application.
+ *
+ * When in stereo operation, a display may need to generate a special stereo
+ * sync signal as part of the video output.  The sync signal consists of a blue
+ * line which occupies the first 25% of the last scanline for the left eye view,
+ * and the first 75% of the last scanline for the right eye view.  The remainder
+ * of the scanline is black.   It may be set using the forceBlueLine option.
+ *
+ * A configuration change can apply for the life of an app, the life of a login session, or
+ * permanently. If a request is made to make a change permanent, and the change
+ * cannot be supported by the Aqua UI (resolution and pixel depth constraints apply),
+ * then the configuration  change is demoted to lasting the session.
+ *
+ * A permanent configuration change also becomes the current session's
+ * configuration.
+ *
+ * When the system reverts configurations at app termination, the
+ * configuration always reverts to the session or permanent configuration setting.
+ *
+ * When the system reverts configurations at session termination, the
+ * configuration always reverts to the permanent configuration setting.
+ */
+CGError CGDisplaySetStereoOperation(CGDirectDisplayID display, boolean_t stereo, boolean_t forceBlueLine, CGConfigureOption option);
+
+/*
  * These APIs allow applications and higher level frameworks
  * such as DrawSprocket to determine interesting properties
  * of displays, such as if a display is built-in, if a display
@@ -230,6 +304,9 @@ CGDirectDisplayID CGDisplayMirrorsDisplay(CGDirectDisplayID display);
 
 /* True if the display is using OpenGL acceleration */
 boolean_t CGDisplayUsesOpenGLAcceleration(CGDirectDisplayID display);
+
+/* True if the display is running in a stereo graphics mode */
+boolean_t CGDisplayIsStereo(CGDirectDisplayID display);
 
 
 /*

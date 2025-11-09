@@ -1,7 +1,7 @@
 /*
         NSActionCell.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -17,6 +17,9 @@
 }
 
 - (NSView *)controlView;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (void)setControlView:(NSView*)view;
+#endif
 - (void)setFont:(NSFont *)fontObj;
 - (void)setAlignment:(NSTextAlignment)mode;
 - (void)setBordered:(BOOL)flag;

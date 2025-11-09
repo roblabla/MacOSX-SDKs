@@ -52,7 +52,6 @@
 
 #include <sys/appleapiopts.h>
 
-#ifdef __APPLE_API_UNSTABLE
 #define DEVFS_CHAR 	0
 #define DEVFS_BLOCK 	1
 
@@ -73,19 +72,9 @@ __BEGIN_DECLS
  * Returns:
  *   A handle to a device node if successful, NULL otherwise.
  */
-void * 	devfs_make_node __P((dev_t dev, int chrblk, uid_t uid, gid_t gid, 
-			     int perms, char *fmt, ...));
+void * 	devfs_make_node(dev_t dev, int chrblk, uid_t uid, gid_t gid, 
+			     int perms, const char *fmt, ...);
 
-/*
- * Function: devfs_make_link
- *
- * Purpose:
- *   Create a link to a previously created device node.
- *
- * Returns:
- *   0 if successful, -1 if failed
- */
-int	devfs_link __P((void * handle, char *fmt, ...));
 
 /*
  * Function: devfs_remove
@@ -94,10 +83,9 @@ int	devfs_link __P((void * handle, char *fmt, ...));
  *   Remove the device node returned by devfs_make_node() along with
  *   any links created with devfs_make_link().
  */
-void	devfs_remove __P((void * handle));
+void	devfs_remove(void * handle);
 
 __END_DECLS
-#endif /* __APPLE_API_UNSTABLE */
 
 #ifdef __APPLE_API_PRIVATE
 /* XXX */

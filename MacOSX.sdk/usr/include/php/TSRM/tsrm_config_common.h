@@ -10,7 +10,7 @@
 #elif defined(NETWARE)
 # include "tsrm_config.nw.h"
 #else
-# include "tsrm_config.h"
+# include <tsrm_config.h>
 # include <sys/param.h>
 #endif
 
@@ -42,6 +42,8 @@ char *alloca ();
 #ifndef MAXPATHLEN
 # ifdef PATH_MAX
 #  define MAXPATHLEN PATH_MAX
+# elif defined(MAX_PATH)
+#  define MAXPATHLEN MAX_PATH
 # else
 #  define MAXPATHLEN 256
 # endif

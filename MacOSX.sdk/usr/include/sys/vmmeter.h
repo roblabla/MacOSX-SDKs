@@ -110,9 +110,6 @@ struct vmmeter {
 	u_int v_inactive_target; /* number of pages desired inactive */
 	u_int v_inactive_count;  /* number of pages inactive */
 };
-#ifdef KERNEL
-extern struct	vmmeter cnt;
-#endif
 
 /* systemwide totals computed every five seconds */
 struct vmtotal
@@ -132,9 +129,6 @@ struct vmtotal
 	int32_t	t_armshr;	/* active shared real memory */
 	int32_t	t_free;		/* free memory pages */
 };
-#ifdef KERNEL
-extern struct	vmtotal total;
-#endif
 
 #endif /*__APPLE_API_OBSOLETE */
 

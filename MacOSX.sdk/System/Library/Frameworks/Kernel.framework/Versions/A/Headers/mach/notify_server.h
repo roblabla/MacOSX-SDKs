@@ -119,12 +119,22 @@ extern const struct do_notify_subsystem {
 
 #ifndef __Request__notify_subsystem__defined
 #define __Request__notify_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
 	} __Request__mach_notify_port_deleted_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -132,23 +142,43 @@ extern const struct do_notify_subsystem {
 		mach_msg_port_descriptor_t rights;
 		/* end of the kernel processed data */
 	} __Request__mach_notify_port_destroyed_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_mscount_t mscount;
 	} __Request__mach_notify_no_senders_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__mach_notify_send_once_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
 	} __Request__mach_notify_dead_name_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__notify_subsystem__defined */
 
 
@@ -168,36 +198,66 @@ union __RequestUnion__do_notify_subsystem {
 
 #ifndef __Reply__notify_subsystem__defined
 #define __Reply__notify_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__mach_notify_port_deleted_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__mach_notify_port_destroyed_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__mach_notify_no_senders_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__mach_notify_send_once_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__mach_notify_dead_name_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__notify_subsystem__defined */
 
 

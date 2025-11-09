@@ -3,9 +3,9 @@
  
      Contains:   Public Code Fragment Manager Interfaces.
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1992-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -303,6 +303,9 @@ enum {
  *    MacOS 8.5 and later. Passing NULL as those parameters when
  *    running Mac OS 8.1 and earlier systems will corrupt low-memory.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -320,6 +323,9 @@ GetSharedLibrary(
 
 /*
  *  GetDiskFragment()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -341,6 +347,9 @@ GetDiskFragment(
 /*
  *  GetMemFragment()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -360,6 +369,9 @@ GetMemFragment(
 /*
  *  CloseConnection()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -371,6 +383,9 @@ CloseConnection(CFragConnectionID * connID)                   AVAILABLE_MAC_OS_X
 
 /*
  *  FindSymbol()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -388,6 +403,9 @@ FindSymbol(
 /*
  *  CountSymbols()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -401,6 +419,9 @@ CountSymbols(
 
 /*
  *  GetIndSymbol()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework

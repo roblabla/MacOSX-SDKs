@@ -60,6 +60,8 @@ class IOFireWireLocalNode;
 class IOFWWorkLoop;
 class IOFireWireIRM;
 class IOFireWirePowerManager;
+class IOFWSimplePhysicalAddressSpace;
+class IOFWSimpleContiguousPhysicalAddressSpace;
 
 #if FIRELOGCORE
 class IOFireLog;
@@ -251,7 +253,47 @@ struct IOFWNodeScan {
     int							fRead;
     IOFWReadQuadCommand 	* 	fCmd;
     UInt32						generation;
+    UInt32						fIRMBitBucket;
+    bool						fIRMisBad;
     bool						speedChecking;
+    bool						fIRMChecking;
+	int							fRetriesBumped;
+};
+
+
+typedef struct IOFWDuplicateGUIDStruct IOFWDuplicateGUIDRec;
+struct IOFWDuplicateGUIDStruct
+ {
+	IOFWDuplicateGUIDRec		* 	fNextGUID;
+	CSRNodeUniqueID				fGUID;
+	UInt32						fLastGenSeen;
+};
+	
+
+// IOFireWireDuplicateGUIDList
+//
+// A little class for keeping track of GUIDs which where we have observed 2 nodes with
+// the same GUID
+
+class IOFireWireDuplicateGUIDList : public OSObject
+{
+    OSDeclareDefaultStructors(IOFireWireDuplicateGUIDList);
+
+private:
+    IOFWDuplicateGUIDRec		* 	fFirstGUID;
+    
+protected:
+    virtual void free();
+    
+public:
+
+	static IOFireWireDuplicateGUIDList * create( void );
+
+	void addDuplicateGUID( CSRNodeUniqueID guid, UInt32 gen );
+	void removeDuplicateGUID( CSRNodeUniqueID guid );
+	
+	bool findDuplicateGUID( CSRNodeUniqueID guid, UInt32 gen );
+	
 };
 
 #define kMaxPendingTransfers kFWAsynchTTotal
@@ -274,6 +316,11 @@ protected:
 	
 	IOFireWireController * 		fPrimary;
 	
+	UInt8						fMaxRec;
+	
+	UInt8						fPadding;
+	UInt16						fPadding2;
+	
 	/*! 
 		@struct ExpansionData
 		@discussion This structure will be used to expand the capablilties of the class in the future.
@@ -291,8 +338,17 @@ protected:
     virtual bool 									init ( 
 																IOFireWireController * 	primary );
 	virtual	void 									free ();
-	virtual IOFWDCLPool *							createDCLPool ( unsigned capacity ) const ;
-//	virtual IOFWBufferFillIsochPort *				createBufferFillIsochPort () const ;
+	virtual IOFWDCLPool *							createDCLPool ( unsigned capacity ) const ;	
+	virtual UInt8									getMaxRec( void );
+	virtual IOFWBufferFillIsochPort *				createBufferFillIsochPort() const ;
+	
+	virtual UInt64 getFireWirePhysicalAddressMask( void );
+	virtual UInt32 getFireWirePhysicalAddressBits( void );
+	virtual UInt64 getFireWirePhysicalBufferMask( void );
+	virtual UInt32 getFireWirePhysicalBufferBits( void );
+	
+	virtual IOFWSimpleContiguousPhysicalAddressSpace * createSimpleContiguousPhysicalAddressSpace( vm_size_t size, IODirection direction );
+	virtual IOFWSimplePhysicalAddressSpace * createSimplePhysicalAddressSpace( vm_size_t size, IODirection direction );
 	
 private:
     OSMetaClassDeclareReservedUnused(IOFireWireControllerAux, 0);
@@ -360,7 +416,8 @@ protected:
 	friend class IOFWCommand;
 	friend class IOFireWireDevice;
 	friend class IOFireWireDeviceAux;
-    friend class IOFireWirePCRSpace;
+    friend class IOFireWireUnit;
+	friend class IOFireWirePCRSpace;
     friend class IOFireWireROMCache;
     friend class IOFWAsyncStreamCommand;
 	friend class IOFWAddressSpaceAux;
@@ -371,7 +428,9 @@ protected:
 	friend class IOFWWriteQuadCommand;
 	friend class IOFWWriteCommand;
 	friend class IOFWCompareAndSwapCommand;
-
+	friend class IOFWAsyncCommand;
+	friend class IOFireWireAVCTargetSpace ;
+	
 #if FIRELOGCORE
 	friend class IOFireLog;
 #endif
@@ -395,6 +454,7 @@ protected:
     IORegistryEntry *			fNodes[kFWMaxNodesPerBus];	// FireWire nodes on this bus
     UInt32 *					fNodeIDs[kFWMaxNodesPerBus+1];	// Pointer to SelfID list for each node
 							// +1 so we know how many selfIDs the last node has
+							
     UInt32						fGapCount;		// What we think the gap count should be
     UInt8						fSpeedCodes[(kFWMaxNodesPerBus+1)*kFWMaxNodesPerBus];
 						// Max speed between two nodes
@@ -462,6 +522,21 @@ protected:
 
 	bool						fUseHalfSizePackets;
 	bool						fRequestedHalfSizePackets;
+
+	IOFWNodeScan *					fScans[kFWMaxNodesPerBus];
+	IOFireWireDuplicateGUIDList	*	fGUIDDups;
+	
+	bool						fDelegateCycleMaster;
+	bool						fBadIRMsKnown;
+	
+	UInt32						fPreviousGap;
+	IONotifier *				fPowerEventNotifier;
+	
+	bool fStarted;
+
+	UInt32 fIOCriticalSectionCount;
+
+	UInt32 fHubPort;
 	
 /*! @struct ExpansionData
     @discussion This structure will be used to expand the capablilties of the class in the future.
@@ -489,7 +564,7 @@ protected:
 
     // Process read from a local address, return rcode
     virtual UInt32 doReadSpace(UInt16 nodeID, IOFWSpeed &speed, FWAddress addr, UInt32 len,
-                                      IOMemoryDescriptor **buf, IOByteCount * offset,
+                                      IOMemoryDescriptor **buf, IOByteCount * offset, IODMACommand **dma_command,
                                       IOFWRequestRefCon refcon);
 
     // Process write to a local address, return rcode
@@ -510,7 +585,7 @@ protected:
     virtual void buildTopology(bool doFWPlane);
 
     virtual void readDeviceROM(IOFWNodeScan *refCon, IOReturn status);
-
+    
     virtual IOReturn UpdateROM();
     virtual IOReturn allocAddress(IOFWAddressSpace *space);
     virtual void freeAddress(IOFWAddressSpace *space);
@@ -644,7 +719,6 @@ public:
     virtual IOFWPseudoAddressSpace *createPseudoAddressSpace(FWAddress *addr, UInt32 len,
                                 FWReadCallback reader, FWWriteCallback writer, void *refcon);
 
-
     // Extract info about the async request 
     virtual bool isLockRequest(IOFWRequestRefCon refcon);
     virtual bool isQuadRequest(IOFWRequestRefCon refcon);
@@ -660,7 +734,7 @@ public:
     bool checkGeneration(UInt32 gen) const;
     UInt32 getGeneration() const;
     UInt16 getLocalNodeID() const;
-    IOReturn getIRMNodeID(UInt32 &generation, UInt16 &id) const;
+    IOReturn getIRMNodeID(UInt32 &generation, UInt16 &id);
     
     const AbsoluteTime * getResetTime() const;
 
@@ -735,7 +809,7 @@ protected:
 	virtual IOReturn createPendingQ( void );
 	virtual void destroyPendingQ( void );
 
-	virtual UInt32 countNodeIDChildren( UInt16 nodeID );
+	virtual UInt32 countNodeIDChildren( UInt16 nodeID, int hub_port = 0, int * hubChildRemainder = NULL, bool * hubParentFlag = NULL );
 
 public:
 	virtual UInt32 hopCount(UInt16 nodeAAddress, UInt16 nodeBAddress );
@@ -776,12 +850,31 @@ protected:
 	
 	virtual UInt32 getPortNumberFromIndex( UInt16 index );
 												
+    virtual bool checkForDuplicateGUID(IOFWNodeScan *scan, CSRNodeUniqueID *currentGUIDs );
+    virtual void updateDevice(IOFWNodeScan *scan );
+    virtual bool AssignCycleMaster();
+
 public:
 
  	IOReturn clipMaxRec2K(Boolean clipMaxRec );
 	void setNodeSpeed( UInt16 nodeAddress, IOFWSpeed speed );
 	void useHalfSizePackets( void );
 	void disablePhyPortOnSleepForNodeID( UInt32 nodeID );
+
+	IOReturn handleAsyncCompletion( IOFWCommand *cmd, IOReturn status );
+
+	static IOReturn systemShutDownHandler( void * target, void * refCon,
+                                    UInt32 messageType, IOService * service,
+                                    void * messageArgument, vm_size_t argSize );
+
+	IOReturn beginIOCriticalSection( void );
+	void endIOCriticalSection( void );
+
+protected:	
+	IOReturn poweredStart( void );
+
+public:
+	bool isPhysicalAccessEnabledForNodeID( UInt16 nodeID );
 	
 private:
     OSMetaClassDeclareReservedUnused(IOFireWireController, 0);

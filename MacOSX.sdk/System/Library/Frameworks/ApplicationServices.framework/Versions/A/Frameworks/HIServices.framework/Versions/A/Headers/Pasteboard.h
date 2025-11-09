@@ -3,9 +3,9 @@
  
      Contains:   Pasteboard Manager Interfaces.
  
-     Version:    HIServices-125.7~1
+     Version:    HIServices-169~651
  
-     Copyright:  © 2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -87,9 +87,9 @@ extern "C" {
  *    services to act on multiple items. Another difference from both
  *    the Scrap and Drag Managers is the use of Uniform Type Identifier
  *    based flavor types rather than four character code OSTypes. These
- *    have several advantages. They allow compatiblity with Cocoa's
+ *    have several advantages. They allow compatibility with Cocoa's
  *    NSPasteboard, more accurately describe the data being
- *    transported, provied a type inheritance mechanism and allow
+ *    transported, provide a type inheritance mechanism and allow
  *    namespacing with a reverse DNS scheme.
  */
 typedef struct OpaquePasteboardRef*     PasteboardRef;
@@ -123,7 +123,7 @@ enum {
    * reference. The call to PasteboardSynchronize() has updated the
    * local pasteboard reference to sync it up with the global resource.
    * This is a good time to see what new information has been placed on
-   * the pasteboard to determine wether any tasty flavors have been
+   * the pasteboard to determine whether any tasty flavors have been
    * added and possibly enable pasting.
    */
   kPasteboardModified           = (1 << 0),
@@ -350,6 +350,40 @@ PasteboardClear(PasteboardRef inPasteboard)                   AVAILABLE_MAC_OS_X
 
 
 /*
+ *  PasteboardCopyName()
+ *  
+ *  Summary:
+ *    Copies the name of the given pasteboard. Useful for discovering
+ *    the name of a uniquely named pasteboard so other processes may
+ *    access it.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inPasteboard:
+ *      A local pasteboard reference.
+ *    
+ *    outName:
+ *      On return, a CFString reference to the pasteboard's name. This
+ *      string must be released by the client.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PasteboardCopyName(
+  PasteboardRef   inPasteboard,
+  CFStringRef *   outName)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
  *  PasteboardGetItemCount()
  *  
  *  Summary:
@@ -396,7 +430,8 @@ PasteboardGetItemCount(
  *      A local pasteboard reference.
  *    
  *    inIndex:
- *      A UInt32 index requesting the nth pasteboard item reference.
+ *      A 1-based UInt32 index requesting the nth pasteboard item
+ *      reference.
  *    
  *    outItem:
  *      A PasteboardItemID which receives the nth pasteboard item
@@ -515,8 +550,8 @@ PasteboardGetItemFlavorFlags(
  *      A pasteboard item identifier containing the flavor of interest.
  *    
  *    inFlavorType:
- *      A Uniform Type Idendtifier based flavor type whose data is
- *      being retrieved.
+ *      A Uniform Type Identifier-based flavor type whose data is being
+ *      retrieved.
  *    
  *    outData:
  *      A CFDataRef reference which receives the flavor data. It is the

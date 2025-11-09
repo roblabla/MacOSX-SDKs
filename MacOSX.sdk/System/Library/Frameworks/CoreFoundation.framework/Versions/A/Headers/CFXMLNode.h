@@ -1,5 +1,5 @@
 /*	CFXMLNode.h
-	Copyright (c) 1998-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFXMLNODE__)
@@ -132,7 +132,7 @@ typedef struct {
  kCFXMLNodeTypeDocument             <currently unused>                   CFXMLDocumentInfo *
  kCFXMLNodeTypeElement              tag name                             CFXMLElementInfo *
  kCFXMLNodeTypeAttribute            <currently unused>                   <currently unused>
- kCFXMLNodeTypeProcessInstruction   name of the target                   CFXMLProcessingInstructionInfo *
+ kCFXMLNodeTypeProcessingInstruction   name of the target                   CFXMLProcessingInstructionInfo *
  kCFXMLNodeTypeComment              text of the comment                  NULL
  kCFXMLNodeTypeText                 the text's contents                  NULL
  kCFXMLNodeTypeCDATASection         text of the CDATA                    NULL

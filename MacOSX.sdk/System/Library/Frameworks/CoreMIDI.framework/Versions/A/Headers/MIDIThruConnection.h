@@ -6,7 +6,7 @@
  	Version:	Technology: Mac OS X
  				Release:	Mac OS X
  
- 	Copyright:  (c) 2002 by Apple Computer, Inc., all rights reserved.
+ 	Copyright:  (c) 2002-2005 by Apple Computer, Inc., all rights reserved.
  
  	Bugs?:  	For bug reports, consult the following page on
  				the World Wide Web:
@@ -24,7 +24,7 @@
 
 //  -----------------------------------------------------------------------------
 /*!
-	@header MIDIThruConnection
+	@header MIDIThruConnection.h
 
 	This header defines functions to create MIDI play-through connections
 	between the MIDI sources and destinations.  These connections may be
@@ -47,7 +47,7 @@
 typedef struct OpaqueMIDIThruConnection *		MIDIThruConnectionRef;
 
 /*!
-	@typedef		MIDIValueMap
+	@struct			MIDIValueMap
 	
 	@discussion		A custom mapping function to transform MIDI 7-bit values,
 					as contained in note numbers, velocities, control values,
@@ -59,75 +59,174 @@ struct MIDIValueMap {
 };
 typedef struct MIDIValueMap MIDIValueMap;
 
-enum {
-	kMIDITransform_None = 0,		// no param
-	kMIDITransform_FilterOut = 1,	// filter out event type, no param
-	kMIDITransform_MapControl = 2,	// param is remapped control number
-	kMIDITransform_Add = 8,			// param is value to add
-	kMIDITransform_Scale = 9,		// param is amount to scale by: fixed point bbbb.bbbb bbbb bbbb
+/*!
+	@enum			MIDITransformType
+	
+	@discussion		Values specifying a type of MIDI transformation, as found in the transform member of MIDITransform.
+	
+	@constant	kMIDITransform_None
+		no transformation (param unused)
+	@constant	kMIDITransform_FilterOut
+		filter out the specified event type (param unused)
+	@constant	kMIDITransform_MapControl
+		transform one control number to another; param is destination control number
+	@constant	kMIDITransform_Add
+		add param to values
+	@constant	kMIDITransform_Scale
+		multiple value by the fixed point number in param, which is in fixed point: bbbb.bbbb bbbb bbbb
+	@constant	kMIDITransform_MinValue
+		the value's minimum value is param
+	@constant	kMIDITransform_MaxValue
+		the value's maximum value is param
+	@constant	kMIDITransform_MapValue
+		transform the value using a map; param is the index of the map in the connection's array of maps.
+*/
+enum {	// MIDITransformType
+	kMIDITransform_None = 0,
+	kMIDITransform_FilterOut = 1,
+	kMIDITransform_MapControl = 2,
+	kMIDITransform_Add = 8,
+	kMIDITransform_Scale = 9,
 	kMIDITransform_MinValue = 10,
 	kMIDITransform_MaxValue = 11,
-	kMIDITransform_MapValue = 12	// param is index of map in connection's map array
+	kMIDITransform_MapValue = 12
 };
+typedef UInt16 MIDITransformType;
 
 enum {
 	kMIDIThruConnection_MaxEndpoints = 8
 };
 
-// control types
-// (implementation note: some code tests bits of these values)
-enum {
-	kMIDIControlType_7Bit = 0,		// control numbers may be 0-127
-	kMIDIControlType_14Bit = 1,		// control numbers may be 0-31
-	kMIDIControlType_7BitRPN = 2,	// control numbers may be 0-16383
+/*!
+	@enum		MIDITransformControlType
+	
+	@discussion	Specifies how control numbers are interpreted.
+	@constant	kMIDIControlType_7Bit
+		control numbers may be 0-127
+	@constant	kMIDIControlType_14Bit
+		control numbers may be 0-31
+	@constant	kMIDIControlType_7BitRPN
+		control numbers may be 0-16383
+	@constant	kMIDIControlType_14BitRPN
+	@constant	kMIDIControlType_7BitNRPN
+	@constant	kMIDIControlType_14BitNRPN
+*/
+enum {	// MIDITransformControlType
+	kMIDIControlType_7Bit = 0,
+	kMIDIControlType_14Bit = 1,
+	kMIDIControlType_7BitRPN = 2,
 	kMIDIControlType_14BitRPN = 3,
 	kMIDIControlType_7BitNRPN = 4,
 	kMIDIControlType_14BitNRPN = 5
 };
+typedef UInt8 MIDITransformControlType;
 
+/*!
+    @struct		MIDITransform
+    @abstract   Describes how a single type of MIDI event is transformed.
+	@discussion	This structure controls the transformation of various MIDI events other than control changes.
+    @field      transform	The type of transformation to be applied to the event values.
+	@field		param		An argument to the transformation method (see description of MIDITransformType).
+*/
 struct MIDITransform {
-	UInt16				transform;
+	MIDITransformType	transform;
 	SInt16				param;
 };
 typedef struct MIDITransform MIDITransform;
 
-// Note: must order control transforms appropriately -- first, filter out and remap.
-// Further transforms can follow, and will apply to the remapped control number (if any).
-// N.B. All transformations are done using 14-bit control values, so, when doing an add/min/max
-// transform on a 7-bit value, the parameter must be a 14-bit value, e.g. to add n, param
-// must be n << 7.
+/*!
+    @struct		MIDIControlTransform
+    @abstract   Describes a transformation of MIDI control change events.
+    @discussion
+		A single MIDIThruConnectionParams may describe any number of transformations to control
+		events. It is important that multiple transformations are ordered correctly: filter out,
+		remap, then alter values.
+		
+		All transformations are done internally using 14-bit values, so for example, when doing
+		an add/min/max transform on a 7-bit control value, the parameter must be a 14-bit value.
+		For example, to add 10 to a control value, param must be (10 << 7) = 1280.
+    @field  controlType			The type of control specified by controlNumber
+	@field	remappedControlType	If transform is kMIDITransform_MapControl, the output control type
+	@field	controlNumber		The control number to be affected.
+    @field  transform			The type of transformation to be applied to the event values.
+	@field	param				An argument to the transformation method (see description of MIDITransformType).
+*/
 struct MIDIControlTransform {
-	UInt8				controlType;
-	UInt8				remappedControlType;	// only used when transform is kMIDITransform_MapControl
-	UInt16				controlNumber;
-	UInt16				transform;
-	SInt16				param;
+	MIDITransformControlType	controlType;
+	MIDITransformControlType	remappedControlType;
+	UInt16						controlNumber;
+	MIDITransformType			transform;
+	SInt16						param;
 };
 typedef struct MIDIControlTransform MIDIControlTransform;
 
-// When filling one of these out, clients can leave uniqueID 0 if the endpoint exists.
-// When when one is provided back to the client, the endpoint may be null if it doesn't
-// exist, but the uniqueID will always be non-zero.
+/*!
+	@struct		MIDIThruConnectionEndpoint
+	@abstract	Describes a source or destination in a MIDIThruConnection.
+	@field	endpointRef		The endpoint specified as a MIDIEndpointRef.
+	@field	uniqueID		The endpoint specified by its uniqueID.
+	@discussion
+		When creating one of these, you can leave uniqueID 0 if the endpoint exists and you are passing
+		its MIDIEndpointRef.
+		
+		When obtaining one of these from CoreMIDI, endpointRef may be NULL if it doesn't exist, but the
+		uniqueID will always be non-zero.
+*/
 struct MIDIThruConnectionEndpoint {
 	MIDIEndpointRef			endpointRef;
 	MIDIUniqueID			uniqueID;
 };
 typedef struct MIDIThruConnectionEndpoint MIDIThruConnectionEndpoint;
 
+/*!
+	@struct		MIDIThruConnectionParams
+	@abstract	Describes a set of MIDI routings and transformations.
+	@field		version		Version of this structure; must be 0.
+	@field		numSources	The number of valid sources in the following array.
+	@field		sources		All MIDI generated by these sources is routed into this connection for processing
+							and distribution to destinations.
+	@field		numDestinations	The number of valid destinations in the following array.
+	@field		destinations	All MIDI output from the connection is routed to these destinations.
+	@field		channelMap		Maps each of the source 16 MIDI channels to channel 0-15 (1-16) or 0xFF when
+								MIDI from a channel is to be filtered out.
+	@field		lowVelocity		Note events with a velocity less than this value are filtered out.
+	@field		highVelocity	Note events with a velocity greater than this, if it is not 0, are filtered out.
+	@field		lowNote			See highNote.
+	@field		highNote		If highNote >= lowNote, then notes outside this range are filtered out.
+								If lowNote > highNote, then notes <i>inside</i> this range are filtered out.
+								This applies to note and polyphonic key pressure events.
+								These fields are ignored if a there is a MIDIValueMap applying to noteNumber.
+	@field		noteNumber		Specifies how MIDI note numbers are transformed.
+	@field		velocity		Specifies how MIDI note velocities are transformed.
+	@field		keyPressure		Specifies how MIDI polyphonic key pressure events are transformed.
+	@field		channelPressure	Specifies how MIDI monophonic (channel) pressure events are transformed.
+	@field		programChange	Specifies how MIDI program change events are transformed.
+	@field		pitchBend		Specifies how MIDI pitch bend events are transformed.
+	@field		filterOutSysEx	If 1, specifies that system-exclusive messages are to be filtered out.
+	@field		filterOutMTC	If 1, specifies that MIDI Time Code messages are to be filtered out.
+	@field		filterOutBeatClock	If 1, specifies the MIDI clock, play, stop, and resume messages are to
+								be filtered out.
+	@field		filterOutTuneRequest	If 1, specifies that MIDI Tune Request messages are to be filtered out.
+	@field		reserved2		Must be 0.
+	@field		filterOutAllControls	If 1, specifies that all MIDI continuous control messages are to be filtered out.
+	@field		numControlTransforms	The number of control transformations in the variable-length portion of the struct.
+	@field		numMaps					The number of MIDIValueMaps in the variable-length portion of the struct.
+	@field		reserved3		Must be 0.
+	
+	@discussion
+		The remainder of the structure is variably-sized. It contains numControlTransform instances of 
+		MIDIControlTransform, followed by numMaps instances of MIDIValueMap.
+*/
 struct MIDIThruConnectionParams {
-	UInt32						version;			// must be 0
+	UInt32						version;
 	UInt32						numSources;
 	MIDIThruConnectionEndpoint	sources[kMIDIThruConnection_MaxEndpoints];
 	UInt32						numDestinations;
 	MIDIThruConnectionEndpoint	destinations[kMIDIThruConnection_MaxEndpoints];
 	
-	// map each of the source 16 MIDI channels to channel 0-15 (1-16) or 0xFF to filter out
 	UInt8					channelMap[16];
-	
-	UInt8					reserved1[2];		// must be 0
-	UInt8					lowNote, highNote;	// ignored if mapping
-												// if highNote < lowNote, then 0..highNote and lowNote..127
-												// are passed
+	UInt8					lowVelocity, highVelocity;
+	UInt8					lowNote, highNote;
 	MIDITransform			noteNumber;
 	MIDITransform			velocity;
 	MIDITransform			keyPressure;
@@ -139,12 +238,12 @@ struct MIDIThruConnectionParams {
 	UInt8					filterOutMTC;
 	UInt8					filterOutBeatClock;
 	UInt8					filterOutTuneRequest;
-	UInt8					reserved2[3];		// must be 0
+	UInt8					reserved2[3];
 	UInt8					filterOutAllControls;
 	
 	UInt16					numControlTransforms;
 	UInt16					numMaps;
-	UInt16					reserved3[4];		// must be 0
+	UInt16					reserved3[4];
 
 	// remainder of structure is variable-length:
 	//		MIDIControlTransform	controls[];
@@ -152,45 +251,113 @@ struct MIDIThruConnectionParams {
 };
 typedef struct MIDIThruConnectionParams MIDIThruConnectionParams;
 
+/*!
+	@defined	MIDIThruConnectionParamsSize
+    @abstract   Returns the size of a MIDIThruConnectionParams.
+    @discussion Accounts for the variable-length elements in the structure and returns its true
+				size in bytes.
+*/
+#define MIDIThruConnectionParamsSize(ptr) \
+	(sizeof(MIDIThruConnectionParams) + (ptr)->numControlTransforms * sizeof(MIDIControlTransform) \
+	+ (ptr)->numMaps * sizeof(MIDIValueMap))
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-// Convenience function to fill the connection structure with default values:
-// no endpoints, no transformations (mostly zeroes except for the channel map).
-// Then just filling in the source and adding one destination will create a simple, 
-// unmodified thru connection.
+/*!
+    @function	MIDIThruConnectionParamsInitialize
+    @abstract   Fills a MIDIThruConnectionParams with default values.
+    @param      inConnectionParams	The struct to be initialized.
+    @result     An OSStatus result code.
+    @discussion
+		This convenience function fills the connection structure with default values:
+no endpoints, no transformations (mostly zeroes except for the channel map).
+Then, just filling in the source and adding one destination will create a simple, 
+unmodified thru connection.
+*/
 extern void
 MIDIThruConnectionParamsInitialize(
-							MIDIThruConnectionParams *		inConnectionParams );
+							MIDIThruConnectionParams *		inConnectionParams )
+																AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
-// if inPersistentOwnerID is null, then the connection is marked as owned by the client
-// and will be automatically disposed with the client.  if it is non-null, then it
-// should be a unique identifier, e.g. "com.mycompany.MyCoolProgram".
+/*!
+    @function	MIDIThruConnectionCreate
+    @abstract   Creates a thru connection.
+    @param      inPersistentOwnerID
+					If null, then the connection is marked as owned by the client
+					and will be automatically disposed with the client.  if it is non-null, then it
+					should be a unique identifier, e.g. "com.mycompany.MyCoolProgram".
+	@param		inConnectionParams
+					A MIDIThruConnectionParams contained in a CFDataRef.
+	@param		outConnection
+					On successful return, a reference to the newly-create connection.
+    @result     An OSStatus result code.
+    @discussion
+*/
 extern OSStatus
 MIDIThruConnectionCreate(	CFStringRef						inPersistentOwnerID,
 							CFDataRef						inConnectionParams,
-							MIDIThruConnectionRef *			outConnection );
+							MIDIThruConnectionRef *			outConnection )
+																AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
+/*!
+    @function	MIDIThruConnectionDispose
+    @abstract   Disposes a thru connection.
+    @param      connection
+					The connection to be disposed
+    @result     An OSStatus result code.
+    @discussion
+*/
 extern OSStatus
-MIDIThruConnectionDispose(	MIDIThruConnectionRef			connection );
+MIDIThruConnectionDispose(	MIDIThruConnectionRef			connection )
+																AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
-// The returned CFDataRef contains a MIDIThruConnectionParams structure; client is responsible
-// for releasing it.
+/*!
+    @function	MIDIThruConnectionGetParams
+    @abstract   Obtains a thru connection's MIDIThruConnectionParams.
+    @param      connection
+					The connection to be disposed.
+	@param		outConnectionParams
+					On successful return, the connection's MIDIThruConnectionParams in a CFDataRef
+    @result     An OSStatus result code.
+    @discussion
+		The returned CFDataRef contains a MIDIThruConnectionParams structure. The caller is responsible
+		for releasing it.
+*/
 extern OSStatus
 MIDIThruConnectionGetParams(MIDIThruConnectionRef			connection,
-							CFDataRef *						outConnectionParams );
+							CFDataRef *						outConnectionParams )
+																AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
-// The supplied CFDataRef contains a MIDIThruConnectionParams structure; reference is not consumed.
+/*!
+    @function	MIDIThruConnectionSetParams
+    @abstract   Alters a thru connection's MIDIThruConnectionParams.
+    @param      connection
+					The connection to be modified.
+	@param		inConnectionParams
+					The connection's new MIDIThruConnectionParams in a CFDataRef
+    @result     An OSStatus result code.
+    @discussion
+*/
 extern OSStatus
 MIDIThruConnectionSetParams(MIDIThruConnectionRef			connection,
-							CFDataRef						inConnectionParams );
+							CFDataRef						inConnectionParams )
+																AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
-// the returned CFDataRef is an array of MIDIThruConnectionRef's containing all of the 
-// connections created by the specified owner.
+/*!
+    @function	MIDIThruConnectionFind
+    @abstract   Returns all of the persistent thru connections created by a client.
+    @param      inPersistentOwnerID
+					The ID of the owner whose connections are to be returned.
+	@param		outConnectionList
+					On successful return, a CFDataRef containing an array of MIDIThruConnectionRef's.
+    @result     An OSStatus result code.
+    @discussion
+*/
 extern OSStatus
 MIDIThruConnectionFind(		CFStringRef						inPersistentOwnerID,
-							CFDataRef *						outConnectionList );
+							CFDataRef *						outConnectionList )
+																AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 #ifdef __cplusplus
 }

@@ -3,9 +3,9 @@
  
      Contains:   Finder flags and container types.
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1990-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -203,6 +203,7 @@ enum {
 enum {
   kExtendedFlagsAreInvalid      = 0x8000, /* If set the other extended flags are ignored */
   kExtendedFlagHasCustomBadge   = 0x0100, /* Set if the file or folder has a badge resource */
+  kExtendedFlagObjectIsBusy     = 0x0080, /* Set if the object is marked as busy/incomplete */
   kExtendedFlagHasRoutingInfo   = 0x0004 /* Set if the file contains routing info resource */
 };
 

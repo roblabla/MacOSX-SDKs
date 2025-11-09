@@ -26,6 +26,9 @@ typedef enum {
 
     /* Types from CFBase.h */
     kAXValueCFRangeType = 4,
+    
+    /* Types from AXError.h */
+    kAXValueAXErrorType = 5,
 
     /* Other */
     kAXValueIllegalType = 0

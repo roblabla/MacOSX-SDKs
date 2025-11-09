@@ -31,7 +31,6 @@ typedef function_table_entry 	*function_table_t;
 
 #include <mach/std_types.h>
 #include <mach/mig.h>
-#include <mach/mig.h>
 #include <mach/mach_types.h>
 
 #ifdef __BeforeMigUserHeader
@@ -194,45 +193,91 @@ __END_DECLS
 
 #ifndef __Request__processor_set_subsystem__defined
 #define __Request__processor_set_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		processor_set_flavor_t flavor;
 		mach_msg_type_number_t info_outCnt;
 	} __Request__processor_set_statistics_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__processor_set_destroy_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int max_priority;
 		boolean_t change_threads;
 	} __Request__processor_set_max_priority_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int policy;
 	} __Request__processor_set_policy_enable_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int policy;
 		boolean_t change_threads;
 	} __Request__processor_set_policy_disable_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__processor_set_tasks_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__processor_set_threads_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -241,18 +286,32 @@ __END_DECLS
 		integer_t policy_info[5];
 		boolean_t change;
 	} __Request__processor_set_policy_control_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__processor_set_stack_usage_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int flavor;
 		mach_msg_type_number_t info_outCnt;
 	} __Request__processor_set_info_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__processor_set_subsystem__defined */
 
 /* union of all requests */
@@ -276,6 +335,10 @@ union __RequestUnion__processor_set_subsystem {
 
 #ifndef __Reply__processor_set_subsystem__defined
 #define __Reply__processor_set_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -283,31 +346,61 @@ union __RequestUnion__processor_set_subsystem {
 		mach_msg_type_number_t info_outCnt;
 		integer_t info_out[5];
 	} __Reply__processor_set_statistics_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__processor_set_destroy_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__processor_set_max_priority_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__processor_set_policy_enable_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__processor_set_policy_disable_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -317,7 +410,13 @@ union __RequestUnion__processor_set_subsystem {
 		NDR_record_t NDR;
 		mach_msg_type_number_t task_listCnt;
 	} __Reply__processor_set_tasks_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -327,13 +426,25 @@ union __RequestUnion__processor_set_subsystem {
 		NDR_record_t NDR;
 		mach_msg_type_number_t thread_listCnt;
 	} __Reply__processor_set_threads_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__processor_set_policy_control_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -344,7 +455,13 @@ union __RequestUnion__processor_set_subsystem {
 		vm_size_t maxusage;
 		vm_offset_t maxstack;
 	} __Reply__processor_set_stack_usage_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -355,7 +472,9 @@ union __RequestUnion__processor_set_subsystem {
 		mach_msg_type_number_t info_outCnt;
 		integer_t info_out[5];
 	} __Reply__processor_set_info_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__processor_set_subsystem__defined */
 
 /* union of all replies */

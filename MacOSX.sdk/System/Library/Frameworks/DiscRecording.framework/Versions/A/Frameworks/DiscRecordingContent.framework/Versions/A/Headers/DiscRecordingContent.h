@@ -41,6 +41,7 @@
 #import <DiscRecordingContent/DRFile.h>
 #import <DiscRecordingContent/DRFolder.h>
 #import <DiscRecordingContent/DRFSObject.h>
+#import <DiscRecordingContent/DRBurn_ContentSupport.h>
 #import <DiscRecordingContent/DRTrack_ContentSupport.h>
 #endif
 

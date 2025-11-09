@@ -65,7 +65,7 @@
  * compile time; you *cannot* set it higher than the hard limit!!
  */
 #define	ARG_MAX		   (256 * 1024)	/* max bytes for an exec function */
-#define	CHILD_MAX		   100	/* max simultaneous processes */
+#define	CHILD_MAX		   266	/* max simultaneous processes */
 #define	GID_MAX		   2147483647U	/* max value for a gid_t (2^31-2) */
 #define	LINK_MAX		32767	/* max file link count */
 #define	MAX_CANON		  255	/* max bytes in term canon input line */
@@ -77,10 +77,10 @@
 #define	PATH_MAX		 1024	/* max bytes in pathname */
 #define	PIPE_BUF		  512	/* max bytes for atomic pipe writes */
 
-#define	BC_BASE_MAX	      INT_MAX	/* max ibase/obase values in bc(1) */
-#define	BC_DIM_MAX		65535	/* max array elements in bc(1) */
-#define	BC_SCALE_MAX	      INT_MAX	/* max scale value in bc(1) */
-#define	BC_STRING_MAX	      INT_MAX	/* max const string length in bc(1) */
+#define	BC_BASE_MAX		   99	/* max ibase/obase values in bc(1) */
+#define	BC_DIM_MAX		 2048	/* max array elements in bc(1) */
+#define	BC_SCALE_MAX		   99	/* max scale value in bc(1) */
+#define	BC_STRING_MAX		 1000	/* max const string length in bc(1) */
 #define	COLL_WEIGHTS_MAX	    2	/* max weights for order keyword */
 #define	EQUIV_CLASS_MAX		    2
 #define	EXPR_NEST_MAX		   32	/* max expressions nested in expr(1) */

@@ -32,6 +32,9 @@
 //	Includes
 //ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 
+// Mach includes
+#include <kern/queue.h>
+
 // General IOKit headers
 #include <IOKit/IOLib.h>
 #include <IOKit/IOCommandGate.h>
@@ -69,7 +72,7 @@ class IOSCSIProtocolServices : public IOSCSIProtocolInterface
 private:
 	
 	// The head pointer for the queue of waiting SCSI Tasks.
-	SCSITask *		fSCSITaskQueueHead;
+	SCSITask *		fSCSITaskQueueHead;		/* OBSOLETE */
 	
 	// This is the lock for preventing multiple access while
 	// manipulating the SCSI Task queue.
@@ -88,6 +91,8 @@ protected:
 		UInt32				fSemaphore;
 		bool				fRequiresAutosenseDescriptor;
 		SCSITaskCompletion	fCompletionRoutine;
+		queue_head_t		fTaskQueueHead;
+		queue_head_t		fAutoSenseQueueHead;
 	};
 	IOSCSIProtocolServicesExpansionData * fIOSCSIProtocolServicesReserved;
 	

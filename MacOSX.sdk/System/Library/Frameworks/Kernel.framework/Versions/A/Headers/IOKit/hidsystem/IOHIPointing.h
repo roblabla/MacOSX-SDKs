@@ -86,18 +86,24 @@ typedef void (*ScrollWheelEventCallback)(
                         /* fixedDelta1 */  IOFixed    fixedDelta1,
                         /* fixedDelta2 */  IOFixed    fixedDelta2,
                         /* fixedDelta3 */  IOFixed    fixedDelta3,
+                        /* pointDelta1 */  SInt32     pointDelta1,
+                        /* pointDelta2 */  SInt32     pointDelta2,
+                        /* pointDelta3 */  SInt32     pointDelta3,
+                        /* reserved */     SInt32     options,
                         /* atTime */       AbsoluteTime ts,
                         /* sender */       OSObject * sender,
                         /* refcon */       void *     refcon);
 
 /* End Action Definitions */
 class IOHIDPointingDevice;
+struct ScrollAccelInfo;
 
 class IOHIPointing : public IOHIDevice
 {
     OSDeclareDefaultStructors(IOHIPointing);
     
     friend class IOHITablet;
+    friend class IOHIDPointing;
 
 private:
     IOLock *		_deviceLock;  // Lock for all device access
@@ -120,39 +126,40 @@ private:
     OSObject *                 _scrollWheelEventTarget;
     ScrollWheelEventAction     _scrollWheelEventAction;
     
-    #define SCROLL_TIME_DELTA_COUNT		8
-
     struct ExpansionData { 
-    
-        // Added for scroll whell accel support
-        IOFixed		scrollAcceleration;
-        void *		scrollScaleSegments;
-        IOItemCount	scrollScaleSegCount;
+        UInt32      scrollType;
+                
+        ScrollAccelInfo * scrollWheelInfo;
+        ScrollAccelInfo * scrollPointerInfo;
 
-        UInt32		scrollTimeDeltas1[SCROLL_TIME_DELTA_COUNT];
-        UInt32		scrollTimeDeltas2[SCROLL_TIME_DELTA_COUNT];
-        UInt32		scrollTimeDeltas3[SCROLL_TIME_DELTA_COUNT];
-        UInt8 		scrollTimeDeltaIndex1;
-        UInt8 		scrollTimeDeltaIndex2;
-        UInt8 		scrollTimeDeltaIndex3;
-        IOFixed		scrollLastDeltaAxis1;
-        IOFixed		scrollLastDeltaAxis2;
-        IOFixed		scrollLastDeltaAxis3;
         IOFixed		scrollFixedDeltaAxis1;
         IOFixed		scrollFixedDeltaAxis2;
-        IOFixed		scrollFixedDeltaAxis3;        
-        AbsoluteTime	scrollLastEventTime1;
-        AbsoluteTime	scrollLastEventTime2;
-        AbsoluteTime	scrollLastEventTime3;
+        IOFixed		scrollFixedDeltaAxis3;
+        SInt32		scrollPointDeltaAxis1;
+        SInt32		scrollPointDeltaAxis2;
+        SInt32		scrollPointDeltaAxis3;
+        UInt32      scrollButtonMask;
 
         // Added to post events to the HID Manager
         IOHIDPointingDevice	* hidPointingNub;
         IOService 		* openClient;
         
         bool		isSeized;
+        UInt32        accelerateMode;
     };
 
     ExpansionData *  _reserved;
+    
+    void    setPointingMode(UInt32 accelerateMode);
+    UInt32  getPointingMode ();
+
+    void dispatchScrollWheelEventWithAccelInfo(
+                                SInt32              deltaAxis1,
+                                SInt32              deltaAxis2,
+                                SInt32              deltaAxis3,
+                                ScrollAccelInfo *   info,
+                                AbsoluteTime        ts);
+    
     
 protected:
   virtual void dispatchRelativePointerEvent(int        dx,
@@ -178,7 +185,6 @@ protected:
 public:
   virtual bool init(OSDictionary * properties = 0);
   virtual bool start(IOService * provider);
-  virtual void stop( IOService * provider );
   virtual void free();
 
   virtual bool open(IOService *                client,
@@ -225,13 +231,13 @@ private:
   // Unfortunately, we don't have any padding, so these
   // are going to be non-virtual.
   /*virtual*/ bool 	resetScroll();
-  /*virtual*/ void 	scaleScrollAxes(IOFixed * axis1p, IOFixed * axis2p, IOFixed * axis3p);
   /*virtual*/ void 	setupScrollForAcceleration(IOFixed accl);
   
   // RY: We have to make sure that subclasses that will 
   // take advantage of this have their defined resolution 
   // in their property table.
   /*virtual*/ IOFixed	scrollResolution();
+  /*virtual*/ IOFixed   scrollReportRate();
   
 private:
   static void _relativePointerEvent( IOHIPointing * self,

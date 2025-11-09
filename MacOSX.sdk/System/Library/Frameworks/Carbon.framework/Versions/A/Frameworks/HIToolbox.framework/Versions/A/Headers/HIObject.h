@@ -3,9 +3,9 @@
  
      Contains:   Base object for HIToolbox
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 2001-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -179,6 +179,7 @@ enum {
 
 enum {
   kEventParamHIObjectInstance   = 'hioi',
+  kEventParamHIArchive          = 'hiac', /* typeCFTypeRef */
   typeHIObjectRef               = 'hiob'
 };
 
@@ -192,7 +193,8 @@ enum {
     kEventHIObjectInitialize        = 2,
     kEventHIObjectDestruct          = 3,
     kEventHIObjectIsEqual           = 4,
-    kEventHIObjectPrintDebugInfo    = 5
+    kEventHIObjectPrintDebugInfo    = 5,
+    kEventHIObjectEncode            = 6
 */
 /*
  *  kEventClassHIObject / kEventHIObjectConstruct
@@ -269,6 +271,14 @@ enum {
  *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamHIArchive (in, typeCFTypeRef)
+ *          The HIArchive reference from which the HIObject should be
+ *          decoded. This parameter will only exist when the HIObject
+ *          is requested to initialize itself from a decoded archive. 
+ *          Otherwise, the HIObject should initialize itself normally.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in Carbon.framework
@@ -365,6 +375,40 @@ enum {
 };
 
 /*
+ *  kEventClassHIObject / kEventHIObjectEncode
+ *  
+ *  Summary:
+ *    Your object is being requested to encode itself into an archive.
+ *  
+ *  Discussion:
+ *    Your handler should pass this event on to the superclass first
+ *    before handling this event. This is done by calling
+ *    CallNextEventHandler with the event. When that function returns,
+ *    you should make sure the result is noErr. If not, you should NOT
+ *    continue to initialize your class.
+ *    
+ *    HIArchiveEncodeHIObject has been called on your HIObject. At this
+ *    point all relevant long term data should be encoded to the
+ *    HIArchive provided.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamHIArchive (in, typeCFTypeRef)
+ *          The HIArchive reference into which the HIObject should be
+ *          compiled.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventHIObjectEncode          = 6
+};
+
+/*
  *  HIObjectRegisterSubclass()
  *  
  *  Discussion:
@@ -398,19 +442,22 @@ enum {
  *      CallNextEventHandler. Other than that, you should return a
  *      result as usual. After your object is constructed, this proc
  *      will be installed as the event handler for the remaining events
- *      specified in the inEventList parameter. You may pass NULL to
- *      create an "abstract class" that cannot be instantiated, but can
- *      still be used as a base class for subclasses; if you pass NULL,
- *      HIObjectCreate on the class ID will return
- *      hiObjectClassIsAbstractErr.
+ *      specified in the inEventList parameter. On Mac OS X 10.4 and
+ *      later, you may pass NULL to create an "abstract class" that
+ *      cannot be instantiated, but can still be used as a base class
+ *      for subclasses; if you pass NULL, HIObjectCreate on the class
+ *      ID will return hiObjectClassIsAbstractErr.
  *    
  *    inNumEvents:
  *      The number of events you are installing.
  *    
  *    inEventList:
- *      The events your handler wishes to receive. You must handle the
+ *      The events your handler wishes to receive. If you are not
+ *      creating an abstract class, then you must handle the
  *      kEventHIObjectConstruct and kEventHIObjectDestruct event. If
- *      these events are not specified, an error is returned.
+ *      these events are not specified, an error is returned. An
+ *      abstract class may pass 0 for the inNumEvents parameter and
+ *      NULL for the inEventList parameter.
  *    
  *    inConstructData:
  *      Pass any info you want passed into your event handler here. For
@@ -769,6 +816,412 @@ extern OSStatus
 HIObjectSetAccessibilityIgnored(
   HIObjectRef   inObject,
   Boolean       inIgnored)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  HIObjectSetAuxiliaryAccessibilityAttribute()
+ *  
+ *  Summary:
+ *    Associates an additional accessibility attribute with a UIElement
+ *    that is used to represent a given HIObject or a part thereof.
+ *  
+ *  Discussion:
+ *    This routine lets your application provide the name of and data
+ *    for an accessibility attribute that you want to add to the
+ *    UIElement used to represent a given HIObject-identifier pair.
+ *    Normally, accessibility attributes can only be supplied
+ *    dynamically via Carbon Events, but this routine allows you to
+ *    supply them statically. 
+ *    
+ *    When an accessibility attribute Carbon Event is handled by the
+ *    HIObject with a given identifier, the toolbox automatically
+ *    supplies the names and/or values of any auxiliary attributes
+ *    associated with that HIObject- identifier pair. 
+ *    
+ *    This routine is particularly useful for supplying values for the
+ *    kAXDescriptionAttribute, kAXTitleUIElementAttribute,
+ *    kAXServesAsTitleUIElementAttribute, kAXLinkedUIElementsAttribute
+ *    and other attributes whose value is specific to the layout and
+ *    usage of your application. 
+ *    
+ *    This routine only allows you to associate attributes whose values
+ *    never change. If you need to supply attributes whose values are
+ *    determined dynamically or whose values are settable, you must
+ *    install the normal accessibility Carbon Event handlers. 
+ *    
+ *    The auxiliary attribute store is consulted during the HIObject's
+ *    default handling of the accessibility attribute Carbon Events.
+ *    This means that any programmatic handling of a given
+ *    accessibility attribute will have a chance to override or block
+ *    the consultation of the store. The general rule is that if the
+ *    toolbox or a Carbon Event handler can provide the attribute value
+ *    some other way, the store will not be consulted.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inHIObject:
+ *      The HIObjectRef part of the object-identifier pair to which the
+ *      attribute data is associated.
+ *    
+ *    inIdentifier:
+ *      The 64-bit identifier part of the object-identifier pair to
+ *      which the attribute data is associated. When you want to
+ *      associate the attribute data to the HIObject as a whole -- such
+ *      as when you want to give a description attribute to a push
+ *      button -- you should pass zero in this parameter.
+ *    
+ *    inAttributeName:
+ *      A CFStringRef of the name of the attribute you wish to
+ *      associate with the object-identifier pair. This string will be
+ *      retained before adding it to the auxiliary attribute store.
+ *    
+ *    inAttributeData:
+ *      A CFTypeRef with the data to be supplied as the attribute's
+ *      value. This data will be retained before adding it to the
+ *      auxiliary attribute store; you may release inAttributeData
+ *      after you have called this routine. The inAttributeData
+ *      parameter may also be NULL, which indicates that the named
+ *      auxiliary attribute should no longer be associated with the
+ *      object-identifier pair; any named attribute data previously
+ *      associated with the object-identifier pair will be released.
+ *  
+ *  Result:
+ *    An OSStatus result code. The function will return noErr if it was
+ *    able to associate the attribute data with the HIObjectRef. If the
+ *    HIObjectRef is invalid, paramErr will be returned. Other results
+ *    may be returned in other situations.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIObjectSetAuxiliaryAccessibilityAttribute(
+  HIObjectRef   inHIObject,
+  UInt64        inIdentifier,
+  CFStringRef   inAttributeName,
+  CFTypeRef     inAttributeData)       /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  HIObjectOverrideAccessibilityContainment()
+ *  
+ *  Summary:
+ *    Allows you to override the AXUIElementRefs that an HIObject would
+ *    normally supply as the values of its AXParent, AXWindow, and
+ *    AXTopLevelUIElement attributes.
+ *  
+ *  Discussion:
+ *    This routine allows you to change the parent that an HIObject
+ *    would normally supply in the accessibility hierarchy. For
+ *    instance, a popup control could call this routine on its menu so
+ *    that the menu returned the popup control as the menu's parent;
+ *    normally the menu would return the application as its parent.
+ *    Optionally, this routine also allows you to change the window and
+ *    top-level element that an HIObject would normally supply. 
+ *     
+ *    If the input HIObject is a standard toolbox construct like an
+ *    HIView or a Menu, the input HIObject will not be added as an
+ *    accessibility child of its normal parent. In all other cases, it
+ *    is the client's responsibility to ensure that the input HIObject
+ *    is not added as an accessibility child of its normal parent. 
+ *     
+ *    If the desired AXUIElementRef parent represents an HIView, a
+ *    Menu, or a Window, the input HIObject will be automatically added
+ *    as an accessibility child of the specified parent. In all other
+ *    cases, it is the client's responsibility to manually add the
+ *    input HIObject as a child of the specified parent. To represent
+ *    an HIView, a Menu, or a Window, an AXUIElementRef must contain
+ *    the appropriate HIObjectRef as well as an identifier value of
+ *    zero. 
+ *    
+ *    Similar rules don't have to apply for the handling of the window
+ *    and top-level element attributes because those attributes don't
+ *    represent two-way relationships. 
+ *    
+ *    A containment override is not necessarily supported by every type
+ *    of HIObject. Currently, it is supported by HIViews, Menus, and
+ *    Windows.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inHIObject:
+ *      The HIObjectRef whose parent attribute you want to override.
+ *    
+ *    inDesiredParent:
+ *      The AXUIElementRef that you wish the HIObject to return as the
+ *      value of its AXParent attribute. This routine makes a copy of
+ *      the AXUIElementRef; you must release inDesiredParent after you
+ *      have called this routine. Passing NULL indicates that you want
+ *      the HIObject to revert to its normal, un-overridden behavior.
+ *    
+ *    inDesiredWindow:
+ *      The AXUIElementRef that you wish the HIObject to return as the
+ *      value of its AXWindow attribute. This routine makes a copy of
+ *      the AXUIElementRef; you must release inDesiredWindow after you
+ *      have called this routine. Passing NULL indicates that you want
+ *      the HIObject to report its normal window, if any.
+ *    
+ *    inDesiredTopLevelUIElement:
+ *      The AXUIElementRef that you wish the HIObject to return as the
+ *      value of its AXTopLevelUIElement attribute. This routine makes
+ *      a copy of the AXUIElementRef; you must release
+ *      inDesiredTopLevelUIElement after you have called this routine.
+ *      Passing NULL indicates that you want the HIObject to report its
+ *      normal top-level element, if any.
+ *  
+ *  Result:
+ *    An OSStatus result code. If the HIObjectRef is invalid, this
+ *    routine will return paramErr.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIObjectOverrideAccessibilityContainment(
+  HIObjectRef      inHIObject,
+  AXUIElementRef   inDesiredParent,
+  AXUIElementRef   inDesiredWindow,
+  AXUIElementRef   inDesiredTopLevelUIElement)                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  HIObjectIsArchivingIgnored()
+ *  
+ *  Discussion:
+ *    Reports whether or not the given HIObject is marked as ignored
+ *    for archiving.
+ *    See the discussion of HIObjectSetArchivingIgnored for details on
+ *    what it means to be archiving ignored.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inObject:
+ *      The object whose archiving ignored state you wish to query.
+ *  
+ *  Result:
+ *    A Boolean value indicating whether or not the HIObject is ignored
+ *    for archiving.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+HIObjectIsArchivingIgnored(HIObjectRef inObject)              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  HIObjectSetArchivingIgnored()
+ *  
+ *  Discussion:
+ *    Marks an HIObject as ignored (or not) for the purposes of the
+ *    archiving APIs.
+ *    An HIObject that is ignored for archiving will never be requested
+ *    to encode itself into an archive. This is a statement that the
+ *    HIObject does not handle the archiving protocol.
+ *    By default, an HIObject *is* archiving ignored.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inObject:
+ *      The object whose archiving ignored state you wish to change.
+ *    
+ *    inIgnored:
+ *      A Boolean value indicating whether or not to ignore the object.
+ *  
+ *  Result:
+ *    An OSStatus signifying success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIObjectSetArchivingIgnored(
+  HIObjectRef   inObject,
+  Boolean       inIgnored)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+/*
+   Standard custom archive data dictionary keys describing custom initialize event parameters.
+   Each keyed value is an array of OSTypes represented by CFStrings. Use UTCreateStringForOSType
+   and UTGetOSTypeFromString in UTType.h for CFStringRef <-> OSType conversion.
+*/
+/*
+ *  kHIObjectCustomDataParameterNamesKey
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kHIObjectCustomDataParameterNamesKey        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kHIObjectCustomDataParameterTypesKey
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kHIObjectCustomDataParameterTypesKey        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kHIObjectCustomDataParameterValuesKey
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kHIObjectCustomDataParameterValuesKey       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*
+   Standard custom archive data dictionary keys defining a class and superclass for clients who do
+   not implement the object's true class. Each keyed value is a CFStringRef based HIObject class ID.
+*/
+/*
+ *  kHIObjectCustomDataClassIDKey
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kHIObjectCustomDataClassIDKey               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kHIObjectCustomDataSuperClassIDKey
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kHIObjectCustomDataSuperClassIDKey          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*
+   Standard custom archive data dictionary key for ProcPointer based CDEFs.  The key value is a
+   CFString based SInt16. Use CFStringGetIntValue in CFString.h for CFStringRef <-> SInt16 conversion.
+*/
+/*
+ *  kHIObjectCustomDataCDEFProcIDKey
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kHIObjectCustomDataCDEFProcIDKey            AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*
+ *  HIObjectCopyCustomArchiveData()
+ *  
+ *  Discussion:
+ *    Copies the custom archive data associated with an HIObject that
+ *    has been read from or will be written to an archive. Useful for
+ *    an archive editor that has read a custom object from an archive
+ *    and would like to edit its custom data.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inObject:
+ *      The object whose custom archive data you wish to retrieve.
+ *    
+ *    outCustomData:
+ *      On return, a CFDictionaryRef containing the custom data. The
+ *      client is responsible for releasing the dictionary. NULL will
+ *      be returned if there is no custom archive data available.
+ *  
+ *  Result:
+ *    An OSStatus signifying success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIObjectCopyCustomArchiveData(
+  HIObjectRef        inObject,
+  CFDictionaryRef *  outCustomData)                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  HIObjectSetCustomArchiveData()
+ *  
+ *  Discussion:
+ *    Retrieves the custom archive data associated with an HIObject
+ *    that has been read from or will be written to an archive. Useful
+ *    for an archive editor that has edited a custom object's custom
+ *    data and would like it to be written to an archive with the
+ *    object.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inObject:
+ *      The object whose custom archive data you wish to change.
+ *    
+ *    inCustomData:
+ *      A CFDictionaryRef containing the custom archive data you would
+ *      like to associate with the object. Setting custom data will
+ *      replace any existing custom data. Passing NULL will clear the
+ *      custom archive data. The dictionary's keys and values must use
+ *      CFType callbacks for archiving purposes.
+ *  
+ *  Result:
+ *    An OSStatus signifying success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIObjectSetCustomArchiveData(
+  HIObjectRef       inObject,
+  CFDictionaryRef   inCustomData)       /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 

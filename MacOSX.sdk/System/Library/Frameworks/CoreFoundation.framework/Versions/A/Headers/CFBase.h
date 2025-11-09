@@ -1,29 +1,45 @@
 /*	CFBase.h
-	Copyright (c) 1998-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFBASE__)
 #define __COREFOUNDATION_CFBASE__ 1
 
+#if (defined(__CYGWIN32__) || defined(_WIN32)) && !defined (__WIN32__)
+#define __WIN32__ 1
+#endif
+
+#if defined(_MSC_VER) && defined(_M_IX86)
+#define __i386__ 1
+#endif
+
 #if defined(__WIN32__)
 #include <windows.h>
 #endif
 
+#if defined(__GNUC__)
 #include <stdint.h>
 #include <stdbool.h>
+#elif defined(__WIN32__)
+// mostly for the benefit of MSVC
+#include <GNUCompatibility/stdint.h>
+#include <GNUCompatibility/stdbool.h>
+#endif
 #include <AvailabilityMacros.h>
 
-#if !defined(DARWIN)
+#ifndef CF_OPEN_SOURCE
     #if defined(__CF_USE_FRAMEWORK_INCLUDES__) || (defined(__MACH__) && !defined(__MWERKS__)) 
 	#include <CoreServices/../Frameworks/CarbonCore.framework/Headers/MacTypes.h>
-    #else
+    #elif defined(__MWERKS__)
 	#include <MacTypes.h>
     #endif
-#endif /* !DARWIN */
-#if defined(DARWIN)
-#if defined(__MACH__)
-    #include <CarbonCore/MacTypes.h>
-#else
+#else // CF_OPEN_SOURCE
+    #if defined(__MACH__)
+        #include <CarbonCore/MacTypes.h>
+    #endif
+#endif // CF_OPEN_SOURCE
+
+#if !defined(__MACTYPES__)
     typedef unsigned char           Boolean;
     typedef unsigned char           UInt8;
     typedef signed char             SInt8;
@@ -42,19 +58,29 @@
     typedef const unsigned char *   ConstStr255Param;
     typedef SInt16                  OSErr;
     typedef SInt32                  OSStatus;
+#endif
+#if !defined(__MACTYPES__) || (defined(UNIVERSAL_INTERFACES_VERSION) && UNIVERSAL_INTERFACES_VERSION < 0x0340)
     typedef UInt32                  UTF32Char;
     typedef UInt16                  UTF16Char;
     typedef UInt8                   UTF8Char;
 #endif
-#endif /* DARWIN */
+
 
 #if defined(__cplusplus)
 extern "C" {
 #endif
 
-#if !defined(NULL)
-    #define NULL	0
-#endif
+#ifndef NULL
+#ifdef __GNUG__
+#define NULL __null
+#else /* ! __GNUG__ */
+#ifndef __cplusplus
+#define NULL ((void *)0)
+#else /* __cplusplus */
+#define NULL 0
+#endif /* ! __cplusplus */
+#endif /* __GNUG__ */
+#endif /* ! NULL */
 
 #if !defined(TRUE)
     #define TRUE	1
@@ -66,6 +92,14 @@ extern "C" {
 
 #if defined(__WIN32__)
     #undef CF_EXPORT
+/*
+    We don't build as a library now, but this would be the starting point.
+    #if defined(CF_BUILDING_CF_AS_LIB)
+    // we're building CF as a library
+    #define CF_EXPORT	extern
+    #elif defined(CF_BUILDING_CF)
+    // we're building CF as a DLL
+*/
     #if defined(CF_BUILDING_CF)
 	#define CF_EXPORT __declspec(dllexport) extern
     #else
@@ -82,10 +116,14 @@ extern "C" {
 #endif
 
 #if !defined(CF_INLINE)
-    #if defined(__GNUC__)
-	#define CF_INLINE static __inline__
+    #if defined(__GNUC__) && (__GNUC__ == 4) && !defined(DEBUG)
+	#define CF_INLINE static __inline__ __attribute__((always_inline))
+    #elif defined(__GNUC__)
+    #define CF_INLINE static __inline__
     #elif defined(__MWERKS__) || defined(__cplusplus)
 	#define CF_INLINE static inline
+    #elif defined(_MSC_VER)
+        #define CF_INLINE static __inline
     #elif defined(__WIN32__)
 	#define CF_INLINE static __inline__
     #endif
@@ -96,20 +134,26 @@ CF_EXPORT double kCFCoreFoundationVersionNumber;
 
 #define kCFCoreFoundationVersionNumber10_0 196.4
 #define kCFCoreFoundationVersionNumber10_0_3 196.5
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 #define kCFCoreFoundationVersionNumber10_1 226.0
-/* Note these do not follow the usual numbering policy from the base release */
+/* Note the next two do not follow the usual numbering policy from the base release */
 #define kCFCoreFoundationVersionNumber10_1_2 227.2
 #define kCFCoreFoundationVersionNumber10_1_4 227.3
-#endif
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
 #define kCFCoreFoundationVersionNumber10_2 263.0
-#endif
+#define kCFCoreFoundationVersionNumber10_3 299.0
+#define kCFCoreFoundationVersionNumber10_3_3 299.3
+#define kCFCoreFoundationVersionNumber10_3_4 299.31
 
+#if defined(__ppc64__)
+typedef UInt32 CFTypeID;
+typedef UInt64 CFOptionFlags;
+typedef UInt32 CFHashCode;
+typedef SInt64 CFIndex;
+#else
 typedef UInt32 CFTypeID;
 typedef UInt32 CFOptionFlags;
 typedef UInt32 CFHashCode;
 typedef SInt32 CFIndex;
+#endif
 
 /* Base "type" of all "CF objects", and polymorphic functions on them */
 typedef const void * CFTypeRef;
@@ -204,6 +248,13 @@ const CFAllocatorRef kCFAllocatorSystemDefault;
 */
 CF_EXPORT
 const CFAllocatorRef kCFAllocatorMalloc;
+
+/* This allocator explicitly uses the default malloc zone, returned by
+   malloc_default_zone(). It should only be used when an object is
+   safe to be allocated in non-scanned memory.
+ */
+CF_EXPORT
+const CFAllocatorRef kCFAllocatorMallocZone AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* Null allocator which does nothing and allocates no memory. This allocator
    is useful as the "bytesDeallocator" in CFData or "contentsDeallocator"
@@ -305,6 +356,9 @@ void CFRelease(CFTypeRef cf);
 
 CF_EXPORT
 CFIndex CFGetRetainCount(CFTypeRef cf);
+
+CF_EXPORT
+CFTypeRef CFMakeCollectable(CFTypeRef cf) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 CF_EXPORT
 Boolean CFEqual(CFTypeRef cf1, CFTypeRef cf2);

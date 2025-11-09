@@ -3,9 +3,9 @@
  
      Contains:   AppleEvent Package Interfaces.
  
-     Version:    AppleEvents-287~1
+     Version:    AppleEvents-316.2~623
  
-     Copyright:  © 1989-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1989-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -39,10 +39,12 @@
 #define kAEOpenApplication 				'oapp'
 #define kAEOpenDocuments 				'odoc'
 #define kAEPrintDocuments 				'pdoc'
+#define kAEOpenContents 				'ocon'
 #define kAEQuitApplication 				'quit'
 #define kAEAnswer 						'ansr'
 #define kAEApplicationDied 				'obit'
 #define kAEShowPreferences 				'pref'				/*  sent by Mac OS X when the user chooses the Preferences item  */
+#define kAEAutosaveNow 					'asav'				/*  sent by Mac OS X when it is advisable to autosave all the user's documents with uncommitted changes.  */
 
 /* Constants for recording */
 #define kAEStartRecording 				'reca'				/*  available only in vers 1.0.1 and greater  */

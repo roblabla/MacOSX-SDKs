@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2004-2005 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -24,23 +24,24 @@
 #ifndef _IOKIT_SCSI_PORTS_H_
 #define _IOKIT_SCSI_PORTS_H_
 
-// Message definition to be used with the messageClients call to 
-// inform of a change in port status
+/* Message definition to be used with the messageClients call to 
+ * inform of a change in port status
+ */
 enum
 {
 	kSCSIPort_NotificationStatusChange		= 0x68000001
 };
 
 
-// Port status type
+/* Port status type */
 typedef UInt32 SCSIPortStatus;
 
-// Definitions for the possible statuses
+/* Definitions for the possible statuses */
 enum
 {
-	kSCSIPort_StatusOnline	= 0,	// Port is online
-	kSCSIPort_StatusOffline	= 1,	// Port is offline (e.g. unplugged cable)
-	kSCSIPort_StatusFailure	= 2		// Driver has detected unrecoverable port failure (e.g. hardware port failure)
+	kSCSIPort_StatusOnline	= 0,	/* Port is online */
+	kSCSIPort_StatusOffline	= 1,	/* Port is offline (e.g. unplugged cable) */
+	kSCSIPort_StatusFailure	= 2		/* Driver has detected unrecoverable port failure (e.g. hardware port failure) */
 };
 
 #endif /* _IOKIT_SCSI_PORTS_H_ */

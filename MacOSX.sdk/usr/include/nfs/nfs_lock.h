@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2002-2005 Apple Computer, Inc. All rights reserved.
+ *
+ * @APPLE_LICENSE_HEADER_START@
+ * 
+ * The contents of this file constitute Original Code as defined in and
+ * are subject to the Apple Public Source License Version 1.1 (the
+ * "License").  You may not use this file except in compliance with the
+ * License.  Please obtain a copy of the License at
+ * http://www.apple.com/publicsource and read it before using this file.
+ * 
+ * This Original Code and all software distributed under the License are
+ * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
+ * License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * @APPLE_LICENSE_HEADER_END@
+ */
 /*-
  * Copyright (c) 1998 Berkeley Software Design, Inc. All rights reserved.
  * Redistribution and use in source and binary forms, with or without
@@ -60,7 +81,7 @@ typedef struct nfs_lock_msg {
 	u_int64_t		lm_xid;			/* unique message transaction ID */
 	struct flock		lm_fl;			/* The lock request. */
 	struct sockaddr_storage lm_addr;		/* The address. */
-	size_t			lm_fh_len;		/* The file handle length. */
+	int			lm_fh_len;		/* The file handle length. */
 	struct xucred		lm_cred;		/* user cred for lock req */
 	u_int8_t		lm_fh[NFS_SMALLFH];	/* The file handle. */
 } LOCKD_MSG;
@@ -96,7 +117,7 @@ struct lockd_ans {
 	pid_t		la_pid;			/* pid of lock requester/owner */
 	off_t		la_start;		/* lock starting offset */
 	off_t		la_len;			/* lock length */
-	size_t		la_fh_len;		/* The file handle length. */
+	int 		la_fh_len;		/* The file handle length. */
 	u_int8_t	la_fh[NFS_SMALLFH];	/* The file handle. */
 };
 
@@ -106,11 +127,4 @@ struct lockd_ans {
 #define LOCKD_ANS_LOCK_EXCL	0x0004	/* lock is exclusive */
 
 
-#ifdef KERNEL
-void	nfs_lockinit(void);
-int	nfs_dolock(struct vop_advlock_args *ap);
-int	nfslockdans(struct proc *p, struct lockd_ans *ansp);
-int	nfslockdfd(struct proc *p, int fd);
-int	nfslockdwait(struct proc *p);
-#endif
 #endif /* __APPLE_API_PRIVATE */

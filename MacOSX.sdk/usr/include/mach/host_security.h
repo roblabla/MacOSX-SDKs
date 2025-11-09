@@ -31,7 +31,6 @@ typedef function_table_entry 	*function_table_t;
 
 #include <mach/std_types.h>
 #include <mach/mig.h>
-#include <mach/mig.h>
 #include <mach/mach_types.h>
 
 #ifdef __BeforeMigUserHeader
@@ -93,6 +92,10 @@ __END_DECLS
 
 #ifndef __Request__host_security_subsystem__defined
 #define __Request__host_security_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -107,7 +110,13 @@ __END_DECLS
 		mach_msg_type_number_t ledgersCnt;
 		boolean_t inherit_memory;
 	} __Request__host_security_create_task_token_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -119,7 +128,9 @@ __END_DECLS
 		security_token_t sec_token;
 		audit_token_t audit_token;
 	} __Request__host_security_set_task_token_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__host_security_subsystem__defined */
 
 /* union of all requests */
@@ -135,6 +146,10 @@ union __RequestUnion__host_security_subsystem {
 
 #ifndef __Reply__host_security_subsystem__defined
 #define __Reply__host_security_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -142,13 +157,21 @@ union __RequestUnion__host_security_subsystem {
 		mach_msg_port_descriptor_t child_task;
 		/* end of the kernel processed data */
 	} __Reply__host_security_create_task_token_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__host_security_set_task_token_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__host_security_subsystem__defined */
 
 /* union of all replies */

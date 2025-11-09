@@ -1,53 +1,45 @@
 /*
-Copyright (c) 2002 Jorge Acereda  <jacereda@users.sourceforge.net> &
-                   Peter O'Gorman <ogorman@users.sourceforge.net>
-                   
-Portions may be copyright others, see the AUTHORS file included with this
-distribution.
+ * Copyright (c) 2004-2005 Apple Computer, Inc. All rights reserved.
+ *
+ * @APPLE_LICENSE_HEADER_START@
+ * 
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ * 
+ * @APPLE_LICENSE_HEADER_END@
+ */
 
-Maintained by Peter O'Gorman <ogorman@users.sourceforge.net>
-
-Bug Reports and other queries should go to <ogorman@users.sourceforge.net>
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+/*
+  Based on the dlcompat work done by:
+		Jorge Acereda  <jacereda@users.sourceforge.net> &
+		Peter O'Gorman <ogorman@users.sourceforge.net>
 */
+
 #ifndef _DLFCN_H_
 #define _DLFCN_H_
-
-#ifndef DLOPEN_NO_WARN
-#warning "You are using dlopen(), a legacy API. Please use the Mach-O dylib loading APIs if at all possible"
-#endif
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#if defined (__GNUC__) && __GNUC__ > 3
-#define dl_restrict __restrict
-#else
-#define dl_restrict
-#endif
+#include <sys/cdefs.h>
+
+#ifndef _POSIX_C_SOURCE
 /*
  * Structure filled in by dladdr().
  */
-
 typedef struct dl_info {
         const char      *dli_fname;     /* Pathname of shared object */
         void            *dli_fbase;     /* Base address of shared object */
@@ -55,16 +47,20 @@ typedef struct dl_info {
         void            *dli_saddr;     /* Address of nearest symbol */
 } Dl_info;
 
-extern void * dlopen(const char *path, int mode);
-extern void * dlsym(void * dl_restrict handle, const char * dl_restrict symbol);
-extern const char * dlerror(void);
-extern int dlclose(void * handle);
-extern int dladdr(const void * dl_restrict, Dl_info * dl_restrict);
+extern int dladdr(const void *, Dl_info *);
+#endif /* not POSIX */
+
+extern int dlclose(void * __handle);
+extern char * dlerror(void);
+extern void * dlopen(const char * __path, int __mode);
+extern void * dlsym(void * __handle, const char * __symbol);
 
 #define RTLD_LAZY	0x1
 #define RTLD_NOW	0x2
 #define RTLD_LOCAL	0x4
 #define RTLD_GLOBAL	0x8
+
+#ifndef _POSIX_C_SOURCE
 #define RTLD_NOLOAD	0x10
 #define RTLD_NODELETE	0x80
 
@@ -73,6 +69,7 @@ extern int dladdr(const void * dl_restrict, Dl_info * dl_restrict);
  */
 #define	RTLD_NEXT		((void *) -1)	/* Search subsequent objects. */
 #define	RTLD_DEFAULT	((void *) -2)	/* Use default search algorithm. */
+#endif /* not POSIX */
 
 #ifdef __cplusplus
 }

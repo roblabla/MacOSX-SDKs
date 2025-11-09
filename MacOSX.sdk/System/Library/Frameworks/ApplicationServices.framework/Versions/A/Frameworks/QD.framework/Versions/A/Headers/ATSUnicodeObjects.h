@@ -3,9 +3,9 @@
  
      Contains:   ATSUI object manipulation functions.
  
-     Version:    Quickdraw-150.7~2
+     Version:    Quickdraw-192.24~58
  
-     Copyright:  © 2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -2600,67 +2600,6 @@ ATSUGetObjFontFallbacks(
 /*  ATSUI font matching                                                         */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUSetFontFallbacks()
- *  
- *  Summary:
- *    Sets font fallback behavior on a global basis.
- *  
- *  Discussion:
- *    Control of font fallback behavior on a global basis is no longer
- *    recommended. Object based font fallbacks are preferred. See the
- *    functions ATSUCreateFontFallbacks, ATSUDisposeFontFallbacks,
- *    ATSUSetObjFontFallbacks, and ATSUGetObjFontFallbacks, as well as
- *    the kATSULineFontFallbacksTag attribute for more information
- *    about object based font fallbacks.
- *  
- *  Result:
- *    On success, noErr is returned. See MacErrors.h for possible error
- *    codes.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
- */
-extern OSStatus 
-ATSUSetFontFallbacks(
-  ItemCount                iFontFallbacksCount,
-  const ATSUFontID         iFontIDs[],
-  ATSUFontFallbackMethod   iFontFallbackMethod)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  ATSUGetFontFallbacks()
- *  
- *  Summary:
- *    Gets the current global font fallback behavior.
- *  
- *  Discussion:
- *    Control of font fallback behavior on a global basis is no longer
- *    recommended. Object based font fallbacks are preferred. See the
- *    functions ATSUCreateFontFallbacks, ATSUDisposeFontFallbacks,
- *    ATSUSetObjFontFallbacks, and ATSUGetObjFontFallbacks, as well as
- *    the kATSULineFontFallbacksTag attribute for more information
- *    about object based font fallbacks.
- *  
- *  Result:
- *    On success, noErr is returned. See MacErrors.h for possible error
- *    codes.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
- */
-extern OSStatus 
-ATSUGetFontFallbacks(
-  ItemCount                 iMaxFontFallbacksCount,
-  ATSUFontID                oFontIDs[],
-  ATSUFontFallbackMethod *  oFontFallbackMethod,
-  ItemCount *               oActualFallbacksCount)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
  *  ATSUMatchFontsToText()
  *  
  *  Summary:
@@ -2837,17 +2776,90 @@ ATSUGetTransientFontMatching(
 /* Functions listed beyond this point are either deprecated or not recommended */
 
 /* ---------------------------------------------------------------------------- */
+/* ATSUI global font fallback functions                                        */
+/* ---------------------------------------------------------------------------- */
+/*
+ *  ATSUSetFontFallbacks()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use ATSUSetObjFontFallbacks object API instead.
+ *  
+ *  Summary:
+ *    Sets font fallback behavior on a global basis.
+ *  
+ *  Discussion:
+ *    Control of font fallback behavior on a global basis is no longer
+ *    recommended. Object based font fallbacks are preferred. See the
+ *    functions ATSUCreateFontFallbacks, ATSUDisposeFontFallbacks,
+ *    ATSUSetObjFontFallbacks, and ATSUGetObjFontFallbacks, as well as
+ *    the kATSULineFontFallbacksTag attribute for more information
+ *    about object based font fallbacks.
+ *  
+ *  Result:
+ *    On success, noErr is returned. See MacErrors.h for possible error
+ *    codes.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.3
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
+ */
+extern OSStatus 
+ATSUSetFontFallbacks(
+  ItemCount                iFontFallbacksCount,
+  const ATSUFontID         iFontIDs[],
+  ATSUFontFallbackMethod   iFontFallbackMethod)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+
+
+/*
+ *  ATSUGetFontFallbacks()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use ATSUGetObjFontFallbacks object API instead.
+ *  
+ *  Summary:
+ *    Gets the current global font fallback behavior.
+ *  
+ *  Discussion:
+ *    Control of font fallback behavior on a global basis is no longer
+ *    recommended. Object based font fallbacks are preferred. See the
+ *    functions ATSUCreateFontFallbacks, ATSUDisposeFontFallbacks,
+ *    ATSUSetObjFontFallbacks, and ATSUGetObjFontFallbacks, as well as
+ *    the kATSULineFontFallbacksTag attribute for more information
+ *    about object based font fallbacks.
+ *  
+ *  Result:
+ *    On success, noErr is returned. See MacErrors.h for possible error
+ *    codes.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.3
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
+ */
+extern OSStatus 
+ATSUGetFontFallbacks(
+  ItemCount                 iMaxFontFallbacksCount,
+  ATSUFontID                oFontIDs[],
+  ATSUFontFallbackMethod *  oFontFallbackMethod,
+  ItemCount *               oActualFallbacksCount)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+
+
+/* ---------------------------------------------------------------------------- */
 /*  Handle-based functions                                                      */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUCreateTextLayoutWithTextHandle()
+ *  ATSUCreateTextLayoutWithTextHandle()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use ATSUCreateTextLayoutWithTextPtr instead.
  *  
  *  Discussion:
  *    This function is no longer recommended. Please use
  *    ATSUCreateTextLayoutWithTextPtr instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -2860,18 +2872,21 @@ ATSUCreateTextLayoutWithTextHandle(
   ItemCount            iNumberOfRuns,
   const UniCharCount   iRunLengths[],
   ATSUStyle            iStyles[],
-  ATSUTextLayout *     oTextLayout)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUTextLayout *     oTextLayout)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  ATSUSetTextHandleLocation()
+ *  ATSUSetTextHandleLocation()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use ATSUSetTextPointerLocation instead.
  *  
  *  Discussion:
  *    This function is no longer recommended. Please use
  *    ATSUSetTextPointerLocation instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -2881,14 +2896,17 @@ ATSUSetTextHandleLocation(
   UniCharArrayHandle   iText,
   UniCharArrayOffset   iTextOffset,
   UniCharCount         iTextLength,
-  UniCharCount         iTextTotalLength)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharCount         iTextTotalLength)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  ATSUI idle processing (deprecated)                                          */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUIdle()
+ *  ATSUIdle()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    No longer needed on MacOS X.
  *  
  *  Summary:
  *    Performs background processing.
@@ -2899,64 +2917,76 @@ ATSUSetTextHandleLocation(
  *    nothing.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
-ATSUIdle(ATSUTextLayout iTextLayout)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ATSUIdle(ATSUTextLayout iTextLayout)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /* ---------------------------------------------------------------------------- */
 /*  ATSUI Memory allocation specification functions (not in Carbon)             */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUCreateMemorySetting()
+ *  ATSUCreateMemorySetting()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    No longer needed on MacOS X.
  *  
  *  Discussion:
- *    ATSUI memory setting functions are not necessary on Mac OS X.
+ *    ATSUI memory setting functions are not necessary on MacOS X.
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         not available but deprecated in 10.0
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
 
 
 /*
- *  ATSUSetCurrentMemorySetting()
+ *  ATSUSetCurrentMemorySetting()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    No longer needed on MacOS X.
  *  
  *  Discussion:
- *    ATSUI memory setting functions are not necessary on Mac OS X.
+ *    ATSUI memory setting functions are not necessary on MacOS X.
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         not available but deprecated in 10.0
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
 
 
 /*
- *  ATSUGetCurrentMemorySetting()
+ *  ATSUGetCurrentMemorySetting()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    No longer needed on MacOS X.
  *  
  *  Discussion:
  *    ATSUI memory setting functions are not necessary on Mac OS X.
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         not available but deprecated in 10.0
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */
 
 
 /*
- *  ATSUDisposeMemorySetting()
+ *  ATSUDisposeMemorySetting()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    No longer needed on MacOS X.
  *  
  *  Discussion:
- *    ATSUI memory setting functions are not necessary on Mac OS X.
+ *    ATSUI memory setting functions are not necessary on MacOS X.
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         not available but deprecated in 10.0
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.6 and later
  */

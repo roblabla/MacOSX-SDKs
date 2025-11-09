@@ -1,5 +1,5 @@
 /*	NSObject.h
-	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>
@@ -75,6 +75,10 @@
 + (id)allocWithZone:(NSZone *)zone;
 + (id)alloc;
 - (void)dealloc;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (void)finalize;
+#endif
 
 - (id)copy;
 - (id)mutableCopy;

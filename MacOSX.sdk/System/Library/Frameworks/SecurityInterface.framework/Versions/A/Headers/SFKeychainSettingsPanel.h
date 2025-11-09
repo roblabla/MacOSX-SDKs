@@ -1,7 +1,7 @@
 /*
 	SFKeychainSettingsPanel.h
 	SecurityInterface
-	Copyright (c) 2000-2003, Apple Computer, Inc.
+	Copyright (c) 2000-2004 Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -37,7 +37,7 @@
 	SecKeychainRef _keychainRef;
     BOOL _lockOnSleepVal;
     SecKeychainSettings _settings;
-    void *_reserved_SFKeychainSettingsPanel;
+    id _reserved;
 }
 
 /*!
@@ -48,7 +48,7 @@
 
 /*!
     @method runModalForSettings:keychain:
-    @abstract Changes the keychain settings using the settings panel. The panel contains settings such as "lock on sleep", "automatic lock", etc. It also allows the user to change their keychain password. If the user attempts to change the settings of a locked keychain, the unlock panel will be presented.  It returns NSOKButton or NSCancelButton.
+    @abstract Changes the keychain settings using the settings panel. The panel contains settings such as "lock on sleep", "automatic lock", etc. If the user attempts to change the settings of a locked keychain, the unlock panel will be presented.  It returns NSOKButton or NSCancelButton.
     @param settings A pointer to a keychain settings structure. Since this structure is versioned, you must preallocate it and fill in the version of the structure.
     @param keychain The keychain that will have it's settings changed.
 */

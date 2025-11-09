@@ -1,5 +1,5 @@
 /*	NSUndoManager.h
-	Copyright (c) 1995-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1995-2005, Apple, Inc. All rights reserved.
 */
 
 //

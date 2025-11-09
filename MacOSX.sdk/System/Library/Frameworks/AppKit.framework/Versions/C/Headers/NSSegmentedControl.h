@@ -1,7 +1,7 @@
 /*
 	NSSegmentedControl.h
 	Application Kit
-	Copyright (c) 2003, Apple Computer, Inc.
+	Copyright (c) 2003-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -24,6 +24,10 @@
 
 - (void)setSelectedSegment:(int)selectedSegment;
 - (int)selectedSegment;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (BOOL)selectSegmentWithTag:(int)tag;
+#endif
 
 - (void)setWidth:(float)width forSegment:(int)segment;
 - (float)widthForSegment:(int)segment;

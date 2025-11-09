@@ -39,18 +39,29 @@ extern "C" {
 typedef	kern_return_t		IOReturn;
 
 #ifndef sys_iokit
-#define sys_iokit                    err_system(0x38)
+#define sys_iokit                         err_system(0x38)
 #endif /* sys_iokit */
-#define sub_iokit_common             err_sub(0)
-#define sub_iokit_usb                err_sub(1)
-#define sub_iokit_firewire           err_sub(2)
-#define sub_iokit_block_storage      err_sub(4)
-#define sub_iokit_graphics           err_sub(5)
-#define sub_iokit_bluetooth          err_sub(8)
-#define sub_iokit_pmu                err_sub(9)
-#define sub_iokit_reserved           err_sub(-1)
-#define	iokit_common_err(return)     (sys_iokit|sub_iokit_common|return)
-#define	iokit_family_err(sub,return) (sys_iokit|sub|return)
+#define sub_iokit_common                  err_sub(0)
+#define sub_iokit_usb                     err_sub(1)
+#define sub_iokit_firewire                err_sub(2)
+#define sub_iokit_block_storage           err_sub(4)
+#define sub_iokit_graphics                err_sub(5)
+#define sub_iokit_networking		  err_sub(6)
+#define sub_iokit_bluetooth               err_sub(8)
+#define sub_iokit_pmu                     err_sub(9)
+#define sub_iokit_acpi                    err_sub(10)
+#define sub_iokit_smbus                   err_sub(11)
+#define sub_iokit_ahci                    err_sub(12)
+#define sub_iokit_powermanagement         err_sub(13)
+//#define sub_iokit_hidsystem             err_sub(14)
+//#define sub_iokit_pccard                err_sub(21)
+
+#define sub_iokit_vendor_specific         err_sub(-2)
+#define sub_iokit_reserved                err_sub(-1)
+
+#define	iokit_common_err(return)          (sys_iokit|sub_iokit_common|return)
+#define	iokit_family_err(sub,return)      (sys_iokit|sub|return)
+#define iokit_vendor_specific_err(return) (sys_iokit|sub_iokit_vendor_specific|return)
 
 #define kIOReturnSuccess         KERN_SUCCESS            // OK
 #define kIOReturnError           iokit_common_err(0x2bc) // general error 	

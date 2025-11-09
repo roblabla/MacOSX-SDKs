@@ -3,9 +3,9 @@
  
      Contains:   Multiprocessing Information interfaces
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1995-2003 DayStar Digital, Inc.
+     Copyright:  © 1995-2006 DayStar Digital, Inc.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -39,6 +39,10 @@
 
 #if PRAGMA_ONCE
 #pragma once
+#endif
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 #pragma options align=power
@@ -137,10 +141,14 @@
  *  MPGetNextCpuID()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in MPDiagnostics 2.3 and later
  */
+extern OSStatus 
+MPGetNextCpuID(
+  MPCoherenceID   owningCoherenceID,
+  MPCpuID *       cpuID)                                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 /*
@@ -167,10 +175,14 @@
  *  MPGetNextTaskID()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in MPDiagnostics 2.3 and later
  */
+extern OSStatus 
+MPGetNextTaskID(
+  MPProcessID   owningProcessID,
+  MPTaskID *    taskID)                                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 /*
@@ -447,6 +459,9 @@ typedef struct MPAddressSpaceInfo       MPAddressSpaceInfo;
 
 #pragma options align=reset
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __MULTIPROCESSINGINFO__ */
 

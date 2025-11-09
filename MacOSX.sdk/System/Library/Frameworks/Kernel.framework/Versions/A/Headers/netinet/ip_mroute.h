@@ -87,7 +87,6 @@
 #define MRT_ASSERT      107     /* enable PIM assert processing */
 
 
-#define GET_TIME(t)	microtime(&t)
 
 /*
  * Types and macros for handling bitmaps with one bit per virtual interface.
@@ -172,27 +171,7 @@ struct sioc_vif_req {
     u_long ibytes;		/* Input byte count on vif		*/
     u_long obytes;		/* Output byte count on vif		*/
 };
-    
 
-/*
- * The kernel's virtual-interface structure.
- */
-struct vif {
-    u_char   		v_flags;     	/* VIFF_ flags defined above         */
-    u_char   		v_threshold;	/* min ttl required to forward on vif*/
-    u_int      		v_rate_limit; 	/* max rate			     */
-    struct tbf 	       *v_tbf;       	/* token bucket structure at intf.   */
-    struct in_addr 	v_lcl_addr;   	/* local interface address           */
-    struct in_addr 	v_rmt_addr;   	/* remote address (tunnels only)     */
-    struct ifnet       *v_ifp;	     	/* pointer to interface              */
-    u_long		v_pkt_in;	/* # pkts in on interface            */
-    u_long		v_pkt_out;	/* # pkts out on interface           */
-    u_long		v_bytes_in;	/* # bytes in on interface	     */
-    u_long		v_bytes_out;	/* # bytes out on interface	     */
-    struct route	v_route;	/* cached route if this is a tunnel */
-    u_int		v_rsvp_on;	/* RSVP listening on this vif */
-    struct socket      *v_rsvpd;	/* RSVP daemon socket */
-};
 
 /*
  * The kernel's multicast forwarding cache entry structure 
@@ -228,63 +207,6 @@ struct igmpmsg {
     u_char	    unused3;
     struct in_addr  im_src, im_dst;
 };
-
-/*
- * Argument structure used for pkt info. while upcall is made
- */
-struct rtdetq {
-    struct mbuf 	*m;		/* A copy of the packet		    */
-    struct ifnet	*ifp;		/* Interface pkt came in on	    */
-    vifi_t		xmt_vif;	/* Saved copy of imo_multicast_vif  */
-#if UPCALL_TIMING
-    struct timeval	t;		/* Timestamp */
-#endif /* UPCALL_TIMING */
-    struct rtdetq	*next;		/* Next in list of packets          */
-};
-
-#define MFCTBLSIZ	256
-#if (MFCTBLSIZ & (MFCTBLSIZ - 1)) == 0	  /* from sys:route.h */
-#define MFCHASHMOD(h)	((h) & (MFCTBLSIZ - 1))
-#else
-#define MFCHASHMOD(h)	((h) % MFCTBLSIZ)
-#endif
-
-#define MAX_UPQ	4		/* max. no of pkts in upcall Q */
-
-/*
- * Token Bucket filter code 
- */
-#define MAX_BKT_SIZE    10000             /* 10K bytes size 		*/
-#define MAXQSIZE        10                /* max # of pkts in queue 	*/
-
-/*
- * the token bucket filter at each vif
- */
-struct tbf
-{
-    struct timeval tbf_last_pkt_t; /* arr. time of last pkt 	*/
-    u_long tbf_n_tok;      	/* no of tokens in bucket 	*/
-    u_long tbf_q_len;    	/* length of queue at this vif	*/
-    u_long tbf_max_q_len;	/* max. queue length		*/
-    struct mbuf *tbf_q;		/* Packet queue			*/
-    struct mbuf *tbf_t;		/* tail-insertion pointer	*/
-};
-
-#ifdef KERNEL
-#ifdef __APPLE_API_PRIVATE
-
-struct sockopt;
-
-extern int	(*ip_mrouter_set) __P((struct socket *, struct sockopt *));
-extern int	(*ip_mrouter_get) __P((struct socket *, struct sockopt *));
-extern int	(*ip_mrouter_done) __P((void));
-#if MROUTING
-extern int	(*mrt_ioctl) __P((int, caddr_t));
-#else
-extern int	(*mrt_ioctl) __P((int, caddr_t, struct proc *));
-#endif
-
-#endif /* __APPLE_API_PRIVATE */
-#endif /* KERNEL */
+#define MFCTBLSIZ       256
 
 #endif /* _NETINET_IP_MROUTE_H_ */

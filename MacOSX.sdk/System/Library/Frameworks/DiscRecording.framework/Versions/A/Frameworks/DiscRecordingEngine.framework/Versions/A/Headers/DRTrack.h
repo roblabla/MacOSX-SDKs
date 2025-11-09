@@ -33,14 +33,14 @@
 	data is streamed to the disc from some data producer as it's needed. This is 
 	accomplished through an object associated with the track when the track is created 
 	called the <i>track producer</i>. A track producer is a class you create that implements 
-	the @link //apple_ref/occ/intfDRTrackDataProduction DRTrackDataProduction @/link informal protocol. This protocol defines all of 
+	the @link //apple_ref/occ/intf/DRTrackDataProduction DRTrackDataProduction @/link informal protocol. This protocol defines all of 
 	the methods that a track object will call during a burn to obtain data.
 	
 	<h3>Track Properties</h3>
 
 	A DRTrack object contains several properties which define the track for the burn.
 	These properties are stored in an NSDictionary and are accessed through the @link //apple_ref/occ/instm/DRTrack/properties properties @/link
-	and @link //apple_ref/occ/instm/DRTrack/setProperties%58 setProperties: @/link methods. 
+	and @link //apple_ref/occ/instm/DRTrack/setProperties: setProperties: @/link methods. 
 	
 	There are several properties that are required to be present and if they are not, will 
 	cause the burn to fail. These are:
@@ -89,14 +89,14 @@
 	data is streamed to the disc from some data producer as it's needed. This is 
 	accomplished through an object associated with the track when the track is created 
 	called the <i>track producer</i>. A track producer is a class you create that implements 
-	the @link //apple_ref/occ/intf/DRTrackDataProduction DRTrackDataProduction @/link informal protocol. This protocol defines all of 
+	the @link DRTrackDataProduction DRTrackDataProduction @/link informal protocol. This protocol defines all of 
 	the methods that a track object will call during a burn to obtain data.
 	
 	<h3>Track Properties</h3>
 
 	A DRTrack object contains several properties which define the track for the burn.
 	These properties are stored in an NSDictionary and are accessed through the @link //apple_ref/occ/instm/DRTrack/properties properties @/link
-	and @link //apple_ref/occ/instm/DRTrack/setProperties%58 setProperties: @/link methods. 
+	and @link //apple_ref/occ/instm/DRTrack/setProperties: setProperties: @/link methods. 
 	
 	There are several properties that are required to be present and if they are not, will 
 	cause the burn to fail. These are:
@@ -148,7 +148,7 @@
    	@method 		testProductionSpeedForInterval:
    	@abstract		Tests the production speed for a specified interval.
    	@discussion		Runs a fake "production" cycle, repeatedly asking the receiver for data by calling
-					it's producer's @link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataIntoBuffer%58length%58atAddress%58blockSize%58ioFlags%58 produceDataIntoBuffer:length:atAddress:blockSize:ioFlags: @/link for the 
+					it's producer's @link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataIntoBuffer:length:atAddress:blockSize:ioFlags: produceDataIntoBuffer:length:atAddress:blockSize:ioFlags: @/link for the 
 					specified time interval.
 						
 					Use this function to verify that the the production code can produce data fast 
@@ -165,7 +165,7 @@
    	@method 		testProductionSpeedForLength:
    	@abstract		Tests the production speed for a specified byte count.
    	@discussion		Runs a fake "production" cycle, repeatedly asking the receiver for data by calling
-					it's producer's @link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataIntoBuffer%58length%58atAddress%58blockSize%58ioFlags%58 produceDataIntoBuffer:length:atAddress:blockSize:ioFlags: @/link until 
+					it's producer's @link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataIntoBuffer:length:atAddress:blockSize:ioFlags: produceDataIntoBuffer:length:atAddress:blockSize:ioFlags: @/link until 
 					the specified length number of bytes have been produced.
 						
 					Use this function to verify that the the production code can produce data fast 
@@ -173,11 +173,12 @@
 					
 					Returns the calculated maximum speed the at which the receiver can produce data. 
 					This value should be used when setting up a burn to limit the burn speed
-   	@param 			interval	The length of the test in seconds.
+   	@param 			length	The length of the test in bytes.
    	@result			The maximum speed data can be produced at.
 */
 - (float) testProductionSpeedForLength:(uint32_t)length;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 /*!
 	@method		estimateLength
 	@abstract	Asks the track producer for a size estimate.
@@ -190,8 +191,8 @@
 				involved) can cause this call to take 30 seconds or more. Since your
 				main thread should not be allowed to block for this long, you may wish
 				to call this function on a separate thread.
+	@result		The estimated length of the track.
 */
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (uint64_t) estimateLength;
 #endif
 
@@ -214,6 +215,7 @@
    					of the track data itself is returned. This is a simple wrapper to obtain the 
    					@link DRTrackLengthKey DRTrackLengthKey @/link. If the @link DRTrackLengthKey DRTrackLengthKey @/link property has not been set for the track
    					this method will return a zero-length @link //apple_ref/occ/cl/DRMSF DRMSF @/link object (0m:0s:0f).
+	@result			A DRMSF representing the length of the track.
 */
 - (DRMSF*) length;
 
@@ -223,7 +225,7 @@
     @discussion		This is a simple wrapper to obtain the @link DRPreGapLengthKey DRPreGapLengthKey @/link. If the @link DRPreGapLengthKey DRPreGapLengthKey @/link 
     				property has not been set for the track this method will return a zero-length @link //apple_ref/occ/cl/DRMSF DRMSF @/link 
     				object (0m:0s:0f).
-  	
+  	@result			A DRMSF representing the length of the pre gap.
 */
 - (DRMSF*) preGap;
 
@@ -250,34 +252,35 @@
 	In concept a track data producer similar to an NSTable data source in Cocoa. 
 	Each producer method receives a pointer to the track it should produce data for. 
 	There is one method that <b>must</b> be implemented -
-	@link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataForTrack%58intoBuffer%58length%58atAddress%58blockSize%58ioFlags%58 produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link.
+	@link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link.
 	
 	The methods of this protocol will be called in roughly this order:
 	
 	<ol type="1">
-	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/prepareTrackForBurn%58 prepareTrackForBurn: @/link</li>
-	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/producePreGapForTrack%58intoBuffer%58length%58atAddress%58blockSize%58ioFlags%58 producePreGapForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link</li>
-	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataForTrack%58intoBuffer%58length%58atAddress%58blockSize%58ioFlags%58 produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link</li>
-	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/prepareTrackForVerification%58 prepareTrackForVerification: @/link</li>
-	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/verifyDataForTrack%58inBuffer%58length%58atAddress%58blockSize%58ioFlags%58 verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags: @/link</li>
-	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/cleanupTrackAfterVerification%58 cleanupTrackAfterVerification: @/link</li>
-	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/cleanupTrackAfterBurn%58 cleanupTrackAfterBurn: @/link</li>
+	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/prepareTrackForBurn: prepareTrackForBurn: @/link</li>
+	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/producePreGapForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: producePreGapForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link</li>
+	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link</li>
+	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/prepareTrackForVerification: prepareTrackForVerification: @/link</li>
+	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags: verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags: @/link</li>
+	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/cleanupTrackAfterVerification: cleanupTrackAfterVerification: @/link</li>
+	<li>@link //apple_ref/occ/intfm/DRTrackDataProduction/cleanupTrackAfterBurn: cleanupTrackAfterBurn: @/link</li>
 	</ol>
 	
 	If verification of the disc is not requested, or a track omits or defines 
 	@link DRVerificationTypeKey DRVerificationTypeKey @/link to be @link DRVerificationTypeNone DRVerificationTypeNone @/link, then 
-	@link //apple_ref/occ/intfm/DRTrackDataProduction/prepareTrackForVerification%58 prepareTrackForVerification: @/link, 
-	@link //apple_ref/occ/intfm/DRTrackDataProduction/verifyDataForTrack%58inBuffer%58length%58atAddress%58blockSize%58ioFlags%58 verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags: @/link and
-	@link //apple_ref/occ/intfm/DRTrackDataProduction/cleanupTrackAfterVerification%58 cleanupTrackAfterVerification: @/link
+	@link //apple_ref/occ/intfm/DRTrackDataProduction/prepareTrackForVerification: prepareTrackForVerification: @/link, 
+	@link //apple_ref/occ/intfm/DRTrackDataProduction/verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags: verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags: @/link and
+	@link //apple_ref/occ/intfm/DRTrackDataProduction/cleanupTrackAfterVerification: cleanupTrackAfterVerification: @/link
 	will not be called.
 	
-	During a burn, @link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataForTrack%58intoBuffer%58length%58atAddress%58blockSize%58ioFlags%58 produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link is called
+	During a burn, @link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link is called
 	very frequently in a real-time thread. Because of this, it is of utmost importance that
 	this method very effficient and does not perform any long task, since by doing so, the
 	burn may fail because data is not available to write to the disc.
 */
 @protocol DRTrackDataProduction
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 /*!
 	@method			estimateLengthOfTrack:
 	@abstract		Estimates the size of the track to be burned.
@@ -289,7 +292,6 @@
 	@result			The number of blocks of data that the track will occupy. The estimate should be 
 					reasonably accurate, and no smaller than the actual size that will be needed.
 */
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (uint64_t) estimateLengthOfTrack:(DRTrack*)track;
 #endif
 
@@ -379,6 +381,24 @@
 	@result			<i>YES</i> to indicate that the verification should proceed and <i>NO</i> to indicate a failure occurred.
 */
 - (BOOL) prepareTrackForVerification:(DRTrack*)track;
+
+/*!
+	@method			verifyPreGapForTrack:inBuffer:length:atAddress:blockSize:ioFlags:
+	@abstract		Checks the integrity track pregap after a burn.
+	@discussion		If the class implementing this method asks for a verification type of @link DRVerificationTypeReceiveData DRVerificationTypeReceiveData @/link, 
+					then a series of calls to this method will start. It's up to the class to reproduce the pregap
+					again and compare it to the data passed in buffer. The buffer passed in will be a multiple of blockSize 
+					(bufferLength == blockSize * N, where N > 1). address is the sector address on the disc from
+					the start of the track that is the buffer was written to.
+	@param			track	The track object being burned
+	@param			buffer	The data read in from the track to compare with
+	@param			bufferLength	The length of buffer
+	@param			address	The on-disc address of where data will was read from.
+	@param			blockSize	the size of each block on the disc. It's best to return a multiple of this size.
+	@param			flags	flags
+	@result			<i>YES</i> to indicate that the data compared successfully and <i>NO</i> to indicate a failure occurred.
+*/
+- (BOOL) verifyPreGapForTrack:(DRTrack*)track inBuffer:(const char*)buffer length:(uint32_t)bufferLength atAddress:(uint64_t)address blockSize:(uint32_t)blockSize ioFlags:(uint32_t*)flags;
 
 /*!
 	@method			verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags:
@@ -499,6 +519,22 @@ extern NSString* const DRMaxBurnSpeedKey		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LA
 extern NSString* const DRPreGapLengthKey		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!
+	@const		DRPreGapIsRequiredKey
+	@discussion	For CD tracks only. NSNumber indicating whether the pregap listed for the 
+				track is required.  If this key is not present, the track will behave as 
+				though the key were <i>NO</i>.
+				
+				If this key's value is set to <i>YES</i> and the device does
+				not support the exact pregap length, the burn
+				will fail with a return value of @link //apple_ref/c/econst/kDRDevicePregapLengthNotAvailableErr kDRDevicePregapLengthNotAvailableErr @/link.
+				
+				If this key's value is set to <i>YES</i> and the device does
+				not support any of the suggested pregap length, the engine
+				will choose an alternate pregap length. 
+*/
+extern const CFStringRef kDRPreGapIsRequiredKey					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
 	@const		DRDVDTimestampKey
 	@discussion	For DVD tracks only.  NSData containing the DVD timestamp structure sent
 				through the SEND DVD STRUCTURE command.  The contents of this will be
@@ -589,7 +625,7 @@ extern NSString* const DRSerialCopyManagementStateKey	AVAILABLE_MAC_OS_X_VERSION
 	@const		DRVerificationTypeProduceAgain
 	@discussion	One of the possible values of the @link DRVerificationTypeKey DRVerificationTypeKey @/link.
 				The engine will simply begin another production cycle and start calling 
-				<@link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataForTrack%58intoBuffer%58length%58atAddress%58blockSize%58ioFlags%58 produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link again.
+				<@link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link again.
 */
 extern NSString* const DRVerificationTypeProduceAgain	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
@@ -597,9 +633,16 @@ extern NSString* const DRVerificationTypeProduceAgain	AVAILABLE_MAC_OS_X_VERSION
 	@const		DRVerificationTypeReceiveData
 	@discussion	One of the possible values of the @link DRVerificationTypeKey DRVerificationTypeKey @/link.
 				The engine will begin reading data from the disc and calling
-				@link //apple_ref/occ/intfm/DRTrackDataProduction/verifyDataForTrack%58inBuffer%58length%58atAddress%58blockSize%58ioFlags%58 verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags: @/link.
+				@link //apple_ref/occ/intfm/DRTrackDataProduction/verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags: verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags: @/link.
 */
 extern NSString* const DRVerificationTypeReceiveData	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/*!
+	@const		DRVerificationTypeChecksum
+	@discussion	One of the possible values of the @link DRVerificationTypeKey DRVerificationTypeKey @/link.
+				The engine will verify the track data with an internally calculated checksum.
+*/
+extern NSString * const DRVerificationTypeChecksum		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
 	@const		DRVerificationTypeNone
@@ -787,7 +830,7 @@ extern NSString* const DRDataPreparer				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LAT
 
 /*!
 	@const		DRApplicationIdentifier
-	@discussion	NSString indicating the application identifier for ISO and Joliet volumes.
+	@discussion	NSString indicating the application identifier for ISO, Joliet and UDF volumes.
 */
 extern NSString* const DRApplicationIdentifier		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 

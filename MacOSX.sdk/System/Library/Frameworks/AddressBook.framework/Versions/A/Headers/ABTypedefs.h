@@ -51,7 +51,22 @@ typedef enum _ABSearchComparison {
         kABPrefixMatch,
         kABPrefixMatchCaseInsensitive,
 #if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
-        kABBitsInBitFieldMatch
+        kABBitsInBitFieldMatch,
+#endif
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
+        kABDoesNotContainSubString,
+        kABDoesNotContainSubStringCaseInsensitive,
+        kABNotEqualCaseInsensitive,
+        kABSuffixMatch,
+        kABSuffixMatchCaseInsensitive,
+        kABWithinIntervalAroundToday,
+        kABWithinIntervalAroundTodayYearless,
+        kABNotWithinIntervalAroundToday,
+        kABNotWithinIntervalAroundTodayYearless,
+        kABWithinIntervalFromToday,
+        kABWithinIntervalFromTodayYearless,
+        kABNotWithinIntervalFromToday,
+        kABNotWithinIntervalFromTodayYearless
 #endif
 } ABSearchComparison;
 

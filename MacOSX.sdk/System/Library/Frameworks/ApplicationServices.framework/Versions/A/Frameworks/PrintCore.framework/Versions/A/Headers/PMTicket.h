@@ -199,21 +199,6 @@ typedef struct PMTicketItemStruct       PMTicketItemStruct;
 
 /* ENUMS for Ticket Values */
 
-/* The values for kPMDuplexingKey */
-
-enum {
-	kPMDuplexNone = 1,	
-	// Print on both sides of the paper, pages flip from left to right.
-    kPMDuplexNoTumble = 2,
-	// Print on both sides of the paper, tumbling on so pages flip top to bottom.
-	kPMDuplexTumble = 3,
-	// Print on only one side of the paper, but tumble the images while printing.
-	kPMSimplexTumble = 4
-};
-/* If the kPMDuplexingKey is not in a ticket then kPMDuplexDefault should be assumed.
- */
-#define	kPMDuplexDefault	(kPMDuplexNone)
-
 /* The values for kPMCoverPageKey */
 
 enum {
@@ -264,6 +249,8 @@ enum {
 #define kPMMatchPaperKey            		CFSTR( kPMMatchPaperStr )           		/* CFBoolean tells if we need to find a closest match for this paper */
 #define kPMConstrainedPaperStr            	kPMPaperInfoPrelude "PMConstrainedPaper"
 #define kPMConstrainedPaperKey            	CFSTR( kPMConstrainedPaperStr )           	/* CFBoolean tells if this paper is constrained */
+#define kPMCustomPaperStr            	kPMPaperInfoPrelude "PMCustomPaper"
+#define kPMCustomPaperKey            	CFSTR( kPMCustomPaperStr )           	/* CFBoolean tells if this paper is a custom paper */
 
 /* Ticket: PAGE FORMAT TICKET
     Describes the application's drawing environment, including resolution, scaling, and
@@ -417,6 +404,18 @@ enum {
 #define kPMFaxUseSoundKey		    		CFSTR( kPMFaxUseSoundStr )			/* CFString - fax use sound */
 #define kPMFaxWaitForDialToneStr			"faxWaitForDialTone"
 #define kPMFaxWaitForDialToneKey		    CFSTR( kPMFaxWaitForDialToneStr )	/* CFString - fax wait for dial tone */
+
+#define kPMFaxToLabelStr					"faxToLabel"
+#define kPMFaxToLabelKey					CFSTR( kPMFaxToLabelStr )			/* CFString - To: label */
+#define kPMFaxFromLabelStr					"faxFromLabel"
+#define kPMFaxFromLabelKey					CFSTR( kPMFaxFromLabelStr )			/* CFString - From: label */
+#define kPMFaxDateLabelStr					"faxDateLabel"
+#define kPMFaxDateLabelKey					CFSTR( kPMFaxDateLabelStr )			/* CFString - Date: label */
+#define kPMFaxSubjectLabelStr				"faxSubjectLabel"
+#define kPMFaxSubjectLabelKey				CFSTR( kPMFaxSubjectLabelStr )		/* CFString - Subject: label */
+#define kPMFaxSheetsLabelStr				"faxSheetsLabel"
+#define kPMFaxSheetsLabelKey				CFSTR( kPMFaxSheetsLabelStr )		/* CFString - Sheets to Follow: label */
+
 
 
 #define kPMCoverPageStr                     kPMPrintSettingsPrelude "PMCoverPage"
@@ -646,6 +645,38 @@ enum {
 #define kPMCVColorSyncProfileIDKey			CFSTR( kPMCVColorSyncProfileIDStr )			/* CFNumber, kCFNumberSInt32Type, the profile ID for the profile to be used with this job. */
 
 
+#define kPMPageToPaperMappingTypeStr	    "com.apple.print.PageToPaperMappingType"
+#define kPMPageToPaperMappingTypeKey	    CFSTR(kPMPageToPaperMappingTypeStr) /* a CFNumber - values from PMPageToPaperMappingType */
+#define kPMPageToPaperMediaNameStr	    "com.apple.print.PageToPaperMappingMediaName" 
+#define kPMPageToPaperMediaNameKey	    CFSTR(kPMPageToPaperMediaNameStr) /* a CFString - the untranslated media name for the destination sheet */
+
+#define kPMPageToPaperMappingAllowScalingUpStr	    "com.apple.print.PageToPaperMappingAllowScalingUp"
+#define kPMPageToPaperMappingAllowScalingUpKey	    CFSTR(kPMPageToPaperMappingAllowScalingUpStr) /* a CFBoolean - if true, allow scaling up to fit
+												    destination sheet, otherwise do not scale
+												    up if destination sheet is larger than formatting
+												    sheet. Default value: false. */
+
+/* Possible values for the kPMColorMatchingModeKey*/
+#define kPMColorSyncMatchingStr		    "AP_ColorSyncColorMatching"
+#define kPMColorSyncMatching		    CFSTR( kPMColorSyncMatchingStr )
+#define kPMVendorColorMatchingStr	    "AP_VendorColorMatching"
+#define kPMVendorColorMatching		    CFSTR( kPMVendorColorMatchingStr )
+#define kPMApplicationColorMatchingStr      "AP_ApplicationColorMatching"
+#define kPMApplicationColorMatching	    CFSTR( kPMApplicationColorMatchingStr )
+
+#define kPMColorMatchingModeStr		    "AP_ColorMatchingMode"
+#define kPMColorMatchingModeKey		    CFSTR( kPMColorMatchingModeStr )   /* Value is CFStringRef - one of kPMColorSyncMatching, 
+										kPMVendorColorMatching, kPMApplicationColorMatching */
+
+#define kPMSupportsVendorMatchingModeStr    "APSupportsCustomColorMatching"
+#define kPMSupportsVendorMatchingModeKey    CFSTR( kPMSupportsVendorMatchingModeStr )
+
+/* Page to Paper Mapping Types */
+typedef enum{
+    kPMPageToPaperMappingNone = 1,
+    kPMPageToPaperMappingScaleToFit,
+}PMPageToPaperMappingType;
+
 /* END OF SECTION II: TICKET KEYS */
 
 /* SECTION III, FUNCTIONS: */
@@ -761,7 +792,14 @@ PMXMLURLToTicket				( CFAllocatorRef allocator,
                                   CFPropertyListFormat *format, 
                                   CFStringRef *errorString );
 
-/* Read from file and convert from XML. */
+/* Convert to XML and write to a file */
+EXTERN_API_C( OSStatus )
+PMTicketToXMLURL				( PMTicketRef ticket, 
+                                    CFURLRef anXMLFileURL,
+                                    CFPropertyListFormat format, 
+                                    CFStringRef *errorString );
+
+/* Read from file and convert to XML. */
 EXTERN_API_C( OSStatus )
 PMTicketReadXMLFromFile         (CFAllocatorRef         allocator,
                                  const char *           path,

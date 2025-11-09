@@ -93,6 +93,8 @@ extern CFArrayRef ABCopyArrayOfAllGroups(ABAddressBookRef addressBook);         
 //      ABRecord
 // --------------------------------------------------------------------------------
 
+extern ABRecordRef ABRecordCreateCopy(ABRecordRef record) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
 extern CFStringRef ABRecordCopyRecordType(ABRecordRef record);
 
     // --- Property value
@@ -101,6 +103,8 @@ extern CFTypeRef ABRecordCopyValue(ABRecordRef record, CFStringRef property);
 extern bool ABRecordSetValue(ABRecordRef record, CFStringRef property, CFTypeRef value);
     // takes a CFDictionary for multi-value properties
 extern bool ABRecordRemoveValue(ABRecordRef record, CFStringRef property);
+   // is the record read only
+extern bool ABRecordIsReadOnly(ABRecordRef record) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
     // ---- Unique ID access convenience
 extern CFStringRef ABRecordCopyUniqueId(ABRecordRef record);
@@ -135,7 +139,7 @@ extern CFArrayRef ABGroupCopyArrayOfAllSubgroups(ABGroupRef group);
 extern bool ABGroupAddGroup(ABGroupRef group, ABGroupRef groupToAdd);
 extern bool ABGroupRemoveGroup(ABGroupRef group, ABGroupRef groupToRemove);
 
-    // --- Dealong with Parents
+    // --- Dealing with Parents
 extern CFArrayRef ABGroupCopyParentGroups(ABGroupRef group);
 
     // --- Distribution list

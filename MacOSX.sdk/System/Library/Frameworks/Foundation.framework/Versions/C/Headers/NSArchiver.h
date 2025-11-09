@@ -1,5 +1,5 @@
 /*	NSArchiver.h
-	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
@@ -51,7 +51,7 @@
     char		unused2;
     void		*pointerTable;
     void		*stringTable;
-    void		*classVersions;
+    id			classVersions;
     int			lastLabel;
     void		*map;
     void		*allUnarchivedObjects;

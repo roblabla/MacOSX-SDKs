@@ -3,9 +3,9 @@
  
      Contains:   Icon Utilities and Icon Services Interfaces.
  
-     Version:    HIServices-125.7~1
+     Version:    HIServices-169~651
  
-     Copyright:  © 1990-2003 by Apple Computer, Inc. All rights reserved
+     Copyright:  © 1990-2006 by Apple Computer, Inc. All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -653,7 +653,7 @@ PlotIconMethod(
  *  GetLabel()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Panther
+ *    Thread safe since version 10.3
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1492,7 +1492,7 @@ GetIconFamilyData(
  *  GetIconRefOwners()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1515,7 +1515,7 @@ GetIconRefOwners(
  *  AcquireIconRef()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1541,7 +1541,7 @@ AcquireIconRef(IconRef theIconRef)                            AVAILABLE_MAC_OS_X
  *  ReleaseIconRef()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1581,7 +1581,7 @@ ReleaseIconRef(IconRef theIconRef)                            AVAILABLE_MAC_OS_X
  *  GetIconRefFromFile()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1614,7 +1614,7 @@ GetIconRefFromFile(
  *  GetIconRef()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1647,7 +1647,7 @@ GetIconRef(
  *  GetIconRefFromFolder()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1680,7 +1680,7 @@ GetIconRefFromFolder(
  *    this information instead.
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -1723,7 +1723,7 @@ GetIconRefFromFileInfo(
   const FSCatalogInfo *    inCatalogInfo,          /* can be NULL */
   IconServicesUsageFlags   inUsageFlags,
   IconRef *                outIconRef,
-  SInt16 *                 outLabel)                          AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  SInt16 *                 outLabel)               /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /* GetIconRefFromTypeInfo*/
@@ -1840,7 +1840,7 @@ GetIconRefFromIconFamilyPtr(
  *  RegisterIconRefFromIconFamily()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1871,7 +1871,7 @@ RegisterIconRefFromIconFamily(
  *  RegisterIconRefFromResource()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1896,7 +1896,7 @@ RegisterIconRefFromResource(
  *    associates it with a creator/type pair.
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -1937,7 +1937,7 @@ RegisterIconRefFromFSRef(
  *  UnregisterIconRef()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1968,7 +1968,7 @@ UnregisterIconRef(
  *  UpdateIconRef()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1992,7 +1992,7 @@ UpdateIconRef(IconRef theIconRef)                             AVAILABLE_MAC_OS_X
  *  OverrideIconRefFromResource()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2043,7 +2043,7 @@ OverrideIconRef(
  *  RemoveIconRefOverride()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2073,7 +2073,7 @@ RemoveIconRefOverride(IconRef theIconRef)                     AVAILABLE_MAC_OS_X
  *  CompositeIconRef()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2098,7 +2098,7 @@ CompositeIconRef(
  *  IsIconRefComposite()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2129,7 +2129,7 @@ IsIconRefComposite(
  *  IsValidIconRef()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2178,7 +2178,7 @@ PlotIconRef(
  *    This routines plots an IconRef using Quartz/CoreGraphics.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe since version 10.4
  *  
  *  Parameters:
  *    
@@ -2401,7 +2401,7 @@ IsDataAvailableInIconRef(
  *  FlushIconRefs()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.3
@@ -2427,7 +2427,7 @@ FlushIconRefs(
  *  FlushIconRefsByVolume()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.3
@@ -2570,7 +2570,7 @@ GetIconRefVariant(
  *  RegisterIconRefFromIconFile()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework

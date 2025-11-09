@@ -1,12 +1,13 @@
 /*
 	NSKeyValueObserving.h
-	Copyright (c) 2003, Apple Computer, Inc.
+	Copyright (c) 2003-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
+#import <Foundation/NSSet.h>
 
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 @class NSIndexSet, NSString;
 
@@ -23,18 +24,35 @@ typedef enum {
     NSKeyValueChangeReplacement = 4
 } NSKeyValueChange;
 
-FOUNDATION_EXPORT NSString *NSKeyValueChangeKindKey;
-FOUNDATION_EXPORT NSString *NSKeyValueChangeNewKey;
-FOUNDATION_EXPORT NSString *NSKeyValueChangeOldKey;
-FOUNDATION_EXPORT NSString *NSKeyValueChangeIndexesKey;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+
+// Possible values for the second argument of -willChangeValueForKey:withSetMutation:usingObjects: and -didChangeValueForKey:withSetMutation:usingObjects:.
+typedef enum {
+    
+    // The set representing an unordered to-many relationship is being changed using NSMutableSet's -unionSet:, -minusSet:, -intersectSet:, or -setSet: method, or something that has the same semantics.
+    NSKeyValueUnionSetMutation = 1,
+    NSKeyValueMinusSetMutation = 2,
+    NSKeyValueIntersectSetMutation = 3,
+    NSKeyValueSetSetMutation = 4
+    
+} NSKeyValueSetMutationKind;
+
+#endif
+
+FOUNDATION_EXPORT NSString *const NSKeyValueChangeKindKey AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString *const NSKeyValueChangeNewKey AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString *const NSKeyValueChangeOldKey AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString *const NSKeyValueChangeIndexesKey AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 @interface NSObject(NSKeyValueObserving)
 
-// Given that the receiver has been registered as an observer of the value at the key path relative to the object, be notified that the value has changed.  context is the same pointer that was passed in at observer-registration time, and the change dictionary contains the following entries:
-// NSKeyValueChangeKindKey - An NSNumber containing an NSKeyValueChange, indicating what sort of change has happened (use -[NSNumber intValue]).  A value of NSKeyValueChangeSetting indicates that the observed object has received a -setValue:forKey: message, or that the key-value-coding-compliant set method for the key has been invoked, or that -willChangeValueForKey:/-didChangeValueForKey: has otherwise been invoked.  A value of NSKeyValueChangeInsertion, NSKeyValueChangeRemoval, or NSKeyValueChangeReplacement indicates that mutating messages have been sent to the array returned by a -mutableArrayValueForKey: message sent to the object, or that one of the key-value-coding-compliant array mutation methods for the key has been invoked, or that -willChange:valuesAtIndexes:forKey:/-didChange:valuesAtIndexes:forKey: has otherwise been invoked.
-// NSKeyValueChangeNewKey - If the value of the NSKeyValueChangeKindKey entry is NSKeyValueChangeSetting, and NSKeyValueObservingOptionNew was specified when the observer was registered, the value after the setting has taken place (or an NSNull if the new value is nil).  For NSKeyValueChangeInsertion or NSKeyValueChangeReplacement, if NSKeyValueObservingOptionNew was specified when the observer was registered, an NSArray of the objects that have been inserted, or have replaced other objects, respectively.
-// NSKeyValueChangeOldKey - If the value of the NSKeyValueChangeKindKey entry is NSKeyValueChangeSetting, and NSKeyValueObservingOptionOld was specified when the observer was registered, the value from before the setting took place (or an NSNull if the old value was nil).  For NSKeyValueChangeRemoval or NSKeyValueChangeReplacement, if NSKeyValueObservingOptionOld was specified when the observer was registered, an NSArray of the objects that have been removed, or have been replaced by other objects, respectively.
-// NSKeyValueChangeIndexesKey - If the value of the NSKeyValueChangeKindKey entry is NSKeyValueChangeInsertion, NSKeyValueChangeRemoval, or NSKeyValueChangeReplacement, an NSIndexSet containing the indexes of the inserted, removed, or replaced objects.
+// Given that the receiver has been registered as an observer of the value at a key path relative to an object, be notified that the value has changed. The change dictionary always contains an NSKeyValueChangeKindKey entry whose value is an NSNumber wrapping an NSKeyValueChange (use -[NSNumber intValue]). The meaning of NSKeyValueChange depends on what sort of property is identified by the key path:
+// - For any sort of property (attribute, to-one relationship, or ordered or unordered to-many relationship) NSKeyValueChangeSetting indicates that the observed object has received a -setValue:forKey: message, or that the key-value coding-compliant set method for the key has been invoked, or that a -willChangeValueForKey:/-didChangeValueForKey: pair has otherwise been invoked.
+// - For an _ordered_ to-many relationship, NSKeyValueChangeInsertion, NSKeyValueChangeRemoval, and NSKeyValueChangeReplacement indicate that a mutating message has been sent to the array returned by a -mutableArrayValueForKey: message sent to the object, or that one of the key-value coding-compliant array mutation methods for the key has been invoked, or that a -willChange:valuesAtIndexes:forKey:/-didChange:valuesAtIndexes:forKey: pair has otherwise been invoked.
+// - For an _unordered_ to-many relationship (introduced in Mac OS 10.4), NSKeyValueChangeInsertion, NSKeyValueChangeRemoval, and NSKeyValueChangeReplacement indicate that a mutating message has been sent to the set returned by a -mutableSetValueForKey: message sent to the object, or that one of the key-value coding-compliant set mutation methods for the key has been invoked, or that a -willChangeValueForKey:withSetMutation:usingObjects:/-didChangeValueForKey:withSetMutation:usingObjects: pair has otherwise been invoked.
+// For any sort of property, the change dictionary always contains an NSKeyValueChangeNewKey entry if NSKeyValueObservingOptionNew was specified at observer-registration time, likewise for NSKeyValueChangeOldKey if NSKeyValueObservingOptionOld was specified. See the comments for the NSKeyValueObserverNotification informal protocol methods for what the values of those entries will be.
+// For an _ordered_ to-many relationship, the change dictionary always contains an NSKeyValueChangeIndexesKey entry whose value is an NSIndexSet containing the indexes of the inserted, removed, or replaced objects, unless the change is an NSKeyValueChangeSetting.
+//  context is always the same pointer that was passed in at observer-registration time.
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 
 @end
@@ -53,17 +71,52 @@ FOUNDATION_EXPORT NSString *NSKeyValueChangeIndexesKey;
 - (void)addObserver:(NSObject *)observer toObjectsAtIndexes:(NSIndexSet *)indexes forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context;
 - (void)removeObserver:(NSObject *)observer fromObjectsAtIndexes:(NSIndexSet *)indexes forKeyPath:(NSString *)keyPath;
 
+// NSArrays are not observable, so these methods raise exceptions when invoked on NSArrays. Instead of observing an array, observe the ordered to-many relationship for which the array is the collection of related objects.
+- (void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context;
+- (void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath;
+
 @end
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+
+@interface NSSet(NSKeyValueObserverRegistration)
+
+// NSSets are not observable, so these methods raise exceptions when invoked on NSSets. Instead of observing a set, observe the unordered to-many relationship for which the set is the collection of related objects.
+- (void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context;
+- (void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath;
+
+@end
+
+#endif
 
 @interface NSObject(NSKeyValueObserverNotification)
 
-// Prepare to send, and send, respectively, an -observeValueForKeyPath:ofObject:change:context: message whose kind is NSKeyValueChangeSetting to each registered observer of the receiver.
+// Given a key that identifies a property (attribute, to-one relationship, or ordered or unordered to-many relationship), prepare to send, and send, respectively, an -observeValueForKeyPath:ofObject:change:context: notification message whose kind is NSKeyValueChangeSetting to each of the receiver's observers registered for the key. Invocations of these methods must always be paired. The change dictionaries in notifications resulting from use of these methods will contain optional entries if requested at observer registration time:
+// - The NSKeyValueChangeOldKey entry, if present, contains the value returned by -valueForKey: at the instant that -willChangeValueForKey: is invoked (or an NSNull if -valueForKey: returns nil).
+// - The NSKeyValueChangeNewKey entry, if present, contains the value returned by -valueForKey: at the instant that -didChangeValueForKey: is invoked (or an NSNull if -valueForKey: returns nil).
 - (void)willChangeValueForKey:(NSString *)key;
 - (void)didChangeValueForKey:(NSString *)key;
 
-// Prepare to send, and send, respectively, an -observeValueForKeyPath:ofObject:change:context: message whose message is of the passed-in kind to each registered observer of the receiver.
-- (void)willChange:(NSKeyValueChange)change valuesAtIndexes:(NSIndexSet *)indexes forKey:(NSString *)key;
-- (void)didChange:(NSKeyValueChange)change valuesAtIndexes:(NSIndexSet *)indexes forKey:(NSString *)key;
+// Given a key that identifies an _ordered_ to-many relationship, prepare to send, and send, respectively, an -observeValueForKeyPath:ofObject:change:context: message of the passed-in change kind to each of the receiver's observers registered for the key. The passed-in kind must be NSKeyValueChangeInsertion, NSKeyValueChangeRemoval, or NSKeyValueChangeReplacement. The passed-in index set must be the indexes of the objects being inserted, removed, or replaced. Invocations of these methods must always be paired, with identical arguments. The change dictionaries in notifications resulting from use of these methods will contain optional entries if requested at observer registration time:
+// - The NSKeyValueChangeOldKey entry, if present (only for NSKeyValueChangeRemoval and NSKeyValueChangeReplacement), contains an array of the indexed objects from the array returned by -valueForKey: at the instant that -willChangeValueForKey:valuesAtIndexes:forKey: is invoked.
+// - The NSKeyValueChangeNewKey entry, if present (only for NSKeyValueChangeInsertion and NSKeyValueChangeReplacement), contains an array of the indexed objects from the array returned by -valueForKey: at the instant that -didChangeValueForKey:valuesAtIndexes:forKey: is invoked.
+- (void)willChange:(NSKeyValueChange)changeKind valuesAtIndexes:(NSIndexSet *)indexes forKey:(NSString *)key;
+- (void)didChange:(NSKeyValueChange)changeKind valuesAtIndexes:(NSIndexSet *)indexes forKey:(NSString *)key;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+
+// Given a key that identifies an _unordered_ to-many relationship, prepare to send, and send, respectively, an -observeValueForKeyPath:ofObject:change:context: message. The passed-in mutation kind corresponds to an NSMutableSet method. The passed-in set must contain the set that would be passed to the corresponding NSMutableSet method. Invocations of these methods must always be paired, with identical arguments. The change dictionaries in notifications resulting from use of these methods always contain an NSKeyValueChangeKindKey entry. Its value will depend on the passed-in mutationKind value:
+// - NSKeyValueUnionSetMutation -> NSKeyValueChangeInsertion
+// - NSKeyValueMinusSetMutation -> NSKeyValueChangeRemoval
+// - NSKeyValueIntersectSetMutation -> NSKeyValueChangeRemoval
+// - NSKeyValueSetSetMutation -> NSKeyValueChangeReplacement
+// The change dictionary may also contain optional entries:
+// - The NSKeyValueChangeOldKey entry, if present (only for for NSKeyValueChangeRemoval and NSKeyValueChangeReplacement), contains the set of objects that were removed.
+// - The NSKeyValueChangeNewKey entry, if present (only for NSKeyValueChangeInsertion and NSKeyValueChangeReplacement), contains the set of objects that were added.
+- (void)willChangeValueForKey:(NSString *)key withSetMutation:(NSKeyValueSetMutationKind)mutationKind usingObjects:(NSSet *)objects;
+- (void)didChangeValueForKey:(NSString *)key withSetMutation:(NSKeyValueSetMutationKind)mutationKind usingObjects:(NSSet *)objects;
+
+#endif
 
 @end
 

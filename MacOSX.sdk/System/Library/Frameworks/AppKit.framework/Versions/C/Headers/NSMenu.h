@@ -1,7 +1,7 @@
 /*
         NSMenu.h
         Application Kit
-        Copyright (c) 1996-2003, Apple Computer, Inc.
+        Copyright (c) 1996-2005, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -19,7 +19,7 @@
     @private
     NSMenu *_supermenu;
     NSString *_title;
-    void *_itemArray;
+    id _itemArray;
     id _menuImpl;
     struct __mFlags {
         unsigned int noAutoenable:1;
@@ -118,6 +118,10 @@
 - (id)delegate;
 #endif
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (float)menuBarHeight;
+#endif
+
 @end
 
 @interface NSMenu(NSSubmenuAction)
@@ -147,6 +151,4 @@ APPKIT_EXTERN NSString *NSMenuDidRemoveItemNotification;
 APPKIT_EXTERN NSString *NSMenuDidChangeItemNotification;
     // All three of these have a user info key NSMenuItemIndex with a NSNumber value.
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
-APPKIT_EXTERN NSString *NSMenuDidEndTrackingNotification;
-#endif
+APPKIT_EXTERN NSString *NSMenuDidEndTrackingNotification    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;

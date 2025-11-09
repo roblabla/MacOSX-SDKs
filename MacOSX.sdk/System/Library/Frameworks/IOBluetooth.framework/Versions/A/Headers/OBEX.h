@@ -62,7 +62,11 @@ enum OBEXErrorCodes
 	kOBEXUnsupportedError				= -21852,		// We don't currently handle whatever you are trying to do.
 	kOBEXInternalError					= -21853,		// A problem has occurred in our internal code.
 	kOBEXBadArgumentError				= -21854,		// A bad argument was passed to an OBEX function.
-
+	kOBEXTimeoutError					= -21855,		// timeout error
+	kOBEXBadRequestError				= -21856,		// bad request error
+	kOBEXCancelledError					= -21857,
+	
+	
 	kOBEXSessionBusyError				= -21875,		// Session is busy with a command already.
 	kOBEXSessionNotConnectedError		= -21876,		// Session does not have an open connection.
 	kOBEXSessionBadRequestError			= -21877,		// Whatever you are trying to do is invalid (trying to send more data than the max packet size supports, e.g.).
@@ -1387,7 +1391,7 @@ CFDictionaryRef OBEXGetHeaders( const void* inData, size_t inDataSize );
 	uint8_t* 				headerDataPtr;
 	uint32_t 				headerDataLength;
 	
-	dictionary = CFDictionaryCreateMutable( NULL, 1, NULL, NULL );
+	dictionary = CFDictionaryCreateMutable( NULL, 0, NULL, NULL );
 	
 	// Package up desired headers.
 
@@ -1481,9 +1485,9 @@ OBEXError OBEXAddTypeHeader(	CFStringRef				type,
 							
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function		OBEXAddTimeISOHeader
-	@abstract		Add a CFStringRef to a dictionary of OBEXheaders.
-	@param			inHeaderData		Target header data.			
-	@param			inHeaderDataLength	Length of Target header data.
+	@abstract		Add bytes to a dictionary of OBEXheaders.
+	@param			inHeaderData		Time ISO 8601 header data, local times in format YYYYMMDDTHHMMSS and UTC in the format YYYYMMDDTHHMMSSZ.
+	@param			inHeaderDataLength	Length of header data.
 	@result			Error code, kOBEXSuccess (0) if success.
 	@discussion		TimeISO header - OBEX Spec, 2.2.5: Byte Sequence
 */
@@ -1494,7 +1498,7 @@ OBEXError OBEXAddTimeISOHeader(	const void*				inHeaderData,
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function		OBEXAddTargetHeader
-	@abstract		Add a CFStringRef to a dictionary of OBEXheaders.
+	@abstract		Add bytes of data to a dictionary of OBEXheaders.
 	@param			inHeaderData		Target header data.			
 	@param			inHeaderDataLength	Length of Target header data.
 	@param			dictRef				dictionary you have allocated to hold the headers. Make sure it's mutable.		
@@ -1508,7 +1512,7 @@ OBEXError OBEXAddTargetHeader(	const void*				inHeaderData,
 								
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function		OBEXAddHTTPHeader
-	@abstract		Add a CFStringRef to a dictionary of OBEXheaders.
+	@abstract		Add bytes of data to a dictionary of OBEXheaders.
 	@param			inHeaderData		HTTP header data.			
 	@param			inHeaderDataLength	Length of HTTP header data.
 	@param			dictRef				dictionary you have allocated to hold the headers. Make sure it's mutable.		
@@ -1522,7 +1526,7 @@ OBEXError OBEXAddHTTPHeader(	const void*				inHeaderData,
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function		OBEXAddBodyHeader
-	@abstract		Add a CFStringRef to a dictionary of OBEXheaders.
+	@abstract		Add bytes of data to a dictionary of OBEXheaders.
 	@param			inHeaderData		Body header data.			
 	@param			inHeaderDataLength	Length of Body header data.
 	@param			isEndOfBody			Set this flag if you want an end of body header instead of a body header.
@@ -1538,7 +1542,7 @@ OBEXError OBEXAddBodyHeader(	const void*				inHeaderData,
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function		OBEXAddWhoHeader
-	@abstract		Add a CFStringRef to a dictionary of OBEXheaders.
+	@abstract		Add bytes of data to a dictionary of OBEXheaders.
 	@param			inHeaderData		Who header data.			
 	@param			inHeaderDataLength	Length of Who header data.	
 	@param			dictRef				dictionary you have allocated to hold the headers. Make sure it's mutable.		
@@ -1552,7 +1556,7 @@ OBEXError OBEXAddWhoHeader(	const void*				inHeaderData,
 							
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function		OBEXAddConnectionIDHeader
-	@abstract		Add an bytes representing a connection ID to a dictionary of OBEX headers.
+	@abstract		Add bytes representing a connection ID to a dictionary of OBEX headers.
 	@param			inHeaderData		Connection ID data. Should be 4 bytes in length only.
 	@param			inHeaderDataLength	Length of Connection ID data. This should ONLY be set to equal 4.		
 	@param			dictRef				dictionary you have allocated to hold the headers. Make sure it's mutable.		
@@ -1570,7 +1574,7 @@ OBEXError OBEXAddConnectionIDHeader(	const void*				inHeaderData,
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function		OBEXAddApplicationParameterHeader
-	@abstract		Add an bytes representing a connection ID to a dictionary of OBEX headers.
+	@abstract		Add bytes representing an application parameter to a dictionary of OBEX headers.
 	@param			inHeaderData		Application parameter data - should be tag/length/value triplets.
 	@param			inHeaderDataLength	Length of application parameter data.		
 	@param			dictRef				dictionary you have allocated to hold the headers. Make sure it's mutable.		
@@ -1584,12 +1588,17 @@ OBEXError OBEXAddApplicationParameterHeader(	const void*				inHeaderData,
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function		OBEXAddByteSequenceHeader
-	@abstract		Add an arbitrary byte sequence header to a dictionary of OBEXheaders.
+	@abstract		Add a byte sequence header to a dictionary of OBEXheaders.
 	@param			inHeaderData		bytes you want to put in the byte sequence header.			
 	@param			inHeaderDataLength	length of the bytes you want to put in the byte sequence header.			
-	@param			dictRef			dictionary you have allocated to hold the headers. Make sure it's mutable.		
+	@param			dictRef				dictionary you have allocated to hold the headers. Make sure it's mutable.		
 	@result			Error code, kOBEXSuccess (0) if success.
-	@discussion		Byte Sequence header - OBEX Spec, 2.2.5: Byte sequence.
+	@discussion		Byte Sequence header - OBEX Spec, 2.2.5: Byte sequence. One thing of important note here - since we
+					don't know what Header Identifier and length you intend to use here, you MUST include your own
+					identifier and length in the data you pass. Thus, your data must be in this format:
+						<1:HI><2:LENGTH><n:(<TAG><LENGTH><VALUE>)>
+					Also, note that LENGTH = (3 + n), (1 for HI, 2 for the 2 bytes of length information, plus your n bytes of custom data).
+					Be careful here to not mess up these values, as it could adversely affect the ability of the remote-device's headers parser.
 */
 
 OBEXError OBEXAddByteSequenceHeader(	const void*				inHeaderData,
@@ -1601,7 +1610,7 @@ OBEXError OBEXAddByteSequenceHeader(	const void*				inHeaderData,
 	@abstract		Add an object class header to a dictionary of OBEXheaders.
 	@param			inHeaderData		bytes you want to put in the object class header.			
 	@param			inHeaderDataLength	length of the bytes you want to put in the object class header.			
-	@param			dictRef			dictionary you have allocated to hold the headers. Make sure it's mutable.		
+	@param			dictRef				dictionary you have allocated to hold the headers. Make sure it's mutable.		
 	@result			Error code, kOBEXSuccess (0) if success.
 	@discussion		Object Class header - OBEX Spec, 2.2.15: Byte sequence.
 */

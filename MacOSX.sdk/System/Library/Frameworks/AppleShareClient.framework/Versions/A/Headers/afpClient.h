@@ -35,7 +35,7 @@
 #endif
 
 /* used to be __cplusplus	*/
-#if __GNUG__		
+#if __cplusplus		
 extern "C" {
 #endif
 

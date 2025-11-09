@@ -1,11 +1,11 @@
 /*	CFByteOrder.h
-	Copyright (c) 1995-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1995-2005, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFBYTEORDER__)
 #define __COREFOUNDATION_CFBYTEORDER__ 1
 
-#if defined(__i386) && !defined(__LITTLE_ENDIAN__)
+#if defined(__i386__) && !defined(__LITTLE_ENDIAN__)
     #define __LITTLE_ENDIAN__ 1
 #endif
 

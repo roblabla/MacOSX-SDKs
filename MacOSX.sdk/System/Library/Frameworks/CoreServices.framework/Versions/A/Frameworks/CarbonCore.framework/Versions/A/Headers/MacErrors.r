@@ -3,9 +3,9 @@
  
      Contains:   OSErr codes.
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -119,6 +119,10 @@
 #define errFSIteratorNotFound 			(-1423)				/*  Passed FSIterator is not an open iterator  */
 #define errFSIteratorNotSupported 		(-1424)				/*  The iterator's flags or container are not supported by this call  */
 #define errFSQuotaExceeded 				(-1425)				/*  The user's quota of disk blocks has been exhausted.  */
+#define errFSOperationNotSupported 		(-1426)				/*  The attempted operation is not supported  */
+#define errFSAttributeNotFound 			(-1427)				/*  The requested attribute does not exist  */
+#define errFSPropertyNotValid 			(-1428)				/*  The requested property is not valid (has not been set yet)  */
+#define errFSNotEnoughSpaceForOperation  (-1429)			/*  There is not enough disk space to perform the requested operation  */
 #define envNotPresent 					(-5500)				/* returned by glue. */
 #define envBadVers 						(-5501)				/* Version non-positive */
 #define envVersTooBig 					(-5502)				/* Version bigger than call can handle */
@@ -947,6 +951,11 @@
 #define cfragClosureIDErr 				(-2829)				/*  The closure ID was not valid. */
 #define cfragAbortClosureErr 			(-2830)				/*  Used by notification handlers to abort a closure. */
 #define cfragOutputLengthErr 			(-2831)				/*  An output parameter is too small to hold the value. */
+#define cfragMapFileErr 				(-2851)				/*  A file could not be mapped. */
+#define cfragExecFileRefErr 			(-2854)				/*  Bundle does not have valid executable file. */
+#define cfragStdFolderErr 				(-2855)				/*  Could not find standard CFM folder. */
+#define cfragRsrcForkErr 				(-2856)				/*  Resource fork could not be opened. */
+#define cfragCFragRsrcErr 				(-2857)				/*  'cfrg' resource could not be loaded. */
 #define cfragLastErrCode 				(-2899)				/*  The last value in the range of CFM errors. */
 
 															/*  Reserved values for internal "warnings". */
@@ -1190,6 +1199,10 @@
 #define badRoutingSizeErr 				(-4276)
 
 #define coreFoundationUnknownErr 		(-4960)
+#define errCoreEndianDataTooShortForFormat  (-4940)
+#define errCoreEndianDataTooLongForFormat  (-4941)
+#define errCoreEndianDataDoesNotMatchFormat  (-4942)
+
 #define internalScrapErr 				(-4988)
 #define duplicateScrapFlavorErr 		(-4989)
 #define badScrapRefErr 					(-4990)
@@ -2218,6 +2231,24 @@
 #define kURLInvalidConfigurationError 	(-30786)
 #define kURLAccessNotAvailableError 	(-30787)
 #define kURL68kNotSupportedError 		(-30788)
+
+#define errCppGeneral 					(-32000)
+#define errCppbad_alloc 				(-32001)			/*  thrown by new  */
+#define errCppbad_cast 					(-32002)			/*  thrown by dynamic_cast when fails with a referenced type  */
+#define errCppbad_exception 			(-32003)			/*  thrown when an exception doesn't match any catch  */
+#define errCppbad_typeid 				(-32004)			/*  thrown by typeid  */
+#define errCpplogic_error 				(-32005)
+#define errCppdomain_error 				(-32006)
+#define errCppinvalid_argument 			(-32007)
+#define errCpplength_error 				(-32008)
+#define errCppout_of_range 				(-32009)
+#define errCppruntime_error 			(-32010)
+#define errCppoverflow_error 			(-32011)
+#define errCpprange_error 				(-32012)
+#define errCppunderflow_error 			(-32013)
+#define errCppios_base_failure 			(-32014)
+#define errCppLastSystemDefinedError 	(-32020)
+#define errCppLastUserDefinedError 		(-32049)			/*  -32021 through -32049 are free for developer-defined exceptions */
 
 #define badComponentInstance 			0x80008001			/*  when cast to an OSErr this is -32767 */
 #define badComponentSelector 			0x80008002			/*  when cast to an OSErr this is -32766 */

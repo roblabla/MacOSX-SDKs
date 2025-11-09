@@ -3,9 +3,9 @@
  
      Contains:   URL Access Interfaces.
  
-     Version:    SecurityHI-90~822
+     Version:    SecurityHI-24742~1491
  
-     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -156,15 +156,23 @@ enum {
 
 
 /*
- *  URLGetURLAccessVersion()
+ *  URLGetURLAccessVersion()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Return the version number ( in the same format as a
+ *    NumVersionVariant.whole ) of the URLAccess libraries
+ *    available.
+ *    URLAccess is deprecated on Mac OS X.  See Technical Q&A 1291 for
+ *    more information on the replacements available.
+ *     http://developer.apple.com/qa/qa2001/qa1291.html
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
 extern OSStatus 
-URLGetURLAccessVersion(UInt32 * returnVers)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+URLGetURLAccessVersion(UInt32 * returnVers)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
@@ -196,7 +204,7 @@ typedef STACK_UPP_TYPE(URLSystemEventProcPtr)                   URLSystemEventUP
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern URLNotifyUPP
-NewURLNotifyUPP(URLNotifyProcPtr userRoutine)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewURLNotifyUPP(URLNotifyProcPtr userRoutine)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  NewURLSystemEventUPP()
@@ -207,7 +215,7 @@ NewURLNotifyUPP(URLNotifyProcPtr userRoutine)                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern URLSystemEventUPP
-NewURLSystemEventUPP(URLSystemEventProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewURLSystemEventUPP(URLSystemEventProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  DisposeURLNotifyUPP()
@@ -218,7 +226,7 @@ NewURLSystemEventUPP(URLSystemEventProcPtr userRoutine)       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeURLNotifyUPP(URLNotifyUPP userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeURLNotifyUPP(URLNotifyUPP userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  DisposeURLSystemEventUPP()
@@ -229,7 +237,7 @@ DisposeURLNotifyUPP(URLNotifyUPP userUPP)                     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeURLSystemEventUPP(URLSystemEventUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeURLSystemEventUPP(URLSystemEventUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  InvokeURLNotifyUPP()
@@ -244,7 +252,7 @@ InvokeURLNotifyUPP(
   void *             userContext,
   URLEvent           event,
   URLCallbackInfo *  callbackInfo,
-  URLNotifyUPP       userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URLNotifyUPP       userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  InvokeURLSystemEventUPP()
@@ -258,13 +266,13 @@ extern OSStatus
 InvokeURLSystemEventUPP(
   void *             userContext,
   EventRecord *      event,
-  URLSystemEventUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URLSystemEventUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
- *  URLSimpleDownload()
+ *  URLSimpleDownload()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
@@ -275,14 +283,14 @@ URLSimpleDownload(
   Handle              destinationHandle,       /* can be NULL */
   URLOpenFlags        openFlags,
   URLSystemEventUPP   eventProc,               /* can be NULL */
-  void *              userContext)             /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *              userContext)             /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  URLDownload()
+ *  URLDownload()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
@@ -293,14 +301,14 @@ URLDownload(
   Handle              destinationHandle,       /* can be NULL */
   URLOpenFlags        openFlags,
   URLSystemEventUPP   eventProc,               /* can be NULL */
-  void *              userContext)             /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *              userContext)             /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  URLSimpleUpload()
+ *  URLSimpleUpload()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
@@ -310,14 +318,14 @@ URLSimpleUpload(
   const FSSpec *      source,
   URLOpenFlags        openFlags,
   URLSystemEventUPP   eventProc,         /* can be NULL */
-  void *              userContext)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *              userContext)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  URLUpload()
+ *  URLUpload()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
@@ -327,40 +335,40 @@ URLUpload(
   const FSSpec *      source,
   URLOpenFlags        openFlags,
   URLSystemEventUPP   eventProc,         /* can be NULL */
-  void *              userContext)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *              userContext)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  URLNewReference()
+ *  URLNewReference()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
 extern OSStatus 
 URLNewReference(
   const char *    url,
-  URLReference *  urlRef)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URLReference *  urlRef)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  URLDisposeReference()
+ *  URLDisposeReference()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
 extern OSStatus 
-URLDisposeReference(URLReference urlRef)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+URLDisposeReference(URLReference urlRef)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  URLOpen()
+ *  URLOpen()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
@@ -371,40 +379,40 @@ URLOpen(
   URLOpenFlags   openFlags,
   URLNotifyUPP   notifyProc,          /* can be NULL */
   URLEventMask   eventRegister,
-  void *         userContext)         /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *         userContext)         /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  URLAbort()
+ *  URLAbort()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
 extern OSStatus 
-URLAbort(URLReference urlRef)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+URLAbort(URLReference urlRef)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  URLGetDataAvailable()
+ *  URLGetDataAvailable()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
 extern OSStatus 
 URLGetDataAvailable(
   URLReference   urlRef,
-  Size *         dataSize)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size *         dataSize)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  URLGetBuffer()
+ *  URLGetBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
@@ -412,28 +420,28 @@ extern OSStatus
 URLGetBuffer(
   URLReference   urlRef,
   void **        buffer,
-  Size *         bufferSize)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size *         bufferSize)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  URLReleaseBuffer()
+ *  URLReleaseBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
 extern OSStatus 
 URLReleaseBuffer(
   URLReference   urlRef,
-  void *         buffer)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *         buffer)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  URLGetProperty()
+ *  URLGetProperty()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
@@ -442,14 +450,14 @@ URLGetProperty(
   URLReference   urlRef,
   const char *   property,
   void *         propertyBuffer,
-  Size           bufferSize)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size           bufferSize)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  URLGetPropertySize()
+ *  URLGetPropertySize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
@@ -457,14 +465,14 @@ extern OSStatus
 URLGetPropertySize(
   URLReference   urlRef,
   const char *   property,
-  Size *         propertySize)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size *         propertySize)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  URLSetProperty()
+ *  URLSetProperty()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
@@ -473,54 +481,54 @@ URLSetProperty(
   URLReference   urlRef,
   const char *   property,
   void *         propertyBuffer,
-  Size           bufferSize)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size           bufferSize)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  URLGetCurrentState()
+ *  URLGetCurrentState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
 extern OSStatus 
 URLGetCurrentState(
   URLReference   urlRef,
-  URLState *     state)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  URLState *     state)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  URLGetError()
+ *  URLGetError()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
 extern OSStatus 
 URLGetError(
   URLReference   urlRef,
-  OSStatus *     urlError)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSStatus *     urlError)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  URLIdle()
+ *  URLIdle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
 extern OSStatus 
-URLIdle(void)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+URLIdle(void)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  URLGetFileInfo()
+ *  URLGetFileInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in URLAccessLib 1.0 and later
  */
@@ -528,7 +536,7 @@ extern OSStatus
 URLGetFileInfo(
   StringPtr   fName,
   OSType *    fType,
-  OSType *    fCreator)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType *    fCreator)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 

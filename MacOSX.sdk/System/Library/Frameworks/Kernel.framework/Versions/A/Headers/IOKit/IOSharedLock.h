@@ -57,9 +57,6 @@ typedef IOSharedLockData    *   IOSharedLock;
 
 #define IOSpinLockInit(l)	(*(l) = (IOSharedLockData)0)
 
-#ifndef KERNEL
-extern void IOSpinLock(IOSharedLock l);
-#endif
 
 extern void IOSpinUnlock(IOSharedLock l);
 extern boolean_t IOTrySpinLock(IOSharedLock l);
@@ -73,9 +70,6 @@ typedef ev_lock_data_t	    *	ev_lock_t;
 // needs isync?
 //#define ev_is_locked(l)	(*(l) != (ev_lock_data_t)0)
 
-#ifndef KERNEL
-extern void ev_lock(ev_lock_t l);		// Spin lock!
-#endif
 
 extern void ev_unlock(ev_lock_t l);
 extern boolean_t ev_try_lock(ev_lock_t l);

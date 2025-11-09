@@ -3,9 +3,9 @@
  
      Contains:   ICC Profile Format Definitions
  
-     Version:    ColorSync-118.2.4~3
+     Version:    ColorSync-174.3.3~45
  
-     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -58,6 +58,7 @@ enum {
   cmICCReservedFlagsMask        = 0x0000FFFF, /* these bits of the flags field are defined and reserved by ICC */
   cmEmbeddedMask                = 0x00000001, /* if bit 0 is 0 then not embedded profile, if 1 then embedded profile */
   cmEmbeddedUseMask             = 0x00000002, /* if bit 1 is 0 then ok to use anywhere, if 1 then ok to use as embedded profile only */
+  cmBlackPointCompensationMask  = 0x00000004, /* if bit 1 is 0 then ok to use anywhere, if 1 then ok to use as embedded profile only */
   cmCMSReservedFlagsMask        = (long)0xFFFF0000, /* these bits of the flags field are defined and reserved by CMS vendor */
   cmQualityMask                 = 0x00030000, /* if bits 16-17 is 0 then normal, if 1 then draft, if 2 then best */
   cmInterpolationMask           = 0x00040000, /* if bit 18 is 0 then interpolation, if 1 then lookup only */
@@ -75,6 +76,11 @@ enum {
   cmNormalMode                  = 0,    /* it uses the least significent two bits in the high word of flag */
   cmDraftMode                   = 1,    /* it should be evaulated like this: right shift 16 bits first, mask off the */
   cmBestMode                    = 2     /* high 14 bits, and then compare with the enum to determine the option value */
+};
+
+/* black point compensation flag option */
+enum {
+  cmBlackPointCompensation      = 1     /* 0 do not apply Black Point Compensation, 1 apply */
 };
 
 

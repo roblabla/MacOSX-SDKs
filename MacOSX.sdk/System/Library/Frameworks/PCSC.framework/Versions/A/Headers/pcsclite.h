@@ -36,6 +36,8 @@
 #ifndef __pcsclite_h__
 #define __pcsclite_h__
 
+#include <stdint.h>
+
 #ifndef __APPLE__
 #include <wintypes.h>
 #endif
@@ -45,10 +47,10 @@ extern "C"
 {
 #endif
 
-	typedef long SCARDCONTEXT;
+	typedef int32_t SCARDCONTEXT;
 	typedef SCARDCONTEXT *PSCARDCONTEXT;
 	typedef SCARDCONTEXT *LPSCARDCONTEXT;
-	typedef long SCARDHANDLE;
+	typedef int32_t SCARDHANDLE;
 	typedef SCARDHANDLE *PSCARDHANDLE;
 	typedef SCARDHANDLE *LPSCARDHANDLE;
 
@@ -56,9 +58,9 @@ extern "C"
 	{
 		const char *szReader;
 		void *pvUserData;
-		unsigned long dwCurrentState;
-		unsigned long dwEventState;
-		unsigned long cbAtr;
+		uint32_t dwCurrentState;
+		uint32_t dwEventState;
+		uint32_t cbAtr;
 		unsigned char rgbAtr[33];
 	}
 	SCARD_READERSTATE_A;
@@ -68,8 +70,8 @@ extern "C"
 
 	typedef struct _SCARD_IO_REQUEST
 	{
-		unsigned long dwProtocol;	/* Protocol identifier */
-		unsigned long cbPciLength;	/* Protocol Control Inf Length */
+		uint32_t dwProtocol;	/* Protocol identifier */
+		uint32_t cbPciLength;	/* Protocol Control Inf Length */
 	}
 	SCARD_IO_REQUEST, *PSCARD_IO_REQUEST, *LPSCARD_IO_REQUEST;
 
@@ -85,7 +87,7 @@ extern "C"
 	/*
 	 * Gets a stringified error response 
 	 */
-	char *pcsc_stringify_error(long);
+	char *pcsc_stringify_error(int32_t err);
 
 #define SCARD_S_SUCCESS                 0x00000000
 #define SCARD_E_CANCELLED               0x80100002

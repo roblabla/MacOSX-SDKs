@@ -1,5 +1,5 @@
 /*	NSRunLoop.h
-	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -12,12 +12,10 @@ FOUNDATION_EXPORT NSString * const NSDefaultRunLoopMode;
 
 @interface NSRunLoop : NSObject {
 @private
-    void	*_rl;
-    void	*_dperf;
-    void	*_perft;
-    void	*_ports;
-    id          _winMessagePort;
-    void	*_reserved[6];
+    id          _rl;
+    id          _dperf;
+    id          _perft;
+    void	*_reserved[8];
 }
 
 + (NSRunLoop *)currentRunLoop;

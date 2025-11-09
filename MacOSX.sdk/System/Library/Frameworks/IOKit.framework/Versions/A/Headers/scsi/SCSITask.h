@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2005 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -33,17 +33,18 @@
 #endif
 
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
-//	Constants used inside the kernel and user space
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+/*
+ *	Constants used inside the kernel and user space
+ */
 
-// The usage of these should be as follows:
-// - if the identifier can either be that of an initiator or a target,
-//	SCSIDeviceIdentifier should be used.
-// - if the identifier is for a target only and not an initiator, then
-// 	SCSITargetIdentifier should be used.
-// - if the identifier is for an initiator only and not a target, then
-//	SCSIInitiatorIdentifier should be used.
+/* The usage of these should be as follows:
+ * - if the identifier can either be that of an initiator or a target,
+ *	SCSIDeviceIdentifier should be used.
+ * - if the identifier is for a target only and not an initiator, then
+ * 	SCSITargetIdentifier should be used.
+ * - if the identifier is for an initiator only and not a target, then
+ *	SCSIInitiatorIdentifier should be used.
+ */
 
 typedef UInt64 					SCSIDeviceIdentifier;
 typedef SCSIDeviceIdentifier 	SCSITargetIdentifier;
@@ -114,19 +115,20 @@ typedef enum SCSITaskState
  */ 
 typedef enum SCSIServiceResponse
 {
-	// This is not one of the standard service responses defined by
-	// SAM, but is necessary for asynchronous commands that are not 
-	// yet completed.
+	/* This is not one of the standard service responses defined by
+	 * SAM, but is necessary for asynchronous commands that are not 
+	 * yet completed.
+	 */
 	kSCSIServiceResponse_Request_In_Process					= 0,
 
-	// General Service Response
+	/* General Service Response */
 	kSCSIServiceResponse_SERVICE_DELIVERY_OR_TARGET_FAILURE	= 1,
 
-	// Service Responses for Execute Command
+	/* Service Responses for Execute Command */
 	kSCSIServiceResponse_TASK_COMPLETE 						= 2,
 	kSCSIServiceResponse_LINK_COMMAND_COMPLETE				= 3,
 	
-	// Service Responses used for Task Management Functions
+	/* Service Responses used for Task Management Functions */
 	kSCSIServiceResponse_FUNCTION_COMPLETE					= 4,
 	kSCSIServiceResponse_FUNCTION_REJECTED					= 5
 } SCSIServiceResponse;
@@ -149,11 +151,12 @@ typedef enum SCSIServiceResponse
  */
 typedef enum SCSITaskStatus
 {
-	// These are the Task Status values as defined by the SCSI Architecture Model
-	// specification and are returned only when task completes with a service response 
-	// of either TASK_COMPLETED or LINK_COMMAND_COMPLETE.
-	// Since these are well documented in the SAM specifications, that document should be
-	// referenced for their meaning.
+	/* These are the Task Status values as defined by the SCSI Architecture Model
+	 * specification and are returned only when task completes with a service response 
+	 * of either TASK_COMPLETED or LINK_COMMAND_COMPLETE.
+	 * Since these are well documented in the SAM specifications, that document should be
+	 * referenced for their meaning.
+	 */
 	kSCSITaskStatus_GOOD						= 0x00,
 	kSCSITaskStatus_CHECK_CONDITION				= 0x02,
 	kSCSITaskStatus_CONDITION_MET				= 0x04,
@@ -164,57 +167,65 @@ typedef enum SCSITaskStatus
 	kSCSITaskStatus_TASK_SET_FULL				= 0x28,
 	kSCSITaskStatus_ACA_ACTIVE					= 0x30,
 	
-	// These are the Task Status values for use when a task fails to complete due to
-	// a service response of SERVICE_DELIVERY_OR_TARGET_FAILURE.
-	// These values are not defined in the SCSI specifications, but are here so that
-	// the SCSI Protocol Layer objects can provide more information, if available, to 
-	// the SCSI Application Layer as to the cause of the failure.
-	
-	// If a task is aborted by the SCSI Protocol Layer due to it exceeding the timeout
-	// value specified by the task, the task status shall be set to
-	// kSCSITaskStatus_TaskTimeoutOccurred.
+	/* These are the Task Status values for use when a task fails to complete due to
+	 * a service response of SERVICE_DELIVERY_OR_TARGET_FAILURE.
+	 * These values are not defined in the SCSI specifications, but are here so that
+	 * the SCSI Protocol Layer objects can provide more information, if available, to 
+	 * the SCSI Application Layer as to the cause of the failure.
+	 */
+	 
+	/* If a task is aborted by the SCSI Protocol Layer due to it exceeding the timeout
+	 * value specified by the task, the task status shall be set to
+	 * kSCSITaskStatus_TaskTimeoutOccurred.
+	 */
 	kSCSITaskStatus_TaskTimeoutOccurred			= 0x01,
 	
-	// If a task is aborted by the SCSI Protocol Layer due to it exceeding a timeout
-	// value specified by the support for the protocol or a related specification, 
-	// the task status shall be set to kSCSITaskStatus_TaskTimeoutOccurred.
+	/* If a task is aborted by the SCSI Protocol Layer due to it exceeding a timeout
+	 * value specified by the support for the protocol or a related specification, 
+	 * the task status shall be set to kSCSITaskStatus_TaskTimeoutOccurred.
+	 */
 	kSCSITaskStatus_ProtocolTimeoutOccurred		= 0x02,
 	
-	// If a task is unable to be delivered due to a failure of the device not
-	// accepting the task or the device acknowledging the attempt to send it
-	// the device the task status shall be set to kSCSITaskStatus_DeviceNotResponding.
-	// This will allow the SCSI Application driver to perform the necessary steps 
-	// to try to recover the device.  This shall only be reported after the 
-	// SCSI Protocol Layer driver has attempted all protocol specific attempts to recover the device.
+	/* If a task is unable to be delivered due to a failure of the device not
+	 * accepting the task or the device acknowledging the attempt to send it
+	 * the device the task status shall be set to kSCSITaskStatus_DeviceNotResponding.
+	 * This will allow the SCSI Application driver to perform the necessary steps 
+	 * to try to recover the device.  This shall only be reported after the 
+	 * SCSI Protocol Layer driver has attempted all protocol specific attempts to recover the device.
+	 */
 	kSCSITaskStatus_DeviceNotResponding			= 0x03,
 	
-	// If the task is unable to be delivered because the device has been detached,
-	// the task status shall be set to kSCSITaskStatus_DeviceNotPresent.  This will
-	// allow the SCSI Application Layer to halt the sending of tasks to the device and, 
-	// if supported, perform any device failover or system cleanup.
+	/* If the task is unable to be delivered because the device has been detached,
+	 * the task status shall be set to kSCSITaskStatus_DeviceNotPresent.  This will
+	 * allow the SCSI Application Layer to halt the sending of tasks to the device and, 
+	 * if supported, perform any device failover or system cleanup.
+	 */
 	kSCSITaskStatus_DeviceNotPresent			= 0x04,
 
-	// If the task is unable to be delivered to the device due to a failure in the SCSI 
-	// Protocol Layer, such as a bus reset or communications error, but the device is
-	// is known to be functioning properly, the task status shall be set to 
-	// kSCSITaskStatus_DeliveryFailure.  This can also be reported if the task could not 
-	// be delivered due to a protocol error that has since been corrected.
+	/* If the task is unable to be delivered to the device due to a failure in the SCSI 
+	 * Protocol Layer, such as a bus reset or communications error, but the device is
+	 * is known to be functioning properly, the task status shall be set to 
+	 * kSCSITaskStatus_DeliveryFailure.  This can also be reported if the task could not 
+	 * be delivered due to a protocol error that has since been corrected.
+	 */
 	kSCSITaskStatus_DeliveryFailure				= 0x05,
             
-	// This status is not defined by the SCSI specifications,
-	// but is here to provide a status that can be returned in
-	// cases where there is not status available from the device
-	// or protocol, for example, when the service response is neither
-	// TASK_COMPLETED nor LINK_COMMAND_COMPLETE or when the service response is
-	// SERVICE_DELIVERY_OR_TARGET_FAILURE and the reason for failure could not be determined.
+	/* This status is not defined by the SCSI specifications,
+	 * but is here to provide a status that can be returned in
+	 * cases where there is not status available from the device
+	 * or protocol, for example, when the service response is neither
+	 * TASK_COMPLETED nor LINK_COMMAND_COMPLETE or when the service response is
+	 * SERVICE_DELIVERY_OR_TARGET_FAILURE and the reason for failure could not be determined.
+	 */
 	kSCSITaskStatus_No_Status					= 0xFF
 } SCSITaskStatus;
 
-// Command Descriptor Block Size constants
+/* Command Descriptor Block Size constants */
 enum
 {
-	// This is the largest size a Command Descriptor
-	// Block can be as specified in SPC-2
+	/* This is the largest size a Command Descriptor
+	 * Block can be as specified in SPC-2
+	 */
 	kSCSICDBSize_Maximum 	= 16,
 	kSCSICDBSize_6Byte 		= 6,
 	kSCSICDBSize_10Byte 	= 10,
@@ -224,7 +235,7 @@ enum
 
 typedef UInt8 SCSICommandDescriptorBlock[kSCSICDBSize_Maximum];
 
-// Constants for the DataTransferDirection field
+/* Constants for the DataTransferDirection field */
 enum
 {
 	kSCSIDataTransfer_NoDataTransfer		= 0x00,
@@ -236,17 +247,13 @@ enum
 #if defined(KERNEL) && defined(__cplusplus)
 
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
-//	Includes
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
-
-// Libkern includes
+/* Libkern includes */
 #include <libkern/c++/OSObject.h>
 
 
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
-//	Constants used inside the kernel only
-//ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+/*
+ *	Constants used inside the kernel only
+ */
 
 /* The SCSI Task mode is used by the SCSI Protocol Layer to 
  * indicate what mode the task is executing, the command or

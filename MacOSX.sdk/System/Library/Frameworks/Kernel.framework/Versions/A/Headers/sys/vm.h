@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2005 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -63,52 +63,22 @@
 #define _SYS_VM_H
 
 #include <sys/appleapiopts.h>
+#include <sys/cdefs.h>
 
-/* Machine specific config stuff */
-#if	defined(KERNEL) && !defined(MACH_USER_API)	
-#include <sys/vmmeter.h>
-#include <sys/queue.h>
-#include <mach/vm_param.h>
-#endif
-
-#ifdef __APPLE_API_OBSOLETE
-/*
- * Shareable process virtual address space.
- * May eventually be merged with vm_map.
- * Several fields are temporary (text, data stuff).
- */
-struct vmspace {
-	int	vm_refcnt;	/* number of references */
-	caddr_t	vm_shm;		/* SYS5 shared memory private data XXX */
-/* we copy from vm_startcopy to the end of the structure on fork */
-#define vm_startcopy vm_rssize
-	segsz_t vm_rssize; 	/* current resident set size in pages */
-	segsz_t vm_swrss;	/* resident set size before last swap */
-	segsz_t vm_tsize;	/* text size (pages) XXX */
-	segsz_t vm_dsize;	/* data size (pages) XXX */
-	segsz_t vm_ssize;	/* stack size (pages) */
-	caddr_t	vm_taddr;	/* user virtual address of text XXX */
-	caddr_t	vm_daddr;	/* user virtual address of data XXX */
-	caddr_t vm_maxsaddr;	/* user VA at max stack growth */
-};
-
-#else /* __APPLE_API_OBSOLETE */
 /* just to keep kinfo_proc happy */
+/* NOTE: Pointer fields are size variant for LP64 */
 struct vmspace {
-	int32_t	dummy[10];
+	int32_t	dummy;
+	caddr_t	dummy2;
+	int32_t	dummy3[5];
+	caddr_t	dummy4[3];
 };
-#endif /* __APPLE_API_OBSOLETE */
 
-#ifdef KERNEL
 
-#ifdef __APPLE_API_PRIVATE
-#ifdef BSD_BUILD
-#include <kern/thread.h>
-#endif /* BSD_BUILD */
-#endif /* __APPLE_API_PRIVATE */
 
+__BEGIN_DECLS
 struct proc *current_proc(void);
+__END_DECLS
 
-#endif /* KERNEL */
 
 #endif /* _SYS_VM_H */

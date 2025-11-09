@@ -1,34 +1,37 @@
 /*
 	NSObjectController.h
 	Application Kit
-	Copyright (c) 2002-2003, Apple Computer, Inc.
+	Copyright (c) 2002-2005, Apple Computer, Inc.
 	All rights reserved.
  */
 
 #import <AppKit/NSController.h>
 #import <AppKit/NSMenu.h>
+#import <CoreData/NSFetchRequest.h>
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
-@class NSArray;
+@class NSArray, NSPredicate, NSManagedObjectContext, NSError;
 
 @interface NSObjectController : NSController {
 @private
-	void *_reserved3;
-	void *_reserved4;
+    void *_reserved3;
+    id _managedProxy;
     struct __objectControllerFlags {
         unsigned int _editable:1;
         unsigned int _automaticallyPreparesContent:1;
         unsigned int _hasLoadedData:1;
         unsigned int _explicitlyCannotAdd:1;
         unsigned int _explicitlyCannotRemove:1;
-        unsigned int _reservedObjectController:27;
+        unsigned int _isUsingManagedProxy:1;
+        unsigned int _hasFetched:1;
+        unsigned int _reservedObjectController:25;
     } _objectControllerFlags;
     NSString *_objectClassName;
     Class _objectClass;
     NSArray *_contentObjectArray;
 @protected    // all instance variables are private
-	id _content;
+    id _content;
     id _objectHandler;
 }
 
@@ -59,5 +62,25 @@
 - (BOOL)validateMenuItem:(id <NSMenuItem>)menuItem;    // used to automatically disable menu items for action methods of the controller (for example if canAdd returns NO, menu items with the add: action are disabled)
 
 @end
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+
+@interface NSObjectController (NSManagedController)
+
+- (NSManagedObjectContext *)managedObjectContext;
+- (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+
+- (NSString *)entityName;
+- (void)setEntityName:(NSString *)entityName;
+- (NSPredicate *)fetchPredicate;
+- (void)setFetchPredicate:(NSPredicate *)predicate;
+
+- (BOOL)fetchWithRequest:(NSFetchRequest *)fetchRequest merge:(BOOL)merge error:(NSError **)error;    // subclasses can override this method to customize the fetch request, for example to specify fetch limits (passing nil for the fetch request will result in the default fetch request to be used; this method will never be invoked with a nil fetch request from within the standard Cocoa frameworks) - the merge flag determines whether the controller replaces the entire content with the fetch result or merges the existing content with the fetch result
+
+- (void)fetch:(id)sender;
+
+@end
+
+#endif
 
 #endif

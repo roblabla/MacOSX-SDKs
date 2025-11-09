@@ -204,6 +204,37 @@ extern NSString* const	DRStatusStateFinishing			AVAILABLE_MAC_OS_X_VERSION_10_2_
 extern NSString* const DRStatusStateErasing				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
+
+#if 0
+#pragma mark Extended progress dictionary values
+#endif
+/*!
+	@const DRStatusProgressInfoKey
+	@abstract	A dictionary of extended progress information.
+	@discussion A key for the status dictionary. The value of this key is a reference to a NSDictionary
+				object containing extended progress information.
+*/
+extern NSString* const DRStatusProgressInfoKey			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
+	@const DRStatusProgressCurrentKPS
+	@abstract	The current burn speed in kilobytes per second.
+	@discussion This is an optional key within the @link DRStatusProgressInfoKey DRStatusProgressInfoKey @/link dictionary. The value of this
+				key, if present, is a NSNumber object containing the write speed of the burn.
+*/
+extern NSString* const DRStatusProgressCurrentKPS		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
+	@const DRStatusProgressCurrentXFactor
+	@abstract	The current burn speed in a media appropriate x-factor
+	@discussion This is an optional key within the @link DRStatusProgressInfoKey DRStatusProgressInfoKey @/link dictionary. The value of this
+				key, if present, is a NSNumber object containing the appropriate x-factor for the media.
+*/
+extern NSString* const DRStatusProgressCurrentXFactor	AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+
 #if 0
 #pragma mark Status dictionary error keys
 #endif
@@ -225,6 +256,12 @@ extern NSString* const DRErrorStatusErrorKey					AVAILABLE_MAC_OS_X_VERSION_10_2
 	@discussion	An NSString describing the error in a user appropriate manner.
 */
 extern NSString* const DRErrorStatusErrorStringKey				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/*!
+	@const		DRErrorStatusErrorInfoStringKey
+	@discussion	An NSString describing extended error information in a user appropriate manner.
+*/
+extern NSString* const DRErrorStatusErrorInfoStringKey			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
 	@const		DRErrorStatusSenseKey

@@ -104,7 +104,7 @@
 #define _GLIBCPP_USE_LONG_LONG 1
 
 // Define if C99 features such as lldiv_t, llabs, lldiv should be exposed.
-/* #undef _GLIBCPP_USE_C99 */
+#define _GLIBCPP_USE_C99 1
 
 // Define if code specialized for wchar_t should be used.
 #define _GLIBCPP_USE_WCHAR_T 1
@@ -151,19 +151,19 @@
 #define _GLIBCPP_HAVE_MODFF 1
 
 // Define if you have the modfl function.
-/* #undef _GLIBCPP_HAVE_MODFL */
+#define _GLIBCPP_HAVE_MODFL 1
 
 // Define if you have the expf function.
 #define _GLIBCPP_HAVE_EXPF 1
 
 // Define if you have the expl function.
-/* #undef _GLIBCPP_HAVE_EXPL */
+#define _GLIBCPP_HAVE_EXPL 1
 
 // Define if you have the hypotf function.
 #define _GLIBCPP_HAVE_HYPOTF 1
 
 // Define if you have the hypotl function.
-/* #undef _GLIBCPP_HAVE_HYPOTL */
+#define _GLIBCPP_HAVE_HYPOTL 1
 
 // Define if the compiler/host combination has __builtin_abs
 #define _GLIBCPP_HAVE___BUILTIN_ABS 1
@@ -205,7 +205,7 @@
 #define _GLIBCPP_HAVE___BUILTIN_SQRTF 1
 
 // Define if the compiler/host combination has __builtin_sqrtl
-/* #undef _GLIBCPP_HAVE___BUILTIN_SQRTL */
+#define _GLIBCPP_HAVE___BUILTIN_SQRTL 1
 
 // Define if LC_MESSAGES is available in <locale.h>.
 #define _GLIBCPP_HAVE_LC_MESSAGES 1
@@ -217,7 +217,7 @@
 #define _GLIBCPP_HAVE___SIGNBITF 1
 
 /* Define if you have the __signbitl function.  */
-/* #undef _GLIBCPP_HAVE___SIGNBITL */
+#define _GLIBCPP_HAVE___SIGNBITL 1
 
 /* Define if you have the _acosf function.  */
 /* #undef _GLIBCPP_HAVE__ACOSF */
@@ -412,25 +412,25 @@
 #define _GLIBCPP_HAVE_ACOSF 1
 
 /* Define if you have the acosl function.  */
-/* #undef _GLIBCPP_HAVE_ACOSL */
+#define _GLIBCPP_HAVE_ACOSL 1
 
 /* Define if you have the asinf function.  */
 #define _GLIBCPP_HAVE_ASINF 1
 
 /* Define if you have the asinl function.  */
-/* #undef _GLIBCPP_HAVE_ASINL */
+#define _GLIBCPP_HAVE_ASINL 1
 
 /* Define if you have the atan2f function.  */
 #define _GLIBCPP_HAVE_ATAN2F 1
 
 /* Define if you have the atan2l function.  */
-/* #undef _GLIBCPP_HAVE_ATAN2L */
+#define _GLIBCPP_HAVE_ATAN2L 1
 
 /* Define if you have the atanf function.  */
 #define _GLIBCPP_HAVE_ATANF 1
 
 /* Define if you have the atanl function.  */
-/* #undef _GLIBCPP_HAVE_ATANL */
+#define _GLIBCPP_HAVE_ATANL 1
 
 /* Define if you have the btowc function.  */
 #define _GLIBCPP_HAVE_BTOWC 1
@@ -439,7 +439,7 @@
 #define _GLIBCPP_HAVE_CEILF 1
 
 /* Define if you have the ceill function.  */
-/* #undef _GLIBCPP_HAVE_CEILL */
+#define _GLIBCPP_HAVE_CEILL 1
 
 /* Define if you have the copysign function.  */
 #define _GLIBCPP_HAVE_COPYSIGN 1
@@ -448,7 +448,7 @@
 #define _GLIBCPP_HAVE_COPYSIGNF 1
 
 /* Define if you have the copysignl function.  */
-/* #undef _GLIBCPP_HAVE_COPYSIGNL */
+#define _GLIBCPP_HAVE_COPYSIGNL 1
 
 /* Define if you have the cosf function.  */
 #define _GLIBCPP_HAVE_COSF 1
@@ -457,10 +457,10 @@
 #define _GLIBCPP_HAVE_COSHF 1
 
 /* Define if you have the coshl function.  */
-/* #undef _GLIBCPP_HAVE_COSHL */
+#define _GLIBCPP_HAVE_COSHL 1
 
 /* Define if you have the cosl function.  */
-/* #undef _GLIBCPP_HAVE_COSL */
+#define _GLIBCPP_HAVE_COSL 1
 
 /* Define if you have the drand48 function.  */
 #define _GLIBCPP_HAVE_DRAND48 1
@@ -469,13 +469,13 @@
 #define _GLIBCPP_HAVE_EXPF 1
 
 /* Define if you have the expl function.  */
-/* #undef _GLIBCPP_HAVE_EXPL */
+#define _GLIBCPP_HAVE_EXPL 1
 
 /* Define if you have the fabsf function.  */
 #define _GLIBCPP_HAVE_FABSF 1
 
 /* Define if you have the fabsl function.  */
-/* #undef _GLIBCPP_HAVE_FABSL */
+#define _GLIBCPP_HAVE_FABSL 1
 
 /* Define if you have the fgetwc function.  */
 #define _GLIBCPP_HAVE_FGETWC 1
@@ -487,7 +487,7 @@
 #define _GLIBCPP_HAVE_FINITE 1
 
 /* Define if you have the finitef function.  */
-#define _GLIBCPP_HAVE_FINITEF 1
+/* #undef _GLIBCPP_HAVE_FINITEF */
 
 /* Define if you have the finitel function.  */
 /* #undef _GLIBCPP_HAVE_FINITEL */
@@ -496,13 +496,13 @@
 #define _GLIBCPP_HAVE_FLOORF 1
 
 /* Define if you have the floorl function.  */
-/* #undef _GLIBCPP_HAVE_FLOORL */
+#define _GLIBCPP_HAVE_FLOORL 1
 
 /* Define if you have the fmodf function.  */
 #define _GLIBCPP_HAVE_FMODF 1
 
 /* Define if you have the fmodl function.  */
-/* #undef _GLIBCPP_HAVE_FMODL */
+#define _GLIBCPP_HAVE_FMODL 1
 
 /* Define if you have the fpclass function.  */
 /* #undef _GLIBCPP_HAVE_FPCLASS */
@@ -517,7 +517,7 @@
 #define _GLIBCPP_HAVE_FREXPF 1
 
 /* Define if you have the frexpl function.  */
-/* #undef _GLIBCPP_HAVE_FREXPL */
+#define _GLIBCPP_HAVE_FREXPL 1
 
 /* Define if you have the fwide function.  */
 #define _GLIBCPP_HAVE_FWIDE 1
@@ -544,16 +544,16 @@
 #define _GLIBCPP_HAVE_HYPOTF 1
 
 /* Define if you have the hypotl function.  */
-/* #undef _GLIBCPP_HAVE_HYPOTL */
+#define _GLIBCPP_HAVE_HYPOTL 1
 
 /* Define if you have the iconv function.  */
-/* #undef _GLIBCPP_HAVE_ICONV */
+#define _GLIBCPP_HAVE_ICONV 1
 
 /* Define if you have the iconv_close function.  */
-/* #undef _GLIBCPP_HAVE_ICONV_CLOSE */
+#define _GLIBCPP_HAVE_ICONV_CLOSE 1
 
 /* Define if you have the iconv_open function.  */
-/* #undef _GLIBCPP_HAVE_ICONV_OPEN */
+#define _GLIBCPP_HAVE_ICONV_OPEN 1
 
 /* Define if you have the isatty function.  */
 #define _GLIBCPP_HAVE_ISATTY 1
@@ -580,19 +580,19 @@
 #define _GLIBCPP_HAVE_LDEXPF 1
 
 /* Define if you have the ldexpl function.  */
-/* #undef _GLIBCPP_HAVE_LDEXPL */
+#define _GLIBCPP_HAVE_LDEXPL 1
 
 /* Define if you have the log10f function.  */
 #define _GLIBCPP_HAVE_LOG10F 1
 
 /* Define if you have the log10l function.  */
-/* #undef _GLIBCPP_HAVE_LOG10L */
+#define _GLIBCPP_HAVE_LOG10L 1
 
 /* Define if you have the logf function.  */
 #define _GLIBCPP_HAVE_LOGF 1
 
 /* Define if you have the logl function.  */
-/* #undef _GLIBCPP_HAVE_LOGL */
+#define _GLIBCPP_HAVE_LOGL 1
 
 /* Define if you have the mbrlen function.  */
 #define _GLIBCPP_HAVE_MBRLEN 1
@@ -610,7 +610,7 @@
 #define _GLIBCPP_HAVE_MODFF 1
 
 /* Define if you have the modfl function.  */
-/* #undef _GLIBCPP_HAVE_MODFL */
+#define _GLIBCPP_HAVE_MODFL 1
 
 /* Define if you have the nan function.  */
 #define _GLIBCPP_HAVE_NAN 1
@@ -622,7 +622,7 @@
 #define _GLIBCPP_HAVE_POWF 1
 
 /* Define if you have the powl function.  */
-/* #undef _GLIBCPP_HAVE_POWL */
+#define _GLIBCPP_HAVE_POWL 1
 
 /* Define if you have the putwc function.  */
 #define _GLIBCPP_HAVE_PUTWC 1
@@ -652,16 +652,16 @@
 #define _GLIBCPP_HAVE_SINHF 1
 
 /* Define if you have the sinhl function.  */
-/* #undef _GLIBCPP_HAVE_SINHL */
+#define _GLIBCPP_HAVE_SINHL 1
 
 /* Define if you have the sinl function.  */
-/* #undef _GLIBCPP_HAVE_SINL */
+#define _GLIBCPP_HAVE_SINL 1
 
 /* Define if you have the sqrtf function.  */
 #define _GLIBCPP_HAVE_SQRTF 1
 
 /* Define if you have the sqrtl function.  */
-/* #undef _GLIBCPP_HAVE_SQRTL */
+#define _GLIBCPP_HAVE_SQRTL 1
 
 /* Define if you have the strtof function.  */
 #define _GLIBCPP_HAVE_STRTOF 1
@@ -682,10 +682,10 @@
 #define _GLIBCPP_HAVE_TANHF 1
 
 /* Define if you have the tanhl function.  */
-/* #undef _GLIBCPP_HAVE_TANHL */
+#define _GLIBCPP_HAVE_TANHL 1
 
 /* Define if you have the tanl function.  */
-/* #undef _GLIBCPP_HAVE_TANL */
+#define _GLIBCPP_HAVE_TANL 1
 
 /* Define if you have the ungetwc function.  */
 #define _GLIBCPP_HAVE_UNGETWC 1
@@ -889,7 +889,7 @@
 #define _GLIBCPP_HAVE_MEMLIMIT_VMEM 0
 
 /* Only used in build directory testsuite_hooks.h. */
-#define _GLIBCPP_HAVE_MEMLIMIT_AS 0
+#define _GLIBCPP_HAVE_MEMLIMIT_AS 1
 
 //
 // Systems that have certain non-standard functions prefixed with an

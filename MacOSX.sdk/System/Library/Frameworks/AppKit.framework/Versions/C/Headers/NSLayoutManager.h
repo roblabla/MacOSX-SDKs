@@ -1,7 +1,7 @@
 /*
         NSLayoutManager.h
         Application Kit
-        Copyright (c) 1994-2003, Apple Computer, Inc.
+        Copyright (c) 1994-2005, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -33,6 +33,8 @@
 @class NSMutableArray;
 @class NSEvent;
 @class NSCell;
+@class NSGlyphGenerator;
+@class NSTextBlock;
 
 // These glyph attributes are used only inside the glyph generation machinery, but must be shared between components.
 enum _NSGlyphAttribute {
@@ -62,10 +64,17 @@ typedef enum {
     NSTypesetterBehavior_10_2_WithCompatibility = 1, // 10.2 with backward compatibility layout (uses new ATS-based typestter)
     NSTypesetterBehavior_10_2 = 2,
     NSTypesetterBehavior_10_3 = 3
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+    , NSTypesetterBehavior_10_4 = 4
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 } NSTypesetterBehavior;
 #endif
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 @interface NSLayoutManager : NSObject <NSCoding, NSGlyphStorage> {
+#else
+@interface NSLayoutManager : NSObject <NSCoding> {
+#endif
 
   /*All instance variables are private*/
 
@@ -116,10 +125,11 @@ typedef enum {
         unsigned int defaultAttachmentScaling:2;
         unsigned int isInUILayoutMode:1;
         unsigned int seenRightToLeft:1;
-        unsigned int ignoresAntialiasThreshold:1;
+        unsigned int ignoresViewTransformations:1;
         unsigned int needToFlushGlyph:1;
+        unsigned int flipsIfNeeded:1;
 
-        unsigned int _pad:3;
+        unsigned int _pad:2;
     } _lmFlags;
 
     id _delegate;
@@ -162,11 +172,11 @@ typedef enum {
     NSTabWell *_rulerAccViewCenterTabWell;
     NSTabWell *_rulerAccViewDecimalTabWell;
     id _rulerAccViewStyles;
-    id _rulerAccViewReserved;
+    id _rulerAccViewLists;
 
     NSRange _newlyFilledGlyphRange;
 
-    void *_extraData;
+    id _extraData;
 }
 
 /**************************** Initialization ****************************/
@@ -182,10 +192,16 @@ typedef enum {
 
 - (void)replaceTextStorage:(NSTextStorage *)newTextStorage;
     // This method should be used instead of the primitive -setTextStorage: if you need to replace a NSLayoutManager's NSTextStorage with a new one leaving the rest of the web intact.  This method deals with all the work of making sure the NSLayoutManager doesn't get deallocated and transferring all the NSLayoutManagers on the old NSTextStorage to the new one.
+    
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (NSGlyphGenerator *)glyphGenerator;
+- (void)setGlyphGenerator:(NSGlyphGenerator *)glyphGenerator;
+    // Setting glyph generator invalidates all glyphs and layout in the NSLayoutManager.
+#endif
 
 - (NSTypesetter *)typesetter;
 - (void)setTypesetter:(NSTypesetter *)typesetter;
-    // Setting the default NSTypesetter should invalidate all glyphs in the NSLayoutManager.  It can't just invalidate layout because the typesetter may have contributed to the actual glyphs as well (e.g. hyphenation).
+    // Setting the typesetter invalidates all glyphs in the NSLayoutManager.  It can't just invalidate layout because the typesetter may have contributed to the actual glyphs as well (e.g. hyphenation).
 
 - (id)delegate;
 - (void)setDelegate:(id)delegate;
@@ -330,6 +346,13 @@ typedef enum {
 - (NSRect)lineFragmentUsedRectForGlyphAtIndex:(unsigned)glyphIndex effectiveRange:(NSRangePointer)effectiveGlyphRange;
     // Returns the usage rect for the line fragment in which the given glyph is laid and (optionally) by reference the whole range of glyphs that are in that fragment.  This will cause glyph generation AND layout as needed.
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (NSRect)lineFragmentRectForGlyphAtIndex:(unsigned)glyphIndex effectiveRange:(NSRangePointer)effectiveGlyphRange withoutAdditionalLayout:(BOOL)flag;
+- (NSRect)lineFragmentUsedRectForGlyphAtIndex:(unsigned)glyphIndex effectiveRange:(NSRangePointer)effectiveGlyphRange withoutAdditionalLayout:(BOOL)flag;
+- (NSTextContainer *)textContainerForGlyphAtIndex:(unsigned)glyphIndex effectiveRange:(NSRangePointer)effectiveGlyphRange withoutAdditionalLayout:(BOOL)flag;
+    // If flag is YES, the withoutAdditionalLayout variants will not generate glyphs or perform layout in attempting to answer, so should not be used unless layout is known to be complete for the range in question.  Primarily for use from within NSTypesetter, after layout is complete for the range in question, but before the layout manager's call to NSTypesetter has returned.  In that case glyph and layout holes have not yet been recalculated, so the layout manager does not yet know that layout is complete for that range, and the withoutAdditionalLayout: variants must be used.
+#endif
+
 - (NSSize)attachmentSizeForGlyphAtIndex:(unsigned)glyphIndex;
     // Returns the size at which the glyph should be drawn.
 
@@ -346,6 +369,19 @@ typedef enum {
 
 - (BOOL)notShownAttributeForGlyphAtIndex:(unsigned) glyphIndex;
     // Some glyphs are not shown.  This will cause glyph generation and layout as needed..
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+/************************** Block information **************************/
+
+- (void)setLayoutRect:(NSRect)rect forTextBlock:(NSTextBlock *)block glyphRange:(NSRange)glyphRange;
+- (void)setBoundsRect:(NSRect)rect forTextBlock:(NSTextBlock *)block glyphRange:(NSRange)glyphRange;
+- (NSRect)layoutRectForTextBlock:(NSTextBlock *)block glyphRange:(NSRange)glyphRange;
+- (NSRect)boundsRectForTextBlock:(NSTextBlock *)block glyphRange:(NSRange)glyphRange;
+    // Used to set and get information about layout of text blocks.  These methods cause glyph generation but not layout.  The latter two will return NSZeroRect if no rect has been set for the specified block and range since the last invalidation.
+- (NSRect)layoutRectForTextBlock:(NSTextBlock *)block atIndex:(unsigned)glyphIndex effectiveRange:(NSRangePointer)effectiveGlyphRange;
+- (NSRect)boundsRectForTextBlock:(NSTextBlock *)block atIndex:(unsigned)glyphIndex effectiveRange:(NSRangePointer)effectiveGlyphRange;
+    // Similar to the above, but they can be passed any index in the range and will return the range by reference.
+#endif
 
 /************************ More sophisticated queries ************************/
 
@@ -375,7 +411,7 @@ typedef enum {
 
 - (NSRange)glyphRangeForBoundingRect:(NSRect)bounds inTextContainer:(NSTextContainer *)container;
 - (NSRange)glyphRangeForBoundingRectWithoutAdditionalLayout:(NSRect)bounds inTextContainer:(NSTextContainer *)container;
-    // Returns the minimum contiguous glyph range that would need to be displayed in order to draw all glyphs that fall (even partially) within the bounding rect given.  This range might include glyphs which do not fall into the rect at all.  At most this will return the glyph range for the whole container.  The "WithoutFillingHoles" variant will not generate glyphs or perform layout in attempting to answer, and, thus, will potentially not be totally correct.
+    // Returns the minimum contiguous glyph range that would need to be displayed in order to draw all glyphs that fall (even partially) within the bounding rect given.  This range might include glyphs which do not fall into the rect at all.  At most this will return the glyph range for the whole container.  The "WithoutAdditionalLayout" variant will not generate glyphs or perform layout in attempting to answer, and, thus, will potentially not be totally correct.
 
 - (unsigned)glyphIndexForPoint:(NSPoint)point inTextContainer:(NSTextContainer *)container fractionOfDistanceThroughGlyph:(float *)partialFraction;
 - (unsigned)glyphIndexForPoint:(NSPoint)point inTextContainer:(NSTextContainer *)container;
@@ -396,7 +432,7 @@ typedef enum {
     // Sets whether this layoutManager will use screen fonts when it is possible to do so.
 
 - (NSFont *)substituteFontForFont:(NSFont *)originalFont;
-    // Returns a font to use in place of originalFont.  This method is used to substitute screen fonts for regular fonts.  If screen fonts are allowed AND no NSTextView managed by this layoutManager is scaled or rotated AND a screen font is available for originalFont, it is returned, otherwise originalFont is returned.  This method will eventually need to know or be told whether use of screen fonts is appropriate in a given situation (ie screen font used might be enabled or disabled, we might be printing, etc...).  This method causes no generation.
+    // Returns a font to use in place of originalFont.  This method is used to substitute screen fonts for regular fonts.  If screen fonts are allowed and a screen font is available for originalFont, it is returned, otherwise originalFont is returned.  This method causes no generation.
 
 /************************ Temporary attribute support ************************/
 - (NSDictionary *)temporaryAttributesAtCharacterIndex:(unsigned)charIndex effectiveRange:(NSRangePointer)effectiveCharRange;

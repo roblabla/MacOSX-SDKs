@@ -6,7 +6,7 @@
      Version:    Technology: Mac OS X
                  Release:    Mac OS X
  
-     Copyright:  (c) 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 2000-2005 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -25,14 +25,12 @@
 #include <CoreMIDI/CoreMIDI.h>
 
 /*!
-	@header MIDIDriver
+	@header MIDIDriver.h
 	
 	This is the header file for Mac OS X's MIDI driver interface.
 	
 	<h2>About MIDI drivers</h2>
-	
 	MIDI drivers are CFPlugIns, installed into the following places:
-	
 <pre>
     /System/Library/Extensions      -- not recommended for non-Apple drivers, but
                                     necessary for compatibility with CoreMIDI 1.0
@@ -41,30 +39,26 @@
     
     ~/Library/Audio/MIDI Drivers    -- starting with CoreMIDI 1.1
 </pre>
-	
 	Refer to the CFPlugIn documentation for more information about plug-ins.
 	
 	<h2>Driver bundle/plug-in properties</h2>
-	
 	A driver's bundle settings should include settings resembling the following:
-	
 <pre>
     Bundle settings:
         CFBundleIdentifier              String          com.mycompany.midi.driver.mydevice
             (note that this will be the driver's persistent ID in MIDISetup's)
         CFPlugInDynamicRegistration     String          NO
         CFPlugInFactories               Dictionary      1 key/value pair
-            <your new factory UUID>     String          <your factory function name>
+            [your new factory UUID]     String          [your factory function name]
         CFPlugInTypes                   Dictionary      1 key/value pair
             ECDE9574-0FE4-11D4-BB1A-0050E4CEA526        Array       1 object
                 (this is kMIDIDriverTypeID)
-                0                       String          <your new factory UUID>
+                0                       String          [your new factory UUID]
     Build settings:
         WRAPPER_EXTENSION               plugin
 </pre>
 	
 	<h2>Driver access to the CoreMIDI API</h2>
-	
 	Drivers have access to most of the CoreMIDI API.  They should link with
 	CoreMIDIServer.framework, <b>not</b> CoreMIDI.framework.
 	
@@ -74,13 +68,13 @@
 	
 	The MIDI I/O functions MIDISend and MIDIReceived may be called from any thread.
 	
-	All other CoreMIDI functions must only be called from the server's main thread,
-	which is the thread on which the driver is created and from which all calls to it
-	other than Send() are made.
+	All other CoreMIDI functions must only be called from the server's main thread, which is the
+	thread on which the driver is created and from which all calls to the driver other than
+	Send() are made.
 */
 
 typedef struct MIDIDriverInterface		MIDIDriverInterface;
-//  -----------------------------------------------------------------------------
+
 /*!
 	@typedef		MIDIDriverRef
 	
@@ -100,6 +94,134 @@ typedef MIDIDriverInterface **			MIDIDriverRef;
 */
 typedef struct OpaqueMIDIDeviceList*    MIDIDeviceListRef;
 
+
+/*!
+	@interface		MIDIDriverInterface
+	
+	@abstract		The COM-style interface to a MIDI driver.
+	
+	@discussion
+		This is the function table interface to a MIDI driver.  Both version 1 and 2 drivers use
+		this same table of function pointers (except as noted).
+
+		Drivers which support both the version 1 and version 2 interfaces can tell which version
+		of the server is running by checking to see whether kMIDIDriverInterface2ID or
+		kMIDIDriverInterfaceID is passed to the factory function.  If the version 1 interface is
+		requested, the driver should behave as if it is a version 1 driver.
+*/
+struct MIDIDriverInterface
+{
+	IUNKNOWN_C_GUTS;
+
+	/*!
+		@function FindDevices
+		@discussion
+			This is only called for version 1 drivers.  The server is requesting that the driver
+			detect the devices which are present.  For each device present, the driver should
+			create a MIDIDeviceRef with entities, using MIDIDeviceCreate and
+			MIDIDeviceAddEntity, and add the device to the supplied MIDIDeviceListRef, using
+			MIDIDeviceListAddDevice.
+
+			The driver should not retain any references to the created devices and entities.
+	*/	
+	OSStatus	(*FindDevices)(MIDIDriverRef self, MIDIDeviceListRef devList);
+
+	/*!
+		@function Start
+		@discussion
+			The server is telling the driver to begin MIDI I/O.
+
+			The provided device list contains the devices which were previously located by
+			FindDevices (in the case of a version 1 driver), or the devices which are owned by
+			this driver and are currently in the current MIDISetup (for version 2 drivers).
+
+			The provided devices may or may not still be present.  A version 1 driver should
+			attempt to use as many of the devices as are actually present.
+
+			A version 2 driver may make calls such as MIDISetupAddDevice, MIDIDeviceAddEntity,
+			MIDIDeviceRemoveEntity to dynamically modify the system's current state. For devices
+			in the provided device list which are not present, the driver should set their
+			kMIDIPropertyOffline property to 1.  A version 2 driver may also set up
+			notifications when the IORegistry changes, to detect connection and disconnection of
+			devices it wishes to control.  At these times also, the driver may change the
+			devices' kMIDIPropertyOffline, and dynamically modify the system's current state to
+			reflect the devices which are present.  When passing a CFRunLoopRef to IOKit for
+			notification purposes, the driver must use the server's main runloop, which is
+			obtained with CFRunLoopGetCurrent().
+
+			The driver will probably want to iterate through the destination endpoints and
+			assign their driver refCons, so as to identify multiple destinations when Send() is
+			called.
+
+			The provided device list remains owned by the system and can be assumed to contain
+			only devices owned by this driver.  The driver may retain references to the devices
+			in this list and any it creates while running.
+	*/					
+	OSStatus	(*Start)(MIDIDriverRef self, MIDIDeviceListRef devList);
+
+	/*!
+		@function Stop
+		@discussion
+			The server is telling the driver to terminate MIDI I/O.  All I/O operations that
+			were begun in Start, or as a result of a subsequent IOKit notification, should be
+			terminated.
+	*/
+	OSStatus	(*Stop)(MIDIDriverRef self);
+	
+	/*!
+		@function Configure
+		@discussion
+			not currently used
+	*/
+	OSStatus	(*Configure)(MIDIDriverRef self, MIDIDeviceRef device);
+
+	/*!
+		@function Send
+		@discussion
+			Send a MIDIPacketList to the destination endpoint whose refCons are being passed as
+			arguments.
+	*/
+	OSStatus	(*Send)(MIDIDriverRef self, const MIDIPacketList *pktlist, void *destRefCon1, void *destRefCon2);
+	
+	/*!
+		@function EnableSource
+		@discussion
+			A client has opened or closed a connection, and now the server is telling the driver
+			that input from a particular source either does or does not have any listeners in
+			the system.  The driver may use this information to decide whether to pass messages
+			from the source to the server, and it may even be able to tell the source hardware
+			not to generate incoming MIDI I/O for that source.
+	*/
+	OSStatus	(*EnableSource)(MIDIDriverRef self, MIDIEndpointRef src, Boolean enabled);
+	
+	/*!
+		@function Flush
+		@discussion
+			Only for version 2 drivers (new for CoreMIDI 1.1).
+
+			Drivers which support schedule-ahead, when receiving this message, should unschedule
+			all pending output to the specified destination.  If the destination is null, the
+			driver should unschedule all pending output to all destinations.
+	*/
+	OSStatus	(*Flush)(MIDIDriverRef self, MIDIEndpointRef dest, void *destRefCon1, void *destRefCon2);
+
+	/*!
+		@function Monitor		
+		@discussion
+			Only for version 2 drivers (new for CoreMIDI 1.1).
+
+			Some specialized drivers (e.g. a MIDI monitor display) may wish to intercept and
+			look at all outgoing MIDI messages.  After a driver calls
+			MIDIDriverEnableMonitoring(true) on itself, this function is called with the
+			outgoing MIDI packets for all destinations in the system.  The Monitor function
+			cannot rely on the MIDI events arriving in order, due to MIDIServer's schedule-ahead
+			facilities.
+	*/
+	OSStatus	(*Monitor)(MIDIDriverRef self, MIDIEndpointRef dest, const MIDIPacketList *pktlist);
+};
+
+
+//  -----------------------------------------------------------------------------
 /*!
 	@define			kMIDIDriverTypeID
 	
@@ -108,12 +230,12 @@ typedef struct OpaqueMIDIDeviceList*    MIDIDeviceListRef;
 	@discussion		kMIDIDriverTypeID should be entered into your driver's bundle settings
 					as follows:
 					
-					<pre>
-					CFPlugInTypes                   Dictionary      1 key/value pair
-						ECDE9574-0FE4-11D4-BB1A-0050E4CEA526        Array       1 object
-							(this is kMIDIDriverTypeID)
-							0                       String          <your new factory UUID>
-					</pre>
+<pre>
+CFPlugInTypes                   Dictionary      1 key/value pair
+	ECDE9574-0FE4-11D4-BB1A-0050E4CEA526        Array       1 object
+		(this is kMIDIDriverTypeID)
+		0                       String          [your new factory UUID]
+</pre>
 */
 #define kMIDIDriverTypeID \
 	CFUUIDGetConstantUUIDWithBytes(NULL, 0xEC, 0xDE, 0x95, 0x74, 0x0F, 0xE4, 0x11, 0xD4, 0xBB, 0x1A, 0x00, 0x50, 0xE4, 0xCE, 0xA5, 0x26)
@@ -161,132 +283,6 @@ typedef struct OpaqueMIDIDeviceList*    MIDIDeviceListRef;
 */
 extern const CFStringRef kMIDIDriverPropertyUsesSerial;
 
-/*!
-	@class			MIDIDriverInterface
-
-	@discussion		The function table interface to a MIDI driver.  Both version 1 and 2
-					drivers use this same table of function pointers (except as noted).
-					
-					Drivers which support both the version 1 and version 2 interfaces
-					can tell which version of the server is running by checking to 
-					see whether kMIDIDriverInterface2ID or kMIDIDriverInterfaceID
-					is passed to the factory function.  If the version 1 interface
-					is requested, the driver should behave as if it is a version 1
-					driver.
-	
-*/
-struct MIDIDriverInterface
-{
-#ifdef __cplusplus
-//public:		// informs HeaderDoc that the members of a struct are public by default
-#endif
-	IUNKNOWN_C_GUTS;
-
-	/*!
-		@function FindDevices
-					This is only called for version 1 drivers.  The server is requesting
-					that the driver detect the devices which are present.  For each device
-					present, the driver should create a MIDIDeviceRef with entities,
-					using MIDIDeviceCreate and MIDIDeviceAddEntity, and add the
-					device to the supplied MIDIDeviceListRef, using MIDIDeviceListAddDevice.
-
-					The driver should not retain any references to the created devices
-					and entities.
-	*/	
-	OSStatus	(*FindDevices)(MIDIDriverRef self, MIDIDeviceListRef devList);
-
-	/*!
-		@function Start
-					The server is telling the driver to begin MIDI I/O.
-					
-					The provided device list contains the devices which were previously located
-					by FindDevices (in the case of a version 1 driver), or the devices
-					which are owned by this driver and are currently in the current MIDISetup
-					(for version 2 drivers).
-					
-					The provided devices may or may not still be present.  A version 1 driver should
-					attempt to use as many of the devices as are actually present.
-					
-					A version 2 driver may make calls such as MIDISetupAddDevice, MIDIDeviceAddEntity,
-					MIDIDeviceRemoveEntity to dynamically modify the system's current state.
-					For devices in the provided device list which are not present, the driver
-					should set their kMIDIPropertyOffline property to 1.  A version 2 driver
-					may also set up notifications when the IORegistry changes, to detect
-					connection and disconnection of devices it wishes to control.  At these
-					times also, the driver may change the devices' kMIDIPropertyOffline, and
-					dynamically modify the system's current state to reflect the devices
-					which are present.  When passing a CFRunLoopRef to IOKit for notification
-					purposes, the driver must use the server's main runloop, which is obtained
-					with CFRunLoopGetCurrent().
-					
-					The driver will probably want to iterate through the destination endpoints
-					and assign their driver refCons, so as to identify multiple destinations
-					when Send() is called.
-
-					The provided device list remains owned by the system and can be assumed
-					to contain only devices owned by this driver.  The driver may
-					retain references to the devices in this list and any it creates while
-					running.
-	*/					
-	OSStatus	(*Start)(MIDIDriverRef self, MIDIDeviceListRef devList);
-
-	/*!
-		@function Stop
-					The system is telling the driver to terminate MIDI I/O.  All I/O operations
-					that were begun in Start, or as a result of a subsequent IOKit notification,
-					should be terminated.
-	*/
-	OSStatus	(*Stop)(MIDIDriverRef self);
-	
-	/*!
-		@function Configure
-					not currently used
-	*/
-	OSStatus	(*Configure)(MIDIDriverRef self, MIDIDeviceRef device);
-
-	/*!
-		@function Send
-					Send a MIDIPacketList to the destination endpoint whose refCons are being 
-					passed as arguments.
-	*/
-	OSStatus	(*Send)(MIDIDriverRef self, const MIDIPacketList *pktlist, void *destRefCon1, void *destRefCon2);
-	
-	/*!
-		@function EnableSource
-					A client has opened or closed a connection, and now the server is 
-					telling the driver that input from a particular source either does or 
-					does not have any listeners in the system.  The driver may use this 
-					information to decide whether to pass messages from the source to the 
-					server, and it may even be able to tell the source hardware not to 
-					generate incoming MIDI I/O for that source.
-	*/
-	OSStatus	(*EnableSource)(MIDIDriverRef self, MIDIEndpointRef src, Boolean enabled);
-	
-	/*!
-		@function Flush
-					Only for version 2 drivers (new for CoreMIDI 1.1).
-					
-					Drivers which support schedule-ahead, when receiving this message, should
-					unschedule all pending output to the specified destination.  If the
-					destination is null, the driver should unschedule all pending output
-					to all destinations.
-	*/
-	OSStatus	(*Flush)(MIDIDriverRef self, MIDIEndpointRef dest, void *destRefCon1, void *destRefCon2);
-
-	/*!
-		@function Monitor		
-					Only for version 2 drivers (new for CoreMIDI 1.1).
-					
-					Some specialized drivers (e.g. a MIDI monitor display) may wish to intercept
-					and look at all outgoing MIDI messages.  After a driver calls
-					MIDIDriverEnableMonitoring(true) on itself, this function is called
-					with the outgoing MIDI packets for all destinations in the system.  The
-					Monitor function cannot rely on the MIDI events arriving in order, due
-					to MIDIServer's schedule-ahead facilities.
-	*/
-	OSStatus	(*Monitor)(MIDIDriverRef self, MIDIEndpointRef dest, const MIDIPacketList *pktlist);
-};
-
 
 #ifdef __cplusplus
 extern "C" {
@@ -320,7 +316,8 @@ extern "C" {
 */
 extern OSStatus		MIDIDeviceCreate(MIDIDriverRef owner, 
 							CFStringRef name, CFStringRef manufacturer, 
-							CFStringRef model, MIDIDeviceRef *outDevice);
+							CFStringRef model, MIDIDeviceRef *outDevice)
+																AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*!
@@ -339,7 +336,7 @@ extern OSStatus		MIDIDeviceCreate(MIDIDriverRef owner,
 						The device to be disposed.
 	@result			An OSStatus result code.
 */
-extern OSStatus		MIDIDeviceDispose(MIDIDeviceRef device);
+extern OSStatus		MIDIDeviceDispose(MIDIDeviceRef device)		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 // ___________________________________________________________________________________________
 //	MIDIDeviceList
@@ -355,7 +352,8 @@ extern OSStatus		MIDIDeviceDispose(MIDIDeviceRef device);
 						The device list.
 	@result			The number of devices in the list, or 0 if an error occurred.
 */
-extern ItemCount		MIDIDeviceListGetNumberOfDevices(MIDIDeviceListRef devList);
+extern ItemCount		MIDIDeviceListGetNumberOfDevices(MIDIDeviceListRef devList)
+																AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -370,7 +368,8 @@ extern ItemCount		MIDIDeviceListGetNumberOfDevices(MIDIDeviceListRef devList);
 						to return.
 	@result			A reference to a device, or NULL if an error occurred.
 */
-extern MIDIDeviceRef	MIDIDeviceListGetDevice(MIDIDeviceListRef devList, ItemCount index0);
+extern MIDIDeviceRef	MIDIDeviceListGetDevice(MIDIDeviceListRef devList, ItemCount index0)
+																AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -384,7 +383,8 @@ extern MIDIDeviceRef	MIDIDeviceListGetDevice(MIDIDeviceListRef devList, ItemCoun
 						The device to add to the list.
 	@result			An OSStatus result code.
 */
-extern OSStatus		MIDIDeviceListAddDevice(MIDIDeviceListRef devList, MIDIDeviceRef dev);
+extern OSStatus		MIDIDeviceListAddDevice(MIDIDeviceListRef devList, MIDIDeviceRef dev)
+																AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -392,13 +392,12 @@ extern OSStatus		MIDIDeviceListAddDevice(MIDIDeviceListRef devList, MIDIDeviceRe
 
 	@discussion		Dispose a device list, but not the contained devices.
 	
-					New for CoreMIDI 1.1.
-	
 	@param			devList
 						The device list to be disposed.
 	@result			An OSStatus result code.
 */
-extern OSStatus		MIDIDeviceListDispose(MIDIDeviceListRef devList);				
+extern OSStatus		MIDIDeviceListDispose(MIDIDeviceListRef devList)
+																AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 // ___________________________________________________________________________________________
@@ -432,7 +431,7 @@ extern OSStatus		MIDIDeviceListDispose(MIDIDeviceListRef devList);
 	@result			An OSStatus result code.
 */
 extern OSStatus		MIDIEndpointSetRefCons(MIDIEndpointRef endpt,
-					void *ref1, void *ref2);
+					void *ref1, void *ref2)					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -449,7 +448,7 @@ extern OSStatus		MIDIEndpointSetRefCons(MIDIEndpointRef endpt,
 	@result			An OSStatus result code.
 */
 extern OSStatus		MIDIEndpointGetRefCons(MIDIEndpointRef endpt, 
-					void **ref1, void **ref2);
+					void **ref1, void **ref2)				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 // ___________________________________________________________________________________________
 
@@ -468,12 +467,12 @@ extern OSStatus		MIDIEndpointGetRefCons(MIDIEndpointRef endpt,
 					into MIDIPacketLists to be passed to MIDIReceived.
 	
 					This is a realtime-priority thread and shouldn't be used for anything other 
-					than I/O.  For lower-priority purposes, drivers can use the runloop which 
+					than I/O.  For lower-priority tasks, drivers can use the runloop which 
 					was current when they were constructed.
 
 	@result			The CFRunLoopRef of the server's driver I/O thread.
 */
-extern CFRunLoopRef	MIDIGetDriverIORunLoop();
+extern CFRunLoopRef	MIDIGetDriverIORunLoop()				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -485,14 +484,13 @@ extern CFRunLoopRef	MIDIGetDriverIORunLoop();
 					The returned device list should be disposed (using MIDIDeviceListDispose)
 					by the caller.
 					
-					New for CoreMIDI 1.1.
-	
 	@param			driver
 						The driver whose devices are to be returned.
 
 	@result			The requested device list.
 */
-extern MIDIDeviceListRef	MIDIGetDriverDeviceList(MIDIDriverRef driver);
+extern MIDIDeviceListRef	MIDIGetDriverDeviceList(MIDIDriverRef driver)
+															AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -502,8 +500,6 @@ extern MIDIDeviceListRef	MIDIGetDriverDeviceList(MIDIDriverRef driver);
 					packet, to all destinations in the system (not just those controlled by
 					itself).
 					
-					New for CoreMIDI 1.1.
-	
 	@param			driver
 						The driver whose Monitor function is to be enabled.
 	@param			enabled
@@ -511,7 +507,8 @@ extern MIDIDeviceListRef	MIDIGetDriverDeviceList(MIDIDriverRef driver);
 
 	@result			An OSStatus result code.
 */
-extern OSStatus			MIDIDriverEnableMonitoring(MIDIDriverRef driver, Boolean enabled);
+extern OSStatus			MIDIDriverEnableMonitoring(MIDIDriverRef driver, Boolean enabled)
+															AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 #ifdef __cplusplus

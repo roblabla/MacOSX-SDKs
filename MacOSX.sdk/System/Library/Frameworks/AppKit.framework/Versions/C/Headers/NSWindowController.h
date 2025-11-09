@@ -1,7 +1,7 @@
 /*
 	NSWindowController.h
 	Application Kit
-	Copyright (c) 1997-2003, Apple Computer, Inc.
+	Copyright (c) 1997-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -24,8 +24,8 @@
         unsigned int nibNameIsPath:1;
         unsigned int RESERVED:28;
     } _wcFlags;
-    void *_reserved1;
-    void *_reserved2;
+    id _autounbinder;
+    void *_reserved;
 }
 
 - (id)initWithWindow:(NSWindow *)window;

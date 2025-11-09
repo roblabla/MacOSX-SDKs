@@ -3,9 +3,9 @@
  
      Contains:   Public interface to the font access and data management functions of ATS.
  
-     Version:    ATS-135.7~1
+     Version:    ATS-184.7.7~42
  
-     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -83,7 +83,7 @@ enum {
 
 /* Iteration Option Flags */
 enum {
-  kATSOptionFlagsIterateByPrecedenceMask = 0x00000001 << 5,
+  kATSOptionFlagsIterateByPrecedenceMask = 0x00000001 << 5, /* Fonts returned from highest to lowest precedece */
   kATSOptionFlagsIterationScopeMask = 0x00000007 << 12, /* Mask option bits 12-14 for iteration scopes */
   kATSOptionFlagsDefaultScope   = 0x00000000 << 12,
   kATSOptionFlagsUnRestrictedScope = 0x00000001 << 12,
@@ -212,6 +212,9 @@ typedef CALLBACK_API_C( void , ATSNotificationCallback )(ATSFontNotificationInfo
 /*
  *  ATSGetGeneration()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -223,6 +226,9 @@ ATSGetGeneration(void)                                        AVAILABLE_MAC_OS_X
 
 /*
  *  ATSFontActivateFromFileSpecification()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -241,6 +247,9 @@ ATSFontActivateFromFileSpecification(
 
 /*
  *  ATSFontActivateFromMemory()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -261,6 +270,9 @@ ATSFontActivateFromMemory(
 /*
  *  ATSFontDeactivate()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -279,6 +291,9 @@ ATSFontDeactivate(
 /*
  *  ATSFontFamilyApplyFunction()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -292,6 +307,9 @@ ATSFontFamilyApplyFunction(
 
 /*
  *  ATSFontFamilyIteratorCreate()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -310,6 +328,9 @@ ATSFontFamilyIteratorCreate(
 /*
  *  ATSFontFamilyIteratorRelease()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -321,6 +342,9 @@ ATSFontFamilyIteratorRelease(ATSFontFamilyIterator * ioIterator) AVAILABLE_MAC_O
 
 /*
  *  ATSFontFamilyIteratorReset()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -339,6 +363,9 @@ ATSFontFamilyIteratorReset(
 /*
  *  ATSFontFamilyIteratorNext()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -352,6 +379,9 @@ ATSFontFamilyIteratorNext(
 
 /*
  *  ATSFontFamilyFindFromName()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -367,6 +397,9 @@ ATSFontFamilyFindFromName(
 /*
  *  ATSFontFamilyGetGeneration()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -378,6 +411,9 @@ ATSFontFamilyGetGeneration(ATSFontFamilyRef iFamily)          AVAILABLE_MAC_OS_X
 
 /*
  *  ATSFontFamilyGetName()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -394,6 +430,9 @@ ATSFontFamilyGetName(
 /*
  *  ATSFontFamilyGetEncoding()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -409,6 +448,9 @@ ATSFontFamilyGetEncoding(ATSFontFamilyRef iFamily)            AVAILABLE_MAC_OS_X
 /*
  *  ATSFontApplyFunction()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -422,6 +464,9 @@ ATSFontApplyFunction(
 
 /*
  *  ATSFontIteratorCreate()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -440,6 +485,9 @@ ATSFontIteratorCreate(
 /*
  *  ATSFontIteratorRelease()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -451,6 +499,9 @@ ATSFontIteratorRelease(ATSFontIterator * ioIterator)          AVAILABLE_MAC_OS_X
 
 /*
  *  ATSFontIteratorReset()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -469,6 +520,9 @@ ATSFontIteratorReset(
 /*
  *  ATSFontIteratorNext()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -482,6 +536,9 @@ ATSFontIteratorNext(
 
 /*
  *  ATSFontFindFromName()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -497,6 +554,9 @@ ATSFontFindFromName(
 /*
  *  ATSFontFindFromPostScriptName()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -510,6 +570,9 @@ ATSFontFindFromPostScriptName(
 
 /*
  *  ATSFontFindFromContainer()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -528,6 +591,9 @@ ATSFontFindFromContainer(
 /*
  *  ATSFontGetGeneration()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -539,6 +605,9 @@ ATSFontGetGeneration(ATSFontRef iFont)                        AVAILABLE_MAC_OS_X
 
 /*
  *  ATSFontGetName()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -555,6 +624,9 @@ ATSFontGetName(
 /*
  *  ATSFontGetPostScriptName()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -569,6 +641,9 @@ ATSFontGetPostScriptName(
 
 /*
  *  ATSFontGetTableDirectory()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -585,6 +660,9 @@ ATSFontGetTableDirectory(
 
 /*
  *  ATSFontGetTable()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -604,6 +682,9 @@ ATSFontGetTable(
 /*
  *  ATSFontGetHorizontalMetrics()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -618,6 +699,9 @@ ATSFontGetHorizontalMetrics(
 
 /*
  *  ATSFontGetVerticalMetrics()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -637,6 +721,9 @@ ATSFontGetVerticalMetrics(
 /*
  *  ATSFontFamilyFindFromQuickDrawName()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -648,6 +735,9 @@ ATSFontFamilyFindFromQuickDrawName(ConstStr255Param iName)    AVAILABLE_MAC_OS_X
 
 /*
  *  ATSFontFamilyGetQuickDrawName()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -663,6 +753,9 @@ ATSFontFamilyGetQuickDrawName(
 /*
  *  ATSFontGetFileSpecification()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -676,6 +769,9 @@ ATSFontGetFileSpecification(
 
 /*
  *  ATSFontGetFontFamilyResource()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -701,6 +797,9 @@ ATSFontGetFontFamilyResource(
  *  Summary:
  *    Used to alert ATS that an action which may require notification
  *    to clients has occurred.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Parameters:
  *    
@@ -734,6 +833,9 @@ ATSFontNotify(
  *    occurred.  Note that your application must have a CFRunLoop in
  *    order to receive notifications. Any Appkit or Carbon event loop
  *    based application will have one by default.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Parameters:
  *    
@@ -776,6 +878,9 @@ ATSFontNotificationSubscribe(
  *  Summary:
  *    Release subscription and stop receiving notifications for a given
  *    reference.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Parameters:
  *    
@@ -885,6 +990,9 @@ typedef CALLBACK_API_C( CFPropertyListRef , ATSFontQueryCallback )(ATSFontQueryM
  *  Summary:
  *    Creates a CFRunLoopSourceRef that will be used to convey font
  *    queries from ATS.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Parameters:
  *    

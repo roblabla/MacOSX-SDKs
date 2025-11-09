@@ -1,5 +1,5 @@
 /*	NSDistantObject.h
-	Copyright (c) 1989-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1989-2005, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSProxy.h>
@@ -9,12 +9,11 @@
 @interface NSDistantObject : NSProxy <NSCoding> {
     @private
     id			name;
-    unsigned		wire:2;
-    unsigned		unused:6;
-    unsigned		refCount:24;
+    unsigned short	wire;
+    unsigned short	refCount;
     NSConnection	*conn;
     unsigned		wireCount;
-    void		*_knownSelectors;
+    id                  _knownSelectors;
     void		*_reserved;
 }
 

@@ -1,7 +1,7 @@
 /*
 	NSImageRep.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -25,7 +25,8 @@ enum {
         unsigned int cacheParamsComputed:1;
         unsigned int cacheAlphaComputed:1;
         unsigned int loadState:2;
-        unsigned int reserved:2;
+        unsigned int keepCacheWindow:1;
+        unsigned int reserved:1;
         unsigned int bitsPerSample:8;
 	unsigned int gsaved:16;
     } _repFlags;

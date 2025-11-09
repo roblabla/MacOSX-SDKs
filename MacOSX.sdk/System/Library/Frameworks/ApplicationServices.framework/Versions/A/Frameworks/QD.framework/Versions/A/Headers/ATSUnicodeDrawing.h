@@ -3,9 +3,9 @@
  
      Contains:   ATSUI drawing, measuring, and highlighting functions.
  
-     Version:    Quickdraw-150.7~2
+     Version:    Quickdraw-192.24~58
  
-     Copyright:  © 2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -1716,14 +1716,17 @@ ATSULeftwardCursorPosition(
 /* Functions listed beyond this point are either deprecated or not recommended */
 
 /*
- *  ATSUMeasureText()
+ *  ATSUMeasureText()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use ATSUGetUnjustifiedBounds instead.
  *  
  *  Discussion:
  *    This function is no longer recommended. Please use
  *    ATSUGetUnjustifiedBounds instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
@@ -1735,7 +1738,7 @@ ATSUMeasureText(
   ATSUTextMeasurement *  oTextBefore,
   ATSUTextMeasurement *  oTextAfter,
   ATSUTextMeasurement *  oAscent,
-  ATSUTextMeasurement *  oDescent)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUTextMeasurement *  oDescent)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 
 

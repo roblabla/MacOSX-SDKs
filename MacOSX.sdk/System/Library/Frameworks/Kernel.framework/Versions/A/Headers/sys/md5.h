@@ -46,9 +46,7 @@ void   MD5Final (unsigned char [16], MD5_CTX *);
 char * MD5End(MD5_CTX *, char *);
 char * MD5File(const char *, char *);
 char * MD5Data(const unsigned char *, unsigned int, char *);
-#ifdef KERNEL
-void MD5Transform __P((u_int32_t [4], const unsigned char [64]));
-#endif
+void MD5Transform(u_int32_t [4], const unsigned char [64]);
 __END_DECLS
 #endif /* !KERNEL || __APPLE_API_PRIVATE */
 #endif /* _SYS_MD5_H_ */

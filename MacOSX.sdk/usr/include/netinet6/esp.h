@@ -67,43 +67,5 @@ struct esptail {
 	/*variable size, 32bit bound*/	/* Authentication data (new IPsec)*/
 };
 
-#ifdef KERNEL
-#ifdef __APPLE_API_PRIVATE
-struct secasvar;
 
-struct esp_algorithm {
-	size_t padbound;	/* pad boundary, in byte */
-	int ivlenval;		/* iv length, in byte */
-	int (*mature) __P((struct secasvar *));
-	int keymin;	/* in bits */
-	int keymax;	/* in bits */
-	int (*schedlen) __P((const struct esp_algorithm *));
-	const char *name;
-	int (*ivlen) __P((const struct esp_algorithm *, struct secasvar *));
-	int (*decrypt) __P((struct mbuf *, size_t,
-		struct secasvar *, const struct esp_algorithm *, int));
-	int (*encrypt) __P((struct mbuf *, size_t, size_t,
-		struct secasvar *, const struct esp_algorithm *, int));
-	/* not supposed to be called directly */
-	int (*schedule) __P((const struct esp_algorithm *, struct secasvar *));
-	int (*blockdecrypt) __P((const struct esp_algorithm *,
-		struct secasvar *, u_int8_t *, u_int8_t *));
-	int (*blockencrypt) __P((const struct esp_algorithm *,
-		struct secasvar *, u_int8_t *, u_int8_t *));
-};
-
-extern const struct esp_algorithm *esp_algorithm_lookup __P((int));
-extern int esp_max_ivlen __P((void));
-
-/* crypt routines */
-extern int esp4_output __P((struct mbuf *, struct ipsecrequest *));
-extern void esp4_input __P((struct mbuf *, int off));
-extern size_t esp_hdrsiz __P((struct ipsecrequest *));
-
-extern int esp_schedule __P((const struct esp_algorithm *, struct secasvar *));
-extern int esp_auth __P((struct mbuf *, size_t, size_t,
-	struct secasvar *, u_char *));
-#endif /* __APPLE_API_PRIVATE */
-#endif /*KERNEL*/
-
-#endif /*_NETINET6_ESP_H_*/
+#endif /* _NETINET6_ESP_H_ */

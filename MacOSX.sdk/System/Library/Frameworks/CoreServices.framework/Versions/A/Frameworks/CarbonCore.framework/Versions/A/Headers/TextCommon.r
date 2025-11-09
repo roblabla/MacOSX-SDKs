@@ -3,9 +3,9 @@
  
      Contains:   TextEncoding-related types and constants, and prototypes for related functions
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1995-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1995-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -242,8 +242,8 @@
 #define kMacVT100EuroSignVariant 		2					/*  Mac OS version >= 8.5, 0xDB is EURO SIGN       */
 
 #define kUnicodeNoSubset 				0
-#define kUnicodeCanonicalDecompVariant 	2					/*  canonical decomposition (NFD); excludes composed characters */
-#define kUnicodeCanonicalCompVariant 	3					/*  canonical composition (NFC); uses the composed chars as of Unicode 3.1 */
+#define kUnicodeNormalizationFormD 		5					/*  canonical decomposition (NFD); excludes composed chars */
+#define kUnicodeNormalizationFormC 		3					/*  canonical composition (NFC); uses the composed chars as of Unicode 3.1 */
 #define kUnicodeHFSPlusDecompVariant 	8					/*  decomposition for HFS+; doesn't decompose in 2000-2FFF, F900-FAFF, 2F800-2FAFF */
 #define kUnicodeHFSPlusCompVariant 		9					/*  composition based on HFS+ decomposition */
 
@@ -300,9 +300,17 @@
 #define kJapaneseVertAtKuPlusTenVariant  5					/*  kJapaneseStdNoOneByteKanaVariant = 6,  // replaced by kJapaneseNoOneByteKanaOption */
 															/*  kJapaneseBasicNoOneByteKanaVariant = 7,    // replaced by kJapaneseNoOneByteKanaOption     */
 #define kHebrewStandardVariant 			0
-#define kHebrewFigureSpaceVariant 		1
-#define kUnicodeMaxDecomposedVariant 	2					/*  replaced by kUnicodeCanonicalDecompVariant */
-#define kUnicodeNoComposedVariant 		3					/*  this really meant NoComposing; replaced by kUnicodeCanonicalCompVariant */
+#define kHebrewFigureSpaceVariant 		1					/*  Old Unicode variants. Variant 2 (kUnicodeCanonicalDecompVariant, kUnicodeMaxDecomposedVariant) is ambiguous and means */
+															/*  different things in different contexts. When normalizing (using ConvertFromUnicodeToText to convert from arbitrary */
+															/*  Unicode to a normalized form), Unicode variant 2 means the same thing as kUnicodeNormalizationFormD (i.e. NFD). */
+															/*  However, when converting between Unicode and traditional Mac OS encodings, Unicode variant 2 means the same thing as */
+															/*  kUnicodeHFSPlusDecompVariant (i.e. the special HFS decomposition which excludes some character ranges from normalization). */
+															/*  For clarity, please use the less ambiguous constants: kUnicodeNormalizationFormD = 5, kUnicodeHFSPlusDecompVariant = 8. */
+															/*   */
+#define kUnicodeCanonicalDecompVariant 	2					/*  use kUnicodeNormalizationFormD or kUnicodeHFSPlusDecompVariant */
+#define kUnicodeMaxDecomposedVariant 	2					/*  use kUnicodeNormalizationFormD or kUnicodeHFSPlusDecompVariant */
+#define kUnicodeCanonicalCompVariant 	3					/*  replaced by kUnicodeNormalizationFormC */
+#define kUnicodeNoComposedVariant 		3					/*  this really meant NoComposing; replaced by kUnicodeNormalizationFormC */
 															/*  The following Japanese variant options were never supported and are now deprecated. */
 															/*  In TEC 1.4 and later their functionality is replaced by the Unicode Converter options listed. */
 #define kJapaneseNoOneByteKanaOption 	0x20				/*  replaced by UnicodeConverter option kUnicodeNoHalfwidthCharsBit */
@@ -368,6 +376,7 @@
 #define kUCCharPropTypeGenlCategory 	1					/*  requests enumeration value */
 #define kUCCharPropTypeCombiningClass 	2					/*  requests numeric value 0..255 */
 #define kUCCharPropTypeBidiCategory 	3					/*  requests enumeration value */
+#define kUCCharPropTypeDecimalDigitValue  4					/*  requests numeric value 0..9 for decimal digit chars (get err for others) */
 
 															/*  Normative categories: */
 #define kUCGenlCatOtherNotAssigned 		0					/*  Cn Other, Not Assigned */

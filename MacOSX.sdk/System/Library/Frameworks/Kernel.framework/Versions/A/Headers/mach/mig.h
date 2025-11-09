@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2005 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -34,6 +34,29 @@
 #include <mach/port.h>
 #include <mach/message.h>
 #include <mach/vm_types.h>
+
+#include <sys/cdefs.h>
+
+#if defined(MACH_KERNEL)
+
+/* Turn MIG type checking on by default for kernel */
+#define __MigTypeCheck 1
+#define __MigKernelSpecificCode 1
+#define _MIG_KERNEL_SPECIFIC_CODE_ 1
+
+/* Otherwise check legacy setting (temporary) */
+#elif defined(TypeCheck)  
+
+#define __MigTypeCheck TypeCheck
+ 
+#endif /* defined(TypeCheck) */
+
+/*
+ * Pack MIG message structs.
+ * This is an indicator of the need to view shared structs in a
+ * binary-compatible format - and MIG message structs are no different.
+ */
+#define __MigPackStructs 1
 
 /*
  * Definition for MIG-generated server stub routines.  These routines
@@ -103,6 +126,9 @@ typedef struct mig_symtab {
 					 							 */
 } mig_symtab_t;
 
+
+__BEGIN_DECLS
+
 /* Client side reply port allocate */
 extern mach_port_t mig_get_reply_port(void);
 
@@ -115,129 +141,14 @@ extern void mig_put_reply_port(mach_port_t reply_port);
 /* Bounded string copy */
 extern int mig_strncpy(char	*dest, const char *src,	int	len);
 
-#ifdef	KERNEL_PRIVATE
-#include <sys/appleapiopts.h>
 
-/* Allocate memory for out-of-stack mig structures */
-extern char *mig_user_allocate(vm_size_t size);
+/* Allocate memory for out-of-line mig structures */
+extern void mig_allocate(vm_address_t *, vm_size_t);
 
-/* Deallocate memory used for out-of-stack mig structures */
-extern void mig_user_deallocate(char *data, vm_size_t size);
+/* Deallocate memory used for out-of-line mig structures */
+extern void mig_deallocate(vm_address_t, vm_size_t);
 
-#ifdef __APPLE_API_EVOLVING
-/*
- * MIG object runtime definitions
- *
- * Conforming MIG subsystems may enable this support to get
- * significant assistance from the base mig_object_t implementation.
- *
- * Support includes:
- *	- Transparency from port manipulation.
- *	- Dymanic port allocation on first "remoting" of an object.
- *	- Reference conversions from object to port and vice versa.
- *	- Automatic port deallocation on no-more-senders.
- *	- Support for multiple server implementations in a single space.
- *	- Messaging bypass for local servers.
- *	- Automatic hookup to base dispatch mechanism.
- *	- General notification support
- * Coming soon:
- *	- User-level support
- */
-typedef unsigned int 			mig_notify_type_t;
 
-typedef struct MIGIID {
-	unsigned long				data1;
-	unsigned short				data2;
-	unsigned short				data3;
-	unsigned char				data4[8];
-} MIGIID;
+__END_DECLS
 
-typedef struct IMIGObjectVtbl			IMIGObjectVtbl;
-typedef struct IMIGNotifyObjectVtbl		IMIGNotifyObjectVtbl;
-
-typedef struct IMIGObject {
-	IMIGObjectVtbl				*pVtbl;
-} IMIGObject;
-
-typedef struct IMIGNotifyObject {
-	IMIGNotifyObjectVtbl			*pVtbl;
-} IMIGNotifyObject;
-
-struct IMIGObjectVtbl {
-	kern_return_t (*QueryInterface)(
-			IMIGObject		*object,
-			const MIGIID		*iid,
-			void			**ppv);
-
-	unsigned long (*AddRef)(
-			IMIGObject		*object);
-
-	unsigned long (*Release)(	
-			IMIGObject		*object);
-
-	unsigned long (*GetServer)(
-			IMIGObject		*object,
-			mig_server_routine_t 	*server);
-	    
-	boolean_t (*RaiseNotification)(
-			IMIGObject 		*object,
-			mig_notify_type_t	notify_type);
-
-	boolean_t (*RequestNotification)(
-			IMIGObject		*object,
-			IMIGNotifyObject	*notify,
-			mig_notify_type_t	notify_type);
-};		
-
-/*
- * IMIGNotifyObject
- *
- * A variant of the IMIGObject interface that is a sink for
- * MIG notifications.
- *
- * A reference is held on both the subject MIGObject and the target
- * MIGNotifyObject. Because of this, care must be exercised to avoid
- * reference cycles.  Once a notification is raised, the object
- * reference is returned and the request must be re-requested (if
- * desired).
- *
- * One interesting note:  because this interface is itself a MIG
- * object, one may request notification about state changes in
- * the MIGNotifyObject itself.
- */
-struct IMIGNotifyObjectVtbl {
-	kern_return_t (*QueryInterface)(
-			IMIGNotifyObject	*notify,
-			const MIGIID		*iid,
-			void			**ppv);
-
-	unsigned long (*AddRef)(	
-			IMIGNotifyObject	*notify);
-
-	unsigned long (*Release)(	
-			IMIGNotifyObject	*notify);
-
-	unsigned long (*GetServer)(
-			IMIGNotifyObject	*notify,
-			mig_server_routine_t	*server);
-
-	boolean_t (*RaiseNotification)(
-			IMIGNotifyObject	*notify,
-			mig_notify_type_t	notify_type);
-
-	boolean_t (*RequestNotification)(
-			IMIGNotifyObject	*notify,
-			IMIGNotifyObject	*notify_notify,
-			mig_notify_type_t	notify_type);
-
-	void (*HandleNotification)(
-			IMIGNotifyObject	*notify,
-			IMIGObject		*object,
-			mig_notify_type_t	notify_type);
-};
-
-#endif /* __APPLE_API_EVOLVING */
-
-#endif /* KERNEL_PRIVATE */
-
-#endif /* _MACH_MIG_H_ */
+#endif	/* _MACH_MIG_H_ */

@@ -4,44 +4,46 @@
 <dict>
 	<key>isBaseSDK</key>
 	<string>YES</string>
-	<key>buildSettings</key>
-	<dict>
-		<key>MACOSX_DEPLOYMENT_TARGET</key>
-		<string>10.3</string>
-	</dict>
 	<key>CustomProperties</key>
 	<dict>
 		<key>KERNEL_EXTENSION_HEADER_SEARCH_PATHS</key>
-		<string>$(KERNEL_FRAMEWORK_HEADERS) $(KERNEL_FRAMEWORK_HEADERS)/bsd $(KERNEL_FRAMEWORK)/PrivateHeaders</string>
+		<string>$(KERNEL_FRAMEWORK)/PrivateHeaders $(KERNEL_FRAMEWORK_HEADERS)</string>
 	</dict>
 	<key>DefaultProperties</key>
 	<dict>
 		<key>MACOSX_DEPLOYMENT_TARGET</key>
-		<string>10.3</string>
+		<string>10.4</string>
 		<key>PLATFORM_NAME</key>
 		<string>macosx</string>
 	</dict>
 	<key>name</key>
-	<string>Mac OS X 10.3.9</string>
+	<string>Mac OS X 10.4 (Universal)</string>
+	<key>supportsZeroLink</key>
+	<string>YES</string>
+	<key>buildSettings</key>
+	<dict>
+		<key>MACOSX_DEPLOYMENT_TARGET</key>
+		<string>10.4</string>
+	</dict>
 	<key>MaximumDeploymentTarget</key>
-	<string>10.3</string>
-	<key>MinimumSupportedToolsVersion</key>
-	<string>1.0</string>
+	<string>10.4</string>
 	<key>FamilyName</key>
 	<string>Mac OS X</string>
 	<key>FamilyIdentifier</key>
 	<string>macosx</string>
 	<key>Version</key>
-	<string>10.3.9</string>
+	<string>10.4</string>
 	<key>DisplayName</key>
-	<string>Mac OS X 10.3.9</string>
+	<string>Mac OS X 10.4</string>
 	<key>DocSetFeedName</key>
-	<string>Apple Mac OS X 10.3</string>
+	<string>Apple Mac OS X 10.4</string>
 	<key>CanonicalName</key>
-	<string>macosx10.3.9</string>
+	<string>macosx10.4</string>
 	<key>MinimalDisplayName</key>
-	<string>10.3.9</string>
-	<key>supportsZeroLink</key>
-	<string>YES</string>
+	<string>10.4</string>
+	<key>MinimumSupportedToolsVersion</key>
+	<string>2.0</string>
+	<key>SupportedBuildToolComponents</key>
+	<array/>
 </dict>
 </plist>

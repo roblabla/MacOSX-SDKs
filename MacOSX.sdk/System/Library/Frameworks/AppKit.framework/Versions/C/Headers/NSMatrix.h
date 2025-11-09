@@ -1,7 +1,7 @@
 /*
 	NSMatrix.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -45,9 +45,11 @@ typedef struct __MFlags {
     unsigned int	subclassIsSafeForLiveResize:1;
     unsigned int 	tmpAllowNonVisibleCellsToBecomeFirstResponder:1;
     unsigned int 	needsRedrawBeforeFirstLiveResizeCache:1;
-    unsigned int	reservedMatrix:7;
+    unsigned int        browserOptimizationsEnabled:1;
+    unsigned int	reservedMatrix:6;
 #else
-    unsigned int	reservedMatrix:7;
+    unsigned int	reservedMatrix:6;
+    unsigned int        browserOptimizationsEnabled:1;
     unsigned int 	needsRedrawBeforeFirstLiveResizeCache:1;
     unsigned int 	tmpAllowNonVisibleCellsToBecomeFirstResponder:1;
     unsigned int	subclassIsSafeForLiveResize:1;
@@ -95,7 +97,7 @@ typedef struct __MFlags {
     id                  _protoCell;
     id                  _cellClass;
     NSColor             *_backgroundColor;
-    void	        *_private;
+    id                  _private;
     NSMutableArray	*_cells;
     _MFlags              _mFlags;
 }

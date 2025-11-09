@@ -59,6 +59,8 @@
 	@param		rfcommChannelRef IOBluetoothRFCOMMChannelRef for which an IOBluetoothRFCOMMChannel * is desired.
 	@param		object		Target object
 	@param		selector	Selector to be called on the target object when a new RFCOMM channel is opened.
+				the format for the selector is: 
+				-(void) selectorName:(IOBluetoothUserNotification *)inNotification channel:(IOBluetoothRFCOMMChannel *)newChannel
 	@result		Returns an IOBluetoothUserNotification representing the outstanding RFCOMM channel notification.
 				To unregister the notification, call -unregister on the resulting IOBluetoothUserNotification 
 				object.  If an error is encountered creating the notification, nil is returned.  The returned
@@ -77,6 +79,8 @@
 				notification object.  The second is the IOBluetoothL2CAPChannel that was opened.
 	@param		object		Target object
 	@param		selector	Selector to be called on the target object when a new RFCOMM channel is opened.
+				the format for the selector is: 
+				-(void) selectorName:(IOBluetoothUserNotification *)inNotification channel:(IOBluetoothRFCOMMChannel *)newChannel
 	@param		channeLID	RFCOMM channel ID to match a new RFCOMM channel.  If the channel ID doesn't matter, 0 may be passed in.
 	@param		inDirection	The desired direction of the RFCOMM channel - kIOBluetoothUserNotificationChannelDirectionAny
 				if the direction doesn't matter.

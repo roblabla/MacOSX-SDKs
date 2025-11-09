@@ -40,6 +40,17 @@ class IOFireWireController;
 class IOFireWireBus;
 class IOConfigDirectory;
 class IOFireWireNub;
+class IOFireWireDevice;
+class IOFireWireUnit;
+class IOFWSimplePhysicalAddressSpace;
+class IOFWSimpleContiguousPhysicalAddressSpace;
+
+enum TerminationState
+{
+	kNotTerminated = 0,
+	kNeedsTermination,
+	kTerminated
+};
 
 #pragma mark -
 
@@ -56,6 +67,7 @@ class IOFireWireNubAux : public OSObject
 protected:
 	
 	IOFireWireNub * 		fPrimary;
+	TerminationState		fTerminationState;
 	
 	/*! 
 		@struct ExpansionData
@@ -76,6 +88,15 @@ protected:
 
 	virtual UInt32 hopCount( IOFireWireNub * nub );
 	virtual UInt32 hopCount( void );
+	
+	virtual TerminationState getTerminationState( void );
+	virtual void setTerminationState( TerminationState state );
+
+	virtual bool isPhysicalAccessEnabled( void );
+
+	virtual IOFWSimpleContiguousPhysicalAddressSpace * createSimpleContiguousPhysicalAddressSpace( vm_size_t size, IODirection direction );
+		
+    virtual IOFWSimplePhysicalAddressSpace * createSimplePhysicalAddressSpace( vm_size_t size, IODirection direction );
 	
 private:
     OSMetaClassDeclareReservedUnused(IOFireWireNubAux, 0);
@@ -109,6 +130,8 @@ class IOFireWireNub : public IOService
     friend class IOFireWireNubAux;
 	friend class IOFireWireDeviceAux;
 	friend class IOFireWireUnitAux;
+	friend class IOFireWireDevice;
+	friend class IOFireWireUnit;
    
 /*------------------Useful info about device (also available in the registry)--------*/
 protected:
@@ -146,12 +169,6 @@ protected:
     ExpansionData *reserved;
 
     virtual void free();
-    
-    // Create an IOUserClient object to handle communication with User task
-    virtual IOReturn newUserClient( task_t		owningTask,
-                                    void * 		security_id,
-                                    UInt32  		type,
-                                    IOUserClient **	handler );
 
 /*------------------Methods provided to FireWire device clients-----------------------*/
 public:
@@ -244,9 +261,26 @@ public:
 		
 	inline UInt32 hopCount( void )
 		{ return fAuxiliary->hopCount(); }
-		
+
+	inline TerminationState getTerminationState( void )
+		{ return fAuxiliary->getTerminationState(); }
+				
 protected:
+	inline void setTerminationState( TerminationState state )
+		{ fAuxiliary->setTerminationState( state ); }
+
 	virtual IOFireWireNubAux * createAuxiliary( void );
+
+public:
+
+	inline bool isPhysicalAccessEnabled( void )
+		{ return fAuxiliary->isPhysicalAccessEnabled(); }
+
+	inline IOFWSimpleContiguousPhysicalAddressSpace * createSimpleContiguousPhysicalAddressSpace( vm_size_t size, IODirection direction )
+		{ return fAuxiliary->createSimpleContiguousPhysicalAddressSpace( size, direction ); }
+		
+    inline IOFWSimplePhysicalAddressSpace * createSimplePhysicalAddressSpace( vm_size_t size, IODirection direction )
+		{ return fAuxiliary->createSimplePhysicalAddressSpace( size, direction ); }
     
 private:
     OSMetaClassDeclareReservedUsed(IOFireWireNub, 0);

@@ -1,5 +1,5 @@
 /*	NSNotificationQueue.h
-	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -21,10 +21,10 @@ typedef enum {
 @interface NSNotificationQueue : NSObject {
 @private
     id		_notificationCenter;
-    void	*_asapQueue;
-    void	*_asapObs;
-    void	*_idleQueue;
-    void	*_idleObs;
+    id		_asapQueue;
+    id		_asapObs;
+    id		_idleQueue;
+    id		_idleObs;
 }
 
 + (NSNotificationQueue *)defaultQueue;

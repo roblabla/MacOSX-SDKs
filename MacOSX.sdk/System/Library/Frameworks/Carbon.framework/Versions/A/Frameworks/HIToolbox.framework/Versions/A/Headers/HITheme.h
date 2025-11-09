@@ -1,11 +1,11 @@
 /*
      File:       HIToolbox/HITheme.h
  
-     Contains:   Private interfaces for HITheme
+     Contains:   HIToolbox HITheme interfaces.
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -124,51 +124,6 @@ enum {
 };
 
 typedef UInt32                          HIThemeGrowBoxSize;
-/* -------------------------------------------------------------------------- */
-/*  Tab Drawing size                                                          */
-/* -------------------------------------------------------------------------- */
-
-/*
- */
-enum {
-
-  /*
-   * No tab adornments are to be drawn.
-   */
-  kHIThemeTabAdornmentNone      = 0,
-
-  /*
-   * A focus ring is to be drawn around the tab.
-   */
-  kHIThemeTabAdornmentFocus     = (1 << 2) /* to match button focus adornment */
-};
-
-typedef UInt32                          HIThemeTabAdornment;
-
-/*
- *  Summary:
- *    These values are similar to kControlSize constants for
- *    convenience.
- */
-enum {
-
-  /*
-   * The tabs are normal (large) sized.
-   */
-  kHIThemeTabSizeNormal         = 0,
-
-  /*
-   * The tabs are drawn as the small variant.
-   */
-  kHIThemeTabSizeSmall          = 1,
-
-  /*
-   * The tabs are drawn as the mini variant.
-   */
-  kHIThemeTabSizeMini           = 3
-};
-
-typedef UInt32                          HIThemeTabSize;
 
 /*
  */
@@ -312,7 +267,7 @@ struct HIThemeTrackDrawInfo {
   ThemeTrackKind      kind;                   /* what kind of track this info is for */
 
   /*
-   * An HIRect describing the bounds of the button being drawn or
+   * An HIRect describing the bounds of the track being drawn or
    * measured.
    */
   HIRect              bounds;                 /* track basis rectangle */
@@ -490,18 +445,119 @@ typedef struct HIThemeSplitterDrawInfo  HIThemeSplitterDrawInfo;
 typedef HIThemeSplitterDrawInfo *       HIThemeSplitterDrawInfoPtr;
 
 /*
+ */
+enum {
+
+  /*
+   * No tab adornments are to be drawn.
+   */
+  kHIThemeTabAdornmentNone      = 0,
+
+  /*
+   * A focus ring is to be drawn around the tab.
+   */
+  kHIThemeTabAdornmentFocus     = (1 << 2), /* to match button focus adornment */
+
+  /*
+   * If available, a leading separator is to be drawn on the tab,
+   * either to the left or above, depending on orientation. Note that
+   * tabs overlap and if the separators are drawn over top each other,
+   * the shadows multiply undesirably. New in Mac OS X 10.4.
+   */
+  kHIThemeTabAdornmentLeadingSeparator = (1 << 3),
+
+  /*
+   * If available, a right separator is to be drawn on the tab, either
+   * to the right or below, depending on the orientation. Note that
+   * tabs overlap and if the separators are drawn over top each other,
+   * the shadows multiply undesirably. New in Mac OS X 10.4.
+   */
+  kHIThemeTabAdornmentTrailingSeparator = (1 << 4)
+};
+
+typedef UInt32                          HIThemeTabAdornment;
+
+/*
+ *  Summary:
+ *    These values are similar to kControlSize constants for
+ *    convenience.
+ */
+enum {
+
+  /*
+   * The tabs are normal (large) sized.
+   */
+  kHIThemeTabSizeNormal         = 0,
+
+  /*
+   * The tabs are drawn as the small variant.
+   */
+  kHIThemeTabSizeSmall          = 1,
+
+  /*
+   * The tabs are drawn as the mini variant.
+   */
+  kHIThemeTabSizeMini           = 3
+};
+
+typedef UInt32                          HIThemeTabSize;
+
+/*
+ *  Summary:
+ *    Available values for HIThemeTabPosition. These are positions of
+ *    the tabs within the tab control. New in Mac OS X 10.4.
+ */
+enum {
+
+  /*
+   * The first position of a tab control. Left or top tab.
+   */
+  kHIThemeTabPositionFirst      = 0,
+
+  /*
+   * A middle tab.
+   */
+  kHIThemeTabPositionMiddle     = 1,
+
+  /*
+   * The last position of a tab control. Right or bottom tab.
+   */
+  kHIThemeTabPositionLast       = 2,
+
+  /*
+   * The only position of a tab control. It is simultaneously first and
+   * last. You know, only. There is only one tab. It looks pretty much
+   * like a button. Please don't use this if you can avoid it. It's
+   * ugly.
+   */
+  kHIThemeTabPositionOnly       = 3
+};
+
+typedef UInt32                          HIThemeTabPosition;
+
+/*
+ *  Summary:
+ *    Available values for HIThemeTabKind.
+ */
+enum {
+  kHIThemeTabKindNormal         = 0
+};
+
+typedef UInt32                          HIThemeTabKind;
+
+/*
  *  HIThemeTabDrawInfo
  *  
  *  Summary:
  *    Drawing parameters passed to tab drawing and measuring theme APIs.
  *  
  *  Discussion:
- *    New in Mac OS X 10.3.
+ *    In Mac OS X 10.4, added kind and position fields.
  */
 struct HIThemeTabDrawInfo {
 
   /*
-   * The version of this data structure.  Currently, it is always 0.
+   * The version of this data structure.  Currently, it is always 1.
    */
   UInt32              version;
 
@@ -526,8 +582,115 @@ struct HIThemeTabDrawInfo {
    * are to be drawn on the tab.
    */
   HIThemeTabAdornment  adornment;             /* various tab attributes */
+
+  /*
+   * An HIThemeTabKind indicating what kind of tab to draw.
+   */
+  HIThemeTabKind      kind;
+
+  /*
+   * The HIThemeTabPositions of the tab to be drawn or measured.
+   */
+  HIThemeTabPosition  position;
 };
 typedef struct HIThemeTabDrawInfo       HIThemeTabDrawInfo;
+
+/*
+ *  HIThemeTabDrawInfoVersionZero
+ *  
+ *  Summary:
+ *    This structure is left here as a reference to the previous
+ *    version of the tab drawing parameters. Please use the current
+ *    version.
+ *  
+ *  Discussion:
+ *    Shipped with Mac OS X 10.3.
+ */
+struct HIThemeTabDrawInfoVersionZero {
+  UInt32              version;
+  ThemeTabStyle       style;
+  ThemeTabDirection   direction;
+  HIThemeTabSize      size;
+  HIThemeTabAdornment  adornment;             /* various tab attributes */
+};
+typedef struct HIThemeTabDrawInfoVersionZero HIThemeTabDrawInfoVersionZero;
+
+/*
+ *  Summary:
+ *    Values for HIThemeTabPaneAdornment.
+ */
+enum {
+  kHIThemeTabPaneAdornmentNormal = 0
+};
+
+
+typedef UInt32                          HIThemeTabPaneAdornment;
+
+/*
+ *  HIThemeTabPaneDrawInfo
+ *  
+ *  Summary:
+ *    Drawing parameters passed to tab pane drawing and measuring theme
+ *    APIs.
+ *  
+ *  Discussion:
+ *    In Mac OS X 10.4, added kind and adornment fields.
+ */
+struct HIThemeTabPaneDrawInfo {
+
+  /*
+   * The version of this data structure.  Currently, it is always 1.
+   */
+  UInt32              version;
+
+  /*
+   * The ThemeDrawState for the tab pane to be drawn.
+   */
+  ThemeDrawState      state;
+
+  /*
+   * A ThemeTabDirection describing on which side of the pane the tabs
+   * will be drawn.
+   */
+  ThemeTabDirection   direction;
+
+  /*
+   * An HIThemeTabSize indicating what size of tab pane to draw.
+   */
+  HIThemeTabSize      size;
+
+  /*
+   * An HIThemeTabKind indicating what kind of tab to draw this pane
+   * for.
+   */
+  HIThemeTabKind      kind;
+
+  /*
+   * An HIThemeTabPaneAdornment describing any additional adornments
+   * that are to be drawn on the tab pane.
+   */
+  HIThemeTabPaneAdornment  adornment;
+};
+typedef struct HIThemeTabPaneDrawInfo   HIThemeTabPaneDrawInfo;
+
+/*
+ *  HIThemeTabPaneDrawInfoVersionZero
+ *  
+ *  Summary:
+ *    This structure is left here as a reference to the previous
+ *    version of the tab pane drawing parameters. Please use the
+ *    current version.
+ *  
+ *  Discussion:
+ *    Shipped with Mac OS X 10.3.
+ */
+struct HIThemeTabPaneDrawInfoVersionZero {
+  UInt32              version;
+  ThemeDrawState      state;
+  ThemeTabDirection   direction;
+  HIThemeTabSize      size;
+};
+typedef struct HIThemeTabPaneDrawInfoVersionZero HIThemeTabPaneDrawInfoVersionZero;
 
 /*
  *  HIThemeMenuDrawInfo
@@ -802,42 +965,6 @@ struct HIThemeMenuTitleDrawInfo {
 };
 typedef struct HIThemeMenuTitleDrawInfo HIThemeMenuTitleDrawInfo;
 typedef HIThemeMenuTitleDrawInfo *      HIThemeMenuTitleDrawInfoPtr;
-
-/*
- *  HIThemeTabPaneDrawInfo
- *  
- *  Summary:
- *    Drawing parameters passed to tab pane drawing and measuring theme
- *    APIs.
- *  
- *  Discussion:
- *    New in Mac OS X 10.3.
- */
-struct HIThemeTabPaneDrawInfo {
-
-  /*
-   * The version of this data structure.  Currently, it is always 0.
-   */
-  UInt32              version;
-
-  /*
-   * The ThemeDrawState for the tab pane to be drawn.
-   */
-  ThemeDrawState      state;
-
-  /*
-   * A ThemeTabDirection describing on which side of the pane the tabs
-   * will be drawn.
-   */
-  ThemeTabDirection   direction;
-
-  /*
-   * An HIThemeTabSize indicating what size of tab pane to draw.
-   */
-  HIThemeTabSize      size;
-};
-typedef struct HIThemeTabPaneDrawInfo   HIThemeTabPaneDrawInfo;
-typedef HIThemeTabPaneDrawInfo *        HIThemeTabPaneDrawInfoPtr;
 
 /*
  *  HIThemeTickMarkDrawInfo
@@ -1222,6 +1349,11 @@ HIThemeDrawButton(
  *  
  *  Summary:
  *    Get a shape of a themed button.
+ *  
+ *  Discussion:
+ *    This API was mistakenly named as a "Get" API. It behaves as
+ *    "Copy" API. THE CALLER IS RESPONSIBLE FOR RELEASING THE RETURNED
+ *    SHAPE.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -1663,6 +1795,207 @@ HIThemeGetMenuBackgroundShape(
 
 
 /* -------------------------------------------------------------------------- */
+/*  Segments                                                                  */
+/* -------------------------------------------------------------------------- */
+
+/*
+ *  Summary:
+ *    Available values for HIThemeSegmentPosition. These are positions
+ *    of the segments within the segmented view.
+ */
+enum {
+
+  /*
+   * The first position of a segmented view.
+   */
+  kHIThemeSegmentPositionFirst  = 0,
+
+  /*
+   * A middle segment.
+   */
+  kHIThemeSegmentPositionMiddle = 1,
+
+  /*
+   * The last position of a segmented view.
+   */
+  kHIThemeSegmentPositionLast   = 2,
+
+  /*
+   * The only position of a segmented view. It is simultaneously first
+   * and last. You know, only. There is only one segment. It looks
+   * pretty much like a button. Please don't use this if you can avoid
+   * it. It's ugly.
+   */
+  kHIThemeSegmentPositionOnly   = 3
+};
+
+typedef UInt32                          HIThemeSegmentPosition;
+
+/*
+ *  Summary:
+ *    Available values for HIThemeSegmentKind.
+ */
+enum {
+
+  /*
+   * The outset looking segment. Do not use on metal or metal-like
+   * windows.
+   */
+  kHIThemeSegmentKindNormal     = 0,
+
+  /*
+   * The inset segment. Use on metal or metal-like windows.
+   */
+  kHIThemeSegmentKindInset      = 1
+};
+
+typedef UInt32                          HIThemeSegmentKind;
+
+/*
+ *  Summary:
+ *    Available values for HIThemeSegmentSize.
+ */
+enum {
+
+  /*
+   * The normally sized segment.
+   */
+  kHIThemeSegmentSizeNormal     = 0,
+
+  /*
+   * The small segment. Not available with as inset.
+   */
+  kHIThemeSegmentSizeSmall      = 1,
+
+  /*
+   * The mini segment. Not available with as inset.
+   */
+  kHIThemeSegmentSizeMini       = 3
+};
+
+typedef UInt32                          HIThemeSegmentSize;
+
+/*
+ */
+enum {
+
+  /*
+   * No segment adornments are to be drawn.
+   */
+  kHIThemeSegmentAdornmentNone  = 0,
+
+  /*
+   * A focus ring is to be drawn around the segment.
+   */
+  kHIThemeSegmentAdornmentFocus = (1 << 2), /* to match button focus adornment */
+
+  /*
+   * If available, a leading separator is to be drawn on the segment.
+   * Note that segments overlap and if the separators are drawn over
+   * top each other, the shadows multiply undesirably.
+   */
+  kHIThemeSegmentAdornmentLeadingSeparator = (1 << 3),
+
+  /*
+   * If available, a trailing separator is to be drawn on the segment.
+   * Note that segments overlap and if the separators are drawn over
+   * top each other, the shadows multiply undesirably.
+   */
+  kHIThemeSegmentAdornmentTrailingSeparator = (1 << 4)
+};
+
+typedef UInt32                          HIThemeSegmentAdornment;
+
+/*
+ *  HIThemeSegmentDrawInfo
+ *  
+ *  Summary:
+ *    Drawing parameters passed to segment drawing and measuring theme
+ *    APIs.
+ *  
+ *  Discussion:
+ *    New in Mac OS X 10.4.
+ */
+struct HIThemeSegmentDrawInfo {
+
+  /*
+   * The version of this data structure.  Currently, it is always 0.
+   */
+  UInt32              version;
+
+  /*
+   * The ThemeDrawState for the segment to be drawn or measured.
+   */
+  ThemeDrawState      state;
+
+  /*
+   * The ThemeButtonValue of the segment to be drawn or measured.
+   */
+  ThemeButtonValue    value;
+  HIThemeSegmentSize  size;
+
+  /*
+   * The HIThemeSegmentKind of the segment to be drawn or measured.
+   */
+  HIThemeSegmentKind  kind;
+
+  /*
+   * The HIThemeSegmentPositions of the segment to be drawn or measured.
+   */
+  HIThemeSegmentPosition  position;
+
+  /*
+   * The HIThemeSegmentAdornment of the segment to be drawn or measured.
+   */
+  HIThemeSegmentAdornment  adornment;
+};
+typedef struct HIThemeSegmentDrawInfo   HIThemeSegmentDrawInfo;
+typedef HIThemeSegmentDrawInfo *        HIThemeSegmentDrawInfoPtr;
+/*
+ *  HIThemeDrawSegment()
+ *  
+ *  Summary:
+ *    Draw a piece of a segmented view.
+ *  
+ *  Discussion:
+ *    New in Mac OS X 10.4. Please note that segments can draw a
+ *    separator outside of the specified bounds and the adornments of
+ *    the individual segments must coordinate their drawing of
+ *    separators (with the adornment field of the passed in
+ *    HIThemeSegmentDrawInfo) to avoid overdrawing.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inBounds:
+ *      The bounds of the segment to be drawn.
+ *    
+ *    inDrawInfo:
+ *      A HIThemeSegmentDrawInfo describing the segment to be drawn.
+ *    
+ *    inContext:
+ *      The CG context in which the drawing is to be done.
+ *    
+ *    inOrientation:
+ *      An HIThemeOrientation that describes the orientation of the
+ *      passed in context.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIThemeDrawSegment(
+  const HIRect *                  inBounds,
+  const HIThemeSegmentDrawInfo *  inDrawInfo,
+  CGContextRef                    inContext,
+  HIThemeOrientation              inOrientation)              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/* -------------------------------------------------------------------------- */
 /*  Tabs                                                                      */
 /* -------------------------------------------------------------------------- */
 /*
@@ -1750,6 +2083,11 @@ HIThemeDrawTab(
  *    Gets the shape of the draw area relative to the full bounds of
  *    the tab+pane.
  *  
+ *  Discussion:
+ *    This API was mistakenly named as a "Get" API. It behaves as
+ *    "Copy" API. THE CALLER IS RESPONSIBLE FOR RELEASING THE RETURNED
+ *    SHAPE.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
@@ -1788,6 +2126,11 @@ HIThemeGetTabPaneDrawShape(
  *  Summary:
  *    Gets the shape of the content area relative to the full bounds of
  *    the tab+pane.
+ *  
+ *  Discussion:
+ *    This API was mistakenly named as a "Get" API. It behaves as
+ *    "Copy" API. THE CALLER IS RESPONSIBLE FOR RELEASING THE RETURNED
+ *    SHAPE.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -1828,6 +2171,11 @@ HIThemeGetTabPaneContentShape(
  *    Gets the shape of the tab drawing area relative to the full
  *    bounds of the tab+pane.
  *  
+ *  Discussion:
+ *    This API was mistakenly named as a "Get" API. It behaves as
+ *    "Copy" API. THE CALLER IS RESPONSIBLE FOR RELEASING THE RETURNED
+ *    SHAPE.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
@@ -1860,6 +2208,11 @@ HIThemeGetTabDrawShape(
  *  
  *  Summary:
  *    Gets the shape for a themed tab.
+ *  
+ *  Discussion:
+ *    This API was mistakenly named as a "Get" API. It behaves as
+ *    "Copy" API. THE CALLER IS RESPONSIBLE FOR RELEASING THE RETURNED
+ *    SHAPE.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -2037,14 +2390,15 @@ struct HIThemeTextInfo {
 
   /*
    * Specifies where truncation should occur. If this field is
-   * kHIThemeTruncationNone, no truncation will occur, and all fields
-   * with the truncation prefix will be ignored.
+   * kHIThemeTextTruncationNone, no truncation will occur, and all
+   * fields with the truncation prefix will be ignored.
    */
   HIThemeTextTruncation  truncationPosition;  /* kHIThemeTextTruncation[None/Middle/End], If none the following field is ignored */
 
   /*
    * The maximum number of lines to measure or draw before truncation
-   * occurs. Ignored if truncationPosition is kHIThemeTruncationNone.
+   * occurs. Ignored if truncationPosition is
+   * kHIThemeTextTruncationNone.
    */
   UInt32              truncationMaxLines;     /* the maximum number of lines before truncation occurs */
 
@@ -2075,14 +2429,26 @@ typedef struct HIThemeTextInfo          HIThemeTextInfo;
  *  Parameters:
  *    
  *    inString:
- *      The string to measure.
+ *      A CFStringRef containing the unicode characters you wish to
+ *      measure. You MUST NOT pass in a CFStringRef that was allocated
+ *      with any of the "NoCopy" CFString creation APIs; a string
+ *      created with a "NoCopy" API has transient storage which is
+ *      incompatible with HIThemeGetTextDimensions's caches.
  *    
  *    inWidth:
  *      The width to constrain the text before wrapping. If inWidth is
  *      0, the text will not wrap and will be laid out as a single
- *      line. If inWidth is not 0, the text will wrap at the given
- *      width and the measurements will be returned from the multi line
- *      layout.
+ *      line, unless it contains embedded carriage return or linefeed
+ *      characters; CR/LF will cause the text to wrap and the resulting
+ *      measurements will include space for multiple lines of text. If
+ *      inWidth is not 0, the text will wrap at the given width and the
+ *      measurements will be returned from the multi-line layout.
+ *      
+ *      
+ *      To force single-line layout even in the presence of embedded
+ *      CR/LF characters, pass FLT_MAX for inWidth,
+ *      kHIThemeTextTruncationEnd for inTextInfo.truncationPosition,
+ *      and 1 for inTextInfo.truncationMaxLines.
  *    
  *    inTextInfo:
  *      The HIThemeTextInfo parameter block specifying additional
@@ -2136,7 +2502,11 @@ HIThemeGetTextDimensions(
  *  Parameters:
  *    
  *    inString:
- *      The string to draw.
+ *      A CFStringRef containing the unicode characters you wish to
+ *      render. You MUST NOT pass in a CFStringRef that was allocated
+ *      with any of the "NoCopy" CFString creation APIs; a string
+ *      created with a "NoCopy" API has transient storage which is
+ *      incompatible with HIThemeDrawTextBox's caches.
  *    
  *    inBounds:
  *      The HIRect that bounds where the text is to be drawn
@@ -2312,6 +2682,11 @@ HIThemeDrawTickMark(
  *  Summary:
  *    Get the thumb shape of a themed track.
  *  
+ *  Discussion:
+ *    This API was mistakenly named as a "Get" API. It behaves as
+ *    "Copy" API. THE CALLER IS RESPONSIBLE FOR RELEASING THE RETURNED
+ *    SHAPE.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
@@ -2384,7 +2759,7 @@ HIThemeHitTestTrack(
  *  Parameters:
  *    
  *    inDrawInfo:
- *      An HIThemeTrackDrawInfo describing the tab that will be drawn.
+ *      An HIThemeTrackDrawInfo describing the track that will be drawn.
  *    
  *    outBounds:
  *      A pointer to an HIRect in which will be returned the rectangle
@@ -2424,7 +2799,7 @@ HIThemeGetTrackBounds(
  *    inPartCode:
  *      A ControlPartCode describing which part to measure.  A list of
  *      available ControlPartCodes can be retrieved using
- *      HIThemeGetTrackPartBounds.
+ *      HIThemeGetTrackParts.
  *    
  *    outPartBounds:
  *      The bounds of the specified part relative to the start
@@ -2936,6 +3311,11 @@ HIThemeGetGrowBoxBounds(
  *  Summary:
  *    Obtains the specified window shape.
  *  
+ *  Discussion:
+ *    This API was mistakenly named as a "Get" API. It behaves as
+ *    "Copy" API. THE CALLER IS RESPONSIBLE FOR RELEASING THE RETURNED
+ *    SHAPE.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
@@ -3104,7 +3484,9 @@ HIThemeDrawGroupBox(
  *    
  *    inDrawInfo:
  *      An HIThemeButtonDrawInfo that describes attributes of the well
- *      to be drawn.
+ *      to be drawn. Set the kThemeAdornmentDefault bit of the
+ *      adornment field of this structure to also draw the center of
+ *      the well.
  *    
  *    inContext:
  *      The CG context in which the drawing is to be done.
@@ -3289,9 +3671,8 @@ HIThemeDrawHeader(
  *      The HIRect in which to draw.
  *    
  *    inHasFocus:
- *      A Boolean indicating whether there is to be focus or not.  If
- *      there is no focus, the focus area will be erased instead of
- *      drawn.
+ *      Pass in true to draw focus. Passing false effectively makes
+ *      this API a no-op.
  *    
  *    inContext:
  *      The CG context in which the drawing is to be done.
@@ -3351,10 +3732,148 @@ HIThemeDrawSeparator(
 
 
 /*
+ *  HIThemeSetFill()
+ *  
+ *  Summary:
+ *    Set the context fill color to that specified by the requested
+ *    brush.
+ *  
+ *  Discussion:
+ *    Note that this call does not actually draw anything. It sets the
+ *    passed context's fill color to that of the specified theme brush.
+ *    Subsequent fills in the context will be with the color specified
+ *    by the theme brush.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inBrush:
+ *      The ThemeBrush describing the requested fill color.
+ *    
+ *    inInfo:
+ *      Not used. Should always be NULL.
+ *    
+ *    inContext:
+ *      The CG context for which the fill color is to be set.
+ *    
+ *    inOrientation:
+ *      An HIThemeOrientation that describes the orientation of the
+ *      passed in context.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIThemeSetFill(
+  ThemeBrush           inBrush,
+  void *               inInfo,
+  CGContextRef         inContext,
+  HIThemeOrientation   inOrientation)                         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  HIThemeSetStroke()
+ *  
+ *  Summary:
+ *    Set the context stroke color to that specified by the requested
+ *    brush.
+ *  
+ *  Discussion:
+ *    Note that this call does not actually draw anything. It sets the
+ *    passed context's stroke color to that of the specified theme
+ *    brush. Subsequent strokes in the context will be with the color
+ *    specified by the theme brush.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inBrush:
+ *      The ThemeBrush describing the requested stroke color.
+ *    
+ *    inInfo:
+ *      Not used. Should always be NULL.
+ *    
+ *    inContext:
+ *      The CG context for which the stroke color is to be set.
+ *    
+ *    inOrientation:
+ *      An HIThemeOrientation that describes the orientation of the
+ *      passed in context.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIThemeSetStroke(
+  ThemeBrush           inBrush,
+  void *               inInfo,
+  CGContextRef         inContext,
+  HIThemeOrientation   inOrientation)                         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  HIThemeSetTextFill()
+ *  
+ *  Summary:
+ *    Set the context text fill color to that specified by the
+ *    requested brush.
+ *  
+ *  Discussion:
+ *    Note that this call does not actually draw anything. It sets the
+ *    passed context's text fill color to that of the specified
+ *    ThemeTextColor. Subsequent text drawing in the context will be
+ *    with the color specified by the ThemeTextColor.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inColor:
+ *      A ThemeTextColor describing the requested text fill color.
+ *    
+ *    inInfo:
+ *      Not used. Should always be NULL.
+ *    
+ *    inContext:
+ *      The CG context for which the fill color is to be set.
+ *    
+ *    inOrientation:
+ *      An HIThemeOrientation that describes the orientation of the
+ *      passed in context.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIThemeSetTextFill(
+  ThemeTextColor       inColor,
+  void *               inInfo,
+  CGContextRef         inContext,
+  HIThemeOrientation   inOrientation)                         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
  *  HIThemeApplyBackground()
  *  
  *  Summary:
- *    Apply a themed background to a rectangle.
+ *    Apply a themed background for a rectangle.
+ *  
+ *  Discussion:
+ *    Note that this call does not actually draw anything. It sets the
+ *    passed context's fill color to the requested theme background.
+ *    Subsequent fills in the context will fill with the theme
+ *    background.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -3362,14 +3881,15 @@ HIThemeDrawSeparator(
  *  Parameters:
  *    
  *    inBounds:
- *      An HIRect for the background.
+ *      An HIRect enclosing the whole background. This rectangle is
+ *      used to calculate the pattern phase (if there is one) of the
+ *      background as it is set up in the context.
  *    
  *    inDrawInfo:
- *      An HIThemeBackgroundDrawInfo describing the background to be
- *      drawn.
+ *      An HIThemeBackgroundDrawInfo describing the background.
  *    
  *    inContext:
- *      The CG context in which the drawing is to be done.
+ *      The CG context for which the background is to be set.
  *    
  *    inOrientation:
  *      An HIThemeOrientation that describes the orientation of the
@@ -3394,6 +3914,9 @@ HIThemeApplyBackground(
  *  Summary:
  *    Draw a themed background for a rectangle.
  *  
+ *  Discussion:
+ *    Currently, this call only works with kThemeBackgroundMetal.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
@@ -3401,13 +3924,12 @@ HIThemeApplyBackground(
  *    
  *    inBounds:
  *      An HIRect indicating the bounds to fill with the background.
- *      For background that need pattern continuity, such as
+ *      For backgrounds that need pattern continuity, such as
  *      kThemeBackgroundMetal, this rectangle is the full bounds of the
  *      rectangle for which the filling is to occur. If drawing a
  *      sub-rectangle of that background, set the clip and draw the
  *      full rectangle. This routine has been optimized to not perform
  *      calculations on the non-clip part of the drawing bounds.
- *      CURRENTLY, THIS API ONLY WORKS WITH kThemeBackgroundMetal.
  *    
  *    inDrawInfo:
  *      An HIThemeBackgroundDrawInfo describing the background to be
@@ -3431,6 +3953,41 @@ HIThemeDrawBackground(
   const HIThemeBackgroundDrawInfo *  inDrawInfo,
   CGContextRef                       inContext,
   HIThemeOrientation                 inOrientation)           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HIThemeBrushCreateCGColor()
+ *  
+ *  Summary:
+ *    Create a CGColor for a ThemeBrush.
+ *  
+ *  Discussion:
+ *    Color is an ambiguous term. The color may be a pattern.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inBrush:
+ *      The ThemeBrush describing the requested color.
+ *    
+ *    outColor:
+ *      A pointer to a CGColorRef that will be set to the newly created
+ *      CGColor.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIThemeBrushCreateCGColor(
+  ThemeBrush    inBrush,
+  CGColorRef *  outColor)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 

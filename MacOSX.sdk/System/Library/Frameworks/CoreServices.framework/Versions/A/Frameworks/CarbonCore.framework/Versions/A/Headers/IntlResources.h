@@ -3,9 +3,9 @@
  
      Contains:   International Resource definitions.
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1983-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1983-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -190,11 +190,40 @@ struct UntokenTable {
 typedef struct UntokenTable             UntokenTable;
 typedef UntokenTable *                  UntokenTablePtr;
 typedef UntokenTablePtr *               UntokenTableHandle;
+#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_4
+#define __WIDE_CHAR_USE_STRUCT__ 1
+#else
+#define __WIDE_CHAR_USE_STRUCT__ 0
+#endif
+#if __WIDE_CHAR_USE_STRUCT__
+#if __BIG_ENDIAN__
+union WideChar {
+  struct {
+    char                hi;
+    char                lo;
+  }                       a;
+  short               b;
+};
+typedef union WideChar                  WideChar;
+#else
+union WideChar {
+  struct {
+    char                lo;
+    char                hi;
+  }                       a;
+  short               b;
+};
+typedef union WideChar                  WideChar;
+#endif  /* __BIG_ENDIAN__ */
+
+#else
 union WideChar {
   char                a[2];                   /*0 is the high order character*/
   short               b;
 };
 typedef union WideChar                  WideChar;
+#endif  /* __WIDE_CHAR_USE_STRUCT__ */
+
 struct WideCharArr {
   short               size;
   WideChar            data[10];

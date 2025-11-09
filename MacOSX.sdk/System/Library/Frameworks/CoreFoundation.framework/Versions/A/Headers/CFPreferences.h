@@ -1,5 +1,5 @@
 /*	CFPreferences.h
-	Copyright (c) 1998-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFPREFERENCES__)
@@ -116,6 +116,7 @@ all arguments must be non-NULL */
 CF_EXPORT
 CFArrayRef CFPreferencesCopyKeyList(CFStringRef applicationID, CFStringRef userName, CFStringRef hostName);
 
+#ifndef CF_OPEN_SOURCE
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 /* Function to determine whether or not a given key has been imposed on the
@@ -125,6 +126,7 @@ corresponding to those preference keys. */
 CF_EXPORT
 Boolean CFPreferencesAppValueIsForced(CFStringRef key, CFStringRef applicationID);
 
+#endif
 #endif
 
 #if defined(__cplusplus)

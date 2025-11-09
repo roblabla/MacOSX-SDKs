@@ -157,6 +157,13 @@ extern "C" {
 	OSStatus FWAGetClockSource(FWARef inRef, FWAIsochStreamRef *streamRef, UInt32 *sequence);
 	OSStatus FWASetClockSource(FWARef inRef, FWAIsochStreamRef streamRef,UInt32 sequence);
 
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// V6
+	
+	OSStatus FWASetAutoLoad(FWARef inRef, bool enable);
+	OSStatus FWAGetProperty(FWARef inRef, UInt32 propertyID, void * data,UInt32* size);
+	OSStatus FWASetProperty(FWARef inRef, UInt32 propertyID, void * data,UInt32 size);
+
 	
 #if __cplusplus
 }

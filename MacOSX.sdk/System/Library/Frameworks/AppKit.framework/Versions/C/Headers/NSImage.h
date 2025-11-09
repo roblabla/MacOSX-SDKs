@@ -1,7 +1,7 @@
 /*
 	NSImage.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -56,7 +56,7 @@ typedef enum {
         unsigned int focusedWhilePrinting:1;
         unsigned int reserved1:14;
     } _flags;
-    void *_reps;
+    id _reps;
     NSColor *_color;
 }
 

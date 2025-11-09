@@ -3,9 +3,9 @@
  
      Contains:   Apple Type Services layout public structures and constants.
  
-     Version:    ATS-135.7~1
+     Version:    ATS-184.7.7~42
  
-     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -249,14 +249,13 @@ enum {
 
   /*
    * Specifies that ATS produce antialiased glyph images despite system
-   * preferences or CGContext settings.
+   * preferences (negates kATSLineNoAntiAliasing bit if set).
    */
   kATSLineApplyAntiAliasing     = 0x00000800,
 
   /*
    * Specifies that ATS turn-off antialiasing glyph imaging despite
-   * system preferences or CGContext settings (negates
-   * kATSLineApplyAntiAliasing bit if set).
+   * system preferences (negates kATSLineApplyAntiAliasing bit if set).
    */
   kATSLineNoAntiAliasing        = 0x00001000,
 
@@ -276,8 +275,8 @@ enum {
   kATSLineDisableAutoAdjustDisplayPos = 0x00004000,
 
   /*
-   * Specifies that rendering be done through Quickdraw (default
-   * rendering in ATSUI is through CoreGraphics on MacOSX).
+   * Specifies that rendering be done simulating Quickdraw rendering
+   * (4-bit pixel aligned antialiasing).
    */
   kATSLineUseQDRendering        = 0x00008000,
 
@@ -357,13 +356,14 @@ enum {
 
   /*
    * Specifies that ATS produce antialiased glyph images despite system
-   * preferences or CGContext settings.
+   * preferences or LineLayoutOptions (negates kATSStyleNoAntiAliasing
+   * bit if set).
    */
   kATSStyleApplyAntiAliasing    = 0x00000002,
 
   /*
    * Specifies that ATS turn-off antialiasing glyph imaging despite
-   * system preferences or CGContext settings (negates
+   * system preferences or LineLayoutOptions (negates
    * kATSStyleApplyAntiAliasing bit if set).
    */
   kATSStyleNoAntiAliasing       = 0x00000004,

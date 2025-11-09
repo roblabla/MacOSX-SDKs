@@ -1,7 +1,7 @@
 /*
 	NSController.h
 	Application Kit
-	Copyright (c) 2002-2003, Apple Computer, Inc.
+	Copyright (c) 2002-2005, Apple Computer, Inc.
 	All rights reserved.
  */
 
@@ -14,20 +14,21 @@
 
 @interface NSController : NSObject <NSCoding> {
 @private
-	void *_reserved;
-	void *_reserved2;
+    void *_reserved;
+    void *_reserved2;
     int _specialPurposeType;
     id _bindingAdaptor;
     CFMutableArrayRef _editors;
-	NSMutableArray *_declaredKeys;
+    NSMutableArray *_declaredKeys;
     NSMutableDictionary *_dependentKeyToModelKeyTable;
     NSMutableDictionary *_modelKeyToDependentKeyTable;
     NSMutableArray *_modelKeysToRefreshEachTime;
     struct __bindingsControllerFlags {
+        unsigned int _alwaysPresentsApplicationModalAlerts:1;
         unsigned int _refreshesAllModelKeys:1;
         unsigned int _multipleObservedModelObjects:1;
         unsigned int _isEditing:1;
-        unsigned int _reservedController:29;
+        unsigned int _reservedController:28;
     } _bindingsControllerFlags;
     NSMutableDictionary *_reservedOther;
 @protected    // all instance variables are private
@@ -40,6 +41,7 @@
 - (void)objectDidEndEditing:(id)editor;
 - (void)discardEditing;
 - (BOOL)commitEditing;
+- (void)commitEditingWithDelegate:(id)delegate didCommitSelector:(SEL)didCommitSelector contextInfo:(void *)contextInfo;
 - (BOOL)isEditing;
 
 @end

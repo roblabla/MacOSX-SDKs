@@ -7,10 +7,6 @@
 #define __KERBEROSPROFILE__
 
 /* Environment dependent macros */
-#define SIZEOF_INT 4
-#define SIZEOF_LONG 4
-#define SIZEOF_SHORT 2
-
 
 /* Error tables from prof_err.h */
 #define initialize_prof_error_table()
@@ -58,7 +54,7 @@
 #include <win-mac.h>
 #endif
 
-#if defined(macintosh) || (defined(__MACH__) && defined(__APPLE__))
+#if defined(__MACH__) && defined(__APPLE__)
 #    include <TargetConditionals.h>
 #    if TARGET_RT_MAC_CFM
 #        error "Use KfM 4.0 SDK headers for CFM compilation."
@@ -83,12 +79,6 @@ typedef struct _profile_t *profile_t;
 extern "C" {
 #endif /* __cplusplus */
 
-#if TARGET_OS_MAC
-#    if defined(__MWERKS__)
-#        pragma import on
-#    endif
-#endif
-
 typedef char* profile_filespec_t;	/* path as C string */
 typedef char* profile_filespec_list_t;	/* list of : separated paths, C string */
 typedef const char * const_profile_filespec_t;	/* path as C string */
@@ -102,6 +92,17 @@ long KRB5_CALLCONV profile_init_path
 
 long KRB5_CALLCONV profile_flush
 	(profile_t profile);
+long KRB5_CALLCONV profile_flush_to_file
+	(profile_t profile, const_profile_filespec_t outfile);
+long KRB5_CALLCONV profile_flush_to_buffer
+	(profile_t profile, char **bufp);
+void KRB5_CALLCONV profile_free_buffer
+	(profile_t profile, char *buf);
+
+long KRB5_CALLCONV profile_is_writable
+	(profile_t profile, int *writable);
+long KRB5_CALLCONV profile_is_modified
+	(profile_t profile, int *modified);
 
 void KRB5_CALLCONV profile_abandon
 	(profile_t profile);
@@ -136,7 +137,7 @@ long KRB5_CALLCONV profile_get_subsection_names
 	(profile_t profile, const char **names, char ***ret_names);
 
 long KRB5_CALLCONV profile_iterator_create
-	(profile_t profile, const char **names,
+	(profile_t profile, const char *const *names,
 		   int flags, void **ret_iter);
 
 void KRB5_CALLCONV profile_iterator_free
@@ -162,15 +163,9 @@ long KRB5_CALLCONV profile_add_relation
 	(profile_t profile, const char **names, 
 		   const char *new_value);
 
-#if TARGET_OS_MAC
-#    if defined(__MWERKS__)
-#        pragma import reset
-#    endif
-#endif
-
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
 
 #endif /* _KRB5_PROFILE_H */
-#endif /* __KERBEROSPROFILE__  */
+#endif /* __KERBEROSPROFILE__ */

@@ -23,8 +23,8 @@
  * @OSF_COPYRIGHT@
  */
 
-#ifndef	_SYNC_POLICY_H_
-#define _SYNC_POLICY_H_
+#ifndef	_MACH_SYNC_POLICY_H_
+#define _MACH_SYNC_POLICY_H_
 
 typedef int sync_policy_t;
 
@@ -37,10 +37,7 @@ typedef int sync_policy_t;
 #define SYNC_POLICY_ORDER_MASK		0x3
 #define SYNC_POLICY_LIFO		(SYNC_POLICY_FIFO|SYNC_POLICY_REVERSED)
 
-/*
- *	These options provide addition (kernel-private) behaviors
- */
 
 #define SYNC_POLICY_MAX			0x7
 
-#endif 	/*_SYNC_POLICY_H_*/
+#endif 	/* _MACH_SYNC_POLICY_H_ */

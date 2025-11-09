@@ -54,8 +54,16 @@ enum _CGError {
 	kCGErrorApplicationCanOnlyBeRunInOneSessionAtATime = 1026,
 		/*	The application being launched is incompatible with multiple user sessions,
 			and is already running in another session by another user. */
+			
+	kCGErrorClassicApplicationsMustBeLaunchedByClassic = 1027,
+		/*	To avoid deadlock, Classic can't launch another Classic application by going
+			thru CPS.  This error gets returned in that case, and it signals TruBlueEnvironment
+			that it must handle this launch on its own. */
 
-    kCGErrorLast = kCGErrorApplicationCanOnlyBeRunInOneSessionAtATime
+	kCGErrorForkFailed = 1028,
+		/*	CPS was unable to fork a new process in order to launch an application. */
+
+    kCGErrorLast = kCGErrorForkFailed
 };
 typedef int32_t  CGError;
 

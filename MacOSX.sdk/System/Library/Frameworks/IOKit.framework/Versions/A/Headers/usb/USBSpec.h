@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2003 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -21,36 +21,6 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-
-#ifndef __OPEN_SOURCE__
-/*
- *
- *	$Id: USBSpec.h,v 1.15.36.1 2003/12/22 03:36:46 nano Exp $
- *
- *	$Log: USBSpec.h,v $
- *	Revision 1.15.36.1  2003/12/22 03:36:46  nano
- *	Add some new classes and rearranged some of the others
- *	
- *	Revision 1.16  2003/10/01 21:11:00  nano
- *	Cleared up the device/interface class and subclass definitions.
- *	Added some new subclasses and protocols.
- *	
- *	Revision 1.15  2003/08/20 19:41:41  nano
- *	
- *	Bug #:
- *	New version's of Nima's USB Prober (2.2b17)
- *	3382540  Panther: Ejecting a USB CardBus card can freeze a machine
- *	3358482  Device Busy message with Modems and IOUSBFamily 201.2.14 after sleep
- *	3385948  Need to implement device recovery on High Speed Transaction errors to full speed devices
- *	3377037  USB EHCI: returnTransactions can cause unstable queue if transactions are aborted
- *	
- *	Also, updated most files to use the id/log functions of cvs
- *	
- *	Submitted by: nano
- *	Reviewed by: rhoads/barryt/nano
- *	
- */
-#endif
 
 /*
  * Constants that both OS9 and OSX want to define, and whose values are
@@ -397,6 +367,22 @@ enum {
     kUSBDFUManifestationTolerantBit     = 2
 };
 
+/*!
+@enum Endpoint Descriptor bits
+ @discussion Bit definitions for endpoint descriptor fields
+ */
+enum {
+    kUSBbEndpointAddressMask				= 0x0f,
+    kUSBbEndpointDirectionBit				= 7,
+    kUSBbEndpointDirectionMask				= ( 1 << kUSBbEndpointDirectionBit ),
+    kUSBEndpointDirectionOut				= 0x00,
+    kUSBEndpointDirectionIn				= 0x80,
+    kUSBEndpointbmAttributesTransferTypeMask		= 0x03,
+    kUSBEndpointbmAttributesSynchronizationTypeMask	= 0x0c,
+    kUSBEndpointbmAttributesSynchronizationTypeShift	= 2,
+    kUSBEndpointbmAttributesUsageTypeMask		= 0x30,
+    kUSBEndpointbmAttributesUsageTypeShift		= 4
+};
 
     /*!
     @enum Property Names

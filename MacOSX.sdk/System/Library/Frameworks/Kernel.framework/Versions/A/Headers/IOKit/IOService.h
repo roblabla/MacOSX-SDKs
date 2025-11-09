@@ -314,12 +314,24 @@ public:
 
     virtual bool didTerminate( IOService * provider, IOOptionBits options, bool * defer );
 
+    /* method available in Mac OS X 10.4 or later */
+/*! @function nextIdleTimeout
+    @abstract Allows subclasses to customize idle power management behavior.
+    @discussion Returns the next time that the device should idle into its next lower power state. Subclasses may override for custom idle behavior.
+    @param currentTime The current time
+    @param lastActivity The time of last activity on this device
+    @param powerState The device's current power state.
+    @result Returns the next time the device should idle off (in seconds, relative to the current time). */
+
+    virtual SInt32 nextIdleTimeout(AbsoluteTime currentTime, 
+        AbsoluteTime lastActivity, unsigned int powerState);
+
 private:
     OSMetaClassDeclareReservedUsed(IOService, 0);
     OSMetaClassDeclareReservedUsed(IOService, 1);
     OSMetaClassDeclareReservedUsed(IOService, 2);
+    OSMetaClassDeclareReservedUsed(IOService, 3);
 
-    OSMetaClassDeclareReservedUnused(IOService, 3);
     OSMetaClassDeclareReservedUnused(IOService, 4);
     OSMetaClassDeclareReservedUnused(IOService, 5);
     OSMetaClassDeclareReservedUnused(IOService, 6);
@@ -364,6 +376,8 @@ private:
     OSMetaClassDeclareReservedUnused(IOService, 45);
     OSMetaClassDeclareReservedUnused(IOService, 46);
     OSMetaClassDeclareReservedUnused(IOService, 47);
+
+#ifdef __ppc__
     OSMetaClassDeclareReservedUnused(IOService, 48);
     OSMetaClassDeclareReservedUnused(IOService, 49);
     OSMetaClassDeclareReservedUnused(IOService, 50);
@@ -380,6 +394,7 @@ private:
     OSMetaClassDeclareReservedUnused(IOService, 61);
     OSMetaClassDeclareReservedUnused(IOService, 62);
     OSMetaClassDeclareReservedUnused(IOService, 63);
+#endif
 
 public:
 /*! @function getState
@@ -962,7 +977,7 @@ public:
 
 /*! @function disableInterrupt
     @abstract Disable a device interrupt.
-    @discussion Disable a device interrupt. It is the callers responsiblity to keep track of the enable state of the interrupt source.
+    @discussion Synchronously disable a device interrupt.  If the interrupt routine is running, the call will block until the routine completes.  It is the callers responsiblity to keep track of the enable state of the interrupt source.
     @param source The index of the interrupt source in the device.
     @result An IOReturn code.<br>kIOReturnNoInterrupt is returned if the source is not valid. */
 
@@ -1146,10 +1161,15 @@ public:
     static void actionFinalize( IOService * victim, IOOptionBits options );
     static void actionStop( IOService * client, IOService * provider );
 
-    void PMfree( void );
-
     virtual IOReturn resolveInterrupt(IOService *nub, int source);
     virtual IOReturn lookupInterrupt(int source, bool resolve, IOInterruptController **interruptController);
+
+    // SPI to control CPU low power modes
+    void  setCPUSnoopDelay(UInt32 ns);
+    UInt32 getCPUSnoopDelay();
+    void   requireMaxBusStall(UInt32 ns);
+
+    void PMfree( void );
 
     /* power management */
     
@@ -1827,6 +1847,10 @@ private:
     void all_done ( void );
     void all_acked ( void );
     void driver_acked ( void );
+public:
+    void all_acked_threaded (void );    
+    void driver_acked_threaded ( void );
+private:
     void start_ack_timer ( void );
     void stop_ack_timer ( void );
     unsigned long compute_settle_time ( void );
@@ -1844,6 +1868,7 @@ private:
     IOReturn allowCancelCommon ( void );
     void computeDesiredState ( void );
     void rebuildChildClampBits ( void );
+    IOReturn temporaryMakeUsable ( void );
 };
 
 #endif /* ! _IOKIT_IOSERVICE_H */

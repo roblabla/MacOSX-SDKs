@@ -3,9 +3,9 @@
  
      Contains:   Definitions of controls provided by the Control Manager
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -307,6 +307,7 @@
 #define kControlEditTextKeyFilterTag 	'fltr'
 #define kControlEditTextSelectionTag 	'sele'				/*  ControlEditTextSelectionRec */
 #define kControlEditTextPasswordTag 	'pass'				/*  The clear text password text */
+#define kControlEditTextCharCount 		'chrc'				/*  Count of characters in the control's text */
 
 #define kControlEditTextKeyScriptBehaviorTag  'kscr'		/*  ControlKeyScriptBehavior. Defaults to "PrefersRoman" for password fields, */
 															/*        or "AllowAnyScript" for non-password fields. */
@@ -488,6 +489,7 @@
 #define kDataBrowserTruncateTextAtEnd 	0x0200				/*  kDataBrowserTextType && kDataBrowserIconAndTextType  */
 #define kDataBrowserTruncateTextMiddle 	0x00				/*  kDataBrowserTextType && kDataBrowserIconAndTextType  */
 #define kDataBrowserTruncateTextAtStart  0x0100				/*  kDataBrowserTextType && kDataBrowserIconAndTextType  */
+#define kDataBrowserPopupMenuButtonless  0x0100				/*  kDataBrowserPopupMenuType */
 #define kDataBrowserPropertyModificationFlags  0xFF00		/*  support for an old name */
 #define kDataBrowserRelativeDateTime 	0x0100				/*  support for an old name */
 
@@ -504,7 +506,11 @@
 #define kDataBrowserListViewMovableColumn  0x00020000
 #define kDataBrowserListViewSortableColumn  0x00040000
 #define kDataBrowserListViewTypeSelectColumn  0x00080000
+#define kDataBrowserListViewNoGapForIconInHeaderButton  0x00100000
 #define kDataBrowserListViewDefaultColumnFlags  0x00060000
+
+#define kControlEditUnicodeTextProc 	912
+#define kControlEditUnicodeTextPasswordProc  914
 
 #define kControlKindEditUnicodeText 	'eutx'
 #define kControlEditTextSingleLineTag 	'sglc'				/*  data is a Boolean; indicates whether the control should always be single-line */

@@ -1,7 +1,7 @@
 /*
 	NSScrollView.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 #import <Foundation/NSDate.h>
@@ -27,9 +27,11 @@ typedef struct __SFlags {
     unsigned int	focusRingNeedsRedisplay:1;
     unsigned int	hasCustomLineBorderColor:1;
     unsigned int	autohidesScrollers:1;
-    unsigned int        RESERVED:15;
+    unsigned int	autoforwardsScrollWheelEvents:1;
+    unsigned int        RESERVED:14;
 #else
-    unsigned int        RESERVED:15;
+    unsigned int        RESERVED:14;
+    unsigned int	autoforwardsScrollWheelEvents:1;
     unsigned int	autohidesScrollers:1;
     unsigned int	hasCustomLineBorderColor:1;
     unsigned int	focusRingNeedsRedisplay:1;

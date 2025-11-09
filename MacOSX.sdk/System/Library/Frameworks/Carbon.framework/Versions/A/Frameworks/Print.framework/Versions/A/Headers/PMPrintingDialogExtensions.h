@@ -70,19 +70,6 @@ enum {
 };
 
 /*
-Define Printing Dialog Extensions CFPlugIn constants.
-
-First, the base string for all constants relating to Printing Dialog Extensions.
-*/
-#define kPMPDEBase "com.apple.printing.pde"
-/*
-Define the Type and Interface keys for Printing Dialog Extensions.
-*/
-#define kPMPDEAppType           CFSTR(kPMPDEBase ".app")
-#define KPMPDEPrinterType       CFSTR(kPMPDEBase ".pm")
-#define kPMPDEInterface         CFSTR(kPMPDEBase ".ui")
-
-/*
 Define the Kind IDs for Universal and Standard Printing Dialog Extensions.
 */
 /* Implemented Universal */
@@ -107,6 +94,7 @@ Define the Kind IDs for Universal and Standard Printing Dialog Extensions.
 #define kPMErrorHandlingPDEKindID		CFSTR("com.apple.print.pde.ErrorHandlingKind")
 #define kPMPaperFeedPDEKindID           CFSTR("com.apple.print.pde.PaperFeedKind")
 #define kPMPrinterFeaturesPDEKindID		CFSTR("com.apple.print.pde.PrinterFeaturesKind")
+#define kPMInkPDEKindID					CFSTR("com.apple.print.pde.InkKind")
 /* Unimplemented Standard */
 #define kPMColorPDEKindID               CFSTR("com.apple.print.pde.ColorKind")
 #define kPMQualityMediaPDEKindID        CFSTR("com.apple.print.pde.QualityMediaPDEKind")
@@ -132,9 +120,9 @@ typedef UInt32                          PMPDEFlags;
 /*#define    TEST_PLUGINS_LINKED_IN     1 */
 /* Type and Interface IDs. */
 #define kDialogExtensionIntfIDStr			CFSTR("A996FD7E-B738-11D3-8519-0050E4603277")
-#define kGeneralPageSetupDialogTypeIDStr		CFSTR("6E6ED964-B738-11D3-952F-0050E4603277")
-#define kGeneralPrintDialogTypeIDStr			CFSTR("C1BF838E-B72A-11D3-9644-0050E4603277")
-#define kAppPageSetupDialogTypeIDStr			CFSTR("B9A0DA98-E57F-11D3-9E83-0050E4603277")
+#define kGeneralPageSetupDialogTypeIDStr	CFSTR("6E6ED964-B738-11D3-952F-0050E4603277")
+#define kGeneralPrintDialogTypeIDStr		CFSTR("C1BF838E-B72A-11D3-9644-0050E4603277")
+#define kAppPageSetupDialogTypeIDStr		CFSTR("B9A0DA98-E57F-11D3-9E83-0050E4603277")
 #define kAppPrintDialogTypeIDStr			CFSTR("BCB07250-E57F-11D3-8CA6-0050E4603277")
 #define kAppPrintThumbnailTypeIDStr			CFSTR("9320FE03-B5D5-11D5-84D1-003065D6135E")
 #define kPrinterModuleTypeIDStr				CFSTR("BDB091F4-E57F-11D3-B5CC-0050E4603277")
@@ -150,8 +138,22 @@ typedef UInt32                          PMPDEFlags;
 #define kPDEBaseVersionMinor        0
 /* Interface layout - object and vtable: */
 
+/* Plugin vtable call back routines descriptors */
 typedef struct PlugInIntf       PlugInIntf;
 typedef struct PlugInIntfVTable PlugInIntfVTable;
+
+typedef CALLBACK_API_C( OSStatus , PrologueProcPtr ) ( PMPDEContext *context, OSType *creator,
+                            CFStringRef *userOptionKind, CFStringRef *title, UInt32 *maxH, UInt32 *maxV );
+typedef CALLBACK_API_C( OSStatus , InitializeProcPtr ) ( PMPDEContext context, PMPDEFlags* flags,
+                            PMPDERef ref,  ControlRef embedderUserPane, PMPrintSession printSession);
+typedef CALLBACK_API_C( OSStatus , SyncProcPtr ) ( PMPDEContext context, PMPrintSession printSession,
+                            Boolean reinitializePlugIn);
+typedef CALLBACK_API_C( OSStatus , GetSummaryTextProcPtr ) ( PMPDEContext context, CFArrayRef *titleArray,
+                            CFArrayRef *summaryArray );
+typedef CALLBACK_API_C( OSStatus , OpenProcPtr ) ( PMPDEContext context );
+typedef CALLBACK_API_C( OSStatus , CloseProcPtr ) ( PMPDEContext context );
+typedef CALLBACK_API_C( OSStatus , TerminateProcPtr ) ( PMPDEContext context, 
+                            OSStatus status );
 
 struct PlugInIntf
 {
@@ -171,42 +173,13 @@ struct PlugInIntfVTable
 
     // Entry points for Printing Dialog Extension modules...
 
-
-    CALLBACK_API_C( OSStatus , Prologue )
-                        (   PMPDEContext        *context,
-                            OSType              *creator,
-                            CFStringRef         *userOptionKind,
-                            CFStringRef         *title, 
-                            UInt32              *maxH, 
-                            UInt32              *maxV);
-
-    CALLBACK_API_C( OSStatus , Initialize )
-                        (   PMPDEContext        context, 
-                            PMPDEFlags*         flags,
-                            PMPDERef            ref,
-                            ControlRef          embedderUserPane,
-                            PMPrintSession      printSession);
-
-    CALLBACK_API_C( OSStatus , Sync )
-                        (   PMPDEContext        context,
-                            PMPrintSession      printSession,
-                            Boolean             reinitializePlugIn);
-
-    CALLBACK_API_C( OSStatus , GetSummaryText )
-                        (   PMPDEContext        context, 
-                            CFArrayRef          *titleArray,
-                            CFArrayRef          *summaryArray );
-
-    CALLBACK_API_C( OSStatus , Open )
-                        (   PMPDEContext        context );
-                        
-    CALLBACK_API_C( OSStatus , Close )
-                        (   PMPDEContext        context );
-                        
-    CALLBACK_API_C( OSStatus , Terminate )
-                        (   PMPDEContext        context, 
-                            OSStatus            status );
-
+    PrologueProcPtr				Prologue;
+    InitializeProcPtr			Initialize;
+    SyncProcPtr					Sync;
+    GetSummaryTextProcPtr		GetSummaryText;
+    OpenProcPtr					Open;
+    CloseProcPtr				Close;
+    TerminateProcPtr			Terminate;
 };
 
 /* Some commonly used routines used by PDEs */

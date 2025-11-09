@@ -14,7 +14,7 @@
 // Represents values of type ABMultiXXXXXProperty. All values in an ABMultiValue must be of the same type
 // (kABMultiStringProperty: all values must be strings....)
 //
-// In case your application needs to store away a reference to a specific value/label pair uses the identifier.
+// In case your application needs to store away a reference to a specific value/label pair, use the identifier.
 // Index won't work in this case because any client can add/remove/reorder a multivalue making your index
 // point to the wrong pair. Identifiers are unique Ids.
 //
@@ -40,7 +40,7 @@
     // Raises if index is out of bounds
 
 - (NSString *)identifierAtIndex:(unsigned int)index;
-    // Returns a identifier at a given index
+    // Returns an identifier at a given index
     // Raises if index is out of bounds
 
 - (unsigned int)indexForIdentifier:(NSString *)identifier;
@@ -48,11 +48,11 @@
     // Returns NSNotFound if not found
 
 - (NSString *)primaryIdentifier;
-    // Identifier for the primvary value
+    // Identifier for the primary value
 
 - (ABPropertyType)propertyType;
     // Type of this multivalue (kABMultiXXXXProperty)
-    // Returns kABErrorInProperty in this multi-value is empty or not all values have
+    // Returns kABErrorInProperty if this multi-value is empty or not all values have
     // the same type.
 @end
 
@@ -78,7 +78,7 @@
     // with a multivalue that doesn't have all its values of the same type will return an error
 
 - (BOOL)removeValueAndLabelAtIndex:(unsigned int)index;
-    // Removes a value/label pari at a given index
+    // Removes a value/label pair at a given index
     // Raises if the index is out of bounds
 
 - (BOOL)replaceValueAtIndex:(unsigned int)index withValue:(id)value;

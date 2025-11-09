@@ -3,9 +3,9 @@
  
      Contains:   Fixed Math Interfaces.
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -51,10 +51,11 @@ extern "C" {
 #define FloatToFract(a)     ((Fract)((float)(a) * fract1))
 #define ColorToFract(a)     (((Fract) (a) << 14) + ((Fract)(a) + 2 >> 2))
 #define FractToColor(a)     ((gxColorValue) ((a) - ((a) >> 16) + 8191 >> 14))
-#ifndef ff  /* ff is already defined on some platforms */
-#define ff(a)              IntToFixed(a)
-#define fl(a)              FloatToFixed(a)
-#endif
+/* These macros were removed because of developer complaints of variable name collision. */
+//#ifndef ff    /* ff is already defined on some platforms */
+//#define ff(a)            IntToFixed(a)
+//#define fl(a)            FloatToFixed(a)
+//#endif
 /*
     FixRatio, FixMul, and FixRound were previously in ToolUtils.h
 */
@@ -295,10 +296,20 @@ extern Fract
 X2Frac(double x)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/* QuickTime 3.0 makes these Wide routines available on other platforms*/
-#if TARGET_CPU_PPC
 /*
  *  WideCompare()
+ *  
+ *  Parameters:
+ *    
+ *    target:
+ *      a pointer to the first wide to compare
+ *    
+ *    source:
+ *      a pointer to the second wide to compare
+ *  
+ *  Result:
+ *    return 0 if the value in target == the value in source ; a value
+ *    < 0 if *target < *source and a value > 0 if *target > *source
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -314,6 +325,21 @@ WideCompare(
 /*
  *  WideAdd()
  *  
+ *  Discussion:
+ *    Adds the value in source to target and returns target.  Note that
+ *    target is updated to the new value.
+ *  
+ *  Parameters:
+ *    
+ *    target:
+ *      a pointer to the value to have source added to
+ *    
+ *    source:
+ *      a pointer to the value to be added to target
+ *  
+ *  Result:
+ *    returns the value target
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -327,6 +353,21 @@ WideAdd(
 
 /*
  *  WideSubtract()
+ *  
+ *  Discussion:
+ *    Subtracts the value in source from target and returns target. 
+ *    Note that target is updated to the new value.
+ *  
+ *  Parameters:
+ *    
+ *    target:
+ *      a pointer to the value to have source subtracted from
+ *    
+ *    source:
+ *      a pointer to the value to be substracted from target
+ *  
+ *  Result:
+ *    returns the value target
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -342,6 +383,17 @@ WideSubtract(
 /*
  *  WideNegate()
  *  
+ *  Discussion:
+ *    Negates the value ( twos complement ) in target and returns
+ *    target.  Note that target is updated to the new value.
+ *  
+ *  Parameters:
+ *    
+ *    target:
+ *  
+ *  Result:
+ *    returns the value target
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -353,6 +405,19 @@ WideNegate(wide * target)                                     AVAILABLE_MAC_OS_X
 
 /*
  *  WideShift()
+ *  
+ *  Discussion:
+ *    Shift the value in target by shift bits with upwards rounding of
+ *    the remainder.    Note that target is updated to the new value.
+ *  
+ *  Parameters:
+ *    
+ *    target:
+ *      the value to be shifted
+ *    
+ *    shift:
+ *      the count of bits to shift, positive values shift right and
+ *      negative values shift left
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -368,6 +433,18 @@ WideShift(
 /*
  *  WideSquareRoot()
  *  
+ *  Discussion:
+ *    Return the closest integer value to the square root for the given
+ *    number.
+ *  
+ *  Parameters:
+ *    
+ *    source:
+ *      the value to calculate the root for
+ *  
+ *  Result:
+ *    the closest integer value to the square root of source
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -379,6 +456,22 @@ WideSquareRoot(const wide * source)                           AVAILABLE_MAC_OS_X
 
 /*
  *  WideMultiply()
+ *  
+ *  Discussion:
+ *    Returns the wide result of multipling two signed long values
+ *  
+ *  Parameters:
+ *    
+ *    multiplicand:
+ *    
+ *    multiplier:
+ *    
+ *    target:
+ *      a pointer to where to put the result  of multiplying
+ *      multiplicand and multiplier, must not be NULL
+ *  
+ *  Result:
+ *    the value target
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -392,9 +485,32 @@ WideMultiply(
   wide *  target)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/* returns the quotient */
 /*
  *  WideDivide()
+ *  
+ *  Discussion:
+ *    Returns the integer and remainder results after dividing a wide
+ *    value by a long. Will overflow to positiveInfinity or
+ *    negativeInfinity if the result won't fit into a long.  If
+ *    remainder is (long) -1 then any overflow rounds to
+ *    negativeInfinity.
+ *  
+ *  Parameters:
+ *    
+ *    dividend:
+ *      the value to be divided
+ *    
+ *    divisor:
+ *      the value to divide by
+ *    
+ *    remainder:
+ *      a pointer to where to put the remainder result, between 0 and
+ *      divisor, after dividing divident by divisor. If NULL, no
+ *      remainder is returned.  If (long*) -1, then any overflow result
+ *      will round to negativeInfinity.
+ *  
+ *  Result:
+ *    the integer signed long result of dividend / divisor
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -408,9 +524,28 @@ WideDivide(
   long *        remainder)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/* quotient replaces dividend */
 /*
  *  WideWideDivide()
+ *  
+ *  Discussion:
+ *    Returns the wide integer and remainder results after dividing a
+ *    wide value by a long. Note that dividend is updated with the
+ *    result.
+ *  
+ *  Parameters:
+ *    
+ *    dividend:
+ *      the value to be divided
+ *    
+ *    divisor:
+ *      the value to divide by
+ *    
+ *    remainder:
+ *      a pointer to where to put the remainder result, between 0 and
+ *      divisor, after dividing divident by divisor
+ *  
+ *  Result:
+ *    the wide result of dividend / divisor
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -427,6 +562,22 @@ WideWideDivide(
 /*
  *  WideBitShift()
  *  
+ *  Discussion:
+ *    Shift the value in target by shift bits.  Note that target is
+ *    updated with the shifted result.
+ *  
+ *  Parameters:
+ *    
+ *    target:
+ *      the value to be shifted
+ *    
+ *    shift:
+ *      the count of bits to shift, positive values shift right and
+ *      negative values shift left
+ *  
+ *  Result:
+ *    return the value target
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -434,11 +585,24 @@ WideWideDivide(
  */
 extern wide * 
 WideBitShift(
-  wide *  src,
+  wide *  target,
   long    shift)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#endif  /* TARGET_CPU_PPC */
+/*
+ *  UnsignedFixedMulDiv()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern UnsignedFixed 
+UnsignedFixedMulDiv(
+  UnsignedFixed   value,
+  UnsignedFixed   multiplier,
+  UnsignedFixed   divisor)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
 
 
 

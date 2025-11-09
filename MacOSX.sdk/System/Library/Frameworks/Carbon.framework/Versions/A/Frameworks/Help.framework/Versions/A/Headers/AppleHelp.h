@@ -3,9 +3,9 @@
  
      Contains:   Apple Help
  
-     Version:    Help-27~1003
+     Version:    Help-32.1~824
  
-     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -64,8 +64,7 @@ enum {
  *  Result:
  *    An operating system result code that indicates whether the
  *    request was successfully sent to the Help Viewer application.
- *    Possible values: noErr, paramErr, kAHInternalErr,
- *    kAHInternetConfigPrefErr.
+ *    Possible values: noErr, paramErr, kAHInternalErr.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -79,11 +78,13 @@ AHSearch(
 
 
 /*
- *  AHGotoMainTOC()
+ *  AHGotoMainTOC()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    Delivers a request to load the main table of contents of
- *    installed help books to the Help Viewer application.
+ *    installed help books to the Help Viewer application. This method
+ *    has been deprecated in Mac OS X 10.4. Instead, please use
+ *    AHGotoPage to jump directly to different books or anchors.
  *  
  *  Parameters:
  *    
@@ -93,16 +94,15 @@ AHSearch(
  *  Result:
  *    An operating system result code that indicates whether the
  *    request was successfully sent to the Help Viewer application.
- *    Possible values: noErr, paramErr, kAHInternalErr,
- *    kAHInternetConfigPrefErr.
+ *    Possible values: noErr, paramErr, kAHInternalErr.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AHGotoMainTOC(AHTOCType toctype)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AHGotoMainTOC(AHTOCType toctype)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -134,8 +134,7 @@ AHGotoMainTOC(AHTOCType toctype)                              AVAILABLE_MAC_OS_X
  *  Result:
  *    An operating system result code that indicates whether the
  *    request was successfully sent to the Help Viewer application.
- *    Possible values: noErr, paramErr, kAHInternalErr,
- *    kAHInternetConfigPrefErr.
+ *    Possible values: noErr, paramErr, kAHInternalErr.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -171,8 +170,7 @@ AHGotoPage(
  *  Result:
  *    An operating system result code that indicates whether the
  *    request was successfully sent to the Help Viewer application.
- *    Possible values: noErr, paramErr, kAHInternalErr,
- *    kAHInternetConfigPrefErr.
+ *    Possible values: noErr, paramErr, kAHInternalErr.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework

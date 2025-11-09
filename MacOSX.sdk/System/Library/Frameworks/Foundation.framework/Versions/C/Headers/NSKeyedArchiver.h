@@ -1,12 +1,12 @@
 /*	NSKeyedArchiver.h
-	Copyright (c) 2001-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 2001-2005, Apple, Inc. All rights reserved.
 */
-
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSCoder.h>
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSPropertyList.h>
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSArray, NSMutableData, NSData;
 
@@ -18,13 +18,13 @@ FOUNDATION_EXPORT NSString * const NSInvalidUnarchiveOperationException;
     void *_stream;
     uint32_t _flags;
     id _delegate;
-    void *_containers;
-    void *_objects;
-    void *_objRefMap;
-    void *_replacementMap;
-    void *_classNameMap;
-    void *_conditionals;
-    void *_classes;
+    id _containers;
+    id _objects;
+    id _objRefMap;
+    id _replacementMap;
+    id _classNameMap;
+    id _conditionals;
+    id _classes;
     int32_t _genericKey;
     void *_cache;
     uint32_t _cacheSize;
@@ -71,19 +71,18 @@ FOUNDATION_EXPORT NSString * const NSInvalidUnarchiveOperationException;
 @private
     id _delegate;
     uint32_t _flags;
-    void *_objRefMap;
-    void *_replacementMap;
-    void *_nameClassMap;
-    void *_tmpRefObjMap;
-    void *_refObjMap;
+    id _objRefMap;
+    id _replacementMap;
+    id _nameClassMap;
+    id _tmpRefObjMap;
+    id _refObjMap;
     int32_t _genericKey;
-    const void *_data;
-    const uint8_t *_bytes;
+    id _data;
     void *_offsetData;
-    void *_containers;
-    void *_objects;
-    void *_reserved3;
-    void *_reserved2;
+    id _containers;
+    id _objects;
+    const uint8_t *_bytes;
+    uint64_t _len;
     void *_reserved1;
     void *_reserved0;
 }
@@ -221,6 +220,12 @@ FOUNDATION_EXPORT NSString * const NSInvalidUnarchiveOperationException;
 	// [self replacementObjectForArchiver:nil] by default, NOT
 	// -replacementObjectForCoder: as might be expected.  This is a concession
 	// to source compatibility.
+
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
++ (NSArray *)classFallbacksForKeyedArchiver;
+
+#endif
 
 @end
 

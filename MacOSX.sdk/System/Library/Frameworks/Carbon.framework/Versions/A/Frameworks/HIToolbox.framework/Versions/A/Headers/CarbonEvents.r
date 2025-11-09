@@ -3,9 +3,9 @@
  
      Contains:   Carbon Event Manager
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -60,6 +60,12 @@
 #define kHICommandPageSetup 			'page'
 #define kHICommandAppHelp 				'ahlp'
 #define kHICommandShowCharacterPalette 	'chrp'
+#define kHICommandShowSpellingPanel 	'shsp'
+#define kHICommandCheckSpelling 		'cksp'
+#define kHICommandChangeSpelling 		'chsp'
+#define kHICommandCheckSpellingAsYouType  'aspc'
+#define kHICommandIgnoreSpelling 		'igsp'
+#define kHICommandLearnWord 			'lrwd'
 
 
 #endif /* __CARBONEVENTS_R__ */

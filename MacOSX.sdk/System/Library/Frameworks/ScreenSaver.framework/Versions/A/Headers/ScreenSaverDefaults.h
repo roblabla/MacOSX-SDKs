@@ -9,11 +9,11 @@
 
 @interface ScreenSaverDefaults : NSUserDefaults 
 {
-@private
-    void			*_reserved4;
-    void			*_reserved5;
+	@private
+		void			*_reserved4;
+		void			*_reserved5;
 }
 
-+ (id)defaultsForModuleWithName:(NSString*)moduleName;
++ (id) defaultsForModuleWithName:(NSString *)inModuleName;
 
 @end

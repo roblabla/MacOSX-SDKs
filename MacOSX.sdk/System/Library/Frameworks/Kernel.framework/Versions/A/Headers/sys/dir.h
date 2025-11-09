@@ -63,11 +63,7 @@
 #ifndef _SYS_DIR_H_
 #define	_SYS_DIR_H_
 
-#ifdef KERNEL
 #include <sys/dirent.h>
-#else
-#include <dirent.h>
-#endif
 
 /*
  * Backwards compatibility.

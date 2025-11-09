@@ -14,7 +14,7 @@
 
 
 /* used to be __cplusplus	*/
-#if __GNUG__		
+#ifdef __cplusplus		
 extern "C" {
 #endif
 
@@ -78,7 +78,7 @@ AFPMountURL(const char* inURL,
 
 
 /* used to be __cplusplus	*/
-#if __GNUG__		
+#ifdef __cplusplus		
 };
 #endif
 

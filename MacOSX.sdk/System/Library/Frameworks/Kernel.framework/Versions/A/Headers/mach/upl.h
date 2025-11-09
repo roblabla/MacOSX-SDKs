@@ -63,8 +63,8 @@ extern
 kern_return_t upl_abort_range
 (
 	upl_t upl_object,
-	vm_offset_t offset,
-	vm_size_t size,
+	upl_offset_t offset,
+	upl_size_t size,
 	integer_t abort_cond,
 	boolean_t *empty
 );
@@ -91,8 +91,8 @@ extern
 kern_return_t upl_commit_range
 (
 	upl_t upl_object,
-	vm_offset_t offset,
-	vm_size_t size,
+	upl_offset_t offset,
+	upl_size_t size,
 	integer_t cntrl_flags,
 	upl_page_info_array_t page_list,
 	mach_msg_type_number_t page_listCnt,
@@ -116,37 +116,61 @@ __END_DECLS
 
 #ifndef __Request__upl_subsystem__defined
 #define __Request__upl_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		integer_t abort_cond;
 	} __Request__upl_abort_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
-		vm_offset_t offset;
-		vm_size_t size;
+		upl_offset_t offset;
+		upl_size_t size;
 		integer_t abort_cond;
 	} __Request__upl_abort_range_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_msg_type_number_t page_listCnt;
-		upl_page_info_t page_list[20];
+		upl_page_info_t page_list[256];
 	} __Request__upl_commit_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
-		vm_offset_t offset;
-		vm_size_t size;
+		upl_offset_t offset;
+		upl_size_t size;
 		integer_t cntrl_flags;
 		mach_msg_type_number_t page_listCnt;
-		upl_page_info_t page_list[20];
+		upl_page_info_t page_list[256];
 	} __Request__upl_commit_range_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__upl_subsystem__defined */
 
 /* union of all requests */
@@ -164,32 +188,56 @@ union __RequestUnion__upl_subsystem {
 
 #ifndef __Reply__upl_subsystem__defined
 #define __Reply__upl_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__upl_abort_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		boolean_t empty;
 	} __Reply__upl_abort_range_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__upl_commit_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		boolean_t empty;
 	} __Reply__upl_commit_range_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__upl_subsystem__defined */
 
 /* union of all replies */

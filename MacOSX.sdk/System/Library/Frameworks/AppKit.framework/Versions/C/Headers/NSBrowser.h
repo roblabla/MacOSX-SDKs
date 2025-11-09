@@ -1,7 +1,7 @@
 /*
 	NSBrowser.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -72,8 +72,6 @@ typedef struct __Brflags {
 #endif
 } _Brflags;
 
-typedef struct NSBrowserAuxiliary NSBrowserAuxiliaryOpaque;
-
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 typedef enum _NSBrowserColumnResizingType {
@@ -101,7 +99,7 @@ typedef enum _NSBrowserColumnResizingType {
     NSMutableArray	*_titles;
     NSString		*_pathSeparator;
     NSMutableArray	*_columns;
-    NSBrowserAuxiliaryOpaque *_brAuxiliaryStorage;
+    id                  _brAuxiliaryStorage;
     NSString		*_firstColumnTitle;
     NSScroller		*_scroller;
     _Brflags            _brflags;

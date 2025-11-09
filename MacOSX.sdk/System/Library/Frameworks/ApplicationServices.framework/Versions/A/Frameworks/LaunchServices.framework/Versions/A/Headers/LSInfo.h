@@ -3,9 +3,9 @@
  
      Contains:   Public interfaces for LaunchServices.framework
  
-     Version:    LaunchServices-98.4~11
+     Version:    LaunchServices-182~2
  
-     Copyright:  © 2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -39,26 +39,27 @@ extern "C" {
 
 enum {
   kLSAppInTrashErr              = -10660, /* The app cannot be run when inside a Trash folder*/
-  kLSUnknownErr                 = -10810,
-  kLSNotAnApplicationErr        = -10811,
-  kLSNotInitializedErr          = -10812,
-  kLSDataUnavailableErr         = -10813, /* e.g. no kind string*/
-  kLSApplicationNotFoundErr     = -10814, /* e.g. no application claims the file*/
-  kLSUnknownTypeErr             = -10815,
-  kLSDataTooOldErr              = -10816,
-  kLSDataErr                    = -10817,
-  kLSLaunchInProgressErr        = -10818, /* e.g. opening an alreay opening application*/
-  kLSNotRegisteredErr           = -10819,
-  kLSAppDoesNotClaimTypeErr     = -10820,
-  kLSAppDoesNotSupportSchemeWarning = -10821, /* not an error, just a warning*/
-  kLSServerCommunicationErr     = -10822, /* cannot set recent items*/
-  kLSCannotSetInfoErr           = -10823, /* you may not set item info for this item*/
-  kLSNoRegistrationInfoErr      = -10824, /* the item contains no registration info*/
-  kLSIncompatibleSystemVersionErr = -10825, /* the app cannot run on the current OS version*/
-  kLSNoLaunchPermissionErr      = -10826, /* user doesn't have permission to launch the app (managed networks)*/
-  kLSNoExecutableErr            = -10827, /* the executable is missing or has an unusable format*/
-  kLSNoClassicEnvironmentErr    = -10828, /* the Classic environment was required but is not available*/
-  kLSMultipleSessionsNotSupportedErr = -10829 /* the app cannot run simultaneously in two different sessions*/
+  kLSExecutableIncorrectFormat  = -10661,
+  kLSUnknownErr                 = -10810, /* Unexpected internal error*/
+  kLSNotAnApplicationErr        = -10811, /* Item needs to be an application, but is not*/
+  kLSNotInitializedErr          = -10812, /* Not used in 10.2 and later*/
+  kLSDataUnavailableErr         = -10813, /* E.g. no kind string*/
+  kLSApplicationNotFoundErr     = -10814, /* E.g. no application claims the file*/
+  kLSUnknownTypeErr             = -10815, /* Don't know anything about the type of the item*/
+  kLSDataTooOldErr              = -10816, /* Not used in 10.3 and later*/
+  kLSDataErr                    = -10817, /* Not used in 10.4 and later*/
+  kLSLaunchInProgressErr        = -10818, /* E.g. launching an alreay launching application*/
+  kLSNotRegisteredErr           = -10819, /* Not used in 10.3 and later*/
+  kLSAppDoesNotClaimTypeErr     = -10820, /* Not used in 10.3 and later*/
+  kLSAppDoesNotSupportSchemeWarning = -10821, /* Not used in 10.2 and later*/
+  kLSServerCommunicationErr     = -10822, /* The server process (registration and recent items) is not available*/
+  kLSCannotSetInfoErr           = -10823, /* The extension visibility on this item cannot be changed*/
+  kLSNoRegistrationInfoErr      = -10824, /* The item contains no registration info*/
+  kLSIncompatibleSystemVersionErr = -10825, /* The app cannot run on the current OS version*/
+  kLSNoLaunchPermissionErr      = -10826, /* User doesn't have permission to launch the app (managed networks)*/
+  kLSNoExecutableErr            = -10827, /* The executable is missing*/
+  kLSNoClassicEnvironmentErr    = -10828, /* The Classic environment was required but is not available*/
+  kLSMultipleSessionsNotSupportedErr = -10829 /* The app cannot run simultaneously in two different sessions*/
 };
 
 typedef OptionBits                      LSInitializeFlags;
@@ -107,10 +108,12 @@ enum {
 typedef OptionBits                      LSRolesMask;
 enum {
   kLSRolesNone                  = 0x00000001, /* no claim is made about support for this type/scheme*/
-  kLSRolesViewer                = 0x00000002, /* claim to be able to view this type/scheme*/
-  kLSRolesEditor                = 0x00000004, /* claim to be able to edit this type/scheme*/
+  kLSRolesViewer                = 0x00000002, /* claim to view items of this type*/
+  kLSRolesEditor                = 0x00000004, /* claim to edit items of this type/scheme*/
+  kLSRolesShell                 = 0x00000008, /* claim to execute items of this type*/
   kLSRolesAll                   = (unsigned long)0xFFFFFFFF /* claim to do it all*/
 };
+
 
 typedef UInt32                          LSKindID;
 enum {
@@ -1047,6 +1050,445 @@ LSCopyApplicationURLsForURL(
   CFURLRef      inURL,
   LSRolesMask   inRoleMask)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
+
+
+/* ================================================================================== */
+/*   API for retrieving item attributes                                               */
+/* ================================================================================== */
+/* 
+ *  Attributes Names
+ *
+ *  kLSItemContentType
+ *
+ *    The item's content type identifier (a uniform type identifier string)
+ *    Value type CFStringRef
+ *
+ *
+ *  kLSItemFileType
+ *
+ *    The item's file type (OSType)
+ *    Value type CFStringRef
+ *
+ *
+ *  kLSItemFileCreator
+ *
+ *    The item's file creator (OSType)
+ *    Value type CFStringRef 
+ *
+ *
+ *  kLSItemExtension
+ *
+ *    The item's filename extension
+ *    Value type CFStringRef 
+ *
+ *
+ *  kLSItemDisplayName
+ *
+ *    The item's name as displayed to the user
+ *    (The display name reflects localization and
+ *    extension hiding which may be in effect)
+ *    Value type CFStringRef 
+ *
+ *
+ *  kLSItemDisplayKind
+ *
+ *    The localized kind string describing this item's type
+ *    Value type CFStringRef 
+ *
+ *
+ *  kLSItemRoleHandlerDisplayName
+ *
+ *    The display name of the application set to handle (open) this item
+ *    (subject to the role mask)
+ *    value type CFStringRef 
+ *
+ *
+ *  kLSItemIsInvisible
+ *
+ *    True if the item is normally hidden from users
+ *    Value type CFBooleanRef 
+ *
+ *
+ *  kLSItemExtensionIsHidden
+ *
+ *    True if the item's extension is set to be hidden
+ *    Value type CFBooleanRef 
+ */
+/*
+ *  kLSItemContentType
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kLSItemContentType                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kLSItemFileType
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kLSItemFileType                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kLSItemFileCreator
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kLSItemFileCreator                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kLSItemExtension
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kLSItemExtension                            AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kLSItemDisplayName
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kLSItemDisplayName                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kLSItemDisplayKind
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kLSItemDisplayKind                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kLSItemRoleHandlerDisplayName
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kLSItemRoleHandlerDisplayName               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kLSItemIsInvisible
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kLSItemIsInvisible                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kLSItemExtensionIsHidden
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kLSItemExtensionIsHidden                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  LSCopyItemAttribute()
+ *  
+ *  Discussion:
+ *    Assigns the value of the specified item's attribute (or NULL, if
+ *    the item has no such attribute or an error occurs) to *outValue.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
+ *  
+ *  Parameters:
+ *    
+ *    inItem:
+ *      The FSRef of the item
+ *    
+ *    inRoles:
+ *      The role(s), at least one of which must be provided by the
+ *      application selected when computing attributes related to
+ *      document binding (such as kLSItemRoleHandlerDisplayName). Pass
+ *      kLSRolesAll if any role is acceptable.
+ *    
+ *    inAttributeName:
+ *      The name of the attribute to copy
+ *    
+ *    outValue:
+ *      Receives the attribute value
+ *  
+ *  Result:
+ *    an OSStatus value.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+LSCopyItemAttribute(
+  const FSRef *  inItem,
+  LSRolesMask    inRoles,
+  CFStringRef    inAttributeName,
+  CFTypeRef *    outValue)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+/*
+ *  LSCopyItemAttributes()
+ *  
+ *  Assigns a dictionary containing the specified attribute
+ *  values to *outValues. The dictionary keys are the requested 
+ *  attribute names. The CFTypeID of each value in the dictionary 
+ *  varies by attribute. See each attribute name constant for a 
+ *  description of its value type. An attribute key will be
+ *  absent from the values dictionary if the item has no such
+ *  attribute.
+ *  
+ *  On success, returns noErr. Failure modes include I/O errors.
+ */
+/*
+ *  LSCopyItemAttributes()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+LSCopyItemAttributes(
+  const FSRef *      inItem,
+  LSRolesMask        inRoles,
+  CFArrayRef         inAttributeNames,
+  CFDictionaryRef *  outValues)                               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+/* ================================================================================== */
+/*   API for accessing content and URL handler preferences                            */
+/* ================================================================================== */
+
+/*
+ *  LSCopyDefaultRoleHandlerForContentType
+ *  
+ *  Returns the application bundle identifier of the default handler 
+ *  for the specified content type (UTI), in the specified role(s).
+ *  For any role, specify kLSRolesAll. Returns NULL if no handler
+ *  is available.
+ */
+/*
+ *  LSCopyDefaultRoleHandlerForContentType()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef 
+LSCopyDefaultRoleHandlerForContentType(
+  CFStringRef   inContentType,
+  LSRolesMask   inRole)                                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+/*
+ *  LSCopyAllRoleHandlersForContentType
+ *  
+ *  Returns an array of application bundle identifiers for
+ *  applications capable of handling the specified content type 
+ *  (UTI) with the specified role(s). Application content handling 
+ *  capabilities are determined according to the kCFBundleDocumentTypes 
+ *  listed in an application's Info.plist). For any role, specify kLSRolesAll. 
+ *  Returns NULL if no handlers are available.
+ */
+/*
+ *  LSCopyAllRoleHandlersForContentType()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFArrayRef 
+LSCopyAllRoleHandlersForContentType(
+  CFStringRef   inContentType,
+  LSRolesMask   inRole)                                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+/*
+ *  LSSetDefaultRoleHandlerForContentType
+ *  
+ *  Sets the user's preferred handler for the specified content
+ *  type (UTI) in the specified role(s). For all roles, specify
+ *  kLSRolesAll. The handler is specified as an application
+ *  bundle identifier.
+ */
+/*
+ *  LSSetDefaultRoleHandlerForContentType()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+LSSetDefaultRoleHandlerForContentType(
+  CFStringRef   inContentType,
+  LSRolesMask   inRole,
+  CFStringRef   inHandlerBundleID)                            AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+/*
+ *  LSHandlerOptions
+ *
+ *  Options controlling how content handlers are selected.
+ *
+ *    kLSHandlerOptionsDefault - by default, Launch Services will
+ *        use a content item's creator (when available) to select a handler
+ *    kLSHandlerOptionsIgnoreCreator - Launch Services will ignore content item 
+ *        creator information when selecting a role handler for the specified 
+ *        content type
+ */
+typedef OptionBits                      LSHandlerOptions;
+enum {
+  kLSHandlerOptionsDefault      = 0,
+  kLSHandlerOptionsIgnoreCreator = 1
+};
+
+
+/*
+ *  LSGetHandlerOptionsForContentType
+ *  
+ *  Get the handler options for the specified content type (UTI).
+ */
+/*
+ *  LSGetHandlerOptionsForContentType()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern LSHandlerOptions 
+LSGetHandlerOptionsForContentType(CFStringRef inContentType)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+/*
+ *  LSSetHandlerOptionsForContentType
+ *  
+ *  Set the handler options for the specified content type (UTI).
+ */
+/*
+ *  LSSetHandlerOptionsForContentType()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+LSSetHandlerOptionsForContentType(
+  CFStringRef        inContentType,
+  LSHandlerOptions   inOptions)                               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+/*
+ *  LSCopyDefaultHandlerForURLScheme
+ *  
+ *  Returns the bundle identifier of the default handler for
+ *  the specified URL scheme. Returns NULL if no handler
+ *  is available.
+ */
+/*
+ *  LSCopyDefaultHandlerForURLScheme()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef 
+LSCopyDefaultHandlerForURLScheme(CFStringRef inURLScheme)     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+/*
+ *  LSCopyAllHandlersForURLScheme
+ *  
+ *  Returns an array of application bundle identifiers for
+ *  applications capable of handling the specified URL scheme. 
+ *  URL handling capability is determined according to the 
+ *  kCFBundleURLTypes listed in an application's Info.plist).
+ *  Returns NULL if no handlers are available.
+ */
+/*
+ *  LSCopyAllHandlersForURLScheme()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFArrayRef 
+LSCopyAllHandlersForURLScheme(CFStringRef inURLScheme)        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+/*
+ *  LSSetDefaultHandlerForURLScheme
+ *  
+ *  Sets the user's preferred handler for the specified URL
+ *  scheme. The handler is specified as an application
+ *  bundle identifier.
+ */
+/*
+ *  LSSetDefaultHandlerForURLScheme()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.4
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+LSSetDefaultHandlerForURLScheme(
+  CFStringRef   inURLScheme,
+  CFStringRef   inHandlerBundleID)                            AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 

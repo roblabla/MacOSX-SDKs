@@ -1,7 +1,7 @@
 /*
 	NSPrintInfo.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -56,11 +56,20 @@ APPKIT_EXTERN NSString *NSPrintMustCollate; // an NSNumber containing a boolean 
 APPKIT_EXTERN NSString *NSPrintReversePageOrder; // an NSNumber containing a boolean value
 APPKIT_EXTERN NSString *NSPrintJobDisposition; // an NSString equal to NSPrintSpoolJob, NSPrintPreviewJob, NSPrintSaveJob, or NSPrintCancelJob
 APPKIT_EXTERN NSString *NSPrintSavePath; // an NSString containing a path to which the job file will be saved, for NSPrintSaveJob
+APPKIT_EXTERN NSString *NSPrintPagesAcross AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSNumber containing the number of logical pages to be placed across a physical sheet
+APPKIT_EXTERN NSString *NSPrintPagesDown AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSNumber containing the number of logical pages to be placed down a physical sheet
+APPKIT_EXTERN NSString *NSPrintTime AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSDate containing the time at which printing should begin
+APPKIT_EXTERN NSString *NSPrintDetailedErrorReporting AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSNumber containing a boolean value
+APPKIT_EXTERN NSString *NSPrintFaxNumber AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSString containing a fax number
+APPKIT_EXTERN NSString *NSPrintPrinterName AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSString containing the name of a printer
+
+// Keys for page adornment attributes that are recognized by NSPrintInfo.
+APPKIT_EXTERN NSString *NSPrintHeaderAndFooter AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSNumber containing a boolean value
 
 @interface NSPrintInfo : NSObject<NSCopying, NSCoding> {
     @private
     NSMutableDictionary *_attributes;
-    void *_moreVars;
+    id _moreVars;
 }
 
 // Set or get the "shared" instance of NSPrintInfo.  The shared print info object is the one that is used automatically by -[NSPageLayout runModal] and +[NSPrintOperation printOperationWithView:].
@@ -110,14 +119,14 @@ APPKIT_EXTERN NSString *NSPrintSavePath; // an NSString containing a path to whi
 // Validate all of the attributes encapsulated by this object.  This method is invoked automatically before the object is used by an NSPrintOperation.  This method may be overridden to perform validation of attributes that are not recognized by the NSPrintInfo class.
 - (void)setUpPrintOperationDefaultValues;
 
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 
 // Return the imageable area of a sheet of paper specified by this object, taking into account the current printer, paper size, and orientation settings, but not scaling.  "Imageable area" is the maximum area that can possibly be marked on by the printer hardware, not the area defined by the current margin settings.  The rectangle is in a coordinate space measured by points, with (0, 0) being the lower-left corner of the oriented sheet and (paperWidth, paperHeight) being the upper-right corner of the oriented sheet.  The imageable bounds may extend past the edges of the sheet when, for example, a printer driver specifies it so that borderless printing can be done reliably.
 - (NSRect)imageablePageBounds;
 
 #endif
 
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 // Return the human-readable name of the currently selected paper size, suitable for presentation in user interfaces.  This will typically be different from the name returned by -paperName, which is almost never suitable for presentation to to the user.
 - (NSString *)localizedPaperName;

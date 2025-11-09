@@ -1,6 +1,6 @@
 /*
         NSMovieView.h
-        Copyright (c) 1998-2003, Apple Computer, Inc. All rights reserved.
+        Copyright (c) 1998-2005, Apple Computer, Inc. All rights reserved.
 */
 
 #import <AppKit/NSView.h>

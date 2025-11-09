@@ -3,9 +3,9 @@
  
      Contains:   Endian swapping utilties
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1997-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1997-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -288,6 +288,204 @@ typedef Fixed                           BigEndianFixed;
 typedef UnsignedFixed                   BigEndianUnsignedFixed;
 typedef OSType                          BigEndianOSType;
 #endif  /* TARGET_RT_LITTLE_ENDIAN */
+
+#if TARGET_API_MAC_OSX
+/*
+        CoreEndian flipping API.
+
+        This API is used to generically massage data buffers, in
+        place, from one endian architecture to another.  In effect,
+        the API supports registering a set of callbacks that can
+        effect this translation.  
+
+        The data types have specific meanings within their domain,
+        although some data types can be registered with the same
+        callback in several domains.  There is no wildcard domain.
+
+        A set of pre-defined flippers are implemented by the Carbon
+        frameworks for most common resource manager and AppleEvent data
+        types.
+  */
+enum {
+  kCoreEndianResourceManagerDomain = 'rsrc',
+  kCoreEndianAppleEventManagerDomain = 'aevt'
+};
+
+
+/*
+ *  CoreEndianFlipProc
+ *  
+ *  Discussion:
+ *    Callback use to flip endian-ness of typed data
+ *  
+ *  Parameters:
+ *    
+ *    dataDomain:
+ *      Domain of the data type
+ *    
+ *    dataType:
+ *      Type of data being flipped
+ *    
+ *    id:
+ *      resource id (if being flipped on behalf of the resource
+ *      manager, otherwise will be zero)
+ *    
+ *    dataPtr:
+ *      Pointer to the data
+ *    
+ *    dataSize:
+ *      Length of the data
+ *    
+ *    currentlyNative:
+ *      Boolean indicating which direction to flip: false means flip
+ *      from disk big endian to native (from disk), true means flip
+ *      from native to disk big endian (to disk)
+ *    
+ *    refcon:
+ *      An optional user reference supplied when the flipper is
+ *      installed
+ *  
+ *  Result:
+ *    Error code indicating whether the data was flipped.  noErr would
+ *    indicate that the data was flipped as appropriate; any other
+ *    error will be propagated back to the caller.
+ */
+typedef CALLBACK_API( OSStatus , CoreEndianFlipProc )(OSType dataDomain, OSType dataType, short id, void *dataPtr, UInt32 dataSize, Boolean currentlyNative, void *refcon);
+/*
+ * Install a flipper for this application
+ */
+/*
+ *  CoreEndianInstallFlipper()
+ *  
+ *  Summary:
+ *    Installs a flipper proc for the given data type.  If the flipper
+ *    is already registered, this flipper will take replace it.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    dataDomain:
+ *      Domain of the data type
+ *    
+ *    dataType:
+ *      Type of data for which this flipper should be installed
+ *    
+ *    proc:
+ *      Flipper callback to be called for data of this type
+ *    
+ *    refcon:
+ *      Optional user reference for the flipper
+ *  
+ *  Result:
+ *    Error code indicating whether or not the flipper could be
+ *    installed
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+CoreEndianInstallFlipper(
+  OSType               dataDomain,
+  OSType               dataType,
+  CoreEndianFlipProc   proc,
+  void *               refcon)           /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  CoreEndianGetFlipper()
+ *  
+ *  Summary:
+ *    Gets an existing data flipper proc for the given data type
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    dataDomain:
+ *      Domain of the data type
+ *    
+ *    dataType:
+ *      Type of the data for which this flipper should be installed
+ *    
+ *    proc:
+ *      Pointer to a flipper callback
+ *    
+ *    refcon:
+ *      Pointer to the callback refcon
+ *  
+ *  Result:
+ *    noErr if the given flipper could be found; otherwise
+ *    handlerNotFoundErr will be returned.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+CoreEndianGetFlipper(
+  OSType                dataDomain,
+  OSType                dataType,
+  CoreEndianFlipProc *  proc,
+  void **               refcon)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  CoreEndianFlipData()
+ *  
+ *  Summary:
+ *    Calls the flipper for the given data type with the associated data
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    dataDomain:
+ *      Domain of the data type
+ *    
+ *    dataType:
+ *      type of the data
+ *    
+ *    id:
+ *      resource id (if not a resource, pass zero)
+ *    
+ *    data:
+ *      a pointer to the data to be flipped (in place)
+ *    
+ *    dataLen:
+ *      length of the data to flip
+ *    
+ *    currentlyNative:
+ *      a boolean indicating the direction to flip (whether the data is
+ *      currently native endian or big-endian)
+ *  
+ *  Result:
+ *    Error code indicating whether the data was flipped.  If
+ *    handlerNotFound is returned, then no flipping took place (which
+ *    is not necessarily an error condtion)
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+CoreEndianFlipData(
+  OSType    dataDomain,
+  OSType    dataType,
+  short     id,
+  void *    data,
+  UInt32    dataLen,
+  Boolean   currentlyNative)                                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+#endif  /* TARGET_API_MAC_OSX */
 
 
 #pragma options align=reset

@@ -191,9 +191,9 @@ struct JNINativeInterface_ {
 
     void *reserved3;
     
-#if !TARGET_RT_MAC_CFM
+#if !TARGET_RT_MAC_CFM && defined(__ppc__)
     void* cfm_vectors[225];
-#endif /* !TARGET_RT_MAC_CFM */
+#endif /* !TARGET_RT_MAC_CFM && defined(__ppc__) */
 
     jint (JNICALL *GetVersion)(JNIEnv *env);
 
@@ -739,9 +739,9 @@ struct JNINativeInterface_ {
     jlong (JNICALL *GetDirectBufferCapacity)
        (JNIEnv* env, jobject buf);
     
-#if TARGET_RT_MAC_CFM
+#if TARGET_RT_MAC_CFM && defined(__ppc__)
     void* real_functions[228];
-#endif /* TARGET_RT_MAC_CFM */
+#endif /* TARGET_RT_MAC_CFM && defined(__ppc__) */
 
 };
 
@@ -1895,9 +1895,9 @@ struct JNIInvokeInterface_ {
     void *reserved1;
     void *reserved2;
 
-#if !TARGET_RT_MAC_CFM
+#if !TARGET_RT_MAC_CFM && defined(__ppc__)
     void* cfm_vectors[4];
-#endif /* !TARGET_RT_MAC_CFM */
+#endif /* !TARGET_RT_MAC_CFM && defined(__ppc__) */
 
     jint (JNICALL *DestroyJavaVM)(JavaVM *vm);
 
@@ -1909,9 +1909,9 @@ struct JNIInvokeInterface_ {
 
     jint (JNICALL *AttachCurrentThreadAsDaemon)(JavaVM *vm, void **penv, void *args);
     
-#if TARGET_RT_MAC_CFM
+#if TARGET_RT_MAC_CFM && defined(__ppc__)
     void* real_functions[5];
-#endif /* TARGET_RT_MAC_CFM */
+#endif /* TARGET_RT_MAC_CFM && defined(__ppc__) */
 };
 
 struct JavaVM_ {

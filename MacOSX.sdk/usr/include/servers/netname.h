@@ -111,6 +111,10 @@ __END_DECLS
 
 #ifndef __Request__netname_subsystem__defined
 #define __Request__netname_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -123,7 +127,13 @@ __END_DECLS
 		mach_msg_type_number_t port_nameCnt;
 		char port_name[80];
 	} __Request__netname_check_in_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -134,7 +144,13 @@ __END_DECLS
 		mach_msg_type_number_t port_nameCnt;
 		char port_name[80];
 	} __Request__netname_look_up_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -146,11 +162,19 @@ __END_DECLS
 		mach_msg_type_number_t port_nameCnt;
 		char port_name[80];
 	} __Request__netname_check_out_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__netname_version_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__netname_subsystem__defined */
 
 /* union of all requests */
@@ -168,12 +192,22 @@ union __RequestUnion__netname_subsystem {
 
 #ifndef __Reply__netname_subsystem__defined
 #define __Reply__netname_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__netname_check_in_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -181,13 +215,25 @@ union __RequestUnion__netname_subsystem {
 		mach_msg_port_descriptor_t port_id;
 		/* end of the kernel processed data */
 	} __Reply__netname_look_up_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__netname_check_out_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -196,7 +242,9 @@ union __RequestUnion__netname_subsystem {
 		mach_msg_type_number_t versionCnt;
 		char version[80];
 	} __Reply__netname_version_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__netname_subsystem__defined */
 
 /* union of all replies */

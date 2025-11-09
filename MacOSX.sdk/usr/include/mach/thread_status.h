@@ -59,8 +59,8 @@
  *
  */
 
-#ifndef	THREAD_STATUS_H_
-#define	THREAD_STATUS_H_
+#ifndef	_MACH_THREAD_STATUS_H_
+#define	_MACH_THREAD_STATUS_H_
 
 /*
  *	The actual structure that comprises the thread state is defined
@@ -77,11 +77,12 @@
 typedef	natural_t	*thread_state_t;	/* Variable-length array */
 
 /* THREAD_STATE_MAX is now defined in <mach/machine/thread_state.h> */
-typedef	int	thread_state_data_t[THREAD_STATE_MAX];
+typedef	natural_t	thread_state_data_t[THREAD_STATE_MAX];
 
 #define	THREAD_STATE_FLAVOR_LIST	0	/* List of valid flavors */
+#define THREAD_STATE_FLAVOR_LIST_NEW	128
 
 typedef	int			thread_state_flavor_t;
 typedef thread_state_flavor_t	*thread_state_flavor_array_t;
 
-#endif	/* THREAD_STATUS_H_ */
+#endif	/* _MACH_THREAD_STATUS_H_ */

@@ -1,7 +1,7 @@
 /*
 	SFKeychainSavePanel.h
 	SecurityInterface
-	Copyright (c) 2002-2003, Apple Computer, Inc.
+	Copyright (c) 2002-2004 Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -24,7 +24,7 @@
 	NSString *_kcFullPathName;
 	NSString *_startPath;
 	NSString *_keychainFileName;
-    SecKeychainRef _returnedKeychain;
+    __strong SecKeychainRef _returnedKeychain;
 	NSWindow *_parentWindowForSheet;	
     SEL	_clientDidEndSelector;
 	id	_clientDelegate;			

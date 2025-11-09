@@ -1,8 +1,26 @@
 /*	NSIndexSet.h
-	Copyright (c) 2002-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 2002-2005, Apple, Inc. All rights reserved.
 */
 
 /* Class for managing set of indexes. The set of valid indexes are 0 .. NSNotFound - 1; trying to use indexes outside this range is an error.  NSIndexSet uses NSNotFound as a return value in cases where the queried index doesn't exist in the set; for instance, when you ask firstIndex and there are no indexes; or when you ask for indexGreaterThanIndex: on the last index, and so on.
+
+The following code snippets can be used to enumerate over the indexes in an NSIndexSet:
+
+    // Forward
+    unsigned currentIndex = [set firstIndex];
+    while (currentIndex != NSNotFound) {
+        ...
+        currentIndex = [set indexGreaterThanIndex:currentIndex];
+    }
+    
+    // Backward
+    unsigned currentIndex = [set lastIndex];
+    while (currentIndex != NSNotFound) {
+        ...
+        currentIndex = [set indexLessThanIndex:currentIndex];
+    }
+
+To enumerate without doing a call per index, you can use the method getIndexes:maxCount:inIndexRange:.
 */
 
 #import <Foundation/NSObject.h>
@@ -42,7 +60,7 @@
 
 - (unsigned int)count;
 
-/* The following six methods will return NSNotFound if there is no index in the set satisfying the query.
+/* The following six methods will return NSNotFound if there is no index in the set satisfying the query. 
 */
 - (unsigned int)firstIndex;
 - (unsigned int)lastIndex;

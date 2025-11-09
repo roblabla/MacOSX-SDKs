@@ -1,5 +1,5 @@
 /* CoreGraphics - CGPDFPage.h
- * Copyright (c) 2001-2003 Apple Computer, Inc.
+ * Copyright (c) 2001-2004 Apple Computer, Inc.
  * All rights reserved.
  */
 
@@ -11,7 +11,6 @@ typedef struct CGPDFPage *CGPDFPageRef;
 #include <CoreGraphics/CGAffineTransform.h> 
 #include <CoreGraphics/CGPDFDictionary.h> 
 #include <CoreGraphics/CGPDFDocument.h> 
-#include <AvailabilityMacros.h>
 
 enum CGPDFBox {
     kCGPDFMediaBox = 0,
@@ -27,12 +26,12 @@ CG_EXTERN_C_BEGIN
 /* Equivalent to `CFRetain(page)', except it doesn't crash (as CFRetain
  * does) if `page' is NULL. */
 
-CG_EXTERN CGPDFPageRef CGPDFPageRetain(CGPDFPageRef page);
+CG_EXTERN CGPDFPageRef CGPDFPageRetain(CGPDFPageRef page) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /* Equivalent to `CFRelease(page)', except it doesn't crash (as CFRelease
  * does) if `page' is NULL. */
 
-CG_EXTERN void CGPDFPageRelease(CGPDFPageRef page);
+CG_EXTERN void CGPDFPageRelease(CGPDFPageRef page) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /* Return the document of `page'. */
 
@@ -46,12 +45,12 @@ CG_EXTERN size_t CGPDFPageGetPageNumber(CGPDFPageRef page) AVAILABLE_MAC_OS_X_VE
  * of the corresponding entry (such as /MediaBox, /ArtBox, and so on) in
  * the page's dictionary. */
 
-CG_EXTERN CGRect CGPDFPageGetBoxRect(CGPDFPageRef page, CGPDFBox box);
+CG_EXTERN CGRect CGPDFPageGetBoxRect(CGPDFPageRef page, CGPDFBox box) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /* Return the rotation angle (in degrees) of `page'.  This is the value of
  * the /Rotate entry in the page's dictionary. */
 
-CG_EXTERN int CGPDFPageGetRotationAngle(CGPDFPageRef page);
+CG_EXTERN int CGPDFPageGetRotationAngle(CGPDFPageRef page) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /* Return a transform mapping the box specified by `box' to `rect' as
  * follows:

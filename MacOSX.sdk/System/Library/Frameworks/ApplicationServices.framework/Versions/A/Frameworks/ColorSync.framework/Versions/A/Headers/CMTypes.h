@@ -3,9 +3,9 @@
  
      Contains:   ColorSync types
  
-     Version:    ColorSync-118.2.4~3
+     Version:    ColorSync-174.3.3~45
  
-     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -48,6 +48,15 @@ typedef struct OpaqueCMWorldRef*        CMWorldRef;
 /* On 8 & 9 this is a AVIDType */
 /* On X this is a CGSDisplayID */
 typedef UInt32                          CMDisplayIDType;
+typedef UInt32                          CMChromaticAdaptation;
+enum {
+  cmUseDefaultChromaticAdaptation = 0,
+  cmLinearChromaticAdaptation   = 1,
+  cmVonKriesChromaticAdaptation = 2,
+  cmBradfordChromaticAdaptation = 3
+};
+
+
 
 /* Caller-supplied flatten function */
 typedef CALLBACK_API( OSErr , CMFlattenProcPtr )(long command, long *size, void *data, void *refCon);

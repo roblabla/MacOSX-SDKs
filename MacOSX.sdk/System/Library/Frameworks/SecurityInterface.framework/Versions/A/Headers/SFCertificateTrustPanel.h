@@ -1,7 +1,7 @@
 /*
 	SFCertificateTrustPanel.h
 	SecurityInterface
-	Copyright (c) 2002-2003, Apple Computer, Inc.
+	Copyright (c) 2002-2004 Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -10,51 +10,64 @@
 
 #import <Cocoa/Cocoa.h>
 #import <SecurityInterface/SFCertificatePanel.h>
-#import <SecurityInterface/SFCertificateView.h>
 #include <Security/SecTrust.h>
 
 @class SFCertificateView;
 
 /*!
     @class SFCertificateTrustPanel 
-    @abstract SFCertificateTrustPanel is a panel and sheet interface that allows a user to apply trust decisions to the trust configuration.
+    @abstract SFCertificateTrustPanel is a panel and sheet interface that allows a user to make trust decisions
+	when one or more certificates involved in an operation are invalid or cannot be verified. It should be used
+	whenever confirmation is required before proceeding with a certificate-related operation. It can also be
+	displayed as an informative alert without requiring a decision to be made (if the operation or transaction
+	has already occurred.)
 */
-@interface SFCertificateTrustPanel : SFCertificatePanel 
+@interface SFCertificateTrustPanel : SFCertificatePanel
 {
 @private
+	/* All instance variables are private */
 	IBOutlet NSSplitView *_splitView;		
 	IBOutlet NSTextField *_messageView;		
 	IBOutlet NSButton *_saveChangesButton;
-    IBOutlet NSButton *_cancelButton;	
+	IBOutlet NSButton *_cancelButton;	
 	NSString *_defaultMessage;
 	BOOL _saveChanges;
-	void *_reservedTrust;
+	id _reserved_SFCertificateTrustPanel;
 }
 
 /*!
 	@method sharedCertificateTrustPanel
-	@abstract Returns a global instance of SFEditTrustPanel.
+	@abstract Returns a shared instance of SFCertificateTrustPanel.
+	@discussion If your application can display multiple SFCertificateTrustPanels at once,
+	you should allocate (alloc) and initialize (init) separate object instances instead of using this class method.
 */
 + (SFCertificateTrustPanel *)sharedCertificateTrustPanel;
 
 /*!
     @method runModalForTrust:message:
-    @abstract Displays a panel that shows the results of a trust evaluation from the specified trust object. It returns NSOKButton or NSCancelButton. The trust result can be retrieved from the trust object if the user made additional changes to the trust object in the panel.
-    @param trust Trust reference used for the trust evaluation.
-    @param message Client-defined string to display in the panel.
+    @abstract Displays a modal panel that shows the results of a certificate trust evaluation.
+		Returns NSOKButton if the default button is pressed, or NSCancelButton if the alternate button is pressed.
+		Note that the user can edit trust decisions in this panel; call SecTrustGetResult after the panel is dismissed
+		to obtain the current trust result for the SecTrustRef.
+	@param trust A trust reference, previously created with SecTrustCreateWithCertificates (see <Security/SecTrust.h>).
+    @param message Client-defined message string to display in the panel.
 */
 - (int)runModalForTrust:(SecTrustRef)trust message:(NSString *)message;
 
 /*!
-@method beginSheetForWindow:trust:message:modalDelegate:didEndSelector:contextInfo:
-@abstract Displays a sheet version of the SFCertificateTrustPanel.
- @discussion Displays the edit trust panel sheet showing the results of a trust evaluation. The user can edit trust decisions in the panel. The trust return value gets returned in the client's didEndSelector method.The didEndSelector returnCode will contain either NSOKButton or NSCancelButton. If the user changed trust settings, you can examine the trust evaluation result using the result method of your SFTrust object.
-    @param docWindow The parent window where the sheet appears.
-    @param modalDelegate The object that has the didEndSelector method when the sheet goes away.
-    @param didEndSelector This method is called when the sheet goes away.
-    @param contextInfo A client-defined context.
-    @param trust Trust reference used for the trust evaluation.
-    @param message Client-defined string to display in the panel.
+	@method beginSheetForWindow:trust:message:modalDelegate:didEndSelector:contextInfo:
+	@abstract Displays a modal sheet that shows the results of a certificate trust evaluation.
+	@discussion The didEndSelector method should have the following signature:
+        - (void)certificateTrustSheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
+		returnCode will contain either NSOKButton or NSCancelButton.
+		Note that the user can edit trust decisions in this panel; call SecTrustGetResult after the panel is dismissed
+		to obtain the current trust result for the SecTrustRef.
+    @param docWindow The parent window to which the sheet is attached.
+    @param modalDelegate The object whose didEndSelector method will be called when the sheet is dismissed.
+    @param didEndSelector This method is called when the sheet is dismissed.
+    @param contextInfo Client-defined contextual data which will be passed to the didEndSelector method.
+    @param trust A trust reference, previously created with SecTrustCreateWithCertificates (see <Security/SecTrust.h>).
+    @param message Client-defined message string to display in the panel.
 */
 - (void)beginSheetForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo trust:(SecTrustRef)trust message:(NSString *)message;
 

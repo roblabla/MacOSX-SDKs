@@ -1,7 +1,7 @@
 /*
 	NSControl.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -20,9 +20,9 @@
 	unsigned int        ignoreMultiClick:1;
 	unsigned int        calcSize:1;
 	unsigned int        drawingAncestor:1;
-        unsigned int	    wantsCellClipTips:1;
         unsigned int	    ibReserved:1;
 	unsigned int        updateCellFocus:1;
+        unsigned int        deallocating:1;
 	unsigned int        reserved:25;
     } _conFlags;
 }
@@ -85,6 +85,10 @@
 - (void)validateEditing;
 - (void)mouseDown:(NSEvent *)theEvent;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (NSWritingDirection)baseWritingDirection;
+- (void)setBaseWritingDirection:(NSWritingDirection)writingDirection;
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 @end
 
 @interface NSControl(NSKeyboardUI)

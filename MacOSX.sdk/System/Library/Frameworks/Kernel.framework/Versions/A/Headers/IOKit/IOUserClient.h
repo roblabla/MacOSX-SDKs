@@ -79,6 +79,12 @@ enum {
 #define kIOClientPrivilegeAdministrator	"root"
 #define kIOClientPrivilegeLocalUser	"local"
 
+/*!
+    @class IOUserClient
+    @abstract   Provides a basis for communication between client applications and I/O Kit objects.
+*/
+
+
 class IOUserClient : public IOService
 {
     OSDeclareAbstractStructors(IOUserClient)
@@ -86,16 +92,20 @@ class IOUserClient : public IOService
 protected:
 /*! @struct ExpansionData
     @discussion This structure will be used to expand the capablilties of this class in the future.
-    */    
+*/    
     struct ExpansionData { };
 
 /*! @var reserved
-    Reserved for future use.  (Internal use only)  */
+    Reserved for future use.  (Internal use only) 
+*/
     ExpansionData * reserved;
 
 public:
     OSSet * mappings;
-    void  * __reserved[8];
+    UInt8   sharedInstance;
+
+    UInt8   __reservedA[3];
+    void  * __reserved[7];
 
 private:
     OSMetaClassDeclareReservedUnused(IOUserClient, 0);
@@ -130,6 +140,10 @@ public:
     static IOReturn clientHasPrivilege( void * securityToken,
                                         const char * privilegeName );
 
+#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
+    virtual bool init();
+    virtual bool init( OSDictionary * dictionary );
+#endif
     // Currently ignores the all args, just passes up to IOService::init()
     virtual bool initWithTask(
                     task_t owningTask, void * securityToken, UInt32 type,
@@ -174,9 +188,9 @@ public:
     /*!
         @function exportObjectToClient
         Make an arbitrary OSObject available to the client task.
-        @param task The task
-        @param obj The object we want to export to the client
-        @param clientObj returned value is the client's port name.
+        @param task The task.
+        @param obj The object we want to export to the client.
+        @param clientObj Returned value is the client's port name.
     */
     virtual IOReturn exportObjectToClient(task_t task,
 				OSObject *obj, io_object_t *clientObj);

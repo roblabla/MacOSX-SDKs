@@ -35,6 +35,12 @@
     // property will return nil.
     // Raises if property is nil
     // Returns YES if the value was removed successfully
+
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (BOOL)isReadOnly;
+    // Returns whether or not the record is read only.
+#endif
+
 @end
 
 // ================================================================================

@@ -72,7 +72,10 @@ enum
 	kAudioUnitType_FormatConverter			= 'aufc',
 	kAudioUnitSubType_AUConverter			= 'conv',
 	kAudioUnitSubType_Varispeed				= 'vari',
+	kAudioUnitSubType_DeferredRenderer		= 'defr',
 	kAudioUnitSubType_TimePitch				= 'tmpt',
+	kAudioUnitSubType_Splitter				= 'splt',
+	kAudioUnitSubType_Merger				= 'merg',
 	
 	kAudioUnitType_Effect					= 'aufx',
 	kAudioUnitSubType_Delay					= 'dely',
@@ -87,6 +90,10 @@ enum
 	kAudioUnitSubType_DynamicsProcessor		= 'dcmp',
 	kAudioUnitSubType_MultiBandCompressor	= 'mcmp',
 	kAudioUnitSubType_MatrixReverb			= 'mrev',
+	kAudioUnitSubType_SampleDelay			= 'sdly',
+	kAudioUnitSubType_Pitch					= 'pitc',
+	kAudioUnitSubType_AUFilter				= 'filt',
+	kAudioUnitSubType_NetSend				= 'nsnd',
 	
 	kAudioUnitType_Mixer					= 'aumx',
 	kAudioUnitSubType_StereoMixer			= 'smxr',
@@ -98,6 +105,9 @@ enum
 	kAudioUnitType_OfflineEffect			= 'auol',
 
 	kAudioUnitType_Generator				= 'augn',
+	kAudioUnitSubType_ScheduledSoundPlayer	= 'sspl',
+	kAudioUnitSubType_AudioFilePlayer		= 'afpl',
+	kAudioUnitSubType_NetReceive			= 'nrcv',
 
 	kAudioUnitManufacturer_Apple			= 'appl'
 };

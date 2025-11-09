@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -50,6 +50,7 @@
 #define kIOUSBMassStoragePreferredSubclass		"Preferred Subclass"
 #define kIOUSBMassStoragePreferredProtocol		"Preferred Protocol"
 #define kIOUSBMassStorageResetOnResume			"Reset On Resume"
+#define kIOUSBMassStorageUseStandardUSBReset    "Use Standard USB Reset"
 #define kIOUSBMassStorageMaxLogicalUnitNumber	"Max Logical Unit Number"
 
 #pragma mark -
@@ -154,14 +155,22 @@ protected:
     // Reserve space for future expansion.
     struct ExpansionData
 	{
-		bool	fResetInProgress;
-		OSSet *	fClients;
+		bool		fResetInProgress;
+		OSSet *		fClients;
+		IOUSBPipe * fPotentiallyStalledPipe;
+		bool        fUseUSBResetNotBOReset;
+		bool		fAbortCurrentSCSITaskInProgress;
+        bool        fDeviceAttached;
 	};
     ExpansionData *				reserved;
 	
-	#define fResetInProgress	reserved->fResetInProgress
-	#define fClients			reserved->fClients
-
+	#define fResetInProgress					reserved->fResetInProgress
+	#define fClients							reserved->fClients
+	#define fPotentiallyStalledPipe				reserved->fPotentiallyStalledPipe
+    #define fUseUSBResetNotBOReset				reserved->fUseUSBResetNotBOReset
+	#define fAbortCurrentSCSITaskInProgress		reserved->fAbortCurrentSCSITaskInProgress
+    #define fDeviceAttached                     reserved->fDeviceAttached
+	
 	// Enumerated constants used to control various aspects of this
 	// driver.
 	
@@ -319,7 +328,7 @@ protected:
 	enum
 	{
 		// CSW general struture definitions
-		kCommandStatusWrapperSingature	= OSSwapHostToBigConstInt32 ( 'USBS' ),
+		kCommandStatusWrapperSignature	= OSSwapHostToBigConstInt32 ( 'USBS' ),
 		kByteCountOfCSW					= 13,
 
 		// CSW status definitions
@@ -368,12 +377,16 @@ protected:
 		                UInt32			bufferSizeRemaining );
 	
 public:
+
     bool				init( OSDictionary * 	propTable );
     virtual bool		start( IOService *	 	provider );
     virtual void 		stop( IOService * 		provider );
 	virtual void		free( void );
 	virtual	IOReturn	message( UInt32 type, IOService * provider, void * argument = 0 );
-	
+    
+	virtual bool        willTerminate(  IOService *     provider, 
+                                        IOOptionBits    options );
+                                        
 	virtual bool		handleOpen( IOService *		client,
 									IOOptionBits	options,
 									void *			arg );
@@ -388,10 +401,13 @@ public:
 protected:
 
 	static IOReturn		sWaitForReset( void * refcon );
-	
 	IOReturn			GatedWaitForReset( void );
 	
+	static IOReturn		sWaitForTaskAbort( void * refcon );
+	IOReturn			GatedWaitForTaskAbort( void );
+	
 	static void			sResetDevice( void * refcon );
+	static void			sAbortCurrentSCSITask( void * refcon );
 	
     OSMetaClassDeclareReservedUsed( IOUSBMassStorageClass, 1 );
 	virtual IOReturn	StartDeviceRecovery( void );
@@ -405,6 +421,9 @@ protected:
 		                	IOReturn		status,
 		                	UInt32			bufferSizeRemaining );
 
+    void                ResetDeviceNow( void );
+	void                AbortCurrentSCSITask( void );
+	 
 	// Space reserved for future expansion.
     OSMetaClassDeclareReservedUnused( IOUSBMassStorageClass, 3 );
     OSMetaClassDeclareReservedUnused( IOUSBMassStorageClass, 4 );

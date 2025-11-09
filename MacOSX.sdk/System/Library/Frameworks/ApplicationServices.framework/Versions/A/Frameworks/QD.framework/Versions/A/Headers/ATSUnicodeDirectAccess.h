@@ -3,9 +3,9 @@
  
      Contains:   Public Interfaces/Types for Low Level ATSUI
  
-     Version:    Quickdraw-150.7~2
+     Version:    Quickdraw-192.24~58
  
-     Copyright:  © 2002-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2002-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -278,9 +278,10 @@ ATSUDirectGetLayoutDataArrayPtrFromLineRef(
  *    iLineOffset:
  *      The edge offset that corresponds to the beginning of the range
  *      of text of the line of the requested data. If the text has
- *      multiple lines, then ATSUDirectGetLayoutDataArrayPtrFromLineRef
- *      will need to be called for each of the lines in which the
- *      requested data is needed.
+ *      multiple lines, then
+ *      ATSUDirectGetLayoutDataArrayPtrFromTextLayout will need to be
+ *      called for each of the lines in which the requested data is
+ *      needed.
  *    
  *    iDataSelector:
  *      The selector for the data that is being requested.

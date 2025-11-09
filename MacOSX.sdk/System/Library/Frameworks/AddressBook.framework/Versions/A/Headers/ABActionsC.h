@@ -42,7 +42,7 @@ extern "C" {
 //
 // Action plugins are stored in ~/Library/Address Book Plug-Ins or /Library/Address Book Plug-Ins
 //
-// There can be only 1 Action plug in per bundle.
+// There can be only 1 Action plugin per bundle.
 
 typedef CFStringRef (*ABActionGetPropertyCallback) (void);
 typedef CFStringRef (*ABActionCopyTitleCallback) (ABPersonRef person, CFStringRef identifier);

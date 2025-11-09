@@ -500,51 +500,5 @@ struct {								\
 		    (elm)->field.cqe_next;				\
 } while (0)
 
-#ifdef KERNEL
-
-#if NOTFB31
-
-/*
- * XXX insque() and remque() are an old way of handling certain queues.
- * They bogusly assumes that all queue heads look alike.
- */
-
-struct quehead {
-	struct quehead *qh_link;
-	struct quehead *qh_rlink;
-};
-
-#ifdef	__GNUC__
-
-static __inline void
-insque(void *a, void *b)
-{
-	struct quehead *element = a, *head = b;
-
-	element->qh_link = head->qh_link;
-	element->qh_rlink = head;
-	head->qh_link = element;
-	element->qh_link->qh_rlink = element;
-}
-
-static __inline void
-remque(void *a)
-{
-	struct quehead *element = a;
-
-	element->qh_link->qh_rlink = element->qh_rlink;
-	element->qh_rlink->qh_link = element->qh_link;
-	element->qh_rlink = 0;
-}
-
-#else /* !__GNUC__ */
-
-void	insque __P((void *a, void *b));
-void	remque __P((void *a));
-
-#endif /* __GNUC__ */
-
-#endif
-#endif /* KERNEL */
 
 #endif /* !_SYS_QUEUE_H_ */

@@ -3,9 +3,9 @@
  
      Contains:   Menu Manager Interfaces.
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -140,7 +140,9 @@ extern "C" {
             menu definition should set the itemSelected field to zero.
             
             The values placed in the itemUnderMouse and itemSelected fields should be less than or
-            equal to the number of items returned by CountMenuItems on this menu.
+            equal to the number of items returned by CountMenuItems on this menu. The values placed
+            in these two fields should be identical if both are non-zero. itemUnderMouse should always
+            be non-zero if the mouse is actually over an item.
             
             The menu definition should not hilite the found item during this message. The Menu 
             Manager will send a separate kMenuHiliteItemMsg to request hiliting of the item.
@@ -346,13 +348,18 @@ enum {
                                         /* menu defProc messages */
   kMenuDrawMsg                  = 0,
   kMenuSizeMsg                  = 2,
-  kMenuPopUpMsg                 = 3,
+  kMenuPopUpMsg                 = 3,    /* position the popup menu rect appropriately */
   kMenuCalcItemMsg              = 5,
   kMenuThemeSavvyMsg            = 7,    /* is your MDEF theme-savvy?  If so, return kThemeSavvyMenuResponse in the whichItem parameter*/
-  mDrawMsg                      = 0,
-  mSizeMsg                      = 2,
-  mPopUpMsg                     = 3,    /* position the popup menu rect appropriately */
-  mCalcItemMsg                  = 5
+  kMenuInitMsg                  = 8,    /* Return an error code in *whichItem to indicate success or failure. Only supported in Carbon. */
+  kMenuDisposeMsg               = 9,    /* The menu is being destroyed. Only supported in Carbon.*/
+  kMenuFindItemMsg              = 10,   /* Determine which item is under the mouse. Only supported in Carbon.*/
+  kMenuHiliteItemMsg            = 11,   /* Hilite the specified item. Only supported in Carbon.*/
+  kMenuDrawItemsMsg             = 12,   /* Draw a range of items. Only supported in Carbon.*/
+  mDrawMsg                      = kMenuDrawMsg, /* obsolete constant name*/
+  mSizeMsg                      = kMenuSizeMsg, /* obsolete constant name*/
+  mPopUpMsg                     = kMenuPopUpMsg, /* obsolete constant name*/
+  mCalcItemMsg                  = kMenuCalcItemMsg /* obsolete constant name*/
 };
 
 #if CALL_NOT_IN_CARBON
@@ -363,23 +370,14 @@ enum {
 enum {
   mChooseMsg                    = 1,
   mDrawItemMsg                  = 4,
-  kMenuChooseMsg                = 1,
-  kMenuDrawItemMsg              = 4
+  kMenuChooseMsg                = mChooseMsg,
+  kMenuDrawItemMsg              = mDrawItemMsg
 };
 
 #endif  /* CALL_NOT_IN_CARBON */
 
 enum {
   kThemeSavvyMenuResponse       = 0x7473 /* should be returned in *whichItem when handling kMenuThemeSavvyMsg*/
-};
-
-/* these MDEF messages are only supported in Carbon*/
-enum {
-  kMenuInitMsg                  = 8,
-  kMenuDisposeMsg               = 9,
-  kMenuFindItemMsg              = 10,
-  kMenuHiliteItemMsg            = 11,
-  kMenuDrawItemsMsg             = 12
 };
 
 
@@ -457,8 +455,8 @@ enum {
   kMenuIconSuiteType            = 5,    /* Type for Icon Suite*/
   kMenuIconRefType              = 6,    /* Type for Icon Ref*/
   kMenuCGImageRefType           = 7,    /* Type for a CGImageRef (Mac OS X only)*/
-  kMenuSystemIconSelectorType   = 8,    /* Type for an IconRef registered with Icon Services under kSystemIconsCreator (Mac OS X 10.1 and later only)*/
-  kMenuIconResourceType         = 9     /* Type for a CFStringRef naming a resource in the main bundle of the process (Mac OS X 10.1 and later only)*/
+  kMenuSystemIconSelectorType   = 8,    /* Type for an OSType identifying an IconRef registered with Icon Services under kSystemIconsCreator (Mac OS X 10.1 and later only)*/
+  kMenuIconResourceType         = 9     /* Type for a CFStringRef with the full name of a .icns resource in the main bundle of the process (Mac OS X 10.1 and later only)*/
 };
 
 /* For use with Get/SetMenuItemKeyGlyph*/
@@ -521,7 +519,9 @@ enum {
   kMenuF14Glyph                 = 0x88, /* F14 key*/
   kMenuF15Glyph                 = 0x89, /* F15 key*/
   kMenuControlISOGlyph          = 0x8A, /* Control key (ISO standard)*/
-  kMenuEjectGlyph               = 0x8C  /* Eject key (available on Jaguar and later)*/
+  kMenuEjectGlyph               = 0x8C, /* Eject key (available on Mac OS X 10.2 and later)*/
+  kMenuEisuGlyph                = 0x8D, /* Japanese eisu key (available in Mac OS X 10.4 and later)*/
+  kMenuKanaGlyph                = 0x8E  /* Japanese kana key (available in Mac OS X 10.4 and later)*/
 };
 
 
@@ -1199,9 +1199,11 @@ enum {
    * fields will be returned when getting the handle. The iconType
    * field should contain one of the constants kMenuIconType,
    * kMenuShrinkIconType, kMenuSmallIconType, kMenuColorIconType,
-   * kMenuIconSuiteType, or kMenuIconRefType. An icon handle may be a
-   * handle to an ICON resource, a SICN resource, a cicn resource, an
-   * IconSuite, or an IconRef. Valid only for menu items.
+   * kMenuIconSuiteType, kMenuIconRefType, kMenuCGImageRefType,
+   * kMenuSystemIconSelectorType, or kMenuIconResourceType. An icon
+   * handle may be a handle to an ICON resource, a SICN resource, a
+   * cicn resource, an IconSuite, an IconRef, a CGImageRef, an OSType,
+   * or a CFStringRef. Valid only for menu items.
    */
   kMenuItemDataIconHandle       = (1 << 9),
 
@@ -1253,10 +1255,6 @@ enum {
   kMenuItemDataCmdVirtualKey    = (1 << 20),
   kMenuItemDataAllDataVersionOne = 0x000FFFFF,
   kMenuItemDataAllDataVersionTwo = kMenuItemDataAllDataVersionOne | kMenuItemDataCmdVirtualKey
-};
-
-enum {
-  kMenuItemDataAllData          = kMenuItemDataAllDataVersionTwo
 };
 
 typedef UInt64                          MenuItemDataFlags;
@@ -1834,13 +1832,17 @@ IsValidMenu(MenuRef inMenu)                                   AVAILABLE_MAC_OS_X
  *  Summary:
  *    Returns the retain count of this menu.
  *  
+ *  Discussion:
+ *    In Mac OS X 10.2 and later, you can use CFGetRetainCount instead
+ *    of GetMenuRetainCount.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Parameters:
  *    
  *    inMenu:
- *      The menu whose retain count to increment.
+ *      The menu whose retain count to return.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1858,6 +1860,9 @@ GetMenuRetainCount(MenuRef inMenu)                            AVAILABLE_MAC_OS_X
  *    Increments the retain count of a menu.
  *  
  *  Discussion:
+ *    In Mac OS X 10.2 and later, you can use CFRetain instead of
+ *    RetainMenu. 
+ *    
  *    RetainMenu does not create a new menu. It simply adds one to the
  *    retain count. If called on a menu that was not created by
  *    CarbonLib, it will not affect the menu's retain count.
@@ -1886,6 +1891,9 @@ RetainMenu(MenuRef inMenu)                                    AVAILABLE_MAC_OS_X
  *    Decrements the retain count of a menu.
  *  
  *  Discussion:
+ *    In Mac OS X 10.2 and later, you can use CFRelease instead of
+ *    ReleaseMenu. 
+ *    
  *    If called on a menu that was not created by CarbonLib, it will
  *    not affect the menu's retain count.
  *  
@@ -2036,7 +2044,7 @@ SetMenuTitleWithCFString(
  *      The type of icon being used to specify the icon title; use
  *      kMenuNoIcon to remove the icon from the menu title. In Mac OS X
  *      10.2 and earlier, the supported types are kMenuIconSuiteType
- *      and kMenuIconRefType; Mac OS X 10.3 also support
+ *      and kMenuIconRefType; Mac OS X 10.3 also supports
  *      kMenuCGImageRefType.
  *    
  *    inIcon:
@@ -2287,9 +2295,9 @@ MacAppendMenu(
  */
 extern void 
 InsertResMenu(
-  MenuRef   theMenu,
-  ResType   theType,
-  short     afterItem)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         theMenu,
+  ResType         theType,
+  MenuItemIndex   afterItem)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2347,7 +2355,7 @@ extern void
 MacInsertMenuItem(
   MenuRef            theMenu,
   ConstStr255Param   itemString,
-  short              afterItem)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuItemIndex      afterItem)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2363,8 +2371,8 @@ MacInsertMenuItem(
  */
 extern void 
 DeleteMenuItem(
-  MenuRef   theMenu,
-  short     item)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         theMenu,
+  MenuItemIndex   item)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2380,9 +2388,9 @@ DeleteMenuItem(
  */
 extern void 
 InsertFontResMenu(
-  MenuRef   theMenu,
-  short     afterItem,
-  short     scriptFilter)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         theMenu,
+  MenuItemIndex   afterItem,
+  short           scriptFilter)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2398,10 +2406,10 @@ InsertFontResMenu(
  */
 extern void 
 InsertIntlResMenu(
-  MenuRef   theMenu,
-  ResType   theType,
-  short     afterItem,
-  short     scriptFilter)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         theMenu,
+  ResType         theType,
+  MenuItemIndex   afterItem,
+  short           scriptFilter)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2720,10 +2728,10 @@ MenuSelect(Point startPt)                                     AVAILABLE_MAC_OS_X
  */
 extern long 
 PopUpMenuSelect(
-  MenuRef   menu,
-  short     top,
-  short     left,
-  short     popUpItem)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         menu,
+  short           top,
+  short           left,
+  MenuItemIndex   popUpItem)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3422,9 +3430,9 @@ SetRootMenu(MenuRef inMenu)                                   AVAILABLE_MAC_OS_X
 #endif
 extern void 
 MacCheckMenuItem(
-  MenuRef   theMenu,
-  short     item,
-  Boolean   checked)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         theMenu,
+  MenuItemIndex   item,
+  Boolean         checked)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -3442,7 +3450,7 @@ MacCheckMenuItem(
 extern void 
 SetMenuItemText(
   MenuRef            theMenu,
-  short              item,
+  MenuItemIndex      item,
   ConstStr255Param   itemString)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -3459,9 +3467,9 @@ SetMenuItemText(
  */
 extern void 
 GetMenuItemText(
-  MenuRef   theMenu,
-  short     item,
-  Str255    itemString)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         theMenu,
+  MenuItemIndex   item,
+  Str255          itemString)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3478,7 +3486,7 @@ GetMenuItemText(
 extern void 
 SetItemMark(
   MenuRef         theMenu,
-  short           item,
+  MenuItemIndex   item,
   CharParameter   markChar)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -3496,7 +3504,7 @@ SetItemMark(
 extern void 
 GetItemMark(
   MenuRef          theMenu,
-  short            item,
+  MenuItemIndex    item,
   CharParameter *  markChar)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -3514,7 +3522,7 @@ GetItemMark(
 extern void 
 SetItemCmd(
   MenuRef         theMenu,
-  short           item,
+  MenuItemIndex   item,
   CharParameter   cmdChar)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -3532,7 +3540,7 @@ SetItemCmd(
 extern void 
 GetItemCmd(
   MenuRef          theMenu,
-  short            item,
+  MenuItemIndex    item,
   CharParameter *  cmdChar)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -3549,9 +3557,9 @@ GetItemCmd(
  */
 extern void 
 SetItemIcon(
-  MenuRef   theMenu,
-  short     item,
-  short     iconIndex)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         theMenu,
+  MenuItemIndex   item,
+  short           iconIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* icon is returned in high byte of 16-bit iconIndex */
@@ -3568,9 +3576,9 @@ SetItemIcon(
  */
 extern void 
 GetItemIcon(
-  MenuRef   theMenu,
-  short     item,
-  short *   iconIndex)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         theMenu,
+  MenuItemIndex   item,
+  short *         iconIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3587,7 +3595,7 @@ GetItemIcon(
 extern void 
 SetItemStyle(
   MenuRef          theMenu,
-  short            item,
+  MenuItemIndex    item,
   StyleParameter   chStyle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -3604,9 +3612,9 @@ SetItemStyle(
  */
 extern void 
 GetItemStyle(
-  MenuRef   theMenu,
-  short     item,
-  Style *   chStyle)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         theMenu,
+  MenuItemIndex   item,
+  Style *         chStyle)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* These APIs are not supported in Carbon. Please use EnableMenuItem and */
@@ -3644,9 +3652,9 @@ GetItemStyle(
  */
 extern OSErr 
 SetMenuItemCommandID(
-  MenuRef       inMenu,
-  SInt16        inItem,
-  MenuCommand   inCommandID)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         inMenu,
+  MenuItemIndex   inItem,
+  MenuCommand     inCommandID)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3662,9 +3670,9 @@ SetMenuItemCommandID(
  */
 extern OSErr 
 GetMenuItemCommandID(
-  MenuRef        inMenu,
-  SInt16         inItem,
-  MenuCommand *  outCommandID)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         inMenu,
+  MenuItemIndex   inItem,
+  MenuCommand *   outCommandID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3680,9 +3688,9 @@ GetMenuItemCommandID(
  */
 extern OSErr 
 SetMenuItemModifiers(
-  MenuRef   inMenu,
-  SInt16    inItem,
-  UInt8     inModifiers)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         inMenu,
+  MenuItemIndex   inItem,
+  UInt8           inModifiers)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3698,9 +3706,9 @@ SetMenuItemModifiers(
  */
 extern OSErr 
 GetMenuItemModifiers(
-  MenuRef   inMenu,
-  SInt16    inItem,
-  UInt8 *   outModifiers)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         inMenu,
+  MenuItemIndex   inItem,
+  UInt8 *         outModifiers)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3716,10 +3724,10 @@ GetMenuItemModifiers(
  */
 extern OSErr 
 SetMenuItemIconHandle(
-  MenuRef   inMenu,
-  SInt16    inItem,
-  UInt8     inIconType,
-  Handle    inIconHandle)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         inMenu,
+  MenuItemIndex   inItem,
+  UInt8           inIconType,
+  Handle          inIconHandle)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3735,10 +3743,10 @@ SetMenuItemIconHandle(
  */
 extern OSErr 
 GetMenuItemIconHandle(
-  MenuRef   inMenu,
-  SInt16    inItem,
-  UInt8 *   outIconType,
-  Handle *  outIconHandle)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         inMenu,
+  MenuItemIndex   inItem,
+  UInt8 *         outIconType,
+  Handle *        outIconHandle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3754,9 +3762,9 @@ GetMenuItemIconHandle(
  */
 extern OSErr 
 SetMenuItemTextEncoding(
-  MenuRef        inMenu,
-  SInt16         inItem,
-  TextEncoding   inScriptID)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         inMenu,
+  MenuItemIndex   inItem,
+  TextEncoding    inScriptID)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3773,7 +3781,7 @@ SetMenuItemTextEncoding(
 extern OSErr 
 GetMenuItemTextEncoding(
   MenuRef         inMenu,
-  SInt16          inItem,
+  MenuItemIndex   inItem,
   TextEncoding *  outScriptID)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -3790,9 +3798,9 @@ GetMenuItemTextEncoding(
  */
 extern OSErr 
 SetMenuItemHierarchicalID(
-  MenuRef   inMenu,
-  SInt16    inItem,
-  MenuID    inHierID)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         inMenu,
+  MenuItemIndex   inItem,
+  MenuID          inHierID)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3808,9 +3816,9 @@ SetMenuItemHierarchicalID(
  */
 extern OSErr 
 GetMenuItemHierarchicalID(
-  MenuRef   inMenu,
-  SInt16    inItem,
-  MenuID *  outHierID)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         inMenu,
+  MenuItemIndex   inItem,
+  MenuID *        outHierID)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3826,9 +3834,9 @@ GetMenuItemHierarchicalID(
  */
 extern OSErr 
 SetMenuItemFontID(
-  MenuRef   inMenu,
-  SInt16    inItem,
-  SInt16    inFontID)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         inMenu,
+  MenuItemIndex   inItem,
+  SInt16          inFontID)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3844,9 +3852,9 @@ SetMenuItemFontID(
  */
 extern OSErr 
 GetMenuItemFontID(
-  MenuRef   inMenu,
-  SInt16    inItem,
-  SInt16 *  outFontID)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         inMenu,
+  MenuItemIndex   inItem,
+  SInt16 *        outFontID)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3862,9 +3870,9 @@ GetMenuItemFontID(
  */
 extern OSErr 
 SetMenuItemRefCon(
-  MenuRef   inMenu,
-  SInt16    inItem,
-  UInt32    inRefCon)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         inMenu,
+  MenuItemIndex   inItem,
+  UInt32          inRefCon)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3880,9 +3888,9 @@ SetMenuItemRefCon(
  */
 extern OSErr 
 GetMenuItemRefCon(
-  MenuRef   inMenu,
-  SInt16    inItem,
-  UInt32 *  outRefCon)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         inMenu,
+  MenuItemIndex   inItem,
+  UInt32 *        outRefCon)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Please use the menu item property APIs in Carbon.*/
@@ -3909,8 +3917,38 @@ GetMenuItemRefCon(
 /*
  *  SetMenuItemKeyGlyph()
  *  
+ *  Summary:
+ *    Sets the command key glyph code for a menu item.
+ *  
+ *  Discussion:
+ *    A menu item's command key may be customized using a key glyph
+ *    code; these codes are the kMenu*Glyph constants documented in
+ *    Menus.h. In classic Mac OS, a glyph code is only used for
+ *    display; it does not affect command key matching. In Carbon, a
+ *    menu item's glyph code is used for command key matching if the
+ *    menu item does not have a command key character or virtual
+ *    keycode assigned to it. 
+ *    
+ *    In CarbonLib 1.2 and Mac OS X 10.0 and later, the Menu Manager
+ *    will automatically draw the appropriate glyph for a menu item
+ *    that has a virtual keycode command key assigned to it; it is not
+ *    necessary to set both the virtual keycode and the glyph for an
+ *    item.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inMenu:
+ *      The menu to change.
+ *    
+ *    inItem:
+ *      The menu item to change.
+ *    
+ *    inGlyph:
+ *      The new glyph code for the item, or zero to remove the item's
+ *      glyph code.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3919,9 +3957,9 @@ GetMenuItemRefCon(
  */
 extern OSErr 
 SetMenuItemKeyGlyph(
-  MenuRef   inMenu,
-  SInt16    inItem,
-  SInt16    inGlyph)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         inMenu,
+  MenuItemIndex   inItem,
+  SInt16          inGlyph)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3937,9 +3975,9 @@ SetMenuItemKeyGlyph(
  */
 extern OSErr 
 GetMenuItemKeyGlyph(
-  MenuRef   inMenu,
-  SInt16    inItem,
-  SInt16 *  outGlyph)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef         inMenu,
+  MenuItemIndex   inItem,
+  SInt16 *        outGlyph)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* Routines available in Mac OS 8.5 and later (supporting enabling/disabling of > 31 items)*/
@@ -5752,7 +5790,7 @@ CreateStandardFontMenu(
   MenuItemIndex   afterItem,
   MenuID          firstHierMenuID,
   OptionBits      options,
-  ItemCount *     outHierMenuCount)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *     outHierMenuCount)       /* can be NULL */   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5769,7 +5807,7 @@ CreateStandardFontMenu(
 extern OSStatus 
 UpdateStandardFontMenu(
   MenuRef      menu,
-  ItemCount *  outHierMenuCount)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *  outHierMenuCount)       /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -5889,7 +5927,7 @@ enum {
    * Specifies the text of an item in a contextual menu. Data for this
    * parameter can be in one of several formats. In Mac OS 7/8/9.x and
    * Mac OS X 10.0 and 10.1, typeChar and typeIntlText are supported.
-   * In Mac OS X after 10.1, typeStyledText, typeAEText,
+   * In Mac OS X 10.2 and later, typeStyledText, typeAEText,
    * typeUnicodeText, and typeCFStringRef are also supported. If you
    * provide data as typeCFStringRef, the Contextual Menu Manager will
    * automatically release the CFStringRef once the menu has been
@@ -5915,7 +5953,7 @@ enum {
   /*
    * Specifies the menu item attributes of an item in a contextual
    * menu. Data for this parameter should be typeLongInteger. Available
-   * in Mac OS X after 10.1.
+   * in Mac OS X 10.2 and later.
    */
   keyContextualMenuAttributes   = 'cmat',
 
@@ -5926,7 +5964,7 @@ enum {
    * with the keyContextualMenuAttributes parameter, it is possible to
    * create a contextual menu with dynamic items which change according
    * to the modifier keys pressed by the user. Available in Mac OS X
-   * after 10.1.
+   * 10.2 and later.
    */
   keyContextualMenuModifiers    = 'cmmd'
 };
@@ -6013,7 +6051,15 @@ IsShowContextualMenuClick(const EventRecord * inEvent)        AVAILABLE_MAC_OS_X
  *    Carbon EventRef as its parameter instead of an EventRecord.
  *    EventRecords cannot express a right-mouse-click, but EventRefs
  *    can, so this API will return true for a right- click where
- *    IsShowContextualMenuClick will not.
+ *    IsShowContextualMenuClick will not. 
+ *    
+ *    In Mac OS X 10.3 and earlier, this API always returned false if
+ *    the event kind was not kEventMouseDown,
+ *    kEventWindowClickContentRgn, kEventWindowClickStructureRgn, or
+ *    kEventWindowHandleContentClick. In Mac OS X 10.4 and later, this
+ *    API no longer requires a specific event kind; it only requires
+ *    that the event contain kEventParamMouseButton and
+ *    kEventParamKeyModifiers parameters.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -6138,7 +6184,7 @@ ContextualMenuSelect(
   ConstStr255Param   inHelpItemString,           /* can be NULL */
   const AEDesc *     inSelection,                /* can be NULL */
   UInt32 *           outUserSelectionType,
-  SInt16 *           outMenuID,
+  MenuID *           outMenuID,
   MenuItemIndex *    outMenuItem)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -6276,7 +6322,7 @@ CMPluginPostMenuCleanup(void * thisInstance);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16 
+extern MenuID 
 LMGetTheMenu(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 

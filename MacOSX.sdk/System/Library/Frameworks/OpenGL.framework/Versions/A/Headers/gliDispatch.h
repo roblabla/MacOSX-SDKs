@@ -672,6 +672,46 @@ typedef struct __GLIFunctionDispatchRec
 	void (*get_buffer_parameteriv) (GLIContext ctx, GLenum target, GLenum pname, GLint *params);
 	void (*get_buffer_pointerv) (GLIContext ctx, GLenum target, GLenum pname, GLvoid **params);
 	void (*depth_bounds_EXT) (GLIContext ctx, GLclampd zmin, GLclampd zmax);
+	void (*draw_buffers_ARB) (GLIContext ctx, GLsizei n, const GLenum *bufs);
+	
+	GLboolean (*is_shader) (GLIContext ctx, GLuint shader);
+	GLboolean (*is_program) (GLIContext ctx, GLuint program);
+	void (*get_shaderiv) (GLIContext ctx, GLuint shader, GLenum pname, GLint *params);
+	void (*get_programiv) (GLIContext ctx, GLuint program, GLenum pname, GLint *params);
+	void (*get_shader_info_log) (GLIContext ctx, GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
+	void (*get_program_info_log) (GLIContext ctx, GLuint program, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
+
+	void (*stencil_func_separate) (GLIContext ctx, GLenum face, GLenum func, GLint ref, GLuint mask);
+	void (*stencil_mask_separate) (GLIContext ctx, GLenum face, GLuint mask);
+	
+	void (*multi_draw_element_array_APPLE)(GLIContext ctx, GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
+	void (*multi_draw_range_element_array_APPLE)(GLIContext ctx, GLenum mode, GLuint start, GLuint end, const GLint *first, const GLsizei *count, GLsizei primcount);
+
+	/* frame buffer object */
+	GLboolean (*is_renderbuffer_EXT) (GLIContext ctx, GLuint renderbuffer);
+	void (*bind_renderbuffer_EXT) (GLIContext ctx, GLenum target, GLuint renderbuffer);
+	void (*delete_renderbuffers_EXT) (GLIContext ctx, GLsizei n, const GLuint *renderbuffers);
+	void (*gen_renderbuffers_EXT) (GLIContext ctx, GLsizei n, GLuint *renderbuffers);
+	void (*renderbuffer_storage_EXT) (GLIContext ctx, GLenum target, GLenum internalformat, GLsizei width, GLsizei height);
+	void (*get_renderbuffer_parameteriv_EXT) (GLIContext ctx, GLenum target, GLenum pname, GLint *params);
+	GLboolean (*is_framebuffer_EXT) (GLIContext ctx, GLuint framebuffer);
+	void (*bind_framebuffer_EXT) (GLIContext ctx, GLenum target, GLuint framebuffer);
+	void (*delete_framebuffers_EXT) (GLIContext ctx, GLsizei n, const GLuint *framebuffers);
+	void (*gen_framebuffers_EXT) (GLIContext ctx, GLsizei n, GLuint *framebuffers);
+	GLenum (*check_framebuffer_status_EXT) (GLIContext ctx, GLenum target);
+	void (*framebuffer_texture1D_EXT) (GLIContext ctx, GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
+	void (*framebuffer_texture2D_EXT) (GLIContext ctx, GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
+	void (*framebuffer_texture3D_EXT) (GLIContext ctx, GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset);
+	void (*framebuffer_renderbuffer_EXT) (GLIContext ctx, GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer);
+	void (*get_framebuffer_attachment_parameteriv_EXT) (GLIContext ctx, GLenum target, GLenum attachment, GLenum pname, GLint *params);
+	void (*generate_mipmap_EXT) (GLIContext ctx, GLenum target);
+
+	void (*buffer_parameteri_APPLE) (GLIContext ctx, GLenum target, GLenum pname, GLint param);
+	void (*flush_mapped_buffer_range_APPLE) (GLIContext ctx, GLenum target, GLintptrARB offset, GLsizeiptrARB size);
+    
+	void (*program_env_parameters4fv_EXT)(GLIContext ctx, GLenum target, GLuint index, GLsizei count, const GLfloat *params);
+	void (*program_local_parameters4fv_EXT)(GLIContext ctx, GLenum target, GLuint index, GLsizei count, const GLfloat *params);
+
 } GLIFunctionDispatch;
 
 #ifdef __cplusplus

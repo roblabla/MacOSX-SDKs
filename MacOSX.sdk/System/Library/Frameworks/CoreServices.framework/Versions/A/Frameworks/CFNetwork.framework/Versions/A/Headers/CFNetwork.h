@@ -3,9 +3,9 @@
  
      Contains:   CoreFoundation Network header
  
-     Version:    CFNetwork-71.9~1
+     Version:    CFNetwork-129.20~93
  
-     Copyright:  © 2001-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -20,6 +20,10 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
+
+#ifndef __CFNETWORKDEFS__
+#include <CFNetwork/CFNetworkDefs.h>
+#endif
 
 #ifndef __CFSOCKETSTREAM__
 #include <CFNetwork/CFSocketStream.h>
@@ -39,6 +43,14 @@
 
 #ifndef __CFHTTPSTREAM__
 #include <CFNetwork/CFHTTPStream.h>
+#endif
+
+#ifndef __CFHTTPAUTHENTICATION__
+#include <CFNetwork/CFHTTPAuthentication.h>
+#endif
+
+#ifndef __CFNETDIAGNOSTICS__
+#include <CFNetwork/CFNetDiagnostics.h>
 #endif
 
 #ifndef __CFNETSERVICES__

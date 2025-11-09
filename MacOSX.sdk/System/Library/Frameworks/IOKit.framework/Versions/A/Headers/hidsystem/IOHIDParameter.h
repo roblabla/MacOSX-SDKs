@@ -62,11 +62,13 @@
 #define kIOHIDKeyMappingKey				"HIDKeyMapping"
 #define kIOHIDResetKeyboardKey			"HIDResetKeyboard"
 
-#define kIOHIDKeyboardSwapCommandAltKey		"HIDKeyboardSwapCommandAlt"
-#define kIOHIDKeyboardSwapControlCapsLockKey	"HIDKeyboardSwapControlCapsLock"
-#define kIOHIDKeyboardCapsLockDoesLockKey	"HIDKeyboardCapsLockDoesLock"
-#define kIOHIDKeyboardSupportsF12EjectKey	"HIDKeyboardSupportsF12Eject"
-#define kIOHIDKeyboardSupportedModifiersKey   "HIDKeyboardSupportedModifiers"
+#define kIOHIDKeyboardModifierMappingPairsKey   "HIDKeyboardModifierMappingPairs"
+#define kIOHIDKeyboardModifierMappingSrcKey     "HIDKeyboardModifierMappingSrc"
+#define kIOHIDKeyboardModifierMappingDstKey     "HIDKeyboardModifierMappingDst"
+
+#define kIOHIDKeyboardCapsLockDoesLockKey       "HIDKeyboardCapsLockDoesLock"
+#define kIOHIDKeyboardSupportsF12EjectKey       "HIDKeyboardSupportsF12Eject"
+#define kIOHIDKeyboardSupportedModifiersKey     "HIDKeyboardSupportedModifiers"
 
 #define kIOHIDPointerResolutionKey		"HIDPointerResolution"
 #define kIOHIDResetPointerKey			"HIDResetPointer"
@@ -83,9 +85,12 @@
 
 #define kIOHIDScrollResetKey			"HIDScrollReset"
 #define kIOHIDScrollResolutionKey		"HIDScrollResolution"
+#define kIOHIDScrollReportRateKey       "HIDScrollReportRate"
 #define kIOHIDScrollAccelerationKey		"HIDScrollAcceleration"
 #define kIOHIDScrollAccelerationTypeKey     "HIDScrollAccelerationType"
 #define kIOHIDScrollAccelerationTableKey	"HIDScrollAccelerationTable"
+
+#define kIOHIDScrollMouseButtonKey      "HIDScrollMouseButton"
 
 #define kIOHIDTrackpadScrollAccelerationKey "HIDTrackpadScrollAcceleration"
 #define kIOHIDMouseScrollAccelerationKey   "HIDMouseScrollAcceleration"
@@ -135,11 +140,13 @@
 #define kIOHIDUseKeyswitchKey                "HIDUseKeyswitch"
 
 
-// the following are misspelled keys present in the system
-// they are being kept around, but will eventually be deprecated
-#define kIOHIDSickyKeysDisabledKey		"HIDStickyKeysDisabled"
-#define kIOHIDSickyKeysOnKey			"HIDStickyKeysOn"
-#define kIOHIDSickyKeysShiftTogglesKey	"HIDStickyKeysShiftToggles"
+#ifdef __ppc__
+    // the following are misspelled keys present in the system
+    // they are being kept around, but will eventually be deprecated
+    #define kIOHIDSickyKeysDisabledKey		kIOHIDStickyKeysDisabledKey
+    #define kIOHIDSickyKeysOnKey			kIOHIDStickyKeysOnKey
+    #define kIOHIDSickyKeysShiftTogglesKey	kIOHIDStickyKeysShiftTogglesKey
+#endif
 
 // the following values are used in kIOHIDPointerButtonMode
 typedef enum {

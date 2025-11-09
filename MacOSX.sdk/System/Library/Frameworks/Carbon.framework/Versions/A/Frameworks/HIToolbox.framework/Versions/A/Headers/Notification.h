@@ -3,9 +3,9 @@
  
      Contains:   Notification Manager interfaces
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1989-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1989-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

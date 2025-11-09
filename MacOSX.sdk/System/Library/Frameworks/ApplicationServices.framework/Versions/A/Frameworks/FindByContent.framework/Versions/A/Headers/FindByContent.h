@@ -3,9 +3,9 @@
  
      Contains:   Public search interface for the Find by Content shared library
  
-     Version:    FindByContent-62~14
+     Version:    FindByContent-110~1145
  
-     Copyright:  © 1997-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1997-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -145,7 +145,7 @@ typedef STACK_UPP_TYPE(FBCCallbackProcPtr)                      FBCCallbackUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern FBCCallbackUPP
-NewFBCCallbackUPP(FBCCallbackProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewFBCCallbackUPP(FBCCallbackProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  DisposeFBCCallbackUPP()
@@ -156,7 +156,7 @@ NewFBCCallbackUPP(FBCCallbackProcPtr userRoutine)             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeFBCCallbackUPP(FBCCallbackUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeFBCCallbackUPP(FBCCallbackUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  InvokeFBCCallbackUPP()
@@ -171,7 +171,7 @@ InvokeFBCCallbackUPP(
   UInt16          phase,
   float           percentDone,
   void *          data,
-  FBCCallbackUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FBCCallbackUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
    ***************************************************************************
@@ -181,10 +181,10 @@ InvokeFBCCallbackUPP(
 */
 
 /*
- *  FBCSetSessionCallback()
+ *  FBCSetSessionCallback()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -192,22 +192,22 @@ extern void
 FBCSetSessionCallback(
   FBCSearchSession   searchSession,
   FBCCallbackUPP     fn,
-  void *             data)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  void *             data)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*      OS X DEPRECATED, use FBCSetSessionCallback*/
 /*
- *  FBCSetCallback()
+ *  FBCSetCallback()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern void 
 FBCSetCallback(
   FBCCallbackUPP   fn,
-  void *           data)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *           data)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -227,7 +227,7 @@ typedef STACK_UPP_TYPE(FBCHitTestProcPtr)                       FBCHitTestUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern FBCHitTestUPP
-NewFBCHitTestUPP(FBCHitTestProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+NewFBCHitTestUPP(FBCHitTestProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  DisposeFBCHitTestUPP()
@@ -238,7 +238,7 @@ NewFBCHitTestUPP(FBCHitTestProcPtr userRoutine)               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeFBCHitTestUPP(FBCHitTestUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+DisposeFBCHitTestUPP(FBCHitTestUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  InvokeFBCHitTestUPP()
@@ -252,7 +252,7 @@ extern Boolean
 InvokeFBCHitTestUPP(
   const FSRef *  theFile,
   void *         data,
-  FBCHitTestUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FBCHitTestUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
    ***************************************************************************
@@ -260,10 +260,10 @@ InvokeFBCHitTestUPP(
    ***************************************************************************
 */
 /*
- *  FBCSetSessionHitTest()
+ *  FBCSetSessionHitTest()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
@@ -271,7 +271,7 @@ extern void
 FBCSetSessionHitTest(
   FBCSearchSession   theSession,
   FBCHitTestUPP      fn,
-  void *             data)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  void *             data)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -283,15 +283,15 @@ FBCSetSessionHitTest(
 
 /*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
- *  FBCSetHeapReservation()
+ *  FBCSetHeapReservation()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern void 
-FBCSetHeapReservation(UInt32 bytes)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+FBCSetHeapReservation(UInt32 bytes)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -302,15 +302,15 @@ FBCSetHeapReservation(UInt32 bytes)                           AVAILABLE_MAC_OS_X
 
 /*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
- *  FBCVolumeIsIndexed()
+ *  FBCVolumeIsIndexed()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern Boolean 
-FBCVolumeIsIndexed(SInt16 theVRefNum)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+FBCVolumeIsIndexed(SInt16 theVRefNum)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -321,15 +321,15 @@ FBCVolumeIsIndexed(SInt16 theVRefNum)                         AVAILABLE_MAC_OS_X
 
 /*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
- *  FBCVolumeIsRemote()
+ *  FBCVolumeIsRemote()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern Boolean 
-FBCVolumeIsRemote(SInt16 theVRefNum)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+FBCVolumeIsRemote(SInt16 theVRefNum)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -340,17 +340,17 @@ FBCVolumeIsRemote(SInt16 theVRefNum)                          AVAILABLE_MAC_OS_X
 
 /*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
- *  FBCVolumeIndexTimeStamp()
+ *  FBCVolumeIndexTimeStamp()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern OSErr 
 FBCVolumeIndexTimeStamp(
   SInt16    theVRefNum,
-  UInt32 *  timeStamp)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *  timeStamp)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -361,17 +361,17 @@ FBCVolumeIndexTimeStamp(
 
 /*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
- *  FBCVolumeIndexPhysicalSize()
+ *  FBCVolumeIndexPhysicalSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern OSErr 
 FBCVolumeIndexPhysicalSize(
   SInt16    theVRefNum,
-  UInt32 *  size)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *  size)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -381,52 +381,52 @@ FBCVolumeIndexPhysicalSize(
 */
 
 /*
- *  FBCCreateSearchSession()
+ *  FBCCreateSearchSession()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern OSErr 
-FBCCreateSearchSession(FBCSearchSession * searchSession)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+FBCCreateSearchSession(FBCSearchSession * searchSession)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FBCCloneSearchSession()
+ *  FBCCloneSearchSession()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern OSErr 
 FBCCloneSearchSession(
   FBCSearchSession    original,
-  FBCSearchSession *  clone)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FBCSearchSession *  clone)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
- *  FBCAddAllVolumesToSession()
+ *  FBCAddAllVolumesToSession()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern OSErr 
 FBCAddAllVolumesToSession(
   FBCSearchSession   theSession,
-  Boolean            includeRemote)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean            includeRemote)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
- *  FBCSetSessionVolumes()
+ *  FBCSetSessionVolumes()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
@@ -434,60 +434,60 @@ extern OSErr
 FBCSetSessionVolumes(
   FBCSearchSession   theSession,
   const SInt16       vRefNums[],
-  UInt16             numVolumes)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt16             numVolumes)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
- *  FBCAddVolumeToSession()
+ *  FBCAddVolumeToSession()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern OSErr 
 FBCAddVolumeToSession(
   FBCSearchSession   theSession,
-  SInt16             vRefNum)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16             vRefNum)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
- *  FBCRemoveVolumeFromSession()
+ *  FBCRemoveVolumeFromSession()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern OSErr 
 FBCRemoveVolumeFromSession(
   FBCSearchSession   theSession,
-  SInt16             vRefNum)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16             vRefNum)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
- *  FBCGetSessionVolumeCount()
+ *  FBCGetSessionVolumeCount()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern OSErr 
 FBCGetSessionVolumeCount(
   FBCSearchSession   theSession,
-  UInt16 *           count)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt16 *           count)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
- *  FBCGetSessionVolumes()
+ *  FBCGetSessionVolumes()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
@@ -495,7 +495,7 @@ extern OSErr
 FBCGetSessionVolumes(
   FBCSearchSession   theSession,
   SInt16             vRefNums[],
-  UInt16 *           numVolumes)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt16 *           numVolumes)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -505,10 +505,10 @@ FBCGetSessionVolumes(
 */
 
 /*
- *  FBCDoQuerySearch()
+ *  FBCDoQuerySearch()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
@@ -519,14 +519,14 @@ FBCDoQuerySearch(
   const FSSpec       targetDirs[],
   UInt32             numTargets,
   UInt32             maxHits,
-  UInt32             maxHitWords)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32             maxHitWords)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FBCDoCFStringSearch()
+ *  FBCDoCFStringSearch()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -537,14 +537,14 @@ FBCDoCFStringSearch(
   const FSSpec       targetDirs[],
   UInt32             numTargets,
   UInt32             maxHits,
-  UInt32             maxHitWords)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32             maxHitWords)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FBCDoExampleSearch()
+ *  FBCDoExampleSearch()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
@@ -556,15 +556,15 @@ FBCDoExampleSearch(
   const FSSpec       targetDirs[],
   UInt32             numTargets,
   UInt32             maxHits,
-  UInt32             maxHitWords)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32             maxHitWords)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* OS X DEPRECATED, use FBCBlindExampleSearchWithCallback to be able to cancel*/
 /*
- *  FBCBlindExampleSearch()
+ *  FBCBlindExampleSearch()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
@@ -578,14 +578,14 @@ FBCBlindExampleSearch(
   UInt32              maxHitWords,
   Boolean             allIndexes,
   Boolean             includeRemote,
-  FBCSearchSession *  theSession)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FBCSearchSession *  theSession)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FBCBlindExampleSearchWithCallback()
+ *  FBCBlindExampleSearchWithCallback()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -603,7 +603,7 @@ FBCBlindExampleSearchWithCallback(
   FBCCallbackUPP      callback,
   void *              callbackData,
   FBCHitTestUPP       userHitTest,
-  void *              userHitTestData)                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  void *              userHitTestData)                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
@@ -614,24 +614,24 @@ FBCBlindExampleSearchWithCallback(
 */
 
 /*
- *  FBCGetHitCount()
+ *  FBCGetHitCount()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern OSErr 
 FBCGetHitCount(
   FBCSearchSession   theSession,
-  UInt32 *           count)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *           count)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FBCGetHitDocument()
+ *  FBCGetHitDocument()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
@@ -639,14 +639,14 @@ extern OSErr
 FBCGetHitDocument(
   FBCSearchSession   theSession,
   UInt32             hitNumber,
-  FSSpec *           theDocument)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FSSpec *           theDocument)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FBCGetHitDocumentRef()
+ *  FBCGetHitDocumentRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -654,14 +654,14 @@ extern OSErr
 FBCGetHitDocumentRef(
   FBCSearchSession   theSession,
   UInt32             hitNumber,
-  FSRef *            theDocument)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FSRef *            theDocument)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FBCGetHitScore()
+ *  FBCGetHitScore()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
@@ -669,7 +669,7 @@ extern OSErr
 FBCGetHitScore(
   FBCSearchSession   theSession,
   UInt32             hitNumber,
-  float *            score)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  float *            score)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
@@ -680,10 +680,10 @@ FBCGetHitScore(
 */
 
 /*
- *  FBCSummarize()
+ *  FBCSummarize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
@@ -693,14 +693,14 @@ FBCSummarize(
   UInt32        inLength,
   void *        outBuf,
   UInt32 *      outLength,
-  UInt32 *      numSentences)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *      numSentences)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FBCSummarizeCFString()
+ *  FBCSummarizeCFString()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -708,42 +708,42 @@ extern OSStatus
 FBCSummarizeCFString(
   CFStringRef    inString,
   CFStringRef *  outString,
-  UInt32 *       numSentences)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  UInt32 *       numSentences)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FBCGetSummaryOfCFString()
+ *  FBCGetSummaryOfCFString()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 FBCGetSummaryOfCFString(
   CFStringRef      inString,
-  FBCSummaryRef *  summary)                                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FBCSummaryRef *  summary)                                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FBCGetSummarySentenceCount()
+ *  FBCGetSummarySentenceCount()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 FBCGetSummarySentenceCount(
   FBCSummaryRef   summary,
-  UInt32 *        numSentences)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  UInt32 *        numSentences)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FBCGetSummarySentences()
+ *  FBCGetSummarySentences()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -752,19 +752,19 @@ FBCGetSummarySentences(
   FBCSummaryRef   summary,
   CFStringRef *   outString,
   UInt32 *        numSentences,
-  Boolean         paragraphs)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  Boolean         paragraphs)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FBCDisposeSummary()
+ *  FBCDisposeSummary()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-FBCDisposeSummary(FBCSummaryRef summary)                      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+FBCDisposeSummary(FBCSummaryRef summary)                      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
@@ -775,27 +775,27 @@ FBCDisposeSummary(FBCSummaryRef summary)                      AVAILABLE_MAC_OS_X
 */
 
 /*
- *  FBCReleaseSessionHits()
+ *  FBCReleaseSessionHits()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern OSErr 
-FBCReleaseSessionHits(FBCSearchSession theSession)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+FBCReleaseSessionHits(FBCSearchSession theSession)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FBCDestroySearchSession()
+ *  FBCDestroySearchSession()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern OSErr 
-FBCDestroySearchSession(FBCSearchSession theSession)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+FBCDestroySearchSession(FBCSearchSession theSession)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -806,24 +806,24 @@ FBCDestroySearchSession(FBCSearchSession theSession)          AVAILABLE_MAC_OS_X
 
 /*      OS X DEPRECATED (will be removed from OS X exports in a future release)*/
 /*
- *  FBCIndexItems()
+ *  FBCIndexItems()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   in FindByContent 9.0 and later
  */
 extern OSErr 
 FBCIndexItems(
   FSSpecArrayPtr   theItems,
-  UInt32           itemCount)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32           itemCount)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FBCIndexItemsInLanguages()
+ *  FBCIndexItemsInLanguages()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -832,7 +832,7 @@ FBCIndexItemsInLanguages(
   FSSpecArrayPtr   theItems,
   UInt32           itemCount,
   UInt32           languageHighBits,
-  UInt32           languageLowBits)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32           languageLowBits)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -843,17 +843,17 @@ FBCIndexItemsInLanguages(
 */
 
 /*
- *  FBCFindIndexFileFolderForFolder()
+ *  FBCFindIndexFileFolderForFolder()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 FBCFindIndexFileFolderForFolder(
   const FSRef *  inFolder,
-  FSRef *        outFolder)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FSRef *        outFolder)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -863,15 +863,15 @@ FBCFindIndexFileFolderForFolder(
 */
 
 /*
- *  FBCDeleteIndexFileForFolder()
+ *  FBCDeleteIndexFileForFolder()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
-FBCDeleteIndexFileForFolder(const FSRef * folder)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+FBCDeleteIndexFileForFolder(const FSRef * folder)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
@@ -883,10 +883,10 @@ FBCDeleteIndexFileForFolder(const FSRef * folder)             AVAILABLE_MAC_OS_X
 
 /*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
- *  FBCGetMatchedWords()
+ *  FBCGetMatchedWords()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
@@ -895,15 +895,15 @@ FBCGetMatchedWords(
   FBCSearchSession   theSession,
   UInt32             hitNumber,
   UInt32 *           wordCount,
-  FBCWordList *      list)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FBCWordList *      list)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
- *  FBCGetTopicWords()
+ *  FBCGetTopicWords()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
@@ -912,22 +912,22 @@ FBCGetTopicWords(
   FBCSearchSession   theSession,
   UInt32             hitNumber,
   UInt32 *           wordCount,
-  FBCWordList *      list)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FBCWordList *      list)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*      OS X DEPRECATED, NO-OP (will be removed from OS X exports in a future release)*/
 /*
- *  FBCDestroyWordList()
+ *  FBCDestroyWordList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in FindByContent 8.5 and later
  */
 extern OSErr 
 FBCDestroyWordList(
   FBCWordList   theList,
-  UInt32        wordCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32        wordCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* These names are deprecated, use the new ones above*/

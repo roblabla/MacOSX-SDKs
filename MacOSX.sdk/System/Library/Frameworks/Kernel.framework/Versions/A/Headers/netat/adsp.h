@@ -31,6 +31,10 @@
 #ifndef _NETAT_ADSP_H_
 #define _NETAT_ADSP_H_
 #include <sys/appleapiopts.h>
+#include <netat/appletalk.h>
+
+#ifdef __APPLE_API_OBSOLETE
+
 /* ADSP flags for read, write, and close routines */
 
 #define	ADSP_EOM	0x01	/* Sent or received EOM with data */
@@ -269,7 +273,7 @@ struct tpb {
 #endif
 */
 
-typedef long (*ProcPtr)();
+typedef long (*ProcPtr)();	/* XXX */
 typedef ProcPtr *ProcHandle;
 typedef char *Ptr;
 typedef Ptr *Handle;
@@ -429,13 +433,8 @@ struct adspcmd {
     struct adspcmd *qLink;
     u_int ccbRefNum;
     caddr_t ioc;
-#ifdef KERNEL
     gref_t *gref;
     gbuf_t *mp;
-#else
-    void *gref;
-    void *mp;
-#endif
     short ioResult;
     u_short ioDirection;
     short csCode;
@@ -663,44 +662,5 @@ typedef struct {
 #define ADSPGETSOCK	((AT_MID_ADSP<<8) | 239)
 #define ADSPGETPEER	((AT_MID_ADSP<<8) | 238)
 
-#ifdef KERNEL
-#ifdef __APPLE_API_PRIVATE
-
-/* from h/adsp_adsp.h */
-
-/* Definitions from strgeneric.h (on AIX?) */
-#define STR_IGNORE	0
-#define STR_PUTNEXT	1
-#define STR_PUTBACK	2
-#define STR_QTIME	(HZ >> 3)
-
-extern int adspInit();
-extern int adspOpen();
-extern int adspCLListen();
-extern int adspClose();
-extern int adspCLDeny();
-extern int adspStatus();
-extern int adspRead();
-extern int adspWrite();
-extern int adspAttention();
-extern int adspOptions();
-extern int adspReset();
-extern int adspNewCID();
-extern int adspPacket();
-
-
-struct adsp_debug {
-    int ad_time;
-    int ad_seq;
-    int ad_caller;
-    int ad_descriptor;
-    int ad_bits;
-    short ad_sendCnt;
-    short ad_sendMax;
-    int ad_maxSendSeq;
-    int ad_sendWdwSeq;
-};
-
-#endif /* __APPLE_API_PRIVATE */
-#endif /* KERNEL */
+#endif /* __APPLE_API_OBSOLETE */
 #endif /* _NETAT_ADSP_H_ */

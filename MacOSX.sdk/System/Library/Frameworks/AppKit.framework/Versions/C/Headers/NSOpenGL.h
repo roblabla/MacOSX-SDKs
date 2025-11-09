@@ -1,7 +1,7 @@
 /*
         NSOpenGL.h
         Application Kit
-        Copyright (c) 2000-2003, Apple Computer, Inc.
+        Copyright (c) 2000-2005, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -62,6 +62,12 @@ typedef enum {
 	NSOpenGLPFASampleBuffers      =  55,	/* number of multi sample buffers               */
 	NSOpenGLPFASamples            =  56,	/* number of samples per multi sample buffer    */
 	NSOpenGLPFAAuxDepthStencil    =  57,	/* each aux buffer has its own depth stencil    */
+	NSOpenGLPFAColorFloat         =  58,	/* color buffers store floating point pixels    */
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+	NSOpenGLPFAMultisample        =  59,    /* choose multisampling                         */
+	NSOpenGLPFASupersample        =  60,    /* choose supersampling                         */
+	NSOpenGLPFASampleAlpha        =  61,    /* request alpha filtering                      */
+#endif
 	NSOpenGLPFARendererID         =  70,	/* request renderer by ID                       */
 	NSOpenGLPFASingleRenderer     =  71,	/* choose a single renderer for all screens     */
 	NSOpenGLPFANoRecovery         =  72,	/* disable all failure recovery systems         */

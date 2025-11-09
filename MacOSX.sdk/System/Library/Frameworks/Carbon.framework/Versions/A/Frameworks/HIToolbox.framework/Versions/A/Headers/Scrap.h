@@ -3,9 +3,9 @@
  
      Contains:   Scrap Manager Interfaces.
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -61,7 +61,8 @@ enum {
   kScrapFlavorTypeTextStyle     = 'styl', /* see TEGetStyleScrapHandle*/
   kScrapFlavorTypeMovie         = 'moov', /* reference to a movie*/
   kScrapFlavorTypeSound         = 'snd ', /* see SndRecord and SndPlay*/
-  kScrapFlavorTypeUnicode       = 'utxt', /* stream of UTF16 characters*/
+  kScrapFlavorTypeUnicode       = 'utxt', /* stream of UTF16 characters (internal representation)*/
+  kScrapFlavorTypeUTF16External = 'ut16', /* stream of UTF16 characters (external representation)*/
   kScrapFlavorTypeUnicodeStyle  = 'ustl' /* ATSUI defines; Textension uses*/
 };
 

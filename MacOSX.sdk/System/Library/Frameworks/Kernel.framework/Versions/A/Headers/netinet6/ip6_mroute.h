@@ -51,9 +51,6 @@
 /*
  * Multicast Routing set/getsockopt commands.
  */
-#ifdef KERNEL
-#define MRT6_OINIT		100	/* initialize forwarder (omrt6msg) */
-#endif
 #define MRT6_DONE		101	/* shut down forwarder */
 #define MRT6_ADD_MIF		102	/* add multicast interface */
 #define MRT6_DEL_MIF		103	/* delete multicast interface */
@@ -62,12 +59,8 @@
 #define MRT6_PIM                107     /* enable pim code */
 #define MRT6_INIT		108	/* initialize forwarder (mrt6msg) */
 
-#if BSD >= 199103
-#define GET_TIME(t)	microtime(&t)
-#elif defined(sun)
-#define GET_TIME(t)	uniqtime(&t)
-#else
-#define GET_TIME(t)	((t) = time)
+#ifdef __APPLE__
+#define GET_TIME(t)	getmicrotime(&t)
 #endif
 
 /*
@@ -140,26 +133,6 @@ struct mrt6stat {
 	u_quad_t mrt6s_upq_sockfull;	/* upcalls dropped - socket full   */
 };
 
-#if MRT6_OINIT
-/*
- * Struct used to communicate from kernel to multicast router
- * note the convenient similarity to an IPv6 header.
- * XXX old version, superseded by mrt6msg.
- */
-struct omrt6msg {
-	u_long	    unused1;
-	u_char	    im6_msgtype;		/* what type of message	    */
-#if 0
-#define MRT6MSG_NOCACHE	1
-#define MRT6MSG_WRONGMIF	2
-#define MRT6MSG_WHOLEPKT	3		/* used for user level encap*/
-#endif
-	u_char	    im6_mbz;			/* must be zero		    */
-	u_char	    im6_mif;			/* mif rec'd on		    */
-	u_char	    unused2;
-	struct in6_addr  im6_src, im6_dst;
-};
-#endif
 
 /*
  * Structure used to communicate from kernel to multicast router.
@@ -203,78 +176,5 @@ struct sioc_mif_req6 {
 	u_quad_t obytes;	/* Output byte count on mif		*/
 };
 
-#ifdef KERNEL
-#ifdef __APPLE_API_PRIVATE
-/*
- * The kernel's multicast-interface structure.
- */
-struct mif6 {
-        u_char   	m6_flags;     	/* MIFF_ flags defined above         */
-	u_int      	m6_rate_limit; 	/* max rate			     */
-#if notyet
-	struct tbf      *m6_tbf;      	/* token bucket structure at intf.   */
-#endif 
-	struct in6_addr	m6_lcl_addr;   	/* local interface address           */
-	struct ifnet    *m6_ifp;     	/* pointer to interface              */
-	u_quad_t	m6_pkt_in;	/* # pkts in on interface            */
-	u_quad_t	m6_pkt_out;	/* # pkts out on interface           */
-	u_quad_t	m6_bytes_in;	/* # bytes in on interface	     */
-	u_quad_t	m6_bytes_out;	/* # bytes out on interface	     */
-	struct route_in6 m6_route;/* cached route if this is a tunnel */
-#if notyet
-	u_int		m6_rsvp_on;	/* RSVP listening on this vif */
-	struct socket   *m6_rsvpd;	/* RSVP daemon socket */
-#endif 
-};
-
-/*
- * The kernel's multicast forwarding cache entry structure
- */
-struct mf6c {
-	struct sockaddr_in6  mf6c_origin;	/* IPv6 origin of mcasts     */
-	struct sockaddr_in6  mf6c_mcastgrp;	/* multicast group associated*/
-	mifi_t	    	 mf6c_parent; 		/* incoming IF               */
-	struct if_set	 mf6c_ifset;		/* set of outgoing IFs */
-
-	u_quad_t    	mf6c_pkt_cnt;		/* pkt count for src-grp     */
-	u_quad_t    	mf6c_byte_cnt;		/* byte count for src-grp    */
-	u_quad_t    	mf6c_wrong_if;		/* wrong if for src-grp	     */
-	int	    	mf6c_expire;		/* time to clean entry up    */
-	struct timeval  mf6c_last_assert;	/* last time I sent an assert*/
-	struct rtdetq  *mf6c_stall;		/* pkts waiting for route */
-	struct mf6c    *mf6c_next;		/* hash table linkage */
-};
-
-#define MF6C_INCOMPLETE_PARENT ((mifi_t)-1)
-
-/*
- * Argument structure used for pkt info. while upcall is made
- */
-#ifndef _NETINET_IP_MROUTE_H_
-struct rtdetq {		/* XXX: rtdetq is also defined in ip_mroute.h */
-    struct mbuf 	*m;		/* A copy of the packet	    	    */
-    struct ifnet	*ifp;		/* Interface pkt came in on 	    */
-#if UPCALL_TIMING
-    struct timeval	t;		/* Timestamp */
-#endif /* UPCALL_TIMING */
-    struct rtdetq	*next;
-};
-#endif /* _NETINET_IP_MROUTE_H_ */
-
-#define MF6CTBLSIZ	256
-#if (MF6CTBLSIZ & (MF6CTBLSIZ - 1)) == 0	  /* from sys:route.h */
-#define MF6CHASHMOD(h)	((h) & (MF6CTBLSIZ - 1))
-#else
-#define MF6CHASHMOD(h)	((h) % MF6CTBLSIZ)
-#endif
-
-#define MAX_UPQ6	4		/* max. no of pkts in upcall Q */
-
-int	ip6_mrouter_set __P((struct socket *so, struct sockopt *sopt));
-int	ip6_mrouter_get __P((struct socket *so, struct sockopt *sopt));
-int	ip6_mrouter_done __P((void));
-int	mrt6_ioctl __P((int, caddr_t));
-#endif /* __APPLE_API_PRIVATE */
-#endif /* KERNEL */
 
 #endif /* !_NETINET6_IP6_MROUTE_H_ */

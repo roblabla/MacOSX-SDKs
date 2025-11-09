@@ -34,35 +34,35 @@
 					Here's an example that shows you how to use this class:
 					
 					<code>
-					- (void) doBurn
-					{
-						DRDevice*       device;
-						DRTrack*        track;
-						DRBurn*         burn;
-					
+					- (void) doBurn																								<br/>
+					{																											<br/>
+						DRDevice*       device;																					<br/>
+						DRTrack*        track;																					<br/>
+						DRBurn*         burn;																					<br/>
+																																<br/>
 						<i>...determine correct device to burn to...</i>
-						
-						<i>...create track...</i>
-						
-						burn = [[DRBurn alloc] initWithDevice:device];
-							
-						<i>...set options appropriate to this burn...</i>
-						
-						// register to receive notification about the burn status.
-						[[DRNotificationCenter currentRunLoopCenter] addObserver:self 
-																		selector:&#x40;selector(burnNotification:) 
-																			name:DRBurnStatusChangedNotification 
-																		  object:burn];
-						// start the burn
-						[burn writeLayout:track];
-					}
-					
-					- (void) burnNotification:(NSNotification*)notification
-					{
-						DRBurn*         burn = [notification object];
-						NSDictionary*   status = [notification userInfo];
-						
-						<i>...do what you wish with the notification...</i>
+
+						<i>...create track...</i>																				<br/>
+
+						burn = [[DRBurn alloc] initWithDevice:device];															<br/>
+																																<br/>
+						<i>...set options appropriate to this burn...</i>														<br/>
+
+						// register to receive notification about the burn status.												<br/>
+						[[DRNotificationCenter currentRunLoopCenter] addObserver:self 											<br/>
+																		selector:&#x40;selector(burnNotification:) 				<br/>
+																			name:DRBurnStatusChangedNotification 				<br/>
+																		  object:burn];											<br/>
+						// start the burn																						<br/>
+						[burn writeLayout:track];																				<br/>
+					}																											<br/>
+																																<br/>
+					- (void) burnNotification:(NSNotification*)notification														<br/>
+					{																											<br/>
+						DRBurn*         burn = [notification object];															<br/>
+						NSDictionary*   status = [notification userInfo];														<br/>
+
+						<i>...do what you wish with the notification...</i>														<br/>
 					}
 					</code>
 */
@@ -80,12 +80,12 @@
 	@abstract		Handles the process of burning a CD or DVD disc.
 	@discussion		Each time you want to burn to a disc, an instance of this class needs to be created. 
 					
-					When an instance is created, you pass in an instance of @link //apple_ref/occ/cl/DRDevice DRDevice @/link to let the @link //apple_ref/occ/cl/DRBurn DRBurn @/link object know 
+					When an instance is created, you pass in an instance of @link //apple_ref/occ/cl/DRDevice DRDevice @/link to let the DRBurn object know 
 					what device to use. This object is retained for the life of the DRBurn instance. Before burning, 
 					you can set several options that control the behavior of the burn and the handling 
 					of the disc once the burn completes.
 					
-					A DRBurn object will send out notifications through the DRNotificationCenter mechanism to 
+					A DRBurn object will send out notifications through the @link //apple_ref/occ/cl/DRNotificationCenter DRNotificationCenter @/link mechanism to 
 					broadcast the burn state to any interested observers. However, if for some reason you don't want
 					to use notifications, you can poll the burn object at any time for the current status using
 					@link //apple_ref/occ/instm/DRBurn/status status @/link. This is not recommended in any 
@@ -94,35 +94,35 @@
 					Here's an example that shows you how to use this class:
 					
 					<code>
-					- (void) doBurn
-					{
-						DRDevice*       device;
-						DRTrack*        track;
-						DRBurn*         burn;
-					
+					- (void) doBurn																								<br/>
+					{																											<br/>
+						DRDevice*       device;																					<br/>
+						DRTrack*        track;																					<br/>
+						DRBurn*         burn;																					<br/>
+																																<br/>
 						<i>...determine correct device to burn to...</i>
-						
-						<i>...create track...</i>
-						
-						burn = [[DRBurn alloc] initWithDevice:device];
-							
-						<i>...set options appropriate to this burn...</i>
-						
-						// register to receive notification about the burn status.
-						[[DRNotificationCenter currentRunLoopCenter] addObserver:self 
-																		selector:&#x40;selector(burnNotification:) 
-																			name:DRBurnStatusChangedNotification 
-																		  object:burn];
-						// start the burn
-						[burn writeLayout:track];
-					}
-					
-					- (void) burnNotification:(NSNotification*)notification
-					{
-						DRBurn*         burn = [notification object];
-						NSDictionary*   status = [notification userInfo];
-						
-						<i>...do what you wish with the notification...</i>
+
+						<i>...create track...</i>																				<br/>
+
+						burn = [[DRBurn alloc] initWithDevice:device];															<br/>
+																																<br/>
+						<i>...set options appropriate to this burn...</i>														<br/>
+
+						// register to receive notification about the burn status.												<br/>
+						[[DRNotificationCenter currentRunLoopCenter] addObserver:self 											<br/>
+																		selector:&#x40;selector(burnNotification:) 				<br/>
+																			name:DRBurnStatusChangedNotification 				<br/>
+																		  object:burn];											<br/>
+						// start the burn																						<br/>
+						[burn writeLayout:track];																				<br/>
+					}																											<br/>
+																																<br/>
+					- (void) burnNotification:(NSNotification*)notification														<br/>
+					{																											<br/>
+						DRBurn*         burn = [notification object];															<br/>
+						NSDictionary*   status = [notification userInfo];														<br/>
+
+						<i>...do what you wish with the notification...</i>														<br/>
 					}
 					</code>
 */
@@ -134,7 +134,7 @@
 
 /*! 
    	@method 		burnForDevice:
-   	@abstract		Creates a burn object.
+   	@abstract		Creates an autoreleased burn object.
 	@discussion		Once a burn is created with this method, the object is ready to write data to the disc.
    	@param 			device	Device to use for the burn
     @result  		An autoreleased DRBurn object.
@@ -164,13 +164,13 @@
 	
 					<ol>
 					<li>For a multi-session burn, layout must be a valid NSArray containing 
-						 one or more NSArrays, each of which contains one or more valid DRTrack objects.</li>
+						 one or more NSArrays, each of which contains one or more valid @link //apple_ref/occ/cl/DRTrack DRTrack @/link objects.</li>
 					<li>For a single-session multi-track burn, layout must be a valid NSArray 
-						 containing one or more valid DRTrack objects.</li>
-					<li>For a single-session single-track burn, layout must be a valid DRTrack object.</li>
+						 containing one or more valid @link //apple_ref/occ/cl/DRTrack DRTrack @/link objects.</li>
+					<li>For a single-session single-track burn, layout must be a valid @link //apple_ref/occ/cl/DRTrack DRTrack @/link object.</li>
 					</ol>
 					If none of these configurations are met or the leaf values contained in
-					layout are not valid DRTrack objects, an exception is thrown.
+					layout are not valid @link //apple_ref/occ/cl/DRTrack DRTrack @/link objects, an exception is thrown.
 */
 - (void) writeLayout:(id)layout;
 
@@ -274,7 +274,7 @@
    	@discussion		After data is written to disc, the data can be verified. The verification
    					process will read the data on the disc back into memory and compare it to the 
    					data originally used to write to disc. The type of verification is determined
-   					by a track property on a track-by-track basis. See the {@link //apple_ref/occ/cl/DRTrack DRTrack}
+   					by a track property on a track-by-track basis. See the @link //apple_ref/occ/cl/DRTrack DRTrack @/link
    					documentation for more information on verification types.
     @result  		A BOOL indicating if the disc will be verified.
 */
@@ -371,7 +371,7 @@ extern NSString* const DRBurnUnderrunProtectionKey	AVAILABLE_MAC_OS_X_VERSION_10
 	@discussion		The burn property whose value is a BOOL indicating if the burn will run 
 					as a test burn.
 
-					When this is set and the burn object is sent @link writeLayout%58 writeLayout: @/link,
+					When this is set and the burn object is sent @link writeLayout: writeLayout: @/link,
 					the entire burn process proceeds as if data would be 
 					written to the disc, but the laser is not turned on to full power, so
 					the physical disc is not modified.
@@ -417,8 +417,27 @@ extern NSString* const DRBurnFailureActionKey		AVAILABLE_MAC_OS_X_VERSION_10_3_A
 extern NSString* const DRMediaCatalogNumberKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*!
+	@const		DRBurnDoubleLayerL0DataZoneBlocksKey
+	@discussion	The burn property key whose value is an NSNumber containing the number of blocks desired
+				for the layer 0 data zone on a double layer writable disc.
+				
+				The size of the layer 0 data zone dictates where the transition point is from layer 0 to
+				layer 1. If this key is present, the data zone size will be set prior to the start of the
+				burn using the value for this key. If it is not present, the default layer 0 data zone will 
+				be used (half the available blocks on an empty disc).
+				
+				The transition point can be specified two ways. If the value specified in this key is
+				greater than 1.0, then it will designate an absolute block number for the transition point. In
+				this case, the block number should be a multiple of 16 and at least 40000h per specification. If
+				the value is less than 1.0, it will specify the percentage of the burn that should reside on
+				layer 0. A typical value is 0.5, designating half the burn for each layer. A value of 0.0 or 1.0
+				will not change the layer 0 transition point.
+*/				
+extern NSString* const DRBurnDoubleLayerL0DataZoneBlocksKey		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
 	@const			DRBurnStrategyKey
-	@discussion		The burn property whose value is an NSString, or NSArray or NSStrings,
+	@discussion		The burn property whose value is an NSString, or array of NSStrings,
 					indicating the burn strategy or strategies that are suggested.  If this
 					key is not present, the burn engine picks an appropriate burn strategy
 					automatically. Most clients will not need to specify a specific burn
@@ -439,7 +458,7 @@ extern NSString* const DRBurnStrategyKey			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_L
 /*!
 	@const			DRBurnStrategyIsRequiredKey
 	@discussion		The burn property whose value is a BOOL indicating whether the burn
-					strategy/strategies listed for kDRBurnStrategyKey are
+					strategy/strategies listed for @link DRBurnStrategyKey DRBurnStrategyKey @/link are
 					the only strategies allowed.  If this key is not present,
 					the burn will default to a value of <i>NO</i>.
 					
@@ -453,6 +472,22 @@ extern NSString* const DRBurnStrategyKey			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_L
 					that will provide an equivalent disc.
 */
 extern NSString* const DRBurnStrategyIsRequiredKey	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+/*!
+	@const			DRCDTextKey
+	@discussion		This key points to a @link //apple_ref/occ/cl/DRCDTextBlock DRCDTextBlock @/link, or array of @link //apple_ref/occ/cl/DRCDTextBlock DRCDTextBlocks @/link
+					containing the CD-Text information for the disc.  If this key
+					is not present, the burn will not write CD-Text.
+				
+					Before using this key, you should to make sure that the device
+					supports CD-Text by checking the value of @link //apple_ref/occ/data/DRDeviceCanWriteCDTextKey DRDeviceCanWriteCDTextKey @/link
+					in the device's write capabilities dictionary.
+				
+					If this value is set to <i>YES</i>, and the device does
+					not support writing CD-Text, the burn will fail with
+					@link //apple_ref/c/econst/kDRDeviceCantWriteCDTextErr kDRDeviceCantWriteCDTextErr @/link.  
+*/
+extern NSString* const DRCDTextKey					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* --------------------------------------- */
 /* Completion actions */
@@ -524,12 +559,12 @@ extern NSString* const DRBurnStrategyDVDDAO			AVAILABLE_MAC_OS_X_VERSION_10_3_AN
 /* Notifications */
 /*!
 	@const		DRBurnStatusChangedNotification 
-	@discussion	Posted by a DRNotificationCenter when the status of the
+	@discussion	Posted by a @link //apple_ref/occ/cl/DRNotificationCenter DRNotificationCenter @/link when the status of the
 				burn operation has changed. 
 	
 				The object associated with this notification
-				is the burn object sending it and the userInfo contains a dictionary
-				detailing the status. 
+				is the DRBurn object sending it and the userInfo contains the same dictionary
+				as returned by @link //apple_ref/occ/instm/DRBurn/status status @/link which details the current state of the burn. 
 */
 extern NSString* const DRBurnStatusChangedNotification	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 

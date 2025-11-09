@@ -1,13 +1,13 @@
 /*
 	NSPasteboard.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
-#import <Foundation/NSObject.h>
-#import <Foundation/NSURL.h>
 #import <AppKit/AppKitDefines.h>
+#import <Foundation/NSURL.h>
+#import <CoreFoundation/CFBase.h>
 
 @class NSArray, NSData, NSFileWrapper;
 
@@ -28,11 +28,9 @@ APPKIT_EXTERN NSString *NSHTMLPboardType;
 APPKIT_EXTERN NSString *NSPICTPboardType;
 APPKIT_EXTERN NSString *NSURLPboardType;
 APPKIT_EXTERN NSString *NSPDFPboardType;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
-APPKIT_EXTERN NSString *NSVCardPboardType;
-// HFS Promise type for dragging only
-APPKIT_EXTERN NSString *NSFilesPromisePboardType;
-#endif
+APPKIT_EXTERN NSString *NSVCardPboardType AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+APPKIT_EXTERN NSString *NSFilesPromisePboardType AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER; // HFS Promise type for dragging only
+APPKIT_EXTERN NSString *NSInkTextPboardType AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* standard Pasteboard names */
 
@@ -48,13 +46,16 @@ APPKIT_EXTERN NSString *NSCreateFileContentsPboardType(NSString *fileType);
 APPKIT_EXTERN NSString *NSGetFileType(NSString *pboardType);
 APPKIT_EXTERN NSArray *NSGetFileTypes(NSArray *pboardTypes);
 
+
 @interface NSPasteboard : NSObject
 {
     @private
-    void *		_pboard;
+    id			_pboard;
     int			_gen;
-    void *		_owners;
-    void *		_reserved[8];
+    id			_owners;
+    CFIndex		_cachedTypeNameChangeCount;
+    NSArray *		_cachedTypeNames;
+    void *		_reserved[6];
 }
 
 + (NSPasteboard *)generalPasteboard;

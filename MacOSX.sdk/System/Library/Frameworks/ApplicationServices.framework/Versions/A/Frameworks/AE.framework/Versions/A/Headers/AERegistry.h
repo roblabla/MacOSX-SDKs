@@ -3,9 +3,9 @@
  
      Contains:   AppleEvents Registry Interface.
  
-     Version:    AppleEvents-287~1
+     Version:    AppleEvents-316.2~623
  
-     Copyright:  © 1993-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1993-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -116,7 +116,6 @@ enum {
   enumSaveOptions               = 'savo', /*  0x7361766f  */
   enumStyle                     = 'styl', /*  0x7374796c  */
   enumTransferMode              = 'tran', /*  0x7472616e  */
-  formUniqueID                  = 'ID  ', /*  0x49442020  */
   kAEAbout                      = 'abou', /*  0x61626f75  */
   kAEAfter                      = 'afte', /*  0x61667465  */
   kAEAliasSelection             = 'sali', /*  0x73616c69  */
@@ -389,6 +388,7 @@ enum {
   keyAESaveOptions              = 'savo', /*  0x7361766f  */
   keyAEScale                    = 'pscl', /*  0x7073636c  */
   keyAEScriptTag                = 'psct', /*  0x70736374  */
+  keyAESearchText               = 'stxt', /*  0x73747874  */
   keyAEShowWhere                = 'show', /*  0x73686f77  */
   keyAEStartAngle               = 'pang', /*  0x70616e67  */
   keyAEStartPoint               = 'pstp', /*  0x70737470  */
@@ -714,15 +714,31 @@ typedef struct IntlText                 IntlText;
 
 /* Hilite styles */
 enum {
-  kCaretPosition                = 1,    /* specify caret position */
-  kRawText                      = 2,    /* specify range of raw text */
-  kSelectedRawText              = 3,    /* specify range of selected raw text */
-  kConvertedText                = 4,    /* specify range of converted text */
-  kSelectedConvertedText        = 5,    /* specify range of selected converted text */
-  kBlockFillText                = 6,    /* Block Fill hilite style */
-  kOutlineText                  = 7,    /* Outline hilite style */
-  kSelectedText                 = 8     /* Selected hilite style */
+  kTSMHiliteCaretPosition       = 1,    /* specify caret position */
+  kTSMHiliteRawText             = 2,    /* specify range of raw text */
+  kTSMHiliteSelectedRawText     = 3,    /* specify range of selected raw text */
+  kTSMHiliteConvertedText       = 4,    /* specify range of converted text */
+  kTSMHiliteSelectedConvertedText = 5,  /* specify range of selected converted text */
+  kTSMHiliteBlockFillText       = 6,    /* Block Fill hilite style */
+  kTSMHiliteOutlineText         = 7,    /* Outline hilite style */
+  kTSMHiliteSelectedText        = 8,    /* Selected hilite style */
+  kTSMHiliteNoHilite            = 9     /* specify range of non-hilited text */
 };
+
+#if OLDROUTINENAMES
+/* Hilite styles */
+enum {
+  kCaretPosition                = kTSMHiliteCaretPosition,
+  kRawText                      = kTSMHiliteRawText,
+  kSelectedRawText              = kTSMHiliteSelectedRawText,
+  kConvertedText                = kTSMHiliteConvertedText,
+  kSelectedConvertedText        = kTSMHiliteSelectedConvertedText,
+  kBlockFillText                = kTSMHiliteBlockFillText,
+  kOutlineText                  = kTSMHiliteOutlineText,
+  kSelectedText                 = kTSMHiliteSelectedText
+};
+
+#endif  /* OLDROUTINENAMES */
 
 enum {
   keyAEHiliteRange              = 'hrng', /* typeTextRangeArray for System 7, typeHiliteRangeArray for System 8 */
@@ -742,16 +758,6 @@ enum {
 };
 
 #endif  /* OLDROUTINENAMES */
-
-enum {
-                                        /* AppleScript 1.3: New Text types */
-  typeUnicodeText               = 'utxt',
-  typeStyledUnicodeText         = 'sutx',
-  typeUTF8Text                  = 'utf8',
-  typeEncodedString             = 'encs',
-  typeCString                   = 'cstr',
-  typePString                   = 'pstr'
-};
 
 enum {
                                         /* AppleScript 1.3: Unit types */
@@ -1026,6 +1032,10 @@ enum {
   eF13Key                       = 0x6B736900,
   eF14Key                       = 0x6B736B00,
   eF15Key                       = 0x6B737100
+};
+
+enum {
+  keyAEQuitWithoutUI            = 'noui' /* If present in a kAEQuitApplication event, autosave any documents with uncommitted changes and quit */
 };
 
 

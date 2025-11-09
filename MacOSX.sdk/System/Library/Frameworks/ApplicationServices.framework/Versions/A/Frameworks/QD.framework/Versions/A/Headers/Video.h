@@ -3,9 +3,9 @@
  
      Contains:   Video Driver Interfaces.
  
-     Version:    Quickdraw-150.7~2
+     Version:    Quickdraw-192.24~58
  
-     Copyright:  © 1986-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1986-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -29,6 +29,18 @@
 #endif
 
 #pragma options align=mac68k
+
+
+
+/******************** DEPRECATION NOTICE *********************
+ *
+ * All declarations in this file are deprecated; their use 
+ * doesn't make sense on Mac OS X. Some structures are used
+ * in the DisplayMgr API, which is being deprecated as well.
+ * Use the CGDirectDisplay API in the CoreGraphics framework in 
+ * ApplicationServices.framework as replacement.
+ *
+ *************************************************************/
 
 enum {
   mBaseOffset                   = 1,    /*Id of mBaseOffset.*/

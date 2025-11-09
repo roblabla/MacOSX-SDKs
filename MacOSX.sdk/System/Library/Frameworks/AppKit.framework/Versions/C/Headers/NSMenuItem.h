@@ -1,7 +1,7 @@
 /*
         NSMenuItem.h
         Application Kit
-        Copyright (c) 1996-2003, Apple Computer, Inc.
+        Copyright (c) 1996-2005, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -109,7 +109,7 @@
     id _target;
     SEL _action;
     int _tag;
-    void *_extraData;
+    id _extraData;
     struct __miFlags {
         unsigned int disabled:1;
         unsigned int isSeparator:1;

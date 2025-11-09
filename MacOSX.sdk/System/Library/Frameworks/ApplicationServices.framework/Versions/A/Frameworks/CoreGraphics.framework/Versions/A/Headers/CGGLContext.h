@@ -8,7 +8,6 @@
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGContext.h>
-#include <AvailabilityMacros.h>
 
 CG_EXTERN_C_BEGIN
 

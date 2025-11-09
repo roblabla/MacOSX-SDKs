@@ -1,11 +1,25 @@
 /*	NSData.h
-	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSRange.h>
 
-@class NSString, NSURL;
+@class NSString, NSURL, NSError;
+
+
+/****************	Read/Write Options	****************/
+
+enum {	// Options for NSData reading methods
+    NSMappedRead = 1,	    // Hint to map the file in if possible
+    NSUncachedRead = 2	    // Hint to get the file not to be cached in the kernel
+};
+
+enum {	// Options for NSData writing methods
+    NSAtomicWrite = 1	    // Hint to use auxiliary file when saving; equivalent to atomically:YES
+};
+
+
 
 /****************	Immutable Data		****************/
 
@@ -26,6 +40,10 @@
 - (NSData *)subdataWithRange:(NSRange)range;
 - (BOOL)writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile;
 - (BOOL)writeToURL:(NSURL *)url atomically:(BOOL)atomically; // the atomically flag is ignored if the url is not of a type the supports atomic writes
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (BOOL)writeToFile:(NSString *)path options:(unsigned)writeOptionsMask error:(NSError **)errorPtr;
+- (BOOL)writeToURL:(NSURL *)url options:(unsigned)writeOptionsMask error:(NSError **)errorPtr;
+#endif
 
 @end
 
@@ -37,6 +55,10 @@
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 + (id)dataWithBytesNoCopy:(void *)bytes length:(unsigned)length freeWhenDone:(BOOL)b;
 #endif
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
++ (id)dataWithContentsOfFile:(NSString *)path options:(unsigned)readOptionsMask error:(NSError **)errorPtr;
++ (id)dataWithContentsOfURL:(NSURL *)url options:(unsigned)readOptionsMask error:(NSError **)errorPtr;
+#endif
 + (id)dataWithContentsOfFile:(NSString *)path;
 + (id)dataWithContentsOfURL:(NSURL *)url;
 + (id)dataWithContentsOfMappedFile:(NSString *)path;
@@ -44,6 +66,10 @@
 - (id)initWithBytesNoCopy:(void *)bytes length:(unsigned)length;
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 - (id)initWithBytesNoCopy:(void *)bytes length:(unsigned)length freeWhenDone:(BOOL)b;
+#endif
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (id)initWithContentsOfFile:(NSString *)path options:(unsigned)readOptionsMask error:(NSError **)errorPtr;
+- (id)initWithContentsOfURL:(NSURL *)url options:(unsigned)readOptionsMask error:(NSError **)errorPtr;
 #endif
 - (id)initWithContentsOfFile:(NSString *)path;
 - (id)initWithContentsOfURL:(NSURL *)url;

@@ -3,9 +3,9 @@
  
      Contains:   ATSUI glyph handling functions.
  
-     Version:    Quickdraw-150.7~2
+     Version:    Quickdraw-192.24~58
  
-     Copyright:  © 2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -975,7 +975,10 @@ ATSUGlyphGetCurvePaths(
 /* ATSUI glyphInfo access (deprecated)                                          */
 /* ---------------------------------------------------------------------------- */
 /*
- *  ATSUGetGlyphInfo()
+ *  ATSUGetGlyphInfo()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use ATSUnicodeDirectAccess.h functions instead.
  *  
  *  Summary:
  *    Obtains a copy of the style and layout information for each glyph
@@ -985,7 +988,7 @@ ATSUGlyphGetCurvePaths(
  *    Please see ATSUnicodeDirectAccess.h for replacement functions.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.1 and later
  */
@@ -995,11 +998,14 @@ ATSUGetGlyphInfo(
   UniCharArrayOffset    iLineStart,
   UniCharCount          iLineLength,
   ByteCount *           ioBufferSize,
-  ATSUGlyphInfoArray *  oGlyphInfoPtr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSUGlyphInfoArray *  oGlyphInfoPtr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 
 /*
- *  ATSUDrawGlyphInfo()
+ *  ATSUDrawGlyphInfo()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use ATSUnicodeDirectAccess.h functions instead.
  *  
  *  Summary:
  *    Draws glyphs at the specified location, based on style and layout
@@ -1009,14 +1015,14 @@ ATSUGetGlyphInfo(
  *    Please see ATSUnicodeDirectAccess.h for replacement functions.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 9.1 and later
  */
 extern OSStatus 
 ATSUDrawGlyphInfo(
   ATSUGlyphInfoArray *  iGlyphInfoArray,
-  Float32Point          iLocation)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Float32Point          iLocation)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 
 

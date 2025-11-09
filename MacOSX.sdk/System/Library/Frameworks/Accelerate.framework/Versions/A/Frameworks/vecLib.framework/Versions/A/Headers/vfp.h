@@ -3,9 +3,9 @@
  
      Contains:   MathLib style functions for vectors
  
-     Version:    vecLib-153.2~2
+     Version:    vecLib-192.17
  
-     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2007 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,10 +16,7 @@
 #ifndef __VFP__
 #define __VFP__
 
-#ifndef __CORESERVICES__
-#include <CoreServices/CoreServices.h>
-#endif
-
+#include <stdint.h>
 /*
 #ifndef __VECLIBTYPES__
 #include <vecLib/vecLibTypes.h>
@@ -38,7 +35,7 @@
 extern "C" {
 #endif
 
-#if defined(__ppc__) || defined(__i386__)
+#if defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__)
 #if defined(__VEC__) || defined(__SSE__)
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
@@ -166,6 +163,9 @@ extern vFloat  vlog1pf(vFloat X)                              AVAILABLE_MAC_OS_X
 extern vFloat  vlogbf(vFloat X)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#endif  /* defined(__VEC__) || defined(__SSE__) */
+
+#if defined(__VEC__) || defined(__SSE2__)
 /*
  *  vscalbf()
  *  
@@ -177,8 +177,9 @@ extern vFloat  vlogbf(vFloat X)                               AVAILABLE_MAC_OS_X
 extern vFloat  vscalbf(vFloat X, vSInt32 n)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#endif  /* defined(__VEC__) || defined(__SSE2__) */
 
-
+#if defined(__VEC__) || defined(__SSE__)
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ[ Auxiliary Functions]ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
                                                                                 
@@ -227,8 +228,9 @@ extern vFloat  vcopysignf(vFloat arg2, vFloat arg1)                         AVAI
 extern vFloat  vnextafterf(vFloat x, vFloat y)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#endif  /* defined(__VEC__) || defined(__SSE__) */
 
-
+#if defined(__VEC__) || defined(__SSE2__)
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ[ Inquiry Functions]ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
                                                                                 
@@ -260,8 +262,9 @@ extern vUInt32  vclassifyf(vFloat arg)                        AVAILABLE_MAC_OS_X
 extern vUInt32  vsignbitf(vFloat arg)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#endif  /* defined(__VEC__) || defined(__SSE2__) */
 
-
+#if defined(__VEC__) || defined(__SSE__)
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ[ Transcendental Functions]ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
                                                                                 
@@ -476,6 +479,9 @@ extern vFloat  vfmodf(vFloat X, vFloat Y)                                   AVAI
 extern vFloat  vremainderf(vFloat X, vFloat Y)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#endif  /* defined(__VEC__) || defined(__SSE__) */
+
+#if defined(__VEC__) || defined(__SSE2__)
 /*
  *  vremquof()
  *  
@@ -509,6 +515,9 @@ extern vFloat  vremquof(vFloat X, vFloat Y, vUInt32 *QUO)                       
 extern vFloat  vipowf(vFloat X, vSInt32 Y)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+#endif  /* defined(__VEC__) || defined(__SSE2__) */
+
+#if defined(__VEC__) || defined(__SSE__)
 /*
  *  vpowf()
  *  
@@ -520,13 +529,14 @@ extern vFloat  vipowf(vFloat X, vSInt32 Y)                                   AVA
 extern vFloat  vpowf(vFloat X, vFloat Y)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-
+#endif  /* defined(__VEC__) || defined(__SSE__) */
 
 /*
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
     Useful                                                                      
 ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 */
+#if defined(__VEC__) || defined(__SSE2__)
 /*
  *  vtablelookup()
  *  
@@ -535,12 +545,12 @@ extern vFloat  vpowf(vFloat X, vFloat Y)                                    AVAI
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vUInt32  vtablelookup(vSInt32 Index_Vect, unsigned long *Table)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vUInt32  vtablelookup(vSInt32 Index_Vect, uint32_t *Table)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#endif  /* defined(__VEC__) || defined(__SSE__) */
+#endif  /* defined(__VEC__) || defined(__SSE2__) */
 
-#endif  /* defined(__ppc__) || defined(__i386__) */
+#endif  /* defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__) */
 
 
 #ifdef __cplusplus

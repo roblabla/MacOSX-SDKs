@@ -127,21 +127,6 @@
 					/* in specified number of hz */
 #define	VTR_STAMP	4		/* user specified stamp */
 
-#ifdef KERNEL
-#if TRACE
-extern struct	proc *traceproc;
-extern int	tracewhich, tracebuf[TRCSIZ];
-extern u_int	tracex;
-extern char	traceflags[TR_NFLAGS];
-#define	pack(v,b)	(((v)->v_mount->mnt_stat.f_fsid.val[0])<<16)|(b)
-#define	trace(a,b,c) {							\
-	if (traceflags[a])						\
-		trace1(a,b,c);						\
-}
-#else
-#define	trace(a,b,c)
-#endif
-#endif /* KERNEL */
 
 #endif /* __APPLE_API_OBSOLETE */
 

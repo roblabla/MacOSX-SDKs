@@ -3,9 +3,9 @@
  
      Contains:   Object Support Library Interfaces.
  
-     Version:    AppleEvents-287~1
+     Version:    AppleEvents-316.2~623
  
-     Copyright:  © 1991-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1991-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -65,6 +65,7 @@
 #define formRange 						'rang'				/*   0x72616e67   */
 #define formPropertyID 					'prop'				/*   0x70726f70   */
 #define formName 						'name'				/*   0x6e616d65   */
+#define formUniqueID 					'ID  '				/*   0x49442020   */
 															/*     ... relevant types (some of these are often pared with forms above).  */
 #define typeObjectSpecifier 			'obj '				/*   0x6f626a20   */
 #define typeObjectBeingExamined 		'exmn'				/*   0x65786d6e   */

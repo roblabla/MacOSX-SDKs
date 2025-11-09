@@ -1,5 +1,5 @@
 /*
-	Copyright:  (c) 1999 by Apple Computer, Inc., all rights reserved.
+	Copyright:  (c) 1999-2005 by Apple Computer, Inc., all rights reserved.
 */
 
 #ifndef __glext_h_
@@ -55,6 +55,7 @@ extern "C" {
 #define GL_ARB_point_parameters             1
 #define GL_ARB_vertex_program               1
 #define GL_ARB_fragment_program             1
+#define GL_ARB_fragment_program_shadow      1
 #define GL_ARB_texture_mirrored_repeat      1
 #define GL_ARB_depth_texture                1
 #define GL_ARB_shadow                       1
@@ -69,6 +70,11 @@ extern "C" {
 #define GL_ARB_vertex_buffer_object         1
 #define GL_ARB_point_sprite                 1
 #define GL_ARB_texture_non_power_of_two     1
+#define GL_ARB_texture_rectangle            1
+#define GL_ARB_draw_buffers                 1
+#define GL_ARB_pixel_buffer_object          1
+#define GL_ARB_shader_texture_lod           1
+#define GL_ARB_texture_float                1
 #define GL_EXT_clip_volume_hint             1
 #define GL_EXT_rescale_normal               1
 #define GL_EXT_blend_color                  1
@@ -96,6 +102,11 @@ extern "C" {
 #define GL_EXT_depth_bounds_test            1
 #define GL_EXT_blend_equation_separate      1
 #define GL_EXT_texture_mirror_clamp         1
+#define GL_EXT_texture_compression_dxt1     1
+#define GL_EXT_framebuffer_object           1
+#define GL_EXT_packed_depth_stencil         1
+#define GL_EXT_gpu_program_parameters       1
+#define GL_APPLE_flush_buffer_range         1
 #define GL_APPLE_specular_vector            1
 #define GL_APPLE_transform_hint             1
 #define GL_APPLE_packed_pixels              1
@@ -120,6 +131,7 @@ extern "C" {
 #define GL_ATI_separate_stencil             1
 #define GL_ATI_array_rev_comps_in_4_bytes   1
 #define GL_ATI_texture_compression_3dc      1
+#define GL_ATI_texture_float                1
 #define GL_ATIX_pn_triangles                1
 #define GL_IBM_rasterpos_clip               1
 #define GL_NV_point_sprite                  1
@@ -134,6 +146,10 @@ extern "C" {
 #define GL_NV_texture_shader3               1
 #define GL_NV_depth_clamp                   1
 #define GL_NV_light_max_exponent            1
+#define GL_NV_fragment_program_option       1
+#define GL_NV_fragment_program2             1
+#define GL_NV_vertex_program2_option        1
+#define GL_NV_vertex_program3               1
 #define GL_SGI_color_matrix                 1
 #define GL_SGIS_texture_edge_clamp          1
 #define GL_SGIS_generate_mipmap             1
@@ -145,7 +161,7 @@ typedef char GLcharARB;
 typedef void *GLhandleARB;
 #endif
 
-#if GL_ARB_vertex_buffer_object || 1
+#if GL_ARB_vertex_buffer_object
 typedef long GLintptrARB;
 typedef long GLsizeiptrARB;
 #endif
@@ -515,6 +531,10 @@ typedef long GLsizeiptrARB;
 #define GL_SAMPLER_2D_RECT_SHADOW_ARB                      0x8B64
 #endif
 
+#if GL_ARB_vertex_shader || GL_NV_vertex_program3
+#define GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS_ARB              0x8B4C
+#endif
+
 #if GL_ARB_vertex_shader
 #define GL_VERTEX_SHADER_ARB                               0x8B31
 #define GL_MAX_VERTEX_UNIFORM_COMPONENTS_ARB               0x8B4A
@@ -522,7 +542,6 @@ typedef long GLsizeiptrARB;
 #define GL_MAX_TEXTURE_IMAGE_UNITS_ARB                     0x8872
 #define GL_MAX_VARYING_FLOATS_ARB                          0x8B4B
 #define GL_MAX_VERTEX_ATTRIBS_ARB                          0x8869
-#define GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS_ARB              0x8B4C
 #define GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS_ARB            0x8B4D
 #define GL_VERTEX_PROGRAM_POINT_SIZE_ARB                   0x8642
 #define GL_VERTEX_PROGRAM_TWO_SIDE_ARB                     0x8643
@@ -540,6 +559,7 @@ typedef long GLsizeiptrARB;
 #if GL_ARB_fragment_shader
 #define GL_FRAGMENT_SHADER_ARB                             0x8B30
 #define GL_MAX_FRAGMENT_UNIFORM_COMPONENTS_ARB             0x8B49
+#define GL_FRAGMENT_SHADER_DERIVATIVE_HINT_ARB             0x8B8B
 #define GL_MAX_TEXTURE_COORDS_ARB                          0x8871
 #define GL_MAX_TEXTURE_IMAGE_UNITS_ARB                     0x8872
 #endif
@@ -583,6 +603,63 @@ typedef long GLsizeiptrARB;
 #if GL_ARB_point_sprite
 #define GL_POINT_SPRITE_ARB                                0x8861
 #define GL_COORD_REPLACE_ARB                               0x8862
+#endif
+
+#if GL_ARB_texture_rectangle
+#define GL_TEXTURE_RECTANGLE_ARB          0x84F5
+#define GL_TEXTURE_BINDING_RECTANGLE_ARB  0x84F6
+#define GL_PROXY_TEXTURE_RECTANGLE_ARB    0x84F7
+#define GL_MAX_RECTANGLE_TEXTURE_SIZE_ARB 0x84F8
+#endif
+
+#if GL_ARB_draw_buffers
+#define GL_MAX_DRAW_BUFFERS_ARB           0x8824
+#define GL_DRAW_BUFFER0_ARB               0x8825
+#define GL_DRAW_BUFFER1_ARB               0x8826
+#define GL_DRAW_BUFFER2_ARB               0x8827
+#define GL_DRAW_BUFFER3_ARB               0x8828
+#define GL_DRAW_BUFFER4_ARB               0x8829
+#define GL_DRAW_BUFFER5_ARB               0x882A
+#define GL_DRAW_BUFFER6_ARB               0x882B
+#define GL_DRAW_BUFFER7_ARB               0x882C
+#define GL_DRAW_BUFFER8_ARB               0x882D
+#define GL_DRAW_BUFFER9_ARB               0x882E
+#define GL_DRAW_BUFFER10_ARB              0x882F
+#define GL_DRAW_BUFFER11_ARB              0x8830
+#define GL_DRAW_BUFFER12_ARB              0x8831
+#define GL_DRAW_BUFFER13_ARB              0x8832
+#define GL_DRAW_BUFFER14_ARB              0x8833
+#define GL_DRAW_BUFFER15_ARB              0x8834
+#endif
+
+#if GL_ARB_pixel_buffer_object
+#define GL_PIXEL_PACK_BUFFER_ARB                        0x88EB
+#define GL_PIXEL_UNPACK_BUFFER_ARB                      0x88EC
+#define GL_PIXEL_PACK_BUFFER_BINDING_ARB                0x88ED
+#define GL_PIXEL_UNPACK_BUFFER_BINDING_ARB              0x88EF
+#endif
+
+#if GL_ARB_texture_float
+#define GL_TEXTURE_RED_TYPE_ARB             0x8C10
+#define GL_TEXTURE_GREEN_TYPE_ARB           0x8C11
+#define GL_TEXTURE_BLUE_TYPE_ARB            0x8C12
+#define GL_TEXTURE_ALPHA_TYPE_ARB           0x8C13
+#define GL_TEXTURE_LUMINANCE_TYPE_ARB       0x8C14
+#define GL_TEXTURE_INTENSITY_TYPE_ARB       0x8C15
+#define GL_TEXTURE_DEPTH_TYPE_ARB           0x8C16
+#define GL_UNSIGNED_NORMALIZED_ARB          0x8C17
+#define GL_RGBA32F_ARB                      0x8814
+#define GL_RGB32F_ARB                       0x8815
+#define GL_ALPHA32F_ARB                     0x8816
+#define GL_INTENSITY32F_ARB                 0x8817
+#define GL_LUMINANCE32F_ARB                 0x8818
+#define GL_LUMINANCE_ALPHA32F_ARB           0x8819
+#define GL_RGBA16F_ARB                      0x881A
+#define GL_RGB16F_ARB                       0x881B
+#define GL_ALPHA16F_ARB                     0x881C
+#define GL_INTENSITY16F_ARB                 0x881D
+#define GL_LUMINANCE16F_ARB                 0x881E
+#define GL_LUMINANCE_ALPHA16F_ARB           0x881F
 #endif
 
 
@@ -1289,6 +1366,66 @@ typedef long GLsizeiptrARB;
 #define GL_MIRROR_CLAMP_TO_BORDER_EXT     0x8912
 #endif
 
+#if GL_EXT_framebuffer_object
+#define GL_FRAMEBUFFER_EXT                 0x8D40
+#define GL_RENDERBUFFER_EXT                0x8D41
+#define GL_STENCIL_INDEX1_EXT              0x8D46
+#define GL_STENCIL_INDEX4_EXT              0x8D47
+#define GL_STENCIL_INDEX8_EXT              0x8D48
+#define GL_STENCIL_INDEX16_EXT             0x8D49
+#define GL_RENDERBUFFER_WIDTH_EXT           0x8D42
+#define GL_RENDERBUFFER_HEIGHT_EXT          0x8D43
+#define GL_RENDERBUFFER_INTERNAL_FORMAT_EXT 0x8D44
+#define GL_RENDERBUFFER_RED_SIZE_EXT        0x8D50
+#define GL_RENDERBUFFER_GREEN_SIZE_EXT      0x8D51
+#define GL_RENDERBUFFER_BLUE_SIZE_EXT       0x8D52
+#define GL_RENDERBUFFER_ALPHA_SIZE_EXT      0x8D53
+#define GL_RENDERBUFFER_DEPTH_SIZE_EXT      0x8D54
+#define GL_RENDERBUFFER_STENCIL_SIZE_EXT    0x8D55
+#define GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE_EXT           0x8CD0
+#define GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME_EXT           0x8CD1
+#define GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_EXT         0x8CD2
+#define GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE_EXT 0x8CD3
+#define GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_EXT    0x8CD4
+#define GL_COLOR_ATTACHMENT0_EXT           0x8CE0
+#define GL_COLOR_ATTACHMENT1_EXT           0x8CE1
+#define GL_COLOR_ATTACHMENT2_EXT           0x8CE2
+#define GL_COLOR_ATTACHMENT3_EXT           0x8CE3
+#define GL_COLOR_ATTACHMENT4_EXT           0x8CE4
+#define GL_COLOR_ATTACHMENT5_EXT           0x8CE5
+#define GL_COLOR_ATTACHMENT6_EXT           0x8CE6
+#define GL_COLOR_ATTACHMENT7_EXT           0x8CE7
+#define GL_COLOR_ATTACHMENT8_EXT           0x8CE8
+#define GL_COLOR_ATTACHMENT9_EXT           0x8CE9
+#define GL_COLOR_ATTACHMENT10_EXT          0x8CEA
+#define GL_COLOR_ATTACHMENT11_EXT          0x8CEB
+#define GL_COLOR_ATTACHMENT12_EXT          0x8CEC
+#define GL_COLOR_ATTACHMENT13_EXT          0x8CED
+#define GL_COLOR_ATTACHMENT14_EXT          0x8CEE
+#define GL_COLOR_ATTACHMENT15_EXT          0x8CEF
+#define GL_DEPTH_ATTACHMENT_EXT            0x8D00
+#define GL_STENCIL_ATTACHMENT_EXT          0x8D20
+#define GL_FRAMEBUFFER_COMPLETE_EXT                        0x8CD5
+#define GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT           0x8CD6
+#define GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT   0x8CD7
+#define GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT           0x8CD9
+#define GL_FRAMEBUFFER_INCOMPLETE_FORMATS_EXT              0x8CDA
+#define GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_EXT          0x8CDB
+#define GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_EXT          0x8CDC
+#define GL_FRAMEBUFFER_UNSUPPORTED_EXT                     0x8CDD
+#define GL_FRAMEBUFFER_BINDING_EXT         0x8CA6
+#define GL_RENDERBUFFER_BINDING_EXT        0x8CA7
+#define GL_MAX_COLOR_ATTACHMENTS_EXT       0x8CDF
+#define GL_MAX_RENDERBUFFER_SIZE_EXT       0x84E8
+#define GL_INVALID_FRAMEBUFFER_OPERATION_EXT 0x0506
+#endif
+
+#if GL_EXT_packed_depth_stencil
+#define GL_DEPTH_STENCIL_EXT					0x84F9
+#define GL_UNSIGNED_INT_24_8_EXT				0x84FA
+#define GL_DEPTH24_STENCIL8_EXT					0x88F0
+#define GL_TEXTURE_STENCIL_SIZE_EXT				0x88F1
+#endif
 
 #if GL_APPLE_vertex_array_range
 #define GL_VERTEX_ARRAY_RANGE_APPLE             0x851D
@@ -1381,6 +1518,11 @@ typedef long GLsizeiptrARB;
 #define GL_VERTEX_ATTRIB_MAP2_DOMAIN_APPLE               0x8A09
 #endif
 
+#if GL_APPLE_flush_buffer_range
+#define GL_BUFFER_SERIALIZED_MODIFY_APPLE 0x8A12
+#define GL_BUFFER_FLUSHING_UNMAP_APPLE    0x8A13
+#endif
+
 
 #if GL_ATI_blend_weighted_minmax
 #define GL_MIN_WEIGHTED_ATI               0x877D
@@ -1449,6 +1591,21 @@ typedef long GLsizeiptrARB;
 
 #if GL_ATI_texture_compression_3dc
 #define GL_COMPRESSED_LUMINANCE_ALPHA_3DC_ATI           0x8837
+#endif
+
+#if GL_ATI_texture_float
+#define GL_RGBA_FLOAT32_ATI                             0x8814
+#define GL_RGB_FLOAT32_ATI                              0x8815
+#define GL_ALPHA_FLOAT32_ATI                            0x8816
+#define GL_INTENSITY_FLOAT32_ATI                        0x8817
+#define GL_LUMINANCE_FLOAT32_ATI                        0x8818
+#define GL_LUMINANCE_ALPHA_FLOAT32_ATI                  0x8819
+#define GL_RGBA_FLOAT16_ATI                             0x881A
+#define GL_RGB_FLOAT16_ATI                              0x881B
+#define GL_ALPHA_FLOAT16_ATI                            0x881C
+#define GL_INTENSITY_FLOAT16_ATI                        0x881D
+#define GL_LUMINANCE_FLOAT16_ATI                        0x881E
+#define GL_LUMINANCE_ALPHA_FLOAT16_ATI                  0x881F
 #endif
 
 
@@ -1669,7 +1826,7 @@ typedef long GLsizeiptrARB;
 #define GL_VERTEX_PROGRAM_POINT_SIZE_NV   0x8642
 #define GL_VERTEX_PROGRAM_TWO_SIDE_NV     0x8643
 #define GL_PROGRAM_PARAMETER_NV           0x8644
-#define GL_ATTRIBUTE_ARRAY_POINTER_NV     0x8645
+#define GL_ATTRIB_ARRAY_POINTER_NV        0x8645
 #define GL_PROGRAM_TARGET_NV              0x8646
 #define GL_PROGRAM_RESIDENT_NV            0x8647
 #define GL_TRACK_MATRIX_NV                0x8648
@@ -1846,6 +2003,16 @@ typedef long GLsizeiptrARB;
 #define GL_MAX_SPOT_EXPONENT_NV				             0x8505
 #endif
 
+#if GL_NV_fragment_program2 || GL_NV_vertex_program2_option
+#define GL_MAX_PROGRAM_EXEC_INSTRUCTIONS_NV              0x88F4
+#define GL_MAX_PROGRAM_CALL_DEPTH_NV                     0x88F5
+#endif
+
+#if GL_NV_fragment_program2
+#define GL_MAX_PROGRAM_IF_DEPTH_NV                       0x88F6
+#define GL_MAX_PROGRAM_LOOP_DEPTH_NV                     0x88F7
+#define GL_MAX_PROGRAM_LOOP_COUNT_NV                     0x88F8
+#endif
 
 #if GL_PGI_vertex_hints
 #define GL_VERTEX_DATA_HINT_PGI           0x1A22A
@@ -2572,53 +2739,6 @@ typedef void (* glDeleteProgramsARBProcPtr) (GLsizei n, const GLuint *programs);
 typedef void (* glGenProgramsARBProcPtr) (GLsizei n, GLuint *programs);
 typedef GLboolean (* glIsProgramARBProcPtr) (GLuint program);
 
-typedef void (* glVertexAttrib1sARBProcPtr) (GLuint index, GLshort x);
-typedef void (* glVertexAttrib1fARBProcPtr) (GLuint index, GLfloat x);
-typedef void (* glVertexAttrib1dARBProcPtr) (GLuint index, GLdouble x);
-typedef void (* glVertexAttrib2sARBProcPtr) (GLuint index, GLshort x, GLshort y);
-typedef void (* glVertexAttrib2fARBProcPtr) (GLuint index, GLfloat x, GLfloat y);
-typedef void (* glVertexAttrib2dARBProcPtr) (GLuint index, GLdouble x, GLdouble y);
-typedef void (* glVertexAttrib3sARBProcPtr) (GLuint index, GLshort x, GLshort y, GLshort z);
-typedef void (* glVertexAttrib3fARBProcPtr) (GLuint index, GLfloat x, GLfloat y, GLfloat z);
-typedef void (* glVertexAttrib3dARBProcPtr) (GLuint index, GLdouble x, GLdouble y, GLdouble z);
-typedef void (* glVertexAttrib4sARBProcPtr) (GLuint index, GLshort x, GLshort y, GLshort z, GLshort w);
-typedef void (* glVertexAttrib4fARBProcPtr) (GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-typedef void (* glVertexAttrib4dARBProcPtr) (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-typedef void (* glVertexAttrib4NubARBProcPtr) (GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
-typedef void (* glVertexAttrib1svARBProcPtr) (GLuint index, const GLshort *v);
-typedef void (* glVertexAttrib1fvARBProcPtr) (GLuint index, const GLfloat *v);
-typedef void (* glVertexAttrib1dvARBProcPtr) (GLuint index, const GLdouble *v);
-typedef void (* glVertexAttrib2svARBProcPtr) (GLuint index, const GLshort *v);
-typedef void (* glVertexAttrib2fvARBProcPtr) (GLuint index, const GLfloat *v);
-typedef void (* glVertexAttrib2dvARBProcPtr) (GLuint index, const GLdouble *v);
-typedef void (* glVertexAttrib3svARBProcPtr) (GLuint index, const GLshort *v);
-typedef void (* glVertexAttrib3fvARBProcPtr) (GLuint index, const GLfloat *v);
-typedef void (* glVertexAttrib3dvARBProcPtr) (GLuint index, const GLdouble *v);
-typedef void (* glVertexAttrib4bvARBProcPtr) (GLuint index, const GLbyte *v);
-typedef void (* glVertexAttrib4svARBProcPtr) (GLuint index, const GLshort *v);
-typedef void (* glVertexAttrib4ivARBProcPtr) (GLuint index, const GLint *v);
-typedef void (* glVertexAttrib4ubvARBProcPtr) (GLuint index, const GLubyte *v);
-typedef void (* glVertexAttrib4usvARBProcPtr) (GLuint index, const GLushort *v);
-typedef void (* glVertexAttrib4uivARBProcPtr) (GLuint index, const GLuint *v);
-typedef void (* glVertexAttrib4fvARBProcPtr) (GLuint index, const GLfloat *v);
-typedef void (* glVertexAttrib4dvARBProcPtr) (GLuint index, const GLdouble *v);
-typedef void (* glVertexAttrib4NbvARBProcPtr) (GLuint index, const GLbyte *v);
-typedef void (* glVertexAttrib4NsvARBProcPtr) (GLuint index, const GLshort *v);
-typedef void (* glVertexAttrib4NivARBProcPtr) (GLuint index, const GLint *v);
-typedef void (* glVertexAttrib4NubvARBProcPtr) (GLuint index, const GLubyte *v);
-typedef void (* glVertexAttrib4NusvARBProcPtr) (GLuint index, const GLushort *v);
-typedef void (* glVertexAttrib4NuivARBProcPtr) (GLuint index, const GLuint *v);
-
-typedef void (* glVertexAttribPointerARBProcPtr) (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer);
-
-typedef void (* glEnableVertexAttribArrayARBProcPtr) (GLuint index);
-typedef void (* glDisableVertexAttribArrayARBProcPtr) (GLuint index);
-
-typedef void (* glGetVertexAttribdvARBProcPtr) (GLuint index, GLenum pname, GLdouble *params);
-typedef void (* glGetVertexAttribfvARBProcPtr) (GLuint index, GLenum pname, GLfloat *params);
-typedef void (* glGetVertexAttribivARBProcPtr) (GLuint index, GLenum pname, GLint *params);
-typedef void (* glGetVertexAttribPointervARBProcPtr) (GLuint index, GLenum pname, GLvoid **pointer);
-
 typedef void (* glProgramEnvParameter4dARBProcPtr) (GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
 typedef void (* glProgramEnvParameter4dvARBProcPtr) (GLenum target, GLuint index, const GLdouble *params);
 typedef void (* glProgramEnvParameter4fARBProcPtr) (GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
@@ -2627,6 +2747,11 @@ typedef void (* glProgramLocalParameter4dARBProcPtr) (GLenum target, GLuint inde
 typedef void (* glProgramLocalParameter4dvARBProcPtr) (GLenum target, GLuint index, const GLdouble *params);
 typedef void (* glProgramLocalParameter4fARBProcPtr) (GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
 typedef void (* glProgramLocalParameter4fvARBProcPtr) (GLenum target, GLuint index, const GLfloat *params);
+
+#if GL_EXT_gpu_program_parameters
+typedef void (* glProgramEnvParameters4fvEXTProcPtr) (GLenum target, GLuint index, GLsizei count, const GLfloat *params);
+typedef void (* glProgramLocalParameters4fvEXTProcPtr) (GLenum target, GLuint index, GLsizei count, const GLfloat *params);
+#endif
 
 typedef void (* glGetProgramEnvParameterdvARBProcPtr) (GLenum target, GLuint index, GLdouble *params);
 typedef void (* glGetProgramEnvParameterfvARBProcPtr) (GLenum target, GLuint index, GLfloat *params);
@@ -2643,53 +2768,6 @@ extern void glDeleteProgramsARB(GLsizei n, const GLuint *programs);
 extern void glGenProgramsARB(GLsizei n, GLuint *programs);
 extern GLboolean glIsProgramARB(GLuint program);
 
-extern void glVertexAttrib1sARB(GLuint index, GLshort x);
-extern void glVertexAttrib1fARB(GLuint index, GLfloat x);
-extern void glVertexAttrib1dARB(GLuint index, GLdouble x);
-extern void glVertexAttrib2sARB(GLuint index, GLshort x, GLshort y);
-extern void glVertexAttrib2fARB(GLuint index, GLfloat x, GLfloat y);
-extern void glVertexAttrib2dARB(GLuint index, GLdouble x, GLdouble y);
-extern void glVertexAttrib3sARB(GLuint index, GLshort x, GLshort y, GLshort z);
-extern void glVertexAttrib3fARB(GLuint index, GLfloat x, GLfloat y, GLfloat z);
-extern void glVertexAttrib3dARB(GLuint index, GLdouble x, GLdouble y, GLdouble z);
-extern void glVertexAttrib4sARB(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w);
-extern void glVertexAttrib4fARB(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-extern void glVertexAttrib4dARB(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-extern void glVertexAttrib4NubARB(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
-extern void glVertexAttrib1svARB(GLuint index, const GLshort *v);
-extern void glVertexAttrib1fvARB(GLuint index, const GLfloat *v);
-extern void glVertexAttrib1dvARB(GLuint index, const GLdouble *v);
-extern void glVertexAttrib2svARB(GLuint index, const GLshort *v);
-extern void glVertexAttrib2fvARB(GLuint index, const GLfloat *v);
-extern void glVertexAttrib2dvARB(GLuint index, const GLdouble *v);
-extern void glVertexAttrib3svARB(GLuint index, const GLshort *v);
-extern void glVertexAttrib3fvARB(GLuint index, const GLfloat *v);
-extern void glVertexAttrib3dvARB(GLuint index, const GLdouble *v);
-extern void glVertexAttrib4bvARB(GLuint index, const GLbyte *v);
-extern void glVertexAttrib4svARB(GLuint index, const GLshort *v);
-extern void glVertexAttrib4ivARB(GLuint index, const GLint *v);
-extern void glVertexAttrib4ubvARB(GLuint index, const GLubyte *v);
-extern void glVertexAttrib4usvARB(GLuint index, const GLushort *v);
-extern void glVertexAttrib4uivARB(GLuint index, const GLuint *v);
-extern void glVertexAttrib4fvARB(GLuint index, const GLfloat *v);
-extern void glVertexAttrib4dvARB(GLuint index, const GLdouble *v);
-extern void glVertexAttrib4NbvARB(GLuint index, const GLbyte *v);
-extern void glVertexAttrib4NsvARB(GLuint index, const GLshort *v);
-extern void glVertexAttrib4NivARB(GLuint index, const GLint *v);
-extern void glVertexAttrib4NubvARB(GLuint index, const GLubyte *v);
-extern void glVertexAttrib4NusvARB(GLuint index, const GLushort *v);
-extern void glVertexAttrib4NuivARB(GLuint index, const GLuint *v);
-
-extern void glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer);
-
-extern void glEnableVertexAttribArrayARB(GLuint index);
-extern void glDisableVertexAttribArrayARB(GLuint index);
-
-extern void glGetVertexAttribdvARB(GLuint index, GLenum pname, GLdouble *params);
-extern void glGetVertexAttribfvARB(GLuint index, GLenum pname, GLfloat *params);
-extern void glGetVertexAttribivARB(GLuint index, GLenum pname, GLint *params);
-extern void glGetVertexAttribPointervARB(GLuint index, GLenum pname, GLvoid **pointer);
-
 extern void glProgramEnvParameter4dARB(GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
 extern void glProgramEnvParameter4dvARB(GLenum target, GLuint index, const GLdouble *params);
 extern void glProgramEnvParameter4fARB(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
@@ -2701,6 +2779,11 @@ extern void glProgramLocalParameter4fvARB(GLenum target, GLuint index, const GLf
 
 extern void glGetProgramEnvParameterdvARB(GLenum target, GLuint index, GLdouble *params);
 extern void glGetProgramEnvParameterfvARB(GLenum target, GLuint index, GLfloat *params);
+#if GL_EXT_gpu_program_parameters
+extern void glProgramEnvParameters4fvEXT(GLenum target, GLuint index, GLsizei count, const GLfloat *params);
+extern void glProgramLocalParameters4fvEXT(GLenum target, GLuint index, GLsizei count, const GLfloat *params);
+#endif
+
 extern void glGetProgramLocalParameterdvARB(GLenum target, GLuint index, GLdouble *params);
 extern void glGetProgramLocalParameterfvARB(GLenum target, GLuint index, GLfloat *params);
 
@@ -2711,47 +2794,148 @@ extern void glGetProgramivARB(GLenum target, GLenum pname, GLint *params);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
+
+#if GL_ARB_vertex_shader || GL_ARB_vertex_program
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+
+typedef void (* glVertexAttrib1dARBProcPtr) (GLuint index, GLdouble x);
+typedef void (* glVertexAttrib1dvARBProcPtr) (GLuint index, const GLdouble *v);
+typedef void (* glVertexAttrib1fARBProcPtr) (GLuint index, GLfloat x);
+typedef void (* glVertexAttrib1fvARBProcPtr) (GLuint index, const GLfloat *v);
+typedef void (* glVertexAttrib1sARBProcPtr) (GLuint index, GLshort x);
+typedef void (* glVertexAttrib1svARBProcPtr) (GLuint index, const GLshort *v);
+typedef void (* glVertexAttrib2dARBProcPtr) (GLuint index, GLdouble x, GLdouble y);
+typedef void (* glVertexAttrib2dvARBProcPtr) (GLuint index, const GLdouble *v);
+typedef void (* glVertexAttrib2fARBProcPtr) (GLuint index, GLfloat x, GLfloat y);
+typedef void (* glVertexAttrib2fvARBProcPtr) (GLuint index, const GLfloat *v);
+typedef void (* glVertexAttrib2sARBProcPtr) (GLuint index, GLshort x, GLshort y);
+typedef void (* glVertexAttrib2svARBProcPtr) (GLuint index, const GLshort *v);
+typedef void (* glVertexAttrib3dARBProcPtr) (GLuint index, GLdouble x, GLdouble y, GLdouble z);
+typedef void (* glVertexAttrib3dvARBProcPtr) (GLuint index, const GLdouble *v);
+typedef void (* glVertexAttrib3fARBProcPtr) (GLuint index, GLfloat x, GLfloat y, GLfloat z);
+typedef void (* glVertexAttrib3fvARBProcPtr) (GLuint index, const GLfloat *v);
+typedef void (* glVertexAttrib3sARBProcPtr) (GLuint index, GLshort x, GLshort y, GLshort z);
+typedef void (* glVertexAttrib3svARBProcPtr) (GLuint index, const GLshort *v);
+typedef void (* glVertexAttrib4NbvARBProcPtr) (GLuint index, const GLbyte *v);
+typedef void (* glVertexAttrib4NivARBProcPtr) (GLuint index, const GLint *v);
+typedef void (* glVertexAttrib4NsvARBProcPtr) (GLuint index, const GLshort *v);
+typedef void (* glVertexAttrib4NubARBProcPtr) (GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
+typedef void (* glVertexAttrib4NubvARBProcPtr) (GLuint index, const GLubyte *v);
+typedef void (* glVertexAttrib4NuivARBProcPtr) (GLuint index, const GLuint *v);
+typedef void (* glVertexAttrib4NusvARBProcPtr) (GLuint index, const GLushort *v);
+typedef void (* glVertexAttrib4bvARBProcPtr) (GLuint index, const GLbyte *v);
+typedef void (* glVertexAttrib4dARBProcPtr) (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+typedef void (* glVertexAttrib4dvARBProcPtr) (GLuint index, const GLdouble *v);
+typedef void (* glVertexAttrib4fARBProcPtr) (GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+typedef void (* glVertexAttrib4fvARBProcPtr) (GLuint index, const GLfloat *v);
+typedef void (* glVertexAttrib4ivARBProcPtr) (GLuint index, const GLint *v);
+typedef void (* glVertexAttrib4sARBProcPtr) (GLuint index, GLshort x, GLshort y, GLshort z, GLshort w);
+typedef void (* glVertexAttrib4svARBProcPtr) (GLuint index, const GLshort *v);
+typedef void (* glVertexAttrib4ubvARBProcPtr) (GLuint index, const GLubyte *v);
+typedef void (* glVertexAttrib4uivARBProcPtr) (GLuint index, const GLuint *v);
+typedef void (* glVertexAttrib4usvARBProcPtr) (GLuint index, const GLushort *v);
+typedef void (* glVertexAttribPointerARBProcPtr) (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer);
+
+typedef void (* glDisableVertexAttribArrayARBProcPtr) (GLuint index);
+typedef void (* glEnableVertexAttribArrayARBProcPtr) (GLuint index);
+
+typedef void (* glGetVertexAttribPointervARBProcPtr) (GLuint index, GLenum pname, GLvoid **pointer);
+typedef void (* glGetVertexAttribdvARBProcPtr) (GLuint index, GLenum pname, GLdouble *params);
+typedef void (* glGetVertexAttribfvARBProcPtr) (GLuint index, GLenum pname, GLfloat *params);
+typedef void (* glGetVertexAttribivARBProcPtr) (GLuint index, GLenum pname, GLint *params);
+
+#else
+
+extern void glVertexAttrib1dARB(GLuint index, GLdouble x);
+extern void glVertexAttrib1dvARB(GLuint index, const GLdouble *v);
+extern void glVertexAttrib1fARB(GLuint index, GLfloat x);
+extern void glVertexAttrib1fvARB(GLuint index, const GLfloat *v);
+extern void glVertexAttrib1sARB(GLuint index, GLshort x);
+extern void glVertexAttrib1svARB(GLuint index, const GLshort *v);
+extern void glVertexAttrib2dARB(GLuint index, GLdouble x, GLdouble y);
+extern void glVertexAttrib2dvARB(GLuint index, const GLdouble *v);
+extern void glVertexAttrib2fARB(GLuint index, GLfloat x, GLfloat y);
+extern void glVertexAttrib2fvARB(GLuint index, const GLfloat *v);
+extern void glVertexAttrib2sARB(GLuint index, GLshort x, GLshort y);
+extern void glVertexAttrib2svARB(GLuint index, const GLshort *v);
+extern void glVertexAttrib3dARB(GLuint index, GLdouble x, GLdouble y, GLdouble z);
+extern void glVertexAttrib3dvARB(GLuint index, const GLdouble *v);
+extern void glVertexAttrib3fARB(GLuint index, GLfloat x, GLfloat y, GLfloat z);
+extern void glVertexAttrib3fvARB(GLuint index, const GLfloat *v);
+extern void glVertexAttrib3sARB(GLuint index, GLshort x, GLshort y, GLshort z);
+extern void glVertexAttrib3svARB(GLuint index, const GLshort *v);
+extern void glVertexAttrib4NbvARB(GLuint index, const GLbyte *v);
+extern void glVertexAttrib4NivARB(GLuint index, const GLint *v);
+extern void glVertexAttrib4NsvARB(GLuint index, const GLshort *v);
+extern void glVertexAttrib4NubARB(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
+extern void glVertexAttrib4NubvARB(GLuint index, const GLubyte *v);
+extern void glVertexAttrib4NuivARB(GLuint index, const GLuint *v);
+extern void glVertexAttrib4NusvARB(GLuint index, const GLushort *v);
+extern void glVertexAttrib4bvARB(GLuint index, const GLbyte *v);
+extern void glVertexAttrib4dARB(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+extern void glVertexAttrib4dvARB(GLuint index, const GLdouble *v);
+extern void glVertexAttrib4fARB(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+extern void glVertexAttrib4fvARB(GLuint index, const GLfloat *v);
+extern void glVertexAttrib4ivARB(GLuint index, const GLint *v);
+extern void glVertexAttrib4sARB(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w);
+extern void glVertexAttrib4svARB(GLuint index, const GLshort *v);
+extern void glVertexAttrib4ubvARB(GLuint index, const GLubyte *v);
+extern void glVertexAttrib4uivARB(GLuint index, const GLuint *v);
+extern void glVertexAttrib4usvARB(GLuint index, const GLushort *v);
+extern void glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer);
+
+extern void glDisableVertexAttribArrayARB(GLuint index);
+extern void glEnableVertexAttribArrayARB(GLuint index);
+
+extern void glGetVertexAttribPointervARB(GLuint index, GLenum pname, GLvoid **pointer);
+extern void glGetVertexAttribdvARB(GLuint index, GLenum pname, GLdouble *params);
+extern void glGetVertexAttribfvARB(GLuint index, GLenum pname, GLfloat *params);
+extern void glGetVertexAttribivARB(GLuint index, GLenum pname, GLint *params);
+
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
 #if GL_ARB_shader_objects
 #ifdef GL_GLEXT_FUNCTION_POINTERS
-extern void (* glDeleteObjectARBProcPtr) (GLhandleARB obj);
-extern GLhandleARB (* glGetHandleARBProcPtr) (GLenum pname);
-extern void (* glDetachObjectARBProcPtr) (GLhandleARB containerObj, GLhandleARB attachedObj);
-extern GLhandleARB (* glCreateShaderObjectARBProcPtr) (GLenum shaderType);
-extern void (* glShaderSourceARBProcPtr) (GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length);
-extern void (* glCompileShaderARBProcPtr) (GLhandleARB shaderObj);
-extern GLhandleARB (* glCreateProgramObjectARBProcPtr) (void);
-extern void (* glAttachObjectARBProcPtr) (GLhandleARB containerObj, GLhandleARB obj);
-extern void (* glLinkProgramARBProcPtr) (GLhandleARB programObj);
-extern void (* glUseProgramObjectARBProcPtr) (GLhandleARB programObj);
-extern void (* glValidateProgramARBProcPtr) (GLhandleARB programObj);
-extern void (* glUniform1fARBProcPtr) (GLint location, GLfloat v0);
-extern void (* glUniform2fARBProcPtr) (GLint location, GLfloat v0, GLfloat v1);
-extern void (* glUniform3fARBProcPtr) (GLint location, GLfloat v0, GLfloat v1, GLfloat v2);
-extern void (* glUniform4fARBProcPtr) (GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
-extern void (* glUniform1iARBProcPtr) (GLint location, GLint v0);
-extern void (* glUniform2iARBProcPtr) (GLint location, GLint v0, GLint v1);
-extern void (* glUniform3iARBProcPtr) (GLint location, GLint v0, GLint v1, GLint v2);
-extern void (* glUniform4iARBProcPtr) (GLint location, GLint v0, GLint v1, GLint v2, GLint v3);
-extern void (* glUniform1fvARBProcPtr) (GLint location, GLsizei count, const GLfloat *value);
-extern void (* glUniform2fvARBProcPtr) (GLint location, GLsizei count, const GLfloat *value);
-extern void (* glUniform3fvARBProcPtr) (GLint location, GLsizei count, const GLfloat *value);
-extern void (* glUniform4fvARBProcPtr) (GLint location, GLsizei count, const GLfloat *value);
-extern void (* glUniform1ivARBProcPtr) (GLint location, GLsizei count, const GLint *value);
-extern void (* glUniform2ivARBProcPtr) (GLint location, GLsizei count, const GLint *value);
-extern void (* glUniform3ivARBProcPtr) (GLint location, GLsizei count, const GLint *value);
-extern void (* glUniform4ivARBProcPtr) (GLint location, GLsizei count, const GLint *value);
-extern void (* glUniformMatrix2fvARBProcPtr) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-extern void (* glUniformMatrix3fvARBProcPtr) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-extern void (* glUniformMatrix4fvARBProcPtr) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-extern void (* glGetObjectParameterfvARBProcPtr) (GLhandleARB obj, GLenum pname, GLfloat *params);
-extern void (* glGetObjectParameterivARBProcPtr) (GLhandleARB obj, GLenum pname, GLint *params);
-extern void (* glGetInfoLogARBProcPtr) (GLhandleARB obj, GLsizei maxLength, GLsizei *length, GLcharARB *infoLog);
-extern void (* glGetAttachedObjectsARBProcPtr) (GLhandleARB containerObj, GLsizei maxCount, GLsizei *count, GLhandleARB *obj);
-extern GLint (* glGetUniformLocationARBProcPtr) (GLhandleARB programObj, const GLcharARB *name);
-extern void (* glGetActiveUniformARBProcPtr) (GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei *length, GLint *size, GLenum *type, GLcharARB *name);
-extern void (* glGetUniformfvARBProcPtr) (GLhandleARB programObj, GLint location, GLfloat *params);
-extern void (* glGetUniformivARBProcPtr) (GLhandleARB programObj, GLint location, GLint *params);
-extern void (* glGetShaderSourceARBProcPtr) (GLhandleARB obj, GLsizei maxLength, GLsizei *length, GLcharARB *source);
+typedef void (* glDeleteObjectARBProcPtr) (GLhandleARB obj);
+typedef GLhandleARB (* glGetHandleARBProcPtr) (GLenum pname);
+typedef void (* glDetachObjectARBProcPtr) (GLhandleARB containerObj, GLhandleARB attachedObj);
+typedef GLhandleARB (* glCreateShaderObjectARBProcPtr) (GLenum shaderType);
+typedef void (* glShaderSourceARBProcPtr) (GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length);
+typedef void (* glCompileShaderARBProcPtr) (GLhandleARB shaderObj);
+typedef GLhandleARB (* glCreateProgramObjectARBProcPtr) (void);
+typedef void (* glAttachObjectARBProcPtr) (GLhandleARB containerObj, GLhandleARB obj);
+typedef void (* glLinkProgramARBProcPtr) (GLhandleARB programObj);
+typedef void (* glUseProgramObjectARBProcPtr) (GLhandleARB programObj);
+typedef void (* glValidateProgramARBProcPtr) (GLhandleARB programObj);
+typedef void (* glUniform1fARBProcPtr) (GLint location, GLfloat v0);
+typedef void (* glUniform2fARBProcPtr) (GLint location, GLfloat v0, GLfloat v1);
+typedef void (* glUniform3fARBProcPtr) (GLint location, GLfloat v0, GLfloat v1, GLfloat v2);
+typedef void (* glUniform4fARBProcPtr) (GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
+typedef void (* glUniform1iARBProcPtr) (GLint location, GLint v0);
+typedef void (* glUniform2iARBProcPtr) (GLint location, GLint v0, GLint v1);
+typedef void (* glUniform3iARBProcPtr) (GLint location, GLint v0, GLint v1, GLint v2);
+typedef void (* glUniform4iARBProcPtr) (GLint location, GLint v0, GLint v1, GLint v2, GLint v3);
+typedef void (* glUniform1fvARBProcPtr) (GLint location, GLsizei count, const GLfloat *value);
+typedef void (* glUniform2fvARBProcPtr) (GLint location, GLsizei count, const GLfloat *value);
+typedef void (* glUniform3fvARBProcPtr) (GLint location, GLsizei count, const GLfloat *value);
+typedef void (* glUniform4fvARBProcPtr) (GLint location, GLsizei count, const GLfloat *value);
+typedef void (* glUniform1ivARBProcPtr) (GLint location, GLsizei count, const GLint *value);
+typedef void (* glUniform2ivARBProcPtr) (GLint location, GLsizei count, const GLint *value);
+typedef void (* glUniform3ivARBProcPtr) (GLint location, GLsizei count, const GLint *value);
+typedef void (* glUniform4ivARBProcPtr) (GLint location, GLsizei count, const GLint *value);
+typedef void (* glUniformMatrix2fvARBProcPtr) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+typedef void (* glUniformMatrix3fvARBProcPtr) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+typedef void (* glUniformMatrix4fvARBProcPtr) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+typedef void (* glGetObjectParameterfvARBProcPtr) (GLhandleARB obj, GLenum pname, GLfloat *params);
+typedef void (* glGetObjectParameterivARBProcPtr) (GLhandleARB obj, GLenum pname, GLint *params);
+typedef void (* glGetInfoLogARBProcPtr) (GLhandleARB obj, GLsizei maxLength, GLsizei *length, GLcharARB *infoLog);
+typedef void (* glGetAttachedObjectsARBProcPtr) (GLhandleARB containerObj, GLsizei maxCount, GLsizei *count, GLhandleARB *obj);
+typedef GLint (* glGetUniformLocationARBProcPtr) (GLhandleARB programObj, const GLcharARB *name);
+typedef void (* glGetActiveUniformARBProcPtr) (GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei *length, GLint *size, GLenum *type, GLcharARB *name);
+typedef void (* glGetUniformfvARBProcPtr) (GLhandleARB programObj, GLint location, GLfloat *params);
+typedef void (* glGetUniformivARBProcPtr) (GLhandleARB programObj, GLint location, GLint *params);
+typedef void (* glGetShaderSourceARBProcPtr) (GLhandleARB obj, GLsizei maxLength, GLsizei *length, GLcharARB *source);
 #else
 extern void glDeleteObjectARB(GLhandleARB obj);
 extern GLhandleARB glGetHandleARB(GLenum pname);
@@ -2797,99 +2981,13 @@ extern void glGetShaderSourceARB(GLhandleARB obj, GLsizei maxLength, GLsizei *le
 
 #if GL_ARB_vertex_shader
 #ifdef GL_GLEXT_FUNCTION_POINTERS
-extern void (* glVertexAttrib1fARBProcPtr) (GLuint index, GLfloat v0);
-extern void (* glVertexAttrib1sARBProcPtr) (GLuint index, GLshort v0);
-extern void (* glVertexAttrib1dARBProcPtr) (GLuint index, GLdouble v0);
-extern void (* glVertexAttrib2fARBProcPtr) (GLuint index, GLfloat v0, GLfloat v1);
-extern void (* glVertexAttrib2sARBProcPtr) (GLuint index, GLshort v0, GLshort v1);
-extern void (* glVertexAttrib2dARBProcPtr) (GLuint index, GLdouble v0, GLdouble v1);
-extern void (* glVertexAttrib3fARBProcPtr) (GLuint index, GLfloat v0, GLfloat v1, GLfloat v2);
-extern void (* glVertexAttrib3sARBProcPtr) (GLuint index, GLshort v0, GLshort v1, GLshort v2);
-extern void (* glVertexAttrib3dARBProcPtr) (GLuint index, GLdouble v0, GLdouble v1, GLdouble v2);
-extern void (* glVertexAttrib4fARBProcPtr) (GLuint index, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
-extern void (* glVertexAttrib4sARBProcPtr) (GLuint index, GLshort v0, GLshort v1, GLshort v2, GLshort v3);
-extern void (* glVertexAttrib4dARBProcPtr) (GLuint index, GLdouble v0, GLdouble v1, GLdouble v2, GLdouble v3);
-extern void (* glVertexAttrib4NubARBProcPtr) (GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
-extern void (* glVertexAttrib1fvARBProcPtr) (GLuint index, const GLfloat *v);
-extern void (* glVertexAttrib1svARBProcPtr) (GLuint index, const GLshort *v);
-extern void (* glVertexAttrib1dvARBProcPtr) (GLuint index, const GLdouble *v);
-extern void (* glVertexAttrib2fvARBProcPtr) (GLuint index, const GLfloat *v);
-extern void (* glVertexAttrib2svARBProcPtr) (GLuint index, const GLshort *v);
-extern void (* glVertexAttrib2dvARBProcPtr) (GLuint index, const GLdouble *v);
-extern void (* glVertexAttrib3fvARBProcPtr) (GLuint index, const GLfloat *v);
-extern void (* glVertexAttrib3svARBProcPtr) (GLuint index, const GLshort *v);
-extern void (* glVertexAttrib3dvARBProcPtr) (GLuint index, const GLdouble *v);
-extern void (* glVertexAttrib4fvARBProcPtr) (GLuint index, const GLfloat *v);
-extern void (* glVertexAttrib4svARBProcPtr) (GLuint index, const GLshort *v);
-extern void (* glVertexAttrib4dvARBProcPtr) (GLuint index, const GLdouble *v);
-extern void (* glVertexAttrib4ivARBProcPtr) (GLuint index, const GLint *v);
-extern void (* glVertexAttrib4bvARBProcPtr) (GLuint index, const GLbyte *v);
-extern void (* glVertexAttrib4ubvARBProcPtr) (GLuint index, const GLubyte *v);
-extern void (* glVertexAttrib4usvARBProcPtr) (GLuint index, const GLushort *v);
-extern void (* glVertexAttrib4uivARBProcPtr) (GLuint index, const GLuint *v);
-extern void (* glVertexAttrib4NbvARBProcPtr) (GLuint index, const GLbyte *v);
-extern void (* glVertexAttrib4NsvARBProcPtr) (GLuint index, const GLshort *v);
-extern void (* glVertexAttrib4NivARBProcPtr) (GLuint index, const GLint *v);
-extern void (* glVertexAttrib4NubvARBProcPtr) (GLuint index, const GLubyte *v);
-extern void (* glVertexAttrib4NusvARBProcPtr) (GLuint index, const GLushort *v);
-extern void (* glVertexAttrib4NuivARBProcPtr) (GLuint index, const GLuint *v);
-extern void (* glVertexAttribPointerARBProcPtr) (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer);
-extern void (* glEnableVertexAttribArrayARBProcPtr) (GLuint index);
-extern void (* glDisableVertexAttribArrayARBProcPtr) (GLuint index);
-extern void (* glBindAttribLocationARBProcPtr) (GLhandleARB programObj, GLuint index, const GLcharARB *name);
-extern void (* glGetActiveAttribARBProcPtr) (GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei *length, GLint *size, GLenum *type, GLcharARB *name);
-extern GLint (* glGetAttribLocationARBProcPtr) (GLhandleARB programObj, const GLcharARB *name);
-extern void (* glGetVertexAttribdvARBProcPtr) (GLuint index, GLenum pname, GLdouble *params);
-extern void (* glGetVertexAttribfvARBProcPtr) (GLuint index, GLenum pname, GLfloat *params);
-extern void (* glGetVertexAttribivARBProcPtr) (GLuint index, GLenum pname, GLint *params);
-extern void (* glGetVertexAttribPointervARBProcPtr) (GLuint index, GLenum pname, GLvoid **pointer);
+typedef void (* glBindAttribLocationARBProcPtr) (GLhandleARB programObj, GLuint index, const GLcharARB *name);
+typedef void (* glGetActiveAttribARBProcPtr) (GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei *length, GLint *size, GLenum *type, GLcharARB *name);
+typedef GLint (* glGetAttribLocationARBProcPtr) (GLhandleARB programObj, const GLcharARB *name);
 #else
-extern void glVertexAttrib1fARB(GLuint index, GLfloat v0);
-extern void glVertexAttrib1sARB(GLuint index, GLshort v0);
-extern void glVertexAttrib1dARB(GLuint index, GLdouble v0);
-extern void glVertexAttrib2fARB(GLuint index, GLfloat v0, GLfloat v1);
-extern void glVertexAttrib2sARB(GLuint index, GLshort v0, GLshort v1);
-extern void glVertexAttrib2dARB(GLuint index, GLdouble v0, GLdouble v1);
-extern void glVertexAttrib3fARB(GLuint index, GLfloat v0, GLfloat v1, GLfloat v2);
-extern void glVertexAttrib3sARB(GLuint index, GLshort v0, GLshort v1, GLshort v2);
-extern void glVertexAttrib3dARB(GLuint index, GLdouble v0, GLdouble v1, GLdouble v2);
-extern void glVertexAttrib4fARB(GLuint index, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
-extern void glVertexAttrib4sARB(GLuint index, GLshort v0, GLshort v1, GLshort v2, GLshort v3);
-extern void glVertexAttrib4dARB(GLuint index, GLdouble v0, GLdouble v1, GLdouble v2, GLdouble v3);
-extern void glVertexAttrib4NubARB(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
-extern void glVertexAttrib1fvARB(GLuint index, const GLfloat *v);
-extern void glVertexAttrib1svARB(GLuint index, const GLshort *v);
-extern void glVertexAttrib1dvARB(GLuint index, const GLdouble *v);
-extern void glVertexAttrib2fvARB(GLuint index, const GLfloat *v);
-extern void glVertexAttrib2svARB(GLuint index, const GLshort *v);
-extern void glVertexAttrib2dvARB(GLuint index, const GLdouble *v);
-extern void glVertexAttrib3fvARB(GLuint index, const GLfloat *v);
-extern void glVertexAttrib3svARB(GLuint index, const GLshort *v);
-extern void glVertexAttrib3dvARB(GLuint index, const GLdouble *v);
-extern void glVertexAttrib4fvARB(GLuint index, const GLfloat *v);
-extern void glVertexAttrib4svARB(GLuint index, const GLshort *v);
-extern void glVertexAttrib4dvARB(GLuint index, const GLdouble *v);
-extern void glVertexAttrib4ivARB(GLuint index, const GLint *v);
-extern void glVertexAttrib4bvARB(GLuint index, const GLbyte *v);
-extern void glVertexAttrib4ubvARB(GLuint index, const GLubyte *v);
-extern void glVertexAttrib4usvARB(GLuint index, const GLushort *v);
-extern void glVertexAttrib4uivARB(GLuint index, const GLuint *v);
-extern void glVertexAttrib4NbvARB(GLuint index, const GLbyte *v);
-extern void glVertexAttrib4NsvARB(GLuint index, const GLshort *v);
-extern void glVertexAttrib4NivARB(GLuint index, const GLint *v);
-extern void glVertexAttrib4NubvARB(GLuint index, const GLubyte *v);
-extern void glVertexAttrib4NusvARB(GLuint index, const GLushort *v);
-extern void glVertexAttrib4NuivARB(GLuint index, const GLuint *v);
-extern void glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer);
-extern void glEnableVertexAttribArrayARB(GLuint index);
-extern void glDisableVertexAttribArrayARB(GLuint index);
 extern void glBindAttribLocationARB(GLhandleARB programObj, GLuint index, const GLcharARB *name);
 extern void glGetActiveAttribARB(GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei *length, GLint *size, GLenum *type, GLcharARB *name);
 extern GLint glGetAttribLocationARB(GLhandleARB programObj, const GLcharARB *name);
-extern void glGetVertexAttribdvARB(GLuint index, GLenum pname, GLdouble *params);
-extern void glGetVertexAttribfvARB(GLuint index, GLenum pname, GLfloat *params);
-extern void glGetVertexAttribivARB(GLuint index, GLenum pname, GLint *params);
-extern void glGetVertexAttribPointervARB(GLuint index, GLenum pname, GLvoid **pointer);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
@@ -2919,6 +3017,14 @@ extern GLboolean glUnmapBufferARB(GLenum target);
 extern void glGetBufferParameterivARB(GLenum target, GLenum pname, GLint *params);
 extern void glGetBufferPointervARB(GLenum target, GLenum pname, GLvoid **params);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_ARB_draw_buffers
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glDrawBuffersARBProcPtr) (GLsizei n, const GLenum *bufs);
+#else
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+extern void glDrawBuffersARB(GLsizei n, const GLenum *bufs);
 #endif
 
 
@@ -3480,6 +3586,46 @@ extern void glBlendEquationSeparateEXT(GLenum modeRGB, GLenum modeAlpha);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
+#if GL_EXT_framebuffer_object
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef GLboolean (* glIsRenderbufferEXTProcPtr) (GLuint renderbuffer);
+typedef void (* glBindRenderbufferEXTProcPtr) (GLenum target, GLuint renderbuffer);
+typedef void (* glDeleteRenderbuffersEXTProcPtr) (GLsizei n, const GLuint *renderbuffers);
+typedef void (* glGenRenderbuffersEXTProcPtr) (GLsizei n, GLuint *renderbuffers);
+typedef void (* glRenderbufferStorageEXTProcPtr) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height);
+typedef void (* glGetRenderbufferParameterivEXTProcPtr) (GLenum target, GLenum pname, GLint *params);
+typedef GLboolean (* glIsFramebufferEXTProcPtr) (GLuint framebuffer);
+typedef void (* glBindFramebufferEXTProcPtr) (GLenum target, GLuint framebuffer);
+typedef void (* glDeleteFramebuffersEXTProcPtr) (GLsizei n, const GLuint *framebuffers);
+typedef void (* glGenFramebuffersEXTProcPtr) (GLsizei n, GLuint *framebuffers);
+typedef GLenum (* glCheckFramebufferStatusEXTProcPtr) (GLenum target);
+typedef void (* glFramebufferTexture1DEXTProcPtr) (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
+typedef void (* glFramebufferTexture2DEXTProcPtr) (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
+typedef void (* glFramebufferTexture3DEXTProcPtr) (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset);
+typedef void (* glFramebufferRenderbufferEXTProcPtr) (GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer);
+typedef void (* glGetFramebufferAttachmentParameterivEXTProcPtr) (GLenum target, GLenum attachment, GLenum pname, GLint *params);
+typedef void (* glGenerateMipmapEXTProcPtr) (GLenum target);
+#else
+extern GLboolean glIsRenderbufferEXT(GLuint renderbuffer);
+extern void glBindRenderbufferEXT(GLenum target, GLuint renderbuffer);
+extern void glDeleteRenderbuffersEXT(GLsizei n, const GLuint *renderbuffers);
+extern void glGenRenderbuffersEXT(GLsizei n, GLuint *renderbuffers);
+extern void glRenderbufferStorageEXT(GLenum target, GLenum internalformat, GLsizei width, GLsizei height);
+extern void glGetRenderbufferParameterivEXT(GLenum target, GLenum pname, GLint *params);
+extern GLboolean glIsFramebufferEXT(GLuint framebuffer);
+extern void glBindFramebufferEXT(GLenum target, GLuint framebuffer);
+extern void glDeleteFramebuffersEXT(GLsizei n, const GLuint *framebuffers);
+extern void glGenFramebuffersEXT(GLsizei n, GLuint *framebuffers);
+extern GLenum glCheckFramebufferStatusEXT(GLenum target);
+extern void glFramebufferTexture1DEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
+extern void glFramebufferTexture2DEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
+extern void glFramebufferTexture3DEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset);
+extern void glFramebufferRenderbufferEXT(GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer);
+extern void glGetFramebufferAttachmentParameterivEXT(GLenum target, GLenum attachment, GLenum pname, GLint *params);
+extern void glGenerateMipmapEXT(GLenum target);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
 
 #if GL_APPLE_texture_range
 #ifdef GL_GLEXT_FUNCTION_POINTERS
@@ -3544,10 +3690,14 @@ extern void glFinishObjectAPPLE(GLenum object, GLuint name);
 typedef void (* glElementPointerAPPLEProcPtr) (GLenum type, const GLvoid *pointer);
 typedef void (* glDrawElementArrayAPPLEProcPtr) (GLenum mode, GLint first, GLsizei count);
 typedef void (* glDrawRangeElementArrayAPPLEProcPtr) (GLenum mode, GLuint start, GLuint end, GLint first, GLsizei count);
+typedef void (* glMultiDrawElementArrayAPPLEProcPtr) (GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
+typedef void (* glMultiDrawRangeElementArrayAPPLEProcPtr) (GLenum mode, GLuint start, GLuint end, const GLint *first, const GLsizei *count, GLsizei primcount);
 #else
 extern void glElementPointerAPPLE(GLenum type, const GLvoid *pointer);
 extern void glDrawElementArrayAPPLE(GLenum mode, GLint first, GLsizei count);
 extern void glDrawRangeElementArrayAPPLE(GLenum mode, GLuint start, GLuint end, GLint first, GLsizei count);
+extern void glMultiDrawElementArrayAPPLE(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
+extern void glMultiDrawRangeElementArrayAPPLE(GLenum mode, GLuint start, GLuint end, const GLint *first, const GLsizei *count, GLsizei primcount);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
@@ -3580,6 +3730,16 @@ extern void glMapVertexAttrib1dAPPLE(GLuint index, GLuint size, GLdouble u1, GLd
 extern void glMapVertexAttrib1fAPPLE(GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat *points);
 extern void glMapVertexAttrib2dAPPLE(GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint ustride, GLint uorder, GLdouble v1, GLdouble v2, GLint vstride, GLint vorder, const GLdouble *points);
 extern void glMapVertexAttrib2fAPPLE(GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, const GLfloat *points);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_APPLE_flush_buffer_range
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glBufferParameteriAPPLEProcPtr) (GLenum target, GLenum pname, GLint param);
+typedef void (* glFlushMappedBufferRangeAPPLEProcPtr) (GLenum target, GLintptr offset, GLsizeiptr size);
+#else
+extern void glBufferParameteriAPPLE(GLenum target, GLenum pname, GLint param);
+extern void glFlushMappedBufferRangeAPPLE(GLenum target, GLintptr offset, GLsizeiptr size);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 

@@ -1,7 +1,7 @@
 /*
 	NSSavePanel.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2004, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -24,7 +24,7 @@ typedef struct __SPFlags {
     unsigned int reserved:27;
 } _SPFlags;
 
-typedef struct NSSavePanelAuxiliary NSSavePanelAuxiliaryOpaque;
+@class NSSavePanelAuxiliary;
 
 @interface NSSavePanel : NSPanel {
     NSNavView *_navView;
@@ -36,7 +36,7 @@ typedef struct NSSavePanelAuxiliary NSSavePanelAuxiliaryOpaque;
     IBOutlet NSTextField  *_messageTextField;
     IBOutlet NSView       *_savePane;
     IBOutlet NSBox        *_saveNavSeparatorBox;
-    IBOutlet NSView         *_nameFieldContainer;
+    IBOutlet NSView         *_savePaneTopPartsContainer;
     IBOutlet NSTextField      *_nameField;
     IBOutlet NSTextField      *_nameFieldLabel;
     IBOutlet NSButton         *_expansionButton;
@@ -56,7 +56,7 @@ typedef struct NSSavePanelAuxiliary NSSavePanelAuxiliaryOpaque;
 
     _SPFlags	_spFlags;
     
-    NSSavePanelAuxiliaryOpaque *_spAuxiliaryStorage;
+    NSSavePanelAuxiliary   *_spAuxiliaryStorage;
     
     char _reserved[5];
 

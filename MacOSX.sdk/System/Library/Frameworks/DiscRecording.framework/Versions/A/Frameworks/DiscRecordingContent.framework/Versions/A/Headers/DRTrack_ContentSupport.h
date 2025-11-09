@@ -32,11 +32,11 @@
 /* ------------------------------------------------------------------------------ */
 /* Preconfigured track types */
 /*!
-	@category DRTrack (AudioContentCreation)
-	@discussion This category on DRTrack creates a track configured to burn audio data to disc.
-				It impelements two methods @link //apple_ref/occ/instm/DRTrack(DataContentCreation)/trackForAudioOfLength%58producer%58 trackForAudioOfLength:producer: @/link.
-				and @link //apple_ref/occ/instm/DRTrack(DataContentCreation)/trackForAudioFile%58 trackForAudioFile: @/link which
-				create and returns a fully configured track to the caller.
+	@category DRTrack(AudioContentCreation)
+	@discussion This category on @link //apple_ref/occ/cl/DRTrack DRTrack @/link creates a track configured to burn audio data to disc.
+				It implements two methods @link //apple_ref/occ/clm/DRTrack/trackForAudioOfLength:producer: trackForAudioOfLength:producer: @/link
+				and @link //apple_ref/occ/clm/DRTrack/trackForAudioFile: trackForAudioFile: @/link which
+				create and return a fully configured track to the caller.
 */
 @interface DRTrack (AudioContentCreation)
 
@@ -54,6 +54,7 @@
 
 + (DRTrack*) trackForAudioOfLength:(DRMSF*)length producer:(id)producer;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 /*!
 	@method			trackForAudioFile:
 	@abstract		Creates a DRTrack capable of burning RedBook CD audio from a QuickTime readable file.
@@ -65,7 +66,6 @@
 							QuickTime. 
 	@result			An autoreleased DRTrack
 */
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 + (DRTrack*) trackForAudioFile:(NSString*)path;
 #endif
 
@@ -74,8 +74,8 @@
 
 /*!
 	@category DRTrack (DataContentCreation)
-	@discussion	This category on DRTrack creates a custom DRTrack instance which is set up to burn
-				a DRFolder to disc. It implements only one method, @link //apple_ref/occ/instm/DRTrack(DataContentCreation)/trackForRootFolder%58 trackForRootFolder: @/link which
+	@discussion	This category on @link //apple_ref/occ/cl/DRTrack DRTrack @/link creates a track instance which is set up to burn
+				a @link //apple_ref/occ/cl/DRFolder DRFolder @/link to disc. It implements only one method, @link //apple_ref/occ/clm/DRTrack/trackForRootFolder: trackForRootFolder: @/link which
 				creates and returns a fully configured track to the caller.
 */
 @interface DRTrack (DataContentCreation)
@@ -84,7 +84,7 @@
 	@method			trackForRootFolder:
 	@abstract		Creates a DRTrack capable of burning a folder to disc.
 	@discussion		Additional track properties can be set controlling the various 
-					filesystems to be generated. See the documentation for DRTrack.h for more info.
+					filesystems to be generated. See the documentation for @link //apple_ref/occ/cl/DRTrack DRTrack @/link for more info.
 	@param			rootFolder		The root of the volume to be created.
 	@result			An autoreleased DRTrack
 */

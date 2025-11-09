@@ -3,9 +3,9 @@
  
      Contains:   Data types for Finder AppleEvents
  
-     Version:    OSA-63~8
+     Version:    OSA-97~629
  
-     Copyright:  © 1991-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1991-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

@@ -1,5 +1,5 @@
 /* CoreGraphics - CGDataProvider.h
- * Copyright (c) 1999-2000 Apple Computer, Inc.
+ * Copyright (c) 1999-2004 Apple Computer, Inc.
  * All rights reserved.
  */
 
@@ -89,7 +89,7 @@ typedef struct CGDataProviderDirectAccessCallbacks CGDataProviderDirectAccessCal
 
 /* Return the CFTypeID for CGDataProviderRefs. */
 
-CG_EXTERN CFTypeID CGDataProviderGetTypeID(void);
+CG_EXTERN CFTypeID CGDataProviderGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* Create a sequential-access data provider using `callbacks' to provide
  * the data.  `info' is passed to each of the callback functions. */
@@ -101,11 +101,19 @@ CG_EXTERN CGDataProviderRef CGDataProviderCreate(void *info, const CGDataProvide
 
 CG_EXTERN CGDataProviderRef CGDataProviderCreateDirectAccess(void *info, size_t size, const CGDataProviderDirectAccessCallbacks *callbacks);
 
+/* The callback used by `CGDataProviderCreateWithData'. */
+
+typedef void (*CGDataProviderReleaseDataCallback)(void *info, const void *data, size_t size);
+
 /* Create a direct-access data provider using `data', an array of `size'
  * bytes.  `releaseData' is called when the data provider is freed, and is
  * passed `info' as its first argument. */
 
-CG_EXTERN CGDataProviderRef CGDataProviderCreateWithData(void *info, const void *data, size_t size, void (*releaseData)(void *info, const void *data, size_t size));
+CG_EXTERN CGDataProviderRef CGDataProviderCreateWithData(void *info, const void *data, size_t size, CGDataProviderReleaseDataCallback releaseData);
+
+/* Create a direct-access data provider which reads from `data'. */
+
+CG_EXTERN CGDataProviderRef CGDataProviderCreateWithCFData(CFDataRef data) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* Create a data provider using `url'. */
 
@@ -121,7 +129,7 @@ CG_EXTERN void CGDataProviderRelease(CGDataProviderRef provider);
 
 /** DEPRECATED FUNCTIONS **/
 
-/* Don't use this function; use CFDataProviderCreateWithURL instead. */
+/* Don't use this function; use CGDataProviderCreateWithURL instead. */
 
 CG_EXTERN CGDataProviderRef CGDataProviderCreateWithFilename(const char *filename);
 

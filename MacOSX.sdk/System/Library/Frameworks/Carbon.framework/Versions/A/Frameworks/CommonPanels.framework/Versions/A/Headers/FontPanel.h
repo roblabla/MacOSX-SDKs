@@ -3,9 +3,9 @@
  
      Contains:   Carbon Font Panel package Interfaces.
  
-     Version:    CommonPanels-70~169
+     Version:    CommonPanels-73.2~861
  
-     Copyright:  © 2002-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 2002-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -354,10 +354,10 @@ FPShowHideFontPanel(void)                                     AVAILABLE_MAC_OS_X
  */
 extern OSStatus 
 SetFontInfoForSelection(
-  OSType        iStyleType,
-  UInt32        iNumStyles,
-  void *        iStyles,
-  HIObjectRef   iFPEventTarget)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  OSType           iStyleType,
+  UInt32           iNumStyles,
+  void *           iStyles,
+  EventTargetRef   iFPEventTarget)                            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

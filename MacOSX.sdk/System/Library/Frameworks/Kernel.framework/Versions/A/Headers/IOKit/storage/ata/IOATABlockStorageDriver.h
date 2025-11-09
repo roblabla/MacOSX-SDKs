@@ -39,6 +39,8 @@
 #include <IOKit/ata/IOATADevice.h>
 #include <IOKit/ata/IOATATypes.h>
 
+#include <IOKit/IOPolledInterface.h>
+
 // Forward class declaration
 class IOATABlockStorageDriver;
 
@@ -161,21 +163,33 @@ protected:
 	// binary compatibility instance variable expansion
 	struct ExpansionData
 	{
-		bool			fUseExtendedLBA;
-		bool			fPowerAckInProgress;
-		IONotifier *	fPowerDownNotifier;
-		IOSimpleLock *  fParkLock;
-		IOATACommand *  fParkCommand;
-		UInt32			fParkDelayLoops;
+		bool					fUseExtendedLBA;
+		bool					fPowerAckInProgress;
+		IONotifier *			fPowerDownNotifier;
+		
+		IOSimpleLock *			fParkLock;
+		IOATACommand *			fParkCommand;
+		UInt32					fParkDelayLoops;
+		
+		IOATACommand *			fPolledIOCommand;
+		IOPolledCompletion		fPolledIOCompletion;
+		bool					fPreventSleepBeforePolledCommand;
+		
 	};
 	ExpansionData * reserved;
 	
-	#define fUseExtendedLBA		reserved->fUseExtendedLBA
-	#define fPowerAckInProgress	reserved->fPowerAckInProgress
-	#define fPowerDownNotifier	reserved->fPowerDownNotifier
-	#define fParkLock			reserved->fParkLock
-	#define fParkCommand		reserved->fParkCommand
-	#define fParkDelayLoops		reserved->fParkDelayLoops
+	#define fUseExtendedLBA						reserved->fUseExtendedLBA
+	#define fPowerAckInProgress					reserved->fPowerAckInProgress
+	#define fPowerDownNotifier					reserved->fPowerDownNotifier
+	
+	#define fParkLock							reserved->fParkLock
+	#define fParkCommand						reserved->fParkCommand
+	#define fParkDelayLoops						reserved->fParkDelayLoops
+	
+	#define fPolledIOCommand					reserved->fPolledIOCommand
+	#define fPolledIOCompletion					reserved->fPolledIOCompletion
+	#define fPreventSleepBeforePolledCommand	reserved->fPreventSleepBeforePolledCommand
+	
 
 public:
 		
@@ -197,6 +211,8 @@ protected:
 
 	static void 	sHandleCommandCompletion ( IOATACommand * cmd );
 
+	static void		sCompleteZeroBlockTransfer ( IOATACommand * cmd );
+	
 	static void 	sHandleReset ( IOATACommand * cmd );
 	
 	static void 	sPowerManagement ( thread_call_param_t whichDevice );
@@ -224,6 +240,7 @@ protected:
 	static void		sSaveStateData ( IOATACommand * cmd );
 	
 	static IOReturn	sValidateIdentifyData ( UInt8 * deviceIdentifyData );
+	
 	
 	// The sSetWakeupResetOccurred method is used to safely set member variables
 	// behind the command gate.
@@ -371,7 +388,7 @@ protected:
 	
 	// The setWakeupResetOccurred method is used to safely set/clear the reset flag.
 	virtual void			setWakeupResetOccurred ( bool resetOccurred );
-
+	
 	
 public:
 	
@@ -413,7 +430,7 @@ public:
 	virtual IOReturn doSyncReadWrite ( 	IOMemoryDescriptor *	buffer,
 										UInt32					block,
 										UInt32					nblks );
-	
+										
 	//-----------------------------------------------------------------------
 	// Eject the media in the drive.
 	
@@ -588,6 +605,41 @@ public:
 	OSMetaClassDeclareReservedUnused ( IOATABlockStorageDriver, 14 );
 	OSMetaClassDeclareReservedUnused ( IOATABlockStorageDriver, 15 );
 	OSMetaClassDeclareReservedUnused ( IOATABlockStorageDriver, 16 );
+	
+	
+public:
+	
+	IOReturn doPolledIO (   UInt8					polledIOSelector,
+							IOMemoryDescriptor *	buffer,
+							UInt32					bufferOffset,
+							UInt64					deviceOffset,
+							UInt64					length,
+							IOPolledCompletion		completion );
+	
+	
+protected:
+	
+	void setupPolledIOReadWriteTaskFile (   IOATACommand *			cmd,
+											IOMemoryDescriptor *	buffer,
+											bool					isWrite,
+											UInt64					offset,
+											UInt32					block,
+											UInt32					nblks );
+	
+	IOReturn asyncPolledExecute (   IOATACommand *	  		cmd,
+									IOPolledCompletion		completion,
+									UInt32			  		timeout );
+	
+	
+	IOReturn doPolledSynchronizeCache ( void );
+
+	IOReturn doPolledReset ( void );
+	
+	IOATACommand * ataCommandPolledFlushCache ( void );
+	
+	IOReturn issuePolledSleepCommand ( void );
+	
+	static void sHandlePolledCommandCompletion ( IOATACommand * cmd );
 	
 };
 

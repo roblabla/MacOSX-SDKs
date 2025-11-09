@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2003 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -20,31 +20,6 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef __OPEN_SOURCE__
-/*
- *
- *	$Id: IOUSBController.h,v 1.36.36.1 2004/07/28 03:46:49 nano Exp $
- *
- *	$Log: IOUSBController.h,v $
- *	Revision 1.36.36.1  2004/07/28 03:46:49  nano
- *	Bring TOT EHCI driver into PantherUpdate for Strider
- *	
- *	Revision 1.36  2003/08/20 19:41:40  nano
- *	
- *	Bug #:
- *	New version's of Nima's USB Prober (2.2b17)
- *	3382540  Panther: Ejecting a USB CardBus card can freeze a machine
- *	3358482  Device Busy message with Modems and IOUSBFamily 201.2.14 after sleep
- *	3385948  Need to implement device recovery on High Speed Transaction errors to full speed devices
- *	3377037  USB EHCI: returnTransactions can cause unstable queue if transactions are aborted
- *	
- *	Also, updated most files to use the id/log functions of cvs
- *	
- *	Submitted by: nano
- *	Reviewed by: rhoads/barryt/nano
- *	
- */
-#endif
 #ifndef _IOKIT_IOUSBCONTROLLER_H
 #define _IOKIT_IOUSBCONTROLLER_H
 
@@ -82,12 +57,19 @@ enum
     kErrataCMDDisableTestMode		= (1 << 0),		// turn off UHCI test mode
     kErrataOnlySinglePageTransfers	= (1 << 1),		// Don't cross page boundaries in a single transfer
     kErrataRetryBufferUnderruns		= (1 << 2),		// Don't cross page boundaries in a single transfer
-    kErrataLSHSOpti			= (1 << 3),		// Don't cross page boundaries in a single transfer
+    kErrataLSHSOpti					= (1 << 3),		// Don't cross page boundaries in a single transfer
     kErrataDisableOvercurrent		= (1 << 4),		// Always set the NOCP bit in rhDescriptorA register
     kErrataLucentSuspendResume		= (1 << 5),		// Don't allow port suspend at the root hub
     kErrataNeedsWatchdogTimer		= (1 << 6),		// Use Watchdog timer to reset confused controllers
     kErrataNeedsPortPowerOff		= (1 << 7),		// Power off the ports and back on again to clear weird status.
-    kErrataAgereEHCIAsyncSched		= (1 << 8)		// needs workaround for Async Sched bug
+    kErrataAgereEHCIAsyncSched		= (1 << 8),		// needs workaround for Async Sched bug
+    kErrataNECOHCIIsochWraparound	= (1 << 9),		// needs workaround for NEC isoch buffer wraparound problem
+	kErrataNECIncompleteWrite		= (1 << 10),	// needs workaround for NEC bits not sticking (errata IBB-2UE-00030 Jun 23 2005)
+	kErrataICH6PowerSequencing		= (1 << 11),	// needs special power sequencing for early Transition machines
+	kErrataICH7ISTBuffer			= (1 << 12),	// buffer for Isochronous Scheduling Threshold
+	kErrataUHCISupportsOvercurrent	= (1 << 13),	// UHCI controller supports overcurrent detection
+	kErrataNeedsOvercurrentDebounce = (1 << 14),	// The overcurrent indicator should be debounced by 10ms
+	kErrataSupportsPortResumeEnable = (1 << 15)		// UHCI has resume enable bits at config address 0xC4
 };
 
 enum
@@ -187,8 +169,9 @@ protected:
         UInt32			_currentSizeOfCommandPool;
         UInt32			_currentSizeOfIsocCommandPool;
         UInt8			_controllerSpeed;	// Controller speed, passed down for splits
-        thread_call_t		_terminatePCCardThread;
+        thread_call_t	_terminatePCCardThread;
         bool			_addressPending[128];
+		SInt32			_activeIsochTransfers;				// isochronous transfers in the queue
     };
     ExpansionData *_expansionData;
 
@@ -208,12 +191,16 @@ protected:
 
     // The following methods do not use and upper case initial letter because they are part of IOKit
     //
+
+public:
     virtual bool 		init( OSDictionary *  propTable );
     virtual bool 		start( IOService *  provider );
     virtual void 		stop( IOService * provider );
     virtual bool 		finalize(IOOptionBits options);
     virtual IOReturn 		message( UInt32 type, IOService * provider,  void * argument = 0 );
- 
+
+protected:
+		
     IOReturn			getNubResources( IOService *  regEntry );
 
     virtual UInt32 		GetErrataBits(
@@ -331,11 +318,20 @@ protected:
     // Invokes the specified completion action of the request.  If
     // the completion action is unspecified, no action is taken.
     void 			Complete(
-                                            IOUSBCompletion	completion,
-                                            IOReturn		status,
-                                            UInt32		actualByteCount = 0 );
+                     IOUSBCompletion	completion,
+                     IOReturn		status,
+                     UInt32		actualByteCount = 0 );
 
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    // Invokes the specified completion action of the request.  If
+    // the completion action is unspecified, no action is taken.
+    void	CompleteWithTimeStamp (
+                                IOUSBCompletionWithTimeStamp		completion,
+                                IOReturn				status,
+                                UInt32					actualByteCount,
+                                AbsoluteTime				timeStamp);
 
+    
 
     //
     // UIM methods
@@ -1079,11 +1075,24 @@ public:
                                                         UInt32			updateFrequency);
 
 
-    OSMetaClassDeclareReservedUnused(IOUSBController,  17);
+    OSMetaClassDeclareReservedUsed(IOUSBController,  17);
+    virtual IOReturn 		CheckForDisjointDescriptor(IOUSBCommand *command, UInt16 maxPacketSize);
+    
+#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
+    /*!
+		@function UIMCreateIsochTransfer
+	 @abstract UIM function, Do a transfer on an Isocchronous endpoint.
+	 @param command  an IOUSBIsocCommand object with all the necessary information
+	 */
+    OSMetaClassDeclareReservedUsed(IOUSBController,  18);
+	virtual IOReturn UIMCreateIsochTransfer(IOUSBIsocCommand *command);
+#else
     OSMetaClassDeclareReservedUnused(IOUSBController,  18);
+#endif
+
     OSMetaClassDeclareReservedUnused(IOUSBController,  19);
     
-private:
+protected:
     void	IncreaseIsocCommandPool();
     void 	IncreaseCommandPool();
     void	ParsePCILocation(const char *str, int *deviceNum, int *functionNum);

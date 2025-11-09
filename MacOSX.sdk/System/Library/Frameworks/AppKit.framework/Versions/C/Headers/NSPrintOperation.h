@@ -1,7 +1,7 @@
 /*
 	NSPrintOperation.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -60,10 +60,16 @@ APPKIT_EXTERN NSString *NSPrintOperationExistsException;
 - (void)setCanSpawnSeparateThread:(BOOL)canSpawnSeparateThread;
 - (BOOL)canSpawnSeparateThread;
 
-/* Control whether the print panel is shown during the operation (doesn't necessarily include alerts).
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+
+/* Control whether the print and progress panels are shown during the operation.
 */
-- (void)setShowPanels:(BOOL)flag;
-- (BOOL)showPanels;
+- (void)setShowsPrintPanel:(BOOL)flag;
+- (BOOL)showsPrintPanel;
+- (void)setShowsProgressPanel:(BOOL)flag;
+- (BOOL)showsProgressPanel;
+
+#endif
 
 /* Allow developers to supply their own Print panel if they like.
 */
@@ -75,7 +81,7 @@ APPKIT_EXTERN NSString *NSPrintOperationExistsException;
 - (void)setAccessoryView:(NSView *)aView;
 - (NSView *)accessoryView;
 
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 
 // Set or get a string that provides a hint about the type of print job.  This controls the set of items that appear in the Presets menu of the print panel presented by this operation, if it presents one.  The string must be one of the job style hint strings declared in NSPrintPanel.h, or nil to provide no hint.
 - (void)setJobStyleHint:(NSString *)hint;
@@ -121,5 +127,13 @@ APPKIT_EXTERN NSString *NSPrintOperationExistsException;
 */
 - (void)cleanUpOperation;
 
+@end
+
+@interface NSPrintOperation(NSDeprecated)
+
+/* Methods that were deprecated in Mac OS 10.4. Use the new -setShowsPrintPanel:/-showsPrintPanel and -setShowsProgressPanel:/-showsProgressPanel methods instead.
+*/
+- (void)setShowPanels:(BOOL)flag;
+- (BOOL)showPanels;
 
 @end

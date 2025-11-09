@@ -1,24 +1,37 @@
 /*	NSError.h
-	Copyright 2003, Apple, Inc. All rights reserved.
+	Copyright (c) 2003-2005, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
 #if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
-@class NSDictionary;
+@class NSDictionary, NSArray;
 
-// Key in userInfo. In simple cases, for subsystems wishing to provide their error description up-front. Value should be a NSString.
-FOUNDATION_EXPORT NSString *const NSLocalizedDescriptionKey	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+// Predefined domain for errors from most AppKit and Foundation APIs.
+FOUNDATION_EXPORT NSString *const NSCocoaErrorDomain		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+// Other predefined domains; value of "code" will correspond to preexisting values in these domains.
+FOUNDATION_EXPORT NSString *const NSPOSIXErrorDomain		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString *const NSOSStatusErrorDomain		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString *const NSMachErrorDomain		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 // Key in userInfo. A recommended standard way to embed NSErrors from underlying calls. The value of this key should be an NSError.
 FOUNDATION_EXPORT NSString *const NSUnderlyingErrorKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
+// Keys in userInfo, for subsystems wishing to provide their error messages up-front.
+FOUNDATION_EXPORT NSString *const NSLocalizedDescriptionKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;  // NSString
+FOUNDATION_EXPORT NSString *const NSLocalizedFailureReasonErrorKey      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // NSString
+FOUNDATION_EXPORT NSString *const NSLocalizedRecoverySuggestionErrorKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // NSString
+FOUNDATION_EXPORT NSString *const NSLocalizedRecoveryOptionsErrorKey    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // NSArray of NSStrings
+FOUNDATION_EXPORT NSString *const NSRecoveryAttempterErrorKey		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // Instance of a subclass of NSObject that conforms to the NSErrorRecoveryAttempting informal protocol
 
-// Predefined domains; value of "code" will correspond to preexisting values in these domains.
-FOUNDATION_EXPORT NSString *const NSPOSIXErrorDomain		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-FOUNDATION_EXPORT NSString *const NSOSStatusErrorDomain		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-FOUNDATION_EXPORT NSString *const NSMachErrorDomain		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+// Other standard keys in userInfo, for various error codes
+FOUNDATION_EXPORT NSString *const NSStringEncodingErrorKey  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // NSNumber containing NSStringEncoding
+FOUNDATION_EXPORT NSString *const NSURLErrorKey		    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // NSURL
+FOUNDATION_EXPORT NSString *const NSFilePathErrorKey	    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // NSString
+
 
 
 @interface NSError : NSObject <NSCopying, NSCoding> {
@@ -43,11 +56,51 @@ FOUNDATION_EXPORT NSString *const NSMachErrorDomain		AVAILABLE_MAC_OS_X_VERSION_
 */
 - (NSDictionary *)userInfo;
 
-/* This method can be overridden by subclassers wishing to present better error strings.  By default this looks for NSLocalizedDescriptionKey in the user info. If not present, it manufactures a string from the domain and code. Also, for some of the built-in domains it knows about, it might try to fetch an error string by calling a domain-specific function. In the absence of a custom error string, the manufactured one might not be suitable for presentation to the user, but can be used in logs or debugging. 
+/* The primary user-presentable message for the error. This method can be overridden by subclassers wishing to present better error strings.  By default this looks for NSLocalizedDescriptionKey in the user info. If not present, it manufactures a string from the domain and code. Also, for some of the built-in domains it knows about, it might try to fetch an error string by calling a domain-specific function. In the absence of a custom error string, the manufactured one might not be suitable for presentation to the user, but can be used in logs or debugging. 
 */
 - (NSString *)localizedDescription;
 
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+/* Return a complete sentence which describes why the operation failed. In many cases this will be just the "because" part of the error message (but as a complete sentence, which makes localization easier). This will return nil if string is not available. Default implementation of this will pick up the value of the NSLocalizedFailureReasonErrorKey from the userInfo dictionary.
+*/
+- (NSString *)localizedFailureReason;
+
+/* Return the string that can be displayed as the "informative" (aka "secondary") message on an alert panel. Returns nil if no such string is available. Default implementation of this will pick up the value of the NSLocalizedRecoverySuggestionErrorKey from the userInfo dictionary.
+*/
+- (NSString *)localizedRecoverySuggestion;
+
+/* Return titles of buttons that are appropriate for displaying in an alert. These should match the string provided as a part of localizedRecoverySuggestion.  The first string would be the title of the right-most and default button, the second one next to it, and so on. If used in an alert the corresponding default return values are NSAlertFirstButtonReturn + n. Default implementation of this will pick up the value of the NSLocalizedRecoveryOptionsKey from the userInfo dictionary.  nil return usually implies no special suggestion, which would imply a single "OK" button.
+*/
+- (NSArray *)localizedRecoveryOptions;
+
+/* Return an object that conforms to the NSErrorRecoveryAttempting informal protocol. The recovery attempter must be an object that can correctly interpret an index into the array returned by -localizedRecoveryOptions. The default implementation of this method merely returns [[self userInfo] objectForKey:NSRecoveryAttempterErrorKey].
+*/
+- (id)recoveryAttempter;
+
+#endif
+
 @end
+
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+@interface NSObject(NSErrorRecoveryAttempting)
+
+/* Given that an error alert has been presented document-modally to the user, and the user has chosen one of the error's recovery options, attempt recovery from the error, and send the selected message to the specified delegate. The option index is an index into the error's array of localized recovery options. The method selected by didRecoverSelector must have the same signature as:
+
+    - (void)didPresentErrorWithRecovery:(BOOL)didRecover contextInfo:(void *)contextInfo;
+
+The value passed for didRecover must be YES if error recovery was completely successful, NO otherwise.
+*/
+- (void)attemptRecoveryFromError:(NSError *)error optionIndex:(unsigned int)recoveryOptionIndex delegate:(id)delegate didRecoverSelector:(SEL)didRecoverSelector contextInfo:(void *)contextInfo;
+
+/* Given that an error alert has been presented applicaton-modally to the user, and the user has chosen one of the error's recovery options, attempt recovery from the error, and return YES if error recovery was completely successful, NO otherwise. The recovery option index is an index into the error's array of localized recovery options.
+*/
+- (BOOL)attemptRecoveryFromError:(NSError *)error optionIndex:(unsigned int)recoveryOptionIndex;
+
+@end
+
+#endif
 
 #endif
 

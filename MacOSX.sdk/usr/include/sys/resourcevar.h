@@ -102,19 +102,6 @@ struct plimit {
 	int	p_refcnt;		/* number of references */
 };
 
-/* add user profiling from AST */
-#define	ADDUPROF(p)							\
-	addupc_task(p,							\
-	    (p)->p_stats->p_prof.pr_addr, (p)->p_stats->p_prof.pr_ticks)
-
-#ifdef KERNEL
-void	 addupc_intr __P((struct proc *p, u_long pc, u_int ticks));
-void	 addupc_task __P((struct proc *p, u_long pc, u_int ticks));
-void	 calcru __P((struct proc *p, struct timeval *up, struct timeval *sp,
-	    struct timeval *ip));
-void	 ruadd __P((struct rusage *ru, struct rusage *ru2));
-struct plimit *limcopy __P((struct plimit *lim));
-#endif /* KERNEL */
 
 #endif /* __APPLE_API_PRIVATE */
 

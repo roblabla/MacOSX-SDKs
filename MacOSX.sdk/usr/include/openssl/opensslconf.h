@@ -18,6 +18,9 @@
 #ifndef OPENSSL_THREADS
 # define OPENSSL_THREADS
 #endif
+#ifndef OPENSSL_NO_ASM
+# define OPENSSL_NO_ASM
+#endif
 
 /* The OPENSSL_NO_* macros are also defined as NO_* if the application
    asks for it.  This is a transient feature that is provided for those
@@ -35,7 +38,11 @@
 /* crypto/opensslconf.h.in */
 
 /* Generate 80386 code? */
+#if defined(__i386__)                                            
+#define I386_ONLY
+#else /* !__i386__ */
 #undef I386_ONLY
+#endif /* __i386__ */
 
 #if !(defined(VMS) || defined(__VMS)) /* VMS uses logical names instead */
 #if defined(HEADER_CRYPTLIB_H) && !defined(OPENSSLDIR)
@@ -100,8 +107,15 @@
  * EIGHT_BIT but I don't care since I've only used this mode
  * for debuging the bignum libraries */
 #undef SIXTY_FOUR_BIT_LONG
+
+#ifdef __LP64__
+#define SIXTY_FOUR_BIT
+#undef THIRTY_TWO_BIT
+#else
 #undef SIXTY_FOUR_BIT
 #define THIRTY_TWO_BIT
+#endif /* __LP64__ */
+
 #undef SIXTEEN_BIT
 #undef EIGHT_BIT
 #endif

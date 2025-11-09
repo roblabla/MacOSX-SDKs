@@ -3,9 +3,9 @@
  
      Contains:   Dialog Manager interfaces.
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -71,6 +71,7 @@
 #define kStdAlertDoNotAnimateOnDefault 	0x02
 #define kStdAlertDoNotAnimateOnCancel 	0x04
 #define kStdAlertDoNotAnimateOnOther 	0x08
+#define kStdAlertDoNotCloseOnHelp 		0x10
 
 
 /*----------------------------wctb ¥ Alert Color Lookup Table--------------------------*/

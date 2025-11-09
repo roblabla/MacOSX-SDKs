@@ -3,9 +3,9 @@
  
      Contains:   AppleEvent Data Model Interfaces.
  
-     Version:    AppleEvents-287~1
+     Version:    AppleEvents-316.2~623
  
-     Copyright:  © 1996-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1996-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -36,7 +36,27 @@ extern "C" {
 /* Apple event descriptor types */
 enum {
   typeBoolean                   = 'bool',
-  typeChar                      = 'TEXT'
+  typeChar                      = 'TEXT' /* Deprecated, use typeUTF8Text instead. */
+};
+
+/*
+ * The following descriptor types are deprecated due to their lack of
+ * explicit encoding or byte order definition.  Please use
+ * typeUTF16ExternalRepresentation or typeUTF8Text instead. */
+enum {
+  typeStyledUnicodeText         = 'sutx', /* Not implemented */
+  typeEncodedString             = 'encs', /* Not implemented */
+  typeUnicodeText               = 'utxt', /* native byte ordering, optional BOM */
+  typeCString                   = 'cstr', /* MacRoman characters followed by a NULL byte */
+  typePString                   = 'pstr' /* Unsigned length byte followed by MacRoman characters */
+};
+
+/*
+ * The preferred unicode text types.  In both cases, there is no explicit null termination or length byte.
+ */
+enum {
+  typeUTF16ExternalRepresentation = 'ut16', /* big-endian 16 bit unicode with optional byte-order-mark, or little-endian 16 bit unicode with required byte-order-mark. */
+  typeUTF8Text                  = 'utf8' /* 8 bit unicode */
 };
 
 /* Preferred numeric Apple event descriptor types */
@@ -552,9 +572,9 @@ AEInitializeDesc(AEDesc * desc)                               AVAILABLE_MAC_OS_X
 
 
 #ifdef __cplusplus
-    inline void AEInitializeDescInline(AEDesc* d) { d->descriptorType = typeNull; d->dataHandle = NULL; };
+    inline void AEInitializeDescInline(AEDesc* d) { d->descriptorType = typeNull; d->dataHandle = NULL; }
 #else
-   #define AEInitializeDescInline(__d) do { AEDesc* d = __d; d->descriptorType = typeNull; d->dataHandle = NULL; } while (0)
+    #define AEInitializeDescInline(__d) do { AEDesc* d = __d; d->descriptorType = typeNull; d->dataHandle = NULL; } while (0)
 #endif
 
 
@@ -1237,8 +1257,8 @@ AEFlattenDesc(
  */
 extern OSStatus 
 AEUnflattenDesc(
-  Ptr       buffer,
-  AEDesc *  result)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const void *  buffer,
+  AEDesc *      result)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /**************************************************************************

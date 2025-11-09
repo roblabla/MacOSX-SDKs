@@ -90,7 +90,7 @@
 					notifies the observer of all notifications with the name notificationName.
 					
 					The notification center does not retain anObserver or anObject. Therefore, you
-					should always send @link //apple_ref/occ/instm/DRNotificationCenter/removeObserver%58name%58object%58 removeObserver:name:object: @/link to the notification center 
+					should always send @link //apple_ref/occ/instm/DRNotificationCenter/removeObserver:name:object: removeObserver:name:object: @/link to the notification center 
 					before releasing these objects.
 	@param			observer	The observer to send notifications to.
 	@param			aSelector	The selector to call
@@ -105,7 +105,7 @@
 	@discussion		Removes anObserver as the observer of notifications with the name
 					notificationName and object anObject from the receiver. Be sure to invoke this
 					method before deallocating the observer object or any object specified in 
-					@link //apple_ref/occ/instm/DRNotificationCenter/addObserver%58selector%58name%58object%58 addObserver:selector:name:object: @/link.
+					@link //apple_ref/occ/instm/DRNotificationCenter/addObserver:selector:name:object: addObserver:selector:name:object: @/link.
 	@param			observer	The observer to remove
 	@param			aName		The notification the remove the observer from.
 	@param			anObject	The object the observer was listening for.

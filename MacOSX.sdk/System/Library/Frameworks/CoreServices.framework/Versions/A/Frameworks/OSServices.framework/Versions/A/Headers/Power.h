@@ -3,9 +3,9 @@
  
      Contains:   Power Manager Interfaces.
  
-     Version:    OSServices-63~113
+     Version:    OSServices-101.1~790
  
-     Copyright:  © 1990-2003 by Apple Computer, Inc.  All rights reserved
+     Copyright:  © 1990-2006 by Apple Computer, Inc.  All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -553,83 +553,78 @@ struct PowerSourceParamBlock {
 typedef struct PowerSourceParamBlock    PowerSourceParamBlock;
 typedef PowerSourceParamBlock *         PowerSourceParamBlockPtr;
 /*
- *  DisableWUTime()
+ *  DisableWUTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-DisableWUTime(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisableWUTime(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  SetWUTime()
+ *  SetWUTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-SetWUTime(long wuTime)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetWUTime(long wuTime)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  GetWUTime()
+ *  GetWUTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 GetWUTime(
   long *  wuTime,
-  Byte *  wuFlag)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Byte *  wuFlag)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  BatteryStatus()
+ *  BatteryStatus()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 BatteryStatus(
   Byte *  status,
-  Byte *  power)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Byte *  power)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  ModemStatus()
+ *  ModemStatus()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-ModemStatus(Byte * status)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  IdleUpdate()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-extern long 
-IdleUpdate(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ModemStatus(Byte * status)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
  *  GetCPUSpeed()
+ *  
+ *  Discussion:
+ *    GetCPUSpeed() returns the current effective clock speed of the
+ *    CPU in megahertz.
+ *  
+ *  Result:
+ *    the current effective clock speed of the CPU in megahertz.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -641,27 +636,54 @@ GetCPUSpeed(void)                                             AVAILABLE_MAC_OS_X
 
 
 /*
- *  EnableIdle()
+ *  IdleUpdate()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The Power Manager is deprecated in Mac OS X.  Some of this
+ *    functionality is provided in similar form in IOKit; some is
+ *    provided in the Carbon and Cocoa frameworks.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void 
-EnableIdle(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern long 
+IdleUpdate(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  DisableIdle()
+ *  EnableIdle()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The Power Manager is deprecated in Mac OS X.  Some of this
+ *    functionality is provided in similar form in IOKit; some is
+ *    provided in the Carbon and Cocoa frameworks.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DisableIdle(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+EnableIdle(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
+
+
+/*
+ *  DisableIdle()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The Power Manager is deprecated in Mac OS X.  Some of this
+ *    functionality is provided in similar form in IOKit; some is
+ *    provided in the Carbon and Cocoa frameworks.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+extern void 
+DisableIdle(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
@@ -689,63 +711,88 @@ SleepQRemove(SleepQRecPtr qRecPtr)                            AVAILABLE_MAC_OS_X
 
 
 /*
- *  AOn()
+ *  AOn()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    This function is deprecated on Mac OS X.  IOKit may provide
+ *    replacement functionality depending on what this was being used
+ *    for.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-AOn(void)                                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AOn(void)                                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  AOnIgnoreModem()
+ *  AOnIgnoreModem()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    This function is deprecated on Mac OS X.  IOKit may provide
+ *    replacement functionality depending on what this was being used
+ *    for.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-AOnIgnoreModem(void)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AOnIgnoreModem(void)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  BOn()
+ *  BOn()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    This function is deprecated on Mac OS X.  IOKit may provide
+ *    replacement functionality depending on what this was being used
+ *    for.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-BOn(void)                                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+BOn(void)                                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  AOff()
+ *  AOff()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    This function is deprecated on Mac OS X.  IOKit may provide
+ *    replacement functionality depending on what this was being used
+ *    for.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-AOff(void)                                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AOff(void)                                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  BOff()
+ *  BOff()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    This function is deprecated on Mac OS X.  IOKit may provide
+ *    replacement functionality depending on what this was being used
+ *    for.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-BOff(void)                                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+BOff(void)                                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 
@@ -775,87 +822,87 @@ PMFeatures(void)                                              AVAILABLE_MAC_OS_X
 
 
 /*
- *  GetSleepTimeout()
+ *  GetSleepTimeout()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern UInt8 
-GetSleepTimeout(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetSleepTimeout(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  SetSleepTimeout()
+ *  SetSleepTimeout()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-SetSleepTimeout(UInt8 timeout)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetSleepTimeout(UInt8 timeout)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  GetHardDiskTimeout()
+ *  GetHardDiskTimeout()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern UInt8 
-GetHardDiskTimeout(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetHardDiskTimeout(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  SetHardDiskTimeout()
+ *  SetHardDiskTimeout()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-SetHardDiskTimeout(UInt8 timeout)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetHardDiskTimeout(UInt8 timeout)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  HardDiskPowered()
+ *  HardDiskPowered()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern Boolean 
-HardDiskPowered(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+HardDiskPowered(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  SpinDownHardDisk()
+ *  SpinDownHardDisk()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-SpinDownHardDisk(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SpinDownHardDisk(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  IsSpindownDisabled()
+ *  IsSpindownDisabled()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern Boolean 
-IsSpindownDisabled(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+IsSpindownDisabled(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
@@ -871,81 +918,88 @@ SetSpindownDisable(Boolean setDisable)                        AVAILABLE_MAC_OS_X
 
 
 /*
- *  HardDiskQInstall()
+ *  HardDiskQInstall()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-HardDiskQInstall(HDQueueElement * theElement)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+HardDiskQInstall(HDQueueElement * theElement)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  HardDiskQRemove()
+ *  HardDiskQRemove()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-HardDiskQRemove(HDQueueElement * theElement)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+HardDiskQRemove(HDQueueElement * theElement)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  GetScaledBatteryInfo()
+ *  GetScaledBatteryInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
 GetScaledBatteryInfo(
   short          whichBattery,
-  BatteryInfo *  theInfo)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  BatteryInfo *  theInfo)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  AutoSleepControl()
+ *  AutoSleepControl()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-AutoSleepControl(Boolean enableSleep)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AutoSleepControl(Boolean enableSleep)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  GetIntModemInfo()
+ *  GetIntModemInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern UInt32 
-GetIntModemInfo(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetIntModemInfo(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  SetIntModemState()
+ *  SetIntModemState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-SetIntModemState(short theState)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetIntModemState(short theState)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
  *  MaximumProcessorSpeed()
+ *  
+ *  Discussion:
+ *    MaximumProcessorSpeed() returns the maximum effective clock speed
+ *    of the CPU in megahertz.
+ *  
+ *  Result:
+ *    the maximum effective clock speed of the CPU in megahertz.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -959,6 +1013,14 @@ MaximumProcessorSpeed(void)                                   AVAILABLE_MAC_OS_X
 /*
  *  MinimumProcessorSpeed()
  *  
+ *  Discussion:
+ *    MinimumProcessorSpeed() returns the minimum effective clock speed
+ *    of the CPU in megahertz. Before Mac OS X 10.4, this function
+ *    always returns the maximum cpu speed, not the minimum as expected.
+ *  
+ *  Result:
+ *    the minimum effective clock speed of the CPU in megahertz.
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -970,6 +1032,16 @@ MinimumProcessorSpeed(void)                                   AVAILABLE_MAC_OS_X
 
 /*
  *  CurrentProcessorSpeed()
+ *  
+ *  Discussion:
+ *    CurrentProcessorSpeed() returns the current effective clock speed
+ *    of the CPU in megahertz. Before Mac OS X 10.4, this function
+ *    always returns the maximum cpu speed, not the actual current
+ *    speed the processor is running at.  One MHz represents one
+ *    million cycles per second.
+ *  
+ *  Result:
+ *    the current effective clock speed of the CPU in megahertz.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1005,51 +1077,51 @@ SetProcessorSpeed(Boolean fullSpeed)                          AVAILABLE_MAC_OS_X
 
 
 /*
- *  GetSCSIDiskModeAddress()
+ *  GetSCSIDiskModeAddress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern short 
-GetSCSIDiskModeAddress(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetSCSIDiskModeAddress(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  SetSCSIDiskModeAddress()
+ *  SetSCSIDiskModeAddress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-SetSCSIDiskModeAddress(short scsiAddress)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetSCSIDiskModeAddress(short scsiAddress)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  GetWakeupTimer()
+ *  GetWakeupTimer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-GetWakeupTimer(WakeupTime * theTime)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetWakeupTimer(WakeupTime * theTime)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  SetWakeupTimer()
+ *  SetWakeupTimer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-SetWakeupTimer(WakeupTime * theTime)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetWakeupTimer(WakeupTime * theTime)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
@@ -1089,113 +1161,113 @@ BatteryCount(void)                                            AVAILABLE_MAC_OS_X
 
 
 /*
- *  GetBatteryVoltage()
+ *  GetBatteryVoltage()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern Fixed 
-GetBatteryVoltage(short whichBattery)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetBatteryVoltage(short whichBattery)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  GetBatteryTimes()
+ *  GetBatteryTimes()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
 GetBatteryTimes(
   short             whichBattery,
-  BatteryTimeRec *  theTimes)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  BatteryTimeRec *  theTimes)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  GetDimmingTimeout()
+ *  GetDimmingTimeout()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern UInt8 
-GetDimmingTimeout(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetDimmingTimeout(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  SetDimmingTimeout()
+ *  SetDimmingTimeout()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-SetDimmingTimeout(UInt8 timeout)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetDimmingTimeout(UInt8 timeout)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  DimmingControl()
+ *  DimmingControl()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern void 
-DimmingControl(Boolean enableSleep)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DimmingControl(Boolean enableSleep)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  IsDimmingControlDisabled()
+ *  IsDimmingControlDisabled()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern Boolean 
-IsDimmingControlDisabled(void)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+IsDimmingControlDisabled(void)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  IsAutoSlpControlDisabled()
+ *  IsAutoSlpControlDisabled()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern Boolean 
-IsAutoSlpControlDisabled(void)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+IsAutoSlpControlDisabled(void)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  PMgrStateQInstall()
+ *  PMgrStateQInstall()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-PMgrStateQInstall(PMgrQueueElement * theElement)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+PMgrStateQInstall(PMgrQueueElement * theElement)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  PMgrStateQRemove()
+ *  PMgrStateQRemove()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-PMgrStateQRemove(PMgrQueueElement * theElement)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+PMgrStateQRemove(PMgrQueueElement * theElement)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
@@ -1211,99 +1283,99 @@ UpdateSystemActivity(UInt8 activity)                          AVAILABLE_MAC_OS_X
 
 
 /*
- *  DelaySystemIdle()
+ *  DelaySystemIdle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-DelaySystemIdle(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DelaySystemIdle(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  GetStartupTimer()
+ *  GetStartupTimer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-GetStartupTimer(StartupTime * theTime)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetStartupTimer(StartupTime * theTime)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  SetStartupTimer()
+ *  SetStartupTimer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-SetStartupTimer(StartupTime * theTime)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetStartupTimer(StartupTime * theTime)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  GetLastActivity()
+ *  GetLastActivity()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-GetLastActivity(ActivityInfo * theActivity)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetLastActivity(ActivityInfo * theActivity)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  GetSoundMixerState()
+ *  GetSoundMixerState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.1 and later
  */
 extern OSErr 
-GetSoundMixerState(SoundMixerByte * theSoundMixerByte)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetSoundMixerState(SoundMixerByte * theSoundMixerByte)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  SetSoundMixerState()
+ *  SetSoundMixerState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.1 and later
  */
 extern OSErr 
-SetSoundMixerState(SoundMixerByte * theSoundMixerByte)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetSoundMixerState(SoundMixerByte * theSoundMixerByte)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  GetDimSuspendState()
+ *  GetDimSuspendState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.1 and later
  */
 extern Boolean 
-GetDimSuspendState(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetDimSuspendState(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  SetDimSuspendState()
+ *  SetDimSuspendState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in PowerMgrLib 1.1 and later
  */
 extern void 
-SetDimSuspendState(Boolean dimSuspendState)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetDimSuspendState(Boolean dimSuspendState)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 /*

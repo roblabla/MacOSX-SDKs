@@ -94,6 +94,8 @@ kern_return_t memory_object_lock_request
 	memory_object_control_t memory_control,
 	memory_object_offset_t offset,
 	memory_object_size_t size,
+	memory_object_offset_t *resid_offset,
+	integer_t *io_errno,
 	memory_object_return_t should_return,
 	integer_t flags,
 	vm_prot_t lock_value
@@ -217,13 +219,23 @@ __END_DECLS
 
 #ifndef __Request__memory_object_control_subsystem__defined
 #define __Request__memory_object_control_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		memory_object_flavor_t flavor;
 		mach_msg_type_number_t attributesCnt;
 	} __Request__memory_object_get_attributes_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -231,14 +243,26 @@ __END_DECLS
 		mach_msg_type_number_t attributesCnt;
 		int attributes[6];
 	} __Request__memory_object_change_attributes_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		memory_object_offset_t offset;
 		vm_offset_t length;
 	} __Request__memory_object_synchronize_completed_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -248,13 +272,25 @@ __END_DECLS
 		integer_t flags;
 		vm_prot_t lock_value;
 	} __Request__memory_object_lock_request_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t reason;
 	} __Request__memory_object_destroy_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -263,7 +299,13 @@ __END_DECLS
 		mach_msg_type_number_t page_listCnt;
 		integer_t cntrl_flags;
 	} __Request__memory_object_upl_request_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -273,26 +315,50 @@ __END_DECLS
 		mach_msg_type_number_t page_listCnt;
 		integer_t cntrl_flags;
 	} __Request__memory_object_super_upl_request_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		memory_object_offset_t offset;
 		integer_t ops;
 	} __Request__memory_object_page_op_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		boolean_t wait_on_terminating;
 	} __Request__memory_object_recover_named_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		integer_t flags;
 	} __Request__memory_object_release_name_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -300,7 +366,9 @@ __END_DECLS
 		memory_object_offset_t offset_end;
 		integer_t ops;
 	} __Request__memory_object_range_op_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__memory_object_control_subsystem__defined */
 
 /* union of all requests */
@@ -325,6 +393,10 @@ union __RequestUnion__memory_object_control_subsystem {
 
 #ifndef __Reply__memory_object_control_subsystem__defined
 #define __Reply__memory_object_control_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -332,31 +404,63 @@ union __RequestUnion__memory_object_control_subsystem {
 		mach_msg_type_number_t attributesCnt;
 		int attributes[6];
 	} __Reply__memory_object_get_attributes_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__memory_object_change_attributes_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__memory_object_synchronize_completed_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
+		memory_object_offset_t resid_offset;
+		integer_t io_errno;
 	} __Reply__memory_object_lock_request_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__memory_object_destroy_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -365,9 +469,15 @@ union __RequestUnion__memory_object_control_subsystem {
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		mach_msg_type_number_t page_listCnt;
-		upl_page_info_t page_list[20];
+		upl_page_info_t page_list[256];
 	} __Reply__memory_object_upl_request_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -376,9 +486,15 @@ union __RequestUnion__memory_object_control_subsystem {
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		mach_msg_type_number_t page_listCnt;
-		upl_page_info_t page_list[20];
+		upl_page_info_t page_list[256];
 	} __Reply__memory_object_super_upl_request_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -386,26 +502,46 @@ union __RequestUnion__memory_object_control_subsystem {
 		uint32_t phys_entry;
 		integer_t flags;
 	} __Reply__memory_object_page_op_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__memory_object_recover_named_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__memory_object_release_name_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		integer_t range;
 	} __Reply__memory_object_range_op_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__memory_object_control_subsystem__defined */
 
 /* union of all replies */

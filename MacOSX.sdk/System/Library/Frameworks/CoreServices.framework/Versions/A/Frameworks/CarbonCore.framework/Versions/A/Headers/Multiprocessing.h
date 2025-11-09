@@ -3,9 +3,9 @@
  
      Contains:   Multiprocessing interfaces
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1995-2003 DayStar Digital, Inc.
+     Copyright:  © 1995-2006 DayStar Digital, Inc.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -496,7 +496,7 @@ MPSetTaskType(
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPAllocateTaskStorageIndex(TaskStorageIndex * index)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPAllocateTaskStorageIndex(TaskStorageIndex * taskIndex)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -513,7 +513,7 @@ MPAllocateTaskStorageIndex(TaskStorageIndex * index)          AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPDeallocateTaskStorageIndex(TaskStorageIndex index)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPDeallocateTaskStorageIndex(TaskStorageIndex taskIndex)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -531,7 +531,7 @@ MPDeallocateTaskStorageIndex(TaskStorageIndex index)          AVAILABLE_MAC_OS_X
  */
 extern OSStatus 
 MPSetTaskStorageValue(
-  TaskStorageIndex   index,
+  TaskStorageIndex   taskIndex,
   TaskStorageValue   value)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -549,7 +549,7 @@ MPSetTaskStorageValue(
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern TaskStorageValue 
-MPGetTaskStorageValue(TaskStorageIndex index)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPGetTaskStorageValue(TaskStorageIndex taskIndex)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -1616,12 +1616,59 @@ enum {
 };
 
 
-
 /*
  *  MPRemoteCall()
  *  
+ *  Summary:
+ *    Calls a nonreentrant function and blocks the current task.
+ *  
+ *  Discussion:
+ *    You use this function primarily to indirectly execute Mac OS
+ *    system software functions. The task making the remote call is
+ *    blocked until the call completes. The amount of time taken to
+ *    schedule the remote procedure depends on the choice of the
+ *    designated operating context. Specifying kMPAnyRemoteContext
+ *    offers the lowest latency, but the called procedure may not have
+ *    access to process-specific resources such as some low-memory
+ *    values. Specifying kMPOwningProcessRemoteContext has higher
+ *    latency because the remote procedure is deferred until the owning
+ *    process becomes active. However, the remote procedure is
+ *    guaranteed to execute within the owning process. Note that with
+ *    the exception of functions in Multiprocessing Services, you
+ *    cannot safely call any system software functions directly from a
+ *    preemptive task. Even if some system software function appears to
+ *    work today when called from a preemptive task, unless explicitly
+ *    stated otherwise there is no guarantee that subsequent versions
+ *    of the same function will continue to work in future versions of
+ *    system software. In Mac OS 8 implementations of Multiprocessing
+ *    Services, the only exceptions to this rule are the atomic memory
+ *    operations (such as AddAtomic ) exported in the InterfaceLib
+ *    shared library. Even these functions may switch to 68K mode if
+ *    the operands to them are not aligned. If you need to access
+ *    system software functions from a preemptive task, you must do so
+ *    using the MPRemoteCall function.
+ *  
  *  Mac OS X threading:
  *    Thread safe
+ *  
+ *  Parameters:
+ *    
+ *    remoteProc:
+ *      A pointer of type MPRemoteProcedure that references the
+ *      application-defined function you want to call. See
+ *      MyRemoteProcedure for more information about the form of this
+ *      function.
+ *    
+ *    parameter:
+ *      A pointer to a parameter to pass to the application-defined
+ *      function. For example, this value could point to a data
+ *      structure or a memory location.
+ *    
+ *    context:
+ *      A value of type MPRemoteContext that specifies which contexts
+ *      (that is processes) are allowed to execute the function. See
+ *      “Remote Call Context Option Constants” for a list of possible
+ *      values.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1635,7 +1682,66 @@ MPRemoteCall(
   MPRemoteContext     context)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/* ! MPRemoteCall is new in version 2.0.*/
+/*
+ *  MPRemoteCallCFM()
+ *  
+ *  Summary:
+ *    Calls a nonreentrant function and blocks the current task.
+ *  
+ *  Discussion:
+ *    You use this function primarily to indirectly execute Mac OS
+ *    system software functions. The task making the remote call is
+ *    blocked until the call completes. The amount of time taken to
+ *    schedule the remote procedure depends on the choice of the
+ *    designated operating context. Specifying kMPAnyRemoteContext
+ *    offers the lowest latency, but the called procedure may not have
+ *    access to process-specific resources such as some low-memory
+ *    values. Specifying kMPOwningProcessRemoteContext has higher
+ *    latency because the remote procedure is deferred until the owning
+ *    process becomes active. However, the remote procedure is
+ *    guaranteed to execute within the owning process. Note that with
+ *    the exception of functions in Multiprocessing Services, you
+ *    cannot safely call any system software functions directly from a
+ *    preemptive task. Even if some system software function appears to
+ *    work today when called from a preemptive task, unless explicitly
+ *    stated otherwise there is no guarantee that subsequent versions
+ *    of the same function will continue to work in future versions of
+ *    system software.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
+ *  Parameters:
+ *    
+ *    remoteProc:
+ *      A pointer of type MPRemoteProcedure to a CFM function that
+ *      references the application-defined function you want to call.
+ *      See MyRemoteProcedure for more information about the form of
+ *      this function.
+ *    
+ *    parameter:
+ *      A pointer to a parameter to pass to the application-defined
+ *      function. For example, this value could point to a data
+ *      structure or a memory location.
+ *    
+ *    context:
+ *      A value of type MPRemoteContext that specifies which contexts
+ *      (that is processes) are allowed to execute the function. See
+ *      “Remote Call Context Option Constants” for a list of possible
+ *      values.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   in MPLibrary 2.0 and later
+ */
+extern void * 
+MPRemoteCallCFM(
+  MPRemoteProcedure   remoteProc,
+  void *              parameter,
+  MPRemoteContext     context)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
 /*
    §
    ===========================================================================================

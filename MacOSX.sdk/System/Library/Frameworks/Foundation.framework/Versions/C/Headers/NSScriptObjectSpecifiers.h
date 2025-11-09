@@ -1,16 +1,12 @@
 /*
 	NSScriptObjectSpecifiers.h
-	Copyright (c) 1997-2003, Apple Computer, Inc.
+	Copyright (c) 1997-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSArray;
-@class NSScriptClassDescription;
-@class NSString;
-@class NSScriptWhoseTest;
-
+@class NSArray, NSAppleEventDescriptor, NSScriptClassDescription, NSScriptWhoseTest, NSString;
 
 // Error codes for specific problems evaluating specifiers
 enum {
@@ -57,11 +53,11 @@ typedef enum {
     NSScriptObjectSpecifier *_container;
     NSScriptObjectSpecifier *_child;
     NSString *_key;
-    unsigned long _keyCode;
     NSScriptClassDescription *_containerClassDescription;
     BOOL _containerIsObjectBeingTested;
     BOOL _containerIsRangeContainerObject;
     char _padding[2];
+    NSAppleEventDescriptor *_descriptor;
     int _error;
 }
 
@@ -166,7 +162,7 @@ typedef enum {
     NSScriptObjectSpecifier *_specifier;
     NSInsertionPosition _unadjustedPosition;
     NSScriptClassDescription *_insertionClassDescription;
-    void *_moreVars;
+    id _moreVars;
     void *_reserved0;
 }
 

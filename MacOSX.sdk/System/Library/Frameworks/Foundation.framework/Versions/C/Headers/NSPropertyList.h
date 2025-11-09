@@ -1,11 +1,11 @@
 /*	NSPropertyList.h
-	Copyright (c) 2002-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 2002-2005, Apple, Inc. All rights reserved.
 */
-
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 #include <CoreFoundation/CFPropertyList.h>
+
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSData, NSString;
 

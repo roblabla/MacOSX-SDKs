@@ -344,6 +344,17 @@ struct BluetoothL2CAPQualityOfServiceOptions
 	UInt32		delayVariation;
 };
 
+typedef struct BluetoothL2CAPRetransmissionAndFlowControlOptions BluetoothL2CAPRetransmissionAndFlowControlOptions;
+struct BluetoothL2CAPRetransmissionAndFlowControlOptions
+{
+	UInt8		flags;
+	UInt8		txWindowSize;
+	UInt8		maxTransmit;
+	UInt16		retransmissionTimeout;
+	UInt16		monitorTimeout;
+	UInt16		maxPDUPayloadSize;
+};
+
 enum
 {
 	kBluetoothL2CAPInfoTypeMaxConnectionlessMTUSize = 0x0001
@@ -386,21 +397,32 @@ typedef enum
 
 typedef enum
 {
-    kBluetoothL2CAPConfigurationOptionMTU			= 0x01,
-    kBluetoothL2CAPConfigurationOptionFlushTimeout	= 0x02,
-    kBluetoothL2CAPConfigurationOptionQoS			= 0x03,
+    kBluetoothL2CAPConfigurationOptionMTU                           = 0x01,
+    kBluetoothL2CAPConfigurationOptionFlushTimeout                  = 0x02,
+    kBluetoothL2CAPConfigurationOptionQoS                           = 0x03,
+    kBluetoothL2CAPConfigurationOptionRetransmissionAndFlowControl  = 0x04
 } BluetoothL2CAPConfigurationOption;
 
 enum
 {
-	kBluetoothL2CAPConfigurationOptionMTULength				= 2,
-	kBluetoothL2CAPConfigurationOptionFlushTimeoutLength	= 2,
-	kBluetoothL2CAPConfigurationOptionQoSLength				= 22
+    kBluetoothL2CAPConfigurationOptionMTULength                             = 2,
+    kBluetoothL2CAPConfigurationOptionFlushTimeoutLength                    = 2,
+    kBluetoothL2CAPConfigurationOptionQoSLength                             = 22,
+    kBluetoothL2CAPConfigurationOptionRetransmissionAndFlowControlLength    = 9
 };
 
 typedef enum
 {
+    kBluetoothL2CAPConfigurationRetransmissionModeFlag  = 0x01,
+    kBluetoothL2CAPConfigurationFlowControlModeFlag     = 0x02,
+    kBluetoothL2CAPConfigurationBasicL2CAPModeFlag      = 0x00,
+} BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags;
+
+
+typedef enum
+{
     kBluetoothL2CAPInformationTypeConnectionlessMTU	= 0x0001,
+    kBluetoothL2CAPInformationTypeExtendedFeatures	= 0x0002,
 } BluetoothL2CAPInformationType;
 
 typedef enum
@@ -411,7 +433,15 @@ typedef enum
 
 typedef enum
 {
-    kBluetoothL2CAPQoSTypeNoTraffic		= 0x00,
+    kBluetoothL2CAPInformationNoExtendedFeatures       = 0x00000000,
+    kBluetoothL2CAPInformationFlowControlMode           = 0x00000001,
+    kBluetoothL2CAPInformationRetransmissionMode		= 0x00000002,
+    kBluetoothL2CAPInformationBidirectionalQoS          = 0x00000004,
+} BluetoothL2CAPInformationExtendedFeaturesMask;
+
+typedef enum
+{
+    kBluetoothL2CAPQoSTypeNoTraffic     = 0x00,
     kBluetoothL2CAPQoSTypeBestEffort	= 0x01,
     kBluetoothL2CAPQoSTypeGuaranteed	= 0x02,
 } BluetoothL2CAPQoSType;
@@ -465,7 +495,7 @@ typedef UInt16		BluetoothHCICommandOpCode;
 typedef	UInt32		BluetoothHCIVendorCommandSelector;
 
 #define	BluetoothHCIMakeCommandOpCode( GROUP, CMD )				( ( ( ( GROUP ) & 0x003F ) << 10 ) | ( ( CMD ) & 0x03FF ) )
-#define	BluetoothHCIMakeCommandOpCodeEndianSwap( GROUP, CMD )	( ( ( ( ( GROUP ) & 0x003F ) << 10 ) >> 8) | ( ( ( CMD ) & 0x03FF ) << 8 ) )
+#define	BluetoothHCIMakeCommandOpCodeEndianSwap( GROUP, CMD )	( CFSwapInt16HostToLittle ( BluetoothHCIMakeCommandOpCode( GROUP, CMD ) ) )
 #define	BluetoothHCIExtractCommandOpCodeGroup( OPCODE )			( ( ( OPCODE ) >> 10 ) & 0x003F )
 #define	BluetoothHCIExtractCommandOpCodeCommand( OPCODE )		( ( OPCODE ) & 0x03FF )
 
@@ -1419,8 +1449,9 @@ enum
 
 typedef enum
 {
-	kBluetoothHCIPowerStateON		= 0x01,
-	kBluetoothHCIPowerStateOFF		= 0x00,
+	kBluetoothHCIPowerStateON				= 0x01,
+	kBluetoothHCIPowerStateOFF				= 0x00,
+	kBluetoothHCIPowerStateUnintialized		= 0xFF,	
 } BluetoothHCIPowerState;
 
 enum

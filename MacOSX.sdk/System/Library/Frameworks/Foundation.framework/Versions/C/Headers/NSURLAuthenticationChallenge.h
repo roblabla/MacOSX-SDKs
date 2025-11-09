@@ -1,6 +1,6 @@
 /*	
     NSURLAuthenticationChallenge.h
-    Copyright (C) 2003 Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2003-2005, Apple Computer, Inc. All rights reserved.    
     
     Public header file.
 */

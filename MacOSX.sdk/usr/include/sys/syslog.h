@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2005 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -59,6 +59,7 @@
 #define _SYS_SYSLOG_H_
 
 #include <sys/appleapiopts.h>
+#include <sys/cdefs.h>
 
 #define	_PATH_LOG	"/var/run/syslog"
 
@@ -95,40 +96,40 @@ typedef struct _code {
 } CODE;
 
 CODE prioritynames[] = {
-	"alert",	LOG_ALERT,
-	"crit",		LOG_CRIT,
-	"debug",	LOG_DEBUG,
-	"emerg",	LOG_EMERG,
-	"err",		LOG_ERR,
-	"error",	LOG_ERR,		/* DEPRECATED */
-	"info",		LOG_INFO,
-	"none",		INTERNAL_NOPRI,		/* INTERNAL */
-	"notice",	LOG_NOTICE,
-	"panic", 	LOG_EMERG,		/* DEPRECATED */
-	"warn",		LOG_WARNING,		/* DEPRECATED */
-	"warning",	LOG_WARNING,
-	NULL,		-1,
+	{ "alert",	LOG_ALERT },
+	{ "crit",	LOG_CRIT },
+	{ "debug",	LOG_DEBUG },
+	{ "emerg",	LOG_EMERG },
+	{ "err",	LOG_ERR },
+	{ "error",	LOG_ERR },		/* DEPRECATED */
+	{ "info",	LOG_INFO },
+	{ "none",	INTERNAL_NOPRI },	/* INTERNAL */
+	{ "notice",	LOG_NOTICE },
+	{ "panic", 	LOG_EMERG },		/* DEPRECATED */
+	{ "warn",	LOG_WARNING },		/* DEPRECATED */
+	{ "warning",	LOG_WARNING },
+	{ 0,		-1 }
 };
 #endif
 
 /* facility codes */
-#define	LOG_KERN	(0<<3)	/* kernel messages */
-#define	LOG_USER	(1<<3)	/* random user-level messages */
-#define	LOG_MAIL	(2<<3)	/* mail system */
-#define	LOG_DAEMON	(3<<3)	/* system daemons */
-#define	LOG_AUTH	(4<<3)	/* security/authorization messages */
-#define	LOG_SYSLOG	(5<<3)	/* messages generated internally by syslogd */
-#define	LOG_LPR		(6<<3)	/* line printer subsystem */
-#define	LOG_NEWS	(7<<3)	/* network news subsystem */
-#define	LOG_UUCP	(8<<3)	/* UUCP subsystem */
-#define	LOG_CRON	(9<<3)	/* clock daemon */
-#define	LOG_AUTHPRIV	(10<<3)	/* security/authorization messages (private) */
-#define	LOG_FTP		(11<<3)	/* ftp daemon */
-#define	LOG_NETINFO	(12<<3)	/* NetInfo */
+#define	LOG_KERN		(0<<3)	/* kernel messages */
+#define	LOG_USER		(1<<3)	/* random user-level messages */
+#define	LOG_MAIL		(2<<3)	/* mail system */
+#define	LOG_DAEMON		(3<<3)	/* system daemons */
+#define	LOG_AUTH		(4<<3)	/* security/authorization messages */
+#define	LOG_SYSLOG		(5<<3)	/* messages generated internally by syslogd */
+#define	LOG_LPR			(6<<3)	/* line printer subsystem */
+#define	LOG_NEWS		(7<<3)	/* network news subsystem */
+#define	LOG_UUCP		(8<<3)	/* UUCP subsystem */
+#define	LOG_CRON		(9<<3)	/* clock daemon */
+#define	LOG_AUTHPRIV 	(10<<3)	/* security/authorization messages (private) */
+#define	LOG_FTP			(11<<3)	/* ftp daemon */
+#define	LOG_NETINFO		(12<<3)	/* NetInfo */
 #define	LOG_REMOTEAUTH	(13<<3)	/* remote authentication/authorization */
-#define	LOG_INSTALL	(14<<3)	/* installer subsystem */
+#define	LOG_INSTALL		(14<<3)	/* installer subsystem */
+#define	LOG_RAS			(15<<3)	/* Remote Access Service (VPN / PPP) */
 
-	/* other codes through 15 reserved for system use */
 #define	LOG_LOCAL0	(16<<3)	/* reserved for local use */
 #define	LOG_LOCAL1	(17<<3)	/* reserved for local use */
 #define	LOG_LOCAL2	(18<<3)	/* reserved for local use */
@@ -138,47 +139,46 @@ CODE prioritynames[] = {
 #define	LOG_LOCAL6	(22<<3)	/* reserved for local use */
 #define	LOG_LOCAL7	(23<<3)	/* reserved for local use */
 
-#define	LOG_NFACILITIES	24	/* current number of facilities */
+#define	LOG_LAUNCHD		(24<<3)	/* launchd - general bootstrap daemon */
+
+#define	LOG_NFACILITIES	25	/* current number of facilities */
 #define	LOG_FACMASK	0x03f8	/* mask to extract facility part */
 				/* facility of pri */
 #define	LOG_FAC(p)	(((p) & LOG_FACMASK) >> 3)
 
 #ifdef SYSLOG_NAMES
 CODE facilitynames[] = {
-	"auth",		LOG_AUTH,
-	"authpriv",	LOG_AUTHPRIV,
-	"cron", 	LOG_CRON,
-	"daemon",	LOG_DAEMON,
-	"ftp",		LOG_FTP,
-	"install",	LOG_INSTALL,
-	"kern",		LOG_KERN,
-	"lpr",		LOG_LPR,
-	"mail",		LOG_MAIL,
-	"mark", 	INTERNAL_MARK,		/* INTERNAL */
-	"netinfo",	LOG_NETINFO,
-	"remoteauth",	LOG_REMOTEAUTH,
-	"news",		LOG_NEWS,
-	"security",	LOG_AUTH,		/* DEPRECATED */
-	"syslog",	LOG_SYSLOG,
-	"user",		LOG_USER,
-	"uucp",		LOG_UUCP,
-	"local0",	LOG_LOCAL0,
-	"local1",	LOG_LOCAL1,
-	"local2",	LOG_LOCAL2,
-	"local3",	LOG_LOCAL3,
-	"local4",	LOG_LOCAL4,
-	"local5",	LOG_LOCAL5,
-	"local6",	LOG_LOCAL6,
-	"local7",	LOG_LOCAL7,
-	NULL,		-1,
+	{ "auth",	LOG_AUTH },
+	{ "authpriv",	LOG_AUTHPRIV },
+	{ "cron", 	LOG_CRON },
+	{ "daemon",	LOG_DAEMON },
+	{ "ftp",	LOG_FTP },
+	{ "install",	LOG_INSTALL },
+	{ "kern",	LOG_KERN },
+	{ "lpr",	LOG_LPR },
+	{ "mail",	LOG_MAIL },
+	{ "mark", 	INTERNAL_MARK },	/* INTERNAL */
+	{ "netinfo",	LOG_NETINFO },
+	{ "ras", 	LOG_RAS },
+	{ "remoteauth", LOG_REMOTEAUTH },
+	{ "news",	LOG_NEWS },
+	{ "security",	LOG_AUTH },		/* DEPRECATED */
+	{ "syslog",	LOG_SYSLOG },
+	{ "user",	LOG_USER },
+	{ "uucp",	LOG_UUCP },
+	{ "local0",	LOG_LOCAL0 },
+	{ "local1",	LOG_LOCAL1 },
+	{ "local2",	LOG_LOCAL2 },
+	{ "local3",	LOG_LOCAL3 },
+	{ "local4",	LOG_LOCAL4 },
+	{ "local5",	LOG_LOCAL5 },
+	{ "local6",	LOG_LOCAL6 },
+	{ "local7",	LOG_LOCAL7 },
+	{ "launchd", 	LOG_LAUNCHD },
+	{ 0,		-1 }
 };
 #endif
 
-#ifdef KERNEL
-#ifdef __APPLE_API_PRIVATE
-#define	LOG_PRINTF	-1	/* pseudo-priority to indicate use of printf */
-#endif /* __APPLE_API_PRIVATE */
-#endif
 
 /*
  * arguments to setlogmask.
@@ -199,113 +199,18 @@ CODE facilitynames[] = {
 #define	LOG_NOWAIT	0x10	/* don't wait for console forks: DEPRECATED */
 #define	LOG_PERROR	0x20	/* log to stderr as well */
 
-#include <sys/cdefs.h>
-
-#ifndef KERNEL
-
-/*
- * Don't use va_list in the vsyslog() prototype.   Va_list is typedef'd in two
- * places (<machine/varargs.h> and <machine/stdarg.h>), so if we include one
- * of them here we may collide with the utility's includes.  It's unreasonable
- * for utilities to have to include one of them to include syslog.h, so we get
- * _BSD_VA_LIST_ from <machine/ansi.h> and use it.
- */
-#include <machine/ansi.h>
+#ifndef _POSIX_C_SOURCE
+#include <sys/_types.h>		/* for __darwin_va_list */
+#endif /* _POSIX_C_SOURCE */
 
 __BEGIN_DECLS
-void	closelog __P((void));
-void	openlog __P((const char *, int, int));
-int	setlogmask __P((int));
-void	syslog __P((int, const char *, ...));
-void	vsyslog __P((int, const char *, _BSD_VA_LIST_));
+void	closelog(void);
+void	openlog(const char *, int, int);
+int	setlogmask(int);
+void	syslog(int, const char *, ...) __DARWIN_LDBL_COMPAT(syslog);
+#ifndef _POSIX_C_SOURCE
+void	vsyslog(int, const char *, __darwin_va_list) __DARWIN_LDBL_COMPAT(vsyslog);
+#endif /* _POSIX_C_SOURCE */
 __END_DECLS
 
-#else /* !KERNEL */
-#ifdef __APPLE_API_OBSOLETE
-/*
- * bit field descriptions for printf %r and %R formats
- */
-
-/*
- * printf("%r %R", val, reg_descp);
- * struct reg_desc *reg_descp;
- *
- * the %r and %R formats allow formatted output of bit fields.
- * reg_descp points to an array of reg_desc structures, each element of the
- * array describes a range of bits within val.  the array should have a
- * final element with all structure elements 0.
- * %r outputs a string of the format "<bit field descriptions>"
- * %R outputs a string of the format "0x%x<bit field descriptions>"
- *
- * The fields in a reg_desc are:
- *	unsigned rd_mask;	An appropriate mask to isolate the bit field
- *				within a word, and'ed with val
- *
- *	int rd_shift;		A shift amount to be done to the isolated
- *				bit field.  done before printing the isolate
- *				bit field with rd_format and before searching
- *				for symbolic value names in rd_values
- *
- *	char *rd_name;		If non-null, a bit field name to label any
- *				out from rd_format or searching rd_values.
- *				if neither rd_format or rd_values is non-null
- *				rd_name is printed only if the isolated
- *				bit field is non-null.
- *
- *	char *rd_format;	If non-null, the shifted bit field value
- *				is printed using this format.
- *
- *	struct reg_values *rd_values;	If non-null, a pointer to a table
- *				matching numeric values with symbolic names.
- *				rd_values are searched and the symbolic
- *				value is printed if a match is found, if no
- *				match is found "???" is printed.
- *
- * printf("%n %N", val, reg_valuesp);
- * struct reg_values *reg_valuesp;
- *
- * the %n and %N formats allow formatted output of symbolic constants
- * Reg_valuesp is a pointer to an array of struct reg_values which pairs
- * numeric values (rv_value) with symbolic names (rv_name).  The array is
- * terminated with a reg_values entry that has a null pointer for the
- * rv_name field.  When %n or %N is used rd_values are searched and the
- * symbolic value is printed if a match is found, if no match is found
- * "???" is printed.
- *				
- * printf("%C", val);
- * int val;
- *
- * the %C format prints an int as a 4 character string.
- * The most significant byte of the int is printed first, the least
- * significant byte is printed last.
- */
-
-/*
- * register values
- * map between numeric values and symbolic values
- */
-struct reg_values {
-	unsigned rv_value;
-	char *rv_name;
-};
-
-/*
- * register descriptors are used for formatted prints of register values
- * rd_mask and rd_shift must be defined, other entries may be null
- */
-struct reg_desc {
-	unsigned rd_mask;	/* mask to extract field */
-	int rd_shift;		/* shift for extracted value, - >>, + << */
-	char *rd_name;		/* field name */
-	char *rd_format;	/* format to print field */
-	struct reg_values *rd_values;	/* symbolic names of values */
-};
-
-#endif /* __APPLE_API_OBSOLETE */
-
-void	logpri __P((int));
-void	log __P((int, const char *, ...));
-void	addlog __P((const char *, ...));
-
-#endif /* !KERNEL */
 #endif /* !_SYS_SYSLOG_H_ */

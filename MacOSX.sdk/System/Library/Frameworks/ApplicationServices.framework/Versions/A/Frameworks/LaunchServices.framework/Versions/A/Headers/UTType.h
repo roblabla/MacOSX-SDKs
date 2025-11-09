@@ -1,11 +1,11 @@
 /*
      File:       LaunchServices/UTType.h
  
-     Contains:   Public interfaces for Uniform Type Indentification
+     Contains:   Public interfaces for Uniform Type Identification
  
-     Version:    LaunchServices-98.4~11
+     Version:    LaunchServices-182~2
  
-     Copyright:  © 2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -38,8 +38,8 @@ extern "C" {
     Uniform Type Identification Primer
 
     Uniform Type Identifiers (or UTIs) are strings which uniquely identify
-    abstract types. They can be used to describe a file format or
-    data type, but can also be used to describe type information for
+    abstract types. They can be used to describe a file format or an
+    in-memory data type, but can also be used to describe the type of
     other sorts of entities, such as directories, volumes, or packages.
 
     The syntax of a uniform type identifier looks like a bundle identifier.
@@ -51,7 +51,7 @@ extern "C" {
 
         public.jpeg
         public.utf16-plain-text
-        com.apple.xml-plist
+        com.apple.xml-property-list
         com.apple.appleworks.doc
 
     Types which are standard or not controlled by any one organization 
@@ -70,8 +70,8 @@ extern "C" {
     Conformance
 
     A type may "conform" to one or more other types. For example, the
-    type com.apple.macos.xml-property-list conforms to both the
-    com.apple.macos.property-list and public.xml types. The public.xml 
+    type com.apple.xml-property-list conforms to both the
+    com.apple.property-list and public.xml types. The public.xml 
     type in turn conforms to type public.text. Finally, type public.text  
     conforms to public.data, which is the base type for all types 
     describing bytes stream formats. Conformance relationships between 
@@ -79,12 +79,12 @@ extern "C" {
 
     Conformance relationships establish a multiple inheritanace hierarchy
     between types. Type property values may be inherited at runtime
-    according to the conformance relationships each type. When a type's 
+    according to the conformance relationships for each type. When a type's 
     declaration does not include a value for particular type property, 
     then the type's supertypes are searched for a value. Supertypes are 
     searched depth-first, in the order given in the type declaration. 
     This is the only way in which the declared order of the conforms-to 
-    supertypes is signitificant.
+    supertypes is significant.
 
     Tags
 
@@ -109,7 +109,7 @@ extern "C" {
     are optional.
 
     Exported vs. Imported Type Declarations
-    
+
     Type declarations are either exported or imported. An exported
     type declaration means that the type itself is defined or owned 
     by the organization making the declaration. For example, a propietary
@@ -136,20 +136,17 @@ extern "C" {
             <dict>
                 <key>UTTypeIdentifier</key>
                 <string>public.jpeg</string>
-                <key>UTTypeReferenceURL</key>
-                <string>http://www.w3.org/Graphics/JPEG/</string>
                 <key>UTTypeDescription</key>
                 <string>JPEG image</string>
-                <key>UTTypeIconName</key>
+                <key>UTTypeIconFile</key>
                 <string>public.jpeg.icns</string>
                 <key>UTTypeConformsTo</key>
                 <array>
                     <string>public.image</string>
-                    <string>public.data</string>
                 </array>
                 <key>UTTypeTagSpecification</key>
                 <dict>
-                    <key>com.apple.macos.ostype</key>
+                    <key>com.apple.ostype</key>
                     <string>JPEG</string>
                     <key>public.filename-extension</key>
                     <array>
@@ -369,7 +366,7 @@ extern const CFStringRef kUTTagClassOSType                           AVAILABLE_M
  *    inTag:
  *      the tag string
  *    
- *    inConformingToTypeIdentifier:
+ *    inConformingToUTI:
  *      the identifier of a type to which the result must conform
  *  
  *  Result:
@@ -385,7 +382,7 @@ extern CFStringRef
 UTTypeCreatePreferredIdentifierForTag(
   CFStringRef   inTagClass,
   CFStringRef   inTag,
-  CFStringRef   inConformingToTypeIdentifier)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef   inConformingToUTI)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 
@@ -420,7 +417,7 @@ UTTypeCreatePreferredIdentifierForTag(
  *    inTag:
  *      the tag string
  *    
- *    inConformingToTypeIdentifier:
+ *    inConformingToUTI:
  *      the identifier of a type to which the results must conform
  *  
  *  Result:
@@ -436,7 +433,7 @@ extern CFArrayRef
 UTTypeCreateAllIdentifiersForTag(
   CFStringRef   inTagClass,
   CFStringRef   inTag,
-  CFStringRef   inConformingToTypeIdentifier)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef   inConformingToUTI)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 
@@ -445,7 +442,7 @@ UTTypeCreateAllIdentifiersForTag(
  *  
  *  Discussion:
  *    Returns the identified type's preferred tag with the specified
- *    tag class as a CSString. This is the primary function to use for
+ *    tag class as a CFString. This is the primary function to use for
  *    going from uniform type identifier to tag. If the type
  *    declaration included more than one tag with the specified class,
  *    the first tag in the declared tag array is the preferred tag.
@@ -455,7 +452,7 @@ UTTypeCreateAllIdentifiersForTag(
  *  
  *  Parameters:
  *    
- *    inTypeIdentifier:
+ *    inUTI:
  *      the uniform type identifier
  *    
  *    inTagClass:
@@ -472,7 +469,7 @@ UTTypeCreateAllIdentifiersForTag(
  */
 extern CFStringRef 
 UTTypeCopyPreferredTagWithClass(
-  CFStringRef   inTypeIdentifier,
+  CFStringRef   inUTI,
   CFStringRef   inTagClass)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
@@ -493,10 +490,10 @@ UTTypeCopyPreferredTagWithClass(
  *  
  *  Parameters:
  *    
- *    inTypeIdentifier1:
+ *    inUTI1:
  *      a uniform type identifier
  *    
- *    inTypeIdentifier2:
+ *    inUTI2:
  *      another uniform type identifier
  *  
  *  Availability:
@@ -506,8 +503,8 @@ UTTypeCopyPreferredTagWithClass(
  */
 extern Boolean 
 UTTypeEqual(
-  CFStringRef   inTypeIdentifier1,
-  CFStringRef   inTypeIdentifier2)                            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef   inUTI1,
+  CFStringRef   inUTI2)                                       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 
@@ -524,10 +521,10 @@ UTTypeEqual(
  *  
  *  Parameters:
  *    
- *    inTypeIdentifier:
+ *    inUTI:
  *      the uniform type identifier to test
  *    
- *    inConformsToTypeIdentifier:
+ *    inConformsToUTI:
  *      the uniform type identifier against which to test conformance.
  *  
  *  Availability:
@@ -537,8 +534,8 @@ UTTypeEqual(
  */
 extern Boolean 
 UTTypeConformsTo(
-  CFStringRef   inTypeIdentifier,
-  CFStringRef   inConformsToTypeIdentifier)                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef   inUTI,
+  CFStringRef   inConformsToUTI)                              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 
@@ -553,7 +550,7 @@ UTTypeConformsTo(
  *  
  *  Parameters:
  *    
- *    inTypeIdentifier:
+ *    inUTI:
  *      the uniform type identifier
  *  
  *  Result:
@@ -565,7 +562,7 @@ UTTypeConformsTo(
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-UTTypeCopyDescription(CFStringRef inTypeIdentifier)           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+UTTypeCopyDescription(CFStringRef inUTI)                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 
@@ -583,7 +580,7 @@ UTTypeCopyDescription(CFStringRef inTypeIdentifier)           AVAILABLE_MAC_OS_X
  *  
  *  Parameters:
  *    
- *    inTypeIdentifier:
+ *    inUTI:
  *      the uniform type identifier
  *  
  *  Result:
@@ -595,7 +592,7 @@ UTTypeCopyDescription(CFStringRef inTypeIdentifier)           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFDictionaryRef 
-UTTypeCopyDeclaration(CFStringRef inTypeIdentifier)           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+UTTypeCopyDeclaration(CFStringRef inUTI)                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 
@@ -611,7 +608,7 @@ UTTypeCopyDeclaration(CFStringRef inTypeIdentifier)           AVAILABLE_MAC_OS_X
  *  
  *  Parameters:
  *    
- *    inTypeIdentifier:
+ *    inUTI:
  *      the uniform type identifier
  *  
  *  Result:
@@ -623,7 +620,7 @@ UTTypeCopyDeclaration(CFStringRef inTypeIdentifier)           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFURLRef 
-UTTypeCopyDeclaringBundleURL(CFStringRef inTypeIdentifier)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+UTTypeCopyDeclaringBundleURL(CFStringRef inUTI)               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 

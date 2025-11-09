@@ -1,15 +1,15 @@
 /*	CFNumberFormatter.h
-	Copyright (c) 2003-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 2003-2005, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFNUMBERFORMATTER__)
 #define __COREFOUNDATION_CFNUMBERFORMATTER__ 1
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
-
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFNumber.h>
 #include <CoreFoundation/CFLocale.h>
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 #if defined(__cplusplus)
 extern "C" {
@@ -27,7 +27,8 @@ typedef enum {	// number format styles
 	kCFNumberFormatterDecimalStyle = 1,
 	kCFNumberFormatterCurrencyStyle = 2,
 	kCFNumberFormatterPercentStyle = 3,
-	kCFNumberFormatterScientificStyle = 4
+	kCFNumberFormatterScientificStyle = 4,
+	kCFNumberFormatterSpellOutStyle = 5
 } CFNumberFormatterStyle;
 
 
@@ -119,6 +120,13 @@ CF_EXPORT const CFStringRef kCFNumberFormatterFormatWidth AVAILABLE_MAC_OS_X_VER
 CF_EXPORT const CFStringRef kCFNumberFormatterPaddingPosition AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;	// CFNumber
 CF_EXPORT const CFStringRef kCFNumberFormatterPaddingCharacter AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;	// CFString
 CF_EXPORT const CFStringRef kCFNumberFormatterDefaultFormat AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;		// CFString
+CF_EXPORT const CFStringRef kCFNumberFormatterMultiplier AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFNumber
+CF_EXPORT const CFStringRef kCFNumberFormatterPositivePrefix AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFString
+CF_EXPORT const CFStringRef kCFNumberFormatterPositiveSuffix AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFString
+CF_EXPORT const CFStringRef kCFNumberFormatterNegativePrefix AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFString
+CF_EXPORT const CFStringRef kCFNumberFormatterNegativeSuffix AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFString
+CF_EXPORT const CFStringRef kCFNumberFormatterPerMillSymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFString
+CF_EXPORT const CFStringRef kCFNumberFormatterInternationalCurrencySymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // CFString
 
 typedef enum {
     kCFNumberFormatterRoundCeiling = 0,

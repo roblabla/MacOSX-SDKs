@@ -3,9 +3,9 @@
  
      Contains:   ColorSync Scripting Plugin API
  
-     Version:    ColorSync-118.2.4~3
+     Version:    ColorSync-174.3.3~45
  
-     Copyright:  © 1998-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1998-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -27,7 +27,6 @@
 
 
 
-
 #include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
@@ -39,7 +38,7 @@ extern "C" {
 #endif
 
 enum {
-                                        /* ColorSync Scripting AppleEvent Errors */
+                                        /* ColorSync Scripting Errors */
   cmspInvalidImageFile          = -4220, /* Plugin cannot handle this image file type */
   cmspInvalidImageSpace         = -4221, /* Plugin cannot create an image file of this colorspace */
   cmspInvalidProfileEmbed       = -4222, /* Specific invalid profile errors */
@@ -58,29 +57,6 @@ enum {
   cmspFavorEmbeddedMask         = 0x00000001 /* if bit 0 is 0 then use srcProf profile, if 1 then use profile embedded in image if present*/
 };
 
-
-/**** scripting plugin entry points  ****/
-typedef CALLBACK_API_C( CMError , ValidateImageProcPtr )(const FSSpec * spec);
-typedef CALLBACK_API_C( CMError , GetImageSpaceProcPtr )(const FSSpec *spec, OSType *space);
-typedef CALLBACK_API_C( CMError , ValidateSpaceProcPtr )(const FSSpec *spec, OSType *space);
-typedef CALLBACK_API_C( CMError , EmbedImageProcPtr )(const FSSpec *specFrom, const FSSpec *specInto, CMProfileRef embedProf, UInt32 embedFlags);
-typedef CALLBACK_API_C( CMError , UnembedImageProcPtr )(const FSSpec *specFrom, const FSSpec *specInto);
-typedef CALLBACK_API_C( CMError , MatchImageProcPtr )(const FSSpec *specFrom, const FSSpec *specInto, UInt32 qual, UInt32 srcIntent, CMProfileRef srcProf, CMProfileRef dstProf, CMProfileRef prfProf, UInt32 matchFlags);
-typedef CALLBACK_API_C( CMError , CountImageProfilesProcPtr )(const FSSpec *spec, UInt32 *count);
-typedef CALLBACK_API_C( CMError , GetIndImageProfileProcPtr )(const FSSpec *spec, UInt32 index, CMProfileRef *prof);
-typedef CALLBACK_API_C( CMError , SetIndImageProfileProcPtr )(const FSSpec *specFrom, const FSSpec *specInto, UInt32 index, CMProfileRef prof, UInt32 embedFlags);
-/**** CSScriptingLib entry points  ****/
-typedef CALLBACK_API_C( CMError , CMValidImageProcPtr )(const FSSpec * spec);
-typedef CALLBACK_API_C( CMError , CMGetImageSpaceProcPtr )(const FSSpec *spec, OSType *space);
-typedef CALLBACK_API_C( CMError , CMEmbedImageProcPtr )(const FSSpec *specFrom, const FSSpec *specInto, Boolean repl, CMProfileRef embProf);
-typedef CALLBACK_API_C( CMError , CMUnembedImageProcPtr )(const FSSpec *specFrom, const FSSpec *specInto, Boolean repl);
-typedef CALLBACK_API_C( CMError , CMMatchImageProcPtr )(const FSSpec *specFrom, const FSSpec *specInto, Boolean repl, UInt32 qual, CMProfileRef srcProf, UInt32 srcIntent, CMProfileRef dstProf);
-typedef CALLBACK_API_C( CMError , CMProofImageProcPtr )(const FSSpec *specFrom, const FSSpec *specInto, Boolean repl, UInt32 qual, CMProfileRef srcProf, UInt32 srcIntent, CMProfileRef dstProf, CMProfileRef prfProf);
-typedef CALLBACK_API_C( CMError , CMLinkImageProcPtr )(const FSSpec *specFrom, const FSSpec *specInto, Boolean repl, UInt32 qual, CMProfileRef lnkProf, UInt32 lnkIntent);
-typedef CALLBACK_API_C( CMError , CMCountImageProfilesProcPtr )(const FSSpec *spec, UInt32 *count);
-typedef CALLBACK_API_C( CMError , CMGetIndImageProfileProcPtr )(const FSSpec *spec, UInt32 index, CMProfileRef *prof);
-typedef CALLBACK_API_C( CMError , CMSetIndImageProfileProcPtr )(const FSSpec *specFrom, const FSSpec *specInto, Boolean repl, UInt32 index, CMProfileRef prof);
-/**** CSScriptingLib API  ****/
 
 /*
  *  CMValidImage()

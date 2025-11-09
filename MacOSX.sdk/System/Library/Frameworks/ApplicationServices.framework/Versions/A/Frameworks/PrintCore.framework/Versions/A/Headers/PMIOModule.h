@@ -41,7 +41,7 @@ strings in its UI, instead it gets the actual UI strings from the Printer Browse
 #define   kPMUSBConnection          	CFSTR("USB")
 #define   kPMLPRConnection          	CFSTR("LPR")
 #define   kPMDirServicesConnection      CFSTR("Directory Services")
-#define	  kPMRendezvousConnection		CFSTR("Rendezvous")
+#define	  kPMDNSSDConnection			CFSTR("DNSSD")
 #define	  kPMBluetoothConnection		CFSTR("Bluetooth")
 
 /* possible attributes that can be requested from an IO Module and allow clients to determine various 

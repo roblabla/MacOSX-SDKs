@@ -3,9 +3,9 @@
  
      Contains:   Keyboard API.
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1997-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1997-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -254,7 +254,15 @@ enum {
   /*
    * The keyboard layout kind (KeyboardLayoutKind).
    */
-  kKLKind                       = 7
+  kKLKind                       = 7,
+
+  /*
+   * The language/locale string associated with the keyboard, if any
+   * (CFStringRef). This string uses ISO 639 and ISO 3166 codes
+   * (examples: "fr", "en_US". Note: The CFStringRef may be NULL for
+   * some keyboards.
+   */
+  kKLLanguageCode               = 9
 };
 
 

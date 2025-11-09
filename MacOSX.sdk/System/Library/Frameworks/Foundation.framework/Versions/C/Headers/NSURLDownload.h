@@ -1,6 +1,6 @@
 /*	
     NSURLDownload.h
-    Copyright (C) 2003 Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2003-2005, Apple Computer, Inc. All rights reserved.    
     
     Public header file.
 */
@@ -14,6 +14,7 @@
 
 @class NSError;
 @class NSString;
+@class NSData;
 @class NSURLAuthenticationChallenge;
 @class NSURLDownloadInternal;
 @class NSURLRequest;
@@ -32,6 +33,17 @@
 }
 
 /*!
+    @method canResumeDownloadDecodedWithEncodingMIMEType:
+    @abstract Returns whether or not NSURLDownload can resume a download that was decoded with a given encoding MIME type.
+    @param MIMEType The encoding MIME type.
+    @description canResumeDownloadDecodedWithEncodingMIMEType: returns whether or not NSURLDownload can resume a download
+    that was decoded with a given encoding MIME type.  NSURLDownload cannot resume a download that was partially decoded
+    in the gzip format for example. In order to ensure that a download can be later resumed,
+    canResumeDownloadDecodedWithEncodingMIMEType: should be used when download:shouldDecodeSourceDataOfMIMEType: is called.
+*/
++ (BOOL)canResumeDownloadDecodedWithEncodingMIMEType:(NSString *)MIMEType;
+
+/*!
     @method initWithRequest:delegate:
     @abstract Initializes a NSURLDownload object and starts the download.
     @param request The request to download. Must not be nil.
@@ -39,6 +51,16 @@
     @result An initialized NSURLDownload object.
 */
 - (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate;
+
+/*!
+    @method initWithResumeData:delegate:path:
+    @abstract Initializes a NSURLDownload object for resuming a previous download.
+    @param resumeData The resume data from the previous download.
+    @param delegate The delegate of the download.
+    @param path The path of the incomplete downloaded file.
+    @result An initialized NSURLDownload object.
+*/
+- (id)initWithResumeData:(NSData *)resumeData delegate:(id)delegate path:(NSString *)path;
 
 /*!
     @method cancel
@@ -65,6 +87,36 @@
     @result The request of the download.
 */
 - (NSURLRequest *)request;
+
+/*!
+    @method resumeData
+    @abstract Returns the resume data of a download that is incomplete.
+    @result The resume data.
+    @description resumeData returns the resume data of a download that is incomplete. This data represents the necessary
+    state information that NSURLDownload needs to resume a download. The resume data can later be used when initializing
+    a download with initWithResumeData:delegate:path:. Non-nil is returned if resuming the download seems possible.
+    Non-nil is returned if the download was cancelled or ended in error after some but not all data has been received.
+    The protocol of the download as well as the server must support resuming for non-nil to be returned.
+    In order to later resume a download, be sure to call setDeletesFileUponFailure: with NO.
+*/
+- (NSData *)resumeData;
+
+/*!
+    @method setDeletesFileUponFailure:
+    @abstract Sets whether or not the downloaded file should be deleted upon failure.
+    @param deletesFileUponFailure The value of deletesFileUponFailure.
+    @description To allow the download to be resumed in case the download ends prematurely,
+    deletesFileUponFailure must be set to NO as soon as possible to prevent the downloaded file
+    from being deleted.
+*/
+- (void)setDeletesFileUponFailure:(BOOL)deletesFileUponFailure;
+
+/*!
+    @method deletesFileUponFailure
+    @abstract Returns whether or not the downloaded file should be deleted upon failure.
+    @result The value of deletesFileUponFailure. deletesFileUponFailure is YES by default.
+*/
+- (BOOL)deletesFileUponFailure;
 
 @end
 
@@ -124,6 +176,19 @@
     and should check the new response for the expected content length.
 */
 - (void)download:(NSURLDownload *)download didReceiveResponse:(NSURLResponse *)response;
+
+/*!
+    @method download:willResumeWithResponse:fromByte:
+    @abstract This method is called when the download has received a response from the server after attempting to
+    resume a download.
+    @param download The download that now has a NSURLResponse available for inspection.
+    @param response The NSURLResponse object for the given download.
+    @param startingByte The number of bytes from where the download will resume. 0 indicates that the download will
+    restart from the beginning.
+    @discussion download:willResumeWithResponse:fromByte: is called instead of download:didReceiveResponse:
+    when a download is initialized with initWithResumeData:delegate:path:.
+*/
+- (void)download:(NSURLDownload *)download willResumeWithResponse:(NSURLResponse *)response fromByte:(long long)startingByte;
 
 /*!
     @method download:didReceiveDataOfLength:

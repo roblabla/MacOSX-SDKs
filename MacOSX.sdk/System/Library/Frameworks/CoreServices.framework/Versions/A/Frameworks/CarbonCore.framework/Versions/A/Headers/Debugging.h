@@ -3,9 +3,9 @@
  
      Contains:   Macros to handle exceptions and assertions.
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1989-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1989-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -775,6 +775,91 @@ InstallDebugAssertOutputHandler(DebugAssertOutputHandlerUPP handler) AVAILABLE_M
  */
 
 
+/*
+ *  GetMacOSStatusErrorString()
+ *  
+ *  Summary:
+ *    Returns a const char* string which corresponds to the textual
+ *    constant for the given OSStatus code.
+ *  
+ *  Discussion:
+ *    This function returns a text string which corresponds to the
+ *    given OSStatus code, based on the errors in MacErrors.h.  For
+ *    example, GetMacOSStatusErrorString( -43 ) returns "fnfErr", which
+ *    is the text representation for the error constant -43.  This
+ *    function is useful if you want to get or print out ( for
+ *    debugging purposes only ) a useful description for a given
+ *    OSStatus error.  If no string is available for the given
+ *    constant, then the empty string "" is returned. Some error values
+ *    have multiple meanings; in those cases the multiple meanings are
+ *    all returned seperated by '/'es.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
+ *  Parameters:
+ *    
+ *    err:
+ *      The OSStatus to return a text string for.
+ *  
+ *  Result:
+ *    A const char* string corresponding to the given OSStatus
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const char * 
+GetMacOSStatusErrorString(OSStatus err)                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  GetMacOSStatusCommentString()
+ *  
+ *  Summary:
+ *    Returns a const char* string which corresponds to the descriptive
+ *    string for the given OSStatus code.
+ *  
+ *  Discussion:
+ *    This function returns a text string which corresponds to a
+ *    comment for the given OSStatus code, based on the errors in
+ *    MacErrors.h.  For example, GetMacOSStatusConstantString( -43 )
+ *    returns "File not found", which is the text representation for
+ *    the error constant -43.  This function is useful if you want to
+ *    get or print out ( for debugging purposes only ) a useful
+ *    description for a given OSStatus error.  If no string is
+ *    available for the given constant, then the empty string "" is
+ *    returned. If no string is available for the given constant, then
+ *    the empty string "" is returned.  Some error values have multiple
+ *    meanings; in those cases the multiple meanings are all returned
+ *    seperated by '/'es.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
+ *  Parameters:
+ *    
+ *    err:
+ *      The OSStatus to return a text string for.
+ *  
+ *  Result:
+ *    A const char* string corresponding to the given OSStatus
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const char * 
+GetMacOSStatusCommentString(OSStatus err)                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+/*
+   pascal < threadsafe, exportset=fw_CarbonCore_XMerlot >
+   Boolean IsDebuggerAttachedToProcess ( );
+*/
 /*
  *  NewDebugComponentCallbackUPP()
  *  

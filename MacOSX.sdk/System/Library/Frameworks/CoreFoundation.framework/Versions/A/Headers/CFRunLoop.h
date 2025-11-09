@@ -1,5 +1,5 @@
 /*	CFRunLoop.h
-	Copyright (c) 1998-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
 */
 
 /*!
@@ -197,8 +197,8 @@ CF_EXPORT void CFRunLoopRemoveTimer(CFRunLoopRef rl, CFRunLoopTimerRef timer, CF
 		Version 0 sources are fairly generic, but may require a
 		bit more implementation, or may require a separate
 		thread as part of the implementation, for a complex
-		source. Version 1 sources are available on Mach, and
-		have performance advantages when the source type can
+		source. Version 1 sources are available on Mach and Windows,
+		and have performance advantages when the source type can
 		be described with this style.
 	@field info An arbitrary pointer to client-defined data, which
 		can be associated with the source at creation time, and
@@ -227,26 +227,27 @@ CF_EXPORT void CFRunLoopRemoveTimer(CFRunLoopRef rl, CFRunLoopTimerRef timer, CF
 		whenever the source is removed from a run loop mode. This
 		information is often needed to implement complex sources.
 	@field getPort Defined in version 1 sources, this function returns
-		the Mach port to represent the source to the run loop.
-		This function must return the same Mach port every time it
-		is called, for the lifetime of the source, and should be
-		quick.
+		the Mach port or Windows HANDLE of a kernel object to
+		represent the source to the run loop.  This function
+		must return the same result every time it is called, for the
+                lifetime of the source, and should be quick.
 	@field perform This callback is the workhorse of a run loop source.
 		It is called when the source needs to be "handled" or
 		processing is needed for input or conditions relating to
 		the source. For version 0 sources, this function is called
 		when the source has been marked "signaled" with the
 		CFRunLoopSourceSignal() function, and should do whatever
-		handling is required for the source. For a version 1
-		source, this function is called when a Mach message arrives
-		on the source's Mach port, with the Mach message, its
+		handling is required for the source. For a version 1 source
+		on Mach, this function is called when a Mach message arrives
+		on the source's Mach port, with the message, its
 		length, an allocator, and the source's info pointer. A
 		version 1 source performs whatever processing is required
 		on the Mach message, then can return a pointer to a Mach
 		message (or NULL if none) to be sent (usually this is a
 		"reply" message), which should be allocated with the
 		allocator (and will be deallocated by the run loop after
-		sending).
+		sending).  For a version 1 source on Windows the function
+		is called when the kernel object is in the signaled state.
 */
 typedef struct {
     CFIndex	version;
@@ -261,7 +262,6 @@ typedef struct {
     void	(*perform)(void *info);
 } CFRunLoopSourceContext;
 
-#if defined(__MACH__)
 typedef struct {
     CFIndex	version;
     void *	info;
@@ -270,10 +270,14 @@ typedef struct {
     CFStringRef	(*copyDescription)(const void *info);
     Boolean	(*equal)(const void *info1, const void *info2);
     CFHashCode	(*hash)(const void *info);
+#if defined(__MACH__)
     mach_port_t	(*getPort)(void *info);
     void *	(*perform)(void *msg, CFIndex size, CFAllocatorRef allocator, void *info);
-} CFRunLoopSourceContext1;
+#else
+    HANDLE	(*getPort)(void *info);
+    void	(*perform)(void *info);
 #endif
+} CFRunLoopSourceContext1;
 
 /*!
 	@function CFRunLoopSourceGetTypeID

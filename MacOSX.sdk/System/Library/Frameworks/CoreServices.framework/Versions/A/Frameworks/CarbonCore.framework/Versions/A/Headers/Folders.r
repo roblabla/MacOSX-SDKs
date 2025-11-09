@@ -3,9 +3,9 @@
  
      Contains:   Folder Manager Interfaces.
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1995-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1995-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -31,7 +31,7 @@
 #define kUserDomain 					(-32763)			/*  Read/write. Resources that are private to the user. */
 #define kClassicDomain 					(-32762)			/*  Domain referring to the currently configured Classic System Folder */
 
-#define kLastDomainConstant 			(-32762)
+#define kLastDomainConstant 			(-32761)
 #define kCreateFolder 					1
 #define kDontCreateFolder 				0
 
@@ -51,6 +51,16 @@
 #define kFontsFolderType 				'font'				/*  Fonts go here  */
 #define kPreferencesFolderType 			'pref'				/*  preferences for applications go here  */
 #define kSystemPreferencesFolderType 	'sprf'				/*  System-type Preferences go here - this is always the system's preferences folder, never a logged in user's  */
+															/*     On Mac OS X, items in the temporary items folder on the boot volume will be deleted a certain amount of time after their */
+															/*     last access.  On non-boot volumes, items in the temporary items folder may never get deleted.  Thus, the use of the */
+															/*     temporary items folder on Mac OS X is discouraged, especially for long lived data.  Using this folder temporarily ( like */
+															/*     to write a temporary copy of a document to during a save, after which you FSpExchangeFiles() to swap the new contents with */
+															/*     the old version ) is certainly ok, but using the temporary items folder to cache data is not a good idea.  Instead, look */
+															/*     at tmpfile() and its cousins for a better way to do this kind of thing.  On Mac OS X 10.4 and later, this folder is inside a */
+															/*     folder named ".TemporaryItems" and in earlier versions of Mac OS X this folder is inside a folder named "Temporary Items". */
+															/*     On Mac OS 9.x, items in the the Temporary Items folder are never automatically deleted.  Instead, when a 9.x machine boots */
+															/*     up the temporary items folder on a volume ( if one still exists, and is not empty ) is moved into the trash folder on the */
+															/*     same volume and renamed "Rescued Items from <diskname>".    */
 #define kTemporaryFolderType 			'temp'				/*  temporary files go here (deleted periodically, but don't rely on it.)  */
 
 #define kExtensionDisabledFolderType 	'extD'
@@ -130,15 +140,15 @@
 #define kCachedDataFolderType 			'cach'				/*  Contains various cache files for different clients */
 #define kTemporaryItemsInCacheDataFolderType  'vtmp'
 #define kMagicTemporaryItemsFolderType 	'mtmp'
-#define kFrameworksFolderType 			'fram'				/*  Contains MacOS X Framework folders      */
+#define kFrameworksFolderType 			'fram'				/*  Contains MacOS X Framework folders */
 #define kPrivateFrameworksFolderType 	'pfrm'				/*  Contains MacOS X Private Framework folders      */
 #define kClassicDesktopFolderType 		'sdsk'				/*  MacOS 9 compatible desktop folder - same as  */
 															/*  kSystemDesktopFolderType but with a more appropriate */
 															/*  name for Mac OS X code. */
 #define kDeveloperFolderType 			'devf'				/*  Contains MacOS X Developer Resources */
-#define kSystemSoundsFolderType 		'ssnd'				/*  Contains Mac OS X System Sound Files */
-#define kComponentsFolderType 			'cmpd'				/*  Contains Mac OS X components */
-#define kQuickTimeComponentsFolderType 	'wcmp'				/*  Contains QuickTime components for Mac OS X */
+#define kSystemSoundsFolderType 		'ssnd'				/*  Contains Mac OS X System Sound Files ( valid in kSystemDomain, kLocalDomain, and kUserDomain ) */
+#define kComponentsFolderType 			'cmpd'				/*  Contains Mac OS X components   ( valid in kSystemDomain, kLocalDomain, and kUserDomain ) */
+#define kQuickTimeComponentsFolderType 	'wcmp'				/*  Contains QuickTime components for Mac OS X ( valid in kSystemDomain, kLocalDomain, and kUserDomain ) */
 #define kCoreServicesFolderType 		'csrv'				/*  Refers to the "CoreServices" folder on Mac OS X */
 #define kPictureDocumentsFolderType 	'pdoc'				/*  Refers to the "Pictures" folder in a users home directory */
 #define kMovieDocumentsFolderType 		'mdoc'				/*  Refers to the "Movies" folder in a users home directory */
@@ -146,6 +156,7 @@
 #define kInternetSitesFolderType 		'site'				/*  Refers to the "Sites" folder in a users home directory */
 #define kPublicFolderType 				'pubb'				/*  Refers to the "Public" folder in a users home directory */
 #define kAudioSupportFolderType 		'adio'				/*  Refers to the Audio support folder for Mac OS X */
+#define kAudioPresetsFolderType 		'apst'				/*  "Presets" folder of "Audio" folder, Mac OS X 10.4 and later */
 #define kAudioSoundsFolderType 			'asnd'				/*  Refers to the Sounds subfolder of Audio Support */
 #define kAudioSoundBanksFolderType 		'bank'				/*  Refers to the Banks subfolder of the Sounds Folder */
 #define kAudioAlertSoundsFolderType 	'alrt'				/*  Refers to the Alert Sounds subfolder of the Sound Folder */
@@ -187,6 +198,11 @@
 #define kPreMacOS91AutomountedServersFolderType  '§rvÄ'		/*  The "Servers" folder, pre Mac OS 9.1  */
 #define kPreMacOS91StationeryFolderType  '¿dst'				/*  The "Stationery" folder, pre Mac OS 9.1  */
 
+#define kTemporaryItemsInUserDomainFolderType  'temq'
+#define kAutosaveInformationFolderType 	'asav'				/*  ~/Library/Autosaved Information/ folder, used to store autosave information for user's applications.  Available in Mac OS X 10.4 and later.   */
+#define kSpotlightSavedSearchesFolderType  'spot'			/*  Usually ~/Library/Saved Searches/; used by Finder and Nav/Cocoa panels to find saved Spotlight searches  */
+#define kAutomatorWorkflowsFolderType 	'flow'				/*  Automator Workflows folder  */
+
 #define kCreateFolderAtBoot 			0x00000002
 #define kCreateFolderAtBootBit 			1
 #define kFolderCreatedInvisible 		0x00000004
@@ -209,6 +225,10 @@
 #define kFolderManagerFolderInMacOS9FolderIfMacOSXIsInstalledMask  0x00000400
 #define kFolderManagerFolderInMacOS9FolderIfMacOSXIsInstalledBit  10
 #define kFolderInLocalOrRemoteUserFolder  0x000000A0
+#define kFolderManagerNotCreatedOnRemoteVolumesBit  11
+#define kFolderManagerNotCreatedOnRemoteVolumesMask  0x0800
+#define kFolderManagerNewlyCreatedFolderIsLocalizedBit  12
+#define kFolderManagerNewlyCreatedFolderShouldHaveDotLocalizedCreatedWithinMask  0x1000
 
 #define kRelativeFolder 				'relf'
 #define kRedirectedRelativeFolder 		'rrel'

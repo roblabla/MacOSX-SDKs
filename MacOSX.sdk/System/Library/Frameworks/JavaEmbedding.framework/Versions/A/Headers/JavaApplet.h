@@ -3,9 +3,9 @@
  
      Contains:   interface to embedding a Java Applet in a Carbon Control
  
-     Version:    JavaEmbedding-24~506
+     Version:    JavaEmbedding-34~361
  
-     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -138,7 +138,11 @@ typedef CALLBACK_API_C( void , JE_ShowDocumentCallback )(jobject applet, CFURLRe
  */
 typedef CALLBACK_API_C( void , JE_SetStatusCallback )(jobject applet, CFStringRef statusMessage, void *userData);
 /*
- *  GetEmbeddingVMParams()
+ *  GetEmbeddingVMParams()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The JavaEmbedding framework is deprecated. Use the Java
+ *    Applet.plugin instead (in /Library/Internet Plug-Ins)
  *  
  *  Discussion:
  *    Gets a set of VM params that can be passed to JNI_CreateJavaVM.
@@ -153,16 +157,20 @@ typedef CALLBACK_API_C( void , JE_SetStatusCallback )(jobject applet, CFStringRe
  *      filled in with new data on completion.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-GetEmbeddingVMParams(JavaVMInitArgs * ioJavaVMInitArgs)       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+GetEmbeddingVMParams(JavaVMInitArgs * ioJavaVMInitArgs)       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  CreateAppletArena()
+ *  CreateAppletArena()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The JavaEmbedding framework is deprecated. Use the Java
+ *    Applet.plugin instead (in /Library/Internet Plug-Ins)
  *  
  *  Discussion:
  *    Create an applet arena. By default each applet you create will
@@ -177,17 +185,21 @@ GetEmbeddingVMParams(JavaVMInitArgs * ioJavaVMInitArgs)       AVAILABLE_MAC_OS_X
  *      The newly created applet arena.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-CreateAppletArena(AppletArena * outNewArena)                  AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+CreateAppletArena(AppletArena * outNewArena)                  AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
 /*
- *  CreateJavaApplet()
+ *  CreateJavaApplet()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The JavaEmbedding framework is deprecated. Use the Java
+ *    Applet.plugin instead (in /Library/Internet Plug-Ins)
  *  
  *  Discussion:
  *    Creates a java applet from a descriptor.
@@ -213,7 +225,7 @@ CreateAppletArena(AppletArena * outNewArena)                  AVAILABLE_MAC_OS_X
  *      creating controls.  Call env->DeleteGlobalRef() on it when done.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -223,7 +235,7 @@ CreateJavaApplet(
   AppletDescriptor   applet,
   Boolean            trusted,
   AppletArena        arena,              /* can be NULL */
-  jobject *          outJavaFrame)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  jobject *          outJavaFrame)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
@@ -242,7 +254,11 @@ typedef enum AppletState AppletState;
 
 
 /*
- *  SetJavaAppletState()
+ *  SetJavaAppletState()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The JavaEmbedding framework is deprecated. Use the Java
+ *    Applet.plugin instead (in /Library/Internet Plug-Ins)
  *  
  *  Discussion:
  *    Sets the state of the current applet as defined by the applet
@@ -262,7 +278,7 @@ typedef enum AppletState AppletState;
  *      Host defined data passed into showStatusFunction.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -270,12 +286,16 @@ extern OSStatus
 SetJavaAppletState(
   JNIEnv *      env,
   jobject       inAppletFrame,
-  AppletState   inNewState)                                   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  AppletState   inNewState)                                   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
 /*
- *  RegisterStatusCallback()
+ *  RegisterStatusCallback()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The JavaEmbedding framework is deprecated. Use the Java
+ *    Applet.plugin instead (in /Library/Internet Plug-Ins)
  *  
  *  Discussion:
  *    Registers your function that will be called to update the
@@ -304,7 +324,7 @@ SetJavaAppletState(
  *      Host defined data passed into showStatusFunction.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -313,12 +333,16 @@ RegisterStatusCallback(
   JNIEnv *               env,
   jobject                inJavaFrame,
   JE_SetStatusCallback   showStatusFunction,
-  void *                 userData)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  void *                 userData)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
 /*
- *  RegisterShowDocumentCallback()
+ *  RegisterShowDocumentCallback()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The JavaEmbedding framework is deprecated. Use the Java
+ *    Applet.plugin instead (in /Library/Internet Plug-Ins)
  *  
  *  Discussion:
  *    Registers your function that will be called when the applet
@@ -350,7 +374,7 @@ RegisterStatusCallback(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -359,7 +383,7 @@ RegisterShowDocumentCallback(
   JNIEnv *                  env,
   jobject                   inJavaFrame,
   JE_ShowDocumentCallback   showDocumentFunction,
-  void *                    userData)                         AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  void *                    userData)                         AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 

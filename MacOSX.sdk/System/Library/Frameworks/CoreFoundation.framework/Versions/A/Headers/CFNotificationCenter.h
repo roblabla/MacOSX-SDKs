@@ -1,5 +1,5 @@
 /*	CFNotificationCenter.h
-	Copyright (c) 1998-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2005, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFNOTIFICATIONCENTER__)
@@ -29,7 +29,27 @@ typedef enum {
 
 CF_EXPORT CFTypeID CFNotificationCenterGetTypeID(void);
 
+CF_EXPORT CFNotificationCenterRef CFNotificationCenterGetLocalCenter(void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
 CF_EXPORT CFNotificationCenterRef CFNotificationCenterGetDistributedCenter(void);
+
+CF_EXPORT CFNotificationCenterRef CFNotificationCenterGetDarwinNotifyCenter(void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+// The Darwin Notify Center is based on the <notify.h> API.
+// For this center, there are limitations in the API. There are no notification "objects",
+// "userInfo" cannot be passed in the notification, and there are no suspension behaviors
+// (always "deliver immediately"). Other limitations in the <notify.h> API as described in
+// that header will also apply.
+// - In the CFNotificationCallback, the 'object' and 'userInfo' parameters must be ignored.
+// - CFNotificationCenterAddObserver(): the 'object' and 'suspensionBehavior' arguments are ignored.
+// - CFNotificationCenterAddObserver(): the 'name' argument may not be NULL (for this center).
+// - CFNotificationCenterRemoveObserver(): the 'object' argument is ignored.
+// - CFNotificationCenterPostNotification(): the 'object', 'userInfo', and 'deliverImmediately' arguments are ignored.
+// - CFNotificationCenterPostNotificationWithOptions(): the 'object', 'userInfo', and 'options' arguments are ignored.
+// The Darwin Notify Center has no notion of per-user sessions, all notifications are system-wide.
+// As with distributed notifications, the main thread's run loop must be running in one of the
+// common modes (usually kCFRunLoopDefaultMode) for Darwin-style notifications to be delivered.
+// NOTE: NULL or 0 should be passed for all ignored arguments to ensure future compatibility.
+
 
 CF_EXPORT void CFNotificationCenterAddObserver(CFNotificationCenterRef center, const void *observer, CFNotificationCallback callBack, CFStringRef name, const void *object, CFNotificationSuspensionBehavior suspensionBehavior);
 

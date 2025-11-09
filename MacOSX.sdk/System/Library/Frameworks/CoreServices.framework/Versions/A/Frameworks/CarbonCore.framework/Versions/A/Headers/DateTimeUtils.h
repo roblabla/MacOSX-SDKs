@@ -3,9 +3,9 @@
  
      Contains:   International Date and Time Interfaces (previously in TextUtils)
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -437,10 +437,17 @@ UCConvertCFAbsoluteTimeToLongDateTime(
     These routine are available in Carbon with their new name
 */
 /*
- *  DateString()
+ *  DateString()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFDateFormatterCreateStringWithDate instead
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFDateFormatterCreateStringWithDate instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -449,14 +456,21 @@ DateString(
   long       dateTime,
   DateForm   longFlag,
   Str255     result,
-  Handle     intlHandle)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle     intlHandle)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  TimeString()
+ *  TimeString()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFDateFormatterCreateStringWithDate instead
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFDateFormatterCreateStringWithDate instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -465,14 +479,21 @@ TimeString(
   long      dateTime,
   Boolean   wantSeconds,
   Str255    result,
-  Handle    intlHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle    intlHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  LongDateString()
+ *  LongDateString()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFDateFormatterCreateStringWithDate instead
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFDateFormatterCreateStringWithDate instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -481,14 +502,21 @@ LongDateString(
   const LongDateTime *  dateTime,
   DateForm              longFlag,
   Str255                result,
-  Handle                intlHandle)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle                intlHandle)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  LongTimeString()
+ *  LongTimeString()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFDateFormatterCreateStringWithDate instead
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFDateFormatterCreateStringWithDate instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
  */
@@ -497,7 +525,7 @@ LongTimeString(
   const LongDateTime *  dateTime,
   Boolean               wantSeconds,
   Str255                result,
-  Handle                intlHandle)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle                intlHandle)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
@@ -505,22 +533,35 @@ LongTimeString(
     These routine are available in Carbon and InterfaceLib with their new name
 */
 /*
- *  InitDateCache()
+ *  InitDateCache()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    No longer needed on MacOS X.
+ *  
+ *  Discussion:
+ *    This function is obsolate.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-InitDateCache(DateCachePtr theCache)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+InitDateCache(DateCachePtr theCache)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  StringToDate()
+ *  StringToDate()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFDateFormatterCreateDateFromString instead
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFDateFormatterCreateDateFromString instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -530,14 +571,21 @@ StringToDate(
   long           textLen,
   DateCachePtr   theCache,
   long *         lengthUsed,
-  LongDateRec *  dateTime)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  LongDateRec *  dateTime)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  StringToTime()
+ *  StringToTime()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFDateFormatterCreateDateFromString instead
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFDateFormatterCreateDateFromString instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -547,42 +595,63 @@ StringToTime(
   long           textLen,
   DateCachePtr   theCache,
   long *         lengthUsed,
-  LongDateRec *  dateTime)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  LongDateRec *  dateTime)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  LongDateToSeconds()
+ *  LongDateToSeconds()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFCalendar instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use CFCalendar
+ *    instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 LongDateToSeconds(
   const LongDateRec *  lDate,
-  LongDateTime *       lSecs)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  LongDateTime *       lSecs)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  LongSecondsToDate()
+ *  LongSecondsToDate()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFCalendar instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use CFCalendar
+ *    instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 LongSecondsToDate(
   const LongDateTime *  lSecs,
-  LongDateRec *         lDate)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  LongDateRec *         lDate)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  ToggleDate()
+ *  ToggleDate()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFCalendar instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use CFCalendar
+ *    instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -592,14 +661,21 @@ ToggleDate(
   LongDateField     field,
   DateDelta         delta,
   short             ch,
-  const TogglePB *  params)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const TogglePB *  params)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  ValidDate()
+ *  ValidDate()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFCalendar instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use CFCalendar
+ *    instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -607,95 +683,144 @@ extern short
 ValidDate(
   const LongDateRec *  vDate,
   long                 flags,
-  LongDateTime *       newSecs)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  LongDateTime *       newSecs)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  ReadDateTime()
+ *  ReadDateTime()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFAbsoluteTimeGetCurrent instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFAbsoluteTimeGetCurrent instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-ReadDateTime(unsigned long * time)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ReadDateTime(unsigned long * time)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetDateTime()
+ *  GetDateTime()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFAbsoluteTimeGetCurrent instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFAbsoluteTimeGetCurrent instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GetDateTime(unsigned long * secs)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetDateTime(unsigned long * secs)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SetDateTime()
+ *  SetDateTime()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    deprecated it without replacement
+ *  
+ *  Discussion:
+ *    This function is no longer recommended.  One has to be root on
+ *    MacOSX to set. This is done through other means on OS X
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-SetDateTime(unsigned long time)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetDateTime(unsigned long time)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SetTime()
+ *  SetTime()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    deprecated it without replacement
+ *  
+ *  Discussion:
+ *    This function is no longer recommended.  One has to be root on
+ *    MacOSX to set. This is done through other means on OS X
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetTime(const DateTimeRec * d)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetTime(const DateTimeRec * d)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetTime()
+ *  GetTime()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFAbsoluteTimeGetCurrent instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFAbsoluteTimeGetCurrent instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GetTime(DateTimeRec * d)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetTime(DateTimeRec * d)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DateToSeconds()
+ *  DateToSeconds()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFCalendar instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use CFCalendar
+ *    instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 DateToSeconds(
   const DateTimeRec *  d,
-  unsigned long *      secs)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *      secs)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SecondsToDate()
+ *  SecondsToDate()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFCalendar instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use CFCalendar
+ *    instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 SecondsToDate(
   unsigned long   secs,
-  DateTimeRec *   d)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DateTimeRec *   d)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 

@@ -27,7 +27,8 @@ typedef struct OpaqueIOBluetoothObjectRef *			IOBluetoothServiceBrowserControlle
   @enum IOBluetoothServiceBrowserControllerOptions
   @discussion Option values to customize the behavior of an IOBluetoothServiceBrowserController object.
   @constant kIOBluetoothServiceBrowserControllerOptionsNone - no options set.
-  @constant kIOBluetoothServiceBrowserControllerOptionsAutoStartInquiry - automatically start an inquiry when the panel is diaplayed.
+  @constant kIOBluetoothServiceBrowserControllerOptionsAutoStartInquiry - automatically start an inquiry when the panel is displayed.
+  @constant kIOBluetoothServiceBrowserControllerOptionsDisconnectWhenDone - disconnect from the device when UI operations are finished.
   
 */
 typedef uint32_t IOBluetoothServiceBrowserControllerOptions;

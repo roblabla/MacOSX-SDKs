@@ -1,5 +1,5 @@
 /*	NSStream.h
-        Copyright 2003, Apple, Inc. All rights reserved
+        Copyright (c) 2003-2005, Apple, Inc. All rights reserved
 */
 
 #import <Foundation/NSObject.h>

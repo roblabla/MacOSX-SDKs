@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002,2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2005 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -22,30 +22,24 @@
 /*
  * @OSF_COPYRIGHT@
  */
+
 /*
  * Define Basic IPC types available to callers.
  * These are not intended to be used directly, but
  * are used to define other types available through
  * port.h and mach_types.h for in-kernel entities.
  */
-#ifndef	_IPC_TYPES_H_
-#define	_IPC_TYPES_H_
+
+#ifndef	_IPC_IPC_TYPES_H_
+#define	_IPC_IPC_TYPES_H_
 
 #include <mach/port.h>
 #include <mach/message.h>
 #include <mach/mach_types.h>
 
-#if !defined(MACH_KERNEL_PRIVATE)
 
-/*
- * For kernel code that resides outside of mach
- * we define empty structs so that everything will
- * remain strongly typed, without giving out
- * implementation details.
- */
 struct ipc_object ;
 
-#endif /* !MACH_KERNEL_PRIVATE */
 
 typedef struct ipc_object	*ipc_object_t;
 
@@ -54,6 +48,4 @@ typedef struct ipc_object	*ipc_object_t;
 #define IPC_OBJECT_VALID(io)	(((io) != IPC_OBJECT_NULL) && \
 				 ((io) != IPC_OBJECT_DEAD))
 
-typedef	void (*mach_msg_continue_t)(mach_msg_return_t);	/* after wakeup */
-
-#endif	/* _IPC_TYPES_H_ */
+#endif	/* _IPC_IPC_TYPES_H_ */

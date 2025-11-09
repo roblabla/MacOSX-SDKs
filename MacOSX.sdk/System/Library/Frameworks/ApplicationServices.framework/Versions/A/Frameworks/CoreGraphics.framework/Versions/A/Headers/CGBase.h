@@ -8,6 +8,7 @@
 
 #include <stdbool.h>
 #include <stddef.h>
+#include <AvailabilityMacros.h>
 
 #ifdef __cplusplus
 #  define CG_EXTERN_C_BEGIN extern "C" {
@@ -38,6 +39,14 @@ CG_EXTERN_C_BEGIN
 
 #if !defined(CG_PRIVATE_EXTERN)
 #  define CG_PRIVATE_EXTERN __private_extern__
+#endif
+
+#if !defined(CG_OBSOLETE)
+#  if defined(__GNUC__) && (__GNUC__ >= 3) && (__GNUC_MINOR__ >= 1)
+#    define CG_OBSOLETE __attribute__((deprecated))
+#  else
+#    define CG_OBSOLETE
+#  endif
 #endif
 
 #if !defined(CG_INLINE)

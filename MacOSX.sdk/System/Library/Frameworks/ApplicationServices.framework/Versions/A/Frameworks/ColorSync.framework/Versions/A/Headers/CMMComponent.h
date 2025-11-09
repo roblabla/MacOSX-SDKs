@@ -3,9 +3,9 @@
  
      Contains:   ColorSync CMM Component API
  
-     Version:    ColorSync-118.2.4~3
+     Version:    ColorSync-174.3.3~45
  
-     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -24,6 +24,10 @@
 #include <ColorSync/CMApplication.h>
 #endif
 
+#ifndef __CMFLOATBITMAP__
+#include <ColorSync/CMFloatBitmap.h>
+#endif
+
 
 
 
@@ -33,240 +37,264 @@
 #pragma once
 #endif
 
-/* Component-based CMM interface version */
-enum {
-  CMMInterfaceVersion           = 1
-};
-
-
-/* Component-based CMM function selectors */
-enum {
-                                        /* Required */
-  kCMMOpen                      = -1,   /* kComponentOpenSelect,*/
-  kCMMClose                     = -2,   /* kComponentCloseSelect,*/
-  kCMMGetInfo                   = -4,   /* kComponentVersionSelect*/
-  kNCMMInit                     = 6,
-  kCMMMatchColors               = 1,
-  kCMMCheckColors               = 2,
-
-                                        /* Optional */
-  kCMMValidateProfile           = 8,
-  kCMMMatchBitmap               = 9,
-  kCMMCheckBitmap               = 10,
-  kCMMConcatenateProfiles       = 5,
-  kCMMConcatInit                = 7,
-  kCMMNewLinkProfile            = 16,
-  kNCMMConcatInit               = 18,
-  kNCMMNewLinkProfile           = 19,
-  kCMMGetPS2ColorSpace          = 11,
-  kCMMGetPS2ColorRenderingIntent = 12,
-  kCMMGetPS2ColorRendering      = 13,
-  kCMMGetPS2ColorRenderingVMSize = 17,
-
-                                        /* obsolete with ColorSync 2.5 */
-  kCMMFlattenProfile            = 14,
-  kCMMUnflattenProfile          = 15,
-
-                                        /* obsolete with ColorSync 2.6 */
-  kCMMInit                      = 0,
-  kCMMGetNamedColorInfo         = 70,
-  kCMMGetNamedColorValue        = 71,
-  kCMMGetIndNamedColorValue     = 72,
-  kCMMGetNamedColorIndex        = 73,
-  kCMMGetNamedColorName         = 74,
-
-                                        /* obsolete with ColorSync 3.0 */
-  kCMMMatchPixMap               = 3,
-  kCMMCheckPixMap               = 4
-};
-
-
-#if !TARGET_API_MAC_OS8
-/*
-   The following declarations specify the calling conventions
-   for non-Component-based CMM entry-points.
-*/
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /*
-   On TARGET_API_MAC_OSX, cmmInstance is a CFBundleRef
-   On TARGET_OS_WIN32, cmmInstance is a HINSTANCE
+   The following declarations specify the calling conventions for CMM entry-points on Mac OS X.
+   On TARGET_API_MAC_OSX, cmmInstance is undefined
 */
 /*
  *  CMMOpen()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *    Implemented by client
  */
+extern CMError 
+CMMOpen(
+  UInt32 *  cmmStorage,
+  void *    cmmInstance);
 
 
 /*
  *  CMMClose()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *    Implemented by client
  */
+extern CMError 
+CMMClose(UInt32 * cmmStorage);
 
 
 /*
  *  NCMMInit()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *    Implemented by client
  */
+extern CMError 
+NCMMInit(
+  UInt32 *       cmmStorage,
+  CMProfileRef   srcProfile,
+  CMProfileRef   dstProfile);
 
 
 /*
  *  CMMMatchColors()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *    Implemented by client
  */
+extern CMError 
+CMMMatchColors(
+  UInt32 *   cmmStorage,
+  CMColor *  colors,
+  UInt32     count);
 
 
 /*
  *  CMMCheckColors()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *    Implemented by client
  */
+extern CMError 
+CMMCheckColors(
+  UInt32 *   cmmStorage,
+  CMColor *  colors,
+  UInt32     count,
+  UInt8 *    result);
 
 
 /*
  *  CMMValidateProfile()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *    Implemented by client
  */
+extern CMError 
+CMMValidateProfile(
+  UInt32 *       cmmStorage,
+  CMProfileRef   prof,
+  Boolean *      valid);
 
 
 /*
  *  CMMMatchBitmap()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *    Implemented by client
  */
+extern CMError 
+CMMMatchBitmap(
+  UInt32 *              cmmStorage,
+  CMBitmap *            bitmap,
+  CMBitmapCallBackUPP   progressProc,
+  void *                refCon,
+  CMBitmap *            matchedBitmap);
 
 
 /*
  *  CMMCheckBitmap()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *    Implemented by client
  */
+extern CMError 
+CMMCheckBitmap(
+  UInt32 *              cmmStorage,
+  const CMBitmap *      bitmap,
+  CMBitmapCallBackUPP   progressProc,
+  void *                refCon,
+  CMBitmap *            resultBitmap);
+
+
+/*
+ *  CMMMatchFloatBitmap()
+ *  
+ *  Availability:
+ *    Implemented by client
+ */
+extern CMError 
+CMMMatchFloatBitmap(
+  UInt32 *               cmmStorage,
+  const CMFloatBitmap *  bitmap,
+  CMFloatBitmap *        resultBitmap);
 
 
 /*
  *  CMMConcatInit()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *    Implemented by client
  */
+extern CMError 
+CMMConcatInit(
+  UInt32 *              cmmStorage,
+  CMConcatProfileSet *  profileSet);
 
 
 /*
  *  NCMMConcatInit()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *    Implemented by client
  */
+extern CMError 
+NCMMConcatInit(
+  UInt32 *               cmmStorage,
+  NCMConcatProfileSet *  profileSet,
+  CMConcatCallBackUPP    proc,
+  void *                 refCon);
+
+
+/*
+ *  CMMSetProperties()
+ *  
+ *  Availability:
+ *    Implemented by client
+ */
+extern CMError 
+CMMSetProperties(
+  UInt32 *      cmmStorage,
+  CMWorldRef    cw,
+  CFStringRef   requestedKey);
 
 
 /*
  *  CMMNewLinkProfile()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *    Implemented by client
  */
+extern CMError 
+CMMNewLinkProfile(
+  UInt32 *                   cmmStorage,
+  CMProfileRef *             prof,
+  const CMProfileLocation *  targetLocation,
+  CMConcatProfileSet *       profileSet);
 
 
 /*
  *  NCMMNewLinkProfile()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *    Implemented by client
  */
+extern CMError 
+NCMMNewLinkProfile(
+  UInt32 *               cmmStorage,
+  CMProfileRef           prof,
+  NCMConcatProfileSet *  profileSet,
+  CMConcatCallBackUPP    proc,
+  void *                 refCon);
 
 
 /*
  *  CMMGetPS2ColorSpace()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *    Implemented by client
  */
+extern CMError 
+CMMGetPS2ColorSpace(
+  UInt32 *       cmmStorage,
+  CMProfileRef   srcProf,
+  UInt32         flags,
+  CMFlattenUPP   proc,
+  void *         refCon);
 
 
 /*
  *  CMMGetPS2ColorRenderingIntent()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *    Implemented by client
  */
+extern CMError 
+CMMGetPS2ColorRenderingIntent(
+  UInt32 *       cmmStorage,
+  CMProfileRef   srcProf,
+  UInt32         flags,
+  CMFlattenUPP   proc,
+  void *         refCon);
 
 
 /*
  *  CMMGetPS2ColorRendering()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *    Implemented by client
  */
+extern CMError 
+CMMGetPS2ColorRendering(
+  UInt32 *       cmmStorage,
+  CMProfileRef   srcProf,
+  CMProfileRef   dstProf,
+  UInt32         flags,
+  CMFlattenUPP   proc,
+  void *         refCon);
 
 
 /*
  *  CMMGetPS2ColorRenderingVMSize()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *    Implemented by client
  */
+extern CMError 
+CMMGetPS2ColorRenderingVMSize(
+  UInt32 *       cmmStorage,
+  CMProfileRef   srcProf,
+  CMProfileRef   dstProf,
+  UInt32 *       vmSize);
 
 
-#endif  /* !TARGET_API_MAC_OS8 */
 
-#if TARGET_OS_WIN32
-/*
- *  CMMGetCMMInfo()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-#endif  /* TARGET_OS_WIN32 */
-
-
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __CMMCOMPONENT__ */
 

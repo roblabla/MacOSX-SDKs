@@ -1,17 +1,12 @@
 /*
 	NSScriptCommand.h
-	Copyright (c) 1997-2003, Apple Computer, Inc.
+	Copyright (c) 1997-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSAppleEventDescriptor;
-@class NSDictionary;
-@class NSMutableDictionary;
-@class NSScriptObjectSpecifier;
-@class NSScriptCommandDescription;
-@class NSString;
+@class NSAppleEventDescriptor, NSDictionary, NSMutableDictionary, NSScriptObjectSpecifier, NSScriptCommandDescription, NSString;
 
 // Error codes for general command execution problems (not typedef'd to allow subclasses to define their own values)
 enum {
@@ -41,11 +36,9 @@ enum {
     struct {
         unsigned int hasEvaluatedReceivers:1;
         unsigned int hasEvaluatedArguments:1;
-        unsigned int hasBeenValidated:1;
-        unsigned int isWellFormed:1;
-        unsigned int RESERVED:28;
+        unsigned int RESERVED:30;
     } _flags;
-    void *_moreVars;
+    id _moreVars;
     void *_reserved;
 
 }

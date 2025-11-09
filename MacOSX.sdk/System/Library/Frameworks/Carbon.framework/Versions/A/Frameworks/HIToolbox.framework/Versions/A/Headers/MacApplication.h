@@ -3,9 +3,9 @@
  
      Contains:   Application-level APIs
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -55,6 +55,15 @@ extern "C" {
  *    Non-Carbon CFM:   not available
  */
 extern const float kHIToolboxVersionNumber                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+// the HIToolbox version number for various Mac OS X releases
+#define kHIToolboxVersionNumber10_3      (145.0)
+#define kHIToolboxVersionNumber10_3_2   (145.35)
+#define kHIToolboxVersionNumber10_3_3  (145.38)
+#define kHIToolboxVersionNumber10_3_4  (145.41)
+#define kHIToolboxVersionNumber10_3_5  (145.43)
+
+
 
 /*
  *  Summary:
@@ -611,10 +620,14 @@ GetApplicationScript(void)                                    AVAILABLE_MAC_OS_X
  *  Discussion:
  *    This about box is a generic about box that automatically can
  *    display your application name, version string, and copyright
- *    string. It peeks into either the Info.plist or your bundle
- *    resource (not recommended) to get the information by default. You
- *    can customize what it displays by passing in various options in
- *    the input dictionary.
+ *    string. It peeks into either the Info.plist (for the
+ *    CFBundleName, CFBundleVersion, and CFBundleGetInfoString keys) or
+ *    your bundle resource (not recommended) to get the information by
+ *    default. You can customize what it displays by passing in various
+ *    options in the input dictionary. Note that currently the
+ *    description string can only be specified in the options
+ *    dictionary; this function does not check your Info.plist for a
+ *    descriptions string. <br>
  *    There are three basic ways to call this function. First, you can
  *    pass NULL for inOptions. As mentioned, default information will
  *    be displayed. Second, you can pass the actual values for the
@@ -632,14 +645,15 @@ GetApplicationScript(void)                                    AVAILABLE_MAC_OS_X
  *    should be the same value as the keys you would use to pass into
  *    the inOptions dictionary. Again, if a string is not found in that
  *    file, we would fall back to looking for a string in the
- *    dictionary, and then finally the Info.plist.
+ *    dictionary, and then finally the Info.plist. 
+ *    
  *    Certainly this is not the be-all-end-all of about boxes, but it
  *    does provide a simple no-work about box for your application. The
  *    standard Toolbox application handler now responds to the
  *    kHICommandAbout command ID by calling HIAboutBox for you. This
  *    means that any Carbon Event-based application will get this
  *    behavior for free right out of the box. If you wish for the
- *    window to respond to cmd-W in the menu bar, you should be sure
+ *    window to respond to cmd-W in the menu bar, you should make sure
  *    that menu item has the kHICommandClose commandID.
  *  
  *  Mac OS X threading:
@@ -662,6 +676,43 @@ GetApplicationScript(void)                                    AVAILABLE_MAC_OS_X
  */
 extern OSStatus 
 HIAboutBox(CFDictionaryRef inOptions)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+/*
+ *  HISearchWindowShow()
+ *  
+ *  Summary:
+ *    Sends a message to the System UI server to put up Spotlight UI.
+ *  
+ *  Discussion:
+ *    Brings up "search for string" Spotlight UI. The window is shown
+ *    in the default configuration (Search scope and grouping rules)
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSearchString:
+ *      A CFString to search for. You may pass NULL to open the search
+ *      window with no initial query string.
+ *    
+ *    inFlags:
+ *      Optional flags. Use kNilOptions for now.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISearchWindowShow(
+  CFStringRef   inSearchString,       /* can be NULL */
+  OptionBits    inFlags)                                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 

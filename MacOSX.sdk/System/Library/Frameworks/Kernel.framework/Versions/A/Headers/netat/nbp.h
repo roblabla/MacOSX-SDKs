@@ -54,6 +54,8 @@
 #define _NETAT_NBP_H_
 #include <sys/appleapiopts.h>
 
+#ifdef __APPLE_API_OBSOLETE
+
 /* NBP packet types */
 
 #define NBP_BRRQ		0x01  	/* Broadcast request */
@@ -89,61 +91,21 @@
 #define	NBP_HDR_SIZE	2
 
 typedef struct at_nbp {
-        unsigned      	control : 4,
-        	      	tuple_count : 4;
+#if BYTE_ORDER == BIG_ENDIAN
+        unsigned      	
+        	control : 4,
+        	tuple_count : 4;
+#endif
+#if BYTE_ORDER == LITTLE_ENDIAN
+		unsigned
+			tuple_count : 4,
+			control : 4;
+#endif
 	u_char		at_nbp_id;
 	at_nbptuple_t	tuple[NBP_TUPLE_MAX];
 } at_nbp_t;
 
 #define DEFAULT_ZONE(zone) (!(zone)->len || ((zone)->len == 1 && (zone)->str[0] == '*'))
 
-#ifdef KERNEL
-#ifdef __APPLE_API_PRIVATE
-
-/* Struct for name registry */
-typedef struct _nve_ {
-	TAILQ_ENTRY(_nve_) nve_link; /* tailq macro glue */
-	gbuf_t		*tag;		/*pointer to the parent gbuf_t*/
-					/* *** there's no reason why tag has to
-					   be an mbuf *** */
-	at_nvestr_t	zone;
-	u_int		zone_hash;
-	at_nvestr_t	object;
-	u_int		object_hash;
-	at_nvestr_t	type;
-	u_int		type_hash;
-	at_inet_t	address;
-	u_char		ddptype;
-	u_char		enumerator;
-	int		pid;
-	long		unique_nbp_id;	/* long to be compatible with OT */
-} nve_entry_t;
-
-#define	NBP_WILD_OBJECT	0x01
-#define	NBP_WILD_TYPE	0x02
-#define	NBP_WILD_MASK	0x03
-
-typedef	struct	nbp_req	{
-	int		(*func)();
-	gbuf_t		*response;	/* the response datagram	*/
-	int		space_unused;	/* Space available in the resp	*/
-					/* packet.			*/
-	gbuf_t		*request;	/* The request datagram		*/
-					/* Saved for return address	*/
-	nve_entry_t	nve;
-	u_char		flags;		/* Flags to indicate whether or	*/
-					/* not the request tuple has	*/
-					/* wildcards in it		*/
-} nbp_req_t;
-
-extern int	nbp_insert_entry(nve_entry_t *);
-extern u_int	nbp_strhash (at_nvestr_t *);
-extern nve_entry_t *nbp_find_nve(nve_entry_t *);
-extern int	nbp_fillin_nve();
-
-extern at_nvestr_t *getSPLocalZone(int);
-extern at_nvestr_t *getLocalZone(int);
-
-#endif /* __APPLE_API_PRIVATE */
-#endif /* KERNEL */
+#endif /* __APPLE_API_OBSOLETE */
 #endif /* _NETAT_NBP_H_ */

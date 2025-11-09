@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2004 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -19,17 +19,36 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
-#ifndef _MACHINE_SPL_H
-#define _MACHINE_SPL_H
+#ifndef _BSD_MACHINE_SPL_H_
+#define _BSD_MACHINE_SPL_H_
+
+#ifndef __ASSEMBLER__
+/*
+ *	Machine-dependent SPL definitions.
+ *
+ */
+typedef unsigned	spl_t;
+
+extern unsigned	int sploff(void);
+extern unsigned	int splhigh(void);
+extern unsigned	int splsched(void);
+extern unsigned	int splclock(void);
+extern unsigned	int splpower(void);
+extern unsigned	int splvm(void);
+extern unsigned	int splbio(void);
+extern unsigned	int splimp(void);
+extern unsigned	int spltty(void);
+extern unsigned	int splnet(void);
+extern unsigned	int splsoftclock(void);
+
+extern void	spllo(void);
+extern void	splon(unsigned int level);
+extern void	splx(unsigned int level);
+extern void	spln(unsigned int level);
+#define splstatclock()	splhigh()
+
+#endif /* __ASSEMBLER__ */
 
 
-#if defined (__ppc__)
-#include "ppc/spl.h"
-#elif defined (__i386__)
-#include "i386/spl.h"
-#else
-#error architecture not supported
-#endif
 
-
-#endif /* _MACHINE_SPL_H */
+#endif /* _BSD_MACHINE_SPL_H_ */

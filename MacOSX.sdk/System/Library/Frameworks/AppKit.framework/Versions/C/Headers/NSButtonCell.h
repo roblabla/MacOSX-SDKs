@@ -1,7 +1,7 @@
 /*
 	NSButtonCell.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -42,7 +42,14 @@ typedef enum _NSBezelStyle {
     NSTexturedSquareBezelStyle   = 8,
     NSHelpButtonBezelStyle       = 9,
 #endif
-    
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+    NSSmallSquareBezelStyle       = 10,
+    NSTexturedRoundedBezelStyle   = 11,
+    NSRoundRectBezelStyle         = 12,
+    NSRecessedBezelStyle          = 13,
+    NSRoundedDisclosureBezelStyle = 14,
+#endif
+
     // this will be obsolete before GM
 
     NSSmallIconButtonBezelStyle  = 2
@@ -159,6 +166,12 @@ typedef struct __BCFlags2 {
 - (void)setKeyEquivalentFont:(NSFont *)fontObj;
 - (void)setKeyEquivalentFont:(NSString *)fontName size:(float)fontSize;
 - (void)performClick:(id)sender; // Significant NSCell override, actually clicks itself.
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (void)drawImage:(NSImage*)image withFrame:(NSRect)frame inView:(NSView*)controlView;
+- (NSRect)drawTitle:(NSAttributedString*)title withFrame:(NSRect)frame inView:(NSView*)controlView;
+- (void)drawBezelWithFrame:(NSRect)frame inView:(NSView*)controlView;
+#endif
 @end
 
 @interface NSButtonCell(NSKeyboardUI)
@@ -198,6 +211,11 @@ typedef enum _NSGradientType {
 
 - (void) mouseEntered:(NSEvent*)event;
 - (void) mouseExited:(NSEvent*)event;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (NSColor*)backgroundColor;
+- (void)setBackgroundColor:(NSColor*)color;
+#endif
 
 @end
 

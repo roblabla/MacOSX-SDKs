@@ -390,6 +390,7 @@ public:
 	OSDictionary *		GetDeviceCharacteristicsDictionary ( void );	
 	UInt8				GetANSIVersion ( void );
 	bool				GetCMDQUE ( void );
+    OSString *          MapINQUIRYDataToIconFile ( void );
 	
 	// -- SCSI Protocol Interface Methods	--
 	// The ExecuteCommand method will take a SCSI Task and transport

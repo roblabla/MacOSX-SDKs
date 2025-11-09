@@ -90,37 +90,49 @@ protected:
 	bool	IsProviderAnotherPathToTarget (
 				IOSCSIProtocolServices * 	provider );
 	
-	bool	DoesLUNObjectExist ( SCSILogicalUnitNumber logicalUnitNumber );
+	IOService *	GetLUNObject ( SCSILogicalUnitNumber logicalUnitNumber );
 	
-	bool		InitializeDeviceSupport ( void );
-	void		StartDeviceSupport ( void );
-	void		SuspendDeviceSupport ( void );
-	void 		ResumeDeviceSupport ( void );
-	void		StopDeviceSupport ( void );
-	void 		TerminateDeviceSupport ( void );
-	UInt32		GetNumberOfPowerStateTransitions ( void );
-	bool		ClearNotReadyStatus ( void );
+	bool	IsBootLUNRequired ( SCSILogicalUnitNumber * bootLUN );
+	void	GetTargetDeviceBootPath ( char * path, SInt32 * length );
+	void	GetBootDeviceBootPath ( char * path, SInt32 * length, SCSILogicalUnitNumber * bootLUN );
+	bool	IsLUNMasked ( SCSILogicalUnitNumber logicalUnit,
+						  OSArray * 			lunMaskList );
+
+	bool	InitializeDeviceSupport ( void );
+	void	StartDeviceSupport ( void );
+	void	SuspendDeviceSupport ( void );
+	void 	ResumeDeviceSupport ( void );
+	void	StopDeviceSupport ( void );
+	void 	TerminateDeviceSupport ( void );
+	UInt32	GetNumberOfPowerStateTransitions ( void );
+	bool	ClearNotReadyStatus ( void );
 	
-	void	ScanForLogicalUnits ( void );
+	void	ScanForLogicalUnits ( OSArray * lunMaskList );
 	void 	RetrieveCharacteristicsFromProvider ( void );
 
 	bool	DetermineTargetCharacteristics ( void );
 	bool	VerifyTargetPresence ( void );
 	bool	SetCharacteristicsFromINQUIRY ( SCSICmd_INQUIRY_StandardDataAll * inquiryBuffer );
-	bool	PerformREPORTLUNS ( void );
-	void	ParseReportLUNsInformation ( SCSICmd_REPORT_LUNS_Header * buffer );
-
+	bool	PerformREPORTLUNS ( OSArray * lunMaskList );
+	void	ParseReportLUNsInformation ( SCSICmd_REPORT_LUNS_Header * buffer, OSArray * lunMaskList );
+	void	ProcessIndividualLUN ( SCSILogicalUnitNumber logicalUnitNumber, OSArray * lunMaskList );
+	
 	// DEPRECATED, use version with 32-bit dataSize
 	bool	RetrieveReportLUNsData (
 						SCSILogicalUnitNumber					logicalUnit,
 						UInt8 * 								dataBuffer,  
 						UInt8									dataSize );
-						
+	
 	bool	RetrieveReportLUNsData (
 						SCSILogicalUnitNumber					logicalUnit,
 						UInt8 * 								dataBuffer,  
 						UInt32									dataSize );
-
+	
+	bool	RetrieveReportDeviceIdentifierData (
+						SCSILogicalUnitNumber					logicalUnit,
+						UInt8 * 								dataBuffer,
+						UInt32									dataSize );
+	
 	UInt64	DetermineMaximumLogicalUnitNumber ( void );
 	bool	VerifyLogicalUnitPresence ( SCSILogicalUnitNumber theLogicalUnit );
 	bool	CreateLogicalUnit ( SCSILogicalUnitNumber theLogicalUnit );
@@ -141,6 +153,9 @@ protected:
 	void	PublishINQUIRYVitalProductDataInformation ( IOService * object, SCSILogicalUnitNumber logicalUnit );
 	void	PublishDeviceIdentification ( IOService * object, SCSILogicalUnitNumber logicalUnit );
 	void	PublishUnitSerialNumber ( IOService * object, SCSILogicalUnitNumber logicalUnit );
+	void	PublishReportDeviceIdentifierData (
+						IOService * 			object,
+						SCSILogicalUnitNumber 	logicalUnit );
 	
 	void	SetLogicalUnitNumber ( SCSITaskIdentifier request, SCSILogicalUnitNumber logicalUnit );
 	
@@ -162,6 +177,9 @@ protected:
 	virtual void		free ( void );
 	
 private:
+	
+	// LUN Mask methods
+	static void	VerifyLUNs ( OSObject * target, OSArray * lunMaskList );
 	
 	// Reserve space for future expansion.
 	struct IOSCSITargetDeviceExpansionData { };

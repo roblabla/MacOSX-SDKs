@@ -3,9 +3,9 @@
  
      Contains:   Generic Abstract Shape API
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 2001-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -52,16 +52,7 @@ extern "C" {
  *    created and passed around and 'copied' very quickly, since they
  *    are actually refcounted when copied. This avoids needing to do
  *    the handle-to-handle copies that occur right now with
- *    RgnHandle-based APIs. 
- *    
- *    IMPORTANT: Unfortunately, this header is somewhat useless in Mac
- *    OS X 10.2. We did not get to use HIShapeRefs anywhere in our
- *    HIView APIs, yet it was too late to pull this header for fear of
- *    breakage. So look at this header as a kind of sneak peek. You can
- *    use this APIs to start using HIShapeRefs in your own code if you
- *    wish though. When the Toolbox starts to use this in future
- *    releases, you will be able to pass your HIShapeRefs directly into
- *    APIs as you'd expect.
+ *    RgnHandle-based APIs.
  */
 typedef const struct __HIShape*         HIShapeRef;
 typedef struct __HIShape*               HIMutableShapeRef;
@@ -94,6 +85,27 @@ HIShapeGetTypeID(void)                                        AVAILABLE_MAC_OS_X
 /*======================================================================================*/
 /*  IMMUTABLE FUNCTIONS                                                                 */
 /*======================================================================================*/
+/*
+ *  HIShapeCreateEmpty()
+ *  
+ *  Discussion:
+ *    Creates an immutable empty shape. Useful at times.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Result:
+ *    An immutable, empty HIShape reference.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern HIShapeRef 
+HIShapeCreateEmpty(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
 /*
  *  HIShapeCreateWithQDRgn()
  *  
@@ -351,6 +363,38 @@ extern Boolean
 HIShapeContainsPoint(
   HIShapeRef       inShape,
   const HIPoint *  inPoint)                                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  HIShapeIntersectsRect()
+ *  
+ *  Discussion:
+ *    Returns true if the given HIShapeRef intersects the rect passed
+ *    in.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inShape:
+ *      An existing HIShapeRef.
+ *    
+ *    inRect:
+ *      The rectangle to check.
+ *  
+ *  Result:
+ *    A boolean result.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+HIShapeIntersectsRect(
+  HIShapeRef      inShape,
+  const HIRect *  inRect)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 /*

@@ -1,5 +1,5 @@
 /*	NSObjCRuntime.h
-	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
 */
 
 #if defined(__WIN32__)
@@ -28,7 +28,11 @@
 #endif
 
 #if !defined(FOUNDATION_STATIC_INLINE)
+#if defined (__GNUC__) && (__GNUC__ == 4)
+#define FOUNDATION_STATIC_INLINE static __inline__ __attribute__((always_inline))
+#else
 #define FOUNDATION_STATIC_INLINE static __inline__
+#endif
 #endif
 
 #if !defined(FOUNDATION_EXTERN_INLINE)
@@ -46,12 +50,12 @@
 FOUNDATION_EXPORT double NSFoundationVersionNumber;
 
 #define NSFoundationVersionNumber10_0 397.4
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 #define NSFoundationVersionNumber10_1 425.0
-#endif
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
 #define NSFoundationVersionNumber10_2 462.0
-#endif
+#define NSFoundationVersionNumber10_3 500.0
+#define NSFoundationVersionNumber10_3_2 500.3
+#define NSFoundationVersionNumber10_3_3 500.54
+#define NSFoundationVersionNumber10_3_4 500.56
 
 @class NSString;
 

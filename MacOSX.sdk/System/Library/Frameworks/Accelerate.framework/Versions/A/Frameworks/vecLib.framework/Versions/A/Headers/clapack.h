@@ -29,12 +29,22 @@
 extern "C" {
 #endif
 
+
+#if defined(__LP64__) /* In LP64 match sizes with the 32 bit ABI */
+typedef int 		__CLPK_integer;
+typedef int 		__CLPK_logical;
+typedef float 		__CLPK_real;
+typedef double 		__CLPK_doublereal;
+typedef 		__CLPK_logical 	(*__CLPK_L_fp)();
+typedef int 		__CLPK_ftnlen;
+#else
 typedef long int 	__CLPK_integer;
 typedef long int 	__CLPK_logical;
 typedef float 		__CLPK_real;
 typedef double 		__CLPK_doublereal;
 typedef __CLPK_logical 	(*__CLPK_L_fp)();
 typedef long int 	__CLPK_ftnlen;
+#endif
 
 typedef struct { __CLPK_real r, i; } __CLPK_complex;
 typedef struct { __CLPK_doublereal r, i; } __CLPK_doublecomplex;
@@ -5113,6 +5123,270 @@ __CLPK_integer izmax1_(__CLPK_integer *n, __CLPK_doublecomplex *cx, __CLPK_integ
 /* Subroutine */ int zupmtr_(char *side, char *uplo, char *trans, __CLPK_integer *m, 
 	__CLPK_integer *n, __CLPK_doublecomplex *ap, __CLPK_doublecomplex *tau, __CLPK_doublecomplex *c__,
 	 __CLPK_integer *ldc, __CLPK_doublecomplex *work, __CLPK_integer *info);
+
+/*
+ The following prototypes are not present in the reference clapack.h distributed via netlib.
+ Nevertheless, the supporting code has always been present in the library.
+*/
+
+/* Subroutine */ int cgelsd_(__CLPK_integer *m, __CLPK_integer *n, __CLPK_integer *nrhs, __CLPK_complex *
+	a, __CLPK_integer *lda, __CLPK_complex *b, __CLPK_integer *ldb, __CLPK_real *s, __CLPK_real *rcond, 
+	__CLPK_integer *rank, __CLPK_complex *work, __CLPK_integer *lwork, __CLPK_real *rwork, __CLPK_integer *
+	iwork, __CLPK_integer *info);
+
+/* Subroutine */ int cgelss_(__CLPK_integer *m, __CLPK_integer *n, __CLPK_integer *nrhs, __CLPK_complex *
+	a, __CLPK_integer *lda, __CLPK_complex *b, __CLPK_integer *ldb, __CLPK_real *s, __CLPK_real *rcond, 
+	__CLPK_integer *rank, __CLPK_complex *work, __CLPK_integer *lwork, __CLPK_real *rwork, __CLPK_integer *
+	info);
+
+/* Subroutine */ int cgesdd_(char *jobz, __CLPK_integer *m, __CLPK_integer *n, __CLPK_complex *a, 
+	__CLPK_integer *lda, __CLPK_real *s, __CLPK_complex *u, __CLPK_integer *ldu, __CLPK_complex *vt, __CLPK_integer 
+	*ldvt, __CLPK_complex *work, __CLPK_integer *lwork, __CLPK_real *rwork, __CLPK_integer *iwork, 
+	__CLPK_integer *info);
+
+/* Subroutine */ int cgesvd_(char *jobu, char *jobvt, __CLPK_integer *m, __CLPK_integer *n, 
+	__CLPK_complex *a, __CLPK_integer *lda, __CLPK_real *s, __CLPK_complex *u, __CLPK_integer *ldu, __CLPK_complex *
+	vt, __CLPK_integer *ldvt, __CLPK_complex *work, __CLPK_integer *lwork, __CLPK_real *rwork, 
+	__CLPK_integer *info);
+
+/* Subroutine */ int chbgvd_(char *jobz, char *uplo, __CLPK_integer *n, __CLPK_integer *ka, 
+	__CLPK_integer *kb, __CLPK_complex *ab, __CLPK_integer *ldab, __CLPK_complex *bb, __CLPK_integer *ldbb, 
+	__CLPK_real *w, __CLPK_complex *z__, __CLPK_integer *ldz, __CLPK_complex *work, __CLPK_integer *lwork, 
+	__CLPK_real *rwork, __CLPK_integer *lrwork, __CLPK_integer *iwork, __CLPK_integer *liwork, 
+	__CLPK_integer *info);
+
+/* Subroutine */ int chetd2_(char *uplo, __CLPK_integer *n, __CLPK_complex *a, __CLPK_integer *lda,
+	 __CLPK_real *d__, __CLPK_real *e, __CLPK_complex *tau, __CLPK_integer *info);
+
+/* Complex */ void cladiv_(__CLPK_complex * ret_val, __CLPK_complex *x, __CLPK_complex *y);
+
+/* Subroutine */ int clalsd_(char *uplo, __CLPK_integer *smlsiz, __CLPK_integer *n, __CLPK_integer 
+	*nrhs, __CLPK_real *d__, __CLPK_real *e, __CLPK_complex *b, __CLPK_integer *ldb, __CLPK_real *rcond, 
+	__CLPK_integer *rank, __CLPK_complex *work, __CLPK_real *rwork, __CLPK_integer *iwork, 
+	__CLPK_integer *info);
+
+__CLPK_doublereal clangb_(char *norm, __CLPK_integer *n, __CLPK_integer *kl, __CLPK_integer *ku, 
+	__CLPK_complex *ab, __CLPK_integer *ldab, __CLPK_real *work);
+
+__CLPK_doublereal clange_(char *norm, __CLPK_integer *m, __CLPK_integer *n, __CLPK_complex *a, 
+	__CLPK_integer *lda, __CLPK_real *work);
+
+__CLPK_doublereal clangt_(char *norm, __CLPK_integer *n, __CLPK_complex *dl, __CLPK_complex *d__, 
+	__CLPK_complex *du);
+
+__CLPK_doublereal clanhb_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_integer *k, 
+	__CLPK_complex *ab, __CLPK_integer *ldab, __CLPK_real *work);
+
+__CLPK_doublereal clanhe_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_complex *a, 
+	__CLPK_integer *lda, __CLPK_real *work);
+
+__CLPK_doublereal clanhp_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_complex *ap, 
+	__CLPK_real *work);
+
+__CLPK_doublereal clanhs_(char *norm, __CLPK_integer *n, __CLPK_complex *a, __CLPK_integer *lda, 
+	__CLPK_real *work);
+
+__CLPK_doublereal clanht_(char *norm, __CLPK_integer *n, __CLPK_real *d__, __CLPK_complex *e);
+
+__CLPK_doublereal clansb_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_integer *k, 
+	__CLPK_complex *ab, __CLPK_integer *ldab, __CLPK_real *work);
+
+__CLPK_doublereal clansp_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_complex *ap, 
+	__CLPK_real *work);
+
+__CLPK_doublereal clansy_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_complex *a, 
+	__CLPK_integer *lda, __CLPK_real *work);
+
+__CLPK_doublereal clantb_(char *norm, char *uplo, char *diag, __CLPK_integer *n, 
+	__CLPK_integer *k, __CLPK_complex *ab, __CLPK_integer *ldab, __CLPK_real *work);
+
+__CLPK_doublereal clantp_(char *norm, char *uplo, char *diag, __CLPK_integer *n, 
+	__CLPK_complex *ap, __CLPK_real *work);
+
+__CLPK_doublereal clantr_(char *norm, char *uplo, char *diag, __CLPK_integer *m, 
+	__CLPK_integer *n, __CLPK_complex *a, __CLPK_integer *lda, __CLPK_real *work);
+
+/* Subroutine */ int cpteqr_(char *compz, __CLPK_integer *n, __CLPK_real *d__, __CLPK_real *e, 
+	__CLPK_complex *z__, __CLPK_integer *ldz, __CLPK_real *work, __CLPK_integer *info);
+
+/* Subroutine */ int cstegr_(char *jobz, char *range, __CLPK_integer *n, __CLPK_real *d__, 
+	__CLPK_real *e, __CLPK_real *vl, __CLPK_real *vu, __CLPK_integer *il, __CLPK_integer *iu, __CLPK_real *abstol, 
+	__CLPK_integer *m, __CLPK_real *w, __CLPK_complex *z__, __CLPK_integer *ldz, __CLPK_integer *isuppz, 
+	__CLPK_real *work, __CLPK_integer *lwork, __CLPK_integer *iwork, __CLPK_integer *liwork, 
+	__CLPK_integer *info);
+
+__CLPK_doublereal dlamc3_(__CLPK_doublereal *a, __CLPK_doublereal *b);
+
+__CLPK_doublereal dlamch_(char *cmach);
+
+__CLPK_doublereal dlangb_(char *norm, __CLPK_integer *n, __CLPK_integer *kl, __CLPK_integer *ku, 
+	__CLPK_doublereal *ab, __CLPK_integer *ldab, __CLPK_doublereal *work);
+
+__CLPK_doublereal dlange_(char *norm, __CLPK_integer *m, __CLPK_integer *n, __CLPK_doublereal *a, 
+	__CLPK_integer *lda, __CLPK_doublereal *work);
+
+__CLPK_doublereal dlangt_(char *norm, __CLPK_integer *n, __CLPK_doublereal *dl, __CLPK_doublereal *d__, 
+	__CLPK_doublereal *du);
+
+__CLPK_doublereal dlanhs_(char *norm, __CLPK_integer *n, __CLPK_doublereal *a, __CLPK_integer *lda, 
+	__CLPK_doublereal *work);
+
+__CLPK_doublereal dlansb_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_integer *k, 
+	__CLPK_doublereal *ab, __CLPK_integer *ldab, __CLPK_doublereal *work);
+
+__CLPK_doublereal dlansp_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_doublereal *ap, 
+	__CLPK_doublereal *work);
+
+__CLPK_doublereal dlanst_(char *norm, __CLPK_integer *n, __CLPK_doublereal *d__, __CLPK_doublereal *e);
+
+__CLPK_doublereal dlansy_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_doublereal *a, 
+	__CLPK_integer *lda, __CLPK_doublereal *work);
+
+__CLPK_doublereal dlantb_(char *norm, char *uplo, char *diag, __CLPK_integer *n, __CLPK_integer *k,
+	 __CLPK_doublereal *ab, __CLPK_integer *ldab, __CLPK_doublereal *work);
+
+__CLPK_doublereal dlantp_(char *norm, char *uplo, char *diag, __CLPK_integer *n, 
+	__CLPK_doublereal *ap, __CLPK_doublereal *work);
+
+__CLPK_doublereal dlantr_(char *norm, char *uplo, char *diag, __CLPK_integer *m, __CLPK_integer *n,
+	 __CLPK_doublereal *a, __CLPK_integer *lda, __CLPK_doublereal *work);
+
+__CLPK_doublereal dlapy2_(__CLPK_doublereal *x, __CLPK_doublereal *y);
+
+__CLPK_doublereal dlapy3_(__CLPK_doublereal *x, __CLPK_doublereal *y, __CLPK_doublereal *z__);
+
+__CLPK_doublereal dsecnd_();
+
+__CLPK_doublereal dzsum1_(__CLPK_integer *n, __CLPK_doublecomplex *cx, __CLPK_integer *incx);
+
+__CLPK_logical lsame_(char *ca, char *cb);
+
+__CLPK_logical lsamen_(__CLPK_integer *n, char *ca, char *cb);
+
+__CLPK_doublereal scsum1_(__CLPK_integer *n, __CLPK_complex *cx, __CLPK_integer *incx);
+
+__CLPK_doublereal second_();
+
+__CLPK_doublereal slamc3_(__CLPK_real *a, __CLPK_real *b);
+
+__CLPK_doublereal slamch_(char *cmach);
+
+__CLPK_doublereal slangb_(char *norm, __CLPK_integer *n, __CLPK_integer *kl, __CLPK_integer *ku, __CLPK_real *ab,
+	 __CLPK_integer *ldab, __CLPK_real *work);
+
+__CLPK_doublereal slange_(char *norm, __CLPK_integer *m, __CLPK_integer *n, __CLPK_real *a, __CLPK_integer *lda, 
+	__CLPK_real *work);
+
+__CLPK_doublereal slangt_(char *norm, __CLPK_integer *n, __CLPK_real *dl, __CLPK_real *d__, __CLPK_real *du);
+
+__CLPK_doublereal slanhs_(char *norm, __CLPK_integer *n, __CLPK_real *a, __CLPK_integer *lda, __CLPK_real *work);
+
+__CLPK_doublereal slansb_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_integer *k, __CLPK_real *ab, 
+	__CLPK_integer *ldab, __CLPK_real *work);
+
+__CLPK_doublereal slansp_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_real *ap, __CLPK_real *work);
+
+__CLPK_doublereal slanst_(char *norm, __CLPK_integer *n, __CLPK_real *d__, __CLPK_real *e);
+
+__CLPK_doublereal slansy_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_real *a, __CLPK_integer *lda, 
+	__CLPK_real *work);
+
+__CLPK_doublereal slantb_(char *norm, char *uplo, char *diag, __CLPK_integer *n, __CLPK_integer *k,
+	 __CLPK_real *ab, __CLPK_integer *ldab, __CLPK_real *work);
+
+__CLPK_doublereal slantp_(char *norm, char *uplo, char *diag, __CLPK_integer *n, __CLPK_real *ap, 
+	__CLPK_real *work);
+
+__CLPK_doublereal slantr_(char *norm, char *uplo, char *diag, __CLPK_integer *m, __CLPK_integer *n,
+	 __CLPK_real *a, __CLPK_integer *lda, __CLPK_real *work);
+
+__CLPK_doublereal slapy2_(__CLPK_real *x, __CLPK_real *y);
+
+__CLPK_doublereal slapy3_(__CLPK_real *x, __CLPK_real *y, __CLPK_real *z__);
+
+/* Subroutine */ int zgelsd_(__CLPK_integer *m, __CLPK_integer *n, __CLPK_integer *nrhs, 
+	__CLPK_doublecomplex *a, __CLPK_integer *lda, __CLPK_doublecomplex *b, __CLPK_integer *ldb, 
+	__CLPK_doublereal *s, __CLPK_doublereal *rcond, __CLPK_integer *rank, __CLPK_doublecomplex *work, 
+	__CLPK_integer *lwork, __CLPK_doublereal *rwork, __CLPK_integer *iwork, __CLPK_integer *info);
+
+/* Subroutine */ int zgesdd_(char *jobz, __CLPK_integer *m, __CLPK_integer *n, 
+	__CLPK_doublecomplex *a, __CLPK_integer *lda, __CLPK_doublereal *s, __CLPK_doublecomplex *u, 
+	__CLPK_integer *ldu, __CLPK_doublecomplex *vt, __CLPK_integer *ldvt, __CLPK_doublecomplex *work, 
+	__CLPK_integer *lwork, __CLPK_doublereal *rwork, __CLPK_integer *iwork, __CLPK_integer *info);
+
+/* Subroutine */ int zgesvd_(char *jobu, char *jobvt, __CLPK_integer *m, __CLPK_integer *n, 
+	__CLPK_doublecomplex *a, __CLPK_integer *lda, __CLPK_doublereal *s, __CLPK_doublecomplex *u, 
+	__CLPK_integer *ldu, __CLPK_doublecomplex *vt, __CLPK_integer *ldvt, __CLPK_doublecomplex *work, 
+	__CLPK_integer *lwork, __CLPK_doublereal *rwork, __CLPK_integer *info);
+
+/* Subroutine */ int zhbgvd_(char *jobz, char *uplo, __CLPK_integer *n, __CLPK_integer *ka, 
+	__CLPK_integer *kb, __CLPK_doublecomplex *ab, __CLPK_integer *ldab, __CLPK_doublecomplex *bb, 
+	__CLPK_integer *ldbb, __CLPK_doublereal *w, __CLPK_doublecomplex *z__, __CLPK_integer *ldz, 
+	__CLPK_doublecomplex *work, __CLPK_integer *lwork, __CLPK_doublereal *rwork, 
+	__CLPK_integer *lrwork, __CLPK_integer *iwork, __CLPK_integer *liwork, __CLPK_integer *info);
+
+/* Subroutine */ int zhetd2_(char *uplo, __CLPK_integer *n, __CLPK_doublecomplex *a, 
+	__CLPK_integer *lda, __CLPK_doublereal *d__, __CLPK_doublereal *e, __CLPK_doublecomplex *tau, 
+	__CLPK_integer *info);
+
+/* Double Complex */ void zladiv_(__CLPK_doublecomplex * ret_val, __CLPK_doublecomplex *x, 
+	__CLPK_doublecomplex *y);
+
+/* Subroutine */ int zlalsd_(char *uplo, __CLPK_integer *smlsiz, __CLPK_integer *n, __CLPK_integer 
+	*nrhs, __CLPK_doublereal *d__, __CLPK_doublereal *e, __CLPK_doublecomplex *b, __CLPK_integer *ldb,
+	__CLPK_doublereal *rcond, __CLPK_integer *rank, __CLPK_doublecomplex *work, 
+	__CLPK_doublereal *rwork, __CLPK_integer *iwork, __CLPK_integer *info);
+
+__CLPK_doublereal zlangb_(char *norm, __CLPK_integer *n, __CLPK_integer *kl, __CLPK_integer *ku, 
+	__CLPK_doublecomplex *ab, __CLPK_integer *ldab, __CLPK_doublereal *work);
+
+__CLPK_doublereal zlange_(char *norm, __CLPK_integer *m, __CLPK_integer *n, __CLPK_doublecomplex *a, 
+	__CLPK_integer *lda, __CLPK_doublereal *work);
+
+__CLPK_doublereal zlangt_(char *norm, __CLPK_integer *n, __CLPK_doublecomplex *dl, 
+	__CLPK_doublecomplex *d__, __CLPK_doublecomplex *du);
+
+__CLPK_doublereal zlanhb_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_integer *k, 
+	__CLPK_doublecomplex *ab, __CLPK_integer *ldab, __CLPK_doublereal *work);
+
+__CLPK_doublereal zlanhe_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_doublecomplex *a, 
+	__CLPK_integer *lda, __CLPK_doublereal *work);
+
+__CLPK_doublereal zlanhp_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_doublecomplex *ap, 
+	__CLPK_doublereal *work);
+
+__CLPK_doublereal zlanhs_(char *norm, __CLPK_integer *n, __CLPK_doublecomplex *a, __CLPK_integer *lda, 
+	__CLPK_doublereal *work);
+
+__CLPK_doublereal zlanht_(char *norm, __CLPK_integer *n, __CLPK_doublereal *d__, __CLPK_doublecomplex *e);
+
+__CLPK_doublereal zlansb_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_integer *k, 
+	__CLPK_doublecomplex *ab, __CLPK_integer *ldab, __CLPK_doublereal *work);
+
+__CLPK_doublereal zlansp_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_doublecomplex *ap, 
+	__CLPK_doublereal *work);
+
+__CLPK_doublereal zlansy_(char *norm, char *uplo, __CLPK_integer *n, __CLPK_doublecomplex *a, 
+	__CLPK_integer *lda, __CLPK_doublereal *work);
+
+__CLPK_doublereal zlantb_(char *norm, char *uplo, char *diag, __CLPK_integer *n, __CLPK_integer *k,
+	 __CLPK_doublecomplex *ab, __CLPK_integer *ldab, __CLPK_doublereal *work);
+
+__CLPK_doublereal zlantp_(char *norm, char *uplo, char *diag, __CLPK_integer *n, 
+	__CLPK_doublecomplex *ap, __CLPK_doublereal *work);
+
+__CLPK_doublereal zlantr_(char *norm, char *uplo, char *diag, __CLPK_integer *m, __CLPK_integer *n,
+	 __CLPK_doublecomplex *a, __CLPK_integer *lda, __CLPK_doublereal *work);
+
+/* Subroutine */ int zpteqr_(char *compz, __CLPK_integer *n, __CLPK_doublereal *d__, 
+	__CLPK_doublereal *e, __CLPK_doublecomplex *z__, __CLPK_integer *ldz, __CLPK_doublereal *work, 
+	__CLPK_integer *info);
+
+/* Subroutine */ int zstegr_(char *jobz, char *range, __CLPK_integer *n, 
+	__CLPK_doublereal *d__, __CLPK_doublereal *e, __CLPK_doublereal *vl, __CLPK_doublereal *vu, 
+	__CLPK_integer *il, __CLPK_integer *iu, __CLPK_doublereal *abstol, __CLPK_integer *m, __CLPK_doublereal *w, 
+	__CLPK_doublecomplex *z__, __CLPK_integer *ldz, __CLPK_integer *isuppz, __CLPK_doublereal *work, 
+	__CLPK_integer *lwork, __CLPK_integer *iwork, __CLPK_integer *liwork, __CLPK_integer *info);
 
 #ifdef __cplusplus
 }

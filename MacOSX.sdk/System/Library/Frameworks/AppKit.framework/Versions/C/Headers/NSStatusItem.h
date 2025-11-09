@@ -1,7 +1,7 @@
 /*
         NSStatusItem.h
         Application Kit
-        Copyright (c) 1997-2003, Apple Computer, Inc.
+        Copyright (c) 1997-2005, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -50,6 +50,11 @@ typedef struct {
 
 - (SEL) action;
 - (void) setAction:(SEL)action;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (SEL) doubleAction;
+- (void) setDoubleAction:(SEL)action;
+#endif
 
 - (id) target;
 - (void) setTarget:(id)target;

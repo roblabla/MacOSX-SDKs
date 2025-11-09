@@ -1,7 +1,7 @@
 /*
 	NSColorPanel.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -67,7 +67,7 @@ enum {
     id			_resizeDimple;
     BOOL		_reserved5;
     BOOL		_reserved6;
-    BOOL		_reserved7;
+    BOOL		_handlingOpacityMoveAction;
     BOOL		_ignoreConstraints;
     BOOL		_continuous;
     BOOL		_allowColorSetting;

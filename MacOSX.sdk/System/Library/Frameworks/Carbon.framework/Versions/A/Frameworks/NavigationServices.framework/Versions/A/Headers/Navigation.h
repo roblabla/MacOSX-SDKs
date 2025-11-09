@@ -3,9 +3,9 @@
  
      Contains:   Navigation Services Interfaces
  
-     Version:    NavigationServices-101.3~1
+     Version:    NavigationServices-130~640
  
-     Copyright:  © 1996-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1996-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -614,7 +614,7 @@ enum {
   kNavDontAddRecents            = 0x00004000, /* don't add chosen objects to the recents list, v2.0 or greater */
   kNavDontUseCustomFrame        = 0x00008000, /* don't draw the custom area bevel frame, v2.0 or greater */
   kNavDontConfirmReplacement    = 0x00010000, /* don't show the "Replace File?" alert on save conflict, v3.0 or greater */
-  kNavPreserveSaveFileExtension = 0x00020000 /* extension in default file name is preserved and initially hidden, v3.1 or greater */
+  kNavPreserveSaveFileExtension = 0x00020000 /* extension in default file name is preserved between dialog invocations and initially hidden, v3.1 or greater */
 };
 
 
@@ -2153,6 +2153,43 @@ NavDialogSetSaveFileExtensionHidden(
   NavDialogRef   inPutFileDialog,
   Boolean        inHidden)                                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
+
+/*
+ *  NavDialogSetFilterTypeIdentifiers()
+ *  
+ *  Summary:
+ *    Set a list Uniform Type Identifers against which all files will
+ *    be automatically filtered.
+ *  
+ *  Discussion:
+ *    This function can be called at any time to filter files shown in
+ *    the dialog based on the list of type identifiers provided. This
+ *    function is only applicable for GetFile and ChooseFile dialogs.
+ *  
+ *  Parameters:
+ *    
+ *    inGetFileDialog:
+ *      Which GetFile or ChooseFile dialog.
+ *    
+ *    inTypeIdentifiers:
+ *      The list of Uniform Type Identifiers describing the file types
+ *      to be shown in the dialog file browser.  If an empty array is
+ *      passed, all files will be filtered out. If NULL, no files are
+ *      filtered. The "Enable" popup view will be automatically shown
+ *      and hidden as necessary.
+ *  
+ *  Result:
+ *    A status code
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+NavDialogSetFilterTypeIdentifiers(
+  NavDialogRef   inGetFileDialog,
+  CFArrayRef     inTypeIdentifiers)       /* can be NULL */   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 

@@ -1,7 +1,7 @@
 /*
 	SFAuthorizationView.h
 	SecurityInterface
-    Copyright (c) 2000-2003, Apple Computer, Inc.
+    Copyright (c) 2000-2004 Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -59,7 +59,7 @@ Calls to updateStatus: return YES if in the unlocked state, NO otherwise. Note t
 
 /*!
     @method setString:
-    @abstract Sets the authorization string that the client wishes to display as text for the view.
+    @abstract A convenience method to specify an authorization rights set containing a single item with the name set to the specified string.
     @param authorizationString Authorization string.
 */
 - (void)setString:(AuthorizationString)authorizationString;

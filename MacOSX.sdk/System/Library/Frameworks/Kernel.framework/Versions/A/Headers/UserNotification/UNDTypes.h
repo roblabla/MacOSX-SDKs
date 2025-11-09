@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2005 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -40,28 +40,9 @@ typedef char *UNDPath;
  */
 typedef const char * xmlData_t;
 
-#ifdef KERNEL_PRIVATE
-#ifdef MACH_KERNEL_PRIVATE
-
-/*
- * UNDReply definition - used to dispatch UserNotification
- * replies back to the in-kernel client.
- */
-typedef struct UNDReply *UNDReplyRef;
-
-extern UNDReplyRef convert_port_to_UNDReply(mach_port_t);
-
-#else /* !MACH_KERNEL_PRIVATE */
-
-typedef struct __UNDReply__ *UNDReplyRef;
-
-#endif /* !MACH_KERNEL_PRIVATE */
-
-#else /* ! KERNEL_PRIVATE */
 
 typedef mach_port_t UNDReplyRef;
 
-#endif /* ! KERNEL_PRIVATE */
 
 #define UND_REPLY_NULL ((UNDReplyRef)0)
 #define XML_DATA_NULL	((xmlData_t)0)

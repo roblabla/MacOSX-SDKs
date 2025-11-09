@@ -3,9 +3,9 @@
  
      Contains:   ATSUI types and constants.
  
-     Version:    Quickdraw-150.7~2
+     Version:    Quickdraw-192.24~58
  
-     Copyright:  © 2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -197,8 +197,8 @@ enum {
 
   /*
    * (Type: Boolean) (Default value: GetSysDirection()) Must be 0 or 1.
-   * See below for convenience constants. May be set as a line or
-   * layout control.
+   * See below for convenience constants. May be set as a layout
+   * control.
    */
   kATSULineDirectionTag         = 3L,
 
@@ -291,9 +291,9 @@ enum {
 
   /*
    * (Type: ATSULayoutOperationOverrideSpecifier) (Default value: NULL)
-   * See ATSUnicodeDirectAccess.h for a definition of the
-   * ATSULayoutOperationOverrideSpecifier type. May be set as a layout
-   * control.
+   * See ATSLayoutTypes.h for a definition of the
+   * ATSULayoutOperationOverrideSpecifier structure. May be set as a
+   * layout control.
    */
   kATSULayoutOperationOverrideTag = 15L,
 

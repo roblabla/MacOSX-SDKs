@@ -60,7 +60,9 @@ typedef double glePoint[2];
 /* ====================================================== */
 
 #ifdef __GLE_DOUBLE
-#define gleDouble 		double
+#ifndef gleDouble
+    #define gleDouble 		double
+#endif
 #define urot_axis(a,b,c) 	urot_axis_d(a,b,c)
 #define uview_direction(a,b,c) 	uview_direction_d(a,b,c)
 #define uviewpoint(a,b,c,d) 	uviewpoint_d(a,b,c,d)

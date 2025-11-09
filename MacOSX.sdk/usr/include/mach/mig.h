@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2005 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -34,6 +34,29 @@
 #include <mach/port.h>
 #include <mach/message.h>
 #include <mach/vm_types.h>
+
+#include <sys/cdefs.h>
+
+#if defined(MACH_KERNEL)
+
+/* Turn MIG type checking on by default for kernel */
+#define __MigTypeCheck 1
+#define __MigKernelSpecificCode 1
+#define _MIG_KERNEL_SPECIFIC_CODE_ 1
+
+/* Otherwise check legacy setting (temporary) */
+#elif defined(TypeCheck)  
+
+#define __MigTypeCheck TypeCheck
+ 
+#endif /* defined(TypeCheck) */
+
+/*
+ * Pack MIG message structs.
+ * This is an indicator of the need to view shared structs in a
+ * binary-compatible format - and MIG message structs are no different.
+ */
+#define __MigPackStructs 1
 
 /*
  * Definition for MIG-generated server stub routines.  These routines
@@ -103,6 +126,9 @@ typedef struct mig_symtab {
 					 							 */
 } mig_symtab_t;
 
+
+__BEGIN_DECLS
+
 /* Client side reply port allocate */
 extern mach_port_t mig_get_reply_port(void);
 
@@ -116,4 +142,13 @@ extern void mig_put_reply_port(mach_port_t reply_port);
 extern int mig_strncpy(char	*dest, const char *src,	int	len);
 
 
-#endif /* _MACH_MIG_H_ */
+/* Allocate memory for out-of-line mig structures */
+extern void mig_allocate(vm_address_t *, vm_size_t);
+
+/* Deallocate memory used for out-of-line mig structures */
+extern void mig_deallocate(vm_address_t, vm_size_t);
+
+
+__END_DECLS
+
+#endif	/* _MACH_MIG_H_ */

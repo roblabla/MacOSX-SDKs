@@ -148,7 +148,9 @@ enum {
     kIOFBNotifyDidPowerOn	= 8,
 
     kIOFBNotifyWillChangeSpeed	= 9,
-    kIOFBNotifyDidChangeSpeed	= 10
+    kIOFBNotifyDidChangeSpeed	= 10,
+
+    kIOFBNotifyClamshellChange	= 20
 };
 
 enum {
@@ -326,6 +328,7 @@ public:
     virtual bool start( IOService * provider );
     virtual void stop( IOService * provider );
     virtual void free();
+    virtual IOReturn requestProbe( IOOptionBits options );
 
     virtual IOReturn powerStateWillChangeTo ( IOPMPowerFlags, unsigned long, IOService* );
     virtual IOReturn powerStateDidChangeTo ( IOPMPowerFlags, unsigned long, IOService* );

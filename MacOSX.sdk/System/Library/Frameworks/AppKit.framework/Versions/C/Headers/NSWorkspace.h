@@ -1,7 +1,7 @@
 /*
 	NSWorkspace.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -28,6 +28,14 @@ enum {
      // NSWorkspaceLaunchAndDisplayFailures
      NSWorkspaceLaunchDefault = NSWorkspaceLaunchAsync | 
 NSWorkspaceLaunchAllowingClassicStartup
+};
+#endif
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+typedef unsigned int NSWorkspaceIconCreationOptions;
+enum {
+    NSExcludeQuickDrawElementsIconCreationOption    = 1 << 1,
+    NSExclude10_4ElementsIconCreationOption	    = 1 << 2
 };
 #endif
 
@@ -74,6 +82,9 @@ NSWorkspaceLaunchAllowingClassicStartup
 - (NSImage *)iconForFile:(NSString *)fullPath;
 - (NSImage *)iconForFiles:(NSArray *)fullPaths;
 - (NSImage *)iconForFileType:(NSString *)fileType;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (BOOL)setIcon:(NSImage *)image forFile:(NSString *)fullPath options:(unsigned)options;
+#endif
 
 - (BOOL)getFileSystemInfoForPath:(NSString *)fullPath isRemovable:(BOOL *)removableFlag isWritable:(BOOL *)writableFlag isUnmountable:(BOOL *)unmountableFlag description:(NSString **)description type:(NSString **)fileSystemType;
 

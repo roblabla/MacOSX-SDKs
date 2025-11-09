@@ -18,12 +18,6 @@ typedef struct CGContext *CGContextRef;
 #include <CoreGraphics/CGPattern.h>
 #include <CoreGraphics/CGPDFDocument.h>
 #include <CoreGraphics/CGShading.h>
-#include <CoreFoundation/CFBase.h>
-#include <limits.h>
-#include <stddef.h>
-#include <AvailabilityMacros.h>
-
-CG_EXTERN_C_BEGIN
 
 /* Line join styles. */
 
@@ -76,17 +70,43 @@ enum CGTextEncoding {
 };
 typedef enum CGTextEncoding CGTextEncoding;
 
+/* Interpolation quality. */
+
 enum CGInterpolationQuality {
     kCGInterpolationDefault,		/* Let the context decide. */
     kCGInterpolationNone,		/* Never interpolate. */
-    kCGInterpolationLow,		/* Fast, low quality. */
-    kCGInterpolationHigh		/* Slow, high quality. */
+    kCGInterpolationLow,		/* Faster, lower quality. */
+    kCGInterpolationHigh		/* Slower, higher quality. */
 };
 typedef enum CGInterpolationQuality CGInterpolationQuality;
 
+/* Blend modes. */
+
+enum CGBlendMode {
+    kCGBlendModeNormal,
+    kCGBlendModeMultiply,
+    kCGBlendModeScreen,
+    kCGBlendModeOverlay,
+    kCGBlendModeDarken,
+    kCGBlendModeLighten,
+    kCGBlendModeColorDodge,
+    kCGBlendModeColorBurn,
+    kCGBlendModeSoftLight,
+    kCGBlendModeHardLight,
+    kCGBlendModeDifference,
+    kCGBlendModeExclusion,
+    kCGBlendModeHue,
+    kCGBlendModeSaturation,
+    kCGBlendModeColor,
+    kCGBlendModeLuminosity
+};
+typedef enum CGBlendMode CGBlendMode; /* Available in Mac OS X 10.4 & later. */
+
+CG_EXTERN_C_BEGIN
+
 /* Return the CFTypeID for CGContextRefs. */
 
-CG_EXTERN CFTypeID CGContextGetTypeID(void);
+CG_EXTERN CFTypeID CGContextGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /** Graphics state functions. **/
 
@@ -146,18 +166,22 @@ CG_EXTERN void CGContextSetLineJoin(CGContextRef c, CGLineJoin join);
 
 CG_EXTERN void CGContextSetMiterLimit(CGContextRef c, float limit);
 
-/* Set the line dash patttern in the current graphics state. */
+/* Set the line dash patttern in the current graphics state of `c'. */
 
 CG_EXTERN void CGContextSetLineDash(CGContextRef c, float phase, const float lengths[], size_t count);
 
-/* Set the path flatness parameter in the current graphics state to
+/* Set the path flatness parameter in the current graphics state of `c' to
  * `flatness'. */
 
 CG_EXTERN void CGContextSetFlatness(CGContextRef c, float flatness);
 
-/* Set the alpha value in the current graphics state to `alpha'. */
+/* Set the alpha value in the current graphics state of `c' to `alpha'. */
 
 CG_EXTERN void CGContextSetAlpha(CGContextRef c, float alpha);
+
+/* Set the blend mode of `context' to `mode'. */
+
+CG_EXTERN void CGContextSetBlendMode(CGContextRef context, CGBlendMode mode) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /** Path construction functions. **/
 
@@ -204,6 +228,12 @@ CG_EXTERN void CGContextAddRects(CGContextRef c, const CGRect rects[], size_t co
 
 CG_EXTERN void CGContextAddLines(CGContextRef c, const CGPoint points[], size_t count);
 
+/* Add an ellipse inside `rect' to the current path of `context'.  See the
+ * function `CGPathAddEllipseInRect' for more information on how the path
+ * for the ellipse is constructed. */
+
+CG_EXTERN void CGContextAddEllipseInRect(CGContextRef context, CGRect rect) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
 /* Add an arc of a circle to the context's path, possibly preceded by a
  * straight line segment.  `(x, y)' is the center of the arc; `radius' is
  * its radius; `startAngle' is the angle to the first endpoint of the arc;
@@ -223,13 +253,25 @@ CG_EXTERN void CGContextAddArcToPoint(CGContextRef c, float x1, float y1, float 
 /* Add `path' to the path of context.  The points in `path' are transformed
  * by the CTM of context before they are added. */
 
-CG_EXTERN void CGContextAddPath(CGContextRef context, CGPathRef path);
+CG_EXTERN void CGContextAddPath(CGContextRef context, CGPathRef path) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/** Path stroking. **/
+
+/* Replace the path in context with the stroked version of the path, using
+ * the parameters of `context' to calculate the stroked path.  The
+ * resulting path is created such that filling it with the appropriate
+ * color will produce the same results as stroking the original path. You
+ * can use this path in the same way you can use the path of any context;
+ * for example, you can clip to the stroked version of a path by calling
+ * this function followed by a call to "CGContextClipPath". */
+
+CG_EXTERN void CGContextReplacePathWithStrokedPath(CGContextRef c) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /** Path information functions. **/
 
-/* Return 1 if the context's path contains no elements, 0 otherwise. */
+/* Return true if the context's path contains no elements, false otherwise. */
 
-CG_EXTERN int CGContextIsPathEmpty(CGContextRef c);
+CG_EXTERN bool CGContextIsPathEmpty(CGContextRef c);
 
 /* Return the current point of the current subpath of the context's
  * path. */
@@ -241,6 +283,13 @@ CG_EXTERN CGPoint CGContextGetPathCurrentPoint(CGContextRef c);
  * including control points for Bezier and quadratic curves. */
 
 CG_EXTERN CGRect CGContextGetPathBoundingBox(CGContextRef c);
+
+/* Return true if `point' is contained in the current path of `context'.  A
+ * point is contained within a context's path if it is inside the painted
+ * region when the path is stroked or filled with opaque colors using the
+ * path drawing mode `mode'.  `point' is specified is user space. */
+
+CG_EXTERN bool CGContextPathContainsPoint(CGContextRef context, CGPoint point, CGPathDrawingMode mode) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /** Path drawing functions. **/
 
@@ -287,6 +336,27 @@ CG_EXTERN void CGContextStrokeRectWithWidth(CGContextRef c, CGRect rect, float w
 
 CG_EXTERN void CGContextClearRect(CGContextRef c, CGRect rect);
 
+/* Fill an ellipse (an oval) inside `rect'. */
+
+CG_EXTERN void CGContextFillEllipseInRect(CGContextRef context, CGRect rect) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/* Stroke an ellipse (an oval) inside `rect'. */
+
+CG_EXTERN void CGContextStrokeEllipseInRect(CGContextRef context, CGRect rect) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/* Stroke a sequence of line segments one after another in `context'.  The
+ * line segments are specified by `points', an array of `count' CGPoints.
+ * This function is equivalent to
+ *   CGContextBeginPath(context);
+ *   for (k = 0; k < count; k += 2) {
+ *       CGContextMoveToPoint(context, s[k].x, s[k].y);
+ *       CGContextAddLineToPoint(context, s[k+1].x, s[k+1].y);
+ *   }
+ *   CGContextStrokePath(context);
+ */
+
+CG_EXTERN void CGContextStrokeLineSegments(CGContextRef c, const CGPoint points[], size_t count) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
 /** Clipping functions. **/
 
 /* Intersect the context's path with the current clip path and use the
@@ -300,6 +370,35 @@ CG_EXTERN void CGContextClip(CGContextRef c);
  * Use the even-odd fill rule for deciding what's inside the path. */
 
 CG_EXTERN void CGContextEOClip(CGContextRef c);
+
+/* Add `mask' transformed to `rect' to the clipping area of `context'.  The
+ * mask, which may be either an image mask or an image, is mapped into the
+ * specified rectangle and intersected with the current clipping area of
+ * the context.
+ *
+ * If `mask' is an image mask, then it clips in a manner identical to the
+ * behavior if it were used with "CGContextDrawImage": it indicates an area
+ * to be masked out (left unchanged) when drawing.  The source samples of
+ * the image mask determine which points of the clipping area are changed,
+ * acting as an "inverse alpha": if the value of a source sample in the
+ * image mask is S, then the corresponding point in the current clipping
+ * area will be multiplied by an alpha of (1-S).  (For example, if S is 1,
+ * then the point in the clipping area becomes clear, while if S is 0, the
+ * point in the clipping area is unchanged.
+ *
+ * If `mask' is an image, then it serves as alpha mask and is blended with
+ * the current clipping area.  The source samples of mask determine which
+ * points of the clipping area are changed: if the value of the source
+ * sample in mask is S, then the corresponding point in the current
+ * clipping area will be multiplied by an alpha of S.  (For example, if S
+ * is 0, then the point in the clipping area becomes clear, while if S is
+ * 1, the point in the clipping area is unchanged.
+ *
+ * If `mask' is an image, then it must be in the DeviceGray color space,
+ * may not have alpha, and may not be masked by an image mask or masking
+ * color. */
+
+CG_EXTERN void CGContextClipToMask(CGContextRef c, CGRect rect, CGImageRef mask);
 
 /* Return the bounding box of the clip path of `c' in user space.  The
  * bounding box is the smallest rectangle completely enclosing all points
@@ -382,7 +481,8 @@ CG_EXTERN void CGContextSetFillPattern(CGContextRef c, CGPatternRef pattern, con
 
 CG_EXTERN void CGContextSetStrokePattern(CGContextRef c, CGPatternRef pattern, const float components[]);
 
-/* Set the pattern phase of context `c' to `phase'. */
+/* Set the pattern phase in the current graphics state of the context `c'
+ * to `phase'. */
 
 CG_EXTERN void CGContextSetPatternPhase(CGContextRef c, CGSize phase);
 
@@ -424,7 +524,8 @@ CG_EXTERN void CGContextSetCMYKStrokeColor(CGContextRef c, float cyan, float mag
 
 /** Rendering intent. **/
 
-/* Set the current rendering intent in the context `c' to `intent'. */
+/* Set the rendering intent in the current graphics state of context `c' to
+ * `intent'. */
 
 CG_EXTERN void CGContextSetRenderingIntent(CGContextRef c, CGColorRenderingIntent intent);
 
@@ -472,7 +573,7 @@ CG_EXTERN void CGContextSetShadow(CGContextRef context, CGSize offset, float blu
 
 /* Fill the current clipping region of `c' with `shading'. */
 
-CG_EXTERN void CGContextDrawShading(CGContextRef c, CGShadingRef shading);
+CG_EXTERN void CGContextDrawShading(CGContextRef c, CGShadingRef shading) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /** Text functions. **/
 
@@ -500,21 +601,25 @@ CG_EXTERN void CGContextSetTextMatrix(CGContextRef c, CGAffineTransform t);
 
 CG_EXTERN CGAffineTransform CGContextGetTextMatrix(CGContextRef c);
 
-/* Set the current text drawing mode in the context `c' to `mode'. */
+/* Set the text drawing mode in the current graphics state of the context
+ * `c' to `mode'. */
 
 CG_EXTERN void CGContextSetTextDrawingMode(CGContextRef c, CGTextDrawingMode mode);
 
-/* Set the current font in the context `c' to `font'. */
+/* Set the font in the current graphics state of the context `c' to
+ * `font'. */
 
 CG_EXTERN void CGContextSetFont(CGContextRef c, CGFontRef font);
 
-/* Set the current font size in the context `c' to `size'. */
+/* Set the font size in the current graphics state of the context `c' to
+ * `size'. */
 
 CG_EXTERN void CGContextSetFontSize(CGContextRef c, float size);
 
-/* Attempts to find the font named `name' for the context `c'.  If
- * successful, scales it to `size' units in text space.  `textEncoding'
- * specifies how to translate from bytes to glyphs. */
+/* Attempts to find the font named `name' and, if successful, sets it as
+ * the font in the current graphics state of `c' and sets the font size in
+ * the current graphics state to `size'. `textEncoding' specifies how to
+ * translate from bytes to glyphs when displaying text. */
 
 CG_EXTERN void CGContextSelectFont(CGContextRef c, const char *name, float size, CGTextEncoding textEncoding);
 
@@ -556,7 +661,7 @@ CG_EXTERN void CGContextShowGlyphsAtPoint(CGContextRef c, float x, float y, cons
 
 /* Draw `page' in the current user space of the context `c'. */
 
-CG_EXTERN void CGContextDrawPDFPage(CGContextRef c, CGPDFPageRef page);
+CG_EXTERN void CGContextDrawPDFPage(CGContextRef c, CGPDFPageRef page) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /* DEPRECATED; use the CGPDFPage API instead.
  * Draw `page' in `document' in the rectangular area specified by `rect' in
@@ -600,6 +705,13 @@ CG_EXTERN void CGContextSynchronize(CGContextRef c);
 
 CG_EXTERN void CGContextSetShouldAntialias(CGContextRef c, bool shouldAntialias);
 
+/* Allow antialiasing in context `c' if `allowsAntialiasing' is true; don't
+ * allow it otherwise. This parameter is not part of the graphics state. A
+ * context will perform antialiasing if both `allowsAntialiasing' and the
+ * graphics state parameter `shouldAntialias' are true. */
+
+CG_EXTERN void CGContextSetAllowsAntialiasing(CGContextRef context, bool allowsAntialiasing) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
 /** Font smoothing functions. **/
 
 /* Turn on font smoothing if `shouldSmoothFonts' is true; turn it off
@@ -607,7 +719,7 @@ CG_EXTERN void CGContextSetShouldAntialias(CGContextRef c, bool shouldAntialias)
  * doesn't guarantee that font smoothing will occur: not all destination
  * contexts support font smoothing. */
 
-CG_EXTERN void CGContextSetShouldSmoothFonts(CGContextRef c, bool shouldSmoothFonts);
+CG_EXTERN void CGContextSetShouldSmoothFonts(CGContextRef c, bool shouldSmoothFonts) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /** Transparency layer support. **/
 
@@ -630,6 +742,43 @@ CG_EXTERN void CGContextBeginTransparencyLayer(CGContextRef context, CFDictionar
 /* End a tranparency layer. */
 
 CG_EXTERN void CGContextEndTransparencyLayer(CGContextRef context) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+/** User space to device space tranformations. **/
+
+/* Return the affine transform mapping the user space (abstract
+ * coordinates) of `context' to device space (pixels). */
+
+CG_EXTERN CGAffineTransform CGContextGetUserSpaceToDeviceSpaceTransform(CGContextRef c) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/* Transform `point' from the user space of `context' to device space. */
+
+CG_EXTERN CGPoint CGContextConvertPointToDeviceSpace(CGContextRef c, CGPoint point) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/* Transform `point' from device space to the user space of `context'. */
+
+CG_EXTERN CGPoint CGContextConvertPointToUserSpace(CGContextRef c, CGPoint point) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/* Transform `size' from the user space of `context' to device space. */
+
+CG_EXTERN CGSize CGContextConvertSizeToDeviceSpace(CGContextRef c, CGSize size) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/* Transform `size' from device space to the user space of `context'. */
+
+CG_EXTERN CGSize CGContextConvertSizeToUserSpace(CGContextRef c, CGSize size) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/* Transform `rect' from the user space of `context' to device space. Since
+ * affine transforms do not preserve rectangles in general, this function
+ * returns the smallest rectangle which contains the transformed corner
+ * points of `rect'. */
+
+CG_EXTERN CGRect CGContextConvertRectToDeviceSpace(CGContextRef c, CGRect rect) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/* Transform `rect' from device space to the user space of `context'. Since
+ * affine transforms do not preserve rectangles in general, this function
+ * returns the smallest rectangle which contains the transformed corner
+ * points of `rect'. */
+
+CG_EXTERN CGRect CGContextConvertRectToUserSpace(CGContextRef c, CGRect rect) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 CG_EXTERN_C_END
 

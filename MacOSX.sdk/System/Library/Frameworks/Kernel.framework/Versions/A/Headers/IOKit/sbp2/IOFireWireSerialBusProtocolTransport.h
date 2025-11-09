@@ -155,10 +155,11 @@ protected:
 	*/
 	
 	typedef struct {
-		IOFireWireSBP2ORB *		orb;
-		SCSITaskIdentifier 		scsiTask;
-		SCSIServiceResponse 	serviceResponse;
-		SCSITaskStatus			taskStatus;
+		IOFireWireSBP2ORB *				orb;
+		SCSITaskIdentifier 				scsiTask;
+		SCSIServiceResponse 			serviceResponse;
+		SCSITaskStatus					taskStatus;
+		IOBufferMemoryDescriptor *		quadletAlignedBuffer;
 	} SBP2ClientOrbData;
 	
 	static const UInt32 kDefaultBusyTimeoutValue	= 0x0000000F;
@@ -174,8 +175,12 @@ protected:
 	// binary compatibility instance variable expansion
 	struct ExpansionData
 	{ 
-		IOCommandPool *	 fCommandPool;
-		SBP2LoginState	 fLoginState;
+		IOCommandPool *		fCommandPool;
+		IOCommandPool *		fSubmitQueue;
+		SBP2LoginState		fLoginState;
+		bool				fLUNResetPathFlag;
+		int					fLUNResetCount;
+		bool				fAlwaysSetSenseData;
 	};
 	
 	ExpansionData * reserved;
@@ -368,6 +373,18 @@ public:
 	
 	virtual void cleanUp ( void );
 
+#if 0
+	
+	/*!
+		@function close
+		@abstract See IOService for discussion.
+		@result none.
+	*/
+	
+	virtual void close ( IOService * provider, IOOptionBits options );
+	
+#endif
+	
 	/*!
 		@function finalize
 		@abstract See IOService for discussion.
@@ -420,12 +437,14 @@ protected:
 		CriticalOrbSubmission (
 			IOFireWireSBP2ORB * orb,
 			SCSITaskIdentifier request );
-		
+	
+	virtual void submitOrbFromQueue ( void );
+	OSMetaClassDeclareReservedUsed ( IOFireWireSerialBusProtocolTransport, 6 );
+	
 private:
 	
 	// binary compatibility reserved method space
     
-	OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 6 );
 	OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 7 );
 	OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 8 );
 	OSMetaClassDeclareReservedUnused ( IOFireWireSerialBusProtocolTransport, 9 );

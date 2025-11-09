@@ -1,5 +1,5 @@
 /*	NSXMLParser.h
-        Copyright 2003, Apple, Inc. All rights reserved.
+        Copyright (c) 2003-2005, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -12,9 +12,9 @@
 @private
     void * _parser;
     id _delegate;
-    void * _reserved1;
-    void * _reserved2;
-    void * _reserved3;
+    id _reserved1;
+    id _reserved2;
+    id _reserved3;
 }
 - (id)initWithContentsOfURL:(NSURL *)url;  // initializes the parser with the specified URL.
 - (id)initWithData:(NSData *)data; // create the parser from data

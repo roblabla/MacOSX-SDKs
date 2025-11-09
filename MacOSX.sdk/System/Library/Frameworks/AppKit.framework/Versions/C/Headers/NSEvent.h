@@ -1,13 +1,14 @@
 /*
 	NSEvent.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
 #import <Foundation/NSGeometry.h>
+#import <IOKit/hidsystem/IOLLEvent.h>
 
 @class NSGraphicsContext, NSWindow;
 
@@ -30,6 +31,10 @@ typedef enum _NSEventType {		/* various types of events */
 	NSPeriodic		= 16,
 	NSCursorUpdate		= 17,
         NSScrollWheel		= 22,
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+	NSTabletPoint		= 23,
+	NSTabletProximity       = 24,
+#endif
         NSOtherMouseDown	= 25,
         NSOtherMouseUp		= 26,
         NSOtherMouseDragged	= 27
@@ -54,6 +59,10 @@ enum {					/* masks for the types of events */
 	NSPeriodicMask			= 1 << NSPeriodic,
 	NSCursorUpdateMask		= 1 << NSCursorUpdate,
         NSScrollWheelMask		= 1 << NSScrollWheel,
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+	NSTabletPointMask		= 1 << NSTabletPoint,
+	NSTabletProximityMask		= 1 << NSTabletProximity,
+#endif
 	NSOtherMouseDownMask		= 1 << NSOtherMouseDown,
 	NSOtherMouseUpMask		= 1 << NSOtherMouseUp,
 	NSOtherMouseDraggedMask		= 1 << NSOtherMouseDragged,
@@ -71,8 +80,28 @@ enum {
 	NSCommandKeyMask =		1 << 20,
 	NSNumericPadKeyMask =		1 << 21,
 	NSHelpKeyMask =			1 << 22,
-	NSFunctionKeyMask =		1 << 23
+	NSFunctionKeyMask =		1 << 23,
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+	NSDeviceIndependentModifierFlagsMask = 0xffff0000U
+#endif
 };
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+/* pointer types for NSTabletProximity events or mouse events with subtype NSTabletProximityEventSubtype*/
+typedef enum {		
+    NSUnknownPointingDevice = NX_TABLET_POINTER_UNKNOWN,
+    NSPenPointingDevice	    = NX_TABLET_POINTER_PEN,
+    NSCursorPointingDevice  = NX_TABLET_POINTER_CURSOR,
+    NSEraserPointingDevice  = NX_TABLET_POINTER_ERASER
+} NSPointingDeviceType;
+
+/* button masks for NSTabletPoint events or mouse events with subtype NSTabletPointEventSubtype */
+enum {
+    NSPenTipMask =	    NX_TABLET_BUTTON_PENTIPMASK,
+    NSPenLowerSideMask =    NX_TABLET_BUTTON_PENLOWERSIDEMASK,
+    NSPenUpperSideMask =    NX_TABLET_BUTTON_PENUPPERSIDEMASK
+};
+#endif
 
 @interface NSEvent : NSObject <NSCopying, NSCoding> {
     /*All instance variables are private*/
@@ -118,7 +147,6 @@ enum {
 
 /* these messages are valid for all events */
 - (NSEventType)type;
-- (NSPoint)locationInWindow;
 - (unsigned int)modifierFlags;
 - (NSTimeInterval)timestamp;
 - (NSWindow *)window;
@@ -127,10 +155,14 @@ enum {
 
 /* these messages are valid for all mouse down/up/drag events */
 - (int)clickCount;
-- (float)pressure;
 - (int)buttonNumber;	// for NSOtherMouse events, but will return valid constants for NSLeftMouse and NSRightMouse
 /* these messages are valid for all mouse down/up/drag and enter/exit events */
 - (int)eventNumber;
+
+/* These messages are valid for all mouse down/up/drag events */
+/* These messages are also valid for NSTabletPoint events on 10.4 or later */
+- (float)pressure;
+- (NSPoint)locationInWindow;
 
 /* these messages are valid for scroll wheel events and mouse move/drag events */
 - (float)deltaX;	
@@ -149,10 +181,59 @@ enum {
 - (int)trackingNumber;
 - (void *)userData;
 
-/* these messages are valid for kit, system, and app-defined events */
+/* this message is valid for kit, system, and app-defined events */
+/* this message is also valid for mouse events on 10.4 or later */
 - (short)subtype;
+
+/* these messages are valid for kit, system, and app-defined events */
 - (int)data1;
 - (int)data2;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+/* this message is valid for mouse events with subtype NSTabletPointEventSubtype or NSTabletProximityEventSubtype, and for NSTabletPoint and NSTabletProximity events */
+- (unsigned int)deviceID;
+
+/* these messages are valid for mouse events with subtype NSTabletPointEventSubtype, and for NSTabletPoint events */
+/* absolute x coordinate in tablet space at full tablet resolution */
+- (int)absoluteX; 
+/* absolute y coordinate in tablet space at full tablet resolution */
+- (int)absoluteY;               
+/* absolute z coordinate in tablet space at full tablet resolution */
+- (int)absoluteZ; 	
+/* mask indicating which buttons are pressed.*/
+- (unsigned int)buttonMask;  
+/* range is -1 to 1 for both axes */
+- (NSPoint)tilt;     
+/* device rotation in degrees */
+- (float)rotation;       
+/* tangential pressure on the device; range is -1 to 1 */
+- (float)tangentialPressure;  
+/* NSArray of 3 vendor defined shorts */
+- (id)vendorDefined;	
+
+/* these messages are valid for mouse events with subtype NSTabletProximityEventSubtype, and  for NSTabletProximity events */
+/* vendor defined, typically USB vendor ID */
+- (unsigned int)vendorID;
+/* vendor defined tablet ID */
+- (unsigned int)tabletID;
+/* index of the device on the tablet.  Usually 0, except for tablets that support multiple concurrent devices */
+- (unsigned int)pointingDeviceID;
+/* system assigned unique tablet ID */
+- (unsigned int)systemTabletID;
+/* vendor defined pointing device type */
+- (unsigned int)vendorPointingDeviceType; 
+/* vendor defined serial number of pointing device */
+- (unsigned int)pointingDeviceSerialNumber; 
+/* vendor defined unique ID */
+- (unsigned long long)uniqueID;	
+/* mask representing capabilities of device */
+- (unsigned int)capabilityMask;	
+/* mask representing capabilities of device */
+- (NSPointingDeviceType)pointingDeviceType;
+/* YES - entering; NO - leaving */
+- (BOOL)isEnteringProximity;	
+
+#endif
 
 /* used for initial delay and periodic behavior in tracking loops */
 + (void)startPeriodicEventsAfterDelay:(NSTimeInterval)delay withPeriod:(NSTimeInterval)period;
@@ -259,3 +340,13 @@ enum {		/* event subtypes for NSAppKitDefined events */
 enum {		/* event subtypes for NSSystemDefined events */
     NSPowerOffEventType			= 1
 };
+
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+enum {		/* event subtypes for mouse events */
+    NSMouseEventSubtype		    = NX_SUBTYPE_DEFAULT,
+    NSTabletPointEventSubtype       = NX_SUBTYPE_TABLET_POINT,
+    NSTabletProximityEventSubtype   = NX_SUBTYPE_TABLET_PROXIMITY
+};
+#endif
+

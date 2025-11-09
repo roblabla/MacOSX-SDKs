@@ -3,9 +3,9 @@
  
      Contains:   Process Manager Interfaces.
  
-     Version:    HIServices-125.7~1
+     Version:    HIServices-169~651
  
-     Copyright:  © 1989-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1989-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -34,13 +34,6 @@ extern "C" {
 
 #pragma options align=mac68k
 
-/* type for unique process identifier */
-struct ProcessSerialNumber {
-  unsigned long       highLongOfPSN;
-  unsigned long       lowLongOfPSN;
-};
-typedef struct ProcessSerialNumber      ProcessSerialNumber;
-typedef ProcessSerialNumber *           ProcessSerialNumberPtr;
 enum {
                                         /* Process identifier - Various reserved process serial numbers */
   kNoProcess                    = 0,
@@ -443,7 +436,13 @@ GetProcessInformation(
  *    Key Name                    Type 
  *    --------                    ---- 
  *    "PSN"                       CFNumber, kCFNumberLongLongType 
- *     "Flavor"                    CFNumber, kCFNumberSInt32 
+ *     "Flavor"                    CFNumber, kCFNumberSInt32.  A hint
+ *    as to the flavor of the application. Note that this should only
+ *    be used as a hint, since a bundle of a different flavor might be
+ *    loaded into an application's address space.  The assigned values
+ *    at present are:  Mac OS Classic aplications have the value 0,
+ *    Carbon applications have the value 2, Cocoa applications have the
+ *    value 4. Other undocumented values may also be returned.
  *     "Attributes"                CFNumber, kCFNumberSInt32 
  *     "ParentPSN" *               CFNumber, kCFNumberLongLong 
  *     "FileType" *                CFString, file type 

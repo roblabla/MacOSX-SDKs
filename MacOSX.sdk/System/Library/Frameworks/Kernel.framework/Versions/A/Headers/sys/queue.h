@@ -500,7 +500,6 @@ struct {								\
 		    (elm)->field.cqe_next;				\
 } while (0)
 
-#ifdef KERNEL
 
 #if NOTFB31
 
@@ -539,12 +538,11 @@ remque(void *a)
 
 #else /* !__GNUC__ */
 
-void	insque __P((void *a, void *b));
-void	remque __P((void *a));
+void	insque(void *a, void *b);
+void	remque(void *a);
 
 #endif /* __GNUC__ */
 
 #endif
-#endif /* KERNEL */
 
 #endif /* !_SYS_QUEUE_H_ */

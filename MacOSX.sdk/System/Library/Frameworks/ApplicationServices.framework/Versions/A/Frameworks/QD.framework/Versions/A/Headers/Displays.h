@@ -3,9 +3,9 @@
  
      Contains:   Display Manager Interfaces.
  
-     Version:    Quickdraw-150.7~2
+     Version:    Quickdraw-192.24~58
  
-     Copyright:  © 1993-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1993-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -45,6 +45,14 @@ extern "C" {
 #endif
 
 #pragma options align=mac68k
+
+/******************** DEPRECATION NOTICE *********************
+ *
+ * The DisplayMgr API is being deprecated, and should be replaced
+ * by the CGDirectDisplay API in the CoreGraphics framework in 
+ * ApplicationServices.framework.
+ *
+ *************************************************************/
 
 typedef void *                          DMProcessInfoPtr;
 typedef void *                          DMModalFilterUPP;
@@ -416,7 +424,7 @@ typedef STACK_UPP_TYPE(DMDisplayListIteratorProcPtr)            DMDisplayListIte
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DMNotificationUPP
-NewDMNotificationUPP(DMNotificationProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewDMNotificationUPP(DMNotificationProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  NewDMExtendedNotificationUPP()
@@ -427,7 +435,7 @@ NewDMNotificationUPP(DMNotificationProcPtr userRoutine)       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DMExtendedNotificationUPP
-NewDMExtendedNotificationUPP(DMExtendedNotificationProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewDMExtendedNotificationUPP(DMExtendedNotificationProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  NewDMComponentListIteratorUPP()
@@ -438,7 +446,7 @@ NewDMExtendedNotificationUPP(DMExtendedNotificationProcPtr userRoutine) AVAILABL
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DMComponentListIteratorUPP
-NewDMComponentListIteratorUPP(DMComponentListIteratorProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewDMComponentListIteratorUPP(DMComponentListIteratorProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  NewDMDisplayModeListIteratorUPP()
@@ -449,7 +457,7 @@ NewDMComponentListIteratorUPP(DMComponentListIteratorProcPtr userRoutine) AVAILA
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DMDisplayModeListIteratorUPP
-NewDMDisplayModeListIteratorUPP(DMDisplayModeListIteratorProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewDMDisplayModeListIteratorUPP(DMDisplayModeListIteratorProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  NewDMProfileListIteratorUPP()
@@ -460,7 +468,7 @@ NewDMDisplayModeListIteratorUPP(DMDisplayModeListIteratorProcPtr userRoutine) AV
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DMProfileListIteratorUPP
-NewDMProfileListIteratorUPP(DMProfileListIteratorProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewDMProfileListIteratorUPP(DMProfileListIteratorProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  NewDMDisplayListIteratorUPP()
@@ -471,7 +479,7 @@ NewDMProfileListIteratorUPP(DMProfileListIteratorProcPtr userRoutine) AVAILABLE_
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DMDisplayListIteratorUPP
-NewDMDisplayListIteratorUPP(DMDisplayListIteratorProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewDMDisplayListIteratorUPP(DMDisplayListIteratorProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  DisposeDMNotificationUPP()
@@ -482,7 +490,7 @@ NewDMDisplayListIteratorUPP(DMDisplayListIteratorProcPtr userRoutine) AVAILABLE_
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDMNotificationUPP(DMNotificationUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeDMNotificationUPP(DMNotificationUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  DisposeDMExtendedNotificationUPP()
@@ -493,7 +501,7 @@ DisposeDMNotificationUPP(DMNotificationUPP userUPP)           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDMExtendedNotificationUPP(DMExtendedNotificationUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeDMExtendedNotificationUPP(DMExtendedNotificationUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  DisposeDMComponentListIteratorUPP()
@@ -504,7 +512,7 @@ DisposeDMExtendedNotificationUPP(DMExtendedNotificationUPP userUPP) AVAILABLE_MA
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDMComponentListIteratorUPP(DMComponentListIteratorUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeDMComponentListIteratorUPP(DMComponentListIteratorUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  DisposeDMDisplayModeListIteratorUPP()
@@ -515,7 +523,7 @@ DisposeDMComponentListIteratorUPP(DMComponentListIteratorUPP userUPP) AVAILABLE_
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDMDisplayModeListIteratorUPP(DMDisplayModeListIteratorUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeDMDisplayModeListIteratorUPP(DMDisplayModeListIteratorUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  DisposeDMProfileListIteratorUPP()
@@ -526,7 +534,7 @@ DisposeDMDisplayModeListIteratorUPP(DMDisplayModeListIteratorUPP userUPP) AVAILA
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDMProfileListIteratorUPP(DMProfileListIteratorUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeDMProfileListIteratorUPP(DMProfileListIteratorUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  DisposeDMDisplayListIteratorUPP()
@@ -537,7 +545,7 @@ DisposeDMProfileListIteratorUPP(DMProfileListIteratorUPP userUPP) AVAILABLE_MAC_
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDMDisplayListIteratorUPP(DMDisplayListIteratorUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeDMDisplayListIteratorUPP(DMDisplayListIteratorUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  InvokeDMNotificationUPP()
@@ -550,7 +558,7 @@ DisposeDMDisplayListIteratorUPP(DMDisplayListIteratorUPP userUPP) AVAILABLE_MAC_
 extern void
 InvokeDMNotificationUPP(
   AppleEvent *       theEvent,
-  DMNotificationUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DMNotificationUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  InvokeDMExtendedNotificationUPP()
@@ -565,7 +573,7 @@ InvokeDMExtendedNotificationUPP(
   void *                     userData,
   short                      theMessage,
   void *                     notifyData,
-  DMExtendedNotificationUPP  userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DMExtendedNotificationUPP  userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  InvokeDMComponentListIteratorUPP()
@@ -580,7 +588,7 @@ InvokeDMComponentListIteratorUPP(
   void *                      userData,
   DMListIndexType             itemIndex,
   DMComponentListEntryPtr     componentInfo,
-  DMComponentListIteratorUPP  userUPP)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DMComponentListIteratorUPP  userUPP)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  InvokeDMDisplayModeListIteratorUPP()
@@ -595,7 +603,7 @@ InvokeDMDisplayModeListIteratorUPP(
   void *                        userData,
   DMListIndexType               itemIndex,
   DMDisplayModeListEntryPtr     displaymodeInfo,
-  DMDisplayModeListIteratorUPP  userUPP)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DMDisplayModeListIteratorUPP  userUPP)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  InvokeDMProfileListIteratorUPP()
@@ -610,7 +618,7 @@ InvokeDMProfileListIteratorUPP(
   void *                    userData,
   DMListIndexType           itemIndex,
   DMProfileListEntryPtr     profileInfo,
-  DMProfileListIteratorUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DMProfileListIteratorUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  InvokeDMDisplayListIteratorUPP()
@@ -625,7 +633,7 @@ InvokeDMDisplayListIteratorUPP(
   void *                    userData,
   DMListIndexType           itemIndex,
   DisplayListEntryPtr       displaymodeInfo,
-  DMDisplayListIteratorUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DMDisplayListIteratorUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  DMDisplayGestalt()
@@ -739,86 +747,86 @@ InvokeDMDisplayListIteratorUPP(
 
 
 /*
- *  DMGetFirstScreenDevice()
+ *  DMGetFirstScreenDevice()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern GDHandle 
-DMGetFirstScreenDevice(Boolean activeOnly)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DMGetFirstScreenDevice(Boolean activeOnly)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMGetNextScreenDevice()
+ *  DMGetNextScreenDevice()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern GDHandle 
 DMGetNextScreenDevice(
   GDHandle   theDevice,
-  Boolean    activeOnly)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean    activeOnly)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMDrawDesktopRect()
+ *  DMDrawDesktopRect()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DMDrawDesktopRect(Rect * globalRect)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DMDrawDesktopRect(Rect * globalRect)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMDrawDesktopRegion()
+ *  DMDrawDesktopRegion()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DMDrawDesktopRegion(RgnHandle globalRgn)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DMDrawDesktopRegion(RgnHandle globalRgn)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
 
 /*
- *  DMBeginConfigureDisplays()
+ *  DMBeginConfigureDisplays()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-DMBeginConfigureDisplays(Handle * displayState)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DMBeginConfigureDisplays(Handle * displayState)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMEndConfigureDisplays()
+ *  DMEndConfigureDisplays()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-DMEndConfigureDisplays(Handle displayState)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DMEndConfigureDisplays(Handle displayState)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMAddDisplay()
+ *  DMAddDisplay()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -830,14 +838,14 @@ DMAddDisplay(
   unsigned long   reserved,
   unsigned long   displayID,
   Component       displayComponent,
-  Handle          displayState)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle          displayState)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMMoveDisplay()
+ *  DMMoveDisplay()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -846,73 +854,73 @@ DMMoveDisplay(
   GDHandle   moveDevice,
   short      x,
   short      y,
-  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMDisableDisplay()
+ *  DMDisableDisplay()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 DMDisableDisplay(
   GDHandle   disableDevice,
-  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMEnableDisplay()
+ *  DMEnableDisplay()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 DMEnableDisplay(
   GDHandle   enableDevice,
-  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMRemoveDisplay()
+ *  DMRemoveDisplay()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 DMRemoveDisplay(
   GDHandle   removeDevice,
-  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
 
 
 /*
- *  DMSetMainDisplay()
+ *  DMSetMainDisplay()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 DMSetMainDisplay(
   GDHandle   newMainDevice,
-  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMSetDisplayMode()
+ *  DMSetDisplayMode()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -922,14 +930,14 @@ DMSetDisplayMode(
   unsigned long    mode,
   unsigned long *  depthMode,
   unsigned long    reserved,
-  Handle           displayState)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle           displayState)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMCheckDisplayMode()
+ *  DMCheckDisplayMode()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -940,90 +948,90 @@ DMCheckDisplayMode(
   unsigned long    depthMode,
   unsigned long *  switchFlags,
   unsigned long    reserved,
-  Boolean *        modeOk)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *        modeOk)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMGetDeskRegion()
+ *  DMGetDeskRegion()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-DMGetDeskRegion(RgnHandle * desktopRegion)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DMGetDeskRegion(RgnHandle * desktopRegion)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMRegisterNotifyProc()
+ *  DMRegisterNotifyProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 DMRegisterNotifyProc(
   DMNotificationUPP   notificationProc,
-  DMProcessInfoPtr    whichPSN)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DMProcessInfoPtr    whichPSN)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMRemoveNotifyProc()
+ *  DMRemoveNotifyProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 DMRemoveNotifyProc(
   DMNotificationUPP   notificationProc,
-  DMProcessInfoPtr    whichPSN)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DMProcessInfoPtr    whichPSN)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMQDIsMirroringCapable()
+ *  DMQDIsMirroringCapable()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
-DMQDIsMirroringCapable(Boolean * qdIsMirroringCapable)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DMQDIsMirroringCapable(Boolean * qdIsMirroringCapable)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMCanMirrorNow()
+ *  DMCanMirrorNow()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
-DMCanMirrorNow(Boolean * canMirrorNow)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DMCanMirrorNow(Boolean * canMirrorNow)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMIsMirroringOn()
+ *  DMIsMirroringOn()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
-DMIsMirroringOn(Boolean * isMirroringOn)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DMIsMirroringOn(Boolean * isMirroringOn)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMMirrorDevices()
+ *  DMMirrorDevices()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
@@ -1031,59 +1039,59 @@ extern OSErr
 DMMirrorDevices(
   GDHandle   gD1,
   GDHandle   gD2,
-  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMUnmirrorDevice()
+ *  DMUnmirrorDevice()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
 DMUnmirrorDevice(
   GDHandle   gDevice,
-  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMGetNextMirroredDevice()
+ *  DMGetNextMirroredDevice()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
 DMGetNextMirroredDevice(
   GDHandle    gDevice,
-  GDHandle *  mirroredDevice)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  GDHandle *  mirroredDevice)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMBlockMirroring()
+ *  DMBlockMirroring()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
-DMBlockMirroring(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DMBlockMirroring(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMUnblockMirroring()
+ *  DMUnblockMirroring()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
-DMUnblockMirroring(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DMUnblockMirroring(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -1097,10 +1105,10 @@ DMUnblockMirroring(void)                                      AVAILABLE_MAC_OS_X
 
 
 /*
- *  DMGetDisplayIDByGDevice()
+ *  DMGetDisplayIDByGDevice()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
@@ -1108,7 +1116,7 @@ extern OSErr
 DMGetDisplayIDByGDevice(
   GDHandle         displayDevice,
   DisplayIDType *  displayID,
-  Boolean          failToMain)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean          failToMain)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -1127,38 +1135,38 @@ DMGetGDeviceByDisplayID(
 
 
 /*
- *  DMSetDisplayComponent()
+ *  DMSetDisplayComponent()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 DMSetDisplayComponent(
   GDHandle    theDevice,
-  Component   displayComponent)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Component   displayComponent)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMGetDisplayComponent()
+ *  DMGetDisplayComponent()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 DMGetDisplayComponent(
   GDHandle     theDevice,
-  Component *  displayComponent)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Component *  displayComponent)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMNewDisplay()
+ *  DMNewDisplay()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
@@ -1170,40 +1178,40 @@ DMNewDisplay(
   unsigned long   reserved,
   DisplayIDType   displayID,
   Component       displayComponent,
-  Handle          displayState)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle          displayState)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMDisposeDisplay()
+ *  DMDisposeDisplay()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
 DMDisposeDisplay(
   GDHandle   disposeDevice,
-  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMResolveDisplayComponents()
+ *  DMResolveDisplayComponents()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-DMResolveDisplayComponents(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DMResolveDisplayComponents(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMRegisterExtendedNotifyProc()
+ *  DMRegisterExtendedNotifyProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib 2.0 and later
  */
@@ -1212,14 +1220,14 @@ DMRegisterExtendedNotifyProc(
   DMExtendedNotificationUPP   notifyProc,
   void *                      notifyUserData,
   unsigned short              nofifyOnFlags,
-  DMProcessInfoPtr            whichPSN)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DMProcessInfoPtr            whichPSN)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMRemoveExtendedNotifyProc()
+ *  DMRemoveExtendedNotifyProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib 2.0 and later
  */
@@ -1228,14 +1236,14 @@ DMRemoveExtendedNotifyProc(
   DMExtendedNotificationUPP   notifyProc,
   void *                      notifyUserData,
   DMProcessInfoPtr            whichPSN,
-  unsigned short              removeFlags)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short              removeFlags)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMNewAVPanelList()
+ *  DMNewAVPanelList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1247,14 +1255,14 @@ DMNewAVPanelList(
   unsigned long      panelListFlags,
   unsigned long      reserved,
   DMListIndexType *  thePanelCount,
-  DMListType *       thePanelList)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DMListType *       thePanelList)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMNewAVEngineList()
+ *  DMNewAVEngineList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1266,14 +1274,14 @@ DMNewAVEngineList(
   unsigned long      engineListFlags,
   unsigned long      reserved,
   DMListIndexType *  engineCount,
-  DMListType *       engineList)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DMListType *       engineList)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMNewAVDeviceList()
+ *  DMNewAVDeviceList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1283,14 +1291,14 @@ DMNewAVDeviceList(
   unsigned long      deviceListFlags,
   unsigned long      reserved,
   DMListIndexType *  deviceCount,
-  DMListType *       deviceList)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DMListType *       deviceList)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMNewAVPortListByPortType()
+ *  DMNewAVPortListByPortType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1300,14 +1308,14 @@ DMNewAVPortListByPortType(
   unsigned long      portListFlags,
   unsigned long      reserved,
   DMListIndexType *  devicePortCount,
-  DMListType *       theDevicePortList)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DMListType *       theDevicePortList)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMGetIndexedComponentFromList()
+ *  DMGetIndexedComponentFromList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1317,26 +1325,26 @@ DMGetIndexedComponentFromList(
   DMListIndexType              itemIndex,
   unsigned long                reserved,
   DMComponentListIteratorUPP   listIterator,
-  void *                       userData)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                       userData)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMDisposeList()
+ *  DMDisposeList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib 2.0 and later
  */
 extern OSErr 
-DMDisposeList(DMListType panelList)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DMDisposeList(DMListType panelList)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMGetNameByAVID()
+ *  DMGetNameByAVID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1344,14 +1352,14 @@ extern OSErr
 DMGetNameByAVID(
   AVIDType        theID,
   unsigned long   nameFlags,
-  Str255          name)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255          name)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMNewAVIDByPortComponent()
+ *  DMNewAVIDByPortComponent()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1360,14 +1368,14 @@ DMNewAVIDByPortComponent(
   Component       thePortComponent,
   ResType         portKind,
   unsigned long   reserved,
-  AVIDType *      newID)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AVIDType *      newID)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMGetPortComponentByAVID()
+ *  DMGetPortComponentByAVID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1376,14 +1384,14 @@ DMGetPortComponentByAVID(
   DisplayIDType           thePortID,
   Component *             thePortComponent,
   ComponentDescription *  theDesciption,
-  ResType *               thePortKind)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResType *               thePortKind)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMSendDependentNotification()
+ *  DMSendDependentNotification()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib 2.0 and later
  */
@@ -1392,26 +1400,26 @@ DMSendDependentNotification(
   ResType             notifyType,
   ResType             notifyClass,
   AVIDType            displayID,
-  ComponentInstance   notifyComponent)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance   notifyComponent)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMDisposeAVComponent()
+ *  DMDisposeAVComponent()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
 extern OSErr 
-DMDisposeAVComponent(Component theAVComponent)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DMDisposeAVComponent(Component theAVComponent)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMSaveScreenPrefs()
+ *  DMSaveScreenPrefs()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1419,14 +1427,14 @@ extern OSErr
 DMSaveScreenPrefs(
   unsigned long   reserved1,
   unsigned long   saveFlags,
-  unsigned long   reserved2)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long   reserved2)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMNewAVIDByDeviceComponent()
+ *  DMNewAVIDByDeviceComponent()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1435,14 +1443,14 @@ DMNewAVIDByDeviceComponent(
   Component        theDeviceComponent,
   ResType          portKind,
   unsigned long    reserved,
-  DisplayIDType *  newID)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DisplayIDType *  newID)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMNewAVPortListByDeviceAVID()
+ *  DMNewAVPortListByDeviceAVID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1453,14 +1461,14 @@ DMNewAVPortListByDeviceAVID(
   unsigned long      portListFlags,
   unsigned long      reserved,
   DMListIndexType *  devicePortCount,
-  DMListType *       theDevicePortList)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DMListType *       theDevicePortList)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMGetDeviceComponentByAVID()
+ *  DMGetDeviceComponentByAVID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1469,14 +1477,14 @@ DMGetDeviceComponentByAVID(
   AVIDType                theDeviceID,
   Component *             theDeviceComponent,
   ComponentDescription *  theDesciption,
-  ResType *               theDeviceKind)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResType *               theDeviceKind)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMNewDisplayModeList()
+ *  DMNewDisplayModeList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1486,14 +1494,14 @@ DMNewDisplayModeList(
   unsigned long      modeListFlags,
   unsigned long      reserved,
   DMListIndexType *  thePanelCount,
-  DMListType *       thePanelList)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DMListType *       thePanelList)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMGetIndexedDisplayModeFromList()
+ *  DMGetIndexedDisplayModeFromList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1503,14 +1511,14 @@ DMGetIndexedDisplayModeFromList(
   DMListIndexType                itemIndex,
   unsigned long                  reserved,
   DMDisplayModeListIteratorUPP   listIterator,
-  void *                         userData)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                         userData)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMGetGraphicInfoByAVID()
+ *  DMGetGraphicInfoByAVID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1519,14 +1527,14 @@ DMGetGraphicInfoByAVID(
   AVIDType         theID,
   PicHandle *      theAVPcit,
   Handle *         theAVIconSuite,
-  AVLocationRec *  theAVLocation)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AVLocationRec *  theAVLocation)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMGetAVPowerState()
+ *  DMGetAVPowerState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1534,14 +1542,14 @@ extern OSErr
 DMGetAVPowerState(
   AVIDType          theID,
   AVPowerStatePtr   getPowerState,
-  unsigned long     reserved1)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long     reserved1)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMSetAVPowerState()
+ *  DMSetAVPowerState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1550,28 +1558,28 @@ DMSetAVPowerState(
   AVIDType          theID,
   AVPowerStatePtr   setPowerState,
   unsigned long     powerFlags,
-  Handle            displayState)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle            displayState)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMGetDeviceAVIDByPortAVID()
+ *  DMGetDeviceAVIDByPortAVID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
 extern OSErr 
 DMGetDeviceAVIDByPortAVID(
   AVIDType    portAVID,
-  AVIDType *  deviceAVID)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AVIDType *  deviceAVID)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMGetEnableByAVID()
+ *  DMGetEnableByAVID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1579,14 +1587,14 @@ extern OSErr
 DMGetEnableByAVID(
   AVIDType   theAVID,
   Boolean *  isAVIDEnabledNow,
-  Boolean *  canChangeEnableNow)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *  canChangeEnableNow)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMSetEnableByAVID()
+ *  DMSetEnableByAVID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
@@ -1594,28 +1602,28 @@ extern OSErr
 DMSetEnableByAVID(
   AVIDType   theAVID,
   Boolean    doEnable,
-  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle     displayState)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMGetDisplayMode()
+ *  DMGetDisplayMode()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib68k 2.0 and later
  */
 extern OSErr 
 DMGetDisplayMode(
   GDHandle          theDevice,
-  VDSwitchInfoPtr   switchInfo)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  VDSwitchInfoPtr   switchInfo)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DMConfirmConfiguration()
+ *  DMConfirmConfiguration()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in DisplayLib 2.1 and later
  */
@@ -1624,7 +1632,7 @@ DMConfirmConfiguration(
   DMModalFilterUPP   filterProc,
   UInt32             confirmFlags,
   UInt32             reserved,
-  Handle             displayState)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle             displayState)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 

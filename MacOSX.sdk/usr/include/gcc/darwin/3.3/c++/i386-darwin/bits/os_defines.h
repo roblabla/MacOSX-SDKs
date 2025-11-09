@@ -97,16 +97,32 @@ typedef enum node_mode {
 	NM_LOCKED=4
 	} TnodeMode ;
 
-
-
+/* WARNING: the return value of _keymgr_set_per_thread_data is 
+   not meaningful on Tiger and above.  Use the macro
+   KEYMGR_SET_PER_THREAD_DATA (below) to handle this properly. */
 extern void * _keymgr_get_per_thread_data(unsigned int key) ;
-extern void _keymgr_set_per_thread_data(unsigned int key, void *keydata) ;
+extern int _keymgr_set_per_thread_data(unsigned int key, void *keydata) ;
 extern void *_keymgr_get_and_lock_processwide_ptr(unsigned int key) ;
 extern void _keymgr_set_and_unlock_processwide_ptr(unsigned int key, void *ptr) ;
 extern void _keymgr_unlock_processwide_ptr(unsigned int key) ;
 extern void _keymgr_set_lockmode_processwide_ptr(unsigned int key, unsigned int mode) ;
 extern unsigned int  _keymgr_get_lockmode_processwide_ptr(unsigned int key) ;
 extern int _keymgr_get_lock_count_processwide_ptr(unsigned int key) ;
+
+extern void *__keymgr_global[];
+typedef struct _Sinfo_Node {
+        unsigned int size ;             /*size of this node*/
+        unsigned short major_version ;  /*API major version.*/
+        unsigned short minor_version ;  /*API minor version.*/
+        } _Tinfo_Node ;
+
+#define KEYMGR_VERSION \
+  (__keymgr_global[2] ? ((_Tinfo_Node *)__keymgr_global[2])->major_version : 0)
+
+#define KEYMGR_SET_PER_THREAD_DATA(key, keydata)   \
+  (KEYMGR_VERSION >= 4                             \
+  ? _keymgr_set_per_thread_data((key), (keydata))  \
+  : (_keymgr_set_per_thread_data((key), (keydata)), 0))
 
 #ifndef NULL
 #define NULL (0)
@@ -140,7 +156,7 @@ extern int _keymgr_get_lock_count_processwide_ptr(unsigned int key) ;
 
 #define KEYMGR_ZOE_IMAGE_LIST		12	/*Head pointer for list of per image dwarf2 unwind sections.*/
 
-
+#define KEYMGR_EH_GLOBALS_KEY           13      /* Variable used in eh_globals.cc */
 
 /*
  * Other important data.

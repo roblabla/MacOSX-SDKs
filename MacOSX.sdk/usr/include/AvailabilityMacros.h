@@ -1,7 +1,7 @@
 /*
      File:       AvailabilityMacros.h
  
-     Copyright:  (c) 2001-2006 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 2001-2005 by Apple Computer, Inc., all rights reserved.
 
      More Info:  See TechNote 2064
 
@@ -93,13 +93,13 @@
 #endif
 
 /*
- * if max OS not specified, assume largerof(10.3, min)
+ * if max OS not specified, assume largerof(10.4, min)
  */
 #ifndef MAC_OS_X_VERSION_MAX_ALLOWED
-    #if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_3
+    #if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4
         #define MAC_OS_X_VERSION_MAX_ALLOWED MAC_OS_X_VERSION_MIN_REQUIRED
     #else
-        #define MAC_OS_X_VERSION_MAX_ALLOWED MAC_OS_X_VERSION_10_3
+        #define MAC_OS_X_VERSION_MAX_ALLOWED MAC_OS_X_VERSION_10_4
     #endif
 #endif
 
@@ -449,6 +449,9 @@
 #else
     #define DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER
 #endif
+
+
+
 
 /*
  * AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER

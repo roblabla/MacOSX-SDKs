@@ -56,16 +56,6 @@
 #define AP_LONGEST_LONG long long
 #endif
 
-/* determine: isinf() found in libc */ 
-#ifndef HAVE_ISINF
-#define HAVE_ISINF 1
-#endif
-
-/* determine: isnan() found in libc */ 
-#ifndef HAVE_ISNAN
-#define HAVE_ISNAN 1
-#endif
-
 /* determine: byte order of machine (12: little endian, 21: big endian) */
 #ifndef AP_BYTE_ORDER
 #define AP_BYTE_ORDER 21

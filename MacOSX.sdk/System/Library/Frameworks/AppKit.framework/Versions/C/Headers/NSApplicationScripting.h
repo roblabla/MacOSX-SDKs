@@ -1,7 +1,7 @@
 /*
         NSApplicationScripting.h
         AppKit Framework
-        Copyright (c) 1997-2003, Apple Computer, Inc.
+        Copyright (c) 1997-2004, Apple Computer, Inc.
         All rights reserved.
 */
 

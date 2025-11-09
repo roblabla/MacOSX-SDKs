@@ -20,7 +20,7 @@ CG_EXTERN_C_BEGIN
  *   Return the CFTypeID for CGShadingRefs.
  */
 
-CG_EXTERN CFTypeID CGShadingGetTypeID(void);
+CG_EXTERN CFTypeID CGShadingGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*! @function CGShadingCreateAxial
  *
@@ -49,7 +49,7 @@ CG_EXTERN CFTypeID CGShadingGetTypeID(void);
  *   point of the axis.
  */
 
-CG_EXTERN CGShadingRef CGShadingCreateAxial(CGColorSpaceRef colorspace, CGPoint start, CGPoint end, CGFunctionRef function, bool extendStart, bool extendEnd);
+CG_EXTERN CGShadingRef CGShadingCreateAxial(CGColorSpaceRef colorspace, CGPoint start, CGPoint end, CGFunctionRef function, bool extendStart, bool extendEnd) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*! @function CGShadingCreateRadial
  *
@@ -84,21 +84,21 @@ CG_EXTERN CGShadingRef CGShadingCreateAxial(CGColorSpaceRef colorspace, CGPoint 
  *   circle.
  */
 
-CG_EXTERN CGShadingRef CGShadingCreateRadial(CGColorSpaceRef colorspace, CGPoint start, float startRadius, CGPoint end, float endRadius, CGFunctionRef function, bool extendStart, bool extendEnd);
+CG_EXTERN CGShadingRef CGShadingCreateRadial(CGColorSpaceRef colorspace, CGPoint start, float startRadius, CGPoint end, float endRadius, CGFunctionRef function, bool extendStart, bool extendEnd) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*! @function CGShadingRetain
  *
  * Equivalent to <tt>CFRetain(shading)</tt>.
  */
 
-CG_EXTERN CGShadingRef CGShadingRetain(CGShadingRef shading);
+CG_EXTERN CGShadingRef CGShadingRetain(CGShadingRef shading) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*! @function CGShadingRelease
  *
  * Equivalent to <tt>CFRelease(shading)</tt>.
  */
 
-CG_EXTERN void CGShadingRelease(CGShadingRef shading);
+CG_EXTERN void CGShadingRelease(CGShadingRef shading) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 CG_EXTERN_C_END
 

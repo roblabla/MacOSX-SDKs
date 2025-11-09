@@ -25,7 +25,7 @@
 /*
  * KClient 3.0 API
  *
- * $Header: /cvs/kfm/KerberosFramework/KClient/Headers/Kerberos/KClient.h,v 1.12 2003/07/03 16:13:45 lxs Exp $
+ * $Header$
  */
 
 #ifndef	__KCLIENT__

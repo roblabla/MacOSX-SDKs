@@ -3,9 +3,9 @@
  
      Contains:   Basic Algebraic Operations for AltiVec
  
-     Version:    vecLib-153.2~2
+     Version:    vecLib-192.17
  
-     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2007 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,10 +16,7 @@
 #ifndef __VBASICOPS__
 #define __VBASICOPS__
 
-#ifndef __CORESERVICES__
-#include <CoreServices/CoreServices.h>
-#endif
-
+#include <stdint.h>
 /*
 #ifndef __VECLIBTYPES__
 #include <vecLib/vecLibTypes.h>
@@ -38,8 +35,8 @@
 extern "C" {
 #endif
 
-#if defined(__ppc__) || defined(__i386__)
-#if defined(__VEC__) || defined(__SSE__)
+#if defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__)
+#if defined(__VEC__) || defined(__SSE2__)
 /*                                                                                  
   This section is a collection of algebraic functions that uses the AltiVec       
   instruction set, and is designed to facilitate vector processing in             
@@ -145,6 +142,7 @@ Following is a short description of functions in this section:
       Rotate2      Rotate by two factors( only apply to 64 bit operation )     
                                                                                  
 */
+
 
 /*
  *  vU8Divide()
@@ -959,9 +957,9 @@ vR128Rotate(
   vUInt8    vRotateFactor)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-#endif  /* defined(__VEC__) || defined(__SSE__) */
+#endif  /* defined(__VEC__) || defined(__SSE2__) */
 
-#endif  /* defined(__ppc__) || defined(__i386__) */
+#endif  /* defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__) */
 
 
 #ifdef __cplusplus

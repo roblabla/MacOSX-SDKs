@@ -1,4 +1,25 @@
 /*
+ * Copyright (c) 2004-2005 Apple Computer, Inc. All rights reserved.
+ *
+ * @APPLE_LICENSE_HEADER_START@
+ * 
+ * The contents of this file constitute Original Code as defined in and
+ * are subject to the Apple Public Source License Version 1.1 (the
+ * "License").  You may not use this file except in compliance with the
+ * License.  Please obtain a copy of the License at
+ * http://www.apple.com/publicsource and read it before using this file.
+ * 
+ * This Original Code and all software distributed under the License are
+ * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
+ * License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * @APPLE_LICENSE_HEADER_END@
+ */
+/*
  * Copyright (c) 1988 University of Utah.
  * Copyright (c) 1990, 1993
  *	The Regents of the University of California.  All rights reserved.
@@ -46,6 +67,46 @@
 #define _SYS_VNIOCTL_H_
 
 #include <sys/appleapiopts.h>
+#include <sys/cdefs.h>
+
+
+/*
+ * Ioctl definitions for file (vnode) disk pseudo-device.
+ */
+
+#define _PATH_VNTAB	"/etc/vntab"	/* default config file */
+
+typedef enum {
+	vncontrol_readwrite_io_e = 0
+} vncontrol_t;
+
+struct vn_ioctl {
+	char *		vn_file;	/* pathname of file to mount */
+	int			vn_size;	/* (returned) size of disk */
+	vncontrol_t	vn_control;
+};
+
+
+/*
+ * Before you can use a unit, it must be configured with VNIOCSET.
+ * The configuration persists across opens and closes of the device;
+ * an VNIOCCLR must be used to reset a configuration.  An attempt to
+ * VNIOCSET an already active unit will return EBUSY.
+ */
+#define VNIOCATTACH	_IOWR('F', 0, struct vn_ioctl)	/* attach file */
+#define VNIOCDETACH	_IOWR('F', 1, struct vn_ioctl)	/* detach disk */
+#define VNIOCGSET	_IOWR('F', 2, u_int32_t )		/* set global option */
+#define VNIOCGCLEAR	_IOWR('F', 3, u_int32_t )		/* reset --//-- */
+#define VNIOCUSET	_IOWR('F', 4, u_int32_t )		/* set unit option */
+#define VNIOCUCLEAR	_IOWR('F', 5, u_int32_t )		/* reset --//-- */
+#define VNIOCSHADOW	_IOWR('F', 6, struct vn_ioctl)	/* attach shadow */
+
+#define VN_LABELS	0x1	/* Use disk(/slice) labels */
+#define VN_FOLLOW	0x2	/* Debug flow in vn driver */
+#define VN_DEBUG	0x4	/* Debug data in vn driver */
+#define VN_IO		0x8	/* Debug I/O in vn driver */
+#define VN_DONTCLUSTER	0x10	/* Don't cluster */
+#define VN_RESERVE	0x20	/* Pre-reserve swap */
 
 
 #endif	/* _SYS_VNIOCTL_H_*/

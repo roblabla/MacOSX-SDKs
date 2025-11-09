@@ -8,8 +8,14 @@
 #ifndef _FORCEFEEDBACK_H_
 #define _FORCEFEEDBACK_H_
 
+
 #if PRAGMA_ONCE
 #pragma once
+#endif
+
+// <rdar://problem/4056272> 10.4 (8A414) Headers - using CodeWarrior 9.4 ForceFeedback.h gives errors
+#ifdef __MWERKS__
+#warning You must turn on gcc extensions to use this header
 #endif
 
 #ifdef __cplusplus

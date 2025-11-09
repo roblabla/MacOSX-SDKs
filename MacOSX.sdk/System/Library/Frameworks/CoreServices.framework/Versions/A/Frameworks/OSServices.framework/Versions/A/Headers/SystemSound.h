@@ -3,9 +3,9 @@
  
      Contains:   SystemSound include file
  
-     Version:    OSServices-63~113
+     Version:    OSServices-101.1~790
  
-     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -41,7 +41,8 @@ extern "C" {
 /* ================================================================================ */
 enum {
   kSystemSoundNoError           = 0,
-  kSystemSoundUnspecifiedError  = -1500
+  kSystemSoundUnspecifiedError  = -1500,
+  kSystemSoundClientTimedOutError = -1501
 };
 
 /* ================================================================================ */
@@ -168,8 +169,12 @@ SystemSoundPlay(SystemSoundActionID inAction)                 AVAILABLE_MAC_OS_X
  *  Discussion:
  *    If the user wants to add a sound that can be played via
  *    SystemSoundPlay(), an FSRef for an audio file can be passed and a
- *    SystemSoundActionID, which can be passed to SystemSoundPlay(),
- *    will be returned .
+ *    SystemSoundActionID, which can be passed to SystemSoundPlay() or
+ *    AlertSoundPlayCustomSound(), will be returned. It is important
+ *    that SystemSoundRemoveActionID() be called when the action is no
+ *    longer needed by the client application so the System Sound
+ *    Server can release any resources dedicated to the returned action
+ *    id.
  *  
  *  Parameters:
  *    

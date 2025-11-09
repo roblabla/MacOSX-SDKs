@@ -356,8 +356,8 @@ int32_t CGShieldingWindowLevel(void);
  */
 void * CGDisplayBaseAddress(CGDirectDisplayID display);
 /*
- * return address for X,Y in screen coordinates;
- *	(0,0) represents the upper left corner of the display.
+ * return address for X,Y in global coordinates;
+ *	(0,0) represents the upper left corner of the main display.
  * returns NULL for an invalid display or out of bounds coordinates
  * If the display has not been captured, the returned address may refer
  * to read-only memory.

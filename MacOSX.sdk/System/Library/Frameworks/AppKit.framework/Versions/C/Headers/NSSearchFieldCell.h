@@ -1,7 +1,7 @@
 /*
 	NSSearchFieldCell.h
 	Application Kit
-	Copyright (c) 2003, Apple Computer, Inc.
+	Copyright (c) 2003-2005, Apple Computer, Inc.
 	All rights reserved.
  */
 
@@ -34,7 +34,9 @@
 	unsigned int drawSize:2;
 	unsigned int disableText:1;
 	unsigned int menuTracking:1;
-	unsigned int reserved:18;
+	unsigned int deferredUpdate:1;
+	unsigned int sendsImmediately:1;
+	unsigned int reserved:16;
     } _sfFlags;
     NSButtonCell*   _searchButtonCell;
     NSButtonCell*   _cancelButtonCell;
@@ -85,6 +87,11 @@
 - (void) setRecentsAutosaveName:(NSString*)string;
 - (NSString*) recentsAutosaveName;
     // must be set to use. default is nil which means no autosave.
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (BOOL) sendsSearchStringImmediately;
+- (void) setSendsSearchStringImmediately:(BOOL)flag;
+#endif
 
 @end
 

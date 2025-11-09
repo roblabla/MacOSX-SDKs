@@ -1,5 +1,5 @@
 /*	NSFileManager.h
-	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -100,6 +100,9 @@ FOUNDATION_EXPORT NSString * const NSFileAppendOnly;
 FOUNDATION_EXPORT NSString * const NSFileCreationDate;
 FOUNDATION_EXPORT NSString * const NSFileOwnerAccountID;
 FOUNDATION_EXPORT NSString * const NSFileGroupOwnerAccountID;
+#endif
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
+FOUNDATION_EXPORT NSString * const NSFileBusy;
 #endif
 
 /* File System attributes */

@@ -16,16 +16,16 @@
 //	interface ABSearchElement : NSObject
 // ================================================================================
 // Use -[ABPerson searchElementForProperty:...] and -[ABGroup searchElementForProperty:...] to create
-// search element on ABPerson and ABGroup.
+// search elements on ABPerson and ABGroup.
 
 @interface ABSearchElement : NSObject
 
 + (ABSearchElement *)searchElementForConjunction:(ABSearchConjunction)conjuction children:(NSArray *)children;
-    // Creates a search element combining several sub search element.
+    // Creates a search element combining several sub search elements.
     // conjunction can be kABSearchAnd or kABSearchOr.
-    // Raises of children is nil or empty
+    // Raises if children is nil or empty
 
 - (BOOL)matchesRecord:(ABRecord *)record;
-    // Given a record returns YES is this record matches the search element
+    // Given a record returns YES if this record matches the search element
     // Raises if record is nil
 @end

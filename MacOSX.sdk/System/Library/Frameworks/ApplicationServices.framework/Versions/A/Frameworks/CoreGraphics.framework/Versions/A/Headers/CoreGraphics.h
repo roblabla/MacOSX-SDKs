@@ -21,25 +21,32 @@
 #include <CoreGraphics/CGDisplayConfiguration.h>
 #include <CoreGraphics/CGDisplayFade.h>
 #include <CoreGraphics/CGError.h>
+#include <CoreGraphics/CGEvent.h>
+#include <CoreGraphics/CGEventSource.h>
+#include <CoreGraphics/CGEventTypes.h>
 #include <CoreGraphics/CGFont.h>
 #include <CoreGraphics/CGFunction.h>
-#include <CoreGraphics/CGGeometry.h>
 #include <CoreGraphics/CGGLContext.h>
+#include <CoreGraphics/CGGeometry.h>
 #include <CoreGraphics/CGImage.h>
-#include <CoreGraphics/CGPath.h>
-#include <CoreGraphics/CGPattern.h>
+#include <CoreGraphics/CGLayer.h>
 #include <CoreGraphics/CGPDFArray.h>
+#include <CoreGraphics/CGPDFContentStream.h>
 #include <CoreGraphics/CGPDFContext.h>
 #include <CoreGraphics/CGPDFDictionary.h>
 #include <CoreGraphics/CGPDFDocument.h>
 #include <CoreGraphics/CGPDFObject.h>
+#include <CoreGraphics/CGPDFOperatorTable.h>
 #include <CoreGraphics/CGPDFPage.h>
+#include <CoreGraphics/CGPDFScanner.h>
 #include <CoreGraphics/CGPDFStream.h>
 #include <CoreGraphics/CGPDFString.h>
 #include <CoreGraphics/CGPSConverter.h>
+#include <CoreGraphics/CGPath.h>
+#include <CoreGraphics/CGPattern.h>
 #include <CoreGraphics/CGRemoteOperation.h>
+#include <CoreGraphics/CGSession.h>
 #include <CoreGraphics/CGShading.h>
 #include <CoreGraphics/CGWindowLevel.h>
-#include <CoreGraphics/CGSession.h>
 
 #endif	/* COREGRAPHICS_H_ */

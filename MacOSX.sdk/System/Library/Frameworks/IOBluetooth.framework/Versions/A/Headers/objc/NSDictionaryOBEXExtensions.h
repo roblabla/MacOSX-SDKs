@@ -3,7 +3,7 @@
 
 	Version:	xxx put version here xxx
 
-	Copyright:	(C) 2002-2003 by Apple Computer, Inc., all rights reserved.
+	Copyright:	(C) 2002-2004 by Apple Computer, Inc., all rights reserved.
 */
 
 #import <IOKit/IOKitLib.h>
@@ -11,12 +11,16 @@
 
 #import <IOBluetooth/OBEX.h>
 
+//===========================================================================================================================
+//	NSMutableDictionary
+//===========================================================================================================================
 
 @interface NSMutableDictionary (NSDictionaryOBEXExtensions)
 
 /* creation */
 
-+(NSDictionary*)withOBEXHeadersData:(const void*)inHeadersData headersDataSize:(size_t)inDataSize;
++(NSMutableDictionary*)dictionaryWithOBEXHeadersData:(const void*)inHeadersData headersDataSize:(size_t)inDataSize;
++(NSMutableDictionary*)dictionaryWithOBEXHeadersData:(NSData*)inHeadersData;
 
 /* Utilities */
 
@@ -41,6 +45,14 @@
 -(OBEXError)addCountHeader:(uint32_t)inCount;
 -(OBEXError)addDescriptionHeader:(NSString*)inDescriptionString;
 -(OBEXError)addNameHeader:(NSString*)inNameString;
+-(OBEXError)addUserDefinedHeader:(const void*)inHeaderData	length:(uint32_t)inHeaderDataLength;
+
+-(OBEXError)addImageHandleHeader:(NSString*)type;
+-(OBEXError)addImageDescriptorHeader:(const void*)inHeaderData	length:(uint32_t)inHeaderDataLength;
+
+// Deprecated in favor of dictionaryWithOBEXHeadersData: above.
+
++(NSMutableDictionary*)withOBEXHeadersData:(const void*)inHeadersData headersDataSize:(size_t)inDataSize;
 
 
 @end

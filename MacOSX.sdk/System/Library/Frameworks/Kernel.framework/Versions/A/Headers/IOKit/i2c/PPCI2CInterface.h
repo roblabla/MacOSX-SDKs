@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2005 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -20,7 +20,7 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 /*
- * Copyright (c) 1998 Apple Computer, Inc.  All rights reserved.
+ * Copyright (c) 1998-2005 Apple Computer, Inc.  All rights reserved.
  *
  * Interface definition for the keylargo I2C interface
  *
@@ -61,6 +61,18 @@
 
 // handy macro for identifying a particular bus in debug messages
 #define busTypeString (i2cPMU ? "i2cPMU" : (i2cSMU ? "i2cSMU" : (i2cUniN ? "i2cUniN" : (i2cK2 ?  "i2cK2" : (i2cmacio ? "i2cmacio" : "i2cUnkn")))))
+
+#if defined( __ppc__ )
+extern __inline__ unsigned int mfdec(void)
+{
+        unsigned int result;
+        __asm__ volatile("mfdec %0" : "=r" (result));
+        return result;
+}
+	#define I2CIODelay(delay) SpinDelay(delay, loopsPerMic)
+#else
+	#define I2CIODelay IODelay
+#endif	// __ppc__
 
 // Clients get call backs with this type of function:
 typedef void (*AppleI2Cclient)(IOService * client, UInt32 addressInfo, UInt32 length, UInt8 * buffer); 
@@ -410,6 +422,9 @@ protected:
     
     // pointer to the data to be transfered
     UInt8 *dataBuffer;
+    
+	// number of SpinLoops per 1000 microseconds
+	UInt32 loopsPerMic;
     
     // and the number of bytes still to transfer
     UInt16 nBytes;

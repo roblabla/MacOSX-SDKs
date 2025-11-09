@@ -31,13 +31,13 @@
  *     and: Eric S. Raymond <esr@snark.thyrsus.com>                         *
  ****************************************************************************/
 
-/* $Id: termcap.h.in,v 1.1.1.1 2001/11/29 20:40:53 jevans Exp $ */
+/* $Id: termcap.h.in,v 1.16 2001/03/24 21:53:27 tom Exp $ */
 
 #ifndef NCURSES_TERMCAP_H_incl
 #define NCURSES_TERMCAP_H_incl	1
 
 #undef  NCURSES_VERSION
-#define NCURSES_VERSION "5.2"
+#define NCURSES_VERSION "5.4"
 
 #include <ncurses_dll.h>
 

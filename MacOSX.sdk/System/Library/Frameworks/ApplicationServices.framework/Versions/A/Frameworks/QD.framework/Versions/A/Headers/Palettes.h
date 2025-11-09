@@ -3,9 +3,9 @@
  
      Contains:   Palette Manager Interfaces.
  
-     Version:    Quickdraw-150.7~2
+     Version:    Quickdraw-192.24~58
  
-     Copyright:  © 1987-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1987-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -72,22 +72,22 @@ typedef struct Palette                  Palette;
 typedef Palette *                       PalettePtr;
 typedef PalettePtr *                    PaletteHandle;
 /*
- *  InitPalettes()
+ *  InitPalettes()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-InitPalettes(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+InitPalettes(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  NewPalette()
+ *  NewPalette()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -96,50 +96,50 @@ NewPalette(
   short        entries,
   CTabHandle   srcColors,
   short        srcUsage,
-  short        srcTolerance)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short        srcTolerance)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetNewPalette()
+ *  GetNewPalette()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern PaletteHandle 
-GetNewPalette(short PaletteID)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetNewPalette(short PaletteID)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DisposePalette()
+ *  DisposePalette()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DisposePalette(PaletteHandle srcPalette)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposePalette(PaletteHandle srcPalette)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  ActivatePalette()
+ *  ActivatePalette()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ActivatePalette(WindowRef srcWindow)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ActivatePalette(WindowRef srcWindow)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SetPalette()
+ *  SetPalette()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -147,14 +147,14 @@ extern void
 SetPalette(
   WindowRef       dstWindow,
   PaletteHandle   srcPalette,
-  Boolean         cUpdates)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean         cUpdates)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  NSetPalette()
+ *  NSetPalette()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -162,26 +162,26 @@ extern void
 NSetPalette(
   WindowRef       dstWindow,
   PaletteHandle   srcPalette,
-  short           nCUpdates)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short           nCUpdates)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetPalette()
+ *  GetPalette()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern PaletteHandle 
-GetPalette(WindowRef srcWindow)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetPalette(WindowRef srcWindow)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  CopyPalette()
+ *  CopyPalette()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -191,38 +191,38 @@ CopyPalette(
   PaletteHandle   dstPalette,
   short           srcEntry,
   short           dstEntry,
-  short           dstLength)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short           dstLength)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  PmForeColor()
+ *  PmForeColor()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-PmForeColor(short dstEntry)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+PmForeColor(short dstEntry)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  PmBackColor()
+ *  PmBackColor()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-PmBackColor(short dstEntry)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+PmBackColor(short dstEntry)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  AnimateEntry()
+ *  AnimateEntry()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -230,14 +230,14 @@ extern void
 AnimateEntry(
   WindowRef         dstWindow,
   short             dstEntry,
-  const RGBColor *  srcRGB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const RGBColor *  srcRGB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  [Mac]AnimatePalette()
+ *  [Mac]AnimatePalette()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -250,14 +250,14 @@ MacAnimatePalette(
   CTabHandle   srcCTab,
   short        srcIndex,
   short        dstEntry,
-  short        dstLength)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short        dstLength)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetEntryColor()
+ *  GetEntryColor()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -265,14 +265,14 @@ extern void
 GetEntryColor(
   PaletteHandle   srcPalette,
   short           srcEntry,
-  RGBColor *      dstRGB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RGBColor *      dstRGB)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SetEntryColor()
+ *  SetEntryColor()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -280,14 +280,14 @@ extern void
 SetEntryColor(
   PaletteHandle     dstPalette,
   short             dstEntry,
-  const RGBColor *  srcRGB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const RGBColor *  srcRGB)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetEntryUsage()
+ *  GetEntryUsage()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -296,14 +296,14 @@ GetEntryUsage(
   PaletteHandle   srcPalette,
   short           srcEntry,
   short *         dstUsage,
-  short *         dstTolerance)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short *         dstTolerance)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SetEntryUsage()
+ *  SetEntryUsage()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -312,14 +312,14 @@ SetEntryUsage(
   PaletteHandle   dstPalette,
   short           dstEntry,
   short           srcUsage,
-  short           srcTolerance)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short           srcTolerance)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  CTab2Palette()
+ *  CTab2Palette()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -328,52 +328,52 @@ CTab2Palette(
   CTabHandle      srcCTab,
   PaletteHandle   dstPalette,
   short           srcUsage,
-  short           srcTolerance)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short           srcTolerance)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  Palette2CTab()
+ *  Palette2CTab()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 Palette2CTab(
   PaletteHandle   srcPalette,
-  CTabHandle      dstCTab)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CTabHandle      dstCTab)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  Entry2Index()
+ *  Entry2Index()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-Entry2Index(short entry)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+Entry2Index(short entry)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  RestoreDeviceClut()
+ *  RestoreDeviceClut()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-RestoreDeviceClut(GDHandle gd)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+RestoreDeviceClut(GDHandle gd)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  [Mac]ResizePalette()
+ *  [Mac]ResizePalette()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -383,62 +383,62 @@ RestoreDeviceClut(GDHandle gd)                                AVAILABLE_MAC_OS_X
 extern void 
 MacResizePalette(
   PaletteHandle   p,
-  short           size)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short           size)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SaveFore()
+ *  SaveFore()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SaveFore(ColorSpec * c)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SaveFore(ColorSpec * c)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SaveBack()
+ *  SaveBack()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SaveBack(ColorSpec * c)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SaveBack(ColorSpec * c)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  RestoreFore()
+ *  RestoreFore()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-RestoreFore(const ColorSpec * c)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+RestoreFore(const ColorSpec * c)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  RestoreBack()
+ *  RestoreBack()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-RestoreBack(const ColorSpec * c)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+RestoreBack(const ColorSpec * c)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SetDepth()
+ *  SetDepth()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -447,14 +447,14 @@ SetDepth(
   GDHandle   gd,
   short      depth,
   short      whichFlags,
-  short      flags)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short      flags)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  HasDepth()
+ *  HasDepth()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -463,52 +463,52 @@ HasDepth(
   GDHandle   gd,
   short      depth,
   short      whichFlags,
-  short      flags)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short      flags)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  PMgrVersion()
+ *  PMgrVersion()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-PMgrVersion(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+PMgrVersion(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SetPaletteUpdates()
+ *  SetPaletteUpdates()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 SetPaletteUpdates(
   PaletteHandle   p,
-  short           updates)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short           updates)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetPaletteUpdates()
+ *  GetPaletteUpdates()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-GetPaletteUpdates(PaletteHandle p)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetPaletteUpdates(PaletteHandle p)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetGray()
+ *  GetGray()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -516,7 +516,7 @@ extern Boolean
 GetGray(
   GDHandle          device,
   const RGBColor *  backGround,
-  RGBColor *        foreGround)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RGBColor *        foreGround)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 

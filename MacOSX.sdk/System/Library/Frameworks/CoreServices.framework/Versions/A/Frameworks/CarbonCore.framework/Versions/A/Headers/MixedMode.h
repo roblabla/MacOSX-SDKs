@@ -3,9 +3,9 @@
  
      Contains:   Mixed Mode Manager Interfaces.
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1992-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -30,6 +30,18 @@
 
 #pragma options align=mac68k
 
+/*
+    ===========================================================================
+    
+    Notes on Mixed Mode and Mac OS X
+    
+    Mac OS X doesn't have mixed mode, nor the Mixed Mode Manager, because
+    everything running is PowerPC code.  Therefore, there is little need for
+    anything in this file unless the code still needs to run on Mac OS 9.x
+    CarbonLib, and on Mac OS X.
+
+    =========================================================================== 
+*/
 /* Mixed Mode constants */
 /* Current Routine Descriptor Version */
 enum {
@@ -87,13 +99,6 @@ enum {
  #if TARGET_CPU_PPC
      #define     GetCurrentISA()     ((ISAType) kPowerPCISA)
         #define     GetCurrentRTA()     ((RTAType) kPowerPCRTA)
-    #elif TARGET_CPU_68K
-       #define     GetCurrentISA()     ((ISAType) kM68kISA)
-       #if TARGET_RT_MAC_CFM
-          #define GetCurrentRTA()     ((RTAType) kCFM68kRTA)
-     #else
-          #define GetCurrentRTA()     ((RTAType) kOld68kRTA)
-     #endif
 
    #elif TARGET_CPU_X86
        #define     GetCurrentISA()     ((ISAType) kX86ISA)
@@ -214,70 +219,46 @@ struct MixedModeStateRecord {
   UInt32              state4;
 };
 typedef struct MixedModeStateRecord     MixedModeStateRecord;
-#if CALL_NOT_IN_CARBON
-/* Macros for building static Routine Descriptors (not available in Carbon) */
+/*
+ *  NewRoutineDescriptor()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    This function is deprecated on Mac OS X and in CarbonLib because
+ *    routine descriptors existed to allow 68k code and PowerPC code to
+ *    call each other and get parameter marshalling and other OS
+ *    services.  Mac OS X is entirely PowerPC native, and does not
+ *    require the use of mixed mode.
+ *    You should remove any calls to NewRoutineDescriptor() from your
+ *    sources, and replace them with theProc parameter itself.
+ *  
+ *  Availability:
+ *    Mac OS X:         not available but deprecated in 10.4
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
 
-/* A macro which creates a static instance of a non-dispatched routine descriptor */
-#define BUILD_ROUTINE_DESCRIPTOR(procInfo, procedure)                               \
-    {                                                                               \
-        _MixedModeMagic,                            /* Mixed Mode A-Trap */         \
-        kRoutineDescriptorVersion,                  /* version */                   \
-        kSelectorsAreNotIndexable,                  /* RD Flags - not dispatched */ \
-        0,                                          /* reserved 1 */                \
-        0,                                          /* reserved 2 */                \
-        0,                                          /* selector info */             \
-        0,                                          /* number of routines */        \
-        {                                           /* It’s an array */             \
-            {                                       /* It’s a struct */             \
-                (procInfo),                         /* the ProcInfo */              \
-                0,                                  /* reserved */                  \
-                GetCurrentArchitecture(),           /* ISA and RTA */               \
-                kProcDescriptorIsAbsolute |         /* Flags - it’s absolute addr */\
-                kFragmentIsPrepared |               /* It’s prepared */             \
-                kUseNativeISA,                      /* Always use native ISA */     \
-                (ProcPtr)(procedure),               /* the procedure */             \
-                0,                                  /* reserved */                  \
-                0                                   /* Not dispatched */            \
-            }                                                                       \
-        }                                                                           \
-    }
 
-/* a macro which creates a static instance of a fat routine descriptor */
-#define BUILD_FAT_ROUTINE_DESCRIPTOR(m68kProcInfo, m68kProcPtr, powerPCProcInfo, powerPCProcPtr)  \
-    {                                                                               \
-        _MixedModeMagic,                            /* Mixed Mode A-Trap */         \
-        kRoutineDescriptorVersion,                  /* version */                   \
-        kSelectorsAreNotIndexable,                  /* RD Flags - not dispatched */ \
-        0,                                          /* reserved */                  \
-        0,                                          /* reserved */                  \
-        0,                                          /* reserved */                  \
-        1,                                          /* Array count */               \
-        {                                           /* It’s an array */             \
-            {                                       /* It’s a struct */             \
-                (m68kProcInfo),                     /* the ProcInfo */              \
-                0,                                  /* reserved */                  \
-                kM68kISA |                          /* ISA */                       \
-                kOld68kRTA,                         /* RTA */                       \
-                kProcDescriptorIsAbsolute |         /* Flags - it’s absolute addr */\
-                kUseCurrentISA,                     /* Use current ISA */           \
-                (ProcPtr)(m68kProcPtr),             /* the procedure */             \
-                0,                                  /* reserved */                  \
-                0,                                  /* reserved */                  \
-            },                                                                      \
-            {                                       /* It’s a struct */             \
-                (powerPCProcInfo),                  /* the ProcInfo */              \
-                0,                                  /* reserved */                  \
-                GetCurrentArchitecture(),           /* ISA and RTA */               \
-                kProcDescriptorIsAbsolute |         /* Flags - it’s absolute addr */\
-                kFragmentIsPrepared |               /* It’s prepared */             \
-                kUseCurrentISA,                     /* Always use current ISA */    \
-                (ProcPtr)(powerPCProcPtr),          /* the procedure */             \
-                0,                                  /* reserved */                  \
-                0                                   /* reserved */                  \
-            }                                                                       \
-        }                                                                           \
-    }
-#endif /* CALL_NOT_IN_CARBON */
+/*
+ *  DisposeRoutineDescriptor()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    DisposeRoutineDescriptor() is deprecated on Mac OS X. 
+ *    RoutineDescriptors are no longer used.
+ *    You should delete any calls to DisposeRoutineDescriptor() from
+ *    your sources.
+ *  
+ *  Availability:
+ *    Mac OS X:         not available but deprecated in 10.4
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ */
+
+
+
+   #define NewRoutineDescriptor(theProc, procInfo, isa) ((UniversalProcPtr) theProc)
+  #define DisposeRoutineDescriptor(upp)
+
+
 
 /* Mixed Mode ProcInfos */
 enum {
@@ -330,107 +311,6 @@ enum {
   kSpecialCaseGNEFilterProc     = 11,
   kSpecialCaseMBarHook          = 12
 };
-
-
-/*
-    NOTES ON USING ROUTINE DESCRIPTOR FUNCTIONS
-    
-    When calling these routine from classic 68k code there are two possible intentions.
-
-    The first is source compatibility with code ported to CFM (either PowerPC or 68k CFM). When
-    the code is compiled for CFM the functions create routine descriptors that can be used by
-    the mixed mode manager operating on that machine. When the code is compiled for classic 68k
-    these functions do nothing so that the code will run on Macintoshes that do not have a
-    mixed mode manager. The dual nature of these functions is achieved by turning the CFM calls
-    into "no-op" macros for classic 68k: You can put "NewRoutineDescriptor" in your source,
-    compile it for any runtime or instruction set architecture, and it will run correctly on the
-    intended runtime/instruction platform. All without source changes and/or conditional source.
-    
-    The other intention is for code that "knows" that it is executing as classic 68k runtime
-    and is specifically trying to call code of another architecture using mixed mode. Since the
-    routines were designed with classic <-> CFM source compatibility in mind this second case
-    is treated special. For classic 68k code to create routines descriptors for use by mixed mode
-    it must call the "Trap" versions of the routines (NewRoutineDescriptorTrap). These versions
-    are only available to classic 68k callers: rigging the interfaces to allow calling them
-    from CFM code will result in runtime failure because no shared library implements or exports
-    the functions.
-    
-
-    This almost appears seamless until you consider "fat" routine descriptors and the advent of
-    CFM-68K. What does "fat" mean? CFM-68K is not emulated on PowerPC and PowerPC is not emulated
-    on CFM-68K. It makes no sense to create a routine descriptor having both a CFM-68K routine
-    and a PowerPC native routine pointer. Therefore "fat" is defined to be a mix of classic and
-    CFM for the hardware's native instruction set: on PowerPC fat is classic and PowerPC native,
-    on a 68k machine with CFM-68K installed fat is classic and CFM-68K.
-    
-    By definition fat routine descriptors are only constructed by code that is aware of the 
-    architecture it is executing as and that another architecture exists. Source compatibility
-    between code intented as pure classic and pure CFM is not an issue and so NewFatRoutineDescriptor
-    is not available when building pure classic code.
-    
-    NewFatRoutineDescriptorTrap is available to classic code on both PowerPC and CFM-68K. The
-    classic code can use the code fragment manager routine "FindSymbol" to obtain the address of 
-    a routine in a shared library and then construct a routine descriptor with both the CFM routine 
-    and classic routine.
-*/
-
-/*
- *  NewRoutineDescriptor()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later or as macro/inline
- */
-
-
-#define NewRoutineDescriptor(theProc, procInfo, isa) ((UniversalProcPtr) theProc)
-
-/*
- *  DisposeRoutineDescriptor()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later or as macro/inline
- */
-
-
-#define DisposeRoutineDescriptor(upp)
-/*
- *  NewFatRoutineDescriptor()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-
-/*
-    CallUniversalProc is defined for all targets except classic 68k code.  This will 
-    catch accidental calls from classic 68K code that previously only showed up as 
-    linker errors.
-*/
-/*
- *  CallUniversalProc()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  CallOSTrapUniversalProc()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
@@ -579,13 +459,8 @@ enum {
  *      typedef REGISTER_UPP_TYPE(IOCompletionProcPtr)  IOCompletionUPP;
  *
  */
-#if TARGET_OS_MAC && TARGET_CPU_68K && !TARGET_RT_MAC_CFM
-  /* classic 68k runtime */
-  #define STACK_UPP_TYPE(name)    name
-   #define REGISTER_UPP_TYPE(name) Register68kProcPtr
- #define TVECTOR_UPP_TYPE(name)  name
-#elif TARGET_OS_MAC && TARGET_RT_MAC_CFM
-  /* PowerPC and CFM68K runtime */
+#if TARGET_OS_MAC && TARGET_RT_MAC_CFM
+ /* PowerPC and CFM68K runtime */
    #if OPAQUE_UPP_TYPES
        #define STACK_UPP_TYPE(name)    struct Opaque##name##*
      #define REGISTER_UPP_TYPE(name) struct Opaque##name##*

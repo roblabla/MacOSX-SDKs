@@ -3,9 +3,9 @@
  
      Contains:   Window Manager Interfaces
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1997-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1997-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -53,6 +53,8 @@
 #define kWindowSideTitlebarAttribute 	0x00000020
 #define kWindowToolbarButtonAttribute 	0x00000040
 #define kWindowMetalAttribute 			0x00000100
+#define kWindowNoTitleBarAttribute 		0x00000200
+#define kWindowMetalNoContentSeparatorAttribute  0x00000800
 #define kWindowDoesNotCycleAttribute 	0x00008000
 #define kWindowNoUpdatesAttribute 		0x00010000
 #define kWindowNoActivatesAttribute 	0x00020000
@@ -67,6 +69,8 @@
 #define kWindowLiveResizeAttribute 		0x10000000
 #define kWindowIgnoreClicksAttribute 	0x20000000
 #define kWindowNoConstrainAttribute 	0x80000000
+#define kWindowFrameworkScaledAttribute  0x00100000
+#define kWindowApplicationScaledAttribute  0x40000000
 #define kWindowStandardDocumentAttributes  0x0000001F
 #define kWindowStandardFloatingAttributes  0x00000009
 

@@ -3,9 +3,9 @@
  
      Contains:   Ink Manager
  
-     Version:    InkFramework-55.12~1
+     Version:    InkFramework-71~854
  
-     Copyright:  © 2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -24,6 +24,7 @@
 #include <HIToolbox/HIToolbox.h>
 #endif
 
+#include <IOKit/hidsystem/IOLLEvent.h>
 
 
 #include <AvailabilityMacros.h>
@@ -184,31 +185,85 @@ extern "C" {
 /*  • Ink Types                                                                         */
 /*——————————————————————————————————————————————————————————————————————————————————————*/
 
+
 /*
  *  InkTextRef
  *  
  *  Discussion:
- *    Primary Ink opaque object references. Use CFRetain & CFRelease to
- *    manage Ink object retention. When any Ink object reference is
- *    obtained from a Carbon event, it is only guaranteed to persist
- *    for the life of the event handler.  If the client wishes to use
- *    the object at some later time, it must perform a CFRetain on the
- *    object.
+ *    Primary Ink opaque object reference for ink data and recognition
+ *    results. Use CFRetain & CFRelease to manage all Ink object
+ *    retention. When any Ink object reference is obtained from a
+ *    Carbon event, it is only guaranteed to persist for the life of
+ *    the event handler.  If the client wishes to use the object at
+ *    some later time, it must perform a CFRetain on the object.
  */
 typedef struct OpaqueInkTextRef*        InkTextRef;
+
+/*
+ *  InkStrokeRef
+ *  
+ *  Discussion:
+ *    Opaque reference to individual Ink strokes. 
+ *    
+ *    Use CFRetain & CFRelease to manage all Ink object retention.
+ *    
+ *    
+ *    If obtained from an InkTextRef, an InkStrokeRef is only
+ *    guaranteed to persist for the life of that InkTextRef. If the
+ *    client wishes to use the InkStrokeRef after the InkTextRef has
+ *    been released, it must perform a CFRetain on the InkStrokeRef.
+ *    
+ *    
+ *    When any Ink object reference is obtained from a Carbon event, it
+ *    is only guaranteed to persist for the life of the event handler. 
+ *    If the client wishes to use the object at some later time, it
+ *    must perform a CFRetain on the object.
+ */
+typedef struct OpaqueInkStrokeRef*      InkStrokeRef;
+
+/*
+ *  InkPoint
+ *  
+ *  Discussion:
+ *    An InkPoint contains the minimum per-point information needed to
+ *    drive system inking and recognition.
+ */
+struct InkPoint {
+
+  /*
+   * The location for the mouse event (kEventParamMouseLocation from
+   * the mouse event).
+   */
+  HIPoint             point;
+
+  /*
+   * Use the data from the kEventParamTabletPointRec contained in the
+   * original mouse/tablet event.
+   */
+  TabletPointRec      tabletPointData;
+
+  /*
+   * The modifiers that were down when the original mouse event occured
+   * (kEventParamKeyModifiers from the mouse event).
+   */
+  UInt32              keyModifiers;
+};
+typedef struct InkPoint                 InkPoint;
+typedef InkPoint *                      InkPointPtr;
 
 /*
  *  InkAlternateCount
  *  
  *  Discussion:
- *    Type used for counting alternates in InkTextRef.
+ *    Type used for counting and indexing alternates in InkTextRef.
+ *    Defined for backward compatibility only.  APIs now take and
+ *    return CFIndex.
  */
-typedef unsigned long                   InkAlternateCount;
-
-
+typedef CFIndex                         InkAlternateCount;
 /*——————————————————————————————————————————————————————————————————————————————————————*/
 /*  • Ink Constants                                                                     */
 /*——————————————————————————————————————————————————————————————————————————————————————*/
+
 
 /*
  *  InkUserWritingModeType
@@ -225,7 +280,6 @@ enum {
 
 
 
-
 /*
  *  InkApplicationWritingModeType
  *  
@@ -237,7 +291,6 @@ enum {
   kInkWriteNowhereInApp         = 'nowa',
   kInkWriteAnywhereInApp        = 'anya'
 };
-
 
 
 
@@ -301,7 +354,7 @@ enum {
  *    termination can be inhibited entirely by calling
  *    InkSetPhraseTerminationMode(kInkTerminationNone). Normal
  *    automatic phrase termination may be restored by calling
- *    InkSetPhraseTerminationMode(kInkTerminationAll). More precise
+ *    InkSetPhraseTerminationMode(kInkTerminationDefault). More precise
  *    control over the Ink Manager’s automatic phrase termination can
  *    be obtained by combining the following constants.
  */
@@ -336,10 +389,26 @@ enum {
   kInkTerminationRecognizerVerticalBreak = 1 << 3,
 
   /*
-   * Restores automatic phrase termination matching the current user
+   * Causes phrases to be terminated at the end of every stroke
+   * (whenever the pen is lifted from the tablet while writing). Only
+   * useful for single-stroke gesture input, not for text.
+   */
+  kInkTerminationStroke         = 1 << 4,
+
+  /*
+   * Restores default phrase termination matching the current user
    * settings. See above note for kInkTerminationOutOfProximity.
    */
-  kInkTerminationAll            = (unsigned long)0xFFFFFFFF
+  kInkTerminationDefault        = 0x0F, /* TimeOut | OutOfProximity | RecognizerHorizontalBreak | RecognizerVerticalBreak*/
+
+  /*
+   * Deprecated.  Use kInkTerminationDefault instead.  As of Mac OS X
+   * 10.4 this value will be overriden to behave like
+   * kInkTerminationDefault. Restores automatic phrase termination
+   * matching the current user settings. See above note for
+   * kInkTerminationOutOfProximity.
+   */
+  kInkTerminationAll            = (unsigned long)0xFFFFFFFF /* Deprecated*/
 };
 
 
@@ -393,6 +462,8 @@ enum {
 
 
 /*
+ *  InkGestureKind
+ *  
  *  Discussion:
  *    The following constants are the values returned for the
  *    kEventParameterInkGestureKind parameter of
@@ -442,19 +513,22 @@ enum {
  *    the gesture type, that require and produce different handling. 
  *    The two classes are: 
  *    
- *    Context-independent (non-tentative) -- These gestures are always
- *    and only treated as gestures, regardless of where they are drawn.
- *     If an application fails to handle them (has no handler installed
- *    or returns eventNotHandledErr), the Ink Manager will convert them
- *    to keyDowns (typically as command-key shortcuts).  No attempt
- *    will be made to recognize and post them as text. 
+ *    Non-tentative -- Non-tentative gestures are always and only
+ *    treated as gestures, regardless of where they are drawn.  They
+ *    are non-tentative because they may be applied anywhere and
+ *    because they have been designed to not conflict with normal
+ *    alphanumeric characters. If an application fails to handle them
+ *    (has no handler installed or returns eventNotHandledErr), the Ink
+ *    Manager will convert them to keyDowns (typically as command-key
+ *    shortcuts).  No attempt will be made to recognize and post them
+ *    as text. 
  *    
- *    Context-dependent (tentative) -- These tentative gestures should
- *    only be treated as gestures if it makes sense, given the context
- *    (knowable only by your application).  If an application fails to
- *    handle a tentative gesture (has no handler installed or returns
- *    eventNotHandledErr), the Ink Manager will recognize and post the
- *    corresponding ink as text. 
+ *    Tentative -- Tentative gestures should only be interpreted as
+ *    gestures if it makes sense, given the context (knowable only by
+ *    your application).  If an application fails to handle a tentative
+ *    gesture (has no handler installed or returns eventNotHandledErr),
+ *    the Ink Manager will recognize and post the corresponding ink as
+ *    text. 
  *    
  *    For example, if the join gesture is received, but the top-left
  *    and top-right points of the bounding box are not near the end and
@@ -469,8 +543,12 @@ enum {
  *    by an application, the Ink Manager would cause a sequence of key
  *    events to be posted that simulated the user typing a command-u.
  */
+typedef FourCharCode InkGestureKind;
 enum {
-                                        /* Context-independent (non-tentative) gestures…*/
+
+  /*
+   * Non-tentative gestures…  (All except kInkGestureJoin.)
+   */
   kInkGestureUndo               = 'undo',
   kInkGestureCut                = 'cut ',
   kInkGestureCopy               = 'copy',
@@ -518,9 +596,11 @@ enum {
    * immediately preceding the insertion point (unless the insertion
    * point is at the absolute head of the document).
    */
-  kInkGestureDelete             = 'del ', /* Context-dependent (tentative) gestures…*/
+  kInkGestureDelete             = 'del ',
 
   /*
+   * Tentative gestures…  (Just kInkGestureJoin.) 
+   * 
    * kInkGestureJoin should join two words into a single word, eliding
    * the space between them.  It looks like the letter ‘v’.  The
    * affected words would be the ones closest to the top-most points at
@@ -543,7 +623,6 @@ enum {
   kInkGestureJoin               = 'join'
 };
 
-typedef FourCharCode                    InkGestureKind;
 
 
 /*
@@ -570,38 +649,85 @@ enum {
 };
 
 
+/*
+ *  Discussion:
+ *    Pens used with modern graphics tablets often have both a writing
+ *    tip and an eraser tip.  Some tablets also support pucks in
+ *    addition to or instead of stylus-like devices.  The following
+ *    constants may be used to determine what kind of pointer device
+ *    and which tip of a stylus-like device is being used with a
+ *    graphics tablet, by comparing them to the contents of the
+ *    TabletProximityRec's pointerType element in Carbon or the value
+ *    returned by the pointerType message to tablet events (or mouse
+ *    events with tablet data in them) in Cocoa.  These pointerType
+ *    data are only available in tablet-proximity events (not
+ *    tablet-point events). 
+ *    
+ *    Note that these constants are defined in terms of NX_* constants
+ *    from <IOKit/hidsystem/IOLLEvent.h> in order to ensure consistency
+ *    between the values used by driver writers and those used by
+ *    applications.
+ */
+enum {
+
+  /*
+   * Shouldn't happen (0)…
+   */
+  kInkTabletPointerUnknown      = NX_TABLET_POINTER_UNKNOWN + 0, /* shouldn't happen*/
+
+  /*
+   * Writing end of a stylus-like device (1)…
+   */
+  kInkTabletPointerPen          = NX_TABLET_POINTER_PEN + 0, /* writing end of a stylus-like device*/
+
+  /*
+   * Any puck-like device (2)…
+   */
+  kInkTabletPointerCursor       = NX_TABLET_POINTER_CURSOR + 0, /* any puck-like device*/
+
+  /*
+   * Eraser end of a stylus-like device (3)…
+   */
+  kInkTabletPointerEraser       = NX_TABLET_POINTER_ERASER + 0 /* eraser end of a stylus-like device*/
+};
 
 
 /*
- *  InkPoint
- *  
  *  Discussion:
- *    An InkPoint contains the minimum per-point information needed to
- *    drive system inking and recognition.
+ *    Pens used with modern graphics tablets often have multiple barrel
+ *    buttons that can be assigned special meaning by either the the
+ *    tablet driver or by an application.  In addition, the writing or
+ *    eraser tip may be engaged at any given moment.  The following
+ *    constants may be used to determine which (if any) pen tip or
+ *    barrel buttons are currently being held down by and-ing their
+ *    contents with that of a TabletPointRec's buttons member in Carbon
+ *    or the value returned by the buttonMask message sent to tablet
+ *    events (or mouse events containing tablet data) in Cocoa.  These
+ *    buttons and buttonMask data are only available for tablet-point
+ *    events (not tablet-proximity events). 
+ *    
+ *    Note that these constants are defined in terms of NX_* constants
+ *    from <IOKit/hidsystem/IOLLEvent.h> in order to ensure consistency
+ *    between the values used by driver writers and those used by
+ *    applications.
  */
-struct InkPoint {
+enum {
 
   /*
-   * The location for the mouse event (kEventParamMouseLocation from
-   * the mouse event).
+   * Writing tip or eraser tip (bit 0, 0x0001)…
    */
-  HIPoint             point;
+  kInkPenTipButtonMask          = NX_TABLET_BUTTON_PENTIPMASK + 0, /* writing tip or eraser tip*/
 
   /*
-   * Use the data from the kEventParamTabletPointRec contained in the
-   * original mouse/tablet event.
+   * Lower pen barrel button (bit 1, 0x0002)…
    */
-  TabletPointRec      tabletPointData;
+  kInkPenLowerSideButtonMask    = NX_TABLET_BUTTON_PENLOWERSIDEMASK + 0, /* lower barrel button*/
 
   /*
-   * The modifiers that were down when the original mouse event occured
-   * (kEventParamKeyModifiers from the mouse event).
+   * Upper pen barrel button (bit 2, 0x0004)…
    */
-  UInt32              keyModifiers;
+  kInkPenUpperSideButtonMask    = NX_TABLET_BUTTON_PENUPPERSIDEMASK + 0 /* upper barrel button*/
 };
-typedef struct InkPoint                 InkPoint;
-typedef InkPoint *                      InkPointPtr;
-
 
 /*——————————————————————————————————————————————————————————————————————————————————————*/
 /*  • Ink state APIs                                                                    */
@@ -747,7 +873,7 @@ InkSetApplicationRecognitionMode(InkRecognitionType iRecognitionType) AVAILABLE_
  *    InkTerminationTypes (kInkTermination* constants).  To inhibit all
  *    automatic phrase termination, pass in zero or
  *    kInkTerminationNone.  Default behavior is as if this API had been
- *    called with kInkTerminationAll. 
+ *    called with kInkTerminationDefault. 
  *    
  *    Using one of the InkSourceType constants (kInkSource*) allows
  *    independent control over termination of data originating with the
@@ -948,7 +1074,7 @@ InkTerminateCurrentPhrase(InkSourceType iSource)              AVAILABLE_MAC_OS_X
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
-extern InkAlternateCount 
+extern CFIndex 
 InkTextAlternatesCount(InkTextRef iTextRef)                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
@@ -968,7 +1094,7 @@ InkTextAlternatesCount(InkTextRef iTextRef)                   AVAILABLE_MAC_OS_X
  *    iTextRef:
  *      The InkTextRef to get the string from.
  *    
- *    iIndex:
+ *    iAlternateIndex:
  *      The index of the alternate to retrieve.
  *  
  *  Result:
@@ -982,8 +1108,8 @@ InkTextAlternatesCount(InkTextRef iTextRef)                   AVAILABLE_MAC_OS_X
  */
 extern CFStringRef 
 InkTextCreateCFString(
-  InkTextRef          iTextRef,
-  InkAlternateCount   iIndex)                                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  InkTextRef   iTextRef,
+  CFIndex      iAlternateIndex)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*
@@ -1291,6 +1417,203 @@ extern InkTextRef
 InkTextCreateFromCFData(
   CFDataRef   iFlattenedInkText,
   CFIndex     iIndex)                                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+/*
+ *  InkTextGetTypeID()
+ *  
+ *  Discussion:
+ *    Returns the CFTypeID of an InkTextRef object. 
+ *    <BR> Given an InkTextRef, this routine will return its CFTypeID.
+ *  
+ *  Parameters:
+ *    
+ *    iTextRef:
+ *      The InkTextRef to get the CFTypeID of.
+ *  
+ *  Result:
+ *    The CFTypeID of an InkTextRef object.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern CFTypeID 
+InkTextGetTypeID(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+/*
+ *  InkTextGetStrokeCount()
+ *  
+ *  Discussion:
+ *    Returns the number of strokes in the specified InkTextRef.
+ *    
+ *    
+ *    Given an InkTextRef, this routine will return the number of
+ *    strokes it contains.
+ *  
+ *  Parameters:
+ *    
+ *    iTextRef:
+ *      The InkTextRef to get the stroke count from.
+ *  
+ *  Result:
+ *    A CFIndex indicating the number of strokes contained in the
+ *    specified InkTextRef.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern CFIndex 
+InkTextGetStrokeCount(InkTextRef iTextRef)                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+/*
+ *  InkTextGetStroke()
+ *  
+ *  Discussion:
+ *    Returns a reference to the specified stroke in an InkTextRef.
+ *    
+ *    
+ *    Given an InkTextRef and a stroke index (between 0 and
+ *    InkTextGetStrokeCount( iTextRef ) - 1), this routine will return
+ *    the InkStrokeRef corresponding to the specified stroke index.
+ *    
+ *    
+ *    The returned InkStrokeRef is only guaranteed to persist for the
+ *    life of the InkTextRef from which it was obtained. If the client
+ *    wishes to use the InkStrokeRef after the InkTextRef has been
+ *    released, it must perform a CFRetain on the InkStrokeRef.
+ *    
+ *    
+ *    When any Ink object reference is obtained from a Carbon event, it
+ *    is only guaranteed to persist for the life of the event handler. 
+ *    If the client wishes to use the object at some later time, it
+ *    must perform a CFRetain on the object.
+ *  
+ *  Parameters:
+ *    
+ *    iTextRef:
+ *      The InkTextRef to get the stroke from.
+ *    
+ *    iStrokeIndex:
+ *      The index of the stroke for which an InkStrokeRef is desired.
+ *  
+ *  Result:
+ *    An InkStrokeRef for the specified stroke of the specified
+ *    InkTextRef.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern InkStrokeRef 
+InkTextGetStroke(
+  InkTextRef   iTextRef,
+  CFIndex      iStrokeIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*  • InkStroke APIs                                                                    */
+/*——————————————————————————————————————————————————————————————————————————————————————*/
+
+/*
+ *  InkStrokeGetPointCount()
+ *  
+ *  Discussion:
+ *    Returns the number of points in the specified InkStrokeRef.
+ *    
+ *    
+ *    Given an InkStrokeRef, this routine will return the number of
+ *    points that stroke contains.
+ *  
+ *  Parameters:
+ *    
+ *    iStrokeRef:
+ *      The InkStrokeRef to get the point count from.
+ *  
+ *  Result:
+ *    A CFIndex indicating the number of points contained in the
+ *    specified InkStrokeRef.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern CFIndex 
+InkStrokeGetPointCount(InkStrokeRef iStrokeRef)               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  InkStrokeGetPoints()
+ *  
+ *  Discussion:
+ *    Fills an array with the points belonging to the specified
+ *    InkStrokeRef. 
+ *    
+ *    Given an InkStrokeRef and a point buffer, this routine will fill
+ *    that buffer with the points belonging to that stroke. 
+ *    
+ *    The size of the point buffer must be at least:
+ *     InkStrokeGetPointCount( iStrokeRef ) * sizeof( InkPoint ).
+ *     The pointer to the block of memory containing the InkPoints will
+ *    be returned as the result.
+ *  
+ *  Parameters:
+ *    
+ *    iStrokeRef:
+ *      The InkStrokeRef to get the points from.
+ *    
+ *    oPointBuffer:
+ *      The point buffer into which the point data will be copied.
+ *  
+ *  Result:
+ *    A pointer to the copied array of InkPoints from the specified
+ *    InkStrokeRef (same as the oPointBuffer address provided by the
+ *    app).
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern InkPoint * 
+InkStrokeGetPoints(
+  InkStrokeRef   iStrokeRef,
+  InkPoint *     oPointBuffer)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+/*
+ *  InkStrokeGetTypeID()
+ *  
+ *  Discussion:
+ *    Returns the CFTypeID of an InkStrokeRef object. 
+ *    <BR> Given an InkStrokeRef, this routine will return its CFTypeID.
+ *  
+ *  Parameters:
+ *    
+ *    iStrokeRef:
+ *      The InkStrokeRef to get the CFTypeID of.
+ *  
+ *  Result:
+ *    The CFTypeID of an InkStrokeRef object.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern CFTypeID 
+InkStrokeGetTypeID(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 

@@ -89,19 +89,19 @@ extern const CFStringRef kDRApplicationIdentifier	AVAILABLE_MAC_OS_X_VERSION_10_
 
 /*!	@constant	kDRCopyrightFile
 	@abstract	(ISO/Joliet) The key for indicating the copyright file.
-	@discussion	Value is a DRFileRef (which must be in the root directory).
+	@discussion	Value is a @link //apple_ref/c/tdef/DRFileRef DRFileRef @/link (which must be in the root directory).
 */
 extern const CFStringRef kDRCopyrightFile			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!	@constant	kDRAbstractFile
 	@abstract	(ISO/Joliet) The key for indicating the abstract file.
-	@discussion	Value is a DRFileRef (which must be in the root directory).
+	@discussion	Value is a @link //apple_ref/c/tdef/DRFileRef DRFileRef @/link (which must be in the root directory).
 */
 extern const CFStringRef kDRAbstractFile			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!	@constant	kDRBibliographicFile
 	@abstract	(ISO/Joliet) The key for indicating the bibliographic file.
-	@discussion	Value is a DRFileRef (which must be in the root directory).
+	@discussion	Value is a @link //apple_ref/c/tdef/DRFileRef DRFileRef @/link (which must be in the root directory).
 */
 extern const CFStringRef kDRBibliographicFile		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
@@ -119,19 +119,19 @@ extern const CFStringRef kDRDefaultDate				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_L
 
 /*!	@constant	kDRVolumeCreationDate
 	@abstract	The key for indicating the volume creation date.
-	@discussion	Value is a CFDateRef.  kDRDefaultDate is used if unspecified.
+	@discussion	Value is a CFDateRef.  @link kDRDefaultDate kDRDefaultDate @/link is used if unspecified.
 */
 extern const CFStringRef kDRVolumeCreationDate		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!	@constant	kDRVolumeModificationDate
 	@abstract	The key for indicating the volume modification date.
-	@discussion	Value is a CFDateRef.  kDRDefaultDate is used if unspecified.
+	@discussion	Value is a CFDateRef.  @link kDRDefaultDate kDRDefaultDate @/link is used if unspecified.
 */
 extern const CFStringRef kDRVolumeModificationDate	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*!	@constant	kDRVolumeCheckedDate
 	@abstract	(HFS+) The key for indicating the volume-checked date.
-	@discussion	Value is a CFDateRef.  kDRDefaultDate is used if unspecified.
+	@discussion	Value is a CFDateRef.  @link kDRDefaultDate kDRDefaultDate @/link is used if unspecified.
 */
 extern const CFStringRef kDRVolumeCheckedDate		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
@@ -192,7 +192,7 @@ extern const CFStringRef kDRISO9660					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATE
 	@abstract	The key for accessing the ISO-9660 level 1 name for the file.
 	@discussion	This key is used to refer specifically to the name generated for ISO-9660 if
 				the ISO level is set to 1.  When used for a property, it is equivalent
-				in use to the kDRISO9660 key and acts as a synonym for that key.
+				in use to the @link kDRISO9660 kDRISO9660 @/link key and acts as a synonym for that key.
 				
 				ISO9660 level 1 names are in the form typically known as 8.3 - eight
 				characters of name and three characters of extension (if it's a file;
@@ -205,7 +205,7 @@ extern const CFStringRef kDRISO9660LevelOne			AVAILABLE_MAC_OS_X_VERSION_10_2_AN
 	@abstract	The key for accessing the ISO-9660 level 2 name for the file.
 	@discussion	This key is used to refer specifically to the name generated for ISO-9660 if
 				the ISO level is set to 2.  When used for a property, it is equivalent
-				in use to the kDRISO9660 key and acts as a synonym for that key.
+				in use to the @link kDRISO9660 kDRISO9660 @/link key and acts as a synonym for that key.
 	
 				ISO9660 level 2 names can be 32 chars long, are limited to a subset
 				of the 7-bit ASCII chars (capital letters, numbers, space, punctuation),
@@ -227,6 +227,10 @@ extern const CFStringRef kDRJoliet					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER
 extern const CFStringRef kDRHFSPlus					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
+/*!	@constant	kDRUDF
+	@abstract	The key for accessing the UDF name/properties for the file.
+*/
+extern const CFStringRef kDRUDF						AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 /* -------------------------------------------------------------------------------- */
@@ -317,7 +321,7 @@ extern const CFStringRef kDRPosixGID				AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATE
 	@discussion	Value is a CFNumber.  This value is used by the MacOS to help when converting
 				the natively UTF-16 filename into an 8-bit-per-character representation (such
 				as MacRoman, Shift-JIS, or UTF8).  If not set, default behavior is to call
-				CFStringGetMostCompatibleMacStringEncoding(CFStringGetSmallestEncoding()).
+				@link //apple_ref/c/func/CFStringGetMostCompatibleMacStringEncoding CFStringGetMostCompatibleMacStringEncoding @/link(@link //apple_ref/c/func/CFStringGetSmallestEncoding CFStringGetSmallestEncoding @/link()).
 */
 extern const CFStringRef kDRHFSPlusTextEncodingHint	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
@@ -326,7 +330,7 @@ extern const CFStringRef kDRHFSPlusTextEncodingHint	AVAILABLE_MAC_OS_X_VERSION_1
 	@discussion	Value is a CFNumber.  Currently, this value if set is only a suggestion.
 				The burn engine will attempt to use this node ID, but may use another value
 				if it needs to resolve conflicts.  Default behavior is to allocate node IDs
-				incrementally from kHFSFirstUserCatalogNodeID.
+				incrementally from @link //apple_ref/c/econst/kHFSFirstUserCatalogNodeID kHFSFirstUserCatalogNodeID @/link.
 */
 extern const CFStringRef kDRHFSPlusCatalogNodeID	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
@@ -368,7 +372,7 @@ extern const CFStringRef kDRMacWindowView			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_
 
 /*!	@constant	kDRMacFinderFlags
 	@abstract	The property key for the item's Finder flags (MacOS only).
-	@discussion	Value is a CFNumber.  The "invisible" bit is ignored - use kDRInvisibility instead.
+	@discussion	Value is a CFNumber.  The "invisible" bit is ignored - use @link kDRInvisible kDRInvisible @/link instead.
 */
 extern const CFStringRef kDRMacFinderFlags			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
@@ -377,6 +381,114 @@ extern const CFStringRef kDRMacFinderFlags			AVAILABLE_MAC_OS_X_VERSION_10_2_AND
 	@discussion	Value is a CFNumber.
 */
 extern const CFStringRef kDRMacExtendedFinderFlags	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*!	@const		kDRUDFWriteVersion
+	@discussion	Optional key. This property key defines the version for the UDF
+				structures written to disk. Values are definde in UDF Version types.
+*/
+extern const CFStringRef kDRUDFWriteVersion			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/* ------------------------------------ */
+/* UDF Version types */
+/*!	@const		kDRUDFVersion102
+	@discussion	This value is used in @link kDRUDFWriteVersion kDRUDFWriteVersion @/link.
+*/
+extern const CFStringRef kDRUDFVersion102			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!	@const		kDRUDFVersion150
+	@discussion	This value is used in @link kDRUDFWriteVersion kDRUDFWriteVersion @/link.
+*/
+extern const CFStringRef kDRUDFVersion150			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*!
+	@const		kDRUDFPrimaryVolumeDescriptorNumber
+	@discussion	Optional key. This property key defines the primary volume sequence number.
+				See the UDF specs for details.
+*/
+extern const CFStringRef kDRUDFPrimaryVolumeDescriptorNumber	AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
+	@const		kDRUDFVolumeSequenceNumber
+	@discussion	Optional key. This property key defines the volume sequence number.
+				See the UDF specs for details.
+*/
+extern const CFStringRef kDRUDFVolumeSequenceNumber				AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
+	@const		kDRUDFMaxVolumeSequenceNumber
+	@discussion	Optional key. This property key defines the maximum volume sequence number.
+				See the UDF specs for details.
+*/
+extern const CFStringRef kDRUDFMaxVolumeSequenceNumber			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
+	@const		kDRUDFInterchangeLevel
+	@discussion	Optional key. This property key defines the volume interchange level.
+				See the UDF specs for details.
+*/
+extern const CFStringRef kDRUDFInterchangeLevel					AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
+	@const		kDRUDFMaxInterchangeLevel
+	@discussion	Optional key. This property key defines the maximum volume interchange level number.
+				See the UDF specs for details.
+*/
+extern const CFStringRef kDRUDFMaxInterchangeLevel				AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
+	@const		kDRUDFApplicationIdentifierSuffix
+	@discussion	Optional key.  A CFData object containing at most 8 bytes of data.
+				See the UDF specs for details.
+*/
+extern const CFStringRef kDRUDFApplicationIdentifierSuffix		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
+	@const		kDRUDFVolumeSetIdentifier
+	@discussion	Optional key. The Volume Set Identifier for the UDF volume set. If this key
+				is not present, @link kDRVolumeSet kDRVolumeSet @/link will be used if present.
+				The Volume Set Identifier is composed of the Volume Set Timestamp, the 
+				Implementation Use, and a the string contained in this property.
+*/
+extern const CFStringRef kDRUDFVolumeSetIdentifier				AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
+	@const		kDRUDFVolumeSetTimestamp
+	@discussion	Optional key. 
+				See the UDF specs for details.
+*/
+extern const CFStringRef kDRUDFVolumeSetTimestamp				AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
+	@const		kDRUDFVolumeSetImplementationUse
+	@discussion	Optional key. A CFData object containing at most 8 bytes of data.
+				See the UDF specs for details.
+*/
+extern const CFStringRef kDRUDFVolumeSetImplementationUse		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!	@constant	kDRUDFRealTimeFile
+	@abstract	Optional key. Specifies whether this file is to be marked as a UDF Real-Time file.
+	@discussion	Value is a CFBooleanRef.
+*/
+extern const CFStringRef kDRUDFRealTimeFile						AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!	@constant	kDRUDFExtendedFilePermissions
+	@abstract	Optional key. Specifies the extended UDF file permissions of this file.
+	@discussion	Value is a CFNumberRef.
+				Bit 0: Change attributes for others (low order bit)
+				Bit 1: Delete permissions for others
+				Bit 2: Change attributes for group
+				Bit 3: Delete permissions for group
+				Bit 4: Change attributes for owner
+				Bit 5: Delete permissions for owner
+				Bit 6 & 7: Reserved
+				If this key is not present, @link kDRPosixFileMode kDRPosixFileMode @/link will be used with the above bits
+				being set to the corresponding write bit for owner, group, and others.
+				If @link kDRPosixFileMode kDRPosixFileMode @/link is not present, the file mode from the file on disc will
+				be used, again using the write bit for these permissions.
+*/
+extern const CFStringRef kDRUDFExtendedFilePermissions			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 #ifdef __cplusplus

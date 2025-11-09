@@ -3,9 +3,9 @@
  
      Contains:   OS Utilities Interfaces.
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -27,11 +27,6 @@
 /*  HandToHand and other memory utilties were moved to MacMemory.h */
 #ifndef __MACMEMORY__
 #include <CarbonCore/MacMemory.h>
-#endif
-
-/*  GetTrapAddress and other trap table utilties were moved to Patches.h */
-#ifndef __PATCHES__
-#include <CarbonCore/Patches.h>
 #endif
 
 /*  Date and Time utilties were moved to DateTimeUtils.h */
@@ -89,6 +84,7 @@ enum {
 };
 
 typedef SignedByte                      QTypes;
+#if ALLOW_OBSOLETE_CARBON_OSUTILS
 struct SysParmType {
   UInt8               valid;
   UInt8               aTalkA;
@@ -104,6 +100,10 @@ struct SysParmType {
 };
 typedef struct SysParmType              SysParmType;
 typedef SysParmType *                   SysPPtr;
+#else
+typedef void *                          SysPPtr;
+#endif  /* ALLOW_OBSOLETE_CARBON_OSUTILS */
+
 struct QElem {
   struct QElem *      qLink;
   short               qType;
@@ -211,9 +211,6 @@ struct MachineLocation {
     } u;
 };
 typedef struct MachineLocation MachineLocation;
-
-
-
 /*
  *  IsMetric()
  *  
@@ -227,15 +224,18 @@ IsMetric(void)                                                AVAILABLE_MAC_OS_X
 
 
 /*
- *  GetSysPPtr()
+ *  GetSysPPtr()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Don't use this function; it always returns NULL on Mac OS X.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern SysPPtr 
-GetSysPPtr(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetSysPPtr(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
@@ -246,43 +246,49 @@ GetSysPPtr(void)                                              AVAILABLE_MAC_OS_X
           would make a circular include.
 */
 /*
- *  DTInstall()
+ *  DTInstall()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The Deferred Task Manager is deprecated.  Look into restructuring
+ *    your code to use threads, or MPTasks, or some other threading
+ *    solution.
+ *  
+ *  Summary:
+ *    Adds the specified task record to the deferred-task queue.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-DTInstall(DeferredTaskPtr dtTaskPtr)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DTInstall(DeferredTaskPtr dtTaskPtr)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*
+ *  DTUninstall()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    The Deferred Task Manager is deprecated.  Look into restructuring
+ *    your code to use threads, or MPTasks, or some other threading
+ *    solution.
+ *  
+ *  Summary:
+ *    Adds the specified task record to the deferred-task queue.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+DTUninstall(DeferredTaskPtr dtTaskPtr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
-
-#if TARGET_CPU_PPC || !TARGET_OS_MAC
+#if TARGET_API_MAC_CARBON
 #define GetMMUMode() ((SInt8)true32b)
 #define SwapMMUMode(x) (*(SInt8*)(x) = true32b)
-#else
-/*
- *  GetMMUMode()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  SwapMMUMode()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
 #endif
 /*
  *  Delay()
@@ -299,15 +305,19 @@ Delay(
 
 
 /*
- *  WriteParam()
+ *  WriteParam()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    This function no longer does anything on Mac OS X; you should
+ *    remove all calls to it from your code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-WriteParam(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+WriteParam(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -340,40 +350,45 @@ Dequeue(
 
 
 /*
- *  SetCurrentA5()
+ *  SetCurrentA5()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    You no longer need to use SetCurrentA5() on Mac OS X.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-SetCurrentA5(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetCurrentA5(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SetA5()
+ *  SetA5()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    You no longer need to use SetA5() on Mac OS X.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-SetA5(long newA5)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetA5(long newA5)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  InitUtil()
+ *  InitUtil()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-InitUtil(void)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
+InitUtil(void)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 
 /*
@@ -390,17 +405,6 @@ MakeDataExecutable(
   unsigned long   length)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-
-/*
- *  FlushCodeCacheRange()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
- */
-
-
 /*
  *  ReadLocation()
  *  
@@ -411,7 +415,6 @@ MakeDataExecutable(
  */
 extern void 
 ReadLocation(MachineLocation * loc)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
 
 
 /*
@@ -426,7 +429,6 @@ extern void
 WriteLocation(const MachineLocation * loc)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
-
 /*
  *  TickCount()
  *  
@@ -437,7 +439,6 @@ WriteLocation(const MachineLocation * loc)                    AVAILABLE_MAC_OS_X
  */
 extern UInt32 
 TickCount(void)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
 
 
 /*
@@ -464,11 +465,11 @@ extern CFStringRef
 CSCopyMachineName(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-
 #if OLDROUTINENAMES
 #define IUMetric() IsMetric()
 #endif  /* OLDROUTINENAMES */
 
+#if ALLOW_OBSOLETE_CARBON_OSUTILS
 /*
     NOTE: SysEnvirons is obsolete.  You should be using Gestalt.
 */
@@ -530,16 +531,7 @@ enum {
   envExtISOADBKbd               = 9
 };
 
-/*
- *  SysEnvirons()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
+#endif  /* ALLOW_OBSOLETE_CARBON_OSUTILS */
 
 
 

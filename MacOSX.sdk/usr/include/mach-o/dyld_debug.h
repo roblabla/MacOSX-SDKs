@@ -27,8 +27,11 @@
 #ifndef DYLD_BUILD /* do not include this when building dyld itself */
 #include <mach-o/dyld.h>
 #endif /* !defined(DYLD_BUILD) */
+
+#include <AvailabilityMacros.h>
+
 /*
- * The dyld debugging API.
+ * The dyld debugging API is deprecated as of Mac OS X 10.4
  */
 enum dyld_debug_return {
     DYLD_SUCCESS,
@@ -63,7 +66,7 @@ extern enum dyld_debug_return _dyld_debug_defining_module(
     unsigned long rcv_timeout,
     boolean_t inconsistent_data_ok,
     char *name,
-    struct dyld_debug_module *module);
+    struct dyld_debug_module *module) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 extern enum dyld_debug_return _dyld_debug_is_module_bound(
     mach_port_t target_task,
@@ -71,14 +74,14 @@ extern enum dyld_debug_return _dyld_debug_is_module_bound(
     unsigned long rcv_timeout,
     boolean_t inconsistent_data_ok,
     struct dyld_debug_module module,
-    boolean_t *bound);
+    boolean_t *bound) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 extern enum dyld_debug_return _dyld_debug_bind_module(
     mach_port_t target_task,
     unsigned long send_timeout,
     unsigned long rcv_timeout,
     boolean_t inconsistent_data_ok,
-    struct dyld_debug_module module);
+    struct dyld_debug_module module) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 extern enum dyld_debug_return _dyld_debug_module_name(
     mach_port_t target_task,
@@ -89,14 +92,14 @@ extern enum dyld_debug_return _dyld_debug_module_name(
     char **image_name,
     unsigned long *image_nameCnt,
     char **module_name,
-    unsigned long *module_nameCnt);
+    unsigned long *module_nameCnt) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 extern enum dyld_debug_return _dyld_debug_subscribe_to_events(
     mach_port_t target_task,
     unsigned long send_timeout,
     unsigned long rcv_timeout,
     boolean_t inconsistent_data_ok,
-    void (*dyld_event_routine)(struct dyld_event event));
+    void (*dyld_event_routine)(struct dyld_event event)) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  * _dyld_debug_add_event_subscriber() uses the mig interface functions below
@@ -107,7 +110,7 @@ extern enum dyld_debug_return _dyld_debug_add_event_subscriber(
     unsigned long send_timeout,
     unsigned long rcv_timeout,
     boolean_t inconsistent_data_ok,
-    mach_port_t subscriber);
+    mach_port_t subscriber) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  * These structures should be produced by mig(1) from the mig generated files
@@ -196,7 +199,7 @@ struct _dyld_debug_task_state {
  */
 extern enum dyld_debug_return _dyld_debug_make_runnable(
     mach_port_t target_task,
-    struct _dyld_debug_task_state *state);
+    struct _dyld_debug_task_state *state) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  * _dyld_debug_restore_runnable() is called after sending messages to the
@@ -205,7 +208,7 @@ extern enum dyld_debug_return _dyld_debug_make_runnable(
  */
 extern enum dyld_debug_return _dyld_debug_restore_runnable(
     mach_port_t target_task,
-    struct _dyld_debug_task_state *state);
+    struct _dyld_debug_task_state *state) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  * To provide more detailed information when the APIs of the dyld debug
@@ -231,13 +234,13 @@ struct dyld_debug_error_data {
 };
 
 extern void _dyld_debug_set_error_func(
-    void (*func)(struct dyld_debug_error_data *e));
+    void (*func)(struct dyld_debug_error_data *e)) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 #ifndef DYLD_BUILD /* do not include this when building dyld itself */
 
 extern enum dyld_debug_return _dyld_debug_task_from_core(
     NSObjectFileImage coreFileImage,
-    mach_port_t *core_task);
+    mach_port_t *core_task) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 #endif /* !defined(DYLD_BUILD) */
 

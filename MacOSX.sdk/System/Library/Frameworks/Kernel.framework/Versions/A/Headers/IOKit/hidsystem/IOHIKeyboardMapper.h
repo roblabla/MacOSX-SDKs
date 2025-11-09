@@ -24,6 +24,7 @@
 #define _IOHIKEYBOARDMAPPER_H
 
 #include <IOKit/hidsystem/ev_keymap.h>
+#include <IOKit/hidsystem/IOLLEvent.h>
 #include <IOKit/IOTimerEventSource.h>
 #include <IOKit/IOInterruptEventSource.h>
 
@@ -132,7 +133,7 @@ private:
 	IOTimerEventSource 	*ejectTimerEventSource;
 
         // This is for sticky keys
-        kbdBitVector		stickyKeys_Modifier_KeyBits;
+        kbdBitVector		cached_KeyBits;
         StickyKeys_ModifierInfo stickyKeys_StuckModifiers[kMAX_MODIFIERS];
         IOInterruptEventSource  *stickyKeysMouseClickEventSource;
         IOInterruptEventSource	*stickyKeysSetFnStateEventSource;
@@ -149,12 +150,14 @@ private:
         // stored for slowKeysPostProcess
         UInt8		slowKeys_Aborted_Key;
         UInt8		slowKeys_Current_Key;        
-        kbdBitVector	slowKeys_Current_KeyBits;
         
-        UInt32		swapKeyState;
         UInt32		specialKeyModifierFlags;
         
         bool		supportsF12Eject;
+        
+        SInt32      modifierSwap_Modifiers[NX_NUMMODIFIERS];
+		
+		unsigned char * cachedAlphaLockModDefs;
     };
     ExpansionData * _reserved;				    // Reserved for future use.  (Internal use only)
     
@@ -204,7 +207,7 @@ private:
 private:
 	// original translateKeyCode
 	void rawTranslateKeyCode (UInt8 key, bool keyDown, kbdBitVector keyBits);
-        void calcModSwap(UInt8 * key);
+    bool modifierSwapFilterKey(UInt8 * key);
 
 	// the current state of stickyKeys
 	UInt32            	_stickyKeys_State; 
@@ -243,7 +246,7 @@ private:
 	bool createParamDicts (void);
   
 	// post special keyboard events thru the event system
-	void postKeyboardSpecialEvent (unsigned subtype);
+	void postKeyboardSpecialEvent (unsigned subtype, unsigned eventType=NX_SYSDEFINED);
 
 	// check any modifier to see if it is pressed 5 times
 	// based on StickyKeys_ToggleInfo
@@ -264,7 +267,9 @@ private:
 	bool stickyKeysFilterKey (UInt8 key, bool keyDown, kbdBitVector keyBits, bool mouseClick = false);
 
         // called by interrupt event source to inform sticky keys of mouse down event
-        static void stickyKeysMouseDown(IOHIKeyboardMapper *owner, IOEventSource *sender);
+        static void stickyKeysMouseUp(IOHIKeyboardMapper *owner, IOEventSource *sender);
+
+	void stickyKeysCleanup();
 
         // called by interrupt event source to restore prior fn state
 	static void stickyKeysSetFnState(IOHIKeyboardMapper *owner, IOEventSource *sender);

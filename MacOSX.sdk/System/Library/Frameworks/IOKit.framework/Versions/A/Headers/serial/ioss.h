@@ -28,6 +28,7 @@
 
 #ifndef _POSIX_SOURCE
 
+#include <sys/termios.h>
 #include <sys/ttycom.h>
 
 /*
@@ -58,6 +59,11 @@
  * to false will halt any further call outs on the cu device.
  */
 #define IOSSPREEMPT    _IOW('T', 1, int)
+
+/*
+ * Sets the input speed and output speed to a non-traditional baud rate
+ */
+#define IOSSIOSPEED    _IOW('T', 2, speed_t)
 
 #endif  /*_POSIX_SOURCE */
 

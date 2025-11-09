@@ -3,9 +3,9 @@
  
      Contains:   Carbon Event Manager
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -54,9 +54,9 @@ extern "C" {
 
 #pragma options align=mac68k
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /* Parameter names and types                                                            */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 
 /*
  */
@@ -120,6 +120,7 @@ enum {
   kEventParamGDevice            = 'gdev', /* typeGDHandle*/
   kEventParamIndex              = 'indx', /* typeCFIndex*/
   kEventParamUserData           = 'usrd', /* typeVoidPtr*/
+  kEventParamShape              = 'shap', /* typeHIShapeRef*/
   typeWindowRef                 = 'wind', /* WindowRef*/
   typeGrafPtr                   = 'graf', /* CGrafPtr*/
   typeGWorldPtr                 = 'gwld', /* GWorldPtr*/
@@ -133,6 +134,7 @@ enum {
   typeHIPoint                   = 'hipt', /* HIPoint*/
   typeHISize                    = 'hisz', /* HISize*/
   typeHIRect                    = 'hirc', /* HIRect*/
+  typeHIShapeRef                = 'shap', /* HIShapeRef*/
   typeVoidPtr                   = 'void', /* void * (used for HIObject fun)*/
   typeGDHandle                  = 'gdev' /* GDHandle*/
 };
@@ -230,6 +232,7 @@ enum {
   kEventParamTSMDocAccessEffectiveRange = 'tder', /*    typeRange*/
   kEventParamTSMDocAccessReplyATSUGlyphSelector = 'tdrg', /*    typeGlyphSelector*/
   kEventParamTSMDocAccessLockCount = 'tdlc', /*    typeCFIndex*/
+  kEventParamTSMDocAccessLineBounds = 'tdlb', /*  typeCFMutableArrayRef*/
   typeATSFontRef                = 'atsf', /*    ATSFontRef*/
   typeGlyphSelector             = 'glfs' /*    ATSUGlyphSelector*/
 };
@@ -314,6 +317,7 @@ enum {
   kEventParamControlPartAutoRepeats = 'caur', /* typeBoolean*/
   kEventParamControlFrameMetrics = 'cfmt', /* typeControlFrameMetrics*/
   kEventParamControlWouldAcceptDrop = 'cldg', /* typeBoolean*/
+  kEventParamControlPrefersShape = 'cpsh', /* typeBoolean*/
   typeControlActionUPP          = 'caup', /* ControlActionUPP*/
   typeIndicatorDragConstraint   = 'cidc', /* IndicatorDragConstraint*/
   typeControlPartCode           = 'cprt', /* ControlPartCode*/
@@ -379,9 +383,7 @@ enum {
   kEventParamTabletPointRec     = 'tbrc', /* typeTabletPointRec*/
   kEventParamTabletProximityRec = 'tbpx', /* typeTabletProximityRec*/
   typeTabletPointRec            = 'tbrc', /* kEventParamTabletPointRec*/
-  typeTabletProximityRec        = 'tbpx', /* kEventParamTabletProximityRec*/
-  kEventParamTabletPointerRec   = 'tbrc', /* typeTabletPointerRec      -- deprecated, for compatibility only*/
-  typeTabletPointerRec          = 'tbrc' /* kEventParamTabletPointerRec    -- deprecated, for compatibility only*/
+  typeTabletProximityRec        = 'tbpx' /* kEventParamTabletProximityRec*/
 };
 
 /* Appearance event parameters*/
@@ -425,9 +427,9 @@ enum {
   typeCFRange                   = 'cfrn' /* CFRange*/
 };
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*  • Helpful utilities                                                                 */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 
 /*
  *  Discussion:
@@ -750,7 +752,24 @@ HIMouseTrackingGetParameters(
  *    your application where you need an EventRecord and all you have
  *    is an EventRef. If the event can be converted, outEvent is filled
  *    in and the function returns true. If not, false is returned and
- *    outEvent will contain a nullEvent.
+ *    outEvent will contain a nullEvent. 
+ *    
+ *    Currently, the following events can be converted: 
+ *    
+ *    kEventClassMouse: kEventMouseDown, kEventMouseUp,
+ *    kEventMouseMoved, kEventMouseDragged. 
+ *    
+ *    kEventClassKeyboard: kEventRawKeyDown, kEventRawKeyUp,
+ *    kEventRawKeyRepeat. 
+ *    
+ *    kEventClassControl: kEventControlTrack (in Mac OS X 10.4 and
+ *    later; converts to a mouseDown event). 
+ *    
+ *    kEventClassWindow: kEventWindowUpdate, kEventWindowActivate,
+ *    kEventWindowDeactivate, kEventWindowCursorChange. 
+ *    
+ *    kEventClassApplication: kEventAppActivated, kEventAppDeactivated.
+ *    <BR><BR> kEventClassAppleEvent: kEventAppleEvent.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -829,9 +848,9 @@ extern EventTime
 GetLastUserEventTime(void)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*  • Mouse Coalescing                                                                  */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*
  *  IsMouseCoalescingEnabled()
  *  
@@ -1003,9 +1022,9 @@ enum {
   kEventClassTSMDocumentAccess  = 'tdac'
 };
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /* Mouse Events                                                                         */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*
     kEventClassMouse quick reference:
     
@@ -1077,6 +1096,14 @@ enum {
  *  Summary:
  *    A mouse button was pressed.
  *  
+ *  Discussion:
+ *    All windows have a default handler installed on the window target
+ *    that handles this event by calling SetFrontProcess on the current
+ *    process if the current process is not already the front process.
+ *    It is very important that an event handler for this event always
+ *    return eventNotHandledErr, so that the default handler can run
+ *    and can activate the current process.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
@@ -1096,11 +1123,11 @@ enum {
  *          OS X 10.1 and later.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -1169,11 +1196,11 @@ enum {
  *          OS X 10.1 and later.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -1241,6 +1268,13 @@ enum {
  *          top left of the structure of the window. Available in Mac
  *          OS X 10.3 and later.
  *    
+ *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
+ *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
  *          generated.
@@ -1302,11 +1336,11 @@ enum {
  *          OS X 10.1 and later.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -1444,11 +1478,11 @@ enum {
  *          OS X 10.1 and later.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -1477,9 +1511,9 @@ enum {
   kEventMouseWheelMoved         = 10
 };
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /* TSM Document Access Events                                                           */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*
     kEventClassTSMDocumentAccess quick reference:
     
@@ -1492,7 +1526,7 @@ enum {
         
     ** Text Attribute Access **
     kEventTSMDocumentAccessGetFont                          = 6,
-    kEventTSMDocumentAccessGetGlyphInfo                     = 7
+    kEventTSMDocumentAccessGetGlyphInfo                     = 7,
     
     ** Transaction control **
     kEventTSMDocumentAccessLockDocument                     = 8,
@@ -2055,9 +2089,9 @@ enum {
 };
 
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /* Text Input Events                                                                    */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*
     kEventClassTextInput quick reference:
     
@@ -2067,12 +2101,14 @@ enum {
     kEventTextInputPosToOffset              = 4,
     kEventTextInputShowHideBottomWindow     = 5,
     kEventTextInputGetSelectedText          = 6,
-    kEventTextInputUnicodeText              = 7
+    kEventTextInputUnicodeText              = 7,
+    kEventTextInputFilterText               = 14
     
     The following TextInput events (UpdateActiveInputArea thru GetSelectedText) reimplement
     the AppleEvents defined in Inside Mac Text: Text Services Manager, and provide the benefits
     of Carbon Event targeting, dispatching, and propagation to applications that have formerly
     handled the TSM suite of AppleEvents.
+    
     TextInput handlers may be installed on controls, windows, or the application event target
     (equivalent to AppleEvent-based handling). In all cases, if a given TextInput handler is
     not installed, TSM will convert that TextInput to an AppleEvent and redispatch via AESend
@@ -2158,13 +2194,13 @@ enum {
  *          user action, such as changing the selected clause or
  *          highlited subrange of text in the active input area, or
  *          that the input method is changing the caret position in the
- *          active input area (if it uses the kCaretPosition hilite
- *          style). Depending on how your text engine draws hilite
- *          styles supported in the kEventParamTextInputSendHiliteRng
- *          parameter, you may or may not need to redraw the text
- *          itself, simply change the hilite. This parameter is
- *          optional and may not be present in all instances of this
- *          event.
+ *          active input area (if it uses the kTSMHiliteCaretPosition
+ *          hilite style). Depending on how your text engine draws
+ *          hilite styles supported in the
+ *          kEventParamTextInputSendHiliteRng parameter, you may or may
+ *          not need to redraw the text itself, simply change the
+ *          hilite. This parameter is optional and may not be present
+ *          in all instances of this event.
  *    
  *    --> kEventParamTextInputSendHiliteRng (in, typeTextRangeArray)
  *          An array of text-range records (see TextRangeArray) that
@@ -2177,8 +2213,8 @@ enum {
  *          been confirmed.  Specifically, if the entire text is being
  *          confirmed, it is clear that any contents of this parameter
  *          should be ignored, especially non-zero values
- *          kCaretPosition. This parameter is optional and may not be
- *          present in all instances of this event.
+ *          kTSMHiliteCaretPosition. This parameter is optional and may
+ *          not be present in all instances of this event.
  *    
  *    --> kEventParamTextInputSendClauseRng (in, typeOffsetArray)
  *          An array of offsets (see OffsetArray) used by an input
@@ -2239,7 +2275,7 @@ enum {
  *          supports this feature via the
  *          kTSMDocumentSupportGlyphInfoPropertyTag TSMDocumentProperty
  *          tag. For more information, see the Glyph Access protocol
- *          described in TechNote TN20TT. This parameter is optional
+ *          described in Technote TN2079. This parameter is optional
  *          and may not be present in all instances of this event.
  *    
  *    --> kEventParamTextInputSendReplaceRange (in, typeCFRange)
@@ -2380,7 +2416,7 @@ enum {
  *          but note that this capability should be used with care
  *          because changing the font of an input text stream can lead
  *          to a confusing user interface. For more information, see
- *          the Glyph Access protocol described in TechNote TN20TT.
+ *          the Glyph Access protocol described in Technote TN2079.
  *          This parameter is optional and may not be present in all
  *          instances of this event.
  *  
@@ -2419,29 +2455,40 @@ enum {
  *          user focus.  (Required Parameter)
  *    
  *    --> kEventParamTextInputSendTextOffset (in, typeLongInteger)
- *          The text offset in an active input area for which the
- *          global position (in QD coordinates) is desired.  (Required
- *          Parameter) NOTE:  If no input area is active, the original
- *          definition of this parameter IM-Text 7-74 states that the
- *          offset is "relative to the start of the current text body".
- *           However, some applications have implemented the case
- *          offset = 0 relative to the insertion point, which makes
- *          some sense in that an input method is typically interested
- *          in interacting with the user at the insertion point and
- *          this allows an input method to display some UI (such as a
- *          translucent input mode indicator)  near the insertion point
- *          even before typing has taken place.  Input Methods usually
- *          have no reason to care about the on-screen position of the
- *          beginning of a text document.
+ *          Specifies the text offset in an active input area for which
+ *          the global position (in QD coordinates) is desired. 
+ *          Because an inline input session always begins at the
+ *          insertion point, the offset is always considered relative
+ *          to the insertion point, even when there is no active input
+ *          area.  (Required Parameter)
  *          
- *          However, new events in the TSM suite now allow an input
- *          method to obtain the insertion point as a document-relative
- *          offset in Unicode space, so the original definition of this
- *          parameter should hold... the text offset is to be
- *          considered relative to the beginning of the text document,
- *          especially when the app indicates it supports the TSM text
- *          Attribute events, specifically
- *          kEventTextInputGetInsertionPointAttributes.
+ *          If an offset is outside the bounds of the document text,
+ *          errOffsetInvalid should be returned.  Negative offsets are
+ *          not valid when an inline input session exists, but are
+ *          valid when none exists, to allow query of offsets before
+ *          the insertion point.
+ *          
+ *          NOTE:  Non-zero offsets in the absence of an active input
+ *          area can only be specified when the originator of the event
+ *          is certain that the character encoding used by the target
+ *          (the current TSMDocument) is the same as its own encoding. 
+ *          When there is no active input area, TSM is unable to
+ *          convert offsets between different encodings that might be
+ *          used by the app and an input method (as it normally does)
+ *          since TSM does not have access to the document text. 
+ *          Practically, this means that both the originator and event
+ *          target must be Unicode-savvy, i.e. the current TSMDocument
+ *          was created with kUnicodeDocumentInterfaceType.
+ *          
+ *          NOTE:  Insertion point relative offsets when there is no
+ *          active input area is contrary to the original definition of
+ *          this parameter in IM-Text 7-74 which states that the offset
+ *          is "relative to the start of the current text body" in this
+ *          case.  However, most applications and text engines have
+ *          already implemented the case offset = 0 as being the
+ *          insertion point.  This allows an input method to display
+ *          some UI near the the insertion point even before typing
+ *          takes place.
  *    
  *    --> kEventParamTextInputSendSLRec (in, typeIntlWritingCode)
  *          Specifies which glyph on either side of the supplied text
@@ -2554,14 +2601,16 @@ enum {
  *  kEventClassTextInput / kEventTextInputPosToOffset
  *  
  *  Summary:
- *    Requests conversion from global QD coordinate to inline session
- *    text offset.
+ *    Requests conversion from global QD coordinate to a byte offset in
+ *    text.
  *  
  *  Discussion:
- *    This event is typically produced by an input method to perform
- *    proper cursor management as the cursor moves over various
- *    subranges, or clauses of text (or the boundaries between these)
- *    in the inline input session.
+ *    This event is used for mouse tracking.  An input method typically
+ *    produces this event to perform proper cursor management as the
+ *    cursor moves over various subranges, or clauses of text (or the
+ *    boundaries between these) in an inline input session, or moves
+ *    between an inline input session to the main text body, or even
+ *    outside of the main text body.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -2578,9 +2627,11 @@ enum {
  *          user focus.  (Required Parameter)
  *    
  *    --> kEventParamTextInputSendCurrentPoint (in, typeQDPoint)
- *          The point (in QD coordinates) whose text offset in the
- *          active input area the input method method is requesting. 
- *          (Required Parameter)
+ *          The point whose text offset (and classification) the input
+ *          method is requesting. This point is usually the current
+ *          mouse position in global QD coordinates.  Text offset
+ *          classifications are defined by
+ *          kEventParamTextInputReplyRegionClass. (Required Parameter)
  *    
  *    --> kEventParamTextInputSendDraggingMode (in, typeBoolean)
  *          A Boolean value that indicates whether the input method is
@@ -2770,7 +2821,7 @@ enum {
  *          be applied to the text range.  This is useful for
  *          characters in Unicode private use area. For more
  *          information, see the Glyph Access protocol described in
- *          TechNote TN20TT. This parameter is optional and may not be
+ *          Technote TN2079. This parameter is optional and may not be
  *          returned to the caller. NOTE:  This parameter should really
  *          have been kEventParamTextInputReplyGlyphInfoArray, which
  *          was introduced after glyphInfo support was added to this
@@ -2853,7 +2904,7 @@ enum {
  *          but note that this capability should be used with care
  *          because changing the font of an input text stream can lead
  *          to a confusing user interface. For more information, see
- *          the Glyph Access protocol described in TechNote TN20TT.
+ *          the Glyph Access protocol described in Technote TN2079.
  *          This parameter is optional and may not be present in all
  *          instances of this event.
  *  
@@ -2866,9 +2917,59 @@ enum {
 };
 
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*
+ *  kEventClassTextInput / kEventTextInputFilterText
+ *  
+ *  Summary:
+ *    Send text about to be inserted into the user focus to be filtered
+ *    first.
+ *  
+ *  Discussion:
+ *    Sent before any final-form text is sent to the user focus.  Final
+ *    form text includes text produced by a keyboard layout, Ink input
+ *    method, Character palette or any other TSM text service, and any
+ *    text being "confirmed" (or commited) from an inline input
+ *    session.  In the case of text confirmed from an inline input
+ *    session, TSM will take the resulting text buffer filtered by the
+ *    event handler and adjust all parameters in the
+ *    UpdateActiveInputArea event produced by the input method. The
+ *    text filtering action will thus be transparent to both the app's
+ *    UpdateActiveInputArea handler and the input method confirming the
+ *    text.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamTextInputSendRefCon (in, typeLongInteger)
+ *          TSM's SendTextInputEvent, called by an input method,
+ *          inserts this parameter before dispatching the event to the
+ *          user focus.  (Required Parameter)
+ *    
+ *    --> kEventParamTextInputSendText (in, typeUnicodeText)
+ *          The Unicode characters that are about to be sent to the
+ *          user focus, and need to be filtered.  (Required Parameter)
+ *    
+ *    <-- kEventParamTextInputReplyText (out, typeUnicodeText)
+ *          The filtered Unicode characters... may be a zero-size
+ *          parameter.  (Required Parameter)
+ *  
+ *  Result:
+ *    Return noErr to indicate that the text needing filtering has been
+ *    changed, otherwise return eventNotHandledErr.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventTextInputFilterText     = 14
+};
+
+/*--------------------------------------------------------------------------------------*/
 /* Raw Keyboard Events                                                                  */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*
     kEventClassKeyboard quick reference:
     
@@ -3099,14 +3200,12 @@ enum {
 };
 
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /* Application Events                                                                   */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
+
 /*
     kEventClassApplication quick reference:
-    
-    %% please check CarbonEventsPriv.i for any events of class kEventClassApplication before
-    %% adding values to this list...
     
     kEventAppActivated                      = 1,
     kEventAppDeactivated                    = 2,
@@ -3120,6 +3219,7 @@ enum {
     kEventAppFocusNextDocumentWindow        = 9,
     kEventAppFocusNextFloatingWindow        = 10,
     kEventAppFocusToolbar                   = 11,
+    kEventAppFocusDrawer                    = 12,
     
     kEventAppGetDockTileMenu                = 20,
     
@@ -3130,9 +3230,8 @@ enum {
     kEventAppSystemUIModeChanged            = 109,
     kEventAppAvailableWindowBoundsChanged   = 110,
     kEventAppActiveWindowChanged            = 111
-    
-    %% Make sure to avoid overlap with the App Event IDs in CarbonEventsPriv.i!
 */
+
 /*
  *  kEventClassApplication / kEventAppActivated
  *  
@@ -3732,6 +3831,40 @@ enum {
 };
 
 /*
+ *  kEventClassApplication / kEventAppFocusDrawer
+ *  
+ *  Summary:
+ *    The user has requested keyboard focus on the drawer in the
+ *    focused window.
+ *  
+ *  Discussion:
+ *    This event is handled automatically by the default application
+ *    event handler. A handler for this event should put focus on the
+ *    first control in the drawer in the focused window, if a drawer is
+ *    present. If multiple drawers are present, focus is moved in
+ *    clockwise order from one drawer to the next, starting with the
+ *    top drawer, if any. If the modifiers parameter contains the shift
+ *    key, then focus should be moved in reverse (counterclockwise)
+ *    order.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamKeyModifiers (in, typeUInt32)
+ *          The keyboard modifiers that were pressed when the user
+ *          requested a focus switch.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventAppFocusDrawer          = 12
+};
+
+/*
  *  kEventClassApplication / kEventAppIsEventInInstantMouser
  *  
  *  Summary:
@@ -3761,9 +3894,9 @@ enum {
 };
 
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*  Apple Events                                                                        */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*
     kEventClassAppleEvent quick reference:
 
@@ -3816,9 +3949,9 @@ enum {
   kEventAppleEvent              = 1
 };
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*  Window Events                                                                       */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*
     kEventClassWindow quick reference:
     
@@ -3831,7 +3964,10 @@ enum {
     
     kEventWindowActivated               = 5,
     kEventWindowDeactivated             = 6,
+    kEventWindowHandleActivate          = 91,
+    kEventWindowHandleDeactivate        = 92,
     kEventWindowGetClickActivation      = 7,
+    kEventWindowGetClickModality        = 8,
     
     -- window state change events --
     
@@ -3908,6 +4044,14 @@ enum {
     kEventWindowFocusRelinquish         = 201,
     kEventWindowFocusContent            = 202,
     kEventWindowFocusToolbar            = 203,
+    kEventWindowFocusDrawer             = 204,
+    
+    -- sheet events --
+    
+    kEventWindowSheetOpening,           = 210,
+    kEventWindowSheetOpened             = 211,
+    kEventWindowSheetClosing            = 212,
+    kEventWindowSheetClosed             = 213,
     
     -- drawer events --
     
@@ -3931,7 +4075,9 @@ enum {
     kEventWindowMeasureTitle            = 1010,
     kEventWindowDrawGrowBox             = 1011,
     kEventWindowGetGrowImageRegion      = 1012,
-    kEventWindowPaint                   = 1013
+    kEventWindowPaint                   = 1013,
+    kEventWindowAttributesChanged       = 1019,
+    kEventWindowTitleChanged            = 1020
     
     On window handlers:
     
@@ -3994,8 +4140,13 @@ enum {
  *  Discussion:
  *    This event is sent by the standard window handler when it
  *    receives a kEventWindowUpdate event. BeginUpdate, SetPort, and
- *    EndUpdate are called for you; your handler only needs to draw
- *    into the current port. 
+ *    EndUpdate are called by the standard handler inside its
+ *    kEventWindowUpdate handler; your handler for the
+ *    kEventWindowDrawContent event only needs to draw into the current
+ *    port. 
+ *    
+ *    The standard window handler responds to this event by calling
+ *    UpdateControls. 
  *    
  *    Regardless of whether the window uses the standard window event
  *    handler, you will also receive this event right before a window
@@ -4028,9 +4179,12 @@ enum {
  *  Discussion:
  *    This event is sent to all handlers registered for it. It is sent
  *    to any window that is activated, regardless of whether the window
- *    has the standard handler installed. The standard window event
- *    handler responds to this event by calling ActivateControl on the
- *    window’s root control.
+ *    has the standard handler installed. On Mac OS X 10.3 and later,
+ *    the standard window event handler responds to this event by
+ *    sending a kEventWindowHandleActivate event to the window; on
+ *    CarbonLib and earlier releases of Mac OS X, the standard window
+ *    handler calls ActivateControl on the window’s root
+ *    control.
  *    
  *    If all handlers for this event return eventNotHandledErr, then
  *    the Window Manager posts the event to the event queue, where it
@@ -4064,9 +4218,12 @@ enum {
  *  Discussion:
  *    This event is sent to all handlers registered for it. It is sent
  *    to any window that is deactivated, regardless of whether the
- *    window has the standard handler installed. The standard window
- *    event handler responds to this event by calling DeactivateControl
- *    on the window’s root control.
+ *    window has the standard handler installed. On Mac OS X 10.3 and
+ *    later, the standard window event handler responds to this event
+ *    by sending a kEventWindowHandleDeactivate event to the window; on
+ *    CarbonLib and earlier releases of Mac OS X, the standard window
+ *    handler calls DeactivateControl on the window’s root
+ *    control.
  *    
  *    If all handlers for this event return eventNotHandledErr, then
  *    the Window Manager posts the event to the event queue, where it
@@ -4092,35 +4249,105 @@ enum {
 };
 
 /*
+ *  kEventClassWindow / kEventWindowHandleActivate
+ *  
+ *  Summary:
+ *    The window has received a kEventWindowActivated event, and its
+ *    contents should become active.
+ *  
+ *  Discussion:
+ *    This event is generated by the standard window handler in
+ *    response to a kEventWindowActivated event. An application may
+ *    handle this event by activating its content appropriately. The
+ *    standard window handler responds to this event by calling
+ *    ActivateControl on the window's root control.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamDirectObject (in, typeWindowRef)
+ *          The window that was activated.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventWindowHandleActivate    = 91
+};
+
+/*
+ *  kEventClassWindow / kEventWindowHandleDeactivate
+ *  
+ *  Summary:
+ *    The window has received a kEventWindowDeactivated event, and its
+ *    contents should become inactive.
+ *  
+ *  Discussion:
+ *    This event is generated by the standard window handler in
+ *    response to a kEventWindowDeactivated event. An application may
+ *    handle this event by deactivating its content appropriately. The
+ *    standard window handler responds to this event by calling
+ *    DeactivateControl on the window's root control.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamDirectObject (in, typeWindowRef)
+ *          The window that was deactivated.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventWindowHandleDeactivate  = 92
+};
+
+/*
  *  kEventClassWindow / kEventWindowGetClickActivation
  *  
  *  Summary:
- *    Sent when a click occurs in a inactive window. Allows the window
- *    to determine whether the window should be activated and whether
- *    the click should be handled.
+ *    Sent when a click occurs in a window. Allows the window to
+ *    determine whether the window should be activated and whether the
+ *    click should be handled.
  *  
  *  Discussion:
- *    This event is sent to a window when a click occurs in the window
- *    while it is inactive. A handler for this event can determine
- *    whether the window is activated and whether the click is handled
- *    or ignored by setting the kEventParamClickActivation parameter to
- *    one of the ClickActivationResult constants in Controls.h.
+ *    This event is sent in two situations:
+ *    - for all windows, it is sent to a clicked window when the
+ *    window's process is inactive
+ *    - for windows that use the standard window event handler, this
+ *    event is also sent to clicked windows when the window's process
+ *    is active. Prior to Mac OS X 10.4, this event is only sent when
+ *    the clicked window is not the frontmost window in its window
+ *    group. In Mac OS X 10.4 and later, this event is sent in response
+ *    to all clicks in a window, regardless of whether the window is
+ *    frontmost, so that command-clicks may properly avoid z-ordering
+ *    the window in front of other windows from other processes.
  *    
  *    
- *    For windows which use the standard window event handler, this
- *    event is sent regardless of whether the window’s process is
- *    active or inactive; for windows that do not use the standard
- *    window event handler, this event is only sent to windows in
- *    inactive processes. This event is never sent to
- *    kUtilityWindowClass windows, since they are never inactive.
+ *    A handler for this event can determine whether the window is
+ *    activated and whether the click is handled or ignored by setting
+ *    the kEventParamClickActivation parameter to one of the
+ *    ClickActivationResult constants in Controls.h. 
  *    
- *    
- *    The default behavior is to bring the window forward and ignore
- *    the click (in other words, return kActivateAndIgnoreClick),
- *    unless the click falls on the window widgets in the window
- *    structure, in which case kDoNotActivateAndHandleClick is usually
- *    returned. You have the option of overriding the behavior to
- *    support click-thru or select-and-click.
+ *    The default behavior varies according to the window state and the
+ *    click location:
+ *    - if the window's process is active, and the window is frontmost
+ *    in its group, then the standard window event handler returns
+ *    kActivateAndHandleClick.
+ *    - if the window's process is inactive, or the window is not
+ *    frontmost in its group, then the standard window event handler
+ *    returns kActivateAndIgnoreClick.
+ *    - if the click falls on the window widgets in the window
+ *    structure, then the default window event handler usually returns
+ *    kDoNotActivateAndHandleClick.
+ *    You have the option of overriding the behavior to support
+ *    click-through or select-and-click.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -4168,6 +4395,160 @@ enum {
 
 /*
  *  Summary:
+ *    Responses to the kEventWindowGetClickModality event.
+ */
+enum {
+
+  /*
+   * Indicates whether a modal window prevents the mouse event from
+   * being passed to the clicked window. If this bit is set, the
+   * kEventParamModalWindow and kEventParamWindowModality parameters
+   * should be set before the event handler returns. If this bit is
+   * clear, normal event handling will occur; the clicked window will
+   * typically be z-ordered to the top of its window group, activated,
+   * become the user focus window, and receive the mouse event for
+   * further processing.
+   */
+  kHIModalClickIsModal          = 1 << 0,
+
+  /*
+   * If kHIModalClickIsModal is set, this flag indicates whether the
+   * click event should be allowed to pass to the clicked window. If
+   * kHIModalClickIsModal is not set, this flag is ignored.
+   */
+  kHIModalClickAllowEvent       = 1 << 1,
+
+  /*
+   * If kHIModalClickIsModal is set and kHIModalClickAllowEvent is not
+   * set, this flag indicates whether the caller should announce that
+   * the click has been blocked by a modal window using appropriate UI
+   * (typically, by calling SysBeep). If kHIModalClickIsModal is not
+   * set, or if kHIModalClickAllowEvent is set, this flag is ignored.
+   */
+  kHIModalClickAnnounce         = 1 << 2,
+
+  /*
+   * If both kHIModalClickIsModal and kHIModalClickAllowEvent are set,
+   * this flag indicates whether the clicked window should be z-ordered
+   * to the top of its window group. The window will not, however, be
+   * activated or become the user focus window. If either of
+   * kHIModalClickIsModal or kHIModalClickAllowEvent is not set, this
+   * flag is ignored.
+   */
+  kHIModalClickRaiseWindow      = 1 << 3
+};
+
+typedef UInt32                          HIModalClickResult;
+enum {
+  typeModalClickResult          = 'wmcr', /* HIModalClickResult*/
+  typeWindowModality            = 'wmod', /* WindowModality*/
+  kEventParamModalClickResult   = typeModalClickResult, /* typeModalClickResult*/
+  kEventParamModalWindow        = 'mwin', /* typeWindowRef*/
+  kEventParamWindowModality     = typeWindowModality /* typeWindowModality*/
+};
+
+/*
+ *  kEventClassWindow / kEventWindowGetClickModality
+ *  
+ *  Summary:
+ *    Determines whether a mouse-down or mouse-up event is blocked by a
+ *    modal window.
+ *  
+ *  Discussion:
+ *    This event is sent to a window by the event dispatcher target
+ *    prior to dispatching a mouse-down or mouse-up event to the
+ *    clicked window. A handler for this event may examine application
+ *    state to determine whether this click should be allowed. 
+ *    
+ *    This event may also be sent in other circumstances besides a
+ *    mouse event. The toolbox currently sends this event in the
+ *    following other cases:
+ *    
+ *    - in SelectWindow
+ *    - when handling the cmd-~ key sequence
+ *    - when restoring a collapsed window from the Dock
+ *    - when handling the kHICommandSelectWindow command
+ *    - during application activation, when activating a clicked
+ *    window
+ *    
+ *    In each case, the result of this event is used to determine
+ *    whether z-ordering, activation, and hiliting of the window should
+ *    be allowed. 
+ *    
+ *    This event contains an optional EventRef parameter that is the
+ *    original mouse event. This parameter is not always present; if
+ *    not present, the handler should generally assume that the click
+ *    was a single click. 
+ *    
+ *    There is a default handler for this event installed on the
+ *    application target. The default behavior is to determine whether
+ *    this is a modal click by examining the modality of the visible,
+ *    uncollapsed windows in front of the clicked window, the location
+ *    of the click, and the keyboard modifiers. A custom handler may,
+ *    of course, entirely ignore window z-order or modality, and
+ *    determine modality in any way it deems necessary.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamDirectObject (in, typeWindowRef)
+ *          The window that was clicked.
+ *    
+ *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
+ *          The window part that was clicked.
+ *    
+ *    --> kEventParamKeyModifiers (in, typeUInt32)
+ *          The keyboard modifiers that were pressed when the mouse
+ *          button was pressed.
+ *    
+ *    --> kEventParamEventRef (in, typeEventRef)
+ *          The original mouse event. This parameter is optional and
+ *          may not be present in all instances of this event. If this
+ *          parameter is not present, the handler should assume that
+ *          the click was a single click, with the window part and
+ *          keyboard modifiers specified by the other parameters in the
+ *          kEventWindowGetClickModality event.
+ *    
+ *    <-- kEventParamModalClickResult (out, typeModalClickResult)
+ *          On exit, this parameter should contain an
+ *          HIModalClickResult value indicating how the click should be
+ *          handled.
+ *    
+ *    <-- kEventParamModalWindow (out, typeWindowRef)
+ *          On exit, this parameter should contain the modal window
+ *          that caused the click to be blocked, if any. The sender of
+ *          this event uses this information to determine which window
+ *          should be activated if the application is inactive.
+ *          
+ *          
+ *          This parameter is only required if the
+ *          kEventParamModalClickResult parameter contains
+ *          kHIModalClickIsModal. If an event handler wants to report
+ *          that a click has been blocked by modality, but cannot
+ *          determine which window blocked the click, it is acceptable
+ *          to either not add this parameter to the event, or to set
+ *          the parameter to a NULL WindowRef.
+ *    
+ *    <-- kEventParamWindowModality (out, typeWindowModality)
+ *          On exit, this parameter should contain the modality of the
+ *          modal window that is in front of the clicked window, if
+ *          any. This parameter is only required if the
+ *          kEventParamModalClickResult parameter contains
+ *          kHIModalClickIsModal.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventWindowGetClickModality  = 8
+};
+
+
+/*
+ *  Summary:
  *    Window bounds change event attributes
  *  
  *  Discussion:
@@ -4192,12 +4573,13 @@ enum {
   kWindowBoundsChangeUserResize = (1 << 1),
 
   /*
-   * The dimensions of the window (width and height) are changing.
+   * The dimensions (width and height) of the window content area are
+   * changing.
    */
   kWindowBoundsChangeSizeChanged = (1 << 2),
 
   /*
-   * The top left corner (origin) is changing.
+   * The top left corner (origin) of the window content is changing.
    */
   kWindowBoundsChangeOriginChanged = (1 << 3),
 
@@ -4440,6 +4822,11 @@ enum {
  *    
  *    --> kEventParamDirectObject (in, typeWindowRef)
  *          The window that was zoomed.
+ *    
+ *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
+ *          The part code (inZoomIn or inZoomOut) that was passed to
+ *          ZoomWindow or ZoomWindowIdeal. This parameter is available
+ *          in Mac OS X 10.4 and later.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4486,19 +4873,22 @@ enum {
  *          window is being resized, moved, or both.
  *    
  *    --> kEventParamOriginalBounds (in, typeQDRectangle)
- *          The window’s original bounds before the window resize or
- *          drag began.
+ *          The window’s original content bounds before the window
+ *          resize or drag began.
  *    
  *    --> kEventParamPreviousBounds (in, typeQDRectangle)
- *          The window’s bounds before the current bounds change.
+ *          The window’s content bounds before the current bounds
+ *          change.
  *    
  *    <-> kEventParamCurrentBounds (in/out, typeQDRectangle)
- *          On entry, the window’s proposed new bounds; on exit, the
- *          bounds that are desired by the event handler.
+ *          On entry, the window’s proposed new content bounds; on
+ *          exit, the content bounds that are desired by the event
+ *          handler.
  *  
  *  Result:
  *    Return noErr to indicate that the Window Manager should use the
- *    kEventParamCurrentBounds parameter as the window’s new bounds.
+ *    kEventParamCurrentBounds parameter as the window’s new content
+ *    bounds.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4533,14 +4923,15 @@ enum {
  *          window was resized, moved, or both.
  *    
  *    --> kEventParamOriginalBounds (in, typeQDRectangle)
- *          The window’s original bounds before the window resize or
- *          drag began.
+ *          The window’s original content bounds before the window
+ *          resize or drag began.
  *    
  *    --> kEventParamPreviousBounds (in, typeQDRectangle)
- *          The window’s bounds before the current bounds change.
+ *          The window’s content bounds before the current bounds
+ *          change.
  *    
  *    --> kEventParamCurrentBounds (in, typeQDRectangle)
- *          The window’s new bounds.
+ *          The window’s new content bounds.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4802,11 +5193,11 @@ enum {
  *          OS X 10.1 and later.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -4886,11 +5277,11 @@ enum {
  *          OS X 10.1 and later.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -4975,11 +5366,11 @@ enum {
  *          OS X 10.1 and later.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -5062,11 +5453,11 @@ enum {
  *          OS X 10.1 and later.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -5149,11 +5540,11 @@ enum {
  *          OS X 10.1 and later.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -5251,11 +5642,11 @@ enum {
  *          OS X 10.1 and later.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -5338,11 +5729,11 @@ enum {
  *          OS X 10.1 and later.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -5424,11 +5815,11 @@ enum {
  *          OS X 10.1 and later.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -5511,11 +5902,11 @@ enum {
  *          OS X 10.1 and later.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -5924,11 +6315,11 @@ enum {
  *          OS X 10.1 and later.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -5992,7 +6383,17 @@ enum {
  *    A handler for this event should put a MenuRef into the event and
  *    return noErr to cause the menu to be displayed as the path
  *    selection popup menu. The menu will not be released by the
- *    standard window handler.
+ *    standard window handler; however, in Mac OS X 10.4 and later, it
+ *    will be retained by the EventRef when added to the event, and
+ *    released when the event is destroyed, so a handler for this event
+ *    may, on Mac OS X 10.4 and later, release the menu after adding it
+ *    to the menu. 
+ *    
+ *    Note! The standard window handler's use of this event was broken
+ *    in all releases of CarbonLib and Mac OS X before Mac OS X 10.4;
+ *    the MenuRef added to this event was not used to display the path
+ *    selection menu. Therefore, this event is effectively useless
+ *    before Mac OS X 10.4.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -6029,7 +6430,14 @@ enum {
  *    This event is not handled by either the basic or standard window
  *    handlers. If no handler responds to this event, the basic window
  *    handler uses an ideal size based on the size of the monitor on
- *    which the window is located.
+ *    which the window is located. 
+ *    
+ *    Prior to Mac OS X Mac OS X 10.4, the ZoomWindowIdeal API
+ *    malfunctioned if passed an idealSize that was large enough to
+ *    cause 16-bit integer overflow when added to the window's current
+ *    position. Therefore, when providing an ideal size in response to
+ *    this event, you should generally not return values that are close
+ *    to 32767. It is better to limit your ideal size to, say, 16K.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -6356,11 +6764,11 @@ enum {
  *          OS X 10.1 and later.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -6476,11 +6884,11 @@ enum {
  *          OS X 10.1 and later.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -6534,10 +6942,13 @@ enum {
  *  Discussion:
  *    This event is sent to all handlers registered for it. 
  *    
- *    The standard window handler responds to this event by calling
- *    SetKeyboardFocus to focus on the first control in the window. An
- *    application handler may choose to set the focus to custom
- *    application content instead.
+ *    The basic window handler responds to this event by forwarding the
+ *    event to the focused control in the specified window. This allows
+ *    the focused control to invalidate or redraw itself as necessary;
+ *    for example, the standard edit-text control responds to this
+ *    event by enabling its blinking insertion point. An application
+ *    handler may choose to set the focus to custom application content
+ *    instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -6564,11 +6975,14 @@ enum {
  *  Discussion:
  *    This event is sent to all handlers registered for it. 
  *    
- *    The basic window handler responds to this event by clearing the
- *    the current keyboard focus, if the window’s activation scope is
- *    kWindowActivationScopeIndependent. An application handler should
- *    remove the focus from custom application content and ensure that
- *    the content is redrawn without the focus highlight.
+ *    The basic window handler responds to this event by forwarding the
+ *    event to the focused control in the specified window. This allows
+ *    the focused control to invalidate or redraw itself as necessary;
+ *    for example, the standard edit-text control responds to this
+ *    event by disabling its blinking insertion point. An application
+ *    handler should remove the focus from custom application content
+ *    and ensure that the content is redrawn without the focus
+ *    highlight.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -6647,6 +7061,160 @@ enum {
 };
 
 /*
+ *  kEventClassWindow / kEventWindowFocusDrawer
+ *  
+ *  Summary:
+ *    A request to set the focus to the drawer of a window.
+ *  
+ *  Discussion:
+ *    If your window’s drawer is not already focused, you should set
+ *    the focus to the first item in the drawer. If your window’s
+ *    drawer is already focused, you should move the focus to the next
+ *    or previous drawer, if any, depending on whether the modifiers
+ *    parameter contains the shift key modifier. The basic window
+ *    handler responds to this event by calling SetUserFocusWindow on,
+ *    and sending a kEventWindowFocusContent event to, the appropriate
+ *    drawer, if the focus is not already contained within the drawer.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamDirectObject (in, typeWindowRef)
+ *          The window whose drawer should be focused.
+ *    
+ *    --> kEventParamKeyModifiers (in, typeUInt32)
+ *          The keyboard modifiers that were pressed when the user
+ *          requested a focus switch.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventWindowFocusDrawer       = 204
+};
+
+/*
+ *  kEventClassWindow / kEventWindowSheetOpening
+ *  
+ *  Summary:
+ *    Notification that a sheet is opening.
+ *  
+ *  Discussion:
+ *    This event is sent to all handlers registered for it. This event
+ *    is sent to the sheet, its parent window, and the application
+ *    target before the sheet begins opening.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamDirectObject (in, typeWindowRef)
+ *          The sheet that is opening.
+ *  
+ *  Result:
+ *    An event handler for this event may return userCanceledErr if the
+ *    sheet should not open. Any other return value is ignored and will
+ *    still allow the sheet to open.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventWindowSheetOpening      = 210
+};
+
+/*
+ *  kEventClassWindow / kEventWindowSheetOpened
+ *  
+ *  Summary:
+ *    Notification that a sheet is open.
+ *  
+ *  Discussion:
+ *    This event is sent to all handlers registered for it. This event
+ *    is sent to the sheet, its parent window, and the application
+ *    target after the sheet is fully open.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamDirectObject (in, typeWindowRef)
+ *          The sheet that opened.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventWindowSheetOpened       = 211
+};
+
+/*
+ *  kEventClassWindow / kEventWindowSheetClosing
+ *  
+ *  Summary:
+ *    Notification that a sheet is closing.
+ *  
+ *  Discussion:
+ *    This event is sent to all handlers registered for it. This event
+ *    is sent to the sheet, its parent window, and the application
+ *    target before the sheet begins closing.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamDirectObject (in, typeWindowRef)
+ *          The sheet that is opening.
+ *  
+ *  Result:
+ *    An event handler for this event may return userCanceledErr if the
+ *    sheet should not close. Any other return value is ignored and
+ *    will still allow the sheet to close.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventWindowSheetClosing      = 212
+};
+
+/*
+ *  kEventClassWindow / kEventWindowSheetClosed
+ *  
+ *  Summary:
+ *    Notification that a sheet is closed.
+ *  
+ *  Discussion:
+ *    This event is sent to all handlers registered for it. This event
+ *    is sent to the sheet, its parent window, and the application
+ *    target after the sheet is fully closed.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamDirectObject (in, typeWindowRef)
+ *          The sheet that closed.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventWindowSheetClosed       = 213
+};
+
+/*
  *  kEventClassWindow / kEventWindowDrawerOpening
  *  
  *  Summary:
@@ -6654,8 +7222,8 @@ enum {
  *  
  *  Discussion:
  *    This event is sent to all handlers registered for it. This event
- *    is sent to the drawer and its parent window when the drawer
- *    begins opening.
+ *    is sent to the drawer, its parent window, and the application
+ *    target before the drawer begins opening.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -6686,8 +7254,8 @@ enum {
  *  
  *  Discussion:
  *    This event is sent to all handlers registered for it. This event
- *    is sent to the drawer and its parent window when the drawer is
- *    fully open.
+ *    is sent to the drawer, its parent window, and the application
+ *    target after the drawer is fully open.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -6713,8 +7281,8 @@ enum {
  *  
  *  Discussion:
  *    This event is sent to all handlers registered for it. This event
- *    is sent to the drawer and its parent window when the drawer
- *    begins closing.
+ *    is sent to the drawer, its parent window, and the application
+ *    target before the drawer begins closing.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -6745,8 +7313,8 @@ enum {
  *  
  *  Discussion:
  *    This event is sent to all handlers registered for it. This event
- *    is sent to the drawer and its parent window when the drawer is
- *    fully closed.
+ *    is sent to the drawer, its parent window, and the application
+ *    target after the drawer is fully closed.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -7197,9 +7765,74 @@ enum {
   kEventWindowPaint             = 1013
 };
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*
+ *  kEventClassWindow / kEventWindowAttributesChanged
+ *  
+ *  Summary:
+ *    Sent by the Window Manager when a window’s attributes have
+ *    changed.
+ *  
+ *  Discussion:
+ *    This event is only sent to windows that use an HIView-based
+ *    window frame. It is not sent to windows that use a WDEF-based
+ *    window frame. At the time that the event is sent, the window's
+ *    attributes have already been changed, so an event hander for this
+ *    event can simply call GetWindowAttributes to get the new
+ *    attributes. This event is sent to all handlers registered for it
+ *    on the window event target. It does not propagate past the window.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamDirectObject (in, typeWindowRef)
+ *          The window whose attributes have changed.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventWindowAttributesChanged = 1019
+};
+
+/*
+ *  kEventClassWindow / kEventWindowTitleChanged
+ *  
+ *  Summary:
+ *    Sent by the Window Manager when a window’s title changes.
+ *  
+ *  Discussion:
+ *    In Mac OS X 10.2 through 10.4, this event is only sent to windows
+ *    that use an HIView to draw their window frames. Windows that use
+ *    a WDEF to draw their frames do not receive this event on those
+ *    versions of Mac OS X. In Mac OS X 10.5 and later, this event is
+ *    always sent when a window’s title changes, regardless of whether
+ *    the window uses an HIView or WDEF to draw its frame. This event
+ *    is sent to all handlers registered for it on the window event
+ *    target. It does not propagate past the window.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamDirectObject (in, typeWindowRef)
+ *          The window whose title was changed.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventWindowTitleChanged      = 1020
+};
+
+
+/*--------------------------------------------------------------------------------------*/
 /*  Menu Events                                                                         */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*
     kEventClassMenu quick reference:
     
@@ -7595,7 +8228,15 @@ enum {
  *    command key matching, the Menu Manager only sends this event if
  *    the menu itself has a handler; if a handler for this event is
  *    installed on any other event target, it will not receive the
- *    event. <BR><BR> This event is sent after kEventMenuEnableItems.
+ *    event.
+ *    
+ *    In CarbonLib and Mac OS X through version 10.3, the Menu Manager
+ *    sends a kEventMenuEnableItems event to the menu before sending
+ *    kEventMenuMatchKey. In Mac OS X 10.4 and later, the Menu Manager
+ *    no longer sends kEventMenuEnableItems (or the resulting
+ *    kEventCommandUpdateStatus events) to the menu; a handler for
+ *    kEventMenuMatchKey is expected to determine on its own whether a
+ *    matching menu item is enabled.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -7682,12 +8323,17 @@ enum {
  *    called without your ever receiving the keyboard event or calling
  *    MenuKey/MenuEvent/IsMenuKeyEvent yourself. Therefore, you have no
  *    opportunity to enable your menu items properly other than from a
- *    kEventMenuEnableItems or kEventCommandUpdateStatus handler. 
- *     It is not necessary to handle this event if you do not install
+ *    kEventMenuEnableItems or kEventCommandUpdateStatus handler.
+ *    
+ *    
+ *    It is not necessary to handle this event if you do not install
  *    kEventCommandProcess handlers for your menu items; in that case,
  *    the command key event will be returned from WaitNextEvent or
  *    ReceiveNextEvent as normal, and you can set up your menus before
- *    calling MenuKey/MenuEvent/ IsMenuKeyEvent.
+ *    calling MenuKey/MenuEvent/ IsMenuKeyEvent. 
+ *    
+ *    This event is sent first to the target menu, and then to the user
+ *    focus target.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -7791,7 +8437,7 @@ enum {
  *  kEventClassMenu / kEventMenuDispose
  *  
  *  Summary:
- *    Sent when a menu is being destroyed.
+ *    Sent when a menu definition should disconnect itself from a menu.
  *  
  *  Discussion:
  *    This event is sent to all handlers registered for it.
@@ -7936,14 +8582,20 @@ enum {
  *          The type of menu item.
  *    
  *    --> kEventParamCGContextRef (in, typeCGContextRef)
- *          The CG context in which the menu should be drawn.
+ *          The CG context in which the menu item should be drawn. Note
+ *          that this context has Cartesian coordinates, with (0,0) at
+ *          the bottom left, while the item bounds passed in the event
+ *          has QuickDraw coordinates, with (0,0) at the top left. To
+ *          align the context coordinates with the item bounds, use the
+ *          height of the current port to flip the context with
+ *          CGContextTranslateCTM( context, 0, height ) and
+ *          CGContextScaleCTM( context, 1, -1 ).
  *    
  *    <-- kEventParamMenuMarkBounds (out, typeQDRectangle)
  *          On exit, contains the bounds of the menu item mark
- *          character. Not present if the >                       item
- *          has no mark. Added to the event by the standard menu
- *          definition’s handler, if the event is allowed to pass
- *          through.
+ *          character. Not present if the item has no mark. Added to
+ *          the event by the standard menu definition’s handler, if the
+ *          event is allowed to pass through.
  *    
  *    <-- kEventParamMenuIconBounds (out, typeQDRectangle)
  *          On exit, contains the bounds of the menu item icon. Not
@@ -8028,7 +8680,14 @@ enum {
  *          black&white or color mode.
  *    
  *    --> kEventParamCGContextRef (in, typeCGContextRef)
- *          The CG context in which the menu should be drawn.
+ *          The CG context in which the menu item should be drawn. Note
+ *          that this context has Cartesian coordinates, with (0,0) at
+ *          the bottom left, while the item bounds passed in the event
+ *          has QuickDraw coordinates, with (0,0) at the top left. To
+ *          align the context coordinates with the item bounds, use the
+ *          height of the current port to flip the context with
+ *          CGContextTranslateCTM( context, 0, height ) and
+ *          CGContextScaleCTM( context, 1, -1 ).
  *    
  *    <-- kEventParamMenuMarkBounds (out, typeQDRectangle)
  *          On exit, contains the bounds of the menu item mark
@@ -8380,9 +9039,9 @@ enum {
   kEventMenuBarHidden           = 2001
 };
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*  Command Events                                                                      */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*
     kEventClassCommand quick reference:
     
@@ -8614,54 +9273,53 @@ enum {
   kHICommandPreferences         = 'pref',
 
   /*
-   * The active window should be zoomed in or out. The Window Manager
-   * will respond to this event automatically; your application does
-   * not need to handle it, but you may want to install a Carbon event
-   * handler for kEventWindowGetIdealSize to return the ideal size for
-   * your document windows.
+   * The active window should be zoomed in or out. The default
+   * application handler will respond to this event automatically; your
+   * application does not need to handle it, but you may want to
+   * install a Carbon event handler for kEventWindowGetIdealSize to
+   * return the ideal size for your document windows.
    */
   kHICommandZoomWindow          = 'zoom',
 
   /*
-   * The active window should be minimized. The Window Manager will
-   * respond to this event automatically; your application does not
-   * need to handle it.
+   * The active window should be minimized. The default application
+   * handler will respond to this event automatically; your application
+   * does not need to handle it.
    */
   kHICommandMinimizeWindow      = 'mini',
 
   /*
-   * All collapsable windows should be minimized. The Window Manager
-   * will respond to this event automatically; your application does
-   * not need to handle it.
+   * All collapsable windows should be minimized. The default
+   * application handler will respond to this event automatically; your
+   * application does not need to handle it.
    */
   kHICommandMinimizeAll         = 'mina',
 
   /*
    * The active window should be maximized. Only sent on Mac OS 9. The
-   * Window Manager will respond to this event automatically; your
-   * application does not need to handle it.
+   * default application handler will respond to this event
+   * automatically; your application does not need to handle it.
    */
   kHICommandMaximizeWindow      = 'maxi',
 
   /*
-   * All collapsable windows should be maximized. The Window Manager
-   * will respond to this event automatically; your application does
-   * not need to handle it.
+   * All collapsable windows should be maximized. This command is not
+   * sent or handled on Mac OS X.
    */
   kHICommandMaximizeAll         = 'maxa',
 
   /*
    * All document-class windows should be arranged in a stack. The
-   * Window Manager will respond to this event automatically; your
-   * application does not need to handle it.
+   * default application handler will respond to this event
+   * automatically; your application does not need to handle it.
    */
   kHICommandArrangeInFront      = 'frnt',
 
   /*
    * All windows of this application should be brought in front of
-   * windows from other applications. Only sent on Mac OS X. The Window
-   * Manager will respond to this event automatically; your application
-   * does not need to handle it.
+   * windows from other applications. Only sent on Mac OS X. The
+   * default application handler will respond to this event
+   * automatically; your application does not need to handle it.
    */
   kHICommandBringAllToFront     = 'bfrt',
 
@@ -8692,50 +9350,54 @@ enum {
    * toolbox whenever it needs to activate a window in your
    * application; for example, it is used when a window is selected
    * from the application's Dock menu, and when a window that uses the
-   * standard window event handler is clicked. The Window Manager will
-   * respond to this event automatically; your application does not
-   * need to handle it.
+   * standard window event handler is clicked. The default application
+   * handler will respond to this event automatically; your application
+   * does not need to handle it.
    */
   kHICommandSelectWindow        = 'swin',
 
   /*
    * The Rotate Windows hotkey (cmd-~ by default) has been pressed, and
    * non-floating windows should be rotated so that the window after
-   * the active window is activated. The Window Manager will respond to
-   * this event automatically; your application does not need to handle
-   * it.
+   * the active window is activated. The default application handler
+   * will respond to this event automatically; your application does
+   * not need to handle it.
    */
   kHICommandRotateWindowsForward = 'rotw',
 
   /*
    * The Rotate Windows hotkey (cmd-~ by default) has been pressed, and
    * non-floating windows should be rotated so that the window before
-   * the active window is activated. The Window Manager will respond to
-   * this event automatically; your application does not need to handle
-   * it.
+   * the active window is activated. The default application handler
+   * will respond to this event automatically; your application does
+   * not need to handle it.
    */
   kHICommandRotateWindowsBackward = 'rotb',
 
   /*
    * The floating window focus hotkey (ctl-F6 by default) has been
    * pressed, and floating windows should be rotated so that the window
-   * after the focused window is activated. The Window Manager will
-   * respond to this event automatically; your application does not
-   * need to handle it.
+   * after the focused window is activated. The default application
+   * handler will respond to this event automatically; your application
+   * does not need to handle it.
    */
   kHICommandRotateFloatingWindowsForward = 'rtfw',
 
   /*
    * The floating window focus hotkey (ctl-F6 by default) has been
    * pressed, and floating windows should be rotated so that the window
-   * before the focused window is activated. The Window Manager will
-   * respond to this event automatically; your application does not
-   * need to handle it.
+   * before the focused window is activated. The default application
+   * handler will respond to this event automatically; your application
+   * does not need to handle it.
    */
   kHICommandRotateFloatingWindowsBackward = 'rtfb',
 
   /*
-   * The About menu item has been selected.
+   * The About menu item has been selected. In Mac OS X 10.3 and later,
+   * RunApplicationEventLoop installs a handler for this command ID on
+   * the application target, and will handle this event automatically
+   * by calling HIAboutBox. Your application may install its own
+   * handler if it wishes to display a customized about box.
    */
   kHICommandAbout               = 'abou',
 
@@ -8750,7 +9412,11 @@ enum {
   kHICommandOpen                = 'open',
 
   /*
-   * The active window should be closed.
+   * The active window should be closed. This command would typically
+   * be generated by a Close menu item. On Mac OS X 10.3 and later, the
+   * default application handler responds to this command by sending a
+   * kEventWindowClose event; on earlier systems, only the standard
+   * window event handler responded to this event.
    */
   kHICommandClose               = 'clos',
 
@@ -8784,8 +9450,9 @@ enum {
   /*
    * The application’s help book should be displayed. Used by the Help
    * Manager when it adds the "<AppName> Help" menu item to the Help
-   * menu. The Help Manager will respond to this event automatically;
-   * your application does not need to handle it.
+   * menu. The Help Manager installs a handler for this command ID on
+   * the Help menu returned by HMGetHelpMenu, and will respond to this
+   * event automatically; your application does not need to handle it.
    */
   kHICommandAppHelp             = 'ahlp',
 
@@ -8795,7 +9462,48 @@ enum {
    * respond to this event automatically; your application does not
    * need to handle it.
    */
-  kHICommandShowCharacterPalette = 'chrp'
+  kHICommandShowCharacterPalette = 'chrp',
+
+  /*
+   * Display the spelling panel if it is not already visible. Events
+   * with this command ID are only generated in Mac OS X 10.4 and
+   * later.  If spell checking has been enabled in MLTE or an
+   * HITextView then this command is handled automatically.
+   */
+  kHICommandShowSpellingPanel   = 'shsp',
+
+  /*
+   * Spell check the document now.  Events with this command ID are
+   * only generated in Mac OS X 10.4 and later.  If spell checking has
+   * been enabled in MLTE or an HITextView then this command is handled
+   * automatically.
+   */
+  kHICommandCheckSpelling       = 'cksp',
+  kHICommandChangeSpelling      = 'chsp',
+
+  /*
+   * Begin interactive spell checking. Events with this command ID are
+   * only generated in Mac OS X 10.4 and later.  If spell checking has
+   * been enabled in MLTE or an HITextView then this command is handled
+   * automatically.
+   */
+  kHICommandCheckSpellingAsYouType = 'aspc',
+
+  /*
+   * Ignore this word while spell checking this text view. Events with
+   * this command ID are only generated in Mac OS X 10.4 and later.  If
+   * spell checking has been enabled in MLTE or an HITextView then this
+   * command is handled automatically.
+   */
+  kHICommandIgnoreSpelling      = 'igsp',
+
+  /*
+   * Learn this spelling for all documents.  Events with this command
+   * ID are only generated in Mac OS X 10.4 and later.  If spell
+   * checking has been enabled in MLTE or an HITextView then this
+   * command is handled automatically.
+   */
+  kHICommandLearnWord           = 'lrwd'
 };
 
 
@@ -8853,9 +9561,10 @@ struct HICommandExtended {
   }                       source;
 };
 typedef struct HICommandExtended        HICommandExtended;
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*  Control Events                                                                      */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
+
 /*
     kEventClassControl quick reference:
   
@@ -8889,8 +9598,8 @@ typedef struct HICommandExtended        HICommandExtended;
     kEventControlDragLeave                      = 20,
     kEventControlDragReceive                    = 21,
     kEventControlInvalidateForSizeChange        = 22,
-%   kEventControlTrackingAreaEntered            = 23,   // in private header
-%   kEventControlTrackingAreaExited             = 24,   // in private header
+    kEventControlTrackingAreaEntered            = 23,   // in HIView.h
+    kEventControlTrackingAreaExited             = 24,   // in HIView.h
 
     // tracking
     kEventControlTrack                          = 51,
@@ -8909,7 +9618,6 @@ typedef struct HICommandExtended        HICommandExtended;
     kEventControlGetFrameMetrics                = 106,
     
     // notification
-    %% NOTE: some values in this range may already be taken. Look for kEventControl in ControlsPriv.i
     kEventControlValueFieldChanged              = 151,
     kEventControlAddedSubControl                = 152,
     kEventControlRemovingSubControl             = 153,
@@ -8973,11 +9681,11 @@ typedef struct HICommandExtended        HICommandExtended;
  *          top left of the structure of the window.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -9162,6 +9870,17 @@ enum {
  *    Sent when your control should simulate a click in response to
  *    some other action, such as a return key for a default button.
  *  
+ *  Discussion:
+ *    Note that this event is solely meant to provide visual feedback
+ *    that a control was clicked. For example, the push button control
+ *    hilites itself briefly in response to this event. This event does
+ *    not cause other events (such as kEventControlHit or
+ *    kEventCommandProcess) to be sent. To fully simulate the results
+ *    of clicking on a control, you can use the HIViewSimulateClick
+ *    API, which sends a kEventControlSimulateHit event and also sends
+ *    the kEventControlHit and kEventCommandProcess events that would
+ *    normally result from a click on a control.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
@@ -9252,6 +9971,14 @@ enum {
  *          A region describing the area that needs to be redrawn; you
  *          may constrain your drawing to this region. This parameter
  *          is only provided on Mac OS X 10.2 and later, and only in
+ *          certain situations in compositing mode (when the view is
+ *          visible, etc). Draw the entire control if the parameter is
+ *          not present.
+ *    
+ *    --> kEventParamShape (in, typeHIShapeRef)
+ *          An HIShapeRef describing the area that needs to be redrawn;
+ *          you may constrain your drawing to this area. This parameter
+ *          is only provided on Mac OS X 10.4 and later, and only in
  *          certain situations in compositing mode (when the view is
  *          visible, etc). Draw the entire control if the parameter is
  *          not present.
@@ -9490,9 +10217,6 @@ enum {
  *  Parameters:
  *    
  *    --> kEventParamDirectObject (in, typeControlRef)
- *          The control containing the mouse.
- *    
- *    --> kEventParamEventRef (in, typeEventRef)
  *          The mouse-down event to intercept.
  *  
  *  Result:
@@ -9512,9 +10236,9 @@ enum {
  *  kEventClassControl / kEventControlGetClickActivation
  *  
  *  Summary:
- *    Sent when a click occurs in a inactive window. Allows the control
- *    to determine whether the window should be activated and whether
- *    the click should be handled.
+ *    Sent when a click occurs in a window. Allows the control to
+ *    determine whether the window should be activated and whether the
+ *    click should be handled.
  *  
  *  Discussion:
  *    This is very much like the window class version of this event.
@@ -9555,11 +10279,11 @@ enum {
  *          top left of the structure of the window.
  *    
  *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
- *          The part code the mouse location hit in the window. This
- *          parameter only exists if the windowRef parameter exists.
- *          This saves you the trouble of calling FindWindow, which is
- *          expensive on Mac OS X as it needs to call the Window
- *          Server. Available in Mac OS X 10.3 and later.
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
  *    
  *    --> kEventParamKeyModifiers (in, typeUInt32)
  *          The keyboard modifiers that were pressed when the event was
@@ -9906,7 +10630,59 @@ enum {
  *    --> kEventParamMouseLocation (in, typeQDPoint)
  *          The mouse location, in view-local coordinates if the
  *          control’s owning window is composited, or port-local
- *          coordinates if not.
+ *          coordinates if not. In Mac OS X 10.2 and earlier, however,
+ *          this parameter was incorrectly in global coordinates.
+ *    
+ *    --> kEventParamWindowRef (in, typeWindowRef)
+ *          The window under the mouse. Available in Mac OS X 10.3 and
+ *          later.
+ *    
+ *    --> kEventParamWindowMouseLocation (in, typeHIPoint)
+ *          The window-relative position of the mouse in the window
+ *          given in the kEventParamWindowRef parameter. 0,0 is at the
+ *          top left of the structure of the window. Available in Mac
+ *          OS X 10.3 and later.
+ *    
+ *    --> kEventParamWindowPartCode (in, typeWindowPartCode)
+ *          The part code that the mouse location hit in the window.
+ *          This parameter only exists if the WindowRef parameter
+ *          exists. This saves you the trouble of calling FindWindow,
+ *          which is expensive on Mac OS X as it needs to call the
+ *          Window Server. Available in Mac OS X 10.3 and later.
+ *    
+ *    --> kEventParamKeyModifiers (in, typeUInt32)
+ *          The keyboard modifiers that were pressed when the event was
+ *          generated. Available in Mac OS X 10.3 and later.
+ *    
+ *    --> kEventParamMouseButton (in, typeMouseButton)
+ *          Which mouse button was pressed. Available in Mac OS X 10.3
+ *          and later.
+ *    
+ *    --> kEventParamClickCount (in, typeUInt32)
+ *          Whether this is a single click, double click, etc.
+ *          Available in Mac OS X 10.3 and later.
+ *    
+ *    --> kEventParamMouseChord (in, typeUInt32)
+ *          Which other mouse buttons were pressed when the event was
+ *          generated. Available in Mac OS X 10.3 and later.
+ *    
+ *    --> kEventParamTabletEventType (in, typeUInt32)
+ *          The type of tablet event which generated this mouse event;
+ *          contains either kEventTabletPoint or kEventTabletProximity.
+ *          Only present if the event was generated from a tablet.
+ *          Available in Mac OS X 10.3 and later.
+ *    
+ *    --> kEventParamTabletPointRec (in, typeTabletPointRec)
+ *          Further information about the tablet event which generated
+ *          this mouse event. Present if the the
+ *          kEventParamTabletEventType parameter contains
+ *          kEventTabletPoint. Available in Mac OS X 10.3 and later.
+ *    
+ *    --> kEventParamTabletProximityRec (in, typeTabletProximityRec)
+ *          Further information about the tablet event which generated
+ *          this mouse event. Present if the the
+ *          kEventParamTabletEventType parameter contains
+ *          kEventTabletProximity. Available in Mac OS X 10.3 and later.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -10145,8 +10921,44 @@ enum {
  *  kEventClassControl / kEventControlGetPartRegion
  *  
  *  Summary:
- *    Sent by the GetControlRegion API when a client wants to get a
- *    particular region of your control.
+ *    Sent by the GetControlRegion, HIViewCopyPartShape, and similar
+ *    APIs when a client wants to get a particular region or shape of
+ *    your control.
+ *  
+ *  Discussion:
+ *    This event is sent to your handler in order to fetch both regions
+ *    and shapes from your view. Shapes will only be requested on Mac
+ *    OS X 10.4 and later. There are two strategies for handling this
+ *    event: the non-shape savvy way and the shape savvy way. The shape
+ *    savvy way avoids costly conversions between regions and shapes
+ *    which can slow your view's performance. 
+ *    
+ *    Non-shape savvy way: Get the region out of the
+ *    kEventParamControlRegion parameter and modify it appropriately to
+ *    reflect the desired part. Before the advent of shapes, this was
+ *    the only method for handling this event. If you always handle the
+ *    event this way on Mac OS X 10.4 and later, you may force the
+ *    Control Manager to convert the region to a shape, which adversely
+ *    affects performance. 
+ *    
+ *    Shape savvy way: Get the value of the
+ *    kEventParamControlPrefersShape parameter. If the parameter
+ *    doesn't exist or if its value is false, handle this event in the
+ *    non-shape savvy way as described above. If the parameter exists
+ *    and has a value of true, allocate an immutable shape that
+ *    represents the given part of your view and use SetEventParameter
+ *    to add the shape to the event in the kEventParamShape parameter.
+ *    You may now release the shape, since it was retained by
+ *    SetEventParameter. If for some reason you are unwilling or unable
+ *    to provide a shape for the given part, you may still fall back to
+ *    the non-shape savvy method. 
+ *    
+ *    NOTE: If your handler attempts to pre- or post-process some other
+ *    handler's processing of this event by calling
+ *    CallNextEventHandler, you MUST NOT rely on the value of the
+ *    kEventParamControlPrefersShape parameter being preserved across
+ *    the call to CallNextEventHandler. This event may dynamically
+ *    modify itself depending on how any given handler acts upon it.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -10154,15 +10966,47 @@ enum {
  *  Parameters:
  *    
  *    --> kEventParamDirectObject (in, typeControlRef)
- *          The control whose region to return.
+ *          The control whose region/shape to return.
  *    
  *    --> kEventParamControlPart (in, typeControlPartCode)
- *          The control part code whose region to return.
+ *          The control part code whose region/shape to return.
+ *    
+ *    --> kEventParamControlPrefersShape (in, typeBoolean)
+ *          A Boolean indicating whether your view may respond to this
+ *          event by adding a kEventParamShape parameter to it instead
+ *          of modifying the region in the kEventParamControlRegion
+ *          parameter. If the parameter is false, you must respond to
+ *          the event by modifying the region in the
+ *          kEventParamControlRegion parameter; you may not add a
+ *          kEventParamShape parameter. If the parameter is true, you
+ *          may — but are not required to — respond to the event by
+ *          adding the kEventParamShape parameter; if you choose not
+ *          to, you must respond to the event by modifying the region
+ *          in the kEventParamControlRegion parameter. This parameter
+ *          will only be present on Mac OS X 10.4 and later. In fact,
+ *          even on Mac OS X 10.4 it is an optional parameter and will
+ *          not always be present. If this parameter is not present,
+ *          you should act as though its value were false.
  *    
  *    --> kEventParamControlRegion (in, typeQDRgnHandle)
- *          A pre-allocated RgnHandle. Your handler should get the
- *          RgnHandle from the event and set the region contents
- *          appropriately.
+ *          A pre-allocated RgnHandle. Unless your handler is allowed
+ *          to and chooses to add a kEventParamShape parameter (see the
+ *          discussion of kEventParamControlPrefersShape above), your
+ *          handler should get the RgnHandle from the event and set the
+ *          region contents appropriately. If your handler adds a
+ *          kEventParamShape parameter to the event, it must neither
+ *          get nor modify this parameter.
+ *    
+ *    <-- kEventParamShape (out, typeHIShapeRef)
+ *          If your handler is allowed to and chooses to provide a
+ *          shape (see the discussion of kEventParamControlPrefersShape
+ *          above), your handler should create a new, immutable shape
+ *          and return it in this parameter. After you call
+ *          SetEventParameter, you may release the shape, as it will be
+ *          retained by SetEventParameter and released when the event
+ *          is destroyed. If your handler gets or modifies the
+ *          kEventParamControlRegion parameter, it must not set this
+ *          parameter.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -10434,7 +11278,7 @@ enum {
  *  Parameters:
  *    
  *    --> kEventParamDirectObject (in, typeControlRef)
- *          The control whose bounds have change.
+ *          The control whose bounds have changed.
  *    
  *    --> kEventParamAttributes (in, typeUInt32)
  *          Flags indicating how the bounds changed, including
@@ -10442,13 +11286,22 @@ enum {
  *          kControlBoundsChangePositionChanged.
  *    
  *    --> kEventParamOriginalBounds (in, typeQDRectangle)
- *          The control’s bounds before the change.
+ *          The control’s bounds before the change. This is the
+ *          control’s frame bounds; for a compositing view, this
+ *          bounding rect is in the parent view’s coordinate system,
+ *          and for a non-compositing view, it is in local GrafPort
+ *          coordinates.
  *    
  *    --> kEventParamPreviousBounds (in, typeQDRectangle)
- *          The control’s bounds before the change.
+ *          The control’s bounds before the change. This parameter
+ *          always has the same value as the kEventParamOriginalBounds
+ *          parameter.
  *    
  *    --> kEventParamCurrentBounds (in, typeQDRectangle)
- *          The control’s new bounds.
+ *          The control’s new bounds. This is the control’s frame
+ *          bounds; for a compositing view, this bounding rect is in
+ *          the parent view’s coordinate system, and for a
+ *          non-compositing view, it is in local GrafPort coordinates.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -10705,9 +11558,9 @@ enum {
   kControlBoundsChangePositionChanged = (1 << 3)
 };
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*  Tablet Events (and tablet data in mouse events)                                     */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*
     kEventClassTablet quick reference:
   
@@ -10788,14 +11641,16 @@ struct TabletProximityRec {
   UInt16              vendorPointerType;      /* vendor-defined pointer type */
   UInt32              pointerSerialNumber;    /* vendor-defined serial number of the specific pointing device */
   UInt64              uniqueID;               /* vendor-defined unique ID for this pointer */
-  UInt32              capabilityMask;         /* mask representing the capabilities of the device */
+  UInt32              capabilityMask;         /* mask representing the capabilities of the device. */
+                                              /* capability bits are defined in the tablet capability */
+                                              /* masks section of <IOKit/hidsystem/IOLLEvent.h> */
   UInt8               pointerType;            /* type of pointing device - enum to be defined */
   UInt8               enterProximity;         /* non-zero = entering; zero = leaving */
 };
 typedef struct TabletProximityRec       TabletProximityRec;
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /* Volume Events                                                                        */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*
     kEventClassVolume quick reference:
 
@@ -10860,9 +11715,9 @@ enum {
   kEventVolumeUnmounted         = 2
 };
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /* Appearance Events                                                                    */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*
     kEventClassAppearance quick reference:
 
@@ -10895,9 +11750,9 @@ enum {
   kEventAppearanceScrollBarVariantChanged = 1
 };
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*  Services Events                                                                     */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*
     kEventClassService quick reference:
     
@@ -11114,9 +11969,90 @@ extern CFStringRef
 CreateTypeStringWithOSType(OSType inType)                     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+
+/*
+ *  kHIServicesMenuProviderName
+ *  
+ *  Discussion:
+ *    A CFDictionaryRef key in a dictionary returned by
+ *    CopyServicesMenuCommandKeys. The value for this key is the name
+ *    of the service provider represented as a CFString.
+ */
+#define kHIServicesMenuProviderName     CFSTR("kHIServicesMenuProviderName")
+
+/*
+ *  kHIServicesMenuItemName
+ *  
+ *  Discussion:
+ *    A CFDictionaryRef key in a dictionary returned by
+ *    CopyServicesMenuCommandKeys. The value for this key is the name
+ *    of the menu item represented as a CFString.
+ */
+#define kHIServicesMenuItemName         CFSTR("kHIServicesMenuItemName")
+
+/*
+ *  kHIServicesMenuCharCode
+ *  
+ *  Discussion:
+ *    A CFDictionaryRef key in a dictionary returned by
+ *    CopyServicesMenuCommandKeys. The value for this key is the
+ *    character code of the menu item shortcut, represented as a
+ *    CFString.
+ */
+#define kHIServicesMenuCharCode         CFSTR("kHIServicesMenuCharCode")
+
+/*
+ *  kHIServicesMenuKeyModifiers
+ *  
+ *  Discussion:
+ *    A CFDictionaryRef key in a dictionary returned by
+ *    CopyServicesMenuCommandKeys. The value for this key is the
+ *    keyboard modifiers of the menu item shortcut in Menu Manager
+ *    modifiers format, represented as a CFNumber.
+ */
+#define kHIServicesMenuKeyModifiers     CFSTR("kHIServicesMenuKeyModifiers")
+/*
+ *  CopyServicesMenuCommandKeys()
+ *  
+ *  Summary:
+ *    Returns an array of CFDictionaryRefs containing information about
+ *    the command-key short cuts for items in the application services
+ *    menu.
+ *  
+ *  Discussion:
+ *    Each array entry is a CFDictionaryRef, and each dictionary
+ *    contains information about a single command key shortcut for
+ *    items in the application's Services menu. Each dictionary
+ *    contains the following keys: kHIServicesMenuProviderName,
+ *    kHIServicesMenuItemName, kHIServicesMenuCharCode, and
+ *    kHIServicesMenuKeyModifiers. The array must be released by the
+ *    caller; the dictionaries do not need to be released (they will be
+ *    auto-released when the array is released).
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    outCommandKeyArray:
+ *      On exit, contains an array of the values of the Services menu
+ *      items that have command key shortcuts associated with them.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+CopyServicesMenuCommandKeys(CFArrayRef * outCommandKeyArray)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*--------------------------------------------------------------------------------------*/
 /*  Accessibility Events                                                                */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*
     kEventClassAccessibility quick reference:
     
@@ -11502,8 +12438,12 @@ enum {
  *          The name of the requested action.
  *    
  *    <-> kEventParamAccessibleActionDescription (in/out, typeCFMutableStringRef)
- *          If you support the action, set the contents of this string
- *          to contain a description of the action.
+ *          If you support the action, extract this parameter from the
+ *          event and set the contents of the mutable string to contain
+ *          a description of the action. Do not set this event
+ *          parameter to a CFStringRef of your own creation; you must
+ *          modify the preexisting mutable string stored in the event
+ *          parameter.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in Carbon.framework
@@ -11521,7 +12461,11 @@ enum {
  *    object for a Carbon application. A Carbon accessible object is
  *    comprised of an HIObjectRef and a 64-bit identifier. The
  *    resulting AXUIElementRef is a CFTypeRef, and must be managed as
- *    such.
+ *    such. You can create a new AXUIElementRef every time you need
+ *    one. Even though the actual hex values of two AXUIElementRefs
+ *    might be different, they may represent the same accessible
+ *    object; because AXUIElementRefs are Core Foundation objects, you
+ *    can use CFEqual to compare them.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -11655,17 +12599,119 @@ AXNotificationHIObjectNotify(
   UInt64        inIdentifier)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*
+ *  HICopyAccessibilityRoleDescription()
+ *  
+ *  Summary:
+ *    Returns the role description string for a standard role or a
+ *    standard role-subrole pair.
+ *  
+ *  Discussion:
+ *    This routine is useful if you are implementing an accessible
+ *    object that has a standard role or role-subrole pair and you want
+ *    to make sure your object provides the same role description
+ *    string that the equivalent system-supplied object provides. In
+ *    other words, if you are implementing an accessible object of role
+ *    kAXButtonRole, you can use this routine to make sure it provides
+ *    the same role description that the standard push button provides.
+ *    
+ *    This routine can provide role description strings for all roles
+ *    and role-subrole pairs that are used in the standard/system
+ *    accessible objects on Mac OS X 10.4 and later. Once this routine
+ *    is able to provide a role description string for a role or
+ *    role-subrole pair, it will continue to do so on subsequent system
+ *    releases, even if the system no longer produces a standard
+ *    accessible object with that role or role-subrole pair.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inRole:
+ *      The role CFStringRef for your accessible object. Callers
+ *      typically pass one of the kAXFooRole constant strings from
+ *      within the HIServices framework.
+ *    
+ *    inSubrole:
+ *      The subrole CFStringRef for your accessible object. Callers
+ *      typically pass one of the kAXFooSubrole constant strings from
+ *      within the HIServices framework. Pass NULL if your accessible
+ *      object does not have a subrole.
+ *  
+ *  Result:
+ *    A CFStringRef with the standard role description for the role or
+ *    role-subrole pair. You must release the role description when you
+ *    are finished with it. If there is no standard role description
+ *    for the role or role-subrole pair, this routine will return NULL.
+ *    If you pass either an unknown role or an unknown subrole, this
+ *    routine will return NULL.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef 
+HICopyAccessibilityRoleDescription(
+  CFStringRef   inRole,
+  CFStringRef   inSubrole)       /* can be NULL */            AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  HICopyAccessibilityActionDescription()
+ *  
+ *  Summary:
+ *    Returns the action description string for a standard
+ *    accessibility action.
+ *  
+ *  Discussion:
+ *    This routine is useful if you are implementing an accessible
+ *    object that implements a standard action and you want to make
+ *    sure your object provides the same role action string that the a
+ *    system-supplied object provides. 
+ *    This routine can provide action description strings for all
+ *    actions that are used in the standard/system accessible objects
+ *    on Mac OS X 10.4 and later. Once this routine is able to provide
+ *    a description string for an action, it will continue to do so on
+ *    subsequent system releases, even if the system no longer produces
+ *    a standard accessible object that supports the action.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inAction:
+ *      The action CFStringRef for which you'd like to generate a
+ *      description. Callers must pass one of the kAXFooAction constant
+ *      strings from within the HIServices framework.
+ *  
+ *  Result:
+ *    A CFStringRef with the standard description for the action. You
+ *    must release the description when you are finished with it. If
+ *    you pass an unsupported action to this routine, the behavior is
+ *    undefined.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef 
+HICopyAccessibilityActionDescription(CFStringRef inAction)    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*--------------------------------------------------------------------------------------*/
 /*  System Events                                                                       */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
+
 /*
     kEventClassSystem quick reference:
 
     kEventSystemTimeDateChanged         = 2,
     kEventSystemUserSessionActivated    = 10,
     kEventSystemUserSessionDeactivated  = 11
-
-    %% Make sure to avoid overlap with the System Event IDs in CarbonEventsPriv.i!
 */
 /*
  *  kEventClassSystem / kEventSystemTimeDateChanged
@@ -11674,7 +12720,8 @@ AXNotificationHIObjectNotify(
  *    The system time and/or date has changed via the preferences panel.
  *  
  *  Discussion:
- *    This event is sent to all handlers registered for it.
+ *    This event is sent to all handlers registered for it on the
+ *    application event target.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -11694,10 +12741,10 @@ enum {
  *    The current user login session has been activated.
  *  
  *  Discussion:
- *    This event is sent to all handlers registered for it. It is sent
- *    when the Fast User Switching feature of Mac OS X 10.3 is used to
- *    activate the login session in which the current application is
- *    running.
+ *    This event is sent to all handlers registered for it on the
+ *    application event target. It is sent when the Fast User Switching
+ *    feature of Mac OS X 10.3 is used to activate the login session in
+ *    which the current application is running.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -11717,9 +12764,10 @@ enum {
  *    The current user login session has been deactivated.
  *  
  *  Discussion:
- *    This event is sent to all handlers registered for it. It is sent
- *    when the Fast User Switching feature of Mac OS X 10.3 is used to
- *    switch to another user's login session.
+ *    This event is sent to all handlers registered for it on the
+ *    application event target. It is sent when the Fast User Switching
+ *    feature of Mac OS X 10.3 is used to switch to another user's
+ *    login session.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -11732,9 +12780,9 @@ enum {
   kEventSystemUserSessionDeactivated = 11
 };
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*  Installing Event Handlers                                                           */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*
  *  GetWindowEventTarget()
  *  
@@ -11848,8 +12896,10 @@ GetApplicationEventTarget(void)                               AVAILABLE_MAC_OS_X
  *  Discussion:
  *    Returns the EventTargetRef for the current user focus at the time
  *    of the call. Keyboard events are always sent to this target.
- *    There is a default handler installed on this target that passes
- *    the event to the focused control in the focused window.
+ *    Events that are sent to this target are automatically propagated
+ *    to the following other targets: first to the focused control in
+ *    the focused window, then up the control hierarchy to the focused
+ *    window itself, and then to the application target. 
  *    
  *    Note that command key processing occurs before key events are
  *    sent to this target; to intercept key events before command key
@@ -11943,7 +12993,8 @@ GetEventDispatcherTarget(void)                                AVAILABLE_MAC_OS_X
  *    still install handlers for these events on the event monitor
  *    target, but no events of these types will be sent to your
  *    handler. Administrator privileges are required to enable this
- *    feature.
+ *    feature. You can determine whether this control is checked using
+ *    the AXAPIEnabled API in AXUIElement.h.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -11961,20 +13012,23 @@ GetEventMonitorTarget(void)                                   AVAILABLE_MAC_OS_X
 
 
 
-#define InstallApplicationEventHandler( h, n, l, u, r ) \
-     InstallEventHandler( GetApplicationEventTarget(), (h), (n), (l), (u), (r) )
+#define InstallApplicationEventHandler( handler, numTypes, list, userData, outHandlerRef ) \
+      InstallEventHandler( GetApplicationEventTarget(), (handler), (numTypes), (list), (userData), (outHandlerRef) )
 
-#define InstallHIObjectEventHandler( t, h, n, l, u, r ) \
-     InstallEventHandler( HIObjectGetEventTarget( t ), (h), (n), (l), (u), (r) )
+#define InstallHIObjectEventHandler( target, handler, numTypes, list, userData, outHandlerRef ) \
+      InstallEventHandler( HIObjectGetEventTarget( target ), (handler), (numTypes), (list), (userData), (outHandlerRef) )
 
-#define InstallWindowEventHandler( t, h, n, l, u, r ) \
-       InstallEventHandler( GetWindowEventTarget( t ), (h), (n), (l), (u), (r) )
+#define InstallWindowEventHandler( target, handler, numTypes, list, userData, outHandlerRef ) \
+       InstallEventHandler( GetWindowEventTarget( target ), (handler), (numTypes), (list), (userData), (outHandlerRef) )
 
-#define InstallControlEventHandler( t, h, n, l, u, r ) \
-        InstallEventHandler( GetControlEventTarget( t ), (h), (n), (l), (u), (r) )
+#define InstallControlEventHandler( target, handler, numTypes, list, userData, outHandlerRef ) \
+        InstallEventHandler( GetControlEventTarget( target ), (handler), (numTypes), (list), (userData), (outHandlerRef) )
 
-#define InstallMenuEventHandler( t, h, n, l, u, r ) \
-      InstallEventHandler( GetMenuEventTarget( t ), (h), (n), (l), (u), (r) )
+#define InstallMenuEventHandler( target, handler, numTypes, list, userData, outHandlerRef ) \
+      InstallEventHandler( GetMenuEventTarget( target ), (handler), (numTypes), (list), (userData), (outHandlerRef) )
+
+#define HIViewInstallEventHandler( target, handler, numTypes, list, userData, outHandlerRef ) \
+       InstallEventHandler( HIObjectGetEventTarget( (HIObjectRef) (target) ), (handler), (numTypes), (list), (userData), (outHandlerRef) )
 
 
 /*
@@ -12015,57 +13069,6 @@ EventHandlerUPP Get ## x ## UPP()             \
         SendEventToEventTarget( (e), GetUserFocusEventTarget() )
 
 /*======================================================================================*/
-/*  EVENT-BASED OBJECT CLASSES                                                          */
-/*                                                                                      */
-/*  Here it is - the replacement for classic defprocs. This is also a convenient way    */
-/*  to create toolbox objects (windows, etc.) that have a specific behavior without     */
-/*  installing handlers on each instance of the object. With a toolbox object class,    */
-/*  you register your class, then use special creation routines to create objects of    */
-/*  that class. The event handlers are automatically installed and ready to go.         */
-/*                                                                                      */
-/*  Note that on Mac OS X 10.2 and later, we recommend using the HIObject API           */
-/*  HIObjectRegisterSubclass rather than RegisterToolboxObjectClass. This API is        */
-/*  considered deprecated on Mac OS X 10.2 and later.                                   */
-/*======================================================================================*/
-typedef struct OpaqueToolboxObjectClassRef*  ToolboxObjectClassRef;
-/*
- *  RegisterToolboxObjectClass()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-RegisterToolboxObjectClass(
-  CFStringRef              inClassID,
-  ToolboxObjectClassRef    inBaseClass,              /* can be NULL */
-  UInt32                   inNumEvents,
-  const EventTypeSpec *    inEventList,
-  EventHandlerUPP          inEventHandler,
-  void *                   inEventHandlerData,
-  ToolboxObjectClassRef *  outClassRef)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  UnregisterToolboxObjectClass()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-UnregisterToolboxObjectClass(ToolboxObjectClassRef inClassRef) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*======================================================================================*/
 /*  • Command Routines                                                                  */
 /*======================================================================================*/
 /*
@@ -12101,9 +13104,9 @@ extern OSStatus
 ProcessHICommand(const HICommand * inCommand)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*  • Event Loop Routines                                                               */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 
 /*
  *  RunApplicationEventLoop()
@@ -12151,9 +13154,9 @@ extern void
 QuitApplicationEventLoop(void)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*  • Event Modality routines                                                           */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 
 /*
  *  RunAppModalLoopForWindow()
@@ -12163,12 +13166,14 @@ QuitApplicationEventLoop(void)                                AVAILABLE_MAC_OS_X
  *    Carbon Event-based modal dialog. Once called, this routine will
  *    not exit until QuitAppModalLoopForWindow is called. Calls to
  *    RunAppModalLoopForWindow can be nested, as long as each call is
- *    made on a different window. In Mac OS X 10.0.x,
- *    RunAppModalLoopForWindow will fail to re-enable the menubar
- *    before exiting if you dispose of the window during the modal loop
- *    (for example, from a Carbon event handler). You can work around
- *    this bug by retaining the window before calling
- *    RunAppModalLoopForWindow, and releasing it afterwards.
+ *    made on a different window. The window must be visible when
+ *    calling RunAppModalLoopForWindow; otherwise, windowWrongStateErr
+ *    is returned. In Mac OS X 10.0.x, RunAppModalLoopForWindow will
+ *    fail to re-enable the menubar before exiting if you dispose of
+ *    the window during the modal loop (for example, from a Carbon
+ *    event handler). You can work around this bug by retaining the
+ *    window before calling RunAppModalLoopForWindow, and releasing it
+ *    afterwards.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -12179,7 +13184,8 @@ QuitApplicationEventLoop(void)                                AVAILABLE_MAC_OS_X
  *      The window you wish to behave modally.
  *  
  *  Result:
- *    An operating system status code.
+ *    An operating system status code. windowWrongStateErr will be
+ *    returned if the window is invisible.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -12247,7 +13253,8 @@ QuitAppModalLoopForWindow(WindowRef inWindow)                 AVAILABLE_MAC_OS_X
  *      The window you wish to behave modally.
  *  
  *  Result:
- *    An operating system status code.
+ *    An operating system status code. windowWrongStateErr will be
+ *    returned if the window is invisible.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -12286,7 +13293,7 @@ EndAppModalStateForWindow(WindowRef inWindow)                 AVAILABLE_MAC_OS_X
 
 
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*  • User Focus                                                                        */
 /*                                                                                      */
 /* The 'user focus' is where keyboard input goes. We also use the term 'key' applied    */
@@ -12303,7 +13310,7 @@ EndAppModalStateForWindow(WindowRef inWindow)                 AVAILABLE_MAC_OS_X
 /* Keep in mind that setting the focus will only last until you restore focus, or the   */
 /* user starts clicking in other windows. When that happens, the toolbox will auto-     */
 /* redirect the user focus to a newly selected window.                                  */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /* pick the most appropriate window for focus*/
 #define kUserFocusAuto                  ((WindowRef)(-1))
 /*
@@ -12337,7 +13344,7 @@ GetUserFocusWindow(void)                                      AVAILABLE_MAC_OS_X
 
 
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*  • Default/Cancel buttons                                                            */
 /*                                                                                      */
 /* In our quest to eliminate the need for dialogs when using the new event model, we    */
@@ -12347,7 +13354,7 @@ GetUserFocusWindow(void)                                      AVAILABLE_MAC_OS_X
 /* present, the standard toolbox handlers will handle keyboard input mapping to these   */
 /* buttons. This means that pressing return or enter will 'press' the default button    */
 /* and escape or command-period will 'press' the cancel button.                         */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 
 /*
  *  SetWindowDefaultButton()
@@ -12418,9 +13425,9 @@ GetWindowCancelButton(
 
 
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 /*  • Global HotKey API                                                                 */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 struct EventHotKeyID {
   OSType              signature;
   UInt32              id;
@@ -12599,582 +13606,143 @@ CopySymbolicHotKeys(CFArrayRef * outHotKeyArray)              AVAILABLE_MAC_OS_X
 
 
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
-/*  • MouseTrackingRegions                                                              */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
-
 /*
- *  MouseTrackingRef
- *  
- *  Discussion:
- *    A MouseTrackingRef is an object that controls the generation of
- *    mouse-enter and mouse-exit events. When the user moves the mouse
- *    into a tracking region, a kEventClassMouse/kEventMouseEntered
- *    event is sent to the app. When the user moves the mouse out of a
- *    tracking region, an event of type
- *    kEventClassMouse/kEventMouseExited is sent. Mouse tracking
- *    regions are uniquely identified within the scope of a window by a
- *    MouseTrackingRegionID which is a client signature/id pair. The
- *    client signature is the usual DTS-registered creator OSType.
- *    Mouse tracking regions can overlap, but are not exclusive. Mouse
- *    motion events are generated for each of the tracking areas
- *    intersected by the mouse. Mouse tracking regions are initially
- *    enabled. You can explicitly disable a mouse tracking area to
- *    prevent mouse-enter/exit events from being generated. Unlike
- *    global mouse-moved events, mouse-enter and mouse-exit events are
- *    generated while your app is in the background. If this is not
- *    considered desirable, disable the tracking areas while the
- *    application is in the background. MouseTrackingRefs become
- *    invalid when the window that they are bound to is disposed of.
+ *  Summary:
+ *    Parameters to the PushSymbolicHotKeyMode SPI.
  */
-typedef struct OpaqueMouseTrackingRef*  MouseTrackingRef;
-
-
-/*
- *  MouseTrackingOptions
- *  
- *  Discussion:
- *    These values define how the user’s region is handled by the Mouse
- *    Tracking Region API. They define the behavior throughout the life
- *    of the Mouse Tracking Region. For example, if a region is created
- *    with the option of kMouseTrackingOptionsGlobalClip then all
- *    operations on this region will be interpreted in global
- *    coordinates and will be clipped to the owning window’s structure.
- */
-typedef UInt32 MouseTrackingOptions;
 enum {
 
   /*
-   * The region is expected in local coordinates and mouse movement
-   * tracking is clipped to the owning window’s content region.
+   * All hotkeys are enabled.
    */
-  kMouseTrackingOptionsLocalClip = 0,
+  kHIHotKeyModeAllEnabled       = 0,
 
   /*
-   * The region is expected in global coordinates and mouse movement
-   * tracking is clipped to the owning window’s structure region.
+   * All hotkeys are disabled.
    */
-  kMouseTrackingOptionsGlobalClip = 1,
+  kHIHotKeyModeAllDisabled      = (1 << 0),
 
   /*
-   * Standard options. The region will be handled in local coordinates
-   * and remain clipped against the windows content region.
+   * All hotkeys are disabled except for the Universal Access hotkeys
+   * (zooming, white-on-black, and enhanced contrast).
    */
-  kMouseTrackingOptionsStandard = kMouseTrackingOptionsLocalClip
+  kHIHotKeyModeAllDisabledExceptUniversalAccess = (1 << 1)
 };
-
-struct MouseTrackingRegionID {
-  OSType              signature;
-  SInt32              id;
-};
-typedef struct MouseTrackingRegionID    MouseTrackingRegionID;
-/* Creation*/
 
 /*
- *  CreateMouseTrackingRegion()
+ *  PushSymbolicHotKeyMode()
+ *  
+ *  Summary:
+ *    Sets a new mode for enabling or disabling symbolic hotkeys.
  *  
  *  Discussion:
- *    Creates a mouse tracking region and installs it into the window
- *    system.
+ *    The Event Manager keeps a stack of hotkey modes that have been
+ *    requested using the PushSymbolicHotKeyMode API. The most recently
+ *    pushed mode is the mode that is currently in use. 
+ *    
+ *    Because disabling hotkeys can significantly affect the usability
+ *    of Mac OS X, applications are only allowed to disable hotkeys if
+ *    the "Enable access for assistive devices" checkbox is checked in
+ *    the Universal Access preference pane. If this feature is not
+ *    enabled, PushSymbolicHotKeyMode will still push the mode request
+ *    onto the mode stack and return a valid token, but the actual
+ *    hotkey mode will not change. 
+ *    
+ *    If an application that pushes a new hotkey mode is frontmost,
+ *    then the new mode (if it disables any hotkeys) will only be
+ *    active while the application remains frontmost. If the
+ *    application is deactivated or exits without reenabling hotkeys,
+ *    the hotkey mode will automatically revert to the previous mode.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Parameters:
- *    
- *    inWindow:
- *      The window that will contain the created region.
- *    
- *    inRegion:
- *      The region for which you will receive entered/exit events.
- *    
- *    inClip:
- *      A region to clip inRegion against (can be NULL).
  *    
  *    inOptions:
- *      The options which define whether inRegion is given in global or
- *      local coordinates.
- *    
- *    inID:
- *      The signature/id pair which uniquely defines this region.
- *    
- *    inRefCon:
- *      Any user defined value.
- *    
- *    inTargetToNotify:
- *      The event target that should receive kEventMouseEntered/Exited
- *      events for this tracking region. If NULL, the window’s event
- *      target receives these events.
- *    
- *    outTrackingRef:
- *      A reference to the newly created mouse tracking region.
+ *      The symbolic hotkey mode that is requested.
  *  
  *  Result:
- *    An operating system status code.
+ *    A token that should be passed to PopSymbolicHotKeyMode to remove
+ *    this mode request from the stack.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus 
-CreateMouseTrackingRegion(
-  WindowRef               inWindow,
-  RgnHandle               inRegion,
-  RgnHandle               inClip,                 /* can be NULL */
-  MouseTrackingOptions    inOptions,
-  MouseTrackingRegionID   inID,
-  void *                  inRefCon,
-  EventTargetRef          inTargetToNotify,       /* can be NULL */
-  MouseTrackingRef *      outTrackingRef)                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
+extern void * 
+PushSymbolicHotKeyMode(OptionBits inOptions)                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 /*
- *  RetainMouseTrackingRegion()
+ *  PopSymbolicHotKeyMode()
+ *  
+ *  Summary:
+ *    Removes a hotkey mode request from the hotkey mode stack.
  *  
  *  Discussion:
- *    Retains the MouseTrackingRef.
+ *    This API removes a mode request from the mode stack. If this
+ *    request was the topmost request in the stack, the actual hotkey
+ *    mode will change to the next request in the stack; if there are
+ *    other mode requests on top of this one on the stack, the actual
+ *    mode will not change.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Parameters:
  *    
- *    inMouseRef:
- *      A valid MouseTrackingRef to retain.
- *  
- *  Result:
- *    An operating system status code.
+ *    inToken:
+ *      A hotkey mode token that was returned by PushSymbolicHotKeyMode.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus 
-RetainMouseTrackingRegion(MouseTrackingRef inMouseRef)        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
+extern void 
+PopSymbolicHotKeyMode(void * inToken)                         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 /*
- *  ReleaseMouseTrackingRegion()
+ *  GetSymbolicHotKeyMode()
  *  
- *  Discussion:
- *    Releases the MouseTrackingRef. Since mouse tracking regions are
- *    bound to a window, they are automatically released when the
- *    window is disposed of.
+ *  Summary:
+ *    Returns the current hotkey mode in use.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
- *  Parameters:
- *    
- *    inMouseRef:
- *      A valid MouseTrackingRef to release.
- *  
  *  Result:
- *    An operating system status code.
+ *    The mode request at the top of the hotkey mode stack. If there
+ *    are no requests on the stack, it returns zero, indicating that
+ *    hotkeys are currently enabled. 
+ *    
+ *    Note that even if hotkeys are enabled in the current process,
+ *    hotkeys can still be disabled for the current user session if
+ *    they are disabled by some other process. 
+ *    
+ *    Note that if "Enable access for assistive devices" is not checked
+ *    in the Universal Access preference pane, then even if this API
+ *    returns a non-zero value, the actual hotkey mode will still be
+ *    that all hotkeys are enabled.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus 
-ReleaseMouseTrackingRegion(MouseTrackingRef inMouseRef)       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-
-
-/*
- *  ChangeMouseTrackingRegion()
- *  
- *  Discussion:
- *    Changes the MouseTrackingRefs region and optionally, its clip.
- *    This will not change the enabled state or options of the region.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    inMouseRef:
- *      A valid MouseTrackingRef to modify.
- *    
- *    inRegion:
- *      The region to set as the mouse tracking region.
- *    
- *    inClip:
- *      An optional clip to clip inRegion against (may be NULL).
- *  
- *  Result:
- *    An operating system status code.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-ChangeMouseTrackingRegion(
-  MouseTrackingRef   inMouseRef,
-  RgnHandle          inRegion,
-  RgnHandle          inClip)           /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-
-
-/*
- *  ClipMouseTrackingRegion()
- *  
- *  Discussion:
- *    Adjust the region to clip the MouseTrackingRef against. This can
- *    be used in the case where a window is resized or when a
- *    previously obscured region becomes exposed.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    inMouseRef:
- *      A valid MouseTrackingRef to adjust.
- *    
- *    inRegion:
- *      A new region to clip inMouseRef against (can be NULL). If NULL,
- *      standard clipping will be provided.
- *  
- *  Result:
- *    An operating system status code.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-ClipMouseTrackingRegion(
-  MouseTrackingRef   inMouseRef,
-  RgnHandle          inRegion)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-
-/* Accessors*/
-
-/*
- *  GetMouseTrackingRegionID()
- *  
- *  Discussion:
- *    Retrieves the MouseTrackingRegionID of the given
- *    MouseTrackingRef. Can be used to determine if the region belongs
- *    to your app, and if so, which region it is.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    inMouseRef:
- *      A valid MouseTrackingRef from which to obtain the
- *      MouseTrackingRegionID.
- *    
- *    outID:
- *      Receives the MouseTrackingRegionID.
- *  
- *  Result:
- *    An operating system status code.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-GetMouseTrackingRegionID(
-  MouseTrackingRef         inMouseRef,
-  MouseTrackingRegionID *  outID)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-
-
-/*
- *  GetMouseTrackingRegionRefCon()
- *  
- *  Discussion:
- *    Retrieves the RefCon from the given mouse tracking region.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    inMouseRef:
- *      A valid MouseTrackingRef from which to obtain the refcon.
- *    
- *    outRefCon:
- *      Receives the refcon.
- *  
- *  Result:
- *    An operating system status code.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-GetMouseTrackingRegionRefCon(
-  MouseTrackingRef   inMouseRef,
-  void **            outRefCon)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-
-
-/* Geometry*/
-
-/*
- *  MoveMouseTrackingRegion()
- *  
- *  Discussion:
- *    Moves the given mouse tracking region by the specified delta. It
- *    can also optionally reclip the region, such as if the region is
- *    scrolled within a pane.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    inMouseRef:
- *      A valid MouseTrackingRef to move.
- *    
- *    deltaH:
- *      The horizontal delta to move the MouseTrackingRef.
- *    
- *    deltaV:
- *      The vertical delta to move the MouseTrackingRef.
- *    
- *    inClip:
- *      A region to optionally clip against (can be NULL).
- *  
- *  Result:
- *    An operating system status code.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-MoveMouseTrackingRegion(
-  MouseTrackingRef   inMouseRef,
-  SInt16             deltaH,
-  SInt16             deltaV,
-  RgnHandle          inClip)           /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-
-
-/* Enable/disable*/
-
-/*
- *  SetMouseTrackingRegionEnabled()
- *  
- *  Discussion:
- *    Set the enabled state of the mouse tracking region
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    inMouseRef:
- *      A valid MouseTrackingRef to modify.
- *    
- *    inEnabled:
- *      Indicate whether this region should be enabled (true) or
- *      disabled (false).
- *  
- *  Result:
- *    An operating system status code.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-SetMouseTrackingRegionEnabled(
-  MouseTrackingRef   inMouseRef,
-  Boolean            inEnabled)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-
-
-/*
-   
-   Namespace operators
-*/
-
-/*
- *  ClipWindowMouseTrackingRegions()
- *  
- *  Discussion:
- *    Bulk clip operation to modify the region that all mouse tracking
- *    regions with the given signature will be clipped against.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    inWindow:
- *      The window that contains the regions with the given signature
- *      that you are interested in updating.
- *    
- *    inSignature:
- *      The signature of the mouse tracking regions that will be
- *      reclipped.
- *    
- *    inClip:
- *      The region to clip all of the regions against (can be NULL). If
- *      NULL, standard clipping will be provided.
- *  
- *  Result:
- *    An operating system status code.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-ClipWindowMouseTrackingRegions(
-  WindowRef   inWindow,
-  OSType      inSignature,
-  RgnHandle   inClip)            /* can be NULL */            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-
-
-/*
- *  MoveWindowMouseTrackingRegions()
- *  
- *  Discussion:
- *    Bulk move operation to move all regions with the given signature
- *    the specified delta. An optional clip can be provided to reclip
- *    the regions against, such as in the case of the regions are being
- *    scrolled within a pane.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    inWindow:
- *      The window that contains the regions with the given signature
- *      that you are interested in moving.
- *    
- *    inSignature:
- *      The signature of the mouse tracking regions that will be moved.
- *    
- *    deltaH:
- *      The horizontal delta to move all of the regions.
- *    
- *    deltaV:
- *      The vertical delta to move all of the regions.
- *    
- *    inClip:
- *      An optional clipping region to clip against (can be NULL). If
- *      NULL, standard clipping will be provided.
- *  
- *  Result:
- *    An operating system status code.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-MoveWindowMouseTrackingRegions(
-  WindowRef   inWindow,
-  OSType      inSignature,
-  SInt16      deltaH,
-  SInt16      deltaV,
-  RgnHandle   inClip)            /* can be NULL */            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-
-
-/*
- *  SetWindowMouseTrackingRegionsEnabled()
- *  
- *  Discussion:
- *    Bulk set the enabled state of the mouse tracking regions of the
- *    given signature belonging to the given window.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    inWindow:
- *      The window which contains the mouse tracking regions that you
- *      are interested in modifying.
- *    
- *    inSignature:
- *      The signature of the mouse tracking regions whose enabled state
- *      you wish to modify.
- *    
- *    inEnabled:
- *      Indicates whether the regions should be enabled (true) or
- *      disabled (false).
- *  
- *  Result:
- *    An operating system status code.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-SetWindowMouseTrackingRegionsEnabled(
-  WindowRef   inWindow,
-  OSType      inSignature,
-  Boolean     inEnabled)                                      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-
-
-/*
- *  ReleaseWindowMouseTrackingRegions()
- *  
- *  Discussion:
- *    Bulk release the mouse tracking regions with the given signature.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    inWindow:
- *      The window to which the regions to be released belong.
- *    
- *    inSignature:
- *      The signature of the regions to be released.
- *  
- *  Result:
- *    An operating system status code.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-ReleaseWindowMouseTrackingRegions(
-  WindowRef   inWindow,
-  OSType      inSignature)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OptionBits 
+GetSymbolicHotKeyMode(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+
+/*--------------------------------------------------------------------------------------*/
 /*  Ink Events                                                                          */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
 enum {
   kEventParamInkTextRef         = 'iwrd', /* typePtr */
   kEventParamInkKeyboardShortcut = 'ikbd', /* typeBoolean */
@@ -13290,12 +13858,740 @@ enum {
 };
 
 
+/*--------------------------------------------------------------------------------------*/
+/*  • DEPRECATED                                                                        */
+/*                                                                                      */
+/*  All functions below this point are either deprecated (they continue to function     */
+/*  but are not the most modern nor most efficient solution to a problem), or they are  */
+/*  completely unavailable on Mac OS X.                                                 */
+/*--------------------------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------------------------*/
+/*  • MouseTrackingRegions                                                              */
+/*--------------------------------------------------------------------------------------*/
+
+/*
+ *  MouseTrackingRef
+ *  
+ *  Discussion:
+ *    MouseTrackingRef   *** DEPRECATED ***
+ *    
+ *    Deprecated:
+ *    Applications should use HIViewTrackingAreas, described in
+ *    HIView.h, instead of MouseTrackingRegions and their associated
+ *    settings.
+ *    
+ *    A MouseTrackingRef is an object that controls the generation of
+ *    mouse-enter and mouse-exit events. When the user moves the mouse
+ *    into a tracking region, a kEventClassMouse/kEventMouseEntered
+ *    event is sent to the app. When the user moves the mouse out of a
+ *    tracking region, an event of type
+ *    kEventClassMouse/kEventMouseExited is sent.
+ *    
+ *    Mouse tracking regions are uniquely identified within the scope
+ *    of a window by a MouseTrackingRegionID which is a client
+ *    signature/id pair. The client signature should be any unique
+ *    four-character constant that does not have entirely lowercase
+ *    characters; a good choice is the usual DTS-registered creator
+ *    OSType, but you can use any constant that you like.
+ *    
+ *    Mouse tracking regions can overlap, but are not exclusive. Mouse
+ *    motion events are generated for each of the tracking areas
+ *    intersected by the mouse.
+ *    
+ *    Mouse tracking regions are initially enabled. You can explicitly
+ *    disable a mouse tracking area to prevent mouse-enter/exit events
+ *    from being generated.
+ *    
+ *    Unlike global mouse-moved events, mouse-enter and mouse-exit
+ *    events are generated while your app is in the background. If this
+ *    is not considered desirable, disable the tracking areas while the
+ *    application is in the background.
+ *    
+ *    MouseTrackingRefs become invalid when the window that they are
+ *    bound to is disposed.
+ */
+typedef struct OpaqueMouseTrackingRef*  MouseTrackingRef;
+
+
+/*
+ *  MouseTrackingOptions
+ *  
+ *  Discussion:
+ *    MouseTrackingOptions   *** DEPRECATED ***
+ *    
+ *    Deprecated:
+ *    Applications should use HIViewTrackingAreas, described in
+ *    HIView.h, instead of MouseTrackingRegions and their associated
+ *    settings.
+ *    
+ *    These values define how the user’s region is handled by the Mouse
+ *    Tracking Region API. They define the behavior throughout the life
+ *    of the Mouse Tracking Region. For example, if a region is created
+ *    with the option of kMouseTrackingOptionsGlobalClip then all
+ *    operations on this region will be interpreted in global
+ *    coordinates and will be clipped to the owning window’s structure.
+ */
+typedef UInt32 MouseTrackingOptions;
+enum {
+
+  /*
+   * The region is expected in local coordinates and mouse movement
+   * tracking is clipped to the owning window’s content region.
+   */
+  kMouseTrackingOptionsLocalClip = 0,
+
+  /*
+   * The region is expected in global coordinates and mouse movement
+   * tracking is clipped to the owning window’s structure region.
+   */
+  kMouseTrackingOptionsGlobalClip = 1,
+
+  /*
+   * Standard options. The region will be handled in local coordinates
+   * and remain clipped against the windows content region.
+   */
+  kMouseTrackingOptionsStandard = kMouseTrackingOptionsLocalClip
+};
+
+struct MouseTrackingRegionID {
+  OSType              signature;
+  SInt32              id;
+};
+typedef struct MouseTrackingRegionID    MouseTrackingRegionID;
+/* Creation*/
+
+/*
+ *  CreateMouseTrackingRegion()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use HIView-based tracking areas instead of MouseTrackingRegions.
+ *    In this case, use HIViewNewTrackingArea(), defined in HIView.h,
+ *    instead of CreateMouseTrackingRegion().
+ *  
+ *  Discussion:
+ *    Creates a mouse tracking region and installs it into the window
+ *    system.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window that will contain the created region.
+ *    
+ *    inRegion:
+ *      The region for which you will receive entered/exit events.
+ *    
+ *    inClip:
+ *      A region to clip inRegion against (can be NULL).
+ *    
+ *    inOptions:
+ *      The options which define whether inRegion is given in global or
+ *      local coordinates. If local coordinates are used, inRegion will
+ *      be clipped against the window's current content region; if
+ *      global coordinates are used, inRegion will be clipped against
+ *      the window's current structure region. All clipping occurs
+ *      against the regions as they are at the moment when the tracking
+ *      region is created; changes to the window content or structure
+ *      regions after the tracking region is created will not affect
+ *      the tracking region.
+ *    
+ *    inID:
+ *      The signature/id pair which uniquely defines this region. Note
+ *      that if you are creating both LocalClip and GlobalClip tracking
+ *      regions for a given window, the global regions must use a
+ *      different inID.signature value from the local regions.
+ *    
+ *    inRefCon:
+ *      Any user defined value. This value can be retrieved later by
+ *      calling GetMouseTrackingRegionRefCon on the MouseTrackingRef.
+ *    
+ *    inTargetToNotify:
+ *      The event target that should receive kEventMouseEntered/Exited
+ *      events for this tracking region. If NULL, the window’s event
+ *      target receives these events.
+ *    
+ *    outTrackingRef:
+ *      A reference to the newly created mouse tracking region. This
+ *      reference will also be provided in the
+ *      kEventMouseEntered/Exited events sent to your event target.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+CreateMouseTrackingRegion(
+  WindowRef               inWindow,
+  RgnHandle               inRegion,
+  RgnHandle               inClip,                 /* can be NULL */
+  MouseTrackingOptions    inOptions,
+  MouseTrackingRegionID   inID,
+  void *                  inRefCon,
+  EventTargetRef          inTargetToNotify,       /* can be NULL */
+  MouseTrackingRef *      outTrackingRef)                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
-/* Obsolete constant names - use the new ones. Will be removed.                         */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*
+ *  RetainMouseTrackingRegion()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use HIView-based tracking areas, described in HIView.h, instead
+ *    of MouseTrackingRegions.
+ *  
+ *  Discussion:
+ *    Retains the MouseTrackingRef.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inMouseRef:
+ *      A valid MouseTrackingRef to retain.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+RetainMouseTrackingRegion(MouseTrackingRef inMouseRef)        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+
+/*
+ *  ReleaseMouseTrackingRegion()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use HIView-based tracking areas instead of MouseTrackingRegions.
+ *    In this case, use HIViewDisposeTrackingArea(), defined in
+ *    HIView.h, instead of ReleaseMouseTrackingRegion().
+ *  
+ *  Discussion:
+ *    Releases the MouseTrackingRef. Since mouse tracking regions are
+ *    bound to a window, they are automatically released when the
+ *    window is disposed of.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inMouseRef:
+ *      A valid MouseTrackingRef to release.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+ReleaseMouseTrackingRegion(MouseTrackingRef inMouseRef)       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+
+/*
+ *  ChangeMouseTrackingRegion()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use HIView-based tracking areas instead of MouseTrackingRegions.
+ *    In this case, use HIViewChangeTrackingArea(), defined in
+ *    HIView.h, instead of ChangeMouseTrackingRegion().
+ *  
+ *  Discussion:
+ *    Changes the MouseTrackingRefs region and optionally, its clip.
+ *    This will not change the enabled state or options of the region.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inMouseRef:
+ *      A valid MouseTrackingRef to modify.
+ *    
+ *    inRegion:
+ *      The region to set as the mouse tracking region.
+ *    
+ *    inClip:
+ *      An optional clip to clip inRegion against (may be NULL).
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+ChangeMouseTrackingRegion(
+  MouseTrackingRef   inMouseRef,
+  RgnHandle          inRegion,
+  RgnHandle          inClip)           /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+
+/*
+ *  ClipMouseTrackingRegion()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use HIView-based tracking areas, described in HIView.h, instead
+ *    of MouseTrackingRegions.
+ *  
+ *  Discussion:
+ *    Adjust the region to clip the MouseTrackingRef against. This can
+ *    be used in the case where a window is resized or when a
+ *    previously obscured region becomes exposed.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inMouseRef:
+ *      A valid MouseTrackingRef to adjust.
+ *    
+ *    inRegion:
+ *      A new region to clip inMouseRef against (can be NULL). If NULL,
+ *      standard clipping will be provided.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+ClipMouseTrackingRegion(
+  MouseTrackingRef   inMouseRef,
+  RgnHandle          inRegion)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/* Accessors*/
+
+/*
+ *  GetMouseTrackingRegionID()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use HIView-based tracking areas instead of MouseTrackingRegions.
+ *    In this case, use HIViewGetTrackingAreaID(), defined in HIView.h,
+ *    instead of GetMouseTrackingRegionID().
+ *  
+ *  Discussion:
+ *    Retrieves the MouseTrackingRegionID of the given
+ *    MouseTrackingRef. Can be used to determine if the region belongs
+ *    to your app, and if so, which region it is.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inMouseRef:
+ *      A valid MouseTrackingRef from which to obtain the
+ *      MouseTrackingRegionID.
+ *    
+ *    outID:
+ *      Receives the MouseTrackingRegionID.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+GetMouseTrackingRegionID(
+  MouseTrackingRef         inMouseRef,
+  MouseTrackingRegionID *  outID)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+
+/*
+ *  GetMouseTrackingRegionRefCon()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use HIView-based tracking areas, described in HIView.h, instead
+ *    of MouseTrackingRegions.
+ *  
+ *  Discussion:
+ *    Retrieves the RefCon from the given mouse tracking region.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inMouseRef:
+ *      A valid MouseTrackingRef from which to obtain the refcon.
+ *    
+ *    outRefCon:
+ *      Receives the refcon that was provided to
+ *      CreateMouseTrackingRegion.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+GetMouseTrackingRegionRefCon(
+  MouseTrackingRef   inMouseRef,
+  void **            outRefCon)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+
+/* Geometry*/
+
+/*
+ *  MoveMouseTrackingRegion()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use HIView-based tracking areas, described in HIView.h, instead
+ *    of MouseTrackingRegions.
+ *  
+ *  Discussion:
+ *    Moves the given mouse tracking region by the specified delta. It
+ *    can also optionally reclip the region, such as if the region is
+ *    scrolled within a pane.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inMouseRef:
+ *      A valid MouseTrackingRef to move.
+ *    
+ *    deltaH:
+ *      The horizontal delta to move the MouseTrackingRef.
+ *    
+ *    deltaV:
+ *      The vertical delta to move the MouseTrackingRef.
+ *    
+ *    inClip:
+ *      A region to optionally clip against (can be NULL).
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+MoveMouseTrackingRegion(
+  MouseTrackingRef   inMouseRef,
+  SInt16             deltaH,
+  SInt16             deltaV,
+  RgnHandle          inClip)           /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+
+/* Enable/disable*/
+
+/*
+ *  SetMouseTrackingRegionEnabled()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use HIView-based tracking areas, described in HIView.h, instead
+ *    of MouseTrackingRegions.
+ *  
+ *  Discussion:
+ *    Set the enabled state of the mouse tracking region
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inMouseRef:
+ *      A valid MouseTrackingRef to modify.
+ *    
+ *    inEnabled:
+ *      Indicate whether this region should be enabled (true) or
+ *      disabled (false).
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+SetMouseTrackingRegionEnabled(
+  MouseTrackingRef   inMouseRef,
+  Boolean            inEnabled)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+
+/*
+   
+   Namespace operators
+*/
+
+/*
+ *  ClipWindowMouseTrackingRegions()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use HIView-based tracking areas, described in HIView.h, instead
+ *    of MouseTrackingRegions.
+ *  
+ *  Discussion:
+ *    Bulk clip operation to modify the region that all mouse tracking
+ *    regions with the given signature will be clipped against.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window that contains the regions with the given signature
+ *      that you are interested in updating.
+ *    
+ *    inSignature:
+ *      The signature of the mouse tracking regions that will be
+ *      reclipped.
+ *    
+ *    inClip:
+ *      The region to clip all of the regions against (can be NULL). If
+ *      NULL, standard clipping will be provided.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+ClipWindowMouseTrackingRegions(
+  WindowRef   inWindow,
+  OSType      inSignature,
+  RgnHandle   inClip)            /* can be NULL */            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+
+/*
+ *  MoveWindowMouseTrackingRegions()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use HIView-based tracking areas, described in HIView.h, instead
+ *    of MouseTrackingRegions.
+ *  
+ *  Discussion:
+ *    Bulk move operation to move all regions with the given signature
+ *    the specified delta. An optional clip can be provided to reclip
+ *    the regions against, such as in the case of the regions are being
+ *    scrolled within a pane.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window that contains the regions with the given signature
+ *      that you are interested in moving.
+ *    
+ *    inSignature:
+ *      The signature of the mouse tracking regions that will be moved.
+ *    
+ *    deltaH:
+ *      The horizontal delta to move all of the regions.
+ *    
+ *    deltaV:
+ *      The vertical delta to move all of the regions.
+ *    
+ *    inClip:
+ *      An optional clipping region to clip against (can be NULL). If
+ *      NULL, standard clipping will be provided.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+MoveWindowMouseTrackingRegions(
+  WindowRef   inWindow,
+  OSType      inSignature,
+  SInt16      deltaH,
+  SInt16      deltaV,
+  RgnHandle   inClip)            /* can be NULL */            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+
+/*
+ *  SetWindowMouseTrackingRegionsEnabled()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use HIView-based tracking areas, described in HIView.h, instead
+ *    of MouseTrackingRegions.
+ *  
+ *  Discussion:
+ *    Bulk set the enabled state of the mouse tracking regions of the
+ *    given signature belonging to the given window.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window which contains the mouse tracking regions that you
+ *      are interested in modifying.
+ *    
+ *    inSignature:
+ *      The signature of the mouse tracking regions whose enabled state
+ *      you wish to modify.
+ *    
+ *    inEnabled:
+ *      Indicates whether the regions should be enabled (true) or
+ *      disabled (false).
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+SetWindowMouseTrackingRegionsEnabled(
+  WindowRef   inWindow,
+  OSType      inSignature,
+  Boolean     inEnabled)                                      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+
+/*
+ *  ReleaseWindowMouseTrackingRegions()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use HIView-based tracking areas, described in HIView.h, instead
+ *    of MouseTrackingRegions.
+ *  
+ *  Discussion:
+ *    Bulk release the mouse tracking regions with the given signature.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window to which the regions to be released belong.
+ *    
+ *    inSignature:
+ *      The signature of the regions to be released.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+ReleaseWindowMouseTrackingRegions(
+  WindowRef   inWindow,
+  OSType      inSignature)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+/*======================================================================================*/
+/*  EVENT-BASED OBJECT CLASSES                                                          */
+/*  *** DEPRECATED ***                                                                  */
+/*                                                                                      */
+/*  Here it is - the replacement for classic defprocs. This is also a convenient way    */
+/*  to create toolbox objects (windows, etc.) that have a specific behavior without     */
+/*  installing handlers on each instance of the object. With a toolbox object class,    */
+/*  you register your class, then use special creation routines to create objects of    */
+/*  that class. The event handlers are automatically installed and ready to go.         */
+/*                                                                                      */
+/*  Note that on Mac OS X 10.2 and later, we recommend using the HIObject API           */
+/*  HIObjectRegisterSubclass rather than RegisterToolboxObjectClass. This API is        */
+/*  considered deprecated on Mac OS X 10.2 and later.                                   */
+/*======================================================================================*/
+typedef struct OpaqueToolboxObjectClassRef*  ToolboxObjectClassRef;
+/*
+ *  RegisterToolboxObjectClass()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.1 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+RegisterToolboxObjectClass(
+  CFStringRef              inClassID,
+  ToolboxObjectClassRef    inBaseClass,              /* can be NULL */
+  UInt32                   inNumEvents,
+  const EventTypeSpec *    inEventList,
+  EventHandlerUPP          inEventHandler,
+  void *                   inEventHandlerData,
+  ToolboxObjectClassRef *  outClassRef)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  UnregisterToolboxObjectClass()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.1 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+UnregisterToolboxObjectClass(ToolboxObjectClassRef inClassRef) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*--------------------------------------------------------------------------------------*/
+/* Obsolete constant names - use the new ones.                                          */
+/*--------------------------------------------------------------------------------------*/
+enum {
+  kEventParamTabletPointerRec   = 'tbrc', /* typeTabletPointerRec      -- deprecated, for compatibility only*/
+  typeTabletPointerRec          = 'tbrc' /* kEventParamTabletPointerRec    -- deprecated, for compatibility only*/
+};
+
 enum {
   kEventWindowDefDrawFrame      = kEventWindowDrawFrame,
   kEventWindowDefDrawPart       = kEventWindowDrawPart,
@@ -13332,16 +14628,14 @@ enum {
   kEventTabletPointer           = kEventTabletPoint
 };
 
-/*——————————————————————————————————————————————————————————————————————————————————————*/
-/* Obsolete typedefs. Will be removed eventually.                                       */
-/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*--------------------------------------------------------------------------------------*/
+/* Obsolete typedefs.                                                                   */
+/*--------------------------------------------------------------------------------------*/
 
 typedef UInt32                          EventClassID;
 typedef UInt32                          EventClass;
 typedef UInt32                          EventType;
 /* OBSOLETE CONSTANTS*/
-
-
 enum {
   kMouseTrackingMousePressed    = kMouseTrackingMouseDown,
   kMouseTrackingMouseReleased   = kMouseTrackingMouseUp

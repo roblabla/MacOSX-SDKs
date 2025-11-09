@@ -65,37 +65,6 @@
 #ifdef __APPLE_API_PRIVATE
 #include <sys/quota.h>
 
-#ifdef KERNEL
-#include <sys/queue.h>
-
-
-#include <sys/cdefs.h>
-
-struct inode;
-struct mount;
-struct proc;
-struct ucred;
-__BEGIN_DECLS
-int	chkdq __P((struct inode *, int64_t, struct ucred *, int));
-int	chkdqchg __P((struct inode *, int64_t, struct ucred *, int));
-int	chkiq __P((struct inode *, long, struct ucred *, int));
-int	chkiqchg __P((struct inode *, long, struct ucred *, int));
-int	getinoquota __P((struct inode *));
-int	getquota __P((struct mount *, u_long, int, caddr_t));
-int	qsync __P((struct mount *mp));
-int	quotaoff __P((struct proc *, struct mount *, int));
-int	quotaon __P((struct proc *, struct mount *, int, caddr_t, enum uio_seg));
-int	setquota __P((struct mount *, u_long, int, caddr_t));
-int	setuse __P((struct mount *, u_long, int, caddr_t));
-int	ufs_quotactl __P((struct mount *, int, uid_t, caddr_t, struct proc *));
-__END_DECLS
-
-#if DIAGNOSTIC
-__BEGIN_DECLS
-void	chkdquot __P((struct inode *));
-__END_DECLS
-#endif
-#endif /* KERNEL */
 
 #endif /* __APPLE_API_PRIVATE */
 #endif /* ! _UFS_QUOTA_H */

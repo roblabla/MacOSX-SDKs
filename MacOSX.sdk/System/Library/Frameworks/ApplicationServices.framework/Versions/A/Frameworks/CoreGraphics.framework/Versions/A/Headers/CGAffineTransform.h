@@ -41,6 +41,10 @@ CG_EXTERN CGAffineTransform CGAffineTransformMakeScale(float sx, float sy);
 
 CG_EXTERN CGAffineTransform CGAffineTransformMakeRotation(float angle);
 
+/* Return true if `t' is the identity transform, false otherwise. */
+
+CG_EXTERN bool CGAffineTransformIsIdentity(CGAffineTransform t) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
 /* Translate `t' by `(tx, ty)' and return the result:
  *   t' = [ 1 0 0 1 tx ty ] * t */
 
@@ -61,10 +65,14 @@ CG_EXTERN CGAffineTransform CGAffineTransformRotate(CGAffineTransform t, float a
 
 CG_EXTERN CGAffineTransform CGAffineTransformInvert(CGAffineTransform t);
 
-/* Concatenate `t2' to `t1' and returne the result:
+/* Concatenate `t2' to `t1' and return the result:
  *   t' = t1 * t2 */
 
 CG_EXTERN CGAffineTransform CGAffineTransformConcat(CGAffineTransform t1, CGAffineTransform t2);
+
+/* Return true if `t1' and `t2' are equal, false otherwise. */
+
+CG_EXTERN bool CGAffineTransformEqualToTransform(CGAffineTransform t1, CGAffineTransform t2) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* Transform `point' by `t' and return the result:
  *   p' = p * t
@@ -77,6 +85,15 @@ CG_EXTERN CGPoint CGPointApplyAffineTransform(CGPoint point, CGAffineTransform t
  * where s = [ width height 0 ]. */
 
 CG_EXTERN CGSize CGSizeApplyAffineTransform(CGSize size, CGAffineTransform t);
+
+/* Transform `rect' by `t' and return the result. Since affine transforms
+ * do not preserve rectangles in general, this function returns the
+ * smallest rectangle which contains the transformed corner points of
+ * `rect'. If `t' consists solely of scales, flips and translations, then
+ * the returned rectangle coincides with the rectangle constructed from the
+ * four transformed corners. */
+
+CG_EXTERN CGRect CGRectApplyAffineTransform(CGRect rect, CGAffineTransform t) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*** Definitions of inline functions. ***/
 

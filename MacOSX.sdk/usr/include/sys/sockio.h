@@ -58,6 +58,8 @@
 #ifndef	_SYS_SOCKIO_H_
 #define	_SYS_SOCKIO_H_
 
+#include <sys/appleapiopts.h>
+
 #include <sys/ioccom.h>
 
 /* Socket ioctl's. */
@@ -69,8 +71,10 @@
 #define	SIOCSPGRP	 _IOW('s',  8, int)		/* set process group */
 #define	SIOCGPGRP	 _IOR('s',  9, int)		/* get process group */
 
-#define	SIOCADDRT	 _IOW('r', 10, struct ortentry)	/* add route */
-#define	SIOCDELRT	 _IOW('r', 11, struct ortentry)	/* delete route */
+#if 0
+#define        SIOCADDRT        _IOW('r', 10, struct ortentry) /* add route */
+#define        SIOCDELRT        _IOW('r', 11, struct ortentry) /* delete route */
+#endif
 
 #define	SIOCSIFADDR	_IOW('i', 12, struct ifreq)	/* set ifnet address */
 #define	OSIOCGIFADDR	_IOWR('i', 13, struct ifreq)	/* get ifnet address */
@@ -101,6 +105,7 @@
 #define	SIOCGIFNETMASK	_IOWR('i', 37, struct ifreq)	/* get net addr mask */
 #define SIOCAUTOADDR	_IOWR('i', 38, struct ifreq)	/* autoconf address */
 #define SIOCAUTONETMASK	_IOW('i', 39, struct ifreq)	/* autoconf netmask */
+#define SIOCARPIPLL		_IOWR('i', 40, struct ifreq)	/* arp for IPv4LL address */
 
 
 #define	SIOCADDMULTI	 _IOW('i', 49, struct ifreq)	/* add m'cast addr */
@@ -124,18 +129,22 @@
 #define	SIOCSLIFPHYADDR	 _IOW('i', 66, struct if_laddrreq) /* set gif addrs */
 #define	SIOCGLIFPHYADDR	_IOWR('i', 67, struct if_laddrreq) /* get gif addrs */
 
-
-
-
-
-
+#define	SIOCGIFDEVMTU	_IOWR('i', 68, struct ifreq) 	/* get if ifdevmtu */
+#define	SIOCSIFALTMTU	 _IOW('i', 69, struct ifreq)	/* set if alternate mtu */
+#define SIOCGIFALTMTU	_IOWR('i', 72, struct ifreq) 	/* get if alternate mtu */
+#define SIOCSIFBOND	 _IOW('i', 70, struct ifreq)	/* set bond if config */
+#define SIOCGIFBOND	_IOWR('i', 71, struct ifreq)	/* get bond if config */
+#define	SIOCIFCREATE	_IOWR('i', 120, struct ifreq)	/* create clone if */
+#define	SIOCIFDESTROY	 _IOW('i', 121, struct ifreq)	/* destroy clone if */
+#define	SIOCSIFVLAN	 _IOW('i', 126, struct ifreq)	/* set VLAN config */
+#define	SIOCGIFVLAN	_IOWR('i', 127, struct ifreq)	/* get VLAN config */
+#define	SIOCSETVLAN	SIOCSIFVLAN
+#define	SIOCGETVLAN	SIOCGIFVLAN
 
 
 #define	SIOCGIFASYNCMAP _IOWR('i', 124, struct ifreq)	/* get ppp asyncmap */
 #define	SIOCSIFASYNCMAP _IOW('i', 125, struct ifreq)	/* set ppp asyncmap */
 
 
-#define SIOCSETOT     _IOW('s', 128, int)             /* set socket for LibOT */
-                             
 
 #endif /* !_SYS_SOCKIO_H_ */

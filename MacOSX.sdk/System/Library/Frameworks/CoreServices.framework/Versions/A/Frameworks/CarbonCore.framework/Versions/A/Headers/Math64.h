@@ -3,9 +3,9 @@
  
      Contains:   64-bit integer math Interfaces.
  
-     Version:    CarbonCore-545~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -1336,55 +1336,61 @@ SInt64ToUInt64(SInt64 value);
   
    These functions are necessary if source code which uses both
    wide and SInt64 is to compile under a compiler that supports
-   long long.
+   long long, where SInt64 and UInt64 are supported natively as
+   64 bit values by the compiler.
  
    SInt64ToWide
    
                Converts a SInt64 to a wide struct.  If SInt64 is implemented
               as a typedef of wide, the macro does nothing. If SInt64 is 
-                implemented as a long long, it casts the long long into a 
+                implemented as a long long, it returns the long long in a 
              wide struct.
    
    WideToSInt64
    
                Converts a wide struct into a SInt64.  If SInt64 is implemented
                 as a typedef of wide, the macro does nothing. If SInt64 is 
-                implemented as a long long, it reads the struct into a long long.
+                implemented as a long long, it returns the value in the struct
+             as a long long.
 */
+
 #if TYPE_LONGLONG 
 
-#if defined(__GNUC__)
 
-    union __ull_outwit_u {
-          UnsignedWide  asUnsignedWide;
-          UInt64        asUInt64;
-    };
+   #if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199409L
 
-    union __ll_outwit_u {
-          wide          aswide;
-          SInt64        asSInt64;
-    };
-    
-    #define __ull_outwit(srcType, dstType, v)        ({ union __ull_outwit_u __u;      \
-                              __u.as##srcType = (v);  \
-                              __u.as##dstType; })
+      static inline wide  SInt64ToWide ( SInt64 s ) { wide result; result.hi = ( s >> 32 ); result.lo = ( s & 0xffffffffUL ); return result; }
+       static inline SInt64 WideToSInt64 ( wide w ) { SInt64 result = w.hi; result = ( result << 32 ) | ( w.lo ); return result; }
 
-    #define __ll_outwit(srcType, dstType, v)        ({ union __ll_outwit_u __u;        \
-                              __u.as##srcType = (v);  \
-                              __u.as##dstType; })
+       static inline UnsignedWide  UInt64ToUnsignedWide ( UInt64 u ) { UnsignedWide result; result.hi = ( u >> 32 ); result.lo = ( u & 0xffffffffUL ); return result; }
+       static inline UInt64 UnsignedWideToUInt64 ( UnsignedWide uw ) { UInt64 result = uw.hi; result = ( result << 32 ) | ( uw.lo ); return result; }
 
-#else
 
-    #define __ll_outwit(srcType, dstType, v)        (*((dstType *) (& (v))))
- #define __ull_outwit(srcType, dstType, v)       (*((dstType *) (& (v))))
+   #elif defined(__GNUC__)
 
-#endif
+       static __inline wide    SInt64ToWide ( SInt64 s ) { wide result; result.hi = ( s >> 32 ); result.lo = ( s & 0xffffffffUL ); return result; }
+       static __inline SInt64 WideToSInt64 ( wide w ) { SInt64 result = w.hi; result = ( result << 32 ) | ( w.lo ); return result; }
 
-#define SInt64ToWide(x)         __ll_outwit(SInt64, wide, (x))
-#define WideToSInt64(x)         __ll_outwit(wide, SInt64, (x))
-#define UInt64ToUnsignedWide(x) __ull_outwit(UInt64, UnsignedWide, (x))
-#define UnsignedWideToUInt64(x) __ull_outwit(UnsignedWide, UInt64, (x))
+     static __inline UnsignedWide    UInt64ToUnsignedWide ( UInt64 u ) { UnsignedWide result; result.hi = ( u >> 32 ); result.lo = ( u & 0xffffffffUL ); return result; }
+       static __inline UInt64 UnsignedWideToUInt64 ( UnsignedWide uw ) { UInt64 result = uw.hi ; result = ( result << 32 ) | ( uw.lo ); return result; }
 
+
+   #else
+      //  Although this isn't as efficent as it could be, there's no safe way to do this in a way which complies with both -ansi and -pedantic,
+      //  on all the compilers I know about, so CarbonCore.framework just exports these so folks can link to them.  Only applications built with
+     //  TYPE_LONGLONG defined though should call them, since the ABI is different in those cases.
+      extern wide _SInt64ToWideLL ( SInt64 s );
+      extern SInt64 _WideToSInt64LL ( wide w );
+
+     extern wide _UInt64ToUnsignedWide ( UInt64 u );
+        extern SInt64 _UnsignedWideToUInt64 ( UnsignedWide uw );
+       
+       #define SInt64ToWide(x)         _SInt64ToWide(x)
+       #define WideToSInt64(x)         _WideToSInt64(x)
+       #define UInt64ToUnsignedWide(x) _UInt64ToUnsignedWide(x)
+       #define UnsignedWideToUInt64(x) _UnsignedWideToUInt64(x)
+
+  #endif
 
 
 

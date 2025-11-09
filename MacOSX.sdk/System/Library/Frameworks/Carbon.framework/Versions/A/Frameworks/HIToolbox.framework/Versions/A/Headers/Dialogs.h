@@ -3,9 +3,9 @@
  
      Contains:   Dialog Manager interfaces.
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -441,7 +441,19 @@ enum {
    * hidden immediately without animation effects when the other button
    * is chosen by the user.
    */
-  kStdAlertDoNotAnimateOnOther  = 1 << 3
+  kStdAlertDoNotAnimateOnOther  = 1 << 3,
+
+  /*
+   * Allows dialog to stay up even after clicking the Help button.
+   * Normally, it would close immediately. It is not necessary to set
+   * this option for sheets, as they merely send the HICommandHelp
+   * command to the target provided. RunStandardAlert will return with
+   * the help button item in the itemHit parameter, but the window will
+   * remain up. You can then perform whatever help function you wish
+   * and then call RunStandardAlert again. This option is available in
+   * Mac OS X 10.4 or later.
+   */
+  kStdAlertDoNotCloseOnHelp     = 1 << 4
 };
 
 struct AlertStdCFStringAlertParamRec {
@@ -1482,6 +1494,11 @@ RunStandardAlert(
  *    The sheet is hidden and the sheet dialog destroyed before the
  *    command is sent; the caller does not have to call HideSheetWindow
  *    or DisposeDialog. 
+ *    
+ *    If the caller needs to destroy the sheet before showing it, then
+ *    it is sufficient to call DisposeDialog on the sheet. This is the
+ *    only case in which the caller would need to destroy the sheet
+ *    explicitly. 
  *    
  *    The strings passed to this API in the error, explanation, and
  *    AlertStdCFStringAlertParamRec button title parameters will all be

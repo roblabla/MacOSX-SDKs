@@ -1,12 +1,12 @@
 /*	NSScriptCoercionHandler.h
-	Copyright (c) 1997-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1997-2005, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
 @interface NSScriptCoercionHandler : NSObject {
     @private
-    void *_coercers;
+    id _coercers;
 }
 
 + (NSScriptCoercionHandler *)sharedCoercionHandler;

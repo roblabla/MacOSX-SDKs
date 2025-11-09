@@ -1,11 +1,3 @@
-/*
-	File:		IOBluetoothUserLib.h
-	Contains:	Library to allow user-side clients to use Bluetooth API's.
-	Version:	1.0
-	Copyright:	й 2002 by Apple Computer, Inc. All rights reserved.
-	DRI:		Jason Giles
-	Technology:	Bluetooth
-*/
 
 #pragma once
 
@@ -34,7 +26,7 @@
  
 #if 0
 #pragma mark -
-#pragma mark ее Availability Macros ее
+#pragma mark === Availability Macros ===
 #endif
 
 
@@ -87,8 +79,11 @@
 #define BLUETOOTH_VERSION_1_3	010300
 #define BLUETOOTH_VERSION_1_3_0	BLUETOOTH_VERSION_1_3
 #define BLUETOOTH_VERSION_1_3_1 010301
+#define BLUETOOTH_VERSION_1_6	010600
+#define BLUETOOTH_VERSION_1_6_0	BLUETOOTH_VERSION_1_6
+#define BLUETOOTH_VERSION_1_6_3 010603
 
-#define BLUETOOTH_VERSION_CURRENT	BLUETOOTH_VERSION_1_3_1
+#define BLUETOOTH_VERSION_CURRENT	BLUETOOTH_VERSION_1_6_3
 
 #ifdef BLUETOOTH_VERSION_USE_CURRENT
 	#define BLUETOOTH_VERSION_MIN_REQUIRED	BLUETOOTH_VERSION_CURRENT
@@ -210,13 +205,41 @@
 	#define AVAILABLE_BLUETOOTH_VERSION_1_3_1_AND_LATER
 #endif
 
+/*
+ * AVAILABLE_BLUETOOTH_VERSION_1_6_AND_LATER
+ *
+ * Used on declarations introduced in Mac OS X 10.4.0 (Bluetooth version 1.6.0)
+ */
+ 
+#if BLUETOOTH_VERSION_MAX_ALLOWED < BLUETOOTH_VERSION_1_6
+	#define AVAILABLE_BLUETOOTH_VERSION_1_6_AND_LATER		UNAVAILABLE_ATTRIBUTE
+#elif BLUETOOTH_VERSION_MIN_REQUIRED < BLUETOOTH_VERSION_1_6_3
+	#define AVAILABLE_BLUETOOTH_VERSION_1_6_AND_LATER		WEAK_IMPORT_ATTRIBUTE
+#else
+	#define AVAILABLE_BLUETOOTH_VERSION_1_6_AND_LATER
+#endif
+
+/*
+ * AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER
+ *
+ * Used on declarations introduced in Mac OS X 10.4.2 (Bluetooth version 1.6.3)
+ */
+ 
+#if BLUETOOTH_VERSION_MAX_ALLOWED < BLUETOOTH_VERSION_1_6_3
+	#define AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER		UNAVAILABLE_ATTRIBUTE
+#elif BLUETOOTH_VERSION_MIN_REQUIRED < BLUETOOTH_VERSION_1_6_3
+	#define AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER		WEAK_IMPORT_ATTRIBUTE
+#else
+	#define AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER
+#endif
+
 //===========================================================================================================================
 // General
 //===========================================================================================================================
  
 #if 0
 #pragma mark -
-#pragma mark ее General ее
+#pragma mark === General ===
 #endif
 
 
@@ -328,7 +351,7 @@ typedef void (*IOBluetoothSDPQueryCallback)						( void * userRefCon, IOBluetoot
  
 #if 0
 #pragma mark -
-#pragma mark ее Device ее
+#pragma mark === Device ===
 #endif
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -471,7 +494,7 @@ extern IOReturn IOBluetoothDevicePerformSDPQuery(	IOBluetoothDeviceRef						inDe
  
  #if 0
 #pragma mark -
-#pragma mark ее Device - attributes ее
+#pragma mark === Device - attributes ===
 #endif
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -732,7 +755,7 @@ extern BluetoothHCIEncryptionMode IOBluetoothDeviceGetEncryptionMode(IOBluetooth
                 present if an SDP query has been done on the target object.  This can be determined by calling
                 IOBluetoothDeviceGetLastServicesUpdate().  It will return the last date/time of the SDP query. 
                 Currently, the only way to have an SDP query executed is to use the search manager 
-                (IOBluetoothDeviceSearchGetSDPData()).  This will change in the future as API will be added to 
+                (IOBluetoothDevicePerformSDPQuery()).  This will change in the future as API will be added to 
                 IOBluetoothDevice to initiate the SDP query. 
                 
                 Instead of allowing individual clients to query for different services and service attributes,
@@ -880,8 +903,10 @@ extern Boolean IOBluetoothDeviceIsPaired(IOBluetoothDeviceRef device) AVAILABLE_
  
 #if 0
 #pragma mark -
-#pragma mark ее Device Searching ее
+#pragma mark === Device Searching ===
 #endif
+
+// See Inquiry API below!
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@typedef	IOBluetoothDeviceSearchOptions
@@ -934,7 +959,7 @@ struct 	IOBluetoothDeviceSearchAttributes
 
 #if 0
 #pragma mark -
-#pragma mark ее  Local Device Interaction ее
+#pragma mark ===  Local Device Interaction ===
 #endif
 
 typedef void (*IOBluetoothReadNameCallback)						( void * userRefCon, OSStatus status, BluetoothDeviceName * name );
@@ -1180,7 +1205,7 @@ extern IOReturn IOBluetoothLocalDeviceReadPageScanMode(	BluetoothHCIPageScanMode
  
 #if 0
 #pragma mark -
-#pragma mark ее L2CAP ее
+#pragma mark === L2CAP ===
 #endif
 
 
@@ -1190,7 +1215,7 @@ extern IOReturn IOBluetoothLocalDeviceReadPageScanMode(	BluetoothHCIPageScanMode
 
 #if 0
 #pragma mark -
-#pragma mark ее L2CAP channel eventsее
+#pragma mark === L2CAP channel events===
 #endif
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -1308,7 +1333,7 @@ typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPCha
  
 #if 0
 #pragma mark -
-#pragma mark ее Device - L2CAP channel creation ее
+#pragma mark === Device - L2CAP channel creation ===
 #endif
 
 
@@ -1419,7 +1444,7 @@ extern IOReturn IOBluetoothDeviceOpenL2CAPChannelSync(IOBluetoothDeviceRef btDev
 
 #if 0
 #pragma mark -
-#pragma mark ее  L2CAP channel ее
+#pragma mark ===  L2CAP channel ===
 #endif
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -1629,7 +1654,7 @@ extern Boolean IOBluetoothL2CAPChannelIsIncoming(IOBluetoothL2CAPChannelRef l2ca
  
  #if 0
 #pragma mark -
-#pragma mark ее RFCOMM ее
+#pragma mark === RFCOMM ===
 #endif
 
 
@@ -1639,7 +1664,7 @@ extern Boolean IOBluetoothL2CAPChannelIsIncoming(IOBluetoothL2CAPChannelRef l2ca
 
 #if 0
 #pragma mark -
-#pragma mark ее RFCOMM channel eventsее
+#pragma mark === RFCOMM channel events===
 #endif
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -1815,7 +1840,7 @@ typedef void (*IOBluetoothRFCOMMChannelIncomingEventListener)(IOBluetoothRFCOMMC
  
  #if 0
 #pragma mark -
-#pragma mark ее Device - RFCOMM channel creationее
+#pragma mark === Device - RFCOMM channel creation===
 #endif
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -1827,8 +1852,8 @@ typedef void (*IOBluetoothRFCOMMChannelIncomingEventListener)(IOBluetoothRFCOMMC
                 channel open process will not complete until the client has registered an incoming data 
                 listener on the new channel.
                                 
-                Because a new IOBluetoothL2CAPChannelRef will be created for the client as a result of this
-                function, the client is responsible for releasing the resulting IOBluetoothL2CAPChannelRef
+                Because a new IOBluetoothRFCOMMChannelRef will be created for the client as a result of this
+                function, the client is responsible for releasing the resulting IOBluetoothRFCOMMChannelRef
                 (by calling IOBluetoothObjectRelease()).
     @param		btDevice The target IOBluetoothDeviceRef
 	@param		channelID		The RFCOMM channel ID for the new channel.
@@ -1850,8 +1875,8 @@ extern IOReturn IOBluetoothDeviceOpenRFCOMMChannel(IOBluetoothDeviceRef btDevice
                 channel open process will not complete until the client has registered an incoming data 
                 listener on the new channel.
                                 
-                Because a new IOBluetoothL2CAPChannelRef will be created for the client as a result of this
-                function, the client is responsible for releasing the resulting IOBluetoothL2CAPChannelRef
+                Because a new IOBluetoothRFCOMMChannelRef will be created for the client as a result of this
+                function, the client is responsible for releasing the resulting IOBluetoothRFCOMMChannelRef
                 (by calling IOBluetoothObjectRelease()).
 				
 				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
@@ -1877,8 +1902,8 @@ IOReturn IOBluetoothDeviceOpenRFCOMMChannelAsync(IOBluetoothDeviceRef btDevice, 
                 channel open process will not complete until the client has registered an incoming data 
                 listener on the new channel.
                                 
-                Because a new IOBluetoothL2CAPChannelRef will be created for the client as a result of this
-                function, the client is responsible for releasing the resulting IOBluetoothL2CAPChannelRef
+                Because a new IOBluetoothRFCOMMChannelRef will be created for the client as a result of this
+                function, the client is responsible for releasing the resulting IOBluetoothRFCOMMChannelRef
                 (by calling IOBluetoothObjectRelease()).
 				
 				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
@@ -1898,7 +1923,7 @@ IOReturn IOBluetoothDeviceOpenRFCOMMChannelSync(IOBluetoothDeviceRef btDevice, I
 
 #if 0
 #pragma mark -
-#pragma mark ее RFCOMM Channel ее
+#pragma mark === RFCOMM Channel ===
 #endif
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -2140,7 +2165,7 @@ extern Boolean IOBluetoothRFCOMMChannelIsIncoming(IOBluetoothRFCOMMChannelRef rf
 
 #if 0
 #pragma mark -
-#pragma mark ее SDP ее
+#pragma mark === SDP ===
 #endif
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -2210,7 +2235,7 @@ extern IOReturn IOBluetoothRemoveServiceWithRecordHandle( BluetoothSDPServiceRec
 
 #if 0
 #pragma mark -
-#pragma mark ее IOBluetoothSDPUUID ее
+#pragma mark === IOBluetoothSDPUUID ===
 #endif
 
 /*!
@@ -2307,7 +2332,7 @@ extern Boolean IOBluetoothSDPUUIDIsEqualToUUID(IOBluetoothSDPUUIDRef uuid1, IOBl
 
 #if 0
 #pragma mark -
-#pragma mark ее IOBluetoothSDPDataElement ее
+#pragma mark === IOBluetoothSDPDataElement ===
 #endif
 
 /*!
@@ -2423,7 +2448,7 @@ extern Boolean IOBluetoothSDPDataElementIsEqualToDataElement(IOBluetoothSDPDataE
 
 #if 0
 #pragma mark -
-#pragma mark ее IOBluetoothSDPServiceRecord ее
+#pragma mark === IOBluetoothSDPServiceRecord ===
 #endif
 
 /*!
@@ -2532,7 +2557,7 @@ extern Boolean IOBluetoothSDPServiceRecordHasServiceFromArray(IOBluetoothSDPServ
 
 #if 0
 #pragma mark -
-#pragma mark ее Notifications ее
+#pragma mark === Notifications ===
 #endif
 
 typedef enum IOBluetoothUserNotificationChannelDirection
@@ -2721,6 +2746,354 @@ IOBluetoothUserNotificationRef IOBluetoothRegisterForFilteredRFCOMMChannelOpenNo
 IOBluetoothUserNotificationRef IOBluetoothRFCOMMChannelRegisterForChannelCloseNotification(	IOBluetoothRFCOMMChannelRef inChannel,
                                                                                             IOBluetoothUserNotificationCallback callback,
                                                                                             void * inRefCon );
+
+#if 0
+#pragma mark -
+#pragma mark === Device Inquiry ===
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!
+    @typedef	IOBluetoothDeviceInquiryRef
+	@abstract	To be written	
+	@discussion To be written
+*/
+
+typedef struct OpaqueIOBluetoothDeviceInquiryRef *			IOBluetoothDeviceInquiryRef;
+
+/*!
+    @typedef	IOBluetoothDeviceInquiryStartedCallback
+    @abstract	Callback function definition for inquiry messages.
+    @discussion	This callback will be invoked when the message for which it was registered is sent.
+    @param		inquiryRef		(IOBluetoothDeviceInquiryRef) The inquiry object ref responsible for sending the callback.
+    @param		userRefCon		(void *) This user defined parameter was provided during the original call to register the callback.
+    @result		None.
+*/
+
+typedef void (*IOBluetoothDeviceInquiryStartedCallback)( 	void * 							userRefCon,
+															IOBluetoothDeviceInquiryRef		inquiryRef	);
+
+/*!
+    @typedef	IOBluetoothDeviceInquiryDeviceFoundCallback
+    @abstract	Callback function definition for inquiry messages.
+    @discussion	This callback will be invoked when the message for which it was registered is sent.
+    @param		inquiryRef		(IOBluetoothDeviceInquiryRef) The inquiry object ref responsible for sending the callback.
+    @param		userRefCon		(void *) This user defined parameter was provided during the original call to register the callback.
+    @result		None.
+*/
+
+typedef void (*IOBluetoothDeviceInquiryDeviceFoundCallback)( 	void * 						userRefCon,
+																IOBluetoothDeviceInquiryRef	inquiryRef,
+																IOBluetoothDeviceRef 		deviceRef );
+
+/*!
+    @typedef	IOBluetoothDeviceInquiryUpdatingNamesStartedCallback
+    @abstract	Callback function definition for inquiry messages.
+    @discussion	This callback will be invoked when the message for which it was registered is sent.
+    @param		inquiryRef			(IOBluetoothDeviceInquiryRef) The inquiry object ref responsible for sending the callback.
+    @param		userRefCon			(void *) This user defined parameter was provided during the original call to register the callback.
+    @param		devicesRemaining	Number of devices remaining to be updated.
+    @result		None.
+*/
+
+typedef void (*IOBluetoothDeviceInquiryUpdatingNamesStartedCallback)(	void * 						userRefCon,
+																		IOBluetoothDeviceInquiryRef	inquiryRef,
+																		uint32_t					devicesRemaining );
+
+/*!
+    @typedef	IOBluetoothDeviceInquiryDeviceNameUpdatedCallback
+    @abstract	Callback function definition for inquiry messages.
+    @discussion	This callback will be invoked when the message for which it was registered is sent.
+    @param		inquiryRef			(IOBluetoothDeviceInquiryRef) The inquiry object ref responsible for sending the callback.
+    @param		userRefCon			(void *) This user defined parameter was provided during the original call to register the callback.
+    @param		deviceRemaining		Number of devices remaining to be updated.
+    @result		None.
+*/
+
+typedef void (*IOBluetoothDeviceInquiryDeviceNameUpdatedCallback)( 	void * 						userRefCon,
+																	IOBluetoothDeviceInquiryRef	inquiryRef,
+																	IOBluetoothDeviceRef 		deviceRef,
+																	uint32_t					devicesRemaining );
+	
+/*!
+    @typedef	IOBluetoothDeviceInquiryCompleteCallback
+    @abstract	Callback function definition for inquiry messages.
+    @discussion	This callback will be invoked when the message for which it was registered is sent.
+    @param		inquiryRef	(IOBluetoothDeviceInquiryRef) The inquiry object ref responsible for sending the callback.
+    @param		userRefCon	(void *) This user defined parameter was provided during the original call to register the callback.
+    @param		error		(IOReturn) kIOReturnSuccess if inquiry completed without event. Otherwise, an error code.
+    @param		aborted		1 if user called -stop on the inquiry.
+    @result		None.
+*/
+
+typedef void (*IOBluetoothDeviceInquiryCompleteCallback)( 	void * 						userRefCon,
+															IOBluetoothDeviceInquiryRef	inquiryRef,
+															IOReturn					error,
+															Boolean						aborted );
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!
+    @function	IOBluetoothDeviceInquiryCreateWithCallbackRefCon
+	@abstract	Returns the created IOBluetoothDeviceInquiryRef.
+	@discussion	
+	@param		inUserRefCon	Client-supplied refCon to be passed to the callback.
+	@result		Returns the IOBluetoothDeviceInquiryRef.
+*/
+
+extern IOBluetoothDeviceInquiryRef IOBluetoothDeviceInquiryCreateWithCallbackRefCon( void *		inUserRefCon )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!
+    @function	IOBluetoothDeviceInquiryDelete
+	@abstract	Returns the created IOBluetoothDeviceInquiryRef.
+	@discussion	
+	@param		inRefCon	Client-supplied refCon to be passed to the callback.
+	@result		Returns the IOBluetoothDeviceInquiryRef.
+*/
+
+extern IOReturn		IOBluetoothDeviceInquiryDelete( IOBluetoothDeviceInquiryRef inquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!
+    @function	IOBluetoothDeviceInquiryStart
+	@abstract	Starts the inquiry using the IOBluetoothDeviceInquiryRef.
+	@discussion	
+	@result		Returns whether the inquiry was started with or without error.
+*/
+
+extern IOReturn		IOBluetoothDeviceInquiryStart( IOBluetoothDeviceInquiryRef inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!
+    @function	IOBluetoothDeviceInquiryStop
+	@abstract	Stops the inquiry using the IOBluetoothDeviceInquiryRef.
+	@discussion	
+	@result		Returns whether the inquiry was stopped with or without error.
+*/
+
+extern	IOReturn	IOBluetoothDeviceInquiryStop( IOBluetoothDeviceInquiryRef inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!
+    @function	IOBluetoothDeviceInquirySetStartedCallback
+	@abstract	Set the function callback that is invoked when the inquiry is started.
+	@param		callback	Function ptr that conforms to IOBluetoothDeviceInquiryStartedCallback.
+*/
+
+extern IOReturn 	IOBluetoothDeviceInquirySetStartedCallback(	IOBluetoothDeviceInquiryRef				inInquiryRef,
+																IOBluetoothDeviceInquiryStartedCallback	callback )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!
+    @function	IOBluetoothDeviceInquirySetDeviceFoundCallback
+	@abstract	Set the function callback that is invoked when the inquiry finds a new device.
+	@param		callback	Function ptr that conforms to IOBluetoothDeviceInquiryDeviceFoundCallback.
+*/
+
+extern IOReturn 	IOBluetoothDeviceInquirySetDeviceFoundCallback(	IOBluetoothDeviceInquiryRef				inInquiryRef,
+																	IOBluetoothDeviceInquiryDeviceFoundCallback	callback )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!
+    @function	IOBluetoothDeviceInquirySetUpdatingNamesStartedCallback
+	@abstract	
+	@param		
+*/
+
+extern IOReturn 	IOBluetoothDeviceInquirySetUpdatingNamesStartedCallback(	IOBluetoothDeviceInquiryRef								inInquiryRef,
+																				IOBluetoothDeviceInquiryUpdatingNamesStartedCallback	callback )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!
+    @function	IOBluetoothDeviceInquirySetDeviceNameUpdatedCallback
+	@abstract	Set the function callback that is invoked when the inquiry updates a device name.
+	@param		callback	Function ptr that conforms to IOBluetoothDeviceInquiryDeviceNameUpdatedCallback.
+*/
+
+extern IOReturn 	IOBluetoothDeviceInquirySetDeviceNameUpdatedCallback(	IOBluetoothDeviceInquiryRef								inInquiryRef,
+																			IOBluetoothDeviceInquiryDeviceNameUpdatedCallback		callback )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!
+    @function	IOBluetoothDeviceInquirySetCompleteCallback
+	@abstract	Set the function callback that is invoked when the inquiry is complete.
+	@param		callback	Function ptr that conforms to IOBluetoothDeviceInquiryCompleteCallback.
+*/
+
+extern IOReturn 	IOBluetoothDeviceInquirySetCompleteCallback(	IOBluetoothDeviceInquiryRef					inInquiryRef,
+																	IOBluetoothDeviceInquiryCompleteCallback	callback )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!
+    @function	IOBluetoothDeviceInquirySetUserRefCon
+	@abstract	Set the user reference constant that is provided to the callbacks when they are called.
+	@param		void *	A ptr to an object.
+*/
+
+extern IOReturn 	IOBluetoothDeviceInquirySetUserRefCon(	IOBluetoothDeviceInquiryRef	inInquiryRef,
+															void * 						inUserRefCon )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!
+    @function	IOBluetoothDeviceInquiryGetUserRefCon
+	@abstract	Get the user reference constant.
+	@result		void *	A ptr to an object.
+*/
+
+extern void  *	IOBluetoothDeviceInquiryGetUserRefCon(	IOBluetoothDeviceInquiryRef	inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!
+    @function	IOBluetoothDeviceInquirySetInquiryLength
+	@abstract   Set the length of the inquiry that is performed each time -start is used on an inquiry object. 
+	@param		inSeconds		Number of seconds the inquiry will search for in-range devices before refreshing device names, if specified.
+	@result		Number of seconds the search will be performed.
+	@discussion A default of 10 seconds is used, unless a different value is specifed using this method.  Note that if you
+				have called -start again too quickly, your inquiry may actually take much longer than what length you
+				specify, as inquiries are throttled in the system.
+*/
+
+extern IOReturn 	IOBluetoothDeviceInquirySetInquiryLength(	IOBluetoothDeviceInquiryRef	inInquiryRef,
+																int8_t						inSeconds )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!
+    @function	IOBluetoothDeviceInquiryGetInquiryLength
+	@abstract   Returns the number of seconds the search will be performed.
+	@result		Number of seconds the search will be performed.
+*/
+
+extern uint8_t IOBluetoothDeviceInquiryGetInquiryLength( 	IOBluetoothDeviceInquiryRef	inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!
+    @function	IOBluetoothDeviceInquirySetUpdateNewDeviceNames
+	@abstract   Sets whether or not the inquiry object will retrieve the names of devices found during the search.
+	@param		inUpdateNames		Pass TRUE if names are to be updated, otherwise pass FALSE.
+	@discussion The default value for the inquiry object is TRUE, unless this method is used to change it.
+*/
+
+extern IOReturn 	IOBluetoothDeviceInquirySetUpdateNewDeviceNames( 	IOBluetoothDeviceInquiryRef	inInquiryRef,
+																		Boolean						inUpdateNames )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!
+    @function	IOBluetoothDeviceInquirySetUpdateNewDeviceNames
+	@abstract	Returns whether or the inquiry object will perform remote name requests on found devices. 
+	@result		TRUE if the inquiry will get device name for found objects, FALSE if not.
+*/
+
+extern Boolean 	IOBluetoothDeviceInquiryGetUpdateNewDeviceNames( 	IOBluetoothDeviceInquiryRef	inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@function	IOBluetoothDeviceInquiryGetFoundDevices
+	@abstract   Returns found IOBluetoothDeviceRef objects as an array.
+	@result		Returns an CFArrayRef of IOBluetoothDeviceRef objects.
+	@discussion Will not return nil. If there are no devices found, returns an array with length of 0.
+*/
+
+extern	CFArrayRef	IOBluetoothDeviceInquiryGetFoundDevices( 	IOBluetoothDeviceInquiryRef	inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@function	IOBluetoothDeviceInquiryClearFoundDevices
+	@abstract   Removes all found devices from the inquiry object.
+*/
+
+extern	IOReturn	IOBluetoothDeviceInquiryClearFoundDevices( 	IOBluetoothDeviceInquiryRef	inInquiryRef )	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@function	IOBluetoothDeviceInquirySetSearchCriteria
+	@abstract   Use this method to set the criteria for the device search.
+	@param		inServiceClassMajor		Set the major service class for found devices. Set to kBluetoothServiceClassMajorAny for all devices. See BluetoothAssignedNumbers.h for possible values.
+	@param		inMajorDeviceClass		Set the major device class for found devices. Set to kBluetoothDeviceClassMajorAny for all devices. See BluetoothAssignedNumbers.h for possible values.
+	@param		inMinorDeviceClass		Set the minor device class for found devices. Set to kBluetoothDeviceClassMinorAny for all devices. See BluetoothAssignedNumbers.h for possible values.
+	@discussion The default inquiry object qill search for all types of devices. If you wish to find only keyboards, for example, you might use this method like this:
+	
+				IOBluetoothDeviceInquirySetSearchCriteria(	myInquiryObjectRef,
+														kBluetoothServiceClassMajorAny
+														kBluetoothDeviceClassMajorPeripheral
+														kBluetoothDeviceClassMinorPeripheral1Keyboard );
+										
+				However, we recommend only using this if you are certain of the device class you are looking for, as some
+				devices may report a different/unexpected device class, and the search may miss the device you are interested in.
+*/
+
+extern	IOReturn	IOBluetoothDeviceInquirySetSearchCriteria(	IOBluetoothDeviceInquiryRef		inInquiryRef,
+																BluetoothServiceClassMajor		inServiceClassMajor,
+																BluetoothDeviceClassMajor		inMajorDeviceClass,
+																BluetoothDeviceClassMinor		inMinorDeviceClass	)	AVAILABLE_BLUETOOTH_VERSION_1_6_3_AND_LATER;
+
+
+#if 0
+#pragma mark -
+#pragma mark === SCO Audio ===
+#endif
+
+/*!
+    @function	IOBluetoothAddSCOAudioDevice
+    @abstract   Creates a persistent audio driver that will route audio data to/from the specified device.
+    @discussion When a client attempts to use the audio driver, it will automatically open the baseband connection
+				and the SCO connection if necessary.  Once they are open, it will route audio data to/from the
+				audio system.  The audio driver will continue to exist (even through reboots) until IOBluetoothRemoveAudioDevice
+				is called.
+
+				Currently, the only recognized entry in the configDict is "IOAudioControls".  That entry will be an NSArray of 
+				NSDictionary objects where each dictionary represents a single audio control.  Following is a description of the mandatory
+				and optional entries in each control dictionary.
+
+				Mandatory entries:
+
+					kIOAudioControlTypeKey			= Four-char-code representing the control type (see IOAudioTypes.h)
+														Possible values:
+															kIOAudioControlTypeLevel
+															kIOAudioControlTypeToggle
+															kIOAudioControlTypeSelector
+					kIOAudioControlSubTypeKey		= Four-char-code representing the control subtype.  The value is dependent on the control type.
+													  Following are common subtypes for each control type:
+														kIOAudioTypeLevel:
+															kIOAudioLevelControLSubTypeVolume
+														kIOAudioTypeToggle:
+															kIOAudioToggleControlSubTypeMute
+														kIOAudioControlTypeSelector:
+															kIOAudioSelectorControlSubTypeOutput
+															kIOAudioSelectorControlSubTypeInput
+					kIOAudioControlUsageKey			= Four-char-code representing the usage of the control (i.e. what part of the I/O chain the control 
+													  affects - input, output, pass-thru, ...) (see IOAudioTypes.h)
+														Possible values:
+															kIOAudioControlUsageOutput
+															kIOAudioControlUsageInput
+															kIOAudioControlUsagePassThru
+					kIOAudioControlChannelIDKey		= channel ID for the channel(s) the control acts on (see IOAudioControl.h and IOAudioTypes.h for more info)
+					kIOAudioControlChannelNameKey	= name for the channel (see IOAudioControl.h and IOAudioDefines.h for more info)
+					kIOAudioControlValueKey			= Initial value of the control - as an NSNumber
+
+				Optional entries:
+					kIOAudioControlIDKey			= Optional developer-defined ID field used to uniquely identify each control.
+
+				Level control-specific entries (see IOAudioDefines.h)
+					kIOAudioLevelControlMinValueKey	= Min value for the range for the level control
+					kIOAudioLevelControlMaxValueKey	= Max value for the range for the level control
+					kIOAudioLevelControlMinDBKey	= Min value in db for the range for the level control.  Value is a fixed-point 16.16 number
+													  represented as an integer in an NSNumber.
+					kIOAudioLevelControlMaxDBKey	= Max value in db for the range for the level control.  Value is a fixed-point 16.16 number
+													  represented as an integer in an NSNumber.
+				
+				For a more detailed description of these attributes and how IOAudioControls work, see the headerdoc for IOAudioControl, IOAudioLevelControl,
+				IOAudioToggleControl and IOAudioSelectorControl in the Kernel.framework.
+	@param		device	Bluetooth audio device
+	@param		configDict	Configuration dictionary containing a description of the audio controls to be attached to the driver
+	@result		Returns kIOReturnSuccess if the audio driver was successfully created.
+*/
+extern IOReturn IOBluetoothAddSCOAudioDevice( IOBluetoothDeviceRef device, CFDictionaryRef configDict )	AVAILABLE_BLUETOOTH_VERSION_1_6_AND_LATER;
+
+/*!
+    @function	IOBluetoothRemoveSCOAudioDevice
+    @abstract   Removes a persistent audio driver for a device that had already been added using IOBluetoothAddAudioDevice().
+	@param		device	Bluetooth audio device to remove
+	@result		Returns kIOReturnSuccess if the audio driver was successfully removed.
+*/
+extern IOReturn IOBluetoothRemoveSCOAudioDevice( IOBluetoothDeviceRef device )	AVAILABLE_BLUETOOTH_VERSION_1_6_AND_LATER;
+
 
 #ifdef	__cplusplus
 	}

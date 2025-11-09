@@ -3,9 +3,9 @@
  
      Contains:   AppleEvent Data Model Interfaces.
  
-     Version:    AppleEvents-287~1
+     Version:    AppleEvents-316.2~623
  
-     Copyright:  © 1996-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1996-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -23,7 +23,23 @@
 
 /* Apple event descriptor types */
 #define typeBoolean 					'bool'
-#define typeChar 						'TEXT'
+#define typeChar 						'TEXT'				/*  Deprecated, use typeUTF8Text instead.  */
+
+/*
+ * The following descriptor types are deprecated due to their lack of
+ * explicit encoding or byte order definition.  Please use
+ * typeUTF16ExternalRepresentation or typeUTF8Text instead. */
+#define typeStyledUnicodeText 			'sutx'				/*  Not implemented  */
+#define typeEncodedString 				'encs'				/*  Not implemented  */
+#define typeUnicodeText 				'utxt'				/*  native byte ordering, optional BOM  */
+#define typeCString 					'cstr'				/*  MacRoman characters followed by a NULL byte  */
+#define typePString 					'pstr'				/*  Unsigned length byte followed by MacRoman characters  */
+
+/*
+ * The preferred unicode text types.  In both cases, there is no explicit null termination or length byte.
+ */
+#define typeUTF16ExternalRepresentation  'ut16'				/*  big-endian 16 bit unicode with optional byte-order-mark, or little-endian 16 bit unicode with required byte-order-mark.  */
+#define typeUTF8Text 					'utf8'				/*  8 bit unicode  */
 
 /* Preferred numeric Apple event descriptor types */
 #define typeSInt16 						'shor'

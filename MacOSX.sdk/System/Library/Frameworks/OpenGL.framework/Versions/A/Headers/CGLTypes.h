@@ -39,9 +39,9 @@ typedef enum _CGLPixelFormatAttribute {
 	kCGLPFASamples            =  56,	/* number of samples per multi sample buffer    */
 	kCGLPFAAuxDepthStencil    =  57,	/* each aux buffer has its own depth stencil    */
 	kCGLPFAColorFloat         =  58,	/* color buffers store floating point pixels    */
-	kCGLPFAMultisample        =  59,    /* choose multisampling                         */
-	kCGLPFASupersample        =  60,    /* choose supersampling                         */
-	kCGLPFASampleAlpha        =  61,    /* request alpha filtering                      */
+	kCGLPFAMultisample        =  59,	/* choose multisampling                         */
+	kCGLPFASupersample        =  60,	/* choose supersampling                         */
+	kCGLPFASampleAlpha        =  61,	/* request alpha filtering                      */
 
 	kCGLPFARendererID         =  70,	/* request renderer by ID                       */
 	kCGLPFASingleRenderer     =  71,	/* choose a single renderer for all screens     */
@@ -56,7 +56,7 @@ typedef enum _CGLPixelFormatAttribute {
 	kCGLPFACompliant          =  83,	/* renderer is opengl compliant                 */
 	kCGLPFADisplayMask        =  84,	/* mask limiting supported displays             */
 	kCGLPFAPBuffer            =  90,	/* can be used to render to a pbuffer           */
-    kCGLPFARemotePBuffer	  =  91,    /* can be used to render offline to a pbuffer	*/
+	kCGLPFARemotePBuffer      =  91,	/* can be used to render offline to a pbuffer   */
 	kCGLPFAVirtualScreenCount = 128 	/* number of virtual screens in this format     */
 } CGLPixelFormatAttribute;
 
@@ -83,10 +83,12 @@ typedef enum _CGLRendererProperty {
 	kCGLRPMaxAuxBuffers       = 107,	/* maximum number of auxilliary buffers          */
 	kCGLRPMaxSampleBuffers    = 108,	/* maximum number of sample buffers              */
 	kCGLRPMaxSamples          = 109,	/* maximum number of samples                     */
-	kCGLRPSampleModes         = 110,    /* a bitfield of supported sample modes          */
-	kCGLRPSampleAlpha         = 111,    /* support for alpha sampling                    */
+	kCGLRPSampleModes         = 110,	/* a bitfield of supported sample modes          */
+	kCGLRPSampleAlpha         = 111,	/* support for alpha sampling                    */
 	kCGLRPVideoMemory         = 120,	/* total video memory                            */
 	kCGLRPTextureMemory       = 121,	/* video memory useable for texture storage      */
+	kCGLRPGPUVertProcCapable  = 122,	/* renderer capable of GPU vertex processing     */
+	kCGLRPGPUFragProcCapable  = 123,	/* renderer capable of GPU fragment processing   */
 	kCGLRPRendererCount       = 128 	/* the number of renderers in this renderer info */
 } CGLRendererProperty;
 
@@ -98,8 +100,9 @@ typedef enum _CGLContextEnable {
 	kCGLCESwapLimit        = 203,	/* Enable or disable the swap async limit        */
 	kCGLCERasterization    = 221,	/* Enable or disable all rasterization           */
 	kCGLCEStateValidation  = 301,	/* Validate state for multi-screen functionality */
-	kCGLCESurfaceBackingSize = 305,	/* Enable or disable surface backing size override */
-	kCGLCEDisplayListOptimization = 307	/* Ability to turn off display list optimizer  */
+	kCGLCESurfaceBackingSize = 305, /* Enable or disable surface backing size override */
+	kCGLCEDisplayListOptimization = 307,  /* Ability to turn off display list optimizer */
+	kCGLCEMPEngine = 313            /* Enable or disable multi-threaded GL engine    */
 } CGLContextEnable;
 
 /*
@@ -109,6 +112,7 @@ typedef enum _CGLContextParameter {
 	kCGLCPSwapRectangle     = 200,  /* 4 params.  Set or get the swap rectangle {x, y, w, h}  */
 	kCGLCPSwapInterval      = 222,  /* 1 param.   0 -> Don't sync, n -> Sync every n retrace  */
 	kCGLCPDispatchTableSize = 224,  /* 1 param.   Get the dispatch table size                 */
+	/* Note: kCGLCPClientStorage is always a pointer-sized parameter, even though the API claims GLint. */
 	kCGLCPClientStorage     = 226,  /* 1 param.   Context specific generic storage            */
 	kCGLCPSurfaceTexture    = 228,  /* 3 params.  SID, target, internal_format                */
 /*  - Used by AGL - */
@@ -123,7 +127,12 @@ typedef enum _CGLContextParameter {
 /*  AGL_CLIP_REGION          254   */
 /*  AGL_FS_CAPTURE_SINGLE    255   */
 	kCGLCPSurfaceBackingSize = 304,  	/* 2 params.   Width/height of surface backing size     */
-	kCGLCPSurfaceSurfaceVolatile = 306	/* 1 params.   Surface volatile state					*/
+/* AGL_SURFACE_VOLATILE		 306	*/
+	kCGLCPSurfaceSurfaceVolatile = 306,	/* 1 param.   Surface volatile state					*/
+	kCGLCPReclaimResources		 = 308,	/* 0 params.  */
+	kCGLCPCurrentRendererID      = 309,	/* 1 param.   Retrieves the current renderer ID         */
+	kCGLCPGPUVertexProcessing	 = 310, /* 1 param.   Currently processing vertices with GPU (get) */
+	kCGLCPGPUFragmentProcessing	 = 311, /* 1 param.   Currently processing fragments with GPU (get) */
 } CGLContextParameter;
 
 /*
@@ -133,8 +142,9 @@ typedef enum _CGLGlobalOption {
 	kCGLGOFormatCacheSize  = 501,	/* Set the size of the pixel format cache        */
 	kCGLGOClearFormatCache = 502,	/* Reset the pixel format cache if true          */
 	kCGLGORetainRenderers  = 503,	/* Whether to retain loaded renderers in memory  */
-	kCGLGOResetLibrary     = 504,	/* Do a soft reset of the CGL library if true    */
-	kCGLGOUseErrorHandler  = 505 	/* Call the Core Graphics handler on CGL errors  */
+	kCGLGOResetLibrary     = 504,	/* *** DEPRECATED in MacOS X 10.4 ***            */
+	                             	/* Do a soft reset of the CGL library if true    */
+	kCGLGOUseErrorHandler  = 505,	/* Call the Core Graphics handler on CGL errors  */
 } CGLGlobalOption;
 
 /*

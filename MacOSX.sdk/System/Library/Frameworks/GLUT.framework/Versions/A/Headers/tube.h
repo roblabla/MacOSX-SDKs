@@ -30,7 +30,9 @@ extern "C" {
 #endif
 
 /* some types */
-#define gleDouble double
+#ifndef gleDouble
+    #define gleDouble double
+#endif
 typedef gleDouble gleAffine[2][3];
 
 /* ====================================================== */

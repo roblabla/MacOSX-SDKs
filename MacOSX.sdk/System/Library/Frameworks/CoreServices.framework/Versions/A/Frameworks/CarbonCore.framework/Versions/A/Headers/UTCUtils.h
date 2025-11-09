@@ -3,9 +3,9 @@
  
      Contains:   Interface for UTC to Local Time conversion and 64 Bit Clock routines
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -62,117 +62,173 @@ typedef LocalDateTime *                 LocalDateTimePtr;
 typedef LocalDateTimePtr *              LocalDateTimeHandle;
 /* Classic 32 bit clock conversion routines */
 /*
- *  ConvertLocalTimeToUTC()
+ *  ConvertLocalTimeToUTC()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFTimeZoneGetSceondsFromGMT instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFTimeZoneGetSceondsFromGMT instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in UTCUtils 1.0 and later
  */
 extern OSStatus 
 ConvertLocalTimeToUTC(
   UInt32    localSeconds,
-  UInt32 *  utcSeconds)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *  utcSeconds)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  ConvertUTCToLocalTime()
+ *  ConvertUTCToLocalTime()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFTimeZoneGetSceondsFromGMT instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFTimeZoneGetSceondsFromGMT instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in UTCUtils 1.0 and later
  */
 extern OSStatus 
 ConvertUTCToLocalTime(
   UInt32    utcSeconds,
-  UInt32 *  localSeconds)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *  localSeconds)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* 64 bit clock conversion routines */
 /*
- *  ConvertUTCToLocalDateTime()
+ *  ConvertUTCToLocalDateTime()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFTimeZoneGetSceondsFromGMT instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFTimeZoneGetSceondsFromGMT instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in UTCUtils 1.0 and later
  */
 extern OSStatus 
 ConvertUTCToLocalDateTime(
   const UTCDateTime *  utcDateTime,
-  LocalDateTime *      localDateTime)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  LocalDateTime *      localDateTime)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  ConvertLocalToUTCDateTime()
+ *  ConvertLocalToUTCDateTime()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFTimeZoneGetSceondsFromGMT instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFTimeZoneGetSceondsFromGMT instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in UTCUtils 1.0 and later
  */
 extern OSStatus 
 ConvertLocalToUTCDateTime(
   const LocalDateTime *  localDateTime,
-  UTCDateTime *          utcDateTime)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UTCDateTime *          utcDateTime)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* Getter and Setter Clock routines using 64 Bit values */
 /*
- *  GetUTCDateTime()
+ *  GetUTCDateTime()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFTimeZoneGetSecondsFromGMT instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFTimeZoneGetSecondsFromGMT instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in UTCUtils 1.0 and later
  */
 extern OSStatus 
 GetUTCDateTime(
   UTCDateTime *  utcDateTime,
-  OptionBits     options)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OptionBits     options)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SetUTCDateTime()
+ *  SetUTCDateTime()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    deprecated it without replacement
+ *  
+ *  Discussion:
+ *    This function is no longer recommended.  One has to be root on
+ *    MacOSX to set. This is done through other means on OS X
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in UTCUtils 1.0 and later
  */
 extern OSStatus 
 SetUTCDateTime(
   const UTCDateTime *  utcDateTime,
-  OptionBits           options)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OptionBits           options)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetLocalDateTime()
+ *  GetLocalDateTime()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFTimeZoneGetSecondsFromGMT instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFTimeZoneGetSecondsFromGMT instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in UTCUtils 1.0 and later
  */
 extern OSStatus 
 GetLocalDateTime(
   LocalDateTime *  localDateTime,
-  OptionBits       options)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OptionBits       options)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SetLocalDateTime()
+ *  SetLocalDateTime()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    deprecated it without replacement
+ *  
+ *  Discussion:
+ *    This function is no longer recommended.  One has to be root on
+ *    MacOSX to set. This is done through other means on OS X
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in UTCUtils 1.0 and later
  */
 extern OSStatus 
 SetLocalDateTime(
   const LocalDateTime *  localDateTime,
-  OptionBits             options)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OptionBits             options)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 

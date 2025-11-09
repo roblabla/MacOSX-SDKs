@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2004 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -32,9 +32,6 @@ __BEGIN_DECLS
 #include <mach/kern_return.h>
 #include <mach/machine/vm_types.h>
 
-#ifdef PEXPERT_KERNEL_PRIVATE
-#include <pexpert/protos.h>
-#endif
 #include <pexpert/boot.h>
 
 #if	defined(PEXPERT_KERNEL_PRIVATE) || defined(IOKIT_KERNEL_PRIVATE)
@@ -53,6 +50,8 @@ void PE_init_platform(
 
 void PE_init_kprintf(
 	boolean_t vm_initialized);
+
+extern int32_t gPESerialBaud;
 
 unsigned int PE_init_taproot(vm_offset_t *taddr);
 
@@ -106,8 +105,10 @@ void PE_install_interrupt_handler(
 	void *nub, int source,
         void *target, IOInterruptHandler handler, void *refCon);
 
-void kprintf(
-	const char *fmt, ...);
+#ifndef _FN_KPRINTF
+#define	_FN_KPRINTF
+void kprintf(const char *fmt, ...);
+#endif
 
 void init_display_putc(unsigned char *baseaddr, int rowbytes, int height);
 void display_putc(char c);
@@ -190,8 +191,13 @@ extern char * PE_boot_args(
 	void);
 
 extern boolean_t PE_parse_boot_arg(
-	char    *arg_string,
-	void    *arg_ptr);
+	const char	*arg_string,
+	void    	*arg_ptr);
+
+extern boolean_t PE_parse_boot_argn(
+	const char	*arg_string,
+	void    	*arg_ptr,
+	int			max_arg);
 
 enum {
     kPEOptionKey	= 0x3a,

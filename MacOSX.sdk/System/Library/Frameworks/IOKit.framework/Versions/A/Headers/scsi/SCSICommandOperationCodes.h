@@ -233,7 +233,7 @@ enum
     kSCSICmdVariableLengthCDB				= 0x7F
 };
 
-// Service Action Definitions for the Variable Length CDB (7Fh) command
+/* Service Action Definitions for the Variable Length CDB (7Fh) command */
 enum
 {
 	kSCSIServiceAction_READ_32				= 0x0009,
@@ -247,18 +247,18 @@ enum
 	kSCSIServiceAction_XPWRITE_32			= 0x0006
 };
 
-// Service Action Definitions for the MAINTENANCE IN (A3h) command
+/* Service Action Definitions for the MAINTENANCE IN (A3h) command */
 enum
 {
-	kSCSIServiceAction_REPORT_ALIASES				= 0x0B,
-	kSCSIServiceAction_REPORT_DEVICE_IDENTIFIER		= 0x05,
-	kSCSIServiceAction_REPORT_PRIORITY				= 0x0E,
+	kSCSIServiceAction_REPORT_ALIASES								= 0x0B,
+	kSCSIServiceAction_REPORT_DEVICE_IDENTIFIER						= 0x05,
+	kSCSIServiceAction_REPORT_PRIORITY								= 0x0E,
 	kSCSIServiceAction_REPORT_SUPPORTED_OPERATION_CODES				= 0x0C,
 	kSCSIServiceAction_REPORT_SUPPORTED_TASK_MANAGEMENT_FUNCTIONS	= 0x0D,
-	kSCSIServiceAction_REPORT_TARGET_PORT_GROUPS	= 0x0A	
+	kSCSIServiceAction_REPORT_TARGET_PORT_GROUPS					= 0x0A
 };
 
-// Service Action Definitions for the MAINTENANCE OUT (A4h) command
+/* Service Action Definitions for the MAINTENANCE OUT (A4h) command */
 enum
 {
 	kSCSIServiceAction_CHANGE_ALIASES			= 0x0B,
@@ -267,14 +267,14 @@ enum
 	kSCSIServiceAction_SET_TARGET_PORT_GROUPS	= 0x0A	
 };
 
-// Service Action Definitions for the SERVICE ACTION IN (9Eh) command
+/* Service Action Definitions for the SERVICE ACTION IN (9Eh) command */
 enum
 {
 	kSCSIServiceAction_READ_CAPACITY_16		= 0x10,
 	kSCSIServiceAction_READ_LONG_16			= 0x11	
 };
 
-// Service Action Definitions for the SERVICE ACTION OUT (9Fh) command
+/* Service Action Definitions for the SERVICE ACTION OUT (9Fh) command */
 enum
 {
 	kSCSIServiceAction_WRITE_LONG_16		= 0x11	
@@ -297,7 +297,6 @@ enum
  *
  * These commands are defined for all devices.
  */
- // Needs to be updated for SPC-3
 #if 0
 enum 
 {
@@ -354,7 +353,6 @@ enum
  * specification.  The definitions and section numbers are based on section 6.1
  * of the revision 8c, 13 November 1997 version of the specification. 
  */
- // Needs to be updated for SBC-2
 #if 0
 enum
 {

@@ -1,7 +1,7 @@
 /*
 	NSView.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -11,7 +11,7 @@
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSGraphics.h>
 
-@class NSCursor, NSImage, NSPasteboard, NSScrollView, NSWindow;
+@class NSBitmapImageRep, NSCursor, NSGraphicsContext, NSImage, NSPasteboard, NSScrollView, NSWindow, NSAttributedString;
 
 enum {
     NSViewNotSizable			=  0,
@@ -83,8 +83,7 @@ typedef struct __VFlags {
 typedef int NSTrackingRectTag;
 typedef int NSToolTipTag;
 
-struct __NSViewAuxiliary;
-typedef struct __NSViewAuxiliary _NSViewAuxiliary;
+@class _NSViewAuxiliary;
 
 @interface NSView : NSResponder
 {
@@ -94,7 +93,7 @@ typedef struct __NSViewAuxiliary _NSViewAuxiliary;
     id                  _superview;
     id			_subviews;
     NSWindow            *_window;
-    int                 _gState;
+    id                  _gState;
     id                  _frameMatrix;
     id			_drawMatrix;
     id			_dragTypes;
@@ -187,6 +186,9 @@ typedef struct __NSViewAuxiliary _NSViewAuxiliary;
 - (void)lockFocus;
 - (void)unlockFocus;
 - (BOOL)lockFocusIfCanDraw;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (BOOL)lockFocusIfCanDrawInContext:(NSGraphicsContext *)context;
+#endif
 + (NSView *)focusView;
 - (NSRect)visibleRect;
 
@@ -198,6 +200,12 @@ typedef struct __NSViewAuxiliary _NSViewAuxiliary;
 - (void)displayRectIgnoringOpacity:(NSRect)rect;
 - (void)displayIfNeededInRectIgnoringOpacity:(NSRect)rect;
 - (void)drawRect:(NSRect)rect;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (void)displayRectIgnoringOpacity:(NSRect)aRect inContext:(NSGraphicsContext *)context;
+
+- (NSBitmapImageRep *)bitmapImageRepForCachingDisplayInRect:(NSRect)rect;
+- (void)cacheDisplayInRect:(NSRect)rect toBitmapImageRep:(NSBitmapImageRep *)bitmapImageRep;
+#endif
 
 - (int)gState;
 - (void)allocateGState;
@@ -254,6 +262,14 @@ typedef struct __NSViewAuxiliary _NSViewAuxiliary;
 - (void)viewDidEndLiveResize;
 // inLiveResize can be called from drawRect: to decide between cheap and full drawing
 - (BOOL)inLiveResize;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+/* A view that returns YES for -preservesContentDuringLiveResize is responsible for invalidating its own dirty rects during live resize */
+- (BOOL)preservesContentDuringLiveResize;
+/* -rectPreservedDuringLiveResize indicates the rect the view previously occupied, in the current coordinate system of the view */
+- (NSRect)rectPreservedDuringLiveResize;
+/* On return from -getRectsExposedDuringLiveResize, exposedRects indicates the parts of the view that are newly exposed (at most 4 rects).  *count indicates how many rects are in the exposedRects list */
+- (void)getRectsExposedDuringLiveResize:(NSRect[4])exposedRects count:(int *)count;
+#endif
 @end
 
 @interface NSObject(NSToolTipOwner)
@@ -301,6 +317,10 @@ typedef struct __NSViewAuxiliary _NSViewAuxiliary;
 - (NSRect)rectForPage:(int)page;
 - (NSPoint)locationOfPrintRect:(NSRect)aRect;
 - (void)drawPageBorderWithSize:(NSSize)borderSize;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (NSAttributedString *)pageHeader;
+- (NSAttributedString *)pageFooter;
+#endif
 
 /*** This method is obsolete.  It will never be invoked from within AppKit, and NSView's implementation of it does nothing. ***/
 - (void)drawSheetBorderWithSize:(NSSize)borderSize;
@@ -319,6 +339,9 @@ typedef struct __NSViewAuxiliary _NSViewAuxiliary;
 @interface NSView(NSDrag)
 - (void)dragImage:(NSImage *)anImage at:(NSPoint)viewLocation offset:(NSSize)initialOffset event:(NSEvent *)event pasteboard:(NSPasteboard *)pboard source:(id)sourceObj slideBack:(BOOL)slideFlag;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (NSArray *)registeredDraggedTypes;
+#endif
 - (void)registerForDraggedTypes:(NSArray *)newTypes;
 - (void)unregisterDraggedTypes;
 

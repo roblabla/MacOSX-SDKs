@@ -1,7 +1,7 @@
 /*
 	NSSegmentedCell.h
 	Application Kit
-	Copyright (c) 2003, Apple Computer, Inc.
+	Copyright (c) 2003-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -27,8 +27,10 @@ typedef enum {
     struct {
 	unsigned int trackingMode:3;
 	unsigned int trimmedLabels:1;
-    unsigned int drawing:1;
-    unsigned int reserved:27;
+	unsigned int drawing:1;
+	unsigned int style:2;
+	unsigned int recalcToolTips:1;
+	unsigned int reserved:24;
     } _seFlags;
     unsigned int    _reserved1;
     unsigned int    _reserved2;
@@ -45,6 +47,10 @@ typedef enum {
 */
 - (void)setSelectedSegment:(int)selectedSegment;
 - (int)selectedSegment;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (BOOL)selectSegmentWithTag:(int)tag;
+#endif
 
 /* For keyboard UI. Wraps.
 */

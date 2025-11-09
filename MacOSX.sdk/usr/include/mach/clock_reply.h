@@ -73,6 +73,10 @@ __END_DECLS
 
 #ifndef __Request__clock_reply_subsystem__defined
 #define __Request__clock_reply_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -80,7 +84,9 @@ __END_DECLS
 		alarm_type_t alarm_type;
 		mach_timespec_t alarm_time;
 	} __Request__clock_alarm_reply_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__clock_reply_subsystem__defined */
 
 /* union of all requests */
@@ -95,12 +101,18 @@ union __RequestUnion__clock_reply_subsystem {
 
 #ifndef __Reply__clock_reply_subsystem__defined
 #define __Reply__clock_reply_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__clock_alarm_reply_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__clock_reply_subsystem__defined */
 
 /* union of all replies */

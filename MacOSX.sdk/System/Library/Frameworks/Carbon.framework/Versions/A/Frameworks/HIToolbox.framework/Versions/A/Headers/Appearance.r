@@ -3,9 +3,9 @@
  
      Contains:   Appearance Manager Interfaces.
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1994-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -56,21 +56,21 @@
 #define kAppearanceRegionStructure 		32
 #define kAppearanceRegionContent 		33					/*  Content area of the window; empty when the window is collapsed */
 
-#define kThemeBrushDialogBackgroundActive  1				/*  use with kModalWindowClass  */
-#define kThemeBrushDialogBackgroundInactive  2				/*  use with kModalWindowClass  */
-#define kThemeBrushAlertBackgroundActive  3					/*  use with kAlertWindowClass and kMovableAlertWindowClass  */
-#define kThemeBrushAlertBackgroundInactive  4				/*  use with kAlertWindowClass and kMovableAlertWindowClass  */
-#define kThemeBrushModelessDialogBackgroundActive  5		/*  use with kDocumentWindowClass  */
-#define kThemeBrushModelessDialogBackgroundInactive  6		/*  use with kDocumentWindowClass  */
-#define kThemeBrushUtilityWindowBackgroundActive  7			/*  use with kFloatingWindowClass and kUtilityWindowClass  */
-#define kThemeBrushUtilityWindowBackgroundInactive  8		/*  use with kFloatingWindowClass and kUtilityWindowClass  */
-#define kThemeBrushListViewSortColumnBackground  9			/*  Finder list views  */
+#define kThemeBrushDialogBackgroundActive  1
+#define kThemeBrushDialogBackgroundInactive  2
+#define kThemeBrushAlertBackgroundActive  3
+#define kThemeBrushAlertBackgroundInactive  4
+#define kThemeBrushModelessDialogBackgroundActive  5
+#define kThemeBrushModelessDialogBackgroundInactive  6
+#define kThemeBrushUtilityWindowBackgroundActive  7
+#define kThemeBrushUtilityWindowBackgroundInactive  8
+#define kThemeBrushListViewSortColumnBackground  9
 #define kThemeBrushListViewBackground 	10
 #define kThemeBrushIconLabelBackground 	11
 #define kThemeBrushListViewSeparator 	12
 #define kThemeBrushChasingArrows 		13
 #define kThemeBrushDragHilite 			14
-#define kThemeBrushDocumentWindowBackground  15				/*  use with kDocumentWindowClass  */
+#define kThemeBrushDocumentWindowBackground  15
 #define kThemeBrushFinderWindowBackground  16
 
 #define kThemeBrushScrollBarDelimiterActive  17
@@ -106,20 +106,25 @@
 #define kThemeBrushBevelInactiveDark 	47
 
 #define kThemeBrushNotificationWindowBackground  48
-#define kThemeBrushMovableModalBackground  49				/*  use with kMovableModalWindowClass; available in Mac OS X, and CarbonLib 1.3 and later  */
-#define kThemeBrushSheetBackgroundOpaque  50				/*  use with kSheetWindowClass and kSheetAlertWindowClass; available in Mac OS X, and CarbonLib 1.3 and later  */
-#define kThemeBrushDrawerBackground 	51					/*  use with kDrawerWindowClass; available in Mac OS X, and CarbonLib 1.3 and later  */
-#define kThemeBrushToolbarBackground 	52					/*  use with kToolbarWindowClass; available in Mac OS X, and CarbonLib 1.6 and later  */
-#define kThemeBrushSheetBackgroundTransparent  53			/*  use with kSheetWindowClass and kSheetAlertWindowClass; available in Mac OS X 10.1 and CarbonLib 1.6, and later  */
-#define kThemeBrushMenuBackground 		54					/*  available in Mac OS X 10.1 and CarbonLib 1.6, and later  */
-#define kThemeBrushMenuBackgroundSelected  55				/*  available in Mac OS X 10.1 and CarbonLib 1.6, and later  */
+#define kThemeBrushMovableModalBackground  49
+#define kThemeBrushSheetBackgroundOpaque  50
+#define kThemeBrushDrawerBackground 	51
+
+#define kThemeBrushToolbarBackground 	52
+#define kThemeBrushSheetBackgroundTransparent  53
+#define kThemeBrushMenuBackground 		54
+#define kThemeBrushMenuBackgroundSelected  55
+
+#define kThemeBrushListViewOddRowBackground  56
+#define kThemeBrushListViewEvenRowBackground  57
+#define kThemeBrushListViewColumnDivider  58
 
 #define kThemeBrushSheetBackground 		50
 #define kThemeBrushBlack 				(-1)
 #define kThemeBrushWhite 				(-2)
-#define kThemeBrushPrimaryHighlightColor  (-3)				/*  available in Mac OS 10.1 and CarbonLib 1.6, and later */
-#define kThemeBrushSecondaryHighlightColor  (-4)			/*  available in Mac OS 10.1 and CarbonLib 1.6, and later */
-#define kThemeBrushAlternatePrimaryHighlightColor  (-5)		/*  available in Mac OS 10.2 and later */
+#define kThemeBrushPrimaryHighlightColor  (-3)
+#define kThemeBrushSecondaryHighlightColor  (-4)
+#define kThemeBrushAlternatePrimaryHighlightColor  (-5)
 
 #define kThemeTextColorDialogActive 	1
 #define kThemeTextColorDialogInactive 	2
@@ -324,16 +329,29 @@
 #define kThemeSmallTabHeightMax 		19
 #define kThemeLargeTabHeightMax 		24
 
+#define kThemeScrollBarMedium 			0
+#define kThemeScrollBarSmall 			1
+#define kThemeSliderMedium 				2
+#define kThemeProgressBarMedium 		3
+#define kThemeIndeterminateBarMedium 	4
+#define kThemeRelevanceBar 				5
+#define kThemeSliderSmall 				6
+#define kThemeProgressBarLarge 			7
+#define kThemeIndeterminateBarLarge 	8
+
+#define kThemeScrollBarMini 			9
+#define kThemeSliderMini 				10
+#define kThemeProgressBarMini 			11
+#define kThemeIndeterminateBarMini 		12
+
 #define kThemeMediumScrollBar 			0
 #define kThemeSmallScrollBar 			1
 #define kThemeMediumSlider 				2
 #define kThemeMediumProgressBar 		3
 #define kThemeMediumIndeterminateBar 	4
-#define kThemeRelevanceBar 				5
 #define kThemeSmallSlider 				6
 #define kThemeLargeProgressBar 			7
 #define kThemeLargeIndeterminateBar 	8
-
 #define kThemeMiniScrollBar 			9
 #define kThemeMiniSlider 				10
 #define kThemeMiniProgressBar 			11
@@ -372,15 +390,16 @@
 #define kThemeTrackNoScrollBarArrows 	0x10
 #define kThemeTrackHasFocus 			0x20
 
-#define kThemeWindowHasGrow 			0x01				/*  can the size of the window be changed by the user?  */
-#define kThemeWindowHasHorizontalZoom 	0x08				/*  window can zoom only horizontally  */
-#define kThemeWindowHasVerticalZoom 	0x10				/*  window can zoom only vertically  */
-#define kThemeWindowHasFullZoom 		0x18				/*  window zooms in all directions  */
-#define kThemeWindowHasCloseBox 		0x20				/*  window has a close box  */
-#define kThemeWindowHasCollapseBox 		0x40				/*  window has a collapse box  */
-#define kThemeWindowHasTitleText 		0x80				/*  window has a title/title icon  */
-#define kThemeWindowIsCollapsed 		0x0100				/*  window is in the collapsed state  */
+#define kThemeWindowHasGrow 			0x01
+#define kThemeWindowHasHorizontalZoom 	0x08
+#define kThemeWindowHasVerticalZoom 	0x10
+#define kThemeWindowHasFullZoom 		0x18
+#define kThemeWindowHasCloseBox 		0x20
+#define kThemeWindowHasCollapseBox 		0x40
+#define kThemeWindowHasTitleText 		0x80
+#define kThemeWindowIsCollapsed 		0x0100
 #define kThemeWindowHasDirty 			0x0200
+#define kThemeWindowHasToolbarButton 	0x0800
 
 #define kThemeDocumentWindow 			0
 #define kThemeDialogWindow 				1
@@ -426,23 +445,23 @@
 #define kThemeBevelButton 				3
 #define kThemeArrowButton 				4
 #define kThemePopupButton 				5
-#define kThemeDisclosureButton 			6
+#define kThemeDisclosureTriangle 		6
 #define kThemeIncDecButton 				7
-#define kThemeSmallBevelButton 			8
-#define kThemeMediumBevelButton 		3
-#define kThemeLargeBevelButton 			9
+#define kThemeBevelButtonSmall 			8
+#define kThemeBevelButtonMedium 		3
+#define kThemeBevelButtonLarge 			9
 #define kThemeListHeaderButton 			10
 #define kThemeRoundButton 				11
-#define kThemeLargeRoundButton 			12
-#define kThemeSmallCheckBox 			13
-#define kThemeSmallRadioButton 			14
+#define kThemeRoundButtonLarge 			12
+#define kThemeCheckBoxSmall 			13
+#define kThemeRadioButtonSmall 			14
 #define kThemeRoundedBevelButton 		15
 #define kThemeComboBox 					16
 #define kThemeComboBoxSmall 			17
 
 #define kThemeComboBoxMini 				18
-#define kThemeMiniCheckBox 				19
-#define kThemeMiniRadioButton 			20
+#define kThemeCheckBoxMini 				19
+#define kThemeRadioButtonMini 			20
 #define kThemeIncDecButtonSmall 		21
 #define kThemeIncDecButtonMini 			22
 #define kThemeArrowButtonSmall 			23
@@ -454,8 +473,22 @@
 #define kThemePopupButtonSmall 			29
 #define kThemePopupButtonMini 			30
 
+#define kThemeBevelButtonInset 			31
+#define kThemePushButtonInset 			32
+#define kThemePushButtonInsetSmall 		33
+#define kThemeRoundButtonHelp 			34
+
 #define kThemeNormalCheckBox 			1
 #define kThemeNormalRadioButton 		2
+#define kThemeLargeBevelButton 			9
+#define kThemeMediumBevelButton 		3
+#define kThemeMiniCheckBox 				19
+#define kThemeMiniRadioButton 			20
+#define kThemeSmallBevelButton 			8
+#define kThemeSmallCheckBox 			13
+#define kThemeSmallRadioButton 			14
+#define kThemeLargeRoundButton 			12
+#define kThemeDisclosureButton 			6
 
 #define kThemeButtonOff 				0
 #define kThemeButtonOn 					1
@@ -465,22 +498,24 @@
 #define kThemeDisclosureLeft 			2
 
 #define kThemeAdornmentNone 			0
-#define kThemeAdornmentDefault 			0x01				/*  if set, draw default ornamentation ( for push button and generic well )  */
-#define kThemeAdornmentFocus 			0x04				/*  if set, draw focus  */
-#define kThemeAdornmentRightToLeft 		0x10				/*  if set, draw right to left label  */
-#define kThemeAdornmentDrawIndicatorOnly  0x20				/*  if set, don't draw or erase label ( radio, check, disclosure )  */
-#define kThemeAdornmentHeaderButtonLeftNeighborSelected  0x40 /*  if set, draw the left border of the button as selected ( list header button only )  */
-#define kThemeAdornmentHeaderButtonRightNeighborSelected  0x80 /*  if set, draw the right border of the button ( list header button only )  */
-#define kThemeAdornmentHeaderButtonSortUp  0x0100			/*  if set, draw the sort indicator pointing upward ( list header button only )  */
-#define kThemeAdornmentHeaderMenuButton  0x0200				/*  if set, draw as a header menu button ( list header button only )  */
-#define kThemeAdornmentHeaderButtonNoShadow  0x0400			/*  if set, draw the non-shadow area of the button ( list header button only )  */
-#define kThemeAdornmentHeaderButtonShadowOnly  0x0800		/*  if set, draw the only the shadow area of the button ( list header button only )  */
-#define kThemeAdornmentNoShadow 		0x0400				/*  old name  */
-#define kThemeAdornmentShadowOnly 		0x0800				/*  old name  */
-#define kThemeAdornmentArrowLeftArrow 	0x40				/*  If set, draw a left arrow on the arrow button  */
-#define kThemeAdornmentArrowDownArrow 	0x80				/*  If set, draw a down arrow on the arrow button  */
-#define kThemeAdornmentArrowDoubleArrow  0x0100				/*  If set, draw a double arrow on the arrow button  */
-#define kThemeAdornmentArrowUpArrow 	0x0200				/*  If set, draw a up arrow on the arrow button  */
+#define kThemeAdornmentDefault 			0x01
+#define kThemeAdornmentFocus 			0x04
+#define kThemeAdornmentRightToLeft 		0x10
+#define kThemeAdornmentDrawIndicatorOnly  0x20
+#define kThemeAdornmentHeaderButtonLeftNeighborSelected  0x40
+#define kThemeAdornmentHeaderButtonRightNeighborSelected  0x80
+#define kThemeAdornmentHeaderButtonSortUp  0x0100
+#define kThemeAdornmentHeaderMenuButton  0x0200
+#define kThemeAdornmentHeaderButtonNoShadow  0x0400
+#define kThemeAdornmentHeaderButtonShadowOnly  0x0800
+#define kThemeAdornmentHeaderButtonNoSortArrow  0x1000
+#define kThemeAdornmentArrowLeftArrow 	0x40
+#define kThemeAdornmentArrowDownArrow 	0x80
+#define kThemeAdornmentArrowDoubleArrow  0x0100
+#define kThemeAdornmentArrowUpArrow 	0x0200
+
+#define kThemeAdornmentNoShadow 		0x0400
+#define kThemeAdornmentShadowOnly 		0x0800
 
 #define kThemeNoSounds 					0
 #define kThemeWindowSoundsMask 			0x01
@@ -756,6 +791,15 @@
 #define kThemeMetricSmallTabFrameOverlap  125
 #define kThemeMetricSmallTabOverlap 	126
 #define kThemeMetricSmallPaneSplitterHeight  127
+
+#define kThemeMetricHSliderTickOffset 	128
+#define kThemeMetricVSliderTickOffset 	129
+#define kThemeMetricSliderMinThumbHeight  130
+#define kThemeMetricSliderMinThumbWidth  131
+#define kThemeMetricScrollBarMinThumbHeight  132
+#define kThemeMetricScrollBarMinThumbWidth  133
+#define kThemeMetricSmallScrollBarMinThumbHeight  134
+#define kThemeMetricSmallScrollBarMinThumbWidth  135
 
 #define appearanceBadBrushIndexErr 		(-30560)			/*  pattern index invalid  */
 #define appearanceProcessRegisteredErr 	(-30561)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2005 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -54,33 +54,13 @@
 #ifndef	_MACH_MACHINE_H_
 #define _MACH_MACHINE_H_
 
-#include <sys/appleapiopts.h>
-
+#include <stdint.h>
 #include <mach/machine/vm_types.h>
 #include <mach/boolean.h>
 
-/*
- *	For each host, there is a maximum possible number of
- *	cpus that may be available in the system.  This is the
- *	compile-time constant NCPUS, which is defined in cpus.h.
- *
- *	In addition, there is a machine_slot specifier for each
- *	possible cpu in the system.
- */
-
-struct machine_info {
-	integer_t	major_version;	/* kernel major version id */
-	integer_t	minor_version;	/* kernel minor version id */
-	integer_t	max_cpus;	/* max number of cpus compiled */
-	integer_t	avail_cpus;	/* number actually available */
-	vm_size_t	memory_size;	/* size of memory in bytes */
-};
-
-typedef struct machine_info	*machine_info_t;
-typedef struct machine_info	machine_info_data_t;	/* bogus */
-
 typedef integer_t	cpu_type_t;
 typedef integer_t	cpu_subtype_t;
+typedef integer_t	cpu_threadtype_t;
 
 #define CPU_STATE_MAX		4
 
@@ -89,26 +69,13 @@ typedef integer_t	cpu_subtype_t;
 #define CPU_STATE_IDLE		2
 #define CPU_STATE_NICE		3
 
-#ifdef	KERNEL_PRIVATE
-#ifdef   __APPLE_API_UNSTABLE
 
-struct machine_slot {
-/*boolean_t*/integer_t	is_cpu;		/* is there a cpu in this slot? */
-	cpu_type_t	cpu_type;	/* type of cpu */
-	cpu_subtype_t	cpu_subtype;	/* subtype of cpu */
-/*boolean_t*/integer_t	running;	/* is cpu running */
-	integer_t	cpu_ticks[CPU_STATE_MAX];
-	integer_t	clock_freq;	/* clock interrupt frequency */
-};
 
-typedef struct machine_slot	*machine_slot_t;
-typedef struct machine_slot	machine_slot_data_t;	/* bogus */
-
-extern struct machine_info	machine_info;
-extern struct machine_slot	machine_slot[];
-
-#endif /* __APPLE_API_UNSTABLE */
-#endif /* KERNEL_PRIVATE */
+/*
+ * Capability bits used in the definition of cpu_type.
+ */
+#define	CPU_ARCH_MASK	0xff000000		/* mask for architecture bits */
+#define CPU_ARCH_ABI64	0x01000000		/* 64 bit ABI */
 
 /*
  *	Machine types known by all.
@@ -122,7 +89,10 @@ extern struct machine_slot	machine_slot[];
 /* skip				((cpu_type_t) 4)	*/
 /* skip				((cpu_type_t) 5)	*/
 #define	CPU_TYPE_MC680x0	((cpu_type_t) 6)
-#define CPU_TYPE_I386		((cpu_type_t) 7)
+#define CPU_TYPE_X86		((cpu_type_t) 7)
+#define CPU_TYPE_I386		CPU_TYPE_X86		/* compatibility */
+#define	CPU_TYPE_X86_64		(CPU_TYPE_X86 | CPU_ARCH_ABI64)
+
 /* skip CPU_TYPE_MIPS		((cpu_type_t) 8)	*/
 /* skip 			((cpu_type_t) 9)	*/
 #define CPU_TYPE_MC98000	((cpu_type_t) 10)
@@ -134,7 +104,7 @@ extern struct machine_slot	machine_slot[];
 /* skip	CPU_TYPE_ALPHA		((cpu_type_t) 16)	*/
 /* skip				((cpu_type_t) 17)	*/
 #define CPU_TYPE_POWERPC		((cpu_type_t) 18)
-
+#define CPU_TYPE_POWERPC64		(CPU_TYPE_POWERPC | CPU_ARCH_ABI64)
 
 /*
  *	Machine subtypes (these are defined here, instead of in a machine
@@ -156,6 +126,12 @@ extern struct machine_slot	machine_slot[];
 #define	CPU_SUBTYPE_MULTIPLE		((cpu_subtype_t) -1)
 #define CPU_SUBTYPE_LITTLE_ENDIAN	((cpu_subtype_t) 0)
 #define CPU_SUBTYPE_BIG_ENDIAN		((cpu_subtype_t) 1)
+
+/*
+ *     Machine threadtypes.
+ *     This is none - not defined - for most machine types/subtypes.
+ */
+#define CPU_THREADTYPE_NONE		((cpu_threadtype_t) 0)
 
 /*
  *	VAX subtypes (these do *not* necessary conform to the actual cpu
@@ -199,25 +175,49 @@ extern struct machine_slot	machine_slot[];
 #define	CPU_SUBTYPE_MC68030_ONLY	((cpu_subtype_t) 3)
 
 /*
- *	I386 subtypes.
+ *	I386 subtypes
  */
 
-#define	CPU_SUBTYPE_I386_ALL	((cpu_subtype_t) 3)
-#define CPU_SUBTYPE_386		((cpu_subtype_t) 3)
-#define CPU_SUBTYPE_486		((cpu_subtype_t) 4)
-#define CPU_SUBTYPE_486SX	((cpu_subtype_t) 4 + 128)
-#define CPU_SUBTYPE_586		((cpu_subtype_t) 5)
 #define CPU_SUBTYPE_INTEL(f, m)	((cpu_subtype_t) (f) + ((m) << 4))
+
+#define	CPU_SUBTYPE_I386_ALL			CPU_SUBTYPE_INTEL(3, 0)
+#define CPU_SUBTYPE_386					CPU_SUBTYPE_INTEL(3, 0)
+#define CPU_SUBTYPE_486					CPU_SUBTYPE_INTEL(4, 0)
+#define CPU_SUBTYPE_486SX				CPU_SUBTYPE_INTEL(4, 8)	// 8 << 4 = 128
+#define CPU_SUBTYPE_586					CPU_SUBTYPE_INTEL(5, 0)
 #define CPU_SUBTYPE_PENT	CPU_SUBTYPE_INTEL(5, 0)
 #define CPU_SUBTYPE_PENTPRO	CPU_SUBTYPE_INTEL(6, 1)
 #define CPU_SUBTYPE_PENTII_M3	CPU_SUBTYPE_INTEL(6, 3)
 #define CPU_SUBTYPE_PENTII_M5	CPU_SUBTYPE_INTEL(6, 5)
+#define CPU_SUBTYPE_CELERON				CPU_SUBTYPE_INTEL(7, 6)
+#define CPU_SUBTYPE_CELERON_MOBILE		CPU_SUBTYPE_INTEL(7, 7)
+#define CPU_SUBTYPE_PENTIUM_3			CPU_SUBTYPE_INTEL(8, 0)
+#define CPU_SUBTYPE_PENTIUM_3_M			CPU_SUBTYPE_INTEL(8, 1)
+#define CPU_SUBTYPE_PENTIUM_3_XEON		CPU_SUBTYPE_INTEL(8, 2)
+#define CPU_SUBTYPE_PENTIUM_M			CPU_SUBTYPE_INTEL(9, 0)
+#define CPU_SUBTYPE_PENTIUM_4			CPU_SUBTYPE_INTEL(10, 0)
+#define CPU_SUBTYPE_PENTIUM_4_M			CPU_SUBTYPE_INTEL(10, 1)
+#define CPU_SUBTYPE_ITANIUM				CPU_SUBTYPE_INTEL(11, 0)
+#define CPU_SUBTYPE_ITANIUM_2			CPU_SUBTYPE_INTEL(11, 1)
+#define CPU_SUBTYPE_XEON				CPU_SUBTYPE_INTEL(12, 0)
+#define CPU_SUBTYPE_XEON_MP				CPU_SUBTYPE_INTEL(12, 1)
 
 #define CPU_SUBTYPE_INTEL_FAMILY(x)	((x) & 15)
 #define CPU_SUBTYPE_INTEL_FAMILY_MAX	15
 
 #define CPU_SUBTYPE_INTEL_MODEL(x)	((x) >> 4)
 #define CPU_SUBTYPE_INTEL_MODEL_ALL	0
+
+/*
+ *	X86 subtypes.
+ */
+
+#define CPU_SUBTYPE_X86_ALL		((cpu_subtype_t)3)
+#define CPU_SUBTYPE_X86_64_ALL		((cpu_subtype_t)3)
+#define CPU_SUBTYPE_X86_ARCH1		((cpu_subtype_t)4)
+
+
+#define CPU_THREADTYPE_INTEL_HTT	((cpu_threadtype_t) 1)
 
 /*
  *	Mips subtypes.
@@ -285,5 +285,21 @@ extern struct machine_slot	machine_slot[];
 #define CPU_SUBTYPE_POWERPC_SCVger	((cpu_subtype_t) 11)
 #endif
 #define CPU_SUBTYPE_POWERPC_970		((cpu_subtype_t) 100)
+
+/*
+ *      CPU families (sysctl hw.cpufamily)
+ *
+ * NB: the encodings of the CPU families are intentionally arbitrary.
+ * There is no ordering, and you should never try to deduce whether
+ * or not some feature is available based on the family.
+ * Use feature flags (eg, hw.optional.altivec) to test for optional
+ * functionality.
+ */
+#define CPUFAMILY_UNKNOWN    0
+#define CPUFAMILY_POWERPC_G3 0xcee41549
+#define CPUFAMILY_POWERPC_G4 0x77c184ae
+#define CPUFAMILY_POWERPC_G5 0xed76d8aa
+#define CPUFAMILY_INTEL_6_14 0x73d67300  /* Intel Core Solo and Intel Core Duo (32-bit Pentium-M with SSE3) */
+#define CPUFAMILY_INTEL_6_15 0x426f69ef  /* Intel Core 2 */
 
 #endif	/* _MACH_MACHINE_H_ */

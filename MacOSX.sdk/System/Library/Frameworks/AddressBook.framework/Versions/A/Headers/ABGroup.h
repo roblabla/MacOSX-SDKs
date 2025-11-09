@@ -63,12 +63,12 @@
     // The default distribution identifier is the property's primary identifier
     // Use nil for the identifer to reset the distribution identifier to the default (e.g. primary)
     // Raises if property or person is nil
-    // Returns YES is successful
+    // Returns YES if successful
 
 - (NSString *)distributionIdentifierForProperty:(NSString *)property person:(ABPerson *)person;
     // Returns the distribution identifier for a given property and person. If not set then returns the property primary identifier
     // Raises if property or person is nil
-    // Returns the distribution identifier or nil if not sucessfull
+    // Returns the distribution identifier or nil if not successful
 @end
 
 
@@ -84,11 +84,11 @@
     //          key: propety name
     //          value: property type
     // Property name must be unique
-    // Returns YES is successful
+    // Returns YES if successful
 
 + (int)removeProperties:(NSArray *)properties;
     // Removes properties from all groups
-    // returns YES is successful
+    // returns YES if successful
 
 + (NSArray *)properties;
     // Returns an array of property names

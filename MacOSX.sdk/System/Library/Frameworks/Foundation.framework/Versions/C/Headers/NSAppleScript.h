@@ -1,24 +1,21 @@
 /*
 	NSAppleScript.h
-	Copyright (c) 2002-2003, Apple Computer, Inc.
+	Copyright (c) 2002-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 #import <Foundation/NSObject.h>
 
-@class NSAppleEventDescriptor;
-@class NSDictionary;
-@class NSString;
-@class NSURL;
+#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+@class NSAppleEventDescriptor, NSDictionary, NSString, NSURL;
 
 // If the result of -initWithContentsOfURL:error:, -compileAndReturnError:, -executeAndReturnError:, or -executeAppleEvent:error:, signals failure (nil, NO, nil, or nil, respectively), a pointer to an autoreleased dictionary is put at the location pointed to by the error parameter.  The error info dictionary may contain entries that use any combination of the following keys, including no entries at all.
-FOUNDATION_EXPORT NSString * const NSAppleScriptErrorMessage; // NSString
-FOUNDATION_EXPORT NSString * const NSAppleScriptErrorNumber; // NSNumber
-FOUNDATION_EXPORT NSString * const NSAppleScriptErrorAppName; // NSString
-FOUNDATION_EXPORT NSString * const NSAppleScriptErrorBriefMessage; // NSString
-FOUNDATION_EXPORT NSString * const NSAppleScriptErrorRange; // NSValue (containing a range)
+FOUNDATION_EXPORT NSString *const NSAppleScriptErrorMessage AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER; // NSString
+FOUNDATION_EXPORT NSString *const NSAppleScriptErrorNumber AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER; // NSNumber
+FOUNDATION_EXPORT NSString *const NSAppleScriptErrorAppName AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER; // NSString
+FOUNDATION_EXPORT NSString *const NSAppleScriptErrorBriefMessage AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER; // NSString
+FOUNDATION_EXPORT NSString *const NSAppleScriptErrorRange AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER; // NSValue containing an NSRange
 
 @interface NSAppleScript : NSObject<NSCopying> {
     @private

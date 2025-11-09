@@ -3,9 +3,9 @@
  
      Contains:   Device Manager Interfaces.
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -164,6 +164,7 @@ struct DRVRHeader {
 typedef struct DRVRHeader               DRVRHeader;
 typedef DRVRHeader *                    DRVRHeaderPtr;
 typedef DRVRHeaderPtr *                 DRVRHeaderHandle;
+typedef struct OpaqueDCtlHandle*        DCtlHandle;
 /*  The NDRV Driver IO Entry Point and Commands */
 typedef UInt16                          UnitNumber;
 typedef UInt32                          DriverOpenCount;

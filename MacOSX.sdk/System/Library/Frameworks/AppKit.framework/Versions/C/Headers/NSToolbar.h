@@ -1,7 +1,7 @@
 /*
 	NSToolbar.h
 	Application Kit
-	Copyright (c) 2000-2003, Apple Computer, Inc.
+	Copyright (c) 2000-2004, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -27,13 +27,13 @@ typedef enum { NSToolbarSizeModeDefault, NSToolbarSizeModeRegular, NSToolbarSize
     id				_initPListTarget; 
     
     NSString *			_selectedItemIdentifier;
-    int				_tbReserved1;
+    void *			_metrics;
 
     id				_delegate;
     NSWindow *			_window;
     id				_configPalette;
     id 				_toolbarView;
-    int				_notifPostEnabledCount;
+    int				_syncPostEnabledCount;
     
     struct __tbFlags {
 	unsigned int allowsUserCustomization:1;
@@ -56,12 +56,15 @@ typedef enum { NSToolbarSizeModeDefault, NSToolbarSizeModeRegular, NSToolbarSize
         unsigned int showHideDuringConfigurationChangeDisabled:1;
 	unsigned int displayMode:2;
 	unsigned int sizeMode:2;
-	unsigned int delegateSelectableItemIdentifiers:1;
-	unsigned int RESERVED:4;
+	unsigned int doNotShowBaselineSeparator:1;
+        unsigned int hideWithoutResizingWindowHint:1;
+        unsigned int autovalidatesItemsDisabled:1;
+        unsigned int inAutovalidation:1;
+	unsigned int loadedMetrics:1;
     } _tbFlags;
 
     int				_customizationSheetWidth;
-    void *			_tbReserved;
+    id				_tbReserved;
 }
 
 - (id)initWithIdentifier:(NSString *)identifier;
@@ -98,6 +101,13 @@ typedef enum { NSToolbarSizeModeDefault, NSToolbarSizeModeRegular, NSToolbarSize
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 - (void)setSizeMode:(NSToolbarSizeMode)sizeMode;
 - (NSToolbarSizeMode)sizeMode;
+#endif
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+/* Use this API to hide the baseline NSToolbar draws between itself and the main window contents.  The default is YES.  This method should only be used before the toolbar is attached to its window (-[NSWindow setToolbar:]).
+*/
+- (void)setShowsBaselineSeparator:(BOOL)flag;
+- (BOOL)showsBaselineSeparator;
 #endif
 
 - (void)setAllowsUserCustomization:(BOOL)allowCustomization;

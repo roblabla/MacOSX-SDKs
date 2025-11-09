@@ -3,9 +3,9 @@
  
      Contains:   Quickdraw Text Interfaces.
  
-     Version:    Quickdraw-150.7~2
+     Version:    Quickdraw-192.24~58
  
-     Copyright:  © 1983-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1983-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -33,22 +33,22 @@ extern "C" {
 
 #pragma options align=mac68k
 
-/* new CGrafPort bottleneck ("newProc2") function, used in Unicode Text drawing */
 /*
- *  StandardGlyphs()
+ *  The remaining functions in this file have all been deprecated on Mac OS X 10.4. There are other
+ *  solutions that are recommended that provide better compatibility with the rest of the operating
+ *  system.
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in QuickDrawText 8.5 and later
+ *  Instead of using the QuickDraw functions, you should consider the following:
+ *
+ *  1.  For drawing and measuring text, you can use the Appearance Manager API in HITheme.h or the
+ *      ATSUI API in ATSUnicode.h to render text directly through a Quartz graphics context.
+ *
+ *  2.  For accessing information on fonts tracked by the operating system, please refer to the
+ *      functions described in ATSFont.h.
+ *  
+ *  3.  For accessing and modifying information on fonts in a Quartz graphics context, please refer
+ *      to the functions described in CoreGraphics.h.
  */
-extern OSStatus 
-StandardGlyphs(
-  void *      dataStream,
-  ByteCount   size)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
 enum {
                                         /* CharToPixel directions */
   leftCaret                     = 0,    /*Place caret for left block*/
@@ -62,8 +62,8 @@ enum {
   smHilite                      = 1     /*Direction is TESysJust - obsolete */
 };
 
+/* Constants for styleRunPosition argument in PortionLine, DrawJustified, MeasureJustified, CharToPixel, and PixelToChar. */
 enum {
-                                        /*Constants for styleRunPosition argument in PortionLine, DrawJustified, MeasureJustified, CharToPixel, and PixelToChar.*/
   onlyStyleRun                  = 0,    /* This is the only style run on the line */
   leftStyleRun                  = 1,    /* This is leftmost of multiple style runs on the line */
   rightStyleRun                 = 2,    /* This is rightmost of multiple style runs on the line */
@@ -74,20 +74,20 @@ enum {
   smMiddleStyleRun              = 3     /* obsolete */
 };
 
-/* type for styleRunPosition parameter in PixelToChar etc. */
+/*  Type for styleRunPosition parameter in PixelToChar etc. */
 typedef short                           JustStyleCode;
-/* Type for truncWhere parameter in TruncString, TruncText */
+/*  Type for truncWhere parameter in TruncString, TruncText */
 typedef short                           TruncCode;
+/*  Constants for truncWhere argument in TruncString and TruncText */
 enum {
-                                        /* Constants for truncWhere argument in TruncString and TruncText */
   truncEnd                      = 0,    /* Truncate at end */
   truncMiddle                   = 0x4000, /* Truncate in middle */
   smTruncEnd                    = 0,    /* Truncate at end - obsolete */
   smTruncMiddle                 = 0x4000 /* Truncate in middle - obsolete */
 };
 
+/*  Constants for TruncString and TruncText results */
 enum {
-                                        /* Constants for TruncString and TruncText results */
   notTruncated                  = 0,    /* No truncation was necessary */
   truncated                     = 1,    /* Truncation performed */
   truncErr                      = -1,   /* General error */
@@ -103,13 +103,11 @@ enum {
   smBreakOverflow               = 2
 };
 
-/*QuickTime3.0*/
+/* Constants for txFlags (which used to be the pad field after txFace) in QuickTime 3.0. */
 enum {
-                                        /* Constants for txFlags (which used to be the pad field after txFace) */
   tfAntiAlias                   = 1 << 0,
   tfUnicode                     = 1 << 1
 };
-
 
 struct FontInfo {
   short               ascent;
@@ -121,8 +119,26 @@ typedef struct FontInfo                 FontInfo;
 
 typedef short                           FormatOrder[1];
 typedef FormatOrder *                   FormatOrderPtr;
-/* FormatStatus was moved to TextUtils.i */
-/* OffsetTable moved to IntlResources.i */
+/* FormatStatus was moved to TextUtils.i.*/
+/* OffsetTable moved to IntlResources.i.*/
+
+/*
+ *  StandardGlyphs()   *** DEPRECATED ***
+ *  
+ *  Discussion:
+ *    The CGrafPort bottleneck ("newProc2") function, used in Unicode
+ *    text drawing.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in QuickDrawText 8.5 and later
+ */
+extern OSStatus 
+StandardGlyphs(
+  void *      dataStream,
+  ByteCount   size)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
 
 typedef CALLBACK_API( Boolean , StyleRunDirectionProcPtr )(short styleRunIndex, void *dirParam);
 typedef STACK_UPP_TYPE(StyleRunDirectionProcPtr)                StyleRunDirectionUPP;
@@ -135,7 +151,7 @@ typedef STACK_UPP_TYPE(StyleRunDirectionProcPtr)                StyleRunDirectio
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern StyleRunDirectionUPP
-NewStyleRunDirectionUPP(StyleRunDirectionProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewStyleRunDirectionUPP(StyleRunDirectionProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  DisposeStyleRunDirectionUPP()
@@ -146,7 +162,7 @@ NewStyleRunDirectionUPP(StyleRunDirectionProcPtr userRoutine) AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeStyleRunDirectionUPP(StyleRunDirectionUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeStyleRunDirectionUPP(StyleRunDirectionUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  InvokeStyleRunDirectionUPP()
@@ -160,7 +176,7 @@ extern Boolean
 InvokeStyleRunDirectionUPP(
   short                 styleRunIndex,
   void *                dirParam,
-  StyleRunDirectionUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  StyleRunDirectionUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *  Pixel2Char()
@@ -183,10 +199,10 @@ InvokeStyleRunDirectionUPP(
 
 
 /*
- *  PixelToChar()
+ *  PixelToChar()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -200,14 +216,14 @@ PixelToChar(
   Fixed *         widthRemaining,
   JustStyleCode   styleRunPosition,
   Point           numer,
-  Point           denom)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Point           denom)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  CharToPixel()
+ *  CharToPixel()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -220,14 +236,14 @@ CharToPixel(
   short           direction,
   JustStyleCode   styleRunPosition,
   Point           numer,
-  Point           denom)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Point           denom)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DrawJustified()
+ *  DrawJustified()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -238,14 +254,14 @@ DrawJustified(
   Fixed           slop,
   JustStyleCode   styleRunPosition,
   Point           numer,
-  Point           denom)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Point           denom)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  MeasureJustified()
+ *  MeasureJustified()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -257,14 +273,14 @@ MeasureJustified(
   Ptr             charLocs,
   JustStyleCode   styleRunPosition,
   Point           numer,
-  Point           denom)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Point           denom)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  PortionLine()
+ *  PortionLine()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -274,14 +290,14 @@ PortionLine(
   long            textLen,
   JustStyleCode   styleRunPosition,
   Point           numer,
-  Point           denom)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Point           denom)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  HiliteText()
+ *  HiliteText()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -291,7 +307,7 @@ HiliteText(
   short         textLength,
   short         firstOffset,
   short         secondOffset,
-  OffsetTable   offsets)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OffsetTable   offsets)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -325,24 +341,24 @@ HiliteText(
 
 
 /*
- *  VisibleLength()
+ *  VisibleLength()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
 VisibleLength(
   Ptr    textPtr,
-  long   textLength)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long   textLength)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetFormatOrder()
+ *  GetFormatOrder()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -353,98 +369,98 @@ GetFormatOrder(
   short                  lastFormat,
   Boolean                lineRight,
   StyleRunDirectionUPP   rlDirProc,
-  Ptr                    dirParam)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Ptr                    dirParam)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  TextFont()
+ *  TextFont()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-TextFont(short font)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TextFont(short font)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  TextFace()
+ *  TextFace()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-TextFace(StyleParameter face)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TextFace(StyleParameter face)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  TextMode()
+ *  TextMode()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-TextMode(short mode)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TextMode(short mode)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  TextSize()
+ *  TextSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-TextSize(short size)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TextSize(short size)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SpaceExtra()
+ *  SpaceExtra()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SpaceExtra(Fixed extra)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SpaceExtra(Fixed extra)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DrawChar()
+ *  DrawChar()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DrawChar(CharParameter ch)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DrawChar(CharParameter ch)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  DrawString()
+ *  DrawString()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DrawString(ConstStr255Param s)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DrawString(ConstStr255Param s)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  [Mac]DrawText()
+ *  [Mac]DrawText()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -455,38 +471,38 @@ extern void
 MacDrawText(
   const void *  textBuf,
   short         firstByte,
-  short         byteCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short         byteCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  CharWidth()
+ *  CharWidth()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-CharWidth(CharParameter ch)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CharWidth(CharParameter ch)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  StringWidth()
+ *  StringWidth()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-StringWidth(ConstStr255Param s)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+StringWidth(ConstStr255Param s)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  TextWidth()
+ *  TextWidth()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -494,14 +510,14 @@ extern short
 TextWidth(
   const void *  textBuf,
   short         firstByte,
-  short         byteCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short         byteCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  MeasureText()
+ *  MeasureText()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -509,38 +525,38 @@ extern void
 MeasureText(
   short         count,
   const void *  textAddr,
-  void *        charLocs)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *        charLocs)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetFontInfo()
+ *  GetFontInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GetFontInfo(FontInfo * info)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetFontInfo(FontInfo * info)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  CharExtra()
+ *  CharExtra()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-CharExtra(Fixed extra)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CharExtra(Fixed extra)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  StdText()
+ *  StdText()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -549,14 +565,14 @@ StdText(
   short         count,
   const void *  textAddr,
   Point         numer,
-  Point         denom)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Point         denom)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  StdTxMeas()
+ *  StdTxMeas()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -566,14 +582,14 @@ StdTxMeas(
   const void *  textAddr,
   Point *       numer,
   Point *       denom,
-  FontInfo *    info)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FontInfo *    info)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  StyledLineBreak()
+ *  StyledLineBreak()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -585,14 +601,14 @@ StyledLineBreak(
   long     textEnd,
   long     flags,
   Fixed *  textWidth,
-  long *   textOffset)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *   textOffset)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  TruncString()
+ *  TruncString()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -600,14 +616,14 @@ extern short
 TruncString(
   short       width,
   Str255      theString,
-  TruncCode   truncWhere)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TruncCode   truncWhere)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  TruncText()
+ *  TruncText()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -616,7 +632,7 @@ TruncText(
   short       width,
   Ptr         textPtr,
   short *     length,
-  TruncCode   truncWhere)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TruncCode   truncWhere)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 
@@ -641,10 +657,10 @@ TruncText(
 
 
 /*
- *  stdtext()
+ *  stdtext()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -653,23 +669,22 @@ stdtext(
   short          count,
   const void *   textAddr,
   const Point *  numer,
-  const Point *  denom)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const Point *  denom)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SwapQDTextFlags()
+ *  SwapQDTextFlags()   *** DEPRECATED ***
  *  
  *  Discussion:
- *    Obsolete. Use QDSwapTextFlags instead (in Quickdraw.h).
+ *    Use QDSwapTextFlags instead (in Quickdraw.h).
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework but deprecated in 10.4
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern UInt32 
-SwapQDTextFlags(UInt32 newFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
+SwapQDTextFlags(UInt32 newFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 #if OLDROUTINENAMES

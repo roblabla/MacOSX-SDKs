@@ -59,95 +59,16 @@
 #define	_SYS_USER_H_
 
 #include <sys/appleapiopts.h>
-#ifndef KERNEL
 /* stuff that *used* to be included by user.h, or is now needed */
 #include <errno.h>
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <sys/ucred.h>
 #include <sys/uio.h>
-#endif
 #include <sys/resourcevar.h>
-#include <sys/signalvar.h>
 #include <sys/vm.h>		/* XXX */
 #include <sys/sysctl.h>
  
-#ifdef KERNEL
-
-#ifdef __APPLE_API_PRIVATE
-struct nlminfo;
-/*
- *	Per-thread U area.
- */
-struct uthread {
-	int	*uu_ar0;		/* address of users saved R0 */
-
-	/* syscall parameters, results and catches */
-	int	uu_arg[8];		/* arguments to current system call */
-	int	*uu_ap;			/* pointer to arglist */
-    int uu_rval[2];
-
-	/* thread exception handling */
-	int	uu_code;			/* ``code'' to trap */
-	char uu_cursig;				/* p_cursig for exc. */
-	struct nlminfo *uu_nlminfo;	/* for rpc.lockd */
-	/* support for syscalls which use continuations */
-	union {
-		struct _select {
-			u_int32_t	*ibits, *obits; /* bits to select on */
-			uint	nbytes;	/* number of bytes in ibits and obits */
-			u_int64_t abstime;
-			int poll;
-			int error;
-			int count;
-			int nfcount;
-			char * wql;
-			int allocsize;		/* select allocated size */
-		} ss_select;			/* saved state for select() */
-		struct _wait {
-			int	f;
-		} ss_wait;			/* saved state for wait?() */
-	  struct _owait {
-		int pid;
-		int *status;
-		int options;
-		struct rusage *rusage;
-	  } ss_owait;
-	  int uu_nfs_myiod;    /* saved state for nfsd */
-	} uu_state;
-
-  /* internal support for continuation framework */
-    int (*uu_continuation)(int);
-    int uu_pri;
-    int uu_timo;
-	int uu_flag;
-	struct proc * uu_proc;
-	void * uu_userstate;
-	wait_queue_sub_t uu_wqsub;
-	sigset_t uu_siglist;				/* signals pending for the thread */
-	sigset_t  uu_sigwait;				/*  sigwait on this thread*/
-	sigset_t  uu_sigmask;				/* signal mask for the thread */
-	sigset_t  uu_oldmask;				/* signal mask saved before sigpause */
-	thread_act_t uu_act;
-	sigset_t  uu_vforkmask;				/* saved signal mask during vfork */
-
-	TAILQ_ENTRY(uthread) uu_list;		/* List of uthreads in proc */
-
-	struct kaudit_record 		*uu_ar;		/* audit record */
-	struct task*	uu_aio_task;			/* target task for async io */
-};
-
-typedef struct uthread * uthread_t;
-
-/* Definition of uu_flag */
-#define	USAS_OLDMASK	0x1		/* need to restore mask before pause */
-#define UNO_SIGMASK		0x2		/* exited thread; invalid sigmask */
-/* Kept same as in proc */
-#define P_VFORK     0x2000000   /* process has vfork children */
-
-#endif /* __APPLE_API_PRIVATE */
-
-#endif	/* KERNEL */
 
 /*
  * Per process structure containing data that isn't needed in core

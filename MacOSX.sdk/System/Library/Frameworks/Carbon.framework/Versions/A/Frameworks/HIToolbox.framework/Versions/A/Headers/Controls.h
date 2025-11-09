@@ -3,9 +3,9 @@
  
      Contains:   Control Manager interfaces
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -510,7 +510,10 @@ enum {
    * The data browser only changes the size of its scrollbars. As of
    * Mac OS X 10.3, chasing arrows, disclosure button, popup button,
    * scroll view, search field and little arrows control also accept
-   * this tag. Still check your return values!
+   * this tag. As of Mac OS X 10.4, if the font of the editable text
+   * has not been overridden, the font size of the combo box and search
+   * field will adjust to respect the size of the control. Still check
+   * your return values!
    */
   kControlSizeTag               = 'size'
 };
@@ -628,7 +631,7 @@ enum {
   kControlSizeSmall             = 1,
 
   /*
-   * Use the control's small drawing variant.  Currently supported by
+   * Use the control's large drawing variant.  Currently supported by
    * the Indeterminate Progress Bar, Progress Bar and Round Button
    * controls.
    */
@@ -841,6 +844,16 @@ InvokeControlDefUPP(
 /* Certain controls can have a keyfilter attached to them.                              */
 /* Definition of a key filter for intercepting and possibly changing keystrokes         */
 /* which are destined for a control.                                                    */
+/*                                                                                      */
+/* IMPORTANT! Because this filter provides WorldScript-encoded text in its parameters,  */
+/* it provides no meaningful information for key events generated when a Unicode        */
+/* keyboard layout or input method is active; these layouts and input methods generate  */
+/* Unicode text that often cannot be translated into any WorldScript encoding. On       */
+/* Mac OS X, you should avoid using this filter, or at most, use the filter as an       */
+/* indication that the text is changing but do not depend on the charCode parameter to  */
+/* the filter. Use a kEventTextInputUnicodeForKeyEvent Carbon event handler as a        */
+/* replacement for the ControlKeyFilter callback; on Mac OS X 10.4 and later, you can   */
+/* also use a kEventTextShouldChangeInRange or kEventTextDidChange event handler.       */
 /* Key Filter Result Codes                                                          */
 /* The filter proc should return one of the two constants below. If                 */
 /* kKeyFilterBlockKey is returned, the key is blocked and never makes it to the     */
@@ -1212,8 +1225,29 @@ IsControlActive(ControlRef inControl)                         AVAILABLE_MAC_OS_X
 /*
  *  IsControlVisible()
  *  
+ *  Summary:
+ *    Returns whether a control is visible.
+ *  
+ *  Discussion:
+ *    Note that IsControlVisible returns a control's effective
+ *    visibility, which is determined both by the control's own
+ *    visibility and the visibility of its parent controls. If a parent
+ *    control is invisible, then this control is considered to be
+ *    invisible also. 
+ *    
+ *    Latent visibility can be determined with HIViewIsLatentlyVisible.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inControl:
+ *      The control whose visibility you wish to determine.
+ *  
+ *  Result:
+ *    A boolean value indicating whether the control is visible (true)
+ *    or hidden (false).
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1760,8 +1794,24 @@ DragControl(
 /*
  *  TestControl()
  *  
+ *  Summary:
+ *    Determines the control part that is at a given point.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    theControl:
+ *      The control to test.
+ *    
+ *    testPoint:
+ *      The location to test. For a non-compositing control, this
+ *      location should be in port-local coordinates; for a compositing
+ *      control, this location should be in view-local coordinates.
+ *  
+ *  Result:
+ *    The control part code that was at the specified location.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1777,8 +1827,37 @@ TestControl(
 /*
  *  FindControl()
  *  
+ *  Summary:
+ *    Finds the control in a window that is at a given point.
+ *  
+ *  Discussion:
+ *    FindControl does not work properly in compositing windows prior
+ *    to Mac OS X 10.4. In earlier releases of Mac OS X, it will return
+ *    the correct control, but the part code parameter will be invalid
+ *    (usually kControlNoPart). 
+ *    
+ *    In Mac OS X 10.2 and later, we recommend using
+ *    HIViewGetViewForMouseEvent or HIViewGetSubviewHit instead of
+ *    FindControl.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    testPoint:
+ *      The point to test. The point should be given in port-local
+ *      coordinates for the specified window.
+ *    
+ *    theWindow:
+ *      The window whose controls to test.
+ *    
+ *    theControl:
+ *      On exit, contains the control that was at the specified
+ *      location.
+ *  
+ *  Result:
+ *    The control part code that was at the specified location.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1802,8 +1881,38 @@ FindControl(
 /*
  *  FindControlUnderMouse()
  *  
+ *  Summary:
+ *    Finds the control in a window that is at a given point.
+ *  
+ *  Discussion:
+ *    FindControlUnderMouse does not work properly in compositing
+ *    windows prior to Mac OS X 10.4. In earlier releases of Mac OS X,
+ *    it will return the correct control, but the part code parameter
+ *    will be invalid (usually kControlNoPart). 
+ *    
+ *    In Mac OS X 10.2 and later, we recommend using
+ *    HIViewGetViewForMouseEvent or HIViewGetSubviewHit instead of
+ *    FindControlUnderMouse.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWhere:
+ *      The point to test. The point should be given in port-local
+ *      coordinates for the specified window.
+ *    
+ *    inWindow:
+ *      The window whose controls to test.
+ *    
+ *    outPart:
+ *      On exit, contains the control part code that was at the
+ *      specified location. You may pass NULL for this parameter if you
+ *      don't need this information.
+ *  
+ *  Result:
+ *    The control that was at the specified location.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1905,23 +2014,6 @@ HandleControlKey(
   SInt16           inKeyCode,
   SInt16           inCharCode,
   EventModifiers   inModifiers)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  IdleControls()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
- */
-extern void 
-IdleControls(WindowRef inWindow)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -3346,7 +3438,9 @@ SetKeyboardFocus(
  *    full keyboard navigation mode. It will only advance the focus
  *    between traditionally focusable controls. If you want to advance
  *    the focus in a way that respects the full keyboard navigation
- *    mode, use the HIViewAdvanceFocus API.
+ *    mode, use the HIViewAdvanceFocus API. AdvanceKeyboardFocus does
+ *    not work for windows in compositing mode. For compositing
+ *    windows, you must call HIViewAdvanceFocus instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -3381,7 +3475,9 @@ AdvanceKeyboardFocus(WindowRef inWindow)                      AVAILABLE_MAC_OS_X
  *    full keyboard navigation mode. It will only reverse the focus
  *    between traditionally focusable controls. If you want to reverse
  *    the focus in a way that respects the full keyboard navigation
- *    mode, use the HIViewAdvanceFocus API.
+ *    mode, use the HIViewAdvanceFocus API. ReverseKeyboardFocus does
+ *    not work for windows in compositing mode. For compositing
+ *    windows, you must call HIViewAdvanceFocus instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -4189,6 +4285,56 @@ extern void
 SetControlPopupMenuID(
   ControlRef   control,
   short        menuID)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*--------------------------------------------------------------------------------------*/
+/*  ¥ DEPRECATED                                                                        */
+/*                                                                                      */
+/*  All functions below this point are either deprecated (they continue to function     */
+/*  but are not the most modern nor most efficient solution to a problem), or they are  */
+/*  completely unavailable on Mac OS X.                                                 */
+/*--------------------------------------------------------------------------------------*/
+
+/*
+ *  IdleControls()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Applications should remove calls to IdleControls. Custom control
+ *    definitions should use Carbon event loop timers instead.
+ *  
+ *  Summary:
+ *    Gives idle time to any controls that want the kControlMsgIdle
+ *    message.
+ *  
+ *  Discussion:
+ *    IdleControls gives idle processing time for controls that set the
+ *    kControlWantsIdle feature bit. IdleControls is deprecated on Mac
+ *    OS X.  System-supplied controls do not respond to IdleControls
+ *    being called on Mac OS X. 
+ *    
+ *    Custom controls should use repeating Carbon event loop timers to
+ *    perform tasks, such as animation, that previously used time given
+ *    with IdleControls().  See InstallEventLoopTimer() in
+ *    CarbonEventsCore.h for more information.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The WindowRef whose controls are offered idle time.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.4
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
+ */
+extern void 
+IdleControls(WindowRef inWindow)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+
+
+
 
 
 

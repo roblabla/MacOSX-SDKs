@@ -3,9 +3,9 @@
  
      Contains:   Toolbar and Toolbar Item API
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 2001-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -177,6 +177,49 @@ enum {
   kHICommandHideToolbar         = 'tbhd',
 
   /*
+   * This command causes a window's toolbar visibility to be toggled;
+   * if the toolbar is currently visible, then the toolbar is hidden,
+   * and vice versa. You can set a menu item's command to this ID and
+   * it will be handled and updated automatically for you. The text of
+   * the menu item will also be updated to indicate whether the toolbar
+   * will be shown or hidden. The standard window frame view sends a
+   * command event with this command ID when the toolbar button is
+   * clicked. Available in Mac OS X 10.5 and later.
+   */
+  kHICommandToggleToolbar       = 'tbtg',
+
+  /*
+   * This command causes the visibility of all toolbars with the same
+   * ID as the toolbar in the target window to be toggled. The standard
+   * window frame view sends a command event with this command ID when
+   * the toolbar button is option-clicked. Available in Mac OS X 10.5
+   * and later.
+   */
+  kHICommandToggleAllToolbars   = 'tbta',
+
+  /*
+   * This command causes the display mode and size of a window's
+   * toolbar to be cycled to the next smaller combination. For example,
+   * if the toolbar is currently displaying IconOnly at the Normal
+   * size, then the toolbar will switch display size to Small. The
+   * standard window frame view sends a command event with this command
+   * ID when the toolbar button is command-clicked. Available in Mac OS
+   * X 10.5 and later.
+   */
+  kHICommandCycleToolbarModeSmaller = 'tbms',
+
+  /*
+   * This command causes the display mode and size of a window's
+   * toolbar to be cycled to the next larger combination. For example,
+   * if the toolbar is currently displaying IconOnly at the Normal
+   * size, then the toolbar will switch display mode to IconAndLabel
+   * and display size to Small. The standard window frame view sends a
+   * command event with this command ID when the toolbar button is
+   * command-shift-clicked. Available in Mac OS X 10.5 and later.
+   */
+  kHICommandCycleToolbarModeLarger = 'tbml',
+
+  /*
    * This command, when specified as a toolbar itemÕs command ID, will
    * cause a kEventToolbarItemPerformAction event to be generated when
    * the toolbar itemÕs menu item in the toolbar overflow menu is
@@ -200,6 +243,7 @@ enum {
     kEventToolbarDisplayModeChanged         = 7,
     kEventToolbarDisplaySizeChanged         = 8,
     kEventToolbarLayoutChanged              = 9,
+    kEventToolbarGetSelectableIdentifiers   = 10,
     kEventToolbarBeginMultiChange           = 12,
     kEventToolbarEndMultiChange             = 13
 */
@@ -265,6 +309,45 @@ enum {
  */
 enum {
   kEventToolbarGetAllowedIdentifiers = 2
+};
+
+/*
+ *  kEventClassToolbar / kEventToolbarGetSelectableIdentifiers
+ *  
+ *  Summary:
+ *    This event is sent to the delegate to get a list of all the items
+ *    which can acquire a selection highlight when clicked. This is
+ *    sent out after a toolbar item is clicked by the user. You are
+ *    passed a mutable array to fill in with the identifiers. If you
+ *    pass back a non-empty array, and the clicked item's identifier
+ *    matches one of the identifiers that is in the list, then the
+ *    toolbar will automatically draw that item with a selected
+ *    highlight, and unhighlight the previously selected item. Note
+ *    that the selection will only change in the clicked window; it
+ *    will not change in other windows that share the same toolbar. To
+ *    share the selection across all windows that use the same toolbar,
+ *    you will need to manually change the kHIToolbarItemSelected
+ *    attribute for the clicked item using
+ *    HIToolbarItemChangeAttributes; in this case, you should not
+ *    handle the kEventToolbarGetSelectableIdentifiers event.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamToolbar (in, typeHIToolbarRef)
+ *          The toolbar for which to retrieve identifiers.
+ *    
+ *    --> kEventParamMutableArray (in, typeCFMutableArrayRef)
+ *          A mutable array to fill in with the identifiers.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventToolbarGetSelectableIdentifiers = 10
 };
 
 /*
@@ -504,8 +587,8 @@ enum {
     kEventToolbarItemEnabledStateChanged    = 7,
     kEventToolbarItemPerformAction          = 8,
     kEventToolbarItemWouldAcceptDrop        = 10,
-    kEventToolbarItemAcceptDrop             = 11
-
+    kEventToolbarItemAcceptDrop             = 11,
+    kEventToolbarItemSelectedStateChanged   = 12
 */
 /*
  *  kEventClassToolbarItem / kEventToolbarItemImageChanged
@@ -652,6 +735,34 @@ enum {
  */
 enum {
   kEventToolbarItemEnabledStateChanged = 7
+};
+
+/*
+ *  kEventClassToolbarItem / kEventToolbarItemSelectedStateChanged
+ *  
+ *  Summary:
+ *    This event is sent to the item (itself) when the selected state
+ *    changes. Any interested parties can install handlers on the
+ *    toolbar item to receive notifications.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamWindowRef (in, typeWindowRef)
+ *          The window in which the item is changing state. This
+ *          parameter is optional and may not be present in all
+ *          instances of this event. If not present, the item is
+ *          changing state across all windows that share the same
+ *          toolbar.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventToolbarItemSelectedStateChanged = 12
 };
 
 /*
@@ -926,8 +1037,30 @@ enum {
    * attribute is available in Mac OS X 10.3 and later.
    */
   kHIToolbarItemLabelDisabled   = (1 << 5),
-  kHIToolbarItemValidAttrs      = kHIToolbarItemAllowDuplicates | kHIToolbarItemIsSeparator | kHIToolbarItemCantBeRemoved | kHIToolbarItemAnchoredLeft | kHIToolbarItemSendCmdToUserFocus | kHIToolbarItemLabelDisabled,
-  kHIToolbarItemMutableAttrs    = kHIToolbarItemCantBeRemoved | kHIToolbarItemAnchoredLeft | kHIToolbarItemLabelDisabled
+
+  /*
+   * This item is disabled. Setting this attribute is the same as
+   * calling HIToolbarItemSetEnabled( item, false ). Available on Mac
+   * OS X 10.4 and later.
+   */
+  kHIToolbarItemDisabled        = (1 << 6),
+
+  /*
+   * This item is drawn with a selected appearance. Available on Mac OS
+   * X 10.4 and later.
+   */
+  kHIToolbarItemSelected        = (1 << 7),
+
+  /*
+   * The set of all valid toolbar item attributes.
+   */
+  kHIToolbarItemValidAttrs      = kHIToolbarItemAllowDuplicates | kHIToolbarItemIsSeparator | kHIToolbarItemCantBeRemoved | kHIToolbarItemAnchoredLeft | kHIToolbarItemSendCmdToUserFocus | kHIToolbarItemLabelDisabled | kHIToolbarItemDisabled | kHIToolbarItemSelected,
+
+  /*
+   * The set of toolbar item attributes that can be changed with
+   * HIToolbarItemChangeAttributes.
+   */
+  kHIToolbarItemMutableAttrs    = kHIToolbarItemCantBeRemoved | kHIToolbarItemAnchoredLeft | kHIToolbarItemLabelDisabled | kHIToolbarItemDisabled | kHIToolbarItemSelected
 };
 
 /*======================================================================================*/
@@ -1635,6 +1768,195 @@ HIToolbarItemChangeAttributes(
 
 
 /*
+ *  HIToolbarItemGetAttributesInWindow()
+ *  
+ *  Summary:
+ *    Returns the attributes of the given item in a given window, and
+ *    information about which attributes are overridden for that window.
+ *  
+ *  Discussion:
+ *    The HIToolbarItemGetAttributesInWindow returns the combined
+ *    attributes that control a toolbar item view in a specific window.
+ *    It also returns a bitmask of toolbar item attributes indicating
+ *    which attributes are overridden for this particular window, and
+ *    which are inherited from the non-window-specific toolbar item
+ *    attributes.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inItem:
+ *      The item in question.
+ *    
+ *    inWindow:
+ *      The window containing the item. Passing NULL is equivalent to
+ *      calling HIToolbarItemGetAttributes; it returns the
+ *      non-window-specific attributes for the item with no per-window
+ *      modifications.
+ *    
+ *    outOverriddenAttributes:
+ *      On exit, contains a bitmask indicating which attributes are
+ *      overridden for this particular window. May be NULL if you don't
+ *      need this information.
+ *    
+ *    outCombinedAttributes:
+ *      On exit, contains the effective attributes for this item in
+ *      this window, produced by combining the item's
+ *      non-window-specific attributes with the overridden attributes
+ *      for this window. May be NULL if you don't need this information.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIToolbarItemGetAttributesInWindow(
+  HIToolbarItemRef   inItem,
+  WindowRef          inWindow,                      /* can be NULL */
+  OptionBits *       outOverriddenAttributes,       /* can be NULL */
+  OptionBits *       outCombinedAttributes)         /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  HIToolbarItemChangeAttributesInWindow()
+ *  
+ *  Summary:
+ *    Changes the attributes of a toolbar item in a specific window.
+ *  
+ *  Discussion:
+ *    The HIToolbarItemChangeAttributesInWindow API allows the
+ *    attributes of a toolbar item to be overridden on a per-window
+ *    basis. The attributes used to draw a toolbar item view in a
+ *    particular window are determined by combining the
+ *    non-window-specific attributes for the item (set by
+ *    HIToolbarItemChangeAttributes) with the window-specific
+ *    attributes (set by HIToolbarItemChangeAttributesInWindow). For
+ *    example, your application might have a toolbar that is shared
+ *    across several windows, but in some windows a toolbar item might
+ *    be enabled, and in other windows the same item might be disabled.
+ *    
+ *    
+ *    Whenever HIToolbarChangeAttributesInWindow is used to set or
+ *    clear attributes, the toolbar item adds the modified attributes
+ *    to a bitmask of attributes recording which attributes are
+ *    overridden for that particular window. Once an attribute is
+ *    overridden for a window (whether it is set or cleared), the
+ *    attribute remains overridden for that window until
+ *    HIToolbarItemChangeAttributesInWindow is called with that
+ *    attribute specified in the inAttrsToNoLongerOverride parameter.
+ *    The attributes specified in that parameter will be removed from
+ *    the override mask for the toolbar item in the specified window.
+ *    The effective value of attributes removed from the override mask
+ *    will then revert back to the non-window- specific value of the
+ *    attributes for the toolbar item. 
+ *    
+ *    Only those attributes defined by the kHIToolbarItemMutableAttrs
+ *    can be passed into this API. All other options can only be
+ *    specified at creation. 
+ *    
+ *    The per-window attributes for an item are not saved in the
+ *    toolbar preferences.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inItem:
+ *      The item in question.
+ *    
+ *    inWindow:
+ *      The window containing the item. Passing NULL is equivalent to
+ *      calling HIToolbarItemChangeAttributes; the item's
+ *      non-window-specific attributes will be changed, rather than its
+ *      per-window attributes.
+ *    
+ *    inAttrsToSet:
+ *      The attributes to set on the item. Pass
+ *      kHIToolbarItemNoAttributes if you are only clearing attributes.
+ *      These attributes will be added to the overridden attribute mask
+ *      associated with this item in this window.
+ *    
+ *    inAttrsToClear:
+ *      The attributes to clear on the item. Pass
+ *      kHIToolbarItemNoAttributes if you are only setting attributes.
+ *      These attributes will be added to the overridden attribute mask
+ *      associated with this item in this window.
+ *    
+ *    inAttrsToNoLongerOverride:
+ *      The attributes that should no longer be overridden at the
+ *      per-window level for this toolbar item; pass
+ *      kHIToolbarItemNoAttributes if all attributes should remain
+ *      overridden. If an attribute is in both this parameter and
+ *      either the inAttrsToSet or inAttrsToClear parameters, the
+ *      attribute will no longer be overridden. If the inWindow
+ *      parameter is NULL, this parameter must be
+ *      kHIToolbarItemNoAttributes; if not, paramErr will be returned.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIToolbarItemChangeAttributesInWindow(
+  HIToolbarItemRef   inItem,
+  WindowRef          inWindow,                        /* can be NULL */
+  OptionBits         inAttrsToSet,
+  OptionBits         inAttrsToClear,
+  OptionBits         inAttrsToNoLongerOverride)               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  HIToolbarGetSelectedItemInWindow()
+ *  
+ *  Summary:
+ *    Returns the toolbar item that is selected in a given window.
+ *  
+ *  Discussion:
+ *    Each window that shares a toolbar may have a different selected
+ *    item. This API returns the selected item in a particular window.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inToolbar:
+ *      The toolbar in question.
+ *    
+ *    inWindow:
+ *      A window containing the toolbar.
+ *    
+ *    outItem:
+ *      On exit, contains the toolbar item that is selected in the
+ *      specified window, or NULL if there is no selected item.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIToolbarGetSelectedItemInWindow(
+  HIToolbarRef        inToolbar,
+  WindowRef           inWindow,
+  HIToolbarItemRef *  outItem)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
  *  HIToolbarItemSetLabel()
  *  
  *  Discussion:
@@ -1848,7 +2170,6 @@ HIToolbarItemGetCommandID(
   MenuCommand *      outCommandID)                            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
-#define _HIToolbarItemSetIconRef HIToolbarItemSetIconRef
 /*
  *  HIToolbarItemSetIconRef()
  *  

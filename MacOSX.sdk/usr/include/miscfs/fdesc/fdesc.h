@@ -65,43 +65,5 @@
 #include  <sys/appleapiopts.h>
 
 #ifdef __APPLE_API_PRIVATE
-#ifdef KERNEL
-struct fdescmount {
-	struct vnode	*f_root;	/* Root node */
-};
-
-#define FD_ROOT		2
-#define FD_DEVFD	3
-#define FD_STDIN	4
-#define FD_STDOUT	5
-#define FD_STDERR	6
-#define FD_DESC		8
-#define FD_MAX		12
-
-typedef enum {
-	Froot,
-	Fdevfd,
-	Fdesc,
-	Flink
-} fdntype;
-
-struct fdescnode {
-	LIST_ENTRY(fdescnode) fd_hash;	/* Hash list */
-	struct vnode	*fd_vnode;	/* Back ptr to vnode */
-	fdntype		fd_type;	/* Type of this node */
-	unsigned	fd_fd;		/* Fd to be dup'ed */
-	char		*fd_link;	/* Link to fd/n */
-	int		fd_ix;		/* filesystem index */
-};
-
-#define VFSTOFDESC(mp)	((struct fdescmount *)((mp)->mnt_data))
-#define	VTOFDESC(vp) ((struct fdescnode *)(vp)->v_data)
-
-extern int fdesc_init __P((struct vfsconf *));
-extern int fdesc_root __P((struct mount *, struct vnode **));
-extern int fdesc_allocvp __P((fdntype, int, struct mount *, struct vnode **));
-extern int (**fdesc_vnodeop_p)(void *);
-extern struct vfsops fdesc_vfsops;
-#endif /* KERNEL */
 #endif /* __APPLE_API_PRIVATE */
 #endif /* __FDESC_FDESC_H__ */

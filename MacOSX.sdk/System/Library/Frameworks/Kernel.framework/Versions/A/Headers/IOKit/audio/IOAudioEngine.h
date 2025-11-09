@@ -213,8 +213,8 @@ public:
      *  A total of the active user clients - those that are currently playing or 
      *    recording audio. */
     UInt32			numActiveUserClients;
-    UInt32			sampleOffset;
-    
+    UInt32			sampleOffset;				// used for input and output if inputSampleOffset is not set, if inputSampleOffset is set used as output only 
+		      
     UInt32			index;
     bool			duringStartup;
 
@@ -235,6 +235,7 @@ protected:
 		IOBufferMemoryDescriptor			*bytesInOutputBufferArrayDescriptor;
 		UInt32								mixClipOverhead;
 		OSArray								*streams;
+	    UInt32								inputSampleOffset;
 	};
     
     ExpansionData   *reserved;
@@ -305,6 +306,36 @@ public:
      */
 	virtual void setClockDomain(UInt32 clockDomain = kIOAudioNewClockDomain);
 
+	// OSMetaClassDeclareReservedUsed(IOAudioEngine, 9);
+    /*!
+	 * @function convertInputSamplesVBR
+     * @abstract Override this method if you want to return a different number of sample frames than was requested.  
+     */
+	virtual IOReturn convertInputSamplesVBR(const void *sampleBuf, void *destBuf, UInt32 firstSampleFrame, UInt32 &numSampleFrames, const IOAudioStreamFormat *streamFormat, IOAudioStream *audioStream);
+
+	// OSMetaClassDeclareReservedUsed(IOAudioEngine, 10);
+    /*!
+	 * @function setInputSampleOffset
+     * @abstract set the offset CoreAudio will read from off the current read pointer
+	 * @param numSamples size of offset in sample
+	 */
+    virtual void setInputSampleOffset(UInt32 numSamples);
+
+	// OSMetaClassDeclareReservedUsed(IOAudioEngine, 11);
+    /*!
+	 * @function setOutputSampleOffset
+     * @abstract set the offset CoreAudio will write at off the current write pointer
+	 * @param numSamples size of offset in sample
+	 */
+    virtual void setOutputSampleOffset(UInt32 numSamples);
+
+protected:
+	
+#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
+	// OSMetaClassDeclareReservedUsed(IOAudioEngine, 12);
+    virtual IOReturn createUserClient(task_t task, void *securityID, UInt32 type, IOAudioEngineUserClient **newUserClient, OSDictionary *properties);
+#endif
+	
 private:
 	OSMetaClassDeclareReservedUsed(IOAudioEngine, 0);
 	OSMetaClassDeclareReservedUsed(IOAudioEngine, 1);
@@ -315,11 +346,15 @@ private:
 	OSMetaClassDeclareReservedUsed(IOAudioEngine, 6);
 	OSMetaClassDeclareReservedUsed(IOAudioEngine, 7);
 	OSMetaClassDeclareReservedUsed(IOAudioEngine, 8);
-
-	OSMetaClassDeclareReservedUnused(IOAudioEngine, 9);
-	OSMetaClassDeclareReservedUnused(IOAudioEngine, 10);
-	OSMetaClassDeclareReservedUnused(IOAudioEngine, 11);
+	OSMetaClassDeclareReservedUsed(IOAudioEngine, 9);
+	OSMetaClassDeclareReservedUsed(IOAudioEngine, 10);
+	OSMetaClassDeclareReservedUsed(IOAudioEngine, 11);
+#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
+	OSMetaClassDeclareReservedUsed(IOAudioEngine, 12);
+#else
 	OSMetaClassDeclareReservedUnused(IOAudioEngine, 12);
+#endif
+
 	OSMetaClassDeclareReservedUnused(IOAudioEngine, 13);
 	OSMetaClassDeclareReservedUnused(IOAudioEngine, 14);
 	OSMetaClassDeclareReservedUnused(IOAudioEngine, 15);
@@ -475,13 +510,18 @@ public:
      *  to connect to this service.  It allocates a new IOAudioEngineUserClient object and increments
      *  the number of connections for this audio engine.  If this is the first user client for this IOAudioEngine,
      *  it calls startAudioEngine().  There is no need to call this function directly.
+	 *  A derived class that requires overriding of newUserClient should override the version with the properties
+	 *  parameter for Intel targets, and without the properties parameter for PPC targets.  The #if __i386__ directive
+	 *  can be used to select between the two behaviors.
      * @param task The task requesting the new user client.
      * @param securityID Optional security paramater passed in by the client - ignored.
      * @param type Optional user client type passed in by the client - ignored.
      * @param handler The new IOUserClient * must be stored in this param on a successful completion.
+     * @param properties A dictionary of additional properties for the connection.
      * @result Returns kIOReturnSuccess on success.  May also result kIOReturnError or kIOReturnNoMemory.
      */
     virtual IOReturn newUserClient(task_t task, void *securityID, UInt32 type, IOUserClient **handler);
+    virtual IOReturn newUserClient(task_t task, void *securityID, UInt32 type, OSDictionary *properties, IOUserClient **handler);
 
     /*!
      * @function addAudioStream
@@ -728,7 +768,7 @@ protected:
     virtual void setSampleOffset(UInt32 numSamples);
 
     /*!
-     * @function setErases
+     * @function setRunEraseHead
      * @abstract Tells the audio engine whether or not to run the erase head.
      * @discussion By default, output audio engines run the erase head and input audio engines do not.  This method can
      *  be called after setDirection() is called in order to change the default behavior.

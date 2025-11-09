@@ -3,9 +3,9 @@
  
      Contains:   Window Manager Interfaces
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1997-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1997-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -211,8 +211,8 @@ enum {
    * windows, but is layered beneath floating windows. Use
    * kThemeBrushToolbarBackground to draw the background of a toolbar
    * window in Mac OS X or later; CarbonLib does not currently support
-   * kThemeBrushToolbarBackground. Floating windows are initially
-   * placed in the toolbar window group, given a modality of
+   * kThemeBrushToolbarBackground. Toolbar windows are initially placed
+   * in the toolbar window group, given a modality of
    * kWindowModalityNone, and given an activation scope of
    * kWindowActivationScopeNone. Available in CarbonLib 1.1 and later,
    * and Mac OS X.
@@ -238,12 +238,27 @@ enum {
    * the window manager port; by creating a full-screen overlay window
    * and drawing into it, you can draw over any window in any
    * application without disturbing the contents of the windows
-   * underneath your drawing. After creating an overlay window, you
-   * should use CGContextClearRect to clear the overlay window's alpha
-   * channel to zero; this ensures the initial transparancy of the
-   * window. You must use CoreGraphics to draw into an overlay window
-   * to preserve the transparency of the window. Overlay windows are
-   * initially placed in the overlay window group, given a modality of
+   * underneath your drawing. Overlay windows have a default handler
+   * for kEventWindowPaint that uses CGContextClearRect to clear the
+   * overlay window's alpha channel to zero. This ensures the initial
+   * transparency of the window. You can install your own
+   * kEventWindowPaint handler to do your own drawing; typically, you
+   * would call through to the default handler with
+   * CallNextEventHandler first, and then use QDBeginCGContext to
+   * create your own context for drawing. You can use either QuickDraw
+   * or CoreGraphics to draw into an overlay window, but you must use
+   * CoreGraphics to draw if you need any of your drawing to be
+   * non-opaque, since QuickDraw always sets the alpha channel of any
+   * pixels that it touches to 1.0. You can also use the standard
+   * window event handler together with regular controls in an overlay
+   * window. When using the standard window event handler, you will
+   * probably want your kEventWindowPaint handler to return
+   * eventNotHandledErr (after calling the default handler with
+   * CallNextEventHandler first) so that after the Paint handler
+   * returns, the Window Manager will send a kEventWindowDrawContent
+   * event which the standard window event handler can respond to by
+   * drawing the controls in the window. Overlay windows are initially
+   * placed in the overlay window group, given a modality of
    * kWindowModalityNone, and given an activation scope of
    * kWindowActivationScopeNone. Available in Mac OS X.
    */
@@ -402,6 +417,20 @@ enum {
   kWindowMetalAttribute         = (1L << 8),
 
   /*
+   * For Document, Floating, and Utility windows, this attribute allows
+   * you to hide the title bar of a window. For Mac OS X 10.4 or later.
+   */
+  kWindowNoTitleBarAttribute    = (1L << 9),
+
+  /*
+   * Indicates that no border should be drawn between the toolbar and
+   * window content. Relevant only in metal windows. Ignored in
+   * non-metal windows.  Available in Mac OS X 10.4 and later for
+   * window classes that support metal.
+   */
+  kWindowMetalNoContentSeparatorAttribute = (1L << 11),
+
+  /*
    * This window does not participate in window cycling invoked by
    * cmd-~ or the "Focus on Window" hotkey defined in the Keyboards
    * preference pane. Available for all windows on Mac OS X 10.2 and
@@ -455,8 +484,11 @@ enum {
    * This window is marked so that the window server will drag the
    * window automatically. Your application should not call DragWindow
    * for this window, else it would confuse the heck out of the drag
-   * (it would fight with the window server for control). This is
-   * available on Mac OS X 10.3 or later.
+   * (it would fight with the window server for control). This
+   * attribute is ignored (async drag is not used) if your window is
+   * grouped with other windows in a window group that has the
+   * kWindowGroupAttrMoveTogether attribute. Available for all windows
+   * on Mac OS X 10.3 and later.
    */
   kWindowAsyncDragAttribute     = (1L << 23),
 
@@ -502,6 +534,35 @@ enum {
    * OS X 10.1 and later, and CarbonLib 1.6 and later.
    */
   kWindowNoConstrainAttribute   = (unsigned long)((1L << 31)),
+
+  /*
+   * This window's context should be scaled to match the display scale
+   * factor. This attribute can only be used when
+   * kWindowCompositingAttribute is also enabled. When this attribute
+   * is enabled, you may not draw with QuickDraw in the window. If this
+   * attribute is enabled and if the scale factor is something other
+   * than 1.0, the window's scale mode will be
+   * kHIWindowScaleModeFrameworkScaled. It is illegal to specify both
+   * this attribute and kWindowApplicationScaledAttribute. You may only
+   * specify this attribute at window creation time. Available for all
+   * windows in Mac OS X 10.4 and later.
+   */
+  kWindowFrameworkScaledAttribute = (1L << 20),
+
+  /*
+   * This attribute indicates that the details of
+   * resolution-independent scaling will be taken care of primarily by
+   * the application. This is valid for both compositing and
+   * non-compositing windows. Resolution-independent windows that draw
+   * with QuickDraw must use this attribute bit. If this attribute is
+   * enabled and if the scale factor is something other than 1.0, the
+   * window's scale mode will be kHIWindowScaleModeApplicationScaled.
+   * It is illegal to specify both this attribute and
+   * kWindowFrameworkScaledAttribute. You may only specify this
+   * attribute at window creation time. Available for all windows in
+   * Mac OS X 10.4 and later.
+   */
+  kWindowApplicationScaledAttribute = (1L << 30),
 
   /*
    * The minimum set of window attributes commonly used by document
@@ -809,7 +870,8 @@ enum {
   kWindowContentRgn             = 33,   /* Content area of the window; empty when the window is collapsed*/
   kWindowUpdateRgn              = 34,   /* Carbon forward*/
   kWindowOpaqueRgn              = 35,   /* Mac OS X: Area of window considered to be opaque. Only valid for windows with alpha channels.*/
-  kWindowGlobalPortRgn          = 40    /* Carbon forward - bounds of the window’s port in global coordinates; not affected by CollapseWindow*/
+  kWindowGlobalPortRgn          = 40,   /* Carbon forward - bounds of the window’s port in global coordinates; not affected by CollapseWindow*/
+  kWindowToolbarButtonRgn       = 41    /* Mac OS X Tiger: the toolbar button area*/
 };
 
 /* GetWindowRegionRec - a pointer to this is passed in WDEF param for kWindowMsgGetRegion*/
@@ -968,39 +1030,134 @@ enum {
 /*——————————————————————————————————————————————————————————————————————————————————————*/
 /* • Window Feature Bits                                                                */
 /*——————————————————————————————————————————————————————————————————————————————————————*/
-enum {
-  kWindowCanGrow                = (1 << 0),
-  kWindowCanZoom                = (1 << 1),
-  kWindowCanCollapse            = (1 << 2),
-  kWindowIsModal                = (1 << 3),
-  kWindowCanGetWindowRegion     = (1 << 4),
-  kWindowIsAlert                = (1 << 5),
-  kWindowHasTitleBar            = (1 << 6)
-};
-
-/* Feature bits available from Mac OS 8.5 forward*/
-enum {
-  kWindowSupportsDragHilite     = (1 << 7), /* window definition supports kWindowMsgDragHilite*/
-  kWindowSupportsModifiedBit    = (1 << 8), /* window definition supports kWindowMsgModified*/
-  kWindowCanDrawInCurrentPort   = (1 << 9), /* window definition supports kWindowMsgDrawInCurrentPort*/
-  kWindowCanSetupProxyDragImage = (1 << 10), /* window definition supports kWindowMsgSetupProxyDragImage*/
-  kWindowCanMeasureTitle        = (1 << 11), /* window definition supports kWindowMsgMeasureTitle*/
-  kWindowWantsDisposeAtProcessDeath = (1 << 12), /* window definition wants a Dispose message for windows still extant during ExitToShell*/
-  kWindowSupportsGetGrowImageRegion = (1 << 13), /* window definition will calculate the grow image region manually.*/
-  kWindowDefSupportsColorGrafPort = 0x40000002
-};
-
-/* Feature bits for post MacOS 10.0*/
-enum {
-  kWindowIsOpaque               = (1 << 14) /* Window doesn't need an alpha channel. Saves memory.*/
-};
 
 /*
-   THIS CONSTANT IS GOING AWAY. IT IS NAMED INCORRECTLY. USE THE GETGROWIMAGE CONSTANT ABOVE INSTEAD.
-   DO YOU HEAR ME! AM I YELLING LOUD ENOUGH?!
-*/
+ *  Summary:
+ *    Window feature bits
+ *  
+ *  Discussion:
+ *    These feature bits are supplied by window definition functions in
+ *    response to the kWindowMsgGetFeatures message or the
+ *    kEventWindowInit Carbon event. A window's feature bits can also
+ *    be modified dynamically using the HIWindowChangeFeatures API;
+ *    typically, feature bits are only modified by a window definition
+ *    or window frame view.
+ */
 enum {
-  kWindowSupportsSetGrowImageRegion = (1 << 13)
+
+  /*
+   * Indicates whether the window is resizable. Available on Mac OS 8.0
+   * and later. Not supported on Mac OS X; replaced by
+   * kWindowResizableAttribute.
+   */
+  kWindowCanGrow                = (1 << 0),
+
+  /*
+   * Indicates whether the window can zoom. Available on Mac OS 8.0 and
+   * later. Not supported on Mac OS X; replaced by
+   * kWindowHorizontal/Vertical/FullZoomAttribute.
+   */
+  kWindowCanZoom                = (1 << 1),
+
+  /*
+   * Indicates whether the window can be minimized. Available on Mac OS
+   * 8.0 and later. Not supported on Mac OS X; replaced by
+   * kWindowCollapseBoxAttribute.
+   */
+  kWindowCanCollapse            = (1 << 2),
+
+  /*
+   * Indicates whether the window is application-modal. Available on
+   * Mac OS 8.0 and later.
+   */
+  kWindowIsModal                = (1 << 3),
+
+  /*
+   * Indicates that the window definition supports the
+   * kWindowMsgGetRegion message. Available on Mac OS 8.0 and later.
+   * Not supported on Mac OS X. All window definitions that implement
+   * the kWindowMsgGetFeatures message automatically get this feature
+   * bit on Mac OS X.
+   */
+  kWindowCanGetWindowRegion     = (1 << 4),
+
+  /*
+   * Indicates whether the window is an alert. Available on Mac OS 8.0
+   * and later.
+   */
+  kWindowIsAlert                = (1 << 5),
+
+  /*
+   * Indicates whether the window has a title bar. Available on Mac OS
+   * 8.0 and later. This feature is required for async dragging to be
+   * enabled for a window.
+   */
+  kWindowHasTitleBar            = (1 << 6),
+
+  /*
+   * Indicates that the window definition supports the
+   * kWindowMsgDragHilite message. Available on Mac OS 8.5 and later.
+   */
+  kWindowSupportsDragHilite     = (1 << 7),
+
+  /*
+   * Indicates that the window definition supports the
+   * kWindowMsgModified message. Available on Mac OS 8.5 and later.
+   */
+  kWindowSupportsModifiedBit    = (1 << 8),
+
+  /*
+   * Indicates that the window definition supports the
+   * kWindowMsgDrawInCurrentPort message. Available on Mac OS 8.5 and
+   * later. Not supported on Mac OS X.
+   */
+  kWindowCanDrawInCurrentPort   = (1 << 9),
+
+  /*
+   * Indicates that the window definition supports the
+   * kWindowMsgSetupProxyDragImage message. Available on Mac OS 8.5 and
+   * later.
+   */
+  kWindowCanSetupProxyDragImage = (1 << 10),
+
+  /*
+   * Indicates that the window definition supports the
+   * kWindowMsgMeasureTitle message. Available on Mac OS 8.5 and later.
+   */
+  kWindowCanMeasureTitle        = (1 << 11),
+
+  /*
+   * Indicates that the window definition wants to receive a
+   * kWindowMsgCleanUp message for each existing window when a process
+   * is terminated. Available on Mac OS 8.5 and later. Not supported on
+   * Mac OS X.
+   */
+  kWindowWantsDisposeAtProcessDeath = (1 << 12),
+
+  /*
+   * Indicates that the window definition supports the
+   * kWindowMsgGetGrowImageRegion message. Available on Mac OS X 10.0
+   * and later.
+   */
+  kWindowSupportsGetGrowImageRegion = (1 << 13),
+
+  /*
+   * Indicates that the window is entirely opaque. If this feature bit
+   * is set, the window will use less memory because no alpha channel
+   * information will be stored for the window's pixels. If this
+   * feature bit is not set, the Window Manager will send a
+   * kEventWindowGetRegion Carbon event to the window with the
+   * kWindowOpaqueRgn constant to get a region that describes the
+   * opaque area of the window. Available on Mac OS X 10.1 and later.
+   */
+  kWindowIsOpaque               = (1 << 14),
+
+  /*
+   * Indicates that the window definition does not require that the
+   * current port be the classic Window Manager port. Not supported on
+   * Mac OS X.
+   */
+  kWindowDefSupportsColorGrafPort = 0x40000002
 };
 
 /*——————————————————————————————————————————————————————————————————————————————————————*/
@@ -1934,9 +2091,15 @@ SetWindowClass(
  *    already existed and had certain behaviour, we could not change it
  *    to behave the way HIWindowChangeClass does. 
  *    
- *    This function can convert a window between document, floating,
- *    utility, and movable modal window classes only. It cannot change
- *    a window into a plain window, for example.
+ *    This function can convert a window between kDocumentWindowClass,
+ *    kFloatingWindowClass, kUtilityWindowClass, and
+ *    kMovableModalWindowClass only. It cannot change a document window
+ *    into a plain window, for example. 
+ *    
+ *    The attributes of the window are adjusted to contain only those
+ *    that are allowed for the new class. It is the caller’s
+ *    responsibility to adjust them further after HIWindowChangeClass
+ *    returns, if necessary.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -2262,7 +2425,15 @@ enum {
    * subgroup with this attribute are also hidden. All windows will be
    * shown again when the collapsed window is expanded.
    */
-  kWindowGroupAttrHideOnCollapse = 1 << 4
+  kWindowGroupAttrHideOnCollapse = 1 << 4,
+
+  /*
+   * This window group's window level should be left unchanged. If this
+   * attribute is not specified, this window group's window level will
+   * be promoted to a value equal to the level of the next FixedLevel
+   * window group beneath it in the window group hierarchy.
+   */
+  kWindowGroupAttrFixedLevel    = 1 << 5
 };
 
 
@@ -2635,19 +2806,30 @@ ChangeWindowGroupAttributes(
  *    Cocoa applications on Mac OS X) are divided into layers specified
  *    by a window level. Standard window levels are listed in
  *    <CoreGraphics/CGWindowLevel.h>. By default, a new window group
- *    has a window level of kCGNormalWindowLevel. When a window is
- *    placed into a window group, its window level is determined by the
- *    window level of its "base group". This is the containing group
- *    that is a child of the root group. For example, if group A is a
- *    child of the root group, and group B is a child of group A, and
- *    window C is in group B, then window C's base group is group A,
- *    and group A's window level determines the level of window C.
+ *    has a window level of kCGNormalWindowLevel. 
+ *    
+ *    When a window is placed into a window group, its window level is
+ *    determined by the window level of its "base group". This is the
+ *    containing group that is a child of the root group. For example,
+ *    if group A is a child of the root group, and group B is a child
+ *    of group A, and window C is in group B, then window C's base
+ *    group is group A, and group A's window level determines the level
+ *    of window C. 
+ *    
  *    SetWindowGroupLevel only allows changing the window level of
  *    groups that are children of the root group. It returns paramErr
  *    for other groups, since a group that is not a child of the root
  *    group is not a base group and changing its level has no effect.
+ *    
+ *    
  *    Changing the level of a group also changes the level of all
- *    windows currently contained by the group.
+ *    windows currently contained by the group. 
+ *    
+ *    In Mac OS X 10.4 and later, SetWindowGroupLevel will set all
+ *    three window levels associated with a window group: the Active,
+ *    Inactive, and Promoted levels. It will then immediately determine
+ *    if the Active level needs to be promoted to a larger value, and
+ *    if so, set the Promoted level to that value.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -2677,6 +2859,11 @@ SetWindowGroupLevel(
  *  Summary:
  *    Gets the CoreGraphics window group level of windows in a group.
  *  
+ *  Discussion:
+ *    In Mac OS X 10.4 and later, GetWindowGroupLevel will return
+ *    either the Promoted window level or the Inactive window level,
+ *    depending on whether the application is active or inactive.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
@@ -2697,6 +2884,152 @@ extern OSStatus
 GetWindowGroupLevel(
   WindowGroupRef   inGroup,
   SInt32 *         outLevel)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+ *  Summary:
+ *    Parameters to GetWindowGroupLevelOfType and
+ *    SetWindowGroupLevelOfType
+ */
+enum {
+
+  /*
+   * The window level that is nominally used for windows in the group
+   * when the application is active. However, if a group with a higher
+   * window level is positioned below group in the window group
+   * hierarchy, this group's active level will be promoted to match the
+   * level of the group in front of it. You can determine the actual
+   * window level in use for a group using the
+   * kWindowGroupLevelPromoted constant.
+   */
+  kWindowGroupLevelActive       = 1,
+
+  /*
+   * The window level that is used for windows in the group when the
+   * application is inactive.
+   */
+  kWindowGroupLevelInactive     = 2,
+
+  /*
+   * The window level that is actually used for windows in the group
+   * when the application is active. This level will either be the same
+   * as the Active window level, or will be a larger value to match the
+   * level of a group below this group. 
+   * 
+   * We do not recommend setting the Promoted window level explicitly,
+   * because the promoted level is reset by the Window Manager whenever
+   * the window group hierarchy structure changes, and therefore any
+   * changes that you may make to the promoted level can be
+   * overwritten. In general you should only use this API to set the
+   * Active and Inactive window levels.
+   */
+  kWindowGroupLevelPromoted     = 3
+};
+
+/*
+ *  SetWindowGroupLevelOfType()
+ *  
+ *  Summary:
+ *    Sets a CoreGraphics window group level of a window group.
+ *  
+ *  Discussion:
+ *    See the SetWindowGroupLevel API for a general discussion of
+ *    window levels and window groups. 
+ *    
+ *    In Mac OS X 10.4 and later, a window group may have multiple
+ *    window levels associated with it; one level for when the
+ *    application is active, and another for when the application is
+ *    inactive. The Window Manager automatically switches each group's
+ *    level as the application becomes active or inactive. This API can
+ *    be used to set each level associated with a group. 
+ *    
+ *    This API can also be used to set the promoted window level that
+ *    is actually used for windows in the group; however, we do not
+ *    recommend this usage, because the promoted window level is reset
+ *    by the Window Manager whenever the window group hierarchy
+ *    structure changes, and therefore any changes that you may make to
+ *    the promoted level can be overwritten. In general you should only
+ *    use this API to set the Active and Inactive window levels.
+ *    
+ *    
+ *    When setting the Active level of a group with the FixedLevel
+ *    window group attribute, this API will automatically also set the
+ *    Promoted level to the same value, and also update the Promoted
+ *    level of any non-FixedLevel groups above the group being modified.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inGroup:
+ *      The window group whose level to change.
+ *    
+ *    inLevelType:
+ *      The level type to change (one of kWindowGroupLevelActive,
+ *      kWindowGroupLevelInactive, or kWindowGroupLevelPromoted).
+ *    
+ *    inLevel:
+ *      The new level for the windows in this group.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+SetWindowGroupLevelOfType(
+  WindowGroupRef   inGroup,
+  UInt32           inLevelType,
+  CGWindowLevel    inLevel)                                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  GetWindowGroupLevelOfType()
+ *  
+ *  Summary:
+ *    Gets a CoreGraphics window level of a window group.
+ *  
+ *  Discussion:
+ *    See the SetWindowGroupLevel API for a general discussion of
+ *    window levels and window groups. 
+ *    
+ *    In Mac OS X 10.4 and later, a window group may have multiple
+ *    window levels associated with it; one level for when the
+ *    application is active, and another for when the application is
+ *    inactive. The Window Manager automatically switches each group's
+ *    level as the application becomes active or inactive. The
+ *    GetWindowGroupLevelOfType API can be used to get each level
+ *    associated with a group, including the promoted window level that
+ *    is actually in use for windows in the group while the application
+ *    is active.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inGroup:
+ *      The window group whose level to retrieve.
+ *    
+ *    inLevelType:
+ *      The level type to retrieve (one of kWindowGroupLevelActive,
+ *      kWindowGroupLevelInactive, or kWindowGroupLevelPromoted).
+ *    
+ *    outLevel:
+ *      On exit, the level for the windows in this group.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+GetWindowGroupLevelOfType(
+  WindowGroupRef   inGroup,
+  UInt32           inLevelType,
+  CGWindowLevel *  outLevel)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 
@@ -3178,8 +3511,8 @@ GetWindowIndex(
  *    window. The ActiveNonFloatingWindow API returns the active window
  *    regardless of where it is positioned in the z-order. Most code
  *    that currently uses FrontNonFloatingWindow or
- *    GetFrontWindowOfClass(kDocumentClass) to get the active window
- *    should use ActiveNonFloatingWindow instead.
+ *    GetFrontWindowOfClass(kDocumentWindowClass) to get the active
+ *    window should use ActiveNonFloatingWindow instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -3763,8 +4096,25 @@ MacFindWindow(
 /*
  *  FrontWindow()
  *  
+ *  Summary:
+ *    Returns the frontmost visible window in the window list.
+ *  
+ *  Discussion:
+ *    The frontmost visible window is not necessarily a document or
+ *    dialog window, or even a window created by your application. For
+ *    example, it may be a menu window, a Text Services Manager
+ *    bottom-line input window, a help tag, or a floating window. If
+ *    your code needs the frontmost document or dialog window, use the
+ *    ActiveNonFloatingWindow or FrontNonFloatingWindow APIs instead of
+ *    FrontWindow. For compatibility with existing applications,
+ *    FrontWindow ignores all windows of class kMenuBarWindowClass and
+ *    instead returns the frontmost visible window behind the menubar.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Result:
+ *    The frontmost visible window, or NULL if no windows are visible.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4126,8 +4476,33 @@ IsValidWindowPtr(WindowRef possibleWindow)                    AVAILABLE_MAC_OS_X
 /*
  *  HiliteWindow()
  *  
+ *  Summary:
+ *    Hilites or unhilites a window's frame.
+ *  
+ *  Discussion:
+ *    Hiliting a window's frame is not the same as activating the
+ *    window. A window's hilited state determines whether the window
+ *    draws its titlebar and associated widgets as if they were the
+ *    frontmost window of its window group, whereas a window's active
+ *    state determines whether the window really is the frontmost
+ *    window of its window group. Activating or deactivating a window
+ *    automatically adjusts a window's hilited state to match.
+ *    
+ *    In general, only very old compatibility code would ever need or
+ *    want to manually modify a window's hilited state via the
+ *    HiliteWindow API. Modern clients can typically avoid this API
+ *    entirely.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window whose frame you wish to hilite/unhilite.
+ *    
+ *    fHilite:
+ *      Whether to hilite or unhilite the window's frame.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4303,7 +4678,8 @@ GetWindowStructureWidths(
  *  
  *  Discussion:
  *    HIWindowChangeFeatures changes the features of a window. This
- *    should only be used by custom window definitions.
+ *    should only be used by custom window definitions or window frame
+ *    views.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -4649,6 +5025,79 @@ extern OSStatus
 GetWindowProxyFSSpec(
   WindowRef   window,
   FSSpec *    outFile)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  HIWindowSetProxyFSRef()
+ *  
+ *  Summary:
+ *    Set the proxy icon for a window using an FSRef to an existing
+ *    file system object (volume, folder, or file).
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window whose proxy icon to set.
+ *    
+ *    inRef:
+ *      The file system object that the window represents. The window's
+ *      proxy icon is determined by asking Icon Services for the icon
+ *      of this object.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIWindowSetProxyFSRef(
+  WindowRef      window,
+  const FSRef *  inRef)                                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  HIWindowGetProxyFSRef()
+ *  
+ *  Summary:
+ *    Returns the FSRef used to determine the proxy icon for a window.
+ *  
+ *  Discussion:
+ *    This API will return noErr and a valid FSRef if the window's
+ *    proxy icon has been specified using the FSRef, FSSpec or alias
+ *    SetWindowProxy APIs. If the window has no proxy icon, or if the
+ *    icon was specified with SetWindowProxyCreatorAndType or
+ *    SetWindowProxyIcon, then an error will be returned.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window containing the proxy icon to return.
+ *    
+ *    outRef:
+ *      On exit, contains the FSRef to the window's proxy icon.
+ *  
+ *  Result:
+ *    noErr if the window's proxy icon FSRef has been returned;
+ *    errWindowDoesNotHaveProxy if the window does not have a proxy
+ *    icon, or if the proxy icon was specified by
+ *    SetWindowProxyCreatorAndType or SetWindowProxyIcon. Other
+ *    operating system error codes may also be returned.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIWindowGetProxyFSRef(
+  WindowRef   window,
+  FSRef *     outRef)                                         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 /*
@@ -5364,8 +5813,10 @@ enum {
    * Shows the window. Use with the Zoom, Sheet, Fade, or Genie
    * transition effects. For the Zoom, Sheet, and Genie effects, the
    * inRect parameter is the global coordinates from which to start the
-   * animation; if inRect is NULL, the animation begins at the center
-   * of the window. The Fade effect does not use the inRect parameter.
+   * animation; inRect may be NULL for the Zoom and Sheet effects, and
+   * in that case, the animation begins at the center of the window.
+   * The Genie effect requires a non-NULL inRect parameter. The Fade
+   * effect does not use the inRect parameter.
    */
   kWindowShowTransitionAction   = 1,
 
@@ -5373,8 +5824,10 @@ enum {
    * Hides the window. Use with the Zoom, Sheet, Fade, or Genie
    * transition effects. For the Zoom, Sheet, and Genie effects, the
    * inRect parameter is the global coordinates at which to end the
-   * animation; if inRect is NULL, the animation ends at the center of
-   * the window. The Fade effect does not use the inRect parameter.
+   * animation; inRect may be NULL for the Zoom and Sheet effects, and
+   * in that case, the animation ends at the center of the window. The
+   * Genie effect requires a non-NULL inRect parameter. The Fade effect
+   * does not use the inRect parameter.
    */
   kWindowHideTransitionAction   = 2,
 
@@ -6318,12 +6771,13 @@ IsWindowInStandardState(
  *    is moved as little as possible when switching between user and
  *    standard states, the window is zoomed to the screen that contains
  *    the largest portion of the window, and the window is positioned
- *    in its zoomed-out size to avoid the Dock on Mac OS X. The
- *    ZoomWindowIdeal API calculates a window’s ideal standard state
- *    and updates a window’s ideal user state independently of the
- *    WStateData structure. Previously, the window definition function
- *    was responsible for updating the user state, but because it
- *    relies upon the WStateData structure, the window definition
+ *    in its zoomed-out size to avoid the Dock on Mac OS X. 
+ *    
+ *    The ZoomWindowIdeal API calculates a window’s ideal standard
+ *    state and updates a window’s ideal user state independently of
+ *    the WStateData structure. Previously, the window definition
+ *    function was responsible for updating the user state, but because
+ *    it relies upon the WStateData structure, the window definition
  *    function is unaware of the ideal standard state and can no longer
  *    track the window’s zoom state reliably. The Window Manager
  *    provides the GetWindowIdealUserState and SetWindowIdealUserState
@@ -6356,7 +6810,14 @@ IsWindowInStandardState(
  *      contains the new height and width of the window’s content
  *      region; ZoomWindowIdeal saves the current user state of the
  *      window and zooms the window to its ideal size for the standard
- *      state.
+ *      state. 
+ *      
+ *      Prior to Mac OS X Mac OS X 10.4, the ZoomWindowIdeal API
+ *      malfunctioned if passed an idealSize that was large enough to
+ *      cause 16-bit integer overflow when added to the window's
+ *      current position. Therefore, when specifying the ideal size
+ *      parameter, you should generally not use values that are close
+ *      to 32767. It is better to limit your ideal size to, say, 16K.
  *  
  *  Result:
  *    An operating system result code.
@@ -6848,6 +7309,101 @@ IsWindowLatentVisible(
 
 
 
+/*
+  ——————————————————————————————————————————————————————————————————————————————————————
+    • Window Availability for Exposé
+  ——————————————————————————————————————————————————————————————————————————————————————
+*/
+
+
+/*
+ *  Summary:
+ *    Window availability options for Exposé.
+ *  
+ *  Discussion:
+ *    These options are used with the HIWindowGet/ChangeAvailability
+ *    APIs to override the default behavior of the Window Manager in
+ *    determining whether a window is visible during Exposé. Most
+ *    applications should not override the default behavior; these
+ *    options should only be used in special cases. By default, newly
+ *    created windows of class kDocumentWindowClass are given an
+ *    availability of zero (meaning that they are available during
+ *    Exposé), and windows from all other window classes are given an
+ *    availability of kHIWindowExposeHidden.
+ */
+enum {
+
+  /*
+   * This window is hidden during Exposé’s “All windows” and
+   * “Application windows” modes. If this bit is not set, the window is
+   * visible during these modes.
+   */
+  kHIWindowExposeHidden         = 1 << 0
+};
+
+
+typedef OptionBits                      HIWindowAvailability;
+/*
+ *  HIWindowGetAvailability()
+ *  
+ *  Summary:
+ *    Returns the availability of a window during Exposé.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose availability to return.
+ *    
+ *    outAvailability:
+ *      On exit, contains the window availability.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIWindowGetAvailability(
+  HIWindowRef             inWindow,
+  HIWindowAvailability *  outAvailability)                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
+ *  HIWindowChangeAvailability()
+ *  
+ *  Summary:
+ *    Alters the availability of a window during Exposé.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose availability to change.
+ *    
+ *    inSetAvailability:
+ *      The availability bits to set.
+ *    
+ *    inClearAvailability:
+ *      The availability bits to clear.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIWindowChangeAvailability(
+  HIWindowRef            inWindow,
+  HIWindowAvailability   inSetAvailability,
+  HIWindowAvailability   inClearAvailability)                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
 /*——————————————————————————————————————————————————————————————————————————————————————*/
 /*
     • Sheets
@@ -7236,7 +7792,6 @@ enum {
   kWindowDrawerClosed           = 4
 };
 
-
 typedef UInt32                          WindowDrawerState;
 
 /*
@@ -7543,7 +8098,7 @@ GetDrawerOffsets(
  *    ToggleDrawer opens the drawer if it is closed, opening, or
  *    closing. If the drawer is open, it closes the drawer.
  *    
- *    ToggleDrawer attemps to open the drawer on its preferred edge,
+ *    ToggleDrawer attempts to open the drawer on its preferred edge,
  *    but if there is not enough room on that edge, it will try the
  *    opposite edge instead. If there is insufficient room on either
  *    edge, the drawer will open on the preferred edge but may extend
@@ -7883,6 +8438,106 @@ extern Boolean
 IsWindowToolbarVisible(WindowRef inWindow)                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
+/*
+    About Custom Toolbar Views
+    
+    A window with a custom toolbar view does not have an HIToolbarRef. No API that takes an HIToolbarRef will work.
+    
+    When a custom toolbar view is provided for a window, the Window Manager will:
+        - set the view's HIViewID to kHIViewWindowToolbarID
+        - embed the toolbar view in the root view of the window
+        - make the toolbar view invisible
+        
+    These aspects of the standard toolbar support also work with custom toolbar views:
+        - unmodified clicks on the toolbar button to show and hide the toolbar
+        - ShowHideWindowToolbar and IsWindowToolbarVisible
+        - kHICommandShow/HideToolbar and kHICommandToggleToolbar
+        
+    These aspects of the standard toolbar support do _not_ work with custom toolbar views:
+        - option-click on toolbar button to toggle all windows with the same toolbar
+        - command-click and command-shift-click on toolbar button to change display mode and size
+        - command-option click on toolbar button to display config sheet
+        
+    A custom toolbar view must handle these events:
+        - kEventControlGetOptimalBounds
+        - kEventControlSetData with kHIToolbarViewDrawBackgroundTag
+        - kEventControlDraw and draw, or not, as requested by the background tag
+        
+    A custom toolbar view may optionally handle:
+        - kEventWindowAttributesChanged to be notified when window style changes
+        - kHICommandCustomizeToolbar to present its own toolbar customization dialog
+        - kHICommandToggleAllToolbars to implement multi-window toggling
+        - kHICommandCycleToolbarModeSmaller/Larger to change display mode and size
+*/
+
+/*
+ */
+enum {
+
+  /*
+   * A SetControlData tag that is used by the standard window frame
+   * view to inform the toolbar view whether the view should draw its
+   * background or leave its background transparent. The data for this
+   * tag is a Boolean. If the data value is true, the toolbar view
+   * should draw its background as it desires. If the data value is
+   * false, the toolbar view should leave its background transparent so
+   * that the window's root view can show through the toolbar view.
+   * Currently, the toolbar view will be asked to leave its background
+   * transparent for windows with the textured or unified appearance.
+   */
+  kHIToolbarViewDrawBackgroundTag = 'back'
+};
+
+/*
+ *  HIWindowSetToolbarView()
+ *  
+ *  Summary:
+ *    Sets a custom toolbar view for a window.
+ *  
+ *  Discussion:
+ *    This API is provided for use by applications that cannot use the
+ *    HIToolbarRef API. For best compatibility with future versions of
+ *    Mac OS X, we highly recommend that you use the HIToolbar API if
+ *    possible. However, if HIToolbar is not sufficient for your needs,
+ *    you can provide a custom toolbar view that will be placed at the
+ *    standard location inside the window frame. You are responsible
+ *    for defining the appearance and behavior of the view. You cannot
+ *    use this API to customize the view that is associated with an
+ *    HIToolbarRef; a window with an HIToolbarRef uses a standard
+ *    HIToolbox-provided view that cannot be customized. When using a
+ *    custom toolbar view, no API that takes an HIToolbarRef will work
+ *    with that window.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose toolbar view to set.
+ *    
+ *    inView:
+ *      The custom toolbar view for the window. You may pass NULL to
+ *      remove the custom view from the window. Setting a custom view
+ *      will also remove any HIToolbarRef that is associated with the
+ *      window. 
+ *      
+ *      After a custom toolbar view has been set, the window owns the
+ *      view and will release it automatically when the window is
+ *      destroyed, or when a different custom view or standard
+ *      HIToolbar is set for the window.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIWindowSetToolbarView(
+  WindowRef   inWindow,
+  void *      inView)         /* can be NULL */               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
 /*——————————————————————————————————————————————————————————————————————————————————————*/
 /* • Window Transparency                                                                */
 /*——————————————————————————————————————————————————————————————————————————————————————*/
@@ -7952,6 +8607,130 @@ extern OSStatus
 GetWindowAlpha(
   WindowRef   inWindow,
   float *     outAlpha)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————*/
+/* • Window Shadows                                                                     */
+/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*
+ *  HIWindowInvalidateShadow()
+ *  
+ *  Summary:
+ *    This API causes a window's shadow to be recalculated.
+ *  
+ *  Discussion:
+ *    HIWindowInvalidateShadow is not typically used by applications.
+ *    However, it may be useful for applications with customized window
+ *    frames that change shape dynamically; in this case, after the
+ *    application has drawn the new window shape, the window shadow
+ *    must be recalculated to follow the new window shape.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIWindowInvalidateShadow(HIWindowRef inWindow)                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————*/
+/* • Window Scaling for Resolution Independence                                         */
+/*——————————————————————————————————————————————————————————————————————————————————————*/
+
+/*
+ *  HIWindowScaleMode
+ *  
+ *  Discussion:
+ *    A window's scale mode indicates in which resolution-independent
+ *    scale mode it is operating.
+ */
+typedef UInt32 HIWindowScaleMode;
+enum {
+
+  /*
+   * The window is not scaled at all because the display scale factor
+   * is 1.0.
+   */
+  kHIWindowScaleModeUnscaled    = 0,
+
+  /*
+   * The window's backing store is being magnified by the window server
+   * because the display scale factor != 1.0, and because the window
+   * was created with neither the kWindowFrameworkScaledAttribute nor
+   * the kWindowApplicationScaledAttribute.
+   */
+  kHIWindowScaleModeMagnified   = 1,
+
+  /*
+   * The window's context has been scaled to match the display scale
+   * factor because the display scale factor != 1.0 and because the
+   * window was created with the kWindowFrameworkScaledAttribute.
+   */
+  kHIWindowScaleModeFrameworkScaled = 2,
+
+  /*
+   * This window's contents are being scaled manually by the
+   * application because the display scale factor != 1.0 and because
+   * the window was created with the kWindowApplicationScaledAttribute.
+   */
+  kHIWindowScaleModeApplicationScaled = 3
+};
+
+/*
+ *  HIWindowGetScaleMode()
+ *  
+ *  Summary:
+ *    Provides the window's scale mode and the application's display
+ *    scale factor.
+ *  
+ *  Discussion:
+ *    HIWindowGetScaleMode returns the HIWindowScaleMode for the
+ *    window, which is determined based on the application's display
+ *    scale factor and any resolution-independence attributes specified
+ *    at window creation time. Applications and the views within the
+ *    window can use the scale mode and display scale factor to help
+ *    draw or layout properly for a particular scale mode.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The WindowRef whose scale mode to provide.
+ *    
+ *    outMode:
+ *      On exit, an HIWindowScaleMode indicating the window's scale
+ *      mode.
+ *    
+ *    outScaleFactor:
+ *      On exit, a float indicating the display scale factor for the
+ *      application. You may pass NULL if you are not interested in
+ *      acquiring the scale factor; it is provided only as a
+ *      convenience.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIWindowGetScaleMode(
+  HIWindowRef          inWindow,
+  HIWindowScaleMode *  outMode,
+  float *              outScaleFactor)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 /*——————————————————————————————————————————————————————————————————————————————————————*/
@@ -8431,12 +9210,26 @@ extern short
 GetWindowKind(WindowRef window)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-
 /*
  *  IsWindowHilited()
  *  
+ *  Summary:
+ *    Indicates whether a window's frame is hilited.
+ *  
+ *  Discussion:
+ *    See HiliteWindow for a disucssion on the meaning of a window's
+ *    hilited state.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window whose hilited state you wish to retrieve.
+ *  
+ *  Result:
+ *    A Boolean indicating whether the window's frame is hilited.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework

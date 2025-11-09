@@ -1,15 +1,15 @@
 /*	NSSerialization.h
-	Copyright (c) 1993-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1993-2005, Apple, Inc. All rights reserved.
 */
+
+#import <Foundation/NSObject.h>
+#import <Foundation/NSData.h>
 
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 #warning The API is this header is obsolete and deprecated in 10.2.
 #warning Stop using this API and including this header.
 // Note also that this API does not handle modern property list object graphs.
 #endif
-
-#import <Foundation/NSObject.h>
-#import <Foundation/NSData.h>
 
 /***************	Serialization of very basic types	***********/
 

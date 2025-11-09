@@ -1,15 +1,15 @@
 /*	CFDateFormatter.h
-	Copyright (c) 2003-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 2003-2005, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFDATEFORMATTER__)
 #define __COREFOUNDATION_CFDATEFORMATTER__ 1
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
-
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFDate.h>
 #include <CoreFoundation/CFLocale.h>
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 #if defined(__cplusplus)
 extern "C" {
@@ -64,8 +64,7 @@ CF_EXPORT
 void CFDateFormatterSetFormat(CFDateFormatterRef formatter, CFStringRef formatString) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 	// Set the format description string of the date formatter.  This
 	// overrides the style settings.  The format of the format string
-	// is as defined by the ICU library, and is similar to that found
-	// in C# (and Java I believe).  The date formatter starts with a
+	// is as defined by the ICU library.  The date formatter starts with a
 	// default format string defined by the style arguments with
 	// which it was created.
 
@@ -105,8 +104,25 @@ CF_EXPORT const CFStringRef kCFDateFormatterIsLenient AVAILABLE_MAC_OS_X_VERSION
 CF_EXPORT const CFStringRef kCFDateFormatterTimeZone AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;		// CFTimeZone
 CF_EXPORT const CFStringRef kCFDateFormatterCalendarName AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;	// CFString
 CF_EXPORT const CFStringRef kCFDateFormatterDefaultFormat AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;	// CFString
+CF_EXPORT const CFStringRef kCFDateFormatterTwoDigitStartDate AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // CFDate
+CF_EXPORT const CFStringRef kCFDateFormatterDefaultDate AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CFDate
+CF_EXPORT const CFStringRef kCFDateFormatterCalendar AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFCalendar
+CF_EXPORT const CFStringRef kCFDateFormatterEraSymbols AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterMonthSymbols AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterShortMonthSymbols AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterWeekdaySymbols AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterShortWeekdaySymbols AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // CFArray of CFString
+CF_EXPORT const CFStringRef kCFDateFormatterAMSymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFString
+CF_EXPORT const CFStringRef kCFDateFormatterPMSymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFString
 
-CF_EXPORT const CFStringRef kCFGregorianCalendar AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+// See CFLocale.h for these calendar constants:
+//	const CFStringRef kCFGregorianCalendar;
+//	const CFStringRef kCFBuddhistCalendar;
+//	const CFStringRef kCFJapaneseCalendar;
+//	const CFStringRef kCFIslamicCalendar;
+//	const CFStringRef kCFIslamicCivilCalendar;
+//	const CFStringRef kCFHebrewCalendar;
+//	const CFStringRef kCFChineseCalendar;
 
 #if defined(__cplusplus)
 }

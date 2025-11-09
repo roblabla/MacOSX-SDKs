@@ -54,7 +54,7 @@ enum
 	kAudioUnitProperty_MaximumFramesPerSlice		= 14,
 	kAudioUnitProperty_SetExternalBuffer			= 15,
 	kAudioUnitProperty_ParameterValueStrings		= 16,
-	kAudioUnitProperty_MIDIControlMapping			= 17, // deprecated see kAudioUnitProperty_ParameterMIDIMapping
+	kAudioUnitProperty_MIDIControlMapping			= 17, // deprecated see ParameterMIDIMapping Properties
 	kAudioUnitProperty_GetUIComponentList			= 18,
 	kAudioUnitProperty_AudioChannelLayout			= 19,  
 	kAudioUnitProperty_TailTime						= 20,
@@ -85,6 +85,7 @@ enum
 	kAudioUnitProperty_AddParameterMIDIMapping		= 42,
 	kAudioUnitProperty_RemoveParameterMIDIMapping   = 43,
 	kAudioUnitProperty_HotMapParameterMIDIMapping   = 44,
+	kAudioUnitProperty_DependentParameters			= 45,
 	
 // Applicable to MusicDevices				(1000 -> 1999)
 	kMusicDeviceProperty_InstrumentCount 			= 1000,
@@ -122,7 +123,7 @@ enum
 	kAudioUnitProperty_PannerMode					= 3008,
 	kAudioUnitProperty_MatrixDimensions				= 3009,
 	kAudioUnitProperty_3DMixerDistanceParams		= 3010,
-	kAudioUnitProperty_MeterClipping				= 3011, // returns a AudioUnitMeterClipping struct
+	kAudioUnitProperty_MeterClipping				= 3011, // matrix mixer returns an AudioUnitMeterClipping struct
 
 // offline unit properties
 	kAudioOfflineUnitProperty_InputSize				= 3020,
@@ -130,6 +131,47 @@ enum
 	kAudioUnitOfflineProperty_StartOffset			= 3022,
 	kAudioUnitOfflineProperty_PreflightRequirements	= 3023,
 	kAudioUnitOfflineProperty_PreflightName			= 3024,
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+	// For AUScheduledSoundPlayer:
+	
+	kAudioUnitProperty_ScheduleAudioSlice			= 3300,		// ScheduledAudioSlice
+	kAudioUnitProperty_ScheduleStartTimeStamp		= 3301,		// AudioTimeStamp, with either
+																// sample time or host time valid. Sample time
+																// takes precedence, -1 means "now". Host time
+																// of 0 means "now."
+	kAudioUnitProperty_CurrentPlayTime				= 3302,		// AudioTimeStamp, relative to start time,
+																// sample time of -1 if not yet started.
+
+	// For AUAudioFilePlayer:
+	
+	kAudioUnitProperty_ScheduledFileIDs				= 3310,		// Array of AudioFileIDs
+		// must set this property on scheduled file player for all files to be played
+	kAudioUnitProperty_ScheduledFileRegion			= 3311,		// struct ScheduledAudioFileRegion
+	kAudioUnitProperty_ScheduledFilePrime			= 3312,		// UInt32
+		// the number of frames to read from disk before returning, or 0 to specify use of a default value
+	kAudioUnitProperty_ScheduledFileBufferSizeFrames = 3313,	// UInt32
+	kAudioUnitProperty_ScheduledFileNumberBuffers   = 3314,		// UInt32
+
+	// For AUDeferredRenderer:
+	
+	kAudioUnitProperty_DeferredRendererPullSize		= 3320,		// UInt32
+	kAudioUnitProperty_DeferredRendererExtraLatency	= 3321,		// UInt32
+	kAudioUnitProperty_DeferredRendererWaitFrames   = 3322,		// UInt32
+
+	// For AUNetReceive:
+	kAUNetReceiveProperty_Hostname = 3511,
+	kAUNetReceiveProperty_Password = 3512,
+	
+	// For AUNetSend:
+	kAUNetSendProperty_PortNum = 3513,
+	kAUNetSendProperty_TransmissionFormat = 3514,
+	kAUNetSendProperty_TransmissionFormatIndex = 3515,
+	kAUNetSendProperty_ServiceName = 3516,
+	kAUNetSendProperty_Disconnect = 3517,
+	kAUNetSendProperty_Password = 3518,
+#endif
+
 
 // translation properties when migrating settings from other plugin formats to AU
 	kAudioUnitMigrateProperty_FromPlugin			= 4000,
@@ -315,7 +357,7 @@ enum
 		With PresentPreset the client of the AU owns the CFString when it retrieves the
 		preset with PresentPreset and is expected to release this (as with ALL properties 
 		that retrieve a CF object from an AU)
-
+		
 	kAudioUnitProperty_PresentationLatency					(Input/Output Scope) Float64 (write only)
 		This property is set by a host to describe to the AU the presentation latency of both
 		any of its input and/or output audio data. 
@@ -454,8 +496,21 @@ enum
 			
 			At all times, the _AllMappings property will completely describe the current known state of the AU's mappings
 			of MIDI messages to parameters.
+		
+		kAudioUnitProperty_DependentParameters								array of AUDependentParameter (read only)
+		
+			This property is used for parameters with the kAudioUnitParameterFlag_IsGlobalMeta 
+			or kAudioUnitParameterFlag_IsElementMeta flags set. AU hosts (and the AudioUnitParameterListener
+			mechanism) can interrogate this property to determine which parameters are dependent on a
+			meta-parameter.
+			
+			For parameters marked with kAudioUnitParameterFlag_IsGlobalMeta, any non-global
+			dependent parameters are assumed to be dependent in every element of their scope.
+			
+			For parameters marked with kAudioUnitParameterFlag_IsElementMeta, then its dependent
+			parameters must all be the same scope, and are assumed to apply only within a single element,
+			not to other instances of the same parameter in other elements.
 */
-
 
 // these properties are superseded by the AudioUnitQuality settings
 enum {
@@ -522,6 +577,25 @@ enum {
 	kOfflinePreflight_Optional		= 1,
 	kOfflinePreflight_Required		= 2
 };
+
+enum {
+	kAUNetSendPresetFormat_PCMFloat32 = 0,		// 1411 kilobits per second per channel @ 44100KHz (kilo == 1000 not 1024)
+	kAUNetSendPresetFormat_PCMInt24 = 1,		// 1058 kilobits per second per channel @ 44100KHz
+	kAUNetSendPresetFormat_PCMInt16 = 2,		//  706 kilobits per second per channel @ 44100KHz
+	kAUNetSendPresetFormat_Lossless24 = 3,		// ~650 kilobits per second per channel @ 44100KHz
+	kAUNetSendPresetFormat_Lossless16 = 4,		// ~350 kilobits per second per channel @ 44100KHz
+	kAUNetSendPresetFormat_ULaw = 5,			//  353 kilobits per second per channel @ 44100KHz
+	kAUNetSendPresetFormat_IMA4 = 6,			//  176 kilobits per second per channel @ 44100KHz
+	kAUNetSendPresetFormat_AAC_128kbpspc = 7,	//  128 kilobits per second per channel
+	kAUNetSendPresetFormat_AAC_96kbpspc = 8,	//   96 kilobits per second per channel
+	kAUNetSendPresetFormat_AAC_80kbpspc = 9,	//   80 kilobits per second per channel
+	kAUNetSendPresetFormat_AAC_64kbpspc = 10,	//   64 kilobits per second per channel
+	kAUNetSendPresetFormat_AAC_48kbpspc = 11,	//   48 kilobits per second per channel
+	kAUNetSendPresetFormat_AAC_40kbpspc = 12,	//   40 kilobits per second per channel
+	kAUNetSendPresetFormat_AAC_32kbpspc = 13,	//   32 kilobits per second per channel
+	kAUNetSendNumPresetFormats = 14
+};
+
 
 // Apple reserves usage of scope IDs from 0 to 1024 for system usage
 enum {
@@ -754,7 +828,7 @@ enum
 	kAudioUnitParameterFlag_CFNameRelease		= (1L << 4),
 
 	kAudioUnitParameterFlag_MeterReadOnly		= (1L << 15),
-
+	
 	// bit positions 18,17,16 are set aside for display scales. bit 19 is reserved.
 	kAudioUnitParameterFlag_DisplayMask			= (7L << 16) | (1L << 22),
 	kAudioUnitParameterFlag_DisplaySquareRoot	= (1L << 16),
@@ -923,6 +997,11 @@ typedef struct AUParameterMIDIMapping
 	UInt32					reserved3; // MUST be set to zero
 } AUParameterMIDIMapping;
 
+typedef struct AUDependentParameter {
+	AudioUnitScope			mScope;
+	AudioUnitParameterID	mParameterID;
+} AUDependentParameter;
+
 // new for 10.3
 typedef struct AudioOutputUnitStartAtTimeParams {
 	// see AudioDeviceStartAtTime
@@ -950,6 +1029,266 @@ typedef struct AudioUnitMeterClipping
 	Boolean sawNotANumber;
 } AudioUnitMeterClipping;
 #endif
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+/*
+	Using AUScheduledSoundPlayer
+	----------------------------
+	
+	This AudioUnit provides a way for a client to schedule audio buffers for
+	future playback, with sample-accurate timing.
+	
+	
+	Elements and Formats
+	
+	This unit has one output element, and no input elements. The output's format
+	should be a canonical AudioUnit stream format (native Float32,
+	deinterleaved).
+
+
+	Scheduling
+
+	To schedule slices of audio for future playback, set the
+	kAudioUnitProperty_ScheduleAudioSlice property, with a ScheduledAudioSlice
+	structure as the property value. The slice's mTimeStamp.mSampleTime
+	determines when the slice will be played. This sample number is relative to
+	the unit's start time, which you must set using the
+	kAudioUnitProperty_ScheduleStartTimeStamp property before playback will
+	begin.
+
+	You must retain, unmodified, the ScheduledAudioSlice structure, including
+	its mBufferList and the buffers to which it points, until the slice has been
+	completely played, or until you stop playback by uninitializing or resetting
+	the unit. The format of the slice's buffer list must match the unit's output
+	stream format.
+	
+	(The members other than mSampleTime and mFlags in mTimestamp are currently
+	ignored.)
+	
+	
+	Completion
+	
+	To receive a callback when the slice has been played, store a pointer to a
+	callback function in mCompletionProc. This function will be called (from the
+	unit's rendering thread) when the slice has been completely played -- or
+	determined to be unplayable due to an error. As an alternative, you may also
+	poll the slice's (mFlags & kScheduledAudioSliceFlag_Complete).
+
+	Upon completion, you can test (mFlags &
+	kScheduledAudioSliceFlag_BeganToRenderLate) to determine whether some
+	portion of the slice was not played due to its having been scheduled too
+	late relative to the current playback time.
+	
+	
+	Start Time
+	
+	The unit will not play any slices following initialization or reset -- until
+	its start time has been set. The start time establishes the beginning of a
+	timeline: the timestamps of all slices in the schedule are relative to the
+	start time.
+
+	Set a start time by setting kAudioUnitProperty_ScheduleStartTimeStamp with
+	an AudioTimeStamp structure. If the timestamp contains a valid sample time
+	(timestamp.mFlags & kAudioTimeStampSampleTimeValid), then playback begins
+	when the timestamp passed to AudioUnitRender reaches the specified sample
+	time. If the specified sample time is -1, playback begins on the next render
+	cycle.
+	
+	If the start timestamp does not contain a valid sample time, but does contain a
+	valid host time (timestamp.mFlags & kAudioTimeStampHostTimeValid), then the
+	specified host time is translated to the sample time at which playback will
+	begin. A host time of 0 means "start on the next render cycle."
+	
+	kAudioUnitProperty_ScheduleStartTimeStamp may be queried to obtain the time
+	at which playback has actually begun. If the start time has not yet been reached,
+	the timestamp returned will be whatever the client last set.
+	
+	
+	Current play time
+	
+	kAudioUnitProperty_CurrentPlayTime may be queried to determine the unit's current
+	time offset from its start time (useful, for example, to monitor playback progress).
+	
+	
+	Unscheduling events
+	
+	To clear the unit's play schedule, call AudioUnitReset. The completion proc
+	(if any) for each slice in the schedule will called. Playback will not
+	resume until a new start time has been set. This also happens when the unit
+	is uninitialized.
+*/
+enum {  // bits in ScheduledAudioSlice.mFlags
+	kScheduledAudioSliceFlag_Complete				= 1,		// set if the unit is done with this slice
+	kScheduledAudioSliceFlag_BeganToRender			= 2,		// set if any portion of the buffer has been played
+	kScheduledAudioSliceFlag_BeganToRenderLate		= 4			// set if any portion of the buffer was not played
+																// because it was scheduled late
+};
+
+typedef struct ScheduledAudioSlice ScheduledAudioSlice;
+typedef void (*ScheduledAudioSliceCompletionProc)(void *userData, 
+				ScheduledAudioSlice *bufferList);
+				
+struct ScheduledAudioSlice {
+	AudioTimeStamp			mTimeStamp;
+	ScheduledAudioSliceCompletionProc  mCompletionProc;	// may be null
+	void *					mCompletionProcUserData;
+	UInt32					mFlags;
+	UInt32					mReserved;		// must be 0
+	void *					mReserved2;		// for internal use
+	UInt32					mNumberFrames;  // must be consistent with byte count of mBufferList
+	AudioBufferList *		mBufferList;	// must contain deinterleaved Float32
+};
+
+
+
+/*
+	Using AUAudioFilePlayer
+	-----------------------
+
+	This AudioUnit lets you schedule regions of audio files for future playback,
+	with sample-accurate timing.
+
+	The unit is a subclass of AUScheduledSoundPlayer and inherits all of its
+	behavior, in particular the kAudioUnitProperty_ScheduleStartTimeStamp and
+	kAudioUnitProperty_CurrentPlayTime. Instead of scheduling slices (buffers)
+	of audio to be played (via kAudioUnitProperty_ScheduleAudioSlice), however,
+	you schedule regions of audio files to be played. The unit reads and
+	converts audio file data into its own internal buffers. It performs disk I/O
+	on a high-priority thread shared among all instances of this unit within a
+	process. Upon completion of a disk read, the unit internally schedules
+	buffers for playback.
+
+
+	Elements and Formats
+	
+	This unit has one output element, and no input elements. The output's format
+	should be a canonical AudioUnit stream format (native Float32,
+	deinterleaved). This format should have at least as many channels are in the
+	audio file(s) to be played (otherwise channels will be dropped). During
+	playback, all audio file data is converted to the unit's output format.
+	
+
+	Audio Files
+
+	Before starting playback, you must first open all audio files to be played
+	using the AudioFile API's (see AudioToolbox/AudioFile.h), and pass their
+	AudioFileIDs to the unit by setting the kAudioUnitProperty_ScheduledFileIDs
+	propery. This property must not be set during playback. The audio files must
+	be kept open for the duration of playback.
+
+
+	Scheduling Regions
+	
+	To schedule the playback of a region of an audio file, set the
+	kAudioUnitProperty_ScheduledFileRegion property. This is a
+	ScheduledAudioFileRegion structure. mTimeStamp.mSampleTime must be valid and
+	is interpreted relative to the unit's start time -- the start time semantics
+	(using kAudioUnitProperty_ScheduleStartTimeStamp) are identical to those of
+	AUScheduledSoundPlayer. Unlike the ScheduledAudioSlice structures, the unit
+	makes copies of ScheduledAudioFileRegions, so you may create them on the
+	stack or otherwise reuse/dispose of them immediately after scheduling them.
+	
+	
+	Priming
+	
+	You should set kAudioUnitProperty_ScheduledFilePrime after scheduling
+	initial file regions to be played and before starting playback. This SetProperty call
+	will begin reading the audio files and not return until the number of frames
+	specifed by the property value have been read.
+	
+	
+	Completion Callbacks
+	
+	A region's completion callback (mCompletionProc) is called when it has been
+	completely scheduled for reading from disk. This callback is issued on the disk 
+	read thread. If the region is not read from disk in time to play at its
+	scheduled time, mCompletionProc is called a second time with an error code,
+	also from the read thread. Note that the region passed to the callback will not
+	be the same memory object as was passed by the client (since the unit copies the region).
+	
+	
+	Start Time and Current Time
+	
+	These properties work identically as in AUScheduledSoundPlayer.
+	
+	
+	Unscheduling regions
+	
+	To clear the unit's play schedule, call AudioUnitReset. The completion proc
+	(if any) for each file region in the schedule will be called. Playback will
+	not resume until a new start time has been set. This also happens when the
+	unit is uninitialized.
+	
+	
+	Customization
+	
+	The size and number of the player's disk read buffers default to "sensible"
+	values, but may be configured with the properties:
+		kAudioUnitProperty_ScheduledFileBufferSizeFrames
+		kAudioUnitProperty_ScheduledFileNumberBuffers
+	
+
+	Bugs
+	
+	kAudioUnitProperty_ScheduledFileBufferSizeFrames
+	kAudioUnitProperty_ScheduledFileNumberBuffers
+		are currently unimplemented
+
+	An option to make the unit not perform conversion from the audio file sample
+	rate to the unit's output rate may be desirable.
+*/
+
+typedef struct ScheduledAudioFileRegion ScheduledAudioFileRegion;
+typedef void (*ScheduledAudioFileRegionCompletionProc)(void *userData, 
+				ScheduledAudioFileRegion *fileRegion, OSStatus result);
+
+// defined in AudioToolbox/AudioFile.h:
+//		typedef	struct OpaqueAudioFileID	*AudioFileID;
+struct ScheduledAudioFileRegion {
+	AudioTimeStamp			mTimeStamp;
+	ScheduledAudioFileRegionCompletionProc  mCompletionProc;	// may be NULL
+	void *					mCompletionProcUserData;
+	struct OpaqueAudioFileID *mAudioFile;   // must be a valid and open AudioFileID
+	UInt32					mLoopCount;		// 0 = don't loop
+	SInt64					mStartFrame;	// offset into file
+	UInt32					mFramesToPlay;	// number of frames to play
+};
+
+/*
+	Using AUDeferredRenderer
+	------------------------
+	
+	This unit has one input element and one output element. They must both have
+	the same format, which must be canonical (Float32 deinterleaved) with the
+	same number of channels.
+
+	The unit creates a high-priority producer thread, on which calls to
+	PullInput are performed, at a constant buffer size. This buffer size may be
+	set with kAudioUnitProperty_DeferredRendererPullSize. The deferred renderer
+	may be asked to render at different buffer sizes by a downstream unit or
+	host application, but it always pulls upstream at its constant buffer size.
+	The upstream pull size MUST be greater than or equal to the downstream pull
+	size.
+
+	The upstream producer thread runs in advance of calls to its Render
+	function, with respect to the timestamps being passed to Render and
+	PullInput. The difference between these timestamps is the unit's "latency",
+	which is always at least one upstream pull buffer. The client may specify
+	additional latency with the property
+	kAudioUnitProperty_DeferredRendererExtraLatency, which is a number of sample
+	frames.
+
+	It is possible, at Render time, for the producer thread to have not yet
+	finished rendering the necessary data. This generates an error. In order to
+	give the producer a small amount of extra time to finish rendering, the
+	client may set the unit's property
+	kAudioUnitProperty_DeferredRendererWaitFrames. If this property is non-zero,
+	then when Render finds that insufficient data has been produced, it will
+	sleep for the amount of realtime corresponding to the number of wait frames.
+	It will then check again to see if the required amount of data has been
+	produced, and fail if it hasn't.
+*/
+#endif // MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 
 #endif // __AudioUnitProperties

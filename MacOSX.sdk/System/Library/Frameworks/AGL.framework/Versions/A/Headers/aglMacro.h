@@ -6,7 +6,7 @@
     Version:	Technology:	Mac OS X
                 Release:	GM
  
-     Copyright: (c) 2000-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright: (c) 2000-2005 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -20,1693 +20,2006 @@
 
 #include "aglContext.h"
 
+/* Macro context name (AGLContext) */
+#if !defined(AGL_MACRO_CONTEXT)
+#define AGL_MACRO_CONTEXT agl_ctx
+#endif
+
+/* Macro renderer name (GLIContext) */
+#if !defined(AGL_MACRO_RENDERER)
+#define AGL_MACRO_RENDERER agl_rend
+#endif
+
+#define AGL_MACRO_DECLARE_CONTEXT()  AGLContext AGL_MACRO_CONTEXT = aglGetCurrentContext();
+
+/* Repeated renderer lookups may be avoided by defining AGL_MACRO_CACHE_RENDERER before including aglMacro.h.
+   Note: If you change the value of AGL_MACRO_CONTEXT partway through a function, you will have to
+   keep AGL_MACRO_RENDERER up to date with with it's context. */
+#if defined(AGL_MACRO_CACHE_RENDERER)
+#define AGL_MACRO_DECLARE_RENDERER()  GLIContext AGL_MACRO_RENDERER = AGL_MACRO_CONTEXT->rend;
+#define AGL_MACRO_CONTEXT_RENDERER  AGL_MACRO_RENDERER
+#else
+#define AGL_MACRO_DECLARE_RENDERER()
+#define AGL_MACRO_CONTEXT_RENDERER  AGL_MACRO_CONTEXT->rend
+#endif
+
+/* Use the following function macro to declare the local aglMacro variables */
+#define AGL_MACRO_DECLARE_VARIABLES() \
+    AGL_MACRO_DECLARE_CONTEXT(); \
+    AGL_MACRO_DECLARE_RENDERER();
+
 /****************** OpenGL 1.1 Macros *****************************/
 
-/* Macro context name */
-#define AGL_MACRO_CONTEXT agl_ctx
-
 #define glAccum(op, value) \
-	(*agl_ctx->disp.accum)(agl_ctx->rend, op, value)
+	(*(AGL_MACRO_CONTEXT)->disp.accum)(AGL_MACRO_CONTEXT_RENDERER, op, value)
 
 #define glAlphaFunc(func, ref) \
-	(*agl_ctx->disp.alpha_func)(agl_ctx->rend, func, ref)
+	(*(AGL_MACRO_CONTEXT)->disp.alpha_func)(AGL_MACRO_CONTEXT_RENDERER, func, ref)
 
 #define glAreTexturesResident(n, textures, residences) \
-	(*agl_ctx->disp.are_textures_resident)(agl_ctx->rend, n, textures, residences)
+	(*(AGL_MACRO_CONTEXT)->disp.are_textures_resident)(AGL_MACRO_CONTEXT_RENDERER, n, textures, residences)
 
 #define glArrayElement(i) \
-	(*agl_ctx->disp.array_element)(agl_ctx->rend, i)
+	(*(AGL_MACRO_CONTEXT)->disp.array_element)(AGL_MACRO_CONTEXT_RENDERER, i)
 
 #define glBegin(mode) \
-	(*agl_ctx->disp.begin)(agl_ctx->rend, mode)
+	(*(AGL_MACRO_CONTEXT)->disp.begin)(AGL_MACRO_CONTEXT_RENDERER, mode)
 
 #define glBindTexture(target, texture) \
-	(*agl_ctx->disp.bind_texture)(agl_ctx->rend, target, texture)
+	(*(AGL_MACRO_CONTEXT)->disp.bind_texture)(AGL_MACRO_CONTEXT_RENDERER, target, texture)
 
 #define glBitmap(width, height, xorig, yorig, xmove, ymove, bmap) \
-	(*agl_ctx->disp.bitmap)(agl_ctx->rend, width, height, xorig, yorig, xmove, ymove, bmap)
+	(*(AGL_MACRO_CONTEXT)->disp.bitmap)(AGL_MACRO_CONTEXT_RENDERER, width, height, xorig, yorig, xmove, ymove, bmap)
 
 #define glBlendFunc(sfactor, dfactor) \
-	(*agl_ctx->disp.blend_func)(agl_ctx->rend, sfactor, dfactor)
+	(*(AGL_MACRO_CONTEXT)->disp.blend_func)(AGL_MACRO_CONTEXT_RENDERER, sfactor, dfactor)
 
 #define glCallList(list) \
-	(*agl_ctx->disp.call_list)(agl_ctx->rend, list)
+	(*(AGL_MACRO_CONTEXT)->disp.call_list)(AGL_MACRO_CONTEXT_RENDERER, list)
 
 #define glCallLists(n, type, lists) \
-	(*agl_ctx->disp.call_lists)(agl_ctx->rend, n, type, lists)
+	(*(AGL_MACRO_CONTEXT)->disp.call_lists)(AGL_MACRO_CONTEXT_RENDERER, n, type, lists)
 
 #define glClear(mask) \
-	(*agl_ctx->disp.clear)(agl_ctx->rend, mask)
+	(*(AGL_MACRO_CONTEXT)->disp.clear)(AGL_MACRO_CONTEXT_RENDERER, mask)
 
 #define glClearAccum(red, green, blue, alpha) \
-	(*agl_ctx->disp.clear_accum)(agl_ctx->rend, red, green, blue, alpha)
+	(*(AGL_MACRO_CONTEXT)->disp.clear_accum)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue, alpha)
 
 #define glClearColor(red, green, blue, alpha) \
-	(*agl_ctx->disp.clear_color)(agl_ctx->rend, red, green, blue, alpha)
+	(*(AGL_MACRO_CONTEXT)->disp.clear_color)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue, alpha)
 
 #define glClearDepth(depth) \
-	(*agl_ctx->disp.clear_depth)(agl_ctx->rend, depth)
+	(*(AGL_MACRO_CONTEXT)->disp.clear_depth)(AGL_MACRO_CONTEXT_RENDERER, depth)
 
 #define glClearIndex(c) \
-	(*agl_ctx->disp.clear_index)(agl_ctx->rend, c)
+	(*(AGL_MACRO_CONTEXT)->disp.clear_index)(AGL_MACRO_CONTEXT_RENDERER, c)
 
 #define glClearStencil(s) \
-	(*agl_ctx->disp.clear_stencil)(agl_ctx->rend, s)
+	(*(AGL_MACRO_CONTEXT)->disp.clear_stencil)(AGL_MACRO_CONTEXT_RENDERER, s)
 
 #define glClipPlane(plane, equation) \
-	(*agl_ctx->disp.clip_plane)(agl_ctx->rend, plane, equation)
+	(*(AGL_MACRO_CONTEXT)->disp.clip_plane)(AGL_MACRO_CONTEXT_RENDERER, plane, equation)
 
 #define glColor3b(red, green, blue) \
-	(*agl_ctx->disp.color3b)(agl_ctx->rend, red, green, blue)
+	(*(AGL_MACRO_CONTEXT)->disp.color3b)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue)
 
 #define glColor3bv(v) \
-	(*agl_ctx->disp.color3bv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.color3bv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glColor3d(red, green, blue) \
-	(*agl_ctx->disp.color3d)(agl_ctx->rend, red, green, blue)
+	(*(AGL_MACRO_CONTEXT)->disp.color3d)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue)
 
 #define glColor3dv(v) \
-	(*agl_ctx->disp.color3dv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.color3dv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glColor3f(red, green, blue) \
-	(*agl_ctx->disp.color3f)(agl_ctx->rend, red, green, blue)
+	(*(AGL_MACRO_CONTEXT)->disp.color3f)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue)
 
 #define glColor3fv(v) \
-	(*agl_ctx->disp.color3fv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.color3fv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glColor3i(red, green, blue) \
-	(*agl_ctx->disp.color3i)(agl_ctx->rend, red, green, blue)
+	(*(AGL_MACRO_CONTEXT)->disp.color3i)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue)
 
 #define glColor3iv(v) \
-	(*agl_ctx->disp.color3iv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.color3iv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glColor3s(red, green, blue) \
-	(*agl_ctx->disp.color3s)(agl_ctx->rend, red, green, blue)
+	(*(AGL_MACRO_CONTEXT)->disp.color3s)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue)
 
 #define glColor3sv(v) \
-	(*agl_ctx->disp.color3sv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.color3sv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glColor3ub(red, green, blue) \
-	(*agl_ctx->disp.color3ub)(agl_ctx->rend, red, green, blue)
+	(*(AGL_MACRO_CONTEXT)->disp.color3ub)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue)
 
 #define glColor3ubv(v) \
-	(*agl_ctx->disp.color3ubv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.color3ubv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glColor3ui(red, green, blue) \
-	(*agl_ctx->disp.color3ui)(agl_ctx->rend, red, green, blue)
+	(*(AGL_MACRO_CONTEXT)->disp.color3ui)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue)
 
 #define glColor3uiv(v) \
-	(*agl_ctx->disp.color3uiv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.color3uiv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glColor3us(red, green, blue) \
-	(*agl_ctx->disp.color3us)(agl_ctx->rend, red, green, blue)
+	(*(AGL_MACRO_CONTEXT)->disp.color3us)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue)
 
 #define glColor3usv(v) \
-	(*agl_ctx->disp.color3usv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.color3usv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glColor4b(red, green, blue, alpha) \
-	(*agl_ctx->disp.color4b)(agl_ctx->rend, red, green, blue, alpha)
+	(*(AGL_MACRO_CONTEXT)->disp.color4b)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue, alpha)
 
 #define glColor4bv(v) \
-	(*agl_ctx->disp.color4bv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.color4bv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glColor4d(red, green, blue, alpha) \
-	(*agl_ctx->disp.color4d)(agl_ctx->rend, red, green, blue, alpha)
+	(*(AGL_MACRO_CONTEXT)->disp.color4d)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue, alpha)
 
 #define glColor4dv(v) \
-	(*agl_ctx->disp.color4dv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.color4dv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glColor4f(red, green, blue, alpha) \
-	(*agl_ctx->disp.color4f)(agl_ctx->rend, red, green, blue, alpha)
+	(*(AGL_MACRO_CONTEXT)->disp.color4f)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue, alpha)
 
 #define glColor4fv(v) \
-	(*agl_ctx->disp.color4fv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.color4fv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glColor4i(red, green, blue, alpha) \
-	(*agl_ctx->disp.color4i)(agl_ctx->rend, red, green, blue, alpha)
+	(*(AGL_MACRO_CONTEXT)->disp.color4i)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue, alpha)
 
 #define glColor4iv(v) \
-	(*agl_ctx->disp.color4iv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.color4iv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glColor4s(red, green, blue, alpha) \
-	(*agl_ctx->disp.color4s)(agl_ctx->rend, red, green, blue, alpha)
+	(*(AGL_MACRO_CONTEXT)->disp.color4s)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue, alpha)
 
 #define glColor4sv(v) \
-	(*agl_ctx->disp.color4sv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.color4sv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glColor4ub(red, green, blue, alpha) \
-	(*agl_ctx->disp.color4ub)(agl_ctx->rend, red, green, blue, alpha)
+	(*(AGL_MACRO_CONTEXT)->disp.color4ub)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue, alpha)
 
 #define glColor4ubv(v) \
-	(*agl_ctx->disp.color4ubv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.color4ubv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glColor4ui(red, green, blue, alpha) \
-	(*agl_ctx->disp.color4ui)(agl_ctx->rend, red, green, blue, alpha)
+	(*(AGL_MACRO_CONTEXT)->disp.color4ui)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue, alpha)
 
 #define glColor4uiv(v) \
-	(*agl_ctx->disp.color4uiv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.color4uiv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glColor4us(red, green, blue, alpha) \
-	(*agl_ctx->disp.color4us)(agl_ctx->rend, red, green, blue, alpha)
+	(*(AGL_MACRO_CONTEXT)->disp.color4us)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue, alpha)
 
 #define glColor4usv(v) \
-	(*agl_ctx->disp.color4usv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.color4usv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glColorMask(red, green, blue, alpha) \
-	(*agl_ctx->disp.color_mask)(agl_ctx->rend, red, green, blue, alpha)
+	(*(AGL_MACRO_CONTEXT)->disp.color_mask)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue, alpha)
 
 #define glColorMaterial(face, mode) \
-	(*agl_ctx->disp.color_material)(agl_ctx->rend, face, mode)
+	(*(AGL_MACRO_CONTEXT)->disp.color_material)(AGL_MACRO_CONTEXT_RENDERER, face, mode)
 
 #define glColorPointer(size, type, stride, pointer) \
-	(*agl_ctx->disp.color_pointer)(agl_ctx->rend, size, type, stride, pointer)
+	(*(AGL_MACRO_CONTEXT)->disp.color_pointer)(AGL_MACRO_CONTEXT_RENDERER, size, type, stride, pointer)
 
 #define glCopyPixels(x, y, width, height, type) \
-	(*agl_ctx->disp.copy_pixels)(agl_ctx->rend, x, y, width, height, type)
+	(*(AGL_MACRO_CONTEXT)->disp.copy_pixels)(AGL_MACRO_CONTEXT_RENDERER, x, y, width, height, type)
 
 #define glCopyTexImage1D(target, level, internalFormat, x, y, width, border) \
-	(*agl_ctx->disp.copy_tex_image1D)(agl_ctx->rend, target, level, internalFormat, x, y, width, border)
+	(*(AGL_MACRO_CONTEXT)->disp.copy_tex_image1D)(AGL_MACRO_CONTEXT_RENDERER, target, level, internalFormat, x, y, width, border)
 
 #define glCopyTexImage2D(target, level, internalFormat, x, y, width, height, border) \
-	(*agl_ctx->disp.copy_tex_image2D)(agl_ctx->rend, target, level, internalFormat, x, y, width, height, border)
+	(*(AGL_MACRO_CONTEXT)->disp.copy_tex_image2D)(AGL_MACRO_CONTEXT_RENDERER, target, level, internalFormat, x, y, width, height, border)
 
 #define glCopyTexSubImage1D(target, level, xoffset, x, y, width) \
-	(*agl_ctx->disp.copy_tex_sub_image1D)(agl_ctx->rend, target, level, xoffset, x, y, width)
+	(*(AGL_MACRO_CONTEXT)->disp.copy_tex_sub_image1D)(AGL_MACRO_CONTEXT_RENDERER, target, level, xoffset, x, y, width)
 
 #define glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height) \
-	(*agl_ctx->disp.copy_tex_sub_image2D)(agl_ctx->rend, target, level, xoffset, yoffset, x, y, width, height)
+	(*(AGL_MACRO_CONTEXT)->disp.copy_tex_sub_image2D)(AGL_MACRO_CONTEXT_RENDERER, target, level, xoffset, yoffset, x, y, width, height)
 
 #define glCullFace(mode) \
-	(*agl_ctx->disp.cull_face)(agl_ctx->rend, mode)
+	(*(AGL_MACRO_CONTEXT)->disp.cull_face)(AGL_MACRO_CONTEXT_RENDERER, mode)
 
 #define glDeleteLists(list, range) \
-	(*agl_ctx->disp.delete_lists)(agl_ctx->rend, list, range)
+	(*(AGL_MACRO_CONTEXT)->disp.delete_lists)(AGL_MACRO_CONTEXT_RENDERER, list, range)
 
 #define glDeleteTextures(n, textures) \
-	(*agl_ctx->disp.delete_textures)(agl_ctx->rend, n, textures)
+	(*(AGL_MACRO_CONTEXT)->disp.delete_textures)(AGL_MACRO_CONTEXT_RENDERER, n, textures)
 
 #define glDepthFunc(func) \
-	(*agl_ctx->disp.depth_func)(agl_ctx->rend, func)
+	(*(AGL_MACRO_CONTEXT)->disp.depth_func)(AGL_MACRO_CONTEXT_RENDERER, func)
 
 #define glDepthMask(flag) \
-	(*agl_ctx->disp.depth_mask)(agl_ctx->rend, flag)
+	(*(AGL_MACRO_CONTEXT)->disp.depth_mask)(AGL_MACRO_CONTEXT_RENDERER, flag)
 
 #define glDepthRange(zNear, zFar) \
-	(*agl_ctx->disp.depth_range)(agl_ctx->rend, zNear, zFar)
+	(*(AGL_MACRO_CONTEXT)->disp.depth_range)(AGL_MACRO_CONTEXT_RENDERER, zNear, zFar)
 
 #define glDisable(cap) \
-	(*agl_ctx->disp.disable)(agl_ctx->rend, cap)
+	(*(AGL_MACRO_CONTEXT)->disp.disable)(AGL_MACRO_CONTEXT_RENDERER, cap)
 
 #define glDisableClientState(array) \
-	(*agl_ctx->disp.disable_client_state)(agl_ctx->rend, array)
+	(*(AGL_MACRO_CONTEXT)->disp.disable_client_state)(AGL_MACRO_CONTEXT_RENDERER, array)
 
 #define glDrawArrays(mode, first, count) \
-	(*agl_ctx->disp.draw_arrays)(agl_ctx->rend, mode, first, count)
+	(*(AGL_MACRO_CONTEXT)->disp.draw_arrays)(AGL_MACRO_CONTEXT_RENDERER, mode, first, count)
 
 #define glDrawBuffer(mode) \
-	(*agl_ctx->disp.draw_buffer)(agl_ctx->rend, mode)
+	(*(AGL_MACRO_CONTEXT)->disp.draw_buffer)(AGL_MACRO_CONTEXT_RENDERER, mode)
 
 #define glDrawElements(mode, count, type, indices) \
-	(*agl_ctx->disp.draw_elements)(agl_ctx->rend, mode, count, type, indices)
+	(*(AGL_MACRO_CONTEXT)->disp.draw_elements)(AGL_MACRO_CONTEXT_RENDERER, mode, count, type, indices)
 
 #define glDrawPixels(width, height, format, type, pixels) \
-	(*agl_ctx->disp.draw_pixels)(agl_ctx->rend, width, height, format, type, pixels)
+	(*(AGL_MACRO_CONTEXT)->disp.draw_pixels)(AGL_MACRO_CONTEXT_RENDERER, width, height, format, type, pixels)
 
 #define glEdgeFlag(flag) \
-	(*agl_ctx->disp.edge_flag)(agl_ctx->rend, flag)
+	(*(AGL_MACRO_CONTEXT)->disp.edge_flag)(AGL_MACRO_CONTEXT_RENDERER, flag)
 
 #define glEdgeFlagPointer(stride, pointer) \
-	(*agl_ctx->disp.edge_flag_pointer)(agl_ctx->rend, stride, pointer)
+	(*(AGL_MACRO_CONTEXT)->disp.edge_flag_pointer)(AGL_MACRO_CONTEXT_RENDERER, stride, pointer)
 
 #define glEdgeFlagv(flag) \
-	(*agl_ctx->disp.edge_flagv)(agl_ctx->rend, flag)
+	(*(AGL_MACRO_CONTEXT)->disp.edge_flagv)(AGL_MACRO_CONTEXT_RENDERER, flag)
 
 #define glEnable(cap) \
-	(*agl_ctx->disp.enable)(agl_ctx->rend, cap)
+	(*(AGL_MACRO_CONTEXT)->disp.enable)(AGL_MACRO_CONTEXT_RENDERER, cap)
 
 #define glEnableClientState(array) \
-	(*agl_ctx->disp.enable_client_state)(agl_ctx->rend, array)
+	(*(AGL_MACRO_CONTEXT)->disp.enable_client_state)(AGL_MACRO_CONTEXT_RENDERER, array)
 
 #define glEnd() \
-	(*agl_ctx->disp.end)(agl_ctx->rend)
+	(*(AGL_MACRO_CONTEXT)->disp.end)(AGL_MACRO_CONTEXT_RENDERER)
 
 #define glEndList() \
-	(*agl_ctx->disp.end_list)(agl_ctx->rend)
+	(*(AGL_MACRO_CONTEXT)->disp.end_list)(AGL_MACRO_CONTEXT_RENDERER)
 
 #define glEvalCoord1d(u) \
-	(*agl_ctx->disp.eval_coord1d)(agl_ctx->rend, u)
+	(*(AGL_MACRO_CONTEXT)->disp.eval_coord1d)(AGL_MACRO_CONTEXT_RENDERER, u)
 
 #define glEvalCoord1dv(u) \
-	(*agl_ctx->disp.eval_coord1dv)(agl_ctx->rend, u)
+	(*(AGL_MACRO_CONTEXT)->disp.eval_coord1dv)(AGL_MACRO_CONTEXT_RENDERER, u)
 
 #define glEvalCoord1f(u) \
-	(*agl_ctx->disp.eval_coord1f)(agl_ctx->rend, u)
+	(*(AGL_MACRO_CONTEXT)->disp.eval_coord1f)(AGL_MACRO_CONTEXT_RENDERER, u)
 
 #define glEvalCoord1fv(u) \
-	(*agl_ctx->disp.eval_coord1fv)(agl_ctx->rend, u)
+	(*(AGL_MACRO_CONTEXT)->disp.eval_coord1fv)(AGL_MACRO_CONTEXT_RENDERER, u)
 
 #define glEvalCoord2d(u, v) \
-	(*agl_ctx->disp.eval_coord2d)(agl_ctx->rend, u, v)
+	(*(AGL_MACRO_CONTEXT)->disp.eval_coord2d)(AGL_MACRO_CONTEXT_RENDERER, u, v)
 
 #define glEvalCoord2dv(u) \
-	(*agl_ctx->disp.eval_coord2dv)(agl_ctx->rend, u)
+	(*(AGL_MACRO_CONTEXT)->disp.eval_coord2dv)(AGL_MACRO_CONTEXT_RENDERER, u)
 
 #define glEvalCoord2f(u, v) \
-	(*agl_ctx->disp.eval_coord2f)(agl_ctx->rend, u, v)
+	(*(AGL_MACRO_CONTEXT)->disp.eval_coord2f)(AGL_MACRO_CONTEXT_RENDERER, u, v)
 
 #define glEvalCoord2fv(u) \
-	(*agl_ctx->disp.eval_coord2fv)(agl_ctx->rend, u)
+	(*(AGL_MACRO_CONTEXT)->disp.eval_coord2fv)(AGL_MACRO_CONTEXT_RENDERER, u)
 
 #define glEvalMesh1(mode, i1, i2) \
-	(*agl_ctx->disp.eval_mesh1)(agl_ctx->rend, mode, i1, i2)
+	(*(AGL_MACRO_CONTEXT)->disp.eval_mesh1)(AGL_MACRO_CONTEXT_RENDERER, mode, i1, i2)
 
 #define glEvalMesh2(mode, i1, i2, j1, j2) \
-	(*agl_ctx->disp.eval_mesh2)(agl_ctx->rend, mode, i1, i2, j1, j2)
+	(*(AGL_MACRO_CONTEXT)->disp.eval_mesh2)(AGL_MACRO_CONTEXT_RENDERER, mode, i1, i2, j1, j2)
 
 #define glEvalPoint1(i) \
-	(*agl_ctx->disp.eval_point1)(agl_ctx->rend, i)
+	(*(AGL_MACRO_CONTEXT)->disp.eval_point1)(AGL_MACRO_CONTEXT_RENDERER, i)
 
 #define glEvalPoint2(i, j) \
-	(*agl_ctx->disp.eval_point2)(agl_ctx->rend, i, j)
+	(*(AGL_MACRO_CONTEXT)->disp.eval_point2)(AGL_MACRO_CONTEXT_RENDERER, i, j)
 
 #define glFeedbackBuffer(size, type, buffer) \
-	(*agl_ctx->disp.feedback_buffer)(agl_ctx->rend, size, type, buffer)
+	(*(AGL_MACRO_CONTEXT)->disp.feedback_buffer)(AGL_MACRO_CONTEXT_RENDERER, size, type, buffer)
 
 #define glFinish() \
-	(*agl_ctx->disp.finish)(agl_ctx->rend)
+	(*(AGL_MACRO_CONTEXT)->disp.finish)(AGL_MACRO_CONTEXT_RENDERER)
 
 #define glFlush() \
-	(*agl_ctx->disp.flush)(agl_ctx->rend)
+	(*(AGL_MACRO_CONTEXT)->disp.flush)(AGL_MACRO_CONTEXT_RENDERER)
 
 #define glFogf(pname, param) \
-	(*agl_ctx->disp.fogf)(agl_ctx->rend, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.fogf)(AGL_MACRO_CONTEXT_RENDERER, pname, param)
 
 #define glFogfv(pname, params) \
-	(*agl_ctx->disp.fogfv)(agl_ctx->rend, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.fogfv)(AGL_MACRO_CONTEXT_RENDERER, pname, params)
 
 #define glFogi(pname, param) \
-	(*agl_ctx->disp.fogi)(agl_ctx->rend, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.fogi)(AGL_MACRO_CONTEXT_RENDERER, pname, param)
 
 #define glFogiv(pname, params) \
-	(*agl_ctx->disp.fogiv)(agl_ctx->rend, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.fogiv)(AGL_MACRO_CONTEXT_RENDERER, pname, params)
 
 #define glFrontFace(mode) \
-	(*agl_ctx->disp.front_face)(agl_ctx->rend, mode)
+	(*(AGL_MACRO_CONTEXT)->disp.front_face)(AGL_MACRO_CONTEXT_RENDERER, mode)
 
 #define glFrustum(left, right, bottom, top, zNear, zFar) \
-	(*agl_ctx->disp.frustum)(agl_ctx->rend, left, right, bottom, top, zNear, zFar)
+	(*(AGL_MACRO_CONTEXT)->disp.frustum)(AGL_MACRO_CONTEXT_RENDERER, left, right, bottom, top, zNear, zFar)
 
 #define glGenLists(range) \
-	(*agl_ctx->disp.gen_lists)(agl_ctx->rend, range)
+	(*(AGL_MACRO_CONTEXT)->disp.gen_lists)(AGL_MACRO_CONTEXT_RENDERER, range)
 
 #define glGenTextures(n, textures) \
-	(*agl_ctx->disp.gen_textures)(agl_ctx->rend, n, textures)
+	(*(AGL_MACRO_CONTEXT)->disp.gen_textures)(AGL_MACRO_CONTEXT_RENDERER, n, textures)
 
 #define glGetBooleanv(pname, params) \
-	(*agl_ctx->disp.get_booleanv)(agl_ctx->rend, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_booleanv)(AGL_MACRO_CONTEXT_RENDERER, pname, params)
 
 #define glGetClipPlane(plane, equation) \
-	(*agl_ctx->disp.get_clip_plane)(agl_ctx->rend, plane, equation)
+	(*(AGL_MACRO_CONTEXT)->disp.get_clip_plane)(AGL_MACRO_CONTEXT_RENDERER, plane, equation)
 
 #define glGetDoublev(pname, params) \
-	(*agl_ctx->disp.get_doublev)(agl_ctx->rend, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_doublev)(AGL_MACRO_CONTEXT_RENDERER, pname, params)
 
 #define glGetError() \
-	(*agl_ctx->disp.get_error)(agl_ctx->rend)
+	(*(AGL_MACRO_CONTEXT)->disp.get_error)(AGL_MACRO_CONTEXT_RENDERER)
 
 #define glGetFloatv(pname, params) \
-	(*agl_ctx->disp.get_floatv)(agl_ctx->rend, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_floatv)(AGL_MACRO_CONTEXT_RENDERER, pname, params)
 
 #define glGetIntegerv(pname, params) \
-	(*agl_ctx->disp.get_integerv)(agl_ctx->rend, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_integerv)(AGL_MACRO_CONTEXT_RENDERER, pname, params)
 
 #define glGetLightfv(light, pname, params) \
-	(*agl_ctx->disp.get_lightfv)(agl_ctx->rend, light, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_lightfv)(AGL_MACRO_CONTEXT_RENDERER, light, pname, params)
 
 #define glGetLightiv(light, pname, params) \
-	(*agl_ctx->disp.get_lightiv)(agl_ctx->rend, light, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_lightiv)(AGL_MACRO_CONTEXT_RENDERER, light, pname, params)
 
 #define glGetMapdv(target, query, v) \
-	(*agl_ctx->disp.get_mapdv)(agl_ctx->rend, target, query, v)
+	(*(AGL_MACRO_CONTEXT)->disp.get_mapdv)(AGL_MACRO_CONTEXT_RENDERER, target, query, v)
 
 #define glGetMapfv(target, query, v) \
-	(*agl_ctx->disp.get_mapfv)(agl_ctx->rend, target, query, v)
+	(*(AGL_MACRO_CONTEXT)->disp.get_mapfv)(AGL_MACRO_CONTEXT_RENDERER, target, query, v)
 
 #define glGetMapiv(target, query, v) \
-	(*agl_ctx->disp.get_mapiv)(agl_ctx->rend, target, query, v)
+	(*(AGL_MACRO_CONTEXT)->disp.get_mapiv)(AGL_MACRO_CONTEXT_RENDERER, target, query, v)
 
 #define glGetMaterialfv(face, pname, params) \
-	(*agl_ctx->disp.get_materialfv)(agl_ctx->rend, face, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_materialfv)(AGL_MACRO_CONTEXT_RENDERER, face, pname, params)
 
 #define glGetMaterialiv(face, pname, params) \
-	(*agl_ctx->disp.get_materialiv)(agl_ctx->rend, face, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_materialiv)(AGL_MACRO_CONTEXT_RENDERER, face, pname, params)
 
 #define glGetPixelMapfv(map, values) \
-	(*agl_ctx->disp.get_pixel_mapfv)(agl_ctx->rend, map, values)
+	(*(AGL_MACRO_CONTEXT)->disp.get_pixel_mapfv)(AGL_MACRO_CONTEXT_RENDERER, map, values)
 
 #define glGetPixelMapuiv(map, values) \
-	(*agl_ctx->disp.get_pixel_mapuiv)(agl_ctx->rend, map, values)
+	(*(AGL_MACRO_CONTEXT)->disp.get_pixel_mapuiv)(AGL_MACRO_CONTEXT_RENDERER, map, values)
 
 #define glGetPixelMapusv(map, values) \
-	(*agl_ctx->disp.get_pixel_mapusv)(agl_ctx->rend, map, values)
+	(*(AGL_MACRO_CONTEXT)->disp.get_pixel_mapusv)(AGL_MACRO_CONTEXT_RENDERER, map, values)
 
 #define glGetPointerv(pname, params) \
-	(*agl_ctx->disp.get_pointerv)(agl_ctx->rend, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_pointerv)(AGL_MACRO_CONTEXT_RENDERER, pname, params)
 
 #define glGetPolygonStipple(mask) \
-	(*agl_ctx->disp.get_polygon_stipple)(agl_ctx->rend, mask)
+	(*(AGL_MACRO_CONTEXT)->disp.get_polygon_stipple)(AGL_MACRO_CONTEXT_RENDERER, mask)
 
 #define glGetString(name) \
-	(*agl_ctx->disp.get_string)(agl_ctx->rend, name)
+	(*(AGL_MACRO_CONTEXT)->disp.get_string)(AGL_MACRO_CONTEXT_RENDERER, name)
 
 #define glGetTexEnvfv(target, pname, params) \
-	(*agl_ctx->disp.get_tex_envfv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_tex_envfv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glGetTexEnviv(target, pname, params) \
-	(*agl_ctx->disp.get_tex_enviv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_tex_enviv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glGetTexGendv(coord, pname, params) \
-	(*agl_ctx->disp.get_tex_gendv)(agl_ctx->rend, coord, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_tex_gendv)(AGL_MACRO_CONTEXT_RENDERER, coord, pname, params)
 
 #define glGetTexGenfv(coord, pname, params) \
-	(*agl_ctx->disp.get_tex_genfv)(agl_ctx->rend, coord, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_tex_genfv)(AGL_MACRO_CONTEXT_RENDERER, coord, pname, params)
 
 #define glGetTexGeniv(coord, pname, params) \
-	(*agl_ctx->disp.get_tex_geniv)(agl_ctx->rend, coord, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_tex_geniv)(AGL_MACRO_CONTEXT_RENDERER, coord, pname, params)
 
 #define glGetTexImage(target, level, format, type, pixels) \
-	(*agl_ctx->disp.get_tex_image)(agl_ctx->rend, target, level, format, type, pixels)
+	(*(AGL_MACRO_CONTEXT)->disp.get_tex_image)(AGL_MACRO_CONTEXT_RENDERER, target, level, format, type, pixels)
 
 #define glGetTexLevelParameterfv(target, level, pname, params) \
-	(*agl_ctx->disp.get_tex_level_parameterfv)(agl_ctx->rend, target, level, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_tex_level_parameterfv)(AGL_MACRO_CONTEXT_RENDERER, target, level, pname, params)
 
 #define glGetTexLevelParameteriv(target, level, pname, params) \
-	(*agl_ctx->disp.get_tex_level_parameteriv)(agl_ctx->rend, target, level, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_tex_level_parameteriv)(AGL_MACRO_CONTEXT_RENDERER, target, level, pname, params)
 
 #define glGetTexParameterfv(target, pname, params) \
-	(*agl_ctx->disp.get_tex_parameterfv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_tex_parameterfv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glGetTexParameteriv(target, pname, params) \
-	(*agl_ctx->disp.get_tex_parameteriv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_tex_parameteriv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glHint(target, mode) \
-	(*agl_ctx->disp.hint)(agl_ctx->rend, target, mode)
+	(*(AGL_MACRO_CONTEXT)->disp.hint)(AGL_MACRO_CONTEXT_RENDERER, target, mode)
 
 #define glIndexMask(mask) \
-	(*agl_ctx->disp.index_mask)(agl_ctx->rend, mask)
+	(*(AGL_MACRO_CONTEXT)->disp.index_mask)(AGL_MACRO_CONTEXT_RENDERER, mask)
 
 #define glIndexPointer(type, stride, pointer) \
-	(*agl_ctx->disp.index_pointer)(agl_ctx->rend, type, stride, pointer)
+	(*(AGL_MACRO_CONTEXT)->disp.index_pointer)(AGL_MACRO_CONTEXT_RENDERER, type, stride, pointer)
 
 #define glIndexd(c) \
-	(*agl_ctx->disp.indexd)(agl_ctx->rend, c)
+	(*(AGL_MACRO_CONTEXT)->disp.indexd)(AGL_MACRO_CONTEXT_RENDERER, c)
 
 #define glIndexdv(c) \
-	(*agl_ctx->disp.indexdv)(agl_ctx->rend, c)
+	(*(AGL_MACRO_CONTEXT)->disp.indexdv)(AGL_MACRO_CONTEXT_RENDERER, c)
 
 #define glIndexf(c) \
-	(*agl_ctx->disp.indexf)(agl_ctx->rend, c)
+	(*(AGL_MACRO_CONTEXT)->disp.indexf)(AGL_MACRO_CONTEXT_RENDERER, c)
 
 #define glIndexfv(c) \
-	(*agl_ctx->disp.indexfv)(agl_ctx->rend, c)
+	(*(AGL_MACRO_CONTEXT)->disp.indexfv)(AGL_MACRO_CONTEXT_RENDERER, c)
 
 #define glIndexi(c) \
-	(*agl_ctx->disp.indexi)(agl_ctx->rend, c)
+	(*(AGL_MACRO_CONTEXT)->disp.indexi)(AGL_MACRO_CONTEXT_RENDERER, c)
 
 #define glIndexiv(c) \
-	(*agl_ctx->disp.indexiv)(agl_ctx->rend, c)
+	(*(AGL_MACRO_CONTEXT)->disp.indexiv)(AGL_MACRO_CONTEXT_RENDERER, c)
 
 #define glIndexs(c) \
-	(*agl_ctx->disp.indexs)(agl_ctx->rend, c)
+	(*(AGL_MACRO_CONTEXT)->disp.indexs)(AGL_MACRO_CONTEXT_RENDERER, c)
 
 #define glIndexsv(c) \
-	(*agl_ctx->disp.indexsv)(agl_ctx->rend, c)
+	(*(AGL_MACRO_CONTEXT)->disp.indexsv)(AGL_MACRO_CONTEXT_RENDERER, c)
 
 #define glIndexub(c) \
-	(*agl_ctx->disp.indexub)(agl_ctx->rend, c)
+	(*(AGL_MACRO_CONTEXT)->disp.indexub)(AGL_MACRO_CONTEXT_RENDERER, c)
 
 #define glIndexubv(c) \
-	(*agl_ctx->disp.indexubv)(agl_ctx->rend, c)
+	(*(AGL_MACRO_CONTEXT)->disp.indexubv)(AGL_MACRO_CONTEXT_RENDERER, c)
 
 #define glInitNames() \
-	(*agl_ctx->disp.init_names)(agl_ctx->rend)
+	(*(AGL_MACRO_CONTEXT)->disp.init_names)(AGL_MACRO_CONTEXT_RENDERER)
 
 #define glInterleavedArrays(format, stride, pointer) \
-	(*agl_ctx->disp.interleaved_arrays)(agl_ctx->rend, format, stride, pointer)
+	(*(AGL_MACRO_CONTEXT)->disp.interleaved_arrays)(AGL_MACRO_CONTEXT_RENDERER, format, stride, pointer)
 
 #define glIsEnabled(cap) \
-	(*agl_ctx->disp.is_enabled)(agl_ctx->rend, cap)
+	(*(AGL_MACRO_CONTEXT)->disp.is_enabled)(AGL_MACRO_CONTEXT_RENDERER, cap)
 
 #define glIsList(list) \
-	(*agl_ctx->disp.is_list)(agl_ctx->rend, list)
+	(*(AGL_MACRO_CONTEXT)->disp.is_list)(AGL_MACRO_CONTEXT_RENDERER, list)
 
 #define glIsTexture(texture) \
-	(*agl_ctx->disp.is_texture)(agl_ctx->rend, texture)
+	(*(AGL_MACRO_CONTEXT)->disp.is_texture)(AGL_MACRO_CONTEXT_RENDERER, texture)
 
 #define glLightModelf(pname, param) \
-	(*agl_ctx->disp.light_modelf)(agl_ctx->rend, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.light_modelf)(AGL_MACRO_CONTEXT_RENDERER, pname, param)
 
 #define glLightModelfv(pname, params) \
-	(*agl_ctx->disp.light_modelfv)(agl_ctx->rend, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.light_modelfv)(AGL_MACRO_CONTEXT_RENDERER, pname, params)
 
 #define glLightModeli(pname, param) \
-	(*agl_ctx->disp.light_modeli)(agl_ctx->rend, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.light_modeli)(AGL_MACRO_CONTEXT_RENDERER, pname, param)
 
 #define glLightModeliv(pname, params) \
-	(*agl_ctx->disp.light_modeliv)(agl_ctx->rend, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.light_modeliv)(AGL_MACRO_CONTEXT_RENDERER, pname, params)
 
 #define glLightf(light, pname, param) \
-	(*agl_ctx->disp.lightf)(agl_ctx->rend, light, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.lightf)(AGL_MACRO_CONTEXT_RENDERER, light, pname, param)
 
 #define glLightfv(light, pname, params) \
-	(*agl_ctx->disp.lightfv)(agl_ctx->rend, light, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.lightfv)(AGL_MACRO_CONTEXT_RENDERER, light, pname, params)
 
 #define glLighti(light, pname, param) \
-	(*agl_ctx->disp.lighti)(agl_ctx->rend, light, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.lighti)(AGL_MACRO_CONTEXT_RENDERER, light, pname, param)
 
 #define glLightiv(light, pname, params) \
-	(*agl_ctx->disp.lightiv)(agl_ctx->rend, light, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.lightiv)(AGL_MACRO_CONTEXT_RENDERER, light, pname, params)
 
 #define glLineStipple(factor, pattern) \
-	(*agl_ctx->disp.line_stipple)(agl_ctx->rend, factor, pattern)
+	(*(AGL_MACRO_CONTEXT)->disp.line_stipple)(AGL_MACRO_CONTEXT_RENDERER, factor, pattern)
 
 #define glLineWidth(width) \
-	(*agl_ctx->disp.line_width)(agl_ctx->rend, width)
+	(*(AGL_MACRO_CONTEXT)->disp.line_width)(AGL_MACRO_CONTEXT_RENDERER, width)
 
 #define glListBase(base) \
-	(*agl_ctx->disp.list_base)(agl_ctx->rend, base)
+	(*(AGL_MACRO_CONTEXT)->disp.list_base)(AGL_MACRO_CONTEXT_RENDERER, base)
 
 #define glLoadIdentity() \
-	(*agl_ctx->disp.load_identity)(agl_ctx->rend)
+	(*(AGL_MACRO_CONTEXT)->disp.load_identity)(AGL_MACRO_CONTEXT_RENDERER)
 
 #define glLoadMatrixd(m) \
-	(*agl_ctx->disp.load_matrixd)(agl_ctx->rend, m)
+	(*(AGL_MACRO_CONTEXT)->disp.load_matrixd)(AGL_MACRO_CONTEXT_RENDERER, m)
 
 #define glLoadMatrixf(m) \
-	(*agl_ctx->disp.load_matrixf)(agl_ctx->rend, m)
+	(*(AGL_MACRO_CONTEXT)->disp.load_matrixf)(AGL_MACRO_CONTEXT_RENDERER, m)
 
 #define glLoadName(name) \
-	(*agl_ctx->disp.load_name)(agl_ctx->rend, name)
+	(*(AGL_MACRO_CONTEXT)->disp.load_name)(AGL_MACRO_CONTEXT_RENDERER, name)
 
 #define glLogicOp(opcode) \
-	(*agl_ctx->disp.logic_op)(agl_ctx->rend, opcode)
+	(*(AGL_MACRO_CONTEXT)->disp.logic_op)(AGL_MACRO_CONTEXT_RENDERER, opcode)
 
 #define glMap1d(target, u1, u2, stride, order, points) \
-	(*agl_ctx->disp.map1d)(agl_ctx->rend, target, u1, u2, stride, order, points)
+	(*(AGL_MACRO_CONTEXT)->disp.map1d)(AGL_MACRO_CONTEXT_RENDERER, target, u1, u2, stride, order, points)
 
 #define glMap1f(target, u1, u2, stride, order, points) \
-	(*agl_ctx->disp.map1f)(agl_ctx->rend, target, u1, u2, stride, order, points)
+	(*(AGL_MACRO_CONTEXT)->disp.map1f)(AGL_MACRO_CONTEXT_RENDERER, target, u1, u2, stride, order, points)
 
 #define glMap2d(target, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) \
-	(*agl_ctx->disp.map2d)(agl_ctx->rend, target, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)
+	(*(AGL_MACRO_CONTEXT)->disp.map2d)(AGL_MACRO_CONTEXT_RENDERER, target, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)
 
 #define glMap2f(target, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) \
-	(*agl_ctx->disp.map2f)(agl_ctx->rend, target, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)
+	(*(AGL_MACRO_CONTEXT)->disp.map2f)(AGL_MACRO_CONTEXT_RENDERER, target, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)
 
 #define glMapGrid1d(un, u1, u2) \
-	(*agl_ctx->disp.map_grid1d)(agl_ctx->rend, un, u1, u2)
+	(*(AGL_MACRO_CONTEXT)->disp.map_grid1d)(AGL_MACRO_CONTEXT_RENDERER, un, u1, u2)
 
 #define glMapGrid1f(un, u1, u2) \
-	(*agl_ctx->disp.map_grid1f)(agl_ctx->rend, un, u1, u2)
+	(*(AGL_MACRO_CONTEXT)->disp.map_grid1f)(AGL_MACRO_CONTEXT_RENDERER, un, u1, u2)
 
 #define glMapGrid2d(un, u1, u2, vn, v1, v2) \
-	(*agl_ctx->disp.map_grid2d)(agl_ctx->rend, un, u1, u2, vn, v1, v2)
+	(*(AGL_MACRO_CONTEXT)->disp.map_grid2d)(AGL_MACRO_CONTEXT_RENDERER, un, u1, u2, vn, v1, v2)
 
 #define glMapGrid2f(un, u1, u2, vn, v1, v2) \
-	(*agl_ctx->disp.map_grid2f)(agl_ctx->rend, un, u1, u2, vn, v1, v2)
+	(*(AGL_MACRO_CONTEXT)->disp.map_grid2f)(AGL_MACRO_CONTEXT_RENDERER, un, u1, u2, vn, v1, v2)
 
 #define glMaterialf(face, pname, param) \
-	(*agl_ctx->disp.materialf)(agl_ctx->rend, face, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.materialf)(AGL_MACRO_CONTEXT_RENDERER, face, pname, param)
 
 #define glMaterialfv(face, pname, params) \
-	(*agl_ctx->disp.materialfv)(agl_ctx->rend, face, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.materialfv)(AGL_MACRO_CONTEXT_RENDERER, face, pname, params)
 
 #define glMateriali(face, pname, param) \
-	(*agl_ctx->disp.materiali)(agl_ctx->rend, face, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.materiali)(AGL_MACRO_CONTEXT_RENDERER, face, pname, param)
 
 #define glMaterialiv(face, pname, params) \
-	(*agl_ctx->disp.materialiv)(agl_ctx->rend, face, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.materialiv)(AGL_MACRO_CONTEXT_RENDERER, face, pname, params)
 
 #define glMatrixMode(mode) \
-	(*agl_ctx->disp.matrix_mode)(agl_ctx->rend, mode)
+	(*(AGL_MACRO_CONTEXT)->disp.matrix_mode)(AGL_MACRO_CONTEXT_RENDERER, mode)
 
 #define glMultMatrixd(m) \
-	(*agl_ctx->disp.mult_matrixd)(agl_ctx->rend, m)
+	(*(AGL_MACRO_CONTEXT)->disp.mult_matrixd)(AGL_MACRO_CONTEXT_RENDERER, m)
 
 #define glMultMatrixf(m) \
-	(*agl_ctx->disp.mult_matrixf)(agl_ctx->rend, m)
+	(*(AGL_MACRO_CONTEXT)->disp.mult_matrixf)(AGL_MACRO_CONTEXT_RENDERER, m)
 
 #define glNewList(list, mode) \
-	(*agl_ctx->disp.new_list)(agl_ctx->rend, list, mode)
+	(*(AGL_MACRO_CONTEXT)->disp.new_list)(AGL_MACRO_CONTEXT_RENDERER, list, mode)
 
 #define glNormal3b(nx, ny, nz) \
-	(*agl_ctx->disp.normal3b)(agl_ctx->rend, nx, ny, nz)
+	(*(AGL_MACRO_CONTEXT)->disp.normal3b)(AGL_MACRO_CONTEXT_RENDERER, nx, ny, nz)
 
 #define glNormal3bv(v) \
-	(*agl_ctx->disp.normal3bv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.normal3bv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glNormal3d(nx, ny, nz) \
-	(*agl_ctx->disp.normal3d)(agl_ctx->rend, nx, ny, nz)
+	(*(AGL_MACRO_CONTEXT)->disp.normal3d)(AGL_MACRO_CONTEXT_RENDERER, nx, ny, nz)
 
 #define glNormal3dv(v) \
-	(*agl_ctx->disp.normal3dv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.normal3dv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glNormal3f(nx, ny, nz) \
-	(*agl_ctx->disp.normal3f)(agl_ctx->rend, nx, ny, nz)
+	(*(AGL_MACRO_CONTEXT)->disp.normal3f)(AGL_MACRO_CONTEXT_RENDERER, nx, ny, nz)
 
 #define glNormal3fv(v) \
-	(*agl_ctx->disp.normal3fv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.normal3fv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glNormal3i(nx, ny, nz) \
-	(*agl_ctx->disp.normal3i)(agl_ctx->rend, nx, ny, nz)
+	(*(AGL_MACRO_CONTEXT)->disp.normal3i)(AGL_MACRO_CONTEXT_RENDERER, nx, ny, nz)
 
 #define glNormal3iv(v) \
-	(*agl_ctx->disp.normal3iv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.normal3iv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glNormal3s(nx, ny, nz) \
-	(*agl_ctx->disp.normal3s)(agl_ctx->rend, nx, ny, nz)
+	(*(AGL_MACRO_CONTEXT)->disp.normal3s)(AGL_MACRO_CONTEXT_RENDERER, nx, ny, nz)
 
 #define glNormal3sv(v) \
-	(*agl_ctx->disp.normal3sv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.normal3sv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glNormalPointer(type, stride, pointer) \
-	(*agl_ctx->disp.normal_pointer)(agl_ctx->rend, type, stride, pointer)
+	(*(AGL_MACRO_CONTEXT)->disp.normal_pointer)(AGL_MACRO_CONTEXT_RENDERER, type, stride, pointer)
 
 #define glOrtho(left, right, bottom, top, zNear, zFar) \
-	(*agl_ctx->disp.ortho)(agl_ctx->rend, left, right, bottom, top, zNear, zFar)
+	(*(AGL_MACRO_CONTEXT)->disp.ortho)(AGL_MACRO_CONTEXT_RENDERER, left, right, bottom, top, zNear, zFar)
 
 #define glPassThrough(token) \
-	(*agl_ctx->disp.pass_through)(agl_ctx->rend, token)
+	(*(AGL_MACRO_CONTEXT)->disp.pass_through)(AGL_MACRO_CONTEXT_RENDERER, token)
 
 #define glPixelMapfv(map, mapsize, values) \
-	(*agl_ctx->disp.pixel_mapfv)(agl_ctx->rend, map, mapsize, values)
+	(*(AGL_MACRO_CONTEXT)->disp.pixel_mapfv)(AGL_MACRO_CONTEXT_RENDERER, map, mapsize, values)
 
 #define glPixelMapuiv(map, mapsize, values) \
-	(*agl_ctx->disp.pixel_mapuiv)(agl_ctx->rend, map, mapsize, values)
+	(*(AGL_MACRO_CONTEXT)->disp.pixel_mapuiv)(AGL_MACRO_CONTEXT_RENDERER, map, mapsize, values)
 
 #define glPixelMapusv(map, mapsize, values) \
-	(*agl_ctx->disp.pixel_mapusv)(agl_ctx->rend, map, mapsize, values)
+	(*(AGL_MACRO_CONTEXT)->disp.pixel_mapusv)(AGL_MACRO_CONTEXT_RENDERER, map, mapsize, values)
 
 #define glPixelStoref(pname, param) \
-	(*agl_ctx->disp.pixel_storef)(agl_ctx->rend, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.pixel_storef)(AGL_MACRO_CONTEXT_RENDERER, pname, param)
 
 #define glPixelStorei(pname, param) \
-	(*agl_ctx->disp.pixel_storei)(agl_ctx->rend, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.pixel_storei)(AGL_MACRO_CONTEXT_RENDERER, pname, param)
 
 #define glPixelTransferf(pname, param) \
-	(*agl_ctx->disp.pixel_transferf)(agl_ctx->rend, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.pixel_transferf)(AGL_MACRO_CONTEXT_RENDERER, pname, param)
 
 #define glPixelTransferi(pname, param) \
-	(*agl_ctx->disp.pixel_transferi)(agl_ctx->rend, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.pixel_transferi)(AGL_MACRO_CONTEXT_RENDERER, pname, param)
 
 #define glPixelZoom(xfactor, yfactor) \
-	(*agl_ctx->disp.pixel_zoom)(agl_ctx->rend, xfactor, yfactor)
+	(*(AGL_MACRO_CONTEXT)->disp.pixel_zoom)(AGL_MACRO_CONTEXT_RENDERER, xfactor, yfactor)
 
 #define glPointSize(size) \
-	(*agl_ctx->disp.point_size)(agl_ctx->rend, size)
+	(*(AGL_MACRO_CONTEXT)->disp.point_size)(AGL_MACRO_CONTEXT_RENDERER, size)
 
 #define glPolygonMode(face, mode) \
-	(*agl_ctx->disp.polygon_mode)(agl_ctx->rend, face, mode)
+	(*(AGL_MACRO_CONTEXT)->disp.polygon_mode)(AGL_MACRO_CONTEXT_RENDERER, face, mode)
 
 #define glPolygonOffset(factor, units) \
-	(*agl_ctx->disp.polygon_offset)(agl_ctx->rend, factor, units)
+	(*(AGL_MACRO_CONTEXT)->disp.polygon_offset)(AGL_MACRO_CONTEXT_RENDERER, factor, units)
 
 #define glPolygonStipple(mask) \
-	(*agl_ctx->disp.polygon_stipple)(agl_ctx->rend, mask)
+	(*(AGL_MACRO_CONTEXT)->disp.polygon_stipple)(AGL_MACRO_CONTEXT_RENDERER, mask)
 
 #define glPopAttrib() \
-	(*agl_ctx->disp.pop_attrib)(agl_ctx->rend)
+	(*(AGL_MACRO_CONTEXT)->disp.pop_attrib)(AGL_MACRO_CONTEXT_RENDERER)
 
 #define glPopClientAttrib() \
-	(*agl_ctx->disp.pop_client_attrib)(agl_ctx->rend)
+	(*(AGL_MACRO_CONTEXT)->disp.pop_client_attrib)(AGL_MACRO_CONTEXT_RENDERER)
 
 #define glPopMatrix() \
-	(*agl_ctx->disp.pop_matrix)(agl_ctx->rend)
+	(*(AGL_MACRO_CONTEXT)->disp.pop_matrix)(AGL_MACRO_CONTEXT_RENDERER)
 
 #define glPopName() \
-	(*agl_ctx->disp.pop_name)(agl_ctx->rend)
+	(*(AGL_MACRO_CONTEXT)->disp.pop_name)(AGL_MACRO_CONTEXT_RENDERER)
 
 #define glPrioritizeTextures(n, textures, priorities) \
-	(*agl_ctx->disp.prioritize_textures)(agl_ctx->rend, n, textures, priorities)
+	(*(AGL_MACRO_CONTEXT)->disp.prioritize_textures)(AGL_MACRO_CONTEXT_RENDERER, n, textures, priorities)
 
 #define glPushAttrib(mask) \
-	(*agl_ctx->disp.push_attrib)(agl_ctx->rend, mask)
+	(*(AGL_MACRO_CONTEXT)->disp.push_attrib)(AGL_MACRO_CONTEXT_RENDERER, mask)
 
 #define glPushClientAttrib(mask) \
-	(*agl_ctx->disp.push_client_attrib)(agl_ctx->rend, mask)
+	(*(AGL_MACRO_CONTEXT)->disp.push_client_attrib)(AGL_MACRO_CONTEXT_RENDERER, mask)
 
 #define glPushMatrix() \
-	(*agl_ctx->disp.push_matrix)(agl_ctx->rend)
+	(*(AGL_MACRO_CONTEXT)->disp.push_matrix)(AGL_MACRO_CONTEXT_RENDERER)
 
 #define glPushName(name) \
-	(*agl_ctx->disp.push_name)(agl_ctx->rend, name)
+	(*(AGL_MACRO_CONTEXT)->disp.push_name)(AGL_MACRO_CONTEXT_RENDERER, name)
 
 #define glRasterPos2d(x, y) \
-	(*agl_ctx->disp.raster_pos2d)(agl_ctx->rend, x, y)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos2d)(AGL_MACRO_CONTEXT_RENDERER, x, y)
 
 #define glRasterPos2dv(v) \
-	(*agl_ctx->disp.raster_pos2dv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos2dv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glRasterPos2f(x, y) \
-	(*agl_ctx->disp.raster_pos2f)(agl_ctx->rend, x, y)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos2f)(AGL_MACRO_CONTEXT_RENDERER, x, y)
 
 #define glRasterPos2fv(v) \
-	(*agl_ctx->disp.raster_pos2fv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos2fv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glRasterPos2i(x, y) \
-	(*agl_ctx->disp.raster_pos2i)(agl_ctx->rend, x, y)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos2i)(AGL_MACRO_CONTEXT_RENDERER, x, y)
 
 #define glRasterPos2iv(v) \
-	(*agl_ctx->disp.raster_pos2iv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos2iv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glRasterPos2s(x, y) \
-	(*agl_ctx->disp.raster_pos2s)(agl_ctx->rend, x, y)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos2s)(AGL_MACRO_CONTEXT_RENDERER, x, y)
 
 #define glRasterPos2sv(v) \
-	(*agl_ctx->disp.raster_pos2sv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos2sv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glRasterPos3d(x, y, z) \
-	(*agl_ctx->disp.raster_pos3d)(agl_ctx->rend, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos3d)(AGL_MACRO_CONTEXT_RENDERER, x, y, z)
 
 #define glRasterPos3dv(v) \
-	(*agl_ctx->disp.raster_pos3dv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos3dv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glRasterPos3f(x, y, z) \
-	(*agl_ctx->disp.raster_pos3f)(agl_ctx->rend, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos3f)(AGL_MACRO_CONTEXT_RENDERER, x, y, z)
 
 #define glRasterPos3fv(v) \
-	(*agl_ctx->disp.raster_pos3fv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos3fv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glRasterPos3i(x, y, z) \
-	(*agl_ctx->disp.raster_pos3i)(agl_ctx->rend, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos3i)(AGL_MACRO_CONTEXT_RENDERER, x, y, z)
 
 #define glRasterPos3iv(v) \
-	(*agl_ctx->disp.raster_pos3iv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos3iv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glRasterPos3s(x, y, z) \
-	(*agl_ctx->disp.raster_pos3s)(agl_ctx->rend, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos3s)(AGL_MACRO_CONTEXT_RENDERER, x, y, z)
 
 #define glRasterPos3sv(v) \
-	(*agl_ctx->disp.raster_pos3sv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos3sv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glRasterPos4d(x, y, z, w) \
-	(*agl_ctx->disp.raster_pos4d)(agl_ctx->rend, x, y, z, w)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos4d)(AGL_MACRO_CONTEXT_RENDERER, x, y, z, w)
 
 #define glRasterPos4dv(v) \
-	(*agl_ctx->disp.raster_pos4dv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos4dv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glRasterPos4f(x, y, z, w) \
-	(*agl_ctx->disp.raster_pos4f)(agl_ctx->rend, x, y, z, w)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos4f)(AGL_MACRO_CONTEXT_RENDERER, x, y, z, w)
 
 #define glRasterPos4fv(v) \
-	(*agl_ctx->disp.raster_pos4fv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos4fv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glRasterPos4i(x, y, z, w) \
-	(*agl_ctx->disp.raster_pos4i)(agl_ctx->rend, x, y, z, w)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos4i)(AGL_MACRO_CONTEXT_RENDERER, x, y, z, w)
 
 #define glRasterPos4iv(v) \
-	(*agl_ctx->disp.raster_pos4iv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos4iv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glRasterPos4s(x, y, z, w) \
-	(*agl_ctx->disp.raster_pos4s)(agl_ctx->rend, x, y, z, w)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos4s)(AGL_MACRO_CONTEXT_RENDERER, x, y, z, w)
 
 #define glRasterPos4sv(v) \
-	(*agl_ctx->disp.raster_pos4sv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.raster_pos4sv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glReadBuffer(mode) \
-	(*agl_ctx->disp.read_buffer)(agl_ctx->rend, mode)
+	(*(AGL_MACRO_CONTEXT)->disp.read_buffer)(AGL_MACRO_CONTEXT_RENDERER, mode)
 
 #define glReadPixels(x, y, width, height, format, type, pixels) \
-	(*agl_ctx->disp.read_pixels)(agl_ctx->rend, x, y, width, height, format, type, pixels)
+	(*(AGL_MACRO_CONTEXT)->disp.read_pixels)(AGL_MACRO_CONTEXT_RENDERER, x, y, width, height, format, type, pixels)
 
 #define glRectd(x1, y1, x2, y2) \
-	(*agl_ctx->disp.rectd)(agl_ctx->rend, x1, y1, x2, y2)
+	(*(AGL_MACRO_CONTEXT)->disp.rectd)(AGL_MACRO_CONTEXT_RENDERER, x1, y1, x2, y2)
 
 #define glRectdv(v1, v2) \
-	(*agl_ctx->disp.rectdv)(agl_ctx->rend, v1, v2)
+	(*(AGL_MACRO_CONTEXT)->disp.rectdv)(AGL_MACRO_CONTEXT_RENDERER, v1, v2)
 
 #define glRectf(x1, y1, x2, y2) \
-	(*agl_ctx->disp.rectf)(agl_ctx->rend, x1, y1, x2, y2)
+	(*(AGL_MACRO_CONTEXT)->disp.rectf)(AGL_MACRO_CONTEXT_RENDERER, x1, y1, x2, y2)
 
 #define glRectfv(v1, v2) \
-	(*agl_ctx->disp.rectfv)(agl_ctx->rend, v1, v2)
+	(*(AGL_MACRO_CONTEXT)->disp.rectfv)(AGL_MACRO_CONTEXT_RENDERER, v1, v2)
 
 #define glRecti(x1, y1, x2, y2) \
-	(*agl_ctx->disp.recti)(agl_ctx->rend, x1, y1, x2, y2)
+	(*(AGL_MACRO_CONTEXT)->disp.recti)(AGL_MACRO_CONTEXT_RENDERER, x1, y1, x2, y2)
 
 #define glRectiv(v1, v2) \
-	(*agl_ctx->disp.rectiv)(agl_ctx->rend, v1, v2)
+	(*(AGL_MACRO_CONTEXT)->disp.rectiv)(AGL_MACRO_CONTEXT_RENDERER, v1, v2)
 
 #define glRects(x1, y1, x2, y2) \
-	(*agl_ctx->disp.rects)(agl_ctx->rend, x1, y1, x2, y2)
+	(*(AGL_MACRO_CONTEXT)->disp.rects)(AGL_MACRO_CONTEXT_RENDERER, x1, y1, x2, y2)
 
 #define glRectsv(v1, v2) \
-	(*agl_ctx->disp.rectsv)(agl_ctx->rend, v1, v2)
+	(*(AGL_MACRO_CONTEXT)->disp.rectsv)(AGL_MACRO_CONTEXT_RENDERER, v1, v2)
 
 #define glRenderMode(mode) \
-	(*agl_ctx->disp.render_mode)(agl_ctx->rend, mode)
+	(*(AGL_MACRO_CONTEXT)->disp.render_mode)(AGL_MACRO_CONTEXT_RENDERER, mode)
 
 #define glRotated(angle, x, y, z) \
-	(*agl_ctx->disp.rotated)(agl_ctx->rend, angle, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.rotated)(AGL_MACRO_CONTEXT_RENDERER, angle, x, y, z)
 
 #define glRotatef(angle, x, y, z) \
-	(*agl_ctx->disp.rotatef)(agl_ctx->rend, angle, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.rotatef)(AGL_MACRO_CONTEXT_RENDERER, angle, x, y, z)
 
 #define glScaled(x, y, z) \
-	(*agl_ctx->disp.scaled)(agl_ctx->rend, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.scaled)(AGL_MACRO_CONTEXT_RENDERER, x, y, z)
 
 #define glScalef(x, y, z) \
-	(*agl_ctx->disp.scalef)(agl_ctx->rend, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.scalef)(AGL_MACRO_CONTEXT_RENDERER, x, y, z)
 
 #define glScissor(x, y, width, height) \
-	(*agl_ctx->disp.scissor)(agl_ctx->rend, x, y, width, height)
+	(*(AGL_MACRO_CONTEXT)->disp.scissor)(AGL_MACRO_CONTEXT_RENDERER, x, y, width, height)
 
 #define glSelectBuffer(size, buffer) \
-	(*agl_ctx->disp.select_buffer)(agl_ctx->rend, size, buffer)
+	(*(AGL_MACRO_CONTEXT)->disp.select_buffer)(AGL_MACRO_CONTEXT_RENDERER, size, buffer)
 
 #define glShadeModel(mode) \
-	(*agl_ctx->disp.shade_model)(agl_ctx->rend, mode)
+	(*(AGL_MACRO_CONTEXT)->disp.shade_model)(AGL_MACRO_CONTEXT_RENDERER, mode)
 
 #define glStencilFunc(func, ref, mask) \
-	(*agl_ctx->disp.stencil_func)(agl_ctx->rend, func, ref, mask)
+	(*(AGL_MACRO_CONTEXT)->disp.stencil_func)(AGL_MACRO_CONTEXT_RENDERER, func, ref, mask)
 
 #define glStencilMask(mask) \
-	(*agl_ctx->disp.stencil_mask)(agl_ctx->rend, mask)
+	(*(AGL_MACRO_CONTEXT)->disp.stencil_mask)(AGL_MACRO_CONTEXT_RENDERER, mask)
 
 #define glStencilOp(fail, zfail, zpass) \
-	(*agl_ctx->disp.stencil_op)(agl_ctx->rend, fail, zfail, zpass)
+	(*(AGL_MACRO_CONTEXT)->disp.stencil_op)(AGL_MACRO_CONTEXT_RENDERER, fail, zfail, zpass)
 
 #define glTexCoord1d(s) \
-	(*agl_ctx->disp.tex_coord1d)(agl_ctx->rend, s)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord1d)(AGL_MACRO_CONTEXT_RENDERER, s)
 
 #define glTexCoord1dv(v) \
-	(*agl_ctx->disp.tex_coord1dv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord1dv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glTexCoord1f(s) \
-	(*agl_ctx->disp.tex_coord1f)(agl_ctx->rend, s)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord1f)(AGL_MACRO_CONTEXT_RENDERER, s)
 
 #define glTexCoord1fv(v) \
-	(*agl_ctx->disp.tex_coord1fv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord1fv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glTexCoord1i(s) \
-	(*agl_ctx->disp.tex_coord1i)(agl_ctx->rend, s)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord1i)(AGL_MACRO_CONTEXT_RENDERER, s)
 
 #define glTexCoord1iv(v) \
-	(*agl_ctx->disp.tex_coord1iv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord1iv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glTexCoord1s(s) \
-	(*agl_ctx->disp.tex_coord1s)(agl_ctx->rend, s)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord1s)(AGL_MACRO_CONTEXT_RENDERER, s)
 
 #define glTexCoord1sv(v) \
-	(*agl_ctx->disp.tex_coord1sv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord1sv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glTexCoord2d(s, t) \
-	(*agl_ctx->disp.tex_coord2d)(agl_ctx->rend, s, t)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord2d)(AGL_MACRO_CONTEXT_RENDERER, s, t)
 
 #define glTexCoord2dv(v) \
-	(*agl_ctx->disp.tex_coord2dv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord2dv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glTexCoord2f(s, t) \
-	(*agl_ctx->disp.tex_coord2f)(agl_ctx->rend, s, t)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord2f)(AGL_MACRO_CONTEXT_RENDERER, s, t)
 
 #define glTexCoord2fv(v) \
-	(*agl_ctx->disp.tex_coord2fv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord2fv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glTexCoord2i(s, t) \
-	(*agl_ctx->disp.tex_coord2i)(agl_ctx->rend, s, t)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord2i)(AGL_MACRO_CONTEXT_RENDERER, s, t)
 
 #define glTexCoord2iv(v) \
-	(*agl_ctx->disp.tex_coord2iv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord2iv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glTexCoord2s(s, t) \
-	(*agl_ctx->disp.tex_coord2s)(agl_ctx->rend, s, t)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord2s)(AGL_MACRO_CONTEXT_RENDERER, s, t)
 
 #define glTexCoord2sv(v) \
-	(*agl_ctx->disp.tex_coord2sv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord2sv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glTexCoord3d(s, t, r) \
-	(*agl_ctx->disp.tex_coord3d)(agl_ctx->rend, s, t, r)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord3d)(AGL_MACRO_CONTEXT_RENDERER, s, t, r)
 
 #define glTexCoord3dv(v) \
-	(*agl_ctx->disp.tex_coord3dv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord3dv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glTexCoord3f(s, t, r) \
-	(*agl_ctx->disp.tex_coord3f)(agl_ctx->rend, s, t, r)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord3f)(AGL_MACRO_CONTEXT_RENDERER, s, t, r)
 
 #define glTexCoord3fv(v) \
-	(*agl_ctx->disp.tex_coord3fv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord3fv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glTexCoord3i(s, t, r) \
-	(*agl_ctx->disp.tex_coord3i)(agl_ctx->rend, s, t, r)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord3i)(AGL_MACRO_CONTEXT_RENDERER, s, t, r)
 
 #define glTexCoord3iv(v) \
-	(*agl_ctx->disp.tex_coord3iv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord3iv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glTexCoord3s(s, t, r) \
-	(*agl_ctx->disp.tex_coord3s)(agl_ctx->rend, s, t, r)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord3s)(AGL_MACRO_CONTEXT_RENDERER, s, t, r)
 
 #define glTexCoord3sv(v) \
-	(*agl_ctx->disp.tex_coord3sv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord3sv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glTexCoord4d(s, t, r, q) \
-	(*agl_ctx->disp.tex_coord4d)(agl_ctx->rend, s, t, r, q)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord4d)(AGL_MACRO_CONTEXT_RENDERER, s, t, r, q)
 
 #define glTexCoord4dv(v) \
-	(*agl_ctx->disp.tex_coord4dv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord4dv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glTexCoord4f(s, t, r, q) \
-	(*agl_ctx->disp.tex_coord4f)(agl_ctx->rend, s, t, r, q)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord4f)(AGL_MACRO_CONTEXT_RENDERER, s, t, r, q)
 
 #define glTexCoord4fv(v) \
-	(*agl_ctx->disp.tex_coord4fv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord4fv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glTexCoord4i(s, t, r, q) \
-	(*agl_ctx->disp.tex_coord4i)(agl_ctx->rend, s, t, r, q)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord4i)(AGL_MACRO_CONTEXT_RENDERER, s, t, r, q)
 
 #define glTexCoord4iv(v) \
-	(*agl_ctx->disp.tex_coord4iv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord4iv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glTexCoord4s(s, t, r, q) \
-	(*agl_ctx->disp.tex_coord4s)(agl_ctx->rend, s, t, r, q)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord4s)(AGL_MACRO_CONTEXT_RENDERER, s, t, r, q)
 
 #define glTexCoord4sv(v) \
-	(*agl_ctx->disp.tex_coord4sv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord4sv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glTexCoordPointer(size, type, stride, pointer) \
-	(*agl_ctx->disp.tex_coord_pointer)(agl_ctx->rend, size, type, stride, pointer)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_coord_pointer)(AGL_MACRO_CONTEXT_RENDERER, size, type, stride, pointer)
 
 #define glTexEnvf(target, pname, param) \
-	(*agl_ctx->disp.tex_envf)(agl_ctx->rend, target, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_envf)(AGL_MACRO_CONTEXT_RENDERER, target, pname, param)
 
 #define glTexEnvfv(target, pname, params) \
-	(*agl_ctx->disp.tex_envfv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_envfv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glTexEnvi(target, pname, param) \
-	(*agl_ctx->disp.tex_envi)(agl_ctx->rend, target, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_envi)(AGL_MACRO_CONTEXT_RENDERER, target, pname, param)
 
 #define glTexEnviv(target, pname, params) \
-	(*agl_ctx->disp.tex_enviv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_enviv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glTexGend(coord, pname, param) \
-	(*agl_ctx->disp.tex_gend)(agl_ctx->rend, coord, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_gend)(AGL_MACRO_CONTEXT_RENDERER, coord, pname, param)
 
 #define glTexGendv(coord, pname, params) \
-	(*agl_ctx->disp.tex_gendv)(agl_ctx->rend, coord, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_gendv)(AGL_MACRO_CONTEXT_RENDERER, coord, pname, params)
 
 #define glTexGenf(coord, pname, param) \
-	(*agl_ctx->disp.tex_genf)(agl_ctx->rend, coord, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_genf)(AGL_MACRO_CONTEXT_RENDERER, coord, pname, param)
 
 #define glTexGenfv(coord, pname, params) \
-	(*agl_ctx->disp.tex_genfv)(agl_ctx->rend, coord, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_genfv)(AGL_MACRO_CONTEXT_RENDERER, coord, pname, params)
 
 #define glTexGeni(coord, pname, param) \
-	(*agl_ctx->disp.tex_geni)(agl_ctx->rend, coord, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_geni)(AGL_MACRO_CONTEXT_RENDERER, coord, pname, param)
 
 #define glTexGeniv(coord, pname, params) \
-	(*agl_ctx->disp.tex_geniv)(agl_ctx->rend, coord, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_geniv)(AGL_MACRO_CONTEXT_RENDERER, coord, pname, params)
 
 #define glTexImage1D(target, level, internalformat, width, border, format, type, pixels) \
-	(*agl_ctx->disp.tex_image1D)(agl_ctx->rend, target, level, internalformat, width, border, format, type, pixels)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_image1D)(AGL_MACRO_CONTEXT_RENDERER, target, level, internalformat, width, border, format, type, pixels)
 
 #define glTexImage2D(target, level, internalformat, width, height, border, format, type, pixels) \
-	(*agl_ctx->disp.tex_image2D)(agl_ctx->rend, target, level, internalformat, width, height, border, format, type, pixels)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_image2D)(AGL_MACRO_CONTEXT_RENDERER, target, level, internalformat, width, height, border, format, type, pixels)
 
 #define glTexParameterf(target, pname, param) \
-	(*agl_ctx->disp.tex_parameterf)(agl_ctx->rend, target, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_parameterf)(AGL_MACRO_CONTEXT_RENDERER, target, pname, param)
 
 #define glTexParameterfv(target, pname, params) \
-	(*agl_ctx->disp.tex_parameterfv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_parameterfv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glTexParameteri(target, pname, param) \
-	(*agl_ctx->disp.tex_parameteri)(agl_ctx->rend, target, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_parameteri)(AGL_MACRO_CONTEXT_RENDERER, target, pname, param)
 
 #define glTexParameteriv(target, pname, params) \
-	(*agl_ctx->disp.tex_parameteriv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_parameteriv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glTexSubImage1D(target, level, xoffset, width, format, type, pixels) \
-	(*agl_ctx->disp.tex_sub_image1D)(agl_ctx->rend, target, level, xoffset, width, format, type, pixels)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_sub_image1D)(AGL_MACRO_CONTEXT_RENDERER, target, level, xoffset, width, format, type, pixels)
 
 #define glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels) \
-	(*agl_ctx->disp.tex_sub_image2D)(agl_ctx->rend, target, level, xoffset, yoffset, width, height, format, type, pixels)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_sub_image2D)(AGL_MACRO_CONTEXT_RENDERER, target, level, xoffset, yoffset, width, height, format, type, pixels)
 
 #define glTranslated(x, y, z) \
-	(*agl_ctx->disp.translated)(agl_ctx->rend, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.translated)(AGL_MACRO_CONTEXT_RENDERER, x, y, z)
 
 #define glTranslatef(x, y, z) \
-	(*agl_ctx->disp.translatef)(agl_ctx->rend, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.translatef)(AGL_MACRO_CONTEXT_RENDERER, x, y, z)
 
 #define glVertex2d(x, y) \
-	(*agl_ctx->disp.vertex2d)(agl_ctx->rend, x, y)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex2d)(AGL_MACRO_CONTEXT_RENDERER, x, y)
 
 #define glVertex2dv(v) \
-	(*agl_ctx->disp.vertex2dv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex2dv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glVertex2f(x, y) \
-	(*agl_ctx->disp.vertex2f)(agl_ctx->rend, x, y)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex2f)(AGL_MACRO_CONTEXT_RENDERER, x, y)
 
 #define glVertex2fv(v) \
-	(*agl_ctx->disp.vertex2fv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex2fv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glVertex2i(x, y) \
-	(*agl_ctx->disp.vertex2i)(agl_ctx->rend, x, y)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex2i)(AGL_MACRO_CONTEXT_RENDERER, x, y)
 
 #define glVertex2iv(v) \
-	(*agl_ctx->disp.vertex2iv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex2iv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glVertex2s(x, y) \
-	(*agl_ctx->disp.vertex2s)(agl_ctx->rend, x, y)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex2s)(AGL_MACRO_CONTEXT_RENDERER, x, y)
 
 #define glVertex2sv(v) \
-	(*agl_ctx->disp.vertex2sv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex2sv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glVertex3d(x, y, z) \
-	(*agl_ctx->disp.vertex3d)(agl_ctx->rend, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex3d)(AGL_MACRO_CONTEXT_RENDERER, x, y, z)
 
 #define glVertex3dv(v) \
-	(*agl_ctx->disp.vertex3dv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex3dv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glVertex3f(x, y, z) \
-	(*agl_ctx->disp.vertex3f)(agl_ctx->rend, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex3f)(AGL_MACRO_CONTEXT_RENDERER, x, y, z)
 
 #define glVertex3fv(v) \
-	(*agl_ctx->disp.vertex3fv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex3fv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glVertex3i(x, y, z) \
-	(*agl_ctx->disp.vertex3i)(agl_ctx->rend, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex3i)(AGL_MACRO_CONTEXT_RENDERER, x, y, z)
 
 #define glVertex3iv(v) \
-	(*agl_ctx->disp.vertex3iv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex3iv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glVertex3s(x, y, z) \
-	(*agl_ctx->disp.vertex3s)(agl_ctx->rend, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex3s)(AGL_MACRO_CONTEXT_RENDERER, x, y, z)
 
 #define glVertex3sv(v) \
-	(*agl_ctx->disp.vertex3sv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex3sv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glVertex4d(x, y, z, w) \
-	(*agl_ctx->disp.vertex4d)(agl_ctx->rend, x, y, z, w)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex4d)(AGL_MACRO_CONTEXT_RENDERER, x, y, z, w)
 
 #define glVertex4dv(v) \
-	(*agl_ctx->disp.vertex4dv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex4dv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glVertex4f(x, y, z, w) \
-	(*agl_ctx->disp.vertex4f)(agl_ctx->rend, x, y, z, w)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex4f)(AGL_MACRO_CONTEXT_RENDERER, x, y, z, w)
 
 #define glVertex4fv(v) \
-	(*agl_ctx->disp.vertex4fv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex4fv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glVertex4i(x, y, z, w) \
-	(*agl_ctx->disp.vertex4i)(agl_ctx->rend, x, y, z, w)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex4i)(AGL_MACRO_CONTEXT_RENDERER, x, y, z, w)
 
 #define glVertex4iv(v) \
-	(*agl_ctx->disp.vertex4iv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex4iv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glVertex4s(x, y, z, w) \
-	(*agl_ctx->disp.vertex4s)(agl_ctx->rend, x, y, z, w)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex4s)(AGL_MACRO_CONTEXT_RENDERER, x, y, z, w)
 
 #define glVertex4sv(v) \
-	(*agl_ctx->disp.vertex4sv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex4sv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glVertexPointer(size, type, stride, pointer) \
-	(*agl_ctx->disp.vertex_pointer)(agl_ctx->rend, size, type, stride, pointer)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_pointer)(AGL_MACRO_CONTEXT_RENDERER, size, type, stride, pointer)
 
 #define glViewport(x, y, width, height) \
-	(*agl_ctx->disp.viewport)(agl_ctx->rend, x, y, width, height)
+	(*(AGL_MACRO_CONTEXT)->disp.viewport)(AGL_MACRO_CONTEXT_RENDERER, x, y, width, height)
 
 /****************** OpenGL 1.2 ************************************/
 
 #define glBlendColor(red, green, blue, alpha) \
-	(*agl_ctx->disp.blend_color)(agl_ctx->rend, red, green, blue, alpha)
+	(*(AGL_MACRO_CONTEXT)->disp.blend_color)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue, alpha)
 
 #define glBlendEquation(mode) \
-	(*agl_ctx->disp.blend_equation)(agl_ctx->rend, mode)
+	(*(AGL_MACRO_CONTEXT)->disp.blend_equation)(AGL_MACRO_CONTEXT_RENDERER, mode)
 
 #define glDrawRangeElements(mode, start, end, count, type, indices) \
-	(*agl_ctx->disp.draw_range_elements)(agl_ctx->rend, mode, start, end, count, type, indices)
+	(*(AGL_MACRO_CONTEXT)->disp.draw_range_elements)(AGL_MACRO_CONTEXT_RENDERER, mode, start, end, count, type, indices)
 
 #define glTexImage3D(target, level, internalformat, width, height, depth, border, format, type, data) \
-	(*agl_ctx->disp.tex_image3D)(agl_ctx->rend, target, level, internalformat, width, height, depth, border, format, type, data)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_image3D)(AGL_MACRO_CONTEXT_RENDERER, target, level, internalformat, width, height, depth, border, format, type, data)
 
 #define glTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels) \
-	(*agl_ctx->disp.tex_sub_image3D)(agl_ctx->rend, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels)
+	(*(AGL_MACRO_CONTEXT)->disp.tex_sub_image3D)(AGL_MACRO_CONTEXT_RENDERER, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels)
 
 #define glCopyTexSubImage3D(target, level, xoffset, yoffset, zoffset, x, y, width, height) \
-	(*agl_ctx->disp.copy_tex_sub_image3D)(agl_ctx->rend, target, level, xoffset, yoffset, zoffset, x, y, width, height)
+	(*(AGL_MACRO_CONTEXT)->disp.copy_tex_sub_image3D)(AGL_MACRO_CONTEXT_RENDERER, target, level, xoffset, yoffset, zoffset, x, y, width, height)
 
 /****************** OpenGL 1.2 Imaging Subset *********************/
 
 #define glColorTable(target, internalformat, width, format, type, table) \
-	(*agl_ctx->disp.color_table)(agl_ctx->rend, target, internalformat, width, format, type, table)
+	(*(AGL_MACRO_CONTEXT)->disp.color_table)(AGL_MACRO_CONTEXT_RENDERER, target, internalformat, width, format, type, table)
 
 #define glColorTableParameterfv(target, pname, params) \
-	(*agl_ctx->disp.color_table_parameterfv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.color_table_parameterfv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glColorTableParameteriv(target, pname, params) \
-	(*agl_ctx->disp.color_table_parameteriv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.color_table_parameteriv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glCopyColorTable(target, internalformat, x, y, width) \
-	(*agl_ctx->disp.copy_color_table)(agl_ctx->rend, target, internalformat, x, y, width)
+	(*(AGL_MACRO_CONTEXT)->disp.copy_color_table)(AGL_MACRO_CONTEXT_RENDERER, target, internalformat, x, y, width)
 
 #define glGetColorTable(target, format, type, table) \
-	(*agl_ctx->disp.get_color_table)(agl_ctx->rend, target, format, type, table)
+	(*(AGL_MACRO_CONTEXT)->disp.get_color_table)(AGL_MACRO_CONTEXT_RENDERER, target, format, type, table)
 
 #define glGetColorTableParameterfv(target, pname, params) \
-	(*agl_ctx->disp.get_color_table_parameterfv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_color_table_parameterfv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glGetColorTableParameteriv(target, pname, params) \
-	(*agl_ctx->disp.get_color_table_parameteriv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_color_table_parameteriv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glColorSubTable(target, start, count, format, type, data) \
-	(*agl_ctx->disp.color_sub_table)(agl_ctx->rend, target, start, count, format, type, data)
+	(*(AGL_MACRO_CONTEXT)->disp.color_sub_table)(AGL_MACRO_CONTEXT_RENDERER, target, start, count, format, type, data)
 
 #define glCopyColorSubTable(target, start, x, y, width) \
-	(*agl_ctx->disp.copy_color_sub_table)(agl_ctx->rend, target, start, x, y, width)
+	(*(AGL_MACRO_CONTEXT)->disp.copy_color_sub_table)(AGL_MACRO_CONTEXT_RENDERER, target, start, x, y, width)
 
 #define glConvolutionFilter1D(target, internalformat, width, format, type, image) \
-	(*agl_ctx->disp.convolution_filter1D)(agl_ctx->rend, target, internalformat, width, format, type, image)
+	(*(AGL_MACRO_CONTEXT)->disp.convolution_filter1D)(AGL_MACRO_CONTEXT_RENDERER, target, internalformat, width, format, type, image)
 
 #define glConvolutionFilter2D(target, internalformat, width, height, format, type, image) \
-	(*agl_ctx->disp.convolution_filter2D)(agl_ctx->rend, target, internalformat, width, height, format, type, image)
+	(*(AGL_MACRO_CONTEXT)->disp.convolution_filter2D)(AGL_MACRO_CONTEXT_RENDERER, target, internalformat, width, height, format, type, image)
 
 #define glConvolutionParameterf(target, pname, param) \
-	(*agl_ctx->disp.convolution_parameterf)(agl_ctx->rend, target, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.convolution_parameterf)(AGL_MACRO_CONTEXT_RENDERER, target, pname, param)
 
 #define glConvolutionParameterfv(target, pname, params) \
-	(*agl_ctx->disp.convolution_parameterfv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.convolution_parameterfv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glConvolutionParameteri(target, pname, param) \
-	(*agl_ctx->disp.convolution_parameteri)(agl_ctx->rend, target, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.convolution_parameteri)(AGL_MACRO_CONTEXT_RENDERER, target, pname, param)
 
 #define glConvolutionParameteriv(target, pname, params) \
-	(*agl_ctx->disp.convolution_parameteriv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.convolution_parameteriv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glCopyConvolutionFilter1D(target, internalformat, x, y, width) \
-	(*agl_ctx->disp.copy_convolution_filter1D)(agl_ctx->rend, target, internalformat, x, y, width)
+	(*(AGL_MACRO_CONTEXT)->disp.copy_convolution_filter1D)(AGL_MACRO_CONTEXT_RENDERER, target, internalformat, x, y, width)
 
 #define glCopyConvolutionFilter2D(target, internalformat, x, y, width, height) \
-	(*agl_ctx->disp.copy_convolution_filter2D)(agl_ctx->rend, target, internalformat, x, y, width, height)
+	(*(AGL_MACRO_CONTEXT)->disp.copy_convolution_filter2D)(AGL_MACRO_CONTEXT_RENDERER, target, internalformat, x, y, width, height)
 
 #define glGetConvolutionFilter(target, format, type, image) \
-	(*agl_ctx->disp.get_convolution_filter)(agl_ctx->rend, target, format, type, image)
+	(*(AGL_MACRO_CONTEXT)->disp.get_convolution_filter)(AGL_MACRO_CONTEXT_RENDERER, target, format, type, image)
 
 #define glGetConvolutionParameterfv(target, pname, params) \
-	(*agl_ctx->disp.get_convolution_parameterfv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_convolution_parameterfv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glGetConvolutionParameteriv(target, pname, params) \
-	(*agl_ctx->disp.get_convolution_parameteriv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_convolution_parameteriv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glGetSeparableFilter(target, format, type, row, column, span) \
-	(*agl_ctx->disp.get_separable_filter)(agl_ctx->rend, target, format, type, row, column, span)
+	(*(AGL_MACRO_CONTEXT)->disp.get_separable_filter)(AGL_MACRO_CONTEXT_RENDERER, target, format, type, row, column, span)
 
 #define glSeparableFilter2D(target, internalformat, width, height, format, type, row, column) \
-	(*agl_ctx->disp.separable_filter2D)(agl_ctx->rend, target, internalformat, width, height, format, type, row, column)
+	(*(AGL_MACRO_CONTEXT)->disp.separable_filter2D)(AGL_MACRO_CONTEXT_RENDERER, target, internalformat, width, height, format, type, row, column)
 
 #define glGetHistogram(target, reset, format, type, values) \
-	(*agl_ctx->disp.get_histogram)(agl_ctx->rend, target, reset, format, type, values)
+	(*(AGL_MACRO_CONTEXT)->disp.get_histogram)(AGL_MACRO_CONTEXT_RENDERER, target, reset, format, type, values)
 
 #define glGetHistogramParameterfv(target, pname, params) \
-	(*agl_ctx->disp.get_histogram_parameterfv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_histogram_parameterfv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glGetHistogramParameteriv(target, pname, params) \
-	(*agl_ctx->disp.get_histogram_parameteriv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_histogram_parameteriv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glGetMinmax(target, reset, format, type, values) \
-	(*agl_ctx->disp.get_minmax)(agl_ctx->rend, target, reset, format, type, values)
+	(*(AGL_MACRO_CONTEXT)->disp.get_minmax)(AGL_MACRO_CONTEXT_RENDERER, target, reset, format, type, values)
 
 #define glGetMinmaxParameterfv(target, pname, params) \
-	(*agl_ctx->disp.get_minmax_parameterfv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_minmax_parameterfv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glGetMinmaxParameteriv(target, pname, params) \
-	(*agl_ctx->disp.get_minmax_parameteriv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_minmax_parameteriv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glHistogram(target, width, internalformat, sink) \
-	(*agl_ctx->disp.histogram)(agl_ctx->rend, target, width, internalformat, sink)
+	(*(AGL_MACRO_CONTEXT)->disp.histogram)(AGL_MACRO_CONTEXT_RENDERER, target, width, internalformat, sink)
 
 #define glMinmax(target, internalformat, sink) \
-	(*agl_ctx->disp.minmax)(agl_ctx->rend, target, internalformat, sink)
+	(*(AGL_MACRO_CONTEXT)->disp.minmax)(AGL_MACRO_CONTEXT_RENDERER, target, internalformat, sink)
 
 #define glResetHistogram(target) \
-	(*agl_ctx->disp.reset_histogram)(agl_ctx->rend, target)
+	(*(AGL_MACRO_CONTEXT)->disp.reset_histogram)(AGL_MACRO_CONTEXT_RENDERER, target)
 
 #define glResetMinmax(target) \
-	(*agl_ctx->disp.reset_minmax)(agl_ctx->rend, target)
+	(*(AGL_MACRO_CONTEXT)->disp.reset_minmax)(AGL_MACRO_CONTEXT_RENDERER, target)
 
 /****************** OpenGL 1.3 ************************************/
 
 #define glClientActiveTexture(target) \
-	(*agl_ctx->disp.client_active_texture)(agl_ctx->rend, target)
+	(*(AGL_MACRO_CONTEXT)->disp.client_active_texture)(AGL_MACRO_CONTEXT_RENDERER, target)
 
 #define glActiveTexture(target) \
-	(*agl_ctx->disp.active_texture)(agl_ctx->rend, target)
+	(*(AGL_MACRO_CONTEXT)->disp.active_texture)(AGL_MACRO_CONTEXT_RENDERER, target)
 
 #define glMultiTexCoord1d(target, s) \
-	(*agl_ctx->disp.multi_tex_coord1d)(agl_ctx->rend, target, s)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord1d)(AGL_MACRO_CONTEXT_RENDERER, target, s)
 
 #define glMultiTexCoord1dv(target, v) \
-	(*agl_ctx->disp.multi_tex_coord1dv)(agl_ctx->rend, target, v)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord1dv)(AGL_MACRO_CONTEXT_RENDERER, target, v)
 
 #define glMultiTexCoord1f(target, s) \
-	(*agl_ctx->disp.multi_tex_coord1f)(agl_ctx->rend, target, s)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord1f)(AGL_MACRO_CONTEXT_RENDERER, target, s)
 
 #define glMultiTexCoord1fv(target, v) \
-	(*agl_ctx->disp.multi_tex_coord1fv)(agl_ctx->rend, target, v)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord1fv)(AGL_MACRO_CONTEXT_RENDERER, target, v)
 
 #define glMultiTexCoord1i(target, s) \
-	(*agl_ctx->disp.multi_tex_coord1i)(agl_ctx->rend, target, s)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord1i)(AGL_MACRO_CONTEXT_RENDERER, target, s)
 
 #define glMultiTexCoord1iv(target, v) \
-	(*agl_ctx->disp.multi_tex_coord1iv)(agl_ctx->rend, target, v)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord1iv)(AGL_MACRO_CONTEXT_RENDERER, target, v)
 
 #define glMultiTexCoord1s(target, s) \
-	(*agl_ctx->disp.multi_tex_coord1s)(agl_ctx->rend, target, s)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord1s)(AGL_MACRO_CONTEXT_RENDERER, target, s)
 
 #define glMultiTexCoord1sv(target, v) \
-	(*agl_ctx->disp.multi_tex_coord1sv)(agl_ctx->rend, target, v)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord1sv)(AGL_MACRO_CONTEXT_RENDERER, target, v)
 
 #define glMultiTexCoord2d(target, s, t) \
-	(*agl_ctx->disp.multi_tex_coord2d)(agl_ctx->rend, target, s, t)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord2d)(AGL_MACRO_CONTEXT_RENDERER, target, s, t)
 
 #define glMultiTexCoord2dv(target, v) \
-	(*agl_ctx->disp.multi_tex_coord2dv)(agl_ctx->rend, target, v)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord2dv)(AGL_MACRO_CONTEXT_RENDERER, target, v)
 
 #define glMultiTexCoord2f(target, s, t) \
-	(*agl_ctx->disp.multi_tex_coord2f)(agl_ctx->rend, target, s, t)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord2f)(AGL_MACRO_CONTEXT_RENDERER, target, s, t)
 
 #define glMultiTexCoord2fv(target, v) \
-	(*agl_ctx->disp.multi_tex_coord2fv)(agl_ctx->rend, target, v)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord2fv)(AGL_MACRO_CONTEXT_RENDERER, target, v)
 
 #define glMultiTexCoord2i(target, s, t) \
-	(*agl_ctx->disp.multi_tex_coord2i)(agl_ctx->rend, target, s, t)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord2i)(AGL_MACRO_CONTEXT_RENDERER, target, s, t)
 
 #define glMultiTexCoord2iv(target, v) \
-	(*agl_ctx->disp.multi_tex_coord2iv)(agl_ctx->rend, target, v)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord2iv)(AGL_MACRO_CONTEXT_RENDERER, target, v)
 
 #define glMultiTexCoord2s(target, s, t) \
-	(*agl_ctx->disp.multi_tex_coord2s)(agl_ctx->rend, target, s, t)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord2s)(AGL_MACRO_CONTEXT_RENDERER, target, s, t)
 
 #define glMultiTexCoord2sv(target, v) \
-	(*agl_ctx->disp.multi_tex_coord2sv)(agl_ctx->rend, target, v)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord2sv)(AGL_MACRO_CONTEXT_RENDERER, target, v)
 
 #define glMultiTexCoord3d(target, s, t, r) \
-	(*agl_ctx->disp.multi_tex_coord3d)(agl_ctx->rend, target, s, t, r)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord3d)(AGL_MACRO_CONTEXT_RENDERER, target, s, t, r)
 
 #define glMultiTexCoord3dv(target, v) \
-	(*agl_ctx->disp.multi_tex_coord3dv)(agl_ctx->rend, target, v)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord3dv)(AGL_MACRO_CONTEXT_RENDERER, target, v)
 
 #define glMultiTexCoord3f(target, s, t, r) \
-	(*agl_ctx->disp.multi_tex_coord3f)(agl_ctx->rend, target, s, t, r)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord3f)(AGL_MACRO_CONTEXT_RENDERER, target, s, t, r)
 
 #define glMultiTexCoord3fv(target, v) \
-	(*agl_ctx->disp.multi_tex_coord3fv)(agl_ctx->rend, target, v)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord3fv)(AGL_MACRO_CONTEXT_RENDERER, target, v)
 
 #define glMultiTexCoord3i(target, s, t, r) \
-	(*agl_ctx->disp.multi_tex_coord3i)(agl_ctx->rend, target, s, t, r)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord3i)(AGL_MACRO_CONTEXT_RENDERER, target, s, t, r)
 
 #define glMultiTexCoord3iv(target, v) \
-	(*agl_ctx->disp.multi_tex_coord3iv)(agl_ctx->rend, target, v)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord3iv)(AGL_MACRO_CONTEXT_RENDERER, target, v)
 
 #define glMultiTexCoord3s(target, s, t, r) \
-	(*agl_ctx->disp.multi_tex_coord3s)(agl_ctx->rend, target, s, t, r)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord3s)(AGL_MACRO_CONTEXT_RENDERER, target, s, t, r)
 
 #define glMultiTexCoord3sv(target, v) \
-	(*agl_ctx->disp.multi_tex_coord3sv)(agl_ctx->rend, target, v)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord3sv)(AGL_MACRO_CONTEXT_RENDERER, target, v)
 
 #define glMultiTexCoord4d(target, s, t, r, q) \
-	(*agl_ctx->disp.multi_tex_coord4d)(agl_ctx->rend, target, s, t, r, q)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord4d)(AGL_MACRO_CONTEXT_RENDERER, target, s, t, r, q)
 
 #define glMultiTexCoord4dv(target, v) \
-	(*agl_ctx->disp.multi_tex_coord4dv)(agl_ctx->rend, target, v)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord4dv)(AGL_MACRO_CONTEXT_RENDERER, target, v)
 
 #define glMultiTexCoord4f(target, s, t, r, q) \
-	(*agl_ctx->disp.multi_tex_coord4f)(agl_ctx->rend, target, s, t, r, q)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord4f)(AGL_MACRO_CONTEXT_RENDERER, target, s, t, r, q)
 
 #define glMultiTexCoord4fv(target, v) \
-	(*agl_ctx->disp.multi_tex_coord4fv)(agl_ctx->rend, target, v)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord4fv)(AGL_MACRO_CONTEXT_RENDERER, target, v)
 
 #define glMultiTexCoord4i(target, s, t, r, q) \
-	(*agl_ctx->disp.multi_tex_coord4i)(agl_ctx->rend, target, s, t, r, q)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord4i)(AGL_MACRO_CONTEXT_RENDERER, target, s, t, r, q)
 
 #define glMultiTexCoord4iv(target, v) \
-	(*agl_ctx->disp.multi_tex_coord4iv)(agl_ctx->rend, target, v)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord4iv)(AGL_MACRO_CONTEXT_RENDERER, target, v)
 
 #define glMultiTexCoord4s(target, s, t, r, q) \
-	(*agl_ctx->disp.multi_tex_coord4s)(agl_ctx->rend, target, s, t, r, q)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord4s)(AGL_MACRO_CONTEXT_RENDERER, target, s, t, r, q)
 
 #define glMultiTexCoord4sv(target, v) \
-	(*agl_ctx->disp.multi_tex_coord4sv)(agl_ctx->rend, target, v)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_tex_coord4sv)(AGL_MACRO_CONTEXT_RENDERER, target, v)
 
 #define glSampleCoverage(v, i) \
-	(*agl_ctx->disp.sample_coverage)(agl_ctx->rend, v, i)
+	(*(AGL_MACRO_CONTEXT)->disp.sample_coverage)(AGL_MACRO_CONTEXT_RENDERER, v, i)
 
 #define glSamplePass(mode) \
-	(*agl_ctx->disp.sample_pass)(agl_ctx->rend, mode)
+	(*(AGL_MACRO_CONTEXT)->disp.sample_pass)(AGL_MACRO_CONTEXT_RENDERER, mode)
 
 #define glLoadTransposeMatrixf(v) \
-	(*agl_ctx->disp.load_transpose_matrixf)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.load_transpose_matrixf)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glLoadTransposeMatrixd(v) \
-	(*agl_ctx->disp.load_transpose_matrixd)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.load_transpose_matrixd)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glMultTransposeMatrixf(v) \
-	(*agl_ctx->disp.mult_transpose_matrixf)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.mult_transpose_matrixf)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glMultTransposeMatrixd(v) \
-	(*agl_ctx->disp.mult_transpose_matrixd)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.mult_transpose_matrixd)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glCompressedTexImage3D(target, level, internalformat, width, height, depth, border, imageSize, data) \
-	(*agl_ctx->disp.compressed_tex_image3D)(agl_ctx->rend, target, level, internalformat, width, height, depth, border, imageSize, data)
+	(*(AGL_MACRO_CONTEXT)->disp.compressed_tex_image3D)(AGL_MACRO_CONTEXT_RENDERER, target, level, internalformat, width, height, depth, border, imageSize, data)
 
 #define glCompressedTexImage2D(target, level, internalformat, width, height, border, imageSize, data) \
-	(*agl_ctx->disp.compressed_tex_image2D)(agl_ctx->rend, target, level, internalformat, width, height, border, imageSize, data)
+	(*(AGL_MACRO_CONTEXT)->disp.compressed_tex_image2D)(AGL_MACRO_CONTEXT_RENDERER, target, level, internalformat, width, height, border, imageSize, data)
 
 #define glCompressedTexImage1D(target, level, internalformat, width, border, imageSize, data) \
-	(*agl_ctx->disp.compressed_tex_image1D)(agl_ctx->rend, target, level, internalformat, width, border, imageSize, data)
+	(*(AGL_MACRO_CONTEXT)->disp.compressed_tex_image1D)(AGL_MACRO_CONTEXT_RENDERER, target, level, internalformat, width, border, imageSize, data)
 
 #define glCompressedTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data) \
-	(*agl_ctx->disp.compressed_tex_sub_image3D)(agl_ctx->rend, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data)
+	(*(AGL_MACRO_CONTEXT)->disp.compressed_tex_sub_image3D)(AGL_MACRO_CONTEXT_RENDERER, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data)
 
 #define glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data) \
-	(*agl_ctx->disp.compressed_tex_sub_image2D)(agl_ctx->rend, target, level, xoffset, yoffset, width, height, format, imageSize, data)
+	(*(AGL_MACRO_CONTEXT)->disp.compressed_tex_sub_image2D)(AGL_MACRO_CONTEXT_RENDERER, target, level, xoffset, yoffset, width, height, format, imageSize, data)
 
 #define glCompressedTexSubImage1D(target, level, xoffset, width, format, imageSize, data) \
-	(*agl_ctx->disp.compressed_tex_sub_image1D)(agl_ctx->rend, target, level, xoffset, width, format, imageSize, data)
+	(*(AGL_MACRO_CONTEXT)->disp.compressed_tex_sub_image1D)(AGL_MACRO_CONTEXT_RENDERER, target, level, xoffset, width, format, imageSize, data)
 
 #define glGetCompressedTexImage(target, level, img) \
-	(*agl_ctx->disp.get_compressed_tex_image)(agl_ctx->rend, target, level, img)
+	(*(AGL_MACRO_CONTEXT)->disp.get_compressed_tex_image)(AGL_MACRO_CONTEXT_RENDERER, target, level, img)
 
 #define glSampleCoverage(v, i) \
-	(*agl_ctx->disp.sample_coverage)(agl_ctx->rend, v, i)
+	(*(AGL_MACRO_CONTEXT)->disp.sample_coverage)(AGL_MACRO_CONTEXT_RENDERER, v, i)
 
 #define glSamplePass(mode) \
-	(*agl_ctx->disp.sample_pass)(agl_ctx->rend, mode)
+	(*(AGL_MACRO_CONTEXT)->disp.sample_pass)(AGL_MACRO_CONTEXT_RENDERER, mode)
 
 /****************** OpenGL 1.4 ************************************/
 
 #define glFogCoordf(coord) \
-	(*agl_ctx->disp.fog_coordf)(agl_ctx->rend, coord)
+	(*(AGL_MACRO_CONTEXT)->disp.fog_coordf)(AGL_MACRO_CONTEXT_RENDERER, coord)
 
 #define glFogCoordfv(coord) \
-	(*agl_ctx->disp.fog_coordfv)(agl_ctx->rend, coord)
+	(*(AGL_MACRO_CONTEXT)->disp.fog_coordfv)(AGL_MACRO_CONTEXT_RENDERER, coord)
 
 #define glFogCoordd(coord) \
-	(*agl_ctx->disp.fog_coordd)(agl_ctx->rend, coord)
+	(*(AGL_MACRO_CONTEXT)->disp.fog_coordd)(AGL_MACRO_CONTEXT_RENDERER, coord)
 
 #define glFogCoorddv(coord) \
-	(*agl_ctx->disp.fog_coorddv)(agl_ctx->rend,coord)
+	(*(AGL_MACRO_CONTEXT)->disp.fog_coorddv)(AGL_MACRO_CONTEXT_RENDERER,coord)
 
 #define glFogCoordPointer(type, stride, pointer) \
-	(*agl_ctx->disp.fog_coord_pointer)(agl_ctx->rend, type, stride, pointer)
+	(*(AGL_MACRO_CONTEXT)->disp.fog_coord_pointer)(AGL_MACRO_CONTEXT_RENDERER, type, stride, pointer)
 
 #define glSecondaryColor3b(red, green, blue) \
-	(*agl_ctx->disp.secondary_color3b)(agl_ctx->rend, red, green, blue)
+	(*(AGL_MACRO_CONTEXT)->disp.secondary_color3b)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue)
 
 #define glSecondaryColor3bv(components) \
-	(*agl_ctx->disp.secondary_color3bv)(agl_ctx->rend, components)
+	(*(AGL_MACRO_CONTEXT)->disp.secondary_color3bv)(AGL_MACRO_CONTEXT_RENDERER, components)
 
 #define glSecondaryColor3d(red, green, blue) \
-	(*agl_ctx->disp.secondary_color3d)(agl_ctx->rend, red, green, blue)
+	(*(AGL_MACRO_CONTEXT)->disp.secondary_color3d)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue)
 
 #define glSecondaryColor3dv(components) \
-	(*agl_ctx->disp.secondary_color3dv)(agl_ctx->rend, components)
+	(*(AGL_MACRO_CONTEXT)->disp.secondary_color3dv)(AGL_MACRO_CONTEXT_RENDERER, components)
 
 #define glSecondaryColor3f(red, green, blue) \
-	(*agl_ctx->disp.secondary_color3f)(agl_ctx->rend, red, green, blue)
+	(*(AGL_MACRO_CONTEXT)->disp.secondary_color3f)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue)
 
 #define glSecondaryColor3fv(components) \
-	(*agl_ctx->disp.secondary_color3fv)(agl_ctx->rend, components)
+	(*(AGL_MACRO_CONTEXT)->disp.secondary_color3fv)(AGL_MACRO_CONTEXT_RENDERER, components)
 
 #define glSecondaryColor3i(red, green, blue) \
-	(*agl_ctx->disp.secondary_color3i)(agl_ctx->rend, red, green, blue)
+	(*(AGL_MACRO_CONTEXT)->disp.secondary_color3i)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue)
 
 #define glSecondaryColor3iv(components) \
-	(*agl_ctx->disp.secondary_color3iv)(agl_ctx->rend, components)
+	(*(AGL_MACRO_CONTEXT)->disp.secondary_color3iv)(AGL_MACRO_CONTEXT_RENDERER, components)
 
 #define glSecondaryColor3s(red, green, blue) \
-	(*agl_ctx->disp.secondary_color3s)(agl_ctx->rend, red, green, blue)
+	(*(AGL_MACRO_CONTEXT)->disp.secondary_color3s)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue)
 
 #define glSecondaryColor3sv(components) \
-	(*agl_ctx->disp.secondary_color3sv)(agl_ctx->rend, components)
+	(*(AGL_MACRO_CONTEXT)->disp.secondary_color3sv)(AGL_MACRO_CONTEXT_RENDERER, components)
 
 #define glSecondaryColor3ub(red, green, blue) \
-	(*agl_ctx->disp.secondary_color3ub)(agl_ctx->rend, red, green, blue)
+	(*(AGL_MACRO_CONTEXT)->disp.secondary_color3ub)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue)
 
 #define glSecondaryColor3ubv(components) \
-	(*agl_ctx->disp.secondary_color3ubv)(agl_ctx->rend, components)
+	(*(AGL_MACRO_CONTEXT)->disp.secondary_color3ubv)(AGL_MACRO_CONTEXT_RENDERER, components)
 
 #define glSecondaryColor3ui(red, green, blue) \
-	(*agl_ctx->disp.secondary_color3ui)(agl_ctx->rend, red, green, blue)
+	(*(AGL_MACRO_CONTEXT)->disp.secondary_color3ui)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue)
 
 #define glSecondaryColor3uiv(components) \
-	(*agl_ctx->disp.secondary_color3uiv)(agl_ctx->rend, components)
+	(*(AGL_MACRO_CONTEXT)->disp.secondary_color3uiv)(AGL_MACRO_CONTEXT_RENDERER, components)
 
 #define glSecondaryColor3us(red, green, blue) \
-	(*agl_ctx->disp.secondary_color3us)(agl_ctx->rend, red, green, blue)
+	(*(AGL_MACRO_CONTEXT)->disp.secondary_color3us)(AGL_MACRO_CONTEXT_RENDERER, red, green, blue)
 
 #define glSecondaryColor3usv(components) \
-	(*agl_ctx->disp.secondary_color3usv)(agl_ctx->rend, components)
+	(*(AGL_MACRO_CONTEXT)->disp.secondary_color3usv)(AGL_MACRO_CONTEXT_RENDERER, components)
 
 #define glSecondaryColorPointer(size, type, stride, pointer) \
-	(*agl_ctx->disp.secondary_color_pointer)(agl_ctx->rend, size, type, stride, pointer)
+	(*(AGL_MACRO_CONTEXT)->disp.secondary_color_pointer)(AGL_MACRO_CONTEXT_RENDERER, size, type, stride, pointer)
 
 #define glPointParameterf(pname, param) \
-	(*agl_ctx->disp.point_parameterf)(agl_ctx->rend, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.point_parameterf)(AGL_MACRO_CONTEXT_RENDERER, pname, param)
 
 #define glPointParameterfv(pname, params) \
-	(*agl_ctx->disp.point_parameterfv)(agl_ctx->rend, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.point_parameterfv)(AGL_MACRO_CONTEXT_RENDERER, pname, params)
+
+#define glPointParameteri(pname, param) \
+	(*(AGL_MACRO_CONTEXT)->disp.point_parameteri)(AGL_MACRO_CONTEXT_RENDERER, pname, param)
+
+#define glPointParameteriv(pname, params) \
+	(*(AGL_MACRO_CONTEXT)->disp.point_parameteriv)(AGL_MACRO_CONTEXT_RENDERER, pname, params)
 
 #define glBlendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha) \
-	(*agl_ctx->disp.blend_func_separate)(agl_ctx->rend, sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha)
+	(*(AGL_MACRO_CONTEXT)->disp.blend_func_separate)(AGL_MACRO_CONTEXT_RENDERER, sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha)
 
 #define glMultiDrawArrays(mode, first, count, primcount) \
-	(*agl_ctx->disp.multi_draw_arrays)(agl_ctx->rend, mode, first, count, primcount)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_draw_arrays)(AGL_MACRO_CONTEXT_RENDERER, mode, first, count, primcount)
 
 #define glMultiDrawElements(mode, count, type, indices, primcount) \
-	(*agl_ctx->disp.multi_draw_elements)(agl_ctx->rend, mode, count, type, indices, primcount)
+	(*(AGL_MACRO_CONTEXT)->disp.multi_draw_elements)(AGL_MACRO_CONTEXT_RENDERER, mode, count, type, indices, primcount)
 
 #define glWindowPos2d(x, y) \
-	(*agl_ctx->disp.window_pos2d)(agl_ctx->rend, x, y)
+	(*(AGL_MACRO_CONTEXT)->disp.window_pos2d)(AGL_MACRO_CONTEXT_RENDERER, x, y)
 
 #define glWindowPos2dv(v) \
-	(*agl_ctx->disp.window_pos2dv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.window_pos2dv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glWindowPos2f(x, y) \
-	(*agl_ctx->disp.window_pos2f)(agl_ctx->rend, x, y)
+	(*(AGL_MACRO_CONTEXT)->disp.window_pos2f)(AGL_MACRO_CONTEXT_RENDERER, x, y)
 
 #define glWindowPos2fv(v) \
-	(*agl_ctx->disp.window_pos2fv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.window_pos2fv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glWindowPos2i(x, y) \
-	(*agl_ctx->disp.window_pos2i)(agl_ctx->rend, x, y)
+	(*(AGL_MACRO_CONTEXT)->disp.window_pos2i)(AGL_MACRO_CONTEXT_RENDERER, x, y)
 
 #define glWindowPos2iv(v) \
-	(*agl_ctx->disp.window_pos2iv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.window_pos2iv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glWindowPos2s(x, y) \
-	(*agl_ctx->disp.window_pos2s)(agl_ctx->rend, x, y)
+	(*(AGL_MACRO_CONTEXT)->disp.window_pos2s)(AGL_MACRO_CONTEXT_RENDERER, x, y)
 
 #define glWindowPos2sv(v) \
-	(*agl_ctx->disp.window_pos2sv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.window_pos2sv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glWindowPos3d(x, y, z) \
-	(*agl_ctx->disp.window_pos3d)(agl_ctx->rend, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.window_pos3d)(AGL_MACRO_CONTEXT_RENDERER, x, y, z)
 
 #define glWindowPos3dv(v) \
-	(*agl_ctx->disp.window_pos3dv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.window_pos3dv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glWindowPos3f(x, y, z) \
-	(*agl_ctx->disp.window_pos3f)(agl_ctx->rend, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.window_pos3f)(AGL_MACRO_CONTEXT_RENDERER, x, y, z)
 
 #define glWindowPos3fv(v) \
-	(*agl_ctx->disp.window_pos3fv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.window_pos3fv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glWindowPos3i(x, y, z) \
-	(*agl_ctx->disp.window_pos3i)(agl_ctx->rend, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.window_pos3i)(AGL_MACRO_CONTEXT_RENDERER, x, y, z)
 
 #define glWindowPos3iv(v) \
-	(*agl_ctx->disp.window_pos3iv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.window_pos3iv)(AGL_MACRO_CONTEXT_RENDERER, v)
 
 #define glWindowPos3s(x, y, z) \
-	(*agl_ctx->disp.window_pos3s)(agl_ctx->rend, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.window_pos3s)(AGL_MACRO_CONTEXT_RENDERER, x, y, z)
 
 #define glWindowPos3sv(v) \
-	(*agl_ctx->disp.window_pos3sv)(agl_ctx->rend, v)
+	(*(AGL_MACRO_CONTEXT)->disp.window_pos3sv)(AGL_MACRO_CONTEXT_RENDERER, v)
+
+/****************** OpenGL 1.5 Macros *****************************/
 
 #define glGenQueries(n, ids) \
-	(*agl_ctx->disp.gen_queries)(agl_ctx->rend, n, ids)
+	(*(AGL_MACRO_CONTEXT)->disp.gen_queries)(AGL_MACRO_CONTEXT_RENDERER, n, ids)
 
 #define glDeleteQueries(n, ids) \
-	(*agl_ctx->disp.delete_queries)(agl_ctx->rend, n, ids)
+	(*(AGL_MACRO_CONTEXT)->disp.delete_queries)(AGL_MACRO_CONTEXT_RENDERER, n, ids)
 
 #define glIsQuery(id) \
-	(*agl_ctx->disp.is_query)(agl_ctx->rend, id)
+	(*(AGL_MACRO_CONTEXT)->disp.is_query)(AGL_MACRO_CONTEXT_RENDERER, id)
 
 #define glBeginQuery(target, id) \
-	(*agl_ctx->disp.begin_query)(agl_ctx->rend, target, id)
+	(*(AGL_MACRO_CONTEXT)->disp.begin_query)(AGL_MACRO_CONTEXT_RENDERER, target, id)
 
 #define glEndQuery(target) \
-	(*agl_ctx->disp.end_query)(agl_ctx->rend, target)
+	(*(AGL_MACRO_CONTEXT)->disp.end_query)(AGL_MACRO_CONTEXT_RENDERER, target)
 
 #define glGetQueryiv(target, pname, params) \
-	(*agl_ctx->disp.get_queryiv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_queryiv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glGetQueryObjectiv(id, pname, params) \
-	(*agl_ctx->disp.get_query_objectiv)(agl_ctx->rend, id, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_query_objectiv)(AGL_MACRO_CONTEXT_RENDERER, id, pname, params)
 
 #define glGetQueryObjectuiv(id, pname, params) \
-	(*agl_ctx->disp.get_query_objectuiv)(agl_ctx->rend, id, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_query_objectuiv)(AGL_MACRO_CONTEXT_RENDERER, id, pname, params)
 
 #define glBindBuffer(target, buffer) \
-	(*agl_ctx->disp.bind_buffer)(agl_ctx->rend, target, buffer)
+	(*(AGL_MACRO_CONTEXT)->disp.bind_buffer)(AGL_MACRO_CONTEXT_RENDERER, target, buffer)
 
 #define glDeleteBuffers(n, buffers) \
-	(*agl_ctx->disp.delete_buffers)(agl_ctx->rend, n, buffers)
+	(*(AGL_MACRO_CONTEXT)->disp.delete_buffers)(AGL_MACRO_CONTEXT_RENDERER, n, buffers)
 
 #define glGenBuffers(n, buffers) \
-	(*agl_ctx->disp.gen_buffers)(agl_ctx->rend, n, buffers)
+	(*(AGL_MACRO_CONTEXT)->disp.gen_buffers)(AGL_MACRO_CONTEXT_RENDERER, n, buffers)
 
 #define glIsBuffer(buffer) \
-	(*agl_ctx->disp.is_buffer)(agl_ctx->rend, buffer)
+	(*(AGL_MACRO_CONTEXT)->disp.is_buffer)(AGL_MACRO_CONTEXT_RENDERER, buffer)
 
 #define glBufferData(target, size, data, usage) \
-	(*agl_ctx->disp.buffer_data)(agl_ctx->rend, target, size, data, usage)
+	(*(AGL_MACRO_CONTEXT)->disp.buffer_data)(AGL_MACRO_CONTEXT_RENDERER, target, size, data, usage)
 
 #define glBufferSubData(target, offset, size, data) \
-	(*agl_ctx->disp.buffer_sub_data)(agl_ctx->rend, target, offset, size, data)
+	(*(AGL_MACRO_CONTEXT)->disp.buffer_sub_data)(AGL_MACRO_CONTEXT_RENDERER, target, offset, size, data)
 
 #define glGetBufferSubData(target, offset, size, data) \
-	(*agl_ctx->disp.get_buffer_sub_data)(agl_ctx->rend, target, offset, size, data)
+	(*(AGL_MACRO_CONTEXT)->disp.get_buffer_sub_data)(AGL_MACRO_CONTEXT_RENDERER, target, offset, size, data)
 
 #define glMapBuffer(target, access) \
-	(*agl_ctx->disp.map_buffer)(agl_ctx->rend, target, access)
+	(*(AGL_MACRO_CONTEXT)->disp.map_buffer)(AGL_MACRO_CONTEXT_RENDERER, target, access)
 
 #define glUnmapBuffer(target) \
-	(*agl_ctx->disp.unmap_buffer)(agl_ctx->rend, target)
+	(*(AGL_MACRO_CONTEXT)->disp.unmap_buffer)(AGL_MACRO_CONTEXT_RENDERER, target)
 
 #define glGetBufferParameteriv(target, pname, params) \
-	(*agl_ctx->disp.get_buffer_parameteriv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_buffer_parameteriv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 #define glGetBufferPointerv(target, pname, params) \
-	(*agl_ctx->disp.get_buffer_pointerv)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_buffer_pointerv)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
+	
+/****************** OpenGL 2.0 Macros *****************************/
 
-/*********** ARB Extensions *************************************************/
+#define glDrawBuffers(n, bufs) \
+	(*(AGL_MACRO_CONTEXT)->disp.draw_buffers_ARB)(AGL_MACRO_CONTEXT_RENDERER, n, bufs)
+
+#define glVertexAttrib1d(index, x) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib1d_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x)
+
+#define glVertexAttrib1dv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib1dv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib1f(index, x) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib1f_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x)
+
+#define glVertexAttrib1fv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib1fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib1s(index, x) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib1s_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x)
+
+#define glVertexAttrib1sv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib1sv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib2d(index, x, y) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib2d_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y)
+
+#define glVertexAttrib2dv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib2dv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib2f(index, x, y) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib2f_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y)
+
+#define glVertexAttrib2fv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib2fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib2s(index, x, y) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib2s_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y)
+
+#define glVertexAttrib2sv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib2sv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib3d(index, x, y, z) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib3d_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y, z)
+
+#define glVertexAttrib3dv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib3dv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib3f(index, x, y, z) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib3f_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y, z)
+
+#define glVertexAttrib3fv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib3fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib3s(index, x, y, z) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib3s_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y, z)
+
+#define glVertexAttrib3sv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib3sv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib4Nbv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4Nbv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib4Niv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4Niv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib4Nsv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4Nsv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib4Nub(index, x, y, z, w) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4Nub_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y, x, w)
+
+#define glVertexAttrib4Nubv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4ubv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib4Nuiv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4Nuiv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib4Nusv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4Nusv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib4bv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4bv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib4d(index, x, y, z, w) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4d_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y, z, w)
+
+#define glVertexAttrib4dv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4dv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib4f(index, x, y, z, w) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4f_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y, z, w)
+
+#define glVertexAttrib4fv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib4iv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4iv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib4s(index, x, y, z, w) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4s_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y, z, w)
+
+#define glVertexAttrib4sv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4sv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib4ubv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4ubv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib4uiv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4uiv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttrib4usv(index, v) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4usv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, v)
+
+#define glVertexAttribPointer(index, size, type, normalized, stride, pointer) \
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib_pointer_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, size, type, normalized, stride, pointer)
+
+#define glEnableVertexAttribArray(index) \
+	(*(AGL_MACRO_CONTEXT)->disp.enable_vertex_attrib_array_ARB)(AGL_MACRO_CONTEXT_RENDERER, index)
+
+#define glDisableVertexAttribArray(index) \
+	(*(AGL_MACRO_CONTEXT)->disp.disable_vertex_attrib_array_ARB)(AGL_MACRO_CONTEXT_RENDERER, index)
+
+#define glGetVertexAttribdv(index, pname, params) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_vertex_attribdv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, pname, params)
+
+#define glGetVertexAttribfv(index, pname, params) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_vertex_attribfv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, pname, params)
+
+#define glGetVertexAttribiv(index, pname, params) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_vertex_attribiv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, pname, params)
+
+#define glGetVertexAttribPointerv(index, pname, pointer) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_vertex_attrib_pointerv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, pname, pointer)
+
+#define glDeleteShader(shader) \
+	(*(AGL_MACRO_CONTEXT)->disp.delete_object_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) shader)
+
+#define glDetachShader(program, shader) \
+	(*(AGL_MACRO_CONTEXT)->disp.detach_object_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) program, (GLhandleARB) shader)
+
+#define glCreateShader(type) \
+	(GLuint) (*(AGL_MACRO_CONTEXT)->disp.create_shader_object_ARB)(AGL_MACRO_CONTEXT_RENDERER, type)
+
+#define glShaderSource(shader, count, string, length) \
+	(*(AGL_MACRO_CONTEXT)->disp.shader_source_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) shader, count, string, length)
+
+#define glCompileShader(shader) \
+	(*(AGL_MACRO_CONTEXT)->disp.compile_shader_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) shader)
+
+#define glCreateProgram() \
+	(GLuint) (*(AGL_MACRO_CONTEXT)->disp.create_program_object_ARB)(AGL_MACRO_CONTEXT_RENDERER)
+
+#define glAttachShader(program, shader) \
+	(*(AGL_MACRO_CONTEXT)->disp.attach_object_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) program, (GLhandleARB) shader)
+
+#define glLinkProgram(program) \
+	(*(AGL_MACRO_CONTEXT)->disp.link_program_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) program)
+
+#define glUseProgram(program) \
+	(*(AGL_MACRO_CONTEXT)->disp.use_program_object_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) program)
+
+#define glDeleteProgram(program) \
+	(*(AGL_MACRO_CONTEXT)->disp.delete_object_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) program)
+
+#define glValidateProgram(program) \
+	(*(AGL_MACRO_CONTEXT)->disp.validate_program_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) program)
+
+#define glUniform1f(location, v0) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform1f_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, v0)
+
+#define glUniform2f(location, v0, v1) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform2f_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, v0, v1)
+
+#define glUniform3f(location, v0, v1, v2) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform3f_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, v0, v1, v2)
+
+#define glUniform4f(location, v0, v1, v2, v3) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform4f_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, v0, v1, v2, v3)
+
+#define glUniform1i(location, v0) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform1i_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, v0)
+
+#define glUniform2i(location, v0, v1) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform2i_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, v0, v1)
+
+#define glUniform3i(location, v0, v1, v2) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform3i_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, v0, v1, v2)
+
+#define glUniform4i(location, v0, v1, v2, v3) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform4i_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, v0, v1, v2, v3)
+
+#define glUniform1fv(location, count, value) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform1fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, value)
+
+#define glUniform2fv(location, count, value) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform2fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, value)
+
+#define glUniform3fv(location, count, value) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform3fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, value)
+
+#define glUniform4fv(location, count, value) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform4fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, value)
+
+#define glUniform1iv(location, count, value) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform1iv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, value)
+
+#define glUniform2iv(location, count, value) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform2iv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, value)
+
+#define glUniform3iv(location, count, value) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform3iv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, value)
+
+#define glUniform4iv(location, count, value) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform4iv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, value)
+
+#define glUniformMatrix2fv(location, count, transpose, value) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform_matrix2fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, transpose, value)
+
+#define glUniformMatrix3fv(location, count, transpose, value) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform_matrix3fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, transpose, value)
+
+#define glUniformMatrix4fv(location, count, transpose, value) \
+	(*(AGL_MACRO_CONTEXT)->disp.uniform_matrix4fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, transpose, value)
+
+#define glIsShader(shader) \
+	(*(AGL_MACRO_CONTEXT)->disp.is_shader)(AGL_MACRO_CONTEXT_RENDERER, shader)
+
+#define glIsProgram(program) \
+	(*(AGL_MACRO_CONTEXT)->disp.is_program)(AGL_MACRO_CONTEXT_RENDERER, program)
+
+#define glGetShaderiv(shader, pname, params) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_shaderiv)(AGL_MACRO_CONTEXT_RENDERER, shader, pname, params)
+
+#define glGetProgramiv(program, pname, params) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_programiv)(AGL_MACRO_CONTEXT_RENDERER, program, pname, params)
+
+#define glGetAttachedShaders(program, maxCount, count, shaders) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_attached_objects_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) program, maxCount, count, (GLhandleARB *) shaders)
+
+#define glGetShaderInfoLog(shader, bufSize, length, infoLog) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_shader_info_log)(AGL_MACRO_CONTEXT_RENDERER, shader, bufSize, length, infoLog)
+
+#define glGetProgramInfoLog(program, bufSize, length, infoLog) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_program_info_log)(AGL_MACRO_CONTEXT_RENDERER, program, bufSize, length, infoLog)
+
+#define glGetUniformLocation(program, name) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_uniform_location_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) program, name)
+
+#define glGetActiveUniform(program, index, bufSize, length, size, type, name) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_active_uniform_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) program, index, bufSize, length, size, type, name)
+
+#define glGetUniformfv(program, location, params) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_uniformfv_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) program, location, params)
+
+#define glGetUniformiv(program, location, params) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_uniformiv_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) program, location, params)
+
+#define glGetShaderSource(shader, bufSize, length, source) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_shader_source_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) shader, bufSize, length, source)
+
+#define glBindAttribLocation(program, index, name) \
+	(*(AGL_MACRO_CONTEXT)->disp.bind_attrib_location_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) program, index, name)
+
+#define glGetActiveAttrib(program, index, bufSize, length, size, type, name) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_active_attrib_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) program, index, bufSize, length, size, type, name)
+
+#define glGetAttribLocation(program, name) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_attrib_location_ARB)(AGL_MACRO_CONTEXT_RENDERER, (GLhandleARB) program, name)
+
+#define glStencilFuncSeparate(face, func, ref, mask) \
+	(*(AGL_MACRO_CONTEXT)->disp.stencil_func_separate)(AGL_MACRO_CONTEXT_RENDERER, face, func, ref, mask)
+
+#define glStencilOpSeparate(face, fail, zfail, zpass) \
+	(*(AGL_MACRO_CONTEXT)->disp.stencil_op_separate_ATI)(AGL_MACRO_CONTEXT_RENDERER, face, fail, zfail, zpass)
+
+#define glStencilMaskSeparate(face, mask) \
+	(*(AGL_MACRO_CONTEXT)->disp.stencil_mask_separate)(AGL_MACRO_CONTEXT_RENDERER, face, mask)
+
+
+
+/********** ARB Extensions *************************************************/
 
 /* GL_ARB_vertex_program */
 #define glBindProgramARB(target, id) \
-	(*agl_ctx->disp.bind_program_ARB)(agl_ctx->rend, target, id)
+	(*(AGL_MACRO_CONTEXT)->disp.bind_program_ARB)(AGL_MACRO_CONTEXT_RENDERER, target, id)
 
 #define glDeleteProgramsARB(n, programs) \
-	(*agl_ctx->disp.delete_programs_ARB)(agl_ctx->rend, n, programs)
+	(*(AGL_MACRO_CONTEXT)->disp.delete_programs_ARB)(AGL_MACRO_CONTEXT_RENDERER, n, programs)
 
 #define glGenProgramsARB(n, programs) \
-	(*agl_ctx->disp.gen_programs_ARB)(agl_ctx->rend, n, programs)
+	(*(AGL_MACRO_CONTEXT)->disp.gen_programs_ARB)(AGL_MACRO_CONTEXT_RENDERER, n, programs)
 
 #define glIsProgramARB(id) \
-	(*agl_ctx->disp.is_program_ARB)(agl_ctx->rend, id)
+	(*(AGL_MACRO_CONTEXT)->disp.is_program_ARB)(AGL_MACRO_CONTEXT_RENDERER, id)
 
 #define glVertexAttrib1sARB(index, x) \
-	(*agl_ctx->disp.vertex_attrib1s_ARB)(agl_ctx->rend, index, x)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib1s_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x)
 
 #define glVertexAttrib1fARB(index, x) \
-	(*agl_ctx->disp.vertex_attrib1f_ARB)(agl_ctx->rend, index, x)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib1f_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x)
 
 #define glVertexAttrib1dARB(index, x) \
-	(*agl_ctx->disp.vertex_attrib1d_ARB)(agl_ctx->rend, index, x)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib1d_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x)
 
 #define glVertexAttrib2sARB(index, x, y) \
-	(*agl_ctx->disp.vertex_attrib2s_ARB)(agl_ctx->rend, index, x, y)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib2s_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y)
 
 #define glVertexAttrib2fARB(index, x, y) \
-	(*agl_ctx->disp.vertex_attrib2f_ARB)(agl_ctx->rend, index, x, y)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib2f_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y)
 
 #define glVertexAttrib2dARB(index, x, y) \
-	(*agl_ctx->disp.vertex_attrib2d_ARB)(agl_ctx->rend, index, x, y)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib2d_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y)
 
 #define glVertexAttrib3sARB(index, x, y, z) \
-	(*agl_ctx->disp.vertex_attrib3s_ARB)(agl_ctx->rend, index, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib3s_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y, z)
 
 #define glVertexAttrib3fARB(index, x, y, z) \
-	(*agl_ctx->disp.vertex_attrib3f_ARB)(agl_ctx->rend, index, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib3f_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y, z)
 
 #define glVertexAttrib3dARB(index, x, y, z) \
-	(*agl_ctx->disp.vertex_attrib3d_ARB)(agl_ctx->rend, index, x, y, z)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib3d_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y, z)
 
 #define glVertexAttrib4sARB(index, x, y, z, w) \
-	(*agl_ctx->disp.vertex_attrib4s_ARB)(agl_ctx->rend, index, x, y, z, w)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4s_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y, z, w)
 
 #define glVertexAttrib4fARB(index, x, y, z, w) \
-	(*agl_ctx->disp.vertex_attrib4f_ARB)(agl_ctx->rend, index, x, y, z, w)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4f_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y, z, w)
 
 #define glVertexAttrib4dARB(index, x, y, z, w) \
-	(*agl_ctx->disp.vertex_attrib4d_ARB)(agl_ctx->rend, index, x, y, z, w)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4d_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y, z, w)
 
 #define glVertexAttrib4NubARB(index, x, y, z, w) \
-	(*agl_ctx->disp.vertex_attrib4Nub_ARB)(agl_ctx->rend, index, x, y, z, w)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4Nub_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, x, y, z, w)
 
 #define glVertexAttrib1svARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib1sv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib1sv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib1fvARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib1fv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib1fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib1dvARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib1dv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib1dv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib2svARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib2sv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib2sv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib2fvARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib2fv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib2fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib2dvARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib2dv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib2dv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib3svARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib3sv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib3sv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib3fvARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib3fv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib3fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib3dvARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib3dv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib3dv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib4bvARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib4bv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4bv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib4ubvARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib4ubv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4ubv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib4svARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib4sv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4sv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib4usvARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib4usv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4usv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib4ivARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib4iv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4iv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib4uivARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib4uiv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4uiv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib4fvARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib4fv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib4dvARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib4dv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4dv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib4NbvARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib4Nbv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4Nbv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib4NubvARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib4Nubv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4Nubv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib4NsvARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib4Nsv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4Nsv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib4NusvARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib4Nusv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4Nusv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib4NivARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib4Niv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4Niv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttrib4NuivARB(index, addr) \
-	(*agl_ctx->disp.vertex_attrib4Nuiv_ARB)(agl_ctx->rend, index, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib4Nuiv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, addr)
 
 #define glVertexAttribPointerARB(index, size, type, normalized, stride, addr) \
-	(*agl_ctx->disp.vertex_attrib_pointer_ARB)(agl_ctx->rend, index, size, type, normalized, stride, addr)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_attrib_pointer_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, size, type, normalized, stride, addr)
 
 #define glEnableVertexAttribArrayARB(index) \
-	(*agl_ctx->disp.enable_vertex_attrib_array_ARB)(agl_ctx->rend, index)
+	(*(AGL_MACRO_CONTEXT)->disp.enable_vertex_attrib_array_ARB)(AGL_MACRO_CONTEXT_RENDERER, index)
 
 #define glDisableVertexAttribArrayARB(index) \
-	(*agl_ctx->disp.disable_vertex_attrib_array_ARB)(agl_ctx->rend, index)
+	(*(AGL_MACRO_CONTEXT)->disp.disable_vertex_attrib_array_ARB)(AGL_MACRO_CONTEXT_RENDERER, index)
 
 #define glGetVertexAttribdvARB(index, pname, params) \
-	(*agl_ctx->disp.get_vertex_attribdv_ARB)(agl_ctx->rend, index, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_vertex_attribdv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, pname, params)
 
 #define glGetVertexAttribfvARB(index, pname, params) \
-	(*agl_ctx->disp.get_vertex_attribfv_ARB)(agl_ctx->rend, index, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_vertex_attribfv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, pname, params)
 
 #define glGetVertexAttribivARB(index, pname, params) \
-	(*agl_ctx->disp.get_vertex_attribiv_ARB)(agl_ctx->rend, index, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_vertex_attribiv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, pname, params)
 
 #define glGetVertexAttribPointervARB(index, pname, pointer) \
-	(*agl_ctx->disp.get_vertex_attrib_pointerv_ARB)(agl_ctx->rend, index, pname, pointer)
+	(*(AGL_MACRO_CONTEXT)->disp.get_vertex_attrib_pointerv_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, pname, pointer)
 
 #define glProgramEnvParameter4dARB(target, index, x, y, z, w) \
-	(*agl_ctx->disp.program_env_parameter4d_ARB)(agl_ctx->rend, target, index, x, y, z, w)
+	(*(AGL_MACRO_CONTEXT)->disp.program_env_parameter4d_ARB)(AGL_MACRO_CONTEXT_RENDERER, target, index, x, y, z, w)
 
 #define glProgramEnvParameter4dvARB(target, index, params) \
-	(*agl_ctx->disp.program_env_parameter4dv_ARB)(agl_ctx->rend, target, index, params)
+	(*(AGL_MACRO_CONTEXT)->disp.program_env_parameter4dv_ARB)(AGL_MACRO_CONTEXT_RENDERER, target, index, params)
 
 #define glProgramEnvParameter4fARB(target, index, x, y, z, w) \
-	(*agl_ctx->disp.program_env_parameter4f_ARB)(agl_ctx->rend, target, index, x, y, z, w)
+	(*(AGL_MACRO_CONTEXT)->disp.program_env_parameter4f_ARB)(AGL_MACRO_CONTEXT_RENDERER, target, index, x, y, z, w)
 
 #define glProgramEnvParameter4fvARB(target, index, params) \
-	(*agl_ctx->disp.program_env_parameter4fv_ARB)(agl_ctx->rend, target, index, params)
+	(*(AGL_MACRO_CONTEXT)->disp.program_env_parameter4fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, target, index, params)
 
 #define glProgramLocalParameter4dARB(target, index, x, y, z, w) \
-	(*agl_ctx->disp.program_local_parameter4d_ARB)(agl_ctx->rend, target, index, x, y, z, w)
+	(*(AGL_MACRO_CONTEXT)->disp.program_local_parameter4d_ARB)(AGL_MACRO_CONTEXT_RENDERER, target, index, x, y, z, w)
 
 #define glProgramLocalParameter4dvARB(target, index, params) \
-	(*agl_ctx->disp.program_local_parameter4dv_ARB)(agl_ctx->rend, target, index, params)
+	(*(AGL_MACRO_CONTEXT)->disp.program_local_parameter4dv_ARB)(AGL_MACRO_CONTEXT_RENDERER, target, index, params)
 
 #define glProgramLocalParameter4fARB(target, index, x, y, z, w) \
-	(*agl_ctx->disp.program_local_parameter4f_ARB)(agl_ctx->rend, target, index, x, y, z, w)
+	(*(AGL_MACRO_CONTEXT)->disp.program_local_parameter4f_ARB)(AGL_MACRO_CONTEXT_RENDERER, target, index, x, y, z, w)
 
 #define glProgramLocalParameter4fvARB(target, index, params) \
-	(*agl_ctx->disp.program_local_parameter4fv_ARB)(agl_ctx->rend, target, index, params)
+	(*(AGL_MACRO_CONTEXT)->disp.program_local_parameter4fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, target, index, params)
 
 #define glGetProgramEnvParameterdvARB(target, index, params) \
-	(*agl_ctx->disp.get_program_env_parameterdv_ARB)(agl_ctx->rend, target, index, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_program_env_parameterdv_ARB)(AGL_MACRO_CONTEXT_RENDERER, target, index, params)
 
 #define glGetProgramEnvParameterfvARB(target, index, params) \
-	(*agl_ctx->disp.get_program_env_parameterfv_ARB)(agl_ctx->rend, target, index, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_program_env_parameterfv_ARB)(AGL_MACRO_CONTEXT_RENDERER, target, index, params)
 
 #define glGetProgramLocalParameterdvARB(target, index, params) \
-	(*agl_ctx->disp.get_program_local_parameterdv_ARB)(agl_ctx->rend, target, index, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_program_local_parameterdv_ARB)(AGL_MACRO_CONTEXT_RENDERER, target, index, params)
 
 #define glGetProgramLocalParameterfvARB(target, index, params) \
-	(*agl_ctx->disp.get_program_local_parameterfv_ARB)(agl_ctx->rend, target, index, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_program_local_parameterfv_ARB)(AGL_MACRO_CONTEXT_RENDERER, target, index, params)
 
 #define glProgramStringARB(target, format, length, string) \
-	(*agl_ctx->disp.program_string_ARB)(agl_ctx->rend, target, format, length, string)
+	(*(AGL_MACRO_CONTEXT)->disp.program_string_ARB)(AGL_MACRO_CONTEXT_RENDERER, target, format, length, string)
 
 #define glGetProgramStringARB(target, pname, string) \
-	(*agl_ctx->disp.get_program_string_ARB)(agl_ctx->rend, target, pname, string)
+	(*(AGL_MACRO_CONTEXT)->disp.get_program_string_ARB)(AGL_MACRO_CONTEXT_RENDERER, target, pname, string)
 
 #define glGetProgramivARB(target, pname, params) \
-	(*agl_ctx->disp.get_programiv_ARB)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_programiv_ARB)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 /* GL_ARB_vertex_blend */
 #define glWeightbvARB(size, weights) \
-	(*agl_ctx->disp.weightbv_ARB)(agl_ctx->rend, size, weights)
+	(*(AGL_MACRO_CONTEXT)->disp.weightbv_ARB)(AGL_MACRO_CONTEXT_RENDERER, size, weights)
 
 #define glWeightsvARB(size, weights) \
-	(*agl_ctx->disp.weightsv_ARB)(agl_ctx->rend, size, weights)
+	(*(AGL_MACRO_CONTEXT)->disp.weightsv_ARB)(AGL_MACRO_CONTEXT_RENDERER, size, weights)
 
 #define glWeightivARB(size, weights) \
-	(*agl_ctx->disp.weightiv_ARB)(agl_ctx->rend, size, weights)
+	(*(AGL_MACRO_CONTEXT)->disp.weightiv_ARB)(AGL_MACRO_CONTEXT_RENDERER, size, weights)
 
 #define glWeightfvARB(size, weights) \
-	(*agl_ctx->disp.weightfv_ARB)(agl_ctx->rend, size, weights)
+	(*(AGL_MACRO_CONTEXT)->disp.weightfv_ARB)(AGL_MACRO_CONTEXT_RENDERER, size, weights)
 
 #define glWeightdvARB(size, weights) \
-	(*agl_ctx->disp.weightdv_ARB)(agl_ctx->rend, size, weights)
+	(*(AGL_MACRO_CONTEXT)->disp.weightdv_ARB)(AGL_MACRO_CONTEXT_RENDERER, size, weights)
 
 #define glWeightubvARB(size, weights) \
-	(*agl_ctx->disp.weightubv_ARB)(agl_ctx->rend, size, weights)
+	(*(AGL_MACRO_CONTEXT)->disp.weightubv_ARB)(AGL_MACRO_CONTEXT_RENDERER, size, weights)
 
 #define glWeightusvARB(size, weights) \
-	(*agl_ctx->disp.weightusv_ARB)(agl_ctx->rend, size, weights)
+	(*(AGL_MACRO_CONTEXT)->disp.weightusv_ARB)(AGL_MACRO_CONTEXT_RENDERER, size, weights)
 
 #define glWeightuivARB(size, weights) \
-	(*agl_ctx->disp.weightuiv_ARB)(agl_ctx->rend, size, weights)
+	(*(AGL_MACRO_CONTEXT)->disp.weightuiv_ARB)(AGL_MACRO_CONTEXT_RENDERER, size, weights)
 
 #define glWeightPointerARB(size, type, stride, pointer) \
-	(*agl_ctx->disp.weight_pointer_ARB)(agl_ctx->rend, size, type, stride, pointer)
+	(*(AGL_MACRO_CONTEXT)->disp.weight_pointer_ARB)(AGL_MACRO_CONTEXT_RENDERER, size, type, stride, pointer)
 
 #define glVertexBlendARB(count) \
-	(*agl_ctx->disp.vertex_blend_ARB)(agl_ctx->rend, count)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_blend_ARB)(AGL_MACRO_CONTEXT_RENDERER, count)
 
 /* GL_ARB_multitexture */
 #define glClientActiveTextureARB glClientActiveTexture
@@ -1810,152 +2123,155 @@
 
 /* GL_ARB_shader_objects */
 #define glDeleteObjectARB(obj) \
-	(*agl_ctx->disp.delete_object_ARB)(agl_ctx->rend, obj)
+	(*(AGL_MACRO_CONTEXT)->disp.delete_object_ARB)(AGL_MACRO_CONTEXT_RENDERER, obj)
 
 #define glGetHandleARB(pname) \
-	(*agl_ctx->disp.get_handle_ARB)(agl_ctx->rend, pname)
+	(*(AGL_MACRO_CONTEXT)->disp.get_handle_ARB)(AGL_MACRO_CONTEXT_RENDERER, pname)
 
 #define glDetachObjectARB(container, attached) \
-	(*agl_ctx->disp.detach_object_ARB)(agl_ctx->rend, container, attached)
+	(*(AGL_MACRO_CONTEXT)->disp.detach_object_ARB)(AGL_MACRO_CONTEXT_RENDERER, container, attached)
 
 #define glCreateShaderObjectARB(shader) \
-	(*agl_ctx->disp.create_shader_object_ARB)(agl_ctx->rend, shader)
+	(*(AGL_MACRO_CONTEXT)->disp.create_shader_object_ARB)(AGL_MACRO_CONTEXT_RENDERER, shader)
 
 #define glShaderSourceARB(shader, count, string, length) \
-	(*agl_ctx->disp.shader_source_ARB)(agl_ctx->rend, shader, count, string, length)
+	(*(AGL_MACRO_CONTEXT)->disp.shader_source_ARB)(AGL_MACRO_CONTEXT_RENDERER, shader, count, string, length)
 
 #define glCompileShaderARB(shader) \
-	(*agl_ctx->disp.compile_shader_ARB)(agl_ctx->rend, shader)
+	(*(AGL_MACRO_CONTEXT)->disp.compile_shader_ARB)(AGL_MACRO_CONTEXT_RENDERER, shader)
 
 #define glCreateProgramObjectARB() \
-	(*agl_ctx->disp.create_program_object_ARB)(agl_ctx->rend)
+	(*(AGL_MACRO_CONTEXT)->disp.create_program_object_ARB)(AGL_MACRO_CONTEXT_RENDERER)
 
 #define glAttachObjectARB(container, object) \
-	(*agl_ctx->disp.attach_object_ARB)(agl_ctx->rend, container, object)
+	(*(AGL_MACRO_CONTEXT)->disp.attach_object_ARB)(AGL_MACRO_CONTEXT_RENDERER, container, object)
 
 #define glLinkProgramARB(program) \
-	(*agl_ctx->disp.link_program_ARB)(agl_ctx->rend, program)
+	(*(AGL_MACRO_CONTEXT)->disp.link_program_ARB)(AGL_MACRO_CONTEXT_RENDERER, program)
 
 #define glUseProgramObjectARB(program) \
-	(*agl_ctx->disp.use_program_object_ARB)(agl_ctx->rend, program)
+	(*(AGL_MACRO_CONTEXT)->disp.use_program_object_ARB)(AGL_MACRO_CONTEXT_RENDERER, program)
 
 #define glValidateProgramARB(program) \
-	(*agl_ctx->disp.validate_program_ARB)(agl_ctx->rend, program)
+	(*(AGL_MACRO_CONTEXT)->disp.validate_program_ARB)(AGL_MACRO_CONTEXT_RENDERER, program)
 
 #define glUniform1fARB(location, v0) \
-	(*agl_ctx->disp.uniform1f_ARB)(agl_ctx->rend, location, v0)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform1f_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, v0)
 
 #define glUniform2fARB(location, v0, v1) \
-	(*agl_ctx->disp.uniform2f_ARB)(agl_ctx->rend, location, v0, v1)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform2f_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, v0, v1)
 
 #define glUniform3fARB(location, v0, v1, v2) \
-	(*agl_ctx->disp.uniform3f_ARB)(agl_ctx->rend, location, v0, v1, v2)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform3f_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, v0, v1, v2)
 
 #define glUniform4fARB(location, v0, v1, v2, v3) \
-	(*agl_ctx->disp.uniform4f_ARB)(agl_ctx->rend, location, v0, v1, v2, v3)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform4f_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, v0, v1, v2, v3)
 
 #define glUniform1iARB(location, v0) \
-	(*agl_ctx->disp.uniform1i_ARB)(agl_ctx->rend, location, v0)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform1i_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, v0)
 
 #define glUniform2iARB(location, v0, v1) \
-	(*agl_ctx->disp.uniform2i_ARB)(agl_ctx->rend, location, v0, v1)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform2i_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, v0, v1)
 
 #define glUniform3iARB(location, v0, v1, v2) \
-	(*agl_ctx->disp.uniform3i_ARB)(agl_ctx->rend, location, v0, v1, v2)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform3i_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, v0, v1, v2)
 
 #define glUniform4iARB(location, v0, v1, v2, v3) \
-	(*agl_ctx->disp.uniform4i_ARB)(agl_ctx->rend, location, v0, v1, v2, v3)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform4i_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, v0, v1, v2, v3)
 
 #define glUniform1fvARB(location, count, value) \
-	(*agl_ctx->disp.uniform1fv_ARB)(agl_ctx->rend, location, count, value)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform1fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, value)
 
 #define glUniform2fvARB(location, count, value) \
-	(*agl_ctx->disp.uniform2fv_ARB)(agl_ctx->rend, location, count, value)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform2fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, value)
 
 #define glUniform3fvARB(location, count, value) \
-	(*agl_ctx->disp.uniform3fv_ARB)(agl_ctx->rend, location, count, value)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform3fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, value)
 
 #define glUniform4fvARB(location, count, value) \
-	(*agl_ctx->disp.uniform4fv_ARB)(agl_ctx->rend, location, count, value)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform4fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, value)
 
 #define glUniform1ivARB(location, count, value) \
-	(*agl_ctx->disp.uniform1iv_ARB)(agl_ctx->rend, location, count, value)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform1iv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, value)
 
 #define glUniform2ivARB(location, count, value) \
-	(*agl_ctx->disp.uniform2iv_ARB)(agl_ctx->rend, location, count, value)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform2iv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, value)
 
 #define glUniform3ivARB(location, count, value) \
-	(*agl_ctx->disp.uniform3iv_ARB)(agl_ctx->rend, location, count, value)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform3iv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, value)
 
 #define glUniform4ivARB(location, count, value) \
-	(*agl_ctx->disp.uniform4iv_ARB)(agl_ctx->rend, location, count, value)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform4iv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, value)
 
 #define glUniformMatrix2fvARB(location, count, transpose, value) \
-	(*agl_ctx->disp.uniform_matrix2fv_ARB)(agl_ctx->rend, location, count, transpose, value)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform_matrix2fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, transpose, value)
 
 #define glUniformMatrix3fvARB(location, count, transpose, value) \
-	(*agl_ctx->disp.uniform_matrix3fv_ARB)(agl_ctx->rend, location, count, transpose, value)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform_matrix3fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, transpose, value)
 
 #define glUniformMatrix4fvARB(location, count, transpose, value) \
-	(*agl_ctx->disp.uniform_matrix4fv_ARB)(agl_ctx->rend, location, count, transpose, value)
+	(*(AGL_MACRO_CONTEXT)->disp.uniform_matrix4fv_ARB)(AGL_MACRO_CONTEXT_RENDERER, location, count, transpose, value)
 
 #define glGetObjectParameterfvARB(obj, pname, params) \
-	(*agl_ctx->disp.get_object_parameterfv_ARB)(agl_ctx->rend, obj, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_object_parameterfv_ARB)(AGL_MACRO_CONTEXT_RENDERER, obj, pname, params)
 
 #define glGetObjectParameterivARB(obj, pname, params) \
-	(*agl_ctx->disp.get_object_parameteriv_ARB)(agl_ctx->rend, obj, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_object_parameteriv_ARB)(AGL_MACRO_CONTEXT_RENDERER, obj, pname, params)
 
 #define glGetInfoLogARB(obj, max, length, info) \
-	(*agl_ctx->disp.get_info_log_ARB)(agl_ctx->rend, obj, max, length, info)
+	(*(AGL_MACRO_CONTEXT)->disp.get_info_log_ARB)(AGL_MACRO_CONTEXT_RENDERER, obj, max, length, info)
 
 #define glGetAttachedObjectsARB(container, max, count, obj) \
-	(*agl_ctx->disp.get_attached_objects_ARB)(agl_ctx->rend, container, max, count, obj)
+	(*(AGL_MACRO_CONTEXT)->disp.get_attached_objects_ARB)(AGL_MACRO_CONTEXT_RENDERER, container, max, count, obj)
 
 #define glGetUniformLocationARB(program, name) \
-	(*agl_ctx->disp.get_uniform_location_ARB)(agl_ctx->rend, program, name)
+	(*(AGL_MACRO_CONTEXT)->disp.get_uniform_location_ARB)(AGL_MACRO_CONTEXT_RENDERER, program, name)
 
 #define glGetActiveUniformARB(program, index, max, length, size, type, name) \
-	(*agl_ctx->disp.get_active_uniform_ARB)(agl_ctx->rend, program, index, max, length, size, type, name)
+	(*(AGL_MACRO_CONTEXT)->disp.get_active_uniform_ARB)(AGL_MACRO_CONTEXT_RENDERER, program, index, max, length, size, type, name)
 
 #define glGetUniformfvARB(program, location, params) \
-	(*agl_ctx->disp.get_uniformfv_ARB)(agl_ctx->rend, program, location, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_uniformfv_ARB)(AGL_MACRO_CONTEXT_RENDERER, program, location, params)
 
 #define glGetUniformivARB(program, location, params) \
-	(*agl_ctx->disp.get_uniformiv_ARB)(agl_ctx->rend, program, location, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_uniformiv_ARB)(AGL_MACRO_CONTEXT_RENDERER, program, location, params)
 
 #define glGetShaderSourceARB(obj, max, length, source) \
-	(*agl_ctx->disp.get_shader_source_ARB)(agl_ctx->rend, obj, max, length, source)
+	(*(AGL_MACRO_CONTEXT)->disp.get_shader_source_ARB)(AGL_MACRO_CONTEXT_RENDERER, obj, max, length, source)
 
 /* GL_ARB_vertex_shader */
 #define glBindAttribLocationARB(program, index, name) \
-	(*agl_ctx->disp.bind_attrib_location_ARB)(agl_ctx->rend, program, index, name)
+	(*(AGL_MACRO_CONTEXT)->disp.bind_attrib_location_ARB)(AGL_MACRO_CONTEXT_RENDERER, program, index, name)
 
 #define glGetActiveAttribARB(program, index, max, length, size, type, name) \
-	(*agl_ctx->disp.get_active_attrib_ARB)(agl_ctx->rend, program, index, max, length, size, type, name)
+	(*(AGL_MACRO_CONTEXT)->disp.get_active_attrib_ARB)(AGL_MACRO_CONTEXT_RENDERER, program, index, max, length, size, type, name)
 
 #define glGetAttribLocationARB(program, name) \
-	(*agl_ctx->disp.get_attrib_location_ARB)(agl_ctx->rend, program, name)
-
+	(*(AGL_MACRO_CONTEXT)->disp.get_attrib_location_ARB)(AGL_MACRO_CONTEXT_RENDERER, program, name)
+	
+#define glDrawBuffersARB(n, bufs)\
+	(*(AGL_MACRO_CONTEXT)->disp.draw_buffers_ARB)(AGL_MACRO_CONTEXT_RENDERER, n, bufs)
+	
 /*********** EXT Extensions *************************************************/
 
 /* GL_EXT_compiled_vertex_array */
 #define glLockArraysEXT(first, count) \
-	(*agl_ctx->disp.lock_arrays_EXT)(agl_ctx->rend, first, count)
+	(*(AGL_MACRO_CONTEXT)->disp.lock_arrays_EXT)(AGL_MACRO_CONTEXT_RENDERER, first, count)
 
 #define glUnlockArraysEXT() \
-	(*agl_ctx->disp.unlock_arrays_EXT)(agl_ctx->rend)
+	(*(AGL_MACRO_CONTEXT)->disp.unlock_arrays_EXT)(AGL_MACRO_CONTEXT_RENDERER)
 
 /* GL_EXT_stencil_two_side */
 #define glActiveStencilFaceEXT(face) \
-	(*agl_ctx->disp.active_stencil_face_EXT)(agl_ctx->rend, face)
+	(*(AGL_MACRO_CONTEXT)->disp.active_stencil_face_EXT)(AGL_MACRO_CONTEXT_RENDERER, face)
 
 /* GL_EXT_depth_bounds_test */
 #define glDepthBoundsEXT(zmin, zmax) \
-	(*agl_ctx->disp.depth_bounds_EXT)(agl_ctx->rend, zmin, zmax)
+	(*(AGL_MACRO_CONTEXT)->disp.depth_bounds_EXT)(AGL_MACRO_CONTEXT_RENDERER, zmin, zmax)
 
 /* GL_EXT_blend_equation_separate */
 #define glBlendEquationSeparateEXT(modeRGB, modeAlpha) \
-	(*agl_ctx->disp.blend_equation_separate_EXT)(agl_ctx->rend, modeRGB, modeAlpha)
+	(*(AGL_MACRO_CONTEXT)->disp.blend_equation_separate_EXT)(AGL_MACRO_CONTEXT_RENDERER, modeRGB, modeAlpha)
 
 /* GL_EXT_paletted_texture */
 #define glColorTableEXT glColorTable
@@ -2006,124 +2322,185 @@
 /* GL_EXT_blend_minmax */
 #define glBlendEquationEXT glBlendEquation
 
+#if 0
+
+/* GL_EXT_framebuffer_object */
+#define glIsRenderbufferEXT(renderbuffer) \
+	(*(AGL_MACRO_CONTEXT)->disp.is_renderbuffer_EXT)(AGL_MACRO_CONTEXT_RENDERER, renderbuffer)
+
+#define glBindRenderbufferEXT(target, renderbuffer) \
+	(*(AGL_MACRO_CONTEXT)->disp.bind_renderbuffer_EXT)(AGL_MACRO_CONTEXT_RENDERER, target, renderbuffer)
+
+#define glDeleteRenderbuffersEXT(n, renderbuffers) \
+	(*(AGL_MACRO_CONTEXT)->disp.delete_renderbuffers_EXT)(AGL_MACRO_CONTEXT_RENDERER, n, renderbuffers)
+
+#define glGenRenderbuffersEXT(n, renderbuffers) \
+	(*(AGL_MACRO_CONTEXT)->disp.gen_renderbuffers_EXT)(AGL_MACRO_CONTEXT_RENDERER, n, renderbuffers)
+
+#define glRenderbufferStorageEXT(target, internalformat, width, height) \
+	(*(AGL_MACRO_CONTEXT)->disp.renderbuffer_storage_EXT)(AGL_MACRO_CONTEXT_RENDERER, target, internalformat, width, height)
+
+#define glGetRenderbufferParameterivEXT(target, pname, params) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_renderbuffer_parameteriv_EXT)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
+
+#define glIsFramebufferEXT(framebuffer) \
+	(*(AGL_MACRO_CONTEXT)->disp.is_framebuffer_EXT)(AGL_MACRO_CONTEXT_RENDERER, framebuffer)
+
+#define glBindFramebufferEXT(target, framebuffer) \
+	(*(AGL_MACRO_CONTEXT)->disp.bind_framebuffer_EXT)(AGL_MACRO_CONTEXT_RENDERER, target, framebuffer)
+
+#define glDeleteFramebuffersEXT(n, framebuffers) \
+	(*(AGL_MACRO_CONTEXT)->disp.delete_framebuffers_EXT)(AGL_MACRO_CONTEXT_RENDERER, n, framebuffers)
+
+#define glGenFramebuffersEXT(n, framebuffers) \
+	(*(AGL_MACRO_CONTEXT)->disp.gen_framebuffers_EXT)(AGL_MACRO_CONTEXT_RENDERER, n, framebuffers)
+
+#define glCheckFramebufferStatusEXT(target) \
+	(*(AGL_MACRO_CONTEXT)->disp.check_framebuffer_status_EXT)(AGL_MACRO_CONTEXT_RENDERER, target)
+
+#define glFramebufferTexture1DEXT(target, attachment, textarget, texture, level) \
+	(*(AGL_MACRO_CONTEXT)->disp.framebuffer_texture1D_EXT)(AGL_MACRO_CONTEXT_RENDERER, target, attachment, textarget, texture, level)
+
+#define glFramebufferTexture2DEXT(target, attachment, textarget, texture, level) \
+	(*(AGL_MACRO_CONTEXT)->disp.framebuffer_texture2D_EXT)(AGL_MACRO_CONTEXT_RENDERER, target, attachment, textarget, texture, level)
+
+#define glFramebufferTexture3DEXT(target, attachment, textarget, texture, level, zoffset) \
+	(*(AGL_MACRO_CONTEXT)->disp.framebuffer_texture3D_EXT)(AGL_MACRO_CONTEXT_RENDERER, target, attachment, textarget, texture, level, zoffset)
+
+#define glFramebufferRenderbufferEXT(target, attachment, renderbuffertarget, renderbuffer) \
+	(*(AGL_MACRO_CONTEXT)->disp.framebuffer_renderbuffer_EXT)(AGL_MACRO_CONTEXT_RENDERER, target, attachment, renderbuffertarget, renderbuffer)
+
+#define glGetFramebufferAttachmentParameterivEXT(target, attachment, pname, params) \
+	(*(AGL_MACRO_CONTEXT)->disp.get_framebuffer_attachment_parameteriv_EXT)(AGL_MACRO_CONTEXT_RENDERER, target, attachment, pname, params)
+
+#define glGenerateMipmapEXT(target) \
+	(*(AGL_MACRO_CONTEXT)->disp.generate_mipmap_EXT)(AGL_MACRO_CONTEXT_RENDERER, target)
+	
+#endif
 /*********** APPLE Extensions ***********************************************/
 
 /* GL_APPLE_vertex_program_evaluators */
 #define glEnableVertexAttribAPPLE(index, pname) \
-	(*agl_ctx->disp.enable_vertex_attrib_ARB)(agl_ctx->rend, index, pname)
+	(*(AGL_MACRO_CONTEXT)->disp.enable_vertex_attrib_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, pname)
 
 #define glDisableVertexAttribAPPLE(index, pname) \
-	(*agl_ctx->disp.disable_vertex_attrib_ARB)(agl_ctx->rend, index, pname)
+	(*(AGL_MACRO_CONTEXT)->disp.disable_vertex_attrib_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, pname)
 
 #define glIsVertexAttribEnabledAPPLE(index, pname) \
-	(*agl_ctx->disp.is_vertex_attrib_enabled_ARB)(agl_ctx->rend, index, pname)
+	(*(AGL_MACRO_CONTEXT)->disp.is_vertex_attrib_enabled_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, pname)
 
 #define glMapVertexAttrib1dAPPLE(index, size, u1, u2, stride, order, points) \
-	(*agl_ctx->disp.map_vertex_attrib1d_ARB)(agl_ctx->rend, index, size, u1, u2, stride, order, points)
+	(*(AGL_MACRO_CONTEXT)->disp.map_vertex_attrib1d_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, size, u1, u2, stride, order, points)
 
 #define glMapVertexAttrib1fAPPLE(index, size, u1, u2, stride, order, points) \
-	(*agl_ctx->disp.map_vertex_attrib1f_ARB)(agl_ctx->rend, index, size, u1, u2, stride, order, points)
+	(*(AGL_MACRO_CONTEXT)->disp.map_vertex_attrib1f_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, size, u1, u2, stride, order, points)
 
 #define glMapVertexAttrib2dAPPLE(index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) \
-	(*agl_ctx->disp.map_vertex_attrib2d_ARB)(agl_ctx->rend, index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)
+	(*(AGL_MACRO_CONTEXT)->disp.map_vertex_attrib2d_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)
 
 #define glMapVertexAttrib2fAPPLE(index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) \
-	(*agl_ctx->disp.map_vertex_attrib2f_ARB)(agl_ctx->rend, index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)
+	(*(AGL_MACRO_CONTEXT)->disp.map_vertex_attrib2f_ARB)(AGL_MACRO_CONTEXT_RENDERER, index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)
 
 /* GL_APPLE_texture_range */
 #define glTextureRangeAPPLE(target, length, pointer) \
-	(*agl_ctx->disp.texture_range_APPLE)(agl_ctx->rend, target, length, pointer)
+	(*(AGL_MACRO_CONTEXT)->disp.texture_range_APPLE)(AGL_MACRO_CONTEXT_RENDERER, target, length, pointer)
 
 #define glGetTexParameterPointervAPPLE(target, pname, params) \
-	(*agl_ctx->disp.get_tex_parameter_pointerv_APPLE)(agl_ctx->rend, target, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_tex_parameter_pointerv_APPLE)(AGL_MACRO_CONTEXT_RENDERER, target, pname, params)
 
 /* GL_APPLE_fence */
 #define glGenFencesAPPLE(n, fences) \
-	(*agl_ctx->disp.gen_fences_APPLE)(agl_ctx->rend, n, fences)
+	(*(AGL_MACRO_CONTEXT)->disp.gen_fences_APPLE)(AGL_MACRO_CONTEXT_RENDERER, n, fences)
 
 #define glDeleteFencesAPPLE(n, fences) \
-	(*agl_ctx->disp.delete_fences_APPLE)(agl_ctx->rend, n, fences)
+	(*(AGL_MACRO_CONTEXT)->disp.delete_fences_APPLE)(AGL_MACRO_CONTEXT_RENDERER, n, fences)
 
 #define glSetFenceAPPLE(fence) \
-	(*agl_ctx->disp.set_fence_APPLE)(agl_ctx->rend, fence)
+	(*(AGL_MACRO_CONTEXT)->disp.set_fence_APPLE)(AGL_MACRO_CONTEXT_RENDERER, fence)
 
 #define glIsFenceAPPLE(fence) \
-	(*agl_ctx->disp.is_fence_APPLE)(agl_ctx->rend, fence)
+	(*(AGL_MACRO_CONTEXT)->disp.is_fence_APPLE)(AGL_MACRO_CONTEXT_RENDERER, fence)
 
 #define glTestFenceAPPLE(fence) \
-	(*agl_ctx->disp.test_fence_APPLE)(agl_ctx->rend, fence)
+	(*(AGL_MACRO_CONTEXT)->disp.test_fence_APPLE)(AGL_MACRO_CONTEXT_RENDERER, fence)
 
 #define glFinishFenceAPPLE(fence) \
-	(*agl_ctx->disp.finish_fence_APPLE)(agl_ctx->rend, fence)
+	(*(AGL_MACRO_CONTEXT)->disp.finish_fence_APPLE)(AGL_MACRO_CONTEXT_RENDERER, fence)
 
 #define glTestObjectAPPLE(object, name) \
-	(*agl_ctx->disp.test_object_APPLE)(agl_ctx->rend, object, name)
+	(*(AGL_MACRO_CONTEXT)->disp.test_object_APPLE)(AGL_MACRO_CONTEXT_RENDERER, object, name)
 
 #define glFinishObjectAPPLE(object, name) \
-	(*agl_ctx->disp.finish_object_APPLE)(agl_ctx->rend, object, name)
+	(*(AGL_MACRO_CONTEXT)->disp.finish_object_APPLE)(AGL_MACRO_CONTEXT_RENDERER, object, name)
 
 /* GL_APPLE_vertex_array_range */
 #define glVertexArrayRangeAPPLE(length, pointer) \
-	(*agl_ctx->disp.vertex_array_range_EXT)(agl_ctx->rend, length, pointer)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_array_range_EXT)(AGL_MACRO_CONTEXT_RENDERER, length, pointer)
 
 #define glFlushVertexArrayRangeAPPLE(length, pointer) \
-	(*agl_ctx->disp.flush_vertex_array_range_EXT)(agl_ctx->rend, length, pointer)
+	(*(AGL_MACRO_CONTEXT)->disp.flush_vertex_array_range_EXT)(AGL_MACRO_CONTEXT_RENDERER, length, pointer)
 
 #define glVertexArrayParameteriAPPLE(pname, param) \
-	(*agl_ctx->disp.vertex_array_parameteri_EXT)(agl_ctx->rend, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.vertex_array_parameteri_EXT)(AGL_MACRO_CONTEXT_RENDERER, pname, param)
 
 /* GL_APPLE_vertex_array_object */
 #define glBindVertexArrayAPPLE(id) \
-	(*agl_ctx->disp.bind_vertex_array_EXT)(agl_ctx->rend, id)
+	(*(AGL_MACRO_CONTEXT)->disp.bind_vertex_array_EXT)(AGL_MACRO_CONTEXT_RENDERER, id)
 
 #define glDeleteVertexArraysAPPLE(n, ids) \
-	(*agl_ctx->disp.delete_vertex_arrays_EXT)(agl_ctx->rend, n, ids)
+	(*(AGL_MACRO_CONTEXT)->disp.delete_vertex_arrays_EXT)(AGL_MACRO_CONTEXT_RENDERER, n, ids)
 
 #define glGenVertexArraysAPPLE(n, ids) \
-	(*agl_ctx->disp.gen_vertex_arrays_EXT)(agl_ctx->rend, n, ids)
+	(*(AGL_MACRO_CONTEXT)->disp.gen_vertex_arrays_EXT)(AGL_MACRO_CONTEXT_RENDERER, n, ids)
 
 #define glIsVertexArrayAPPLE(id) \
-	(*agl_ctx->disp.is_vertex_array_EXT)(agl_ctx->rend, id)
+	(*(AGL_MACRO_CONTEXT)->disp.is_vertex_array_EXT)(AGL_MACRO_CONTEXT_RENDERER, id)
 
 /* GL_APPLE_element_array */
 #define glElementPointerAPPLE(type, pointer) \
-	(*agl_ctx->disp.element_pointer_APPLE)(agl_ctx->rend, type, pointer)
+	(*(AGL_MACRO_CONTEXT)->disp.element_pointer_APPLE)(AGL_MACRO_CONTEXT_RENDERER, type, pointer)
 
 #define glDrawElementArrayAPPLE(mode, first, count) \
-	(*agl_ctx->disp.draw_element_array_APPLE)(agl_ctx->rend, mode, first, count)
+	(*(AGL_MACRO_CONTEXT)->disp.draw_element_array_APPLE)(AGL_MACRO_CONTEXT_RENDERER, mode, first, count)
 
 #define glDrawRangeElementArrayAPPLE(mode, start, end, first, count) \
-	(*agl_ctx->disp.draw_range_element_array_APPLE)(agl_ctx->rend, mode, start, end, first, count)
+	(*(AGL_MACRO_CONTEXT)->disp.draw_range_element_array_APPLE)(AGL_MACRO_CONTEXT_RENDERER, mode, start, end, first, count)
+
+#define glMultiDrawElementArrayAPPLE(mode, first, count, primcount) \
+	(*(AGL_MACRO_CONTEXT)->disp.multi_draw_element_array_APPLE)(AGL_MACRO_CONTEXT_RENDERER, mode, first, count, primcount)
+
+#define glMultiDrawRangeElementArrayAPPLE(mode, start, end, first, count, primcount) \
+	(*(AGL_MACRO_CONTEXT)->disp.multi_draw_range_element_array_APPLE)(AGL_MACRO_CONTEXT_RENDERER, mode, start, end, first, count, primcount)
 
 /* GL_APPLE_flush_render */
 #define glFlushRenderAPPLE() \
-	(*agl_ctx->disp.flush_render_APPLE)(agl_ctx->rend)
+	(*(AGL_MACRO_CONTEXT)->disp.flush_render_APPLE)(AGL_MACRO_CONTEXT_RENDERER)
 
 #define glFinishRenderAPPLE() \
-	(*agl_ctx->disp.finish_render_APPLE)(agl_ctx->rend)
+	(*(AGL_MACRO_CONTEXT)->disp.finish_render_APPLE)(AGL_MACRO_CONTEXT_RENDERER)
 
 #define glSwapAPPLE() \
-	(*agl_ctx->disp.swap_APPLE)(agl_ctx->rend)
+	(*(AGL_MACRO_CONTEXT)->disp.swap_APPLE)(AGL_MACRO_CONTEXT_RENDERER)
 
 
 /*********** ATI Extensions *************************************************/
 
 /* GL_ATI_separate_stencil */
 #define glStencilOpSeparateATI(face, sfail, dpfail, dppass) \
-	(*agl_ctx->disp.stencil_op_separate_ATI)(agl_ctx->rend, face, sfail, dpfail, dppass)
+	(*(AGL_MACRO_CONTEXT)->disp.stencil_op_separate_ATI)(AGL_MACRO_CONTEXT_RENDERER, face, sfail, dpfail, dppass)
 
 #define glStencilFuncSeparateATI(frontfunc, backfunc, ref, mask) \
-	(*agl_ctx->disp.stencil_func_separate_ATI)(agl_ctx->rend, frontfunc, backfunc, ref, mask)
+	(*(AGL_MACRO_CONTEXT)->disp.stencil_func_separate_ATI)(AGL_MACRO_CONTEXT_RENDERER, frontfunc, backfunc, ref, mask)
 
 /* GL_ATI_blend_equation_separate */
 #define glBlendEquationSeparateATI glBlendEquationSeparateEXT
 
 /* GL_ATI_pn_triangles */
 #define glPNTrianglesiATI(pname, param) \
-	(*agl_ctx->disp.pn_trianglesi_ATI)(agl_ctx->rend, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.pn_trianglesi_ATI)(AGL_MACRO_CONTEXT_RENDERER, pname, param)
 
 #define glPNTrianglesfATI(pname, param) \
-	(*agl_ctx->disp.pn_trianglesf_ATI)(agl_ctx->rend, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.pn_trianglesf_ATI)(AGL_MACRO_CONTEXT_RENDERER, pname, param)
 
 /* GL_ATIX_pn_triangles */
 #define glPNTrianglesiATIX glPNTrianglesiATI
@@ -2133,57 +2510,57 @@
 
 /* GL_NV_point_sprite */
 #define glPointParameteriNV(pname, param) \
-	(*agl_ctx->disp.point_parameteri)(agl_ctx->rend, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.point_parameteri)(AGL_MACRO_CONTEXT_RENDERER, pname, param)
 
 #define glPointParameterivNV(pname, params) \
-	(*agl_ctx->disp.point_parameteriv)(agl_ctx->rend, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.point_parameteriv)(AGL_MACRO_CONTEXT_RENDERER, pname, params)
 
 /* GL_NV_register_combiners */
 #define glCombinerParameterfvNV(pname, params) \
-	(*agl_ctx->disp.combiner_parameterfv_NV)(agl_ctx->rend, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.combiner_parameterfv_NV)(AGL_MACRO_CONTEXT_RENDERER, pname, params)
 
 #define glCombinerParameterfNV(pname, param) \
-	(*agl_ctx->disp.combiner_parameterf_NV)(agl_ctx->rend, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.combiner_parameterf_NV)(AGL_MACRO_CONTEXT_RENDERER, pname, param)
 
 #define glCombinerParameterivNV(pname, params) \
-	(*agl_ctx->disp.combiner_parameteriv_NV)(agl_ctx->rend, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.combiner_parameteriv_NV)(AGL_MACRO_CONTEXT_RENDERER, pname, params)
 
 #define glCombinerParameteriNV(pname, param) \
-	(*agl_ctx->disp.combiner_parameteri_NV)(agl_ctx->rend, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.combiner_parameteri_NV)(AGL_MACRO_CONTEXT_RENDERER, pname, param)
 
 #define glCombinerInputNV(stage, portion, variable, input, mapping ,componentUsage) \
-	(*agl_ctx->disp.combiner_input_NV)(agl_ctx->rend, stage, portion, variable, input, mapping ,componentUsage)
+	(*(AGL_MACRO_CONTEXT)->disp.combiner_input_NV)(AGL_MACRO_CONTEXT_RENDERER, stage, portion, variable, input, mapping ,componentUsage)
 
 #define glCombinerOutputNV(stage, portion, abOutput, cdOutput, sumOutput, scale, bias, abDotProduct, cdDoProduct, muxSum) \
-	(*agl_ctx->disp.combiner_output_NV)(agl_ctx->rend, stage, portion, abOutput, cdOutput, sumOutput, scale, bias, abDotProduct, cdDoProduct, muxSum)
+	(*(AGL_MACRO_CONTEXT)->disp.combiner_output_NV)(AGL_MACRO_CONTEXT_RENDERER, stage, portion, abOutput, cdOutput, sumOutput, scale, bias, abDotProduct, cdDoProduct, muxSum)
 
 #define glFinalCombinerInputNV(variable, input, mapping, componentUsage) \
-	(*agl_ctx->disp.final_combiner_input_NV)(agl_ctx->rend, variable, input, mapping, componentUsage)
+	(*(AGL_MACRO_CONTEXT)->disp.final_combiner_input_NV)(AGL_MACRO_CONTEXT_RENDERER, variable, input, mapping, componentUsage)
 
 #define glGetCombinerInputParameterfvNV(stage, portion, variable, pname, params) \
-	(*agl_ctx->disp.get_combiner_input_parameterfv_NV)(agl_ctx->rend, stage, portion, variable, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_combiner_input_parameterfv_NV)(AGL_MACRO_CONTEXT_RENDERER, stage, portion, variable, pname, params)
 
 #define glGetCombinerInputParameterivNV(stage, portion, variable, pname, params) \
-	(*agl_ctx->disp.get_combiner_input_parameteriv_NV)(agl_ctx->rend, stage, portion, variable, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_combiner_input_parameteriv_NV)(AGL_MACRO_CONTEXT_RENDERER, stage, portion, variable, pname, params)
 
 #define glGetCombinerOutputParameterfvNV(stage, portion, pname, params) \
-	(*agl_ctx->disp.get_combiner_output_parameterfv_NV)(agl_ctx->rend, stage, portion, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_combiner_output_parameterfv_NV)(AGL_MACRO_CONTEXT_RENDERER, stage, portion, pname, params)
 
 #define glGetCombinerOutputParameterivNV(stage, portion, pname, params) \
-	(*agl_ctx->disp.get_combiner_output_parameteriv_NV)(agl_ctx->rend, stage, portion, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_combiner_output_parameteriv_NV)(AGL_MACRO_CONTEXT_RENDERER, stage, portion, pname, params)
 
 #define glGetFinalCombinerInputParameterfvNV(variable, pname, params) \
-	(*agl_ctx->disp.get_final_combiner_input_parameterfv_NV)(agl_ctx->rend, variable, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_final_combiner_input_parameterfv_NV)(AGL_MACRO_CONTEXT_RENDERER, variable, pname, params)
 
 #define glGetFinalCombinerInputParameterfvNV(variable, pname, params) \
-	(*agl_ctx->disp.get_final_combiner_input_parameterfv_NV)(agl_ctx->rend, variable, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.get_final_combiner_input_parameterfv_NV)(AGL_MACRO_CONTEXT_RENDERER, variable, pname, params)
 
 /* GL_NV_register_combiners2 */
 #define glCombinerStageParameterfvNV(stage, pname, params) \
-	(*agl_ctx->disp.combiner_stage_parameterfv_NV)(agl_ctx->rend, stage, pname, params)
+	(*(AGL_MACRO_CONTEXT)->disp.combiner_stage_parameterfv_NV)(AGL_MACRO_CONTEXT_RENDERER, stage, pname, params)
 
 #define glGetCombinerStageParameterfvNV(stage, pname, param) \
-	(*agl_ctx->disp.get_combiner_stage_parameterfv_NV)(agl_ctx->rend, stage, pname, param)
+	(*(AGL_MACRO_CONTEXT)->disp.get_combiner_stage_parameterfv_NV)(AGL_MACRO_CONTEXT_RENDERER, stage, pname, param)
 
 #endif /* _AGLMACRO_H */
 

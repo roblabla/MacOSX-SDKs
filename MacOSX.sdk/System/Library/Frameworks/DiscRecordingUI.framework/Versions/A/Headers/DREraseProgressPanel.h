@@ -23,12 +23,12 @@
 					for begining the erase. 
 					
 					The erase is begun and a progress panel is displayed on screen 
-					by calling @link //apple_ref/occ/instm/DREraseProgressPanel/beginProgressSheetForErase%58modalForWindow%58 beginProgressSheetForErase:modalForWindow: @/link 
+					by calling @link //apple_ref/occ/instm/DREraseProgressPanel/beginProgressSheetForErase:modalForWindow: beginProgressSheetForErase:modalForWindow: @/link 
 					if a sheet interface is desired, or 
-					@link //apple_ref/occ/instm/DREraseProgressPanel/beginProgressPanelForErase%58 beginProgressPanelForErase:  @/link for a non-modal panel.
+					@link //apple_ref/occ/instm/DREraseProgressPanel/beginProgressPanelForErase: beginProgressPanelForErase:  @/link for a non-modal panel.
 
 					A @link //apple_ref/occ/cl/DREraseProgressPanel DREraseProgressPanel @/link sends a 
-					@link //apple_ref/occ/instm/NSObject(DREraseProgressPanelDelegateMethods)/eraseProgressPanel%58eraseDidFinish%58 eraseProgressPanel:eraseDidFinish: @/link message to it's delegate 
+					@link //apple_ref/occ/instm/NSObject/eraseProgressPanel:eraseDidFinish: eraseProgressPanel:eraseDidFinish: @/link message to it's delegate 
 					when the erase completes. This method allows the delegate 
 					to take over end-of-erase handling from the erase progress 
 					panel to customize error dialogs or user notification.
@@ -69,12 +69,12 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 					for begining the erase. 
 					
 					The erase is begun and a progress panel is displayed on screen 
-					by calling @link //apple_ref/occ/instm/DREraseProgressPanel/beginProgressSheetForErase%58modalForWindow%58 beginProgressSheetForErase:modalForWindow: @/link 
+					by calling @link //apple_ref/occ/instm/DREraseProgressPanel/beginProgressSheetForErase:modalForWindow: beginProgressSheetForErase:modalForWindow: @/link 
 					if a sheet interface is desired, or 
-					@link //apple_ref/occ/instm/DREraseProgressPanel/beginProgressPanelForErase%58 beginProgressPanelForErase:  @/link for a non-modal panel.
+					@link //apple_ref/occ/instm/DREraseProgressPanel/beginProgressPanelForErase: beginProgressPanelForErase:  @/link for a non-modal panel.
 
 					A DREraseProgressPanel sends a 
-					@link //apple_ref/occ/instm/NSObject(DREraseProgressPanelDelegateMethods)/eraseProgressPanel%58eraseDidFinish%58 eraseProgressPanel:eraseDidFinish: @/link message to it's delegate 
+					@link //apple_ref/occ/instm/NSObject/eraseProgressPanel:eraseDidFinish: eraseProgressPanel:eraseDidFinish: @/link message to it's delegate 
 					when the erase completes. This method allows the delegate 
 					to take over end-of-erase handling from the erase progress 
 					panel to customize error dialogs or user notification.

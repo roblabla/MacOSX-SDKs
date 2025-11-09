@@ -5,6 +5,12 @@
 /* APPLE LOCAL begin MW compatibility */
 /* Define the maximum values of built-in integral types, if needed.  */
 #ifdef __MWERKS__
+#ifndef __CHAR_BIT__ 
+#define __CHAR_BIT__ 8
+#endif
+#ifndef __SCHAR_MAX__ 
+#define __SCHAR_MAX__ 127
+#endif
 #ifndef __SHRT_MAX__ 
 #define __SHRT_MAX__ 32767
 #endif

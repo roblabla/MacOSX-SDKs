@@ -3,9 +3,9 @@
  
      Contains:   OSErr codes.
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -136,6 +136,10 @@ enum {
   errFSIteratorNotFound         = -1423, /* Passed FSIterator is not an open iterator */
   errFSIteratorNotSupported     = -1424, /* The iterator's flags or container are not supported by this call */
   errFSQuotaExceeded            = -1425, /* The user's quota of disk blocks has been exhausted. */
+  errFSOperationNotSupported    = -1426, /* The attempted operation is not supported */
+  errFSAttributeNotFound        = -1427, /* The requested attribute does not exist */
+  errFSPropertyNotValid         = -1428, /* The requested property is not valid (has not been set yet) */
+  errFSNotEnoughSpaceForOperation = -1429, /* There is not enough disk space to perform the requested operation */
   envNotPresent                 = -5500, /*returned by glue.*/
   envBadVers                    = -5501, /*Version non-positive*/
   envVersTooBig                 = -5502, /*Version bigger than call can handle*/
@@ -1169,6 +1173,11 @@ enum {
   cfragClosureIDErr             = -2829, /* The closure ID was not valid.*/
   cfragAbortClosureErr          = -2830, /* Used by notification handlers to abort a closure.*/
   cfragOutputLengthErr          = -2831, /* An output parameter is too small to hold the value.*/
+  cfragMapFileErr               = -2851, /* A file could not be mapped.*/
+  cfragExecFileRefErr           = -2854, /* Bundle does not have valid executable file.*/
+  cfragStdFolderErr             = -2855, /* Could not find standard CFM folder.*/
+  cfragRsrcForkErr              = -2856, /* Resource fork could not be opened.*/
+  cfragCFragRsrcErr             = -2857, /* 'cfrg' resource could not be loaded.*/
   cfragLastErrCode              = -2899 /* The last value in the range of CFM errors.*/
 };
 
@@ -1460,6 +1469,14 @@ enum {
 enum {
   coreFoundationUnknownErr      = -4960
 };
+
+/* CoreEndian error codes.  These can be returned by Flippers. */
+enum {
+  errCoreEndianDataTooShortForFormat = -4940,
+  errCoreEndianDataTooLongForFormat = -4941,
+  errCoreEndianDataDoesNotMatchFormat = -4942
+};
+
 
 /* ScrapMgr error codes (CarbonLib 1.0 and later)*/
 enum {
@@ -2724,26 +2741,148 @@ enum {
 };
 
 
-/* Control Manager Error Codes */
+
+/*
+ *  Discussion:
+ *    Control Manager Error Codes
+ */
 enum {
+
+  /*
+   * Not exclusively a Control Manager error code. In general, this
+   * return value means a control, window, or menu definition does not
+   * support the message/event that underlies an API call.
+   */
   errMessageNotSupported        = -30580,
+
+  /*
+   * This is returned from GetControlData and SetControlData if the
+   * control doesn't support the tag name and/or part code that is
+   * passed in. It can also be returned from other APIs - like
+   * SetControlFontStyle - which are wrappers around Get/SetControlData.
+   */
   errDataNotSupported           = -30581,
+
+  /*
+   * The control you passed to a focusing API doesn't support focusing.
+   * This error isn't sent on Mac OS X; instead, you're likely to
+   * receive errCouldntSetFocus or eventNotHandledErr.
+   */
   errControlDoesntSupportFocus  = -30582,
+
+  /*
+   * This is a variant of and serves the same purpose as
+   * controlHandleInvalidErr. Various Control Manager APIs will return
+   * this error if one of the passed-in controls is NULL or otherwise
+   * invalid.
+   */
   errUnknownControl             = -30584,
+
+  /*
+   * The focus couldn't be set to a given control or advanced through a
+   * hierarchy of controls. This could be because the control doesn't
+   * support focusing, the control isn't currently embedded in a
+   * window, or there are no focusable controls in the window when you
+   * try to advance the focus.
+   */
   errCouldntSetFocus            = -30585,
+
+  /*
+   * This is returned by GetRootControl before a root control was
+   * created for a given non-compositing window. Alternatively, you
+   * called a Control Manager API such as ClearKeyboardFocus or
+   * AutoEmbedControl that requires a root control, but there is no
+   * root control on the window.
+   */
   errNoRootControl              = -30586,
+
+  /*
+   * This is returned by CreateRootControl on the second and successive
+   * calls for a given window.
+   */
   errRootAlreadyExists          = -30587,
+
+  /*
+   * The ControlPartCode you passed to a Control Manager API is out of
+   * range, invalid, or otherwise unsupported.
+   */
   errInvalidPartCode            = -30588,
+
+  /*
+   * You called CreateRootControl after creating one or more non-root
+   * controls in a window, which is illegal; if you want an embedding
+   * hierarchy on a given window, you must call CreateRootControl
+   * before creating any other controls for a given window. This will
+   * never be returned on Mac OS X, because a root control is created
+   * automatically if it doesn't already exist the first time any
+   * non-root control is created in a window.
+   */
   errControlsAlreadyExist       = -30589,
+
+  /*
+   * You passed a control that doesn't support embedding to a Control
+   * Manager API which requires the control to support embedding.
+   */
   errControlIsNotEmbedder       = -30590,
+
+  /*
+   * You called GetControlData or SetControlData with a buffer whose
+   * size does not match the size of the data you are attempting to get
+   * or set.
+   */
   errDataSizeMismatch           = -30591,
+
+  /*
+   * You called TrackControl, HandleControlClick or a similar mouse
+   * tracking API on a control that is invisible or disabled. You
+   * cannot track controls that are invisible or disabled.
+   */
   errControlHiddenOrDisabled    = -30592,
+
+  /*
+   * You called EmbedControl or a similar API with the same control in
+   * the parent and child parameters. You cannot embed a control into
+   * itself.
+   */
   errCantEmbedIntoSelf          = -30594,
+
+  /*
+   * You called EmbedControl or a similiar API to embed the root
+   * control in another control. You cannot embed the root control in
+   * any other control.
+   */
   errCantEmbedRoot              = -30595,
+
+  /*
+   * You called GetDialogItemAsControl on a dialog item such as a
+   * kHelpDialogItem that is not represented by a control.
+   */
   errItemNotControl             = -30596,
+
+  /*
+   * You called GetControlData or SetControlData with a buffer that
+   * represents a versioned structure, but the version is unsupported
+   * by the control definition. This can happen with the Tabs control
+   * and the kControlTabInfoTag.
+   */
   controlInvalidDataVersionErr  = -30597,
+
+  /*
+   * You called SetControlProperty, GetControlProperty, or a similar
+   * API with an illegal property creator OSType.
+   */
   controlPropertyInvalid        = -5603,
+
+  /*
+   * You called GetControlProperty or a similar API with a property
+   * creator and property tag that does not currently exist on the
+   * given control.
+   */
   controlPropertyNotFoundErr    = -5604,
+
+  /*
+   * You passed an invalid ControlRef to a Control Manager API.
+   */
   controlHandleInvalidErr       = -30599
 };
 
@@ -2771,6 +2910,34 @@ enum {
   kURL68kNotSupportedError      = -30788
 };
 
+/*
+    Error Codes for C++ Exceptions
+
+        C++ exceptions cannot be thrown across certain boundaries, for example,
+        from an event handler back to the main application.  You may use these
+        error codes to communicate an exception through an API that only supports
+        OSStatus error codes.  Mac OS APIs will never generate these error codes;
+        they are reserved for developer convenience only.
+*/
+enum {
+  errCppGeneral                 = -32000,
+  errCppbad_alloc               = -32001, /* thrown by new */
+  errCppbad_cast                = -32002, /* thrown by dynamic_cast when fails with a referenced type */
+  errCppbad_exception           = -32003, /* thrown when an exception doesn't match any catch */
+  errCppbad_typeid              = -32004, /* thrown by typeid */
+  errCpplogic_error             = -32005,
+  errCppdomain_error            = -32006,
+  errCppinvalid_argument        = -32007,
+  errCpplength_error            = -32008,
+  errCppout_of_range            = -32009,
+  errCppruntime_error           = -32010,
+  errCppoverflow_error          = -32011,
+  errCpprange_error             = -32012,
+  errCppunderflow_error         = -32013,
+  errCppios_base_failure        = -32014,
+  errCppLastSystemDefinedError  = -32020,
+  errCppLastUserDefinedError    = -32049 /* -32021 through -32049 are free for developer-defined exceptions*/
+};
 
 /* ComponentError codes*/
 enum {

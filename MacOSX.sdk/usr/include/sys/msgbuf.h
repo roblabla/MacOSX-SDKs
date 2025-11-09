@@ -65,8 +65,4 @@ struct	msgbuf {
 	long	msg_bufr;		/* read pointer */
 	char	msg_bufc[MSG_BSIZE];	/* buffer */
 };
-#ifdef KERNEL
-extern struct	msgbuf *msgbufp;
-extern void log_putc(char);
-#endif
 #endif	/* !_SYS_MSGBUF_H_ */

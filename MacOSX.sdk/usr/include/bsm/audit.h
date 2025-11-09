@@ -25,9 +25,8 @@
 #define	_BSM_AUDIT_H
 
 #include <sys/queue.h>
-#include <sys/ucred.h>
+#include <sys/types.h>
 #include <sys/param.h>
-#include <sys/ipc.h>
 #include <sys/socket.h>
 #include <sys/cdefs.h>
 
@@ -45,7 +44,7 @@
 /*
  * Pre-defined audit IDs
  */
-#define AU_DEFAUDITID	-1
+#define AU_DEFAUDITID	((uid_t)-1)
 
 /*
  * Define the masks for the classes of audit events.
@@ -284,7 +283,6 @@ struct au_evclass_map {
 };
 typedef struct au_evclass_map au_evclass_map_t;
 
-#ifndef KERNEL
 
 int audit (const void *, int);
 int auditon (int, void *, int);
@@ -295,7 +293,6 @@ int getaudit (struct auditinfo *);
 int setaudit (const struct auditinfo *);
 int getaudit_addr (struct auditinfo_addr *, int);
 int setaudit_addr (const struct auditinfo_addr *, int);
-#endif /* !KERNEL */
 
 __END_DECLS
 

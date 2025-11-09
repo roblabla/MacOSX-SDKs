@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2005 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -62,6 +62,9 @@
 #define _SYS_QUOTA_H
 
 #include <sys/appleapiopts.h>
+#include <sys/cdefs.h>
+
+#include <mach/boolean.h>
 
 #ifdef __APPLE_API_UNSTABLE
 /*
@@ -210,120 +213,10 @@ dqhashshift(u_long size)
 }
 
 
-#ifndef KERNEL
-
-#include <sys/cdefs.h>
-
 __BEGIN_DECLS
-int quotactl __P((char *, int, int, caddr_t));
-__END_DECLS
-#endif /* !KERNEL */
-
-#ifdef KERNEL
-#include <sys/queue.h>
-
-/*
- * Macros to avoid subroutine calls to trivial functions.
- */
-#if DIAGNOSTIC
-#define	DQREF(dq)	dqref(dq)
-#else
-#define	DQREF(dq)	(dq)->dq_cnt++
-#endif
-
-
-/* Quota file info
- */
-struct quotafile {
-	struct vnode *qf_vp;         /* quota file vnode */
-	struct ucred *qf_cred;       /* quota file access cred */
-	int           qf_shift;      /* primary hash shift */
-	int           qf_maxentries; /* size of hash table (power of 2) */
-	int           qf_entrycnt;  /* count of active entries */
-	time_t        qf_btime;      /* block quota time limit */
-	time_t        qf_itime;      /* inode quota time limit */
-	char          qf_qflags;     /* quota specific flags */
-};
-
-/*
- * Flags describing the runtime state of quotas.
- * (in qf_qflags)
- */
-#define	QTF_OPENING	0x01	/* Q_QUOTAON in progress */
-#define	QTF_CLOSING	0x02	/* Q_QUOTAOFF in progress */
-
-
-/*
- * The following structure records disk usage for a user or group on a
- * filesystem. There is one allocated for each quota that exists on any
- * filesystem for the current user or group. A cache is kept of recently
- * used entries.
- */
-struct dquot {
-	LIST_ENTRY(dquot) dq_hash;	/* hash list */
-	TAILQ_ENTRY(dquot) dq_freelist;	/* free list */
-	u_int16_t dq_flags;		/* flags, see below */
-	u_int16_t dq_cnt;		/* count of active references */
-	u_int16_t dq_spare;		/* unused spare padding */
-	u_int16_t dq_type;		/* quota type of this dquot */
-	u_int32_t dq_id;		/* identifier this applies to */
-	u_int32_t dq_index;		/* index into quota file */
-	struct	quotafile *dq_qfile;	/* quota file that this is taken from */
-	struct	dqblk dq_dqb;		/* actual usage & quotas */
-};
-/*
- * Flag values.
- */
-#define	DQ_LOCK		0x01		/* this quota locked (no MODS) */
-#define	DQ_WANT		0x02		/* wakeup on unlock */
-#define	DQ_MOD		0x04		/* this quota modified since read */
-#define	DQ_FAKE		0x08		/* no limits here, just usage */
-#define	DQ_BLKS		0x10		/* has been warned about blk limit */
-#define	DQ_INODS	0x20		/* has been warned about inode limit */
-/*
- * Shorthand notation.
- */
-#define	dq_bhardlimit	dq_dqb.dqb_bhardlimit
-#define	dq_bsoftlimit	dq_dqb.dqb_bsoftlimit
-#define	dq_curbytes	dq_dqb.dqb_curbytes
-#define	dq_ihardlimit	dq_dqb.dqb_ihardlimit
-#define	dq_isoftlimit	dq_dqb.dqb_isoftlimit
-#define	dq_curinodes	dq_dqb.dqb_curinodes
-#define	dq_btime	dq_dqb.dqb_btime
-#define	dq_itime	dq_dqb.dqb_itime
-
-/*
- * If the system has never checked for a quota for this file, then it is
- * set to NODQUOT.  Once a write attempt is made the inode pointer is set
- * to reference a dquot structure.
- */
-#define	NODQUOT		NULL
-
-/*
- * Flags to chkdq() and chkiq()
- */
-#define	FORCE	0x01	/* force usage changes independent of limits */
-#define	CHOWN	0x02	/* (advisory) change initiated by chown */
-
-
-/*
- * Functions that manage the in-core dquot and the
- * on-disk dqblk data structures.
- */
-__BEGIN_DECLS
-int	dqfileopen(struct quotafile *, int);
-void	dqfileclose(struct quotafile *, int);
-void	dqflush(struct vnode *);
-int	dqget(struct vnode *, u_long, struct quotafile *, int, struct dquot **);
-void	dqinit(void);
-void	dqref(struct dquot *);
-void	dqrele(struct vnode *, struct dquot *);
-void	dqreclaim(struct vnode *, struct dquot *);
-int	dqsync(struct vnode *, struct dquot *);
-void	dqsync_orphans(struct quotafile *);
+int quotactl(char *, int, int, caddr_t);
 __END_DECLS
 
-#endif /* KERNEL */
 
 #endif /* __APPLE_API_UNSTABLE */
 

@@ -13,7 +13,7 @@
  * See the file "license.terms" for information on usage and redistribution
  * of this file, and for a DISCLAIMER OF ALL WARRANTIES.
  *
- * RCS: @(#) $Id: tcl.h,v 1.1.1.8 2003/07/22 23:11:05 landonf Exp $
+ * RCS: @(#) $Id: tcl.h,v 1.153.2.13 2004/07/13 19:21:17 hobbs Exp $
  */
 
 #ifndef _TCL
@@ -58,10 +58,10 @@ extern "C" {
 #define TCL_MAJOR_VERSION   8
 #define TCL_MINOR_VERSION   4
 #define TCL_RELEASE_LEVEL   TCL_FINAL_RELEASE
-#define TCL_RELEASE_SERIAL  4
+#define TCL_RELEASE_SERIAL  7
 
 #define TCL_VERSION	    "8.4"
-#define TCL_PATCH_LEVEL	    "8.4.4"
+#define TCL_PATCH_LEVEL	    "8.4.7"
 
 /*
  * The following definitions set up the proper options for Windows
@@ -352,11 +352,16 @@ typedef long LONG;
  */
 
 #if !defined(TCL_WIDE_INT_TYPE)&&!defined(TCL_WIDE_INT_IS_LONG)
-#   if defined(__CYGWIN__)
+#   if defined(__GNUC__)
 #      define TCL_WIDE_INT_TYPE long long
+#      if defined(__WIN32__) && !defined(__CYGWIN__)
+#         define TCL_LL_MODIFIER        "I64"
+#         define TCL_LL_MODIFIER_SIZE   3
+#      else
 #      define TCL_LL_MODIFIER	"L"
-typedef struct stat	Tcl_StatBuf;
 #      define TCL_LL_MODIFIER_SIZE	1
+#      endif
+typedef struct stat	Tcl_StatBuf;
 #   elif defined(__WIN32__)
 #      define TCL_WIDE_INT_TYPE __int64
 #      ifdef __BORLANDC__
@@ -1591,6 +1596,7 @@ typedef struct Tcl_GlobTypeData {
 #define TCL_GLOB_TYPE_FILE		(1<<4)
 #define TCL_GLOB_TYPE_LINK		(1<<5)
 #define TCL_GLOB_TYPE_SOCK		(1<<6)
+#define TCL_GLOB_TYPE_MOUNT		(1<<7)
 
 #define TCL_GLOB_PERM_RONLY		(1<<0)
 #define TCL_GLOB_PERM_HIDDEN		(1<<1)

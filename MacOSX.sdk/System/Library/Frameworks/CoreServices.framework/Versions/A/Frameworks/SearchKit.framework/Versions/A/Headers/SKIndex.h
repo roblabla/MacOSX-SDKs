@@ -3,9 +3,9 @@
  
      Contains:   SearchKit Interfaces.
  
-     Version:    SearchKit-60~16
+     Version:    SearchKit-147.2~771
  
-     Copyright:  © 2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -523,8 +523,24 @@ SKIndexGetDocumentCount(SKIndexRef inIndex)                   AVAILABLE_MAC_OS_X
 
 
 /*
+ *  SKIndexClose()
+ *  
+ *  Summary:
+ *    Close the index.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+SKIndexClose(SKIndexRef inIndex)                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+/*
  * Managing documents inside an index
  */
+typedef CFIndex                         SKDocumentID;
 /*
  *  SKIndexAddDocumentWithText()
  *  
@@ -722,7 +738,7 @@ SKIndexGetDocumentState(
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFIndex 
+extern SKDocumentID 
 SKIndexGetDocumentID(
   SKIndexRef      inIndex,
   SKDocumentRef   inDocument)                                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
@@ -741,8 +757,8 @@ SKIndexGetDocumentID(
  */
 extern SKDocumentRef 
 SKIndexCopyDocumentForDocumentID(
-  SKIndexRef   inIndex,
-  CFIndex      inDocumentID)                                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  SKIndexRef     inIndex,
+  SKDocumentID   inDocumentID)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*
@@ -833,7 +849,7 @@ SKIndexDocumentIteratorCopyNext(SKIndexDocumentIteratorRef inIterator) AVAILABLE
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFIndex 
+extern SKDocumentID 
 SKIndexGetMaximumDocumentID(SKIndexRef inIndex)               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
@@ -850,8 +866,8 @@ SKIndexGetMaximumDocumentID(SKIndexRef inIndex)               AVAILABLE_MAC_OS_X
  */
 extern CFIndex 
 SKIndexGetDocumentTermCount(
-  SKIndexRef   inIndex,
-  CFIndex      inDocumentID)                                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  SKIndexRef     inIndex,
+  SKDocumentID   inDocumentID)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*
@@ -870,8 +886,8 @@ SKIndexGetDocumentTermCount(
  */
 extern CFArrayRef 
 SKIndexCopyTermIDArrayForDocumentID(
-  SKIndexRef   inIndex,
-  CFIndex      inDocumentID)                                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  SKIndexRef     inIndex,
+  SKDocumentID   inDocumentID)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*
@@ -887,9 +903,9 @@ SKIndexCopyTermIDArrayForDocumentID(
  */
 extern CFIndex 
 SKIndexGetDocumentTermFrequency(
-  SKIndexRef   inIndex,
-  CFIndex      inDocumentID,
-  CFIndex      inTermID)                                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  SKIndexRef     inIndex,
+  SKDocumentID   inDocumentID,
+  CFIndex        inTermID)                                    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*

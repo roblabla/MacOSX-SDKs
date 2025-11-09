@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1993-1995, 1999-2000 Apple Computer, Inc.
+ * Copyright (c) 1993-1995, 1999-2005 Apple Computer, Inc.
  * All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
@@ -22,59 +22,51 @@
  */
 /*
  * Declarations for thread-based callouts.
- *
- * HISTORY
- *
- * 10 July 1999 (debo)
- *  Pulled into Mac OS X (microkernel).
- *
- * 3 July 1993 (debo)
- *	Created.
  */
 
 #ifndef _KERN_THREAD_CALL_H_
 #define _KERN_THREAD_CALL_H_
 
-#include <sys/appleapiopts.h>
-
 #include <mach/mach_types.h>
 
 #include <kern/clock.h>
+
+#include <sys/cdefs.h>
 
 typedef struct call_entry	*thread_call_t;
 typedef void				*thread_call_param_t;
 typedef void				(*thread_call_func_t)(
 									thread_call_param_t		param0,
 									thread_call_param_t		param1);
+__BEGIN_DECLS
 
 boolean_t
 thread_call_enter(
 	thread_call_t		call
 );
+
 boolean_t
 thread_call_enter1(
 	thread_call_t			call,
 	thread_call_param_t		param1
 );
+
 boolean_t
 thread_call_enter_delayed(
 	thread_call_t		call,
 	uint64_t			deadline
 );
+
 boolean_t
 thread_call_enter1_delayed(
 	thread_call_t			call,
 	thread_call_param_t		param1,
 	uint64_t				deadline
 );
+
 boolean_t
 thread_call_cancel(
 	thread_call_t		call
-);
-boolean_t
-thread_call_is_delayed(
-	thread_call_t		call,
-	uint64_t			*deadline
 );
 
 thread_call_t
@@ -82,84 +74,14 @@ thread_call_allocate(
 	thread_call_func_t		func,
 	thread_call_param_t		param0
 );
+
 boolean_t
 thread_call_free(
 	thread_call_t		call
 );
 
-#ifdef	__APPLE_API_PRIVATE
+__END_DECLS
 
-#ifdef	__APPLE_API_OBSOLETE
 
-/*
- * This portion of the interface
- * is OBSOLETE and DEPRECATED.  It
- * will disappear shortly.
- */
 
-void
-thread_call_func(
-	thread_call_func_t		func,
-	thread_call_param_t		param,
-	boolean_t				unique_call
-);
-void
-thread_call_func_delayed(
-	thread_call_func_t		func,
-	thread_call_param_t		param,
-	uint64_t				deadline
-);
-
-boolean_t
-thread_call_func_cancel(
-	thread_call_func_t		func,
-	thread_call_param_t		param,
-	boolean_t				cancel_all
-);
-
-/* End OBSOLETE and DEPRECATED */
-
-#endif	/* __APPLE_API_OBSOLETE */
-
-#ifdef MACH_KERNEL_PRIVATE
-#include <kern/call_entry.h>
-
-typedef struct call_entry	thread_call_data_t;
-
-void
-thread_call_initialize(void);
-
-void
-thread_call_setup(
-	thread_call_t			call,
-	thread_call_func_t		func,
-	thread_call_param_t		param0
-);
-
-void
-call_thread_block(void),
-call_thread_unblock(void);
-
-#endif /* MACH_KERNEL_PRIVATE */
-
-#endif	/* __APPLE_API_PRIVATE */
-
-#if		!defined(MACH_KERNEL_PRIVATE) && !defined(ABSOLUTETIME_SCALAR_TYPE)
-
-#include <libkern/OSBase.h>
-
-#define thread_call_enter_delayed(a, b)	\
-	thread_call_enter_delayed((a), __OSAbsoluteTime(b))
-
-#define thread_call_enter1_delayed(a, b, c)	\
-	thread_call_enter1_delayed((a), (b), __OSAbsoluteTime(c))
-
-#define thread_call_is_delayed(a, b)	\
-	thread_call_is_delayed((a), __OSAbsoluteTimePtr(b))
-
-#define thread_call_func_delayed(a, b, c)	\
-	thread_call_func_delayed((a), (b), __OSAbsoluteTime(c))
-
-#endif
-
-#endif /* _KERN_THREAD_CALL_H_ */
+#endif	/* _KERN_THREAD_CALL_H_ */

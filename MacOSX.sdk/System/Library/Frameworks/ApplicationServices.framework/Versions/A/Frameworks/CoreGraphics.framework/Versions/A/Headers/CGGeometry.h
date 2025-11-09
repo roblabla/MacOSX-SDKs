@@ -1,5 +1,5 @@
 /* CoreGraphics - CGGeometry.h
- * Copyright (c) 1998-2000 Apple Computer, Inc.
+ * Copyright (c) 1998-2003 Apple Computer, Inc.
  * All rights reserved.
  */
 
@@ -59,6 +59,10 @@ CG_EXTERN const CGRect CGRectZero;
  * same as the zero rect. */
 
 CG_EXTERN const CGRect CGRectNull;
+
+/* The infinite rectangle. */
+
+CG_EXTERN const CGRect CGRectInfinite AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* Make a point from `(x, y)'. */
 
@@ -130,6 +134,10 @@ CG_EXTERN int CGRectIsEmpty(CGRect rect);
  * disjoint rectangles is a null rect. */
 
 CG_EXTERN int CGRectIsNull(CGRect rect);
+
+/* Return true if `rect' is the infinite rectangle, false otherwise. */
+
+CG_EXTERN bool CGRectIsInfinite(CGRect rect) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* Inset `rect' by `(dx, dy)' -- i.e., offset its origin by `(dx, dy)', and
  * decrease its size by `(2*dx, 2*dy)'. */

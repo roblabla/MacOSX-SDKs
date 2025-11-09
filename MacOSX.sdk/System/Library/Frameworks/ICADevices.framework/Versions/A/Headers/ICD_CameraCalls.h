@@ -3,7 +3,7 @@
 
  	Contains:   Camera module related interfaces
 
- 	Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
+ 	Copyright:  © 2000-2004 by Apple Computer, Inc., all rights reserved.
 
  
   	Bugs?:      For bug reports, consult the following page on
@@ -18,6 +18,7 @@
 
 #include <Carbon/Carbon.h>
 #include <CoreFoundation/CoreFoundation.h>
+#import <IOBluetooth/Bluetooth.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -37,9 +38,11 @@ extern "C" {
 
 /* DataTypes for _ICD_ReadFileData/_ICD_WriteFileData */
 enum {
-    kICD_FileData		= 'file',
-    kICD_ThumbnailData	= 'thum',
-    kICD_MetaData		= 'meta'
+    kICD_FileData                 = 'file',
+    kICD_ThumbnailData            = 'thum',
+    kICD_MetaData                 = 'meta',
+    kICD_ThumbnailDataFormatJPEG  = 'tjpg',
+    kICD_ThumbnailDataFormatTIFF  = 'ttif'
 };
 
 /* flags */
@@ -125,6 +128,10 @@ typedef CALLBACK_API_C(OSErr, __ICD_OpenFireWireDevice)(UInt64 guid, ObjectInfo 
 
 typedef CALLBACK_API_C(OSErr, __ICD_OpenFireWireDeviceWithIORegPath)(UInt64 guid, io_string_t ioregPath, ObjectInfo * objectInfo);
 
+typedef CALLBACK_API_C(OSErr, __ICD_OpenBluetoothDevice)(CFDictionaryRef params, ObjectInfo * objectInfo);
+
+typedef CALLBACK_API_C(OSErr, __ICD_OpenTCPIPDevice)(CFDictionaryRef params, ObjectInfo * objectInfo);
+
 typedef CALLBACK_API_C(OSErr, __ICD_CloseDevice)(ObjectInfo * objectInfo);
         
 typedef CALLBACK_API_C(OSErr, __ICD_PeriodicTask)(ObjectInfo * objectInfo);
@@ -147,9 +154,10 @@ typedef CALLBACK_API_C(OSErr, __ICD_ReadFileData)(const ObjectInfo *	objectInfo,
                             UInt32			offset,
                             UInt32 *		length);
     
-typedef CALLBACK_API_C(OSErr, __ICD_WriteFileData)(const ObjectInfo *	objectInfo,
+typedef CALLBACK_API_C(OSErr, __ICD_WriteFileData)(const ObjectInfo *	parentInfo,
+                            const char *    filename,
                             UInt32			dataType,
-                            Ptr			buffer,
+                            Ptr             buffer,
                             UInt32			offset,
                             UInt32 *		length);
     
@@ -220,6 +228,18 @@ OSErr ICDDisconnectFWDeviceWithIORegPath(UInt64 guid,
                                          io_string_t ioregPath);
 
 // ----------------------------------------------------
+// Bluetooth
+
+OSErr ICDConnectBluetoothDevice(CFDictionaryRef params);
+OSErr ICDDisconnectBluetoothDevice(CFDictionaryRef params);
+
+// ----------------------------------------------------
+// TCP/IP
+
+OSErr ICDConnectTCPIPDevice(CFDictionaryRef params);
+OSErr ICDDisconnectTCPIPDevice(CFDictionaryRef params);
+                          
+// ----------------------------------------------------
 OSErr ICDStatusChanged (ICAObject	object,							// deprecated - use ICDInitiateNotificationCallback instead
                         OSType		message);
 
@@ -241,7 +261,8 @@ typedef struct ICD_callback_functions
     __ICD_OpenFireWireDevice  				f_ICD_OpenFireWireDevice;
     __ICD_OpenUSBDeviceWithIORegPath		f_ICD_OpenUSBDeviceWithIORegPath;
     __ICD_OpenFireWireDeviceWithIORegPath	f_ICD_OpenFireWireDeviceWithIORegPath;
-    
+    __ICD_OpenBluetoothDevice               f_ICD_OpenBluetoothDevice;
+    __ICD_OpenTCPIPDevice                   f_ICD_OpenTCPIPDevice;
 } ICD_callback_functions;
 extern ICD_callback_functions gICDCallbackFunctions;
 

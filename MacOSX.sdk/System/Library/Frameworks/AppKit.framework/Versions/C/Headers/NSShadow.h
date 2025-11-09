@@ -1,8 +1,8 @@
 /*
-	NSShadow.h
-	Application Kit
-	Copyright (c) 2002-2003, Apple Computer, Inc.
-	All rights reserved.
+    NSShadow.h
+    Application Kit
+    Copyright (c) 2002-2005, Apple Computer, Inc.
+    All rights reserved.
 */
 
 /* NSShadow stores the properties of a drop shadow to be added to drawing.  */
@@ -32,7 +32,7 @@
 - (float)shadowBlurRadius;      // blur radius of the shadow in default user space units
 - (void)setShadowBlurRadius:(float)val;
 
-- (NSColor *)shadowColor;	// color used for the shadow (default is black with an alpha value of 1/3)
+- (NSColor *)shadowColor;   // color used for the shadow (default is black with an alpha value of 1/3)
 - (void)setShadowColor:(NSColor *)color;
 
 - (void)set;

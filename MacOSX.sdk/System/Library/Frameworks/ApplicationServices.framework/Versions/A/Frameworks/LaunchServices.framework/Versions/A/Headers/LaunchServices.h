@@ -3,9 +3,9 @@
  
      Contains:   Public interfaces for LaunchServices.framework
  
-     Version:    LaunchServices-98.4~11
+     Version:    LaunchServices-182~2
  
-     Copyright:  © 2001-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -23,6 +23,10 @@
 
 #ifndef __LSOPEN__
 #include <LaunchServices/LSOpen.h>
+#endif
+
+#ifndef __UTCORETYPES__
+#include <LaunchServices/UTCoreTypes.h>
 #endif
 
 #ifndef __UTTYPE__

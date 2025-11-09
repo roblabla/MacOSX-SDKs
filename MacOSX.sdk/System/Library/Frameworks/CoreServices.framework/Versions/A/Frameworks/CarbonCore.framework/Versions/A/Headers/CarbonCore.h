@@ -3,9 +3,9 @@
  
      Contains:   Master include for CarbonCore private framework
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -55,10 +55,6 @@
 
 #ifndef __ENDIAN__
 #include <CarbonCore/Endian.h>
-#endif
-
-#ifndef __PATCHES__
-#include <CarbonCore/Patches.h>
 #endif
 
 #ifndef __GESTALT__

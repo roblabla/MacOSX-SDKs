@@ -1,7 +1,7 @@
 /*
 	NSColorList.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -17,8 +17,6 @@ NSColorLists post "NSColorListDidChangeNotification" when changed.
 #import <CoreFoundation/CFDictionary.h>
 
 @class NSArray, NSMutableArray, NSColor, NSBundle;
-
-typedef struct NSColorListAuxiliary NSColorListAuxiliaryOpaque;
 
 @interface NSColorList : NSObject <NSCoding> {
     /*All instance variables are private*/
@@ -36,9 +34,10 @@ typedef struct NSColorListAuxiliary NSColorListAuxiliaryOpaque;
 	unsigned int hasFrozen:1;
 	unsigned int notificationsDisabled:1;
         unsigned int hasAttemptedLoadingBundleForDirectory:1;
-	unsigned int :25;
+	unsigned int isProfileBased:1;
+	unsigned int :24;
     } _flags;
-    NSColorListAuxiliaryOpaque *_clAuxiliaryStorage;
+    id _clAuxiliaryStorage;
 }
 
 /* Returns all color lists in the user's color list path, including those added at runtime. Creating a named color list and saving with writeToFile:nil will add it to this list; removeFile will remove it from this list. (That is what happens as the user creates and destroys color lists in the color panel.)

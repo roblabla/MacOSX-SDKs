@@ -3,9 +3,9 @@
  
      Contains:   Color Management Device Interfaces
  
-     Version:    ColorSync-118.2.4~3
+     Version:    ColorSync-174.3.3~45
  
-     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -129,14 +129,17 @@ enum {
 
 /*
    Clients can register for notifications of device changes:
-      DeviceRegistered      a new device was registered
-      DeviceUnregistered    a device was unregistered
-      DeviceOnline          change to Online as a result of CMSetDeviceState
-      DeviceOffline         change to Offline as a result of CMSetDeviceState
-      DeviceState           other change to a device state
-      DefaultDevice         default device for a device class changed
-      DeviceProfiles        change to a device's profiles
-      DefaultDeviceProfile  The default profile for any device changed
+      Notification         Description                           Sent by API
+    ----------------      -----------                           -----------
+      DeviceRegistered      a device was registered               CMRegisterColorDevice()  
+      DeviceUnregistered    a device was unregistered             CMUnregisterColorDevice()
+      DeviceOnline          a device's state changed to Online    CMSetDeviceState()
+      DeviceOffline         a device's state changed to Offline   CMSetDeviceState()
+      DeviceState           a device's state changed              CMSetDeviceState()
+      DefaultDevice         a class' default device changed       CMSetDefaultDevice()
+      DeviceProfiles        a device's profiles changed           CMSetDeviceFactoryProfiles(), CMSetDeviceProfiles()
+      DefaultDeviceProfile  a device's default profile ID changed CMSetDeviceDefaultProfileID()
+      DisplayDeviceProfiles a display device's profiles changed   CMSetDeviceFactoryProfiles(), CMSetDeviceProfiles()
 */
 #define kCMDeviceRegisteredNotification     CFSTR("CMDeviceRegisteredNotification")
 #define kCMDeviceUnregisteredNotification   CFSTR("CMDeviceUnregisteredNotification")
@@ -146,6 +149,7 @@ enum {
 #define kCMDefaultDeviceNotification        CFSTR("CMDefaultDeviceNotification")
 #define kCMDeviceProfilesNotification       CFSTR("CMDeviceProfilesNotification")
 #define kCMDefaultDeviceProfileNotification CFSTR("CMDefaultDeviceProfileNotification")
+#define kCMDisplayDeviceProfilesNotification CFSTR("CMDisplayDeviceProfilesNotification")
 
 /*
     Device state data.

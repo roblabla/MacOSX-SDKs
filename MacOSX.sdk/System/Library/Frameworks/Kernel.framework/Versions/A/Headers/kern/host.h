@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2003 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2005 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -59,41 +59,19 @@
 #define _KERN_HOST_H_
 
 #include <mach/mach_types.h>
+#include <sys/cdefs.h>
 
-#include <sys/appleapiopts.h>
-
-#ifdef	__APPLE_API_PRIVATE
-
-#ifdef MACH_KERNEL_PRIVATE
-#include <kern/lock.h>
-#include <kern/exception.h>
-#include <mach/exception_types.h>
-#include <mach/host_special_ports.h>
-#include <kern/kern_types.h>
-
-
-struct	host {
-	decl_mutex_data(,lock)		/* lock to protect exceptions */
-	ipc_port_t special[HOST_MAX_SPECIAL_PORT + 1];
-	struct exception_action exc_actions[EXC_TYPES_COUNT];
-};
-
-typedef struct host	host_data_t;
-
-extern host_data_t	realhost;
-
-#define host_lock(host)		mutex_lock(&(host)->lock)
-#define host_unlock(host)	mutex_unlock(&(host)->lock)
-
-#endif /* MACH_KERNEL_PRIVATE */
-
-#endif	/* __APPLE_API_PRIVATE */
 
 /*
  * Access routines for inside the kernel.
  */
-extern host_t host_self(void);
-extern host_priv_t host_priv_self(void);
-extern host_security_t host_security_self(void);
+
+__BEGIN_DECLS
+
+extern host_t			host_self(void);
+extern host_priv_t		host_priv_self(void);
+extern host_security_t	host_security_self(void);
+
+__END_DECLS
 
 #endif	/* _KERN_HOST_H_ */

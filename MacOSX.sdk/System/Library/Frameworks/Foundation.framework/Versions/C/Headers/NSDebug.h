@@ -1,5 +1,5 @@
 /*	NSDebug.h
-	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2005, Apple, Inc. All rights reserved.
 */
 
 /**************************************************************************
@@ -79,13 +79,6 @@ FOUNDATION_EXPORT BOOL NSDeallocateZombies;
 	// objects. And since the memory is never freed, storage
 	// allocated to an object will never be reused, either (which
 	// is sometimes useful otherwise).
-
-FOUNDATION_EXPORT BOOL NSHangOnMallocError;
-	// MACH only: Cause the process to hang after printing out the
-	// "Malloc-related error detected with code N" message to stderr.
-	// A backtrace can be gotten from the process with the 'sample'
-	// utility, or the process can be attached to with a debugger.
-	// The default is NO. Has no effect on non-MACH platforms.
 
 FOUNDATION_EXPORT BOOL NSHangOnUncaughtException;
 	// If set to YES, causes the process to hang after logging the

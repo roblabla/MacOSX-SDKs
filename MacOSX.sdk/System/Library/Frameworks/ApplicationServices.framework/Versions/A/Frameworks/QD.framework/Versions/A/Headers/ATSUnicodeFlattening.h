@@ -3,9 +3,9 @@
  
      Contains:   Public interfaces for Apple Type Services for Unicode Imaging
  
-     Version:    Quickdraw-150.7~2
+     Version:    Quickdraw-192.24~58
  
-     Copyright:  © 2002-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2002-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -74,7 +74,7 @@ enum {
 /* ---------------------------------------------------------------------------- */
 
 /*
-   ATSUStyleRunInfo is a structure that contrains an index into an array of 
+   ATSUStyleRunInfo is a structure that contains an index into an array of 
    unique ATSUStyle objects as well as the length of the run that the style run 
    object covers. This structure is utilized by ATSUUnflattenStyleRunsFromStream() 
    to return the style run info to the caller. 
@@ -531,7 +531,7 @@ typedef struct ATSFlatDataFontSpecRawNameDataHeader ATSFlatDataFontSpecRawNameDa
  *    iFlattenOptions:
  *      The options you want to use to flatten the data. There are no
  *      options supported at this time, so you must pass the constant
- *      kATSUFlattenOptionsNoOptionsMask.
+ *      kATSUFlattenOptionNoOptionsMask.
  *    
  *    iNumberOfRunInfo:
  *      The number of style run information structures passed in the
@@ -644,7 +644,7 @@ ATSUFlattenStyleRunsToStream(
  *    iUnflattenOptions:
  *      The options you want to use to unflatten the data. There are no
  *      options supported at this time, so you must pass the constant
- *      kATSUUnflattenOptionsNoOptionsMask.
+ *      kATSUUnflattenOptionNoOptionsMask.
  *    
  *    iStreamBufferSize:
  *      The size of the buffer pointed to by the iStreamBuffer
@@ -658,7 +658,7 @@ ATSUFlattenStyleRunsToStream(
  *    
  *    iNumberOfRunInfo:
  *      The number of style run information structures passed in the
- *      iRunInfoArray parameter. If you are uncertain of the number of
+ *      oRunInfoArray parameter. If you are uncertain of the number of
  *      style run information structures, see the Discussion.
  *    
  *    iNumberOfStyleObjects:
@@ -722,39 +722,45 @@ ATSUUnflattenStyleRunsFromStream(
 /* Functions listed beyond this point are either deprecated or not recommended */
 
 /*
- *  ATSUCopyToHandle()
+ *  ATSUCopyToHandle()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use ATSUFlattenStyleRunsToStream instead.
  *  
  *  Discussion:
  *    This function is no longer recommended. Please use
  *    ATSUFlattenStyleRunsToStream instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.1
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUCopyToHandle(
   ATSUStyle   iStyle,
-  Handle      oStyleHandle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle      oStyleHandle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_1;
 
 
 /*
- *  ATSUPasteFromHandle()
+ *  ATSUPasteFromHandle()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use ATSUUnflattenStyleRunsFromStream instead.
  *  
  *  Discussion:
  *    This function is no longer recommended. Please use
  *    ATSUUnflattenStyleRunsFromStream instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.1
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ATSUnicodeLib 8.5 and later
  */
 extern OSStatus 
 ATSUPasteFromHandle(
   ATSUStyle   iStyle,
-  Handle      iStyleHandle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle      iStyleHandle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_1;
 
 
 

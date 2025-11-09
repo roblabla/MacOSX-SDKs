@@ -58,7 +58,7 @@ typedef struct CGPatternCallbacks CGPatternCallbacks;
 
 /* Return the CFTypeID for CGPatternRefs. */
 
-CG_EXTERN CFTypeID CGPatternGetTypeID(void);
+CG_EXTERN CFTypeID CGPatternGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /* Create a pattern. */
 

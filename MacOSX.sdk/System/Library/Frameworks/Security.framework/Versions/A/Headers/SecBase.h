@@ -1,18 +1,24 @@
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All Rights Reserved.
+ * Copyright (c) 2000-2004 Apple Computer, Inc. All Rights Reserved.
  * 
- * The contents of this file constitute Original Code as defined in and are
- * subject to the Apple Public Source License Version 1.2 (the 'License').
- * You may not use this file except in compliance with the License. Please obtain
- * a copy of the License at http://www.apple.com/publicsource and read it before
- * using this file.
+ * @APPLE_LICENSE_HEADER_START@
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS
- * OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES, INCLUDING WITHOUT
- * LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT. Please see the License for the
- * specific language governing rights and limitations under the License.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ * 
+ * @APPLE_LICENSE_HEADER_END@
  */
 
 /*!
@@ -140,6 +146,12 @@ typedef struct OpaqueSecKeyRef *SecKeyRef;
 typedef struct OpaqueSecTrustRef *SecACLRef;
 
 /*!
+    @typedef SecPasswordRef
+    @abstract Contains information about a password.
+*/
+typedef struct OpaqueSecPasswordRef *SecPasswordRef;
+
+/*!
     @typedef SecKeychainAttributeInfo
     @abstract Represents an attribute. 
     @field count The number of tag-format pairs in the respective arrays. 
@@ -192,6 +204,12 @@ typedef struct SecKeychainAttributeInfo  SecKeychainAttributeInfo;
 @constant errSecNoAccessForItem The specified item has no access control.
 @constant errSecInvalidOwnerEdit Invalid attempt to change the owner of this item.
 @constant errSecTrustNotAvailable No trust results are available.
+@constant errSecUnsupportedFormat Import/Export format unsupported.
+@constant errSecUnknownFormat Unknown format in import.
+@constant errSecKeyIsSensitive Key material must be wrapped for export.
+@constant errSecMultiplePrivKeys An attempt was made to import multiple private keys.
+@constant errSecPassphraseRequired Passphrase is required for import/export.
+
 @discussion The assigned error space is discontinuous: -25240..-25279, -25290..25329.
 */
 
@@ -239,7 +257,13 @@ enum
 	errSecInvalidTrustSetting    = -25242,	/* The specified trust setting is invalid. */
 	errSecNoAccessForItem        = -25243,	/* The specified item has no access control. */
 	errSecInvalidOwnerEdit       = -25244,  /* Invalid attempt to change the owner of this item. */
-	errSecTrustNotAvailable      = -25245	/* No trust results are available. */
+	errSecTrustNotAvailable      = -25245,	/* No trust results are available. */
+	errSecUnsupportedFormat		 = -25256,  /* Import/Export format unsupported. */
+	errSecUnknownFormat			 = -25257,  /* Unknown format in import. */
+	errSecKeyIsSensitive		 = -25258,  /* Key material must be wrapped for export. */
+	errSecMultiplePrivKeys		 = -25259,  /* An attempt was made to import multiple private keys. */
+	errSecPassphraseRequired	 = -25260,  /* Passphrase is required for import/export. */
+    errSecInvalidPasswordRef     = -25261   /* Invalid SecPasswordRef */
 };
 
 #if defined(__cplusplus)

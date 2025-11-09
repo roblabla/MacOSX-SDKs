@@ -1,7 +1,7 @@
 /*
         NSSpellChecker.h
 	Application Kit
-	Copyright (c) 1990-2003, Apple Computer, Inc.
+	Copyright (c) 1990-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -35,7 +35,7 @@ The usual usage of this is to implement a checkSpelling: method in an object tha
     id _accessoryView;
     id _dictionaryBrowser;
     NSString *_selectionString;
-    void *_spellServers;
+    id _spellServers;
     NSString *_lastGuess;
     
     struct __scFlags {

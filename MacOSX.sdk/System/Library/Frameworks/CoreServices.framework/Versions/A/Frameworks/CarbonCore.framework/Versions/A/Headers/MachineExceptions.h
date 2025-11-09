@@ -3,9 +3,9 @@
  
      Contains:   Processor Exception Handling Interfaces.
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.11~29
  
-     Copyright:  � 1993-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  � 1993-2005 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -25,6 +25,10 @@
 #endif
 
 
+#if TARGET_CPU_X86
+#include <xmmintrin.h>
+#endif
+
 
 #include <AvailabilityMacros.h>
 
@@ -41,11 +45,21 @@ extern "C" {
 /* Some basic declarations used throughout the kernel */
 typedef struct OpaqueAreaID*            AreaID;
 /* Machine Dependent types for PowerPC: */
+
+/* Because a number of sources do a #define CR 13 and this file contains a struct member named CR,
+ * an obscure compilation error gets spit out.  Rename the field to CRRegister.  To build old code
+ * which has the name CR in it, either update the code to use CRRegister or do a
+ * #define __MACHINEEXCEPTIONS_USE_OLD_CR_FIELD_NAME__ 1
+ * before #including <CoreServices/CoreServices.h> */
+#if __MACHINEEXCEPTIONS_USE_OLD_CR_FIELD_NAME__
+#define CRRegister   CR
+#endif
+
 struct MachineInformationPowerPC {
   UnsignedWide        CTR;
   UnsignedWide        LR;
   UnsignedWide        PC;
-  unsigned long       CR;
+  unsigned long       CRRegister;             /*    changed from CR since some folks had a #define CR  13 in their source code*/
   unsigned long       XER;
   unsigned long       MSR;
   unsigned long       MQ;
@@ -199,14 +213,17 @@ typedef VectorInformationPowerPC        VectorInformation;
 
 #if TARGET_CPU_X86
 struct MachineInformationIntel {
-  unsigned short      CS;
-  unsigned short      DS;
-  unsigned short      SS;
-  unsigned short      ES;
-  unsigned short      FS;
-  unsigned short      GS;
+  unsigned long       CS;
+  unsigned long       DS;
+  unsigned long       SS;
+  unsigned long       ES;
+  unsigned long       FS;
+  unsigned long       GS;
   unsigned long       EFLAGS;
   unsigned long       EIP;
+  unsigned long       ExceptTrap;
+  unsigned long       ExceptErr;
+  unsigned long       ExceptAddr;
 };
 typedef struct MachineInformationIntel  MachineInformationIntel;
 struct RegisterInformationIntel {
@@ -233,8 +250,15 @@ struct FPUInformationIntel {
   unsigned int        DS;
 };
 typedef struct FPUInformationIntel      FPUInformationIntel;
+union Vector128Intel {
+  __m128              s;
+  __m128i             si;
+  __m128d             sd;
+  unsigned char       c[16];
+};
+typedef union Vector128Intel            Vector128Intel;
 struct VectorInformationIntel {
-  UnsignedWide        Registers[8];
+  Vector128Intel      Registers[8];
 };
 typedef struct VectorInformationIntel   VectorInformationIntel;
 

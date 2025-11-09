@@ -26,27 +26,5 @@
 #include <sys/appleapiopts.h>
 #include <sys/cdefs.h> 
 
-#ifdef KERNEL
-#ifdef __APPLE_API_UNSTABLE
-/*
- * UTF-8 encode/decode flags
- */
-#define	UTF_REVERSE_ENDIAN	0x01	/* reverse UCS-2 byte order */
-#define UTF_NO_NULL_TERM	0x02	/* do not add null termination */
-#define	UTF_DECOMPOSED		0x04	/* generate fully decomposed UCS-2 */
-#define	UTF_PRECOMPOSED		0x08	/* generate precomposed UCS-2 */
-
-__BEGIN_DECLS
-size_t	utf8_encodelen __P((const u_int16_t *, size_t, u_int16_t, int));
-
-int	utf8_encodestr __P((const u_int16_t *, size_t, u_int8_t *, size_t *,
-		size_t, u_int16_t, int));
-
-int	utf8_decodestr __P((const u_int8_t *, size_t, u_int16_t *,size_t *,
-		size_t, u_int16_t, int));
-__END_DECLS
-
-#endif /* __APPLE_API_UNSTABLE */
-#endif /* KERNEL */
 
 #endif /* !_SYS_UTFCONV_H_ */

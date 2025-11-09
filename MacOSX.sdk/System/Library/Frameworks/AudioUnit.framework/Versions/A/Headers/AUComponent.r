@@ -35,8 +35,10 @@
 #define kAudioUnitType_FormatConverter			'aufc'
 #define kAudioUnitSubType_AUConverter			'conv'
 #define kAudioUnitSubType_Varispeed				'vari'
+#define kAudioUnitSubType_DeferredRenderer		'defr'
 #define kAudioUnitSubType_TimePitch				'tmpt'
-
+#define kAudioUnitSubType_Splitter				'splt'
+#define kAudioUnitSubType_Merger				'merg'
 
 #define kAudioUnitType_Effect					'aufx'
 #define kAudioUnitSubType_Delay					'dely'
@@ -51,17 +53,25 @@
 #define kAudioUnitSubType_DynamicsProcessor		'dcmp'
 #define kAudioUnitSubType_MultiBandCompressor	'mcmp'
 #define kAudioUnitSubType_MatrixReverb			'mrev'
+#define kAudioUnitSubType_SampleDelay			'sdly'
+#define kAudioUnitSubType_Pitch					'pitc'
+#define kAudioUnitSubType_AUFilter				'filt'
+#define kAudioUnitSubType_NetSend				'nsnd'
 
 #define kAudioUnitType_Mixer					'aumx'
 #define kAudioUnitSubType_StereoMixer			'smxr'
 #define kAudioUnitSubType_3DMixer				'3dmx'
 #define kAudioUnitSubType_MatrixMixer			'mxmx'
+#define kAudioUnitSubType_DynamicMatrix			'dymx'
 
 #define kAudioUnitType_Panner					'aupn'
 
 #define kAudioUnitType_OfflineEffect			'auol'
 
 #define kAudioUnitType_Generator				'augn'
+#define kAudioUnitSubType_ScheduledSoundPlayer	'sspl'
+#define kAudioUnitSubType_AudioFilePlayer		'afpl'
+#define kAudioUnitSubType_NetReceive			'nrcv'
 
 #define kAudioUnitManufacturer_Apple			'appl'
 

@@ -3,9 +3,9 @@
  
      Contains:   Services to load and share icon family data.
  
-     Version:    OSServices-63~113
+     Version:    OSServices-101.1~790
  
-     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -33,6 +33,7 @@
 /* The following icon types can only be used as an icon element */
 /* inside a 'icns' icon family */
 enum {
+  kIconServices256PixelDataARGB = 'ic08',
   kThumbnail32BitData           = 'it32',
   kThumbnail8BitMask            = 't8mk'
 };

@@ -1,5 +1,5 @@
 /* CoreGraphics - CGPDFDictionary.h
- * Copyright (c) 2002-2003 Apple Computer, Inc.
+ * Copyright (c) 2002-2004 Apple Computer, Inc.
  * All rights reserved.
  */
 
@@ -12,7 +12,6 @@ typedef struct CGPDFDictionary *CGPDFDictionaryRef;
 #include <CoreGraphics/CGPDFObject.h>
 #include <CoreGraphics/CGPDFStream.h>
 #include <CoreGraphics/CGPDFString.h>
-#include <AvailabilityMacros.h>
 
 CG_EXTERN_C_BEGIN
 

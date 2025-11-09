@@ -1,7 +1,7 @@
 /*
      File Name:  PPDLib.h
 
-     Contains:   PPDLib Interfaces
+     Contains:   Deprecated PPDLib Interfaces.  Use routines in libcups instead.
  
      Version:    Technology: Mac OS X
                  Release:    1.0
@@ -176,16 +176,16 @@ typedef struct LPaper{
 	ppdGetGenericPPDName() through.
 */
 	
-typedef OSErr (*PPDGetGenericPPDNameProc)(StringPtr genericPPDName);
-typedef OSErr (*InfoButtonProcPtr)(void *infoRefConP);
-typedef OSStatus (*WebSearchDlgFilter)(EventRecord *event, void *refcon);
-typedef OSStatus (*WebSearchProgressProc)(ConstStr255Param status, int percentDone, void *refcon);
+typedef OSErr (*PPDGetGenericPPDNameProc)(StringPtr genericPPDName) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+typedef OSErr (*InfoButtonProcPtr)(void *infoRefConP) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;;
+typedef OSStatus (*WebSearchDlgFilter)(EventRecord *event, void *refcon) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;;
+typedef OSStatus (*WebSearchProgressProc)(ConstStr255Param status, int percentDone, void *refcon) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;;
 
 /*	A PPDEventFilter function pointer can be passed to ppdNavSelectFile() so that the caller
 	can receive update, idle, and other useful events while the Navigation Choose file is
 	being displayed.
 */
-typedef OSStatus (*PPDEventFilter)(EventRecord *event, void *filterData);
+typedef OSStatus (*PPDEventFilter)(EventRecord *event, void *filterData) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;;
 
 /*** Prototypes ***/
 
@@ -194,7 +194,7 @@ typedef OSStatus (*PPDEventFilter)(EventRecord *event, void *filterData);
 #endif
 
 
-OSErr ppdParseFile (const FSSpec *ppdFileSpec, short compiledRef, short compiledResFRef, PPDParseErr *errInfoP);
+OSErr ppdParseFile (const FSSpec *ppdFileSpec, short compiledRef, short compiledResFRef, PPDParseErr *errInfoP) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Parse a PPD file, and all its includes.
 	FSSpecPtr will be closed upon exit.
 	The PPD is parsed into the open file with the file reference 'compiledRef'.
@@ -203,7 +203,7 @@ OSErr ppdParseFile (const FSSpec *ppdFileSpec, short compiledRef, short compiled
 	*'errInfoP'.
 */
 
-OSErr ppdParseHandle (Handle ppdHandle, short compiledRef, short compiledResFRef, PPDParseErr *errInfoP);
+OSErr ppdParseHandle (Handle ppdHandle, short compiledRef, short compiledResFRef, PPDParseErr *errInfoP) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Parse a PPD file, and all its includes.
 	Parse from a resource Handle.  We will Release the handle when we are through.
 	The PPD is parsed into the open file with the file reference 'compiledRef'.
@@ -214,7 +214,7 @@ OSErr ppdParseHandle (Handle ppdHandle, short compiledRef, short compiledResFRef
 
 // removed ppdOpen macro
 
-OSErr ppdOpenContext(short compiledPPDRef, PPDContext *ppdContext);
+OSErr ppdOpenContext(short compiledPPDRef, PPDContext *ppdContext) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Prepare to reference the compiled PPD information in the
 	open file with reference 'compiledPPDRef'. If this function
 	doesn't return an error, then *'ppdContext' is filled in
@@ -227,27 +227,27 @@ void ppdCloseContext(PPDContext ppdContext);
 	After this call, 'ppdContext' is no longer valid.
 */
 
-OSStatus PPDAddFeatureEntries(PMTicketRef jobTicket, CFMutableDictionaryRef psContextDictRef);
+OSStatus PPDAddFeatureEntries(PMTicketRef jobTicket, CFMutableDictionaryRef psContextDictRef) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*
  Obsolete. Returns kPMNotImplemented.
 */
 
 OSStatus PPDAddFeatureEntriesFromPPDContext(PMTicketRef jobTicket, PPDContext ppdContext, 
-							CFMutableDictionaryRef psContextDictRef);
+							CFMutableDictionaryRef psContextDictRef) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*
     Obsolete. Returns kPMNotImplemented.
 */
 
-OSStatus ppdGetCompiledPPDData(PMTicketRef printerInfoTicket, CFDataRef *ppdData);
+OSStatus ppdGetCompiledPPDData(PMTicketRef printerInfoTicket, CFDataRef *ppdData) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*
 From the printerInfoTicket passed in, get the parsed PPD data. Upon return
 ppdData contains a reference to the PPD data.
 */
 
 //BGMARK
-OSStatus ppdCreateInstallableOptionsData(FSSpec ppdSpec, char ** data, CFMutableArrayRef optionKeyWords);
+OSStatus ppdCreateInstallableOptionsData(FSSpec ppdSpec, char ** data, CFMutableArrayRef optionKeyWords) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 
-OSStatus ppdOpenCompiledPPDFromTicket(PMTicketRef printerInfoTicket, PPDContext *ppdContextP, FSSpec *tempFSSpecP);
+OSStatus ppdOpenCompiledPPDFromTicket(PMTicketRef printerInfoTicket, PPDContext *ppdContextP, FSSpec *tempFSSpecP) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*
 From the printerInfoTicket passed in, create a temp file containing the parsed PPD data and open that
 file, returning in *ppdContextP the PPDContext corresponding to the open, parsed PPD file. Upon return
@@ -255,13 +255,13 @@ file, returning in *ppdContextP the PPDContext corresponding to the open, parsed
 in order to delete that temp file.
 */
 
-OSStatus ppdCloseCompiledPPDFromTicket(PPDContext ppdContext, FSSpec *tempPPDFileSpecP);
+OSStatus ppdCloseCompiledPPDFromTicket(PPDContext ppdContext, FSSpec *tempPPDFileSpecP) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*
 Call ppdClose for the ppdContext and delete the file corresponding to *tempPPDFileSpecP.
 */
 
 
-Mindex ppdGetMainIndex(PPDContext ppdContext, const StringPtr keyword);
+Mindex ppdGetMainIndex(PPDContext ppdContext, const StringPtr keyword) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Given Pascal string reprentation of a PPD main keyword, 'keyword',
 	this routine returns a main key index (Mindex) that can be passed to other PPD
 	routines. A Mindex is an integer representation of a main keyword.
@@ -269,7 +269,7 @@ Mindex ppdGetMainIndex(PPDContext ppdContext, const StringPtr keyword);
 	the Mindex to keyword mapping is not defined across compiled PPDs.
 */
 
-Oindex ppdGetOptionIndex(PPDContext ppdContext, const StringPtr keyword);
+Oindex ppdGetOptionIndex(PPDContext ppdContext, const StringPtr keyword) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Given a Pascal string reprentation of a PPD option keyword, 'keyword'
 	this routine returns an option key index (Oindex) that can be passed to other PPD
 	routines. An Oindex is an integer representation of an option keyword.
@@ -277,7 +277,7 @@ Oindex ppdGetOptionIndex(PPDContext ppdContext, const StringPtr keyword);
 	the Oindex to keyword mapping is not defined across compiled PPDs.
 */
 
-short ppdGetUIKeyType(PPDContext ppdContext, Mindex mainkey);
+short ppdGetUIKeyType(PPDContext ppdContext, Mindex mainkey) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Once a Mindex has been found for a main keyword, the existence of the keyword
 	in a compiled PPD can be checked with ppdGetUIkeyType (). If the keyword exists,
 	ppdGetUIkeyType() will also indicate whether the keyword is a UI type keyword or not.
@@ -288,68 +288,68 @@ short ppdGetUIKeyType(PPDContext ppdContext, Mindex mainkey);
 	key, then -1 is returned.
 */
 
-Boolean ppdGetUIHeader(PPDContext ppdContext, Mindex mainkey, xUIHeaderP p);
+Boolean ppdGetUIHeader(PPDContext ppdContext, Mindex mainkey, xUIHeaderP p) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Once a Mindex for a UI keyword has been found, ppdGetUIHeader() can be used
 	to get information about the UI main keyword. The structure pointed to by the
 	UIHeaderP parameter will be filled in with information about the main keywords
 	group, its query code, its default option key, and the number of options.
 */
 
-Boolean ppdGetUIOption(PPDContext ppdContext, Mindex mainkey, Oindex optionkey, xUIOptionP p);
+Boolean ppdGetUIOption(PPDContext ppdContext, Mindex mainkey, Oindex optionkey, xUIOptionP p) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Given a Mindex and Oindex pair, a caller can use the function ppdGetUIOption()
 	to get information about the pair. ppdGetUIOption() provides information about
 	a main keyword, option keyword pair¹s translation string, constraints, and
 	any invocation code.
 */
 
-short ppdCountUIHeaders(PPDContext ppdContext);
+short ppdCountUIHeaders(PPDContext ppdContext) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Used with ppdGetIndUIHeader(), ppdCountUIHeaders () allows a caller to
 	enumerate the list of UI main keywords in a compiled PPD.
 */
 
-Boolean ppdGetIndUIHeader(PPDContext ppdContext, short index, xUIHeaderP p);
+Boolean ppdGetIndUIHeader(PPDContext ppdContext, short index, xUIHeaderP p) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Once the number of UI headers has been found using  ppdCountUIHeaders (),
 	the caller uses ppdGetIndUIHeader() to enumerate the UI main keywords.
 */
 
-short ppdCountUIOptions(PPDContext ppdContext, Mindex mainkey);
+short ppdCountUIOptions(PPDContext ppdContext, Mindex mainkey) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Used with the function ppdGetIndUIOption(), ppdCountUIOptions() can be
 	used to enumerate the option keywords associated with a UI main keyword.
 	ppdCountUIOptions() returns the number of option keywords associated with
 	a UI main keyword.
 */
 
-Boolean ppdGetIndUIOption(PPDContext ppdContext, Mindex mainKey, short index, xUIOptionP p);
+Boolean ppdGetIndUIOption(PPDContext ppdContext, Mindex mainKey, short index, xUIOptionP p) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	After the caller uses ppdCountUIOptions() to find the number of option
 	keywords for a given main keyword, ppdGetIndUIOption() can be used to
 	enumerate the options.
 */
 
-OSErr ppdSetSelection(PPDContext ppdContext, Mindex mainKey, Oindex optionKey, Boolean setOrClear);
+OSErr ppdSetSelection(PPDContext ppdContext, Mindex mainKey, Oindex optionKey, Boolean setOrClear) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	The PPD code can help the caller track user selections and 
 	certain selections are constrained by the PPD or not. The ppdSetSelection()
 	function can be used by a caller to indicate that a user has selected or deselected
 	a main keyword, option keyword pair.
 */
 
-UIConstraintListH getUIConstraintListH(PPDContext ppdContext);
+UIConstraintListH getUIConstraintListH(PPDContext ppdContext) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Returns the UIConstraintListH so that the user can determine whether
 	certain selections are constrained by the PPD or not by searching the list.
 */
 
-void ppdClearOptions(PPDContext ppdContext, Mindex mainKey);
+void ppdClearOptions(PPDContext ppdContext, Mindex mainKey) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	When running a user interface, it is often useful to clear a users selections
 	for a given main keyword. The function ppdClearOptions() does this.
 */
 
-void ppdSetDefaultOptions(PPDContext ppdContext, Oindex groupIndex);
+void ppdSetDefaultOptions(PPDContext ppdContext, Oindex groupIndex) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	To set all the main keyword, option keyword UI pairs of a particular
 	group to their default settings use ppdSetDefaultOptions().
 	This function is most useful when setting the installable options
 	group of key pairs to their default settings.
 */
 
-OSErr ppdGetAllOptions(PPDContext ppdContext, recordOptionPairProc addPair, long refCon);
+OSErr ppdGetAllOptions(PPDContext ppdContext, recordOptionPairProc addPair, long refCon) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	When a user has finished running a user interface built upon the PPD code,
 	the caller may desire to retrieve the user¹s final PPD selections.
 	The function ppdGetAllOptions() will enumerate through the main keyword,
@@ -357,39 +357,39 @@ OSErr ppdGetAllOptions(PPDContext ppdContext, recordOptionPairProc addPair, long
 	will be invoked.
 */
 
-Boolean ppdGetMainString(PPDContext ppdContext, Mindex mainkey, StringPtr buffer);
+Boolean ppdGetMainString(PPDContext ppdContext, Mindex mainkey, StringPtr buffer) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	In order to get a string representation of a Mindex, use the function
 	ppdGetMainString (). ppdGetMainString () is the inverse function of
 	ppdMainIndexGet().
 */
 
-Boolean ppdGetMainAlias(PPDContext ppdContext, Mindex mainkey, StringPtr buffer);
+Boolean ppdGetMainAlias(PPDContext ppdContext, Mindex mainkey, StringPtr buffer) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Similar to ppdGetMainString () except that it returns the translation string
 	for a main keyword. If the keyword has no translation string then the Pascal
 	string representation of the main keyword is returned.Use this function to
 	build user interface strings.
 */
 
-Boolean ppdGetOptionString(PPDContext ppdContext, Oindex optionkey, StringPtr buffer);
+Boolean ppdGetOptionString(PPDContext ppdContext, Oindex optionkey, StringPtr buffer) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	In order to get a string representation of an Oindex, use the function
 	ppdGetOptionString (). ppdGetOptionString () is the inverse function
 	of ppdOptionIndexGet().
 */
 
-Boolean ppdGetOptionAlias(PPDContext ppdContext, Mindex mainkey, Oindex optionkey, StringPtr buffer);
+Boolean ppdGetOptionAlias(PPDContext ppdContext, Mindex mainkey, Oindex optionkey, StringPtr buffer) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	ppdGetOptionAlias() is similar to ppdGetOptionString () except that it
 	returns the translation string for an option keyword. If the keyword
 	has no translation string then the Pascal string representation of
 	the option keyword is returned.Use this function to build user interface strings.
 */
 
-Boolean ppdGetGroupAlias(PPDContext ppdContext, Oindex groupKeyIndex, Byte *buf);
+Boolean ppdGetGroupAlias(PPDContext ppdContext, Oindex groupKeyIndex, Byte *buf) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Returns the translation string for a group keyword. If the keyword
 	has no translation string then the Pascal string representation of
 	the group keyword is returned. Use this function to build user interface strings.
 */
 
-OSErr ppdGetInvocationLocator(PPDContext ppdContext, Mindex mainkey, Oindex optionkey, InvocationLocator *invocation);
+OSErr ppdGetInvocationLocator(PPDContext ppdContext, Mindex mainkey, Oindex optionkey, InvocationLocator *invocation) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	At some point after a user has selected a main key, option key pair, the
 	caller may need to determine the PostScript invocation string associated with
 	the user¹s choice. The function ppdGetInvocationLocator() provides information
@@ -397,7 +397,7 @@ OSErr ppdGetInvocationLocator(PPDContext ppdContext, Mindex mainkey, Oindex opti
 	ppdGetInvocation(), ppdGetInvocationStruct(), or ppdGetInvocationFile().
 */
 
-OSErr ppdGetInvocation(PPDContext ppdContext, InvocationLocator *invocation, long *offset, long *count, Ptr buffer);
+OSErr ppdGetInvocation(PPDContext ppdContext, InvocationLocator *invocation, long *offset, long *count, Ptr buffer) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	ppdGetInvocation() is the most general routine for retrieving the PostScript
 	invocation string. It can be used to retrieve invocations that are very large.
 	ppdGetInvocation() fills a caller supplied buffer with as much of the invocation
@@ -405,19 +405,19 @@ OSErr ppdGetInvocation(PPDContext ppdContext, InvocationLocator *invocation, lon
 	the rest of the data if it does not fit in the caller¹s buffer.
 */
 
-OSErr ppdGetInvocationString(PPDContext ppdContext, Mindex mindex, Oindex oindex, StringPtr data, short maxLength);
+OSErr ppdGetInvocationString(PPDContext ppdContext, Mindex mindex, Oindex oindex, StringPtr data, short maxLength) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	ppdGetInvocationString() will directly return the invocation string from a main key,
 	option key pair as a Pascal style string. Because ppdGetInvocationString() is
 	built upon ppdGetInvocation(), the same conversions as noted in the description
 	of ppdGetInvocation() are performed here.
 */
 
-Boolean ppdCheckConstraints(PPDContext ppdContext, Mindex *mainkey1, Oindex *optkey1, Mindex *mainkey2, Oindex *optkey2);
+Boolean ppdCheckConstraints(PPDContext ppdContext, Mindex *mainkey1, Oindex *optkey1, Mindex *mainkey2, Oindex *optkey2) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	ppdCheckConstraints() goes through its list of selected items
 	and returns the first pair chosen that is illegal.
 */
 
-int ppdCheckDates(PPDContext ppdContext);
+int ppdCheckDates(PPDContext ppdContext) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Check mod dates on all PPD files that ppdContext is made up from.
 	The purpose is to flag to the client that the PPD needs to be reparsed.
 	Return:
@@ -429,7 +429,7 @@ int ppdCheckDates(PPDContext ppdContext);
 	Generic PPD is the parsed version of the current driver's Generic PPD.
 */
 
-OSStatus setInstallableOptions(PPDContext ppdContext, PMTicketRef ticket);
+OSStatus setInstallableOptions(PPDContext ppdContext, PMTicketRef ticket) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Overrides any matching default constraints in PPDContext with printer 
         installed restraints.
 */
@@ -437,26 +437,26 @@ OSStatus setInstallableOptions(PPDContext ppdContext, PMTicketRef ticket);
 /* The following calls are not yet documented in the PPD library specs.
 */
 
-OSErr ppdGetInvocationStruct(PPDContext ppdContext, Mindex mindex, Oindex oindex, void *data, short size);
+OSErr ppdGetInvocationStruct(PPDContext ppdContext, Mindex mindex, Oindex oindex, void *data, short size) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Specialized version of GetInvocationString for returning a struct
 */
 
-OSErr ppdGetInvocationFile(PPDContext ppdContext, short invocationType, PPDFileSpec *theFile);
+OSErr ppdGetInvocationFile(PPDContext ppdContext, short invocationType, PPDFileSpec *theFile) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Return a File Spec for a remote invocation file.
 	Returns fnfErr if we can't find the file data or if the file data block
 	is zero, indicating an unused file.
 */
 
-Boolean ppdApplyConstraints(PPDContext ppdContext);
+Boolean ppdApplyConstraints(PPDContext ppdContext) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Check UI constraints and mark the UI entries to reflect the constraints.
 	Returns true if some constraint is VIOLATED, false if everything is OK
 */
 
-StrList** ppdGetMessageTranslateList(PPDContext ppdContext);
+StrList** ppdGetMessageTranslateList(PPDContext ppdContext) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Get a Handle to the status and error message translations
 */
 
-OSErr ppdGetFolder(FSSpec *ppdFolder);
+OSErr ppdGetFolder(FSSpec *ppdFolder) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	This routine fills *'ppdFolder' with the volume id and directory id
 	of the PPD folder. 'ppdFolder->name' is not changed by this function.
 	To open a PPD file, call this function so that it fills in the
@@ -464,7 +464,7 @@ OSErr ppdGetFolder(FSSpec *ppdFolder);
 	name into the name field.
 */
 
-OSErr ppdGetParseFolder(FSSpecPtr parseFolder);
+OSErr ppdGetParseFolder(FSSpecPtr parseFolder) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Fill in the FSSpec pointed to by 'parseFolder' with
 	the 'vRefNum' and 'parID' of the parsed PPD folder.
 	The client can place a parsed PPD file name into the
@@ -473,7 +473,7 @@ OSErr ppdGetParseFolder(FSSpecPtr parseFolder);
 	is not the FSSpec of the parsed PPD folder.
 */
 
-OSErr ppdFindFile(FSSpec *base, StringPtr name, Boolean useBase);
+OSErr ppdFindFile(FSSpec *base, StringPtr name, Boolean useBase) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Find a PPD file. if 'useBase' is true, start searching in the directory
 	referenced by *'base'.  If 'useBase' is false, or the ppd file is not
 	found in the specified folder, search in other locations as follows until
@@ -484,7 +484,7 @@ OSErr ppdFindFile(FSSpec *base, StringPtr name, Boolean useBase);
 	folder exists, then search directly in the System folder.
 */
 
-OSErr ppdMatchPrinter(PPDPrinterDesc *desc, PPDMatchHandle *matchesP);
+OSErr ppdMatchPrinter(PPDPrinterDesc *desc, PPDMatchHandle *matchesP) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	This routine takes information about a given printer and attempts
 	to find one or more PPDs that are appropriate for the described device.
 	*'desc' is a pointer to a structure that contains pointers to three
@@ -500,7 +500,7 @@ OSErr ppdMatchPrinter(PPDPrinterDesc *desc, PPDMatchHandle *matchesP);
 */
 
 
-OSErr ppdGetGenericPPDName(Str63 genericPPDName);
+OSErr ppdGetGenericPPDName(Str63 genericPPDName) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	This routine places the suggested name for the generic PPD into
 	the buffer pointed to by 'genericPPDName'. New for 8.4.1.
 */
@@ -509,7 +509,7 @@ OSStatus ppdOpenAndParsePPDAutoSetup(Collection prInfo,
 									 PPDContext *ppdContextP, 
 									 short *resFRefP, 
 									 PPDParseErr *errInfoP, 
-									 OSStatus *lastErr);
+									 OSStatus *lastErr) DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*	Same as ppdOpenAndParsePPD with the addition of lastErr to track the 
 	ppd error (if any) generated prior to falling back to the generic ppd. 
 	This will allow the autosetup code to notify the user that the selected

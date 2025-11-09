@@ -118,6 +118,10 @@ extern const struct catch_exc_subsystem {
 
 #ifndef __Request__exc_subsystem__defined
 #define __Request__exc_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -130,7 +134,13 @@ extern const struct catch_exc_subsystem {
 		mach_msg_type_number_t codeCnt;
 		integer_t code[2];
 	} __Request__exception_raise_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -141,7 +151,13 @@ extern const struct catch_exc_subsystem {
 		mach_msg_type_number_t old_stateCnt;
 		natural_t old_state[144];
 	} __Request__exception_raise_state_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -157,7 +173,9 @@ extern const struct catch_exc_subsystem {
 		mach_msg_type_number_t old_stateCnt;
 		natural_t old_state[144];
 	} __Request__exception_raise_state_identity_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__exc_subsystem__defined */
 
 
@@ -175,12 +193,22 @@ union __RequestUnion__catch_exc_subsystem {
 
 #ifndef __Reply__exc_subsystem__defined
 #define __Reply__exc_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__exception_raise_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -189,7 +217,13 @@ union __RequestUnion__catch_exc_subsystem {
 		mach_msg_type_number_t new_stateCnt;
 		natural_t new_state[144];
 	} __Reply__exception_raise_state_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -198,7 +232,9 @@ union __RequestUnion__catch_exc_subsystem {
 		mach_msg_type_number_t new_stateCnt;
 		natural_t new_state[144];
 	} __Reply__exception_raise_state_identity_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__exc_subsystem__defined */
 
 

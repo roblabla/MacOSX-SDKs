@@ -1,7 +1,7 @@
 /*
 	AppKit.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 
 	This file is included by all AppKit application source files for easy building.  Using this file is preferred over importing individual files because it will use a precompiled version.
@@ -9,6 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKitDefines.h>
+#import <AppKit/AppKitErrors.h>
 #import <AppKit/NSGraphicsContext.h>
 #import <AppKit/NSAccessibility.h>
 #import <AppKit/NSActionCell.h>
@@ -31,10 +32,12 @@
 #import <AppKit/NSMenu.h>
 #import <AppKit/NSMenuItem.h>
 #import <AppKit/NSColor.h>
+#import <AppKit/NSColorSpace.h>
 #import <AppKit/NSBitmapImageRep.h>
 #import <AppKit/NSBrowser.h>
 #import <AppKit/NSBrowserCell.h>
 #import <AppKit/NSCachedImageRep.h>
+#import <AppKit/NSCIImageRep.h>
 #import <AppKit/NSColorList.h>
 #import <AppKit/NSColorPanel.h>
 #import <AppKit/NSColorPicking.h>
@@ -84,6 +87,8 @@
 #import <AppKit/NSTextField.h>
 #import <AppKit/NSTextFieldCell.h>
 #import <AppKit/NSText.h>
+#import <AppKit/NSTokenField.h>
+#import <AppKit/NSTokenFieldCell.h>
 #import <AppKit/NSView.h>
 #import <AppKit/NSWindow.h>
 #import <AppKit/NSWindowController.h>
@@ -147,5 +152,14 @@
 #import <AppKit/NSController.h>
 #import <AppKit/NSObjectController.h>
 #import <AppKit/NSArrayController.h>
+#import <AppKit/NSTreeController.h>
 #import <AppKit/NSUserDefaultsController.h>
 #import <AppKit/NSKeyValueBinding.h>
+#import <AppKit/NSTextList.h>
+#import <AppKit/NSTextTable.h>
+#import <AppKit/NSDatePickerCell.h>
+#import <AppKit/NSDatePicker.h>
+#import <AppKit/NSLevelIndicatorCell.h>
+#import <AppKit/NSLevelIndicator.h>
+#import <AppKit/NSAnimation.h>
+#import <AppKit/NSPersistentDocument.h>

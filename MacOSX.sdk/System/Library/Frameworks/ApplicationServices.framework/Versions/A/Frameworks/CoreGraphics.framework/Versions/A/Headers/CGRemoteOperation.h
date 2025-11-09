@@ -84,7 +84,8 @@ CG_EXTERN CGError CGWaitForScreenRefreshRects( CGRect ** pRectArray, CGRectCount
 enum _CGScreenUpdateOperation
 {
         kCGScreenUpdateOperationRefresh = 0,
-        kCGScreenUpdateOperationMove = (1 << 0)
+        kCGScreenUpdateOperationMove = (1 << 0),
+        kCGScreenUpdateOperationReducedDirtyRectangleCount = (1 << 31)
 };
 typedef uint32_t CGScreenUpdateOperation;
 

@@ -1,7 +1,7 @@
 /*
 	NSPrintPanel.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -10,7 +10,7 @@
 
 @class NSPrintInfo, NSView, NSWindow;
 
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 
 // Valid values for passing into -[NSPrintPanel setJobStyleHint:].
 APPKIT_EXTERN NSString *NSPrintPhotoJobStyleHint;
@@ -64,7 +64,7 @@ enum {
 - (NSView *)accessoryView;
 - (void)setAccessoryView:(NSView *)aView;
 
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 
 // Set or get a string that provides a hint about the type of print job in which this print panel is being used.  This controls the set of items that appear in the Presets menu.  The string must be one of the job style hint strings declared above, or nil to provide no hint.
 - (void)setJobStyleHint:(NSString *)hint;

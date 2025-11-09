@@ -31,7 +31,6 @@ typedef function_table_entry 	*function_table_t;
 
 #include <mach/std_types.h>
 #include <mach/mig.h>
-#include <mach/mig.h>
 #include <mach/mach_types.h>
 #include <servers/bootstrap_defs.h>
 
@@ -210,6 +209,10 @@ __END_DECLS
 
 #ifndef __Request__bootstrap_subsystem__defined
 #define __Request__bootstrap_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -217,17 +220,35 @@ __END_DECLS
 		integer_t server_uid;
 		boolean_t on_demand;
 	} __Request__bootstrap_create_server_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__bootstrap_unprivileged_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		name_t service_name;
 	} __Request__bootstrap_check_in_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -237,13 +258,25 @@ __END_DECLS
 		NDR_record_t NDR;
 		name_t service_name;
 	} __Request__bootstrap_register_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		name_t service_name;
 	} __Request__bootstrap_look_up_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -253,21 +286,45 @@ __END_DECLS
 		NDR_record_t NDR;
 		mach_msg_type_number_t service_namesCnt;
 	} __Request__bootstrap_look_up_array_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__bootstrap_parent_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		name_t service_name;
 	} __Request__bootstrap_status_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__bootstrap_info_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -275,13 +332,21 @@ __END_DECLS
 		mach_msg_port_descriptor_t requestor_port;
 		/* end of the kernel processed data */
 	} __Request__bootstrap_subset_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		name_t service_name;
 	} __Request__bootstrap_create_service_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__bootstrap_subsystem__defined */
 
 /* union of all requests */
@@ -306,6 +371,10 @@ union __RequestUnion__bootstrap_subsystem {
 
 #ifndef __Reply__bootstrap_subsystem__defined
 #define __Reply__bootstrap_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -313,7 +382,13 @@ union __RequestUnion__bootstrap_subsystem {
 		mach_msg_port_descriptor_t server_port;
 		/* end of the kernel processed data */
 	} __Reply__bootstrap_create_server_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -321,7 +396,13 @@ union __RequestUnion__bootstrap_subsystem {
 		mach_msg_port_descriptor_t unpriv_port;
 		/* end of the kernel processed data */
 	} __Reply__bootstrap_unprivileged_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -329,13 +410,25 @@ union __RequestUnion__bootstrap_subsystem {
 		mach_msg_port_descriptor_t service_port;
 		/* end of the kernel processed data */
 	} __Reply__bootstrap_check_in_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__bootstrap_register_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -343,7 +436,13 @@ union __RequestUnion__bootstrap_subsystem {
 		mach_msg_port_descriptor_t service_port;
 		/* end of the kernel processed data */
 	} __Reply__bootstrap_look_up_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -354,7 +453,13 @@ union __RequestUnion__bootstrap_subsystem {
 		mach_msg_type_number_t service_portsCnt;
 		boolean_t all_services_known;
 	} __Reply__bootstrap_look_up_array_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -362,14 +467,26 @@ union __RequestUnion__bootstrap_subsystem {
 		mach_msg_port_descriptor_t parent_port;
 		/* end of the kernel processed data */
 	} __Reply__bootstrap_parent_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		bootstrap_status_t service_active;
 	} __Reply__bootstrap_status_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -383,7 +500,13 @@ union __RequestUnion__bootstrap_subsystem {
 		mach_msg_type_number_t server_namesCnt;
 		mach_msg_type_number_t service_activeCnt;
 	} __Reply__bootstrap_info_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -391,7 +514,13 @@ union __RequestUnion__bootstrap_subsystem {
 		mach_msg_port_descriptor_t subset_port;
 		/* end of the kernel processed data */
 	} __Reply__bootstrap_subset_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -399,7 +528,9 @@ union __RequestUnion__bootstrap_subsystem {
 		mach_msg_port_descriptor_t service_port;
 		/* end of the kernel processed data */
 	} __Reply__bootstrap_create_service_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__bootstrap_subsystem__defined */
 
 /* union of all replies */

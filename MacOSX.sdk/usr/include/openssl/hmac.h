@@ -64,7 +64,11 @@
 
 #include <openssl/evp.h>
 
+#ifdef OPENSSL_FIPS
+#define HMAC_MAX_MD_CBLOCK	128
+#else
 #define HMAC_MAX_MD_CBLOCK	64
+#endif
 
 #ifdef  __cplusplus
 extern "C" {
@@ -98,6 +102,7 @@ unsigned char *HMAC(const EVP_MD *evp_md, const void *key, int key_len,
 		    const unsigned char *d, int n, unsigned char *md,
 		    unsigned int *md_len);
 
+void HMAC_CTX_set_flags(HMAC_CTX *ctx, unsigned long flags);
 
 #ifdef  __cplusplus
 }

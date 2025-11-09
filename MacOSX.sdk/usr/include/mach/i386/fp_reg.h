@@ -22,56 +22,6 @@
 /*
  * @OSF_COPYRIGHT@
  */
-/*
- * HISTORY
- * 
- * Revision 1.1.1.1  1998/09/22 21:05:31  wsanchez
- * Import of Mac OS X kernel (~semeria)
- *
- * Revision 1.1.1.1  1998/03/07 02:25:47  wsanchez
- * Import of OSF Mach kernel (~mburg)
- *
- * Revision 1.2.6.1  1994/09/23  02:37:03  ezf
- * 	change marker to not FREE
- * 	[1994/09/22  21:39:57  ezf]
- *
- * Revision 1.2.2.2  1993/06/09  02:40:30  gm
- * 	Added to OSF/1 R1.3 from NMK15.0.
- * 	[1993/06/02  21:16:11  jeffc]
- * 
- * Revision 1.2  1993/04/19  16:33:51  devrcs
- * 	ansi C conformance changes
- * 	[1993/02/02  18:56:01  david]
- * 
- * Revision 1.1  1992/09/30  02:30:43  robert
- * 	Initial revision
- * 
- * $EndLog$
- */
-/* CMU_HIST */
-/*
- * Revision 2.1.1.1.2.1  92/03/03  16:21:23  jeffreyh
- * 	Merged up to Trunk
- * 	[92/02/26            jeffreyh]
- * 
- * Revision 2.4  92/02/26  13:10:29  elf
- * 	Added stupid alaises to make i386/fpu.c compile. RVB will fix.
- * 	 
- * 	[92/02/26            elf]
- * 
- * Revision 2.3  92/02/26  12:47:46  elf
- * 	Installed from i386 directory.
- * 	[92/02/26            danner]
- * 
- * 
- * Revision 2.2  92/01/03  20:19:47  dbg
- * 	Move this file to mach/i386.  Add FP_NO..FP_387 codes for
- * 	floating-point processor status.  Error bits in control
- * 	register are masks, not enables.
- * 	[91/10/19            dbg]
- * 
- */
-/* CMU_ENDHIST */
 /* 
  * Mach Operating System
  * Copyright (c) 1992-1989 Carnegie Mellon University
@@ -102,32 +52,10 @@
 
 #ifndef	_I386_FP_SAVE_H_
 #define	_I386_FP_SAVE_H_
-/*
- *	Floating point registers and status, as saved
- *	and restored by FP save/restore instructions.
- */
-struct i386_fp_save	{
-	unsigned short	fp_control;	/* control */
-	unsigned short	fp_unused_1;
-	unsigned short	fp_status;	/* status */
-	unsigned short	fp_unused_2;
-	unsigned short	fp_tag;		/* register tags */
-	unsigned short	fp_unused_3;
-	unsigned int	fp_eip;		/* eip at failed instruction */
-	unsigned short	fp_cs;		/* cs at failed instruction */
-	unsigned short	fp_opcode;	/* opcode of failed instruction */
-	unsigned int	fp_dp;		/* data address */
-	unsigned short	fp_ds;		/* data segment */
-	unsigned short	fp_unused_4;
-};
 
-struct i386_fp_regs {
-	unsigned short	fp_reg_word[5][8];
-					/* space for 8 80-bit FP registers */
-};
 
 /* note when allocating this data structure, it must be 16 byte aligned. */
-struct i386_fx_save {
+struct x86_fx_save {
         unsigned short  fx_control;     /* control */
         unsigned short  fx_status;      /* status */
         unsigned char  	fx_tag;         /* register tags */
@@ -141,9 +69,10 @@ struct i386_fx_save {
         unsigned short  fx_bbz3;	/* better be zero when calling fxrtstor */
         unsigned int  	fx_MXCSR;
         unsigned int  	fx_MXCSR_MASK;
-        unsigned short  fx_reg_word[8][8];      /* STx/MMx registers */
-        unsigned short  fx_XMM_reg[8][8];       /* XMM0-XMM7 */
-        unsigned char 	fx_reserved[16*14];     /* reserved by intel for future expansion */
+        unsigned short  fx_reg_word[8][8];	/* STx/MMx registers */
+        unsigned short  fx_XMM_reg[8][16];	/* XMM0-XMM15 on 64 bit processors */
+                                                /* XMM0-XMM7  on 32 bit processors... unused storage reserved */
+        unsigned char 	fx_reserved[16*6];	/* reserved by intel for future expansion */
 };
 
 

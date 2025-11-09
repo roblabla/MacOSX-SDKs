@@ -88,6 +88,13 @@ extern CGLError CGLSetOption(CGLGlobalOption pname, long param);
 extern CGLError CGLGetOption(CGLGlobalOption pname, long *param);
 
 /*
+** Locking functions
+*/
+extern CGLError CGLLockContext(CGLContextObj ctx) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+extern CGLError CGLUnlockContext(CGLContextObj ctx) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*
 ** Version numbers
 */
 extern void CGLGetVersion(long *majorvers, long *minorvers);

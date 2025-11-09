@@ -3,9 +3,9 @@
  
      Contains:   Event Manager Interfaces.
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -114,9 +114,9 @@ enum {
   alphaLockBit                  = 10,   /* alpha lock down?*/
   optionKeyBit                  = 11,   /* option key down?*/
   controlKeyBit                 = 12,   /* control key down?*/
-  rightShiftKeyBit              = 13,   /* right shift key down?*/
-  rightOptionKeyBit             = 14,   /* right Option key down?*/
-  rightControlKeyBit            = 15    /* right Control key down?*/
+  rightShiftKeyBit              = 13,   /* right shift key down? Not supported on Mac OS X.*/
+  rightOptionKeyBit             = 14,   /* right Option key down? Not supported on Mac OS X.*/
+  rightControlKeyBit            = 15    /* right Control key down? Not supported on Mac OS X.*/
 };
 
 enum {
@@ -127,9 +127,9 @@ enum {
   alphaLock                     = 1 << alphaLockBit,
   optionKey                     = 1 << optionKeyBit,
   controlKey                    = 1 << controlKeyBit,
-  rightShiftKey                 = 1 << rightShiftKeyBit,
-  rightOptionKey                = 1 << rightOptionKeyBit,
-  rightControlKey               = 1 << rightControlKeyBit
+  rightShiftKey                 = 1 << rightShiftKeyBit, /* Not supported on Mac OS X.*/
+  rightOptionKey                = 1 << rightOptionKeyBit, /* Not supported on Mac OS X.*/
+  rightControlKey               = 1 << rightControlKeyBit /* Not supported on Mac OS X.*/
 };
 
 /* MacRoman character codes*/

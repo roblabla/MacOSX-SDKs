@@ -57,8 +57,8 @@
  *
  */
 
-#ifndef	VM_PROT_H_
-#define	VM_PROT_H_
+#ifndef	_MACH_VM_PROT_H_
+#define	_MACH_VM_PROT_H_
 
 /*
  *	Types defined:
@@ -79,6 +79,12 @@ typedef int		vm_prot_t;
 #define VM_PROT_EXECUTE	((vm_prot_t) 0x04)	/* execute permission */
 
 /*
+ *	For now we can only support no execute on stacks... too many
+ *	entries are marked w/o VM_PROT_EXECUTE that actually have code
+ */
+#define STACK_ONLY_NX	1
+
+/*
  *	The default protection for newly-created virtual memory
  */
 
@@ -96,6 +102,7 @@ typedef int		vm_prot_t;
  *	to page locks.  Using -1 here is a bad idea because it
  *	looks like VM_PROT_ALL and then some.
  */
+
 #define VM_PROT_NO_CHANGE	((vm_prot_t) 0x08)
 
 /* 
@@ -105,6 +112,7 @@ typedef int		vm_prot_t;
  *      and write permission will be added to the maximum protections
  *      for the associated entry. 
  */        
+
 #define VM_PROT_COPY            ((vm_prot_t) 0x10)
 
 
@@ -118,6 +126,8 @@ typedef int		vm_prot_t;
  *	being pushed up by the memory manager and the kernel
  *	walking down the shadow chain.
  */
+
 #define VM_PROT_WANTS_COPY	((vm_prot_t) 0x10)
 
-#endif	/* VM_PROT_H_ */
+
+#endif	/* _MACH_VM_PROT_H_ */

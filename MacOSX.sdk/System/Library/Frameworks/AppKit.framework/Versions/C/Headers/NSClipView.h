@@ -1,7 +1,7 @@
 /*
 	NSClipView.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -17,7 +17,7 @@
     NSRect              _docRect;
     NSRect              _oldDocFrame;
     NSCursor            *_cursor;
-    void                *_halftone;
+    id                  _scrollAnimationHelper;
     struct __cvFlags {
 	unsigned int        isFlipped:1;
 	unsigned int        onlyUncovered:1;
@@ -31,7 +31,9 @@
         unsigned int        animateCurrentScroll:1;
         unsigned int        canAnimateScrolls:1;
         unsigned int	    nextScrollRelativeToCurrentPosition:1;
-        unsigned int        RESERVED:20;
+        unsigned int        viewBoundsChangedOverridden:1;
+        unsigned int        viewFrameChangedOverridden:1;
+        unsigned int        RESERVED:18;
     } _cvFlags;
 }
 

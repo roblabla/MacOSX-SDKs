@@ -3,9 +3,9 @@
  
      Contains:   Script Manager interfaces
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1986-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1986-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -339,7 +339,7 @@ enum {
   verPakistanUrdu               = 34,   /* UR ur_PK     Urdu for Pakistan                        */
   verTurkishModified            = 35,   /*       tr_TR*/
   verItalianSwiss               = 36,   /* ST it_CH     Italian Swiss*/
-  verInternational              = 37,   /* Z  en-ASCII English for international use; ASCII chars only     */
+  verInternational              = 37,   /* Z  en-ascii English for international use; ASCII chars only     */
                                         /*              38 is unassigned*/
   verRomania                    = 39,   /* RO ro_RO*/
   verGreekAncient               = 40,   /*       grc      Ancient Greek, polytonic orthography          */
@@ -370,7 +370,7 @@ enum {
   verUkraine                    = 62,   /* UA uk_UA*/
                                         /*              63 is unassigned*/
   verGreeceAlt                  = 64,   /*       el_GR     unused                              */
-  verSerbian                    = 65,   /* SR sr_YU                                    */
+  verSerbian                    = 65,   /* SR sr_CS                                    */
   verSlovenian                  = 66,   /* SV sl_SI                                    */
   verMacedonian                 = 67,   /* MD mk_MK                                    */
   verCroatia                    = 68,   /* CR hr_HR*/
@@ -386,7 +386,7 @@ enum {
   verNunavut                    = 78,   /* IU iu_CA     Inuktitut for Canada*/
   verWelsh                      = 79,   /* CU cy*/
                                         /*              80 is ID for KCHR resource - Canadian CSA*/
-  verIrishGaelicScript          = 81,   /* GS ga-dots_IE  Irish Gaelic for Ireland (using dot above)*/
+  verIrishGaelicScript          = 81,   /* GS ga-Latg_IE  Irish Gaelic for Ireland (using dot above)*/
   verEngCanada                  = 82,   /* V  en_CA       English for Canada*/
   verBhutan                     = 83,   /* BH dz_BT     Dzongkha for Bhutan*/
   verArmenian                   = 84,   /* HY hy_AM*/
@@ -634,6 +634,10 @@ enum {
 
 enum {
                                         /* GetScriptManagerVariable and SetScriptManagerVariable verbs */
+                                        /* all the constants are deprecated except for smLastScript and smKeyScript */
+                                        /* all the deprecated constants are not needed on MacOSX except for */
+                                        /* smEnabled can be replaced with CFLocaleCopyAvailableLocaleIdentifiers */
+                                        /* smSysScript can be replaced with GetApplicationTextEncoding() or CFStringGetSystemEncoding */
   smVersion                     = 0,    /*Script Manager version number*/
   smMunged                      = 2,    /*Globals change count*/
   smEnabled                     = 4,    /*Count of enabled scripts, incl Roman*/
@@ -663,6 +667,15 @@ enum {
                                         /* GetScriptVariable and SetScriptVariable verbs. */
                                         /* Note: Verbs private to script systems are negative, while */
                                         /* those general across script systems are non-negative. */
+                                        /* all the constants are deprecated */
+                                        /* all the deprecated constants are not needed on MacOSX except for */
+                                        /* smScriptRight can be replaced with useUCGetCharProperty */
+                                        /* smScriptsysFond and smScriptAppFond can be replaced with GetThemeFont or UseThemeFont */
+                                        /* smScriptNumber can be replaced with CFNumberFormatter */
+                                        /* smScriptDate can be replaced with CFDateFormatter */
+                                        /* smScriptSort can be replaced with CFString or UCCollate */
+                                        /* smScriptEncoding can be replaced with GetApplicationTextEncoding or CFStringGetSystemEncoding */
+                                        /* smScriptLang can be replaced with CFLocale */
   smScriptVersion               = 0,    /*Script software version*/
   smScriptMunged                = 2,    /*Script entry changed count*/
   smScriptEnabled               = 4,    /*Script enabled flag*/
@@ -1007,63 +1020,98 @@ struct TokenBlock {
 typedef struct TokenBlock               TokenBlock;
 typedef TokenBlock *                    TokenBlockPtr;
 /*
- *  GetSysDirection()
+ *  GetSysDirection()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use AppleTextDirection in CFPreference instead.
+ *  
+ *  Discussion:
+ *    We need to make sure we want to make this preference public
+ *    first. Note that it may be absent in which case LTR should be
+ *    assumed
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-GetSysDirection(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetSysDirection(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SetSysDirection()
+ *  SetSysDirection()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    No longer needed on MacOS X.
+ *  
+ *  Discussion:
+ *    This function is obsolate.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetSysDirection(short value)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetSysDirection(short value)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FontScript()
+ *  FontScript()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use ATSFontGetEncoding instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    ATSFontGetEncoding instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-FontScript(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+FontScript(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  IntlScript()
+ *  IntlScript()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use ATSFontGetEncoding instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    ATSFontGetEncoding instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-IntlScript(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+IntlScript(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FontToScript()
+ *  FontToScript()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use ATSFontGetEncoding instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    ATSFontGetEncoding instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-FontToScript(short fontNumber)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+FontToScript(short fontNumber)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -1122,10 +1170,19 @@ SetScriptVariable(
 
 
 /*
- *  CharacterByteType()
+ *  CharacterByteType()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use the combination of CFString, UCGetCharProperty and
+ *    CFCharacterSet  instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use the
+ *    combination of CFString, UCGetCharProperty and CFCharacterSet 
+ *    instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1133,14 +1190,23 @@ extern short
 CharacterByteType(
   Ptr          textBuf,
   short        textOffset,
-  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  CharacterType()
+ *  CharacterType()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use the combination of CFString, UCGetCharProperty and
+ *    CFCharacterSet  instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use the
+ *    combination of CFString, UCGetCharProperty and CFCharacterSet 
+ *    instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1148,14 +1214,21 @@ extern short
 CharacterType(
   Ptr          textBuf,
   short        textOffset,
-  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  TransliterateText()
+ *  TransliterateText()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringUppercase instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringUppercase instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1165,21 +1238,30 @@ TransliterateText(
   Handle       dstHandle,
   short        target,
   long         srcMask,
-  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FillParseTable()
+ *  FillParseTable()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use the combination of CFString, UCGetCharProperty and
+ *    CFCharacterSet  instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use the
+ *    combination of CFString, UCGetCharProperty and CFCharacterSet 
+ *    instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
 FillParseTable(
   CharByteTable   table,
-  ScriptCode      script)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ScriptCode      script)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -1195,22 +1277,34 @@ GetIntlResource(short theID)                                  AVAILABLE_MAC_OS_X
 
 
 /*
- *  ClearIntlResourceCache()
+ *  ClearIntlResourceCache()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    No longer needed on MacOS X.
+ *  
+ *  Discussion:
+ *    This function is obsolate.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ClearIntlResourceCache(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ClearIntlResourceCache(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetIntlResourceTable()
+ *  GetIntlResourceTable()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    No longer needed on MacOS X.
+ *  
+ *  Discussion:
+ *    This function is obsolate.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -1220,7 +1314,7 @@ GetIntlResourceTable(
   short        tableCode,
   Handle *     itlHandle,
   long *       offset,
-  long *       length)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *       length)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -1315,15 +1409,21 @@ GetIntlResourceTable(
 
 
 /*
- *  IntlTokenize()
+ *  IntlTokenize()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    No longer needed on MacOS X.
+ *  
+ *  Discussion:
+ *    This function is obsolate.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern TokenResults 
-IntlTokenize(TokenBlockPtr tokenParam)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+IntlTokenize(TokenBlockPtr tokenParam)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 #if OLDROUTINENAMES

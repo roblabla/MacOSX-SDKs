@@ -3,9 +3,9 @@
  
      Contains:   Types, constants, prototypes for Unicode Utilities (Unicode input and text utils)
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1997-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1997-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -60,6 +60,14 @@
 #define kUCCollateTypeShiftBits 		24
 
 #define kUCCollateTypeMask 				0xFF000000
+#define kUCTSDirectionNext 				0
+#define kUCTSDirectionPrevious 			1
+
+#define kUCTSOptionsNoneMask 			0
+#define kUCTSOptionsReleaseStringMask 	1
+#define kUCTSOptionsDataIsOrderedMask 	2
+
+#define kUCTypeSelectMaxListSize 		0xFFFFFFFF
 #define kUnicodeTextBreakClass 			'ubrk'
 #define kUCTextBreakCharMask 			0x00000001
 #define kUCTextBreakClusterMask 		0x00000004

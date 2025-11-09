@@ -64,6 +64,12 @@ protected:
 
     virtual bool init( IOFireWireUnit * primary );
 	virtual	void free();
+
+	virtual bool isPhysicalAccessEnabled( void );
+
+	virtual IOFWSimpleContiguousPhysicalAddressSpace * createSimpleContiguousPhysicalAddressSpace( vm_size_t size, IODirection direction );
+		
+    virtual IOFWSimplePhysicalAddressSpace * createSimplePhysicalAddressSpace( vm_size_t size, IODirection direction );
 	
 private:
     OSMetaClassDeclareReservedUnused(IOFireWireUnitAux, 0);
@@ -82,6 +88,7 @@ class IOFireWireUnit : public IOFireWireNub
     OSDeclareDefaultStructors(IOFireWireUnit)
 
 	friend class IOFireWireUnitAux;
+	friend class IOFireWireDevice;
 
 protected:
     IOFireWireDevice *fDevice;	// The device unit is part of
@@ -131,6 +138,8 @@ public:
 	virtual void clearNodeFlags( UInt32 flags );
     virtual UInt32 getNodeFlags( void );
 
+	virtual IOReturn setConfigDirectory( IOConfigDirectory *directory );
+
     /*
      * Create local FireWire address spaces for the device to access
      */
@@ -144,7 +153,11 @@ protected:
 
 public:
 	void setMaxSpeed( IOFWSpeed speed );
-	    
+
+protected:
+	void terminateUnit( void );
+	static void terminateUnitThreadFunc( void * refcon );
+
 private:
     OSMetaClassDeclareReservedUnused(IOFireWireUnit, 0);
     OSMetaClassDeclareReservedUnused(IOFireWireUnit, 1);

@@ -75,12 +75,18 @@ extern const struct memory_object_default_subsystem {
 
 #ifndef __Request__memory_object_default_subsystem__defined
 #define __Request__memory_object_default_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		vm_size_t new_memory_object_size;
 	} __Request__memory_object_create_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__memory_object_default_subsystem__defined */
 
 
@@ -96,6 +102,10 @@ union __RequestUnion__memory_object_default_subsystem {
 
 #ifndef __Reply__memory_object_default_subsystem__defined
 #define __Reply__memory_object_default_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -103,7 +113,9 @@ union __RequestUnion__memory_object_default_subsystem {
 		mach_msg_port_descriptor_t new_memory_object;
 		/* end of the kernel processed data */
 	} __Reply__memory_object_create_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__memory_object_default_subsystem__defined */
 
 

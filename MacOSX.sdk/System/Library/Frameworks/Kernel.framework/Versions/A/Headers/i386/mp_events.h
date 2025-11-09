@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2005 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -26,38 +26,43 @@
 
 #ifndef ASSEMBLER
 
+#include <sys/cdefs.h>
+
 typedef enum {
 	MP_TLB_FLUSH = 0,
-	MP_CLOCK,
 	MP_KDP,
 	MP_KDB,
 	MP_AST,
-	MP_SOFTCLOCK,
 	MP_RENDEZVOUS,
 	MP_IDLE,
 	MP_UNIDLE,
+	MP_CHUD,
 	MP_LAST
 } mp_event_t;
 
 #define MP_EVENT_NAME_DECL()	\
-char *mp_event_name[] = {	\
+const char *mp_event_name[] = {	\
 	"MP_TLB_FLUSH",		\
-	"MP_CLOCK",		\
 	"MP_KDP",		\
 	"MP_KDB",		\
 	"MP_AST",		\
-	"MP_SOFTCLOCK",		\
 	"MP_RENDEZVOUS",	\
 	"MP_IDLE",		\
 	"MP_UNIDLE",		\
+	"MP_CHUD",		\
 	"MP_LAST"		\
 }
 	
 typedef enum { SYNC, ASYNC } mp_sync_t;
 
+__BEGIN_DECLS
+
 extern void	i386_signal_cpu(int cpu, mp_event_t event, mp_sync_t mode);
 extern void	i386_signal_cpus(mp_event_t event, mp_sync_t mode);
 extern int	i386_active_cpus(void);
+
+__END_DECLS
+
 #endif
 
 #endif

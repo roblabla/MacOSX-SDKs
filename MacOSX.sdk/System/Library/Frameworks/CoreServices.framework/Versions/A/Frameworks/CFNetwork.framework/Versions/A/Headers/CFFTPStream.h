@@ -3,9 +3,9 @@
  
      Contains:   CoreFoundation FTP stream header
  
-     Version:    CFNetwork-71.9~1
+     Version:    CFNetwork-129.20~93
  
-     Copyright:  © 2001-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -15,6 +15,10 @@
 */
 #ifndef __CFFTPSTREAM__
 #define __CFFTPSTREAM__
+
+#ifndef __CFNETWORKDEFS__
+#include <CFNetwork/CFNetworkDefs.h>
+#endif
 
 #ifndef __CFSTREAM__
 #include <CoreFoundation/CFStream.h>
@@ -250,7 +254,7 @@ CFFTPCreateParsedResourceListing.
  *  kCFFTPResourceMode
  *  
  *  Discussion:
- *    CFDictinary key, for get value operation.  CFNumber to hold the
+ *    CFDictionary key, for get value operation.  CFNumber to hold the
  *    resource access permission defined in sys/types.h.
  *  
  *  Availability:
@@ -265,7 +269,7 @@ extern const CFStringRef kCFFTPResourceMode                          AVAILABLE_M
  *  kCFFTPResourceName
  *  
  *  Discussion:
- *    CFDictinary key, for get value operation.  CFString that holds
+ *    CFDictionary key, for get value operation.  CFString that holds
  *    the resource name.
  *  
  *  Availability:
@@ -280,7 +284,7 @@ extern const CFStringRef kCFFTPResourceName                          AVAILABLE_M
  *  kCFFTPResourceOwner
  *  
  *  Discussion:
- *    CFDictinary key, for get value operation.  CFString that holds
+ *    CFDictionary key, for get value operation.  CFString that holds
  *    the resource owner's name.
  *  
  *  Availability:
@@ -295,7 +299,7 @@ extern const CFStringRef kCFFTPResourceOwner                         AVAILABLE_M
  *  kCFFTPResourceGroup
  *  
  *  Discussion:
- *    CFDictinary key, for get value operation.  CFString to hold the
+ *    CFDictionary key, for get value operation.  CFString to hold the
  *    name of the group that shares the resource.
  *  
  *  Availability:
@@ -310,7 +314,7 @@ extern const CFStringRef kCFFTPResourceGroup                         AVAILABLE_M
  *  kCFFTPResourceLink
  *  
  *  Discussion:
- *    CFDictinary key, for get value operation.  CFString to hold
+ *    CFDictionary key, for get value operation.  CFString to hold
  *    symbolic link information.  If the item is a symbolic link the
  *    string will contain the path to the item the link references.
  *  
@@ -326,7 +330,7 @@ extern const CFStringRef kCFFTPResourceLink                          AVAILABLE_M
  *  kCFFTPResourceSize
  *  
  *  Discussion:
- *    CFDictinary key, for get value operation.  CFNumber of
+ *    CFDictionary key, for get value operation.  CFNumber of
  *    kCFNumberLongLongType to hold the resource length in bytes.
  *  
  *  Availability:
@@ -341,7 +345,7 @@ extern const CFStringRef kCFFTPResourceSize                          AVAILABLE_M
  *  kCFFTPResourceType
  *  
  *  Discussion:
- *    CFDictinary key, for get value operation.  CFNumber to hold the
+ *    CFDictionary key, for get value operation.  CFNumber to hold the
  *    resource type as defined in sys/dirent.h.
  *  
  *  Availability:
@@ -356,7 +360,7 @@ extern const CFStringRef kCFFTPResourceType                          AVAILABLE_M
  *  kCFFTPResourceModDate
  *  
  *  Discussion:
- *    CFDictinary key, for get value operation.  CFDate to hold the
+ *    CFDictionary key, for get value operation.  CFDate to hold the
  *    last modification date and time information.
  *  
  *  Availability:

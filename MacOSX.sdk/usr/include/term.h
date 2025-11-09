@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright (c) 1998,1999,2000,2001 Free Software Foundation, Inc.         *
+ * Copyright (c) 1998-2001,2003 Free Software Foundation, Inc.              *
  *                                                                          *
  * Permission is hereby granted, free of charge, to any person obtaining a  *
  * copy of this software and associated documentation files (the            *
@@ -29,9 +29,10 @@
 /****************************************************************************/
 /* Author: Zeyd M. Ben-Halim <zmbenhal@netcom.com> 1992,1995                */
 /*    and: Eric S. Raymond <esr@snark.thyrsus.com>                          */
+/*    and: Thomas E. Dickey                        1995-2003                */
 /****************************************************************************/
 
-/* $Id: MKterm.h.awk.in,v 1.1.1.2 2002/01/03 23:53:21 jevans Exp $ */
+/* $Id: MKterm.h.awk.in,v 1.42 2003/12/27 19:09:16 tom Exp $ */
 
 /*
 **	term.h -- Definition of struct term
@@ -41,7 +42,7 @@
 #define NCURSES_TERM_H_incl 1
 
 #undef  NCURSES_VERSION
-#define NCURSES_VERSION "5.2"
+#define NCURSES_VERSION "5.4"
 
 #include <ncurses_dll.h>
 
@@ -698,6 +699,7 @@ typedef struct term {		/* describe an actual terminal */
     TTY		Ottyb,		/* original state of the terminal */
 		Nttyb;		/* current state of the terminal */
     int		_baudrate;	/* used to compute padding */
+    char *      _termname;      /* used for termname() */
 } TERMINAL;
 
 extern NCURSES_EXPORT_VAR(TERMINAL *) cur_term;

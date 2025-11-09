@@ -3,9 +3,9 @@
  
      Contains:   General purpose Image Capture definitions
  
-     Version:    ImageCapture-183.6~1
+     Version:    ImageCaptureFramework-328~385
  
-     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,6 +16,7 @@
 #ifndef __ICAAPPLICATION__
 #define __ICAAPPLICATION__
 
+#include <IOKit/IOTypes.h>
 #ifndef __CORESERVICES__
 #include <CoreServices/CoreServices.h>
 #endif
@@ -69,6 +70,9 @@ enum {
   kICADeviceCamera              = 'cmra', /* Also file type of device library files */
   kICADeviceScanner             = 'scan', /* Also file type of device library files */
   kICADeviceMFP                 = 'mfp ', /* Also file type of device library files */
+  kICADevicePhone               = 'phon',
+  kICADevicePDA                 = 'pda ',
+  kICADeviceOther               = 'doth',
   kICAList                      = 'objl',
   kICADirectory                 = 'dire',
   kICAFile                      = 'file',
@@ -875,98 +879,98 @@ typedef struct ICAScannerStartPB        ICAScannerStartPB;
  *  ICAScannerOpenSession()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAScannerOpenSession(
   ICAScannerOpenSessionPB *  pb,
-  ICACompletion              completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  ICACompletion              completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
  *  ICAScannerCloseSession()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAScannerCloseSession(
   ICAScannerCloseSessionPB *  pb,
-  ICACompletion               completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  ICACompletion               completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
  *  ICAScannerInitialize()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAScannerInitialize(
   ICAScannerInitializePB *  pb,
-  ICACompletion             completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  ICACompletion             completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
  *  ICAScannerGetParameters()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAScannerGetParameters(
   ICAScannerGetParametersPB *  pb,
-  ICACompletion                completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  ICACompletion                completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
  *  ICAScannerSetParameters()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAScannerSetParameters(
   ICAScannerSetParametersPB *  pb,
-  ICACompletion                completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  ICACompletion                completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
  *  ICAScannerStatus()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAScannerStatus(
   ICAScannerStatusPB *  pb,
-  ICACompletion         completion)       /* can be NULL */   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  ICACompletion         completion)       /* can be NULL */   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
  *  ICAScannerStart()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAScannerStart(
   ICAScannerStartPB *  pb,
-  ICACompletion        completion)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  ICACompletion        completion)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
  
@@ -986,7 +990,8 @@ enum {
  
 /* ICAImportImage*/
 enum {
-  kICAAllowMultipleImages       = 0x00000001
+  kICAAllowMultipleImages       = 0x00000001,
+  kICADownloadAndReturnPathArray = 0x00000002
 };
 
 typedef CALLBACK_API_C( Boolean , ICAImportFilterProc )(CFDictionaryRef imageInfo, UInt32 refcon);
@@ -1004,20 +1009,19 @@ typedef struct ICAImportImagePB         ICAImportImagePB;
  *  ICAImportImage()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICAImportImage(
   ICAImportImagePB *  pb,
-  ICACompletion       completion)       /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  ICACompletion       completion)       /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
  
  
-/* ICACopyObjectThumbnail*/
-
+/* ICACopyObjectThumbnail */
 enum {
   kICAThumbnailFormatICA        = 'ica ',
   kICAThumbnailFormatJPEG       = 'jpeg',
@@ -1035,15 +1039,324 @@ typedef struct ICACopyObjectThumbnailPB ICACopyObjectThumbnailPB;
  *  ICACopyObjectThumbnail()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
 ICACopyObjectThumbnail(
   ICACopyObjectThumbnailPB *  pb,
-  ICACompletion               completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  ICACompletion               completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
+
+ 
+/* 
+--- new APIs for Tiger --------------------------------------------- 
+*/
+ 
+/* Special device list objects */
+enum {
+  kICANetworkDeviceList         = 'netw',
+  kICAManualConnectDeviceList   = 'manc'
+};
+
+ 
+/* Transport types */
+/*
+ *  kICAUSBTransportType
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kICAUSBTransportType                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kICAFireWireTransportType
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kICAFireWireTransportType                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kICABluetoothTransportType
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kICABluetoothTransportType                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kICATCPIPTransportType
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kICATCPIPTransportType                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kICASCSITransportType
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kICASCSITransportType                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kICATWAINTransportType
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kICATWAINTransportType                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+ 
+/* Keys used for paramDictionary in ICALoadDeviceModulePB*/
+/*
+ *  kICADeviceModulePathKey
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kICADeviceModulePathKey                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kICATransportTypeKey
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kICATransportTypeKey                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kICABluetoothAddressKey
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kICABluetoothAddressKey                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kICAUSBLocationIDKey
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kICAUSBLocationIDKey                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kICAFireWireGUIDKey
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kICAFireWireGUIDKey                         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kICAIOServicePathKey
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kICAIOServicePathKey                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kICAIPAddressKey
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kICAIPAddressKey                            AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kICAIPPortKey
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kICAIPPortKey                               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kICAIPNameKey
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kICAIPNameKey                               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kICAIPGUIDKey
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kICAIPGUIDKey                               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+/*
+ *  kICATWAINDSPathKey
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const CFStringRef kICATWAINDSPathKey                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+ 
+/* struct ICALoadDeviceModulePB
+    Legal Key-Value pairs for populating paramDictionary:
+            
+    Key                             Value                               Comment
+    
+    kICADeviceModulePathKey         CFStringRef                         Path to the device module bundle that needs to be launched.
+    kICATransportTypeKey            CFStringRef                         Should be one of the six predifined transport types.
+    kICABluetoothAddressKey         CFStringRef                         Bluetooth device address string formatted as "00-11-22-33-44-55". 
+    kICAUSBLocationIDKey            CFNumberRef (kCFNumberLongType)     32 bit USB location ID.
+    kICAFireWireGUIDKey             CFNumberRef (kCFNumberLongLongType) 64 bit FireWire GUID.                                                               
+    kICAIOServicePathKey            CFStringRef                         IO service path to the device obtained from the IO registry.
+    kICAIPAddressKey                CFStringRef                         IP address of the device. This can be a host address ("camera.apple.com"),
+                                                                        ipv4 address ('192.168.123.10") or ipv6 address ("3ff3:0000:0000:0000:0123:4567:89ab:cdef")
+    kICAIPPortKey                   CFNumberRef (kCFNumberLongType)     IP port number of the device.
+    kICAIPNameKey                   CFStringRef                         Human readable device name.
+    kICAIPGUIDKey                   CFStringRef                         16 byte GUID string of the device formatted as "01234567-89ab-cdef-0123-456789abcdef".
+    kICATWAINDSPathKey              CFStringRef                         Path to TWAIN DS bundle. */
+ 
+/* ICALoadDeviceModule */
+ 
+struct ICALoadDeviceModulePB {
+  ICAHeader           header;                 /* <-> */
+  CFDictionaryRef     paramDictionary;        /* <-- */
+};
+typedef struct ICALoadDeviceModulePB    ICALoadDeviceModulePB;
+ 
+/*
+ *  ICALoadDeviceModule()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+ICALoadDeviceModule(
+  ICALoadDeviceModulePB *  pb,
+  ICACompletion            completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+ 
+/* ICAUnloadDeviceModule */
+ 
+struct ICAUnloadDeviceModulePB {
+  ICAHeader           header;                 /* <-> */
+  ICAObject           deviceObject;           /* <-- */
+};
+typedef struct ICAUnloadDeviceModulePB  ICAUnloadDeviceModulePB;
+ 
+/*
+ *  ICAUnloadDeviceModule()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+ICAUnloadDeviceModule(
+  ICAUnloadDeviceModulePB *  pb,
+  ICACompletion              completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+ 
+/* ICAUploadFile */
+ 
+enum {
+  kICAUploadFileAsIs            = 0x00000000,
+  kICAUploadFileScaleToFit      = 0x00000001
+};
+
+ 
+struct ICAUploadFilePB {
+  ICAHeader           header;
+  ICAObject           parentObject;           /* <-- */
+  FSRef *             fileFSRef;              /* <-- */
+  UInt32              flags;                  /* <-- */
+};
+typedef struct ICAUploadFilePB          ICAUploadFilePB;
+ 
+/*
+ *  ICAUploadFile()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+ICAUploadFile(
+  ICAUploadFilePB *  pb,
+  ICACompletion      completion)       /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+ 
+/* ICAOpenSession */
+ 
+struct ICAOpenSessionPB {
+  ICAHeader           header;                 /* <-> */
+  ICAObject           deviceObject;           /* <-- */
+  UInt32              sessionID;              /* --> */
+};
+typedef struct ICAOpenSessionPB         ICAOpenSessionPB;
+ 
+/*
+ *  ICAOpenSession()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+ICAOpenSession(
+  ICAOpenSessionPB *  pb,
+  ICACompletion       completion)       /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+ 
+/* ICACloseSession */
+ 
+struct ICACloseSessionPB {
+  ICAHeader           header;                 /* <-> */
+  UInt32              sessionID;              /* <-- */
+};
+typedef struct ICACloseSessionPB        ICACloseSessionPB;
+ 
+/*
+ *  ICACloseSession()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+ICACloseSession(
+  ICACloseSessionPB *  pb,
+  ICACompletion        completion)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 

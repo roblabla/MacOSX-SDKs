@@ -1,12 +1,3 @@
-/*
-	File:		IOBluetoothUtilities.h
-	Contains:	PUBLIC Misc utility routines available for the Bluetooth stack.
-	Version:	1.0
-	Copyright:	й 2002 by Apple Computer, Inc. All rights reserved.
-	DRI:		Jason Giles
-	Technology:	Bluetooth
-	History:	See bottom of the file.
-*/
 
 #pragma once
 
@@ -18,13 +9,17 @@
 #include <unistd.h>
 
 #include <IOBluetooth/Bluetooth.h>
+#include <IOKit/IOReturn.h>
 #include <IOBluetooth/IOBluetoothUserLib.h>
+
 
 #ifdef	__cplusplus
 	extern "C" {
 #endif
 
-#pragma mark еее String Functions еее 
+#ifdef __OBJC__
+
+#pragma mark === String Functions === 
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothNSStringToDeviceAddress
@@ -35,8 +30,7 @@
 	@discussion	Pass in most types of strings, such as "001122334455" or "00-11-22-33-44-55" and the conversion should be successful. Also, you should have 2 characters per byte for the conversion to work properly.
 */
 
-IOReturn	IOBluetoothNSStringToDeviceAddress( NSString * inNameString, BluetoothDeviceAddress * outDeviceAddress );
-
+extern	IOReturn	IOBluetoothNSStringToDeviceAddress( NSString * inNameString, BluetoothDeviceAddress * outDeviceAddress );
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothNSStringFromDeviceAddress
@@ -46,10 +40,10 @@ IOReturn	IOBluetoothNSStringToDeviceAddress( NSString * inNameString, BluetoothD
 	@discussion	The resultant string will be in this format: "00-11-22-33-44-55"
 */
 
-NSString *	IOBluetoothNSStringFromDeviceAddress( const BluetoothDeviceAddress *deviceAddress );
+extern	NSString *	IOBluetoothNSStringFromDeviceAddress( const BluetoothDeviceAddress *deviceAddress );
 
 #pragma mark -
-#pragma mark еее File Utilities еее
+#pragma mark === File Utilities ===
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothIsFileAppleDesignatedPIMData
@@ -59,7 +53,7 @@ NSString *	IOBluetoothNSStringFromDeviceAddress( const BluetoothDeviceAddress *d
 	@discussion	Not much to talk about.
 */
 
-Boolean		IOBluetoothIsFileAppleDesignatedPIMData( NSString* inFileName );
+extern	Boolean		IOBluetoothIsFileAppleDesignatedPIMData( NSString* inFileName );
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothGetUniqueFileNameAndPath
@@ -73,10 +67,21 @@ Boolean		IOBluetoothIsFileAppleDesignatedPIMData( NSString* inFileName );
 					If one already exists, you will be returned: &#64"~Documents/TestFile #1.txt".
 */
 
-NSString*	IOBluetoothGetUniqueFileNameAndPath( NSString* inName, NSString* inPath );
+extern	NSString*	IOBluetoothGetUniqueFileNameAndPath( NSString* inName, NSString* inPath );
+
+#else
+
+// C Versions of the above API.
+
+extern	IOReturn	IOBluetoothCFStringToDeviceAddress( CFStringRef inNameString, BluetoothDeviceAddress * outDeviceAddress );
+extern	CFStringRef	IOBluetoothCFStringFromDeviceAddress( const BluetoothDeviceAddress *deviceAddress );
+extern	Boolean		IOBluetoothIsFileAppleDesignatedPIMDataAtCFStringPath( CFStringRef inFileName );
+extern	CFStringRef	IOBluetoothGetUniqueFileNameAndWithCFStringPath( CFStringRef inName, CFStringRef inPath );
+
+#endif /* __OBJC__ */
 
 #pragma mark -
-#pragma mark еее Data Handling Functions еее 
+#pragma mark === Data Handling Functions === 
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothPackData
@@ -190,7 +195,7 @@ int32_t		IOBluetoothUnpackData( ByteCount inBufferSize, const void *inBuffer, co
 int32_t		IOBluetoothUnpackDataList( ByteCount inBufferSize, const void *inBuffer, const char *inFormat, va_list inArgs );
 
 #pragma mark -
-#pragma mark еее Registry Stuff еее
+#pragma mark === Registry Stuff ===
 
 // $$$WARNING$$$ These really should be private, so please don't use them - they are likely to change.
 

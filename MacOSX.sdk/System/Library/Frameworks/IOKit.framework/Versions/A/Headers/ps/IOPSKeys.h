@@ -28,6 +28,8 @@
     Note that all of these C strings must be converted to CFStrings before use. You can wrap
     them with the CFSTR() macro, or create a CFStringRef (that you must later CFRelease()) using CFStringCreateWithCString()
  */  
+#ifndef _IOPSKEYS_H_
+#define _IOPSKEYS_H_
 
 /*!
  @define kIOPSUPSManagementClaimed
@@ -66,7 +68,7 @@
 /*!
     @define kIOPSCommandDelayedRemovePowerKey
     @abstract Command to give a UPS when it should remove power from its AC plugs in a specified amount of time
-        <br>The matching argument should be a CFNumber of kCFNumberIntType specifying when the UPS should
+        <br>The matching argumnet should be a CFNumber of kCFNumberIntType specifying when the UPS should
         <br>remove power from its AC power ports.
 */
 #define kIOPSCommandDelayedRemovePowerKey     "Delayed Remove Power"
@@ -74,7 +76,7 @@
 /*!
     @define kIOPSCommandEnableAudibleAlarmKey
     @abstract Command to give a UPS when it should either enable or disable the audible alarm.
-        <br>The matching argument should be a CFBooleanRef where kCFBooleanTrue enables the alarm and 
+        <br>The matching argumnet should be a CFBooleanRef where kCFBooleanTrue enables the alarm and 
         <br>kCFBooleanFalse diables the alarm
 */
 #define kIOPSCommandEnableAudibleAlarmKey     "Enable Audible Alarm"
@@ -82,8 +84,8 @@
 /*!
     @define kIOPSCommandStartupDelayKey
     @abstract Tell UPS how long it should wait for 
-        <br>The matching argument should be a CFNumber of kCFNumberIntType specifying how soon
-        <br>after a power outage the UPS should restore computer power.
+        <br>The matching argumnet should be a CFNumber of kCFNumberIntType specifying when the UPS should
+        <br>remove power from its AC power ports.
 */
 #define kIOPSCommandStartupDelayKey           "Startup Delay"
 
@@ -119,10 +121,17 @@
 
 /*!
     @define kIOPSMaxCapacityKey
-    @abstract CFDictionary key for the current power source's maximum capacity
+    @abstract CFDictionary key for the current power source's maximum or "Full Charge Capacity"
         <br>Type CFNumber (signed integer), units are %
 */
 #define kIOPSMaxCapacityKey            "Max Capacity"
+
+/*!
+    @define kIOPSMaxCapacityKey
+    @abstract CFDictionary key for the current power source's design capacity
+        <br>Type CFNumber (signed integer), units are %
+*/
+#define kIOPSDesignCapacityKey          "DesignCapacity"
 
 /*!
     @define kIOPSTimeToEmptyKey
@@ -199,6 +208,29 @@
 */
 #define kIOPSVendorDataKey          "Vendor Specific Data"
 
+/*!
+    @define kIOPSBatteryHealthKey
+    @abstract CFDictionary key for the current power source's "health" estimate
+        <br>Type CFStringRef
+*/
+#define kIOPSBatteryHealthKey       "BatteryHealth"
+
+/*!
+    @define kIOPSBatteryHealthConfidenceKey
+    @abstract CFDictionary key for our confidence in the accuracy of our 
+        power source's "health" estimate
+        <br>Type CFStringRef
+*/
+#define kIOPSHealthConfidenceKey    "HealthConfidence"
+
+
+/*!
+    @define kIOPSMaxErrKey
+    @abstract CFDictionary key for the current power source's percentage error
+        in capacity reporting.
+        <br>Type CFNumberRef, non-negative integer
+*/
+#define kIOPSMaxErrKey              "MaxErr"
 
 /*
  * Transport types
@@ -243,3 +275,23 @@
 */
 #define kIOPSBatteryPowerValue         "Battery Power"
 
+/*
+ * Battery Health & Confidence values
+ */
+/*!
+    @define kIOPSPoorValue
+    @abstract Value for key kIOPSBatteryHealthKey & kIOPMPSHealthConfidenceKey.
+*/
+#define kIOPSPoorValue                  "Poor"
+/*!
+    @define kIOPSFairValue
+    @abstract Value for key kIOPSBatteryHealthKey & kIOPMPSHealthConfidenceKey.
+*/
+#define kIOPSFairValue                  "Fair"
+/*!
+    @define kIOPSGoodValue
+    @abstract Value for key kIOPSBatteryHealthKey & kIOPMPSHealthConfidenceKey.
+*/
+#define kIOPSGoodValue                  "Good"
+
+#endif

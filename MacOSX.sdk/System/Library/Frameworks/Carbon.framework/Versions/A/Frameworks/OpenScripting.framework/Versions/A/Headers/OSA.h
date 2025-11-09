@@ -3,9 +3,9 @@
  
      Contains:   Open Scripting Architecture Client Interfaces.
  
-     Version:    OSA-63~8
+     Version:    OSA-97~629
  
-     Copyright:  © 1992-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -330,7 +330,7 @@ enum {
   kOSASelectMakeContext         = 0x0805
 };
 
-/* Debugging */
+/* Debugging (currently unsupported) */
 enum {
   kOSADebuggerCreateSession     = 0x0901,
   kOSADebuggerGetSessionState   = 0x0902,

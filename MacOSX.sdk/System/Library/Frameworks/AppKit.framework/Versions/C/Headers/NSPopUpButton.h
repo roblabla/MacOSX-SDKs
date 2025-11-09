@@ -1,7 +1,7 @@
 /*
         NSPopUpButton.h
         Application Kit
-        Copyright (c) 1997-2003, Apple Computer, Inc.
+        Copyright (c) 1997-2005, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -66,12 +66,14 @@
 - (void)selectItem:(id <NSMenuItem>)item;
 - (void)selectItemAtIndex:(int)index;
 - (void)selectItemWithTitle:(NSString *)title;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+- (BOOL)selectItemWithTag:(int)tag;
+#endif
 - (void)setTitle:(NSString *)aString;
 
 - (id <NSMenuItem>)selectedItem;
 - (int)indexOfSelectedItem;
 - (void)synchronizeTitleAndSelectedItem;
-
 
 // Title conveniences
 - (NSString *)itemTitleAtIndex:(int)index;

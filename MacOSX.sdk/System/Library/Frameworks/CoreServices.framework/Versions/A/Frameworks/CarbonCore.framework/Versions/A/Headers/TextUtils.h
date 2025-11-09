@@ -3,9 +3,9 @@
  
      Contains:   Text Utilities Interfaces.
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -103,6 +103,7 @@ struct NBreakTable {
 typedef struct NBreakTable              NBreakTable;
 typedef NBreakTable *                   NBreakTablePtr;
 /* The following functions are new names that work on 68k and PowerPC*/
+
 /*
  *  Munger()
  *  
@@ -122,48 +123,76 @@ Munger(
 
 
 /*
- *  NewString()
+ *  NewString()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringCreateCopy instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringCreateCopy instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern StringHandle 
-NewString(ConstStr255Param theString)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewString(ConstStr255Param theString)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  SetString()
+ *  SetString()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringCreateWithPascalString and CFStringReplaceAll instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringCreateWithPascalString and CFStringReplaceAll instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 SetString(
   StringHandle       theString,
-  ConstStr255Param   strNew)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstStr255Param   strNew)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetString()
+ *  GetString()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFBundleCopyLocalizedString instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFBundleCopyLocalizedString instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern StringHandle 
-GetString(short stringID)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetString(short stringID)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  GetIndString()
+ *  GetIndString()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFBundleCopyLocalizedString instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFBundleCopyLocalizedString instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -171,7 +200,7 @@ extern void
 GetIndString(
   Str255   theString,
   short    strListID,
-  short    index)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short    index)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -185,10 +214,17 @@ GetIndString(
 
 
 /*
- *  newstring()
+ *  newstring()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringCreateCopy instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringCreateCopy instead.
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         not available but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -205,10 +241,17 @@ GetIndString(
 
 
 /*
- *  FindWordBreaks()
+ *  FindWordBreaks()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringUppercase instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringUppercase instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -220,14 +263,21 @@ FindWordBreaks(
   Boolean         leadingEdge,
   BreakTablePtr   breaks,
   OffsetTable     offsets,
-  ScriptCode      script)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ScriptCode      script)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  LowercaseText()
+ *  LowercaseText()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringLowercase instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringLowercase instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -235,14 +285,21 @@ extern void
 LowercaseText(
   Ptr          textPtr,
   short        len,
-  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  UppercaseText()
+ *  UppercaseText()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringUppercase instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringUppercase instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -250,14 +307,21 @@ extern void
 UppercaseText(
   Ptr          textPtr,
   short        len,
-  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  StripDiacritics()
+ *  StripDiacritics()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringTransform instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringTransform instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -265,14 +329,21 @@ extern void
 StripDiacritics(
   Ptr          textPtr,
   short        len,
-  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  UppercaseStripDiacritics()
+ *  UppercaseStripDiacritics()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringTransform instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringTransform instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -280,14 +351,20 @@ extern void
 UppercaseStripDiacritics(
   Ptr          textPtr,
   short        len,
-  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  FindScriptRun()
+ *  FindScriptRun()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    No longer needed on MacOS X.
+ *  
+ *  Discussion:
+ *    This function is obsolate.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -295,7 +372,7 @@ extern ScriptRunStatus
 FindScriptRun(
   Ptr     textPtr,
   long    textLen,
-  long *  lenUsed)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *  lenUsed)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
@@ -383,31 +460,45 @@ FindScriptRun(
 /* The following are new names which are exported by InterfaceLib*/
 
 /*
- *  UpperString()
+ *  UpperString()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringUppercase instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringUppercase instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 UpperString(
   Str255    theString,
-  Boolean   diacSensitive)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean   diacSensitive)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  upperstring()
+ *  upperstring()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFStringUppercase instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFStringUppercase instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 upperstring(
   char *    theString,
-  Boolean   diacSensitive)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean   diacSensitive)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /* The following are macros which map old names to the names exported by InterfaceLib*/
@@ -445,99 +536,135 @@ upperstring(
     
 */
 /*
- *  c2pstrcpy()
+ *  c2pstrcpy()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFString instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use CFString
+ *    instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
 extern void 
 c2pstrcpy(
   Str255        dst,
-  const char *  src)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const char *  src)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  p2cstrcpy()
+ *  p2cstrcpy()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFString instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use CFString
+ *    instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
 extern void 
 p2cstrcpy(
   char *             dst,
-  ConstStr255Param   src)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstStr255Param   src)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  CopyPascalStringToC()
+ *  CopyPascalStringToC()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFString instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use CFString
+ *    instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
 extern void 
 CopyPascalStringToC(
   ConstStr255Param   src,
-  char *             dst)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  char *             dst)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  CopyCStringToPascal()
+ *  CopyCStringToPascal()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFString instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use CFString
+ *    instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0.2 and later
  */
 extern void 
 CopyCStringToPascal(
   const char *  src,
-  Str255        dst)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255        dst)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  c2pstr()
+ *  c2pstr()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
+extern StringPtr 
+c2pstr(char * aStr)                                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  C2PStr()
+ *  C2PStr()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
+extern StringPtr 
+C2PStr(Ptr cString)                                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
 
 
 /*
- *  p2cstr()
+ *  p2cstr()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
+extern char * 
+p2cstr(StringPtr aStr)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 /*
- *  P2CStr()
+ *  P2CStr()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.4
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
+extern Ptr 
+P2CStr(StringPtr pString)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 
 #if !TARGET_OS_MAC

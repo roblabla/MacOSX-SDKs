@@ -1,28 +1,27 @@
 /*
- * Copyright (c) 2000-2001 Apple Computer, Inc. All Rights Reserved.
+ * Copyright (c) 1999-2001,2003-2004 Apple Computer, Inc. All Rights Reserved.
  * 
- * The contents of this file constitute Original Code as defined in and are
- * subject to the Apple Public Source License Version 1.2 (the 'License').
- * You may not use this file except in compliance with the License. Please obtain
- * a copy of the License at http://www.apple.com/publicsource and read it before
- * using this file.
+ * @APPLE_LICENSE_HEADER_START@
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS
- * OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES, INCLUDING WITHOUT
- * LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT. Please see the License for the
- * specific language governing rights and limitations under the License.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ * 
+ * @APPLE_LICENSE_HEADER_END@
+ *
+ * oidsbase.h -- Basic Object Identifier Macros and Data Types.
  */
-
-
-/*
-   File:      oidsbase.h
-
-   Contains:  Basic Object Identifier Macros and Data Types.
-
-   Copyright: (c) 1999-2000 Apple Computer, Inc., all rights reserved.
-*/
 
 #ifndef _OIDSBASE_H_
 #define _OIDSBASE_H_  1
@@ -115,11 +114,16 @@ representation is implied */
 
 #define OID_PKIX							OID_DOD, 1, 5, 5, 7
 #define OID_PKIX_LENGTH						6
+#define OID_PE								OID_PKIX, 1
+#define OID_PE_LENGTH						OID_PKIX_LENGTH + 1
 #define OID_QT								OID_PKIX, 2
 #define OID_QT_LENGTH						OID_PKIX_LENGTH + 1
-
 #define OID_KP								OID_PKIX, 3
 #define OID_KP_LENGTH						OID_PKIX_LENGTH + 1
+#define OID_AD								OID_PKIX, 48
+#define OID_AD_LENGTH						OID_PKIX_LENGTH + 1
+#define OID_AD_OCSP							OID_AD, 1
+#define OID_AD_OCSP_LENGTH					OID_AD_LENGTH + 1
 
 #define OID_OIW_SECSIG        				OID_OIW, 3
 #define OID_OIW_LENGTH       				2
@@ -127,6 +131,10 @@ representation is implied */
 
 #define OID_OIW_ALGORITHM    				OID_OIW_SECSIG, 2
 #define OID_OIW_ALGORITHM_LENGTH   			OID_OIW_SECSIG_LENGTH +1
+
+/* NIST defined digest algorithm arc (2, 16, 840, 1, 101, 3, 4, 2) */
+#define OID_NIST_HASHALG					0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02
+#define OID_NIST_HASHALG_LENGTH				8
 
 /*
  * Apple-specific OID bases
@@ -171,16 +179,90 @@ representation is implied */
 #define APPLE_ALG_OID_LENGTH	APPLE_ADS_OID_LENGTH + 1
 
 /*
- * Netscape extensions. 
+ * appleDotMacCertificate OBJECT IDENTIFIER ::= 
+ *		{ appleDataSecurity 3 }
+ *      { 1 2 840 113635 100 3 }
  */
+#define APPLE_DOTMAC_CERT_OID			APPLE_ADS_OID, 3
+#define APPLE_DOTMAC_CERT_OID_LENGTH	APPLE_ADS_OID_LENGTH + 1
+
 /*
+ * Basis of Policy OIDs for .mac TP requests
+ *
+ * dotMacCertificateRequest OBJECT IDENTIFIER ::= 
+ *		{ appleDotMacCertificate 1 }
+ *      { 1 2 840 113635 100 3 1 }
+ */
+#define APPLE_DOTMAC_CERT_REQ_OID			APPLE_DOTMAC_CERT_OID, 1
+#define APPLE_DOTMAC_CERT_REQ_OID_LENGTH	APPLE_DOTMAC_CERT_OID_LENGTH + 1
+
+/*
+ * Basis of .mac Certificate Extensions
+ *
+ * dotMacCertificateExtension OBJECT IDENTIFIER ::= 
+ *		{ appleDotMacCertificate 2 }
+ *      { 1 2 840 113635 100 3 2 }
+ */
+#define APPLE_DOTMAC_CERT_EXTEN_OID			APPLE_DOTMAC_CERT_OID, 2
+#define APPLE_DOTMAC_CERT_EXTEN_OID_LENGTH  APPLE_DOTMAC_CERT_OID_LENGTH + 1
+
+/*
+ * Basis of .mac Certificate request OID/value identitifiers
+ *
+ * dotMacCertificateRequestValues OBJECT IDENTIFIER ::= 
+ *		{ appleDotMacCertificate 3 }
+ *      { 1 2 840 113635 100 3 3 }
+ */
+#define APPLE_DOTMAC_CERT_REQ_VALUE_OID			APPLE_DOTMAC_CERT_OID, 3
+#define APPLE_DOTMAC_CERT_REQ_VALUE_OID_LENGTH  APPLE_DOTMAC_CERT_OID_LENGTH + 1
+
+/*
+ * Basis of Apple-specific extended key usages
+ *
+ * appleExtendedKeyUsage OBJECT IDENTIFIER ::= 
+ *		{ appleDataSecurity 4 }
+ *      { 1 2 840 113635 100 4 }
+ */
+#define APPLE_EKU_OID					APPLE_ADS_OID, 4
+#define APPLE_EKU_OID_LENGTH			APPLE_ADS_OID_LENGTH + 1
+
+/* 
+ * Basis of Apple Code Signing extended key usages
+ * appleCodeSigning  OBJECT IDENTIFIER ::= 
+ *		{ appleExtendedKeyUsage 1 }
+ *      { 1 2 840 113635 100 4 1}
+ */
+#define APPLE_EKU_CODE_SIGNING			APPLE_EKU_OID, 1
+#define APPLE_EKU_CODE_SIGNING_LENGTH	APPLE_EKU_OID_LENGTH + 1
+
+/*
+ * Basis of Apple-specific Certific Policy IDs.
+ * appleCertificatePolicies OBJECT IDENTIFIER ::= 
+ *		{appleDataSecurity 5}
+ *		{ 1 2 840 113635 100 5 }
+ */
+#define APPLE_CERT_POLICIES				APPLE_ADS_OID, 5
+#define APPLE_CERT_POLICIES_LENGTH		APPLE_ADS_OID_LENGTH + 1
+
+/*
+ * Netscape OIDs.
+ */
+#define NETSCAPE_BASE_OID		0x60, 0x86, 0x48, 0x01, 0x86, 0xf8, 0x42
+#define NETSCAPE_BASE_OID_LEN   7
+
+/*
+ * Netscape cert extension.
+ *
  *  netscape-cert-extension OBJECT IDENTIFIER ::=
  * 		{ 2 16 840 1 113730 1 }
  *
  *	BER = 06 08 60 86 48 01 86 F8 42 01
  */
-#define NETSCAPE_CERT_EXTEN		0x60, 0x86, 0x48, 0x01, 0x86, 0xf8, 0x42, 0x01
-#define NETSCAPE_CERT_EXTEN_LENGTH	8
+#define NETSCAPE_CERT_EXTEN			NETSCAPE_BASE_OID, 0x01
+#define NETSCAPE_CERT_EXTEN_LENGTH	NETSCAPE_BASE_OID_LEN + 1
+
+#define NETSCAPE_CERT_POLICY		NETSCAPE_BASE_OID, 0x04
+#define NETSCAPE_CERT_POLICY_LENGTH	NETSCAPE_BASE_OID_LEN + 1
 
 #ifdef __cplusplus
 }

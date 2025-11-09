@@ -3,9 +3,9 @@
  
      Contains:   Macintosh Help Package Interfaces.
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1998-2003 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1998-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -824,7 +824,15 @@ HMSetDialogHelpFromBalloonRsrc(
  *  HMDisplayTag()
  *  
  *  Summary:
- *    Displays a help tag at a user defined location.
+ *    Displays a help tag at a user-defined location.
+ *  
+ *  Discussion:
+ *    Note that HMDisplayTag does not currently retain the help content
+ *    that is passed to it, nor release it when the tag is closed. Your
+ *    application must ensure that the help content remains valid as
+ *    long as the tag may be visible (which effectively means that your
+ *    application should never dispose of help content that is passed
+ *    to HMDisplayTag).
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -866,6 +874,57 @@ HMDisplayTag(const HMHelpContentRec * inContent)              AVAILABLE_MAC_OS_X
  */
 extern OSStatus 
 HMHideTag(void)                                               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+
+/*
+ *  Summary:
+ *    Values for the inOptions parameter to HMHideTagWithOptions.
+ */
+enum {
+
+  /*
+   * Causes the tag to fade out when hidden. If this flag is not
+   * specified, the tag is hidden without fading.
+   */
+  kHMHideTagFade                = 1 << 0,
+
+  /*
+   * Causes the tag to begin hiding immediately. If this flag is not
+   * specified, the tag is hidden after a short delay (currently 0.75
+   * second).
+   */
+  kHMHideTagImmediately         = 1 << 1
+};
+
+/*
+ *  HMHideTagWithOptions()
+ *  
+ *  Summary:
+ *    Hides the current help tag, with various options to control how
+ *    the tag is hidden.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inOptions:
+ *      Options for how the tag should be hidden. kHMHideTagFade and
+ *      kHMHideTagImmediately are the only available options.
+ *  
+ *  Result:
+ *    An operating system result code. noErr is returned if there is no
+ *    tag currently visible.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HMHideTagWithOptions(OptionBits inOptions)                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
 
 
 

@@ -100,17 +100,33 @@ __END_DECLS
 
 #ifndef __Request__clock_subsystem__defined
 #define __Request__clock_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__clock_get_time_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		clock_flavor_t flavor;
 		mach_msg_type_number_t clock_attrCnt;
 	} __Request__clock_get_attributes_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
@@ -121,7 +137,9 @@ __END_DECLS
 		alarm_type_t alarm_type;
 		mach_timespec_t alarm_time;
 	} __Request__clock_alarm_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__clock_subsystem__defined */
 
 /* union of all requests */
@@ -138,13 +156,23 @@ union __RequestUnion__clock_subsystem {
 
 #ifndef __Reply__clock_subsystem__defined
 #define __Reply__clock_subsystem__defined
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_timespec_t cur_time;
 	} __Reply__clock_get_time_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
@@ -152,13 +180,21 @@ union __RequestUnion__clock_subsystem {
 		mach_msg_type_number_t clock_attrCnt;
 		int clock_attr[1];
 	} __Reply__clock_get_attributes_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__clock_alarm_t;
-
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__clock_subsystem__defined */
 
 /* union of all replies */

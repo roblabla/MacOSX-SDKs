@@ -18,6 +18,7 @@
 
 #include <Carbon/Carbon.h>
 #include <CoreFoundation/CoreFoundation.h>
+#include <IOBluetooth/Bluetooth.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -189,6 +190,12 @@ typedef CALLBACK_API_C(OSErr, __ICD_ScannerOpenFireWireDeviceWithIORegPath)(UInt
                                                                io_string_t ioregPath,
                                                                ScannerObjectInfo * objectInfo);
 
+typedef CALLBACK_API_C(OSErr, __ICD_ScannerOpenBluetoothDevice)(CFDictionaryRef     params,
+                                                                ScannerObjectInfo*  objectInfo);
+
+typedef CALLBACK_API_C(OSErr, __ICD_ScannerOpenTCPIPDevice)(CFDictionaryRef     params,
+                                                            ScannerObjectInfo*  objectInfo);
+
 typedef CALLBACK_API_C(OSErr, __ICD_ScannerCloseDevice)(ScannerObjectInfo * objectInfo);
 
 typedef CALLBACK_API_C(OSErr, __ICD_ScannerPeriodicTask)(ScannerObjectInfo * objectInfo);
@@ -211,7 +218,8 @@ typedef CALLBACK_API_C(OSErr, __ICD_ScannerReadFileData)(const ScannerObjectInfo
                                                          UInt32			offset,
                                                          UInt32 *		length);
 
-typedef CALLBACK_API_C(OSErr, __ICD_ScannerWriteFileData)(const ScannerObjectInfo *	objectInfo,
+typedef CALLBACK_API_C(OSErr, __ICD_ScannerWriteFileData)(const ScannerObjectInfo *	parentInfo,
+                                                          const char *  filename,
                                                           UInt32		dataType,
                                                           Ptr			buffer,
                                                           UInt32		offset,
@@ -270,7 +278,8 @@ typedef struct ICD_Scannerscanner_callback_functions
     __ICD_ScannerSetParameters						f_ICD_ScannerSetParameters;
     __ICD_ScannerStatus								f_ICD_ScannerStatus;
     __ICD_ScannerStart								f_ICD_ScannerStart;
-
+    __ICD_ScannerOpenBluetoothDevice                f_ICD_ScannerOpenBluetoothDevice;
+    __ICD_ScannerOpenTCPIPDevice                    f_ICD_ScannerOpenTCPIPDevice;
 } ICD_scanner_callback_functions;
 extern ICD_scanner_callback_functions gICDScannerCallbackFunctions;
 
@@ -321,6 +330,18 @@ OSErr ICDScannerDisconnectFWDevice(UInt64 guid);
 OSErr ICDScannerDisconnectFWDeviceWithIORegPath(UInt64 guid,
                                                 io_string_t ioregPath);
 
+// ----------------------------------------------------
+// Bluetooth
+
+OSErr ICDScannerConnectBluetoothDevice(CFDictionaryRef params);
+OSErr ICDScannerDisconnectBluetoothDevice(CFDictionaryRef params);
+
+// ----------------------------------------------------
+// TCP/IP
+
+OSErr ICDScannerConnectTCPIPDevice(CFDictionaryRef params);
+OSErr ICDScannerDisconnectTCPIPDevice(CFDictionaryRef params);
+                          
 #if PRAGMA_STRUCT_ALIGN
 #pragma options align=reset
 #elif PRAGMA_STRUCT_PACKPUSH

@@ -102,13 +102,7 @@ struct	ether_addr {
 #define	ETHERMTU	(ETHER_MAX_LEN-ETHER_HDR_LEN-ETHER_CRC_LEN)
 #define	ETHERMIN	(ETHER_MIN_LEN-ETHER_HDR_LEN-ETHER_CRC_LEN)
 
-#ifdef KERNEL
-#ifdef __APPLE_API_PRIVATE
-struct	ether_addr *ether_aton __P((char *));
-#endif /* __APPLE_API_PRIVATE */
-#endif
 
-#ifndef KERNEL
 #include <sys/cdefs.h>
 
 /*
@@ -116,11 +110,11 @@ struct	ether_addr *ether_aton __P((char *));
  */
 __BEGIN_DECLS
 
-int	ether_hostton __P((char *, struct ether_addr *));
-int	ether_line __P((char *, struct ether_addr *, char *));
-char 	*ether_ntoa __P((const struct ether_addr *));
-int	ether_ntohost __P((char *, struct ether_addr *));
+int	ether_hostton(const char *, struct ether_addr *);
+int	ether_line(const char *, struct ether_addr *, char *);
+char 	*ether_ntoa(const struct ether_addr *);
+struct	ether_addr *ether_aton(const char *);
+int	ether_ntohost(char *, const struct ether_addr *);
 __END_DECLS
-#endif /* !KERNEL */
 
 #endif /* !_NET_ETHERNET_H_ */

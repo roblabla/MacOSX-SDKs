@@ -1,13 +1,13 @@
 /*
 	NSAlert.h
 	Application Kit
-	Copyright (c) 1994-2003, Apple Computer, Inc.
+	Copyright (c) 1994-2005, Apple Computer, Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <AppKit/NSGraphics.h>
-@class NSTextField, NSPanel, NSArray, NSWindow, NSImage, NSButton;
+@class NSTextField, NSPanel, NSArray, NSWindow, NSImage, NSButton, NSError;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
@@ -22,36 +22,44 @@ typedef enum NSAlertStyle {
 {
     @private
     /*All instance variables are private*/
-    NSTextField *informationField;
-    id  first;
-    id  second;
-    id  third;
-    NSArray *buttons;
-    NSPanel *panel;
-    id  messageField;
-    id  imageView;
-    NSSize minButtonSize;
-    float buttonSpacing;
-    float buttonPadding;
-    float messagePadding;
-    float buttonSpacingMaxX;
-    float buttonSpacingY;
-    id modalDelegate;
-    NSWindow *docWindow;
-    SEL didEndSelector;
-    SEL didDismissSelector;
-    NSImage *unbadgedImage;
-    NSSize defaultPanelSize;
-    id helpButton;
-    id delegate;
-    NSAlertStyle alertStyle;
-    id helpAnchor;
-    BOOL useNSLayout;
-    BOOL showsHelp;
+    NSTextField *_informationField;
+    id  _first;
+    id  _second;
+    id  _third;
+    NSArray *_buttons;
+    NSPanel *_panel;
+    id  _messageField;
+    id  _imageView;
+    NSSize _minButtonSize;
+    float _buttonSpacing;
+    float _buttonPadding;
+    float _messagePadding;
+    float _buttonSpacingMaxX;
+    float _buttonSpacingY;
+    id _modalDelegate;
+    NSWindow *_docWindow;
+    SEL _didEndSelector;
+    SEL _didDismissSelector;
+    NSImage *_unbadgedImage;
+    NSSize _defaultPanelSize;
+    id _helpButton;
+    id _delegate;
+    NSAlertStyle _alertStyle;
+    id _helpAnchor;
+    BOOL _useNSLayout;
+    BOOL _showsHelp;
     BOOL reserved[2];
     id reserved1;
     id reserved2;
 }
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+
+/* Given an NSError, create an NSAlert that can be used to present the error to the user. The error's localized description, recovery suggestion, and recovery options will be used to set the alert's message text, informative text, and button titles, respectively.
+*/
++ (NSAlert *)alertWithError:(NSError *)error;
+
+#endif
 
 // the following class method is for use by apps migrating from the C-based API.  Note that this returns an NSAlert that is equivalent to the one created in NSRunAlertPanel, so the layout, button return values, and key equivalents are the same as for the C-based API.
 + (NSAlert *)alertWithMessageText:(NSString *)message defaultButton:(NSString *)defaultButton alternateButton:(NSString *)alternateButton otherButton:(NSString *)otherButton informativeTextWithFormat:(NSString *)format, ...;
@@ -119,7 +127,7 @@ enum {
 @end
 
 @interface NSObject(NSAlertDelegate)
-// the delegate should implement this is custom help behavior is required.
+// the delegate should implement this if custom help behavior is required.
 - (BOOL)alertShowHelp:(NSAlert *)alert;
 @end
 

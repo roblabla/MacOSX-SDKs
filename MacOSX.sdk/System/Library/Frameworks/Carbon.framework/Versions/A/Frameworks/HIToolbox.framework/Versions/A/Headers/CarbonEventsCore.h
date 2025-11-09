@@ -3,9 +3,9 @@
  
      Contains:   Carbon Event Manager
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -190,9 +190,15 @@ enum {
             
         Retained in Panther and later:
         
+            typeEventRef
             typeCFArrayRef
             typeCFDictionaryRef:
             typeCFMutableDictionaryRef
+            
+        Retained in Tiger and later:
+        
+            typeHIShapeRef
+            typeMenuRef
             
     Note that other data types may be retained in future releases of Mac OS X.
     Apple recommends that if you need to know whether a particular data type
@@ -335,7 +341,7 @@ typedef struct OpaqueEventLoopRef*      EventLoopRef;
  *    returned.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
  *  
  *  Result:
  *    An event loop reference.
@@ -356,7 +362,7 @@ GetCurrentEventLoop(void)                                     AVAILABLE_MAC_OS_X
  *    Returns the event loop object for the main application thread.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
  *  
  *  Result:
  *    An event loop reference.
@@ -383,7 +389,7 @@ GetMainEventLoop(void)                                        AVAILABLE_MAC_OS_X
  *    most likely on another thread of execution.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
  *  
  *  Parameters:
  *    
@@ -410,7 +416,7 @@ RunCurrentEventLoop(EventTimeout inTimeout)                   AVAILABLE_MAC_OS_X
  *    RunCurrentEventLoop.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
  *  
  *  Parameters:
  *    
@@ -443,7 +449,7 @@ QuitEventLoop(EventLoopRef inEventLoop)                       AVAILABLE_MAC_OS_X
  *    don't need to use this.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
  *  
  *  Parameters:
  *    
@@ -476,7 +482,7 @@ GetCFRunLoopFromEventLoop(EventLoopRef inEventLoop)           AVAILABLE_MAC_OS_X
  *    blocked waiting for events to arrive when inside this function.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
  *  
  *  Parameters:
  *    
@@ -560,7 +566,7 @@ enum {
  *    Creates a new Carbon event.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
  *  
  *  Parameters:
  *    
@@ -682,8 +688,23 @@ CopyEventAs(
 /*
  *  RetainEvent()
  *  
+ *  Summary:
+ *    Increments the retain count of an event.
+ *  
+ *  Discussion:
+ *    Note that EventRefs are not CoreFoundation types, and therefore
+ *    you cannot use CFRetain on an EventRef; you must use RetainEvent.
+ *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inEvent:
+ *      The event to retain.
+ *  
+ *  Result:
+ *    The event that was retained.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -697,8 +718,24 @@ RetainEvent(EventRef inEvent)                                 AVAILABLE_MAC_OS_X
 /*
  *  GetEventRetainCount()
  *  
+ *  Summary:
+ *    Returns the retain count of an event.
+ *  
+ *  Discussion:
+ *    Note that EventRefs are not CoreFoundation types, and therefore
+ *    you cannot use CFGetRetainCount on an EventRef; you must use
+ *    GetEventRetainCount.
+ *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inEvent:
+ *      The event whose retain count to return.
+ *  
+ *  Result:
+ *    The event's retain count.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -712,8 +749,22 @@ GetEventRetainCount(EventRef inEvent)                         AVAILABLE_MAC_OS_X
 /*
  *  ReleaseEvent()
  *  
+ *  Summary:
+ *    Decrements the retain count of an event. If the retain count
+ *    reaches zero, the event is destroyed.
+ *  
+ *  Discussion:
+ *    Note that EventRefs are not CoreFoundation types, and therefore
+ *    you cannot use CFRelease on an EventRef; you must use
+ *    ReleaseEvent.
+ *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inEvent:
+ *      The event to release.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -727,8 +778,15 @@ ReleaseEvent(EventRef inEvent)                                AVAILABLE_MAC_OS_X
 /*
  *  SetEventParameter()
  *  
- *  Discussion:
+ *  Summary:
  *    Sets a piece of data for the given event.
+ *  
+ *  Discussion:
+ *    SetEventParameter is thread-safe to the extent of allowing
+ *    multiple threads to each modify a separate event, but it is not
+ *    safe to have multiple threads call SetEventParameter on the same
+ *    event. Multiple threads modifying the same event can cause
+ *    corruption of the event data.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -841,7 +899,7 @@ GetEventParameter(
  *    etc.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
  *  
  *  Parameters:
  *    
@@ -870,7 +928,7 @@ GetEventClass(EventRef inEvent)                               AVAILABLE_MAC_OS_X
  *    class and kind is what determines an event signature.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
  *  
  *  Parameters:
  *    
@@ -898,7 +956,7 @@ GetEventKind(EventRef inEvent)                                AVAILABLE_MAC_OS_X
  *    since the last system startup.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
  *  
  *  Parameters:
  *    
@@ -920,7 +978,6 @@ GetEventTime(EventRef inEvent)                                AVAILABLE_MAC_OS_X
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  ¥ Setters for 'base-class' event info                                               */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-
 /*
  *  SetEventTime()
  *  
@@ -931,7 +988,7 @@ GetEventTime(EventRef inEvent)                                AVAILABLE_MAC_OS_X
  *    time instead of creating a new event each time.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
  *  
  *  Parameters:
  *    
@@ -969,7 +1026,7 @@ typedef struct OpaqueEventQueueRef*     EventQueueRef;
  *    returned.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
  *  
  *  Result:
  *    An event queue reference.
@@ -988,9 +1045,15 @@ GetCurrentEventQueue(void)                                    AVAILABLE_MAC_OS_X
  *  
  *  Discussion:
  *    Returns the event queue object for the main application thread.
+ *    
+ *    
+ *    GetMainEventQueue is threadsafe in Mac OS X 10.4 and later. On
+ *    earlier versions of Mac OS X, you should call GetMainEventQueue
+ *    once before creating any other threads if those other threads
+ *    will be calling GetMainEventQueue themselves.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe since version 10.4
  *  
  *  Result:
  *    An event queue reference.
@@ -1065,10 +1128,10 @@ InvokeEventComparatorUPP(
  *  PostEventToQueue()
  *  
  *  Discussion:
- *    Posts an event to the queue specified. This automatically wakes
- *    up the event loop of the thread the queue belongs to. After
- *    posting the event, you should release the event. The event queue
- *    retains it.
+ *    Posts an event to the specified queue and increments the event's
+ *    retain count. This automatically wakes up the event loop of the
+ *    thread the queue belongs to. After posting the event, you may
+ *    release the event, since it is retained by the queue.
  *  
  *  Mac OS X threading:
  *    Thread safe
@@ -1265,10 +1328,10 @@ GetNumEventsInQueue(EventQueueRef inQueue)                    AVAILABLE_MAC_OS_X
  *  RemoveEventFromQueue()
  *  
  *  Discussion:
- *    Removes the given event from the queue which it was posted. When
- *    you call this function, the event ownership is transferred to
- *    you, the caller, at no charge. You must release the event when
- *    you are through with it.
+ *    Removes the given event from the specified queue and decrements
+ *    the event's retain count. If it was your intention to hold onto
+ *    the event, you must retain the event before removing it from the
+ *    queue.
  *  
  *  Mac OS X threading:
  *    Thread safe
@@ -1282,7 +1345,8 @@ GetNumEventsInQueue(EventQueueRef inQueue)                    AVAILABLE_MAC_OS_X
  *      The event to remove.
  *  
  *  Result:
- *    An operating system result code.
+ *    An operating system result code. eventNotInQueueErr is returned
+ *    if the event is not actually contained in the specified queue.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1403,8 +1467,10 @@ AcquireFirstMatchingEventInQueue(
  *  Discussion:
  *    When an event with kEventAttributeUserEvent is dispatched by the
  *    event dispatcher target, it is recorded internally by the Event
- *    Manager. At any time during the handling of that event,
- *    GetCurrentEvent may be used to retrieve the original EventRef.
+ *    Manager. At any time during the handling of that event (or of any
+ *    other event which is created and sent during the handling of the
+ *    original event), GetCurrentEvent may be used to retrieve the
+ *    original EventRef.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -1444,11 +1510,44 @@ GetCurrentEvent(void)                                         AVAILABLE_MAC_OS_X
  *    in the event queue, or if events are being artificially
  *    introduced into the event queue from an outside source.
  *    GetCurrentEventButtonState returns the queue-synchronized button
- *    state. It is generally better to use this API than to use the
- *    Button function or the GetCurrentButtonState function (which
- *    return the hardware state). This gives a more consistent user
- *    experience when the user input queue is being remoted controlled
- *    or manipulated via non-hardware event sources such as speech or
+ *    state. This state is determined by user input events that are
+ *    sent through the event dispatcher target; whenever a user input
+ *    event (mouse or keyboard) is handled by the Carbon event
+ *    dispatcher, its button state is recorded, and that button state
+ *    will be returned by GetCurrentEventButtonState. 
+ *    
+ *    The "current event" referenced in the API name is the event most
+ *    recently dispatched through the event dispatcher target, which is
+ *    not necessarily the event that your event handler is handling.
+ *    For example, if a mouse-down event occurs, and you have a handler
+ *    for the kEventWindowHandleContentClick event that is generated
+ *    from the mouse-down, then the button state will be that which was
+ *    attached to the mouse-down. The ContentClick event itself does
+ *    also have MouseButton and MouseChord parameters, which are copied
+ *    from the the mouse-down event, but GetCurrentEventButtonState
+ *    returns the button state from the mouse-down, not from the
+ *    ContentClick event, since it was the mouse-down that was most
+ *    recently dispatched through the event dispatcher. Usually, this
+ *    is the behavior that you want anyways. 
+ *    
+ *    Note that events that are not sent through the event dispatcher
+ *    target will not update the current event button state. Also, note
+ *    that events arriving from outside the application, such as an
+ *    AppleEvent or an Accessibility event, also will not update the
+ *    modifiers. If your application modifies its behavior based on
+ *    button state, we recommend that you parameterize your core code
+ *    with the event buttons, and determine the button state based on
+ *    the origin of the behavior request. For a request that originates
+ *    directly from user input, you can use GetCurrentEventButtonState,
+ *    but for a request that originates from an AppleEvent or
+ *    Accessibility event, you would probably use no button state, or
+ *    perhaps just left-button-pressed. 
+ *    
+ *    It is generally better to use this API than to use the Button
+ *    function or the GetCurrentButtonState function (which return the
+ *    hardware state). This gives a more consistent user experience
+ *    when the user input queue is being remoted controlled or
+ *    manipulated via non-hardware event sources such as speech or
  *    AppleEvents; using GetCurrentEventButtonState is also much faster
  *    than using Button or GetCurrentButtonState.
  *    
@@ -1492,11 +1591,43 @@ GetCurrentEventButtonState(void)                              AVAILABLE_MAC_OS_X
  *    in the event queue, or if events are being artificially
  *    introduced into the event queue from an outside source.
  *    GetCurrentEventKeyModifiers returns the queue-synchronized
- *    modifier state. It is generally better to use this API than to
- *    use the GetCurrentKeyModifiers API (which returns the hardware
- *    state). This gives a more consistent user experience when the
- *    user input queue is being remoted controlled or manipulated via
- *    non-hardware event sources such as speech or AppleEvents; using
+ *    modifier state. This state is determined by user input events
+ *    that are sent through the event dispatcher target; whenever a
+ *    user input event (mouse or keyboard) is handled by the Carbon
+ *    event dispatcher, its modifiers are recorded, and those modifiers
+ *    will be returned by GetCurrentEventKeyModifiers. 
+ *    
+ *    The "current event" referenced in the API name is the event most
+ *    recently dispatched through the event dispatcher target, which is
+ *    not necessarily the event that your event handler is handling.
+ *    For example, if a mouse-down event occurs, and you have a handler
+ *    for the kEventWindowHandleContentClick event that is generated
+ *    from the mouse-down, then the modifiers will be those that were
+ *    attached to the mouse-down. The ContentClick event itself does
+ *    also have a KeyModifiers parameter, which is copied from the
+ *    mouse-down event, but GetCurrentEventKeyModifiers returns the
+ *    modifiers from the mouse-down, not from the ContentClick event,
+ *    since it was the mouse-down that was most recently dispatched
+ *    through the event dispatcher. Usually, this is the behavior that
+ *    you want anyways. 
+ *    
+ *    Note that events that are not sent through the event dispatcher
+ *    target will not update the current event key modifiers. Also,
+ *    note that events arriving from outside the application, such as
+ *    an AppleEvent or an Accessibility event, also will not update the
+ *    modifiers. If your application modifies its behavior based on
+ *    modifier state, we recommend that you parameterize your core code
+ *    with the event modifiers, and determine the modifiers based on
+ *    the origin of the behavior request. For a request that originates
+ *    directly from user input, you can use
+ *    GetCurrentEventKeyModifiers, but for a request that originates
+ *    from an AppleEvent or Accessibility event, you would probably use
+ *    no modifiers. 
+ *    BR> It is generally better to use this API than to use the
+ *    GetCurrentKeyModifiers API (which returns the hardware state).
+ *    This gives a more consistent user experience when the user input
+ *    queue is being remoted controlled or manipulated via non-hardware
+ *    event sources such as speech or AppleEvents; using
  *    GetCurrentEventKeyModifiers is also much faster than using
  *    EventAvail(0, &eventRecord) or GetCurrentKeyModifiers.
  *    
@@ -1580,7 +1711,7 @@ GetCurrentButtonState(void)                                   AVAILABLE_MAC_OS_X
  *    Returns the current time since last system startup in seconds.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
  *  
  *  Result:
  *    EventTime.
@@ -1781,7 +1912,7 @@ InvokeEventLoopIdleTimerUPP(
  *    on the parameters passed to this function.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
  *  
  *  Parameters:
  *    
@@ -1844,7 +1975,7 @@ InstallEventLoopTimer(
  *    all idle timers automatically for you.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
  *  
  *  Parameters:
  *    
@@ -1862,7 +1993,10 @@ InstallEventLoopTimer(
  *      in the middle of control tracking, say, it wouldn't fire until
  *      the user stopped tracking. But if you installed it at app
  *      startup and the user hasn't typed/clicked, it would fire in
- *      inDelay seconds.
+ *      inDelay seconds. On Mac OS X 10.3 and earlier, the delay must
+ *      be greater than zero. On Mac OS X 10.4 and later, the delay
+ *      must be greather than or equal to zero. You cannot use
+ *      kEventDurationForever for the delay.
  *    
  *    inInterval:
  *      The timer interval (pass 0 for a one-shot timer, which executes
@@ -1905,7 +2039,7 @@ InstallEventLoopIdleTimer(
  *    using a timer.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
  *  
  *  Parameters:
  *    
@@ -1938,7 +2072,7 @@ RemoveEventLoopTimer(EventLoopTimerRef inTimer)               AVAILABLE_MAC_OS_X
  *    first-fire delay.
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe
  *  
  *  Parameters:
  *    
@@ -2067,10 +2201,10 @@ typedef struct OpaqueEventTargetRef*    EventTargetRef;
 /* different object is legal.                                                           */
 /*                                                                                      */
 /* Upon successful completion of this routine, you are returned an EventHandlerRef,     */
-/* which you can use in various other calls, and is passed to your event handler. You   */
-/* use it to extract information about the handler, such as the target (window, etc.)   */
-/* if you have the same handler installed for different objects and need to perform     */
-/* actions on the current target (say, call a window manager function).                 */
+/* which you can use in various other calls. It is not possible to retrieve any         */
+/* information from an EventHandlerRef about which object the handler is attached to;   */
+/* to keep track of the target object of an event handler, use the inUserData paramter  */
+/* to InstallEventHandler to specify the object.                                        */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*
  *  InstallEventHandler()
@@ -2130,8 +2264,31 @@ InstallEventHandler(
 /*
  *  InstallStandardEventHandler()
  *  
+ *  Summary:
+ *    Installs the standard event handler (if any) for an event target.
+ *  
+ *  Discussion:
+ *    All event targets have default handlers installed on them by the
+ *    toolbox to perform certain basic operations common to that type
+ *    of target. Some targets also have standard handlers which are not
+ *    installed by default, but may be requested. A standard handler
+ *    typically provides higher-level behavior for its target.
+ *    Currently, only window event targets have a standard handler; the
+ *    window standard event hander may also be installed by setting the
+ *    kWindowStandardHandlerAttribute flag. Calling
+ *    InstallStandardEventHandler on any other type of target
+ *    (application, control, menu, etc.) has no effect.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inTarget:
+ *      The target whose standard handler should be installed.
+ *  
+ *  Result:
+ *    An operating system result code.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2145,8 +2302,13 @@ InstallStandardEventHandler(EventTargetRef inTarget)          AVAILABLE_MAC_OS_X
 /*
  *  RemoveEventHandler()
  *  
- *  Discussion:
+ *  Summary:
  *    Removes an event handler from the target it was bound to.
+ *  
+ *  Discussion:
+ *    As of Mac OS X 10.1, it is safe to remove an event handler from
+ *    inside the handler function. This is not safe to do in CarbonLib
+ *    or earlier releases of Mac OS X.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -2309,16 +2471,17 @@ CallNextEventHandler(
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 
 /*
- *  Discussion:
- *    EventTarget Send Options
+ *  Summary:
+ *    Options for the SendEventToEventTargetWithOptions API.
  */
 enum {
 
   /*
    * The event should be sent to the target given only, and should not
-   * propagate to any other target. CallNextEventHandler will do
-   * nothing in a handler which has received an event sent in this
-   * manner.
+   * propagate to any other target. CallNextEventHandler, when passed
+   * an event sent with this option, will only call other event
+   * handlers installed on the current event target; it will not
+   * propagate the event to other event targets.
    */
   kEventTargetDontPropagate     = (1 << 0),
 
@@ -2329,7 +2492,7 @@ enum {
    * event falls through each handler. This means that if the first
    * handler to receive the event returned noErr, and the next returned
    * eventNotHandledErr, the result returned would actually be noErr.
-   * No handler can stop this event from propagating, i.e. the result
+   * No handler can stop this event from propagating; i.e., the result
    * code does not alter event flow.
    */
   kEventTargetSendToAllHandlers = (1 << 1)
@@ -2353,7 +2516,15 @@ enum {
  *      The target to send it to.
  *  
  *  Result:
- *    An operating system result code.
+ *    An operating system result code. The result is determined by both
+ *    the SendEventToEventTarget API and also the event handlers that
+ *    receive the event. SendEventToEventTarget will return paramErr if
+ *    the event or the target are invalid, or eventNotHandledErr if the
+ *    event is not wanted by any handler. If the event is received by a
+ *    handler, however, then the result code returned by the API is
+ *    determined by the handler; a handler may return any error code,
+ *    and your code should not make any assumptions about exactly which
+ *    errors will be returned by SendEventToEventTarget.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2390,7 +2561,16 @@ SendEventToEventTarget(
  *      makes it behave just like SendEventToEventTarget.
  *  
  *  Result:
- *    An operating system result code.
+ *    An operating system result code. The result is determined by both
+ *    the SendEventToEventTargetWithOptions API and also the event
+ *    handlers that receive the event.
+ *    SendEventToEventTargetWithOptions will return paramErr if the
+ *    event or the target are invalid, or eventNotHandledErr if the
+ *    event is not wanted by any handler. If the event is received by a
+ *    handler, however, then the result code returned by the API is
+ *    determined by the handler; a handler may return any error code,
+ *    and your code should not make any assumptions about exactly which
+ *    errors will be returned by SendEventToEventTargetWithOptions.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in Carbon.framework

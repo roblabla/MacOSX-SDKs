@@ -66,7 +66,7 @@ enum
  * When calling the Rotate and Affine Transform functions, it is possible that some part of the output 
  * image may come from regions of the input image that are outside the original input image. In these cases,
  * the "revealed" pixels will be of the color provided in the backgroundColor parameter passed to the function,
- * unless vImageEdgeExtend is passed, in which case it will be taken from the nearest edge pixel. 
+ * unless kvImageEdgeExtend is passed, in which case it will be taken from the nearest edge pixel. 
  *
  * The Scaling function may need to read outside the edges of the input buffer to service the resampling kernel.
  * In this case the values of the edge pixels a replicated outward infinitely. This allows us to avoid having
@@ -114,6 +114,7 @@ vImage_Error	vImageRotate_PlanarF( const vImage_Buffer *src, const vImage_Buffer
 vImage_Error	vImageRotate_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, float angleInRadians, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 vImage_Error	vImageRotate_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, float angleInRadians, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
+/* Developers using vImage_Scale* on MacOS X.3 should pass kvImageEdgeExtend in the flags field to avoid ringing artifacts at the edges of images */
 vImage_Error	vImageScale_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 vImage_Error	vImageScale_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 vImage_Error	vImageScale_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
@@ -136,7 +137,13 @@ vImage_Error	vImageAffineWarp_ARGBFFFF( const vImage_Buffer *src, const vImage_B
  * number of bytes per pixel (the data format). The rowbytes and data fields are ignored. As long as the size
  * of the buffers doesn't change, the size returned by  GetMinimumTempBufferSize() will not change. 
  */
-size_t		vImageGetMinimumGeometryTempBufferSize( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags, size_t bytesPerPixel )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+ 
+/*
+ * It is recommended that you use the kvImageGetTempBufferSize flag with the appropriate function, instead of using this API 
+ * Simply pass the kvImageGetTempBufferSize flag in addition to all the regular parameters. The size will be returned in the  
+ * vImage_Error result.  kvImageGetTempBufferSize is for MacOS X.4 and later. 
+ */
+size_t		vImageGetMinimumGeometryTempBufferSize( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags, size_t bytesPerPixel )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 /*
  *	Low Level Geometry Functions
@@ -194,21 +201,21 @@ vImage_Error	vImageRotate90_ARGBFFFF( const vImage_Buffer *src, const vImage_Buf
 /*
  *	The Shearing functions use resampling to rescale a image and offset it to fractional pixel offsets. 
  *	The functions actually shear, resize in one dimension and translate. All of it is done with fractional
- *	pixel precision. The shear angle is set using the angleInRadians parameter. It is measured as clockwise
- *	rotation of the leading edge away from the x or y axis. The xTranslate and yTranslate variables may be used
- *	to adjust the position of the destination image in the x and y directions. Scaling (making the image larger or
- *	smaller in one dimension) is done by adjusting the resampling kernel.
+ *	pixel precision. The shear slope is set using the shearSlope parameter. They are intended to be identical
+ *      to the off diagonal components of the AffineWarp matrix for the same shear (i.e. at 1,0 or 0,1). The 
+ *      xTranslate or yTranslate variable may be used to adjust the position of the destination image in the x and 
+ *      y directions. Scaling (making the image larger or smaller in one dimension) is done by adjusting the resampling kernel.
  */
 
-vImage_Error	vImageHorizontalShear_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, uint32_t srcOffsetToROI_X, uint32_t srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageHorizontalShear_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, uint32_t srcOffsetToROI_X, uint32_t srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageHorizontalShear_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, uint32_t srcOffsetToROI_X, uint32_t srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageHorizontalShear_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, uint32_t srcOffsetToROI_X, uint32_t srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageHorizontalShear_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageHorizontalShear_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageHorizontalShear_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageHorizontalShear_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
-vImage_Error	vImageVerticalShear_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, uint32_t srcOffsetToROI_X, uint32_t srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageVerticalShear_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, uint32_t srcOffsetToROI_X, uint32_t srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageVerticalShear_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, uint32_t srcOffsetToROI_X, uint32_t srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter,  Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageVerticalShear_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, uint32_t srcOffsetToROI_X, uint32_t srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageVerticalShear_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageVerticalShear_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageVerticalShear_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter,  Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageVerticalShear_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
  
 /*
@@ -252,13 +259,13 @@ void			vImageDestroyResamplingFilter( ResamplingFilter filter )    AVAILABLE_MAC
  
 vImage_Error	vImageNewResamplingFilterForFunctionUsingBuffer( ResamplingFilter filter, 
                                                         float scale, 
-                                                        void (*kernelFunc)( const float *xArray, float *yArray, unsigned int count, void *userData ), 
+                                                        void (*kernelFunc)( const float *xArray, float *yArray, unsigned long count, void *userData ), 
                                                         float kernelWidth, 
                                                         void *userData,
                                                         vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 size_t		vImageGetResamplingFilterSize(  float scale, 
-                                                void (*kernelFunc)( const float *xArray, float *yArray, unsigned int count, void *userData ),
+                                                void (*kernelFunc)( const float *xArray, float *yArray, unsigned long count, void *userData ),
                                                 float kernelWidth, 
                                                 vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 

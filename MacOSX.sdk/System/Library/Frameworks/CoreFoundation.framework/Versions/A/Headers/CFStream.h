@@ -1,10 +1,11 @@
 /*	CFStream.h
-	Copyright (c) 2000-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 2000-2005, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFSTREAM__)
 #define __COREFOUNDATION_CFSTREAM__ 1
 
+#include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFDictionary.h>
 #include <CoreFoundation/CFURL.h>

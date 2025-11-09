@@ -3,9 +3,9 @@
  
      Contains:   Gestalt Interfaces.
  
-     Version:    CarbonCore-557~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1988-2003 by Apple Computer, Inc.  All rights reserved
+     Copyright:  © 1988-2006 by Apple Computer, Inc.  All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -467,7 +467,8 @@ enum {
   gestaltAliasMgrFollowsAliasesWhenResolving = 4,
   gestaltAliasMgrSupportsExtendedCalls = 5,
   gestaltAliasMgrSupportsFSCalls = 6,   /* true if Alias Mgr supports HFS+ Calls */
-  gestaltAliasMgrPrefersPath    = 7     /* True if the Alias Mgr prioritizes the path over file id during resolution by default */
+  gestaltAliasMgrPrefersPath    = 7,    /* True if the Alias Mgr prioritizes the path over file id during resolution by default */
+  gestaltAliasMgrRequiresAccessors = 8  /* Set if Alias Manager requires accessors for size and usertype */
 };
 
 /* Gestalt selector and values for the Appearance Manager */
@@ -550,6 +551,10 @@ enum {
 
 enum {
   gestaltBusClkSpeed            = 'bclk' /* main I/O bus clock speed in hertz */
+};
+
+enum {
+  gestaltBusClkSpeedMHz         = 'bclm' /* main I/O bus clock speed in megahertz ( an unsigned long ) */
 };
 
 enum {
@@ -684,7 +689,8 @@ enum {
   gestaltCPUApollo              = 0x0111, /* Apollo , Altivec, G4 7455 */
   gestaltCPUG47447              = 0x0112,
   gestaltCPU750FX               = 0x0120, /* Sahara,G3 like thing */
-  gestaltCPU970                 = 0x0139
+  gestaltCPU970                 = 0x0139, /* G5 */
+  gestaltCPU970FX               = 0x013C /* another G5 */
 };
 
 enum {
@@ -693,7 +699,8 @@ enum {
   gestaltCPUPentium             = 'i586',
   gestaltCPUPentiumPro          = 'i5pr',
   gestaltCPUPentiumII           = 'i5ii',
-  gestaltCPUX86                 = 'ixxx'
+  gestaltCPUX86                 = 'ixxx',
+  gestaltCPUPentium4            = 'i5iv'
 };
 
 enum {
@@ -705,6 +712,10 @@ enum {
 
 enum {
   gestaltControlStripVersion    = 'csvr' /* Control Strip version (was 'sdvr') */
+};
+
+enum {
+  gestaltCountOfCPUs            = 'cpus' /* the number of CPUs on the computer, Mac OS X 10.4 and later */
 };
 
 enum {
@@ -924,7 +935,8 @@ enum {
   gestaltMustUseFCBAccessors    = 13,   /* FCBSPtr and FSFCBLen are invalid - must use FSM FCB accessor functions*/
   gestaltFSUsesPOSIXPathsForConversion = 14, /* The path interchange routines operate on POSIX paths instead of HFS paths */
   gestaltFSSupportsExclusiveLocks = 15, /* File system uses POSIX O_EXLOCK for opens */
-  gestaltFSSupportsHardLinkDetection = 16 /* File system returns if an item is a hard link */
+  gestaltFSSupportsHardLinkDetection = 16, /* File system returns if an item is a hard link */
+  gestaltFSAllowsConcurrentAsyncIO = 17 /* File Manager supports concurrent async reads and writes */
 };
 
 enum {
@@ -1008,7 +1020,8 @@ enum {
   gestaltKeyboardType           = 'kbd ', /* keyboard type */
   gestaltMacKbd                 = 1,
   gestaltMacAndPad              = 2,
-  gestaltMacPlusKbd             = 3,
+  gestaltMacPlusKbd             = 3,    /* OBSOLETE: This pre-ADB keyboard is not supported by any Mac OS X hardware and this value now means gestaltUnknownThirdPartyKbd */
+  gestaltUnknownThirdPartyKbd   = 3,    /* Unknown 3rd party keyboard. */
   gestaltExtADBKbd              = 4,
   gestaltStdADBKbd              = 5,
   gestaltPrtblADBKbd            = 6,
@@ -1030,6 +1043,12 @@ enum {
   gestaltPwrBkSubDomKbd         = 28,   /* PowerBook Subnote Domestic Keyboard with function keys w/  inverted T  */
   gestaltPwrBkSubISOKbd         = 29,   /* PowerBook Subnote International Keyboard with function keys w/  inverted T     */
   gestaltPwrBkSubJISKbd         = 30,   /* PowerBook Subnote Japanese Keyboard with function keys w/ inverted T    */
+  gestaltPortableUSBANSIKbd     = 37,   /* Powerbook USB-based internal keyboard, ANSI layout */
+  gestaltPortableUSBISOKbd      = 38,   /* Powerbook USB-based internal keyboard, ISO layout */
+  gestaltPortableUSBJISKbd      = 39,   /* Powerbook USB-based internal keyboard, JIS layout */
+  gestaltThirdPartyANSIKbd      = 40,   /* Third party keyboard, ANSI layout.  Returned in Mac OS X Tiger and later. */
+  gestaltThirdPartyISOKbd       = 41,   /* Third party keyboard, ISO layout. Returned in Mac OS X Tiger and later. */
+  gestaltThirdPartyJISKbd       = 42,   /* Third party keyboard, JIS layout. Returned in Mac OS X Tiger and later. */
   gestaltPwrBkEKDomKbd          = 195,  /* (0xC3) PowerBook Domestic Keyboard with Embedded Keypad, function keys & inverted T    */
   gestaltPwrBkEKISOKbd          = 196,  /* (0xC4) PowerBook International Keyboard with Embedded Keypad, function keys & inverted T   */
   gestaltPwrBkEKJISKbd          = 197,  /* (0xC5) PowerBook Japanese Keyboard with Embedded Keypad, function keys & inverted T      */
@@ -1048,7 +1067,6 @@ enum {
   gestaltPortable2001ISOKbd     = 203,  /* (0xCB) PowerBook and iBook International (ISO) Keyboard with 2nd cmd key right & function key moves.   */
   gestaltPortable2001JISKbd     = 207   /* (0xCF) PowerBook and iBook Japanese (JIS) Keyboard with function key moves.                   */
 };
-
 
 enum {
   gestaltUSBProF16ANSIKbd       = 34,   /* (0x22) USB Pro Keyboard w/ F16 key Domestic (ANSI) Keyboard */
@@ -1429,6 +1447,9 @@ enum {
 };
 
 enum {
+                                        /*    On Mac OS X, the user visible machine name may something like "PowerMac3,4", which is*/
+                                        /*    a unique string for each signifigant Macintosh computer which Apple creates, but is*/
+                                        /*    not terribly useful as a user visible string.*/
   gestaltUserVisibleMachineName = 'mnam' /* Coerce response into a StringPtr to get a user visible machine name */
 };
 
@@ -2129,8 +2150,9 @@ enum {
 enum {
   gestaltTSMgrVersion           = 'tsmv', /* Text Services Mgr version, if present */
   gestaltTSMgr15                = 0x0150,
-  gestaltTSMgr20                = 0x0200,
-  gestaltTSMgr22                = 0x0220
+  gestaltTSMgr20                = 0x0200, /* Version 2.0 as of MacOSX 10.0 */
+  gestaltTSMgr22                = 0x0220, /* Version 2.2 as of MacOSX 10.3 */
+  gestaltTSMgr23                = 0x0230 /* Version 2.3 as of MacOSX 10.4 */
 };
 
 enum {
@@ -2288,17 +2310,6 @@ enum {
 };
 
 
-/* gestaltX86VectorUnit returns the vector unit type (if any)
-   available and supported by both the current processor and operating
-   system */
-enum {
-  gestaltX86VectorUnit          = 'x86v',
-  gestaltX86VectorUnitNone      = 0,
-  gestaltX86VectorUnitSSE2      = 4,
-  gestaltX86VectorUnitSSE       = 3,
-  gestaltX86VectorUnitMMX       = 2
-};
-
 /* gestaltX86Features is a convenience for 'cpuid' instruction.  Note
    that even though the processor may support a specific feature, the
    OS may not support all of these features.  These bitfields
@@ -2335,6 +2346,24 @@ enum {
   gestaltX86HasSS               = 27,   /* Self-Snoop*/
   gestaltX86HasHTT              = 28,   /* Hyper-Threading Technology*/
   gestaltX86HasTM               = 29    /* Thermal Monitor*/
+};
+
+/* 'cpuid' now returns a 64 bit value, and the following 
+    gestalt selector and field definitions apply
+    to the extended form of this instruction */
+enum {
+  gestaltX86AdditionalFeatures  = 'x86a',
+  gestaltX86HasSSE3             = 0,    /* Prescott New Inst.*/
+  gestaltX86HasMONITOR          = 3,    /* Monitor/mwait*/
+  gestaltX86HasDSCPL            = 4,    /* Debug Store CPL*/
+  gestaltX86HasVMX              = 5,    /* VMX*/
+  gestaltX86HasSMX              = 6,    /* SMX*/
+  gestaltX86HasEST              = 7,    /* Enhanced SpeedsTep (GV3)*/
+  gestaltX86HasTM2              = 8,    /* Thermal Monitor 2*/
+  gestaltX86HasSupplementalSSE3 = 9,    /* Supplemental SSE3 instructions*/
+  gestaltX86HasCID              = 10,   /* L1 Context ID*/
+  gestaltX86HasCX16             = 13,   /* CmpXchg16b instruction*/
+  gestaltX86HasxTPR             = 14    /* Send Task PRiority msgs*/
 };
 
 enum {

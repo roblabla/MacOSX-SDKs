@@ -140,24 +140,44 @@ void cblas_scopy(const int N, const float *X, const int incX,
                  float *Y, const int incY);
 void cblas_saxpy(const int N, const float alpha, const float *X,
                  const int incX, float *Y, const int incY);
+void catlas_saxpby(const int N, const float alpha, const float *X,
+                  const int incX, const float beta, float *Y, const int incY);
+void catlas_sset
+   (const int N, const float alpha, float *X, const int incX);
+
 void cblas_dswap(const int N, double *X, const int incX,
                  double *Y, const int incY);
 void cblas_dcopy(const int N, const double *X, const int incX,
                  double *Y, const int incY);
 void cblas_daxpy(const int N, const double alpha, const double *X,
                  const int incX, double *Y, const int incY);
+void catlas_daxpby(const int N, const double alpha, const double *X,
+                  const int incX, const double beta, double *Y, const int incY);
+void catlas_dset       
+   (const int N, const double alpha, double *X, const int incX);
+                       
 void cblas_cswap(const int N, void *X, const int incX,
                  void *Y, const int incY);
 void cblas_ccopy(const int N, const void *X, const int incX,
                  void *Y, const int incY);
 void cblas_caxpy(const int N, const void *alpha, const void *X,
                  const int incX, void *Y, const int incY);
+void catlas_caxpby(const int N, const void *alpha, const void *X,
+                  const int incX, const void *beta, void *Y, const int incY);
+void catlas_cset
+   (const int N, const void *alpha, void *X, const int incX);
+
 void cblas_zswap(const int N, void *X, const int incX,
                  void *Y, const int incY);
 void cblas_zcopy(const int N, const void *X, const int incX,
                  void *Y, const int incY);
 void cblas_zaxpy(const int N, const void *alpha, const void *X,
                  const int incX, void *Y, const int incY);
+void catlas_zaxpby(const int N, const void *alpha, const void *X,
+                  const int incX, const void *beta, void *Y, const int incY);
+void catlas_zset
+   (const int N, const void *alpha, void *X, const int incX);
+
 
 /*
  * Routines with S and D prefix only
@@ -633,6 +653,18 @@ void cblas_zher2k(const enum CBLAS_ORDER Order, const enum CBLAS_UPLO Uplo,
 */
 
 /*
+   The level 3 BLAS may allocate a large (approximately 4Mb) buffer to hold intermediate operands
+   and results. These intermediate quantities are organized in memory for efficient access and
+   so contribute to optimal performance. By default, this buffer is retained across calls to the
+   BLAS. This strategy has substantial advantages when the BLAS are executed repeatedly. Clients
+   who wish to free this buffer and return the memory allocation to the malloc heap can call the
+   following routine at any time. Note that subsequent calls to the level 3 BLAS may allocate this
+   buffer again.
+*/
+
+extern void ATLU_DestroyThreadMemory();
+
+/*
    -------------------------------------------------------------------------------------------------
    The BLAS standard requires that parameter errors be reported and cause the program to terminate.
    The default behavior for the Mac OS implementation of the BLAS is to print a message in English
@@ -655,23 +687,24 @@ typedef void (*BLASParamErrorProc)(const char *funcName, const char *paramName, 
 		const int *paramValue);
 void SetBLASParamErrorProc(BLASParamErrorProc ErrorProc);
 
-#if defined(__ppc__)
-    #ifdef __VEC__
-        typedef vector float			VectorFloat;
-        typedef vector float	                ConstVectorFloat; 
+#if defined(__ppc__) || defined(__ppc64__)
+    #if defined( __VEC__ )
+        typedef vector float	VectorFloat;
+        typedef vector float	ConstVectorFloat; 
     #endif
 
-#elif defined(__i386__)
-    typedef int __m128  __attribute__((mode(V4SF)));
+#elif defined(__i386__) || defined( __x86_64__ )
+    #if defined( __SSE__ )
+		typedef float __M128  __attribute__((vector_size (16)));
 
-    typedef __m128  				VectorFloat;
-    typedef VectorFloat				ConstVectorFloat;
-    
+		typedef __M128			VectorFloat;
+		typedef VectorFloat		ConstVectorFloat;
+    #endif
 #else
-#error Unknown architecture
+	#error Unknown architecture
 #endif
 
-#if defined(__VEC__) || defined(__i386__)
+#if defined(__VEC__) || defined(__SSE__)
 /*
    -------------------------------------------------------------------------------------------------
    These routines provide optimized, SIMD-only support for common small matrix multiplications.
@@ -731,7 +764,7 @@ void dMultVecMat_32x32(const double X[32], const double A[32][32], double Y[32])
 void dMultMatVec_32x32(const double A[32][32], const double X[32], double Y[32]);
 void dMultMatMat_32x32(const double A[32][32], const double B[32][32], double C[32][32]);
 
-#endif /* defined(__VEC__) || defined(__i386__) */
+#endif /* defined(__VEC__) || defined(__SSE__) */
 #endif  /* end #ifdef CBLAS_ENUM_ONLY */
 
 #ifdef __cplusplus

@@ -1,5 +1,5 @@
 /*	NSTask.h
-	Copyright (c) 1996-2003, Apple, Inc. All rights reserved.
+	Copyright (c) 1996-2005, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -45,8 +45,8 @@
 // actions
 - (void)launch;
 
-- (void)interrupt; // Not always possible. Sends SIGINT, or Ctrl-C on Windows
-- (void)terminate; // Not always possible. Sends SIGTERM, or Ctrl-Break on Windows
+- (void)interrupt; // Not always possible. Sends SIGINT.
+- (void)terminate; // Not always possible. Sends SIGTERM.
 
 - (BOOL)suspend;
 - (BOOL)resume;

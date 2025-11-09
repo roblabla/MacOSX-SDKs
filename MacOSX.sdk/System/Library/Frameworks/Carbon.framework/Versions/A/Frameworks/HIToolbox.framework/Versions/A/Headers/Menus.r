@@ -3,9 +3,9 @@
  
      Contains:   Menu Manager Interfaces.
  
-     Version:    HIToolbox-145.48~1
+     Version:    HIToolbox-227.3~63
  
-     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1985-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -38,8 +38,8 @@
 #define kMenuIconSuiteType 				5					/*  Type for Icon Suite */
 #define kMenuIconRefType 				6					/*  Type for Icon Ref */
 #define kMenuCGImageRefType 			7					/*  Type for a CGImageRef (Mac OS X only) */
-#define kMenuSystemIconSelectorType 	8					/*  Type for an IconRef registered with Icon Services under kSystemIconsCreator (Mac OS X 10.1 and later only) */
-#define kMenuIconResourceType 			9					/*  Type for a CFStringRef naming a resource in the main bundle of the process (Mac OS X 10.1 and later only) */
+#define kMenuSystemIconSelectorType 	8					/*  Type for an OSType identifying an IconRef registered with Icon Services under kSystemIconsCreator (Mac OS X 10.1 and later only) */
+#define kMenuIconResourceType 			9					/*  Type for a CFStringRef with the full name of a .icns resource in the main bundle of the process (Mac OS X 10.1 and later only) */
 
 #define kMenuNullGlyph 					0x00				/*  Null (always glyph 1) */
 #define kMenuTabRightGlyph 				0x02				/*  Tab to the right key (for left-to-right script systems) */
@@ -99,7 +99,9 @@
 #define kMenuF14Glyph 					0x88				/*  F14 key */
 #define kMenuF15Glyph 					0x89				/*  F15 key */
 #define kMenuControlISOGlyph 			0x8A				/*  Control key (ISO standard) */
-#define kMenuEjectGlyph 				0x8C				/*  Eject key (available on Jaguar and later) */
+#define kMenuEjectGlyph 				0x8C				/*  Eject key (available on Mac OS X 10.2 and later) */
+#define kMenuEisuGlyph 					0x8D				/*  Japanese eisu key (available in Mac OS X 10.4 and later) */
+#define kMenuKanaGlyph 					0x8E				/*  Japanese kana key (available in Mac OS X 10.4 and later) */
 
 #define kMenuAttrExcludesMarkColumn 	0x01
 #define kMenuAttrAutoDisable 			0x04

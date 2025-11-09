@@ -1,5 +1,5 @@
 /*	NSValueTransformer.h
-        Copyright (c) 2002-2003, Apple, Inc. All rights reserved.
+        Copyright (c) 2002-2005, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
